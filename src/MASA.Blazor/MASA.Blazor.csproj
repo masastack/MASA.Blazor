@@ -17,4 +17,8 @@
     <ProjectReference Include="..\..\..\..\OpenSource\BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>
