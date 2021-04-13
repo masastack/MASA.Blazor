@@ -1,7 +1,7 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 
-namespace MASA.Blazor.Components.App
+namespace MASA.Blazor
 {
     /// <summary>
     /// Root for application
