@@ -1,11 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj" />
     <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
   </ItemGroup>
 
