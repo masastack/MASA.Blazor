@@ -1,0 +1,3 @@
+[submodule "BlazorComponent"]
+	path = BlazorComponent
+	url = https://github.com/BlazorComponent/BlazorComponent.git
