@@ -27,12 +27,12 @@ namespace MASA.Blazor
             ClassMapper
                 .Add("m-application")
                 .Add("m-application--wrap")
-                .Get(() =>
+                .Add(() =>
                 {
                     var suffix = LeftToRight ? "ltr" : "rtl";
                     return $"{prefix}--is-{suffix}";
                 })
-                .Get(() =>
+                .Add(() =>
                 {
                     var suffix = Dark ? "dark" : "light";
                     return $"theme--{suffix}";
