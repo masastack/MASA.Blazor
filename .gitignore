@@ -218,3 +218,5 @@ package-lock.json
 Thunbs.db
 packages/
 .vscode/
+
+src/BlazorComponent
