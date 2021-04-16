@@ -21,7 +21,7 @@
   "scripts": {
     "start": "dotnet watch -p ./Doc/MASA.Blazor.Doc.Server/MASA.Blazor.Doc.Server run -f net5",
     "start:wasm": "dotnet watch -p ./Doc/MASA.Blazor.Doc.Server/MASA.Blazor.Doc.Server run -f net5",
-    "gulp:components": "gulp --gulpfile ../BlazorComponent/src/Component/BlazorComponent/gulpfile.js",
+    "gulp:components": "gulp --gulpfile ./BlazorComponent/src/Component/BlazorComponent/gulpfile.js",
     "gulp:docs": "gulp --gulpfile ./Doc/MASA.Blazor.Doc.Server/gulpfile.js",
     "preinstall": "dotnet tool restore",
     "changelog": "node ./scripts/print-changelog"
