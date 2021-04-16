@@ -24,7 +24,8 @@ namespace MASA.Blazor
         {
             var prefix = "m-application";
 
-            ClassMapper
+            CssBuilder
+                .Clear()
                 .Add("m-application")
                 .Add("m-application--wrap")
                 .Add(() =>
