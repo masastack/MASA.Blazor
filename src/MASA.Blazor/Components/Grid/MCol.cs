@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Components.Grid
+namespace MASA.Blazor
 {
     public partial class MCol : BCol
     {
@@ -18,11 +18,11 @@ namespace MASA.Blazor.Components.Grid
         {
             CssBuilder
                 .AddIf("col", () => IsNullOrDefault(Span))
-                .AddIf($"col-{Span}", () => !IsNullOrDefault(Span))
-                .AddIf($"offset-{Offset}", () => !IsNullOrDefault(Offset))
-                .AddIf($"order-{Order}", () => !IsNullOrDefault(Order))
+                .AddIf(() => $"col-{Span.Value}", () => !IsNullOrDefault(Span))
+                .AddIf(() => $"offset-{Offset.Value}", () => !IsNullOrDefault(Offset))
+                .AddIf(() => $"order-{Order.Value}", () => !IsNullOrDefault(Order))
                 //'auto', 'start', 'end', 'center', 'baseline', 'stretch'
-                .AddIf($"align-self-{AlignSelf}", () => !string.IsNullOrEmpty(AlignSelf));
+                .AddIf(() => $"align-self-{AlignSelf}", () => !string.IsNullOrEmpty(AlignSelf));
         }
 
         private bool IsNullOrDefault(OneOf<string, int> span)
