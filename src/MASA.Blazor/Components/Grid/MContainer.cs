@@ -11,7 +11,7 @@ namespace MASA.Blazor
     public partial class MContainer : BContainer
     {
         /// <summary>
-        /// 是否删除视图最大宽度大小的断点
+        /// Removes viewport maximum-width size breakpoints
         /// </summary>
         [Parameter]
         public bool Fluid { get; set; }
