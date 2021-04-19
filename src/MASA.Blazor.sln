@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MASA.Blazor", "MASA.Blazor\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MASA.Blazor.Doc.Server", "Doc\MASA.Blazor.Doc.Server\MASA.Blazor.Doc.Server.csproj", "{E052A139-4E79-4C4B-911F-173DFC1A24AB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorComponent", "BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj", "{78D2A044-C1D9-40D6-91C1-7670B529FB1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorComponent", "..\BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj", "{141D7519-8CF8-4CFC-9D6F-88DE7CA6BC25}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8697C073-1B6D-46E6-8AA0-4EAACEB45A82}"
 	ProjectSection(SolutionItems) = preProject
@@ -28,10 +28,10 @@ Global
 		{E052A139-4E79-4C4B-911F-173DFC1A24AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E052A139-4E79-4C4B-911F-173DFC1A24AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E052A139-4E79-4C4B-911F-173DFC1A24AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78D2A044-C1D9-40D6-91C1-7670B529FB1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78D2A044-C1D9-40D6-91C1-7670B529FB1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78D2A044-C1D9-40D6-91C1-7670B529FB1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78D2A044-C1D9-40D6-91C1-7670B529FB1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{141D7519-8CF8-4CFC-9D6F-88DE7CA6BC25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{141D7519-8CF8-4CFC-9D6F-88DE7CA6BC25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{141D7519-8CF8-4CFC-9D6F-88DE7CA6BC25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{141D7519-8CF8-4CFC-9D6F-88DE7CA6BC25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

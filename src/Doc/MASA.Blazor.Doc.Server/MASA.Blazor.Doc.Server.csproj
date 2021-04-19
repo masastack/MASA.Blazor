@@ -8,4 +8,8 @@
     <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Components\" />
+  </ItemGroup>
+
 </Project>
