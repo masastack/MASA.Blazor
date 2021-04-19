@@ -27,7 +27,6 @@ namespace MASA.Blazor
             CssBuilder
                 .Clear()
                 .Add("m-application")
-                .Add("m-application--wrap")
                 .Add(() =>
                 {
                     var suffix = LeftToRight ? "ltr" : "rtl";
@@ -39,6 +38,7 @@ namespace MASA.Blazor
                     return $"theme--{suffix}";
                 });
 
+            WrapCssBuilder.Add("m-application--wrap");
         }
     }
 }
