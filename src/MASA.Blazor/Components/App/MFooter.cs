@@ -21,11 +21,7 @@ namespace MASA.Blazor
             CssBuilder
                 .Add("m-footer")
                 .Add("m-sheet")
-                .Add(() =>
-                {
-                    var suffix = Dark ? "dark" : "light";
-                    return $"theme--{suffix}";
-                });
+                .AddTheme(Dark);
         }
     }
 }

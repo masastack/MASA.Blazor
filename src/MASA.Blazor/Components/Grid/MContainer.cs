@@ -10,6 +10,9 @@ namespace MASA.Blazor
 {
     public partial class MContainer : BContainer
     {
+        /// <summary>
+        /// 是否使用流式容器
+        /// </summary>
         [Parameter]
         public bool Fluid { get; set; }
 

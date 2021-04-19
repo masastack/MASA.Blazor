@@ -11,8 +11,11 @@ namespace MASA.Blazor
 {
     public partial class MCol : BCol
     {
+        /// <summary>
+        /// 'auto', 'start', 'end', 'center', 'baseline', 'stretch'
+        /// </summary>
         [Parameter]
-        public string AlignSelf { get; set; }
+        public string Align { get; set; }
 
         public override void SetComponentClass()
         {
@@ -21,8 +24,7 @@ namespace MASA.Blazor
                 .AddIf(() => $"col-{Span.Value}", () => !IsNullOrDefault(Span))
                 .AddIf(() => $"offset-{Offset.Value}", () => !IsNullOrDefault(Offset))
                 .AddIf(() => $"order-{Order.Value}", () => !IsNullOrDefault(Order))
-                //'auto', 'start', 'end', 'center', 'baseline', 'stretch'
-                .AddIf(() => $"align-self-{AlignSelf}", () => !string.IsNullOrEmpty(AlignSelf));
+                .AddIf(() => $"align-self-{Align}", () => !string.IsNullOrEmpty(Align));
         }
 
         private bool IsNullOrDefault(OneOf<string, int> span)

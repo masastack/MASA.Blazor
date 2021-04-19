@@ -32,11 +32,7 @@ namespace MASA.Blazor
                     var suffix = LeftToRight ? "ltr" : "rtl";
                     return $"{prefix}--is-{suffix}";
                 })
-                .Add(() =>
-                {
-                    var suffix = Dark ? "dark" : "light";
-                    return $"theme--{suffix}";
-                });
+                .AddTheme(Dark);
 
             WrapCssBuilder.Add("m-application--wrap");
         }
