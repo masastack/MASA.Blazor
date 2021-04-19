@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
+    <ProjectReference Include="..\MASA.Blazor.Doc\MASA.Blazor.Doc.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,14 +1,9 @@
-using MASA.Blazor.Doc.Server.Data;
+﻿using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MASA.Blazor.Doc.Server
 {
@@ -27,9 +22,19 @@ namespace MASA.Blazor.Doc.Server
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
 
             services.AddMasaBlazor();
+
+            services.AddTransient(sp => new HttpClient()
+            {
+                DefaultRequestHeaders =
+                {
+                    // Use to call the github API on server side
+                    {"User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68"}
+                }
+            });
+
+            services.AddMasaBlazorDocs();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

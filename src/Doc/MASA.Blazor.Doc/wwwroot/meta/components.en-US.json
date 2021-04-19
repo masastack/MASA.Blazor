@@ -1,0 +1,132 @@
+[
+  {
+    "Title": "Grid",
+    "Type": "Grid",
+    "Desc": "<p>24 Grids System。</p>\n<h2>Design concept#</h2>\n<p>In most business situations, Ant Design needs to solve a lot of information storage problems within the design area, so based on 12 Grids System, we divided the design area into 24 sections.</p>\n<p>We name the divided area 'box'. We suggest four boxes for horizontal arrangement at most, one at least. Boxes are proportional to the entire screen as shown in the picture above. To ensure a high level of visual comfort, we customize the typography inside of the box based on the box unit.</p>\n<h2>Outline</h2>\n<p>In the grid system, we define the frame outside the information area based on row and column, to ensure that every area can have stable arrangement.</p>\n<p>Following is a brief look at how it works:</p>\n<ul>\n<li>Establish a set of column in the horizontal space defined by row (abbreviated col)</li>\n<li>Your content elements should be placed directly in the col, and only col should be placed directly in row</li>\n<li>The column grid system is a value of 1-24 to represent its range spans. For example, three columns of equal width can be created by <Col span={8} />.</li>\n<li>If the sum of col spans in a row are more than 24, then the overflowing col as a whole will start a new line arrangement.</li>\n</ul>\n<p>Our grid systems base on Flex layout to allow the elements within the parent to be aligned horizontally - left, center, right, wide arrangement, and decentralized arrangement. The Grid system also supports vertical alignment - top aligned, vertically centered, bottom-aligned. You can also define the order of elements by using order.</p>\n<p>Layout uses a 24 grid layout to define the width of each &quot;box&quot;, but does not rigidly adhere to the grid layout.</p>\n",
+    "ApiDoc": "<h2 id=\"API\"><span>API</span><a href=\"en-US/components/grid#API\" class=\"anchor\">#</a></h2>\n<p>Row</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>align</td>\n<td>the vertical alignment of the flex layout:：<code>top</code> <code>middle</code> <code>bottom</code></td>\n<td>string</td>\n<td>top</td>\n</tr>\n<tr>\n<td>gutter</td>\n<td>spacing between grids, could be a number or a object like { xs: 8, sm: 16, md: 24}. or you can use array to make horizontal and vertical spacing work at the same time <code>[horizontal, vertical]</code> (supported after 1.5.0)</td>\n<td>number, object, array</td>\n<td>0</td>\n</tr>\n<tr>\n<td>justify</td>\n<td>horizontal arrangement of the flex layout:<code>start</code> <code>end</code> <code>center</code> <code>space-around</code> <code>space-between</code></td>\n<td>string</td>\n<td>start</td>\n</tr>\n<tr>\n<td>type</td>\n<td>layout mode, optional <code>flex</code>， browser support</td>\n<td>string</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>Col</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>offset</td>\n<td>the number of cells to offset Col from the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>order</td>\n<td>raster order, used in flex layout mode</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>pull</td>\n<td>the number of cells that raster is moved to the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>push</td>\n<td>the number of cells that raster is moved to the right</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>span</td>\n<td>raster number of cells to occupy, 0 corresponds to  <code>display: none</code></td>\n<td>string</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xs</td>\n<td><code>&lt;576px</code> and also default setting, could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>sm</td>\n<td><code>≥576px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>md</td>\n<td><code>≥768px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>lg</td>\n<td><code>≥992px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xl</td>\n<td><code>≥1200px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xxl</td>\n<td><code>≥1600px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>The breakpoints of responsive grid follow BootStrap 4 media queries rules(not including <code>occasionally</code> part).</p>\n",
+    "Cols": 1,
+    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "basic",
+        "Title": "Basic Grid",
+        "Description": "<p>From the stack to the horizontal arrangement.</p>\n<p>You can create a basic grid system by using a single set of <code>Row</code> and <code>Col</code> grid assembly, all of the columns (Col) must be placed in <code>Row</code>.</p>\n",
+        "Code": "<div>\r\n    <MRow>\r\n        <MCol Span=\"24\">MCol-24</MCol>   \r\n    </MRow>\r\n    <MRow>\r\n        <MCol Span=\"12\">MCol-12</MCol>\r\n        <MCol Span=\"12\">MCol-12</MCol>\r\n    </MRow>\r\n    <MRow>\r\n        <MCol Span=\"8\">MCol-8</MCol>\r\n        <MCol Span=\"8\">MCol-8</MCol>\r\n        <MCol Span=\"8\">MCol-8</MCol>\r\n    </MRow>\r\n    <MRow>\r\n        <MCol Span=\"6\">MCol-6</MCol>\r\n        <MCol Span=\"6\">MCol-6</MCol>\r\n        <MCol Span=\"6\">MCol-6</MCol>\r\n        <MCol Span=\"6\">MCol-6</MCol>\r\n    </MRow>\r\n</div>\r\n",
+        "Type": "Demos.Components.Grid.demo.Basic",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 5,
+        "Name": "flex-align",
+        "Title": "Align",
+        "Description": "<p>Change the vertical alignment of flex items and their parents using the align and align-self properties.</p>\n",
+        "Code": "<div>\r\n    <Divider Orientation=\"left\">Align Top</Divider>\r\n    <MRow Align=\"start\">\r\n        <MCol Span=\"3\">\r\n            @DemoBox((100, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((50, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((120, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((80, \"MCol-3\"))\r\n        </MCol>\r\n    </MRow>\r\n\r\n    <Divider Orientation=\"left\">Align Middle</Divider>\r\n    <MRow  Align=\"center\">\r\n        <MCol Span=\"3\">\r\n            @DemoBox((100, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((50, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((120, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((80, \"MCol-3\"))\r\n        </MCol>\r\n    </MRow>\r\n\r\n    <Divider Orientation=\"left\">Align Bottom</Divider>\r\n    <MRow Align=\"end\">\r\n        <MCol Span=\"3\">\r\n            @DemoBox((100, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((50, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((120, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((80, \"MCol-3\"))\r\n        </MCol>\r\n    </MRow>\r\n</div>\r\n\r\n<style>\r\n    #components-grid-demo-flex-align [class~='row'] {\r\n        background: rgba(128, 128, 128, 0.08);\r\n    }\r\n    #components-grid-demo-flex-align [class~='col'] p {\r\n        background: rgba(0, 161, 255, 1);\r\n    }\r\n</style>\r\n\r\n@code{\r\n    RenderFragment<(int value, string children)> DemoBox = props =>@<p style=\"@($\"height: {props.value}px\")\">@props.children</p>;\r\n}\r\n",
+        "Type": "Demos.Components.Grid.demo.FlexAlign",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 6,
+        "Name": "flex-order",
+        "Title": "Order",
+        "Description": "<p>To change the element sort by <code>order</code>.</p>\n",
+        "Code": "<div>\r\n    <Divider Orientation=\"left\">Normal</Divider>\r\n    <Row>\r\n        <Col Span=\"6\" Order=\"4\">\r\n        1 col-order-4\r\n        </Col>\r\n        <Col Span=\"6\" Order=\"3\">\r\n        2 col-order-3\r\n        </Col>\r\n        <Col Span=\"6\" Order=\"2\">\r\n        3 col-order-2\r\n        </Col>\r\n        <Col Span=\"6\" Order=\"1\">\r\n        4 col-order-1\r\n        </Col>\r\n    </Row>\r\n    <Divider Orientation=\"left\">Responsive</Divider>\r\n    <Row>\r\n        <Col Span=\"6\" Xs=\"new AntDesign.EmbeddedProperty{ Order= 1 }\" Sm=\"new AntDesign.EmbeddedProperty{ Order= 2 }\" Md=\"new AntDesign.EmbeddedProperty{ Order= 3 }\" Lg=\"new AntDesign.EmbeddedProperty{ Order= 4 }\">\r\n        1 col-order-responsive\r\n        </Col>\r\n        <Col Span=\"6\" Xs=\"new AntDesign.EmbeddedProperty{ Order= 2 }\"  Sm=\"new AntDesign.EmbeddedProperty{ Order= 1 }\"  Md=\"new AntDesign.EmbeddedProperty{ Order= 4 }\"  Lg=\"new AntDesign.EmbeddedProperty{ Order= 3 }\" >\r\n        2 col-order-responsive\r\n        </Col>\r\n        <Col Span=\"6\" Xs=\"new AntDesign.EmbeddedProperty{ Order= 3 }\"  Sm=\"new AntDesign.EmbeddedProperty{ Order= 4 }\"  Md=\"new AntDesign.EmbeddedProperty{ Order= 2 }\"  Lg=\"new AntDesign.EmbeddedProperty{ Order= 1 }\" >\r\n        3 col-order-responsive\r\n        </Col>\r\n        <Col Span=\"6\" Xs=\"new AntDesign.EmbeddedProperty{ Order= 4 }\"  Sm=\"new AntDesign.EmbeddedProperty{ Order= 3 }\"  Md=\"new AntDesign.EmbeddedProperty{ Order= 1 }\"  Lg=\"new AntDesign.EmbeddedProperty{ Order= 2 }\" >\r\n        4 col-order-responsive\r\n        </Col>\r\n    </Row>\r\n</div>\r\n\r\n<style>\r\n    #components-grid-demo-flex-order [class~='ant-row'] {\r\n        background: rgba(128, 128, 128, 0.08);\r\n    }\r\n</style>",
+        "Type": "Demos.Components.Grid.demo.FlexOrder",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 7,
+        "Name": "flex-stretch",
+        "Title": "Flex Stretch",
+        "Description": "<p>Col provides <code>flex</code> prop to support fill rest.</p>\n",
+        "Code": "<div>\r\n    <Divider Orientation=\"left\">Percentage columns</Divider>\r\n    <Row>\r\n        <Col Flex=\"2\">2 / 5</Col>\r\n        <Col Flex=\"3\">3 / 5</Col>\r\n    </Row>\r\n    <Divider Orientation=\"left\">Fill rest</Divider>\r\n    <Row>\r\n        <Col Flex=@(\"100px\")>100px</Col>\r\n        <Col Flex=@(\"auto\")>Fill Rest</Col>\r\n    </Row>\r\n    <Divider Orientation=\"left\">Raw flex style</Divider>\r\n    <Row>\r\n        <Col Flex=@(\"1 1 200px\")>1 1 200px</Col>\r\n        <Col Flex=@(\"0 1 300px\")>0 1 300px</Col>\r\n    </Row>\r\n\r\n    <Row Wrap=\"false\">\r\n        <Col Flex=@(\"none\")>\r\n        <div style=\"padding: 0 16px\">none</div>\r\n        </Col>\r\n        <Col Flex=@(\"auto\")>auto with no-wrap</Col>\r\n    </Row>\r\n</div>",
+        "Type": "Demos.Components.Grid.demo.FlexStretch",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 4,
+        "Name": "flex",
+        "Title": "Typesetting",
+        "Description": "<p>Child elements depending on the value of the <code>start</code>,<code>center</code>, <code>end</code>,<code>space-between</code>, <code>space-around</code>, which are defined in its parent node typesetting mode.</p>\n",
+        "Code": "<div>\r\n    <Divider Orientation=\"left\">sub-element align left</Divider>\r\n    <Row Justify=\"start\">\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n    </Row>\r\n\r\n    <Divider Orientation=\"left\">sub-element align center</Divider>\r\n    <Row Justify=\"center\">\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n    </Row>\r\n\r\n    <Divider Orientation=\"left\">sub-element align right</Divider>\r\n    <Row Justify=\"end\">\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n    </Row>\r\n\r\n\r\n    <Divider Orientation=\"left\">sub-element monospaced arrangement</Divider>\r\n    <Row Justify=\"space-between\">\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n    </Row>\r\n\r\n\r\n    <Divider Orientation=\"left\">sub-element align full</Divider>\r\n    <Row Justify=\"space-around\">\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n    </Row>\r\n</div>\r\n\r\n<style>\r\n    #components-grid-demo-flex [class~='ant-row'] {\r\n        background: rgba(128, 128, 128, 0.08);\r\n    }\r\n</style>",
+        "Type": "Demos.Components.Grid.demo.Flex",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 1,
+        "Name": "gutter",
+        "Title": "Grid Gutter",
+        "Description": "<p>You can use the <code>gutter</code> property of <code>Row</code> as grid spacing, we recommend set it to <code>(16 + 8n) px</code> (<code>n</code> stands for natural number).</p>\n<p>You can set it to a object like <code>{ xs: 8, sm: 16, md: 24, lg: 32 }</code> for responsive design.</p>\n<p>You can use a array to set vertical spacing, <code>[horizontal, vertical]</code> <code>[16, { xs: 8, sm: 16, md: 24, lg: 32 }]</code>.</p>\n",
+        "Code": "@{\r\n    string style=\"background: #0092ff; padding: 8px 0;\";\r\n    Dictionary<string, int> gutter = new()\r\n    {\r\n        [\"xs\"] = 8,\r\n        [\"sm\"] = 16,\r\n        [\"md\"] = 24,\r\n        [\"lg\"] = 32,\r\n        [\"xl\"] = 48,\r\n        [\"xxl\"] = 64\r\n    };\r\n}\r\n<div>\r\n    <Divider Orientation=\"left\">Horizontal</Divider>\r\n    <MRow Gutter=\"16\">\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n    </MRow>\r\n    <Divider Orientation=\"left\">Responsive</Divider>\r\n    <MRow Gutter=\"@gutter\">\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n    </MRow>\r\n    <Divider Orientation=\"left\">Vertical</Divider>\r\n    <MRow Gutter=\"(16,24)\">\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n    </MRow>\r\n\r\n</div>\r\n\r\n<style>\r\n    .gutter-box {\r\n        padding: 8px 0;\r\n        background: #00a0e9;\r\n    }\r\n</style>\r\n",
+        "Type": "Demos.Components.Grid.demo.Gutter",
+        "Style": "\n[data-theme=\"dark\"] .gutter-box {\n  background: #028ac8;\n}\n\n",
+        "Debug": false
+      },
+      {
+        "Order": 2,
+        "Name": "offset",
+        "Title": "Column offset",
+        "Description": "<p><code>offset</code> can set the column to the right side. For example, using <code>offset = {4}</code> can set the element shifted to the right four columns width.</p>\n",
+        "Code": "<div>\r\n    <Row>\r\n        <Col Span=\"8\">\r\n            col-8\r\n        </Col>\r\n        <Col Span=\"8\" Offset=\"8\">\r\n            col-8\r\n        </Col>\r\n    </Row>\r\n    <Row>\r\n        <Col Span=\"6\" Offset=\"6\">\r\n            col-6 col-offset-6\r\n        </Col>\r\n        <Col Span=\"6\" Offset=\"6\">\r\n            col-6 col-offset-6\r\n        </Col>\r\n    </Row>\r\n    <Row>\r\n        <Col Span=\"12\" Offset=\"6\">\r\n            col-12 col-offset-6\r\n        </Col>\r\n    </Row>\r\n</div>\r\n@code{\r\n\r\n}",
+        "Type": "Demos.Components.Grid.demo.Offset",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 10,
+        "Name": "playground",
+        "Title": "Playground",
+        "Description": "<p>A simple playground for column count and gutter.</p>\n",
+        "Code": "<div>\r\nTo do   \r\n</div>\r\n",
+        "Type": "Demos.Components.Grid.demo.Playground",
+        "Style": "\n[data-theme=\"dark\"] #components-grid-demo-playground [class~='ant-col'] > div {\n  background: #028ac8;\n}\n\n",
+        "Debug": false
+      },
+      {
+        "Order": 9,
+        "Name": "responsive-more",
+        "Title": "More responsive",
+        "Description": "<p><code>span</code> <code>pull</code> <code>push</code> <code>offset</code> <code>order</code> property can be embedded into <code>xs</code> <code>sm</code> <code>md</code> <code>lg</code> <code>xl</code> <code>xxl</code> properties to use, where <code>xs={6}</code> is equivalent to <code>xs={{span: 6}}</code>.</p>\n",
+        "Code": "<Row>\r\n    <Col Xs=\"@Property(5,1)\" Lg=\"@Property(6,2)\">\r\n      Col\r\n    </Col>\r\n    <Col Xs=\"@Property(11,1)\" Lg=\"@Property(6,2)\">\r\n      Col\r\n    </Col>\r\n    <Col Xs=\"@Property(5,1)\" Lg=\"@Property(6,2)\">\r\n      Col\r\n    </Col>\r\n</Row>\r\n\r\n@code{ AntDesign.EmbeddedProperty Property(int span, int offset) => new() { Span = span, Offset = offset }; }",
+        "Type": "Demos.Components.Grid.demo.ResponsiveMore",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 8,
+        "Name": "responsive",
+        "Title": "Responsive",
+        "Description": "<p>Referring to the Bootstrap <a href=\"http://getbootstrap.com/css/#grid-media-queries\">responsive design</a>, here preset six dimensions: <code>xs</code> <code>sm</code> <code>md</code> <code>lg</code> <code>xl</code> <code>xxl</code>.</p>\n",
+        "Code": "<Row>\r\n    <Col Xs=\"2\" Sm=\"4\" Md=\"6\" Lg=\"8\" Xl=\"10\">\r\n      Col\r\n    </Col>\r\n    <Col Xs=\"20\" Sm=\"16\" Md=\"12\" Lg=\"8\" Xl=\"4\">\r\n      Col\r\n    </Col>\r\n    <Col Xs=\"2\" Sm=\"4\" Md=\"6\" Lg=\"8\" Xl=\"10\">\r\n      Col\r\n    </Col>\r\n</Row>\r\n\r\n",
+        "Type": "Demos.Components.Grid.demo.Responsive",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 3,
+        "Name": "sort",
+        "Title": "Grid sort",
+        "Description": "<p>By using <code>push</code> and <code>pull</code> class you can easily change column order.</p>\n",
+        "Code": "<div>\r\n    <Row>\r\n        <Col Span=\"18\" Push=\"6\">\r\n            col-18 col-push-6\r\n        </Col>\r\n        <Col Span=\"6\" Pull=\"18\">\r\n            col-6 col-pull-18\r\n        </Col>\r\n    </Row>\r\n</div>\r\n",
+        "Type": "Demos.Components.Grid.demo.Sort",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 10,
+        "Name": "useBreakpoint",
+        "Title": "Breakpoint",
+        "Description": "<p>Use <code>OnBreakpoint</code> provide personalized layout.</p>\n",
+        "Code": "<Row OnBreakpoint=\"HandleBreakpoint\">\r\n    Current break point: @current?.Name\r\n    @foreach (var type in types)\r\n    {\r\n        if (type.Width < current?.Width)\r\n        {\r\n            <Tag Color=\"blue\">@type.Name</Tag>\r\n        }\r\n    }\r\n</Row>\r\n\r\n@code{\r\n\r\n    AntDesign.BreakpointType[] types = new[] { AntDesign.BreakpointType.Xxl, AntDesign.BreakpointType.Xl, AntDesign.BreakpointType.Lg, AntDesign.BreakpointType.Md, AntDesign.BreakpointType.Sm, AntDesign.BreakpointType.Xs };\r\n\r\n    AntDesign.BreakpointType current;\r\n\r\n    void HandleBreakpoint(AntDesign.BreakpointType breakpoint)\r\n    {\r\n        current = breakpoint;\r\n    }\r\n}",
+        "Type": "Demos.Components.Grid.demo.UseBreakpoint",
+        "Style": "",
+        "Debug": false
+      }
+    ]
+  }
+]

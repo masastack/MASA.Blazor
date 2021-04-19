@@ -1,0 +1,23 @@
+﻿@using BlazorComponent.Doc.CLI.Models
+@using MASA.Blazor.Doc.Services
+@inherits ComponentBase
+
+@Component
+
+
+@inject DemoService demoService;
+
+@code {
+
+    [Parameter]
+    public DemoItemModel Demo { get; set; }
+
+    RenderFragment Component;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        Component = demoService.GetShowCase(Demo.Type);
+    }
+
+}

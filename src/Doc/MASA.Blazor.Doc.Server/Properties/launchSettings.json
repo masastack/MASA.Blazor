@@ -29,7 +29,10 @@
       "commandName": "Executable",
       "executablePath": "dotnet",
       "commandLineArgs": "watch",
-      "workingDirectory": "$(ProjectDir)"
+      "workingDirectory": "$(ProjectDir)",
+      "environmentVariables": {
+        "SolutionDir": "$(SolutionDir)"
+      }
     }
   }
 }

@@ -1,0 +1,75 @@
+[
+  {
+    "Order": 0,
+    "Title": "文档",
+    "Type": "subMenu",
+    "Url": "docs",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "Ant Design of Blazor",
+        "Type": "menuItem",
+        "Url": "docs/introduce"
+      },
+      {
+        "Order": 1,
+        "Title": "快速上手",
+        "Type": "menuItem",
+        "Url": "docs/getting-started"
+      },
+      {
+        "Order": 4,
+        "Title": "国际化",
+        "Type": "menuItem",
+        "Url": "docs/i18n"
+      },
+      {
+        "Order": 5,
+        "Title": "路径式属性访问",
+        "Type": "menuItem",
+        "Url": "docs/path-based-property-access"
+      },
+      {
+        "Order": 6,
+        "Title": "更新日志",
+        "Type": "menuItem",
+        "Url": "docs/CHANGELOG"
+      },
+      {
+        "Order": 6,
+        "Title": "获取每日构建",
+        "Type": "menuItem",
+        "Url": "docs/nightly-build"
+      },
+      {
+        "Order": 11,
+        "Title": "贡献指南",
+        "Type": "menuItem",
+        "Url": "docs/contributing"
+      }
+    ]
+  },
+  {
+    "Order": 2,
+    "Title": "组件",
+    "Type": "subMenu",
+    "Url": "components",
+    "Children": [
+      {
+        "Order": 1,
+        "Title": "网格",
+        "Type": "itemGroup",
+        "Children": [
+          {
+            "Order": 0,
+            "Title": "Grid",
+            "SubTitle": "网格",
+            "Type": "menuItem",
+            "Url": "components/grid",
+            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg"
+          }
+        ]
+      }
+    ]
+  }
+]

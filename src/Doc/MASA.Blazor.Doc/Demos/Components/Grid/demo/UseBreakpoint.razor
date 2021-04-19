@@ -1,0 +1,22 @@
+﻿<Row OnBreakpoint="HandleBreakpoint">
+    Current break point: @current?.Name
+    @foreach (var type in types)
+    {
+        if (type.Width < current?.Width)
+        {
+            <Tag Color="blue">@type.Name</Tag>
+        }
+    }
+</Row>
+
+@code{
+
+    AntDesign.BreakpointType[] types = new[] { AntDesign.BreakpointType.Xxl, AntDesign.BreakpointType.Xl, AntDesign.BreakpointType.Lg, AntDesign.BreakpointType.Md, AntDesign.BreakpointType.Sm, AntDesign.BreakpointType.Xs };
+
+    AntDesign.BreakpointType current;
+
+    void HandleBreakpoint(AntDesign.BreakpointType breakpoint)
+    {
+        current = breakpoint;
+    }
+}

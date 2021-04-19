@@ -1,0 +1,35 @@
+﻿@using MASA.Blazor.Doc.Highlight
+
+    <pre class="language-@Language">
+        <code>
+@sourceCode
+        </code>
+    </pre>
+
+@inject IPrismHighlighter Highlighter
+
+@code {
+
+    [Parameter]
+    public string Code { get; set; }
+
+    [Parameter]
+    public string Language { get; set; }
+
+    [Parameter]
+    public bool CanLoad { get; set; }
+
+    MarkupString sourceCode { get; set; }
+
+    bool hasLoaded = false;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (CanLoad && !hasLoaded)
+        {
+            sourceCode = await Highlighter.HighlightAsync(Code, Language);
+            hasLoaded = true;
+        }
+    }
+
+}

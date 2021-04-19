@@ -1,0 +1,134 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\en-US.json" />
+    <EmbeddedResource Include="Resources\zh-CN.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Counter.razor" />
+    <None Include="Pages\FetchData.razor" />
+    <None Include="Pages\Index.razor" />
+    <None Include="Shared\MainLayout.razor" />
+    <None Include="Shared\NavMenu.razor" />
+    <None Include="Shared\SurveyPrompt.razor" />
+    <None Include="wwwroot\docs\assets\blazor.svg" />
+    <None Include="wwwroot\docs\assets\logo.svg" />
+    <None Include="wwwroot\docs\CHANGELOG.en-US.md" />
+    <None Include="wwwroot\docs\CHANGELOG.zh-CN.md" />
+    <None Include="wwwroot\docs\contributing.en-US.md" />
+    <None Include="wwwroot\docs\contributing.zh-CN.md" />
+    <None Include="wwwroot\docs\getting-started.en-US.md" />
+    <None Include="wwwroot\docs\getting-started.zh-CN.md" />
+    <None Include="wwwroot\docs\i18n.en-US.md" />
+    <None Include="wwwroot\docs\i18n.zh-CN.md" />
+    <None Include="wwwroot\docs\introduce.en-US.md" />
+    <None Include="wwwroot\docs\introduce.zh-CN.md" />
+    <None Include="wwwroot\docs\nightly-build.en-US.md" />
+    <None Include="wwwroot\docs\nightly-build.zh-CN.md" />
+    <None Include="wwwroot\docs\path-based-property-access.en-US.md" />
+    <None Include="wwwroot\docs\path-based-property-access.zh-CN.md" />
+    <None Include="wwwroot\js\docsearch.js" />
+    <None Include="wwwroot\js\prism.js" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AntDesign" Version="0.8.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0-preview.3.21201.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.5" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <CLIProjectDir>BlazorComponent/src/Doc/BlazorComponent.Doc.CLI</CLIProjectDir>
+    <CLIPath>$(CLIProjectDir)/bin/Debug/net6.0/BlazorComponent.Doc.CLI.dll</CLIPath>
+    <ProjectDir>$(SolutionDir)/Doc/MASA.Blazor.Doc</ProjectDir>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <DocFiles Include="$(SolutionDir)docs\**\*.*" />
+    <DocFiles Include="$(SolutionDir)\CHANGELOG.*.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj" />
+    <ProjectReference Include="..\..\BlazorComponent\src\Doc\BlazorComponent.Doc.CLI\BlazorComponent.Doc.CLI.csproj" />
+    <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Shared\BlankLayout.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\CodeBox.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\ContributorsList.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\DemoCard.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\GithubButton.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\HeaderMenu.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\HighlightedCode.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\MainContent.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\MainFooter.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\MainHeader.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\MockBrowser.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\PlainText.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\PrevNextNav.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\RazorBox.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\Recommend.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Shared\Style.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
+  <Target Name="RunCli" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug'">
+    <Copy SourceFiles="@(DocFiles)" DestinationFolder="$(ProjectDir)\wwwroot\docs\%(RecursiveDir)" ContinueOnError="true" />
+    <Exec WorkingDirectory="$(SolutionDir)" Command="dotnet build $(CLIProjectDir)" />
+    <Exec WorkingDirectory="$(SolutionDir)" Command="dotnet $(CLIPath) demo2json $(ProjectDir)/Demos $(ProjectDir)/wwwroot/meta" />
+    <Exec WorkingDirectory="$(SolutionDir)" Command="dotnet $(CLIPath) menu2json $(ProjectDir)/Demos $(ProjectDir)/wwwroot/docs $(ProjectDir)/wwwroot/meta" />
+    <Exec WorkingDirectory="$(SolutionDir)" Command="dotnet $(CLIPath) docs2html $(ProjectDir)/wwwroot/docs ./Doc/MASA.Blazor.Doc/wwwroot/docs" />
+  </Target>
+
+  <Target Name="PublishRunGulp" AfterTargets="ComputeFilesToPublish">
+    <Exec WorkingDirectory="$(SolutionDir)" Command="npm install" />
+    <Exec WorkingDirectory="$(SolutionDir)" Command="npm run gulp:docs" />
+  </Target>
+
+</Project>

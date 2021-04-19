@@ -1,0 +1,133 @@
+[
+  {
+    "Title": "Grid",
+    "SubTitle": "网格",
+    "Type": "网格",
+    "Desc": "<p>MASA.Blazor 配备了一个使用 flexbox 构建的 12 格网格系统。 网格用于在应用的内容中创建特定的布局。 它包含 5 种类型的媒体断点，用于针对特定的屏幕尺寸或方向，xs、sm、md、lg 和 xl。 这些分辨率在视口断点表中定义如下，可以通过自定义断点进行修改。</p>\n<h2>Material Design 断点</h2>\n<table>\n<thead>\n<tr>\n<th>设备</th>\n<th>代码</th>\n<th>类型</th>\n<th>像素范围</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Extra small (超小号)</td>\n<td><strong>xs</strong></td>\n<td>小型号到大型号的手机</td>\n<td>&lt; 600px</td>\n</tr>\n<tr>\n<td>Small (小号)</td>\n<td><strong>sm</strong></td>\n<td>小型号到中型号的平板</td>\n<td>600px &gt; &lt; 960px</td>\n</tr>\n<tr>\n<td>Medium (中号)</td>\n<td><strong>md</strong></td>\n<td>大型号平板到手提电脑</td>\n<td>960px &gt; &lt; 1264px*</td>\n</tr>\n<tr>\n<td>Large (大号)</td>\n<td><strong>lg</strong></td>\n<td>桌面端</td>\n<td>1264px &gt; &lt; 1904px*</td>\n</tr>\n<tr>\n<td>Extra large (超大号)</td>\n<td><strong>xl</strong></td>\n<td>4K 和超宽屏幕</td>\n<td>&gt; 1904px*</td>\n</tr>\n</tbody>\n</table>\n<p>桌面端上浏览器滚动条的宽度为 * -16px</p>\n",
+    "ApiDoc": "",
+    "Cols": 1,
+    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "basic",
+        "Title": "基础栅格",
+        "Description": "<p>从堆叠到水平排列。</p>\n<p>使用单一的一组 <code>Row</code> 和 <code>Col</code> 栅格组件，就可以创建一个基本的栅格系统，所有列（Col）必须放在 <code>Row</code> 内。</p>\n",
+        "Code": "<div>\r\n    <MRow>\r\n        <MCol Span=\"24\">MCol-24</MCol>   \r\n    </MRow>\r\n    <MRow>\r\n        <MCol Span=\"12\">MCol-12</MCol>\r\n        <MCol Span=\"12\">MCol-12</MCol>\r\n    </MRow>\r\n    <MRow>\r\n        <MCol Span=\"8\">MCol-8</MCol>\r\n        <MCol Span=\"8\">MCol-8</MCol>\r\n        <MCol Span=\"8\">MCol-8</MCol>\r\n    </MRow>\r\n    <MRow>\r\n        <MCol Span=\"6\">MCol-6</MCol>\r\n        <MCol Span=\"6\">MCol-6</MCol>\r\n        <MCol Span=\"6\">MCol-6</MCol>\r\n        <MCol Span=\"6\">MCol-6</MCol>\r\n    </MRow>\r\n</div>\r\n",
+        "Type": "Demos.Components.Grid.demo.Basic",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 5,
+        "Name": "flex-align",
+        "Title": "垂直对齐",
+        "Description": "<p>使用 align 和 align-self 属性来改变 flex 项目及其父项的垂直对齐方式。</p>\n",
+        "Code": "<div>\r\n    <Divider Orientation=\"left\">Align Top</Divider>\r\n    <MRow Align=\"start\">\r\n        <MCol Span=\"3\">\r\n            @DemoBox((100, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((50, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((120, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((80, \"MCol-3\"))\r\n        </MCol>\r\n    </MRow>\r\n\r\n    <Divider Orientation=\"left\">Align Middle</Divider>\r\n    <MRow  Align=\"center\">\r\n        <MCol Span=\"3\">\r\n            @DemoBox((100, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((50, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((120, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((80, \"MCol-3\"))\r\n        </MCol>\r\n    </MRow>\r\n\r\n    <Divider Orientation=\"left\">Align Bottom</Divider>\r\n    <MRow Align=\"end\">\r\n        <MCol Span=\"3\">\r\n            @DemoBox((100, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((50, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((120, \"MCol-3\"))\r\n        </MCol>\r\n        <MCol Span=\"3\">\r\n            @DemoBox((80, \"MCol-3\"))\r\n        </MCol>\r\n    </MRow>\r\n</div>\r\n\r\n<style>\r\n    #components-grid-demo-flex-align [class~='row'] {\r\n        background: rgba(128, 128, 128, 0.08);\r\n    }\r\n    #components-grid-demo-flex-align [class~='col'] p {\r\n        background: rgba(0, 161, 255, 1);\r\n    }\r\n</style>\r\n\r\n@code{\r\n    RenderFragment<(int value, string children)> DemoBox = props =>@<p style=\"@($\"height: {props.value}px\")\">@props.children</p>;\r\n}\r\n",
+        "Type": "Demos.Components.Grid.demo.FlexAlign",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 6,
+        "Name": "flex-order",
+        "Title": "排序",
+        "Description": "<p>通过 <code>order</code> 来改变元素的排序。</p>\n",
+        "Code": "<div>\r\n    <Divider Orientation=\"left\">Normal</Divider>\r\n    <Row>\r\n        <Col Span=\"6\" Order=\"4\">\r\n        1 col-order-4\r\n        </Col>\r\n        <Col Span=\"6\" Order=\"3\">\r\n        2 col-order-3\r\n        </Col>\r\n        <Col Span=\"6\" Order=\"2\">\r\n        3 col-order-2\r\n        </Col>\r\n        <Col Span=\"6\" Order=\"1\">\r\n        4 col-order-1\r\n        </Col>\r\n    </Row>\r\n    <Divider Orientation=\"left\">Responsive</Divider>\r\n    <Row>\r\n        <Col Span=\"6\" Xs=\"new AntDesign.EmbeddedProperty{ Order= 1 }\" Sm=\"new AntDesign.EmbeddedProperty{ Order= 2 }\" Md=\"new AntDesign.EmbeddedProperty{ Order= 3 }\" Lg=\"new AntDesign.EmbeddedProperty{ Order= 4 }\">\r\n        1 col-order-responsive\r\n        </Col>\r\n        <Col Span=\"6\" Xs=\"new AntDesign.EmbeddedProperty{ Order= 2 }\"  Sm=\"new AntDesign.EmbeddedProperty{ Order= 1 }\"  Md=\"new AntDesign.EmbeddedProperty{ Order= 4 }\"  Lg=\"new AntDesign.EmbeddedProperty{ Order= 3 }\" >\r\n        2 col-order-responsive\r\n        </Col>\r\n        <Col Span=\"6\" Xs=\"new AntDesign.EmbeddedProperty{ Order= 3 }\"  Sm=\"new AntDesign.EmbeddedProperty{ Order= 4 }\"  Md=\"new AntDesign.EmbeddedProperty{ Order= 2 }\"  Lg=\"new AntDesign.EmbeddedProperty{ Order= 1 }\" >\r\n        3 col-order-responsive\r\n        </Col>\r\n        <Col Span=\"6\" Xs=\"new AntDesign.EmbeddedProperty{ Order= 4 }\"  Sm=\"new AntDesign.EmbeddedProperty{ Order= 3 }\"  Md=\"new AntDesign.EmbeddedProperty{ Order= 1 }\"  Lg=\"new AntDesign.EmbeddedProperty{ Order= 2 }\" >\r\n        4 col-order-responsive\r\n        </Col>\r\n    </Row>\r\n</div>\r\n\r\n<style>\r\n    #components-grid-demo-flex-order [class~='ant-row'] {\r\n        background: rgba(128, 128, 128, 0.08);\r\n    }\r\n</style>",
+        "Type": "Demos.Components.Grid.demo.FlexOrder",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 7,
+        "Name": "flex-stretch",
+        "Title": "Flex 填充",
+        "Description": "<p>Col 提供 <code>flex</code> 属性以支持填充。</p>\n",
+        "Code": "<div>\r\n    <Divider Orientation=\"left\">Percentage columns</Divider>\r\n    <Row>\r\n        <Col Flex=\"2\">2 / 5</Col>\r\n        <Col Flex=\"3\">3 / 5</Col>\r\n    </Row>\r\n    <Divider Orientation=\"left\">Fill rest</Divider>\r\n    <Row>\r\n        <Col Flex=@(\"100px\")>100px</Col>\r\n        <Col Flex=@(\"auto\")>Fill Rest</Col>\r\n    </Row>\r\n    <Divider Orientation=\"left\">Raw flex style</Divider>\r\n    <Row>\r\n        <Col Flex=@(\"1 1 200px\")>1 1 200px</Col>\r\n        <Col Flex=@(\"0 1 300px\")>0 1 300px</Col>\r\n    </Row>\r\n\r\n    <Row Wrap=\"false\">\r\n        <Col Flex=@(\"none\")>\r\n        <div style=\"padding: 0 16px\">none</div>\r\n        </Col>\r\n        <Col Flex=@(\"auto\")>auto with no-wrap</Col>\r\n    </Row>\r\n</div>",
+        "Type": "Demos.Components.Grid.demo.FlexStretch",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 4,
+        "Name": "flex",
+        "Title": "排版",
+        "Description": "<p>布局基础。</p>\n<p>子元素根据不同的值 <code>start</code>,<code>center</code>,<code>end</code>,<code>space-between</code>,<code>space-around</code>，分别定义其在父节点里面的排版方式。</p>\n",
+        "Code": "<div>\r\n    <Divider Orientation=\"left\">sub-element align left</Divider>\r\n    <Row Justify=\"start\">\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n    </Row>\r\n\r\n    <Divider Orientation=\"left\">sub-element align center</Divider>\r\n    <Row Justify=\"center\">\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n    </Row>\r\n\r\n    <Divider Orientation=\"left\">sub-element align right</Divider>\r\n    <Row Justify=\"end\">\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n    </Row>\r\n\r\n\r\n    <Divider Orientation=\"left\">sub-element monospaced arrangement</Divider>\r\n    <Row Justify=\"space-between\">\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n    </Row>\r\n\r\n\r\n    <Divider Orientation=\"left\">sub-element align full</Divider>\r\n    <Row Justify=\"space-around\">\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n        <Col Span=\"4\">col-4</Col>\r\n    </Row>\r\n</div>\r\n\r\n<style>\r\n    #components-grid-demo-flex [class~='ant-row'] {\r\n        background: rgba(128, 128, 128, 0.08);\r\n    }\r\n</style>",
+        "Type": "Demos.Components.Grid.demo.Flex",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 1,
+        "Name": "gutter",
+        "Title": "区块间隔",
+        "Description": "<p>栅格常常需要和间隔进行配合，你可以使用 <code>Row</code> 的 <code>gutter</code> 属性，我们推荐使用 <code>(16+8n)px</code> 作为栅格间隔(n 是自然数)。</p>\n<p>如果要支持响应式，可以写成 <code>{ xs: 8, sm: 16, md: 24, lg: 32 }</code>。</p>\n<p>如果需要垂直间距，可以写成数组形式 <code>[水平间距, 垂直间距]</code> <code>[16, { xs: 8, sm: 16, md: 24, lg: 32 }]</code>。</p>\n",
+        "Code": "@{\r\n    string style=\"background: #0092ff; padding: 8px 0;\";\r\n    Dictionary<string, int> gutter = new()\r\n    {\r\n        [\"xs\"] = 8,\r\n        [\"sm\"] = 16,\r\n        [\"md\"] = 24,\r\n        [\"lg\"] = 32,\r\n        [\"xl\"] = 48,\r\n        [\"xxl\"] = 64\r\n    };\r\n}\r\n<div>\r\n    <Divider Orientation=\"left\">Horizontal</Divider>\r\n    <MRow Gutter=\"16\">\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n    </MRow>\r\n    <Divider Orientation=\"left\">Responsive</Divider>\r\n    <MRow Gutter=\"@gutter\">\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n    </MRow>\r\n    <Divider Orientation=\"left\">Vertical</Divider>\r\n    <MRow Gutter=\"(16,24)\">\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n        <MCol Class=\"gutter-MRow\" Span=\"6\">\r\n            <div style=\"@style\">col-6</div>\r\n        </MCol>\r\n    </MRow>\r\n\r\n</div>\r\n\r\n<style>\r\n    .gutter-box {\r\n        padding: 8px 0;\r\n        background: #00a0e9;\r\n    }\r\n</style>\r\n",
+        "Type": "Demos.Components.Grid.demo.Gutter",
+        "Style": "\n[data-theme=\"dark\"] .gutter-box {\n  background: #028ac8;\n}\n\n",
+        "Debug": false
+      },
+      {
+        "Order": 2,
+        "Name": "offset",
+        "Title": "左右偏移",
+        "Description": "<p>列偏移。</p>\n<p>使用 <code>offset</code> 可以将列向右侧偏。例如，<code>offset={4}</code> 将元素向右侧偏移了 4 个列（column）的宽度。</p>\n",
+        "Code": "<div>\r\n    <Row>\r\n        <Col Span=\"8\">\r\n            col-8\r\n        </Col>\r\n        <Col Span=\"8\" Offset=\"8\">\r\n            col-8\r\n        </Col>\r\n    </Row>\r\n    <Row>\r\n        <Col Span=\"6\" Offset=\"6\">\r\n            col-6 col-offset-6\r\n        </Col>\r\n        <Col Span=\"6\" Offset=\"6\">\r\n            col-6 col-offset-6\r\n        </Col>\r\n    </Row>\r\n    <Row>\r\n        <Col Span=\"12\" Offset=\"6\">\r\n            col-12 col-offset-6\r\n        </Col>\r\n    </Row>\r\n</div>\r\n@code{\r\n\r\n}",
+        "Type": "Demos.Components.Grid.demo.Offset",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 10,
+        "Name": "playground",
+        "Title": "栅格配置器",
+        "Description": "<p>可以简单配置几种等分栅格和间距。</p>\n",
+        "Code": "<div>\r\nTo do   \r\n</div>\r\n",
+        "Type": "Demos.Components.Grid.demo.Playground",
+        "Style": "\n[data-theme=\"dark\"] #components-grid-demo-playground [class~='ant-col'] > div {\n  background: #028ac8;\n}\n\n",
+        "Debug": false
+      },
+      {
+        "Order": 9,
+        "Name": "responsive-more",
+        "Title": "其他属性的响应式",
+        "Description": "<p><code>span</code> <code>pull</code> <code>push</code> <code>offset</code> <code>order</code> 属性可以通过内嵌到 <code>xs</code> <code>sm</code> <code>md</code> <code>lg</code> <code>xl</code> <code>xxl</code> 属性中来使用。</p>\n<p>其中 <code>xs={6}</code> 相当于 <code>xs={{ span: 6 }}</code>。</p>\n",
+        "Code": "<Row>\r\n    <Col Xs=\"@Property(5,1)\" Lg=\"@Property(6,2)\">\r\n      Col\r\n    </Col>\r\n    <Col Xs=\"@Property(11,1)\" Lg=\"@Property(6,2)\">\r\n      Col\r\n    </Col>\r\n    <Col Xs=\"@Property(5,1)\" Lg=\"@Property(6,2)\">\r\n      Col\r\n    </Col>\r\n</Row>\r\n\r\n@code{ AntDesign.EmbeddedProperty Property(int span, int offset) => new() { Span = span, Offset = offset }; }",
+        "Type": "Demos.Components.Grid.demo.ResponsiveMore",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 8,
+        "Name": "responsive",
+        "Title": "响应式布局",
+        "Description": "<p>参照 Bootstrap 的 <a href=\"http://getbootstrap.com/css/#grid-media-queries\">响应式设计</a>，预设六个响应尺寸：<code>xs</code> <code>sm</code> <code>md</code> <code>lg</code> <code>xl</code>\u00A0<code>xxl</code>。</p>\n",
+        "Code": "<Row>\r\n    <Col Xs=\"2\" Sm=\"4\" Md=\"6\" Lg=\"8\" Xl=\"10\">\r\n      Col\r\n    </Col>\r\n    <Col Xs=\"20\" Sm=\"16\" Md=\"12\" Lg=\"8\" Xl=\"4\">\r\n      Col\r\n    </Col>\r\n    <Col Xs=\"2\" Sm=\"4\" Md=\"6\" Lg=\"8\" Xl=\"10\">\r\n      Col\r\n    </Col>\r\n</Row>\r\n\r\n",
+        "Type": "Demos.Components.Grid.demo.Responsive",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 3,
+        "Name": "sort",
+        "Title": "栅格排序",
+        "Description": "<p>列排序。</p>\n<p>通过使用 <code>push</code> 和 <code>pull</code> 类就可以很容易的改变列（column）的顺序。</p>\n",
+        "Code": "<div>\r\n    <Row>\r\n        <Col Span=\"18\" Push=\"6\">\r\n            col-18 col-push-6\r\n        </Col>\r\n        <Col Span=\"6\" Pull=\"18\">\r\n            col-6 col-pull-18\r\n        </Col>\r\n    </Row>\r\n</div>\r\n",
+        "Type": "Demos.Components.Grid.demo.Sort",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 10,
+        "Name": "useBreakpoint",
+        "Title": "监听 Breakpoint",
+        "Description": "<p>使用 <code>OnBreakpoint</code> 事件个性化布局。</p>\n",
+        "Code": "<Row OnBreakpoint=\"HandleBreakpoint\">\r\n    Current break point: @current?.Name\r\n    @foreach (var type in types)\r\n    {\r\n        if (type.Width < current?.Width)\r\n        {\r\n            <Tag Color=\"blue\">@type.Name</Tag>\r\n        }\r\n    }\r\n</Row>\r\n\r\n@code{\r\n\r\n    AntDesign.BreakpointType[] types = new[] { AntDesign.BreakpointType.Xxl, AntDesign.BreakpointType.Xl, AntDesign.BreakpointType.Lg, AntDesign.BreakpointType.Md, AntDesign.BreakpointType.Sm, AntDesign.BreakpointType.Xs };\r\n\r\n    AntDesign.BreakpointType current;\r\n\r\n    void HandleBreakpoint(AntDesign.BreakpointType breakpoint)\r\n    {\r\n        current = breakpoint;\r\n    }\r\n}",
+        "Type": "Demos.Components.Grid.demo.UseBreakpoint",
+        "Style": "",
+        "Debug": false
+      }
+    ]
+  }
+]

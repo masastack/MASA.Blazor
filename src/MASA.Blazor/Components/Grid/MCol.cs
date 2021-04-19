@@ -20,7 +20,8 @@ namespace MASA.Blazor
         public override void SetComponentClass()
         {
             CssBuilder
-                .AddIf("col", () => IsNullOrDefault(Span))
+                .Clear()
+                .Add("col")
                 .AddIf(() => $"col-{Span.Value}", () => !IsNullOrDefault(Span))
                 .AddIf(() => $"offset-{Offset.Value}", () => !IsNullOrDefault(Offset))
                 .AddIf(() => $"order-{Order.Value}", () => !IsNullOrDefault(Order))

@@ -1,0 +1,53 @@
+﻿@using BlazorComponent.Doc.CLI.Models
+<section class="prev-next-nav">
+    @if (prev != null)
+    {
+        <NavLink class="prev-page" href="@($"{MainLayout?.CurrentLanguage}/{prev.Url}")">
+            <Icon Type="left" Class="footer-nav-icon-before"/>
+            <span>
+                @prev.Title
+            </span>
+            @if (prev.SubTitle != null)
+            {
+                <span class="chinese">@prev.SubTitle</span>
+            }
+            <Icon Type="right" Class="footer-nav-icon-after"/>
+        </NavLink>
+    }
+    @if (next != null)
+    {
+        <NavLink class="next-page" href="@($"{MainLayout?.CurrentLanguage}/{next.Url}")">
+            <Icon Type="left" Class="footer-nav-icon-before"/>
+            <span>@next.Title</span>
+            @if (next.SubTitle != null)
+            {
+                <span class="chinese">@next.SubTitle</span>
+            }
+            <Icon Type="right" Class="footer-nav-icon-after"/>
+        </NavLink>
+    }
+</section>
+
+@code
+{
+    [CascadingParameter]
+    public MainLayout MainLayout { get; set; }
+
+    DemoMenuItemModel prev;
+    DemoMenuItemModel next;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        MainLayout.PrevNextNav = this;
+    }
+
+    public void SetPrevNextNav(DemoMenuItemModel prev, DemoMenuItemModel next)
+    {
+        this.prev = prev;
+        this.next = next;
+
+        StateHasChanged();
+    }
+}
