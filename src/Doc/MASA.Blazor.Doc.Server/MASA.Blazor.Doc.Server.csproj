@@ -5,12 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
-    <ProjectReference Include="..\MASA.Blazor.Doc\MASA.Blazor.Doc.csproj" />
+    <Compile Remove="Pages\Components\**" />
+    <Content Remove="Pages\Components\**" />
+    <EmbeddedResource Remove="Pages\Components\**" />
+    <None Remove="Pages\Components\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Components\" />
+    <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
+    <ProjectReference Include="..\MASA.Blazor.Doc\MASA.Blazor.Doc.csproj" />
   </ItemGroup>
 
 </Project>
