@@ -11,13 +11,13 @@ namespace MASA.Blazor
     public partial class MRow : BRow
     {
         /// <summary>
-        /// 是否去除外边距
+        /// 是否移除 v-col 之间的距离
         /// </summary>
         [Parameter]
         public bool NoGutters { get; set; }
 
         /// <summary>
-        /// 是否使用密集模式
+        /// 是否减少 v-col 之间的距离
         /// </summary>
         [Parameter]
         public bool Dense { get; set; }
