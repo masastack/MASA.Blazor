@@ -8,20 +8,19 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MFooter : BFooter
+    public partial class MContainer : BContainer
     {
         /// <summary>
-        /// Whether dark theme
+        /// 是否删除视图最大宽度大小的断点
         /// </summary>
         [Parameter]
-        public bool Dark { get; set; }
+        public bool Fluid { get; set; }
 
         public override void SetComponentClass()
         {
             CssBuilder
-                .Add("m-footer")
-                .Add("m-sheet")
-                .AddTheme(Dark);
+                .Add("container")
+                .AddIf("container--fluid", () => Fluid);
         }
     }
 }
