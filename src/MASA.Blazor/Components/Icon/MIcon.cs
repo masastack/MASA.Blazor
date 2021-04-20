@@ -74,6 +74,7 @@ namespace MASA.Blazor
                 })
                 .AddIf("m-icon--link", () => Click.HasDelegate)
                 .AddIf("m-icon--dense", () => Dense)
+                .AddIf("m-icon--left", () => Left)
                 .AddIf("m-icon--right", () => Right);
 
             // TODO: 能否拿到属性排列顺序，最后一个优先级最高
