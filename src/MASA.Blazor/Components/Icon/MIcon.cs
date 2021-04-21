@@ -34,7 +34,7 @@ namespace MASA.Blazor
         public bool Large { get; set; }
 
         [Parameter]
-        public bool Left { get; set; } = true;
+        public bool Left { get; set; }
 
         [Parameter]
         public bool Right { get; set; }
