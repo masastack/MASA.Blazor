@@ -1,5 +1,5 @@
-﻿using BlazorComponent;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using BlazorComponent;
 
 namespace MASA.Blazor
 {
@@ -17,7 +17,7 @@ namespace MASA.Blazor
         {
             CombinePrefix = ".m-application",
             Primary = "#1976D2",
-            Secondary = "#424242",
+            Secondary = "#5cbbf6",
             Accent = "#82B1FF",
             Error = "#FF5252",
             Info = "#2196F3",
