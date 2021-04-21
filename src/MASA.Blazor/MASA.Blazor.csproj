@@ -2,7 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Components\Card\MCardAction.cs" />
+  </ItemGroup>
 
 
   <ItemGroup>
