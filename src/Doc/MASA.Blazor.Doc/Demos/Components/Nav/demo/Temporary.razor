@@ -1,0 +1,63 @@
+﻿<div class="overflow-hidden" style="height:400px;position:relative;">
+    <MContainer>
+        <MRow Align="center" Justify="center">
+            <button @onclick="Toggle">toggle</button>
+        </MRow>
+    </MContainer>
+
+    <MNavigationDrawer Temporary="true" Absolute="true" Drawer="_drawer">
+        <MListItem>
+            <MListItemContent>
+                <MListItemTitle>
+                    Application
+                </MListItemTitle>
+            </MListItemContent>
+        </MListItem>
+
+        <MDivider></MDivider>
+
+        <MList>
+            <MListItem>
+                <MListItemIcon>
+                    <MIcon>home</MIcon>
+                </MListItemIcon>
+                <MListItemContent>
+                    <MListItemTitle>1</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+            <MListItem>
+                <MListItemIcon>
+                    <MIcon>dashboard</MIcon>
+                </MListItemIcon>
+                <MListItemContent>
+                    <MListItemTitle>2</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+            <MListItem>
+                <MListItemIcon>
+                    <MIcon>shopping_bag</MIcon>
+                </MListItemIcon>
+                <MListItemContent>
+                    <MListItemTitle>3</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+        </MList>
+    </MNavigationDrawer>
+</div>
+
+@code{
+    private bool _drawer;
+
+    public void Toggle(MouseEventArgs args)
+    {
+        _drawer = !_drawer;
+    }
+}
+
+
+
+
+
+
+
+

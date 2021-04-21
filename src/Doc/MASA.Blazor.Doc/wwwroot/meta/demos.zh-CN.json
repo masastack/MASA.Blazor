@@ -13,5 +13,64 @@
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg"
       }
     ]
+  },
+  {
+    "Order": 2,
+    "Title": "导航",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "Nav",
+        "SubTitle": "导航",
+        "Type": "menuItem",
+        "Url": "components/nav",
+        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Nav.svg"
+      }
+    ]
+  },
+  {
+    "Order": 3,
+    "Title": "图标",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "Icon",
+        "SubTitle": "图标",
+        "Type": "menuItem",
+        "Url": "components/icon",
+        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg"
+      }
+    ]
+  },
+  {
+    "Order": 4,
+    "Title": "按钮",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "Button",
+        "SubTitle": "按钮",
+        "Type": "menuItem",
+        "Url": "components/button",
+        "Cover": "https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Button.svg"
+      }
+    ]
+  },
+  {
+    "Order": 8,
+    "Title": "进度环",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "ProcessCircular",
+        "SubTitle": "进度环",
+        "Type": "menuItem",
+        "Url": "components/processcircular"
+      }
+    ]
   }
 ]

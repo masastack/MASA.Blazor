@@ -1,4 +1,16 @@
 [
+  "Demos.Components.Button.demo.Block",
+  "Demos.Components.Button.demo.Depressed",
+  "Demos.Components.Button.demo.Floating",
+  "Demos.Components.Button.demo.Icon",
+  "Demos.Components.Button.demo.Loaders",
+  "Demos.Components.Button.demo.Normal",
+  "Demos.Components.Button.demo.Outlined",
+  "Demos.Components.Button.demo.Plain",
+  "Demos.Components.Button.demo.Rounded",
+  "Demos.Components.Button.demo.Size",
+  "Demos.Components.Button.demo.Text",
+  "Demos.Components.Button.demo.Tile",
   "Demos.Components.Grid.demo.Basic",
   "Demos.Components.Grid.demo.FlexAlign",
   "Demos.Components.Grid.demo.FlexOrder",
@@ -10,5 +22,9 @@
   "Demos.Components.Grid.demo.ResponsiveMore",
   "Demos.Components.Grid.demo.Responsive",
   "Demos.Components.Grid.demo.Sort",
-  "Demos.Components.Grid.demo.UseBreakpoint"
+  "Demos.Components.Grid.demo.UseBreakpoint",
+  "Demos.Components.Icon.demo.Basic",
+  "Demos.Components.Nav.demo.Basic",
+  "Demos.Components.Nav.demo.Temporary",
+  "Demos.Components.ProcessCircular.demo.Basic"
 ]

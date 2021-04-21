@@ -1,5 +1,135 @@
 [
   {
+    "Title": "Button",
+    "Type": "Button",
+    "Desc": "<p>To trigger an operation.</p>\n",
+    "ApiDoc": "",
+    "Cols": 1,
+    "Cover": "https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Button.svg",
+    "DemoList": [
+      {
+        "Order": 2,
+        "Name": "block",
+        "Title": "Block",
+        "Description": "<p><code>block</code> buttons extend the full available width.</p>\n",
+        "Code": "<div>\r\n\t<MButton Block Color=\"secondary\">Block Button</MButton>\r\n</div>\r\n",
+        "Type": "Demos.Components.Button.demo.Block",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 1,
+        "Name": "depressed",
+        "Title": "Depressed",
+        "Description": "<p>Depressed buttons still maintain their background color, but have no box shadow.</p>\n",
+        "Code": "<MRow Align=\"center\"\r\n\t  Justify=\"space-around\">\r\n\t<MButton Depressed>\r\n\t\tNormal\r\n\t</MButton>\r\n\t<MButton Depressed Color=\"primary\">\r\n\t\tPrimary\r\n\t</MButton>\r\n\t<MButton Depressed Color=\"error\">\r\n\t\tError\r\n\t</MButton>\r\n\t<MButton Depressed Disabled>\r\n\t\tDisabled\r\n\t</MButton>\r\n</MRow>",
+        "Type": "Demos.Components.Button.demo.Depressed",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 3,
+        "Name": "floating",
+        "Title": "Floating",
+        "Description": "<p>Floating buttons are rounded and usually contain an icon.</p>\n",
+        "Code": "<div Style=\"text-align:center\">\r\n\t<MButton Style=\"margin-right: 16px\"\r\n\t\t\t Fab\r\n\t\t\t Small\r\n\t\t\t Dark\r\n\t\t\t Color=\"primary\">\r\n\t\t<MIcon>\r\n\t\t\tmdi-minus\r\n\t\t</MIcon>\r\n\t</MButton>\r\n\r\n\t<MButton Style=\"margin-right: 16px\"\r\n\t\t\t Fab\r\n\t\t\t Small\r\n\t\t\t Dark\r\n\t\t\t Color=\"pink\">\r\n\t\t<MIcon>mdi-heart</MIcon>\r\n\t</MButton>\r\n\r\n\t<MButton Style=\"margin-right: 16px\"\r\n\t\t\t Fab\r\n\t\t\t Dark\r\n\t\t\t Color=\"indigo\">\r\n\t\t<MIcon>mdi-plus</MIcon>\r\n\t</MButton>\r\n\r\n\t<MButton Style=\"margin-right: 16px\"\r\n\t\t\t Fab\r\n\t\t\t Dark\r\n\t\t\t Color=\"teal\">\r\n\t\t<MIcon>\tmdi-format-list-bulleted-square</MIcon>\r\n\t</MButton>\r\n\r\n\t<MButton Style=\"margin-right: 16px\"\r\n\t\t\t Fab\r\n\t\t\t Dark\r\n\t\t\t Large\r\n\t\t\t Color=\"cyan\">\r\n\t\t<MIcon>mdi-pencil</MIcon>\r\n\t</MButton>\r\n\r\n\t<MButton Style=\"margin-right: 16px\"\r\n\t\t\t Fab\r\n\t\t\t Dark\r\n\t\t\t Large\r\n\t\t\t Color=\"purple\">\r\n\t\t<MIcon>\r\n\t\t\tmdi-android\r\n\t\t</MIcon>\r\n\t</MButton>\r\n</div>\r\n",
+        "Type": "Demos.Components.Button.demo.Floating",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 4,
+        "Name": "icon",
+        "Title": "Icon",
+        "Description": "<p>Icons can be used for the primary content of a button. This property makes the button rounded and applies the text prop styles.</p>\n",
+        "Code": "<MContainer Fluid>\r\n\t<MRow>\r\n\t\t<MCol Span=\"3\">\r\n\t\t\t<MButton Icon Color=\"pink\">\r\n\t\t\t\t<MIcon>mdi-heart</MIcon>\r\n\t\t\t</MButton>\r\n\t\t</MCol>\r\n\t\t<MCol Span=\"3\">\r\n\t\t\t<MButton Icon Color=\"indigo\">\r\n\t\t\t\t<MIcon>mdi-star</MIcon>\r\n\t\t\t</MButton>\r\n\t\t</MCol>\r\n\t\t<MCol Span=\"3\">\r\n\t\t\t<MButton Icon Color=\"green\">\r\n\t\t\t\t<MIcon>mdi-cached</MIcon>\r\n\t\t\t</MButton>\r\n\t\t</MCol>\r\n\t\t<MCol Span=\"3\">\r\n\t\t\t<MButton Icon Color=\"deep-orange\">\r\n\t\t\t\t<MIcon>mdi-thumb-up</MIcon>\r\n\t\t\t</MButton>\r\n\t\t</MCol>\r\n\t</MRow>\r\n\t<MRow>\r\n\t\t<MCol Span=\"3\">\r\n\t\t\t<MButton Icon Disabled>\r\n\t\t\t\t<MIcon>mdi-heart</MIcon>\r\n\t\t\t</MButton>\r\n\t\t</MCol>\r\n\t\t<MCol Span=\"3\">\r\n\t\t\t<MButton Icon Disabled>\r\n\t\t\t\t<MIcon>mdi-star</MIcon>\r\n\t\t\t</MButton>\r\n\t\t</MCol>\r\n\t\t<MCol Span=\"3\">\r\n\t\t\t<MButton Icon Disabled>\r\n\t\t\t\t<MIcon>mdi-cached</MIcon>\r\n\t\t\t</MButton>\r\n\t\t</MCol>\r\n\t\t<MCol Span=\"3\">\r\n\t\t\t<MButton Icon Disabled>\r\n\t\t\t\t<MIcon>mdi-thumb-up</MIcon>\r\n\t\t\t</MButton>\r\n\t\t</MCol>\r\n\t</MRow>\r\n</MContainer>\r\n",
+        "Type": "Demos.Components.Button.demo.Icon",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 5,
+        "Name": "loaders",
+        "Title": "Loaders",
+        "Description": "<p>Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a v-progress-circular component but this can be customized.</p>\n",
+        "Code": "<div style=\"text-align:center\">\r\n\t<MButton Style=\"margin-right: 8px\"\r\n\t\t\tLoadingFragment=\"LoadingFragment\"\r\n\t\t\t Loading=\"loading\"\r\n\t\t\t Disabled=\"loading\"\r\n\t\t\t Color=\"secondary\"\r\n\t\t\t Click=\"OnClick\">\r\n\t\tAccept Terms\r\n\t</MButton>\r\n\r\n\t<MButton Style=\"margin-right: 8px\"\r\n\t\t\t LoadingFragment=\"LoadingFragment\"\r\n\t\t\t Loading=\"loading2\"\r\n\t\t\t Disabled=\"loading2\"\r\n\t\t\t Color=\"blue-grey\"\r\n\t\t\t Click=\"OnClick2\">\r\n\t\tUpload\r\n\t\t<MIcon Right Dark>\r\n\t\t\tmdi-cloud-upload\r\n\t\t</MIcon>\r\n\t</MButton>\r\n\r\n\t<MButton Style=\"margin-right: 8px\"\r\n\t\t\t LoadingFragment=\"LoadingTemplate\"\r\n\t\t\t Loading=\"loading3\"\r\n\t\t\t Disabled=\"loading3\"\r\n\t\t\t Color=\"success\"\r\n\t\t\t Click=\"OnClick3\">\r\n\t\tCustom Loader\r\n\t</MButton>\r\n\r\n\t<MButton Style=\"margin-right: 8px\"\r\n\t\t\t LoadingFragment=\"LoadingTemplate4\"\r\n\t\t\t Loading=\"loading4\"\r\n\t\t\t Disabled=\"loading4\"\r\n\t\t\t Color=\"info\"\r\n\t\t\t Click=\"OnClick4\">\r\n\t\tIcon Loader\r\n\t</MButton>\r\n\r\n\t<MButton LoadingFragment=\"LoadingFragment\"\r\n\t\t\t Loading=\"loading5\"\r\n\t\t\t Disabled=\"loading5\"\r\n\t\t\t Color=\"blue-grey\"\r\n\t\t\t Fab\r\n\t\t\t Click=\"OnClick5\">\r\n\t\t<MIcon Dark>\r\n\t\t\tmdi-cloud-upload\r\n\t\t</MIcon>\r\n\t</MButton>\r\n</div>\r\n\r\n@code {\r\n\tprivate RenderFragment LoadingFragment =\r\n\t@<MProcessCircular Indeterminate Size=\"23\"></MProcessCircular>\r\n\t;\r\n\r\n\tprivate RenderFragment LoadingTemplate =\r\n\t@<span>Loading...</span>\r\n\t;\r\n\r\n\tprivate RenderFragment LoadingTemplate4 =\r\n\t@<span class=\"custom-loader\"><MIcon>mdi-cached</MIcon></span>\r\n\t;\r\n\r\n\tprivate bool loading = false;\r\n\tprivate void OnClick()\r\n\t{\r\n\t\tloading = true;\r\n\t\tTask.Run(async () =>\r\n\t\t{\r\n\t\t\tawait Task.Delay(1000);\r\n\t\t\tloading = false;\r\n\t\t\tawait InvokeAsync(StateHasChanged);\r\n\t\t});\r\n\t}\r\n\r\n\tprivate bool loading2 = false;\r\n\tprivate void OnClick2()\r\n\t{\r\n\t\tloading2 = true;\r\n\t\tTask.Run(async () =>\r\n\t\t{\r\n\t\t\tawait Task.Delay(1000);\r\n\t\t\tloading2 = false;\r\n\t\t\tawait InvokeAsync(StateHasChanged);\r\n\t\t});\r\n\t}\r\n\r\n\tprivate bool loading3 = false;\r\n\tprivate void OnClick3()\r\n\t{\r\n\t\tloading3 = true;\r\n\t\tTask.Run(async () =>\r\n\t\t{\r\n\t\t\tawait Task.Delay(1000);\r\n\t\t\tloading3 = false;\r\n\t\t\tawait InvokeAsync(StateHasChanged);\r\n\t\t});\r\n\t}\r\n\r\n\tprivate bool loading4 = false;\r\n\tprivate void OnClick4()\r\n\t{\r\n\t\tloading4 = true;\r\n\t\tTask.Run(async () =>\r\n\t\t{\r\n\t\t\tawait Task.Delay(1000);\r\n\t\t\tloading4 = false;\r\n\t\t\tawait InvokeAsync(StateHasChanged);\r\n\t\t});\r\n\t}\r\n\r\n\tprivate bool loading5 = false;\r\n\tprivate void OnClick5()\r\n\t{\r\n\t\tloading5 = true;\r\n\t\tTask.Run(async () =>\r\n\t\t{\r\n\t\t\tawait Task.Delay(1000);\r\n\t\t\tloading5 = false;\r\n\t\t\tawait InvokeAsync(StateHasChanged);\r\n\t\t});\r\n\t}\r\n}\r\n\r\n<style>\r\n\t.custom-loader {\r\n\t\tanimation: loader 1s infinite;\r\n\t\tdisplay: flex;\r\n\t}\r\n\r\n\t@(\"@-moz-keyframes\") loader {\r\n\t\tfrom {\r\n\t\ttransform: rotate(0);\r\n\t\t}\r\n\r\n\t\tto {\r\n\t\ttransform: rotate(360deg);\r\n\t\t}\r\n\t}\r\n\r\n\t@(\"@-webkit-keyframes\") loader {\r\n\t\tfrom {\r\n\t\ttransform: rotate(0);\r\n\t\t}\r\n\r\n\t\tto {\r\n\t\ttransform: rotate(360deg);\r\n\t\t}\r\n\t}\r\n\r\n\t@(\"@-o-keyframes\") loader {\r\n\t\tfrom {\r\n\t\ttransform: rotate(0);\r\n\t\t}\r\n\r\n\t\tto {\r\n\t\ttransform: rotate(360deg);\r\n\t\t}\r\n\t}\r\n\r\n\t@(\"@keyframes\") loader {\r\n\t\tfrom {\r\n\t\ttransform: rotate(0);\r\n\t\t}\r\n\r\n\t\tto {\r\n\t\ttransform: rotate(360deg);\r\n\t\t}\r\n\t}\r\n</style>\r\n",
+        "Type": "Demos.Components.Button.demo.Loaders",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 0,
+        "Name": "normal",
+        "Title": "Default",
+        "Description": "<p>raised buttons have a box shadow that increases when clicked. This is the default style.</p>\n",
+        "Code": "<MRow Align=\"center\"\r\n\t  Justify=\"space-around\">\r\n\t<MButton>\r\n\t\tNormal\r\n\t</MButton>\r\n\t<MButton Color=\"primary\">\r\n\t\tPrimary\r\n\t</MButton>\r\n\t<MButton Color=\"error\">\r\n\t\tError\r\n\t</MButton>\r\n\t<MButton Disabled>\r\n\t\tDisabled\r\n\t</MButton>\r\n</MRow>",
+        "Type": "Demos.Components.Button.demo.Normal",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 6,
+        "Name": "outlined",
+        "Title": "Outlined",
+        "Description": "<p><code>outlined</code> buttons inherit their borders from the current color applied.</p>\n",
+        "Code": "<div style=\"text-align:center\">\r\n\t<MButton Style=\"margin-right: 8px\"\r\n\t\t\t Outlined\r\n\t\t\t Color=\"indigo\">\r\n\t\tOutlined Button\r\n\t</MButton>\r\n\t<MButton Style=\"margin-right: 8px\"\r\n\t\t\t Outlined\r\n\t\t\t Fab\r\n\t\t\t Color=\"teal\">\r\n\t\t<MIcon>mdi-format-list-bulleted-square</MIcon>\r\n\t</MButton>\r\n\t<MButton Style=\"margin-right: 8px\"\r\n\t\t\t Outlined\r\n\t\t\t Large\r\n\t\t\t Fab\r\n\t\t\t Color=\"indigo\">\r\n\t\t<MIcon>mdi-pencil</MIcon>\r\n\t</MButton>\r\n</div>",
+        "Type": "Demos.Components.Button.demo.Outlined",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 7,
+        "Name": "plain",
+        "Title": "Plain",
+        "Description": "<p><code>plain</code> buttons have a lower baseline opacity that reacts to hover and focus.</p>\n",
+        "Code": "<div style=\"text-align:center\">\r\n\t<MButton Disabled\r\n\t\t\t Style=\"margin-right: 8px\"\r\n\t\t\t Color=\"grey\"\r\n\t\t\t Plain>\r\n\t\tCancel\r\n\t</MButton>\r\n\r\n\t<MButton Style=\"margin-right: 8px\"\r\n\t\t\t Color=\"error\"\r\n\t\t\t Plain>\r\n\t\tDelete\r\n\t</MButton>\r\n</div>\r\n",
+        "Type": "Demos.Components.Button.demo.Plain",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 8,
+        "Name": "rounded",
+        "Title": "Rounded",
+        "Description": "<p><code>rounded</code> buttons behave the same as regular buttons but have rounded edges.</p>\n",
+        "Code": "<div style=\"text-align: center\">\r\n\t<MButton Rounded Color=\"primary\">Rounded Button</MButton>\r\n</div>\r\n",
+        "Type": "Demos.Components.Button.demo.Rounded",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 9,
+        "Name": "size",
+        "Title": "Sizing",
+        "Description": "<p>Buttons can be given different sizing options to fit a multitude of scenarios.</p>\n",
+        "Code": "<MContainer Fluid>\r\n\t<MRow Align=\"center\">\r\n\t\t<MCol Span=\"6\">\r\n\t\t\t<div style=\"text-align: center\">\r\n\t\t\t\t<div style=\"margin-bottom:8px\">\r\n\t\t\t\t\t<MButton XSmall Color=\"secondary\">XSmall Button</MButton>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div style=\"margin-bottom:8px\">\r\n\t\t\t\t\t<MButton Small Color=\"primary\">Small Button</MButton>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div style=\"margin-bottom:8px\">\r\n\t\t\t\t\t<MButton Color=\"warning\">Normal Button</MButton>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div style=\"margin-bottom:8px\">\r\n\t\t\t\t\t<MButton Large Color=\"error\">Large Button</MButton>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div style=\"margin-bottom:8px\">\r\n\t\t\t\t\t<MButton XLarge Color=\"success\">XLarge Button</MButton>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</MCol>\r\n\t\t<MCol Span=\"6\">\r\n\t\t\t<div style=\"text-align: center\">\r\n\t\t\t\t<div style=\"margin-bottom:8px\">\r\n\t\t\t\t\t<MButton XSmall Fab Color=\"secondary\">\r\n\t\t\t\t\t\t<MIcon>mdi-television</MIcon>\r\n\t\t\t\t\t</MButton>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div style=\"margin-bottom:8px\">\r\n\t\t\t\t\t<MButton Small Fab Color=\"primary\">\r\n\t\t\t\t\t\t<MIcon>mdi-pencil</MIcon>\r\n\t\t\t\t\t</MButton>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div style=\"margin-bottom:8px\">\r\n\t\t\t\t\t<MButton Fab Color=\"warning\">\r\n\t\t\t\t\t\t<MIcon>mdi-account-circle</MIcon>\r\n\t\t\t\t\t</MButton>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div style=\"margin-bottom:8px\">\r\n\t\t\t\t\t<MButton Large Fab Color=\"error\">\r\n\t\t\t\t\t\t<MIcon>mdi-alarm</MIcon>\r\n\t\t\t\t\t</MButton>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div style=\"margin-bottom:8px\">\r\n\t\t\t\t\t<MButton XLarge Fab Color=\"success\">\r\n\t\t\t\t\t\t<MIcon>mdi-domain</MIcon>\r\n\t\t\t\t\t</MButton>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</MCol>\r\n\t</MRow>\r\n</MContainer>",
+        "Type": "Demos.Components.Button.demo.Size",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 10,
+        "Name": "text",
+        "Title": "Text",
+        "Description": "<p>Text buttons have no box shadow and no background. Only on hover is the container for the button shown. When used with the color prop, the supplied color is applied to the button text instead of the background.</p>\n",
+        "Code": "<MRow Align=\"center\" Justify=\"space-around\">\r\n\t<MButton Text>\r\n\t\tNormal\r\n\t</MButton>\r\n\t<MButton Text Color=\"primary\">\r\n\t\tPrimary\r\n\t</MButton>\r\n\t<MButton Text Color=\"error\">\r\n\t\tError\r\n\t</MButton>\r\n\t<MButton Text Disabled>\r\n\t\tDisabled\r\n\t</MButton>\r\n</MRow>\r\n",
+        "Type": "Demos.Components.Button.demo.Text",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 11,
+        "Name": "tile",
+        "Title": "Tile",
+        "Description": "<p><code>tile</code> buttons behave the same as regular buttons but have no border radius.</p>\n",
+        "Code": "<MRow Align=\"center\"\r\n\t  Justify=\"space-around\">\r\n\t<MButton Tile Color=\"success\">\r\n\t\t<MIcon Left>mdi-pencil</MIcon>\r\n\t\tEdit\r\n\t</MButton>\r\n</MRow>",
+        "Type": "Demos.Components.Button.demo.Tile",
+        "Style": "",
+        "Debug": false
+      }
+    ]
+  },
+  {
     "Title": "Grid",
     "Type": "Grid",
     "Desc": "<p>24 Grids System。</p>\n<h2>Design concept#</h2>\n<p>In most business situations, Ant Design needs to solve a lot of information storage problems within the design area, so based on 12 Grids System, we divided the design area into 24 sections.</p>\n<p>We name the divided area 'box'. We suggest four boxes for horizontal arrangement at most, one at least. Boxes are proportional to the entire screen as shown in the picture above. To ensure a high level of visual comfort, we customize the typography inside of the box based on the box unit.</p>\n<h2>Outline</h2>\n<p>In the grid system, we define the frame outside the information area based on row and column, to ensure that every area can have stable arrangement.</p>\n<p>Following is a brief look at how it works:</p>\n<ul>\n<li>Establish a set of column in the horizontal space defined by row (abbreviated col)</li>\n<li>Your content elements should be placed directly in the col, and only col should be placed directly in row</li>\n<li>The column grid system is a value of 1-24 to represent its range spans. For example, three columns of equal width can be created by <Col span={8} />.</li>\n<li>If the sum of col spans in a row are more than 24, then the overflowing col as a whole will start a new line arrangement.</li>\n</ul>\n<p>Our grid systems base on Flex layout to allow the elements within the parent to be aligned horizontally - left, center, right, wide arrangement, and decentralized arrangement. The Grid system also supports vertical alignment - top aligned, vertically centered, bottom-aligned. You can also define the order of elements by using order.</p>\n<p>Layout uses a 24 grid layout to define the width of each &quot;box&quot;, but does not rigidly adhere to the grid layout.</p>\n",
@@ -124,6 +254,75 @@
         "Description": "<p>Use <code>OnBreakpoint</code> provide personalized layout.</p>\n",
         "Code": "<Row OnBreakpoint=\"HandleBreakpoint\">\r\n    Current break point: @current?.Name\r\n    @foreach (var type in types)\r\n    {\r\n        if (type.Width < current?.Width)\r\n        {\r\n            <Tag Color=\"blue\">@type.Name</Tag>\r\n        }\r\n    }\r\n</Row>\r\n\r\n@code{\r\n\r\n    AntDesign.BreakpointType[] types = new[] { AntDesign.BreakpointType.Xxl, AntDesign.BreakpointType.Xl, AntDesign.BreakpointType.Lg, AntDesign.BreakpointType.Md, AntDesign.BreakpointType.Sm, AntDesign.BreakpointType.Xs };\r\n\r\n    AntDesign.BreakpointType current;\r\n\r\n    void HandleBreakpoint(AntDesign.BreakpointType breakpoint)\r\n    {\r\n        current = breakpoint;\r\n    }\r\n}",
         "Type": "Demos.Components.Grid.demo.UseBreakpoint",
+        "Style": "",
+        "Debug": false
+      }
+    ]
+  },
+  {
+    "Title": "Icon",
+    "Type": "Icon",
+    "Desc": "<p>Semantic vector graphics.</p>\n",
+    "ApiDoc": "",
+    "Cols": 1,
+    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "basic",
+        "Title": "Basic",
+        "Description": "<p>Supports <code>Material Icons</code>、<code>Material Design Icons</code>、<code>Font Awesome 5</code> icon libraries。</p>\n",
+        "Code": "<div>\r\n\t<MIcon>home</MIcon>\r\n\t<MIcon>mdi-home</MIcon>\r\n\t<MIcon>fas fa-home</MIcon>\r\n</div>\r\n",
+        "Type": "Demos.Components.Icon.demo.Basic",
+        "Style": "",
+        "Debug": false
+      }
+    ]
+  },
+  {
+    "Title": "Nav",
+    "Type": "Nav",
+    "Desc": "<h2>Navigation drawers</h2>\n<p>The v-navigation-drawer component is what your users will utilize to navigate through the application. The navigation-drawer is pre-configured to work with or without vue-router right out the box. For the purpose of display, some examples are wrapped in a v-card element. Within your application you will generally place the v-navigation-drawer as a direct child of v-app.</p>\n",
+    "ApiDoc": "",
+    "Cols": 1,
+    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Nav.svg",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "basic",
+        "Title": "Basic Nav",
+        "Description": "<p>The navigation drawer is primarily used to house links to the pages in your application. Using null as the starting value for its v-model will initialize the drawer as closed on mobile and as open on desktop. It is common to pair drawers with the v-list component using the nav property.</p>\n",
+        "Code": "<MNavCard Height=\"400\" Width=\"256\">\r\n    <MNavigationDrawer>\r\n        <MListItem>\r\n            <MListItemContent>\r\n                <MListItemTitle>\r\n                    Application\r\n                </MListItemTitle>\r\n            </MListItemContent>\r\n        </MListItem>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MList>\r\n            <MListItem>\r\n                <MListItemIcon>\r\n                    <MIcon>home</MIcon>\r\n                </MListItemIcon>\r\n                <MListItemContent>\r\n                    <MListItemTitle>1</MListItemTitle>\r\n                </MListItemContent>\r\n            </MListItem>\r\n            <MListItem>\r\n                <MListItemIcon>\r\n                    <MIcon>dashboard</MIcon>\r\n                </MListItemIcon>\r\n                <MListItemContent>\r\n                    <MListItemTitle>2</MListItemTitle>\r\n                </MListItemContent>\r\n            </MListItem>\r\n            <MListItem>\r\n                <MListItemIcon>\r\n                    <MIcon>shopping_bag</MIcon>\r\n                </MListItemIcon>\r\n                <MListItemContent>\r\n                    <MListItemTitle>3</MListItemTitle>\r\n                </MListItemContent>\r\n            </MListItem>\r\n        </MList>\r\n    </MNavigationDrawer>\r\n</MNavCard>\r\n\r\n\r\n\r\n",
+        "Type": "Demos.Components.Nav.demo.Basic",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 0,
+        "Name": "Temporary",
+        "Title": "Temporary",
+        "Description": "<h3>Temporary</h3>\n<p>A temporary drawer sits above its application and uses a scrim (overlay) to darken the background. This drawer behavior is mimicked by default when on mobile. Clicking outside of the drawer will cause it to close.</p>\n",
+        "Code": "<div class=\"overflow-hidden\" style=\"height:400px;position:relative;\">\r\n    <MContainer>\r\n        <MRow Align=\"center\" Justify=\"center\">\r\n            <button @onclick=\"Toggle\">toggle</button>\r\n        </MRow>\r\n    </MContainer>\r\n\r\n    <MNavigationDrawer Temporary=\"true\" Absolute=\"true\" Drawer=\"_drawer\">\r\n        <MListItem>\r\n            <MListItemContent>\r\n                <MListItemTitle>\r\n                    Application\r\n                </MListItemTitle>\r\n            </MListItemContent>\r\n        </MListItem>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MList>\r\n            <MListItem>\r\n                <MListItemIcon>\r\n                    <MIcon>home</MIcon>\r\n                </MListItemIcon>\r\n                <MListItemContent>\r\n                    <MListItemTitle>1</MListItemTitle>\r\n                </MListItemContent>\r\n            </MListItem>\r\n            <MListItem>\r\n                <MListItemIcon>\r\n                    <MIcon>dashboard</MIcon>\r\n                </MListItemIcon>\r\n                <MListItemContent>\r\n                    <MListItemTitle>2</MListItemTitle>\r\n                </MListItemContent>\r\n            </MListItem>\r\n            <MListItem>\r\n                <MListItemIcon>\r\n                    <MIcon>shopping_bag</MIcon>\r\n                </MListItemIcon>\r\n                <MListItemContent>\r\n                    <MListItemTitle>3</MListItemTitle>\r\n                </MListItemContent>\r\n            </MListItem>\r\n        </MList>\r\n    </MNavigationDrawer>\r\n</div>\r\n\r\n@code{\r\n    private bool _drawer;\r\n\r\n    public void Toggle(MouseEventArgs args)\r\n    {\r\n        _drawer = !_drawer;\r\n    }\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+        "Type": "Demos.Components.Nav.demo.Temporary",
+        "Style": "",
+        "Debug": false
+      }
+    ]
+  },
+  {
+    "Title": "ProcessCircular",
+    "Type": "ProcessCircular",
+    "Desc": "<p>The component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.</p>\n",
+    "ApiDoc": "",
+    "Cols": 1,
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "basic",
+        "Title": "Basic",
+        "Description": "<p>By default, progress circular uses the applications secondary color.</p>\n",
+        "Code": "<div>\r\n\t<MProcessCircular Indeterminate></MProcessCircular>\r\n</div>\r\n",
+        "Type": "Demos.Components.ProcessCircular.demo.Basic",
         "Style": "",
         "Debug": false
       }
