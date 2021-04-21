@@ -1,0 +1,28 @@
+image: masastack/dotnet:5.0
+
+stages:
+  - build
+  - tests
+  - nuget
+
+build:
+  stage: build
+  only:
+    - branches
+  script:
+    - dotnet build
+
+# tests:
+#   stage: tests
+#   only:
+#     - branches
+#   script:
+#     - dotnet test --collect:"XPlat Code Coverage"
+
+nuget:
+  stage: nuget
+  only:
+    - branches
+  script:
+    - dotnet build
+    - dotnet nuget push "**/*.nupkg" --source gitlab
