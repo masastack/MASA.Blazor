@@ -5,6 +5,10 @@ stages:
   - tests
   - nuget
 
+variables:
+  # 拉取 Submodule 内容
+  GIT_SUBMODULE_STRATEGY: recursive
+
 build:
   stage: build
   only:
