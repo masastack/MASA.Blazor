@@ -21,11 +21,6 @@ namespace MASA.Blazor
         [Parameter]
         public bool Dark { get; set; }
 
-        protected override Dictionary<string, object> StaticAttributes => new()
-        {
-            { "data-app", true }
-        };
-
         public override void SetComponentClass()
         {
             var prefix = "m-application";
@@ -41,6 +36,8 @@ namespace MASA.Blazor
                 .AddTheme(Dark);
 
             WrapCssBuilder.Add("m-application--wrap");
+
+            Attributes.Add("data-app", true);
         }
     }
 }

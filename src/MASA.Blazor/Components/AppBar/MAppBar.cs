@@ -64,11 +64,6 @@ namespace MASA.Blazor
         [Parameter]
         public StringNumber Right { get; set; } = 0;
 
-        protected override Dictionary<string, object> StaticAttributes => new()
-        {
-            { "data-booted", true }
-        };
-
         public override void SetComponentClass()
         {
             var prefix = "m-toolbar";
@@ -104,6 +99,8 @@ namespace MASA.Blazor
             ContentStyleBuilder
                 .Clear()
                 .Add($"height:{Height.Value}");
+
+            Attributes.Add("data-booted", true);
         }
     }
 }
