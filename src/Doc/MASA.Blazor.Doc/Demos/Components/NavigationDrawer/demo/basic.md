@@ -1,8 +1,8 @@
 ---
 order: 0
 title:
-  zh-CN: 基础导航
-  en-US: Basic Nav
+  zh-CN: 基础导航抽屉
+  en-US: Basic NavigationDrawer
 ---
 
 ## zh-CN

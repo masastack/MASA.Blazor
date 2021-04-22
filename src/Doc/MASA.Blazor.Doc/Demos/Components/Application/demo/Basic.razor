@@ -1,0 +1,22 @@
+﻿<MApp>
+    <MNavigationDrawer Absolute="true">
+    </MNavigationDrawer>
+
+    <MAppBar Absolute="true" Left="_left">
+        app-bar
+    </MAppBar>
+
+    <MMain Style="padding-left:256px;padding-top:56px;">
+        <MContainer>
+            main
+        </MContainer>
+    </MMain>
+
+    <MFooter Style="padding-left: 256px;">
+        <MContainer>footer</MContainer>
+    </MFooter>
+</MApp>
+
+@code{
+    private string _left = "256px";
+}

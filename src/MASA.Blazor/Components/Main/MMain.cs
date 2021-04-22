@@ -12,8 +12,6 @@ namespace MASA.Blazor
     {
         public override void SetComponentClass()
         {
-            Style = "padding: 64px 0px 0px;";
-
             CssBuilder
                 .Add("m-main");
 

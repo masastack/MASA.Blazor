@@ -218,3 +218,4 @@ package-lock.json
 Thunbs.db
 packages/
 .vscode/
+src/Doc/MASA.Blazor.Doc/wwwroot/meta/

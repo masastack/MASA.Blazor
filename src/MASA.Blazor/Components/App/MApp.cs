@@ -1,4 +1,5 @@
-﻿using BlazorComponent;
+﻿using System.Collections.Generic;
+using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
@@ -19,6 +20,11 @@ namespace MASA.Blazor
         /// </summary>
         [Parameter]
         public bool Dark { get; set; }
+
+        protected override Dictionary<string, object> StaticAttributes => new()
+        {
+            { "data-app", true }
+        };
 
         public override void SetComponentClass()
         {

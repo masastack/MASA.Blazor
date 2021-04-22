@@ -82,10 +82,10 @@ namespace MASA.Blazor
 
             StyleBuilder
                 .AddIf(() => $"height:{Height.Value}px", () => Height != default)
-                .AddIf(() => $"minHeight:{MinHeight.Value}px", () => MinHeight != default)
-                .AddIf(() => $"minWidth:{MinWidth.Value}px", () => MinWidth != default)
-                .AddIf(() => $"maxHeight:{MaxHeight.Value}px", () => MaxHeight != default)
-                .AddIf(() => $"maxWidth:{MaxWidth.Value}px", () => MaxWidth != default)
+                .AddIf(() => $"min-height:{MinHeight.Value}px", () => MinHeight != default)
+                .AddIf(() => $"min-width:{MinWidth.Value}px", () => MinWidth != default)
+                .AddIf(() => $"max-height:{MaxHeight.Value}px", () => MaxHeight != default)
+                .AddIf(() => $"max-width:{MaxWidth.Value}px", () => MaxWidth != default)
                 .AddIf(() => $"width:{Width.Value}px", () => Width != default);
         }
     }

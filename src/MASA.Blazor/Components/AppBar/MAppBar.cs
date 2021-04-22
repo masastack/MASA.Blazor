@@ -13,8 +13,6 @@ namespace MASA.Blazor
 
     public partial class MAppBar : BAppBar
     {
-        private StringNumber _height;
-
         protected bool IsExtended { get; set; }
 
         [Parameter]
@@ -42,24 +40,10 @@ namespace MASA.Blazor
         /// Sets the height of the navigation drawer
         /// </summary>
         [Parameter]
-        public StringNumber Height
-        {
-            get
-            {
-                if (_height.Value == default)
-                {
-                    return "56px";
-                }
+        public StringNumber Height { get; set; } = "56px";
 
-                return _height;
-            }
-            set
-            {
-                _height = value;
-            }
-        }
-
-        public string MarginTop { get; }
+        [Parameter]
+        public string MarginTop { get; set; }
 
         /// <summary>
         /// This should be down in next version
@@ -79,6 +63,11 @@ namespace MASA.Blazor
 
         [Parameter]
         public StringNumber Right { get; set; } = 0;
+
+        protected override Dictionary<string, object> StaticAttributes => new()
+        {
+            { "data-booted", true }
+        };
 
         public override void SetComponentClass()
         {

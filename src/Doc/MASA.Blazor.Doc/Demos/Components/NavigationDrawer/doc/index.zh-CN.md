@@ -1,10 +1,10 @@
 ---
 category: Components
-subtitle: 导航
-type: 导航
-title: Nav
+subtitle: 导航抽屉
+type: 导航抽屉
+title: NavigationDrawer
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Nav.svg
+cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg
 
 ---
 
