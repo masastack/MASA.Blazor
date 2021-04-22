@@ -67,5 +67,19 @@
         "Url": "components/processcircular"
       }
     ]
+  },
+  {
+    "Order": 9,
+    "Title": "Card",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "Card",
+        "Type": "menuItem",
+        "Url": "components/card",
+        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg"
+      }
+    ]
   }
 ]

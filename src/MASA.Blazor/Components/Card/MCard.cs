@@ -4,14 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlazorComponent;
+using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
     public partial class MCard : BCard
     {
+        /// <summary>
+        /// Whether dark theme
+        /// </summary>
+        [Parameter]
+        public bool Dark { get; set; }
+
         public override void SetComponentClass()
         {
-            CssBuilder.Add("m-card").Add("elevation-2");
+            CssBuilder.Add("m-card")
+                .Add("m-sheet--outlined")
+                .AddIf("elevation-2",()=> !Outlined)
+                .AddTheme(Dark);
 
             CardCoverCssBuilder.Add("m-responsive").Add("m-image__image--cover");
 

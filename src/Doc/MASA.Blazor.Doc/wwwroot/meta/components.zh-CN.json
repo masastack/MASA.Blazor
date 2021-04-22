@@ -131,6 +131,47 @@
     ]
   },
   {
+    "Title": "Card",
+    "SubTitle": "卡片",
+    "Type": "卡片",
+    "Desc": "<p>MCard 组件是一个可用于从面板到静态图像的多功能组件。 卡 组件有许多帮助程序组件来尽可能简单地进行标记。 没有列出选项的组件使用Vue的功能组件来更快渲染并充当标记糖以使建筑变得更加容易。</p>\n",
+    "ApiDoc": "",
+    "Cols": 1,
+    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "basic",
+        "Title": "基本",
+        "Description": "<p>MCard 基本用法</p>\n",
+        "Code": "<MCard Style=\"width:300px;\">\r\n\t<Cover> <img alt=\"example\" src=\"https://cdn.vuetifyjs.com/images/cards/cooking.png\" /> </Cover>\r\n\t<Title> <span>Card title</span> </Title>\r\n\t<SubTitle> <span>Subtitle text</span> </SubTitle>\r\n\t<Text>  <p>Greyhound divisively hello coldly wonderfully marginally far upon excluding. </p> </Text>\r\n\t<Actions>\r\n\t\t<MButton Text Color=\"primary\">\r\n\t\t\t<MIcon Small>fas fa-edit</MIcon>\r\n\t\t\tedit\r\n\t\t</MButton>\r\n\t\t<MButton Text Color=\"primary\">\r\n\t\t\t<MIcon Small>fas fa-share-square</MIcon>\r\n\t\t\tshare\r\n\t\t</MButton>\r\n\t</Actions>\r\n</MCard>",
+        "Type": "Demos.Components.Card.demo.Basic",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 1,
+        "Name": "Outlined",
+        "Title": "轮廓",
+        "Description": "<p>An outlined card has 0 elevation and contains a soft border.</p>\n",
+        "Code": "<MCard Outlined Style=\"width:300px;\">\r\n\t<Title> <span>Card title</span> </Title>\r\n\t<SubTitle> <span>Subtitle text</span> </SubTitle>\r\n\t<Text>  <p>Greyhound divisively hello coldly wonderfully marginally far upon excluding. </p> </Text>\r\n\t<Actions>\r\n\t\t<MButton Text Color=\"primary\">\r\n\t\t\t<MIcon Small>fas fa-edit</MIcon>\r\n\t\t\tedit\r\n\t\t</MButton>\r\n\t\t<MButton Text Color=\"primary\">\r\n\t\t\t<MIcon Small>fas fa-share-square</MIcon>\r\n\t\t\tshare\r\n\t\t</MButton>\r\n\t</Actions>\r\n</MCard>",
+        "Type": "Demos.Components.Card.demo.Outlined",
+        "Style": "",
+        "Debug": false
+      },
+      {
+        "Order": 2,
+        "Name": "Weather",
+        "Title": "天气",
+        "Description": "<p>使用v-list-items和v-slider，我们能够创建唯一的气象卡。 列表组件确保我们具有一致的间距和功能，而滑块组件使我们能够为用户提供有用的选择界面。</p>\n",
+        "Code": "<MCard Style=\"width:400px;\">\r\n\t<Text>\r\n\t\t<MListItem TwoLine>\r\n\t\t\t<MListItemContent>\r\n\t\t\t\t<MListItemTitle class=\"headline\">\r\n\t\t\t\t\tSan Francisco\r\n\t\t\t\t</MListItemTitle>\r\n\t\t\t\t<MListItemTitle>Mon, 12:30 PM, Mostly sunny</MListItemTitle>\r\n\t\t\t</MListItemContent>\r\n\t\t</MListItem>\r\n\t\t<MListItem>\r\n\t\t\t<MRow Align=\"center\">\r\n\t\t\t\t<MCol cols=\"6\">\r\n\t\t\t\t\t  <h1 class=\"display-1\">23&deg;C</h1>\t\t\r\n\t\t\t\t</MCol>\r\n\t\t\t\t<MCol cols=\"6\">\r\n\t\t\t\t\t<img src=\"https://cdn.vuetifyjs.com/images/cards/sun.png\"  />\r\n\t\t\t\t</MCol>\r\n\t\t\t</MRow>\r\n\t\t</MListItem>\r\n\t\t<MListItem>\r\n\t\t\t<MListItemIcon>\r\n\t\t\t\t<MIcon>mdi-send</MIcon>\r\n\t\t\t</MListItemIcon>\r\n\t\t\t<MListItemTitle>23 km/h</MListItemTitle>\r\n\t\t</MListItem>\r\n\t\t<MListItem>\r\n\t\t\t<MListItemIcon>\r\n\t\t\t\t<MIcon>mdi-cloud-download</MIcon>\r\n\t\t\t</MListItemIcon>\r\n\t\t\t<MListItemTitle>48%</MListItemTitle>\r\n\t\t</MListItem>\r\n\t\t<MList>\r\n\t\t\t<MListItem>\r\n\t\t\t\t<MListItemTitle>Tuesday</MListItemTitle>\r\n\t\t\t\t<MListItemIcon>\r\n\t\t\t\t\t<MIcon>mdi-white-balance-sunny</MIcon>\r\n\t\t\t\t</MListItemIcon>\r\n\t\t\t\t<MListItemTitle> 23&deg;C </MListItemTitle>\r\n\t\t\t</MListItem>\r\n\t\t\t<MListItem>\r\n\t\t\t\t<MListItemTitle>Wednesday</MListItemTitle>\r\n\t\t\t\t<MListItemIcon>\r\n\t\t\t\t\t<MIcon>mdi-white-balance-sunny</MIcon>\r\n\t\t\t\t</MListItemIcon>\r\n\t\t\t\t<MListItemTitle> 26&deg;C </MListItemTitle>\r\n\t\t\t</MListItem>\r\n\t\t\t<MListItem>\r\n\t\t\t\t<MListItemTitle>Thursday</MListItemTitle>\r\n\t\t\t\t<MListItemIcon>\r\n\t\t\t\t\t<MIcon>mdi-cloud</MIcon>\r\n\t\t\t\t</MListItemIcon>\r\n\t\t\t\t<MListItemTitle> 25&deg;C </MListItemTitle>\r\n\t\t\t</MListItem>\r\n\t\t</MList>\r\n\t</Text>\r\n\t<Actions>\r\n\t\t<MButton Text Color=\"primary\" Block>\r\n\t\t\tFull Report\r\n\t\t</MButton>\r\n\t</Actions>\r\n</MCard>",
+        "Type": "Demos.Components.Card.demo.Weather",
+        "Style": "",
+        "Debug": false
+      }
+    ]
+  },
+  {
     "Title": "Grid",
     "SubTitle": "网格",
     "Type": "网格",
