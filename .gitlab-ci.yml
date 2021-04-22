@@ -14,7 +14,7 @@ build:
   only:
     - branches
   script:
-    - dotnet build
+    - dotnet build src
 
 # tests:
 #   stage: tests
