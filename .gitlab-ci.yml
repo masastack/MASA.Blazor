@@ -1,4 +1,4 @@
-image: proget-hz.lonsid.cn/masa-images/library/dotnet:5.0
+image: proget-hz.lonsid.cn/masa-images/library/dotnet:6.0
 
 stages:
   - build
