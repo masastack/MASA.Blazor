@@ -1,0 +1,23 @@
+﻿@using AlertType = Blazor.AlertType
+
+<div>
+	<MAlert Dense
+			Type="AlertType.Info">
+		I'm a dense alert with a <strong>type</strong> of info
+	</MAlert>
+	<MAlert Dense
+			Text
+			Type="AlertType.Success">
+		I'm a dense alert with the <strong>text</strong> prop and a <strong>type</strong> of success
+	</MAlert>
+	<MAlert Dense
+			Border="AlertBorder.Left"
+			Type="AlertType.Warning">
+		I'm a dense alert with the <strong>border</strong> prop and a <strong>type</strong> of warning
+	</MAlert>
+	<MAlert Dense
+			Outlined
+			Type="AlertType.Error">
+		I'm a dense alert with the <strong>outlined</strong> prop and a <strong>type</strong> of error
+	</MAlert>
+</div>
