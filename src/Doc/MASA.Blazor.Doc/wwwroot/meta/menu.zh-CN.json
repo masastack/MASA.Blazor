@@ -1,0 +1,209 @@
+[
+  {
+    "Order": 0,
+    "Title": "文档",
+    "Type": "subMenu",
+    "Url": "docs",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "Ant Design of Blazor",
+        "Type": "menuItem",
+        "Url": "docs/introduce"
+      },
+      {
+        "Order": 1,
+        "Title": "快速上手",
+        "Type": "menuItem",
+        "Url": "docs/getting-started"
+      },
+      {
+        "Order": 4,
+        "Title": "国际化",
+        "Type": "menuItem",
+        "Url": "docs/i18n"
+      },
+      {
+        "Order": 5,
+        "Title": "路径式属性访问",
+        "Type": "menuItem",
+        "Url": "docs/path-based-property-access"
+      },
+      {
+        "Order": 6,
+        "Title": "更新日志",
+        "Type": "menuItem",
+        "Url": "docs/CHANGELOG"
+      },
+      {
+        "Order": 6,
+        "Title": "获取每日构建",
+        "Type": "menuItem",
+        "Url": "docs/nightly-build"
+      },
+      {
+        "Order": 11,
+        "Title": "贡献指南",
+        "Type": "menuItem",
+        "Url": "docs/contributing"
+      }
+    ]
+  },
+  {
+    "Order": 2,
+    "Title": "组件",
+    "Type": "subMenu",
+    "Url": "components",
+    "Children": [
+      {
+        "Order": 1,
+        "Title": "网格",
+        "Type": "itemGroup",
+        "Children": [
+          {
+            "Order": 0,
+            "Title": "Grid",
+            "SubTitle": "网格",
+            "Type": "menuItem",
+            "Url": "components/grid",
+            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg"
+          }
+        ]
+      },
+      {
+        "Order": 2,
+        "Title": "应用程序",
+        "Type": "itemGroup",
+        "Children": [
+          {
+            "Order": 0,
+            "Title": "Application",
+            "SubTitle": "应用程序",
+            "Type": "menuItem",
+            "Url": "components/application",
+            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Application.svg"
+          }
+        ]
+      },
+      {
+        "Order": 3,
+        "Title": "图标",
+        "Type": "itemGroup",
+        "Children": [
+          {
+            "Order": 0,
+            "Title": "Icon",
+            "SubTitle": "图标",
+            "Type": "menuItem",
+            "Url": "components/icon",
+            "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg"
+          }
+        ]
+      },
+      {
+        "Order": 4,
+        "Title": "按钮",
+        "Type": "itemGroup",
+        "Children": [
+          {
+            "Order": 0,
+            "Title": "Button",
+            "SubTitle": "按钮",
+            "Type": "menuItem",
+            "Url": "components/button",
+            "Cover": "https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Button.svg"
+          }
+        ]
+      },
+      {
+        "Order": 6,
+        "Title": "分隔线",
+        "Type": "itemGroup",
+        "Children": [
+          {
+            "Order": 0,
+            "Title": "Divider",
+            "SubTitle": "分隔线",
+            "Type": "menuItem",
+            "Url": "components/divider",
+            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Divider.svg"
+          }
+        ]
+      },
+      {
+        "Order": 8,
+        "Title": "列表",
+        "Type": "itemGroup",
+        "Children": [
+          {
+            "Order": 0,
+            "Title": "List",
+            "SubTitle": "列表",
+            "Type": "menuItem",
+            "Url": "components/list",
+            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg"
+          }
+        ]
+      },
+      {
+        "Order": 9,
+        "Title": "进度环",
+        "Type": "itemGroup",
+        "Children": [
+          {
+            "Order": 0,
+            "Title": "ProcessCircular",
+            "SubTitle": "进度环",
+            "Type": "menuItem",
+            "Url": "components/processcircular"
+          }
+        ]
+      },
+      {
+        "Order": 10,
+        "Title": "导航抽屉",
+        "Type": "itemGroup",
+        "Children": [
+          {
+            "Order": 0,
+            "Title": "NavigationDrawer",
+            "SubTitle": "导航抽屉",
+            "Type": "menuItem",
+            "Url": "components/navigationdrawer",
+            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg"
+          }
+        ]
+      },
+      {
+        "Order": 11,
+        "Title": "卡片",
+        "Type": "itemGroup",
+        "Children": [
+          {
+            "Order": 0,
+            "Title": "Card",
+            "SubTitle": "卡片",
+            "Type": "menuItem",
+            "Url": "components/card",
+            "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg"
+          }
+        ]
+      },
+      {
+        "Order": 12,
+        "Title": "树形",
+        "Type": "itemGroup",
+        "Children": [
+          {
+            "Order": 0,
+            "Title": "Tree",
+            "SubTitle": "树形",
+            "Type": "menuItem",
+            "Url": "components/tree",
+            "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg"
+          }
+        ]
+      }
+    ]
+  }
+]

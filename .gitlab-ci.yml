@@ -23,10 +23,10 @@ build:
 #   script:
 #     - dotnet test --collect:"XPlat Code Coverage"
 
-# nuget:
-#   stage: nuget
-#   only:
-#     - branches
-#   script:
-#     - dotnet build
-#     - dotnet nuget push "**/*.nupkg" --source gitlab
+nuget:
+   stage: nuget
+   only:
+     - branches
+   script:
+     - dotnet build src
+     - dotnet nuget push "**/*.nupkg" --source gitlab
