@@ -1,0 +1,69 @@
+﻿<MContainer Fluid>
+	<MRow class="light--text">
+		<MCol Span="4">
+			on
+		</MCol>
+		<MCol Span="4">
+			off
+		</MCol>
+		<MCol Span="4">
+			indeterminate
+		</MCol>
+	</MRow>
+	<MRow>
+		<MCol Span="4">
+			<MCheckbox Checked="checked1" CheckedChanged="ToggleChecked1"></MCheckbox>
+		</MCol>
+		<MCol Span="4">
+			<MCheckbox Checked="checked2" CheckedChanged="ToggleChecked2"></MCheckbox>
+		</MCol>
+		<MCol Span="4">
+			<MCheckbox Indeterminate="@indeterminate" Checked="checked3" CheckedChanged="ToggleChecked3"></MCheckbox>
+		</MCol>
+	</MRow>
+	<MRow class="light--text">
+		<MCol Span="4">
+			on disabled
+		</MCol>
+		<MCol Span="4">
+			off disabled
+		</MCol>
+	</MRow>
+	<MRow>
+		<MCol Span="4">
+			<MCheckbox Checked="checked4" CheckedChanged="ToggleChecked4"
+					   Disabled></MCheckbox>
+		</MCol>
+		<MCol Span="4">
+			<MCheckbox Disabled></MCheckbox>
+		</MCol>
+	</MRow>
+</MContainer>
+
+@code {
+	bool checked1 = true;
+	void ToggleChecked1(bool value)
+	{
+		checked1 = value;
+	}
+
+	bool checked2 = false;
+	void ToggleChecked2(bool value)
+	{
+		checked2 = value;
+	}
+
+	bool indeterminate = true;
+	bool checked3 = false;
+	void ToggleChecked3(bool value)
+	{
+		checked3 = value;
+		if (indeterminate) indeterminate = false;
+	}
+
+	bool checked4 = false;
+	void ToggleChecked4(bool value)
+	{
+		checked4 = value;
+	}
+}
