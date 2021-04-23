@@ -1,5 +1,6 @@
 ﻿using BlazorComponent;
 using BlazorComponent.Components.Core.CssProcess;
+using MASA.Blazor.Helpers;
 using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
@@ -67,15 +68,11 @@ namespace MASA.Blazor
         {
             CssBuilder
                 .Add("m-icon")
-                .Add(() =>
-                {
-                    var suffix = Dark ? "dark" : "light";
-                    return $"theme--{suffix}";
-                })
                 .AddIf("m-icon--link", () => Click.HasDelegate)
                 .AddIf("m-icon--dense", () => Dense)
                 .AddIf("m-icon--left", () => Left)
-                .AddIf("m-icon--right", () => Right);
+                .AddIf("m-icon--right", () => Right)
+                .AddTheme(Dark);
 
             // TODO: 能否拿到属性排列顺序，最后一个优先级最高
             StyleBuilder
@@ -92,31 +89,9 @@ namespace MASA.Blazor
                 );
 
             // 渲染颜色和变体
-            if (!string.IsNullOrWhiteSpace(Color))
-            {
-                var color_variant = Color.Split(" ");
-                var color = color_variant[0];
-                if (!string.IsNullOrWhiteSpace(color))
-                {
-                    if (color.StartsWith("#"))
-                    {
-                        StyleBuilder.Add($"color: {color}");
-                    }
-                    else
-                    {
-                        CssBuilder.Add($"{color}--text");
-                    }
-
-                    if (color_variant.Length == 2)
-                    {
-                        var variant = color_variant[1];
-                        // TODO: 是否需要正则表达式验证格式，Vuetify没有
-                        // {darken|lighten|accent}-{1|2}
-
-                        CssBuilder.AddIf($"text--{variant}", () => !string.IsNullOrWhiteSpace(variant));
-                    }
-                }
-            }
+            var (color_class, color_style) = ColorHelper.ToCss(Color);
+            CssBuilder.Add(color_class);
+            StyleBuilder.Add(color_style);
         }
     }
 }
