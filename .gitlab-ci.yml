@@ -1,13 +1,13 @@
 image: proget-hz.lonsid.cn/masa-images/library/dotnet:6.0
 
+default:
+  before_script:
+    - git clone -b develop https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
+
 stages:
   - build
   - tests
   - nuget
-
-variables:
-  # 拉取 Submodule 内容
-  GIT_SUBMODULE_STRATEGY: recursive
 
 build:
   stage: build
