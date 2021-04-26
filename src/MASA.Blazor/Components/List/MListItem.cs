@@ -117,7 +117,7 @@ namespace MASA.Blazor
             }
         }
 
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             var prefix = "m-list-item";
             CssBuilder

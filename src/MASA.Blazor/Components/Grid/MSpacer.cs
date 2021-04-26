@@ -9,7 +9,7 @@ namespace MASA.Blazor
 {
     public partial class MSpacer : BSpacer
     {
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             CssBuilder.Add("spacer");
         }

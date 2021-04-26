@@ -9,7 +9,7 @@ namespace MASA.Blazor
 {
     public partial class MListItemIcon : BListItemIcon
     {
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             CssBuilder
                 .Add("m-list-item__icon");

@@ -28,7 +28,7 @@ namespace MASA.Blazor
         [Parameter]
         public string AlignContent { get; set; }
 
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             CssBuilder.Add("row")
                 .AddIf("no-gutters", () => NoGutters)

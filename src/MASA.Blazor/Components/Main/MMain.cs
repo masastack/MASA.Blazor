@@ -10,7 +10,7 @@ namespace MASA.Blazor
 {
     public partial class MMain : BMain
     {
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             CssBuilder
                 .Add("m-main");

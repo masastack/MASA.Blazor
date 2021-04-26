@@ -1,7 +1,7 @@
 ---
 category: Components
-type: ProcessCircular
-title: ProcessCircular
+type: Process
+title: Process
 cols: 1
 ---
 

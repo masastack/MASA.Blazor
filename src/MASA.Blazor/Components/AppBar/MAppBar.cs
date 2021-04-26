@@ -64,7 +64,7 @@ namespace MASA.Blazor
         [Parameter]
         public StringNumber Right { get; set; } = 0;
 
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             var prefix = "m-toolbar";
 

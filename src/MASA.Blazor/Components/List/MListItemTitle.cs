@@ -9,7 +9,7 @@ namespace MASA.Blazor
 {
     public partial class MListItemTitle : BListItemTitle
     {
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             CssBuilder.Add("m-list-item__title");
         }

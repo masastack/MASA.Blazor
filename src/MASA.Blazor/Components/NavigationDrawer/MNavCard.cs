@@ -64,7 +64,7 @@ namespace MASA.Blazor
         [Parameter]
         public int? Width { get; set; }
 
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             var prefix = "m-card";
             CssBuilder

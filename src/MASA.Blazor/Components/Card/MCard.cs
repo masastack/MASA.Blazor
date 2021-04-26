@@ -16,7 +16,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool Dark { get; set; }
 
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             CssBuilder.Add("m-card")
                 .Add("m-sheet--outlined")

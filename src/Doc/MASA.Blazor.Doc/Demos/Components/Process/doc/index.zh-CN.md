@@ -1,8 +1,8 @@
 ---
 category: Components
-subtitle: 进度环
-type: 进度环
-title: ProcessCircular
+subtitle: 进度
+type: 进度
+title: Process
 cols: 1
 
 ---

@@ -180,7 +180,7 @@ namespace MASA.Blazor
             base.OnInitialized();
         }
 
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             var prefix = "m-navigation-drawer";
 

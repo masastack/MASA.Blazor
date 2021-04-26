@@ -64,7 +64,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool XSmall { get; set; }
 
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             CssBuilder
                 .Add("m-icon")

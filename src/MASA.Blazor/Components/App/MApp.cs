@@ -21,21 +21,27 @@ namespace MASA.Blazor
         [Parameter]
         public bool Dark { get; set; }
 
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             var prefix = "m-application";
 
-            CssBuilder
-                .Clear()
-                .Add("m-application")
-                .Add(() =>
+            ConfigProvider
+                .Add<BApp>(cssBuilder =>
                 {
-                    var suffix = LeftToRight ? "ltr" : "rtl";
-                    return $"{prefix}--is-{suffix}";
+                    cssBuilder
+                    .Add("m-application")
+                    .Add(() =>
+                    {
+                        var suffix = LeftToRight ? "ltr" : "rtl";
+                        return $"{prefix}--is-{suffix}";
+                    })
+                    .AddTheme(Dark);
                 })
-                .AddTheme(Dark);
-
-            WrapCssBuilder.Add("m-application--wrap");
+                .Add<BApp>("wrap", cssBuilder =>
+                {
+                    cssBuilder
+                    .Add("m-application--wrap");
+                });
 
             Attributes.Add("data-app", true);
         }

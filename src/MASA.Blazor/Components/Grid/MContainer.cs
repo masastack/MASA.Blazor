@@ -16,7 +16,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool Fluid { get; set; }
 
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             CssBuilder
                 .Add("container")

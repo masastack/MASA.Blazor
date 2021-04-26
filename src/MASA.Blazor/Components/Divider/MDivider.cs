@@ -17,7 +17,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool Vertical { get; set; }
 
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             var prefix = "m-divider";
             CssBuilder

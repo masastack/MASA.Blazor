@@ -17,7 +17,7 @@ namespace MASA.Blazor
         [Parameter]
         public string Align { get; set; }
 
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             CssBuilder
                 .Clear()

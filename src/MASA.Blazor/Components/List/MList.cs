@@ -120,7 +120,7 @@ namespace MASA.Blazor
 
         public override List<BListItem> Items { get; set; } = new List<BListItem>();
 
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             var prefix = "m-list";
             CssBuilder
