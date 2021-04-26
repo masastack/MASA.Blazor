@@ -19,13 +19,16 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            CssBuilder
-                .Clear()
-                .Add("col")
-                .AddIf(() => $"col-{Span.Value}", () => !IsNullOrDefault(Span))
-                .AddIf(() => $"offset-{Offset.Value}", () => !IsNullOrDefault(Offset))
-                .AddIf(() => $"order-{Order.Value}", () => !IsNullOrDefault(Order))
-                .AddIf(() => $"align-self-{Align}", () => !string.IsNullOrEmpty(Align));
+            CssProvider
+                .Apply<BCol>(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("col")
+                        .AddIf(() => $"col-{Span.Value}", () => !IsNullOrDefault(Span))
+                        .AddIf(() => $"offset-{Offset.Value}", () => !IsNullOrDefault(Offset))
+                        .AddIf(() => $"order-{Order.Value}", () => !IsNullOrDefault(Order))
+                        .AddIf(() => $"align-self-{Align}", () => !string.IsNullOrEmpty(Align));
+                });
         }
 
         private bool IsNullOrDefault(OneOf<string, int> span)

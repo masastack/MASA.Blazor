@@ -18,10 +18,14 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            CssBuilder
-                .Add("m-footer")
-                .Add("m-sheet")
-                .AddTheme(Dark);
+            CssProvider
+                .Apply<BFooter>(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-footer")
+                        .Add("m-sheet")
+                        .AddTheme(Dark);
+                });
         }
     }
 }

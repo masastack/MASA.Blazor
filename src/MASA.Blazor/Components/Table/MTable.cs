@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlazorComponent;
+using MASA.Blazor.Components.Table;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using OneOf;
@@ -30,28 +31,29 @@ namespace MASA.Blazor
         {
             var prefix = "m-data-table";
 
-            ConfigProvider
-                .Add<BTable<TItem>>(cssBuilder =>
-                 {
-                     cssBuilder
-                          .Add("m-data-table")
-                         .AddIf($"{prefix}--dense", () => Dense)
-                         .AddIf($"{prefix}--fixed-height", () => Height.Value != default && !FixedHeader)
-                         .AddIf($"{prefix}--fixed-header", () => FixedHeader)
-                         .AddIf($"{prefix}--has-top", () => Top != default)
-                         .AddIf($"{prefix}--has-bottom", () => Bottom != default)
-                         .AddTheme(Dark);
-                 })
-                .Add<BTable<TItem>>("wrap", cssBuilder =>
-                 {
-                     cssBuilder
-                         .Add("m-data-table__wrapper");
-                 }, styleBuilder =>
-                 {
-                     styleBuilder
-                         .AddIf(() => $"height:{Height.Value}", () => Height.Value != default);
-                 })
-                .Add<BTable<TItem>>("empty", cssBuilder =>
+            CssProvider
+                .AsProvider<BTable<TItem>>()
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                         .Add("m-data-table")
+                        .AddIf($"{prefix}--dense", () => Dense)
+                        .AddIf($"{prefix}--fixed-height", () => Height.Value != default && !FixedHeader)
+                        .AddIf($"{prefix}--fixed-header", () => FixedHeader)
+                        .AddIf($"{prefix}--has-top", () => Top != default)
+                        .AddIf($"{prefix}--has-bottom", () => Bottom != default)
+                        .AddTheme(Dark);
+                })
+                .Apply("wrap", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-data-table__wrapper");
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddIf(() => $"height:{Height.Value}", () => Height.Value != default);
+                })
+                .Apply("empty", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-data-table__empty-wrapper");
@@ -59,93 +61,32 @@ namespace MASA.Blazor
                 {
                     styleBuilder
                         .AddIf(() => $"height:{Height.Value}", () => Height.Value != default);
-                })
-                .Add<BTableHeader>(cssBuilder =>
-               {
-                   cssBuilder
-                       .Add("m-data-table-header");
-               })
-                .Add<BProcessLinear, MProcessLinear>(properties =>
+                });
+
+            SlotProvider
+                .Apply<BTableLoading, MTableLoading>()
+                .Apply<BTableHeader, MTableHeader>()
+                .Apply<BTableFooter, MTableFooter>(properties =>
                 {
-                    properties[nameof(MProcessLinear.Color)] = "primary";
-                    properties[nameof(MProcessLinear.Indeterminate)] = true;
-                })
-                .Add<BTableLoading>("progress", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-data-table__progress");
-                })
-                .Add<BTableLoading>("column", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("column");
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .Add("padding:0");
-                })
-                .Add<BButton, MTableFooterButton>("prev", properties =>
-                {
-                    properties[nameof(MTableFooterButton.IconName)] = "mdi-chevron-left";
-                    properties[nameof(MTableFooterButton.HandlePageChange)] = EventCallback.Factory.Create<MouseEventArgs>(this, args =>
+                    properties[nameof(MTableFooter.OnPrevClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, args =>
                     {
                         if (Page > 1)
                         {
                             Page--;
                         }
-                        else
-                        {
-                            PrevDisabled = true;
-                        }
-
-                        if (Page < TotalPage)
-                        {
-                            NextDisabled = false;
-                        }
                     });
-                    properties[nameof(MTableFooterButton.Disabled)] = PrevDisabled;
-                })
-                .Add<BButton, MTableFooterButton>("next", properties =>
-                {
-                    properties[nameof(MTableFooterButton.IconName)] = "mdi-chevron-right";
-                    properties[nameof(MTableFooterButton.HandlePageChange)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
+                    properties[nameof(MTableFooter.OnNextClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, args =>
                     {
                         if (Page < TotalPage)
                         {
                             Page++;
                         }
-                        else
-                        {
-                            NextDisabled = true;
-                        }
-
-                        if (Page > 1)
-                        {
-                            PrevDisabled = false;
-                        }
-
                     });
-                    properties[nameof(MTableFooterButton.Disabled)] = NextDisabled;
-                })
-                .Add<BTableFooter>(css =>
-                {
-                    css.Add("m-data-footer");
-                })
-                .Add<BTableFooter>("select", css =>
-                 {
-                     css.Add("m-data-footer__select");
-                 })
-                .Add<BTableFooter>("pagination", css =>
-                {
-                    css.Add("m-data-footer__pagination");
-                })
-                .Add<BTableFooter>("before", css =>
-                {
-                    css.Add("m-data-footer__icons-before");
-                })
-                .Add<BTableFooter>("after", css =>
-                {
-                    css.Add("m-data-footer__icons-after");
+                    properties[nameof(MTableFooter.PrevDisabled)] = PrevDisabled;
+                    properties[nameof(MTableFooter.NextDisabled)] = NextDisabled;
+                    properties[nameof(MTableFooter.PageStart)] = PageStart;
+                    properties[nameof(MTableFooter.PageStop)] = PageStop;
+                    properties[nameof(MTableFooter.TotalCount)] = TotalCount;
                 });
         }
     }

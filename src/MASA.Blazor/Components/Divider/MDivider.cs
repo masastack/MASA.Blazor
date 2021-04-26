@@ -20,11 +20,16 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             var prefix = "m-divider";
-            CssBuilder
-                .Add("m-divider")
-                .AddIf($"{prefix}--inset", () => Inset)
-                .AddIf($"{prefix}--vertical", () => Vertical)
-                .AddTheme(Dark);
+
+            CssProvider
+                .Apply<BDivider>(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-divider")
+                        .AddIf($"{prefix}--inset", () => Inset)
+                        .AddIf($"{prefix}--vertical", () => Vertical)
+                        .AddTheme(Dark);
+                });
         }
     }
 }

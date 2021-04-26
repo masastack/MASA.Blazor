@@ -47,7 +47,11 @@ namespace MASA.Blazor
         {
             var prefix = "m-progress-linear";
 
-            CssBuilder
+            CssProvider
+                .AsProvider<BProcessLinear>()
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
                 .Add("m-progress-linear")
                 .AddIf($"{prefix}--absolute", () => Absolute)
                 .AddIf($"{prefix}--fixed", () => Fixed)
@@ -55,19 +59,19 @@ namespace MASA.Blazor
                 .AddIf($"{prefix}--rounded", () => Rounded)
                 .AddIf($"{prefix}--striped", () => Striped)
                 .AddTheme(Dark);
-
-            StyleBuilder
+                }, styleBuilder =>
+                {
+                    styleBuilder
                 .AddIf("bottom:0", () => Bottom)
                 .AddIf("top:0", () => Top)
                 .AddIf(() => $"height:{Height}px", () => Active);
-
-            ConfigProvider
-                .Add(typeof(BProcessLinear), "stream", cssBuilder =>
+                })
+                .Apply("stream", cssBuilder =>
                  {
                      cssBuilder
                          .Add($"{prefix}__stream");
                  })
-                .Add(typeof(BProcessLinear), "background", cssBuilder =>
+                .Apply("background", cssBuilder =>
                 {
                     cssBuilder
                         .Add($"{prefix}__background")
@@ -77,37 +81,37 @@ namespace MASA.Blazor
                     styleBuilder
                         .Add("opacity: 0.3; left: 0%; width: 100%;");
                 })
-                .Add(typeof(BProcessLinear), "buffer", cssBuilder =>
+                .Apply("buffer", cssBuilder =>
                 {
                     cssBuilder
                         .Add($"{prefix}__buffer");
                 })
-                .Add(typeof(BProcessLinear), "determinate", cssBuilder =>
+                .Apply("determinate", cssBuilder =>
                 {
                     cssBuilder
                         .Add($"{prefix}__determinate");
                 })
-                .Add(typeof(BProcessLinear), "indeterminate", cssBuilder =>
+                .Apply("indeterminate", cssBuilder =>
                 {
                     cssBuilder
                         .Add($"{prefix}__indeterminate")
                         .AddIf($"{prefix}__indeterminate--active", () => Active);
                 })
-                .Add(typeof(BProcessLinear), "long", cssBuilder =>
+                .Apply("long", cssBuilder =>
                 {
                     cssBuilder
                         .Add($"{prefix}__indeterminate")
                         .Add("long")
                         .AddIf(() => Color, () => Color != null);
                 })
-                .Add(typeof(BProcessLinear), "short", cssBuilder =>
+                .Apply("short", cssBuilder =>
                 {
                     cssBuilder
                         .Add($"{prefix}__indeterminate")
                         .Add("short")
                         .AddIf(() => Color, () => Color != null);
                 })
-                .Add(typeof(BProcessLinear), "content", cssBuilder =>
+                .Apply("content", cssBuilder =>
                 {
                     cssBuilder
                         .Add($"{prefix}__content");

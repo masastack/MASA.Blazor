@@ -49,7 +49,7 @@ namespace MASA.Blazor
             builder.CloseElement();
         };
 
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             CssBuilder
                 .Add("m-input m-input--selection-controls m-input--checkbox")

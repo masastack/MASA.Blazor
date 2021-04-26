@@ -18,9 +18,13 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            CssBuilder
-                .Add("container")
-                .AddIf("container--fluid", () => Fluid);
+            CssProvider
+                .Apply<BContainer>(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("container")
+                        .AddIf("container--fluid", () => Fluid);
+                });
         }
     }
 }

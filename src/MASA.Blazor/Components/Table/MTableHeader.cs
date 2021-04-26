@@ -7,17 +7,16 @@ using BlazorComponent;
 
 namespace MASA.Blazor
 {
-    public class MTreeItem<T> : BTreeItem<T>
+    public partial class MTableHeader : BTableHeader
     {
         protected override void SetComponentClass()
         {
-            CssBuilder.Add("m-treeview-node");
-
-            CssBuilderRoot.Add("m-treeview-node__root");
-
-            CssBuilderLevel.Add("m-treeview-node__level");
-
-
+            CssProvider
+                .Apply<BTableHeader>(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-data-table-header");
+                });
         }
     }
 }

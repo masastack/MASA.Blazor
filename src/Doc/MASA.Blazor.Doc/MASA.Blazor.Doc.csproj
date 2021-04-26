@@ -118,6 +118,10 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\meta\" />
+  </ItemGroup>
+
   <Target Name="RunCli" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug'">
     <Copy SourceFiles="@(DocFiles)" DestinationFolder="$(ProjectDir)\wwwroot\docs\%(RecursiveDir)" ContinueOnError="true" />
     <Exec WorkingDirectory="$(SolutionDir)" Command="dotnet build $(CLIProjectDir)" />

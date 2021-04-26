@@ -68,37 +68,43 @@ namespace MASA.Blazor
         {
             var prefix = "m-toolbar";
 
-            CssBuilder
-                .Add("m-toolbar")
-                .AddIf($"{prefix}--absolute", () => Absolute)
-                .AddIf($"{prefix}--bottom", () => Bottom)
-                .AddIf($"{prefix}--collapse", () => Collapse)
-                .AddIf($"{prefix}--collapsed", () => Collapse)
-                .AddIf($"{prefix}--dense", () => Dense)
-                .AddIf($"{prefix}--extended", () => IsExtended)
-                .AddIf($"{prefix}--flat", () => Flat)
-                .AddIf($"{prefix}--floating", () => Floating)
-                .AddIf($"{prefix}--prominent", () => Prominent)
-                .Add("m-sheet")
-                .AddTheme(Dark)
-                .Add("m-app-bar")
-                .AddIf("m-app-bar--fixed", () => !Absolute && (App || Fixed));
-
-            StyleBuilder
-                .Clear()
-                .AddIf(() => $"height:{Height.Value}", () => Height.Value != null)
-                .AddIf(() => $"margin-top:{MarginTop}", () => MarginTop != null)
-                .AddIf(() => $"transform:translateY({Transform}px)", () => Transform != null)
-                .AddIf(() => $"left:{Left.Value}", () => Left.Value != null)
-                .AddIf(() => $"right:{Right.Value}", () => Right.Value != null);
-
-            ContentCssBuilder
-                .Clear()
-                .Add("m-toolbar__content");
-
-            ContentStyleBuilder
-                .Clear()
-                .Add($"height:{Height.Value}");
+            CssProvider
+                .AsProvider<BAppBar>()
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                    .Add("m-toolbar")
+                    .AddIf($"{prefix}--absolute", () => Absolute)
+                    .AddIf($"{prefix}--bottom", () => Bottom)
+                    .AddIf($"{prefix}--collapse", () => Collapse)
+                    .AddIf($"{prefix}--collapsed", () => Collapse)
+                    .AddIf($"{prefix}--dense", () => Dense)
+                    .AddIf($"{prefix}--extended", () => IsExtended)
+                    .AddIf($"{prefix}--flat", () => Flat)
+                    .AddIf($"{prefix}--floating", () => Floating)
+                    .AddIf($"{prefix}--prominent", () => Prominent)
+                    .Add("m-sheet")
+                    .AddTheme(Dark)
+                    .Add("m-app-bar")
+                    .AddIf("m-app-bar--fixed", () => !Absolute && (App || Fixed));
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                    .AddIf(() => $"height:{Height.Value}", () => Height.Value != null)
+                    .AddIf(() => $"margin-top:{MarginTop}", () => MarginTop != null)
+                    .AddIf(() => $"transform:translateY({Transform}px)", () => Transform != null)
+                    .AddIf(() => $"left:{Left.Value}", () => Left.Value != null)
+                    .AddIf(() => $"right:{Right.Value}", () => Right.Value != null);
+                })
+                .Apply("content", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-toolbar__content");
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                    .Add($"height:{Height.Value}");
+                });
 
             Attributes.Add("data-booted", true);
         }

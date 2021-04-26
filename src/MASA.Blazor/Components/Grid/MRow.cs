@@ -30,13 +30,18 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            CssBuilder.Add("row")
-                .AddIf("no-gutters", () => NoGutters)
-                .AddIf("row--dense", () => Dense)
-                //'start', 'end', 'center', 'baseline', 'stretch'
-                .AddIf($"align-{Align}", () => !string.IsNullOrEmpty(Align))
-                .AddIf($"justify-{Justify}", () => !string.IsNullOrEmpty(Justify))
-                .AddIf($"align-content-{AlignContent}", () => !string.IsNullOrEmpty(AlignContent));
+            CssProvider
+                .Apply<BRow>(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("row")
+                        .AddIf("no-gutters", () => NoGutters)
+                        .AddIf("row--dense", () => Dense)
+                        //'start', 'end', 'center', 'baseline', 'stretch'
+                        .AddIf($"align-{Align}", () => !string.IsNullOrEmpty(Align))
+                        .AddIf($"justify-{Justify}", () => !string.IsNullOrEmpty(Justify))
+                        .AddIf($"align-content-{AlignContent}", () => !string.IsNullOrEmpty(AlignContent));
+                });
         }
     }
 }

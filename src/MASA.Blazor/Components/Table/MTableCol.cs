@@ -17,8 +17,8 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            ConfigProvider
-                .Add(typeof(BTableCol), cssBuilder =>
+            CssProvider
+                .Apply(typeof(BTableCol), cssBuilder =>
                 {
                     cssBuilder
                         .AddIf(() => $"text-{Align}", () => !string.IsNullOrEmpty(Align))

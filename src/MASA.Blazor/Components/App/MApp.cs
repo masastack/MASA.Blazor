@@ -25,22 +25,23 @@ namespace MASA.Blazor
         {
             var prefix = "m-application";
 
-            ConfigProvider
-                .Add<BApp>(cssBuilder =>
+            CssProvider
+                .AsProvider<BApp>()
+                .Apply(cssBuilder =>
                 {
                     cssBuilder
-                    .Add("m-application")
-                    .Add(() =>
-                    {
-                        var suffix = LeftToRight ? "ltr" : "rtl";
-                        return $"{prefix}--is-{suffix}";
-                    })
-                    .AddTheme(Dark);
+                        .Add("m-application")
+                        .Add(() =>
+                        {
+                            var suffix = LeftToRight ? "ltr" : "rtl";
+                            return $"{prefix}--is-{suffix}";
+                        })
+                        .AddTheme(Dark);
                 })
-                .Add<BApp>("wrap", cssBuilder =>
+                .Apply("wrap", cssBuilder =>
                 {
                     cssBuilder
-                    .Add("m-application--wrap");
+                        .Add("m-application--wrap");
                 });
 
             Attributes.Add("data-app", true);

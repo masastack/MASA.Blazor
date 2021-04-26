@@ -18,7 +18,7 @@ namespace MASA.Blazor
             { "success", "mdi-check-circle" },
             { "error", "mdi-alert" },
             { "info", "mdi-information" },
-            { "warning","mdi-exclamation" },
+            { "warning", "mdi-exclamation" },
         };
 
         [Parameter]
@@ -32,7 +32,7 @@ namespace MASA.Blazor
 
         protected override Task OnInitializedAsync()
         {
-            string originClass ="m-alert__icon";
+            string originClass = "m-alert__icon";
 
             if (string.IsNullOrWhiteSpace(Icon))
             {
@@ -63,7 +63,7 @@ namespace MASA.Blazor
             return base.OnInitializedAsync();
         }
 
-        public override void SetComponentClass()
+        protected override void SetComponentClass()
         {
             CssBuilder
                 .Add("m-alert")
