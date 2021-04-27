@@ -1,9 +1,5 @@
 image: proget-hz.lonsid.cn/masa-images/library/dotnet:6.0
 
-default:
-  before_script:
-    - git clone -b develop https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
-
 stages:
   - build
   - tests
@@ -14,7 +10,13 @@ build:
   only:
     - branches
   script:
+    - git clone -b develop https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
     - dotnet build src
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - .
+
 
 # tests:
 #   stage: tests
@@ -28,7 +30,6 @@ nuget:
    only:
      - branches
    script:
-     - dotnet build src
      - dotnet pack src --include-symbols -p:PackageVersion=0.1.0.$CI_PIPELINE_ID
      - dotnet nuget push "**/*.nupkg" --source gitlab
 
