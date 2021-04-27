@@ -68,7 +68,10 @@ namespace MASA.Blazor
 
             SlotProvider
                 .Apply<BTableLoading, MTableLoading>()
-                .Apply<BTableHeader, MTableHeader>()
+                .Apply<BTableHeader, MTableHeader>(properties =>
+                {
+                    properties[nameof(MTableHeader.Headers)] = Headers;
+                })
                 .Apply<BTableFooter, MTableFooter>(properties =>
                 {
                     properties[nameof(MTableFooter.OnPrevClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, args =>
