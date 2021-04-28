@@ -1,0 +1,33 @@
+﻿
+<MForm>
+    <MContainer>
+        <MRow>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextArea Label="Regular" @bind-Value="_value"></MTextArea>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextArea Label="Regular"></MTextArea>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextArea Label="Solo" IsSolo="true"></MTextArea>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextArea Label="Solo" IsSolo="true"></MTextArea>
+            </MCol>
+        </MRow>
+    </MContainer>
+</MForm>
+
+@code{
+    private List<string> _messages = new()
+    {
+            "text required",
+            "required"
+        };
+    private string _value;
+
+    public void ValidatePassword(List<string> messages)
+    {
+        messages.Add("required");
+    }
+}

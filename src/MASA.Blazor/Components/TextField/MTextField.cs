@@ -89,12 +89,12 @@ namespace MASA.Blazor
                 });
 
             SlotProvider
-                .Apply<BInputDefault, MInputDefault>(properties =>
+                .Apply<BInputSlot, MInputSlot>(properties =>
                 {
-                    properties[nameof(MInputDefault.Label)] = Label;
-                    properties[nameof(MInputDefault.ShowLabel)] = ShowLabel;
-                    properties[nameof(MInputDefault.Active)] = Active || !string.IsNullOrEmpty(Value);
-                    properties[nameof(MInputDefault.HandleBlur)] = EventCallback.Factory.Create(this, async () =>
+                    properties[nameof(MInputSlot.Label)] = Label;
+                    properties[nameof(MInputSlot.ShowLabel)] = ShowLabel;
+                    properties[nameof(MInputSlot.Active)] = Active || !string.IsNullOrEmpty(Value);
+                    properties[nameof(MInputSlot.HandleBlur)] = EventCallback.Factory.Create(this, async () =>
                      {
                          Active = false;
                          IsFocused = false;
@@ -104,8 +104,8 @@ namespace MASA.Blazor
                              await Validator.InvokeAsync(Messages);
                          }
                      });
-                    properties[nameof(MInputDefault.Value)] = Value;
-                    properties[nameof(MInputDefault.ValueChanged)] = EventCallback.Factory.Create<string>(this, async value =>
+                    properties[nameof(MInputSlot.Value)] = Value;
+                    properties[nameof(MInputSlot.ValueChanged)] = EventCallback.Factory.Create<string>(this, async value =>
                      {
                          Value = value;
 
@@ -114,9 +114,9 @@ namespace MASA.Blazor
                              await ValueChanged.InvokeAsync(value);
                          }
                      });
-                    properties[nameof(MInputDefault.PlaceHolder)] = IsFocused ? Placeholder : "";
-                    properties[nameof(MInputDefault.Outlined)] = Outlined;
-                    properties[nameof(MInputDefault.Type)] = Type;
+                    properties[nameof(MInputSlot.PlaceHolder)] = IsFocused ? Placeholder : "";
+                    properties[nameof(MInputSlot.Outlined)] = Outlined;
+                    properties[nameof(MInputSlot.Type)] = Type;
                 });
             ValidationState = "error";
         }

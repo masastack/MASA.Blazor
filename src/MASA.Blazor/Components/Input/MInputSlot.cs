@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MInputDefault : BInputDefault
+    public partial class MInputSlot : BInputSlot
     {
         public int Width => Active ? ComputeLabeLength() * 6 : 0;
 
@@ -38,7 +38,7 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .AsProvider<BInputDefault>()
+                .AsProvider<BInputSlot>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
