@@ -55,7 +55,7 @@ namespace MASA.Blazor
         public string Type { get; set; }
 
         [Parameter]
-        public EventCallback<List<string>> Validator { get; set; }
+        public EventCallback<ValidatorArgs> Validator { get; set; }
 
         public bool ShowLabel => (!string.IsNullOrEmpty(Label) && !IsSolo) || (string.IsNullOrEmpty(Value) && IsSolo && !IsFocused);
 
@@ -101,7 +101,8 @@ namespace MASA.Blazor
 
                          if (Validator.HasDelegate)
                          {
-                             await Validator.InvokeAsync(Messages);
+                             Messages = new List<string>();
+                             await Validator.InvokeAsync(new ValidatorArgs(Value, Messages));
                          }
                      });
                     properties[nameof(MInputSlot.Value)] = Value;

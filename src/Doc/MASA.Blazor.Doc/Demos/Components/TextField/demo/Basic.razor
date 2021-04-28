@@ -54,8 +54,8 @@
     };
     private string _value = "12";
 
-    public void ValidatePassword(List<string> messages)
+    public void ValidatePassword(ValidatorArgs args)
     {
-        messages.Add("required");
+        args.Messages.Add("required");
     }
 }
