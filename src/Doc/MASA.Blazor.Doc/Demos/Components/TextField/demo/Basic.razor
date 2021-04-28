@@ -1,0 +1,59 @@
+﻿
+<MContainer>
+    <MRow>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="Regular" @bind-Value="_value"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="Regular" Placeholder="PlaceHolder"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="Solo" IsSolo="true"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="Solo" IsSolo="true" Placeholder="PlaceHolder"></MTextField>
+        </MCol>
+    </MRow>
+    <MRow>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="Filled" Filled="true"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="Filled" Filled="true" Placeholder="PlaceHolder"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="测试" Outlined="true"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="Outlined" Outlined="true" Placeholder="PlaceHolder"></MTextField>
+        </MCol>
+    </MRow>
+    <MRow>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Type="password" Label="password" @bind-Value="_value" Validator="ValidatePassword"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="Regular" Placeholder="PlaceHolder"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="Solo" IsSolo="true"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="Solo" IsSolo="true" Placeholder="PlaceHolder"></MTextField>
+        </MCol>
+    </MRow>
+</MContainer>
+
+@code{
+    private List<string> _messages = new()
+    {
+        "text required",
+        "required"
+    };
+    private string _value = "12";
+
+    public void ValidatePassword(List<string> messages)
+    {
+        messages.Add("required");
+    }
+}

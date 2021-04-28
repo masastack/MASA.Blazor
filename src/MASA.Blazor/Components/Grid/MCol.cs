@@ -27,7 +27,11 @@ namespace MASA.Blazor
                         .AddIf(() => $"col-{Span.Value}", () => !IsNullOrDefault(Span))
                         .AddIf(() => $"offset-{Offset.Value}", () => !IsNullOrDefault(Offset))
                         .AddIf(() => $"order-{Order.Value}", () => !IsNullOrDefault(Order))
-                        .AddIf(() => $"align-self-{Align}", () => !string.IsNullOrEmpty(Align));
+                        .AddIf(() => $"align-self-{Align}", () => !string.IsNullOrEmpty(Align))
+                        .AddIf(() => $"col-sm-{Sm.Value}", () => Sm.Value != default)
+                        .AddIf(() => $"col-md-{Md.Value}", () => Md.Value != default)
+                        .AddIf(() => $"col-lg-{Lg.Value}", () => Lg.Value != default)
+                        .AddIf(() => $"col-xl-{Xl.Value}", () => Xl.Value != default);
                 });
         }
 
