@@ -1,0 +1,24 @@
+﻿<div style="text-align: center">
+	<MButton Color="error"
+			 Click="OnClick"
+			 ClickStopPropagation>
+		Show Overlay
+	</MButton>
+
+	<MOverlay @bind-Value="overlay"></MOverlay>
+</div>
+
+@code {
+	bool overlay = false;
+
+	async Task OnClick(MouseEventArgs args)
+	{
+		overlay = true;
+		System.Console.WriteLine(overlay);
+		await InvokeAsync(StateHasChanged);
+
+		await Task.Delay(2000);
+		overlay = false;
+		System.Console.WriteLine(overlay);
+	}
+}

@@ -1,0 +1,37 @@
+﻿<MRow Align="center"
+	  Justify="center">
+	<MCard Style="height:300px;width:250px">
+		<Cover>
+			<MRow Justify="center">
+				<MButton Color="orange lighten-2"
+						 Style="margin-top:24px"
+						 Click="Toggle">
+					Show Overlay
+				</MButton>
+
+				<MOverlay Absolute
+						  Opacity="1.0"
+						  @bind-Value="overlay">
+					<MButton Color="orange lighten-2"
+							 Click="Hide">
+						Hide Overlay
+					</MButton>
+				</MOverlay>
+			</MRow>
+		</Cover>
+	</MCard>
+</MRow>
+@code {
+	bool overlay = false;
+
+	void Toggle(MouseEventArgs args)
+	{
+		overlay = !overlay;
+	}
+
+	void Hide(MouseEventArgs args)
+	{
+		System.Console.WriteLine("hide..");
+		overlay = false;
+	}
+}

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
@@ -29,11 +27,6 @@ namespace MASA.Blazor
         /// </summary>
         [Parameter]
         public bool Inactive { get; set; }
-
-        /// <summary>
-        /// This should be down in next version
-        /// </summary>
-        public override bool IsClickable => List != null && NavigationDrawer != null;
 
         /// <summary>
         /// Allow text selection inside v-list-item. This prop uses user-select
@@ -125,22 +118,34 @@ namespace MASA.Blazor
                 .Add("m-list-item")
                 .AddIf($"{prefix}--dense", () => Dense)
                 .AddIf($"{prefix}--disabled", () => Disabled)
-                .AddIf($"{prefix}--link", () => IsClickable && !Inactive)
                 .AddIf($"{prefix}--selectable", () => Selectable)
                 .AddIf($"{prefix}--two-line", () => TwoLine)
                 .AddIf($"{prefix}--three-line", () => ThreeLine)
-                .AddIf($"{prefix}--active", () => IsActive && List != null)
+                .AddIf($"{prefix}--link", () => Link && !Inactive)
+                .AddIf($"{prefix}--active", () => Link && Group?.Value == Key)
                 .AddTheme(Dark);
         }
 
-        public override Task HandleOnClick(MouseEventArgs args)
+        protected override async Task HandleOnClick(MouseEventArgs args)
         {
             if (NavigationManager != null && !string.IsNullOrEmpty(Href))
             {
                 NavigationManager.NavigateTo(Href);
             }
 
-            return Task.CompletedTask;
+            if (Group != null)
+            {
+                if (Group.ValueChanged.HasDelegate)
+                {
+                    await Group.ValueChanged.InvokeAsync(Key);
+                }
+                else
+                {
+                    await Group.ChangeValue(Key);
+                }
+            }
+
+            await base.HandleOnClick(args);
         }
 
         protected override void Dispose(bool disposing)

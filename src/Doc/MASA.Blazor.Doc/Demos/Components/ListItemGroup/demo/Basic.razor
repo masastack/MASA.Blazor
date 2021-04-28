@@ -1,0 +1,47 @@
+<div style="max-width:500px">
+	<MList>
+		<MListItemGroup Value="@selected">
+			@foreach (var item in _items)
+			{
+	   <MListItem Key="@item.Text">
+		<MListItemIcon>
+		 <MIcon>@item.Icon</MIcon>
+		</MListItemIcon>
+		<MListItemContent>
+		 <MListItemTitle>@item.Text</MListItemTitle>
+		</MListItemContent>
+	   </MListItem>
+			}
+  </MListItemGroup>
+ </MList>
+</div>
+
+@code {
+	public class Item
+	{
+		public string Icon { get; set; }
+		public string Text { get; set; }
+	}
+
+	static Item[] _items = {
+	new Item  {
+	Icon= "mdi-inbox",
+	Text= "Inbox",
+	},
+	new Item{
+	Icon= "mdi-star",
+	Text= "Star",
+	},
+	new Item{
+	Icon= "mdi-send",
+	Text= "Send",
+	},
+	new Item{
+	Icon= "mdi-email-open",
+	Text= "Drafts",
+	},
+	};
+
+	string selected = _items[1].Text;
+
+}
