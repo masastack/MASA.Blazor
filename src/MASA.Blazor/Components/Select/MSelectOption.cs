@@ -13,11 +13,11 @@ namespace MASA.Blazor
             SlotProvider
                 .Apply<BListItem, MListItem>(props =>
                 {
-                    props[nameof(MListItem.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
-                    {
-                        SelectWrapper.SetVisible(false);
-                        SelectWrapper.SetSelected(Value);
-                    });
+                    props[nameof(MListItem.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
+                     {
+                         SelectWrapper.SetVisible(false);
+                         await SelectWrapper.SetSelectedAsync(Value);
+                     });
                 })
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>();

@@ -23,6 +23,12 @@ namespace MASA.Blazor.Components.Table
         [Parameter]
         public bool NextDisabled { get; set; }
 
+        [Parameter]
+        public int PageSize { get; set; }
+
+        [Parameter]
+        public EventCallback<string> OnPageSizeChange { get; set; }
+
         protected override void SetComponentClass()
         {
             CssProvider
@@ -60,6 +66,21 @@ namespace MASA.Blazor.Components.Table
                     properties[nameof(MTableFooterButton.IconName)] = "mdi-chevron-right";
                     properties[nameof(MTableFooterButton.HandlePageChange)] = OnNextClick;
                     properties[nameof(MTableFooterButton.Disabled)] = NextDisabled;
+                })
+                .Apply<BSelect<string>, MSelect<string>>(props =>
+                {
+                    props[nameof(MSelect<string>.Items)] = new List<string>
+                    {
+                        "5",
+                        "10",
+                        "15",
+                        "All"
+                    };
+                    props[nameof(MSelect<string>.ItemText)] = new Func<string, string>(r => r);
+                    props[nameof(MSelect<string>.ItemValue)] = new Func<string, string>(r => r);
+                    props[nameof(MSelect<string>.MinWidth)] = 75;
+                    props[nameof(MSelect<string>.ValueChanged)] = OnPageSizeChange;
+                    props[nameof(MSelect<string>.Text)] = PageSize.ToString();
                 });
         }
     }

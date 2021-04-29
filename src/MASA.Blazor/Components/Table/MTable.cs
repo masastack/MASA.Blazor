@@ -93,6 +93,18 @@ namespace MASA.Blazor
                     properties[nameof(MTableFooter.PageStart)] = PageStart;
                     properties[nameof(MTableFooter.PageStop)] = PageStop;
                     properties[nameof(MTableFooter.TotalCount)] = TotalCount;
+                    properties[nameof(MTableFooter.PageSize)] = PageSize;
+                    properties[nameof(MTableFooter.OnPageSizeChange)] = EventCallback.Factory.Create<string>(this, val =>
+                    {
+                        if (int.TryParse(val, out var pageSize))
+                        {
+                            PageSize = pageSize;
+                        }
+                        else if (val == "All")
+                        {
+                            PageSize = TotalCount;
+                        }
+                    });
                 });
         }
     }

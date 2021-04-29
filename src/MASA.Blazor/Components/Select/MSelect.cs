@@ -12,6 +12,9 @@ namespace MASA.Blazor
         [Parameter]
         public bool Dark { get; set; }
 
+        [Parameter]
+        public int MinWidth { get; set; }
+
         protected override Task OnInitializedAsync()
         {
             _icon = "mdi-menu-down";
@@ -39,6 +42,9 @@ namespace MASA.Blazor
                 .AddIf("m-input--is-focused primary--text", () => _focused)
                 .AddIf("m-select--is-menu-active", () => _visible)
                 .AddTheme(Dark);
+
+            StyleBuilder
+                .AddIf(() => $"min-width:{MinWidth}px", () => MinWidth != 0);
 
             ControlCssBuilder
                 .Add("m-input__control");
