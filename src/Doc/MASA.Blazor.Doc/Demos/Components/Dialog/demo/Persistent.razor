@@ -1,0 +1,37 @@
+﻿<MRow Justify="center">
+    <MButton
+        Color="primary"
+        Dark
+        Click="() => _visible = true">
+        Open Dialog
+    </MButton>
+    <MDialog
+        @bind-Visible="_visible"
+        Persistent
+        MaxWidth="290">
+        <MCard>
+            <Title>
+                Use Google'suttonocation service?
+            </Title>
+            <Text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</Text>
+            <Actions>
+                <MButton
+                    Color="green darken-1"
+                    Text
+                    Click="() => _visible = false">
+                    Disagree
+                </MButton>
+                <MButton
+                    Color="green darken-1"
+                    Text
+                    Click="() => _visible = false">
+                    Agree
+                </MButton>
+            </Actions>
+        </MCard>
+    </MDialog>
+</MRow>
+
+@code {
+    bool _visible = false;
+}
