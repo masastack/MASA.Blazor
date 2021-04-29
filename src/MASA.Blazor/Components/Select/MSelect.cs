@@ -23,7 +23,7 @@ namespace MASA.Blazor
         {
             if (firstRender)
             {
-                _rect = await JsInvokeAsync<BoundingClientRect>("MasaBlazor.getBoundingClientRect", Ref);
+                _rect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, Ref);
             }
         }
 

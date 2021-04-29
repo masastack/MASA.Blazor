@@ -26,7 +26,7 @@ namespace MASA.Blazor
         {
             if (firstRender)
             {
-                var _rect = await JsInvokeAsync<BoundingClientRect>("MasaBlazor.getBoundingClientRect", Ref);
+                var _rect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, Ref);
 
                 System.Console.WriteLine(JsonSerializer.Serialize(_rect));
 
