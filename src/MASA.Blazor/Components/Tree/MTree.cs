@@ -19,8 +19,13 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssBuilder.Add("m-treeview").AddTheme(Dark);
-
             CssBuilderChildren.Add("m-treeview-node__children");
+
+            SlotProvider
+                .Apply<BTreeItem<T>, MTreeItem<T>>(props =>
+                {
+                    props[nameof(MTreeItem<T>.HandleItemClick)] = HandleItemClick;
+                });
         }
     }
 }
