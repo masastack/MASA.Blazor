@@ -22,12 +22,9 @@
     <ProjectReference Include="..\MASA.Blazor.Doc\MASA.Blazor.Doc.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Dockerfile">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+   <!-- FIX: NETSDK1148: Found multiple publish output files with the same relative path -->
+  <PropertyGroup>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+  </PropertyGroup>
 
 </Project>
