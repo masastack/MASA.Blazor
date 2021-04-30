@@ -1,21 +1,23 @@
-﻿using System;
+﻿using BlazorComponent;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BlazorComponent;
 
-namespace MASA.Blazor
+namespace MASA.Blazor.Components.List
 {
-    public partial class MListItemIcon : BListItemIcon
+    public class MListGroupItem : MListItem
     {
         protected override void SetComponentClass()
         {
+            base.SetComponentClass();
+
             CssProvider
-                .Apply<BListItemIcon>(cssBuilder =>
+                .Merge<BListItem>(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-list-item__icon");
+                        .Add("m-list-group__header");
                 });
         }
     }

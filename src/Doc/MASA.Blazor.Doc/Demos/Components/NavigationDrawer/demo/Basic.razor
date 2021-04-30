@@ -1,42 +1,49 @@
 ﻿<MNavCard Height="400" Width="256">
-	<MNavigationDrawer>
-		<MListItem>
-			<MListItemContent>
-				<MListItemTitle>
-					Application
-				</MListItemTitle>
-			</MListItemContent>
-		</MListItem>
+    <MNavigationDrawer>
+        <MListItem>
+            <MListItemContent>
+                <MListItemTitle>
+                    Application
+                </MListItemTitle>
+            </MListItemContent>
+        </MListItem>
 
-		<MDivider></MDivider>
+        <MDivider></MDivider>
 
-		<MList>
-			<MListItem Link>
-				<MListItemIcon>
-					<MIcon>home</MIcon>
-				</MListItemIcon>
-				<MListItemContent>
-					<MListItemTitle>1</MListItemTitle>
-				</MListItemContent>
-			</MListItem>
-			<MListItem Link>
-				<MListItemIcon>
-					<MIcon>dashboard</MIcon>
-				</MListItemIcon>
-				<MListItemContent>
-					<MListItemTitle>2</MListItemTitle>
-				</MListItemContent>
-			</MListItem>
-			<MListItem Link>
-				<MListItemIcon>
-					<MIcon>shopping_bag</MIcon>
-				</MListItemIcon>
-				<MListItemContent>
-					<MListItemTitle>3</MListItemTitle>
-				</MListItemContent>
-			</MListItem>
-		</MList>
-	</MNavigationDrawer>
+        <MList>
+            <MListGroup PrependIcon="home">
+                <Activator>
+                    <MListItemContent>
+                        <MListItemTitle>test</MListItemTitle>
+                    </MListItemContent>
+                </Activator>
+                <ChildContent>
+                    <MListItem Link>
+                        <MListItemIcon>
+                        </MListItemIcon>
+                        <MListItemContent>
+                            <MListItemTitle>1</MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                    <MListItem Link>
+                        <MListItemIcon>
+                        </MListItemIcon>
+                        <MListItemContent>
+                            <MListItemTitle>2</MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                </ChildContent>
+            </MListGroup>
+            <MListItem Link>
+                <MListItemIcon>
+                    <MIcon>shopping_bag</MIcon>
+                </MListItemIcon>
+                <MListItemContent>
+                    <MListItemTitle>3</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+        </MList>
+    </MNavigationDrawer>
 </MNavCard>
 
 

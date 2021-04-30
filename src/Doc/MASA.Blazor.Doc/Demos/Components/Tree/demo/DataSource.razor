@@ -1,4 +1,4 @@
-﻿<MTree T="Data" DataSource="_data" TitleExpression="r=>r.DataItem.Name" ChildrenExpression="r=>r.DataItem.Children" HandleItemClick="HandleItemClick" Checkable="true" DefaultCheckedExpression="@(new Func<Data,bool>(Checked))" Expanded="@true">
+﻿<MTree T="Data" DataSource="_data" TitleExpression="r=>r.DataItem.Name" ChildrenExpression="r=>r.DataItem.Children" HandleItemClick="HandleItemClick" Checkable="true" DefaultCheckedExpression="r=>_ids.Contains(r.Id)" Expanded="@true"> 
 </MTree>
 
 @code{

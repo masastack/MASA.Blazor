@@ -113,17 +113,20 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             var prefix = "m-list-item";
-            CssBuilder
-                .Clear()
-                .Add("m-list-item")
-                .AddIf($"{prefix}--dense", () => Dense)
-                .AddIf($"{prefix}--disabled", () => Disabled)
-                .AddIf($"{prefix}--selectable", () => Selectable)
-                .AddIf($"{prefix}--two-line", () => TwoLine)
-                .AddIf($"{prefix}--three-line", () => ThreeLine)
-                .AddIf($"{prefix}--link", () => Link && !Inactive)
-                .AddIf($"{prefix}--active", () => Link && Group?.Value == Key)
-                .AddTheme(Dark);
+            CssProvider
+                .Apply<BListItem>(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-list-item")
+                        .AddIf($"{prefix}--dense", () => Dense)
+                        .AddIf($"{prefix}--disabled", () => Disabled)
+                        .AddIf($"{prefix}--selectable", () => Selectable)
+                        .AddIf($"{prefix}--two-line", () => TwoLine)
+                        .AddIf($"{prefix}--three-line", () => ThreeLine)
+                        .AddIf($"{prefix}--link", () => Link && !Inactive)
+                        .AddIf($"{prefix}--active", () => Link && Group?.Value == Key || IsActive)
+                        .AddTheme(Dark);
+                });
         }
 
         protected override async Task HandleOnClick(MouseEventArgs args)
