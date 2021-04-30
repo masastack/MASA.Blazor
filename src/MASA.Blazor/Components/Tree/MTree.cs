@@ -27,7 +27,6 @@ namespace MASA.Blazor
                     props[nameof(MTreeItem<T>.HandleItemClick)] = HandleItemClick;
                     props[nameof(MTreeItem<T>.DefaultCheckedExpression)] = DefaultCheckedExpression;
                     props[nameof(MTreeItem<T>.Checkable)] = Checkable;
-                    props[nameof(MTreeItem<T>.Expanded)] = Expanded;
                 });
         }
     }

@@ -28,7 +28,6 @@ namespace MASA.Blazor
                     props[nameof(HandleItemClick)] = HandleItemClick;
                     props[nameof(DefaultCheckedExpression)] = DefaultCheckedExpression;
                     props[nameof(Checkable)] = Checkable;
-                    props[nameof(Expanded)] = Expanded;
                 });
         }
     }
