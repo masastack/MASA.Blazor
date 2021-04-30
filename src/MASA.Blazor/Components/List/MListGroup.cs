@@ -18,6 +18,9 @@ namespace MASA.Blazor
 
         protected bool SubGroup { get; set; }
 
+        [Parameter]
+        public bool Dark { get; set; }
+
         protected override void SetComponentClass()
         {
             var prefix = "m-list-group";
@@ -48,12 +51,16 @@ namespace MASA.Blazor
                     props[nameof(MListGroupItem.IsActive)] = IsActive;
                     props[nameof(MListGroupItem.Link)] = true;
                     props[nameof(MListGroupItem.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, args => IsActive = !IsActive);
+                    props[nameof(MListGroupItem.Dark)] = Dark;
                 })
                 .Apply<BListItemIcon, MListGroupItemIcon>("prepend", props =>
                 {
                     props[nameof(MListGroupItemIcon.Type)] = "prepend";
                 })
-                .Apply<BIcon, MIcon>()
+                .Apply<BIcon, MIcon>(props =>
+                {
+                    props[nameof(MIcon.Dark)] = Dark;
+                })
                 .Apply<BListItemIcon, MListGroupItemIcon>("append", props =>
                 {
                     props[nameof(MListGroupItemIcon.Type)] = "append";
