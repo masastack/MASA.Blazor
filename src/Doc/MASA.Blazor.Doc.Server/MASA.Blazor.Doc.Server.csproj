@@ -22,7 +22,10 @@
     <ProjectReference Include="..\MASA.Blazor.Doc\MASA.Blazor.Doc.csproj" />
   </ItemGroup>
 
-   <!-- FIX: NETSDK1148: Found multiple publish output files with the same relative path -->
+   <!--
+      FIX: NETSDK1148: Found multiple publish output files with the same relative path.
+      https://github.com/dotnet/aspnetcore/issues/29524
+   -->
   <PropertyGroup>
     <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
   </PropertyGroup>
