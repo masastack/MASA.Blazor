@@ -17,6 +17,7 @@ packer:
     expire_in: 1 day
     paths:
       - ./src/Doc/MASA.Blazor.Doc.Server/bin/Debug/net6.0
+      - /root/.nuget/packages/antdesign/0.8.0/staticwebassets/
 
 docker:
   image: docker:17.05.0
