@@ -1,4 +1,4 @@
-﻿<MTree T="Data" DataSource="_data" TitleExpression="r=>r.DataItem.Name" ChildrenExpression="r=>r.DataItem.Children" HandleItemClick="HandleItemClick">
+﻿<MTree T="Data" DataSource="_data" TitleExpression="r=>r.DataItem.Name" ChildrenExpression="r=>r.DataItem.Children" HandleItemClick="HandleItemClick" Checkable="true" DefaultCheckedExpression="r=>_ids.Contains(r.Id)" Expanded="@true"> 
 </MTree>
 
 @code{
@@ -11,14 +11,19 @@
         public List<Data> Children { get; set; }
     }
 
+    private List<int> _ids = new List<int>
+{
+        2
+    };
+
     private List<Data> _data = new List<Data>
-    {
+{
         new Data
         {
             Id=1,
             Name="11",
             Children=new List<Data>
-        {
+{
                     new Data
                     {
                         Id=2,

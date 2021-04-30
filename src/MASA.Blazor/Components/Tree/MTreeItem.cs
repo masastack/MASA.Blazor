@@ -16,16 +16,19 @@ namespace MASA.Blazor
             CssBuilderLevel.Add("m-treeview-node__level");
 
             CssProvider
-                .Apply<BTreeItem<T>>("icon",styleAction: styleBuilder =>
-                {
-                    styleBuilder
-                        .Add("width:14px");
-                });
+                .Apply<BTreeItem<T>>("icon", styleAction: styleBuilder =>
+                 {
+                     styleBuilder
+                         .Add("width:14px");
+                 });
 
             SlotProvider
                 .Apply<BTreeItem<T>, MTreeItem<T>>(props =>
                 {
                     props[nameof(HandleItemClick)] = HandleItemClick;
+                    props[nameof(DefaultCheckedExpression)] = DefaultCheckedExpression;
+                    props[nameof(Checkable)] = Checkable;
+                    props[nameof(Expanded)] = Expanded;
                 });
         }
     }
