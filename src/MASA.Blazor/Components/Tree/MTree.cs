@@ -25,6 +25,7 @@ namespace MASA.Blazor
                 .Apply<BTreeItem<T>, MTreeItem<T>>(props =>
                 {
                     props[nameof(MTreeItem<T>.HandleItemClick)] = HandleItemClick;
+                    props[nameof(MTreeItem<T>.HandleCheckboxClick)] = HandleCheckboxClick;
                     props[nameof(MTreeItem<T>.DefaultCheckedExpression)] = DefaultCheckedExpression;
                     props[nameof(MTreeItem<T>.Checkable)] = Checkable;
                 });

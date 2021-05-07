@@ -20,12 +20,19 @@ namespace MASA.Blazor
                  {
                      styleBuilder
                          .Add("width:14px");
-                 });
+                 })
+                .Apply<BTreeItem<T>>("title", styleAction: styleBuilder =>
+                {
+                    styleBuilder
+                        .Add("margin-left:3px")
+                        .Add("cursor:default");
+                });
 
             SlotProvider
                 .Apply<BTreeItem<T>, MTreeItem<T>>(props =>
                 {
                     props[nameof(HandleItemClick)] = HandleItemClick;
+                    props[nameof(HandleCheckboxClick)] = HandleCheckboxClick;
                     props[nameof(DefaultCheckedExpression)] = DefaultCheckedExpression;
                     props[nameof(Checkable)] = Checkable;
                 });
