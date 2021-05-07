@@ -7,7 +7,7 @@ namespace MASA.Blazor
 {
     public partial class MIcon : BIcon
     {
-        private const string XSMALL= "12px";
+        private const string XSMALL = "12px";
         private const string SMALL = "16px";
         private const string DENSE = "20px";
         private const string LARGE = "36px";
@@ -66,32 +66,37 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            CssBuilder
-                .Add("m-icon")
-                .AddIf("m-icon--link", () => Click.HasDelegate)
-                .AddIf("m-icon--dense", () => Dense)
-                .AddIf("m-icon--left", () => Left)
-                .AddIf("m-icon--right", () => Right)
-                .AddTheme(Dark);
-
-            // TODO: 能否拿到属性排列顺序，最后一个优先级最高
-            StyleBuilder
-                .AddFirstIf(
-                    (() => Size.Value.Match(
-                         str => $"font-size: {str}",
-                         num => $"font-size: {num}px"),
-                       () => Size.HasValue),
-                    (() => $"font-size: {XLARGE}", () => XLarge),
-                    (() => $"font-size: {LARGE}", () => Large),
-                    (() => $"font-size: {DENSE}", () => Dense),
-                    (() => $"font-size: {SMALL}", () => Small),
-                    (() => $"font-size: {XSMALL}", () => XSmall)
-                );
-
             // 渲染颜色和变体
             var (color_class, color_style) = ColorHelper.ToCss(Color);
-            CssBuilder.Add(color_class);
-            StyleBuilder.Add(color_style);
+
+            CssProvider
+                .Merge<BIcon>(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-icon")
+                        .AddIf("m-icon--link", () => Click.HasDelegate)
+                        .AddIf("m-icon--dense", () => Dense)
+                        .AddIf("m-icon--left", () => Left)
+                        .AddIf("m-icon--right", () => Right)
+                        .AddTheme(Dark)
+                        .Add(color_class);
+                }, styleBuilder =>
+                {
+                    // TODO: 能否拿到属性排列顺序，最后一个优先级最高
+                    styleBuilder
+                        .Add(color_style)
+                        .AddFirstIf(
+                            (() => Size.Value.Match(
+                                 str => $"font-size: {str}",
+                                 num => $"font-size: {num}px"),
+                               () => Size.HasValue),
+                            (() => $"font-size: {XLARGE}", () => XLarge),
+                            (() => $"font-size: {LARGE}", () => Large),
+                            (() => $"font-size: {DENSE}", () => Dense),
+                            (() => $"font-size: {SMALL}", () => Small),
+                            (() => $"font-size: {XSMALL}", () => XSmall)
+                        );
+                });
         }
     }
 }

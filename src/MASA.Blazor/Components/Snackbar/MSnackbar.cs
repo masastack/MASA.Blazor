@@ -1,0 +1,144 @@
+﻿using BlazorComponent;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Timers;
+using System.Threading.Tasks;
+
+namespace MASA.Blazor
+{
+    public partial class MSnackbar : BSnackbar
+    {
+        private bool _isActive;
+
+        [Parameter]
+        public bool Absolute { get; set; }
+
+        [Parameter]
+        public bool IsActive
+        {
+            get
+            {
+                return _isActive;
+            }
+            set
+            {
+                _isActive = value;
+
+                if (_isActive)
+                {
+                    Timer = new Timer(Timeout);
+                    Timer.Elapsed += Timer_Elapsed;
+                    Timer.Enabled = true;
+                }
+            }
+        }
+
+        [Parameter]
+        public bool Bottom { get; set; }
+
+        [Parameter]
+        public bool Centered { get; set; }
+
+        [Parameter]
+        public bool Outlined { get; set; }
+
+        [Parameter]
+        public bool Left { get; set; }
+
+        [Parameter]
+        public bool MultiLine { get; set; }
+
+        [Parameter]
+        public bool Right { get; set; }
+
+        [Parameter]
+        public bool Text { get; set; }
+
+        [Parameter]
+        public bool Top { get; set; }
+
+        [Parameter]
+        public bool Vertical { get; set; }
+
+        [Parameter]
+        public bool Shaped { get; set; }
+
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public int Timeout { get; set; } = 5000;
+
+        protected Timer Timer { get; set; }
+
+        protected override void SetComponentClass()
+        {
+            var prefix = "m-snack";
+            CssProvider
+                .AsProvider<BSnackbar>()
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add(prefix)
+                        .AddIf($"{prefix}--absolute", () => Absolute)
+                        .AddIf($"{prefix}--active", () => IsActive)
+                        .AddIf($"{prefix}--bottom", () => Bottom || !Top)
+                        .AddIf($"{prefix}--centered", () => Centered)
+                        .AddIf($"{prefix}--has-background", () => !Text && !Outlined)
+                        .AddIf($"{prefix}--left", () => Left)
+                        .AddIf($"{prefix}--multi-line", () => MultiLine && !Vertical)
+                        .AddIf($"{prefix}--right", () => Right)
+                        .AddIf($"{prefix}--text", () => Text)
+                        .AddIf($"{prefix}--top", () => Top)
+                        .AddIf($"{prefix}--vertical", () => Vertical);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .Add("padding-bottom: 0px")
+                        .Add("padding-top: 64px");
+                })
+                .Apply("wrap", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add($"{prefix}__wrapper")
+                        .Add("m-sheet")
+                        .AddIf("m-sheet--outlined", () => Outlined)
+                        .AddIf("m-sheet--shaped", () => Shaped)
+                        .AddTheme(Dark);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddIf("display:none", () => !IsActive);
+                })
+                .Apply("content", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add($"{prefix}__content");
+                })
+                .Apply("action", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add($"{prefix}__action");
+                });
+
+            SlotProvider
+                .Apply<BButton, MSnackbarButton>(props =>
+                {
+                    props[nameof(MSnackbarButton.Text)] = true;
+                    props[nameof(MSnackbarButton.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, () => IsActive = false);
+                });
+        }
+
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            IsActive = false;
+            Timer.Enabled = false;
+
+            InvokeStateHasChanged();
+        }
+    }
+}
