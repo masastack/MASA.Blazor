@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
@@ -9,11 +10,9 @@ namespace MASA.Blazor
     {
         private BoundingClientRect _rect;
 
-        [Parameter]
-        public bool Dark { get; set; }
+        [Parameter] public bool Dark { get; set; }
 
-        [Parameter]
-        public int MinWidth { get; set; }
+        [Parameter] public int MinWidth { get; set; }
 
         protected override Task OnInitializedAsync()
         {
@@ -57,14 +56,8 @@ namespace MASA.Blazor
 
             LabelCssBuilder
                 .Add("m-label")
-                .AddIf("m-label--active", () =>
-                {
-                    return Solo ? false : _visible || Value != null;
-                })
-                .AddIf("primary--text", () =>
-                {
-                    return Solo ? false : _focused;
-                })
+                .AddIf("m-label--active", () => { return Solo ? false : _visible || _text.Any(); })
+                .AddIf("primary--text", () => { return Solo ? false : _focused; })
                 .AddTheme(Dark);
 
             LabelStyleCssBuilder
@@ -85,7 +78,6 @@ namespace MASA.Blazor
             HitCssBuilder
                 .Add("m-text--field__details");
 
-            var value = true;
             SlotProvider
                 .Apply<BIcon, MIcon>(props =>
                 {
@@ -94,20 +86,35 @@ namespace MASA.Blazor
                 .Apply<BPopover, MPopover>(props =>
                 {
                     props[nameof(MPopover.OriginalClass)] = "m-menu__content menuable__content__active";
-                    props[nameof(MPopover.Visible)] = value;
-                    props[nameof(MPopover.MinWidth)] = (StringOrNumber)_rect.Width;
+                    props[nameof(MPopover.Visible)] = (_visible && Items != null);
+                    props[nameof(MPopover.MinWidth)] = (StringOrNumber)_rect?.Width;
+                    props[nameof(MPopover.MaxHeight)] = (StringOrNumber)400;
                 })
                 .Apply<BOverlay, MOverlay>(props =>
                 {
-                    props[nameof(MOverlay.Value)] = value;
-                    props[nameof(MOverlay.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, () => { _visible = false; });
+                    props[nameof(MOverlay.Value)] = _visible;
+                    props[nameof(MOverlay.Click)] =
+                        EventCallback.Factory.Create<MouseEventArgs>(this, () => { _visible = false; });
                     props[nameof(MOverlay.Opacity)] = (StringOrNumber)0;
                 })
                 .Apply<BList, MList>(props =>
                 {
                     props[nameof(MList.Dense)] = Dense;
                 })
-                .Apply<BListItemGroup, MListItemGroup>()
+                .Apply<BListItemGroup, MListItemGroup>(props =>
+                {
+                    props[nameof(MListItemGroup.Color)] = "primary";
+
+                    if (Multiple)
+                    {
+                        props[nameof(MListItemGroup.Multiple)] = Multiple;
+                        props[nameof(MListItemGroup.Values)] = Values;
+                    }
+                    else
+                    {
+                        props[nameof(MListItemGroup.Value)] = Value;
+                    }
+                })
                 .Apply<BSelectOption<TItem>, MSelectOption<TItem>>()
                 .Apply<BHitMessage, MHitMessage>();
         }

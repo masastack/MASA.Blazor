@@ -25,7 +25,8 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             StyleBuilder
-                .Add(() => $"z-index: {ZIndex.TryGetNumber().number}");
+                .Add(() => $"z-index: {ZIndex.TryGetNumber().number}")
+                .AddIf("display:none", () => !Value);
 
             ScrimCssBuilder
                 .Add("m-overlay__scrim");

@@ -1,39 +1,52 @@
 <MRow>
 	<MCol Span="6">
-		<MSelect Label="Standard"
+		<MSelect @bind-Value="@value1"
+				 Label="Standard"
 				 Items="@items"
 				 ItemText="u => u.Label"
-				 ItemValue="u => u.Value">
+				 ItemValue="u => u.Value"
+				 Hint="@($"selected value: {@value1}")">
 		</MSelect>
 	</MCol>
 	<MCol Span="6">
-		<MSelect Label="Filled style"
+		<MSelect @bind-Value="@value2"
+				 Label="Filled style"
 				 Filled
 				 Items="@items"
 				 ItemText="u => u.Label"
-				 ItemValue="u => u.Value">
+				 ItemValue="u => u.Value"
+				 Hint="@($"selected value: {@value2}")">
 		</MSelect>
 	</MCol>
 
 	<MCol Span="6">
-		<MSelect Label="Outlined style"
+		<MSelect @bind-Value="@value3"
+				 Label="Outlined style"
 				 Outlined
 				 Items="@items"
 				 ItemText="u => u.Label"
-				 ItemValue="u => u.Value">
+				 ItemValue="u => u.Value"
+				 Hint="@($"selected value: {@value3}")">
 		</MSelect>
 	</MCol>
 	<MCol Span="6">
-		<MSelect Label="Solo style"
+		<MSelect @bind-Value="@value4"
+				 Label="Solo style"
 				 Solo
 				 Items="@items"
 				 ItemText="u => u.Label"
-				 ItemValue="u => u.Value">
+				 ItemValue="u => u.Value"
+				 Hint="@($"selected value: {@value4}")">
 		</MSelect>
 	</MCol>
 </MRow>
 
 @code {
+	private string value1 = "1";
+	private string value2;
+	private string value3;
+	private string value4;
+
 	string[] items2 = { "item 1", "item 2" };
 
 	public class Item

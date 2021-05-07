@@ -1,4 +1,5 @@
 ﻿using BlazorComponent;
+using MASA.Blazor.Helpers;
 using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
@@ -13,6 +14,9 @@ namespace MASA.Blazor
             CssBuilder
                 .Add("m-item-group m-list-item-group")
                 .AddTheme(Dark);
+
+            var (css, style) = ColorHelper.ToCss(Color);
+            CssBuilder.Add(css);
         }
     }
 }

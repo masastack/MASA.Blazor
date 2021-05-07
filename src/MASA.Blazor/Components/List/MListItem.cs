@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using BlazorComponent;
@@ -124,7 +125,18 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--two-line", () => TwoLine)
                         .AddIf($"{prefix}--three-line", () => ThreeLine)
                         .AddIf($"{prefix}--link", () => Link && !Inactive)
-                        .AddIf($"{prefix}--active", () => Link && Group?.Value == Key || IsActive)
+                        .AddIf($"{prefix}--active", () =>
+                        {
+                            if (!Link) return false;
+                            if (Group == null) return false;
+
+                            if (Group.Multiple)
+                            {
+                                return Group.Values.Contains(Key);
+                            }
+
+                            return Group.Value == Key;
+                        })
                         .AddTheme(Dark);
                 });
         }
@@ -138,14 +150,29 @@ namespace MASA.Blazor
 
             if (Group != null)
             {
-                if (Group.ValueChanged.HasDelegate)
+                if (Group.Multiple)
                 {
-                    await Group.ValueChanged.InvokeAsync(Key);
+                    if (Group.ValuesChanged.HasDelegate)
+                    {
+                        if (Group.Values.Contains(Key))
+                        {
+                            await Group.ValuesChanged.InvokeAsync(Group.Values.Where(u => u != Key).ToList());
+                        }
+                        else
+                        {
+                            await Group.ValuesChanged.InvokeAsync(Group.Values.Concat(new[] { Key }).ToList());
+                        }
+                    }
                 }
                 else
                 {
-                    await Group.ChangeValue(Key);
+                    if (Group.ValueChanged.HasDelegate)
+                    {
+                        await Group.ValueChanged.InvokeAsync(Key);
+                    }
                 }
+
+                await Group.ToggleSelectAsync(Key);
             }
 
             await base.HandleOnClick(args);

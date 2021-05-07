@@ -1,6 +1,6 @@
 <div style="max-width:500px">
     <MList>
-        <MListItemGroup Value="@(selected)">
+        <MListItemGroup @bind-Values="@selected" Multiple Color="primary">
             @foreach (var item in _items)
             {
                 <MListItem Key="@item.Text">
@@ -14,6 +14,8 @@
             }
         </MListItemGroup>
     </MList>
+
+    <span>@string.Join(',', selected)</span>
 </div>
 
 @code {
@@ -48,5 +50,5 @@
         }
     };
 
-    readonly string selected = _items[1].Text;
+    IEnumerable<string> selected = _items.Where(u => u.Text == "Star").Select(u => u.Text);
 }
