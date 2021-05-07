@@ -18,22 +18,23 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            CssBuilder.Add("m-card")
-                .Add("m-sheet--outlined")
-                .AddIf("elevation-2",()=> !Outlined)
-                .AddTheme(Dark);
-
-            CardCoverCssBuilder.Add("m-responsive").Add("m-image__image--cover");
-
-            CoverStyleBuilder.Add("height: 250px;");
-
-            TitleCssBuilder.Add("m-card__title");
-
-            SubTitleCssBuilder.Add("m-card__subtitle");
-
-            TextCssBuilder.Add("m-card__text");
-
-            ActionsCssBuilder.Add("m-card__actions");
+            CssProvider
+                .AsProvider<BCard>()
+                .Apply(css =>
+                {
+                    css.Add("m-card")
+                        .Add("m-sheet--outlined")
+                        .AddIf("elevation-2", () => !Outlined)
+                        .AddTheme(Dark);
+                }, style =>
+                {
+                    style.AddIf(() => $"max-height: {MaxHeight.TryGetNumber().number}px", () => MaxHeight != null)
+                        .AddIf(() => $"min-height: {MinHeight.TryGetNumber().number}px", () => MinHeight != null)
+                        .AddIf(() => $"height: {Height.TryGetNumber().number}px", () => Height != null)
+                        .AddIf(() => $"max-width: {MaxWidth.TryGetNumber().number}px", () => MaxWidth != null)
+                        .AddIf(() => $"min-width: {MinWidth.TryGetNumber().number}px", () => MinWidth != null)
+                        .AddIf(() => $"width: {Width.TryGetNumber().number}px", () => Width != null);
+                });
         }
     }
 }
