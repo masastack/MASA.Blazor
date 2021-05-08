@@ -21,6 +21,9 @@ namespace MASA.Blazor
         [Parameter]
         public bool Dark { get; set; }
 
+        [Parameter]
+        public string Color { get; set; }
+
         protected override void SetComponentClass()
         {
             var prefix = "m-list-group";
@@ -33,7 +36,8 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--active", () => IsActive)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--no-action", () => NoAction)
-                        .AddIf($"{prefix}--sub-group", () => SubGroup);
+                        .AddIf($"{prefix}--sub-group", () => SubGroup)
+                        .AddIf($"{Color}--text", () => !string.IsNullOrEmpty(Color));
                 })
                 .Apply("items", cssBuilder =>
                 {

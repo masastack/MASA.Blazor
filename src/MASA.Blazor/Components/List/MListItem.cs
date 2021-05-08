@@ -127,6 +127,11 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--link", () => Link && !Inactive)
                         .AddIf($"{prefix}--active", () =>
                         {
+                            if (IsActive)
+                            {
+                                return true;
+                            }
+
                             if (!Link) return false;
                             if (Group == null) return false;
 
