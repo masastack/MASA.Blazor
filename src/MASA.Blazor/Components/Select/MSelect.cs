@@ -1,8 +1,8 @@
-using System.Linq;
-using System.Threading.Tasks;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
@@ -13,6 +13,9 @@ namespace MASA.Blazor
         [Parameter] public bool Dark { get; set; }
 
         [Parameter] public int MinWidth { get; set; }
+
+        private int Width => _visible || _text.Any() ? ComputeLabeLength() * 6 : 0;
+        protected override string LegendStyle => $"width: {Width}px";
 
         protected override Task OnInitializedAsync()
         {
@@ -116,7 +119,31 @@ namespace MASA.Blazor
                     }
                 })
                 .Apply<BSelectOption<TItem>, MSelectOption<TItem>>()
+                .Apply<BChip, MChip>()
                 .Apply<BHitMessage, MHitMessage>();
+        }
+
+        private int ComputeLabelLength()
+        {
+            if (string.IsNullOrEmpty(Label))
+            {
+                return 0;
+            }
+
+            var length = 0;
+            for (int i = 0; i < Label.Length; i++)
+            {
+                if (Label[i] > 127)
+                {
+                    length += 2;
+                }
+                else
+                {
+                    length += 1;
+                }
+            }
+
+            return length + 1;
         }
     }
 }
