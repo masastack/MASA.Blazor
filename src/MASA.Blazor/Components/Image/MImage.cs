@@ -9,7 +9,8 @@ namespace MASA.Blazor
     {
         private Dimensions _dimensions;
 
-        [Parameter] public bool Dark { get; set; }
+        [Parameter] 
+        public bool Dark { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {

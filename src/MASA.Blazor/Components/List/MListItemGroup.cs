@@ -11,12 +11,16 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            CssBuilder
-                .Add("m-item-group m-list-item-group")
-                .AddTheme(Dark);
+            CssProvider
+                .Apply<BListItemGroup>(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-item-group m-list-item-group")
+                        .AddTheme(Dark);
 
-            var (css, style) = ColorHelper.ToCss(Color);
-            CssBuilder.Add(css);
+                    var (css, style) = ColorHelper.ToCss(Color);
+                    cssBuilder.Add(css);
+                });
         }
     }
 }

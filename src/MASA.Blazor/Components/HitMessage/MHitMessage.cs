@@ -12,15 +12,24 @@ namespace MASA.Blazor
         {
             base.SetComponentClass();
 
-            CssBuilder
-                .Add("m-messages")
-                .AddTheme(Dark);
-
-            WrapperCssBuilder
-                .Add("m-messages__wrapper");
-
-            MessageCssBuilder
-                .Add("m-messages__message");
+            CssProvider
+                .AsProvider<BHitMessage>()
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-messages")
+                        .AddTheme(Dark);
+                })
+                .Apply("wrap", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-messages__wrapper");
+                })
+                .Apply("message", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-messages__message");
+                });
         }
     }
 }

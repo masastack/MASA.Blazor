@@ -12,8 +12,10 @@ namespace MASA.Blazor
     {
         [Parameter]
         public bool Dark { get; set; }
+
         [Parameter]
         public bool Inset { get; set; }
+
         [Parameter]
         public bool Vertical { get; set; }
 

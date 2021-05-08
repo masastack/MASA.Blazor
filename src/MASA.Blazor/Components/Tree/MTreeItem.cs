@@ -11,17 +11,25 @@ namespace MASA.Blazor
     {
         protected override void SetComponentClass()
         {
-            CssBuilder.Add("m-treeview-node");
-            CssBuilderRoot.Add("m-treeview-node__root");
-            CssBuilderLevel.Add("m-treeview-node__level");
-
             CssProvider
-                .Apply<BTreeItem<T>>("icon", styleAction: styleBuilder =>
+                .AsProvider<BTreeItem<T>>()
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-treeview-node")
+                        .Add("m-treeview-node__root");
+                })
+                .Apply("level", cssBuilder =>
+                 {
+                     cssBuilder
+                         .Add("m-treeview-node__level");
+                 })
+                .Apply("icon", styleAction: styleBuilder =>
                  {
                      styleBuilder
                          .Add("width:14px");
                  })
-                .Apply<BTreeItem<T>>("title", styleAction: styleBuilder =>
+                .Apply("title", styleAction: styleBuilder =>
                 {
                     styleBuilder
                         .Add("margin-left:3px")

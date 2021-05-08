@@ -11,7 +11,12 @@ namespace MASA.Blazor
     {
         protected override void SetComponentClass()
         {
-            CssBuilder.Add("spacer");
+            CssProvider
+                .Apply<BSpacer>(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("spacer");
+                });
         }
     }
 }

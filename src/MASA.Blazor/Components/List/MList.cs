@@ -123,29 +123,35 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             var prefix = "m-list";
-            CssBuilder
-                .Add("m-sheet")
-                .AddIf("m-sheet--outlined", () => Outlined)
-                .AddIf("m-sheet--shaped", () => Shaped)
-                .AddTheme(Dark)
-                .Add("m-list")
-                .AddIf($"elevation-{Elevation.Value}", () => Elevation.Value != default)
-                .AddIf($"{prefix}--dense", () => Dense)
-                .AddIf($"{prefix}--disabled", () => Disabled)
-                .AddIf($"{prefix}--flat", () => Flat)
-                .AddIf($"{prefix}--nav", () => Nav || NavigationDrawer != null)
-                .AddIf($"{prefix}--rounded", () => Rounded)
-                .AddIf($"{prefix}--subheader", () => Subheader)
-                .AddIf($"{prefix}--two-line", () => TwoLine)
-                .AddIf($"{prefix}--three-line", () => ThreeLine);
 
-            StyleBuilder
-                .AddIf($"height:{Height.Value}", () => Height.Value != default)
-                .AddIf($"minHeight:{MinHeight.Value}", () => MinHeight.Value != default)
-                .AddIf($"minWidth:{MinWidth.Value}", () => MinWidth.Value != default)
-                .AddIf($"maxHeight:{MaxHeight.Value}", () => MaxHeight.Value != default)
-                .AddIf($"maxWidth:{MaxWidth.Value}", () => MaxWidth.Value != default)
-                .AddIf($"width:{Width.Value}", () => Width.Value != default);
+            CssProvider
+                .Apply<BList>(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-sheet")
+                        .AddIf("m-sheet--outlined", () => Outlined)
+                        .AddIf("m-sheet--shaped", () => Shaped)
+                        .AddTheme(Dark)
+                        .Add("m-list")
+                        .AddIf($"elevation-{Elevation.Value}", () => Elevation.Value != default)
+                        .AddIf($"{prefix}--dense", () => Dense)
+                        .AddIf($"{prefix}--disabled", () => Disabled)
+                        .AddIf($"{prefix}--flat", () => Flat)
+                        .AddIf($"{prefix}--nav", () => Nav || NavigationDrawer != null)
+                        .AddIf($"{prefix}--rounded", () => Rounded)
+                        .AddIf($"{prefix}--subheader", () => Subheader)
+                        .AddIf($"{prefix}--two-line", () => TwoLine)
+                        .AddIf($"{prefix}--three-line", () => ThreeLine);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddIf($"height:{Height.Value}", () => Height.Value != default)
+                        .AddIf($"minHeight:{MinHeight.Value}", () => MinHeight.Value != default)
+                        .AddIf($"minWidth:{MinWidth.Value}", () => MinWidth.Value != default)
+                        .AddIf($"maxHeight:{MaxHeight.Value}", () => MaxHeight.Value != default)
+                        .AddIf($"maxWidth:{MaxWidth.Value}", () => MaxWidth.Value != default)
+                        .AddIf($"width:{Width.Value}", () => Width.Value != default);
+                });
         }
 
         public override void Select(BListItem selectItem)

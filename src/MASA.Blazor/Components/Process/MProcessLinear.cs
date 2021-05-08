@@ -52,19 +52,19 @@ namespace MASA.Blazor
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
-                .Add("m-progress-linear")
-                .AddIf($"{prefix}--absolute", () => Absolute)
-                .AddIf($"{prefix}--fixed", () => Fixed)
-                .AddIf($"{prefix}--query", () => Query)
-                .AddIf($"{prefix}--rounded", () => Rounded)
-                .AddIf($"{prefix}--striped", () => Striped)
-                .AddTheme(Dark);
+                        .Add("m-progress-linear")
+                        .AddIf($"{prefix}--absolute", () => Absolute)
+                        .AddIf($"{prefix}--fixed", () => Fixed)
+                        .AddIf($"{prefix}--query", () => Query)
+                        .AddIf($"{prefix}--rounded", () => Rounded)
+                        .AddIf($"{prefix}--striped", () => Striped)
+                        .AddTheme(Dark);
                 }, styleBuilder =>
                 {
                     styleBuilder
-                .AddIf("bottom:0", () => Bottom)
-                .AddIf("top:0", () => Top)
-                .AddIf(() => $"height:{Height}px", () => Active);
+                        .AddIf("bottom:0", () => Bottom)
+                        .AddIf("top:0", () => Top)
+                        .AddIf(() => $"height:{Height}px", () => Active);
                 })
                 .Apply("stream", cssBuilder =>
                  {

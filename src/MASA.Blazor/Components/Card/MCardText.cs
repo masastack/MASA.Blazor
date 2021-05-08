@@ -8,7 +8,13 @@ namespace MASA.Blazor
         {
             base.SetComponentClass();
 
-            CssProvider.AsProvider<BCardText>().Apply(css => { css.Add("m-card__text"); });
+            CssProvider
+                .AsProvider<BCardText>()
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-card__text");
+                });
         }
     }
 }

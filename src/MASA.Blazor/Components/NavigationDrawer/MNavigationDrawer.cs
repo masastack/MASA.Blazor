@@ -184,39 +184,46 @@ namespace MASA.Blazor
         {
             var prefix = "m-navigation-drawer";
 
-            CssBuilder
-                .Clear()
-                .Add("m-navigation-drawer")
-                .AddIf($"{prefix}--absolute", () => Absolute)
-                .AddIf($"{prefix}--bottom", () => IsBottom)
-                .AddIf($"{prefix}--clipped", () => Clipped)
-                .AddIf($"{prefix}--close", () => !IsActive)
-                .AddIf($"{prefix}--fixed", () => !Absolute && (App || Fixed))
-                .AddIf($"{prefix}--floating", () => Floating)
-                .AddIf($"{prefix}--is-mobile", () => Mobile)
-                .AddIf($"{prefix}--is-mouseover", () => IsMouseover)
-                .AddIf($"{prefix}--mini-variant", () => IsMiniVariant)
-                .AddIf($"{prefix}--custom-mini-variant", () => MiniVariantWidth.IsT1 && MiniVariantWidth.AsT1 != 56)
-                .AddIf($"{prefix}--open", () => IsActive)
-                .AddIf($"{prefix}--open-on-hover", () => ExpandOnHover)
-                .AddIf($"{prefix}--right", () => Right)
-                .AddIf($"{prefix}--temporary", () => Temporary)
-                .AddTheme(Dark);
+            CssProvider
+                .AsProvider<BNavigationDrawer>()
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-navigation-drawer")
+                        .AddIf($"{prefix}--absolute", () => Absolute)
+                        .AddIf($"{prefix}--bottom", () => IsBottom)
+                        .AddIf($"{prefix}--clipped", () => Clipped)
+                        .AddIf($"{prefix}--close", () => !IsActive)
+                        .AddIf($"{prefix}--fixed", () => !Absolute && (App || Fixed))
+                        .AddIf($"{prefix}--floating", () => Floating)
+                        .AddIf($"{prefix}--is-mobile", () => Mobile)
+                        .AddIf($"{prefix}--is-mouseover", () => IsMouseover)
+                        .AddIf($"{prefix}--mini-variant", () => IsMiniVariant)
+                        .AddIf($"{prefix}--custom-mini-variant", () => MiniVariantWidth.IsT1 && MiniVariantWidth.AsT1 != 56)
+                        .AddIf($"{prefix}--open", () => IsActive)
+                        .AddIf($"{prefix}--open-on-hover", () => ExpandOnHover)
+                        .AddIf($"{prefix}--right", () => Right)
+                        .AddIf($"{prefix}--temporary", () => Temporary)
+                        .AddTheme(Dark);
+                },styleBuilder=> {
+                    var translate = IsBottom ? "translateY" : "translateX";
+                    styleBuilder
+                        .Add($"height:{Height.Value}")
+                        .Add($"top:{Top}")
+                        .AddIf(() => $"maxHeight:calc(100% - {MaxHeight})", () => MaxHeight != null)
+                        .AddIf(() => $"transform:{translate}({Transform}%)", () => Transform != null)
+                        .Add($"width:{(IsMiniVariant ? MiniVariantWidth.Value : Width.Value)}");
+                })
+                .Apply("content",cssBuilder=> {
+                    cssBuilder
+                        .Add($"{prefix}__content");
+                })
+                .Apply("border", cssBuilder => {
+                    cssBuilder
+                        .Add($"{prefix}__border");
+                });
 
-            var translate = IsBottom ? "translateY" : "translateX";
-            StyleBuilder
-                .Clear()
-                .Add($"height:{Height.Value}")
-                .Add($"top:{Top}")
-                .AddIf(() => $"maxHeight:calc(100% - {MaxHeight})", () => MaxHeight != null)
-                .AddIf(() => $"transform:{translate}({Transform}%)", () => Transform != null)
-                .Add($"width:{(IsMiniVariant ? MiniVariantWidth.Value : Width.Value)}");
-
-            ContentCssBuilder
-                .Add($"{prefix}__content");
-
-            BorderCssBuilder
-                .Add($"{prefix}__border");
+            Attributes.Add("data-booted", true);
         }
 
         public override void Select(BListItem selectItem)

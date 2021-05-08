@@ -12,11 +12,20 @@ namespace MASA.Blazor
     {
         protected override void SetComponentClass()
         {
-            CssBuilder
-                .Add("m-main");
+            CssProvider
+                .AsProvider<BMain>()
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-main");
+                })
+                .Apply("wrap", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-main__wrap");
+                });
 
-            WrapCssBuilder
-                .Add("m-main__wrap");
+            Attributes.Add("data-booted", true);
         }
     }
 }

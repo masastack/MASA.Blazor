@@ -16,11 +16,9 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            _btnContentClass = "m-btn__content";
-            _btnLoaderClass = "m-btn__loader";
-
             CssProvider
-                .Apply<BButton>(cssBuilder =>
+                .AsProvider<BButton>()
+                .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-btn")
@@ -102,9 +100,19 @@ namespace MASA.Blazor
                             }
                         }
                     }
+                })
+                .Apply("content", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-btn__content");
+                })
+                .Apply("loader", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-btn__loader");
                 });
 
-            
+
         }
     }
 }

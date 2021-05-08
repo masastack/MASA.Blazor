@@ -15,23 +15,34 @@ namespace MASA.Blazor
         {
             var prefix = "m-dialog";
 
-            CssBuilder
-                .Add($"{prefix}__content")
-                .AddIf($"{prefix}__content--active", () => Visible);
-            StyleBuilder
-                .Add("z-index: 202");
-
-            BodyCssBuilder
-                .Add(prefix)
-                .AddIf($"{prefix}--active", () => Visible)
-                .AddIf($"{prefix}--persistent", () => Persistent)
-                .AddIf($"{prefix}--scrollable", () => Scrollable)
-                .AddIf($"{prefix}--animated", () => _animated);
-            BodyStyleBuilder
-                .Add("transform-origin: center center")
-                .AddIf(() => $"width: {Width.TryGetNumber().number}px", () => Width != null)
-                .AddIf(() => $"max-width: {MaxWidth.TryGetNumber().number}px", () => MaxWidth != null)
-                .AddIf("display: none", () => !Visible);
+            CssProvider
+                .AsProvider<BDialog>()
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add($"{prefix}__content")
+                        .AddIf($"{prefix}__content--active", () => Visible);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .Add("z-index: 202");
+                })
+                .Apply("body", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add(prefix)
+                        .AddIf($"{prefix}--active", () => Visible)
+                        .AddIf($"{prefix}--persistent", () => Persistent)
+                        .AddIf($"{prefix}--scrollable", () => Scrollable)
+                        .AddIf($"{prefix}--animated", () => _animated);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .Add("transform-origin: center center")
+                        .AddIf(() => $"width: {Width.TryGetNumber().number}px", () => Width != null)
+                        .AddIf(() => $"max-width: {MaxWidth.TryGetNumber().number}px", () => MaxWidth != null)
+                        .AddIf("display: none", () => !Visible);
+                });
 
             SlotProvider
                 .Apply<BPopover, MPopover>(props => { props[nameof(MPopover.Visible)] = Visible; })

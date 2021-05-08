@@ -34,61 +34,85 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            CssBuilder
-                .Add("m-input m-text-field m-text-field--is-booted m-select")
-                .AddIf("m-input--is-disabled", () => Disabled)
-                .AddIf("m-input--dense", () => Dense)
-                .AddIf("m-text-field--enclosed m-text-field--filled", () => Filled)
-                .AddIf("m-text-field--enclosed m-text-field--outlined", () => Outlined)
-                .AddIf("m-text-field--enclosed m-text-field--single-line m-text-field--solo", () => Solo)
-                .AddIf("m-input--is-focused primary--text", () => _focused)
-                .AddIf("m-select--is-menu-active", () => _visible)
-                .AddTheme(Dark);
-
-            StyleBuilder
-                .AddIf(() => $"min-width:{MinWidth}px", () => MinWidth != 0);
-
-            ControlCssBuilder
-                .Add("m-input__control");
-
-            SlotCssBuilder
-                .Add("m-input__slot");
-
-            SelectSlotCssBuilder
-                .Add("m-select__slot");
-
-            LabelCssBuilder
-                .Add("m-label")
-                .AddIf("m-label--active", () => { return Solo ? false : _visible || _text.Any(); })
-                .AddIf("primary--text", () => { return Solo ? false : _focused; })
-                .AddTheme(Dark);
-
-            LabelStyleCssBuilder
-                .Add("left: 0px; right: auto; position: absolute");
-
-            SelectorCssBuilder
-                .Add("m-select__selections");
-
-            SelectedCssBuilder
-                .Add("m-select__selection--comma");
-
-            SelectArrowCssBuilder
-                .Add("m-input__append-inner");
-
-            SelectArrowIconCssBuilder
-                .Add("m-input__icon m-input__icon--append");
-
-            HitCssBuilder
-                .Add("m-text--field__details");
+            CssProvider
+                .AsProvider<BSelect<TItem>>()
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input m-text-field m-text-field--is-booted m-select")
+                        .AddIf("m-input--is-disabled", () => Disabled)
+                        .AddIf("m-input--dense", () => Dense)
+                        .AddIf("m-text-field--enclosed m-text-field--filled", () => Filled)
+                        .AddIf("m-text-field--enclosed m-text-field--outlined", () => Outlined)
+                        .AddIf("m-text-field--enclosed m-text-field--single-line m-text-field--solo", () => Solo)
+                        .AddIf("m-input--is-focused primary--text", () => _focused)
+                        .AddIf("m-select--is-menu-active", () => _visible)
+                        .AddTheme(Dark);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddIf(() => $"min-width:{MinWidth}px", () => MinWidth != 0);
+                })
+                .Apply("control", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input__control");
+                })
+                .Apply("slot", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input__slot");
+                })
+                .Apply("select-slot", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-select__slot");
+                })
+                .Apply("label", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-label")
+                        .AddIf("m-label--active", () => { return Solo ? false : _visible || _text.Any(); })
+                        .AddIf("primary--text", () => { return Solo ? false : _focused; })
+                        .AddTheme(Dark);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .Add("left: 0px; right: auto; position: absolute");
+                })
+                .Apply("selector", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-select__selections");
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .Add("m-select__selection--comma");
+                })
+                .Apply("select-arrow", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input__append-inner");
+                })
+                .Apply("select-arrow-icon", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input__icon m-input__icon--append");
+                })
+                .Apply("hit", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-text--field__details");
+                });
 
             SlotProvider
                 .Apply<BIcon, MIcon>(props =>
                 {
-                    props[nameof(MIcon.OriginalClass)] = _visible ? "primary--text" : "";
+                    props[nameof(MIcon.Class)] = _visible ? "primary--text" : "";
                 })
                 .Apply<BPopover, MPopover>(props =>
                 {
-                    props[nameof(MPopover.OriginalClass)] = "m-menu__content menuable__content__active";
+                    props[nameof(MPopover.Class)] = "m-menu__content menuable__content__active";
                     props[nameof(MPopover.Visible)] = (_visible && Items != null);
                     props[nameof(MPopover.MinWidth)] = (StringOrNumber)_rect?.Width;
                     props[nameof(MPopover.MaxHeight)] = (StringOrNumber)400;

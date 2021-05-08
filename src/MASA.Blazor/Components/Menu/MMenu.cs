@@ -52,10 +52,18 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
+            CssProvider
+                .AsProvider<BMenu>()
+                .Apply("slot", styleAction: styleBuilder =>
+                {
+                    styleBuilder
+                        .Add("position:relative; display:inline-block");
+                });
+
             SlotProvider
                 .Apply<BPopover, MPopover>(props =>
                 {
-                    props[nameof(MPopover.OriginalClass)] = "m-menu__content menuable__content__active";
+                    props[nameof(MPopover.Class)] = "m-menu__content menuable__content__active";
                     props[nameof(MPopover.Visible)] = _visible;
                     props[nameof(MPopover.ClientX)] = (StringOrNumber)_clientX;
                     props[nameof(MPopover.ClientY)] = (StringOrNumber)_clientY;

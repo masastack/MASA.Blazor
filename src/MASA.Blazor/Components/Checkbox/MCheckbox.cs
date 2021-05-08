@@ -51,22 +51,37 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            CssBuilder
-                .Add("m-input m-input--selection-controls m-input--checkbox")
-                .AddIf("m-input--is-disabled", () => Disabled)
-                .AddTheme(Dark);
-
-            ControlCssBuilder
-                .Add("m-input__control");
-
-            SlotCssBuilder
-                .Add("m-input__slot");
-
-            InputWrapperCssBuilder
-                .Add("m-input--selection-controls__input");
-
-            LabelCssBuilder
-                .Add("m-label");
+            CssProvider
+                .AsProvider<BCheckbox>()
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input")
+                        .Add("m-input--selection-controls")
+                        .Add("m-input--checkbox")
+                        .AddIf("m-input--is-disabled", () => Disabled)
+                        .AddTheme(Dark);
+                })
+                .Apply("control", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input__control");
+                })
+                .Apply("slot", cssBuilder =>
+                {
+                    cssBuilder
+                       .Add("m-input__slot");
+                })
+                .Apply("input", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input--selection-controls__input");
+                })
+                .Apply("label", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-label");
+                });
         }
     }
 }

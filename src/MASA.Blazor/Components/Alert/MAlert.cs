@@ -65,77 +65,102 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            CssBuilder
-                .Add("m-alert")
-                .Add("m-sheet")
-                .AddTheme(Dark || (Type.HasValue && !ColoredBorder))
-                .AddIf(() => Elevation.Value.Match(
-                    str => $"elevation-{str}",
-                    num => $"elevation-{num}"
-                    ), () => Elevation.HasValue)
-                .AddFirstIf(
-                    (() => "m-alert--prominent", () => Prominent),
-                    (() => "m-alert--dense", () => Dense))
-                .AddIf("m-alert--text", () => Text)
-                .AddIf("m-alert--outlined", () => Outlined);
-
-            StyleBuilder
-                .AddIf("display: none", () => !Visible);
-
-            WrapperCssBuilder
-                .Add("m-alert__wrapper");
-
-            ContentCssBuilder
-                .Add("m-alert__content");
-
-            BorderCssBuilder
-                .Add("m-alert__border")
-                .AddIf(() => Border.Value switch
+            CssProvider
+                .AsProvider<BAlert>()
+                .Apply(cssBuilder =>
                 {
-                    AlertBorder.Left => "m-alert__border--left",
-                    AlertBorder.Right => "m-alert__border--right",
-                    AlertBorder.Top => "m-alert__border--top",
-                    AlertBorder.Bottom => "m-alert__border--bottom",
-                    _ => "",
-                }, () => Border.HasValue)
-                .AddIf("m-alert__border--has-color", () => ColoredBorder)
-                .AddIf(() => Type.Value.ToString().ToLower(), () => ColoredBorder && Type.HasValue);
+                    cssBuilder
+                        .Add("m-alert")
+                        .Add("m-sheet")
+                        .AddTheme(Dark || (Type.HasValue && !ColoredBorder))
+                        .AddIf(() => Elevation.Value.Match(
+                            str => $"elevation-{str}",
+                            num => $"elevation-{num}"
+                            ), () => Elevation.HasValue)
+                        .AddFirstIf(
+                            (() => "m-alert--prominent", () => Prominent),
+                            (() => "m-alert--dense", () => Dense))
+                        .AddIf("m-alert--text", () => Text)
+                        .AddIf("m-alert--outlined", () => Outlined);
 
-            // 渲染颜色和变体
-            if (!string.IsNullOrWhiteSpace(Color))
-            {
-                if (ColoredBorder)
-                {
-                    var (@class, style) = ColorHelper.ToCss(Color);
-                    BorderCssBuilder.Add(@class);
-                    BorderStyleBuilder.Add(style);
-                }
-                else
-                {
-                    if (Color.StartsWith("#"))
+                    // 渲染颜色和变体
+                    if (!string.IsNullOrWhiteSpace(Color) && !ColoredBorder && !Color.StartsWith("#"))
                     {
                         if (Outlined || Text)
                         {
-                            StyleBuilder.Add($"color:{Color}");
+                            cssBuilder.Add($"{Color}--text");
                         }
                         else
                         {
-                            StyleBuilder.Add($"background-color: {Color}");
+                            cssBuilder.Add(Color);
                         }
                     }
-                    else
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddIf("display: none", () => !Visible);
+
+                    // 渲染颜色和变体
+                    if (!string.IsNullOrWhiteSpace(Color) && !ColoredBorder && Color.StartsWith("#"))
                     {
                         if (Outlined || Text)
                         {
-                            CssBuilder.Add($"{Color}--text");
+                            styleBuilder.Add($"color:{Color}");
                         }
                         else
                         {
-                            CssBuilder.Add(Color);
+                            styleBuilder.Add($"background-color: {Color}");
                         }
                     }
-                }
-            }
+                })
+                .Apply("wrap", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-alert__wrapper");
+                })
+                .Apply("content", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-alert__content");
+                })
+                .Apply("border", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-alert__border")
+                        .AddIf(() => Border.Value switch
+                        {
+                            AlertBorder.Left => "m-alert__border--left",
+                            AlertBorder.Right => "m-alert__border--right",
+                            AlertBorder.Top => "m-alert__border--top",
+                            AlertBorder.Bottom => "m-alert__border--bottom",
+                            _ => "",
+                        }, () => Border.HasValue)
+                        .AddIf("m-alert__border--has-color", () => ColoredBorder)
+                        .AddIf(() => Type.Value.ToString().ToLower(), () => ColoredBorder && Type.HasValue);
+
+                    // 渲染颜色和变体
+                    if (!string.IsNullOrWhiteSpace(Color))
+                    {
+                        if (ColoredBorder)
+                        {
+                            var (@class, style) = ColorHelper.ToCss(Color);
+                            cssBuilder.Add(@class);
+                        }
+                    }
+                }, styleBuilder =>
+                {
+                    // 渲染颜色和变体
+                    if (!string.IsNullOrWhiteSpace(Color))
+                    {
+                        if (ColoredBorder)
+                        {
+                            var (@class, style) = ColorHelper.ToCss(Color);
+                            styleBuilder.Add(style);
+                        }
+                    }
+                });
+
+
         }
     }
 }

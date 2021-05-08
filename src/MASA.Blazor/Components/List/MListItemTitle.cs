@@ -11,7 +11,12 @@ namespace MASA.Blazor
     {
         protected override void SetComponentClass()
         {
-            CssBuilder.Add("m-list-item__title");
+            CssProvider
+                .Apply<BListItemTitle>(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-list-item__title");
+                });
         }
     }
 }

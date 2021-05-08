@@ -8,31 +8,38 @@ namespace MASA.Blazor
         [Parameter]
         public bool Dark { get; set; } = true;
 
-        protected override string OverlayCss =>
-            CssBuilder.Clear()
-                .Add("m-overlay")
-                .AddIf("m-overlay--active", () => Value)
-                .AddIf("m-overlay--absolute", () => Absolute)
-                .AddTheme(Dark)
-                .ToString();
-
-        protected override string ScrimStyle =>
-            ScrimStyleBuilder.Clear()
-                .Add($"background-color: {Color}; border-color: {Color}")
-                .Add(() => Value ? $"opacity: {Opacity.TryGetNumber().number}" : "opacity: 0")
-                .ToString();
-
         protected override void SetComponentClass()
         {
-            StyleBuilder
-                .Add(() => $"z-index: {ZIndex.TryGetNumber().number}")
-                .AddIf("display:none", () => !Value);
-
-            ScrimCssBuilder
-                .Add("m-overlay__scrim");
-
-            ContentCssBuilder
-                .Add("m-overlay__content");
+            CssProvider
+                .AsProvider<BOverlay>()
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-overlay")
+                        .AddIf("m-overlay--active", () => Value)
+                        .AddIf("m-overlay--absolute", () => Absolute)
+                        .AddTheme(Dark);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .Add(() => $"z-index: {ZIndex.TryGetNumber().number}")
+                        .AddIf("display:none", () => !Value);
+                })
+                .Apply("scrim", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-overlay__scrim");
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .Add($"background-color: {Color}; border-color: {Color}")
+                        .Add(() => Value ? $"opacity: {Opacity.TryGetNumber().number}" : "opacity: 0");
+                })
+                .Apply("content", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-overlay__content");
+                });
         }
     }
 }

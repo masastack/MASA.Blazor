@@ -13,10 +13,15 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            CssBuilder
-                .Add("m-subheader")
-                .AddIf("m-subheader--inset", () => Inset)
-                .AddTheme(Dark);
+            CssProvider
+                .AsProvider<BSubheader>()
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-subheader")
+                        .AddIf("m-subheader--inset", () => Inset)
+                        .AddTheme(Dark);
+                });
         }
     }
 }
