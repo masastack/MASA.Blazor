@@ -30,8 +30,12 @@ namespace MASA.Blazor
 
                 if (_isActive)
                 {
-                    Timer = new Timer(Timeout);
-                    Timer.Elapsed += Timer_Elapsed;
+                    if (Timer == null)
+                    {
+                        Timer = new Timer(Timeout);
+                        Timer.Elapsed += Timer_Elapsed;
+                    }
+
                     Timer.Enabled = true;
                 }
             }
