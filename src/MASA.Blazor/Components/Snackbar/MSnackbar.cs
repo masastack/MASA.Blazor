@@ -42,6 +42,9 @@ namespace MASA.Blazor
         }
 
         [Parameter]
+        public EventCallback<bool> IsActiveChanged { get; set; }
+
+        [Parameter]
         public bool Bottom { get; set; }
 
         [Parameter]
@@ -133,15 +136,26 @@ namespace MASA.Blazor
                 .Apply<BButton, MSnackbarButton>(props =>
                 {
                     props[nameof(MSnackbarButton.Text)] = true;
-                    props[nameof(MSnackbarButton.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, () => IsActive = false);
+                    props[nameof(MSnackbarButton.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
+                    {
+                        IsActive = false;
+                        if (IsActiveChanged.HasDelegate)
+                        {
+                            await IsActiveChanged.InvokeAsync(_isActive);
+                        }
+                    });
                 });
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             IsActive = false;
-            Timer.Enabled = false;
+            if (IsActiveChanged.HasDelegate)
+            {
+                InvokeAsync(() => IsActiveChanged.InvokeAsync(_isActive));
+            }
 
+            Timer.Enabled = false;
             InvokeStateHasChanged();
         }
     }
