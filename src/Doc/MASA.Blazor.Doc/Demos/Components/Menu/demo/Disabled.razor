@@ -1,31 +1,31 @@
 ﻿<div style="text-align:center">
-	<MMenu Disabled>
-		<Slot>
-			<MButton Color="primary">DROPDOWN</MButton>
-		</Slot>
+    <MMenu Disabled>
+        <Activator>
+            <MButton Color="primary">DROPDOWN</MButton>
+        </Activator>
 
-		<ChildContent>
-			<MList>
-				@foreach (var item in titles)
-					{
-	<MListItem>
-	 <MListItemContent>
-	  <MListItemTitle>
-							@item
-	  </MListItemTitle>
-	 </MListItemContent>
-	</MListItem>
-				}
-			</MList>
-		</ChildContent>
-	</MMenu>
+        <ChildContent>
+            <MList>
+                @foreach (var item in titles)
+                    {
+                <MListItem>
+                    <MListItemContent>
+                        <MListItemTitle>
+                            @item
+                        </MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+                }
+            </MList>
+        </ChildContent>
+    </MMenu>
 </div>
 
 @code {
-	string[] titles = {
-	"Click Me",
-	"Click Me",
-	"Click Me",
-	"Click Me 2",
-	};
+    string[] titles = {
+    "Click Me",
+    "Click Me",
+    "Click Me",
+    "Click Me 2",
+    };
 }

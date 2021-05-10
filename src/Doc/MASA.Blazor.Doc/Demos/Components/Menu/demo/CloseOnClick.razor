@@ -1,5 +1,7 @@
 ﻿<div style="text-align:center">
-    <MMenu NudgeBottom="8" OffsetY>
+    <MCheckbox @bind-Checked="close" Label="close on click"></MCheckbox>
+
+    <MMenu CloseOnClick="close">
         <Activator>
             <MButton Color="primary">DROPDOWN</MButton>
         </Activator>
@@ -30,4 +32,6 @@
     "Click Me",
     "Click Me 2",
     };
+
+    bool close = true;
 }

@@ -1,33 +1,33 @@
 ﻿<div style="text-align:center">
-	<MMenu Absolute>
-		<Slot>
-			<MCard>
-				<Cover> <img alt="example" src="https://cdn.vuetifyjs.com/images/cards/cooking.png" /> </Cover>
-			</MCard>
-		</Slot>
+    <MMenu Absolute Style="display:block">
+        <Activator>
+            <MCard>
+                <MImage Alt="example" Height="300" Src="https://cdn.vuetifyjs.com/images/cards/cooking.png"></MImage>
+            </MCard>
+        </Activator>
 
-		<ChildContent>
-			<MList>
-				@foreach (var item in titles)
-				{
-		<MListItem>
-		 <MListItemContent>
-		  <MListItemTitle>
-								@item
-		  </MListItemTitle>
-		 </MListItemContent>
-		</MListItem>
-				}
-   </MList>
-  </ChildContent>
- </MMenu>
+        <ChildContent>
+            <MList>
+                @foreach (var item in titles)
+                    {
+                <MListItem>
+                    <MListItemContent>
+                        <MListItemTitle>
+                            @item
+                        </MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+                }
+            </MList>
+        </ChildContent>
+    </MMenu>
 </div>
 
 @code {
-	string[] titles = {
-	"Click Me",
-	"Click Me",
-	"Click Me",
-	"Click Me 2",
-	};
+    string[] titles = {
+    "Click Me",
+    "Click Me",
+    "Click Me",
+    "Click Me 2",
+    };
 }
