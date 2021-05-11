@@ -1,15 +1,20 @@
-﻿using System.Collections.Specialized;
-using System.Threading.Tasks;
-using System.Xml.Schema;
-using BlazorComponent;
+﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
     public partial class MDialog : BDialog
     {
         private bool _animated = false;
+
+        protected override async Task OnFirstAfterRenderAsync()
+        {
+            await JsInvokeAsync(JsInteropConstants.AddElementTo, Ref, ".m-application");
+
+            await base.OnFirstAfterRenderAsync();
+        }
 
         protected override void SetComponentClass()
         {
@@ -49,22 +54,19 @@ namespace MASA.Blazor
                 .Apply<BOverlay, MOverlay>(props =>
                 {
                     props[nameof(MOverlay.Value)] = Visible;
-                    if (Persistent)
-                    {
-                        props[nameof(MOverlay.Click)] =
-                            EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
+                    props[nameof(MOverlay.Click)] = Persistent
+                        ? EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                             {
                                 _animated = true;
                                 await Task.Delay(100);
                                 _animated = false;
                                 await InvokeStateHasChangedAsync();
+                            })
+                        : (object)EventCallback.Factory.Create<MouseEventArgs>(this, () =>
+                            {
+                                if (VisibleChanged.HasDelegate)
+                                    VisibleChanged.InvokeAsync(false);
                             });
-                    }
-                    else
-                    {
-                        props[nameof(MOverlay.Click)] =
-                            EventCallback.Factory.Create<MouseEventArgs>(this, () => { Visible = false; });
-                    }
                 });
         }
     }

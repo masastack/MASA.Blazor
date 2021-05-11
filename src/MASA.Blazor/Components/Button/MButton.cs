@@ -1,4 +1,5 @@
 ﻿using BlazorComponent;
+using MASA.Blazor.Helpers;
 using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
@@ -16,6 +17,8 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
+            var (colorCss, colorStyle) = ColorHelper.ToCss(Color);
+
             CssProvider
                 .AsProvider<BButton>()
                 .Apply(cssBuilder =>
@@ -50,7 +53,7 @@ namespace MASA.Blazor
                         {
                             if (Icon || Outlined || Plain || Text)
                             {
-                                cssBuilder.Add($"{Color}--text");
+                                cssBuilder.Add(colorCss);
                             }
                             else
                             {
@@ -92,7 +95,7 @@ namespace MASA.Blazor
                         {
                             if (Icon || Outlined || Plain || Text)
                             {
-                                styleBuilder.Add($"color:{Color}");
+                                styleBuilder.Add(colorStyle);
                             }
                             else
                             {
@@ -111,8 +114,6 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-btn__loader");
                 });
-
-
         }
     }
 }

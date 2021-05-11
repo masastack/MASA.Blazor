@@ -1,30 +1,27 @@
 ﻿<MRow Justify="center">
-    <MButton
-        Color="primary"
-        Dark
-        Click="() => _visible = true">
+    <MButton Color="primary"
+             Dark
+             Click="() => _visible = true">
         Open Dialog
     </MButton>
-    <MDialog
-        @bind-Visible="_visible"
-        Persistent
-        MaxWidth="290">
+    <MDialog @bind-Visible="_visible"
+             Persistent
+             MaxWidth="290">
         <MCard>
             <MCardTitle>
-                Use Google'suttonocation service?
+                Use Google'location service?
             </MCardTitle>
             <MCardText>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</MCardText>
             <MCardActions>
-                <MButton
-                    Color="green darken-1"
-                    Text
-                    Click="() => _visible = false">
+                <MSpacer></MSpacer>
+                <MButton Color="green darken-1"
+                         Text
+                         Click="() => _visible = false">
                     Disagree
                 </MButton>
-                <MButton
-                    Color="green darken-1"
-                    Text
-                    Click="() => _visible = false">
+                <MButton Color="green darken-1"
+                         Text
+                         Click="() => _visible = false">
                     Agree
                 </MButton>
             </MCardActions>
