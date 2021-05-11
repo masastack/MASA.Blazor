@@ -24,7 +24,7 @@ docker:
     - branches
   variables:
     DOCKER_HOST: tcp://localhost:2375/
-    IMAGE: proget-hz.lonsid.cn/masa-images/library/masa.blazor.docs:0.1.0.$CI_PIPELINE_ID
+    IMAGE: proget-hz.lonsid.cn/masa-images/library/masa.blazor.docs:0.1.$CI_PIPELINE_ID
   services:
     - name: docker:17.05.0-dind 
       command: ["dockerd-entrypoint.sh","--insecure-registry=proget-hz.lonsid.cn"]
