@@ -12,10 +12,6 @@ packer:
     - dotnet build src
     - dotnet pack src --include-symbols -p:PackageVersion=0.1.0.$CI_PIPELINE_ID
     - dotnet nuget push "**/*.symbols.nupkg" --source gitlab
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - ./src/BlazorComponent
 
 docker:
   image: docker:17.05.0
@@ -25,6 +21,7 @@ docker:
   variables:
     DOCKER_HOST: tcp://localhost:2375/
     IMAGE: proget-hz.lonsid.cn/masa-images/library/masa.blazor.docs:0.1.$CI_PIPELINE_ID
+    LATEST: proget-hz.lonsid.cn/masa-images/library/masa.blazor.docs
   services:
     - name: docker:17.05.0-dind 
       command: ["dockerd-entrypoint.sh","--insecure-registry=proget-hz.lonsid.cn"]
@@ -32,3 +29,6 @@ docker:
     - docker login -u gitlabci -p gitlabci http://proget-hz.lonsid.cn
     - docker build -t $IMAGE .
     - docker push $IMAGE
+    - docker tag $IMAGE $LATEST
+    - docker push $LATEST
+    - bash redeploy.sh 
