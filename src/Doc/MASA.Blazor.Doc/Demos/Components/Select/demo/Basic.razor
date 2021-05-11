@@ -1,6 +1,6 @@
 <MRow>
 	<MCol Span="6">
-		<MSelect @bind-Value="@value1"
+		<MSelect TItem="Item" @bind-Value="@value1"
 				 Label="Standard"
 				 Items="@items"
 				 ItemText="u => u.Label"
@@ -9,7 +9,7 @@
 		</MSelect>
 	</MCol>
 	<MCol Span="6">
-		<MSelect @bind-Value="@value2"
+		<MSelect TItem="Item" @bind-Value="@value2"
 				 Label="Filled style"
 				 Filled
 				 Items="@items"
@@ -20,7 +20,7 @@
 	</MCol>
 
 	<MCol Span="6">
-		<MSelect @bind-Value="@value3"
+		<MSelect TItem="Item" @bind-Value="@value3"
 				 Label="Outlined style"
 				 Outlined
 				 Items="@items"
@@ -30,7 +30,7 @@
 		</MSelect>
 	</MCol>
 	<MCol Span="6">
-		<MSelect @bind-Value="@value4"
+		<MSelect TItem="Item" @bind-Value="@value4"
 				 Label="Solo style"
 				 Solo
 				 Items="@items"
@@ -60,7 +60,7 @@
 		}
 	}
 
-	Item[] items = {
+	List<Item> items =new() {
 	new Item("Item 1", "1"),
 	new Item("Item 2", "2")
 	};

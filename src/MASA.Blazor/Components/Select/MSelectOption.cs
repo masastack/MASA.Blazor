@@ -42,7 +42,12 @@ namespace MASA.Blazor
                     props[nameof(MCheckbox.Checked)] = Checked;
                 })
                 .Apply<BListItemContent, MListItemContent>()
-                .Apply<BListItemTitle, MListItemTitle>();
+                .Apply<BListItemTitle, MListItemTitle>()
+                .Apply<BListItemIcon, MListItemIcon>(props =>
+                {
+                    props[nameof(Style)] = "margin:12px 0 12px 12px";
+                })
+                .Apply<BIcon, MIcon>();
         }
     }
 }

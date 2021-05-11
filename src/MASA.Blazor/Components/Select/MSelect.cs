@@ -10,11 +10,14 @@ namespace MASA.Blazor
     {
         private BoundingClientRect _rect;
 
-        [Parameter] public bool Dark { get; set; }
+        [Parameter]
+        public bool Dark { get; set; }
 
-        [Parameter] public int MinWidth { get; set; }
+        [Parameter]
+        public int MinWidth { get; set; }
 
         private int Width => _visible || _text.Any() ? ComputeLabelLength() * 6 : 0;
+
         protected override string LegendStyle => $"width: {Width}px";
 
         protected override Task OnInitializedAsync()
