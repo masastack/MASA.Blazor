@@ -36,4 +36,4 @@ docker:
     - docker push $IMAGE
     - docker tag $IMAGE $LATEST
     - docker push $LATEST
-    - bash redeploy.sh 
+    - sh redeploy.sh 
