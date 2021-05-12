@@ -64,6 +64,9 @@ namespace MASA.Blazor
         [Parameter]
         public bool XSmall { get; set; }
 
+        [Parameter]
+        public bool IsActive { get; set; } = true;
+
         protected override void SetComponentClass()
         {
             // 渲染颜色和变体
@@ -79,7 +82,7 @@ namespace MASA.Blazor
                         .AddIf("m-icon--left", () => Left)
                         .AddIf("m-icon--right", () => Right)
                         .AddTheme(Dark)
-                        .Add(color_class);
+                        .AddIf(color_class, () => IsActive);
                 }, styleBuilder =>
                 {
                     // TODO: 能否拿到属性排列顺序，最后一个优先级最高

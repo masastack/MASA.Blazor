@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace MASA.Blazor
 {
-    public partial class MTextField : MInput
+    public partial class MTextField : MInput<string>
     {
         [Parameter]
         public bool FullWidth { get; set; }
@@ -118,6 +118,7 @@ namespace MASA.Blazor
                     properties[nameof(MInputSlot.PlaceHolder)] = IsFocused ? Placeholder : "";
                     properties[nameof(MInputSlot.Outlined)] = Outlined;
                     properties[nameof(MInputSlot.Type)] = Type;
+                    properties[nameof(MInputSlot.IsTextField)] = true;
                 });
             ValidationState = "error";
         }

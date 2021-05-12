@@ -28,6 +28,9 @@ namespace MASA.Blazor
         [Parameter]
         public bool Active { get; set; }
 
+        [Parameter]
+        public string Color { get; set; } = "primary";
+
         protected override void SetComponentClass()
         {
             var prefix = "m-label";
@@ -39,7 +42,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--active", () => Active)
                         .AddIf($"{prefix}--is-disabled", () => Disabled)
                         .AddTheme(Dark)
-                        .AddIf("primary--text", () => Active);
+                        .AddIf($"{Color}--text", () => Active);
                 }, styleBuilder =>
                 {
                     styleBuilder

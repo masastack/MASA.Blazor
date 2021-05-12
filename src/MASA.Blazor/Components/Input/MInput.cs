@@ -8,16 +8,16 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MInput : BInput
+    public partial class MInput<TValue> : BInput
     {
         [Parameter]
         public bool HasState { get; set; }
 
         [Parameter]
-        public string Value { get; set; }
+        public TValue Value { get; set; }
 
         [Parameter]
-        public EventCallback<string> ValueChanged { get; set; }
+        public EventCallback<TValue> ValueChanged { get; set; }
 
         [Parameter]
         public bool IsDisabled { get; set; }
@@ -54,8 +54,8 @@ namespace MASA.Blazor
                         .Add(prefix)
                         .AddIf($"{prefix}--has-state", () => HasState)
                         .AddIf($"{prefix}--hide-details", () => !ShowDetails)
-                        .AddIf($"{prefix}--is-label-active", () => !string.IsNullOrEmpty(Value))
-                        .AddIf($"{prefix}--is-dirty", () => !string.IsNullOrEmpty(Value))
+                        .AddIf($"{prefix}--is-label-active", () => Value != null)
+                        .AddIf($"{prefix}--is-dirty", () => Value != null)
                         .AddIf($"{prefix}--is-disabled", () => IsDisabled)
                         .AddIf($"{prefix}--is-focused", () => IsFocused)
                         .AddIf($"{prefix}--is-loading", () => Loading)
