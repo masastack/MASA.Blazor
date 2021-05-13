@@ -12,6 +12,7 @@ namespace MASA.Blazor
     {
         [Parameter]
         public string Align { get; set; } = "start";
+
         [Parameter]
         public bool Divider { get; set; }
 

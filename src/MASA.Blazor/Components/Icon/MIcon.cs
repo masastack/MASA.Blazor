@@ -69,9 +69,6 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            // 渲染颜色和变体
-            var (color_class, color_style) = ColorHelper.ToCss(Color);
-
             CssProvider
                 .Merge<BIcon>(cssBuilder =>
                 {
@@ -82,12 +79,12 @@ namespace MASA.Blazor
                         .AddIf("m-icon--left", () => Left)
                         .AddIf("m-icon--right", () => Right)
                         .AddTheme(Dark)
-                        .AddIf(color_class, () => IsActive);
+                        .AddTextColor(Color, () => IsActive);
                 }, styleBuilder =>
                 {
                     // TODO: 能否拿到属性排列顺序，最后一个优先级最高
                     styleBuilder
-                        .Add(color_style)
+                        .AddTextColor(Color, () => IsActive)
                         .AddFirstIf(
                             (() => Size.Value.Match(
                                  str => $"font-size: {str}",

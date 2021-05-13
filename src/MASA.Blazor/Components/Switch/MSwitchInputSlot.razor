@@ -1,0 +1,16 @@
+﻿@namespace MASA.Blazor
+@inherits BInputSlot
+
+<div class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()" id="@Id" @ref="Ref">
+    <input disabled="@IsDisabled" role="checkbox" type="checkbox" checked="@IsActive" />
+    <div class="@CssProvider.GetClass("ripple")" style="@CssProvider.GetStyle("ripple")"></div>
+    <div class="@CssProvider.GetClass("track")" style="@CssProvider.GetStyle("track")"></div>
+    <div class="@CssProvider.GetClass("thumb")" style="@CssProvider.GetStyle("thumb")"></div>
+</div>
+
+@if (!string.IsNullOrEmpty(Label))
+{
+    <MLabel>
+        @Label
+    </MLabel>
+}

@@ -25,7 +25,7 @@ namespace MASA.Blazor
 
             var prefix = "m-textarea";
             CssProvider
-                .Merge<BInput>(cssBuilder =>
+                .Merge(cssBuilder =>
                 {
                     cssBuilder
                         .Add(prefix)

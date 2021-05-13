@@ -26,7 +26,7 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add(prefix)
                         .AddTheme(Dark)
-                        .AddIf(() => $"{Color}--text", () => !string.IsNullOrEmpty(Color));
+                        .AddTextColor(Color);
                 })
                 .Apply("wrap", cssBuilder =>
                 {

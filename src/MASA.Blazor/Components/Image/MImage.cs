@@ -9,7 +9,7 @@ namespace MASA.Blazor
     {
         private Dimensions _dimensions;
 
-        [Parameter] 
+        [Parameter]
         public bool Dark { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -27,14 +27,14 @@ namespace MASA.Blazor
         {
             CssProvider
                 .AsProvider<BImage>()
-                .Apply(css =>
+                .Apply(cssBuilder =>
                 {
-                    css.Add("m-image")
+                    cssBuilder.Add("m-image")
                         .Add("m-responsive")
                         .AddTheme(Dark);
-                }, style =>
+                }, styleBuilder =>
                 {
-                    style
+                    styleBuilder
                         .AddIf(() => $"max-height: {MaxHeight.TryGetNumber().number}px", () => MaxHeight != null)
                         .AddIf(() => $"min-height: {MinHeight.TryGetNumber().number}px", () => MinHeight != null)
                         .AddIf(() => $"height: {Height.TryGetNumber().number}px", () => Height != null)
@@ -42,20 +42,27 @@ namespace MASA.Blazor
                         .AddIf(() => $"min-width: {MinWidth.TryGetNumber().number}px", () => MinWidth != null)
                         .AddIf(() => $"width: {Width.TryGetNumber().number}px", () => Width != null);
                 })
-                .Apply("resp_sizer", css => { css.Add("m-responsive__sizer"); })
-                .Apply("image", css =>
+                .Apply("resp_sizer", cssBuilder =>
                 {
-                    css.Add("m-image__image")
+                    cssBuilder.Add("m-responsive__sizer");
+                })
+                .Apply("image", cssBuilder =>
+                {
+                    cssBuilder.Add("m-image__image")
                         .AddFirstIf(
                             ("m-image__image--contain", () => Contain),
                             ("m-image__image--cover", () => true)
                         );
-                }, style =>
+                }, styleBuilder =>
                 {
-                    style.AddIf(() => $"background-image: url(\"{Src}\")", () => !string.IsNullOrEmpty(Src))
+                    styleBuilder
+                        .AddIf(() => $"background-image: url(\"{Src}\")", () => !string.IsNullOrEmpty(Src))
                         .Add("background-position: center center");
                 })
-                .Apply("resp_content", css => { css.Add("m-responsive__content"); });
+                .Apply("resp_content", cssBuilder =>
+                {
+                    cssBuilder.Add("m-responsive__content");
+                });
         }
 
         private static string GenerateRespSizerStyle(Dimensions dimensions, StringOrNumber aspectRatio)

@@ -21,9 +21,6 @@ namespace MASA.Blazor
         [Parameter]
         public bool FixedHeader { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         [Parameter]
         public StringNumber Height { get; set; }
 

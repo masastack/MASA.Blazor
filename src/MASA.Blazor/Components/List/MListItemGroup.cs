@@ -16,10 +16,8 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-item-group m-list-item-group")
-                        .AddTheme(Dark);
-
-                    var (css, style) = ColorHelper.ToCss(Color);
-                    cssBuilder.Add(css);
+                        .AddTheme(Dark)
+                        .AddTextColor(Color);
                 });
         }
     }

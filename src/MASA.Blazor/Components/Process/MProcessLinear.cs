@@ -75,7 +75,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add($"{prefix}__background")
-                        .AddIf(() => Color, () => Color != null);
+                        .AddIf(Color, () => Color != null);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -102,14 +102,14 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add($"{prefix}__indeterminate")
                         .Add("long")
-                        .AddIf(() => Color, () => Color != null);
+                        .AddIf(Color, () => Color != null);
                 })
                 .Apply("short", cssBuilder =>
                 {
                     cssBuilder
                         .Add($"{prefix}__indeterminate")
                         .Add("short")
-                        .AddIf(() => Color, () => Color != null);
+                        .AddIf(Color, () => Color != null);
                 })
                 .Apply("content", cssBuilder =>
                 {

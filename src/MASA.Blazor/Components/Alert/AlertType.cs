@@ -2,12 +2,10 @@
 {
     public enum AlertType
     {
-        Success = 0,
-
+        None = 0,
+        Success,
         Info,
-
         Warning,
-
         Error
     }
 }

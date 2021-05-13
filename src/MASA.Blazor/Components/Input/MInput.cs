@@ -41,21 +41,22 @@ namespace MASA.Blazor
         public int Height { get; set; }
 
         [Parameter]
-        public string ValidationState { get; set; }
+        public string ValidationState { get; set; } = "primary";
+
+        protected bool? IsActive { get; set; }
 
         protected override void SetComponentClass()
         {
             var prefix = "m-input";
             CssProvider
-                .AsProvider<BInput>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .Add(prefix)
                         .AddIf($"{prefix}--has-state", () => HasState)
                         .AddIf($"{prefix}--hide-details", () => !ShowDetails)
-                        .AddIf($"{prefix}--is-label-active", () => Value != null)
-                        .AddIf($"{prefix}--is-dirty", () => Value != null)
+                        .AddIf($"{prefix}--is-label-active", () => IsActive ?? Value != null)
+                        .AddIf($"{prefix}--is-dirty", () => IsActive ?? Value != null)
                         .AddIf($"{prefix}--is-disabled", () => IsDisabled)
                         .AddIf($"{prefix}--is-focused", () => IsFocused)
                         .AddIf($"{prefix}--is-loading", () => Loading)

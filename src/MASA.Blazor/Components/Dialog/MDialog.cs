@@ -50,22 +50,27 @@ namespace MASA.Blazor
                 });
 
             SlotProvider
-                .Apply<BPopover, MPopover>(props => { props[nameof(MPopover.Visible)] = Visible; })
+                .Apply<BPopover, MPopover>(props =>
+                {
+                    props[nameof(MPopover.Visible)] = Visible;
+                })
                 .Apply<BOverlay, MOverlay>(props =>
                 {
                     props[nameof(MOverlay.Value)] = Visible;
-                    props[nameof(MOverlay.Click)] = Persistent
-                        ? EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
+                    props[nameof(MOverlay.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                             {
-                                _animated = true;
-                                await Task.Delay(100);
-                                _animated = false;
-                                await InvokeStateHasChangedAsync();
-                            })
-                        : (object)EventCallback.Factory.Create<MouseEventArgs>(this, () =>
-                            {
-                                if (VisibleChanged.HasDelegate)
-                                    VisibleChanged.InvokeAsync(false);
+                                if (Persistent)
+                                {
+                                    _animated = true;
+                                    await Task.Delay(100);
+                                    _animated = false;
+                                    await InvokeStateHasChangedAsync();
+                                }
+                                else
+                                {
+                                    if (VisibleChanged.HasDelegate)
+                                        await VisibleChanged.InvokeAsync(false);
+                                }
                             });
                 });
         }

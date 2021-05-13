@@ -30,25 +30,25 @@ namespace MASA.Blazor.Components.Table
         {
             CssProvider
                 .AsProvider<BTableFooter>()
-                .Apply(css =>
+                .Apply(cssBuilder =>
                 {
-                    css.Add("m-data-footer");
+                    cssBuilder.Add("m-data-footer");
                 })
-                .Apply("select", css =>
+                .Apply("select", cssBuilder =>
                 {
-                    css.Add("m-data-footer__select");
+                    cssBuilder.Add("m-data-footer__select");
                 })
-                .Apply("pagination", css =>
+                .Apply("pagination", cssBuilder =>
                 {
-                    css.Add("m-data-footer__pagination");
+                    cssBuilder.Add("m-data-footer__pagination");
                 })
-                .Apply("before", css =>
+                .Apply("before", cssBuilder =>
                 {
-                    css.Add("m-data-footer__icons-before");
+                    cssBuilder.Add("m-data-footer__icons-before");
                 })
-                .Apply("after", css =>
+                .Apply("after", cssBuilder =>
                 {
-                    css.Add("m-data-footer__icons-after");
+                    cssBuilder.Add("m-data-footer__icons-after");
                 });
 
             SlotProvider

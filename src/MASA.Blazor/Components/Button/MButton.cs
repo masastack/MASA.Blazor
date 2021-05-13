@@ -17,8 +17,6 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            var (colorCss, colorStyle) = ColorHelper.ToCss(Color);
-
             CssProvider
                 .AsProvider<BButton>()
                 .Apply(cssBuilder =>
@@ -45,22 +43,8 @@ namespace MASA.Blazor
                             ("m-size--x-small", () => XSmall),
                             ("m-size--default", () => true)
                             )
-                        .AddTheme(Dark);
-
-                    if (!string.IsNullOrWhiteSpace(Color))
-                    {
-                        if (!Color.StartsWith("#"))
-                        {
-                            if (Icon || Outlined || Plain || Text)
-                            {
-                                cssBuilder.Add(colorCss);
-                            }
-                            else
-                            {
-                                cssBuilder.Add(Color);
-                            }
-                        }
-                    }
+                        .AddTheme(Dark)
+                        .AddColor(Color, Icon || Outlined || Plain || Text);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -87,22 +71,8 @@ namespace MASA.Blazor
                         .AddIf(() => MaxHeight.Value.Match(
                                  str => $"max-height: {str}",
                                  num => $"max-height: {num}px"),
-                               () => MaxHeight.HasValue);
-
-                    if (!string.IsNullOrWhiteSpace(Color))
-                    {
-                        if (Color.StartsWith("#"))
-                        {
-                            if (Icon || Outlined || Plain || Text)
-                            {
-                                styleBuilder.Add(colorStyle);
-                            }
-                            else
-                            {
-                                styleBuilder.Add($"background-color: {Color}");
-                            }
-                        }
-                    }
+                               () => MaxHeight.HasValue)
+                        .AddColor(Color, Icon || Outlined || Plain || Text);
                 })
                 .Apply("content", cssBuilder =>
                 {

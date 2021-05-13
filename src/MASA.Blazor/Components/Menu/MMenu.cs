@@ -27,7 +27,6 @@ namespace MASA.Blazor
                 _contentRect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetFirstChildBoundingClientRect, ContentRef);
 
                 Console.WriteLine(JsonSerializer.Serialize(_activatorRect));
-
                 await JsInvokeAsync(JsInteropConstants.AddElementToBody, ContentRef);
             }
 

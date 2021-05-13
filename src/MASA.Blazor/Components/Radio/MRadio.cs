@@ -49,7 +49,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-input--selection-controls__ripple")
-                        .AddIf($"{ValidationState}--text", () => IsActive);
+                        .AddTextColor(ValidationState, () => IsActive);
                 });
 
             SlotProvider

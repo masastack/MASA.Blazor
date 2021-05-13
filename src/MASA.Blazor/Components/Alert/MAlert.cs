@@ -81,37 +81,13 @@ namespace MASA.Blazor
                             (() => "m-alert--prominent", () => Prominent),
                             (() => "m-alert--dense", () => Dense))
                         .AddIf("m-alert--text", () => Text)
-                        .AddIf("m-alert--outlined", () => Outlined);
-
-                    // 渲染颜色和变体
-                    if (!string.IsNullOrWhiteSpace(Color) && !ColoredBorder && !Color.StartsWith("#"))
-                    {
-                        if (Outlined || Text)
-                        {
-                            cssBuilder.Add($"{Color}--text");
-                        }
-                        else
-                        {
-                            cssBuilder.Add(Color);
-                        }
-                    }
+                        .AddIf("m-alert--outlined", () => Outlined)
+                        .AddColor(Color, Outlined || Text, () => !ColoredBorder);
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf("display: none", () => !Visible);
-
-                    // 渲染颜色和变体
-                    if (!string.IsNullOrWhiteSpace(Color) && !ColoredBorder && Color.StartsWith("#"))
-                    {
-                        if (Outlined || Text)
-                        {
-                            styleBuilder.Add($"color:{Color}");
-                        }
-                        else
-                        {
-                            styleBuilder.Add($"background-color: {Color}");
-                        }
-                    }
+                        .AddIf("display: none", () => !Visible)
+                        .AddColor(Color, Outlined || Text, () => !ColoredBorder);
                 })
                 .Apply("wrap", cssBuilder =>
                 {
@@ -136,28 +112,12 @@ namespace MASA.Blazor
                             _ => "",
                         }, () => Border.HasValue)
                         .AddIf("m-alert__border--has-color", () => ColoredBorder)
-                        .AddIf(() => Type.Value.ToString().ToLower(), () => ColoredBorder && Type.HasValue);
-
-                    // 渲染颜色和变体
-                    if (!string.IsNullOrWhiteSpace(Color))
-                    {
-                        if (ColoredBorder)
-                        {
-                            var (@class, style) = ColorHelper.ToCss(Color);
-                            cssBuilder.Add(@class);
-                        }
-                    }
+                        .AddIf(() => Type.Value.ToString().ToLower(), () => ColoredBorder && Type.HasValue)
+                        .AddTextColor(Color, () => ColoredBorder);
                 }, styleBuilder =>
                 {
-                    // 渲染颜色和变体
-                    if (!string.IsNullOrWhiteSpace(Color))
-                    {
-                        if (ColoredBorder)
-                        {
-                            var (@class, style) = ColorHelper.ToCss(Color);
-                            styleBuilder.Add(style);
-                        }
-                    }
+                    styleBuilder
+                        .AddTextColor(Color, () => ColoredBorder);
                 });
 
 

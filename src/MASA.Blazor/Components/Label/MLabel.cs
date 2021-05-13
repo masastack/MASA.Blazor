@@ -42,7 +42,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--active", () => Active)
                         .AddIf($"{prefix}--is-disabled", () => Disabled)
                         .AddTheme(Dark)
-                        .AddIf($"{Color}--text", () => Active);
+                        .AddTextColor(Color, () => Active);
                 }, styleBuilder =>
                 {
                     styleBuilder

@@ -37,7 +37,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--no-action", () => NoAction)
                         .AddIf($"{prefix}--sub-group", () => SubGroup)
-                        .AddIf($"{Color}--text", () => !string.IsNullOrEmpty(Color));
+                        .AddTextColor(Color);
                 })
                 .Apply("items", cssBuilder =>
                 {

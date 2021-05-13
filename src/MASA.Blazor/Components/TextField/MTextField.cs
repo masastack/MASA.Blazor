@@ -67,7 +67,7 @@ namespace MASA.Blazor
 
             var prefix = "m-text-field";
             CssProvider
-                .Merge<BInput>(cssBuilder =>
+                .Merge(cssBuilder =>
                 {
                     cssBuilder
                         .Add(prefix)
@@ -123,10 +123,12 @@ namespace MASA.Blazor
             ValidationState = "error";
         }
 
-        protected override void HandleClick(MouseEventArgs args)
+        protected override Task HandleClick(MouseEventArgs args)
         {
             Active = true;
             IsFocused = true;
+
+            return Task.CompletedTask;
         }
     }
 }

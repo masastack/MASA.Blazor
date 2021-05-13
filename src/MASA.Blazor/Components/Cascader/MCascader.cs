@@ -10,15 +10,6 @@ namespace MASA.Blazor
 {
     public partial class MCascader : MSelect<BCascaderNode>
     {
-        public MCascader()
-            : base()
-        {
-            Slot = true;
-            Outlined = true;
-            ItemText = r => IsFull ? string.Join('/', r.GetAllNodes().Select(t => t.Label)) : r.Label;
-            ItemValue = r => r.Value;
-        }
-
         [Parameter]
         public bool IsFull { get; set; }
 
@@ -50,6 +41,11 @@ namespace MASA.Blazor
                 });
 
             base.SetComponentClass();
+
+            Slot = true;
+            Outlined = true;
+            ItemText = r => IsFull ? string.Join('/', r.GetAllNodes().Select(t => t.Label)) : r.Label;
+            ItemValue = r => r.Value;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
