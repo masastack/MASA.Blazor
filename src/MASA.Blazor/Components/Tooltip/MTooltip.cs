@@ -1,9 +1,5 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor
@@ -66,12 +62,14 @@ namespace MASA.Blazor
                         .Add(() => $"left:{OffsetLeft}px")
                         .Add(() => $"top:{OffsetTop}px")
                         .Add($"opacity:{(IsActive ? 0.9 : 0)}")
-                        .Add("z-index:8");
+                        .Add("z-index:8")
+                        .AddIf("display:none", () => Disabled);
                 })
                 .Apply("activator", styleAction: styleBuilder =>
                  {
                      styleBuilder
-                         .Add("display:inline-block");
+                         .Add("display:inline-block")
+                         .Add(ActivatorStyle);
                  });
         }
 

@@ -2,11 +2,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using OneOf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
@@ -35,6 +30,9 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool XSmall { get; set; }
+
+        [Parameter]
+        public string CloseIconColor { get; set; }
 
         public bool Medium => !XSmall && !Small && !Large && !XLarge;
 
@@ -73,13 +71,16 @@ namespace MASA.Blazor
                 {
                     props[nameof(MChipCloseIcon.Right)] = true;
                     props[nameof(MChipCloseIcon.Size)] = (OneOf<string, int>)18;
+                    props[nameof(MChipCloseIcon.Color)] = CloseIconColor;
                     props[nameof(MChipCloseIcon.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async args =>
                     {
-                        Show = false;
-
                         if (Click.HasDelegate)
                         {
                             await Click.InvokeAsync(args);
+                        }
+                        else
+                        {
+                            Show = false;
                         }
                     });
                 });
