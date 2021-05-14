@@ -11,10 +11,10 @@ namespace MASA.Blazor
                  {
                      styleBuilder
                          .Add(() => "z-index: 1000;")
-                         .Add(() => $"top: {ClientY?.TryGetNumber().number ?? 0}px")
-                         .Add(() => $"left: {ClientX?.TryGetNumber().number ?? 0}px")
-                         .AddIf(() => $"min-width: {MinWidth?.TryGetNumber().number ?? 0}px", () => MinWidth != null)
-                         .AddIf(() => $"max-height: {MaxHeight?.TryGetNumber().number}px", () => MaxHeight != null)
+                         .Add(() => $"top: {ClientY.ToUnit()}")
+                         .Add(() => $"left: {ClientX.ToUnit()}")
+                         .AddMinWidth(MinWidth)
+                         .AddMaxHeight(MaxHeight)
                          .AddFirstIf(
                              ("position: absolute", () => Visible),
                              ("display: none", () => !Visible)

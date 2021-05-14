@@ -11,8 +11,6 @@ using OneOf;
 
 namespace MASA.Blazor
 {
-    using StringNumber = OneOf<string, int>;
-
     public partial class MTable<TItem> : BTable<TItem>
     {
         [Parameter]
@@ -38,7 +36,7 @@ namespace MASA.Blazor
                     cssBuilder
                          .Add("m-data-table")
                         .AddIf($"{prefix}--dense", () => Dense)
-                        .AddIf($"{prefix}--fixed-height", () => Height.Value != default && !FixedHeader)
+                        .AddIf($"{prefix}--fixed-height", () => Height != null && !FixedHeader)
                         .AddIf($"{prefix}--fixed-header", () => FixedHeader)
                         .AddIf($"{prefix}--has-top", () => Top != default)
                         .AddIf($"{prefix}--has-bottom", () => Bottom != default)
@@ -51,7 +49,7 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf(() => $"height:{Height.Value}", () => Height.Value != default);
+                        .AddHeight(Height);
                 })
                 .Apply("empty", cssBuilder =>
                 {
@@ -60,7 +58,7 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf(() => $"height:{Height.Value}", () => Height.Value != default);
+                        .AddHeight(Height);
                 });
 
             SlotProvider

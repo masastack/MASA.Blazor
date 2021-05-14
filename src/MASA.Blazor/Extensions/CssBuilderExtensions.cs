@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlazorComponent.Components.Core.CssProcess;
+using OneOf;
 
 namespace BlazorComponent
 {
@@ -20,7 +21,7 @@ namespace BlazorComponent
             return cssBuilder;
         }
 
-        public static CssBuilder AddColor(this CssBuilder cssBuilder, string color, bool isText)
+        public static CssBuilder AddColor(this CssBuilder cssBuilder, string color, bool isText = false)
         {
             return cssBuilder.AddColor(color, isText, () => true);
         }
@@ -67,6 +68,29 @@ namespace BlazorComponent
         public static CssBuilder AddTextColor(this CssBuilder cssBuilder, string color)
         {
             return cssBuilder.AddColor(color, true, () => true);
+        }
+
+        public static CssBuilder AddRounded(this CssBuilder cssBuilder, bool tile, OneOf<bool, string> rounded)
+        {
+            if (tile)
+            {
+                cssBuilder.Add("rounded-0");
+            }
+            else if (rounded.IsT1)
+            {
+                var values = rounded.AsT1.Split(' ');
+
+                foreach (var val in values)
+                {
+                    cssBuilder.Add(val);
+                }
+            }
+            else if (rounded.IsT0 && rounded.AsT0)
+            {
+                cssBuilder.Add("rounded");
+            }
+
+            return cssBuilder;
         }
     }
 }

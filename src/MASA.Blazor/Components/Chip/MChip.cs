@@ -70,7 +70,7 @@ namespace MASA.Blazor
                 .Apply<BIcon, MChipCloseIcon>(props =>
                 {
                     props[nameof(MChipCloseIcon.Right)] = true;
-                    props[nameof(MChipCloseIcon.Size)] = (OneOf<string, int>)18;
+                    props[nameof(MChipCloseIcon.Size)] = (StringNumber)18;
                     props[nameof(MChipCloseIcon.Color)] = CloseIconColor;
                     props[nameof(MChipCloseIcon.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async args =>
                     {

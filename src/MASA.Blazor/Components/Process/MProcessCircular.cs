@@ -16,10 +16,8 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf(() => Size.Value.Match(
-                                str => $"height: {str}; width: {str}",
-                                num => $"height: {num}px; width: {num}px"),
-                            () => Size.HasValue)
+                        .AddHeight(Size)
+                        .AddWidth(Size)
                         .AddTextColor(Color);
                 });
         }

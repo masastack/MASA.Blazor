@@ -38,7 +38,7 @@ namespace MASA.Blazor
         public bool Dark { get; set; }
 
         [Parameter]
-        public int Height { get; set; }
+        public StringNumber Height { get; set; }
 
         [Parameter]
         public string ValidationState { get; set; } = "primary";
@@ -86,7 +86,7 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf($"height:{Height}px", () => Height != default);
+                        .AddHeight(Height);
                 });
 
             SlotProvider

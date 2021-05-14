@@ -48,30 +48,12 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf(() => Height.Value.Match(
-                                 str => $"height: {str}",
-                                 num => $"height: {num}px"),
-                               () => Height.HasValue)
-                        .AddIf(() => Width.Value.Match(
-                                 str => $"width: {str}",
-                                 num => $"width: {num}px"),
-                               () => Width.HasValue)
-                        .AddIf(() => MinWidth.Value.Match(
-                                 str => $"min-width: {str}",
-                                 num => $"min-width: {num}px"),
-                               () => MinWidth.HasValue)
-                        .AddIf(() => MaxWidth.Value.Match(
-                                 str => $"max-width: {str}",
-                                 num => $"max-width: {num}px"),
-                               () => MaxWidth.HasValue)
-                        .AddIf(() => MinHeight.Value.Match(
-                                 str => $"min-height: {str}",
-                                 num => $"min-height: {num}px"),
-                               () => MinHeight.HasValue)
-                        .AddIf(() => MaxHeight.Value.Match(
-                                 str => $"max-height: {str}",
-                                 num => $"max-height: {num}px"),
-                               () => MaxHeight.HasValue)
+                        .AddHeight(Height)
+                        .AddWidth(Width)
+                        .AddMinWidth(MinWidth)
+                        .AddMaxWidth(MaxWidth)
+                        .AddMinHeight(MinHeight)
+                        .AddMaxHeight(MaxHeight)
                         .AddColor(Color, Icon || Outlined || Plain || Text);
                 })
                 .Apply("content", cssBuilder =>

@@ -82,9 +82,9 @@ namespace MASA.Blazor
                 {
                     props[nameof(MPopover.Class)] = "m-menu__content menuable__content__active";
                     props[nameof(MPopover.Visible)] = _visible;
-                    props[nameof(MPopover.ClientX)] = (StringOrNumber)_clientX;
-                    props[nameof(MPopover.ClientY)] = (StringOrNumber)_clientY;
-                    props[nameof(MPopover.MinWidth)] = (StringOrNumber)_minWidth;
+                    props[nameof(MPopover.ClientX)] = (StringNumber)_clientX;
+                    props[nameof(MPopover.ClientY)] = (StringNumber)_clientY;
+                    props[nameof(MPopover.MinWidth)] = (StringNumber)_minWidth;
                     props[nameof(MPopover.ChildContent)] = ChildContent;
                     props[nameof(MPopover.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
                     {
@@ -104,7 +104,7 @@ namespace MASA.Blazor
                             _visible = false;
                         }
                     });
-                    props[nameof(MOverlay.Opacity)] = (StringOrNumber)0;
+                    props[nameof(MOverlay.Opacity)] = (StringNumber)0;
                 });
         }
 

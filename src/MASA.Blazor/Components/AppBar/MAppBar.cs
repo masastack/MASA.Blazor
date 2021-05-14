@@ -9,8 +9,6 @@ using OneOf;
 
 namespace MASA.Blazor
 {
-    using StringNumber = OneOf<string, int>;
-
     public partial class MAppBar : BAppBar
     {
         protected bool IsExtended { get; set; }
@@ -52,7 +50,7 @@ namespace MASA.Blazor
         public StringNumber Height { get; set; } = "56px";
 
         [Parameter]
-        public string MarginTop { get; set; }
+        public StringNumber MarginTop { get; set; }
 
         /// <summary>
         /// This should be down in next version
@@ -99,11 +97,11 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf(() => $"height:{Height.Value}", () => Height.Value != null)
-                        .AddIf(() => $"margin-top:{MarginTop}", () => MarginTop != null)
+                        .AddIf(() => $"height:{Height.ToUnit()}", () => Height.Value != null)
+                        .AddIf(() => $"margin-top:{MarginTop.ToUnit()}", () => MarginTop != null)
                         .AddIf(() => $"transform:translateY({Transform}px)", () => Transform != null)
-                        .AddIf(() => $"left:{Left.Value}", () => Left.Value != null)
-                        .AddIf(() => $"right:{Right.Value}", () => Right.Value != null);
+                        .AddIf(() => $"left:{Left.ToUnit()}", () => Left != null)
+                        .AddIf(() => $"right:{Right.ToUnit()}", () => Right != null);
                 })
                 .Apply("content", cssBuilder =>
                 {

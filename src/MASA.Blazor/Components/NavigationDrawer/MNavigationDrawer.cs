@@ -11,8 +11,6 @@ using OneOf;
 
 namespace MASA.Blazor
 {
-    using StringNumber = OneOf<string, int>;
-
     public partial class MNavigationDrawer : BNavigationDrawer
     {
         private StringNumber _height;
@@ -107,7 +105,7 @@ namespace MASA.Blazor
         {
             get
             {
-                if (_height.Value == default)
+                if (_height == null)
                 {
                     return App ? "100vh" : "100%";
                 }
@@ -205,20 +203,23 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--right", () => Right)
                         .AddIf($"{prefix}--temporary", () => Temporary)
                         .AddTheme(Dark);
-                },styleBuilder=> {
+                }, styleBuilder =>
+                {
                     var translate = IsBottom ? "translateY" : "translateX";
                     styleBuilder
-                        .Add($"height:{Height.Value}")
+                        .Add($"height:{Height.ToUnit()}")
                         .Add($"top:{Top}")
                         .AddIf(() => $"maxHeight:calc(100% - {MaxHeight})", () => MaxHeight != null)
                         .AddIf(() => $"transform:{translate}({Transform}%)", () => Transform != null)
                         .Add($"width:{(IsMiniVariant ? MiniVariantWidth.Value : Width.Value)}");
                 })
-                .Apply("content",cssBuilder=> {
+                .Apply("content", cssBuilder =>
+                {
                     cssBuilder
                         .Add($"{prefix}__content");
                 })
-                .Apply("border", cssBuilder => {
+                .Apply("border", cssBuilder =>
+                {
                     cssBuilder
                         .Add($"{prefix}__border");
                 });

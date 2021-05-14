@@ -86,10 +86,7 @@ namespace MASA.Blazor
                     styleBuilder
                         .AddTextColor(Color, () => IsActive)
                         .AddFirstIf(
-                            (() => Size.Value.Match(
-                                 str => $"font-size: {str}",
-                                 num => $"font-size: {num}px"),
-                               () => Size.HasValue),
+                            (() => $"font-size: {Size.ToUnit()}", () => Size != null),
                             (() => $"font-size: {XLARGE}", () => XLarge),
                             (() => $"font-size: {LARGE}", () => Large),
                             (() => $"font-size: {DENSE}", () => Dense),

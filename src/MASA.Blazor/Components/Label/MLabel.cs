@@ -17,10 +17,10 @@ namespace MASA.Blazor
         public bool Dark { get; set; }
 
         [Parameter]
-        public int Left { get; set; }
+        public StringNumber Left { get; set; }
 
         [Parameter]
-        public int Right { get; set; }
+        public StringNumber Right { get; set; } = "auto";
 
         [Parameter]
         public bool Absolute { get; set; }
@@ -46,8 +46,8 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .Add(() => $"left:{Left}px")
-                        .Add(() => $"right:{(Right == 0 ? "auto" : Right + "px")}")
+                        .Add(() => $"left:{Left.ToUnit()}")
+                        .Add(() => $"right:{Right.ToUnit()}")
                         .Add(() => $"position:{(Absolute ? "absolute" : "relative")}");
                 });
         }

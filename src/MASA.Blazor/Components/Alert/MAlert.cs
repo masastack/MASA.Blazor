@@ -9,8 +9,6 @@ using static MASA.Blazor.Helpers.RenderHelper;
 
 namespace MASA.Blazor
 {
-    using StringNumber = OneOf<string, int>;
-
     public partial class MAlert : BAlert
     {
         private static readonly Dictionary<string, string> _typeIconDict = new()
@@ -25,7 +23,7 @@ namespace MASA.Blazor
         public AlertType? Type { get; set; }
 
         [Parameter]
-        public StringNumber? Elevation { get; set; }
+        public StringNumber Elevation { get; set; }
 
         [Parameter]
         public bool Dark { get; set; }
@@ -73,10 +71,7 @@ namespace MASA.Blazor
                         .Add("m-alert")
                         .Add("m-sheet")
                         .AddTheme(Dark || (Type.HasValue && !ColoredBorder))
-                        .AddIf(() => Elevation.Value.Match(
-                            str => $"elevation-{str}",
-                            num => $"elevation-{num}"
-                            ), () => Elevation.HasValue)
+                        .AddIf(() => $"elevation-{Elevation.Value}", () => Elevation != null)
                         .AddFirstIf(
                             (() => "m-alert--prominent", () => Prominent),
                             (() => "m-alert--dense", () => Dense))

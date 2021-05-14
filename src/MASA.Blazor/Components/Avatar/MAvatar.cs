@@ -23,25 +23,25 @@ namespace MASA.Blazor
         public bool Tile { get; set; }
 
         [Parameter]
-        public int Size { get; set; } = 48;
+        public StringNumber Size { get; set; } = 48;
 
         [Parameter]
-        public int? Height { get; set; }
+        public StringNumber Height { get; set; }
 
         [Parameter]
-        public int? MaxHeight { get; set; }
+        public StringNumber MaxHeight { get; set; }
 
         [Parameter]
-        public int? MaxWidth { get; set; }
+        public StringNumber MaxWidth { get; set; }
 
         [Parameter]
-        public int? MinHeight { get; set; }
+        public StringNumber MinHeight { get; set; }
 
         [Parameter]
-        public int? MinWidth { get; set; }
+        public StringNumber MinWidth { get; set; }
 
         [Parameter]
-        public int? Width { get; set; }
+        public StringNumber Width { get; set; }
 
         [Parameter]
         public string Color { get; set; }
@@ -63,15 +63,15 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .Add($"height:{Size}px")
-                        .Add($"min-width:{Size}px")
-                        .Add($"width:{Size}px")
-                        .AddIf($"height:{Height}px", () => Height != null)
-                        .AddIf($"min-height:{MinHeight}px", () => MinHeight != null)
-                        .AddIf($"min-width:{MinWidth}px", () => MinWidth != null)
-                        .AddIf($"max-height:{MaxHeight}px", () => MaxHeight != null)
-                        .AddIf($"max-width:{MaxWidth}px", () => MaxWidth != null)
-                        .AddIf($"width:{Width}px", () => Width != null);
+                        .AddHeight(Size)
+                        .AddMinWidth(Size)
+                        .AddWidth(Size)
+                        .AddHeight(Height)
+                        .AddWidth(Width)
+                        .AddMinWidth(MinWidth)
+                        .AddMaxWidth(MaxWidth)
+                        .AddMinHeight(MinHeight)
+                        .AddMaxHeight(MaxHeight);
                 });
         }
     }

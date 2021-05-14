@@ -35,12 +35,12 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf(() => $"max-height: {MaxHeight.TryGetNumber().number}px", () => MaxHeight != null)
-                        .AddIf(() => $"min-height: {MinHeight.TryGetNumber().number}px", () => MinHeight != null)
-                        .AddIf(() => $"height: {Height.TryGetNumber().number}px", () => Height != null)
-                        .AddIf(() => $"max-width: {MaxWidth.TryGetNumber().number}px", () => MaxWidth != null)
-                        .AddIf(() => $"min-width: {MinWidth.TryGetNumber().number}px", () => MinWidth != null)
-                        .AddIf(() => $"width: {Width.TryGetNumber().number}px", () => Width != null);
+                        .AddHeight(Height)
+                        .AddWidth(Width)
+                        .AddMinWidth(MinWidth)
+                        .AddMaxWidth(MaxWidth)
+                        .AddMinHeight(MinHeight)
+                        .AddMaxHeight(MaxHeight);
                 })
                 .Apply("resp_sizer", cssBuilder =>
                 {
@@ -65,7 +65,7 @@ namespace MASA.Blazor
                 });
         }
 
-        private static string GenerateRespSizerStyle(Dimensions dimensions, StringOrNumber aspectRatio)
+        private static string GenerateRespSizerStyle(Dimensions dimensions, StringNumber aspectRatio)
         {
             double ratio = 2;
             if (aspectRatio == null)

@@ -43,9 +43,9 @@ namespace MASA.Blazor
 
             CssProvider
                 .AsProvider<BCard>()
-                .Apply(css =>
+                .Apply(cssBuilder =>
                 {
-                    css.Add("m-card")
+                    cssBuilder.Add("m-card")
                         .AddIf("elevation-2", () => !Outlined)
                         .AddTheme(Dark)
                         .Add("m-sheet")
@@ -57,14 +57,15 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--loading", () => Loading)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--raised", () => Raised); ;
-                }, style =>
+                }, styleBuilder =>
                 {
-                    style.AddIf(() => $"max-height: {MaxHeight.TryGetNumber().number}px", () => MaxHeight != null)
-                        .AddIf(() => $"min-height: {MinHeight.TryGetNumber().number}px", () => MinHeight != null)
-                        .AddIf(() => $"height: {Height.TryGetNumber().number}px", () => Height != null)
-                        .AddIf(() => $"max-width: {MaxWidth.TryGetNumber().number}px", () => MaxWidth != null)
-                        .AddIf(() => $"min-width: {MinWidth.TryGetNumber().number}px", () => MinWidth != null)
-                        .AddIf(() => $"width: {Width.TryGetNumber().number}px", () => Width != null);
+                    styleBuilder
+                        .AddHeight(Height)
+                        .AddWidth(Width)
+                        .AddMinWidth(MinWidth)
+                        .AddMaxWidth(MaxWidth)
+                        .AddMinHeight(MinHeight)
+                        .AddMaxHeight(MaxHeight);
                 });
         }
     }

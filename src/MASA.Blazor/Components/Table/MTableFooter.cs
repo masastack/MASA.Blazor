@@ -75,7 +75,7 @@ namespace MASA.Blazor.Components.Table
                     };
                     props[nameof(MSelect<string>.ItemText)] = new Func<string, string>(r => r);
                     props[nameof(MSelect<string>.ItemValue)] = new Func<string, string>(r => r);
-                    props[nameof(MSelect<string>.MinWidth)] = 75;
+                    props[nameof(MSelect<string>.MinWidth)] = (StringNumber)75;
                     props[nameof(MSelect<string>.ValueChanged)] = OnPageSizeChange;
                     props[nameof(MSelect<string>.Value)] = PageSize.ToString();
                 });

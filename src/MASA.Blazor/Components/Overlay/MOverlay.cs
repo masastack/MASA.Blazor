@@ -32,7 +32,7 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .Add($"background-color: {Color}; border-color: {Color}")
+                        .AddBackgroundColor(Color)
                         .Add(() => Value ? $"opacity: {Opacity.TryGetNumber().number}" : "opacity: 0");
                 })
                 .Apply("content", cssBuilder =>

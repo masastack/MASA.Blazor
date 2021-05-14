@@ -14,7 +14,7 @@ namespace MASA.Blazor
         public bool Dark { get; set; }
 
         [Parameter]
-        public int MinWidth { get; set; }
+        public StringNumber MinWidth { get; set; }
 
         private int Width => _visible || _text.Any() ? ComputeLabelLength() * 6 : 0;
 
@@ -54,7 +54,7 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf(() => $"min-width:{MinWidth}px", () => MinWidth != 0);
+                        .AddMinWidth(MinWidth);
                 })
                 .Apply("control", cssBuilder =>
                 {
@@ -117,15 +117,15 @@ namespace MASA.Blazor
                 {
                     props[nameof(MPopover.Class)] = "m-menu__content menuable__content__active";
                     props[nameof(MPopover.Visible)] = (_visible && Items != null);
-                    props[nameof(MPopover.MinWidth)] = (StringOrNumber)_rect?.Width;
-                    props[nameof(MPopover.MaxHeight)] = (StringOrNumber)400;
+                    props[nameof(MPopover.MinWidth)] = (StringNumber)_rect?.Width;
+                    props[nameof(MPopover.MaxHeight)] = (StringNumber)400;
                 })
                 .Apply<BOverlay, MOverlay>(props =>
                 {
                     props[nameof(MOverlay.Value)] = _visible;
                     props[nameof(MOverlay.Click)] =
                         EventCallback.Factory.Create<MouseEventArgs>(this, () => { _visible = false; });
-                    props[nameof(MOverlay.Opacity)] = (StringOrNumber)0;
+                    props[nameof(MOverlay.Opacity)] = (StringNumber)0;
                 })
                 .Apply<BList, MList>(props =>
                 {

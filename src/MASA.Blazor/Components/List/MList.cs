@@ -9,8 +9,6 @@ using OneOf;
 
 namespace MASA.Blazor
 {
-    using StringNumber = OneOf<string, int>;
-
     public partial class MList : BList
     {
         /// <summary>
@@ -133,7 +131,7 @@ namespace MASA.Blazor
                         .AddIf("m-sheet--shaped", () => Shaped)
                         .AddTheme(Dark)
                         .Add("m-list")
-                        .AddIf($"elevation-{Elevation.Value}", () => Elevation.Value != default)
+                        .AddIf(() => $"elevation-{Elevation.Value}", () => Elevation != null)
                         .AddIf($"{prefix}--dense", () => Dense)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--flat", () => Flat)
@@ -145,12 +143,12 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf($"height:{Height.Value}", () => Height.Value != default)
-                        .AddIf($"minHeight:{MinHeight.Value}", () => MinHeight.Value != default)
-                        .AddIf($"minWidth:{MinWidth.Value}", () => MinWidth.Value != default)
-                        .AddIf($"maxHeight:{MaxHeight.Value}", () => MaxHeight.Value != default)
-                        .AddIf($"maxWidth:{MaxWidth.Value}", () => MaxWidth.Value != default)
-                        .AddIf($"width:{Width.Value}", () => Width.Value != default);
+                        .AddHeight(Height)
+                        .AddWidth(Width)
+                        .AddMinWidth(MinWidth)
+                        .AddMaxWidth(MaxWidth)
+                        .AddMinHeight(MinHeight)
+                        .AddMaxHeight(MaxHeight);
                 });
         }
 

@@ -44,8 +44,8 @@ namespace MASA.Blazor
                 {
                     styleBuilder
                         .Add("transform-origin: center center")
-                        .AddIf(() => $"width: {Width.TryGetNumber().number}px", () => Width != null)
-                        .AddIf(() => $"max-width: {MaxWidth.TryGetNumber().number}px", () => MaxWidth != null)
+                        .AddWidth(Width)
+                        .AddMaxWidth(MaxWidth)
                         .AddIf("display: none", () => !Visible);
                 });
 

@@ -24,8 +24,8 @@ namespace MASA.Blazor
                 {
                     props[nameof(MPopover.Class)] = "m-menu__content menuable__content__active";
                     props[nameof(MPopover.Visible)] = (_visible && Items != null);
-                    props[nameof(MPopover.ClientX)] = (StringOrNumber)Left;
-                    props[nameof(MPopover.ClientY)] = (StringOrNumber)Top;
+                    props[nameof(MPopover.ClientX)] = (StringNumber)Left;
+                    props[nameof(MPopover.ClientY)] = (StringNumber)Top;
                 })
                 .Apply<BSelectSlot, MCascaderSelectSlot>(props =>
                 {
