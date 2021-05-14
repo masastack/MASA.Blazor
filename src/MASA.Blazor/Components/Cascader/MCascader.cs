@@ -1,9 +1,7 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor
@@ -16,6 +14,42 @@ namespace MASA.Blazor
         protected double Left { get; set; }
 
         protected double Top { get; set; }
+
+        private BCascaderNode GetNodeByValue(IEnumerable<BCascaderNode> items, string value)
+        {
+            BCascaderNode result = null;
+
+            foreach (var item in items)
+            {
+                if (item.Value == value)
+                {
+                    result = item;
+                    break;
+                }
+                else if (item.Children != null)
+                {
+                    result = GetNodeByValue(item.Children, value);
+                }
+            }
+
+            return result;
+        }
+
+        protected override List<string> FormatText(string value)
+        {
+            var list = new List<string>();
+            var result = GetNodeByValue(Items, value);
+
+            if (result != null)
+            {
+                var text = IsFull ? string.Join('/', result.GetAllNodes().Select(t => t.Label))
+                : result.Label;
+
+                list.Add(text);
+            }
+
+            return list;
+        }
 
         protected override void SetComponentClass()
         {
@@ -30,7 +64,7 @@ namespace MASA.Blazor
                 .Apply<BSelectSlot, MCascaderSelectSlot>(props =>
                 {
                     props[nameof(MCascaderSelectSlot.Items)] = Items;
-                    props[nameof(MCascaderSelectSlot.SelectNode)] = SelectNode;
+                    //props[nameof(MCascaderSelectSlot.SelectNode)] = SelectNode;
                     props[nameof(MCascaderSelectSlot.Visible)] = _visible;
                     props[nameof(MCascaderSelectSlot.Left)] = Left;
                     props[nameof(MCascaderSelectSlot.Top)] = Top;

@@ -1,9 +1,5 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor
@@ -25,8 +21,8 @@ namespace MASA.Blazor
         [Parameter]
         public EventCallback<MCascaderSelectOption> OnOptionSelect { get; set; }
 
-        [Parameter]
-        public BCascaderNode SelectNode { get; set; }
+        //[Parameter]
+        //public BCascaderNode SelectNode { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -76,7 +72,7 @@ namespace MASA.Blazor
                 {
                     props[nameof(Visible)] = ShowSubItems;
                     props[nameof(Items)] = SubItems;
-                    props[nameof(SelectNode)] = SelectNode;
+                    //props[nameof(SelectNode)] = SelectNode;
                     props[nameof(OnOptionSelect)] = OnOptionSelect;
                     props[nameof(Height)] = Height;
                 });
