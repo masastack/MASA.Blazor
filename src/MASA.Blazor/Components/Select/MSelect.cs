@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MSelect<TItem> : BSelect<TItem>
+    public partial class MSelect<TItem, TValue> : BSelect<TItem, TValue>
     {
         private BoundingClientRect _rect;
 
@@ -38,7 +38,7 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .AsProvider<BSelect<TItem>>()
+                .AsProvider<BSelect<TItem, TValue>>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
@@ -102,7 +102,7 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-input__icon m-input__icon--append");
                 })
-                .Apply("hit", cssBuilder =>
+                .Apply("hint", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-text--field__details");
@@ -138,14 +138,16 @@ namespace MASA.Blazor
                     if (Multiple)
                     {
                         props[nameof(MListItemGroup.Multiple)] = Multiple;
-                        props[nameof(MListItemGroup.Values)] = Values;
+                        // TODO: change to TValue
+                        props[nameof(MListItemGroup.Values)] = Values.Select(u => u.ToString());
                     }
                     else
                     {
-                        props[nameof(MListItemGroup.Value)] = Value;
+                        // TODO: change to TValue
+                        props[nameof(MListItemGroup.Value)] = Value?.ToString();
                     }
                 })
-                .Apply<BSelectOption<TItem>, MSelectOption<TItem>>()
+                .Apply<BSelectOption<TItem, TValue>, MSelectOption<TItem, TValue>>()
                 .Apply<BChip, MChip>()
                 .Apply<BHitMessage, MHitMessage>();
         }

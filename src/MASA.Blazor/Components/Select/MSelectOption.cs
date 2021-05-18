@@ -1,14 +1,17 @@
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System.Linq;
 
 namespace MASA.Blazor
 {
-    public partial class MSelectOption<TItem> : BSelectOption<TItem>
+    public partial class MSelectOption<TItem, TValue> : BSelectOption<TItem, TValue>
     {
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
+
+            _checked = SelectWrapper.Values.Contains(Value);
 
             SlotProvider
                 .Apply<BListItem, MListItem>(props =>
@@ -19,19 +22,20 @@ namespace MASA.Blazor
                         if (!SelectWrapper.Multiple)
                         {
                             SelectWrapper.SetVisible(false);
-                            await SelectWrapper.SetSelectedAsync(Value);
+
+                            await SelectWrapper.SetSelectedAsync(Label, Value);
                         }
                         else
                         {
-                            if (Checked)
+                            if (_checked)
                             {
-                                Checked = false;
-                                await SelectWrapper.RemoveSelectedAsync(Value);
+                                _checked = false;
+                                await SelectWrapper.RemoveSelectedAsync(Label, Value);
                             }
                             else
                             {
-                                Checked = true;
-                                await SelectWrapper.SetSelectedAsync(Value);
+                                _checked = true;
+                                await SelectWrapper.SetSelectedAsync(Label, Value);
                             }
                         }
                     });
@@ -39,7 +43,7 @@ namespace MASA.Blazor
                 .Apply<BListItemAction, MListItemAction>()
                 .Apply<BCheckbox, MCheckbox>(props =>
                 {
-                    props[nameof(MCheckbox.Checked)] = Checked;
+                    props[nameof(MCheckbox.Checked)] = _checked;
                 })
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>()

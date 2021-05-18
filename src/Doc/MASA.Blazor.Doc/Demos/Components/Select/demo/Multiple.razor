@@ -8,6 +8,8 @@
         <MCol Span="6">
             <MSelect @bind-Values="e6"
                      Items="@states"
+                     ItemText="u => u"
+                     ItemValue="u => u"
                      Label="Select"
                      Multiple
                      Hint="@($"selected values: {string.Join(',', e6)}")">
@@ -21,6 +23,8 @@
         <MCol Span="6">
             <MSelect @bind-Values="e7"
                      Items="@states"
+                     ItemText="u => u"
+                     ItemValue="u => u"
                      Label="Select"
                      Multiple
                      Chips

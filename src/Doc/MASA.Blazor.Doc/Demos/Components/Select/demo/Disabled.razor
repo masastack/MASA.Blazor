@@ -1,11 +1,13 @@
 <MRow Align="center">
-	<MCol Span="12">
-		<MSelect TItem="string" Items="items"
-				 Disabled
-				 Label="Disabled"></MSelect>
-	</MCol>
+    <MCol Span="12">
+        <MSelect Items="items"
+                 ItemText="u => u"
+                 ItemValue="u => u"
+                 Disabled
+                 Label="Disabled"></MSelect>
+    </MCol>
 </MRow>
 
 @code {
-	List<string> items =new() { "item 1", "item 2" };
+    List<string> items = new() { "item 1", "item 2" };
 }

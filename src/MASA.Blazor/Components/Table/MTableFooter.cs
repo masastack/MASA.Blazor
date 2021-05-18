@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using BlazorComponent;
+﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System;
+using System.Collections.Generic;
 
 namespace MASA.Blazor.Components.Table
 {
@@ -64,20 +64,20 @@ namespace MASA.Blazor.Components.Table
                     properties[nameof(MTableFooterButton.HandlePageChange)] = OnNextClick;
                     properties[nameof(MTableFooterButton.Disabled)] = NextDisabled;
                 })
-                .Apply<BSelect<string>, MSelect<string>>(props =>
+                .Apply<BSelect<string, string>, MSelect<string, string>>(props =>
                 {
-                    props[nameof(MSelect<string>.Items)] = new List<string>
+                    props[nameof(MSelect<string, string>.Items)] = new List<string>
                     {
                         "5",
                         "10",
                         "15",
                         "All"
                     };
-                    props[nameof(MSelect<string>.ItemText)] = new Func<string, string>(r => r);
-                    props[nameof(MSelect<string>.ItemValue)] = new Func<string, string>(r => r);
-                    props[nameof(MSelect<string>.MinWidth)] = (StringNumber)75;
-                    props[nameof(MSelect<string>.ValueChanged)] = OnPageSizeChange;
-                    props[nameof(MSelect<string>.Value)] = PageSize.ToString();
+                    props[nameof(MSelect<string, string>.ItemText)] = new Func<string, string>(r => r);
+                    props[nameof(MSelect<string, string>.ItemValue)] = new Func<string, string>(r => r);
+                    props[nameof(MSelect<string, string>.MinWidth)] = (StringNumber)75;
+                    props[nameof(MSelect<string, string>.ValueChanged)] = OnPageSizeChange;
+                    props[nameof(MSelect<string, string>.Value)] = PageSize.ToString();
                 });
         }
     }

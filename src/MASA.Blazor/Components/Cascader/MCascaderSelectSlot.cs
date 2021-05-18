@@ -48,14 +48,14 @@ namespace MASA.Blazor
                 {
                     props[nameof(MListItemGroup.Color)] = "primary";
                 })
-                .Apply<BSelectOption<BCascaderNode>, MCascaderSelectOption>(props =>
+                .Apply<BSelectOption<BCascaderNode, string>, MCascaderSelectOption>(props =>
                 {
                     props[nameof(MCascaderSelectOption.OnOptionClick)] = EventCallback.Factory.Create<MCascaderSelectOption>(this, async option =>
                      {
-                         if (option.Value.Children != null && option.Value.Children.Count > 0)
+                         if (option.Item.Children != null && option.Item.Children.Count > 0)
                          {
                              ShowSubItems = true;
-                             SubItems = option.Value.Children;
+                             SubItems = option.Item.Children;
                          }
                          else
                          {

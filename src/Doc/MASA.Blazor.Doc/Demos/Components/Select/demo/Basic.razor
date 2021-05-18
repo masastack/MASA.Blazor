@@ -10,12 +10,15 @@
     </MCol>
     <MCol Span="6">
         <MSelect @bind-Value="@value2"
+                 TItem="Item"
+                 TValue="string"
                  Label="Filled style"
                  Filled
-                 Items="@items"
-                 ItemText="u => u.Label"
-                 ItemValue="u => u.Value"
                  Hint="@($"selected value: {@value2}")">
+            @foreach (var item in items)
+            {
+                <MSelectOption TItem="Item" TValue="string" Label="@item.Label" Value="@item.Value" />
+            }
         </MSelect>
     </MCol>
 

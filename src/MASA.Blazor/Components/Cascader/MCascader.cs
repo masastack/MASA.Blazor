@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MCascader : MSelect<BCascaderNode>
+    public partial class MCascader : MSelect<BCascaderNode, string>
     {
         [Parameter]
         public bool IsFull { get; set; }
@@ -21,6 +21,8 @@ namespace MASA.Blazor
 
             foreach (var item in items)
             {
+                if (result != null) break;
+
                 if (item.Value == value)
                 {
                     result = item;
@@ -41,18 +43,18 @@ namespace MASA.Blazor
             var result = GetNodeByValue(Items, value);
 
             if (result != null)
-            {
-                var text = IsFull ? string.Join('/', result.GetAllNodes().Select(t => t.Label))
-                : result.Label;
-
-                list.Add(text);
-            }
+                list.Add(ItemText(result));
 
             return list;
         }
 
         protected override void SetComponentClass()
         {
+            Slot = true;
+            Outlined = true;
+            ItemText = r => IsFull ? string.Join('/', r.GetAllNodes().Select(t => t.Label)) : r.Label;
+            ItemValue = r => r.Value;
+
             SlotProvider
                 .Apply<BPopover, MCascaderPopover>(props =>
                 {
@@ -69,17 +71,12 @@ namespace MASA.Blazor
                     props[nameof(MCascaderSelectSlot.Left)] = Left;
                     props[nameof(MCascaderSelectSlot.Top)] = Top;
                     props[nameof(MCascaderSelectSlot.OnOptionSelect)] = EventCallback.Factory.Create<MCascaderSelectOption>(this, async option =>
-                     {
-                         await SetSelectedAsync(option.Value);
-                     });
+                    {
+                        await SetSelectedAsync(ItemText(option.Item), option.Value);
+                    });
                 });
 
             base.SetComponentClass();
-
-            Slot = true;
-            Outlined = true;
-            ItemText = r => IsFull ? string.Join('/', r.GetAllNodes().Select(t => t.Label)) : r.Label;
-            ItemValue = r => r.Value;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -90,40 +87,8 @@ namespace MASA.Blazor
                 Left = rect.Left;
                 Top = rect.Top + rect.Height;
 
-                if (!string.IsNullOrEmpty(Value))
-                {
-                    var nodes = new List<BCascaderNode>();
-                    var node = GetNode(Value, Items);
-                    if (node != null)
-                    {
-                        await SetSelectedAsync(node);
-                    }
-                }
-
                 StateHasChanged();
             }
-        }
-
-        private BCascaderNode GetNode(string value, IReadOnlyList<BCascaderNode> items)
-        {
-            if (items == null || items.Count == 0)
-            {
-                return null;
-            }
-
-            foreach (var item in items)
-            {
-                if (item.Value == value)
-                {
-                    return item;
-                }
-                else
-                {
-                    return GetNode(value, item.Children);
-                }
-            }
-
-            return null;
         }
     }
 }

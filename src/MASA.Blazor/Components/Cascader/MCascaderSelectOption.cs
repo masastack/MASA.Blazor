@@ -1,15 +1,10 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MCascaderSelectOption : MSelectOption<BCascaderNode>
+    public partial class MCascaderSelectOption : MSelectOption<BCascaderNode, string>
     {
         [Parameter]
         public EventCallback<MCascaderSelectOption> OnOptionClick { get; set; }
@@ -30,7 +25,7 @@ namespace MASA.Blazor
                 });
 
             base.SetComponentClass();
-            Icon = Value.Children != null && Value.Children.Count > 0 ? "mdi-chevron-right" : string.Empty;
+            Icon = Item.Children != null && Item.Children.Count > 0 ? "mdi-chevron-right" : string.Empty;
         }
     }
 }
