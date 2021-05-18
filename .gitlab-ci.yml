@@ -1,7 +1,6 @@
 stages:
   - packer
   - docker
-  - deploy
 
 packer:
   image: proget-hz.lonsid.cn/masa-images/library/dotnet:6.0
@@ -37,11 +36,3 @@ docker:
     - docker push $IMAGE
     - docker tag $IMAGE $LATEST
     - docker push $LATEST
-
-deploy:
-  image: buildpack-deps
-  stage: deploy
-  only:
-    - branches
-  script:
-    - bash redeploy.sh
