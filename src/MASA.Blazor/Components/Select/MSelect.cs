@@ -8,7 +8,10 @@ namespace MASA.Blazor
 {
     public partial class MSelect<TItem, TValue> : BSelect<TItem, TValue>
     {
-        private BoundingClientRect _rect;
+        private double _clientX;
+        private double _clientY;
+
+        private BoundingClientRect _activatorRect = new BoundingClientRect();
 
         [Parameter]
         public bool Dark { get; set; }
@@ -30,9 +33,16 @@ namespace MASA.Blazor
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
+                await JsInvokeAsync(JsInteropConstants.AddElementTo, PopoverRef, ".m-application");
+
+            if (_activatorRect.Width == 0)
             {
-                _rect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, Ref);
+                _activatorRect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, Ref);
+
+                _clientX = _activatorRect.Left;
+                _clientY = _activatorRect.Top;
             }
+
         }
 
         protected override void SetComponentClass()
@@ -117,7 +127,9 @@ namespace MASA.Blazor
                 {
                     props[nameof(MPopover.Class)] = "m-menu__content menuable__content__active";
                     props[nameof(MPopover.Visible)] = (_visible && Items != null);
-                    props[nameof(MPopover.MinWidth)] = (StringNumber)_rect?.Width;
+                    props[nameof(MPopover.ClientX)] = (StringNumber)_clientX;
+                    props[nameof(MPopover.ClientY)] = (StringNumber)_clientY;
+                    props[nameof(MPopover.MinWidth)] = (StringNumber)_activatorRect?.Width;
                     props[nameof(MPopover.MaxHeight)] = (StringNumber)400;
                 })
                 .Apply<BOverlay, MOverlay>(props =>
@@ -139,7 +151,7 @@ namespace MASA.Blazor
                     {
                         props[nameof(MListItemGroup.Multiple)] = Multiple;
                         // TODO: change to TValue
-                        props[nameof(MListItemGroup.Values)] = Values.Select(u => u.ToString());
+                        props[nameof(MListItemGroup.Values)] = Values.Select(u => u.ToString()).ToList();
                     }
                     else
                     {

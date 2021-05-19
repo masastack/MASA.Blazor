@@ -22,18 +22,20 @@ namespace MASA.Blazor
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
+                await JsInvokeAsync(JsInteropConstants.AddElementToBody, ContentRef);
+
+            if (_activatorRect.Width == 0)
             {
                 _activatorRect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, Ref);
-                _contentRect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetFirstChildBoundingClientRect, ContentRef);
 
-                Console.WriteLine(JsonSerializer.Serialize(_activatorRect));
-                await JsInvokeAsync(JsInteropConstants.AddElementToBody, ContentRef);
+                _clientX = _activatorRect.Left;
+                _clientY = _activatorRect.Top;
             }
 
-            if (Absolute) return;
+            if (_contentRect.Width == 0)
+                _contentRect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetFirstChildBoundingClientRect, ContentRef);
 
-            _clientX = _activatorRect.Left;
-            _clientY = _activatorRect.Top;
+            if (Absolute) return;
 
             if (Top)
             {

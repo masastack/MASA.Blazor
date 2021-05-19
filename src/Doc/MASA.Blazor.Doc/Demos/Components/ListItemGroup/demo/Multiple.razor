@@ -50,5 +50,5 @@
         }
     };
 
-    IEnumerable<string> selected = _items.Where(u => u.Text == "Star").Select(u => u.Text);
+    List<string> selected = _items.Where(u => u.Text == "Star").Select(u => u.Text).ToList();
 }

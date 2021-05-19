@@ -6,7 +6,7 @@
             <MSubheader>Multiple with persistent hint</MSubheader>
         </MCol>
         <MCol Span="6">
-            <MSelect @bind-Values="e6"
+            <MSelect @bind-Values="@e6"
                      Items="@states"
                      ItemText="u => u"
                      ItemValue="u => u"
@@ -21,7 +21,7 @@
         </MCol>
 
         <MCol Span="6">
-            <MSelect @bind-Values="e7"
+            <MSelect @bind-Values="@e7"
                      Items="@states"
                      ItemText="u => u"
                      ItemValue="u => u"
@@ -36,8 +36,8 @@
 </MContainer>
 
 @code {
-    IEnumerable<string> e6 = new List<string>() { "Alaska" };
-    IEnumerable<string> e7 = new List<string>() { "Alaska" };
+    List<string> e6 = new List<string>() { "Alaska" };
+    List<string> e7 = new List<string>() { "Alaska" };
 
     string[] states =
     {
