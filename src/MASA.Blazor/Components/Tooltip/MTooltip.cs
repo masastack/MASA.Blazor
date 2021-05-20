@@ -6,6 +6,9 @@ namespace MASA.Blazor
 {
     public partial class MTooltip : BTooltip
     {
+        private BoundingClientRect _activatorRect = new();
+        private BoundingClientRect _contentRect = new();
+
         [Parameter]
         public bool Top { get; set; }
 
@@ -62,7 +65,7 @@ namespace MASA.Blazor
                         .Add(() => $"left:{OffsetLeft}px")
                         .Add(() => $"top:{OffsetTop}px")
                         .Add($"opacity:{(IsActive ? 0.9 : 0)}")
-                        .Add("z-index:8")
+                        .Add("z-index:1100")
                         .AddIf("display:none", () => Disabled);
                 })
                 .Apply("activator", styleAction: styleBuilder =>
@@ -76,30 +79,30 @@ namespace MASA.Blazor
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
-            {
-                var activator = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, Ref);
-                var content = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, ContentRef);
-
-                if (Top || Bottom || Unknown)
-                {
-                    OffsetLeft = activator.Left + (activator.Width / 2) - (content.Width / 2);
-                }
-                else if (Left || Right)
-                {
-                    OffsetLeft = activator.Left + (Right ? activator.Width : -(activator.Width * 3 / 2)) + (Right ? 10 : -5);
-                }
-
-                if (Top || Bottom)
-                {
-                    OffsetTop = activator.Top + (Bottom ? activator.Height : -content.Height) + (Bottom ? 10 : -10);
-                }
-                else if (Left || Right)
-                {
-                    OffsetTop = activator.Top + (activator.Height / 2) - (content.Height / 2);
-                }
-
                 await JsInvokeAsync(JsInteropConstants.AddElementToBody, ContentRef);
-                StateHasChanged();
+
+            if (_activatorRect.Width == 0)
+                _activatorRect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, Ref);
+
+            if (_contentRect.Width == 0)
+                _contentRect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, ContentRef);
+
+            if (Top || Bottom || Unknown)
+            {
+                OffsetLeft = _activatorRect.Left + (_activatorRect.Width / 2) - (_contentRect.Width / 2);
+            }
+            else if (Left || Right)
+            {
+                OffsetLeft = _activatorRect.Left + (Right ? _activatorRect.Width : -(_activatorRect.Width * 3 / 2)) + (Right ? 10 : -5);
+            }
+
+            if (Top || Bottom)
+            {
+                OffsetTop = _activatorRect.Top + (Bottom ? _activatorRect.Height : -_contentRect.Height) + (Bottom ? 10 : -10);
+            }
+            else if (Left || Right)
+            {
+                OffsetTop = _activatorRect.Top + (_activatorRect.Height / 2) - (_contentRect.Height / 2);
             }
         }
     }
