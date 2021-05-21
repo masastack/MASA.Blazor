@@ -58,5 +58,22 @@ namespace MASA.Blazor
                 await ValueChanged.InvokeAsync(radio.Value);
             }
         }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            if (firstRender)
+            {
+                foreach (var item in Items)
+                {
+                    if (item.Value.Equals(Value))
+                    {
+                        item.Active();
+                        break;
+                    }
+                }
+
+                StateHasChanged();
+            }
+        }
     }
 }

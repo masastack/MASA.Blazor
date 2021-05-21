@@ -1,15 +1,11 @@
-﻿<div class="text-center ma-2">
-    <MRadioGroup Value="1" Row="true">
+﻿<div>
+    <label>@_value</label>
+    <MRadioGroup @bind-Value="_value" Row="true">
         <MRadio Label="radio 1" Value="1"></MRadio>
         <MRadio Label="radio 2" Value="2"></MRadio>
     </MRadioGroup>
 </div>
 
-@code{
-    private bool _show;
-
-    public void Show()
-    {
-        _show = true;
-    }
+@code {
+    private int _value = 1;
 }
