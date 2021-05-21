@@ -13,8 +13,8 @@ namespace MASA.Blazor
         private double _clientY;
         private double _minWidth;
 
-        private BoundingClientRect _activatorRect = new BoundingClientRect();
-        private BoundingClientRect _contentRect = new BoundingClientRect();
+        private HtmlElement _activatorRect = new HtmlElement();
+        private HtmlElement _contentRect = new HtmlElement();
 
         [Parameter]
         public bool Dark { get; set; }
@@ -24,37 +24,35 @@ namespace MASA.Blazor
             if (firstRender)
                 await JsInvokeAsync(JsInteropConstants.AddElementToBody, ContentRef);
 
-            if (_activatorRect.Width == 0)
-            {
-                _activatorRect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, Ref);
+            if (_activatorRect.ClientWidth == 0)
+                _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
 
-                _clientX = _activatorRect.Left;
-                _clientY = _activatorRect.Top;
-            }
-
-            if (_contentRect.Width == 0)
-                _contentRect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetFirstChildBoundingClientRect, ContentRef);
+            if (_contentRect.ClientWidth == 0)
+                _contentRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, ContentRef);
 
             if (Absolute) return;
 
+            _clientX = _activatorRect.AbsoluteLeft;
+            _clientY = _activatorRect.AbsoluteTop;
+
             if (Top)
             {
-                _clientY -= _contentRect.Height - _activatorRect.Height;
+                _clientY -= _contentRect.ClientHeight - _activatorRect.ClientHeight;
 
-                if (OffsetY) _clientY -= _activatorRect.Height;
+                if (OffsetY) _clientY -= _activatorRect.ClientHeight;
             }
             else
             {
-                if (OffsetY) _clientY += _activatorRect.Height;
+                if (OffsetY) _clientY += _activatorRect.ClientHeight;
             }
 
             if (Left)
             {
-                if (OffsetX) _clientX -= _activatorRect.Width;
+                if (OffsetX) _clientX -= _activatorRect.ClientWidth;
             }
             else
             {
-                if (OffsetX) _clientX += _activatorRect.Width;
+                if (OffsetX) _clientX += _activatorRect.ClientWidth;
             }
 
             if (NudgeTop != null) _clientY -= NudgeTop.TryGetNumber().number;
@@ -65,7 +63,7 @@ namespace MASA.Blazor
 
             if (NudgeRight != null) _clientX -= NudgeRight.TryGetNumber().number;
 
-            _minWidth = _activatorRect.Width;
+            _minWidth = _activatorRect.ClientWidth;
             if (NudgeWidth != null) _minWidth += NudgeWidth.TryGetNumber().number;
         }
 
@@ -118,8 +116,8 @@ namespace MASA.Blazor
             {
                 Console.WriteLine(JsonSerializer.Serialize(args));
 
-                _clientX = _activatorRect.Left + args.OffsetX;
-                _clientY = _activatorRect.Top + args.OffsetY;
+                _clientX = _activatorRect.AbsoluteLeft + args.OffsetX;
+                _clientY = _activatorRect.AbsoluteTop + args.OffsetY;
             }
 
             _visible = true;

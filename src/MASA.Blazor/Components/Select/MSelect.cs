@@ -8,10 +8,7 @@ namespace MASA.Blazor
 {
     public partial class MSelect<TItem, TValue> : BSelect<TItem, TValue>
     {
-        private double _clientX;
-        private double _clientY;
-
-        private BoundingClientRect _activatorRect = new BoundingClientRect();
+        private HtmlElement _activatorRect = new HtmlElement();
 
         [Parameter]
         public bool Dark { get; set; }
@@ -34,15 +31,6 @@ namespace MASA.Blazor
         {
             if (firstRender)
                 await JsInvokeAsync(JsInteropConstants.AddElementTo, PopoverRef, ".m-application");
-
-            if (_activatorRect.Width == 0)
-            {
-                _activatorRect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, Ref);
-
-                _clientX = _activatorRect.Left;
-                _clientY = _activatorRect.Top;
-            }
-
         }
 
         protected override void SetComponentClass()
@@ -125,11 +113,21 @@ namespace MASA.Blazor
                 })
                 .Apply<BPopover, MPopover>(props =>
                 {
-                    props[nameof(MPopover.Class)] = "m-menu__content menuable__content__active";
+                    var css = "m-menu__content menuable__content__active";
+                    var clientX = _activatorRect.AbsoluteLeft;
+                    var clientY = _activatorRect.AbsoluteTop;
+                    if (Fixed)
+                    {
+                        css += " m-menu__content--fixed";
+                        clientX = _activatorRect.RelativeLeft;
+                        clientY = _activatorRect.RelativeTop;
+                    };
+
+                    props[nameof(MPopover.Class)] = css;
                     props[nameof(MPopover.Visible)] = (_visible && Items != null);
-                    props[nameof(MPopover.ClientX)] = (StringNumber)_clientX;
-                    props[nameof(MPopover.ClientY)] = (StringNumber)_clientY;
-                    props[nameof(MPopover.MinWidth)] = (StringNumber)_activatorRect?.Width;
+                    props[nameof(MPopover.ClientX)] = (StringNumber)clientX;
+                    props[nameof(MPopover.ClientY)] = (StringNumber)clientY;
+                    props[nameof(MPopover.MinWidth)] = (StringNumber)_activatorRect.ClientWidth;
                     props[nameof(MPopover.MaxHeight)] = (StringNumber)400;
                 })
                 .Apply<BOverlay, MOverlay>(props =>
@@ -162,6 +160,13 @@ namespace MASA.Blazor
                 .Apply<BSelectOption<TItem, TValue>, MSelectOption<TItem, TValue>>()
                 .Apply<BChip, MChip>()
                 .Apply<BHitMessage, MHitMessage>();
+        }
+
+        protected override async Task Click(MouseEventArgs args)
+        {
+            _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
+
+            await base.Click(args);
         }
 
         private int ComputeLabelLength()

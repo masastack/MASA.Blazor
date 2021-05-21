@@ -83,9 +83,9 @@ namespace MASA.Blazor
         {
             if (firstRender)
             {
-                var rect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, Ref);
-                Left = rect.Left;
-                Top = rect.Top + rect.Height;
+                var rect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
+                Left = rect.AbsoluteLeft;
+                Top = rect.AbsoluteTop + rect.ClientHeight;
 
                 StateHasChanged();
             }

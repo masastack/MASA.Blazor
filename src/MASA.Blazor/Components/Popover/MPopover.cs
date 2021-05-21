@@ -16,7 +16,6 @@ namespace MASA.Blazor
                          .AddMinWidth(MinWidth)
                          .AddMaxHeight(MaxHeight)
                          .AddFirstIf(
-                             ("position: absolute", () => Visible),
                              ("display: none", () => !Visible)
                          );
                  });

@@ -82,8 +82,8 @@ namespace MASA.Blazor
         {
             if (ShowSubItems && Height == null)
             {
-                var rect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, Ref);
-                Height = rect.Height;
+                var rect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
+                Height = rect.ClientHeight;
 
                 StateHasChanged();
             }

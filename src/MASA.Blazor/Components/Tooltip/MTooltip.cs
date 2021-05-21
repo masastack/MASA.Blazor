@@ -6,8 +6,8 @@ namespace MASA.Blazor
 {
     public partial class MTooltip : BTooltip
     {
-        private BoundingClientRect _activatorRect = new();
-        private BoundingClientRect _contentRect = new();
+        private HtmlElement _activatorRect = new();
+        private HtmlElement _contentRect = new();
 
         [Parameter]
         public bool Top { get; set; }
@@ -81,28 +81,28 @@ namespace MASA.Blazor
             if (firstRender)
                 await JsInvokeAsync(JsInteropConstants.AddElementToBody, ContentRef);
 
-            if (_activatorRect.Width == 0)
-                _activatorRect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, Ref);
+            if (_activatorRect.ClientWidth == 0)
+                _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
 
-            if (_contentRect.Width == 0)
-                _contentRect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, ContentRef);
+            if (_contentRect.ClientWidth == 0)
+                _contentRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, ContentRef);
 
             if (Top || Bottom || Unknown)
             {
-                OffsetLeft = _activatorRect.Left + (_activatorRect.Width / 2) - (_contentRect.Width / 2);
+                OffsetLeft = _activatorRect.AbsoluteLeft + (_activatorRect.ClientWidth / 2) - (_contentRect.ClientWidth / 2);
             }
             else if (Left || Right)
             {
-                OffsetLeft = _activatorRect.Left + (Right ? _activatorRect.Width : -(_activatorRect.Width * 3 / 2)) + (Right ? 10 : -5);
+                OffsetLeft = _activatorRect.AbsoluteLeft + (Right ? _activatorRect.ClientWidth : -(_activatorRect.ClientWidth * 3 / 2)) + (Right ? 10 : -5);
             }
 
             if (Top || Bottom)
             {
-                OffsetTop = _activatorRect.Top + (Bottom ? _activatorRect.Height : -_contentRect.Height) + (Bottom ? 10 : -10);
+                OffsetTop = _activatorRect.AbsoluteTop + (Bottom ? _activatorRect.ClientHeight : -_contentRect.ClientHeight) + (Bottom ? 10 : -10);
             }
             else if (Left || Right)
             {
-                OffsetTop = _activatorRect.Top + (_activatorRect.Height / 2) - (_contentRect.Height / 2);
+                OffsetTop = _activatorRect.AbsoluteTop + (_activatorRect.ClientHeight / 2) - (_contentRect.ClientHeight / 2);
             }
         }
     }
