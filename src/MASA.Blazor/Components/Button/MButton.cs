@@ -1,6 +1,6 @@
 ﻿using BlazorComponent;
-using MASA.Blazor.Helpers;
 using Microsoft.AspNetCore.Components;
+using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
@@ -77,6 +77,17 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-btn__loader");
                 });
+        }
+
+        protected override Task OnInitializedAsync()
+        {
+            SlotProvider.Apply<BProcessCircular, MProcessCircular>(prop =>
+            {
+                prop[nameof(MProcessCircular.Size)] = (StringNumber)23;
+                prop[nameof(MProcessCircular.Indeterminate)] = true;
+            });
+
+            return base.OnInitializedAsync();
         }
     }
 }

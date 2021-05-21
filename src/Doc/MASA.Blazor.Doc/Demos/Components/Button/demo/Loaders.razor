@@ -1,6 +1,5 @@
 ﻿<div style="text-align:center">
 	<MButton Style="margin-right: 8px"
-			LoadingFragment="LoadingFragment"
 			 Loading="loading"
 			 Disabled="loading"
 			 Color="secondary"
@@ -9,7 +8,6 @@
 	</MButton>
 
 	<MButton Style="margin-right: 8px"
-			 LoadingFragment="LoadingFragment"
 			 Loading="loading2"
 			 Disabled="loading2"
 			 Color="blue-grey"
@@ -21,25 +19,32 @@
 	</MButton>
 
 	<MButton Style="margin-right: 8px"
-			 LoadingFragment="LoadingTemplate"
 			 Loading="loading3"
 			 Disabled="loading3"
 			 Color="success"
 			 Click="OnClick3">
-		Custom Loader
+		<Loader>
+			<span>Loading...</span>
+		</Loader>
+		<ChildContent>
+			Custom Loader 
+		</ChildContent>
 	</MButton>
 
 	<MButton Style="margin-right: 8px"
-			 LoadingFragment="LoadingTemplate4"
 			 Loading="loading4"
 			 Disabled="loading4"
 			 Color="info"
 			 Click="OnClick4">
-		Icon Loader
+		<Loader>
+			<span class="custom-loader"><MIcon>mdi-cached</MIcon></span>
+		</Loader>
+		<ChildContent>
+			Icon Loader
+		</ChildContent>
 	</MButton>
 
-	<MButton LoadingFragment="LoadingFragment"
-			 Loading="loading5"
+	<MButton Loading="loading5"
 			 Disabled="loading5"
 			 Color="blue-grey"
 			 Fab
@@ -51,18 +56,6 @@
 </div>
 
 @code {
-	private RenderFragment LoadingFragment =
-	@<MProcessCircular Indeterminate Size="23"></MProcessCircular>
-	;
-
-	private RenderFragment LoadingTemplate =
-	@<span>Loading...</span>
-	;
-
-	private RenderFragment LoadingTemplate4 =
-	@<span class="custom-loader"><MIcon>mdi-cached</MIcon></span>
-	;
-
 	private bool loading = false;
 	private void OnClick()
 	{
