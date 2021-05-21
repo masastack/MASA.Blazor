@@ -29,13 +29,11 @@ docker:
   only:
     - branches
   services:
-    - name: docker:17.05.0-dind 
-      command: ["dockerd-entrypoint.sh","--insecure-registry=proget-hz.lonsid.cn"]
+    - name: proget-hz.lonsid.cn/masa-images/library/docker:17.05.01-dind
   script:
     - docker login -u gitlabci -p gitlabci http://proget-hz.lonsid.cn
     - docker build -t $IMAGE .
     - docker push $IMAGE
-
 
 deploy:
   image: zhu1531/rancher
