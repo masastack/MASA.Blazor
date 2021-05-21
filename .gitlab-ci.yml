@@ -1,6 +1,11 @@
 stages:
   - packer
   - docker
+  - deploy
+
+variables:
+  DOCKER_HOST: tcp://localhost:2375/
+  IMAGE: proget-hz.lonsid.cn/masa-images/library/masa.blazor.docs:0.1.$CI_PIPELINE_ID
 
 packer:
   image: proget-hz.lonsid.cn/masa-images/library/dotnet:6.0
@@ -23,10 +28,6 @@ docker:
   stage: docker
   only:
     - branches
-  variables:
-    DOCKER_HOST: tcp://localhost:2375/
-    IMAGE: proget-hz.lonsid.cn/masa-images/library/masa.blazor.docs:0.1.$CI_PIPELINE_ID
-    LATEST: proget-hz.lonsid.cn/masa-images/library/masa.blazor.docs
   services:
     - name: docker:17.05.0-dind 
       command: ["dockerd-entrypoint.sh","--insecure-registry=proget-hz.lonsid.cn"]
@@ -34,5 +35,12 @@ docker:
     - docker login -u gitlabci -p gitlabci http://proget-hz.lonsid.cn
     - docker build -t $IMAGE .
     - docker push $IMAGE
-    - docker tag $IMAGE $LATEST
-    - docker push $LATEST
+
+
+deploy:
+  image: zhu1531/rancher
+  stage: deploy
+  only:
+    - branches
+  script:
+    - rancher kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n dev-techs-preview
