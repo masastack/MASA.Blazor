@@ -16,13 +16,13 @@ namespace MASA.Blazor
         public ThemeOptions Theme { get; set; } = new ThemeOptions()
         {
             CombinePrefix = ".m-application",
-            Primary = "#1976D2",
-            Secondary = "#5cbbf6",
-            Accent = "#82B1FF",
+            Primary = "#1867C0",
+            Secondary = "#5CBBF6",
+            Accent = "#005CAF",
             Error = "#FF5252",
             Info = "#2196F3",
             Success = "#4CAF50",
-            Warning = "#FFC107",
+            Warning = "#FB8C00",
             UserDefined = new Dictionary<string, string>() { { "Tertiary", "#e57373" } },
         };
     }

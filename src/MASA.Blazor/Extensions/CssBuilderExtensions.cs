@@ -21,6 +21,19 @@ namespace BlazorComponent
             return cssBuilder;
         }
 
+        public static CssBuilder AddElevation(this CssBuilder cssBuilder, int? elevation)
+        {
+            cssBuilder
+                .AddIf($"elevation-{elevation}", () => elevation != null);
+
+            return cssBuilder;
+        }
+
+        public static CssBuilder AddBackgroundColor(this CssBuilder cssBuilder, string color)
+        {
+            return cssBuilder.AddColor(color, false, () => true);
+        }
+
         public static CssBuilder AddColor(this CssBuilder cssBuilder, string color, bool isText = false)
         {
             return cssBuilder.AddColor(color, isText, () => true);
