@@ -1,5 +1,7 @@
 ﻿using BlazorComponent;
 using MASA.Blazor;
+using MASA.Blazor.Model;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -10,7 +12,17 @@ namespace Microsoft.Extensions.DependencyInjection
             InitBlazorComponentVariables(options);
 
             services.AddBlazorComponent();
+            return services;
+        }
 
+        public static IServiceCollection AddMasaBlazor(this IServiceCollection services, Action<MasaBlazorOptionsBuilder> builderAction)
+        {
+            var builder = new MasaBlazorOptionsBuilder(services);
+            builderAction?.Invoke(builder);
+
+            InitBlazorComponentVariables(builder.Options);
+
+            services.AddBlazorComponent();
             return services;
         }
 
