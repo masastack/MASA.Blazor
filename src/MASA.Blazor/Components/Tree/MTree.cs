@@ -32,7 +32,7 @@ namespace MASA.Blazor
                         .Add("m-treeview-node__children");
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BTreeItem<T>, MTreeItem<T>>(props =>
                 {
                     props[nameof(MTreeItem<T>.HandleItemClick)] = HandleItemClick;

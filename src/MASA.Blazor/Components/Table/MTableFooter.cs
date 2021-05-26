@@ -51,7 +51,7 @@ namespace MASA.Blazor.Components.Table
                     cssBuilder.Add("m-data-footer__icons-after");
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BButton, MTableFooterButton>("prev", properties =>
                 {
                     properties[nameof(MTableFooterButton.IconName)] = "mdi-chevron-left";

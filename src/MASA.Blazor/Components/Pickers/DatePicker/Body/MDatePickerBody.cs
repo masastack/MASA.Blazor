@@ -25,7 +25,7 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            SlotProvider
+            AbstractProvider
                 .Apply<BDatePickerYears, MDatePickerYears>(props =>
                 {
                     props[nameof(MDatePickerYears.Color)] = Component.Color;

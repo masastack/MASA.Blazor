@@ -110,7 +110,7 @@ namespace MASA.Blazor
                         .Add("m-picker--date");
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<IPickerTitle, MDatePickerTitle>(props =>
                 {
                     props[nameof(MDatePickerTitle.Year)] = (StringNumber)Value.Year;

@@ -36,7 +36,7 @@ namespace MASA.Blazor
                         .Add("cursor:default");
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BTreeItem<T>, MTreeItem<T>>(props =>
                 {
                     props[nameof(HandleItemClick)] = HandleItemClick;

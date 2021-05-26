@@ -26,7 +26,7 @@ namespace MASA.Blazor
                         .AddIf("m-date-picker-title--disabled", () => Disabled);
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BDatePickerTitleButton, MDatePickerTittleButton>("year-btn",props =>
                 {
                     props[nameof(Class)] = "m-date-picker-title__year";

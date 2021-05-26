@@ -106,7 +106,7 @@ namespace MASA.Blazor
                         .Add("m-text--field__details");
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BIcon, MIcon>(props =>
                 {
                     props[nameof(MIcon.Class)] = _visible ? "primary--text" : "";

@@ -132,7 +132,7 @@ namespace MASA.Blazor
                         .Add($"{prefix}__action");
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BButton, MSnackbarButton>(props =>
                 {
                     props[nameof(MSnackbarButton.Text)] = true;

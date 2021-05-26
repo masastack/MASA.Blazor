@@ -33,11 +33,12 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--no-resize", () => AutoGrow || NoResize);
                 });
 
-            SlotProvider.Merge<BInputSlot>(properties =>
-            {
-                properties[nameof(MInputSlot.Rows)] = Rows;
-                properties[nameof(MInputSlot.IsTextArea)] = true;
-            });
+            AbstractProvider
+                .Merge<IInputBody>(properties =>
+                {
+                    properties[nameof(MInputBody.Rows)] = Rows;
+                    properties[nameof(MInputBody.IsTextArea)] = true;
+                });
         }
     }
 }

@@ -11,7 +11,7 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            SlotProvider
+            AbstractProvider
                 .Apply<BListItem, MListItem>(props =>
                 {
                     props[nameof(MListItem.Key)] = Key;

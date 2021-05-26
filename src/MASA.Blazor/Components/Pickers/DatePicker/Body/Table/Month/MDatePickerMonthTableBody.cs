@@ -11,7 +11,7 @@ namespace MASA.Blazor
     {
         protected override void SetComponentClass()
         {
-            SlotProvider
+            AbstractProvider
                 .Apply<BButton, MButton>(props =>
                 {
                     props[nameof(MButton.Text)] = true;

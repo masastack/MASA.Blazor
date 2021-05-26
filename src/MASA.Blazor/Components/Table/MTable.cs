@@ -61,7 +61,7 @@ namespace MASA.Blazor
                         .AddHeight(Height);
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BTableLoading, MTableLoading>()
                 .Apply<BTableHeader, MTableHeader>(properties =>
                 {

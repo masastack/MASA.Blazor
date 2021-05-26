@@ -28,7 +28,7 @@ namespace MASA.Blazor
                         .Add("padding:0");
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BProcessLinear, MProcessLinear>(properties =>
                 {
                     properties[nameof(MProcessLinear.Color)] = "primary";

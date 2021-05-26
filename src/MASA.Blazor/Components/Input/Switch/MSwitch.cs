@@ -19,14 +19,6 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            SlotProvider
-                .Apply<BInputSlot, MSwitchInputSlot>(props =>
-                {
-                    props[nameof(MSwitchInputSlot.ValidationState)] = ValidationState;
-                    props[nameof(MSwitchInputSlot.IsActive)] = IsActive ?? false;
-                    props[nameof(MSwitchInputSlot.Label)] = Label;
-                });
-
             base.SetComponentClass();
 
             var prefix = "m-input";
@@ -38,17 +30,23 @@ namespace MASA.Blazor
                         .Add($"{prefix}--switch")
                         .AddIf($"{prefix}--switch--flat", () => Flat)
                         .AddIf($"{prefix}--switch--inset", () => Inset)
-                        .AddIf($"{ValidationState}--text", () => IsActive ?? false);
+                        .AddIf($"{ValidationState}--text", () => IsActive);
                 });
 
-            IsActive = false;
+            AbstractProvider
+                .Apply<IInputBody, MSwitchInputBody>(props =>
+                {
+                    props[nameof(MSwitchInputBody.ValidationState)] = ValidationState;
+                    props[nameof(MSwitchInputBody.IsActive)] = IsActive;
+                    props[nameof(MSwitchInputBody.Label)] = Label;
+                });
         }
 
         protected override async Task HandleClick(MouseEventArgs args)
         {
             IsActive = !IsActive;
 
-            Value = IsActive ?? false;
+            Value = IsActive;
             if (ValueChanged.HasDelegate)
             {
                 await ValueChanged.InvokeAsync(Value);

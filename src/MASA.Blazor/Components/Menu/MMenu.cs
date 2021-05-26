@@ -77,7 +77,7 @@ namespace MASA.Blazor
                         .Add("position:relative; display:inline-block");
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BPopover, MPopover>(props =>
                 {
                     props[nameof(MPopover.Class)] = "m-menu__content menuable__content__active";

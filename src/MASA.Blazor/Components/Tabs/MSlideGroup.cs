@@ -25,7 +25,7 @@ namespace MASA.Blazor
                          .Add($"{prefix}__wrapper");
                  });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BSlideGroupSlot, MSlideGroupSlot>();
         }
     }

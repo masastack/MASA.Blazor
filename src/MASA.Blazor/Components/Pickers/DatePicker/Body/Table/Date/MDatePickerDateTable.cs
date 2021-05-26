@@ -25,7 +25,7 @@ namespace MASA.Blazor
                         .Add("m-date-picker-table--date");
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<IDatePickerTableBody, MDatePickerDateTableBody>(props =>
                 {
                     props[nameof(MDatePickerDateTableBody.Component)] = this;

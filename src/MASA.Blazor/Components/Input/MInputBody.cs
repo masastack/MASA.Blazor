@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MInputSlot : BInputSlot
+    public partial class MInputBody : BInputBody
     {
-        public int Width => Active ? ComputeLabeLength() * 6 : 0;
+        public int Width => IsActive ? ComputeLabeLength() * 6 : 0;
 
         private int ComputeLabeLength()
         {
@@ -49,12 +49,12 @@ namespace MASA.Blazor
                         .Add(() => $"width:{Width}px");
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BLabel, MLabel>(properties =>
                 {
                     properties[nameof(MLabel.Value)] = Label;
                     properties[nameof(MLabel.Absolute)] = true;
-                    properties[nameof(MLabel.Active)] = Active;
+                    properties[nameof(MLabel.Active)] = IsActive;
                 });
         }
     }

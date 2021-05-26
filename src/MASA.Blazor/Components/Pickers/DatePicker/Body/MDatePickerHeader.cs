@@ -44,7 +44,7 @@ namespace MASA.Blazor
                         .AddTextColor(Color);
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BButton, MButton>(props =>
                 {
                     props[nameof(MButton.Dark)] = Dark;

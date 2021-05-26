@@ -9,22 +9,13 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MSwitchInputSlot : BInputSlot
+    public partial class MSwitchInputBody : BSwitchInputBody,IInputBody
     {
-        [Parameter]
-        public bool IsDisabled { get; set; }
-
-        [Parameter]
-        public bool IsActive { get; set; }
-
         [Parameter]
         public string ValidationState { get; set; }
 
         [Parameter]
         public bool Dark { get; set; }
-
-        [Parameter]
-        public EventCallback<MouseEventArgs> Click { get; set; }
 
         protected override void SetComponentClass()
         {

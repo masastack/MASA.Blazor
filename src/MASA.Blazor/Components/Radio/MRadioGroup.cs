@@ -33,8 +33,8 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--radio-group--row", () => Row);
                 });
 
-            SlotProvider
-                .Apply<BInputSlot, MRadioGroupInputSlot>();
+            AbstractProvider
+                .Apply<IInputBody, MRadioGroupInputBody>();
         }
 
         public void AddRadio(MRadio<TValue> radio)

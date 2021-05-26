@@ -55,7 +55,7 @@ namespace MASA.Blazor
             ItemText = r => IsFull ? string.Join('/', r.GetAllNodes().Select(t => t.Label)) : r.Label;
             ItemValue = r => r.Value;
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BPopover, MCascaderPopover>(props =>
                 {
                     props[nameof(MPopover.Class)] = "m-menu__content menuable__content__active";

@@ -49,7 +49,7 @@ namespace MASA.Blazor
                         .AddIf("display: none", () => !Visible);
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BPopover, MPopover>(props =>
                 {
                     props[nameof(MPopover.Visible)] = Visible;

@@ -100,7 +100,7 @@ namespace MASA.Blazor
                         .AddIf(() => $"width:{SlideWidth.ToUnit()}", () => SlideWidth != null);
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<ITabsBar, MTabsBar>()
                 .Apply<ITabsItems, MTabsItems>()
                 .Apply<BTabsSlider, MTabsSlider>();

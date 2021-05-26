@@ -52,7 +52,7 @@ namespace MASA.Blazor
                         .AddTextColor(ValidationState, () => IsActive);
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BIcon, MIcon>(props =>
                 {
                     props[nameof(MIcon.Color)] = ValidationState;

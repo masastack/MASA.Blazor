@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using BlazorComponent;
@@ -35,7 +36,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool IsBooted { get; set; } = true;
 
-        public bool Enclosed => Filled || IsSolo || Outlined;
+        protected bool Enclosed => Filled || IsSolo || Outlined;
 
         [Parameter]
         public bool Outlined { get; set; }
@@ -54,12 +55,7 @@ namespace MASA.Blazor
         [Parameter]
         public string Type { get; set; }
 
-        [Parameter]
-        public EventCallback<ValidatorArgs> Validator { get; set; }
-
-        public bool ShowLabel => (!string.IsNullOrEmpty(Label) && !IsSolo) || (string.IsNullOrEmpty(Value) && IsSolo && !IsFocused);
-
-        protected bool Active { get; set; }
+        protected bool ShowLabel => (!string.IsNullOrEmpty(Label) && !IsSolo) || (string.IsNullOrEmpty(Value) && IsSolo && !IsFocused);
 
         protected override void SetComponentClass()
         {
@@ -85,47 +81,33 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--placeholder", () => !string.IsNullOrEmpty(Placeholder))
                         .AddIf($"{prefix}--rounded", () => Rounded)
                         .AddIf($"{prefix}--shaped", () => Shaped)
-                        .AddIf("primary--text", () => Active);
+                        .AddIf("primary--text", () => IsActive);
                 });
 
-            SlotProvider
-                .Apply<BInputSlot, MInputSlot>(properties =>
+            AbstractProvider
+                .Apply<IInputBody, MInputBody>(properties =>
                 {
-                    properties[nameof(MInputSlot.Label)] = Label;
-                    properties[nameof(MInputSlot.ShowLabel)] = ShowLabel;
-                    properties[nameof(MInputSlot.Active)] = Active || !string.IsNullOrEmpty(Value);
-                    properties[nameof(MInputSlot.HandleBlur)] = EventCallback.Factory.Create(this, async () =>
-                     {
-                         Active = false;
-                         IsFocused = false;
-
-                         if (Validator.HasDelegate)
-                         {
-                             Messages = new List<string>();
-                             await Validator.InvokeAsync(new ValidatorArgs(Value, Messages));
-                         }
-                     });
-                    properties[nameof(MInputSlot.Value)] = Value;
-                    properties[nameof(MInputSlot.ValueChanged)] = EventCallback.Factory.Create<string>(this, async value =>
-                     {
-                         Value = value;
-
-                         if (ValueChanged.HasDelegate)
-                         {
-                             await ValueChanged.InvokeAsync(value);
-                         }
-                     });
-                    properties[nameof(MInputSlot.PlaceHolder)] = IsFocused ? Placeholder : "";
-                    properties[nameof(MInputSlot.Outlined)] = Outlined;
-                    properties[nameof(MInputSlot.Type)] = Type;
-                    properties[nameof(MInputSlot.IsTextField)] = true;
+                    properties[nameof(MInputBody.Label)] = Label;
+                    properties[nameof(MInputBody.ShowLabel)] = ShowLabel;
+                    properties[nameof(MInputBody.IsActive)] = IsActive || !string.IsNullOrEmpty(Value);
+                    properties[nameof(MInputBody.OnBlur)] = EventCallback.Factory.Create<FocusEventArgs>(this, () =>
+                    {
+                        IsActive = false;
+                        IsFocused = false;
+                    });
+                    properties[nameof(MInputBody.Value)] = Value;
+                    properties[nameof(MInputBody.ValueChanged)] = ValueChanged;
+                    properties[nameof(MInputBody.PlaceHolder)] = IsFocused ? Placeholder : "";
+                    properties[nameof(MInputBody.Outlined)] = Outlined;
+                    properties[nameof(MInputBody.Type)] = Type;
+                    properties[nameof(MInputBody.IsTextField)] = true;
                 });
             ValidationState = "error";
         }
 
         protected override Task HandleClick(MouseEventArgs args)
         {
-            Active = true;
+            IsActive = true;
             IsFocused = true;
 
             return Task.CompletedTask;

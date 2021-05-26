@@ -18,7 +18,7 @@ namespace MASA.Blazor
                     style.Add("padding: 8px 0");
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BList, MList>(prop =>
                 {
                     prop[nameof(MList.Style)] = Files.Any() ? "" : "padding:0";

@@ -13,7 +13,7 @@ namespace MASA.Blazor
 
             _checked = SelectWrapper.Values.Contains(Value);
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BListItem, MListItem>(props =>
                 {
                     props[nameof(MListItem.Key)] = Key;

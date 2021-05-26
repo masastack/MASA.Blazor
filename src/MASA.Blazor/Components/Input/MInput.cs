@@ -1,23 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace MASA.Blazor
 {
     public partial class MInput<TValue> : BInput
     {
-        [Parameter]
-        public bool HasState { get; set; }
+        private bool _init;
+        private TValue _value;
 
         [Parameter]
-        public TValue Value { get; set; }
+        public TValue Value
+        {
+            get
+            {
+                return _value;
+            }
+            set
+            {
+                if (!EqualityComparer<TValue>.Default.Equals(_value, value))
+                {
+                    _value = value;
+
+                    if (EditContext != null && _init)
+                    {
+                        EditContext.NotifyFieldChanged(FieldIdentifier);
+                    }
+                }
+            }
+        }
 
         [Parameter]
         public EventCallback<TValue> ValueChanged { get; set; }
+
+        [Parameter]
+        public Expression<Func<TValue>> ValueExpression { get; set; }
+
+        protected FieldIdentifier FieldIdentifier { get; set; }
+
+        [CascadingParameter]
+        public EditContext EditContext { get; set; }
 
         [Parameter]
         public bool IsDisabled { get; set; }
@@ -43,7 +71,10 @@ namespace MASA.Blazor
         [Parameter]
         public string ValidationState { get; set; } = "primary";
 
-        protected bool? IsActive { get; set; }
+        [Parameter]
+        public bool HasState { get; set; }
+
+        protected bool IsActive { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -55,8 +86,8 @@ namespace MASA.Blazor
                         .Add(prefix)
                         .AddIf($"{prefix}--has-state", () => HasState)
                         .AddIf($"{prefix}--hide-details", () => !ShowDetails)
-                        .AddIf($"{prefix}--is-label-active", () => IsActive ?? Value != null)
-                        .AddIf($"{prefix}--is-dirty", () => IsActive ?? Value != null)
+                        .AddIf($"{prefix}--is-label-active", () => IsActive)
+                        .AddIf($"{prefix}--is-dirty", () => IsActive)
                         .AddIf($"{prefix}--is-disabled", () => IsDisabled)
                         .AddIf($"{prefix}--is-focused", () => IsFocused)
                         .AddIf($"{prefix}--is-loading", () => Loading)
@@ -89,12 +120,39 @@ namespace MASA.Blazor
                         .AddHeight(Height);
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BMessage, MMessage>(properties =>
                 {
                     properties[nameof(MMessage.Color)] = ValidationState;
                     properties[nameof(MMessage.Value)] = Messages;
                 });
+        }
+
+        protected override void OnParametersSet()
+        {
+            if (ValueExpression != null && EditContext != null && !_init)
+            {
+                FieldIdentifier = FieldIdentifier.Create(ValueExpression);
+                EditContext.OnValidationStateChanged += EditContext_OnValidationStateChanged;
+
+                _init = true;
+            }
+        }
+
+        private void EditContext_OnValidationStateChanged(object sender, ValidationStateChangedEventArgs e)
+        {
+            Messages = EditContext.GetValidationMessages(FieldIdentifier).ToList();
+            StateHasChanged();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            if (EditContext != null)
+            {
+                EditContext.OnValidationStateChanged -= EditContext_OnValidationStateChanged;
+            }
         }
     }
 }

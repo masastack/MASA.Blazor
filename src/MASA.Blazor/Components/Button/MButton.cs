@@ -81,11 +81,12 @@ namespace MASA.Blazor
 
         protected override Task OnInitializedAsync()
         {
-            SlotProvider.Apply<BProcessCircular, MProcessCircular>(prop =>
-            {
-                prop[nameof(MProcessCircular.Size)] = (StringNumber)23;
-                prop[nameof(MProcessCircular.Indeterminate)] = true;
-            });
+            AbstractProvider
+                .Apply<BProcessCircular, MProcessCircular>(prop =>
+                {
+                    prop[nameof(MProcessCircular.Size)] = (StringNumber)23;
+                    prop[nameof(MProcessCircular.Indeterminate)] = true;
+                });
 
             return base.OnInitializedAsync();
         }

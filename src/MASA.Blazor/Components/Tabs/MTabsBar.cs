@@ -30,7 +30,7 @@ namespace MASA.Blazor
                         .AddTextColor(Color);
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Merge<BSlideGroupSlot>(props =>
                 {
                     props[nameof(Class)] = "m-tabs-bar__content";

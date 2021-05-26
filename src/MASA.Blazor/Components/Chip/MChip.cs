@@ -66,7 +66,7 @@ namespace MASA.Blazor
                          .Add("m-chip__content");
                  });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BIcon, MChipCloseIcon>(props =>
                 {
                     props[nameof(MChipCloseIcon.Right)] = true;

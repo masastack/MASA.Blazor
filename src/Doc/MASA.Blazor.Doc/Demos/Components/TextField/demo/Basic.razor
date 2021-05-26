@@ -1,61 +1,62 @@
-﻿
-<MForm>
-<MContainer>
-    <MRow>
-        <MCol Span="12" Sm="6" Md="3">
-            <MTextField Label="Regular" @bind-Value="_value"></MTextField>
-        </MCol>
-        <MCol Span="12" Sm="6" Md="3">
-            <MTextField Label="Regular" Placeholder="PlaceHolder"></MTextField>
-        </MCol>
-        <MCol Span="12" Sm="6" Md="3">
-            <MTextField Label="Solo" IsSolo="true"></MTextField>
-        </MCol>
-        <MCol Span="12" Sm="6" Md="3">
-            <MTextField Label="Solo" IsSolo="true" Placeholder="PlaceHolder"></MTextField>
-        </MCol>
-    </MRow>
-    <MRow>
-        <MCol Span="12" Sm="6" Md="3">
-            <MTextField Label="Filled" Filled="true"></MTextField>
-        </MCol>
-        <MCol Span="12" Sm="6" Md="3">
-            <MTextField Label="Filled" Filled="true" Placeholder="PlaceHolder"></MTextField>
-        </MCol>
-        <MCol Span="12" Sm="6" Md="3">
-            <MTextField Label="测试" Outlined="true"></MTextField>
-        </MCol>
-        <MCol Span="12" Sm="6" Md="3">
-            <MTextField Label="Outlined" Outlined="true" Placeholder="PlaceHolder"></MTextField>
-        </MCol>
-    </MRow>
-    <MRow>
-        <MCol Span="12" Sm="6" Md="3">
-            <MTextField Type="password" Label="password" @bind-Value="_value" Validator="ValidatePassword"></MTextField>
-        </MCol>
-        <MCol Span="12" Sm="6" Md="3">
-            <MTextField Label="Regular" Placeholder="PlaceHolder"></MTextField>
-        </MCol>
-        <MCol Span="12" Sm="6" Md="3">
-            <MTextField Label="Solo" IsSolo="true"></MTextField>
-        </MCol>
-        <MCol Span="12" Sm="6" Md="3">
-            <MTextField Label="Solo" IsSolo="true" Placeholder="PlaceHolder"></MTextField>
-        </MCol>
-    </MRow>
-</MContainer>
+﻿@using System.ComponentModel.DataAnnotations
+
+<MForm Model="_person" EnableDataAnnotationsValidation="true">
+    <MContainer>
+        <MRow>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextField Label="Regular" @bind-Value="_person.Name"></MTextField>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextField Label="Regular" Placeholder="PlaceHolder"></MTextField>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextField Label="Solo" IsSolo="true"></MTextField>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextField Label="Solo" IsSolo="true" Placeholder="PlaceHolder"></MTextField>
+            </MCol>
+        </MRow>
+        <MRow>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextField Label="Filled" Filled="true"></MTextField>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextField Label="Filled" Filled="true" Placeholder="PlaceHolder"></MTextField>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextField Label="测试" Outlined="true"></MTextField>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextField Label="Outlined" Outlined="true" Placeholder="PlaceHolder"></MTextField>
+            </MCol>
+        </MRow>
+        <MRow>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextField Type="password" Label="password"></MTextField>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextField Label="Regular" Placeholder="PlaceHolder"></MTextField>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextField Label="Solo" IsSolo="true"></MTextField>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextField Label="Solo" IsSolo="true" Placeholder="PlaceHolder"></MTextField>
+            </MCol>
+        </MRow>
+    </MContainer>
 </MForm>
 
-@code{
-    private List<string> _messages = new()
+@code {
+    public class Person
     {
-        "text required",
-        "required"
-    };
-    private string _value = "12";
-
-    public void ValidatePassword(ValidatorArgs args)
-    {
-        args.Messages.Add("required");
+        [StringLength(5)]
+        [Required]
+        public string Name { get; set; }
     }
+
+    private Person _person = new Person
+    {
+        Name = "zhangsan"
+    };
 }

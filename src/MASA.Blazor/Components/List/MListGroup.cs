@@ -49,7 +49,7 @@ namespace MASA.Blazor
                         .AddIf("display:none", () => !IsActive);
                 });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BListItem, MListGroupItem>(props =>
                 {
                     props[nameof(MListGroupItem.IsActive)] = IsActive;

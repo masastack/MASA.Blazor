@@ -42,7 +42,7 @@ namespace MASA.Blazor
                          .AddIf("border-right: 1px solid #f0f0f0", () => ShowSubItems);
                  });
 
-            SlotProvider
+            AbstractProvider
                 .Apply<BList, MList>()
                 .Apply<BListItemGroup, MListItemGroup>(props =>
                 {
