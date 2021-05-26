@@ -22,7 +22,7 @@ namespace MASA.Blazor
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
-                await JsInvokeAsync(JsInteropConstants.AddElementToBody, ContentRef);
+                await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, ".m-application");
 
             if (_activatorRect.ClientWidth == 0)
                 _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
