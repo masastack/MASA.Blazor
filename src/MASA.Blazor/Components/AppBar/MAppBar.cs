@@ -110,7 +110,7 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                    .Add($"height:{Height.Value}");
+                        .Add($"height:{Height.Value}");
                 });
 
             Attributes.Add("data-booted", true);

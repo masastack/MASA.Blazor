@@ -123,7 +123,7 @@ namespace MASA.Blazor
             _visible = true;
         }
 
-        protected override void MouseOver(MouseEventArgs args)
+        protected override void MouseEnter(MouseEventArgs args)
         {
             if (OpenOnHover && !_visible)
             {

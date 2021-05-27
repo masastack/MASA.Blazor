@@ -2,6 +2,7 @@
 using MASA.Blazor;
 using MASA.Blazor.Model;
 using System;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

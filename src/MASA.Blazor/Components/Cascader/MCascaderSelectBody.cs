@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MCascaderSelectSlot : BCascaderSelectSlot
+    public partial class MCascaderSelectBody : BCascaderSelectBody
     {
         [Parameter]
         public bool Visible { get; set; }
@@ -21,13 +21,10 @@ namespace MASA.Blazor
         [Parameter]
         public EventCallback<MCascaderSelectOption> OnOptionSelect { get; set; }
 
-        //[Parameter]
-        //public BCascaderNode SelectNode { get; set; }
-
         protected override void SetComponentClass()
         {
             CssProvider
-                .Apply<BCascaderSelectSlot>(cssBuilder =>
+                .Apply<BCascaderSelectBody>(cssBuilder =>
                 {
                     cssBuilder
                       .Add("m-application");
@@ -68,11 +65,10 @@ namespace MASA.Blazor
                          }
                      });
                 })
-                .Apply<BCascaderSelectSlot, MCascaderSelectSlot>(props =>
+                .Apply<BCascaderSelectBody, MCascaderSelectBody>(props =>
                 {
                     props[nameof(Visible)] = ShowSubItems;
                     props[nameof(Items)] = SubItems;
-                    //props[nameof(SelectNode)] = SelectNode;
                     props[nameof(OnOptionSelect)] = OnOptionSelect;
                     props[nameof(Height)] = Height;
                 });

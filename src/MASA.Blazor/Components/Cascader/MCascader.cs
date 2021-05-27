@@ -50,7 +50,7 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            Slot = true;
+            HasBody = true;
             Outlined = true;
             ItemText = r => IsFull ? string.Join('/', r.GetAllNodes().Select(t => t.Label)) : r.Label;
             ItemValue = r => r.Value;
@@ -63,14 +63,13 @@ namespace MASA.Blazor
                     props[nameof(MPopover.ClientX)] = (StringNumber)Left;
                     props[nameof(MPopover.ClientY)] = (StringNumber)Top;
                 })
-                .Apply<BSelectSlot, MCascaderSelectSlot>(props =>
+                .Apply<ISelectBody, MCascaderSelectBody>(props =>
                 {
-                    props[nameof(MCascaderSelectSlot.Items)] = Items;
-                    //props[nameof(MCascaderSelectSlot.SelectNode)] = SelectNode;
-                    props[nameof(MCascaderSelectSlot.Visible)] = _visible;
-                    props[nameof(MCascaderSelectSlot.Left)] = Left;
-                    props[nameof(MCascaderSelectSlot.Top)] = Top;
-                    props[nameof(MCascaderSelectSlot.OnOptionSelect)] = EventCallback.Factory.Create<MCascaderSelectOption>(this, async option =>
+                    props[nameof(MCascaderSelectBody.Items)] = Items;
+                    props[nameof(MCascaderSelectBody.Visible)] = _visible;
+                    props[nameof(MCascaderSelectBody.Left)] = Left;
+                    props[nameof(MCascaderSelectBody.Top)] = Top;
+                    props[nameof(MCascaderSelectBody.OnOptionSelect)] = EventCallback.Factory.Create<MCascaderSelectOption>(this, async option =>
                     {
                         await SetSelectedAsync(ItemText(option.Item), option.Value);
                     });
