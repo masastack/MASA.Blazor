@@ -35,10 +35,10 @@ docker:
     - docker build -t $IMAGE .
     - docker push $IMAGE
 
-deploy:
-  image: zhu1531/rancher
-  stage: deploy
-  only:
-    - branches
-  script:
-    - rancher kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n dev-techs-preview
+# deploy:
+#   image: zhu1531/rancher
+#   stage: deploy
+#   only:
+#     - branches
+#   script:
+#     - rancher kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n dev-techs-preview
