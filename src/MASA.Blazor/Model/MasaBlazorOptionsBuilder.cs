@@ -20,13 +20,6 @@ namespace MASA.Blazor.Model
 
         internal IServiceCollection Services { get; }
 
-        public MasaBlazorOptionsBuilder UseExceptionFilter<TExceptionFilter>()
-            where TExceptionFilter : class, IExceptionFilter
-        {
-            Services.AddSingleton<IExceptionFilter, TExceptionFilter>();
-            return this;
-        }
-
         public MasaBlazorOptionsBuilder UseDarkTheme()
         {
             Options.DarkTheme = true;
