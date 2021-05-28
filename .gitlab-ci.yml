@@ -13,7 +13,7 @@ packer:
   only:
     - branches
   script:
-    - git clone -b develop https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
+    - git clone -b develop http://gitlab-hz.lonsid.cn/MASA-Stack/BlazorComponent.git ./src/BlazorComponent
     - dotnet build src
     - dotnet pack src --include-symbols -p:PackageVersion=0.1.0.$CI_PIPELINE_ID
     - dotnet nuget push "**/*.symbols.nupkg" --source gitlab
@@ -35,10 +35,10 @@ docker:
     - docker build -t $IMAGE .
     - docker push $IMAGE
 
-# deploy:
-#   image: zhu1531/rancher
-#   stage: deploy
-#   only:
-#     - branches
-#   script:
-#     - rancher kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n dev-techs-preview
+deploy:
+  image: zhu1531/rancher
+  stage: deploy
+  only:
+    - branches
+  script:
+    - rancher kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n dev-techs-preview
