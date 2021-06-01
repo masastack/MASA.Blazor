@@ -13,6 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection
             InitBlazorComponentVariables(options);
 
             services.AddBlazorComponent();
+            services.TryAddSingleton<IExceptionFilterProvider, ExceptionFilterProvider>();
+
             return services;
         }
 
@@ -24,6 +26,8 @@ namespace Microsoft.Extensions.DependencyInjection
             InitBlazorComponentVariables(builder.Options);
 
             services.AddBlazorComponent();
+            services.TryAddSingleton<IExceptionFilterProvider, ExceptionFilterProvider>();
+
             return services;
         }
 
