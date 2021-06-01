@@ -12,10 +12,15 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .Apply<BTableHeader>(cssBuilder =>
+                .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-data-table-header");
+                })
+                .Apply("th", cssBuilder =>
+                {
+                    cssBuilder
+                            .AddIf(() => $"text-{Align}", () => !string.IsNullOrEmpty(Align));
                 });
         }
     }

@@ -13,6 +13,8 @@ namespace MASA.Blazor
 {
     public partial class MTable<TItem> : BTable<TItem>
     {
+        private bool _scrollRight;
+
         [Parameter]
         public bool Dense { get; set; }
 
@@ -24,6 +26,12 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool Dark { get; set; }
+
+        [Parameter]
+        public bool FixedRight { get; set; }
+
+        [Parameter]
+        public StringNumber Width { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -45,11 +53,23 @@ namespace MASA.Blazor
                 .Apply("wrap", cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-data-table__wrapper");
+                        .Add("m-data-table__wrapper")
+                        .AddIf("fixed-right", () => FixedRight)
+                        .AddIf("not-scroll-right", () => !_scrollRight);
                 }, styleBuilder =>
                 {
                     styleBuilder
                         .AddHeight(Height);
+                })
+                .Apply("table", styleAction: styleBuilder =>
+                {
+                    styleBuilder
+                        .AddWidth(Width);
+                })
+                .Apply("stripe", cssBuilder =>
+                {
+                    cssBuilder
+                        .AddIf("stripe", () => Stripe);
                 })
                 .Apply("empty", cssBuilder =>
                 {
@@ -66,6 +86,7 @@ namespace MASA.Blazor
                 .Apply<BTableHeader, MTableHeader>(properties =>
                 {
                     properties[nameof(MTableHeader.Headers)] = Headers;
+                    properties[nameof(MTableHeader.Align)] = Align;
                 })
                 .Apply<BTableFooter, MTableFooter>(properties =>
                 {
@@ -101,6 +122,38 @@ namespace MASA.Blazor
                         }
                     });
                 });
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender && Width == null && FixedRight)
+            {
+                var element = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, WrapRef);
+                Width = element.ClientWidth * 1.5;
+
+                StateHasChanged();
+            }
+        }
+
+        public override async Task HandleScrollAsync(EventArgs args)
+        {
+            if (FixedRight)
+            {
+                var element = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, WrapRef);
+                if (element.ScrollWidth == element.ScrollLeft + element.ClientWidth)
+                {
+                    _scrollRight = true;
+                    StateHasChanged();
+                }
+                else
+                {
+                    if (_scrollRight)
+                    {
+                        _scrollRight = false;
+                        StateHasChanged();
+                    }
+                }
+            }
         }
     }
 }

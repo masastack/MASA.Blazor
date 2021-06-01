@@ -1,0 +1,68 @@
+﻿/*extend-class*/
+.m-data-table > .m-data-table__wrapper.not-scroll-right > table > tbody > tr > td:last-child::after {
+    box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 15%);
+}
+
+.m-data-table > .m-data-table__wrapper.not-scroll-right > table > thead > tr > th:last-child::after {
+    box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 15%);
+}
+
+.m-data-table > .m-data-table__wrapper.fixed-right {
+    overflow-x: scroll;
+}
+
+    .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child {
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        z-index: 2;
+        background-color: #fff;
+        right: 0px;
+    }
+
+        .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child::after {
+            position: absolute;
+            top: 0;
+            bottom: -1px;
+            left: 0;
+            width: 30px;
+            transform: translateX(-100%);
+            transition: box-shadow .3s;
+            content: '';
+            pointer-events: none;
+        }
+
+    .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr:hover > td:last-child {
+        background-color: inherit;
+    }
+
+    .m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child {
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        z-index: 2;
+        background-color: #fff;
+        right: 0px;
+    }
+
+        .m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child::after {
+            position: absolute;
+            top: 0;
+            bottom: -1px;
+            left: 0;
+            width: 30px;
+            transform: translateX(-100%);
+            transition: box-shadow .3s;
+            content: '';
+            pointer-events: none;
+        }
+
+.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe > td {
+    background-color: #fafafa;
+}
+
+.theme--light.m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe:hover:not(.m-data-table__expanded__content):not(.m-data-table__empty-wrapper) > td {
+    background: #eeeeee;
+}
+
+.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr.stripe > td:last-child {
+    background-color: #fafafa;
+}

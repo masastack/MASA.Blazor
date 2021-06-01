@@ -11,10 +11,15 @@ namespace MASA.Blazor
     public partial class MTableCol : BTableCol
     {
         [Parameter]
-        public string Align { get; set; } = "start";
+        public string Align { get; set; }
 
         [Parameter]
         public bool Divider { get; set; }
+
+        [CascadingParameter(Name = "TableAlign")]
+        public string TableAlign { get; set; }
+
+        public string ComputedAlign => Align ?? TableAlign;
 
         protected override void SetComponentClass()
         {
@@ -22,7 +27,7 @@ namespace MASA.Blazor
                 .Apply(typeof(BTableCol), cssBuilder =>
                 {
                     cssBuilder
-                        .AddIf(() => $"text-{Align}", () => !string.IsNullOrEmpty(Align))
+                        .AddIf(() => $"text-{ComputedAlign}", () => !string.IsNullOrEmpty(ComputedAlign))
                         .AddIf("m-data-table__divider", () => Divider);
                 });
         }

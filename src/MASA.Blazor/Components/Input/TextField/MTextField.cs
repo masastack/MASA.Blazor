@@ -82,6 +82,11 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--rounded", () => Rounded)
                         .AddIf($"{prefix}--shaped", () => Shaped)
                         .AddIf("primary--text", () => IsActive);
+                })
+                .Merge("details", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-text-field__details");
                 });
 
             AbstractProvider

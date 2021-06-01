@@ -1,0 +1,46 @@
+﻿@using System.ComponentModel.DataAnnotations
+
+<MCard>
+    <MRow>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="测试" Dense="true" Outlined="true"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="测试" Dense="true" Outlined="true"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="测试" Dense="true" Outlined="true"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="测试" Dense="true" Outlined="true"></MTextField>
+        </MCol>
+    </MRow>
+    <MRow>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="测试" Dense="true" Outlined="true"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="测试" Dense="true" Outlined="true"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="测试" Dense="true" Outlined="true"></MTextField>
+        </MCol>
+        <MCol Span="12" Sm="6" Md="3">
+            <MTextField Label="测试" Dense="true" Outlined="true"></MTextField>
+        </MCol>
+    </MRow>
+</MCard>
+
+@code {
+    public class Person
+    {
+        [StringLength(5)]
+        [Required]
+        public string Name { get; set; }
+    }
+
+    private Person _person = new Person
+    {
+        Name = "zhangsan"
+    };
+}
