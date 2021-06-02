@@ -34,9 +34,9 @@ namespace MASA.Blazor
                 })
                 .Apply<BButton, MButton>()
                 .Apply<BIcon, MIcon>()
-                .Apply<BHitMessage, MHitMessage>(prop =>
+                .Apply<BHintMessage, MHintMessage>(prop =>
                 {
-                    prop[nameof(MHitMessage.Style)] = "text-align: right";
+                    prop[nameof(MHintMessage.Style)] = "text-align: right";
                 })
                 .Apply<BChip, MChip>(prop =>
                 {

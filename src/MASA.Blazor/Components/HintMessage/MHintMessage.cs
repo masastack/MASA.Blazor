@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MHitMessage : BHitMessage
+    public partial class MHintMessage : BHintMessage
     {
         [Parameter]
         public bool Dark { get; set; }
@@ -13,7 +13,7 @@ namespace MASA.Blazor
             base.SetComponentClass();
 
             CssProvider
-                .AsProvider<BHitMessage>()
+                .AsProvider<BHintMessage>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

@@ -159,7 +159,7 @@ namespace MASA.Blazor
                 })
                 .Apply<BSelectOption<TItem, TValue>, MSelectOption<TItem, TValue>>()
                 .Apply<BChip, MChip>()
-                .Apply<BHitMessage, MHitMessage>();
+                .Apply<BHintMessage, MHintMessage>();
         }
 
         protected override async Task Click(MouseEventArgs args)
