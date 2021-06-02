@@ -9,8 +9,7 @@ namespace MASA.Blazor
         private HtmlElement _activatorRect = new();
         private HtmlElement _contentRect = new();
 
-        [Parameter]
-        public bool Top { get; set; }
+        private bool Top => !(Bottom || Left || Right);
 
         [Parameter]
         public bool Right { get; set; }
@@ -24,15 +23,11 @@ namespace MASA.Blazor
         [Parameter]
         public bool Attached { get; set; }
 
-        public bool ActivatorFixed { get; set; }
-
         [Parameter]
         public int MaxWidth { get; set; }
 
         [Parameter]
         public int MinWidth { get; set; }
-
-        public bool Unknown => !Bottom && !Left && !Top && !Right;
 
         protected double OffsetLeft { get; set; }
 
@@ -58,7 +53,7 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add($"{prefix}__content")
                         .AddIf("menuable__content__active", () => IsActive)
-                        .AddIf($"{prefix}__content--fixed", () => ActivatorFixed);
+                        .AddIf($"{prefix}__content--fixed", () => Fixed);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -71,7 +66,7 @@ namespace MASA.Blazor
                 .Apply("activator", styleAction: styleBuilder =>
                  {
                      styleBuilder
-                         .Add("display:inline-block")
+                         .Add("display:inline-block; width:initial;")
                          .Add(ActivatorStyle);
                  });
         }
@@ -87,23 +82,38 @@ namespace MASA.Blazor
             if (_contentRect.ClientWidth == 0)
                 _contentRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, ContentRef);
 
-            if (Top || Bottom || Unknown)
+            if (Top || Bottom)
             {
-                OffsetLeft = _activatorRect.AbsoluteLeft + (_activatorRect.ClientWidth / 2) - (_contentRect.ClientWidth / 2);
+                OffsetLeft = (Fixed ? _activatorRect.RelativeLeft : _activatorRect.AbsoluteLeft) +
+                    (_activatorRect.ClientWidth / 2) -
+                    (_contentRect.ClientWidth / 2);
             }
             else if (Left || Right)
             {
-                OffsetLeft = _activatorRect.AbsoluteLeft + (Right ? _activatorRect.ClientWidth : -(_activatorRect.ClientWidth * 3 / 2)) + (Right ? 10 : -5);
+                OffsetLeft = (Fixed ? _activatorRect.RelativeLeft : _activatorRect.AbsoluteLeft) +
+                    (Right ? _activatorRect.ClientWidth : -_contentRect.ClientWidth) +
+                    (Right ? 10 : -5);
             }
 
             if (Top || Bottom)
             {
-                OffsetTop = _activatorRect.AbsoluteTop + (Bottom ? _activatorRect.ClientHeight : -_contentRect.ClientHeight) + (Bottom ? 10 : -10);
+                OffsetTop = (Fixed ? _activatorRect.RelativeTop : _activatorRect.AbsoluteTop) +
+                    (Bottom ? _activatorRect.ClientHeight : -_contentRect.ClientHeight) +
+                    (Bottom ? 10 : -10);
             }
             else if (Left || Right)
             {
-                OffsetTop = _activatorRect.AbsoluteTop + (_activatorRect.ClientHeight / 2) - (_contentRect.ClientHeight / 2);
+                OffsetTop = (Fixed ? _activatorRect.RelativeTop : _activatorRect.AbsoluteTop) +
+                    (_activatorRect.ClientHeight / 2) -
+                    (_contentRect.ClientHeight / 2);
             }
+        }
+
+        protected override async Task OnMouseEnter()
+        {
+            await base.OnMouseEnter();
+
+            _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
         }
     }
 }
