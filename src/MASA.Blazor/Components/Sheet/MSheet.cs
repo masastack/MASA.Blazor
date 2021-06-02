@@ -61,7 +61,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--outlined", () => Outlined)
                         .AddIf($"{prefix}--shaped", () => Shaped)
                         .AddTheme(Dark)
-                        .AddIf($"elevation-{Elevation.Value}", () => Elevation.Value != default)
+                        .AddElevation(Elevation)
                         .AddRounded(Tile, Rounded)
                         .AddColor(Color);
                 }, styleBuilder =>

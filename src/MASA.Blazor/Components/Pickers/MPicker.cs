@@ -25,7 +25,7 @@ namespace MASA.Blazor
         public bool Dark { get; set; }
 
         [Parameter]
-        public int? Elevation { get; set; }
+        public StringNumber Elevation { get; set; }
 
         [Parameter]
         public virtual string Color { get; set; }

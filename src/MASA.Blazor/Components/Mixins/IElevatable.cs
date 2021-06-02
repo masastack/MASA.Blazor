@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlazorComponent;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace MASA.Blazor
 {
     public interface IElevatable
     {
-        int? Elevation { get; set; }
+        StringNumber Elevation { get; set; }
     }
 }
