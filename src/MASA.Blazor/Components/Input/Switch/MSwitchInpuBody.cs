@@ -45,6 +45,9 @@ namespace MASA.Blazor
                         .AddIf($"{ValidationState}--text", () => IsActive)
                         .AddTheme(Dark);
                 });
+
+            AbstractProvider
+                .Apply<BLabel, MLabel>();
         }
     }
 }

@@ -40,6 +40,7 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool Outlined { get; set; }
+
         [Parameter]
         public bool Reverse { get; set; }
 
@@ -56,6 +57,8 @@ namespace MASA.Blazor
         public string Type { get; set; }
 
         protected bool ShowLabel => (!string.IsNullOrEmpty(Label) && !IsSolo) || (string.IsNullOrEmpty(Value) && IsSolo && !IsFocused);
+
+        protected InputContext InputContext { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -101,7 +104,7 @@ namespace MASA.Blazor
                         IsFocused = false;
                     });
                     properties[nameof(MInputBody.Value)] = Value;
-                    properties[nameof(MInputBody.ValueChanged)] = ValueChanged;
+                    properties[nameof(MInputBody.InputContext)] = InputContext;
                     properties[nameof(MInputBody.PlaceHolder)] = IsFocused ? Placeholder : "";
                     properties[nameof(MInputBody.Outlined)] = Outlined;
                     properties[nameof(MInputBody.Type)] = Type;
@@ -110,12 +113,30 @@ namespace MASA.Blazor
             ValidationState = "error";
         }
 
-        protected override Task HandleClick(MouseEventArgs args)
+        protected override void OnParametersSet()
+        {
+            if (InputContext == null)
+            {
+                InputContext = new InputContext();
+                InputContext.OnValueChanged += InputContext_OnValueChanged;
+            }
+        }
+
+        private void InputContext_OnValueChanged(string value)
+        {
+            Value = value;
+            if (ValueChanged.HasDelegate)
+            {
+                ValueChanged.InvokeAsync(Value);
+            }
+        }
+
+        protected override async Task HandleClickAsync(MouseEventArgs args)
         {
             IsActive = true;
             IsFocused = true;
 
-            return Task.CompletedTask;
+            await InputContext.InputRef.FocusAsync();
         }
     }
 }

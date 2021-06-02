@@ -42,7 +42,12 @@ namespace MASA.Blazor
                 });
         }
 
-        protected override async Task HandleClick(MouseEventArgs args)
+        protected override void OnParametersSet()
+        {
+            IsActive = Value;
+        }
+
+        protected override async Task HandleClickAsync(MouseEventArgs args)
         {
             IsActive = !IsActive;
 

@@ -1,7 +1,13 @@
-﻿<div class="text-center ma-2">
+﻿<div>
     <MSwitch @bind-Value="_show" Label="Switch 1"></MSwitch>
+    <MButton Click="Test">Test</MButton>
 </div>
 
 @code{
-    private bool _show;
+    private bool _show = true;
+
+    public void Test()
+    {
+        _show = !_show;
+    }
 }

@@ -37,42 +37,55 @@ namespace MASA.Blazor
                 .Apply<IInputBody, MRadioGroupInputBody>();
         }
 
+        protected override void OnParametersSet()
+        {
+            SetActiveRadio();
+        }
+
+        private void SetActiveRadio()
+        {
+            foreach (var radio in Items)
+            {
+                if (EqualityComparer<TValue>.Default.Equals(radio.Value, Value))
+                {
+                    radio.Active();
+                }
+                else
+                {
+                    radio.DeActive();
+                }
+            }
+        }
+
         public void AddRadio(MRadio<TValue> radio)
         {
-            Items.Add(radio);
-            radio.Change = EventCallback.Factory.Create<BRadio<TValue>>(this, UpdateItemsState);
+            if (!Items.Contains(radio))
+            {
+                Items.Add(radio);
+                radio.NotifyChange += UpdateItemsState;
+            }
+
+            SetActiveRadio();
         }
 
         public async Task UpdateItemsState(BRadio<TValue> radio)
         {
             foreach (var item in Items)
             {
-                if (item != radio)
+                if (item == radio)
+                {
+                    item.Active();
+                }
+                else
                 {
                     item.DeActive();
                 }
             }
 
+            Value = radio.Value;
             if (ValueChanged.HasDelegate)
             {
                 await ValueChanged.InvokeAsync(radio.Value);
-            }
-        }
-
-        protected override void OnAfterRender(bool firstRender)
-        {
-            if (firstRender)
-            {
-                foreach (var item in Items)
-                {
-                    if (item.Value.Equals(Value))
-                    {
-                        item.Active();
-                        break;
-                    }
-                }
-
-                StateHasChanged();
             }
         }
     }

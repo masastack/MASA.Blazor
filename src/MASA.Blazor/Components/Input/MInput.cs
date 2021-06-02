@@ -76,6 +76,8 @@ namespace MASA.Blazor
 
         protected bool IsActive { get; set; }
 
+        protected bool IsDirty => !EqualityComparer<TValue>.Default.Equals(Value, default);
+
         protected override void SetComponentClass()
         {
             var prefix = "m-input";
@@ -86,8 +88,8 @@ namespace MASA.Blazor
                         .Add(prefix)
                         .AddIf($"{prefix}--has-state", () => HasState)
                         .AddIf($"{prefix}--hide-details", () => !ShowDetails)
-                        .AddIf($"{prefix}--is-label-active", () => IsActive)
-                        .AddIf($"{prefix}--is-dirty", () => IsActive)
+                        .AddIf($"{prefix}--is-label-active", () => IsDirty)
+                        .AddIf($"{prefix}--is-dirty", () => IsDirty)
                         .AddIf($"{prefix}--is-disabled", () => IsDisabled)
                         .AddIf($"{prefix}--is-focused", () => IsFocused)
                         .AddIf($"{prefix}--is-loading", () => Loading)
