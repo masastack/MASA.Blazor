@@ -54,7 +54,8 @@ namespace MASA.Blazor
                 {
                     properties[nameof(MLabel.Value)] = Label;
                     properties[nameof(MLabel.Absolute)] = true;
-                    properties[nameof(MLabel.Active)] = IsActive;
+                    properties[nameof(MLabel.IsActive)] = IsActive;
+                    properties[nameof(MLabel.IsFocused)] = IsFocused;
                 });
         }
     }

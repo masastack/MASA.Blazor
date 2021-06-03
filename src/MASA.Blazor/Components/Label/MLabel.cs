@@ -26,7 +26,10 @@ namespace MASA.Blazor
         public bool Absolute { get; set; }
 
         [Parameter]
-        public bool Active { get; set; }
+        public bool IsActive { get; set; }
+
+        [Parameter]
+        public bool IsFocused { get; set; }
 
         [Parameter]
         public string Color { get; set; } = "primary";
@@ -39,10 +42,10 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add(prefix)
-                        .AddIf($"{prefix}--active", () => Active)
+                        .AddIf($"{prefix}--active", () => IsActive)
                         .AddIf($"{prefix}--is-disabled", () => Disabled)
                         .AddTheme(Dark)
-                        .AddTextColor(Color, () => Active);
+                        .AddTextColor(Color, () => IsFocused);
                 }, styleBuilder =>
                 {
                     styleBuilder

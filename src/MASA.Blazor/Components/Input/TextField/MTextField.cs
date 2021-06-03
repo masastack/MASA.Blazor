@@ -98,6 +98,7 @@ namespace MASA.Blazor
                     properties[nameof(MInputBody.Label)] = Label;
                     properties[nameof(MInputBody.ShowLabel)] = ShowLabel;
                     properties[nameof(MInputBody.IsActive)] = IsActive || !string.IsNullOrEmpty(Value);
+                    properties[nameof(MInputBody.IsFocused)] = IsFocused;
                     properties[nameof(MInputBody.OnBlur)] = EventCallback.Factory.Create<FocusEventArgs>(this, () =>
                     {
                         IsActive = false;
