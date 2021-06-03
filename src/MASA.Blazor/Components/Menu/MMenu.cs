@@ -1,8 +1,6 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor
@@ -13,8 +11,8 @@ namespace MASA.Blazor
         private double _clientY;
         private double _minWidth;
 
-        private HtmlElement _activatorRect = new HtmlElement();
-        private HtmlElement _contentRect = new HtmlElement();
+        private HtmlElement _activatorRect = new();
+        private HtmlElement _contentRect = new();
 
         [Parameter]
         public bool Dark { get; set; }
@@ -24,47 +22,18 @@ namespace MASA.Blazor
             if (firstRender)
                 await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, ".m-application");
 
-            if (_activatorRect.ClientWidth == 0)
+            if (_activatorRect.OffsetWidth == 0)
                 _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
 
-            if (_contentRect.ClientWidth == 0)
-                _contentRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, ContentRef);
-
-            if (Absolute) return;
-
-            _clientX = _activatorRect.AbsoluteLeft;
-            _clientY = _activatorRect.AbsoluteTop;
-
-            if (Top)
-            {
-                _clientY -= _contentRect.ClientHeight - _activatorRect.ClientHeight;
-
-                if (OffsetY) _clientY -= _activatorRect.ClientHeight;
-            }
-            else
-            {
-                if (OffsetY) _clientY += _activatorRect.ClientHeight;
-            }
-
-            if (Left)
-            {
-                if (OffsetX) _clientX -= _activatorRect.ClientWidth;
-            }
-            else
-            {
-                if (OffsetX) _clientX += _activatorRect.ClientWidth;
-            }
+            _minWidth = _activatorRect.OffsetWidth;
 
             if (NudgeTop != null) _clientY -= NudgeTop.TryGetNumber().number;
-
             if (NudgeBottom != null) _clientY += NudgeBottom.TryGetNumber().number;
-
             if (NudgeLeft != null) _clientX -= NudgeLeft.TryGetNumber().number;
-
             if (NudgeRight != null) _clientX -= NudgeRight.TryGetNumber().number;
-
-            _minWidth = _activatorRect.ClientWidth;
             if (NudgeWidth != null) _minWidth += NudgeWidth.TryGetNumber().number;
+
+            _contentRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetFirstChildDomInfo, ContentRef, ".m-application");
         }
 
         protected override void SetComponentClass()
@@ -108,26 +77,52 @@ namespace MASA.Blazor
                 });
         }
 
-        protected override void Click(MouseEventArgs args)
+        protected override async Task Click(MouseEventArgs args)
         {
             if (Disabled) return;
 
             if (Absolute)
             {
-                Console.WriteLine(JsonSerializer.Serialize(args));
-
                 _clientX = _activatorRect.AbsoluteLeft + args.OffsetX;
                 _clientY = _activatorRect.AbsoluteTop + args.OffsetY;
+            }
+            else
+            {
+                _clientX = _activatorRect.AbsoluteLeft;
+                _clientY = _activatorRect.AbsoluteTop;
+
+                if (Top)
+                {
+                    _clientY -= _contentRect.OffsetHeight - _activatorRect.OffsetHeight;
+
+                    if (OffsetY) _clientY -= _activatorRect.OffsetHeight;
+                }
+                else
+                {
+                    if (OffsetY) _clientY += _activatorRect.OffsetHeight;
+                }
+
+                if (Left)
+                {
+                    if (OffsetX)
+                        _clientX -= _contentRect.OffsetWidth;
+                    else
+                        _clientX -= _contentRect.OffsetWidth - _activatorRect.OffsetWidth;
+                }
+                else
+                {
+                    if (OffsetX) _clientX += _activatorRect.OffsetWidth;
+                }
             }
 
             _visible = true;
         }
 
-        protected override void MouseEnter(MouseEventArgs args)
+        protected override async Task MouseEnter(MouseEventArgs args)
         {
             if (OpenOnHover && !_visible)
             {
-                Click(args);
+                await Click(args);
 
                 _visible = true;
             }
