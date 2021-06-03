@@ -1,0 +1,34 @@
+﻿@namespace MASA.Blazor.Presets
+
+<MNavigationDrawer Temporary Absolute Right Width="@Width" Drawer="Visible" Style="@_style">
+    <MCard Style="height:100%;overflow-y:hidden">
+        <MCardTitle>
+            <span>
+                @Title
+            </span>
+            <MSpacer></MSpacer>
+            <MButton Icon>
+                <MButton Icon Click="HandleOnCancel">
+                    <MIcon>mdi-close</MIcon>
+                </MButton>
+            </MButton>
+        </MCardTitle>
+
+        <MDivider />
+
+        <MCardText Style="overflow:auto;height:calc(100% - 120px)">
+            @ChildContent
+        </MCardText>
+
+        @if (ShowActions)
+        {
+            <MDivider />
+
+            <MCardActions>
+                <MSpacer />
+                <MButton Text Click="HandleOnCancel">@CancelText</MButton>
+                <MButton Text Color="primary" Click="HandleOnOk" Loading="_loading">@OkText</MButton>
+            </MCardActions>
+        }
+    </MCard>
+</MNavigationDrawer>

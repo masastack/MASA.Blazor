@@ -1,0 +1,32 @@
+﻿@namespace MASA.Blazor.Presets
+
+<MDialog @bind-Visible="Visible" Width="@Width" MaxWidth="@MaxWidth" Persistent Scrollable>
+    <MCard>
+        <MCardTitle>
+            <span>
+                @Title
+            </span>
+            <MSpacer></MSpacer>
+            <MButton Icon Click="HandleOnCancel">
+                <MIcon>mdi-close</MIcon>
+            </MButton>
+        </MCardTitle>
+
+        <MDivider />
+
+        <MCardText Style="@BodyStyle">
+            @ChildContent
+        </MCardText>
+
+        @if (ShowActions)
+        {
+            <MDivider />
+
+            <MCardActions>
+                <MSpacer />
+                <MButton Text Click="HandleOnCancel">@CancelText</MButton>
+                <MButton Text Color="primary" Click="HandleOnOk" Loading="_loading">@OkText</MButton>
+            </MCardActions>
+        }
+    </MCard>
+</MDialog>

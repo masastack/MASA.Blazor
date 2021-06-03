@@ -1,0 +1,26 @@
+﻿@namespace MASA.Blazor.Presets
+
+<MDialog @bind-Visible="Visible" Width="360" Persistent Style="z-index: 203">
+    <MCard>
+        <MCardTitle>
+            @if (!string.IsNullOrEmpty(Icon))
+            {
+                <MIcon Color="@IconColor" Style="margin-right: 8px">@Icon</MIcon>
+            }
+            <span>@Title</span>
+        </MCardTitle>
+
+        @if (ChildContent != null)
+        {
+            <MCardText>
+                @ChildContent
+            </MCardText>
+        }
+
+        <MCardActions>
+            <MSpacer />
+            <MButton Text Color="@CancelColor" Click="HandleOnCancel">@CancelText</MButton>
+            <MButton Text Color="@OkColor" Click="HandleOnOk" Loading="_loading">@OkText</MButton>
+        </MCardActions>
+    </MCard>
+</MDialog>

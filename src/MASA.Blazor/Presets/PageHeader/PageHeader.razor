@@ -1,0 +1,72 @@
+﻿@namespace MASA.Blazor.Presets
+
+<div class="body">
+    <div class="header">
+        <h1>@Title</h1>
+        <div class="actions">
+            @LeftActions
+
+            @if (LeftActions != null && Filters != null)
+            {
+                <MDivider Vertical Style="margin: 0 8px" />
+            }
+
+            @if (Filters != null)
+            {
+                @RightActions
+
+                @if (ShowFilters)
+                {
+
+                    <MButton Icon Click="HandleOnSearch" Loading="_loading"><MIcon>mdi-magnify</MIcon></MButton>
+                }
+
+                <MButton Icon Click="() => ShowFilters = !ShowFilters">
+                    @if (ShowFilters)
+                    {
+                        <MIcon>mdi-filter-off-outline</MIcon>
+                    }
+                    else
+                    {
+                        <MIcon>mdi-filter-outline</MIcon>
+                    }
+                </MButton>
+            }
+        </div>
+    </div>
+
+    <MDivider Style="margin: 10px 0 16px 0;" />
+
+    @if (ShowFilters)
+    {
+        <div>
+            @Filters
+        </div>
+    }
+</div>
+
+<style>
+    .body {
+        margin-bottom: 16px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: center;
+        height: 36px;
+    }
+
+        .actions > * {
+            margin: 0 4px;
+        }
+
+            .actions > *:last-child {
+                margin-right: 0px;
+            }
+</style>
