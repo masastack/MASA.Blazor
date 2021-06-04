@@ -1,7 +1,6 @@
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using System.Linq;
 
 namespace MASA.Blazor
 {
@@ -10,8 +9,6 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
-
-            _checked = SelectWrapper.Values.Contains(Value);
 
             AbstractProvider
                 .Apply<BListItem, MListItem>(props =>
@@ -52,6 +49,11 @@ namespace MASA.Blazor
                     props[nameof(Style)] = "margin:12px 0 12px 12px";
                 })
                 .Apply<BIcon, MIcon>();
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            _checked = SelectWrapper.Values.Contains(Value);
         }
     }
 }
