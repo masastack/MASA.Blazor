@@ -15,21 +15,21 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             AbstractProvider
-                .Apply<BButton, MButton>(props =>
+                .Apply<BButton, MDatePickerTableButton>(props =>
                 {
                     props[nameof(MButton.Text)] = true;
                     props[nameof(MButton.Rounded)] = true;
                     props[nameof(MButton.Default)] = false;
-                    props[nameof(MButton.Color)] = "accent";
+                    props[nameof(MButton.Color)] = Color;
                 })
-                .Apply<BButton, MButton>("current-btn", props =>
+                .Apply<BButton, MDatePickerTableButton>("current-btn", props =>
                 {
                     props[nameof(Class)] = "m-date-picker-table__current";
                     props[nameof(MButton.Outlined)] = true;
                     props[nameof(MButton.Rounded)] = true;
                     props[nameof(MButton.Default)] = false;
-                    props[nameof(MButton.Color)] = "accent";
-                    props[nameof(MButton.CurrentDate)] = true;
+                    props[nameof(MButton.Color)] = Color;
+                    props[nameof(MDatePickerTableButton.IsCurrent)] = true;
                 });
         }
     }

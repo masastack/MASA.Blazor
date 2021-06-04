@@ -13,16 +13,9 @@ namespace MASA.Blazor
         public bool Outlined { get; set; }
 
         [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
         public bool Default { get; set; } = true;
 
-        [Parameter]
-        public bool? IsActive { get; set; }
-
-        [Parameter]
-        public bool CurrentDate { get; set; }
+        protected virtual bool HasBackgroud => !(Icon || Plain || Outlined || Text);
 
         protected override void SetComponentClass()
         {
@@ -43,9 +36,9 @@ namespace MASA.Blazor
                         .AddIf("m-btn--icon", () => Icon)
                         .AddIf("m-btn--outlined", () => Outlined)
                         .AddIf("m-btn--plain", () => Plain)
-                        .AddIf("m-btn--text", () => Text && IsActive == null)
+                        .AddIf("m-btn--text", () => Text)
                         .AddIf("m-btn--tile", () => Tile)
-                        .AddIf("m-btn--active", () => IsActive ?? false)
+                        .AddIf("m-btn--active", () => IsActive)
                         .AddFirstIf(
                             ("m-size--x-large", () => XLarge),
                             ("m-size--large", () => Large),
@@ -54,8 +47,8 @@ namespace MASA.Blazor
                             ("m-size--default", () => Default)
                             )
                         .AddTheme(Dark)
-                        .AddColor(Color, (IsActive == null) && (Icon || Outlined || Plain || Text), () => IsActive == null || (IsActive ?? false))
-                        .AddTextColor(Color, () => IsActive != null && IsActive == false && CurrentDate);
+                        .AddBackgroundColor(Color, () => HasBackgroud)
+                        .AddTextColor(Color, () => !HasBackgroud);
                 }, styleBuilder =>
                 {
                     styleBuilder

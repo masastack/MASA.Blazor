@@ -18,7 +18,7 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool Shaped { get; set; }
-        
+
         [Parameter]
         public bool Flat { get; set; }
 
@@ -37,6 +37,9 @@ namespace MASA.Blazor
         [Parameter]
         public bool Raised { get; set; }
 
+        [Parameter]
+        public string Color { get; set; }
+
         protected override void SetComponentClass()
         {
             var prefix = "m-card";
@@ -53,10 +56,11 @@ namespace MASA.Blazor
                         .AddIf("m-sheet--shaped", () => Shaped)
                         .AddIf($"{prefix}--flat", () => Flat)
                         .AddIf($"{prefix}--hover", () => Hover)
-                        .AddIf($"{prefix}--link", () => Link)
+                        .AddIf($"{prefix}--link", () => Link || Click.HasDelegate)
                         .AddIf($"{prefix}--loading", () => Loading)
                         .AddIf($"{prefix}--disabled", () => Disabled)
-                        .AddIf($"{prefix}--raised", () => Raised); ;
+                        .AddIf($"{prefix}--raised", () => Raised)
+                        .AddBackgroundColor(Color);
                 }, styleBuilder =>
                 {
                     styleBuilder

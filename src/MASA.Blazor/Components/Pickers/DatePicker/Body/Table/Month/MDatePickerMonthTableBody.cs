@@ -12,10 +12,10 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             AbstractProvider
-                .Apply<BButton, MButton>(props =>
+                .Apply<BButton, MDatePickerTableButton>(props =>
                 {
                     props[nameof(MButton.Text)] = true;
-                    props[nameof(MButton.Color)] = "accent";
+                    props[nameof(MButton.Color)] = Color;
                 });
         }
     }
