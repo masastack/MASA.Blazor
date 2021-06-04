@@ -1,0 +1,3 @@
+[submodule "src/BlazorComponent"]
+	path = src/BlazorComponent
+	url = http://gitlab-hz.lonsid.cn/MASA-Stack/BlazorComponent.git

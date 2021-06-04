@@ -1,3 +1,0 @@
-[submodule "src/BlazorComponent"]
-	path = src/BlazorComponent
-	url = https://github.com/BlazorComponent/BlazorComponent.git
