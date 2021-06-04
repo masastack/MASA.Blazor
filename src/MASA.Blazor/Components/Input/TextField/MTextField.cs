@@ -121,6 +121,8 @@ namespace MASA.Blazor
                 InputContext = new InputContext();
                 InputContext.OnValueChanged += InputContext_OnValueChanged;
             }
+
+            base.OnParametersSet();
         }
 
         private void InputContext_OnValueChanged(string value)
