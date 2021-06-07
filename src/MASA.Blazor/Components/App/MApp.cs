@@ -26,7 +26,6 @@ namespace MASA.Blazor
             var prefix = "m-application";
 
             CssProvider
-                .AsProvider<BApp>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
