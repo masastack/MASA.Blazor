@@ -1,6 +1,7 @@
 ﻿@namespace MASA.Blazor.Presets
 
-<MNavigationDrawer Temporary Absolute Right Width="@Width" Drawer="Visible" Style="@_style">
+<MOverlay Value="Visible" Click="HandleOverlayClick"></MOverlay>
+<MNavigationDrawer Temporary Absolute Right Width="@Width" Drawer="Visible" Style="@Style">
     <MCard Style="height:100%;overflow-y:hidden">
         <MCardTitle>
             <span>

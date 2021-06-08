@@ -8,15 +8,21 @@ namespace MASA.Blazor.Presets
     {
         private bool _loading;
         private string _style;
-        private readonly string _defaultStyle = "";
+        private readonly string _defaultStyle = "position: fixed; z-index: 201; ";
 
         private StringNumber _minWidth = (StringNumber)256;
+
+        private string Style { get => _defaultStyle + _style; set => _style = value; }
 
         [Parameter]
         public bool Visible { get; set; }
 
         [Parameter]
         public string Title { get; set; }
+
+
+        [Parameter]
+        public bool Persistent { get; set; }
 
         [Parameter]
         public StringNumber Width { get; set; } = (StringNumber)256;
@@ -31,7 +37,7 @@ namespace MASA.Blazor.Presets
             set
             {
                 var (isNumber, number) = _minWidth.TryGetNumber();
-                _style = _defaultStyle + (isNumber ? $"min-width: {number}px" : $"min-width: {_minWidth}");
+                _style = isNumber ? $"min-width: {number}px" : $"min-width: {_minWidth}";
 
                 _minWidth = value;
             }
@@ -57,6 +63,14 @@ namespace MASA.Blazor.Presets
 
         [Parameter]
         public EventCallback<MouseEventArgs> OnCancel { get; set; }
+
+        private void HandleOverlayClick(MouseEventArgs args)
+        {
+            if (!Persistent)
+            {
+                HandleOnCancel(args);
+            }
+        }
 
         private void HandleOnCancel(MouseEventArgs args)
         {

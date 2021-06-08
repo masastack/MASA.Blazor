@@ -1,0 +1,109 @@
+﻿<div>
+    <MButton Click="() => _addModal.Show()" Class="mb-1">Open Modal</MButton>
+
+    <MASA.Blazor.Presets.Modal Visible="_addModal.Visible" Title="新增用户" Width="500" OnOk="HandleOnClick" OnCancel="() => _addModal.Hide()">
+        <MRow>
+            <MCol Span="12">
+                <MTextField @bind-Value="_addModal.Data.UserName" Label="UserName" Dense Outlined />
+            </MCol>
+            <MCol Span="12">
+                <MRadioGroup @bind-Value="_addModal.Data.Gender" Row Dense Style="margin-top: 0">
+                    <MRadio Label="男" Value="0"></MRadio>
+                    <MRadio Label="女" Value="1"></MRadio>
+                </MRadioGroup>
+            </MCol>
+        </MRow>
+    </MASA.Blazor.Presets.Modal>
+
+    <MRow>
+        <MCol>username: @_user.UserName</MCol>
+        <MCol>gender: @_user.Gender</MCol>
+        <MCol><MButton Click="() => _addModal.Show(_user.ShallowCopy())" Color="primary" Text Small>Edit</MButton></MCol>
+    </MRow>
+</div>
+
+@code {
+    private User _user = new()
+    {
+        UserName = "capdiem",
+        Gender = 0
+    };
+
+    private DataModal<User> _addModal = new();
+
+    private async Task HandleOnClick()
+    {
+        _addModal.ShowLoading();
+
+        if (_addModal.HasValue)
+        {
+            // Update
+        }
+        else
+        {
+            // Add
+        }
+        await Task.Delay(1000);
+
+        _addModal.HideLoading();
+
+        _addModal.Hide();
+    }
+
+    public class User : IShallowCopy<User>
+    {
+        public string UserName { get; set; }
+        public int Gender { get; set; }
+
+        public User ShallowCopy()
+        {
+            return (User)this.MemberwiseClone();
+        }
+    }
+
+    public class DataModal<T> where T : class, new()
+    {
+        public bool Visible { get; set; }
+
+        public T Data { get; private set; }
+
+        public bool HasValue { get; private set; }
+
+        public bool Loading { get; private set; }
+
+        public DataModal()
+        {
+            Data = new T();
+        }
+
+        public void Show() => Visible = true;
+
+        /// <summary>
+        /// 显示弹窗
+        /// </summary>
+        /// <param name="data"></param>
+        /// <remarks>写入数据之前请确保此对象是拷贝过的</remarks>
+        public void Show(T data)
+        {
+            Visible = true;
+            HasValue = true;
+            Data = data;
+        }
+
+        public virtual void Hide()
+        {
+            Visible = false;
+            HasValue = false;
+            Data = new T();
+        }
+
+        public bool ShowLoading() => Loading = true;
+
+        public bool HideLoading() => Loading = false;
+    }
+
+    public interface IShallowCopy<T>
+    {
+        public T ShallowCopy();
+    }
+}

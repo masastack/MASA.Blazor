@@ -23,7 +23,7 @@ namespace MASA.Blazor
                 {
                     styleBuilder
                         .Add(() => $"z-index: {ZIndex.TryGetNumber().number}")
-                        .AddIf("display:none", () => !Value);
+                        .AddIf("visibility:hidden", () => !Value);
                 })
                 .Apply("scrim", cssBuilder =>
                 {

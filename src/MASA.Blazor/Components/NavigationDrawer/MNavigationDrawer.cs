@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlazorComponent;
+﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using OneOf;
+using System.Collections.Generic;
 
 
 namespace MASA.Blazor
@@ -211,7 +205,7 @@ namespace MASA.Blazor
                         .Add($"top:{Top}")
                         .AddIf(() => $"maxHeight:calc(100% - {MaxHeight})", () => MaxHeight != null)
                         .AddIf(() => $"transform:{translate}({Transform}%)", () => Transform != null)
-                        .Add($"width:{(IsMiniVariant ? MiniVariantWidth.Value : Width.Value)}");
+                        .Add($"width:{(IsMiniVariant ? MiniVariantWidth.ToUnit() : Width.ToUnit())}");
                 })
                 .Apply("content", cssBuilder =>
                 {
@@ -224,7 +218,7 @@ namespace MASA.Blazor
                         .Add($"{prefix}__border");
                 });
 
-            Attributes.Add("data-booted", true);
+            Attributes.Add("data-booted", "true");
         }
 
         public override void Select(BListItem selectItem)
