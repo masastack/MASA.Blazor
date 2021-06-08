@@ -62,7 +62,7 @@ namespace MASA.Blazor.Doc.Shared
             if (FilePath == null)
                 return;
 
-            _avatarList = await HttpClient.GetFromJsonAsync<AvatarInfo[]>($"https://proapi.azurewebsites.net/doc/getAvatarList?filename={FilePath}&owner=ant-design-blazor&repo=ant-design-blazor");
+            //_avatarList = await HttpClient.GetFromJsonAsync<AvatarInfo[]>($"https://proapi.azurewebsites.net/doc/getAvatarList?filename={FilePath}&owner=ant-design-blazor&repo=ant-design-blazor");
 
             StateHasChanged();
         }
