@@ -1,0 +1,32 @@
+﻿
+<MBreadcrumbs Items="ItemsData" ItemText="x => x.Text" ItemValue="x => x.URL" DisabledValue="@_disabledValue"></MBreadcrumbs>
+
+<MBreadcrumbs Items="ItemsData" ItemText="x => x.Text" ItemValue="x => x.URL" DisabledLast></MBreadcrumbs>
+
+<MBreadcrumbs Items="ItemsData2" ItemText="x => x.Text" ItemValue="x => x.URL" DisabledLast Divider=">"></MBreadcrumbs>
+
+@code {
+
+    private string _disabledValue => ItemsData[1].URL;
+
+    private List<ItemsModel> ItemsData { get; set; } =
+                    new List<ItemsModel> {
+                        new ItemsModel{ Text="主页",URL="/" },
+                        new ItemsModel{ Text="列表",URL="/components"},
+                        new ItemsModel{ Text="详情",URL="/components/breadcrumbs"},
+                    };
+
+    private List<ItemsModel> ItemsData2 { get; set; } =
+                    new List<ItemsModel> {
+                        new ItemsModel{ Text="主页",URL="/" },
+                        new ItemsModel{ Text="我的订单",URL="/components/form" },
+                        new ItemsModel{ Text="列表",URL="/components"},
+                        new ItemsModel{ Text="详情",URL="/components/breadcrumbs"},
+                    };
+
+    public class ItemsModel
+    {
+        public string Text { get; set; }
+        public string URL { get; set; }
+    }
+}
