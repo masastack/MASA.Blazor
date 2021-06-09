@@ -20,26 +20,27 @@
     <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 </head>
 <body>
-	<app>
-		<component type="typeof(App)" render-mode="ServerPrerendered" />
-	</app>
+    <app>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </app>
 
-	@* todo remove ant design*@
-	<script src="_content/AntDesign/js/ant-design-blazor.js"></script>
-	<script src="_content/BlazorComponent/js/blazor-component.js"></script>
-	<script src="_content/MASA.Blazor.Doc/js/prism.js"></script>
-	<script src="_framework/blazor.server.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2.6.3/dist/cdn/docsearch.min.js" integrity="sha256-qybEsgf0PGiQS22AmoozPs09oRnSC7Gu7eBu4fbS2Ac=" crossorigin="anonymous"></script>
-	<script src="_content/MASA.Blazor.Doc/js/docsearch.js"></script>
-	<script>
-		window.AntDesign.Prism = {};
-		window.AntDesign.Prism.highlight = function (code, language) {
-			return Prism.highlight(code, Prism.languages[language], language);
-		}
+    @* todo remove ant design*@
+    <script src="_content/AntDesign/js/ant-design-blazor.js"></script>
+    <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+    <script src="_content/MASA.Blazor.Doc/js/prism.js"></script>
+    <script src="_framework/blazor.server.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2.6.3/dist/cdn/docsearch.min.js" integrity="sha256-qybEsgf0PGiQS22AmoozPs09oRnSC7Gu7eBu4fbS2Ac=" crossorigin="anonymous"></script>
+    <script src="_content/MASA.Blazor.Doc/js/docsearch.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"></script>
+    <script>
+        window.AntDesign.Prism = {};
+        window.AntDesign.Prism.highlight = function (code, language) {
+            return Prism.highlight(code, Prism.languages[language], language);
+        }
 
-		window.AntDesign.Prism.highlightAll = function () {
-			Prism.highlightAll();
-		}
-	</script>
+        window.AntDesign.Prism.highlightAll = function () {
+            Prism.highlightAll();
+        }
+    </script>
 </body>
 </html>

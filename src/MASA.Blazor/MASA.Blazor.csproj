@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\echarts.js" />
     <None Include="wwwroot\logo_masablazor_48.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
