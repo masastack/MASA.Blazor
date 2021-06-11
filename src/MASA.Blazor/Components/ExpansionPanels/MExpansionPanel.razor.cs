@@ -1,19 +1,23 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MBreadcrumbs<TItem> : BBreadcrumbs<TItem>
+    public partial class MExpansionPanel : BExpansionPanel
     {
-
         protected override void SetComponentClass()
         {
             CssProvider
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-breadcrumbs theme--light");
+                        .Add("m-expansion-panel");
                 })
                 .Apply("divider", cssBuilder =>
                 {

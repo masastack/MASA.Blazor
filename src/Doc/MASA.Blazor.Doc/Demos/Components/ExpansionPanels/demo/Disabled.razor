@@ -1,0 +1,28 @@
+﻿
+
+<MCheckbox @bind-Checked="check" Label="disabled all"></MCheckbox>
+
+<MExpansionPanels Disabled="check">
+    @for (int i = 0; i < 5; i++)
+    {
+        <MExpansionPanel>
+            <MExpansionPanelHeader>
+                Item1
+            </MExpansionPanelHeader>
+            <MExpansionPanelContent>
+                <MAlert Border="AlertBorder.Top"
+                    Color="red lighten-2"
+                    Dark>
+                    I'm an alert with a top border and red color
+                </MAlert>
+
+            </MExpansionPanelContent>
+        </MExpansionPanel>
+    }
+</MExpansionPanels>
+
+
+@code {
+	private bool check = true;
+	private string Label => $"Checkbox value: {(check ? "true" : "false")}";
+}

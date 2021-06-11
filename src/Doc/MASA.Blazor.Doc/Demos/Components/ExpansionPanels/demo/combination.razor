@@ -1,0 +1,49 @@
+﻿
+<MExpansionPanels>
+    <MExpansionPanel Active>
+        <MExpansionPanelHeader>
+            isActive
+        </MExpansionPanelHeader>
+        <MExpansionPanelContent>
+            <MTextField Value="my status is active.."></MTextField>
+        </MExpansionPanelContent>
+    </MExpansionPanel>
+
+    <MExpansionPanel Active>
+        <MExpansionPanelHeader Icon="fas fa-burn">
+            diy icon
+        </MExpansionPanelHeader>
+        <MExpansionPanelContent>
+            this is diy icon
+        </MExpansionPanelContent>
+    </MExpansionPanel>
+
+    <MExpansionPanel Disabled>
+        <MExpansionPanelHeader>
+            disabled
+        </MExpansionPanelHeader>
+        <MExpansionPanelContent>
+            <MAlert Border="AlertBorder.Top"
+                    Color="red lighten-2"
+                    Dark>
+                this is disabled
+            </MAlert>
+
+        </MExpansionPanelContent>
+    </MExpansionPanel>
+
+    <MExpansionPanel Disabled Active="@true">
+        <MExpansionPanelHeader>
+            disabled and isActive
+        </MExpansionPanelHeader>
+        <MExpansionPanelContent>
+            <MAlert Border="AlertBorder.Top"
+                    Color="red lighten-2"
+                    Dark>
+                this is disabled and isActive
+            </MAlert>
+
+        </MExpansionPanelContent>
+    </MExpansionPanel>
+
+</MExpansionPanels>
