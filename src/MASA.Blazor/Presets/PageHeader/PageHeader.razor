@@ -17,18 +17,38 @@
 
                 @if (ShowFilters)
                 {
-
-                    <MButton Icon Click="HandleOnSearch" Loading="_loading"><MIcon>mdi-magnify</MIcon></MButton>
+                    <MTooltip>
+                        <Activator>
+                            <MButton Icon Click="HandleOnSearch" Loading="_loading"><MIcon>mdi-magnify</MIcon></MButton>
+                        </Activator>
+                        <ChildContent>
+                            搜索
+                        </ChildContent>
+                    </MTooltip>
                 }
 
                 <MButton Icon Click="() => ShowFilters = !ShowFilters">
                     @if (ShowFilters)
                     {
-                        <MIcon>mdi-filter-off-outline</MIcon>
+                        <MTooltip>
+                            <Activator>
+                                <MIcon>mdi-filter-off-outline</MIcon>
+                            </Activator>
+                            <ChildContent>
+                                隐藏搜索框
+                            </ChildContent>
+                        </MTooltip>
                     }
                     else
                     {
-                        <MIcon>mdi-filter-outline</MIcon>
+                        <MTooltip>
+                            <Activator>
+                                <MIcon>mdi-filter-outline</MIcon>
+                            </Activator>
+                            <ChildContent>
+                                显示搜索框
+                            </ChildContent>
+                        </MTooltip>
                     }
                 </MButton>
             }
