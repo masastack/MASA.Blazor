@@ -10,7 +10,7 @@
             <span>@Title</span>
         </MCardTitle>
 
-        @if (ChildContent != null)
+        @if (ChildContent != default)
         {
             <MCardText>
                 @ChildContent
@@ -19,8 +19,22 @@
 
         <MCardActions>
             <MSpacer />
-            <MButton Text Color="@CancelColor" Click="HandleOnCancel">@CancelText</MButton>
-            <MButton Text Color="@OkColor" Click="HandleOnOk" Loading="_loading">@OkText</MButton>
+            @if (Actions != default)
+            {
+                @Actions
+            }
+            else
+            {
+                @if (OnCancel.HasDelegate)
+                {
+                    <MButton Text Color="@CancelColor" Click="HandleOnCancel">@CancelText</MButton>
+                }
+
+                @if (OnOk.HasDelegate)
+                {
+                    <MButton Text Color="@OkColor" Click="HandleOnOk" Loading="_loading">@OkText</MButton>
+                }
+            }
         </MCardActions>
     </MCard>
 </MDialog>

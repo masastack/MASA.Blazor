@@ -10,6 +10,7 @@ namespace MASA.Blazor.Presets
         private bool _loading;
         private string _icon;
         private string _iconColor;
+        private string _okColor;
 
         [Parameter]
         public bool Visible { get; set; }
@@ -74,7 +75,26 @@ namespace MASA.Blazor.Presets
         public string OkText { get; set; } = "确定";
 
         [Parameter]
-        public string OkColor { get; set; } = "primary";
+        public string OkColor
+        {
+            get
+            {
+                return string.IsNullOrEmpty(_okColor)
+                    ? Type switch
+                    {
+                        AlertType.Success => "success",
+                        AlertType.Info => "info",
+                        AlertType.Warning => "warning",
+                        AlertType.Error => "error",
+                        _ => "primary"
+                    }
+                    : _okColor ?? "primary";
+            }
+            set
+            {
+                _okColor = value;
+            }
+        }
 
         [Parameter]
         public string CancelText { get; set; } = "取消";
@@ -88,12 +108,12 @@ namespace MASA.Blazor.Presets
         [Parameter]
         public EventCallback<MouseEventArgs> OnOk { get; set; }
 
+        [Parameter]
+        public RenderFragment Actions { get; set; }
+
         private async Task HandleOnCancel(MouseEventArgs args)
         {
-            if (OnCancel.HasDelegate)
-            {
-                await OnCancel.InvokeAsync(args);
-            }
+            await OnCancel.InvokeAsync(args);
 
             if (VisibleChanged.HasDelegate)
             {
@@ -103,12 +123,9 @@ namespace MASA.Blazor.Presets
 
         private async Task HandleOnOk(MouseEventArgs args)
         {
-            if (OnOk.HasDelegate)
-            {
-                _loading = true;
-                await OnOk.InvokeAsync(args);
-                _loading = false;
-            }
+            _loading = true;
+            await OnOk.InvokeAsync(args);
+            _loading = false;
 
             if (VisibleChanged.HasDelegate)
             {

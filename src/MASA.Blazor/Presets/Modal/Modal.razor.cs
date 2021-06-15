@@ -48,6 +48,9 @@ namespace MASA.Blazor.Presets
         [Parameter]
         public EventCallback<MouseEventArgs> OnCancel { get; set; }
 
+        [Parameter]
+        public RenderFragment Actions { get; set; }
+
         private async Task HandleOnOk(MouseEventArgs args)
         {
             if (OnOk.HasDelegate)

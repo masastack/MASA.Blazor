@@ -24,8 +24,15 @@
 
             <MCardActions>
                 <MSpacer />
-                <MButton Text Click="HandleOnCancel">@CancelText</MButton>
-                <MButton Text Color="primary" Click="HandleOnOk" Loading="_loading">@OkText</MButton>
+                @if (Actions != default)
+                {
+                    @Actions
+                }
+                else
+                {
+                    <MButton Text Click="HandleOnCancel">@CancelText</MButton>
+                    <MButton Text Color="primary" Click="HandleOnOk" Loading="_loading">@OkText</MButton>
+                }
             </MCardActions>
         }
     </MCard>
