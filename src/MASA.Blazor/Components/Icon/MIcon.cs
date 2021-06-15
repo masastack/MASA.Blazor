@@ -1,6 +1,4 @@
 ﻿using BlazorComponent;
-using BlazorComponent.Components.Core.CssProcess;
-using MASA.Blazor.Helpers;
 using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
@@ -70,7 +68,7 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .Merge<BIcon>(cssBuilder =>
+                .Apply<BIcon>(cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-icon")
