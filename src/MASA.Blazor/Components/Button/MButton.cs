@@ -39,6 +39,11 @@ namespace MASA.Blazor
                         .AddIf("m-btn--text", () => Text)
                         .AddIf("m-btn--tile", () => Tile)
                         .AddIf("m-btn--active", () => IsActive)
+                        .AddIf("m-btn--absolute", () => Absolute)
+                        .AddIf("m-btn--top", () => Top)
+                        .AddIf("m-btn--bottom", () => Bottom)
+                        .AddIf("m-btn--left", () => Left)
+                        .AddIf("m-btn--right", () => Right)
                         .AddFirstIf(
                             ("m-size--x-large", () => XLarge),
                             ("m-size--large", () => Large),
