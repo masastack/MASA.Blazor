@@ -1,9 +1,37 @@
 ﻿@namespace MASA.Blazor.Presets
 
-<div class="body">
-    <div class="header">
-        <h1>@Title</h1>
-        <div class="actions">
+<div class="m-presets-ph--body">
+    <div class="m-presets-ph--header">
+        @if (OnBack.HasDelegate)
+        {
+            <MButton Icon Style="margin-right: 8px" Click="HandleOnBack"><MIcon>mdi-arrow-left</MIcon></MButton>
+        }
+
+        <span class="m-presets--title" style="margin-right: 8px">
+            @if (TitleFragment != default)
+            {
+                @TitleFragment
+            }
+            else
+            {
+                @Title
+            }
+        </span>
+
+        <span class="m-presets--subtitle">
+            @if (SubtitleFragment != default)
+            {
+                @SubtitleFragment
+            }
+            else if (!string.IsNullOrEmpty(Subtitle))
+            {
+                @Subtitle
+            }
+        </span>
+
+        <MSpacer />
+
+        <div class="m-presets-ph--actions">
             @LeftActions
 
             @if (LeftActions != null && Filters != null)
@@ -66,27 +94,34 @@
 </div>
 
 <style>
-    .body {
+    .m-presets-ph--body {
         margin-bottom: 16px;
     }
 
-    .header {
+    .m-presets-ph--header {
         display: flex;
-        justify-content: space-between;
         align-items: center;
     }
 
-    .actions {
+    .m-presets--title {
+        font-size: 24px;
+    }
+
+    .m-presets--subtitle {
+        color: #757575;
+    }
+
+    .m-presets-ph--actions {
         display: flex;
         justify-content: center;
         height: 36px;
     }
 
-        .actions > * {
+        .m-presets-ph--actions > * {
             margin: 0 4px;
         }
 
-            .actions > *:last-child {
+            .m-presets-ph--actions > *:last-child {
                 margin-right: 0px;
             }
 </style>

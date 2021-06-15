@@ -1,7 +1,7 @@
 ---
-order: 0
+order: 1
 title:
-  zh-CN: 对话框(不推荐)
+  zh-CN: 对话框
   en-US: Modal
 ---
 

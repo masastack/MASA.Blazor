@@ -30,6 +30,15 @@ namespace MASA.Blazor.Presets
         public string Title { get; set; }
 
         [Parameter]
+        public RenderFragment TitleFragment { get; set; }
+
+        [Parameter]
+        public string Subtitle { get; set; }
+
+        [Parameter]
+        public RenderFragment SubtitleFragment { get; set; }
+
+        [Parameter]
         public RenderFragment LeftActions { get; set; }
 
         [Parameter]
@@ -39,7 +48,13 @@ namespace MASA.Blazor.Presets
         public RenderFragment Filters { get; set; }
 
         [Parameter]
+        public RenderFragment Breadcrumbs { get; set; }
+
+        [Parameter]
         public EventCallback OnSearch { get; set; }
+
+        [Parameter]
+        public EventCallback OnBack { get; set; }
 
         private async Task HandleOnSearch()
         {
@@ -50,6 +65,14 @@ namespace MASA.Blazor.Presets
                 await OnSearch.InvokeAsync();
 
                 _loading = false;
+            }
+        }
+
+        private async Task HandleOnBack()
+        {
+            if (OnBack.HasDelegate)
+            {
+                await OnBack.InvokeAsync();
             }
         }
     }

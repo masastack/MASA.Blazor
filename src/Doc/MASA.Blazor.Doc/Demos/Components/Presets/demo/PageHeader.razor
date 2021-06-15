@@ -1,4 +1,12 @@
-﻿<MASA.Blazor.Presets.PageHeader Title="Order">
+﻿<MASA.Blazor.Presets.PageHeader Title="Order" Subtitle="This is an order page!" OnBack="OnBack" OnSearch="OnSearch">
+    <LeftActions>
+        <MButton Color="primary"><MIcon Left>mdi-plus</MIcon>Add Order</MButton>
+    </LeftActions>
+
+    <RightActions>
+        <MButton Icon><MIcon>mdi-refresh</MIcon></MButton>
+    </RightActions>
+
     <Filters>
         <MRow Dense>
             <MCol Span="6"><MTextField Label="Name" Outlined Dense></MTextField></MCol>
@@ -8,3 +16,15 @@
         </MRow>
     </Filters>
 </MASA.Blazor.Presets.PageHeader>
+
+@code {
+    private void OnBack()
+    {
+        // navigate
+    }
+
+    private async Task OnSearch()
+    {
+        await Task.Delay(1000);
+    }
+}
