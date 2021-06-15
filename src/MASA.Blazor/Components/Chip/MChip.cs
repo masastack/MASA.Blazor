@@ -34,14 +34,18 @@ namespace MASA.Blazor
         [Parameter]
         public string CloseIconColor { get; set; }
 
+        [Parameter]
+        public string SelectColor { get; set; } = "primary";
+
         public bool Medium => !XSmall && !Small && !Large && !XLarge;
 
         [Parameter]
-        public EventCallback<MouseEventArgs> Click { get; set; }
+        public EventCallback<MouseEventArgs> CloseClick { get; set; }
 
         protected override void SetComponentClass()
         {
             var prefix = "m-chip";
+
             CssProvider
                 .AsProvider<BChip>()
                 .Apply(cssBuilder =>
@@ -58,7 +62,10 @@ namespace MASA.Blazor
                         .AddIf("m-size--x-small", () => XSmall)
                         .AddIf("m-size--small", () => Small)
                         .AddIf("m-size--large", () => Large)
-                        .AddIf("m-size--x-large", () => XLarge);
+                        .AddIf("m-size--x-large", () => XLarge)
+                        .AddIf($"{prefix}--active", () => IsActive)
+                        .AddIf($"{prefix}--clickable", () => ItemGroup != null)
+                        .AddIf($"{SelectColor}--text", () => IsActive);
                 })
                 .Apply("content", cssBuilder =>
                  {
@@ -74,9 +81,9 @@ namespace MASA.Blazor
                     props[nameof(MChipCloseIcon.Color)] = CloseIconColor;
                     props[nameof(MChipCloseIcon.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async args =>
                     {
-                        if (Click.HasDelegate)
+                        if (CloseClick.HasDelegate)
                         {
-                            await Click.InvokeAsync(args);
+                            await CloseClick.InvokeAsync(args);
                         }
                         else
                         {
