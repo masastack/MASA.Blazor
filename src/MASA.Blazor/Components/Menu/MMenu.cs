@@ -25,14 +25,6 @@ namespace MASA.Blazor
             if (_activatorRect.OffsetWidth == 0)
                 _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
 
-            _minWidth = _activatorRect.OffsetWidth;
-
-            if (NudgeTop != null) _clientY -= NudgeTop.TryGetNumber().number;
-            if (NudgeBottom != null) _clientY += NudgeBottom.TryGetNumber().number;
-            if (NudgeLeft != null) _clientX -= NudgeLeft.TryGetNumber().number;
-            if (NudgeRight != null) _clientX -= NudgeRight.TryGetNumber().number;
-            if (NudgeWidth != null) _minWidth += NudgeWidth.TryGetNumber().number;
-
             _contentRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetFirstChildDomInfo, ContentRef, ".m-application");
         }
 
@@ -40,37 +32,35 @@ namespace MASA.Blazor
         {
             CssProvider
                 .AsProvider<BMenu>()
-                .Apply(styleAction: styleBuilder =>
-                {
-                    styleBuilder
-                        .Add("position:relative; display:inline-block");
-                });
+                .Apply(styleAction: styleBuilder => styleBuilder
+                        .Add("display:inline-block")
+                        .Add(ActivatorStyle));
 
             AbstractProvider
                 .Apply<BPopover, MPopover>(props =>
                 {
                     props[nameof(MPopover.Class)] = "m-menu__content menuable__content__active";
-                    props[nameof(MPopover.Visible)] = _visible;
+                    props[nameof(MPopover.Visible)] = Visible;
                     props[nameof(MPopover.ClientX)] = (StringNumber)_clientX;
                     props[nameof(MPopover.ClientY)] = (StringNumber)_clientY;
-                    props[nameof(MPopover.MinWidth)] = (StringNumber)_minWidth;
+                    props[nameof(MPopover.MinWidth)] = MinWidth ?? _minWidth;
                     props[nameof(MPopover.ChildContent)] = ChildContent;
-                    props[nameof(MPopover.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
+                    props[nameof(MPopover.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
-                        if (CloseOnContentClick)
+                        if (CloseOnContentClick && VisibleChanged.HasDelegate)
                         {
-                            _visible = false;
+                            await VisibleChanged.InvokeAsync(false);
                         }
                     });
                 })
                 .Apply<BOverlay, MOverlay>(props =>
                 {
-                    props[nameof(MOverlay.Value)] = (_visible && !OpenOnHover);
-                    props[nameof(MOverlay.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
+                    props[nameof(MOverlay.Value)] = (Visible && !OpenOnHover);
+                    props[nameof(MOverlay.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
-                        if (CloseOnClick)
+                        if (CloseOnClick && VisibleChanged.HasDelegate)
                         {
-                            _visible = false;
+                            await VisibleChanged.InvokeAsync(false);
                         }
                     });
                     props[nameof(MOverlay.Opacity)] = (StringNumber)0;
@@ -90,6 +80,12 @@ namespace MASA.Blazor
             {
                 _clientX = _activatorRect.AbsoluteLeft;
                 _clientY = _activatorRect.AbsoluteTop;
+
+                if (MinWidth == default)
+                {
+                    _minWidth = _activatorRect.OffsetWidth;
+                    if (NudgeWidth != null) _minWidth += NudgeWidth.TryGetNumber().number;
+                }
 
                 if (Top)
                 {
@@ -115,16 +111,21 @@ namespace MASA.Blazor
                 }
             }
 
-            _visible = true;
+            if (NudgeTop != null) _clientY -= NudgeTop.TryGetNumber().number;
+            if (NudgeBottom != null) _clientY += NudgeBottom.TryGetNumber().number;
+            if (NudgeLeft != null) _clientX -= NudgeLeft.TryGetNumber().number;
+            if (NudgeRight != null) _clientX -= NudgeRight.TryGetNumber().number;
+
+            await VisibleChanged.InvokeAsync(true);
         }
 
         protected override async Task MouseEnter(MouseEventArgs args)
         {
-            if (OpenOnHover && !_visible)
+            if (OpenOnHover && !Visible)
             {
                 await Click(args);
 
-                _visible = true;
+                await VisibleChanged.InvokeAsync(true);
             }
         }
     }
