@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using BlazorComponent;
+﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
@@ -110,6 +105,8 @@ namespace MASA.Blazor
                     properties[nameof(MInputBody.Outlined)] = Outlined;
                     properties[nameof(MInputBody.Type)] = Type;
                     properties[nameof(MInputBody.IsTextField)] = true;
+                    properties[nameof(MInputBody.Readonly)] = IsReadonly;
+                    properties[nameof(MInputBody.Disabled)] = IsDisabled;
                 });
             ValidationState = "error";
         }
