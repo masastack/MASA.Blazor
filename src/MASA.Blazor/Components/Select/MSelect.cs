@@ -8,7 +8,7 @@ namespace MASA.Blazor
 {
     public partial class MSelect<TItem, TValue> : BSelect<TItem, TValue>
     {
-        private HtmlElement _activatorRect = new HtmlElement();
+        protected HtmlElement _activatorRect = new();
 
         [Parameter]
         public bool Dark { get; set; }
@@ -46,7 +46,7 @@ namespace MASA.Blazor
                         .AddIf("m-text-field--enclosed m-text-field--filled", () => Filled)
                         .AddIf("m-text-field--enclosed m-text-field--outlined", () => Outlined)
                         .AddIf("m-text-field--enclosed m-text-field--single-line m-text-field--solo", () => Solo)
-                        .AddIf("m-input--is-focused primary--text", () => _focused)
+                        .AddIf("m-input--is-focused primary--text", () => _focused && !Loading)
                         .AddIf("m-select--is-menu-active", () => _visible)
                         .AddTheme(Dark);
                 }, styleBuilder =>
@@ -104,12 +104,18 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-text--field__details");
+                })
+                .Apply("selected", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-select__selection")
+                        .Add("m-select__selection--comma");
                 });
 
             AbstractProvider
                 .Apply<BIcon, MIcon>(props =>
                 {
-                    props[nameof(MIcon.Class)] = _visible ? "primary--text" : "";
+                    props[nameof(MIcon.Class)] = _focused ? "primary--text" : "";
                 })
                 .Apply<BPopover, MPopover>(props =>
                 {

@@ -15,6 +15,7 @@ namespace MASA.Blazor
                          .Add(() => $"left: {ClientX.ToUnit()}")
                          .AddMinWidth(MinWidth)
                          .AddMaxHeight(MaxHeight)
+                         .AddMaxWidth(MaxWidth)
                          .AddFirstIf(
                              ("display: none", () => !Visible)
                          );
