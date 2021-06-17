@@ -1,11 +1,9 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 
@@ -79,6 +77,7 @@ namespace MASA.Blazor
                      props[nameof(MPopover.MaxWidth)] = (StringNumber)_activatorRect.ClientWidth;
                      props[nameof(MPopover.MaxHeight)] = (StringNumber)400;
                      props[nameof(MCascaderPopover.ActivatorRef)] = Ref;
+                     props[nameof(MPopover.PreventDefault)] = true;
                  })
                 .Apply<ISelectBody, MAutocompleteSelectBody<TItem>>(props =>
                 {
