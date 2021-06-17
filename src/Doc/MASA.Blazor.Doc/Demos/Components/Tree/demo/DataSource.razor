@@ -1,4 +1,12 @@
-﻿<MTree T="Data" DataSource="_data" TitleExpression="r=>r.DataItem.Name" HandleCheckboxClick="HandleCheckBoxClick" ChildrenExpression="r=>r.DataItem.Children" HandleItemClick="HandleItemClick" Checkable="true" DefaultCheckedExpression="r=>_ids.Contains(r.Id)" Expanded="true">
+﻿<MTree T="Data" Activatable DataSource="_data" TitleExpression="r=>r.DataItem.Name"
+       HandleCheckboxClick="HandleCheckBoxClick" ChildrenExpression="r=>r.DataItem.Children"
+       HandleItemClick="HandleItemClick" Checkable="true" DefaultCheckedExpression="r=>_ids.Contains(r.Id)"
+       Expanded="true">
+    <PrependContent>
+        <MIcon>
+            @_files[context.File]
+        </MIcon>
+    </PrependContent>
 </MTree>
 
 @code{
@@ -8,11 +16,21 @@
 
         public string Name { get; set; }
 
+        public string File { get; set; }
+
         public List<Data> Children { get; set; }
     }
 
+    private Dictionary<string, string> _files = new Dictionary<string, string>
+{
+        { "png","mdi-file-image" },
+        { "html","mdi-language-html5" },
+        { "txt","mdi-file-document-outline" }
+    };
+
     private List<int> _ids = new List<int>
 {
+    1,
     2
     };
 
@@ -22,19 +40,28 @@
     {
     Id=1,
     Name="11",
+    File="png",
     Children=new List<Data>
 {
             new Data
             {
                 Id=2,
                 Name="22",
+                File="html"
+            },
+            new Data
+            {
+                Id=4,
+                Name="44",
+                File="html"
             }
         }
     },
     new Data
     {
     Id=3,
-    Name="33"
+    Name="33",
+    File="txt"
     }
     };
 
