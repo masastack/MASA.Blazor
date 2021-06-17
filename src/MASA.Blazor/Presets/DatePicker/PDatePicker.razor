@@ -1,0 +1,60 @@
+﻿@namespace MASA.Blazor.Presets
+@using MASA.Blazor
+
+@if (Dialog)
+{
+    <div style="display: block" @onclick="() => _menuVisible = true">
+        <MTextField Label="@Label" Dense="Dense" IsReadonly="Readonly" IsDisabled="Disabled" Value="@InputValue" ValueChanged="InputValueChanged"></MTextField>
+    </div>
+
+    <MDialog Visible="_menuVisible" Width="@("auto")" Persistent>
+        <MDatePicker @bind-Value="_dateTime" Style="width:min-content" ActionsStyle="flex-direction:column;">
+            <ActionsContent>
+                @if (Time)
+                {
+                <MRow Dense Align="center" Style="padding: 0 12px;">
+                    <MCol><MSelect Dense Label="时" @bind-Value="_hour" Items="_hours" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u"></MSelect></MCol>
+                    <MCol><MSelect Dense Label="分" @bind-Value="_minute" Items="_minutes" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u"></MSelect></MCol>
+                    <MCol><MSelect Dense Label="秒" @bind-Value="_second" Items="_seconds" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u"></MSelect></MCol>
+                </MRow>
+                }
+
+                <div style="display:flex; width: 100%">
+                    <MButton Plain Color="primary" Click="OnNow">此刻</MButton>
+                    <MSpacer />
+                    <MButton Text Click="OnCancel">取消</MButton>
+                    <MButton Text Color="primary" Click="OnOk">确认</MButton>
+                </div>
+            </ActionsContent>
+        </MDatePicker>
+    </MDialog>
+}
+else
+{
+    <MMenu @bind-Visible="_menuVisible" MinWidth="@("auto")" ActivatorStyle="display: block;" CloseOnContentClick="false" OffsetY Bottom>
+        <Activator>
+            <MTextField Label="@Label" Dense="Dense" IsReadonly="Readonly" IsDisabled="Disabled" Value="@InputValue" ValueChanged="InputValueChanged"></MTextField>
+        </Activator>
+        <ChildContent>
+            <MDatePicker @bind-Value="_dateTime" Style="width:min-content" ActionsStyle="flex-direction:column;">
+                <ActionsContent>
+                    @if (Time)
+                    {
+                    <MRow Dense Align="center" Style="padding: 0 12px;">
+                        <MCol><MSelect Dense Label="时" @bind-Value="_hour" Items="_hours" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u"></MSelect></MCol>
+                        <MCol><MSelect Dense Label="分" @bind-Value="_minute" Items="_minutes" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u"></MSelect></MCol>
+                        <MCol><MSelect Dense Label="秒" @bind-Value="_second" Items="_seconds" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u"></MSelect></MCol>
+                    </MRow>
+                    }
+
+                    <div style="display:flex; width: 100%">
+                        <MButton Plain Color="primary" Click="OnNow">此刻</MButton>
+                        <MSpacer />
+                        <MButton Text Click="OnCancel">取消</MButton>
+                        <MButton Text Color="primary" Click="OnOk">确认</MButton>
+                    </div>
+                </ActionsContent>
+            </MDatePicker>
+        </ChildContent>
+    </MMenu>
+}

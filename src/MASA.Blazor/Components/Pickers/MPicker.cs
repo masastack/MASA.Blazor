@@ -1,10 +1,5 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
@@ -76,6 +71,9 @@ namespace MASA.Blazor
                         .Add($"{prefix}__actions")
                         .Add("m-card__actions")
                         .AddIf($"{prefix}__actions--no-title", () => NoTitle);
+                }, styleBuilder =>
+                {
+                    styleBuilder.Add(ActionsStyle);
                 });
         }
     }
