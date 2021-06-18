@@ -40,16 +40,19 @@ namespace MASA.Blazor
                 .Apply<BPopover, MPopover>(props =>
                 {
                     props[nameof(MPopover.Class)] = "m-menu__content menuable__content__active";
-                    props[nameof(MPopover.Visible)] = Visible;
+                    props[nameof(MPopover.Visible)] = _visible;
                     props[nameof(MPopover.ClientX)] = (StringNumber)_clientX;
                     props[nameof(MPopover.ClientY)] = (StringNumber)_clientY;
                     props[nameof(MPopover.MinWidth)] = MinWidth ?? _minWidth;
                     props[nameof(MPopover.ChildContent)] = ChildContent;
                     props[nameof(MPopover.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
-                        if (CloseOnContentClick && VisibleChanged.HasDelegate)
+                        if (CloseOnContentClick)
                         {
-                            await VisibleChanged.InvokeAsync(false);
+                            if (VisibleChanged.HasDelegate)
+                                await VisibleChanged.InvokeAsync(false);
+                            else
+                                _visible = false;
                         }
                     });
                 })
@@ -58,9 +61,12 @@ namespace MASA.Blazor
                     props[nameof(MOverlay.Value)] = (Visible && !OpenOnHover);
                     props[nameof(MOverlay.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
-                        if (CloseOnClick && VisibleChanged.HasDelegate)
+                        if (CloseOnClick)
                         {
-                            await VisibleChanged.InvokeAsync(false);
+                            if (VisibleChanged.HasDelegate)
+                                await VisibleChanged.InvokeAsync(false);
+                            else
+                                _visible = false;
                         }
                     });
                     props[nameof(MOverlay.Opacity)] = (StringNumber)0;
@@ -116,7 +122,10 @@ namespace MASA.Blazor
             if (NudgeLeft != null) _clientX -= NudgeLeft.TryGetNumber().number;
             if (NudgeRight != null) _clientX -= NudgeRight.TryGetNumber().number;
 
-            await VisibleChanged.InvokeAsync(true);
+            if (VisibleChanged.HasDelegate)
+                await VisibleChanged.InvokeAsync(true);
+            else
+                _visible = true;
         }
 
         protected override async Task MouseEnter(MouseEventArgs args)
@@ -124,8 +133,10 @@ namespace MASA.Blazor
             if (OpenOnHover && !Visible)
             {
                 await Click(args);
-
-                await VisibleChanged.InvokeAsync(true);
+            }
+            else
+            {
+                PreventRender();
             }
         }
     }
