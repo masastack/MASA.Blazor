@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace MASA.Blazor
 {
@@ -107,6 +108,23 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add($"{prefix}__append-outer");
                 })
+                .Apply("append-inner", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add($"{prefix}__append-inner");
+                })
+                .Apply("icon-clearable", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add($"{prefix}__icon")
+                        .Add($"{prefix}__icon--clear");
+                })
+                .Apply("icon", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add($"{prefix}__icon")
+                        .Add($"{prefix}__icon--append");
+                })
                 .Apply("control", cssBuilder =>
                 {
                     cssBuilder
@@ -127,6 +145,24 @@ namespace MASA.Blazor
                 {
                     properties[nameof(MMessage.Color)] = ValidationState;
                     properties[nameof(MMessage.Value)] = Messages;
+                })
+                .Apply<BIcon, MIcon>(properties =>
+                {
+                    properties[nameof(MIcon.Tag)] = IconTag.I;
+                })
+                .Apply<BIcon, MIcon>("clearable", properties =>
+                {
+                    properties[nameof(MIcon.Tag)] = IconTag.I;
+                    properties[nameof(MIcon.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
+                    {
+                        if (ValueChanged.HasDelegate)
+                            await ValueChanged.InvokeAsync(default);
+                        else
+                            Value = default;
+
+                        if (ClearClick.HasDelegate)
+                            await ClearClick.InvokeAsync();
+                    });
                 });
         }
 

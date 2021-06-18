@@ -20,7 +20,21 @@ namespace MASA.Blazor.Presets
         private DateTime _value;
         private DateTime _dateTime;
 
-        public string InputValue => Format == default ? (Time ? Value.ToString("yyyy-MM-dd HH:mm:ss") : Value.ToString("yyyy-MM-dd")) : Value.ToString(Format);
+        private string InputValue
+        {
+            get
+            {
+                if (Value == default) return string.Empty;
+
+                return Format == default
+                    ? Time
+                        ? Value.ToString("yyyy-MM-dd HH:mm:ss")
+                        : Value.ToString("yyyy-MM-dd")
+                    : Value.ToString(Format);
+            }
+        }
+
+        private string OnNowText => Time ? "此刻" : "今日";
 
         [Parameter]
         public DateTime Value
@@ -44,18 +58,6 @@ namespace MASA.Blazor.Presets
         [Parameter]
         public bool Time { get; set; }
 
-        [Parameter]
-        public string Label { get; set; }
-
-        [Parameter]
-        public bool Disabled { get; set; } = false;
-
-        [Parameter]
-        public bool Readonly { get; set; } = true;
-
-        [Parameter]
-        public bool Dense { get; set; } = false;
-
         /// <summary>
         /// The template to format <see cref="DateTime"/>, defualt set "yyyy-MM-dd HH:mm:ss"
         /// </summary>
@@ -64,6 +66,34 @@ namespace MASA.Blazor.Presets
 
         [Parameter]
         public bool Dialog { get; set; }
+
+        #region TextField Parameters
+
+        [Parameter]
+        public string Label { get; set; }
+
+        [Parameter]
+        public bool Disabled { get; set; }
+
+        [Parameter]
+        public bool Readonly { get; set; } = true;
+
+        [Parameter]
+        public bool Dense { get; set; }
+
+        [Parameter]
+        public bool Outlined { get; set; }
+
+        [Parameter]
+        public bool Filled { get; set; }
+
+        [Parameter]
+        public bool Solo { get; set; }
+
+        [Parameter]
+        public string Placeholder { get; set; }
+
+        #endregion
 
         private async Task InputValueChanged(string inputValue)
         {
@@ -112,6 +142,11 @@ namespace MASA.Blazor.Presets
                 _minute = dateTime.Minute;
                 _second = dateTime.Second;
             }
+        }
+
+        private async Task HandleClearClick()
+        {
+            await ValueChanged.InvokeAsync(default);
         }
     }
 }

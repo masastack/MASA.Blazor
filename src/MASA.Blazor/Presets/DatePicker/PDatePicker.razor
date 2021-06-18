@@ -4,10 +4,20 @@
 @if (Dialog)
 {
     <div style="display: block" @onclick="() => _menuVisible = true">
-        <MTextField Label="@Label" Dense="Dense" IsReadonly="Readonly" IsDisabled="Disabled" Value="@InputValue" ValueChanged="InputValueChanged"></MTextField>
+        <MTextField Label="@Label" 
+                Dense="Dense"
+                IsReadonly="Readonly"
+                IsDisabled="Disabled"
+                Outlined="Outlined"
+                Filled="Filled"
+                IsSolo="Solo"
+                Placeholder="@Placeholder"
+                Clearable
+                ClearClick="HandleClearClick"
+                Value="@InputValue" ValueChanged="InputValueChanged"></MTextField>
     </div>
 
-    <MDialog Visible="_menuVisible" Width="@("auto")" Persistent>
+    <MDialog Visible="_menuVisible" Width="@("auto")" OutsideClick="OnCancel">
         <MDatePicker @bind-Value="_dateTime" Style="width:min-content" ActionsStyle="flex-direction:column;">
             <ActionsContent>
                 @if (Time)
@@ -20,7 +30,7 @@
                 }
 
                 <div style="display:flex; width: 100%">
-                    <MButton Plain Color="primary" Click="OnNow">此刻</MButton>
+                    <MButton Plain Color="primary" Click="OnNow">@OnNowText</MButton>
                     <MSpacer />
                     <MButton Text Click="OnCancel">取消</MButton>
                     <MButton Text Color="primary" Click="OnOk">确认</MButton>
@@ -31,9 +41,19 @@
 }
 else
 {
-    <MMenu @bind-Visible="_menuVisible" MinWidth="@("auto")" ActivatorStyle="display: block;" CloseOnContentClick="false" OffsetY Bottom>
+    <MMenu @bind-Visible="_menuVisible" MinWidth="@("auto")" ActivatorStyle="display: block;" CloseOnContentClick="false" OutsideClick="OnCancel" OffsetY Bottom>
         <Activator>
-            <MTextField Label="@Label" Dense="Dense" IsReadonly="Readonly" IsDisabled="Disabled" Value="@InputValue" ValueChanged="InputValueChanged"></MTextField>
+            <MTextField Label="@Label" 
+                    Dense="Dense"
+                    IsReadonly="Readonly"
+                    IsDisabled="Disabled"
+                    Outlined="Outlined"
+                    Filled="Filled"
+                    IsSolo="Solo"
+                    Placeholder="@Placeholder"
+                    Clearable
+                    ClearClick="HandleClearClick"
+                    Value="@InputValue" ValueChanged="InputValueChanged"></MTextField>
         </Activator>
         <ChildContent>
             <MDatePicker @bind-Value="_dateTime" Style="width:min-content" ActionsStyle="flex-direction:column;">
@@ -48,7 +68,7 @@ else
                     }
 
                     <div style="display:flex; width: 100%">
-                        <MButton Plain Color="primary" Click="OnNow">此刻</MButton>
+                        <MButton Plain Color="primary" Click="OnNow">@OnNowText</MButton>
                         <MSpacer />
                         <MButton Text Click="OnCancel">取消</MButton>
                         <MButton Text Color="primary" Click="OnOk">确认</MButton>

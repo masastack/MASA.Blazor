@@ -45,12 +45,6 @@ namespace MASA.Blazor
         public bool Small { get; set; }
 
         /// <summary>
-        /// TODO: Specifies a custom tag to be used
-        /// </summary>
-        [Parameter]
-        public string Tag { get; set; } = "i";
-
-        /// <summary>
         /// 40px
         /// </summary>
         [Parameter]
