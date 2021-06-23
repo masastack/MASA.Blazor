@@ -2,21 +2,29 @@
     <MButton Click="() => _addModal.Show()" Class="mb-1">Open Modal</MButton>
 
     <MASA.Blazor.Presets.Modal Visible="_addModal.Visible" Title="新增用户" Width="500" OnOk="HandleOnClick" OnCancel="() => _addModal.Hide()">
-        <MRow>
-            <MCol Span="12">
-                <MTextField @bind-Value="_addModal.Data.UserName" Label="UserName" Dense Outlined />
-            </MCol>
-            <MCol Span="12">
-                <MRadioGroup @bind-Value="_addModal.Data.Gender" Row Dense Style="margin-top: 0">
-                    <MRadio Label="男" Value="0"></MRadio>
-                    <MRadio Label="女" Value="1"></MRadio>
-                </MRadioGroup>
-            </MCol>
-        </MRow>
+        <p>@System.Text.Json.JsonSerializer.Serialize(_addModal.Data)</p>
+
+        <MForm>
+            <MRow>
+                <MCol Span="12">
+                    <MTextField @bind-Value="_addModal.Data.UserName" Label="UserName" Dense Outlined />
+                </MCol>
+                <MCol Span="12">
+                    <MTextField @bind-Value="_addModal.Data.City" Label="City" Dense Outlined />
+                </MCol>
+                <MCol Span="12">
+                    <MRadioGroup @bind-Value="_addModal.Data.Gender" Row Dense Style="margin-top: 0">
+                        <MRadio Label="男" Value="0"></MRadio>
+                        <MRadio Label="女" Value="1"></MRadio>
+                    </MRadioGroup>
+                </MCol>
+            </MRow>
+        </MForm>
     </MASA.Blazor.Presets.Modal>
 
     <MRow>
         <MCol>username: @_user.UserName</MCol>
+        <MCol>city: @_user.City</MCol>
         <MCol>gender: @_user.Gender</MCol>
         <MCol><MButton Click="() => _addModal.Show(_user.ShallowCopy())" Color="primary" Text Small>Edit</MButton></MCol>
     </MRow>
@@ -26,6 +34,7 @@
     private User _user = new()
     {
         UserName = "capdiem",
+        City = "HangZhou",
         Gender = 0
     };
 
@@ -54,6 +63,7 @@
     {
         public string UserName { get; set; }
         public int Gender { get; set; }
+        public string City { get; set; }
 
         public User ShallowCopy()
         {

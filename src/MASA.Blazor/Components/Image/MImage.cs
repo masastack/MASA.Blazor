@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using BlazorComponent;
-using BlazorComponent.Components.Core.Model;
 using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor

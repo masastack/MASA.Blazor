@@ -1,4 +1,8 @@
 ﻿<MRow Justify="center">
-    <MDatePicker></MDatePicker>
+    <MDatePicker @bind-Value="_date"></MDatePicker>
 </MRow>
+
+@code {
+    private DateTime _date = DateTime.Now;
+}
 

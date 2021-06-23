@@ -69,15 +69,28 @@ namespace MASA.Blazor
             IsAutocomplete = true;
 
             AbstractProvider
-                .Apply<BPopover, MCascaderPopover>(props =>
+                .Apply<BMenu, MMenu>(props =>
                  {
-                     props[nameof(MPopover.Class)] = "m-menu__content menuable__content__active";
-                     props[nameof(MPopover.Visible)] = (_visible && Items != null);
-                     props[nameof(MPopover.MinWidth)] = (StringNumber)_activatorRect.ClientWidth;
-                     props[nameof(MPopover.MaxWidth)] = (StringNumber)_activatorRect.ClientWidth;
-                     props[nameof(MPopover.MaxHeight)] = (StringNumber)400;
-                     props[nameof(MCascaderPopover.ActivatorRef)] = Ref;
-                     props[nameof(MPopover.PreventDefault)] = true;
+                     props[nameof(MMenu.Visible)] = Visible;
+                     props[nameof(MMenu.VisibleChanged)] = EventCallback.Factory.Create<bool>(this, (v) =>
+                     {
+                         Visible = v;
+                     });
+                     props[nameof(MMenu.OffsetY)] = MenuProps?.OffsetY ?? true;
+                     props[nameof(MMenu.OffsetX)] = MenuProps?.OffsetX;
+                     props[nameof(MMenu.Block)] = MenuProps?.Block ?? true;
+                     props[nameof(MMenu.CloseOnContentClick)] = !Multiple;
+                     props[nameof(MMenu.Top)] = MenuProps?.Top;
+                     props[nameof(MMenu.Right)] = MenuProps?.Right;
+                     props[nameof(MMenu.Bottom)] = MenuProps?.Bottom;
+                     props[nameof(MMenu.Left)] = MenuProps?.Left;
+                     props[nameof(MMenu.NudgeTop)] = MenuProps?.NudgeTop;
+                     props[nameof(MMenu.NudgeRight)] = MenuProps?.NudgeRight;
+                     props[nameof(MMenu.NudgeBottom)] = MenuProps?.NudgeBottom;
+                     props[nameof(MMenu.NudgeLeft)] = MenuProps?.NudgeLeft;
+                     props[nameof(MMenu.NudgeWidth)] = MenuProps?.NudgeWidth;
+                     props[nameof(MMenu.MaxHeight)] = MenuProps?.MaxHeight ?? 400;
+                     props[nameof(MMenu.MinWidth)] = MenuProps?.MinWidth;
                  })
                 .Apply<ISelectBody, MAutocompleteSelectBody<TItem>>(props =>
                 {
@@ -223,7 +236,6 @@ namespace MASA.Blazor
 
         protected void OnBlur()
         {
-            _visible = false;
             HighlightIndex = -1;
             ValueText = SelectedItem == null ? string.Empty : ItemText(SelectedItem);
 
@@ -255,8 +267,6 @@ namespace MASA.Blazor
 
         protected override async Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            _visible = true;
-
             ValueText = args.Value.ToString();
             QueryText = ValueText;
             HighlightIndex = -1;

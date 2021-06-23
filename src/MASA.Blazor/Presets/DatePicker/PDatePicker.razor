@@ -23,9 +23,9 @@
                 @if (Time)
                 {
                 <MRow Dense Align="center" Style="padding: 0 12px;">
-                    <MCol><MSelect Dense Label="时" @bind-Value="_hour" Items="_hours" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u"></MSelect></MCol>
-                    <MCol><MSelect Dense Label="分" @bind-Value="_minute" Items="_minutes" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u"></MSelect></MCol>
-                    <MCol><MSelect Dense Label="秒" @bind-Value="_second" Items="_seconds" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u"></MSelect></MCol>
+                    <MCol><MSelect Dense Label="时" @bind-Value="_hour" Items="_hours" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForHour"></MSelect></MCol>
+                    <MCol><MSelect Dense Label="分" @bind-Value="_minute" Items="_minutes" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForMin"></MSelect></MCol>
+                    <MCol><MSelect Dense Label="秒" @bind-Value="_second" Items="_seconds" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForSecond"></MSelect></MCol>
                 </MRow>
                 }
 
@@ -41,7 +41,7 @@
 }
 else
 {
-    <MMenu @bind-Visible="_menuVisible" MinWidth="@("auto")" ActivatorStyle="display: block;" CloseOnContentClick="false" OutsideClick="OnCancel" OffsetY Bottom>
+    <MMenu @bind-Visible="_menuVisible" MinWidth="@("auto")" Block CloseOnContentClick="false" OutsideClick="OnCancel" MaxHeight="@("auto")" OffsetY Bottom>
         <Activator>
             <MTextField Label="@Label" 
                     Dense="Dense"
@@ -61,9 +61,9 @@ else
                     @if (Time)
                     {
                     <MRow Dense Align="center" Style="padding: 0 12px;">
-                        <MCol><MSelect Dense Label="时" @bind-Value="_hour" Items="_hours" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u"></MSelect></MCol>
-                        <MCol><MSelect Dense Label="分" @bind-Value="_minute" Items="_minutes" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u"></MSelect></MCol>
-                        <MCol><MSelect Dense Label="秒" @bind-Value="_second" Items="_seconds" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u"></MSelect></MCol>
+                        <MCol><MSelect Dense Label="时" @bind-Value="_hour" Items="_hours" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForHour"></MSelect></MCol>
+                        <MCol><MSelect Dense Label="分" @bind-Value="_minute" Items="_minutes" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForMin"></MSelect></MCol>
+                        <MCol><MSelect Dense Label="秒" @bind-Value="_second" Items="_seconds" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForSecond"></MSelect></MCol>
                     </MRow>
                     }
 

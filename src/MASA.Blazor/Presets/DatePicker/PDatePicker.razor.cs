@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorComponent;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +11,10 @@ namespace MASA.Blazor.Presets
         private static readonly int[] _hours = Enumerable.Range(0, 24).ToArray();
         private static readonly int[] _minutes = Enumerable.Range(0, 60).ToArray();
         private static readonly int[] _seconds = Enumerable.Range(0, 60).ToArray();
+
+        private static BMenuProps _menuPropsForHour = new() { MaxHeight = 200, NudgeTop = 100 };
+        private static BMenuProps _menuPropsForMin = new() { MaxHeight = 200, NudgeTop = 100 };
+        private static BMenuProps _menuPropsForSecond = new() { MaxHeight = 200, NudgeTop = 100 };
 
         private bool _menuVisible = false;
 
@@ -122,6 +127,10 @@ namespace MASA.Blazor.Presets
             SetTime(_dateTime);
 
             _menuVisible = false;
+
+            _menuPropsForHour.Visible = false;
+            _menuPropsForMin.Visible = false;
+            _menuPropsForSecond.Visible = false;
         }
 
         private async Task OnOk()

@@ -59,14 +59,14 @@ namespace MASA.Blazor
                 .Apply<BPopover, MCascaderPopover>(props =>
                 {
                     props[nameof(MPopover.Class)] = "m-menu__content menuable__content__active";
-                    props[nameof(MPopover.Visible)] = (_visible && Items != null);
+                    props[nameof(MPopover.Visible)] = (Visible && Items != null);
                     props[nameof(MPopover.ClientX)] = (StringNumber)Left;
                     props[nameof(MPopover.ClientY)] = (StringNumber)Top;
                 })
                 .Apply<ISelectBody, MCascaderSelectBody>(props =>
                 {
                     props[nameof(MCascaderSelectBody.Items)] = Items;
-                    props[nameof(MCascaderSelectBody.Visible)] = _visible;
+                    props[nameof(MCascaderSelectBody.Visible)] = Visible;
                     props[nameof(MCascaderSelectBody.Left)] = Left;
                     props[nameof(MCascaderSelectBody.Top)] = Top;
                     props[nameof(MCascaderSelectBody.OnOptionSelect)] = EventCallback.Factory.Create<MCascaderSelectOption>(this, async option =>

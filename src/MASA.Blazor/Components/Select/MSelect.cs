@@ -16,7 +16,7 @@ namespace MASA.Blazor
         [Parameter]
         public StringNumber MinWidth { get; set; }
 
-        private int Width => _visible || _text.Any() ? ComputeLabelLength() * 6 : 0;
+        private int Width => Visible || _text.Any() ? ComputeLabelLength() * 6 : 0;
 
         protected override string LegendStyle => $"width: {Width}px";
 
@@ -25,12 +25,6 @@ namespace MASA.Blazor
             _icon = "mdi-menu-down";
 
             return base.OnInitializedAsync();
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-                await JsInvokeAsync(JsInteropConstants.AddElementTo, PopoverRef, ".m-application");
         }
 
         protected override void SetComponentClass()
@@ -47,7 +41,7 @@ namespace MASA.Blazor
                         .AddIf("m-text-field--enclosed m-text-field--outlined", () => Outlined)
                         .AddIf("m-text-field--enclosed m-text-field--single-line m-text-field--solo", () => Solo)
                         .AddIf("m-input--is-focused primary--text", () => _focused && !Loading)
-                        .AddIf("m-select--is-menu-active", () => _visible)
+                        .AddIf("m-select--is-menu-active", () => Visible)
                         .AddTheme(Dark);
                 }, styleBuilder =>
                 {
@@ -73,7 +67,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-label")
-                        .AddIf("m-label--active", () => { return Solo ? false : _visible || _text.Any(); })
+                        .AddIf("m-label--active", () => { return Solo ? false : Visible || _text.Any(); })
                         .AddIf("primary--text", () => { return Solo ? false : _focused; })
                         .AddTheme(Dark);
                 }, styleBuilder =>
@@ -113,35 +107,32 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
+                .Apply<BMenu, MMenu>(props =>
+                {
+                    props[nameof(MMenu.Visible)] = Visible;
+                    props[nameof(MMenu.VisibleChanged)] = EventCallback.Factory.Create<bool>(this, (v) =>
+                    {
+                        Visible = v;
+                    });
+                    props[nameof(MMenu.OffsetY)] = MenuProps?.OffsetY;
+                    props[nameof(MMenu.OffsetX)] = MenuProps?.OffsetX;
+                    props[nameof(MMenu.Block)] = MenuProps?.Block ?? true;
+                    props[nameof(MMenu.CloseOnContentClick)] = !HasBody && !Multiple;
+                    props[nameof(MMenu.Top)] = MenuProps?.Top;
+                    props[nameof(MMenu.Right)] = MenuProps?.Right;
+                    props[nameof(MMenu.Bottom)] = MenuProps?.Bottom;
+                    props[nameof(MMenu.Left)] = MenuProps?.Left;
+                    props[nameof(MMenu.NudgeTop)] = MenuProps?.NudgeTop;
+                    props[nameof(MMenu.NudgeRight)] = MenuProps?.NudgeRight;
+                    props[nameof(MMenu.NudgeBottom)] = MenuProps?.NudgeBottom;
+                    props[nameof(MMenu.NudgeLeft)] = MenuProps?.NudgeLeft;
+                    props[nameof(MMenu.NudgeWidth)] = MenuProps?.NudgeWidth;
+                    props[nameof(MMenu.MaxHeight)] = MenuProps?.MaxHeight ?? 400;
+                    props[nameof(MMenu.MinWidth)] = MenuProps?.MinWidth;
+                })
                 .Apply<BIcon, MIcon>(props =>
                 {
                     props[nameof(MIcon.Class)] = _focused ? "primary--text" : "";
-                })
-                .Apply<BPopover, MPopover>(props =>
-                {
-                    var css = "m-menu__content menuable__content__active";
-                    var clientX = _activatorRect.AbsoluteLeft;
-                    var clientY = _activatorRect.AbsoluteTop;
-                    if (Fixed)
-                    {
-                        css += " m-menu__content--fixed";
-                        clientX = _activatorRect.RelativeLeft;
-                        clientY = _activatorRect.RelativeTop;
-                    };
-
-                    props[nameof(MPopover.Class)] = css;
-                    props[nameof(MPopover.Visible)] = (_visible && Items != null);
-                    props[nameof(MPopover.ClientX)] = (StringNumber)clientX;
-                    props[nameof(MPopover.ClientY)] = (StringNumber)clientY;
-                    props[nameof(MPopover.MinWidth)] = (StringNumber)_activatorRect.ClientWidth;
-                    props[nameof(MPopover.MaxHeight)] = (StringNumber)400;
-                })
-                .Apply<BOverlay, MOverlay>(props =>
-                {
-                    props[nameof(MOverlay.Value)] = _visible;
-                    props[nameof(MOverlay.Click)] =
-                        EventCallback.Factory.Create<MouseEventArgs>(this, () => { _visible = false; });
-                    props[nameof(MOverlay.Opacity)] = (StringNumber)0;
                 })
                 .Apply<BList, MList>(props =>
                 {
@@ -166,13 +157,6 @@ namespace MASA.Blazor
                 .Apply<BSelectOption<TItem, TValue>, MSelectOption<TItem, TValue>>()
                 .Apply<BChip, MChip>()
                 .Apply<BHintMessage, MHintMessage>();
-        }
-
-        protected override async Task Click(MouseEventArgs args)
-        {
-            _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
-
-            await base.Click(args);
         }
 
         private int ComputeLabelLength()

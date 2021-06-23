@@ -18,8 +18,6 @@ namespace MASA.Blazor
                     {
                         if (!SelectWrapper.Multiple)
                         {
-                            SelectWrapper.SetVisible(false);
-
                             await SelectWrapper.SetSelectedAsync(Label, Value);
                         }
                         else

@@ -17,6 +17,11 @@ namespace MASA.Blazor
                     props[nameof(MListItem.Key)] = Key;
                     props[nameof(MListItem.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
+                        if (Item.Children == null || Item.Children.Count ==0)
+                        {
+                            SelectWrapper.SetVisible(false);
+                        }
+
                         if (OnOptionClick.HasDelegate)
                         {
                             await OnOptionClick.InvokeAsync(this);
