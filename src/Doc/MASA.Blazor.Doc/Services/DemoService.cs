@@ -70,6 +70,11 @@ namespace MASA.Blazor.Doc.Services
             });
         }
 
+        public Task<DocFileModel> GetDocFileAsync(string docUrl)
+        {
+            return _httpClient.GetFromJsonAsync<DocFileModel>(docUrl);
+        }
+
         public async Task InitializeDemos()
         {
             _showCaseCache ??= new ConcurrentCache<string, RenderFragment>();

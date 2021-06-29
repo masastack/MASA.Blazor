@@ -27,9 +27,7 @@ namespace MASA.Blazor.Doc.Pages
         private DocFileModel _file;
 
         private bool _waitingHighlight = false;
-        private bool _init;
 
-        private string _filePath;
 
         private string CurrentLanguage => LanguageService.CurrentCulture.Name;
 
@@ -37,7 +35,6 @@ namespace MASA.Blazor.Doc.Pages
         [Inject] private ILanguageService LanguageService { get; set; }
         [Inject] private DemoService DemoService { get; set; }
         [Inject] private IPrismHighlighter PrismHighlighter { get; set; }
-        [Inject] private HttpClient HttpClient { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -62,12 +59,12 @@ namespace MASA.Blazor.Doc.Pages
             {
                 var baseUrl = NavigationManager.ToAbsoluteUri(NavigationManager.BaseUri);
                 var docUrl = new Uri(baseUrl, $"_content/MASA.Blazor.Doc/docs/{(Dir == null ? "" : Dir + "/")}{FileName}.{CurrentLanguage}.json").ToString();
-                _file = await HttpClient.GetFromJsonAsync<DocFileModel>(docUrl);
+                _file = await DemoService.GetDocFileAsync(docUrl);
                 _waitingHighlight = true;
 
                 //await MainLayout.ChangePrevNextNav(FileName);
 
-                _filePath = $"docs/{FileName}.{CurrentLanguage}.md";
+                //_filePath = $"docs/{FileName}.{CurrentLanguage}.md";
             }
         }
 
