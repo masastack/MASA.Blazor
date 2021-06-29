@@ -1,0 +1,14 @@
+{
+  "order": 8,
+  "title": [
+    {
+      "lang": "zh-CN",
+      "content": "关于"
+    },
+    {
+      "lang": "en-US",
+      "content": "About"
+    }
+  ],
+  "icon": "mdi-vuetify"
+}

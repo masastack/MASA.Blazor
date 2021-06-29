@@ -1,10 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using AntDesign;
-using AntDesign.Core.Extensions;
 using MASA.Blazor.Doc.Localization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
@@ -110,11 +109,15 @@ namespace MASA.Blazor.Doc.Routing
             }
             else
             {
-                if (segment.IsIn("zh-CN", "en-US"))
+                var cultures = new List<string>
+                {
+                    "zh-CN", "en-US"
+                };
+                if (cultures.Contains(segment))
                 {
                     LanguageService.SetLanguage(CultureInfo.GetCultureInfo(segment));
                 }
-                else if (currentCulture.Name.IsIn("zh-CN", "en-US"))
+                else if (cultures.Contains(currentCulture.Name))
                 {
                     NavigationManager.NavigateTo($"{currentCulture.Name}/{relativeUri}");
                 }
@@ -141,18 +144,6 @@ namespace MASA.Blazor.Doc.Routing
                 }
 
                 _renderHandle.Render(NotFound);
-            }
-
-            if (!string.IsNullOrWhiteSpace(hash))
-            {
-                if (JsRuntime.IsBrowser())
-                {
-                    ((IJSInProcessRuntime)JsRuntime).InvokeVoid(JSInteropConstants.ScrollTo, $"{hash}");
-                }
-                else
-                {
-                    Task.Run(() => JsRuntime.InvokeVoidAsync(JSInteropConstants.ScrollTo, $"{hash}"));
-                }
             }
         }
     }

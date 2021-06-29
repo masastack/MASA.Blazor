@@ -1,0 +1,14 @@
+{
+  "order": 1,
+  "title": [
+    {
+      "lang": "zh-CN",
+      "content": "快速入门"
+    },
+    {
+      "lang": "en-US",
+      "content": "Getting started"
+    }
+  ],
+  "icon": "mdi-speedometer"
+}

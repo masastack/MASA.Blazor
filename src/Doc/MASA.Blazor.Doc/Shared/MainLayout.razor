@@ -1,55 +1,170 @@
 @inherits LayoutComponentBase
 
-<MApp>
-    <div id="react-content">
-        <MainHeader OnMobileModeChanged="isMobile=> _isMobile=isMobile" />
-        <div class="main-wrapper">
-            @if (_isMobile)
-            {
-                <div class="drawer-wrapper">
-                    <div class="drawer drawer-left @(_drawerVisible?"drawer-open":"")">
-                        <div class="drawer-mask" @onclick="()=> { _drawerVisible = false; }"></div>
-                        <div class="drawer-content-wrapper" style="@(_drawerVisible?"":"transform:translateX(-100%)")">
-                            <div class="drawer-content">
-                                <NavMenu />
-                            </div>
-                            <div class="drawer-handle" @onclick="()=> { _drawerVisible = !_drawerVisible; }">
-                                <i class="drawer-handle-icon"></i>
-                            </div>
+<CascadingValue Value="this">
+    <MApp>
+        <MAppBar Flat Fixed Color="white" Class="m-bar--underline" Left="300">
+            <div class="flex-1-1-auto d-flex align-center justify-end">
+                <MTextField Flat IsSolo Dense Class="mx-2 mx-md-4 rounded-lg" Color="grey lighten-3" Placeholder="搜索(按 回车)" Style="max-width: 450px;">
+                    <PrependInnerContent>
+                        <MIcon Class="ml-1 mr-2">mdi-magnify</MIcon>
+                    </PrependInnerContent>
+                </MTextField>
+                <MDivider Vertical Class="mx-2 my-auto" Inset Style="height:16px"></MDivider>
+                <MButton Text Class="m-btn--app text--secondary text-capitalize font-weight-regular px-2">
+                    学习
+                    <MIcon>mdi-chevron-down</MIcon>
+                </MButton>
+                <MButton Text Class="m-btn--app text--secondary text-capitalize font-weight-regular px-2">
+                    支持
+                    <MIcon>mdi-chevron-down</MIcon>
+                </MButton>
+                <MButton Text Class="m-btn--app text--secondary text-capitalize font-weight-regular px-2">
+                    <span>我们的团队</span>
+                </MButton>
+                <MDivider Vertical Class="mx-2 my-auto" Inset Style="height:16px"></MDivider>
+                <MButton Icon Rounded>
+                    <MIcon>mdi-cog-outline</MIcon>
+                </MButton>
+                <MButton Icon Rounded>
+                    <MIcon>mdi-translate</MIcon>
+                </MButton>
+            </div>
+        </MAppBar>
+        <MNavigationDrawer Fixed Floating Width="300">
+            <PrependContent>
+                <MToolbar Flat Class="m-bar--underline">
+                    <MListItem Class="pa-0 mx-n1">
+                        <MImage Width="40" Class="shrink" Src="https://masa-cdn.oss-cn-hangzhou.aliyuncs.com/images/logo/logo.png?x-oss-process=image/resize,w_100"></MImage>
+                        <span style="font-weight:bold;font-size:larger;margin-left:3px;padding:3px;">MASA Blazor</span>
+                        <MSpacer></MSpacer>
+                        <MButton Text Class="m-btn--app text--secondary text-capitalize font-weight-regular px-2">
+                            <span>v2.5.4</span>
+                            <MIcon>mdi-chevron-down</MIcon>
+                        </MButton>
+                    </MListItem>
+                </MToolbar>
+            </PrependContent>
+            <ChildContent>
+                <div class="pt-4 pb-3 px-2">
+                    <div class="ml-2 mb-3 text-caption font-weight-regular text--secondary" path="premiere-sponsors">高级赞助商</div>
+                    <MCard Class="d-inline-block px-2 py-1 rounded transparent" Flat Link Style="box-shadow:none!important">
+                        <MImage Class="d-inline-block" MaxHeight="64" Width="148" Src="https://img-cdn.lonsid.co/image/www/img/logo_g_2.png"></MImage>
+                    </MCard>
+                </div>
+                <MList Dense>
+                    @foreach (var item in MenuItems)
+                    {
+                        if (item.Children != null && item.Children.Any())
+                        {
+                            <MListGroup PrependIcon="@item.Icon" Color="primary" AppendIcon="mdi-menu-down ">
+                                <Activator>
+                                    <MListItemContent>
+                                        <MListItemTitle>@item.Title</MListItemTitle>
+                                    </MListItemContent>
+                                </Activator>
+                                <ChildContent>
+                                    @if (item.Children != null && item.Children.Any())
+                                    {
+                                        @foreach (var componentItem in item.Children)
+                                        {
+                                            <MListItem Link Href="@componentItem.Url">
+                                                <MListItemIcon>
+                                                </MListItemIcon>
+                                                <MListItemContent>
+                                                    <MListItemTitle>
+                                                        @if (LanguageService.CurrentCulture.Name == "zh-CN" && !string.IsNullOrEmpty(componentItem.SubTitle))
+                                                        {
+                                                            var title = componentItem.Title + $" ({componentItem.SubTitle})";
+                                                            @title
+                                                        }
+                                                        else
+                                                        {
+                                                            @componentItem.Title
+                                                        }
+                                                    </MListItemTitle>
+                                                </MListItemContent>
+                                            </MListItem>
+                                        }
+                                    }
+                                </ChildContent>
+                            </MListGroup>
+                        }
+                        else
+                        {
+                            <MListItem Link Href="@item.Url">
+                                <MListItemIcon>
+                                    <MIcon>@item.Icon</MIcon>
+                                </MListItemIcon>
+                                <MListItemContent>
+                                    <MListItemTitle>@item.Title</MListItemTitle>
+                                </MListItemContent>
+                            </MListItem>
+                        }
+                    }
+                </MList>
+                <div class="pt-12"></div>
+            </ChildContent>
+        </MNavigationDrawer>
+        <MMain Style="padding: 64px 256px 0px 300px;">
+            <MContainer Class="pa-4 pa-sm-6 pa-md-8" Fluid>
+                <div class="m-responsive mx-auto overflow-visible" style="max-width: 868px;">
+                    <div class="m-responsive__content">
+                        <div class="markdown-body">
+                            <section>
+                                @Body
+                            </section>
+                            <section class="mt-12">
+                                <h2 class="m-heading text-h4 text-sm-h4 mb-3"> 了解更多？ </h2>
+                                <div class="mb-3">
+                                    继续学习由
+                                    <a class="app-link text-decoration-none primary--text font-weight-medium d-inline-block">我们的团队</a> 选择的相关内容，或通过使用下面的导航链接在页面之间跳转。
+                                </div>
+                                <MRow Dense>
+                                    <MCol Span="4">
+                                        <MSheet Class="overflow-hidden" Outlined Rounded="true" MinHeight="61"></MSheet>
+                                    </MCol>
+                                    <MCol Span="4">
+                                        <MSheet Class="overflow-hidden" Outlined Rounded="true" MinHeight="61"></MSheet>
+                                    </MCol>
+                                    <MCol Span="4">
+                                        <MSheet Class="overflow-hidden" Outlined Rounded="true" MinHeight="61"></MSheet>
+                                    </MCol>
+                                </MRow>
+                                <MDivider Class="my-6 mt-7 mb-5"></MDivider>
+                                <div class="d-flex mb-4">
+                                    <a class="text-decoration-none text-body-1">
+                                        <span class="text-h6 text--primary">←&nbsp;</span>
+                                        <span>上一页</span>
+                                    </a>
+                                    <MSpacer></MSpacer>
+                                    <a class="text-decoration-none text-body-1">
+                                        <span>下一页</span>
+                                        <span class="text-h6 text--primary">&nbsp;→</span>
+                                    </a>
+                                </div>
+                                <MSheet Class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 m-vuetify-ad mb-8" Outlined Rounded="true" MinHeight="74" Style="width:100%"></MSheet>
+                                <div>
+                                    <div class="blue-grey--text text--darken-1 d-flexalign-center justify-space-between">
+                                        <div class="font-weight-medium d-flex align-baseline grow flex-wrap">
+                                            <span class="mb-2 mb-md-0">在 GitHub <a class="app-link text-decoration-none primary--text font-weight-medium d-inline-block">GitHub</a> 上编辑此页面</span><div class="spacer hidden-sm-and-down"></div><div class="text-body-2"><span class="font-weight-medium mr-1">最后更新：</span><span class="text--secondary">06/25/2021, 8:18:35 AM</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                     </div>
                 </div>
-            }
-
-            <Row>
-                @if (!_isMobile)
-                {
-                    <GridCol Class="main-menu" Xs="24" Sm="24" Md="6" Lg="6" Xl="5" Xxl="4">
-                        <div>
-                            <Affix>
-                                <section class="main-menu-inner">
-                                    <NavMenu />
-                                </section>
-                            </Affix>
-                        </div>
-                    </GridCol>
-                }
-
-                <GridCol Xs="24" Sm="24" Md="18" Lg="18" Xl="19" Xxl="20">
-                    <CascadingValue Value="this">
-                        @Body
-                        @*<div class="fixed-widgets">
-                            <span class="ant-avatar fixed-widgets-avatar ant-dropdown-trigger ant-avatar-circle ant-avatar-icon" style="width: 44px; height: 44px; line-height: 44px; font-size: 22px;">
-                                <span role="img" class="anticon">
-                                    <svg width="21" height="21" viewBox="0 0 21 21" fill="currentColor"><g fill-rule="evenodd"><g fill-rule="nonzero"><path d="M7.02 3.635l12.518 12.518a1.863 1.863 0 010 2.635l-1.317 1.318a1.863 1.863 0 01-2.635 0L3.068 7.588A2.795 2.795 0 117.02 3.635zm2.09 14.428a.932.932 0 110 1.864.932.932 0 010-1.864zm-.043-9.747L7.75 9.635l9.154 9.153 1.318-1.317-9.154-9.155zM3.52 12.473c.514 0 .931.417.931.931v.932h.932a.932.932 0 110 1.864h-.932v.931a.932.932 0 01-1.863 0l-.001-.931h-.93a.932.932 0 010-1.864h.93v-.932c0-.514.418-.931.933-.931zm15.374-3.727a1.398 1.398 0 110 2.795 1.398 1.398 0 010-2.795zM4.385 4.953a.932.932 0 000 1.317l2.046 2.047L7.75 7 5.703 4.953a.932.932 0 00-1.318 0zM14.701.36a.932.932 0 01.931.932v.931h.932a.932.932 0 010 1.864h-.933l.001.932a.932.932 0 11-1.863 0l-.001-.932h-.93a.932.932 0 110-1.864h.93v-.931a.932.932 0 01.933-.932z"></path></g></g></svg>
-                                </span>
-                            </span>
-                        </div>*@
-                        <PrevNextNav />
-                    </CascadingValue>
-                    <MainFooter />
-                </GridCol>
-            </Row>
-        </div>
-    </div>
-</MApp>
+            </MContainer>
+        </MMain>
+        <MNavigationDrawer Clipped Fixed Floating Right Top="64" Class="default-toc py-4 pr-3">
+            <PrependContent>
+                <div class="mb-2 text-h6 font-weight-medium text--primary" path="contents">目录</div>
+            </PrependContent>
+            <ChildContent>
+                <Contents></Contents>
+                <div class="ml-5">
+                </div>
+            </ChildContent>
+        </MNavigationDrawer>
+    </MApp>
+</CascadingValue>

@@ -13,11 +13,10 @@
     <link rel="icon" href="logo.png" type="image/x-icon">
     <link href="_content/MASA.Blazor/css/masa-blazor.css" rel="stylesheet">
     <link href="_content/MASA.Blazor/css/masa-extend-blazor.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2.6.3/dist/cdn/docsearch.min.css" />
-    <link href="_content/MASA.Blazor.Doc/css/docs.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;display=swap" media="all">
 </head>
 <body>
     <app>
@@ -25,20 +24,35 @@
     </app>
 
     @* todo remove ant design*@
-    <script src="_content/AntDesign/js/ant-design-blazor.js"></script>
     <script src="_content/BlazorComponent/js/blazor-component.js"></script>
     <script src="_content/MASA.Blazor.Doc/js/prism.js"></script>
     <script src="_framework/blazor.server.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2.6.3/dist/cdn/docsearch.min.js" integrity="sha256-qybEsgf0PGiQS22AmoozPs09oRnSC7Gu7eBu4fbS2Ac=" crossorigin="anonymous"></script>
-    <script src="_content/MASA.Blazor.Doc/js/docsearch.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"></script>
     <script>
-        window.AntDesign.Prism = {};
-        window.AntDesign.Prism.highlight = function (code, language) {
+        window.BlazorComponent.Prism = {};
+        window.BlazorComponent.Prism.highlight = function (code, language) {
             return Prism.highlight(code, Prism.languages[language], language);
         }
 
-        window.AntDesign.Prism.highlightAll = function () {
+        window.BlazorComponent.Prism.highlightAll = function () {
+            var pres = document.querySelectorAll("pre");
+
+            for (var i = 0; i < pres.length; i++) {
+                let pre = pres[i];
+
+                let parent = pre.parentElement;
+                if (parent.classList[0] == "app-code") {
+                    break;
+                }
+
+                let div = document.createElement("div");
+                div.className = "app-code overflow-hidden m-sheet m-sheet--outlined theme--light rounded grey lighten-5";
+                div.style = "opacity:0.85"
+
+                parent.replaceChild(div, pre);
+                div.appendChild(pre);
+            }
+
             Prism.highlightAll();
         }
     </script>

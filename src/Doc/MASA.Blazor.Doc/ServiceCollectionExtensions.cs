@@ -10,13 +10,10 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddMasaBlazorDocs(this IServiceCollection services)
         {
-            // todo: remove ant design
-            services.AddAntDesign();
             services.AddMasaBlazor();
 
             services.AddSingleton<RouteManager>();
             services.AddScoped<DemoService>();
-            services.AddScoped<IconListService>();
             services.AddSingleton<ILanguageService>(new InAssemblyLanguageService(Assembly.GetExecutingAssembly()));
             services.AddScoped<IPrismHighlighter, PrismHighlighter>();
 

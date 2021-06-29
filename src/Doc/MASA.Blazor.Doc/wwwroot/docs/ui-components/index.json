@@ -1,0 +1,14 @@
+{
+  "order": 4,
+  "title": [
+    {
+      "lang": "zh-CN",
+      "content": "UI组件"
+    },
+    {
+      "lang": "en-US",
+      "content": "UI components"
+    }
+  ],
+  "icon": "mdi-view-dashboard-outline"
+}

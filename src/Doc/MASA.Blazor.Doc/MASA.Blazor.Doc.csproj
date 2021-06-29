@@ -14,24 +14,9 @@
     <None Include="Pages\FetchData.razor" />
     <None Include="Pages\Index.razor" />
     <None Include="Shared\MainLayout.razor" />
-    <None Include="Shared\NavMenu.razor" />
     <None Include="Shared\SurveyPrompt.razor" />
     <None Include="wwwroot\docs\assets\blazor.svg" />
     <None Include="wwwroot\docs\assets\logo.svg" />
-    <None Include="wwwroot\docs\CHANGELOG.en-US.md" />
-    <None Include="wwwroot\docs\CHANGELOG.zh-CN.md" />
-    <None Include="wwwroot\docs\contributing.en-US.md" />
-    <None Include="wwwroot\docs\contributing.zh-CN.md" />
-    <None Include="wwwroot\docs\getting-started.en-US.md" />
-    <None Include="wwwroot\docs\getting-started.zh-CN.md" />
-    <None Include="wwwroot\docs\i18n.en-US.md" />
-    <None Include="wwwroot\docs\i18n.zh-CN.md" />
-    <None Include="wwwroot\docs\introduce.en-US.md" />
-    <None Include="wwwroot\docs\introduce.zh-CN.md" />
-    <None Include="wwwroot\docs\nightly-build.en-US.md" />
-    <None Include="wwwroot\docs\nightly-build.zh-CN.md" />
-    <None Include="wwwroot\docs\path-based-property-access.en-US.md" />
-    <None Include="wwwroot\docs\path-based-property-access.zh-CN.md" />
     <None Include="wwwroot\js\docsearch.js" />
     <None Include="wwwroot\js\prism.js" />
   </ItemGroup>
@@ -42,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AntDesign" Version="0.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0-preview.4.21253.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.5" />
   </ItemGroup>
@@ -68,52 +52,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Shared\BlankLayout.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
     <Content Update="Shared\CodeBox.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
-    <Content Update="Shared\ContributorsList.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Shared\DemoCard.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Shared\GithubButton.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Shared\HeaderMenu.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
     <Content Update="Shared\HighlightedCode.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Shared\MainContent.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Shared\MainFooter.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Shared\MainHeader.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Shared\MockBrowser.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Shared\PlainText.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Shared\PrevNextNav.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Shared\RazorBox.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Shared\Recommend.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Shared\Style.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
   </ItemGroup>

@@ -66,3 +66,210 @@
 .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr.stripe > td:last-child {
     background-color: #fafafa;
 }
+
+.theme--dark .m-bar--underline.theme--light, .theme--light .m-bar--underline.theme--light {
+    border-bottom-color: rgba(0,0,0,.12) !important;
+}
+
+.theme--dark .m-bar--underline, .theme--light .m-bar--underline {
+    border-width: 0 0 thin;
+    border-style: solid;
+}
+
+.flex-1-1-auto {
+    flex: 1 1 auto !important;
+}
+
+.default-toc ul {
+    list-style-type: none;
+}
+
+.default-toc li.router-link-active {
+    border-left-color: currentColor;
+}
+
+.default-toc li {
+    border-left: 2px solid #e5e5e5;
+}
+
+.m-heading {
+    display: inline-block;
+    position: relative;
+}
+
+    .m-heading > a:not(:hover):not(:focus) {
+        opacity: 0;
+    }
+
+.markdown-body a:not(:hover) {
+    text-decoration: none;
+}
+
+.m-heading > a {
+    bottom: 0;
+    display: inline-block;
+    left: 0;
+    margin: 0 -.7em;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+h1 + p {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+.markdown-body > section section {
+    margin-bottom: 3rem;
+}
+
+ol, ul {
+    margin-bottom: 16px;
+}
+
+.default-toc .m-toc-link {
+    color: inherit;
+}
+
+.m-sheet.app-code {
+    margin: 16px 0;
+    position: relative;
+    padding: 12px 50px 12px 16px;
+}
+
+    .m-sheet.app-code code[class*=language], .m-sheet.app-code pre[class*=language] {
+        background: none;
+        font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+        font-size: 1rem;
+        -webkit-hyphens: none;
+        -ms-hyphens: none;
+        hyphens: none;
+        line-height: 1.5;
+        margin: 0;
+        padding: 0;
+        -moz-tab-size: 4;
+        tab-size: 4;
+        text-align: left;
+        text-shadow: none;
+        white-space: pre;
+        word-break: normal;
+        word-spacing: normal;
+        word-wrap: normal;
+    }
+
+.m-example code[class*=language-], .m-example pre[class*=language-] {
+    text-shadow: none;
+}
+
+.m-sheet.app-code > pre {
+    border-radius: inherit;
+}
+
+.m-sheet.app-code code, .m-sheet.app-code pre {
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 300;
+    margin: 0 !important;
+}
+
+:not(pre) > code[class*=language-], pre[class*=language-] {
+    background: #f5f2f0;
+}
+
+pre[class*=language-] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+code[class*=language-], pre[class*=language-] {
+    color: #000;
+    background: none;
+    text-shadow: 0 1px #fff;
+    font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+    font-size: 1em;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+.token.boolean, .token.constant, .token.deleted, .token.property, .token.symbol, {
+    color: #905;
+}
+
+.token.tag {
+    color: rgb(128,0,128);
+}
+
+.token.number {
+    color: black;
+}
+
+.token {
+    background: none !important;
+}
+
+    .token.punctuation {
+        color: rgb(0,0,0,0.7);
+    }
+
+    .token.builtin, .token.char, .token.inserted, .token.selector {
+        color: #690;
+    }
+
+    .token.attr-name {
+        color: rgb(128,0,128);
+    }
+
+    .token.string {
+        color: rgb(163,21,21)
+    }
+
+    .token.atrule {
+        color: #07a;
+    }
+
+    .token.attr-value {
+        color: black;
+    }
+
+    .token.keyword {
+        color: blue;
+    }
+
+.m-sheet.app-code pre[class*=language]::after {
+    bottom: .75rem;
+    color: rgba(48,48,48,.5);
+    font-family: inherit;
+    font-size: .7rem;
+    font-weight: 700;
+    position: absolute;
+    right: 1rem;
+    text-transform: uppercase;
+}
+
+.m-example pre.language-html::after {
+    content: "razor";
+}
+
+.m-example pre.language-csharp::after {
+    content: "c#";
+}
+
+.token.class-name {
+    color: rgb(43,145,175)
+}
+
+.token.function {
+    color: rgb(116,83,31)
+}

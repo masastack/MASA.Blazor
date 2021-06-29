@@ -12,8 +12,6 @@
     </NotFound>
 </ConventionRouter>
 
-<AntContainer />
-
 @code{
 
     RenderFragment Result;
@@ -22,8 +20,6 @@
     {
         await base.OnInitializedAsync();
         await Task.Delay(2000);
-
-        Result = @<Result Status="404"/>;
     }
 
 }

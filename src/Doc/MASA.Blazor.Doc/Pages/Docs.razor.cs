@@ -15,7 +15,11 @@ namespace MASA.Blazor.Doc.Pages
 {
     public partial class Docs : ComponentBase, IDisposable
     {
-        [Parameter] public string FileName { get; set; }
+        [Parameter]
+        public string FileName { get; set; }
+
+        [Parameter]
+        public string Dir { get; set; }
 
         [CascadingParameter]
         public MainLayout MainLayout { get; set; }
@@ -23,9 +27,9 @@ namespace MASA.Blazor.Doc.Pages
         private DocFileModel _file;
 
         private bool _waitingHighlight = false;
+        private bool _init;
 
         private string _filePath;
-        private string EditUrl => $"https://github.com/ant-design-blazor/ant-design-blazor/edit/master/{_filePath}";
 
         private string CurrentLanguage => LanguageService.CurrentCulture.Name;
 
@@ -57,11 +61,11 @@ namespace MASA.Blazor.Doc.Pages
             if (!string.IsNullOrEmpty(FileName))
             {
                 var baseUrl = NavigationManager.ToAbsoluteUri(NavigationManager.BaseUri);
-                var docUrl = new Uri(baseUrl, $"_content/MASA.Blazor.Doc/docs/{FileName}.{CurrentLanguage}.json").ToString();
+                var docUrl = new Uri(baseUrl, $"_content/MASA.Blazor.Doc/docs/{(Dir == null ? "" : Dir + "/")}{FileName}.{CurrentLanguage}.json").ToString();
                 _file = await HttpClient.GetFromJsonAsync<DocFileModel>(docUrl);
                 _waitingHighlight = true;
 
-                await MainLayout.ChangePrevNextNav(FileName);
+                //await MainLayout.ChangePrevNextNav(FileName);
 
                 _filePath = $"docs/{FileName}.{CurrentLanguage}.md";
             }
@@ -70,13 +74,10 @@ namespace MASA.Blazor.Doc.Pages
         protected override async Task OnParametersSetAsync()
         {
             await SetDocUrl();
-            await base.OnParametersSetAsync();
         }
 
-        private async void OnLocationChanged(object sender, LocationChangedEventArgs args)
+        private void OnLocationChanged(object sender, LocationChangedEventArgs args)
         {
-            await SetDocUrl();
-            await InvokeAsync(StateHasChanged);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

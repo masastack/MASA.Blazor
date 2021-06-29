@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -15,14 +16,14 @@ namespace MASA.Blazor.Doc.Highlight
 
         public async ValueTask<MarkupString> HighlightAsync(string code, string language)
         {
-            string highlighted = await jsRuntime.InvokeAsync<string>("AntDesign.Prism.highlight", code, language);
+            string highlighted = await jsRuntime.InvokeAsync<string>("BlazorComponent.Prism.highlight", code, language);
 
             return new MarkupString(highlighted);
         }
 
         public async Task HighlightAllAsync()
         {
-            await jsRuntime.InvokeVoidAsync("AntDesign.Prism.highlightAll");
+            await jsRuntime.InvokeVoidAsync("BlazorComponent.Prism.highlightAll");
         }
     }
 }

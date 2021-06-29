@@ -32,7 +32,7 @@ namespace MASA.Blazor
                 }
             }
 
-            return length+1;
+            return length + 1;
         }
 
         protected override void SetComponentClass()
@@ -47,6 +47,11 @@ namespace MASA.Blazor
                 {
                     styleBuilder
                         .Add(() => $"width:{Width}px");
+                })
+                .Apply("prepend-inner", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input__prepend-inner");
                 });
 
             AbstractProvider

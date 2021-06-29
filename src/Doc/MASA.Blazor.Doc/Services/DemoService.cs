@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Reflection;
 using System.Threading.Tasks;
-using AntDesign;
+using BlazorComponent.Doc.CLI.Extensions;
 using BlazorComponent.Doc.CLI.Models;
 using MASA.Blazor.Doc.Localization;
 using Microsoft.AspNetCore.Components;
@@ -20,13 +20,14 @@ namespace MASA.Blazor.Doc.Services
         private static ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>> _demoMenuCache;
         private static ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>> _docMenuCache;
         private static ConcurrentCache<string, RenderFragment> _showCaseCache;
-
         private readonly ILanguageService _languageService;
         private readonly HttpClient _httpClient;
         private readonly NavigationManager _navigationManager;
         private Uri _baseUrl;
 
         private string CurrentLanguage => _languageService.CurrentCulture.Name;
+
+        private string CurrentComponentName { get; set; }
 
         public DemoService(ILanguageService languageService, HttpClient httpClient, NavigationManager navigationManager)
         {
@@ -81,10 +82,31 @@ namespace MASA.Blazor.Doc.Services
 
         public async Task<DemoComponentModel> GetComponentAsync(string componentName)
         {
+            CurrentComponentName = componentName;
             await InitializeAsync(CurrentLanguage);
             return _componentCache.TryGetValue(CurrentLanguage, out var component)
                 ? (await component)[componentName.ToLower()]
                 : null;
+        }
+
+        public async Task<List<ContentsItem>> GetTitlesAsync()
+        {
+            var menuItems = await GetMenuAsync();
+            var currentSubmenuUrl = GetCurrentUrl();
+            var current = menuItems.SelectMany(r => r.Children).FirstOrDefault(r => r.Url != null && currentSubmenuUrl.Contains(r.Url));
+
+            var contents = current?.Contents;
+            if (contents == null)
+            {
+                var components = await GetComponentAsync(CurrentComponentName);
+                contents = components.DemoList?.OrderBy(r => r.Order).Select(r => new ContentsItem
+                {
+                    Href = $"/#section-" + HashHelper.Hash(r.Title),
+                    Title = r.Title
+                }).ToList();
+            }
+
+            return contents;
         }
 
         public async Task<DemoMenuItemModel[]> GetMenuAsync()
@@ -107,17 +129,26 @@ namespace MASA.Blazor.Doc.Services
             return string.IsNullOrEmpty(originalUrl) ? "/" : originalUrl.Split('/')[0];
         }
 
+        public string GetCurrentUrl()
+        {
+            var currentUrl = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
+            return currentUrl;
+        }
+
         public RenderFragment GetShowCase(string type)
         {
             _showCaseCache ??= new ConcurrentCache<string, RenderFragment>();
             return _showCaseCache.GetOrAdd(type, t =>
             {
-                var showCase = Type.GetType($"{Assembly.GetExecutingAssembly().GetName().Name}.{type}") ?? typeof(Template);
+                var showCase = Type.GetType($"{Assembly.GetExecutingAssembly().GetName().Name}.{type}");
 
                 void ShowCase(RenderTreeBuilder builder)
                 {
-                    builder.OpenComponent(0, showCase);
-                    builder.CloseComponent();
+                    if (showCase != null)
+                    {
+                        builder.OpenComponent(0, showCase);
+                        builder.CloseComponent();
+                    }
                 }
 
                 return ShowCase;

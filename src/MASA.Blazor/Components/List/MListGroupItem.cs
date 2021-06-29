@@ -20,5 +20,9 @@ namespace MASA.Blazor.Components.List
                         .Add("m-list-group__header");
                 });
         }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+        }
     }
 }

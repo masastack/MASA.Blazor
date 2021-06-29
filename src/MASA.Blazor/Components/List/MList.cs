@@ -154,17 +154,33 @@ namespace MASA.Blazor
 
         public override void Select(BListItem selectItem)
         {
+            var groups = new List<BListGroup>();
+            var group = new BListGroup();
+
             foreach (MListItem item in Items)
             {
                 if (item != selectItem)
                 {
                     item.Deactive();
+
+                    if (item.ListGroup != null && !groups.Contains(item.ListGroup))
+                    {
+                        groups.Add(item.ListGroup);
+                    }
                 }
                 else
                 {
                     item.Active();
+
+                    if (item.ListGroup != null)
+                    {
+                        group = item.ListGroup;
+                    }
                 }
             }
+
+            groups.Remove(group);
+            groups.ForEach(r => r.DeActive());
         }
     }
 }

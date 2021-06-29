@@ -1,7 +1,7 @@
 ---
 order: 0
 title:
-  zh-CN: 用例
+  zh-CN: Fixed
   en-US: Usage
 ---
 

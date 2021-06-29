@@ -21,6 +21,10 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-window-item")
                         .AddIf("m-window-item--active", () => IsActive);
+                }, cssBuilder =>
+                {
+                    cssBuilder
+                        .AddIf("display:none", () => !IsActive);
                 });
         }
     }

@@ -1,0 +1,14 @@
+{
+  "order": 5,
+  "title": [
+    {
+      "lang": "zh-CN",
+      "content": "API"
+    },
+    {
+      "lang": "en-US",
+      "content": "API"
+    }
+  ],
+  "icon": "mdi-flask-outline"
+}

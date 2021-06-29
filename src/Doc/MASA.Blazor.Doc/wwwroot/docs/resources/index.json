@@ -1,0 +1,14 @@
+{
+  "order": 7,
+  "title": [
+    {
+      "lang": "zh-CN",
+      "content": "资源"
+    },
+    {
+      "lang": "en-US",
+      "content": "Resources"
+    }
+  ],
+  "icon": "mdi-teach"
+}

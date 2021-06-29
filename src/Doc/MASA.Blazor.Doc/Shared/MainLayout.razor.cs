@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using BlazorComponent;
+using BlazorComponent.Doc.CLI.Models;
 using MASA.Blazor.Doc.Localization;
 using MASA.Blazor.Doc.Services;
 using Microsoft.AspNetCore.Components;
@@ -12,12 +15,6 @@ namespace MASA.Blazor.Doc.Shared
 {
     public partial class MainLayout : LayoutComponentBase, IDisposable
     {
-        private bool _drawerVisible = false;
-
-        public string CurrentLanguage => LanguageService.CurrentCulture.Name;
-
-        private bool _isMobile;
-
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
@@ -30,10 +27,13 @@ namespace MASA.Blazor.Doc.Shared
         [Inject]
         public IJSRuntime JsInterop { get; set; }
 
-        internal PrevNextNav PrevNextNav { get; set; }
+        [Parameter]
+        public DemoMenuItemModel[] MenuItems { get; set; } = { };
 
         protected override async Task OnInitializedAsync()
         {
+            MenuItems = await DemoService.GetMenuAsync();
+
             StateHasChanged();
             await DemoService.InitializeDemos();
 
@@ -45,30 +45,29 @@ namespace MASA.Blazor.Doc.Shared
         {
             if (firstRender)
             {
-                await JsInterop.InvokeVoidAsync("window.MASA.DocSearch.init", CurrentLanguage);
+                //await JsInterop.InvokeVoidAsync("window.MASA.DocSearch.init", CurrentLanguage);
             }
         }
 
         public async Task ChangePrevNextNav(string currentTitle)
         {
-            if (string.IsNullOrWhiteSpace(currentTitle))
-                return;
+            //if (string.IsNullOrWhiteSpace(currentTitle))
+            //    return;
 
-            var currentSubmenuUrl = DemoService.GetCurrentSubMenuUrl();
-            var prevNext = await DemoService.GetPrevNextMenu(currentSubmenuUrl, currentTitle);
+            //var currentSubmenuUrl = DemoService.GetCurrentSubMenuUrl();
+            //var prevNext = await DemoService.GetPrevNextMenu(currentSubmenuUrl, currentTitle);
 
-            PrevNextNav?.SetPrevNextNav(prevNext[0], prevNext[1]);
         }
 
         private async void OnLanguageChanged(object sender, CultureInfo culture)
         {
-            await JsInterop.InvokeVoidAsync("window.MASA.DocSearch.localeChange", culture.Name);
-            await InvokeAsync(StateHasChanged);
+            //await JsInterop.InvokeVoidAsync("window.MASA.DocSearch.localeChange", culture.Name);
+            //await InvokeAsync(StateHasChanged);
         }
 
         private void OnLocationChanged(object sender, LocationChangedEventArgs args)
         {
-            StateHasChanged();
+            //_href = NavigationManager.Uri;
         }
 
         public void Dispose()

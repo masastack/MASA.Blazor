@@ -1,0 +1,14 @@
+{
+  "order": 3,
+  "title": [
+    {
+      "lang": "zh-CN",
+      "content": "样式和动画"
+    },
+    {
+      "lang": "en-US",
+      "content": "Styles and animations"
+    }
+  ],
+  "icon": "mdi-palette-outline"
+}

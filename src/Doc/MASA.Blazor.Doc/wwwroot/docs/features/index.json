@@ -1,0 +1,14 @@
+{
+  "order": 2,
+  "title": [
+    {
+      "lang": "zh-CN",
+      "content": "特性"
+    },
+    {
+      "lang": "en-US",
+      "content": "Features"
+    }
+  ],
+  "icon": "mdi-image-edit-outline"
+}

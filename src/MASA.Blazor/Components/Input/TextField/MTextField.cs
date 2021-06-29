@@ -49,11 +49,19 @@ namespace MASA.Blazor
         public bool Shaped { get; set; }
 
         [Parameter]
-        public string Type { get; set; }
+        public string Type { get; set; } = "text";
+
+        [Parameter]
+        public bool PersistentPlaceholder { get; set; }
+
+        [Parameter]
+        public RenderFragment PrependInnerContent { get; set; }
 
         protected bool ShowLabel => (!string.IsNullOrEmpty(Label) && !IsSolo) || (string.IsNullOrEmpty(Value) && IsSolo && !IsFocused);
 
         protected InputContext InputContext { get; set; }
+
+        protected bool HasLabel => Label != null;
 
         protected override void SetComponentClass()
         {
@@ -101,12 +109,13 @@ namespace MASA.Blazor
                     });
                     properties[nameof(MInputBody.Value)] = Value;
                     properties[nameof(MInputBody.InputContext)] = InputContext;
-                    properties[nameof(MInputBody.PlaceHolder)] = IsFocused ? Placeholder : "";
+                    properties[nameof(MInputBody.PlaceHolder)] = PersistentPlaceholder || IsFocused || !HasLabel ? Placeholder : "";
                     properties[nameof(MInputBody.Outlined)] = Outlined;
                     properties[nameof(MInputBody.Type)] = Type;
                     properties[nameof(MInputBody.IsTextField)] = true;
                     properties[nameof(MInputBody.Readonly)] = IsReadonly;
                     properties[nameof(MInputBody.Disabled)] = IsDisabled;
+                    properties[nameof(MInputBody.PrependInnerContent)] = PrependInnerContent;
                 });
             ValidationState = "error";
         }

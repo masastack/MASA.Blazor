@@ -75,6 +75,9 @@ namespace MASA.Blazor
         [Parameter]
         public bool HasState { get; set; }
 
+        [Parameter]
+        public string Color { get; set; }
+
         protected bool IsActive { get; set; }
 
         protected bool IsDirty => !EqualityComparer<TValue>.Default.Equals(Value, default);
@@ -133,7 +136,8 @@ namespace MASA.Blazor
                 .Apply("input-slot", cssBuilder =>
                 {
                     cssBuilder
-                        .Add($"{prefix}__slot");
+                        .Add($"{prefix}__slot")
+                        .AddBackgroundColor(Color);
                 }, styleBuilder =>
                 {
                     styleBuilder

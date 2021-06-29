@@ -112,7 +112,25 @@ namespace MASA.Blazor
             }
         }
 
-        public string Top => !IsBottom ? "0" : "auto";
+        private StringNumber _top;
+
+        [Parameter]
+        public StringNumber Top
+        {
+            get
+            {
+                if (_top == null)
+                {
+                    return !IsBottom ? "0" : "auto";
+                }
+
+                return _top;
+            }
+            set
+            {
+                _top = value;
+            }
+        }
 
         /// <summary>
         /// This should be down in next version
@@ -202,7 +220,7 @@ namespace MASA.Blazor
                     var translate = IsBottom ? "translateY" : "translateX";
                     styleBuilder
                         .Add($"height:{Height.ToUnit()}")
-                        .Add($"top:{Top}")
+                        .Add($"top:{Top.ToUnit()}")
                         .AddIf(() => $"maxHeight:calc(100% - {MaxHeight})", () => MaxHeight != null)
                         .AddIf(() => $"transform:{translate}({Transform}%)", () => Transform != null)
                         .Add($"width:{(IsMiniVariant ? MiniVariantWidth.ToUnit() : Width.ToUnit())}");
@@ -216,6 +234,11 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add($"{prefix}__border");
+                })
+                .Apply("prepend", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-navigation-drawer__prepend");
                 });
 
             Attributes.Add("data-booted", "true");

@@ -62,6 +62,9 @@ namespace MASA.Blazor
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
+        [CascadingParameter]
+        public BListGroup ListGroup { get; set; }
+
         private void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
             if (!string.IsNullOrEmpty(Href) && MatchUrl(Href, e.Location) && List != null)
