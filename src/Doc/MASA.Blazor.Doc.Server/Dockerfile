@@ -4,8 +4,9 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
 WORKDIR /src
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install -y nodejs && node -v && npm -v
 COPY ["Doc/MASA.Blazor.Doc.Server/MASA.Blazor.Doc.Server.csproj", "Doc/MASA.Blazor.Doc.Server/"]
 COPY ["MASA.Blazor/MASA.Blazor.csproj", "MASA.Blazor/"]
 COPY ["BlazorComponent/src/Component/BlazorComponent/BlazorComponent.csproj", "BlazorComponent/src/Component/BlazorComponent/"]

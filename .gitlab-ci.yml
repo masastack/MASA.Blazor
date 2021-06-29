@@ -8,11 +8,12 @@ variables:
   IMAGE: proget-hz.lonsid.cn/masa-blazor/docs:0.1.$CI_PIPELINE_ID
 
 build:
-  image: mcr.microsoft.com/dotnet/sdk:6.0
+  image: mcr.microsoft.com/dotnet/sdk:6.0-focal
   stage: build
   only:
     - branches
   script:
+    - curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install -y nodejs && node -v && npm -v
     - cd ./src
     - git clone -b develop http://gitlab-hz.lonsid.cn/MASA-Stack/BlazorComponent.git ./BlazorComponent
     - dotnet build 
