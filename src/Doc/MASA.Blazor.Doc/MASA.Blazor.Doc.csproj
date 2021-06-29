@@ -78,9 +78,5 @@
     <Exec WorkingDirectory="$(SolutionDir)" Command="dotnet $(CLIPath) docs2html $(ProjectDir)/wwwroot/docs ./Doc/MASA.Blazor.Doc/wwwroot/docs" />
   </Target>
 
-  <Target Name="PublishRunGulp" AfterTargets="ComputeFilesToPublish">
-    <Exec WorkingDirectory="$(SolutionDir)" Command="npm install" />
-    <Exec WorkingDirectory="$(SolutionDir)" Command="npm run gulp:docs" />
-  </Target>
 
 </Project>
