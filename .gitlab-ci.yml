@@ -1,5 +1,5 @@
 stages:
-  - build
+  - packer
   - docker
   - deploy
 
@@ -7,17 +7,15 @@ variables:
   DOCKER_HOST: tcp://localhost:2375/
   IMAGE: proget-hz.lonsid.cn/masa-blazor/docs:0.1.$CI_PIPELINE_ID
 
-build:
-  image: mcr.microsoft.com/dotnet/sdk:6.0-focal
-  stage: build
+packer:
+  image: proget-hz.lonsid.cn/masa-images/dotnet/sdk:6.0
+  stage: packer
   only:
     - branches
   script:
-    - curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install -y nodejs && node -v && npm -v
-    - cd ./src
-    - git clone -b develop http://gitlab-hz.lonsid.cn/MASA-Stack/BlazorComponent.git ./BlazorComponent
-    - dotnet build 
-    - dotnet pack  --include-symbols -p:PackageVersion=0.1.0.$CI_PIPELINE_ID
+    - git clone -b develop http://gitlab-hz.lonsid.cn/MASA-Stack/BlazorComponent.git ./src/BlazorComponent
+    - dotnet build src
+    - dotnet pack src --include-symbols -p:PackageVersion=0.1.0.$CI_PIPELINE_ID
     - dotnet nuget push "**/*.symbols.nupkg" --source gitlab
   artifacts:
     expire_in: 1 day
@@ -33,15 +31,14 @@ docker:
   services:
     - name: proget-hz.lonsid.cn/masa-images/library/docker:17.05.01-dind
   script:
-    - cd ./src
     - docker login -u gitlabci -p gitlabci http://proget-hz.lonsid.cn
-    - docker build -f ./Doc/MASA.Blazor.Doc.Server/Dockerfile -t $IMAGE .
+    - docker build -t $IMAGE .
     - docker push $IMAGE
 
 deploy:
-  image: zhu1531/rancher
+  image: zhu1531/rancher:sec
   stage: deploy
   only:
     - branches
   script:
-    - rancher kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n dev-techs-preview
+    - rancher kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
