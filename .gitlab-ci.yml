@@ -43,5 +43,5 @@ deploy:
   only:
     - branches
   script:
-    - rancher kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
+    - kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
   retry: 2
