@@ -21,6 +21,7 @@ packer:
     expire_in: 1 day
     paths:
       - ./src/BlazorComponent
+  retry: 2
 
 
 docker:
@@ -34,6 +35,7 @@ docker:
     - docker login -u gitlabci -p gitlabci http://proget-hz.lonsid.cn
     - docker build -t $IMAGE .
     - docker push $IMAGE
+  retry: 2
 
 deploy:
   image: zhu1531/rancher:sec
@@ -42,3 +44,4 @@ deploy:
     - branches
   script:
     - rancher kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
+  retry: 2
