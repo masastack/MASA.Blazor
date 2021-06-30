@@ -38,7 +38,7 @@ docker:
   retry: 2
 
 deploy:
-  image: proget-hz.lonsid.cn/masa-images/library/kubectl:1.17.2
+  image: proget-hz.lonsid.cn/masa-images/library/kubectl:1.17.2-newack
   stage: deploy
   only:
     - branches
