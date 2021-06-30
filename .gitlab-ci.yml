@@ -38,7 +38,7 @@ docker:
   retry: 2
 
 deploy:
-  image: zhu1531/rancher:sec
+  image: proget-hz.lonsid.cn/masa-images/library/kubectl:1.17.2
   stage: deploy
   only:
     - branches
