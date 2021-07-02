@@ -1,11 +1,11 @@
 ﻿<MRow>
-    <MCol Span="3">
+    <MCol Span="4">
         @string.Join(',', _values)
     </MCol>
     <MSpacer></MSpacer>
 </MRow>
 <MRow>
-    <MCol Span="3">
+    <MCol Span="4">
         <MAutocomplete TValue="string" @bind-Values="_values" TItem="Item" Multiple Items="_items" ItemValue="r=>r.Value" ItemText="r=>r.Label"></MAutocomplete>
     </MCol>
     <MSpacer></MSpacer>

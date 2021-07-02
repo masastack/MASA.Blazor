@@ -11,10 +11,6 @@ namespace MASA.Blazor
         [Parameter]
         public bool IsFull { get; set; }
 
-        protected double Left { get; set; }
-
-        protected double Top { get; set; }
-
         private BCascaderNode GetNodeByValue(IEnumerable<BCascaderNode> items, string value)
         {
             BCascaderNode result = null;
@@ -56,19 +52,36 @@ namespace MASA.Blazor
             ItemValue = r => r.Value;
 
             AbstractProvider
-                .Apply<BPopover, MCascaderPopover>(props =>
+                .Apply<BMenu, MCascaderMenu>(props =>
                 {
-                    props[nameof(MPopover.Class)] = "m-menu__content menuable__content__active";
-                    props[nameof(MPopover.Visible)] = (Visible && Items != null);
-                    props[nameof(MPopover.ClientX)] = (StringNumber)Left;
-                    props[nameof(MPopover.ClientY)] = (StringNumber)Top;
+                    props[nameof(MCascaderMenu.ActiverRef)] = SelectSoltRef;
+                    props[nameof(MCascaderMenu.OffsetLeft)] = -12.00;
+                    props[nameof(MMenu.Visible)] = Visible;
+                    props[nameof(MCascaderMenu.ContentStyle)] = "background-color: white";
+                    props[nameof(MMenu.VisibleChanged)] = EventCallback.Factory.Create<bool>(this, (v) =>
+                    {
+                        Visible = v;
+                    });
+                    props[nameof(MMenu.OffsetY)] = MenuProps?.OffsetY;
+                    props[nameof(MMenu.OffsetX)] = MenuProps?.OffsetX;
+                    props[nameof(MMenu.Block)] = MenuProps?.Block ?? true;
+                    props[nameof(MMenu.CloseOnContentClick)] = !HasBody && !Multiple;
+                    props[nameof(MMenu.Top)] = MenuProps?.Top;
+                    props[nameof(MMenu.Right)] = MenuProps?.Right;
+                    props[nameof(MMenu.Bottom)] = MenuProps?.Bottom;
+                    props[nameof(MMenu.Left)] = MenuProps?.Left;
+                    props[nameof(MMenu.NudgeTop)] = MenuProps?.NudgeTop;
+                    props[nameof(MMenu.NudgeRight)] = MenuProps?.NudgeRight;
+                    props[nameof(MMenu.NudgeBottom)] = MenuProps?.NudgeBottom;
+                    props[nameof(MMenu.NudgeLeft)] = MenuProps?.NudgeLeft;
+                    props[nameof(MMenu.NudgeWidth)] = MenuProps?.NudgeWidth;
+                    props[nameof(MMenu.MaxHeight)] = MenuProps?.MaxHeight ?? 400;
+                    props[nameof(MMenu.MinWidth)] = (StringNumber)"auto";
                 })
                 .Apply<ISelectBody, MCascaderSelectBody>(props =>
                 {
                     props[nameof(MCascaderSelectBody.Items)] = Items;
                     props[nameof(MCascaderSelectBody.Visible)] = Visible;
-                    props[nameof(MCascaderSelectBody.Left)] = Left;
-                    props[nameof(MCascaderSelectBody.Top)] = Top;
                     props[nameof(MCascaderSelectBody.OnOptionSelect)] = EventCallback.Factory.Create<MCascaderSelectOption>(this, async option =>
                     {
                         await SetSelectedAsync(ItemText(option.Item), option.Value);
@@ -76,18 +89,6 @@ namespace MASA.Blazor
                 });
 
             base.SetComponentClass();
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                var rect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
-                Left = rect.AbsoluteLeft;
-                Top = rect.AbsoluteTop + rect.ClientHeight;
-
-                StateHasChanged();
-            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
+using System;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor
@@ -8,6 +9,7 @@ namespace MASA.Blazor
     {
         private HtmlElement _activatorRect = new();
         private HtmlElement _contentRect = new();
+        private Func<Task> _removeTask;
 
         private bool Top => !(Bottom || Left || Right);
 
@@ -61,7 +63,7 @@ namespace MASA.Blazor
                         .Add(() => $"top:{OffsetTop}px")
                         .Add($"opacity:{(IsActive ? 0.9 : 0)}")
                         .Add("z-index:1100")
-                        .AddIf("display:none", () => Disabled);
+                        .AddIf("display:none", () => !IsActive || Disabled);
                 })
                 .Apply("activator", styleAction: styleBuilder =>
                  {
@@ -74,7 +76,13 @@ namespace MASA.Blazor
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
-                await JsInvokeAsync(JsInteropConstants.AddElementToBody, ContentRef);
+            {
+                await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, ".m-application");
+                _removeTask = async () =>
+                {
+                    await JsInvokeAsync(JsInteropConstants.DelElementFrom, ContentRef, ".m-application");
+                };
+            }
 
             if (_activatorRect.ClientWidth == 0)
                 _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
@@ -114,6 +122,16 @@ namespace MASA.Blazor
             await base.OnMouseEnter();
 
             _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            if (_removeTask != null)
+            {
+                Task.Run(_removeTask);
+            }
         }
     }
 }

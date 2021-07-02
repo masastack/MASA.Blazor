@@ -5,7 +5,7 @@
             isActive
         </MExpansionPanelHeader>
         <MExpansionPanelContent>
-            <MTextField Value="my status is active.."></MTextField>
+            <MTextField Value="_text" TValue="string"></MTextField>
         </MExpansionPanelContent>
     </MExpansionPanel>
 
@@ -47,3 +47,7 @@
     </MExpansionPanel>
 
 </MExpansionPanels>
+
+@code{
+    private string _text = "my status is active..";
+}

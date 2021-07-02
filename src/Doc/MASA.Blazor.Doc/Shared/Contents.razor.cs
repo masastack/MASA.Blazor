@@ -27,9 +27,6 @@ namespace MASA.Blazor.Doc.Shared
         public IJSRuntime Js { get; set; }
 
         [Inject]
-        public DemoService DemoService { get; set; }
-
-        [Inject]
         public NavigationManager NavigationManager { get; set; }
 
         private Timer _timer;
@@ -43,6 +40,13 @@ namespace MASA.Blazor.Doc.Shared
                 _timer.Interval = 300;
                 _timer.Elapsed += _timer_Elapsed;
             }
+        }
+
+        private async void OnLocationChanged(object sender, LocationChangedEventArgs e)
+        {
+            ActiveItem = null;
+            Items = await Service.GetTitlesAsync(NavigationManager.Uri);
+            StateHasChanged();
         }
 
         private async void _timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -77,13 +81,6 @@ namespace MASA.Blazor.Doc.Shared
                 ActiveItem = Items?.Find(r => r.Href.Contains(id));
                 await InvokeAsync(StateHasChanged);
             }
-        }
-
-        private async void OnLocationChanged(object sender, LocationChangedEventArgs e)
-        {
-            ActiveItem = null;
-            Items = await DemoService.GetTitlesAsync();
-            StateHasChanged();
         }
 
         protected override void OnAfterRender(bool firstRender)

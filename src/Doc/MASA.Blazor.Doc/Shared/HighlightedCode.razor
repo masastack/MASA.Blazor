@@ -23,12 +23,13 @@
 
     bool hasLoaded = false;
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (CanLoad && !hasLoaded)
         {
             sourceCode = await Highlighter.HighlightAsync(Code, Language);
             hasLoaded = true;
+            StateHasChanged();
         }
     }
 

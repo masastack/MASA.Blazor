@@ -1,4 +1,4 @@
-﻿---
+---
 order: 0
 title: 安装
 ---
@@ -36,10 +36,9 @@ $ dotnet add package MASA.Blazor -s http://gitlab-hz.lonsid.cn/api/v4/projects/2
 <link href="_content/MASA.Blazor/css/masa-blazor.css" rel="stylesheet">
 <link href="_content/MASA.Blazor/css/masa-extend-blazor.css" rel="stylesheet">
 <!--字体-->
-<link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
-<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;display=swap" media="all">
+<link href="https://cdn.masastack.com/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
 <!--脚本-->
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```

@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace MASA.Blazor.Doc.Pages
 {
-    public partial class Docs : ComponentBase, IDisposable
+    public partial class Docs : IDisposable
     {
         [Parameter]
         public string FileName { get; set; }
@@ -33,7 +33,6 @@ namespace MASA.Blazor.Doc.Pages
 
         [Inject] private NavigationManager NavigationManager { get; set; }
         [Inject] private ILanguageService LanguageService { get; set; }
-        [Inject] private DemoService DemoService { get; set; }
         [Inject] private IPrismHighlighter PrismHighlighter { get; set; }
 
         protected override async Task OnInitializedAsync()
@@ -44,7 +43,7 @@ namespace MASA.Blazor.Doc.Pages
             {
                 var currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
                 var newUrl = currentUrl.IndexOf('/') > 0 ? currentUrl.Substring(currentUrl.IndexOf('/') + 1) : currentUrl;
-                var menus = await DemoService.GetMenuAsync();
+                var menus = await Service.GetMenuAsync();
                 var current = menus.FirstOrDefault(x => x.Url == newUrl);
                 if (current != null)
                 {
@@ -57,9 +56,9 @@ namespace MASA.Blazor.Doc.Pages
         {
             if (!string.IsNullOrEmpty(FileName))
             {
-                var baseUrl = NavigationManager.ToAbsoluteUri(NavigationManager.BaseUri);
+                var baseUrl = new Uri("http://127.0.0.1:5000");
                 var docUrl = new Uri(baseUrl, $"_content/MASA.Blazor.Doc/docs/{(Dir == null ? "" : Dir + "/")}{FileName}.{CurrentLanguage}.json").ToString();
-                _file = await DemoService.GetDocFileAsync(docUrl);
+                _file = await Service.GetDocFileAsync(docUrl);
                 _waitingHighlight = true;
 
                 //await MainLayout.ChangePrevNextNav(FileName);

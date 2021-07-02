@@ -10,12 +10,6 @@ namespace MASA.Blazor
         public bool Visible { get; set; }
 
         [Parameter]
-        public double Left { get; set; }
-
-        [Parameter]
-        public double Top { get; set; }
-
-        [Parameter]
         public double? Height { get; set; }
 
         [Parameter]
@@ -24,11 +18,7 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .Apply<BCascaderSelectBody>(cssBuilder =>
-                {
-                    cssBuilder
-                      .Add("m-application");
-                }, styleBuilder =>
+                .Apply<BCascaderSelectBody>(styleAction: styleBuilder =>
                  {
                      styleBuilder
                          .Add("display:inline-block")

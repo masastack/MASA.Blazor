@@ -15,12 +15,6 @@
         <MTableCol Align="right">
             @context.Col3
         </MTableCol>
-        <MTableCol>
-            @context.Col4
-        </MTableCol>
-        <MTableCol>
-            @context.Col5
-        </MTableCol>
     </MTable>
 </MContainer>
 
@@ -32,205 +26,76 @@
         public int Col1 { get; set; }
         public int Col2 { get; set; }
         public int Col3 { get; set; }
-        public int Col4 { get; set; }
-        public int Col5 { get; set; }
     }
 
     private bool _loading;
 
-    private List<Dessert> _desserts = new List<Dessert>
-{
-        new Dessert
-        {
-            Name= "Frozen Yogurt",
-            Calories= 159,
-        },
-        new Dessert
-        {
-        Name= "Ice cream sandwich",
-        Calories= 237,
-        },
-        new Dessert
-        {
-        Name= "Eclair",
-        Calories=  262,
-        },
-        new Dessert
-        {
-            Name= "Frozen Yogurt",
-            Calories= 159,
-        },
-        new Dessert
-        {
-        Name= "Ice cream sandwich",
-        Calories= 237,
-        },
-        new Dessert
-        {
-        Name= "Eclair",
-        Calories=  262,
-        },
-        new Dessert
-        {
-            Name= "Frozen Yogurt",
-            Calories= 159,
-        },
-        new Dessert
-        {
-        Name= "Ice cream sandwich",
-        Calories= 237,
-        },
-        new Dessert
-        {
-        Name= "Eclair",
-        Calories=  262,
-        },
-        new Dessert
-        {
-            Name= "Frozen Yogurt",
-            Calories= 159,
-        },
-        new Dessert
-        {
-        Name= "Ice cream sandwich",
-        Calories= 237,
-        },
-        new Dessert
-        {
-        Name= "Eclair",
-        Calories=  262,
-        },
-        new Dessert
-        {
-            Name= "Frozen Yogurt",
-            Calories= 159,
-        },
-        new Dessert
-        {
-        Name= "Ice cream sandwich",
-        Calories= 237,
-        },
-        new Dessert
-        {
-        Name= "Eclair",
-        Calories=  262,
-        },
-        new Dessert
-        {
-            Name= "Frozen Yogurt",
-            Calories= 159,
-        },
-        new Dessert
-        {
-        Name= "Ice cream sandwich",
-        Calories= 237,
-        },
-        new Dessert
-        {
-        Name= "Eclair",
-        Calories=  262,
-        },
-        new Dessert
-        {
-            Name= "Frozen Yogurt",
-            Calories= 159,
-        },
-        new Dessert
-        {
-        Name= "Ice cream sandwich",
-        Calories= 237,
-        },
-        new Dessert
-        {
-        Name= "Eclair",
-        Calories=  262,
-        },
-        new Dessert
-        {
-            Name= "Frozen Yogurt",
-            Calories= 159,
-        },
-        new Dessert
-        {
-        Name= "Ice cream sandwich",
-        Calories= 237,
-        },
-        new Dessert
-        {
-        Name= "Eclair",
-        Calories=  262,
-        },
-        new Dessert
-        {
-            Name= "Frozen Yogurt",
-            Calories= 159,
-        },
-        new Dessert
-        {
-        Name= "Ice cream sandwich",
-        Calories= 237,
-        },
-        new Dessert
-        {
-        Name= "Eclair",
-        Calories=  262,
-        },
-        new Dessert
-        {
-            Name= "Frozen Yogurt",
-            Calories= 159,
-        },
-        new Dessert
-        {
-        Name= "Ice cream sandwich",
-        Calories= 237,
-        },
-        new Dessert
-        {
-        Name= "Eclair",
-        Calories=  262,
-        },
-        new Dessert
-        {
-            Name= "Frozen Yogurt",
-            Calories= 159,
-        },
-        new Dessert
-        {
-        Name= "Ice cream sandwich",
-        Calories= 237,
-        },
-        new Dessert
-        {
-        Name= "Eclair",
-        Calories=  262,
-        },
-        new Dessert
-        {
-            Name= "Frozen Yogurt",
-            Calories= 159,
-        },
-        new Dessert
-        {
-        Name= "Ice cream sandwich",
-        Calories= 237,
-        },
-        new Dessert
-        {
-        Name= "Eclair",
-        Calories=  262,
-        }
-    };
-
-    private List<string> _headers = new List<string>
-{
+    private List<TableHeaderOptions> _headers = new List<TableHeaderOptions>
+    {
         "Name",
         "Calories",
         "Col1",
         "Col2",
         "Col3",
-        "Col4",
-        "Col5"
+    };
+
+    private List<Dessert> _desserts = new List<Dessert>
+    {
+        new Dessert
+        {
+            Name= "Frozen Yogurt",
+            Calories= 159,
+        },
+        new Dessert
+        {
+        Name= "Ice cream sandwich",
+        Calories= 237,
+        },
+        new Dessert
+        {
+        Name= "Eclair",
+        Calories=  262,
+        },
+        new Dessert
+        {
+            Name= "Frozen Yogurt",
+            Calories= 159,
+        },
+        new Dessert
+        {
+        Name= "Ice cream sandwich",
+        Calories= 237,
+        },
+        new Dessert
+        {
+        Name= "Eclair",
+        Calories=  262,
+        },
+        new Dessert
+        {
+            Name= "Frozen Yogurt",
+            Calories= 159,
+        },
+        new Dessert
+        {
+        Name= "Ice cream sandwich",
+        Calories= 237,
+        },
+        new Dessert
+        {
+        Name= "Eclair",
+        Calories=  262,
+        },
+        new Dessert
+        {
+            Name= "Frozen Yogurt",
+            Calories= 159,
+        },
+        new Dessert
+        {
+        Name= "Ice cream sandwich",
+        Calories= 237,
+        }
     };
 
     public void Test(MouseEventArgs args)

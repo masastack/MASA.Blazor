@@ -1,13 +1,19 @@
 ﻿<MContainer>
-    <div>
-        <button @onclick="Test">test</button>
-    </div>
-    <MTable TItem="Dessert" Headers="_headers" Loading="_loading" Items="_desserts">
+    <MTable TItem="Dessert" Headers="_headers" Loading="_loading" Items="_desserts" Align="center">
         <MTableCol>
             @context.Name
         </MTableCol>
         <MTableCol>
             @context.Calories
+        </MTableCol>
+        <MTableCol Width="100">
+            @context.Col1
+        </MTableCol>
+        <MTableCol>
+            @context.Col2
+        </MTableCol>
+        <MTableCol Align="right">
+            @context.Col3
         </MTableCol>
     </MTable>
 </MContainer>
@@ -17,17 +23,28 @@
     {
         public string Name { get; set; }
         public int Calories { get; set; }
+        public int Col1 { get; set; }
+        public int Col2 { get; set; }
+        public int Col3 { get; set; }
     }
+
     private bool _loading;
 
     private List<TableHeaderOptions> _headers = new List<TableHeaderOptions>
     {
         "Name",
-        "Calories"
+        "Calories",
+        new TableHeaderOptions
+        {
+            Text="Col1",
+            Width=100
+        },
+        "Col2",
+        "Col3",
     };
 
     private List<Dessert> _desserts = new List<Dessert>
-    {
+{
         new Dessert
         {
             Name= "Frozen Yogurt",
@@ -35,28 +52,13 @@
         },
         new Dessert
         {
-            Name= "Ice cream sandwich",
-            Calories= 237,
+        Name= "Ice cream sandwich",
+        Calories= 237,
         },
         new Dessert
         {
-            Name= "Eclair",
-            Calories=  262,
-        },
-        new Dessert
-        {
-            Name= "Frozen Yogurt",
-            Calories= 159,
-        },
-        new Dessert
-        {
-            Name= "Ice cream sandwich",
-            Calories= 237,
-        },
-        new Dessert
-        {
-            Name= "Eclair",
-            Calories=  262,
+        Name= "Eclair",
+        Calories=  262,
         },
         new Dessert
         {
@@ -65,13 +67,13 @@
         },
         new Dessert
         {
-            Name= "Ice cream sandwich",
-            Calories= 237,
+        Name= "Ice cream sandwich",
+        Calories= 237,
         },
         new Dessert
         {
-            Name= "Eclair",
-            Calories=  262,
+        Name= "Eclair",
+        Calories=  262,
         },
         new Dessert
         {
@@ -80,8 +82,23 @@
         },
         new Dessert
         {
-            Name= "Ice cream sandwich",
-            Calories= 237
+        Name= "Ice cream sandwich",
+        Calories= 237,
+        },
+        new Dessert
+        {
+        Name= "Eclair",
+        Calories=  262,
+        },
+        new Dessert
+        {
+            Name= "Frozen Yogurt",
+            Calories= 159,
+        },
+        new Dessert
+        {
+        Name= "Ice cream sandwich",
+        Calories= 237,
         }
     };
 

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MInputBody : BInputBody
+    public partial class MInputBody<TValue> : BInputBody<TValue>
     {
         public int Width => IsActive ? ComputeLabeLength() * 6 : 0;
 

@@ -1,11 +1,13 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MTextField : MInput<string>
+    public partial class MTextField<TValue> : MInput<TValue>
     {
         [Parameter]
         public bool FullWidth { get; set; }
@@ -57,9 +59,9 @@ namespace MASA.Blazor
         [Parameter]
         public RenderFragment PrependInnerContent { get; set; }
 
-        protected bool ShowLabel => (!string.IsNullOrEmpty(Label) && !IsSolo) || (string.IsNullOrEmpty(Value) && IsSolo && !IsFocused);
+        protected bool ShowLabel => (!string.IsNullOrEmpty(Label) && !IsSolo) || (EqualityComparer<TValue>.Default.Equals(Value, default) && IsSolo && !IsFocused);
 
-        protected InputContext InputContext { get; set; }
+        protected InputContext<TValue> InputContext { get; set; }
 
         protected bool HasLabel => Label != null;
 
@@ -96,26 +98,26 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply<IInputBody, MInputBody>(properties =>
+                .Apply<IInputBody, MInputBody<TValue>>(properties =>
                 {
-                    properties[nameof(MInputBody.Label)] = Label;
-                    properties[nameof(MInputBody.ShowLabel)] = ShowLabel;
-                    properties[nameof(MInputBody.IsActive)] = IsActive || !string.IsNullOrEmpty(Value);
-                    properties[nameof(MInputBody.IsFocused)] = IsFocused;
-                    properties[nameof(MInputBody.OnBlur)] = EventCallback.Factory.Create<FocusEventArgs>(this, () =>
+                    properties[nameof(MInputBody<TValue>.Label)] = Label;
+                    properties[nameof(MInputBody<TValue>.ShowLabel)] = ShowLabel;
+                    properties[nameof(MInputBody<TValue>.IsActive)] = IsActive || !EqualityComparer<TValue>.Default.Equals(Value, default);
+                    properties[nameof(MInputBody<TValue>.IsFocused)] = IsFocused;
+                    properties[nameof(MInputBody<TValue>.OnBlur)] = EventCallback.Factory.Create<FocusEventArgs>(this, () =>
                     {
                         IsActive = false;
                         IsFocused = false;
                     });
-                    properties[nameof(MInputBody.Value)] = Value;
-                    properties[nameof(MInputBody.InputContext)] = InputContext;
-                    properties[nameof(MInputBody.PlaceHolder)] = PersistentPlaceholder || IsFocused || !HasLabel ? Placeholder : "";
-                    properties[nameof(MInputBody.Outlined)] = Outlined;
-                    properties[nameof(MInputBody.Type)] = Type;
-                    properties[nameof(MInputBody.IsTextField)] = true;
-                    properties[nameof(MInputBody.Readonly)] = IsReadonly;
-                    properties[nameof(MInputBody.Disabled)] = IsDisabled;
-                    properties[nameof(MInputBody.PrependInnerContent)] = PrependInnerContent;
+                    properties[nameof(MInputBody<TValue>.Value)] = Value;
+                    properties[nameof(MInputBody<TValue>.InputContext)] = InputContext;
+                    properties[nameof(MInputBody<TValue>.PlaceHolder)] = PersistentPlaceholder || IsFocused || !HasLabel ? Placeholder : "";
+                    properties[nameof(MInputBody<TValue>.Outlined)] = Outlined;
+                    properties[nameof(MInputBody<TValue>.Type)] = Type;
+                    properties[nameof(MInputBody<TValue>.IsTextField)] = true;
+                    properties[nameof(MInputBody<TValue>.Readonly)] = IsReadonly;
+                    properties[nameof(MInputBody<TValue>.Disabled)] = IsDisabled;
+                    properties[nameof(MInputBody<TValue>.PrependInnerContent)] = PrependInnerContent;
                 });
             ValidationState = "error";
         }
@@ -124,20 +126,20 @@ namespace MASA.Blazor
         {
             if (InputContext == null)
             {
-                InputContext = new InputContext();
+                InputContext = new InputContext<TValue>();
                 InputContext.OnValueChanged += InputContext_OnValueChanged;
             }
 
             base.OnParametersSet();
         }
 
-        private void InputContext_OnValueChanged(string value)
+        private async Task InputContext_OnValueChanged(TValue value)
         {
-            Value = value;
             if (ValueChanged.HasDelegate)
             {
-                ValueChanged.InvokeAsync(Value);
+                await ValueChanged.InvokeAsync(value);
             }
+            Value = value;
         }
 
         protected override async Task HandleClickAsync(MouseEventArgs args)

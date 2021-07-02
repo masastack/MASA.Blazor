@@ -1,6 +1,8 @@
 ﻿@page "/docs/{fileName}"
 @page "/docs"
 @page "/docs/{dir}/{fileName}"
+@using MASA.Blazor.Doc.Services
+@inherits OwningComponentBase<DemoService>
 
 @if (_file != null)
 {

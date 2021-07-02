@@ -3,6 +3,9 @@
 @page "/charts/{name}"
 @page "/charts"
 @using BlazorComponent.Doc.CLI.Models
+@using MASA.Blazor.Doc.Services
+@inherits OwningComponentBase<DemoService>
+@inject NavigationManager NavigationManager
 
 @if (_demoComponent != null)
 {

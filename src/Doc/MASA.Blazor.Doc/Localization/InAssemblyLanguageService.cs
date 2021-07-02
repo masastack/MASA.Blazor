@@ -92,7 +92,7 @@ namespace MASA.Blazor.Doc.Localization
                 var content = streamReader.ReadToEnd();
                 return new Resources(content);
             }
-            catch (System.Exception e)
+            catch
             {
                 return null;
             }

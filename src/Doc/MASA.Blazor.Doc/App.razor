@@ -14,7 +14,7 @@
 
 @code{
 
-    RenderFragment Result;
+    RenderFragment Result = r => r.AddContent(0, "对不起，页面不存在！");
 
     protected override async Task OnInitializedAsync()
     {

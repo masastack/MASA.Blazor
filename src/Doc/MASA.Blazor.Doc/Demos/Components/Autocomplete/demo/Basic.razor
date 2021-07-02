@@ -1,11 +1,11 @@
 ﻿<MRow>
-    <MCol Span="3">
+    <MCol Span="4">
         @_value
     </MCol>
     <MSpacer></MSpacer>
 </MRow>
 <MRow>
-    <MCol Span="3">
+    <MCol Span="4">
         <MAutocomplete Loading="_loading" OnInput="HandleOnInputAsync" @bind-Value="_value" TValue="string" TItem="Item" Items="_items" ItemValue="r=>r.Value" ItemText="r=>r.Label"></MAutocomplete>
     </MCol>
     <MSpacer></MSpacer>

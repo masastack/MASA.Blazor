@@ -69,29 +69,31 @@ namespace MASA.Blazor
             IsAutocomplete = true;
 
             AbstractProvider
-                .Apply<BMenu, MMenu>(props =>
-                 {
-                     props[nameof(MMenu.Visible)] = Visible;
-                     props[nameof(MMenu.VisibleChanged)] = EventCallback.Factory.Create<bool>(this, (v) =>
-                     {
-                         Visible = v;
-                     });
-                     props[nameof(MMenu.OffsetY)] = MenuProps?.OffsetY ?? true;
-                     props[nameof(MMenu.OffsetX)] = MenuProps?.OffsetX;
-                     props[nameof(MMenu.Block)] = MenuProps?.Block ?? true;
-                     props[nameof(MMenu.CloseOnContentClick)] = !Multiple;
-                     props[nameof(MMenu.Top)] = MenuProps?.Top;
-                     props[nameof(MMenu.Right)] = MenuProps?.Right;
-                     props[nameof(MMenu.Bottom)] = MenuProps?.Bottom;
-                     props[nameof(MMenu.Left)] = MenuProps?.Left;
-                     props[nameof(MMenu.NudgeTop)] = MenuProps?.NudgeTop;
-                     props[nameof(MMenu.NudgeRight)] = MenuProps?.NudgeRight;
-                     props[nameof(MMenu.NudgeBottom)] = MenuProps?.NudgeBottom;
-                     props[nameof(MMenu.NudgeLeft)] = MenuProps?.NudgeLeft;
-                     props[nameof(MMenu.NudgeWidth)] = MenuProps?.NudgeWidth;
-                     props[nameof(MMenu.MaxHeight)] = MenuProps?.MaxHeight ?? 400;
-                     props[nameof(MMenu.MinWidth)] = MenuProps?.MinWidth;
-                 })
+                .Apply<BMenu, MCascaderMenu>(props =>
+                {
+                    props[nameof(MCascaderMenu.ActiverRef)] = SelectSoltRef;
+                    props[nameof(MCascaderMenu.ContentStyle)] = $"max-width:{MinWidth.ToUnit()};overflow: hidden";
+                    props[nameof(MMenu.Visible)] = Visible;
+                    props[nameof(MMenu.VisibleChanged)] = EventCallback.Factory.Create<bool>(this, (v) =>
+                    {
+                        Visible = v;
+                    });
+                    props[nameof(MMenu.OffsetY)] = MenuProps?.OffsetY;
+                    props[nameof(MMenu.OffsetX)] = MenuProps?.OffsetX;
+                    props[nameof(MMenu.Block)] = MenuProps?.Block ?? true;
+                    props[nameof(MMenu.CloseOnContentClick)] = !HasBody && !Multiple;
+                    props[nameof(MMenu.Top)] = MenuProps?.Top;
+                    props[nameof(MMenu.Right)] = MenuProps?.Right;
+                    props[nameof(MMenu.Bottom)] = MenuProps?.Bottom;
+                    props[nameof(MMenu.Left)] = MenuProps?.Left;
+                    props[nameof(MMenu.NudgeTop)] = MenuProps?.NudgeTop;
+                    props[nameof(MMenu.NudgeRight)] = MenuProps?.NudgeRight;
+                    props[nameof(MMenu.NudgeBottom)] = MenuProps?.NudgeBottom;
+                    props[nameof(MMenu.NudgeLeft)] = MenuProps?.NudgeLeft;
+                    props[nameof(MMenu.NudgeWidth)] = MenuProps?.NudgeWidth;
+                    props[nameof(MMenu.MaxHeight)] = MenuProps?.MaxHeight ?? 400;
+                    props[nameof(MMenu.MinWidth)] = MenuProps?.MinWidth;
+                })
                 .Apply<ISelectBody, MAutocompleteSelectBody<TItem>>(props =>
                 {
                     props[nameof(MAutocompleteSelectBody<TItem>.Items)] = GetFilteredItems();
@@ -226,6 +228,8 @@ namespace MASA.Blazor
                 var activeIndex = GetFilteredItems().IndexOf(SelectedItem);
                 HighlightIndex = activeIndex;
             }
+
+            await InputRef.FocusAsync();
         }
 
         protected override void HandleOnBlur(FocusEventArgs args)
@@ -262,6 +266,8 @@ namespace MASA.Blazor
                 {
                     ValueChanged.InvokeAsync(Value);
                 }
+
+                Visible = false;
             }
         }
 

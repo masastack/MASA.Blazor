@@ -14,7 +14,7 @@
                 Placeholder="@Placeholder"
                 Clearable
                 ClearClick="HandleClearClick"
-                Value="@InputValue" ValueChanged="InputValueChanged"></MTextField>
+                Value="@InputValue" TValue="string" ValueChanged="InputValueChanged"></MTextField>
     </div>
 
     <MDialog Visible="_menuVisible" Width="@("auto")" OutsideClick="OnCancel">
@@ -53,7 +53,7 @@ else
                     Placeholder="@Placeholder"
                     Clearable
                     ClearClick="HandleClearClick"
-                    Value="@InputValue" ValueChanged="InputValueChanged"></MTextField>
+                    Value="@InputValue" TValue="string" ValueChanged="InputValueChanged"></MTextField>
         </Activator>
         <ChildContent>
             <MDatePicker @bind-Value="_dateTime" Style="width:min-content" ActionsStyle="flex-direction:column;">

@@ -34,7 +34,7 @@ namespace MASA.Blazor.Doc.Services
             _languageService = languageService;
             _httpClient = httpClient;
             _navigationManager = navigationManager;
-            _baseUrl = _navigationManager.ToAbsoluteUri(_navigationManager.BaseUri);
+            _baseUrl = new Uri("http://127.0.0.1:5000");
 
             _languageService.LanguageChanged += async (sender, args) => await InitializeAsync(args.Name);
         }
@@ -94,16 +94,16 @@ namespace MASA.Blazor.Doc.Services
                 : null;
         }
 
-        public async Task<List<ContentsItem>> GetTitlesAsync()
+        public async Task<List<ContentsItem>> GetTitlesAsync(string currentUrl)
         {
             var menuItems = await GetMenuAsync();
-            var currentSubmenuUrl = GetCurrentUrl();
-            var current = menuItems.SelectMany(r => r.Children).FirstOrDefault(r => r.Url != null && currentSubmenuUrl.Contains(r.Url));
+            var current = menuItems.SelectMany(r => r.Children).FirstOrDefault(r => r.Url != null && currentUrl.Contains(r.Url));
 
             var contents = current?.Contents;
-            if (contents == null)
+            var componentName = currentUrl.Split('/')[^1];
+            if (contents == null && componentName != null)
             {
-                var components = await GetComponentAsync(CurrentComponentName);
+                var components = await GetComponentAsync(componentName);
                 contents = components.DemoList?.OrderBy(r => r.Order).Select(r => new ContentsItem
                 {
                     Href = $"/#section-" + HashHelper.Hash(r.Title),

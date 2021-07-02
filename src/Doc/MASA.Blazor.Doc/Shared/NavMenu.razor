@@ -1,0 +1,68 @@
+﻿@using MASA.Blazor.Doc.Services
+@inherits OwningComponentBase<DemoService>
+@using BlazorComponent.Doc.CLI.Models;
+@inject ILanguageService LanguageService
+<MList Dense>
+    @foreach (var item in MenuItems)
+    {
+        if (item.Children != null && item.Children.Any())
+        {
+            <MListGroup PrependIcon="@item.Icon" Color="primary" AppendIcon="mdi-menu-down ">
+                <Activator>
+                    <MListItemContent>
+                        <MListItemTitle>@item.Title</MListItemTitle>
+                    </MListItemContent>
+                </Activator>
+                <ChildContent>
+                    @if (item.Children != null && item.Children.Any())
+                    {
+                        @foreach (var componentItem in item.Children)
+                        {
+                            <MListItem Link Href="@componentItem.Url">
+                                <MListItemIcon>
+                                </MListItemIcon>
+                                <MListItemContent>
+                                    <MListItemTitle>
+                                        @if (LanguageService.CurrentCulture.Name == "zh-CN" && !string.IsNullOrEmpty(componentItem.SubTitle))
+                                        {
+                                            var title = componentItem.Title + $" ({componentItem.SubTitle})";
+                                            @title
+                                        }
+                                        else
+                                        {
+                                            @componentItem.Title
+                                        }
+                                    </MListItemTitle>
+                                </MListItemContent>
+                            </MListItem>
+                        }
+                    }
+                </ChildContent>
+            </MListGroup>
+        }
+        else
+        {
+            <MListItem Link Href="@item.Url">
+                <MListItemIcon>
+                    <MIcon>@item.Icon</MIcon>
+                </MListItemIcon>
+                <MListItemContent>
+                    <MListItemTitle>@item.Title</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+        }
+    }
+</MList>
+
+@code{
+    [Parameter]
+    public DemoMenuItemModel[] MenuItems { get; set; } = { };
+
+    protected override async Task OnInitializedAsync()
+    {
+        MenuItems = await Service.GetMenuAsync();
+
+        StateHasChanged();
+        await Service.InitializeDemos();
+    }
+}

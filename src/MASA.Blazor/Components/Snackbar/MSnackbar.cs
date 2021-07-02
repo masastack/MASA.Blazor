@@ -142,6 +142,7 @@ namespace MASA.Blazor
                     props[nameof(MSnackbarButton.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
                         IsActive = false;
+                        Timer.Stop();
                         if (IsActiveChanged.HasDelegate)
                         {
                             await IsActiveChanged.InvokeAsync(_isActive);

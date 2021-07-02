@@ -1,0 +1,36 @@
+﻿@using System.ComponentModel.DataAnnotations
+
+<MForm Model="_order" EnableDataAnnotationsValidation>
+    <MRow>
+        <MCol Span="4">
+            <MTextField @bind-Value="_order.Title"></MTextField>
+            <MTextField @bind-Value="_order.Price" Type="number"></MTextField>
+        </MCol>
+        <MSpacer></MSpacer>
+    </MRow>
+    <MRow>
+        <MButton Click="()=>SubmitOrder(context)">提交</MButton>
+    </MRow>
+</MForm>
+
+@code{
+    public class Order
+    {
+        public int Id { get; set; }
+        [Required]
+        public string Title { get; set; }
+        [Range(0, 20.00)]
+        public decimal Price { get; set; }
+    }
+
+    private Order _order = new();
+
+    public void SubmitOrder(EditContext context)
+    {
+        var success = context.Validate();
+        if (success)
+        {
+            //验证成功，操作业务
+        }
+    }
+}

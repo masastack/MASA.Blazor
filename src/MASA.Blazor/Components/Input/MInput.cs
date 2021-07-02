@@ -170,7 +170,7 @@ namespace MASA.Blazor
                 });
         }
 
-        protected override void OnParametersSet()
+        protected override void OnInitialized()
         {
             if (ValueExpression != null && EditContext != null && !_init)
             {

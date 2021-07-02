@@ -1,0 +1,22 @@
+﻿@using System.ComponentModel.DataAnnotations
+
+<MForm Model="_order" EnableDataAnnotationsValidation>
+    <MRow>
+        <MCol Span="4">
+            <MTextField @bind-Value="_order.Title"></MTextField>
+        </MCol>
+        <MSpacer></MSpacer>
+    </MRow>
+</MForm>
+
+@code{
+    public class Order
+    {
+        public int Id { get; set; }
+        [Required]
+        public string Title { get; set; }
+        public decimal Price { get; set; }
+    }
+
+    private Order _order = new();
+}

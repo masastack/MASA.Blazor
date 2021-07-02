@@ -45,7 +45,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj" />
-    <ProjectReference Include="..\..\BlazorComponent\src\Doc\BlazorComponent.Doc.CLI\BlazorComponent.Doc.CLI.csproj" />
+	  <ProjectReference Include="..\..\BlazorComponent\src\Doc\BlazorComponent.Doc.CLI\BlazorComponent.Doc.CLI.csproj" />
     <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
   </ItemGroup>
 
@@ -54,9 +54,6 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Shared\HighlightedCode.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Shared\RazorBox.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Shared\Recommend.razor">

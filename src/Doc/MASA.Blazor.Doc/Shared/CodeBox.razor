@@ -1,6 +1,6 @@
 ﻿@using BlazorComponent.Doc.CLI.Models
 @using MASA.Blazor.Doc.Services
-@inherits ComponentBase
+@inherits OwningComponentBase<DemoService>
 
 <section id="@Id">
     <h2 class="m-heading text-h4 text-sm-h4 mb-3">
@@ -74,25 +74,21 @@
                         </MButton>
                     </MSheet>
                 </MWindowItem>
-                @if (Code != null && IsCode)
-                {
-                    <MWindowItem IsActive="IsCode">
-                        <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden my-0">
-                            <HighlightedCode Code="@Code" CanLoad="_expend" Language="csharp"></HighlightedCode>
-                            <MButton Class="m-btn--copy mr-n2 mt-n2" Absolute Icon Right Rounded Top Style="background-color:inherit">
-                                <MIcon>
-                                    mdi-content-copy
-                                </MIcon>
-                            </MButton>
-                        </MSheet>
-                    </MWindowItem>
-                }
+                <MWindowItem IsActive="IsCode">
+                    <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden my-0">
+                        <HighlightedCode Code="@Code" CanLoad="Code!=null" Language="csharp"></HighlightedCode>
+                        <MButton Class="m-btn--copy mr-n2 mt-n2" Absolute Icon Right Rounded Top Style="background-color:inherit">
+                            <MIcon>
+                                mdi-content-copy
+                            </MIcon>
+                        </MButton>
+                    </MSheet>
+                </MWindowItem>
             </MWindow>
         </div>
     </MSheet>
 </section>
 
-@inject DemoService demoService;
 @inject ILanguageService lang;
 @inject NavigationManager NavigationManager
 @inject IJSRuntime Js
@@ -118,11 +114,7 @@
 
     RenderFragment Component;
 
-    RenderFragment DebugIcon;
-
     public string Id => "section-" + BlazorComponent.Doc.CLI.Extensions.HashHelper.Hash(Demo.Title);
-
-    private bool _copied;
 
     protected string DemoId => $"components-{ComponentName.ToLower()}-demo-{Demo.Name}";
 
@@ -136,7 +128,7 @@
     {
         await base.OnInitializedAsync();
 
-        Component = demoService.GetShowCase(Demo.Type);
+        Component = Service.GetShowCase(Demo.Type);
 
     }
 

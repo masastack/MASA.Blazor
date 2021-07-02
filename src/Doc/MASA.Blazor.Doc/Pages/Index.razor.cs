@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor.Doc.Pages
 {
-    public partial class Index : ComponentBase, IDisposable
+    public partial class Index : IDisposable
     {
         private Recommend[] _recommends = { };
 
@@ -15,7 +15,6 @@ namespace MASA.Blazor.Doc.Pages
 
         private MoreProps[] _moreArticles = { };
 
-        [Inject] private DemoService DemoService { get; set; }
         [Inject] private ILanguageService Language { get; set; }
 
         protected override async Task OnInitializedAsync()
@@ -34,10 +33,10 @@ namespace MASA.Blazor.Doc.Pages
 
         private async Task FetchData()
         {
-            _recommends = await DemoService.GetRecommend();
+            _recommends = await Service.GetRecommend();
 
-            _products = await DemoService.GetProduct();
-            _moreArticles = await DemoService.GetMore();
+            _products = await Service.GetProduct();
+            _moreArticles = await Service.GetMore();
         }
 
         public void Dispose()

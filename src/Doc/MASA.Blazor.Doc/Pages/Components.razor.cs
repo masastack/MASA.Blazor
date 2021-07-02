@@ -16,12 +16,9 @@ namespace MASA.Blazor.Doc.Pages
         [Parameter]
         public string Name { get; set; }
 
-        [Inject]
-        private DemoService DemoService { get; set; }
-
         protected override async Task OnParametersSetAsync()
         {
-            _demoComponent = await DemoService.GetComponentAsync(Name);
+            _demoComponent = await Service.GetComponentAsync(Name);
         }
     }
 }

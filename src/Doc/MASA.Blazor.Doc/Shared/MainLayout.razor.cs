@@ -22,44 +22,18 @@ namespace MASA.Blazor.Doc.Shared
         public ILanguageService LanguageService { get; set; }
 
         [Inject]
-        public DemoService DemoService { get; set; }
-
-        [Inject]
         public IJSRuntime JsInterop { get; set; }
 
         [Parameter]
         public DemoMenuItemModel[] MenuItems { get; set; } = { };
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            MenuItems = await DemoService.GetMenuAsync();
-
-            StateHasChanged();
-            await DemoService.InitializeDemos();
-
             LanguageService.LanguageChanged += OnLanguageChanged;
             NavigationManager.LocationChanged += OnLocationChanged;
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                //await JsInterop.InvokeVoidAsync("window.MASA.DocSearch.init", CurrentLanguage);
-            }
-        }
-
-        public async Task ChangePrevNextNav(string currentTitle)
-        {
-            //if (string.IsNullOrWhiteSpace(currentTitle))
-            //    return;
-
-            //var currentSubmenuUrl = DemoService.GetCurrentSubMenuUrl();
-            //var prevNext = await DemoService.GetPrevNextMenu(currentSubmenuUrl, currentTitle);
-
-        }
-
-        private async void OnLanguageChanged(object sender, CultureInfo culture)
+        private void OnLanguageChanged(object sender, CultureInfo culture)
         {
             //await JsInterop.InvokeVoidAsync("window.MASA.DocSearch.localeChange", culture.Name);
             //await InvokeAsync(StateHasChanged);

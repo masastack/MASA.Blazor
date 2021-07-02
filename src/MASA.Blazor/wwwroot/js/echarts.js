@@ -1,5 +1,7 @@
 ﻿
 export function init(container, option) {
-    var chart = echarts.init(container);
+    window.devicePixelRatio = 2
+
+    var chart = echarts.init(container, null, { renderer: 'svg' });
     chart.setOption(option);
 }

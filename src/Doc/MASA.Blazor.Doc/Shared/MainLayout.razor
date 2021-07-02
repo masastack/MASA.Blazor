@@ -1,25 +1,26 @@
-@inherits LayoutComponentBase
+Ôªø@inherits LayoutComponentBase
+@inject NavigationManager navigationmanager
 
 <CascadingValue Value="this">
     <MApp>
         <MAppBar Flat Fixed Color="white" Class="m-bar--underline" Left="300">
             <div class="flex-1-1-auto d-flex align-center justify-end">
-                <MTextField Flat IsSolo Dense Class="mx-2 mx-md-4 rounded-lg" Color="grey lighten-3" Placeholder="À—À˜(∞¥ ªÿ≥µ)" Style="max-width: 450px;">
+                <MTextField TValue="string" Flat IsSolo Dense Class="mx-2 mx-md-4 rounded-lg" Color="grey lighten-3" Placeholder="ÊêúÁ¥¢(Êåâ ÂõûËΩ¶)" Style="max-width: 450px;">
                     <PrependInnerContent>
                         <MIcon Class="ml-1 mr-2">mdi-magnify</MIcon>
                     </PrependInnerContent>
                 </MTextField>
                 <MDivider Vertical Class="mx-2 my-auto" Inset Style="height:16px"></MDivider>
                 <MButton Text Class="m-btn--app text--secondary text-capitalize font-weight-regular px-2">
-                    —ßœ∞
+                    Â≠¶‰π†
                     <MIcon>mdi-chevron-down</MIcon>
                 </MButton>
                 <MButton Text Class="m-btn--app text--secondary text-capitalize font-weight-regular px-2">
-                    ÷ß≥÷
+                    ÊîØÊåÅ
                     <MIcon>mdi-chevron-down</MIcon>
                 </MButton>
                 <MButton Text Class="m-btn--app text--secondary text-capitalize font-weight-regular px-2">
-                    <span>Œ“√«µƒÕ≈∂”</span>
+                    <span>Êàë‰ª¨ÁöÑÂõ¢Èòü</span>
                 </MButton>
                 <MDivider Vertical Class="mx-2 my-auto" Inset Style="height:16px"></MDivider>
                 <MButton Icon Rounded>
@@ -34,7 +35,7 @@
             <PrependContent>
                 <MToolbar Flat Class="m-bar--underline">
                     <MListItem Class="pa-0 mx-n1">
-                        <MImage Width="40" Class="shrink" Src="https://masa-cdn.oss-cn-hangzhou.aliyuncs.com/images/logo/logo.png?x-oss-process=image/resize,w_100"></MImage>
+                        <MImage Width="40" Class="shrink" Src="https://cdn.masastack.com/images/logo/MASA.Blazor/96.png"></MImage>
                         <span style="font-weight:bold;font-size:larger;margin-left:3px;padding:3px;">MASA Blazor</span>
                         <MSpacer></MSpacer>
                         <MButton Text Class="m-btn--app text--secondary text-capitalize font-weight-regular px-2">
@@ -46,62 +47,12 @@
             </PrependContent>
             <ChildContent>
                 <div class="pt-4 pb-3 px-2">
-                    <div class="ml-2 mb-3 text-caption font-weight-regular text--secondary" path="premiere-sponsors">∏ﬂº∂‘ﬁ÷˙…Ã</div>
+                    <div class="ml-2 mb-3 text-caption font-weight-regular text--secondary" path="premiere-sponsors">È´òÁ∫ßËµûÂä©ÂïÜ</div>
                     <MCard Class="d-inline-block px-2 py-1 rounded transparent" Flat Link Style="box-shadow:none!important">
                         <MImage Class="d-inline-block" MaxHeight="64" Width="148" Src="https://img-cdn.lonsid.co/image/www/img/logo_g_2.png"></MImage>
                     </MCard>
                 </div>
-                <MList Dense>
-                    @foreach (var item in MenuItems)
-                    {
-                        if (item.Children != null && item.Children.Any())
-                        {
-                            <MListGroup PrependIcon="@item.Icon" Color="primary" AppendIcon="mdi-menu-down ">
-                                <Activator>
-                                    <MListItemContent>
-                                        <MListItemTitle>@item.Title</MListItemTitle>
-                                    </MListItemContent>
-                                </Activator>
-                                <ChildContent>
-                                    @if (item.Children != null && item.Children.Any())
-                                    {
-                                        @foreach (var componentItem in item.Children)
-                                        {
-                                            <MListItem Link Href="@componentItem.Url">
-                                                <MListItemIcon>
-                                                </MListItemIcon>
-                                                <MListItemContent>
-                                                    <MListItemTitle>
-                                                        @if (LanguageService.CurrentCulture.Name == "zh-CN" && !string.IsNullOrEmpty(componentItem.SubTitle))
-                                                        {
-                                                            var title = componentItem.Title + $" ({componentItem.SubTitle})";
-                                                            @title
-                                                        }
-                                                        else
-                                                        {
-                                                            @componentItem.Title
-                                                        }
-                                                    </MListItemTitle>
-                                                </MListItemContent>
-                                            </MListItem>
-                                        }
-                                    }
-                                </ChildContent>
-                            </MListGroup>
-                        }
-                        else
-                        {
-                            <MListItem Link Href="@item.Url">
-                                <MListItemIcon>
-                                    <MIcon>@item.Icon</MIcon>
-                                </MListItemIcon>
-                                <MListItemContent>
-                                    <MListItemTitle>@item.Title</MListItemTitle>
-                                </MListItemContent>
-                            </MListItem>
-                        }
-                    }
-                </MList>
+                <NavMenu></NavMenu>
                 <div class="pt-12"></div>
             </ChildContent>
         </MNavigationDrawer>
@@ -114,10 +65,10 @@
                                 @Body
                             </section>
                             <section class="mt-12">
-                                <h2 class="m-heading text-h4 text-sm-h4 mb-3"> ¡ÀΩ‚∏¸∂‡£ø </h2>
+                                <h2 class="m-heading text-h4 text-sm-h4 mb-3"> ‰∫ÜËß£Êõ¥Â§öÔºü</h2>
                                 <div class="mb-3">
-                                    ºÃ–¯—ßœ∞”…
-                                    <a class="app-link text-decoration-none primary--text font-weight-medium d-inline-block">Œ“√«µƒÕ≈∂”</a> —°‘Òµƒœ‡πÿƒ⁄»›£¨ªÚÕ®π˝ π”√œ¬√Êµƒµº∫Ω¡¥Ω”‘⁄“≥√Ê÷Æº‰Ã¯◊™°£
+                                    ÁªßÁª≠Â≠¶‰π†Áî±
+                                    <a class="app-link text-decoration-none primary--text font-weight-medium d-inline-block">Êàë‰ª¨ÁöÑÂõ¢Èòü</a> ÈÄâÊã©ÁöÑÁõ∏ÂÖ≥ÂÜÖÂÆπÔºåÊàñÈÄöËøá‰ΩøÁî®‰∏ãÈù¢ÁöÑÂØºËà™ÈìæÊé•Âú®È°µÈù¢‰πãÈó¥Ë∑≥ËΩ¨„ÄÇ
                                 </div>
                                 <MRow Dense>
                                     <MCol Span="4">
@@ -133,20 +84,20 @@
                                 <MDivider Class="my-6 mt-7 mb-5"></MDivider>
                                 <div class="d-flex mb-4">
                                     <a class="text-decoration-none text-body-1">
-                                        <span class="text-h6 text--primary">°˚&nbsp;</span>
-                                        <span>…œ“ª“≥</span>
+                                        <span class="text-h6 text--primary">‚Üê&nbsp;</span>
+                                        <span>‰∏ä‰∏ÄÈ°µ</span>
                                     </a>
                                     <MSpacer></MSpacer>
                                     <a class="text-decoration-none text-body-1">
-                                        <span>œ¬“ª“≥</span>
-                                        <span class="text-h6 text--primary">&nbsp;°˙</span>
+                                        <span>‰∏ã‰∏ÄÈ°µ</span>
+                                        <span class="text-h6 text--primary">&nbsp;‚Üí</span>
                                     </a>
                                 </div>
                                 <MSheet Class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 m-vuetify-ad mb-8" Outlined Rounded="true" MinHeight="74" Style="width:100%"></MSheet>
                                 <div>
                                     <div class="blue-grey--text text--darken-1 d-flexalign-center justify-space-between">
                                         <div class="font-weight-medium d-flex align-baseline grow flex-wrap">
-                                            <span class="mb-2 mb-md-0">‘⁄ GitHub <a class="app-link text-decoration-none primary--text font-weight-medium d-inline-block">GitHub</a> …œ±‡º≠¥À“≥√Ê</span><div class="spacer hidden-sm-and-down"></div><div class="text-body-2"><span class="font-weight-medium mr-1">◊Ó∫Û∏¸–¬£∫</span><span class="text--secondary">06/25/2021, 8:18:35 AM</span></div>
+                                            <span class="mb-2 mb-md-0">Âú® GitHub <a class="app-link text-decoration-none primary--text font-weight-medium d-inline-block">GitHub</a> ‰∏äÁºñËæëÊ≠§È°µÈù¢</span><div class="spacer hidden-sm-and-down"></div><div class="text-body-2"><span class="font-weight-medium mr-1">ÊúÄÂêéÊõ¥Êñ∞Ôºö</span><span class="text--secondary">06/25/2021, 8:18:35 AM</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +109,7 @@
         </MMain>
         <MNavigationDrawer Clipped Fixed Floating Right Top="64" Class="default-toc py-4 pr-3">
             <PrependContent>
-                <div class="mb-2 text-h6 font-weight-medium text--primary" path="contents">ƒø¬º</div>
+                <div class="mb-2 text-h6 font-weight-medium text--primary" path="contents">ÁõÆÂΩï</div>
             </PrependContent>
             <ChildContent>
                 <Contents></Contents>

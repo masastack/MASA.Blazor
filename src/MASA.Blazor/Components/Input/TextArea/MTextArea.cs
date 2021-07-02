@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MTextArea : MTextField
+    public partial class MTextArea : MTextField<string>
     {
         [Parameter]
         public bool AutoGrow { get; set; }
@@ -36,8 +36,8 @@ namespace MASA.Blazor
             AbstractProvider
                 .Merge<IInputBody>(properties =>
                 {
-                    properties[nameof(MInputBody.Rows)] = Rows;
-                    properties[nameof(MInputBody.IsTextArea)] = true;
+                    properties[nameof(MInputBody<string>.Rows)] = Rows;
+                    properties[nameof(MInputBody<string>.IsTextArea)] = true;
                 });
         }
     }

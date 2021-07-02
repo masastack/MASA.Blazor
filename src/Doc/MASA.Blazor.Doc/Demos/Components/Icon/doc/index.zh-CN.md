@@ -8,5 +8,5 @@ cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
 
 ---
 
-语义化的矢量图形。
+语义化的矢量图形。查看[图标库](https://materialdesignicons.com/)。
 

@@ -21,14 +21,21 @@ namespace MASA.Blazor
 
         public string ComputedAlign => Align ?? TableAlign;
 
+        [Parameter]
+        public StringNumber Width { get; set; }
+
         protected override void SetComponentClass()
         {
             CssProvider
-                .Apply(typeof(BTableCol), cssBuilder =>
+                .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .AddIf(() => $"text-{ComputedAlign}", () => !string.IsNullOrEmpty(ComputedAlign))
                         .AddIf("m-data-table__divider", () => Divider);
+                },styleBuilder=> {
+                    styleBuilder
+                        .AddWidth(Width)
+                        .AddMinWidth(Width);
                 });
         }
     }

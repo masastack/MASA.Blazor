@@ -7,8 +7,8 @@ namespace MASA.Blazor
 {
     public partial class MMenu : BMenu
     {
-        private double _clientX;
-        private double _clientY;
+        protected double _clientX;
+        protected double _clientY;
         private double _immutableClientY; // Records clientY after OptimizPosition
         private double _minWidth;
 
