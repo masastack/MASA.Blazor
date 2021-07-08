@@ -69,8 +69,6 @@ namespace MASA.Blazor
                 {
                     props[nameof(MListGroupItemIcon.Type)] = "append";
                 });
-
-            AppendIcon = "mdi-chevron-down";
         }
     }
 }

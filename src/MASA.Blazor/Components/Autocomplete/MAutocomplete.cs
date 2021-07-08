@@ -276,6 +276,7 @@ namespace MASA.Blazor
             ValueText = args.Value.ToString();
             QueryText = ValueText;
             HighlightIndex = -1;
+            Visible = true;
 
             if (OnInput.HasDelegate)
             {
@@ -327,6 +328,8 @@ namespace MASA.Blazor
                     }
                     break;
                 case "Enter":
+                    Visible = true;
+
                     if (HighlightIndex > -1 && HighlightIndex < FilteredItemsCount)
                     {
                         var items = GetFilteredItems();

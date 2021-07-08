@@ -1,7 +1,7 @@
 ---
 category: Components
-type: 预设组件
+type: 预置组件
 title: Presets
-subtitle: 预设组件
+subtitle: 预置组件
 cols: 1
 ---
