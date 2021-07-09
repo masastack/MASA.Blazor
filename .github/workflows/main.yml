@@ -1,0 +1,29 @@
+name: .NET
+
+on:
+  push:
+    branches:
+      - develop
+      - feature/*
+  pull_request:
+    branches:
+      - develop
+      - feature/*
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1.8.1
+      with:
+        dotnet-version: 6.0.100-preview.5.21302.13
+    - name: dependencies
+      run: git clone -b develop https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
+    - name: Build
+      run: dotnet build src
+#     - name: Test
+#       run: dotnet test
