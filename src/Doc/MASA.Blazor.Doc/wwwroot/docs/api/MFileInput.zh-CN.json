@@ -1,0 +1,83 @@
+﻿{
+  "Components": [
+    "FileInput"
+  ],
+  "Props": [
+    {
+      "Name": "Accept",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Chips",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "改变一个已选择项为小纸片（chips）的显示方式"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Counter",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "为输入长度创建一个计数器，如果未指定数字，则默认为25，不会应用任何验证。"
+    },
+    {
+      "Name": "Files",
+      "Type": "IList`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "FilesChanged",
+      "Type": "EventCallback`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Multiple",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将 multiple 属性添加到输入中，允许选择多个文件。"
+    },
+    {
+      "Name": "ShowSize",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "设置所选文件的显示大小。当使用 true 默认值为 1000 显示（kB，MB，GB） 时，1024 将显示（KiB，MiB，GiB）。"
+    },
+    {
+      "Name": "ShowUploadList",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ActivatorContent",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnUpload",
+      "Description": ""
+    }
+  ]
+}

@@ -10,3 +10,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Divider.svg
 
 v-diver 组件用于分隔列表或布局的各个部分。
 
+## API
+
+- [MDivider](/docs/api/MDivider)

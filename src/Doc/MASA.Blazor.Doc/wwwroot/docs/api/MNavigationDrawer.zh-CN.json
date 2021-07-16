@@ -1,0 +1,126 @@
+﻿{
+  "Components": [
+    "Navigation"
+  ],
+  "Props": [
+    {
+      "Name": "Absolute",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "应用 position: absolute 样式到组件."
+    },
+    {
+      "Name": "App",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定该组件作为应用程序布局的一部分。用于动态调整内容的大小。使用此属性的组件只有位于 v-main 组件的 外部才能正常运行。您可以在 应用程序页面 获取更多有关布局的信息。注意： 使用此属性会自动应用position: fixed 到布局元素上。您可以使用 absolute 属性 来覆盖这个功能。"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Clipped",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "在应用程序工具栏下面有一个被夹住的抽屉。注意:要求在v-app-bar上夹左或夹右支柱按预期工作"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Drawer",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ExpandOnHover",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将抽屉折叠成 mini-variant，直到用鼠标悬停"
+    },
+    {
+      "Name": "Fixed",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "给组件应用 position: fixed"
+    },
+    {
+      "Name": "Floating",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "浮动抽屉没有可见的容器（没有右边框）"
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "IsActive",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "IsBottom",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "MiniVariantWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "指定mini属性开期时指定的宽度"
+    },
+    {
+      "Name": "Right",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将抽屉放置在右侧"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Temporary",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "临时抽屉位于其应用之上，并使用稀松布（叠加）来使背景变暗"
+    },
+    {
+      "Name": "Top",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的宽度。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "PrependContent",
+      "Description": "抽屉顶部的插槽"
+    }
+  ],
+  "Events": []
+}

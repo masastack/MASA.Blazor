@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MSlideGroupSlot : BSlideGroupSlot
+    internal partial class MSlideGroupSlot : BSlideGroupSlot
     {
         protected override void SetComponentClass()
         {

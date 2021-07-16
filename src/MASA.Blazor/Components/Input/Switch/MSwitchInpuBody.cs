@@ -9,8 +9,11 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MSwitchInputBody : BSwitchInputBody,IInputBody
+    internal partial class MSwitchInputBody : BSwitchInputBody, IInputBody
     {
+        [Parameter]
+        public string Color { get; set; }
+
         [Parameter]
         public string ValidationState { get; set; }
 
@@ -29,20 +32,20 @@ namespace MASA.Blazor
                  {
                      cssBuilder
                          .Add("m-input--selection-controls__ripple")
-                         .AddIf($"{ValidationState}--text",()=>IsActive);
+                         .AddTextColor(Color, () => IsActive);
                  })
                 .Apply("track", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-input--switch__track")
-                        .AddIf($"{ValidationState}--text", () => IsActive)
+                        .AddTextColor(Color, () => IsActive)
                         .AddTheme(Dark);
                 })
                 .Apply("thumb", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-input--switch__thumb")
-                        .AddIf($"{ValidationState}--text", () => IsActive)
+                        .AddTextColor(Color, () => IsActive)
                         .AddTheme(Dark);
                 });
 

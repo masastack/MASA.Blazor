@@ -1,0 +1,83 @@
+﻿{
+  "Components": [
+    "Grid"
+  ],
+  "Props": [
+    {
+      "Name": "Align",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用 align-items css 属性。可用的选项是 start, center, end, baseline 和 stretch。"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "DefaultBreakpoint",
+      "Type": "BreakpointType",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "减少组件的高度。"
+    },
+    {
+      "Name": "Gutter",
+      "Type": "OneOf`6",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Justify",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用 justify-content css 属性。可用选项是 start, center, end, space-between 和 space-around。"
+    },
+    {
+      "Name": "NoGutters",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "移除 v-col 之间的距离。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Type",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Wrap",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "AlignContent",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnBreakpoint",
+      "Description": ""
+    }
+  ]
+}

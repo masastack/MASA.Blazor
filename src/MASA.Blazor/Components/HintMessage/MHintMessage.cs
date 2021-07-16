@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MHintMessage : BHintMessage
+    internal partial class MHintMessage : BHintMessage
     {
         [Parameter]
         public bool Dark { get; set; }

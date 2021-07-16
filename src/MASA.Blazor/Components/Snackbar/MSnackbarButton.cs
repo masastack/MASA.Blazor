@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MSnackbarButton : MButton
+    internal partial class MSnackbarButton : MButton
     {
         protected override void SetComponentClass()
         {

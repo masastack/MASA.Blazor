@@ -1,7 +1,7 @@
 ---
 category: Components
-subtitle: 进度
-type: 进度
+subtitle: 进度-未完成
+type: 进度-未完成
 title: Process
 cols: 1
 

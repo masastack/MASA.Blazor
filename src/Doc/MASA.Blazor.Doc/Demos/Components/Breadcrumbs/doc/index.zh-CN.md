@@ -10,3 +10,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
 
 Breadcrumbs 组件适用于页面层级导航
 
+## API
+
+- [MBreadcrumbs](/docs/api/MBreadcrumbs)

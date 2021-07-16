@@ -1,5 +1,5 @@
 ﻿<MRow Justify="center">
-    <MButton Color="primary" Click="() => _visible = true">CLICK ME</MButton>
+    <MButton Color="primary" OnClick="() => _visible = true">CLICK ME</MButton>
 
     <MDialog @bind-Visible="_visible" Width="500">
         <MCard>
@@ -17,7 +17,7 @@
                 <MSpacer></MSpacer>
                 <MButton Color="primary"
                          Text
-                         Click="() => _visible = false">
+                         OnClick="() => _visible = false">
                     I accept
                 </MButton>
             </MCardActions>

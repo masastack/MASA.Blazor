@@ -1,5 +1,5 @@
 ﻿<MContainer>
-    <MTable TItem="Dessert" Headers="_headers" Loading="_loading" Items="_desserts" FixedRight="true" Align="center" Stripe="true">
+    <MTable TItem="Dessert" Headers="_headers" Items="_desserts" FixedRight="true" Align="center">
         <MTableCol>
             @context.Name
         </MTableCol>
@@ -97,10 +97,5 @@
         Calories= 237,
         }
     };
-
-    public void Test(MouseEventArgs args)
-    {
-        _loading = !_loading;
-    }
 }
 

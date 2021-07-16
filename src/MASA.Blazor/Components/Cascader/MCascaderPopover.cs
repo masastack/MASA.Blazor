@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MCascaderPopover : MPopover
+    internal partial class MCascaderPopover : MPopover
     {
         [Parameter]
         public ElementReference ActivatorRef { get; set; }

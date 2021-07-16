@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MRadioGroupInputBody : MInputBody<bool>
+    internal partial class MRadioGroupInputBody : MInputBody<bool>
     {
         protected override void SetComponentClass()
         {

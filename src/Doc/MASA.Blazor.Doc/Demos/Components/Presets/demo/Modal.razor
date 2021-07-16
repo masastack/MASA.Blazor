@@ -1,5 +1,5 @@
 ﻿<div>
-    <MButton Click="() => _addModal.Show()" Class="mb-1">Open Modal</MButton>
+    <MButton OnClick="() => _addModal.Show()" Class="mb-1">Open Modal</MButton>
 
     <MASA.Blazor.Presets.Modal Visible="_addModal.Visible" Title="新增用户" Width="500" OnOk="HandleOnClick" OnCancel="() => _addModal.Hide()">
         <p>@System.Text.Json.JsonSerializer.Serialize(_addModal.Data)</p>
@@ -26,7 +26,7 @@
         <MCol>username: @_user.UserName</MCol>
         <MCol>city: @_user.City</MCol>
         <MCol>gender: @_user.Gender</MCol>
-        <MCol><MButton Click="() => _addModal.Show(_user.ShallowCopy())" Color="primary" Text Small>Edit</MButton></MCol>
+        <MCol><MButton OnClick="() => _addModal.Show(_user.ShallowCopy())" Color="primary" Text Small>Edit</MButton></MCol>
     </MRow>
 </div>
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using OneOf;
+using System;
 
 namespace MASA.Blazor
 {
@@ -11,7 +12,7 @@ namespace MASA.Blazor
         public bool Disabled { get; set; }
 
         [Parameter]
-        public bool Lable { get; set; }
+        public bool Label { get; set; }
 
         [Parameter]
         public string Color { get; set; }
@@ -39,8 +40,28 @@ namespace MASA.Blazor
 
         public bool Medium => !XSmall && !Small && !Large && !XLarge;
 
+        [Obsolete("Use OnCloseClick instead.")]
         [Parameter]
         public EventCallback<MouseEventArgs> CloseClick { get; set; }
+
+        [Parameter]
+        public EventCallback<MouseEventArgs> OnCloseClick { get; set; }
+
+        [Parameter]
+        public bool Outlined { get; set; }
+
+        [Parameter]
+        public string TextColor { get; set; }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (CloseClick.HasDelegate)
+            {
+                OnCloseClick = CloseClick;
+            }
+        }
 
         protected override void SetComponentClass()
         {
@@ -53,11 +74,13 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add(prefix)
                         .AddIf($"{prefix}--disabled", () => Disabled)
-                        .AddIf($"{prefix}--label", () => Lable)
+                        .AddIf($"{prefix}--label", () => Label)
                         .AddIf($"{prefix}--no-color", () => string.IsNullOrEmpty(Color))
                         .AddIf($"{prefix}--removable", () => Close)
                         .AddTheme(Dark)
-                        .AddIf(Color, () => !string.IsNullOrEmpty(Color))
+                        .AddBackgroundColor(Color)
+                        .AddTextColor(Color, () => Outlined)
+                        .AddTextColor(TextColor)
                         .AddIf("m-size--default", () => Medium)
                         .AddIf("m-size--x-small", () => XSmall)
                         .AddIf("m-size--small", () => Small)
@@ -65,7 +88,8 @@ namespace MASA.Blazor
                         .AddIf("m-size--x-large", () => XLarge)
                         .AddIf($"{prefix}--active", () => IsActive)
                         .AddIf($"{prefix}--clickable", () => ItemGroup != null)
-                        .AddIf($"{SelectColor}--text", () => IsActive);
+                        .AddIf($"{SelectColor}--text", () => IsActive)
+                        .AddIf("m-chip--outlined", () => Outlined);
                 })
                 .Apply("content", cssBuilder =>
                  {
@@ -79,11 +103,11 @@ namespace MASA.Blazor
                     props[nameof(MChipCloseIcon.Right)] = true;
                     props[nameof(MChipCloseIcon.Size)] = (StringNumber)18;
                     props[nameof(MChipCloseIcon.Color)] = CloseIconColor;
-                    props[nameof(MChipCloseIcon.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async args =>
+                    props[nameof(MChipCloseIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async args =>
                     {
-                        if (CloseClick.HasDelegate)
+                        if (OnCloseClick.HasDelegate)
                         {
-                            await CloseClick.InvokeAsync(args);
+                            await OnCloseClick.InvokeAsync(args);
                         }
                         else
                         {

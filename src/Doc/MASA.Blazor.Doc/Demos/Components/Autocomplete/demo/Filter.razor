@@ -1,0 +1,91 @@
+﻿<MCard Class="overflow-hidden">
+    <MToolbar Flat>
+        <MIcon>mdi-account</MIcon>
+        <MToolbarTitle Class="font-weight-light">
+            User Profile
+        </MToolbarTitle>
+        <MSpacer></MSpacer>
+        <MButton Fab
+                 Small
+                 OnClick="()=>_isEditing = !_isEditing">
+            @if (_isEditing)
+            {
+                <MIcon>
+                    mdi-close
+                </MIcon>
+            }
+            else
+            {
+                <MIcon>
+                    mdi-pencil
+                </MIcon>
+            }
+        </MButton>
+    </MToolbar>
+    <MCardText>
+        <MTextField TValue="string"
+                    Color="white"
+                    Label="Name"></MTextField>
+        <MAutocomplete Disabled="!_isEditing"
+                       TItem="Item"
+                       TValue="int"
+                       Items="_states"
+                       Filter="CustomFilter"
+                       ItemText="r=>r.Name"
+                       ItemValue="r=>r.Id"
+                       Label="State"></MAutocomplete>
+    </MCardText>
+    <MDivider></MDivider>
+    <MCardActions>
+        <MSpacer></MSpacer>
+        <MButton Disabled="!_isEditing"
+                 Color="success"
+                 OnClick="Save">
+            Save
+        </MButton>
+    </MCardActions>
+    <MSnackbar @bind-IsActive="_hasSaved"
+                Timeout="2000"
+                Absolute
+                Bottom
+                Left>
+        Your profile has been updated
+    </MSnackbar>
+</MCard>
+
+@code{
+    private bool _isEditing;
+    private bool _hasSaved;
+
+    class Item
+    {
+        public int Id { get; set; }
+        public string Abbr { get; set; }
+        public string Name { get; set; }
+    }
+
+    private List<Item> _states = new List<Item>
+    {
+        new Item { Name= "Florida", Abbr= "FL", Id= 1 },
+        new Item { Name= "Georgia", Abbr= "GA", Id= 2 },
+        new Item { Name= "Nebraska", Abbr= "NE", Id= 3 },
+        new Item { Name= "California", Abbr= "CA", Id= 4 },
+        new Item { Name= "New York", Abbr= "NY", Id= 5 }
+    };
+
+    private bool CustomFilter(Item item, string queryText)
+    {
+        var textOne = item.Name.ToLower();
+        var textTwo = item.Abbr.ToLower();
+        var searchText = queryText.ToLower();
+
+        return textOne.IndexOf(searchText) > -1 ||
+          textTwo.IndexOf(searchText) > -1;
+    }
+
+    public void Save()
+    {
+        _isEditing = !_isEditing;
+        _hasSaved = true;
+    }
+}

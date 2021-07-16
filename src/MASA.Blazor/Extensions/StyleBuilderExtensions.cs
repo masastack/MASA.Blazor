@@ -16,7 +16,7 @@ namespace BlazorComponent
 
         public static StyleBuilder AddColor(this StyleBuilder styleBuilder, string color, bool isText, Func<bool> func)
         {
-            if (string.IsNullOrEmpty(color) || !color.StartsWith("#"))
+            if (string.IsNullOrEmpty(color) || (!color.StartsWith("#") && !color.StartsWith("rgb")))
             {
                 return styleBuilder;
             }
@@ -37,7 +37,7 @@ namespace BlazorComponent
 
         public static StyleBuilder AddBackgroundColor(this StyleBuilder styleBuilder, string color)
         {
-            if (string.IsNullOrEmpty(color) || !color.StartsWith("#"))
+            if (string.IsNullOrEmpty(color) || (!color.StartsWith("#") && !color.StartsWith("rgb")))
             {
                 return styleBuilder;
             }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MDatePickerTableButton : MButton
+    internal partial class MDatePickerTableButton : MButton
     {
         [Parameter]
         public bool IsCurrent { get; set; }
@@ -16,6 +16,8 @@ namespace MASA.Blazor
 
         protected override void OnParametersSet()
         {
+            base.OnParametersSet();
+
             if (!IsCurrent && !IsActive)
             {
                 Color = null;

@@ -46,7 +46,7 @@ namespace BlazorComponent
 
         public static CssBuilder AddColor(this CssBuilder cssBuilder, string color, bool isText, Func<bool> func)
         {
-            if (string.IsNullOrEmpty(color) || color.StartsWith("#"))
+            if (string.IsNullOrEmpty(color) || color.StartsWith("#") || color.StartsWith("rgb"))
             {
                 return cssBuilder;
             }
@@ -100,7 +100,7 @@ namespace BlazorComponent
 
                 foreach (var val in values)
                 {
-                    cssBuilder.Add(val);
+                    cssBuilder.Add($"rounded-{val}");
                 }
             }
             else if (rounded.IsT0 && rounded.AsT0)

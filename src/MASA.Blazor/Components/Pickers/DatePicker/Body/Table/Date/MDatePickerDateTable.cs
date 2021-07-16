@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public class MDatePickerDateTable : MDatePickerTable, IDatePickerDateTable
+    internal class MDatePickerDateTable : MDatePickerTable, IDatePickerDateTable
     {
+        [Parameter]
+        public string Color { get; set; }
+
         [Parameter]
         public EventCallback<int> OnDaySelected { get; set; }
 
@@ -28,6 +31,7 @@ namespace MASA.Blazor
             AbstractProvider
                 .Apply<IDatePickerTableBody, MDatePickerDateTableBody>(props =>
                 {
+                    props[nameof(MDatePickerDateTableBody.Color)] = Color;
                     props[nameof(MDatePickerDateTableBody.Component)] = this;
                     props[nameof(MDatePickerDateTableBody.OnDaySelected)] = OnDaySelected;
                 });

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MChipCloseIcon : MIcon
+    internal partial class MChipCloseIcon : MIcon
     {
         protected override void SetComponentClass()
         {

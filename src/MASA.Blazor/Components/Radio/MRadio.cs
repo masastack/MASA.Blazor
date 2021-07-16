@@ -19,6 +19,9 @@ namespace MASA.Blazor
         protected bool IsFocused { get; set; }
 
         [Parameter]
+        public string Color { get; set; } = "primary";
+
+        [Parameter]
         public bool Dark { get; set; }
 
         protected string ValidationState => RadioGroup?.ValidationState ?? "primary";
@@ -49,13 +52,13 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-input--selection-controls__ripple")
-                        .AddTextColor(ValidationState, () => IsActive);
+                        .AddTextColor(Color, () => IsActive);
                 });
 
             AbstractProvider
                 .Apply<BIcon, MIcon>(props =>
                 {
-                    props[nameof(MIcon.Color)] = ValidationState;
+                    props[nameof(MIcon.Color)] = Color;
                     props[nameof(MIcon.IsActive)] = IsActive;
                 })
                 .Apply<BLabel, MLabel>();

@@ -8,5 +8,8 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SkeletonLoader.svg
 
 ---
 
-m-app 组件和 m-navigation-drawer、m-app-bar、m-footer 等组件上的 app 属性，帮助你的应用围绕 m-main 组件进行适当的大小调整。 这使你可以创建真正独特的界面，无需因管理布局尺寸而烦恼。 所有应用都需要 m-app 组件。 这是许多组件和功能的挂载点，并确保它将默认的应用 变体 （dark/light）传递给子组件，并确保在浏览器中对某些点击事件的正确跨浏览器支持，如 Safari。 m-app 只应该在你的应用中渲染一次。
+v-skeleton-loader 组件是一个多功能工具，可以在一个项目中填充许多角色。 在其核心部分，该组件向用户提供了一个指示，指出某些东西即将出现但尚未可用。 有超过30个预先定义的选项，可以组合成定制的示例。
 
+## API
+
+- [MSkeletonLoader](/docs/api/MSkeletonLoader)

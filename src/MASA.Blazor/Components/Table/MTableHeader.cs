@@ -7,7 +7,7 @@ using BlazorComponent;
 
 namespace MASA.Blazor
 {
-    public partial class MTableHeader : BTableHeader
+    internal partial class MTableHeader : BTableHeader
     {
         protected override void SetComponentClass()
         {

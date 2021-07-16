@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace MASA.Blazor.Components.Table
 {
-    public partial class MTableFooter : BTableFooter
+    internal partial class MTableFooter : BTableFooter
     {
         [Parameter]
         public EventCallback<MouseEventArgs> OnPrevClick { get; set; }

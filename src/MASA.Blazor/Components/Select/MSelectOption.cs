@@ -14,7 +14,7 @@ namespace MASA.Blazor
                 .Apply<BListItem, MListItem>(props =>
                 {
                     props[nameof(MListItem.Key)] = Key;
-                    props[nameof(MListItem.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async (args) =>
+                    props[nameof(MListItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async (args) =>
                     {
                         if (!SelectWrapper.Multiple)
                         {

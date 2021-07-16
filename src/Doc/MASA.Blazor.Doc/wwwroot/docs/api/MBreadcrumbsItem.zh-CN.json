@@ -1,0 +1,39 @@
+﻿{
+  "Components": [
+    "Breadcrumbs"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "移除组件的单击或 target 功能。"
+    },
+    {
+      "Name": "Href",
+      "Type": "String",
+      "Default": "null",
+      "Description": "指定组件为锚点并应用 href 属性。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Text",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    }
+  ],
+  "Contents": [],
+  "Events": []
+}

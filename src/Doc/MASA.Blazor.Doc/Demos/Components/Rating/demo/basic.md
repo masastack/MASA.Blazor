@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-支持 `Material Icons`、`Material Design Icons`、`Font Awesome 5`图标库。
+v-rating 组件为收集用户反馈提供了一个简单的界面。
 
 ## en-US
 

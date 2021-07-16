@@ -1,0 +1,215 @@
+﻿{
+  "Components": [
+    "Tree"
+  ],
+  "Props": [
+    {
+      "Name": "Activatable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "允许用户通过单击节点将其标记为活动节点"
+    },
+    {
+      "Name": "Checkable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ChildNodes",
+      "Type": "List`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "ChildrenExpression",
+      "Type": "Func`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "DataSource",
+      "Type": "IList`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "DefaultCheckedExpression",
+      "Type": "Func`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Expanded",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "IconExpression",
+      "Type": "Func`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Independent",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "IsLeafExpression",
+      "Type": "Func`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "KeyExpression",
+      "Type": "Func`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Multiple",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SearchExpression",
+      "Type": "Func`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "SearchValue",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedData",
+      "Type": "T",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedDataChanged",
+      "Type": "EventCallback`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedDatas",
+      "Type": "T[]",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedKey",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedKeyChanged",
+      "Type": "EventCallback`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedKeys",
+      "Type": "String[]",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedKeysChanged",
+      "Type": "EventCallback`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedNode",
+      "Type": "BTreeItem`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedNodeChanged",
+      "Type": "EventCallback`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedNodes",
+      "Type": "BTreeItem`1[]",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "TitleExpression",
+      "Type": "Func`2",
+      "Default": "",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "NodesContent",
+      "Description": ""
+    },
+    {
+      "Name": "PrependContent",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnCheckBoxChanged",
+      "Description": ""
+    },
+    {
+      "Name": "OnCheckboxClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnExpandChanged",
+      "Description": ""
+    },
+    {
+      "Name": "OnItemClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnNodeLoadDelayAsync",
+      "Description": ""
+    },
+    {
+      "Name": "OnSearchValueChanged",
+      "Description": ""
+    }
+  ]
+}

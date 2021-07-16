@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MDatePickerYears : BDatePickerYears, IColorable
+    internal partial class MDatePickerYears : BDatePickerYears, IColorable
     {
         [Parameter]
         public string Color { get; set; }

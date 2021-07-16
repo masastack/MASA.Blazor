@@ -44,7 +44,7 @@ namespace MASA.Blazor
         public string NextIcon { get; set; }
 
         [Parameter]
-        public string Oprional { get; set; }
+        public string Optional { get; set; }
 
         [Parameter]
         public string PrevIcon { get; set; }

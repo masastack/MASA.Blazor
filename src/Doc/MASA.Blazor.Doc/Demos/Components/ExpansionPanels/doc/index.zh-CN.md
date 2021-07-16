@@ -10,3 +10,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
 
 ExpansionPanels 组件适用于页面层级导航
 
+## API
+
+- [MExpansionPanels](/docs/api/MExpansionPanels)

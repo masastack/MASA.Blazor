@@ -7,7 +7,7 @@ using BlazorComponent;
 
 namespace MASA.Blazor
 {
-    public partial class MTableLoading : BTableLoading
+    internal partial class MTableLoading : BTableLoading
     {
         protected override void SetComponentClass()
         {

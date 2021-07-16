@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-MTree 基本用法
+绑定数据源
 
 ## en-US
 

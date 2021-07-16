@@ -4,7 +4,7 @@
     <div class="m-presets-ph--header">
         @if (OnBack.HasDelegate)
         {
-            <MButton Icon Style="margin-right: 8px" Click="HandleOnBack"><MIcon>mdi-arrow-left</MIcon></MButton>
+            <MButton Icon Style="margin-right: 8px" OnClick="HandleOnBack"><MIcon>mdi-arrow-left</MIcon></MButton>
         }
 
         <span class="m-presets--title" style="margin-right: 8px">
@@ -46,22 +46,22 @@
                 @if (ShowFilters)
                 {
                     <MTooltip>
-                        <Activator>
-                            <MButton Icon Click="HandleOnSearch" Loading="_loading"><MIcon>mdi-magnify</MIcon></MButton>
-                        </Activator>
+                        <ActivatorContent>
+                            <MButton Icon OnClick="HandleOnSearch" Loading="_loading"><MIcon>mdi-magnify</MIcon></MButton>
+                        </ActivatorContent>
                         <ChildContent>
                             搜索
                         </ChildContent>
                     </MTooltip>
                 }
 
-                <MButton Icon Click="() => ShowFilters = !ShowFilters">
+                <MButton Icon OnClick="() => ShowFilters = !ShowFilters">
                     @if (ShowFilters)
                     {
                         <MTooltip>
-                            <Activator>
+                            <ActivatorContent>
                                 <MIcon>mdi-filter-off-outline</MIcon>
-                            </Activator>
+                            </ActivatorContent>
                             <ChildContent>
                                 隐藏搜索框
                             </ChildContent>
@@ -70,9 +70,9 @@
                     else
                     {
                         <MTooltip>
-                            <Activator>
+                            <ActivatorContent>
                                 <MIcon>mdi-filter-outline</MIcon>
-                            </Activator>
+                            </ActivatorContent>
                             <ChildContent>
                                 显示搜索框
                             </ChildContent>

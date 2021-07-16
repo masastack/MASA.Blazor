@@ -66,7 +66,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-icon")
-                        .AddIf("m-icon--link", () => Click.HasDelegate)
+                        .AddIf("m-icon--link", () => OnClick.HasDelegate)
                         .AddIf("m-icon--dense", () => Dense)
                         .AddIf("m-icon--left", () => Left)
                         .AddIf("m-icon--right", () => Right)

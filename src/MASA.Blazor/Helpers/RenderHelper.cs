@@ -28,7 +28,7 @@ namespace MASA.Blazor.Helpers
            builder.AddAttribute(sequence++, nameof(MButton.Dark), dark);
 
            if (!click.Equals(default(EventCallback<MouseEventArgs>)))
-               builder.AddAttribute(sequence++, nameof(MButton.Click), click);
+               builder.AddAttribute(sequence++, nameof(MButton.OnClick), click);
 
            builder.AddAttribute(sequence++, nameof(MButton.ChildContent), childContent.Invoke(sequence++));
 

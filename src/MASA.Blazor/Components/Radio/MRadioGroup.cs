@@ -39,6 +39,7 @@ namespace MASA.Blazor
 
         protected override void OnParametersSet()
         {
+            base.OnParametersSet();
             SetActiveRadio();
         }
 

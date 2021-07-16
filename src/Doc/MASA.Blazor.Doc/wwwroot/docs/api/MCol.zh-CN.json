@@ -1,0 +1,104 @@
+﻿{
+  "Components": [
+    "Grid"
+  ],
+  "Props": [
+    {
+      "Name": "Align",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用 align-items css 属性。可用的选项是start, center, end, auto, baseline 和 stretch。"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Cols",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设置组件扩展的默认列数。可用的选项是 1 -> 12 和 auto 。"
+    },
+    {
+      "Name": "Flex",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Lg",
+      "Type": "OneOf`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Md",
+      "Type": "OneOf`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Offset",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Order",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Pull",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Push",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Sm",
+      "Type": "OneOf`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Xl",
+      "Type": "OneOf`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Xs",
+      "Type": "OneOf`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Xxl",
+      "Type": "OneOf`2",
+      "Default": "",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": []
+}

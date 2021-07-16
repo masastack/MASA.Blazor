@@ -9,3 +9,6 @@ cols: 1
 
 `MImage`组件包含支持丰富媒体的功能。
 
+## API
+
+- [MImage](/docs/api/MImage)

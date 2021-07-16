@@ -1,0 +1,34 @@
+﻿<div>
+    <MBreadcrumbs Items="ItemsData"
+                  ItemText="r=>r.Text"
+                  ItemValue="r=>r.URL"></MBreadcrumbs>
+
+    <MBreadcrumbs Items="ItemsData2"
+                  ItemText="r=>r.Text"
+                  ItemValue="r=>r.URL"
+                  Large></MBreadcrumbs>
+</div>
+
+@code {
+
+    private List<ItemsModel> ItemsData { get; set; } =
+                    new List<ItemsModel> {
+                        new ItemsModel{ Text="主页",URL="/" },
+                        new ItemsModel{ Text="列表",URL="/components"},
+                        new ItemsModel{ Text="详情",URL="/components/breadcrumbs"},
+                                        };
+
+    private List<ItemsModel> ItemsData2 { get; set; } =
+                    new List<ItemsModel> {
+                        new ItemsModel{ Text="主页",URL="/" },
+                        new ItemsModel{ Text="我的订单",URL="/components/form" },
+                        new ItemsModel{ Text="列表",URL="/components"},
+                        new ItemsModel{ Text="详情",URL="/components/breadcrumbs"},
+                                        };
+
+    public class ItemsModel
+    {
+        public string Text { get; set; }
+        public string URL { get; set; }
+    }
+}

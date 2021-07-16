@@ -161,7 +161,7 @@ namespace MASA.Blazor
                     props[nameof(MPopover.MinWidth)] = MinWidth ?? _minWidth;
                     props[nameof(MPopover.MaxHeight)] = MaxHeight;
                     props[nameof(MPopover.ChildContent)] = ChildContent;
-                    props[nameof(MPopover.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
+                    props[nameof(MPopover.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
                         if (CloseOnContentClick)
                         {
@@ -175,7 +175,7 @@ namespace MASA.Blazor
                 .Apply<BOverlay, MOverlay>(props =>
                 {
                     props[nameof(MOverlay.Value)] = (Visible && !OpenOnHover);
-                    props[nameof(MOverlay.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
+                    props[nameof(MOverlay.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
                         if (CloseOnClick)
                         {
@@ -185,8 +185,8 @@ namespace MASA.Blazor
                                 _visible = false;
                         }
 
-                        if (OutsideClick.HasDelegate)
-                            await OutsideClick.InvokeAsync();
+                        if (OnOutsideClick.HasDelegate)
+                            await OnOutsideClick.InvokeAsync();
                     });
                     props[nameof(MOverlay.Opacity)] = (StringNumber)0;
                 });

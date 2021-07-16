@@ -203,7 +203,7 @@ code[class*=language-], pre[class*=language-] {
     hyphens: none;
 }
 
-.token.boolean, .token.constant, .token.deleted, .token.property, .token.symbol, {
+.token.boolean, .token.constant, .token.deleted, .token.property, .token.symbol {
     color: #905;
 }
 
@@ -272,4 +272,16 @@ code[class*=language-], pre[class*=language-] {
 
 .token.function {
     color: rgb(116,83,31)
+}
+
+.text-mono {
+    font-family: monospace;
+}
+
+.api-table .m-markdown p {
+    margin-bottom: 0;
+}
+
+.api-table td.regular-row {
+    padding: 8px 16px !important;
 }

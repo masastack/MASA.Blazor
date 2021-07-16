@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using BlazorComponent.Doc.CLI.Extensions;
 using BlazorComponent.Doc.CLI.Models;
 using MASA.Blazor.Doc.Localization;
+using MASA.Blazor.Doc.Pages;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -68,6 +69,11 @@ namespace MASA.Blazor.Doc.Services
                 var menuItems = await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/meta/docs.{language}.json").ToString());
                 return menuItems;
             });
+        }
+
+        public Task<ApiModel> GetApiAsync(string apiUrl)
+        {
+            return _httpClient.GetFromJsonAsync<ApiModel>(apiUrl);
         }
 
         public Task<DocFileModel> GetDocFileAsync(string docUrl)

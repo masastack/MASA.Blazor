@@ -1,0 +1,48 @@
+﻿<div class="text-center">
+    @if (!_chip1 && !_chip2 && !_chip3 && !_chip4)
+    {
+        <MButton Color="primary"
+                 Dark
+                 OnClick="() => { _chip1 = true; _chip2 = true; _chip3 = true; _chip4 = true; }">
+            Reset _chips
+        </MButton>
+    }
+
+    <MChip Class="ma-2"
+           Close
+           Click="()=>_chip1 = false">
+        Closable
+    </MChip>
+
+    <MChip Class="ma-2"
+           Close
+           Color="red"
+           TextColor="white"
+           Click="()=>_chip2 = false">
+        Remove
+    </MChip>
+
+    <MChip Class="ma-2"
+           Close
+           Color="green"
+           Outlined
+           Click="()=>_chip3 = false">
+        Success
+    </MChip>
+
+    <MChip Class="ma-2"
+           Close
+           Color="orange"
+           Label
+           Outlined
+           Click="()=>_chip4 = false">
+        Complete
+    </MChip>
+</div>
+
+@code{
+    private bool _chip1 = true;
+    private bool _chip2 = true;
+    private bool _chip3 = true;
+    private bool _chip4 = true;
+}

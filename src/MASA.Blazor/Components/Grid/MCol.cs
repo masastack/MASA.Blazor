@@ -24,7 +24,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("col")
-                        .AddIf(() => $"col-{Span.Value}", () => Span != null)
+                        .AddIf(() => $"col-{Cols.Value}", () => Cols != null)
                         .AddIf(() => $"offset-{Offset.Value}", () => Offset != null)
                         .AddIf(() => $"order-{Order.Value}", () => Order != null)
                         .AddIf(() => $"align-self-{Align}", () => !string.IsNullOrEmpty(Align))

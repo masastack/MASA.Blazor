@@ -9,7 +9,7 @@
             </span>
             <MSpacer></MSpacer>
             <MButton Icon>
-                <MButton Icon Click="HandleOnCancel">
+                <MButton Icon OnClick="HandleOnCancel">
                     <MIcon>mdi-close</MIcon>
                 </MButton>
             </MButton>
@@ -27,8 +27,8 @@
 
             <MCardActions>
                 <MSpacer />
-                <MButton Text Click="HandleOnCancel">@CancelText</MButton>
-                <MButton Text Color="primary" Click="HandleOnOk" Loading="_loading">@OkText</MButton>
+                <MButton Text OnClick="HandleOnCancel">@CancelText</MButton>
+                <MButton Text Color="primary" OnClick="HandleOnOk" Loading="_loading">@OkText</MButton>
             </MCardActions>
         }
     </MCard>

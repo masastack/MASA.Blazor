@@ -1,0 +1,169 @@
+﻿{
+  "Components": [
+    "Autocomplete"
+  ],
+  "Props": [
+    {
+      "Name": "Chips",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "改变一个已选择项为小纸片（chips）的显示方式"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "减少组件的高度。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "禁用输入"
+    },
+    {
+      "Name": "Filled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "应用替代填充输入样式"
+    },
+    {
+      "Name": "Filter",
+      "Type": "Func`3",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Hint",
+      "Type": "String",
+      "Default": "null",
+      "Description": "提示文本"
+    },
+    {
+      "Name": "Interval",
+      "Type": "Double",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Items",
+      "Type": "IReadOnlyList`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "ItemText",
+      "Type": "Func`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "ItemValue",
+      "Type": "Func`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Label",
+      "Type": "String",
+      "Default": "null",
+      "Description": "设置输入标签"
+    },
+    {
+      "Name": "Loading",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "显示线性进度条。可以是指定将哪种颜色应用于进度条的字符串（任何 material 色彩——主要（primary）, 次要（secondary）, 成功（success）, 信息（info），警告（warning），错误（error）），或者使用组件的布尔值 color（由色彩属性设置——如果它被组件支持的话）还可以是原色。"
+    },
+    {
+      "Name": "MenuProps",
+      "Type": "BMenuProps",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "Multiple",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "多选，接受数组作为值"
+    },
+    {
+      "Name": "Outlined",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使背景透明并使用薄边框。"
+    },
+    {
+      "Name": "PersistentHint",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "强制提示总是可见的"
+    },
+    {
+      "Name": "Solo",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "改变输入框的样式"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "TValue",
+      "Default": "",
+      "Description": "输入的值"
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Values",
+      "Type": "List`1",
+      "Default": "",
+      "Description": "输入的值"
+    },
+    {
+      "Name": "ValuesChanged",
+      "Type": "EventCallback`1",
+      "Default": "",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnInput",
+      "Description": "被绑定模型的更新"
+    }
+  ]
+}

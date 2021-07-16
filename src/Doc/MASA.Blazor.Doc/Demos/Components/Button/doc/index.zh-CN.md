@@ -9,3 +9,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Button.svg
 ---
 
 按钮用于开始一个即时操作。
+
+## API
+
+- [MButton](/docs/api/MButton)

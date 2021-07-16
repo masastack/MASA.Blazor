@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MDatePickerTitle : BDatePickerTitle, IPickerTitle
+    internal partial class MDatePickerTitle : BDatePickerTitle, IPickerTitle
     {
         [Parameter]
         public bool Disabled { get; set; }

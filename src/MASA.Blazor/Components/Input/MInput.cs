@@ -136,8 +136,7 @@ namespace MASA.Blazor
                 .Apply("input-slot", cssBuilder =>
                 {
                     cssBuilder
-                        .Add($"{prefix}__slot")
-                        .AddBackgroundColor(Color);
+                        .Add($"{prefix}__slot");
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -157,15 +156,15 @@ namespace MASA.Blazor
                 .Apply<BIcon, MIcon>("clearable", properties =>
                 {
                     properties[nameof(MIcon.Tag)] = IconTag.I;
-                    properties[nameof(MIcon.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
+                    properties[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
                         if (ValueChanged.HasDelegate)
                             await ValueChanged.InvokeAsync(default);
                         else
                             Value = default;
 
-                        if (ClearClick.HasDelegate)
-                            await ClearClick.InvokeAsync();
+                        if (OnClearClick.HasDelegate)
+                            await OnClearClick.InvokeAsync();
                     });
                 });
         }

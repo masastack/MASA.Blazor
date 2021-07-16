@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MListGroupItemIcon : MListItemIcon
+    internal partial class MListGroupItemIcon : MListItemIcon
     {
         [Parameter]
         public string Type { get; set; }

@@ -1,0 +1,153 @@
+﻿{
+  "Components": [
+    "Radio"
+  ],
+  "Props": [
+    {
+      "Name": "AppendIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "在组件上附加一个图标，使用与 v-icon 相同的语法"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Clearable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Column",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "单选框列显示"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "减少组件的高度。"
+    },
+    {
+      "Name": "HasState",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "HideDetails",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "隐藏提示和验证错误。当设置为 auto 时，只有在有信息（提示、错误信息、计数器值等）要显示时，才会显示信息。"
+    },
+    {
+      "Name": "IsDisabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "IsFocused",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "IsReadonly",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Label",
+      "Type": "String",
+      "Default": "null",
+      "Description": "设置输入标签"
+    },
+    {
+      "Name": "Loading",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Row",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "单选框行显示"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "ValidationState",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "TValue",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "ValueExpression",
+      "Type": "Expression`1",
+      "Default": "",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "AppendContent",
+      "Description": "在输入框内部，文字之后添加一个内容"
+    },
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "PrependContent",
+      "Description": "在输入框外部，前面添加一个内容"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnClearClick",
+      "Description": ""
+    }
+  ]
+}

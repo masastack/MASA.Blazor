@@ -5,7 +5,7 @@
     <MApp>
         <MAppBar Flat Fixed Color="white" Class="m-bar--underline" Left="300">
             <div class="flex-1-1-auto d-flex align-center justify-end">
-                <MTextField TValue="string" Flat IsSolo Dense Class="mx-2 mx-md-4 rounded-lg" Color="grey lighten-3" Placeholder="搜索(按 回车)" Style="max-width: 450px;">
+                <MTextField TValue="string" HideDetails Flat IsSolo Dense Class="mx-2 mx-md-4 rounded-lg" Color="grey lighten-3" Placeholder="搜索(按 回车)" Style="max-width: 450px;">
                     <PrependInnerContent>
                         <MIcon Class="ml-1 mr-2">mdi-magnify</MIcon>
                     </PrependInnerContent>
@@ -39,7 +39,7 @@
                         <span style="font-weight:bold;font-size:larger;margin-left:3px;padding:3px;">MASA Blazor</span>
                         <MSpacer></MSpacer>
                         <MButton Text Class="m-btn--app text--secondary text-capitalize font-weight-regular px-2">
-                            <span>v2.5.4</span>
+                            <span>v0.2.0</span>
                             <MIcon>mdi-chevron-down</MIcon>
                         </MButton>
                     </MListItem>
@@ -58,53 +58,7 @@
         </MNavigationDrawer>
         <MMain Style="padding: 64px 256px 0px 300px;">
             <MContainer Class="pa-4 pa-sm-6 pa-md-8" Fluid>
-                <div class="m-responsive mx-auto overflow-visible" style="max-width: 868px;">
-                    <div class="m-responsive__content">
-                        <div class="markdown-body">
-                            <section>
-                                @Body
-                            </section>
-                            <section class="mt-12">
-                                <h2 class="m-heading text-h4 text-sm-h4 mb-3"> 了解更多？</h2>
-                                <div class="mb-3">
-                                    继续学习由
-                                    <a class="app-link text-decoration-none primary--text font-weight-medium d-inline-block">我们的团队</a> 选择的相关内容，或通过使用下面的导航链接在页面之间跳转。
-                                </div>
-                                <MRow Dense>
-                                    <MCol Span="4">
-                                        <MSheet Class="overflow-hidden" Outlined Rounded="true" MinHeight="61"></MSheet>
-                                    </MCol>
-                                    <MCol Span="4">
-                                        <MSheet Class="overflow-hidden" Outlined Rounded="true" MinHeight="61"></MSheet>
-                                    </MCol>
-                                    <MCol Span="4">
-                                        <MSheet Class="overflow-hidden" Outlined Rounded="true" MinHeight="61"></MSheet>
-                                    </MCol>
-                                </MRow>
-                                <MDivider Class="my-6 mt-7 mb-5"></MDivider>
-                                <div class="d-flex mb-4">
-                                    <a class="text-decoration-none text-body-1">
-                                        <span class="text-h6 text--primary">←&nbsp;</span>
-                                        <span>上一页</span>
-                                    </a>
-                                    <MSpacer></MSpacer>
-                                    <a class="text-decoration-none text-body-1">
-                                        <span>下一页</span>
-                                        <span class="text-h6 text--primary">&nbsp;→</span>
-                                    </a>
-                                </div>
-                                <MSheet Class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 m-vuetify-ad mb-8" Outlined Rounded="true" MinHeight="74" Style="width:100%"></MSheet>
-                                <div>
-                                    <div class="blue-grey--text text--darken-1 d-flexalign-center justify-space-between">
-                                        <div class="font-weight-medium d-flex align-baseline grow flex-wrap">
-                                            <span class="mb-2 mb-md-0">在 GitHub <a class="app-link text-decoration-none primary--text font-weight-medium d-inline-block">GitHub</a> 上编辑此页面</span><div class="spacer hidden-sm-and-down"></div><div class="text-body-2"><span class="font-weight-medium mr-1">最后更新：</span><span class="text--secondary">06/25/2021, 8:18:35 AM</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>
+                @Body
             </MContainer>
         </MMain>
         <MNavigationDrawer Clipped Fixed Floating Right Top="64" Class="default-toc py-4 pr-3">

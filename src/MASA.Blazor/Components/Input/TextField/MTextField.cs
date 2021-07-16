@@ -95,6 +95,11 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-text-field__details");
+                })
+                .Merge("input-slot", cssBuilder =>
+                {
+                    cssBuilder
+                        .AddBackgroundColor(Color);
                 });
 
             AbstractProvider

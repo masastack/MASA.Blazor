@@ -57,7 +57,7 @@ namespace MASA.Blazor
                 .Apply<BOverlay, MOverlay>(props =>
                 {
                     props[nameof(MOverlay.Value)] = Visible;
-                    props[nameof(MOverlay.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
+                    props[nameof(MOverlay.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
                         if (Persistent)
                         {
@@ -71,8 +71,8 @@ namespace MASA.Blazor
                                 await VisibleChanged.InvokeAsync(false);
                         }
 
-                        if (OutsideClick.HasDelegate)
-                            await OutsideClick.InvokeAsync();
+                        if (OnOutsideClick.HasDelegate)
+                            await OnOutsideClick.InvokeAsync();
                     });
                 });
         }

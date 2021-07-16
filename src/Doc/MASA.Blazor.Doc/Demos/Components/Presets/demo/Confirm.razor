@@ -1,11 +1,11 @@
 ﻿@using AlertTypes = MASA.Blazor.AlertType
 
 <MRow>
-    <MCol><MButton Color="primary" Click="() => Show()">Default</MButton></MCol>
-    <MCol><MButton Color="success" Click="() => Show(AlertTypes.Success)">Success</MButton></MCol>
-    <MCol><MButton Color="info" Click="() => Show(AlertTypes.Info)">Info</MButton></MCol>
-    <MCol><MButton Color="warning" Click="() => Show(AlertTypes.Warning)">Warning</MButton></MCol>
-    <MCol><MButton Color="error" Click="() => Show(AlertTypes.Error)">Error</MButton></MCol>
+    <MCol><MButton Color="primary" OnClick="() => Show()">Default</MButton></MCol>
+    <MCol><MButton Color="success" OnClick="() => Show(AlertTypes.Success)">Success</MButton></MCol>
+    <MCol><MButton Color="info" OnClick="() => Show(AlertTypes.Info)">Info</MButton></MCol>
+    <MCol><MButton Color="warning" OnClick="() => Show(AlertTypes.Warning)">Warning</MButton></MCol>
+    <MCol><MButton Color="error" OnClick="() => Show(AlertTypes.Error)">Error</MButton></MCol>
 </MRow>
 
 <MASA.Blazor.Presets.Confirm Visible="_visible" Title="确认操作" Type="_type" OnCancel="Hide" OnOk="HandleOnOk">

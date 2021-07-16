@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-默认情况下，Progress Circular使用应用程序的辅助颜色。
+最简单的形式， v-progress-linear 显示一个水平进度条。
 
 ## en-US
 

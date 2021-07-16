@@ -1,7 +1,7 @@
 ﻿<MRow Justify="center">
     <MButton Color="primary"
              Dark
-             Click="() => _visible = true">
+             OnClick="() => _visible = true">
         Open Dialog
     </MButton>
     <MDialog @bind-Visible="_visible"
@@ -16,12 +16,12 @@
                 <MSpacer></MSpacer>
                 <MButton Color="green darken-1"
                          Text
-                         Click="() => _visible = false">
+                         OnClick="() => _visible = false">
                     Disagree
                 </MButton>
                 <MButton Color="green darken-1"
                          Text
-                         Click="() => _visible = false">
+                         OnClick="() => _visible = false">
                     Agree
                 </MButton>
             </MCardActions>

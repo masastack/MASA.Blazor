@@ -56,7 +56,7 @@ namespace MASA.Blazor
                         .AddIf("m-sheet--shaped", () => Shaped)
                         .AddIf($"{prefix}--flat", () => Flat)
                         .AddIf($"{prefix}--hover", () => Hover)
-                        .AddIf($"{prefix}--link", () => Link || Click.HasDelegate)
+                        .AddIf($"{prefix}--link", () => Link || OnClick.HasDelegate)
                         .AddIf($"{prefix}--loading", () => Loading)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--raised", () => Raised)

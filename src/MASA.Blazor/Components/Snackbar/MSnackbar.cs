@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Timers;
 using System.Threading.Tasks;
+using OneOf;
 
 namespace MASA.Blazor
 {
@@ -28,7 +29,7 @@ namespace MASA.Blazor
             {
                 _isActive = value;
 
-                if (_isActive)
+                if (_isActive && Timeout > 0)
                 {
                     if (Timer == null)
                     {
@@ -83,6 +84,18 @@ namespace MASA.Blazor
         [Parameter]
         public int Timeout { get; set; } = 5000;
 
+        [Parameter]
+        public string Color { get; set; }
+
+        [Parameter]
+        public StringNumber Elevation { get; set; }
+
+        [Parameter]
+        public bool Tile { get; set; }
+
+        [Parameter]
+        public OneOf<bool, string> Rounded { get; set; }
+
         protected Timer Timer { get; set; }
 
         protected override void SetComponentClass()
@@ -118,6 +131,10 @@ namespace MASA.Blazor
                         .Add("m-sheet")
                         .AddIf("m-sheet--outlined", () => Outlined)
                         .AddIf("m-sheet--shaped", () => Shaped)
+                        .AddBackgroundColor(Color, () => !Text && !Outlined)
+                        .AddTextColor(Color, () => Text || Outlined)
+                        .AddRounded(Tile, Rounded)
+                        .AddElevation(Elevation)
                         .AddTheme(Dark);
                 }, styleBuilder =>
                 {
@@ -139,7 +156,7 @@ namespace MASA.Blazor
                 .Apply<BButton, MSnackbarButton>(props =>
                 {
                     props[nameof(MSnackbarButton.Text)] = true;
-                    props[nameof(MSnackbarButton.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
+                    props[nameof(MSnackbarButton.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
                         IsActive = false;
                         Timer.Stop();

@@ -7,9 +7,7 @@ title:
 
 ## zh-CN
 
-这是一个 Vuetify 默认应用标记的例子。 只要设置 app 属性，你可以将布局元素放在任何地方。 所有这一切的关键组件是 v-main。 这将根据你指定的应用组件的结构而动态调整大小。 你可以使用上述任何或所有组件的组合，包括 v-bottom-navigation。
-
-当使用 vue-router 时，建议将你的视图放在 v-main 内。
+v-sheet 组件是一块可改变的 paper ，为Vuetify 的功能提供了基础。 例如，rounded 和 shaped 修改 border-radius 属性，而elevation增加/减少box-shadow。
 
 ## en-US
 

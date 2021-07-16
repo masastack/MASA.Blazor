@@ -36,6 +36,7 @@ namespace MASA.Blazor
             AbstractProvider
                 .Apply<IInputBody, MSwitchInputBody>(props =>
                 {
+                    props[nameof(MSwitchInputBody.Color)] = Color ?? "primary";
                     props[nameof(MSwitchInputBody.ValidationState)] = ValidationState;
                     props[nameof(MSwitchInputBody.IsActive)] = IsActive;
                     props[nameof(MSwitchInputBody.Label)] = Label;
@@ -44,6 +45,7 @@ namespace MASA.Blazor
 
         protected override void OnParametersSet()
         {
+            base.OnParametersSet();
             IsActive = Value;
         }
 

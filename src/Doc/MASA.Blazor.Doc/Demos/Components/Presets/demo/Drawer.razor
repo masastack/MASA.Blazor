@@ -1,5 +1,5 @@
 ﻿<div class="mb-1">
-    <MButton Click="() => _visible = true">Open Drawer</MButton>
+    <MButton OnClick="() => _visible = true">Open Drawer</MButton>
 
     <MASA.Blazor.Presets.Drawer Visible="_visible" Title="新增用户" Width="500" Persistent OnCancel="() => _visible = false">
         <MRow>

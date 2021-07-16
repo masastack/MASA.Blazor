@@ -1,13 +1,13 @@
 ---
-order: 0
+order: 1
 title:
-  zh-CN: Fixed
-  en-US: Usage
+  zh-CN: 固定列
+  en-US: Fixed
 ---
 
 ## zh-CN
 
-简单表格组件是table元素的封装组件。
+默认固定最后一列
 
 ## en-US
 

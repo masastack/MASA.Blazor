@@ -1,0 +1,78 @@
+﻿{
+  "Components": [
+    "Tooltip"
+  ],
+  "Props": [
+    {
+      "Name": "ActivatorStyle",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Attached",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使组件脱离当前节点并且指向一个新的DOM元素。可以是任何document. querySelector 有效的字符串或者任何有效的节点。将默认指定并附加到根节点v-app下。"
+    },
+    {
+      "Name": "Bottom",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向底部对齐。"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "禁用提示"
+    },
+    {
+      "Name": "Left",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向左边对齐。"
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "Right",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向右边对齐。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ActivatorContent",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": []
+}

@@ -5,7 +5,20 @@ namespace MASA.Blazor
 {
     public partial class MPicker : BPicker, IThemeable, IElevatable, IColorable
     {
-        protected string TitleColor => Color ?? (Dark ? null : "primary");
+        private string _headerColor;
+
+        [Parameter]
+        public string HeaderColor
+        {
+            get
+            {
+                return _headerColor ?? Color ?? "primary";
+            }
+            set
+            {
+                _headerColor = value;
+            }
+        }
 
         [Parameter]
         public bool Flat { get; set; }
@@ -23,7 +36,7 @@ namespace MASA.Blazor
         public StringNumber Elevation { get; set; }
 
         [Parameter]
-        public virtual string Color { get; set; }
+        public string Color { get; set; }
 
         [Parameter]
         public StringNumber Width { get; set; } = 290;
@@ -48,11 +61,11 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add($"{prefix}__title")
                         .AddIf($"{prefix}__title--landscape", () => Landscape)
-                        .AddBackgroundColor(TitleColor);
+                        .AddBackgroundColor(HeaderColor);
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddBackgroundColor(TitleColor);
+                        .AddBackgroundColor(HeaderColor);
                 })
                 .Apply("body", cssBuilder =>
                 {

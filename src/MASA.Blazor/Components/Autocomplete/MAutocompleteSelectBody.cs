@@ -2,7 +2,7 @@
 
 namespace MASA.Blazor
 {
-    public partial class MAutocompleteSelectBody<TItem> : BAutocompleteSelectBody<TItem>
+    internal partial class MAutocompleteSelectBody<TItem> : BAutocompleteSelectBody<TItem>
     {
         protected override void SetComponentClass()
         {

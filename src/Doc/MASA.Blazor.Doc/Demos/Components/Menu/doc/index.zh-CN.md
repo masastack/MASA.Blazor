@@ -8,3 +8,7 @@ cols: 1
 ---
 
 `Menu` 组件在激活它的元素的位置上展示一个菜单。
+
+## API
+
+- [MMenu](/docs/api/MMenu)

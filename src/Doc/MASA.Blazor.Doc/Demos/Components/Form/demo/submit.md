@@ -1,7 +1,7 @@
 ---
 order: 0
 title:
-  zh-CN: 提交验证
+  zh-CN: 提交与验证
   en-US: Sumbit
 ---
 

@@ -46,8 +46,8 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--dense", () => Dense)
                         .AddIf($"{prefix}--fixed-height", () => Height != null && !FixedHeader)
                         .AddIf($"{prefix}--fixed-header", () => FixedHeader)
-                        .AddIf($"{prefix}--has-top", () => Top != default)
-                        .AddIf($"{prefix}--has-bottom", () => Bottom != default)
+                        .AddIf($"{prefix}--has-top", () => TopContent != default)
+                        .AddIf($"{prefix}--has-bottom", () => BottomContent != default)
                         .AddTheme(Dark);
                 })
                 .Apply("wrap", cssBuilder =>

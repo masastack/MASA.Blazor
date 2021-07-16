@@ -9,8 +9,11 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MDatePickerBody : BDatePickerBody<MDatePicker>
+    internal partial class MDatePickerBody : BDatePickerBody<MDatePicker>
     {
+        [Parameter]
+        public string Color { get; set; }
+
         [Parameter]
         public EventCallback<int> OnDaySelected { get; set; }
 
@@ -28,7 +31,7 @@ namespace MASA.Blazor
             AbstractProvider
                 .Apply<BDatePickerYears, MDatePickerYears>(props =>
                 {
-                    props[nameof(MDatePickerYears.Color)] = Component.Color;
+                    props[nameof(MDatePickerYears.Color)] = Color;
                     props[nameof(MDatePickerYears.Min)] = Component.MinYear;
                     props[nameof(MDatePickerYears.Max)] = Component.MaxYear;
                     props[nameof(MDatePickerYears.Value)] = Component.TableYear;
@@ -38,14 +41,15 @@ namespace MASA.Blazor
                 {
                     props[nameof(MDatePickerHeader.PrevIcon)] = Component.PrevIcon;
                     props[nameof(MDatePickerHeader.NextIcon)] = Component.NextIcon;
-                    props[nameof(MDatePickerHeader.Color)] = Component.Color;
+                    props[nameof(MDatePickerHeader.Color)] = Color;
                     props[nameof(MDatePickerHeader.Dark)] = Component.Dark;
                     props[nameof(MDatePickerHeader.Disabled)] = Component.Disabled;
                     props[nameof(MDatePickerHeader.Min)] = Component.ActivePicker == "DATE" ? Component.MinMonth : Component.MinYear;
                     props[nameof(MDatePickerHeader.Max)] = Component.ActivePicker == "DATE" ? Component.MaxMonth : Component.MaxYear;
                     props[nameof(MDatePickerHeader.Readonly)] = Component.Readonly;
+                    props[nameof(MDatePickerHeader.ActivePicker)] = Component.ActivePicker;
                     props[nameof(MDatePickerHeader.Value)] = (StringNumber)(Component.ActivePicker == "DATE" ? $"{Component.TableYear.ToString().PadLeft(4, '0')}-{(Component.TableMonth.ToInt32()).ToString().PadLeft(2, '0')}" : Component.TableYear.ToString().PadLeft(4, '0'));
-                    props[nameof(MDatePickerHeader.PrevClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
+                    props[nameof(MDatePickerHeader.OnPrevClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
                     {
                         if (Component.ActivePicker == "DATE")
                         {
@@ -56,7 +60,7 @@ namespace MASA.Blazor
                             Component.AddYears(-1);
                         }
                     });
-                    props[nameof(MDatePickerHeader.NextClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
+                    props[nameof(MDatePickerHeader.OnNextClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
                     {
                         if (Component.ActivePicker == "DATE")
                         {
@@ -67,17 +71,19 @@ namespace MASA.Blazor
                             Component.AddYears(1);
                         }
                     });
-                    props[nameof(MDatePickerHeader.DateClick)] = DateClick;
+                    props[nameof(MDatePickerHeader.OnDateClick)] = DateClick;
                 })
                 .Apply<IDatePickerDateTable, MDatePickerDateTable>(props =>
                 {
+                    props[nameof(MDatePickerDateTable.Color)] = Color;
                     props[nameof(MDatePickerDateTable.Value)] = Component.Value;
                     props[nameof(MDatePickerDateTable.TableDate)] = Component.TableDate;
                     props[nameof(MDatePickerDateTable.OnDaySelected)] = OnDaySelected;
                 })
                 .Apply<IDatePickerMonthTable, MDatePickerMonthTable>(props =>
                 {
-                    props[nameof(MDatePickerDateTable.Value)] = Component.Value;
+                    props[nameof(MDatePickerMonthTable.Color)] = Color;
+                    props[nameof(MDatePickerMonthTable.Value)] = Component.Value;
                     props[nameof(MDatePickerMonthTable.TableDate)] = Component.TableDate;
                     props[nameof(MDatePickerMonthTable.OnMonthSelected)] = OnMonthSelected;
                 });

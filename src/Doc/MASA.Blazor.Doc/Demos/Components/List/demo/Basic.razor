@@ -1,19 +1,28 @@
-﻿<MCard Class="mx-auto" MaxWidth="400">
-    <MList>
-        <MListItem>
-            <MListItemContent>
-                <MListItemTitle>1</MListItemTitle>
-            </MListItemContent>
-        </MListItem>
-        <MListItem>
-            <MListItemContent>
-                <MListItemTitle>2</MListItemTitle>
-            </MListItemContent>
-        </MListItem>
-        <MListItem>
-            <MListItemContent>
-                <MListItemTitle>3</MListItemTitle>
-            </MListItemContent>
-        </MListItem>
-    </MList>
+﻿<MCard Class="mx-auto"
+        MaxWidth="400"
+        tile>
+    <MListItem>
+        <MListItemContent>
+            <MListItemTitle>Single-line item</MListItemTitle>
+        </MListItemContent>
+    </MListItem>
+
+    <MListItem TwoLine>
+        <MListItemContent>
+            <MListItemTitle>Two-line item</MListItemTitle>
+            <MListItemSubtitle>Secondary text</MListItemSubtitle>
+        </MListItemContent>
+    </MListItem>
+
+    <MListItem ThreeLine>
+        <MListItemContent>
+            <MListItemTitle>Three-line item</MListItemTitle>
+            <MListItemSubtitle>
+                Secondary line text Lorem ipsum dolor sit amet,
+            </MListItemSubtitle>
+            <MListItemSubtitle>
+                consectetur adipiscing elit.
+            </MListItemSubtitle>
+        </MListItemContent>
+    </MListItem>
 </MCard>

@@ -1,7 +1,7 @@
 ---
 order: 3
 title:
-  zh-CN: 密集
+  zh-CN: 紧凑
   en-US: Dense
 ---
 

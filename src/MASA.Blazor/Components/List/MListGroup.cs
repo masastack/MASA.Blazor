@@ -12,17 +12,20 @@ namespace MASA.Blazor
 {
     public partial class MListGroup : BListGroup
     {
-        protected bool Disabled { get; set; }
+        [Parameter]
+        public bool Disabled { get; set; }
 
-        protected bool NoAction { get; set; }
+        [Parameter]
+        public bool NoAction { get; set; }
 
-        protected bool SubGroup { get; set; }
+        [Parameter]
+        public bool SubGroup { get; set; }
 
         [Parameter]
         public bool Dark { get; set; }
 
         [Parameter]
-        public string Color { get; set; }
+        public string Color { get; set; } = "primary";
 
         protected override void SetComponentClass()
         {
@@ -54,7 +57,7 @@ namespace MASA.Blazor
                 {
                     props[nameof(MListGroupItem.IsActive)] = IsActive;
                     props[nameof(MListGroupItem.Link)] = true;
-                    props[nameof(MListGroupItem.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, args => IsActive = !IsActive);
+                    props[nameof(MListGroupItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, args => IsActive = !IsActive);
                     props[nameof(MListGroupItem.Dark)] = Dark;
                 })
                 .Apply<BListItemIcon, MListGroupItemIcon>("prepend", props =>
@@ -69,6 +72,26 @@ namespace MASA.Blazor
                 {
                     props[nameof(MListGroupItemIcon.Type)] = "append";
                 });
+        }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (SubGroup)
+            {
+                if (PrependIcon == null)
+                {
+                    PrependIcon = "mdi-menu-down";
+                }
+            }
+            else
+            {
+                if (AppendIcon == null)
+                {
+                    AppendIcon = "mdi-chevron-down";
+                }
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public class MCascaderMenu : MMenu
+    internal class MCascaderMenu : MMenu
     {
         [Parameter]
         public ElementReference ActiverRef { get; set; }

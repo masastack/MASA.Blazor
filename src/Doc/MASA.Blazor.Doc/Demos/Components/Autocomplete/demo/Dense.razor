@@ -1,0 +1,49 @@
+﻿<MCard>
+    <MContainer Fluid>
+        <MRow Align="center">
+            <MCol Span="12">
+                <MAutocomplete TItem="string" TValue="string" @bind-Values="_values"
+                               Items="_items"
+                               ItemText="r=>r"
+                               ItemValue="r=>r"
+                               Outlined
+                               Dense
+                               Chips
+                               Label="Outlined"
+                               Multiple></MAutocomplete>
+            </MCol>
+            <MCol Span="12">
+                <MAutocomplete @bind-Values="_values"
+                               Items="_items"
+                               ItemText="r=>r"
+                               ItemValue="r=>r"
+                               Dense
+                               Chips
+                               Label="Solo"
+                               Multiple
+                               Solo></MAutocomplete>
+            </MCol>
+            <MCol Span="12">
+                <MAutocomplete @bind-Value="_value"
+                               Items="_items"
+                               ItemText="r=>r"
+                               ItemValue="r=>r"
+                               Dense
+                               Filled
+                               Label="Filled"></MAutocomplete>
+            </MCol>
+        </MRow>
+    </MContainer>
+</MCard>
+
+@code{
+    private List<string> _items = new List<string>
+{
+        "foo", "bar", "fizz", "buzz"
+    };
+    private List<string> _values = new List<string>
+{
+        "foo", "bar"
+    };
+    private string _value = "foo";
+}

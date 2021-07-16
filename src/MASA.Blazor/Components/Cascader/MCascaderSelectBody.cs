@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MCascaderSelectBody : BCascaderSelectBody
+    internal partial class MCascaderSelectBody : BCascaderSelectBody
     {
         [Parameter]
         public bool Visible { get; set; }

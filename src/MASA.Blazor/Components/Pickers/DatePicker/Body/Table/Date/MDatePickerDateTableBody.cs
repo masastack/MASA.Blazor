@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MDatePickerDateTableBody : BDatePickerDateTableBody
+    internal partial class MDatePickerDateTableBody : BDatePickerDateTableBody
     {
 
         protected override void SetComponentClass()

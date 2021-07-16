@@ -10,21 +10,6 @@ namespace MASA.Blazor
         private DateTime _tableDate;
         private DateTime _value;
 
-        [Parameter]
-        public string HeaderColor { get; set; }
-
-        [Parameter]
-        public override string Color
-        {
-            get
-            {
-                return HeaderColor ?? base.Color;
-            }
-            set
-            {
-                base.Color = value;
-            }
-        }
 
         [Parameter]
         public bool Disabled { get; set; }
@@ -112,10 +97,12 @@ namespace MASA.Blazor
                 .Apply<IPickerTitle, MDatePickerTitle>(props =>
                 {
                     props[nameof(MDatePickerTitle.Year)] = (StringNumber)Value.Year;
+                    props[nameof(MDatePickerTitle.YearIcon)] = YearIcon;
                     props[nameof(MDatePickerTitle.Date)] = Value.ToString("MM-dd");
                 })
                 .Apply<IPickerBody, MDatePickerBody>(props =>
                 {
+                    props[nameof(MDatePickerBody.Color)] = Color ?? "accent";
                     props[nameof(MDatePickerBody.Component)] = this;
                     props[nameof(MDatePickerBody.DateClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
                     {

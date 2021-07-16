@@ -26,7 +26,7 @@ namespace MASA.Blazor
         public bool NonLinear { get; set; }
 
         [Parameter]
-        public StringNumber Value { get; set; }
+        public StringNumber Value { get; set; } = 1;
 
         protected override void SetComponentClass()
         {

@@ -1,0 +1,166 @@
+﻿{
+  "Components": [
+    "Pickers"
+  ],
+  "Props": [
+    {
+      "Name": "ActionsStyle",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "禁用与选择器的交互"
+    },
+    {
+      "Name": "Elevation",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "组件的海拔可接受 0 到 24 之间的值。"
+    },
+    {
+      "Name": "Flat",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "移除提升"
+    },
+    {
+      "Name": "FullWidth",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "强制 100% 宽度"
+    },
+    {
+      "Name": "HeaderColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": "定义标题颜色。如果未指定，将使用由 color 属性或默认选择器颜色定义的颜色。"
+    },
+    {
+      "Name": "Landscape",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "水平方向选择器"
+    },
+    {
+      "Name": "MaxMonth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "MaxYear",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "MinMonth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "MinYear",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "NextIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "设置下个 月/年 按钮的图标"
+    },
+    {
+      "Name": "NoTitle",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "隐藏选择器标题"
+    },
+    {
+      "Name": "PrevIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "设置上一个 月/年 按钮的图标"
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使选择器变为只读状态（不允许选择新日期）"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Type",
+      "Type": "String",
+      "Default": "null",
+      "Description": "确定选择器的类型 - 日期选择器的 date ，月选择器的 month"
+    },
+    {
+      "Name": "Value",
+      "Type": "DateTime",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的宽度。"
+    },
+    {
+      "Name": "YearIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "设置年份选择按钮中的图标"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ActionsContent",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "TitleContent",
+      "Description": ""
+    }
+  ],
+  "Events": []
+}

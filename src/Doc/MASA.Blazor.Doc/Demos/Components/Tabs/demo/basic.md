@@ -7,9 +7,7 @@ title:
 
 ## zh-CN
 
-这是一个 Vuetify 默认应用标记的例子。 只要设置 app 属性，你可以将布局元素放在任何地方。 所有这一切的关键组件是 v-main。 这将根据你指定的应用组件的结构而动态调整大小。 你可以使用上述任何或所有组件的组合，包括 v-bottom-navigation。
-
-当使用 vue-router 时，建议将你的视图放在 v-main 内。
+v-tabs 组件是 v-item-group 的样式扩展。 它提供了一个易于使用的接口来组织内容组。
 
 ## en-US
 

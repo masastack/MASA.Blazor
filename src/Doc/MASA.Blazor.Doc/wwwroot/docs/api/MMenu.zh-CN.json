@@ -1,0 +1,173 @@
+﻿{
+  "Components": [
+    "Menu"
+  ],
+  "Props": [
+    {
+      "Name": "Absolute",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "应用 position: absolute 样式到组件."
+    },
+    {
+      "Name": "ActivatorStyle",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Block",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Bottom",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向底部对齐。"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "CloseOnClick",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定菜应该在外部激活器被点击时关闭。"
+    },
+    {
+      "Name": "CloseOnContentClick",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定点击内容时菜单是否应该关闭。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "禁用菜单"
+    },
+    {
+      "Name": "Left",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向左边对齐。"
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大高度。"
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "NudgeBottom",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "向底部微调内容"
+    },
+    {
+      "Name": "NudgeLeft",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "向左侧微调内容"
+    },
+    {
+      "Name": "NudgeRight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "向右侧微调内容"
+    },
+    {
+      "Name": "NudgeTop",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "向顶部微调内容"
+    },
+    {
+      "Name": "NudgeWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "微调内容宽度"
+    },
+    {
+      "Name": "OffsetX",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "在x轴上偏移菜单，与左/右方向一起工作"
+    },
+    {
+      "Name": "OffsetY",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "在y轴上偏移菜单，与上/下方向一起工作"
+    },
+    {
+      "Name": "OpenOnHover",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定是否在激活器悬停时打开菜单"
+    },
+    {
+      "Name": "Right",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向右边对齐。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Top",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向顶部对齐。"
+    },
+    {
+      "Name": "Visible",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "VisibleChanged",
+      "Type": "EventCallback`1",
+      "Default": "",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ActivatorContent",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnOutsideClick",
+      "Description": ""
+    }
+  ]
+}

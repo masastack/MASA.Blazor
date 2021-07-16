@@ -35,8 +35,8 @@ namespace MASA.Blazor
             AbstractProvider
                 .Apply<BTreeItem<T>, MTreeItem<T>>(props =>
                 {
-                    props[nameof(MTreeItem<T>.OnItemClick)] = HandleItemClick;
-                    props[nameof(MTreeItem<T>.HandleCheckboxClick)] = HandleCheckboxClick;
+                    props[nameof(MTreeItem<T>.OnItemClick)] = OnItemClick;
+                    props[nameof(MTreeItem<T>.OnCheckboxClick)] = OnCheckboxClick;
                     props[nameof(MTreeItem<T>.DefaultCheckedExpression)] = DefaultCheckedExpression;
                     props[nameof(MTreeItem<T>.Checkable)] = Checkable;
                     props[nameof(MTreeItem<T>.PrependContent)] = PrependContent;

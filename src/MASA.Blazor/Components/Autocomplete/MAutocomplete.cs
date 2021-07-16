@@ -72,7 +72,7 @@ namespace MASA.Blazor
                 .Apply<BMenu, MCascaderMenu>(props =>
                 {
                     props[nameof(MCascaderMenu.ActiverRef)] = SelectSoltRef;
-                    props[nameof(MCascaderMenu.ContentStyle)] = $"max-width:{MinWidth.ToUnit()};overflow: hidden";
+                    props[nameof(MCascaderMenu.ContentStyle)] = $"max-width:{MinWidth.ToUnit()};overflow-x: hidden";
                     props[nameof(MMenu.Visible)] = Visible;
                     props[nameof(MMenu.VisibleChanged)] = EventCallback.Factory.Create<bool>(this, (v) =>
                     {

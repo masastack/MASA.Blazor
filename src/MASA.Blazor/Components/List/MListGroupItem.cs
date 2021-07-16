@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor.Components.List
 {
-    public class MListGroupItem : MListItem
+    internal class MListGroupItem : MListItem
     {
         protected override void SetComponentClass()
         {

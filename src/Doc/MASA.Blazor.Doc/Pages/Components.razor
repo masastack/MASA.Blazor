@@ -6,6 +6,7 @@
 @using MASA.Blazor.Doc.Services
 @inherits OwningComponentBase<DemoService>
 @inject NavigationManager NavigationManager
+@layout DocLayout
 
 @if (_demoComponent != null)
 {
@@ -21,6 +22,8 @@
         }
     </h1>
     @((MarkupString) _demoComponent.Desc)
+
+    @((MarkupString)_demoComponent.ApiDoc)
 
     var demos = _demoComponent.DemoList?.Where(x => !x.Debug && !x.Docs.HasValue).OrderBy(x => x.Order) ?? Enumerable.Empty<DemoItemModel>();
     foreach (var demo in demos)

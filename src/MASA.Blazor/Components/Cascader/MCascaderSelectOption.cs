@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace MASA.Blazor
 {
-    public partial class MCascaderSelectOption : MSelectOption<BCascaderNode, string>
+    internal partial class MCascaderSelectOption : MSelectOption<BCascaderNode, string>
     {
         [Parameter]
         public EventCallback<MCascaderSelectOption> OnOptionClick { get; set; }
@@ -15,7 +15,7 @@ namespace MASA.Blazor
                 .Apply<BListItem, MListItem>(props =>
                 {
                     props[nameof(MListItem.Key)] = Key;
-                    props[nameof(MListItem.Click)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
+                    props[nameof(MListItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
                         if (Item.Children == null || Item.Children.Count ==0)
                         {
