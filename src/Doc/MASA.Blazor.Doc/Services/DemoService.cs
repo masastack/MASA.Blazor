@@ -110,7 +110,7 @@ namespace MASA.Blazor.Doc.Services
             if (contents == null && componentName != null)
             {
                 var components = await GetComponentAsync(componentName);
-                contents = components.DemoList?.OrderBy(r => r.Order).Select(r => new ContentsItem
+                contents = components.DemoList?.OrderBy(r => r.Order).ThenBy(r=>r.Name).Select(r => new ContentsItem
                 {
                     Href = $"/#section-" + HashHelper.Hash(r.Title),
                     Title = r.Title
