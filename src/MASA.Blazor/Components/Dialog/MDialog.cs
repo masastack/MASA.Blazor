@@ -30,7 +30,7 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .Add("z-index: 202");
+                        .Add($"z-index: {ZIndex}");
                 })
                 .Apply("body", cssBuilder =>
                 {
@@ -50,13 +50,10 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply<BPopover, MPopover>(props =>
-                {
-                    props[nameof(MPopover.Visible)] = Visible;
-                })
                 .Apply<BOverlay, MOverlay>(props =>
                 {
                     props[nameof(MOverlay.Value)] = Visible;
+                    props[nameof(MOverlay.ZIndex)] = ZIndex - 1;
                     props[nameof(MOverlay.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
                         if (Persistent)
