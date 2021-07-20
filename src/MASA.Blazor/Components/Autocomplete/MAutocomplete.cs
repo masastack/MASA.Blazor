@@ -13,19 +13,23 @@ namespace MASA.Blazor
     {
         private Func<TItem, string, bool> _filter;
 
-        protected double Left { get; set; }
-
-        protected double Top { get; set; }
-
-        protected List<TItem> GetFilteredItems()
-        {
-            var items = Items.Where(r => string.IsNullOrEmpty(QueryText) || Filter(r, QueryText)).ToList();
-            return items;
-        }
+        protected List<TItem> FilteredItems => Items.Where(r => string.IsNullOrEmpty(QueryText) || Filter(r, QueryText)).ToList();
 
         protected int FilteredItemsCount => Items.Count(r => string.IsNullOrEmpty(QueryText) || Filter(r, QueryText));
 
         protected string QueryText { get; set; }
+
+        protected int HighlightIndex { get; set; } = -1;
+
+        protected TItem SelectedItem { get; set; }
+
+        protected List<TItem> SelectedItems { get; set; }
+
+        protected bool FirstRender { get; set; } = true;
+
+        protected Timer Timer { get; set; }
+
+        protected string WaitingQueryText { get; set; }
 
         [Parameter]
         public Func<TItem, string, bool> Filter
@@ -50,18 +54,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public double Interval { get; set; } = 500;
-
-        protected int HighlightIndex { get; set; } = -1;
-
-        protected TItem SelectedItem { get; set; }
-
-        protected List<TItem> SelectedItems { get; set; }
-
-        protected bool FirstRender { get; set; } = true;
-
-        protected Timer Timer { get; set; }
-
-        protected string WaitingQueryText { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -96,13 +88,12 @@ namespace MASA.Blazor
                 })
                 .Apply<ISelectBody, MAutocompleteSelectBody<TItem>>(props =>
                 {
-                    props[nameof(MAutocompleteSelectBody<TItem>.Items)] = GetFilteredItems();
+                    props[nameof(MAutocompleteSelectBody<TItem>.Items)] = FilteredItems;
                     props[nameof(MAutocompleteSelectBody<TItem>.ItemText)] = ItemText;
-                    props[nameof(MAutocompleteSelectBody<TItem>.OnItemClick)] = EventCallback.Factory.Create<TItem>(this, async item =>
-                  {
-                      await Task.Yield();
-                      HandleItemClick(item);
-                  });
+                    props[nameof(MAutocompleteSelectBody<TItem>.OnItemClick)] = EventCallback.Factory.Create<TItem>(this, item =>
+                    {
+                        HandleItemClick(item);
+                    });
                     props[nameof(MAutocompleteSelectBody<TItem>.QueryText)] = QueryText;
 
                     if (FilteredItemsCount == 1)
@@ -225,7 +216,7 @@ namespace MASA.Blazor
 
             if (SelectedItem != null)
             {
-                var activeIndex = GetFilteredItems().IndexOf(SelectedItem);
+                var activeIndex = FilteredItems.IndexOf(SelectedItem);
                 HighlightIndex = activeIndex;
             }
 
@@ -332,9 +323,8 @@ namespace MASA.Blazor
 
                     if (HighlightIndex > -1 && HighlightIndex < FilteredItemsCount)
                     {
-                        var items = GetFilteredItems();
                         await Task.Yield();
-                        HandleItemClick(items[HighlightIndex]);
+                        HandleItemClick(FilteredItems[HighlightIndex]);
                     }
                     break;
                 case "Backspace":

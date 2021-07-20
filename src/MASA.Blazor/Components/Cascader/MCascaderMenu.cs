@@ -56,6 +56,7 @@ namespace MASA.Blazor
                     props[nameof(Style)] = ContentStyle;
                     props[nameof(BPopover.ClientX)] = PositionLeft;
                     props[nameof(BPopover.ClientY)] = PositionTop;
+                    props[nameof(BPopover.PreventDefault)] = true;
                 });
         }
     }
