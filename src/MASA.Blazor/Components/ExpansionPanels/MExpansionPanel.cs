@@ -17,7 +17,9 @@ namespace MASA.Blazor
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-expansion-panel");
+                        .Add("m-expansion-panel")
+                        .AddIf("m-expansion-panel--active m-item--active", () => Expanded)
+                        .AddIf("m-expansion-panel--next-active", () => NextActive);
                 })
                 .Apply("divider", cssBuilder =>
                 {

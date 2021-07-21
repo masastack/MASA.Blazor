@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 6
 title:
   zh-CN: 弹出
   en-US: Popout

@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 8
 title:
   zh-CN: 组合
   en-US: Combination

@@ -1,25 +1,27 @@
-﻿<div>
+﻿@using System.ComponentModel.DataAnnotations
+<div>
     <MButton OnClick="() => _addModal.Show()" Class="mb-1">Open Modal</MButton>
 
-    <MASA.Blazor.Presets.Modal Visible="_addModal.Visible" Title="新增用户" Width="500" OnOk="HandleOnClick" OnCancel="() => _addModal.Hide()">
+    <MASA.Blazor.Presets.Modal Visible="_addModal.Visible" Title="新增用户" Width="500" OnOk="HandleOnClick" OnCancel="HandleOnCancel">
         <p>@System.Text.Json.JsonSerializer.Serialize(_addModal.Data)</p>
 
-        <MForm>
-            <MRow>
-                <MCol Span="12">
-                    <MTextField @bind-Value="_addModal.Data.UserName" Label="UserName" Dense Outlined />
-                </MCol>
-                <MCol Span="12">
-                    <MTextField @bind-Value="_addModal.Data.City" Label="City" Dense Outlined />
-                </MCol>
-                <MCol Span="12">
-                    <MRadioGroup @bind-Value="_addModal.Data.Gender" Row Dense Style="margin-top: 0">
-                        <MRadio Label="男" Value="0"></MRadio>
-                        <MRadio Label="女" Value="1"></MRadio>
-                    </MRadioGroup>
-                </MCol>
-            </MRow>
-        </MForm>
+        <MRow>
+            <MCol Span="12">
+                <MTextField @bind-Value="_addModal.Data.UserName" Label="UserName" Dense Outlined />
+            </MCol>
+            <MCol Span="12">
+                <MTextField @bind-Value="_addModal.Data.City" Label="City" Dense Outlined />
+            </MCol>
+            <MCol Span="12">
+                <MRadioGroup @bind-Value="_addModal.Data.Gender" Row Dense Style="margin-top: 0">
+                    <MRadio Label="男" Value="0"></MRadio>
+                    <MRadio Label="女" Value="1"></MRadio>
+                </MRadioGroup>
+            </MCol>
+            <MCol>
+                <MAutocomplete TValue="string" Values="_addModal.Data.Favorites.ToList()" ValuesChanged="(v) => _addModal.Data.Favorites = v.ToArray()" TItem="string" Multiple Items="_favorites" ItemValue="r=>r" ItemText="r=>r"></MAutocomplete>
+            </MCol>
+        </MRow>
     </MASA.Blazor.Presets.Modal>
 
     <MRow>
@@ -35,10 +37,17 @@
     {
         UserName = "capdiem",
         City = "HangZhou",
-        Gender = 0
+        Gender = 0,
     };
 
+    private List<string> _favorites = new List<string>() { "A", "B", "C", "D" };
+
     private DataModal<User> _addModal = new();
+
+    private void HandleOnCancel()
+    {
+        _addModal.Hide();
+    }
 
     private async Task HandleOnClick()
     {
@@ -64,10 +73,13 @@
         public string UserName { get; set; }
         public int Gender { get; set; }
         public string City { get; set; }
+        public string[] Favorites { get; set; } = new string[] { };
 
         public User ShallowCopy()
         {
-            return (User)this.MemberwiseClone();
+            var user = (User)this.MemberwiseClone();
+            user.Favorites = Favorites;
+            return user;
         }
     }
 

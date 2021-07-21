@@ -1,11 +1,9 @@
-﻿
-
-<MCheckbox @bind-Checked="check" Label="disabled all"></MCheckbox>
+﻿<MCheckbox @bind-Checked="check" Label="disabled all"></MCheckbox>
 
 <MExpansionPanels Disabled="check">
     @for (int i = 0; i < 5; i++)
     {
-        <MExpansionPanel>
+        <MExpansionPanel Key="i">
             <MExpansionPanelHeader>
                 Item1
             </MExpansionPanelHeader>

@@ -1,9 +1,4 @@
 ﻿using BlazorComponent;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
@@ -18,15 +13,13 @@ namespace MASA.Blazor
                         .Add("m-expansion-panel-content mt-2");
                 }, styleBuilder =>
                 {
-                    styleBuilder.AddIf("display:none", () => !ExpansionPanel.Active);
+                    styleBuilder.AddIf("display:none", () => !ExpansionPanel.Expanded);
                 })
                 .Apply("wrap", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-expansion-panel-content__wrap");
                 });
-
         }
-
     }
 }

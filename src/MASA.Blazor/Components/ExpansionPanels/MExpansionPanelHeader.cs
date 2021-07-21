@@ -22,8 +22,9 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-expansion-panel-header")
-                        .AddIf("m-expansion-panel-header--active", () => !ExpansionPanel.Active)
-                        .AddIf("m-expansion-panel--disabled m-btn--disabled", () => ExpansionPanels.Disabled)
+                        .AddIf("m-expansion-panel-header--active", () => ExpansionPanel.Expanded)
+                        .AddIf("m-expansion-panel-header--mousedown", () => _hasMouseDown)
+                        .AddIf("m-expansion-panel--disabled m-btn--disabled", () => ExpansionPanel.Disabled)
                         .AddIf("m-expansion-panel--disabled m-btn--disabled", () => ExpansionPanel.Disabled);
                 })
                 .Apply("headerIcon", cssBuilder =>
@@ -39,8 +40,8 @@ namespace MASA.Blazor
                      {
                          cssBuilder
                            .AddIf(Icon, () => !string.IsNullOrWhiteSpace(Icon))
-                           .AddIf($"{prefix}-up", () => ExpansionPanel.Active)
-                           .AddIf($"{prefix}-down", () => !ExpansionPanel.Active);
+                           .AddIf($"{prefix}-up", () => ExpansionPanel.Expanded)
+                           .AddIf($"{prefix}-down", () => !ExpansionPanel.Expanded);
                      }
                  });
         }
