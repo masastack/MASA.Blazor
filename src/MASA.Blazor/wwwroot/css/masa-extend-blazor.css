@@ -203,13 +203,22 @@ code[class*=language-], pre[class*=language-] {
     hyphens: none;
 }
 
-.token.boolean, .token.constant, .token.deleted, .token.property, .token.symbol {
+.token.constant, .token.deleted, .token.property, .token.symbol {
     color: #905;
+}
+
+.token.boolean {
+    color: blue;
 }
 
 .token.tag {
     color: rgb(128,0,128);
 }
+
+    .token.tag > .token.punctuation {
+        color: black;
+        opacity: 0.75;
+    }
 
 .token.number {
     color: black;
@@ -220,7 +229,7 @@ code[class*=language-], pre[class*=language-] {
 }
 
     .token.punctuation {
-        color: rgb(0,0,0,0.7);
+        color: rgb(0,0,0,0.75);
     }
 
     .token.builtin, .token.char, .token.inserted, .token.selector {
@@ -243,8 +252,17 @@ code[class*=language-], pre[class*=language-] {
         color: black;
     }
 
+        .token.attr-value > .token.punctuation {
+            color: black;
+            opacity: 0.75;
+        }
+
     .token.keyword {
         color: blue;
+    }
+
+    .token.comment {
+        color: rgb(0,100,0);
     }
 
 .m-sheet.app-code pre[class*=language]::after {
@@ -284,4 +302,8 @@ code[class*=language-], pre[class*=language-] {
 
 .api-table td.regular-row {
     padding: 8px 16px !important;
+}
+
+.inline-flex {
+    display: inline-flex !important;
 }

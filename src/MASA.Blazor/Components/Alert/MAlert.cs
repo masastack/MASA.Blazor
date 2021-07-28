@@ -28,6 +28,8 @@ namespace MASA.Blazor
         [Parameter]
         public bool Dark { get; set; }
 
+        public string ComputedColor => Color ?? Type?.ToString().ToLower();
+
         protected override Task OnInitializedAsync()
         {
             string originClass = "m-alert__icon";
@@ -39,18 +41,18 @@ namespace MASA.Blazor
                     var type = Type.ToString().ToLower();
                     Color = type;
 
-                    IconContent = RenderIcon(_typeIconDict[type], originClass, ColoredBorder || Text || Outlined ? Color : "", dark: true); ;
+                    IconContent = RenderIcon(_typeIconDict[type], originClass, ColoredBorder || Text || Outlined ? Color : "", dark: true);
                 }
             }
             else
             {
-                IconContent = RenderIcon(Icon, originClass, ColoredBorder || Text || Outlined ? Color : "", dark: true);
+                IconContent = RenderIcon(Icon, originClass, ColoredBorder || Text || Outlined ? ComputedColor : "", dark: true);
             }
 
             if (Dismissible)
             {
                 DismissibleButtonContent = RenderButton(
-                    (s) => RenderIcon("mdi-close-circle", sequence: s),
+                    (s) => RenderIcon("mdi-close-circle", sequence: s, color: Color),
                     EventCallback.Factory.Create<MouseEventArgs>(this, async (args) =>
                     {
                         await VisibleChanged.InvokeAsync(false);
@@ -77,12 +79,12 @@ namespace MASA.Blazor
                             (() => "m-alert--dense", () => Dense))
                         .AddIf("m-alert--text", () => Text)
                         .AddIf("m-alert--outlined", () => Outlined)
-                        .AddColor(Color, Outlined || Text, () => !ColoredBorder);
+                        .AddColor(ComputedColor, Outlined || Text, () => !ColoredBorder);
                 }, styleBuilder =>
                 {
                     styleBuilder
                         .AddIf("display: none", () => !Visible)
-                        .AddColor(Color, Outlined || Text, () => !ColoredBorder);
+                        .AddColor(ComputedColor, Outlined || Text, () => !ColoredBorder);
                 })
                 .Apply("wrap", cssBuilder =>
                 {

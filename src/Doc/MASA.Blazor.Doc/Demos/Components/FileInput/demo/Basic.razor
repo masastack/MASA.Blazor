@@ -8,9 +8,10 @@
 </MFileInput>
 
 @code {
-    IList<UploadFile> files = new List<UploadFile>() {
-    new UploadFile { FileName ="defaultFileName1", Url = "https://picsum.photos/510/300?random", Uploaded = true, IsImage = true },
-    new UploadFile { FileName = "defaultFileNam2", Url = "https://picsum.photos/520/300?random", Uploaded = true, IsImage = true },
+    IList<UploadFile> files = new List<UploadFile>() 
+    {
+        new UploadFile { FileName ="defaultFileName1", Url = "https://picsum.photos/510/300?random", Uploaded = true, IsImage = true },
+        new UploadFile { FileName = "defaultFileNam2", Url = "https://picsum.photos/520/300?random", Uploaded = true, IsImage = true }
     };
 
     async Task HandleUpload(UploadFile file)

@@ -16,6 +16,12 @@ namespace MASA.Blazor
         [Parameter]
         public EventCallback<int> OnMonthSelected { get; set; }
 
+        [Parameter]
+        public DateTime? Min { get; set; }
+
+        [Parameter]
+        public DateTime? Max { get; set; }
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -34,6 +40,8 @@ namespace MASA.Blazor
                     props[nameof(MDatePickerMonthTableBody.Color)] = Color;
                     props[nameof(MDatePickerMonthTableBody.Component)] = this;
                     props[nameof(MDatePickerMonthTableBody.OnMonthSelected)] = OnMonthSelected;
+                    props[nameof(MDatePickerMonthTableBody.Min)] = Min;
+                    props[nameof(MDatePickerMonthTableBody.Max)] = Max;
                 });
         }
     }

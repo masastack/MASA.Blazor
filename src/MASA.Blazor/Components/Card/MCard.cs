@@ -49,7 +49,7 @@ namespace MASA.Blazor
                 .Apply(cssBuilder =>
                 {
                     cssBuilder.Add("m-card")
-                        .AddIf("elevation-2", () => !Outlined)
+                        .AddIf("elevation-2", () => !Outlined && !Flat)
                         .AddTheme(Dark)
                         .Add("m-sheet")
                         .AddIf("m-sheet--outlined", () => Outlined)

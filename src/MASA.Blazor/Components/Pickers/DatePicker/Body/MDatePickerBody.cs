@@ -44,11 +44,11 @@ namespace MASA.Blazor
                     props[nameof(MDatePickerHeader.Color)] = Color;
                     props[nameof(MDatePickerHeader.Dark)] = Component.Dark;
                     props[nameof(MDatePickerHeader.Disabled)] = Component.Disabled;
-                    props[nameof(MDatePickerHeader.Min)] = Component.ActivePicker == "DATE" ? Component.MinMonth : Component.MinYear;
-                    props[nameof(MDatePickerHeader.Max)] = Component.ActivePicker == "DATE" ? Component.MaxMonth : Component.MaxYear;
+                    props[nameof(MDatePickerHeader.Min)] = Component.Min;
+                    props[nameof(MDatePickerHeader.Max)] = Component.Max;
                     props[nameof(MDatePickerHeader.Readonly)] = Component.Readonly;
                     props[nameof(MDatePickerHeader.ActivePicker)] = Component.ActivePicker;
-                    props[nameof(MDatePickerHeader.Value)] = (StringNumber)(Component.ActivePicker == "DATE" ? $"{Component.TableYear.ToString().PadLeft(4, '0')}-{(Component.TableMonth.ToInt32()).ToString().PadLeft(2, '0')}" : Component.TableYear.ToString().PadLeft(4, '0'));
+                    props[nameof(MDatePickerHeader.Value)] = Component.TableDate;
                     props[nameof(MDatePickerHeader.OnPrevClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
                     {
                         if (Component.ActivePicker == "DATE")
@@ -79,6 +79,8 @@ namespace MASA.Blazor
                     props[nameof(MDatePickerDateTable.Value)] = Component.Value;
                     props[nameof(MDatePickerDateTable.TableDate)] = Component.TableDate;
                     props[nameof(MDatePickerDateTable.OnDaySelected)] = OnDaySelected;
+                    props[nameof(MDatePickerDateTable.Min)] = Component.Min;
+                    props[nameof(MDatePickerDateTable.Max)] = Component.Max;
                 })
                 .Apply<IDatePickerMonthTable, MDatePickerMonthTable>(props =>
                 {
@@ -86,6 +88,8 @@ namespace MASA.Blazor
                     props[nameof(MDatePickerMonthTable.Value)] = Component.Value;
                     props[nameof(MDatePickerMonthTable.TableDate)] = Component.TableDate;
                     props[nameof(MDatePickerMonthTable.OnMonthSelected)] = OnMonthSelected;
+                    props[nameof(MDatePickerMonthTable.Min)] = Component.Min;
+                    props[nameof(MDatePickerMonthTable.Max)] = Component.Max;
                 });
         }
     }

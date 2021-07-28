@@ -13,19 +13,21 @@
 @code {
 
     private List<ItemsModel> ItemsData { get; set; } =
-                    new List<ItemsModel> {
+                    new List<ItemsModel>
+                    {
                         new ItemsModel{ Text="主页",URL="/" },
                         new ItemsModel{ Text="列表",URL="/components"},
-                        new ItemsModel{ Text="详情",URL="/components/breadcrumbs"},
-                                        };
+                        new ItemsModel{ Text="详情",URL="/components/breadcrumbs"}
+                    };
 
     private List<ItemsModel> ItemsData2 { get; set; } =
-                    new List<ItemsModel> {
+                    new List<ItemsModel>
+                    {
                         new ItemsModel{ Text="主页",URL="/" },
                         new ItemsModel{ Text="我的订单",URL="/components/form" },
                         new ItemsModel{ Text="列表",URL="/components"},
-                        new ItemsModel{ Text="详情",URL="/components/breadcrumbs"},
-                                        };
+                        new ItemsModel{ Text="详情",URL="/components/breadcrumbs"}
+                    };
 
     public class ItemsModel
     {

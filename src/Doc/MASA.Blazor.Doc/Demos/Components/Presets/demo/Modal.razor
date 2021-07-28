@@ -19,6 +19,9 @@
                 </MRadioGroup>
             </MCol>
             <MCol>
+                <MSelect TValue="string" Values="_addModal.Data.GFs.ToList()" ValuesChanged="(v) => _addModal.Data.GFs = v.ToArray()" TItem="string" Multiple Items="_gfs" ItemValue="r=>r" ItemText="r=>r"></MSelect>
+            </MCol>
+            <MCol>
                 <MAutocomplete TValue="string" Values="_addModal.Data.Favorites.ToList()" ValuesChanged="(v) => _addModal.Data.Favorites = v.ToArray()" TItem="string" Multiple Items="_favorites" ItemValue="r=>r" ItemText="r=>r"></MAutocomplete>
             </MCol>
         </MRow>
@@ -28,6 +31,8 @@
         <MCol>username: @_user.UserName</MCol>
         <MCol>city: @_user.City</MCol>
         <MCol>gender: @_user.Gender</MCol>
+        <MCol>girls: @string.Join(",",_user.GFs)</MCol>
+        <MCol>favorites: @string.Join(",", _user.Favorites)</MCol>
         <MCol><MButton OnClick="() => _addModal.Show(_user.ShallowCopy())" Color="primary" Text Small>Edit</MButton></MCol>
     </MRow>
 </div>
@@ -41,6 +46,7 @@
     };
 
     private List<string> _favorites = new List<string>() { "A", "B", "C", "D" };
+    private List<string> _gfs = new List<string> { "Girl 1", "Girl 2", "Girl 3" };
 
     private DataModal<User> _addModal = new();
 
@@ -74,10 +80,12 @@
         public int Gender { get; set; }
         public string City { get; set; }
         public string[] Favorites { get; set; } = new string[] { };
+        public string[] GFs { get; set; } = new string[] { };
 
         public User ShallowCopy()
         {
             var user = (User)this.MemberwiseClone();
+            user.GFs = GFs;
             user.Favorites = Favorites;
             return user;
         }

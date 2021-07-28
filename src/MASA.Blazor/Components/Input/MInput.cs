@@ -8,13 +8,14 @@ using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
+using OneOf;
 
 namespace MASA.Blazor
 {
     public partial class MInput<TValue> : BInput
     {
         private bool _init;
-        private TValue _value;
+        private NullableValue<TValue> _value;
 
         [Parameter]
         public TValue Value
@@ -25,7 +26,7 @@ namespace MASA.Blazor
             }
             set
             {
-                if (!EqualityComparer<TValue>.Default.Equals(_value, value))
+                if (_value != value)
                 {
                     _value = value;
 
@@ -78,9 +79,16 @@ namespace MASA.Blazor
         [Parameter]
         public string Color { get; set; }
 
+        [Parameter]
+        public bool PersistentPlaceholder { get; set; }
+
         protected bool IsActive { get; set; }
 
-        protected bool IsDirty => !EqualityComparer<TValue>.Default.Equals(Value, default);
+        protected virtual bool IsDirty => Convert.ToString(_value).Length > 0;
+
+        public bool LabelValue => IsFocused || IsLabelActive || PersistentPlaceholder;
+
+        public bool IsLabelActive => IsDirty;
 
         protected override void SetComponentClass()
         {

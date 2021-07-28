@@ -54,19 +54,19 @@
             </div>
         </div>
         <MDivider></MDivider>
-        <div style="@CodeStyle">
-            <MItemGroup Class="pa-2">
-                <MButton Text Class="mr-2" OnClick="()=>activeWindow=0"> template </MButton>
+        <ExpandTransition Value="_expend">
+            <MItemGroup @bind-Value="ActiveWindow" Class="pa-2">
+                <MButton Text Class="mr-2" OnClick="()=>_activeWindow=0" Value="0"> template </MButton>
                 @if (Code != null)
                 {
-                    <MButton Text Class="mr-2" OnClick="()=>activeWindow=1"> code </MButton>
+                    <MButton Text Class="mr-2" OnClick="()=>_activeWindow=1" Value="1"> code </MButton>
                 }
             </MItemGroup>
             <MDivider></MDivider>
             <MWindow>
                 <MWindowItem IsActive="IsTemplate">
                     <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden my-0">
-                        <HighlightedCode Code="@Template" CanLoad="_expend" Language="html"></HighlightedCode>
+                        <HighlightedCode Code="@Template" CanLoad="Template!=null" Language="html"></HighlightedCode>
                         <MButton Class="m-btn--copy mr-n2 mt-n2" Absolute Icon Right Rounded Top Style="background-color:inherit">
                             <MIcon>
                                 mdi-content-copy
@@ -85,7 +85,7 @@
                     </MSheet>
                 </MWindowItem>
             </MWindow>
-        </div>
+        </ExpandTransition>
     </MSheet>
 </section>
 
@@ -95,13 +95,25 @@
 
 @code {
     private bool _expend;
-    private int activeWindow;
+    private int _activeWindow;
 
-    public string CodeStyle => !_expend ? "display:none" : "";
+    public string ActiveWindow
+    {
+        get
 
-    public bool IsTemplate => activeWindow == 0;
+        {
+            return _activeWindow.ToString();
+        }
+        set
+        {
 
-    public bool IsCode => activeWindow == 1;
+            _activeWindow = int.Parse(value);
+        }
+    }
+
+    public bool IsTemplate => _activeWindow == 0;
+
+    public bool IsCode => _activeWindow == 1;
 
     [Parameter]
     public string ComponentName { get; set; }

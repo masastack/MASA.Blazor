@@ -22,47 +22,47 @@
     }
 
     private Dictionary<string, string> _files = new Dictionary<string, string>
-{
+    {
         { "png","mdi-file-image" },
         { "html","mdi-language-html5" },
         { "txt","mdi-file-document-outline" }
     };
 
     private List<int> _ids = new List<int>
-{
-    1,
-    2
+    {
+        1,
+        2
     };
 
     private List<Data> _data = new List<Data>
-{
-    new Data
     {
-    Id=1,
-    Name="11",
-    File="png",
-    Children=new List<Data>
-{
-            new Data
+        new Data
+        {
+            Id=1,
+            Name="11",
+            File="png",
+            Children=new List<Data>
             {
-                Id=2,
-                Name="22",
-                File="html"
-            },
-            new Data
-            {
-                Id=4,
-                Name="44",
-                File="html"
-            }
+                    new Data
+                    {
+                        Id=2,
+                        Name="22",
+                        File="html"
+                    },
+                    new Data
+                    {
+                        Id=4,
+                        Name="44",
+                        File="html"
+                    }
+                }
+        },
+        new Data
+        {
+            Id=3,
+            Name="33",
+            File="txt"
         }
-    },
-    new Data
-    {
-    Id=3,
-    Name="33",
-    File="txt"
-    }
     };
 
     public void HandleItemClick(Data data)

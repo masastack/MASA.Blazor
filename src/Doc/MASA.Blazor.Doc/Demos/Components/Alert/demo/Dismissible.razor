@@ -1,34 +1,34 @@
 ﻿@using AlertType = Blazor.AlertType
 
 <div>
-	<MAlert @bind-Visible="visible"
-			Border="AlertBorder.Left"
-			Color="deep-purple accent-4"
-			Dark
-			Dismissible>
-		Aenean imperdiet. Quisque id odio. Cras dapibus. Pellentesque ut neque. Cras dapibus.
+    <MAlert @bind-Visible="visible"
+            Border="AlertBorder.Left"
+            Color="deep-purple accent-4"
+            Dark
+            Dismissible>
+        Aenean imperdiet. Quisque id odio. Cras dapibus. Pellentesque ut neque. Cras dapibus.
 
-		Vivamus consectetuer hendrerit lacus. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Curabitur blandit mollis lacus. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo.
-	</MAlert>
+        Vivamus consectetuer hendrerit lacus. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Curabitur blandit mollis lacus. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo.
+    </MAlert>
 
-	@if (!visible)
-	{
-	 <div style="text-align: center">
-	  <MButton Color="deep-purple accent-4"
-				 Dark
-				 OnClick="ToggleVisible">
-	   Reset
-	  </MButton>
-	 </div>
-	}
+    @if (!visible)
+    {
+        <div style="text-align: center">
+            <MButton Color="deep-purple accent-4"
+                     Dark
+                     OnClick="ToggleVisible">
+                Reset
+            </MButton>
+        </div>
+    }
 </div>
 
 @code {
-	private bool visible = true;
-	private void ToggleVisible(MouseEventArgs args)
-	{
-		System.Console.WriteLine("toggle visible");
+    private bool visible = true;
+    private void ToggleVisible(MouseEventArgs args)
+    {
+        System.Console.WriteLine("toggle visible");
 
-		visible = !visible;
-	}
+        visible = !visible;
+    }
 }

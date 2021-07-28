@@ -10,39 +10,38 @@
 
         public string File { get; set; }
 
-        public List<Data>
-    Children { get; set; }
+        public List<Data> Children { get; set; }
     }
 
     private List<Data>
         _data = new List<Data>
             {
-            new Data
-            {
-            Id=1,
-            Name="11",
-            File="png",
-            Children=new List<Data>
-                {
                 new Data
                 {
-                Id=2,
-                Name="22",
-                File="html"
+                    Id=1,
+                    Name="11",
+                    File="png",
+                    Children=new List<Data>
+                    {
+                        new Data
+                        {
+                            Id=2,
+                            Name="22",
+                            File="html"
+                        },
+                        new Data
+                        {
+                            Id=4,
+                            Name="44",
+                            File="html"
+                        }
+                    }
                 },
                 new Data
                 {
-                Id=4,
-                Name="44",
-                File="html"
+                    Id=3,
+                    Name="33",
+                    File="txt"
                 }
-                }
-                },
-                new Data
-                {
-                Id=3,
-                Name="33",
-                File="txt"
-                }
-                };
-                }
+        };
+}

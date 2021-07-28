@@ -1,63 +1,64 @@
 ﻿<MContainer Fluid>
-	<MRow>
-		<MCol Span="4">
-			<MCheckbox @bind-Checked="checks[0]"
-					   Label="red"
-					   Color="red"></MCheckbox>
-			<MCheckbox @bind-Checked="checks[1]"
-					   Label="red darken-3"
-					   Color="red darken-3"></MCheckbox>
-		</MCol>
-		<MCol Span="4">
-			<MCheckbox @bind-Checked="checks[2]"
-					   Label="indigo"
-					   Color="indigo"></MCheckbox>
-			<MCheckbox @bind-Checked="checks[3]"
-					   Label="indigo darken-3"
-					   Color="indigo darken-3"></MCheckbox>
-		</MCol>
-		<MCol Span="4">
-			<MCheckbox @bind-Checked="checks[4]"
-					   Label="orange"
-					   Color="orange"></MCheckbox>
-			<MCheckbox @bind-Checked="checks[5]"
-					   Label="orange darken-3"
-					   Color="orange darken-3"></MCheckbox>
-		</MCol>
-	</MRow>
+    <MRow>
+        <MCol Span="4">
+            <MCheckbox @bind-Checked="checks[0]"
+                       Label="red"
+                       Color="red"></MCheckbox>
+            <MCheckbox @bind-Checked="checks[1]"
+                       Label="red darken-3"
+                       Color="red darken-3"></MCheckbox>
+        </MCol>
+        <MCol Span="4">
+            <MCheckbox @bind-Checked="checks[2]"
+                       Label="indigo"
+                       Color="indigo"></MCheckbox>
+            <MCheckbox @bind-Checked="checks[3]"
+                       Label="indigo darken-3"
+                       Color="indigo darken-3"></MCheckbox>
+        </MCol>
+        <MCol Span="4">
+            <MCheckbox @bind-Checked="checks[4]"
+                       Label="orange"
+                       Color="orange"></MCheckbox>
+            <MCheckbox @bind-Checked="checks[5]"
+                       Label="orange darken-3"
+                       Color="orange darken-3"></MCheckbox>
+        </MCol>
+    </MRow>
 
-	<MRow>
-		<MCol Span="4">
-			<MCheckbox @bind-Checked="checks[6]"
-					   Label="primary"
-					   Color="primary"></MCheckbox>
-			<MCheckbox @bind-Checked="checks[7]"
-					   Label="secondary"
-					   Color="secondary"></MCheckbox>
-		</MCol>
-		<MCol Span="4">
-			<MCheckbox @bind-Checked="checks[8]"
-					   Label="success"
-					   Color="success"></MCheckbox>
-			<MCheckbox @bind-Checked="checks[9]"
-					   Label="info"
-					   Color="info"></MCheckbox>
-		</MCol>
-		<MCol Span="4">
-			<MCheckbox @bind-Checked="checks[10]"
-					   Label="warning"
-					   Color="warning"></MCheckbox>
-			<MCheckbox @bind-Checked="checks[11]"
-					   Label="error"
-					   Color="error"></MCheckbox>
-		</MCol>
-	</MRow>
+    <MRow>
+        <MCol Span="4">
+            <MCheckbox @bind-Checked="checks[6]"
+                       Label="primary"
+                       Color="primary"></MCheckbox>
+            <MCheckbox @bind-Checked="checks[7]"
+                       Label="secondary"
+                       Color="secondary"></MCheckbox>
+        </MCol>
+        <MCol Span="4">
+            <MCheckbox @bind-Checked="checks[8]"
+                       Label="success"
+                       Color="success"></MCheckbox>
+            <MCheckbox @bind-Checked="checks[9]"
+                       Label="info"
+                       Color="info"></MCheckbox>
+        </MCol>
+        <MCol Span="4">
+            <MCheckbox @bind-Checked="checks[10]"
+                       Label="warning"
+                       Color="warning"></MCheckbox>
+            <MCheckbox @bind-Checked="checks[11]"
+                       Label="error"
+                       Color="error"></MCheckbox>
+        </MCol>
+    </MRow>
 </MContainer>
 
 @code {
-	private bool[] checks = new bool[12]{
-	true, true, true, true,
-	true, true, true, true,
-	true, true, true, true
-	};
+    private bool[] checks = new bool[12]
+    {
+        true, true, true, true,
+        true, true, true, true,
+        true, true, true, true
+    };
 }

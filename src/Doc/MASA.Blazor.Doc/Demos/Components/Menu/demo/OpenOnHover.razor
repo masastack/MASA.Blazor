@@ -8,14 +8,14 @@
             <MList>
                 <MListItemGroup>
                     @foreach (var item in titles)
-                        {
-                    <MListItem>
-                        <MListItemContent>
-                            <MListItemTitle>
-                                @item
-                            </MListItemTitle>
-                        </MListItemContent>
-                    </MListItem>
+                    {
+                        <MListItem>
+                            <MListItemContent>
+                                <MListItemTitle>
+                                    @item
+                                </MListItemTitle>
+                            </MListItemContent>
+                        </MListItem>
                     }
                 </MListItemGroup>
             </MList>
@@ -24,10 +24,11 @@
 </div>
 
 @code {
-    string[] titles = {
-    "Click Me",
-    "Click Me",
-    "Click Me",
-    "Click Me 2",
+    string[] titles = 
+    {
+        "Click Me",
+        "Click Me",
+        "Click Me",
+        "Click Me 2"
     };
 }

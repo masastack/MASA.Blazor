@@ -1,6 +1,6 @@
 ﻿<MRow Align="center"
-	  Justify="center">
-	<MCard Style="height:300px;width:250px">
+      Justify="center">
+    <MCard Style="height:300px;width:250px">
         <MRow Justify="center">
             <MButton Color="success"
                      Style="margin-top:24px"
@@ -16,20 +16,20 @@
                 </MButton>
             </MOverlay>
         </MRow>
-	</MCard>
+    </MCard>
 </MRow>
 
 @code {
-	bool overlay = false;
+    bool overlay = false;
 
-	void Toggle(MouseEventArgs args)
-	{
-		overlay = !overlay;
-	}
+    void Toggle(MouseEventArgs args)
+    {
+        overlay = !overlay;
+    }
 
-	void Hide(MouseEventArgs args)
-	{
-		System.Console.WriteLine("hide..");
-		overlay = false;
-	}
+    void Hide(MouseEventArgs args)
+    {
+        System.Console.WriteLine("hide..");
+        overlay = false;
+    }
 }

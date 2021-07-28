@@ -46,10 +46,6 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-list-group__items");
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .AddIf("display:none", () => !IsActive);
                 });
 
             AbstractProvider

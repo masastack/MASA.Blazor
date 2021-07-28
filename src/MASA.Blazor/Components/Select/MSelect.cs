@@ -37,6 +37,7 @@ namespace MASA.Blazor
                         .Add("m-input m-text-field m-text-field--is-booted m-select")
                         .AddIf("m-input--is-disabled", () => Disabled)
                         .AddIf("m-input--dense", () => Dense)
+                        .AddIf("m-input--hide-details", () => string.IsNullOrEmpty(Hint))
                         .AddIf("m-text-field--enclosed m-text-field--filled", () => Filled)
                         .AddIf("m-text-field--enclosed m-text-field--outlined", () => Outlined)
                         .AddIf("m-text-field--enclosed m-text-field--single-line m-text-field--solo", () => Solo)

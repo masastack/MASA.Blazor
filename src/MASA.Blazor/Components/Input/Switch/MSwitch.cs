@@ -17,6 +17,8 @@ namespace MASA.Blazor
         [Parameter]
         public bool Inset { get; set; }
 
+        protected override bool IsDirty => Value;
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();

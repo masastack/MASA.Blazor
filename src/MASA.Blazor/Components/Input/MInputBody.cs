@@ -10,7 +10,7 @@ namespace MASA.Blazor
 {
     internal partial class MInputBody<TValue> : BInputBody<TValue>
     {
-        public int Width => IsActive ? ComputeLabeLength() * 6 : 0;
+        public int Width => LabelValue ? ComputeLabeLength() * 6 : 0;
 
         private int ComputeLabeLength()
         {
@@ -59,7 +59,7 @@ namespace MASA.Blazor
                 {
                     properties[nameof(MLabel.Value)] = Label;
                     properties[nameof(MLabel.Absolute)] = true;
-                    properties[nameof(MLabel.IsActive)] = IsActive;
+                    properties[nameof(MLabel.IsActive)] = LabelValue;
                     properties[nameof(MLabel.IsFocused)] = IsFocused;
                 });
         }

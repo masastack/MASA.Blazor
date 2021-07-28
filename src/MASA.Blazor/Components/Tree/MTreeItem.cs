@@ -21,8 +21,18 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-treeview-node")
+                        .AddIf("m-treeview-node--disabled", () => Disabled);
+                })
+                .Apply("root", cssBuilder =>
+                {
+                    cssBuilder
                         .Add("m-treeview-node__root")
                         .AddIf("m-treeview-node--active primary--text", () => IsActive);
+                })
+                .Apply("children", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-treeview-node__children");
                 })
                 .Apply("level", cssBuilder =>
                  {
@@ -46,6 +56,7 @@ namespace MASA.Blazor
                         .Add("m-icon  ")
                         .Add("notranslate")
                         .Add("m-treeview-node__checkbox")
+                        .AddIf("m-icon--disabled", () => Disabled)
                         .Add("m-icon--link")
                         .Add("mdi")
                         .AddIf("mdi-checkbox-marked accent--text", () => Checked && !Indeterminate)
@@ -77,6 +88,7 @@ namespace MASA.Blazor
                     props[nameof(DefaultCheckedExpression)] = DefaultCheckedExpression;
                     props[nameof(Checkable)] = Checkable;
                     props[nameof(PrependContent)] = PrependContent;
+                    props[nameof(ItemDisabled)] = ItemDisabled;
                 });
         }
     }

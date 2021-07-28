@@ -9,9 +9,8 @@ namespace MASA.Blazor
     {
         private HtmlElement _activatorRect = new();
         private HtmlElement _contentRect = new();
-        private Func<Task> _removeTask;
 
-        private bool Top => !(Bottom || Left || Right);
+        public bool Top => !(Bottom || Left || Right);
 
         [Parameter]
         public bool Right { get; set; }
@@ -78,10 +77,6 @@ namespace MASA.Blazor
             if (firstRender)
             {
                 await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, ".m-application");
-                _removeTask = async () =>
-                {
-                    await JsInvokeAsync(JsInteropConstants.DelElementFrom, ContentRef, ".m-application");
-                };
             }
 
             if (_activatorRect.ClientWidth == 0)
@@ -120,18 +115,7 @@ namespace MASA.Blazor
         protected override async Task OnMouseEnter()
         {
             await base.OnMouseEnter();
-
             _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-
-            if (_removeTask != null)
-            {
-                Task.Run(_removeTask);
-            }
         }
     }
 }

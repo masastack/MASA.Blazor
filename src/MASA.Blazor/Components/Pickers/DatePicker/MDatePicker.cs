@@ -10,7 +10,6 @@ namespace MASA.Blazor
         private DateTime _tableDate;
         private DateTime _value;
 
-
         [Parameter]
         public bool Disabled { get; set; }
 
@@ -20,17 +19,13 @@ namespace MASA.Blazor
         [Parameter]
         public string YearIcon { get; set; }
 
-        [Parameter]
-        public StringNumber MinYear { get; set; }
+        public int? MinYear => Min?.Year;
 
-        [Parameter]
-        public StringNumber MaxYear { get; set; }
+        public int? MaxYear => Max?.Year;
 
-        [Parameter]
-        public StringNumber MinMonth { get; set; }
+        public int? MinMonth => Min?.Month;
 
-        [Parameter]
-        public StringNumber MaxMonth { get; set; }
+        public int? MaxMonth => Max?.Month;
 
         public DateTime TableDate
         {
@@ -68,7 +63,6 @@ namespace MASA.Blazor
             set
             {
                 _value = value;
-
                 _tableDate = value;
             }
         }
@@ -81,6 +75,12 @@ namespace MASA.Blazor
 
         [Parameter]
         public string PrevIcon { get; set; } = "mdi-chevron-left";
+
+        [Parameter]
+        public DateTime? Min { get; set; }
+
+        [Parameter]
+        public DateTime? Max { get; set; }
 
         protected override void SetComponentClass()
         {

@@ -12,4 +12,4 @@ v-btn-toggle 组件是专门针对v-btn构建的 v-item-group 的简单包装器
 
 ## API
 
-- [MButtonGroup](/docs/api/MAButtonGroup)
+- [MButtonGroup](/docs/api/MButtonGroup)

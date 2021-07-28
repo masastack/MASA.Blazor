@@ -1,0 +1,19 @@
+﻿<MSheet Class="pa-5">
+    <MRow>
+        <MCol>
+            <MSwitch @bind-Value="_switch1"
+                     Class="inline-flex"
+                     Label="@string.Format("Switch 1: {0}",_switch1)"></MSwitch>
+        </MCol>
+        <MCol>
+            <MSwitch @bind-Value="_switch2"
+                     Class="inline-flex"
+                     Label="@string.Format("Switch 2: {0}",_switch2)"></MSwitch>
+        </MCol>
+    </MRow>
+</MSheet>
+
+@code{
+    private bool _switch1 = true;
+    private bool _switch2;
+}

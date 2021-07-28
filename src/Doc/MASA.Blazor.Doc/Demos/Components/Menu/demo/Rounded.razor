@@ -6,7 +6,7 @@
                OffsetY>
             <Activator>
                 <MButton Color="@_colors[index]"
-                       Class="white--text ma-5">
+                         Class="white--text ma-5">
                     @item.Text Radius
                 </MButton>
             </Activator>
@@ -25,21 +25,23 @@
 </MRow>
 
 @code {
-    Item[] _btns = {
-     new Item
-     {
-         Text="Removed",
-         Rounded="0"
-     },new Item
-     {
-         Text="Large",
-         Rounded="lg"
-     },
-     new Item
-     {
-         Text="Custom",
-         Rounded="b-xl"
-     }
+    Item[] _btns = 
+    {
+         new Item
+         {
+             Text="Removed",
+             Rounded="0"
+         },
+         new Item
+         {
+             Text="Large",
+             Rounded="lg"
+         },
+         new Item
+         {
+             Text="Custom",
+             Rounded="b-xl"
+         }
     };
 
     string[] _colors = new string[]

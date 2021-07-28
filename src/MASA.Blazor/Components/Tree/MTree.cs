@@ -40,6 +40,7 @@ namespace MASA.Blazor
                     props[nameof(MTreeItem<T>.DefaultCheckedExpression)] = DefaultCheckedExpression;
                     props[nameof(MTreeItem<T>.Checkable)] = Checkable;
                     props[nameof(MTreeItem<T>.PrependContent)] = PrependContent;
+                    props[nameof(MTreeItem<T>.ItemDisabled)] = ItemDisabled;
                 });
         }
     }

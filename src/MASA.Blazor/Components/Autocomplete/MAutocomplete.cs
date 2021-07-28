@@ -25,8 +25,6 @@ namespace MASA.Blazor
 
         protected List<TItem> SelectedItems { get; set; }
 
-        protected bool FirstRender { get; set; } = true;
-
         protected Timer Timer { get; set; }
 
         protected string WaitingQueryText { get; set; }
@@ -57,34 +55,17 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
+            base.SetComponentClass();
+
             HasBody = true;
             IsAutocomplete = true;
 
             AbstractProvider
-                .Apply<BMenu, MCascaderMenu>(props =>
+                .Merge<BMenu, MCascaderMenu>(props =>
                 {
-                    props[nameof(MCascaderMenu.ActiverRef)] = SelectSoltRef;
-                    props[nameof(MCascaderMenu.ContentStyle)] = $"max-width:{MinWidth.ToUnit()};overflow-x: hidden";
-                    props[nameof(MMenu.Visible)] = Visible;
-                    props[nameof(MMenu.VisibleChanged)] = EventCallback.Factory.Create<bool>(this, (v) =>
-                    {
-                        Visible = v;
-                    });
-                    props[nameof(MMenu.OffsetY)] = MenuProps?.OffsetY;
-                    props[nameof(MMenu.OffsetX)] = MenuProps?.OffsetX;
-                    props[nameof(MMenu.Block)] = MenuProps?.Block ?? true;
-                    props[nameof(MMenu.CloseOnContentClick)] = !HasBody && !Multiple;
-                    props[nameof(MMenu.Top)] = MenuProps?.Top;
-                    props[nameof(MMenu.Right)] = MenuProps?.Right;
-                    props[nameof(MMenu.Bottom)] = MenuProps?.Bottom;
-                    props[nameof(MMenu.Left)] = MenuProps?.Left;
-                    props[nameof(MMenu.NudgeTop)] = MenuProps?.NudgeTop;
-                    props[nameof(MMenu.NudgeRight)] = MenuProps?.NudgeRight;
-                    props[nameof(MMenu.NudgeBottom)] = MenuProps?.NudgeBottom;
-                    props[nameof(MMenu.NudgeLeft)] = MenuProps?.NudgeLeft;
-                    props[nameof(MMenu.NudgeWidth)] = MenuProps?.NudgeWidth;
-                    props[nameof(MMenu.MaxHeight)] = MenuProps?.MaxHeight ?? 400;
-                    props[nameof(MMenu.MinWidth)] = MenuProps?.MinWidth;
+                    props[nameof(MCascaderMenu.OffsetY)] = true;
+                    props[nameof(MCascaderMenu.ActivatorStyle)] = "display:flex";
+                    props[nameof(MCascaderMenu.CloseOnContentClick)] = !Multiple;
                 })
                 .Apply<ISelectBody, MAutocompleteSelectBody<TItem>>(props =>
                 {
@@ -115,8 +96,6 @@ namespace MASA.Blazor
                      props[nameof(MProcessLinear.Dark)] = true;
                  });
 
-            base.SetComponentClass();
-
             CssProvider
                 .Merge(cssBuilder =>
                 {
@@ -129,24 +108,15 @@ namespace MASA.Blazor
         {
             base.OnParametersSet();
 
-            if (FirstRender)
+            if (Multiple)
             {
-                if (Multiple)
-                {
-                    if (SelectedItems == null)
-                    {
-                        SelectedItems = Items.Where(r => Values.Contains(ItemValue(r))).ToList();
-                        _text = SelectedItems.Select(r => ItemText(r)).ToList();
-                    }
-                }
-                else
-                {
-                    if (SelectedItem == null)
-                    {
-                        SelectedItem = Items.FirstOrDefault(r => EqualityComparer<TValue>.Default.Equals(Value, ItemValue(r)));
-                        ValueText = SelectedItem == null ? string.Empty : ItemText(SelectedItem);
-                    }
-                }
+                SelectedItems = Items.Where(r => Values.Contains(ItemValue(r))).ToList();
+                _text = SelectedItems.Select(r => ItemText(r)).ToList();
+            }
+            else
+            {
+                SelectedItem = Items.FirstOrDefault(r => EqualityComparer<TValue>.Default.Equals(Value, ItemValue(r)));
+                ValueText = SelectedItem == null ? string.Empty : ItemText(SelectedItem);
             }
         }
 
@@ -205,12 +175,12 @@ namespace MASA.Blazor
             if (firstRender)
             {
                 await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputRef);
-                FirstRender = false;
             }
         }
 
         protected override async Task Click(MouseEventArgs args)
         {
+            Visible = true;
             await base.Click(args);
             QueryText = string.Empty;
 
@@ -233,6 +203,7 @@ namespace MASA.Blazor
         {
             HighlightIndex = -1;
             ValueText = SelectedItem == null ? string.Empty : ItemText(SelectedItem);
+            Visible = false;
 
             if (Multiple)
             {
@@ -257,8 +228,6 @@ namespace MASA.Blazor
                 {
                     ValueChanged.InvokeAsync(Value);
                 }
-
-                Visible = false;
             }
         }
 

@@ -54,16 +54,15 @@ namespace MASA.Blazor
         public string Type { get; set; } = "text";
 
         [Parameter]
-        public bool PersistentPlaceholder { get; set; }
-
-        [Parameter]
         public RenderFragment PrependInnerContent { get; set; }
 
-        protected bool ShowLabel => (!string.IsNullOrEmpty(Label) && !IsSolo) || (EqualityComparer<TValue>.Default.Equals(Value, default) && IsSolo && !IsFocused);
+        protected bool ShowLabel => HasLabel && !(IsSingle && LabelValue);
 
         protected InputContext<TValue> InputContext { get; set; }
 
         protected bool HasLabel => Label != null;
+
+        public bool IsSingle => IsSolo || IsSingleLine || FullWidth || (Filled && !HasLabel);
 
         protected override void SetComponentClass()
         {
@@ -106,15 +105,15 @@ namespace MASA.Blazor
                 .Apply<IInputBody, MInputBody<TValue>>(properties =>
                 {
                     properties[nameof(MInputBody<TValue>.Label)] = Label;
+                    properties[nameof(MInputBody<TValue>.LabelValue)] = LabelValue;
                     properties[nameof(MInputBody<TValue>.ShowLabel)] = ShowLabel;
-                    properties[nameof(MInputBody<TValue>.IsActive)] = IsActive || !EqualityComparer<TValue>.Default.Equals(Value, default);
                     properties[nameof(MInputBody<TValue>.IsFocused)] = IsFocused;
                     properties[nameof(MInputBody<TValue>.OnBlur)] = EventCallback.Factory.Create<FocusEventArgs>(this, () =>
                     {
                         IsActive = false;
                         IsFocused = false;
                     });
-                    properties[nameof(MInputBody<TValue>.Value)] = Value;
+                    properties[nameof(MInputBody<TValue>.Value)] = (NullableValue<TValue>)Value;
                     properties[nameof(MInputBody<TValue>.InputContext)] = InputContext;
                     properties[nameof(MInputBody<TValue>.PlaceHolder)] = PersistentPlaceholder || IsFocused || !HasLabel ? Placeholder : "";
                     properties[nameof(MInputBody<TValue>.Outlined)] = Outlined;
@@ -138,7 +137,7 @@ namespace MASA.Blazor
             base.OnParametersSet();
         }
 
-        private async Task InputContext_OnValueChanged(TValue value)
+        private async Task InputContext_OnValueChanged(NullableValue<TValue> value)
         {
             if (ValueChanged.HasDelegate)
             {

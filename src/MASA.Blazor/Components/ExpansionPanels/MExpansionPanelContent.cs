@@ -10,10 +10,7 @@ namespace MASA.Blazor
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-expansion-panel-content mt-2");
-                }, styleBuilder =>
-                {
-                    styleBuilder.AddIf("display:none", () => !ExpansionPanel.Expanded);
+                        .Add("m-expansion-panel-content");
                 })
                 .Apply("wrap", cssBuilder =>
                 {
