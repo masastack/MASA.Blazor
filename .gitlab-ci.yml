@@ -5,7 +5,7 @@ stages:
 
 variables:
   DOCKER_HOST: tcp://localhost:2375/
-  IMAGE: proget-hz.lonsid.cn/masa-blazor/docs:0.1.$CI_PIPELINE_ID
+  IMAGE: proget-hz.lonsid.cn/masa-blazor/docs:0.2.$CI_PIPELINE_ID
 
 packer:
   image: proget-hz.lonsid.cn/masa-images/dotnet/sdk:6.0
