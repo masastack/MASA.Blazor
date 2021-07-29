@@ -14,8 +14,8 @@ namespace MASA.Blazor
 {
     public partial class MInput<TValue> : BInput
     {
-        private bool _init;
         private NullableValue<TValue> _value;
+        private EditContext _oldContext;
 
         [Parameter]
         public TValue Value
@@ -30,7 +30,7 @@ namespace MASA.Blazor
                 {
                     _value = value;
 
-                    if (EditContext != null && _init)
+                    if (EditContext != null && ValueExpression != null)
                     {
                         EditContext.NotifyFieldChanged(FieldIdentifier);
                     }
@@ -70,14 +70,24 @@ namespace MASA.Blazor
         [Parameter]
         public StringNumber Height { get; set; }
 
-        [Parameter]
-        public string ValidationState { get; set; } = "primary";
+        public bool HasState
+        {
+            get
+            {
+                if (IsDisabled)
+                {
+                    return false;
+                }
 
-        [Parameter]
-        public bool HasState { get; set; }
+                return HasError;
+            }
+        }
 
         [Parameter]
         public string Color { get; set; }
+
+        [Parameter]
+        public string BackgroundColor { get; set; }
 
         [Parameter]
         public bool PersistentPlaceholder { get; set; }
@@ -89,6 +99,28 @@ namespace MASA.Blazor
         public bool LabelValue => IsFocused || IsLabelActive || PersistentPlaceholder;
 
         public bool IsLabelActive => IsDirty;
+
+        public string ComputedColor => IsDisabled ? "" : Color ?? (Dark ? "white" : "primary");
+
+        public bool HasError => Messages?.Count > 0;
+
+        public string ValidationState
+        {
+            get
+            {
+                if (IsDisabled)
+                {
+                    return "";
+                }
+
+                if (HasError)
+                {
+                    return "error";
+                }
+
+                return ComputedColor;
+            }
+        }
 
         protected override void SetComponentClass()
         {
@@ -177,14 +209,24 @@ namespace MASA.Blazor
                 });
         }
 
-        protected override void OnInitialized()
+        protected override void OnParametersSet()
         {
-            if (ValueExpression != null && EditContext != null && !_init)
-            {
-                FieldIdentifier = FieldIdentifier.Create(ValueExpression);
-                EditContext.OnValidationStateChanged += EditContext_OnValidationStateChanged;
+            base.OnParametersSet();
 
-                _init = true;
+            if (_oldContext != EditContext)
+            {
+                if (_oldContext != null)
+                {
+                    _oldContext.OnValidationStateChanged -= EditContext_OnValidationStateChanged;
+                }
+
+                if (ValueExpression != null)
+                {
+                    FieldIdentifier = FieldIdentifier.Create(ValueExpression);
+                    EditContext.OnValidationStateChanged += EditContext_OnValidationStateChanged;
+                }
+
+                _oldContext = EditContext;
             }
         }
 

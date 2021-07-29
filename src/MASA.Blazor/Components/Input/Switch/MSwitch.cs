@@ -32,13 +32,12 @@ namespace MASA.Blazor
                         .Add($"{prefix}--switch")
                         .AddIf($"{prefix}--switch--flat", () => Flat)
                         .AddIf($"{prefix}--switch--inset", () => Inset)
-                        .AddIf($"{ValidationState}--text", () => IsActive);
+                        .AddTextColor(ValidationState, () => IsActive);
                 });
 
             AbstractProvider
                 .Apply<IInputBody, MSwitchInputBody>(props =>
                 {
-                    props[nameof(MSwitchInputBody.Color)] = Color ?? "primary";
                     props[nameof(MSwitchInputBody.ValidationState)] = ValidationState;
                     props[nameof(MSwitchInputBody.IsActive)] = IsActive;
                     props[nameof(MSwitchInputBody.Label)] = Label;
@@ -49,6 +48,7 @@ namespace MASA.Blazor
         {
             base.OnParametersSet();
             IsActive = Value;
+            HideDetails = "auto";
         }
 
         protected override async Task HandleClickAsync(MouseEventArgs args)

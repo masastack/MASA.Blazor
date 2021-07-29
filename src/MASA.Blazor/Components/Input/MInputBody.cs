@@ -57,10 +57,11 @@ namespace MASA.Blazor
             AbstractProvider
                 .Apply<BLabel, MLabel>(properties =>
                 {
+                    properties[nameof(MLabel.Color)] = ValidationState;
                     properties[nameof(MLabel.Value)] = Label;
                     properties[nameof(MLabel.Absolute)] = true;
                     properties[nameof(MLabel.IsActive)] = LabelValue;
-                    properties[nameof(MLabel.IsFocused)] = IsFocused;
+                    properties[nameof(MLabel.IsFocused)] = HasState || IsFocused;
                 });
         }
     }

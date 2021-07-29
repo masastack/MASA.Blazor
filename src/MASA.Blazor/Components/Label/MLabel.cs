@@ -32,7 +32,7 @@ namespace MASA.Blazor
         public bool IsFocused { get; set; }
 
         [Parameter]
-        public string Color { get; set; } = "primary";
+        public string Color { get; set; }
 
         protected override void SetComponentClass()
         {

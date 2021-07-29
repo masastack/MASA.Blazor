@@ -1,16 +1,9 @@
 ﻿@using System.ComponentModel.DataAnnotations
 
 <MForm Model="_order" EnableDataAnnotationsValidation>
-    <MRow>
-        <MCol Span="4">
-            <MTextField @bind-Value="_order.Title"></MTextField>
-            <MTextField @bind-Value="_order.Price" Label="金额" Type="number"></MTextField>
-        </MCol>
-        <MSpacer></MSpacer>
-    </MRow>
-    <MRow>
-        <MButton Click="()=>SubmitOrder(context)">提交</MButton>
-    </MRow>
+    <MTextField @bind-Value="_order.Title" Label="名称"></MTextField>
+    <MTextField @bind-Value="_order.Price" Label="金额" Type="number"></MTextField>
+    <MButton Click="()=>SubmitOrder(context)" Color="success">提交</MButton>
 </MForm>
 
 @code{

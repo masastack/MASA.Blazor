@@ -57,7 +57,7 @@ namespace MASA.Blazor.Presets
         {
             if (OnOk.HasDelegate)
             {
-                var context = _form.UseEditContext();
+                var context = _form.EditContext;
                 if (context.Validate())
                 {
                     await OnOk.InvokeAsync(args);

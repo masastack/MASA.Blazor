@@ -1,12 +1,7 @@
 ﻿@using System.ComponentModel.DataAnnotations
 
 <MForm Model="_order" EnableDataAnnotationsValidation>
-    <MRow>
-        <MCol Span="4">
-            <MTextField @bind-Value="_order.Title"></MTextField>
-        </MCol>
-        <MSpacer></MSpacer>
-    </MRow>
+    <MTextField @bind-Value="_order.Title"></MTextField>
 </MForm>
 
 @code{

@@ -12,9 +12,6 @@ namespace MASA.Blazor
     internal partial class MSwitchInputBody : BSwitchInputBody, IInputBody
     {
         [Parameter]
-        public string Color { get; set; }
-
-        [Parameter]
         public string ValidationState { get; set; }
 
         [Parameter]
@@ -32,20 +29,20 @@ namespace MASA.Blazor
                  {
                      cssBuilder
                          .Add("m-input--selection-controls__ripple")
-                         .AddTextColor(Color, () => IsActive);
+                         .AddTextColor(ValidationState, () => IsActive);
                  })
                 .Apply("track", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-input--switch__track")
-                        .AddTextColor(Color, () => IsActive)
+                        .AddTextColor(ValidationState, () => IsActive)
                         .AddTheme(Dark);
                 })
                 .Apply("thumb", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-input--switch__thumb")
-                        .AddTextColor(Color, () => IsActive)
+                        .AddTextColor(ValidationState, () => IsActive)
                         .AddTheme(Dark);
                 });
 

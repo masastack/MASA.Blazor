@@ -7,6 +7,12 @@ title: 发行说明
 
 目前我们是不定期更新，以下是新的功能和修复的bug情况。
 
+## 更新日期：2021-07-29
+
+- 修复了autocomplete的频闪问题
+- 修复了表单验证model改变时失效的问题
+- input增加了颜色，现在可以设置颜色了
+
 ## 更新日期：2021-07-28
 
 - 部分组件增加了过渡动画效果，包括MListGroup,MExpansionPanelContent，文档站点的Demo代码

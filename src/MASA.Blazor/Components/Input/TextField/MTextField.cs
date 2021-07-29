@@ -88,7 +88,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--placeholder", () => !string.IsNullOrEmpty(Placeholder))
                         .AddIf($"{prefix}--rounded", () => Rounded)
                         .AddIf($"{prefix}--shaped", () => Shaped)
-                        .AddIf("primary--text", () => IsActive);
+                        .AddTextColor(ValidationState);
                 })
                 .Merge("details", cssBuilder =>
                 {
@@ -98,12 +98,14 @@ namespace MASA.Blazor
                 .Merge("input-slot", cssBuilder =>
                 {
                     cssBuilder
-                        .AddBackgroundColor(Color);
+                        .AddBackgroundColor(BackgroundColor);
                 });
 
             AbstractProvider
                 .Apply<IInputBody, MInputBody<TValue>>(properties =>
                 {
+                    properties[nameof(MInputBody<TValue>.HasState)] = HasState;
+                    properties[nameof(MInputBody<TValue>.ValidationState)] = ValidationState;
                     properties[nameof(MInputBody<TValue>.Label)] = Label;
                     properties[nameof(MInputBody<TValue>.LabelValue)] = LabelValue;
                     properties[nameof(MInputBody<TValue>.ShowLabel)] = ShowLabel;
@@ -123,7 +125,6 @@ namespace MASA.Blazor
                     properties[nameof(MInputBody<TValue>.Disabled)] = IsDisabled;
                     properties[nameof(MInputBody<TValue>.PrependInnerContent)] = PrependInnerContent;
                 });
-            ValidationState = "error";
         }
 
         protected override void OnParametersSet()

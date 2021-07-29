@@ -180,7 +180,6 @@ namespace MASA.Blazor
 
         protected override async Task Click(MouseEventArgs args)
         {
-            Visible = true;
             await base.Click(args);
             QueryText = string.Empty;
 

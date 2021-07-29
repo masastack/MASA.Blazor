@@ -45,12 +45,6 @@ namespace MASA.Blazor
             return list;
         }
 
-        protected override Task Click(MouseEventArgs args)
-        {
-            Visible = true;
-            return base.Click(args);
-        }
-
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
