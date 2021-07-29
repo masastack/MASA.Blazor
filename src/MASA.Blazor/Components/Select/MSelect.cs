@@ -43,6 +43,8 @@ namespace MASA.Blazor
                         .AddIf("m-text-field--enclosed m-text-field--single-line m-text-field--solo", () => Solo)
                         .AddIf("m-input--is-focused primary--text", () => _focused && !Loading)
                         .AddIf("m-select--is-menu-active", () => Visible)
+                        .AddIf("m-select--is-multi", () => Multiple)
+                        .AddIf("m-select--chips", () => Chips)
                         .AddTheme(Dark);
                 }, styleBuilder =>
                 {
