@@ -2,7 +2,7 @@
 <div>
     <MButton OnClick="() => _addModal.Show()" Class="mb-1">Open Modal</MButton>
 
-    <MASA.Blazor.Presets.Modal Visible="_addModal.Visible" Title="新增用户" Width="500" OnOk="HandleOnClick" OnCancel="HandleOnCancel">
+    <MASA.Blazor.Presets.Modal Visible="_addModal.Visible" Title="新增用户" Width="500" ScrollToTopOnHide OnOk="HandleOnClick" OnCancel="HandleOnCancel">
         <p>@System.Text.Json.JsonSerializer.Serialize(_addModal.Data)</p>
 
         <MRow>

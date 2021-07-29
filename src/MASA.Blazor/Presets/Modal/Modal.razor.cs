@@ -1,6 +1,7 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor.Presets
@@ -10,6 +11,11 @@ namespace MASA.Blazor.Presets
         private bool _loading;
         private string _bodySyle;
         private readonly string _defaultBodyStyle = "padding:24px;";
+
+        [Inject]
+        private IJSRuntime JsRuntime { get; set; }
+
+        private MCardText BodyRef { get; set; }
 
         [Parameter]
         public bool Visible { get; set; }
@@ -51,6 +57,9 @@ namespace MASA.Blazor.Presets
         [Parameter]
         public RenderFragment Actions { get; set; }
 
+        [Parameter]
+        public bool ScrollToTopOnHide { get; set; }
+
         private async Task HandleOnOk(MouseEventArgs args)
         {
             if (OnOk.HasDelegate)
@@ -66,6 +75,22 @@ namespace MASA.Blazor.Presets
             if (OnCancel.HasDelegate)
             {
                 await OnCancel.InvokeAsync(args);
+            }
+        }
+
+        protected override async Task OnParametersSetAsync()
+        {
+            if (Visible == false)
+            {
+                await ScrollToTop();
+            }
+        }
+
+        private async Task ScrollToTop()
+        {
+            if (ScrollToTopOnHide && BodyRef?.Ref != null)
+            {
+                await JsRuntime.InvokeVoidAsync(JsInteropConstants.ScrollToPosition, BodyRef.Ref, 0);
             }
         }
     }

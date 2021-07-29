@@ -27,6 +27,9 @@ namespace MASA.Blazor.Presets
         public RenderFragment ChildContent { get; set; }
 
         [Parameter]
+        public bool ShowActions { get; set; } = true;
+
+        [Parameter]
         public string OkText { get; set; } = "确定";
 
         [Parameter]
@@ -37,6 +40,12 @@ namespace MASA.Blazor.Presets
 
         [Parameter]
         public EventCallback<MouseEventArgs> OnCancel { get; set; }
+
+        [Parameter]
+        public RenderFragment Actions { get; set; }
+
+        [Parameter]
+        public bool ScrollToTopOnHide { get; set; }
 
         [Parameter]
         public object Model { get; set; }
