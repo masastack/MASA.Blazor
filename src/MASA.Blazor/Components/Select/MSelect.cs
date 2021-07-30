@@ -117,6 +117,7 @@ namespace MASA.Blazor
                     {
                         Visible = v;
                     });
+                    props[nameof(MMenu.Disabled)] = Disabled;
                     props[nameof(MMenu.OffsetY)] = MenuProps?.OffsetY;
                     props[nameof(MMenu.OffsetX)] = MenuProps?.OffsetX;
                     props[nameof(MMenu.Block)] = MenuProps?.Block ?? true;
@@ -140,22 +141,6 @@ namespace MASA.Blazor
                 .Apply<BList, MList>(props =>
                 {
                     props[nameof(MList.Dense)] = Dense;
-                })
-                .Apply<BListItemGroup, MListItemGroup>(props =>
-                {
-                    props[nameof(MListItemGroup.Color)] = "primary";
-
-                    if (Multiple)
-                    {
-                        props[nameof(MListItemGroup.Multiple)] = Multiple;
-                        // TODO: change to TValue
-                        props[nameof(MListItemGroup.Values)] = Values.Select(u => u.ToString()).ToList();
-                    }
-                    else
-                    {
-                        // TODO: change to TValue
-                        props[nameof(MListItemGroup.Value)] = Value?.ToString();
-                    }
                 })
                 .Apply<BSelectOption<TItem, TValue>, MSelectOption<TItem, TValue>>()
                 .Apply<BChip, MChip>()

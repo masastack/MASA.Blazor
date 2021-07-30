@@ -145,6 +145,7 @@ namespace MASA.Blazor
 
                             return Group.Value == Key;
                         })
+                        .AddColor(Color, true)
                         .AddTheme(Dark);
                 });
         }

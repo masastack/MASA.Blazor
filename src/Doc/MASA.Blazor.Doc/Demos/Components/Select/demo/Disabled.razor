@@ -6,8 +6,23 @@
                  Disabled
                  Label="Disabled"></MSelect>
     </MCol>
+    <MCol Span="12">
+        <MSelect Items="items2"
+                 ItemText="u => u.Key"
+                 ItemValue="u => u.Key"
+                 ItemDisabled="u => u.Value"
+                 Label="Disabled Item"></MSelect>
+    </MCol>
 </MRow>
 
 @code {
-    List<string> items = new() { "item 1", "item 2" };
+    List<string> items = new() { "item 1", "item 2", "item 3", "item 4" };
+
+    List<KeyValuePair<string, bool>> items2 = new Dictionary<string, bool>
+    {
+    { "item 1", false },
+    { "item 2", false },
+    { "item 3", true },
+    { "item 4", false },
+    }.ToList();
 }

@@ -14,6 +14,12 @@ namespace MASA.Blazor
                 .Apply<BListItem, MListItem>(props =>
                 {
                     props[nameof(MListItem.Key)] = Key;
+                    props[nameof(MListItem.Link)] = true;
+                    props[nameof(MListItem.IsActive)] = Selected;
+                    props[nameof(MListItem.Disabled)] = Disabled;
+
+                    if (!Disabled) props[nameof(MListItem.Color)] = "primary";
+
                     props[nameof(MListItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async (args) =>
                     {
                         if (!SelectWrapper.Multiple)
@@ -22,14 +28,12 @@ namespace MASA.Blazor
                         }
                         else
                         {
-                            if (_checked)
+                            if (Selected)
                             {
-                                _checked = false;
                                 await SelectWrapper.RemoveSelectedAsync(Label, Value);
                             }
                             else
                             {
-                                _checked = true;
                                 await SelectWrapper.SetSelectedAsync(Label, Value);
                             }
                         }
@@ -38,7 +42,7 @@ namespace MASA.Blazor
                 .Apply<BListItemAction, MListItemAction>()
                 .Apply<BCheckbox, MCheckbox>(props =>
                 {
-                    props[nameof(MCheckbox.Checked)] = _checked;
+                    props[nameof(MCheckbox.Checked)] = Selected;
                 })
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>()
@@ -47,11 +51,6 @@ namespace MASA.Blazor
                     props[nameof(Style)] = "margin:12px 0 12px 12px";
                 })
                 .Apply<BIcon, MIcon>();
-        }
-
-        protected override void OnAfterRender(bool firstRender)
-        {
-            _checked = SelectWrapper.Values.Contains(Value);
         }
     }
 }
