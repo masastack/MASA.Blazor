@@ -157,7 +157,7 @@ namespace MASA.Blazor
                     props[nameof(MPopover.Class)] = css;
                     props[nameof(MPopover.Visible)] = _visible;
                     props[nameof(MPopover.ClientX)] = (StringNumber)_clientX;
-                    props[nameof(MPopover.ClientY)] = (StringNumber)(_clientY + 1);
+                    props[nameof(MPopover.ClientY)] = (StringNumber)_clientY;
                     props[nameof(MPopover.MinWidth)] = MinWidth ?? _minWidth;
                     props[nameof(MPopover.MaxHeight)] = MaxHeight;
                     props[nameof(MPopover.ChildContent)] = ChildContent;
