@@ -25,6 +25,8 @@ namespace MASA.Blazor.Presets
         private DateTime _value;
         private DateTime _dateTime;
 
+        private DateTime LocalDateTime => DateTime.Now.ToLocalTime();
+
         private string InputValue
         {
             get
@@ -47,7 +49,7 @@ namespace MASA.Blazor.Presets
             get => _value;
             set
             {
-                _dateTime = value == default ? DateTime.Now : value;
+                _dateTime = value == default ? LocalDateTime : value;
                 SetTime(_dateTime);
 
                 _value = value;
@@ -117,13 +119,13 @@ namespace MASA.Blazor.Presets
 
         private void OnNow()
         {
-            _dateTime = DateTime.Now;
+            _dateTime = LocalDateTime;
             SetTime(_dateTime);
         }
 
         private void OnCancel()
         {
-            _dateTime = Value == default ? DateTime.Now : Value;
+            _dateTime = Value == default ? LocalDateTime : Value;
             SetTime(_dateTime);
 
             _menuVisible = false;
@@ -153,9 +155,9 @@ namespace MASA.Blazor.Presets
             }
         }
 
-        private async Task HandleClearClick()
+        private Task HandleClearClick()
         {
-            await ValueChanged.InvokeAsync(default);
+            return ValueChanged.InvokeAsync(default);
         }
     }
 }
