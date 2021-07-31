@@ -1,5 +1,14 @@
 ﻿<div class="d-flex flex-column justify-space-between align-center">
-    <MImage AspectRatio="16/9"
-            Width="200"
+    <div>
+        <MButton Icon Click="() => width -= 10"><MIcon>mdi-minus</MIcon></MButton>
+        @width
+        <MButton Icon Click="() => width += 10"><MIcon>mdi-plus</MIcon></MButton>
+    </div>
+    <MImage AspectRatio="@("16/9")"
+            Width="@width"
             Src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></MImage>
 </div>
+
+@code {
+    int width = 300;
+}
