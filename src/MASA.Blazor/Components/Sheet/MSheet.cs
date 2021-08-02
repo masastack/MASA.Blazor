@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MSheet : BSheet
+    public partial class MSheet : BSheet, IThemeable
     {
         [Parameter]
         public bool Outlined { get; set; }
@@ -21,10 +21,34 @@ namespace MASA.Blazor
         public bool Dark { get; set; }
 
         [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public override bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
+
+        [Parameter]
         public StringNumber Elevation { get; set; }
 
         [Parameter]
-        public OneOf<bool, string> Rounded { get; set; }
+        public StringBoolean Rounded { get; set; }
 
         [Parameter]
         public bool Tile { get; set; }
@@ -60,10 +84,10 @@ namespace MASA.Blazor
                         .Add(prefix)
                         .AddIf($"{prefix}--outlined", () => Outlined)
                         .AddIf($"{prefix}--shaped", () => Shaped)
-                        .AddTheme(Dark)
+                        .AddTheme(IsDark)
                         .AddElevation(Elevation)
                         .AddRounded(Tile, Rounded)
-                        .AddColor(Color);
+                        .AddBackgroundColor(Color);
                 }, styleBuilder =>
                 {
                     styleBuilder

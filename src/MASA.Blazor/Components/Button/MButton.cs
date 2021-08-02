@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MButton : BButton
+    public partial class MButton : BButton, IThemeable
     {
         [Parameter]
         public bool Depressed { get; set; }
@@ -16,6 +16,33 @@ namespace MASA.Blazor
         public bool Default { get; set; } = true;
 
         protected virtual bool HasBackgroud => !(Icon || Plain || Outlined || Text);
+
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public override bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
 
         protected override void SetComponentClass()
         {
@@ -51,7 +78,7 @@ namespace MASA.Blazor
                             ("m-size--x-small", () => XSmall),
                             ("m-size--default", () => Default)
                             )
-                        .AddTheme(Dark)
+                        .AddTheme(IsDark)
                         .AddBackgroundColor(Color, () => HasBackgroud)
                         .AddTextColor(Color, () => !HasBackgroud);
                 }, styleBuilder =>

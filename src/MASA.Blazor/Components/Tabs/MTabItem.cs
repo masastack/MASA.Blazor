@@ -13,6 +13,24 @@ namespace MASA.Blazor
         [CascadingParameter]
         public BTabs Tabs { get; set; }
 
+        [Parameter]
+        public string Key { get; set; }
+
+        public string ComputedKey => Key ?? Tabs.TabItems.IndexOf(this).ToString();
+
+        [Parameter]
+        public override bool IsActive
+        {
+            get
+            {
+                return Tabs.Value == ComputedKey || (Tabs.Value == null && Tabs.TabItems.IndexOf(this) == 0);
+            }
+            set
+            {
+                base.IsActive = value;
+            }
+        }
+
         protected override void OnInitialized()
         {
             Tabs.AddTabItem(this);

@@ -5,12 +5,36 @@ using System.Collections.Generic;
 
 namespace MASA.Blazor
 {
-    public partial class MNavigationDrawer : BNavigationDrawer
+    public partial class MNavigationDrawer : BNavigationDrawer,IThemeable
     {
         private StringNumber _height;
 
         [Parameter]
         public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        } 
 
         /// <summary>
         /// Applies position: absolute to the component.
@@ -214,7 +238,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--open-on-hover", () => ExpandOnHover)
                         .AddIf($"{prefix}--right", () => Right)
                         .AddIf($"{prefix}--temporary", () => Temporary)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
                     var translate = IsBottom ? "translateY" : "translateX";

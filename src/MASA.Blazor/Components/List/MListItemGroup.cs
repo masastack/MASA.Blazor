@@ -4,10 +4,35 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MListItemGroup : BListItemGroup
+    public partial class MListItemGroup : BListItemGroup,IThemeable
     {
+
         [Parameter]
         public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        } 
 
         protected override void SetComponentClass()
         {
@@ -16,7 +41,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-item-group m-list-item-group")
-                        .AddTheme(Dark)
+                        .AddTheme(IsDark)
                         .AddTextColor(Color);
                 });
         }

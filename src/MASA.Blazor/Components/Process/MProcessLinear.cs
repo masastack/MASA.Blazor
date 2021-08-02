@@ -29,6 +29,30 @@ namespace MASA.Blazor
         public bool Dark { get; set; }
 
         [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        } 
+
+        [Parameter]
         public bool Bottom { get; set; }
 
         [Parameter]
@@ -58,7 +82,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--query", () => Query)
                         .AddIf($"{prefix}--rounded", () => Rounded)
                         .AddIf($"{prefix}--striped", () => Striped)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
                     styleBuilder

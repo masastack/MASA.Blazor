@@ -6,7 +6,7 @@ using System;
 
 namespace MASA.Blazor
 {
-    public partial class MChip : BChip
+    public partial class MChip : BChip, IThemeable
     {
         [Parameter]
         public bool Disabled { get; set; }
@@ -16,9 +16,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public string Color { get; set; }
-
-        [Parameter]
-        public bool Dark { get; set; }
 
         [Parameter]
         public bool Large { get; set; }
@@ -53,6 +50,33 @@ namespace MASA.Blazor
         [Parameter]
         public string TextColor { get; set; }
 
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        } 
+
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -77,7 +101,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--label", () => Label)
                         .AddIf($"{prefix}--no-color", () => string.IsNullOrEmpty(Color))
                         .AddIf($"{prefix}--removable", () => Close)
-                        .AddTheme(Dark)
+                        .AddTheme(IsDark)
                         .AddBackgroundColor(Color)
                         .AddTextColor(Color, () => Outlined)
                         .AddTextColor(TextColor)

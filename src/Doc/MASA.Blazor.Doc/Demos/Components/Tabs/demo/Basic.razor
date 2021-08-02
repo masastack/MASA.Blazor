@@ -1,14 +1,17 @@
-﻿<MTabs>
+﻿<MTabs @bind-Value="_value">
     <TabContent>
-        <MTab>Item One</MTab>
-        <MTab>Item Two</MTab>
-        <MTab>Item Three</MTab>
+        <MTab Key="0">Item One</MTab>
+        <MTab Key="1">Item Two</MTab>
+        <MTab Key="2">Item Three</MTab>
     </TabContent>
     <ItemContent>
-        <MTabItem>1</MTabItem>
-        <MTabItem>2</MTabItem>
-        <MTabItem>3</MTabItem>
+        <MTabItem Key="0">1</MTabItem>
+        <MTabItem Key="1">2</MTabItem>
+        <MTabItem Key="2">3</MTabItem>
     </ItemContent>
 </MTabs>
 
+@code{
+    private string _value = "1";
+}
 

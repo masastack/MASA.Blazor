@@ -8,14 +8,8 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MCard : BCard
+    public partial class MCard : BCard, IThemeable
     {
-        /// <summary>
-        /// Whether dark theme
-        /// </summary>
-        [Parameter]
-        public bool Dark { get; set; }
-
         [Parameter]
         public bool Shaped { get; set; }
 
@@ -40,6 +34,33 @@ namespace MASA.Blazor
         [Parameter]
         public string Color { get; set; }
 
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        } 
+
         protected override void SetComponentClass()
         {
             var prefix = "m-card";
@@ -50,7 +71,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder.Add("m-card")
                         .AddIf("elevation-2", () => !Outlined && !Flat)
-                        .AddTheme(Dark)
+                        .AddTheme(IsDark)
                         .Add("m-sheet")
                         .AddIf("m-sheet--outlined", () => Outlined)
                         .AddIf("m-sheet--shaped", () => Shaped)

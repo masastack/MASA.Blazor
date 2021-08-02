@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 
@@ -7,7 +8,7 @@ namespace MASA.Blazor
     /// <summary>
     /// Root for application
     /// </summary>
-    public partial class MApp : BApp
+    public partial class MApp : BApp, IThemeable
     {
         /// <summary>
         /// Whether to display from left to right
@@ -15,11 +16,45 @@ namespace MASA.Blazor
         [Parameter]
         public bool LeftToRight { get; set; } = true;
 
-        /// <summary>
-        /// Whether dark theme
-        /// </summary>
         [Parameter]
         public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
+
+        [Inject]
+        protected HeadJsInterop HeadJsInterop { get; set; }
+
+        protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();
+
+        protected override Task OnInitializedAsync()
+        {
+            if (Variables.Theme != null)
+                HeadJsInterop.InsertAdjacentHTML("beforeend", ThemeCssBuilder.Build());
+
+            return base.OnInitializedAsync();
+        }
 
         protected override void SetComponentClass()
         {
@@ -35,7 +70,7 @@ namespace MASA.Blazor
                             var suffix = LeftToRight ? "ltr" : "rtl";
                             return $"{prefix}--is-{suffix}";
                         })
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 })
                 .Apply("wrap", cssBuilder =>
                 {

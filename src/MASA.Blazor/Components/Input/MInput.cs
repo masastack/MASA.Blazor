@@ -12,7 +12,7 @@ using OneOf;
 
 namespace MASA.Blazor
 {
-    public partial class MInput<TValue> : BInput
+    public partial class MInput<TValue> : BInput, IThemeable
     {
         private NullableValue<TValue> _value;
         private EditContext _oldContext;
@@ -63,9 +63,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool Dense { get; set; }
-
-        [Parameter]
-        public bool Dark { get; set; }
 
         [Parameter]
         public StringNumber Height { get; set; }
@@ -122,6 +119,33 @@ namespace MASA.Blazor
             }
         }
 
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        } 
+
         protected override void SetComponentClass()
         {
             var prefix = "m-input";
@@ -139,7 +163,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--is-loading", () => Loading)
                         .AddIf($"{prefix}--is-readonly", () => IsReadonly)
                         .AddIf($"{prefix}--dense", () => Dense)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 })
                 .Apply("prepend", cssBuilder =>
                 {

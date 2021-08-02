@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BlazorComponent
@@ -37,16 +38,19 @@ namespace BlazorComponent
 
         public static StyleBuilder AddBackgroundColor(this StyleBuilder styleBuilder, string color)
         {
-            if (string.IsNullOrEmpty(color) || (!color.StartsWith("#") && !color.StartsWith("rgb")))
+            if (IsCssColor(color))
             {
-                return styleBuilder;
+                styleBuilder
+                 .Add($"background-color:{color}")
+                 .Add($"border-color:{color}");
             }
 
-            styleBuilder
-                .Add($"background-color:{color}")
-                .Add($"border-color:{color}");
-
             return styleBuilder;
+        }
+
+        private static bool IsCssColor(string color)
+        {
+            return !string.IsNullOrEmpty(color) && Regex.Match(color, @"^(#|var\(--|(rgb|hsl)a?\()").Success;
         }
 
         public static StyleBuilder AddTextColor(this StyleBuilder styleBuilder, string color, Func<bool> func)
@@ -56,7 +60,14 @@ namespace BlazorComponent
 
         public static StyleBuilder AddTextColor(this StyleBuilder styleBuilder, string color)
         {
-            return styleBuilder.AddColor(color, true, () => true);
+            if (IsCssColor(color))
+            {
+                styleBuilder
+                    .Add($"color:{color}")
+                    .Add($"caret-color:{color}");
+            }
+
+            return styleBuilder;
         }
 
         public static StyleBuilder AddHeight(this StyleBuilder styleBuilder, StringNumber height)

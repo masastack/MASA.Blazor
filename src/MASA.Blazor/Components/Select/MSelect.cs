@@ -14,6 +14,30 @@ namespace MASA.Blazor
         public bool Dark { get; set; }
 
         [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        } 
+
+        [Parameter]
         public StringNumber MinWidth { get; set; }
 
         private int Width => Visible || _text.Any() ? ComputeLabelLength() * 6 : 0;
@@ -45,7 +69,7 @@ namespace MASA.Blazor
                         .AddIf("m-select--is-menu-active", () => Visible)
                         .AddIf("m-select--is-multi", () => Multiple)
                         .AddIf("m-select--chips", () => Chips)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -72,7 +96,7 @@ namespace MASA.Blazor
                         .Add("m-label")
                         .AddIf("m-label--active", () => { return Solo ? false : Visible || _text.Any(); })
                         .AddIf("primary--text", () => { return Solo ? false : _focused; })
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
                     styleBuilder

@@ -4,12 +4,36 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MImage : BImage
+    public partial class MImage : BImage, IThemeable
     {
         private Dimensions _dimensions;
 
         [Parameter]
         public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        } 
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -30,7 +54,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder.Add("m-image")
                         .Add("m-responsive")
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
                     styleBuilder

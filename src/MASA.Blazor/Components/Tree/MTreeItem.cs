@@ -8,10 +8,35 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public class MTreeItem<T> : BTreeItem<T>
+    public class MTreeItem<T> : BTreeItem<T>, IThemeable
     {
+
         [Parameter]
         public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
 
         protected override void SetComponentClass()
         {
@@ -47,7 +72,7 @@ namespace MASA.Blazor
                         .Add("m-treeview-node__toggle")
                         .Add("m-icon--link")
                         .Add("mdi mdi-menu-down")
-                        .AddTheme(Dark)
+                        .AddTheme(IsDark)
                         .AddIf("m-treeview-node__toggle--open", () => Expanded);
                 })
                 .Apply("checkbox", cssBuilder =>
@@ -62,7 +87,7 @@ namespace MASA.Blazor
                         .AddIf("mdi-checkbox-marked accent--text", () => Checked && !Indeterminate)
                         .AddIf("mdi-minus-box accent--text", () => Indeterminate)
                         .AddIf("mdi-checkbox-blank-outline", () => !Checked)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 })
                 .Apply("content", cssBuilder =>
                 {

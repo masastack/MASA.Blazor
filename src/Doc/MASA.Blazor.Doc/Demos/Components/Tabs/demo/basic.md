@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-v-tabs 组件是 v-item-group 的样式扩展。 它提供了一个易于使用的接口来组织内容组。
+v-tabs 组件是 v-item-group 的样式扩展。 它提供了一个易于使用的接口来组织内容组。默认的key为索引值。
 
 ## en-US
 

@@ -8,13 +8,35 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public class MTree<T> : BTree<T>
+    public class MTree<T> : BTree<T>,IThemeable
     {
-        /// <summary>
-        /// Whether dark theme
-        /// </summary>
+
         [Parameter]
         public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        } 
 
         protected override void SetComponentClass()
         {
@@ -24,7 +46,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-treeview")
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 })
                 .Apply("child", cssBuilder =>
                 {

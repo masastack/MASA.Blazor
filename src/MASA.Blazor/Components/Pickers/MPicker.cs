@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MPicker : BPicker, IThemeable, IElevatable, IColorable
+    public partial class MPicker : BPicker, IThemeable
     {
         private string _headerColor;
 
@@ -30,9 +30,6 @@ namespace MASA.Blazor
         public bool FullWidth { get; set; }
 
         [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
         public StringNumber Elevation { get; set; }
 
         [Parameter]
@@ -40,6 +37,33 @@ namespace MASA.Blazor
 
         [Parameter]
         public StringNumber Width { get; set; } = 290;
+
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        } 
 
         protected override void SetComponentClass()
         {
@@ -53,7 +77,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--flat", () => Flat)
                         .AddIf($"{prefix}--landscape", () => Landscape)
                         .AddIf($"{prefix}--full-width", () => FullWidth)
-                        .AddTheme(Dark)
+                        .AddTheme(IsDark)
                         .AddElevation(Elevation);
                 })
                 .Apply("title", cssBuilder =>
@@ -72,7 +96,7 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add($"{prefix}__body")
                         .AddIf($"{prefix}__body--no-title", () => NoTitle)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
                     styleBuilder

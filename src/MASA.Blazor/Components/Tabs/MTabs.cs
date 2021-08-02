@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MTabs : BTabs
+    public partial class MTabs : BTabs, IThemeable
     {
         [Parameter]
         public string ActiveClass { get; set; }
@@ -67,6 +67,30 @@ namespace MASA.Blazor
         [Parameter]
         public bool Dark { get; set; }
 
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
+
         protected StringNumber SlideLeft => ActiveTab?.Rect?.OffsetLeft;
 
         protected StringNumber SlideWidth => ActiveTab?.Rect?.ScrollWidth;
@@ -86,7 +110,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--icons-and-text", () => IconsAndText)
                         .AddIf($"{prefix}--right", () => Right)
                         .AddIf($"{prefix}--vertical", () => Vertical)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 })
                 .Apply("slider-wrap", cssBuilder =>
                 {

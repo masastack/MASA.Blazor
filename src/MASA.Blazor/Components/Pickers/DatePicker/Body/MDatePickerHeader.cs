@@ -8,19 +8,43 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    internal class MDatePickerHeader : BDatePickerHeader, IThemeable, IColorable
+    internal class MDatePickerHeader : BDatePickerHeader, IThemeable
     {
         [Parameter]
         public bool Disabled { get; set; }
-
-        [Parameter]
-        public bool Dark { get; set; }
 
         [Parameter]
         public string Color { get; set; } = "accent";
 
         [Parameter]
         public bool Readonly { get; set; }
+
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        } 
 
         protected override void SetComponentClass()
         {
@@ -30,7 +54,7 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-date-picker-header")
                         .AddIf("m-date-picker-header--disabled", () => Disabled)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 })
                 .Apply("value", cssBuilder =>
                 {

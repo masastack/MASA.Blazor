@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace MASA.Blazor
 {
-    public partial class MListItem : BListItem
+    public partial class MListItem : BListItem, IThemeable
     {
         /// <summary>
         /// Lowers max height of list tiles
@@ -49,6 +49,30 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
 
         [Parameter]
         public bool IsActive { get; set; }
@@ -146,7 +170,7 @@ namespace MASA.Blazor
                             return Group.Value == Key;
                         })
                         .AddColor(Color, true)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 });
         }
 

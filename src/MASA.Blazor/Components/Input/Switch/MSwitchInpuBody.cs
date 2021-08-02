@@ -9,13 +9,37 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    internal partial class MSwitchInputBody : BSwitchInputBody, IInputBody
+    internal partial class MSwitchInputBody : BSwitchInputBody, IInputBody, IThemeable
     {
         [Parameter]
         public string ValidationState { get; set; }
 
         [Parameter]
         public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
 
         protected override void SetComponentClass()
         {
@@ -36,14 +60,14 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-input--switch__track")
                         .AddTextColor(ValidationState, () => IsActive)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 })
                 .Apply("thumb", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-input--switch__thumb")
                         .AddTextColor(ValidationState, () => IsActive)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 });
 
             AbstractProvider

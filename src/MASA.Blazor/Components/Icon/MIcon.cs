@@ -3,16 +3,13 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MIcon : BIcon
+    public partial class MIcon : BIcon, IThemeable
     {
         private const string XSMALL = "12px";
         private const string SMALL = "16px";
         private const string DENSE = "20px";
         private const string LARGE = "36px";
         private const string XLARGE = "40px";
-
-        [Parameter]
-        public bool Dark { get; set; }
 
         /// <summary>
         /// 20px
@@ -59,6 +56,34 @@ namespace MASA.Blazor
         [Parameter]
         public bool IsActive { get; set; } = true;
 
+
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
+
         protected override void SetComponentClass()
         {
             CssProvider
@@ -70,7 +95,7 @@ namespace MASA.Blazor
                         .AddIf("m-icon--dense", () => Dense)
                         .AddIf("m-icon--left", () => Left)
                         .AddIf("m-icon--right", () => Right)
-                        .AddTheme(Dark)
+                        .AddTheme(IsDark)
                         .AddTextColor(Color, () => IsActive);
                 }, styleBuilder =>
                 {

@@ -9,7 +9,7 @@ using static MASA.Blazor.Helpers.RenderHelper;
 
 namespace MASA.Blazor
 {
-    public partial class MAlert : BAlert
+    public partial class MAlert : BAlert, IThemeable
     {
         private static readonly Dictionary<string, string> _typeIconDict = new()
         {
@@ -27,6 +27,30 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
 
         public string ComputedColor => Color ?? Type?.ToString().ToLower();
 
@@ -72,8 +96,8 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-alert")
                         .Add("m-sheet")
-                        .AddTheme(Dark || (Type.HasValue && !ColoredBorder))
-                        .AddIf(() => $"elevation-{Elevation.Value}", () => Elevation != null)
+                        .AddTheme(IsDark, Type.HasValue && !ColoredBorder)
+                        .AddElevation(Elevation)
                         .AddFirstIf(
                             (() => "m-alert--prominent", () => Prominent),
                             (() => "m-alert--dense", () => Dense))

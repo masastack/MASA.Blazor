@@ -22,12 +22,6 @@ namespace MASA.Blazor
 
         public int? Transform { get; } = 0;
 
-        /// <summary>
-        /// Sets the width for the component.
-        /// </summary>
-        [Parameter]
-        public StringNumber Width { get; set; }
-
         [Parameter]
         public StringNumber Left { get; set; } = 0;
 

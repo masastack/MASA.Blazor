@@ -4,10 +4,35 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MOverlay : BOverlay
+    public partial class MOverlay : BOverlay, IThemeable
     {
+
         [Parameter]
         public bool Dark { get; set; } = true;
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
 
         protected override void SetComponentClass()
         {
@@ -19,7 +44,7 @@ namespace MASA.Blazor
                         .Add("m-overlay")
                         .AddIf("m-overlay--active", () => Value)
                         .AddIf("m-overlay--absolute", () => Absolute)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
                     styleBuilder

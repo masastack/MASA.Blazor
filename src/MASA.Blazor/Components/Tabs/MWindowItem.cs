@@ -11,7 +11,7 @@ namespace MASA.Blazor
     public class MWindowItem : BWindowItem
     {
         [Parameter]
-        public bool IsActive { get; set; }
+        public virtual bool IsActive { get; set; }
 
         protected override void SetComponentClass()
         {

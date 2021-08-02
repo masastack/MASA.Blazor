@@ -11,7 +11,7 @@ using OneOf;
 
 namespace MASA.Blazor
 {
-    public partial class MSnackbar : BSnackbar
+    public partial class MSnackbar : BSnackbar, IThemeable
     {
         private bool _isActive;
 
@@ -82,6 +82,30 @@ namespace MASA.Blazor
         public bool Dark { get; set; }
 
         [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
+
+        [Parameter]
         public int Timeout { get; set; } = 5000;
 
         [Parameter]
@@ -94,7 +118,7 @@ namespace MASA.Blazor
         public bool Tile { get; set; }
 
         [Parameter]
-        public OneOf<bool, string> Rounded { get; set; }
+        public StringBoolean Rounded { get; set; }
 
         protected Timer Timer { get; set; }
 
@@ -135,7 +159,7 @@ namespace MASA.Blazor
                         .AddTextColor(Color, () => Text || Outlined)
                         .AddRounded(Tile, Rounded)
                         .AddElevation(Elevation)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
                     styleBuilder

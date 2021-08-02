@@ -8,8 +8,35 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MItemGroup : BItemGroup
+    public partial class MItemGroup : BItemGroup, IThemeable
     {
+
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
         protected override void SetComponentClass()
         {
             CssProvider
@@ -17,7 +44,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-item-group")
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 });
         }
     }

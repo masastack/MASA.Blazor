@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BlazorComponent.Components.Core.CssProcess;
+using MASA.Blazor;
 using OneOf;
 
 namespace BlazorComponent
 {
     public static class CssBuilderExtensions
     {
-        public static CssBuilder AddTheme(this CssBuilder cssBuilder, bool dark)
+        public static CssBuilder AddTheme(this CssBuilder cssBuilder, bool isDark, bool exDark = false)
         {
+            var dark = isDark || exDark;
+
             cssBuilder.Add(() =>
             {
                 var suffix = dark ? "dark" : "light";
@@ -31,7 +35,18 @@ namespace BlazorComponent
 
         public static CssBuilder AddBackgroundColor(this CssBuilder cssBuilder, string color)
         {
-            return cssBuilder.AddColor(color, false, () => true);
+            if (!string.IsNullOrEmpty(color) && !IsCssColor(color))
+            {
+                cssBuilder
+                    .Add(color);
+            }
+
+            return cssBuilder;
+        }
+
+        private static bool IsCssColor(string color)
+        {
+            return Regex.Match(color, @"^(#|var\(--|(rgb|hsl)a?\()").Success;
         }
 
         public static CssBuilder AddBackgroundColor(this CssBuilder cssBuilder, string color, Func<bool> func)
@@ -85,27 +100,46 @@ namespace BlazorComponent
 
         public static CssBuilder AddTextColor(this CssBuilder cssBuilder, string color)
         {
-            return cssBuilder.AddColor(color, true, () => true);
+            if (!string.IsNullOrEmpty(color) && !IsCssColor(color))
+            {
+                var colors = color.Trim().Split(' ');
+                cssBuilder
+                    .Add($"{colors[0]}--text");
+
+                if (colors.Length == 2)
+                {
+                    cssBuilder
+                        .Add($"text--{colors[1]}");
+                }
+            }
+
+            return cssBuilder;
         }
 
-        public static CssBuilder AddRounded(this CssBuilder cssBuilder, bool tile, OneOf<bool, string> rounded)
+        public static CssBuilder AddRounded(this CssBuilder cssBuilder, bool tile, StringBoolean rounded)
         {
             if (tile)
             {
                 cssBuilder.Add("rounded-0");
             }
-            else if (rounded.IsT1)
+            else
             {
-                var values = rounded.AsT1.Split(' ');
-
-                foreach (var val in values)
+                if (rounded != null)
                 {
-                    cssBuilder.Add($"rounded-{val}");
+                    if (rounded.IsT0)
+                    {
+                        var values = rounded.AsT0.Split(' ');
+
+                        foreach (var val in values)
+                        {
+                            cssBuilder.Add($"rounded-{val}");
+                        }
+                    }
+                    else if (rounded.IsT1 && rounded.AsT1)
+                    {
+                        cssBuilder.Add("rounded");
+                    }
                 }
-            }
-            else if (rounded.IsT0 && rounded.AsT0)
-            {
-                cssBuilder.Add("rounded");
             }
 
             return cssBuilder;

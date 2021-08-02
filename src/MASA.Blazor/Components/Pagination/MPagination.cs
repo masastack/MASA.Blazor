@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MPagination : BPagination
+    public partial class MPagination : BPagination,IThemeable
     {
         [Parameter]
         public bool Circle { get; set; }
@@ -19,6 +19,29 @@ namespace MASA.Blazor
         [Parameter]
         public bool Dark { get; set; }
 
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        } 
         protected override void SetComponentClass()
         {
             CssProvider
@@ -28,7 +51,7 @@ namespace MASA.Blazor
                         .Add("m-pagination")
                         .AddIf("m-pagination--circle", () => Circle)
                         .AddIf("m-pagination--disabled", () => Disabled)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 })
                 .Apply("navigation-prev", cssBuilder =>
                 {

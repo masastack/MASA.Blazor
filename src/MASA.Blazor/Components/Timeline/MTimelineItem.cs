@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MTimelineItem : BTimelineItem
+    public partial class MTimelineItem : BTimelineItem, IThemeable
     {
         [Parameter]
         public string Color { get; set; } = "primary";
@@ -40,6 +40,30 @@ namespace MASA.Blazor
         [Parameter]
         public bool Dark { get; set; }
 
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
+
         protected override void SetComponentClass()
         {
             var prefix = "m-timeline-item";
@@ -53,7 +77,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--fill-dot", () => FillDot)
                         .AddIf($"{prefix}--before", () => BTimeline.Reverse ? Right : Left)
                         .AddIf($"{prefix}--after", () => BTimeline.Reverse ? Right : Left)
-                        .AddTheme(Dark);
+                        .AddTheme(IsDark);
                 })
                 .Apply("body", cssBuilder =>
                 {

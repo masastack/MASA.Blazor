@@ -9,7 +9,7 @@ using OneOf;
 
 namespace MASA.Blazor
 {
-    public partial class MList : BList
+    public partial class MList : BList, IThemeable
     {
         /// <summary>
         /// Removes elevation (box-shadow) and adds a thin border.
@@ -22,9 +22,6 @@ namespace MASA.Blazor
         /// </summary>
         [Parameter]
         public bool Shaped { get; set; }
-
-        [Parameter]
-        public bool Dark { get; set; }
 
         [Parameter]
         public StringNumber Elevation { get; set; }
@@ -116,6 +113,33 @@ namespace MASA.Blazor
         [CascadingParameter]
         public BNavigationDrawer NavigationDrawer { get; set; }
 
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        } 
+
         public override List<BListItem> Items { get; set; } = new List<BListItem>();
 
         protected override void SetComponentClass()
@@ -129,7 +153,7 @@ namespace MASA.Blazor
                         .Add("m-sheet")
                         .AddIf("m-sheet--outlined", () => Outlined)
                         .AddIf("m-sheet--shaped", () => Shaped)
-                        .AddTheme(Dark)
+                        .AddTheme(IsDark)
                         .Add("m-list")
                         .AddIf(() => $"elevation-{Elevation.Value}", () => Elevation != null)
                         .AddIf($"{prefix}--dense", () => Dense)

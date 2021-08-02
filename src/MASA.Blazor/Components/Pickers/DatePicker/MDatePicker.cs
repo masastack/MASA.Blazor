@@ -5,7 +5,7 @@ using System;
 
 namespace MASA.Blazor
 {
-    public partial class MDatePicker : MPicker, IThemeable, IElevatable, IColorable
+    public partial class MDatePicker : MPicker, IThemeable
     {
         private DateTime _tableDate;
         private DateTime _value;

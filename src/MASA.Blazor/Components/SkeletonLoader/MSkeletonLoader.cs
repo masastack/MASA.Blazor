@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MSkeletonLoader : BSkeletonLoader
+    public partial class MSkeletonLoader : BSkeletonLoader, IThemeable
     {
         [Parameter]
         public bool Boilerplate { get; set; }
@@ -80,6 +80,33 @@ namespace MASA.Blazor
         [Parameter]
         public StringNumber MinWidth { get; set; }
 
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
+
         protected override void SetComponentClass()
         {
             var prefix = "m-skeleton-loader";
@@ -93,7 +120,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--boilerplate", () => Boilerplate)
                         .AddIf($"{prefix}--is-loading", () => Loading)
                         .AddIf($"{prefix}--tile", () => Tile)
-                        .AddTheme(false)
+                        .AddTheme(IsDark)
                         .AddElevation(2);
                 }, styleBuilder =>
                 {

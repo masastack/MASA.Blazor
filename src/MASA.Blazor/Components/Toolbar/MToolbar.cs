@@ -4,11 +4,8 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public class MToolbar : BToolbar
+    public class MToolbar : MSheet, IThemeable
     {
-        [Parameter]
-        public bool Dark { get; set; }
-
         [Parameter]
         public bool Absolute { get; set; }
 
@@ -20,18 +17,102 @@ namespace MASA.Blazor
 
         public bool IsCollapsed => Collapse;
 
-        protected bool IsExtended { get; set; }
+        public bool IsExtended => Extended || ExtensionContent != null;
 
         [Parameter]
         public bool Floating { get; set; }
 
+        [Parameter]
+        public bool Prominent { get; set; }
+
+        [Parameter]
+        public bool Flat { get; set; }
+
+        [Parameter]
+        public bool Dense { get; set; }
+
+        [Parameter]
+        public string Src { get; set; }
+
+        [Parameter]
+        public RenderFragment<ImgProps> ImgContent { get; set; }
+
+        [Parameter]
+        public bool Short { get; set; }
+
+        [Parameter]
+        public StringNumber ExtensionHeight { get; set; } = 48;
+
+        public StringNumber ComputedContentHeight
+        {
+            get
+            {
+                if (Height != null)
+                {
+                    return Height;
+                }
+
+                if (IsProminent && Dense)
+                {
+                    return 96;
+                }
+
+                if (IsProminent && Short)
+                {
+                    return 112;
+                }
+
+                if (IsProminent)
+                {
+                    return 128;
+                }
+
+                if (Dense)
+                {
+                    return 48;
+                }
+
+                if (Short)//TODO:breakpoint
+                {
+                    return 56;
+                }
+
+                return 64;
+            }
+        }
+
+        public StringNumber ComputedHeight
+        {
+            get
+            {
+                if (!IsExtended)
+                {
+                    return ComputedContentHeight;
+                }
+
+                return IsCollapsed ? ComputedContentHeight : ComputedContentHeight.ToInt32() + ExtensionHeight.ToInt32();
+            }
+        }
+
+        [Parameter]
+        public RenderFragment ExtensionContent { get; set; }
+
+        [Parameter]
+        public override string Tag { get; set; } = "header";
+
+        [Parameter]
+        public bool Extended { get; set; }
+
+        public bool IsProminent => Prominent;
+
         protected override void SetComponentClass()
         {
+            base.SetComponentClass();
+
             CssProvider
-                .Apply(cssBuilder =>
+                .Merge(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-sheet")
                         .Add("m-toolbar")
                         .AddIf("m-toolbar--absolute", () => Absolute)
                         .AddIf("m-toolbar--bottom", () => Bottom)
@@ -41,22 +122,11 @@ namespace MASA.Blazor
                         .AddIf("m-toolbar--extended", () => IsExtended)
                         .AddIf("m-toolbar--flat", () => Flat)
                         .AddIf("m-toolbar--floating", () => Floating)
-                        .AddIf("m-toolbar--prominent", () => Prominent)
-                        .AddBackgroundColor(Color)
-                        .AddTheme(Dark);
+                        .AddIf("m-toolbar--prominent", () => IsProminent);
                 }, styleBuilder =>
                 {
                     styleBuilder
-                       .AddFirstIf(
-                          ("height: 96px", () => Dense && Prominent),
-                          ("height: 128px", () => Prominent),
-                          ("height: 48px", () => Dense),
-                          ("height: 64px", () => true)
-                          )
-                       .AddMinWidth(MinWidth)
-                       .AddMaxWidth(MaxWidth)
-                       .AddMinHeight(MinHeight)
-                       .AddMaxHeight(MaxHeight);
+                       .AddHeight(ComputedHeight);
                 })
                 .Apply("content", cssBuilder =>
                 {
@@ -64,16 +134,39 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                       .AddFirstIf(
-                          ("height: 96px", () => Dense && Prominent),
-                          ("height: 128px", () => Prominent),
-                          ("height: 48px", () => Dense),
-                          ("height: 64px", () => true)
-                          )
-                        .AddMinWidth(MinWidth)
-                        .AddMaxWidth(MaxWidth)
-                        .AddMinHeight(MinHeight)
-                        .AddMaxHeight(MaxHeight);
+                       .AddHeight(ComputedContentHeight);
+                })
+                .Apply("image", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-toolbar__image");
+                })
+                .Apply("extension", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-toolbar__extension");
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddHeight(ExtensionHeight);
+                });
+
+            AbstractProvider
+                .Apply<BSheetBody, BToolbarSheetBody>(props =>
+                {
+                    props[nameof(BToolbarSheetBody.ChildContent)] = ChildContent;
+                    props[nameof(BToolbarSheetBody.CssProvider)] = CssProvider;
+                    props[nameof(BToolbarSheetBody.AbstractProvider)] = AbstractProvider;
+                    props[nameof(BToolbarSheetBody.ImgContent)] = ImgContent;
+                    props[nameof(BToolbarSheetBody.Src)] = Src;
+                    props[nameof(BToolbarSheetBody.Height)] = ComputedHeight;
+                    props[nameof(BToolbarSheetBody.IsExtended)] = IsExtended;
+                    props[nameof(BToolbarSheetBody.ExtensionContent)] = ExtensionContent;
+                })
+                .Apply<BImage, MImage>(props =>
+                {
+                    props[nameof(MImage.Height)] = ComputedHeight;
+                    props[nameof(MImage.Src)] = Src;
                 });
         }
     }
