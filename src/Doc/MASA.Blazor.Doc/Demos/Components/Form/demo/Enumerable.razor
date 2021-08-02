@@ -1,0 +1,62 @@
+﻿@using System.ComponentModel.DataAnnotations
+
+<MForm Model="_order" EnableDataAnnotationsValidation>
+    <MTextField @bind-Value="_order.Title" Label="名称"></MTextField>
+    <MTextField @bind-Value="_order.Price" Label="金额" Type="number"></MTextField>
+    @foreach (var person in _order.Persons)
+    {
+        <MTextField @bind-Value="person.Name" Label="姓名"></MTextField>
+        <MTextField @bind-Value="person.Age" Label="年龄"></MTextField>
+    }
+    <MButton Click="()=>SubmitOrder(context)" Color="success">提交</MButton>
+</MForm>
+
+@code{
+    public class Order
+    {
+        public int Id { get; set; }
+        [Required]
+        public string Title { get; set; }
+        [Range(0, 20.00)]
+        public decimal Price { get; set; }
+
+        [EnumerableValidation]
+        public List<Item> Persons { get; set; }
+    }
+
+    public class Item
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        [Range(25, 100)]
+        public int Age { get; set; }
+    }
+
+    private Order _order = new()
+    {
+        Persons = new List<Item>
+        {
+            new Item
+            {
+                Id=1,
+                Name="jack"
+            },
+            new Item
+            {
+                Id=2
+            }
+        }
+    };
+
+    public void SubmitOrder(EditContext context)
+    {
+        var success = context.Validate();
+        if (success)
+        {
+            //验证成功，操作业务
+        }
+    }
+}
