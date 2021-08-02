@@ -9,11 +9,6 @@ namespace MASA.Blazor
         [Parameter]
         public bool Dark { get; set; } = true;
 
-        protected override Task OnAfterRenderAsync(bool firstRender)
-        {
-            return JsInvokeAsync(JsInteropConstants.AddElementTo, Ref, ".m-application");
-        }
-
         protected override void SetComponentClass()
         {
             CssProvider
