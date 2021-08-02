@@ -8,9 +8,10 @@ namespace MASA.Blazor.Presets
     {
         private bool _loading;
         private string _style;
-        private readonly string _defaultStyle = "position: fixed; z-index: 201; ";
 
-        private StringNumber _minWidth = (StringNumber)256;
+        private static int _zIndex = 201;
+        private static StringNumber _minWidth = (StringNumber)256;
+        private static string _defaultStyle = $"position: fixed; z-index: {_zIndex + 1}; ";
 
         private string Style { get => _defaultStyle + _style; set => _style = value; }
 
