@@ -1,0 +1,46 @@
+﻿@using System.IO;
+
+<MFileInput Files="@files" OnUpload="HandleUpload" Multiple Card Accept="image/*">
+    <ActivatorContent>
+        @if (files.Count == 0)
+                {
+        <MCard Height="102" Width="102" Outlined Style="display:flex;align-items:center;justify-content:center;border-style:dashed;cursor:pointer;">
+            <MButton Icon><MIcon>mdi-plus</MIcon></MButton>
+        </MCard>
+        }
+    </ActivatorContent>
+</MFileInput>
+
+@code {
+    List<UploadFile> files = new List<UploadFile>()
+    {
+    new UploadFile { FileName ="defaultFileName1", Url = "https://picsum.photos/510/300?random", Uploaded = true, IsImage = true },
+    };
+
+    async Task HandleUpload(List<UploadFile> uploadFiles)
+    {
+        // TODO: upload to server
+
+        foreach (var file in uploadFiles)
+        {
+            var buffers = new byte[file.BrowserFile.Size];
+            await file.BrowserFile.OpenReadStream().ReadAsync(buffers);
+            // todo with buffers
+
+            bool succeed = true;
+            if (succeed)
+            {
+                // succeed to upload
+                file.Uploaded = true;
+                //file.Url = "";
+            }
+            else
+            {
+                // failed to upload
+                file.Error = "Error happens";
+            }
+        }
+
+        files.AddRange(uploadFiles);
+    }
+}

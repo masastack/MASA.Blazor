@@ -1,38 +1,64 @@
-﻿@using System.Text.Json;
-@using System.IO;
+﻿@using System.IO;
 
-<MFileInput Files="@files" Upload="HandleUpload" Multiple ShowSize Counter Chips Accept="image/*">
-    <Activator>
+<MSwitch @bind-Value="chips" Label="Use chips"></MSwitch>
+
+<MFileInput Files="@files" OnUpload="HandleUpload" Multiple ShowSize Counter Chips="chips" Accept="image/*" @ref="_uploadElementReference">
+    <ActivatorContent>
         <MButton Color="primary">Upload</MButton>
-    </Activator>
+    </ActivatorContent>
 </MFileInput>
 
 @code {
-    IList<UploadFile> files = new List<UploadFile>() 
+    protected MFileInput _uploadElementReference;
+
+    bool chips = false;
+
+    List<UploadFile> files = new List<UploadFile>()
     {
-        new UploadFile { FileName ="defaultFileName1", Url = "https://picsum.photos/510/300?random", Uploaded = true, IsImage = true },
-        new UploadFile { FileName = "defaultFileNam2", Url = "https://picsum.photos/520/300?random", Uploaded = true, IsImage = true }
+    new UploadFile { FileName ="defaultFileName1", Url = "https://picsum.photos/510/300?random", Uploaded = true, IsImage = true },
+    new UploadFile { FileName = "defaultFileNam2", Url = "https://picsum.photos/520/300?random", Uploaded = true, IsImage = true }
     };
 
-    async Task HandleUpload(UploadFile file)
+    [Inject]
+    public IJSRuntime JsRuntime { get; set; }
+
+    async Task HandleUpload(List<UploadFile> uploadFiles)
     {
-        // TODO: upload to server
-        var buffers = new byte[file.BrowserFile.Size];
-        await file.BrowserFile.OpenReadStream().ReadAsync(buffers);
-        // todo with buffers
-
-        bool succeed = true;
-        if (succeed)
+        var result = await JsRuntime.InvokeAsync<List<UploadFile>>("testUploadFile", _uploadElementReference.Element);
+        for (int i = 0; i < result.Count; i++)
         {
-            // succeed to upload
-            file.Uploaded = true;
-            //file.Url = "";
+            var item = result[i];
+            uploadFiles[i].Uploaded = item.Uploaded;
+            uploadFiles[i].Url = item.Url;
+            uploadFiles[i].Error = item.Error;
         }
-        else
-        {
 
-            // failed to upload
-            file.Error = "Error happens";
-        }
+        files.AddRange(uploadFiles);
     }
+
+    // javascript:
+    //
+    // window.testUploadFile = function(element) {
+    //     let result = []
+    //
+    //     if(element){
+    //         for(let i = 0; i< element.files.length; i++){
+    //             var file = element.files[i]
+    //
+    //             // TODO: oss here
+    //
+    //             let fileInfo = {
+    //                 fileName: file.name,
+    //                 uploaded: true,
+    //                 error: null,
+    //                 url: "",
+    //                 value: null
+    //             }
+    //
+    //             result.push(fileInfo)
+    //         }
+    //     }
+    //
+    //     return result;
+    // }
 }

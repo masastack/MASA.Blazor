@@ -38,21 +38,21 @@ namespace MASA.Blazor
                 {
                     prop[nameof(MHintMessage.Style)] = "text-align: right";
                 })
-                .Apply<BChip, MChip>(prop =>
-                {
-                    prop[nameof(MChip.Style)] = "margin: 0 4px 4px 0";
-                })
+                .Apply<BChip, MChip>()
                 .Apply<BAvatar, MAvatar>(prop =>
                 {
                     prop[nameof(MAvatar.Style)] = "margin-right: 4px";
                 })
                 .Apply<BAvatar, MListItemAvatar>("list-item")
-                .Apply<BTooltip, MTooltip>();
+                .Apply<BTooltip, MTooltip>()
+                .Apply<BImage, MImage>()
+                .Apply<BOverlay, MOverlay>()
+                .Apply<BCard, MCard>();
         }
 
         protected override string GetColorCss(bool uploaded) => uploaded ? "" : "red--text";
 
-        protected override string GetListItemStyle(bool uploaded) => $"border: 1px solid {(uploaded ? "lightgrey" : "#F44336")}; border-radius:4px; margin-top:4px;";
+        protected override string GetListItemStyle(bool uploaded) => $"border: 1px solid {(uploaded ? "lightgrey" : "#F44336")}; border-radius:4px;";
 
     }
 }

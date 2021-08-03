@@ -1,6 +1,5 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
-using System;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor
@@ -64,9 +63,9 @@ namespace MASA.Blazor
                         .Add("z-index:1100")
                         .AddIf("display:none", () => !IsActive || Disabled);
                 })
-                .Apply("activator", styleAction: styleBuilder =>
+                .Apply("activator", css => css.Add(ActivatorClass), style =>
                  {
-                     styleBuilder
+                     style
                          .Add("display:inline-block; width:initial;")
                          .Add(ActivatorStyle);
                  });
