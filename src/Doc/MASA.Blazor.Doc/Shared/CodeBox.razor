@@ -56,10 +56,10 @@
         <MDivider></MDivider>
         <ExpandTransition Value="_expend">
             <MItemGroup @bind-Value="ActiveWindow" Class="pa-2">
-                <MButton Text Class="mr-2" OnClick="()=>_activeWindow=0" Value="0"> template </MButton>
+                <MButton Text Class="mr-2" OnClick="()=>ActiveWindow=0" Value="0"> template </MButton>
                 @if (Code != null)
                 {
-                    <MButton Text Class="mr-2" OnClick="()=>_activeWindow=1" Value="1"> code </MButton>
+                    <MButton Text Class="mr-2" OnClick="()=>ActiveWindow=1" Value="1"> code </MButton>
                 }
             </MItemGroup>
             <MDivider></MDivider>
@@ -95,25 +95,12 @@
 
 @code {
     private bool _expend;
-    private int _activeWindow;
 
-    public string ActiveWindow
-    {
-        get
+    public StringNumber ActiveWindow { get; set; } = 0;
 
-        {
-            return _activeWindow.ToString();
-        }
-        set
-        {
+    public bool IsTemplate => ActiveWindow == 0;
 
-            _activeWindow = int.Parse(value);
-        }
-    }
-
-    public bool IsTemplate => _activeWindow == 0;
-
-    public bool IsCode => _activeWindow == 1;
+    public bool IsCode => ActiveWindow == 1;
 
     [Parameter]
     public string ComponentName { get; set; }
