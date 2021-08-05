@@ -1,19 +1,17 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
     public class MChipGroup : MItemGroup
     {
+        [Parameter]
+        public bool Column { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
-            base.InitType("ChipGroup");
+            base.InitType(GroupType.ChipGroup);
             await base.OnInitializedAsync();
         }
 
