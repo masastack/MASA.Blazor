@@ -18,7 +18,7 @@
     </div>
 
     <MDialog Visible="_menuVisible" Width="@("auto")" OutsideClick="OnCancel">
-        <MDatePicker @bind-Value="_dateTime" Style="width:min-content" ActionsStyle="flex-direction:column;">
+        <MDatePicker @bind-Value="_dateTime" Style="width:min-content" ActionsStyle="flex-direction:column;" @attributes="DatePickerAttributes">
             <ActionsContent>
                 @if (Time)
                 {

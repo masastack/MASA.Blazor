@@ -1,6 +1,7 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -59,6 +60,12 @@ namespace MASA.Blazor.Presets
         [Parameter]
         public EventCallback<DateTime> ValueChanged { get; set; }
 
+        [Parameter]
+        public DateTime? Min { get; set; }
+
+        [Parameter]
+        public DateTime? Max { get; set; }
+
         /// <summary>
         /// Determinate whether to show the time picker
         /// </summary>
@@ -73,6 +80,9 @@ namespace MASA.Blazor.Presets
 
         [Parameter]
         public bool Dialog { get; set; }
+
+        [Parameter(CaptureUnmatchedValues = true)]
+        public Dictionary<string, object> DatePickerAttributes { get; set; } = new Dictionary<string, object>();
 
         #region TextField Parameters
 
