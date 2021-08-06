@@ -1,15 +1,17 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
     public partial class MItemGroup : BItemGroup, IThemeable
     {
+        public MItemGroup() : base(GroupType.ItemGroup)
+        {
+        }
+
+        public MItemGroup(GroupType groupType) : base(groupType)
+        {
+        }
 
         [Parameter]
         public bool Dark { get; set; }
