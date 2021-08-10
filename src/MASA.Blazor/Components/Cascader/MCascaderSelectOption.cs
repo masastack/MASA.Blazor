@@ -7,7 +7,7 @@ namespace MASA.Blazor
     internal partial class MCascaderSelectOption : MSelectOption<BCascaderNode, string>
     {
         [Parameter]
-        public EventCallback<MCascaderSelectOption> OnOptionClick { get; set; }
+        public EventCallback<BCascaderNode> OnItemClick { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -17,14 +17,15 @@ namespace MASA.Blazor
                     props[nameof(MListItem.Key)] = Key;
                     props[nameof(MListItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
-                        if (Item.Children == null || Item.Children.Count ==0)
+                        if (Item.Children == null || Item.Children.Count == 0)
                         {
-                            SelectWrapper.SetVisible(false);
+                            await Select.SetSelectedAsync(Label, Value);
+                            Select.SetVisible(false);
                         }
 
-                        if (OnOptionClick.HasDelegate)
+                        if (OnItemClick.HasDelegate)
                         {
-                            await OnOptionClick.InvokeAsync(this);
+                            await OnItemClick.InvokeAsync(Item);
                         }
                     });
                 });

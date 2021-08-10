@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MCascader : MSelect<BCascaderNode, string>
+    public partial class MCascader : MSelect<BCascaderNode, string>, ICascader
     {
         [Parameter]
         public bool IsFull { get; set; }
@@ -49,29 +49,40 @@ namespace MASA.Blazor
         {
             base.SetComponentClass();
 
-            HasBody = true;
             Outlined = true;
             ItemText = r => IsFull ? string.Join('/', r.GetAllNodes().Select(t => t.Label)) : r.Label;
             ItemValue = r => r.Value;
+
+            CssProvider
+                .Apply("cascader-menu-body", styleAction: styleBuilder =>
+                {
+                    styleBuilder
+                        .Add("display: inline-flex");
+                })
+                .Apply("cascader-menu-body-wrap", styleAction: styleBuilder =>
+                {
+                    styleBuilder
+                        .Add("vertical-align: top")
+                        .Add("min-width: 180px")
+                        .Add("background-color: white")
+                        .Add("border-right: 1px solid #f0f0f0");
+                });
 
             AbstractProvider
                 .Merge<BMenu, MCascaderMenu>(props =>
                 {
                     props[nameof(MCascaderMenu.OffsetY)] = true;
-                    props[nameof(MCascaderMenu.ActivatorStyle)] = "display:flex";
                     props[nameof(MCascaderMenu.MinWidth)] = (StringNumber)180;
                     props[nameof(MCascaderMenu.CloseOnContentClick)] = false;
                 })
-                .Apply<ISelectBody, MCascaderSelectBody>(props =>
+                .Apply<BList, MList>()
+                .Apply<BListItemGroup, MListItemGroup>(props =>
                 {
-                    props[nameof(MCascaderSelectBody.Items)] = Items;
-                    props[nameof(MCascaderSelectBody.Visible)] = Visible;
-                    props[nameof(MCascaderSelectBody.OnOptionSelect)] = EventCallback.Factory.Create<MCascaderSelectOption>(this, async option =>
-                    {
-                        await SetSelectedAsync(ItemText(option.Item), option.Value);
-                    });
-                });
-
+                    props[nameof(MListItemGroup.Color)] = "primary";
+                })
+                .Merge<BSelectOption<BCascaderNode, string>, MCascaderSelectOption>()
+                .Merge(typeof(BSelectMenu<,,>), typeof(BCascaderMenu<MCascader>))
+                .Apply(typeof(BCascaderMenuBody<>), typeof(BCascaderMenuBody<MCascader>));
         }
     }
 }

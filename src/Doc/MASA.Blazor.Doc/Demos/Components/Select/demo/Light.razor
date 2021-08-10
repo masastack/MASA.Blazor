@@ -1,3 +1,71 @@
-<div>
-    Todo...
-</div>
+<MCard>
+    <MContainer Fluid>
+        <MRow Align="center">
+            <MCol Cols="12"
+                  Sm="6">
+                <MSelect @bind-Values="values"
+                         Items="items"
+                         Attach
+                         Chips
+                         ItemText="u => u.Label"
+                         ItemValue="u => u.Value"
+                         Label="Chips"
+                         Multiple></MSelect>
+            </MCol>
+            <MCol Cols="12"
+                  Sm="6">
+                <MSelect @bind-Values="values"
+                         Items="items"
+                         Filled
+                         Chips
+                         ItemText="u => u.Label"
+                         ItemValue="u => u.Value"
+                         Label="Chips"
+                         Multiple></MSelect>
+            </MCol>
+            <MCol Cols="12"
+                  Sm="6">
+                <MSelect @bind-Values="values"
+                         Items="items"
+                         Chips
+                         Label="Chips"
+                         ItemText="u => u.Label"
+                         ItemValue="u => u.Value"
+                         Multiple
+                         Outlined></MSelect>
+            </MCol>
+            <MCol Cols="12"
+                  Sm="6">
+                <MSelect @bind-Values="values"
+                         Items="items"
+                         Chips
+                         ItemText="u => u.Label"
+                         ItemValue="u => u.Value"
+                         Label="Chips"
+                         Multiple
+                         Solo></MSelect>
+            </MCol>
+        </MRow>
+    </MContainer>
+</MCard>
+
+@code{
+    private List<string> values = new List<string> { "1" };
+
+    public class Item
+    {
+        public string Label { get; set; }
+        public string Value { get; set; }
+        public Item(string label, string value)
+        {
+            Label = label;
+            Value = value;
+        }
+    }
+
+    List<Item> items = new()
+    {
+            new Item("Item 1", "1"),
+            new Item("Item 2", "2")
+    };
+}

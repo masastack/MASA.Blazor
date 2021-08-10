@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
+    //TODO:该组件需要完善
     public partial class MRadioGroup<TValue> : MInput<TValue>
     {
         [Parameter]
@@ -31,10 +32,15 @@ namespace MASA.Blazor
                         .Add($"{prefix}--radio-group")
                         .AddIf($"{prefix}--radio-group--column", () => Column && !Row)
                         .AddIf($"{prefix}--radio-group--row", () => Row);
-                });
+                })
+                .Apply("radio-group", cssBuilder =>
+                 {
+                     cssBuilder
+                         .Add("m-input--radio-group__input");
+                 });
 
             AbstractProvider
-                .Apply<IInputBody, MRadioGroupInputBody>();
+                .Merge(typeof(BInputDefaultSlot<>), typeof(BRadioGroupDefaultSlot<TValue>));
         }
 
         protected override void OnParametersSet()

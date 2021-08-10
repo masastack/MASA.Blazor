@@ -1,71 +1,160 @@
-using BlazorComponent;
+﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MSelect<TItem, TValue> : BSelect<TItem, TValue>
+    public class MSelect<TItem, TValue> : MTextField<TValue>, ISelect<TItem, TValue>
     {
-        protected HtmlElement _activatorRect = new();
+        private bool _shouldReformatText = true;
 
-        [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
-
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
-
-        public bool IsDark
+        private bool _visible;
+        protected bool Visible
         {
-            get
+            get => MenuProps == null ? _visible : MenuProps.Visible;
+            set
             {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
+                if (MenuProps == null)
+                    _visible = value;
+                else
+                    MenuProps.Visible = value;
             }
-        } 
+        }
 
         [Parameter]
         public StringNumber MinWidth { get; set; }
 
-        private int Width => Visible || _text.Any() ? ComputeLabelLength() * 6 : 0;
+        [Parameter]
+        public bool Multiple { get; set; }
 
-        protected override string LegendStyle => $"width: {Width}px";
+        [Parameter]
+        public override string AppendIcon { get; set; } = "mdi-menu-down";
 
-        protected override Task OnInitializedAsync()
+        [Parameter]
+        public bool Chips { get; set; }
+
+        [Parameter]
+        public BMenuProps MenuProps { get; set; }
+
+        [Parameter]
+        public override TValue Value
         {
-            _icon = "mdi-menu-down";
+            get => base.Value;
+            set
+            {
+                base.Value = value;
 
-            return base.OnInitializedAsync();
+                if (_shouldReformatText && ItemValue != null)
+                    Text = FormatText(value);
+
+                _shouldReformatText = true;
+            }
+        }
+
+        private List<TValue> _values = new();
+
+        [Parameter]
+        public List<TValue> Values
+        {
+            get => _values;
+            set
+            {
+                _values = value ?? new List<TValue>();
+
+                if (_shouldReformatText && ItemValue != null)
+                    Text = FormatText(_values);
+
+                _shouldReformatText = true;
+                NotifyValuesChanged();
+            }
+        }
+
+        [Parameter]
+        public EventCallback<List<TValue>> ValuesChanged { get; set; }
+
+        [Parameter]
+        public Expression<Func<List<TValue>>> ValuesExpression { get; set; }
+
+        [Parameter]
+        public Func<TItem, string> ItemText { get; set; } = null!;
+
+        [Parameter]
+        public Func<TItem, TValue> ItemValue { get; set; } = null!;
+
+        [Parameter]
+        public Func<TItem, bool> ItemDisabled { get; set; } = (item) => false;
+
+        [Parameter]
+        public IReadOnlyList<TItem> Items { get; set; } = new List<TItem>();
+
+        public List<string> Text { get; set; } = new();
+
+        //TODO:menu will change
+        public Func<MouseEventArgs, Task> OnExtraClick { get; set; }
+
+        public override bool IsDirty => Text.Count > 0;
+
+        public FieldIdentifier ValuesFieldIdentifier { get; set; }
+
+        public int HighlightIndex { get; set; } = -1;
+
+        public override Dictionary<string, object> InputAttrs => new()
+        {
+            { "type", Type },
+            //TODO:this may change
+            { "value", Chips ? "" : string.Join(',', FormatText(Value)) },
+            { "readonly", true }
+        };
+
+        public virtual IReadOnlyList<TItem> ComputedItems => Items;
+
+        public string QueryText { get; set; }
+
+        protected virtual List<string> FormatText(TValue value)
+        {
+            //TODO:set default expression
+            if (ItemValue == null || ItemText == null || EqualityComparer<TValue>.Default.Equals(Value, default))
+            {
+                return new List<string>();
+            }
+
+            //why list?
+            return Items
+                .Where(u => ItemValue(u).Equals(value))
+                .Select(ItemText).ToList();
+        }
+
+        protected virtual List<string> FormatText(IEnumerable<TValue> values)
+        {
+            return Items
+                .Where(u => values.Contains(ItemValue(u)))
+                .Select(ItemText).ToList();
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputRef);
+            }
         }
 
         protected override void SetComponentClass()
         {
+            base.SetComponentClass();
+
             CssProvider
-                .AsProvider<BSelect<TItem, TValue>>()
-                .Apply(cssBuilder =>
+                .Merge(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-input m-text-field m-text-field--is-booted m-select")
-                        .AddIf("m-input--is-disabled", () => Disabled)
-                        .AddIf("m-input--dense", () => Dense)
-                        .AddIf("m-input--hide-details", () => string.IsNullOrEmpty(Hint))
-                        .AddIf("m-text-field--enclosed m-text-field--filled", () => Filled)
-                        .AddIf("m-text-field--enclosed m-text-field--outlined", () => Outlined)
-                        .AddIf("m-text-field--enclosed m-text-field--single-line m-text-field--solo", () => Solo)
-                        .AddIf("m-input--is-focused primary--text", () => _focused && !Loading)
+                        .Add("m-select")
                         .AddIf("m-select--is-menu-active", () => Visible)
                         .AddIf("m-select--is-multi", () => Multiple)
                         .AddIf("m-select--chips", () => Chips)
@@ -75,32 +164,10 @@ namespace MASA.Blazor
                     styleBuilder
                         .AddMinWidth(MinWidth);
                 })
-                .Apply("control", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-input__control");
-                })
-                .Apply("slot", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-input__slot");
-                })
                 .Apply("select-slot", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-select__slot");
-                })
-                .Apply("label", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-label")
-                        .AddIf("m-label--active", () => { return Solo ? false : Visible || _text.Any(); })
-                        .AddIf("primary--text", () => { return Solo ? false : _focused; })
-                        .AddTheme(IsDark);
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .Add("left: 0px; right: auto; position: absolute");
                 })
                 .Apply("selector", cssBuilder =>
                 {
@@ -121,11 +188,6 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-input__icon m-input__icon--append");
                 })
-                .Apply("hint", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-text--field__details");
-                })
                 .Apply("selected", cssBuilder =>
                 {
                     cssBuilder
@@ -134,6 +196,10 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
+                .Merge(typeof(BInputDefaultSlot<>), typeof(BSelectDefaultSlot<TItem, TValue>))
+                .Apply(typeof(BSelectHiddenInput<,,>), typeof(BSelectHiddenInput<TItem, TValue, MSelect<TItem, TValue>>))
+                .Apply(typeof(BSelectMenu<,,>), typeof(BSelectMenu<TItem, TValue, MSelect<TItem, TValue>>))
+                .Apply(typeof(BSelectSelections<,,>), typeof(BSelectSelections<TItem, TValue, MSelect<TItem, TValue>>))
                 .Apply<BMenu, MMenu>(props =>
                 {
                     props[nameof(MMenu.Visible)] = Visible;
@@ -145,7 +211,7 @@ namespace MASA.Blazor
                     props[nameof(MMenu.OffsetY)] = MenuProps?.OffsetY;
                     props[nameof(MMenu.OffsetX)] = MenuProps?.OffsetX;
                     props[nameof(MMenu.Block)] = MenuProps?.Block ?? true;
-                    props[nameof(MMenu.CloseOnContentClick)] = !HasBody && !Multiple;
+                    props[nameof(MMenu.CloseOnContentClick)] = false;
                     props[nameof(MMenu.Top)] = MenuProps?.Top;
                     props[nameof(MMenu.Right)] = MenuProps?.Right;
                     props[nameof(MMenu.Bottom)] = MenuProps?.Bottom;
@@ -157,41 +223,167 @@ namespace MASA.Blazor
                     props[nameof(MMenu.NudgeWidth)] = MenuProps?.NudgeWidth;
                     props[nameof(MMenu.MaxHeight)] = MenuProps?.MaxHeight ?? 400;
                     props[nameof(MMenu.MinWidth)] = MenuProps?.MinWidth;
-                })
-                .Apply<BIcon, MIcon>(props =>
-                {
-                    props[nameof(MIcon.Class)] = _focused ? "primary--text" : "";
+                    props[nameof(MMenu.Input)] = true;
+                    props[nameof(MMenu.ActivatorRef)] = InputSlotRef;
                 })
                 .Apply<BList, MList>(props =>
                 {
                     props[nameof(MList.Dense)] = Dense;
                 })
+                .Apply<BListItem, MListItem>()
+                .Apply<BListItemContent, MListItemContent>()
+                .Apply<BListItemTitle, MListItemTitle>()
                 .Apply<BSelectOption<TItem, TValue>, MSelectOption<TItem, TValue>>()
-                .Apply<BChip, MChip>()
-                .Apply<BHintMessage, MHintMessage>();
+                .Apply<BChip, MChip>();
         }
 
-        private int ComputeLabelLength()
+        public void SetOnExtraClick(Func<MouseEventArgs, Task> onExtraClick)
         {
-            if (string.IsNullOrEmpty(Label))
+            OnExtraClick = onExtraClick;
+        }
+
+        protected void NotifyValuesChanged()
+        {
+            if (EditContext != null && ValuesExpression != null)
             {
-                return 0;
+                EditContext.NotifyFieldChanged(ValuesFieldIdentifier);
+            }
+        }
+
+        protected override void OnParametersSet()
+        {
+            if (EditContextChanged)
+            {
+                if (ValuesExpression != null)
+                {
+                    ValuesFieldIdentifier = FieldIdentifier.Create(ValuesExpression);
+                }
             }
 
-            var length = 0;
-            for (int i = 0; i < Label.Length; i++)
+            base.OnParametersSet();
+        }
+
+        public override Task HandleOnBlur(FocusEventArgs args)
+        {
+            SetVisible(false);
+            return base.HandleOnBlur(args);
+        }
+
+        public override async Task HandleOnKeyDown(KeyboardEventArgs args)
+        {
+            switch (args.Code)
             {
-                if (Label[i] > 127)
-                {
-                    length += 2;
-                }
-                else
-                {
-                    length += 1;
-                }
+                case "ArrowUp":
+                    if (HighlightIndex > 0)
+                    {
+                        HighlightIndex--;
+                    }
+                    else
+                    {
+                        HighlightIndex = ComputedItems.Count - 1;
+                    }
+                    break;
+                case "ArrowDown":
+                    if (HighlightIndex < ComputedItems.Count - 1)
+                    {
+                        HighlightIndex++;
+                    }
+                    else
+                    {
+                        HighlightIndex = 0;
+                    }
+                    break;
+                case "Enter":
+                    if (HighlightIndex > -1 && HighlightIndex < ComputedItems.Count)
+                    {
+                        var item = ComputedItems[HighlightIndex];
+
+                        var label = ItemText(item);
+                        var val = ItemValue(item);
+
+                        if (!Multiple)
+                        {
+                            Visible = false;
+                            await SetSelectedAsync(label, val);
+                        }
+                        else
+                        {
+                            if (_values.Contains(val))
+                            {
+                                await RemoveSelectedAsync(label, val);
+                            }
+                            else
+                            {
+                                await SetSelectedAsync(label, val);
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public override async Task HandleOnClick(MouseEventArgs args)
+        {
+            //TODO:menu will change
+            if (OnExtraClick != null && !Readonly)
+            {
+                await OnExtraClick(args);
             }
 
-            return length + 1;
+            //TODO:try focus
+            await InputRef.FocusAsync();
+            await base.HandleOnClick(args);
+        }
+
+        public void SetVisible(bool visible)
+        {
+            Visible = visible;
+            InvokeStateHasChanged();
+        }
+
+        public async Task SetSelectedAsync(string text, TValue value)
+        {
+            _shouldReformatText = false;
+
+            if (Multiple)
+            {
+                if (!_values.Contains(value))
+                {
+                    _values.Add(value);
+                    Text.Add(text);
+                }
+            }
+            else
+            {
+                Value = value;
+                Text.Clear();
+                Text.Add(text);
+            }
+
+            if (ValueChanged.HasDelegate)
+            {
+                await ValueChanged.InvokeAsync(value);
+            }
+
+            if (ValuesChanged.HasDelegate)
+            {
+                await ValuesChanged.InvokeAsync(_values);
+            }
+        }
+
+        public async Task RemoveSelectedAsync(string text, TValue value)
+        {
+            _shouldReformatText = false;
+
+            _values.Remove(value);
+            Text.Remove(text);
+
+            if (ValuesChanged.HasDelegate)
+            {
+                await ValuesChanged.InvokeAsync(_values);
+            }
         }
     }
 }

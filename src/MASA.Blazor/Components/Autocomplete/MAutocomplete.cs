@@ -13,21 +13,7 @@ namespace MASA.Blazor
     {
         private Func<TItem, string, bool> _filter;
 
-        protected List<TItem> FilteredItems => Items.Where(r => string.IsNullOrEmpty(QueryText) || Filter(r, QueryText)).ToList();
-
-        protected int FilteredItemsCount => Items.Count(r => string.IsNullOrEmpty(QueryText) || Filter(r, QueryText));
-
-        protected string QueryText { get; set; }
-
-        protected int HighlightIndex { get; set; } = -1;
-
-        protected TItem SelectedItem { get; set; }
-
-        protected List<TItem> SelectedItems { get; set; }
-
         protected Timer Timer { get; set; }
-
-        protected string WaitingQueryText { get; set; }
 
         [Parameter]
         public Func<TItem, string, bool> Filter
@@ -48,77 +34,17 @@ namespace MASA.Blazor
         }
 
         [Parameter]
-        public EventCallback<string> OnInput { get; set; }
-
-        [Parameter]
         public double Interval { get; set; } = 500;
 
-        protected override void SetComponentClass()
+        public override Dictionary<string, object> InputAttrs => new()
         {
-            base.SetComponentClass();
+            { "type", Type },
+            //TODO:this can be more simple
+            { "value", (Multiple || Chips) ? QueryText : (QueryText ?? string.Join(',', FormatText(Value))) },
+            { "autocomplete", "off" }
+        };
 
-            HasBody = true;
-            IsAutocomplete = true;
-
-            AbstractProvider
-                .Merge<BMenu, MCascaderMenu>(props =>
-                {
-                    props[nameof(MCascaderMenu.OffsetY)] = true;
-                    props[nameof(MCascaderMenu.ActivatorStyle)] = "display:flex";
-                    props[nameof(MCascaderMenu.CloseOnContentClick)] = !Multiple;
-                })
-                .Apply<ISelectBody, MAutocompleteSelectBody<TItem>>(props =>
-                {
-                    props[nameof(MAutocompleteSelectBody<TItem>.Items)] = FilteredItems;
-                    props[nameof(MAutocompleteSelectBody<TItem>.ItemText)] = ItemText;
-                    props[nameof(MAutocompleteSelectBody<TItem>.OnItemClick)] = EventCallback.Factory.Create<TItem>(this, item =>
-                    {
-                        HandleItemClick(item);
-                    });
-                    props[nameof(MAutocompleteSelectBody<TItem>.QueryText)] = QueryText;
-
-                    if (FilteredItemsCount == 1)
-                    {
-                        HighlightIndex = 0;
-                    }
-
-                    props[nameof(MAutocompleteSelectBody<TItem>.HighlightIndex)] = HighlightIndex;
-                    props[nameof(MAutocompleteSelectBody<TItem>.SelectedItem)] = SelectedItem;
-                    props[nameof(MAutocompleteSelectBody<TItem>.Multiple)] = Multiple;
-                    props[nameof(MAutocompleteSelectBody<TItem>.SelectedItems)] = SelectedItems;
-                })
-                .Apply<BProcessLinear, MProcessLinear>(props =>
-                 {
-                     props[nameof(MProcessLinear.Color)] = "primary";
-                     props[nameof(MProcessLinear.Indeterminate)] = true;
-                     props[nameof(MProcessLinear.Absolute)] = true;
-                     props[nameof(MProcessLinear.Height)] = 2;
-                     props[nameof(MProcessLinear.Dark)] = true;
-                 });
-
-            CssProvider
-                .Merge(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-autocomplete");
-                });
-        }
-
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            if (Multiple)
-            {
-                SelectedItems = Items.Where(r => Values.Contains(ItemValue(r))).ToList();
-                _text = SelectedItems.Select(r => ItemText(r)).ToList();
-            }
-            else
-            {
-                SelectedItem = Items.FirstOrDefault(r => EqualityComparer<TValue>.Default.Equals(Value, ItemValue(r)));
-                ValueText = SelectedItem == null ? string.Empty : ItemText(SelectedItem);
-            }
-        }
+        public override IReadOnlyList<TItem> ComputedItems => Items.Where(r => QueryText == null || Filter(r, QueryText)).ToList();
 
         protected override void OnInitialized()
         {
@@ -130,116 +56,64 @@ namespace MASA.Blazor
             }
         }
 
+        protected override void SetComponentClass()
+        {
+            base.SetComponentClass();
+
+            AbstractProvider
+                .Merge<BMenu>(props =>
+                {
+                    props[nameof(MMenu.OffsetY)] = true;
+                });
+
+            CssProvider
+                .Merge(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-autocomplete");
+                })
+                .Apply("mask", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-list-item__mask");
+                });
+        }
+
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            if (WaitingQueryText != null)
+            InvokeAsync(async () =>
             {
-                var waitingQueryText = WaitingQueryText;
-                WaitingQueryText = null;
-                InvokeAsync(async () =>
+                var args = new ChangeEventArgs()
                 {
-                    await OnInput.InvokeAsync(waitingQueryText);
+                    Value = QueryText
+                };
+                await base.HandleOnInput(args);
 
-                    if (WaitingQueryText == null)
-                    {
-                        Timer.Stop();
-                    }
-                });
-            }
+                Timer.Stop();
+            });
         }
 
-        private void HandleItemClick(TItem item)
+        public override async Task HandleOnBlur(FocusEventArgs args)
         {
-            if (Multiple)
-            {
-                if (SelectedItems.Contains(item))
-                {
-                    SelectedItems.Remove(item);
-                    _text.Remove(ItemText(item));
-                }
-                else
-                {
-                    SelectedItems.Add(item);
-                    _text.Add(ItemText(item));
-                }
-            }
-            else
-            {
-                SelectedItem = item;
-                OnBlur();
-            }
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputRef);
-            }
-        }
-
-        protected override async Task Click(MouseEventArgs args)
-        {
-            await base.Click(args);
-            QueryText = string.Empty;
-
-            if (SelectedItem != null)
-            {
-                var activeIndex = FilteredItems.IndexOf(SelectedItem);
-                HighlightIndex = activeIndex;
-            }
-
-            await InputRef.FocusAsync();
-        }
-
-        protected override void HandleOnBlur(FocusEventArgs args)
-        {
-            base.HandleOnBlur(args);
-            OnBlur();
-        }
-
-        protected void OnBlur()
-        {
+            QueryText = default;
             HighlightIndex = -1;
-            ValueText = SelectedItem == null ? string.Empty : ItemText(SelectedItem);
-            Visible = false;
-
-            if (Multiple)
-            {
-                Values = SelectedItems.Select(r => ItemValue(r)).ToList();
-                if (ValuesChanged.HasDelegate)
-                {
-                    ValuesChanged.InvokeAsync(Values);
-                }
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(ValueText))
-                {
-                    Value = default;
-                }
-                else
-                {
-                    Value = ItemValue(SelectedItem);
-                }
-
-                if (ValueChanged.HasDelegate)
-                {
-                    ValueChanged.InvokeAsync(Value);
-                }
-            }
+            await base.HandleOnBlur(args);
         }
 
-        protected override async Task HandleOnInputAsync(ChangeEventArgs args)
+        public override Task HandleOnChange(ChangeEventArgs args)
         {
-            ValueText = args.Value.ToString();
-            QueryText = ValueText;
+            QueryText = args.Value.ToString();
+            return Task.CompletedTask;
+        }
+
+        public override async Task HandleOnInput(ChangeEventArgs args)
+        {
+            QueryText = args.Value.ToString();
             HighlightIndex = -1;
             Visible = true;
 
             if (OnInput.HasDelegate)
             {
-                WaitingQueryText = QueryText;
                 if (Timer != null && Interval > 0)
                 {
                     if (!Timer.Enabled)
@@ -255,61 +129,45 @@ namespace MASA.Blazor
                 }
                 else
                 {
-                    await OnInput.InvokeAsync(WaitingQueryText);
+                    await base.HandleOnInput(args);
                 }
             }
-
-            await base.HandleOnInputAsync(args);
         }
 
-        protected override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+        public override async Task HandleOnKeyDown(KeyboardEventArgs args)
         {
+            await base.HandleOnKeyDown(args);
+
             switch (args.Code)
             {
-                case "ArrowUp":
-                    if (HighlightIndex > 0)
-                    {
-                        HighlightIndex--;
-                    }
-                    else
-                    {
-                        HighlightIndex = FilteredItemsCount - 1;
-                    }
-                    break;
-                case "ArrowDown":
-                    if (HighlightIndex < FilteredItemsCount - 1)
-                    {
-                        HighlightIndex++;
-                    }
-                    else
-                    {
-                        HighlightIndex = 0;
-                    }
-                    break;
                 case "Enter":
-                    Visible = true;
-
-                    if (HighlightIndex > -1 && HighlightIndex < FilteredItemsCount)
+                    if (!Multiple)
                     {
-                        await Task.Yield();
-                        HandleItemClick(FilteredItems[HighlightIndex]);
+                        QueryText = null;
                     }
                     break;
                 case "Backspace":
+                    Visible = true;
                     if (Multiple)
                     {
-                        if (string.IsNullOrEmpty(ValueText) && SelectedItems.Count > 0)
+                        if (Values.Count > 0 && string.IsNullOrEmpty(QueryText))
                         {
-                            var lastIndex = SelectedItems.Count - 1;
-                            SelectedItems.RemoveAt(lastIndex);
-                            _text.RemoveAt(lastIndex);
+                            Values.RemoveAt(Values.Count - 1);
+                            if (ValuesChanged.HasDelegate)
+                            {
+                                await ValuesChanged.InvokeAsync(Values);
+                            }
                         }
                     }
                     else
                     {
-                        if (ValueText.Length == 1)
+                        if (Chips && !EqualityComparer<TValue>.Default.Equals(Value, default) && string.IsNullOrEmpty(QueryText))
                         {
-                            SelectedItem = default;
+                            Value = default;
+                            if (ValueChanged.HasDelegate)
+                            {
+                                await ValueChanged.InvokeAsync(Value);
+                            }
                         }
                     }
                     break;

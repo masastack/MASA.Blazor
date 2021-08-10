@@ -59,7 +59,7 @@ namespace MASA.Blazor
         public bool Top { get; set; }
 
         [Parameter]
-        public int Height { get; set; } = 4;
+        public StringNumber Height { get; set; } = 4;
 
         [Parameter]
         public bool Active { get; set; } = true;
@@ -88,7 +88,7 @@ namespace MASA.Blazor
                     styleBuilder
                         .AddIf("bottom:0", () => Bottom)
                         .AddIf("top:0", () => Top)
-                        .AddIf(() => $"height:{Height}px", () => Active);
+                        .AddIf(() => $"height:{Height.ToUnit()}", () => Active);
                 })
                 .Apply("stream", cssBuilder =>
                  {

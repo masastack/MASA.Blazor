@@ -17,24 +17,31 @@ namespace MASA.Blazor
                     props[nameof(MListItem.Link)] = true;
                     props[nameof(MListItem.IsActive)] = Selected;
                     props[nameof(MListItem.Disabled)] = Disabled;
+                    props[nameof(MListItem.Highlighted)] = Highlighted;
 
                     if (!Disabled) props[nameof(MListItem.Color)] = "primary";
 
                     props[nameof(MListItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async (args) =>
                     {
-                        if (!SelectWrapper.Multiple)
+                        if (Disabled)
                         {
-                            await SelectWrapper.SetSelectedAsync(Label, Value);
+                            return;
+                        }
+
+                        if (!Select.Multiple)
+                        {
+                            Select.SetVisible(false);
+                            await Select.SetSelectedAsync(Label, Value);
                         }
                         else
                         {
                             if (Selected)
                             {
-                                await SelectWrapper.RemoveSelectedAsync(Label, Value);
+                                await Select.RemoveSelectedAsync(Label, Value);
                             }
                             else
                             {
-                                await SelectWrapper.SetSelectedAsync(Label, Value);
+                                await Select.SetSelectedAsync(Label, Value);
                             }
                         }
                     });

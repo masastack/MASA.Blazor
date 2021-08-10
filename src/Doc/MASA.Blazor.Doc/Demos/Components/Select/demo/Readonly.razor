@@ -1,3 +1,30 @@
-<div>
-    Todo...
-</div>
+<MRow Align="center">
+    <MCol Cols="12">
+        <MSelect Items="items"
+                 @bind-Value="e1"
+                 ItemText="u => u.Label"
+                 ItemValue="u => u.Value"
+                 Readonly
+                 Label="Read-only"></MSelect>
+    </MCol>
+</MRow>
+
+@code{
+    private string e1;
+    public class Item
+    {
+        public string Label { get; set; }
+        public string Value { get; set; }
+        public Item(string label, string value)
+        {
+            Label = label;
+            Value = value;
+        }
+    }
+
+    List<Item> items = new()
+    {
+            new Item("Item 1", "1"),
+            new Item("Item 2", "2")
+    };
+}

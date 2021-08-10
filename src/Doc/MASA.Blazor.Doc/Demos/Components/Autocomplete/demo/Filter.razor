@@ -24,15 +24,16 @@
     </MToolbar>
     <MCardText>
         <MTextField TValue="string"
+                    Disabled="!_isEditing"
                     Color="white"
                     Label="Name"></MTextField>
         <MAutocomplete Disabled="!_isEditing"
                        TItem="Item"
-                       TValue="int"
+                       TValue="string"
                        Items="_states"
                        Filter="CustomFilter"
                        ItemText="r=>r.Name"
-                       ItemValue="r=>r.Id"
+                       ItemValue="r=>r.Abbr"
                        Label="State"></MAutocomplete>
     </MCardText>
     <MDivider></MDivider>

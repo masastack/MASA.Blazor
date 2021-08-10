@@ -40,8 +40,10 @@ namespace MASA.Blazor
             }
         } 
 
+        //TODO:for
+
         [Parameter]
-        public StringNumber Left { get; set; }
+        public StringNumber Left { get; set; } = 0;
 
         [Parameter]
         public StringNumber Right { get; set; } = "auto";
@@ -50,32 +52,33 @@ namespace MASA.Blazor
         public bool Absolute { get; set; }
 
         [Parameter]
-        public bool IsActive { get; set; }
+        public bool Focused { get; set; }
 
         [Parameter]
-        public bool IsFocused { get; set; }
+        public string Color { get; set; } = "primary";
 
         [Parameter]
-        public string Color { get; set; }
+        public bool Value { get; set; }
 
         protected override void SetComponentClass()
         {
             var prefix = "m-label";
             CssProvider
-                .Apply<BLabel>(cssBuilder =>
+                .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .Add(prefix)
-                        .AddIf($"{prefix}--active", () => IsActive)
+                        .AddIf($"{prefix}--active", () => Value)
                         .AddIf($"{prefix}--is-disabled", () => Disabled)
                         .AddTheme(IsDark)
-                        .AddTextColor(Color, () => IsFocused);
+                        .AddTextColor(Color, () => Focused);
                 }, styleBuilder =>
                 {
                     styleBuilder
                         .Add(() => $"left:{Left.ToUnit()}")
                         .Add(() => $"right:{Right.ToUnit()}")
-                        .Add(() => $"position:{(Absolute ? "absolute" : "relative")}");
+                        .Add(() => $"position:{(Absolute ? "absolute" : "relative")}")
+                        .AddTextColor(Color, () => Focused);
                 });
         }
     }

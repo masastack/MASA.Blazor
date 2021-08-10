@@ -15,70 +15,12 @@ namespace MASA.Blazor
     public partial class MInput<TValue> : BInput, IThemeable
     {
         private NullableValue<TValue> _value;
-        private EditContext _oldContext;
+        private EditContext _oldEditContext;
+        private bool _isFocused;
 
-        [Parameter]
-        public TValue Value
-        {
-            get
-            {
-                return _value;
-            }
-            set
-            {
-                if (_value != value)
-                {
-                    _value = value;
-
-                    if (EditContext != null && ValueExpression != null)
-                    {
-                        EditContext.NotifyFieldChanged(FieldIdentifier);
-                    }
-                }
-            }
-        }
-
-        [Parameter]
-        public EventCallback<TValue> ValueChanged { get; set; }
-
-        [Parameter]
-        public Expression<Func<TValue>> ValueExpression { get; set; }
-
-        protected FieldIdentifier FieldIdentifier { get; set; }
-
-        [CascadingParameter]
-        public EditContext EditContext { get; set; }
-
-        [Parameter]
-        public bool IsDisabled { get; set; }
-
-        [Parameter]
-        public bool IsFocused { get; set; }
-
-        [Parameter]
-        public bool Loading { get; set; }
-
-        [Parameter]
-        public bool IsReadonly { get; set; }
-
-        [Parameter]
-        public bool Dense { get; set; }
-
-        [Parameter]
-        public StringNumber Height { get; set; }
-
-        public bool HasState
-        {
-            get
-            {
-                if (IsDisabled)
-                {
-                    return false;
-                }
-
-                return HasError;
-            }
-        }
+        ////TODO:props
+        //[Parameter]
+        //public RenderFragment MessageContent { get; set; }
 
         [Parameter]
         public string Color { get; set; }
@@ -86,22 +28,9 @@ namespace MASA.Blazor
         [Parameter]
         public string BackgroundColor { get; set; }
 
-        [Parameter]
-        public bool PersistentPlaceholder { get; set; }
+        public virtual string ComputedColor => IsDisabled ? "" : Color ?? (Dark ? "white" : "primary");
 
-        protected bool IsActive { get; set; }
-
-        protected virtual bool IsDirty => Convert.ToString(_value).Length > 0;
-
-        public bool LabelValue => IsFocused || IsLabelActive || PersistentPlaceholder;
-
-        public bool IsLabelActive => IsDirty;
-
-        public string ComputedColor => IsDisabled ? "" : Color ?? (Dark ? "white" : "primary");
-
-        public bool HasError => Messages?.Count > 0;
-
-        public string ValidationState
+        public virtual string ValidationState
         {
             get
             {
@@ -112,12 +41,21 @@ namespace MASA.Blazor
 
                 if (HasError)
                 {
+                    //TODO:shouldValidate
                     return "error";
                 }
+
+                //TODO:success
 
                 return ComputedColor;
             }
         }
+
+        [Parameter]
+        public bool Dense { get; set; }
+
+        [Parameter]
+        public StringNumber Height { get; set; }
 
         [Parameter]
         public bool Dark { get; set; }
@@ -128,7 +66,7 @@ namespace MASA.Blazor
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
 
-        public bool IsDark
+        public virtual bool IsDark
         {
             get
             {
@@ -144,10 +82,126 @@ namespace MASA.Blazor
 
                 return Themeable != null && Themeable.IsDark;
             }
-        } 
+        }
+
+        [Parameter]
+        public virtual TValue Value
+        {
+            get
+            {
+                return _value;
+            }
+            set
+            {
+                if (_value != value)
+                {
+                    _value = value;
+                    NotifyValueChanged();
+                }
+            }
+        }
+
+        [Parameter]
+        public EventCallback<TValue> ValueChanged { get; set; }
+
+        [Parameter]
+        public Expression<Func<TValue>> ValueExpression { get; set; }
+
+        [CascadingParameter]
+        public EditContext EditContext { get; set; }
+
+        [Parameter]
+        public bool Disabled { get; set; }
+
+        [Parameter]
+        public StringBoolean Loading { get; set; } = false;
+
+        [Parameter]
+        public bool Readonly { get; set; }
+
+        [CascadingParameter]
+        public BForm Form { get; set; }
+
+        [Parameter]
+        public string Hint { get; set; }
+
+        [Parameter]
+        public bool PersistentHint { get; set; }
+
+        protected FieldIdentifier ValueIdentifier { get; set; }
+
+        protected bool EditContextChanged => _oldEditContext != EditContext;
+
+        public virtual bool IsReadonly => Readonly || (Form != null && Form.Readonly);
+
+        public virtual bool IsFocused
+        {
+            get
+            {
+                return _isFocused;
+            }
+            set
+            {
+                if (_isFocused != value)
+                {
+                    _isFocused = value;
+                    StateHasChanged();
+                }
+            }
+        }
+
+        public virtual bool IsDirty => Convert.ToString(_value).Length > 0;
+
+        public virtual bool IsLabelActive => IsDirty;
+
+        public virtual bool HasState
+        {
+            get
+            {
+                if (IsDisabled)
+                {
+                    return false;
+                }
+
+                return HasError;
+            }
+        }
+
+        public virtual bool IsDisabled => Disabled || (Form != null && Form.Disabled);
+
+        public virtual bool HasError => Messages?.Count > 0;
+
+        //TODO:
+        public virtual bool HasMessages => false;
+
+        public virtual bool HasHint => !HasMessages && Hint != null && (PersistentHint || IsFocused);
+
+        public virtual List<string> MessagesToDisplay
+        {
+            get
+            {
+                if (HasHint)
+                {
+                    return new List<string>
+                    {
+                        Hint
+                    };
+                }
+
+                //TODO:
+                //if (!HasMessages)
+                //{
+                //    return new List<string>();
+                //}
+
+                return Messages;
+            }
+        }
 
         protected override void SetComponentClass()
         {
+            base.SetComponentClass();
+
             var prefix = "m-input";
             CssProvider
                 .Apply(cssBuilder =>
@@ -156,41 +210,41 @@ namespace MASA.Blazor
                         .Add(prefix)
                         .AddIf($"{prefix}--has-state", () => HasState)
                         .AddIf($"{prefix}--hide-details", () => !ShowDetails)
-                        .AddIf($"{prefix}--is-label-active", () => IsDirty)
+                        .AddIf($"{prefix}--is-label-active", () => IsLabelActive)
                         .AddIf($"{prefix}--is-dirty", () => IsDirty)
                         .AddIf($"{prefix}--is-disabled", () => IsDisabled)
                         .AddIf($"{prefix}--is-focused", () => IsFocused)
-                        .AddIf($"{prefix}--is-loading", () => Loading)
+                        .AddIf($"{prefix}--is-loading", () => Loading != false && Loading != null)
                         .AddIf($"{prefix}--is-readonly", () => IsReadonly)
                         .AddIf($"{prefix}--dense", () => Dense)
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark)
+                        .AddTextColor(ValidationState);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddTextColor(ValidationState);
                 })
-                .Apply("prepend", cssBuilder =>
+                .Apply("prepend-outer", cssBuilder =>
                 {
                     cssBuilder
                         .Add($"{prefix}__prepend-outer");
                 })
-                .Apply("append", cssBuilder =>
+                .Apply("prepend-icon", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input__icon")
+                        .Add("m-input__icon--prepend");
+                })
+                .Apply("append-outer", cssBuilder =>
                 {
                     cssBuilder
                         .Add($"{prefix}__append-outer");
                 })
-                .Apply("append-inner", cssBuilder =>
+                .Apply("append-icon", cssBuilder =>
                 {
                     cssBuilder
-                        .Add($"{prefix}__append-inner");
-                })
-                .Apply("icon-clearable", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add($"{prefix}__icon")
-                        .Add($"{prefix}__icon--clear");
-                })
-                .Apply("icon", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add($"{prefix}__icon")
-                        .Add($"{prefix}__icon--append");
+                        .Add("m-input__icon")
+                        .Add("m-input__icon--append");
                 })
                 .Apply("control", cssBuilder =>
                 {
@@ -200,36 +254,56 @@ namespace MASA.Blazor
                 .Apply("input-slot", cssBuilder =>
                 {
                     cssBuilder
-                        .Add($"{prefix}__slot");
+                        .Add($"{prefix}__slot")
+                        .AddBackgroundColor(BackgroundColor);
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddHeight(Height);
+                        .AddHeight(Height)
+                        .AddBackgroundColor(BackgroundColor);
                 });
 
             AbstractProvider
-                .Apply<BMessage, MMessage>(properties =>
+                .Apply(typeof(BInputContent<>), typeof(BInputContent<MInput<TValue>>))
+                .Apply(typeof(BInputPrependSlot<>), typeof(BInputPrependSlot<MInput<TValue>>))
+                .Apply(typeof(BInputSlot<>), typeof(BInputSlot<MInput<TValue>>))
+                .Apply(typeof(BInputIcon<>), typeof(BInputIcon<MInput<TValue>>))
+                .Apply<BIcon, MIcon>("prepend-icon", props =>
                 {
-                    properties[nameof(MMessage.Color)] = ValidationState;
-                    properties[nameof(MMessage.Value)] = Messages;
+                    props[nameof(MIcon.Color)] = ValidationState;
+                    props[nameof(MIcon.Dark)] = Dark;
+                    props[nameof(MIcon.Disabled)] = Disabled;
+                    props[nameof(MIcon.Light)] = Light;
                 })
-                .Apply<BIcon, MIcon>(properties =>
+                .Apply(typeof(BInputControl<>), typeof(BInputControl<MInput<TValue>>))
+                .Apply(typeof(BInputInputSlot<>), typeof(BInputInputSlot<MInput<TValue>>))
+                .Apply(typeof(BInputDefaultSlot<>), typeof(BInputDefaultSlot<MInput<TValue>>))
+                .Apply(typeof(BInputLabel<>), typeof(BInputLabel<MInput<TValue>>))
+                .Apply<BLabel, MLabel>(props =>
                 {
-                    properties[nameof(MIcon.Tag)] = IconTag.I;
+                    props[nameof(MLabel.Color)] = ValidationState;
+                    props[nameof(MLabel.Dark)] = Dark;
+                    props[nameof(MLabel.Disabled)] = IsDisabled;
+                    props[nameof(MLabel.Focused)] = HasState;
+                    //TODO:for
+                    props[nameof(MLabel.Light)] = Light;
                 })
-                .Apply<BIcon, MIcon>("clearable", properties =>
+                .Apply(typeof(BInputMessages<>), typeof(BInputMessages<MInput<TValue>>))
+                .Apply<BMessages, MMessages>(props =>
                 {
-                    properties[nameof(MIcon.Tag)] = IconTag.I;
-                    properties[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
-                    {
-                        if (ValueChanged.HasDelegate)
-                            await ValueChanged.InvokeAsync(default);
-                        else
-                            Value = default;
-
-                        if (OnClearClick.HasDelegate)
-                            await OnClearClick.InvokeAsync();
-                    });
+                    props[nameof(MMessages.Color)] = HasHint ? "" : ValidationState;
+                    props[nameof(MMessages.Value)] = MessagesToDisplay;
+                    props[nameof(MMessages.Dark)] = Dark;
+                    props[nameof(MMessages.Light)] = Light;
+                    //TODO:添加插槽
+                })
+                .Apply(typeof(BInputAppendSlot<>), typeof(BInputAppendSlot<MInput<TValue>>))
+                .Apply<BIcon, MIcon>("append-icon", props =>
+                {
+                    props[nameof(MIcon.Color)] = ValidationState;
+                    props[nameof(MIcon.Dark)] = Dark;
+                    props[nameof(MIcon.Disabled)] = Disabled;
+                    props[nameof(MIcon.Light)] = Light;
                 });
         }
 
@@ -237,37 +311,45 @@ namespace MASA.Blazor
         {
             base.OnParametersSet();
 
-            if (_oldContext != EditContext)
+            if (EditContextChanged)
             {
-                if (_oldContext != null)
+                if (_oldEditContext != null)
                 {
-                    _oldContext.OnValidationStateChanged -= EditContext_OnValidationStateChanged;
+                    _oldEditContext.OnValidationStateChanged -= EditContext_OnValidationStateChanged;
                 }
 
                 if (ValueExpression != null)
                 {
-                    FieldIdentifier = FieldIdentifier.Create(ValueExpression);
+                    ValueIdentifier = FieldIdentifier.Create(ValueExpression);
                     EditContext.OnValidationStateChanged += EditContext_OnValidationStateChanged;
                 }
 
-                _oldContext = EditContext;
+                _oldEditContext = EditContext;
             }
         }
 
         private void EditContext_OnValidationStateChanged(object sender, ValidationStateChangedEventArgs e)
         {
-            Messages = EditContext.GetValidationMessages(FieldIdentifier).ToList();
+            Messages = EditContext.GetValidationMessages(ValueIdentifier).ToList();
             StateHasChanged();
+        }
+
+        protected void NotifyValueChanged()
+        {
+            if (EditContext != null && ValueExpression != null)
+            {
+                EditContext.NotifyFieldChanged(ValueIdentifier);
+            }
         }
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
-
             if (EditContext != null)
             {
                 EditContext.OnValidationStateChanged -= EditContext_OnValidationStateChanged;
             }
+
+            base.Dispose(disposing);
         }
     }
 }

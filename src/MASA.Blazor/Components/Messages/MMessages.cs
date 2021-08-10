@@ -8,9 +8,8 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MMessage : BMessage,IThemeable
+    public partial class MMessages : BMessages,IThemeable
     {
-
         [Parameter]
         public bool Dark { get; set; }
 
@@ -45,7 +44,7 @@ namespace MASA.Blazor
         {
             var prefix = "m-messages";
             CssProvider
-                .AsProvider<BMessage>()
+                .AsProvider<BMessages>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

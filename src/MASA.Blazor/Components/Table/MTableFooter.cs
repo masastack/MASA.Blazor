@@ -64,7 +64,7 @@ namespace MASA.Blazor.Components.Table
                     properties[nameof(MTableFooterButton.HandlePageChange)] = OnNextClick;
                     properties[nameof(MTableFooterButton.Disabled)] = NextDisabled;
                 })
-                .Apply<BSelect<string, string>, MSelect<string, string>>(props =>
+                .Apply<BInput, MSelect<string, string>>(props =>
                 {
                     props[nameof(MSelect<string, string>.Items)] = new List<string>
                     {

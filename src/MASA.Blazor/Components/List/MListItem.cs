@@ -89,6 +89,9 @@ namespace MASA.Blazor
         [CascadingParameter]
         public BListGroup ListGroup { get; set; }
 
+        [Parameter]
+        public bool Highlighted { get; set; }
+
         private void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
             if (!string.IsNullOrEmpty(Href) && MatchUrl(Href, e.Location) && List != null)
@@ -169,7 +172,8 @@ namespace MASA.Blazor
 
                             return Group.Value == Key;
                         })
-                        .AddColor(Color, true)
+                        .AddIf("m-list-item--highlighted", () => Highlighted)
+                        .AddTextColor(Color)
                         .AddTheme(IsDark);
                 });
         }

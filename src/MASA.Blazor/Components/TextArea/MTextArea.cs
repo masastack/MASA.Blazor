@@ -16,8 +16,17 @@ namespace MASA.Blazor
         [Parameter]
         public bool NoResize { get; set; }
 
+        //TODO:rowHeight
+
         [Parameter]
         public int Rows { get; set; } = 5;
+
+        public override string Tag => "textarea";
+
+        public override Dictionary<string, object> InputAttrs => new()
+        {
+            { "rows", Rows }
+        };
 
         protected override void SetComponentClass()
         {
@@ -32,13 +41,8 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--auto-grow", () => AutoGrow)
                         .AddIf($"{prefix}--no-resize", () => AutoGrow || NoResize);
                 });
-
-            AbstractProvider
-                .Merge<IInputBody>(properties =>
-                {
-                    properties[nameof(MInputBody<string>.Rows)] = Rows;
-                    properties[nameof(MInputBody<string>.IsTextArea)] = true;
-                });
         }
+
+        //TODO:oninput
     }
 }

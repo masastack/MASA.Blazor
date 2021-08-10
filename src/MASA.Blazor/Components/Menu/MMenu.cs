@@ -26,6 +26,12 @@ namespace MASA.Blazor
         [Parameter]
         public bool Dark { get; set; }
 
+        [Parameter]
+        public ElementReference ActivatorRef { get; set; }
+
+        //TODO:menu将会改进
+        public ElementReference ComputedRef => Input ? ActivatorRef : Ref;
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -35,7 +41,7 @@ namespace MASA.Blazor
                 _window = await JsInvokeAsync<Window>(JsInteropConstants.GetWindow);
                 DomEventJsInterop.AddEventListener<Window>("window", "resize", OnResize, false);
 
-                DomEventJsInterop.ResizeObserver<Dimensions[]>(Ref, ObserveSizeChange);
+                DomEventJsInterop.ResizeObserver<Dimensions[]>(ComputedRef, ObserveSizeChange);
 
                 await OptimizPosition();
             }
@@ -63,7 +69,7 @@ namespace MASA.Blazor
 
             _bodyRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo);
 
-            _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
+            _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, ComputedRef);
 
             _contentRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetFirstChildDomInfo, ContentRef, ".m-application");
 
@@ -171,6 +177,7 @@ namespace MASA.Blazor
                                 _visible = false;
                         }
                     });
+                    props[nameof(MPopover.PreventDefault)] = Input;
                 })
                 .Apply<BOverlay, MOverlay>(props =>
                 {
