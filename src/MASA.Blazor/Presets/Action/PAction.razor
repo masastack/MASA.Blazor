@@ -1,0 +1,44 @@
+﻿@namespace MASA.Blazor.Presets
+@inherits BDomComponentBase
+
+<div style="width:100%" @ref="Ref">
+    <MTooltip Disabled="TooltipDisabled" ActivatorStyle="@ActivatorStyle">
+        <ActivatorContent>
+            <MButton Color="@Color"
+                     Icon="@(_actionType == ActionTypes.Icon)"
+                     Fab="@Fab"
+                     Plain="@Plain"
+                     Text="@Text"
+                     Tile="@Tile"
+                     Rounded="@Rounded"
+                     Depressed="@Depressed"
+                     Outlined="@Outlined"
+                     Loading="@Loading"
+                     Disabled="Disabled"
+                     XSmall="@XSmall"
+                     Small="@Small"
+                     Large="@Large"
+                     XLarge="@XLarge"
+                     Click="HandleClick"
+                     Style="@ActivatorStyle"
+                     @attributes="Attributes">
+                @switch (_actionType)
+                {
+                    case ActionTypes.Icon:
+                        <MIcon>@Icon</MIcon>
+                        break;
+                    case ActionTypes.Label:
+                        @Label
+                        break;
+                    default:
+                        <MIcon Left>@Icon</MIcon>
+                        @Label
+                        break;
+                }
+            </MButton>
+        </ActivatorContent>
+        <ChildContent>
+            @(Tip ?? Label)
+        </ChildContent>
+    </MTooltip>
+</div>
