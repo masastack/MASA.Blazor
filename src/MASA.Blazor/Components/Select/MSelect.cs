@@ -385,5 +385,18 @@ namespace MASA.Blazor
                 await ValuesChanged.InvokeAsync(_values);
             }
         }
+
+        protected override void OnValidationStateChanged(object sender, ValidationStateChangedEventArgs e)
+        {
+            if (Multiple)
+            {
+                Messages = EditContext.GetValidationMessages(ValuesFieldIdentifier).ToList();
+                StateHasChanged();
+            }
+            else
+            {
+                base.OnValidationStateChanged(sender, e);
+            }
+        }
     }
 }

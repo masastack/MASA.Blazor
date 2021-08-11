@@ -28,8 +28,8 @@
         public decimal Price { get; set; }
         [Required]
         public string Type { get; set; }
-        [MinLength(1)]
-        public List<string> Types{ get; set; }
+        [Required]
+        public List<string> Types { get; set; }
     }
 
     private Order _order = new();

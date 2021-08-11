@@ -315,20 +315,20 @@ namespace MASA.Blazor
             {
                 if (_oldEditContext != null)
                 {
-                    _oldEditContext.OnValidationStateChanged -= EditContext_OnValidationStateChanged;
+                    _oldEditContext.OnValidationStateChanged -= OnValidationStateChanged;
                 }
 
                 if (ValueExpression != null)
                 {
                     ValueIdentifier = FieldIdentifier.Create(ValueExpression);
-                    EditContext.OnValidationStateChanged += EditContext_OnValidationStateChanged;
                 }
 
+                EditContext.OnValidationStateChanged += OnValidationStateChanged;
                 _oldEditContext = EditContext;
             }
         }
 
-        private void EditContext_OnValidationStateChanged(object sender, ValidationStateChangedEventArgs e)
+        protected virtual void OnValidationStateChanged(object sender, ValidationStateChangedEventArgs e)
         {
             Messages = EditContext.GetValidationMessages(ValueIdentifier).ToList();
             StateHasChanged();
@@ -346,7 +346,7 @@ namespace MASA.Blazor
         {
             if (EditContext != null)
             {
-                EditContext.OnValidationStateChanged -= EditContext_OnValidationStateChanged;
+                EditContext.OnValidationStateChanged -= OnValidationStateChanged;
             }
 
             base.Dispose(disposing);
