@@ -11,7 +11,7 @@ packer:
   image: proget-hz.lonsid.cn/masa-images/dotnet/sdk:6.0
   stage: packer
   only:
-    - branches
+    - develop
   script:
     - git clone -b develop http://gitlab-hz.lonsid.cn/MASA-Stack/Framework/BlazorComponent.git ./src/BlazorComponent
     - dotnet build src
@@ -23,13 +23,11 @@ packer:
       - ./src/BlazorComponent
   retry: 2
 
-
-
 docker:
   image: docker:17.05.0
   stage: docker
   only:
-    - branches
+    - develop
   services:
     - name: proget-hz.lonsid.cn/masa-images/library/docker:17.05.01-dind
   script:
@@ -42,8 +40,7 @@ deploy:
   image: proget-hz.lonsid.cn/masa-images/library/kubectl:1.17.2-newack
   stage: deploy
   only:
-    - branches
+    - develop
   script:
     - kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
   retry: 2
-
