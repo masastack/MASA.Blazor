@@ -330,8 +330,11 @@ namespace MASA.Blazor
 
         protected virtual void OnValidationStateChanged(object sender, ValidationStateChangedEventArgs e)
         {
-            Messages = EditContext.GetValidationMessages(ValueIdentifier).ToList();
-            StateHasChanged();
+            if (ValueExpression != null)
+            {
+                Messages = EditContext.GetValidationMessages(ValueIdentifier).ToList();
+                StateHasChanged();
+            }
         }
 
         protected void NotifyValueChanged()

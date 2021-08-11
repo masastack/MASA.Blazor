@@ -120,7 +120,7 @@ namespace MASA.Blazor
         protected virtual List<string> FormatText(TValue value)
         {
             //TODO:set default expression
-            if (ItemValue == null || ItemText == null || EqualityComparer<TValue>.Default.Equals(Value, default))
+            if (ItemValue == null || ItemText == null)
             {
                 return new List<string>();
             }
@@ -388,7 +388,7 @@ namespace MASA.Blazor
 
         protected override void OnValidationStateChanged(object sender, ValidationStateChangedEventArgs e)
         {
-            if (Multiple)
+            if (Multiple && ValuesExpression != null)
             {
                 Messages = EditContext.GetValidationMessages(ValuesFieldIdentifier).ToList();
                 StateHasChanged();
