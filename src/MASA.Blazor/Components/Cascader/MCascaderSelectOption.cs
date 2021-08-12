@@ -1,13 +1,17 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System.Collections.Generic;
 
 namespace MASA.Blazor
 {
-    internal partial class MCascaderSelectOption : MSelectOption<BCascaderNode, string>
+    internal partial class MCascaderSelectOption<TItem, TValue> : MSelectOption<TItem, TValue>
     {
         [Parameter]
-        public EventCallback<BCascaderNode> OnItemClick { get; set; }
+        public EventCallback<TItem> OnItemClick { get; set; }
+
+        [Parameter]
+        public List<TItem> Children { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -17,7 +21,7 @@ namespace MASA.Blazor
                     props[nameof(MListItem.Key)] = Key;
                     props[nameof(MListItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
-                        if (Item.Children == null || Item.Children.Count == 0)
+                        if (Children == null || Children.Count == 0)
                         {
                             await Select.SetSelectedAsync(Label, Value);
                             Select.SetVisible(false);
@@ -30,8 +34,9 @@ namespace MASA.Blazor
                     });
                 });
 
+            Icon = Children != null && Children.Count > 0 ? "mdi-chevron-right" : string.Empty;
+
             base.SetComponentClass();
-            Icon = Item.Children != null && Item.Children.Count > 0 ? "mdi-chevron-right" : string.Empty;
         }
     }
 }

@@ -1,57 +1,27 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MCascader : MSelect<BCascaderNode, string>, ICascader
+    public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue>, ICascader<TItem, TValue>
     {
         [Parameter]
         public bool IsFull { get; set; }
 
-        private BCascaderNode GetNodeByValue(IEnumerable<BCascaderNode> items, string value)
+        [Parameter]
+        public Func<TItem, List<TItem>> ItemChildren { get; set; }
+
+        protected override List<string> FormatText(TValue value)
         {
-            BCascaderNode result = null;
-
-            foreach (var item in items)
-            {
-                if (result != null) break;
-
-                if (item.Value == value)
-                {
-                    result = item;
-                    break;
-                }
-                else if (item.Children != null)
-                {
-                    result = GetNodeByValue(item.Children, value);
-                }
-            }
-
-            return result;
-        }
-
-        protected override List<string> FormatText(string value)
-        {
-            var list = new List<string>();
-            var result = GetNodeByValue(Items, value);
-
-            if (result != null)
-                list.Add(ItemText(result));
-
-            return list;
+            return new List<string> { string.Join("/", GetItemByValue(Items, value, IsFull).Select(ItemText)) };
         }
 
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
-
-            Outlined = true;
-            ItemText = r => IsFull ? string.Join('/', r.GetAllNodes().Select(t => t.Label)) : r.Label;
-            ItemValue = r => r.Value;
 
             CssProvider
                 .Apply("cascader-menu-body", styleAction: styleBuilder =>
@@ -80,9 +50,44 @@ namespace MASA.Blazor
                 {
                     props[nameof(MListItemGroup.Color)] = "primary";
                 })
-                .Merge<BSelectOption<BCascaderNode, string>, MCascaderSelectOption>()
-                .Merge(typeof(BSelectMenu<,,>), typeof(BCascaderMenu<MCascader>))
-                .Apply(typeof(BCascaderMenuBody<>), typeof(BCascaderMenuBody<MCascader>));
+                .Merge<BSelectOption<TItem, TValue>, MCascaderSelectOption<TItem, TValue>>()
+                .Merge(typeof(BSelectMenu<,,>), typeof(BCascaderMenu<TItem, TValue, MCascader<TItem, TValue>>))
+                .Apply(typeof(BCascaderMenuBody<TItem, TValue, ICascader<TItem, TValue>>), typeof(BCascaderMenuBody<TItem, TValue, MCascader<TItem, TValue>>));
+        }
+
+        private List<TItem> GetItemByValue(IEnumerable<TItem> items, TValue value, bool isFull)
+        {
+            var results = new List<TItem>();
+
+            foreach (var item in items)
+            {
+                if (results.Any()) break;
+
+                if (ItemValue(item).Equals(value))
+                {
+                    results.Add(item);
+                    break;
+                }
+                else
+                {
+                    var children = ItemChildren(item);
+                    if (children != null && children.Any())
+                    {
+                        var result = GetItemByValue(children, value, isFull);
+                        if (result.Any())
+                        {
+                            if (isFull)
+                            {
+                                results.Add(item);
+                            }
+
+                            results.AddRange(result);
+                        }
+                    }
+                }
+            }
+
+            return results;
         }
     }
 }

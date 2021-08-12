@@ -1,79 +1,99 @@
 
 <MRow>
-    <MCol Span="4">
-        <MCascader @bind-Value="_vaule" Items="_items" IsFull="true">
+    <MCol Span="6">
+        <MCascader @bind-Value="_vaule"
+                   Items="_items"
+                   ItemText="u => u.Label"
+                   ItemValue="u => u.Value"
+                   ItemChildren="u => u.Children"
+                   IsFull="true">
         </MCascader>
     </MCol>
-    <MSpacer></MSpacer>
+    <MCol Span="6">
+        <MCascader Outlined
+                   @bind-Value="_vaule"
+                   Items="_items"
+                   ItemText="u => u.Label"
+                   ItemValue="u => u.Value"
+                   ItemChildren="u => u.Children">
+        </MCascader>
+    </MCol>
 </MRow>
 
-@code{
+@code {
+    public class BCascaderNode
+    {
+        public string Value { get; set; }
+        public string Label { get; set; }
+        public List<BCascaderNode> Children { get; set; }
+    }
+
     private List<BCascaderNode> _items = new List<BCascaderNode>
 {
-        new BCascaderNode
+    new BCascaderNode
+    {
+    Value="111",
+    Label="111",
+    Children=new List<BCascaderNode>()
+    {
+    new BCascaderNode
+    {
+        Value="333",
+        Label="333",
+        Children=new List<BCascaderNode>()
         {
-            Value="111",
-            Label="111",
-            Children=new List<BCascaderNode>()
+            new BCascaderNode
             {
-                new BCascaderNode
-                {
-                    Value="333",
-                    Label="333",
-                    Children=new List<BCascaderNode>()
-                    {   
-                        new BCascaderNode
-                        {
-                            Value="444",
-                            Label="444",
-                        }
-                    }
-                },
-                new BCascaderNode
-                {
-                    Value="555",
-                    Label="555",
-                    Children=new List<BCascaderNode>()
-                    {
-                        new BCascaderNode
-                        {
-                            Value="666",
-                            Label="666",
-                        }
-                    }
-                }
+                Value="444",
+                Label="444",
             }
-        },
-        new BCascaderNode
+        }
+    },
+    new BCascaderNode
+    {
+        Value="555",
+        Label="555",
+        Children=new List<BCascaderNode>()
         {
-            Value="222",
-            Label="222"
-        },
-        new BCascaderNode
-        {
-            Value="777",
-            Label="777"
-        },
-        new BCascaderNode
-        {
-            Value="888",
-            Label="888"
-        },
-        new BCascaderNode
-        {
-            Value="999",
-            Label="999"
-        },
-        new BCascaderNode
-        {
-            Value="101010",
-            Label="101010"
-        },
-        new BCascaderNode
-        {
-            Value="111111",
-            Label="111111"
-        },
+            new BCascaderNode
+            {
+                Value="666",
+                Label="666",
+            }
+        }
+    }
+    }
+    },
+    new BCascaderNode
+    {
+    Value="222",
+    Label="222"
+    },
+    new BCascaderNode
+    {
+    Value="777",
+    Label="777"
+    },
+    new BCascaderNode
+    {
+    Value="888",
+    Label="888"
+    },
+    new BCascaderNode
+    {
+    Value="999",
+    Label="999"
+    },
+    new BCascaderNode
+    {
+    Value="101010",
+    Label="101010"
+    },
+    new BCascaderNode
+    {
+    Value="111111",
+    Label="111111"
+    },
     };
 
     private string _vaule = "444";
