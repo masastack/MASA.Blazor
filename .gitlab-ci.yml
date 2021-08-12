@@ -13,6 +13,7 @@ packer:
   only:
     - develop
   script:
+    - dotnet --version
     - git clone -b develop http://gitlab-hz.lonsid.cn/MASA-Stack/Framework/BlazorComponent.git ./src/BlazorComponent
     - dotnet build src
     - dotnet pack src --include-symbols -p:PackageVersion=0.2.$CI_PIPELINE_ID
