@@ -45,7 +45,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj" />
-    <ProjectReference Include="..\..\BlazorComponent\src\Doc\BlazorComponent.Doc.CLI\BlazorComponent.Doc.CLI.csproj" />
+    <ProjectReference Include="..\..\BlazorComponent\src\Doc\BlazorComponent.Doc.Models\BlazorComponent.Doc.Models.csproj" />
     <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
   </ItemGroup>
 

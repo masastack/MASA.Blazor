@@ -1,0 +1,58 @@
+﻿<MSelect TItem="SelectionType" TValue="SelectionType" @bind-Value="_type"
+         Items="_types" ItemText="r=>r.ToString()" ItemValue="r=>r"></MSelect>
+<MTreeview Selectable SelectionType="_type" Items="_data"
+           ItemText="r=>r.Name" ItemChildren="r=>r.Children" ItemKey="r=>r.Id">
+</MTreeview>
+
+@code{
+    private SelectionType _type;
+
+    private List<SelectionType> _types = new List<SelectionType>
+{
+        SelectionType.Leaf,
+        SelectionType.Independent
+    };
+
+    public class Data
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string File { get; set; }
+
+        public List<Data> Children { get; set; }
+    }
+
+    private List<Data>
+        _data = new List<Data>
+            {
+                new Data
+                {
+                    Id=1,
+                    Name="11",
+                    File="png",
+                    Children=new List<Data>
+{
+                        new Data
+                        {
+                            Id=2,
+                            Name="22",
+                            File="html"
+                        },
+                        new Data
+                        {
+                            Id=4,
+                            Name="44",
+                            File="html"
+                        }
+                    }
+                },
+                new Data
+                {
+                    Id=3,
+                    Name="33",
+                    File="txt"
+                }
+                                            };
+}

@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using BlazorComponent;
-using BlazorComponent.Doc.CLI.Models;
+using BlazorComponent.Doc.Models;
 using MASA.Blazor.Doc.Localization;
 using MASA.Blazor.Doc.Services;
 using Microsoft.AspNetCore.Components;

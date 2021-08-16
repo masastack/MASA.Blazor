@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31025.218
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31606.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MASA.Blazor", "MASA.Blazor\MASA.Blazor.csproj", "{E005FF40-155F-4BF5-B72B-116086FAF8F7}"
 EndProject
@@ -32,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorComponent.Doc.Models", "BlazorComponent\src\Doc\BlazorComponent.Doc.Models\BlazorComponent.Doc.Models.csproj", "{F3F5874D-7868-4B41-8AD1-4E5E0A5FBD0B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{D6A9B970-55C9-4C90-9C5E-3CDCB2F216DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6A9B970-55C9-4C90-9C5E-3CDCB2F216DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6A9B970-55C9-4C90-9C5E-3CDCB2F216DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3F5874D-7868-4B41-8AD1-4E5E0A5FBD0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3F5874D-7868-4B41-8AD1-4E5E0A5FBD0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3F5874D-7868-4B41-8AD1-4E5E0A5FBD0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3F5874D-7868-4B41-8AD1-4E5E0A5FBD0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{401CD0E2-7825-4F9F-BFCF-D67B4E9650CD} = {3557F7E2-02EC-473A-8E8C-2BB5DF75CD50}
 		{AA6E222C-0E5F-4970-8A9B-D840A4829189} = {4F6DC075-1D88-484F-A9C1-B2797CF3AE1F}
 		{D6A9B970-55C9-4C90-9C5E-3CDCB2F216DD} = {4F6DC075-1D88-484F-A9C1-B2797CF3AE1F}
+		{F3F5874D-7868-4B41-8AD1-4E5E0A5FBD0B} = {4F6DC075-1D88-484F-A9C1-B2797CF3AE1F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84AEBCFA-2E9E-4942-9DD7-D6E1B05A1AF9}

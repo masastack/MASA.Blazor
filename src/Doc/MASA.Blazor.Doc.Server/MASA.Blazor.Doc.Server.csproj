@@ -7,17 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Pages\Components\**" />
-    <Content Remove="Pages\Components\**" />
-    <EmbeddedResource Remove="Pages\Components\**" />
-    <None Remove="Pages\Components\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BlazorComponent\src\Doc\BlazorComponent.Doc.Models\BlazorComponent.Doc.Models.csproj" />
     <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
     <ProjectReference Include="..\MASA.Blazor.Doc\MASA.Blazor.Doc.csproj" />
   </ItemGroup>

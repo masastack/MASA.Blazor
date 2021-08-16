@@ -18,12 +18,6 @@ namespace MASA.Blazor
         public bool Dense { get; set; }
 
         /// <summary>
-        /// TODO: Disable the input
-        /// </summary>
-        [Parameter]
-        public bool Disabled { get; set; }
-
-        /// <summary>
         /// 36px
         /// </summary>
         [Parameter]
@@ -94,6 +88,7 @@ namespace MASA.Blazor
                         .AddIf("m-icon--link", () => OnClick.HasDelegate)
                         .AddIf("m-icon--dense", () => Dense)
                         .AddIf("m-icon--left", () => Left)
+                        .AddIf("m-icon--disabled", () => Disabled)
                         .AddIf("m-icon--right", () => Right)
                         .AddTheme(IsDark)
                         .AddTextColor(Color, () => IsActive);

@@ -1,0 +1,70 @@
+﻿<MTextField @bind-Value="_search" Placeholder="Search"></MTextField>
+<MTreeview Items="_data" Search="@_search" ItemText="r=>r.Name" ItemChildren="r=>r.Children" ItemKey="r=>r.Id">
+    <PrependContent Context="item">
+        <MIcon>
+            @_files[item.File]
+        </MIcon>
+    </PrependContent>
+</MTreeview>
+
+@code{
+    private string _search;
+
+    public class Data
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string File { get; set; }
+
+        public List<Data> Children { get; set; }
+    }
+
+    private Dictionary<string, string> _files = new Dictionary<string, string>
+    {
+        { "png","mdi-file-image" },
+        { "html","mdi-language-html5" },
+        { "txt","mdi-file-document-outline" }
+    };
+
+    private List<Data> _data = new List<Data>
+    {
+        new Data
+        {
+            Id=1,
+            Name="11",
+            File="png",
+            Children=new List<Data>
+            {
+                    new Data
+                    {
+                        Id=2,
+                        Name="22",
+                        File="html",
+                        Children=new List<Data>
+                        {
+                            new Data
+                            {
+                                Id=5,
+                                Name="55",
+                                File="html"
+                            }
+                        }
+                    },
+                    new Data
+                    {
+                        Id=4,
+                        Name="44",
+                        File="html"
+                    }
+                }
+        },
+        new Data
+        {
+            Id=3,
+            Name="33",
+            File="txt"
+        }
+    };
+}

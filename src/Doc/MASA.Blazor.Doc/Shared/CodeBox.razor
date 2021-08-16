@@ -1,4 +1,4 @@
-﻿@using BlazorComponent.Doc.CLI.Models
+﻿@using BlazorComponent.Doc.Models
 @using MASA.Blazor.Doc.Services
 @inherits OwningComponentBase<DemoService>
 
@@ -113,7 +113,7 @@
 
     RenderFragment Component;
 
-    public string Id => "section-" + BlazorComponent.Doc.CLI.Extensions.HashHelper.Hash(Demo.Title);
+    public string Id => "section-" + BlazorComponent.Doc.Extensions.HashHelper.Hash(Demo.Title);
 
     protected string DemoId => $"components-{ComponentName.ToLower()}-demo-{Demo.Name}";
 
