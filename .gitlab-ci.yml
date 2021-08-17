@@ -8,7 +8,7 @@ variables:
   IMAGE: proget-hz.lonsid.cn/masa-blazor/docs:0.2.$CI_PIPELINE_ID
 
 packer:
-  image: proget-hz.lonsid.cn/masa-images/dotnet-sdk:6.0
+  image: proget-hz.lonsid.cn/masa-blazor/dotnet/sdk:6.0
   stage: packer
   only:
     - develop
