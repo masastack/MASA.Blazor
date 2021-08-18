@@ -45,7 +45,7 @@ namespace MASA.Blazor
                 })
                 .Apply<BAvatar, MListItemAvatar>("list-item")
                 .Apply<BTooltip, MTooltip>()
-                .Apply<BImage, MImage>()
+                .Apply(typeof(IImage), typeof(MImage))
                 .Apply<BOverlay, MOverlay>()
                 .Apply<BCard, MCard>();
         }

@@ -16,6 +16,9 @@ namespace MASA.Blazor
                 {
                     cssBuilder.Add("m-toolbar__title");
                 });
+
+            AbstractProvider
+                .Apply(typeof(IImage), typeof(MImage));
         }
     }
 }

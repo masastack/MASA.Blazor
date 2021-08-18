@@ -34,6 +34,12 @@
       "Description": "设定组件的高度。"
     },
     {
+      "Name": "LazySrc",
+      "Type": "String",
+      "Default": "",
+      "Description": "在等待主映像加载时显示的内容，通常是一个小型的base64编码的缩略图。有一个轻微的模糊滤镜应用。"
+    },
+    {
       "Name": "MaxHeight",
       "Type": "StringNumber",
       "Default": "",

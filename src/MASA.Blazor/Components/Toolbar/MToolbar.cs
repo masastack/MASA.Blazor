@@ -163,7 +163,7 @@ namespace MASA.Blazor
                     props[nameof(BToolbarSheetBody.IsExtended)] = IsExtended;
                     props[nameof(BToolbarSheetBody.ExtensionContent)] = ExtensionContent;
                 })
-                .Apply<BImage, MImage>(props =>
+                .Apply(typeof(BImageContent<>),typeof(MImage),props =>
                 {
                     props[nameof(MImage.Height)] = ComputedHeight;
                     props[nameof(MImage.Src)] = Src;

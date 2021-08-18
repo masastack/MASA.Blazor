@@ -1,21 +1,39 @@
-﻿using System.Threading.Tasks;
+﻿using System.Text;
+using System.Threading.Tasks;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MImage : BImage, IThemeable
+    //Todo：Crossover mode to be perfected
+    public partial class MImage : MResponsive, IImage, IThemeable
     {
-        private Dimensions _dimensions;
+        [Parameter] 
+        public bool Contain { get; set; }
 
-        [Parameter]
+        [Parameter] 
+        public string Src { get; set; }
+
+        [Parameter] 
+        public string LazySrc { get; set; }
+
+        [Parameter] 
+        public string Gradient { get; set; }
+
+        [Parameter] 
+        public RenderFragment PlaceholderContent { get; set; }
+
+        [Parameter] 
         public bool Dark { get; set; }
 
-        [Parameter]
+        [Parameter] 
         public bool Light { get; set; }
 
-        [CascadingParameter]
+        [CascadingParameter] 
         public IThemeable Themeable { get; set; }
+
+        [Parameter] 
+        public string Position { get; set; } = "center center";
 
         public bool IsDark
         {
@@ -33,79 +51,119 @@ namespace MASA.Blazor
 
                 return Themeable != null && Themeable.IsDark;
             }
-        } 
+        }
+
+        private string CurrentSrc { get; set; }
+
+        public bool IsLoading { get; set; } = true;
+
+        private bool IsError { get; set; } = false;
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                _dimensions = await JsInvokeAsync<Dimensions>(JsInteropConstants.GetImageDimensions, Src);
-
-                RespSizerStyle = GenerateRespSizerStyle(_dimensions, AspectRatio);
-                await InvokeStateHasChangedAsync();
+                await base.OnAfterRenderAsync(firstRender);
             }
+
+            if (!string.IsNullOrEmpty(LazySrc) && IsLoading && Dimensions == null)
+            {
+                var dimensions = await JsInvokeAsync<Dimensions>(JsInteropConstants.GetImageDimensions, LazySrc);
+                await PollForSize(dimensions);
+            }
+
+            if (!string.IsNullOrEmpty(Src) && IsLoading && !IsError)
+            {
+                var dimensions = await JsInvokeAsync<Dimensions>(JsInteropConstants.GetImageDimensions, Src);
+                await PollForSize(dimensions);
+                IsError = dimensions.HasError;
+                if (!dimensions.HasError)
+                {
+                    IsLoading = false;
+                }
+            }
+
+            await InvokeStateHasChangedAsync();
         }
 
         protected override void SetComponentClass()
         {
+            base.SetComponentClass();
             CssProvider
-                .AsProvider<BImage>()
-                .Apply(cssBuilder =>
+                .Merge(cssBuilder =>
                 {
-                    cssBuilder.Add("m-image")
-                        .Add("m-responsive")
+                    cssBuilder
+                        .Add("m-image")
                         .AddTheme(IsDark);
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .AddHeight(Height)
-                        .AddWidth(Width)
-                        .AddMinWidth(MinWidth)
-                        .AddMaxWidth(MaxWidth)
-                        .AddMinHeight(MinHeight)
-                        .AddMaxHeight(MaxHeight);
-                })
-                .Apply("resp_sizer", cssBuilder =>
-                {
-                    cssBuilder.Add("m-responsive__sizer");
                 })
                 .Apply("image", cssBuilder =>
                 {
                     cssBuilder.Add("m-image__image")
-                        .AddFirstIf(
-                            ("m-image__image--contain", () => Contain),
-                            ("m-image__image--cover", () => true)
-                        );
+                        .AddIf("m-image__image--preload", () => IsLoading)
+                        .AddIf("m-image__image--contain", () => Contain)
+                        .AddIf("m-image__image--cover", () => !Contain);
                 }, styleBuilder =>
                 {
+                    string backgroud = GetBackgroudImage();
                     styleBuilder
-                        .AddIf(() => $"background-image: url(\"{Src}\")", () => !string.IsNullOrEmpty(Src))
-                        .Add("background-position: center center");
+                        .AddIf(backgroud, () => !string.IsNullOrEmpty(backgroud))
+                        .AddIf($"background-position: {Position}", () => !string.IsNullOrEmpty(Position));
                 })
-                .Apply("resp_content", cssBuilder =>
+                .Apply("placeholder", cssBuilder => { cssBuilder.Add("m-image__placeholder"); });
+
+            AbstractProvider
+                .Apply(typeof(BImageContent<>), typeof(BImageContent<MImage>))
+                .Apply(typeof(BPlaceholderSlot<>), typeof(BPlaceholderSlot<MImage>))
+                .Merge(typeof(BResponsiveBody<>), typeof(BImageBody<MImage>))
+                .Apply<BResponsive, MResponsive>(props =>
                 {
-                    cssBuilder.Add("m-responsive__content");
+                    props[nameof(Dimensions)] = Dimensions;
+                    props[nameof(AspectRatio)] = AspectRatio;
+                    props[nameof(ContentClass)] = ContentClass;
+                    props[nameof(Height)] = Height;
+                    props[nameof(MinHeight)] = MinHeight;
+                    props[nameof(MaxHeight)] = MaxHeight;
+                    props[nameof(MinWidth)] = MinWidth;
+                    props[nameof(MaxWidth)] = MaxWidth;
                 });
         }
 
-        private static string GenerateRespSizerStyle(Dimensions dimensions, StringNumber aspectRatio)
+        private string GetBackgroudImage()
         {
-            double ratio = 2;
-            if (aspectRatio == null)
+            if (string.IsNullOrEmpty(Src) && string.IsNullOrEmpty(LazySrc) && string.IsNullOrEmpty(Gradient))
             {
-                if (dimensions != null && dimensions.Height != 0 && dimensions.Width != 0)
-                {
-                    ratio = dimensions.Width / dimensions.Height;
-                }
-            }
-            else if (aspectRatio.TryGetNumber().isNumber)
-            {
-                ratio = aspectRatio.TryGetNumber().number;
+                return string.Empty;
             }
 
-            var paddingBottom = (1 / ratio).ToString("P2");
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("background-image:");
+            if (!string.IsNullOrEmpty(Gradient))
+            {
+                stringBuilder.Append($"linear-gradient({Gradient}),");
+            }
 
-            return $"padding-bottom: {paddingBottom}";
+            var url = IsLoading || IsError ? LazySrc : CurrentSrc;
+            stringBuilder.Append($"url({url})");
+            return stringBuilder.ToString();
+        }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+            if (string.IsNullOrEmpty(CurrentSrc))
+            {
+                CurrentSrc = Src;
+            }
+        }
+
+        private async Task PollForSize(Dimensions dimensions, int? timeOut = 100)
+        {
+            if (IsLoading && !dimensions.HasError && timeOut != null)
+            {
+                await Task.Delay(timeOut.Value);
+            }
+
+            Dimensions = dimensions;
         }
     }
 }
