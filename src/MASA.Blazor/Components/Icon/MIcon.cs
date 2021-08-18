@@ -1,5 +1,8 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
+using System;
+using System.Reflection;
 
 namespace MASA.Blazor
 {
@@ -12,22 +15,15 @@ namespace MASA.Blazor
         private const string XLARGE = "40px";
 
         /// <summary>
-        /// 20px
+        /// Attention! End with a space
         /// </summary>
-        [Parameter]
-        public bool Dense { get; set; }
+        private static string[] _arrFa5Prefix = new string[] { "fa ", "fad ", "fak ", "fab ", "fal ", "far ", "fas " };
 
         /// <summary>
         /// 36px
         /// </summary>
         [Parameter]
         public bool Large { get; set; }
-
-        [Parameter]
-        public bool Left { get; set; }
-
-        [Parameter]
-        public bool Right { get; set; }
 
         /// <summary>
         /// 16px
@@ -49,13 +45,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool IsActive { get; set; } = true;
-
-
-        [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
 
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
@@ -91,10 +80,12 @@ namespace MASA.Blazor
                         .AddIf("m-icon--disabled", () => Disabled)
                         .AddIf("m-icon--right", () => Right)
                         .AddTheme(IsDark)
-                        .AddTextColor(Color, () => IsActive);
+                        .AddTextColor(Color, () => IsActive)
+                        .AddFirstIf((() => Icon, () => _arrFa5Prefix.Any(prefix => Icon.StartsWith(prefix))),
+                        (() => $"mdi {Icon}", () => Icon.StartsWith("mdi-")),
+                        (() => $"material-icons", () => !string.IsNullOrWhiteSpace(NewChildren)));
                 }, styleBuilder =>
                 {
-                    // TODO: 能否拿到属性排列顺序，最后一个优先级最高
                     styleBuilder
                         .AddTextColor(Color, () => IsActive)
                         .AddFirstIf(
@@ -105,7 +96,23 @@ namespace MASA.Blazor
                             (() => $"font-size: {SMALL}", () => Small),
                             (() => $"font-size: {XSMALL}", () => XSmall)
                         );
+                }).Apply("m-icon-svg", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-icon__svg");
                 });
+
+            AbstractProvider
+                .Apply(typeof(BButtonIconSlot<>), typeof(BButtonIconSlot<MIcon>))
+                .Apply(typeof(BFontIconSlot<>), typeof(BFontIconSlot<MIcon>))
+                .Apply(typeof(BSvgIconSlot<>), typeof(BSvgIconSlot<MIcon>));
+
+            SvgAttrs = new()
+            {
+                { "viewBox", "0 0 24 24" },
+                { "role", "img" },
+                { "aria-hidden", "true" }
+            };
         }
     }
 }

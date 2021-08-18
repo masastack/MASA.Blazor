@@ -1,0 +1,17 @@
+﻿<div>
+    <MIcon OnClick="e=>visible = !visible">mdi-chevron-right</MIcon>
+    <MIcon OnClick="e=>visible = !visible">home</MIcon>
+    <MIcon OnClick="e=>visible = !visible" Disabled>mdi-chevron-right</MIcon>
+    <MAlert @bind-Visible="visible"
+            Border="AlertBorder.Left"
+            Color="deep-purple accent-4"
+            Dark>
+        点击图标显示隐藏
+    </MAlert>
+</div>
+
+@code {
+
+    bool visible = false;
+
+}

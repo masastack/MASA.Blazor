@@ -1,8 +1,8 @@
 ---
 order: 0
 title:
-  zh-CN: 基本用法
-  en-US: Basic
+  zh-CN: 图标
+  en-US: Icons
 ---
 
 ## zh-CN

@@ -17,9 +17,6 @@ namespace MASA.Blazor
 
         protected virtual bool HasBackgroud => !(Icon || Plain || Outlined || Text);
 
-        [Parameter]
-        public bool Light { get; set; }
-
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
 
