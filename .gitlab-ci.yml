@@ -13,6 +13,7 @@ packer:
   only:
     - develop
   script:
+    - node -v
     - dotnet --version
     - git clone -b develop http://gitlab-hz.lonsid.cn/MASA-Stack/Framework/BlazorComponent.git ./src/BlazorComponent
     - dotnet build src
