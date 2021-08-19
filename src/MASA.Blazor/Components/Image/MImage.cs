@@ -59,6 +59,8 @@ namespace MASA.Blazor
 
         private bool IsError { get; set; } = false;
 
+        private StringNumber CalculatedLazySrcAspectRatio { get; set; }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -70,6 +72,13 @@ namespace MASA.Blazor
             {
                 var dimensions = await JsInvokeAsync<Dimensions>(JsInteropConstants.GetImageDimensions, LazySrc);
                 await PollForSize(dimensions);
+                if (!dimensions.HasError && AspectRatio == null)
+                {
+                    AspectRatio = dimensions.Width / dimensions.Height;
+                    CalculatedLazySrcAspectRatio = AspectRatio;
+                }
+
+                await InvokeStateHasChangedAsync();
             }
 
             if (!string.IsNullOrEmpty(Src) && IsLoading && !IsError)
@@ -80,10 +89,14 @@ namespace MASA.Blazor
                 if (!dimensions.HasError)
                 {
                     IsLoading = false;
+                    if (AspectRatio == null || CalculatedLazySrcAspectRatio != null)
+                    {
+                        AspectRatio = dimensions.Width / dimensions.Height;
+                    }
                 }
-            }
 
-            await InvokeStateHasChangedAsync();
+                await InvokeStateHasChangedAsync();
+            }
         }
 
         protected override void SetComponentClass()

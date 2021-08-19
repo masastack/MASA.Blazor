@@ -1,10 +1,16 @@
-﻿using BlazorComponent;
+﻿using System.Threading.Tasks;
+using BlazorComponent;
 
 namespace MASA.Blazor
 {
     public class MResponsive : BResponsive
     {
         public Dimensions Dimensions { get; set; }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+        }
 
         protected override void SetComponentClass()
         {
