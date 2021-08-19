@@ -18,7 +18,7 @@ namespace MASA.Blazor
             AbstractProvider
                 .Apply<BListItem, MListItem>(props =>
                 {
-                    props[nameof(MListItem.Key)] = Key;
+                    props[nameof(MListItem.Value)] = (StringNumber)Key;
                     props[nameof(MListItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
                         if (Children == null || Children.Count == 0)

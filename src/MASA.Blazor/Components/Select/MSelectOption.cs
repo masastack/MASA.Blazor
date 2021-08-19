@@ -13,7 +13,7 @@ namespace MASA.Blazor
             AbstractProvider
                 .Apply<BListItem, MListItem>(props =>
                 {
-                    props[nameof(MListItem.Key)] = Key;
+                    props[nameof(MListItem.Value)] = (StringNumber)Key;
                     props[nameof(MListItem.Link)] = true;
                     props[nameof(MListItem.IsActive)] = Selected;
                     props[nameof(MListItem.Disabled)] = Disabled;

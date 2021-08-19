@@ -74,9 +74,6 @@ namespace MASA.Blazor
             }
         }
 
-        [Parameter]
-        public bool IsActive { get; set; }
-
         [CascadingParameter]
         public BList List { get; set; }
 
@@ -163,14 +160,14 @@ namespace MASA.Blazor
                             }
 
                             if (!Link) return false;
-                            if (Group == null) return false;
+                            if (ItemGroup == null) return false;
 
-                            if (Group.Multiple)
+                            if (ItemGroup.Multiple)
                             {
-                                return Group.Values.Contains(Key);
+                                return ItemGroup.Values.Contains(Value);
                             }
 
-                            return Group.Value == Key;
+                            return ItemGroup.Value == Value;
                         })
                         .AddIf("m-list-item--highlighted", () => Highlighted)
                         .AddTextColor(Color)
@@ -185,32 +182,32 @@ namespace MASA.Blazor
                 NavigationManager.NavigateTo(Href);
             }
 
-            if (Group != null)
-            {
-                if (Group.Multiple)
-                {
-                    if (Group.ValuesChanged.HasDelegate)
-                    {
-                        if (Group.Values.Contains(Key))
-                        {
-                            await Group.ValuesChanged.InvokeAsync(Group.Values.Where(u => u != Key).ToList());
-                        }
-                        else
-                        {
-                            await Group.ValuesChanged.InvokeAsync(Group.Values.Concat(new[] { Key }).ToList());
-                        }
-                    }
-                }
-                else
-                {
-                    if (Group.ValueChanged.HasDelegate)
-                    {
-                        await Group.ValueChanged.InvokeAsync(Key);
-                    }
-                }
+            //if (Group != null)
+            //{
+            //    if (Group.Multiple)
+            //    {
+            //        if (Group.ValuesChanged.HasDelegate)
+            //        {
+            //            if (Group.Values.Contains(Key))
+            //            {
+            //                await Group.ValuesChanged.InvokeAsync(Group.Values.Where(u => u != Key).ToList());
+            //            }
+            //            else
+            //            {
+            //                await Group.ValuesChanged.InvokeAsync(Group.Values.Concat(new[] { Key }).ToList());
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if (Group.ValueChanged.HasDelegate)
+            //        {
+            //            await Group.ValueChanged.InvokeAsync(Key);
+            //        }
+            //    }
 
-                await Group.ToggleSelectAsync(Key);
-            }
+            //    await Group.ToggleSelectAsync(Key);
+            //}
 
             await base.HandleOnClick(args);
         }

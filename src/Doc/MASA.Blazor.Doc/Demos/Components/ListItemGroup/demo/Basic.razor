@@ -3,7 +3,7 @@
         <MListItemGroup Value="@(selected)">
             @foreach (var item in _items)
             {
-                <MListItem Key="@item.Text">
+                <MListItem Value="@((StringNumber)item.Text)">
                     <MListItemIcon>
                         <MIcon>@item.Icon</MIcon>
                     </MListItemIcon>
@@ -48,5 +48,5 @@
         }
     };
 
-    readonly string selected = _items[1].Text;
+    readonly StringNumber selected = _items[1].Text;
 }

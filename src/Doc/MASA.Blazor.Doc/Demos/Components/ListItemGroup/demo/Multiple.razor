@@ -3,7 +3,7 @@
         <MListItemGroup @bind-Values="@selected" Multiple Color="primary">
             @foreach (var item in _items)
             {
-                <MListItem Key="@item.Text">
+                <MListItem Value="@((StringNumber)item.Text)">
                     <MListItemIcon>
                         <MIcon>@item.Icon</MIcon>
                     </MListItemIcon>
@@ -50,5 +50,5 @@
         }
     };
 
-    List<string> selected = _items.Where(u => u.Text == "Star").Select(u => u.Text).ToList();
+    List<StringNumber> selected = _items.Where(u => u.Text == "Star").Select(u => (StringNumber)u.Text).ToList();
 }

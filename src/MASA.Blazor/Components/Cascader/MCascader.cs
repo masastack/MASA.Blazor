@@ -46,7 +46,7 @@ namespace MASA.Blazor
                     props[nameof(MCascaderMenu.CloseOnContentClick)] = false;
                 })
                 .Apply<BList, MList>()
-                .Apply<BListItemGroup, MListItemGroup>(props =>
+                .Apply<MItemGroup, MListItemGroup>(props =>
                 {
                     props[nameof(MListItemGroup.Color)] = "primary";
                 })
