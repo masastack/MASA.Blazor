@@ -5,7 +5,7 @@
   "Props": [
     {
       "Name": "Align",
-      "Type": "String",
+      "Type": "OneOf`2",
       "Default": "null",
       "Description": "应用 align-items css 属性。可用的选项是start, center, end, auto, baseline 和 stretch。"
     },
@@ -29,45 +29,81 @@
     },
     {
       "Name": "Lg",
-      "Type": "OneOf`2",
+      "Type": "StringNumber",
       "Default": "",
-      "Description": ""
+      "Description": "在更大和更大的断点上更改列数，可用的选项是 1 -> 12 和 auto 。"
     },
     {
       "Name": "Md",
-      "Type": "OneOf`2",
+      "Type": "StringNumber",
       "Default": "",
-      "Description": ""
+      "Description": "更改中等和较大断点上的列数，可用的选项是 1 -> 12 和 auto 。"
     },
     {
       "Name": "Offset",
       "Type": "StringNumber",
       "Default": "",
-      "Description": ""
+      "Description": "设置列的默认偏移量。"
+    },
+    {
+      "Name": "OffsetLg",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "在更大和更大的断点上更改组件的偏移量。"
+    },
+    {
+      "Name": "OffsetMd",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "在中等和更高的断点上更改组件的偏移量。"
+    },
+    {
+      "Name": "OffsetSm",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "在较小和较大的断点处更改组件的偏移量。"
+    },
+    {
+      "Name": "OffsetXl",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "在更大和更大的断点处更改组件的偏移量。"
     },
     {
       "Name": "Order",
       "Type": "StringNumber",
       "Default": "",
-      "Description": ""
+      "Description": "设置列的默认 order"
     },
     {
-      "Name": "Pull",
+      "Name": "OrderLg",
       "Type": "StringNumber",
       "Default": "",
-      "Description": ""
+      "Description": "在更大和更大的断点上更改组件的偏移量。"
     },
     {
-      "Name": "Push",
+      "Name": "OrderMd",
       "Type": "StringNumber",
       "Default": "",
-      "Description": ""
+      "Description": "在中等和更高的断点上更改组件的偏移量。"
+    },
+    {
+      "Name": "OrderSm",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "在较小和较大的断点处更改组件的偏移量。"
+    },
+    {
+      "Name": "OrderXl",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "在更大和更大的断点处更改组件的偏移量。"
     },
     {
       "Name": "Sm",
-      "Type": "OneOf`2",
+      "Type": "StringNumber",
       "Default": "",
-      "Description": ""
+      "Description": "在较小和较大的断点上更改列数，可用的选项是 1 -> 12 和 auto 。"
     },
     {
       "Name": "Style",
@@ -76,22 +112,16 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "div",
+      "Description": "指定在根元素上使用的自定义标签。"
+    },
+    {
       "Name": "Xl",
-      "Type": "OneOf`2",
+      "Type": "StringNumber",
       "Default": "",
-      "Description": ""
-    },
-    {
-      "Name": "Xs",
-      "Type": "OneOf`2",
-      "Default": "",
-      "Description": ""
-    },
-    {
-      "Name": "Xxl",
-      "Type": "OneOf`2",
-      "Default": "",
-      "Description": ""
+      "Description": "在较小和较大的断点上更改列数，可用的选项是 1 -> 12 和 auto 。"
     }
   ],
   "Contents": [

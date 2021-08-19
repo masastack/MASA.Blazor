@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Todo...
+Offset can also be applied on a per breakpoint basis.

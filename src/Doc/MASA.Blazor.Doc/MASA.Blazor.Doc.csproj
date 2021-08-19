@@ -17,6 +17,7 @@
     <None Include="wwwroot\docs\assets\logo.svg" />
     <None Include="wwwroot\js\docsearch.js" />
     <None Include="wwwroot\js\prism.js" />
+    <None Remove="Demos\Components\Grid\demo\orderFirstAndLast.md" />
   </ItemGroup>
 
 

@@ -24,7 +24,7 @@
               Style="height: 150px;">
             @foreach (var align in _alignments)
             {
-                <MCol>
+                <MCol Align="@align">
                     <MCard Class="pa-2"
                            Outlined
                            tile>
@@ -34,6 +34,23 @@
             }
         </MRow>
     </MContainer>
+
+    <MContainer Class="grey lighten-5">
+            <MRow NoGutters
+                  AlignLg="@AlignTypes.Center"
+                  Style="height: 150px;">
+                @foreach (var align in _alignments)
+                {
+                    <MCol Align="@align">
+                        <MCard Class="pa-2"
+                               Outlined
+                               tile>
+                            One of three columns
+                        </MCard>
+                    </MCol>
+                }
+            </MRow>
+        </MContainer>
 </div>
 
 @code{

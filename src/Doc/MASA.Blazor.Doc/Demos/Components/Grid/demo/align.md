@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Todo...
+Change the vertical alignment of flex items and their parents using the align and align-self properties.

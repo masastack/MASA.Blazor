@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Todo...
+Columns will automatically take up an equal amount of space within their parent container. This can be modified using the cols prop. You can also utilize the sm, md, lg, and xl props to further define how the column will be sized in different viewport sizes.

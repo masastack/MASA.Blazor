@@ -1,21 +1,60 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
-using OneOf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
     public partial class MCol : BCol
     {
+        [Parameter] 
+        public StringNumber Sm { get; set; }
+
+        [Parameter] 
+        public StringNumber Md { get; set; }
+
+        [Parameter] 
+        public StringNumber Lg { get; set; }
+
+        [Parameter] 
+        public StringNumber Xl { get; set; }
+
         /// <summary>
         /// 'auto', 'start', 'end', 'center', 'baseline', 'stretch'
         /// </summary>
         [Parameter]
-        public string Align { get; set; }
+        public StringEnum<AlignTypes> Align { get; set; }
+
+        [Parameter] 
+        public StringNumber OrderLg { get; set; }
+
+        [Parameter] 
+        public StringNumber OrderMd { get; set; }
+
+        [Parameter] 
+        public StringNumber OrderSm { get; set; }
+
+        [Parameter] 
+        public StringNumber OrderXl { get; set; }
+
+        [Parameter] 
+        public StringNumber OffsetLg { get; set; }
+
+        [Parameter] 
+        public StringNumber OffsetMd { get; set; }
+
+        [Parameter] 
+        public StringNumber OffsetSm { get; set; }
+
+        [Parameter] 
+        public StringNumber OffsetXl { get; set; }
+
+        [Parameter] 
+        public StringNumber Flex { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -23,16 +62,41 @@ namespace MASA.Blazor
                 .Apply<BCol>(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("col")
+                        .AddIf(() => $"col",
+                            () => Cols == null || (Sm == null && Md == null && Lg == null && Xl == null))
                         .AddIf(() => $"col-{Cols.Value}", () => Cols != null)
+                        .AddIf(() => $"col-sm-{Sm.Value}", () => Sm != null)
+                        .AddIf(() => $"col-md-{Md.Value}", () => Md != null)
+                        .AddIf(() => $"col-lg-{Lg.Value}", () => Lg != null)
+                        .AddIf(() => $"col-xl-{Xl.Value}", () => Xl != null)
                         .AddIf(() => $"offset-{Offset.Value}", () => Offset != null)
+                        .AddIf(() => $"offset-lg-{OffsetLg}", () => OffsetLg != null)
+                        .AddIf(() => $"offset-md-{OffsetMd}", () => OffsetMd != null)
+                        .AddIf(() => $"offset-sm-{OffsetSm}", () => OffsetSm != null)
+                        .AddIf(() => $"offset-xl-{OffsetXl}", () => OffsetXl != null)
                         .AddIf(() => $"order-{Order.Value}", () => Order != null)
-                        .AddIf(() => $"align-self-{Align}", () => !string.IsNullOrEmpty(Align))
-                        .AddIf(() => $"col-sm-{Sm.Value}", () => Sm.Value != default)
-                        .AddIf(() => $"col-md-{Md.Value}", () => Md.Value != default)
-                        .AddIf(() => $"col-lg-{Lg.Value}", () => Lg.Value != default)
-                        .AddIf(() => $"col-xl-{Xl.Value}", () => Xl.Value != default);
+                        .AddIf(() => $"order-lg-{OrderLg}", () => OrderLg != null)
+                        .AddIf(() => $"order-md-{OrderMd}", () => OrderMd != null)
+                        .AddIf(() => $"order-sm-{OrderSm}", () => OrderSm != null)
+                        .AddIf(() => $"order-xl-{OrderXl}", () => OrderXl != null)
+                        .AddIf(() => $"align-self-{Align}", () => Align != null)
+                        .AddIf(SetHostFlexStyle, () => Flex != null);
                 });
+        }
+
+        private string SetHostFlexStyle()
+        {
+            return this.Flex.Match(str =>
+                {
+                    if (Regex.Match(str, "^\\d+(\\.\\d+)?(px|em|rem|%)$").Success)
+                    {
+                        return $"flex: 0 0 {str}";
+                    }
+
+                    return $"flex: {str}";
+                },
+                num => $"flex: {num} {num} auto",
+                _ => string.Empty);
         }
     }
 }
