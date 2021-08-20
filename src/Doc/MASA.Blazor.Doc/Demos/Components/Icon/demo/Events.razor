@@ -1,6 +1,6 @@
 ﻿<div>
     <MIcon OnClick="e=>visible = !visible">mdi-chevron-right</MIcon>
-    <MIcon OnClick="e=>visible = !visible">home</MIcon>
+    <MIcon OnClick="e=>UpdateIcon()">@icon</MIcon>
     <MIcon OnClick="e=>visible = !visible" Disabled>mdi-chevron-right</MIcon>
     <MAlert @bind-Visible="visible"
             Border="AlertBorder.Left"
@@ -11,7 +11,11 @@
 </div>
 
 @code {
-
     bool visible = false;
+    string icon = "home";
 
+    private void UpdateIcon()
+    {
+        icon = "mdi-email";
+    }
 }
