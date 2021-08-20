@@ -159,7 +159,7 @@ namespace MASA.Blazor
             }
         }
 
-        public bool HasColor => IsFocused;
+        public override bool HasColor => IsFocused;
 
         public override string ValidationState
         {

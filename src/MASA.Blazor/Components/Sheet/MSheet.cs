@@ -99,6 +99,9 @@ namespace MASA.Blazor
                         .AddMaxHeight(MaxHeight)
                         .AddBackgroundColor(Color);
                 });
+
+            AbstractProvider
+                .Apply<BSheetBody, BSheetBody>();
         }
     }
 }

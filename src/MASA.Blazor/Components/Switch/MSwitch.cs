@@ -26,6 +26,8 @@ namespace MASA.Blazor
 
         public bool? Ripple { get; set; }
 
+        public override bool HasColor => Value;
+
         public Task HandleOnBlur(FocusEventArgs args)
         {
             return Task.CompletedTask;
@@ -69,20 +71,20 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-input--selection-controls__ripple")
-                        .AddTextColor(ValidationState, () => Value);
+                        .AddTextColor(ValidationState);
                 })
                 .Apply("track", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-input--switch__track")
-                        .AddTextColor(ValidationState, () => Value)
+                        .AddTextColor(ValidationState)
                         .AddTheme(IsDark);
                 })
                 .Apply("thumb", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-input--switch__thumb")
-                        .AddTextColor(ValidationState, () => Value)
+                        .AddTextColor(ValidationState)
                         .AddTheme(IsDark);
                 });
 

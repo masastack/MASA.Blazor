@@ -28,7 +28,9 @@ namespace MASA.Blazor
         [Parameter]
         public string BackgroundColor { get; set; }
 
-        public virtual string ComputedColor => IsDisabled ? "" : Color ?? (Dark ? "white" : "primary");
+        public virtual string ComputedColor => IsDisabled ? "" : Color ?? (IsDark ? "white" : "primary");
+
+        public virtual bool HasColor { get; }
 
         public virtual string ValidationState
         {
@@ -47,7 +49,12 @@ namespace MASA.Blazor
 
                 //TODO:success
 
-                return ComputedColor;
+                if (HasColor)
+                {
+                    return ComputedColor;
+                }
+
+                return "";
             }
         }
 

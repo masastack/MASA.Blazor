@@ -46,13 +46,13 @@ namespace MASA.Blazor
                     props[nameof(MCascaderMenu.CloseOnContentClick)] = false;
                 })
                 .Apply<BList, MList>()
-                .Apply<MItemGroup, MListItemGroup>(props =>
+                .Apply<BItemGroup, MListItemGroup>(props =>
                 {
                     props[nameof(MListItemGroup.Color)] = "primary";
                 })
                 .Merge<BSelectOption<TItem, TValue>, MCascaderSelectOption<TItem, TValue>>()
                 .Merge(typeof(BSelectMenu<,,>), typeof(BCascaderMenu<TItem, TValue, MCascader<TItem, TValue>>))
-                .Apply(typeof(BCascaderMenuBody<TItem, TValue, ICascader<TItem, TValue>>), typeof(BCascaderMenuBody<TItem, TValue, MCascader<TItem, TValue>>));
+                .Apply(typeof(BCascaderMenuBody<,,>), typeof(BCascaderMenuBody<TItem, TValue, MCascader<TItem, TValue>>));
         }
 
         private List<TItem> GetItemByValue(IEnumerable<TItem> items, TValue value, bool isFull)
