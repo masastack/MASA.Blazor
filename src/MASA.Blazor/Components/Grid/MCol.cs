@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using MASA.Blazor.Extensions;
 
 namespace MASA.Blazor
 {
@@ -27,7 +28,8 @@ namespace MASA.Blazor
         /// 'auto', 'start', 'end', 'center', 'baseline', 'stretch'
         /// </summary>
         [Parameter]
-        public StringEnum<AlignTypes> Align { get; set; }
+        public 
+        StringEnum<AlignTypes> Align { get; set; }
 
         [Parameter] 
         public StringNumber OrderLg { get; set; }
@@ -79,7 +81,14 @@ namespace MASA.Blazor
                         .AddIf(() => $"order-md-{OrderMd}", () => OrderMd != null)
                         .AddIf(() => $"order-sm-{OrderSm}", () => OrderSm != null)
                         .AddIf(() => $"order-xl-{OrderXl}", () => OrderXl != null)
-                        .AddIf(() => $"align-self-{Align}", () => Align != null)
+                        .AddIf(Align.ToString(() =>
+                                $"align-self-{Align}",
+                            ("align-self-auto", AlignTypes.Auto),
+                            ("align-self-start", AlignTypes.Start),
+                            ("align-self-center", AlignTypes.Center),
+                            ("align-self-end", AlignTypes.End),
+                            ("align-self-baseline", AlignTypes.Baseline),
+                            ("align-self-stretch", AlignTypes.Stretch)), () => Align != null)
                         .AddIf(SetHostFlexStyle, () => Flex != null);
                 });
         }
