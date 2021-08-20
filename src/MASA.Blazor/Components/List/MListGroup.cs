@@ -36,7 +36,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add(prefix)
-                        .AddIf($"{prefix}--active", () => IsActive)
+                        .AddIf($"{prefix}--active", () => Expanded)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--no-action", () => NoAction)
                         .AddIf($"{prefix}--sub-group", () => SubGroup)
@@ -51,9 +51,10 @@ namespace MASA.Blazor
             AbstractProvider
                 .Apply<BListItem, MListGroupItem>(props =>
                 {
-                    props[nameof(MListGroupItem.IsActive)] = IsActive;
+                    props[nameof(MListGroupItem.NoGroup)] = true;
+                    props[nameof(MListGroupItem.IsActive)] = Expanded;
                     props[nameof(MListGroupItem.Link)] = true;
-                    props[nameof(MListGroupItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, args => IsActive = !IsActive);
+                    props[nameof(MListGroupItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, args => ToggleExpansion());
                     props[nameof(MListGroupItem.Dark)] = Dark;
                 })
                 .Apply<BListItemIcon, MListGroupItemIcon>("prepend", props =>

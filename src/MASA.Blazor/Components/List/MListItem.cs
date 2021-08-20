@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using BlazorComponent;
+using MASA.Blazor.Components.List;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
@@ -154,18 +155,15 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--link", () => Link && !Inactive)
                         .AddIf($"{prefix}--active", () =>
                         {
-                            if (IsActive)
-                            {
-                                return true;
-                            }
+                            if (IsActive) return true;
 
                             if (!Link) return false;
+
+                            if (Value == null) return false;
+
                             if (ItemGroup == null) return false;
 
-                            if (ItemGroup.Multiple)
-                            {
-                                return ItemGroup.Values.Contains(Value);
-                            }
+                            if (ItemGroup.Multiple) return ItemGroup.Values.Contains(Value);
 
                             return ItemGroup.Value == Value;
                         })
@@ -181,33 +179,6 @@ namespace MASA.Blazor
             {
                 NavigationManager.NavigateTo(Href);
             }
-
-            //if (Group != null)
-            //{
-            //    if (Group.Multiple)
-            //    {
-            //        if (Group.ValuesChanged.HasDelegate)
-            //        {
-            //            if (Group.Values.Contains(Key))
-            //            {
-            //                await Group.ValuesChanged.InvokeAsync(Group.Values.Where(u => u != Key).ToList());
-            //            }
-            //            else
-            //            {
-            //                await Group.ValuesChanged.InvokeAsync(Group.Values.Concat(new[] { Key }).ToList());
-            //            }
-            //        }
-            //    }
-            //    else
-            //    {
-            //        if (Group.ValueChanged.HasDelegate)
-            //        {
-            //            await Group.ValueChanged.InvokeAsync(Key);
-            //        }
-            //    }
-
-            //    await Group.ToggleSelectAsync(Key);
-            //}
 
             await base.HandleOnClick(args);
         }

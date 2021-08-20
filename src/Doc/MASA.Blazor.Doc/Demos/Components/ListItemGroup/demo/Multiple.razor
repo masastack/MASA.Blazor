@@ -1,9 +1,9 @@
-<div style="max-width:500px">
+<MCard MaxWidth="400">
     <MList>
-        <MListItemGroup @bind-Values="@selected" Multiple Color="primary">
+        <MListItemGroup @bind-Values="@selected" Multiple Color="indigo">
             @foreach (var item in _items)
             {
-                <MListItem Value="@((StringNumber)item.Text)">
+                <MListItem Value="@item.Text">
                     <MListItemIcon>
                         <MIcon>@item.Icon</MIcon>
                     </MListItemIcon>
@@ -14,9 +14,7 @@
             }
         </MListItemGroup>
     </MList>
-
-    <span>@string.Join(',', selected)</span>
-</div>
+</MCard>
 
 @code {
 

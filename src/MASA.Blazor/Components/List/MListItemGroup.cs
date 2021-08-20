@@ -16,7 +16,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-list-item-group")
-                        .AddColor(Color, true);
+                        .AddTextColor(Color);
                 });
         }
     }

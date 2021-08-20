@@ -204,7 +204,7 @@ namespace MASA.Blazor
             }
 
             groups.Remove(group);
-            groups.ForEach(r => r.DeActive());
+            groups.ForEach(r => r.Contract());
         }
     }
 }
