@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor.Presets
 {
-    public partial class PSidebar<T>
+    public partial class PSidebar<TItem>
     {
-        private List<SidebarItem<T>> _sidebarItems = new();
+        private List<SidebarItem<TItem>> _sidebarItems = new();
 
-        private List<T> _items = new();
+        private List<TItem> _items = new();
         private bool _itemsChanged;
 
         [Parameter]
-        public List<T> Items
+        public List<TItem> Items
         {
             get => _items;
             set
             {
-                _items = value ?? new List<T>();
+                _items = value ?? new List<TItem>();
                 _itemsChanged = true;
             }
         }
@@ -50,19 +50,19 @@ namespace MASA.Blazor.Presets
         public EventCallback<StringNumber> ValueChanged { get; set; }
 
         [Parameter]
-        public Func<T, StringNumber> Key { get; set; }
+        public Func<TItem, StringNumber> Key { get; set; }
 
         [Parameter]
-        public Func<T, string> Title { get; set; }
+        public Func<TItem, string> Title { get; set; }
 
         [Parameter]
-        public Func<T, string> Icon { get; set; }
+        public Func<TItem, string> Icon { get; set; }
 
         [Parameter]
-        public Func<T, List<T>> Children { get; set; }
+        public Func<TItem, List<TItem>> Children { get; set; }
 
         [Parameter]
-        public EventCallback<T> Click { get; set; }
+        public EventCallback<TItem> Click { get; set; }
 
         [Parameter]
         public string Color { get; set; } = "primary";
@@ -109,9 +109,9 @@ namespace MASA.Blazor.Presets
             }
         }
 
-        private List<SidebarItem<T>> ConvertToSidebarItems(List<T> items, StringNumber activeValue)
+        private List<SidebarItem<TItem>> ConvertToSidebarItems(List<TItem> items, StringNumber activeValue)
         {
-            var sidebarItems = new List<SidebarItem<T>>();
+            var sidebarItems = new List<SidebarItem<TItem>>();
 
             foreach (var item in items)
             {
@@ -119,7 +119,7 @@ namespace MASA.Blazor.Presets
                 var icon = Icon?.Invoke(item);
                 var value = Key?.Invoke(item);
 
-                var sidebarItem = new SidebarItem<T>
+                var sidebarItem = new SidebarItem<TItem>
                 {
                     Title = title,
                     Icon = icon,
