@@ -11,7 +11,7 @@ packer:
   image: proget-hz.lonsid.cn/masa-blazor/dotnet/sdk:6.0
   stage: packer
   tags:
-    - linux-masa
+    - masa-sec
   only:
     - develop
   script:
