@@ -10,8 +10,6 @@ variables:
 packer:
   image: proget-hz.lonsid.cn/masa-blazor/dotnet/sdk:6.0
   stage: packer
-  tags:
-    - masa-sec
   only:
     - develop
   script:
