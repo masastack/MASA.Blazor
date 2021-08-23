@@ -26,8 +26,6 @@ namespace MASA.Blazor.Presets
         private DateTime _value;
         private DateTime _dateTime;
 
-        private DateTime LocalDateTime => DateTime.Now.ToLocalTime();
-
         private string InputValue
         {
             get
@@ -50,7 +48,7 @@ namespace MASA.Blazor.Presets
             get => _value;
             set
             {
-                _dateTime = value == default ? LocalDateTime : value;
+                _dateTime = value == default ? DateTime.Now : value;
                 SetTime(_dateTime);
 
                 _value = value;
@@ -114,28 +112,36 @@ namespace MASA.Blazor.Presets
 
         private async Task InputValueChanged(string inputValue)
         {
-            if (DateTime.TryParse(inputValue, out var value))
+            if (inputValue == default)
             {
-                if (ValueChanged.HasDelegate)
-                    await ValueChanged.InvokeAsync(value);
+                await ValueChanged.InvokeAsync(default);
             }
             else
             {
-                await ValueChanged.InvokeAsync(_dateTime);
+                var dateTime = ValidateInputValue(inputValue);
+
+                await ValueChanged.InvokeAsync(dateTime);
             }
 
             _menuVisible = false;
         }
 
+        private DateTime ValidateInputValue(string inputValue)
+        {
+            return (Time && inputValue.Length != 19) || (!Time && inputValue.Length != 10)
+                ? _dateTime
+                : DateTime.TryParse(inputValue, out var dateTime) ? dateTime : _dateTime;
+        }
+
         private void OnNow()
         {
-            _dateTime = LocalDateTime;
+            _dateTime = DateTime.Now;
             SetTime(_dateTime);
         }
 
         private void OnCancel()
         {
-            _dateTime = Value == default ? LocalDateTime : Value;
+            _dateTime = Value == default ? DateTime.Now : Value;
             SetTime(_dateTime);
 
             _menuVisible = false;
@@ -165,9 +171,10 @@ namespace MASA.Blazor.Presets
             }
         }
 
-        private Task HandleClearClick()
+        private void Popup()
         {
-            return ValueChanged.InvokeAsync(default);
+            if (!Readonly && !Disabled)
+                _menuVisible = true;
         }
     }
 }

@@ -228,6 +228,16 @@ namespace MASA.Blazor
         public virtual async Task HandleOnInput(ChangeEventArgs args)
         {
             //TODO:badInput
+
+            try
+            {
+                Value = (TValue)Convert.ChangeType(args.Value, typeof(TValue));
+            }
+            catch (Exception)
+            {
+                Value = default;
+            }
+
             if (OnInput.HasDelegate)
             {
                 await OnInput.InvokeAsync(args);
@@ -348,7 +358,9 @@ namespace MASA.Blazor
             AbstractProvider
                 .Merge(typeof(BTextFieldAffix<,>), typeof(BTextFieldAffix<TValue, MTextField<TValue>>))
                 .Merge(typeof(BInputAppendSlot<>), typeof(BTextFieldAppendSlot<TValue>))
-                .Merge(typeof(BTextFieldClearIcon<,>), typeof(BTextFieldClearIcon<TValue, MTextField<TValue>>))
+                .Merge(typeof(BTextFieldClearIcon<,>), typeof(BTextFieldClearIcon<TValue, MTextField<TValue>>), props =>
+                {
+                })
                 .Merge(typeof(BTextFieldCounter<,>), typeof(BTextFieldCounter<TValue, MTextField<TValue>>))
                 .Merge(typeof(BInputDefaultSlot<>), typeof(BTextFieldDefaultSlot<TValue, MTextField<TValue>>))
                 .Merge(typeof(BTextFieldFieldset<,>), typeof(BTextFieldFieldset<TValue, MTextField<TValue>>))

@@ -3,30 +3,29 @@
 
 @if (Dialog)
 {
-    <div style="display: block" @onclick="() => _menuVisible = true">
-        <MTextField Label="@Label" 
-                Dense="Dense"
-                IsReadonly="Readonly"
-                IsDisabled="Disabled"
-                Outlined="Outlined"
-                Filled="Filled"
-                IsSolo="Solo"
-                Placeholder="@Placeholder"
-                Clearable
-                ClearClick="HandleClearClick"
-                Value="@InputValue" TValue="string" ValueChanged="InputValueChanged"></MTextField>
-    </div>
+    <MTextField Label="@Label"
+            Dense="Dense"
+            Readonly="Readonly"
+            Disabled="Disabled"
+            Outlined="Outlined"
+            Filled="Filled"
+            Solo="Solo"
+            Placeholder="@Placeholder"
+            Clearable
+            HideDetails="@("auto")"
+            OnClick="Popup"
+            Value="@InputValue" TValue="string" ValueChanged="InputValueChanged"></MTextField>
 
     <MDialog Visible="_menuVisible" Width="@("auto")" OutsideClick="OnCancel">
         <MDatePicker @bind-Value="_dateTime" Style="width:min-content" ActionsStyle="flex-direction:column;" @attributes="DatePickerAttributes">
             <ActionsContent>
                 @if (Time)
                 {
-                <MRow Dense Align="@("center")" Style="padding: 0 12px;">
-                    <MCol><MSelect Dense Label="时" @bind-Value="_hour" Items="_hours" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForHour"></MSelect></MCol>
-                    <MCol><MSelect Dense Label="分" @bind-Value="_minute" Items="_minutes" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForMin"></MSelect></MCol>
-                    <MCol><MSelect Dense Label="秒" @bind-Value="_second" Items="_seconds" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForSecond"></MSelect></MCol>
-                </MRow>
+                    <MRow Dense Align="@("center")" Style="padding: 0 12px;">
+                        <MCol><MSelect Dense Label="时" @bind-Value="_hour" Items="_hours" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForHour"></MSelect></MCol>
+                        <MCol><MSelect Dense Label="分" @bind-Value="_minute" Items="_minutes" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForMin"></MSelect></MCol>
+                        <MCol><MSelect Dense Label="秒" @bind-Value="_second" Items="_seconds" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForSecond"></MSelect></MCol>
+                    </MRow>
                 }
 
                 <div style="display:flex; width: 100%">
@@ -41,18 +40,23 @@
 }
 else
 {
-    <MMenu @bind-Visible="_menuVisible" MinWidth="@("auto")" Block CloseOnContentClick="false" OutsideClick="OnCancel" MaxHeight="@("auto")" OffsetY Bottom>
+    <MMenu @bind-Visible="_menuVisible" MinWidth="@("auto")"
+       MaxHeight="@("auto")"
+       CloseOnContentClick="false"
+       OutsideClick="OnCancel"
+       OffsetY Bottom Block
+       Disabled="@(Disabled || Readonly)">
         <Activator>
-            <MTextField Label="@Label" 
+            <MTextField Label="@Label"
                     Dense="Dense"
-                    IsReadonly="Readonly"
-                    IsDisabled="Disabled"
+                    Readonly="Readonly"
+                    Disabled="Disabled"
                     Outlined="Outlined"
                     Filled="Filled"
-                    IsSolo="Solo"
+                    Solo="Solo"
                     Placeholder="@Placeholder"
                     Clearable
-                    ClearClick="HandleClearClick"
+                    HideDetails="@("auto")"
                     Value="@InputValue" TValue="string" ValueChanged="InputValueChanged"></MTextField>
         </Activator>
         <ChildContent>
@@ -60,11 +64,11 @@ else
                 <ActionsContent>
                     @if (Time)
                     {
-                    <MRow Dense Align="@("center")" Style="padding: 0 12px;">
-                        <MCol><MSelect Dense Label="时" @bind-Value="_hour" Items="_hours" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForHour"></MSelect></MCol>
-                        <MCol><MSelect Dense Label="分" @bind-Value="_minute" Items="_minutes" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForMin"></MSelect></MCol>
-                        <MCol><MSelect Dense Label="秒" @bind-Value="_second" Items="_seconds" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForSecond"></MSelect></MCol>
-                    </MRow>
+                        <MRow Dense Align="@("center")" Style="padding: 0 12px;">
+                            <MCol><MSelect Dense Label="时" @bind-Value="_hour" Items="_hours" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForHour"></MSelect></MCol>
+                            <MCol><MSelect Dense Label="分" @bind-Value="_minute" Items="_minutes" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForMin"></MSelect></MCol>
+                            <MCol><MSelect Dense Label="秒" @bind-Value="_second" Items="_seconds" ItemText="u => u.ToString().PadLeft(2, '0')" ItemValue="u => u" MenuProps="_menuPropsForSecond"></MSelect></MCol>
+                        </MRow>
                     }
 
                     <div style="display:flex; width: 100%">
