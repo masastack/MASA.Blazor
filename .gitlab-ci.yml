@@ -4,7 +4,7 @@ stages:
   - deploy
 
 variables:
-  DOCKER_HOST: tcp://localhost:2375/
+  #DOCKER_HOST: tcp://localhost:2375/
   IMAGE: proget-hz.lonsid.cn/masa-blazor/docs:0.2.$CI_PIPELINE_ID
 
 packer:
