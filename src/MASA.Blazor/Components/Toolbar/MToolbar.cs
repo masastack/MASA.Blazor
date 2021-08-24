@@ -1,6 +1,5 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
@@ -152,7 +151,7 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply<BSheetBody, BToolbarSheetBody>(props =>
+                .Merge<BSheetBody, BToolbarSheetBody>(props =>
                 {
                     props[nameof(BToolbarSheetBody.ChildContent)] = ChildContent;
                     props[nameof(BToolbarSheetBody.CssProvider)] = CssProvider;
@@ -163,11 +162,11 @@ namespace MASA.Blazor
                     props[nameof(BToolbarSheetBody.IsExtended)] = IsExtended;
                     props[nameof(BToolbarSheetBody.ExtensionContent)] = ExtensionContent;
                 })
-                .Apply(typeof(BImageContent<>),typeof(MImage),props =>
-                {
-                    props[nameof(MImage.Height)] = ComputedHeight;
-                    props[nameof(MImage.Src)] = Src;
-                });
+                .Apply(typeof(IImage), typeof(MImage), props =>
+                 {
+                     props[nameof(MImage.Height)] = ComputedHeight;
+                     props[nameof(MImage.Src)] = Src;
+                 });
         }
     }
 }

@@ -1,11 +1,5 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
-using OneOf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
@@ -16,12 +10,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool Shaped { get; set; }
-
-        [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
 
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
