@@ -69,19 +69,27 @@ namespace MASA.Blazor.Test.TextField
         public async Task HandleOnChangeValueChangedShouldBeCalled()
         {
             // Arrange
-            var cut = RenderComponent<TestComponent>();
-            var textField = cut.FindComponent<MTextField<string>>();
+            using var factory = new TestEventCallbackFactory();
+
+            var val = "";
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(p => p.ValueChanged, factory.CreateEventCallback<string>(v =>
+                {
+                    val = v;
+                }));
+            });
+
+            // Act
             var args = new ChangeEventArgs()
             {
                 Value = "hello"
             };
-
-            // Act
-            await cut.InvokeAsync(()=>textField.Instance.HandleOnChange(args));
+            await factory.Reciever.InvokeAsync(() => cut.Instance.HandleOnChange(args));
 
             // Assert
-            Assert.AreEqual("hello", textField.Instance.Value);
-            Assert.AreEqual("hello", cut.Instance.Name);
+            Assert.AreEqual("hello", cut.Instance.Value);
+            Assert.AreEqual("hello", val);
         }
     }
 }
