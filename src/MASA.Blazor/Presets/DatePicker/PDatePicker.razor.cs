@@ -108,7 +108,14 @@ namespace MASA.Blazor.Presets
         [Parameter]
         public string Placeholder { get; set; }
 
+        private string TextFieldStyle => Width == null ? "" : $"width:{Width.ToUnit()}";
+
         #endregion
+
+        private string ActivatorStyle => Width == null ? "width:100%": "";
+
+        [Parameter]
+        public StringNumber Width { get; set; }
 
         private async Task InputValueChanged(string inputValue)
         {

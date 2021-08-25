@@ -14,6 +14,7 @@
             Clearable
             HideDetails="@("auto")"
             OnClick="Popup"
+            Style="@TextFieldStyle"
             Value="@InputValue" TValue="string" ValueChanged="InputValueChanged"></MTextField>
 
     <MDialog Visible="_menuVisible" Width="@("auto")" OutsideClick="OnCancel">
@@ -44,7 +45,8 @@ else
        MaxHeight="@("auto")"
        CloseOnContentClick="false"
        OutsideClick="OnCancel"
-       OffsetY Bottom Block
+       OffsetY Bottom
+       ActivatorStyle="@ActivatorStyle"
        Disabled="@(Disabled || Readonly)">
         <Activator>
             <MTextField Label="@Label"
@@ -57,10 +59,11 @@ else
                     Placeholder="@Placeholder"
                     Clearable
                     HideDetails="@("auto")"
+                    Style="@TextFieldStyle"
                     Value="@InputValue" TValue="string" ValueChanged="InputValueChanged"></MTextField>
         </Activator>
         <ChildContent>
-            <MDatePicker @bind-Value="_dateTime" Style="width:min-content" ActionsStyle="flex-direction:column;">
+            <MDatePicker @bind-Value="_dateTime" Style="width:min-content" ActionsStyle="flex-direction:column;" @attributes="DatePickerAttributes">
                 <ActionsContent>
                     @if (Time)
                     {
