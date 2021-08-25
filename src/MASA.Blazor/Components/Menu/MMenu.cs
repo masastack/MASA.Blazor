@@ -67,7 +67,7 @@ namespace MASA.Blazor
         {
             _window = window ?? _window;
 
-            _bodyRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo);
+            _bodyRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, "document");
 
             _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, ComputedRef);
 
@@ -132,9 +132,9 @@ namespace MASA.Blazor
                 _clientX = _window.InnerWidth - _minWidth - 17;
             }
 
-            if (_clientY + _contentRect.ClientHeight > _bodyRect.ScrollHeight)
+            if (_clientY + _contentRect.ClientHeight > _bodyRect.ScrollTop + _bodyRect.ClientHeight)
             {
-                _clientY = _bodyRect.ScrollHeight - _contentRect.ClientHeight;
+                _clientY = _bodyRect.ScrollTop + _bodyRect.ClientHeight - _contentRect.ClientHeight;
             }
 
             _immutableClientY = _clientY;
