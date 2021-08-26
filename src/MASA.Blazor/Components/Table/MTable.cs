@@ -62,7 +62,6 @@ namespace MASA.Blazor
             var prefix = "m-data-table";
 
             CssProvider
-                .AsProvider<BTable<TItem>>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

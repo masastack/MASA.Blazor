@@ -112,7 +112,6 @@ namespace MASA.Blazor
             var prefix = "m-skeleton-loader";
 
             CssProvider
-                .AsProvider<BSkeletonLoader>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder.Add(prefix)

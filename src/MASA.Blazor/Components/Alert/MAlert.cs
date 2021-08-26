@@ -90,7 +90,6 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .AsProvider<BAlert>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

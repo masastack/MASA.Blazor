@@ -123,7 +123,6 @@ namespace MASA.Blazor
         {
             var prefix = "m-snack";
             CssProvider
-                .AsProvider<BSnackbar>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

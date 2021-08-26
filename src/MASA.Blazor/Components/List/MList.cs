@@ -138,7 +138,7 @@ namespace MASA.Blazor
 
                 return Themeable != null && Themeable.IsDark;
             }
-        } 
+        }
 
         public override List<BListItem> Items { get; set; } = new List<BListItem>();
 
@@ -147,7 +147,7 @@ namespace MASA.Blazor
             var prefix = "m-list";
 
             CssProvider
-                .Apply<BList>(cssBuilder =>
+                .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-sheet")

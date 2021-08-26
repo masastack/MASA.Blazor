@@ -66,7 +66,6 @@ namespace MASA.Blazor
             var prefix = "m-card";
 
             CssProvider
-                .AsProvider<BCard>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder.Add("m-card")

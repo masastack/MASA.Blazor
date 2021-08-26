@@ -37,7 +37,6 @@ namespace MASA.Blazor
         {
             var prefix = "m-tooltip";
             CssProvider
-                .AsProvider<BTooltip>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

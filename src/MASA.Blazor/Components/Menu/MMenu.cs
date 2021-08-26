@@ -145,7 +145,6 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .AsProvider<BMenu>()
                 .Apply(styleAction: styleBuilder => styleBuilder
                         .AddFirstIf(
                             ("display:block", () => Block),

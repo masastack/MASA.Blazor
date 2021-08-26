@@ -12,7 +12,7 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .Apply<BForm>(cssBuilder =>
+                .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-form");

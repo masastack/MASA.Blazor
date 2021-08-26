@@ -12,7 +12,7 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .Apply<BListItemActionText>(cssBuilder =>
+                .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-list-item__action-text");

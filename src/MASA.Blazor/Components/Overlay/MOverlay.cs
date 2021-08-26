@@ -37,7 +37,6 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .AsProvider<BOverlay>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

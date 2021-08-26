@@ -12,7 +12,6 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .AsProvider<BTableLoading>()
                 .Apply("progress", cssBuilder =>
                 {
                     cssBuilder

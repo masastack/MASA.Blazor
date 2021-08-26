@@ -31,14 +31,13 @@ namespace MASA.Blazor
 
                 return Themeable != null && Themeable.IsDark;
             }
-        } 
+        }
 
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
 
             CssProvider
-                .AsProvider<BHintMessage>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

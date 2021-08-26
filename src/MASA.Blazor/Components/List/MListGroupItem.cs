@@ -14,7 +14,7 @@ namespace MASA.Blazor.Components.List
             base.SetComponentClass();
 
             CssProvider
-                .Merge<BListItem>(cssBuilder =>
+                .Merge(cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-list-group__header");

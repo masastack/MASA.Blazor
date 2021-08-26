@@ -8,8 +8,7 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .AsProvider<BUpload>()
-                .Apply(css => { }, style =>
+                .Apply(styleAction: style =>
                 {
                     style.Add("display: inline-block");
                 })

@@ -29,7 +29,6 @@ namespace MASA.Blazor.Components.Table
         protected override void SetComponentClass()
         {
             CssProvider
-                .AsProvider<BTableFooter>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder.Add("m-data-footer");

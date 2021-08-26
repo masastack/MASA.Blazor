@@ -71,7 +71,7 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .Apply<BIcon>(cssBuilder =>
+                .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-icon")

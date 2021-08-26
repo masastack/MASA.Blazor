@@ -14,7 +14,7 @@ namespace MASA.Blazor
             base.SetComponentClass();
 
             CssProvider
-                .Merge<BIcon>(cssBuilder =>
+                .Merge(cssBuilder =>
                 {
                     cssBuilder
                        .Add("m-chip__close");

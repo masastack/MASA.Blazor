@@ -61,7 +61,7 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .Apply<BCol>(cssBuilder =>
+                .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .AddIf(() => $"col",

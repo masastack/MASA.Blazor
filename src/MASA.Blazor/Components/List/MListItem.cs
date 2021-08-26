@@ -143,7 +143,7 @@ namespace MASA.Blazor
         {
             var prefix = "m-list-item";
             CssProvider
-                .Apply<BListItem>(cssBuilder =>
+                .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-list-item")

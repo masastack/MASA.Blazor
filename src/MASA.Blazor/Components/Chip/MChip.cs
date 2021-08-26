@@ -92,7 +92,6 @@ namespace MASA.Blazor
             var prefix = "m-chip";
 
             CssProvider
-                .AsProvider<BChip>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

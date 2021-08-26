@@ -19,7 +19,7 @@ namespace MASA.Blazor
 
             var prefix = "m-list-item__avatar";
             CssProvider
-                .Merge<BAvatar>(cssBuilder =>
+                .Merge(cssBuilder =>
                 {
                     cssBuilder
                         .Add(prefix)

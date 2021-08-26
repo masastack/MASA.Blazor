@@ -14,7 +14,7 @@ namespace MASA.Blazor
             base.SetComponentClass();
 
             CssProvider
-                .Merge<BButton>(cssBuilder =>
+                .Merge(cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-snack__btn");

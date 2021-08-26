@@ -31,7 +31,6 @@ namespace MASA.Blazor
         {
             var prefix = "m-list-group";
             CssProvider
-                .AsProvider<BListGroup>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

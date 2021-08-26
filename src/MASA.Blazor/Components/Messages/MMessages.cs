@@ -44,7 +44,6 @@ namespace MASA.Blazor
         {
             var prefix = "m-messages";
             CssProvider
-                .AsProvider<BMessages>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

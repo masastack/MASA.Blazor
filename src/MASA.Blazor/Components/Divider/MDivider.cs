@@ -48,7 +48,7 @@ namespace MASA.Blazor
             var prefix = "m-divider";
 
             CssProvider
-                .Apply<BDivider>(cssBuilder =>
+                .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-divider")

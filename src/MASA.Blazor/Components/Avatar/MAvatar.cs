@@ -51,7 +51,7 @@ namespace MASA.Blazor
             var prefix = "m-avatar";
 
             CssProvider
-                .Apply<BAvatar>(cssBuilder =>
+                .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .Add(prefix)

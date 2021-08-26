@@ -72,7 +72,6 @@ namespace MASA.Blazor
             var prefix = "m-progress-linear";
 
             CssProvider
-                .AsProvider<BProcessLinear>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

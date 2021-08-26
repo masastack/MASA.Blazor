@@ -21,7 +21,6 @@ namespace MASA.Blazor
             var prefix = "m-dialog";
 
             CssProvider
-                .AsProvider<BDialog>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

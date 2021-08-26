@@ -41,7 +41,6 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .AsProvider<BTreeItem<T>>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

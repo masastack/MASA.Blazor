@@ -18,7 +18,7 @@ namespace MASA.Blazor
             base.SetComponentClass();
 
             CssProvider
-                .Merge<BListItemIcon>(cssBuilder =>
+                .Merge(cssBuilder =>
                 {
                     cssBuilder
                         .Add($"m-list-group__header__{Type}-icon");

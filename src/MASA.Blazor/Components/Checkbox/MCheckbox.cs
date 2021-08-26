@@ -77,7 +77,6 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .AsProvider<BCheckbox>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

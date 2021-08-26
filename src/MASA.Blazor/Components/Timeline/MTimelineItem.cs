@@ -69,7 +69,6 @@ namespace MASA.Blazor
             var prefix = "m-timeline-item";
 
             CssProvider
-                .AsProvider<BTimelineItem>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

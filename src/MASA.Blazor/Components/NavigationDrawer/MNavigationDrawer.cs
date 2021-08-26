@@ -219,7 +219,6 @@ namespace MASA.Blazor
             var prefix = "m-navigation-drawer";
 
             CssProvider
-                .AsProvider<BNavigationDrawer>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder

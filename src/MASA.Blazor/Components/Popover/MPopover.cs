@@ -7,7 +7,7 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .Apply<BPopover>(styleAction: styleBuilder =>
+                .Apply(styleAction: styleBuilder =>
                  {
                      styleBuilder
                          .Add(() => "z-index: 1000;")

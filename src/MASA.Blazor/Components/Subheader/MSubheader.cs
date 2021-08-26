@@ -38,7 +38,6 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .AsProvider<BSubheader>()
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
