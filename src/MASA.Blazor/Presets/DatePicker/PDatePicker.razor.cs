@@ -108,6 +108,9 @@ namespace MASA.Blazor.Presets
         [Parameter]
         public string Placeholder { get; set; }
 
+        [Parameter]
+        public StringBoolean HideDetails { get; set; } = false;
+
         private string TextFieldStyle => Width == null ? "" : $"width:{Width.ToUnit()}";
 
         #endregion
