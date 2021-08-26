@@ -91,7 +91,7 @@ namespace MASA.Blazor.Presets
         public bool Disabled { get; set; }
 
         [Parameter]
-        public bool Readonly { get; set; } = true;
+        public bool Readonly { get; set; }
 
         [Parameter]
         public bool Dense { get; set; }
