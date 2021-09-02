@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorComponent;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace MASA.Blazor.Presets
@@ -17,7 +18,7 @@ namespace MASA.Blazor.Presets
 
             public string IconColor { get; set; }
 
-            public AlertType Type { get; set; } = AlertType.None;
+            public AlertTypes Type { get; set; } = AlertTypes.None;
 
             public string OkText { get; set; } = "确定";
 

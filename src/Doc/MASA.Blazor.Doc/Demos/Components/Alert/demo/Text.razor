@@ -1,4 +1,4 @@
-﻿@using AlertType = Blazor.AlertType
+﻿@using AlertTypes = BlazorComponent.AlertTypes
 
 <div>
     <MAlert Text
@@ -28,20 +28,20 @@
     <MAlert Text
             Outlined
             Color="deep-orange"
-            Icon="mdi-fire">
+            Icon="@("mdi-fire")">
         Nullam tincidunt adipiscing enim. In consectetuer turpis ut velit. Maecenas egestas arcu quis ligula mattis placerat. Praesent metus tellus, elementum eu, semper a, adipiscing nec, purus.
     </MAlert>
     <MAlert Text
             Dense
             Color="teal"
-            Icon="mdi-clock-fast"
-            Border="AlertBorder.Left">
+            Icon="@("mdi-clock-fast")"
+            Border="Borders.Left">
         Vestibulum ullamcorper mauris at ligula. Nulla porta dolor. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor. Curabitur at lacus ac velit ornare lobortis.
     </MAlert>
     <MAlert Text
             Prominent
-            Type="AlertType.Error"
-            Icon="mdi-cloud-alert">
+            Type="AlertTypes.Error"
+            Icon="@("mdi-cloud-alert")">
         Praesent blandit laoreet nibh. Praesent nonummy mi in odio. Phasellus tempus. Mauris turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Duis leo.
     </MAlert>
 </div>

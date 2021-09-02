@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
+using BlazorComponent;
 
 namespace MASA.Blazor.Presets
 {
@@ -7,19 +8,19 @@ namespace MASA.Blazor.Presets
     {
         private string Icon => Type switch
         {
-            AlertType.Success => "mdi-check-circle",
-            AlertType.Info => "mdi-information",
-            AlertType.Warning => "mdi-exclamation",
-            AlertType.Error => "mdi-alert",
+            AlertTypes.Success => "mdi-check-circle",
+            AlertTypes.Info => "mdi-information",
+            AlertTypes.Warning => "mdi-exclamation",
+            AlertTypes.Error => "mdi-alert",
             _ => null,
         };
 
         private string IconColor => Type switch
         {
-            AlertType.Success => "success",
-            AlertType.Info => "info",
-            AlertType.Warning => "warning",
-            AlertType.Error => "error",
+            AlertTypes.Success => "success",
+            AlertTypes.Info => "info",
+            AlertTypes.Warning => "warning",
+            AlertTypes.Error => "error",
             _ => null
         };
 
@@ -30,7 +31,7 @@ namespace MASA.Blazor.Presets
         public EventCallback<bool> VisibleChanged { get; set; }
 
         [Parameter]
-        public AlertType Type { get; set; }
+        public AlertTypes Type { get; set; }
 
         [Parameter]
         public RenderFragment ChildContent { get; set; }

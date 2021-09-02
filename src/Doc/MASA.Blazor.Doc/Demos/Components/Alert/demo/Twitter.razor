@@ -1,14 +1,12 @@
-﻿@using AlertType = Blazor.AlertType
-
-<div>
+﻿<div>
     <div>
-        <MAlert @bind-Visible="_alert"
+        <MAlert @bind-Value="_alert"
                 Dismissible
                 Color="cyan"
-                Border="AlertBorder.Left"
+                Border="Borders.Left"
                 Elevation="2"
                 ColoredBorder
-                Icon="mdi-twitter">
+                Icon="@("mdi-twitter")">
             You've got <strong>5</strong> new updates on your timeline!.
         </MAlert>
 

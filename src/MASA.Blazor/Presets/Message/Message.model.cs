@@ -1,4 +1,6 @@
-﻿namespace MASA.Blazor.Presets
+﻿using BlazorComponent;
+
+namespace MASA.Blazor.Presets
 {
     public partial class Message
     {
@@ -6,7 +8,7 @@
         {
             public bool Visible { get; set; }
 
-            public AlertType Type { get; set; } = AlertType.None;
+            public AlertTypes Type { get; set; } = AlertTypes.None;
 
             public int Timeout { get; set; } = 3000;
 
