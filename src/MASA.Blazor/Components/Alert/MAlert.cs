@@ -153,7 +153,7 @@ namespace MASA.Blazor
                         .AddIf("m-alert--text", () => Text)
                         .AddIf("m-alert--outlined", () => Outlined)
                         .AddColor(ComputedColor, HasText, () => !ColoredBorder)
-                        .AddRounded(Tile, Rounded);
+                        .AddRounded(Rounded, Tile);
                 }, styleBuilder =>
                 {
                     styleBuilder

@@ -153,7 +153,7 @@ namespace MASA.Blazor
                         .AddIf("m-sheet--shaped", () => Shaped)
                         .AddBackgroundColor(Color, () => !Text && !Outlined)
                         .AddTextColor(Color, () => Text || Outlined)
-                        .AddRounded(Tile, Rounded)
+                        .AddRounded(Rounded, Tile)
                         .AddElevation(Elevation)
                         .AddTheme(IsDark);
                 }, styleBuilder =>

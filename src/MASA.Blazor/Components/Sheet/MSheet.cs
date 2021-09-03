@@ -74,7 +74,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--shaped", () => Shaped)
                         .AddTheme(IsDark)
                         .AddElevation(Elevation)
-                        .AddRounded(Tile, Rounded)
+                        .AddRounded(Rounded, Tile)
                         .AddBackgroundColor(Color);
                 }, styleBuilder =>
                 {

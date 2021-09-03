@@ -116,7 +116,29 @@ namespace BlazorComponent
             return cssBuilder;
         }
 
-        public static CssBuilder AddRounded(this CssBuilder cssBuilder, bool tile, StringBoolean rounded)
+        public static CssBuilder AddRounded(this CssBuilder cssBuilder, StringBoolean rounded)
+        {
+            if (rounded != null)
+            {
+                if (rounded.IsT0)
+                {
+                    var values = rounded.AsT0.Split(' ');
+
+                    foreach (var val in values)
+                    {
+                        cssBuilder.Add($"rounded-{val}");
+                    }
+                }
+                else if (rounded.IsT1 && rounded.AsT1)
+                {
+                    cssBuilder.Add("rounded");
+                }
+            }
+
+            return cssBuilder;
+        }
+
+        public static CssBuilder AddRounded(this CssBuilder cssBuilder, StringBoolean rounded, bool tile)
         {
             if (tile)
             {

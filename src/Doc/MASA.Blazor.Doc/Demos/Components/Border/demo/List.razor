@@ -1,0 +1,41 @@
+﻿<MCard MaxWidth="300" Class="mx-auto">
+    <MList Dense>
+        <MSubheader>REPORTS</MSubheader>
+        <MListItemGroup @bind-Value="_selectedItem"
+                        Color="primary">
+            @foreach (var item in _items)
+            {
+                <MBorder Value="@(_selectedItem == item.Text)" Offset="_offset" Width="4">
+                    <MListItem Value="@item.Text">
+                        <MListItemIcon>
+                            <MIcon>@item.Icon</MIcon>
+                        </MListItemIcon>
+                        <MListItemContent>
+                            <MListItemTitle>@item.Text</MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                </MBorder>
+            }
+        </MListItemGroup>
+    </MList>
+    <MSwitch @bind-Value="_offset" Label="Offset"></MSwitch>
+</MCard>
+
+@code{
+    private bool _offset;
+    private StringNumber _selectedItem = "Audience";
+
+    private Item[] _items = new Item[]
+    {
+        new Item {Text = "Real-Time", Icon = "mdi-clock"},
+        new Item {Text = "Audience", Icon = "mdi-account"},
+        new Item {Text = "Conversions", Icon = "mdi-flag"}
+    };
+
+    class Item
+    {
+        public string Text { get; set; }
+        public string Icon { get; set; }
+    }
+
+}

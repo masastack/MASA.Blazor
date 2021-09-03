@@ -11,49 +11,49 @@
     overflow-x: scroll;
 }
 
-    .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child {
-        position: -webkit-sticky !important;
-        position: sticky !important;
-        z-index: 2;
-        background-color: #fff;
-        right: 0px;
-    }
+.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    z-index: 2;
+    background-color: #fff;
+    right: 0px;
+}
 
-        .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child::after {
-            position: absolute;
-            top: 0;
-            bottom: -1px;
-            left: 0;
-            width: 30px;
-            transform: translateX(-100%);
-            transition: box-shadow .3s;
-            content: '';
-            pointer-events: none;
-        }
+.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child::after {
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    left: 0;
+    width: 30px;
+    transform: translateX(-100%);
+    transition: box-shadow .3s;
+    content: '';
+    pointer-events: none;
+}
 
-    .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr:hover > td:last-child {
-        background-color: inherit;
-    }
+.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr:hover > td:last-child {
+    background-color: inherit;
+}
 
-    .m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child {
-        position: -webkit-sticky !important;
-        position: sticky !important;
-        z-index: 2;
-        background-color: #fff;
-        right: 0px;
-    }
+.m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    z-index: 2;
+    background-color: #fff;
+    right: 0px;
+}
 
-        .m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child::after {
-            position: absolute;
-            top: 0;
-            bottom: -1px;
-            left: 0;
-            width: 30px;
-            transform: translateX(-100%);
-            transition: box-shadow .3s;
-            content: '';
-            pointer-events: none;
-        }
+.m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child::after {
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    left: 0;
+    width: 30px;
+    transform: translateX(-100%);
+    transition: box-shadow .3s;
+    content: '';
+    pointer-events: none;
+}
 
 .m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe > td {
     background-color: #fafafa;
@@ -68,7 +68,7 @@
 }
 
 .theme--dark .m-bar--underline.theme--light, .theme--light .m-bar--underline.theme--light {
-    border-bottom-color: rgba(0,0,0,.12) !important;
+    border-bottom-color: rgba(0, 0, 0, .12) !important;
 }
 
 .theme--dark .m-bar--underline, .theme--light .m-bar--underline {
@@ -97,9 +97,9 @@
     position: relative;
 }
 
-    .m-heading > a:not(:hover):not(:focus) {
-        opacity: 0;
-    }
+.m-heading > a:not(:hover):not(:focus) {
+    opacity: 0;
+}
 
 .markdown-body a:not(:hover) {
     text-decoration: none;
@@ -138,25 +138,25 @@ ol, ul {
     padding: 12px 50px 12px 16px;
 }
 
-    .m-sheet.app-code code[class*=language], .m-sheet.app-code pre[class*=language] {
-        background: none;
-        font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
-        font-size: 1rem;
-        -webkit-hyphens: none;
-        -ms-hyphens: none;
-        hyphens: none;
-        line-height: 1.5;
-        margin: 0;
-        padding: 0;
-        -moz-tab-size: 4;
-        tab-size: 4;
-        text-align: left;
-        text-shadow: none;
-        white-space: pre;
-        word-break: normal;
-        word-spacing: normal;
-        word-wrap: normal;
-    }
+.m-sheet.app-code code[class*=language], .m-sheet.app-code pre[class*=language] {
+    background: none;
+    font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+    font-size: 1rem;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    -moz-tab-size: 4;
+    tab-size: 4;
+    text-align: left;
+    text-shadow: none;
+    white-space: pre;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: normal;
+}
 
 .m-example code[class*=language-], .m-example pre[class*=language-] {
     text-shadow: none;
@@ -187,7 +187,7 @@ code[class*=language-], pre[class*=language-] {
     color: #000;
     background: none;
     text-shadow: 0 1px #fff;
-    font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+    font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
     font-size: 1em;
     text-align: left;
     white-space: pre;
@@ -212,13 +212,13 @@ code[class*=language-], pre[class*=language-] {
 }
 
 .token.tag {
-    color: rgb(128,0,128);
+    color: rgb(128, 0, 128);
 }
 
-    .token.tag > .token.punctuation {
-        color: black;
-        opacity: 0.75;
-    }
+.token.tag > .token.punctuation {
+    color: black;
+    opacity: 0.75;
+}
 
 .token.number {
     color: black;
@@ -228,46 +228,46 @@ code[class*=language-], pre[class*=language-] {
     background: none !important;
 }
 
-    .token.punctuation {
-        color: rgb(0,0,0,0.75);
-    }
+.token.punctuation {
+    color: rgb(0, 0, 0, 0.75);
+}
 
-    .token.builtin, .token.char, .token.inserted, .token.selector {
-        color: #690;
-    }
+.token.builtin, .token.char, .token.inserted, .token.selector {
+    color: #690;
+}
 
-    .token.attr-name {
-        color: rgb(128,0,128);
-    }
+.token.attr-name {
+    color: rgb(128, 0, 128);
+}
 
-    .token.string {
-        color: rgb(163,21,21)
-    }
+.token.string {
+    color: rgb(163, 21, 21)
+}
 
-    .token.atrule {
-        color: #07a;
-    }
+.token.atrule {
+    color: #07a;
+}
 
-    .token.attr-value {
-        color: black;
-    }
+.token.attr-value {
+    color: black;
+}
 
-        .token.attr-value > .token.punctuation {
-            color: black;
-            opacity: 0.75;
-        }
+.token.attr-value > .token.punctuation {
+    color: black;
+    opacity: 0.75;
+}
 
-    .token.keyword {
-        color: blue;
-    }
+.token.keyword {
+    color: blue;
+}
 
-    .token.comment {
-        color: rgb(0,100,0);
-    }
+.token.comment {
+    color: rgb(0, 100, 0);
+}
 
 .m-sheet.app-code pre[class*=language]::after {
     bottom: .75rem;
-    color: rgba(48,48,48,.5);
+    color: rgba(48, 48, 48, .5);
     font-family: inherit;
     font-size: .7rem;
     font-weight: 700;
@@ -285,11 +285,11 @@ code[class*=language-], pre[class*=language-] {
 }
 
 .token.class-name {
-    color: rgb(43,145,175)
+    color: rgb(43, 145, 175)
 }
 
 .token.function {
-    color: rgb(116,83,31)
+    color: rgb(116, 83, 31)
 }
 
 .text-mono {
@@ -306,4 +306,88 @@ code[class*=language-], pre[class*=language-] {
 
 .inline-flex {
     display: inline-flex !important;
+}
+
+/* m-border */
+.m-border {
+    border-style: solid;
+    border-width: 4px;
+    content: "";
+    position: absolute;
+}
+
+.m-border__left, .m-border__right {
+    bottom: 0;
+    top: 0;
+}
+
+.m-border__bottom, .m-border__top {
+    left: 0;
+    right: 0;
+}
+
+.m-border__bottom {
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+    bottom: 0;
+}
+
+.rounded .m-border__bottom {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.m-application--is-ltr .m-border__left {
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+    left: 0;
+}
+
+.m-application--is-ltr .rounded .m-border__left {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.m-application--is-rtl .m-border__left {
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+    right: 0;
+}
+
+.m-application--is-rtl .rounded .m-border__left {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.m-application--is-ltr .m-border__right {
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+    right: 0;
+}
+
+.m-application--is-ltr .rounded .m-border__right {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.m-application--is-rtl .m-border__right {
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+    left: 0;
+}
+
+.m-application--is-rtl .rounded .m-border__right {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.m-border__top {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    top: 0;
+}
+
+.rounded .m-border__top {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
 }
