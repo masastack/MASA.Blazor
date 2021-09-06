@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace MASA.Blazor
 {
-    public partial class MSelectOption<TItem, TValue> : BSelectOption<TItem, TValue>
+    public partial class MSelectOption<TItem, TItemValue, TValue> : BSelectOption<TItem, TItemValue, TValue>
     {
         protected override void SetComponentClass()
         {
@@ -47,9 +47,9 @@ namespace MASA.Blazor
                     });
                 })
                 .Apply<BListItemAction, MListItemAction>()
-                .Apply<BCheckbox, MCheckbox>(props =>
+                .Apply<ICheckbox, MCheckbox>(props =>
                 {
-                    props[nameof(MCheckbox.Checked)] = Selected;
+                    props[nameof(MCheckbox.Value)] = Selected;
                 })
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>()

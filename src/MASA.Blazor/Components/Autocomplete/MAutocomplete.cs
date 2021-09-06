@@ -10,7 +10,7 @@ using Timer = System.Timers.Timer;
 
 namespace MASA.Blazor
 {
-    public class MAutocomplete<TItem, TValue> : MSelect<TItem, TValue>
+    public class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, TItemValue, TValue>
     {
         private Func<TItem, string, bool> _filter;
 
@@ -151,24 +151,47 @@ namespace MASA.Blazor
                     Visible = true;
                     if (Multiple)
                     {
-                        if (Values.Count > 0 && string.IsNullOrEmpty(QueryText))
+                        var values = Values;
+                        if (values.Count > 0 && string.IsNullOrEmpty(QueryText))
                         {
-                            Values.RemoveAt(Values.Count - 1);
-                            if (ValuesChanged.HasDelegate)
+                            values.RemoveAt(values.Count - 1);
+
+                            //Since EditContext validate model,we should update outside value of model first
+                            if (OnChange.HasDelegate)
                             {
-                                await ValuesChanged.InvokeAsync(Values);
+                                await OnChange.InvokeAsync((TValue)values);
                             }
+                            else
+                            {
+                                //We don't want render twice
+                                if (ValueChanged.HasDelegate)
+                                {
+                                    await ValueChanged.InvokeAsync((TValue)values);
+                                }
+                            }
+
+                            InternalValue = (TValue)values;
                         }
                     }
                     else
                     {
-                        if (Chips && !EqualityComparer<TValue>.Default.Equals(Value, default) && string.IsNullOrEmpty(QueryText))
+                        if (Chips && !EqualityComparer<TValue>.Default.Equals(InternalValue, default) && string.IsNullOrEmpty(QueryText))
                         {
-                            Value = default;
-                            if (ValueChanged.HasDelegate)
+                            //Since EditContext validate model,we should update outside value of model first
+                            if (OnChange.HasDelegate)
                             {
-                                await ValueChanged.InvokeAsync(Value);
+                                await OnChange.InvokeAsync(default);
                             }
+                            else
+                            {
+                                //We don't want render twice
+                                if (ValueChanged.HasDelegate)
+                                {
+                                    await ValueChanged.InvokeAsync(default);
+                                }
+                            }
+
+                            InternalValue = default;
                         }
                     }
                     break;

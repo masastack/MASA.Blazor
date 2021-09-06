@@ -1,13 +1,15 @@
 <MRow Align="@AlignTypes.Center">
     <MCol Span="12">
-        <MSelect Items="items"
+        <MSelect Value="@("")"
+                 Items="items"
                  ItemText="u => u"
                  ItemValue="u => u"
                  Disabled
                  Label="Disabled"></MSelect>
     </MCol>
     <MCol Span="12">
-        <MSelect Items="items2"
+        <MSelect Value="@("")"
+                 Items="items2"
                  ItemText="u => u.Key"
                  ItemValue="u => u.Key"
                  ItemDisabled="u => u.Value"

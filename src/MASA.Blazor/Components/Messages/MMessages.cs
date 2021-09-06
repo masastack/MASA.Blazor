@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MMessages : BMessages,IThemeable
+    public partial class MMessages : BMessages, IThemeable
     {
         [Parameter]
         public bool Dark { get; set; }
@@ -35,7 +35,7 @@ namespace MASA.Blazor
 
                 return Themeable != null && Themeable.IsDark;
             }
-        } 
+        }
 
         [Parameter]
         public string Color { get; set; }
@@ -50,6 +50,10 @@ namespace MASA.Blazor
                         .Add(prefix)
                         .AddTheme(IsDark)
                         .AddTextColor(Color);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddTextColor(Color);
                 })
                 .Apply("wrap", cssBuilder =>
                 {
@@ -61,6 +65,10 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add($"{prefix}__message");
                 });
+
+            AbstractProvider
+                .Apply(typeof(BMessagesChildren<>), typeof(BMessagesChildren<MMessages>))
+                .Apply(typeof(BMessagesMessage<>), typeof(BMessagesMessage<MMessages>));
         }
     }
 }

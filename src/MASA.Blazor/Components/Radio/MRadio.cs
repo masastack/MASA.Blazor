@@ -12,9 +12,7 @@ namespace MASA.Blazor
     public partial class MRadio<TValue> : BRadio<TValue>
     {
         [CascadingParameter]
-        public BInput Input { get; set; }
-
-        protected MRadioGroup<TValue> RadioGroup => Input as MRadioGroup<TValue>;
+        public MRadioGroup<TValue> RadioGroup { get; set; }
 
         protected bool IsFocused { get; set; }
 

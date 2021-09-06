@@ -24,7 +24,7 @@ cd BlazorApp
 ## 安装Nuget包
 
 ```sh
-$ dotnet add package MASA.Blazor -s http://gitlab-hz.lonsid.cn/api/v4/projects/29/packages/nuget/index.json
+$ dotnet add package MASA.Blazor
 ```
 
 ## 引入样式、字体、脚本
@@ -39,7 +39,7 @@ $ dotnet add package MASA.Blazor -s http://gitlab-hz.lonsid.cn/api/v4/projects/2
 <link href="https://cdn.masastack.com/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
 <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
-<!--脚本-->
+<!--脚本(尽量放到body的最后位置，而不是跟上面的css放到一起)-->
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
 

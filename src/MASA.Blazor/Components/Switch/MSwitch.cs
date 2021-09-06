@@ -18,6 +18,9 @@ namespace MASA.Blazor
         [Parameter]
         public bool Inset { get; set; }
 
+        [Parameter]
+        public EventCallback<bool> OnChange { get; set; }
+
         public override bool IsDirty => Value;
 
         public Dictionary<string, object> InputAttrs { get; set; } = new();
@@ -89,7 +92,7 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Merge(typeof(BInputDefaultSlot<>), typeof(BSwitchDefaultSlot))
+                .Merge(typeof(BInputDefaultSlot<,>), typeof(BSwitchDefaultSlot))
                 .Apply(typeof(BSwitchSwitch<>), typeof(BSwitchSwitch<MSwitch>))
                 .Apply(typeof(BSelectableInput<>), typeof(BSelectableInput<MSwitch>))
                 .Apply(typeof(BRippleableRipple<>), typeof(BRippleableRipple<MSwitch>))
@@ -105,9 +108,16 @@ namespace MASA.Blazor
         public override async Task HandleOnClick(MouseEventArgs args)
         {
             Value = !Value;
-            if (ValueChanged.HasDelegate)
+            if (OnChange.HasDelegate)
             {
-                await ValueChanged.InvokeAsync(Value);
+                await OnChange.InvokeAsync(Value);
+            }
+            else
+            {
+                if (ValueChanged.HasDelegate)
+                {
+                    await ValueChanged.InvokeAsync(Value);
+                }
             }
         }
     }

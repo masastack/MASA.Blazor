@@ -3,12 +3,16 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
     public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
     {
+        private string _badInput;
+
         [Parameter]
         public bool Clearable { get; set; }
 
@@ -41,10 +45,6 @@ namespace MASA.Blazor
         [Parameter]
         public bool Filled { get; set; }
 
-        public bool IsBooted { get; set; } = true;
-
-        public bool IsEnclosed => Filled || IsSolo || Outlined;
-
         [Parameter]
         public bool Outlined { get; set; }
 
@@ -66,10 +66,6 @@ namespace MASA.Blazor
         [Parameter]
         public RenderFragment PrependInnerContent { get; set; }
 
-        public bool ShowLabel => HasLabel && !(IsSingle && LabelValue);
-
-        public bool IsSingle => IsSolo || SingleLine || FullWidth || (Filled && !HasLabel);
-
         [Parameter]
         public string AppendOuterIcon { get; set; }
 
@@ -78,6 +74,50 @@ namespace MASA.Blazor
 
         [Parameter]
         public string PrependInnerIcon { get; set; }
+
+        [Parameter]
+        public string Suffix { get; set; }
+
+        [Parameter]
+        public bool Autofocus { get; set; }
+
+        [Parameter]
+        public EventCallback<FocusEventArgs> OnBlur { get; set; }
+
+        [Parameter]
+        public EventCallback<FocusEventArgs> OnFocus { get; set; }
+
+        [Parameter]
+        public EventCallback<KeyboardEventArgs> OnKeyDown { get; set; }
+
+        [Parameter]
+        public EventCallback<TValue> OnInput { get; set; }
+
+        [Parameter]
+        public EventCallback<TValue> OnChange { get; set; }
+
+        [Parameter]
+        public RenderFragment ProgressContent { get; set; }
+
+        [Parameter]
+        public StringNumber LoaderHeight { get; set; } = 2;
+
+        [Parameter]
+        public StringNumberBoolean Counter { get; set; }
+
+        [Parameter]
+        public Func<TValue, int> CounterValue { get; set; }
+
+        [Parameter]
+        public RenderFragment CounterContent { get; set; }
+
+        public bool IsBooted { get; set; } = true;
+
+        public bool IsEnclosed => Filled || IsSolo || Outlined;
+
+        public bool ShowLabel => HasLabel && !(IsSingle && LabelValue);
+
+        public bool IsSingle => IsSolo || SingleLine || FullWidth || (Filled && !HasLabel);
 
         public virtual bool LabelValue => IsFocused || IsLabelActive || PersistentPlaceholder;
 
@@ -113,36 +153,6 @@ namespace MASA.Blazor
         }
 
         public string LegendInnerHTML => "&#8203;";
-
-        [Parameter]
-        public string Suffix { get; set; }
-
-        [Parameter]
-        public bool Autofocus { get; set; }
-
-        [Parameter]
-        public EventCallback<FocusEventArgs> OnBlur { get; set; }
-
-        [Parameter]
-        public EventCallback<FocusEventArgs> OnFocus { get; set; }
-
-        [Parameter]
-        public EventCallback<KeyboardEventArgs> OnKeyDown { get; set; }
-
-        [Parameter]
-        public EventCallback<ChangeEventArgs> OnInput { get; set; }
-
-        [Parameter]
-        public EventCallback<ChangeEventArgs> OnChange { get; set; }
-
-        [Parameter]
-        public RenderFragment ProgressContent { get; set; }
-
-        [Parameter]
-        public StringNumber LoaderHeight { get; set; } = 2;
-
-        [Parameter]
-        public StringNumberBoolean Counter { get; set; }
 
         public bool HasCounter => Counter != false && Counter != null;
 
@@ -190,33 +200,89 @@ namespace MASA.Blazor
 
         public virtual Dictionary<string, object> InputAttrs => new()
         {
-            { "type", Type }
+            { "type", Type },
+            { "value", _badInput == null ? Value : _badInput }
         };
+
+        public int ComputedCounterValue
+        {
+            get
+            {
+                if (CounterValue != null)
+                {
+                    return CounterValue(InternalValue);
+                }
+
+                return InternalValue.ToString().Length;
+            }
+        }
+
+        public override bool HasDetails => base.HasDetails || HasCounter;
+
+        public StringNumber Max
+        {
+            get
+            {
+                int? max = null;
+
+                if (Counter == true)
+                {
+                    if (Attributes.TryGetValue("maxlength", out var maxValue))
+                    {
+                        max = Convert.ToInt32(maxValue);
+                    }
+                }
+                else
+                {
+                    max = Counter?.ToInt32();
+                }
+
+                return max == null ? null : (StringNumber)max;
+            }
+        }
+
+        public override async Task HandleOnClick(MouseEventArgs args)
+        {
+            if (IsFocused || IsDisabled)
+            {
+                return;
+            }
+
+            await InputRef.FocusAsync();
+        }
 
         public virtual async Task HandleOnChange(ChangeEventArgs args)
         {
-            try
+            var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
+
+            if (success)
             {
-                Value = (TValue)Convert.ChangeType(args.Value, typeof(TValue));
+                _badInput = null;
             }
-            catch (Exception)
+            else
             {
-                Value = default;
+                _badInput = args.Value.ToString();
             }
 
-            if (ValueChanged.HasDelegate)
-            {
-                await ValueChanged.InvokeAsync(Value);
-            }
+            Value = val;
 
             if (OnChange.HasDelegate)
             {
-                await OnChange.InvokeAsync(args);
+                await OnChange.InvokeAsync(Value);
+            }
+            else
+            {
+                //We don't want render twice
+                if (ValueChanged.HasDelegate)
+                {
+                    await ValueChanged.InvokeAsync(Value);
+                }
             }
         }
 
         public virtual async Task HandleOnBlur(FocusEventArgs args)
         {
+            _badInput = null;
             IsFocused = false;
 
             if (OnBlur.HasDelegate)
@@ -227,26 +293,43 @@ namespace MASA.Blazor
 
         public virtual async Task HandleOnInput(ChangeEventArgs args)
         {
-            //TODO:badInput
+            var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
 
-            try
+            if (success)
             {
-                Value = (TValue)Convert.ChangeType(args.Value, typeof(TValue));
+                _badInput = null;
             }
-            catch (Exception)
+            else
             {
-                Value = default;
+                _badInput = args.Value.ToString();
             }
 
+            //Since EditContext validate model,we should update outside value of model first
             if (OnInput.HasDelegate)
             {
-                await OnInput.InvokeAsync(args);
+                await OnInput.InvokeAsync(val);
             }
+            else
+            {
+                if (OnChange.HasDelegate)
+                {
+                    await OnChange.InvokeAsync(val);
+                }
+                else
+                {
+                    //We don't want render twice
+                    if (ValueChanged.HasDelegate)
+                    {
+                        await ValueChanged.InvokeAsync(val);
+                    }
+                }
+            }
+
+            InternalValue = val;
         }
 
         public virtual async Task HandleOnFocus(FocusEventArgs args)
         {
-            //TODO:focus element
             if (!IsFocused)
             {
                 IsFocused = true;
@@ -263,6 +346,27 @@ namespace MASA.Blazor
             {
                 await OnKeyDown.InvokeAsync(args);
             }
+        }
+
+        public virtual async Task HandleOnClear(MouseEventArgs args)
+        {
+            await InputRef.FocusAsync();
+
+            //Since EditContext validate model,we should update outside value of model first
+            if (OnChange.HasDelegate)
+            {
+                await OnChange.InvokeAsync(default);
+            }
+            else
+            {
+                //We don't want render twice
+                if (ValueChanged.HasDelegate)
+                {
+                    await ValueChanged.InvokeAsync(default);
+                }
+            }
+
+            InternalValue = default;
         }
 
         protected override void SetComponentClass()
@@ -356,67 +460,49 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Merge(typeof(BTextFieldAffix<,>), typeof(BTextFieldAffix<TValue, MTextField<TValue>>))
-                .Merge(typeof(BInputAppendSlot<>), typeof(BTextFieldAppendSlot<TValue>))
-                .Merge(typeof(BTextFieldClearIcon<,>), typeof(BTextFieldClearIcon<TValue, MTextField<TValue>>), props =>
+                .ApplyTextFieldDefault<TValue>()
+                .ApplyTextFieldCounter(typeof(MCounter), props =>
                 {
+                    props[nameof(MCounter.Dark)] = Dark;
+                    props[nameof(MCounter.Light)] = Light;
+                    props[nameof(MCounter.Max)] = Max;
+                    props[nameof(MCounter.Value)] = (StringNumber)ComputedCounterValue;
                 })
-                .Merge(typeof(BTextFieldCounter<,>), typeof(BTextFieldCounter<TValue, MTextField<TValue>>))
-                .Merge(typeof(BInputDefaultSlot<>), typeof(BTextFieldDefaultSlot<TValue, MTextField<TValue>>))
-                .Merge(typeof(BTextFieldFieldset<,>), typeof(BTextFieldFieldset<TValue, MTextField<TValue>>))
-                .Merge(typeof(BTextFieldIconSlot<,>), typeof(BTextFieldIconSlot<TValue, MTextField<TValue>>))
-                .Merge(typeof(BTextFieldInput<,>), typeof(BTextFieldInput<TValue, MTextField<TValue>>))
-                .Merge(typeof(BInputInputSlot<>), typeof(BTextFieldInputSlot<TValue>))
-                .Merge(typeof(BTextFieldLegend<,>), typeof(BTextFieldLegend<TValue, MTextField<TValue>>))
-                .Merge(typeof(BInputMessages<>), typeof(BTextFieldMessages<TValue>))
-                .Merge(typeof(BTextFieldPrependInnerSlot<,>), typeof(BTextFieldPrependInnerSlot<TValue, MTextField<TValue>>))
-                .Merge(typeof(BTextFieldProgress<,>), typeof(BTextFieldProgress<TValue, MTextField<TValue>>))
-                .Merge(typeof(BTextFieldTextFieldSlot<,>), typeof(BTextFieldTextFieldSlot<TValue, MTextField<TValue>>))
-                .Merge(typeof(BInputLabel<>), typeof(BTextFieldLabel<TValue>))
-                .Merge<BLabel>(props =>
+                .ApplyTextFieldLabel(typeof(MLabel), props =>
                 {
                     props[nameof(MLabel.Absolute)] = true;
                     props[nameof(MLabel.Focused)] = !IsSingle && (IsFocused || ValidationState != null);
                     //TODO:left,right
                     props[nameof(MLabel.Value)] = LabelValue;
                 })
-                .Apply<BProcessLinear, MProcessLinear>(props =>
-                {
-                    props[nameof(MProcessLinear.Absolute)] = true;
-                    props[nameof(MProcessLinear.Color)] = (Loading == true || Loading == "") ? (Color ?? "primary") : Loading.ToString();
-                    props[nameof(MProcessLinear.Height)] = LoaderHeight;
-                    props[nameof(MProcessLinear.Indeterminate)] = true;
-                })
-                .Apply<BIcon, MIcon>("clear-icon", props =>
+                .ApplyTextFieldProcessLinear(typeof(MProcessLinear), props =>
+                 {
+                     props[nameof(MProcessLinear.Absolute)] = true;
+                     props[nameof(MProcessLinear.Color)] = (Loading == true || Loading == "") ? (Color ?? "primary") : Loading.ToString();
+                     props[nameof(MProcessLinear.Height)] = LoaderHeight;
+                     props[nameof(MProcessLinear.Indeterminate)] = true;
+                 })
+                .ApplyTextFieldClearIcon(typeof(MIcon), props =>
+                 {
+                     props[nameof(MIcon.Color)] = ValidationState;
+                     props[nameof(MIcon.Dark)] = Dark;
+                     props[nameof(MIcon.Disabled)] = Disabled;
+                     props[nameof(MIcon.Light)] = Light;
+                 })
+                .ApplyTextFieldAppendOuterIcon(typeof(MIcon), props =>
                 {
                     props[nameof(MIcon.Color)] = ValidationState;
                     props[nameof(MIcon.Dark)] = Dark;
                     props[nameof(MIcon.Disabled)] = Disabled;
                     props[nameof(MIcon.Light)] = Light;
                 })
-                .Apply<BIcon, MIcon>("append-outer-icon", props =>
-                {
-                    props[nameof(MIcon.Color)] = ValidationState;
-                    props[nameof(MIcon.Dark)] = Dark;
-                    props[nameof(MIcon.Disabled)] = Disabled;
-                    props[nameof(MIcon.Light)] = Light;
-                })
-                .Apply<BIcon, MIcon>("prepend-inner-icon", props =>
+                .ApplyTextFieldPrependInnerIcon(typeof(MIcon), props =>
                 {
                     props[nameof(MIcon.Color)] = ValidationState;
                     props[nameof(MIcon.Dark)] = Dark;
                     props[nameof(MIcon.Disabled)] = Disabled;
                     props[nameof(MIcon.Light)] = Light;
                 });
-        }
-
-        public async Task HandleOnClear(MouseEventArgs args)
-        {
-            Value = default;
-            if (ValueChanged.HasDelegate)
-            {
-                await ValueChanged.InvokeAsync(Value);
-            }
         }
     }
 }

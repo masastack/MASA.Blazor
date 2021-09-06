@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public class MSelect<TItem, TValue> : MTextField<TValue>, ISelect<TItem, TValue>
+    public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TItem, TItemValue, TValue>
     {
         private bool _shouldReformatText = true;
 
@@ -41,6 +41,12 @@ namespace MASA.Blazor
         public bool Chips { get; set; }
 
         [Parameter]
+        public bool SmallChips { get; set; }
+
+        [Parameter]
+        public bool DeletableChips { get; set; }
+
+        [Parameter]
         public BMenuProps MenuProps { get; set; }
 
         [Parameter]
@@ -52,41 +58,26 @@ namespace MASA.Blazor
                 base.Value = value;
 
                 if (_shouldReformatText && ItemValue != null)
-                    Text = FormatText(value);
+                {
+                    if (Multiple)
+                    {
+                        Text = FormatText(Values);
+                    }
+                    else
+                    {
+                        Text = FormatText(value);
+                    }
+                }
 
                 _shouldReformatText = true;
             }
         }
-
-        private List<TValue> _values = new();
-
-        [Parameter]
-        public List<TValue> Values
-        {
-            get => _values;
-            set
-            {
-                _values = value ?? new List<TValue>();
-
-                if (_shouldReformatText && ItemValue != null)
-                    Text = FormatText(_values);
-
-                _shouldReformatText = true;
-                NotifyValuesChanged();
-            }
-        }
-
-        [Parameter]
-        public EventCallback<List<TValue>> ValuesChanged { get; set; }
-
-        [Parameter]
-        public Expression<Func<List<TValue>>> ValuesExpression { get; set; }
 
         [Parameter]
         public Func<TItem, string> ItemText { get; set; } = null!;
 
         [Parameter]
-        public Func<TItem, TValue> ItemValue { get; set; } = null!;
+        public Func<TItem, TItemValue> ItemValue { get; set; } = null!;
 
         [Parameter]
         public Func<TItem, bool> ItemDisabled { get; set; } = (item) => false;
@@ -101,15 +92,13 @@ namespace MASA.Blazor
 
         public override bool IsDirty => Text.Count > 0;
 
-        public FieldIdentifier ValuesFieldIdentifier { get; set; }
-
         public int HighlightIndex { get; set; } = -1;
 
         public override Dictionary<string, object> InputAttrs => new()
         {
             { "type", Type },
             //TODO:this may change
-            { "value", Chips ? "" : string.Join(',', FormatText(Value)) },
+            { "value", Chips ? "" : string.Join(',', FormatText(InternalValue)) },
             { "readonly", true }
         };
 
@@ -117,12 +106,25 @@ namespace MASA.Blazor
 
         public string QueryText { get; set; }
 
+        public IList<TItemValue> Values
+        {
+            get
+            {
+                if (InternalValue is IList<TItemValue> values)
+                {
+                    return values;
+                }
+
+                return new List<TItemValue>();
+            }
+        }
+
         protected virtual List<string> FormatText(TValue value)
         {
             //TODO:set default expression
             if (ItemValue == null || ItemText == null)
             {
-                return new List<string>();
+                return Text;
             }
 
             //why list?
@@ -131,7 +133,7 @@ namespace MASA.Blazor
                 .Select(ItemText).ToList();
         }
 
-        protected virtual List<string> FormatText(IEnumerable<TValue> values)
+        protected virtual List<string> FormatText(IEnumerable<TItemValue> values)
         {
             return Items
                 .Where(u => values.Contains(ItemValue(u)))
@@ -158,6 +160,7 @@ namespace MASA.Blazor
                         .AddIf("m-select--is-menu-active", () => Visible)
                         .AddIf("m-select--is-multi", () => Multiple)
                         .AddIf("m-select--chips", () => Chips)
+                        .AddIf("m-select--chips--small", () => SmallChips)
                         .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
@@ -196,10 +199,10 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Merge(typeof(BInputDefaultSlot<>), typeof(BSelectDefaultSlot<TItem, TValue>))
-                .Apply(typeof(BSelectHiddenInput<,,>), typeof(BSelectHiddenInput<TItem, TValue, MSelect<TItem, TValue>>))
-                .Apply(typeof(BSelectMenu<,,>), typeof(BSelectMenu<TItem, TValue, MSelect<TItem, TValue>>))
-                .Apply(typeof(BSelectSelections<,,>), typeof(BSelectSelections<TItem, TValue, MSelect<TItem, TValue>>))
+                .Merge(typeof(BInputDefaultSlot<,>), typeof(BSelectDefaultSlot<TItem, TItemValue, TValue>))
+                .Apply(typeof(BSelectHiddenInput<,,,>), typeof(BSelectHiddenInput<TItem, TItemValue, TValue, MSelect<TItem, TItemValue, TValue>>))
+                .Apply(typeof(BSelectMenu<,,,>), typeof(BSelectMenu<TItem, TItemValue, TValue, MSelect<TItem, TItemValue, TValue>>))
+                .Apply(typeof(BSelectSelections<,,,>), typeof(BSelectSelections<TItem, TItemValue, TValue, MSelect<TItem, TItemValue, TValue>>))
                 .Apply<BMenu, MMenu>(props =>
                 {
                     props[nameof(MMenu.Visible)] = Visible;
@@ -233,34 +236,19 @@ namespace MASA.Blazor
                 .Apply<BListItem, MListItem>()
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>()
-                .Apply<BSelectOption<TItem, TValue>, MSelectOption<TItem, TValue>>()
-                .Apply<BChip, MChip>();
+                .Apply(typeof(BSelectOption<,,>), typeof(MSelectOption<TItem, TItemValue, TValue>))
+                .Apply<BChip, MChip>(props =>
+                {
+                    props[nameof(MChip.Close)] = DeletableChips && (!IsDisabled && !IsReadonly);
+                    props[nameof(MChip.Disabled)] = IsDisabled;
+                    props[nameof(MChip.Class)] = "m-chip--select";
+                    props[nameof(MChip.Small)] = SmallChips;
+                });
         }
 
         public void SetOnExtraClick(Func<MouseEventArgs, Task> onExtraClick)
         {
             OnExtraClick = onExtraClick;
-        }
-
-        protected void NotifyValuesChanged()
-        {
-            if (EditContext != null && ValuesExpression != null)
-            {
-                EditContext.NotifyFieldChanged(ValuesFieldIdentifier);
-            }
-        }
-
-        protected override void OnParametersSet()
-        {
-            if (EditContextChanged)
-            {
-                if (ValuesExpression != null)
-                {
-                    ValuesFieldIdentifier = FieldIdentifier.Create(ValuesExpression);
-                }
-            }
-
-            base.OnParametersSet();
         }
 
         public override Task HandleOnBlur(FocusEventArgs args)
@@ -308,7 +296,7 @@ namespace MASA.Blazor
                         }
                         else
                         {
-                            if (_values.Contains(val))
+                            if (Values.Contains(val))
                             {
                                 await RemoveSelectedAsync(label, val);
                             }
@@ -343,59 +331,116 @@ namespace MASA.Blazor
             InvokeStateHasChanged();
         }
 
-        public async Task SetSelectedAsync(string text, TValue value)
+        public async Task SetSelectedAsync(string text, TItemValue value)
         {
             _shouldReformatText = false;
 
             if (Multiple)
             {
-                if (!_values.Contains(value))
+                var values = Values;
+                if (!values.Contains(value))
                 {
-                    _values.Add(value);
+                    values.Add(value);
                     Text.Add(text);
+
+                    //Since EditContext validate model,we should update outside value of model first
+                    if (OnChange.HasDelegate)
+                    {
+                        await OnChange.InvokeAsync((TValue)values);
+                    }
+                    else
+                    {
+                        //We don't want render twice
+                        if (ValueChanged.HasDelegate)
+                        {
+                            await ValueChanged.InvokeAsync((TValue)values);
+                        }
+                    }
+
+                    //TODO:Watch for validate
+                    InternalValue = (TValue)values;
                 }
             }
             else
             {
-                Value = value;
-                Text.Clear();
-                Text.Add(text);
+                if (value is TValue val)
+                {
+                    //Since EditContext validate model,we should update outside value of model first
+                    if (OnChange.HasDelegate)
+                    {
+                        await OnChange.InvokeAsync(val);
+                    }
+                    else
+                    {
+                        //We don't want render twice
+                        if (ValueChanged.HasDelegate)
+                        {
+                            await ValueChanged.InvokeAsync(val);
+                        }
+                    }
+
+                    InternalValue = val;
+
+                    Text.Clear();
+                    Text.Add(text);
+                }
             }
 
-            if (ValueChanged.HasDelegate)
-            {
-                await ValueChanged.InvokeAsync(value);
-            }
 
-            if (ValuesChanged.HasDelegate)
-            {
-                await ValuesChanged.InvokeAsync(_values);
-            }
         }
 
-        public async Task RemoveSelectedAsync(string text, TValue value)
+        public async Task RemoveSelectedAsync(string text, TItemValue value)
         {
             _shouldReformatText = false;
 
-            _values.Remove(value);
+            var values = Values;
+            values.Remove(value);
             Text.Remove(text);
 
-            if (ValuesChanged.HasDelegate)
+            //Since EditContext validate model,we should update outside value of model first
+            if (OnChange.HasDelegate)
             {
-                await ValuesChanged.InvokeAsync(_values);
-            }
-        }
-
-        protected override void OnValidationStateChanged(object sender, ValidationStateChangedEventArgs e)
-        {
-            if (Multiple && ValuesExpression != null)
-            {
-                Messages = EditContext.GetValidationMessages(ValuesFieldIdentifier).ToList();
-                StateHasChanged();
+                await OnChange.InvokeAsync((TValue)values);
             }
             else
             {
-                base.OnValidationStateChanged(sender, e);
+                //We don't want render twice
+                if (ValueChanged.HasDelegate)
+                {
+                    await ValueChanged.InvokeAsync((TValue)values);
+                }
+            }
+
+            //TODO:Watch for validate
+            InternalValue = (TValue)values;
+        }
+
+        public override async Task HandleOnClear(MouseEventArgs args)
+        {
+            if (Multiple)
+            {
+                await InputRef.FocusAsync();
+
+                IList<TItemValue> values = new List<TItemValue>();
+                //Since EditContext validate model,we should update outside value of model first
+                if (OnChange.HasDelegate)
+                {
+                    await OnChange.InvokeAsync((TValue)values);
+                }
+                else
+                {
+                    //We don't want render twice
+                    if (ValueChanged.HasDelegate)
+                    {
+                        await ValueChanged.InvokeAsync((TValue)values);
+                    }
+                }
+
+                InternalValue = (TValue)values;
+            }
+            else
+            {
+                await base.HandleOnClear(args);
             }
         }
     }

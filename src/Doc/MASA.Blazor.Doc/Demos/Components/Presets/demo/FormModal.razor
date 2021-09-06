@@ -19,7 +19,7 @@
                 </MRadioGroup>
             </MCol>
             <MCol>
-                <MAutocomplete @bind-Values="_addModal.Data.Favorites" Multiple Items="_favorites" ItemValue="r => r" ItemText="r => r"></MAutocomplete>
+                <MAutocomplete @bind-Value="_addModal.Data.Favorites" Multiple Items="_favorites" ItemValue="r=>r" ItemText="r=>r"></MAutocomplete>
             </MCol>
         </MRow>
     </MASA.Blazor.Presets.FormModal>
@@ -82,8 +82,7 @@
         public string City { get; set; }
 
         [Required]
-        [MinLength(1)]
-        public List<string> Favorites { get; set; } = new();
+        public List<string> Favorites { get; set; } = new List<string> { };
 
         public User ShallowCopy()
         {

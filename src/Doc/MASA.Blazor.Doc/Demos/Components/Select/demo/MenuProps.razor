@@ -1,3 +1,17 @@
-<div>
-    Todo...
-</div>
+<MRow Align="@("center")">
+    <MCol Cols="12">
+      <MSelect
+        @bind-Value="_value"
+        Items="_items"
+        MenuProps="new(){ Top= true, OffsetY= true }"
+        Label="Label"
+        ItemValue="r=>r"
+        ItemText="r=>r"
+      ></MSelect>
+    </MCol>
+  </MRow>
+
+  @code{
+      string _value;
+      List<string> _items = new() { "Foo", "Bar", "Fizz", "Buzz" };
+  }

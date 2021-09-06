@@ -19,10 +19,10 @@
                 </MRadioGroup>
             </MCol>
             <MCol>
-                <MSelect TValue="string" Values="_addModal.Data.GFs.ToList()" ValuesChanged="(v) => _addModal.Data.GFs = v.ToArray()" TItem="string" Multiple Items="_gfs" ItemValue="r=>r" ItemText="r=>r"></MSelect>
+                <MSelect @bind-Value="_addModal.Data.GFs" Multiple Items="_gfs" ItemValue="r=>r" ItemText="r=>r"></MSelect>
             </MCol>
             <MCol>
-                <MAutocomplete TValue="string" Values="_addModal.Data.Favorites.ToList()" ValuesChanged="(v) => _addModal.Data.Favorites = v.ToArray()" TItem="string" Multiple Items="_favorites" ItemValue="r=>r" ItemText="r=>r"></MAutocomplete>
+                <MAutocomplete @bind-Value="_addModal.Data.Favorites" Multiple Items="_favorites" ItemValue="r=>r" ItemText="r=>r"></MAutocomplete>
             </MCol>
         </MRow>
     </MASA.Blazor.Presets.Modal>
@@ -79,8 +79,8 @@
         public string UserName { get; set; }
         public int Gender { get; set; }
         public string City { get; set; }
-        public string[] Favorites { get; set; } = new string[] { };
-        public string[] GFs { get; set; } = new string[] { };
+        public List<string> Favorites { get; set; } = new List<string> { };
+        public List<string> GFs { get; set; } = new List<string> { };
 
         public User ShallowCopy()
         {

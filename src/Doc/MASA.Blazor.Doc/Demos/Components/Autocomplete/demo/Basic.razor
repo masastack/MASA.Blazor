@@ -1,20 +1,21 @@
 ﻿<MCard Flat>
     <MContainer Fluid>
         <div>@string.Join(',', _values)</div>
-        <MAutocomplete Items="_items" @bind-Values="_values"
+        <MAutocomplete Items="_items" @bind-Value="_values"
                        ItemText="r=>r"
                        ItemValue="r=>r"
+                       Clearable
                        Multiple></MAutocomplete>
     </MContainer>
 </MCard>
 
-@code{
+@code {
     private List<string> _items = new List<string>
     {
         "foo", "fbar", "fizz", "fbuzz", "fiiiizz"
     };
     private List<string> _values = new List<string>
-    {   
+    {
         "foo", "fbar"
     };
 }

@@ -6,12 +6,13 @@
             <MSubheader>Multiple with persistent hint</MSubheader>
         </MCol>
         <MCol Span="6">
-            <MSelect @bind-Values="@e6"
+            <MSelect @bind-Value="@e6"
                      Items="@states"
                      ItemText="u => u"
                      ItemValue="u => u"
                      Label="Select"
                      Multiple
+                     Clearable
                      Hint="@($"selected values: {string.Join(',', e6)}")">
             </MSelect>
         </MCol>
@@ -21,7 +22,7 @@
         </MCol>
 
         <MCol Span="6">
-            <MSelect @bind-Values="@e7"
+            <MSelect @bind-Value="@e7"
                      Items="@states"
                      ItemText="u => u"
                      ItemValue="u => u"

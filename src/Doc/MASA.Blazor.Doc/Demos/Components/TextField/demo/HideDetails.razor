@@ -12,10 +12,10 @@
     private Order _order =new Order();
     public class Order
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
         public string Title { get; set; }
         [System.ComponentModel.DataAnnotations.Range(0,25.00)]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
     }
 }

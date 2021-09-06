@@ -5,19 +5,21 @@
                  Items="@items"
                  ItemText="u => u.Label"
                  ItemValue="u => u.Value"
+                 Clearable
                  Hint="@($"selected value: {@value1}")">
         </MSelect>
     </MCol>
     <MCol Span="6">
         <MSelect @bind-Value="@value2"
                  TItem="Item"
+                 TItemValue="string"
                  TValue="string"
                  Label="Filled style"
                  Filled
                  Hint="@($"selected value: {@value2}")">
             @foreach (var item in items)
             {
-                <MSelectOption TItem="Item" TValue="string" Label="@item.Label" Value="@item.Value" />
+                <MSelectOption TItem="Item" TItemValue="string" TValue="string" Label="@item.Label" Value="@item.Value" />
             }
         </MSelect>
     </MCol>

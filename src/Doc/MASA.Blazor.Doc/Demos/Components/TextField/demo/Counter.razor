@@ -1,3 +1,49 @@
-﻿<div>
-    Todo...
-</div>
+﻿@using BlazorComponent
+
+<MForm Context="editContext">
+    <MContainer>
+        <MRow>
+            <MCol Cols="12"
+                  Sm="6">
+                <MTextField @bind-Value="_title"
+                            Counter="25"
+                            Hint="This field uses counter prop"
+                            Label="Regular"></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                  Sm="6">
+                <MTextField @bind-Value="_description"
+                            Counter="25"
+                            Hint="This field uses maxlength attribute"
+                            Label="Limit exceeded"></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                  Sm="6">
+                <MTextField @bind-Value="_title"
+                            Counter="5"
+                            Hint="This field counts words instead of characters"
+                            CounterValue="v=>v.Trim().Split(' ').Length"
+                            Label="Custom counter from prop"></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                  Sm="6">
+                <MTextField @bind-Value="_title"
+                            Counter="true"
+                            Hint="This field counts words instead of characters"
+                            Label="Custom counter from slot">
+                            <CounterContent>
+                                <MCounter Max="5" Value="_title.Trim().Split(' ').Length"></MCounter>
+                            </CounterContent>
+                </MTextField>
+            </MCol>
+        </MRow>
+    </MContainer>
+</MForm>
+
+@code {
+    private string _title = "Preliminary report";
+    private string _description = "California is a state in the western United States";
+}

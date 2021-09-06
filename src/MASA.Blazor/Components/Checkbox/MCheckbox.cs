@@ -2,110 +2,126 @@
 using BlazorComponent;
 using MASA.Blazor.Helpers;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace MASA.Blazor
 {
-    public partial class MCheckbox : BCheckbox, IThemeable
+    public partial class MCheckbox : MInput<bool>, IThemeable, ICheckbox
     {
+        [Parameter]
+        public bool Indeterminate { get; set; }
 
         [Parameter]
-        public bool Dark { get; set; }
+        public string IndeterminateIcon { get; set; } = "mdi-minus-box";
 
         [Parameter]
-        public bool Light { get; set; }
+        public string OnIcon { get; set; } = "mdi-checkbox-marked";
 
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
+        [Parameter]
+        public string OffIcon { get; set; } = "mdi-checkbox-blank-outline";
 
-        public bool IsDark
+        public override bool HasColor => InternalValue;
+
+        public string ComputedIcon
         {
             get
             {
-                if (Dark)
+                if (Indeterminate)
                 {
-                    return true;
+                    return IndeterminateIcon;
                 }
 
-                if (Light)
+                if (IsActive)
                 {
-                    return false;
+                    return OnIcon;
                 }
 
-                return Themeable != null && Themeable.IsDark;
+                return OffIcon;
             }
-        } 
-
-        protected override Task OnInitializedAsync()
-        {
-            UncheckIconContent = RenderIcon("mdi-checkbox-blank-outline", Color, Disabled, Dark);
-            CheckedIconContent = RenderIcon("mdi-checkbox-marked", Color ?? "primary", Disabled, Dark);
-            IndeterminateIconContent = RenderIcon("mdi-minus-box", Color, Disabled, Dark);
-
-            AnimationContent = RenderRipple(Color);
-
-            return base.OnInitializedAsync();
         }
 
-        private RenderFragment RenderIcon(string icon, string color, bool disabled, bool dark) => builder =>
+        public Dictionary<string, object> InputAttrs => new();
+
+        public bool IsActive => Value;
+
+        [Parameter]
+        public bool? Ripple { get; set; }
+
+        [Parameter]
+        public EventCallback<bool> OnChange { get; set; }
+
+        public Task HandleOnBlur(FocusEventArgs args)
         {
-            int sequence = 0;
-            builder.OpenComponent(sequence++, typeof(MIcon));
+            return Task.CompletedTask;
+        }
 
-            if (!disabled)
-            {
-                builder.AddAttribute(sequence++, nameof(MIcon.Color), color);
-                builder.AddAttribute(sequence++, nameof(MIcon.Dark), dark);
-            }
-
-            builder.AddAttribute(sequence++, nameof(MIcon.ChildContent), (RenderFragment)((builder) => builder.AddContent(sequence++, icon)));
-            builder.CloseComponent();
-        };
-
-        private RenderFragment RenderRipple(string color) => builder =>
+        public Task HandleOnChange(ChangeEventArgs args)
         {
-            int sequence = 0;
-            builder.OpenElement(sequence++, "div");
+            return Task.CompletedTask;
+        }
 
-            var (color_css, color_style) = ColorHelper.ToCss(color);
-            builder.AddAttribute(sequence++, "class", $"m-input--selection-controls__ripple {color_css}");
+        public Task HandleOnFocus(FocusEventArgs args)
+        {
+            return Task.CompletedTask;
+        }
 
-            builder.AddAttribute(sequence++, "style", color_style);
-
-            builder.CloseElement();
-        };
+        public Task HandleOnKeyDown(KeyboardEventArgs args)
+        {
+            return Task.CompletedTask;
+        }
 
         protected override void SetComponentClass()
         {
+            base.SetComponentClass();
+
             CssProvider
-                .Apply(cssBuilder =>
+                .Merge(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-input")
                         .Add("m-input--selection-controls")
                         .Add("m-input--checkbox")
-                        .AddIf("m-input--is-disabled", () => Disabled)
-                        .AddTheme(IsDark);
+                        .AddIf("m-input--indeterminate", () => Indeterminate);
                 })
-                .Apply("control", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-input__control");
-                })
-                .Apply("slot", cssBuilder =>
-                {
-                    cssBuilder
-                       .Add("m-input__slot");
-                })
-                .Apply("input", cssBuilder =>
+                .Apply("checkbox-input", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-input--selection-controls__input");
                 })
-                .Apply("label", cssBuilder =>
+                .Apply("ripple", cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-label");
+                        .Add("m-input--selection-controls__ripple")
+                        .AddTextColor(ValidationState);
                 });
+
+            AbstractProvider
+                .Merge(typeof(BInputDefaultSlot<,>), typeof(BCheckboxDefaultSlot<MCheckbox>))
+                .Apply(typeof(BCheckboxCheckbox), typeof(BCheckboxCheckbox))
+                .Apply(typeof(BSelectableInput<>), typeof(BSelectableInput<MCheckbox>))
+                .Apply(typeof(BRippleableRipple<>), typeof(BRippleableRipple<MCheckbox>))
+                .Apply(typeof(BIcon), typeof(MIcon), props =>
+                {
+                    props[nameof(MIcon.Dense)] = Dense;
+                    props[nameof(MIcon.Dark)] = Dark;
+                    props[nameof(MIcon.Light)] = Light;
+                    props[nameof(MIcon.Color)] = ValidationState;
+                });
+        }
+
+        public override async Task HandleOnClick(MouseEventArgs args)
+        {
+            Value = !Value;
+            if (OnChange.HasDelegate)
+            {
+                await OnChange.InvokeAsync(Value);
+            }
+            else
+            {
+                if (ValueChanged.HasDelegate)
+                {
+                    await ValueChanged.InvokeAsync(Value);
+                }
+            }
         }
     }
 }

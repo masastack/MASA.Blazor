@@ -40,7 +40,8 @@ namespace MASA.Blazor
                  });
 
             AbstractProvider
-                .Merge(typeof(BInputDefaultSlot<>), typeof(BRadioGroupDefaultSlot<TValue>));
+                .Merge(typeof(CascadingValue<>), typeof(CascadingValue<MRadioGroup<TValue>>))
+                .Merge(typeof(BInputDefaultSlot<,>), typeof(BRadioGroupDefaultSlot<TValue>));
         }
 
         protected override void OnParametersSet()

@@ -38,9 +38,7 @@ namespace MASA.Blazor
 
                 return Themeable != null && Themeable.IsDark;
             }
-        } 
-
-        //TODO:for
+        }
 
         [Parameter]
         public StringNumber Left { get; set; } = 0;

@@ -1,4 +1,4 @@
-﻿<MSelect TItem="SelectionType" TValue="SelectionType" @bind-Value="_type"
+﻿<MSelect @bind-Value="_type"
          Items="_types" ItemText="r=>r.ToString()" ItemValue="r=>r"></MSelect>
 <MTreeview Selectable SelectionType="_type" Items="_data"
            ItemText="r=>r.Name" ItemChildren="r=>r.Children" ItemKey="r=>r.Id">

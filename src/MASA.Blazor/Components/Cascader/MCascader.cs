@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MASA.Blazor
 {
-    public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue>, ICascader<TItem, TValue>
+    public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>, ICascader<TItem, TValue>
     {
         [Parameter]
         public bool IsFull { get; set; }
@@ -50,8 +50,8 @@ namespace MASA.Blazor
                 {
                     props[nameof(MListItemGroup.Color)] = "primary";
                 })
-                .Merge<BSelectOption<TItem, TValue>, MCascaderSelectOption<TItem, TValue>>()
-                .Merge(typeof(BSelectMenu<,,>), typeof(BCascaderMenu<TItem, TValue, MCascader<TItem, TValue>>))
+                .Merge(typeof(BSelectOption<,,>), typeof(MCascaderSelectOption<TItem, TValue>))
+                .Merge(typeof(BSelectMenu<,,,>), typeof(BCascaderMenu<TItem, TValue, MCascader<TItem, TValue>>))
                 .Apply(typeof(BCascaderMenuBody<,,>), typeof(BCascaderMenuBody<TItem, TValue, MCascader<TItem, TValue>>));
         }
 

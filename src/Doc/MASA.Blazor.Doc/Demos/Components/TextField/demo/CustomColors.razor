@@ -34,11 +34,11 @@
 @code{
     public class Order
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         [Required]
         public string Title { get; set; }
         [Range(0, 20.00)]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
     }
 
     private Order _order = new();

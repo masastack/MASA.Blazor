@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MASA.Blazor
 {
-    internal partial class MCascaderSelectOption<TItem, TValue> : MSelectOption<TItem, TValue>
+    internal partial class MCascaderSelectOption<TItem, TValue> : MSelectOption<TItem, TValue, TValue>
     {
         [Parameter]
         public EventCallback<TItem> OnItemClick { get; set; }

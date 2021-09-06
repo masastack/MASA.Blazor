@@ -12,13 +12,13 @@
     </MRow>
     <MRow>
         <MCol Span="4">
-            <MCheckbox Checked="checked1" CheckedChanged="ToggleChecked1"></MCheckbox>
+            <MCheckbox @bind-Value="checked1" OnChanged="ToggleChecked1"></MCheckbox>
         </MCol>
         <MCol Span="4">
-            <MCheckbox Checked="checked2" CheckedChanged="ToggleChecked2"></MCheckbox>
+            <MCheckbox @bind-Value="checked2" OnChanged="ToggleChecked2"></MCheckbox>
         </MCol>
         <MCol Span="4">
-            <MCheckbox Indeterminate="@indeterminate" Checked="checked3" CheckedChanged="ToggleChecked3"></MCheckbox>
+            <MCheckbox Indeterminate="@indeterminate" @bind-Value="checked3" OnChanged="ToggleChecked3"></MCheckbox>
         </MCol>
     </MRow>
     <MRow class="light--text">
@@ -31,7 +31,7 @@
     </MRow>
     <MRow>
         <MCol Span="4">
-            <MCheckbox Checked="checked4" CheckedChanged="ToggleChecked4"
+            <MCheckbox @bind-Value="checked4" OnChanged="ToggleChecked4"
                        Disabled></MCheckbox>
         </MCol>
         <MCol Span="4">
@@ -61,7 +61,7 @@
         if (indeterminate) indeterminate = false;
     }
 
-    bool checked4 = false;
+    bool checked4 = true;
     void ToggleChecked4(bool value)
     {
         checked4 = value;
