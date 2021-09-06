@@ -10,6 +10,7 @@ namespace MASA.Blazor.Presets
     public partial class FormModal
     {
         private MForm _form;
+        private Func<MouseEventArgs, Task> _debounceHandleOnOk;
 
         [Parameter]
         public bool Visible { get; set; }
@@ -50,19 +51,54 @@ namespace MASA.Blazor.Presets
         [Parameter]
         public object Model { get; set; }
 
+        [Parameter]
+        public int DebounceInterval { get; set; } = 500;
+
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object> Attributes { get; set; }
 
+        protected override void OnInitialized()
+        {
+            _debounceHandleOnOk = DebounceEvent<MouseEventArgs>(
+                async (e) => await OnOk.InvokeAsync(e),
+                TimeSpan.FromMilliseconds(DebounceInterval));
+
+            base.OnInitialized();
+        }
+
         private async Task HandleOnOk(MouseEventArgs args)
         {
-            if (OnOk.HasDelegate)
+            if (_form.EditContext.Validate())
             {
-                var context = _form.EditContext;
-                if (context.Validate())
-                {
-                    await OnOk.InvokeAsync(args);
-                }
+                await _debounceHandleOnOk(args);
             }
+        }
+
+        private Func<T, Task> DebounceEvent<T>(Func<T, Task> action, TimeSpan interval)
+        {
+            return Debounce<T>(async arg =>
+            {
+                await InvokeAsync(async () =>
+                {
+                    await action(arg);
+                    StateHasChanged();
+                });
+            }, interval);
+        }
+
+        private Func<T, Task> Debounce<T>(Func<T, Task> action, TimeSpan interval)
+        {
+            if (action == null) throw new ArgumentNullException(nameof(action));
+
+            var last = 0;
+            return async arg =>
+            {
+                var current = System.Threading.Interlocked.Increment(ref last);
+
+                await Task.Delay(interval);
+
+                if (current == last) await action(arg);
+            };
         }
     }
 }

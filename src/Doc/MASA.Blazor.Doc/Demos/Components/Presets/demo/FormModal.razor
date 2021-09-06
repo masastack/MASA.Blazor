@@ -7,10 +7,10 @@
 
         <MRow>
             <MCol Span="12">
-                <MTextField @bind-Value="_addModal.Data.UserName" Label="UserName" Dense Outlined />
+                <MTextField @bind-Value="_addModal.Data.UserName" Label="UserName" Dense Outlined/>
             </MCol>
             <MCol Span="12">
-                <MTextField @bind-Value="_addModal.Data.City" Label="City" Dense Outlined />
+                <MTextField @bind-Value="_addModal.Data.City" Label="City" Dense Outlined/>
             </MCol>
             <MCol Span="12">
                 <MRadioGroup @bind-Value="_addModal.Data.Gender" Row Dense Style="margin-top: 0">
@@ -19,7 +19,7 @@
                 </MRadioGroup>
             </MCol>
             <MCol>
-                <MAutocomplete TValue="string" Values="_addModal.Data.Favorites.ToList()" ValuesChanged="(v) => _addModal.Data.Favorites = v.ToArray()" TItem="string" Multiple Items="_favorites" ItemValue="r=>r" ItemText="r=>r"></MAutocomplete>
+                <MAutocomplete @bind-Values="_addModal.Data.Favorites" Multiple Items="_favorites" ItemValue="r => r" ItemText="r => r"></MAutocomplete>
             </MCol>
         </MRow>
     </MASA.Blazor.Presets.FormModal>
@@ -28,11 +28,14 @@
         <MCol>username: @_user.UserName</MCol>
         <MCol>city: @_user.City</MCol>
         <MCol>gender: @_user.Gender</MCol>
-        <MCol><MButton OnClick="() => _addModal.Show(_user.ShallowCopy())" Color="primary" Text Small>Edit</MButton></MCol>
+        <MCol>
+            <MButton OnClick="() => _addModal.Show(_user.ShallowCopy())" Color="primary" Text Small>Edit</MButton>
+        </MCol>
     </MRow>
 </div>
 
 @code {
+
     private User _user = new()
     {
         UserName = "capdiem",
@@ -40,7 +43,7 @@
         Gender = 0,
     };
 
-    private List<string> _favorites = new List<string>() { "A", "B", "C", "D" };
+    private List<string> _favorites = new List<string>() {"A", "B", "C", "D"};
 
     private DataModal<User> _addModal = new();
 
@@ -72,16 +75,19 @@
     {
         [Required]
         public string UserName { get; set; }
+
         [Range(0, 1)]
         public int Gender { get; set; }
+
         public string City { get; set; }
+
         [Required]
         [MinLength(1)]
-        public string[] Favorites { get; set; } = new string[] { };
+        public List<string> Favorites { get; set; } = new();
 
         public User ShallowCopy()
         {
-            var user = (User)this.MemberwiseClone();
+            var user = (User) this.MemberwiseClone();
             user.Favorites = Favorites;
             return user;
         }
@@ -132,4 +138,5 @@
     {
         public T ShallowCopy();
     }
+
 }
