@@ -105,7 +105,7 @@ namespace MASA.Blazor
             HideDetails = "auto";
         }
 
-        public override async Task HandleOnClick(MouseEventArgs args)
+        public override async Task HandleOnClickAsync(MouseEventArgs args)
         {
             Value = !Value;
             if (OnChange.HasDelegate)

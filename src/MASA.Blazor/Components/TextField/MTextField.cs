@@ -111,6 +111,15 @@ namespace MASA.Blazor
         [Parameter]
         public RenderFragment CounterContent { get; set; }
 
+        [Parameter]
+        public EventCallback<MouseEventArgs> OnAppendOuterClick { get; set; }
+
+        [Parameter]
+        public EventCallback<MouseEventArgs> OnPrependInnerClick { get; set; }
+
+        [Parameter]
+        public EventCallback<MouseEventArgs> OnClearClick { get; set; }
+
         public bool IsBooted { get; set; } = true;
 
         public bool IsEnclosed => Filled || IsSolo || Outlined;
@@ -241,7 +250,23 @@ namespace MASA.Blazor
             }
         }
 
-        public override async Task HandleOnClick(MouseEventArgs args)
+        public virtual async Task HandleOnAppendOuterClickAsync(MouseEventArgs args)
+        {
+            if (OnAppendOuterClick.HasDelegate)
+            {
+                await OnAppendOuterClick.InvokeAsync(args);
+            }
+        }
+
+        public virtual async Task HandleOnPrependInnerClickAsync(MouseEventArgs args)
+        {
+            if (OnPrependInnerClick.HasDelegate)
+            {
+                await OnPrependInnerClick.InvokeAsync(args);
+            }
+        }
+
+        public override async Task HandleOnClickAsync(MouseEventArgs args)
         {
             if (IsFocused || IsDisabled)
             {
@@ -258,25 +283,25 @@ namespace MASA.Blazor
             if (success)
             {
                 _badInput = null;
+
+                Value = val;
+
+                if (OnChange.HasDelegate)
+                {
+                    await OnChange.InvokeAsync(Value);
+                }
+                else
+                {
+                    //We don't want render twice
+                    if (ValueChanged.HasDelegate)
+                    {
+                        await ValueChanged.InvokeAsync(Value);
+                    }
+                }
             }
             else
             {
                 _badInput = args.Value.ToString();
-            }
-
-            Value = val;
-
-            if (OnChange.HasDelegate)
-            {
-                await OnChange.InvokeAsync(Value);
-            }
-            else
-            {
-                //We don't want render twice
-                if (ValueChanged.HasDelegate)
-                {
-                    await ValueChanged.InvokeAsync(Value);
-                }
             }
         }
 
@@ -298,34 +323,34 @@ namespace MASA.Blazor
             if (success)
             {
                 _badInput = null;
+
+                //Since EditContext validate model,we should update outside value of model first
+                if (OnInput.HasDelegate)
+                {
+                    await OnInput.InvokeAsync(val);
+                }
+                else
+                {
+                    if (OnChange.HasDelegate)
+                    {
+                        await OnChange.InvokeAsync(val);
+                    }
+                    else
+                    {
+                        //We don't want render twice
+                        if (ValueChanged.HasDelegate)
+                        {
+                            await ValueChanged.InvokeAsync(val);
+                        }
+                    }
+                }
+
+                InternalValue = val;
             }
             else
             {
                 _badInput = args.Value.ToString();
             }
-
-            //Since EditContext validate model,we should update outside value of model first
-            if (OnInput.HasDelegate)
-            {
-                await OnInput.InvokeAsync(val);
-            }
-            else
-            {
-                if (OnChange.HasDelegate)
-                {
-                    await OnChange.InvokeAsync(val);
-                }
-                else
-                {
-                    //We don't want render twice
-                    if (ValueChanged.HasDelegate)
-                    {
-                        await ValueChanged.InvokeAsync(val);
-                    }
-                }
-            }
-
-            InternalValue = val;
         }
 
         public virtual async Task HandleOnFocus(FocusEventArgs args)
@@ -348,7 +373,7 @@ namespace MASA.Blazor
             }
         }
 
-        public virtual async Task HandleOnClear(MouseEventArgs args)
+        public virtual async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
             await InputRef.FocusAsync();
 
@@ -367,6 +392,11 @@ namespace MASA.Blazor
             }
 
             InternalValue = default;
+
+            if (OnClearClick.HasDelegate)
+            {
+                await OnClearClick.InvokeAsync(args);
+            }
         }
 
         protected override void SetComponentClass()

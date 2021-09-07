@@ -1,0 +1,34 @@
+<MContainer Fluid>
+    <MSelect @bind-Value="_value"
+             Items="_items"
+             Label="Select Item"
+             ItemValue="r=>r"
+             ItemText="r=>r"
+             Multiple>
+        <SelectionContent Context="index">
+            @if (index == 0)
+            {
+                <MChip>
+                    <span>@_value[index]</span>
+                </MChip>
+            }
+
+            @if (index == 1)
+            {
+                <span class="grey--text text-caption">
+                    (+@(_value.Count - 1) others)
+                </span>
+            }
+        </SelectionContent>
+    </MSelect>
+</MContainer>
+
+@code {
+    private int _index  =  0;
+    private List<string> _items  =  new List<string>{
+    "foo", "bar", "fizz", "buzz", "fizzbuzz", "foobar"
+    };
+    private List<string> _value = new List<string>{
+    "foo", "bar", "fizz"
+    };
+    }

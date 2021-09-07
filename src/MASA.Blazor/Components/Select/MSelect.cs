@@ -85,6 +85,15 @@ namespace MASA.Blazor
         [Parameter]
         public IReadOnlyList<TItem> Items { get; set; } = new List<TItem>();
 
+        [Parameter]
+        public RenderFragment PrependItemContent { get; set; }
+
+        [Parameter]
+        public RenderFragment AppendItemContent { get; set; }
+
+        [Parameter]
+        public RenderFragment<int> SelectionContent { get; set; }
+
         public List<string> Text { get; set; } = new();
 
         //TODO:menu will change
@@ -118,6 +127,9 @@ namespace MASA.Blazor
                 return new List<TItemValue>();
             }
         }
+
+        public IList<TItem> SelectedItems => Items
+                .Where(u => Values.Contains(ItemValue(u))).ToList();
 
         protected virtual List<string> FormatText(TValue value)
         {
@@ -312,7 +324,7 @@ namespace MASA.Blazor
             }
         }
 
-        public override async Task HandleOnClick(MouseEventArgs args)
+        public override async Task HandleOnClickAsync(MouseEventArgs args)
         {
             //TODO:menu will change
             if (OnExtraClick != null && !Readonly)
@@ -322,7 +334,7 @@ namespace MASA.Blazor
 
             //TODO:try focus
             await InputRef.FocusAsync();
-            await base.HandleOnClick(args);
+            await base.HandleOnClickAsync(args);
         }
 
         public void SetVisible(bool visible)
@@ -415,7 +427,7 @@ namespace MASA.Blazor
             InternalValue = (TValue)values;
         }
 
-        public override async Task HandleOnClear(MouseEventArgs args)
+        public override async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
             if (Multiple)
             {
@@ -440,7 +452,7 @@ namespace MASA.Blazor
             }
             else
             {
-                await base.HandleOnClear(args);
+                await base.HandleOnClearClickAsync(args);
             }
         }
     }
