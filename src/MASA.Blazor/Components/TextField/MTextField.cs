@@ -283,19 +283,17 @@ namespace MASA.Blazor
             if (success)
             {
                 _badInput = null;
-
-                Value = val;
+                InternalValue = val;
 
                 if (OnChange.HasDelegate)
                 {
-                    await OnChange.InvokeAsync(Value);
+                    await OnChange.InvokeAsync(InternalValue);
                 }
                 else
                 {
-                    //We don't want render twice
                     if (ValueChanged.HasDelegate)
                     {
-                        await ValueChanged.InvokeAsync(Value);
+                        await ValueChanged.InvokeAsync(InternalValue);
                     }
                 }
             }
@@ -323,29 +321,12 @@ namespace MASA.Blazor
             if (success)
             {
                 _badInput = null;
+                Value = val;
 
-                //Since EditContext validate model,we should update outside value of model first
                 if (OnInput.HasDelegate)
                 {
-                    await OnInput.InvokeAsync(val);
+                    await OnInput.InvokeAsync(Value);
                 }
-                else
-                {
-                    if (OnChange.HasDelegate)
-                    {
-                        await OnChange.InvokeAsync(val);
-                    }
-                    else
-                    {
-                        //We don't want render twice
-                        if (ValueChanged.HasDelegate)
-                        {
-                            await ValueChanged.InvokeAsync(val);
-                        }
-                    }
-                }
-
-                InternalValue = val;
             }
             else
             {
@@ -376,20 +357,6 @@ namespace MASA.Blazor
         public virtual async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
             await InputRef.FocusAsync();
-
-            //Since EditContext validate model,we should update outside value of model first
-            if (OnChange.HasDelegate)
-            {
-                await OnChange.InvokeAsync(default);
-            }
-            else
-            {
-                //We don't want render twice
-                if (ValueChanged.HasDelegate)
-                {
-                    await ValueChanged.InvokeAsync(default);
-                }
-            }
 
             InternalValue = default;
 

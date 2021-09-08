@@ -119,7 +119,7 @@ namespace MASA.Blazor
         {
             get
             {
-                if (InternalValue is IList<TItemValue> values)
+                if (Value is IList<TItemValue> values)
                 {
                     return values;
                 }
@@ -349,82 +349,44 @@ namespace MASA.Blazor
 
             if (Multiple)
             {
-                var values = Values;
-                if (!values.Contains(value))
+                if (!Values.Contains(value))
                 {
-                    values.Add(value);
+                    Values.Add(value);
                     Text.Add(text);
 
-                    //Since EditContext validate model,we should update outside value of model first
-                    if (OnChange.HasDelegate)
+                    if (ValueChanged.HasDelegate)
                     {
-                        await OnChange.InvokeAsync((TValue)values);
+                        await ValueChanged.InvokeAsync(Value);
                     }
-                    else
-                    {
-                        //We don't want render twice
-                        if (ValueChanged.HasDelegate)
-                        {
-                            await ValueChanged.InvokeAsync((TValue)values);
-                        }
-                    }
-
-                    //TODO:Watch for validate
-                    InternalValue = (TValue)values;
                 }
             }
             else
             {
                 if (value is TValue val)
                 {
-                    //Since EditContext validate model,we should update outside value of model first
-                    if (OnChange.HasDelegate)
+                    Value = val;
+                    if (ValueChanged.HasDelegate)
                     {
-                        await OnChange.InvokeAsync(val);
+                        await ValueChanged.InvokeAsync(Value);
                     }
-                    else
-                    {
-                        //We don't want render twice
-                        if (ValueChanged.HasDelegate)
-                        {
-                            await ValueChanged.InvokeAsync(val);
-                        }
-                    }
-
-                    InternalValue = val;
 
                     Text.Clear();
                     Text.Add(text);
                 }
             }
-
-
         }
 
         public async Task RemoveSelectedAsync(string text, TItemValue value)
         {
             _shouldReformatText = false;
 
-            var values = Values;
-            values.Remove(value);
+            Values.Remove(value);
             Text.Remove(text);
 
-            //Since EditContext validate model,we should update outside value of model first
-            if (OnChange.HasDelegate)
+            if (ValueChanged.HasDelegate)
             {
-                await OnChange.InvokeAsync((TValue)values);
+                await ValueChanged.InvokeAsync(Value);
             }
-            else
-            {
-                //We don't want render twice
-                if (ValueChanged.HasDelegate)
-                {
-                    await ValueChanged.InvokeAsync((TValue)values);
-                }
-            }
-
-            //TODO:Watch for validate
-            InternalValue = (TValue)values;
         }
 
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)
@@ -434,20 +396,6 @@ namespace MASA.Blazor
                 await InputRef.FocusAsync();
 
                 IList<TItemValue> values = new List<TItemValue>();
-                //Since EditContext validate model,we should update outside value of model first
-                if (OnChange.HasDelegate)
-                {
-                    await OnChange.InvokeAsync((TValue)values);
-                }
-                else
-                {
-                    //We don't want render twice
-                    if (ValueChanged.HasDelegate)
-                    {
-                        await ValueChanged.InvokeAsync((TValue)values);
-                    }
-                }
-
                 InternalValue = (TValue)values;
             }
             else

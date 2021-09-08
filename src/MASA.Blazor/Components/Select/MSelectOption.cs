@@ -19,37 +19,14 @@ namespace MASA.Blazor
                     props[nameof(MListItem.Disabled)] = Disabled;
                     props[nameof(MListItem.Highlighted)] = Highlighted;
 
-                    if (!Disabled) props[nameof(MListItem.Color)] = "primary";
+                    if (!Disabled) props[nameof(MListItem.Color)] = Selected ? "primary" : null;
 
-                    props[nameof(MListItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async (args) =>
-                    {
-                        if (Disabled)
-                        {
-                            return;
-                        }
-
-                        if (!Select.Multiple)
-                        {
-                            Select.SetVisible(false);
-                            await Select.SetSelectedAsync(Label, Value);
-                        }
-                        else
-                        {
-                            if (Selected)
-                            {
-                                await Select.RemoveSelectedAsync(Label, Value);
-                            }
-                            else
-                            {
-                                await Select.SetSelectedAsync(Label, Value);
-                            }
-                        }
-                    });
+                    props[nameof(MListItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, OnSelectAsync);
                 })
                 .Apply<BListItemAction, MListItemAction>()
-                .Apply<ICheckbox, MCheckbox>(props =>
+                .Apply(typeof(ICheckbox), typeof(MSimpleCheckbox), props =>
                 {
-                    props[nameof(MCheckbox.Value)] = Selected;
+                    props[nameof(MSimpleCheckbox.Value)] = Selected;
                 })
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>()
@@ -58,6 +35,31 @@ namespace MASA.Blazor
                     props[nameof(Style)] = "margin:12px 0 12px 12px";
                 })
                 .Apply<BIcon, MIcon>();
+        }
+
+        private async Task OnSelectAsync()
+        {
+            if (Disabled)
+            {
+                return;
+            }
+
+            if (!Select.Multiple)
+            {
+                Select.SetVisible(false);
+                await Select.SetSelectedAsync(Label, Value);
+            }
+            else
+            {
+                if (Selected)
+                {
+                    await Select.RemoveSelectedAsync(Label, Value);
+                }
+                else
+                {
+                    await Select.SetSelectedAsync(Label, Value);
+                }
+            }
         }
     }
 }
