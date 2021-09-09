@@ -8,6 +8,7 @@ using MASA.Blazor.Components.Table;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using OneOf;
+using Element = BlazorComponent.Web.Element;
 
 namespace MASA.Blazor
 {
@@ -151,7 +152,7 @@ namespace MASA.Blazor
         {
             if (firstRender && Width == null && FixedRight)
             {
-                var element = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, WrapRef);
+                var element = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, WrapRef);
                 Width = element.ClientWidth * 1.5;
 
                 StateHasChanged();
@@ -162,7 +163,7 @@ namespace MASA.Blazor
         {
             if (FixedRight)
             {
-                var element = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, WrapRef);
+                var element = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, WrapRef);
                 if (element.ScrollWidth == element.ScrollLeft + element.ClientWidth)
                 {
                     _scrollRight = true;

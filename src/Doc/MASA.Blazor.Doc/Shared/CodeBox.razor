@@ -92,6 +92,8 @@
 @inject ILanguageService lang;
 @inject NavigationManager NavigationManager
 @inject IJSRuntime Js
+@using BlazorComponent
+@using Element=BlazorComponent.Web.Element
 
 @code {
     private bool _expend;
@@ -150,7 +152,7 @@
 
     public async void HandleOnClick()
     {
-        var element = await Js.InvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, "#" + Id);
+        var element = await Js.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, "#" + Id);
         var options = new
         {
             Top = element.OffsetTop,

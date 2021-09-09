@@ -88,26 +88,26 @@ namespace MASA.Blazor
                 {
                     Value = QueryText
                 };
-                await base.HandleOnInput(args);
+                await base.HandleOnInputAsync(args);
 
                 Timer.Stop();
             });
         }
 
-        public override async Task HandleOnBlur(FocusEventArgs args)
+        public override async Task HandleOnBlurAsync(FocusEventArgs args)
         {
             QueryText = default;
             HighlightIndex = -1;
-            await base.HandleOnBlur(args);
+            await base.HandleOnBlurAsync(args);
         }
 
-        public override Task HandleOnChange(ChangeEventArgs args)
+        public override Task HandleOnChangeAsync(ChangeEventArgs args)
         {
             QueryText = args.Value.ToString();
             return Task.CompletedTask;
         }
 
-        public override async Task HandleOnInput(ChangeEventArgs args)
+        public override async Task HandleOnInputAsync(ChangeEventArgs args)
         {
             QueryText = args.Value.ToString();
             HighlightIndex = -1;
@@ -130,14 +130,14 @@ namespace MASA.Blazor
                 }
                 else
                 {
-                    await base.HandleOnInput(args);
+                    await base.HandleOnInputAsync(args);
                 }
             }
         }
 
-        public override async Task HandleOnKeyDown(KeyboardEventArgs args)
+        public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
-            await base.HandleOnKeyDown(args);
+            await base.HandleOnKeyDownAsync(args);
 
             switch (args.Code)
             {

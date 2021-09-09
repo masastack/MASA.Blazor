@@ -14,7 +14,7 @@ namespace MASA.Blazor
         private string _badInput;
 
         [Parameter]
-        public bool Clearable { get; set; }
+        public virtual bool Clearable { get; set; }
 
         [Parameter]
         public bool PersistentPlaceholder { get; set; }
@@ -130,7 +130,7 @@ namespace MASA.Blazor
 
         public virtual bool LabelValue => IsFocused || IsLabelActive || PersistentPlaceholder;
 
-        public ElementReference InputRef { get; set; }
+        public virtual ElementReference InputElement { get; set; }
 
         //TODO:
         public int LabelWidth => LabelValue ? ComputeLabeLength * 6 : 0;
@@ -213,7 +213,7 @@ namespace MASA.Blazor
             { "value", _badInput == null ? Value : _badInput }
         };
 
-        public int ComputedCounterValue
+        public virtual StringNumber ComputedCounterValue
         {
             get
             {
@@ -273,10 +273,10 @@ namespace MASA.Blazor
                 return;
             }
 
-            await InputRef.FocusAsync();
+            await InputElement.FocusAsync();
         }
 
-        public virtual async Task HandleOnChange(ChangeEventArgs args)
+        public virtual async Task HandleOnChangeAsync(ChangeEventArgs args)
         {
             var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
 
@@ -303,7 +303,7 @@ namespace MASA.Blazor
             }
         }
 
-        public virtual async Task HandleOnBlur(FocusEventArgs args)
+        public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
         {
             _badInput = null;
             IsFocused = false;
@@ -314,7 +314,7 @@ namespace MASA.Blazor
             }
         }
 
-        public virtual async Task HandleOnInput(ChangeEventArgs args)
+        public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
         {
             var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
 
@@ -334,7 +334,7 @@ namespace MASA.Blazor
             }
         }
 
-        public virtual async Task HandleOnFocus(FocusEventArgs args)
+        public virtual async Task HandleOnFocusAsync(FocusEventArgs args)
         {
             if (!IsFocused)
             {
@@ -346,7 +346,7 @@ namespace MASA.Blazor
             }
         }
 
-        public virtual async Task HandleOnKeyDown(KeyboardEventArgs args)
+        public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
             if (OnKeyDown.HasDelegate)
             {
@@ -356,7 +356,7 @@ namespace MASA.Blazor
 
         public virtual async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
-            await InputRef.FocusAsync();
+            await InputElement.FocusAsync();
 
             InternalValue = default;
 
@@ -463,7 +463,7 @@ namespace MASA.Blazor
                     props[nameof(MCounter.Dark)] = Dark;
                     props[nameof(MCounter.Light)] = Light;
                     props[nameof(MCounter.Max)] = Max;
-                    props[nameof(MCounter.Value)] = (StringNumber)ComputedCounterValue;
+                    props[nameof(MCounter.Value)] = ComputedCounterValue;
                 })
                 .ApplyTextFieldLabel(typeof(MLabel), props =>
                 {

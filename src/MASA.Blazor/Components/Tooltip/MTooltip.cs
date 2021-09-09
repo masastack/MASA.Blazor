@@ -1,13 +1,14 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
+using Element = BlazorComponent.Web.Element;
 
 namespace MASA.Blazor
 {
     public partial class MTooltip : BTooltip
     {
-        private HtmlElement _activatorRect = new();
-        private HtmlElement _contentRect = new();
+        private Element _activatorRect = new();
+        private Element _contentRect = new();
 
         public bool Top => !(Bottom || Left || Right);
 
@@ -78,10 +79,10 @@ namespace MASA.Blazor
             }
 
             if (_activatorRect.ClientWidth == 0)
-                _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
+                _activatorRect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, Ref);
 
             if (_contentRect.ClientWidth == 0)
-                _contentRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, ContentRef);
+                _contentRect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, ContentRef);
 
             if (Top || Bottom)
             {
@@ -113,7 +114,7 @@ namespace MASA.Blazor
         protected override async Task OnMouseEnter()
         {
             await base.OnMouseEnter();
-            _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, Ref);
+            _activatorRect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, Ref);
         }
     }
 }

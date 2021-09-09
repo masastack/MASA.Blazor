@@ -7,5 +7,8 @@ title:
 
 ## zh-CN
 
+v-file-input组件的核心是一个基于v-text-field拓展的基本容器
+
 ## en-US
 
+Todo...

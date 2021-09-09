@@ -12,6 +12,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Timers;
 using Timer = System.Timers.Timer;
+using Element = BlazorComponent.Web.Element;
 
 namespace MASA.Blazor.Doc.Shared
 {
@@ -111,7 +112,7 @@ namespace MASA.Blazor.Doc.Shared
             var id = "#" + hash;
             ActiveItem = Items?.Find(r => r.Href.Contains(hash));
 
-            var element = await Js.InvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, id);
+            var element = await Js.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, id);
             var options = new
             {
                 Top = element.OffsetTop,

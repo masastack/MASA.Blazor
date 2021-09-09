@@ -1,6 +1,6 @@
 ﻿@using System.IO;
 
-<MFileInput Files="@files" OnUpload="HandleUpload" Multiple Card Accept="image/*">
+<MUpload Files="@files" OnUpload="HandleUpload" Multiple Card Accept="image/*">
     <ActivatorContent>
         @if (files.Count == 0)
                 {
@@ -9,7 +9,7 @@
         </MCard>
         }
     </ActivatorContent>
-</MFileInput>
+</MUpload>
 
 @code {
     List<UploadFile> files = new List<UploadFile>()

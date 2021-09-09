@@ -156,7 +156,7 @@ namespace MASA.Blazor
         {
             if (firstRender)
             {
-                await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputRef);
+                await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
             }
         }
 
@@ -239,7 +239,7 @@ namespace MASA.Blazor
                     props[nameof(MMenu.MaxHeight)] = MenuProps?.MaxHeight ?? 400;
                     props[nameof(MMenu.MinWidth)] = MenuProps?.MinWidth;
                     props[nameof(MMenu.Input)] = true;
-                    props[nameof(MMenu.ActivatorRef)] = InputSlotRef;
+                    props[nameof(MMenu.ActivatorRef)] = InputSlotElement;
                 })
                 .Apply<BList, MList>(props =>
                 {
@@ -263,13 +263,13 @@ namespace MASA.Blazor
             OnExtraClick = onExtraClick;
         }
 
-        public override Task HandleOnBlur(FocusEventArgs args)
+        public override Task HandleOnBlurAsync(FocusEventArgs args)
         {
             SetVisible(false);
-            return base.HandleOnBlur(args);
+            return base.HandleOnBlurAsync(args);
         }
 
-        public override async Task HandleOnKeyDown(KeyboardEventArgs args)
+        public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
             switch (args.Code)
             {
@@ -333,7 +333,7 @@ namespace MASA.Blazor
             }
 
             //TODO:try focus
-            await InputRef.FocusAsync();
+            await InputElement.FocusAsync();
             await base.HandleOnClickAsync(args);
         }
 
@@ -393,7 +393,7 @@ namespace MASA.Blazor
         {
             if (Multiple)
             {
-                await InputRef.FocusAsync();
+                await InputElement.FocusAsync();
 
                 IList<TItemValue> values = new List<TItemValue>();
                 InternalValue = (TValue)values;

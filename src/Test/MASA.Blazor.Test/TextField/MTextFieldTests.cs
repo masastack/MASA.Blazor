@@ -59,7 +59,7 @@ namespace MASA.Blazor.Test.TextField
             };
 
             // Act
-            await cut.Instance.HandleOnChange(args);
+            await cut.Instance.HandleOnChangeAsync(args);
 
             // Assert
             Assert.AreEqual("hello", cut.Instance.Value);
@@ -85,7 +85,7 @@ namespace MASA.Blazor.Test.TextField
             {
                 Value = "hello"
             };
-            await factory.Reciever.InvokeAsync(() => cut.Instance.HandleOnChange(args));
+            await factory.Reciever.InvokeAsync(() => cut.Instance.HandleOnChangeAsync(args));
 
             // Assert
             Assert.AreEqual("hello", cut.Instance.Value);

@@ -7,6 +7,7 @@ using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using OneOf;
+using Element = BlazorComponent.Web.Element;
 
 namespace MASA.Blazor
 {
@@ -227,7 +228,7 @@ namespace MASA.Blazor
         {
             if (!string.IsNullOrWhiteSpace(ScrollTarget))
             {
-                DomEventJsInterop.AddEventListener<HtmlElement>($"#{ScrollTarget}", "scroll", (e) =>
+                DomEventJsInterop.AddEventListener<Element>($"#{ScrollTarget}", "scroll", (e) =>
                 {
 
                     SavedScroll = CurrentScroll;
@@ -246,7 +247,7 @@ namespace MASA.Blazor
         {
             if (!string.IsNullOrWhiteSpace(ScrollTarget))
             {
-                DomEventJsInterop.RemoveEventListerner<HtmlElement>($"#{ScrollTarget}", "scroll", e =>
+                DomEventJsInterop.RemoveEventListerner<Element>($"#{ScrollTarget}", "scroll", e =>
                 {
 
                 });

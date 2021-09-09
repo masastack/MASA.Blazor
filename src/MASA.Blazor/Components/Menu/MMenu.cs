@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Threading.Tasks;
+using Element = BlazorComponent.Web.Element;
 
 namespace MASA.Blazor
 {
@@ -16,9 +17,9 @@ namespace MASA.Blazor
         private double _absoluteOffsetY;
 
         private Window _window = new();
-        private HtmlElement _bodyRect = new();
-        private HtmlElement _activatorRect = new();
-        private HtmlElement _contentRect = new();
+        private Element _bodyRect = new();
+        private Element _activatorRect = new();
+        private Element _contentRect = new();
 
         [Inject]
         public DomEventJsInterop DomEventJsInterop { get; set; }
@@ -67,11 +68,11 @@ namespace MASA.Blazor
         {
             _window = window ?? _window;
 
-            _bodyRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, "document");
+            _bodyRect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, "document");
 
-            _activatorRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetDomInfo, ComputedRef);
+            _activatorRect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, ComputedRef);
 
-            _contentRect = await JsInvokeAsync<HtmlElement>(JsInteropConstants.GetFirstChildDomInfo, ContentRef, ".m-application");
+            _contentRect = await JsInvokeAsync<Element>(JsInteropConstants.GetFirstChildDomInfo, ContentRef, ".m-application");
 
             if (Fixed)
             {
