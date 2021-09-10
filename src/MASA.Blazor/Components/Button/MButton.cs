@@ -100,10 +100,10 @@ namespace MASA.Blazor
         protected override Task OnInitializedAsync()
         {
             AbstractProvider
-                .Apply<BProcessCircular, MProcessCircular>(prop =>
+                .Apply<BProgressCircular, MProgressCircular>(prop =>
                 {
-                    prop[nameof(MProcessCircular.Size)] = (StringNumber)23;
-                    prop[nameof(MProcessCircular.Indeterminate)] = true;
+                    prop[nameof(MProgressCircular.Size)] = (StringNumber)23;
+                    prop[nameof(MProgressCircular.Indeterminate)] = true;
                 });
 
             return base.OnInitializedAsync();
