@@ -99,7 +99,7 @@ namespace MASA.Blazor
         //TODO:menu will change
         public Func<MouseEventArgs, Task> OnExtraClick { get; set; }
 
-        public override bool IsDirty => Text.Count > 0;
+        public override bool IsDirty => SelectedItems.Count > 0;
 
         public int HighlightIndex { get; set; } = -1;
 
@@ -122,6 +122,14 @@ namespace MASA.Blazor
                 if (Value is IList<TItemValue> values)
                 {
                     return values;
+                }
+
+                if (Value is TItemValue value)
+                {
+                    return new List<TItemValue>
+                    {
+                        value
+                    };
                 }
 
                 return new List<TItemValue>();

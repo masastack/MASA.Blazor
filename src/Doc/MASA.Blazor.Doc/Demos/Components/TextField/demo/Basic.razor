@@ -7,7 +7,7 @@
                 <MTextField Label="Regular" @bind-Value="_person.Name" Clearable></MTextField>
             </MCol>
             <MCol Span="12" Sm="6" Md="3">
-                <MTextField Label="Regular" Placeholder="PlaceHolder" Clearable TValue="string"></MTextField>
+                <MTextField Label="Regular" Placeholder="PlaceHolder" Clearable TValue="string" ErrorMessages="_message"></MTextField>
             </MCol>
             <MCol Span="12" Sm="6" Md="3">
                 <MTextField Label="Solo" Solo="true" AppendIcon="mdi-home" TValue="string"></MTextField>
@@ -40,6 +40,10 @@
         [Required]
         public string Name { get; set; }
     }
+
+    private List<string> _message = new List<string>{
+        "Name is required"
+    };
 
     private Person _person = new Person
     {

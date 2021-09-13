@@ -57,19 +57,19 @@ namespace MASA.Blazor
                     styleBuilder
                         .Add($"transform: rotate({Rotate}deg)");
                 })
-                .Apply("underlay-circle", styleAction: styleBuilder =>
+                .Apply("underlay-circle", cssBuilder =>
                 {
-                    styleBuilder
+                    cssBuilder
                         .Add("m-progress-circular__underlay");
                 })
-                .Apply("overlay-circle", styleAction: styleBuilder =>
+                .Apply("overlay-circle", cssBuilder =>
                 {
-                    styleBuilder
+                    cssBuilder
                         .Add("m-progress-circular__overlay");
                 })
-                .Apply("info", styleAction: styleBuilder =>
+                .Apply("info", cssBuilder =>
                 {
-                    styleBuilder
+                    cssBuilder
                         .Add("m-progress-circular__info");
                 });
 

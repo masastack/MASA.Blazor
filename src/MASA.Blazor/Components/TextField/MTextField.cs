@@ -12,6 +12,7 @@ namespace MASA.Blazor
     public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
     {
         private string _badInput;
+        private CancellationTokenSource _onInputCancellationTokenSource;
 
         [Parameter]
         public virtual bool Clearable { get; set; }
@@ -119,7 +120,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public EventCallback<MouseEventArgs> OnClearClick { get; set; }
-
         public bool IsBooted { get; set; } = true;
 
         public bool IsEnclosed => Filled || IsSolo || Outlined;
@@ -179,31 +179,6 @@ namespace MASA.Blazor
         }
 
         public override bool HasColor => IsFocused;
-
-        public override string ValidationState
-        {
-            get
-            {
-                if (IsDisabled)
-                {
-                    return "";
-                }
-
-                //TODO:shouldValidate
-                if (HasError)
-                {
-                    return "error";
-                }
-
-                //TODO:success
-                if (HasColor)
-                {
-                    return ComputedColor;
-                }
-
-                return "";
-            }
-        }
 
         public virtual string Tag => "input";
 
@@ -316,6 +291,11 @@ namespace MASA.Blazor
 
         public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
         {
+            //When bad network,update may not intime
+            _onInputCancellationTokenSource?.Cancel();
+            _onInputCancellationTokenSource = new CancellationTokenSource();
+            await Task.Delay(300, _onInputCancellationTokenSource.Token);
+
             var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
 
             if (success)

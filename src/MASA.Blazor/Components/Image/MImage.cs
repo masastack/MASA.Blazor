@@ -163,10 +163,8 @@ namespace MASA.Blazor
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
-            if (string.IsNullOrEmpty(CurrentSrc))
-            {
-                CurrentSrc = Src;
-            }
+
+            CurrentSrc = Src;
         }
 
         private async Task PollForSize(Dimensions dimensions, int? timeOut = 100)

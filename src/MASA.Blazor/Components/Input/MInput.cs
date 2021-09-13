@@ -34,6 +34,11 @@ namespace MASA.Blazor
                     return "error";
                 }
 
+                if (HasSuccess)
+                {
+                    return "success";
+                }
+
                 if (HasColor)
                 {
                     return ComputedColor;
@@ -80,11 +85,6 @@ namespace MASA.Blazor
         {
             get
             {
-                if (Value == null)
-                {
-                    return false;
-                }
-
                 return Convert.ToString(Value).Length > 0;
             }
         }
