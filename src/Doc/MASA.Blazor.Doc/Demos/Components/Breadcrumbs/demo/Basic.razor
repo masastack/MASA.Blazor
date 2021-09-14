@@ -1,7 +1,11 @@
 ﻿<div>
-    <MBreadcrumbs Items="items" Divider="."></MBreadcrumbs>
+    <MBreadcrumbs Items="items"></MBreadcrumbs>
 
-    <MBreadcrumbs Items="items" Divider="-"></MBreadcrumbs>
+    <MBreadcrumbs>
+        <MBreadcrumbsItem Href="#breadcrumbs_dashboard">Dashboard</MBreadcrumbsItem>
+        <MBreadcrumbsItem Href="#breadcrumbs_link_1" Text="Link 1"></MBreadcrumbsItem>
+        <MBreadcrumbsItem Href="#breadcrumbs_link_2" Disabled>Link 2</MBreadcrumbsItem>
+    </MBreadcrumbs>
 </div>
 
 @code {

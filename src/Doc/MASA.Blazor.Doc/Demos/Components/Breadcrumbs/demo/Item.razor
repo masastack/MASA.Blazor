@@ -1,8 +1,10 @@
-﻿<div>
-    <MBreadcrumbs Items="items" Divider="."></MBreadcrumbs>
-
-    <MBreadcrumbs Items="items" Divider="-"></MBreadcrumbs>
-</div>
+﻿<MBreadcrumbs Items="items">
+    <ItemContent>
+        <MBreadcrumbsItem Href="@context.Href" Disabled="context.Disabled">
+            @context.Text.ToUpper()
+        </MBreadcrumbsItem>
+    </ItemContent>
+</MBreadcrumbs>
 
 @code {
 

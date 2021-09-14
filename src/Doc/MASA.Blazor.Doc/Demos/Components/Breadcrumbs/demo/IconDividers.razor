@@ -1,7 +1,15 @@
 ﻿<div>
-    <MBreadcrumbs Items="items" Divider="."></MBreadcrumbs>
+    <MBreadcrumbs Items="items">
+        <DividerContent>
+            <MIcon>mdi-forward</MIcon>
+        </DividerContent>
+    </MBreadcrumbs>
 
-    <MBreadcrumbs Items="items" Divider="-"></MBreadcrumbs>
+    <MBreadcrumbs Items="items">
+        <DividerContent>
+            <MIcon>mdi-chevron-right</MIcon>
+        </DividerContent>
+    </MBreadcrumbs>
 </div>
 
 @code {

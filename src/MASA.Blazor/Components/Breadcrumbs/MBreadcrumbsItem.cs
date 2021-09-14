@@ -4,24 +4,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-   public class MBreadcrumbsItem: BBreadcrumbsItem
+    public class MBreadcrumbsItem : BBreadcrumbsItem
     {
+        [Parameter]
+        public string ActiveClass { get; set; } = "m-breadcrumbs__item--disabled";
+
+        /// <summary>
+        /// TODO: ripple in breadcrumbs-item
+        /// </summary>
+        [Parameter]
+        public bool Ripple { get; set; }
+
         protected override void SetComponentClass()
         {
             CssProvider
-                .Apply(cssBuilder =>
+                .Apply("link", css =>
                 {
-                    cssBuilder
-                        .Add(Disabled ? "m-breadcrumbs__item m-breadcrumbs__item--disabled" : "m-breadcrumbs__item");
+                    css.Add("m-breadcrumbs__item")
+                        .AddIf(ActiveClass, () => Disabled);
                 })
-                .Apply("divider", cssBuilder =>
+                .Apply("plain", css =>
                 {
-                    cssBuilder
-                        .Add("m-breadcrumbs__divider");
+                    css.Add("m-breadcrumbs__item")
+                        .AddIf(ActiveClass, () => Disabled);
                 });
+
+            AbstractProvider
+                .Apply(typeof(BBreadcrumbsLinkItem<>), typeof(BBreadcrumbsLinkItem<MBreadcrumbsItem>))
+                .Apply(typeof(BBreadcrumbsPlainItem<>), typeof(BBreadcrumbsPlainItem<MBreadcrumbsItem>))
+                .Apply<BBreadcrumbsDivider, MBreadcrumbsDivider>();
         }
     }
 }

@@ -1,11 +1,41 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace MASA.Blazor
 {
-    public partial class MBreadcrumbs<TItem> : BBreadcrumbs<TItem>
+    public class MBreadcrumbs : BBreadcrumbs
     {
+        [Parameter]
+        public bool Large { get; set; }
+
+        [Parameter]
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        protected bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
 
         protected override void SetComponentClass()
         {
@@ -13,19 +43,15 @@ namespace MASA.Blazor
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-breadcrumbs theme--light");
-                })
-                .Apply("divider", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-breadcrumbs__divider");
+                        .Add("m-breadcrumbs")
+                        .AddIf("m-breadcrumbs--large", () => Large)
+                        .AddTheme(IsDark);
                 });
 
             AbstractProvider
-                .Apply<BBreadcrumbsItem, MBreadcrumbsItem>(props =>
-                {
-                    props[nameof(MBreadcrumbsItem.Class)] = "m-breadcrumbs__item";
-                });
+                .Apply(typeof(BBreadcrumbsItemGroup<>), typeof(BBreadcrumbsItemGroup<MBreadcrumbs>))
+                .Apply<BBreadcrumbsDivider, MBreadcrumbsDivider>()
+                .Apply<BBreadcrumbsItem, MBreadcrumbsItem>();
         }
     }
 }
