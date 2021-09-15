@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 2
 title:
   zh-CN: 浮动
   en-US: Floating

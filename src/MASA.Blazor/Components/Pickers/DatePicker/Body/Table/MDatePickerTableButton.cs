@@ -12,7 +12,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool IsCurrent { get; set; }
 
-        protected override bool HasBackgroud => base.HasBackgroud || IsActive;
+        protected override bool HasBackground => base.HasBackground || IsActive;
 
         protected override void OnParametersSet()
         {

@@ -1,21 +1,81 @@
-﻿using BlazorComponent;
+﻿using System.Reflection.Metadata;
+using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace MASA.Blazor
 {
-    public partial class MButton : BButton, IThemeable
+    public class MButton : BButton, IThemeable
     {
+        public bool Default { get; set; } = true;
+
+        [Parameter]
+        public bool Absolute { get; set; }
+
+        [Parameter]
+        public bool Bottom { get; set; }
+
+        [Parameter]
+        public bool Button { get; set; }
+
         [Parameter]
         public bool Depressed { get; set; }
 
         [Parameter]
-        public bool Outlined { get; set; }
+        public StringNumber Elevation { get; set; }
 
         [Parameter]
-        public bool Default { get; set; } = true;
+        public bool Icon { get; set; }
 
-        protected virtual bool HasBackgroud => !(Icon || Plain || Outlined || Text);
+        [Parameter]
+        public bool Fab { get; set; }
+
+        [Parameter]
+        public bool Fixed { get; set; }
+
+        [Parameter]
+        public bool Large { get; set; }
+
+        [Parameter]
+        public bool Left { get; set; }
+
+        [Parameter]
+        public bool Plain { get; set; }
+
+        [Parameter]
+        public bool Right { get; set; }
+
+        [Parameter]
+        public bool Rounded { get; set; }
+
+        [Parameter]
+        public bool Shaped { get; set; }
+
+        [Parameter]
+        public bool Small { get; set; }
+
+        [Parameter]
+        public bool Text { get; set; }
+
+        [Parameter]
+        public bool Tile { get; set; }
+
+        [Parameter]
+        public string Type
+        {
+            get => TypeAttribute;
+            set => TypeAttribute = value;
+        }
+
+        [Parameter]
+        public bool Top { get; set; }
+
+        [Parameter]
+        public bool XLarge { get; set; }
+
+        [Parameter]
+        public bool XSmall { get; set; }
 
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
@@ -38,42 +98,51 @@ namespace MASA.Blazor
             }
         }
 
+        protected virtual bool HasBackground => !(Icon || Plain || Outlined || Text);
+
+        protected bool IsRound => Icon || Fab;
+
+        protected bool IsElevated => !(Icon || Text || Outlined || Depressed || Disabled || Plain) && (Elevation == null || Elevation.TryGetNumber().number > 0);
+
         protected override void SetComponentClass()
         {
+            base.SetComponentClass();
+            
             CssProvider
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-btn")
-                        .AddIf("m-btn--disabled", () => Disabled)
-                        .AddIf("m-btn--has-bg", () => !(Icon || Plain || Outlined || Text))
-                        .AddIf("m-btn--is-elevated", () => !(Depressed || Icon || Plain || Outlined || Text))
-                        .AddIf("m-btn--round", () => Fab || Icon)
-                        .AddIf("m-btn--rounded", () => Rounded)
+                        .AddIf("m-btn--absolute", () => Absolute)
                         .AddIf("m-btn--block", () => Block)
-                        .AddIf("m-btn--loading", () => Loading)
+                        .AddIf("m-btn--bottom", () => Bottom)
+                        .AddIf("m-btn--disabled", () => Disabled)
+                        .AddIf("m-btn--is-elevated", () => IsElevated)
                         .AddIf("m-btn--fab", () => Fab)
+                        .AddIf("m-btn--fixed", () => Fixed)
+                        .AddIf("m-btn--has-bg", () => HasBackground)
                         .AddIf("m-btn--icon", () => Icon)
+                        .AddIf("m-btn--left", () => Left)
+                        .AddIf("m-btn--loading", () => Loading)
                         .AddIf("m-btn--outlined", () => Outlined)
                         .AddIf("m-btn--plain", () => Plain)
+                        .AddIf("m-btn--right", () => Right)
+                        .AddIf("m-btn--round", () => IsRound)
+                        .AddIf("m-btn--rounded", () => Rounded)
                         .AddIf("m-btn--text", () => Text)
                         .AddIf("m-btn--tile", () => Tile)
-                        .AddIf("m-btn--active", () => IsActive)
-                        .AddIf("m-btn--absolute", () => Absolute)
                         .AddIf("m-btn--top", () => Top)
-                        .AddIf("m-btn--bottom", () => Bottom)
-                        .AddIf("m-btn--left", () => Left)
-                        .AddIf("m-btn--right", () => Right)
+                        .AddIf("m-btn--active", () => IsActive)
                         .AddFirstIf(
                             ("m-size--x-large", () => XLarge),
                             ("m-size--large", () => Large),
                             ("m-size--small", () => Small),
                             ("m-size--x-small", () => XSmall),
                             ("m-size--default", () => Default)
-                            )
+                        )
                         .AddTheme(IsDark)
-                        .AddBackgroundColor(Color, () => HasBackgroud)
-                        .AddTextColor(Color, () => !HasBackgroud);
+                        .AddBackgroundColor(Color, () => HasBackground)
+                        .AddTextColor(Color, () => !HasBackground);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -97,16 +166,30 @@ namespace MASA.Blazor
                 });
         }
 
-        protected override Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
+            base.OnInitialized();
+
+            HasLoader = true;
+
             AbstractProvider
+                .Apply(typeof(BButtonLoader<>), typeof(BButtonLoader<MButton>))
                 .Apply<BProgressCircular, MProgressCircular>(prop =>
                 {
-                    prop[nameof(MProgressCircular.Size)] = (StringNumber)23;
+                    prop[nameof(MProgressCircular.Size)] = (StringNumber) 23;
                     prop[nameof(MProgressCircular.Indeterminate)] = true;
-                });
+                })
+                .Apply(typeof(BButtonContent<>), typeof(BButtonContent<MButton>));
+        }
 
-            return base.OnInitializedAsync();
+        protected override async Task HandleOnClick(MouseEventArgs args)
+        {
+            if (!Fab && args.Detail > 0)
+            {
+                await JsInvokeAsync(JsInteropConstants.Blur, Ref);
+            }
+            
+            await base.HandleOnClick(args);
         }
     }
 }

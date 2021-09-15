@@ -1,5 +1,5 @@
 ---
-order: 8
+order: 7
 title:
   zh-CN: 圆角
   en-US: Rounded
@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-圆形按钮的行为与常规按钮相同，但具有圆形边缘。
+`Rounded` 按钮的行为与常规按钮相同，但具有圆形边缘。
 
 ## en-US
 
-`rounded` buttons behave the same as regular buttons but have rounded edges.
+`Rounded` buttons behave the same as regular buttons but have rounded edges.

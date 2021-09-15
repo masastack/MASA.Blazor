@@ -1,5 +1,5 @@
 ---
-order: 6
+order: 5
 title:
   zh-CN: 轮廓
   en-US: Outlined
@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-轮廓按钮从应用的当前颜色继承其边框。
+添加 `Outlined` 属性，按钮的边框颜色将继承自当前应用的按钮颜色。
 
 ## en-US
 
-`outlined` buttons inherit their borders from the current color applied.
+`Outlined` buttons inherit their borders from the current color applied.

@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-凹陷的按钮依然保持其背景色，但没有框阴影。
+`Depressed` 按钮依然保持其背景色，但没有框阴影。
 
 ## en-US
 
-Depressed buttons still maintain their background color, but have no box shadow.
+`Depressed` buttons still maintain their background color, but have no box shadow.

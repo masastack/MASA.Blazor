@@ -1,5 +1,5 @@
 ---
-order: 9
+order: 8
 title:
   zh-CN: 大小
   en-US: Sizing

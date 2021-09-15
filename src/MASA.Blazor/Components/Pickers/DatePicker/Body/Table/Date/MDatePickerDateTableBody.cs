@@ -18,7 +18,7 @@ namespace MASA.Blazor
                 .Apply<BButton, MDatePickerTableButton>(props =>
                 {
                     props[nameof(MButton.Text)] = true;
-                    props[nameof(MButton.Rounded)] = true;
+                    props[nameof(MButton.Fab)] = true;
                     props[nameof(MButton.Default)] = false;
                     props[nameof(MButton.Color)] = Color;
                 })
@@ -26,7 +26,7 @@ namespace MASA.Blazor
                 {
                     props[nameof(Class)] = "m-date-picker-table__current";
                     props[nameof(MButton.Outlined)] = true;
-                    props[nameof(MButton.Rounded)] = true;
+                    props[nameof(MButton.Fab)] = true;
                     props[nameof(MButton.Default)] = false;
                     props[nameof(MButton.Color)] = Color;
                     props[nameof(MDatePickerTableButton.IsCurrent)] = true;

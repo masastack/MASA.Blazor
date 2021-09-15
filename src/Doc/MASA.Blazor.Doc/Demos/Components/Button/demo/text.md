@@ -1,5 +1,5 @@
 ---
-order: 10
+order:9
 title:
   zh-CN: 文本
   en-US: Text

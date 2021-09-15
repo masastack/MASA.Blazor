@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 0
 title:
   zh-CN: 块状
   en-US: Block
@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-块状按钮可以扩展全部可用宽度。
+添加 `Block` 属性，按钮将延占满可用的宽度。
 
 ## en-US
 
-`block` buttons extend the full available width.
+`Block` buttons extend the full available width.

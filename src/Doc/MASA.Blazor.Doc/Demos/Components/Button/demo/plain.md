@@ -1,14 +1,14 @@
 ---
-order: 7
+order: 6
 title:
-  zh-CN: 普通
+  zh-CN: Plain(朴实)
   en-US: Plain
 ---
 
 ## zh-CN
 
-普通按钮具有较低的基线不透明度，可以对悬停和聚焦做出反应。
+应用 `Plain` 属性， 按钮将会有较低的基准不透明度, 以响应 hover(悬停) 和 focus(聚焦) 事件。
 
 ## en-US
 
-`plain` buttons have a lower baseline opacity that reacts to hover and focus.
+`Plain` buttons have a lower baseline opacity that reacts to hover and focus.
