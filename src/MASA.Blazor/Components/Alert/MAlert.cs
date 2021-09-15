@@ -138,6 +138,8 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
+            base.SetComponentClass();
+
             CssProvider
                 .Apply(cssBuilder =>
                 {
