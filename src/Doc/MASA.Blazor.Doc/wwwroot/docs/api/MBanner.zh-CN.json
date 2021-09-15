@@ -1,0 +1,58 @@
+﻿{
+  "Components": [
+    "Banner"
+  ],
+  "Props": [
+    {
+      "Name": "App",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "当在 m-main 中使用时，将参考和依据 m-toolbar 和 m-system-bar的高度来计算距离顶部位置。"
+    },
+    {
+      "Name": "Icon",
+      "Type": "String",
+      "Default": "undefined",
+      "Description": "指定特定的图标。"
+    },
+    {
+      "Name": "iconColor",
+      "Type": "String",
+      "Default": "undefined",
+      "Description": "指定特定的图标颜色。"
+    },
+    {
+      "Name": "SingleLine",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "强制横幅变为一行。"
+    },
+    {
+      "Name": "Sticky",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "组件应用 position: sticky（常绿浏览器）。你能够在 MDN documentation for sticky position 浏览更多信息。"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "true",
+      "Description": "控制组件可见还是隐藏。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "IconContent",
+      "Description": "用于图标内容的插槽"
+    },
+    {
+      "Name": "ActionsContent",
+      "Description": "动作内容使用的插槽，例如 m-btn。调用时，插槽内的 dismiss 方法将会使横幅关闭"
+    }
+  ],
+  "Events": []
+}
