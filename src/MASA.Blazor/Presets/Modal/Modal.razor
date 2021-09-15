@@ -30,7 +30,7 @@
                 }
                 else
                 {
-                    <MButton Text OnClick="HandleOnCancel">@CancelText</MButton>
+                    <MButton Text Disabled="_loading" OnClick="HandleOnCancel">@CancelText</MButton>
                     <MButton Text Color="primary" OnClick="HandleOnOk" Loading="_loading">@OkText</MButton>
                 }
             </MCardActions>

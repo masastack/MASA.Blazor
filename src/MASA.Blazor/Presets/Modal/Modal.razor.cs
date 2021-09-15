@@ -9,7 +9,7 @@ namespace MASA.Blazor.Presets
     public partial class Modal
     {
         private bool _loading;
-        private string _bodySyle;
+        private string _bodyStyle;
         private readonly string _defaultBodyStyle = "padding:24px;";
 
         [Inject]
@@ -29,8 +29,8 @@ namespace MASA.Blazor.Presets
         [Parameter]
         public string BodyStyle
         {
-            get => _defaultBodyStyle + _bodySyle;
-            set => _bodySyle = value;
+            get => _defaultBodyStyle + _bodyStyle;
+            set => _bodyStyle = value;
         }
 
         [Parameter]
