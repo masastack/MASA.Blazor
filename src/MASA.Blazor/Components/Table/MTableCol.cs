@@ -31,7 +31,8 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .AddIf(() => $"text-{ComputedAlign}", () => !string.IsNullOrEmpty(ComputedAlign))
-                        .AddIf("m-data-table__divider", () => Divider);
+                        .AddIf("m-data-table__divider", () => Divider)
+                        .AddIf("text-truncate", () => Ellipsis);
                 },styleBuilder=> {
                     styleBuilder
                         .AddWidth(Width)

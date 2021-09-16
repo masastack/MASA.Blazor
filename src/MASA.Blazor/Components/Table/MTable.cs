@@ -12,7 +12,7 @@ using Element = BlazorComponent.Web.Element;
 
 namespace MASA.Blazor
 {
-    public partial class MTable<TItem> : BTable<TItem>,IThemeable
+    public partial class MTable<TItem> : BTable<TItem>, IThemeable
     {
         private bool _scrollRight;
 
@@ -50,7 +50,7 @@ namespace MASA.Blazor
 
                 return Themeable != null && Themeable.IsDark;
             }
-        } 
+        }
 
         [Parameter]
         public bool FixedRight { get; set; }
@@ -66,7 +66,7 @@ namespace MASA.Blazor
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
-                         .Add("m-data-table")
+                        .Add("m-data-table")
                         .AddIf($"{prefix}--dense", () => Dense)
                         .AddIf($"{prefix}--fixed-height", () => Height != null && !FixedHeader)
                         .AddIf($"{prefix}--fixed-header", () => FixedHeader)
@@ -88,6 +88,7 @@ namespace MASA.Blazor
                 .Apply("table", styleAction: styleBuilder =>
                 {
                     styleBuilder
+                        .Add($"table-layout:{TableLayout}")
                         .AddWidth(Width);
                 })
                 .Apply("stripe", cssBuilder =>
