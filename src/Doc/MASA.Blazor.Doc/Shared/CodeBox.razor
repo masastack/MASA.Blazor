@@ -55,7 +55,7 @@
         </div>
         <MDivider></MDivider>
         <ExpandTransition Value="_expend">
-            <MItemGroup @bind-Value="ActiveWindow" Class="pa-2">
+            <MItemGroup @bind-Value="ActiveWindow" Class="pa-2" Mandatory>
                 <MButton Text Class="mr-2" OnClick="()=>ActiveWindow=0" Value="0"> template </MButton>
                 @if (Code != null)
                 {
