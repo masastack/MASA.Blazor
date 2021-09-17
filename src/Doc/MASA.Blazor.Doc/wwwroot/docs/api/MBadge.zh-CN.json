@@ -1,0 +1,126 @@
+﻿{
+  "Components": [
+    "Badge"
+  ],
+  "Props": [
+    {
+      "Name": "InLine",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "移动徽章，使其与包装元素保持一致。支持使用 left prop。"
+    },
+    {
+      "Name": "Left",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向左边对齐。"
+    },
+    {
+      "Name": "Avatar",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "去掉了 badge 插槽中使用 m-avatar 的徽章边距。"
+    },
+    {
+      "Name": "Bordered",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "当使用 dot 属性时，默认情况下会在徽章上应用一个 2px 和它的周围应用一个 1.5px 的边框。"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "primary",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。 你可以在 colors page 中找到内置类的列表。"
+    },
+    {
+      "Name": "Content",
+      "Type": "StringNumber",
+      "Default": "undefined",
+      "Description": "任何你想要的内容都可以作为文字注入到徽章中。"
+    },
+    {
+      "Name": "Dot",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "缩小徽章的尺寸并隐藏其内容。"
+    },
+    {
+      "Name": "Icon",
+      "Type": "String",
+      "Default": "undefined",
+      "Description": "指定徽章中使用的具体图标。"
+    },
+    {
+      "Name": "OffsetX",
+      "Type": "StringNumber",
+      "Default": "undefined",
+      "Description": "将徽章在 x 轴上偏移。"
+    },
+    {
+      "Name": "OffsetY",
+      "Type": "StringNumber",
+      "Default": "undefined",
+      "Description": "将徽章在 y 轴上偏移。"
+    },
+    {
+      "Name": "OverLap",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "与组件顶部的开槽内容重叠。"
+    },
+    {
+      "Name": "Tile",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "删除组件的 border-radius。"
+    },
+    {
+      "Name": "Transition",
+      "Type": "String",
+      "Default": "undefined",
+      "Description": "设置组件转换。可以是一个 built in transitions 或者是自己自定义的。"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "true",
+      "Description": "控制组件可见还是隐藏。"
+    },
+    {
+      "Name": "Bottom",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向底部对齐。"
+    },
+    {
+      "Name": "Right",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向右边对齐。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。你可以在 dark themes 的 Material Design 文档中找到更多有关信息。"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "为组件设置浅色主题。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "BadgeContent",
+      "Description": "用于标记内容的插槽"
+    }
+  ],
+  "Events": []
+}

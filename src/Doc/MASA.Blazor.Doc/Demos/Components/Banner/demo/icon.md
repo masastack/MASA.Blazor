@@ -1,8 +1,8 @@
 ---
 order: 3
 title:
-  zh-CN: 图标插槽
-  en-US: IconContent
+  zh-CN: 图标
+  en-US: Icon
 ---
 
 ## zh-CN
