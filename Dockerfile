@@ -1,4 +1,4 @@
-FROM proget-hz.lonsid.cn/masa-blazor/dotnet/sdk:6.0
+FROM registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100-preview.7-nodejs14.16.1
 
 WORKDIR /app
 COPY . .
