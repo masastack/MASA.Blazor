@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor
@@ -12,7 +13,6 @@ namespace MASA.Blazor
     public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
     {
         private string _badInput;
-        private CancellationTokenSource _onInputCancellationTokenSource;
 
         [Parameter]
         public virtual bool Clearable { get; set; }
@@ -225,6 +225,18 @@ namespace MASA.Blazor
             }
         }
 
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            //When use @bind-Value,ValueChanged can not be used
+            //While in this way,@bind-Value can work with OnChange
+            if (OnChange.HasDelegate)
+            {
+                ValueChanged = OnChange;
+            }
+        }
+
         public virtual async Task HandleOnAppendOuterClickAsync(MouseEventArgs args)
         {
             if (OnAppendOuterClick.HasDelegate)
@@ -251,7 +263,7 @@ namespace MASA.Blazor
             await InputElement.FocusAsync();
         }
 
-        public virtual async Task HandleOnChangeAsync(ChangeEventArgs args)
+        public virtual Task HandleOnChangeAsync(ChangeEventArgs args)
         {
             var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
 
@@ -259,23 +271,13 @@ namespace MASA.Blazor
             {
                 _badInput = null;
                 InternalValue = val;
-
-                if (OnChange.HasDelegate)
-                {
-                    await OnChange.InvokeAsync(InternalValue);
-                }
-                else
-                {
-                    if (ValueChanged.HasDelegate)
-                    {
-                        await ValueChanged.InvokeAsync(InternalValue);
-                    }
-                }
             }
             else
             {
                 _badInput = args.Value.ToString();
             }
+
+            return Task.CompletedTask;
         }
 
         public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
@@ -289,29 +291,10 @@ namespace MASA.Blazor
             }
         }
 
-        public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
+        public virtual Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            //When bad network,update may not intime
-            _onInputCancellationTokenSource?.Cancel();
-            _onInputCancellationTokenSource = new CancellationTokenSource();
-            await Task.Delay(300, _onInputCancellationTokenSource.Token);
-
-            var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
-
-            if (success)
-            {
-                _badInput = null;
-                Value = val;
-
-                if (OnInput.HasDelegate)
-                {
-                    await OnInput.InvokeAsync(Value);
-                }
-            }
-            else
-            {
-                _badInput = args.Value.ToString();
-            }
+            //REVIEW:How to deal with oninput event?
+            return Task.CompletedTask;
         }
 
         public virtual async Task HandleOnFocusAsync(FocusEventArgs args)

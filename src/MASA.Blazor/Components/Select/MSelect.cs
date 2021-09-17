@@ -351,50 +351,45 @@ namespace MASA.Blazor
             InvokeStateHasChanged();
         }
 
-        public async Task SetSelectedAsync(string text, TItemValue value)
+        public Task SetSelectedAsync(string text, TItemValue value)
         {
             _shouldReformatText = false;
 
             if (Multiple)
             {
-                if (!Values.Contains(value))
+                IList<TItemValue> values = Values;
+                if (!values.Contains(value))
                 {
-                    Values.Add(value);
+                    values.Add(value);
                     Text.Add(text);
-
-                    if (ValueChanged.HasDelegate)
-                    {
-                        await ValueChanged.InvokeAsync(Value);
-                    }
+                    InternalValue = (TValue)values;
                 }
             }
             else
             {
                 if (value is TValue val)
                 {
-                    Value = val;
-                    if (ValueChanged.HasDelegate)
-                    {
-                        await ValueChanged.InvokeAsync(Value);
-                    }
+                    InternalValue = val;
 
                     Text.Clear();
                     Text.Add(text);
                 }
             }
+
+            return Task.CompletedTask;
         }
 
-        public async Task RemoveSelectedAsync(string text, TItemValue value)
+        public Task RemoveSelectedAsync(string text, TItemValue value)
         {
             _shouldReformatText = false;
 
-            Values.Remove(value);
-            Text.Remove(text);
+            var values = Values;
+            values.Remove(value);
 
-            if (ValueChanged.HasDelegate)
-            {
-                await ValueChanged.InvokeAsync(Value);
-            }
+            Text.Remove(text);
+            InternalValue = (TValue)values;
+
+            return Task.CompletedTask;
         }
 
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)
