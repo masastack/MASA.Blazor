@@ -25,10 +25,10 @@ packer:
     - dotnet build src
     - dotnet pack src --include-symbols -p:PackageVersion=0.2.$CI_PIPELINE_ID
     - dotnet nuget push "**/*.symbols.nupkg" -k $nugetkey -s https://api.nuget.org/v3/index.json
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - ./src/BlazorComponent
+  # artifacts:
+  #   expire_in: 1 day
+  #   paths:
+  #     - ./src/BlazorComponent
   retry: 2
 
 docker:
