@@ -5,8 +5,7 @@
     <Version>0.1.0</Version>
     <RepositoryUrl>http://gitlab-hz.lonsid.cn/MASA-Stack/MASA.Blazor</RepositoryUrl>
     <RepositoryType>gitlab</RepositoryType>
-    <PackageIcon>logo_masablazor_48.png</PackageIcon>
-    <PackageIconUrl />
+    <PackageIconUrl>https://cdn.masastack.com/images/logo/MASA.Blazor/48.png</PackageIconUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
