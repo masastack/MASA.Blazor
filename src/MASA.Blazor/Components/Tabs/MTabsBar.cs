@@ -10,7 +10,6 @@ namespace MASA.Blazor
 {
     public partial class MTabsBar : MSlideGroup, ITabsBar, IThemeable
     {
-
         [Parameter]
         public bool Dark { get; set; }
 
@@ -45,21 +44,10 @@ namespace MASA.Blazor
         {
             base.SetComponentClass();
 
-            var prefix = "m-tabs-bar";
+            const string prefix = "m-tabs-bar";
             CssProvider
-                .Merge(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add(prefix)
-                        .AddTheme(IsDark)
-                        .AddTextColor(Color);
-                });
-
-            AbstractProvider
-                .Merge<BSlideGroupSlot>(props =>
-                {
-                    props[nameof(Class)] = "m-tabs-bar__content";
-                });
+                .Merge(css => { css.Add(prefix).AddTheme(IsDark).AddTextColor(Color); })
+                .Merge("content", css => { css.Add($"{prefix}__content"); });
         }
     }
 }

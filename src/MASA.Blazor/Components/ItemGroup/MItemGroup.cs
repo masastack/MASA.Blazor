@@ -39,6 +39,7 @@ namespace MASA.Blazor
                 return Themeable != null && Themeable.IsDark;
             }
         }
+
         protected override void SetComponentClass()
         {
             CssProvider
