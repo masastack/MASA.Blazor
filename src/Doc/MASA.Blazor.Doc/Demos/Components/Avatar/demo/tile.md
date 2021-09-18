@@ -1,5 +1,5 @@
 ---
-order: 0
+order: 1
 title:
   zh-CN: 方块
   en-US: Tile
@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-tile属性移除了v-avatar的边界半径，只留下一个简单的方形头像。
+tile属性移除了m-avatar的边界半径，只留下一个简单的方形头像。
 
 ## en-US
 
-The tile prop removes the border radius from v-avatar leaving you with a simple square avatar.
+The tile prop removes the border radius from m-avatar leaving you with a simple square avatar.

@@ -112,24 +112,25 @@ namespace MASA.Blazor
                         .AddIf("m-badge--tile", () => Tile)
                         .AddTheme(IsDark);
                 })
-                .Apply("wrapper", cssAction: cssBuilder =>
+                .Apply("wrapper", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m--badge__wrapper");
                 })
-                .Apply("badge", cssAction: cssBuilder => 
+                .Apply("badge", cssBuilder => 
                 {
                     cssBuilder
                         .Add("m-badge__badge")
                         .AddBackgroundColor(Color);
-                }, styleAction: styleBuilder => 
+                }, styleBuilder => 
                 {
                     styleBuilder
                         .AddIf(() => $"bottom:{ComputedBottom}", () => !InLine)
                         .AddIf(() => $"left:{ComputedLeft}", () => !InLine)
                         .AddIf(() => $"right:{ComputedRight}", () => !InLine)
                         .AddIf(() => $"top:{ComputedTop}", () => !InLine)
-                        .AddIf("display: none;", ()=> !Value);
+                        .AddIf("display: none;", ()=> !Value)
+                        .AddBackgroundColor(Color);
                 });
 
             AbstractProvider

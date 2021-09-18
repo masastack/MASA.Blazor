@@ -1,5 +1,6 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace MASA.Blazor
 {
@@ -67,6 +68,9 @@ namespace MASA.Blazor
         [Parameter]
         public EventCallback<bool> ValueChanged { get; set; }
 
+        [Parameter]
+        public EventCallback<MouseEventArgs> OnIconClick { get; set; }
+
         /// <summary>
         /// This should be down in next version
         /// </summary>
@@ -99,7 +103,7 @@ namespace MASA.Blazor
                         .Add($"top:0")
                         .AddIf(() => $"position:sticky", () => IsSticky)
                         .AddIf(() => $"zIndex:1", () => IsSticky)
-                        .AddIf("display:none",()=>!Value);
+                        .AddIf("display:none", () => !Value);
                 })
                 .Apply("wrapper", cssAction: cssBuilder =>
                 {
@@ -113,7 +117,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder.Add("m-banner__text");
                 })
-                .Apply("actions", cssAction: cssBuilder => 
+                .Apply("actions", cssAction: cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-banner__actions");
@@ -126,13 +130,21 @@ namespace MASA.Blazor
                     props[nameof(Class)] = "m-banner__icon";
                     props[nameof(MAvatar.Color)] = Color;
                     props[nameof(MAvatar.Size)] = (StringNumber)40;
-                    //TODO:onclick;
+                    props["onclick"] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnIconClickAsync);
                 })
                 .Apply<BIcon, MIcon>(props =>
                 {
                     props[nameof(MIcon.Size)] = (StringNumber)28;
                     props[nameof(MIcon.Color)] = IconColor;
                 });
+        }
+
+        protected virtual async Task HandleOnIconClickAsync(MouseEventArgs args)
+        {
+            if (OnIconClick.HasDelegate)
+            {
+                await OnIconClick.InvokeAsync(args);
+            }
         }
     }
 }

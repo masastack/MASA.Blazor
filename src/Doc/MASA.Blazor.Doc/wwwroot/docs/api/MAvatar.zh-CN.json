@@ -25,7 +25,7 @@
       "Name": "Left",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "指定头像在组件左侧。它被诸如 v-chip 和 v-btn 等组件绑在一起。"
+      "Description": "指定头像在组件左侧。它被诸如 MChip 和 MButton 等组件绑在一起。"
     },
     {
       "Name": "MaxHeight",
@@ -55,12 +55,12 @@
       "Name": "Right",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "指定头像在组件的右侧。它被诸如 v-chip 和 v-btn 等组件绑在一起。"
+      "Description": "指定头像在组件的右侧。它被诸如 MChip 和 MButton 等组件绑在一起。"
     },
     {
       "Name": "Rounded",
-      "Type": "Boolean",
-      "Default": "false",
+      "Type": "StringBoolean",
+      "Default": "undefined",
       "Description": "对指定的组件应用 border-radius 样式。"
     },
     {

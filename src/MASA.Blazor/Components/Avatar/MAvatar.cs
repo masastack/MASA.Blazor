@@ -17,7 +17,7 @@ namespace MASA.Blazor
         public bool Right { get; set; }
 
         [Parameter]
-        public bool Rounded { get; set; }
+        public StringBoolean Rounded { get; set; }
 
         [Parameter]
         public bool Tile { get; set; }
@@ -57,9 +57,8 @@ namespace MASA.Blazor
                         .Add(prefix)
                         .AddIf($"{prefix}--left", () => Left)
                         .AddIf($"{prefix}--right", () => Right)
-                        .AddIf("rounded", () => Rounded)
-                        .AddIf("rounded-0", () => Tile)
-                        .AddIf(Color, () => !string.IsNullOrEmpty(Color));
+                        .AddRounded(Rounded, Tile)
+                        .AddBackgroundColor(Color);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -71,7 +70,8 @@ namespace MASA.Blazor
                         .AddMinWidth(MinWidth)
                         .AddMaxWidth(MaxWidth)
                         .AddMinHeight(MinHeight)
-                        .AddMaxHeight(MaxHeight);
+                        .AddMaxHeight(MaxHeight)
+                        .AddBackgroundColor(Color);
                 });
         }
     }
