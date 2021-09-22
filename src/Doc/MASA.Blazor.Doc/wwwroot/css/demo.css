@@ -1,0 +1,20 @@
+﻿@keyframes metronome-example {
+    from {
+      transform: scale(.5);
+    }
+
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .m-avatar--metronome {
+    animation-name: metronome-example;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+
+  .e4 {
+  width: 400px;
+  margin: auto;
+}

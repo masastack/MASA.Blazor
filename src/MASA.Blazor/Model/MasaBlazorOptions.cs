@@ -25,5 +25,7 @@ namespace MASA.Blazor
             Warning = "#FB8C00",
             UserDefined = new Dictionary<string, string>() { { "Tertiary", "#e57373" } },
         };
+
+        public bool RTL { get; set; }
     }
 }

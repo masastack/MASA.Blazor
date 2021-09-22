@@ -27,7 +27,7 @@ namespace MASA.Blazor
         public RenderFragment<int> SelectionContent { get; set; }
 
         [Inject]
-        public JsObjectFactory JsObjectFactory { get; set; }
+        public Document Document { get; set; }
 
         [Parameter]
         public bool Multiple { get; set; }
@@ -208,7 +208,7 @@ namespace MASA.Blazor
         public override async Task HandleOnPrependClickAsync(MouseEventArgs args)
         {
             await base.HandleOnPrependClickAsync(args);
-            var input = JsObjectFactory.CreateObject<HtmlElement>(InputFile.Element.Value);
+            var input = Document.QuerySelector(InputFile.Element.Value);
             var @event = new MouseEvent("click");
             @event.StopPropagation();
             await input.DispatchEventAsync(@event);
@@ -242,7 +242,7 @@ namespace MASA.Blazor
         {
             await base.HandleOnClickAsync(args);
 
-            var input = JsObjectFactory.CreateObject<HtmlElement>(InputFile.Element.Value);
+            var input = Document.QuerySelector(InputFile.Element.Value);
             var @event = new MouseEvent("click");
             @event.StopPropagation();
             await input.DispatchEventAsync(@event);
@@ -250,7 +250,7 @@ namespace MASA.Blazor
 
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
-            var input = JsObjectFactory.CreateObject<HtmlElement>(InputFile.Element.Value);
+            var input = Document.QuerySelector(InputFile.Element.Value);
             await input.SetPropertyAsync("value", "");
 
             await base.HandleOnClearClickAsync(args);

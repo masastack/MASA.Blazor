@@ -48,6 +48,16 @@ namespace BlazorComponent
             return styleBuilder;
         }
 
+        public static StyleBuilder AddTop(this StyleBuilder styleBuilder, StringNumber top, Func<bool> func)
+        {
+            return styleBuilder.AddIf($"top:{top.ToUnit()}", func);
+        }
+
+        public static StyleBuilder AddRight(this StyleBuilder styleBuilder, StringNumber right, Func<bool> func)
+        {
+            return styleBuilder.AddIf($"right:{right.ToUnit()}", func);
+        }
+
         private static bool IsCssColor(string color)
         {
             return !string.IsNullOrEmpty(color) && Regex.Match(color, @"^(#|var\(--|(rgb|hsl)a?\()").Success;
@@ -56,6 +66,11 @@ namespace BlazorComponent
         public static StyleBuilder AddTextColor(this StyleBuilder styleBuilder, string color, Func<bool> func)
         {
             return styleBuilder.AddColor(color, true, func);
+        }
+
+        public static StyleBuilder AddTransition(this StyleBuilder styleBuilder, string transition)
+        {
+            return styleBuilder.AddIf($"transition:{transition}", () => transition != null);
         }
 
         public static StyleBuilder AddTextColor(this StyleBuilder styleBuilder, string color)
