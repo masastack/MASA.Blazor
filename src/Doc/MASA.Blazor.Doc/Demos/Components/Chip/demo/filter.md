@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-v-chip 组件有 filter 选项，在纸片处于活动状态时向您显示额外的图标。 可以使用 filter-icon 来自定义。
+MChip 组件有 Filter 选项，在chip处于活动状态时向您显示额外的图标。 可以使用 FilterIcon 来自定义。
 
 ## en-US
 
-Todo...
+The MChip component has a Filter option, which will show you additional icons when the chip is active. You can use FilterIcon to customize.

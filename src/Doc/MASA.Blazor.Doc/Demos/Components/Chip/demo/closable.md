@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-可关闭的纸片可以使用 v-model控制。 您也可以侦听click:close事件，如果您想知道纸片何时关闭。
+可关闭的纸片默认使用Close控制。 如果您想知道纸片何时关闭也可以侦听OnCloseClick事件。
 
 ## en-US
 
-Todo...
+The chip that can be closed can be controlled by Close by default. If you want to know when the chip is closed, you can also listen to the OnCloseClick event.

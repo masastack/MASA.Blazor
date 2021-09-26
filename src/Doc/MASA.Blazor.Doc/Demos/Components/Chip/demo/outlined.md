@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Todo...
+The outline chip inherits its border color from the current text color.

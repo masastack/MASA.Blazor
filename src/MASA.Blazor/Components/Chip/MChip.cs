@@ -1,12 +1,12 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using OneOf;
 using System;
+using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MChip : BChip, IThemeable
+    public partial class MChip : BChip, IThemeable, IChip
     {
         [Parameter]
         public bool Disabled { get; set; }
@@ -59,6 +59,27 @@ namespace MASA.Blazor
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
 
+        [Parameter]
+        public bool Draggable { get;set;  }
+
+        [Parameter]
+        public EventCallback<bool> ActiveChanged { get; set; }
+
+        [Parameter]
+        public bool Filter { get; set; }
+
+        [Parameter]
+        public string FilterIcon { get; set; } = "mdi-check";
+
+        [Parameter]
+        public bool InputValue { get; set; }
+
+        [Parameter]
+        public bool Close { get; set; }
+
+        [Parameter]
+        public string CloseIcon { get; set; }
+
         public bool IsDark
         {
             get
@@ -89,6 +110,8 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
+            base.SetComponentClass();
+
             var prefix = "m-chip";
 
             CssProvider
@@ -109,10 +132,11 @@ namespace MASA.Blazor
                         .AddIf("m-size--small", () => Small)
                         .AddIf("m-size--large", () => Large)
                         .AddIf("m-size--x-large", () => XLarge)
-                        .AddIf($"{prefix}--active", () => IsActive)
+                        .AddIf($"{prefix}--active", () => InputValue)
                         .AddIf($"{prefix}--clickable", () => ItemGroup != null)
-                        .AddIf($"{SelectColor}--text", () => IsActive)
-                        .AddIf("m-chip--outlined", () => Outlined);
+                        .AddIf($"{SelectColor}--text", () => InputValue)
+                        .AddIf("m-chip--outlined", () => Outlined)
+                        .AddIf($"{prefix}--draggable", () => Draggable);
                 })
                 .Apply("content", cssBuilder =>
                  {
@@ -121,25 +145,36 @@ namespace MASA.Blazor
                  });
 
             AbstractProvider
-                .Apply<BIcon, MChipCloseIcon>(props =>
+                .ApplyChipDefault()
+                .Apply<BIcon, MIcon>(props =>
                 {
-                    props[nameof(MChipCloseIcon.Right)] = true;
-                    props[nameof(MChipCloseIcon.Size)] = (StringNumber)18;
-                    props[nameof(MChipCloseIcon.Color)] = CloseIconColor;
-                    props[nameof(MChipCloseIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async args =>
-                    {
-                        if (OnCloseClick.HasDelegate)
-                        {
-                            await OnCloseClick.InvokeAsync(args);
-                        }
-                        else
-                        {
-                            Show = false;
-                        }
-                    });
+                    props[nameof(Class)] = InputValue ? "m-chip__filter" : "m-chip__close";
+                    props[nameof(MIcon.Right)] = !InputValue;
+                    props[nameof(MIcon.Left)] = InputValue;
+                    props[nameof(MIcon.Size)] = InputValue ? "" : (StringNumber)18;
+                    props[nameof(MIcon.Color)] = InputValue ? "" : CloseIconColor;
+                    props[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnIconClickAsync);
                 });
 
             CloseIcon = "mdi-close-circle";
+        }
+
+        protected virtual async Task HandleOnIconClickAsync(MouseEventArgs args)
+        {
+            if (InputValue)
+            {
+                InputValue = !InputValue;
+                await ActiveChanged.InvokeAsync(InputValue);
+            }
+
+            if (OnCloseClick.HasDelegate)
+            {
+                await OnCloseClick.InvokeAsync(args);
+            }
+            else
+            {
+                Show = false;
+            }
         }
     }
 }

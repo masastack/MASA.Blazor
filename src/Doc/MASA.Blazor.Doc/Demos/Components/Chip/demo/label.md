@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-纸片标签使用 v-card 边框半径
+纸片标签的使用
 
 ## en-US
 
-Todo...
+Use of chip tags.

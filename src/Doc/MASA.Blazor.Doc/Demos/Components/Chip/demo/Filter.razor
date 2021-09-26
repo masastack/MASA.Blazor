@@ -1,3 +1,20 @@
-﻿<div>
-    Todo...
-</div>
+﻿<MRow Justify="JustifyTypes.SpaceAround" Align="AlignTypes.Center">
+    <MChip Class="ma-2" @bind-InputValue="_active" Filter>
+        I'm v-chip
+    </MChip>
+
+    <MChip Class="ma-2" @bind-InputValue="_active" Filter FilterIcon="mdi-plus">
+        I'm v-chip
+    </MChip>
+
+    <MChip Class="ma-2" @bind-InputValue="_active" Filter FilterIcon="mdi-minus">
+        I'm v-chip
+    </MChip>
+
+    <MSwitch Label="Active" @bind-Value="_active"></MSwitch>
+</MRow>
+
+@code
+{
+    private bool _active = false;
+}

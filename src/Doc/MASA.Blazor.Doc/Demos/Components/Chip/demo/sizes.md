@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-v-chip 组件可以有从 x-small 到 x-large 不同的大小.
+MChip 组件可以有从 XSmall 到 XLarge 不同的大小.
 
 ## en-US
 
-Todo...
+MChip components can have different sizes from XSmall to XLarge.

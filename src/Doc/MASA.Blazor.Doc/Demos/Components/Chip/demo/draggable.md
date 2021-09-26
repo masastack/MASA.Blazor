@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-可拖拽, v-chip 组件可以被鼠标拖拽
+MChip 组件可以被鼠标拖拽
 
 ## en-US
 
-Todo...
+MChip components can be dragged by the mouse.

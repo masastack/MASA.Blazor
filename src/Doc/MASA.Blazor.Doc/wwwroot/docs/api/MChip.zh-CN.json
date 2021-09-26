@@ -46,10 +46,10 @@
       "Description": "禁用纸片，使其不可选择"
     },
     {
-      "Name": "IsActive",
+      "Name": "InputValue",
       "Type": "Boolean",
       "Default": "false",
-      "Description": ""
+      "Description": "控制项的 active 状态。这通常用于高亮显示组件。"
     },
     {
       "Name": "Label",
@@ -110,6 +110,24 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "使组件尺寸变的更小。"
+    },
+    {
+      "Name": "Draggable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "是否可以被鼠标拖拽。"
+    },
+    {
+      "Name": "Filter",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "选中时显示选择图标。"
+    },
+    {
+      "Name": "FilterIcon",
+      "Type": "String",
+      "Default": "mdi-check",
+      "Description": "更改用于 filter 纸片的默认图标。"
     }
   ],
   "Contents": [

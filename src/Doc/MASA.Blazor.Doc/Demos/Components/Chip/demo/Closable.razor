@@ -8,36 +8,48 @@
         </MButton>
     }
 
-    <MChip Class="ma-2"
-           Close
-           Click="()=>_chip1 = false">
-        Closable
-    </MChip>
+    @if (_chip1)
+    {
+        <MChip Class="ma-2"
+               Close
+               OnCloseClick="()=> _chip1 = false">
+            Closable
+        </MChip>
+    }
 
-    <MChip Class="ma-2"
-           Close
-           Color="red"
-           TextColor="white"
-           Click="()=>_chip2 = false">
-        Remove
-    </MChip>
+    @if (_chip2)
+    {
+        <MChip Class="ma-2"
+               Close
+               Color="red"
+               TextColor="white"
+               OnCloseClick="()=>_chip2 = false">
+            Remove
+        </MChip>
+    }
 
-    <MChip Class="ma-2"
-           Close
-           Color="green"
-           Outlined
-           Click="()=>_chip3 = false">
-        Success
-    </MChip>
+    @if (_chip3)
+    {
+        <MChip Class="ma-2"
+               Close
+               Color="green"
+               Outlined
+               OnCloseClick="()=>_chip3 = false">
+            Success
+        </MChip>
+    }
 
-    <MChip Class="ma-2"
-           Close
-           Color="orange"
-           Label
-           Outlined
-           Click="()=>_chip4 = false">
-        Complete
-    </MChip>
+    @if (_chip4)
+    {
+        <MChip Class="ma-2"
+               Close
+               Color="orange"
+               Label
+               Outlined
+               OnCloseClick="()=>_chip4 = false">
+            Complete
+        </MChip>
+    }
 </div>
 
 @code{
