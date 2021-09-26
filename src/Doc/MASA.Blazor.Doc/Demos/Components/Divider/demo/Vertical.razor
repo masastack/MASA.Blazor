@@ -1,19 +1,25 @@
-﻿<div style=" height: 40px; display: flex; align-items: center; }">
-    <MButton Text>
-        News
-    </MButton>
+﻿<MToolbar Color="purple" Dark>
+    <MToolbarTitle>Title</MToolbarTitle>
 
-    <MDivider Vertical></MDivider>
+    <MDivider Vertical Class="mx-4"></MDivider>
 
-    <MButton Text>
-        Blog
-    </MButton>
+    <span class="subheading">My Home</span>
 
-    <MDivider Vertical></MDivider>
+    <MSpacer></MSpacer>
 
-    <MButton Text>
-        Music
-    </MButton>
+    <MToolbarItems Class="hidden-sm-and-down">
+        <MButton Text>News</MButton>
 
-    <MDivider Vertical></MDivider>
-</div>
+        <MDivider Vertical></MDivider>
+
+        <MButton Text>Blog</MButton>
+
+        <MDivider Vertical></MDivider>
+
+        <MButton Text>Music</MButton>
+
+        <MDivider Vertical></MDivider>
+    </MToolbarItems>
+
+    <MAppBarNavIcon></MAppBarNavIcon>
+</MToolbar>
