@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-MChip 组件可以被鼠标拖拽
+MChip 组件可以被鼠标拖拽 TODO效果未实现
 
 ## en-US
 
