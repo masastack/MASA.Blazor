@@ -10,7 +10,6 @@ namespace MASA.Blazor
 {
     public partial class MFooter : BFooter, IThemeable
     {
-
         [Parameter]
         public bool Dark { get; set; }
 
@@ -36,7 +35,75 @@ namespace MASA.Blazor
 
                 return Themeable != null && Themeable.IsDark;
             }
-        } 
+        }
+
+        [Parameter]
+        public bool Absolute {  get; set; }
+
+        [Parameter]
+        public bool App {  get; set;}
+
+        [Parameter]
+        public string Color { get; set; }
+
+        [Parameter]
+        public StringNumber Elevation {  get; set; }
+
+        [Parameter]
+        public bool Fixed {  get; set; }
+
+        [Parameter]
+        public StringNumber Height { get; set; } = "auto";
+
+        [Parameter]
+        public StringNumber Width { get; set; }
+
+        [Parameter]
+        public bool Inset { get; set; }
+
+        [Parameter]
+        public StringNumber MaxHeight { get; set; }
+
+        [Parameter]
+        public StringNumber MinHeight { get; set; }
+
+        [Parameter]
+        public StringNumber MaxWidth { get; set; }
+
+        [Parameter]
+        public StringNumber MinWidth { get; set; }
+
+        [Parameter]
+        public bool Padless { get; set; }
+
+        [Parameter]
+        public StringBoolean Rounded { get; set; }
+
+        [Parameter]
+        public bool Tile { get; set; }
+
+        [Parameter]
+        public int Right { get; set; }
+
+        [Parameter]
+        public int Left { get; set; }
+
+        [Parameter]
+        public int Bottom { get; set; }
+
+        protected bool IsPositioned() => Absolute || Fixed || App;
+
+        protected StringNumber ComputedLeft() => !IsPositioned() ?
+            string.Empty :
+            (App && Inset ? Left : 0);
+
+        protected StringNumber ComputedRight() => !IsPositioned() ?
+            string.Empty :
+            (App && Inset ? Right : 0);
+
+        protected StringNumber ComputedBottom() => !IsPositioned() ?
+            string.Empty :
+            (App ? Bottom : 0);
 
         protected override void SetComponentClass()
         {
@@ -46,7 +113,27 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-footer")
                         .Add("m-sheet")
-                        .AddTheme(IsDark);
+                        .AddTheme(IsDark)
+                        .AddBackgroundColor(Color)
+                        .AddIf("m-footer--absolute", () => Absolute)
+                        .AddIf("m-footer--fixed", () => !Absolute && (App || Fixed))
+                        .AddIf("m-footer--padless", () => Padless)
+                        .AddIf("m-footer--inset", () => Inset)
+                        .AddElevation(Elevation)
+                        .AddRounded(Rounded, Tile);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddBackgroundColor(Color)
+                        .AddHeight(Height)
+                        .AddWidth(Width)
+                        .AddMaxHeight(MaxHeight)
+                        .AddMaxWidth(MaxWidth)
+                        .AddMinHeight(MinHeight)
+                        .AddMinWidth(MinWidth)
+                        .Add($"left:{ComputedLeft().ToUnit()}")
+                        .Add($"right:{ComputedRight().ToUnit()}")
+                        .Add($"bottom:{ComputedBottom().ToUnit()}");
                 });
         }
     }
