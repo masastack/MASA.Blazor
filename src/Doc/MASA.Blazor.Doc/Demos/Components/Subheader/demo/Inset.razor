@@ -1,5 +1,6 @@
 ﻿<MCol Cols="12"
-      Sm="6">
+      Sm="6"
+      OffsetSm="3">
     <MCard>
         <MSubheader Inset>
             Subheader
@@ -20,7 +21,7 @@
                         </MListItemContent>
                     </MListItem>
                 }
-                else
+                else if (item.Divider)
                 {
                     <MDivider Inset></MDivider>
                 }
