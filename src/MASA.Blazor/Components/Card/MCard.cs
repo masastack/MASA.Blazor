@@ -43,6 +43,9 @@ namespace MASA.Blazor
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
 
+        [Parameter]
+        public string Img { get; set; }
+
         public bool IsDark
         {
             get
@@ -89,7 +92,8 @@ namespace MASA.Blazor
                         .AddMinWidth(MinWidth)
                         .AddMaxWidth(MaxWidth)
                         .AddMinHeight(MinHeight)
-                        .AddMaxHeight(MaxHeight);
+                        .AddMaxHeight(MaxHeight)
+                        .AddIf($"background:url(\"{Img}\") center center / cover no-repeat", () => !string.IsNullOrWhiteSpace(Img));
                 });
         }
     }
