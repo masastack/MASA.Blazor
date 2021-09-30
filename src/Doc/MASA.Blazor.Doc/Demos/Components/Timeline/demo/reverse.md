@@ -11,6 +11,4 @@ title:
 
 ## en-US
 
-You can place your layout elements anywhere, as long as you apply the app property. The key component in all of this is m-main. This will be dynamically sized depending upon the structure of your designated app components. You can use combinations of any or all of the above components including m-bottom-navigation.
-
-When using vue-router it is recommended that you place your views inside m-main.
+You use the reverse attribute to determine the direction of the timeline item. This can work in both the default mode and the dense mode.

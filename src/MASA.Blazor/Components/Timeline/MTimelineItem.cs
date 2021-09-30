@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MTimelineItem : BTimelineItem, IThemeable
+    public partial class MTimelineItem : BTimelineItem, IThemeable, ITimelineItem
     {
         [Parameter]
         public string Color { get; set; } = "primary";
@@ -108,6 +108,15 @@ namespace MASA.Blazor
                 });
 
             Attributes.Add("data-app", true);
+
+            AbstractProvider
+                .ApplyTimelineItemDefault()
+                .Apply<BIcon, MIcon>(props =>
+                {
+                    props[nameof(MIcon.Color)] = IconColor;
+                    props[nameof(MIcon.Dark)] = !IsDark;
+                    props[nameof(MIcon.Small)] = Small;
+                });
         }
     }
 }

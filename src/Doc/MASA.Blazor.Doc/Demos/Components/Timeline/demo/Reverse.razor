@@ -2,7 +2,7 @@
     <MSwitch @bind-Value="_reverse"
              Label="Toggle reverse"></MSwitch>
     <MTimeline Reverse="_reverse"
-               Dense>
+               Dense="false">
         @for (int i = 0; i < 2; i++)
         {
             <MTimelineItem>
