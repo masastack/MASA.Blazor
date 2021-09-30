@@ -1,7 +1,16 @@
 ﻿<div class="text-center ma-2">
-    <MButton OnClick="Show" Dark>Open Snackbar</MButton>
-    <MSnackbar @bind-IsActive="_show" Action="关闭" Top="true">
-        Hello, I'm a snackbar
+    <MButton OnClick="Show" Dark>
+        Open Snackbar
+    </MButton>
+    <MSnackbar @bind-IsActive="_show" Dark>
+        <ChildContent>
+            Hello, I'm a snackbar
+        </ChildContent>
+        <ActionContent>
+            <MButton Color="pink" Text OnClick="Close">
+                Close
+            </MButton>
+        </ActionContent>
     </MSnackbar>
 </div>
 
@@ -11,5 +20,10 @@
     public void Show()
     {
         _show = true;
+    }
+
+    public void Close()
+    {
+        _show = false;
     }
 }

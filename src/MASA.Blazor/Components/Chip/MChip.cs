@@ -110,8 +110,6 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
-            base.SetComponentClass();
-
             var prefix = "m-chip";
 
             CssProvider

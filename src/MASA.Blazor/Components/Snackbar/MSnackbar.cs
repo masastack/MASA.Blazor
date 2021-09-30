@@ -3,12 +3,10 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Timers;
 using Timer = System.Timers.Timer;
-using System.Threading.Tasks;
-using OneOf;
 
 namespace MASA.Blazor
 {
-    public partial class MSnackbar : BSnackbar, IThemeable
+    public partial class MSnackbar : BSnackbar, IThemeable, ISnackbar
     {
         private bool _isActive;
 
@@ -119,6 +117,12 @@ namespace MASA.Blazor
 
         protected Timer Timer { get; set; }
 
+        [Parameter]
+        public string Action { get; set; }
+
+        [Parameter]
+        public RenderFragment ActionContent { get; set; }
+
         protected override void SetComponentClass()
         {
             var prefix = "m-snack";
@@ -173,10 +177,12 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply<BButton, MSnackbarButton>(props =>
+                .ApplySnackbarDefault()
+                .Apply<BButton, MButton>(props =>
                 {
-                    props[nameof(MSnackbarButton.Text)] = true;
-                    props[nameof(MSnackbarButton.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
+                    props[nameof(Class)] = "m-snack__btn";
+                    props[nameof(MButton.Text)] = true;
+                    props[nameof(MButton.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
                         IsActive = false;
                         Timer.Stop();
