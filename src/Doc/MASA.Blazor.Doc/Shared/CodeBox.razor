@@ -54,37 +54,39 @@
             </div>
         </div>
         <MDivider></MDivider>
-        <ExpandTransition Value="_expend">
-            <MItemGroup @bind-Value="ActiveWindow" Class="pa-2" Mandatory>
-                <MButton Text Class="mr-2" OnClick="()=>ActiveWindow=0" Value="0"> template </MButton>
-                @if (Code != null)
-                {
-                    <MButton Text Class="mr-2" OnClick="()=>ActiveWindow=1" Value="1"> code </MButton>
-                }
-            </MItemGroup>
-            <MDivider></MDivider>
-            <MWindow>
-                <MWindowItem IsActive="IsTemplate">
-                    <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden my-0">
-                        <HighlightedCode Code="@Template" CanLoad="Template!=null" Language="html"></HighlightedCode>
-                        <MButton Class="m-btn--copy mr-n2 mt-n2" Absolute Icon Right Rounded Top Style="background-color:inherit">
-                            <MIcon>
-                                mdi-content-copy
-                            </MIcon>
-                        </MButton>
-                    </MSheet>
-                </MWindowItem>
-                <MWindowItem IsActive="IsCode">
-                    <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden my-0">
-                        <HighlightedCode Code="@Code" CanLoad="Code!=null" Language="csharp"></HighlightedCode>
-                        <MButton Class="m-btn--copy mr-n2 mt-n2" Absolute Icon Right Rounded Top Style="background-color:inherit">
-                            <MIcon>
-                                mdi-content-copy
-                            </MIcon>
-                        </MButton>
-                    </MSheet>
-                </MWindowItem>
-            </MWindow>
+        <ExpandTransition>
+            <Element Show="_expend">
+                <MItemGroup @bind-Value="ActiveWindow" Class="pa-2" Mandatory>
+                    <MButton Text Class="mr-2" OnClick="()=>ActiveWindow=0" Value="0"> template </MButton>
+                    @if (Code != null)
+                    {
+                        <MButton Text Class="mr-2" OnClick="()=>ActiveWindow=1" Value="1"> code </MButton>
+                    }
+                </MItemGroup>
+                <MDivider></MDivider>
+                <MWindow>
+                    <MWindowItem IsActive="IsTemplate">
+                        <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden my-0">
+                            <HighlightedCode Code="@Template" CanLoad="Template!=null" Language="html"></HighlightedCode>
+                            <MButton Class="m-btn--copy mr-n2 mt-n2" Absolute Icon Right Rounded Top Style="background-color:inherit">
+                                <MIcon>
+                                    mdi-content-copy
+                                </MIcon>
+                            </MButton>
+                        </MSheet>
+                    </MWindowItem>
+                    <MWindowItem IsActive="IsCode">
+                        <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden my-0">
+                            <HighlightedCode Code="@Code" CanLoad="Code!=null" Language="csharp"></HighlightedCode>
+                            <MButton Class="m-btn--copy mr-n2 mt-n2" Absolute Icon Right Rounded Top Style="background-color:inherit">
+                                <MIcon>
+                                    mdi-content-copy
+                                </MIcon>
+                            </MButton>
+                        </MSheet>
+                    </MWindowItem>
+                </MWindow>
+            </Element>
         </ExpandTransition>
     </MSheet>
 </section>

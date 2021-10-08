@@ -90,6 +90,9 @@ namespace MASA.Blazor
         [Parameter]
         public bool Highlighted { get; set; }
 
+        [Parameter]
+        public bool Ripple { get; set; } = true;
+
         private void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
             if (!string.IsNullOrEmpty(Href) && MatchUrl(Href, e.Location) && List != null)
@@ -137,6 +140,7 @@ namespace MASA.Blazor
             {
                 Active();
             }
+            Attributes["ripple"] = Ripple;
         }
 
         protected override void SetComponentClass()

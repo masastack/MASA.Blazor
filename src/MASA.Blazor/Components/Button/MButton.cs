@@ -77,6 +77,9 @@ namespace MASA.Blazor
         [Parameter]
         public bool XSmall { get; set; }
 
+        [Parameter]
+        public bool Ripple { get; set; } = true;
+
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
 
@@ -107,7 +110,7 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
-            
+
             CssProvider
                 .Apply(cssBuilder =>
                 {
@@ -176,10 +179,16 @@ namespace MASA.Blazor
                 .Apply(typeof(BButtonLoader<>), typeof(BButtonLoader<MButton>))
                 .Apply<BProgressCircular, MProgressCircular>(prop =>
                 {
-                    prop[nameof(MProgressCircular.Size)] = (StringNumber) 23;
+                    prop[nameof(MProgressCircular.Size)] = (StringNumber)23;
                     prop[nameof(MProgressCircular.Indeterminate)] = true;
                 })
                 .Apply(typeof(BButtonContent<>), typeof(BButtonContent<MButton>));
+        }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+            Attributes["ripple"] = Ripple;
         }
 
         protected override async Task HandleOnClick(MouseEventArgs args)
@@ -188,7 +197,7 @@ namespace MASA.Blazor
             {
                 await JsInvokeAsync(JsInteropConstants.Blur, Ref);
             }
-            
+
             await base.HandleOnClick(args);
         }
     }
