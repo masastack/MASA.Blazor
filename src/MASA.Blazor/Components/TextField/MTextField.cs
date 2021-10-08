@@ -435,12 +435,12 @@ namespace MASA.Blazor
                     //TODO:left,right
                     props[nameof(MLabel.Value)] = LabelValue;
                 })
-                .ApplyTextFieldProcessLinear(typeof(MProcessLinear), props =>
+                .ApplyTextFieldProcessLinear(typeof(MProgressLinear), props =>
                  {
-                     props[nameof(MProcessLinear.Absolute)] = true;
-                     props[nameof(MProcessLinear.Color)] = (Loading == true || Loading == "") ? (Color ?? "primary") : Loading.ToString();
-                     props[nameof(MProcessLinear.Height)] = LoaderHeight;
-                     props[nameof(MProcessLinear.Indeterminate)] = true;
+                     props[nameof(MProgressLinear.Absolute)] = true;
+                     props[nameof(MProgressLinear.Color)] = (Loading == true || Loading == "") ? (Color ?? "primary") : Loading.ToString();
+                     props[nameof(MProgressLinear.Height)] = LoaderHeight;
+                     props[nameof(MProgressLinear.Indeterminate)] = true;
                  })
                 .ApplyTextFieldClearIcon(typeof(MIcon), props =>
                  {

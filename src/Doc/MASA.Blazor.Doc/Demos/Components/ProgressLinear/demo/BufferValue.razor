@@ -1,0 +1,55 @@
+﻿@using System.Timers;
+@using Timer = System.Timers.Timer;
+
+<MContainer>
+    <MProgressLinear Value="@_value" BufferValue="@_bufferValue"></MProgressLinear>
+</MContainer>
+<MContainer>
+    <MProgressLinear Value="@_value" BufferValue="@_bufferValue" Color="purple"></MProgressLinear>
+</MContainer>
+<MContainer>
+    <MProgressLinear Value="@_value" BufferValue="@_bufferValue" Color="red lighten-2"></MProgressLinear>
+</MContainer>
+<MContainer>
+    <MProgressLinear Value="@_value" BufferValue="@_bufferValue" Color="black"></MProgressLinear>
+</MContainer>
+
+@code
+{
+    private double _value = 10;
+    private double _bufferValue = 20;
+    protected Timer Timer { get; set; }
+    protected override void OnInitialized()
+    {
+        if (Timer == null)
+        {
+            Timer = new Timer
+            {
+                Interval = 2000
+            };
+            Timer.Elapsed += Timer_Elapsed;
+            Timer.Start();
+        }
+    }
+
+    private async void Timer_Elapsed(object sender, ElapsedEventArgs e)
+    {
+        await InvokeAsync(() =>
+        {
+            if (_bufferValue >= 100)
+            {
+                Timer.Stop();
+                _value = 0;
+                _bufferValue = 10;
+                Timer.Start();
+            }
+            else
+            {
+                _value += new Random().NextDouble() * (15 - 5) + 5;
+                _bufferValue += new Random().NextDouble() * (15 - 5) + 6;
+            }
+
+            StateHasChanged();
+        });
+    }
+}

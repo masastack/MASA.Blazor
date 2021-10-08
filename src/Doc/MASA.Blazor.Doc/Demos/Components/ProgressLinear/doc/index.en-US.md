@@ -1,7 +1,7 @@
 ---
 category: Components
-type: Process
-title: Process
+type: ProgressLinear
+title: ProgressLinear
 cols: 1
 ---
 

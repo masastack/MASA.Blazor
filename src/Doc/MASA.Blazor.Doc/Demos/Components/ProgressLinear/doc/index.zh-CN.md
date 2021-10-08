@@ -1,8 +1,8 @@
 ---
 category: Components
-subtitle: 进度-未完成
-type: 进度-未完成
-title: Process
+subtitle: 进度条
+type: 进度条
+title: ProgressLinear
 cols: 1
 
 ---

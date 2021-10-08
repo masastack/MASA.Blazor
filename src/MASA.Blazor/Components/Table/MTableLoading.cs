@@ -28,10 +28,10 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply<BProcessLinear, MProcessLinear>(properties =>
+                .Apply<BProgressLinear, MProgressLinear>(props =>
                 {
-                    properties[nameof(MProcessLinear.Color)] = "primary";
-                    properties[nameof(MProcessLinear.Indeterminate)] = true;
+                    props[nameof(MProgressLinear.Color)] = "primary";
+                    props[nameof(MProgressLinear.Indeterminate)] = true;
                 });
         }
     }
