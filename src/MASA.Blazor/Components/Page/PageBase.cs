@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorComponent.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using System;
 using System.Collections.Generic;
@@ -369,6 +370,11 @@ namespace MASA.Blazor
             {
                 TryHandleException(ex);
             }
+        }
+
+        string T(string key)
+        {
+            return I18n.T(key);
         }
     }
 }
