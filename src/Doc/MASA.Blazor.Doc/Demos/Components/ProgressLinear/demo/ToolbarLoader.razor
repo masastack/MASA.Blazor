@@ -36,12 +36,13 @@
             <MRow Class="fill-height"
                   Align="AlignTypes.Center"
                   Justify="JustifyTypes.Center">
-                <Transition Name="scale-transition" Value="!_loading" Class="text-center">
-                    <MButton Color="primary"
-                             OnClick="()=>Loading(true)">
+				<ScaleTransition>
+					<Element Show="!_loading" Class="text-center">
+						<MButton Color="primary" OnClick="()=>Loading(true)">
                         Start loading
                     </MButton>
-                </Transition>
+					</Element>
+				</ScaleTransition>
             </MRow>
         </MContainer>
     </MCard>
