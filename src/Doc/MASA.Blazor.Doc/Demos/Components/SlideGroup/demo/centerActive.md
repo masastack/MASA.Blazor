@@ -1,7 +1,7 @@
 ---
 order: 1
 title:
-  zh-CN: 激活项剧中
+  zh-CN: 激活项居中
   en-US: Center active
 ---
 

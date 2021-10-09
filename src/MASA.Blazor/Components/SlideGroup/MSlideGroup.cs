@@ -9,6 +9,10 @@ namespace MASA.Blazor
             base.OnInitialized();
 
             ActiveClass = "m-slide-item--active";
+        }
+
+        protected override void OnParametersSet()
+        {
             NextIcon ??= "mdi-chevron-right";
             PrevIcon ??= "mdi-chevron-left";
         }

@@ -56,13 +56,17 @@
         <MDivider></MDivider>
         <ExpandTransition>
             <Element Show="_expend">
-                <MItemGroup @bind-Value="ActiveWindow" Class="pa-2" Mandatory>
-                    <MButton Text Class="mr-2" OnClick="()=>ActiveWindow=0" Value="0"> template </MButton>
-                    @if (Code != null)
-                    {
-                        <MButton Text Class="mr-2" OnClick="()=>ActiveWindow=1" Value="1"> code </MButton>
-                    }
-                </MItemGroup>
+             <MItemGroup @bind-Value="ActiveWindow" Class="pa-2" Mandatory>
+                <MItem>
+                    <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.IsActive" Value="0"> template </MButton>
+                </MItem>
+                @if (Code != null)
+                {
+                    <MItem>
+                        <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.IsActive" Value="1"> code </MButton>
+                    </MItem>
+                }
+            </MItemGroup>
                 <MDivider></MDivider>
                 <MWindow>
                     <MWindowItem IsActive="IsTemplate">

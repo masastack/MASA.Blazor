@@ -10,9 +10,6 @@ namespace MASA.Blazor
 {
     public class MWindowItem : BWindowItem
     {
-        [Parameter]
-        public virtual bool IsActive { get; set; }
-
         protected override void SetComponentClass()
         {
             CssProvider
@@ -21,9 +18,9 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-window-item")
                         .AddIf("m-window-item--active", () => IsActive);
-                }, cssBuilder =>
+                }, styleBuilder =>
                 {
-                    cssBuilder
+                    styleBuilder
                         .AddIf("display:none", () => !IsActive);
                 });
         }

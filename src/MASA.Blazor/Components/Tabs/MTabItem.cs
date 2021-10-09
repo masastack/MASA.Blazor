@@ -11,49 +11,40 @@ namespace MASA.Blazor
     public partial class MTabItem : MWindowItem, ITabItem
     {
         [CascadingParameter]
-        public BTabs Tabs { get; set; }
+        public MTabs Tabs { get; set; }
 
-        [Parameter]
-        public string Key { get; set; }
-
-        public string ComputedKey => Key ?? Tabs.TabItems.IndexOf(this).ToString();
-
-        [Parameter]
-        public override bool IsActive
-        {
-            get
-            {
-                return Tabs.Value == ComputedKey || (Tabs.Value == null && Tabs.TabItems.IndexOf(this) == 0);
-            }
-            set
-            {
-                base.IsActive = value;
-            }
-        }
+        [CascadingParameter(Name = "DISPLAY:NONE")]
+        public bool IsDisplayNone { get; set; }
 
         protected override void OnInitialized()
         {
-            Tabs.AddTabItem(this);
+            if (Tabs == null)
+            {
+                base.OnInitialized();
+            }
+            else
+            {
+                if (!IsDisplayNone) return;
+
+                if (Value == null)
+                    Value = Tabs.TabItems.Count;
+
+                if (Tabs.TabItems.Any(item => item.Value?.ToString() == Value.ToString())) return;
+
+                Tabs.AddTabItem(this);
+            }
         }
 
-        public void Active()
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            IsActive = true;
-        }
+            await base.OnAfterRenderAsync(firstRender);
+            
+            if (IsDisplayNone) return;
 
-        public void DeActive()
-        {
-            IsActive = false;
-        }
-
-        protected override void SetComponentClass()
-        {
-            CssProvider
-                .Merge(mergeStyleAction: styleBuilder =>
-                {
-                    styleBuilder
-                        .AddIf("display:none", () => !IsActive);
-                });
+            if (firstRender)
+            {
+                Tabs?.CallSlider();
+            }
         }
     }
 }

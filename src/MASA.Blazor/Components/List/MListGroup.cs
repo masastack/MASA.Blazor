@@ -50,7 +50,6 @@ namespace MASA.Blazor
             AbstractProvider
                 .Apply<BListItem, MListGroupItem>(props =>
                 {
-                    props[nameof(MListGroupItem.NoGroup)] = true;
                     props[nameof(MListGroupItem.IsActive)] = Expanded;
                     props[nameof(MListGroupItem.Link)] = true;
                     props[nameof(MListGroupItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, args => ToggleExpansion());

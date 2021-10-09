@@ -41,28 +41,10 @@ namespace MASA.Blazor
         public StringNumber MobileBreakpoint { get; set; }
 
         [Parameter]
-        public string NextIcon { get; set; }
-
-        [Parameter]
         public string Optional { get; set; }
 
         [Parameter]
-        public string PrevIcon { get; set; }
-
-        [Parameter]
         public bool Right { get; set; }
-
-        [Parameter]
-        public bool ShowArrows { get; set; }
-
-        [Parameter]
-        public string SliderColor { get; set; }
-
-        [Parameter]
-        public StringNumber SliderSize { get; set; } = 2;
-
-        [Parameter]
-        public bool Vertical { get; set; }
 
         [Parameter]
         public bool Dark { get; set; }
@@ -91,12 +73,10 @@ namespace MASA.Blazor
             }
         }
 
-        protected StringNumber SlideLeft => ActiveTab?.Rect?.OffsetLeft;
-
-        protected StringNumber SlideWidth => ActiveTab?.Rect?.ScrollWidth;
-
         protected override void SetComponentClass()
         {
+            base.SetComponentClass();
+
             var prefix = "m-tabs";
             CssProvider
                 .Apply(cssBuilder =>
@@ -112,22 +92,37 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--vertical", () => Vertical)
                         .AddTheme(IsDark);
                 })
-                .Apply("slider-wrap", cssBuilder =>
+                .Apply("slider-wrapper",
+                    cssBuilder => { cssBuilder.Add("m-tabs-slider-wrapper"); },
+                    styleBuilder =>
+                    {
+                        styleBuilder
+                            .AddWidth(Slider.width)
+                            .AddHeight(Slider.height)
+                            .AddIf(() => $"left:{Slider.left.ToUnit()}", () => !IsReversed)
+                            .AddIf(() => $"right:{Slider.right.ToUnit()}", () => IsReversed)
+                            .AddIf(() => $"top:{Slider.top.ToUnit()}", () => Vertical)
+                            .AddIf(() => $"transition:none", () => Slider.left == null);
+                    })
+                .Apply("slider", cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-tabs-slider-wrapper");
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .AddHeight(SliderSize)
-                        .AddIf(() => $"left:{SlideLeft.ToUnit()}", () => SlideLeft != null)
-                        .AddIf(() => $"width:{SlideWidth.ToUnit()}", () => SlideWidth != null);
+                        .Add("m-tabs-slider")
+                        .AddBackgroundColor(SliderColor);
                 });
 
             AbstractProvider
-                .Apply<ITabsBar, MTabsBar>()
-                .Apply<ITabsItems, MTabsItems>()
-                .Apply<BTabsSlider, MTabsSlider>();
+                .Apply<BSlideGroup, MTabsBar>(props =>
+                {
+                    props[nameof(MTabsBar.CenterActive)] = CenterActive;
+                    props[nameof(MTabsBar.BackgroundColor)] = BackgroundColor;
+                    props[nameof(MTabsBar.IsDark)] = IsDark;
+                })
+                .Apply(typeof(BTabsSlider<>), typeof(BTabsSlider<MTabs>))
+                .Apply<BItem, MSlideItem>()
+                .Apply<BTab, MTab>()
+                .Apply<BWindow, MTabsItems>()
+                .Apply<BWindowItem, MTabItem>();
         }
     }
 }
