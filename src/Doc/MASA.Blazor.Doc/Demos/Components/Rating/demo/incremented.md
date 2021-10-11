@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 3
 title:
   zh-CN: 增量
   en-US: Incremented
@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-一个评级可以有3个定义的图标，全图标，半图标(带有半增量道具)和空图标。
+`MRating` 有3个定义的图标，全图标、半图标和空图标。
 
 ## en-US
 
-Icons can be used for the primary content of a button. This property makes the button rounded and applies the text prop styles.
+The `MRating` component has 3 defined icons, full icon, half icon and empty icon.

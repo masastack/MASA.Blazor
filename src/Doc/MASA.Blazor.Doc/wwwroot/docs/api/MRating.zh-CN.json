@@ -106,6 +106,15 @@
       "Description": "使组件尺寸变的更小。"
     }
   ],
-  "Contents": [],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "ItemContent",
+      "Description": "已渲染项目的插槽"
+    }
+  ],
   "Events": []
 }

@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 2
 title:
   zh-CN: 长度
   en-US: Length
@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-有时，应用程序会调用定制的实现。轻松改变长度或显示的图标。
+可以使用 `MSilder` 组件轻松更改 `MRating` 组件的长度。
 
 ## en-US
 
-Icons can be used for the primary content of a button. This property makes the button rounded and applies the text prop styles.
+You can use the `MSilder` component to easily change the length of the `MRating` component.

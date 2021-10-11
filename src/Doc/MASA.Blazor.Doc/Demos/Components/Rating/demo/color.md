@@ -7,9 +7,9 @@ title:
 
 ## zh-CN
 
-`Rating` 可以通过使用颜色属性的任何内置颜色和上下文名称来着色。
+`MRating`  组件可以根据您的需要进行着色，您可以设置选定和未选定的颜色。
 
 ## en-US
 
-`Rating` can be colored by using any of the builtin colors and contextual names using the color prop.
+The `MRating` components can be colored according to your needs, and you can set selected and unselected colors.
 
