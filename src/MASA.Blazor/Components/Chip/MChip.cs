@@ -9,9 +9,6 @@ namespace MASA.Blazor
     public partial class MChip : BChip, IThemeable, IChip
     {
         [Parameter]
-        public bool Disabled { get; set; }
-
-        [Parameter]
         public bool Label { get; set; }
 
         [Parameter]
@@ -31,9 +28,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public string CloseIconColor { get; set; }
-
-        [Parameter]
-        public string SelectColor { get; set; } = "primary";
 
         public bool Medium => !XSmall && !Small && !Large && !XLarge;
 
@@ -60,19 +54,13 @@ namespace MASA.Blazor
         public IThemeable Themeable { get; set; }
 
         [Parameter]
-        public bool Draggable { get;set;  }
-
-        [Parameter]
-        public EventCallback<bool> ActiveChanged { get; set; }
+        public bool Draggable { get; set; }
 
         [Parameter]
         public bool Filter { get; set; }
 
         [Parameter]
         public string FilterIcon { get; set; } = "mdi-check";
-
-        [Parameter]
-        public bool InputValue { get; set; }
 
         [Parameter]
         public bool Close { get; set; }
@@ -96,7 +84,7 @@ namespace MASA.Blazor
 
                 return Themeable != null && Themeable.IsDark;
             }
-        } 
+        }
 
         protected override void OnParametersSet()
         {
@@ -130,28 +118,31 @@ namespace MASA.Blazor
                         .AddIf("m-size--small", () => Small)
                         .AddIf("m-size--large", () => Large)
                         .AddIf("m-size--x-large", () => XLarge)
-                        .AddIf($"{prefix}--active", () => InputValue)
+                        .AddIf($"{prefix}--active {ComputedActiveClass}", () => IsActive)
                         .AddIf($"{prefix}--clickable", () => ItemGroup != null)
-                        .AddIf($"{SelectColor}--text", () => InputValue)
                         .AddIf("m-chip--outlined", () => Outlined)
                         .AddIf($"{prefix}--draggable", () => Draggable);
                 })
                 .Apply("content", cssBuilder =>
-                 {
-                     cssBuilder
-                         .Add("m-chip__content");
-                 });
+                {
+                    cssBuilder
+                        .Add("m-chip__content");
+                });
 
             AbstractProvider
                 .ApplyChipDefault()
-                .Apply<BIcon, MIcon>(props =>
+                .Apply<BIcon, MIcon>("close", props =>
                 {
-                    props[nameof(Class)] = InputValue ? "m-chip__filter" : "m-chip__close";
-                    props[nameof(MIcon.Right)] = !InputValue;
-                    props[nameof(MIcon.Left)] = InputValue;
-                    props[nameof(MIcon.Size)] = InputValue ? "" : (StringNumber)18;
-                    props[nameof(MIcon.Color)] = InputValue ? "" : CloseIconColor;
+                    props[nameof(Class)] = "m-chip__close";
+                    props[nameof(MIcon.Right)] = true;
+                    props[nameof(MIcon.Size)] = (StringNumber)18;
+                    props[nameof(MIcon.Color)] = CloseIconColor;
                     props[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnIconClickAsync);
+                })
+                .Apply<BIcon, MIcon>("filter", props =>
+                {
+                    props[nameof(Class)] = "m-chip__filter";
+                    props[nameof(MIcon.Left)] = true;
                 });
 
             CloseIcon = "mdi-close-circle";
@@ -159,12 +150,6 @@ namespace MASA.Blazor
 
         protected virtual async Task HandleOnIconClickAsync(MouseEventArgs args)
         {
-            if (InputValue)
-            {
-                InputValue = !InputValue;
-                await ActiveChanged.InvokeAsync(InputValue);
-            }
-
             if (OnCloseClick.HasDelegate)
             {
                 await OnCloseClick.InvokeAsync(args);

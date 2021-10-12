@@ -19,12 +19,6 @@ namespace MASA.Blazor
         public bool Dense { get; set; }
 
         /// <summary>
-        /// Disables the component
-        /// </summary>
-        [Parameter]
-        public bool Disabled { get; set; }
-
-        /// <summary>
         /// If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler
         /// </summary>
         [Parameter]

@@ -82,12 +82,12 @@ namespace MASA.Blazor
 
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
-
+        
         public override bool IsDark
         {
             get
             {
-                if (Dark)
+                if (Dark || (Matched && (ItemGroup as MButtonGroup).IsDark))
                 {
                     return true;
                 }

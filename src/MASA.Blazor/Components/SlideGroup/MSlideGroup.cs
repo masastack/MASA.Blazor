@@ -4,6 +4,14 @@ namespace MASA.Blazor
 {
     public partial class MSlideGroup : BSlideGroup
     {
+        public MSlideGroup()
+        {
+        }
+
+        public MSlideGroup(GroupType groupType) : base(groupType)
+        {
+        }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();

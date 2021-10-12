@@ -1,5 +1,5 @@
 ---
-order: 0
+order: 2
 title:
   zh-CN: 多选
   en-US: Multiple  
@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-一个 v-btn-twitch 带有 multiple 属性将允许用户选中多个值并以数组的形式返回。
+`MButtonGroup` 带有 **multiple** 属性将允许用户选中多个值并以数组的形式返回。
 
 ## en-US
 
-Todo...
+A `MButtonGroup` with the **multiple** prop will allow a user to select multiple return values as an array.

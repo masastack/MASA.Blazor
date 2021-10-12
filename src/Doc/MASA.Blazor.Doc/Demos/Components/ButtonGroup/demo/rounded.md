@@ -1,5 +1,5 @@
 ---
-order: 0
+order: 3
 title:
   zh-CN: 圆角
   en-US: Rounded   
@@ -7,8 +7,9 @@ title:
 
 ## zh-CN
 
-你可以使用 rounded 属性让 v-btn-toggle 变成圆角样式。
+你可以使用 **rounded** 属性让 `MButtonGroup` 变成圆角样式。
 
 ## en-US
 
-Todo...
+You can make `MButtonGroup` rounded using the **rounded** prop.
+

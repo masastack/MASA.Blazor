@@ -8,7 +8,7 @@
                     Multiple
                 </p>
             </MCol>
-            <MButtonGroup @bind-Values="_values"
+            <MButtonGroup @bind-Values="values"
                           Multiple>
                 <MButton Value="@("left")">
                     <MIcon>mdi-format-align-left</MIcon>
@@ -25,16 +25,12 @@
             </MButtonGroup>
             <MCol Span="12"
                   Class="text-center">
-                Values: [@(string.Join(',',_values))]
+                Values: [@(string.Join(',', values))]
             </MCol>
         </MRow>
     </MCardText>
 </MCard>
 
 @code {
-    private List<StringNumber> _values = new()
-    {
-
-    };
+    List<StringNumber> values = new();
 }
-

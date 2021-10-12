@@ -1,7 +1,7 @@
 ﻿<MRow>
-    <MCol Span="6" Class="py-2">
+    <MCol Cols="12" Sm="6" Class="py-2">
         <p>Exclusive</p>
-        <MButtonGroup @bind-Values="_toggleExclusive">
+        <MButtonGroup @bind-Value="toggleExclusive">
             <MButton>
                 <MIcon>mdi-format-align-left</MIcon>
             </MButton>
@@ -16,26 +16,26 @@
             </MButton>
         </MButtonGroup>
     </MCol>
-    <MCol Span="6" Class="py-2">
-        <p>Multiple [@(string.Join(',',_toggleMultiple))]</p>
-        <MButtonGroup Dense BackgroundColor="primary" Dark Multiple @bind-Values="_toggleMultiple">
-            <MButton Value="@("bold")">
+    <MCol Cols="12" Sm="6" Class="py-2">
+        <p>Multiple</p>
+        <MButtonGroup Dense BackgroundColor="primary" Dark Multiple @bind-Values="toggleMultiple">
+            <MButton>
                 <MIcon>mdi-format-bold</MIcon>
             </MButton>
-            <MButton Value="@("italic")">
+            <MButton>
                 <MIcon>mdi-format-italic</MIcon>
             </MButton>
-            <MButton Value="@("underline")">
+            <MButton>
                 <MIcon>mdi-format-underline</MIcon>
             </MButton>
-            <MButton Value="@("color-fill")">
+            <MButton>
                 <MIcon>mdi-format-color-fill</MIcon>
             </MButton>
         </MButtonGroup>
     </MCol>
-    <MCol Span="6" Class="py-2">
+    <MCol Cols="12" Sm="6" Class="py-2">
         <p>No Options Selected</p>
-        <MButtonGroup>
+        <MButtonGroup @bind-Value="toggleNone">
             <MButton>
                 <MIcon>mdi-format-align-left</MIcon>
             </MButton>
@@ -50,9 +50,9 @@
             </MButton>
         </MButtonGroup>
     </MCol>
-    <MCol Span="6" Class="py-2">
-        <p>Mandatory @_toggleOne.FirstOrDefault()</p>
-        <MButtonGroup Shaped Mandatory @bind-Values="_toggleOne">
+    <MCol Cols="12" Sm="6" Class="py-2">
+        <p>Mandatory</p>
+        <MButtonGroup Shaped Mandatory @bind-Value="toggleOne">
             <MButton Value="@("left")">
                 <MIcon>mdi-format-align-left</MIcon>
             </MButton>
@@ -67,45 +67,45 @@
             </MButton>
         </MButtonGroup>
     </MCol>
-    <MCol Span="12" Class="py-2">
+    <MCol Cols="12" Class="py-2">
         <p>Text Options</p>
-        <MButtonGroup Tile Color="deep-purple accent-3" Group>
-            <MButton>
+        <MButtonGroup Tile Color="deep-purple accent-3" Group @bind-Value="text">
+            <MButton Value="@("left")">
                 Left
             </MButton>
-            <MButton>
+            <MButton Value="@("center")">
                 Center
             </MButton>
-            <MButton>
+            <MButton Value="@("right")">
                 Right
             </MButton>
-            <MButton>
+            <MButton Value="@("justify")">
                 Justify
             </MButton>
         </MButtonGroup>
     </MCol>
-    <MCol Span="12" Class="py-2">
+    <MCol Cols="12" Class="py-2">
         <p>Text &amp; Icon Options</p>
-        <MButtonGroup Borderless>
-            <MButton>
+        <MButtonGroup Borderless @bind-Value="icon">
+            <MButton Value="@("left")">
                 <span class="hidden-sm-and-down">Left</span>
                 <MIcon Right>
                     mdi-format-align-left
                 </MIcon>
             </MButton>
-            <MButton>
+            <MButton Value="@("center")">
                 <span class="hidden-sm-and-down">Center</span>
                 <MIcon Right>
                     mdi-format-align-center
                 </MIcon>
             </MButton>
-            <MButton>
+            <MButton Value="@("right")">
                 <span class="hidden-sm-and-down">Right</span>
                 <MIcon Right>
                     mdi-format-align-right
                 </MIcon>
             </MButton>
-            <MButton>
+            <MButton Value="@("justify")">
                 <span class="hidden-sm-and-down">Justify</span>
                 <MIcon Right>
                     mdi-format-align-justify
@@ -116,7 +116,10 @@
 </MRow>
 
 @code {
-    private List<StringNumber> _toggleExclusive = new() { 2 };
-    private List<StringNumber> _toggleMultiple = new() { "underline" };
-    private List<StringNumber> _toggleOne = new() { "left" };
+    StringNumber text = "center";
+    StringNumber icon = "justify";
+    StringNumber toggleNone;
+    StringNumber toggleOne = 0;
+    StringNumber toggleExclusive = 2;
+    List<StringNumber> toggleMultiple = new() { 0, 1, 2 };
 }
