@@ -99,12 +99,6 @@ namespace MASA.Blazor
                 .Apply(typeof(BSwitchProgress<>), typeof(BSwitchProgress<MSwitch>));
         }
 
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-            HideDetails = "auto";
-        }
-
         public override async Task HandleOnClickAsync(MouseEventArgs args)
         {
             Value = !Value;

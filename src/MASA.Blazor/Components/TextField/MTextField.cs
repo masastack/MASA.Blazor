@@ -182,7 +182,7 @@ namespace MASA.Blazor
 
         public virtual string Tag => "input";
 
-        public virtual Dictionary<string, object> InputAttrs => new()
+        public virtual Dictionary<string, object> InputAttrs => new(Attributes)
         {
             { "type", Type },
             { "value", _badInput == null ? Value : _badInput }

@@ -91,6 +91,12 @@ namespace MASA.Blazor
         [Parameter]
         public bool InverseLabel { get; set; }
 
+        [Parameter]
+        public StringNumber LoaderHeight { get; set; } = 2;
+
+        [Parameter]
+        public RenderFragment ProgressContent { get; set; }
+
         public bool IsActive { get; set; }
 
         public bool NoClick { get; set; }
@@ -443,7 +449,7 @@ namespace MASA.Blazor
                 })
                 .Apply("tick", cssBuilder =>
                 {
-                    var width = cssBuilder.Index * (100 / NumTicks);
+                    var width = cssBuilder.Context.Index * (100 / NumTicks);
                     var filled = GlobalConfig.RTL ? (100 - InputWidth) < width : width < InputWidth;
 
                     cssBuilder
@@ -453,7 +459,7 @@ namespace MASA.Blazor
                 {
                     var direction = Vertical ? "bottom" : (GlobalConfig.RTL ? "right" : "left");
                     var offsetDirection = Vertical ? (GlobalConfig.RTL ? "left" : "right") : "top";
-                    var width = styleBuilder.Index * (100 / NumTicks);
+                    var width = styleBuilder.Context.Index * (100 / NumTicks);
 
                     styleBuilder
                         .AddWidth(TickSize)
