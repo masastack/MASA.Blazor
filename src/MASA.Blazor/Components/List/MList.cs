@@ -140,8 +140,6 @@ namespace MASA.Blazor
             }
         }
 
-        public override List<BListItem> Items { get; set; } = new List<BListItem>();
-
         protected override void SetComponentClass()
         {
             var prefix = "m-list";
@@ -203,8 +201,9 @@ namespace MASA.Blazor
                 }
             }
 
+            // group.Toggle(group.Id);
             groups.Remove(group);
-            groups.ForEach(r => r.Contract());
+            // groups.ForEach(r => r.Contract());
         }
     }
 }

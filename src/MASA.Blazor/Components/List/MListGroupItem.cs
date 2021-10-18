@@ -1,14 +1,17 @@
 ﻿using BlazorComponent;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MASA.Blazor.Components.List
+namespace MASA.Blazor
 {
     internal class MListGroupItem : MListItem
     {
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            Attributes["role"] = "button";
+            Attributes["aria-expanded"] = IsActive.ToString();
+        }
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();

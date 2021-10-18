@@ -8,30 +8,45 @@
         if (item.Children != null && item.Children.Any())
         {
             <MListGroup PrependIcon="@item.Icon" Color="primary" AppendIcon="mdi-menu-down">
-                <Activator>
+                <ActivatorContent>
                     <MListItemContent>
                         <MListItemTitle>@item.Title</MListItemTitle>
                     </MListItemContent>
-                </Activator>
+                </ActivatorContent>
                 <ChildContent>
-                    @if (item.Children != null && item.Children.Any())
+                    @foreach (var componentItem in item.Children)
                     {
-                        @foreach (var componentItem in item.Children)
+                        if (componentItem.Children != null && componentItem.Children.Any())
+                        {
+                            <MListGroup SubGroup>
+                                <ActivatorContent>
+                                    <MListItemContent>
+                                        <MListItemTitle>@FormatComponentTitle(componentItem)</MListItemTitle>
+                                    </MListItemContent>
+                                </ActivatorContent>
+                                <ChildContent>
+                                    @foreach (var subComponentItem in componentItem.Children)
+                                    {
+                                        <MListItem Link Href="@subComponentItem.Url">
+                                            <MListItemIcon></MListItemIcon>
+                                            <MListItemContent>
+                                                <MListItemTitle>
+                                                    @FormatComponentTitle(subComponentItem)
+                                                </MListItemTitle>
+                                            </MListItemContent>
+                                        </MListItem>
+                                    }
+                                </ChildContent>
+                            </MListGroup>
+                        }
+                        else
                         {
                             <MListItem Link Href="@componentItem.Url">
                                 <MListItemIcon>
                                 </MListItemIcon>
                                 <MListItemContent>
                                     <MListItemTitle>
-                                        @if (LanguageService.CurrentCulture.Name == "zh-CN" && !string.IsNullOrEmpty(componentItem.SubTitle))
-                                        {
-                                            var title = componentItem.Title + $" ({componentItem.SubTitle})";
-                                            @title
-                                        }
-                                        else
-                                        {
-                                            @componentItem.Title
-                                        }
+                                        @FormatComponentTitle(componentItem)
                                     </MListItemTitle>
                                 </MListItemContent>
                             </MListItem>
@@ -55,8 +70,9 @@
 </MList>
 
 @code{
+
     [Parameter]
-    public DemoMenuItemModel[] MenuItems { get; set; } = { };
+    public DemoMenuItemModel[] MenuItems { get; set; } = {};
 
     protected override async Task OnInitializedAsync()
     {
@@ -65,4 +81,15 @@
         StateHasChanged();
         await Service.InitializeDemos();
     }
+
+    string FormatComponentTitle(DemoMenuItemModel model)
+    {
+        if (LanguageService.CurrentCulture.Name == "zh-CN" && !string.IsNullOrEmpty(model.SubTitle))
+        {
+            return $"{model.Title}（{model.SubTitle}）";
+        }
+
+        return model.Title;
+    }
+
 }

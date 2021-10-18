@@ -10,16 +10,16 @@
         </MListItem>
 
         <MListGroup Value="true" PrependIcon="mdi-account-circle">
-            <Activator>
+            <ActivatorContent>
                 <MListItemTitle>Users</MListItemTitle>
-            </Activator>
+            </ActivatorContent>
             <ChildContent>
                 <MListGroup Value NoAction SubGroup>
-                    <Activator>
+                    <ActivatorContent>
                         <MListItemContent>
                             <MListItemTitle>Admin</MListItemTitle>
                         </MListItemContent>
-                    </Activator>
+                    </ActivatorContent>
                     <ChildContent>
                         @foreach (var item in _admins)
                         {
@@ -34,13 +34,13 @@
                     </ChildContent>
                 </MListGroup>
 
-                <MListGroup  NoAction
-                              SubGroup>
-                    <Activator>
+                <MListGroup NoAction
+                            SubGroup>
+                    <ActivatorContent>
                         <MListItemContent>
                             <MListItemTitle>Actions</MListItemTitle>
                         </MListItemContent>
-                    </Activator>
+                    </ActivatorContent>
                     <ChildContent>
                         @foreach (var item in _cruds)
                         {

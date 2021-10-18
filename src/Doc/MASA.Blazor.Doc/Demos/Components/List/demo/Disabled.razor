@@ -3,11 +3,11 @@
        tile>
     <MList Disabled>
         <MSubheader>REPORTS</MSubheader>
-        <MListItemGroup @bind-Value="_selectedItem"
+        <MListItemGroup @bind-Value="selectedItem"
                         Color="primary">
-            @foreach (var item in _items)
+            @foreach (var item in items)
             {
-                <MListItem >
+                <MListItem>
                     <MListItemIcon>
                         <MIcon>
                             @item.Icon
@@ -23,8 +23,8 @@
 </MCard>
 
 @code{
-    private StringNumber _selectedItem = "1";
-    private Item[] _items = new Item[]
+    StringNumber selectedItem = 1;
+    Item[] items = new Item[]
     {
        new Item { Text= "Real-Time", Icon= "mdi-clock" },
        new Item { Text= "Audience", Icon= "mdi-account" },

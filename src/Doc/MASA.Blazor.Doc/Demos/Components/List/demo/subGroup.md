@@ -1,14 +1,14 @@
 ---
-order: 1
+order: 7
 title:
   zh-CN: 嵌套列表
-  en-US: SubGroup
+  en-US: Sub group
 ---
 
 ## zh-CN
 
-使用v-list-group组件，您可以使用子组属性创建多达2个深度级别。
+Using the `MListGroup` component you can create up to 2 levels in depth using the `SubGroup` prop.
 
 ## en-US
 
-`List` can be lowered with `Dense` property.
+Using the `MListGroup` component you can create up to 2 levels in depth using the `SubGroup` prop.

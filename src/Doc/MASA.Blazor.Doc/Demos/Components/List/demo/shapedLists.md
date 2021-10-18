@@ -1,14 +1,14 @@
 ---
-order: 1
+order: 6
 title:
   zh-CN: 形状列表
-  en-US: ShapedLists
+  en-US: Shaped
 ---
 
 ## zh-CN
 
-形状列表在v-list-item的一侧有圆形边框。
+Shaped lists have rounded borders on one side of the `MListItem`.
 
 ## en-US
 
-`List` can be lowered with `Dense` property.
+Shaped lists have rounded borders on one side of the `MListItem`.

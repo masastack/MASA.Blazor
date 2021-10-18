@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 9
 title:
   zh-CN: 两行和副标题
   en-US: TwoLinesAndSubheader
@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-列表可以包含子标题、分隔符，并且可以包含1行或多行。如果副标题超过一行，就会溢出省略号。
+Lists can contain subheaders, dividers, and can contain 1 or more lines. The subtitle will overflow with ellipsis if it extends past one line.
 
 ## en-US
 
-`List` can be lowered with `Dense` property.
+Lists can contain subheaders, dividers, and can contain 1 or more lines. The subtitle will overflow with ellipsis if it extends past one line.

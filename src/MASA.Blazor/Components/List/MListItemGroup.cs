@@ -6,6 +6,10 @@ namespace MASA.Blazor
 {
     public partial class MListItemGroup : MItemGroup
     {
+        public MListItemGroup() : base(GroupType.ListItemGroup)
+        {
+        }
+
         [Parameter]
         public string Color { get; set; }
 

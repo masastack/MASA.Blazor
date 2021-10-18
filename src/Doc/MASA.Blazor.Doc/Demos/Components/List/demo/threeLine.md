@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 8
 title:
   zh-CN: 三行
   en-US: ThreeLine
@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-对于三行列表，副标题将垂直夹在两行，然后是省略号。该特性使用行钳，并不是所有浏览器都支持。
+For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis.
 
 ## en-US
 
-`List` can be lowered with `Dense` property.
+For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis.

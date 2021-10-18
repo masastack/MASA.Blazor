@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 2
 title:
   zh-CN: 禁用
   en-US: Disabled
@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-您不能与已禁用的 v-list 交互。
+您不能与已禁用的 `MList` 交互。
 
 ## en-US
 
-`List` can be lowered with `Dense` property.
+You cannot interact with disabled `MList`.

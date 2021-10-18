@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 5
 title:
   zh-CN: 圆角
   en-US: Rounded
@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-你可以使v-list变为圆角。
+You can make `MList` items rounded.
 
 ## en-US
 
-`List` can be lowered with `Dense` property.
+You can make `MList` items rounded.

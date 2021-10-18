@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using BlazorComponent;
-using MASA.Blazor.Components.List;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
@@ -134,7 +133,8 @@ namespace MASA.Blazor
             {
                 Active();
             }
-            Attributes["ripple"] = Ripple;
+
+            Attributes["ripple"] = IsClickable && Ripple;
         }
 
         protected override void SetComponentClass()
@@ -150,8 +150,8 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--selectable", () => Selectable)
                         .AddIf($"{prefix}--two-line", () => TwoLine)
                         .AddIf($"{prefix}--three-line", () => ThreeLine)
-                        .AddIf($"{prefix}--link", () => Link && !Inactive)
-                        .AddIf($"{prefix}--active", () =>
+                        .AddIf($"{prefix}--link", () => IsClickable && !Inactive)
+                        .AddIf($"{prefix}--active {ComputedActiveClass}", () =>
                         {
                             if (IsActive) return true;
 

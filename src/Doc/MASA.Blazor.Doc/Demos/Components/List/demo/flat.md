@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 3
 title:
   zh-CN: 扁平
   en-US: Flat
@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-在具有flat属性的v-list中选择时，项不会更改。
+Items don’t change when selected in `MList` with **Flat** property.
 
 ## en-US
 
-`List` can be lowered with `Dense` property.
+Items don’t change when selected in `MList` with **Flat** property.
