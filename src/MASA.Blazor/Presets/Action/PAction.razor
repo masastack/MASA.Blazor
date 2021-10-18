@@ -2,7 +2,7 @@
 @inherits BDomComponentBase
 
 <div style="width:100%" @ref="Ref">
-    <MTooltip Disabled="TooltipDisabled" ActivatorStyle="@ActivatorStyle">
+    <MTooltip Top Disabled="TooltipDisabled">
         <ActivatorContent>
             <MButton Color="@Color"
                      Icon="@(_actionType == ActionTypes.Icon)"
@@ -21,7 +21,7 @@
                      XLarge="@XLarge"
                      Click="HandleClick"
                      Style="@ActivatorStyle"
-                     @attributes="Attributes">
+                     @attributes="context.Attrs">
                 @switch (_actionType)
                 {
                     case ActionTypes.Icon:

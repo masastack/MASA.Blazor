@@ -4,31 +4,25 @@
             <MButton Dark Color="primary" @attributes="activatorContext.Attrs">Left</MButton>
         </ActivatorContent>
         <ChildContent>
-            <span>Left tooltip</span>
+            <span>Tooltip</span>
         </ChildContent>
     </MTooltip>
-    <MTooltip Top>
-        <ActivatorContent Context="activatorContext">
-            <MButton Dark Color="primary" @attributes="activatorContext.Attrs">Top</MButton>
-        </ActivatorContent>
-        <ChildContent>
-            <span>Top tooltip</span>
-        </ChildContent>
-    </MTooltip>
+
     <MTooltip Bottom>
         <ActivatorContent Context="activatorContext">
-            <MButton Dark Color="primary" @attributes="activatorContext.Attrs">Bottom</MButton>
+            <MIcon Color="primary" @attributes="activatorContext.Attrs">mdi-home</MIcon>
         </ActivatorContent>
         <ChildContent>
-            <span>Bottom tooltip</span>
+            <span>Tooltip</span>
         </ChildContent>
     </MTooltip>
-    <MTooltip Right>
+
+    <MTooltip Bottom>
         <ActivatorContent Context="activatorContext">
-            <MButton Dark Color="primary" @attributes="activatorContext.Attrs">Right</MButton>
+            <span @attributes="activatorContext.Attrs">This text has a tooltip</span>
         </ActivatorContent>
         <ChildContent>
-            <span>Right tooltip</span>
+            <span>Tooltip</span>
         </ChildContent>
     </MTooltip>
 </div>
