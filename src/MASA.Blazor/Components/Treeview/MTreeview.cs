@@ -16,7 +16,6 @@ namespace MASA.Blazor
         [Parameter]
         public bool Dense { get; set; }
 
-
         [Parameter]
         public bool Dark { get; set; }
 
