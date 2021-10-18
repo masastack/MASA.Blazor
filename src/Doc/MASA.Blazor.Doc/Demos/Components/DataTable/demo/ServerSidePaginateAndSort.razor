@@ -31,7 +31,7 @@
     private int _totalDesserts = 0;
     private IEnumerable<Dessert> _desserts = new List<Dessert>();
     private bool _loading = true;
-    private DataOptions _options;
+    private DataOptions _options=new DataOptions();
 
     private List<DataTableHeader<Dessert>> _headers = new List<DataTableHeader<Dessert>>
         {
@@ -52,6 +52,11 @@
     public void HandleOnOptionsUpdate(DataOptions options)
     {
         _options = options;
+        GetDataFromApi();
+    }
+
+    protected override void OnInitialized()
+    {
         GetDataFromApi();
     }
 

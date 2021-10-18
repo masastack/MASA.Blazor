@@ -1,5 +1,5 @@
 ---
-order: 0
+order: 2
 title:
   zh-CN: 图标插槽
   en-US: IconSlots

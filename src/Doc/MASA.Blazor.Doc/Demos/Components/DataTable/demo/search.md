@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-数据表格还提供了 search 属性以过滤数据。
+数据表格还提供了 Search 属性以过滤数据。
 
 ## en-US
 
-The simple table is a wrapper component around the table element.
+TODO...

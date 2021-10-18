@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BlazorComponent
 {
+    /// <summary>
+    /// Cascading this will cause additional render,we may just cascading rtl in the feature
+    /// </summary>
     public class GlobalConfig
     {
         private bool _rtl;

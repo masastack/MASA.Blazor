@@ -11,8 +11,6 @@ namespace MASA.Blazor
 {
     public class MSimpleTable : BSimpleTable, ISimpleTable
     {
-        private bool _scrollRight;
-
         [Parameter]
         public bool Dense { get; set; }
 
@@ -63,6 +61,8 @@ namespace MASA.Blazor
 
         public ElementReference WrapperElement { get; set; }
 
+        protected bool ScrollerOnRight { get; set; }
+
         protected override void SetComponentClass()
         {
             CssProvider
@@ -81,8 +81,9 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-data-table__wrapper")
+                        //REVIEW:Is this class name ok?
                         .AddIf("fixed-right", () => FixedRight)
-                        .AddIf("not-scroll-right", () => !_scrollRight);
+                        .AddIf("not-scroll-right", () => FixedRight && !ScrollerOnRight);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -95,7 +96,7 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply(typeof(BSimpleTableWrapper<>), typeof(BSimpleTableWrapper<MSimpleTable>));
+                .ApplySimpleTableDefault();
         }
 
         public async Task HandleOnScrollAsync(EventArgs args)
@@ -105,13 +106,13 @@ namespace MASA.Blazor
                 var element = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, WrapperElement);
                 if (element.ScrollWidth == element.ScrollLeft + element.ClientWidth)
                 {
-                    _scrollRight = true;
+                    ScrollerOnRight = true;
                 }
                 else
                 {
-                    if (_scrollRight)
+                    if (ScrollerOnRight)
                     {
-                        _scrollRight = false;
+                        ScrollerOnRight = false;
                     }
                 }
             }

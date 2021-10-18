@@ -1,52 +1,32 @@
-﻿@using System.ComponentModel.DataAnnotations
-
-<MForm Model="_person" EnableDataAnnotationsValidation="true">
+﻿<MForm>
     <MContainer>
         <MRow>
             <MCol Span="12" Sm="6" Md="3">
-                <MTextField Label="Regular" @bind-Value="_person.Name" Clearable></MTextField>
+                <MTextField Label="Regular" TValue="string"></MTextField>
             </MCol>
             <MCol Span="12" Sm="6" Md="3">
-                <MTextField Label="Regular" Placeholder="PlaceHolder" Clearable TValue="string" ErrorMessages="_message"></MTextField>
+                <MTextField Label="Regular" Placeholder="PlaceHolder" TValue="string"></MTextField>
             </MCol>
             <MCol Span="12" Sm="6" Md="3">
-                <MTextField Label="Solo" Solo="true" AppendIcon="mdi-home" TValue="string"></MTextField>
+                <MTextField Label="Solo" Solo TValue="string"></MTextField>
             </MCol>
             <MCol Span="12" Sm="6" Md="3">
-                <MTextField Label="Solo" Solo="true" Placeholder="PlaceHolder" TValue="string"></MTextField>
+                <MTextField Label="Solo" Solo Placeholder="PlaceHolder" TValue="string"></MTextField>
             </MCol>
         </MRow>
         <MRow>
             <MCol Span="12" Sm="6" Md="3">
-                <MTextField Label="Filled" Filled="true" TValue="string"></MTextField>
+                <MTextField Label="Filled" Filled TValue="string"></MTextField>
             </MCol>
             <MCol Span="12" Sm="6" Md="3">
-                <MTextField Label="Filled" Filled="true" Placeholder="PlaceHolder" TValue="string"></MTextField>
+                <MTextField Label="Filled" Filled Placeholder="PlaceHolder" TValue="string"></MTextField>
             </MCol>
             <MCol Span="12" Sm="6" Md="3">
-                <MTextField Label="测试" Outlined="true" TValue="string"></MTextField>
+                <MTextField Label="测试" Outlined TValue="string"></MTextField>
             </MCol>
             <MCol Span="12" Sm="6" Md="3">
-                <MTextField Label="Outlined" Outlined="true" Placeholder="PlaceHolder" TValue="string"></MTextField>
+                <MTextField Label="Outlined" Outlined Placeholder="PlaceHolder" TValue="string"></MTextField>
             </MCol>
         </MRow>
     </MContainer>
 </MForm>
-
-@code {
-    public class Person
-    {
-        [StringLength(5)]
-        [Required]
-        public string Name { get; set; }
-    }
-
-    private List<string> _message = new List<string>{
-        "Name is required"
-    };
-
-    private Person _person = new Person
-    {
-        Name = "zhangsan"
-    };
-}

@@ -32,6 +32,7 @@ namespace MASA.Blazor
         [Parameter]
         public StringBoolean Loading { get; set; }
 
+        //TODO:Internationalization
         [Parameter]
         public string NoResultsText { get; set; } = "No matching records found";
 
@@ -48,7 +49,7 @@ namespace MASA.Blazor
         public Func<TItem, bool> SelectableKey { get; set; }
 
         [Parameter]
-        public RenderFragment<(List<TItem> Items, Func<TItem, bool> IsExpanded, Action<TItem, bool> Expand)> ChildContent { get; set; }
+        public RenderFragment<(IEnumerable<TItem> Items, Func<TItem, bool> IsExpanded, Action<TItem, bool> Expand)> ChildContent { get; set; }
 
         RenderFragment IDataIterator<TItem>.ChildContent => ChildContent == null ? null : ChildContent((ComputedItems, IsExpanded, Expand));
 
@@ -129,17 +130,13 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply(typeof(BDataIteratorDefaultSlot<,>), typeof(BDataIteratorDefaultSlot<TItem, MDataIterator<TItem>>))
-                .Apply(typeof(BDataIteratorItems<,>), typeof(BDataIteratorItems<TItem, MDataIterator<TItem>>))
-                .Apply(typeof(BDataIteratorEmpty<,>), typeof(BDataIteratorEmpty<TItem, MDataIterator<TItem>>))
-                .Apply(typeof(BDataIteratorEmptyWrapper), typeof(BDataIteratorEmptyWrapper))
-                .Apply(typeof(BDataIteratorFooter<,>), typeof(BDataIteratorFooter<TItem, MDataIterator<TItem>>))
+                .ApplyDataIteratorDefault<TItem>()
                 .Apply<BDataFooter, MDataFooter>(props =>
                 {
                     props[nameof(MDataFooter.PageTextContent)] = PageTextContent;
                     props[nameof(MDataFooter.Options)] = InternalOptions;
                     props[nameof(MDataFooter.Pagination)] = Pagination;
-                    props[nameof(MDataFooter.OnOptionsUpdate)] = EventCallback.Factory.Create<Action<DataOptions>>(this, UpdateOptions);
+                    props[nameof(MDataFooter.OnOptionsUpdate)] = EventCallback.Factory.Create<Action<DataOptions>>(this, options => UpdateOptions(options));
 
                     if (FooterProps != null)
                     {
@@ -220,7 +217,18 @@ namespace MASA.Blazor
             Selection[key] = value;
             if (ValueChanged.HasDelegate)
             {
-                var selectedItems = Items.Where(item => Selection.ContainsKey(ItemKey(item)));
+                bool IsSelected(TItem item)
+                {
+                    var key = ItemKey(item);
+                    if (Selection.ContainsKey(key))
+                    {
+                        return Selection[key];
+                    }
+
+                    return false;
+                }
+
+                var selectedItems = Items.Where(IsSelected);
                 ValueChanged.InvokeAsync(selectedItems);
             }
         }

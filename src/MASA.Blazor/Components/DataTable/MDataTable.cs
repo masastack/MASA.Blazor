@@ -18,7 +18,7 @@ namespace MASA.Blazor
         public RenderFragment CaptionContent { get; set; }
 
         [Parameter]
-        public List<DataTableHeader<TItem>> Headers { get; set; } = new();
+        public IEnumerable<DataTableHeader<TItem>> Headers { get; set; } = new List<DataTableHeader<TItem>>();
 
         [Parameter]
         public RenderFragment TopContent { get; set; }
@@ -60,7 +60,7 @@ namespace MASA.Blazor
         public RenderFragment GroupContent { get; set; }
 
         [Parameter]
-        public RenderFragment<(List<DataTableHeader<TItem>> Headers, TItem Item)> ExpandedItemContent { get; set; }
+        public RenderFragment<(IEnumerable<DataTableHeader<TItem>> Headers, TItem Item)> ExpandedItemContent { get; set; }
 
         [Parameter]
         public string ItemClass { get; set; }
@@ -101,7 +101,7 @@ namespace MASA.Blazor
         [Parameter]
         public StringNumber Width { get; set; }
 
-        public List<DataTableHeader<TItem>> ComputedHeaders
+        public IEnumerable<DataTableHeader<TItem>> ComputedHeaders
         {
             get
             {
@@ -164,7 +164,7 @@ namespace MASA.Blazor
 
         public Dictionary<string, object> ColspanAttrs => new()
         {
-            { "colspan", HeadersLength > 0 ? HeadersLength : ComputedHeaders.Count }
+            { "colspan", HeadersLength > 0 ? HeadersLength : ComputedHeaders.Count() }
         };
 
         public List<DataTableHeader<TItem>> HeadersWithCustomFilters
@@ -214,15 +214,15 @@ namespace MASA.Blazor
             base.OnInitialized();
 
             CustomFilter = CustomFilterWithColumns;
-            ItemValues = Headers.Select(header => new ItemValue<TItem>(header.Value)).ToList();
+            ItemValues = Headers.Select(header => new ItemValue<TItem>(header.Value));
         }
 
-        private List<TItem> CustomFilterWithColumns(List<TItem> items, IEnumerable<ItemValue<TItem>> filter, string search)
+        private IEnumerable<TItem> CustomFilterWithColumns(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>> filter, string search)
         {
             return SearchTableItems(items, search, HeadersWithCustomFilters, HeadersWithoutCustomFilters, CustomItemFilter);
         }
 
-        private List<TItem> SearchTableItems(List<TItem> items, string search, List<DataTableHeader<TItem>> headersWithCustomFilters, List<DataTableHeader<TItem>> headersWithoutCustomFilters, Func<object, string, TItem, bool> customItemFilter)
+        private IEnumerable<TItem> SearchTableItems(IEnumerable<TItem> items, string search, List<DataTableHeader<TItem>> headersWithCustomFilters, List<DataTableHeader<TItem>> headersWithoutCustomFilters, Func<object, string, TItem, bool> customItemFilter)
         {
             search = search?.Trim();
 
@@ -241,7 +241,7 @@ namespace MASA.Blazor
                 var matchesSearchTerm = string.IsNullOrWhiteSpace(search) || headersWithoutCustomFilters.Any(FilterFunc(item, search, customItemFilter));
 
                 return matcherColumnFilters && matchesSearchTerm;
-            }).ToList();
+            });
         }
 
         protected override void SetComponentClass()
@@ -276,13 +276,7 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Merge(typeof(BDataIteratorDefaultSlot<,>), typeof(BDataTableDefaultSlot<TItem, MDataTable<TItem>>))
-                .Apply(typeof(BDataTableCaption<,>), typeof(BDataTableCaption<TItem, MDataTable<TItem>>))
-                .Apply(typeof(BDataTableColgroup<,>), typeof(BDataTableColgroup<TItem, MDataTable<TItem>>))
-                .Apply(typeof(BDataTableHeaders<,>), typeof(BDataTableHeaders<TItem, MDataTable<TItem>>))
-                .Apply(typeof(BDataTableBody<,>), typeof(BDataTableBody<TItem, MDataTable<TItem>>))
-                .Apply(typeof(BDataTableFoot<,>), typeof(BDataTableFoot<TItem, MDataTable<TItem>>))
-                .Apply(typeof(BDataTableFooters<,>), typeof(BDataTableFooters<TItem, MDataTable<TItem>>))
+                .ApplyDataTableDefault<TItem>()
                 .Apply(typeof(BDataTableHeader), typeof(MDataTableHeader), props =>
                 {
                     foreach (var prop in HeaderProps)
@@ -299,13 +293,10 @@ namespace MASA.Blazor
                     props[nameof(MDataTableHeader.SingleSelect)] = SingleSelect;
                     props[nameof(MDataTableHeader.DisableSort)] = DisableSort;
                     props[nameof(MDataTableHeader.HeaderColContent)] = HeaderColContent;
-                    //TODO:onsort,ongroup,on-toggle-select-all
                     props[nameof(MDataTableHeader.OnToggleSelectAll)] = EventCallback.Factory.Create<bool>(this, ToggleSelectAll);
                     props[nameof(MDataTableHeader.OnSort)] = EventCallback.Factory.Create<string>(this, Sort);
                     props[nameof(MDataTableHeader.OnGroup)] = EventCallback.Factory.Create<string>(this, Group);
                 })
-                .Apply(typeof(BDataTableLoading<,>), typeof(BDataTableLoading<TItem, MDataTable<TItem>>))
-                .Apply(typeof(BLoadableProgress<>), typeof(BLoadableProgress<MDataTable<TItem>>))
                 .Apply(typeof(BProgressLinear), typeof(MProgressLinear), props =>
                 {
                     props[nameof(MProgressLinear.Absolute)] = true;
@@ -331,27 +322,19 @@ namespace MASA.Blazor
                     props[nameof(MSimpleCheckbox.Value)] = IsSelected(item);
                     props[nameof(MSimpleCheckbox.Color)] = CheckboxColor ?? "";
                     props[nameof(MSimpleCheckbox.OnInput)] = EventCallback.Factory.Create<bool>(this, val =>
-                    {
-                        Select(item, val);
-                    });
+                   {
+                       Select(item, val);
+                   });
                 })
                 .Apply(typeof(BDataTableRow<>), typeof(MDataTableRow<TItem>), props =>
                 {
                     props[nameof(MDataTableRow<TItem>.Headers)] = ComputedHeaders;
-                    props[nameof(MDataTableRow<TItem>.IsSelected)] = IsSelected;
+                    props[nameof(MDataTableRow<TItem>.IsSelected)] = (Func<TItem, bool>)IsSelected;
                     props[nameof(MDataTableRow<TItem>.ItemColContent)] = ItemColContent;
-                    props[nameof(MDataTableRow<TItem>.IsExpanded)] = IsExpanded;
+                    props[nameof(MDataTableRow<TItem>.IsExpanded)] = (Func<TItem, bool>)IsExpanded;
                     props[nameof(MDataTableRow<TItem>.Stripe)] = Stripe;
                 })
-                .Apply(typeof(BDataTableItems<,>), typeof(BDataTableItems<TItem, MDataTable<TItem>>))
-                .Apply(typeof(BDataTableGroupedRows<,>), typeof(BDataTableGroupedRows<TItem, MDataTable<TItem>>))
-                .Apply(typeof(BDataTableDefaultRows<,>), typeof(BDataTableDefaultRows<TItem, MDataTable<TItem>>))
-                .Apply(typeof(BDataTableDefaultExpandedRow<,>), typeof(BDataTableDefaultExpandedRow<TItem, MDataTable<TItem>>))
                 .Apply(typeof(BDataTableRowGroup), typeof(MDataTableRowGroup))
-                .Apply(typeof(BDataTableDefaultGroupedRow<,>), typeof(BDataTableDefaultGroupedRow<TItem, MDataTable<TItem>>))
-                .Apply(typeof(BDataTableDefaultSimpleRow<,>), typeof(BDataTableDefaultSimpleRow<TItem, MDataTable<TItem>>))
-                .Apply(typeof(BDataTableRows<,>), typeof(BDataTableRows<TItem, MDataTable<TItem>>))
-                .Merge(typeof(BDataIteratorEmptyWrapper), typeof(BDataTableEmptyWrapper<TItem, MDataTable<TItem>>))
                 .Apply<BIcon, MIcon>("expand-icon", props =>
                 {
                     var item = (TItem)props["_data"];
@@ -385,8 +368,6 @@ namespace MASA.Blazor
 
         public void ToggleGroup(string group)
         {
-            Console.WriteLine("toggle-group");
-
             var open = OpenCache.GetValueOrDefault(group);
             OpenCache[group] = !open;
         }

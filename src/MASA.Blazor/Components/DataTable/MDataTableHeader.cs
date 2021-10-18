@@ -116,10 +116,7 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply(typeof(BDataTableHeaderHeader<>), typeof(BDataTableHeaderHeader<MDataTableHeader>))
-                .Apply(typeof(BDataTableHeaderSelectAll<>), typeof(BDataTableHeaderSelectAll<MDataTableHeader>))
-                .Apply(typeof(BDataTableHeaderSortIcon<>), typeof(BDataTableHeaderSortIcon<MDataTableHeader>))
-                .Apply(typeof(BDataTableGroupByToggle<>), typeof(BDataTableGroupByToggle<MDataTableHeader>))
+                .ApplyDataTableHeaderDefault()
                 .Apply<BSimpleCheckbox, MSimpleCheckbox>(props =>
                 {
                     props[nameof(Class)] = "m-data-table__checkbox";

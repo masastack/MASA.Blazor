@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 0
 title:
   zh-CN: 可清除
   en-US: Clearable

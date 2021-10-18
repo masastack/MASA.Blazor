@@ -1,5 +1,5 @@
 ---
-order: 0
+order: 2
 title:
   zh-CN: 进度条
   en-US: Progress

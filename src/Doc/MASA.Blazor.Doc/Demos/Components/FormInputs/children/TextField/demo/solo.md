@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 0
 title:
   zh-CN: 单独
   en-US: Solo

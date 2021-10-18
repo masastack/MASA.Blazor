@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 0
 title:
   zh-CN: 单行亮色主题
   en-US: SingleLine

@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-v-data-table 使用 v-data-footer 组件渲染一个默认的表脚。 你可以使用 footer-props 将属性传递给这个组件。
+`MDataTable` 使用 `MDataFooter` 组件渲染一个默认的表脚。 你可以使用 `FooterProps` 将属性传递给这个组件。
 
 ## en-US
 
-The simple table is a wrapper component around the table element.
+TODO...

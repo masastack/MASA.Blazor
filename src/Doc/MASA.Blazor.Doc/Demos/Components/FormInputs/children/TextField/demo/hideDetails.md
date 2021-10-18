@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 0
 title:
   zh-CN: 隐藏详细信息
   en-US: HideDatails

@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-你可以应用 hide-default-header 和 hide-default-footer属性，分别移除默认表头和表脚。
+你可以应用 HideDefaultHeader 和 HideDefaultFooter属性，分别移除默认表头和表脚。
 
 ## en-US
 
-The simple table is a wrapper component around the table element.
+TODO...

@@ -1,7 +1,7 @@
 ﻿<MDataTable FixedRight
             Headers="_headers"
             Items="_desserts"
-            Width="1000"
+            Width="@("120%")"
             ItemKey="r=>r.Name"
             Class="elevation-1">
     <ItemColContent>
@@ -50,7 +50,7 @@
           new (){ Text= "Fat (g)", Value= nameof(Dessert.Fat)},
           new (){ Text= "Carbs (g)", Value= nameof(Dessert.Carbs)},
           new (){ Text= "Protein (g)", Value= nameof(Dessert.Protein)},
-          new (){ Text= "Actions", Value= "actions",Sortable=false }
+          new (){ Text= "Actions", Value= "actions",Sortable=false,Width="100px",Align="center" }
         };
 
     private List<Dessert> _desserts = new List<Dessert>

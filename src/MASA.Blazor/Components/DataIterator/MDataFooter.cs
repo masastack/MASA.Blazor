@@ -11,6 +11,7 @@ namespace MASA.Blazor
 {
     public class MDataFooter : BDataFooter, IDataFooter
     {
+        //TODO:Internationalization
         [Parameter]
         public string ItemsPerPageText { get; set; } = "Rows per page:";
 
@@ -24,7 +25,7 @@ namespace MASA.Blazor
         public EventCallback<Action<DataOptions>> OnOptionsUpdate { get; set; }
 
         [Parameter]
-        public List<OneOf<int, DataItemsPerPageOption>> ItemsPerPageOptions { get; set; } = new()
+        public IEnumerable<OneOf<int, DataItemsPerPageOption>> ItemsPerPageOptions { get; set; } = new List<OneOf<int, DataItemsPerPageOption>>()
         {
             5,
             10,
@@ -68,7 +69,7 @@ namespace MASA.Blazor
         [Inject]
         public GlobalConfig GlobalConfig { get; set; }
 
-        public List<DataItemsPerPageOption> ComputedDataItemsPerPageOptions
+        public IEnumerable<DataItemsPerPageOption> ComputedDataItemsPerPageOptions
         {
             get
             {
@@ -77,7 +78,7 @@ namespace MASA.Blazor
                      {
                          Text = r.AsT0 == -1 ? ItemsPerPageAllText : r.AsT0.ToString(),
                          Value = r.AsT0
-                     }).ToList();
+                     });
             }
         }
 
@@ -147,23 +148,21 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply(typeof(BDataFooterItemsPerPageSelect<>), typeof(BDataFooterItemsPerPageSelect<MDataFooter>))
-                .Apply(typeof(BDataFooterPaginationInfo<>), typeof(BDataFooterPaginationInfo<MDataFooter>))
-                .Apply(typeof(BDataFooterIcons<>), typeof(BDataFooterIcons<MDataFooter>))
-                .Apply(typeof(BDataFooterIcon<>), typeof(BDataFooterIcon<MDataFooter>))
+                .ApplyDataFooterDefault()
                 .Apply(typeof(ISelect<,,>), typeof(MSelect<DataItemsPerPageOption, int, int>), props =>
                 {
                     var value = Options.ItemsPerPage;
-                    if (ComputedDataItemsPerPageOptions.Find(r => r.Value == value) == null)
+                    var first = ComputedDataItemsPerPageOptions.FirstOrDefault(r => r.Value == value);
+                    if (first == null)
                     {
-                        value = ComputedDataItemsPerPageOptions[0].Value;
+                        value = first.Value;
                     }
 
                     Func<DataItemsPerPageOption, int> itemValue = r => r.Value;
                     Func<DataItemsPerPageOption, string> itemText = r => r.Text;
 
                     props[nameof(MSelect<DataItemsPerPageOption, int, int>.Disabled)] = DisableItemsPerPage;
-                    props[nameof(MSelect<DataItemsPerPageOption, int, int>.Items)] = ComputedDataItemsPerPageOptions;
+                    props[nameof(MSelect<DataItemsPerPageOption, int, int>.Items)] = ComputedDataItemsPerPageOptions.ToList();
                     props[nameof(MSelect<DataItemsPerPageOption, int, int>.Value)] = value;
                     props[nameof(MSelect<DataItemsPerPageOption, int, int>.ItemValue)] = itemValue;
                     props[nameof(MSelect<DataItemsPerPageOption, int, int>.ItemText)] = itemText;

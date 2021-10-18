@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-使用 dense 属性，可以让数据表格表现为另一种样式。
+使用 Dense 属性，可以让数据表格表现为另一种样式。
 
 ## en-US
 
-The simple table is a wrapper component around the table element.
+TODO...

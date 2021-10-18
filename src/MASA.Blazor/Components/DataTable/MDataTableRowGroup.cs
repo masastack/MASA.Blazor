@@ -9,6 +9,6 @@ namespace MASA.Blazor
 {
     public class MDataTableRowGroup : BDataTableRowGroup
     {
-        public override string HeaderClass => "m-row-group__header";
+        protected override string HeaderClass => "m-row-group__header";
     }
 }

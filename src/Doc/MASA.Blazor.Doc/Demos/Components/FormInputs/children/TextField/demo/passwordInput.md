@@ -1,5 +1,5 @@
 ---
-order: 0
+order: 3
 title:
   zh-CN: 密码输入
   en-US: PasswordInput

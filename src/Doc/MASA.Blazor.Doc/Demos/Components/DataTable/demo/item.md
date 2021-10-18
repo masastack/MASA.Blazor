@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-The simple table is a wrapper component around the table element.
+TODO...
