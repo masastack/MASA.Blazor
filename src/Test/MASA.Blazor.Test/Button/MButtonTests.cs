@@ -25,6 +25,7 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.IsTrue(hasBlockClass);
         }
+
         [TestMethod]
         public void RenderButtonWithDepressed()
         {
@@ -39,6 +40,7 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.IsTrue(noElevatedClass);
         }
+
         [TestMethod]
         public void RenderButtonWithFab()
         {
@@ -53,6 +55,7 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.IsTrue(hasFabClass);
         }
+
         [TestMethod]
         public void RenderButtonWithRound()
         {
@@ -67,6 +70,7 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.IsTrue(hasRoundClass);
         }
+
         [TestMethod]
         public void RenderButtonWithDefault()
         {
@@ -81,6 +85,7 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.IsTrue(hasDefaultClass);
         }
+
         [TestMethod]
         public void RenderButtonWithOutlined()
         {
@@ -95,6 +100,7 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.IsTrue(hasoutlinedClass);
         }
+
         [TestMethod]
         public void RenderButtonWithPlain()
         {
@@ -109,6 +115,7 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.IsTrue(hasPlainClass);
         }
+
         [TestMethod]
         public void RenderButtonWithRounded()
         {
@@ -124,6 +131,7 @@ namespace MASA.Blazor.Test.Button
             Assert.IsTrue(hasRoundedClass);
 
         }
+
         [TestMethod]
         public void RenderButtonWithLight()
         {
@@ -139,6 +147,7 @@ namespace MASA.Blazor.Test.Button
             Assert.IsTrue(hasLightClass);
 
         }
+
         [TestMethod]
         public void RenderButtonWithText()
         {
@@ -153,6 +162,7 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.IsTrue(hasTextClass);
         }
+
         [TestMethod]
         public void RenderButtonWithTile()
         {
@@ -167,6 +177,7 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.IsTrue(hasTileClass);
         }
+
         [TestMethod]
         public void RenderButtonWithIcon()
         {
@@ -181,6 +192,7 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.IsTrue(hasIconClass);
         }
+
         [TestMethod]
         public void RenderButtonWithAbsolute()
         {
@@ -195,6 +207,7 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.IsTrue(hasAbsoluteClass);
         }
+
         [TestMethod]
         public void RenderButtonWithBottom()
         {
@@ -209,6 +222,7 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.IsTrue(hasBottomClass);
         }
+
         [TestMethod]
         public void RenderButtonWithDisabled()
         {
@@ -223,6 +237,7 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.IsTrue(hasDisabledClass);
         }
+
         [TestMethod]
         public void RenderButtonWithFixed()
         {
@@ -237,6 +252,128 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.IsTrue(hasFixedClass);
         }
+
+        [TestMethod]
+        public void RenderButtonWithLeft()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.Left, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLeftClass = classes.Contains("m-btn--left");
+
+            // Assert
+            Assert.IsTrue(hasLeftClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonWithLoading()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.Loading, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLoadingClass = classes.Contains("m-btn--loading");
+
+            // Assert
+            Assert.IsTrue(hasLoadingClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonWithRight()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.Right, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasRightClass = classes.Contains("m-btn--right");
+
+            // Assert
+            Assert.IsTrue(hasRightClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonWithTop()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.Top, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTopClass = classes.Contains("m-btn--top");
+
+            // Assert
+            Assert.IsTrue(hasTopClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonWithXLarge()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.XLarge, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasXLargeClass = classes.Contains("m-size--x-large");
+
+            // Assert
+            Assert.IsTrue(hasXLargeClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonWithLarge()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.Large, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLargeClass = classes.Contains("m-size--large");
+
+            // Assert
+            Assert.IsTrue(hasLargeClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonWithSmall()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.Small, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSmallClass = classes.Contains("m-size--small");
+
+            // Assert
+            Assert.IsTrue(hasSmallClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonWithXSmall()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.XSmall, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasXSmallClass = classes.Contains("m-size--x-small");
+
+            // Assert
+            Assert.IsTrue(hasXSmallClass);
+        }
+
+        
 
         [TestMethod]
         public void RenderButtonAndClick()
