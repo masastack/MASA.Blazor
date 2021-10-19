@@ -64,7 +64,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Demos\Components\ButtonGroup\demo\" />
 		<Folder Include="wwwroot\meta\" />
 	</ItemGroup>
 

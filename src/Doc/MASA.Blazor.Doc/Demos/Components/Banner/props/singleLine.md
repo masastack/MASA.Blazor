@@ -1,8 +1,8 @@
 ---
 order: 0
 title:
-  zh-CN: 属性
-  en-US: Basic
+  zh-CN: 单行亮色主题
+  en-US: Single line
 ---
 
 ## zh-CN

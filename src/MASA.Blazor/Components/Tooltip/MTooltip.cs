@@ -211,6 +211,8 @@ namespace MASA.Blazor
 
         private double CalculatedLeft()
         {
+            if (_activatorRect == null) return 0;
+
             bool unknown = !Bottom && !Left && !Top && !Right;
             double left = 0;
 
@@ -268,6 +270,8 @@ namespace MASA.Blazor
 
         private async Task<double> CalculatedTop()
         {
+            if (_activatorRect == null) return 0;
+            
             double top = 0;
 
             if (Top || Bottom)
@@ -354,10 +358,9 @@ namespace MASA.Blazor
 
             _bodyRect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, "document");
 
-            var acvivator = Document.QuerySelector($"[_activator_{ActivatorId}]");
+            var activator = Document.QuerySelector($"[_activator_{ActivatorId}]");
 
-            var aa = await acvivator.GetBoundingClientRectAsync();
-            _activatorRect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, acvivator.Selectors);
+            _activatorRect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, activator.Selectors);
 
             _contentRect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, ContentRef);
 
