@@ -23,7 +23,7 @@ namespace MASA.Blazor
         public bool Link { get; set; }
 
         [Parameter]
-        public bool Loading { get; set; }
+        public StringBoolean Loading { get; set; }
 
         [Parameter]
         public bool Disabled { get; set; }
@@ -80,7 +80,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--flat", () => Flat)
                         .AddIf($"{prefix}--hover", () => Hover)
                         .AddIf($"{prefix}--link", () => Link || OnClick.HasDelegate)
-                        .AddIf($"{prefix}--loading", () => Loading)
+                        .AddIf($"{prefix}--loading", () => Loading!=false)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--raised", () => Raised)
                         .AddBackgroundColor(Color);

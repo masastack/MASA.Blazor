@@ -13,3 +13,7 @@ MCard 组件是一个可用于从面板到静态图像的多功能组件。 卡 
 ## API
 
 - [MCard](/docs/api/MCard)
+- [MCardActions](/docs/api/MCardActions)
+- [MCardSubtitle](/docs/api/MCardSubtitle)
+- [MCardText](/docs/api/MCardText)
+- [MCardTitle](/docs/api/MCardTitle)
