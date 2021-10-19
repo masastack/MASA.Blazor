@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Bunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,16 @@ using System.Threading.Tasks;
 namespace MASA.Blazor.Test.Button
 {
     [TestClass]
-    public class MButtonTests: TestBase
+    public class MButtonTests : TestBase
     {
         [TestMethod]
-        public void RenderButtonWithBlock() 
+        public void RenderButtonWithBlock()
         {
-             //Act
-             var cut = RenderComponent<MButton>(props=>
-             {
-                 props.Add(button => button.Block, true);
-             });
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.Block, true);
+            });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasBlockClass = classes.Contains("m-btn--block");
 
@@ -136,7 +137,7 @@ namespace MASA.Blazor.Test.Button
 
             // Assert
             Assert.IsTrue(hasLightClass);
-        
+
         }
         [TestMethod]
         public void RenderButtonWithText()
@@ -235,6 +236,27 @@ namespace MASA.Blazor.Test.Button
 
             // Assert
             Assert.IsTrue(hasFixedClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonAndClick()
+        {
+            // Arrange
+            var times = 0;
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.OnClick, args =>
+                {
+                    times++;
+                });
+            });
+
+            // Act
+            var buttonElement = cut.Find("button");
+            buttonElement.Click();
+
+            // Assert
+            Assert.AreEqual(1, times);
         }
     }
 }

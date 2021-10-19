@@ -14,82 +14,40 @@ namespace MASA.Blazor.Test.TextField
     public class MTextFieldTests : TestBase
     {
         [TestMethod]
-        public void RenderShouldHasNoEmptyComponent()
+        public void RenderNormal()
         {
             // Act
             var cut = RenderComponent<MTextField<string>>();
-            var components = cut.FindComponents<EmptyComponent>();
+            var inputDiv = cut.Find("div");
 
             // Assert
-            Assert.AreEqual(0, components.Count);
+            Assert.AreEqual(4, inputDiv.ClassList.Length);
+            Assert.IsTrue(inputDiv.ClassList.Contains("m-input"));
+            Assert.IsTrue(inputDiv.ClassList.Contains("theme--light"));
+            Assert.IsTrue(inputDiv.ClassList.Contains("m-text-field"));
+            Assert.IsTrue(inputDiv.ClassList.Contains("m-text-field--is-booted"));
+            Assert.IsTrue(inputDiv.ClassList.Contains("m-input"));
         }
 
-        [TestMethod]
-        public void RenderShouldHasClasses()
-        {
-            // Act
-            var cut = RenderComponent<MTextField<string>>();
-            var classes = cut.Instance.CssProvider.GetClass();
-
-            // Assert
-            Assert.AreEqual("m-input theme--light m-text-field m-text-field--is-booted", classes);
-        }
-
-        [TestMethod]
-        public void RenderSoloIsSoloShouldBeTrue()
-        {
-            // Act
-            var cut = RenderComponent<MTextField<string>>(props =>
-            {
-                props.Add(p => p.Solo, true);
-            });
-
-            // Assert
-            Assert.IsTrue(cut.Instance.IsSolo);
-        }
-
-        [TestMethod]
-        public async Task HandleOnChangeValueShouldChange()
+        [DataTestMethod]
+        [DataRow("red")]
+        [DataRow("blue")]
+        public void RenderWithColorAndFocus(string color)
         {
             // Arrange
-            var cut = RenderComponent<MTextField<string>>();
-            var args = new ChangeEventArgs()
-            {
-                Value = "hello"
-            };
-
-            // Act
-            await cut.Instance.HandleOnChangeAsync(args);
-
-            // Assert
-            Assert.AreEqual("hello", cut.Instance.Value);
-        }
-
-        [TestMethod]
-        public async Task HandleOnChangeValueChangedShouldBeCalled()
-        {
-            // Arrange
-            using var factory = new TestEventCallbackFactory();
-
-            var val = "";
             var cut = RenderComponent<MTextField<string>>(props =>
             {
-                props.Add(p => p.ValueChanged, factory.CreateEventCallback<string>(v =>
-                {
-                    val = v;
-                }));
+                props.Add(r => r.Color, color);
             });
+            var inputDiv = cut.Find("div");
+            var inputElement = cut.Find("input");
 
             // Act
-            var args = new ChangeEventArgs()
-            {
-                Value = "hello"
-            };
-            await factory.Reciever.InvokeAsync(() => cut.Instance.HandleOnChangeAsync(args));
+            inputElement.Focus();
 
             // Assert
-            Assert.AreEqual("hello", cut.Instance.Value);
-            Assert.AreEqual("hello", val);
+            Assert.AreEqual(6, inputDiv.ClassList.Length);
+            Assert.IsTrue(inputDiv.ClassList.Contains(color + "--text"));
         }
     }
 }

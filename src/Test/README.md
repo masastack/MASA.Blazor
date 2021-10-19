@@ -16,7 +16,7 @@
 
 ​	开发工具：
 
-- [.NET 6 Preview 7](https://dotnet.microsoft.com/download/dotnet/6.0)
+- [.NET 6 rc-2](https://dotnet.microsoft.com/download/dotnet/6.0)
 - [vs2022](https://visualstudio.microsoft.com/zh-hans/vs/preview/) 
 
 ### 2.2 项目结构
@@ -46,104 +46,83 @@ MASA.Blazor
 
 #### 2.3.3 测试样式
 
-##### 1、默认样式
+##### 1、class
 
 ```c#
-			// Act
-			var cut = RenderComponent<MInput<string>>();
-			var classes = cut.Instance.CssProvider.GetClass();
+		[TestMethod]
+        public void RenderNormal()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<MInput<string>>();
+            var inputDiv = cut.Find("div");
 
-			// Assert
-			Assert.AreEqual("m-input theme--light", classes);
+            // Assert
+            Assert.AreEqual(2, inputDiv.ClassList.Length);
+            Assert.IsTrue(inputDiv.ClassList.Contains("m-input"));
+            Assert.IsTrue(inputDiv.ClassList.Contains("theme--light"));
+        }
 ```
 
-##### 2、IsDisabled样式
+##### 2、style
 
 ```c#
-			// Act
-			var cut = RenderComponent<TestInput>(props =>
-			{
-				props.Add(p => p.MockIsDisabled, true);
-			});
-			var input = cut.Instance;
-			var classes = input.CssProvider.GetClass();
+		[TestMethod]
+        public void RenderWithHeight()
+        {
+            // Act
+            var cut = RenderComponent<MInput<string>>(props =>
+            {
+                props.Add(p => p.Height, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-input__slot");
+            var style = inputSlotDiv.GetAttribute("style");
 
-			// Assert
-			Assert.IsTrue(input.IsDisabled);
-			Assert.AreEqual("m-input m-input--is-disabled theme--light", classes);
+            // Assert
+            Assert.AreEqual("height: 100px", style);
+        }
 ```
 
-​	这里Mock了一个IsDisabled，主要目的在于测试m-input--is-disabled是否由IsDisabled属性决定，计算属性IsDisabled会另行测试。
-
-#### 2.3.4 测试计算属性
-
-ComputedColor的默认值应该是primary。
+#### 2.3.4 测试事件
 
 ```c#
-			// Act
-			var cut = RenderComponent<TestInput>();
+		[TestMethod]
+        public void RenderButtonAndClick()
+        {
+            // Arrange
+            var times = 0;
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.OnClick, args =>
+                {
+                    times++;
+                });
+            });
 
-			// Assert
-			Assert.AreEqual("primary", cut.Instance.ComputedColor);
+            // Act
+            var buttonElement = cut.Find("button");
+            buttonElement.Click();
+
+            // Assert
+            Assert.AreEqual(1, times);
+        }
 ```
 
-如果设置了Color则ComputedColor应该是Color
+#### 2.3.5 测试插槽
 
 ```c#
-			// Act
-			var cut = RenderComponent<TestInput>(props =>
-			{
-				props.Add(r => r.Color, color);
-			});
+		[TestMethod]
+        public void RenderWithChildContent()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<MAlert>(props =>
+            {
+                props.Add(alert => alert.ChildContent, "<span>Hello world</span>");
+            });
+            var contentDiv = cut.Find(".m-alert__content");
 
-			// Assert
-			Assert.AreEqual(color, cut.Instance.ComputedColor);
-```
-
-#### 2.3.5 测试事件
-
-HandleOnChange会被组件的部件调用，这里只需要测试它是否正常工作。
-
-```c#
-			// Arrange
-			var cut = RenderComponent<MTextField<string>>();
-			var args = new ChangeEventArgs()
-			{
-				Value = "hello"
-			};
-
-			// Act
-			await cut.Instance.HandleOnChange(args);
-
-			// Assert
-			Assert.AreEqual("hello", cut.Instance.Value);
-```
-
-HandleOnChange还会调用ValueChanged,这里测试ValueChanged是否正常工作。
-
-```c#
-			// Arrange
-			using var factory = new TestEventCallbackFactory();
-
-			var val = "";
-			var cut = RenderComponent<MTextField<string>>(props =>
-			{
-				props.Add(p => p.ValueChanged, factory.CreateEventCallback<string>(v =>
-				{
-					val = v;
-				}));
-			});
-
-			// Act
-			var args = new ChangeEventArgs()
-			{
-				Value = "hello"
-			};
-			await factory.Reciever.InvokeAsync(() => cut.Instance.HandleOnChange(args));
-
-			// Assert
-			Assert.AreEqual("hello", cut.Instance.Value);
-			Assert.AreEqual("hello", val);
+            // Assert
+            contentDiv.Children.MarkupMatches("<span>Hello world</span>");
+        }
 ```
 
 
