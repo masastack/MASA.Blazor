@@ -16,7 +16,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-tab")
-                        .AddIf("m-tab--active", () => IsActive);
+                        .AddIf($"m-tab--active {ComputedActiveClass}", () => IsActive);
                 });
         }
     }
