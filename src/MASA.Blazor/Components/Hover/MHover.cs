@@ -27,7 +27,7 @@ namespace MASA.Blazor
                 .Apply(cssBuilder => 
                 {
                     cssBuilder
-                        .AddIf("on-hover", () => IsActive);
+                        .AddIf("on-hover", () => _isActive);
                 },styleBuilder =>
                 {
                     styleBuilder
@@ -40,7 +40,7 @@ namespace MASA.Blazor
             if(OpenDelay != null && OpenDelay.ToInt32() > 0)
                 await Task.Delay(OpenDelay.ToInt32());
 
-            IsActive = !Disabled || IsActive;
+            _isActive = !Disabled || _isActive;
         }
 
         protected virtual async Task MouseOut(MouseEventArgs e)
@@ -48,7 +48,7 @@ namespace MASA.Blazor
             if (CloseDelay != null && CloseDelay.ToInt32() > 0)
                 await Task.Delay(CloseDelay.ToInt32());
 
-            IsActive = Disabled && IsActive;
+            _isActive = Disabled && _isActive;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
