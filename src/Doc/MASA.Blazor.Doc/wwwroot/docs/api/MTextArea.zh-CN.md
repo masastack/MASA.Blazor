@@ -1,6 +1,6 @@
 ﻿---
 order: 0
-title: MTextArea
+title: MTextarea
 ---
 
 ## 属性
