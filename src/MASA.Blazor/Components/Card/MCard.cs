@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlazorComponent;
+﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
@@ -46,6 +41,9 @@ namespace MASA.Blazor
         [Parameter]
         public string Img { get; set; }
 
+        [Parameter]
+        public StringNumber Elevation { get; set; }
+
         public bool IsDark
         {
             get
@@ -62,7 +60,7 @@ namespace MASA.Blazor
 
                 return Themeable != null && Themeable.IsDark;
             }
-        } 
+        }
 
         protected override void SetComponentClass()
         {
@@ -72,7 +70,8 @@ namespace MASA.Blazor
                 .Apply(cssBuilder =>
                 {
                     cssBuilder.Add("m-card")
-                        .AddIf("elevation-2", () => !Outlined && !Flat)
+                        //TODO:fix here
+                        .AddIf($"elevation-{Elevation}", () => Elevation != null && Elevation.ToInt32() > 0)
                         .AddTheme(IsDark)
                         .Add("m-sheet")
                         .AddIf("m-sheet--outlined", () => Outlined)
