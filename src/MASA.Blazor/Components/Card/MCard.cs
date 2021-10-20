@@ -18,9 +18,6 @@ namespace MASA.Blazor
         public bool Link { get; set; }
 
         [Parameter]
-        public bool Loading { get; set; }
-
-        [Parameter]
         public bool Disabled { get; set; }
 
         [Parameter]
