@@ -22,10 +22,22 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
+      "Name": "Bottom",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "在移动设备上从屏幕底部展开"
+    },
+    {
       "Name": "Clipped",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "在应用程序工具栏下面有一个被夹住的抽屉。注意:要求在v-app-bar上夹左或夹右支柱按预期工作"
+      "Description": "在应用程序工具栏下面有一个被夹住的抽屉。注意:要求在MAppBar上夹左或夹右支柱按预期工作"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "",
+      "Description": "将指定的颜色应用于控件 - 它可以是材质颜色的名称（例如成功或紫色）或 css 颜色（#033 或 rgba(255, 0, 0, 0.5)）。"
     },
     {
       "Name": "Dark",
@@ -34,10 +46,16 @@
       "Description": "将暗色主题变量应用到组件。"
     },
     {
-      "Name": "Drawer",
+      "Name": "DisableResizeWatcher",
       "Type": "Boolean",
       "Default": "false",
-      "Description": ""
+      "Description": "调整大小时将自动打开/关闭抽屉，具体取决于移动设备还是桌面设备。"
+    },
+    {
+      "Name": "DisableRouteWatcher",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "路线更改时禁用导航抽屉的打开。"
     },
     {
       "Name": "ExpandOnHover",
@@ -63,22 +81,23 @@
       "Default": "",
       "Description": "设定组件的高度。"
     },
+
     {
-      "Name": "IsActive",
+      "Name": "Light",
       "Type": "Boolean",
       "Default": "false",
-      "Description": ""
+      "Description": "将亮色主题变量应用到组件。"
     },
     {
-      "Name": "IsBottom",
+      "Name": "MiniVariant",
       "Type": "Boolean",
       "Default": "false",
-      "Description": ""
+      "Description": "压缩导航抽屉宽度。"
     },
     {
       "Name": "MiniVariantWidth",
       "Type": "StringNumber",
-      "Default": "",
+      "Default": "56",
       "Description": "指定mini属性开期时指定的宽度"
     },
     {
@@ -86,6 +105,12 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "将抽屉放置在右侧"
+    },
+    {
+      "Name": "Src",
+      "Type": "String|Object",
+      "Default": "",
+      "Description": "指定一个 MImage 作为组件的背景。"
     },
     {
       "Name": "Style",
@@ -108,8 +133,14 @@
     {
       "Name": "Width",
       "Type": "StringNumber",
-      "Default": "",
+      "Default": "256",
       "Description": "设定组件的宽度。"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "控制组件是可见的还是隐藏的。"
     }
   ],
   "Contents": [
@@ -120,6 +151,14 @@
     {
       "Name": "PrependContent",
       "Description": "抽屉顶部的插槽"
+    },
+    {
+      "Name": "ImgContent",
+      "Description": "用于在使用 Src 属性时修改 MImage 属性的插槽"
+    },
+    {
+      "Name": "AppendContent",
+      "Description": "抽屉底部的插槽"
     }
   ],
   "Events": []

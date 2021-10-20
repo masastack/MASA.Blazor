@@ -1,11 +1,12 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using System.Collections.Generic;
-
+using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MNavigationDrawer : BNavigationDrawer,IThemeable
+    public partial class MNavigationDrawer : BNavigationDrawer, INavigationDrawer
     {
         private StringNumber _height;
 
@@ -46,13 +47,56 @@ namespace MASA.Blazor
         /// Expands from the bottom of the screen on mobile devices
         /// </summary>
         [Parameter]
-        public bool IsBottom { get; set; }
+        public bool Bottom { get; set; }
 
         [Parameter]
         public bool Clipped { get; set; }
 
         [Parameter]
-        public bool IsActive { get; set; } = true;
+        public bool DisableResizeWatcher { get; set; }
+
+        [Parameter]
+        public bool DisableRouteWatcher { get; set; }
+
+        [Parameter]
+        public bool Permanent { get; set; }
+
+        [Parameter]
+        public bool Stateless { get; set; }
+
+        [Parameter]
+        public bool Touchless { get; set; }
+
+        /// <summary>
+        /// Designates the width assigned when the mini prop is turned on
+        /// </summary>
+        [Parameter]
+        public StringNumber MiniVariantWidth { get; set; } = 56;
+
+        /// <summary>
+        /// A floating drawer has no visible container (no border-right)
+        /// </summary>
+        [Parameter]
+        public bool Floating { get; set; }
+
+        private bool _value = true;
+
+        [Parameter]
+        public bool Value
+        {
+            get => _value;
+            set
+            {
+                if (value == _value) return;
+                _value = value;
+                ValueChanged.InvokeAsync(_value);
+            }
+        }
+
+        public bool _isActive => Value;
+
+        [Parameter]
+        public EventCallback<bool> ValueChanged { get; set; }
 
         /// <summary>
         /// Designates the component as part of the application layout. Used for dynamically adjusting content sizing.
@@ -71,37 +115,9 @@ namespace MASA.Blazor
         public bool Fixed { get; set; }
 
         /// <summary>
-        /// A floating drawer has no visible container (no border-right)
-        /// </summary>
-        [Parameter]
-        public bool Floating { get; set; }
-
-        /// <summary>
         /// This should be down in next version
         /// </summary>
         public bool Mobile { get; }
-
-        /// <summary>
-        /// This should be down in next version
-        /// </summary>
-        public bool IsMouseover { get; }
-
-        /// <summary>
-        /// This should be down in next version
-        /// </summary>
-        public bool IsMiniVariant { get; }
-
-        /// <summary>
-        /// Designates the width assigned when the mini prop is turned on
-        /// </summary>
-        [Parameter]
-        public StringNumber MiniVariantWidth { get; set; } = 56;
-
-        /// <summary>
-        /// Collapses the drawer to a mini-variant until hovering with the mouse
-        /// </summary>
-        [Parameter]
-        public bool ExpandOnHover { get; set; }
 
         /// <summary>
         /// Places the navigation drawer on the right
@@ -109,6 +125,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool Right { get; set; }
 
+        //TODO 覆盖层使背景变暗
         /// <summary>
         /// A temporary drawer sits above its application and uses a scrim (overlay) to darken the background
         /// </summary>
@@ -145,7 +162,7 @@ namespace MASA.Blazor
             {
                 if (_top == null)
                 {
-                    return !IsBottom ? "0" : "auto";
+                    return !_isBottom ? "0" : "auto";
                 }
 
                 return _top;
@@ -156,21 +173,18 @@ namespace MASA.Blazor
             }
         }
 
-        /// <summary>
-        /// This should be down in next version
-        /// </summary>
         public int? MaxHeight { get; }
 
         public int? Transform
         {
             get
             {
-                if (IsActive)
+                if (_isActive)
                 {
                     return 0;
                 }
 
-                if (IsBottom)
+                if (_isBottom)
                 {
                     return 100;
                 }
@@ -185,30 +199,22 @@ namespace MASA.Blazor
         [Parameter]
         public StringNumber Width { get; set; } = "256px";
 
-        private bool _drawer;
+        [Parameter]
+        public RenderFragment AppendContent { get; set; }
 
         [Parameter]
-        public bool Drawer
-        {
-            get
-            {
-                return _drawer;
-            }
-            set
-            {
-                _drawer = value;
-                IsActive = _drawer;
-                StateHasChanged();
-            }
-        }
+        public RenderFragment PrependContent { get; set; }
 
-        public override List<BListItem> ListItems { get; set; } = new List<BListItem>();
+        [Parameter]
+        public string Color { get; set; }
+
+        protected bool _isBottom => Bottom && Mobile;
 
         protected override void OnInitialized()
         {
             if (Temporary)
             {
-                IsActive = false;
+                Value = false;
             }
 
             base.OnInitialized();
@@ -224,29 +230,30 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-navigation-drawer")
                         .AddIf($"{prefix}--absolute", () => Absolute)
-                        .AddIf($"{prefix}--bottom", () => IsBottom)
+                        .AddIf($"{prefix}--bottom", () => Bottom)
                         .AddIf($"{prefix}--clipped", () => Clipped)
-                        .AddIf($"{prefix}--close", () => !IsActive)
+                        .AddIf($"{prefix}--close", () => !_isActive)
                         .AddIf($"{prefix}--fixed", () => !Absolute && (App || Fixed))
                         .AddIf($"{prefix}--floating", () => Floating)
                         .AddIf($"{prefix}--is-mobile", () => Mobile)
-                        .AddIf($"{prefix}--is-mouseover", () => IsMouseover)
-                        .AddIf($"{prefix}--mini-variant", () => IsMiniVariant)
+                        .AddIf($"{prefix}--is-mouseover", () => _isMouseover)
+                        .AddIf($"{prefix}--mini-variant", () => _isMiniVariant)
                         .AddIf($"{prefix}--custom-mini-variant", () => MiniVariantWidth.IsT1 && MiniVariantWidth.AsT1 != 56)
-                        .AddIf($"{prefix}--open", () => IsActive)
+                        .AddIf($"{prefix}--open", () => _isActive)
                         .AddIf($"{prefix}--open-on-hover", () => ExpandOnHover)
                         .AddIf($"{prefix}--right", () => Right)
                         .AddIf($"{prefix}--temporary", () => Temporary)
                         .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
-                    var translate = IsBottom ? "translateY" : "translateX";
+                    var translate = _isBottom ? "translateY" : "translateX";
                     styleBuilder
-                        .Add($"height:{Height.ToUnit()}")
-                        .Add($"top:{Top.ToUnit()}")
+                        .AddHeight(Height)
+                        .Add($"top:{(!_isBottom ? Top.ToString() : "auto")}")
                         .AddIf(() => $"maxHeight:calc(100% - {MaxHeight})", () => MaxHeight != null)
                         .AddIf(() => $"transform:{translate}({Transform}%)", () => Transform != null)
-                        .Add($"width:{(IsMiniVariant ? MiniVariantWidth.ToUnit() : Width.ToUnit())}");
+                        .Add($"width:{(_isMiniVariant ? MiniVariantWidth.ToUnit() : Width.ToUnit())}")
+                        .AddBackgroundColor(Color);
                 })
                 .Apply("content", cssBuilder =>
                 {
@@ -261,24 +268,32 @@ namespace MASA.Blazor
                 .Apply("prepend", cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-navigation-drawer__prepend");
+                        .Add($"{prefix}__prepend");
+                })
+                .Apply("append", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add($"{prefix}__append");
+                })
+                .Apply("image", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add($"{prefix}__image");
                 });
 
             Attributes.Add("data-booted", "true");
-        }
 
-        public override void Select(BListItem selectItem)
-        {
-            foreach (var item in ListItems)
-            {
-                if (item is MListItem mItem)
+            AbstractProvider
+                .ApplyNavigationDrawerDefault()
+                .Apply(typeof(IImage), typeof(MImage), props =>
                 {
-                    if (mItem != selectItem)
-                    {
-                        mItem.Deactive();
-                    }
-                }
-            }
+                    props[nameof(MImage.Src)] = Src.Match(t0 => t0, t1 => t1.Src);
+                    props[nameof(MImage.LazySrc)] = Src.IsT1 ? Src.AsT1.LazySrc : string.Empty;
+                    props[nameof(MImage.Height)] = (StringNumber)"100%";
+                    props[nameof(MImage.Width)] = (StringNumber)"100%";
+                    props[nameof(MImage.Dark)] = Dark;
+                    props[nameof(MImage.Light)] = Light;
+                });
         }
     }
 }
