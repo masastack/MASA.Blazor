@@ -23,9 +23,6 @@ namespace MASA.Blazor
         public bool Link { get; set; }
 
         [Parameter]
-        public StringBoolean Loading { get; set; }
-
-        [Parameter]
         public bool Disabled { get; set; }
 
         [Parameter]
@@ -95,6 +92,7 @@ namespace MASA.Blazor
                         .AddMaxHeight(MaxHeight)
                         .AddIf($"background:url(\"{Img}\") center center / cover no-repeat", () => !string.IsNullOrWhiteSpace(Img));
                 });
+            AbstractProvider.Apply<BProgressLinear,MProgressLinear>();
         }
     }
 }

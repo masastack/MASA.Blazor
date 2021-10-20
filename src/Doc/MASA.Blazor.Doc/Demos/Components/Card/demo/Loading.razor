@@ -1,5 +1,5 @@
 ﻿<MCard MaxWidth="374" Loading=@loading>
-    <MProgressLinear Color="deep-purple" Height="10" Indeterminate/>
+  @*  <MProgressLinear Color="deep-purple" Height="10" Indeterminate/>*@
     <MImage Alt="example" Height="250" Src="https://cdn.vuetifyjs.com/images/cards/cooking.png" />
     <MCardTitle>Cafe Badilico</MCardTitle>
     <MCardText>
@@ -13,11 +13,11 @@
     <MDivider Class="mx-4"></MDivider>
     <MCardTitle>Tonight's availability</MCardTitle>
     <MCardText> 
-        <MChipGroup Value=1 ActiveClass="deep-purple accent-4 white--text" Column>
-            <MChip>5:30PM</MChip>
-            <MChip>7:30PM</MChip>
-            <MChip>8:00PM</MChip>
-            <MChip>9:00PM</MChip>
+        <MChipGroup Value=@selection ActiveClass="deep-purple accent-4 white--text" Column>
+            <MChip OnClick="()=>selection=0">5:30PM</MChip>
+            <MChip OnClick="()=>selection=1">7:30PM</MChip>
+            <MChip OnClick="()=>selection=2">8:00PM</MChip>
+            <MChip OnClick="()=>selection=3">9:00PM</MChip>
         </MChipGroup>
     </MCardText>
     <MCardActions>
@@ -26,10 +26,11 @@
 </MCard>
 
 @code{
-    bool loading;
+    StringBoolean loading;
+    int selection = 1;
     async Task Reserve()
     {
-        loading = true;
+        loading = "deep-purple";
         await Task.Delay(2000);
         loading = false;
     }
