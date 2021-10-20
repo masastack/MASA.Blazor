@@ -1,8 +1,8 @@
 ---
 order: 1
 title:
-  zh-CN: 事件
-  en-US: Event
+  zh-CN: 图标事件
+  en-US: Icon click
 ---
 
 ## zh-CN

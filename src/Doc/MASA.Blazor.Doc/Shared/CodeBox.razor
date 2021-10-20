@@ -2,12 +2,10 @@
 @using MASA.Blazor.Doc.Services
 @inherits OwningComponentBase<DemoService>
 
-<section id="@Id">
-    <h2 class="m-heading text-h4 text-sm-h4 mb-3">
-        <a @onclick="HandleOnClick" class="text-decoration-none text-right text-md-left">#</a>
-        @Demo.Title
-    </h2>
-    @((MarkupString)Demo.Description)
+@((MarkupString)Demo.Description)
+
+@if (Component != null)
+{
     <MSheet Outlined Rounded="true" Class="mb-9 m-example">
         <MSheet Rounded="true" Class="pa-4">
             @Component
@@ -19,7 +17,13 @@
                     <MTooltip Bottom>
                         <ActivatorContent>
                             <button type="button" class="m-btn m-btn--icon m-btn--round theme--light m-size--default" aria-label="invert-example-colors">
-                                <span class="m-btn__content"><span aria-hidden="true" class="m-icon notranslate theme--light"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="m-icon__svg"><path d="M12,19.58V19.58C10.4,19.58 8.89,18.96 7.76,17.83C6.62,16.69 6,15.19 6,13.58C6,12 6.62,10.47 7.76,9.34L12,5.1M17.66,7.93L12,2.27V2.27L6.34,7.93C3.22,11.05 3.22,16.12 6.34,19.24C7.9,20.8 9.95,21.58 12,21.58C14.05,21.58 16.1,20.8 17.66,19.24C20.78,16.12 20.78,11.05 17.66,7.93Z"></path></svg></span></span>
+                                <span class="m-btn__content">
+                                    <span aria-hidden="true" class="m-icon notranslate theme--light">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="m-icon__svg">
+                                            <path d="M12,19.58V19.58C10.4,19.58 8.89,18.96 7.76,17.83C6.62,16.69 6,15.19 6,13.58C6,12 6.62,10.47 7.76,9.34L12,5.1M17.66,7.93L12,2.27V2.27L6.34,7.93C3.22,11.05 3.22,16.12 6.34,19.24C7.9,20.8 9.95,21.58 12,21.58C14.05,21.58 16.1,20.8 17.66,19.24C20.78,16.12 20.78,11.05 17.66,7.93Z"></path>
+                                        </svg>
+                                    </span>
+                                </span>
                             </button>
                         </ActivatorContent>
                         <ChildContent>
@@ -31,18 +35,30 @@
                     <MTooltip Bottom>
                         <ActivatorContent>
                             <a class="m-btn m-btn--icon m-btn--round theme--light m-size--default" aria-label="view-in-github">
-                                <span class="m-btn__content"><span aria-hidden="true" class="m-icon notranslate theme--light"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="m-icon__svg"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path></svg></span></span>
+                                <span class="m-btn__content">
+                                    <span aria-hidden="true" class="m-icon notranslate theme--light">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="m-icon__svg">
+                                            <path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path>
+                                        </svg>
+                                    </span>
+                                </span>
                             </a>
                         </ActivatorContent>
-                        <ChildContent><span>在 Github 上查看</span></ChildContent>
+                        <ChildContent>
+                            <span>在 Github 上查看</span>
+                        </ChildContent>
                     </MTooltip>
                 </span>
                 <span class="m-app-tooltip-btn d-inline-block">
                     <MTooltip Bottom>
                         <ActivatorContent>
-                            <button @onclick="()=>_expend=!_expend" onfocus="this.blur()" type="button" class="m-btn m-btn--icon m-btn--round theme--light m-size--default" aria-label="view-source">
+                            <button @onclick="() => _expend = !_expend" onfocus="this.blur()" type="button" class="m-btn m-btn--icon m-btn--round theme--light m-size--default" aria-label="view-source">
                                 <span class="m-btn__content">
-                                    <span aria-hidden="true" class="m-icon notranslate theme--light"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="m-icon__svg"><path d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z"></path></svg></span>
+                                    <span aria-hidden="true" class="m-icon notranslate theme--light">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="m-icon__svg">
+                                            <path d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z"></path>
+                                        </svg>
+                                    </span>
                                 </span>
                             </button>
                         </ActivatorContent>
@@ -56,22 +72,22 @@
         <MDivider></MDivider>
         <ExpandTransition>
             <Element Show="_expend">
-             <MItemGroup @bind-Value="ActiveWindow" Class="pa-2" Mandatory>
-                <MItem>
-                    <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.IsActive" Value="0"> template </MButton>
-                </MItem>
-                @if (Code != null)
-                {
+                <MItemGroup @bind-Value="ActiveWindow" Class="pa-2" Mandatory>
                     <MItem>
-                        <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.IsActive" Value="1"> code </MButton>
+                        <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.IsActive" Value="0"> template </MButton>
                     </MItem>
-                }
-            </MItemGroup>
+                    @if (Code != null)
+                    {
+                        <MItem>
+                            <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.IsActive" Value="1"> code </MButton>
+                        </MItem>
+                    }
+                </MItemGroup>
                 <MDivider></MDivider>
                 <MWindow>
                     <MWindowItem IsActive="IsTemplate">
                         <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden my-0">
-                            <HighlightedCode Code="@Template" CanLoad="Template!=null" Language="html"></HighlightedCode>
+                            <HighlightedCode Code="@Template" CanLoad="Template != null" Language="html"></HighlightedCode>
                             <MButton Class="m-btn--copy mr-n2 mt-n2" Absolute Icon Right Rounded Top Style="background-color:inherit">
                                 <MIcon>
                                     mdi-content-copy
@@ -81,7 +97,7 @@
                     </MWindowItem>
                     <MWindowItem IsActive="IsCode">
                         <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden my-0">
-                            <HighlightedCode Code="@Code" CanLoad="Code!=null" Language="csharp"></HighlightedCode>
+                            <HighlightedCode Code="@Code" CanLoad="Code != null" Language="csharp"></HighlightedCode>
                             <MButton Class="m-btn--copy mr-n2 mt-n2" Absolute Icon Right Rounded Top Style="background-color:inherit">
                                 <MIcon>
                                     mdi-content-copy
@@ -93,13 +109,13 @@
             </Element>
         </ExpandTransition>
     </MSheet>
-</section>
+}
 
 @inject ILanguageService lang;
 @inject NavigationManager NavigationManager
 @inject IJSRuntime Js
 @using BlazorComponent
-@using Element=BlazorComponent.Web.Element
+@using Element = BlazorComponent.Web.Element
 
 @code {
     private bool _expend;
@@ -111,17 +127,18 @@
     public bool IsCode => ActiveWindow == 1;
 
     [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool CodeExpand { get; set; }
+
+    [Parameter]
     public string ComponentName { get; set; }
 
     [Parameter]
     public DemoItemModel Demo { get; set; }
 
-    [Parameter]
-    public bool CodeExpand { get; set; }
-
     RenderFragment Component;
-
-    public string Id => "section-" + BlazorComponent.Doc.Extensions.HashHelper.Hash(Demo.Title);
 
     protected string DemoId => $"components-{ComponentName.ToLower()}-demo-{Demo.Name}";
 
@@ -135,13 +152,15 @@
     {
         await base.OnInitializedAsync();
 
-        Component = Service.GetShowCase(Demo.Type);
-
+        if (Demo.Type != null)
+        {
+            Component = Service.GetShowCase(Demo.Type);
+        }
     }
 
     protected override void OnParametersSet()
     {
-        if (Demo != null)
+        if (Demo.Code != null)
         {
             var index = Demo.Code.IndexOf("@code");
             if (index > 0)
@@ -156,15 +175,4 @@
         }
     }
 
-    public async void HandleOnClick()
-    {
-        var element = await Js.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, "#" + Id);
-        var options = new
-        {
-            Top = element.OffsetTop,
-            Left = 0,
-            Behavior = "smooth"
-        };
-        await Js.InvokeVoidAsync("window.scrollTo", options);
-    }
 }

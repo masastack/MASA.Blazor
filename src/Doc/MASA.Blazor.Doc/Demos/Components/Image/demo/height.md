@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-v-img将自动增长到src的大小，保持正确的纵横比。你可以用Height和MaxHeight的属性来限制。
+`MImage`将自动增长到src的大小，保持正确的纵横比。你可以用Height和MaxHeight的属性来限制。
 
 ## en-US
 

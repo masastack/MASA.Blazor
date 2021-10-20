@@ -2,9 +2,9 @@
 category: Components
 subtitle: 多行文本框
 type: 多行文本框
-title: TextArea
+title: Textareas
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TextField.svg
+cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Textareas.svg
 
 ---
 
@@ -12,4 +12,4 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TextField.svg
 
 ## API
 
-- [MTextArea](/docs/api/MTextArea)
+- [MTextarea](/docs/api/MTextarea)

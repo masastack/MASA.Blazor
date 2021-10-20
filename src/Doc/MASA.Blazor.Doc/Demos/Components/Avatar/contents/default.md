@@ -1,8 +1,8 @@
 ---
 order: 2
 title:
-  zh-CN: 插槽
-  en-US: Slot
+  zh-CN: 默认值
+  en-US: Default
 ---
 
 ## zh-CN

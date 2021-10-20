@@ -1,14 +1,16 @@
 ﻿<div class="d-flex flex-column justify-space-between align-center">
-    <div>
-        <MButton Icon Click="() => width -= 10"><MIcon>mdi-minus</MIcon></MButton>
-        @width
-        <MButton Icon Click="() => width += 10"><MIcon>mdi-plus</MIcon></MButton>
-    </div>
+    <MSlider @bind-Value="_width"
+             Class="align-self-stretch"
+             Min="200"
+             Max="500"
+             Step="1">
+    </MSlider>
+
     <MImage AspectRatio="@("16/9")"
-            Width="@width"
+            Width="@_width"
             Src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></MImage>
 </div>
 
 @code {
-    int width = 300;
+    private double _width = 300;
 }

@@ -7,8 +7,10 @@ using System.Reflection;
 using System.Threading.Tasks;
 using BlazorComponent.Doc.Extensions;
 using BlazorComponent.Doc.Models;
+using MASA.Blazor.Doc.Demos.Components.Border.demo;
 using MASA.Blazor.Doc.Localization;
 using MASA.Blazor.Doc.Pages;
+using MASA.Blazor.Doc.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -45,28 +47,36 @@ namespace MASA.Blazor.Doc.Services
             _menuCache ??= new ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>>();
             await _menuCache.GetOrAdd(language, async (currentLanguage) =>
             {
-                var menuItems = await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/meta/menu.{language}.json").ToString());
+                var menuItems =
+                    await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/meta/menu.{language}.json")
+                        .ToString());
                 return menuItems;
             });
 
             _componentCache ??= new ConcurrentCache<string, ValueTask<IDictionary<string, DemoComponentModel>>>();
             await _componentCache.GetOrAdd(language, async (currentLanguage) =>
             {
-                var components = await _httpClient.GetFromJsonAsync<DemoComponentModel[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/meta/components.{language}.json").ToString());
+                var components =
+                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>(new Uri(_baseUrl,
+                        $"_content/MASA.Blazor.Doc/meta/components.{language}.json").ToString());
                 return components.ToDictionary(x => x.Title.ToLower(), x => x);
             });
 
             _demoMenuCache ??= new ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>>();
             await _demoMenuCache.GetOrAdd(language, async (currentLanguage) =>
             {
-                var menuItems = await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/meta/demos.{language}.json").ToString());
+                var menuItems =
+                    await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/meta/demos.{language}.json")
+                        .ToString());
                 return menuItems;
             });
 
             _docMenuCache ??= new ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>>();
             await _docMenuCache.GetOrAdd(language, async (currentLanguage) =>
             {
-                var menuItems = await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/meta/docs.{language}.json").ToString());
+                var menuItems =
+                    await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/meta/docs.{language}.json")
+                        .ToString());
                 return menuItems;
             });
         }
@@ -84,7 +94,8 @@ namespace MASA.Blazor.Doc.Services
         public async Task InitializeDemos()
         {
             _showCaseCache ??= new ConcurrentCache<string, RenderFragment>();
-            var demoTypes = await _httpClient.GetFromJsonAsync<string[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/meta/demoTypes.json").ToString());
+            var demoTypes =
+                await _httpClient.GetFromJsonAsync<string[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/meta/demoTypes.json").ToString());
             foreach (var type in demoTypes)
             {
                 GetShowCase(type);
@@ -110,11 +121,68 @@ namespace MASA.Blazor.Doc.Services
             if (contents == null && componentName != null)
             {
                 var components = await GetComponentAsync(componentName);
-                contents = components.DemoList?.OrderBy(r => r.Order).ThenBy(r=>r.Name).Select(r => new ContentsItem
+                var demoList = components.DemoList?.OrderBy(r => r.Order).ThenBy(r => r.Name);
+
+                contents = new List<ContentsItem>();
+
+                List<ContentsItem> propsList = new();
+                List<ContentsItem> eventsList = new();
+                List<ContentsItem> contentsList = new();
+                List<ContentsItem> miscList = new();
+
+                foreach (var demo in demoList)
                 {
-                    Href = $"/#section-" + HashHelper.Hash(r.Title),
-                    Title = r.Title
-                }).ToList();
+                    var href = $"/#section-" + HashHelper.Hash(demo.Title);
+                    if (demo.Title.Equals("Usage", StringComparison.OrdinalIgnoreCase) || demo.Title == "使用")
+                    {
+                        contents.Add(new ContentsItem(demo.Title, href, 2));
+                    }
+                    else if (demo.Group == DemoGroup.Props)
+                    {
+                        propsList.Add(new ContentsItem(demo.Title, href, 4));
+                    }
+                    else if (demo.Group == DemoGroup.Events)
+                    {
+                        eventsList.Add(new ContentsItem(demo.Title, href, 4));
+                    }
+                    else if (demo.Group == DemoGroup.Contents)
+                    {
+                        contentsList.Add(new ContentsItem(demo.Title, href, 4));
+                    }
+                    else if (demo.Group == DemoGroup.Misc)
+                    {
+                        miscList.Add(new ContentsItem(demo.Title, href, 4));
+                    }
+                }
+
+                if (propsList.Any() || miscList.Any())
+                {
+                    contents.Add(ContentsItem.GenerateExample(CurrentLanguage));
+                }
+
+                if (propsList.Any())
+                {
+                    contents.Add(ContentsItem.GenerateProps(CurrentLanguage));
+                    contents.AddRange(propsList);
+                }
+
+                if (eventsList.Any())
+                {
+                    contents.Add(ContentsItem.GenerateEvents(CurrentLanguage));
+                    contents.AddRange(eventsList);
+                }
+
+                if (contentsList.Any())
+                {
+                    contents.Add(ContentsItem.GenerateContents(CurrentLanguage));
+                    contents.AddRange(contentsList);
+                }
+
+                if (miscList.Any())
+                {
+                    contents.Add(ContentsItem.GenerateMisc(CurrentLanguage));
+                    contents.AddRange(miscList);
+                }
             }
 
             return contents;
@@ -173,15 +241,19 @@ namespace MASA.Blazor.Doc.Services
 
             if (type.ToLowerInvariant() == "docs")
             {
-                items = _docMenuCache.TryGetValue(CurrentLanguage, out var menuItems) ? (await menuItems).OrderBy(x => x.Order).ToArray() : Array.Empty<DemoMenuItemModel>();
+                items = _docMenuCache.TryGetValue(CurrentLanguage, out var menuItems)
+                    ? (await menuItems).OrderBy(x => x.Order).ToArray()
+                    : Array.Empty<DemoMenuItemModel>();
                 currentTitle = $"docs/{currentTitle}";
             }
             else
             {
-                items = _demoMenuCache.TryGetValue(CurrentLanguage, out var menuItems) ? (await menuItems)
-                .OrderBy(x => x.Order)
-                .SelectMany(x => x.Children)
-                .ToArray() : Array.Empty<DemoMenuItemModel>();
+                items = _demoMenuCache.TryGetValue(CurrentLanguage, out var menuItems)
+                    ? (await menuItems)
+                    .OrderBy(x => x.Order)
+                    .SelectMany(x => x.Children)
+                    .ToArray()
+                    : Array.Empty<DemoMenuItemModel>();
 
                 currentTitle = $"components/{currentTitle}";
             }
@@ -192,16 +264,17 @@ namespace MASA.Blazor.Doc.Services
                 {
                     var prev = i == 0 ? null : items[i - 1];
                     var next = i == items.Length - 1 ? null : items[i + 1];
-                    return new[] { prev, next };
+                    return new[] {prev, next};
                 }
             }
 
-            return new DemoMenuItemModel[] { null, null };
+            return new DemoMenuItemModel[] {null, null};
         }
 
         public async Task<Recommend[]> GetRecommend()
         {
-            return await _httpClient.GetFromJsonAsync<Recommend[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/data/recommend.{CurrentLanguage}.json").ToString());
+            return await _httpClient.GetFromJsonAsync<Recommend[]>(new Uri(_baseUrl,
+                $"_content/MASA.Blazor.Doc/data/recommend.{CurrentLanguage}.json").ToString());
         }
 
         public async Task<Product[]> GetProduct()
@@ -211,7 +284,8 @@ namespace MASA.Blazor.Doc.Services
 
         public async Task<MoreProps[]> GetMore()
         {
-            return await _httpClient.GetFromJsonAsync<MoreProps[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/data/more-list.{CurrentLanguage}.json").ToString());
+            return await _httpClient.GetFromJsonAsync<MoreProps[]>(new Uri(_baseUrl,
+                $"_content/MASA.Blazor.Doc/data/more-list.{CurrentLanguage}.json").ToString());
         }
     }
 }

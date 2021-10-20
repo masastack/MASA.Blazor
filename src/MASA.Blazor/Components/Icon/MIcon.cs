@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
 namespace MASA.Blazor
 {
-    public partial class MIcon : BIcon, IThemeable
+    public partial class MIcon : BIcon, IThemeable, IIcon
     {
         private const string XSMALL = "12px";
         private const string SMALL = "16px";
@@ -49,6 +50,8 @@ namespace MASA.Blazor
 
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
+
+        public IDictionary<string, object> Attrs => Attributes;
 
         public bool IsDark
         {

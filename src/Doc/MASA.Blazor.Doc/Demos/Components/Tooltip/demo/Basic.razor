@@ -1,31 +1,31 @@
 ﻿<div class="text-center d-flex align-center justify-space-around">
     <MTooltip Left>
-        <ActivatorContent>
-            <MButton Dark Color="primary">Left</MButton>
+        <ActivatorContent Context="activatorContext">
+            <MButton Dark Color="primary" @attributes="activatorContext.Attrs">Left</MButton>
         </ActivatorContent>
         <ChildContent>
             <span>Left tooltip</span>
         </ChildContent>
     </MTooltip>
-    <MTooltip>
-        <ActivatorContent>
-            <MButton Dark Color="primary">Top</MButton>
+    <MTooltip Top>
+        <ActivatorContent Context="activatorContext">
+            <MButton Dark Color="primary" @attributes="activatorContext.Attrs">Top</MButton>
         </ActivatorContent>
         <ChildContent>
             <span>Top tooltip</span>
         </ChildContent>
     </MTooltip>
     <MTooltip Bottom>
-        <ActivatorContent>
-            <MButton Dark Color="primary">Bottom</MButton>
+        <ActivatorContent Context="activatorContext">
+            <MButton Dark Color="primary" @attributes="activatorContext.Attrs">Bottom</MButton>
         </ActivatorContent>
         <ChildContent>
             <span>Bottom tooltip</span>
         </ChildContent>
     </MTooltip>
     <MTooltip Right>
-        <ActivatorContent>
-            <MButton Dark Color="primary">Right</MButton>
+        <ActivatorContent Context="activatorContext">
+            <MButton Dark Color="primary" @attributes="activatorContext.Attrs">Right</MButton>
         </ActivatorContent>
         <ChildContent>
             <span>Right tooltip</span>

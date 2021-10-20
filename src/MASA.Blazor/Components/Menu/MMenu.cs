@@ -46,7 +46,7 @@ namespace MASA.Blazor
 
                 await OptimizPosition();
             }
-
+            
             await base.OnAfterRenderAsync(firstRender);
         }
 
