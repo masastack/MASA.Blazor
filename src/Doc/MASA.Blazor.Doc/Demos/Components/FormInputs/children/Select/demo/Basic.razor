@@ -4,23 +4,16 @@
                  Label="Standard"
                  Items="@items"
                  ItemText="u => u.Label"
-                 ItemValue="u => u.Value"
-                 Clearable
-                 Hint="@($"selected value: {@value1}")">
+                 ItemValue="u => u.Value">
         </MSelect>
     </MCol>
     <MCol Span="6">
         <MSelect @bind-Value="@value2"
-                 TItem="Item"
-                 TItemValue="string"
-                 TValue="string"
+                 Items="@items"
                  Label="Filled style"
-                 Filled
-                 Hint="@($"selected value: {@value2}")">
-            @foreach (var item in items)
-            {
-                <MSelectOption TItem="Item" TItemValue="string" TValue="string" Label="@item.Label" Value="@item.Value" />
-            }
+                 ItemText="u => u.Label"
+                 ItemValue="u => u.Value"
+                 Filled>
         </MSelect>
     </MCol>
 
@@ -30,8 +23,7 @@
                  Outlined
                  Items="@items"
                  ItemText="u => u.Label"
-                 ItemValue="u => u.Value"
-                 Hint="@($"selected value: {@value3}")">
+                 ItemValue="u => u.Value">
         </MSelect>
     </MCol>
     <MCol Span="6">
@@ -40,8 +32,7 @@
                  Solo
                  Items="@items"
                  ItemText="u => u.Label"
-                 ItemValue="u => u.Value"
-                 Hint="@($"selected value: {@value4}")">
+                 ItemValue="u => u.Value">
         </MSelect>
     </MCol>
 </MRow>
@@ -66,8 +57,8 @@
     }
 
     List<Item> items = new()
-    {
-        new Item("Item 1", "1"),
-        new Item("Item 2", "2")
-    };
+        {
+            new Item("Item 1", "1"),
+            new Item("Item 2", "2")
+        };
 }

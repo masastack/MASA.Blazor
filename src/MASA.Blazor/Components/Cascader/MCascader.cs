@@ -50,7 +50,7 @@ namespace MASA.Blazor
                 {
                     props[nameof(MListItemGroup.Color)] = "primary";
                 })
-                .Merge(typeof(BSelectOption<,,>), typeof(MCascaderSelectOption<TItem, TValue>))
+                .Merge(typeof(BSelectList<,,>), typeof(MCascaderSelectOption<TItem, TValue>))
                 .Merge(typeof(BSelectMenu<,,,>), typeof(BCascaderMenu<TItem, TValue, MCascader<TItem, TValue>>))
                 .Apply(typeof(BCascaderMenuBody<,,>), typeof(BCascaderMenuBody<TItem, TValue, MCascader<TItem, TValue>>));
         }

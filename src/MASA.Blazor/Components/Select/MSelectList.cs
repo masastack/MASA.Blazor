@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MSelectOption<TItem, TItemValue, TValue> : BSelectOption<TItem, TItemValue, TValue>
+    public partial class MSelectList<TItem, TItemValue, TValue> : BSelectList<TItem, TItemValue, TValue>
     {
         protected override void SetComponentClass()
         {
@@ -28,6 +28,7 @@ namespace MASA.Blazor
                 .Apply(typeof(ICheckbox), typeof(MSimpleCheckbox), props =>
                 {
                     props[nameof(MSimpleCheckbox.Value)] = Selected;
+                    props[nameof(MSimpleCheckbox.OnInput)] = EventCallback.Factory.Create<bool>(this, OnSelectAsync);
                 })
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>()
