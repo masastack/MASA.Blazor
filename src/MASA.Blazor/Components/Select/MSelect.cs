@@ -256,7 +256,7 @@ namespace MASA.Blazor
                 .Apply<BListItem, MListItem>()
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>()
-                .Apply(typeof(BSelectOption<,,>), typeof(MSelectOption<TItem, TItemValue, TValue>))
+                .Apply(typeof(BSelectList<,,>), typeof(MSelectList<TItem, TItemValue, TValue>))
                 .Apply<BChip, MChip>(props =>
                 {
                     props[nameof(MChip.Close)] = DeletableChips && (!IsDisabled && !IsReadonly);

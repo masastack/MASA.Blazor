@@ -7,9 +7,9 @@ title:
 
 ## zh-CN
 
-将禁用的属性应用于`Select`将阻止用户与组件交互。
+将禁用的属性应用于`MSelect`将阻止用户与组件交互。
 
 ## en-US
 
-Applying the `Disabled` prop to a `Select` will prevent a user from interacting with the component.
+Applying the `Disabled` prop to a `MSelect` will prevent a user from interacting with the component.
 

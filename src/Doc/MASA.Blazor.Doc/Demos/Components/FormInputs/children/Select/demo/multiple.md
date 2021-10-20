@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-多选择器可以使用 `Chip` 组件来显示已选项。
+多选择器可以使用 `MChip` 组件来显示已选项。
 
 ## en-US
 
-A multi-select can utilize `Chip` as the display for selected items.
+A multi-select can utilize `MChip` as the display for selected items.
