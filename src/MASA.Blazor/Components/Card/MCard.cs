@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MCard : BCard, IThemeable
+    public partial class MCard : BCard, IThemeable,ICard
     {
         [Parameter]
         public bool Shaped { get; set; }
@@ -59,7 +59,20 @@ namespace MASA.Blazor
 
                 return Themeable != null && Themeable.IsDark;
             }
-        } 
+        }
+
+        [Parameter]
+        public StringNumber LoaderHeight { get; set; } = 10;
+
+        [Parameter]
+        public RenderFragment ProgressContent { get; set; }
+        /// <summary>
+        /// 展示加载栏
+        /// <para>true/false：展示/不展示</para>
+        /// <para>主要（primary）, 次要（secondary）, 成功（success）, 信息（info），警告（warning），错误（error）</para>
+        /// </summary>
+        [Parameter]
+        public StringBoolean Loading { get; set; } = false;
 
         protected override void SetComponentClass()
         {
@@ -77,7 +90,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--flat", () => Flat)
                         .AddIf($"{prefix}--hover", () => Hover)
                         .AddIf($"{prefix}--link", () => Link || OnClick.HasDelegate)
-                        .AddIf($"{prefix}--loading", () => Loading!=false)
+                        .AddIf($"{prefix}--loading", () => Loading != false)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--raised", () => Raised)
                         .AddBackgroundColor(Color);
@@ -92,7 +105,11 @@ namespace MASA.Blazor
                         .AddMaxHeight(MaxHeight)
                         .AddIf($"background:url(\"{Img}\") center center / cover no-repeat", () => !string.IsNullOrWhiteSpace(Img));
                 });
-            AbstractProvider.Apply<BProgressLinear,MProgressLinear>();
+
+            AbstractProvider
+                .Apply(typeof(BCardProgress<>), typeof(BCardProgress<ICard>))
+                .Apply(typeof(BLoadableProgress<>), typeof(BLoadableProgress<ICard>))
+                .Apply<BProgressLinear, MProgressLinear>();
         }
     }
 }
