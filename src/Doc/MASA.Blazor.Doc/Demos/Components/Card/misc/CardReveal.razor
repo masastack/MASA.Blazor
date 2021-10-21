@@ -17,10 +17,7 @@
     </MCardActions>
 
     <ExpandTransition>
-        @if (reveal == true)
-        {
-            <Element Show="@reveal">
-                <MCard Class="transition-fast-in-fast-out v-card--reveal" Style="height: 100%">
+         <MCard Show="@reveal" Class="transition-fast-in-fast-out m-card--reveal" Style="height: 100%">
                     <MCardText Class="pb-0">
                         <p class="text-h4 text--primary">
                             Origin
@@ -31,8 +28,6 @@
                         <MButton Text Color="teal accent-4" OnClick="()=>reveal=false">Close</MButton>
                     </MCardActions>
                 </MCard>
-            </Element>
-        }
     </ExpandTransition>
 
 </MCard>

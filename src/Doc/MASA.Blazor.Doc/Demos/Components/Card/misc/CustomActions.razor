@@ -1,6 +1,6 @@
 ﻿<MCard Class="mx-auto" MaxWidth="344" Outlined>
 
-    <MImage Src="https://cdn.vuetifyjs.com/images/cards/sunshine.jp" Height="200"></MImage>
+    <MImage Src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" Height="200"></MImage>
 
     <MCardTitle>
         Top western road trips
@@ -20,7 +20,7 @@
         </MButton>
 
     </MCardActions>
-     <div display="@(show?"display":"")">
+     <div style="@(show?"display:none":"")">
          <MDivider></MDivider>
          <MCardText>
               I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
@@ -30,5 +30,5 @@
 </MCard>
 
 @code {
-    bool show;
+    bool show=true;
 }

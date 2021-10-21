@@ -8,11 +8,25 @@ namespace MASA.Blazor
     {
         protected async override Task OnInitializedAsync()
         {
+            //CssProvider
+            //   .Apply(cssBuilder =>
+            //   {
+            //       cssBuilder.AddBackgroundColor(Color);
+            //   }, styleBuilder =>
+            //   {
+            //       styleBuilder.AddBackgroundColor(Color);
+                      
+            //   });
             AbstractProvider
                 .Apply<BButton, MButton>(prop =>
                 {
                     prop[nameof(MButton.Class)] = "m-app-bar__nav-icon";
                     prop[nameof(MButton.Icon)] = true;
+
+                    foreach (var attr in Attributes)
+                    {
+                        prop[attr.Key] = attr.Value;
+                    }
                 })
                 .Apply<BIcon, MIcon>(prop =>
                 {

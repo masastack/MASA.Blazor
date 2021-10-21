@@ -2,25 +2,27 @@
     <MRow Justify=JustifyTypes.SpaceAround>
         <MCard Width="400">
 
-            <MImage Height="200" Src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"></MImage>
+            <MImage Height="200" Src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg">
 
-            <MAppBar Flat Color="rgba(0, 0, 0, 0)">
-                <MAppBarNavIcon Color="white"></MAppBarNavIcon>
-                <MToolbarTitle Class="text-h6 white--text pl-0"> Messages</MToolbarTitle>
-                <MSpacer></MSpacer>
-                <MButton Color="white" Icon>
-                    <MIcon>mdi-dots-vertical</MIcon>
-                </MButton>
-            </MAppBar>
+                <MAppBar Flat Color="rgba(0, 0, 0, 0)">
+                    <MAppBarNavIcon Color="white"></MAppBarNavIcon>
+                    <MToolbarTitle Class="text-h6 white--text pl-0"> Messages</MToolbarTitle>
+                    <MSpacer></MSpacer>
+                    <MButton Color="white" Icon>
+                        <MIcon>mdi-dots-vertical</MIcon>
+                    </MButton>
+                </MAppBar>
 
-            <MCardTitle Class="white--text mt-8">
-                <MAvatar Size=56>
-                    <MImage Src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"></MImage>
-                </MAvatar>
-                <p class="ml-3">
-                    John Doe
-                </p>
-            </MCardTitle>
+                <MCardTitle Class="white--text mt-8">
+                    <MAvatar Size=56>
+                        <MImage Src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"></MImage>
+                    </MAvatar>
+                    <p class="ml-3">
+                        John Doe
+                    </p>
+                </MCardTitle>
+
+            </MImage>
 
             <MCardText>
                 <div class="font-weight-bold ml-8 mb-2">
@@ -47,7 +49,7 @@
 
 @code {
     MessageDto[] messages = new[]
-            {
+                {
         new MessageDto
         {
             From="You",

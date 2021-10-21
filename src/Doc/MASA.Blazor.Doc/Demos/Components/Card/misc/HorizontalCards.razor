@@ -40,12 +40,15 @@
                     <MCard Color="@card.Color" Dark>
                         <div class="d-flex flex-no-wrap justify-space-between">
                             <div>
+
                                 <MCardTitle Class="text-h5">
                                     @card.Title
                                 </MCardTitle>
+
                                 <MCardSubtitle>
                                     @card.Artist
                                 </MCardSubtitle>
+
                                 <MCardActions>
                                     @if (card.Artist == "Ellie Goulding")
                                     {
@@ -59,7 +62,7 @@
                                     }                                 
                                 </MCardActions>
                             </div>
-                            <MAvatar Class="ma-3" Size125 Tile>
+                            <MAvatar Class="ma-3" Size=125 Tile>
                                 <MImage Src="@card.Src"></MImage>
                             </MAvatar>
                          </div>
