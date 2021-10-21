@@ -44,13 +44,5 @@ namespace MASA.Blazor
                         .AddIf("m-stepper--non-linear", () => NonLinear);
                 });
         }
-
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
-        {
-            builder.OpenComponent<CascadingValue<MStepper>>(0);
-            builder.AddAttribute(1, nameof(CascadingValue<MStepper>.Value), this);
-            builder.AddAttribute(2, nameof(CascadingValue<MStepper>.ChildContent), new RenderFragment(base.BuildRenderTree));
-            builder.CloseComponent();
-        }
     }
 }
