@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-Using grids, you can create beautiful layouts.
+使用网格，您可以创建漂亮的布局。 
 
 ## en-US
 

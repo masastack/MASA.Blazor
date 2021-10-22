@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-The MCard component is useful for wrapping content.
+MCard 组件可用于包装内容。 
 
 ## en-US
 

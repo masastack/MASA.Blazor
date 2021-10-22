@@ -8,15 +8,6 @@ namespace MASA.Blazor
     {
         protected async override Task OnInitializedAsync()
         {
-            //CssProvider
-            //   .Apply(cssBuilder =>
-            //   {
-            //       cssBuilder.AddBackgroundColor(Color);
-            //   }, styleBuilder =>
-            //   {
-            //       styleBuilder.AddBackgroundColor(Color);
-                      
-            //   });
             AbstractProvider
                 .Apply<BButton, MButton>(prop =>
                 {

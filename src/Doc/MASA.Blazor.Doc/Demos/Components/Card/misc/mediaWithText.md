@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-Using the layout system, we can add custom text anywhere within the background.
+使用布局系统，我们可以在背景中的任何地方添加自定义文本。 
 
 ## en-US
 

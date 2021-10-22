@@ -12,11 +12,6 @@ namespace MASA.Blazor
         {
         }
 
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();           
-        }
-
         protected override void OnParametersSet()
         {
             ActiveClass ??= "m-slide-item--active";
