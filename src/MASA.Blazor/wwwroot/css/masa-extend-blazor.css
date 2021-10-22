@@ -11,49 +11,49 @@
     overflow-x: scroll;
 }
 
-.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child {
-    position: -webkit-sticky !important;
-    position: sticky !important;
-    z-index: 2;
-    background-color: #fff;
-    right: 0px;
-}
+    .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child {
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        z-index: 2;
+        background-color: #fff;
+        right: 0px;
+    }
 
-.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child::after {
-    position: absolute;
-    top: 0;
-    bottom: -1px;
-    left: 0;
-    width: 30px;
-    transform: translateX(-100%);
-    transition: box-shadow .3s;
-    content: '';
-    pointer-events: none;
-}
+        .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr > td:last-child::after {
+            position: absolute;
+            top: 0;
+            bottom: -1px;
+            left: 0;
+            width: 30px;
+            transform: translateX(-100%);
+            transition: box-shadow .3s;
+            content: '';
+            pointer-events: none;
+        }
 
-.m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr:hover > td:last-child {
-    background-color: inherit;
-}
+    .m-data-table > .m-data-table__wrapper.fixed-right > table > tbody > tr:hover > td:last-child {
+        background-color: inherit;
+    }
 
-.m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child {
-    position: -webkit-sticky !important;
-    position: sticky !important;
-    z-index: 2;
-    background-color: #fff;
-    right: 0px;
-}
+    .m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child {
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        z-index: 2;
+        background-color: #fff;
+        right: 0px;
+    }
 
-.m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child::after {
-    position: absolute;
-    top: 0;
-    bottom: -1px;
-    left: 0;
-    width: 30px;
-    transform: translateX(-100%);
-    transition: box-shadow .3s;
-    content: '';
-    pointer-events: none;
-}
+        .m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child::after {
+            position: absolute;
+            top: 0;
+            bottom: -1px;
+            left: 0;
+            width: 30px;
+            transform: translateX(-100%);
+            transition: box-shadow .3s;
+            content: '';
+            pointer-events: none;
+        }
 
 .m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe > td {
     background-color: #fafafa;
@@ -97,9 +97,9 @@
     position: relative;
 }
 
-.m-heading > a:not(:hover):not(:focus) {
-    opacity: 0;
-}
+    .m-heading > a:not(:hover):not(:focus) {
+        opacity: 0;
+    }
 
 .markdown-body a:not(:hover) {
     text-decoration: none;
@@ -138,25 +138,25 @@ ol, ul {
     padding: 12px 50px 12px 16px;
 }
 
-.m-sheet.app-code code[class*=language], .m-sheet.app-code pre[class*=language] {
-    background: none;
-    font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
-    font-size: 1rem;
-    -webkit-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
-    line-height: 1.5;
-    margin: 0;
-    padding: 0;
-    -moz-tab-size: 4;
-    tab-size: 4;
-    text-align: left;
-    text-shadow: none;
-    white-space: pre;
-    word-break: normal;
-    word-spacing: normal;
-    word-wrap: normal;
-}
+    .m-sheet.app-code code[class*=language], .m-sheet.app-code pre[class*=language] {
+        background: none;
+        font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+        font-size: 1rem;
+        -webkit-hyphens: none;
+        -ms-hyphens: none;
+        hyphens: none;
+        line-height: 1.5;
+        margin: 0;
+        padding: 0;
+        -moz-tab-size: 4;
+        tab-size: 4;
+        text-align: left;
+        text-shadow: none;
+        white-space: pre;
+        word-break: normal;
+        word-spacing: normal;
+        word-wrap: normal;
+    }
 
 .m-example code[class*=language-], .m-example pre[class*=language-] {
     text-shadow: none;
@@ -215,10 +215,10 @@ code[class*=language-], pre[class*=language-] {
     color: rgb(128, 0, 128);
 }
 
-.token.tag > .token.punctuation {
-    color: black;
-    opacity: 0.75;
-}
+    .token.tag > .token.punctuation {
+        color: black;
+        opacity: 0.75;
+    }
 
 .token.number {
     color: black;
@@ -228,42 +228,42 @@ code[class*=language-], pre[class*=language-] {
     background: none !important;
 }
 
-.token.punctuation {
-    color: rgb(0, 0, 0, 0.75);
-}
+    .token.punctuation {
+        color: rgb(0, 0, 0, 0.75);
+    }
 
-.token.builtin, .token.char, .token.inserted, .token.selector {
-    color: #690;
-}
+    .token.builtin, .token.char, .token.inserted, .token.selector {
+        color: #690;
+    }
 
-.token.attr-name {
-    color: rgb(128, 0, 128);
-}
+    .token.attr-name {
+        color: rgb(128, 0, 128);
+    }
 
-.token.string {
-    color: rgb(163, 21, 21)
-}
+    .token.string {
+        color: rgb(163, 21, 21)
+    }
 
-.token.atrule {
-    color: #07a;
-}
+    .token.atrule {
+        color: #07a;
+    }
 
-.token.attr-value {
-    color: black;
-}
+    .token.attr-value {
+        color: black;
+    }
 
-.token.attr-value > .token.punctuation {
-    color: black;
-    opacity: 0.75;
-}
+        .token.attr-value > .token.punctuation {
+            color: black;
+            opacity: 0.75;
+        }
 
-.token.keyword {
-    color: blue;
-}
+    .token.keyword {
+        color: blue;
+    }
 
-.token.comment {
-    color: rgb(0, 100, 0);
-}
+    .token.comment {
+        color: rgb(0, 100, 0);
+    }
 
 .m-sheet.app-code pre[class*=language]::after {
     bottom: .75rem;
@@ -390,4 +390,8 @@ code[class*=language-], pre[class*=language-] {
 .rounded .m-border__top {
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
+}
+
+.m-sheet.m-stepper:not(.m-sheet--outlined) {
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
 }

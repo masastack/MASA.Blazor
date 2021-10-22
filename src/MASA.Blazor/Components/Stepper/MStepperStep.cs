@@ -14,28 +14,16 @@ namespace MASA.Blazor
         [CascadingParameter]
         public MStepper Stepper { get; set; }
 
-        protected bool IsActive => Stepper.Value == Step;
+        //protected bool IsActive => Stepper.Value == Step;
 
-        protected bool IsInactive => Stepper.Value < Step;
+        protected bool IsActive { get; set; }
+
+        //protected bool IsInactive => Stepper.Value < Step;
+
+        protected bool IsInactive { get; set; }
 
         [Parameter]
         public string Color { get; set; } = "primary";
-
-        public override Task HandleOnClickAsync(MouseEventArgs args)
-        {
-            if (OnClick.HasDelegate)
-            {
-                OnClick.InvokeAsync();
-            }
-
-            if (Editable)
-            {
-                StepChanged.InvokeAsync(Step);
-                Stepper.StepClick(Step);
-            }
-
-            return base.HandleOnClickAsync(args);
-        }
 
         protected override void SetComponentClass()
         {
@@ -64,6 +52,35 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .Apply<BIcon, MIcon>();
+        }
+
+        protected override void OnInitialized()
+        {
+            Stepper.RegisterStep(this);
+        }
+
+        public override Task HandleOnClickAsync(MouseEventArgs args)
+        {
+            if (OnClick.HasDelegate)
+            {
+                OnClick.InvokeAsync();
+            }
+
+            if (Editable)
+            {
+                StepChanged.InvokeAsync(Step);
+                Stepper.StepClick(Step);
+            }
+
+            return base.HandleOnClickAsync(args);
+        }
+
+        public void Toggle(int step)
+        {
+            IsActive = this.Step == step;
+            IsInactive = step < this.Step;
+
+            StateHasChanged();
         }
     }
 }

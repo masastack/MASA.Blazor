@@ -12,6 +12,8 @@ namespace MASA.Blazor
     {
         protected StringNumber Height { get; set; } = "auto";
 
+        //protected override bool IsActive=> Stepper.i
+
         [CascadingParameter]
         public MStepper Stepper { get; set; }
 
@@ -40,6 +42,19 @@ namespace MASA.Blazor
                     styleBuilder
                         .AddIf($"height:{Height.ToUnit()}", () => Height != null && Stepper.Vertical);
                 });
+        }
+
+        protected override void OnInitialized()
+        {
+            Stepper.RegisterContent(this);
+        }
+
+        public void Toggle(int step, bool reverse)
+        {
+            IsActive = Step == step;
+            IsReverse = reverse;
+
+            StateHasChanged();
         }
     }
 }
