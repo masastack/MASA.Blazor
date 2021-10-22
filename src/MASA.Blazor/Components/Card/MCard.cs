@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MCard : BCard,ICard
+    public partial class MCard : BCard, IMCard
     {
         /// <summary>
         /// 在卡片的左上角和右下角应用较大的边框半径
@@ -155,21 +155,6 @@ namespace MASA.Blazor
 
         public bool HasClick => OnClick.HasDelegate;
 
-        protected override void SetComponentClass()
-        {
-            var card = this as ICard;
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder.Add(()=>card.CardClasses());
-                    
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .Add(() => card.CardStyles());
-                });
-            AbstractProvider
-                .ApplyBCardProgressDefault(this);
-        }
+        protected override void SetComponentClass() => (this as IMCard).SetCardComponentClass();
     }
 }
