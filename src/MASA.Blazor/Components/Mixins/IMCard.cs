@@ -15,13 +15,22 @@ namespace MASA.Blazor
             CssProvider
                .Apply(cssBuilder =>
                {
-                   cssBuilder.Add(() => CardClasses());
+                   cssBuilder.Add(() => CardClasses());              
 
                }, styleBuilder =>
                {
                    styleBuilder
                        .Add(() => CardStyles());
                });
+            //子主键BCardProgress的样式
+            CssProvider.Apply("progress", cssBuilder =>
+            {
+                cssBuilder.Add("v-card__progress");
+
+            }, styleBuilder =>
+            {
+
+            });
 
             AbstractProvider.Apply(typeof(BCardProgress<,>), typeof(BCardProgress<IMCard,MProgressLinear>));
         }
@@ -37,7 +46,6 @@ namespace MASA.Blazor
             if (Disabled) composite.Add("m-card--disabled");
             if (Raised) composite.Add("m-card--raised");
             composite.Add(VSheetClasses());
-
             return String.Join(" ", composite);
         }
 
