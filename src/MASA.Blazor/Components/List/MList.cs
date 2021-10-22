@@ -110,9 +110,6 @@ namespace MASA.Blazor
         [Parameter]
         public StringNumber Width { get; set; }
 
-        [CascadingParameter]
-        public BNavigationDrawer NavigationDrawer { get; set; }
-
         [Parameter]
         public bool Dark { get; set; }
 
@@ -157,7 +154,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--dense", () => Dense)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--flat", () => Flat)
-                        .AddIf($"{prefix}--nav", () => Nav || NavigationDrawer != null)
+                        .AddIf($"{prefix}--nav", () => Nav)
                         .AddIf($"{prefix}--rounded", () => Rounded)
                         .AddIf($"{prefix}--subheader", () => Subheader)
                         .AddIf($"{prefix}--two-line", () => TwoLine)
