@@ -16,10 +16,26 @@ namespace MASA.Blazor
 
         protected bool IsActive => Stepper.Value == Step;
 
-        protected bool IsInactive => Stepper.Value.ToInt32() < Step.ToInt32();
+        protected bool IsInactive => Stepper.Value < Step;
 
         [Parameter]
         public string Color { get; set; } = "primary";
+
+        public override Task HandleOnClickAsync(MouseEventArgs args)
+        {
+            if (OnClick.HasDelegate)
+            {
+                OnClick.InvokeAsync();
+            }
+
+            if (Editable)
+            {
+                StepChanged.InvokeAsync(Step);
+                Stepper.StepClick(Step);
+            }
+
+            return base.HandleOnClickAsync(args);
+        }
 
         protected override void SetComponentClass()
         {

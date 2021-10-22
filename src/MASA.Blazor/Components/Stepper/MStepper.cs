@@ -26,7 +26,10 @@ namespace MASA.Blazor
         public bool NonLinear { get; set; }
 
         [Parameter]
-        public StringNumber Value { get; set; } = 1;
+        public int Value { get; set; } = 1;
+
+        [Parameter]
+        public EventCallback<int> ValueChanged { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -43,6 +46,12 @@ namespace MASA.Blazor
                         .AddIf("m-stepper--alt-labels", () => AltLabels)
                         .AddIf("m-stepper--non-linear", () => NonLinear);
                 });
+        }
+
+        public void StepClick(int step)
+        {
+            Value = step;
+            StateHasChanged();
         }
     }
 }

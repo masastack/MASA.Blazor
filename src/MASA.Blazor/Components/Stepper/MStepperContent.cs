@@ -16,7 +16,7 @@ namespace MASA.Blazor
         public MStepper Stepper { get; set; }
 
         [Parameter]
-        public StringNumber Step { get; set; }
+        public int Step { get; set; }
 
         protected override void SetComponentClass()
         {

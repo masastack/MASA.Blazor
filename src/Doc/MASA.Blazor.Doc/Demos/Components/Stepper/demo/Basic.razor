@@ -4,11 +4,11 @@
             Name of step 1
         </MStepperStep>
         <MDivider></MDivider>
-        <MStepperStep Step="2" Complete="_step>2">
+        <MStepperStep Step="2" Complete="_step>2" Editable>
             Name of step 2
         </MStepperStep>
         <MDivider></MDivider>
-        <MStepperStep Step="3">
+        <MStepperStep Step="3" Editable>
             Name of step 3
         </MStepperStep>
     </MStepperHeader>
@@ -32,6 +32,30 @@
     </MStepperItems>
 </MStepper>
 
-@code{
+@*<MStepper>
+    <MStepperHeader>
+    <MStepperStep Complete
+    Editable
+    Step="1">
+    Select campaign settings
+    </MStepperStep>
+
+    <MDivider></MDivider>
+
+    <MStepperStep Complete
+    Step="2">
+    Create an ad group
+    </MStepperStep>
+
+    <MDivider></MDivider>
+
+    <MStepperStep Step="3"
+    Editable>
+    Create an ad
+    </MStepperStep>
+    </MStepperHeader>
+    </MStepper>*@
+
+@code {
     private int _step = 1;
 }
