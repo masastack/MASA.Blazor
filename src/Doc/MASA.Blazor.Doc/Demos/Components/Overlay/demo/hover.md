@@ -1,13 +1,13 @@
 ---
-order: 3
+order: 1
 title:
-  zh-CN: Z-index
-  en-US: Z-index
+  zh-CN: 绝对定位
+  en-US: Absolute
 ---
 
 ## zh-CN
 
-z-index 使您能够轻松地更改 v-overlay 组件的覆盖顺序。
+`Absolute` 遮罩层被放置在绝对位置，并包含在父元素中。
 
 ## en-US
 

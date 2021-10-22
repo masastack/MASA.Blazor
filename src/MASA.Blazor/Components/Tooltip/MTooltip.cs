@@ -11,6 +11,7 @@ namespace MASA.Blazor
 {
     public partial class MTooltip : BTooltip, ITooltip
     {
+        private int _stackMinZIndex = 6;
         private Window _window = new();
         private Element _bodyRect = new();
         private Element _activatorRect = new();
@@ -126,7 +127,6 @@ namespace MASA.Blazor
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
-
         [Parameter]
         public RenderFragment<ActivatorProps> ActivatorContent { get; set; }
 
@@ -164,7 +164,6 @@ namespace MASA.Blazor
                         .Add($"opacity:{(Value ? 0.9 : 0)}")
                         .Add($"opacity:{(Value ? 0.9 : 0)}")
                         .Add($"z-index:{ZIndex}")
-                        .AddIf("display:none", () => !Value || Disabled)
                         .AddBackgroundColor(Color);
                 });
 
@@ -195,6 +194,28 @@ namespace MASA.Blazor
 
                 await OptimizPosition();
             }
+        }
+
+        private async Task<int> ActiveZIndex()
+        {
+            int zIndex;
+            if (!Value)
+            {
+                zIndex = await JsInvokeAsync<int>(JsInteropConstants.GetZIndex, ContentRef);
+            }
+            else
+            {
+                zIndex = await GetMaxZIndex() + 2;
+            }
+
+            return zIndex;
+        }
+
+        private async Task<int> GetMaxZIndex()
+        {
+            var maxZindex = await JsInvokeAsync<int>(JsInteropConstants.GetMenuOrDialogMaxZIndex, new List<ElementReference> { ContentRef }, Ref);
+
+            return maxZindex > _stackMinZIndex ? maxZindex : _stackMinZIndex;
         }
 
         protected async Task<int> CalculateZIndex()
@@ -271,7 +292,7 @@ namespace MASA.Blazor
         private async Task<double> CalculatedTop()
         {
             if (_activatorRect == null) return 0;
-            
+
             double top = 0;
 
             if (Top || Bottom)
@@ -367,7 +388,10 @@ namespace MASA.Blazor
             OffsetLeft = CalculatedLeft();
             OffsetTop = await CalculatedTop();
 
-            ZIndex = ZIndex != 0 ? ZIndex : await JsInvokeAsync<int>(JsInteropConstants.GetMaxZIndex, _contentRect);
+            if (ZIndex == default)
+            {
+                ZIndex = await ActiveZIndex();
+            }
 
             await InvokeStateHasChangedAsync();
         }

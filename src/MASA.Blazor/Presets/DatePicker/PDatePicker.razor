@@ -17,7 +17,7 @@
             Style="@TextFieldStyle"
             Value="@InputValue" TValue="string" ValueChanged="InputValueChanged"></MTextField>
 
-    <MDialog Visible="_menuVisible" Width="@("auto")" OutsideClick="OnCancel">
+    <MDialog Value="_menuVisible" Width="@("auto")" OutsideClick="OnCancel">
         <MDatePicker @bind-Value="_dateTime" Style="width:min-content" ActionsStyle="flex-direction:column;" @attributes="DatePickerAttributes">
             <ActionsContent>
                 @if (Time)
