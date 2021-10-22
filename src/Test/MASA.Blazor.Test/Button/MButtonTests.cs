@@ -72,21 +72,6 @@ namespace MASA.Blazor.Test.Button
         }
 
         [TestMethod]
-        public void RenderButtonWithDefault()
-        {
-            //Act
-            var cut = RenderComponent<MButton>(props =>
-            {
-                props.Add(button => button.Default, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasDefaultClass = classes.Contains("m-size--default");
-
-            // Assert
-            Assert.IsTrue(hasDefaultClass);
-        }
-
-        [TestMethod]
         public void RenderButtonWithOutlined()
         {
             //Act
@@ -373,8 +358,6 @@ namespace MASA.Blazor.Test.Button
             Assert.IsTrue(hasXSmallClass);
         }
 
-        
-
         [TestMethod]
         public void RenderButtonAndClick()
         {
@@ -395,5 +378,7 @@ namespace MASA.Blazor.Test.Button
             // Assert
             Assert.AreEqual(1, times);
         }
+
     }
 }
+

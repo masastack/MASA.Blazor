@@ -4,12 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bunit;
+using BlazorComponent;
+using Moq;
+using Microsoft.AspNetCore.Components;
 
-namespace MASA.Blazor.Test.Presets
+namespace MASA.Blazor.Test.App
 {
     [TestClass]
-    public class PresetsTests : TestBase
+    public class MAppTests : TestBase
     {
-       
+        
     }
+
 }
