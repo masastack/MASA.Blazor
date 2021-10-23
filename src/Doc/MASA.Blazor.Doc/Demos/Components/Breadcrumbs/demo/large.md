@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 1
 title:
   zh-CN: 大号
   en-US: Large
@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Breadcrumbs Basic Usage
+Large breadcrumbs have larger font size.

@@ -5,53 +5,46 @@ using System.Timers;
 
 namespace MASA.Blazor
 {
-    public class MBreadcrumbs : BBreadcrumbs
+    public class MBreadcrumbs : BBreadcrumbs, IMBreadcrumbs
     {
-        [Parameter]
-        public bool Large { get; set; }
 
-        [Parameter]
-        public bool Dark { get; set; }
+        //[CascadingParameter]
+        //public IThemeable Themeable { get; set; }
 
-        [Parameter]
-        public bool Light { get; set; }
+        //protected bool IsDark
+        //{
+        //    get
+        //    {
+        //        if (Dark)
+        //        {
+        //            return true;
+        //        }
 
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
+        //        if (Light)
+        //        {
+        //            return false;
+        //        }
 
-        protected bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
+        //        return Themeable != null && Themeable.IsDark;
+        //    }
+        //}
 
         protected override void SetComponentClass()
         {
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-breadcrumbs")
-                        .AddIf("m-breadcrumbs--large", () => Large)
-                        .AddTheme(IsDark);
-                });
+            (this as IMBreadcrumbs).SetComponentClass();
+            //CssProvider
+            //    .Apply(cssBuilder =>
+            //    {
+            //        cssBuilder
+            //            .Add("m-breadcrumbs")
+            //            .AddIf("m-breadcrumbs--large", () => Large)
+            //            .AddTheme(IsDark);
+            //    });
 
-            AbstractProvider
-                .Apply(typeof(BBreadcrumbsItemGroup<>), typeof(BBreadcrumbsItemGroup<MBreadcrumbs>))
-                .Apply<BBreadcrumbsDivider, MBreadcrumbsDivider>()
-                .Apply<BBreadcrumbsItem, MBreadcrumbsItem>();
+            //AbstractProvider
+            //    .Apply(typeof(BBreadcrumbsItemGroup<>), typeof(BBreadcrumbsItemGroup<MBreadcrumbs>))
+            //    .Apply<BBreadcrumbsDivider, MBreadcrumbsDivider>()
+            //    .Apply<BBreadcrumbsItem, MBreadcrumbsItem>();
         }
     }
 }

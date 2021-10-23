@@ -34,8 +34,8 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply(typeof(BBreadcrumbsLinkItem<>), typeof(BBreadcrumbsLinkItem<MBreadcrumbsItem>))
-                .Apply(typeof(BBreadcrumbsPlainItem<>), typeof(BBreadcrumbsPlainItem<MBreadcrumbsItem>))
+                //.Apply(typeof(BBreadcrumbsLinkItem<>), typeof(BBreadcrumbsLinkItem<MBreadcrumbsItem>))
+                //.Apply(typeof(BBreadcrumbsPlainItem<>), typeof(BBreadcrumbsPlainItem<MBreadcrumbsItem>))
                 .Apply<BBreadcrumbsDivider, MBreadcrumbsDivider>();
         }
     }

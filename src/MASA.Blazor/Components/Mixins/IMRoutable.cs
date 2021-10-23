@@ -27,5 +27,18 @@ namespace MASA.Blazor
         {
             return To is not null || Href is not null || Link;
         }
+        public string RoutableClass()
+        {
+            if (To is not null) return "";
+            return ActiveClass ?? "";
+        }
+        public (string tag, Dictionary<string, object> props) GenerateRouteLink()
+        {
+            Tag = (Href is not null ? "a" : Tag ?? "div");
+            var props = new Dictionary<string, object>();
+            if(Tag=="a") props.Add("href",Href);
+            props.Add("class",RoutableClass());
+            return (Tag,props);
+        }
     }
 }
