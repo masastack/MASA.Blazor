@@ -80,7 +80,6 @@ namespace MASA.Blazor
                 });
         }
 
-
         protected override void OnAfterRender(bool firstRender)
         {
             if (firstRender)

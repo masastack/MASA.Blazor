@@ -57,6 +57,14 @@ namespace MASA.Blazor
         protected override void OnInitialized()
         {
             Stepper.RegisterStep(this);
+
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            if (firstRender)
+            {
+            }
         }
 
         public override Task HandleOnClickAsync(MouseEventArgs args)
@@ -68,7 +76,6 @@ namespace MASA.Blazor
 
             if (Editable)
             {
-                StepChanged.InvokeAsync(Step);
                 Stepper.StepClick(Step);
             }
 
