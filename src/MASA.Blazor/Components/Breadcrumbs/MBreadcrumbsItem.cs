@@ -8,35 +8,14 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public class MBreadcrumbsItem : BBreadcrumbsItem
+    public class MBreadcrumbsItem : BBreadcrumbsItem,IMRoutable
     {
         [Parameter]
-        public string ActiveClass { get; set; } = "m-breadcrumbs__item--disabled";
-
-        /// <summary>
-        /// TODO: ripple in breadcrumbs-item
-        /// </summary>
-        [Parameter]
-        public bool Ripple { get; set; }
+        public override string ActiveClass { get; set; } = "m-breadcrumbs__item--disabled";
 
         protected override void SetComponentClass()
         {
-            CssProvider
-                .Apply("link", css =>
-                {
-                    css.Add("m-breadcrumbs__item")
-                        .AddIf(ActiveClass, () => Disabled);
-                })
-                .Apply("plain", css =>
-                {
-                    css.Add("m-breadcrumbs__item")
-                        .AddIf(ActiveClass, () => Disabled);
-                });
-
-            AbstractProvider
-                //.Apply(typeof(BBreadcrumbsLinkItem<>), typeof(BBreadcrumbsLinkItem<MBreadcrumbsItem>))
-                //.Apply(typeof(BBreadcrumbsPlainItem<>), typeof(BBreadcrumbsPlainItem<MBreadcrumbsItem>))
-                .Apply<BBreadcrumbsDivider, MBreadcrumbsDivider>();
+            ElementProps = (this as IMRoutable).GenerateRouteLink();
         }
     }
 }

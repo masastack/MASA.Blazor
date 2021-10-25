@@ -27,8 +27,8 @@ namespace MASA.Blazor
 
             //});
 
-            AbstractProvider.Apply<BBreadcrumbsDivider, MBreadcrumbsDivider>();
-               // .Apply<BBreadcrumbsItem, MBreadcrumbsItem>();
+            AbstractProvider.Apply<BBreadcrumbsDivider, MBreadcrumbsDivider>()
+                            .Apply<BBreadcrumbsItem, MBreadcrumbsItem>();
         }
 
         public string MBreadcrumbsClasses()
