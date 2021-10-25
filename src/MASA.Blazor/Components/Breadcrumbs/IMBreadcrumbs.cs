@@ -17,15 +17,6 @@ namespace MASA.Blazor
                    cssBuilder.Add(() => MBreadcrumbsClasses());
 
                });
-            ////子主键BCardProgress的样式
-            //CssProvider.Apply("progress", cssBuilder =>
-            //{
-            //    cssBuilder.Add("v-card__progress");
-
-            //}, styleBuilder =>
-            //{
-
-            //});
 
             AbstractProvider.Apply<BBreadcrumbsDivider, MBreadcrumbsDivider>()
                             .Apply<BBreadcrumbsItem, MBreadcrumbsItem>();
@@ -34,6 +25,7 @@ namespace MASA.Blazor
         public string MBreadcrumbsClasses()
         {
             var composite = new List<string>();
+            composite.Add("m-breadcrumbs");
             if (Large) composite.Add("m-breadcrumbs--large");
             composite.Add(ThemeClasses());
             return String.Join(" ", composite);

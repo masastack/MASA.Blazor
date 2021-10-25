@@ -1,10 +1,12 @@
 ﻿using BlazorComponent;
+using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
     internal class MBreadcrumbsDivider : BBreadcrumbsDivider
     {
-        public override string Tag => "li";
+        [Parameter]
+        public override string Tag { get; set; }= "li";
 
         protected override void SetComponentClass()
         {

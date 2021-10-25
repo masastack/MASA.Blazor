@@ -8,14 +8,11 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public class MBreadcrumbsItem : BBreadcrumbsItem,IMRoutable
+    public class MBreadcrumbsItem : BBreadcrumbsItem,IMBreadcrumbsItem
     {
         [Parameter]
         public override string ActiveClass { get; set; } = "m-breadcrumbs__item--disabled";
 
-        protected override void SetComponentClass()
-        {
-            ElementProps = (this as IMRoutable).GenerateRouteLink();
-        }
+        protected override void SetComponentClass() => (this as IMBreadcrumbsItem).SetComponentClass();
     }
 }
