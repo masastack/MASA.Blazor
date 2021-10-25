@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using MASA.Blazor.Doc.Shared;
 
 namespace MASA.Blazor.Doc.Highlight
 {
@@ -14,11 +15,9 @@ namespace MASA.Blazor.Doc.Highlight
             this.jsRuntime = jsRuntime;
         }
 
-        public async ValueTask<MarkupString> HighlightAsync(string code, string language)
+        public async Task HighlightAsync(string code, string language, DotNetObjectReference<HighlightedCode> objectReference, ElementReference codeElement)
         {
-            string highlighted = await jsRuntime.InvokeAsync<string>("BlazorComponent.Prism.highlight", code, language);
-
-            return new MarkupString(highlighted);
+            await jsRuntime.InvokeVoidAsync("BlazorComponent.Prism.highlight", code, language, objectReference, codeElement);
         }
 
         public async Task HighlightAllAsync()

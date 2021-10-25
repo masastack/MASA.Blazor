@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-rounded prop 增加了默认 4px 的 border-radius。 默认情况下， v-sheet 组件没有边框半径。 通过提供自定义的圆角值来定义半径的大小和位置；例如，圆角值 tr-xl l-pill 等于 rounded-tr-xl rounded-l-pill。 关于圆角样式的其他信息在 边框半径页。
+rounded prop 增加了默认 4px 的 border-radius。 默认情况下， `MSheet` 组件没有边框半径。 通过提供自定义的圆角值来定义半径的大小和位置；例如，圆角值 tr-xl l-pill 等于 rounded-tr-xl rounded-l-pill。 关于圆角样式的其他信息在 边框半径页。
 
 ## en-US
 

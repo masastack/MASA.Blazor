@@ -412,12 +412,5 @@ namespace MASA.Blazor
                     break;
             }
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-
-            DomEventJsInterop.RemoveEventListerner<Window>("window", "resize", OnResize);
-        }
     }
 }

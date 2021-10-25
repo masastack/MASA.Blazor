@@ -30,12 +30,12 @@ namespace MASA.Blazor
         {
             get
             {
-                if (!WindowGroup.InternalReverse)
+                if (WindowGroup != null && !WindowGroup.InternalReverse)
                 {
                     return Transition ?? WindowGroup.ComputedTransition;
                 }
 
-                return ReverseTransition ?? WindowGroup.ComputedTransition;
+                return ReverseTransition ?? WindowGroup?.ComputedTransition;
             }
         }
 
@@ -78,6 +78,12 @@ namespace MASA.Blazor
                     await el.UpdateWindowTransitionAsync(false);
                 }
             }
+        }
+
+        protected override async Task OnEnterTo()
+        {
+            var el = Document.QuerySelector(WindowGroup.Ref);
+            await el.UpdateWindowTransitionAsync(true, Ref);
         }
 
         protected override void SetComponentClass()

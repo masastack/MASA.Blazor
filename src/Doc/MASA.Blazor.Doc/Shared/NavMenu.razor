@@ -2,12 +2,12 @@
 @using MASA.Blazor.Doc.Services
 @inherits OwningComponentBase<DemoService>
 @inject ILanguageService LanguageService
-<MList Dense>
+<MList Dense Nav>
     @foreach (var item in MenuItems)
     {
         if (item.Children != null && item.Children.Any())
         {
-            <MListGroup PrependIcon="@item.Icon" Color="primary" AppendIcon="mdi-menu-down">
+            <MListGroup PrependIcon="@item.Icon" Color="primary" AppendIcon="mdi-menu-down" NoAction> 
                 <ActivatorContent>
                     <MListItemContent>
                         <MListItemTitle>@item.Title</MListItemTitle>
@@ -42,8 +42,6 @@
                         else
                         {
                             <MListItem Link Href="@componentItem.Url">
-                                <MListItemIcon>
-                                </MListItemIcon>
                                 <MListItemContent>
                                     <MListItemTitle>
                                         @FormatComponentTitle(componentItem)

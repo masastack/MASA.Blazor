@@ -127,7 +127,9 @@ namespace MASA.Blazor
             if (firstRender)
             {
                 _isNotFirstRender = false;
-                await JsInvokeAsync(JsInteropConstants.AddElementTo, Ref, ".m-application");
+                var overlayElement = ((BDomComponentBase)Overlay.Instance).Ref;
+                await JsInvokeAsync(JsInteropConstants.AddElementTo, overlayElement, ".m-application");
+                await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, ".m-application");
             }
         }
 

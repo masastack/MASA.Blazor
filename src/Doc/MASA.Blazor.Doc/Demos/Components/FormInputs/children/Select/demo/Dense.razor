@@ -42,7 +42,7 @@
 </MContainer>
 
 @code {
-    private string value1 = "1";
+    private string value1;
     private string value2;
     private string value3;
     private string value4;
@@ -59,8 +59,10 @@
     }
 
     List<Item> _items = new()
-    {
-        new Item("Item 1", "1"),
-        new Item("Item 2", "2")
-    };
+        {
+            new Item("Foo", "1"),
+            new Item("Bar", "2"),
+            new Item("Fizz", "3"),
+            new Item("Buzz", "4"),
+        };
 }

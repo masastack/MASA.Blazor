@@ -35,7 +35,7 @@ namespace MASA.Blazor
 
                 return Themeable != null && Themeable.IsDark;
             }
-        } 
+        }
 
         /// <summary>
         /// Applies position: absolute to the component.
@@ -244,7 +244,7 @@ namespace MASA.Blazor
                     var translate = _isBottom ? "translateY" : "translateX";
                     styleBuilder
                         .AddHeight(Height)
-                        .Add($"top:{(!_isBottom ? Top.ToString() : "auto")}")
+                        .Add($"top:{(!_isBottom ? Top.ToUnit() : "auto")}")
                         .AddIf(() => $"maxHeight:calc(100% - {MaxHeight})", () => MaxHeight != null)
                         .AddIf(() => $"transform:{translate}({Transform}%)", () => Transform != null)
                         .Add($"width:{(_isMiniVariant ? MiniVariantWidth.ToUnit() : Width.ToUnit())}")

@@ -23519,9 +23519,11 @@ html {
 }
 
 .m-window__container {
+    display: flex;
+    flex-direction: column;
     height: inherit;
     position: relative;
-    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+    transition: .3s cubic-bezier(.25,.8,.5,1);
 }
 
 .m-window__container--is-active {
