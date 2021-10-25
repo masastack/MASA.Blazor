@@ -35,7 +35,7 @@ namespace MASA.Blazor
 
                 return Themeable != null && Themeable.IsDark;
             }
-        } 
+        }
 
         /// <summary>
         /// Applies position: absolute to the component.
@@ -89,11 +89,12 @@ namespace MASA.Blazor
             {
                 if (value == _value) return;
                 _value = value;
-                ValueChanged.InvokeAsync(_value);
             }
         }
 
         public bool _isActive => Value;
+
+        protected bool _isOverlay => Value && Temporary;
 
         [Parameter]
         public EventCallback<bool> ValueChanged { get; set; }
@@ -124,13 +125,6 @@ namespace MASA.Blazor
         /// </summary>
         [Parameter]
         public bool Right { get; set; }
-
-        //TODO 覆盖层使背景变暗
-        /// <summary>
-        /// A temporary drawer sits above its application and uses a scrim (overlay) to darken the background
-        /// </summary>
-        [Parameter]
-        public bool Temporary { get; set; }
 
         /// <summary>
         /// Sets the height of the navigation drawer
@@ -215,6 +209,7 @@ namespace MASA.Blazor
             if (Temporary)
             {
                 Value = false;
+                ValueChanged.InvokeAsync(Value);
             }
 
             base.OnInitialized();
@@ -249,7 +244,7 @@ namespace MASA.Blazor
                     var translate = _isBottom ? "translateY" : "translateX";
                     styleBuilder
                         .AddHeight(Height)
-                        .Add($"top:{(!_isBottom ? Top.ToString() : "auto")}")
+                        .Add($"top:{(!_isBottom ? Top.ToUnit() : "auto")}")
                         .AddIf(() => $"maxHeight:calc(100% - {MaxHeight})", () => MaxHeight != null)
                         .AddIf(() => $"transform:{translate}({Transform}%)", () => Transform != null)
                         .Add($"width:{(_isMiniVariant ? MiniVariantWidth.ToUnit() : Width.ToUnit())}")
@@ -293,6 +288,17 @@ namespace MASA.Blazor
                     props[nameof(MImage.Width)] = (StringNumber)"100%";
                     props[nameof(MImage.Dark)] = Dark;
                     props[nameof(MImage.Light)] = Light;
+                })
+                .Apply<BOverlay, MOverlay>(props =>
+                {
+                    props[nameof(MOverlay.ZIndex)] = 7;
+                    props[nameof(MOverlay.Absolute)] = true;
+                    props[nameof(MOverlay.Value)] = _isOverlay;
+                    props[nameof(MOverlay.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
+                    {
+                        Value = !Value;
+                        await ValueChanged.InvokeAsync(Value);
+                    });
                 });
         }
     }

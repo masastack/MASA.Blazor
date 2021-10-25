@@ -16,6 +16,25 @@ namespace MASA.Blazor
         [Parameter]
         public bool Light { get; set; }
 
+        [Inject]
+        public GlobalConfig GlobalConfig { get; set; }
+
+        public bool InternalReverse => GlobalConfig.RTL ? !Reverse : Reverse;
+
+        public string ComputedTransition
+        {
+            get
+            {
+                //TODO:isBooted
+
+                var axis = Vertical ? "y" : "x";
+                var reverse = InternalReverse;//TODO:isReverse
+                var direction = reverse ? "-reverse" : "";
+
+                return $"m-window-{axis}{direction}-transition";
+            }
+        }
+
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -40,6 +59,10 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-window__container")
                         .AddIf("m-window__container--is-active", () => IsActive);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddHeight(TransitionHeight);
                 })
                 .Apply("prev", cssBuilder =>
                 {

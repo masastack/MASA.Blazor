@@ -1,6 +1,6 @@
 <MRow Align="@AlignTypes.Center">
     <MCol Cols="12">
-        <MSelect Items="items"
+        <MSelect Items="_items"
                  @bind-Value="e1"
                  ItemText="u => u.Label"
                  ItemValue="u => u.Value"
@@ -22,9 +22,11 @@
         }
     }
 
-    List<Item> items = new()
-    {
-            new Item("Item 1", "1"),
-            new Item("Item 2", "2")
-    };
+    List<Item> _items = new()
+        {
+            new Item("Foo", "1"),
+            new Item("Bar", "2"),
+            new Item("Fizz", "3"),
+            new Item("Buzz", "4"),
+        };
 }

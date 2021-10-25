@@ -7,7 +7,7 @@
         </MCol>
         <MCol Cols="6">
             <MSelect @bind-Value="e1"
-                     Items="items"
+                     Items="_items"
                      Label="Select"
                      ItemText="u => u.Label"
                      ItemValue="u => u.Value"
@@ -24,7 +24,7 @@
             <MSelect @bind-Value="e2"
                      ItemText="u => u.Label"
                      ItemValue="u => u.Value"
-                     Items="items"
+                     Items="_items"
                      AppendOuterIcon="mdi-map"
                      HideDetails="true"
                      Label="Select"
@@ -37,11 +37,13 @@
     private string e1;
     private string e2;
 
-    List<Item> items = new()
-    {
-        new Item("Item 1", "1"),
-        new Item("Item 2", "2")
-    };
+    List<Item> _items = new()
+        {
+            new Item("Foo", "1"),
+            new Item("Bar", "2"),
+            new Item("Fizz", "3"),
+            new Item("Buzz", "4"),
+        };
 
     public class Item
     {

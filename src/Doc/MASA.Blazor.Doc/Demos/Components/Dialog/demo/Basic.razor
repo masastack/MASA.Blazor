@@ -1,9 +1,8 @@
 ﻿<MRow Justify="@JustifyTypes.Center">
-    <MButton Color="primary" OnClick="() => _visible = true">CLICK ME</MButton>
-
-    <MDialog @bind-Visible="_visible" Width="500">
+    <MButton Color="red lighten-2" Dark OnClick="() => _visible = true">CLICK ME</MButton>
+    <MDialog @bind-Value="_visible" Width="500">
         <MCard>
-            <MCardTitle>
+            <MCardTitle Class="text-h5 grey lighten-2">
                 Privacy Policy
             </MCardTitle>
 

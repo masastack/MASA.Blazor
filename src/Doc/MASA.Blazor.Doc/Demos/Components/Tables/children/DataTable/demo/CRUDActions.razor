@@ -14,7 +14,7 @@
                      OnClick="()=>_dialog=true">
                 New Item
             </MButton>
-            <MDialog @bind-Visible="_dialog"
+            <MDialog @bind-Value="_dialog"
                      MaxWidth="500">
                 <MCard>
                     <MCardTitle>
@@ -73,7 +73,7 @@
                     </MCardActions>
                 </MCard>
             </MDialog>
-            <MDialog @bind-Visible="_dialogDelete" MaxWidth="500">
+            <MDialog @bind-Value="_dialogDelete" MaxWidth="500">
                 <MCard>
                     <MCardTitle Class="text-h5">Are you sure you want to delete this item?</MCardTitle>
                     <MCardActions>

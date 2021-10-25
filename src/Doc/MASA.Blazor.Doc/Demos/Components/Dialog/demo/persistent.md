@@ -1,13 +1,13 @@
 ---
 order: 3
 title:
-  zh-CN: 持久的
+  zh-CN: 保留
   en-US: Persistent
 ---
 
 ## zh-CN
 
-与 Simple Dialog 类似，不同之处在于在触摸外部时不会将其关闭。
+与普通对话框相似，但当用户点击对话框外部或按下 esc 键时，对话框不会关闭。
 
 ## en-US
 

@@ -38,17 +38,16 @@
 </MRow>
 
 @code {
-    private string value1 = "1";
+    private string value1;
     private string value2;
     private string value3;
     private string value4;
-
-    string[] items2 = { "item 1", "item 2" };
 
     public class Item
     {
         public string Label { get; set; }
         public string Value { get; set; }
+
         public Item(string label, string value)
         {
             Label = label;
@@ -58,7 +57,9 @@
 
     List<Item> items = new()
         {
-            new Item("Item 1", "1"),
-            new Item("Item 2", "2")
+            new Item("Foo", "1"),
+            new Item("Bar", "2"),
+            new Item("Fizz", "3"),
+            new Item("Buzz", "4"),
         };
 }
