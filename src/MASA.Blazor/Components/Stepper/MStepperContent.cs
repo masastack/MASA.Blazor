@@ -11,11 +11,9 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace MASA.Blazor
 {
-    public partial class MStepperContent : BStepperContent, IAsyncDisposable
+    public partial class MStepperContent : BStepperContent
     {
         protected StringNumber Height { get; set; } = "auto";
-
-        //protected override bool IsActive=> Stepper.i
 
         [CascadingParameter]
         public MStepper Stepper { get; set; }
@@ -36,8 +34,7 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .Add("transform-origin: center top 0px")
-                        .AddIf("display:none", () => Stepper.Value != Step);
+                        .Add("transform-origin: center top 0px");
                 })
                 .Apply("wrapper", cssBuilder =>
                 {
@@ -57,16 +54,12 @@ namespace MASA.Blazor
             Watcher
                 .Watch<bool>(nameof(IsActive), async (oldVal, newVal) =>
                 {
-                    // If active and the previous state
-                    // was null, is just booting up
                     if (newVal == default && oldVal == default)
                     {
                         Height = "auto";
                     }
-
-                    if (Stepper.Vertical)
+                    else if (Stepper.Vertical)
                     {
-
                         if (IsActive)
                             await Enter();
                         else
@@ -79,9 +72,8 @@ namespace MASA.Blazor
         {
             if (firstRender)
             {
-                var wrapper = Document.QuerySelector(".wrapper");
+                var wrapper = Document.QuerySelector(Ref);
                 await wrapper.AddEventListenerAsync("transitionend", CreateEventCallback<MouseEventArgs>(OnTransition), false);
-
             }
         }
 
@@ -111,6 +103,7 @@ namespace MASA.Blazor
             //requestAnimationFrame(() => {
             //    scrollHeight = this.$refs.wrapper.scrollHeight
             //})
+            await Task.Delay(16);
 
             var el = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, Ref);
             scrollHeight = el.ScrollHeight;
@@ -134,10 +127,10 @@ namespace MASA.Blazor
             Height = 0;
         }
 
-        public async ValueTask DisposeAsync()
-        {
-            var wrapper = Document.QuerySelector(".wrapper");
-            await wrapper.RemoveEventListenerAsync("transitionend");
-        }
+        //public async ValueTask DisposeAsync()
+        //{
+        //    var wrapper = Document.QuerySelector(".wrapper");
+        //    await wrapper.RemoveEventListenerAsync("transitionend");
+        //}
     }
 }

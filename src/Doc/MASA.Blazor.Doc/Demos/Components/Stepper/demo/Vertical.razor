@@ -16,19 +16,24 @@
         <MButton Color="primary" Click="()=>_step=3">Continue</MButton>
         <MButton Text>Cancel</MButton>
     </MStepperContent>
-    <MStepperStep Step="3">
+    <MStepperStep Step="3" Complete="_step>3">
         Select an ad format and name ad unit
     </MStepperStep>
     <MStepperContent Step="3">
-        <MCard Class="mb-12" Height="200" Color="grey lighten-1">3</MCard>
-        <MButton Color="primary" Click="()=>_step=1">Continue</MButton>
+        <MCard Class="mb-12" Height="200" Color="grey lighten-1"></MCard>
+        <MButton Color="primary" Click="()=>_step=4">Continue</MButton>
         <MButton Text>Cancel</MButton>
     </MStepperContent>
     <MStepperStep Step="4">
         View setup instructions
     </MStepperStep>
+    <MStepperContent Step="4">
+        <MCard Class="mb-12" Height="200" Color="grey lighten-1"></MCard>
+        <MButton Color="primary" Click="()=>_step=1">Continue</MButton>
+        <MButton Text>Cancel</MButton>
+    </MStepperContent>
 </MStepper>
 
-@code{
+@code {
     private int _step = 1;
 }

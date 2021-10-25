@@ -31,6 +31,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool NonLinear { get; set; }
 
+
         [Parameter]
         public int Value
         {
@@ -88,7 +89,6 @@ namespace MASA.Blazor
             }
         }
 
-
         public void RegisterStep(MStepperStep step)
         {
             Steps.Add(step);
@@ -96,7 +96,6 @@ namespace MASA.Blazor
 
         public void RegisterContent(MStepperContent content)
         {
-            //TODO:content.isVertical = Vertical;
             Content.Add(content);
         }
 
@@ -115,7 +114,14 @@ namespace MASA.Blazor
 
         public void StepClick(int step)
         {
-            Value = step;
+            if (ValueChanged.HasDelegate)
+            {
+                ValueChanged.InvokeAsync(step);
+            }
+            else
+            {
+                Value = step;
+            }
         }
     }
 }
