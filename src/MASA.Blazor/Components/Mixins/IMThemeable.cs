@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public interface IMThemeable : IThemeable
+    public interface IMThemeable
     {
-        public string ThemeClasses()
-        {
-            if (IsDark) return "theme--dark";
-            else return "theme--light";
-        }
+        public bool Dark { get; set; }
+        public bool Light { get; set; }
     }
 }

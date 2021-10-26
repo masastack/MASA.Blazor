@@ -29,7 +29,7 @@
                     Today
                 </div>
                 <MTimeline AlignTop Dense>
-                    @foreach (var message in messages)
+                    @foreach (var message in _messages)
                     {
                         <MTimelineItem key="@message.Time" Color="@message.Color" Small>
                             <div>
@@ -48,8 +48,8 @@
 </MContainer>
 
 @code {
-    MessageDto[] messages = new[]
-                {
+    MessageDto[] _messages = new[]
+    {
         new MessageDto
         {
             From="You",

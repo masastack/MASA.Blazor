@@ -7,16 +7,8 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public interface IMElevatable : IElevatable
+    public interface IMElevatable 
     {
-        public string ElevationClasses()
-        {
-            if (Elevation is null) return "";
-            if (int.TryParse(Elevation.ToString(), out var number))
-            {
-                return $"elevation-{number}";
-            }
-            else return "";
-        }
+        StringNumber Elevation { get; set; }
     }
 }

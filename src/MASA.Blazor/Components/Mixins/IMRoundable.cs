@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public interface IMRoundable : IRoundable
+    public interface IMRoundable 
     {
+        StringBoolean Rounded { get; }
+
+        bool Tile { get; }
+
         string RoundedClasses()
         {
             var composite = new List<string>();

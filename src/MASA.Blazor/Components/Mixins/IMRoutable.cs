@@ -8,15 +8,35 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public interface IMRoutable : IRoutable
+    public interface IMRoutable
     {
-        public string RoutableClasses()
-        {
-            if (To is not null) return "";
-            var composite = new List<string>();
-            if (ActiveClass is not null) composite.Add(ActiveClass);
-            return String.Join(" ", composite);
-        }
+        string ActiveClass { get; }
+
+        bool Append { get; }
+
+        bool Disabled { get; }
+
+        bool? Exact { get; }
+
+        bool ExactPath { get; }
+
+        string ExactActiveClass { get; }
+
+        bool Link { get; }
+
+        object Href { get; }
+
+        object To { get; }
+
+        bool Nuxt { get; }
+
+        bool Replace { get; }
+
+        object Ripple { get; }
+
+        string Tag { get; }
+
+        string Target { get; }
 
         public bool IsClickable(bool hasClick)
         {

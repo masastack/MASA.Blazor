@@ -9,17 +9,17 @@
         </MListItemContent>
     </MListItem>
 
-    <MCardText>     
+    <MCardText>
         <MRow Align=AlignTypes.Center>
             <MCol Class="text-h2" Cols="6">
-               23&deg;C
+                23&deg;C
             </MCol>
             <MCol Cols="6">
-                <MImage Src="https://cdn.vuetifyjs.com/images/cards/sun.png" alt="Sunny image" Width=92/>
+                <MImage Src="https://cdn.vuetifyjs.com/images/cards/sun.png" alt="Sunny image" Width=92 />
             </MCol>
         </MRow>
     </MCardText>
- 
+
     <MListItem>
         <MListItemIcon>
             <MIcon>mdi-send</MIcon>
@@ -34,10 +34,10 @@
         <MListItemSubtitle>48%</MListItemSubtitle>
     </MListItem>
 
-    <MSlider Value=time Max=6 TickLabels=labels Class="mx-4" Ticks=true >
+    <MSlider Value=_time Max=6 TickLabels=_labels Class="mx-4" Ticks=true>
     </MSlider>
     <MList Class="transparent">
-        @foreach (var forecast in forecasts)
+        @foreach (var forecast in _forecasts)
         {
             <MListItem key="@forecast.Day">
 
@@ -67,11 +67,13 @@
 
 </MCard>
 
-@code{
-    List<string> labels =new List<string> { "SU", "MO", "TU", "WED", "TH", "FR", "SR" };
-    double time = 0;
-    Forecast[] forecasts = new[]
-    {
+@code {
+    List<string> _labels = new List<string> { "SU", "MO", "TU", "WED", "TH", "FR", "SR" };
+
+    double _time = 0;
+
+    Forecast[] _forecasts = new[]
+        {
         new Forecast
         {
             Day="Tuesday",
@@ -91,10 +93,11 @@
             Temp="25\xB0/15\xB0"
         },
     };
+
     class Forecast
     {
-        public string Day{ get; set; }
-        public string Icon{ get; set; }
-        public string Temp{ get; set; }
+        public string Day { get; set; }
+        public string Icon { get; set; }
+        public string Temp { get; set; }
     }
 }

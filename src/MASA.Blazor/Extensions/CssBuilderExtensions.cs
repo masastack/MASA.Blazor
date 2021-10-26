@@ -166,5 +166,79 @@ namespace BlazorComponent
 
             return cssBuilder;
         }
+
+        public static CssBuilder AddRoutable(this CssBuilder cssBuilder, IMRoutable routable)
+        {
+            return cssBuilder.AddIf(routable.ActiveClass, () => routable.To is not null && routable.ActiveClass is not null);
+        }
+
+        public static CssBuilder AddTheme(this CssBuilder cssBuilder, IMThemeable routable)
+        {
+            return cssBuilder.AddIf("theme--dark", () => routable.Dark)
+                             .AddIf("theme--light", () => routable.Light);
+        }
+
+        public static CssBuilder AddElevatable(this CssBuilder cssBuilder, IMElevatable elevatable)
+        {
+            return cssBuilder.Add(ElevationClasses);
+
+            string ElevationClasses()
+            {
+                if (elevatable.Elevation is null) return "";
+                if (int.TryParse(elevatable.Elevation.ToString(), out var number))
+                {
+                    return $"elevation-{number}";
+                }
+                else return "";
+            }
+        }
+
+        public static CssBuilder AddRoundable(this CssBuilder cssBuilder, IMRoundable roundable)
+        {
+            return cssBuilder.Add(RoundedClasses);
+
+            string RoundedClasses()
+            {
+                var composite = new List<string>();
+                if (roundable.Tile is true)
+                {
+                    composite.Add("rounded-0");
+                }
+                else if (roundable.Rounded == true)
+                {
+                    composite.Add("rounded");
+                }
+                else if (roundable.Rounded == false)
+                {
+                }
+                else if (roundable.Rounded is not null)
+                {
+                    var values = roundable.Rounded.ToString().Split(" ");
+                    foreach (var value in values)
+                    {
+                        composite.Add($"rounded-{value}");
+                    }
+                }
+                return String.Join(" ", composite);
+            }
+        }
+
+        public static CssBuilder AddSheet(this CssBuilder cssBuilder, IMSheet sheet)
+        {
+            return cssBuilder.Add(VSheetClasses)
+                      .AddTheme(sheet)
+                      .AddElevatable(sheet)
+                      .AddRoundable(sheet);
+
+
+            string VSheetClasses()
+            {
+                var composite = new List<string>();
+                composite.Add("m-sheet");
+                if (sheet.Outlined) composite.Add("m-sheet--outlined");
+                else if (sheet.Shaped) composite.Add("m-sheet--shaped");
+                return String.Join(" ", composite);
+            }
+        }
     }
 }
