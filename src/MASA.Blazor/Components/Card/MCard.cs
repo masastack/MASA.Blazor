@@ -153,8 +153,6 @@ namespace MASA.Blazor
                             .AddIf("m-card--disabled", () => Raised)
                             .AddSheet(this);
 
-
-
               }, styleBuilder =>
               {
                   styleBuilder

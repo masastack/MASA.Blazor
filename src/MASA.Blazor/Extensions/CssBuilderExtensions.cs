@@ -175,7 +175,7 @@ namespace BlazorComponent
         public static CssBuilder AddTheme(this CssBuilder cssBuilder, IMThemeable routable)
         {
             return cssBuilder.AddIf("theme--dark", () => routable.Dark)
-                             .AddIf("theme--light", () => routable.Light);
+                             .AddIf("theme--light", () => !routable.Dark);
         }
 
         public static CssBuilder AddElevatable(this CssBuilder cssBuilder, IMElevatable elevatable)
