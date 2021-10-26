@@ -30,12 +30,10 @@
                     </MCardActions>
                 </MCard>
             </MCol>
-            @{
-                int i = 0;
-            }
-            @foreach (var card in cards)
+            @for (var i = 0; i < _cards.Length; i++)
             {
-                i++;
+                var card = _cards[i];
+
                 <MCol key="@i" Cols=12>
                     <MCard Color="@card.Color" Dark>
                         <div class="d-flex flex-no-wrap justify-space-between">
@@ -58,14 +56,14 @@
                                     }
                                     else
                                     {
-                                        <MButton Class="ml-2 mt-5" Outlined Rounded Small>START RADIO</MButton> 
-                                    }                                 
+                                        <MButton Class="ml-2 mt-5" Outlined Rounded Small>START RADIO</MButton>
+                                    }
                                 </MCardActions>
                             </div>
                             <MAvatar Class="ma-3" Size=125 Tile>
                                 <MImage Src="@card.Src"></MImage>
                             </MAvatar>
-                         </div>
+                        </div>
                     </MCard>
                 </MCol>
             }
@@ -76,7 +74,7 @@
 </MCard>
 
 @code {
-    Card[] cards = new[]
+    Card[] _cards = new[]
     {
         new Card
         {

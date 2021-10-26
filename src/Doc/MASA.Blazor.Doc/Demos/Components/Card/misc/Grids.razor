@@ -18,7 +18,7 @@
 
     <MContainer Fluid>
         <MRow Dense>
-            @foreach (var card in cards)
+            @foreach (var card in _cards)
             {
                 <MCol key="@card.Title" Cols=@card.Flex>
                     <MCard>
@@ -47,8 +47,8 @@
 </MCard>
 
 @code {
-    Card[] cards = new Card[]
-            {
+    Card[] _cards = new Card[]
+                {
         new Card
         {
             Title="Pre-fab homes",
@@ -67,7 +67,7 @@
             Src="https://cdn.vuetifyjs.com/images/cards/plane.jpg",
             Flex=6,
         }
-            };
+                };
 
     class Card
     {

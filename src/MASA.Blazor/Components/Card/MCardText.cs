@@ -17,7 +17,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-card__text")
-                        .AddTheme(Card?.IsDark ?? false);
+                        .AddTheme(Card);
                 });
         }
     }
