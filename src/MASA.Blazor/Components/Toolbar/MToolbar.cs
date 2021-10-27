@@ -151,16 +151,16 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Merge(typeof(BSheetBody<>), typeof(BToolbarSheetBody<IToolbar>), props =>
+                .Merge(typeof(BSheetBody<>), typeof(BToolbarBody<IToolbar>), props =>
                 {
                     //TODO: Remove this
-                    props[nameof(BToolbarSheetBody<IToolbar>.CssProvider)] = CssProvider;
-                    props[nameof(BToolbarSheetBody<IToolbar>.AbstractProvider)] = AbstractProvider;
-                    props[nameof(BToolbarSheetBody<IToolbar>.ImgContent)] = ImgContent;
-                    props[nameof(BToolbarSheetBody<IToolbar>.Src)] = Src;
-                    props[nameof(BToolbarSheetBody<IToolbar>.Height)] = ComputedHeight;
-                    props[nameof(BToolbarSheetBody<IToolbar>.IsExtended)] = IsExtended;
-                    props[nameof(BToolbarSheetBody<IToolbar>.ExtensionContent)] = ExtensionContent;
+                    props[nameof(BToolbarBody<IToolbar>.CssProvider)] = CssProvider;
+                    props[nameof(BToolbarBody<IToolbar>.AbstractProvider)] = AbstractProvider;
+                    props[nameof(BToolbarBody<IToolbar>.ImgContent)] = ImgContent;
+                    props[nameof(BToolbarBody<IToolbar>.Src)] = Src;
+                    props[nameof(BToolbarBody<IToolbar>.Height)] = ComputedHeight;
+                    props[nameof(BToolbarBody<IToolbar>.IsExtended)] = IsExtended;
+                    props[nameof(BToolbarBody<IToolbar>.ExtensionContent)] = ExtensionContent;
                 })
                 .Apply(typeof(IImage), typeof(MImage), props =>
                 {
