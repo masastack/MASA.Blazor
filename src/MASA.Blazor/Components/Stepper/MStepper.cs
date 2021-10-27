@@ -31,7 +31,6 @@ namespace MASA.Blazor
         [Parameter]
         public bool NonLinear { get; set; }
 
-
         [Parameter]
         public int Value
         {
@@ -97,6 +96,16 @@ namespace MASA.Blazor
         public void RegisterContent(MStepperContent content)
         {
             Content.Add(content);
+        }
+
+        public void UnRegisterStep(MStepperStep stepperStep)
+        {
+            Steps.RemoveAll(step => step != stepperStep);
+        }
+
+        public void UnRegisterContent(MStepperContent stepperContent)
+        {
+            Content.RemoveAll(content => content != stepperContent);
         }
 
         public void UpdateView()

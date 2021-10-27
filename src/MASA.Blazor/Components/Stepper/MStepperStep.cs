@@ -109,5 +109,12 @@ namespace MASA.Blazor
 
             StateHasChanged();
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            Stepper.UnRegisterStep(this);
+
+            base.Dispose(disposing);
+        }
     }
 }

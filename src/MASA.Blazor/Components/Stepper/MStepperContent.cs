@@ -6,14 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlazorComponent.Web;
-using Element = BlazorComponent.Web.Element;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace MASA.Blazor
 {
-    public partial class MStepperContent : BStepperContent
+    public partial class MStepperContent : BStepperContent, IAsyncDisposable
     {
+        private bool _firstRender = true;
+
         protected StringNumber Height { get; set; } = "auto";
+
+        protected override bool IsVertical => Stepper.Vertical;
 
         [CascadingParameter]
         public MStepper Stepper { get; set; }
@@ -34,12 +36,14 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .Add("transform-origin: center top 0px");
+                        .Add("transform-origin: center top 0px")
+                        .AddIf("display:none", () => IsVertical && !IsActive && _firstRender);
                 })
                 .Apply("wrapper", cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-stepper__wrapper");
+                        .Add("m-stepper__wrapper")
+                        .AddIf("active", () => IsActive);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -50,30 +54,20 @@ namespace MASA.Blazor
         protected override void OnInitialized()
         {
             Stepper.RegisterContent(this);
-
-            Watcher
-                .Watch<bool>(nameof(IsActive), async (oldVal, newVal) =>
-                {
-                    if (newVal == default && oldVal == default)
-                    {
-                        Height = "auto";
-                    }
-                    else if (Stepper.Vertical)
-                    {
-                        if (IsActive)
-                            await Enter();
-                        else
-                            await Leave();
-                    }
-                });
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                var wrapper = Document.QuerySelector(Ref);
-                await wrapper.AddEventListenerAsync("transitionend", CreateEventCallback<MouseEventArgs>(OnTransition), false);
+                _firstRender = false;
+
+                if (Stepper.Vertical)
+                {
+                    await JsInvokeAsync(JsInteropConstants.InitStepperWrapper, Ref);
+                }
+
+                await JsInvokeAsync(JsInteropConstants.AddStepperEventListener, Ref, IsActive);
             }
         }
 
@@ -85,52 +79,11 @@ namespace MASA.Blazor
             StateHasChanged();
         }
 
-        public Task OnTransition(MouseEventArgs args)
+        public async ValueTask DisposeAsync()
         {
-            if (IsActive)
-            {
-                Height = "auto";
-            }
+            Stepper.UnRegisterContent(this);
 
-            return Task.CompletedTask;
+            await JsInvokeAsync(JsInteropConstants.RemoveStepperEventListener, Ref, IsActive);
         }
-
-        public async Task Enter()
-        {
-            double scrollHeight;
-
-            //TODO:
-            //requestAnimationFrame(() => {
-            //    scrollHeight = this.$refs.wrapper.scrollHeight
-            //})
-            await Task.Delay(16);
-
-            var el = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, Ref);
-            scrollHeight = el.ScrollHeight;
-
-            Height = 0;
-
-            await Task.Delay(450);
-
-            if (IsActive)
-            {
-                Height = scrollHeight != default ? scrollHeight : "auto";
-            }
-        }
-
-        public async Task Leave()
-        {
-            var el = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, Ref);
-            Height = el.ScrollHeight;
-
-            await Task.Delay(10);
-            Height = 0;
-        }
-
-        //public async ValueTask DisposeAsync()
-        //{
-        //    var wrapper = Document.QuerySelector(".wrapper");
-        //    await wrapper.RemoveEventListenerAsync("transitionend");
-        //}
     }
 }

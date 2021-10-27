@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Element = BlazorComponent.Web.Element;
 
@@ -19,6 +20,7 @@ namespace MASA.Blazor
         private double _pageYOffset;
         private bool _isActive;
         private Guid _activatorId;
+        private CancellationTokenSource _cancellationTokenSource;
 
         protected bool HasWindow => _window != null;
 
@@ -162,7 +164,6 @@ namespace MASA.Blazor
                         .Add(() => $"left:{OffsetLeft}px")
                         .Add(() => $"top:{OffsetTop}px")
                         .Add($"opacity:{(Value ? 0.9 : 0)}")
-                        .Add($"opacity:{(Value ? 0.9 : 0)}")
                         .Add($"z-index:{ZIndex}")
                         .AddBackgroundColor(Color);
                 });
@@ -184,9 +185,9 @@ namespace MASA.Blazor
                     Value = !Value;
                 }), false);
 
-                await activator.AddEventListenerAsync("mouseenter", CreateEventCallback<MouseEventArgs>(HandleOnMouseEnter), false);
+                await activator.AddEventListenerAsync<MouseEventArgs>("mouseenter", HandleOnMouseEnter, false);
 
-                await activator.AddEventListenerAsync("mouseleave", CreateEventCallback<MouseEventArgs>(HandleOnMouseLeave), false);
+                await activator.AddEventListenerAsync<MouseEventArgs>("mouseleave", HandleOnMouseLeave, false);
 
                 _window = await JsInvokeAsync<Window>(JsInteropConstants.GetWindow);
 
@@ -357,13 +358,13 @@ namespace MASA.Blazor
         protected async Task HandleOnMouseEnter(MouseEventArgs args)
         {
             await OptimizPosition();
-            RunDelay("open");
+            _ = RunDelay("open");
         }
 
         protected async Task HandleOnMouseLeave(MouseEventArgs args)
         {
             await OptimizPosition();
-            RunDelay("close");
+            _ = RunDelay("close");
         }
 
         private async void OnResize(Window window)
@@ -396,9 +397,12 @@ namespace MASA.Blazor
             await InvokeStateHasChangedAsync();
         }
 
-        private void RunDelay(string type)
+        private async Task RunDelay(string type)
         {
-            Task.Delay(10);
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+
+            await Task.Delay(100, _cancellationTokenSource.Token);
 
             switch (type)
             {
@@ -411,6 +415,8 @@ namespace MASA.Blazor
                 default:
                     break;
             }
+
+            await InvokeAsync(StateHasChanged);
         }
     }
 }
