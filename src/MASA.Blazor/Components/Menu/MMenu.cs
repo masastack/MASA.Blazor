@@ -28,6 +28,33 @@ namespace MASA.Blazor
         public bool Dark { get; set; }
 
         [Parameter]
+        public bool Light { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return false;
+            }
+        }
+
+        protected override IThemeable Themeable => new ThemeableProvider
+        {
+            Dark = Dark,
+            Light = Light
+        };
+
+        [Parameter]
         public ElementReference ActivatorRef { get; set; }
 
         //TODO:menu将会改进
@@ -46,7 +73,7 @@ namespace MASA.Blazor
 
                 await OptimizPosition();
             }
-            
+
             await base.OnAfterRenderAsync(firstRender);
         }
 
@@ -227,13 +254,6 @@ namespace MASA.Blazor
             {
                 PreventRender();
             }
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-
-            DomEventJsInterop.RemoveEventListerner<Window>("window", "resize", OnResize);
         }
     }
 }

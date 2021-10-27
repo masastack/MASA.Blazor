@@ -1,3 +1,50 @@
-﻿<div>
-    Todo...
-</div>
+﻿<MRow Justify="JustifyTypes.SpaceAround">
+    <MCol Cols="@("auto")">
+        <MButton Color="primary"
+                 OnClick="()=>dialog = true">From the bottom</MButton>
+
+        <MDialog @bind-Value="dialog"
+                 Transition="dialog-bottom-transition"
+                 MaxWidth="600">
+            <MCard>
+                <MToolbar Color="primary"
+                          Dark>
+                    Opening from the bottom
+                </MToolbar>
+                <MCardText>
+                    <div class="text-h2 pa-12">Hello world!</div>
+                </MCardText>
+                <MCardActions Class="justify-end">
+                    <MButton Text
+                             OnClick="()=>dialog = false">Close</MButton>
+                </MCardActions>
+            </MCard>
+        </MDialog>
+    </MCol>
+
+    <MCol Cols="@("auto")">
+        <MButton Color="primary"
+             OnClick="()=>dialog1 = true">From the top</MButton>
+
+        <MDialog @bind-Value="dialog1"
+                 Transition="dialog-top-transition"
+                 MaxWidth="600">
+            <MCard>
+                <MToolbar Color="primary"
+                          Dark>Opening from the top</MToolbar>
+                <MCardText>
+                    <div class="text-h2 pa-12">Hello world!</div>
+                </MCardText>
+                <MCardActions Class="justify-end">
+                    <MButton Text
+                             OnClick="()=>dialog1 = false">Close</MButton>
+                </MCardActions>
+            </MCard>
+        </MDialog>
+    </MCol>
+</MRow>
+
+@code {
+    bool dialog = false;
+    bool dialog1 = false;
+}

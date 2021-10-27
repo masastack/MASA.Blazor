@@ -10,7 +10,7 @@
 
             <MOverlay Absolute
                       Opacity="1.0"
-                      @bind-Value="overlay">
+                      Value="overlay">
                 <MButton Color="orange lighten-2"
                          OnClick="Hide">
                     Hide Overlay
@@ -29,7 +29,6 @@
 
     void Hide(MouseEventArgs args)
     {
-        System.Console.WriteLine("hide..");
         overlay = false;
     }
 }

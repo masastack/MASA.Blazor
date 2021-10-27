@@ -2,9 +2,9 @@
 @inherits OwningComponentBase<DemoService>
 
 <ul class="mb-6">
-    @if (Items != null)
+    @if (_items != null)
     {
-        @foreach (var item in Items)
+        @foreach (var item in _items)
         {
             var exClass = item == ActiveItem ? " primary--text router-link-active" : "text--disabled";
             var pl = item.Level switch 

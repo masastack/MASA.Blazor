@@ -18,13 +18,13 @@
 </MRow>
 
 @code {
-    List<string> items = new() { "item 1", "item 2", "item 3", "item 4" };
+    List<string> items = new() { "Foo", "Bar", "Fizz", "Buzz" };
 
     List<KeyValuePair<string, bool>> items2 = new Dictionary<string, bool>
     {
-    { "item 1", false },
-    { "item 2", false },
-    { "item 3", true },
-    { "item 4", false },
+        { "Foo", false },
+        { "Bar", false },
+        { "Fizz", true },
+        { "Buzz", false }
     }.ToList();
 }

@@ -1,7 +1,7 @@
 ﻿<MRow Justify="@JustifyTypes.Center">
     <MButton Color="primary" Click="() => dialog = true">Open Dialog</MButton>
 
-    <MDialog @bind-Visible="dialog"
+    <MDialog @bind-Value="dialog"
              Scrollable
              MaxWidth="300">
         <MCard>

@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MOverlay : BOverlay, IThemeable
+    public partial class MOverlay : BOverlay, IThemeable, IOverlay
     {
-
         [Parameter]
         public bool Dark { get; set; } = true;
 
@@ -15,6 +14,21 @@ namespace MASA.Blazor
 
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
+
+        [Parameter]
+        public RenderFragment ChildContent { get; set; }
+
+        [Parameter]
+        public bool Absolute { get; set; }
+
+        [Parameter]
+        public string Color { get; set; } = "#212121";
+
+        [Parameter]
+        public StringNumber Opacity { get; set; } = 0.46;
+
+        [Parameter]
+        public int ZIndex { get; set; } = 5;
 
         public bool IsDark
         {
@@ -47,24 +61,27 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .Add(() => $"z-index: {ZIndex}")
-                        .AddIf("visibility:hidden", () => !Value);
+                        .Add(() => $"z-index: {ZIndex}");
                 })
                 .Apply("scrim", cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-overlay__scrim");
+                        .Add("m-overlay__scrim")
+                        .AddBackgroundColor(Color);
                 }, styleBuilder =>
                 {
                     styleBuilder
                         .AddBackgroundColor(Color)
-                        .Add(() => Value ? $"opacity: {Opacity.TryGetNumber().number}" : "opacity: 0");
+                        .Add(() => $"opacity:{(Value ? Opacity.TryGetNumber().number : 0)}");
                 })
                 .Apply("content", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-overlay__content");
                 });
+
+            AbstractProvider
+                .ApplyOverlayDefault();
         }
     }
 }

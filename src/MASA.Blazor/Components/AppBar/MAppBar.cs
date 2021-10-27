@@ -11,7 +11,7 @@ using Element = BlazorComponent.Web.Element;
 
 namespace MASA.Blazor
 {
-    public partial class MAppBar : MToolbar, IScrollable
+    public partial class MAppBar : MToolbar, IScrollable, IThemeable
     {
         private string elevateClass = "m-app-bar--hide-shadow";
 
