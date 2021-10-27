@@ -1,8 +1,8 @@
 ---
 order: 1
 title:
-  zh-CN: 对齐
-  en-US: Alignment
+  zh-CN: 使用
+  en-US: Usage
 ---
 
 ## zh-CN
