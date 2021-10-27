@@ -223,22 +223,5 @@ namespace BlazorComponent
             }
         }
 
-        public static CssBuilder AddSheet(this CssBuilder cssBuilder, IMSheet sheet)
-        {
-            return cssBuilder.Add(VSheetClasses)
-                      .AddTheme(sheet)
-                      .AddElevatable(sheet)
-                      .AddRoundable(sheet);
-
-
-            string VSheetClasses()
-            {
-                var composite = new List<string>();
-                composite.Add("m-sheet");
-                if (sheet.Outlined) composite.Add("m-sheet--outlined");
-                else if (sheet.Shaped) composite.Add("m-sheet--shaped");
-                return String.Join(" ", composite);
-            }
-        }
     }
 }

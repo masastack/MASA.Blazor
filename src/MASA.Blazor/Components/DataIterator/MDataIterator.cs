@@ -104,6 +104,7 @@ namespace MASA.Blazor
         protected Dictionary<string, bool> Expansion { get; } = new();
 
         protected Dictionary<string, bool> Selection { get; } = new();
+
         [Parameter]
         public string Color { get; set; }
 

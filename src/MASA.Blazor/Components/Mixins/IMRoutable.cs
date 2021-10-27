@@ -37,15 +37,5 @@ namespace MASA.Blazor
         string Tag { get; }
 
         string Target { get; }
-
-        public bool IsClickable(bool hasClick)
-        {
-            if (Disabled) return false;
-            return IsLink() || hasClick;
-        }
-        bool IsLink()
-        {
-            return To is not null || Href is not null || Link;
-        }
     }
 }

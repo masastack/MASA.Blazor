@@ -38,7 +38,7 @@ namespace MASA.Blazor
         /// Specifies a higher default elevation (8dp). 
         /// </summary>
         [Parameter]
-        public bool Raised { get; set; }   
+        public bool Raised { get; set; }
 
         [Parameter]
         public string Img { get; set; }
@@ -80,7 +80,7 @@ namespace MASA.Blazor
         public object Ripple { get; set; }
 
         [Parameter]
-        public string Target { get; set; }     
+        public string Target { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -101,12 +101,11 @@ namespace MASA.Blazor
               {
                   styleBuilder
                       .AddIf(() => $"background:url(\"{Img}\") center center / cover no-repeat", () => string.IsNullOrWhiteSpace(Img) == false);
+              })
+              .Apply("progress", cssBuilder =>
+              {
+                    cssBuilder.Add("v-card__progress");
               });
-
-            CssProvider.Apply("progress", cssBuilder =>
-            {
-                cssBuilder.Add("v-card__progress");
-            });
 
             AbstractProvider.Merge(typeof(BSheetBody<>), typeof(BCardBody<ICard>))
                             .Apply(typeof(BCardProgress<>), typeof(BCardProgress<ICard>))

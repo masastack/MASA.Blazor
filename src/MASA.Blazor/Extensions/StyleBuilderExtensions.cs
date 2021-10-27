@@ -140,30 +140,6 @@ namespace BlazorComponent
                 return "";
             }
         }
-
-        public static StyleBuilder AddSheet(this StyleBuilder styleBuilder, IMSheet sheet)
-        {
-            return styleBuilder.AddColorable(sheet)
-                               .Add(VSheetStyles);
-
-
-            string VSheetStyles()
-            {
-                var styles = "";
-                if (sheet.Height is not null) styles += $"{ConvertToUnit("height", sheet.Height)};";
-                if (sheet.MinHeight is not null) styles += $"{ConvertToUnit("min-height", sheet.MinHeight)};";
-                if (sheet.MinWidth is not null) styles += $"{ConvertToUnit("min-width", sheet.MinWidth)};";
-                if (sheet.MaxHeight is not null) styles += $"{ConvertToUnit("max-height", sheet.MaxHeight)};";
-                if (sheet.MaxWidth is not null) styles += $"{ConvertToUnit("max-width", sheet.MaxWidth)};";
-                if (sheet.Width is not null) styles += $"{ConvertToUnit("width", sheet.Width)};";
-
-                return styles;
-
-                string ConvertToUnit(string name, StringNumber size)
-                {
-                    return $"{name}: {size.ToUnit()}";
-                }
-            }
-        }
+      
     }
 }
