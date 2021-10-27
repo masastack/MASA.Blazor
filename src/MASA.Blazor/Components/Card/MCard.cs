@@ -5,13 +5,10 @@ using System.Collections.Generic;
 
 namespace MASA.Blazor
 {
-    public partial class MCard : BCard, IMCard
+    public partial class MCard : MSheet, IMCard
     {
-        /// <summary>
-        /// Applies a large border radius on the top left and bottom right of the card.
-        /// </summary>
         [Parameter]
-        public bool Shaped { get; set; }
+        public RenderFragment ProgressContent { get; set; }
 
         /// <summary>
         /// Removes the card’s elevation.
@@ -41,25 +38,10 @@ namespace MASA.Blazor
         /// Specifies a higher default elevation (8dp). 
         /// </summary>
         [Parameter]
-        public bool Raised { get; set; }
-
-        [Parameter]
-        public string Color { get; set; }
-
-        [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
+        public bool Raised { get; set; }   
 
         [Parameter]
         public string Img { get; set; }
-
-        /// <summary>
-        /// Designates an elevation applied to the component between 0 and 24.
-        /// </summary>
-        [Parameter]
-        public StringNumber Elevation { get; set; }
 
         [Parameter]
         public StringNumber LoaderHeight { get; set; } = 4;
@@ -98,69 +80,37 @@ namespace MASA.Blazor
         public object Ripple { get; set; }
 
         [Parameter]
-        public string Target { get; set; }
-
-        [Parameter]
-        public StringNumber Height { get; set; }
-
-        [Parameter]
-        public StringNumber MaxHeight { get; set; }
-
-        [Parameter]
-        public StringNumber MinHeight { get; set; }
-
-        [Parameter]
-        public StringNumber Width { get; set; }
-
-        [Parameter]
-        public StringNumber MaxWidth { get; set; }
-
-        [Parameter]
-        public StringNumber MinWidth { get; set; }
-
-        /// <summary>
-        /// Removes elevation (box-shadow) and adds a thin border
-        /// </summary>
-        [Parameter]
-        public bool Outlined { get; set; }
-
-        /// <summary>
-        /// Designates the border-radius applied to the component
-        /// </summary>
-        [Parameter]
-        public StringBoolean Rounded { get; set; }
-
-        /// <summary>
-        /// Removes the component’s border-radius
-        /// </summary>
-        [Parameter]
-        public bool Tile { get; set; }
-
-        public bool HasClick => OnClick.HasDelegate;
+        public string Target { get; set; }     
 
         protected override void SetComponentClass()
         {
+            base.SetComponentClass();
+
             CssProvider
-              .Apply(cssBuilder =>
+              .Merge(cssBuilder =>
               {
                   cssBuilder.Add("m-card")
                             .AddRoutable(this)
                             .AddIf("m-card--flat", () => Flat)
                             .AddIf("m-card--hover", () => Hover)
-                            .AddIf("m-card--flat", () => (this as IMRoutable).IsClickable(HasClick))
                             .AddIf("m-card--loading", () => Loading == true)
                             .AddIf("m-card--disabled", () => Disabled)
-                            .AddIf("m-card--disabled", () => Raised)
-                            .AddSheet(this);
+                            .AddIf("m-card--disabled", () => Raised);
 
               }, styleBuilder =>
               {
                   styleBuilder
-                      .AddSheet(this)
-                      .AddIf(() => $"background:url(\"{Img}\") center center / cover no-repeat",()=> string.IsNullOrWhiteSpace(Img) == false);
+                      .AddIf(() => $"background:url(\"{Img}\") center center / cover no-repeat", () => string.IsNullOrWhiteSpace(Img) == false);
               });
 
-            AbstractProvider.Apply(typeof(BCardProgress<>),typeof(MCardProgress));
+            CssProvider.Apply("progress", cssBuilder =>
+            {
+                cssBuilder.Add("v-card__progress");
+            });
+
+            AbstractProvider.Merge(typeof(BSheetBody<>), typeof(BCardBody<ICard>))
+                            .Apply(typeof(BCardProgress<>), typeof(BCardProgress<ICard>))
+                            .ApplyLoadable(Loading, Color, LoaderHeight);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public interface IMCard : IMLoadable, IMRoutable, IMSheet
+    public interface IMCard : ICard,IMLoadable, IMRoutable, IMSheet
     {
         bool Flat { get; }
 
@@ -16,7 +16,5 @@ namespace MASA.Blazor
         string Img { get; }
 
         bool Raised { get; }
-
-        bool HasClick { get; }
     }
 }

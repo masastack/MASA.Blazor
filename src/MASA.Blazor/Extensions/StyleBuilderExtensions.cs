@@ -129,7 +129,7 @@ namespace BlazorComponent
 
         public static StyleBuilder AddColorable(this StyleBuilder styleBuilder, IColorable colorable)
         {
-            return styleBuilder.Add(() => ColorStyles());
+            return styleBuilder.Add(ColorStyles);
 
             string ColorStyles()
             {
@@ -144,7 +144,7 @@ namespace BlazorComponent
         public static StyleBuilder AddSheet(this StyleBuilder styleBuilder, IMSheet sheet)
         {
             return styleBuilder.AddColorable(sheet)
-                               .Add(() => VSheetStyles());
+                               .Add(VSheetStyles);
 
 
             string VSheetStyles()

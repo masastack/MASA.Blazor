@@ -172,10 +172,10 @@ namespace BlazorComponent
             return cssBuilder.AddIf(routable.ActiveClass, () => routable.To is not null && routable.ActiveClass is not null);
         }
 
-        public static CssBuilder AddTheme(this CssBuilder cssBuilder, IMThemeable routable)
+        public static CssBuilder AddTheme(this CssBuilder cssBuilder, IMThemeable themeable)
         {
-            return cssBuilder.AddIf("theme--dark", () => routable.Dark)
-                             .AddIf("theme--light", () => !routable.Dark);
+            return cssBuilder.AddIf("theme--dark", () => themeable.Dark)
+                             .AddIf("theme--light", () => !themeable.Dark);
         }
 
         public static CssBuilder AddElevatable(this CssBuilder cssBuilder, IMElevatable elevatable)
