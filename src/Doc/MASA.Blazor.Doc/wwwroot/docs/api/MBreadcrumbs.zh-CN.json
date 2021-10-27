@@ -4,46 +4,34 @@
   ],
   "Props": [
     {
-      "Name": "Class",
-      "Type": "String",
-      "Default": "null",
-      "Description": "应用到组件最外层元素的class"
-    },
-    {
-      "Name": "DisabledLast",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "DisabledValue",
-      "Type": "String",
-      "Default": "null",
-      "Description": ""
-    },
-    {
       "Name": "Divider",
       "Type": "String",
-      "Default": "null",
+      "Default": "/",
       "Description": "指定项之间的分隔字符。"
     },
     {
       "Name": "Items",
       "Type": "IReadOnlyList`1",
-      "Default": "",
-      "Description": ""
+      "Default": "[]",
+      "Description": "每个面包屑对象的数组。"
     },
     {
-      "Name": "ItemText",
-      "Type": "Func`2",
-      "Default": "",
-      "Description": ""
+      "Name": "large",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将面包屑项文本的字体大小增加到 16px（默认为 14px）"
     },
     {
-      "Name": "ItemValue",
-      "Type": "Func`2",
-      "Default": "",
-      "Description": ""
+      "Name": "light",
+      "Type": "boolean",
+      "Default": "false",
+      "Description": "为组件设置浅色主题。"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
     },
     {
       "Name": "Style",
@@ -56,6 +44,14 @@
     {
       "Name": "ChildContent",
       "Description": "默认插槽"
+    },
+    {
+      "Name": "DividerContent",
+      "Description": "用于分隔器的插槽。"
+    },
+    {
+      "Name": "ItemContent",
+      "Description": "使用 items 属性时，用于覆盖默认 MBreadcrumbsItem 行为的插槽。"
     }
   ],
   "Events": []
