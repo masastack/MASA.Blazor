@@ -1,0 +1,34 @@
+﻿<div class="text-center">
+    <MMenu OpenOnHover Top OffsetY>
+        <ActivatorContent>
+            <MButton Color="primary" @attributes="@context.Attrs">DROPDOWN</MButton>
+        </ActivatorContent>
+
+        <ChildContent>
+            <MList>
+                @foreach (var item in items)
+                {
+                    <MListItem>
+                        <MListItemContent>
+                            <MListItemTitle>
+                                @item
+                            </MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                }
+            </MList>
+        </ChildContent>
+    </MMenu>
+</div>
+
+@code {
+
+    string[] items =
+    {
+        "Click Me",
+        "Click Me",
+        "Click Me",
+        "Click Me 2"
+    };
+
+}

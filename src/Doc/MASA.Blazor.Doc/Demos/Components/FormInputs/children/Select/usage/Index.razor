@@ -4,7 +4,8 @@
                  Label="Standard"
                  Items="@items"
                  ItemText="u => u.Label"
-                 ItemValue="u => u.Value">
+                 ItemValue="u => u.Value"
+                 MenuProps="new BMenuProps(){OffsetY = true}">
         </MSelect>
     </MCol>
     <MCol Span="6">
@@ -16,7 +17,7 @@
                  Filled>
         </MSelect>
     </MCol>
-
+    
     <MCol Span="6">
         <MSelect @bind-Value="@value3"
                  Label="Outlined style"

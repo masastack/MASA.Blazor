@@ -44,6 +44,7 @@ namespace MASA.Blazor
                     props[nameof(MCascaderMenu.OffsetY)] = true;
                     props[nameof(MCascaderMenu.MinWidth)] = (StringNumber)180;
                     props[nameof(MCascaderMenu.CloseOnContentClick)] = false;
+                    props[nameof(MCascaderMenu.ContentStyle)] = "display:flex";
                 })
                 .Apply<BList, MList>()
                 .Apply<BItemGroup, MListItemGroup>(props =>

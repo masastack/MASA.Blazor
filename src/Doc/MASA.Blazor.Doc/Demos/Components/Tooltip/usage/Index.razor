@@ -1,7 +1,7 @@
 ﻿<div class="text-center d-flex align-center justify-space-around">
-    <MTooltip Left>
-        <ActivatorContent Context="activatorContext">
-            <MButton Dark Color="primary" @attributes="activatorContext.Attrs">Left</MButton>
+    <MTooltip Bottom>
+        <ActivatorContent>
+            <MButton Dark Color="primary" @attributes="@context.Attrs">Bottom</MButton>
         </ActivatorContent>
         <ChildContent>
             <span>Tooltip</span>
@@ -9,8 +9,8 @@
     </MTooltip>
 
     <MTooltip Bottom>
-        <ActivatorContent Context="activatorContext">
-            <MIcon Color="primary" @attributes="activatorContext.Attrs">mdi-home</MIcon>
+        <ActivatorContent>
+            <MIcon Dark Color="primary" @attributes="@context.Attrs">mdi-home</MIcon>
         </ActivatorContent>
         <ChildContent>
             <span>Tooltip</span>
@@ -18,8 +18,8 @@
     </MTooltip>
 
     <MTooltip Bottom>
-        <ActivatorContent Context="activatorContext">
-            <span @attributes="activatorContext.Attrs">This text has a tooltip</span>
+        <ActivatorContent>
+            <span @attributes="@context.Attrs">This text has a tooltip</span>
         </ActivatorContent>
         <ChildContent>
             <span>Tooltip</span>
