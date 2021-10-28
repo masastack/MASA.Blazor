@@ -13,82 +13,24 @@ namespace MASA.Blazor
     public partial class MDialog : BDialog, IDialog, IThemeable
     {
         private bool _animated = false;
-        private int _stackMinZIndex = 200;
-        private bool _isNotFirstRender = true;
-
-        public ElementReference ContentRef { get; set; }
-
-        public ElementReference DialogRef { get; set; }
-
-        [Parameter]
-        public bool Attach { get; set; }
-
-        [Parameter]
-        public bool Value { get; set; }
-
-        [Obsolete("Use Value instead.")]
-        [Parameter]
-        public bool Visible { get; set; }
-
-        [Parameter]
-        public EventCallback<bool> ValueChanged { get; set; }
-
-        [Parameter]
-        public string Transition { get; set; } = "dialog-transition";
-
-        [Parameter]
-        public RenderFragment ChildContent { get; set; }
-
-        [Parameter]
-        public RenderFragment<ActivatorProps> ActivatorContent { get; set; }//TODO:ActivatorContent
-
-        protected int ZIndex { get; set; }
-
-        public Guid ActivatorId { get; set; }
-
-        public Dictionary<string, object> ActivatorAttrs { get; set; }
-
-        public Dictionary<string, object> ContentAttrs
-        {
-            get
-            {
-                var attrs = new Dictionary<string, object>
-                {
-                    { "role", "document" }
-                };
-                if (Value)
-                {
-                    attrs.Add("tabindex", 0);
-                }
-
-                return attrs;
-            }
-        }
 
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
 
         [Parameter]
-        public bool Persistent { get; set; }
+        public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Fullscreen { get; set; } //TODO:watch fullscreen =>(hideScroll or showScroll) and (removeOverlay or genOverlay)
+
+        [Parameter]
+        public bool Light { get; set; }
 
         [Parameter]
         public bool Scrollable { get; set; }
 
         [Parameter]
-        public StringNumber Width { get; set; }
-
-        [Parameter]
-        public StringNumber MaxWidth { get; set; }
-
-        [Parameter]
-        public EventCallback<MouseEventArgs> OnOutsideClick { get; set; }
-
-        [Parameter]
-        public bool Fullscreen { get; set; }//TODO:watch fullscreen =>(hideScroll or showScroll) and (removeOverlay or genOverlay)
-
-        public bool Dark { get; set; }
-
-        public bool Light { get; set; }
+        public string Transition { get; set; } = "dialog-transition";
 
         public bool IsDark
         {
@@ -108,31 +50,6 @@ namespace MASA.Blazor
             }
         }
 
-        [Inject]
-        public Document Document { get; set; }
-
-        protected override async Task OnParametersSetAsync()
-        {
-            if (!_isNotFirstRender)
-            {
-                if (ZIndex == default)
-                {
-                    ZIndex = await ActiveZIndex();
-                }
-            }
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                _isNotFirstRender = false;
-                var overlayElement = ((BDomComponentBase)Overlay.Instance).Ref;
-                await JsInvokeAsync(JsInteropConstants.AddElementTo, overlayElement, ".m-application");
-                await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, ".m-application");
-            }
-        }
-
         protected override void SetComponentClass()
         {
             var prefix = "m-dialog";
@@ -142,7 +59,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add($"{prefix}__container")
-                        .AddIf($"{prefix}__container--attached", () => Attach);
+                        .AddIf($"{prefix}__container--attached", () => Attach != null);
                 })
                 .Apply("content", cssBuilder =>
                 {
@@ -187,8 +104,7 @@ namespace MASA.Blazor
                         }
                         else
                         {
-                            if (ValueChanged.HasDelegate)
-                                await ValueChanged.InvokeAsync(false);
+                            Value = false;
                         }
 
                         if (OnOutsideClick.HasDelegate)
@@ -197,27 +113,22 @@ namespace MASA.Blazor
                 })
                 .ApplyDialogDefault();
         }
-
-        private async Task<int> ActiveZIndex()
+        
+        public Dictionary<string, object> ContentAttrs
         {
-            int zIndex;
-            if (!Value)
+            get
             {
-                zIndex = await JsInvokeAsync<int>(JsInteropConstants.GetZIndex, ContentRef);
+                var attrs = new Dictionary<string, object>
+                {
+                    {"role", "document"}
+                };
+                if (Value)
+                {
+                    attrs.Add("tabindex", 0);
+                }
+
+                return attrs;
             }
-            else
-            {
-                zIndex = await GetMaxZIndex() + 2;
-            }
-
-            return zIndex;
-        }
-
-        private async Task<int> GetMaxZIndex()
-        {
-            var maxZindex = await JsInvokeAsync<int>(JsInteropConstants.GetMenuOrDialogMaxZIndex, new List<ElementReference> { ContentRef }, Ref);
-
-            return maxZindex > _stackMinZIndex ? maxZindex : _stackMinZIndex;
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿<div>
 <MRow Justify="JustifyTypes.Center">
-<MButton Color="primary"
-         Class="ma-2"
-         Dark
-         OnClick="() => dialog = true">
-    Open Dialog 1
-</MButton>
+    <MButton Color="primary"
+             Class="ma-2"
+             Dark
+             OnClick="() => dialog = true">
+        Open Dialog 1
+    </MButton>
 <MButton Color="primary"
          Class="ma-2"
          Dark
@@ -42,7 +42,7 @@
          Fullscreen
          Transition="dialog-bottom-transition"
          Scrollable>
-    <MCard>
+    <MCard Tile>
         <MToolbar Flat
                   Dark
                   Color="primary">
@@ -61,9 +61,10 @@
                 </MButton>
             </MToolbarItems>
             <MMenu Bottom
-                   OffsetY>
+                   OffsetY 
+                   Right>
                 <ActivatorContent>
-                    <MButton Dark Icon @attributes="@context.Attrs">
+                    <MButton Icon @attributes="@context.Attrs">
                         <MIcon>mdi-dots-vertical</MIcon>
                     </MButton>
                 </ActivatorContent>
