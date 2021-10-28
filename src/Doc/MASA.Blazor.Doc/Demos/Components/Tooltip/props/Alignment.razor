@@ -1,31 +1,34 @@
 ﻿<div class="text-center d-flex align-center justify-space-around">
     <MTooltip Left>
-        <ActivatorContent Context="activatorContext">
-            <MButton Dark Color="primary" @attributes="activatorContext.Attrs">Left</MButton>
+        <ActivatorContent>
+            <MButton Color="primary" Dark @attributes="@context.Attrs">Left</MButton>
         </ActivatorContent>
         <ChildContent>
             <span>Left tooltip</span>
         </ChildContent>
     </MTooltip>
+
     <MTooltip Top>
-        <ActivatorContent Context="activatorContext">
-            <MButton Dark Color="primary" @attributes="activatorContext.Attrs">Top</MButton>
+        <ActivatorContent>
+            <MButton Color="primary" Dark @attributes="@context.Attrs">Top</MButton>
         </ActivatorContent>
         <ChildContent>
             <span>Top tooltip</span>
         </ChildContent>
     </MTooltip>
+
     <MTooltip Bottom>
-        <ActivatorContent Context="activatorContext">
-            <MButton Dark Color="primary" @attributes="activatorContext.Attrs">Bottom</MButton>
+        <ActivatorContent>
+            <MButton Color="primary" Dark @attributes="@context.Attrs">Bottom</MButton>
         </ActivatorContent>
         <ChildContent>
             <span>Bottom tooltip</span>
         </ChildContent>
     </MTooltip>
+
     <MTooltip Right>
-        <ActivatorContent Context="activatorContext">
-            <MButton Dark Color="primary" @attributes="activatorContext.Attrs">Right</MButton>
+        <ActivatorContent>
+            <MButton Color="primary" Dark @attributes="@context.Attrs">Right</MButton>
         </ActivatorContent>
         <ChildContent>
             <span>Right tooltip</span>

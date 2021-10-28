@@ -1,18 +1,17 @@
 ﻿<MContainer Fluid
-            class="text-center">
+            Class="text-center">
     <MRow Class="flex"
           Justify="JustifyTypes.SpaceBetween">
         <MCol Cols="12">
-            <MButton Click="()=>_show = !_show">
+            <MButton Click="() => show = !show">
                 toggle
             </MButton>
         </MCol>
 
-        <MCol Cols="12"
-                 Class="mt-12">
-            <MTooltip @bind-Value="_show" Top>
-                <ActivatorContent Context="activatorContext">
-                    <MButton icon @attributes="activatorContext.Attrs">
+        <MCol Cols="12" Class="mt-12">
+            <MTooltip @bind-Value="show" Top>
+                <ActivatorContent>
+                    <MButton Icon @attributes="@context.Attrs">
                         <MIcon Color="grey lighten-1">mdi-cart</MIcon>
                     </MButton>
                 </ActivatorContent>
@@ -26,5 +25,5 @@
 
 @code
 {
-    private bool _show = false;
+    private bool show;
 }

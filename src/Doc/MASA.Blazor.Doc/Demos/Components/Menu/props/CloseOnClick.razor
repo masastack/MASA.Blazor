@@ -1,12 +1,14 @@
-﻿<div style="text-align:center">
-    <MMenu Disabled>
-        <Activator>
-            <MButton Color="primary">DROPDOWN</MButton>
-        </Activator>
+﻿<div class="text-center">
+    <MSwitch @bind-Value="closeOnClick" Label="close on click"></MSwitch>
+
+    <MMenu Top CloseOnClick="closeOnClick">
+        <ActivatorContent>
+            <MButton Color="primary" @attributes="@context.Attrs">DROPDOWN</MButton>
+        </ActivatorContent>
 
         <ChildContent>
             <MList>
-                @foreach (var item in titles)
+                @foreach (var item in items)
                 {
                     <MListItem>
                         <MListItemContent>
@@ -22,11 +24,17 @@
 </div>
 
 @code {
-    string[] titles = 
+
+    [Inject]
+    NavigationManager NavigationManager { get; set; }
+
+    string[] items =
     {
         "Click Me",
         "Click Me",
         "Click Me",
         "Click Me 2"
     };
+
+    bool closeOnClick = true;
 }

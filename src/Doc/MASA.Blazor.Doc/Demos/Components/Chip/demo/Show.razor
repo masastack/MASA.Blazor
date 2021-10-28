@@ -3,14 +3,14 @@
 
     <MRow Class="px-6 py-3" Align="AlignTypes.Center">
         <MMenu @bind-Value="menu" Bottom Right Transition="scale-transition" Origin="top left">
-            <Activator>
-                <MChip Pill>
+            <ActivatorContent>
+                <MChip Pill @attributes="@context.Attrs">
                     <MAvatar Left>
                         <MImage Src="https://cdn.vuetifyjs.com/images/john.png"></MImage>
                     </MAvatar>
                     John Leider
                 </MChip>
-            </Activator>
+            </ActivatorContent>
             <ChildContent>
                 <MCard Width="300">
                     <MList Dark>

@@ -2,14 +2,14 @@
     @foreach (var item in _btns)
     {
         var index = Array.IndexOf(_btns, item);
-        <MMenu rounded="rounded"
-               OffsetY>
-            <Activator>
+        <MMenu Rounded="@item.rounded" OffsetY @key="@item.text">
+            <ActivatorContent>
                 <MButton Color="@_colors[index]"
-                         Class="white--text ma-5">
-                    @item.Text Radius
+                         Class="white--text ma-5"
+                         @attributes="@context.Attrs">
+                    @item.text Radius
                 </MButton>
-            </Activator>
+            </ActivatorContent>
             <ChildContent>
                 <MList>
                     @for (int i = 0; i < 4; i++)
@@ -25,33 +25,17 @@
 </MRow>
 
 @code {
-    Item[] _btns = 
+
+    (string text, string rounded)[] _btns =
     {
-         new Item
-         {
-             Text="Removed",
-             Rounded="0"
-         },
-         new Item
-         {
-             Text="Large",
-             Rounded="lg"
-         },
-         new Item
-         {
-             Text="Custom",
-             Rounded="b-xl"
-         }
+        ("Removed", "0"),
+        ("Large", "lg"),
+        ("Custom", "b-xl"),
     };
 
-    string[] _colors = new string[]
+    string[] _colors =
     {
         "deep-purple accent-4", "error", "teal darken-1"
     };
 
-    class Item
-    {
-        public string Text { get; set; }
-        public string Rounded { get; set; }
-    }
 }

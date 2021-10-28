@@ -148,18 +148,13 @@
 
     public string Code { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnParametersSet()
     {
-        await base.OnInitializedAsync();
-
         if (Demo.Type != null)
         {
             Component = Service.GetShowCase(Demo.Type);
         }
-    }
-
-    protected override void OnParametersSet()
-    {
+        
         if (Demo.Code != null)
         {
             var index = Demo.Code.IndexOf("@code");
