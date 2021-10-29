@@ -26,6 +26,11 @@ namespace MASA.Blazor
         [Inject]
         public Document Document { get; set; }
 
+        [Inject]
+        public GlobalConfig GlobalConfig { get; set; }
+
+        protected override bool IsRtl => GlobalConfig.RTL;
+
         protected override void SetComponentClass()
         {
             CssProvider
