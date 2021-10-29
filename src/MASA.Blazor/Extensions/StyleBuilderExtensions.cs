@@ -125,21 +125,6 @@ namespace BlazorComponent
         {
             return styleBuilder
                         .AddSize("max-height", maxHeight);
-        }
-
-        public static StyleBuilder AddColorable(this StyleBuilder styleBuilder, IColorable colorable)
-        {
-            return styleBuilder.Add(ColorStyles);
-
-            string ColorStyles()
-            {
-                if (string.IsNullOrEmpty(colorable.Color) is false && Regex.Match(colorable.Color, @"^(#|var\(--|(rgb|hsl)a?\()").Success)
-                {
-                    return $"background-color:{colorable.Color};border-color:{colorable.Color};";
-                }
-                return "";
-            }
-        }
-      
+        }     
     }
 }
