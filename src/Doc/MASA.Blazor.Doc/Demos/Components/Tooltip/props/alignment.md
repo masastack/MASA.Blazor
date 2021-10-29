@@ -1,14 +1,14 @@
 ---
-order: 0
+order: 1
 title:
-  zh-CN: 使用
-  en-US: Usage
+  zh-CN: 对齐
+  en-US: Alignment
 ---
 
 ## zh-CN
 
-提示组件可以包装任何元素。
+提示可以对齐到激活器元素的四个侧面。
 
 ## en-US
 
-Tooltips can wrap any element.
+A tooltip can be aligned to any of the four sides of the activator element.

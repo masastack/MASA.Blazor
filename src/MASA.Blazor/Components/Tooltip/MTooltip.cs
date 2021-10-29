@@ -29,8 +29,8 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add($"{prefix}__content")
-                        .AddIf("menuable__content__active", () => InternalValue)
-                        .AddIf($"{prefix}__content--fixed", () => Fixed)
+                        .AddIf("menuable__content__active", () => Value)
+                        .AddIf($"{prefix}__content--fixed", () => ActivatorFixed)
                         .AddBackgroundColor(Color);
                 }, styleBuilder =>
                 {
@@ -39,13 +39,18 @@ namespace MASA.Blazor
                         .AddMinWidth(MinWidth)
                         .Add($"left:{CalculatedLeft}px")
                         .Add($"top:{CalculatedTop}px")
-                        .Add($"opacity:{(InternalValue ? 0.9 : 0)}")
+                        .Add($"opacity:{(Value ? 0.9 : 0)}")
                         .Add($"z-index:{InternalZIndex}")
                         .AddBackgroundColor(Color);
                 });
 
             AbstractProvider
                 .ApplyTooltipDefault();
+        }
+
+        protected override async Task MoveContentTo()
+        {
+            await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, Attach ?? ".m-application");
         }
     }
 }
