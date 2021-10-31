@@ -115,7 +115,7 @@ namespace MASA.Blazor
                 var el = Document.QuerySelector(Ref);
                 _boundingClientRect = await el.GetBoundingClientRectAsync();
 
-                EmitColor(args.ClientX, args.ClientY);
+                EmitColor(args.ClientX, args.ClientY); 
             }
         }
 
@@ -145,8 +145,8 @@ namespace MASA.Blazor
                 _boundingClientRect = await el.GetBoundingClientRectAsync();
 
                 var window = Document.QuerySelector("window");
-                await window.AddEventListenerAsync<MouseEventArgs>("mousemove", HandleMouseMove, false);
-                await window.AddEventListenerAsync<MouseEventArgs>("mouseup", HandleMouseUp, false);
+                await window.AddEventListenerAsync("mousemove", CreateEventCallback<MouseEventArgs>(HandleMouseMove), false);
+                await window.AddEventListenerAsync("mouseup", CreateEventCallback<MouseEventArgs>(HandleMouseUp), false);
             }
         }
 
@@ -160,7 +160,13 @@ namespace MASA.Blazor
                 A = Color.Alpha
             });
 
-            ColorPicker.UpdateColor(hsva);
+            Color = hsva;
+
+            var radius = DotSize.ToDouble() / 2;
+            TranslateX = Dot().X - radius + "px";
+            TranslateY = Dot().Y - radius + "px";
+
+            //ColorPicker.UpdateColor(hsva);
         }
 
         public (double X, double Y) Dot()
