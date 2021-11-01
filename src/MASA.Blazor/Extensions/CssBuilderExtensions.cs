@@ -177,9 +177,9 @@ namespace BlazorComponent
             return cssBuilder;
         }
 
-        public static CssBuilder AddTheme(this CssBuilder cssBuilder, IMThemeable themeable)
+        public static CssBuilder AddTheme(this CssBuilder cssBuilder, MASA.Blazor.IThemeable themeable)
         {
-            if(themeable.Dark || themeable.IsCascadingDark || themeable.IsGloabDark)
+            if(themeable.Dark)
             {
                 cssBuilder.Add("theme--dark");
             }
