@@ -5,7 +5,7 @@ using System.Timers;
 
 namespace MASA.Blazor
 {
-    public class MBreadcrumbs : BBreadcrumbs, IBreadcrumbs, IThemeable
+    public class MBreadcrumbs<TItem> : BBreadcrumbs<TItem>, IThemeable where TItem: BreadcrumbItem
     {
         [Parameter]
         public bool Large { get; set; }
@@ -15,6 +15,9 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
 
         protected override void SetComponentClass()
         {
