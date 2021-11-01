@@ -5,7 +5,7 @@ using System.Timers;
 
 namespace MASA.Blazor
 {
-    public class MBreadcrumbs : BBreadcrumbs, IMBreadcrumbs
+    public class MBreadcrumbs : BBreadcrumbs, IBreadcrumbs, IThemeable
     {
         [Parameter]
         public bool Large { get; set; }
