@@ -50,7 +50,7 @@ namespace MASA.Blazor
         public object Ripple { get; set; }
 
 
-        protected override void SetComponentClass()
+        protected override void OnParametersSet()
         {
             var tag = (Href is not null ? "a" : Tag ?? "div");
             var props = new Dictionary<string, object>();
@@ -61,7 +61,7 @@ namespace MASA.Blazor
             var routableClass = string.Join(" ", composite);
             props.Add("class", routableClass ?? RoutableClass());
 
-            ElementProps = (tag, props);
+            ChildProps = (tag, props);
 
             string RoutableClass()
             {
