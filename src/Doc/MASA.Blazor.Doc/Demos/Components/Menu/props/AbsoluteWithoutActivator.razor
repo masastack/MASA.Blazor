@@ -1,0 +1,65 @@
+﻿<div>
+    <MRow
+        Class="flex"
+        Justify="JustifyTypes.Center">
+        <MCard
+            Class="portrait"
+            OnContextmenu="Show">
+            <MImage Height="300" Width="600" Src="https://cdn.vuetifyjs.com/images/cards/girl.jpg"></MImage>
+        </MCard>
+    </MRow>
+
+    <MMenu
+        @bind-Value="showMenu"
+        PositionX="X"
+        PositionY="Y"
+        Absolute
+        OffsetY>
+        <MList>
+            @foreach (var item in items)
+            {
+                <MListItem>
+                    <MListItemContent>
+                        <MListItemTitle>
+                            @item
+                        </MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+            }
+        </MList>
+    </MMenu>
+</div>
+
+<style>
+.portrait.m-card {
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
+}
+</style>
+
+@code {
+
+    bool showMenu = false;
+    double X = 0;
+    double Y = 0;
+
+    string[] items =
+    {
+        "Click Me",
+        "Click Me",
+        "Click Me",
+        "Click Me 2"
+    };
+
+    private void Show(MouseEventArgs args)
+    {
+        showMenu = false;
+        X = args.ClientX;
+        Y = args.ClientY;
+        StateHasChanged();
+        showMenu = true;
+        StateHasChanged();
+    }
+
+}

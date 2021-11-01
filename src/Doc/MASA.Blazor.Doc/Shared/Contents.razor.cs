@@ -108,5 +108,10 @@ namespace MASA.Blazor.Doc.Shared
             };
             await Js.InvokeVoidAsync("window.scrollTo", options);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            NavigationManager.LocationChanged -= OnLocationChanged;
+        }
     }
 }

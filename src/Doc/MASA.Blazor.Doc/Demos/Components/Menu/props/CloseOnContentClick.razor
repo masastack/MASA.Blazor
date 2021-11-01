@@ -1,0 +1,37 @@
+﻿<div class="text-center">
+    <MSwitch @bind-Value="closeOnContentClick" Label="close on content click"></MSwitch>
+
+    <MMenu Top CloseOnContentClick="closeOnContentClick">
+        <ActivatorContent>
+            <MButton Color="primary" @attributes="@context.Attrs">DROPDOWN</MButton>
+        </ActivatorContent>
+
+        <ChildContent>
+            <MList>
+                @foreach (var item in items)
+                {
+                    <MListItem>
+                        <MListItemContent>
+                            <MListItemTitle>
+                                @item
+                            </MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                }
+            </MList>
+        </ChildContent>
+    </MMenu>
+</div>
+
+@code {
+
+    string[] items =
+    {
+        "Click Me",
+        "Click Me",
+        "Click Me",
+        "Click Me 2"
+    };
+
+    bool closeOnContentClick = true;
+}

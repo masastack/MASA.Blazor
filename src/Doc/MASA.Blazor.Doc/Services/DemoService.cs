@@ -118,6 +118,17 @@ namespace MASA.Blazor.Doc.Services
 
             var contents = current?.Contents;
             var componentName = currentUrl.Split('/')[^1];
+
+            if (componentName.Contains('#'))
+            {
+                componentName = componentName.Split("#")[0];
+            }
+
+            if (componentName.Contains('?'))
+            {
+                componentName = componentName.Split("?")[0];
+            }
+
             if (contents == null && componentName != null)
             {
                 var components = await GetComponentAsync(componentName);

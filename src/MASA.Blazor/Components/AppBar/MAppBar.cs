@@ -247,7 +247,7 @@ namespace MASA.Blazor
         {
             if (!string.IsNullOrWhiteSpace(ScrollTarget))
             {
-                DomEventJsInterop.RemoveEventListerner<Element>($"#{ScrollTarget}", "scroll", e =>
+                DomEventJsInterop.RemoveEventListener<Element>($"#{ScrollTarget}", "scroll", e =>
                 {
 
                 });
