@@ -39,4 +39,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Components\Card\" />
+    <Folder Include="Components\Mixins\" />
+  </ItemGroup>
+
 </Project>
