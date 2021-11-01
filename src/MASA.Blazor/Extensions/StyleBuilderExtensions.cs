@@ -125,6 +125,6 @@ namespace BlazorComponent
         {
             return styleBuilder
                         .AddSize("max-height", maxHeight);
-        }
+        }     
     }
 }

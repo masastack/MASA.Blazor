@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public partial class MSheet : BSheet, IThemeable
+    public partial class MSheet : BSheet, IThemeable, BlazorComponent.ISheet
     {
         [Parameter]
         public bool Outlined { get; set; }
@@ -89,7 +89,7 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply<BSheetBody, BSheetBody>();
+                .Apply(typeof(BSheetBody<>), typeof(BSheetBody<BlazorComponent.ISheet>));
         }
     }
 }

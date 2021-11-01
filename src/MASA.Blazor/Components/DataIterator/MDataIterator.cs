@@ -105,6 +105,9 @@ namespace MASA.Blazor
 
         protected Dictionary<string, bool> Selection { get; } = new();
 
+        [Parameter]
+        public string Color { get; set; }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();

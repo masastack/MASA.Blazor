@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-An outlined card has 0 elevation and contains a soft border.
+带轮廓具有0高程并包含软边框的卡片。 
 
 ## en-US
 

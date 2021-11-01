@@ -1,98 +1,119 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
+using System.Collections.Generic;
 
 namespace MASA.Blazor
 {
-    public partial class MCard : BCard, IThemeable
+    public partial class MCard : MSheet, ICard, ILoadable, IRoutable, ISheet
     {
         [Parameter]
-        public bool Shaped { get; set; }
+        public RenderFragment ProgressContent { get; set; }
 
+        /// <summary>
+        /// Removes the card’s elevation.
+        /// </summary>
         [Parameter]
         public bool Flat { get; set; }
 
+        /// <summary>
+        /// Will apply an elevation of 4dp when hovered (default 2dp)
+        /// </summary>
         [Parameter]
         public bool Hover { get; set; }
 
+        /// <summary>
+        /// Designates that the component is a link. This is automatic when using the href or to prop.
+        /// </summary>
         [Parameter]
         public bool Link { get; set; }
 
-        [Parameter]
-        public bool Loading { get; set; }
-
+        /// <summary>
+        /// Removes the ability to click or target the component.
+        /// </summary>
         [Parameter]
         public bool Disabled { get; set; }
 
+        /// <summary>
+        /// Specifies a higher default elevation (8dp). 
+        /// </summary>
         [Parameter]
         public bool Raised { get; set; }
-
-        [Parameter]
-        public string Color { get; set; }
-
-        [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
-
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
 
         [Parameter]
         public string Img { get; set; }
 
         [Parameter]
-        public StringNumber Elevation { get; set; }
+        public StringNumber LoaderHeight { get; set; } = 4;
 
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
+        [Parameter]
+        public StringBoolean Loading { get; set; } = false;
 
-                if (Light)
-                {
-                    return false;
-                }
+        [Parameter]
+        public string ActiveClass { get; set; }
 
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
+        [Parameter]
+        public bool Append { get; set; }
+
+        [Parameter]
+        public bool? Exact { get; set; }
+
+        [Parameter]
+        public bool ExactPath { get; set; }
+
+        [Parameter]
+        public string ExactActiveClass { get; set; }
+
+        [Parameter]
+        public object Href { get; set; }
+
+        [Parameter]
+        public object To { get; set; }
+
+        [Parameter]
+        public bool Nuxt { get; set; }
+
+        [Parameter]
+        public bool Replace { get; set; }
+
+        [Parameter]
+        public object Ripple { get; set; }
+
+        [Parameter]
+        public string Target { get; set; }
+
+        public bool IsCascadingDark => Themeable != null && Themeable.IsDark;
+
+        public bool IsGloabDark => false;
 
         protected override void SetComponentClass()
         {
-            var prefix = "m-card";
+            base.SetComponentClass();
 
             CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder.Add("m-card")
-                        .AddElevation(Elevation)
-                        .AddTheme(IsDark)
-                        .Add("m-sheet")
-                        .AddIf("m-sheet--outlined", () => Outlined)
-                        .AddIf("m-sheet--shaped", () => Shaped)
-                        .AddIf($"{prefix}--flat", () => Flat)
-                        .AddIf($"{prefix}--hover", () => Hover)
-                        .AddIf($"{prefix}--link", () => Link || OnClick.HasDelegate)
-                        .AddIf($"{prefix}--loading", () => Loading)
-                        .AddIf($"{prefix}--disabled", () => Disabled)
-                        .AddIf($"{prefix}--raised", () => Raised)
-                        .AddBackgroundColor(Color);
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .AddHeight(Height)
-                        .AddWidth(Width)
-                        .AddMinWidth(MinWidth)
-                        .AddMaxWidth(MaxWidth)
-                        .AddMinHeight(MinHeight)
-                        .AddMaxHeight(MaxHeight)
-                        .AddIf($"background:url(\"{Img}\") center center / cover no-repeat", () => !string.IsNullOrWhiteSpace(Img));
-                });
+              .Merge(cssBuilder =>
+              {
+                  cssBuilder.Add("m-card")
+                            .AddRoutable(this)
+                            .AddIf("m-card--flat", () => Flat)
+                            .AddIf("m-card--hover", () => Hover)
+                            .AddIf("m-card--loading", () => Loading == true)
+                            .AddIf("m-card--disabled", () => Disabled)
+                            .AddIf("m-card--disabled", () => Raised);
+
+              }, styleBuilder =>
+              {
+                  styleBuilder
+                      .AddIf(() => $"background:url(\"{Img}\") center center / cover no-repeat", () => string.IsNullOrWhiteSpace(Img) == false);
+              })
+              .Apply("progress", cssBuilder =>
+              {
+                    cssBuilder.Add("v-card__progress");
+              });
+
+            AbstractProvider.Merge(typeof(BSheetBody<>), typeof(BCardBody<ICard>))
+                            .Apply(typeof(BCardProgress<>), typeof(BCardProgress<ICard>))
+                            .ApplyLoadable(Loading, Color, LoaderHeight);
         }
     }
 }
