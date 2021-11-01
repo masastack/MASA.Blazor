@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public class MBreadcrumbsItem : BBreadcrumbsItem, IMRoutable
+    public class MBreadcrumbsItem : BBreadcrumbsItem, IRoutable
     {
         [Parameter]
         public object Href { get; set; }

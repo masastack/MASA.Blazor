@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public interface IMBreadcrumbs: IBreadcrumbs,IMThemeable
+    public interface IMBreadcrumbs: IBreadcrumbs,IThemeable
     {
         bool Large { get; }
     }

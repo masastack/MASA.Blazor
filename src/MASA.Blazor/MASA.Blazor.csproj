@@ -39,8 +39,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Components\Card\" />
-  </ItemGroup>
-
 </Project>
