@@ -188,7 +188,7 @@ namespace BlazorComponent
             return cssBuilder;
         }
 
-        public static CssBuilder AddElevatable(this CssBuilder cssBuilder, IMElevatable elevatable)
+        public static CssBuilder AddElevatable(this CssBuilder cssBuilder, IElevatable elevatable)
         {
             if(elevatable.Elevation is not null && int.TryParse(elevatable.Elevation.ToString(), out var number))
             {

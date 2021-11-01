@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MASA.Blazor
 {
-    public partial class MCard : MSheet, ICard, IMLoadable, IRoutable, ISheet
+    public partial class MCard : MSheet, ICard, ILoadable, IRoutable, ISheet
     {
         [Parameter]
         public RenderFragment ProgressContent { get; set; }

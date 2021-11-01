@@ -2,7 +2,7 @@
 
 namespace MASA.Blazor
 {
-    public interface IMElevatable
+    public interface IElevatable
     {
         StringNumber Elevation { get; set; }
     }

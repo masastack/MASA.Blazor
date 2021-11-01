@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public interface IMLoadable : ILoadable, IColorable
+    public interface ILoadable : BlazorComponent.ILoadable, IColorable
     {
         StringNumber LoaderHeight { get; }
     }
