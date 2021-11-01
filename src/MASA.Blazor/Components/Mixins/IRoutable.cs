@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public interface IMRoutable
+    public interface IRoutable
     {
         string ActiveClass { get; }
 

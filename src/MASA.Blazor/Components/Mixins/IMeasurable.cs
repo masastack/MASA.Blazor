@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public interface IMMeasurable
+    public interface IMeasurable
     {
         public StringNumber Height { get; }
 

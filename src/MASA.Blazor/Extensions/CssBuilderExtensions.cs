@@ -167,7 +167,7 @@ namespace BlazorComponent
             return cssBuilder;
         }
 
-        public static CssBuilder AddRoutable(this CssBuilder cssBuilder, IMRoutable routable)
+        public static CssBuilder AddRoutable(this CssBuilder cssBuilder, IRoutable routable)
         {
             if(routable.To is null && routable.ActiveClass is not null)
             {
@@ -198,7 +198,7 @@ namespace BlazorComponent
             return cssBuilder;
         }
 
-        public static CssBuilder AddRoundable(this CssBuilder cssBuilder, IMRoundable roundable)
+        public static CssBuilder AddRoundable(this CssBuilder cssBuilder, IRoundable roundable)
         {
             if (roundable.Tile)
             {

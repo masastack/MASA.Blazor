@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public interface IMSheet: IMRoundable, IMThemeable, IColorable, IMElevatable, IMMeasurable
+    public interface ISheet: IRoundable, IMThemeable, IColorable, IMElevatable, IMeasurable
     {
         bool Outlined { get; }
 

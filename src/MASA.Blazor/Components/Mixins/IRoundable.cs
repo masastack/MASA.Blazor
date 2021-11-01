@@ -7,14 +7,10 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public interface IMCard : ICard,IMLoadable, IMRoutable, IMSheet
+    public interface IRoundable 
     {
-        bool Flat { get; }
+        StringBoolean Rounded { get; }
 
-        bool Hover { get; }
-
-        string Img { get; }
-
-        bool Raised { get; }
+        bool Tile { get; }    
     }
 }
