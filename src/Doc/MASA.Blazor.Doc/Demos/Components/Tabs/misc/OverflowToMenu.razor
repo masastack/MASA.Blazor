@@ -38,16 +38,17 @@
                     <MMenu
                         Bottom
                         Left>
-                        <Activator>
+                        <ActivatorContent>
                             <MButton
                                 Text
-                                Class="align-self-center mr-4">
+                                Class="align-self-center mr-4"
+                                @attributes="@context.Attrs">
                                 more
                                 <MIcon Right>
                                     mdi-menu-down
                                 </MIcon>
                             </MButton>
-                        </Activator>
+                        </ActivatorContent>
 
                         <ChildContent>
                             <MList Class="grey lighten-3">

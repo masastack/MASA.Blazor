@@ -1,7 +1,7 @@
 ﻿<MContainer Fluid>
     <MCard class="mx-auto overflow-hidden" Height="400">
         <MAppBar Absolute>
-            <MAppBarNavIcon OnClick="() => drawer=true"></MAppBarNavIcon>
+            <MAppBarNavIcon @onclick="() => drawer=true"></MAppBarNavIcon>
             <MAppBarTitle>Others </MAppBarTitle>
             <MSpacer></MSpacer>
 
@@ -14,11 +14,11 @@
 
 
             <MMenu NudgeBottom="8" Bottom Left>
-                <Activator>
-                    <MButton Icon>
+                <ActivatorContent>
+                    <MButton Icon @attributes="@context.Attrs">
                         <MIcon>mdi-dots-vertical</MIcon>
                     </MButton>
-                </Activator>
+                </ActivatorContent>
 
                 <ChildContent>
                     <MList>

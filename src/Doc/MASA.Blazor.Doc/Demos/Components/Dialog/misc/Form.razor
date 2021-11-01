@@ -1,0 +1,99 @@
+﻿<MRow Justify="JustifyTypes.Center">
+    <MDialog @bind-Value="dialog"
+             Persistent
+             MaxWidth="600">
+        <ActivatorContent>
+            <MButton Color="primary"
+                     Dark
+                     @attributes="@context.Attrs">
+                Open Dialog
+            </MButton>
+        </ActivatorContent>
+        <ChildContent>
+            <MCard>
+                <MCardTitle>
+                    <span class="text-h5">User Profile</span>
+                </MCardTitle>
+                <MCardText>
+                    <MContainer>
+                        <MRow>
+                            <MCol Cols="12"
+                                  Sm="6"
+                                  Md="4">
+                                <MTextField Label="Legal first name*" TValue="string"></MTextField>
+                            </MCol>
+                            <MCol Cols="12"
+                                  Sm="6"
+                                  Md="4">
+                                <MTextField Label="Legal middle name"
+                                            TValue="string"
+                                            Hint="example of helper text only on focus">
+                                </MTextField>
+                            </MCol>
+                            <MCol Cols="12"
+                                  Sm="6"
+                                  Md="4">
+                                <MTextField Label="Legal last name*"
+                                            TValue="string"
+                                            Hint="example of persistent helper text"
+                                            PersistentHint>
+                                </MTextField>
+                            </MCol>
+                            <MCol Cols="12">
+                                <MTextField Label="Email*" TValue="string"></MTextField>
+                            </MCol>
+                            <MCol Cols="12">
+                                <MTextField Label="Password*"
+                                            TValue="string"
+                                            Type="password">
+                                </MTextField>
+                            </MCol>
+                            <MCol Cols="12"
+                                  Sm="6">
+                                <MSelect Items="_items"
+                                         TItem="string"
+                                         TItemValue="string"
+                                         TValue="string"
+                                         Label="Age*"
+                                         ItemValue="r => r"
+                                         ItemText="r => r">
+                                </MSelect>
+                            </MCol>
+                            <MCol Cols="12"
+                                  Sm="6">
+                                <MAutocomplete @bind-Value="_values"
+                                               Items="_items2"
+                                               Label="Interests"
+                                               ItemValue="r => r"
+                                               ItemText="r => r"
+                                               Multiple>
+                                </MAutocomplete>
+                            </MCol>
+                        </MRow>
+                    </MContainer>
+                    <small>*indicates required field</small>
+                </MCardText>
+                <MCardActions>
+                    <MSpacer></MSpacer>
+                    <MButton Color="blue darken-1"
+                             Text
+                             OnClick="() => dialog = false">
+                        Close
+                    </MButton>
+                    <MButton Color="blue darken-1"
+                             Text
+                             OnClick="() => dialog = false">
+                        Save
+                    </MButton>
+                </MCardActions>
+            </MCard>
+        </ChildContent>
+    </MDialog>
+</MRow>
+
+@code {
+    bool dialog = false;
+    List<string> _values = new List<string>();
+    List<string> _items = new() {"0-17", "18-29", "30-54", "54+"};
+    List<string> _items2 = new() {"Skiing", "Ice hockey", "Soccer", "Basketball", "Hockey", "Reading", "Writing", "Coding", "Basejump"};
+}

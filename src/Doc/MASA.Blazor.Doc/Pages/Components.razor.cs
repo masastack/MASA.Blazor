@@ -29,6 +29,16 @@ namespace MASA.Blazor.Doc.Pages
 
         protected override async Task OnParametersSetAsync()
         {
+            if (Name.Contains('?'))
+            {
+                Name = Name.Split("?")[0];
+            }
+
+            if (Name.Contains('#'))
+            {
+                Name = Name.Split("#")[0];
+            }
+
             _demoComponent = await Service.GetComponentAsync(Name);
 
             var demos = _demoComponent.DemoList?

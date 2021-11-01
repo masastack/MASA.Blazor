@@ -1,38 +1,42 @@
-﻿<MContainer Fluid>
-    <MCard Class="overflow-hidden">
-        Todo...
-        @*<MAppBar Prominent Absolute ScrollTarget="scrolling-sheet-3">
+﻿<MCard Class="overflow-hidden">
+    <MAppBar Absolute
+             Color="#6A76AB"
+             Dark
+             ShrinkOnScroll
+             Prominent
+             Src="https://picsum.photos/1920/1080?random"
+             FadeImgOnScroll
+             ScrollTarget="scrolling-sheet-3">
+        <ImgContent>
+            <MImage Gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"></MImage>
+        </ImgContent>
 
-            $1$<MImage Src="https://picsum.photos/1920/1080?random" ></MImage>#1#
-
+        <ChildContent>
             <MAppBarNavIcon></MAppBarNavIcon>
-            <MAppBarTitle>Fade</MAppBarTitle>
+            <MAppBarTitle>Title</MAppBarTitle>
             <MSpacer></MSpacer>
 
             <MButton Icon>
-            <MIcon>mdi-magnify</MIcon>
+                <MIcon>mdi-magnify</MIcon>
             </MButton>
             <MButton Icon>
-            <MIcon>mdi-heart</MIcon>
+                <MIcon>mdi-heart</MIcon>
             </MButton>
             <MButton Icon>
-            <MIcon>mdi-dots-vertical</MIcon>
+                <MIcon>mdi-dots-vertical</MIcon>
             </MButton>
 
+        </ChildContent>
+        <ExtensionContent>
             <MTabs AlignWithTitle>
-            <MTab>Tab 1</MTab>
-            <MTab>Tab 2</MTab>
-            <MTab>Tab 3</MTab>
+                <MTab>Tab 1</MTab>
+                <MTab>Tab 2</MTab>
+                <MTab>Tab 3</MTab>
             </MTabs>
+        </ExtensionContent>
+    </MAppBar>
 
-            </MAppBar>*@
-
-        <MSheet Class="overflow-y-auto" Color="white" MaxHeight="600" Id="scrolling-sheet-3">
-            <MContainer Style="height: 1000px;"></MContainer>
-        </MSheet>
-    </MCard>
-</MContainer>
-
-@code {
-
-}
+    <MSheet Class="overflow-y-auto" MaxHeight="600" Id="scrolling-sheet-3">
+        <MContainer Style="height: 1000px;"></MContainer>
+    </MSheet>
+</MCard>

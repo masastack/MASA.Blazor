@@ -107,6 +107,9 @@ namespace MASA.Blazor
         [Parameter]
         public string Color { get; set; }
 
+        [Parameter]
+        public string Color { get; set; }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();

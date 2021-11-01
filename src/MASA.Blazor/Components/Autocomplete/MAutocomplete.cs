@@ -62,9 +62,10 @@ namespace MASA.Blazor
             base.SetComponentClass();
 
             AbstractProvider
-                .Merge<BMenu>(props =>
+                .Merge<BMenu, MMenu>(props =>
                 {
                     props[nameof(MMenu.OffsetY)] = true;
+                    props[nameof(MMenu.CloseOnContentClick)] = false;
                 });
 
             CssProvider
@@ -111,7 +112,6 @@ namespace MASA.Blazor
         {
             QueryText = args.Value.ToString();
             HighlightIndex = -1;
-            Visible = true;
 
             if (OnInput.HasDelegate)
             {

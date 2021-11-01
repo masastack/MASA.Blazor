@@ -1,13 +1,13 @@
 ﻿<MContainer Fluid Style="height:300px">
 	<MRow Justify="JustifyTypes.Center">
-		<MMenu Bottom MinWidth="200" Rounded OffsetY>
-			<Activator>
-				<MButton Icon XLarge>
+		<MMenu Bottom MinWidth="200" Rounded="@true" OffsetY>
+			<ActivatorContent>
+				<MButton Icon XLarge @attributes="@context.Attrs">
 					<MAvatar Color="brown" Size="48">
 						<span class="white--text text-h5">JD</span>
 					</MAvatar>
 				</MButton>
-			</Activator>
+			</ActivatorContent>
 			<ChildContent>
 				<MCard>
 					<MListItemContent Class="justify-center">

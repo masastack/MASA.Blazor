@@ -16,7 +16,7 @@
                 <span class="m-app-tooltip-btn d-inline-block">
                     <MTooltip Bottom>
                         <ActivatorContent>
-                            <button type="button" class="m-btn m-btn--icon m-btn--round theme--light m-size--default" aria-label="invert-example-colors">
+                            <button @attributes="context.Attrs" type="button" class="m-btn m-btn--icon m-btn--round theme--light m-size--default" aria-label="invert-example-colors">
                                 <span class="m-btn__content">
                                     <span aria-hidden="true" class="m-icon notranslate theme--light">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="m-icon__svg">
@@ -34,7 +34,7 @@
                 <span class="m-app-tooltip-btn d-inline-block">
                     <MTooltip Bottom>
                         <ActivatorContent>
-                            <a class="m-btn m-btn--icon m-btn--round theme--light m-size--default" aria-label="view-in-github">
+                            <a @attributes="context.Attrs" class="m-btn m-btn--icon m-btn--round theme--light m-size--default" aria-label="view-in-github">
                                 <span class="m-btn__content">
                                     <span aria-hidden="true" class="m-icon notranslate theme--light">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="m-icon__svg">
@@ -52,7 +52,7 @@
                 <span class="m-app-tooltip-btn d-inline-block">
                     <MTooltip Bottom>
                         <ActivatorContent>
-                            <button @onclick="() => _expend = !_expend" onfocus="this.blur()" type="button" class="m-btn m-btn--icon m-btn--round theme--light m-size--default" aria-label="view-source">
+                            <button @attributes="context.Attrs" @onclick="() => _expend = !_expend" onfocus="this.blur()" type="button" class="m-btn m-btn--icon m-btn--round theme--light m-size--default" aria-label="view-source">
                                 <span class="m-btn__content">
                                     <span aria-hidden="true" class="m-icon notranslate theme--light">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="m-icon__svg">
@@ -148,18 +148,13 @@
 
     public string Code { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnParametersSet()
     {
-        await base.OnInitializedAsync();
-
         if (Demo.Type != null)
         {
             Component = Service.GetShowCase(Demo.Type);
         }
-    }
-
-    protected override void OnParametersSet()
-    {
+        
         if (Demo.Code != null)
         {
             var index = Demo.Code.IndexOf("@code");

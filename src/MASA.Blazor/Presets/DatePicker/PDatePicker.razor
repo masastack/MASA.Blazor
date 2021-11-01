@@ -17,7 +17,7 @@
             Style="@TextFieldStyle"
             Value="@InputValue" TValue="string" ValueChanged="InputValueChanged"></MTextField>
 
-    <MDialog Visible="_menuVisible" Width="@("auto")" OutsideClick="OnCancel">
+    <MDialog Value="_menuVisible" Width="@("auto")" OutsideClick="OnCancel">
         <MDatePicker @bind-Value="_dateTime" Style="width:min-content" ActionsStyle="flex-direction:column;" @attributes="DatePickerAttributes">
             <ActionsContent>
                 @if (Time)
@@ -48,7 +48,7 @@ else
        OffsetY Bottom
        ActivatorStyle="@ActivatorStyle"
        Disabled="@(Disabled || Readonly)">
-        <Activator>
+        <ActivatorContent>
             <MTextField Label="@Label"
                     Dense="Dense"
                     Readonly="Readonly"
@@ -60,8 +60,9 @@ else
                     Clearable
                     HideDetails="HideDetails"
                     Style="@TextFieldStyle"
-                    Value="@InputValue" TValue="string" ValueChanged="InputValueChanged"></MTextField>
-        </Activator>
+                    Value="@InputValue" TValue="string" ValueChanged="InputValueChanged"
+                    @attributes="@context.Attrs"></MTextField>
+        </ActivatorContent>
         <ChildContent>
             <MDatePicker @bind-Value="_dateTime" Style="width:min-content" ActionsStyle="flex-direction:column;" @attributes="DatePickerAttributes">
                 <ActionsContent>
