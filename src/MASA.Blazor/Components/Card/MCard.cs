@@ -82,6 +82,10 @@ namespace MASA.Blazor
         [Parameter]
         public string Target { get; set; }
 
+        public bool IsCascadingDark => Themeable != null && Themeable.IsDark;
+
+        public bool IsGloabDark => false;
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
