@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BlazorComponent;
 using BlazorComponent.Web;
@@ -34,10 +35,25 @@ namespace MASA.Blazor
         public StringNumber DotSize { get; set; } = 10;
 
         [Parameter]
-        public ColorTypes Type { get; set; }
+        public ColorTypes ColorType { get; set; }
+
+        private object _value;
+        [Parameter]
+        public object Value
+        {
+            get => _value;
+            set
+            {
+                if (_value != value)
+                {
+                    HandleUpdateColor(ParseColor(Value, _internalValue));
+                }
+                _value = value;
+            }
+        }
 
         [Parameter]
-        public RGBA Value { get; set; }
+        public EventCallback<ColorPickerColor> UpdateColor { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -64,10 +80,11 @@ namespace MASA.Blazor
                     props[nameof(MColorPickerCanvas.DotSize)] = DotSize;
                     props[nameof(MColorPickerCanvas.Width)] = Width;
                     props[nameof(MColorPickerCanvas.Height)] = CanvasHeight;
+                    props[nameof(MColorPickerCanvas.ColorChanged)] = CreateEventCallback<ColorPickerColor>(HandleUpdateColor);
                 });
         }
 
-        public void UpdateColor(ColorPickerColor color)
+        public Task HandleUpdateColor(ColorPickerColor color)
         {
             _internalValue = color;
 
@@ -137,9 +154,80 @@ namespace MASA.Blazor
             //        }
             //        break;
             //}
+
+            return Task.CompletedTask;
         }
 
-        public static bool Compare(object obj1, object obj2)
+        private ColorPickerColor ParseColor(object color, ColorPickerColor oldColor)
+        {
+            if (color == null) return ColorUtils.FromRGBA(new RGBA { R = 255, G = 0, B = 0, A = 1 });
+
+            if (ColorType == ColorTypes.HEX)
+            {
+                var hexColor = color as string;
+                if (hexColor == "transparent") return ColorUtils.FromHexa("#00000000");
+
+                var hex = ParseHex(hexColor);
+
+                if (oldColor != null && hex == oldColor.Hexa)
+                    return oldColor;
+                else
+                    return ColorUtils.FromHexa(hex);
+            }
+
+            if (ColorType == ColorTypes.RGB)
+            {
+                var rgb = color as RGB;
+                return ColorUtils.FromRGBA(new RGBA { R = rgb.R, G = rgb.G, B = rgb.B, A = 1 });
+            }
+
+            if (ColorType == ColorTypes.HSL)
+            {
+                var hsl = color as HSL;
+                return ColorUtils.FromHSLA(new HSLA { H = hsl.H, S = hsl.S, L = hsl.L, A = 1 });
+            }
+
+            if (ColorType == ColorTypes.HSV)
+            {
+                var hsv = color as HSV;
+                return ColorUtils.FromHSVA(new HSVA { H = hsv.H, S = hsv.S, V = hsv.V, A = 1 });
+            }
+
+            if (ColorType == ColorTypes.RGBA || ColorType == ColorTypes.HSLA || ColorType == ColorTypes.HSVA)
+            {
+                return oldColor;
+            }
+
+            return ColorUtils.FromRGBA(new RGBA { R = 255, G = 0, B = 0, A = 1 });
+        }
+
+        private string ParseHex(string hex)
+        {
+            if (hex.StartsWith('#'))
+            {
+                hex = hex[1..];
+            }
+
+            hex = Regex.Replace($"{hex}", "[^0-9a-f]", "F");
+
+            if (hex.Length == 3 || hex.Length == 4)
+            {
+                hex = string.Join("", hex.Select(x => $"{x}{x}"));
+            }
+
+            if (hex.Length == 6)
+            {
+                hex = hex.PadRight(8, 'F');
+            }
+            else
+            {
+                hex = hex.PadRight(6, '0').PadRight(8, 'F');
+            }
+
+            return $"#{hex}".ToUpper()[..9];
+        }
+
+        protected static bool Compare(object obj1, object obj2)
         {
             if (obj1 == null || obj2 == null)
             {
@@ -187,5 +275,6 @@ namespace MASA.Blazor
             }
             return true;
         }
+
     }
 }

@@ -44,6 +44,42 @@ namespace MASA.Blazor
             };
         }
 
+        public static ColorPickerColor FromHexa(string hexa)
+        {
+            var hsva = HexToHSVA(hexa);
+            var hsla = HSVAtoHSLA(hsva);
+            var rgba = HSVAtoRGBA(hsva);
+
+            return new ColorPickerColor
+            {
+                Alpha = hsva.A,
+                Hex = hexa[..7],
+                Hexa = hexa,
+                Hsla = hsla,
+                Hsva = hsva,
+                Hue = hsva.H,
+                Rgba = rgba,
+            };
+        }
+
+        public static ColorPickerColor FromHSLA(HSLA hsla)
+        {
+            var hsva = HSLAtoHSVA(hsla);
+            var hexa = HSVAtoHex(hsva);
+            var rgba = HSVAtoRGBA(hsva);
+
+            return new ColorPickerColor
+            {
+                Alpha = hsva.A,
+                Hex = hexa[..7],
+                Hexa = hexa,
+                Hsla = hsla,
+                Hsva = hsva,
+                Hue = hsva.H,
+                Rgba = rgba,
+            };
+        }
+
         public static string HSVAtoHex(HSVA hsva)
         {
             return RGBAtoHex(HSVAtoRGBA(hsva));
@@ -148,6 +184,14 @@ namespace MASA.Blazor
             double sprime = l == 1 || l == 0 ? 0 : (hsva.V - l) / Math.Min(l, 1 - l);
 
             return new HSLA { H = hsva.H, S = sprime, L = l, A = hsva.A };
+        }
+
+        public static HSVA HSLAtoHSVA(HSLA hsla)
+        {
+            var v = hsla.L + hsla.S * Math.Min(hsla.L, 1 - hsla.L);
+            var sprime = v == 0 ? 0 : 2 - (2 * hsla.L / v);
+
+            return new HSVA { H = hsla.H, S = sprime, V = v, A = hsla.A };
         }
 
         public static string ToHex(double v)

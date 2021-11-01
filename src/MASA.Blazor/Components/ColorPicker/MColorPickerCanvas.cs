@@ -36,7 +36,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool Disabled { get; set; }
 
-        public EventCallback<ColorPickerColor> UpdateColor { get; set; } //todo
+        public EventCallback<ColorPickerColor> ColorChanged { get; set; } //todo
 
         [CascadingParameter]
         public MColorPicker ColorPicker { get; set; }
@@ -115,7 +115,7 @@ namespace MASA.Blazor
                 var el = Document.QuerySelector(Ref);
                 _boundingClientRect = await el.GetBoundingClientRectAsync();
 
-                EmitColor(args.ClientX, args.ClientY); 
+                EmitColor(args.ClientX, args.ClientY);
             }
         }
 
@@ -160,7 +160,8 @@ namespace MASA.Blazor
                 A = Color.Alpha
             });
 
-            Color = hsva;
+            ColorChanged.InvokeAsync(hsva);
+            //Color = hsva;
 
             var radius = DotSize.ToDouble() / 2;
             TranslateX = Dot().X - radius + "px";
