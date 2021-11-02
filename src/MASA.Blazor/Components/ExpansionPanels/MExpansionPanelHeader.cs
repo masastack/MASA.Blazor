@@ -11,40 +11,38 @@ namespace MASA.Blazor
 {
     public partial class MExpansionPanelHeader : BExpansionPanelHeader
     {
-
         [Parameter]
-        public string Icon { get; set; }
+        public bool Ripple { get; set; }
+
+        protected override void OnParametersSet()
+        {
+            Attributes["ripple"] = Ripple;
+
+            base.OnParametersSet();
+        }
 
         protected override void SetComponentClass()
         {
+            ExpandIcon ??= "mdi-chevron-down";
+
             CssProvider
-                .Apply(cssBuilder =>
+                .Apply(css =>
                 {
-                    cssBuilder
-                        .Add("m-expansion-panel-header")
+                    css.Add("m-expansion-panel-header")
                         .AddIf("m-expansion-panel-header--active", () => ExpansionPanel.Expanded)
-                        .AddIf("m-expansion-panel-header--mousedown", () => _hasMouseDown)
+                        .AddIf("m-expansion-panel-header--mousedown", () => HasMouseDown)
                         .AddIf("m-expansion-panel--disabled m-btn--disabled", () => ExpansionPanel.Disabled)
-                        .AddIf("m-expansion-panel--disabled m-btn--disabled", () => ExpansionPanel.Disabled);
-                })
-                .Apply("headerIcon", cssBuilder =>
+                        .AddIf("m-expansion-panel--disabled m-btn--disabled", () => ExpansionPanel.Disabled)
+                        .AddBackgroundColor(Color);
+                }, style => style.AddBackgroundColor(Color))
+                .Apply("headerIcon", css =>
                 {
-                    cssBuilder
-                        .Add("m-expansion-panel-header__icon");
-                })
-                 .Apply("icons", cssBuilder =>
-                 {
-                     var prefix = "fas fa-angle";
+                    css.Add("m-expansion-panel-header__icon")
+                        .AddIf("m-expansion-panel-header__icon--disable-rotate", () => DisableIconRotate);
+                });
 
-                     if (!ExpansionPanel.Disabled)
-                     {
-                         cssBuilder
-                           .AddIf(Icon, () => !string.IsNullOrWhiteSpace(Icon))
-                           .AddIf($"{prefix}-up", () => ExpansionPanel.Expanded)
-                           .AddIf($"{prefix}-down", () => !ExpansionPanel.Expanded);
-                     }
-                 });
+            AbstractProvider
+                .Apply<BIcon, MIcon>();
         }
-
     }
 }
