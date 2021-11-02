@@ -4,7 +4,8 @@
         Justify="JustifyTypes.Center">
         <MCard
             Class="portrait"
-            OnContextmenu="Show">
+            @oncontextmenu="Show"
+            OnContextmenuPreventDefault>
             <MImage Height="300" Width="600" Src="https://cdn.vuetifyjs.com/images/cards/girl.jpg"></MImage>
         </MCard>
     </MRow>
