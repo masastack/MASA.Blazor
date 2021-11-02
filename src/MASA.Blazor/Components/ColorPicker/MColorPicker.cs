@@ -14,6 +14,7 @@ namespace MASA.Blazor
 {
     public partial class MColorPicker : BColorPicker, IColorPicker
     {
+        private object _value;
         private ColorPickerColor _internalValue = ColorUtils.FromRGBA(new RGBA { R = 255, G = 0, B = 0, A = 1 });
 
         [Parameter]
@@ -37,7 +38,6 @@ namespace MASA.Blazor
         [Parameter]
         public ColorTypes ColorType { get; set; }
 
-        private object _value;
         [Parameter]
         public object Value
         {
@@ -53,7 +53,28 @@ namespace MASA.Blazor
         }
 
         [Parameter]
+        public string Mode { get; set; } = "rgba";
+
+        [Parameter]
         public EventCallback<ColorPickerColor> UpdateColor { get; set; }
+
+        public bool HideAlpha
+        {
+            get
+            {
+                if (Value == null)
+                {
+                    return false;
+                }
+
+                if (ColorType == ColorTypes.RGBA || ColorType == ColorTypes.HSVA || ColorType == ColorTypes.HSLA)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
 
         protected override void SetComponentClass()
         {
@@ -65,11 +86,22 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add(prefix)
                         .AddIf($"{prefix}--flat", () => Flat);
+                })
+                .Apply("controls", cssBuilder =>
+                {
+                    cssBuilder
+                       .Add($"{prefix}__controls");
                 });
 
             AbstractProvider
+                .ApplyColorPickerDefault()
                 .Apply<BSheet, MSheet>(props =>
                 {
+                    var cssBuilder = new CssBuilder()
+                         .Add(prefix)
+                         .AddIf($"{prefix}--flat", () => Flat);
+
+                    props[nameof(Class)] = cssBuilder.Class;
                     props[nameof(MSheet.Elevation)] = Elevation;
                     props[nameof(MSheet.MaxWidth)] = Width;
                 })
@@ -80,7 +112,15 @@ namespace MASA.Blazor
                     props[nameof(MColorPickerCanvas.DotSize)] = DotSize;
                     props[nameof(MColorPickerCanvas.Width)] = Width;
                     props[nameof(MColorPickerCanvas.Height)] = CanvasHeight;
-                    props[nameof(MColorPickerCanvas.ColorChanged)] = CreateEventCallback<ColorPickerColor>(HandleUpdateColor);
+                    props[nameof(MColorPickerCanvas.OnColorUpdate)] = CreateEventCallback<ColorPickerColor>(HandleUpdateColor);
+                })
+                .Apply<BColorPickerEdit, MColorPickerEdit>(props =>
+                {
+                    props[nameof(MColorPickerEdit.Color)] = _internalValue;
+                    props[nameof(MColorPickerEdit.Disabled)] = Disabled;
+                    props[nameof(MColorPickerEdit.HideAlpha)] = HideAlpha;
+                    props[nameof(MColorPickerEdit.Mode)] = Mode;
+                    props[nameof(MColorPickerEdit.OnColorUpdate)] = CreateEventCallback<ColorPickerColor>(HandleUpdateColor);
                 });
         }
 
@@ -92,7 +132,7 @@ namespace MASA.Blazor
             if (!Compare(hsva, Value))
             {
                 //this.$emit('input', value)
-                UpdateColor(_internalValue);
+                //UpdateColor(_internalValue);
             }
 
             //switch (Type)
@@ -167,7 +207,7 @@ namespace MASA.Blazor
                 var hexColor = color as string;
                 if (hexColor == "transparent") return ColorUtils.FromHexa("#00000000");
 
-                var hex = ParseHex(hexColor);
+                var hex = ColorUtils.ParseHex(hexColor);
 
                 if (oldColor != null && hex == oldColor.Hexa)
                     return oldColor;
@@ -199,32 +239,6 @@ namespace MASA.Blazor
             }
 
             return ColorUtils.FromRGBA(new RGBA { R = 255, G = 0, B = 0, A = 1 });
-        }
-
-        private string ParseHex(string hex)
-        {
-            if (hex.StartsWith('#'))
-            {
-                hex = hex[1..];
-            }
-
-            hex = Regex.Replace($"{hex}", "[^0-9a-f]", "F");
-
-            if (hex.Length == 3 || hex.Length == 4)
-            {
-                hex = string.Join("", hex.Select(x => $"{x}{x}"));
-            }
-
-            if (hex.Length == 6)
-            {
-                hex = hex.PadRight(8, 'F');
-            }
-            else
-            {
-                hex = hex.PadRight(6, '0').PadRight(8, 'F');
-            }
-
-            return $"#{hex}".ToUpper()[..9];
         }
 
         protected static bool Compare(object obj1, object obj2)
@@ -275,6 +289,5 @@ namespace MASA.Blazor
             }
             return true;
         }
-
     }
 }

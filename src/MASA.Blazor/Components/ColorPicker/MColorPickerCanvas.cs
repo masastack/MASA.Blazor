@@ -20,6 +20,7 @@ namespace MASA.Blazor
             { "height", Height }
         };
 
+        [Parameter]
         public ColorPickerColor Color { get; set; } = ColorUtils.FromRGBA(new RGBA { R = 255, G = 0, B = 0, A = 0 });
 
         public ElementReference CanvasRef { get; set; }
@@ -36,7 +37,8 @@ namespace MASA.Blazor
         [Parameter]
         public bool Disabled { get; set; }
 
-        public EventCallback<ColorPickerColor> ColorChanged { get; set; } //todo
+        [Parameter]
+        public EventCallback<ColorPickerColor> OnColorUpdate { get; set; }
 
         [CascadingParameter]
         public MColorPicker ColorPicker { get; set; }
@@ -46,6 +48,20 @@ namespace MASA.Blazor
 
         [Inject]
         public DomEventJsInterop DomEventJsInterop { get; set; }
+
+        public (double X, double Y) Dot
+        {
+            get
+            {
+                if (Color == null)
+                    return (0, 0);
+
+                double x = Color.Hsva.S * Convert.ToInt32(Width.ToDouble().ToString(), 10);
+                double y = (1 - Color.Hsva.V) * Convert.ToInt32(Height.ToDouble().ToString(), 10);
+
+                return (x, y);
+            }
+        }
 
         protected string TranslateX { get; set; }
 
@@ -75,26 +91,11 @@ namespace MASA.Blazor
                     styleBuilder
                         .Add($"width:{DotSize.ToUnit()}")
                         .Add($"height:{DotSize.ToUnit()}")
-                        .Add($"transform:translate({TranslateX},{TranslateY})");
+                        .Add($"transform:translate({Dot.X - (DotSize.ToDouble() / 2)}px,{Dot.Y - (DotSize.ToDouble() / 2)}px)");
                 });
 
             AbstractProvider
                 .ApplyColorPickerCanvasDefault();
-        }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            var radius = DotSize.ToDouble() / 2;
-            TranslateX = Dot().X - radius + "px";
-            TranslateY = Dot().Y - radius + "px";
-
-            Watcher
-                .Watch<double>(nameof(Color.Hue), async () =>
-                {
-                    await JsInvokeAsync(JsInteropConstants.UpdateCanvas, CanvasRef, Color.Hue);
-                });
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -115,18 +116,16 @@ namespace MASA.Blazor
                 var el = Document.QuerySelector(Ref);
                 _boundingClientRect = await el.GetBoundingClientRectAsync();
 
-                EmitColor(args.ClientX, args.ClientY);
+                await EmitColor(args.ClientX, args.ClientY);
             }
         }
 
-        public Task HandleMouseMove(MouseEventArgs args)
+        public async Task HandleMouseMoveAsync(MouseEventArgs args)
         {
             if (!Disabled)
             {
-                EmitColor(args.ClientX, args.ClientY);
+                await EmitColor(args.ClientX, args.ClientY);
             }
-
-            return Task.CompletedTask;
         }
 
         public async Task HandleMouseUp(MouseEventArgs args)
@@ -145,12 +144,12 @@ namespace MASA.Blazor
                 _boundingClientRect = await el.GetBoundingClientRectAsync();
 
                 var window = Document.QuerySelector("window");
-                await window.AddEventListenerAsync("mousemove", CreateEventCallback<MouseEventArgs>(HandleMouseMove), false);
+                await window.AddEventListenerAsync("mousemove", CreateEventCallback<MouseEventArgs>(HandleMouseMoveAsync), false);
                 await window.AddEventListenerAsync("mouseup", CreateEventCallback<MouseEventArgs>(HandleMouseUp), false);
             }
         }
 
-        private void EmitColor(double x, double y)
+        private async Task EmitColor(double x, double y)
         {
             var hsva = ColorUtils.FromHSVA(new HSVA
             {
@@ -160,25 +159,15 @@ namespace MASA.Blazor
                 A = Color.Alpha
             });
 
-            ColorChanged.InvokeAsync(hsva);
-            //Color = hsva;
+            if (OnColorUpdate.HasDelegate)
+            {
+                if (Color.Hue != hsva.Hue)
+                {
+                    await JsInvokeAsync(JsInteropConstants.UpdateCanvas, CanvasRef, Color.Hue);
+                }
 
-            var radius = DotSize.ToDouble() / 2;
-            TranslateX = Dot().X - radius + "px";
-            TranslateY = Dot().Y - radius + "px";
-
-            //ColorPicker.UpdateColor(hsva);
-        }
-
-        public (double X, double Y) Dot()
-        {
-            if (Color == null)
-                return (0, 0);
-
-            double x = Color.Hsva.S * Convert.ToInt32(Width.ToDouble().ToString(), 10);
-            double y = (1 - Color.Hsva.V) * Convert.ToInt32(Height.ToDouble().ToString(), 10);
-
-            return (x, y);
+                await OnColorUpdate.InvokeAsync(hsva);
+            }
         }
 
         public static double Clamp(double value, double min = 0, double max = 1)
