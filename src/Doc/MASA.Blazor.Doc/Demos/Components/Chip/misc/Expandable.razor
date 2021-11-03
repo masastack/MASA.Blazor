@@ -2,6 +2,7 @@
     <MSystemBar></MSystemBar>
 
     <MRow Class="px-6 py-3" Align="AlignTypes.Center">
+        <span class="mr-4">To</span>
         <MMenu @bind-Value="menu" Bottom Right Transition="scale-transition" Origin="top left">
             <ActivatorContent>
                 <MChip Pill @attributes="@context.Attrs">
@@ -14,7 +15,7 @@
             <ChildContent>
                 <MCard Width="300">
                     <MList Dark>
-                        <MListItem Dark>
+                        <MListItem Dark> @*TODO:Dark没有从MList继承*@
                             <MListItemAvatar>
                                 <MImage Src="https://cdn.vuetifyjs.com/images/john.png"></MImage>
                             </MListItemAvatar>
@@ -23,14 +24,14 @@
                                 <MListItemSubtitle>john@vuetifyjs.com</MListItemSubtitle>
                             </MListItemContent>
                             <MListItemAction>
-                                <MButton Icon OnClick="() => menu = false">
+                                <MButton Icon OnClick="() => menu = false" Dark> @*TODO:Dark没有从MList继承*@
                                     <MIcon>mdi-close-circle</MIcon>
                                 </MButton>
                             </MListItemAction>
                         </MListItem>
                     </MList>
                     <MList>
-                        <MListItem OnClick="() => {}">
+                        <MListItem OnClick="() => { }">
                             <MListItemAction>
                                 <MIcon>mdi-briefcase</MIcon>
                             </MListItemAction>
@@ -51,5 +52,5 @@
 
 @code
 {
-    private bool menu = false;
+    bool menu = false;
 }

@@ -1,5 +1,5 @@
 ---
-order: 4
+order: 2
 title:
   zh-CN: 过滤
   en-US: Search

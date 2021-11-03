@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 1
 title:
   zh-CN: 可展开
   en-US: Show

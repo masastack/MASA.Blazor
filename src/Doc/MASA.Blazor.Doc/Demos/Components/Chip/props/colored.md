@@ -1,5 +1,5 @@
 ---
-order: 0
+order: 1
 title:
   zh-CN: 色彩
   en-US: Colored
