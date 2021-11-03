@@ -36,9 +36,6 @@ namespace MASA.Blazor
         public StringNumber DotSize { get; set; } = 10;
 
         [Parameter]
-        public ColorTypes ColorType { get; set; }
-
-        [Parameter]
         public object Value
         {
             get => _value;
@@ -53,26 +50,21 @@ namespace MASA.Blazor
         }
 
         [Parameter]
-        public string Mode { get; set; } = "rgba";
+        public ColorTypes Mode { get; set; } = ColorTypes.RGBA;
 
         [Parameter]
-        public EventCallback<ColorPickerColor> UpdateColor { get; set; }
+        public EventCallback<ColorPickerColor> OnColorUpdate { get; set; }
 
         public bool HideAlpha
         {
             get
             {
-                if (Value == null)
+                if (Mode == ColorTypes.RGBA || Mode == ColorTypes.HSVA || Mode == ColorTypes.HSLA)
                 {
                     return false;
                 }
 
-                if (ColorType == ColorTypes.RGBA || ColorType == ColorTypes.HSVA || ColorType == ColorTypes.HSLA)
-                {
-                    return true;
-                }
-
-                return false;
+                return true;
             }
         }
 
@@ -127,13 +119,6 @@ namespace MASA.Blazor
         public Task HandleUpdateColor(ColorPickerColor color)
         {
             _internalValue = color;
-
-            var hsva = color.Hsva;
-            if (!Compare(hsva, Value))
-            {
-                //this.$emit('input', value)
-                //UpdateColor(_internalValue);
-            }
 
             //switch (Type)
             //{
@@ -202,7 +187,7 @@ namespace MASA.Blazor
         {
             if (color == null) return ColorUtils.FromRGBA(new RGBA { R = 255, G = 0, B = 0, A = 1 });
 
-            if (ColorType == ColorTypes.HEX)
+            if (Mode == ColorTypes.HEX)
             {
                 var hexColor = color as string;
                 if (hexColor == "transparent") return ColorUtils.FromHexa("#00000000");
@@ -215,25 +200,25 @@ namespace MASA.Blazor
                     return ColorUtils.FromHexa(hex);
             }
 
-            if (ColorType == ColorTypes.RGB)
+            if (Mode == ColorTypes.RGB)
             {
                 var rgb = color as RGB;
                 return ColorUtils.FromRGBA(new RGBA { R = rgb.R, G = rgb.G, B = rgb.B, A = 1 });
             }
 
-            if (ColorType == ColorTypes.HSL)
+            if (Mode == ColorTypes.HSL)
             {
                 var hsl = color as HSL;
                 return ColorUtils.FromHSLA(new HSLA { H = hsl.H, S = hsl.S, L = hsl.L, A = 1 });
             }
 
-            if (ColorType == ColorTypes.HSV)
+            if (Mode == ColorTypes.HSV)
             {
                 var hsv = color as HSV;
                 return ColorUtils.FromHSVA(new HSVA { H = hsv.H, S = hsv.S, V = hsv.V, A = 1 });
             }
 
-            if (ColorType == ColorTypes.RGBA || ColorType == ColorTypes.HSLA || ColorType == ColorTypes.HSVA)
+            if (Mode == ColorTypes.RGBA || Mode == ColorTypes.HSLA || Mode == ColorTypes.HSVA)
             {
                 return oldColor;
             }

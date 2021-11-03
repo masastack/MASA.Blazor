@@ -11,10 +11,7 @@ using Microsoft.AspNetCore.Components.Web;
 namespace MASA.Blazor
 {
     public partial class MColorPickerEdit : BColorPickerEdit, IColorPickerEdit
-    {
-        [Parameter]
-        public EventCallback<ColorPickerColor> OnColorUpdate { get; set; }
-
+    {       
         protected override void SetComponentClass()
         {
             CssProvider
@@ -31,20 +28,6 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyColorPickerEditDefault();
-        }
-
-        public override Task HandleOnChange(ChangeEventArgs args)
-        {
-            if (ColorType == ColorTypes.HEX)
-            {
-                if (OnColorUpdate.HasDelegate)
-                {
-                    var hexValue = ColorUtils.ParseHex(args.Value.ToString());
-                    OnColorUpdate.InvokeAsync(ColorUtils.FromHexa(hexValue));
-                }
-            }
-
-            return base.HandleOnChange(args);
         }
     }
 }
