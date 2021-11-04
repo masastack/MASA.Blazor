@@ -6,12 +6,13 @@
                 {
                     <MCol Cols="12" Md="6">
                         <MItem>
-                            <!-- TODO: Failed to read src from dynamic string -->
-                            <MImage Src="@($"https://cdn.vuetifyjs.com/images/${item}")"
+                            <MImage Src="@($"https://cdn.vuetifyjs.com/images/{item}")"
                                     Height="150"
-                                    Class="text-right pa-2">
+                                    Class="text-right pa-2"
+                                    @onclick="context.Toggle"
+                                    RefBack="context.Ref">
                                 <MButton Icon Dark Click="@context.Toggle">
-                                    <MIcon>@(context.IsActive ? "mdi-heart" : "mdi-heart-outline")</MIcon>
+                                    <MIcon>@(context.Active ? "mdi-heart" : "mdi-heart-outline")</MIcon>
                                 </MButton>
                             </MImage>
                         </MItem>
@@ -29,7 +30,7 @@
         "backgrounds/bg.jpg",
         "backgrounds/md.jpg",
         "backgrounds/bg-2.jpg",
-        "backgrounds/md-2.jpg",
+        "backgrounds/md2.jpg",
     };
 
     List<StringNumber> selected = new();

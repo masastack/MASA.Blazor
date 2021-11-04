@@ -16,7 +16,13 @@
             @foreach (var i in Enumerable.Range(1, 8))
             {
                 <MItem>
-                    <MChip IsActive="@context.IsActive" Click="@context.Toggle">@($"Tag {i}")</MChip>
+                    <MChip
+                        ActiveClass="purple--text"
+                        IsActive="@context.Active"
+                        OnClick="@context.Toggle"
+                        RefBack="@context.Ref">
+                        @($"Tag {i}")
+                    </MChip>
                 </MItem>
             }
         </MItemGroup>

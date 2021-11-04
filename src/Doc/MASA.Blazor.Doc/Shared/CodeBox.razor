@@ -74,12 +74,12 @@
             <Element Show="_expend">
                 <MItemGroup @bind-Value="ActiveWindow" Class="pa-2" Mandatory>
                     <MItem>
-                        <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.IsActive" Value="0"> template </MButton>
+                        <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.Active" Value="0"> template </MButton>
                     </MItem>
                     @if (Code != null)
                     {
                         <MItem>
-                            <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.IsActive" Value="1"> code </MButton>
+                            <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.Active" Value="1"> code </MButton>
                         </MItem>
                     }
                 </MItemGroup>

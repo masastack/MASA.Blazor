@@ -4,11 +4,12 @@
         {
             <MSlideItem>
                 <MButton Class="mx-2"
-                         IsActive="@context.IsActive"
+                         IsActive="@context.Active"
                          ActiveClass="purple white--text"
                          Depressed
                          Rounded
-                         Click="@context.Toggle">
+                         Click="@context.Toggle"
+                         RefBack="@context.Ref">
                     Options @item
                 </MButton>
             </MSlideItem>

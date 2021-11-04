@@ -20,7 +20,7 @@
             @foreach (var item in Enumerable.Range(0, length))
             {
                 <MItem Value="@item">
-                    <MButton Icon IsActive="context.IsActive" Click="@context.Toggle">
+                    <MButton Icon IsActive="context.Active" Click="@context.Toggle">
                         <MIcon>mdi-record</MIcon>
                     </MButton>
                 </MItem>

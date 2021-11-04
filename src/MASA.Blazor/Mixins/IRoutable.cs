@@ -1,12 +1,4 @@
-﻿using BlazorComponent;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
-namespace MASA.Blazor
+﻿namespace MASA.Blazor
 {
     public interface IRoutable
     {
@@ -31,8 +23,6 @@ namespace MASA.Blazor
         bool Nuxt { get; }
 
         bool Replace { get; }
-
-        object Ripple { get; }
 
         string Tag { get; }
 
