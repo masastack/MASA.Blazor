@@ -449,7 +449,7 @@ namespace MASA.Blazor
                 })
                 .Apply("tick", cssBuilder =>
                 {
-                    var width = cssBuilder.Context.Index * (100 / NumTicks);
+                    var width = cssBuilder.Index * (100 / NumTicks);
                     var filled = GlobalConfig.RTL ? (100 - InputWidth) < width : width < InputWidth;
 
                     cssBuilder
@@ -459,7 +459,7 @@ namespace MASA.Blazor
                 {
                     var direction = Vertical ? "bottom" : (GlobalConfig.RTL ? "right" : "left");
                     var offsetDirection = Vertical ? (GlobalConfig.RTL ? "left" : "right") : "top";
-                    var width = styleBuilder.Context.Index * (100 / NumTicks);
+                    var width = styleBuilder.Index * (100 / NumTicks);
 
                     styleBuilder
                         .AddWidth(TickSize)

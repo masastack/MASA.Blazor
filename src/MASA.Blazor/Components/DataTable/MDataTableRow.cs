@@ -37,7 +37,7 @@ namespace MASA.Blazor
                 })
                 .Apply("cell", cssBuilder =>
                 {
-                    if (cssBuilder.Context.Data is DataTableHeader header)
+                    if (cssBuilder.Data is DataTableHeader header)
                     {
                         cssBuilder
                             .Add($"text-{header.Align ?? "start"}")

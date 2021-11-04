@@ -1,0 +1,10 @@
+﻿<MRow Justify="@JustifyTypes.Center">
+    <MDatePicker @bind-Value="_picker"
+                 YearIcon="mdi-calendar-blank"
+                 PrevIcon="mdi-skip-previous"
+                 NextIcon="mdi-skip-next"></MDatePicker>
+</MRow>
+
+@code{
+    private DateOnly _picker = DateOnly.FromDateTime(DateTime.Now);
+}

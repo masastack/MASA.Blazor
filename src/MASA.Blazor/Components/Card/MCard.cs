@@ -122,7 +122,10 @@ namespace MASA.Blazor
                     styleBuilder
                         .AddIf(() => $"background:url(\"{Img}\") center center / cover no-repeat", () => string.IsNullOrWhiteSpace(Img) == false);
                 })
-                .Apply("progress", cssBuilder => { cssBuilder.Add("v-card__progress"); });
+                .Apply("progress", cssBuilder => 
+                {
+                    cssBuilder.Add("m-card__progress"); 
+                });
 
             AbstractProvider.Merge(typeof(BSheetBody<>), typeof(BCardBody<ICard>))
                 .Apply(typeof(BCardProgress<>), typeof(BCardProgress<ICard>))

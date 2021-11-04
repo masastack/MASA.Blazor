@@ -1,0 +1,10 @@
+﻿<MRow Justify="@JustifyTypes.Center"
+      Align="AlignTypes.Center">
+    <MTimePicker @bind-Value="_picker"
+                 Scrollable></MTimePicker>
+</MRow>
+
+@code {
+    private TimeOnly? _picker;
+}
+
