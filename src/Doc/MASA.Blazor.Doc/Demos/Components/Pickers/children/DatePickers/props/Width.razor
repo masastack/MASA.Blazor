@@ -1,0 +1,12 @@
+﻿<MRow Align="@AlignTypes.Center">
+    <MDatePicker @bind-Value="_picker"
+                 Width="290"
+                 Class="mt-4"></MDatePicker>
+    <MDatePicker @bind-Value="_picker"
+                 FullWidth
+                 Class="mt-4"></MDatePicker>
+</MRow>
+
+@code{
+    private DateOnly _picker = DateOnly.FromDateTime(DateTime.Now);
+}

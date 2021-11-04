@@ -134,8 +134,7 @@ namespace MASA.Blazor
                 .ApplyRatingDefault()
                 .Apply<BIcon, MIcon>(props =>
                 {
-                    props.TryGetValue("ItemIndex", out var itemIndexStr);
-                    var itemIndex = int.Parse(itemIndexStr.ToString());
+                    var itemIndex = props.Index;
                     var ratingItem = CreateProps(itemIndex);
 
                     props[nameof(MIcon.Size)] = Size;

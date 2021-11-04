@@ -29,10 +29,9 @@ namespace MASA.Blazor
                 .Apply(css =>
                 {
                     css.Add("m-expansion-panel-header")
-                        .AddIf("m-expansion-panel-header--active", () => ExpansionPanel.Expanded)
+                        .AddIf("m-expansion-panel-header--active", () => IsActive)
                         .AddIf("m-expansion-panel-header--mousedown", () => HasMouseDown)
-                        .AddIf("m-expansion-panel--disabled m-btn--disabled", () => ExpansionPanel.Disabled)
-                        .AddIf("m-expansion-panel--disabled m-btn--disabled", () => ExpansionPanel.Disabled)
+                        .AddIf("m-expansion-panel--disabled m-btn--disabled", () => IsDisabled)
                         .AddBackgroundColor(Color);
                 }, style => style.AddBackgroundColor(Color))
                 .Apply("headerIcon", css =>

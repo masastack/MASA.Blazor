@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace MASA.Blazor
 {
@@ -74,10 +76,13 @@ namespace MASA.Blazor
         public bool Nuxt { get; set; }
 
         [Parameter]
+        public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+        [Parameter]
         public bool Replace { get; set; }
 
         [Parameter]
-        public object Ripple { get; set; }
+        public bool Ripple { get; set; } = true;
 
         [Parameter]
         public string Target { get; set; }
@@ -86,34 +91,50 @@ namespace MASA.Blazor
 
         public bool IsGloabDark => false;
 
+        public bool IsClickable => !Disabled && (IsLink || OnClick.HasDelegate);
+
+        public bool IsLink => Href != null || Link;
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            Attributes["ripple"] = Ripple && IsClickable;
+        }
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
 
             CssProvider
-              .Merge(cssBuilder =>
-              {
-                  cssBuilder.Add("m-card")
-                            .AddRoutable(this)
-                            .AddIf("m-card--flat", () => Flat)
-                            .AddIf("m-card--hover", () => Hover)
-                            .AddIf("m-card--loading", () => Loading == true)
-                            .AddIf("m-card--disabled", () => Disabled)
-                            .AddIf("m-card--disabled", () => Raised);
-
-              }, styleBuilder =>
-              {
-                  styleBuilder
-                      .AddIf(() => $"background:url(\"{Img}\") center center / cover no-repeat", () => string.IsNullOrWhiteSpace(Img) == false);
-              })
-              .Apply("progress", cssBuilder =>
-              {
-                    cssBuilder.Add("v-card__progress");
-              });
+                .Merge(cssBuilder =>
+                {
+                    cssBuilder.Add("m-card")
+                        .AddRoutable(this)
+                        .AddIf("m-card--flat", () => Flat)
+                        .AddIf("m-card--hover", () => Hover)
+                        .AddIf("m-card--link", () => IsClickable)
+                        .AddIf("m-card--loading", () => Loading == true)
+                        .AddIf("m-card--disabled", () => Disabled)
+                        .AddIf("m-card--disabled", () => Raised);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddIf(() => $"background:url(\"{Img}\") center center / cover no-repeat", () => string.IsNullOrWhiteSpace(Img) == false);
+                })
+                .Apply("progress", cssBuilder => 
+                {
+                    cssBuilder.Add("m-card__progress"); 
+                });
 
             AbstractProvider.Merge(typeof(BSheetBody<>), typeof(BCardBody<ICard>))
-                            .Apply(typeof(BCardProgress<>), typeof(BCardProgress<ICard>))
-                            .ApplyLoadable(Loading, Color, LoaderHeight);
+                .Apply(typeof(BCardProgress<>), typeof(BCardProgress<ICard>))
+                .ApplyLoadable(Loading, Color, LoaderHeight);
+        }
+
+        protected override Task HandleOnClick(MouseEventArgs args)
+        {
+            return OnClick.InvokeAsync(args);
         }
     }
 }

@@ -1,15 +1,9 @@
 ---
 category: Components
-subtitle: 日期选择器
-type: 日期选择器
+subtitle: 选择器
+type: 选择器
 title: Pickers
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Pickers.svg
 
 ---
-
-v-date-selecter 是一个功能齐全的日期选择组件, 它让用户选择一个日期或日期范围。
-
-## API
-
-- [MDatePicker](/docs/api/MDatePicker)

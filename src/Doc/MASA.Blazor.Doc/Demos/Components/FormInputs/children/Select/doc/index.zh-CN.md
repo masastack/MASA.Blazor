@@ -1,7 +1,7 @@
 ---
 category: Components
-subtitle: 选择器
-type: 选择器
+subtitle: 下拉框
+type: 下拉框
 title: Select
 cols: 1
 

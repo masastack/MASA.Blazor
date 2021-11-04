@@ -316,7 +316,7 @@ namespace MASA.Blazor
                 })
                 .Apply<BSimpleCheckbox, MSimpleCheckbox>(props =>
                 {
-                    var item = (TItem)props["_data"];
+                    var item = (TItem)props.Data;
                     props[nameof(Class)] = "m-data-table__checkbox";
                     props[nameof(MSimpleCheckbox.Disabled)] = !IsSelectable(item);
                     props[nameof(MSimpleCheckbox.Value)] = IsSelected(item);
@@ -337,7 +337,7 @@ namespace MASA.Blazor
                 .Apply(typeof(BDataTableRowGroup), typeof(MDataTableRowGroup))
                 .Apply<BIcon, MIcon>("expand-icon", props =>
                 {
-                    var item = (TItem)props["_data"];
+                    var item = (TItem)props.Data;
                     var expanded = IsExpanded(item);
                     var @class = IsExpanded(item) ? "m-data-table__expand-icon m-data-table__expand-icon--active" : "m-data-table__expand-icon";
                     props[nameof(Class)] = @class;
@@ -349,7 +349,7 @@ namespace MASA.Blazor
                 })
                 .Apply<BButton, MButton>("group-toggle", props =>
                 {
-                    var group = (string)props["_data"];
+                    var group = (string)props.Data;
                     props[nameof(Class)] = "ma-0";
                     props[nameof(MButton.Icon)] = true;
                     props[nameof(MButton.Small)] = true;

@@ -1,0 +1,8 @@
+﻿<MRow Justify="@JustifyTypes.Center">
+    <MTimePicker Format="TimeFormat.AmPm"></MTimePicker>
+</MRow>
+
+@code {
+    private TimeOnly? _picker = TimeOnly.FromDateTime(DateTime.Now);
+}
+

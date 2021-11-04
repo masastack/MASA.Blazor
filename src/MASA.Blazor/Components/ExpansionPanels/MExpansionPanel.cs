@@ -13,12 +13,14 @@ namespace MASA.Blazor
     {
         protected override void SetComponentClass()
         {
+            ActiveClass ??= "m-item--active";
+
             CssProvider
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-expansion-panel")
-                        .AddIf("m-expansion-panel--active m-item--active", () => Expanded)
+                        .AddIf($"m-expansion-panel--active {ComputedActiveClass}", () => IsActive)
                         .AddIf("m-expansion-panel--next-active", () => NextActive)
                         .AddIf("m-expansion-panel--disabled", () => IsDisabled);
                 })
@@ -29,10 +31,7 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply<BBreadcrumbsItem, MBreadcrumbsItem>(props =>
-                {
-                    props[nameof(MBreadcrumbsItem.Class)] = "m-breadcrumbs__item";
-                });
+                .Apply<BBreadcrumbsItem, MBreadcrumbsItem>(props => { props[nameof(MBreadcrumbsItem.Class)] = "m-breadcrumbs__item"; });
         }
     }
 }

@@ -7,7 +7,7 @@
     {
         if (item.Children != null && item.Children.Any())
         {
-            <MListGroup PrependIcon="@item.Icon" Color="primary" AppendIcon="mdi-menu-down" NoAction> 
+            <MListGroup Class="m-list-group--default" PrependIcon="@item.Icon" Color="primary" AppendIcon="mdi-menu-down" NoAction> 
                 <ActivatorContent>
                     <MListItemContent>
                         <MListItemTitle>@item.Title</MListItemTitle>
@@ -18,7 +18,7 @@
                     {
                         if (componentItem.Children != null && componentItem.Children.Any())
                         {
-                            <MListGroup SubGroup>
+                            <MListGroup Class="m-list-group--default" NoAction SubGroup>
                                 <ActivatorContent>
                                     <MListItemContent>
                                         <MListItemTitle>@FormatComponentTitle(componentItem)</MListItemTitle>
@@ -27,8 +27,7 @@
                                 <ChildContent>
                                     @foreach (var subComponentItem in componentItem.Children)
                                     {
-                                        <MListItem Link Href="@subComponentItem.Url">
-                                            <MListItemIcon></MListItemIcon>
+                                        <MListItem Class="m-list-item--default" Link Href="@subComponentItem.Url">
                                             <MListItemContent>
                                                 <MListItemTitle>
                                                     @FormatComponentTitle(subComponentItem)
@@ -41,7 +40,7 @@
                         }
                         else
                         {
-                            <MListItem Link Href="@componentItem.Url">
+                            <MListItem Class="m-list-item--default" Link Href="@componentItem.Url">
                                 <MListItemContent>
                                     <MListItemTitle>
                                         @FormatComponentTitle(componentItem)
@@ -55,7 +54,7 @@
         }
         else
         {
-            <MListItem Link Href="@item.Url">
+            <MListItem Class="m-list-item--default" Link Href="@item.Url">
                 <MListItemIcon>
                     <MIcon>@item.Icon</MIcon>
                 </MListItemIcon>

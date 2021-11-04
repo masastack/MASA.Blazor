@@ -85,7 +85,7 @@ namespace MASA.Blazor
                 })
                 .Apply("header", cssBuilder =>
                 {
-                    var header = (DataTableHeader)cssBuilder.Context.Data;
+                    var header = (DataTableHeader)cssBuilder.Data;
 
                     if (!DisableSort && header.Sortable)
                     {
@@ -103,7 +103,7 @@ namespace MASA.Blazor
                         .Add($"text-{header.Align ?? "start"}");
                 }, styleBuilder =>
                 {
-                    var header = (DataTableHeader)styleBuilder.Context.Data;
+                    var header = (DataTableHeader)styleBuilder.Data;
 
                     styleBuilder
                         .AddWidth(header.Width)
