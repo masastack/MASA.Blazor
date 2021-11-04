@@ -113,6 +113,12 @@ namespace MASA.Blazor
                     props[nameof(MColorPickerEdit.HideAlpha)] = HideAlpha;
                     props[nameof(MColorPickerEdit.Mode)] = Mode;
                     props[nameof(MColorPickerEdit.OnColorUpdate)] = CreateEventCallback<ColorPickerColor>(HandleUpdateColor);
+                })
+                .Apply<BColorPickerPreview, MColorPickerPreview>(props =>
+                {
+                    props[nameof(MColorPickerPreview.Color)] = _internalValue;
+                    props[nameof(MColorPickerPreview.Disabled)] = Disabled;
+                    props[nameof(MColorPickerPreview.HideAlpha)] = HideAlpha;
                 });
         }
 
