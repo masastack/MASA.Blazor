@@ -13,6 +13,8 @@ namespace MASA.Blazor
     public partial class MColorPickerCanvas : BColorPickerCanvas, IColorPickerCanvas
     {
         private BoundingClientRect _boundingClientRect;
+        private bool _updateCanvas;
+        private ColorPickerColor _color = ColorUtils.FromRGBA(new RGBA { R = 255, G = 0, B = 0, A = 0 });
 
         public Dictionary<string, object> CanvasAttrs => new()
         {
@@ -21,7 +23,21 @@ namespace MASA.Blazor
         };
 
         [Parameter]
-        public ColorPickerColor Color { get; set; } = ColorUtils.FromRGBA(new RGBA { R = 255, G = 0, B = 0, A = 0 });
+        public ColorPickerColor Color
+        {
+            get
+            {
+                return _color;
+            }
+            set
+            {
+                if (_color.Hue!=value.Hue)
+                {
+                    _updateCanvas = true;
+                }
+                _color = value;
+            }
+        }
 
         public ElementReference CanvasRef { get; set; }
 
@@ -106,6 +122,11 @@ namespace MASA.Blazor
                 {
                     await JsInvokeAsync(JsInteropConstants.UpdateCanvas, CanvasRef, Color.Hue);
                 }
+            }
+
+            if (_updateCanvas)
+            {
+                await JsInvokeAsync(JsInteropConstants.UpdateCanvas, CanvasRef, Color.Hue);
             }
         }
 

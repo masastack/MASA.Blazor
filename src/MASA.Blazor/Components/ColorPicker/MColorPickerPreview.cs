@@ -19,7 +19,8 @@ namespace MASA.Blazor
         [Parameter]
         public ColorPickerColor Color { get; set; }
 
-        public Dictionary<string, object> HueAttrs => throw new NotImplementedException();
+        [Parameter]
+        public EventCallback<ColorPickerColor> OnColorUpdate { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -40,10 +41,40 @@ namespace MASA.Blazor
                 {
                     styleBuilder
                         .Add(() => $"background:{ColorUtils.RGBAtoCSS(Color.Rgba)}");
+                })
+                .Apply("sliders", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add($"{prefix}__sliders");
                 });
 
             AbstractProvider
-                .ApplyColorPickerPreviewDefault();
+                .ApplyColorPickerPreviewDefault()
+                .Apply<ISlider<double>, MSlider<double>>(props =>
+                {
+                    if (props.Index == 0)
+                    {
+                        props[nameof(Class)] = "m-color-picker__hue";
+                        props[nameof(MSlider<double>.ThumbColor)] = "grey lighten-2";
+                        props[nameof(MSlider<double>.HideDetails)] = (StringBoolean)true;
+                        props[nameof(MSlider<double>.Value)] = Color.Hue;
+                        props[nameof(MSlider<double>.Step)] = 0D;
+                        props[nameof(MSlider<double>.Min)] = 0D;
+                        props[nameof(MSlider<double>.Max)] = 360D;
+                        props[nameof(MSlider<double>.ValueChanged)] = CreateEventCallback<double>(val =>
+                        {
+                            if (Color.Hue != val)
+                            {
+                                if (OnColorUpdate.HasDelegate)
+                                {
+                                    var hsva = Color.Hsva;
+                                    hsva.H = val;
+                                    OnColorUpdate.InvokeAsync(ColorUtils.FromHSVA(hsva));
+                                }
+                            }
+                        });
+                    }
+                });
         }
     }
 }

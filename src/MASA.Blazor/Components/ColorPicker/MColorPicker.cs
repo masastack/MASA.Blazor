@@ -43,7 +43,7 @@ namespace MASA.Blazor
             {
                 if (_value != value)
                 {
-                    HandleUpdateColor(ParseColor(Value, _internalValue));
+                    HandleOnColorUpdate(ParseColor(Value, _internalValue));
                 }
                 _value = value;
             }
@@ -104,7 +104,7 @@ namespace MASA.Blazor
                     props[nameof(MColorPickerCanvas.DotSize)] = DotSize;
                     props[nameof(MColorPickerCanvas.Width)] = Width;
                     props[nameof(MColorPickerCanvas.Height)] = CanvasHeight;
-                    props[nameof(MColorPickerCanvas.OnColorUpdate)] = CreateEventCallback<ColorPickerColor>(HandleUpdateColor);
+                    props[nameof(MColorPickerCanvas.OnColorUpdate)] = CreateEventCallback<ColorPickerColor>(HandleOnColorUpdate);
                 })
                 .Apply<BColorPickerEdit, MColorPickerEdit>(props =>
                 {
@@ -112,79 +112,101 @@ namespace MASA.Blazor
                     props[nameof(MColorPickerEdit.Disabled)] = Disabled;
                     props[nameof(MColorPickerEdit.HideAlpha)] = HideAlpha;
                     props[nameof(MColorPickerEdit.Mode)] = Mode;
-                    props[nameof(MColorPickerEdit.OnColorUpdate)] = CreateEventCallback<ColorPickerColor>(HandleUpdateColor);
+                    props[nameof(MColorPickerEdit.OnColorUpdate)] = CreateEventCallback<ColorPickerColor>(HandleOnColorUpdate);
                 })
                 .Apply<BColorPickerPreview, MColorPickerPreview>(props =>
                 {
                     props[nameof(MColorPickerPreview.Color)] = _internalValue;
                     props[nameof(MColorPickerPreview.Disabled)] = Disabled;
                     props[nameof(MColorPickerPreview.HideAlpha)] = HideAlpha;
+                    props[nameof(MColorPickerPreview.OnColorUpdate)] = CreateEventCallback<ColorPickerColor>(HandleOnColorUpdate);
                 });
         }
 
-        public Task HandleUpdateColor(ColorPickerColor color)
+        public Task HandleOnColorUpdate(ColorPickerColor color)
         {
             _internalValue = color;
 
-            //switch (Type)
-            //{
-            //    case ColorTypes.HEX:
-            //        var hex = (Value as string).Length == 7 ? color.Hex : color.Hexa;
-            //        if (!Compare(hex, Value))
-            //        {
-            //            //this.$emit('input', value)
-            //            UpdateColor(_internalValue);
-            //        }
-            //        break;
-            //    case ColorTypes.RGB:
-            //        var rgb = new RGB { R = color.Rgba.R, G = color.Rgba.G, B = color.Rgba.B };
-            //        if (!Compare(rgb, Value))
-            //        {
-            //            //this.$emit('input', value)
-            //            UpdateColor(_internalValue);
-            //        }
-            //        break;
-            //    case ColorTypes.RGBA:
-            //        var rgba = color.Rgba;
-            //        if (!Compare(rgba, Value))
-            //        {
-            //            //this.$emit('input', value)
-            //            UpdateColor(_internalValue);
-            //        }
-            //        break;
-            //    case ColorTypes.HSL:
-            //        var hsl = new HSL { H = color.Hsla.H, L = color.Hsla.L, S = color.Hsla.S };
-            //        if (!Compare(hsl, Value))
-            //        {
-            //            //this.$emit('input', value)
-            //            UpdateColor(_internalValue);
-            //        }
-            //        break;
-            //    case ColorTypes.HSLA:
-            //        var hsla = color.Hsla;
-            //        if (!Compare(hsla, Value))
-            //        {
-            //            //this.$emit('input', value)
-            //            UpdateColor(_internalValue);
-            //        }
-            //        break;
-            //    case ColorTypes.HSV:
-            //        var hsv = new HSV { H = color.Hsva.H, S = color.Hsva.S, V = color.Hsva.V };
-            //        if (!Compare(hsv, Value))
-            //        {
-            //            //this.$emit('input', value)
-            //            UpdateColor(_internalValue);
-            //        }
-            //        break;
-            //    case ColorTypes.HSVA:
-            //        var hsva= color.Hsva;
-            //        if (!Compare(hsva, Value))
-            //        {
-            //            //this.$emit('input', value)
-            //            UpdateColor(_internalValue);
-            //        }
-            //        break;
-            //}
+            switch (Mode)
+            {
+                case ColorTypes.HEX:
+                    var hex = (Value as string).Length == 7 ? color.Hex : color.Hexa;
+                    if (!Compare(hex, Value))
+                    {
+                        //this.$emit('input', value)
+                        if (OnColorUpdate.HasDelegate)
+                        {
+                            OnColorUpdate.InvokeAsync(_internalValue);
+                        }
+                    }
+                    break;
+                case ColorTypes.RGB:
+                    var rgb = new RGB { R = color.Rgba.R, G = color.Rgba.G, B = color.Rgba.B };
+                    if (!Compare(rgb, Value))
+                    {
+                        //this.$emit('input', value)
+                        if (OnColorUpdate.HasDelegate)
+                        {
+                            OnColorUpdate.InvokeAsync(_internalValue);
+                        }
+                    }
+                    break;
+                case ColorTypes.RGBA:
+                    var rgba = color.Rgba;
+                    if (!Compare(rgba, Value))
+                    {
+                        //this.$emit('input', value)
+                        if (OnColorUpdate.HasDelegate)
+                        {
+                            OnColorUpdate.InvokeAsync(_internalValue);
+                        }
+                    }
+                    break;
+                case ColorTypes.HSL:
+                    var hsl = new HSL { H = color.Hsla.H, L = color.Hsla.L, S = color.Hsla.S };
+                    if (!Compare(hsl, Value))
+                    {
+                        //this.$emit('input', value)
+                        if (OnColorUpdate.HasDelegate)
+                        {
+                            OnColorUpdate.InvokeAsync(_internalValue);
+                        }
+                    }
+                    break;
+                case ColorTypes.HSLA:
+                    var hsla = color.Hsla;
+                    if (!Compare(hsla, Value))
+                    {
+                        //this.$emit('input', value)
+                        if (OnColorUpdate.HasDelegate)
+                        {
+                            OnColorUpdate.InvokeAsync(_internalValue);
+                        }
+                    }
+                    break;
+                case ColorTypes.HSV:
+                    var hsv = new HSV { H = color.Hsva.H, S = color.Hsva.S, V = color.Hsva.V };
+                    if (!Compare(hsv, Value))
+                    {
+                        //this.$emit('input', value)
+                        if (OnColorUpdate.HasDelegate)
+                        {
+                            OnColorUpdate.InvokeAsync(_internalValue);
+                        }
+                    }
+                    break;
+                case ColorTypes.HSVA:
+                    var hsva = color.Hsva;
+                    if (!Compare(hsva, Value))
+                    {
+                        //this.$emit('input', value)
+                        if (OnColorUpdate.HasDelegate)
+                        {
+                            OnColorUpdate.InvokeAsync(_internalValue);
+                        }
+                    }
+                    break;
+            }
 
             return Task.CompletedTask;
         }
