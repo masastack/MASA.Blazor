@@ -34,7 +34,7 @@ namespace MASA.Blazor.Test.NavigationDrawer
             //Act
             var cut = RenderComponent<MNavigationDrawer>(props =>
             {
-                props.Add(navigationdrawer => navigationdrawer.IsBottom, true);
+                props.Add(navigationdrawer => navigationdrawer.Bottom, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasIsBottomClass = classes.Contains("m-navigation-drawer--bottom");
@@ -64,7 +64,7 @@ namespace MASA.Blazor.Test.NavigationDrawer
             //Act
             var cut = RenderComponent<MNavigationDrawer>(props =>
             {
-                props.Add(navigationdrawer => navigationdrawer.IsActive, true);
+                props.Add(navigationdrawer => navigationdrawer.Value, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasIsActiveClass = classes.Contains("m-navigation-drawer--open");
@@ -214,28 +214,13 @@ namespace MASA.Blazor.Test.NavigationDrawer
             //Act
             var cut = RenderComponent<MNavigationDrawer>(props =>
             {
-                props.Add(navigationdrawer => navigationdrawer.IsActive, true);
+                props.Add(navigationdrawer => navigationdrawer.Value, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var noIsActiveClass = !classes.Contains("m-navigation-drawer--fixed");
 
             // Assert
             Assert.IsTrue(noIsActiveClass);
-        }
-
-        [TestMethod]
-        public void RenderNavigationDrawerWithDrawer()
-        {
-            //Act
-            var cut = RenderComponent<MNavigationDrawer>(props =>
-            {
-                props.Add(navigationdrawer => navigationdrawer.Drawer, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasFixedClass = classes.Contains("m-navigation-drawer--open");
-
-            // Assert
-            Assert.IsTrue(hasFixedClass);
         }
 
         [TestMethod]

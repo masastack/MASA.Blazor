@@ -83,7 +83,7 @@ namespace MASA.Blazor.Test.Overlay
             var style = overlayDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("background-color:#212121;border-color:#212121;opacity: 0", style);
+            Assert.AreEqual("background-color:#212121;border-color:#212121;opacity:0", style);
         }
 
         //[TestMethod]

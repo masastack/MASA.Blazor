@@ -15,7 +15,7 @@ namespace MASA.Blazor.Test.Slider
         public void RenderWithIconContent()
         {
             // Arrange & Act
-            var cut = RenderComponent<MSlider>(props =>
+            var cut = RenderComponent<MSlider<double>>(props =>
             {
                 props.Add(slider => slider.ThumbLabelContent, context => "<span>Hello world</span>");
             });
@@ -29,7 +29,7 @@ namespace MASA.Blazor.Test.Slider
         public void RenderSliderWithVertical()
         {
             //Act
-            var cut = RenderComponent<MSlider>(props =>
+            var cut = RenderComponent<MSlider<double>>(props =>
             {
                 props.Add(slider => slider.Vertical, true);
             });
@@ -44,7 +44,7 @@ namespace MASA.Blazor.Test.Slider
         public void RenderSliderWithInverseLabel()
         {
             //Act
-            var cut = RenderComponent<MSlider>(props =>
+            var cut = RenderComponent<MSlider<double>>(props =>
             {
                 props.Add(slider => slider.InverseLabel, true);
             });
@@ -59,7 +59,7 @@ namespace MASA.Blazor.Test.Slider
         public void RenderSliderWithnoVertical()
         {
             //Act
-            var cut = RenderComponent<MSlider>(props =>
+            var cut = RenderComponent<MSlider<double>>(props =>
             {
                 props.Add(slider => slider.Vertical, true);
             });
