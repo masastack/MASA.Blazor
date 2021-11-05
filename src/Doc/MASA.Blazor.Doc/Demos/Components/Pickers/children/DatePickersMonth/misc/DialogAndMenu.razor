@@ -1,0 +1,74 @@
+﻿<MRow>
+    <MCol Cols="11"
+          Sm="5">
+        <MMenu @bind-Value="_menu"
+               CloseOnContentClick="false"
+               Transition="scale-transition"
+               OffsetY
+               MaxWidth="290"
+               MinWidth="@("auto")">
+            <ActivatorContent>
+                <MTextField @bind-Value="_date"
+                            Label="Picker in menu"
+                            PrependIcon="mdi-calendar"
+                            Readonly
+                            @attributes="context.Attrs"></MTextField>
+            </ActivatorContent>
+            <ChildContent>
+                <MDatePicker @bind-Value="_date"
+                             Type="DatePickerType.Month"
+                             NoTitle
+                             Scrollable>
+                    <MSpacer></MSpacer>
+                    <MButton Text
+                             Color="primary"
+                             OnClick="()=>_menu = false">
+                        Cancel
+                    </MButton>
+                    <MButton Text
+                             Color="primary">
+                        OK
+                    </MButton>
+                </MDatePicker>
+            </ChildContent>
+        </MMenu>
+    </MCol>
+    <MSpacer></MSpacer>
+    <MCol Cols="11"
+          Sm="5">
+        <MDialog @bind-Value="_modal"
+                 Persistent
+                 Width="290">
+            <ActivatorContent>
+                <MTextField @bind-Value="_date"
+                            Label="Picker in dialog"
+                            PrependIcon="mdi-calendar"
+                            Readonly
+                            @attributes="context.Attrs"></MTextField>
+            </ActivatorContent>
+            <ChildContent>
+                <MDatePicker @bind-Value="_date"
+                             Type="DatePickerType.Month"
+                             Scrollable>
+                    <MSpacer></MSpacer>
+                    <MButton Text
+                             Color="primary"
+                             OnClick="()=>_modal = false">
+                        Cancel
+                    </MButton>
+                    <MButton Text
+                             Color="primary">
+                        OK
+                    </MButton>
+                </MDatePicker>
+            </ChildContent>
+        </MDialog>
+    </MCol>
+</MRow>
+
+@code {
+    private DateOnly _date = DateOnly.FromDateTime(DateTime.Now);
+    private bool _menu;
+    private bool _modal;
+}
+

@@ -82,7 +82,7 @@ namespace MASA.Blazor
 
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
-        
+
         public override bool IsDark
         {
             get
@@ -135,7 +135,7 @@ namespace MASA.Blazor
                         .AddIf("m-btn--text", () => Text)
                         .AddIf("m-btn--tile", () => Tile)
                         .AddIf("m-btn--top", () => Top)
-                        .AddIf($"m-btn--active {ActiveClass}", () => IsActive)
+                        .AddIf($"m-btn--active {ComputedActiveClass}", () => IsActive)
                         .AddFirstIf(
                             ("m-size--x-large", () => XLarge),
                             ("m-size--large", () => Large),
@@ -180,6 +180,7 @@ namespace MASA.Blazor
                 .Apply<BProgressCircular, MProgressCircular>(prop =>
                 {
                     prop[nameof(MProgressCircular.Size)] = (StringNumber)23;
+                    prop[nameof(MProgressCircular.Width)] = (StringNumber)2;
                     prop[nameof(MProgressCircular.Indeterminate)] = true;
                 })
                 .Apply(typeof(BButtonContent<>), typeof(BButtonContent<MButton>));

@@ -68,6 +68,7 @@ namespace MASA.Blazor
                 }, style =>
                 {
                     style.AddTextColor(ComputedColor);
+                    style.AddBackgroundColor(BackgroundColor);
                 })
                 .Merge("content", css => { css.Add($"{prefix}__content"); });
         }

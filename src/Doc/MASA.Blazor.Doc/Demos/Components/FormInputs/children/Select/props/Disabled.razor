@@ -1,0 +1,30 @@
+<MRow Align="@AlignTypes.Center">
+    <MCol Span="12">
+        <MSelect Value="@("")"
+                 Items="items"
+                 ItemText="u => u"
+                 ItemValue="u => u"
+                 Disabled
+                 Label="Disabled"></MSelect>
+    </MCol>
+    <MCol Span="12">
+        <MSelect Value="@("")"
+                 Items="items2"
+                 ItemText="u => u.Key"
+                 ItemValue="u => u.Key"
+                 ItemDisabled="u => u.Value"
+                 Label="Disabled Item"></MSelect>
+    </MCol>
+</MRow>
+
+@code {
+    List<string> items = new() { "Foo", "Bar", "Fizz", "Buzz" };
+
+    List<KeyValuePair<string, bool>> items2 = new Dictionary<string, bool>
+    {
+        { "Foo", false },
+        { "Bar", false },
+        { "Fizz", true },
+        { "Buzz", false }
+    }.ToList();
+}

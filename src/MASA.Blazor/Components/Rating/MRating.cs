@@ -54,7 +54,6 @@ namespace MASA.Blazor
             {
                 if (value == _value) return;
                 _value = value;
-                ValueChanged.InvokeAsync(_value);
             }
         }
 
@@ -133,20 +132,21 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyRatingDefault()
-                .Apply<BButton, MButton>(props =>
+                .Apply<BIcon, MIcon>(props =>
                 {
-                    props.TryGetValue("ItemIndex", out var itemIndexStr);
-                    var itemIndex = int.Parse(itemIndexStr.ToString());
+                    var itemIndex = props.Index;
                     var ratingItem = CreateProps(itemIndex);
 
-                    props[nameof(MButton.Icon)] = true;
-                    props[nameof(MButton.Small)] = Small;
-                    props[nameof(MButton.XLarge)] = XLarge;
-                    props[nameof(MButton.Large)] = Large;
-                    props[nameof(MButton.XSmall)] = XSmall;
-                    props[nameof(MButton.Dark)] = Dark;
-                    props[nameof(MButton.Light)] = Light;
-                    props[nameof(MButton.Color)] = GetColor(ratingItem);
+                    props[nameof(MIcon.Size)] = Size;
+                    props[nameof(MIcon.Icon)] = true;
+                    props[nameof(MIcon.Small)] = Small;
+                    props[nameof(MIcon.XLarge)] = XLarge;
+                    props[nameof(MIcon.Large)] = Large;
+                    props[nameof(MIcon.XSmall)] = XSmall;
+                    props[nameof(MIcon.Dark)] = Dark;
+                    props[nameof(MIcon.Light)] = Light;
+                    props[nameof(MIcon.Color)] = GetColor(ratingItem);
+                    props[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () => { }); //TODO Icon 暂不支持exclick事件显示button
                     props["onexclick"] = EventCallback.Factory.Create(this, ratingItem.Click);
                     props["onexmouseenter"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
                         async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseEnter));
@@ -154,10 +154,6 @@ namespace MASA.Blazor
                        async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseLeave));
                     props["onexmousemove"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
                         async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseMove));
-                })
-                .Apply<BIcon, MIcon>(props =>
-                {
-                    props[nameof(MIcon.Size)] = Size;
                 });
         }
 
@@ -214,6 +210,7 @@ namespace MASA.Blazor
 
             var newValue = await GenHoverIndex(i, args);
             Value = Clearable && Value == newValue ? 0 : newValue;
+            await ValueChanged.InvokeAsync(Value);
         }
 
         private async Task<double> GenHoverIndex(int i, ExMouseEventArgs args)

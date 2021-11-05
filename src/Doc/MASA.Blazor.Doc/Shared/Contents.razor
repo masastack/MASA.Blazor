@@ -2,13 +2,21 @@
 @inherits OwningComponentBase<DemoService>
 
 <ul class="mb-6">
-    @if (Items != null)
+    @if (_items != null)
     {
-        @foreach (var item in Items)
+        @foreach (var item in _items)
         {
             var exClass = item == ActiveItem ? " primary--text router-link-active" : "text--disabled";
-            <li class="pl-3 text-body-2 py-1 font-weight-regular @exClass">
-                <a @onclick="()=> HandleOnClick(item.Href)" @onclick:preventDefault @onclick:stopPropagation class="m-toc-link d-block transition-swing text-decoration-none">
+            var pl = item.Level switch 
+            {
+                3 => "pl-6",
+                4 => "pl-9",
+                5 => "pl-12",
+                _ => "pl-3"
+            };
+
+            <li class="@pl text-body-2 py-1 font-weight-regular @exClass">
+                <a @onclick="() => HandleOnClick(item.Href)" @onclick:preventDefault @onclick:stopPropagation class="m-toc-link d-block transition-swing text-decoration-none">
                     @item.Title
                 </a>
             </li>

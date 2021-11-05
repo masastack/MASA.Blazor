@@ -43,7 +43,18 @@ namespace MASA.Blazor
 
         public Dictionary<string, object> InputAttrs => new();
 
-        public bool IsActive => Value;
+        private bool? _isActive;
+
+        [Parameter]
+        public bool IsActive
+        {
+            get => _isActive ?? Value;
+            set
+            {
+                _isActive = value;
+                InternalValue = value;
+            }
+        }
 
         [Parameter]
         public bool? Ripple { get; set; }
@@ -69,6 +80,18 @@ namespace MASA.Blazor
         public Task HandleOnKeyDown(KeyboardEventArgs args)
         {
             return Task.CompletedTask;
+        }
+
+        public override string ValidationState
+        {
+            get
+            {
+                if (IsDisabled && !Indeterminate) return "";
+                if (HasError && ShouldValidate) return "error";
+                if (HasSuccess) return "success";
+                if (HasColor) return ComputedColor;
+                return "";
+            }
         }
 
         protected override void SetComponentClass()

@@ -1,0 +1,38 @@
+﻿{
+  "Components": [
+    "Hover"
+  ],
+  "Props": [
+    {
+      "Name": "CloseDelay",
+      "Type": "StringNumber",
+      "Default": "0",
+      "Description": "关闭组件前等待的毫秒数。"
+    },
+    {
+      "Name": "OpenDelay",
+      "Type": "StringNumber",
+      "Default": "0",
+      "Description": "在打开组件之前等待的毫秒数。"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "控制组件是可见的还是隐藏的。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "关闭悬停功能"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": []
+}

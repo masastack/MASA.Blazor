@@ -46,7 +46,7 @@ namespace MASA.Blazor
                 .Apply<BTooltip, MTooltip>()
                 .Apply(typeof(IImage), typeof(MImage))
                 .Apply<BOverlay, MOverlay>()
-                .Apply<BCard, MCard>();
+                .Apply<ICard, MCard>();
         }
 
         protected override string GetColorCss(bool uploaded) => uploaded ? "" : "red--text";

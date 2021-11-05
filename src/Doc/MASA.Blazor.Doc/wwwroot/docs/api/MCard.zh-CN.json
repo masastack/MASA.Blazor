@@ -4,10 +4,16 @@
   ],
   "Props": [
     {
-      "Name": "Class",
+      "Name": "ActiveClass",
       "Type": "String",
       "Default": "null",
-      "Description": "应用到组件最外层元素的class"
+      "Description": "配置在链接激活时应用的 CSS 类。"
+    },
+    {
+      "Name": "Append",
+      "Type": "boolean",
+      "Default": "false",
+      "Description": "设置 append 属性总是会附加到当前路径的相对路径上。"
     },
     {
       "Name": "Color",
@@ -28,6 +34,24 @@
       "Description": "移除组件的单击或 target 功能。"
     },
     {
+      "Name": "Elevation",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "组件的海拔可接受 0 到 24 之间的值。"
+    },
+    {
+      "Name": "Exact",
+      "Type": "boolean",
+      "Default": "false",
+      "Description": "完全匹配链接。如果没有这个链接，‘/’ 将匹配每个路由。"
+    },
+    {
+      "Name": "ExactActiveClass",
+      "Type": "string",
+      "Default": "null",
+      "Description": "配置在精准链接激活时应用的 CSS 类。"
+    },
+    {
       "Name": "Flat",
       "Type": "Boolean",
       "Default": "false",
@@ -46,10 +70,34 @@
       "Description": "悬停时将应用 4dp 的海拔（默认值为 2dp）。"
     },
     {
+      "Name": "Href",
+      "Type": "string",
+      "Default": "null",
+      "Description": "指定组件为锚点并应用 href 属性。"
+    },
+    {
+      "Name": "Img",
+      "Type": "string",
+      "Default": "null",
+      "Description": "指定卡片的背景图。对于更高级的实现，建议您使用 MImage 组件。"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "为组件设置浅色主题。"
+    },
+    {
       "Name": "Link",
       "Type": "Boolean",
       "Default": "false",
       "Description": "指定组件为链接。当使用 href 或 **to ** 属性时，这是自动的设置的。"
+    },
+    {
+      "Name": "LoaderHeight",
+      "Type": "StringNumber",
+      "Default": "4",
+      "Description": "指定加载器的高度"
     },
     {
       "Name": "Loading",
@@ -94,16 +142,40 @@
       "Description": "指定较高的默认海拔（8dp）。"
     },
     {
+      "Name": "Rounded",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": "对指定的组件应用 border-radius 样式。"
+    },
+    {
       "Name": "Shaped",
       "Type": "Boolean",
       "Default": "false",
       "Description": "在卡片的左上角和右下角应用较大的边框半径。"
     },
     {
-      "Name": "Style",
-      "Type": "String",
+      "Name": "Tag",
+      "Type": "string",
+      "Default": "div",
+      "Description": "指定在根元素上使用的自定义标签。"
+    },
+    {
+      "Name": "Target",
+      "Type": "string",
       "Default": "null",
-      "Description": "应用到组件最外层元素的style"
+      "Description": "指定 target 属性。只在使用 href 属性时应用。"
+    },
+    {
+      "Name": "Tile",
+      "Type": "boolean",
+      "Default": "false",
+      "Description": "删除组件的border-radius样式。"
+    },
+    {
+      "Name": "To",
+      "Type": "string",
+      "Default": "null",
+      "Description": "表示链接的目标路由。"
     },
     {
       "Name": "Width",
@@ -112,16 +184,26 @@
       "Description": "设定组件的宽度。"
     },
     {
-      "Name": "Img",
+      "Name": "Class",
       "Type": "String",
       "Default": "null",
-      "Description": "指定卡片的背景图"
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
     }
   ],
   "Contents": [
     {
       "Name": "ChildContent",
       "Description": "默认插槽"
+    },
+    {
+      "Name": "ProgressContent",
+      "Description": "自定义进度线的插槽（loading属性不等于布尔值False时显示)"
     }
   ],
   "Events": [

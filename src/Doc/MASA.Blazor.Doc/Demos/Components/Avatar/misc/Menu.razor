@@ -1,0 +1,30 @@
+﻿<MContainer Fluid Style="height:300px">
+	<MRow Justify="JustifyTypes.Center">
+		<MMenu Bottom MinWidth="200" Rounded="@true" OffsetY>
+			<ActivatorContent>
+				<MButton Icon XLarge @attributes="@context.Attrs">
+					<MAvatar Color="brown" Size="48">
+						<span class="white--text text-h5">JD</span>
+					</MAvatar>
+				</MButton>
+			</ActivatorContent>
+			<ChildContent>
+				<MCard>
+					<MListItemContent Class="justify-center">
+						<div class="mx-auto text-center">
+							<MAvatar Color="brown">
+								<span class="white--text text-h5">JD</span>
+							</MAvatar>
+							<h3>John Doe</h3>
+							<p class="text-caption mt-1">john.doe@doe.com</p>
+							<MDivider class="my-3"></MDivider>
+							<MButton Depressed Rounded Text>Edit Account</MButton>
+							<MDivider class="my-3"></MDivider>
+							<MButton Depressed Rounded Text>Disconnect</MButton>
+						</div>
+					</MListItemContent>
+				</MCard>
+			</ChildContent>
+		</MMenu>
+	</MRow>
+</MContainer>

@@ -105,15 +105,17 @@ namespace MASA.Blazor
                             .AddIf(() => $"transition:none", () => Slider.left == null);
                     })
                 .Apply("slider", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-tabs-slider")
-                        .AddBackgroundColor(SliderColor);
-                });
+                    {
+                        cssBuilder
+                            .Add("m-tabs-slider")
+                            .AddBackgroundColor(SliderColor);
+                    },
+                    styleBuilder => styleBuilder.AddBackgroundColor(SliderColor));
 
             AbstractProvider
                 .Apply<BSlideGroup, MTabsBar>(props =>
                 {
+                    props[nameof(MTabsBar.ActiveClass)] = ActiveClass;
                     props[nameof(MTabsBar.CenterActive)] = CenterActive;
                     props[nameof(MTabsBar.BackgroundColor)] = BackgroundColor;
                     props[nameof(MTabsBar.IsDark)] = IsDark;

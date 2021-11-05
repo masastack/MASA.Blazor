@@ -5,7 +5,7 @@
         Show Overlay
     </MButton>
 
-    <MOverlay @bind-Value="overlay"></MOverlay>
+    <MOverlay Value="overlay"></MOverlay>
 </div>
 
 @code {
@@ -14,11 +14,9 @@
     async Task OnClick(MouseEventArgs args)
     {
         overlay = true;
-        System.Console.WriteLine(overlay);
         await InvokeAsync(StateHasChanged);
 
         await Task.Delay(2000);
         overlay = false;
-        System.Console.WriteLine(overlay);
     }
 }

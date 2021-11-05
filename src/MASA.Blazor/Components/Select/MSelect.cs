@@ -96,9 +96,6 @@ namespace MASA.Blazor
 
         public List<string> Text { get; set; } = new();
 
-        //TODO:menu will change
-        public Func<MouseEventArgs, Task> OnExtraClick { get; set; }
-
         public override bool IsDirty => SelectedItems.Count > 0;
 
         public int HighlightIndex { get; set; } = -1;
@@ -139,6 +136,8 @@ namespace MASA.Blazor
         public IList<TItem> SelectedItems => Items
                 .Where(u => Values.Contains(ItemValue(u))).ToList();
 
+        public AbstractComponent Menu { get; set; }
+
         protected virtual List<string> FormatText(TValue value)
         {
             //TODO:set default expression
@@ -165,6 +164,8 @@ namespace MASA.Blazor
             if (firstRender)
             {
                 await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
+
+                await (Menu.Instance as MMenu)?.UpdateActivator(InputSlotElement);
             }
         }
 
@@ -225,15 +226,19 @@ namespace MASA.Blazor
                 .Apply(typeof(BSelectSelections<,,,>), typeof(BSelectSelections<TItem, TItemValue, TValue, MSelect<TItem, TItemValue, TValue>>))
                 .Apply<BMenu, MMenu>(props =>
                 {
-                    props[nameof(MMenu.Visible)] = Visible;
-                    props[nameof(MMenu.VisibleChanged)] = EventCallback.Factory.Create<bool>(this, (v) =>
+                    props[nameof(MMenu.Value)] = Visible;
+                    props[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, (v) =>
                     {
                         Visible = v;
+
+                        if (v)
+                        {
+                            InputElement.FocusAsync();
+                        }
                     });
-                    props[nameof(MMenu.Disabled)] = Disabled;
+                    props[nameof(MMenu.Disabled)] = Disabled || Readonly;
                     props[nameof(MMenu.OffsetY)] = MenuProps?.OffsetY;
                     props[nameof(MMenu.OffsetX)] = MenuProps?.OffsetX;
-                    props[nameof(MMenu.Block)] = MenuProps?.Block ?? true;
                     props[nameof(MMenu.CloseOnContentClick)] = false;
                     props[nameof(MMenu.Top)] = MenuProps?.Top;
                     props[nameof(MMenu.Right)] = MenuProps?.Right;
@@ -246,8 +251,6 @@ namespace MASA.Blazor
                     props[nameof(MMenu.NudgeWidth)] = MenuProps?.NudgeWidth;
                     props[nameof(MMenu.MaxHeight)] = MenuProps?.MaxHeight ?? 400;
                     props[nameof(MMenu.MinWidth)] = MenuProps?.MinWidth;
-                    props[nameof(MMenu.Input)] = true;
-                    props[nameof(MMenu.ActivatorRef)] = InputSlotElement;
                 })
                 .Apply<BList, MList>(props =>
                 {
@@ -256,7 +259,7 @@ namespace MASA.Blazor
                 .Apply<BListItem, MListItem>()
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>()
-                .Apply(typeof(BSelectOption<,,>), typeof(MSelectOption<TItem, TItemValue, TValue>))
+                .Apply(typeof(BSelectList<,,>), typeof(MSelectList<TItem, TItemValue, TValue>))
                 .Apply<BChip, MChip>(props =>
                 {
                     props[nameof(MChip.Close)] = DeletableChips && (!IsDisabled && !IsReadonly);
@@ -266,14 +269,9 @@ namespace MASA.Blazor
                 });
         }
 
-        public void SetOnExtraClick(Func<MouseEventArgs, Task> onExtraClick)
-        {
-            OnExtraClick = onExtraClick;
-        }
-
         public override Task HandleOnBlurAsync(FocusEventArgs args)
         {
-            SetVisible(false);
+            // SetVisible(false);
             return base.HandleOnBlurAsync(args);
         }
 
@@ -334,12 +332,6 @@ namespace MASA.Blazor
 
         public override async Task HandleOnClickAsync(MouseEventArgs args)
         {
-            //TODO:menu will change
-            if (OnExtraClick != null && !Readonly)
-            {
-                await OnExtraClick(args);
-            }
-
             //TODO:try focus
             await InputElement.FocusAsync();
             await base.HandleOnClickAsync(args);

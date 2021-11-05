@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public class MToolbar : MSheet, IThemeable
+    public class MToolbar : MSheet, IThemeable, IToolbar
     {
         [Parameter]
         public bool Absolute { get; set; }
@@ -151,22 +151,22 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Merge<BSheetBody, BToolbarSheetBody>(props =>
+                .Merge(typeof(BSheetBody<>), typeof(BToolbarBody<IToolbar>), props =>
                 {
-                    props[nameof(BToolbarSheetBody.ChildContent)] = ChildContent;
-                    props[nameof(BToolbarSheetBody.CssProvider)] = CssProvider;
-                    props[nameof(BToolbarSheetBody.AbstractProvider)] = AbstractProvider;
-                    props[nameof(BToolbarSheetBody.ImgContent)] = ImgContent;
-                    props[nameof(BToolbarSheetBody.Src)] = Src;
-                    props[nameof(BToolbarSheetBody.Height)] = ComputedHeight;
-                    props[nameof(BToolbarSheetBody.IsExtended)] = IsExtended;
-                    props[nameof(BToolbarSheetBody.ExtensionContent)] = ExtensionContent;
+                    //TODO: Remove this
+                    props[nameof(BToolbarBody<IToolbar>.CssProvider)] = CssProvider;
+                    props[nameof(BToolbarBody<IToolbar>.AbstractProvider)] = AbstractProvider;
+                    props[nameof(BToolbarBody<IToolbar>.ImgContent)] = ImgContent;
+                    props[nameof(BToolbarBody<IToolbar>.Src)] = Src;
+                    props[nameof(BToolbarBody<IToolbar>.Height)] = ComputedHeight;
+                    props[nameof(BToolbarBody<IToolbar>.IsExtended)] = IsExtended;
+                    props[nameof(BToolbarBody<IToolbar>.ExtensionContent)] = ExtensionContent;
                 })
                 .Apply(typeof(IImage), typeof(MImage), props =>
-                 {
-                     props[nameof(MImage.Height)] = ComputedHeight;
-                     props[nameof(MImage.Src)] = Src;
-                 });
+                {
+                    props[nameof(MImage.Height)] = ComputedHeight;
+                    props[nameof(MImage.Src)] = Src;
+                });
         }
     }
 }

@@ -1,0 +1,38 @@
+﻿<MCard MaxWidth="400" class="mx-auto">
+    <MContainer class="pa-1">
+        <MItemGroup Multiple @bind-Values="selected">
+            <MRow>
+                @foreach (var item in items)
+                {
+                    <MCol Cols="12" Md="6">
+                        <MItem>
+                            <MImage Src="@($"https://cdn.vuetifyjs.com/images/{item}")"
+                                    Height="150"
+                                    Class="text-right pa-2"
+                                    @onclick="context.Toggle"
+                                    RefBack="context.Ref">
+                                <MButton Icon Dark Click="@context.Toggle">
+                                    <MIcon>@(context.Active ? "mdi-heart" : "mdi-heart-outline")</MIcon>
+                                </MButton>
+                            </MImage>
+                        </MItem>
+                    </MCol>
+                }
+            </MRow>
+        </MItemGroup>
+    </MContainer>
+</MCard>
+
+@code {
+
+    List<string> items = new()
+    {
+        "backgrounds/bg.jpg",
+        "backgrounds/md.jpg",
+        "backgrounds/bg-2.jpg",
+        "backgrounds/md2.jpg",
+    };
+
+    List<StringNumber> selected = new();
+
+}

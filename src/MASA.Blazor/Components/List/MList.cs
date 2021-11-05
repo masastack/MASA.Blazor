@@ -110,9 +110,6 @@ namespace MASA.Blazor
         [Parameter]
         public StringNumber Width { get; set; }
 
-        [CascadingParameter]
-        public BNavigationDrawer NavigationDrawer { get; set; }
-
         [Parameter]
         public bool Dark { get; set; }
 
@@ -140,8 +137,6 @@ namespace MASA.Blazor
             }
         }
 
-        public override List<BListItem> Items { get; set; } = new List<BListItem>();
-
         protected override void SetComponentClass()
         {
             var prefix = "m-list";
@@ -159,7 +154,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--dense", () => Dense)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--flat", () => Flat)
-                        .AddIf($"{prefix}--nav", () => Nav || NavigationDrawer != null)
+                        .AddIf($"{prefix}--nav", () => Nav)
                         .AddIf($"{prefix}--rounded", () => Rounded)
                         .AddIf($"{prefix}--subheader", () => Subheader)
                         .AddIf($"{prefix}--two-line", () => TwoLine)
@@ -203,8 +198,9 @@ namespace MASA.Blazor
                 }
             }
 
+            // group.Toggle(group.Id);
             groups.Remove(group);
-            groups.ForEach(r => r.Contract());
+            // groups.ForEach(r => r.Contract());
         }
     }
 }

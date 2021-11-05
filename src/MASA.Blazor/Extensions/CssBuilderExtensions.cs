@@ -166,5 +166,62 @@ namespace BlazorComponent
 
             return cssBuilder;
         }
+
+        public static CssBuilder AddRoutable(this CssBuilder cssBuilder, IRoutable routable)
+        {
+            if(routable.To is null && routable.ActiveClass is not null)
+            {
+                cssBuilder.Add(routable.ActiveClass);
+            }
+
+            return cssBuilder;
+        }
+
+        public static CssBuilder AddTheme(this CssBuilder cssBuilder, MASA.Blazor.IThemeable themeable)
+        {
+            if(themeable.Dark)
+            {
+                cssBuilder.Add("theme--dark");
+            }
+            else cssBuilder.Add("theme--light");
+
+            return cssBuilder;
+        }
+
+        public static CssBuilder AddElevatable(this CssBuilder cssBuilder, IElevatable elevatable)
+        {
+            if(elevatable.Elevation is not null && int.TryParse(elevatable.Elevation.ToString(), out var number))
+            {
+                cssBuilder.Add($"elevation-{number}");
+            }
+
+            return cssBuilder;
+        }
+
+        public static CssBuilder AddRoundable(this CssBuilder cssBuilder, IRoundable roundable)
+        {
+            if (roundable.Tile)
+            {
+                cssBuilder.Add("rounded-0");
+            }
+            else if (roundable.Rounded == true)
+            {
+                cssBuilder.Add("rounded");
+            }
+            else if (roundable.Rounded == false)
+            {
+            }
+            else if (roundable.Rounded is not null)
+            {
+                var values = roundable.Rounded.ToString().Split(" ");
+                foreach (var value in values)
+                {
+                    cssBuilder.Add($"rounded-{value}");
+                }
+            }
+
+            return cssBuilder;      
+        }
+
     }
 }

@@ -1,0 +1,67 @@
+﻿<MRow>
+    <MCol Cols="11"
+          Sm="5">
+        <MMenu @bind-Value="_menu2"
+               CloseOnContentClick="false"
+               NudgeRight="40"
+               Transition="scale-transition"
+               OffsetY
+               MaxWidth="290"
+               MinWidth="290">
+            <ActivatorContent>
+                <MTextField @bind-Value="_time"
+                            Label="Picker in menu"
+                            PrependIcon="mdi-clock-time-four-outline"
+                            Readonly
+                            @attributes="context.Attrs"></MTextField>
+            </ActivatorContent>
+            <ChildContent>
+                @if (_menu2)
+                {
+                    <MTimePicker @bind-Value="_time"
+                             FullWidth></MTimePicker>
+                }
+            </ChildContent>
+        </MMenu>
+    </MCol>
+    <MSpacer></MSpacer>
+    <MCol Cols="11"
+          Sm="5">
+        <MDialog @bind-Value="_modal2"
+                 Persistent
+                 Width="290">
+            <ActivatorContent>
+                <MTextField @bind-Value="_time"
+                            Label="Picker in dialog"
+                            PrependIcon="mdi-clock-time-four-outline"
+                            Readonly
+                            @attributes="context.Attrs"></MTextField>
+            </ActivatorContent>
+            <ChildContent>
+                @if (_modal2)
+                {
+                    <MTimePicker @bind-Value="_time"
+                             FullWidth>
+                        <MSpacer></MSpacer>
+                        <MButton Text
+                             Color="primary"
+                             OnClick="()=>_modal2 = false">
+                            Cancel
+                        </MButton>
+                        <MButton Text
+                             Color="primary">
+                            OK
+                        </MButton>
+                    </MTimePicker>
+                }
+            </ChildContent>
+        </MDialog>
+    </MCol>
+</MRow>
+
+@code {
+    private TimeOnly? _time;
+    private bool _menu2;
+    private bool _modal2;
+}
+

@@ -1,0 +1,18 @@
+﻿<MSheet Class="mx-auto" MaxWidth="800" Elevation="8">
+    <MSlideGroup ShowArrows="@(true)" Class="pa-4" CenterActive>
+        @foreach (var item in Enumerable.Range(1, 25))
+        {
+            <MSlideItem>
+                <MCard RefBack="@context.Ref" Color="@(context.Active ? "primary" : "grey lighten-1")" Class="ma-4" Height="200" Width="100" @onclick="@context.Toggle">
+                    <MRow Class="fill-height" Align="AlignTypes.Center" Justify="JustifyTypes.Center">
+                        <!--TODO: v-scale-transition -->
+                        @if (context.Active)
+                        {
+                            <MIcon Color="white" Size="48">mdi-close-circle-outline</MIcon>
+                        }
+                    </MRow>
+                </MCard>
+            </MSlideItem>
+        }
+    </MSlideGroup>
+</MSheet>

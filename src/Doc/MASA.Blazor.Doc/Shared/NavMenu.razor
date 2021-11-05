@@ -2,36 +2,48 @@
 @using MASA.Blazor.Doc.Services
 @inherits OwningComponentBase<DemoService>
 @inject ILanguageService LanguageService
-<MList Dense>
+<MList Dense Nav>
     @foreach (var item in MenuItems)
     {
         if (item.Children != null && item.Children.Any())
         {
-            <MListGroup PrependIcon="@item.Icon" Color="primary" AppendIcon="mdi-menu-down">
-                <Activator>
+            <MListGroup Class="m-list-group--default" PrependIcon="@item.Icon" Color="primary" AppendIcon="mdi-menu-down" NoAction> 
+                <ActivatorContent>
                     <MListItemContent>
                         <MListItemTitle>@item.Title</MListItemTitle>
                     </MListItemContent>
-                </Activator>
+                </ActivatorContent>
                 <ChildContent>
-                    @if (item.Children != null && item.Children.Any())
+                    @foreach (var componentItem in item.Children)
                     {
-                        @foreach (var componentItem in item.Children)
+                        if (componentItem.Children != null && componentItem.Children.Any())
                         {
-                            <MListItem Link Href="@componentItem.Url">
-                                <MListItemIcon>
-                                </MListItemIcon>
+                            <MListGroup Class="m-list-group--default" NoAction SubGroup>
+                                <ActivatorContent>
+                                    <MListItemContent>
+                                        <MListItemTitle>@FormatComponentTitle(componentItem)</MListItemTitle>
+                                    </MListItemContent>
+                                </ActivatorContent>
+                                <ChildContent>
+                                    @foreach (var subComponentItem in componentItem.Children)
+                                    {
+                                        <MListItem Class="m-list-item--default" Link Href="@subComponentItem.Url">
+                                            <MListItemContent>
+                                                <MListItemTitle>
+                                                    @FormatComponentTitle(subComponentItem)
+                                                </MListItemTitle>
+                                            </MListItemContent>
+                                        </MListItem>
+                                    }
+                                </ChildContent>
+                            </MListGroup>
+                        }
+                        else
+                        {
+                            <MListItem Class="m-list-item--default" Link Href="@componentItem.Url">
                                 <MListItemContent>
                                     <MListItemTitle>
-                                        @if (LanguageService.CurrentCulture.Name == "zh-CN" && !string.IsNullOrEmpty(componentItem.SubTitle))
-                                        {
-                                            var title = componentItem.Title + $" ({componentItem.SubTitle})";
-                                            @title
-                                        }
-                                        else
-                                        {
-                                            @componentItem.Title
-                                        }
+                                        @FormatComponentTitle(componentItem)
                                     </MListItemTitle>
                                 </MListItemContent>
                             </MListItem>
@@ -42,7 +54,7 @@
         }
         else
         {
-            <MListItem Link Href="@item.Url">
+            <MListItem Class="m-list-item--default" Link Href="@item.Url">
                 <MListItemIcon>
                     <MIcon>@item.Icon</MIcon>
                 </MListItemIcon>
@@ -55,8 +67,9 @@
 </MList>
 
 @code{
+
     [Parameter]
-    public DemoMenuItemModel[] MenuItems { get; set; } = { };
+    public DemoMenuItemModel[] MenuItems { get; set; } = {};
 
     protected override async Task OnInitializedAsync()
     {
@@ -65,4 +78,15 @@
         StateHasChanged();
         await Service.InitializeDemos();
     }
+
+    string FormatComponentTitle(DemoMenuItemModel model)
+    {
+        if (LanguageService.CurrentCulture.Name == "zh-CN" && !string.IsNullOrEmpty(model.SubTitle))
+        {
+            return $"{model.Title}（{model.SubTitle}）";
+        }
+
+        return model.Title;
+    }
+
 }

@@ -12,15 +12,9 @@ namespace MASA.Blazor
         {
         }
 
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            ActiveClass = "m-slide-item--active";
-        }
-
         protected override void OnParametersSet()
         {
+            ActiveClass ??= "m-slide-item--active";
             NextIcon ??= "mdi-chevron-right";
             PrevIcon ??= "mdi-chevron-left";
         }

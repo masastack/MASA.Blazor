@@ -4,20 +4,8 @@
             Src="@_src"
             LazySrc="https://picsum.photos/id/11/10/6">
     </MImage>
-    <div>
-        <MButton OnClick="Test1">first</MButton>
-        <MButton OnClick="Test2">second</MButton>
-    </div>
 </MRow>
 
 @code {
     private string _src = "https://picsum.photos/id/11/500/300";
-    public void Test1()
-    {
-        _src = "https://picsum.photos/id/237/200/300";
-    }
-    public void Test2()
-    {
-        _src = "https://picsum.photos/id/11/500/300";
-    }
 }

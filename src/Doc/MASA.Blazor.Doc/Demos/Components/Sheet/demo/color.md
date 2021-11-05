@@ -9,7 +9,7 @@ title:
 
 纸张和基于它们的部件可以有不同的尺寸和颜色。
 
-v-sheet组件接受自定义Material Design Color值，例如warning、amber darken-3和deep-purple accent，以及rgb、rgba和十六进制值。
+`MSheet` 组件接受自定义Material Design Color值，例如warning、amber darken-3和deep-purple accent，以及rgb、rgba和十六进制值。
 
 ## en-US
 

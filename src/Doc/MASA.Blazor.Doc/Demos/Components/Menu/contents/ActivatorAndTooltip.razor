@@ -1,0 +1,50 @@
+﻿<div class="text-center">
+    <MMenu>
+        <ActivatorContent Context="m">
+            <MTooltip Bottom>
+                <ActivatorContent Context="c">
+                    @{
+                        var attrs = new Dictionary<string, object>();
+                        m.Attrs.ToList().ForEach(item => attrs[item.Key] = item.Value);
+                        c.Attrs.ToList().ForEach(item => attrs[item.Key] = item.Value);
+                    }
+                    <MButton
+                        Color="primary"
+                        Dark
+                        @attributes="@attrs">
+                        Dropdown w/ Tooltip
+                    </MButton>
+                </ActivatorContent>
+                <ChildContent>
+                    <span>Im A ToolTip</span>
+                </ChildContent>
+            </MTooltip>
+        </ActivatorContent>
+        <ChildContent>
+            <MList>
+                @foreach (var item in items)
+                {
+                    <MListItem>
+                        <MListItemContent>
+                            <MListItemTitle>
+                                @item
+                            </MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                }
+            </MList>
+        </ChildContent>
+    </MMenu>
+</div>
+
+@code {
+
+    string[] items =
+    {
+        "Click Me",
+        "Click Me",
+        "Click Me",
+        "Click Me 2"
+    };
+
+}

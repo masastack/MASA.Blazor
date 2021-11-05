@@ -13,6 +13,11 @@ namespace MASA.Blazor
                 {
                     prop[nameof(MButton.Class)] = "m-app-bar__nav-icon";
                     prop[nameof(MButton.Icon)] = true;
+
+                    foreach (var attr in Attributes)
+                    {
+                        prop[attr.Key] = attr.Value;
+                    }
                 })
                 .Apply<BIcon, MIcon>(prop =>
                 {

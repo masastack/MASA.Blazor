@@ -18,7 +18,7 @@ namespace MASA.Blazor
                 .Merge<BPopover>(props =>
                 {
                     props[nameof(BPopover.PreventDefault)] = true;
-                    props[nameof(BPopover.Style)] = Visible ? "display:flex;" : "";
+                    props[nameof(BPopover.Style)] = Value ? "display:flex;" : "";
                 });
         }
     }

@@ -45,40 +45,43 @@
 
                 @if (ShowFilters)
                 {
-                    <MTooltip>
+                    <MTooltip Top>
                         <ActivatorContent>
-                            <MButton Icon OnClick="HandleOnSearch" Loading="_loading"><MIcon>mdi-magnify</MIcon></MButton>
+                            <MButton @attributes="context.Attrs" Icon OnClick="HandleOnSearch" Loading="_loading"><MIcon>mdi-magnify</MIcon></MButton>
                         </ActivatorContent>
                         <ChildContent>
-                            搜索
+                            <span>搜索</span>
                         </ChildContent>
                     </MTooltip>
                 }
 
-                <MButton Icon OnClick="() => ShowFilters = !ShowFilters">
-                    @if (ShowFilters)
-                    {
-                        <MTooltip>
-                            <ActivatorContent>
+                @if (ShowFilters)
+                {
+                    <MTooltip Top>
+                        <ActivatorContent>
+                            <MButton @attributes="context.Attrs" Icon OnClick="() => ShowFilters = !ShowFilters">
                                 <MIcon>mdi-filter-off-outline</MIcon>
-                            </ActivatorContent>
-                            <ChildContent>
-                                隐藏搜索框
-                            </ChildContent>
-                        </MTooltip>
-                    }
-                    else
-                    {
-                        <MTooltip>
-                            <ActivatorContent>
+                            </MButton>
+                        </ActivatorContent>
+                        <ChildContent>
+                            <span>隐藏搜索框</span>
+                        </ChildContent>
+                    </MTooltip>
+                }
+                else
+                {
+                    <MTooltip Top>
+                        <ActivatorContent>
+                            <MButton @attributes="context.Attrs" Icon OnClick="() => ShowFilters = !ShowFilters">
                                 <MIcon>mdi-filter-outline</MIcon>
-                            </ActivatorContent>
-                            <ChildContent>
-                                显示搜索框
-                            </ChildContent>
-                        </MTooltip>
-                    }
-                </MButton>
+                            </MButton>
+                        </ActivatorContent>
+                        <ChildContent>
+                            <span>显示搜索框</span>
+                        </ChildContent>
+                    </MTooltip>
+                }
+
             }
         </div>
     </div>

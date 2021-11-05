@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-v-sheet 组件接受一个介于 0(默认值) 至 24 之间的自定义高度(z轴)。 elevation 属性修改 box-shadow 属性。 更多信息位于MD Elevation设计规格。
+`MSheet` 组件接受一个介于 0(默认值) 至 24 之间的自定义高度(z轴)。 elevation 属性修改 box-shadow 属性。 更多信息位于MD Elevation设计规格。
 
 ## en-US
 

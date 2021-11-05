@@ -1,0 +1,28 @@
+﻿<MItemGroup ActiveClass="error">
+    <MContainer>
+        <MRow>
+            @foreach (var n in Enumerable.Range(0, 3))
+            {
+                <MCol
+                    @key="n"
+                    Cols="12"
+                    Md="4">
+                    <MItem>
+                        <MCard
+                            Class="@($"d-flex align-center {context.ActiveClass}")"
+                            Dark
+                            Height="200"
+                            OnClick="context.Toggle"
+                            RefBack="context.Ref">
+                            <ScrollYTransition>
+                                <Element Show="context.Active" Class="text-h2 flex-grow-1 text-center">
+                                    Active
+                                </Element>
+                            </ScrollYTransition>
+                        </MCard>
+                    </MItem>
+                </MCol>
+            }
+        </MRow>
+    </MContainer>
+</MItemGroup>

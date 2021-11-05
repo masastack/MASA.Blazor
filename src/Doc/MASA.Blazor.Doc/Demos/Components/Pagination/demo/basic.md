@@ -7,10 +7,8 @@ title:
 
 ## zh-CN
 
-分页默认根据设置的 length 属性显示页数，两边有 prev 和 next 按钮帮助导航。
+分页默认根据设置的 Length 属性显示页数，两边有 prev 和 next 按钮帮助导航。
 
 ## en-US
 
-This is an example of the default application markup for Vuetify. You can place your layout elements anywhere, as long as you apply the app property. The key component in all of this is v-main. This will be dynamically sized depending upon the structure of your designated app components. You can use combinations of any or all of the above components including v-bottom-navigation.
-
-When using vue-router it is recommended that you place your views inside v-main.
+By default, paging displays the number of pages according to the set Length property, and there are prev and next buttons on both sides to help navigation.

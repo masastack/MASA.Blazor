@@ -44,13 +44,14 @@ namespace MASA.Blazor
                     props[nameof(MCascaderMenu.OffsetY)] = true;
                     props[nameof(MCascaderMenu.MinWidth)] = (StringNumber)180;
                     props[nameof(MCascaderMenu.CloseOnContentClick)] = false;
+                    props[nameof(MCascaderMenu.ContentStyle)] = "display:flex";
                 })
                 .Apply<BList, MList>()
                 .Apply<BItemGroup, MListItemGroup>(props =>
                 {
                     props[nameof(MListItemGroup.Color)] = "primary";
                 })
-                .Merge(typeof(BSelectOption<,,>), typeof(MCascaderSelectOption<TItem, TValue>))
+                .Merge(typeof(BSelectList<,,>), typeof(MCascaderSelectOption<TItem, TValue>))
                 .Merge(typeof(BSelectMenu<,,,>), typeof(BCascaderMenu<TItem, TValue, MCascader<TItem, TValue>>))
                 .Apply(typeof(BCascaderMenuBody<,,>), typeof(BCascaderMenuBody<TItem, TValue, MCascader<TItem, TValue>>));
         }

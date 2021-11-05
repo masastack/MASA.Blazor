@@ -1,0 +1,28 @@
+﻿
+<MForm>
+    <MContainer>
+        <MRow>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextarea Label="Regular" @bind-Value="_value"></MTextarea>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextarea Label="Regular"></MTextarea>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextarea Label="Solo" Solo></MTextarea>
+            </MCol>
+            <MCol Span="12" Sm="6" Md="3">
+                <MTextarea Label="Solo" Solo></MTextarea>
+            </MCol>
+        </MRow>
+    </MContainer>
+</MForm>
+
+@code{
+    private List<string> _messages = new()
+    {
+            "text required",
+            "required"
+    };
+    private string _value;
+}
