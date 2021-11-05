@@ -19,6 +19,8 @@ namespace MASA.Blazor
         [Parameter]
         public ColorPickerColor Color { get; set; }
 
+        public Dictionary<string, object> HueAttrs => throw new NotImplementedException();
+
         protected override void SetComponentClass()
         {
             var prefix = "m-color-picker";
