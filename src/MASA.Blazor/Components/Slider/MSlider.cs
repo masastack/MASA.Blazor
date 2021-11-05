@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public class MSlider : MInput<double>, ISlider
+    public class MSlider<TValue> : MInput<TValue>, ISlider<TValue>
     {
         [Parameter]
         public bool Vertical { get; set; }
@@ -52,24 +52,26 @@ namespace MASA.Blazor
         [Parameter]
         public RenderFragment<double> ThumbLabelContent { get; set; }
 
-        RenderFragment ISlider.ThumbLabelContent
+        protected virtual double GetRoundedValue(int index)
+        {
+            return RoundValue(DoubleInteralValue);
+        }
+
+        RenderFragment<int> ISlider<TValue>.ThumbLabelContent
         {
             get
             {
-                var val = RoundValue(InternalValue);
-
                 if (ThumbLabelContent != null)
                 {
-
-                    return ThumbLabelContent(val);
+                    return context => ThumbLabelContent(GetRoundedValue(context));
                 }
 
-                return builder =>
-                {
-                    builder.OpenElement(0, "span");
-                    builder.AddContent(1, val);
-                    builder.CloseElement();
-                };
+                return context => new RenderFragment(builder =>
+                 {
+                     builder.OpenElement(0, "span");
+                     builder.AddContent(1, GetRoundedValue(context));
+                     builder.CloseElement();
+                 });
             }
         }
 
@@ -86,7 +88,7 @@ namespace MASA.Blazor
         public EventCallback<FocusEventArgs> OnBlur { get; set; }
 
         [Parameter]
-        public EventCallback<double> OnChange { get; set; }
+        public EventCallback<TValue> OnChange { get; set; }
 
         [Parameter]
         public bool InverseLabel { get; set; }
@@ -96,6 +98,18 @@ namespace MASA.Blazor
 
         [Parameter]
         public RenderFragment ProgressContent { get; set; }
+
+        protected double DoubleInteralValue
+        {
+            get
+            {
+                return InternalValue is double val ? val : default;
+            }
+            set
+            {
+                InternalValue = value is TValue val ? val : default;
+            }
+        }
 
         public bool IsActive { get; set; }
 
@@ -151,7 +165,7 @@ namespace MASA.Blazor
         {
             get
             {
-                return (RoundValue(InternalValue) - Min) / (Max - Min) * 100;
+                return (RoundValue(DoubleInteralValue) - Min) / (Max - Min) * 100;
             }
         }
 
@@ -239,7 +253,9 @@ namespace MASA.Blazor
             { "tabindex", IsDisabled ? -1 : 0 }
         };
 
-        double ISlider.InternalValue => InternalValue;
+        TValue ISlider<TValue>.InternalValue => InternalValue;
+
+        public bool ShowThumbLabelContainer => IsFocused || IsActive || ThumbLabel == "always";
 
         protected override void OnInitialized()
         {
@@ -261,7 +277,7 @@ namespace MASA.Blazor
             }
         }
 
-        public async Task HandleOnSliderClickAsync(MouseEventArgs args)
+        public virtual async Task HandleOnSliderClickAsync(MouseEventArgs args)
         {
             if (NoClick)
             {
@@ -274,9 +290,9 @@ namespace MASA.Blazor
             await HandleOnMouseMoveAsync(args);
         }
 
-        public async Task HandleOnSliderMouseDownAsync(ExMouseEventArgs args)
+        public virtual async Task HandleOnSliderMouseDownAsync(ExMouseEventArgs args)
         {
-            OldValue = InternalValue;
+            OldValue = DoubleInteralValue;
             IsActive = true;
 
             if (args.Target.Class.Contains("m-slider__thumb-container"))
@@ -311,11 +327,6 @@ namespace MASA.Blazor
             });
         }
 
-        private EventCallback<T> CreateEventCallback<T>(Func<T, Task> func)
-        {
-            return EventCallback.Factory.Create(this, func);
-        }
-
         public async Task HandleOnSliderMouseUpAsync(MouseEventArgs args)
         {
             MouseCancellationTokenSource?.Cancel();
@@ -325,17 +336,17 @@ namespace MASA.Blazor
             IsActive = false;
         }
 
-        public async Task HandleOnMouseMoveAsync(MouseEventArgs args)
+        public virtual async Task HandleOnMouseMoveAsync(MouseEventArgs args)
         {
             if (args.Type == "mousemove")
             {
                 ThumbPressed = true;
             }
 
-            InternalValue = RoundValue(await ParseMouseMoveAsync(args));
+            DoubleInteralValue = RoundValue(await ParseMouseMoveAsync(args));
         }
 
-        private async Task<double> ParseMouseMoveAsync(MouseEventArgs args)
+        protected async Task<double> ParseMouseMoveAsync(MouseEventArgs args)
         {
             var track = Document.QuerySelector(TrackElement);
             var rect = await track.GetBoundingClientRectAsync();
@@ -354,7 +365,7 @@ namespace MASA.Blazor
             return Min + clickPos * (Max - Min);
         }
 
-        private double RoundValue(double value)
+        protected double RoundValue(double value)
         {
             if (StepNumeric == 0)
             {
@@ -369,6 +380,16 @@ namespace MASA.Blazor
 
             var newValue = Math.Round((value - offset) / StepNumeric) * StepNumeric + offset;
             return Math.Round(Math.Min(newValue, Max), decimals);
+        }
+
+        protected virtual bool IsThumbActive(int index)
+        {
+            return IsActive;
+        }
+
+        protected virtual bool IsThumbFocus(int index)
+        {
+            return IsFocused;
         }
 
         protected override void SetComponentClass()
@@ -407,6 +428,7 @@ namespace MASA.Blazor
                         .AddBackgroundColor(ComputedTrackColor);
                 }, styleBuilder =>
                 {
+                    //TODO: change here
                     var startDir = Vertical ? GlobalConfig.RTL ? "bottom" : "top" : GlobalConfig.RTL ? "left" : "right";
                     var endDir = Vertical ? "height" : "width";
 
@@ -476,20 +498,13 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-slider__thumb-container")
-                        .AddIf("m-slider__thumb-container--active", () => IsActive)
-                        .AddIf("m-slider__thumb-container--focused", () => IsFocused)
+                        .AddIf("m-slider__thumb-container--active", () => IsThumbActive(cssBuilder.Index))
+                        .AddIf("m-slider__thumb-container--focused", () => IsThumbFocus(cssBuilder.Index))
                         .AddIf("m-slider__thumb-container--show-label", () => ShowThumbLabel)
                         .AddTextColor(ComputedThumbColor);
                 }, styleBuilder =>
                 {
-                    var direction = Vertical ? "top" : "left";
-                    var value = GlobalConfig.RTL ? 100 - InputWidth : InputWidth;
-                    value = Vertical ? 100 - value : value;
-
-                    styleBuilder
-                        .AddTransition(TrackTransition)
-                        .Add($"{direction}:{value}%")
-                        .AddTextColor(ComputedThumbColor);
+                    GetThumbContainerStyles(styleBuilder);
                 })
                 .Apply("thumb", cssBuilder =>
                 {
@@ -505,10 +520,6 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-slider__thumb-label-container");
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .AddIf("display:none", () => !(IsFocused || IsActive || ThumbLabel == "always"));
                 })
                 .Apply("thumb-label", cssBuilder =>
                 {
@@ -528,7 +539,19 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .ApplySliderDefault();
+                .ApplySliderDefault<TValue>();
+        }
+
+        protected virtual void GetThumbContainerStyles(StyleBuilder styleBuilder)
+        {
+            var direction = Vertical ? "top" : "left";
+            var value = GlobalConfig.RTL ? 100 - InputWidth : InputWidth;
+            value = Vertical ? 100 - value : value;
+
+            styleBuilder
+                .AddTransition(TrackTransition)
+                .Add($"{direction}:{value}%")
+                .AddTextColor(ComputedThumbColor);
         }
 
         protected override void OnAfterRender(bool firstRender)
@@ -546,7 +569,7 @@ namespace MASA.Blazor
             InvokeStateHasChanged();
         }
 
-        public async Task HandleOnFocusAsync(FocusEventArgs args)
+        public virtual async Task HandleOnFocusAsync(FocusEventArgs args)
         {
             IsFocused = true;
             if (OnFocus.HasDelegate)
@@ -555,7 +578,7 @@ namespace MASA.Blazor
             }
         }
 
-        public async Task HandleOnBlurAsync(FocusEventArgs args)
+        public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
         {
             IsFocused = false;
             if (OnBlur.HasDelegate)
@@ -564,28 +587,28 @@ namespace MASA.Blazor
             }
         }
 
-        public async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+        public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
             if (!IsInteractive)
             {
                 return;
             }
 
-            var value = ParseKeyDown(args, InternalValue);
+            var value = ParseKeyDown(args, DoubleInteralValue);
 
             if (value == null || value.AsT2 < Min || value.AsT2 > Max)
             {
                 return;
             }
 
-            InternalValue = RoundValue(value.AsT2);
+            DoubleInteralValue = RoundValue(value.AsT2);
             if (OnChange.HasDelegate)
             {
                 await OnChange.InvokeAsync(InternalValue);
             }
         }
 
-        private StringNumber ParseKeyDown(KeyboardEventArgs args, double value)
+        protected StringNumber ParseKeyDown(KeyboardEventArgs args, double value)
         {
             if (!IsInteractive)
             {
