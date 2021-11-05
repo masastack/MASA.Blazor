@@ -25,5 +25,50 @@ namespace MASA.Blazor.Test.Breadcrumbs
             // Assert
             Assert.IsTrue(hasLargeClass);
         }
+
+        [TestMethod]
+        public void RenderAlertWithWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MBreadcrumbs>(props =>
+            {
+                props.Add(breadcrumbs => breadcrumbs.Dark, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("theme--dark");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderAlertWithWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MBreadcrumbs>(props =>
+            {
+                props.Add(breadcrumbs => breadcrumbs.Light, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderWithChildContentt()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<MBreadcrumbs>(props =>
+            {
+                props.Add(breadcrumbs => breadcrumbs.ChildContent, "<span>Hello world</span>");
+            });
+            var contentDiv = cut.Find(".m-breadcrumbs");
+
+            // Assert
+            contentDiv.Children.MarkupMatches("<span>Hello world</span>");
+        }
+
     }
 }

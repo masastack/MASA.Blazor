@@ -102,6 +102,35 @@ namespace MASA.Blazor.Test.ItemGroup
             Assert.IsTrue(hasTileClass);
         }
 
+        [TestMethod]
+        public void RenderItemGroupWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MItemGroup>(props =>
+            {
+                props.Add(itemgroup => itemgroup.Dark, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasdarkClass = classes.Contains("theme--dark");
+
+            // Assert
+            Assert.IsTrue(hasdarkClass);
+        }
+
+        [TestMethod]
+        public void RenderItemGroupWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MItemGroup>(props =>
+            {
+                props.Add(itemgroup => itemgroup.Light, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
 
     }
 }

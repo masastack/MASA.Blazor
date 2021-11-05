@@ -126,7 +126,7 @@ namespace MASA.Blazor.Test.Alert
                 props.Add(alert => alert.ColoredBorder, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var noColoredBorderClass = !classes.Contains("ColoredBorder");
+            var noColoredBorderClass = !classes.Contains("m-alert__border--has-color");
 
             // Assert
             Assert.IsTrue(noColoredBorderClass);
@@ -236,6 +236,5 @@ namespace MASA.Blazor.Test.Alert
             // Assert
             Assert.IsTrue(hasShapedClass);
         }
-
     }
 }

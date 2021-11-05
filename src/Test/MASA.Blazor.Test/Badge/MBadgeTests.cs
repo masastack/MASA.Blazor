@@ -133,5 +133,78 @@ namespace MASA.Blazor.Test.Badge
             Assert.IsTrue(hasTileClass);
         }
 
+        [TestMethod]
+        public void RenderButtonWithRight()
+        {
+            //Act
+            var cut = RenderComponent<MBadge>(props =>
+            {
+                props.Add(badge => badge.Right, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTileClass =! classes.Contains("m-badge--inline");
+
+            // Assert
+            Assert.IsTrue(hasTileClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MBadge>(props =>
+            {
+                props.Add(badge => badge.Value, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = !classes.Contains("display: none");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
+
+        [TestMethod]
+        public void RenderBadgeWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MBadge>(props =>
+            {
+                props.Add(badge => badge.Dark, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasdarkClass = classes.Contains("theme--dark");
+
+            // Assert
+            Assert.IsTrue(hasdarkClass);
+        }
+
+        [TestMethod]
+        public void RenderBadgeWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MBadge>(props =>
+            {
+                props.Add(badge => badge.Light, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderWithBadgeContent()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<MBadge>(props =>
+            {
+                props.Add(badge => badge.BadgeContent, "<span>Hello world</span>");
+            });
+            var contentDiv = cut.Find(".m-badge__badge");
+
+            // Assert
+            contentDiv.Children.MarkupMatches("<span>Hello world</span>");
+        }
     }
 }

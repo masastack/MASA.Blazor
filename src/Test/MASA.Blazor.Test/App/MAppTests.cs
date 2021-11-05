@@ -14,7 +14,6 @@ namespace MASA.Blazor.Test.App
     [TestClass]
     public class MAppTests : TestBase
     {
-        
     }
 
 }

@@ -102,6 +102,21 @@ namespace MASA.Blazor.Test.Button
         }
 
         [TestMethod]
+        public void RenderButtonWithButton()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.Button, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasXSmallClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasXSmallClass);
+        }
+
+        [TestMethod]
         public void RenderButtonWithRounded()
         {
             //Act
@@ -114,6 +129,22 @@ namespace MASA.Blazor.Test.Button
 
             // Assert
             Assert.IsTrue(hasRoundedClass);
+
+        }
+
+        [TestMethod]
+        public void RenderButtonWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.Dark, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("theme--dark");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
 
         }
 
@@ -359,7 +390,7 @@ namespace MASA.Blazor.Test.Button
         }
 
         [TestMethod]
-        public void RenderButtonAndClick()
+        public void RenderButtonAndonClick()
         {
             // Arrange
             var times = 0;
@@ -379,6 +410,41 @@ namespace MASA.Blazor.Test.Button
             Assert.AreEqual(1, times);
         }
 
+        [TestMethod]
+        public void RenderButtonAndClick()
+        {
+            // Arrange
+            var times = 0;
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.Click, args =>
+                {
+                    times++;
+                });
+            });
+
+            // Act
+            var buttonElement = cut.Find("button");
+            buttonElement.Click();
+
+            // Assert
+            Assert.AreEqual(1, times);
+        }
+
+        [TestMethod]
+        public void RenderWithLoaderContent()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.LoaderContent, "<span>Hello world</span>");
+                props.Add(button => button.Loading, true);
+            });
+            var contentDiv = cut.Find(".m-btn__loader");
+
+            // Assert
+            contentDiv.Children.MarkupMatches("<span>Hello world</span>");
+        }
     }
 }
 

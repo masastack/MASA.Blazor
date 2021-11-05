@@ -40,5 +40,50 @@ namespace MASA.Blazor.Test.Input
             // Assert
             Assert.AreEqual("height: 100px", style);
         }
+
+        [TestMethod]
+        public void RenderInputWithWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MInput<string>>(props =>
+            {
+                props.Add(input => input.Dark, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("theme--dark");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderInputWithWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MInput<string>>(props =>
+            {
+                props.Add(input => input.Light, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderInputWithWithDense()
+        {
+            //Act
+            var cut = RenderComponent<MInput<string>>(props =>
+            {
+                props.Add(input => input.Dense, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-input--dense");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
     }
 }

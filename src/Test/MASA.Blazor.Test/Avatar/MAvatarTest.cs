@@ -39,33 +39,35 @@ namespace MASA.Blazor.Test.Avatar
 
             // Assert
             Assert.IsTrue(hasRightClass);
-        //}
-        //[TestMethod]
-        //public void RenderNormal()
-        //{
-        //    // Arrange & Act
-        //    var cut = RenderComponent<MAvatar>();
-        //    var inputDiv = cut.Find("div");
+        }
 
-        //    // Assert
-        //    Assert.AreEqual(2, inputDiv.ClassList.Length);
-        //    Assert.IsTrue(inputDiv.ClassList.Contains("m-input"));
-        //    Assert.IsTrue(inputDiv.ClassList.Contains("theme--light"));
-        //}
+        [TestMethod]
+        public void RenderWithChildContentt()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<MAvatar>(props =>
+            {
+                props.Add(avatar => avatar.ChildContent, "<span>Hello world</span>");
+            });
+            var contentDiv = cut.Find(".m-avatar");
 
-        //[TestMethod]
-        //public void RenderWithHeight()
-        //{
-        //    // Act
-        //    var cut = RenderComponent<MAvatar>(props =>
-        //    {
-        //        props.Add(p => p.Height, 100);
-        //    });
-        //    var avatarDiv = cut.Find(".m-avatar");
-        //    var style = avatarDiv.GetAttribute("style");
+            // Assert
+            contentDiv.Children.MarkupMatches("<span>Hello world</span>");
+        }
 
-        //    // Assert
-        //    Assert.AreEqual("height: 48px", style);
-        //}
+        [TestMethod]
+        public void RenderWithSize()
+        {
+            // Act
+            var cut = RenderComponent<MAvatar>(props =>
+            {
+                props.Add(p => p.Size, 48);
+            });
+            var inputSlotDiv = cut.Find(".m-avatar");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px", style);
+        }
     }
 }

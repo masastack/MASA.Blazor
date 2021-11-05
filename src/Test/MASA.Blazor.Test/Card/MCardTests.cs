@@ -131,5 +131,69 @@ namespace MASA.Blazor.Test.Card
             Assert.IsTrue(hasRaisedClass);
         }
 
+        [TestMethod]
+        public void RenderCardWithWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.Dark, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("theme--dark");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderCardWithWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.Light, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderWithChildContentt()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.ChildContent, "<span>Hello world</span>");
+            });
+            var contentDiv = cut.Find(".m-card");
+
+            // Assert
+            contentDiv.Children.MarkupMatches("<span>Hello world</span>");
+        }
+
+        [TestMethod]
+        public void RenderButtonAndonClick()
+        {
+            // Arrange
+            var times = 0;
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.OnClick, args =>
+                {
+                    times++;
+                });
+            });
+
+            // Act
+            var cardElement = cut.Find(".m-card");
+            cardElement.Click();
+
+            // Assert
+            Assert.AreEqual(1, times);
+        }
     }
 }

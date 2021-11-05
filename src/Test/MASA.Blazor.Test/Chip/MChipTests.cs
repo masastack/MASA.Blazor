@@ -145,5 +145,56 @@ namespace MASA.Blazor.Test.Chip
             // Assert
             Assert.IsTrue(hasDraggableClass);
         }
+
+        [TestMethod]
+        public void RenderButtonAndonClick()
+        {
+            // Arrange
+            var times = 0;
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.OnClick, args =>
+                {
+                    times++;
+                });
+            });
+
+            // Act
+            var chipElement = cut.Find("span");
+            chipElement.Click();
+
+            // Assert
+            Assert.AreEqual(1, times);
+        }
+
+        [TestMethod]
+        public void RenderChipWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.Dark, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("theme--dark");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderChipWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.Light, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
     }
 }
