@@ -22,6 +22,9 @@ namespace MASA.Blazor
         [Parameter]
         public EventCallback<ColorPickerColor> OnColorUpdate { get; set; }
 
+        [Inject]
+        public GlobalConfig GlobalConfig { get; set; }
+
         protected override void SetComponentClass()
         {
             var prefix = "m-color-picker";
@@ -50,18 +53,18 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyColorPickerPreviewDefault()
-                .Apply<ISlider<double>, MSlider<double>>(props =>
+                .Apply<ISlider<double>, MSlider<double>>(async props =>
                 {
-                    if (props.Index == 0)
+                    if (props.Data.ToString() == "m-color-picker__hue")
                     {
-                        props[nameof(Class)] = "m-color-picker__hue";
+                        props[nameof(Class)] = "m-color-picker__track m-color-picker__hue";
                         props[nameof(MSlider<double>.ThumbColor)] = "grey lighten-2";
                         props[nameof(MSlider<double>.HideDetails)] = (StringBoolean)true;
                         props[nameof(MSlider<double>.Value)] = Color.Hue;
                         props[nameof(MSlider<double>.Step)] = 0D;
                         props[nameof(MSlider<double>.Min)] = 0D;
                         props[nameof(MSlider<double>.Max)] = 360D;
-                        props[nameof(MSlider<double>.ValueChanged)] = CreateEventCallback<double>(val =>
+                        props[nameof(MSlider<double>.ValueChanged)] = CreateEventCallback<double>(async val =>
                         {
                             if (Color.Hue != val)
                             {
@@ -69,7 +72,34 @@ namespace MASA.Blazor
                                 {
                                     var hsva = Color.Hsva;
                                     hsva.H = val;
-                                    OnColorUpdate.InvokeAsync(ColorUtils.FromHSVA(hsva));
+                                    await OnColorUpdate.InvokeAsync(ColorUtils.FromHSVA(hsva));
+                                }
+                            }
+                        });
+                    }
+                    if (props.Data.ToString() == "m-color-picker__alpha")
+                    {
+                        props[nameof(Class)] = "m-color-picker__track m-color-picker__alpha";
+                        if (!Disabled)
+                        {
+                            var rtl = GlobalConfig.RTL ? "left" : "right";
+                            props[nameof(Style)] = $"background-image:linear-gradient(to right, transparent, {ColorUtils.RGBtoCSS(Color.Rgba)})";
+                        }
+                        props[nameof(MSlider<double>.ThumbColor)] = "grey lighten-2";
+                        props[nameof(MSlider<double>.HideDetails)] = (StringBoolean)true;
+                        props[nameof(MSlider<double>.Value)] = Color.Alpha;
+                        props[nameof(MSlider<double>.Step)] = 0D;
+                        props[nameof(MSlider<double>.Min)] = 0D;
+                        props[nameof(MSlider<double>.Max)] = 1D;
+                        props[nameof(MSlider<double>.ValueChanged)] = CreateEventCallback<double>(async val =>
+                        {
+                            if (Color.Alpha != val)
+                            {
+                                if (OnColorUpdate.HasDelegate)
+                                {
+                                    var hsva = Color.Hsva;
+                                    hsva.A = val;
+                                    await OnColorUpdate.InvokeAsync(ColorUtils.FromHSVA(hsva));
                                 }
                             }
                         });
