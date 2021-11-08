@@ -8,7 +8,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ColorPicker.svg
 
 ---
 
-ColorPicker 是一个功能齐全的日期选择组件, 它让用户选择一个日期或日期范围。
+MColorPicker 允许你使用各种输入方法来选择颜色。
 
 ## API
 
