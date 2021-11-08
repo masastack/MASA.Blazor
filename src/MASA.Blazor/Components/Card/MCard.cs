@@ -116,7 +116,7 @@ namespace MASA.Blazor
                         .AddIf("m-card--link", () => IsClickable)
                         .AddIf("m-card--loading", () => Loading == true)
                         .AddIf("m-card--disabled", () => Disabled)
-                        .AddIf("m-card--disabled", () => Raised);
+                        .AddIf("m-card--raised", () => Raised);
                 }, styleBuilder =>
                 {
                     styleBuilder
