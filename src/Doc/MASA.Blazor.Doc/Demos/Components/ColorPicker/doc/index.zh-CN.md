@@ -1,6 +1,6 @@
 ---
 category: ColorPicker
-subtitle: 颜色选择器-正在完善
+subtitle: 颜色选择器
 type: 颜色选择器
 title: ColorPicker
 cols: 1

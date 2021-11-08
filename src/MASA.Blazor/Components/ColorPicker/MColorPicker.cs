@@ -133,7 +133,6 @@ namespace MASA.Blazor
                     var hex = (Value as string).Length == 7 ? color.Hex : color.Hexa;
                     if (!Compare(hex, Value))
                     {
-                        //this.$emit('input', value)
                         if (OnColorUpdate.HasDelegate)
                         {
                             OnColorUpdate.InvokeAsync(_internalValue);
@@ -144,7 +143,6 @@ namespace MASA.Blazor
                     var rgb = new RGB { R = color.Rgba.R, G = color.Rgba.G, B = color.Rgba.B };
                     if (!Compare(rgb, Value))
                     {
-                        //this.$emit('input', value)
                         if (OnColorUpdate.HasDelegate)
                         {
                             OnColorUpdate.InvokeAsync(_internalValue);

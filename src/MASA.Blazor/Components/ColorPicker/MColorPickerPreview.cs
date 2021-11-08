@@ -53,7 +53,7 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyColorPickerPreviewDefault()
-                .Apply<ISlider<double>, MSlider<double>>(async props =>
+                .Apply<ISlider<double>, MSlider<double>>(props =>
                 {
                     if (props.Data.ToString() == "m-color-picker__hue")
                     {
