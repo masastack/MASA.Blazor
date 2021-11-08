@@ -1,6 +1,7 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
@@ -40,6 +41,9 @@ namespace MASA.Blazor
         [Parameter]
         public bool Fixed { get; set; }
 
+        [Inject]
+        public GlobalConfig GlobalConfig { get; set; }
+
         private StringNumber ComputedHeight => Height != null ?
             (Regex.IsMatch(Height.ToString(), "^[0-9]*$") ? Height.ToInt32() : Height) :
             (Window ? 32 : 24);
@@ -63,5 +67,20 @@ namespace MASA.Blazor
                         .Add($"height:{ComputedHeight.ToUnit()}");
                 });
         }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+                UpdateApplication(await JsInvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, Ref));
+
+            await base.OnAfterRenderAsync(firstRender);
+        }
+
+        protected void UpdateApplication(BlazorComponent.Web.Element element)
+        {
+            GlobalConfig.Application.Bar = element != null ?
+                element.ClientHeight : ComputedHeight.ToDouble();
+        }
+
     }
 }

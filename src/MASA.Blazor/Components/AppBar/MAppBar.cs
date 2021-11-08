@@ -73,8 +73,19 @@ namespace MASA.Blazor
         [Parameter]
         public int ScrollThreshold { get; set; } = 20;
 
+        [Parameter]
+        public bool ScrollOffScreen { get; set; }
+
+        [Parameter]
+        public bool Value { get; set; } = true;
+
         [Inject]
         public DomEventJsInterop DomEventJsInterop { get; set; }
+
+        [Inject]
+        public GlobalConfig GlobalConfig { get; set; }
+
+        private bool _isActive => Value;
 
         #region  IScrollable
         public int CurrentScroll { get; private set; }
@@ -254,6 +265,82 @@ namespace MASA.Blazor
             }
 
             base.Dispose(disposing);
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                UpdateApplication();
+            }
+
+            await base.OnAfterRenderAsync(firstRender);
+        }
+
+        protected void UpdateApplication()
+        {
+            var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform();
+            if (!Bottom)
+                GlobalConfig.Application.Top = val;
+            else
+                GlobalConfig.Application.Bottom = val;
+        }
+
+        protected double ComputedTransform()
+        {
+            if (!CanScroll() || _isActive ||
+                (ElevateOnScroll && CurrentScroll == 0 && _isActive))
+                return 0;
+
+            var scrollOffScreen = ScrollOffScreen ? ComputedHeight.ToDouble() : ComputedContentHeightAppBar();
+
+            return Bottom ? scrollOffScreen : -scrollOffScreen;
+        }
+
+        protected bool CanScroll()
+        {
+            return
+                InvertedScroll ||
+                ElevateOnScroll ||
+                HideOnScroll ||
+                CollapseOnScroll ||
+                GlobalConfig.Application.IsBooted ||
+                !Value;
+        }
+
+        protected double ComputedContentHeightAppBar()
+        {
+            if (!ShrinkOnScroll)
+                return ComputedContentHeight.ToInt32();
+
+            var min = Dense ? 48 : 56;
+            var max = ComputedOriginalHeightAppBar();
+
+            return min + (max - min) * ScrollRatio();
+        }
+
+        protected double ComputedOriginalHeightAppBar()
+        {
+            var height = ComputedContentHeight.ToDouble();
+            if (isElevated)
+                height += ExtensionHeight.ToDouble();
+
+            return height;
+        }
+
+        protected double ScrollRatio()
+        {
+            var threshold = ComputedScrollThreshold();
+
+            return Math.Max((threshold - CurrentScroll) / threshold, 0);
+        }
+
+        protected double ComputedScrollThreshold()
+        {
+            if (ScrollThreshold > 0)
+                return ScrollThreshold;
+
+            return ComputedOriginalHeightAppBar() - (Dense ? 48 : 56);
         }
     }
 }

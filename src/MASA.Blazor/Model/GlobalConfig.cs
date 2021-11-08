@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MASA.Blazor.Model;
+using System;
+using System.ComponentModel;
 
 namespace BlazorComponent
 {
@@ -30,5 +28,7 @@ namespace BlazorComponent
         }
 
         public event Action<bool> OnRTLChange;
+
+        public Application Application { get; set; } = new();
     }
 }
