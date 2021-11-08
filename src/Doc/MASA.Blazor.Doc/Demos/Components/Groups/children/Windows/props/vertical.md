@@ -1,7 +1,7 @@
 ---
 order: 2
 title:
-  zh-CN: 垂直（未实现）
+  zh-CN: 垂直
   en-US: Vertical
 ---
 

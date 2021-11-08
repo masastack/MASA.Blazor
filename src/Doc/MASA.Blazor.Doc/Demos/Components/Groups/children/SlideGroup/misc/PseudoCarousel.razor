@@ -3,13 +3,18 @@
         @foreach (var item in Enumerable.Range(1, 15))
         {
             <MSlideItem>
-                <MCard Color="@(context.Active ? "primary" : "grey lighten-1")" Class="ma-4" Height="200" Width="100" Click="@context.Toggle">
+                <MCard Color="@(context.Active ? "primary" : "grey lighten-1")"
+                       Class="ma-4"
+                       Height="200"
+                       Width="100"
+                       OnClick="context.Toggle"
+                       RefBack="context.Ref">
                     <MRow Class="fill-height" Align="AlignTypes.Center" Justify="JustifyTypes.Center">
-                        <!--TODO: v-scale-transition -->
-                        @if (context.Active)
-                        {
-                            <MIcon Color="white" Size="48">mdi-close-circle-outline</MIcon>
-                        }
+                        <ScaleTransition>
+                            <Element Show="context.Active">
+                                <MIcon Color="white" Size="48">mdi-close-circle-outline</MIcon>
+                            </Element>
+                        </ScaleTransition>
                     </MRow>
                 </MCard>
             </MSlideItem>

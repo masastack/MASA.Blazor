@@ -1,7 +1,7 @@
 ---
 order: 1
 title:
-  zh-CN: 反转（未实现）
+  zh-CN: 反转
   en-US: Reverse
 ---
 

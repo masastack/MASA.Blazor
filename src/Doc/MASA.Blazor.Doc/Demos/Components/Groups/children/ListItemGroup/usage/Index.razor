@@ -1,9 +1,9 @@
-<MCard MaxWidth="400">
+<MCard Class="mx-auto" MaxWidth="500">
     <MList>
-        <MListItemGroup @bind-Values="@selected" Multiple Color="indigo">
-            @foreach (var item in _items)
+        <MListItemGroup @bind-Value="selected">
+            @foreach (var item in items)
             {
-                <MListItem Value="@item.Text">
+                <MListItem @key="@item">
                     <MListItemIcon>
                         <MIcon>@item.Icon</MIcon>
                     </MListItemIcon>
@@ -18,13 +18,7 @@
 
 @code {
 
-    public class Item
-    {
-        public string Icon { get; set; }
-        public string Text { get; set; }
-    }
-
-    static readonly Item[] _items =
+    static readonly Item[] items =
     {
         new()
         {
@@ -48,5 +42,12 @@
         }
     };
 
-    List<StringNumber> selected = _items.Where(u => u.Text == "Star").Select(u => (StringNumber)u.Text).ToList();
+    StringNumber selected = 1;
+
+    public class Item
+    {
+        public string Icon { get; set; }
+        public string Text { get; set; }
+    }
+
 }
