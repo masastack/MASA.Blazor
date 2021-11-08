@@ -1,7 +1,7 @@
 ---
 category: Components
 type: ColorPicker
-title: ColorPicker
+title: ColorPicker-ÕıÔÚÍêÉÆ
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ColorPicker.svg
 ---
