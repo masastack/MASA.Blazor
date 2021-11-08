@@ -7,8 +7,7 @@ title:
 
 ## zh-CN
 
-最简单的分隔线显示一条水平线。
 
 ## en-US
 
-Dividers in their simplest form display a horizontal line.
+
