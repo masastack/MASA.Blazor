@@ -91,6 +91,9 @@ namespace MASA.Blazor
         [Parameter]
         public int Bottom { get; set; }
 
+        [Inject]
+        public GlobalConfig GlobalConfig { get; set; }
+
         protected bool IsPositioned() => Absolute || Fixed || App;
 
         protected StringNumber ComputedLeft() => !IsPositioned() ?
@@ -136,5 +139,26 @@ namespace MASA.Blazor
                         .Add($"bottom:{ComputedBottom().ToUnit()}");
                 });
         }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                var _documentElement = await JsInvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, Ref);
+                UpdateApplication(_documentElement?.ClientHeight ?? 0);
+            }
+
+            await base.OnAfterRenderAsync(firstRender);
+        }
+
+        protected void UpdateApplication(double clientHeight)
+        {
+            var val = Height.ToDouble() > 0 ? Height.ToDouble() : clientHeight;
+            if (Inset)
+                GlobalConfig.Application.InsetFooter = val;
+            else
+                GlobalConfig.Application.Footer = val;
+        }
+
     }
 }

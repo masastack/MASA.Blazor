@@ -1,158 +1,171 @@
-﻿using BlazorComponent;
+﻿using System.Linq.Expressions;
+using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 
 namespace MASA.Blazor.Presets
 {
     public partial class PAction : BDomComponentBase
     {
-        private ActionTypes _actionType = ActionTypes.Icon;
+        private bool _loading;
+        private bool _set;
 
-        private bool TooltipDisabled => _actionType != ActionTypes.Icon || Disabled;
-
-        private int LabelByteCount => Encoding.Default.GetByteCount(Label ?? string.Empty);
-
-        // button's left-padding and right-padding are 16px
-        private double LabelPx => (LabelByteCount * GetSingleCharPx()) + (GetButtonPadding() * 2);
-
-        // icon's width is 18px
-        // icon's margin-right is 8px
-        private double FullPx => LabelPx + 18 + 8;
-
-        private string ActivatorStyle => _actionType == ActionTypes.Icon ? string.Empty : "width:100%";
+        private ElementReference ButtonRef { get; set; }
+        private MButton ButtonForwardRef { get; set; }
+        private ElementReference IconRef { get; set; }
+        private MIcon IconForwardRef { get; set; }
+        private ElementReference LabelRef { get; set; }
+        
+        internal double BtnWidth { get; set; }
+        internal double IconWidth { get; set; }
+        internal double LabelWidth { get; set; }
+        internal double SpaceWidth { get; set; }
 
         [Inject]
         public DomEventJsInterop DomEventJsInterop { get; set; }
 
-        [Parameter]
-        public string Label { get; set; }
+        [Inject]
+        public IJSRuntime Js { get; set; }
+
+        [CascadingParameter]
+        public PActions Actions { get; set; }
 
         [Parameter]
-        public string Icon { get; set; }
-
-        /// <summary>
-        /// Gets or sets the tip.
-        /// Default sets the Label as a tip if tip is null or empty.
-        /// </summary>
-        [Parameter]
-        public string Tip { get; set; }
-
-        /// <summary>
-        /// Determine whether <see cref="PAction"/> is non-responsive.
-        /// </summary>
-        [Parameter]
-        public bool Persistent { get; set; }
-
-        #region Button props
+        public string Color { get; set; }
 
         [Parameter]
-        public string Color { get; set; } = "primary";
-
-        [Parameter]
-        public bool Fab { get; set; }
-
-        [Parameter]
-        public bool Plain { get; set; }
-
-        [Parameter]
-        public bool Text { get; set; }
-
-        [Parameter]
-        public bool Tile { get; set; }
-
-        [Parameter]
-        public bool Rounded { get; set; }
-
-        [Parameter]
-        public bool Depressed { get; set; }
-
-        [Parameter]
-        public bool Outlined { get; set; }
-
-        [Parameter]
-        public bool Loading { get; set; }
+        public bool Dark { get; set; }
 
         [Parameter]
         public bool Disabled { get; set; }
 
         [Parameter]
-        public bool XSmall { get; set; }
+        public string Label { get; set; }
 
         [Parameter]
-        public bool Small { get; set; }
+        public bool Light { get; set; }
 
         [Parameter]
-        public bool Large { get; set; }
-
-        [Parameter]
-        public bool XLarge { get; set; }
+        public string Icon { get; set; }
 
         [Parameter]
         public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-        #endregion
+        [Parameter]
+        public string Tip { get; set; }
 
-        protected override Task OnAfterRenderAsync(bool firstRender)
+        [Parameter]
+        public bool Visible { get; set; } = true;
+
+        private ActionTypes ActionType => Actions?.Type ?? ActionTypes.IconLabel;
+
+        private string ComputedColor => Color ?? Actions?.Color;
+
+        private bool Depressed => Actions?.Depressed ?? false;
+
+        private bool Large => Actions?.Large ?? false;
+
+        private bool Outlined => Actions?.Outlined ?? false;
+
+        private bool Plain => Actions?.Plain ?? false;
+
+        private bool Rounded => Actions?.Rounded ?? false;
+        
+        private bool ShowIcon => ActionType == ActionTypes.Icon || ActionType == ActionTypes.IconLabel;
+
+        private bool ShowLabel => ActionType == ActionTypes.Label || ActionType == ActionTypes.IconLabel;
+        
+        private bool Small => Actions?.Small ?? false;
+
+        private bool Text => Actions?.Text ?? false;
+
+        private bool Tile => Actions?.Tile ?? false;
+
+        private bool TooltipDisabled => ActionType != ActionTypes.Icon || Disabled;
+
+        private bool XSmall => Actions?.XSmall ?? false;
+
+        private bool XLarge => Actions?.XLarge ?? false;
+
+        internal double IconBtnWidth => IconWidth + SpaceWidth;
+        
+        internal double LabelBtnWidth => LabelWidth + SpaceWidth;
+
+        protected override void OnInitialized()
         {
-            if (firstRender)
+            if (Visible)
             {
-                if (!Persistent)
-                {
-                    DomEventJsInterop.ResizeObserver<Dimensions[]>(Ref, ObserveSizeChange);
-                }
+                Actions.Register(this);
             }
-
-            return base.OnAfterRenderAsync(firstRender);
         }
 
-        private void ObserveSizeChange(Dimensions[] entries)
+        protected override void OnParametersSet()
         {
-            if (entries.Length > 0)
+            base.OnParametersSet();
+
+            if (Visible)
             {
-                var dimension = entries[0];
-
-                if (dimension.Width <= LabelPx)
-                {
-                    _actionType = ActionTypes.Icon;
-                }
-                else if (dimension.Width <= FullPx)
-                {
-                    _actionType = ActionTypes.Label;
-                }
-                else
-                {
-                    _actionType = ActionTypes.IconLabel;
-                }
-
-                StateHasChanged();
+                Actions.Register(this);
             }
+            else
+            {
+                Actions.Unregister(this);
+            }
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                ButtonRef = ButtonForwardRef.Ref;
+                IconRef = IconForwardRef.Ref;
+            }
+
+            if (LabelRef.Context != null)
+            {
+                if (!_set)
+                {
+                    await ResetWidths();
+                    await Actions.CheckWidths();
+                    _set = true;
+                }
+            }
+        }
+
+        private async Task ResetWidths()
+        {
+            IconWidth = await GetElementWidth(IconRef);
+            LabelWidth = await GetElementWidth(LabelRef);
+            BtnWidth = await GetElementWidth(ButtonRef);
+            SpaceWidth = BtnWidth - IconWidth - LabelWidth; // padding, margin
+        }
+
+        private async Task<double> GetElementWidth(ElementReference el)
+        {
+            var rect = await JsInvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, el);
+            return rect.Width;
         }
 
         private async Task HandleClick(MouseEventArgs args)
         {
             if (OnClick.HasDelegate)
             {
-                await OnClick.InvokeAsync();
+                _loading = true;
+
+                try
+                {
+                    await OnClick.InvokeAsync();
+                }
+                finally
+                {
+                    _loading = false;
+                }
             }
-        }
-
-        private double GetButtonPadding()
-        {
-            if (XLarge) return 23.111;
-            if (Large) return 19.556;
-            if (Small) return 12.444;
-            if (XSmall) return 8.889;
-            return 16;
-        }
-
-        private double GetSingleCharPx()
-        {
-            if (XLarge) return 9.72;
-            if (Small) return 7.27;
-            if (XSmall) return 7.09;
-            return 8.46;
         }
     }
 

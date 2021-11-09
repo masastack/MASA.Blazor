@@ -107,10 +107,10 @@ namespace MASA.Blazor
 
             var iconText = Type switch
             {
-                AlertTypes.Success => "mdi-check-circle",
-                AlertTypes.Error => "mdi-alert",
+                AlertTypes.Success => "mdi-checkbox-marked-circle-outline",
+                AlertTypes.Error => "mdi-alert-circle-outline",
                 AlertTypes.Info => "mdi-information",
-                AlertTypes.Warning => "mdi-exclamation",
+                AlertTypes.Warning => "mdi-alert-outline",
                 _ => null
             };
 

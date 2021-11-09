@@ -1,0 +1,100 @@
+﻿@namespace MASA.Blazor.Presets
+
+<div class="m-presets-page-header @Class" style="@Style">
+    <div class="m-presets-page-header--h">
+        @if (OnBack.HasDelegate)
+        {
+            <MButton Icon Class="mr-2" OnClick="HandleOnBack">
+                <MIcon>mdi-arrow-left</MIcon>
+            </MButton>
+        }
+
+        <span class="m-presets-page-header--h-title" style="margin-right: 8px">
+            @if (TitleFragment != default)
+            {
+                @TitleFragment
+            }
+            else
+            {
+                @Title
+            }
+        </span>
+
+        <span class="m-presets-page-header--h-subtitle">
+            @if (SubtitleFragment != default)
+            {
+                @SubtitleFragment
+            }
+            else
+            {
+                @Subtitle
+            }
+        </span>
+
+        <MSpacer/>
+
+        <div class="m-presets-page-header--h-actions">
+            @LeftActions
+
+            @if (LeftActions != null && Filters != null)
+            {
+                <MDivider Vertical Style="margin: 0 8px"/>
+            }
+
+            @if (Filters != null)
+            {
+                <SlideXReverseTransition>
+                    <Element Show="ShowFilters">
+                        @RightActions
+
+                        <MTooltip Top>
+                            <ActivatorContent>
+                                <MButton @attributes="context.Attrs" Icon OnClick="HandleOnSearch" Loading="_loading">
+                                    <MIcon>mdi-magnify</MIcon>
+                                </MButton>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <span>搜索</span>
+                            </ChildContent>
+                        </MTooltip>
+                    </Element>
+                </SlideXReverseTransition>
+
+                @if (ShowFilters)
+                {
+                    <MTooltip Top>
+                        <ActivatorContent>
+                            <MButton @attributes="context.Attrs" Icon OnClick="() => ShowFilters = !ShowFilters">
+                                <MIcon>mdi-filter-off-outline</MIcon>
+                            </MButton>
+                        </ActivatorContent>
+                        <ChildContent>
+                            <span>隐藏搜索框</span>
+                        </ChildContent>
+                    </MTooltip>
+                }
+                else
+                {
+                    <MTooltip Top>
+                        <ActivatorContent>
+                            <MButton @attributes="context.Attrs" Icon OnClick="() => ShowFilters = !ShowFilters">
+                                <MIcon>mdi-filter-outline</MIcon>
+                            </MButton>
+                        </ActivatorContent>
+                        <ChildContent>
+                            <span>显示搜索框</span>
+                        </ChildContent>
+                    </MTooltip>
+                }
+            }
+        </div>
+    </div>
+
+    <MDivider Style="margin: 10px 0 16px 0;"/>
+
+    <SlideYTransition>
+        <Element Show="ShowFilters" Class="m-presets-page-header--content">
+            @Filters
+        </Element>
+    </SlideYTransition>
+</div>

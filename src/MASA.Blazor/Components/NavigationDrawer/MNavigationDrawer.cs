@@ -1,7 +1,7 @@
 ﻿using BlazorComponent;
+using MASA.Blazor.Model;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MASA.Blazor
@@ -202,6 +202,28 @@ namespace MASA.Blazor
         [Parameter]
         public string Color { get; set; }
 
+        [Inject]
+        public GlobalConfig GlobalConfig { get; set; }
+
+        [Parameter]
+        public bool MiniVariant
+        {
+            get => _miniVariant;
+            set
+            {
+                if (value == _miniVariant) return;
+                _miniVariant = value;
+            }
+        }
+
+        [Parameter]
+        public EventCallback<bool> MiniVariantChanged { get; set; }
+
+        protected BlazorComponent.Web.Element Element = null;
+
+        protected bool _isMiniVariant =>
+            (!ExpandOnHover && MiniVariant) || (ExpandOnHover && !_isMouseover);
+
         protected bool _isBottom => Bottom && Mobile;
 
         protected override void OnInitialized()
@@ -300,6 +322,49 @@ namespace MASA.Blazor
                         await ValueChanged.InvokeAsync(Value);
                     });
                 });
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                Element = await JsInvokeAsync<BlazorComponent.Web.Element>(
+                    JsInteropConstants.GetDomInfo, Ref);
+                UpdateApplication(Element);
+            }
+
+            await base.OnAfterRenderAsync(firstRender);
+        }
+
+        protected void UpdateApplication(BlazorComponent.Web.Element element)
+        {
+            var val = (!_isActive || IsMobile() || Temporary || element == null) ? 0 :
+                (ComputedWidth().ToDouble() <= 0 ? element.ClientWidth : ComputedWidth().ToDouble());
+
+            if (Right)
+                GlobalConfig.Application.Right = val;
+            else
+                GlobalConfig.Application.Left = val;
+        }
+
+        protected bool IsMobile() =>
+            !Stateless && !Permanent && Mobile;
+
+        protected StringNumber ComputedWidth() =>
+            _isMiniVariant ? MiniVariantWidth : Width;
+
+        public override async Task Click(MouseEventArgs e)
+        {
+            if (MiniVariant)
+            {
+                MiniVariant = false;
+                await MiniVariantChanged.InvokeAsync(_miniVariant);
+            }
+
+            Element = await JsInvokeAsync<BlazorComponent.Web.Element>(
+                JsInteropConstants.GetDomInfo, Ref);
+
+            UpdateApplication(Element);
         }
     }
 }

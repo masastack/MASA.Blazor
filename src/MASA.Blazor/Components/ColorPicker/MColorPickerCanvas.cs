@@ -79,10 +79,6 @@ namespace MASA.Blazor
             }
         }
 
-        protected string TranslateX { get; set; }
-
-        protected string TranslateY { get; set; }
-
         protected override void SetComponentClass()
         {
             var prefix = "m-color-picker__canvas";
