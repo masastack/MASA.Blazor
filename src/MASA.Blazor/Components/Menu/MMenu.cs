@@ -16,16 +16,16 @@ namespace MASA.Blazor
 {
     public partial class MMenu : BMenu
     {
-        private string AttachedSelector => Attach ?? ".m-application";
-
         [Parameter]
         public bool Dark { get; set; }
+
+        public override string AttachedSelector => Attach ?? ".m-application";
 
         protected override void SetComponentClass()
         {
             Transition ??= "m-menu-transition";
             Origin ??= "top left";
-            
+
             CssProvider
                 .Apply(css => css.Add("m-menu"))
                 .Apply("content", css =>
@@ -48,11 +48,6 @@ namespace MASA.Blazor
                         .Add($"z-index:{InternalZIndex}")
                         .Add(ContentStyle);
                 });
-        }
-
-        protected override Task DelContentFrom()
-        {
-            return JsInvokeAsync(JsInteropConstants.DelElementFrom, ContentRef, AttachedSelector);
         }
 
         protected override Task MoveContentTo()
