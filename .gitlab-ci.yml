@@ -1,7 +1,8 @@
 stages:
   - packer
   - docker
-  - deploy
+  - deploy-dev
+  - deploy-test
 
 variables:
   DOCKER_HOST: tcp://localhost:2375/
@@ -42,11 +43,22 @@ docker:
     - docker push $IMAGE
   retry: 2
 
-deploy:
+deploy-dev:
   image: proget-hz.lonsid.cn/masa-images/library/kubectl:1.17.2-newack
-  stage: deploy
+  stage: deploy-dev
   only:
     - develop
   script:
     - kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
   retry: 2
+  
+deploy-test:
+  image: proget-hz.lonsid.cn/masa-images/library/kubectl:1.17.2-newack 
+  stage: deploy-test
+  only:
+    - develop
+  script:
+    - kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n test-masa-blazor
+  retry: 2
+  when: manual
+    
