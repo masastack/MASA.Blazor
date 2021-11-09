@@ -40,19 +40,5 @@ namespace MASA.Blazor.Test.Messages
             // Assert
             Assert.IsTrue(hasLightClass);
         }
-
-        //[TestMethod]
-        //public void RenderWithChildContentt()
-        //{
-        //    // Arrange & Act
-        //    var cut = RenderComponent<MMessages>(props =>
-        //    {
-        //        props.Add(messages => messages.ChildContent, context => "<span>Hello world</span>");
-        //    });
-        //    var contentDiv = cut.Find(".m-messages");
-
-        //    // Assert
-        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
     }
 }

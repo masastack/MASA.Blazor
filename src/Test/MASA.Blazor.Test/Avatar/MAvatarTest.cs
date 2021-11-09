@@ -69,5 +69,20 @@ namespace MASA.Blazor.Test.Avatar
             // Assert
             Assert.AreEqual("height: 48px;min-width: 48px;width: 48px", style);
         }
+
+        //[TestMethod]
+        //public void RenderWithHeight()
+        //{
+        //    // Act
+        //    var cut = RenderComponent<MAvatar>(props =>
+        //    {
+        //        props.Add(p => p.Height, 48);
+        //    });
+        //    var inputSlotDiv = cut.Find(".m-avatar");
+        //    var style = inputSlotDiv.GetAttribute("style");
+
+        //    // Assert
+        //    Assert.AreEqual("height: 48px;min-width: 48px;width: 48px", style);
+        //}
     }
 }

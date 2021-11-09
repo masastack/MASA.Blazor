@@ -206,5 +206,34 @@ namespace MASA.Blazor.Test.Badge
             // Assert
             contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
+
+        //[TestMethod]
+        //public void RenderWithChildContentt()
+        //{
+        //    // Arrange & Act
+        //    var cut = RenderComponent<MBadge>(props =>
+        //    {
+        //        props.Add(badge => badge.ChildContent, "<span>Hello world</span>");
+        //    });
+        //    var contentDiv = cut.Find(".m-badge");
+
+        //    // Assert
+        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
+        //}
+
+        //[TestMethod]
+        //public void RenderWithSize()
+        //{
+        //    // Act
+        //    var cut = RenderComponent<MBadge>(props =>
+        //    {
+        //        props.Add(p => p.Content, 6);
+        //    });
+        //    var inputSlotDiv = cut.Find(".m-badge__badge");
+        //    var style = inputSlotDiv.GetAttribute("style");
+
+        //    // Assert
+        //    Assert.AreEqual("bottom:calc(100% - 12px);left:calc(100% - 12px);right:auto;top:auto", style);
+        //}
     }
 }

@@ -196,5 +196,35 @@ namespace MASA.Blazor.Test.Chip
             // Assert
             Assert.IsTrue(hasLightClass);
         }
+
+        [TestMethod]
+        public void RenderChipWithPill()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.Pill, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPillClass = classes.Contains("m-chip--pill");
+
+            // Assert
+            Assert.IsTrue(hasPillClass);
+        }
+
+        [TestMethod]
+        public void RenderChipWithIsActive()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.IsActive, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIsActiveClass = classes.Contains("m-chip--active");
+
+            // Assert
+            Assert.IsTrue(hasIsActiveClass);
+        }
     }
 }

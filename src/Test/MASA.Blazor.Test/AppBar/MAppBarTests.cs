@@ -160,5 +160,20 @@ namespace MASA.Blazor.Test.AppBar
             // Assert
             Assert.AreEqual("height: 64px;transform:translateY(0px);left:0px;right:0px", style);
         }
+
+        //[TestMethod]
+        //public void RenderButtonWithHideOnScroll()
+        //{
+        //    //Act
+        //    var cut = RenderComponent<MAppBar>(props =>
+        //    {
+        //        props.Add(appbar => appbar.HideOnScroll, true);
+        //    });
+        //    var classes = cut.Instance.CssProvider.GetClass();
+        //    var hasScrollClass = classes.Contains("overflow-hidden");
+
+        //    // Assert
+        //    Assert.IsTrue(hasScrollClass);
+        //}
     }
 }

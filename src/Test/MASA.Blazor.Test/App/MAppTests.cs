@@ -14,6 +14,34 @@ namespace MASA.Blazor.Test.App
     [TestClass]
     public class MAppTests : TestBase
     {
+        //[TestMethod]
+        //public void RenderWithChildContentt()
+        //{
+        //    // Arrange & Act
+        //    var cut = RenderComponent<MApp>(props =>
+        //    {
+        //        props.Add(app => app.ChildContent, "<span>Hello world</span>");
+        //    });
+        //    var contentDiv = cut.Find(".m-app");
+
+        //    // Assert
+        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
+        //}
+
+        //[TestMethod]
+        //public void RendeListWithDark()
+        //{
+        //    //Act
+        //    var cut = RenderComponent<MApp>(props =>
+        //    {
+        //        props.Add(listgroup => listgroup.Dark, true);
+        //    });
+        //    var classes = cut.Instance.CssProvider.GetClass();
+        //    var hasDarkClass = classes.Contains("theme--dark");
+
+        //    // Assert
+        //    Assert.IsTrue(hasDarkClass);
+        //}
     }
 
 }

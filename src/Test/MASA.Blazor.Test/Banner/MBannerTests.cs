@@ -142,5 +142,20 @@ namespace MASA.Blazor.Test.Banner
             // Assert
             bannerDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
+
+        //[TestMethod]
+        //public void RenderWithSize()
+        //{
+        //    // Act
+        //    var cut = RenderComponent<MBanner>(props =>
+        //    {
+        //        props.Add(p => p.Elevation, 0);
+        //    });
+        //    var inputSlotDiv = cut.Find(".m-avatar");
+        //    var style = inputSlotDiv.GetAttribute("style");
+
+        //    // Assert
+        //    Assert.AreEqual("", style);
+        //}
     }
 }

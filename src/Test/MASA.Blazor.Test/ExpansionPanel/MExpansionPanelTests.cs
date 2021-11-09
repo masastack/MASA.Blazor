@@ -70,5 +70,71 @@ namespace MASA.Blazor.Test.ExpansionPanel
             // Assert
             Assert.IsTrue(hasFocusableClass);
         }
+
+        [TestMethod]
+        public void RenderWithHover()
+        {
+            //Act
+            var cut = RenderComponent<MExpansionPanels>(props =>
+            {
+                props.Add(expansionpanel => expansionpanel.Hover, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHoverClass = classes.Contains("m-expansion-panels--hover");
+
+            // Assert
+            Assert.IsTrue(hasHoverClass);
+        }
+
+        [TestMethod]
+        public void RenderWithInset()
+        {
+            //Act
+            var cut = RenderComponent<MExpansionPanels>(props =>
+            {
+                props.Add(expansionpanel => expansionpanel.Inset, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasInsetClass = classes.Contains("m-expansion-panels--inset");
+
+            // Assert
+            Assert.IsTrue(hasInsetClass);
+        }
+
+        [TestMethod]
+        public void RenderWithPopout()
+        {
+            //Act
+            var cut = RenderComponent<MExpansionPanels>(props =>
+            {
+                props.Add(expansionpanel => expansionpanel.Popout, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPopoutClass = classes.Contains("m-expansion-panels--popout");
+
+            // Assert
+            Assert.IsTrue(hasPopoutClass);
+        }
+
+        //[TestMethod]
+        //public void RenderMExpansionPanelHeaderAndonClick()
+        //{
+        //    // Arrange
+        //    var times = 0;
+        //    var cut = RenderComponent<MExpansionPanelHeader>(props =>
+        //    {
+        //        props.Add(systembar => systembar.OnClick, args =>
+        //        {
+        //            times++;
+        //        });
+        //    });
+
+        //    // Act
+        //    var buttonElement = cut.Find(".m-expansion-panel-header");
+        //    buttonElement.Click();
+
+        //    // Assert
+        //    Assert.AreEqual(1, times);
+        //}
     }
 }

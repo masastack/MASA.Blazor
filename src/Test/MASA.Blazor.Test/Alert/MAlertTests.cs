@@ -236,5 +236,20 @@ namespace MASA.Blazor.Test.Alert
             // Assert
             Assert.IsTrue(hasShapedClass);
         }
+
+        //[TestMethod]
+        //public void RenderWithSize()
+        //{
+        //    // Act
+        //    var cut = RenderComponent<MAlert>(props =>
+        //    {
+        //        props.Add(p => p.Elevation, 24);
+        //    });
+        //    var alertDiv = cut.Find(".m-alert__content");
+        //    var style = alertDiv.GetAttribute("style");
+
+        //    // Assert
+        //    Assert.AreEqual("elevation:2dp;", style);
+        //}
     }
 }
