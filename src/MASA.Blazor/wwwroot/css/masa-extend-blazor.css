@@ -128,10 +128,6 @@ ol, ul {
     margin-bottom: 16px;
 }
 
-    ul.m-date-picker-years {
-        margin-bottom: 0;
-    }
-
 .default-toc .m-toc-link {
     color: inherit;
 }

@@ -1,0 +1,24 @@
+﻿<MRow Justify="JustifyTypes.SpaceAround">
+    <MColorPicker Class="ma-2"
+                  HideInputs></MColorPicker>
+    <MColorPicker Class="ma-2"></MColorPicker>
+    <MRow Class="ma-2"
+          Style="flex: 0 0 auto">
+        <MColorPicker Mode="_mode"></MColorPicker>
+        <MSelect @bind-Value="_mode"
+                 Items="_modes"
+                 ItemValue="r=>r"
+                 ItemText="r=>Enum.GetName(typeof(ColorTypes),r)"
+                 Style="max-width: 300px"></MSelect>
+    </MRow>
+</MRow>
+
+@code {
+    private ColorTypes _mode = ColorTypes.HSLA;
+    private List<ColorTypes> _modes = new List<ColorTypes>
+    {
+        ColorTypes.HSLA,
+        ColorTypes.RGBA,
+        ColorTypes.HEXA
+    };
+}
