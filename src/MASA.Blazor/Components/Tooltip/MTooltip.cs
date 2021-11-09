@@ -12,6 +12,13 @@ namespace MASA.Blazor
 {
     public partial class MTooltip : BTooltip, ITooltip
     {
+        public override string AttachedSelector => Attach ?? ".m-application";
+
+        protected override async Task MoveContentTo()
+        {
+            await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, Attach ?? ".m-application");
+        }
+
         protected override void SetComponentClass()
         {
             var prefix = "m-tooltip";
@@ -47,11 +54,6 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyTooltipDefault();
-        }
-
-        protected override async Task MoveContentTo()
-        {
-            await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, Attach ?? ".m-application");
         }
     }
 }

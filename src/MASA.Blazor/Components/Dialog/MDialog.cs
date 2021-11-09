@@ -104,7 +104,7 @@ namespace MASA.Blazor
                         }
                         else
                         {
-                            Value = false;
+                            await UpdateValue(false);
                         }
 
                         if (OnOutsideClick.HasDelegate)
@@ -113,7 +113,7 @@ namespace MASA.Blazor
                 })
                 .ApplyDialogDefault();
         }
-        
+
         public Dictionary<string, object> ContentAttrs
         {
             get
