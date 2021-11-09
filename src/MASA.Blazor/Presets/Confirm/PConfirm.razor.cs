@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using BlazorComponent;
 
 namespace MASA.Blazor.Presets
 {
-    public partial class Confirm
+    public partial class PConfirm
     {
         private bool _loading;
         private string _icon;
@@ -30,18 +29,15 @@ namespace MASA.Blazor.Presets
                 return string.IsNullOrEmpty(_icon)
                     ? Type switch
                     {
-                        AlertTypes.Success => "mdi-check-circle",
+                        AlertTypes.Success => "mdi-checkbox-marked-circle-outline",
+                        AlertTypes.Error => "mdi-alert-circle-outline",
                         AlertTypes.Info => "mdi-information",
-                        AlertTypes.Warning => "mdi-exclamation",
-                        AlertTypes.Error => "mdi-alert",
+                        AlertTypes.Warning => "mdi-alert-outline",
                         _ => null,
                     }
                     : _icon;
             }
-            set
-            {
-                _icon = value;
-            }
+            set { _icon = value; }
         }
 
         [Parameter]
@@ -60,10 +56,7 @@ namespace MASA.Blazor.Presets
                     }
                     : _iconColor;
             }
-            set
-            {
-                _iconColor = value;
-            }
+            set { _iconColor = value; }
         }
 
         [Parameter]
@@ -91,10 +84,7 @@ namespace MASA.Blazor.Presets
                     }
                     : _okColor ?? "primary";
             }
-            set
-            {
-                _okColor = value;
-            }
+            set { _okColor = value; }
         }
 
         [Parameter]

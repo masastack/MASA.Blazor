@@ -1,34 +1,40 @@
 ﻿@using AlertTypes = BlazorComponent.AlertTypes
 
-<MRow>
-    <MCol><MButton Color="primary" OnClick="() => Show()">Default</MButton></MCol>
-    <MCol><MButton Color="success" OnClick="() => Show(AlertTypes.Success)">Success</MButton></MCol>
-    <MCol><MButton Color="info" OnClick="() => Show(AlertTypes.Info)">Info</MButton></MCol>
-    <MCol><MButton Color="warning" OnClick="() => Show(AlertTypes.Warning)">Warning</MButton></MCol>
-    <MCol><MButton Color="error" OnClick="() => Show(AlertTypes.Error)">Error</MButton></MCol>
-</MRow>
+<div class="d-flex justify-space-between">
+    <MButton Color="primary" OnClick="() => Show()">Default</MButton>
+    <MButton Color="success" OnClick="() => Show(AlertTypes.Success)">Success</MButton>
+    <MButton Color="info" OnClick="() => Show(AlertTypes.Info)">Info</MButton>
+    <MButton Color="warning" OnClick="() => Show(AlertTypes.Warning)">Warning</MButton>
+    <MButton Color="error" OnClick="() => Show(AlertTypes.Error)">Error</MButton>
+</div>
 
-<MASA.Blazor.Presets.Confirm Visible="_visible" Title="确认操作" Type="_type" OnCancel="Hide" OnOk="HandleOnOk">
+<PConfirm Visible="visible"
+          Title="确认操作"
+          Type="type"
+          OnCancel="Hide"
+          OnOk="Ok">
     您确认该操作吗？
-</MASA.Blazor.Presets.Confirm>
+</PConfirm>
 
 @code {
-    private AlertTypes _type = 0;
-    private bool _visible = false;
 
-    private void Show(AlertTypes type = 0)
+    AlertTypes type = 0;
+    bool visible;
+
+    void Show(AlertTypes t = 0)
     {
-        _type = type;
-        _visible = true;
+        type = t;
+        visible = true;
     }
 
-    private void Hide()
+    void Hide()
     {
-        _visible = false;
+        visible = false;
     }
 
-    private void HandleOnOk()
+    void Ok()
     {
-        _visible = false;
+        visible = false;
     }
+
 }

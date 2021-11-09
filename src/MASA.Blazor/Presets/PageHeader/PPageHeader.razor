@@ -1,13 +1,15 @@
 ﻿@namespace MASA.Blazor.Presets
 
-<div class="m-presets-ph--body">
-    <div class="m-presets-ph--header">
+<div class="m-presets-page-header @Class" style="@Style">
+    <div class="m-presets-page-header--h">
         @if (OnBack.HasDelegate)
         {
-            <MButton Icon Style="margin-right: 8px" OnClick="HandleOnBack"><MIcon>mdi-arrow-left</MIcon></MButton>
+            <MButton Icon Class="mr-2" OnClick="HandleOnBack">
+                <MIcon>mdi-arrow-left</MIcon>
+            </MButton>
         }
 
-        <span class="m-presets--title" style="margin-right: 8px">
+        <span class="m-presets-page-header--h-title" style="margin-right: 8px">
             @if (TitleFragment != default)
             {
                 @TitleFragment
@@ -18,42 +20,45 @@
             }
         </span>
 
-        <span class="m-presets--subtitle">
+        <span class="m-presets-page-header--h-subtitle">
             @if (SubtitleFragment != default)
             {
                 @SubtitleFragment
             }
-            else if (!string.IsNullOrEmpty(Subtitle))
+            else
             {
                 @Subtitle
             }
         </span>
 
-        <MSpacer />
+        <MSpacer/>
 
-        <div class="m-presets-ph--actions">
+        <div class="m-presets-page-header--h-actions">
             @LeftActions
 
             @if (LeftActions != null && Filters != null)
             {
-                <MDivider Vertical Style="margin: 0 8px" />
+                <MDivider Vertical Style="margin: 0 8px"/>
             }
 
             @if (Filters != null)
             {
-                @RightActions
+                <SlideXReverseTransition>
+                    <Element Show="ShowFilters">
+                        @RightActions
 
-                @if (ShowFilters)
-                {
-                    <MTooltip Top>
-                        <ActivatorContent>
-                            <MButton @attributes="context.Attrs" Icon OnClick="HandleOnSearch" Loading="_loading"><MIcon>mdi-magnify</MIcon></MButton>
-                        </ActivatorContent>
-                        <ChildContent>
-                            <span>搜索</span>
-                        </ChildContent>
-                    </MTooltip>
-                }
+                        <MTooltip Top>
+                            <ActivatorContent>
+                                <MButton @attributes="context.Attrs" Icon OnClick="HandleOnSearch" Loading="_loading">
+                                    <MIcon>mdi-magnify</MIcon>
+                                </MButton>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <span>搜索</span>
+                            </ChildContent>
+                        </MTooltip>
+                    </Element>
+                </SlideXReverseTransition>
 
                 @if (ShowFilters)
                 {
@@ -81,51 +86,15 @@
                         </ChildContent>
                     </MTooltip>
                 }
-
             }
         </div>
     </div>
 
-    <MDivider Style="margin: 10px 0 16px 0;" />
+    <MDivider Style="margin: 10px 0 16px 0;"/>
 
-    @if (ShowFilters)
-    {
-        <div>
+    <SlideYTransition>
+        <Element Show="ShowFilters" Class="m-presets-page-header--content">
             @Filters
-        </div>
-    }
+        </Element>
+    </SlideYTransition>
 </div>
-
-<style>
-    .m-presets-ph--body {
-        margin-bottom: 16px;
-    }
-
-    .m-presets-ph--header {
-        display: flex;
-        align-items: center;
-    }
-
-    .m-presets--title {
-        font-size: 24px;
-    }
-
-    .m-presets--subtitle {
-        color: #757575;
-    }
-
-    .m-presets-ph--actions {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 36px;
-    }
-
-        .m-presets-ph--actions > * {
-            margin: 0 4px;
-        }
-
-            .m-presets-ph--actions > *:last-child {
-                margin-right: 0px;
-            }
-</style>

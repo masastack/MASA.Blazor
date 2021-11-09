@@ -1,0 +1,158 @@
+﻿@using Action = MASA.Blazor.Presets.Action
+<MRow NoGutters>
+    <MCol Span="12">
+        <MSlider Label="宽度" @bind-Value="width" ThumbLabel="@("always")"></MSlider>
+    </MCol>
+</MRow>
+
+<div style="@($"width:{width}%")">
+    <PActions Items="actions" Text Justify="JustifyTypes.SpaceBetween" Color="primary" Divider>
+    </PActions>
+</div>
+
+<MDivider Style="margin: 8px 0"></MDivider>
+
+<div style="@($"width:{width}%")">
+    <PActions Depressed Justify="JustifyTypes.SpaceBetween" Color="primary">
+        <PAction Label="alert" Icon="mdi-alert-outline"></PAction>
+        <PAction Label="heart" Icon="mdi-heart" Color="red" Dark></PAction>
+        <PAction Label="information" Icon="mdi-information" Disabled></PAction>
+        <PAction Label="check" Icon="mdi-check"></PAction>
+    </PActions>
+</div>
+
+<MDivider Style="margin: 8px 0"></MDivider>
+
+<MDataTable Headers="headers" Items="desserts" Class="elevation-1" Style="@($"width:{width}%")">
+    <ItemColContent>
+        @if (context.Header.Value == "actions")
+        {
+            List<Action> items = new()
+            {
+                new Action()
+                {
+                    Label = "Edit",
+                    Icon = "mdi-pencil",
+                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, () => EditItem(context.Item))
+                },
+                new Action()
+                {
+                    Label = "Remove",
+                    Icon = "mdi-delete",
+                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, () => DeleteItem(context.Item))
+                },
+                new Action()
+                {
+                    Label = "Loading",
+                    Icon = "mdi-reload",
+                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, async () => await Task.Delay(1000))
+                },
+            };
+
+            <PActions Items="items" Small Divider></PActions>
+        }
+        else
+        {
+            @context.Value
+        }
+    </ItemColContent>
+</MDataTable>
+
+@code {
+    private double width = 100;
+
+    List<Action> actions = new()
+    {
+        new Action() {Label = "alert", Icon = "mdi-alert-outline"},
+        new Action() {Label = "heart", Icon = "mdi-heart", Color = "red"},
+        new Action() {Label = "information", Icon = "mdi-information", Disabled = true},
+        new Action() {Label = "check", Icon = "mdi-check"},
+    };
+
+    List<Dessert> desserts = new()
+    {
+        new Dessert
+        {
+            Name = "Frozen Yogurt",
+            Calories = 159,
+            Fat = 6.0,
+            Carbs = 24,
+            Protein = 4.0
+        },
+        new Dessert
+        {
+            Name = "Ice cream sandwich",
+            Calories = 237,
+            Fat = 9.0,
+            Carbs = 37,
+            Protein = 4.3
+        },
+        new Dessert
+        {
+            Name = "Eclair",
+            Calories = 262,
+            Fat = 16.0,
+            Carbs = 23,
+            Protein = 6.0
+        },
+        new Dessert
+        {
+            Name = "Jelly bean",
+            Calories = 375,
+            Fat = 0.0,
+            Carbs = 94,
+            Protein = 0.0
+        },
+        new Dessert
+        {
+            Name = "Lollipop",
+            Calories = 392,
+            Fat = 0.2,
+            Carbs = 98,
+            Protein = 0
+        },
+        new Dessert
+        {
+            Name = "KitKat",
+            Calories = 518,
+            Fat = 26.0,
+            Carbs = 65,
+            Protein = 7
+        }
+    };
+
+    List<DataTableHeader<Dessert>> headers = new()
+    {
+        new()
+        {
+            Text = "Dessert (100g serving)",
+            Align = "start",
+            Sortable = false,
+            Value = nameof(Dessert.Name)
+        },
+        new() {Text = "Calories", Value = nameof(Dessert.Calories)},
+        new() {Text = "Actions", Value = "actions", Sortable = false}
+    };
+
+    public void EditItem(Dessert item)
+    {
+    }
+
+    public void DeleteItem(Dessert item)
+    {
+    }
+
+    public class Dessert
+    {
+        public string Name { get; set; }
+
+        public int Calories { get; set; }
+
+        public double Fat { get; set; }
+
+        public int Carbs { get; set; }
+
+        public double Protein { get; set; }
+    }
+
+}

@@ -1,0 +1,29 @@
+﻿@namespace MASA.Blazor.Presets
+@inherits BDomComponentBase
+
+<CascadingValue Value="this">
+    <div @ref="Ref" class="d-flex @JustifyClass @Class" style="margin: -4px; @Style">
+        @if (Items != null)
+        {
+            @foreach (var (a,i) in VisibleItems.Select((a, i) => (a,i)))
+            {
+                <PAction Color="@a.Color"
+                         Disabled="@a.Disabled"
+                         Icon="@a.Icon"
+                         Label="@a.Label"
+                         OnClick="@a.OnClick"
+                         Visible="@a.Visible">
+                </PAction>
+
+                @if (Divider && i < VisibleItems.Count() - 1)
+                {
+                    <MDivider Vertical Style="margin: 4px"></MDivider>
+                }
+            }
+        }
+        else
+        {
+            @ChildContent
+        }
+    </div>
+</CascadingValue>

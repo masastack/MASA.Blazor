@@ -1,30 +1,45 @@
-﻿<MASA.Blazor.Presets.PageHeader Title="Order" Subtitle="This is an order page!" OnBack="OnBack" OnSearch="OnSearch">
+﻿<PPageHeader Title="Order"
+             Subtitle="This is an order page!"
+             OnBack="OnBack"
+             OnSearch="OnSearch">
     <LeftActions>
         <MButton Color="primary"><MIcon Left>mdi-plus</MIcon>Add Order</MButton>
     </LeftActions>
 
     <RightActions>
-        <MButton Icon><MIcon>mdi-refresh</MIcon></MButton>
+        <MButton Icon>
+            <MIcon>mdi-refresh</MIcon>
+        </MButton>
     </RightActions>
 
     <Filters>
         <MRow Dense>
-            <MCol Span="6"><MTextField Label="Name" Outlined Dense TValue="string"></MTextField></MCol>
-            <MCol Span="6"><MTextField Label="Name" Outlined Dense TValue="string"></MTextField></MCol>
-            <MCol Span="6"><MTextField Label="Name" Outlined Dense TValue="string"></MTextField></MCol>
-            <MCol Span="6"><MTextField Label="Name" Outlined Dense TValue="string"></MTextField></MCol>
+            <MCol Span="6">
+                <MTextField Label="Name" Outlined Dense TValue="string"></MTextField>
+            </MCol>
+            <MCol Span="6">
+                <MTextField Label="Name" Outlined Dense TValue="string"></MTextField>
+            </MCol>
+            <MCol Span="6">
+                <MTextField Label="Name" Outlined Dense TValue="string"></MTextField>
+            </MCol>
+            <MCol Span="6">
+                <MTextField Label="Name" Outlined Dense TValue="string"></MTextField>
+            </MCol>
         </MRow>
     </Filters>
-</MASA.Blazor.Presets.PageHeader>
+</PPageHeader>
 
 @code {
-    private void OnBack()
+
+    void OnBack()
     {
-        // navigate
+    // navigate
     }
 
-    private async Task OnSearch()
+    Task OnSearch()
     {
-        await Task.Delay(1000);
+        return Task.Delay(1000);
     }
+
 }
