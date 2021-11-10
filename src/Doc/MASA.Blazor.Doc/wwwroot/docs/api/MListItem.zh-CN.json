@@ -1,13 +1,25 @@
 ﻿{
   "Components": [
-    "List"
+    "ListItem"
   ],
   "Props": [
+    {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
     {
       "Name": "Class",
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
     },
     {
       "Name": "Dark",
@@ -28,10 +40,22 @@
       "Description": "禁用组件"
     },
     {
+      "Name": "Highlighted",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Href",
       "Type": "String",
       "Default": "null",
       "Description": "指定组件为锚点并应用 href 属性。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Inactive",
@@ -46,9 +70,9 @@
       "Description": ""
     },
     {
-      "Name": "Key",
-      "Type": "String",
-      "Default": "null",
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {
@@ -56,6 +80,12 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "指定组件为链接。当使用 href 或 **to ** 属性时，这是自动的设置的。"
+    },
+    {
+      "Name": "Ripple",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Selectable",
@@ -80,18 +110,28 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "增加两行的列表项高度。 该属性使用 line-clamp ，并非所有浏览器都支持。"
+    },
+    {
+      "Name": "Value",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
     }
   ],
   "Contents": [
     {
       "Name": "ChildContent",
       "Description": "默认插槽"
+    },
+    {
+      "Name": "ItemContent",
+      "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnClick",
-      "Description": "单击组件时发出的事件"
+      "Description": ""
     }
   ]
 }

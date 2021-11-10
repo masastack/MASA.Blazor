@@ -4,6 +4,18 @@
   ],
   "Props": [
     {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "CenterActive",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Class",
       "Type": "String",
       "Default": "null",
@@ -16,10 +28,10 @@
       "Description": "删除水平分页并根据需要包装项目"
     },
     {
-      "Name": "Dark",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": "将暗色主题变量应用到组件。"
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Mandatory",
@@ -28,10 +40,34 @@
       "Description": "强制始终选择一个值（如果可用）。"
     },
     {
+      "Name": "Max",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Multiple",
       "Type": "Boolean",
       "Default": "false",
       "Description": "允许多个选择。value 属性必须是 array。"
+    },
+    {
+      "Name": "NextIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PrevIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ShowArrows",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Style",
@@ -41,25 +77,13 @@
     },
     {
       "Name": "Value",
-      "Type": "String",
+      "Type": "StringNumber",
       "Default": "null",
-      "Description": ""
-    },
-    {
-      "Name": "ValueChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
       "Description": ""
     },
     {
       "Name": "Values",
       "Type": "List`1",
-      "Default": "",
-      "Description": ""
-    },
-    {
-      "Name": "ValuesChanged",
-      "Type": "EventCallback`1",
       "Default": "",
       "Description": ""
     }
@@ -70,5 +94,14 @@
       "Description": "默认插槽"
     }
   ],
-  "Events": []
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Description": ""
+    },
+    {
+      "Name": "ValuesChanged",
+      "Description": ""
+    }
+  ]
 }

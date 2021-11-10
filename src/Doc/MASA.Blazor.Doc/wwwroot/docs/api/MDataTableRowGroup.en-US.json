@@ -1,0 +1,32 @@
+﻿{
+  "Components": [
+    "DataTableRowGroup"
+  ],
+  "Props": [
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Description": "Default Content"
+    },
+    {
+      "Name": "ColumnHeaderContent",
+      "Description": ""
+    },
+    {
+      "Name": "RowContentContent",
+      "Description": ""
+    },
+    {
+      "Name": "RowHeaderContent",
+      "Description": ""
+    }
+  ],
+  "Events": []
+}

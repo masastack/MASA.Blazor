@@ -52,15 +52,15 @@
       "Description": "组件的海拔可接受 0 到 24 之间的值。"
     },
     {
-      "Name": "IsActive",
-      "Type": "Boolean",
-      "Default": "false",
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
-      "Name": "IsActiveChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
+      "Name": "IsActive",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {
@@ -68,6 +68,12 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "将组件向左边对齐。"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "MultiLine",
@@ -89,7 +95,7 @@
     },
     {
       "Name": "Rounded",
-      "Type": "OneOf`2",
+      "Type": "StringBoolean",
       "Default": "",
       "Description": "对指定的组件应用 border-radius 样式。"
     },
@@ -147,6 +153,10 @@
     }
   ],
   "Events": [
+    {
+      "Name": "IsActiveChanged",
+      "Description": ""
+    },
     {
       "Name": "OnClosed",
       "Description": ""

@@ -1,6 +1,6 @@
 ﻿{
   "Components": [
-    "Navigation"
+    "NavigationDrawer"
   ],
   "Props": [
     {
@@ -16,16 +16,16 @@
       "Description": "指定该组件作为应用程序布局的一部分。用于动态调整内容的大小。使用此属性的组件只有位于 v-main 组件的 外部才能正常运行。您可以在 应用程序页面 获取更多有关布局的信息。注意： 使用此属性会自动应用position: fixed 到布局元素上。您可以使用 absolute 属性 来覆盖这个功能。"
     },
     {
-      "Name": "Class",
-      "Type": "String",
-      "Default": "null",
-      "Description": "应用到组件最外层元素的class"
-    },
-    {
       "Name": "Bottom",
       "Type": "Boolean",
       "Default": "false",
       "Description": "在移动设备上从屏幕底部展开"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
     },
     {
       "Name": "Clipped",
@@ -37,7 +37,7 @@
       "Name": "Color",
       "Type": "String",
       "Default": "",
-      "Description": "将指定的颜色应用于控件 - 它可以是材质颜色的名称（例如成功或紫色）或 css 颜色（#033 或 rgba(255, 0, 0, 0.5)）。"
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
     },
     {
       "Name": "Dark",
@@ -81,7 +81,12 @@
       "Default": "",
       "Description": "设定组件的高度。"
     },
-
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
     {
       "Name": "Light",
       "Type": "Boolean",
@@ -101,6 +106,12 @@
       "Description": "指定mini属性开期时指定的宽度"
     },
     {
+      "Name": "Permanent",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Right",
       "Type": "Boolean",
       "Default": "false",
@@ -108,9 +119,15 @@
     },
     {
       "Name": "Src",
-      "Type": "String|Object",
+      "Type": "OneOf`2",
       "Default": "",
       "Description": "指定一个 MImage 作为组件的背景。"
+    },
+    {
+      "Name": "Stateless",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Style",
@@ -131,35 +148,50 @@
       "Description": ""
     },
     {
-      "Name": "Width",
-      "Type": "StringNumber",
-      "Default": "256",
-      "Description": "设定组件的宽度。"
+      "Name": "Touchless",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Value",
       "Type": "Boolean",
       "Default": "false",
       "Description": "控制组件是可见的还是隐藏的。"
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "256",
+      "Description": "设定组件的最小宽度。"
     }
   ],
   "Contents": [
+    {
+      "Name": "AppendContent",
+      "Description": ""
+    },
     {
       "Name": "ChildContent",
       "Description": "默认插槽"
     },
     {
-      "Name": "PrependContent",
-      "Description": "抽屉顶部的插槽"
-    },
-    {
       "Name": "ImgContent",
-      "Description": "用于在使用 Src 属性时修改 MImage 属性的插槽"
+      "Description": ""
     },
     {
-      "Name": "AppendContent",
-      "Description": "抽屉底部的插槽"
+      "Name": "PrependContent",
+      "Description": ""
     }
   ],
-  "Events": []
+  "Events": [
+    {
+      "Name": "MiniVariantChanged",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Description": ""
+    }
+  ]
 }

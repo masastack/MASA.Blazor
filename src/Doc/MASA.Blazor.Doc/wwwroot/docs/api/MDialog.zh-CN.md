@@ -1,16 +1,19 @@
-﻿---
-order: 0
-title: MDialog
 ---
 
+order: 0
+title: Dialog
+
+---
+ 
 ## 属性
-
+ 
 属性
-
+ 
 ## 插槽
-
+ 
 插槽
-
+ 
 ## 事件
-
+ 
 事件
+ 

@@ -1,6 +1,6 @@
 ﻿{
   "Components": [
-    "List"
+    "ListItemAvatar"
   ],
   "Props": [
     {
@@ -26,6 +26,12 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "使用另一种水平样式。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Left",
@@ -65,7 +71,7 @@
     },
     {
       "Name": "Rounded",
-      "Type": "Boolean",
+      "Type": "StringBoolean",
       "Default": "false",
       "Description": "对指定的组件应用 border-radius 样式。"
     },
@@ -91,7 +97,7 @@
       "Name": "Width",
       "Type": "StringNumber",
       "Default": "",
-      "Description": "设定组件的宽度。"
+      "Description": "设定组件的最小宽度。"
     }
   ],
   "Contents": [

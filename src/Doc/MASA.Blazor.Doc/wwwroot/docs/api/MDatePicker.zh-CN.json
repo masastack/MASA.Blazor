@@ -1,11 +1,17 @@
 ﻿{
   "Components": [
-    "Pickers"
+    "DatePicker"
   ],
   "Props": [
     {
-      "Name": "ActionsStyle",
-      "Type": "String",
+      "Name": "ActivePicker",
+      "Type": "Nullable`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "AllowedDates",
+      "Type": "Func`2",
       "Default": "null",
       "Description": ""
     },
@@ -28,6 +34,12 @@
       "Description": "将暗色主题变量应用到组件。"
     },
     {
+      "Name": "DayFormat",
+      "Type": "Func`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Disabled",
       "Type": "Boolean",
       "Default": "false",
@@ -38,6 +50,12 @@
       "Type": "StringNumber",
       "Default": "",
       "Description": "组件的海拔可接受 0 到 24 之间的值。"
+    },
+    {
+      "Name": "FirstDayOfWeek",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
     },
     {
       "Name": "Flat",
@@ -58,33 +76,51 @@
       "Description": "定义标题颜色。如果未指定，将使用由 color 属性或默认选择器颜色定义的颜色。"
     },
     {
+      "Name": "HeaderDateFormat",
+      "Type": "Func`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Landscape",
       "Type": "Boolean",
       "Default": "false",
       "Description": "水平方向选择器"
     },
     {
-      "Name": "MaxMonth",
-      "Type": "StringNumber",
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Max",
+      "Type": "Nullable`1",
       "Default": "",
       "Description": ""
     },
     {
-      "Name": "MaxYear",
-      "Type": "StringNumber",
+      "Name": "Min",
+      "Type": "Nullable`1",
       "Default": "",
       "Description": ""
     },
     {
-      "Name": "MinMonth",
-      "Type": "StringNumber",
-      "Default": "",
+      "Name": "MonthFormat",
+      "Type": "Func`2",
+      "Default": "null",
       "Description": ""
     },
     {
-      "Name": "MinYear",
-      "Type": "StringNumber",
-      "Default": "",
+      "Name": "Multiple",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {
@@ -100,10 +136,28 @@
       "Description": "隐藏选择器标题"
     },
     {
+      "Name": "PickerDate",
+      "Type": "DateOnly",
+      "Default": "",
+      "Description": ""
+    },
+    {
       "Name": "PrevIcon",
       "Type": "String",
       "Default": "null",
       "Description": "设置上一个 月/年 按钮的图标"
+    },
+    {
+      "Name": "Range",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Reactive",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Readonly",
@@ -112,34 +166,70 @@
       "Description": "使选择器变为只读状态（不允许选择新日期）"
     },
     {
+      "Name": "Scrollable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ShowAdjacentMonths",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ShowCurrent",
+      "Type": "OneOf`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "ShowWeek",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的style"
     },
     {
+      "Name": "TitleDateFormat",
+      "Type": "Func`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Type",
-      "Type": "String",
+      "Type": "DatePickerType",
       "Default": "null",
       "Description": "确定选择器的类型 - 日期选择器的 date ，月选择器的 month"
     },
     {
       "Name": "Value",
-      "Type": "DateTime",
+      "Type": "TValue",
       "Default": "",
       "Description": ""
     },
     {
-      "Name": "ValueChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
+      "Name": "WeekdayFormat",
+      "Type": "Func`2",
+      "Default": "null",
       "Description": ""
     },
     {
       "Name": "Width",
       "Type": "StringNumber",
       "Default": "",
-      "Description": "设定组件的宽度。"
+      "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "YearFormat",
+      "Type": "Func`2",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "YearIcon",
@@ -150,17 +240,22 @@
   ],
   "Contents": [
     {
-      "Name": "ActionsContent",
-      "Description": ""
-    },
-    {
       "Name": "ChildContent",
       "Description": "默认插槽"
-    },
-    {
-      "Name": "TitleContent",
-      "Description": ""
     }
   ],
-  "Events": []
+  "Events": [
+    {
+      "Name": "OnActivePickerUpdate",
+      "Description": ""
+    },
+    {
+      "Name": "OnPickerDateUpdate",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Description": ""
+    }
+  ]
 }

@@ -1,65 +1,65 @@
 ﻿{
   "Components": [
-    "Grid"
+    "Row"
   ],
   "Props": [
     {
       "Name": "Align",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "应用 align-items css 属性。可用的选项是 start, center, end, baseline 和 stretch。"
     },
     {
       "Name": "AlignContent",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "应用 align-content 属性。可用的选项是： start, center, end, space-between, space-around 和 stretch。"
     },
     {
       "Name": "AlignContentLg",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "在更大和更大的断点上更改 align-content 属性。"
     },
     {
       "Name": "AlignContentMd",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "在中等和较大的断点上更改 align-content 属性。"
     },
     {
       "Name": "AlignContentSm",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "在较小和较大的断点处更改 align-content 属性。"
     },
     {
       "Name": "AlignContentXl",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "在更大和更大的断点上更改 align-content 属性。"
     },
     {
       "Name": "AlignLg",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "在中等和更高的断点上更改 align-items 属性。"
     },
     {
       "Name": "AlignMd",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "在较小和较大的断点处更改 align-items 属性。"
     },
     {
       "Name": "AlignSm",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "在更大和更大的断点上更改 align-items 属性。"
     },
     {
       "Name": "AlignXl",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "在更大和更大的断点上更改 align-items 属性。"
     },
@@ -88,32 +88,38 @@
       "Description": ""
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Justify",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "应用 justify-content css 属性。可用选项是 start, center, end, space-between 和 space-around。"
     },
     {
       "Name": "JustifyLg",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "在更大和更大的断点上更改 justify-content 属性。"
     },
     {
       "Name": "JustifyMd",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "在中等和更高的断点上更改 justify-content 属性。"
     },
     {
       "Name": "JustifySm",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "在较小和较大的断点上更改 justify-content 属性。"
     },
     {
       "Name": "JustifyXl",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "在更大和更大的断点上更改 justify-content 属性。"
     },
@@ -130,16 +136,16 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
-      "Name": "Type",
-      "Type": "String",
-      "Default": "null",
-      "Description": ""
-    },
-    {
       "Name": "Tag",
       "Type": "String",
       "Default": "div",
       "Description": "指定在根元素上使用的自定义标签。"
+    },
+    {
+      "Name": "Type",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Wrap",

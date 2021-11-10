@@ -1,6 +1,6 @@
 ﻿{
   "Components": [
-    "Radio"
+    "RadioGroup"
   ],
   "Props": [
     {
@@ -10,16 +10,16 @@
       "Description": "在组件上附加一个图标，使用与 v-icon 相同的语法"
     },
     {
+      "Name": "BackgroundColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Class",
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的class"
-    },
-    {
-      "Name": "Clearable",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
     },
     {
       "Name": "Color",
@@ -46,9 +46,27 @@
       "Description": "减少组件的高度。"
     },
     {
-      "Name": "HasState",
+      "Name": "Disabled",
       "Type": "Boolean",
       "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Error",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ErrorCount",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "ErrorMessages",
+      "Type": "List`1",
+      "Default": "null",
       "Description": ""
     },
     {
@@ -59,26 +77,20 @@
     },
     {
       "Name": "HideDetails",
-      "Type": "Boolean",
+      "Type": "StringBoolean",
       "Default": "false",
       "Description": "隐藏提示和验证错误。当设置为 auto 时，只有在有信息（提示、错误信息、计数器值等）要显示时，才会显示信息。"
     },
     {
-      "Name": "IsDisabled",
-      "Type": "Boolean",
-      "Default": "false",
+      "Name": "Hint",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
-      "Name": "IsFocused",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "IsReadonly",
-      "Type": "Boolean",
-      "Default": "false",
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
@@ -88,7 +100,37 @@
       "Description": "设置输入标签"
     },
     {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Loading",
+      "Type": "StringBoolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Messages",
+      "Type": "List`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PersistentHint",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "PrependIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
@@ -106,20 +148,26 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
-      "Name": "ValidationState",
-      "Type": "String",
+      "Name": "Success",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SuccessMessages",
+      "Type": "List`1",
       "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ValidateOnBlur",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {
       "Name": "Value",
       "Type": "TValue",
-      "Default": "",
-      "Description": ""
-    },
-    {
-      "Name": "ValueChanged",
-      "Type": "EventCallback`1",
       "Default": "",
       "Description": ""
     },
@@ -132,21 +180,57 @@
   ],
   "Contents": [
     {
+      "Name": "Append",
+      "Description": ""
+    },
+    {
       "Name": "AppendContent",
-      "Description": "在输入框内部，文字之后添加一个内容"
+      "Description": ""
     },
     {
       "Name": "ChildContent",
       "Description": "默认插槽"
     },
     {
+      "Name": "LabelContent",
+      "Description": ""
+    },
+    {
+      "Name": "MessageContent",
+      "Description": ""
+    },
+    {
+      "Name": "Prepend",
+      "Description": ""
+    },
+    {
       "Name": "PrependContent",
-      "Description": "在输入框外部，前面添加一个内容"
+      "Description": ""
     }
   ],
   "Events": [
     {
-      "Name": "OnClearClick",
+      "Name": "OnAppendClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnMouseDown",
+      "Description": ""
+    },
+    {
+      "Name": "OnMouseUp",
+      "Description": ""
+    },
+    {
+      "Name": "OnPrependClick",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
       "Description": ""
     }
   ]

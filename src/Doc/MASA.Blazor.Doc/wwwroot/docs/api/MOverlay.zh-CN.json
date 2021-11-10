@@ -28,6 +28,18 @@
       "Description": "将暗色主题变量应用到组件。"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Opacity",
       "Type": "StringNumber",
       "Default": "",
@@ -46,14 +58,8 @@
       "Description": ""
     },
     {
-      "Name": "ValueChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
-      "Description": ""
-    },
-    {
       "Name": "ZIndex",
-      "Type": "StringNumber",
+      "Type": "Int32",
       "Default": "",
       "Description": "用于组件的 z-index"
     }
@@ -65,6 +71,10 @@
     }
   ],
   "Events": [
+    {
+      "Name": "Click",
+      "Description": ""
+    },
     {
       "Name": "OnClick",
       "Description": ""

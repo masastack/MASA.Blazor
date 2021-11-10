@@ -40,6 +40,12 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
       "Name": "Dark",
       "Type": "Boolean",
       "Default": "false",
@@ -76,6 +82,18 @@
       "Description": "将堆叠图标和文字垂直"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "MobileBreakpoint",
       "Type": "StringNumber",
       "Default": "",
@@ -107,7 +125,7 @@
     },
     {
       "Name": "ShowArrows",
-      "Type": "Boolean",
+      "Type": "StringBoolean",
       "Default": "false",
       "Description": "如果选项卡项目超出其容器，则显示分页箭头。 对于移动设备，仅在使用此属性时才会显示箭头。"
     },
@@ -130,6 +148,12 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
+      "Name": "Value",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Vertical",
       "Type": "Boolean",
       "Default": "false",
@@ -138,21 +162,14 @@
   ],
   "Contents": [
     {
-      "Name": "ItemContent",
-      "Description": ""
-    },
-    {
-      "Name": "ItemsContent",
-      "Description": ""
-    },
-    {
-      "Name": "SliderContent",
-      "Description": ""
-    },
-    {
-      "Name": "TabContent",
-      "Description": ""
+      "Name": "ChildContent",
+      "Description": "默认插槽"
     }
   ],
-  "Events": []
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Description": ""
+    }
+  ]
 }

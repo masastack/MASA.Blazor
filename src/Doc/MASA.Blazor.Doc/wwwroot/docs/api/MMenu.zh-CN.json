@@ -10,13 +10,19 @@
       "Description": "应用 position: absolute 样式到组件."
     },
     {
-      "Name": "ActivatorStyle",
+      "Name": "AllowOverflow",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Attach",
       "Type": "String",
       "Default": "null",
       "Description": ""
     },
     {
-      "Name": "Block",
+      "Name": "Auto",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
@@ -34,6 +40,12 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
+      "Name": "CloseDelay",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
       "Name": "CloseOnClick",
       "Type": "Boolean",
       "Default": "false",
@@ -44,6 +56,18 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "指定点击内容时菜单是否应该关闭。"
+    },
+    {
+      "Name": "ContentClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ContentStyle",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Dark",
@@ -58,6 +82,18 @@
       "Description": "禁用菜单"
     },
     {
+      "Name": "DisableKeys",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Left",
       "Type": "Boolean",
       "Default": "false",
@@ -68,6 +104,12 @@
       "Type": "StringNumber",
       "Default": "",
       "Description": "设定组件的最大高度。"
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最大宽度。"
     },
     {
       "Name": "MinWidth",
@@ -106,6 +148,12 @@
       "Description": "微调内容宽度"
     },
     {
+      "Name": "OffsetOverflow",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "OffsetX",
       "Type": "Boolean",
       "Default": "false",
@@ -118,10 +166,46 @@
       "Description": "在y轴上偏移菜单，与上/下方向一起工作"
     },
     {
+      "Name": "OpenDelay",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnClick",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnFocus",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "OpenOnHover",
       "Type": "Boolean",
       "Default": "false",
       "Description": "指定是否在激活器悬停时打开菜单"
+    },
+    {
+      "Name": "Origin",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PositionX",
+      "Type": "Nullable`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "PositionY",
+      "Type": "Nullable`1",
+      "Default": "",
+      "Description": ""
     },
     {
       "Name": "Right",
@@ -130,10 +214,22 @@
       "Description": "将组件向右边对齐。"
     },
     {
+      "Name": "Rounded",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": "对指定的组件应用 border-radius 样式。"
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tile",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "删除组件的border-radius样式"
     },
     {
       "Name": "Top",
@@ -142,15 +238,21 @@
       "Description": "将组件向顶部对齐。"
     },
     {
-      "Name": "Visible",
+      "Name": "Transition",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
     },
     {
-      "Name": "VisibleChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
+      "Name": "ZIndex",
+      "Type": "StringNumber",
+      "Default": "null",
       "Description": ""
     }
   ],
@@ -167,6 +269,10 @@
   "Events": [
     {
       "Name": "OnOutsideClick",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
       "Description": ""
     }
   ]

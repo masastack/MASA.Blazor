@@ -46,6 +46,24 @@
       "Description": "减少组件的高度。"
     },
     {
+      "Name": "Elevation",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "组件的海拔可接受 0 到 24 之间的值。"
+    },
+    {
+      "Name": "Extended",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ExtensionHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Flat",
       "Type": "Boolean",
       "Default": "false",
@@ -62,6 +80,18 @@
       "Type": "StringNumber",
       "Default": "",
       "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "MaxHeight",
@@ -88,22 +118,84 @@
       "Description": "设定组件的最小宽度。"
     },
     {
+      "Name": "OnContextmenuPreventDefault",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Outlined",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使背景透明并使用薄边框。"
+    },
+    {
       "Name": "Prominent",
       "Type": "Boolean",
       "Default": "false",
       "Description": "将工具栏内容的高度增加到 128px。"
     },
     {
+      "Name": "Rounded",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": "对指定的组件应用 border-radius 样式。"
+    },
+    {
+      "Name": "Shaped",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Short",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Src",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Tile",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "删除组件的border-radius样式"
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最小宽度。"
     }
   ],
   "Contents": [
     {
       "Name": "ChildContent",
       "Description": "默认插槽"
+    },
+    {
+      "Name": "ExtensionContent",
+      "Description": ""
+    },
+    {
+      "Name": "ImgContent",
+      "Description": ""
     }
   ],
   "Events": []

@@ -1,0 +1,149 @@
+﻿{
+  "Components": [
+    "TreeItem"
+  ],
+  "Props": [
+    {
+      "Name": "Checkable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Checked",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Applies the dark theme variant to the component."
+    },
+    {
+      "Name": "DataItem",
+      "Type": "T",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "DefaultCheckedExpression",
+      "Type": "Func`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Draggable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Expanded",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Icon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Indeterminate",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ItemDisabled",
+      "Type": "Func`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Key",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Loading",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Selected",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Title",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "Nodes",
+      "Description": ""
+    },
+    {
+      "Name": "NodesContent",
+      "Description": ""
+    },
+    {
+      "Name": "PrependContent",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "HandleCheckboxClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnCheckboxClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnItemClick",
+      "Description": ""
+    }
+  ]
+}

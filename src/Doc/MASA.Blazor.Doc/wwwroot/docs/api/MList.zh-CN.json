@@ -34,6 +34,12 @@
       "Description": "组件的海拔可接受 0 到 24 之间的值。"
     },
     {
+      "Name": "Expand",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Flat",
       "Type": "Boolean",
       "Default": "false",
@@ -44,6 +50,18 @@
       "Type": "StringNumber",
       "Default": "",
       "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "MaxHeight",
@@ -106,6 +124,12 @@
       "Description": "会移除上边距（top padding），当前面只有一个列表组标题的时候使用"
     },
     {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "ThreeLine",
       "Type": "Boolean",
       "Default": "false",
@@ -121,7 +145,7 @@
       "Name": "Width",
       "Type": "StringNumber",
       "Default": "",
-      "Description": "设定组件的宽度。"
+      "Description": "设定组件的最小宽度。"
     }
   ],
   "Contents": [

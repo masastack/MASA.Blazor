@@ -10,6 +10,12 @@
       "Description": "允许用户通过单击节点将其标记为活动节点"
     },
     {
+      "Name": "BlockNode",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Checkable",
       "Type": "Boolean",
       "Default": "false",
@@ -52,6 +58,12 @@
       "Description": ""
     },
     {
+      "Name": "Draggable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Expanded",
       "Type": "Boolean",
       "Default": "false",
@@ -61,6 +73,12 @@
       "Name": "IconExpression",
       "Type": "Func`2",
       "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
@@ -76,9 +94,21 @@
       "Description": ""
     },
     {
+      "Name": "ItemDisabled",
+      "Type": "Func`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "KeyExpression",
       "Type": "Func`2",
       "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {
@@ -106,12 +136,6 @@
       "Description": ""
     },
     {
-      "Name": "SelectedDataChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
-      "Description": ""
-    },
-    {
       "Name": "SelectedDatas",
       "Type": "T[]",
       "Default": "",
@@ -124,20 +148,8 @@
       "Description": ""
     },
     {
-      "Name": "SelectedKeyChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
-      "Description": ""
-    },
-    {
       "Name": "SelectedKeys",
       "Type": "String[]",
-      "Default": "",
-      "Description": ""
-    },
-    {
-      "Name": "SelectedKeysChanged",
-      "Type": "EventCallback`1",
       "Default": "",
       "Description": ""
     },
@@ -148,15 +160,27 @@
       "Description": ""
     },
     {
-      "Name": "SelectedNodeChanged",
-      "Type": "EventCallback`1",
+      "Name": "SelectedNodes",
+      "Type": "BTreeItem`1[]",
       "Default": "",
       "Description": ""
     },
     {
-      "Name": "SelectedNodes",
-      "Type": "BTreeItem`1[]",
-      "Default": "",
+      "Name": "ShowExpand",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ShowIcon",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ShowLine",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {
@@ -174,15 +198,43 @@
   ],
   "Contents": [
     {
+      "Name": "IndentTemplate",
+      "Description": ""
+    },
+    {
+      "Name": "Nodes",
+      "Description": ""
+    },
+    {
       "Name": "NodesContent",
       "Description": ""
     },
     {
       "Name": "PrependContent",
       "Description": ""
+    },
+    {
+      "Name": "SwitcherIconTemplate",
+      "Description": ""
+    },
+    {
+      "Name": "TitleIconTemplate",
+      "Description": ""
+    },
+    {
+      "Name": "TitleTemplate",
+      "Description": ""
     }
   ],
   "Events": [
+    {
+      "Name": "HandleCheckboxClick",
+      "Description": ""
+    },
+    {
+      "Name": "HandleItemClick",
+      "Description": ""
+    },
     {
       "Name": "OnCheckBoxChanged",
       "Description": ""
@@ -193,6 +245,14 @@
     },
     {
       "Name": "OnClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnContextMenu",
+      "Description": ""
+    },
+    {
+      "Name": "OnDblClick",
       "Description": ""
     },
     {
@@ -209,6 +269,22 @@
     },
     {
       "Name": "OnSearchValueChanged",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedDataChanged",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedKeyChanged",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedKeysChanged",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedNodeChanged",
       "Description": ""
     }
   ]

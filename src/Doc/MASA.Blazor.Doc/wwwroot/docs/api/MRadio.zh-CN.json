@@ -22,6 +22,12 @@
       "Description": "将暗色主题变量应用到组件。"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "IsActive",
       "Type": "Boolean",
       "Default": "false",
@@ -46,10 +52,22 @@
       "Description": "设置输入标签"
     },
     {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "OffIcon",
       "Type": "String",
       "Default": "null",
       "Description": "不活动时使用的图标"
+    },
+    {
+      "Name": "OnIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Ripple",
@@ -87,10 +105,6 @@
     },
     {
       "Name": "OnFocus",
-      "Description": ""
-    },
-    {
-      "Name": "OnIcon",
       "Description": ""
     },
     {

@@ -1,6 +1,6 @@
 ﻿{
   "Components": [
-    "Table"
+    "TableCol"
   ],
   "Props": [
     {
@@ -22,6 +22,24 @@
       "Description": ""
     },
     {
+      "Name": "Ellipsis",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ShowTitle",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",
@@ -31,7 +49,7 @@
       "Name": "Width",
       "Type": "StringNumber",
       "Default": "",
-      "Description": "设定组件的宽度。"
+      "Description": "设定组件的最小宽度。"
     }
   ],
   "Contents": [

@@ -34,6 +34,18 @@
       "Description": "设定组件的高度。"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "MaxHeight",
       "Type": "StringNumber",
       "Default": "",
@@ -58,6 +70,12 @@
       "Description": "设定组件的最小宽度。"
     },
     {
+      "Name": "OnContextmenuPreventDefault",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Outlined",
       "Type": "Boolean",
       "Default": "false",
@@ -65,7 +83,7 @@
     },
     {
       "Name": "Rounded",
-      "Type": "OneOf`2",
+      "Type": "StringBoolean",
       "Default": "",
       "Description": "对指定的组件应用 border-radius 样式。"
     },
@@ -82,6 +100,12 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Tile",
       "Type": "Boolean",
       "Default": "false",
@@ -91,7 +115,7 @@
       "Name": "Width",
       "Type": "StringNumber",
       "Default": "",
-      "Description": "设定组件的宽度。"
+      "Description": "设定组件的最小宽度。"
     }
   ],
   "Contents": [

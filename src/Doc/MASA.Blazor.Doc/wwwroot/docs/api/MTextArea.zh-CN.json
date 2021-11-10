@@ -1,19 +1,37 @@
 ﻿{
   "Components": [
-    "TextArea"
+    "Textarea"
   ],
   "Props": [
     {
       "Name": "AppendIcon",
       "Type": "String",
       "Default": "null",
-      "Description": "在组件上附加一个图标，使用与 v-icon 相同的语法"
+      "Description": ""
+    },
+    {
+      "Name": "AppendOuterIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Autofocus",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "AutoGrow",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "根据文本数量自动增长文本"
+      "Description": ""
+    },
+    {
+      "Name": "BackgroundColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Class",
@@ -25,13 +43,31 @@
       "Name": "Clearable",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "添加清除已输入内容功能，默认图标是Material Design Icons mdi-clear"
+      "Description": ""
+    },
+    {
+      "Name": "ClearIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Color",
       "Type": "String",
       "Default": "null",
       "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Counter",
+      "Type": "StringNumberBoolean",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "CounterValue",
+      "Type": "Func`2",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Dark",
@@ -46,25 +82,43 @@
       "Description": "减少组件的高度。"
     },
     {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Error",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ErrorCount",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "ErrorMessages",
+      "Type": "List`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Filled",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "应用替代填充输入样式"
+      "Description": ""
     },
     {
       "Name": "Flat",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "当使用solo或者solo-inverted属性时，移除添加到元素的标高（阴影）"
+      "Description": ""
     },
     {
       "Name": "FullWidth",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": "指定输入类型为全宽度"
-    },
-    {
-      "Name": "HasState",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
@@ -72,68 +126,62 @@
     {
       "Name": "Height",
       "Type": "StringNumber",
-      "Default": "",
+      "Default": "null",
       "Description": "设定组件的高度。"
     },
     {
       "Name": "HideDetails",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": "隐藏提示和验证错误。当设置为 auto 时，只有在有信息（提示、错误信息、计数器值等）要显示时，才会显示信息。"
-    },
-    {
-      "Name": "IsBooted",
-      "Type": "Boolean",
-      "Default": "false",
+      "Type": "StringBoolean",
+      "Default": "null",
       "Description": ""
     },
     {
-      "Name": "IsDisabled",
-      "Type": "Boolean",
-      "Default": "false",
+      "Name": "Hint",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
-      "Name": "IsFocused",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "IsReadonly",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "IsSingleLine",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "IsSolo",
-      "Type": "Boolean",
-      "Default": "false",
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
       "Name": "Label",
       "Type": "String",
       "Default": "null",
-      "Description": "设置输入标签"
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "LoaderHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Loading",
-      "Type": "Boolean",
-      "Default": "false",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Messages",
+      "Type": "List`1",
+      "Default": "null",
       "Description": ""
     },
     {
       "Name": "NoResize",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "移除调整大小的句柄"
+      "Description": ""
     },
     {
       "Name": "Outlined",
@@ -142,28 +190,52 @@
       "Description": "使背景透明并使用薄边框。"
     },
     {
+      "Name": "PersistentHint",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "PersistentPlaceholder",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "强制Placeholder始终可见"
+      "Description": ""
     },
     {
       "Name": "Placeholder",
       "Type": "String",
       "Default": "null",
-      "Description": "设置输入的占位符文本"
+      "Description": ""
     },
     {
       "Name": "Prefix",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PrependIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PrependInnerIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "显示前缀"
+      "Description": ""
     },
     {
       "Name": "Reverse",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "反转输入方向"
+      "Description": ""
     },
     {
       "Name": "Rounded",
@@ -172,22 +244,40 @@
       "Description": "对指定的组件应用 border-radius 样式。"
     },
     {
+      "Name": "RowHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Rows",
       "Type": "Int32",
       "Default": "0",
-      "Description": "默认行数"
+      "Description": ""
     },
     {
       "Name": "Shaped",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "如果 outlined 则为圆形，如果 filled 则增加 border-radius。必须与 outlined 或 filled 一起使用"
+      "Description": ""
+    },
+    {
+      "Name": "SingleLine",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Solo",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "SoloInverted",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "减少元素的不透明度，知道获得焦点"
+      "Description": ""
     },
     {
       "Name": "Style",
@@ -196,15 +286,33 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
+      "Name": "Success",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SuccessMessages",
+      "Type": "List`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Suffix",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Type",
       "Type": "String",
       "Default": "null",
-      "Description": "设置输入类型"
+      "Description": ""
     },
     {
-      "Name": "ValidationState",
-      "Type": "String",
-      "Default": "null",
+      "Name": "ValidateOnBlur",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {
@@ -214,26 +322,44 @@
       "Description": ""
     },
     {
-      "Name": "ValueChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
-      "Description": ""
-    },
-    {
       "Name": "ValueExpression",
       "Type": "Expression`1",
-      "Default": "",
+      "Default": "null",
       "Description": ""
     }
   ],
   "Contents": [
     {
+      "Name": "Append",
+      "Description": ""
+    },
+    {
       "Name": "AppendContent",
+      "Description": ""
+    },
+    {
+      "Name": "AppendOuterContent",
       "Description": ""
     },
     {
       "Name": "ChildContent",
       "Description": "默认插槽"
+    },
+    {
+      "Name": "CounterContent",
+      "Description": ""
+    },
+    {
+      "Name": "LabelContent",
+      "Description": ""
+    },
+    {
+      "Name": "MessageContent",
+      "Description": ""
+    },
+    {
+      "Name": "Prepend",
+      "Description": ""
     },
     {
       "Name": "PrependContent",
@@ -242,11 +368,67 @@
     {
       "Name": "PrependInnerContent",
       "Description": ""
+    },
+    {
+      "Name": "ProgressContent",
+      "Description": ""
     }
   ],
   "Events": [
     {
+      "Name": "OnAppendClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnAppendOuterClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnBlur",
+      "Description": ""
+    },
+    {
+      "Name": "OnChange",
+      "Description": ""
+    },
+    {
       "Name": "OnClearClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnFocus",
+      "Description": ""
+    },
+    {
+      "Name": "OnInput",
+      "Description": ""
+    },
+    {
+      "Name": "OnKeyDown",
+      "Description": ""
+    },
+    {
+      "Name": "OnMouseDown",
+      "Description": ""
+    },
+    {
+      "Name": "OnMouseUp",
+      "Description": ""
+    },
+    {
+      "Name": "OnPrependClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnPrependInnerClick",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
       "Description": ""
     }
   ]

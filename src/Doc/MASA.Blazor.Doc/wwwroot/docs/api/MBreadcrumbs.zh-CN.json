@@ -10,16 +10,10 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
-      "Name": "DisabledLast",
+      "Name": "Dark",
       "Type": "Boolean",
       "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "DisabledValue",
-      "Type": "String",
-      "Default": "null",
-      "Description": ""
+      "Description": "将暗色主题变量应用到组件。"
     },
     {
       "Name": "Divider",
@@ -28,21 +22,27 @@
       "Description": "指定项之间的分隔字符。"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Items",
       "Type": "IReadOnlyList`1",
       "Default": "",
       "Description": ""
     },
     {
-      "Name": "ItemText",
-      "Type": "Func`2",
-      "Default": "",
+      "Name": "Large",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {
-      "Name": "ItemValue",
-      "Type": "Func`2",
-      "Default": "",
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {
@@ -56,6 +56,14 @@
     {
       "Name": "ChildContent",
       "Description": "默认插槽"
+    },
+    {
+      "Name": "DividerContent",
+      "Description": ""
+    },
+    {
+      "Name": "ItemContent",
+      "Description": ""
     }
   ],
   "Events": []

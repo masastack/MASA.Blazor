@@ -1,6 +1,6 @@
 ﻿{
   "Components": [
-    "Stepper"
+    "StepperStep"
   ],
   "Props": [
     {
@@ -46,6 +46,12 @@
       "Description": "步骤错误时显示的图标"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Rules",
       "Type": "List`1",
       "Default": "",
@@ -53,7 +59,7 @@
     },
     {
       "Name": "Step",
-      "Type": "StringNumber",
+      "Type": "Int32",
       "Default": "",
       "Description": "步骤圈内显示的内容"
     },
@@ -73,7 +79,7 @@
   "Events": [
     {
       "Name": "OnClick",
-      "Description": "单击组件时发出"
+      "Description": ""
     }
   ]
 }

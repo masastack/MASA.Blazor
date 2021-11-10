@@ -1,6 +1,6 @@
 ﻿{
   "Components": [
-    "Timeline"
+    "TimelineItem"
   ],
   "Props": [
     {
@@ -46,6 +46,12 @@
       "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。 你可以在 colors page 中找到内置类的列表。"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Large",
       "Type": "Boolean",
       "Default": "false",
@@ -56,6 +62,12 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "显式地将项目设置为左方向"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Right",
@@ -78,12 +90,12 @@
   ],
   "Contents": [
     {
-      "Name": "IconContent",
-      "Description": ""
-    },
-    {
       "Name": "ChildContent",
       "Description": "默认插槽"
+    },
+    {
+      "Name": "IconContent",
+      "Description": ""
     },
     {
       "Name": "OppositeContent",

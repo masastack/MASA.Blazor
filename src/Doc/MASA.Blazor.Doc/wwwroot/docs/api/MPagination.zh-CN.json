@@ -34,10 +34,22 @@
       "Description": "禁用组件"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Length",
       "Type": "Int32",
       "Default": "0",
       "Description": "分页组件的长度"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "NextIcon",
@@ -68,27 +80,25 @@
       "Type": "Int32",
       "Default": "0",
       "Description": ""
-    },
-    {
-      "Name": "ValueChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
-      "Description": ""
     }
   ],
   "Contents": [],
   "Events": [
     {
       "Name": "OnInput",
-      "Description": "被绑定模型的更新"
+      "Description": ""
     },
     {
       "Name": "OnNext",
-      "Description": "转到下一个项目时发出"
+      "Description": ""
     },
     {
       "Name": "OnPrevious",
-      "Description": "转到上一个项目时发出"
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Description": ""
     }
   ]
 }

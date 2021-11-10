@@ -64,9 +64,21 @@
       "Description": "隐藏默认表头。"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Items",
       "Type": "IEnumerable`1",
       "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {
@@ -100,13 +112,23 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
+      "Name": "TableLayout",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Width",
       "Type": "StringNumber",
       "Default": "",
-      "Description": "设定组件的宽度。"
+      "Description": "设定组件的最小宽度。"
     }
   ],
   "Contents": [
+    {
+      "Name": "Bottom",
+      "Description": ""
+    },
     {
       "Name": "BottomContent",
       "Description": ""
@@ -116,7 +138,15 @@
       "Description": "默认插槽"
     },
     {
+      "Name": "NoResult",
+      "Description": ""
+    },
+    {
       "Name": "NoResultContent",
+      "Description": ""
+    },
+    {
+      "Name": "Top",
       "Description": ""
     },
     {

@@ -1,0 +1,169 @@
+﻿{
+  "Components": [
+    "Row"
+  ],
+  "Props": [
+    {
+      "Name": "Align",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignContent",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignContentLg",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignContentMd",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignContentSm",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignContentXl",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignLg",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignMd",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignSm",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignXl",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "DefaultBreakpoint",
+      "Type": "BreakpointType",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Decreases component’s height."
+    },
+    {
+      "Name": "Gutter",
+      "Type": "OneOf`6",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Justify",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "JustifyLg",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "JustifyMd",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "JustifySm",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "JustifyXl",
+      "Type": "StringEnum`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "NoGutters",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "div",
+      "Description": ""
+    },
+    {
+      "Name": "Type",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Wrap",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnBreakpoint",
+      "Description": ""
+    }
+  ]
+}

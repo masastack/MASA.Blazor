@@ -19,6 +19,8 @@ namespace MASA.Blazor.Doc.Services
     public class DemoService
     {
         private static ConcurrentCache<string, ValueTask<IDictionary<string, DemoComponentModel>>> _componentCache;
+        private static ConcurrentCache<string, ValueTask<IDictionary<string, DemoComponentModel>>> _styleCache;
+
         private static ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>> _menuCache;
         private static ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>> _demoMenuCache;
         private static ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>> _docMenuCache;
@@ -60,6 +62,15 @@ namespace MASA.Blazor.Doc.Services
                     await _httpClient.GetFromJsonAsync<DemoComponentModel[]>(new Uri(_baseUrl,
                         $"_content/MASA.Blazor.Doc/meta/components.{language}.json").ToString());
                 return components.ToDictionary(x => x.Title.ToLower(), x => x);
+            });
+
+            _styleCache ??= new ConcurrentCache<string, ValueTask<IDictionary<string, DemoComponentModel>>>();
+            await _styleCache.GetOrAdd(language, async (currentLanguage) =>
+            {
+                var styles =
+                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>(new Uri(_baseUrl,
+                        $"_content/MASA.Blazor.Doc/meta/styles-and-animations/components.{language}.json").ToString());
+                return styles.ToDictionary(x => x.Title.ToLower(), x => x);
             });
 
             _demoMenuCache ??= new ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>>();
@@ -107,6 +118,15 @@ namespace MASA.Blazor.Doc.Services
             CurrentComponentName = componentName;
             await InitializeAsync(CurrentLanguage);
             return _componentCache.TryGetValue(CurrentLanguage, out var component)
+                ? ((await component).TryGetValue(componentName.ToLower(),out var componetModel)?componetModel:null)
+                : null;
+        }
+
+        public async Task<DemoComponentModel> GetStyleAsync(string componentName)
+        {
+            CurrentComponentName = componentName;
+            await InitializeAsync(CurrentLanguage);
+            return _styleCache.TryGetValue(CurrentLanguage, out var component)
                 ? (await component)[componentName.ToLower()]
                 : null;
         }
@@ -132,6 +152,7 @@ namespace MASA.Blazor.Doc.Services
             if (contents == null && componentName != null)
             {
                 var components = await GetComponentAsync(componentName);
+                if (components is null) components = await GetStyleAsync(componentName);
                 var demoList = components.DemoList?.OrderBy(r => r.Order).ThenBy(r => r.Name);
 
                 contents = new List<ContentsItem>();
@@ -166,8 +187,11 @@ namespace MASA.Blazor.Doc.Services
                     }
                 }
 
-                contents.Add(ContentsItem.GenerateApi(CurrentLanguage));
-
+                if(string.IsNullOrEmpty(components.ApiDoc) == false)
+                {
+                    contents.Add(ContentsItem.GenerateApi(CurrentLanguage));
+                }
+                
                 if (propsList.Any() || miscList.Any())
                 {
                     contents.Add(ContentsItem.GenerateExample(CurrentLanguage));

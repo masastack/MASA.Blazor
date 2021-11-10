@@ -10,15 +10,33 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "EnableDataAnnotationsValidation",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Model",
       "Type": "Object",
       "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {

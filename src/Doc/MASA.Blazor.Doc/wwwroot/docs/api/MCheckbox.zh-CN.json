@@ -4,15 +4,15 @@
   ],
   "Props": [
     {
-      "Name": "Checked",
-      "Type": "Boolean",
-      "Default": "false",
+      "Name": "AppendIcon",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
-      "Name": "CheckedChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
+      "Name": "BackgroundColor",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
@@ -34,10 +34,58 @@
       "Description": "将暗色主题变量应用到组件。"
     },
     {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "减少组件的高度。"
+    },
+    {
       "Name": "Disabled",
       "Type": "Boolean",
       "Default": "false",
       "Description": "禁用输入"
+    },
+    {
+      "Name": "Error",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ErrorCount",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "ErrorMessages",
+      "Type": "List`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "HideDetails",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Hint",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Indeterminate",
@@ -46,23 +94,172 @@
       "Description": "为复选框设置不确定状态"
     },
     {
+      "Name": "IndeterminateIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "IsActive",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Label",
       "Type": "String",
       "Default": "null",
       "Description": "设置输入标签"
     },
     {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Loading",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Messages",
+      "Type": "List`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OffIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OnIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PersistentHint",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "PrependIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Ripple",
+      "Type": "Nullable`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Success",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SuccessMessages",
+      "Type": "List`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ValidateOnBlur",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ValueExpression",
+      "Type": "Expression`1",
+      "Default": "null",
+      "Description": ""
     }
   ],
   "Contents": [
     {
+      "Name": "Append",
+      "Description": ""
+    },
+    {
+      "Name": "AppendContent",
+      "Description": ""
+    },
+    {
       "Name": "ChildContent",
       "Description": "默认插槽"
+    },
+    {
+      "Name": "LabelContent",
+      "Description": ""
+    },
+    {
+      "Name": "MessageContent",
+      "Description": ""
+    },
+    {
+      "Name": "Prepend",
+      "Description": ""
+    },
+    {
+      "Name": "PrependContent",
+      "Description": ""
     }
   ],
-  "Events": []
+  "Events": [
+    {
+      "Name": "OnAppendClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnChange",
+      "Description": ""
+    },
+    {
+      "Name": "OnClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnMouseDown",
+      "Description": ""
+    },
+    {
+      "Name": "OnMouseUp",
+      "Description": ""
+    },
+    {
+      "Name": "OnPrependClick",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Description": ""
+    }
+  ]
 }

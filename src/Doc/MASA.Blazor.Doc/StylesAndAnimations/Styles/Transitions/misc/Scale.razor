@@ -1,0 +1,24 @@
+﻿<div class="text-center">
+    <MMenu Transition="scale-transition">
+
+        <ActivatorContent>
+            <MButton Dark Color="primary" @attributes="context.Attrs">
+               Scale  Transition
+            </MButton>
+        </ActivatorContent>
+
+        <ChildContent>
+            <MList>
+                @for (var i = 0; i < 5; i++)
+                {
+                    <MListItem>
+                        <MListItemTitle>
+                            @("Item"+i)
+                        </MListItemTitle>
+                    </MListItem>
+                }
+            </MList>
+        </ChildContent>
+
+    </MMenu>
+</div>

@@ -1,6 +1,6 @@
 ﻿{
   "Components": [
-    "Tree"
+    "TreeItem"
   ],
   "Props": [
     {
@@ -46,9 +46,27 @@
       "Description": ""
     },
     {
+      "Name": "Draggable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Expanded",
       "Type": "Boolean",
       "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Icon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
@@ -58,9 +76,21 @@
       "Description": ""
     },
     {
+      "Name": "ItemDisabled",
+      "Type": "Func`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Key",
       "Type": "String",
       "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {
@@ -90,6 +120,10 @@
   ],
   "Contents": [
     {
+      "Name": "Nodes",
+      "Description": ""
+    },
+    {
       "Name": "NodesContent",
       "Description": ""
     },
@@ -99,6 +133,10 @@
     }
   ],
   "Events": [
+    {
+      "Name": "HandleCheckboxClick",
+      "Description": ""
+    },
     {
       "Name": "OnCheckboxClick",
       "Description": ""

@@ -1,0 +1,107 @@
+﻿{
+  "Components": [
+    "Upload"
+  ],
+  "Props": [
+    {
+      "Name": "Accept",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Card",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "CardSize",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Chips",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Counter",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Files",
+      "Type": "List`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Multiple",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ShowSize",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ShowUploadList",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "Activator",
+      "Description": ""
+    },
+    {
+      "Name": "ActivatorContent",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "FilesChanged",
+      "Description": ""
+    },
+    {
+      "Name": "OnUpload",
+      "Description": ""
+    },
+    {
+      "Name": "Upload",
+      "Description": ""
+    }
+  ]
+}
