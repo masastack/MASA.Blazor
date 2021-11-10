@@ -14,6 +14,10 @@ namespace MASA.Blazor
     {
         private bool _animated = false;
 
+        protected override string AttachSelector => Attach ?? ".m-application";
+
+        public bool ShowContent { get; set; }
+
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
 
@@ -47,6 +51,23 @@ namespace MASA.Blazor
                 }
 
                 return Themeable != null && Themeable.IsDark;
+            }
+        }
+
+        public Dictionary<string, object> ContentAttrs
+        {
+            get
+            {
+                var attrs = new Dictionary<string, object>
+                {
+                    {"role", "document"}
+                };
+                if (Value)
+                {
+                    attrs.Add("tabindex", 0);
+                }
+
+                return attrs;
             }
         }
 
@@ -114,20 +135,22 @@ namespace MASA.Blazor
                 .ApplyDialogDefault();
         }
 
-        public Dictionary<string, object> ContentAttrs
+        public override async Task ShowLazyContent()
         {
-            get
+            if (!ShowContent && Value)
             {
-                var attrs = new Dictionary<string, object>
-                {
-                    {"role", "document"}
-                };
-                if (Value)
-                {
-                    attrs.Add("tabindex", 0);
-                }
+                ShowContent = true;
+                Value = false;
 
-                return attrs;
+                StateHasChanged();
+
+                Value = true;
+
+                var overlayElement = ((BDomComponentBase)Overlay.Instance).Ref;
+                await JsInvokeAsync(JsInteropConstants.AddElementTo, overlayElement, AttachSelector);
+                await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachSelector);
+
+                StateHasChanged();
             }
         }
     }
