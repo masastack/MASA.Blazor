@@ -11,4 +11,5 @@ title:
 
 ## en-US
 
-Todo...
+You can control the ordering of grid items. As with offsets, you can set different orders for different sizes. Design
+specialized screen layouts that accommodate to any application.

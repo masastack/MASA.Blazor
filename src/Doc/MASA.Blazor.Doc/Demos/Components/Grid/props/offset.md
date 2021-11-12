@@ -11,4 +11,6 @@ title:
 
 ## en-US
 
-Todo...
+Offsets are useful for compensating for elements that may not be visible yet, or to control the position of content.
+Just as with breakpoints, you can set an offset for any available sizes. This allows you to fine tune your application
+layout precisely to your needs.
