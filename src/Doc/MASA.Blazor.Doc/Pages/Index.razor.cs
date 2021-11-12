@@ -20,23 +20,12 @@ namespace MASA.Blazor.Doc.Pages
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-            await FetchData();
-
             Language.LanguageChanged += HandleLanguageChanged;
         }
 
         private async void HandleLanguageChanged(object _, CultureInfo culture)
         {
-            await FetchData();
             await InvokeAsync(StateHasChanged);
-        }
-
-        private async Task FetchData()
-        {
-            _recommends = await Service.GetRecommend();
-
-            _products = await Service.GetProduct();
-            _moreArticles = await Service.GetMore();
         }
 
         public void Dispose()

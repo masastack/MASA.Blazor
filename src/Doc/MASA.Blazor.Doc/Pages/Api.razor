@@ -32,30 +32,34 @@
                         <a class="text-decoration-none text-right text-md-left"> # </a> 属性
                     </h2>
                     <MSheet Class="overflow-hidden mb-4" Outlined Rounded="true">
-                        <MTable Headers="_headers" PageSize="int.MaxValue" Class="api-table" Items="_api.Props" HideDefaultFooter>
-                            <MTableCol Class="regular-row">
-                                <span class="text-mono font-weight-bold" style="color: rgb(128,0,128)">
-                                    @context.Name
-                                </span>
-                            </MTableCol>
-                            <MTableCol Class="regular-row">
-                                <span class="text-mono" style="color: rgb(43,145,175)">
-                                    @context.Type
-                                </span>
-                            </MTableCol>
-                            <MTableCol Class="regular-row">
-                                <span class="text-mono" style="color:blue">
-                                    @context.Default
-                                </span>
-                            </MTableCol>
-                            <MTableCol Class="regular-row">
-                                <div class="m-markdown">
-                                    <p>
-                                        @context.Description
-                                    </p>
-                                </div>
-                            </MTableCol>
-                        </MTable>
+                        <MDataTable Headers="_headers" Class="api-table" Items="_api.Props" HideDefaultFooter>
+                            <ItemContent>
+                                <tr class="regular-row">
+                                    <td>
+                                        <span class="text-mono font-weight-bold" style="color: rgb(128,0,128)">
+                                            @context.Item.Name
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="text-mono" style="color: rgb(43,145,175)">
+                                            @context.Item.Type
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-mono" style="color:blue">
+                                            @context.Item.Default
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="m-markdown">
+                                            <p>
+                                                @context.Item.Description
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ItemContent>
+                        </MDataTable>
                     </MSheet>
                 </MCol>
             </MRow>
@@ -65,20 +69,24 @@
                         <a class="text-decoration-none text-right text-md-left"> # </a> 插槽
                     </h2>
                     <MSheet Class="overflow-hidden mb-4" Outlined Rounded="true">
-                        <MTable Headers="_headers2" PageSize="int.MaxValue" Class="api-table" Items="_api.Contents" HideDefaultFooter>
-                            <MTableCol Class="regular-row">
-                                <span class="text-mono font-weight-bold" style="color: rgb(128,0,128)">
-                                    @context.Name
-                                </span>
-                            </MTableCol>
-                            <MTableCol Class="regular-row">
-                                <div class="m-markdown">
-                                    <p>
-                                        @context.Description
-                                    </p>
-                                </div>
-                            </MTableCol>
-                        </MTable>
+                        <MDataTable Headers="_headers2" Class="api-table" Items="_api.Contents" HideDefaultFooter>
+                            <ItemContent>
+                                <tr class="regular-row">
+                                    <td>
+                                        <span class="text-mono font-weight-bold" style="color: rgb(128,0,128)">
+                                            @context.Item.Name
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="m-markdown">
+                                            <p>
+                                                @context.Item.Description
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ItemContent>
+                        </MDataTable>
                     </MSheet>
                 </MCol>
             </MRow>
@@ -88,20 +96,24 @@
                         <a class="text-decoration-none text-right text-md-left"> # </a> 事件
                     </h2>
                     <MSheet Class="overflow-hidden mb-4" Outlined Rounded="true">
-                        <MTable Headers="_headers2" PageSize="int.MaxValue" Class="api-table" Items="_api.Events" HideDefaultFooter>
-                            <MTableCol Class="regular-row">
-                                <span class="text-mono font-weight-bold" style="color: rgb(128,0,128)">
-                                    @context.Name
-                                </span>
-                            </MTableCol>
-                            <MTableCol Class="regular-row">
-                                <div class="m-markdown">
-                                    <p>
-                                        @context.Description
-                                    </p>
-                                </div>
-                            </MTableCol>
-                        </MTable>
+                        <MDataTable Headers="_headers2" Class="api-table" Items="_api.Events" HideDefaultFooter>
+                            <ItemContent>
+                                <tr class="regular-row">
+                                    <td>
+                                        <span class="text-mono font-weight-bold" style="color: rgb(128,0,128)">
+                                            @context.Item.Name
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="m-markdown">
+                                            <p>
+                                                @context.Item.Description
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ItemContent>
+                        </MDataTable>
                     </MSheet>
                 </MCol>
             </MRow>

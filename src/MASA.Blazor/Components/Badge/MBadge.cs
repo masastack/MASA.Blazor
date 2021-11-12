@@ -129,7 +129,6 @@ namespace MASA.Blazor
                         .AddIf(() => $"left:{ComputedLeft}", () => !InLine)
                         .AddIf(() => $"right:{ComputedRight}", () => !InLine)
                         .AddIf(() => $"top:{ComputedTop}", () => !InLine)
-                        .AddIf("display: none;", ()=> !Value)
                         .AddBackgroundColor(Color);
                 });
 

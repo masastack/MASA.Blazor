@@ -1,7 +1,7 @@
 ---
 category: Components
-type: Toolbar
-title: Toolbar
+type: Toolbars
+title: Toolbars
 cols: 1
 ---
 

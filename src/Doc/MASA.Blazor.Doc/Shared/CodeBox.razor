@@ -8,7 +8,14 @@
 {
     <MSheet Outlined Rounded="true" Class="mb-9 m-example">
         <MSheet Rounded="true" Class="pa-4">
-            @Component
+            @if (_showComponent)
+            {
+                @Component
+            }
+            else
+            {
+                <div class="text-center">Loading...</div>
+            }
         </MSheet>
         <MDivider></MDivider>
         <div class="m-lazy" style="min-height: 52px;">
@@ -119,6 +126,7 @@
 
 @code {
     private bool _expend;
+    private bool _showComponent;
 
     public StringNumber ActiveWindow { get; set; } = 0;
 
@@ -138,6 +146,9 @@
     [Parameter]
     public DemoItemModel Demo { get; set; }
 
+    [Parameter]
+    public int Index { get; set; }
+
     RenderFragment Component;
 
     protected string DemoId => $"components-{ComponentName.ToLower()}-demo-{Demo.Name}";
@@ -154,7 +165,7 @@
         {
             Component = Service.GetShowCase(Demo.Type);
         }
-        
+
         if (Demo.Code != null)
         {
             var index = Demo.Code.IndexOf("@code");
@@ -170,4 +181,21 @@
         }
     }
 
+    protected override void OnInitialized()
+    {
+        _showComponent = Index < 2;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (!_showComponent)
+            {
+                await Task.Delay(Index * 16);
+                _showComponent = true;
+                StateHasChanged();
+            }
+        }
+    }
 }

@@ -52,5 +52,10 @@
       "Description": "Default Content"
     }
   ],
-  "Events": []
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Description": ""
+    }
+  ]
 }

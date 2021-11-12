@@ -2,7 +2,7 @@
 category: Components
 subtitle: 徽章
 type: 徽章
-title: Badge
+title: Badges
 cols: 1
 
 ---

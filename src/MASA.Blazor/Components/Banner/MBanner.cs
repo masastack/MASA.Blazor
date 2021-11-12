@@ -65,9 +65,6 @@ namespace MASA.Blazor
         public RenderFragment<Action> ActionsContent { get; set; }
 
         [Parameter]
-        public bool Value { get; set; } = true;
-
-        [Parameter]
         public EventCallback<bool> ValueChanged { get; set; }
 
         [Parameter]
@@ -104,8 +101,7 @@ namespace MASA.Blazor
                     styleBuilder
                         .Add($"top:0")
                         .AddIf(() => $"position:sticky", () => IsSticky)
-                        .AddIf(() => $"zIndex:1", () => IsSticky)
-                        .AddIf("display:none", () => !Value);
+                        .AddIf(() => $"zIndex:1", () => IsSticky);
                 })
                 .Apply("wrapper", cssAction: cssBuilder =>
                 {

@@ -136,7 +136,7 @@ namespace MASA.Blazor
         public IList<TItem> SelectedItems => Items
                 .Where(u => Values.Contains(ItemValue(u))).ToList();
 
-        public AbstractComponent Menu { get; set; }
+        public object Menu { get; set; }
 
         protected virtual List<string> FormatText(TValue value)
         {
@@ -165,7 +165,7 @@ namespace MASA.Blazor
             {
                 await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
 
-                await (Menu.Instance as MMenu)?.UpdateActivator(InputSlotElement);
+                await (Menu as MMenu)?.UpdateActivator(InputSlotElement);
             }
         }
 

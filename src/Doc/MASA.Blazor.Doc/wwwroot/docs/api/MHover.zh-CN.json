@@ -52,5 +52,10 @@
       "Description": "默认插槽"
     }
   ],
-  "Events": []
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Description": ""
+    }
+  ]
 }

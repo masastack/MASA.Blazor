@@ -43,12 +43,6 @@ namespace MASA.Blazor
         [Parameter]
         public bool Tile { get; set; }
 
-        /// <summary>
-        /// Sets the component transition. TODO: no implementation
-        /// </summary>
-        [Parameter]
-        public string Transition { get; set; }
-
         [Parameter]
         public StringNumber Height { get; set; }
 
@@ -159,7 +153,6 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf("display:none", () => !Value)
                         .AddColor(ComputedColor, HasText, () => !ColoredBorder)
                         .AddHeight(Height)
                         .AddMaxHeight(MaxHeight)

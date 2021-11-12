@@ -2,9 +2,9 @@
 category: Components
 subtitle: 卡片
 type: 卡片
-title: Card
+title: Cards
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
+cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Cards.svg
 
 ---
 

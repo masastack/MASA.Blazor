@@ -1,7 +1,7 @@
 ---
 category: Components
-type: Badge
-title: Badge
+type: Badges
+title: Badges
 cols: 1
 ---
 
