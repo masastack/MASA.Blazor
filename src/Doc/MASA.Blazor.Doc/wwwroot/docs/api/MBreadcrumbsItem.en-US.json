@@ -10,6 +10,12 @@
       "Description": ""
     },
     {
+      "Name": "Append",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "设置 append 属性总是会附加到当前路径的相对路径上。"
+    },
+    {
       "Name": "Class",
       "Type": "String",
       "Default": "null",
@@ -22,8 +28,26 @@
       "Description": ""
     },
     {
-      "Name": "Href",
+      "Name": "Exact",
+      "Type": "Nullable`1",
+      "Default": "false",
+      "Description": "完全匹配链接。如果没有这个链接，‘/’ 将匹配每个路由。"
+    },
+    {
+      "Name": "ExactActiveClass",
       "Type": "String",
+      "Default": "null",
+      "Description": "配置在精准链接激活时应用的 CSS 类。"
+    },
+    {
+      "Name": "ExactPath",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "精确匹配链接, 忽略query和hash部分。"
+    },
+    {
+      "Name": "Href",
+      "Type": "Object",
       "Default": "null",
       "Description": ""
     },
@@ -34,8 +58,26 @@
       "Description": ""
     },
     {
-      "Name": "Ripple",
+      "Name": "Link",
       "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Nuxt",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定链接是 nuxt-link 。"
+    },
+    {
+      "Name": "Replace",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Ripple",
+      "Type": "Object",
       "Default": "false",
       "Description": ""
     },
@@ -46,14 +88,20 @@
       "Description": "The style applied to the outermost element of the component"
     },
     {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Target",
       "Type": "String",
       "Default": "null",
       "Description": ""
     },
     {
-      "Name": "Text",
-      "Type": "String",
+      "Name": "To",
+      "Type": "Object",
       "Default": "null",
       "Description": ""
     }

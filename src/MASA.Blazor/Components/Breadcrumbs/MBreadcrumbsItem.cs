@@ -8,35 +8,66 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor
 {
-    public class MBreadcrumbsItem : BBreadcrumbsItem
+    public class MBreadcrumbsItem : BBreadcrumbsItem, IRoutable
     {
+        [Parameter]
+        public object Href { get; set; }
+
+        [Parameter]
+        public string Target { get; set; }
+
+        [Parameter]
+        public bool Disabled { get; set; }
+
         [Parameter]
         public string ActiveClass { get; set; } = "m-breadcrumbs__item--disabled";
 
-        /// <summary>
-        /// TODO: ripple in breadcrumbs-item
-        /// </summary>
         [Parameter]
-        public bool Ripple { get; set; }
+        public bool Append { get; set; }
 
-        protected override void SetComponentClass()
+        [Parameter]
+        public bool? Exact { get; set; }
+
+        [Parameter]
+        public bool ExactPath { get; set; }
+
+        [Parameter]
+        public string ExactActiveClass { get; set; }
+
+        [Parameter]
+        public bool Link { get; set; }
+
+        [Parameter]
+        public object To { get; set; }
+
+        [Parameter]
+        public bool Nuxt { get; set; }
+
+        [Parameter]
+        public bool Replace { get; set; }
+
+        [Parameter]
+        public object Ripple { get; set; }
+
+
+        protected override void OnParametersSet()
         {
-            CssProvider
-                .Apply("link", css =>
-                {
-                    css.Add("m-breadcrumbs__item")
-                        .AddIf(ActiveClass, () => Disabled);
-                })
-                .Apply("plain", css =>
-                {
-                    css.Add("m-breadcrumbs__item")
-                        .AddIf(ActiveClass, () => Disabled);
-                });
+            var tag = (Href is not null ? "a" : Tag ?? "div");
+            var props = new Dictionary<string, object>();
+            if (tag == "a") props.Add("href", Href);
+            var composite = new List<string>();
+            composite.Add("m-breadcrumbs__item");
+            if (Disabled) composite.Add(ActiveClass);
+            var routableClass = string.Join(" ", composite);
+            props.Add("class", routableClass ?? RoutableClass());
 
-            AbstractProvider
-                .Apply(typeof(BBreadcrumbsLinkItem<>), typeof(BBreadcrumbsLinkItem<MBreadcrumbsItem>))
-                .Apply(typeof(BBreadcrumbsPlainItem<>), typeof(BBreadcrumbsPlainItem<MBreadcrumbsItem>))
-                .Apply<BBreadcrumbsDivider, MBreadcrumbsDivider>();
+            ChildProps = (tag, props);
+
+            string RoutableClass()
+            {
+                if (To is not null) return "";
+                return ActiveClass ?? "";
+            }
         }
     }
 }

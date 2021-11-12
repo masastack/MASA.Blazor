@@ -10,12 +10,6 @@
       "Description": "The class applied to the outermost element of the component"
     },
     {
-      "Name": "Divider",
-      "Type": "String",
-      "Default": "null",
-      "Description": ""
-    },
-    {
       "Name": "Id",
       "Type": "String",
       "Default": "null",
@@ -26,12 +20,18 @@
       "Type": "String",
       "Default": "null",
       "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     }
   ],
   "Contents": [
     {
-      "Name": "DividerContent",
-      "Description": ""
+      "Name": "ChildContent",
+      "Description": "Default Content"
     }
   ],
   "Events": []

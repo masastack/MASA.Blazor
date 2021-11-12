@@ -18,7 +18,7 @@
     {
       "Name": "Divider",
       "Type": "String",
-      "Default": "null",
+      "Default": "/",
       "Description": "指定项之间的分隔字符。"
     },
     {
@@ -30,8 +30,8 @@
     {
       "Name": "Items",
       "Type": "IReadOnlyList`1",
-      "Default": "",
-      "Description": ""
+      "Default": "[]",
+      "Description": "每个面包屑对象的数组。"
     },
     {
       "Name": "Large",
@@ -50,6 +50,12 @@
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     }
   ],
   "Contents": [
