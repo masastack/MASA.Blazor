@@ -90,8 +90,8 @@
   ],
   "Contents": [
     {
-      "Name": "ChildContent",
-      "Description": "Default Content"
+      "Name": "LabelContent",
+      "Description": ""
     }
   ],
   "Events": [

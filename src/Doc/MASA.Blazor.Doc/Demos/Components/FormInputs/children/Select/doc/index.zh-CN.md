@@ -11,4 +11,4 @@ cols: 1
 
 ## API
 
-- [MSelect](/docs/api/MSelect)
+- [MSelect](/zh-CN/docs/api/MSelect)

@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-使用 `TickLabels` 属性和 `ThumbLabel` 插槽，您可以创建一个非常自定义的解决方案。
+使用 **TickLabels** 属性和 `ThumbLabelContent`，您可以创建一个非常自定义的解决方案。
 
 ## en-US
 
-TODO
+Using the **TickLabels** prop along with the `ThumbLabelContent`, you can create a very customized solution.

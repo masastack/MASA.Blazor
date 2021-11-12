@@ -7,7 +7,8 @@ title:
 
 ## zh-CN
 
-选择 可用于自定义选中值在输入中显示的方式。 当您想要像 foo (+20 others) 或不想让选区占用多行时，这是很棒的。
+**SelectionContent** 可用于自定义选中值在输入中显示的方式。 当您想要像 `foo (+20 others)` 或不想让选区占用多行时，这是很棒的。
 
 ## en-US
-TODO...
+
+The **SelectionContent** can be used to customize the way selected values are shown in the input. This is great when you want something like `foo (+20 others)` or don’t want the selection to occupy multiple lines.

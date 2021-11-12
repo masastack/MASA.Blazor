@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-TODO
+`MRangeSlider` can have steps other than 1. This can be helpful for some applications where you need to adjust values with more or less accuracy.

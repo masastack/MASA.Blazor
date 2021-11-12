@@ -11,5 +11,4 @@ title:
 
 ## en-US
 
-Applying the `Disabled` prop to a `Select` will prevent a user from interacting with the component.
-
+Use a custom prepended or appended icon.

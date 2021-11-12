@@ -82,6 +82,12 @@
       "Description": "The style applied to the outermost element of the component"
     },
     {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Value",
       "Type": "Boolean",
       "Default": "false",

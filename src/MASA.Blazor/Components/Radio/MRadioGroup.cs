@@ -15,6 +15,9 @@ namespace MASA.Blazor
         public bool Column { get; set; } = true;
 
         [Parameter]
+        public bool Mandatory { get; set; }
+
+        [Parameter]
         public bool Row { get; set; }
 
         protected List<MRadio<TValue>> Items { get; set; } = new();
@@ -34,10 +37,10 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--radio-group--row", () => Row);
                 })
                 .Apply("radio-group", cssBuilder =>
-                 {
-                     cssBuilder
-                         .Add("m-input--radio-group__input");
-                 });
+                {
+                    cssBuilder
+                        .Add("m-input--radio-group__input");
+                });
 
             AbstractProvider
                 .Merge(typeof(CascadingValue<>), typeof(CascadingValue<MRadioGroup<TValue>>))
@@ -52,6 +55,20 @@ namespace MASA.Blazor
 
         private void SetActiveRadio()
         {
+            // if no value provided and mandatory
+            // assign first item
+            if (Value == null)
+            {
+                if (!Mandatory) return;
+
+                var item = Items.FirstOrDefault(item => !item.IsDisabled);
+                if (item == null) return;
+
+                _ = UpdateItemsState(item);
+                
+                return;
+            }
+
             foreach (var radio in Items)
             {
                 if (EqualityComparer<TValue>.Default.Equals(radio.Value, Value))

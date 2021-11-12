@@ -7,9 +7,8 @@ title:
 
 ## zh-CN
 
-你可以使用`Dense`属性来降低自动完成的高度和缩小列表项的最大高度。
+你可以使用**Dense**属性来降低自动完成的高度和缩小列表项的最大高度。
 
 ## en-US
 
-Applying the `Disabled` prop to a `Select` will prevent a user from interacting with the component.
-
+You can use **Dense** prop to reduce the field height and lower max height of list items.

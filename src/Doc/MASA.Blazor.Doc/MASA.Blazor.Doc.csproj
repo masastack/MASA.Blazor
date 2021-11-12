@@ -64,6 +64,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="Demos\Components\FormInputs\children\Autocomplete\contents" />
+		<Folder Include="Demos\Components\FormInputs\children\Autocomplete\misc" />
 		<Folder Include="wwwroot\meta\" />
 	</ItemGroup>
 

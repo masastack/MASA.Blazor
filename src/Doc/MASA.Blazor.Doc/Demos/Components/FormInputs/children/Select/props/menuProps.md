@@ -11,5 +11,4 @@ title:
 
 ## en-US
 
-Applying the `Disabled` prop to a `Select` will prevent a user from interacting with the component.
-
+Custom props can be passed directly to `MMenu` using **MenuProps** prop. In this example menu is force directed to top and shifted to top.
