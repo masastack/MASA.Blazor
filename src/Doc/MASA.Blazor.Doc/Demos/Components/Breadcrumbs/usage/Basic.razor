@@ -1,5 +1,7 @@
-﻿<MRow Align="AlignTypes.Center" Justify="JustifyTypes.Center">
-    <MBreadcrumbs Items="items"></MBreadcrumbs>
+﻿@using BlazorComponent
+
+<MRow Align="AlignTypes.Center" Justify="JustifyTypes.Center">
+    <MBreadcrumbs Items="items" TItem="BreadcrumbItem"></MBreadcrumbs>
 </MRow>
 
 @code {

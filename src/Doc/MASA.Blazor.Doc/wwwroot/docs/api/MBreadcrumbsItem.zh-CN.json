@@ -1,6 +1,6 @@
 ﻿{
   "Components": [
-    "Breadcrumbs"
+    "BreadcrumbsItem"
   ],
   "Props": [
     {
@@ -16,6 +16,12 @@
       "Description": "设置 append 属性总是会附加到当前路径的相对路径上。"
     },
     {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
       "Name": "Disabled",
       "Type": "Boolean",
       "Default": "false",
@@ -23,57 +29,81 @@
     },
     {
       "Name": "Exact",
-      "Type": "Boolean",
+      "Type": "Nullable`1",
       "Default": "false",
       "Description": "完全匹配链接。如果没有这个链接，‘/’ 将匹配每个路由。"
     },
     {
       "Name": "ExactActiveClass",
-      "Type": "string",
+      "Type": "String",
       "Default": "null",
       "Description": "配置在精准链接激活时应用的 CSS 类。"
     },
     {
       "Name": "ExactPath",
-      "Type": "boolean",
+      "Type": "Boolean",
       "Default": "false",
       "Description": "精确匹配链接, 忽略query和hash部分。"
     },
     {
       "Name": "Href",
-      "Type": "String",
+      "Type": "Object",
       "Default": "null",
       "Description": "指定组件为锚点并应用 href 属性。"
     },
     {
-      "Name": "link",
-      "Type": "boolean",
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Link",
+      "Type": "Boolean",
       "Default": "false",
-      "Description": "指定组件为链接。当使用 href 或 **to ** 属性时，这是自动的设置的。"
+      "Description": ""
     },
     {
       "Name": "Nuxt",
-      "Type": "boolean",
+      "Type": "Boolean",
       "Default": "false",
       "Description": "指定链接是 nuxt-link 。"
     },
     {
-      "Name": "Ripple",
-      "Type": "boolean",
+      "Name": "Replace",
+      "Type": "Boolean",
       "Default": "false",
-      "Description": "应用 MRipple 指令"
+      "Description": ""
     },
     {
-      "Name": "Class",
-      "Type": "String",
-      "Default": "null",
-      "Description": "应用到组件最外层元素的class"
+      "Name": "Ripple",
+      "Type": "Object",
+      "Default": "false",
+      "Description": "应用 MRipple 指令"
     },
     {
       "Name": "Style",
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Target",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "To",
+      "Type": "Object",
+      "Default": "null",
+      "Description": ""
     }
   ],
   "Contents": [
