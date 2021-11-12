@@ -4,16 +4,22 @@
   ],
   "Props": [
     {
-      "Name": "ActivatorStyle",
-      "Type": "String",
-      "Default": "null",
+      "Name": "Absolute",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "应用 position: absolute 样式到组件."
+    },
+    {
+      "Name": "AllowOverflow",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {
-      "Name": "Attached",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": "使组件脱离当前节点并且指向一个新的DOM元素。可以是任何document. querySelector 有效的字符串或者任何有效的节点。将默认指定并附加到根节点v-app下。"
+      "Name": "Attach",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Bottom",
@@ -28,10 +34,28 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
+      "Name": "CloseDelay",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
       "Name": "Disabled",
       "Type": "Boolean",
       "Default": "false",
       "Description": "禁用提示"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Left",
@@ -41,15 +65,99 @@
     },
     {
       "Name": "MaxWidth",
-      "Type": "Int32",
+      "Type": "StringNumber",
       "Default": "0",
       "Description": "设定组件的最大宽度。"
     },
     {
       "Name": "MinWidth",
-      "Type": "Int32",
+      "Type": "StringNumber",
       "Default": "0",
       "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "NudgeBottom",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "NudgeLeft",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "NudgeRight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "NudgeTop",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "NudgeWidth",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OffsetOverflow",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OffsetX",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OffsetY",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OpenDelay",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnClick",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnFocus",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnHover",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "PositionX",
+      "Type": "Nullable`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "PositionY",
+      "Type": "Nullable`1",
+      "Default": "",
+      "Description": ""
     },
     {
       "Name": "Right",
@@ -62,6 +170,36 @@
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Top",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Transition",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ZIndex",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
     }
   ],
   "Contents": [
@@ -74,5 +212,10 @@
       "Description": "默认插槽"
     }
   ],
-  "Events": []
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Description": ""
+    }
+  ]
 }

@@ -1,16 +1,19 @@
-﻿---
-order: 0
-title: MFooter
 ---
 
+order: 0
+title: Footer
+
+---
+ 
 ## 属性
-
+ 
 属性
-
+ 
 ## 插槽
-
+ 
 插槽
-
+ 
 ## 事件
-
+ 
 事件
+ 

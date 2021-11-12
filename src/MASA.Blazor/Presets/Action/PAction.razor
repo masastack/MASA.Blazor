@@ -1,44 +1,44 @@
 ﻿@namespace MASA.Blazor.Presets
 @inherits BDomComponentBase
 
-<div style="width:100%" @ref="Ref">
-    <MTooltip Top Disabled="TooltipDisabled">
-        <ActivatorContent>
-            <MButton Color="@Color"
-                     Icon="@(_actionType == ActionTypes.Icon)"
-                     Fab="@Fab"
+<MTooltip Top Disabled="TooltipDisabled">
+    <ActivatorContent>
+        <span style="padding: 4px;@Style" class="@Class">
+            <MButton Color="@ComputedColor"
+                     Dark="Dark"
+                     Depressed="@Depressed"
+                     Disabled="Disabled"
+                     Icon="(ActionType == ActionTypes.Icon)"
+                     Large="@Large"
+                     Light="@Light"
+                     Loading="@_loading"
+                     Outlined="@Outlined"
                      Plain="@Plain"
+                     Rounded="@Rounded"
+                     Small="@Small"
                      Text="@Text"
                      Tile="@Tile"
-                     Rounded="@Rounded"
-                     Depressed="@Depressed"
-                     Outlined="@Outlined"
-                     Loading="@Loading"
-                     Disabled="Disabled"
-                     XSmall="@XSmall"
-                     Small="@Small"
-                     Large="@Large"
                      XLarge="@XLarge"
+                     XSmall="@XSmall"
                      Click="HandleClick"
-                     Style="@ActivatorStyle"
+                     @ref="ButtonForwardRef"
                      @attributes="context.Attrs">
-                @switch (_actionType)
+
+                @if (ShowIcon)
                 {
-                    case ActionTypes.Icon:
-                        <MIcon>@Icon</MIcon>
-                        break;
-                    case ActionTypes.Label:
-                        @Label
-                        break;
-                    default:
-                        <MIcon Left>@Icon</MIcon>
-                        @Label
-                        break;
+                    <MIcon Left="ActionType == ActionTypes.IconLabel" @ref="IconForwardRef">@Icon</MIcon>
                 }
+
+                @if (ShowLabel)
+                {
+                    <span @ref="LabelRef">@Label</span>
+                }
+
             </MButton>
-        </ActivatorContent>
-        <ChildContent>
-            @(Tip ?? Label)
-        </ChildContent>
-    </MTooltip>
-</div>
+        </span>
+    </ActivatorContent>
+
+    <ChildContent>
+        @(Tip ?? Label)
+    </ChildContent>
+</MTooltip>

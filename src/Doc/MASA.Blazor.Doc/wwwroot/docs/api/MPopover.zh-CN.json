@@ -28,6 +28,12 @@
       "Description": ""
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "MaxHeight",
       "Type": "StringNumber",
       "Default": "",
@@ -83,6 +89,10 @@
     }
   ],
   "Events": [
+    {
+      "Name": "Click",
+      "Description": ""
+    },
     {
       "Name": "OnClick",
       "Description": ""

@@ -1,7 +1,7 @@
 ---
 category: Components
-type: Banner
-title: Banner
+type: Banners
+title: Banners
 cols: 1
 ---
 

@@ -5,7 +5,7 @@
   "Props": [
     {
       "Name": "Border",
-      "Type": "Nullable`1",
+      "Type": "Borders",
       "Default": "",
       "Description": "在Alert组件内设置边框，可用的值有AlertBorder.Top| AlertBorder.Right | AlertBorder.Bottom | AlertBorder.Left"
     },
@@ -14,6 +14,18 @@
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "CloseIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "CloseLabel",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Color",
@@ -52,10 +64,52 @@
       "Description": "组件的海拔可接受 0 到 24 之间的值。"
     },
     {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的高度。"
+    },
+    {
       "Name": "Icon",
-      "Type": "String",
+      "Type": "StringBoolean",
       "Default": "null",
       "Description": "指定特定的图标。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最大高度。"
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最小高度。"
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最小宽度。"
     },
     {
       "Name": "Outlined",
@@ -70,10 +124,28 @@
       "Description": "显示较大的垂直居中图标，以引起更多注意。"
     },
     {
+      "Name": "Rounded",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": "对指定的组件应用 border-radius 样式。"
+    },
+    {
+      "Name": "Shaped",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Text",
@@ -82,22 +154,34 @@
       "Description": "将定义的 color 应用于文本和同样的低透明度背景。"
     },
     {
+      "Name": "Tile",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "删除组件的border-radius样式"
+    },
+    {
+      "Name": "Transition",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Type",
-      "Type": "Nullable`1",
+      "Type": "AlertTypes",
       "Default": "",
       "Description": "指定一个 AlertType.Success, AlertType.Info, AlertType.Warning 或 AlertType.Error 提示。使用上下文颜色并具有预定义的图标。"
     },
     {
-      "Name": "Visible",
+      "Name": "Value",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "控制组件可见还是隐藏。"
+      "Description": ""
     },
     {
-      "Name": "VisibleChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
-      "Description": ""
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最小宽度。"
     }
   ],
   "Contents": [
@@ -106,5 +190,10 @@
       "Description": "默认插槽"
     }
   ],
-  "Events": []
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Description": ""
+    }
+  ]
 }

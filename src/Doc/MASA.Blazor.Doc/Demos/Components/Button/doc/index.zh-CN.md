@@ -2,9 +2,9 @@
 category: Components
 subtitle: 按钮
 type: 按钮
-title: Button
+title: Buttons
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Button.svg
+cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg
 
 ---
 

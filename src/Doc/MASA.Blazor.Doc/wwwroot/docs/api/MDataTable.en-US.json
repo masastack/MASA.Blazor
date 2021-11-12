@@ -1,0 +1,431 @@
+﻿{
+  "Components": [
+    "DataTable"
+  ],
+  "Props": [
+    {
+      "Name": "Caption",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "CheckboxColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "Applies specified color to the control - it can be the name of material color (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5))."
+    },
+    {
+      "Name": "CustomFilter",
+      "Type": "Func`4",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "CustomGroup",
+      "Type": "Func`5",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "CustomItemFilter",
+      "Type": "Func`4",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "CustomSort",
+      "Type": "Func`6",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Decreases component’s height."
+    },
+    {
+      "Name": "DisableFiltering",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "DisablePagination",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "DisableSort",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Expanded",
+      "Type": "List`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ExpandIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "FixedHeader",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "FixedRight",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "FooterProps",
+      "Type": "Dictionary`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "GroupBy",
+      "Type": "OneOf`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "GroupDesc",
+      "Type": "IList`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "HeaderProps",
+      "Type": "Dictionary`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Headers",
+      "Type": "IEnumerable`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "HeadersLength",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the height for the component."
+    },
+    {
+      "Name": "HideDefaultFooter",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "HideDefaultHeader",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemKey",
+      "Type": "Func`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Items",
+      "Type": "IEnumerable`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemsPerPage",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "ItemValues",
+      "Type": "IEnumerable`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "LoaderHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Loading",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "LoadingText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Locale",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "MultiSort",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "MustSort",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "NoDataText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "NoResultsText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Page",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Search",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "SelectableKey",
+      "Type": "Func`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ServerItemsLength",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "ShowExpand",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ShowGroupBy",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ShowSelect",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SingleExpand",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SingleSelect",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SortBy",
+      "Type": "OneOf`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "SortDesc",
+      "Type": "OneOf`2",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Stripe",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Value",
+      "Type": "IEnumerable`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the width for the component."
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "BodyAppendContent",
+      "Description": ""
+    },
+    {
+      "Name": "BodyPrependContent",
+      "Description": ""
+    },
+    {
+      "Name": "CaptionContent",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Description": "Default Content"
+    },
+    {
+      "Name": "ExpandedItemContent",
+      "Description": ""
+    },
+    {
+      "Name": "FootContent",
+      "Description": ""
+    },
+    {
+      "Name": "FooterContent",
+      "Description": ""
+    },
+    {
+      "Name": "GroupContent",
+      "Description": ""
+    },
+    {
+      "Name": "GroupHeaderContent",
+      "Description": ""
+    },
+    {
+      "Name": "HeaderColContent",
+      "Description": ""
+    },
+    {
+      "Name": "HeaderContent",
+      "Description": ""
+    },
+    {
+      "Name": "ItemColContent",
+      "Description": ""
+    },
+    {
+      "Name": "ItemContent",
+      "Description": ""
+    },
+    {
+      "Name": "ItemDataTableExpandContent",
+      "Description": ""
+    },
+    {
+      "Name": "ItemDataTableSelectContent",
+      "Description": ""
+    },
+    {
+      "Name": "LoadingContent",
+      "Description": ""
+    },
+    {
+      "Name": "NoDataContent",
+      "Description": ""
+    },
+    {
+      "Name": "NoResultsContent",
+      "Description": ""
+    },
+    {
+      "Name": "PageTextContent",
+      "Description": ""
+    },
+    {
+      "Name": "ProgressContent",
+      "Description": ""
+    },
+    {
+      "Name": "TopContent",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnOptionsUpdate",
+      "Description": ""
+    },
+    {
+      "Name": "OnPageCount",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Description": ""
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ﻿{
   "Components": [
-    "Application"
+    "App"
   ],
   "Props": [
     {
@@ -14,6 +14,24 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "LeftToRight",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Style",

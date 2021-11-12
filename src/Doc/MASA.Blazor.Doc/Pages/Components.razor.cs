@@ -4,12 +4,14 @@ using BlazorComponent.Doc.Models;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using MASA.Blazor.Doc.Localization;
+using System.Diagnostics;
 
 namespace MASA.Blazor.Doc.Pages
 {
     public partial class Components
     {
         private DemoComponentModel _demoComponent;
+        private int _demoIndex;
 
         private DemoItemModel Usage { get; set; }
 
@@ -51,6 +53,8 @@ namespace MASA.Blazor.Doc.Pages
             EventsList = demos.Where(demo => demo.Group == DemoGroup.Events).ToList();
             ContentsList = demos.Where(demo => demo.Group == DemoGroup.Contents).ToList();
             MiscList = demos.Where(demo => demo.Group == DemoGroup.Misc).ToList();
+
+            _demoIndex = 0;
         }
     }
 }

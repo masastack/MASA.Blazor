@@ -28,6 +28,18 @@
       "Description": "减少组件的高度。"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Reverse",
       "Type": "Boolean",
       "Default": "false",

@@ -43,12 +43,6 @@ namespace MASA.Blazor
         [Parameter]
         public bool Tile { get; set; }
 
-        /// <summary>
-        /// Sets the component transition. TODO: no implementation
-        /// </summary>
-        [Parameter]
-        public string Transition { get; set; }
-
         [Parameter]
         public StringNumber Height { get; set; }
 
@@ -107,10 +101,10 @@ namespace MASA.Blazor
 
             var iconText = Type switch
             {
-                AlertTypes.Success => "mdi-check-circle",
-                AlertTypes.Error => "mdi-alert",
+                AlertTypes.Success => "mdi-checkbox-marked-circle-outline",
+                AlertTypes.Error => "mdi-alert-circle-outline",
                 AlertTypes.Info => "mdi-information",
-                AlertTypes.Warning => "mdi-exclamation",
+                AlertTypes.Warning => "mdi-alert-outline",
                 _ => null
             };
 
@@ -159,7 +153,6 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf("display:none", () => !Value)
                         .AddColor(ComputedColor, HasText, () => !ColoredBorder)
                         .AddHeight(Height)
                         .AddMaxHeight(MaxHeight)

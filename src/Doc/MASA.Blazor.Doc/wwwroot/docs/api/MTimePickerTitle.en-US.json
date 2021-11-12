@@ -1,0 +1,96 @@
+﻿{
+  "Components": [
+    "TimePickerTitle"
+  ],
+  "Props": [
+    {
+      "Name": "AmPm",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "AmPmReadonly",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Hour",
+      "Type": "Nullable`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Minute",
+      "Type": "Nullable`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Period",
+      "Type": "TimePeriod",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Second",
+      "Type": "Nullable`1",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Selecting",
+      "Type": "SelectingTimes",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "UseSeconds",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    }
+  ],
+  "Contents": [],
+  "Events": [
+    {
+      "Name": "OnPeriodUpdate",
+      "Description": ""
+    },
+    {
+      "Name": "OnSelectingUpdate",
+      "Description": ""
+    }
+  ]
+}

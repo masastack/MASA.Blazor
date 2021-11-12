@@ -1,16 +1,19 @@
-﻿---
-order: 0
-title: MPagination
 ---
 
+order: 0
+title: Pagination
+
+---
+ 
 ## 属性
-
+ 
 属性
-
+ 
 ## 插槽
-
+ 
 插槽
-
+ 
 ## 事件
-
+ 
 事件
+ 

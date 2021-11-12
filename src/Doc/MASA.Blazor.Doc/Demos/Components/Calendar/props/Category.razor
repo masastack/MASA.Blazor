@@ -1,0 +1,49 @@
+﻿<div>TODO</div>
+@*@using OneOf;
+<MRow Class="fill-height">
+    <MCol>
+        <MSheet Height="64">
+            <MToolbar Flat>
+                <MButton Outlined Class="mr-4" Color="grey darken-2" Click="SetToday">
+                    Today
+                </MButton>
+                <MButton Fab Text Small Color="grey darken-2" Click="Prev">
+                    <MIcon Small>mdi-chevron-left</MIcon>
+                </MButton>
+                <MButton Fab Text Small Color="grey darken-2" Click="Next">
+                    <MIcon Small>mdi-chevron-right</MIcon>
+                </MButton>
+                @if (_calendar != null)
+                {
+                    <MToolbar>@_calendar.Title</MToolbar>
+                }
+                <MSpacer></MSpacer>
+            </MToolbar>
+        </MSheet>
+        <MSheet Height="600">
+            <MCalendar @ref="_calendar" @bind-Value="_focus" Color="primary" Type="category" 
+                CategoryShowAll Categories="_categories" Events="_events" EventColor="_color"></MCalendar>
+        </MSheet>
+    </MCol>
+</MRow>
+
+@code{
+    private MCalendar _calendar;
+    private string _focus = string.Empty;
+    private List<Dictionary<string, object>> _events = new();
+    private List<OneOf<string, Dictionary<string, object>>> _categories = new() { "John Smith", "Tori Walker"};
+    private Func<Dictionary<string, object>, string> _color = dic => { return "blue"; };
+
+    private void SetToday() => _focus = string.Empty;
+
+    private void Prev() => _calendar.Prev();
+
+    private void Next() => _calendar.Next();
+
+    private void FetchEvents(CalendarTimestamp start, CalendarTimestamp end)
+    {
+        
+
+    }
+}
+*@

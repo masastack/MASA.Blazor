@@ -4,6 +4,12 @@
   ],
   "Props": [
     {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "BackgroundColor",
       "Type": "String",
       "Default": "null",
@@ -28,12 +34,6 @@
       "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
     },
     {
-      "Name": "Column",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Dark",
       "Type": "Boolean",
       "Default": "false",
@@ -52,9 +52,27 @@
       "Description": "通常用于 v-toolbar 和 v-app-bar。删除背景颜色、边框并增加按钮的间距"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Mandatory",
       "Type": "Boolean",
       "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Max",
+      "Type": "StringNumber",
+      "Default": "null",
       "Description": ""
     },
     {
@@ -89,27 +107,15 @@
     },
     {
       "Name": "Value",
-      "Type": "String",
+      "Type": "StringNumber",
       "Default": "null",
       "Description": "组件的指定 model 值。"
-    },
-    {
-      "Name": "ValueChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
-      "Description": ""
     },
     {
       "Name": "Values",
       "Type": "List`1",
       "Default": "",
       "Description": "组件的指定 model 值。"
-    },
-    {
-      "Name": "ValuesChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
-      "Description": ""
     }
   ],
   "Contents": [
@@ -118,5 +124,14 @@
       "Description": "默认插槽"
     }
   ],
-  "Events": []
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Description": ""
+    },
+    {
+      "Name": "ValuesChanged",
+      "Description": ""
+    }
+  ]
 }

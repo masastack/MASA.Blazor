@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>MASA.Blazor.Doc.WebAssembly</title>
+    <base href="/" />
+    <link rel="icon" href="https://cdn.masastack.com/images/logo/MASA.Blazor/96.png" type="image/x-icon">
+    <link href="_content/MASA.Blazor/css/masa-blazor.css" rel="stylesheet">
+    <link href="_content/MASA.Blazor/css/masa-extend-blazor.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;display=swap" media="all">
+    <link href="_content/MASA.Blazor.Doc/css/demo.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="app">Loading...</div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+    <script src="_content/MASA.Blazor.Doc/js/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"></script>
+    <script>
+        window.BlazorComponent.Prism = {};
+        window.BlazorComponent.Prism.highlight = function (code, language,component,codeElement) {
+            setTimeout(function(){
+                var highlightCode= Prism.highlight(code, Prism.languages[language], language);
+                codeElement.innerHTML=highlightCode;
+                component.invokeMethodAsync('OnAfterHighlighted');
+            },0);
+        }
+
+        window.BlazorComponent.Prism.highlightAll = function () {
+            var pres = document.querySelectorAll("pre");
+
+            for (var i = 0; i < pres.length; i++) {
+                let pre = pres[i];
+
+                let parent = pre.parentElement;
+                if (parent.classList[0] == "app-code") {
+                    break;
+                }
+
+                let div = document.createElement("div");
+                div.className = "app-code overflow-hidden m-sheet m-sheet--outlined theme--light rounded grey lighten-5";
+                div.style = "opacity:0.85"
+
+                parent.replaceChild(div, pre);
+                div.appendChild(pre);
+            }
+
+            Prism.highlightAll();
+        }
+
+        window.testUploadFile = function(element) {
+            let result = []
+
+            if(element){
+                for(let i = 0; i< element.files.length; i++){
+                    var file = element.files[i]
+
+                    // TODO: oss here
+
+                    let fileInfo = {
+                        fileName: file.name,
+                        uploaded: true,
+                        error: null,
+                        url: "",
+                        value: null
+                    }
+
+                    result.push(fileInfo)
+                }
+            }
+
+            return result;
+        }
+    </script>
+</body>
+</html>

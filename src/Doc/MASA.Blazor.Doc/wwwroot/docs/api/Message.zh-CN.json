@@ -1,0 +1,37 @@
+﻿{
+  "Components": [
+    "essage"
+  ],
+  "Props": [
+    {
+      "Name": "Timeout",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Type",
+      "Type": "AlertTypes",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Visible",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "VisibleChanged",
+      "Description": ""
+    }
+  ]
+}

@@ -14,10 +14,16 @@
 
         @((MarkupString)_demoComponent.Desc)
 
+        <div class="mb-8">
+            <div class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 m-vuetify-ad m-sheet m-sheet--outlined theme--light rounded" medium="docs" style="width: 100%; min-height: 74px;">
+            </div>
+        </div>
+
         @if (Usage != null)
         {
+            var index = _demoIndex++;
             <SectionContent Title="@Usage.Title" Level="2" IsAnchor>
-                <CodeBox Demo="Usage" ComponentName="@_demoComponent.Title"></CodeBox>
+                <CodeBox Index="index" Demo="Usage" @key="_demoComponent.Title" ComponentName="@_demoComponent.Title"></CodeBox>
             </SectionContent>
         }
 
@@ -36,8 +42,9 @@
                     <SectionContent Title="@props.Title" Id="props" Level="3" IsAnchor>
                         @foreach (var item in PropsList)
                         {
+                            var index = _demoIndex++;
                             <SectionContent Title="@item.Title" Level="4" IsAnchor>
-                                <CodeBox Demo="item" ComponentName="@_demoComponent?.Title" @key="@($"{_demoComponent.Title}-{item.Title}")"></CodeBox>
+                                <CodeBox Index="index" Demo="item" ComponentName="@_demoComponent?.Title" @key="@($"{_demoComponent.Title}-{item.Title}")"></CodeBox>
                             </SectionContent>
                         }
                     </SectionContent>
@@ -50,8 +57,9 @@
                     <SectionContent Title="@contents.Title" Id="events" Level="3" IsAnchor>
                         @foreach (var item in EventsList)
                         {
+                            var index = _demoIndex++;
                             <SectionContent Title="@item.Title" Level="4" IsAnchor>
-                                <CodeBox Demo="item" ComponentName="@_demoComponent?.Title" @key="@($"{_demoComponent.Title}-{item.Title}")"></CodeBox>
+                                <CodeBox Index="index" Demo="item" ComponentName="@_demoComponent?.Title" @key="@($"{_demoComponent.Title}-{item.Title}")"></CodeBox>
                             </SectionContent>
                         }
                     </SectionContent>
@@ -64,8 +72,9 @@
                     <SectionContent Title="@contents.Title" Id="contents" Level="3" IsAnchor>
                         @foreach (var item in ContentsList)
                         {
+                            var index = _demoIndex++;
                             <SectionContent Title="@item.Title" Level="4" IsAnchor>
-                                <CodeBox Demo="item" ComponentName="@_demoComponent?.Title" @key="@($"{_demoComponent.Title}-{item.Title}")"></CodeBox>
+                                <CodeBox Index="index" Demo="item" ComponentName="@_demoComponent?.Title" @key="@($"{_demoComponent.Title}-{item.Title}")"></CodeBox>
                             </SectionContent>
                         }
                     </SectionContent>
@@ -78,15 +87,14 @@
                     <SectionContent Title="@misc.Title" Id="misc" Level="3" IsAnchor>
                         @foreach (var item in MiscList)
                         {
+                            var index = _demoIndex++;
                             <SectionContent Title="@item.Title" Level="4" IsAnchor>
-                                <CodeBox Demo="item" ComponentName="@_demoComponent?.Title" @key="@($"{_demoComponent.Title}-{item.Title}")"></CodeBox>
+                                <CodeBox Index="index" Demo="item" ComponentName="@_demoComponent?.Title" @key="@($"{_demoComponent.Title}-{item.Title}")"></CodeBox>
                             </SectionContent>
                         }
                     </SectionContent>
                 }
-
             </SectionContent>
         }
-
     </SectionContent>
 }

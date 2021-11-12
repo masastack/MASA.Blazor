@@ -2,7 +2,7 @@
 category: Components
 subtitle: 工具栏
 type: 工具栏
-title: Toolbar
+title: Toolbars
 cols: 1
 
 ---

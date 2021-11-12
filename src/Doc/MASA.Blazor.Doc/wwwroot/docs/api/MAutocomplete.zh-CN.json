@@ -4,6 +4,30 @@
   ],
   "Props": [
     {
+      "Name": "AppendIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AppendOuterIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Autofocus",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "BackgroundColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Chips",
       "Type": "Boolean",
       "Default": "false",
@@ -16,10 +40,46 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
+      "Name": "Clearable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ClearIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Counter",
+      "Type": "StringNumberBoolean",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "CounterValue",
+      "Type": "Func`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Dark",
       "Type": "Boolean",
       "Default": "false",
       "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "DeletableChips",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Dense",
@@ -34,6 +94,24 @@
       "Description": "禁用输入"
     },
     {
+      "Name": "Error",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ErrorCount",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "ErrorMessages",
+      "Type": "List`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Filled",
       "Type": "Boolean",
       "Default": "false",
@@ -46,15 +124,51 @@
       "Description": ""
     },
     {
+      "Name": "Flat",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "FullWidth",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "HideDetails",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Hint",
       "Type": "String",
       "Default": "null",
       "Description": "提示文本"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Interval",
       "Type": "Double",
       "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "ItemDisabled",
+      "Type": "Func`2",
+      "Default": "null",
       "Description": ""
     },
     {
@@ -82,8 +196,20 @@
       "Description": "设置输入标签"
     },
     {
-      "Name": "Loading",
+      "Name": "Light",
       "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "LoaderHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Loading",
+      "Type": "StringBoolean",
       "Default": "false",
       "Description": "显示线性进度条。可以是指定将哪种颜色应用于进度条的字符串（任何 material 色彩——主要（primary）, 次要（secondary）, 成功（success）, 信息（info），警告（warning），错误（error）），或者使用组件的布尔值 color（由色彩属性设置——如果它被组件支持的话）还可以是原色。"
     },
@@ -91,6 +217,12 @@
       "Name": "MenuProps",
       "Type": "BMenuProps",
       "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Messages",
+      "Type": "List`1",
+      "Default": "null",
       "Description": ""
     },
     {
@@ -118,10 +250,82 @@
       "Description": "强制提示总是可见的"
     },
     {
+      "Name": "PersistentPlaceholder",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Placeholder",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Prefix",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PrependIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PrependInnerIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Reverse",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Rounded",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "对指定的组件应用 border-radius 样式。"
+    },
+    {
+      "Name": "Shaped",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SingleLine",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SmallChips",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Solo",
       "Type": "Boolean",
       "Default": "false",
       "Description": "改变输入框的样式"
+    },
+    {
+      "Name": "SoloInverted",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Style",
@@ -130,40 +334,162 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
+      "Name": "Success",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SuccessMessages",
+      "Type": "List`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Suffix",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Type",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ValidateOnBlur",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Value",
       "Type": "TValue",
       "Default": "",
       "Description": "输入的值"
     },
     {
-      "Name": "ValueChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
-      "Description": ""
-    },
-    {
-      "Name": "Values",
-      "Type": "List`1",
-      "Default": "",
-      "Description": "输入的值"
-    },
-    {
-      "Name": "ValuesChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
+      "Name": "ValueExpression",
+      "Type": "Expression`1",
+      "Default": "null",
       "Description": ""
     }
   ],
   "Contents": [
     {
+      "Name": "Append",
+      "Description": ""
+    },
+    {
+      "Name": "AppendContent",
+      "Description": ""
+    },
+    {
+      "Name": "AppendItemContent",
+      "Description": ""
+    },
+    {
+      "Name": "AppendOuterContent",
+      "Description": ""
+    },
+    {
       "Name": "ChildContent",
       "Description": "默认插槽"
+    },
+    {
+      "Name": "CounterContent",
+      "Description": ""
+    },
+    {
+      "Name": "LabelContent",
+      "Description": ""
+    },
+    {
+      "Name": "MessageContent",
+      "Description": ""
+    },
+    {
+      "Name": "Prepend",
+      "Description": ""
+    },
+    {
+      "Name": "PrependContent",
+      "Description": ""
+    },
+    {
+      "Name": "PrependInnerContent",
+      "Description": ""
+    },
+    {
+      "Name": "PrependItemContent",
+      "Description": ""
+    },
+    {
+      "Name": "ProgressContent",
+      "Description": ""
+    },
+    {
+      "Name": "SelectionContent",
+      "Description": ""
     }
   ],
   "Events": [
     {
+      "Name": "OnAppendClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnAppendOuterClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnBlur",
+      "Description": ""
+    },
+    {
+      "Name": "OnChange",
+      "Description": ""
+    },
+    {
+      "Name": "OnClearClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnFocus",
+      "Description": ""
+    },
+    {
       "Name": "OnInput",
-      "Description": "被绑定模型的更新"
+      "Description": ""
+    },
+    {
+      "Name": "OnKeyDown",
+      "Description": ""
+    },
+    {
+      "Name": "OnMouseDown",
+      "Description": ""
+    },
+    {
+      "Name": "OnMouseUp",
+      "Description": ""
+    },
+    {
+      "Name": "OnPrependClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnPrependInnerClick",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Description": ""
     }
   ]
 }

@@ -1,37 +1,13 @@
 ﻿{
   "Components": [
-    "Application"
+    "Footer"
   ],
   "Props": [
-    {
-      "Name": "Class",
-      "Type": "String",
-      "Default": "null",
-      "Description": "应用到组件最外层元素的class"
-    },
-    {
-      "Name": "Dark",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": "将暗色主题变量应用到组件。"
-    },
-    {
-      "Name": "Style",
-      "Type": "String",
-      "Default": "null",
-      "Description": "应用到组件最外层元素的style"
-    },
-    {
-      "Name": "Light",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": "将亮色主题变量应用到组件。"
-    },
     {
       "Name": "Absolute",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "给组件应用 position: absolute。"
+      "Description": "应用 position: absolute 样式到组件."
     },
     {
       "Name": "App",
@@ -40,10 +16,28 @@
       "Description": "指定该组件作为应用程序布局的一部分。用于动态调整内容的大小。"
     },
     {
+      "Name": "Bottom",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": "设定组件的底部边距。"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
       "Name": "Color",
       "Type": "String",
       "Default": "",
       "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
     },
     {
       "Name": "Elevation",
@@ -55,19 +49,19 @@
       "Name": "Fixed",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "给组件应用 position: fixed。"
+      "Description": "给组件应用 position: fixed"
     },
     {
       "Name": "Height",
       "Type": "StringNumber",
       "Default": "",
-      "Description": "设定组件的宽度。"
+      "Description": "设定组件的高度。"
     },
     {
-      "Name": "Width",
-      "Type": "StringNumber",
-      "Default": "false",
-      "Description": "给组件应用 position: absolute。"
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Inset",
@@ -76,22 +70,34 @@
       "Description": "定位工具栏偏离应用程序的m-navigation-drawer的位置。"
     },
     {
+      "Name": "Left",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将亮色主题变量应用到组件。"
+    },
+    {
       "Name": "MaxHeight",
       "Type": "StringNumber",
       "Default": "",
       "Description": "设定组件的最大高度。"
     },
     {
-      "Name": "MinHeight",
-      "Type": "StringNumber",
-      "Default": "",
-      "Description": "设定组件的最小高度。"
-    },
-    {
       "Name": "MaxWidth",
       "Type": "StringNumber",
       "Default": "",
       "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小高度。"
     },
     {
       "Name": "MinWidth",
@@ -106,34 +112,34 @@
       "Description": "删除页脚中的所有边距。"
     },
     {
+      "Name": "Right",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": "设定组件的右侧边距。"
+    },
+    {
       "Name": "Rounded",
       "Type": "StringBoolean",
       "Default": "",
       "Description": "对指定的组件应用 border-radius 样式。"
     },
     {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
       "Name": "Tile",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "删除组件的border-radius样式。"
+      "Description": "删除组件的border-radius样式"
     },
     {
-      "Name": "Right",
-      "Type": "Int",
-      "Default": "0",
-      "Description": "设定组件的右侧边距。"
-    },
-    {
-      "Name": "Light",
-      "Type": "Int",
-      "Default": "0",
-      "Description": "设定组件的左侧边距。"
-    },
-    {
-      "Name": "Bottom",
-      "Type": "Int",
-      "Default": "0",
-      "Description": "设定组件的底部边距。"
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "false",
+      "Description": "设定组件的最小宽度。"
     }
   ],
   "Contents": [

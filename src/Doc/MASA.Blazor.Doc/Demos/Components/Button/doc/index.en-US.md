@@ -1,9 +1,9 @@
 ---
 category: Components
-type: Button
-title: Button
+type: Buttons
+title: Buttons
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Button.svg
+cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg
 ---
 
 To trigger an operation.

@@ -4,9 +4,9 @@
   ],
   "Props": [
     {
-      "Name": "Active",
-      "Type": "Boolean",
-      "Default": "false",
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
@@ -22,10 +22,34 @@
       "Description": "禁用扩展面板内容"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "IsActive",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
     }
   ],
   "Contents": [

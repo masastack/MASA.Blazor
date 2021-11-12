@@ -1,11 +1,11 @@
 ﻿{
   "Components": [
-    "Grid"
+    "Col"
   ],
   "Props": [
     {
       "Name": "Align",
-      "Type": "OneOf`2",
+      "Type": "StringEnum`1",
       "Default": "null",
       "Description": "应用 align-items css 属性。可用的选项是start, center, end, auto, baseline 和 stretch。"
     },
@@ -25,6 +25,12 @@
       "Name": "Flex",
       "Type": "StringNumber",
       "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
@@ -104,6 +110,12 @@
       "Type": "StringNumber",
       "Default": "",
       "Description": "在较小和较大的断点上更改列数，可用的选项是 1 -> 12 和 auto 。"
+    },
+    {
+      "Name": "Span",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Style",

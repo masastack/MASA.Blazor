@@ -16,6 +16,8 @@ namespace MASA.Blazor
 
         protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             Tabs?.RegisterTabItem(this);
         }
 

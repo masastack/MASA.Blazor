@@ -8,23 +8,23 @@ namespace MASA.Blazor
 {
     public partial class MSnackbar : BSnackbar, IThemeable, ISnackbar
     {
-        private bool _isActive;
+        private bool _value;
 
         [Parameter]
         public bool Absolute { get; set; }
 
         [Parameter]
-        public bool IsActive
+        public bool Value
         {
             get
             {
-                return _isActive;
+                return _value;
             }
             set
             {
-                _isActive = value;
+                _value = value;
 
-                if (_isActive && Timeout > 0)
+                if (_value && Timeout > 0)
                 {
                     if (Timer == null)
                     {
@@ -132,7 +132,7 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add(prefix)
                         .AddIf($"{prefix}--absolute", () => Absolute)
-                        .AddIf($"{prefix}--active", () => IsActive)
+                        .AddIf($"{prefix}--active", () => Value)
                         .AddIf($"{prefix}--bottom", () => Bottom || !Top)
                         .AddIf($"{prefix}--centered", () => Centered)
                         .AddIf($"{prefix}--has-background", () => !Text && !Outlined)
@@ -163,7 +163,7 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf("display:none", () => !IsActive);
+                        .AddIf("display:none", () => !Value);
                 })
                 .Apply("content", cssBuilder =>
                 {
@@ -184,11 +184,11 @@ namespace MASA.Blazor
                     props[nameof(MButton.Text)] = true;
                     props[nameof(MButton.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
-                        IsActive = false;
+                        Value = false;
                         Timer.Stop();
                         if (IsActiveChanged.HasDelegate)
                         {
-                            await IsActiveChanged.InvokeAsync(_isActive);
+                            await IsActiveChanged.InvokeAsync(_value);
                         }
                         if (OnClosed.HasDelegate)
                         {
@@ -200,10 +200,10 @@ namespace MASA.Blazor
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            IsActive = false;
+            Value = false;
             if (IsActiveChanged.HasDelegate)
             {
-                InvokeAsync(() => IsActiveChanged.InvokeAsync(_isActive));
+                InvokeAsync(() => IsActiveChanged.InvokeAsync(_value));
             }
             if (OnClosed.HasDelegate)
             {

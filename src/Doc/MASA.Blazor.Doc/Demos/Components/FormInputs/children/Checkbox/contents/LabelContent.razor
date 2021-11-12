@@ -1,0 +1,22 @@
+﻿<MContainer Fluid>
+    <MCheckbox @bind-Value="checkbox">
+        <LabelContent>
+            <div>
+                I agree that
+                <MTooltip Bottom>
+                    <ActivatorContent>
+                        <a target="_blank" href="https://vuetifyjs.com" @attributes="@context.Attrs">Vuetify</a>
+                    </ActivatorContent>
+                    <ChildContent>
+                        Opens in new window
+                    </ChildContent>
+                </MTooltip>
+                is awesome
+            </div>
+        </LabelContent>
+    </MCheckbox>
+</MContainer>
+
+@code {
+    bool checkbox = false;
+}

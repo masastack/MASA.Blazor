@@ -54,7 +54,7 @@ namespace MASA.Blazor
         RenderFragment IDataIterator<TItem>.ChildContent => ChildContent == null ? null : ChildContent((ComputedItems, IsExpanded, Expand));
 
         [Parameter]
-        public RenderFragment<(int Index, TItem Item)> ItemContent { get; set; }
+        public RenderFragment<ItemProps<TItem>> ItemContent { get; set; }
 
         [Parameter]
         public RenderFragment LoadingContent { get; set; }

@@ -22,10 +22,22 @@
       "Description": "防止图像不合适时被裁剪"
     },
     {
+      "Name": "ContentClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Dark",
       "Type": "Boolean",
       "Default": "false",
       "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Gradient",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Height",
@@ -34,10 +46,22 @@
       "Description": "设定组件的高度。"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "LazySrc",
       "Type": "String",
       "Default": "",
       "Description": "在等待主映像加载时显示的内容，通常是一个小型的base64编码的缩略图。有一个轻微的模糊滤镜应用。"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "MaxHeight",
@@ -64,6 +88,12 @@
       "Description": "设定组件的最小宽度。"
     },
     {
+      "Name": "Position",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Src",
       "Type": "String",
       "Default": "null",
@@ -79,9 +109,18 @@
       "Name": "Width",
       "Type": "StringNumber",
       "Default": "",
-      "Description": "设定组件的宽度。"
+      "Description": "设定组件的最小宽度。"
     }
   ],
-  "Contents": [],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "PlaceholderContent",
+      "Description": ""
+    }
+  ],
   "Events": []
 }

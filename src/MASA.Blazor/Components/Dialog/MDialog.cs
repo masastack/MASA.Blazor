@@ -14,6 +14,10 @@ namespace MASA.Blazor
     {
         private bool _animated = false;
 
+        protected override string AttachSelector => Attach ?? ".m-application";
+
+        public bool ShowContent { get; set; }
+
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
 
@@ -47,6 +51,23 @@ namespace MASA.Blazor
                 }
 
                 return Themeable != null && Themeable.IsDark;
+            }
+        }
+
+        public Dictionary<string, object> ContentAttrs
+        {
+            get
+            {
+                var attrs = new Dictionary<string, object>
+                {
+                    {"role", "document"}
+                };
+                if (Value)
+                {
+                    attrs.Add("tabindex", 0);
+                }
+
+                return attrs;
             }
         }
 
@@ -104,7 +125,7 @@ namespace MASA.Blazor
                         }
                         else
                         {
-                            Value = false;
+                            await UpdateValue(false);
                         }
 
                         if (OnOutsideClick.HasDelegate)
@@ -113,21 +134,23 @@ namespace MASA.Blazor
                 })
                 .ApplyDialogDefault();
         }
-        
-        public Dictionary<string, object> ContentAttrs
-        {
-            get
-            {
-                var attrs = new Dictionary<string, object>
-                {
-                    {"role", "document"}
-                };
-                if (Value)
-                {
-                    attrs.Add("tabindex", 0);
-                }
 
-                return attrs;
+        public override async Task ShowLazyContent()
+        {
+            if (!ShowContent && Value)
+            {
+                ShowContent = true;
+                Value = false;
+
+                StateHasChanged();
+
+                Value = true;
+
+                var overlayElement = ((BDomComponentBase)Overlay.Instance).Ref;
+                await JsInvokeAsync(JsInteropConstants.AddElementTo, overlayElement, AttachSelector);
+                await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachSelector);
+
+                StateHasChanged();
             }
         }
     }

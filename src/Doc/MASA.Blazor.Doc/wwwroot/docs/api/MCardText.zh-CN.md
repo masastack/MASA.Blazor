@@ -1,16 +1,19 @@
-﻿---
-order: 0
-title: MCardText
 ---
 
+order: 0
+title: CardText
+
+---
+ 
 ## 属性
-
+ 
 属性
-
+ 
 ## 插槽
-
+ 
 插槽
-
+ 
 ## 事件
-
+ 
 事件
+ 

@@ -22,6 +22,12 @@
       "Description": "设定组件的高度。"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Left",
       "Type": "Boolean",
       "Default": "false",
@@ -85,7 +91,7 @@
       "Name": "Width",
       "Type": "StringNumber",
       "Default": "",
-      "Description": "设定组件的宽度。"
+      "Description": "设定组件的最小宽度。"
     }
   ],
   "Contents": [

@@ -1,0 +1,36 @@
+<MCard
+    Class="mx-auto"
+    MaxWidth="400">
+    <MList>
+        <MListItemGroup
+            @bind-Values="model"
+            Multiple
+            Color="indigo">
+            @foreach (var item in items)
+            {
+                <MListItem @key="item">
+                    <MListItemIcon>
+                        <MIcon>@item.icon</MIcon>
+                    </MListItemIcon>
+
+                    <MListItemContent>
+                        <MListItemTitle>@item.text</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+            }
+        </MListItemGroup>
+    </MList>
+</MCard>
+
+@code {
+
+    List<(string icon, string text)> items = new()
+    {
+        ("mdi-wifi", "Wifi"),
+        ("mdi-bluetooth", "Bluetooth"),
+        ("mdi-chart-donut", "Data Usage"),
+    };
+
+    List<StringNumber> model = new() {1};
+
+}

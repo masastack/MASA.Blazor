@@ -1,0 +1,23 @@
+﻿<MSheet Class="mx-auto" MaxWidth="800" Elevation="8">
+    <MSlideGroup ShowArrows="@(true)" Class="pa-4" PrevIcon="mdi-minus" NextIcon="mdi-plus">
+        @foreach (var item in Enumerable.Range(1, 15))
+        {
+            <MSlideItem>
+                <MCard Color="@(context.Active ? "primary" : "grey lighten-1")"
+                       Class="ma-4"
+                       Height="200"
+                       Width="100"
+                       OnClick="@context.Toggle"
+                       RefBack="@context.Ref">
+                    <MRow Class="fill-height" Align="AlignTypes.Center" Justify="JustifyTypes.Center">
+                        <ScaleTransition>
+                            <Element Show="context.Active">
+                                <MIcon Color="white" Size="48">mdi-close-circle-outline</MIcon>
+                            </Element>
+                        </ScaleTransition>
+                    </MRow>
+                </MCard>
+            </MSlideItem>
+        }
+    </MSlideGroup>
+</MSheet>

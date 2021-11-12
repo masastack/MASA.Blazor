@@ -10,6 +10,12 @@
       "Description": "应用 position: absolute 样式到组件."
     },
     {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Block",
       "Type": "Boolean",
       "Default": "false",
@@ -20,6 +26,12 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "将组件向底部对齐。"
+    },
+    {
+      "Name": "Button",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Class",
@@ -40,12 +52,6 @@
       "Description": "将暗色主题变量应用到组件。"
     },
     {
-      "Name": "Default",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Depressed",
       "Type": "Boolean",
       "Default": "false",
@@ -58,10 +64,22 @@
       "Description": "移除组件的单击或 target 功能。"
     },
     {
+      "Name": "Elevation",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "组件的海拔可接受 0 到 24 之间的值。"
+    },
+    {
       "Name": "Fab",
       "Type": "Boolean",
       "Default": "false",
       "Description": "将按钮指定为浮动动作按钮。按钮会变圆。"
+    },
+    {
+      "Name": "Fixed",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "给组件应用 position: fixed"
     },
     {
       "Name": "Height",
@@ -74,6 +92,12 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "将按钮指定为图标。按钮将变成圆形，并应用text属性。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "IsActive",
@@ -92,6 +116,12 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "将组件向左对齐。 这应该与 absolute 或 fixed 属性一起使用。"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Loading",
@@ -142,10 +172,22 @@
       "Description": "将组件向右对齐。这应该与 absolute 或 fixed 属性一起使用。"
     },
     {
+      "Name": "Ripple",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Rounded",
       "Type": "Boolean",
       "Default": "false",
       "Description": "对指定的组件应用 border-radius 样式。"
+    },
+    {
+      "Name": "Shaped",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Small",
@@ -191,7 +233,7 @@
     },
     {
       "Name": "Value",
-      "Type": "String",
+      "Type": "StringNumber",
       "Default": "null",
       "Description": ""
     },
@@ -199,7 +241,7 @@
       "Name": "Width",
       "Type": "StringNumber",
       "Default": "",
-      "Description": "设定组件的宽度。"
+      "Description": "设定组件的最小宽度。"
     },
     {
       "Name": "XLarge",
@@ -221,13 +263,17 @@
     },
     {
       "Name": "LoaderContent",
-      "Description": "自定义加载插槽。"
+      "Description": ""
     }
   ],
   "Events": [
     {
+      "Name": "Click",
+      "Description": ""
+    },
+    {
       "Name": "OnClick",
-      "Description": "单击组件时发出的事件"
+      "Description": ""
     }
   ]
 }

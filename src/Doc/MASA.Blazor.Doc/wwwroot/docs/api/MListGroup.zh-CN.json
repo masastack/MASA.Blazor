@@ -1,6 +1,6 @@
 ﻿{
   "Components": [
-    "List"
+    "ListGroup"
   ],
   "Props": [
     {
@@ -34,6 +34,12 @@
       "Description": "禁用所有子级的 v-list-item 组件"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "NoAction",
       "Type": "Boolean",
       "Default": "false",
@@ -56,6 +62,12 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "将组件指定为嵌套列表组"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     }
   ],
   "Contents": [
@@ -68,5 +80,10 @@
       "Description": "默认插槽"
     }
   ],
-  "Events": []
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Description": ""
+    }
+  ]
 }

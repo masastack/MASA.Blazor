@@ -128,10 +128,6 @@ ol, ul {
     margin-bottom: 16px;
 }
 
-    ul.m-date-picker-years {
-        margin-bottom: 0;
-    }
-
 .default-toc .m-toc-link {
     color: inherit;
 }
@@ -416,4 +412,39 @@ code[class*=language-], pre[class*=language-] {
 
 .m-application--is-ltr .m-list--dense.m-list--nav .m-list-group--no-action.m-list-group--sub-group > .m-list-group__items > .m-list-item {
     padding-left: 80px;
+}
+
+.m-presets-page-header {
+}
+
+.m-presets-page-header--h {
+    display: flex;
+    align-items: center;
+}
+
+.m-presets-page-header--h-title {
+    font-size: 24px;
+}
+
+.m-presets-page-header--h-subtitle {
+    color: #757575;
+}
+
+.m-presets-page-header--h-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+}
+
+.m-presets-page-header--h-actions > * {
+    margin: 0 4px;
+}
+
+.m-presets-page-header--h-actions > *:last-child {
+    margin-right: 0px;
+}
+
+.m-sheet.m-stepper:not(.m-sheet--outlined) {
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
 }

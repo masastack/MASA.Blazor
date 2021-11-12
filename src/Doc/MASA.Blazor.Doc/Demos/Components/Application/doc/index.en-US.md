@@ -3,7 +3,6 @@ category: Components
 type: Application
 title: Application
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Application.svg
 ---
 
-In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify¡¯s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.
+In `MASA Blazor`, the App properties on the `MApp` component and `MNavigationDrawer`, `MAppBar`, `MFooter` and other components help your application to adjust the size of the `MMain` component appropriately. This allows you to create truly unique interfaces without worrying about managing layout sizes. All applications need the `MApp` component. This is the mount point for many `MASA Blazor` components and functions, and ensures that it passes the default application theme (Dark/Light) to the child components, and ensures the correct cross-browser support for certain click events in the browser .

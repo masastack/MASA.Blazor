@@ -34,6 +34,12 @@
       "Description": "禁用输入"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "IsActive",
       "Type": "Boolean",
       "Default": "false",
@@ -50,6 +56,12 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "当按钮放置在另一个元素或文本的左边时，对按钮内的图标应用适当的间距。"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Right",
@@ -77,7 +89,7 @@
     },
     {
       "Name": "Tag",
-      "Type": "IconTag",
+      "Type": "String",
       "Default": "",
       "Description": "指定要使用的自定义标签"
     },

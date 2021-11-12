@@ -16,10 +16,28 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
+      "Name": "Clearable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Color",
       "Type": "String",
       "Default": "null",
       "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "减少组件的高度。"
     },
     {
       "Name": "EmptyIcon",
@@ -52,6 +70,12 @@
       "Description": "将鼠标悬停在图标上时提供视觉反馈"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Large",
       "Type": "Boolean",
       "Default": "false",
@@ -59,13 +83,25 @@
     },
     {
       "Name": "Length",
-      "Type": "Double",
+      "Type": "StringNumber",
       "Default": "",
       "Description": "要显示的评分数量"
     },
     {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Size",
-      "Type": "String",
+      "Type": "StringNumber",
       "Default": "null",
       "Description": "设置组件的高度和宽度."
     },
@@ -84,12 +120,6 @@
     {
       "Name": "Value",
       "Type": "Double",
-      "Default": "",
-      "Description": ""
-    },
-    {
-      "Name": "ValueChanged",
-      "Type": "EventCallback`1",
       "Default": "",
       "Description": ""
     },
@@ -113,8 +143,13 @@
     },
     {
       "Name": "ItemContent",
-      "Description": "已渲染项目的插槽"
+      "Description": ""
     }
   ],
-  "Events": []
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Description": ""
+    }
+  ]
 }

@@ -4,16 +4,76 @@
   ],
   "Props": [
     {
+      "Name": "Attach",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Class",
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的class"
     },
     {
+      "Name": "CloseDelay",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Fullscreen",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "MaxWidth",
       "Type": "StringNumber",
       "Default": "",
       "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "OpenDelay",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnFocus",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnHover",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Persistent",
@@ -34,25 +94,23 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
-      "Name": "Visible",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "VisibleChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
+      "Name": "Transition",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
       "Name": "Width",
       "Type": "StringNumber",
       "Default": "",
-      "Description": "设定组件的宽度。"
+      "Description": "设定组件的最小宽度。"
     }
   ],
   "Contents": [
+    {
+      "Name": "ActivatorContent",
+      "Description": ""
+    },
     {
       "Name": "ChildContent",
       "Description": "默认插槽"
@@ -61,7 +119,11 @@
   "Events": [
     {
       "Name": "OnOutsideClick",
-      "Description": "在活动对话框外部单击时激发的事件。"
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Description": ""
     }
   ]
 }

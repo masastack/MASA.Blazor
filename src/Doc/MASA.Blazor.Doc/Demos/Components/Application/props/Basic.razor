@@ -1,22 +1,19 @@
 ﻿<MApp>
-    <MNavigationDrawer Absolute>
+    <MAppBar App Absolute Flat Style="grey lighten-1;"></MAppBar>
+
+    <MNavigationDrawer @bind-MiniVariant="_mini" Absolute Style="background-color:#F5F5F5">
+        <MListItem Class="px-2">
+            <MButton Icon OnClick="() => _mini = !_mini">
+                <MIcon>mdi-chevron-left</MIcon>
+            </MButton>
+        </MListItem>
     </MNavigationDrawer>
 
-    <MAppBar Absolute Left="_left">
-        app-bar
-    </MAppBar>
+    <MMain Class="grey lighten-3"></MMain>
 
-    <MMain Style="padding-left:256px;padding-top:56px;">
-        <MContainer>
-            main
-        </MContainer>
-    </MMain>
-
-    <MFooter Style="padding-left: 256px;">
-        <MContainer>footer</MContainer>
-    </MFooter>
+    <MFooter Style="padding-left: 256px;color:grey lighten-1;"></MFooter>
 </MApp>
 
 @code{
-    private string _left = "256px";
+    private bool _mini = false;
 }

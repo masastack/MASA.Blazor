@@ -1,16 +1,19 @@
 ﻿{
+  "Components": [
+    "ItemGroup"
+  ],
   "Props": [
+    {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
     {
       "Name": "Class",
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的class"
-    },
-    {
-      "Name": "Column",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
     },
     {
       "Name": "Dark",
@@ -19,10 +22,28 @@
       "Description": "将暗色主题变量应用到组件。"
     },
     {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Mandatory",
       "Type": "Boolean",
       "Default": "false",
       "Description": "强制始终选择一个值（如果可用）。"
+    },
+    {
+      "Name": "Max",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Multiple",
@@ -38,25 +59,13 @@
     },
     {
       "Name": "Value",
-      "Type": "String",
+      "Type": "StringNumber",
       "Default": "null",
-      "Description": ""
-    },
-    {
-      "Name": "ValueChanged",
-      "Type": "EventCallback`1",
-      "Default": "",
       "Description": ""
     },
     {
       "Name": "Values",
       "Type": "List`1",
-      "Default": "",
-      "Description": ""
-    },
-    {
-      "Name": "ValuesChanged",
-      "Type": "EventCallback`1",
       "Default": "",
       "Description": ""
     }
@@ -67,5 +76,14 @@
       "Description": "默认插槽"
     }
   ],
-  "Events": []
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Description": ""
+    },
+    {
+      "Name": "ValuesChanged",
+      "Description": ""
+    }
+  ]
 }
