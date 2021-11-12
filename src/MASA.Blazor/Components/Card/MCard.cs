@@ -87,9 +87,9 @@ namespace MASA.Blazor
         [Parameter]
         public string Target { get; set; }
 
-        public bool IsCascadingDark => Themeable != null && Themeable.IsDark;
+        public bool CascadingIsDark => Themeable != null && Themeable.IsDark;
 
-        public bool IsGloabDark => false;
+        public bool GloabIsDark => false;
 
         public bool IsClickable => !Disabled && (IsLink || OnClick.HasDelegate);
 
@@ -116,7 +116,7 @@ namespace MASA.Blazor
                         .AddIf("m-card--link", () => IsClickable)
                         .AddIf("m-card--loading", () => Loading == true)
                         .AddIf("m-card--disabled", () => Disabled)
-                        .AddIf("m-card--disabled", () => Raised);
+                        .AddIf("m-card--raised", () => Raised);
                 }, styleBuilder =>
                 {
                     styleBuilder

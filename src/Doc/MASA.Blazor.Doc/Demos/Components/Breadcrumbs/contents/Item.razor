@@ -1,4 +1,6 @@
-﻿<MBreadcrumbs Items="items">
+﻿@using BlazorComponent
+
+<MBreadcrumbs Items="items" TItem="BreadcrumbItem">
     <ItemContent>
         <MBreadcrumbsItem Href="@context.Href" Disabled="context.Disabled">
             @context.Text.ToUpper()
@@ -14,5 +16,4 @@
         new BreadcrumbItem() {Text = "Link 1", Disabled = false, Href = "#breadcrumbs_link_1"},
         new BreadcrumbItem() {Text = "Link 2", Disabled = true, Href = "#breadcrumbs_link_2"}
     };
-
 }
