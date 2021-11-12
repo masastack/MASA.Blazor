@@ -7,9 +7,8 @@ title:
 
 ## zh-CN
 
-标准的单选有多种配置选项
+标准的单选有多种配置选项。
 
 ## en-US
 
-Applying the `Disabled` prop to a `Select` will prevent a user from interacting with the component.
-
+A standard single select has a multitude of configuration options.

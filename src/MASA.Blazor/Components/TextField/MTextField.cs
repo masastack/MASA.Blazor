@@ -197,7 +197,7 @@ namespace MASA.Blazor
                     return CounterValue(InternalValue);
                 }
 
-                return InternalValue.ToString().Length;
+                return InternalValue?.ToString()?.Length ?? 0;
             }
         }
 

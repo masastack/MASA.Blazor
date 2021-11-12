@@ -1,0 +1,31 @@
+﻿<MCard>
+    <MCardText>
+        <MRow Align="AlignTypes.Center">
+            <MCheckbox
+                @bind-Value="includeFiles"
+                HideDetails="@true"
+                Class="shrink mr-2 mt-0">
+            </MCheckbox>
+            <MTextField Label="Include files" TValue="string"></MTextField>
+        </MRow>
+        <MRow Align="AlignTypes.Center">
+            <MCheckbox
+                @bind-Value="enabled"
+                HideDetails="@true"
+                Class="shrink mr-2 mt-0">
+            </MCheckbox>
+            <MTextField
+                Disabled="!enabled"
+                Label="I only work if you check the box"
+                TValue="string">
+            </MTextField>
+        </MRow>
+    </MCardText>
+</MCard>
+
+@code {
+
+    bool includeFiles = true;
+    bool enabled = false;
+
+}

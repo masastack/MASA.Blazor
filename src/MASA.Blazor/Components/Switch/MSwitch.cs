@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    //TODO:该组件需要进一步完善
     public partial class MSwitch : MInput<bool>, ISwitch
     {
         [Parameter]
@@ -30,6 +29,8 @@ namespace MASA.Blazor
         public bool? Ripple { get; set; }
 
         public override bool HasColor => Value;
+
+        public string TextColor => IsLoading ? null : ValidationState;
 
         public Task HandleOnBlur(FocusEventArgs args)
         {
@@ -66,10 +67,10 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--switch--inset", () => Inset);
                 })
                 .Apply("switch", cssBuilder =>
-                 {
-                     cssBuilder
-                         .Add("m-input--selection-controls__input");
-                 })
+                {
+                    cssBuilder
+                        .Add("m-input--selection-controls__input");
+                })
                 .Apply("ripple", cssBuilder =>
                 {
                     cssBuilder
@@ -80,14 +81,14 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-input--switch__track")
-                        .AddTextColor(ValidationState)
+                        .AddTextColor(TextColor)
                         .AddTheme(IsDark);
                 })
                 .Apply("thumb", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-input--switch__thumb")
-                        .AddTextColor(ValidationState)
+                        .AddTextColor(TextColor)
                         .AddTheme(IsDark);
                 });
 
@@ -96,6 +97,27 @@ namespace MASA.Blazor
                 .Apply(typeof(BSwitchSwitch<>), typeof(BSwitchSwitch<MSwitch>))
                 .Apply(typeof(BSelectableInput<>), typeof(BSelectableInput<MSwitch>))
                 .Apply(typeof(BRippleableRipple<>), typeof(BRippleableRipple<MSwitch>))
+                .Apply<BProgressCircular, MProgressCircular>(props =>
+                {
+                    if (!IsLoading) return;
+
+                    string color = null;
+
+                    Loading.Match(
+                        s => color = s,
+                        b => b ? color = Color ?? "primary" : null
+                    );
+
+                    if (color != null && string.IsNullOrWhiteSpace(color))
+                    {
+                        color = Color ?? "primary";
+                    }
+
+                    props[nameof(MProgressCircular.Color)] = color;
+                    props[nameof(MProgressCircular.Indeterminate)] = true;
+                    props[nameof(MProgressCircular.Size)] = (StringNumber)16;
+                    props[nameof(MProgressCircular.Width)] = (StringNumber)2;
+                })
                 .Apply(typeof(BSwitchProgress<>), typeof(BSwitchProgress<MSwitch>));
         }
 

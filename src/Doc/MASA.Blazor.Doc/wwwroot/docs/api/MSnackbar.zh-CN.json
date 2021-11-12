@@ -58,12 +58,6 @@
       "Description": ""
     },
     {
-      "Name": "IsActive",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Left",
       "Type": "Boolean",
       "Default": "false",
@@ -134,6 +128,12 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "将组件向顶部对齐。"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Vertical",

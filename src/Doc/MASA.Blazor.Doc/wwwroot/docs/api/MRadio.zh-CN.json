@@ -90,8 +90,8 @@
   ],
   "Contents": [
     {
-      "Name": "ChildContent",
-      "Description": "默认插槽"
+      "Name": "LabelContent",
+      "Description": ""
     }
   ],
   "Events": [

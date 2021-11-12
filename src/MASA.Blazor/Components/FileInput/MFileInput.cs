@@ -23,7 +23,7 @@ namespace MASA.Blazor
         public bool SmallChips { get; set; }
 
         [Parameter]
-        public RenderFragment<int> SelectionContent { get; set; }
+        public RenderFragment<(int index, string text)> SelectionContent { get; set; }
 
         [Inject]
         public Document Document { get; set; }
@@ -80,7 +80,11 @@ namespace MASA.Blazor
 
         public InputFile InputFile { get; set; }
 
-        public override ElementReference InputElement { get => InputFile.Element.Value; set => base.InputElement = value; }
+        public override ElementReference InputElement
+        {
+            get => InputFile.Element.Value;
+            set => base.InputElement = value;
+        }
 
         public IList<IBrowserFile> Files
         {
@@ -146,7 +150,7 @@ namespace MASA.Blazor
                 return $"{bytes} B";
             }
 
-            var prefix = binary ? new string[] { "Ki", "Mi", "Gi" } : new string[] { "k", "M", "G" };
+            var prefix = binary ? new string[] {"Ki", "Mi", "Gi"} : new string[] {"k", "M", "G"};
             var unit = -1;
             var size = Convert.ToDecimal(bytes);
 
@@ -194,10 +198,7 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply(typeof(BChip), typeof(MChip), props =>
-                {
-                    props[nameof(MChip.Small)] = SmallChips;
-                })
+                .Apply(typeof(BChip), typeof(MChip), props => { props[nameof(MChip.Small)] = SmallChips; })
                 .Merge(typeof(BTextFieldInput<,>), typeof(BFileInputInput<TValue, MFileInput<TValue>>))
                 .Apply(typeof(BFileInputSelections<,>), typeof(BFileInputSelections<TValue, MFileInput<TValue>>))
                 .Apply(typeof(BFileInputChips<,>), typeof(BFileInputChips<TValue, MFileInput<TValue>>))
@@ -228,7 +229,14 @@ namespace MASA.Blazor
             }
             else
             {
-                Value = (TValue)args.File;
+                if (args.FileCount > 0)
+                {
+                    Value = (TValue)args.File;
+                }
+                else
+                {
+                    Value = default;
+                }
             }
 
             if (ValueChanged.HasDelegate)

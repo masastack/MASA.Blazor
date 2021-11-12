@@ -112,6 +112,12 @@
       "Description": ""
     },
     {
+      "Name": "Mandatory",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Messages",
       "Type": "List`1",
       "Default": "null",
