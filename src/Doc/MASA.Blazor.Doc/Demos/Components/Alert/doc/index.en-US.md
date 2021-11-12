@@ -1,7 +1,7 @@
 ---
 category: Components
-type: Alert
-title: Alert
+type: Alerts
+title: Alerts
 cols: 1
 ---
 

@@ -2,7 +2,7 @@
 category: Components
 subtitle: 提示框
 type: 提示框
-title: Alert
+title: Alerts
 cols: 1
 
 ---

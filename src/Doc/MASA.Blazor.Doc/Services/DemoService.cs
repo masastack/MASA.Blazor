@@ -39,7 +39,7 @@ namespace MASA.Blazor.Doc.Services
             _languageService = languageService;
             _httpClient = httpClient;
             _navigationManager = navigationManager;
-            _baseUrl = new Uri("http://127.0.0.1:5000");
+            _baseUrl = new Uri("http://localhost:5000");
 
             _languageService.LanguageChanged += async (sender, args) => await InitializeAsync(args.Name);
         }

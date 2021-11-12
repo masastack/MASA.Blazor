@@ -36,32 +36,48 @@ namespace MASA.Blazor.Doc.Pages
         [Parameter]
         public string ComponentName { get; set; }
 
-        private List<TableHeaderOptions> _headers = new List<TableHeaderOptions>
+        private List<DataTableHeader<Props>> _headers = new List<DataTableHeader<Props>>
         {
-            new TableHeaderOptions
+            new DataTableHeader<Props>
             {
+                Value=nameof(Props.Name),
                 Text="Name",
-                Width="20%"
-            },new TableHeaderOptions
+                Width="20%",
+                Sortable=false
+            },new DataTableHeader<Props>
             {
+                Value=nameof(Props.Type),
                 Text="Type",
-                Width="15%"
-            },new TableHeaderOptions
+                Width="15%",
+                Sortable=false
+            },new DataTableHeader<Props>
             {
+                Value=nameof(Props.Default),
                 Text="Default",
-                Width="12%"
-            },
-            "Description",
+                Width="12%",
+                Sortable=false
+            },new DataTableHeader<Props>
+            {
+                Value=nameof(Props.Description),
+                Text="Description",
+                Sortable=false
+            }
         };
 
-        private List<TableHeaderOptions> _headers2 = new List<TableHeaderOptions>
+        private List<DataTableHeader<Props1>> _headers2 = new List<DataTableHeader<Props1>>
         {
-            new TableHeaderOptions
+            new DataTableHeader<Props1>
             {
+                Value=nameof(Props1.Name),
                 Text="Name",
-                Width="20%"
-            },
-            "Description",
+                Width="20%",
+                Sortable=false
+            },new DataTableHeader<Props1>
+            {
+                Value=nameof(Props1.Description),
+                Text="Description",
+                Sortable=false
+            }
         };
 
         private ApiModel _api;

@@ -1,7 +1,7 @@
 ---
 category: Components
-type: Dialog
-title: Dialog
+type: Dialogs
+title: Dialogs
 cols: 1
 ---
 

@@ -2,7 +2,7 @@
 category: Components
 subtitle: 横幅
 type: 横幅
-title: Banner
+title: Banners
 cols: 1
 
 ---

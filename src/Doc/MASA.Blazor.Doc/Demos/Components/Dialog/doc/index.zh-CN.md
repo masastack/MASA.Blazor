@@ -2,7 +2,7 @@
 category: Components
 subtitle: 对话框
 type: 对话框
-title: Dialog
+title: Dialogs
 cols: 1
 
 ---
