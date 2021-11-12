@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Supports `Material Icons`、`Material Design Icons`、`Font Awesome 5` icon libraries。
+Icons can be used inside of buttons to add emphasis to the action.

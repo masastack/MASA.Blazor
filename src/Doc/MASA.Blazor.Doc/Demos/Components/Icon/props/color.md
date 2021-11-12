@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Supports `Material Icons`、`Material Design Icons`、`Font Awesome 5` icon libraries。
+Using color helpers you can change the color of an icon from the standard dark and light themes.
