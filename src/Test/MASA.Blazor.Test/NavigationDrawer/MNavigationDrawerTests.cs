@@ -238,6 +238,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
         }
 
         //[TestMethod]
+        //public void RenderNavigationDrawerWithDisableResizeWatcher()
+        //{
+        //    //Act
+        //    var cut = RenderComponent<MNavigationDrawer>(props =>
+        //    {
+        //        props.Add(navigationdrawer => navigationdrawer.DisableResizeWatcher, true);
+        //    });
+        //    var classes = cut.Instance.CssProvider.GetClass();
+        //    var hasFixedClass = classes.Contains("m-navigation-disable-resize-watcher");
+
+        //    // Assert
+        //    Assert.IsTrue(hasFixedClass);
+        //}
+
+        //[TestMethod]
         //pub
         //
         //lic void RenderWithSize()

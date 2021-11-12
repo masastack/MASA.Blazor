@@ -70,5 +70,19 @@ namespace MASA.Blazor.Test.Slider
             Assert.IsTrue(noVerticalClass);
         }
 
+        //[TestMethod]
+        //public void RenderWithSize()
+        //{
+        //    // Act
+        //    var cut = RenderComponent<MSlider<double>>(props =>
+        //    {
+        //        props.Add(p => p.ThumbSize, 32);
+        //    });
+        //    var inputSlotDiv = cut.Find(".m-slider");
+        //    var style = inputSlotDiv.GetAttribute("style");
+
+        //    // Assert
+        //    Assert.AreEqual("height: 32px; width: 32px", style);
+        //}
     }
 }

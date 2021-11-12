@@ -32,13 +32,13 @@ namespace MASA.Blazor.Test.Overlay
         //    //Act
         //    var cut = RenderComponent<MOverlay>(props =>
         //    {
-        //        props.Add(overlay => overlay.Light, true);
+        //        props.Add(overlay => overlay.Light, false);
         //    });
         //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasDarkClass = classes.Contains("theme--light");
+        //    var hasLightClass = classes.Contains("theme--light");
 
         //    // Assert
-        //    Assert.IsTrue(hasDarkClass);
+        //    Assert.IsTrue(hasLightClass);
         //}
 
         [TestMethod]
@@ -85,20 +85,6 @@ namespace MASA.Blazor.Test.Overlay
             // Assert
             Assert.AreEqual("background-color:#212121;border-color:#212121;opacity:0", style);
         }
-
-        //[TestMethod]
-        //public void RenderWithChildContentt()
-        //{
-        //    // Arrange & Act
-        //    var cut = RenderComponent<MOverlay>(props =>
-        //    {
-        //        props.Add(overlay => overlay.ChildContent, "<span>Hello world</span>");
-        //    });
-        //    var contentDiv = cut.Find(".m-overlay");
-
-        //    // Assert
-        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
 
         //[TestMethod]
         //public void RenderButtonAndonClick()

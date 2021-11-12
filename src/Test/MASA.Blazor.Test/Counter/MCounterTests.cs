@@ -27,6 +27,21 @@ namespace MASA.Blazor.Test.Counter
         }
 
         [TestMethod]
+        public void RenderCounterNoWithWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MCounter>(props =>
+            {
+                props.Add(counter => counter.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-counter");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
         public void RenderCounterWithWithLight()
         {
             //Act
@@ -36,6 +51,21 @@ namespace MASA.Blazor.Test.Counter
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderCounterNoWithWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MCounter>(props =>
+            {
+                props.Add(counter => counter.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-counter");
 
             // Assert
             Assert.IsTrue(hasLightClass);

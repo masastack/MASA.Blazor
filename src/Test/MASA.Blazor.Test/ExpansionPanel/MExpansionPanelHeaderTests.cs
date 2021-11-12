@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using Bunit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Border
+namespace MASA.Blazor.Test.ExpansionPanel
 {
     [TestClass]
-    public  class MBorderTests:TestBase
+    public  class MExpansionPanelHeaderTests:TestBase
     {
         
     }

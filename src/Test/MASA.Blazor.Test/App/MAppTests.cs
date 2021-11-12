@@ -14,6 +14,7 @@ namespace MASA.Blazor.Test.App
     [TestClass]
     public class MAppTests : TestBase
     {
+        //JS互操作
         //[TestMethod]
         //public void RenderWithChildContentt()
         //{

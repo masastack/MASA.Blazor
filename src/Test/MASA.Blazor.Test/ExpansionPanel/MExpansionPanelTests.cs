@@ -27,6 +27,21 @@ namespace MASA.Blazor.Test.ExpansionPanel
         }
 
         [TestMethod]
+        public void RenderNoWithTile()
+        {
+            //Act
+            var cut = RenderComponent<MExpansionPanels>(props =>
+            {
+                props.Add(expansionpanel => expansionpanel.Tile, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTileClass = classes.Contains("m-expansion-panels");
+
+            // Assert
+            Assert.IsTrue(hasTileClass);
+        }
+
+        [TestMethod]
         public void RenderWithFlat()
         {
             //Act
@@ -36,6 +51,21 @@ namespace MASA.Blazor.Test.ExpansionPanel
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasFlatClass = classes.Contains("m-expansion-panels--flat");
+
+            // Assert
+            Assert.IsTrue(hasFlatClass);
+        }
+
+        [TestMethod]
+        public void RenderNoWithFlat()
+        {
+            //Act
+            var cut = RenderComponent<MExpansionPanels>(props =>
+            {
+                props.Add(expansionpanel => expansionpanel.Flat, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFlatClass = classes.Contains("m-expansion-panels");
 
             // Assert
             Assert.IsTrue(hasFlatClass);
@@ -57,6 +87,21 @@ namespace MASA.Blazor.Test.ExpansionPanel
         }
 
         [TestMethod]
+        public void RenderNoWithAccordion()
+        {
+            //Act
+            var cut = RenderComponent<MExpansionPanels>(props =>
+            {
+                props.Add(expansionpanel => expansionpanel.Accordion, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAccordionClass = classes.Contains("m-expansion-panels");
+
+            // Assert
+            Assert.IsTrue(hasAccordionClass);
+        }
+
+        [TestMethod]
         public void RenderWithFocusable()
         {
             //Act
@@ -66,6 +111,21 @@ namespace MASA.Blazor.Test.ExpansionPanel
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasFocusableClass = classes.Contains("m-expansion-panels--focusable");
+
+            // Assert
+            Assert.IsTrue(hasFocusableClass);
+        }
+
+        [TestMethod]
+        public void RenderNoWithFocusable()
+        {
+            //Act
+            var cut = RenderComponent<MExpansionPanels>(props =>
+            {
+                props.Add(expansionpanel => expansionpanel.Focusable, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFocusableClass = classes.Contains("m-expansion-panels");
 
             // Assert
             Assert.IsTrue(hasFocusableClass);
@@ -87,6 +147,21 @@ namespace MASA.Blazor.Test.ExpansionPanel
         }
 
         [TestMethod]
+        public void RenderNoWithHover()
+        {
+            //Act
+            var cut = RenderComponent<MExpansionPanels>(props =>
+            {
+                props.Add(expansionpanel => expansionpanel.Hover, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHoverClass = classes.Contains("m-expansion-panels");
+
+            // Assert
+            Assert.IsTrue(hasHoverClass);
+        }
+
+        [TestMethod]
         public void RenderWithInset()
         {
             //Act
@@ -102,6 +177,21 @@ namespace MASA.Blazor.Test.ExpansionPanel
         }
 
         [TestMethod]
+        public void RenderNoWithInset()
+        {
+            //Act
+            var cut = RenderComponent<MExpansionPanels>(props =>
+            {
+                props.Add(expansionpanel => expansionpanel.Inset, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasInsetClass = classes.Contains("m-expansion-panels");
+
+            // Assert
+            Assert.IsTrue(hasInsetClass);
+        }
+
+        [TestMethod]
         public void RenderWithPopout()
         {
             //Act
@@ -111,6 +201,21 @@ namespace MASA.Blazor.Test.ExpansionPanel
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasPopoutClass = classes.Contains("m-expansion-panels--popout");
+
+            // Assert
+            Assert.IsTrue(hasPopoutClass);
+        }
+
+        [TestMethod]
+        public void RenderNoWithPopout()
+        {
+            //Act
+            var cut = RenderComponent<MExpansionPanels>(props =>
+            {
+                props.Add(expansionpanel => expansionpanel.Popout, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPopoutClass = classes.Contains("m-expansion-panels");
 
             // Assert
             Assert.IsTrue(hasPopoutClass);

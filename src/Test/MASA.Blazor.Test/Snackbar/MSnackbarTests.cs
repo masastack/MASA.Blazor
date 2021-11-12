@@ -208,17 +208,33 @@ namespace MASA.Blazor.Test.Snackbar
         }
 
         //[TestMethod]
-        //public void RenderWithChildContentt()
+        //public void RenderAlertWithElevation()
         //{
-        //    // Arrange & Act
+        //    //Act
         //    var cut = RenderComponent<MSnackbar>(props =>
         //    {
-        //        props.Add(list => list.ChildContent, "<span>Hello world</span>");
+        //        props.Add(snackbar => snackbar.Elevation, 24);
         //    });
-        //    var contentDiv = cut.Find(".m-snackbar");
+        //    var classes = cut.Instance.CssProvider.GetClass();
+        //    var hasElevationClass = classes.Contains("elevation-24");
 
         //    // Assert
-        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
+        //    Assert.IsTrue(hasElevationClass);
+        //}
+
+        //[TestMethod]
+        //public void RendeListWithShaped()
+        //{
+        //    //Act
+        //    var cut = RenderComponent<MSnackbar>(props =>
+        //    {
+        //        props.Add(snackbar => snackbar.Shaped, true);
+        //    });
+        //    var classes = cut.Instance.CssProvider.GetClass();
+        //    var hasShapedClass = classes.Contains("m-snack__content");
+
+        //    // Assert
+        //    Assert.IsTrue(hasShapedClass);
         //}
     }
 }

@@ -82,5 +82,20 @@ namespace MASA.Blazor.Test.Sheet
             // Assert
             contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
+
+        [TestMethod]
+        public void RenderSheetWithElevation()
+        {
+            //Act
+            var cut = RenderComponent<MSheet>(props =>
+            {
+                props.Add(sheet => sheet.Elevation, 24);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasElevationClass = classes.Contains("elevation-2");
+
+            // Assert
+            Assert.IsTrue(hasElevationClass);
+        }
     }
 }

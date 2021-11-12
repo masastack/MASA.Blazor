@@ -27,6 +27,21 @@ namespace MASA.Blazor.Test.Banner
         }
 
         [TestMethod]
+        public void RenderButtonNoWithSingleLine()
+        {
+            //Act
+            var cut = RenderComponent<MBanner>(props =>
+            {
+                props.Add(banner => banner.SingleLine, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSingleLineClass = classes.Contains("m-banner");
+
+            // Assert
+            Assert.IsTrue(hasSingleLineClass);
+        }
+
+        [TestMethod]
         public void RenderButtonWithApp()
         {
             //Act
@@ -36,6 +51,21 @@ namespace MASA.Blazor.Test.Banner
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasAppClass = classes.Contains("m-banner--sticky");
+
+            // Assert
+            Assert.IsTrue(hasAppClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonNoWithApp()
+        {
+            //Act
+            var cut = RenderComponent<MBanner>(props =>
+            {
+                props.Add(banner => banner.App, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppClass = classes.Contains("m-banner");
 
             // Assert
             Assert.IsTrue(hasAppClass);
@@ -57,6 +87,21 @@ namespace MASA.Blazor.Test.Banner
         }
 
         [TestMethod]
+        public void RenderButtonNoWithSticky()
+        {
+            //Act
+            var cut = RenderComponent<MBanner>(props =>
+            {
+                props.Add(banner => banner.Sticky, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasStickyClass = classes.Contains("m-banner");
+
+            // Assert
+            Assert.IsTrue(hasStickyClass);
+        }
+
+        [TestMethod]
         public void RenderButtonWithDark()
         {
             //Act
@@ -66,6 +111,21 @@ namespace MASA.Blazor.Test.Banner
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasdarkClass = classes.Contains("theme--dark");
+
+            // Assert
+            Assert.IsTrue(hasdarkClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonNoWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MBanner>(props =>
+            {
+                props.Add(banner => banner.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasdarkClass = classes.Contains("m-banner");
 
             // Assert
             Assert.IsTrue(hasdarkClass);
@@ -87,6 +147,21 @@ namespace MASA.Blazor.Test.Banner
         }
 
         [TestMethod]
+        public void RenderButtonNoWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MBanner>(props =>
+            {
+                props.Add(banner => banner.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-banner");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
         public void RenderButtonWithValue()
         {
             //Act
@@ -96,6 +171,21 @@ namespace MASA.Blazor.Test.Banner
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var noValueClass = ! classes.Contains("display:none");
+
+            // Assert
+            Assert.IsTrue(noValueClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonNoWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MBanner>(props =>
+            {
+                props.Add(banner => banner.Value, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var noValueClass = !classes.Contains("m-banner__wrapper");
 
             // Assert
             Assert.IsTrue(noValueClass);
@@ -142,20 +232,5 @@ namespace MASA.Blazor.Test.Banner
             // Assert
             bannerDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
-
-        //[TestMethod]
-        //public void RenderWithSize()
-        //{
-        //    // Act
-        //    var cut = RenderComponent<MBanner>(props =>
-        //    {
-        //        props.Add(p => p.Elevation, 0);
-        //    });
-        //    var inputSlotDiv = cut.Find(".m-avatar");
-        //    var style = inputSlotDiv.GetAttribute("style");
-
-        //    // Assert
-        //    Assert.AreEqual("", style);
-        //}
     }
 }

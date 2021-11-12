@@ -12,7 +12,7 @@ namespace MASA.Blazor.Test.FileInput
     public  class MFileInputTests:TestBase
     {
         //[TestMethod]
-        //public void RenderFileInputWithShaped()
+        //public void RendeFileInputWithChips()
         //{
         //    //Act
         //    var cut = RenderComponent<MFileInput<string>>(props =>
@@ -20,10 +20,10 @@ namespace MASA.Blazor.Test.FileInput
         //        props.Add(fileinput => fileinput.Chips, true);
         //    });
         //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasPlaceholderClass = classes.Contains("m-file-input__text--chips");
+        //    var hasChipsClass = classes.Contains("m-file-input");
 
         //    // Assert
-        //    Assert.IsTrue(hasPlaceholderClass);
+        //    Assert.IsTrue(hasChipsClass);
         //}
 
     }

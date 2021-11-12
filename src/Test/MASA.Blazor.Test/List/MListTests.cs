@@ -208,6 +208,19 @@ namespace MASA.Blazor.Test.List
             contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
 
-        
+        [TestMethod]
+        public void RenderListWithElevation()
+        {
+            //Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(list => list.Elevation, 2);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasElevationClass = classes.Contains("elevation-2");
+
+            // Assert
+            Assert.IsTrue(hasElevationClass);
+        }
     }
 }

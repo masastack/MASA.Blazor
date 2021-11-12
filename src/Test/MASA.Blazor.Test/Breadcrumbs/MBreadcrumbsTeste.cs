@@ -27,6 +27,21 @@ namespace MASA.Blazor.Test.Breadcrumbs
         }
 
         [TestMethod]
+        public void RenderButtonNoWithLarge()
+        {
+            //Act
+            var cut = RenderComponent<MBreadcrumbs>(props =>
+            {
+                props.Add(breadcrumbs => breadcrumbs.Large, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLargeClass = classes.Contains("m-breadcrumbs");
+
+            // Assert
+            Assert.IsTrue(hasLargeClass);
+        }
+
+        [TestMethod]
         public void RenderAlertWithWithDark()
         {
             //Act
@@ -42,6 +57,21 @@ namespace MASA.Blazor.Test.Breadcrumbs
         }
 
         [TestMethod]
+        public void RenderAlertNoWithWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MBreadcrumbs>(props =>
+            {
+                props.Add(breadcrumbs => breadcrumbs.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-breadcrumbs");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
         public void RenderAlertWithWithLight()
         {
             //Act
@@ -51,6 +81,21 @@ namespace MASA.Blazor.Test.Breadcrumbs
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderAlertNoWithWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MBreadcrumbs>(props =>
+            {
+                props.Add(breadcrumbs => breadcrumbs.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-breadcrumbs");
 
             // Assert
             Assert.IsTrue(hasLightClass);

@@ -17,7 +17,7 @@ namespace MASA.Blazor.Test.Tabs
         //    //Act
         //    var cut = RenderComponent<MTabs>(props =>
         //    {
-        //        props.Add(tabs => tabs.Centered, true);
+        //        props.Add(tabs => tabs.AlignWithTitle, false);
         //    });
         //    var classes = cut.Instance.CssProvider.GetClass();
         //    var hasLightClass = classes.Contains("m-tabs--centered");

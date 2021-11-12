@@ -11,6 +11,7 @@ namespace MASA.Blazor.Test.ECharts
     [TestClass]
     public class MEChartsTests:TestBase
     {
+        //******
         //[TestMethod]
         //public void RenderWithWidth()
         //{

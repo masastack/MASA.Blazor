@@ -27,6 +27,21 @@ namespace MASA.Blazor.Test.Card
         }
 
         [TestMethod]
+        public void RenderButtonNoWithOutlined()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.Outlined, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOutlinedClass = classes.Contains("m-sheet");
+
+            // Assert
+            Assert.IsTrue(hasOutlinedClass);
+        }
+
+        [TestMethod]
         public void RenderButtonWithShaped()
         {
             //Act
@@ -36,6 +51,21 @@ namespace MASA.Blazor.Test.Card
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasShapedClass = classes.Contains("m-sheet--shaped");
+
+            // Assert
+            Assert.IsTrue(hasShapedClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonNoWithShaped()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.Shaped, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasShapedClass = classes.Contains("m-sheet");
 
             // Assert
             Assert.IsTrue(hasShapedClass);
@@ -57,6 +87,21 @@ namespace MASA.Blazor.Test.Card
         }
 
         [TestMethod]
+        public void RenderButtonNoWithFlat()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.Flat, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFlatClass = classes.Contains("m-card");
+
+            // Assert
+            Assert.IsTrue(hasFlatClass);
+        }
+
+        [TestMethod]
         public void RenderButtonWithHover()
         {
             //Act
@@ -66,6 +111,21 @@ namespace MASA.Blazor.Test.Card
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasHoverClass = classes.Contains("m-card--hover");
+
+            // Assert
+            Assert.IsTrue(hasHoverClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonNoWithHover()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.Hover, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHoverClass = classes.Contains("m-card");
 
             // Assert
             Assert.IsTrue(hasHoverClass);
@@ -87,6 +147,21 @@ namespace MASA.Blazor.Test.Card
         }
 
         [TestMethod]
+        public void RenderButtonNoWithLink()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.Link, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var haLinkClass = classes.Contains("m-card");
+
+            // Assert
+            Assert.IsTrue(haLinkClass);
+        }
+
+        [TestMethod]
         public void RenderButtonWithLoading()
         {
             //Act
@@ -96,6 +171,21 @@ namespace MASA.Blazor.Test.Card
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasLoadingClass = classes.Contains("m-card--loading");
+
+            // Assert
+            Assert.IsTrue(hasLoadingClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonNoWithLoading()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.Loading, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLoadingClass = classes.Contains("m-card");
 
             // Assert
             Assert.IsTrue(hasLoadingClass);
@@ -117,6 +207,21 @@ namespace MASA.Blazor.Test.Card
         }
 
         [TestMethod]
+        public void RenderButtonNoWithDisabled()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.Disabled, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDisabledClass = classes.Contains("m-card");
+
+            // Assert
+            Assert.IsTrue(hasDisabledClass);
+        }
+
+        [TestMethod]
         public void RenderButtonWithRaised()
         {
             //Act
@@ -126,6 +231,21 @@ namespace MASA.Blazor.Test.Card
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasRaisedClass = classes.Contains("m-card--disabled");
+
+            // Assert
+            Assert.IsTrue(hasRaisedClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonNoWithRaised()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.Raised, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasRaisedClass = classes.Contains("m-card");
 
             // Assert
             Assert.IsTrue(hasRaisedClass);
@@ -147,6 +267,21 @@ namespace MASA.Blazor.Test.Card
         }
 
         [TestMethod]
+        public void RenderCardNoWithWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-card");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
         public void RenderCardWithWithLight()
         {
             //Act
@@ -156,6 +291,21 @@ namespace MASA.Blazor.Test.Card
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderCardNoWithWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-card");
 
             // Assert
             Assert.IsTrue(hasLightClass);
@@ -195,5 +345,23 @@ namespace MASA.Blazor.Test.Card
             // Assert
             Assert.AreEqual(1, times);
         }
+
+        //[TestMethod]
+        //public void RenderAlertWithElevation()
+        //{
+        //    //Act
+        //    var cut = RenderComponent<MCard>(props =>
+        //    {
+        //        props.Add(alert => alert.Elevation, 4);
+        //        props.Add(alert => alert.Loading, true);
+        //    });
+        //    var classes = cut.Instance.CssProvider.GetClass();
+        //    var hasElevationClass = classes.Contains(".m-card__progress");
+
+        //    // Assert
+        //    Assert.IsTrue(hasElevationClass);
+        //}
+
+
     }
 }

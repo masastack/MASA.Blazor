@@ -27,6 +27,21 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
+        public void RenderButtonNoWithScroll()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.ElevateOnScroll, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasScrollClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasScrollClass);
+        }
+
+        [TestMethod]
         public void RenderButtonWithClippedRight()
         {
             //Act
@@ -36,6 +51,21 @@ namespace MASA.Blazor.Test.AppBar
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasClippedRightClass = classes.Contains("m-app-bar--clipped");
+
+            // Assert
+            Assert.IsTrue(hasClippedRightClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonNoWithClippedRight()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.ClippedRight, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasClippedRightClass = classes.Contains("m-app-bar");
 
             // Assert
             Assert.IsTrue(hasClippedRightClass);
@@ -57,6 +87,21 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
+        public void RenderButtonNoWithClippedLeft()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.ClippedLeft, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasClippedLeftClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasClippedLeftClass);
+        }
+
+        [TestMethod]
         public void RenderButtonWithAbsolute()
         {
             //Act
@@ -66,6 +111,21 @@ namespace MASA.Blazor.Test.AppBar
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var noAbsoluteClass = !classes.Contains("m-app-bar--fixed");
+
+            // Assert
+            Assert.IsTrue(noAbsoluteClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonNoWithAbsolute()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.Absolute, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var noAbsoluteClass = !classes.Contains("m-toolbar--absolute");
 
             // Assert
             Assert.IsTrue(noAbsoluteClass);
@@ -87,6 +147,21 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
+        public void RenderButtonNoWithApp()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.App, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasAppClass);
+        }
+
+        [TestMethod]
         public void RenderButtonWithFixed()
         {
             //Act
@@ -96,6 +171,21 @@ namespace MASA.Blazor.Test.AppBar
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasFixedClass = classes.Contains("m-app-bar--fixed");
+
+            // Assert
+            Assert.IsTrue(hasFixedClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonNoWithFixed()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.Fixed, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFixedClass = classes.Contains("m-app-bar");
 
             // Assert
             Assert.IsTrue(hasFixedClass);
@@ -117,6 +207,21 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
+        public void RenderButtonNoWithCollapseOnScroll()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.CollapseOnScroll, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasScrollClass = classes.Contains("m-toolbar");
+
+            // Assert
+            Assert.IsTrue(hasScrollClass);
+        }
+
+        [TestMethod]
         public void RenderButtonWithShrinkOnScroll()
         {
             //Act
@@ -126,6 +231,21 @@ namespace MASA.Blazor.Test.AppBar
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasScrollClass = classes.Contains("v-app-bar--shrink-on-scroll");
+
+            // Assert
+            Assert.IsTrue(hasScrollClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonNoWithShrinkOnScroll()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.ShrinkOnScroll, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasScrollClass = classes.Contains("m-app-bar");
 
             // Assert
             Assert.IsTrue(hasScrollClass);

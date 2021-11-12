@@ -16,7 +16,7 @@ namespace MASA.Blazor.Test.Select
         //[TestMethod]
         //public void RenderSelectWithMultiple()
         //{
-        //    Act
+        //    //Act
         //    var cut = RenderComponent<MSelect<string, string, string>>(props =>
         //    {
         //        props.Add(select => select.Multiple, true);
@@ -26,7 +26,7 @@ namespace MASA.Blazor.Test.Select
         //    var classes = cut.Instance.CssProvider.GetClass();
         //    var hasMultipleClass = classes.Contains("m-select--is-multi");
 
-        //    Assert
+        //    //Assert
         //    Assert.IsTrue(hasMultipleClass);
         //}
     }

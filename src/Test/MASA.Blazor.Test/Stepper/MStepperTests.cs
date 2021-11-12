@@ -86,6 +86,21 @@ namespace MASA.Blazor.Test.Stepper
         }
 
         //[TestMethod]
+        //public void RenderWithSize()
+        //{
+        //    // Act
+        //    var cut = RenderComponent<MStepper>(props =>
+        //    {
+        //        props.Add(p => p.Value, 1);
+        //    });
+        //    var inputSlotDiv = cut.Find(".m-avatar");
+        //    var style = inputSlotDiv.GetAttribute("style");
+
+        //    // Assert
+        //    Assert.AreEqual("", style);
+        //}
+
+        //[TestMethod]
         //public void RendeMStepperWithComplete()
         //{
         //    //Act

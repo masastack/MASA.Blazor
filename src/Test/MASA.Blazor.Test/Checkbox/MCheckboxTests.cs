@@ -27,6 +27,21 @@ namespace MASA.Blazor.Test.Checkbox
         }
 
         [TestMethod]
+        public void RenderCheckboxNoWithIndeterminate()
+        {
+            //Act
+            var cut = RenderComponent<MCheckbox>(props =>
+            {
+                props.Add(checkbox => checkbox.Indeterminate, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIndeterminateClass = classes.Contains("m-input");
+
+            // Assert
+            Assert.IsTrue(hasIndeterminateClass);
+        }
+
+        [TestMethod]
         public void RenderNormal()
         {
             // Arrange & Act
@@ -53,5 +68,35 @@ namespace MASA.Blazor.Test.Checkbox
             // Assert
             Assert.IsTrue(hasLightClass);
         }
+
+        [TestMethod]
+        public void RenderAlertNoWithWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MSimpleCheckbox>(props =>
+            {
+                props.Add(breadcrumbs => breadcrumbs.Disabled, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-simple-checkbox");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        //[TestMethod]
+        //public void RenderAlertWithIndeterminateIcon(string indeterminateicon)
+        //{
+        //    //Act
+        //    var cut = RenderComponent<MSimpleCheckbox>(props =>
+        //    {
+        //        props.Add(breadcrumbs => breadcrumbs.IndeterminateIcon, indeterminateicon);
+        //    });
+        //    var classes = cut.Instance.CssProvider.GetClass();
+        //    var hasLightClass = classes.Contains("m-simple-checkbox--disabled");
+
+        //    // Assert
+        //    Assert.IsTrue(hasLightClass);
+        //}
     }
 }

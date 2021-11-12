@@ -25,5 +25,20 @@ namespace MASA.Blazor.Test.Checkbox
             // Assert
             Assert.IsTrue(hasLightClass);
         }
+
+        [TestMethod]
+        public void RenderAlertNoWithWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MSimpleCheckbox>(props =>
+            {
+                props.Add(breadcrumbs => breadcrumbs.Disabled, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-simple-checkbox");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
     }
 }

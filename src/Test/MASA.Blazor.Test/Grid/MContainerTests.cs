@@ -26,6 +26,21 @@ namespace MASA.Blazor.Test.Grid
             Assert.IsTrue(hasFluidClass);
         }
 
+        [TestMethod]
+        public void RenderFooterNoWithAbsolute()
+        {
+            //Act
+            var cut = RenderComponent<MContainer>(props =>
+            {
+                props.Add(container => container.Fluid, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFluidClass = classes.Contains("container");
+
+            // Assert
+            Assert.IsTrue(hasFluidClass);
+        }
+
         //[TestMethod]
         //public void RenderWithChildContentt()
         //{

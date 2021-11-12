@@ -11,6 +11,7 @@ namespace MASA.Blazor.Test.ChipGroup
     [TestClass]
     public class MChipGroupTests:TestBase
     {
+        //JS互操作
         //[TestMethod]
         //public void RenderChipWithLight()
         //{

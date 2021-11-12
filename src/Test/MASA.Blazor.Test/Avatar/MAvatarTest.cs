@@ -27,6 +27,21 @@ namespace MASA.Blazor.Test.Avatar
         }
 
         [TestMethod]
+        public void RenderAvatarNoWithLeft()
+        {
+            //Act
+            var cut = RenderComponent<MAvatar>(props =>
+            {
+                props.Add(avatar => avatar.Left, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLeftClass = classes.Contains("m-avatar");
+
+            // Assert
+            Assert.IsTrue(hasLeftClass);
+        }
+
+        [TestMethod]
         public void RenderAvatarWithRight()
         {
             //Act
@@ -36,6 +51,21 @@ namespace MASA.Blazor.Test.Avatar
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasRightClass = classes.Contains("m-avatar--right");
+
+            // Assert
+            Assert.IsTrue(hasRightClass);
+        }
+
+        [TestMethod]
+        public void RenderAvatarNoWithRight()
+        {
+            //Act
+            var cut = RenderComponent<MAvatar>(props =>
+            {
+                props.Add(avatar => avatar.Right, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasRightClass = classes.Contains("m-avatar");
 
             // Assert
             Assert.IsTrue(hasRightClass);
@@ -82,7 +112,7 @@ namespace MASA.Blazor.Test.Avatar
         //    var style = inputSlotDiv.GetAttribute("style");
 
         //    // Assert
-        //    Assert.AreEqual("height: 48px;min-width: 48px;width: 48px", style);
+        //    Assert.AreEqual("height:48px;min-width:48px;width:48px;", style);
         //}
     }
 }

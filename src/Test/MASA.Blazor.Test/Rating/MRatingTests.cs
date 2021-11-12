@@ -68,34 +68,5 @@ namespace MASA.Blazor.Test.Rating
             // Assert
             Assert.IsTrue(hasLightClass);
         }
-
-        //[TestMethod]
-        //public void RenderWithChildContentt()
-        //{
-        //    Arrange & Act
-        //    var cut = RenderComponent<MRating>(props =>
-        //    {
-        //        props.Add(rating => rating.ChildContent, "<span>Hello world</span>");
-        //    });
-        //    var contentDiv = cut.Find(".m-rating");
-
-        //    Assert
-        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
-
-        //[TestMethod]
-        //public void RenderButtonWithSmall()
-        //{
-        //    //Act
-        //    var cut = RenderComponent<MRating>(props =>
-        //    {
-        //        props.Add(button => button.Small, true);
-        //    });
-        //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasSmallClass = classes.Contains("m-size--small");
-
-        //    // Assert
-        //    Assert.IsTrue(hasSmallClass);
-        //}
     }
 }

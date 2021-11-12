@@ -86,6 +86,21 @@ namespace MASA.Blazor.Test.Picker
             Assert.IsTrue(hasLightClass);
         }
 
+        [TestMethod]
+        public void RenderPickerWithElevation()
+        {
+            //Act
+            var cut = RenderComponent<MPicker>(props =>
+            {
+                props.Add(picker => picker.Elevation, 2);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasElevationClass = classes.Contains("elevation-2");
+
+            // Assert
+            Assert.IsTrue(hasElevationClass);
+        }
+
         //[TestMethod]
         //public void RendeMPickerWithNoTitle()
         //{

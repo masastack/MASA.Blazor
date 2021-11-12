@@ -27,6 +27,21 @@ namespace MASA.Blazor.Test.Chip
         }
 
         [TestMethod]
+        public void RenderChipNoWithDisabled()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.Disabled, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDisabledClass = classes.Contains("m-chip");
+
+            // Assert
+            Assert.IsTrue(hasDisabledClass);
+        }
+
+        [TestMethod]
         public void RenderChipWithLabel()
         {
             //Act
@@ -36,6 +51,21 @@ namespace MASA.Blazor.Test.Chip
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasLabelClass = classes.Contains("m-chip--label");
+
+            // Assert
+            Assert.IsTrue(hasLabelClass);
+        }
+
+        [TestMethod]
+        public void RenderChipNoWithLabel()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.Label, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLabelClass = classes.Contains("m-chip");
 
             // Assert
             Assert.IsTrue(hasLabelClass);
@@ -57,6 +87,21 @@ namespace MASA.Blazor.Test.Chip
         }
 
         [TestMethod]
+        public void RenderChipNoWithClose()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.Close, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasCloseClass = classes.Contains("m-chip");
+
+            // Assert
+            Assert.IsTrue(hasCloseClass);
+        }
+
+        [TestMethod]
         public void RenderChipWithXSmall()
         {
             //Act
@@ -66,6 +111,21 @@ namespace MASA.Blazor.Test.Chip
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasXSmallClass = classes.Contains("m-size--x-small");
+
+            // Assert
+            Assert.IsTrue(hasXSmallClass);
+        }
+
+        [TestMethod]
+        public void RenderChipNoWithXSmall()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.XSmall, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasXSmallClass = classes.Contains("m-chip");
 
             // Assert
             Assert.IsTrue(hasXSmallClass);
@@ -87,6 +147,21 @@ namespace MASA.Blazor.Test.Chip
         }
 
         [TestMethod]
+        public void RenderChipNoWithSmall()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.Small, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSmallClass = classes.Contains("m-chip");
+
+            // Assert
+            Assert.IsTrue(hasSmallClass);
+        }
+
+        [TestMethod]
         public void RenderChipWithLarge()
         {
             //Act
@@ -96,6 +171,21 @@ namespace MASA.Blazor.Test.Chip
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasLargeClass = classes.Contains("m-size--large");
+
+            // Assert
+            Assert.IsTrue(hasLargeClass);
+        }
+
+        [TestMethod]
+        public void RenderChipNoWithLarge()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.Large, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLargeClass = classes.Contains("m-chip");
 
             // Assert
             Assert.IsTrue(hasLargeClass);
@@ -117,6 +207,21 @@ namespace MASA.Blazor.Test.Chip
         }
 
         [TestMethod]
+        public void RenderChipNoWithXLarge()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.XLarge, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasXLargeClass = classes.Contains("m-chip");
+
+            // Assert
+            Assert.IsTrue(hasXLargeClass);
+        }
+
+        [TestMethod]
         public void RenderChipWithOutlined()
         {
             //Act
@@ -132,6 +237,21 @@ namespace MASA.Blazor.Test.Chip
         }
 
         [TestMethod]
+        public void RenderChipNoWithOutlined()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.Outlined, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOutlinedClass = classes.Contains("m-chip");
+
+            // Assert
+            Assert.IsTrue(hasOutlinedClass);
+        }
+
+        [TestMethod]
         public void RenderChipWithDraggable()
         {
             //Act
@@ -141,6 +261,21 @@ namespace MASA.Blazor.Test.Chip
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasDraggableClass = classes.Contains("m-chip--draggable");
+
+            // Assert
+            Assert.IsTrue(hasDraggableClass);
+        }
+
+        [TestMethod]
+        public void RenderChipNoWithDraggable()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.Draggable, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDraggableClass = classes.Contains("m-chip");
 
             // Assert
             Assert.IsTrue(hasDraggableClass);
@@ -183,6 +318,21 @@ namespace MASA.Blazor.Test.Chip
         }
 
         [TestMethod]
+        public void RenderChipNoWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-chip");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
         public void RenderChipWithLight()
         {
             //Act
@@ -192,6 +342,21 @@ namespace MASA.Blazor.Test.Chip
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderChipNoWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-chip");
 
             // Assert
             Assert.IsTrue(hasLightClass);
@@ -213,6 +378,21 @@ namespace MASA.Blazor.Test.Chip
         }
 
         [TestMethod]
+        public void RenderChipNoWithPill()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.Pill, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPillClass = classes.Contains("m-chip");
+
+            // Assert
+            Assert.IsTrue(hasPillClass);
+        }
+
+        [TestMethod]
         public void RenderChipWithIsActive()
         {
             //Act
@@ -222,6 +402,21 @@ namespace MASA.Blazor.Test.Chip
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasIsActiveClass = classes.Contains("m-chip--active");
+
+            // Assert
+            Assert.IsTrue(hasIsActiveClass);
+        }
+
+        [TestMethod]
+        public void RenderChipNoWithIsActive()
+        {
+            //Act
+            var cut = RenderComponent<MChip>(props =>
+            {
+                props.Add(chip => chip.IsActive, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIsActiveClass = classes.Contains("m-chip");
 
             // Assert
             Assert.IsTrue(hasIsActiveClass);
