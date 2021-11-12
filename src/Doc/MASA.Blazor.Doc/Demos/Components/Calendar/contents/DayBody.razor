@@ -1,0 +1,41 @@
+﻿<div>TODO</div>
+@*<MRow>
+    <MCol>
+        <MSheet Height="500">
+            <MCalendar @bind-bind-Value="_value" Type="week">
+                <DayBodyContent>
+                    <div class="@($"m-current-time {(context.Date == context.Week[0].Date ? "first" : "" )}")" style="@($"top:")"></div>
+
+                </DayBodyContent>
+            </MCalendar>
+        </MSheet>
+    </MCol>
+</MRow>
+
+@code{
+    private string _value = string.Empty;
+    private bool _ready = false;
+}
+
+<style lang="scss">
+    .m-current-time {
+      height: 2px;
+      background-color: #ea4335;
+      position: absolute;
+      left: -1px;
+      right: 0;
+      pointer-events: none;
+
+      &.first::before {
+        content: '';
+        position: absolute;
+        background-color: #ea4335;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-top: -5px;
+        margin-left: -6.5px;
+      }
+    }
+</style>
+*@

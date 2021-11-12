@@ -1,14 +1,8 @@
 ﻿{
   "Components": [
-    "Dialog"
+    "CalendarWeekly"
   ],
   "Props": [
-    {
-      "Name": "Attach",
-      "Type": "String",
-      "Default": "null",
-      "Description": ""
-    },
     {
       "Name": "Class",
       "Type": "String",
@@ -16,10 +10,10 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
-      "Name": "CloseDelay",
-      "Type": "Int32",
-      "Default": "0",
-      "Description": ""
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
     },
     {
       "Name": "Dark",
@@ -28,13 +22,19 @@
       "Description": "将暗色主题变量应用到组件。"
     },
     {
-      "Name": "Disabled",
-      "Type": "Boolean",
-      "Default": "false",
+      "Name": "DayFormat",
+      "Type": "Func`3",
+      "Default": "null",
       "Description": ""
     },
     {
-      "Name": "Fullscreen",
+      "Name": "End",
+      "Type": "StringNumberDate",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "HideHeader",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
@@ -52,40 +52,64 @@
       "Description": ""
     },
     {
-      "Name": "MaxWidth",
-      "Type": "StringNumber",
-      "Default": "",
-      "Description": "设定组件的最大宽度。"
+      "Name": "Locale",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
-      "Name": "OpenDelay",
+      "Name": "LocaleFirstDayOfYear",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "MinWeeks",
       "Type": "Int32",
       "Default": "0",
       "Description": ""
     },
     {
-      "Name": "OpenOnFocus",
+      "Name": "MonthFormat",
+      "Type": "Func`3",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Now",
+      "Type": "StringNumberDate",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ShortMonths",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
     },
     {
-      "Name": "OpenOnHover",
+      "Name": "ShortWeekdays",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
     },
     {
-      "Name": "Persistent",
+      "Name": "ShowMonthOnFirst",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "点击元素外部或按下esc键不会使其失效。"
+      "Description": ""
     },
     {
-      "Name": "Scrollable",
+      "Name": "ShowWeek",
       "Type": "Boolean",
       "Default": "false",
-      "Description": "当设置为 true 时，期望有一个 v-card 和一个 v-card-text 组件，并有指定的高度。更多信息，请查看 可滚动示例。"
+      "Description": ""
+    },
+    {
+      "Name": "Start",
+      "Type": "StringNumberDate",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Style",
@@ -94,35 +118,31 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
-      "Name": "Transition",
-      "Type": "String",
+      "Name": "WeekdayFormat",
+      "Type": "Func`3",
       "Default": "null",
       "Description": ""
     },
     {
-      "Name": "Width",
-      "Type": "StringNumber",
+      "Name": "WeekDays",
+      "Type": "OneOf`2",
       "Default": "",
-      "Description": "设定组件的最小宽度。"
+      "Description": ""
     }
   ],
   "Contents": [
     {
-      "Name": "ActivatorContent",
+      "Name": "DayContent",
       "Description": ""
     },
     {
-      "Name": "ChildContent",
-      "Description": "默认插槽"
+      "Name": "DayLabelContent",
+      "Description": ""
     }
   ],
   "Events": [
     {
-      "Name": "OnOutsideClick",
-      "Description": ""
-    },
-    {
-      "Name": "ValueChanged",
+      "Name": "NowChanged",
       "Description": ""
     }
   ]

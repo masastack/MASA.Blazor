@@ -1,14 +1,8 @@
 ﻿{
   "Components": [
-    "Dialog"
+    "CalendarWeekly"
   ],
   "Props": [
-    {
-      "Name": "Attach",
-      "Type": "String",
-      "Default": "null",
-      "Description": ""
-    },
     {
       "Name": "Class",
       "Type": "String",
@@ -16,10 +10,10 @@
       "Description": "The class applied to the outermost element of the component"
     },
     {
-      "Name": "CloseDelay",
-      "Type": "Int32",
-      "Default": "0",
-      "Description": ""
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "Applies specified color to the control - it can be the name of material color (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5))."
     },
     {
       "Name": "Dark",
@@ -28,13 +22,19 @@
       "Description": "Applies the dark theme variant to the component."
     },
     {
-      "Name": "Disabled",
-      "Type": "Boolean",
-      "Default": "false",
+      "Name": "DayFormat",
+      "Type": "Func`3",
+      "Default": "null",
       "Description": ""
     },
     {
-      "Name": "Fullscreen",
+      "Name": "End",
+      "Type": "StringNumberDate",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "HideHeader",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
@@ -52,39 +52,63 @@
       "Description": ""
     },
     {
-      "Name": "MaxWidth",
-      "Type": "StringNumber",
-      "Default": "",
-      "Description": "Sets the maximum width for the component."
+      "Name": "Locale",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
-      "Name": "OpenDelay",
+      "Name": "LocaleFirstDayOfYear",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "MinWeeks",
       "Type": "Int32",
       "Default": "0",
       "Description": ""
     },
     {
-      "Name": "OpenOnFocus",
+      "Name": "MonthFormat",
+      "Type": "Func`3",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Now",
+      "Type": "StringNumberDate",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ShortMonths",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
     },
     {
-      "Name": "OpenOnHover",
+      "Name": "ShortWeekdays",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
     },
     {
-      "Name": "Persistent",
+      "Name": "ShowMonthOnFirst",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
     },
     {
-      "Name": "Scrollable",
+      "Name": "ShowWeek",
       "Type": "Boolean",
       "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Start",
+      "Type": "StringNumberDate",
+      "Default": "null",
       "Description": ""
     },
     {
@@ -94,35 +118,31 @@
       "Description": "The style applied to the outermost element of the component"
     },
     {
-      "Name": "Transition",
-      "Type": "String",
+      "Name": "WeekdayFormat",
+      "Type": "Func`3",
       "Default": "null",
       "Description": ""
     },
     {
-      "Name": "Width",
-      "Type": "StringNumber",
+      "Name": "WeekDays",
+      "Type": "OneOf`2",
       "Default": "",
-      "Description": "Sets the width for the component."
+      "Description": ""
     }
   ],
   "Contents": [
     {
-      "Name": "ActivatorContent",
+      "Name": "DayContent",
       "Description": ""
     },
     {
-      "Name": "ChildContent",
-      "Description": "Default Content"
+      "Name": "DayLabelContent",
+      "Description": ""
     }
   ],
   "Events": [
     {
-      "Name": "OnOutsideClick",
-      "Description": ""
-    },
-    {
-      "Name": "ValueChanged",
+      "Name": "NowChanged",
       "Description": ""
     }
   ]
