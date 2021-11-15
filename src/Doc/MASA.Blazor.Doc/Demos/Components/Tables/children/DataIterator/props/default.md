@@ -11,4 +11,5 @@ title:
 
 ## en-US
 
-TODO...
+The `MDataIterator` has internal state for both selection and expansion, just like `MDataTable`. In this example we use
+the methods isExpanded and expand available on the default slot.

@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Non-editable steps force a user to process linearly through your process.
+Linear steppers will always move a user through your defined path.

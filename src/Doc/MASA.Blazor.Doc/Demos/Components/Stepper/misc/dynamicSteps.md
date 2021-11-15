@@ -11,4 +11,5 @@ title:
 
 ## en-US
 
-Steppers can have their steps dynamically added or removed. If a currently active step is removed, be sure to account for this by changing the applied model.
+Steppers can have their steps dynamically added or removed. If a currently active step is removed, be sure to account
+for this by changing the applied model.

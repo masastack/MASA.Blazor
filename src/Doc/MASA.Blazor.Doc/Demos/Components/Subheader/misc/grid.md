@@ -2,7 +2,7 @@
 order: 1
 title:
   zh-CN: 栅格
-  en-US: Albums
+  en-US: Grid
 ---
 
 ## zh-CN
@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-A subheader can be added to the context to categorize what the user is looking at, etc.
+A subheader can add context to what a user is looking at.
