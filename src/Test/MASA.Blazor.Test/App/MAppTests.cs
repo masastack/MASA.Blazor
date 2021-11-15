@@ -29,20 +29,69 @@ namespace MASA.Blazor.Test.App
             contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
 
-        //[TestMethod]
-        //public void RendeListWithDark()
-        //{
-        //    //Act
-        //    var cut = RenderComponent<MApp>(props =>
-        //    {
-        //        props.Add(listgroup => listgroup.Dark, true);
-        //    });
-        //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasDarkClass = classes.Contains("theme--dark");
+        [TestMethod]
+        public void RendeAppWithDark()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MApp>(props =>
+            {
+                props.Add(app => app.Dark, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("theme--dark");
 
-        //    // Assert
-        //    Assert.IsTrue(hasDarkClass);
-        //}
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RendeAppNoWithDark()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MApp>(props =>
+            {
+                props.Add(app => app.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-app");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RendeAppWithLight()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MApp>(props =>
+            {
+                props.Add(app => app.Light, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RendeAppNoWithLight()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MApp>(props =>
+            {
+                props.Add(app => app.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-app");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
     }
 
 }

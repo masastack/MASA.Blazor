@@ -8,6 +8,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Autocomplete\**" />
+    <Compile Remove="ButtonGroup\**" />
+    <Compile Remove="Cascader\**" />
+    <Compile Remove="Col\**" />
+    <Compile Remove="DataIterator\**" />
+    <EmbeddedResource Remove="Autocomplete\**" />
+    <EmbeddedResource Remove="ButtonGroup\**" />
+    <EmbeddedResource Remove="Cascader\**" />
+    <EmbeddedResource Remove="Col\**" />
+    <EmbeddedResource Remove="DataIterator\**" />
+    <None Remove="Autocomplete\**" />
+    <None Remove="ButtonGroup\**" />
+    <None Remove="Cascader\**" />
+    <None Remove="Col\**" />
+    <None Remove="DataIterator\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="bunit" Version="1.2.49" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="Moq" Version="4.16.1" />
@@ -21,8 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Cascader\" />
-    <Folder Include="DataIterator\" />
     <Folder Include="Icon\" />
     <Folder Include="RangeSlider\" />
     <Folder Include="SlideGroup\" />
@@ -30,11 +46,8 @@
     <Folder Include="Tooltip\" />
     <Folder Include="Upload\" />
     <Folder Include="Window\" />
-    <Folder Include="Autocomplete\" />
     <Folder Include="Form\" />
     <Folder Include="Row\" />
-    <Folder Include="Col\" />
-    <Folder Include="ButtonGroup\" />
     <Folder Include="ListItemGroup\" />
     <Folder Include="TimePicker\" />
     <Folder Include="SimpleTable\" />
