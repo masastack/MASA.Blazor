@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-TODO...
+Due to the flexibility of pickers, you can really dial in the experience exactly how you want it.

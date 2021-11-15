@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-TODO...
+You can edit time picker’s value using mouse wheel.

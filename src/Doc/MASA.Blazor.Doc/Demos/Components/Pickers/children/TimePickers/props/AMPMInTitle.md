@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-TODO...
+You can move AM/PM switch to picker’s title.
