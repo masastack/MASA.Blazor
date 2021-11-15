@@ -38,5 +38,33 @@ namespace MASA.Blazor.Test.Switch
             // Assert
             Assert.IsTrue(hasInsetClass);
         }
+
+        [TestMethod]
+        public void RendeMSwitchNoWithFlat()
+        {
+            //Act
+            var cut = RenderComponent<MSwitch>(props =>
+            {
+                props.Add(mswitch => mswitch.Flat, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFlatClass = classes.Contains("m-input--switch");
+            // Assert
+            Assert.IsTrue(hasFlatClass);
+        }
+
+        [TestMethod]
+        public void RendeMSwitchNoWithInset()
+        {
+            //Act
+            var cut = RenderComponent<MSwitch>(props =>
+            {
+                props.Add(mswitch => mswitch.Inset, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasInsetClass = classes.Contains("m-input--switch");
+            // Assert
+            Assert.IsTrue(hasInsetClass);
+        }
     }
 }

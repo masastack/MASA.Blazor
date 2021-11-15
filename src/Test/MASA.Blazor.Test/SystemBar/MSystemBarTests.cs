@@ -159,5 +159,119 @@ namespace MASA.Blazor.Test.SystemBar
             // Assert
             contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
+
+        [TestMethod]
+        public void RendeMSystemBarNoWithLightsOut()
+        {
+            //Act
+            var cut = RenderComponent<MSystemBar>(props =>
+            {
+                props.Add(systembar => systembar.LightsOut, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightsOutClass = classes.Contains("m-system-bar");
+            // Assert
+            Assert.IsTrue(hasLightsOutClass);
+        }
+
+        [TestMethod]
+        public void RendeMSystemBarNoWithAbsolute()
+        {
+            //Act
+            var cut = RenderComponent<MSystemBar>(props =>
+            {
+                props.Add(systembar => systembar.Absolute, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAbsoluteClass = classes.Contains("m-system-bar");
+            // Assert
+            Assert.IsTrue(hasAbsoluteClass);
+        }
+
+        [TestMethod]
+        public void RendeMSystemBarNoWithnoAbsolute()
+        {
+            //Act
+            var cut = RenderComponent<MSystemBar>(props =>
+            {
+                props.Add(systembar => systembar.Absolute, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var noAbsoluteClass = !classes.Contains("m-system-bar--absolute");
+            // Assert
+            Assert.IsTrue(noAbsoluteClass);
+        }
+
+        [TestMethod]
+        public void RendeMSystemBarNoWithWindow()
+        {
+            //Act
+            var cut = RenderComponent<MSystemBar>(props =>
+            {
+                props.Add(systembar => systembar.Window, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasWindowClass = classes.Contains("m-system-bar");
+            // Assert
+            Assert.IsTrue(hasWindowClass);
+        }
+
+        [TestMethod]
+        public void RendeMSystemBarNoWithFixed()
+        {
+            //Act
+            var cut = RenderComponent<MSystemBar>(props =>
+            {
+                props.Add(systembar => systembar.Fixed, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFixedClass = classes.Contains("m-system-bar");
+            // Assert
+            Assert.IsTrue(hasFixedClass);
+        }
+
+        [TestMethod]
+        public void RendeMSystemBarNoWithApp()
+        {
+            //Act
+            var cut = RenderComponent<MSystemBar>(props =>
+            {
+                props.Add(systembar => systembar.App, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppClass = classes.Contains("m-system-bar");
+            // Assert
+            Assert.IsTrue(hasAppClass);
+        }
+
+        [TestMethod]
+        public void RenderSystemBarNoWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MSystemBar>(props =>
+            {
+                props.Add(systembar => systembar.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-system-bar");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderSystemBarNoWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MSystemBar>(props =>
+            {
+                props.Add(systembar => systembar.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-system-bar");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
     }
 }

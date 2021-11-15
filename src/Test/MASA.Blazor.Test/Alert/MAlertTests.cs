@@ -464,7 +464,95 @@ namespace MASA.Blazor.Test.Alert
             Assert.IsTrue(hasElevationClass);
         }
 
-        
+        [TestMethod]
+        public void RenderWithHeight()
+        {
+            // Act
+            var cut = RenderComponent<MAlert>(props =>
+            {
+                props.Add(p => p.Height, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-alert");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithWidth()
+        {
+            // Act
+            var cut = RenderComponent<MAlert>(props =>
+            {
+                props.Add(p => p.Width, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-alert");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("width: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMaxHeight()
+        {
+            // Act
+            var cut = RenderComponent<MAlert>(props =>
+            {
+                props.Add(p => p.MaxHeight, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-alert");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("max-height: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMinHeight()
+        {
+            // Act
+            var cut = RenderComponent<MAlert>(props =>
+            {
+                props.Add(p => p.MinHeight, 80);
+            });
+            var inputSlotDiv = cut.Find(".m-alert");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("min-height: 80px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMaxWidth()
+        {
+            // Act
+            var cut = RenderComponent<MAlert>(props =>
+            {
+                props.Add(p => p.MaxWidth, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-alert");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("max-width: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMinWidth()
+        {
+            // Act
+            var cut = RenderComponent<MAlert>(props =>
+            {
+                props.Add(p => p.MinWidth, 80);
+            });
+            var inputSlotDiv = cut.Find(".m-alert");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("min-width: 80px", style);
+        }
 
     }
 }

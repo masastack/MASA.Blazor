@@ -68,5 +68,63 @@ namespace MASA.Blazor.Test.Rating
             // Assert
             Assert.IsTrue(hasLightClass);
         }
+
+        [TestMethod]
+        public void RendeRatingNoWithReadonly()
+        {
+            //Act
+            var cut = RenderComponent<MRating>(props =>
+            {
+                props.Add(rating => rating.Readonly, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasReadonlyClass = classes.Contains("m-rating");
+            // Assert
+            Assert.IsTrue(hasReadonlyClass);
+        }
+
+        [TestMethod]
+        public void RendeRatingNoWithDense()
+        {
+            //Act
+            var cut = RenderComponent<MRating>(props =>
+            {
+                props.Add(rating => rating.Dense, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDenseClass = classes.Contains("m-rating");
+            // Assert
+            Assert.IsTrue(hasDenseClass);
+        }
+
+        [TestMethod]
+        public void RenderRatingNoWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MRating>(props =>
+            {
+                props.Add(rating => rating.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-rating");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderRatingNoWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MRating>(props =>
+            {
+                props.Add(rating => rating.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-rating");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
     }
 }

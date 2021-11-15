@@ -26,6 +26,21 @@ namespace MASA.Blazor.Test.Tabs
             Assert.IsTrue(hasShowArrowsOnHoverClass);
         }
 
+        [TestMethod]
+        public void RendeWindowNoWithShowArrowsOnHover()
+        {
+            //Act
+            var cut = RenderComponent<MWindow>(props =>
+            {
+                props.Add(window => window.ShowArrowsOnHover, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasShowArrowsOnHoverClass = classes.Contains("m-window");
+
+            // Assert
+            Assert.IsTrue(hasShowArrowsOnHoverClass);
+        }
+
         //[TestMethod]
         //public void RenderWithChildContentt()
         //{

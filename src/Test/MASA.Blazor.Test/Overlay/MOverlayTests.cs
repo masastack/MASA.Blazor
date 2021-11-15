@@ -26,20 +26,20 @@ namespace MASA.Blazor.Test.Overlay
             Assert.IsTrue(hasDarkClass);
         }
 
-        //[TestMethod]
-        //public void RenderOverlayWithLight()
-        //{
-        //    //Act
-        //    var cut = RenderComponent<MOverlay>(props =>
-        //    {
-        //        props.Add(overlay => overlay.Light, false);
-        //    });
-        //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasLightClass = classes.Contains("theme--light");
+        [TestMethod]
+        public void RenderOverlayNoWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MOverlay>(props =>
+            {
+                props.Add(overlay => overlay.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-overlay");
 
-        //    // Assert
-        //    Assert.IsTrue(hasLightClass);
-        //}
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
 
         [TestMethod]
         public void RenderOverlayWithValue()
@@ -57,6 +57,21 @@ namespace MASA.Blazor.Test.Overlay
         }
 
         [TestMethod]
+        public void RenderOverlayNoWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MOverlay>(props =>
+            {
+                props.Add(overlay => overlay.Value, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-overlay");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
         public void RenderOverlayWithAbsolute()
         {
             //Act
@@ -66,6 +81,21 @@ namespace MASA.Blazor.Test.Overlay
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasDarkClass = classes.Contains("m-overlay--absolute");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderOverlayNoWithAbsolute()
+        {
+            //Act
+            var cut = RenderComponent<MOverlay>(props =>
+            {
+                props.Add(overlay => overlay.Absolute, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-overlay");
 
             // Assert
             Assert.IsTrue(hasDarkClass);

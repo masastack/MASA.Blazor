@@ -67,5 +67,63 @@ namespace MASA.Blazor.Test.Radio
             // Assert
             Assert.IsTrue(hasLightClass);
         }
+
+        [TestMethod]
+        public void RendeMRadioGroupNoWithRow()
+        {
+            //Act
+            var cut = RenderComponent<MRadioGroup<string>>(props =>
+            {
+                props.Add(radiogroup => radiogroup.Row, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasRowClass = classes.Contains("m-input--radio-group");
+            // Assert
+            Assert.IsTrue(hasRowClass);
+        }
+
+        [TestMethod]
+        public void RendeMRadioGroupNoWithColumn()
+        {
+            //Act
+            var cut = RenderComponent<MRadioGroup<string>>(props =>
+            {
+                props.Add(radiogroup => radiogroup.Column, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColumnClass = classes.Contains("m-input--radio-group");
+            // Assert
+            Assert.IsTrue(hasColumnClass);
+        }
+
+        [TestMethod]
+        public void RenderProgressLinearNoWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MRadioGroup<string>>(props =>
+            {
+                props.Add(counter => counter.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-input--radio-group");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderProgressLinearNoWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MRadioGroup<string>>(props =>
+            {
+                props.Add(counter => counter.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-input--radio-group");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
     }
 }

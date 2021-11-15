@@ -70,6 +70,51 @@ namespace MASA.Blazor.Test.Slider
             Assert.IsTrue(noVerticalClass);
         }
 
+        [TestMethod]
+        public void RenderSliderNoWithVertical()
+        {
+            //Act
+            var cut = RenderComponent<MSlider<double>>(props =>
+            {
+                props.Add(slider => slider.Vertical, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasVerticalClass = classes.Contains("m-input__slider");
+
+            // Assert
+            Assert.IsTrue(hasVerticalClass);
+        }
+
+        [TestMethod]
+        public void RenderSliderNoWithInverseLabel()
+        {
+            //Act
+            var cut = RenderComponent<MSlider<double>>(props =>
+            {
+                props.Add(slider => slider.InverseLabel, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasInverseLabelClass = classes.Contains("m-input__slider");
+
+            // Assert
+            Assert.IsTrue(hasInverseLabelClass);
+        }
+
+        [TestMethod]
+        public void RenderSliderNoWithnoVertical()
+        {
+            //Act
+            var cut = RenderComponent<MSlider<double>>(props =>
+            {
+                props.Add(slider => slider.Vertical, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var noVerticalClass = !classes.Contains("m-slider");
+
+            // Assert
+            Assert.IsTrue(noVerticalClass);
+        }
+
         //[TestMethod]
         //public void RenderWithSize()
         //{

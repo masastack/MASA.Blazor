@@ -29,6 +29,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
         }
 
         [TestMethod]
+        public void RendeButtonGroupNoWithHorizontal()
+        {
+            //Act
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                props.Add(navigationdrawer => navigationdrawer.Absolute, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAbsoluteClass = classes.Contains("m-navigation-drawer");
+
+            // Assert
+            Assert.IsTrue(hasAbsoluteClass);
+        }
+
+        [TestMethod]
         public void RendeButtonGroupWithIsBottoml()
         {
             //Act
@@ -38,6 +53,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasIsBottomClass = classes.Contains("m-navigation-drawer--bottom");
+
+            // Assert
+            Assert.IsTrue(hasIsBottomClass);
+        }
+
+        [TestMethod]
+        public void RendeButtonGroupNoWithIsBottoml()
+        {
+            //Act
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                props.Add(navigationdrawer => navigationdrawer.Bottom, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIsBottomClass = classes.Contains("m-navigation-drawer");
 
             // Assert
             Assert.IsTrue(hasIsBottomClass);
@@ -59,6 +89,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
         }
 
         [TestMethod]
+        public void RendeButtonGroupNoWithClipped()
+        {
+            //Act
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                props.Add(navigationdrawer => navigationdrawer.Clipped, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasClippedClass = classes.Contains("m-navigation-drawer");
+
+            // Assert
+            Assert.IsTrue(hasClippedClass);
+        }
+
+        [TestMethod]
         public void RendeButtonGroupWithIsActive()
         {
             //Act
@@ -68,6 +113,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasIsActiveClass = classes.Contains("m-navigation-drawer--open");
+
+            // Assert
+            Assert.IsTrue(hasIsActiveClass);
+        }
+
+        [TestMethod]
+        public void RendeButtonGroupNoWithIsActive()
+        {
+            //Act
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                props.Add(navigationdrawer => navigationdrawer.Value, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIsActiveClass = classes.Contains("m-navigation-drawer");
 
             // Assert
             Assert.IsTrue(hasIsActiveClass);
@@ -89,6 +149,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
         }
 
         [TestMethod]
+        public void RendeButtonGroupNoWithFloating()
+        {
+            //Act
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                props.Add(navigationdrawer => navigationdrawer.Floating, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFloatingClass = classes.Contains("m-navigation-drawer");
+
+            // Assert
+            Assert.IsTrue(hasFloatingClass);
+        }
+
+        [TestMethod]
         public void RendeButtonGroupWithExpandOnHover()
         {
             //Act
@@ -98,6 +173,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasExpandOnHoverClass = classes.Contains("m-navigation-drawer--open-on-hover");
+
+            // Assert
+            Assert.IsTrue(hasExpandOnHoverClass);
+        }
+
+        [TestMethod]
+        public void RendeButtonGroupNoWithExpandOnHover()
+        {
+            //Act
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                props.Add(navigationdrawer => navigationdrawer.ExpandOnHover, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasExpandOnHoverClass = classes.Contains("m-navigation-drawer");
 
             // Assert
             Assert.IsTrue(hasExpandOnHoverClass);
@@ -119,6 +209,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
         }
 
         [TestMethod]
+        public void RendeButtonGroupNoWithRight()
+        {
+            //Act
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                props.Add(navigationdrawer => navigationdrawer.Right, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasRightClass = classes.Contains("m-navigation-drawer");
+
+            // Assert
+            Assert.IsTrue(hasRightClass);
+        }
+
+        [TestMethod]
         public void RendeButtonGroupWithTemporary()
         {
             //Act
@@ -128,6 +233,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasTemporaryClass = classes.Contains("m-navigation-drawer--temporary");
+
+            // Assert
+            Assert.IsTrue(hasTemporaryClass);
+        }
+
+        [TestMethod]
+        public void RendeButtonGroupNoWithTemporary()
+        {
+            //Act
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                props.Add(navigationdrawer => navigationdrawer.Temporary, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTemporaryClass = classes.Contains("m-navigation-drawer");
 
             // Assert
             Assert.IsTrue(hasTemporaryClass);
@@ -149,6 +269,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
         }
 
         [TestMethod]
+        public void RenderNavigationDrawerNoWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                props.Add(navigationdrawer => navigationdrawer.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-navigation-drawer");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
         public void RenderNavigationDrawerWithLight()
         {
             //Act
@@ -158,6 +293,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderNavigationDrawerNoWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                props.Add(navigationdrawer => navigationdrawer.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-navigation-drawer");
 
             // Assert
             Assert.IsTrue(hasLightClass);
@@ -179,6 +329,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
         }
 
         [TestMethod]
+        public void RenderNavigationDrawerNoWithApp()
+        {
+            //Act
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                props.Add(navigationdrawer => navigationdrawer.App, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppClass = classes.Contains("m-navigation-drawer");
+
+            // Assert
+            Assert.IsTrue(hasAppClass);
+        }
+
+        [TestMethod]
         public void RenderNavigationDrawerWithFixed()
         {
             //Act
@@ -188,6 +353,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasFixedClass = classes.Contains("m-navigation-drawer--fixed");
+
+            // Assert
+            Assert.IsTrue(hasFixedClass);
+        }
+
+        [TestMethod]
+        public void RenderNavigationDrawerNoWithFixed()
+        {
+            //Act
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                props.Add(navigationdrawer => navigationdrawer.Fixed, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFixedClass = classes.Contains("m-navigation-drawer");
 
             // Assert
             Assert.IsTrue(hasFixedClass);
@@ -209,6 +389,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
         }
 
         [TestMethod]
+        public void RenderNavigationDrawerNoWithAbsolute()
+        {
+            //Act
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                props.Add(navigationdrawer => navigationdrawer.Absolute, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var noAbsoluteClass = !classes.Contains("m-navigation-drawer__content");
+
+            // Assert
+            Assert.IsTrue(noAbsoluteClass);
+        }
+
+        [TestMethod]
         public void RenderNavigationDrawerWithIsActive()
         {
             //Act
@@ -218,6 +413,21 @@ namespace MASA.Blazor.Test.NavigationDrawer
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var noIsActiveClass = !classes.Contains("m-navigation-drawer--fixed");
+
+            // Assert
+            Assert.IsTrue(noIsActiveClass);
+        }
+
+        [TestMethod]
+        public void RenderNavigationDrawerNoWithIsActive()
+        {
+            //Act
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                props.Add(navigationdrawer => navigationdrawer.Value, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var noIsActiveClass = !classes.Contains("m-navigation-drawer__content");
 
             // Assert
             Assert.IsTrue(noIsActiveClass);

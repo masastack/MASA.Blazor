@@ -27,6 +27,21 @@ namespace MASA.Blazor.Test.Label
         }
 
         [TestMethod]
+        public void RenderLabelNoWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MLabel>(props =>
+            {
+                props.Add(counter => counter.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-label");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
         public void RenderLabelWithLight()
         {
             //Act
@@ -36,6 +51,21 @@ namespace MASA.Blazor.Test.Label
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderLabelNoWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MLabel>(props =>
+            {
+                props.Add(counter => counter.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-label");
 
             // Assert
             Assert.IsTrue(hasLightClass);
@@ -57,6 +87,21 @@ namespace MASA.Blazor.Test.Label
         }
 
         [TestMethod]
+        public void RenderLabelNoWithDisabled()
+        {
+            //Act
+            var cut = RenderComponent<MLabel>(props =>
+            {
+                props.Add(counter => counter.Disabled, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDisabledClass = classes.Contains("m-label");
+
+            // Assert
+            Assert.IsTrue(hasDisabledClass);
+        }
+
+        [TestMethod]
         public void RenderLabelWithValue()
         {
             //Act
@@ -66,6 +111,21 @@ namespace MASA.Blazor.Test.Label
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasDisabledClass = classes.Contains("m-label--active");
+
+            // Assert
+            Assert.IsTrue(hasDisabledClass);
+        }
+
+        [TestMethod]
+        public void RenderLabelNoWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MLabel>(props =>
+            {
+                props.Add(counter => counter.Value, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDisabledClass = classes.Contains("m-label");
 
             // Assert
             Assert.IsTrue(hasDisabledClass);

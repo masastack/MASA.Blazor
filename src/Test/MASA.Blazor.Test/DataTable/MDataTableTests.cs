@@ -163,21 +163,6 @@ namespace MASA.Blazor.Test.DataTable
             Assert.IsTrue(hasDisableSortClass);
         }
 
-        [TestMethod]
-        public void RendeDataTableWithCheckboxColor(string sorticon)
-        {
-            //Act
-            var cut = RenderComponent<MDataTableHeader>(props =>
-            {
-                props.Add(datatableheader => datatableheader.SortIcon, sorticon);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasDisableSortClass = classes.Contains("mdi-star");
-
-            // Assert
-            Assert.IsTrue(hasDisableSortClass);
-        }
-
         //[TestMethod]
         //public void RenderWithDataTableSelectContent()
         //{

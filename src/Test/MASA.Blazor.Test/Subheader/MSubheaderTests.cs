@@ -55,6 +55,50 @@ namespace MASA.Blazor.Test.Subheader
             Assert.IsTrue(hasLightClass);
         }
 
+        [TestMethod]
+        public void RendeMSubheaderNoWithInset()
+        {
+            //Act
+            var cut = RenderComponent<MSubheader>(props =>
+            {
+                props.Add(subheader => subheader.Inset, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasInsetClass = classes.Contains("m-subheader");
+            // Assert
+            Assert.IsTrue(hasInsetClass);
+        }
+
+        [TestMethod]
+        public void RenderSubheaderNoWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MSubheader>(props =>
+            {
+                props.Add(subheader => subheader.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-subheader");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderSubheaderNoWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MSubheader>(props =>
+            {
+                props.Add(subheader => subheader.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-subheader");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
         //[TestMethod]
         //public void RenderWithChildContentt()
         //{

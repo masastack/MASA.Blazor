@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Bunit;
 using BlazorComponent;
 using Moq;
+
 namespace MASA.Blazor.Test.ItemGroup
 {
     [TestClass]
@@ -28,6 +29,21 @@ namespace MASA.Blazor.Test.ItemGroup
         }
 
         [TestMethod]
+        public void RendeButtonGroupNoWithBorderless()
+        {
+            //Act
+            var cut = RenderComponent<MButtonGroup>(props =>
+            {
+                props.Add(buttongroup => buttongroup.Borderless, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBorderlessClass = classes.Contains("m-btn-toggle");
+
+            // Assert
+            Assert.IsTrue(hasBorderlessClass);
+        }
+
+        [TestMethod]
         public void RendeButtonGroupWithDense()
         {
             //Act
@@ -37,6 +53,21 @@ namespace MASA.Blazor.Test.ItemGroup
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasDenseClass = classes.Contains("m-btn-toggle--dense");
+
+            // Assert
+            Assert.IsTrue(hasDenseClass);
+        }
+
+        [TestMethod]
+        public void RendeButtonGroupNoWithDense()
+        {
+            //Act
+            var cut = RenderComponent<MButtonGroup>(props =>
+            {
+                props.Add(buttongroup => buttongroup.Dense, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDenseClass = classes.Contains("m-btn-toggle");
 
             // Assert
             Assert.IsTrue(hasDenseClass);
@@ -58,6 +89,21 @@ namespace MASA.Blazor.Test.ItemGroup
         }
 
         [TestMethod]
+        public void RendeButtonGroupNoWithGroup()
+        {
+            //Act
+            var cut = RenderComponent<MButtonGroup>(props =>
+            {
+                props.Add(buttongroup => buttongroup.Group, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasGroupClass = classes.Contains("m-btn-toggle");
+
+            // Assert
+            Assert.IsTrue(hasGroupClass);
+        }
+
+        [TestMethod]
         public void RendeButtonGroupWithRounded()
         {
             //Act
@@ -67,6 +113,21 @@ namespace MASA.Blazor.Test.ItemGroup
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasRoundedClass = classes.Contains("m-btn-toggle--rounded");
+
+            // Assert
+            Assert.IsTrue(hasRoundedClass);
+        }
+
+        [TestMethod]
+        public void RendeButtonGroupNoWithRounded()
+        {
+            //Act
+            var cut = RenderComponent<MButtonGroup>(props =>
+            {
+                props.Add(buttongroup => buttongroup.Rounded, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasRoundedClass = classes.Contains("m-btn-toggle");
 
             // Assert
             Assert.IsTrue(hasRoundedClass);
@@ -88,6 +149,21 @@ namespace MASA.Blazor.Test.ItemGroup
         }
 
         [TestMethod]
+        public void RendeButtonGroupNoWithShaped()
+        {
+            //Act
+            var cut = RenderComponent<MButtonGroup>(props =>
+            {
+                props.Add(buttongroup => buttongroup.Shaped, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasShapedClass = classes.Contains("m-btn-toggle");
+
+            // Assert
+            Assert.IsTrue(hasShapedClass);
+        }
+
+        [TestMethod]
         public void RendeButtonGroupWithTile()
         {
             //Act
@@ -103,33 +179,18 @@ namespace MASA.Blazor.Test.ItemGroup
         }
 
         [TestMethod]
-        public void RenderItemGroupWithDark()
+        public void RendeButtonGroupNoWithTile()
         {
             //Act
-            var cut = RenderComponent<MItemGroup>(props =>
+            var cut = RenderComponent<MButtonGroup>(props =>
             {
-                props.Add(itemgroup => itemgroup.Dark, true);
+                props.Add(buttongroup => buttongroup.Tile, false);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasdarkClass = classes.Contains("theme--dark");
+            var hasTileClass = classes.Contains("m-btn-toggle");
 
             // Assert
-            Assert.IsTrue(hasdarkClass);
-        }
-
-        [TestMethod]
-        public void RenderItemGroupWithLight()
-        {
-            //Act
-            var cut = RenderComponent<MItemGroup>(props =>
-            {
-                props.Add(itemgroup => itemgroup.Light, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasLightClass = classes.Contains("theme--light");
-
-            // Assert
-            Assert.IsTrue(hasLightClass);
+            Assert.IsTrue(hasTileClass);
         }
 
     }

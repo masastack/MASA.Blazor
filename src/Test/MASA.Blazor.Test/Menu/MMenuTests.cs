@@ -13,5 +13,20 @@ namespace MASA.Blazor.Test.Menu
     [TestClass]
     public class MMenuTests:TestBase
     {
+        //JS互操作
+        //[TestMethod]
+        //public void RendeMenuWithDark()
+        //{
+        //    //Act
+        //    var cut = RenderComponent<MMenu>(props =>
+        //    {
+        //        props.Add(menu => menu.Dark, true);
+        //    });
+        //    var classes = cut.Instance.CssProvider.GetClass();
+        //    var hasDarkClass = classes.Contains("theme--dark");
+
+        //    // Assert
+        //    Assert.IsTrue(hasDarkClass);
+        //}
     }
 }

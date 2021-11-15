@@ -82,5 +82,77 @@ namespace MASA.Blazor.Test.Timeline
             // Assert
             Assert.IsTrue(hasLightClass);
         }
+
+        [TestMethod]
+        public void RendeMTimelineNoWithAlignTop()
+        {
+            //Act
+            var cut = RenderComponent<MTimeline>(props =>
+            {
+                props.Add(timeline => timeline.AlignTop, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAlignTopClass = classes.Contains("m-timeline");
+            // Assert
+            Assert.IsTrue(hasAlignTopClass);
+        }
+
+        [TestMethod]
+        public void RendeMTimelineNoWithDense()
+        {
+            //Act
+            var cut = RenderComponent<MTimeline>(props =>
+            {
+                props.Add(timeline => timeline.Dense, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDenseClass = classes.Contains("m-timeline");
+            // Assert
+            Assert.IsTrue(hasDenseClass);
+        }
+
+        [TestMethod]
+        public void RendeMTimelineNoWithReverse()
+        {
+            //Act
+            var cut = RenderComponent<MTimeline>(props =>
+            {
+                props.Add(timeline => timeline.Reverse, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasReverseClass = classes.Contains("m-timeline");
+            // Assert
+            Assert.IsTrue(hasReverseClass);
+        }
+
+        [TestMethod]
+        public void RenderTimelineNoWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MTimeline>(props =>
+            {
+                props.Add(timeline => timeline.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-timeline");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderTimelineNoWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MTimeline>(props =>
+            {
+                props.Add(timeline => timeline.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-timeline");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
     }
 }

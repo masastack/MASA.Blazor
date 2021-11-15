@@ -817,6 +817,36 @@ namespace MASA.Blazor.Test.Button
             // Assert
             contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
+
+        [TestMethod]
+        public void RenderButtonWithElevation()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(alert => alert.Elevation, 24);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasElevationClass = classes.Contains("m-btn--is-elevated");
+
+            // Assert
+            Assert.IsTrue(hasElevationClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonWithRipple()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.Ripple, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasXSmallClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasXSmallClass);
+        }
     }
 }
 

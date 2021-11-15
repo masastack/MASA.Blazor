@@ -72,6 +72,62 @@ namespace MASA.Blazor.Test.Stepper
         }
 
         [TestMethod]
+        public void RendeMStepperNoWithFlat()
+        {
+            //Act
+            var cut = RenderComponent<MStepper>(props =>
+            {
+                props.Add(stepper => stepper.Flat, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFlatClass = classes.Contains("m-stepper");
+            // Assert
+            Assert.IsTrue(hasFlatClass);
+        }
+
+        [TestMethod]
+        public void RendeMStepperNoWithVertical()
+        {
+            //Act
+            var cut = RenderComponent<MStepper>(props =>
+            {
+                props.Add(stepper => stepper.Vertical, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasVerticalClass = classes.Contains("m-stepper");
+            // Assert
+            Assert.IsTrue(hasVerticalClass);
+        }
+
+        [TestMethod]
+        public void RendeMStepperNoWithAltLabels()
+        {
+            //Act
+            var cut = RenderComponent<MStepper>(props =>
+            {
+                props.Add(stepper => stepper.AltLabels, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAltLabelsClass = classes.Contains("m-stepper");
+            // Assert
+            Assert.IsTrue(hasAltLabelsClass);
+        }
+
+        [TestMethod]
+        public void RendeMStepperNoWithNonLinear()
+        {
+            //Act
+            var cut = RenderComponent<MStepper>(props =>
+            {
+                props.Add(stepper => stepper.NonLinear, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasNonLinearClass = classes.Contains("m-stepper");
+            // Assert
+            Assert.IsTrue(hasNonLinearClass);
+        }
+
+        [TestMethod]
         public void RenderWithChildContentt()
         {
             // Arrange & Act

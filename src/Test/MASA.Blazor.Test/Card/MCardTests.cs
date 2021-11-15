@@ -346,22 +346,64 @@ namespace MASA.Blazor.Test.Card
             Assert.AreEqual(1, times);
         }
 
+        [TestMethod]
+        public void RenderCardWithLoaderHeight()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(alert => alert.LoaderHeight, 4);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLoaderHeightClass = classes.Contains("m-card");
+
+            // Assert
+            Assert.IsTrue(hasLoaderHeightClass);
+        }
+
+        [TestMethod]
+        public void RenderCardWithExactPath()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(alert => alert.ExactPath, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasExactPathClass = classes.Contains("m-card");
+
+            // Assert
+            Assert.IsTrue(hasExactPathClass);
+        }
+
+        [TestMethod]
+        public void RenderCardNoWithExactPath()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(alert => alert.ExactPath, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasExactPathClass = classes.Contains("m-card");
+
+            // Assert
+            Assert.IsTrue(hasExactPathClass);
+        }
+
         //[TestMethod]
-        //public void RenderAlertWithElevation()
+        //public void RenderWithProgressContent()
         //{
-        //    //Act
+        //    // Arrange & Act
         //    var cut = RenderComponent<MCard>(props =>
         //    {
-        //        props.Add(alert => alert.Elevation, 4);
-        //        props.Add(alert => alert.Loading, true);
+        //        props.Add(list => list.ProgressContent, "<span>Hello world</span>");
+        //        props.Add(button => button.Loading, true);
         //    });
-        //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasElevationClass = classes.Contains(".m-card__progress");
+        //    var contentDiv = cut.Find(".m-progress-linear");
 
         //    // Assert
-        //    Assert.IsTrue(hasElevationClass);
+        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         //}
-
-
     }
 }

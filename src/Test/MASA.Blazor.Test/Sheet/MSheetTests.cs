@@ -97,5 +97,63 @@ namespace MASA.Blazor.Test.Sheet
             // Assert
             Assert.IsTrue(hasElevationClass);
         }
+
+        [TestMethod]
+        public void RendeSheetNoWithOutlined()
+        {
+            //Act
+            var cut = RenderComponent<MSheet>(props =>
+            {
+                props.Add(sheet => sheet.Outlined, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOutlinedClass = classes.Contains("m-sheet");
+            // Assert
+            Assert.IsTrue(hasOutlinedClass);
+        }
+
+        [TestMethod]
+        public void RendeSheetNoWithShaped()
+        {
+            //Act
+            var cut = RenderComponent<MSheet>(props =>
+            {
+                props.Add(sheet => sheet.Shaped, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasShapedClass = classes.Contains("m-sheet");
+            // Assert
+            Assert.IsTrue(hasShapedClass);
+        }
+
+        [TestMethod]
+        public void RendeSheetNoWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MSheet>(props =>
+            {
+                props.Add(sheet => sheet.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-sheet");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RendeMSheetNoWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MSheet>(props =>
+            {
+                props.Add(sheet => sheet.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-sheet");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
     }
 }

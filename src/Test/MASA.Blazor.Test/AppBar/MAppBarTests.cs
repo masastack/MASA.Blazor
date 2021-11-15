@@ -12,7 +12,7 @@ namespace MASA.Blazor.Test.AppBar
     public class MAppBarTests:TestBase
     {
         [TestMethod]
-        public void RenderButtonWithScroll()
+        public void RenderAppBarWithScroll()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -27,7 +27,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonNoWithScroll()
+        public void RenderAppBarNoWithScroll()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -42,7 +42,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonWithClippedRight()
+        public void RenderAppBarWithClippedRight()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -57,7 +57,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonNoWithClippedRight()
+        public void RenderAppBarNoWithClippedRight()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -72,7 +72,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonWithClippedLeft()
+        public void RenderAppBarWithClippedLeft()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -87,7 +87,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonNoWithClippedLeft()
+        public void RenderAppBarNoWithClippedLeft()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -102,7 +102,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonWithAbsolute()
+        public void RenderAppBarWithAbsolute()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -117,7 +117,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonNoWithAbsolute()
+        public void RenderAppBarNoWithAbsolute()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -132,7 +132,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonWithApp()
+        public void RenderAppBarWithApp()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -147,7 +147,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonNoWithApp()
+        public void RenderAppBarNoWithApp()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -162,7 +162,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonWithFixed()
+        public void RenderAppBarWithFixed()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -177,7 +177,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonNoWithFixed()
+        public void RenderAppBarNoWithFixed()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -192,7 +192,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonWithCollapseOnScroll()
+        public void RenderAppBarWithCollapseOnScroll()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -207,7 +207,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonNoWithCollapseOnScroll()
+        public void RenderAppBarNoWithCollapseOnScroll()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -222,7 +222,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonWithShrinkOnScroll()
+        public void RenderAppBarWithShrinkOnScroll()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -237,7 +237,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonNoWithShrinkOnScroll()
+        public void RenderAppBarNoWithShrinkOnScroll()
         {
             //Act
             var cut = RenderComponent<MAppBar>(props =>
@@ -281,19 +281,169 @@ namespace MASA.Blazor.Test.AppBar
             Assert.AreEqual("height: 64px;transform:translateY(0px);left:0px;right:0px", style);
         }
 
-        //[TestMethod]
-        //public void RenderButtonWithHideOnScroll()
-        //{
-        //    //Act
-        //    var cut = RenderComponent<MAppBar>(props =>
-        //    {
-        //        props.Add(appbar => appbar.HideOnScroll, true);
-        //    });
-        //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasScrollClass = classes.Contains("overflow-hidden");
+        [TestMethod]
+        public void RenderWithMarginTop()
+        {
+            // Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(p => p.MarginTop, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-app-bar");
+            var style = inputSlotDiv.GetAttribute("style");
 
-        //    // Assert
-        //    Assert.IsTrue(hasScrollClass);
-        //}
+            // Assert
+            Assert.AreEqual("height: 64px;margin-top:100px;transform:translateY(0px);left:0px;right:0px", style);
+        }
+
+        [TestMethod]
+        public void RenderAppBarWithFadeImgOnScroll()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.FadeImgOnScroll, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFadeImgOnScrollClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasFadeImgOnScrollClass);
+        }
+
+        [TestMethod]
+        public void RenderAppBarNoWithFadeImgOnScroll()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.FadeImgOnScroll, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFadeImgOnScrollClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasFadeImgOnScrollClass);
+        }
+
+        [TestMethod]
+        public void RenderAppBarWithHideOnScroll()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.HideOnScroll, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHideOnScrollClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasHideOnScrollClass);
+        }
+
+        [TestMethod]
+        public void RenderAppBarNoWithHideOnScroll()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.HideOnScroll, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHideOnScrollClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasHideOnScrollClass);
+        }
+
+        [TestMethod]
+        public void RenderAppBarWithInvertedScroll()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.InvertedScroll, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasInvertedScrollClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasInvertedScrollClass);
+        }
+
+        [TestMethod]
+        public void RenderAppBarNoWithInvertedScroll()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.InvertedScroll, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasInvertedScrollClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasInvertedScrollClass);
+        }
+
+        [TestMethod]
+        public void RenderAppBarWithScrollThreshold()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.ScrollThreshold, 20);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasScrollThresholdClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasScrollThresholdClass);
+        }
+
+        [TestMethod]
+        public void RenderWithHeight()
+        {
+            // Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(p => p.Height, 64);
+            });
+            var inputSlotDiv = cut.Find(".m-app-bar");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: 64px;height: 64px;height:64px;transform:translateY(0px);left:0px;right:0px", style);
+        }
+
+        [TestMethod]
+        public void RenderAppBarWithCollapse()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.Collapse, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasCollapseClass = classes.Contains("m-toolbar--collapse");
+
+            // Assert
+            Assert.IsTrue(hasCollapseClass);
+        }
+
+        [TestMethod]
+        public void RenderAppBarNoWithCollapse()
+        {
+            //Act
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.Collapse, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasCollapseClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasCollapseClass);
+        }
     }
 }

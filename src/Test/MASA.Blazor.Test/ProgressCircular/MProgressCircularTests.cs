@@ -26,6 +26,21 @@ namespace MASA.Blazor.Test.ProgressCircular
             Assert.IsTrue(hasIndeterminateClass);
         }
 
+        [TestMethod]
+        public void RendeProgressCircularNoWithIndeterminate()
+        {
+            //Act
+            var cut = RenderComponent<MProgressCircular>(props =>
+            {
+                props.Add(progresscircular => progresscircular.Indeterminate, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIndeterminateClass = classes.Contains("m-progress-circular");
+
+            // Assert
+            Assert.IsTrue(hasIndeterminateClass);
+        }
+
         //[TestMethod]
         //public void RenderWithChildContentt()
         //{

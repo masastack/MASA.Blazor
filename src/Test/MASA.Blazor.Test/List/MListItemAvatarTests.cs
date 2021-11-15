@@ -29,6 +29,21 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
+        public void RendeListItemAvatarNoWithHorizontal()
+        {
+            //Act
+            var cut = RenderComponent<MListItemAvatar>(props =>
+            {
+                props.Add(listitemavatar => listitemavatar.Horizontal, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHorizontalClass = classes.Contains("m-list-item");
+
+            // Assert
+            Assert.IsTrue(hasHorizontalClass);
+        }
+
+        [TestMethod]
         public void RendeListItemAvatarWithTile()
         {
             //Act
@@ -44,6 +59,21 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
+        public void RendeListItemAvatarNoWithTile()
+        {
+            //Act
+            var cut = RenderComponent<MListItemAvatar>(props =>
+            {
+                props.Add(listitemavatar => listitemavatar.Tile, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTileClass = classes.Contains("m-list-item");
+
+            // Assert
+            Assert.IsTrue(hasTileClass);
+        }
+
+        [TestMethod]
         public void RendeListItemAvatarWithHorizontals()
         {
             //Act
@@ -53,6 +83,21 @@ namespace MASA.Blazor.Test.List
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasHorizontalClass = classes.Contains("m-avatar-tile");
+
+            // Assert
+            Assert.IsTrue(hasHorizontalClass);
+        }
+
+        [TestMethod]
+        public void RendeListItemAvatarNoWithHorizontals()
+        {
+            //Act
+            var cut = RenderComponent<MListItemAvatar>(props =>
+            {
+                props.Add(listitemavatar => listitemavatar.Horizontal, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHorizontalClass = classes.Contains("m-list-item");
 
             // Assert
             Assert.IsTrue(hasHorizontalClass);

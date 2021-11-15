@@ -249,5 +249,95 @@ namespace MASA.Blazor.Test.Footer
             // Assert
             Assert.IsTrue(hasElevationClass);
         }
+
+        [TestMethod]
+        public void RenderWithHeight()
+        {
+            // Act
+            var cut = RenderComponent<MFooter>(props =>
+            {
+                props.Add(p => p.Height, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-footer");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: 100px;left:;right:;bottom:", style);
+        }
+
+        [TestMethod]
+        public void RenderWithWidth()
+        {
+            // Act
+            var cut = RenderComponent<MFooter>(props =>
+            {
+                props.Add(p => p.Width, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-footer");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: auto;width: 100px;left:;right:;bottom:", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMaxWidth()
+        {
+            // Act
+            var cut = RenderComponent<MFooter>(props =>
+            {
+                props.Add(p => p.MaxWidth, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-footer");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: auto;max-width: 100px;left:;right:;bottom:", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMinWidth()
+        {
+            // Act
+            var cut = RenderComponent<MFooter>(props =>
+            {
+                props.Add(p => p.MinWidth, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-footer");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: auto;min-width: 100px;left:;right:;bottom:", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMaxHeight()
+        {
+            // Act
+            var cut = RenderComponent<MFooter>(props =>
+            {
+                props.Add(p => p.MaxHeight, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-footer");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: auto;max-height: 100px;left:;right:;bottom:", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMinHeight()
+        {
+            // Act
+            var cut = RenderComponent<MFooter>(props =>
+            {
+                props.Add(p => p.MinHeight, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-footer");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: auto;min-height: 100px;left:;right:;bottom:", style);
+        }
     }
 }

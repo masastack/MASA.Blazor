@@ -123,6 +123,118 @@ namespace MASA.Blazor.Test.Toolbar
             Assert.IsTrue(hasExtendedClass);
         }
 
+        [TestMethod]
+        public void RendeMToolbarNoWithAbsolute()
+        {
+            //Act
+            var cut = RenderComponent<MToolbar>(props =>
+            {
+                props.Add(toolbar => toolbar.Absolute, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAbsoluteClass = classes.Contains("m-toolbar");
+            // Assert
+            Assert.IsTrue(hasAbsoluteClass);
+        }
+
+        [TestMethod]
+        public void RendeMToolbarNoWithBottom()
+        {
+            //Act
+            var cut = RenderComponent<MToolbar>(props =>
+            {
+                props.Add(toolbar => toolbar.Bottom, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBottomClass = classes.Contains("m-toolbar");
+            // Assert
+            Assert.IsTrue(hasBottomClass);
+        }
+
+        [TestMethod]
+        public void RendeMToolbarNoWithCollapse()
+        {
+            //Act
+            var cut = RenderComponent<MToolbar>(props =>
+            {
+                props.Add(toolbar => toolbar.Collapse, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasCollapseClass = classes.Contains("m-toolbar");
+            // Assert
+            Assert.IsTrue(hasCollapseClass);
+        }
+
+        [TestMethod]
+        public void RendeMToolbarNoWithDense()
+        {
+            //Act
+            var cut = RenderComponent<MToolbar>(props =>
+            {
+                props.Add(toolbar => toolbar.Dense, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDenseClass = classes.Contains("m-toolbar");
+            // Assert
+            Assert.IsTrue(hasDenseClass);
+        }
+
+        [TestMethod]
+        public void RendeMToolbarNoWithFlat()
+        {
+            //Act
+            var cut = RenderComponent<MToolbar>(props =>
+            {
+                props.Add(toolbar => toolbar.Flat, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFlatClass = classes.Contains("m-toolbar");
+            // Assert
+            Assert.IsTrue(hasFlatClass);
+        }
+
+        [TestMethod]
+        public void RendeMToolbarNoWithFloating()
+        {
+            //Act
+            var cut = RenderComponent<MToolbar>(props =>
+            {
+                props.Add(toolbar => toolbar.Floating, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFloatingClass = classes.Contains("m-toolbar");
+            // Assert
+            Assert.IsTrue(hasFloatingClass);
+        }
+
+        [TestMethod]
+        public void RendeMToolbarNoWithProminent()
+        {
+            //Act
+            var cut = RenderComponent<MToolbar>(props =>
+            {
+                props.Add(toolbar => toolbar.Prominent, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasProminentClass = classes.Contains("m-toolbar");
+            // Assert
+            Assert.IsTrue(hasProminentClass);
+        }
+
+        [TestMethod]
+        public void RendeMToolbarNoWithExtended()
+        {
+            //Act
+            var cut = RenderComponent<MToolbar>(props =>
+            {
+                props.Add(toolbar => toolbar.Extended, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasExtendedClass = classes.Contains("m-toolbar");
+            // Assert
+            Assert.IsTrue(hasExtendedClass);
+        }
+
         //[TestMethod]
         //public void RenderWithChildContentt()
         //{

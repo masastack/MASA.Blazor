@@ -29,6 +29,21 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
+        public void RendeListGroupNoWithDisabled()
+        {
+            //Act
+            var cut = RenderComponent<MListGroup>(props =>
+            {
+                props.Add(listgroup => listgroup.Disabled, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDisabledClass = classes.Contains("m-list-group");
+
+            // Assert
+            Assert.IsTrue(hasDisabledClass);
+        }
+
+        [TestMethod]
         public void RendeListGroupWithNoAction()
         {
             //Act
@@ -44,6 +59,21 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
+        public void RendeListGroupNoWithNoAction()
+        {
+            //Act
+            var cut = RenderComponent<MListGroup>(props =>
+            {
+                props.Add(listgroup => listgroup.NoAction, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasNoActionClass = classes.Contains("m-list-group");
+
+            // Assert
+            Assert.IsTrue(hasNoActionClass);
+        }
+
+        [TestMethod]
         public void RendeListGroupWithSubGroup()
         {
             //Act
@@ -53,6 +83,21 @@ namespace MASA.Blazor.Test.List
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasSubGroupClass = classes.Contains("m-list-group--sub-group");
+
+            // Assert
+            Assert.IsTrue(hasSubGroupClass);
+        }
+
+        [TestMethod]
+        public void RendeListGroupNoWithSubGroup()
+        {
+            //Act
+            var cut = RenderComponent<MListGroup>(props =>
+            {
+                props.Add(listgroup => listgroup.SubGroup, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSubGroupClass = classes.Contains("m-list-group");
 
             // Assert
             Assert.IsTrue(hasSubGroupClass);

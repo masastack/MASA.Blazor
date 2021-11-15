@@ -100,19 +100,124 @@ namespace MASA.Blazor.Test.Avatar
             Assert.AreEqual("height: 48px;min-width: 48px;width: 48px", style);
         }
 
-        //[TestMethod]
-        //public void RenderWithHeight()
-        //{
-        //    // Act
-        //    var cut = RenderComponent<MAvatar>(props =>
-        //    {
-        //        props.Add(p => p.Height, 48);
-        //    });
-        //    var inputSlotDiv = cut.Find(".m-avatar");
-        //    var style = inputSlotDiv.GetAttribute("style");
+        [TestMethod]
+        public void RenderWithHeight()
+        {
+            // Act
+            var cut = RenderComponent<MAvatar>(props =>
+            {
+                props.Add(p => p.Height, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-avatar");
+            var style = inputSlotDiv.GetAttribute("style");
 
-        //    // Assert
-        //    Assert.AreEqual("height:48px;min-width:48px;width:48px;", style);
-        //}
+            // Assert
+            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;height: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMaxHeight()
+        {
+            // Act
+            var cut = RenderComponent<MAvatar>(props =>
+            {
+                props.Add(p => p.MaxHeight, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-avatar");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;max-height: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMaxWidth()
+        {
+            // Act
+            var cut = RenderComponent<MAvatar>(props =>
+            {
+                props.Add(p => p.MaxWidth, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-avatar");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;max-width: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMinHeight()
+        {
+            // Act
+            var cut = RenderComponent<MAvatar>(props =>
+            {
+                props.Add(p => p.MinHeight, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-avatar");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;min-height: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMinWidth()
+        {
+            // Act
+            var cut = RenderComponent<MAvatar>(props =>
+            {
+                props.Add(p => p.MinWidth, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-avatar");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;min-width: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithWidth()
+        {
+            // Act
+            var cut = RenderComponent<MAvatar>(props =>
+            {
+                props.Add(p => p.Width, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-avatar");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: 48px;min-width: 48px;width: 48px;width: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderAvatarWithRounded()
+        {
+            //Act
+            var cut = RenderComponent<MAvatar>(props =>
+            {
+                props.Add(avatar => avatar.Rounded, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasRoundedClass = classes.Contains("m-avatar");
+
+            // Assert
+            Assert.IsTrue(hasRoundedClass);
+        }
+
+        [TestMethod]
+        public void RenderAvatarNoWithRounded()
+        {
+            //Act
+            var cut = RenderComponent<MAvatar>(props =>
+            {
+                props.Add(avatar => avatar.Rounded, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasRoundedClass = classes.Contains("m-avatar");
+
+            // Assert
+            Assert.IsTrue(hasRoundedClass);
+        }
     }
 }

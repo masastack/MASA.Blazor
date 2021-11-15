@@ -30,6 +30,21 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
+        public void RendeListNoWithOutlined()
+        {
+            //Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(listgroup => listgroup.Outlined, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOutlinedClass = classes.Contains("m-sheet");
+
+            // Assert
+            Assert.IsTrue(hasOutlinedClass);
+        }
+
+        [TestMethod]
         public void RendeListWithShaped()
         {
             //Act
@@ -39,6 +54,21 @@ namespace MASA.Blazor.Test.List
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasShapedClass = classes.Contains("m-sheet--shaped");
+
+            // Assert
+            Assert.IsTrue(hasShapedClass);
+        }
+
+        [TestMethod]
+        public void RendeListNoWithShaped()
+        {
+            //Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(listgroup => listgroup.Shaped, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasShapedClass = classes.Contains("m-sheet");
 
             // Assert
             Assert.IsTrue(hasShapedClass);
@@ -60,6 +90,21 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
+        public void RendeListNoWithDense()
+        {
+            //Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(listgroup => listgroup.Dense, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasShapedClass = classes.Contains("m-list");
+
+            // Assert
+            Assert.IsTrue(hasShapedClass);
+        }
+
+        [TestMethod]
         public void RendeListWithDisabled()
         {
             //Act
@@ -69,6 +114,21 @@ namespace MASA.Blazor.Test.List
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasDisabledClass = classes.Contains("m-list--disabled");
+
+            // Assert
+            Assert.IsTrue(hasDisabledClass);
+        }
+
+        [TestMethod]
+        public void RendeListNoWithDisabled()
+        {
+            //Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(listgroup => listgroup.Disabled, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDisabledClass = classes.Contains("m-list");
 
             // Assert
             Assert.IsTrue(hasDisabledClass);
@@ -90,6 +150,21 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
+        public void RendeListNoWithFlat()
+        {
+            //Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(listgroup => listgroup.Flat, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFlatClass = classes.Contains("m-list");
+
+            // Assert
+            Assert.IsTrue(hasFlatClass);
+        }
+
+        [TestMethod]
         public void RendeListWithNav()
         {
             //Act
@@ -99,6 +174,21 @@ namespace MASA.Blazor.Test.List
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasNavClass = classes.Contains("m-list--nav");
+
+            // Assert
+            Assert.IsTrue(hasNavClass);
+        }
+
+        [TestMethod]
+        public void RendeListNoWithNav()
+        {
+            //Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(listgroup => listgroup.Nav, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasNavClass = classes.Contains("m-list");
 
             // Assert
             Assert.IsTrue(hasNavClass);
@@ -120,6 +210,21 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
+        public void RendeListNoWithRounded()
+        {
+            //Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(listgroup => listgroup.Rounded, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasRoundedClass = classes.Contains("m-list");
+
+            // Assert
+            Assert.IsTrue(hasRoundedClass);
+        }
+
+        [TestMethod]
         public void RendeListWithSubheader()
         {
             //Act
@@ -129,6 +234,21 @@ namespace MASA.Blazor.Test.List
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasSubheaderClass = classes.Contains("m-list--subheader");
+
+            // Assert
+            Assert.IsTrue(hasSubheaderClass);
+        }
+
+        [TestMethod]
+        public void RendeListNoWithSubheader()
+        {
+            //Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(listgroup => listgroup.Subheader, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSubheaderClass = classes.Contains("m-list");
 
             // Assert
             Assert.IsTrue(hasSubheaderClass);
@@ -150,6 +270,21 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
+        public void RendeListNoWithTwoLine()
+        {
+            //Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(listgroup => listgroup.TwoLine, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTwoLineClass = classes.Contains("m-list");
+
+            // Assert
+            Assert.IsTrue(hasTwoLineClass);
+        }
+
+        [TestMethod]
         public void RendeListWithThreeLine()
         {
             //Act
@@ -159,6 +294,21 @@ namespace MASA.Blazor.Test.List
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasThreeLineClass = classes.Contains("m-list--three-line");
+
+            // Assert
+            Assert.IsTrue(hasThreeLineClass);
+        }
+
+        [TestMethod]
+        public void RendeListNoWithThreeLine()
+        {
+            //Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(listgroup => listgroup.ThreeLine, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasThreeLineClass = classes.Contains("m-list");
 
             // Assert
             Assert.IsTrue(hasThreeLineClass);
@@ -180,6 +330,21 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
+        public void RendeListNoWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(listgroup => listgroup.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-list");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
         public void RendeListWithLight()
         {
             //Act
@@ -189,6 +354,21 @@ namespace MASA.Blazor.Test.List
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RendeListNoWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(listgroup => listgroup.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-list");
 
             // Assert
             Assert.IsTrue(hasLightClass);
@@ -221,6 +401,81 @@ namespace MASA.Blazor.Test.List
 
             // Assert
             Assert.IsTrue(hasElevationClass);
+        }
+
+        [TestMethod]
+        public void RenderWithHeight()
+        {
+            // Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(p => p.Height, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-list");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMinHeight()
+        {
+            // Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(p => p.MinHeight, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-list");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("min-height: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMinWidth()
+        {
+            // Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(p => p.MinWidth, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-list");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("min-width: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMaxHeight()
+        {
+            // Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(p => p.MaxHeight, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-list");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("max-height: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMaxWidth()
+        {
+            // Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                props.Add(p => p.MaxWidth, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-list");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("max-width: 100px", style);
         }
     }
 }

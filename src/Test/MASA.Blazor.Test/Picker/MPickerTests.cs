@@ -27,6 +27,21 @@ namespace MASA.Blazor.Test.Picker
         }
 
         [TestMethod]
+        public void RendeMPickerNoWithFlat()
+        {
+            //Act
+            var cut = RenderComponent<MPicker>(props =>
+            {
+                props.Add(picker => picker.Flat, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFlatClass = classes.Contains("m-picker");
+
+            // Assert
+            Assert.IsTrue(hasFlatClass);
+        }
+
+        [TestMethod]
         public void RendeMPickerWithLandscape()
         {
             //Act
@@ -36,6 +51,21 @@ namespace MASA.Blazor.Test.Picker
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasLandscapeClass = classes.Contains("m-picker--landscape");
+
+            // Assert
+            Assert.IsTrue(hasLandscapeClass);
+        }
+
+        [TestMethod]
+        public void RendeMPickerNoWithLandscape()
+        {
+            //Act
+            var cut = RenderComponent<MPicker>(props =>
+            {
+                props.Add(picker => picker.Landscape, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLandscapeClass = classes.Contains("m-picker");
 
             // Assert
             Assert.IsTrue(hasLandscapeClass);
@@ -57,6 +87,21 @@ namespace MASA.Blazor.Test.Picker
         }
 
         [TestMethod]
+        public void RendeMPickerNoWithFullWidth()
+        {
+            //Act
+            var cut = RenderComponent<MPicker>(props =>
+            {
+                props.Add(picker => picker.FullWidth, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFullWidthClass = classes.Contains("m-picker");
+
+            // Assert
+            Assert.IsTrue(hasFullWidthClass);
+        }
+
+        [TestMethod]
         public void RendeMPickerWithDark()
         {
             //Act
@@ -72,6 +117,21 @@ namespace MASA.Blazor.Test.Picker
         }
 
         [TestMethod]
+        public void RendeMPickerNoWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MPicker>(props =>
+            {
+                props.Add(picker => picker.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-picker");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
         public void RendeMPickerWithLight()
         {
             //Act
@@ -81,6 +141,21 @@ namespace MASA.Blazor.Test.Picker
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RendeMPickerNoWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MPicker>(props =>
+            {
+                props.Add(picker => picker.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-picker");
 
             // Assert
             Assert.IsTrue(hasLightClass);

@@ -55,6 +55,49 @@ namespace MASA.Blazor.Test.Radio
             Assert.IsTrue(hasIsDisabledClass);
         }
 
-        
+        [TestMethod]
+        public void RenderRadioNoWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MRadio<string>>(props =>
+            {
+                props.Add(counter => counter.Dark, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-radio");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioNoWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MRadio<string>>(props =>
+            {
+                props.Add(counter => counter.Light, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-radio");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioNoWithIsDisabled()
+        {
+            //Act
+            var cut = RenderComponent<MRadio<string>>(props =>
+            {
+                props.Add(counter => counter.IsDisabled, false);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIsDisabledClass = classes.Contains("m-radio");
+
+            // Assert
+            Assert.IsTrue(hasIsDisabledClass);
+        }
     }
 }
