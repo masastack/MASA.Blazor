@@ -1,0 +1,38 @@
+﻿<MContainer>
+    <MRow>
+
+        <MCol Cols="12" Md="4">
+            <MSkeletonLoader Class="@_attrs.Class" Boilerplate="@_attrs.Boilerplate" Elevation="@_attrs.Elevation" Type="card-avatar,article,actions"></MSkeletonLoader>
+            <MSkeletonLoader Class="@_attrs.Class" Boilerplate="@_attrs.Boilerplate" Elevation="@_attrs.Elevation" Type="date-picker"></MSkeletonLoader>
+        </MCol>
+
+        <MCol Cols="12" Md="4">
+            <MSkeletonLoader Class="@_attrs.Class" Boilerplate="@_attrs.Boilerplate" Elevation="@_attrs.Elevation" Type="article, actions"></MSkeletonLoader>
+            <MSkeletonLoader Class="@_attrs.Class" Boilerplate="@_attrs.Boilerplate" Elevation="@_attrs.Elevation" Type="table-heading, list-item-two-line, image, table-tfoot"></MSkeletonLoader>
+        </MCol>
+
+        <MCol Cols="12" Md="4">
+            <MSkeletonLoader Class="@_attrs.Class" Boilerplate="@_attrs.Boilerplate" Elevation="@_attrs.Elevation" Style="margin-bottom:24px !important" Type="list-item-avatar, divider, list-item-three-line, card-heading, image, actions"></MSkeletonLoader>
+            <MSkeletonLoader Class="@_attrs.Class" Boilerplate="@_attrs.Boilerplate" Elevation="@_attrs.Elevation" Type="list-item-avatar-three-line, image, article"></MSkeletonLoader>
+        </MCol>
+
+    </MRow>
+</MContainer>
+
+@code{
+    Attrs _attrs = new Attrs
+    {
+        Class ="mb-6",
+        Boilerplate=true,
+        Elevation=2
+    };
+
+    class Attrs
+    {
+        public string Class { get; set; }
+
+        public bool Boilerplate { get; set; } 
+
+        public StringNumber Elevation { get; set; } 
+    }
+}

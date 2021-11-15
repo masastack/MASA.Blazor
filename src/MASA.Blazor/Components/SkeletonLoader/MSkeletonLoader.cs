@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public partial class MSkeletonLoader : BSkeletonLoader, IThemeable
+    public partial class MSkeletonLoader : BSkeletonLoader, ISkeletonLoader, IThemeable
     {
         [Parameter]
         public bool Boilerplate { get; set; }
@@ -27,40 +27,9 @@ namespace MASA.Blazor
         public string Type { get; set; }
 
         [Parameter]
-        public Dictionary<string, string> Types { get; set; } = new Dictionary<string, string>
-        {
-            {"actions", "button@2"},
-            {"article", "heading, paragraph"},
-            {"avatar", "avatar"},
-            {"button", "button"},
-            {"card", "image, card-heading"},
-            {"card-avatar", "image, list-item-avatar"},
-            {"card-heading", "heading"},
-            {"chip", "chip"},
-            {"date-picker", "list-item, card-heading, divider, date-picker-options, date-picker-days, actions"},
-            {"date-picker-options", "text, avatar@2"},
-            {"date-picker-days", "avatar@28"},
-            {"heading", "heading"},
-            {"image", "image"},
-            {"list-item", "text"},
-            {"list-item-avatar", "avatar, text"},
-            {"list-item-two-line", "sentences"},
-            {"list-item-avatar-two-line", "avatar, sentences"},
-            {"list-item-three-line", "paragraph"},
-            {"list-item-avatar-three-line", "avatar, paragraph"},
-            {"paragraph", "text@3"},
-            {"sentences", "text@2"},
-            {"table", "table-heading, table-thead, table-tbody, table-tfoot"},
-            {"table-heading", "heading, text"},
-            {"table-thead", "heading@6"},
-            {"table-tbody", "table-row-divider@6"},
-            {"table-row-divider", "table-row, divider"},
-            {"table-row", "table-cell@6"},
-            {"table-cell", "text"},
-            {"table-tfoot", "text@2, avatar@2"},
-            {"text", "text"},
-            {"divider", "divider"},
-        };
+        public Dictionary<string, string> Types { get; set; }
+
+        public Dictionary<string, string> RootTypes { get; set; }
 
         [Parameter]
         public StringNumber Height { get; set; }
@@ -86,26 +55,13 @@ namespace MASA.Blazor
         [Parameter]
         public bool Light { get; set; }
 
+        [Parameter]
+        public StringNumber Elevation { get; set; }
+
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
 
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
+        private bool IsLoading => ChildContent is null || Loading;
 
         protected override void SetComponentClass()
         {
@@ -115,106 +71,112 @@ namespace MASA.Blazor
                 .Apply(cssBuilder =>
                 {
                     cssBuilder.Add(prefix)
-                        .Add("m-application")
                         .AddIf($"{prefix}--boilerplate", () => Boilerplate)
-                        .AddIf($"{prefix}--is-loading", () => Loading)
+                        .AddIf($"{prefix}--is-loading", () => IsLoading)
                         .AddIf($"{prefix}--tile", () => Tile)
-                        .AddTheme(IsDark)
-                        .AddElevation(2);
+                        .AddTheme(this)
+                        .AddElevatable(this);
                 }, styleBuilder =>
                 {
-                    styleBuilder
-                        .AddHeight(Height)
-                        .AddWidth(Width)
-                        .AddMinWidth(MinWidth)
-                        .AddMaxWidth(MaxWidth)
-                        .AddMinHeight(MinHeight)
-                        .AddMaxHeight(MaxHeight);
+                    if(IsLoading == true)
+                    {
+                        styleBuilder.AddMeasurable(this);
+                    }                
                 });
 
-            GenStructure(Type);
-            ChildContent = GenBone(Type);
-
-            if (Loading && !Boilerplate)
+            if (IsLoading && !Boilerplate)
             {
                 Attributes.Add("aria-busy", true);
                 Attributes.Add("aria-live", "polite");
                 Attributes.Add("role", "alert");
             }
+
+            RootTypes = new Dictionary<string, string>
+            {
+                { "actions","button@2"},
+                { "article", "heading, paragraph" },
+                { "avatar", "avatar" },
+                { "button", "button" },
+                { "card", "image, card-heading" },
+                { "card-avatar", "image, list-item-avatar" },
+                { "card-heading", "heading" },
+                { "chip", "chip" },
+                { "date-picker", "list-item, card-heading, divider, date-picker-options, date-picker-days, actions" },
+                { "date-picker-options", "text, avatar@2" },
+                { "date-picker-days", "avatar@28" },
+                { "heading", "heading" },
+                { "image", "image" },
+                { "list-item", "text" },
+                { "list-item-avatar", "avatar, text" },
+                { "list-item-two-line", "sentences" },
+                { "list-item-avatar-two-line", "avatar, sentences" },
+                { "list-item-three-line", "paragraph" },
+                { "list-item-avatar-three-line", "avatar, paragraph" },
+                { "paragraph", "text@3" },
+                { "sentences", "text@2" },
+                { "table", "table-heading, table-thead, table-tbody, table-tfoot" },
+                { "table-heading", "heading, text" },
+                { "table-thead", "heading@6" },
+                { "table-tbody", "table-row-divider@6" },
+                { "table-row-divider", "table-row, divider" },
+                { "table-row", "table-cell@6" },
+                { "table-cell", "text" },
+                { "table-tfoot", "text@2, avatar@2" },
+                { "text", "text" },
+                { "divider", "divider" },
+            };
         }
 
-        private string children = string.Empty;
-
-        private RenderFragment GenBone(string type) => builder =>
+        protected override void OnParametersSet()
         {
-            int sequence = 0;
-            builder.OpenElement(sequence++, "div");
+            base.OnParametersSet();
 
-            builder.AddAttribute(sequence++, "style", "width:100%; Height:100%;");
-
-            if (!string.IsNullOrWhiteSpace(children))
+            if (Types is not null)
             {
-                builder.AddMarkupContent(sequence++, children);
+                foreach (var (key, value) in Types)
+                {
+                    RootTypes.Add(key, value);
+                }
             }
 
-            builder.CloseElement();
-        };
-
-        private void GenStructure(string type)
-        {
-            Types.TryGetValue(type, out string bone);
-
-            if (type.Contains(","))
+            if (IsLoading == true)
             {
-                MapBones(type);
-            }
-            else if (type.Contains("@"))
-            {
-                GenBones(type);
-            }
-            else if (bone.Contains(","))
-            {
-                MapBones(bone);
-            }
-            else if (bone.Contains("@"))
-            {
-                GenBones(bone);
-            }
-            else if (type != bone)
-            {
-                GenStructure(bone);
+                SkeletonLoaderContent = GenSkeleton();
             }
             else
             {
-                children += $"<div class=\"m-skeleton-loader__{type} m-skeleton-loader__bone\"></div>";
+                SkeletonLoaderContent = ChildContent;
             }
         }
 
-        private void MapBones(string bones)
+        public RenderFragment GenSkeleton() => builder =>
         {
-            var types = Regex.Replace(bones, @"\s", "").Split(',').ToList();
-            foreach (var type in types)
+            if (Transition is null)
             {
-                if (type.Contains("@"))
-                {
-                    GenBones(type);
-                }
-                else
-                {
-                    children += $"<div class=\"m-skeleton-loader__{type} m-skeleton-loader__bone\">";
-                    Types.TryGetValue(type, out string bone);
-                    if (type != bone)
-                    {
-                        GenStructure(type);
-                    }
-
-                    children += "</div>";
-                }
+                int sequence = 0;
+                builder.OpenElement(sequence++, "div");
+                builder.AddAttribute(sequence++, "style", "width:100%; Height:100%;");
+                var childrenHtml = string.Join("", GenStructure());
+                builder.AddMarkupContent(sequence++, childrenHtml);
+                builder.CloseElement();
             }
+        };
+
+        public string Genbone(string text, List<string> childrens)
+        {
+            var divHtml = $"<div class=\"m-skeleton-loader__{text} m-skeleton-loader__bone\">";
+            foreach (var child in childrens)
+            {
+                divHtml += child;
+            }
+            divHtml += "</div>";
+
+            return divHtml;
         }
 
-        private void GenBones(string bones)
+        private List<string> GenBones(string bones)
         {
+            var childrens = new List<string>();
             var cutList = bones.Split('@').ToList();
             var bone = cutList.FirstOrDefault();
             var frequency = cutList.LastOrDefault();
@@ -222,9 +184,55 @@ namespace MASA.Blazor
             {
                 for (int i = 0; i < int.Parse(frequency); i++)
                 {
-                    GenStructure(bone);
+                    childrens.AddRange(GenStructure(bone));
                 }
             }
+            return childrens;
+        }
+
+        private List<string> GenStructure(string type = null)
+        {
+            var childrens = new List<string>();
+            type = type ?? this.Type ?? "";
+            RootTypes.TryGetValue(type, out string bone);
+
+            if (type == bone)
+            {
+
+            }
+            else if (type.Contains(","))
+            {
+                return MapBones(type);
+            }
+            else if (type.Contains("@"))
+            {
+                return GenBones(type);
+            }
+            else if (bone.Contains(","))
+            {
+                childrens = MapBones(bone);
+            }
+            else if (bone.Contains("@"))
+            {
+                childrens = GenBones(bone);
+            }
+            else if (bone is not null)
+            {
+                childrens.AddRange(GenStructure(bone));
+            }
+
+            return new List<string> { Genbone(type, childrens) };
+        }
+
+        private List<string> MapBones(string bones)
+        {
+            var childrens = new List<string>();
+            var types = bones.Replace(" ", "").Split(",");
+            foreach (var type in types)
+            {
+                childrens.AddRange(GenStructure(type));
+            }
+            return childrens;
         }
     }
 }
