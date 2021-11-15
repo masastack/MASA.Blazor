@@ -111,7 +111,6 @@ namespace MASA.Blazor
                     props[nameof(ItemText)] = ItemText;
                     props[nameof(ItemDisabled)] = ItemDisabled;
                     props[nameof(ItemChildren)] = ItemChildren;
-                    props[nameof(LoadChildren)] = LoadChildren;
                     //TODO:transition
                     props[nameof(LoadChildren)] = LoadChildren;
                     props[nameof(OpenOnClick)] = OpenOnClick;
