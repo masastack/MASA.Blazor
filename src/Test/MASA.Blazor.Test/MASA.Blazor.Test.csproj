@@ -1,22 +1,43 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="bunit" Version="1.2.49" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="Moq" Version="4.16.1" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.2.3" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.2.3" />
-    <PackageReference Include="coverlet.collector" Version="3.0.2" />
-    <PackageReference Include="System.Runtime" Version="4.3.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.7" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.7" />
+    <PackageReference Include="coverlet.collector" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Cascader\" />
+    <Folder Include="DataIterator\" />
+    <Folder Include="Icon\" />
+    <Folder Include="RangeSlider\" />
+    <Folder Include="SlideGroup\" />
+    <Folder Include="Table\" />
+    <Folder Include="Tooltip\" />
+    <Folder Include="Upload\" />
+    <Folder Include="Window\" />
+    <Folder Include="Autocomplete\" />
+    <Folder Include="Form\" />
+    <Folder Include="Row\" />
+    <Folder Include="Col\" />
+    <Folder Include="ButtonGroup\" />
+    <Folder Include="ListItemGroup\" />
+    <Folder Include="TimePicker\" />
+    <Folder Include="SimpleTable\" />
   </ItemGroup>
 
 </Project>
