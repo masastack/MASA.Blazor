@@ -2,15 +2,14 @@
 order: 1
 title:
   zh-CN: 选取的日期
-  en-US: PickerDate
+  en-US: Picker date
 ---
 
 ## zh-CN
 
-您可以观察 picker-date ，它是显示的月份/年份（取决于选择器类型和激活的视图），以便在其更改时执行某些操作。 这使用了 .sync 修饰符。
+您可以使用 **OnPickerDateUpdate** ，它是显示的月份/年份（取决于选择器类型和激活的视图），以便在其更改时执行某些操作。
 
 ## en-US
 
-This is an example of the default application markup for Vuetify. You can place your layout elements anywhere, as long as you apply the app property. The key component in all of this is v-main. This will be dynamically sized depending upon the structure of your designated app components. You can use combinations of any or all of the above components including v-bottom-navigation.
-
-When using vue-router it is recommended that you place your views inside v-main.
+You can watch the **OnPickerDateUpdate** which is the displayed month/year (depending on the picker type and active
+view) to perform some action when it changes. This uses the .sync modifier.

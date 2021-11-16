@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-菜单也可以使用绝对属性绝对放置在activator元素的顶部。尝试单击图像上的任意位置。
+菜单可以使用 **Absolute** 属性，将其绝对放置在激活器元素的顶部。 尝试点击图像上的任意位置。
 
 ## en-US
 
-Menus can also be placed absolutely on top of the activator element using the absolute prop. Try clicking anywhere on the image.
+Menus can also be placed absolutely on top of the activator element using the **Absolute** prop. Try clicking anywhere on the image.

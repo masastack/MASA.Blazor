@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-TODO...
+You can specify the picker’s width or make it full width.
