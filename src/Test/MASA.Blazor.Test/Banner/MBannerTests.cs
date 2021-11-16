@@ -232,5 +232,20 @@ namespace MASA.Blazor.Test.Banner
             // Assert
             bannerDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
+
+        [TestMethod]
+        public void RenderBannerWithElevation()
+        {
+            //Act
+            var cut = RenderComponent<MBanner>(props =>
+            {
+                props.Add(banner => banner.Elevation, 24);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasElevationClass = classes.Contains("elevation");
+
+            // Assert
+            Assert.IsTrue(hasElevationClass);
+        }
     }
 }
