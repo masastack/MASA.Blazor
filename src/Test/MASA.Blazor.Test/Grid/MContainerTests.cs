@@ -27,32 +27,17 @@ namespace MASA.Blazor.Test.Grid
         }
 
         [TestMethod]
-        public void RenderFooterNoWithAbsolute()
+        public void RenderWithChildContentt()
         {
-            //Act
+            // Arrange & Act
             var cut = RenderComponent<MContainer>(props =>
             {
-                props.Add(container => container.Fluid, false);
+                props.Add(container => container.ChildContent, "<span>Hello world</span>");
             });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasFluidClass = classes.Contains("container");
+            var contentDiv = cut.Find(".container ");
 
             // Assert
-            Assert.IsTrue(hasFluidClass);
+            contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
-
-        //[TestMethod]
-        //public void RenderWithChildContentt()
-        //{
-        //    // Arrange & Act
-        //    var cut = RenderComponent<MContainer>(props =>
-        //    {
-        //        props.Add(container => container.ChildContent, "<span>Hello world</span>");
-        //    });
-        //    var contentDiv = cut.Find(".m-container");
-
-        //    // Assert
-        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
     }
 }
