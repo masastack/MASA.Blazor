@@ -4,6 +4,12 @@
   ],
   "Props": [
     {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "AppendIcon",
       "Type": "String",
       "Default": "null",
