@@ -12,7 +12,22 @@ namespace MASA.Blazor.Test.Image
     public class MImageTests:TestBase
     {
         [TestMethod]
-        public void RenderFooterWithAbsolute()
+        public void RenderImageWithAspectRatio()
+        {
+            //Act
+            var cut = RenderComponent<MImage>(props =>
+            {
+                props.Add(image => image.AspectRatio, 2);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAspectRatioClass = classes.Contains("m-image");
+
+            // Assert
+            Assert.IsTrue(hasAspectRatioClass);
+        }
+
+        [TestMethod]
+        public void RenderImageWithContain()
         {
             //Act
             var cut = RenderComponent<MImage>(props =>
@@ -20,43 +35,14 @@ namespace MASA.Blazor.Test.Image
                 props.Add(image => image.Contain, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var noFluidClass =! classes.Contains("m-image__image--cover");
+            var hasContainClass = classes.Contains("m-image");
 
             // Assert
-            Assert.IsTrue(noFluidClass);
+            Assert.IsTrue(hasContainClass);
         }
 
         [TestMethod]
-        public void RenderFooterNoWithAbsolute()
-        {
-            //Act
-            var cut = RenderComponent<MImage>(props =>
-            {
-                props.Add(image => image.Contain, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var noFluidClass = !classes.Contains("m-image__image--contain");
-
-            // Assert
-            Assert.IsTrue(noFluidClass);
-        }
-
-        [TestMethod]
-        public void RenderWithIconContent()
-        {
-            // Arrange & Act
-            var cut = RenderComponent<MImage>(props =>
-            {
-                props.Add(image => image.PlaceholderContent, "<span>Hello world</span>");
-            });
-            var imageDiv = cut.Find(".m-image__placeholder");
-
-            // Assert
-            imageDiv.Children.MarkupMatches("<span>Hello world</span>");
-        }
-
-        [TestMethod]
-        public void RenderMImageWithDark()
+        public void RenderImageWithDark()
         {
             //Act
             var cut = RenderComponent<MImage>(props =>
@@ -71,22 +57,22 @@ namespace MASA.Blazor.Test.Image
         }
 
         [TestMethod]
-        public void RenderMImageNoWithDark()
+        public void RenderWithHeight()
         {
-            //Act
+            // Act
             var cut = RenderComponent<MImage>(props =>
             {
-                props.Add(counter => counter.Dark, false);
+                props.Add(p => p.Height, 100);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasDarkClass = classes.Contains("m-image");
+            var inputSlotDiv = cut.Find(".m-image");
+            var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.IsTrue(hasDarkClass);
+            Assert.AreEqual("height: 100px", style);
         }
 
         [TestMethod]
-        public void RenderMImageWithLight()
+        public void RenderImageWithLight()
         {
             //Act
             var cut = RenderComponent<MImage>(props =>
@@ -101,18 +87,92 @@ namespace MASA.Blazor.Test.Image
         }
 
         [TestMethod]
-        public void RenderMImageNoWithLight()
+        public void RenderWithMaxHeight()
         {
-            //Act
+            // Act
             var cut = RenderComponent<MImage>(props =>
             {
-                props.Add(counter => counter.Light, false);
+                props.Add(p => p.MaxHeight, 100);
             });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasLightClass = classes.Contains("m-image");
+            var inputSlotDiv = cut.Find(".m-image");
+            var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.IsTrue(hasLightClass);
+            Assert.AreEqual("max-height: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMaxWidth()
+        {
+            // Act
+            var cut = RenderComponent<MImage>(props =>
+            {
+                props.Add(p => p.MaxWidth, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-image");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("max-width: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMinHeight()
+        {
+            // Act
+            var cut = RenderComponent<MImage>(props =>
+            {
+                props.Add(p => p.MinHeight, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-image");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("min-height: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithMinWidth()
+        {
+            // Act
+            var cut = RenderComponent<MImage>(props =>
+            {
+                props.Add(p => p.MinWidth, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-image");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("min-width: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithWidth()
+        {
+            // Act
+            var cut = RenderComponent<MImage>(props =>
+            {
+                props.Add(p => p.Width, 100);
+            });
+            var inputSlotDiv = cut.Find(".m-image");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("width: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderWithIconContent()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<MImage>(props =>
+            {
+                props.Add(image => image.PlaceholderContent, "<span>Hello world</span>");
+            });
+            var imageDiv = cut.Find(".m-image__placeholder");
+
+            // Assert
+            imageDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
     }
 }
