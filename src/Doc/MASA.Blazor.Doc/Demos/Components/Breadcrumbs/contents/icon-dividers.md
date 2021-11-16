@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 10
 title:
   zh-CN: 图标分隔符
   en-US: Icon Dividers
