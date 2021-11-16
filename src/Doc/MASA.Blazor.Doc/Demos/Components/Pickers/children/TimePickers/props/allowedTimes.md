@@ -11,4 +11,5 @@ title:
 
 ## en-US
 
-TODO...
+You can specify allowed times using arrays, objects, and functions. You can also specify time step/precision/interval -
+e.g. 10 minutes.

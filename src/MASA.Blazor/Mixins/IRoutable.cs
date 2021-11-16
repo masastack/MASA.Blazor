@@ -16,7 +16,7 @@
 
         bool Link { get; }
 
-        object Href { get; }
+        string Href { get; }
 
         object To { get; }
 

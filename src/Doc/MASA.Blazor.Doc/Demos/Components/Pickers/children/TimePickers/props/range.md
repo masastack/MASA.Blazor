@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-这是一个用 min 和 max props合并选择器的例子。
+这是一个用 **Min** 和 **Max** 合并选择器的例子。
 
 ## en-US
 
-TODO...
+This is an example of joining pickers together using **Min** and **Max** prop.

@@ -83,7 +83,7 @@
     },
     {
       "Name": "Href",
-      "Type": "Object",
+      "Type": "String",
       "Default": "null",
       "Description": ""
     },
