@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-TODO...
+Read-only picker behaves same as disabled one, but looks like default one.

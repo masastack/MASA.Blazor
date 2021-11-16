@@ -22,6 +22,12 @@
       "Description": "Applies the dark theme variant to the component."
     },
     {
+      "Name": "Elevation",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Designates an elevation applied to the component between 0 and 24."
+    },
+    {
       "Name": "Height",
       "Type": "StringNumber",
       "Default": "",

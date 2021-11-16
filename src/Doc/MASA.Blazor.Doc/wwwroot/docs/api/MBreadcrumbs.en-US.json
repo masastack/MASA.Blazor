@@ -50,12 +50,6 @@
       "Type": "String",
       "Default": "null",
       "Description": "The style applied to the outermost element of the component"
-    },
-    {
-      "Name": "Tag",
-      "Type": "String",
-      "Default": "null",
-      "Description": ""
     }
   ],
   "Contents": [

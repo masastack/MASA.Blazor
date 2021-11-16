@@ -2,7 +2,7 @@
 order: 0
 title:
   zh-CN: 激活的选择器
-  en-US: ActivePicker
+  en-US: Active picker
 ---
 
 ## zh-CN
@@ -11,5 +11,6 @@ title:
 
 ## en-US
 
-You can create a birthday picker - starting with year picker by default, restricting dates range and closing the picker menu after selecting the day make the perfect birthday picker.
+You can create a birthday picker - starting with year picker by default, restricting dates range and closing the picker
+menu after selecting the day make the perfect birthday picker.
 
