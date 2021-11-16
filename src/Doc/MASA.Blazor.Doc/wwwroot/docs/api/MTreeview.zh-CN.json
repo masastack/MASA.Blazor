@@ -46,6 +46,12 @@
       "Description": "减少组件的高度。"
     },
     {
+      "Name": "ExpandIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Hoverable",
       "Type": "Boolean",
       "Default": "false",
@@ -102,6 +108,12 @@
     {
       "Name": "LoadChildren",
       "Type": "Func`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "LoadingIcon",
+      "Type": "String",
       "Default": "null",
       "Description": ""
     },

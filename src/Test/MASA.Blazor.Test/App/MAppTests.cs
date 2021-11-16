@@ -30,7 +30,7 @@ namespace MASA.Blazor.Test.App
         }
 
         [TestMethod]
-        public void RendeAppWithDark()
+        public void RenderAppWithDark()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -46,22 +46,6 @@ namespace MASA.Blazor.Test.App
         }
 
         [TestMethod]
-        public void RendeAppNoWithDark()
-        {
-            //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
-            var cut = RenderComponent<MApp>(props =>
-            {
-                props.Add(app => app.Dark, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasDarkClass = classes.Contains("m-app");
-
-            // Assert
-            Assert.IsTrue(hasDarkClass);
-        }
-
-        [TestMethod]
         public void RendeAppWithLight()
         {
             //Act
@@ -71,26 +55,26 @@ namespace MASA.Blazor.Test.App
                 props.Add(app => app.Light, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasDarkClass = classes.Contains("theme--light");
+            var hasLightClass = classes.Contains("theme--light");
 
             // Assert
-            Assert.IsTrue(hasDarkClass);
+            Assert.IsTrue(hasLightClass);
         }
 
         [TestMethod]
-        public void RendeAppNoWithLight()
+        public void RendeAppWithLeftToRight()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MApp>(props =>
             {
-                props.Add(app => app.Light, false);
+                props.Add(app => app.LeftToRight, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasDarkClass = classes.Contains("m-app");
+            var hasLeftToRightClass = classes.Contains("m-application");
 
             // Assert
-            Assert.IsTrue(hasDarkClass);
+            Assert.IsTrue(hasLeftToRightClass);
         }
     }
 
