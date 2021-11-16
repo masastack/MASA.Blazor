@@ -67,7 +67,7 @@ namespace MASA.Blazor
         public string ExactActiveClass { get; set; }
 
         [Parameter]
-        public object Href { get; set; }
+        public string Href { get; set; }
 
         [Parameter]
         public object To { get; set; }
