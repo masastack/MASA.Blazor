@@ -11,7 +11,7 @@ namespace MASA.Blazor
     public class MBreadcrumbsItem : BBreadcrumbsItem, IRoutable
     {
         [Parameter]
-        public object Href { get; set; }
+        public string Href { get; set; }
 
         [Parameter]
         public string Target { get; set; }

@@ -47,7 +47,7 @@
     },
     {
       "Name": "Href",
-      "Type": "Object",
+      "Type": "String",
       "Default": "null",
       "Description": "指定组件为锚点并应用 href 属性。"
     },

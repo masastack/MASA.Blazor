@@ -7,8 +7,9 @@ title:
 
 ## zh-CN
 
-时间选择器可以切换为24小时格式。 请注意， format prop 只定义选取器的显示方式，选取器的值 (model) 总是以24小时格式。
+时间选择器可以切换为24小时格式。 请注意， **Format** 只定义选取器的显示方式，选取器的值 (model) 总是以24小时格式。
 
 ## en-US
 
-TODO...
+A time picker can be switched to 24hr format. Note that the **Format** prop defines only the way the picker is displayed,
+picker’s value (model) is always in 24hr format.
