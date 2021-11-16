@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-TODO...
+You can’t interact with disabled picker.

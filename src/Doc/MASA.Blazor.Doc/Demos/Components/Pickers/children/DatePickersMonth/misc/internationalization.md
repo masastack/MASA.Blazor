@@ -1,8 +1,8 @@
 ---
 order: 0
 title:
-  zh-CN: 国际化
-  en-US: Internationalization
+  zh-CN: 国际化(TODO)
+  en-US: Internationalization(TODO)
 ---
 
 ## zh-CN

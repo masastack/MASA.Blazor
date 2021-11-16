@@ -1,8 +1,8 @@
 ---
 order: 0
 title:
-  zh-CN: 使用外部库自定义格式
-  en-US: FormattingWithExternalLibraries
+  zh-CN: 使用外部库自定义格式(TODO)
+  en-US: FormattingWithExternalLibraries(TODO)
 ---
 
 ## zh-CN
@@ -12,4 +12,3 @@ title:
 ## en-US
 
 Formatting dates is possible also with external libs such as Moment.js or date-fns
-

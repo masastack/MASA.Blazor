@@ -125,6 +125,17 @@ namespace BlazorComponent
         {
             return styleBuilder
                         .AddSize("max-height", maxHeight);
-        }     
+        }
+
+        public static StyleBuilder AddMeasurable(this StyleBuilder styleBuilder, IMeasurable measurable)
+        {
+            return styleBuilder
+                        .AddSize("height", measurable.Height)
+                        .AddSize("min-height", measurable.MinHeight)
+                        .AddSize("max-height", measurable.MaxHeight)
+                        .AddSize("width", measurable.Width)
+                        .AddSize("min-width", measurable.MinWidth)
+                        .AddSize("max-width", measurable.MaxWidth);
+        }
     }
 }

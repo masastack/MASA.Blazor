@@ -22,6 +22,12 @@
       "Description": "将暗色主题变量应用到组件。"
     },
     {
+      "Name": "Elevation",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "组件的海拔可接受 0 到 24 之间的值。"
+    },
+    {
       "Name": "Height",
       "Type": "StringNumber",
       "Default": "",
@@ -37,7 +43,7 @@
       "Name": "Light",
       "Type": "Boolean",
       "Default": "false",
-      "Description": ""
+      "Description": "为组件设置浅色主题。"
     },
     {
       "Name": "Loading",

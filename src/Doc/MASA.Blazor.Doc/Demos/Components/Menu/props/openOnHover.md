@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-可以使用鼠标悬停来访问菜单，而不是单击鼠标悬停时打开的按钮。
+设置使用 **OpenOnHover** 属性时，菜单会悬停时打开而不是点击时打开。
 
 ## en-US
 
-Menus can be accessed using hover instead of clicking with the open-on-hover prop.
+Menus can be accessed using hover instead of clicking with the **OpenOnHover** prop.

@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-使用 `MButton` 中提供的相同尺寸等级，或提供您自己的size属性。
+使用 `MButton` 中提供的相同尺寸等级，或提供您自己的**Size**属性。
 
 ## en-US
 
-Use the same size class provided in `MButton`, or provide your own size attribute.
+Use the same size class provided in `MButton`, or provide your own **Size** attribute.

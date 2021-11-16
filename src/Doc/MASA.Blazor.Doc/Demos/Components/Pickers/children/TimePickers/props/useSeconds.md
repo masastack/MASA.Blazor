@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-TODO...
+Time picker can have seconds input.

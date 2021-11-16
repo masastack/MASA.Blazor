@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-您可以禁用菜单。 禁用的菜单无法打开。
+您可以禁用菜单。禁用的菜单无法打开。
 
 ## en-US
 
-You can disable the menu. Disabled menus can’t be opened.
+You can disable the menu. **Disabled** menus can’t be opened.
