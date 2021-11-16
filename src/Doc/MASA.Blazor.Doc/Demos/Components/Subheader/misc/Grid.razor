@@ -1,0 +1,47 @@
+﻿<MRow>
+    <MCol Cols="12" Sm="6" OffsetSm="3">
+        <MCard>
+            <MToolbar Color="white" Flat>
+                <MButton Icon Light>
+                    <MIcon Color="grey darken-2">mdi-arrow-left</MIcon>
+                </MButton>
+
+                <MToolbarTitle Class="grey--text text--darken-4">Albums</MToolbarTitle>
+
+                <MSpacer></MSpacer>
+
+                <MButton Icon Light>
+                    <MIcon Color="grey darken-2">mdi-magnify</MIcon>
+                </MButton>
+            </MToolbar>
+
+            <MSubheader>May</MSubheader>
+            <MContainer Fluid>
+                <MRow>
+                    @for (var i = 1; i <= 6; i++)
+                    {
+                        var index = i + 20;
+                        <MCol Cols="4">
+                            <MImage Src="@($"https://randomuser.me/api/portraits/men/{index}.jpg")" Alt="lorem" Class="image" Height="@("100%")" Width="@("100%")"></MImage>
+                        </MCol>
+                    }
+                </MRow>
+            </MContainer>
+
+            <MSubheader>June</MSubheader>
+            <MContainer Fluid>
+                <MRow>
+                    @for (var i = 1; i <= 6; i++)
+                    {
+                        var index = i + 5;
+                        <MCol Cols="4">
+                            <MImage Src="@($"https://randomuser.me/api/portraits/women/{index}.jpg")" Alt="lorem" Class="image" Height="@("100%")" Width="@("100%")"></MImage>
+                        </MCol>
+                    }
+                </MRow>
+            </MContainer>
+
+            <MFooter Class="mt-12"></MFooter>
+        </MCard>
+    </MCol>
+</MRow>
