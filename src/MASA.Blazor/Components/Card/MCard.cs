@@ -87,9 +87,9 @@ namespace MASA.Blazor
         [Parameter]
         public string Target { get; set; }
 
-        public bool CascadingIsDark => Themeable != null && Themeable.IsDark;
+        public bool IsCascadingDark => Themeable != null && Themeable.IsDark;
 
-        public bool GloabIsDark => false;
+        public bool IsGloabDark => false;
 
         public bool IsClickable => !Disabled && (IsLink || OnClick.HasDelegate);
 

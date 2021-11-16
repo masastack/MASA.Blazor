@@ -1,5 +1,5 @@
 ---
-order: 0
+order: 1
 title:
   zh-CN: 分隔线
   en-US: Divider
@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Breadcrumbs separator can be set using divider property.
+Breadcrumbs Basic Usage
