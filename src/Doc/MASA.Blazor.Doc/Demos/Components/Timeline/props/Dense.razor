@@ -1,0 +1,123 @@
+﻿@using System.Timers;
+@using Timer = System.Timers.Timer;
+
+<MCard Class="mx-auto" MaxWidth="600">
+    <MCardTitle Class="blue-grey white--text">
+        <span class="text-h6">Logs</span>
+        <MSpacer></MSpacer>
+        <MButton Outlined="_interval == null" Color="@_btnColor" Dark Depressed OnClick="_interval == null ? Start : Stop">
+            Realtime Logging
+        </MButton>
+    </MCardTitle>
+    <MCardText Class="py-0">
+        <MTimeline Dense>
+            @foreach (var item in _items)
+            {
+                <MTimelineItem Color="@item.Color" Small FillDot Id="@item.Id.ToString()">
+                    <MAlert Value Color="@item.Color" Icon="@item.Icon" Class="white--text">
+                        Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.
+                    </MAlert>
+                </MTimelineItem>
+            }
+        </MTimeline>
+    </MCardText>
+</MCard>
+
+@code
+{
+    private string[] _colors = new string[4] { "info", "warning", "error", "success" };
+    private Dictionary<string, string> _icons = new Dictionary<string, string>
+    {
+        { "info","mdi-information"},
+        { "warning","mdi-alert"},
+        { "error","mdi-alert-circle"},
+        { "success","mdi-check-circle"}
+    };
+    private class ItemDemo
+    {
+        public int Id { get; set; }
+        public string Color { get; set; }
+        public string Icon { get; set; }
+    }
+    private List<ItemDemo> _items = new List<ItemDemo>
+    {
+        new ItemDemo { Id = 1, Color = "info", Icon = "mdi-information" }
+    };
+    private int _nonce = 2;
+    private Timer _interval { get; set; }
+    private string _btnColor => _interval == null ? "white" : "primary";
+
+    private void AddEvent()
+    {
+        var (color, icon) = GenAlert();
+
+        var previousColor = _items[0].Color;
+
+        while (previousColor == color)
+        {
+            (color, icon) = GenAlert();
+        };
+
+        _items.Insert(0, new ItemDemo { Id = _nonce++, Color = color, Icon = icon });
+
+        if (_nonce > 6)
+        {
+            _items.RemoveAt(_items.Count - 1);
+        }
+    }
+
+    private (string, string) GenAlert()
+    {
+        var color = GenColor();
+
+        return (color, GenIcon(color));
+    }
+
+    private string GenColor()
+    {
+        var random = new Random();
+        var num = random.Next(0, 10);
+
+        return _colors[num % 4];
+    }
+
+    private string GenIcon(string color)
+    {
+        _icons.TryGetValue(color, out var icon);
+
+        return icon;
+    }
+
+    private void Start()
+    {
+        if (_interval == null)
+        {
+            _interval = new Timer
+            {
+                Interval = 3000
+            };
+            _interval.Elapsed += Timer_Elapsed;
+        }
+
+        _interval.Start();
+    }
+
+    private async void Timer_Elapsed(object sender, ElapsedEventArgs e)
+    {
+        await InvokeAsync(() =>
+        {
+            AddEvent();
+
+            StateHasChanged();
+        });
+    }
+
+    private void Stop()
+    {
+        _interval.Stop();
+        _interval.Dispose();
+        _interval.Close();
+
+        _interval = null;
+    }
+}

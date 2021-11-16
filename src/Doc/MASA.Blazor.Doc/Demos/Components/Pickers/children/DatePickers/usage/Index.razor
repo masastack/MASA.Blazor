@@ -1,0 +1,8 @@
+﻿<MRow Justify="@JustifyTypes.Center">
+    <MDatePicker @bind-Value="_picker"></MDatePicker>
+</MRow>
+
+@code {
+    private DateOnly _picker = DateOnly.FromDateTime(DateTime.Now);
+}
+
