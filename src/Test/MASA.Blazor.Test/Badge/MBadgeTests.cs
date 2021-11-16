@@ -11,10 +11,8 @@ namespace MASA.Blazor.Test.Badge
     [TestClass]
     public class MBadgeTests:TestBase
     {
-        
-
         [TestMethod]
-        public void RenderButtonWithAvatar()
+        public void RenderBadgeWithAvatar()
         {
             //Act
             var cut = RenderComponent<MBadge>(props =>
@@ -29,22 +27,7 @@ namespace MASA.Blazor.Test.Badge
         }
 
         [TestMethod]
-        public void RenderButtonNoWithAvatar()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.Avatar, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasAvatarClass = classes.Contains("m-badge");
-
-            // Assert
-            Assert.IsTrue(hasAvatarClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonWithBordered()
+        public void RenderBadgeWithBordered()
         {
             //Act
             var cut = RenderComponent<MBadge>(props =>
@@ -59,22 +42,7 @@ namespace MASA.Blazor.Test.Badge
         }
 
         [TestMethod]
-        public void RenderButtonNoWithBordered()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.Bordered, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasBorderedClass = classes.Contains("m-badge");
-
-            // Assert
-            Assert.IsTrue(hasBorderedClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonWithBottom()
+        public void RenderBadgeWithBottom()
         {
             //Act
             var cut = RenderComponent<MBadge>(props =>
@@ -89,22 +57,7 @@ namespace MASA.Blazor.Test.Badge
         }
 
         [TestMethod]
-        public void RenderButtonNoWithBottom()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.Bottom, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasBottomClass = classes.Contains("m-badge");
-
-            // Assert
-            Assert.IsTrue(hasBottomClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonWithDot()
+        public void RenderBadgeWithDot()
         {
             //Act
             var cut = RenderComponent<MBadge>(props =>
@@ -116,201 +69,6 @@ namespace MASA.Blazor.Test.Badge
 
             // Assert
             Assert.IsTrue(hasDotClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonNoWithDot()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.Dot, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasDotClass = classes.Contains("m-badge");
-
-            // Assert
-            Assert.IsTrue(hasDotClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonWithInLine()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.InLine, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasInLineClass = classes.Contains("m-badge--inline");
-
-            // Assert
-            Assert.IsTrue(hasInLineClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonNoWithInLine()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.InLine, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasInLineClass = classes.Contains("m-badge");
-
-            // Assert
-            Assert.IsTrue(hasInLineClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonWithLeft()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.Left, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasLeftClass = classes.Contains("m-badge--left");
-
-            // Assert
-            Assert.IsTrue(hasLeftClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonNoWithLeft()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.Left, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasLeftClass = classes.Contains("m-badge");
-
-            // Assert
-            Assert.IsTrue(hasLeftClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonWithOverLap()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.OverLap, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasOverLapClass = classes.Contains("m-badge--overlap");
-
-            // Assert
-            Assert.IsTrue(hasOverLapClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonNoWithOverLap()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.OverLap, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasOverLapClass = classes.Contains("m-badge");
-
-            // Assert
-            Assert.IsTrue(hasOverLapClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonWithTile()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.Tile, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasTileClass = classes.Contains("m-badge--tile");
-
-            // Assert
-            Assert.IsTrue(hasTileClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonNoWithTile()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.Tile, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasTileClass = classes.Contains("m-badge");
-
-            // Assert
-            Assert.IsTrue(hasTileClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonWithRight()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.Right, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasTileClass =! classes.Contains("m-badge--inline");
-
-            // Assert
-            Assert.IsTrue(hasTileClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonNoWithRight()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.Right, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasTileClass = !classes.Contains("m-badge__badge");
-
-            // Assert
-            Assert.IsTrue(hasTileClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonWithValue()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.Value, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasValueClass = !classes.Contains("display: none");
-
-            // Assert
-            Assert.IsTrue(hasValueClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonNoWithValue()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.Value, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasValueClass = !classes.Contains("m-badge__wrapper");
-
-            // Assert
-            Assert.IsTrue(hasValueClass);
         }
 
         [TestMethod]
@@ -329,17 +87,48 @@ namespace MASA.Blazor.Test.Badge
         }
 
         [TestMethod]
-        public void RenderBadgeNoWithDark()
+        public void RenderBadgeWithContent()
         {
             //Act
             var cut = RenderComponent<MBadge>(props =>
             {
-                props.Add(badge => badge.Dark, false);
+                props.Add(badge => badge.Content, 6);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasdarkClass = classes.Contains("theme--light");
+            var hasContentClass = classes.Contains("m-badge");
+
             // Assert
-            Assert.IsTrue(hasdarkClass);
+            Assert.IsTrue(hasContentClass);
+        }
+
+        [TestMethod]
+        public void RenderBadgeWithInLine()
+        {
+            //Act
+            var cut = RenderComponent<MBadge>(props =>
+            {
+                props.Add(badge => badge.InLine, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasInLineClass = classes.Contains("m-badge--inline");
+
+            // Assert
+            Assert.IsTrue(hasInLineClass);
+        }
+
+        [TestMethod]
+        public void RenderBadgeWithLeft()
+        {
+            //Act
+            var cut = RenderComponent<MBadge>(props =>
+            {
+                props.Add(badge => badge.Left, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLeftClass = classes.Contains("m-badge--left");
+
+            // Assert
+            Assert.IsTrue(hasLeftClass);
         }
 
         [TestMethod]
@@ -358,18 +147,63 @@ namespace MASA.Blazor.Test.Badge
         }
 
         [TestMethod]
-        public void RenderBadgeNoWithLight()
+        public void RenderBadgeWithOverLap()
         {
             //Act
             var cut = RenderComponent<MBadge>(props =>
             {
-                props.Add(badge => badge.Light, false);
+                props.Add(badge => badge.OverLap, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasLightClass = classes.Contains("m-badge");
+            var hasOverLapClass = classes.Contains("m-badge--overlap");
 
             // Assert
-            Assert.IsTrue(hasLightClass);
+            Assert.IsTrue(hasOverLapClass);
+        }
+
+        [TestMethod]
+        public void RenderBadgeWithTile()
+        {
+            //Act
+            var cut = RenderComponent<MBadge>(props =>
+            {
+                props.Add(badge => badge.Tile, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTileClass = classes.Contains("m-badge--tile");
+
+            // Assert
+            Assert.IsTrue(hasTileClass);
+        }
+
+        [TestMethod]
+        public void RenderBadgeWithOffsetX()
+        {
+            //Act
+            var cut = RenderComponent<MBadge>(props =>
+            {
+                props.Add(badge => badge.OffsetX, 10);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOffsetXClass = classes.Contains("m-badge");
+
+            // Assert
+            Assert.IsTrue(hasOffsetXClass);
+        }
+
+        [TestMethod]
+        public void RenderBadgeWithOffsetY()
+        {
+            //Act
+            var cut = RenderComponent<MBadge>(props =>
+            {
+                props.Add(badge => badge.OffsetY, 10);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOffsetYClass = classes.Contains("m-badge");
+
+            // Assert
+            Assert.IsTrue(hasOffsetYClass);
         }
 
         [TestMethod]
@@ -387,48 +221,18 @@ namespace MASA.Blazor.Test.Badge
         }
 
         [TestMethod]
-        public void RenderMBadgeWithElevation()
+        public void RenderBadgeWithValue()
         {
             //Act
             var cut = RenderComponent<MBadge>(props =>
             {
-                props.Add(badge => badge.Content, 6);
+                props.Add(badge => badge.Value, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasContentClass = classes.Contains("m-badge");
+            var hasValueClass = !classes.Contains(".m-badge__badge");
 
             // Assert
-            Assert.IsTrue(hasContentClass);
-        }
-
-        [TestMethod]
-        public void RenderMBadgeWithOffsetX()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.OffsetX, 10);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasOffsetXClass = classes.Contains("m-badge");
-
-            // Assert
-            Assert.IsTrue(hasOffsetXClass);
-        }
-
-        [TestMethod]
-        public void RenderMBadgeWithOffsetY()
-        {
-            //Act
-            var cut = RenderComponent<MBadge>(props =>
-            {
-                props.Add(badge => badge.OffsetY, 10);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasOffsetYClass = classes.Contains("m-badge");
-
-            // Assert
-            Assert.IsTrue(hasOffsetYClass);
+            Assert.IsTrue(hasValueClass);
         }
     }
 }
