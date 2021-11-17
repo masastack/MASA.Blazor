@@ -8,4 +8,4 @@ ENV LANG="zh_CN.UTF-8"
 ENV LANGUAGE="zh_CN:zh"
 ENV ASPNETCORE_URLS=http://0.0.0.0:5000
 
-ENTRYPOINT ["dotnet","./src/Doc/MASA.Blazor.Doc.Server/bin/Debug/net6.0/MASA.Blazor.Doc.Server.dll"]
+ENTRYPOINT ["dotnet","./src/Doc/MASA.Blaozr.Doc.WebAssembly.Host/bin/Debug/net6.0/MASA.Blazor.Doc.WebAssembly.Host.dll"]
