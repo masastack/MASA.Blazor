@@ -7,6 +7,7 @@ stages:
 variables:
   DOCKER_HOST: tcp://localhost:2375/
   IMAGE: proget-hz.lonsid.cn/masa-blazor/docs:0.2.$CI_PIPELINE_ID
+  IMAGEWASM: proget-hz.lonsid.cn/masa-blazor/docs.wasm:0.2.$CI_PIPELINE_ID
 
 packer:
   # image: proget-hz.lonsid.cn/masa-blazor/dotnet/sdk:6.0-forlinux
@@ -42,6 +43,8 @@ docker:
     - docker login -u gitlabci -p gitlabci http://proget-hz.lonsid.cn
     - docker build -t $IMAGE .
     - docker push $IMAGE
+    - docker build -f Dockerfile.wasm -t $IMAGEWASM .
+    - docker push $IMAGEWASM
   retry: 2
 
 deploy-dev:
@@ -51,6 +54,7 @@ deploy-dev:
     - develop
   script:
     - kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
+    - kubectl set image deployment/masa-blazor-docs masa-blazor-docs-wasm=$IMAGEWASM -n masa-blazor
   retry: 2
   
 deploy-test:
@@ -60,6 +64,7 @@ deploy-test:
     - develop
   script:
     - kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n test-masa-blazor
+    - kubectl set image deployment/masa-blazor-docs masa-blazor-docs-wasm=$IMAGEWASM -n test-masa-blazor
   retry: 2
   when: manual
     
