@@ -28,20 +28,6 @@ namespace MASA.Blazor.Test.Pagination
             //Assert.IsTrue(hasCircleClass);
         }
 
-        [TestMethod]
-        public void RendePaginationWithDisabled()
-        {
-            //Act
-            var cut = RenderComponent<MPagination>(props =>
-            {
-                props.Add(pagination => pagination.Disabled, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasDisabledClass = classes.Contains("m-pagination--disabled");
-
-            // Assert
-            Assert.IsTrue(hasDisabledClass);
-        }
 
         [TestMethod]
         public void RenderPaginationWithDark()

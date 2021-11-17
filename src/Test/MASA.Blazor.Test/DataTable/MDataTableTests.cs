@@ -162,48 +162,5 @@ namespace MASA.Blazor.Test.DataTable
             // Assert
             Assert.IsTrue(hasDisableSortClass);
         }
-
-        [TestMethod]
-        public void RendeDataTableWithCheckboxColor(string sorticon)
-        {
-            //Act
-            var cut = RenderComponent<MDataTableHeader>(props =>
-            {
-                props.Add(datatableheader => datatableheader.SortIcon, sorticon);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasDisableSortClass = classes.Contains("mdi-star");
-
-            // Assert
-            Assert.IsTrue(hasDisableSortClass);
-        }
-
-        //[TestMethod]
-        //public void RenderWithDataTableSelectContent()
-        //{
-        //    // Arrange & Act
-        //    var cut = RenderComponent<MDataTableHeader>(props =>
-        //    {
-        //        props.Add(datatableheader => datatableheader.DataTableSelectContent, "<span>Hello world</span>");
-        //    });
-        //    var contentDiv = cut.Find(".m-data-table__checkbox");
-
-        //    // Assert
-        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
-
-        //[TestMethod]
-        //public void RenderWithHeaderColContent()
-        //{
-        //    // Arrange & Act
-        //    var cut = RenderComponent<MDataTableHeader>(props =>
-        //    {
-        //        props.Add(datatableheader => datatableheader.HeaderColContent,context=> "<span>Hello world</span>");
-        //    });
-        //    var contentDiv = cut.Find(".m-data-table__wrapper");
-
-        //    // Assert
-        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
     }
 }
