@@ -2,7 +2,7 @@ FROM registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100-preview.7-nodejs1
 
 WORKDIR /app
 COPY . .
-RUN dotnet build src
+RUN dotnet workload install wasm-tools && dotnet build src
 
 ENV LANG="zh_CN.UTF-8"
 ENV LANGUAGE="zh_CN:zh"
