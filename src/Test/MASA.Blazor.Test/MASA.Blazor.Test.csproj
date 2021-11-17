@@ -13,16 +13,52 @@
     <Compile Remove="Cascader\**" />
     <Compile Remove="Col\**" />
     <Compile Remove="DataIterator\**" />
+    <Compile Remove="Form\**" />
+    <Compile Remove="Icon\**" />
+    <Compile Remove="ListItemGroup\**" />
+    <Compile Remove="RangeSlider\**" />
+    <Compile Remove="Row\**" />
+    <Compile Remove="SimpleTable\**" />
+    <Compile Remove="SlideGroup\**" />
+    <Compile Remove="Table\**" />
+    <Compile Remove="TimePicker\**" />
+    <Compile Remove="Tooltip\**" />
+    <Compile Remove="Upload\**" />
+    <Compile Remove="Window\**" />
     <EmbeddedResource Remove="Autocomplete\**" />
     <EmbeddedResource Remove="ButtonGroup\**" />
     <EmbeddedResource Remove="Cascader\**" />
     <EmbeddedResource Remove="Col\**" />
     <EmbeddedResource Remove="DataIterator\**" />
+    <EmbeddedResource Remove="Form\**" />
+    <EmbeddedResource Remove="Icon\**" />
+    <EmbeddedResource Remove="ListItemGroup\**" />
+    <EmbeddedResource Remove="RangeSlider\**" />
+    <EmbeddedResource Remove="Row\**" />
+    <EmbeddedResource Remove="SimpleTable\**" />
+    <EmbeddedResource Remove="SlideGroup\**" />
+    <EmbeddedResource Remove="Table\**" />
+    <EmbeddedResource Remove="TimePicker\**" />
+    <EmbeddedResource Remove="Tooltip\**" />
+    <EmbeddedResource Remove="Upload\**" />
+    <EmbeddedResource Remove="Window\**" />
     <None Remove="Autocomplete\**" />
     <None Remove="ButtonGroup\**" />
     <None Remove="Cascader\**" />
     <None Remove="Col\**" />
     <None Remove="DataIterator\**" />
+    <None Remove="Form\**" />
+    <None Remove="Icon\**" />
+    <None Remove="ListItemGroup\**" />
+    <None Remove="RangeSlider\**" />
+    <None Remove="Row\**" />
+    <None Remove="SimpleTable\**" />
+    <None Remove="SlideGroup\**" />
+    <None Remove="Table\**" />
+    <None Remove="TimePicker\**" />
+    <None Remove="Tooltip\**" />
+    <None Remove="Upload\**" />
+    <None Remove="Window\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,21 +72,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Icon\" />
-    <Folder Include="RangeSlider\" />
-    <Folder Include="SlideGroup\" />
-    <Folder Include="Table\" />
-    <Folder Include="Tooltip\" />
-    <Folder Include="Upload\" />
-    <Folder Include="Window\" />
-    <Folder Include="Form\" />
-    <Folder Include="Row\" />
-    <Folder Include="ListItemGroup\" />
-    <Folder Include="TimePicker\" />
-    <Folder Include="SimpleTable\" />
   </ItemGroup>
 
 </Project>

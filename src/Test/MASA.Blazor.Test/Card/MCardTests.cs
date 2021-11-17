@@ -222,21 +222,6 @@ namespace MASA.Blazor.Test.Card
         }
 
         [TestMethod]
-        public void RenderButtonWithRaised()
-        {
-            //Act
-            var cut = RenderComponent<MCard>(props =>
-            {
-                props.Add(card => card.Raised, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasRaisedClass = classes.Contains("m-card--disabled");
-
-            // Assert
-            Assert.IsTrue(hasRaisedClass);
-        }
-
-        [TestMethod]
         public void RenderButtonNoWithRaised()
         {
             //Act
