@@ -11,5 +11,4 @@ title:
 
 ## en-US
 
-TODO...
-
+The `MAppBar` component is used for application-wide actions and information.

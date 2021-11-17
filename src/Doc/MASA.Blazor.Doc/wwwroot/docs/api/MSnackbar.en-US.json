@@ -154,11 +154,11 @@
   ],
   "Events": [
     {
-      "Name": "IsActiveChanged",
+      "Name": "OnClosed",
       "Description": ""
     },
     {
-      "Name": "OnClosed",
+      "Name": "ValueChanged",
       "Description": ""
     }
   ]

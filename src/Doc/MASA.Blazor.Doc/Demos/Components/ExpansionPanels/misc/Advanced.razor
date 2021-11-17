@@ -83,7 +83,7 @@
             <MCol Cols="3">
                 Select your destination of choice
                 <br>
-                <a href="#">Learn more</a>
+                <a href="/components/expansionpanels#">Learn more</a>
             </MCol>
         </MRow>
 
@@ -224,8 +224,8 @@
 
 @code {
 
-    DateTime date = DateTime.Now;
-    DateTime date2 = DateTime.Now;
+    DateOnly date = DateOnly.FromDateTime(DateTime.Now);
+    DateOnly date2 = DateOnly.FromDateTime(DateTime.Now);
 
     List<string> locations = new() {"Australia", "Barbados", "Chile", "Denmark", "Ecuador", "France"};
 

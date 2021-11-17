@@ -9,7 +9,7 @@ namespace MASA.Blazor
             CssProvider
                 .Apply(cssBuilder =>
                 {
-                    cssBuilder.Add("m-toolbar__title");
+                    cssBuilder.Add("m-toolbar__items");
                 });
 
             AbstractProvider

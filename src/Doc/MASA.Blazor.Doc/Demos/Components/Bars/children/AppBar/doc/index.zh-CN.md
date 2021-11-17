@@ -12,4 +12,4 @@ AppBar组件对于任何图形用户界面（GUI）都至关重要，因为它�
 
 ## API
 
-- [MAlert](/docs/api/MAppBar)
+- [MAppBar](/docs/api/MAppBar)

@@ -11,4 +11,5 @@ title:
 
 ## en-US
 
-Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a `MProgressCircular` component but this can be customized.
+Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use
+a `MProgressCircular` component but this can be customized.

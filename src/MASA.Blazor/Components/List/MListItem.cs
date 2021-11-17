@@ -134,7 +134,7 @@ namespace MASA.Blazor
                 Active();
             }
 
-            Attributes["ripple"] = IsClickable && Ripple;
+            Attributes["ripple"] = IsClickable || Ripple;
         }
 
         protected override void SetComponentClass()

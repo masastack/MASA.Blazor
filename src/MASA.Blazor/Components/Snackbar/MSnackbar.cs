@@ -38,7 +38,7 @@ namespace MASA.Blazor
         }
 
         [Parameter]
-        public EventCallback<bool> IsActiveChanged { get; set; }
+        public EventCallback<bool> ValueChanged { get; set; }
 
         [Parameter]
         public EventCallback OnClosed { get; set; }
@@ -186,9 +186,9 @@ namespace MASA.Blazor
                     {
                         Value = false;
                         Timer.Stop();
-                        if (IsActiveChanged.HasDelegate)
+                        if (ValueChanged.HasDelegate)
                         {
-                            await IsActiveChanged.InvokeAsync(_value);
+                            await ValueChanged.InvokeAsync(_value);
                         }
                         if (OnClosed.HasDelegate)
                         {
@@ -201,9 +201,9 @@ namespace MASA.Blazor
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             Value = false;
-            if (IsActiveChanged.HasDelegate)
+            if (ValueChanged.HasDelegate)
             {
-                InvokeAsync(() => IsActiveChanged.InvokeAsync(_value));
+                InvokeAsync(() => ValueChanged.InvokeAsync(_value));
             }
             if (OnClosed.HasDelegate)
             {

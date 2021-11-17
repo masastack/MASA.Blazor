@@ -12,3 +12,4 @@ cols: 1
 ## API
 
 - [MApp](/docs/api/MApp)
+- [MMain](/docs/api/MMain)

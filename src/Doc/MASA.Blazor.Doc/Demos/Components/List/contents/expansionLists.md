@@ -7,8 +7,10 @@ title:
 
 ## zh-CN
 
-A list can contain a group of items which will display on click utilizing `MListGroup`'s **ActivatorContent**. Expansion lists are also used within the `MNavigationDrawer` component.
+A list can contain a group of items which will display on click utilizing `MListGroup`'s **ActivatorContent**. Expansion
+lists are also used within the [MNavigationDrawer](/components/navigationdrawer) component.
 
 ## en-US
 
-Lists can contain subheaders, dividers, and can contain 1 or more lines. The subtitle will overflow with ellipsis if it extends past one line.
+A list can contain a group of items which will display on click utilizing `MListGroup`'s **ActivatorContent**. Expansion
+lists are also used within the [MNavigationDrawer](/components/navigationdrawer) component.

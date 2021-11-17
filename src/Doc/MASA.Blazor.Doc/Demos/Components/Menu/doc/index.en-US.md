@@ -5,4 +5,8 @@ title: Menu
 cols: 1
 ---
 
-The `Menu` component shows a menu at the position of the element used to activate it.
+The `MMenu` component shows a menu at the position of the element used to activate it.
+
+## API
+
+- [MMenu](/docs/api/MMenu)

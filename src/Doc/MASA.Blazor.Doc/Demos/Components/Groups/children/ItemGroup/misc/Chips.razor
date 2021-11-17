@@ -4,9 +4,9 @@
     </MToolbar>
 
     <MCardText>
-        <MTextField Filled Label="Title" Value="@("My new post")"></MTextField>
+        <MTextField Filled Label="Title" TValue="string" @bind-Value="@title"></MTextField>
 
-        <MTextField Filled Label="Text" Value="@("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse")"></MTextField>
+        <MTextField Filled Label="Text" TValue="string" @bind-Value="@text"></MTextField>
 
         <MDivider Class="my-2"></MDivider>
 
@@ -35,3 +35,8 @@
         </MCardActions>
     </MCardText>
 </MCard>
+
+@code {
+    string title = "My new post";
+    string text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse";
+}

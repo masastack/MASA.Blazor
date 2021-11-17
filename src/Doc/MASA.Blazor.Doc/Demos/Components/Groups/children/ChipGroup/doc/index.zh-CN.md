@@ -8,8 +8,9 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chip.svg
 
 ---
 
-v-chip-group通过提供可分组的功能来增强v-chip组件。 它使用纸片来创建选择组。
+`MChipGroup` 通过提供可分组的功能来增强 `MChip` 组件。 它使用纸片来创建选择组。
 
 ## API
 
 - [MChipGroup](/docs/api/MChipGroup)
+- [MChip](/docs/api/MChip)

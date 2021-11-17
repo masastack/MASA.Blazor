@@ -31,7 +31,7 @@
         <MList>
             @foreach (var item in items)
             {
-                <MListItem>
+                <MListItem OnClick="() => { }">
                     <MListItemTitle>@item</MListItemTitle>
                 </MListItem>
             }
@@ -64,7 +64,7 @@
                    OffsetY 
                    Right>
                 <ActivatorContent>
-                    <MButton Icon @attributes="@context.Attrs">
+                    <MButton Dark Icon @attributes="@context.Attrs">
                         <MIcon>mdi-dots-vertical</MIcon>
                     </MButton>
                 </ActivatorContent>
@@ -72,7 +72,7 @@
                     <MList>
                         @foreach (var item in items)
                         {
-                            <MListItem>
+                            <MListItem OnClick="() => { }">
                                 <MListItemTitle>@item</MListItemTitle>
                             </MListItem>
                         }
@@ -152,7 +152,6 @@
 </MDialog>
 
 <MDialog @bind-Value="dialog2"
-         Persistent
          MaxWidth="500">
     <MCard>
         <MCardTitle>
@@ -201,7 +200,7 @@
                     <MList>
                         @foreach (var item in items)
                         {
-                            <MListItem>
+                            <MListItem OnClick="() => { }">
                                 <MListItemTitle>@item</MListItemTitle>
                             </MListItem>
                         }

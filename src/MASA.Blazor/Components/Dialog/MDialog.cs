@@ -135,6 +135,20 @@ namespace MASA.Blazor
                 .ApplyDialogDefault();
         }
 
+        protected override async Task Close()
+        {
+            if (Persistent)
+            {
+                _animated = true;
+                await Task.Delay(150);
+                _animated = false;
+
+                return;
+            }
+
+            await base.Close();
+        }
+
         public override async Task ShowLazyContent()
         {
             if (!ShowContent && Value)

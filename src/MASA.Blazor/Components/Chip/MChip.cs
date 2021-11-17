@@ -96,6 +96,8 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
+            CloseIcon ??= "mdi-close-circle";
+            
             var prefix = "m-chip";
 
             CssProvider
@@ -143,8 +145,6 @@ namespace MASA.Blazor
                     props[nameof(Class)] = "m-chip__filter";
                     props[nameof(MIcon.Left)] = true;
                 });
-
-            CloseIcon = "mdi-close-circle";
         }
     }
 }
