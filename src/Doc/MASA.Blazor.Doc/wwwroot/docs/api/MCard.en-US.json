@@ -10,12 +10,6 @@
       "Description": ""
     },
     {
-      "Name": "Append",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Class",
       "Type": "String",
       "Default": "null",
@@ -46,24 +40,6 @@
       "Description": "Designates an elevation applied to the component between 0 and 24."
     },
     {
-      "Name": "Exact",
-      "Type": "Nullable`1",
-      "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "ExactActiveClass",
-      "Type": "String",
-      "Default": "null",
-      "Description": ""
-    },
-    {
-      "Name": "ExactPath",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Flat",
       "Type": "Boolean",
       "Default": "false",
@@ -83,7 +59,7 @@
     },
     {
       "Name": "Href",
-      "Type": "Object",
+      "Type": "String",
       "Default": "null",
       "Description": ""
     },
@@ -148,12 +124,6 @@
       "Description": "Sets the minimum width for the component."
     },
     {
-      "Name": "Nuxt",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "OnContextmenuPreventDefault",
       "Type": "Boolean",
       "Default": "false",
@@ -167,12 +137,6 @@
     },
     {
       "Name": "Raised",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "Replace",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
@@ -218,12 +182,6 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "Removes the component’s border-radius."
-    },
-    {
-      "Name": "To",
-      "Type": "Object",
-      "Default": "null",
-      "Description": ""
     },
     {
       "Name": "Width",

@@ -12,6 +12,9 @@ namespace MASA.Blazor
     public partial class MListGroup : BListGroup
     {
         [Parameter]
+        public string ActiveClass { get; set; }
+
+        [Parameter]
         public bool NoAction { get; set; }
 
         [Parameter]
@@ -45,8 +48,12 @@ namespace MASA.Blazor
                 {
                     props[nameof(MListGroupItem.IsActive)] = IsActive;
                     props[nameof(MListGroupItem.Link)] = true;
-                    // props[nameof(MListGroupItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, args => ToggleExpansion());
                     props[nameof(MListGroupItem.Dark)] = Dark;
+                    
+                    if (IsActive)
+                    {
+                        props[nameof(MListGroupItem.Class)] = ActiveClass;
+                    }
                 })
                 .Apply<BListItemIcon, MListGroupItemIcon>("prepend", props => { props[nameof(MListGroupItemIcon.Type)] = "prepend"; })
                 .Apply<BIcon, MIcon>(props => { props[nameof(MIcon.Dark)] = Dark; })

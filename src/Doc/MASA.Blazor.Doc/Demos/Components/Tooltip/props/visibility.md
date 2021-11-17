@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-可使用 @bind-Value 编程性修改提示可见性。
+可使用 **@bind-Value** 编程性修改提示可见性。
 
 ## en-US
 
-Tooltip visibility can be programmatically changed using @bind-Value.
+Tooltip visibility can be programmatically changed using **@bind-Value**.

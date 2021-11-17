@@ -100,6 +100,18 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Target",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "ThreeLine",
       "Type": "Boolean",
       "Default": "false",

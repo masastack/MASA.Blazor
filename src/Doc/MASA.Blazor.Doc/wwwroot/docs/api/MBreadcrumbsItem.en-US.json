@@ -10,12 +10,6 @@
       "Description": ""
     },
     {
-      "Name": "Append",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": "设置 append 属性总是会附加到当前路径的相对路径上。"
-    },
-    {
       "Name": "Class",
       "Type": "String",
       "Default": "null",
@@ -28,26 +22,8 @@
       "Description": ""
     },
     {
-      "Name": "Exact",
-      "Type": "Nullable`1",
-      "Default": "false",
-      "Description": "完全匹配链接。如果没有这个链接，‘/’ 将匹配每个路由。"
-    },
-    {
-      "Name": "ExactActiveClass",
-      "Type": "String",
-      "Default": "null",
-      "Description": "配置在精准链接激活时应用的 CSS 类。"
-    },
-    {
-      "Name": "ExactPath",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": "精确匹配链接, 忽略query和hash部分。"
-    },
-    {
       "Name": "Href",
-      "Type": "Object",
+      "Type": "String",
       "Default": "null",
       "Description": ""
     },
@@ -64,20 +40,8 @@
       "Description": ""
     },
     {
-      "Name": "Nuxt",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": "指定链接是 nuxt-link 。"
-    },
-    {
-      "Name": "Replace",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Ripple",
-      "Type": "Object",
+      "Type": "Boolean",
       "Default": "false",
       "Description": ""
     },
@@ -100,8 +64,8 @@
       "Description": ""
     },
     {
-      "Name": "To",
-      "Type": "Object",
+      "Name": "Text",
+      "Type": "String",
       "Default": "null",
       "Description": ""
     }

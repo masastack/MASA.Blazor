@@ -29,7 +29,7 @@
 
         @((MarkupString)_demoComponent.ApiDoc)
 
-        @if (PropsList.Any() || MiscList.Any())
+        @if (PropsList.Any() || EventsList.Any() || ContentsList.Any() || MiscList.Any())
         {
             var example = DemoItemModel.GenerateExample(LanguageService.CurrentCulture.Name);
 

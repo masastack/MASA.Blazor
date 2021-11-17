@@ -171,16 +171,6 @@ namespace MASA.Blazor
                 });
         }
 
-        protected override async Task HandleOnClick(MouseEventArgs args)
-        {
-            if (NavigationManager != null && !string.IsNullOrEmpty(Href))
-            {
-                NavigationManager.NavigateTo(Href);
-            }
-
-            await base.HandleOnClick(args);
-        }
-
         protected override void Dispose(bool disposing)
         {
             List?.Items?.Remove(this);

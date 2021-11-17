@@ -5,7 +5,7 @@ using System.Timers;
 
 namespace MASA.Blazor
 {
-    public class MBreadcrumbs<TItem> : BBreadcrumbs<TItem>, IThemeable where TItem: BreadcrumbItem
+    public class MBreadcrumbs : BBreadcrumbs
     {
         [Parameter]
         public bool Large { get; set; }
@@ -19,18 +19,39 @@ namespace MASA.Blazor
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
 
+        protected bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
+
         protected override void SetComponentClass()
         {
             CssProvider
-               .Apply(cssBuilder =>
-               {
-                   cssBuilder.Add("m-breadcrumbs")
-                             .AddIf("m-breadcrumbs--large", () => Large == true)
-                             .AddTheme(this);
-               });
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-breadcrumbs")
+                        .AddIf("m-breadcrumbs--large", () => Large)
+                        .AddTheme(IsDark);
+                });
 
-            AbstractProvider.Apply<BBreadcrumbsDivider, MBreadcrumbsDivider>()
-                            .Apply<BBreadcrumbsItem, MBreadcrumbsItem>();
+            AbstractProvider
+                .Apply(typeof(BBreadcrumbsItemGroup<>), typeof(BBreadcrumbsItemGroup<MBreadcrumbs>))
+                .Apply<BBreadcrumbsDivider, MBreadcrumbsDivider>()
+                .Apply<BBreadcrumbsItem, MBreadcrumbsItem>();
         }
     }
 }

@@ -1,15 +1,23 @@
-﻿@using BlazorComponent
+﻿<div class="d-flex align-center">
+    Items:
+    <MBreadcrumbs Items="items"></MBreadcrumbs>
+</div>
 
-<MRow Align="AlignTypes.Center" Justify="JustifyTypes.Center">
-    <MBreadcrumbs Items="items" TItem="BreadcrumbItem"></MBreadcrumbs>
-</MRow>
+<div class="d-flex align-center">
+    Markup:
+    <MBreadcrumbs>
+        <MBreadcrumbsItem Href="#breadcrumbs_dashboard">Dashboard</MBreadcrumbsItem>
+        <MBreadcrumbsItem Href="#breadcrumbs_link_1" Text="Link 1"></MBreadcrumbsItem>
+        <MBreadcrumbsItem Href="#breadcrumbs_link_2" Disabled>Link 2</MBreadcrumbsItem>
+    </MBreadcrumbs>
+</div>
 
-@code {
+    @code {
 
     List<BreadcrumbItem> items = new()
         {
-            new BreadcrumbItem() { Text = "Dashboard", Disabled = false, Href = "#breadcrumbs_dashboard" },
-            new BreadcrumbItem() { Text = "Link 1", Disabled = false, Href = "#breadcrumbs_link_1" },
-            new BreadcrumbItem() { Text = "Link 2", Disabled = true, Href = "#breadcrumbs_link_2" }
+            new BreadcrumbItem() { Text = "Dashboard", Disabled = false, Href = "breadcrumbs_dashboard" },
+            new BreadcrumbItem() { Text = "Link 1", Disabled = false, Href = "breadcrumbs_link_1" },
+            new BreadcrumbItem() { Text = "Link 2", Disabled = true, Href = "breadcrumbs_link_2" }
         };
-}
+    }

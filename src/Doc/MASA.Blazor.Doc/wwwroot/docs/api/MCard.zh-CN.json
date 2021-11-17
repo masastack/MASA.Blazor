@@ -10,12 +10,6 @@
       "Description": "配置在链接激活时应用的 CSS 类。"
     },
     {
-      "Name": "Append",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": "设置 append 属性总是会附加到当前路径的相对路径上。"
-    },
-    {
       "Name": "Class",
       "Type": "String",
       "Default": "null",
@@ -46,24 +40,6 @@
       "Description": "组件的海拔可接受 0 到 24 之间的值。"
     },
     {
-      "Name": "Exact",
-      "Type": "Nullable`1",
-      "Default": "false",
-      "Description": "完全匹配链接。如果没有这个链接，‘/’ 将匹配每个路由。"
-    },
-    {
-      "Name": "ExactActiveClass",
-      "Type": "String",
-      "Default": "null",
-      "Description": "配置在精准链接激活时应用的 CSS 类。"
-    },
-    {
-      "Name": "ExactPath",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Flat",
       "Type": "Boolean",
       "Default": "false",
@@ -83,7 +59,7 @@
     },
     {
       "Name": "Href",
-      "Type": "Object",
+      "Type": "String",
       "Default": "null",
       "Description": "指定组件为锚点并应用 href 属性。"
     },
@@ -148,12 +124,6 @@
       "Description": "设定组件的最小宽度。"
     },
     {
-      "Name": "Nuxt",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "OnContextmenuPreventDefault",
       "Type": "Boolean",
       "Default": "false",
@@ -170,12 +140,6 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "指定较高的默认海拔（8dp）。"
-    },
-    {
-      "Name": "Replace",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
     },
     {
       "Name": "Ripple",
@@ -218,12 +182,6 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "删除组件的border-radius样式"
-    },
-    {
-      "Name": "To",
-      "Type": "Object",
-      "Default": "null",
-      "Description": "表示链接的目标路由。"
     },
     {
       "Name": "Width",

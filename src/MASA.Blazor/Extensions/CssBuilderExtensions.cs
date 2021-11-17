@@ -167,16 +167,6 @@ namespace BlazorComponent
             return cssBuilder;
         }
 
-        public static CssBuilder AddRoutable(this CssBuilder cssBuilder, IRoutable routable)
-        {
-            if(routable.To is null && routable.ActiveClass is not null)
-            {
-                cssBuilder.Add(routable.ActiveClass);
-            }
-
-            return cssBuilder;
-        }
-
         public static CssBuilder AddTheme(this CssBuilder cssBuilder, MASA.Blazor.IThemeable themeable)
         {
             if(themeable.Dark)

@@ -30,9 +30,6 @@ namespace MASA.Blazor
         public string FilterIcon { get; set; } = "mdi-check";
 
         [Parameter]
-        public string Href { get; set; }
-
-        [Parameter]
         public bool Label { get; set; }
 
         [Parameter]
@@ -40,9 +37,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool Light { get; set; }
-
-        [Parameter]
-        public bool Link { get; set; }
 
         [Parameter]
         public bool Outlined { get; set; }
@@ -57,9 +51,6 @@ namespace MASA.Blazor
         public bool Small { get; set; }
 
         [Parameter]
-        public string Target { get; set; }
-
-        [Parameter]
         public string TextColor { get; set; }
 
         [Parameter]
@@ -68,7 +59,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool XSmall { get; set; }
 
-        public bool IsClickable => (!Disabled && (IsLink || OnClick.HasDelegate || Tabindex > 0)) || ItemGroup != null;
+        public bool IsClickable => _router.IsClickable || ItemGroup != null;
 
         public bool IsDark
         {
@@ -88,9 +79,9 @@ namespace MASA.Blazor
             }
         }
 
-        public bool IsLink => Href != null || Link;
+        public bool IsLink => _router.IsLink;
 
-        public int Tabindex => Attributes.TryGetValue("tabindex", out var tabindex) ? Convert.ToInt32(tabindex) : 0;
+        public int Tabindex => _router.Tabindex;
 
         protected override void OnParametersSet()
         {
@@ -101,13 +92,6 @@ namespace MASA.Blazor
             Attributes["ripple"] = Ripple && IsClickable;
             Attributes["draggable"] = Draggable ? "true" : null;
             Attributes["tabindex"] = ItemGroup != null && !Disabled ? 0 : Tabindex;
-            Attributes["target"] = Target;
-
-            if (Href != null)
-            {
-                Tag = "a";
-                Attributes["href"] = Href;
-            }
         }
 
         protected override void SetComponentClass()

@@ -9,6 +9,8 @@ namespace MASA.Blazor
 {
     public partial class MCard : MSheet, ICard, ILoadable, IRoutable, ISheet
     {
+        private IRoutable _router;
+
         [Parameter]
         public RenderFragment ProgressContent { get; set; }
 
@@ -55,31 +57,10 @@ namespace MASA.Blazor
         public string ActiveClass { get; set; }
 
         [Parameter]
-        public bool Append { get; set; }
-
-        [Parameter]
-        public bool? Exact { get; set; }
-
-        [Parameter]
-        public bool ExactPath { get; set; }
-
-        [Parameter]
-        public string ExactActiveClass { get; set; }
-
-        [Parameter]
-        public object Href { get; set; }
-
-        [Parameter]
-        public object To { get; set; }
-
-        [Parameter]
-        public bool Nuxt { get; set; }
+        public string Href { get; set; }
 
         [Parameter]
         public EventCallback<MouseEventArgs> OnClick { get; set; }
-
-        [Parameter]
-        public bool Replace { get; set; }
 
         [Parameter]
         public bool Ripple { get; set; } = true;
@@ -87,17 +68,15 @@ namespace MASA.Blazor
         [Parameter]
         public string Target { get; set; }
 
-        public bool CascadingIsDark => Themeable != null && Themeable.IsDark;
-
-        public bool GloabIsDark => false;
-
-        public bool IsClickable => !Disabled && (IsLink || OnClick.HasDelegate);
-
-        public bool IsLink => Href != null || Link;
+        public bool IsClickable => _router.IsClickable;
 
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
+
+            _router = new Router(this);
+
+            (Tag, Attributes) = _router.GenerateRouteLink();
 
             Attributes["ripple"] = Ripple && IsClickable;
         }
@@ -110,7 +89,6 @@ namespace MASA.Blazor
                 .Merge(cssBuilder =>
                 {
                     cssBuilder.Add("m-card")
-                        .AddRoutable(this)
                         .AddIf("m-card--flat", () => Flat)
                         .AddIf("m-card--hover", () => Hover)
                         .AddIf("m-card--link", () => IsClickable)
@@ -122,10 +100,7 @@ namespace MASA.Blazor
                     styleBuilder
                         .AddIf(() => $"background:url(\"{Img}\") center center / cover no-repeat", () => string.IsNullOrWhiteSpace(Img) == false);
                 })
-                .Apply("progress", cssBuilder => 
-                {
-                    cssBuilder.Add("m-card__progress"); 
-                });
+                .Apply("progress", cssBuilder => { cssBuilder.Add("m-card__progress"); });
 
             AbstractProvider.Merge(typeof(BSheetBody<>), typeof(BCardBody<ICard>))
                 .Apply(typeof(BCardProgress<>), typeof(BCardProgress<ICard>))
