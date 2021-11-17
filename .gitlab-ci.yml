@@ -21,6 +21,7 @@ packer:
     - node -v
     - dotnet --version
     - git clone -b develop http://gitlab-hz.lonsid.cn/MASA-Stack/Framework/BlazorComponent.git ./src/BlazorComponent
+    - dotnet workload install wasm-tools
     - dotnet build src
     - dotnet pack src --include-symbols -p:PackageVersion=0.2.$CI_PIPELINE_ID
     - dotnet nuget push "**/*.symbols.nupkg" -k $nugetkey -s https://api.nuget.org/v3/index.json
