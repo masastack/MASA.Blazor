@@ -2,10 +2,11 @@ FROM registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100-preview.7-nodejs1
 
 WORKDIR /app
 COPY . .
-RUN dotnet workload install wasm-tools && dotnet build src
+RUN dotnet workload install wasm-tools
+RUN dotnet publish "Doc/MASA.Blaozr.Doc.WebAssembly.Host/MASA.Blazor.Doc.WebAssembly.Host.csproj" -c Release -o /app/publish
 
 ENV LANG="zh_CN.UTF-8"
 ENV LANGUAGE="zh_CN:zh"
 ENV ASPNETCORE_URLS=http://0.0.0.0:5000
 
-ENTRYPOINT ["dotnet","./src/Doc/MASA.Blaozr.Doc.WebAssembly.Host/bin/Debug/net6.0/MASA.Blazor.Doc.WebAssembly.Host.dll"]
+ENTRYPOINT ["dotnet","/app/publish/MASA.Blazor.Doc.WebAssembly.Host.dll"]
