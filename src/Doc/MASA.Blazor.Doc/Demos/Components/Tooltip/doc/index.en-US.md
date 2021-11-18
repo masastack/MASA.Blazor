@@ -6,4 +6,10 @@ cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tooltip.svg
 ---
 
-In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify¡¯s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.
+The `MTooltip` component is useful for conveying information when a user hovers over an element. You can also
+programmatically control the display of tooltips through a **@bind-Value**. When activated, tooltips display a text
+label identifying an element, such as a description of its function.
+
+## API
+
+- [MTooltip](/docs/api/MTooltip)

@@ -18,10 +18,3 @@
   width: 400px;
   margin: auto;
 }
-
-.m-card--reveal {
-    bottom: 0;
-    opacity: 1 !important;
-    position: absolute;
-    width: 100%;
-}

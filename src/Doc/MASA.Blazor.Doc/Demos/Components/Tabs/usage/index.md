@@ -7,8 +7,9 @@ title:
 
 ## zh-CN
 
-`MTabs` 组件是 `MItemGroup` 的样式扩展。 它提供了一个易于使用的接口来组织内容组。
+`MTabs` 组件是 [**MItemGroup**](/components/itemgroup) 的样式扩展。 它提供了一个易于使用的接口来组织内容组。
 
 ## en-US
 
-The `MTabs` component is a styled extension of `MItemGroup`. It provides an easy to use interface for organizing groups of content.
+The `MTabs` component is a styled extension of [**MItemGroup**](/components/itemgroup). It provides an easy to use
+interface for organizing groups of content.

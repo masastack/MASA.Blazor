@@ -13,3 +13,4 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg
 ## API
 
 - [MRadio](/docs/api/MRadio)
+- [MRadio](/docs/api/MRadioGroup)

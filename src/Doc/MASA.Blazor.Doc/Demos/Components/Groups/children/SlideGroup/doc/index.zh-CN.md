@@ -7,8 +7,10 @@ cols: 1
 
 ---
 
-`SlideGroup` 组件用于显示伪分页信息。它以 `ItemGroup` 为核心，为 `Tabs` 和 `ChipGroup` 等组件提供基础。
+`MSlideGroup` 组件用于显示伪分页信息。它以 [**MItemGroup**](/components/itemgroup) 为核心，为 [**MTabs**](/components/tabs)
+和 [**MChipGroup**](/components/chipgroup) 等组件提供基础。
 
 ## API
 
-- [SlideGroup](/docs/api/MSlideGroup)
+- [MSlideGroup](/docs/api/MSlideGroup)
+- [MSlideItem](/docs/api/MSlideItem)

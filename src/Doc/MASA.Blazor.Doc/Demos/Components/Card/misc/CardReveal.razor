@@ -1,5 +1,4 @@
 ﻿<MCard Class="mx-auto" MaxWidth="344" Outlined>
-
     <MCardText>
         <div>Word of the Day</div>
         <p class="text-h4 text--primary">
@@ -30,6 +29,15 @@
         </MCard>
     </ExpandTransition>
 </MCard>
+
+<style>
+    .m-card--reveal {
+        bottom: 0;
+        opacity: 1 !important;
+        position: absolute;
+        width: 100%;
+    }
+</style>
 
 @code {
     bool _reveal;

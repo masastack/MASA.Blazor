@@ -8,8 +8,12 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tabs.svg
 
 ---
 
-v-tab 组件用于将内容隐藏在可选择的项目后面。 这也可以用作页面的伪导航，其中选项卡是链接，选项卡项是内容。
+`MTabs` 组件用于将内容隐藏在可选择的项目后面。 这也可以用作页面的伪导航，其中选项卡是链接，选项卡项是内容。
 
 ## API
 
 - [MTabs](/docs/api/MTabs)
+- [MTab](/docs/api/MTab)
+- [MTabItem](/docs/api/MTabItem)
+- [MTabsItems](/docs/api/MTabsItems)
+- [MTabsSlider](/docs/api/MTabsSlider)

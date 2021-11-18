@@ -1,6 +1,4 @@
-﻿@using BlazorComponent.Doc.Models
-@using MASA.Blazor.Doc.Services
-@inherits OwningComponentBase<DemoService>
+﻿@inherits OwningComponentBase<MASA.Blazor.Doc.Services.DemoService>
 
 @((MarkupString)Demo.Description)
 
@@ -79,123 +77,50 @@
         <MDivider></MDivider>
         <ExpandTransition>
             <Element Show="_expend">
-                <MItemGroup @bind-Value="ActiveWindow" Class="pa-2" Mandatory>
-                    <MItem>
-                        <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.Active" Value="0"> template </MButton>
-                    </MItem>
-                    @if (Code != null)
+                <MItemGroup @bind-Value="_activeItem" Class="pa-2" Mandatory>
+                    @foreach (var ((type, _), content) in _items)
                     {
-                        <MItem>
-                            <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.Active" Value="1"> code </MButton>
+                        if (content == null) return;
+
+                        <MItem Value="type">
+                            <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.Active"> @type </MButton>
                         </MItem>
                     }
                 </MItemGroup>
                 <MDivider></MDivider>
-                <MWindow>
-                    <MWindowItem IsActive="IsTemplate">
-                        <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden my-0">
-                            <HighlightedCode Code="@Template" CanLoad="Template != null" Language="html"></HighlightedCode>
-                            <MButton Class="m-btn--copy mr-n2 mt-n2" Absolute Icon Right Rounded Top Style="background-color:inherit">
-                                <MIcon>
-                                    mdi-content-copy
-                                </MIcon>
-                            </MButton>
-                        </MSheet>
-                    </MWindowItem>
-                    <MWindowItem IsActive="IsCode">
-                        <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden my-0">
-                            <HighlightedCode Code="@Code" CanLoad="Code != null" Language="csharp"></HighlightedCode>
-                            <MButton Class="m-btn--copy mr-n2 mt-n2" Absolute Icon Right Rounded Top Style="background-color:inherit">
-                                <MIcon>
-                                    mdi-content-copy
-                                </MIcon>
-                            </MButton>
-                        </MSheet>
-                    </MWindowItem>
+                <MWindow Value="_activeItem">
+                    @foreach (var ((type, lang), content) in _items)
+                    {
+                        if (content == null) return;
+
+                        <MWindowItem Value="@type">
+                            <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden my-0">
+                                <HighlightedCode Code="@content" CanLoad Language="@lang"></HighlightedCode>
+                                <MButton Class="m-btn--copy mr-n2 mt-n2"
+                                         Style="background-color:inherit"
+                                         Absolute Icon Right Rounded Top
+                                         Disabled="_clicked"
+                                         OnClick="() => Copy(content)">
+                                    <FadeTransition>
+                                        <Element Show="_clicked">
+                                            <MIcon Color="grey">
+                                                mdi-check
+                                            </MIcon>
+                                        </Element>
+                                    </FadeTransition>
+                                    <FadeTransition>
+                                        <Element Show="!_clicked" Style="position: absolute;">
+                                            <MIcon Color="grey">
+                                                mdi-content-copy
+                                            </MIcon>
+                                        </Element>
+                                    </FadeTransition>
+                                </MButton>
+                            </MSheet>
+                        </MWindowItem>
+                    }
                 </MWindow>
             </Element>
         </ExpandTransition>
     </MSheet>
-}
-
-@inject ILanguageService lang;
-@inject NavigationManager NavigationManager
-@inject IJSRuntime Js
-@using BlazorComponent
-@using Element = BlazorComponent.Web.Element
-
-@code {
-    private bool _expend;
-    private bool _showComponent;
-
-    public StringNumber ActiveWindow { get; set; } = 0;
-
-    public bool IsTemplate => ActiveWindow == 0;
-
-    public bool IsCode => ActiveWindow == 1;
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
-
-    [Parameter]
-    public bool CodeExpand { get; set; }
-
-    [Parameter]
-    public string ComponentName { get; set; }
-
-    [Parameter]
-    public DemoItemModel Demo { get; set; }
-
-    [Parameter]
-    public int Index { get; set; }
-
-    RenderFragment Component;
-
-    protected string DemoId => $"components-{ComponentName.ToLower()}-demo-{Demo.Name}";
-
-    private string EditUrl => $"https://github.com/ant-design-blazor/ant-design-blazor/edit/master/site/MASA.Blazor.Doc/Demos/Components/{ComponentName}/demo/{Demo.Name}.razor";
-
-    public string Template { get; set; }
-
-    public string Code { get; set; }
-
-    protected override void OnParametersSet()
-    {
-        if (Demo.Type != null)
-        {
-            Component = Service.GetShowCase(Demo.Type);
-        }
-
-        if (Demo.Code != null)
-        {
-            var index = Demo.Code.IndexOf("@code");
-            if (index > 0)
-            {
-                Template = Demo.Code.Substring(0, index);
-                Code = Demo.Code.Substring(index);
-            }
-            else
-            {
-                Template = Demo.Code;
-            }
-        }
-    }
-
-    protected override void OnInitialized()
-    {
-        _showComponent = Index < 2;
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            if (!_showComponent)
-            {
-                await Task.Delay(Index * 16);
-                _showComponent = true;
-                StateHasChanged();
-            }
-        }
-    }
 }

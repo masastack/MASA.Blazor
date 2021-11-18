@@ -6,7 +6,7 @@
         <MButton Color="info" Click="context">Next slide</MButton>
     </NextContent>
     <ChildContent>
-        @foreach (var item in Enumerable.Range(1, length))
+        @foreach (var item in Enumerable.Range(1, 5))
         {
             <MWindowItem>
                 <MCard Color="grey" Height="200">
@@ -18,8 +18,3 @@
         }
     </ChildContent>
 </MWindow>
-
-@code {
-
-    int length = 5;
-}

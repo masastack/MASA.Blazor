@@ -1,10 +1,10 @@
 ﻿@using MASA.Blazor.Doc.Highlight
 
 <pre class="language-@Language">
-<code class="language-@Language" @ref="_codeElement">
-@sourceCode
-        </code>
-    </pre>
+    <code class="language-@Language" @ref="_codeElement">
+        @sourceCode
+    </code>
+</pre>
 
 @inject IPrismHighlighter Highlighter
 
@@ -30,10 +30,10 @@
         if (CanLoad && !hasLoaded)
         {
             _ = Task.Run(async () =>
-                {
-                    _objRef = DotNetObjectReference.Create(this);
-                    await Highlighter.HighlightAsync(Code, Language, _objRef,_codeElement);//TODO：加载完成通知组件刷新
-                });
+            {
+                _objRef = DotNetObjectReference.Create(this);
+                await Highlighter.HighlightAsync(Code, Language, _objRef, _codeElement); //TODO：加载完成通知组件刷新
+            });
         }
     }
 
@@ -52,4 +52,5 @@
     {
         _objRef?.Dispose();
     }
+
 }

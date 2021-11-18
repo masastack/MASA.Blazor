@@ -284,6 +284,10 @@ code[class*=language-], pre[class*=language-] {
     content: "c#";
 }
 
+.m-example pre.language-css::after {
+    content: "css";
+}
+
 .token.class-name {
     color: rgb(43, 145, 175)
 }

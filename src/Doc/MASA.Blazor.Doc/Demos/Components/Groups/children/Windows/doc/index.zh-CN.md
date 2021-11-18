@@ -11,4 +11,5 @@ cols: 1
 
 ## API
 
-- [MWindows](/docs/api/MWindows)
+- [MWindow](/docs/api/MWindow)
+- [MWindowItem](/docs/api/MWindowItem)

@@ -6,4 +6,13 @@ cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tabs.svg
 ---
 
-In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify¡¯s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.
+The `MTabs` component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation
+for a page, where the tabs are links and the tab-items are the content.
+
+## API
+
+- [MTabs](/docs/api/MTabs)
+- [MTab](/docs/api/MTab)
+- [MTabItem](/docs/api/MTabItem)
+- [MTabsItems](/docs/api/MTabsItems)
+- [MTabsSlider](/docs/api/MTabsSlider)

@@ -34,6 +34,12 @@
       "Description": ""
     },
     {
+      "Name": "Ripple",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",

@@ -5,5 +5,10 @@ title: SlideGroup
 cols: 1
 ---
 
-The `SlideGroup` component is used to display pseudo paginated information. It uses `ItemGroup` at its core and provides a baseline for components such as `Tabs` and `ChipGroup`.
+The `MSlideGroup` component is used to display pseudo paginated information. It uses [**MItemGroup**](/components/itemgroup) at its core and provides
+a baseline for components such as [**MTabs**](/components/tabs) and [**MChipGroup**](/components/chipgroup).
 
+## API
+
+- [MSlideGroup](/docs/api/MSlideGroup)
+- [MSlideItem](/docs/api/MSlideItem)
