@@ -3,11 +3,11 @@ order: 4
 title: 图标字体
 ---
 
-MASA Blazor 支持引导 Material Design 图标, Material 图标, Font Awesome 4 和 Font Awesome 5 默认情况下，应用程序将默认使用[Material Design 图标](https://materialdesignicons.com/)。
+MASA Blazor 支持引导 Material Design 图标, Material 图标, Font Awesome 4 和 Font Awesome 5 默认情况下，应用程序将默认使用 [Material Design 图标](https://materialdesignicons.com/)。
 
 ## 使用
 
-您可以利用`MIcon`，`MAlert`，`MBadge`等组件展示图标。如下：
+您可以利用 `MIcon`，`MAlert`，`MBadge`等组件展示图标。如下：
 
 ```html
 <MIcon>mdi-alarm</MIcon>

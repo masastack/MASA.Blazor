@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-Fade过渡的示例.
+Fade 过渡的示例.
 
 ## en-US
 

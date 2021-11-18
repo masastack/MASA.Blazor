@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-在flexbox容器中使用 `flex-row` 或 `flex-column` 这样的边距辅助类, 你可以分别控制 flex 项目在 **x轴** 和 **y轴** 上的位置.
+在 flexbox 容器中使用 `flex-row` 或 `flex-column` 这样的边距辅助类, 你可以分别控制 flex 项目在 **x轴** 和 **y轴** 上的位置.
 
 <div
   role="alert"

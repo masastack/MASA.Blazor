@@ -9,7 +9,7 @@ title:
 
 **如何运行**
 
-指定元素`overflow`, `overflow-x` 或`overflow-y` 属性。 可以使用以下格式应用这些类：`{overflow}-{value}`。 其中**溢出**是指类型：`overflow`, `overflow-x` 或`overflow-y`，**值**可以是以下之一：`auto`, `hidden`或`visible`。
+指定元素 `overflow`, `overflow-x` 或`overflow-y` 属性。 可以使用以下格式应用这些类：`{overflow}-{value}`。 其中**溢出**是指类型：`overflow`, `overflow-x` 或`overflow-y`，**值**可以是以下之一：`auto`, `hidden`或`visible`。
 
 这是属性列表:
 

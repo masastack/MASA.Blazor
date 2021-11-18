@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-可以通过flex的justify类改变 `justify-content` 设置. 默认情况下, 这将修改 x轴 上的 flex 项目, 但是当使用 `flex-direction: column` 时将被反转从而修改 **y轴**. 从 `start` (浏览器默认), `end`, `center`, `space-between`, 或 `space-acound` 选择一个值.
+可以通过 flex 的 justify 类改变 `justify-content` 设置. 默认情况下, 这将修改 x轴 上的 flex 项目, 但是当使用 `flex-direction: column` 时将被反转从而修改 **y轴**. 从 `start` (浏览器默认), `end`, `center`, `space-between`, 或 `space-acound` 选择一个值.
 
 `justify-content` 同样也有一些弹性变量.
 

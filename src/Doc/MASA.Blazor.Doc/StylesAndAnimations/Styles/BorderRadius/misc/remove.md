@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-使用 `.rounded-0` 辅助类来移除元素所有的半径或按边角选择的半径; 例如. `.rounded-l-0` 和 `.rounded-tr-0`.
+使用 `.rounded-0` 辅助类来移除元素所有的半径或按边角选择的半径; 例如 `.rounded-l-0` 和 `.rounded-tr-0`.
 
 ## en-US
 

@@ -7,7 +7,7 @@
     {
         if (item.Children != null && item.Children.Any())
         {
-            <MListGroup Class="m-list-group--default" PrependIcon="@item.Icon" Color="primary" AppendIcon="mdi-menu-down" NoAction> 
+            <MListGroup Class="m-list-group--default" PrependIcon="@item.Icon" Color="primary" AppendIcon="mdi-menu-down" NoAction>
                 <ActivatorContent>
                     <MListItemContent>
                         <MListItemTitle>@item.Title</MListItemTitle>
@@ -66,10 +66,10 @@
     }
 </MList>
 
-@code{
+@code {
 
     [Parameter]
-    public DemoMenuItemModel[] MenuItems { get; set; } = {};
+    public DemoMenuItemModel[] MenuItems { get; set; } = { };
 
     protected override async Task OnInitializedAsync()
     {
@@ -83,10 +83,14 @@
     {
         if (LanguageService.CurrentCulture.Name == "zh-CN" && !string.IsNullOrEmpty(model.SubTitle))
         {
+            if (model.Url.StartsWith("style"))
+            {
+                return model.SubTitle;
+            }
+
             return $"{model.Title}（{model.SubTitle}）";
         }
 
         return model.Title;
     }
-
 }

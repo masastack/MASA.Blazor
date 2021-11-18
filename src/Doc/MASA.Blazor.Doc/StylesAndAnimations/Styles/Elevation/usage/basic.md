@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-`海拔`助手类允许您为任何元素分配一个自定义 z-deep。
+`Elevation` 助手类允许您为任何元素分配一个自定义 z-deep。
 
 ## en-US
 

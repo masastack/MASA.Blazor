@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-`flex-column` 和 `flex-column-reverse` 可以用于改变flexbox容器的方向. 请注意, IE11 和 Safari 可能存在列方向的问题.
+`flex-column` 和 `flex-column-reverse` 可以用于改变 flexbox 容器的方向. 请注意, IE11 和 Safari 可能存在列方向的问题.
 
 `flex-direction` 也有响应式变化。
 

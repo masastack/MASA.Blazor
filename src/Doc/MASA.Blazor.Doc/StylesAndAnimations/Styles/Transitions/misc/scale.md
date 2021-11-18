@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-许多 MASA.Blazor 组件都包含一个 transition 属性允许你指定想要的效果。
+许多 MASA Blazor 组件都包含一个 transition 属性允许你指定想要的效果。
 
 
 ## en-US

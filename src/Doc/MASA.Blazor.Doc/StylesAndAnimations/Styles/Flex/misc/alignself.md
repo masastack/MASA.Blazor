@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-可以通过flex的align-self类改变 `align-self` 设置. 默认情况下, 这将修改 **x**轴 上的 flex 项目, 但是当使用 `flex-direction: column` 时将被反转从而修改 **y**轴. 从 `start` , `end`, `center`, `baseline`, `auto`, 或 `stretch`(浏览器默认) 选择一个值.
+可以通过 flex 的 align-self 类改变 `align-self` 设置. 默认情况下, 这将修改 **x**轴 上的 flex 项目, 但是当使用 `flex-direction: column` 时将被反转从而修改 **y**轴. 从 `start` , `end`, `center`, `baseline`, `auto`, 或 `stretch`(浏览器默认) 选择一个值.
 
 `align-self-items` 同样也有一些弹性变量.
 

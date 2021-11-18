@@ -3,11 +3,11 @@ order: 1
 title: 赞助商和支持者
 ---
 
-MASA.Blazor 是一个 MIT许可 的开源项目，可以完全免费使用。 由 John 和 Heather Leider 全职积极维护它。 此外，由开源贡献者组成的核心团队有助于维护和指导框架的未来。 维持核心框架和生态系统包所需的时间和投入是相当可观的。 您可以通过以下方法之一成为支持者来支持MASA.Blazor的开源项目：
+MASA Blazor 是一个 MIT 许可 的开源项目，可以完全免费使用。 由 John 和 Heather Leider 全职积极维护它。 此外，由开源贡献者组成的核心团队有助于维护和指导框架的未来。 维持核心框架和生态系统包所需的时间和投入是相当可观的。 您可以通过以下方法之一成为支持者来支持 MASA Blazor 的开源项目：
 
 ## 一次性捐助
 
-一次性捐款可以通过 [支付宝](https://paypal.me/vuetify) 进行。
+一次性捐款可以通过 [支付宝]() 进行。
 
 <br>
 
@@ -15,14 +15,14 @@ MASA.Blazor 是一个 MIT许可 的开源项目，可以完全免费使用。 �
 
 定期捐助会带来 **专属** 的好处，比如 GitHub 的优先级问题、应用审核，以及将您的徽标放在本网站上。
 
-- [通过GitHub成为支持者或赞助商](https://github.com/sponsors/johnleider) 或 [Patreon](https://www.patreon.com/vuetify) （直接转到MASA.Blazor以支持John和Heather）。
-- [通过Open Collection](https://opencollective.com/vuetify) （支持MASA.Blazor开发和维护的透明基金）成为支持者或赞助商。
+- [通过GitHub成为支持者或赞助商]() 或 [Patreon]() （直接转到 MASA Blazor 以支持 John 和 Heather）。
+- [通过Open Collection]() （支持 MASA Blazor 开发和维护的透明基金）成为支持者或赞助商。
 
 <br>
 
 ## 当前项目赞助商
 
-我们感谢所有项目赞助商对MASA.Blazor的持续支持。 If you have any questions about sponsorship, please reach out to [sponsor@vuetifyjs.com](mailto:sponsor@vuetifyjs.com) for more information.
+我们感谢所有项目赞助商对 MASA Blazor 的持续支持。 If you have any questions about sponsorship, please reach out to [sponsor@vuetifyjs.com]() for more information.
 
 <br>
 
@@ -76,8 +76,8 @@ MASA.Blazor 是一个 MIT许可 的开源项目，可以完全免费使用。 �
 
 ## 粗略的
 
-如果您在经营一家企业并在创收的产品中使用MASA.Blazor，那么赞助MASA.Blazor开发是有商业意义的：它可以确保您的产品所依赖的项目保持健康并得到积极维护。 MASA.Blazor是John和Heather的 全职 工作；您的赞助和贡献有助于支持他们。
+如果您在经营一家企业并在创收的产品中使用 MASA Blazor，那么赞助 MASA Blazor 开发是有商业意义的：它可以确保您的产品所依赖的项目保持健康并得到积极维护。 MASA Blazor 是 John 和 Heather 的 全职 工作；您的赞助和贡献有助于支持他们。
 
 <br>
 
-如果您对赞助有任何疑问，请联系 [sponsor@vuetifyjs.com](sponsor@vuetifyjs.com) 了解更多信息。
+如果您对赞助有任何疑问，请联系 [sponsor@vuetifyjs.com]() 了解更多信息。

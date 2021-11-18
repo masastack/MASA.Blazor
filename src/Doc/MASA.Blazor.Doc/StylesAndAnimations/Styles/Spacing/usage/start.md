@@ -9,7 +9,7 @@ title:
 
 **如何运行**
 
-辅助类应用到元素的 **margin** 或 **padding** 范围是从 0 到 16. 每个尺寸增量都与Material Design边距规范一致. 这些类可以通过 `{property}{direction}-{size}` 格式使用。
+辅助类应用到元素的 **margin** 或 **padding** 范围是从 0 到 16. 每个尺寸增量都与 Material Design 边距规范一致. 这些类可以通过 `{property}{direction}-{size}` 格式使用。
 
 **property** 应用间距类型:
 

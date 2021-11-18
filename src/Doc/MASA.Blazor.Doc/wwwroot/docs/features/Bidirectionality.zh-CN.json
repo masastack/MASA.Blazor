@@ -1,5 +1,0 @@
-{
-  "Order": 1,
-  "Title": "双向性(LTR/RTL)",
-  "Html": "\r\n                <h1 class=\"m-heading text-h3 text-sm-h3 mb-2\">\r\n                    <a class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    双向性(LTR/RTL)\r\n                </h1>\n<p>MASA.Blazor 支持 RTL (从右至左) 语言.</p>\n\r\n            <div class=\"mb-8\">&nbsp;</div><section id=\"section-2695973\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    使用\r\n                </h2>\n<pre><code class=\"language-c#\">@page &quot;/rtlSwitch&quot;\n@inject GlobalConfig GlobalConfig\n\n&lt;button @onclick=&quot;SetRTL&quot;&gt;从右至左&lt;/button&gt;\n&lt;button @onclick=&quot;SetLTR&quot;&gt;从左至右&lt;/button&gt;\n&lt;button @onclick=&quot;Switch&quot;&gt;切换&lt;/button&gt;\n\n@code{\n\tvoid SetRTL()\n\t{\n\t\tGlobalConfig.RTL = true;\n\t}\n\n\tvoid SetLTR()\n\t{\n\t\tGlobalConfig.RTL = false;\n\t}\n\n\tvoid Switch()\n\t{\n\t\tGlobalConfig.RTL = !GlobalConfig.RTL;\n\t}\n}\n</code></pre>\n"
-}

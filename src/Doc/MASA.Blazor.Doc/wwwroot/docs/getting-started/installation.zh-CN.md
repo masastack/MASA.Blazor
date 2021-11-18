@@ -7,9 +7,9 @@ title: 安装
 
 ## 创建一个 Blazor Server 项目
 
-> 在创建项目之前，请确保[.NET Core SDK 6.0.100-preview.5+](https://dotnet.microsoft.com/download/dotnet/6.0)已被成功安装。
+> 在创建项目之前，请确保 [.NET Core SDK 6.0.100-preview.5+](https://dotnet.microsoft.com/download/dotnet/6.0) 已被成功安装。
 
-在命令行界面中创建名为`BlazorApp`的新Blazor应用:
+在命令行界面中创建名为 `BlazorApp` 的新 Blazor 应用:
 
 ```sh
 $ dotnet new blazorserver -o BlazorApp
@@ -21,7 +21,7 @@ $ dotnet new blazorserver -o BlazorApp
 cd BlazorApp
 ```
 
-## 安装Nuget包
+## 安装 Nuget 包
 
 ```sh
 $ dotnet add package MASA.Blazor
@@ -29,7 +29,7 @@ $ dotnet add package MASA.Blazor
 
 ## 引入样式、字体、脚本
 
-在`Pages/_Host.cshtml`中引入：
+在 `Pages/_Host.cshtml` 中引入：
 
 ```html
 <!--样式-->
@@ -45,7 +45,7 @@ $ dotnet add package MASA.Blazor
 
 ## 注入相关服务
 
-将 MASA.Blazor 的相关服务添加到`Startup.ConfigureServices`：
+将 MASA.Blazor 的相关服务添加到 `Startup.ConfigureServices`：
 
 ```c#
 services.AddMasaBlazor();
@@ -53,13 +53,13 @@ services.AddMasaBlazor();
 
 ## 全局配置
 
-修改`_Imports.razor`文件,添加以下内容:
+修改 `_Imports.razor` 文件,添加以下内容:
 
 ```c#
 @using MASA.Blazor
 ```
 
-修改`Shared/MainLayout.razor`文件，让MApp成为根元素：
+修改 `Shared/MainLayout.razor` 文件，让 MApp 成为根元素：
 
 ```html
 <MApp>

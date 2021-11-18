@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-MASA Blazor 使用Flexbox通过12点网格系统建构. 间距用来创建应用程序内容的特定布局. 它包含5个媒体断点查询来确定特定屏幕的大小或方向: **xs**, **sm**, **md**, **lg** 和 **xl**. 下面的 视图断点 表中定义了默认解析。
+MASA Blazor 使用 Flexbox 通过12点网格系统建构. 间距用来创建应用程序内容的特定布局. 它包含5个媒体断点查询来确定特定屏幕的大小或方向: **xs**, **sm**, **md**, **lg** 和 **xl**. 下面的 视图断点 表中定义了默认解析。
 
 <div
   class="overflow-hidden mb-12 overflow-hidden m-sheet m-sheet--outlined theme--light rounded"

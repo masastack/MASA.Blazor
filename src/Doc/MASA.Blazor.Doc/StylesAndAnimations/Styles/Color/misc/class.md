@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-规范中的每种颜色都会被转换为**background**和**text**变体，以便通过一个类在你的应用中设置样式，例如 `<div class="red">` 或 `<span class="red--text">`。
+规范中的每种颜色都会被转换为 **background** 和 **text** 变体，以便通过一个类在你的应用中设置样式，例如 `<div class="red">` 或 `<span class="red--text">`。
 
 ## en-US
 

@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-文本颜色也支持**darken**和**lighten**变体，使用 `text--{lighten|darken}-{n}` 即可。
+文本颜色也支持 **darken** 和 **lighten** 变体，使用 `text--{lighten|darken}-{n}` 即可。
 
 ## en-US
 

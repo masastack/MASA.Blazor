@@ -3,11 +3,11 @@ order: 0
 title: 认识开发团队
 ---
 
-MASA.Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团队，不断努力为开发人员带来更好的体验。 请记住，下面并不是所有有助于使MASA.Blazor变得更强的所有人的详尽列表。 感谢您 的支持，感谢您使用 MASA.Blazor ！
+MASA Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团队，不断努力为开发人员带来更好的体验。 请记住，下面并不是所有有助于使 MASA Blazor 变得更强的所有人的详尽列表。 感谢您 的支持，感谢您使用 MASA Blazor ！
 
 ## 公司
 
- MASA.Blazor（公司）是一家全职开源企业。 您可以通过在 GitHub 上赞助 MASA.Blazor 来支持他们。
+ MASA Blazor（公司）是一家全职开源企业。 您可以通过在 GitHub 上赞助 MASA Blazor 来支持他们。
 
 <div class="mb-8">
 	<a href="https://github.com/sponsors/johnleider?utm_source=vuetifyads&utm_medium=promoted-ad" rel="noopener" target="_blank" class="text-decoration-none">
@@ -156,7 +156,7 @@ MASA.Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团
 
 ## 核心团队
 
-核心开发团队是开放源码开发人员，帮助引导MASA.Blazor及其生态系统的方向。
+核心开发团队是开放源码开发人员，帮助引导 MASA Blazor 及其生态系统的方向。
 
 <div class="mb-8">
     <a href="https://opencollective.com/vuetify?utm_source=vuetifyads&amp;utm_medium=promoted-ad" rel="noopener" target="_blank" class="text-decoration-none">

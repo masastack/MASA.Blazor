@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-fab过渡的示例.
+fab 过渡的示例.
 
 ## en-US
 

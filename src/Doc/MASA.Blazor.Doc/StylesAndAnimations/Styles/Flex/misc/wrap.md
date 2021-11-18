@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-默认情况下 `.d-flex` 不提供任何包装(其行为类似于 `flex-wrap：nowrap`)。 这可以通过使用 `flex-{condition}` 格式的flex-wrap辅助类进行修改, condition的值可以为 `nowrap`, `wrap` 或 `wrap-reverse`.
+默认情况下 `.d-flex` 不提供任何包装(其行为类似于 `flex-wrap：nowrap`)。 这可以通过使用 `flex-{condition}` 格式的 flex-wrap 辅助类进行修改, condition 的值可以为 `nowrap`, `wrap` 或 `wrap-reverse`.
 
 * **.flex-nowrap**
 * **.flex-wrap**
