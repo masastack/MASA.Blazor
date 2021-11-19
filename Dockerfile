@@ -2,7 +2,7 @@ FROM registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100-preview.7-nodejs1
 
 WORKDIR /app
 COPY . .
-RUN dotnet build src/Doc/MASA.Blazor.Doc.Server -c release
+RUN dotnet build src/Doc/MASA.Blazor.Doc.Server -c Release
 
 ENV LANG="zh_CN.UTF-8"
 ENV LANGUAGE="zh_CN:zh"
