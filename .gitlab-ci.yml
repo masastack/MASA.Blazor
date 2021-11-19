@@ -6,8 +6,8 @@ stages:
 
 variables:
   DOCKER_HOST: tcp://localhost:2375/
-  IMAGE: proget-hz.lonsid.cn/masa-blazor/docs:0.2.$CI_PIPELINE_ID
-  IMAGEWASM: proget-hz.lonsid.cn/masa-blazor/docs_wasm:0.2.$CI_PIPELINE_ID
+  IMAGE: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:0.2.$CI_PIPELINE_ID
+  IMAGEWASM: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:0.2.$CI_PIPELINE_ID-wasm
 
 packer:
   # image: proget-hz.lonsid.cn/masa-blazor/dotnet/sdk:6.0-forlinux
@@ -38,9 +38,10 @@ docker:
   only:
     - develop
   services:
-    - name: proget-hz.lonsid.cn/masa-images/library/docker:17.05.01-dind
+    - name: registry.cn-hangzhou.aliyuncs.com/library/docker:17.05.01-dind
+  before_script:
+    - docker login -u $CI_ALI_REGISTRY_USER -p $CI_ALI_REGISTRY_PASSWD $CI_ALI_REGISTRY_DOMAIN
   script:
-    - docker login -u gitlabci -p gitlabci http://proget-hz.lonsid.cn
     - docker build -t $IMAGE .
     - docker push $IMAGE
     - docker build -f Dockerfile.wasm -t $IMAGEWASM .
@@ -48,7 +49,8 @@ docker:
   retry: 2
 
 deploy-dev:
-  image: proget-hz.lonsid.cn/masa-images/library/kubectl:1.17.2-newack
+  # image: proget-hz.lonsid.cn/masa-images/library/kubectl:1.17.2-newack
+  image: registry.cn-hangzhou.aliyuncs.com/kubectl:1.17.2-masa-ack-dev
   stage: deploy-dev
   only:
     - develop
@@ -58,7 +60,7 @@ deploy-dev:
   retry: 2
   
 deploy-test:
-  image: proget-hz.lonsid.cn/masa-images/library/kubectl:1.17.2-newack 
+  image: registry.cn-hangzhou.aliyuncs.com/kubectl:1.17.2-masa-ack-dev
   stage: deploy-test
   only:
     - develop
