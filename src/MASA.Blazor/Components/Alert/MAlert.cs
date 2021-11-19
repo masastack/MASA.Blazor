@@ -92,7 +92,7 @@ namespace MASA.Blazor
 
         private string ComputedColor => Color ?? ComputedType;
 
-        private (bool, RenderFragment) ComputedIcon()
+        private(bool, RenderFragment) ComputedIcon()
         {
             if (Icon != null && Icon.IsT1 && Icon.AsT1 == false) return (false, null);
 
@@ -140,6 +140,8 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-alert")
                         .Add("m-sheet")
+                        .AddIf("m-alert--border", () => Border != Borders.None)
+                        .Add(BorderClass)
                         .AddIf("m-sheet--shaped", () => Shaped)
                         .AddTheme(IsDarkTheme)
                         .AddElevation(Elevation)
@@ -167,15 +169,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-alert__border")
-                        .Add(() => Border switch
-                        {
-                            Borders.Left => "m-alert__border--left",
-                            Borders.Right => "m-alert__border--right",
-                            Borders.Top => "m-alert__border--top",
-                            Borders.Bottom => "m-alert__border--bottom",
-                            Borders.None => "",
-                            _ => throw new ArgumentOutOfRangeException(nameof(Border))
-                        })
+                        .Add(BorderClass)
                         .AddIf("m-alert__border--has-color", () => ColoredBorder)
                         .AddIf(() => Type.ToString().ToLower(), () => HasTypedBorder)
                         .AddTextColor(Color, () => ColoredBorder);
@@ -197,6 +191,16 @@ namespace MASA.Blazor
                     props[nameof(MAlertDismissButton.Dark)] = IsDarkTheme;
                 })
                 .Apply<BIcon, MIcon>("dismissible", props => { props[nameof(MIcon.Dark)] = IsDarkTheme; });
+
+            string BorderClass() => Border switch
+            {
+                Borders.Left => "m-alert__border--left",
+                Borders.Right => "m-alert__border--right",
+                Borders.Top => "m-alert__border--top",
+                Borders.Bottom => "m-alert__border--bottom",
+                Borders.None => "",
+                _ => throw new ArgumentOutOfRangeException(nameof(Border))
+            };
         }
     }
 }
