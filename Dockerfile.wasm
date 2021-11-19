@@ -9,4 +9,5 @@ ENV LANG="zh_CN.UTF-8"
 ENV LANGUAGE="zh_CN:zh"
 ENV ASPNETCORE_URLS=http://0.0.0.0:5000
 
+WORKDIR /app/publish
 ENTRYPOINT ["dotnet","/app/publish/MASA.Blazor.Doc.WebAssembly.Host.dll"]
