@@ -10,7 +10,7 @@ namespace MASA.Blazor.Presets;
 public partial class PActions
 {
     private List<PAction> Actions { get; } = new();
-    
+
     private double Width { get; set; }
 
     internal ActionTypes? Type { get; set; }
@@ -72,7 +72,7 @@ public partial class PActions
         JustifyTypes.Start => "justify-start",
         JustifyTypes.SpaceAround => "justify-space-around",
         JustifyTypes.SpaceBetween => "justify-space-between",
-        JustifyTypes.None => ""
+        _ => ""
     };
 
     protected override Task OnAfterRenderAsync(bool firstRender)

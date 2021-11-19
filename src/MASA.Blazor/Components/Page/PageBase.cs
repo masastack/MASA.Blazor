@@ -326,7 +326,9 @@ namespace MASA.Blazor
             }
         }
 
+#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
         Task IHandleEvent.HandleEventAsync(EventCallbackWorkItem callback, object? arg)
+#pragma warning restore CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
         {
             var task = callback.InvokeAsync(arg);
             var shouldAwaitTask = task.Status != TaskStatus.RanToCompletion &&

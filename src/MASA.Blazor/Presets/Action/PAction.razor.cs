@@ -27,9 +27,6 @@ namespace MASA.Blazor.Presets
         [Inject]
         public DomEventJsInterop DomEventJsInterop { get; set; }
 
-        [Inject]
-        public IJSRuntime Js { get; set; }
-
         [CascadingParameter]
         public PActions Actions { get; set; }
 

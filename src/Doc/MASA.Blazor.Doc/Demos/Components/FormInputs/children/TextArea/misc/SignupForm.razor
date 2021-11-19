@@ -103,7 +103,6 @@
         <MSpacer></MSpacer>
         <MButton
             Disabled="!IsValid"
-            Loading="isLoading"
             Class="white--text"
             Color="deep-purple accent-4"
             Depressed
@@ -148,7 +147,6 @@
 
     bool dialog;
     MForm form;
-    bool isLoading;
     Signup model = new() {Bio = bio};
 
     bool IsValid => form != null && form.EditContext.IsModified() && form.EditContext.Validate(); // is right usage?

@@ -112,12 +112,6 @@
       "Description": "在较小和较大的断点上更改列数，可用的选项是 1 -> 12 和 auto 。"
     },
     {
-      "Name": "Span",
-      "Type": "StringNumber",
-      "Default": "null",
-      "Description": ""
-    },
-    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",

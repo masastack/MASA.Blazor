@@ -348,10 +348,6 @@
   ],
   "Contents": [
     {
-      "Name": "Append",
-      "Description": ""
-    },
-    {
       "Name": "AppendContent",
       "Description": ""
     },
@@ -373,10 +369,6 @@
     },
     {
       "Name": "MessageContent",
-      "Description": ""
-    },
-    {
-      "Name": "Prepend",
       "Description": ""
     },
     {

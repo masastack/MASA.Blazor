@@ -130,6 +130,12 @@
       "Description": "将组件向顶部对齐。"
     },
     {
+      "Name": "Transition",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Value",
       "Type": "Boolean",
       "Default": "false",

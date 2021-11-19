@@ -78,10 +78,6 @@
   ],
   "Contents": [
     {
-      "Name": "Activator",
-      "Description": ""
-    },
-    {
       "Name": "ActivatorContent",
       "Description": ""
     },
@@ -97,10 +93,6 @@
     },
     {
       "Name": "OnUpload",
-      "Description": ""
-    },
-    {
-      "Name": "Upload",
       "Description": ""
     }
   ]

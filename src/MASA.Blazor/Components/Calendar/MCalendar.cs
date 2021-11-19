@@ -114,7 +114,8 @@ namespace MASA.Blazor
                         .Add($"margin-bottom:{EventMarginBottom}px");
                 });
 
-            Action<Dictionary<string, object>> propsAction = props => {
+            void BuildProps(Dictionary<string, object> props)
+            {
                 foreach (var prop in Props)
                 {
                     props[prop.Key] = prop.Value;
@@ -125,13 +126,13 @@ namespace MASA.Blazor
                 OneOf<string, List<int>> weekDaysProp = RenderProps.WeekDays;
                 props["Weekdays"] = weekDaysProp;
                 props["Categories"] = RenderProps.Categories;
-            };
+            }
             AbstractProvider
                 .ApplyCalendarWithEventsDefault()
-                .Apply(typeof(ICalendarMonthly), typeof(MCalendarMonthly), propsAction)
-                .Apply(typeof(ICalendarCategory), typeof(MCalendarCategory), propsAction)
-                .Apply<BCalendarDaily, MCalendarDaily>(propsAction)
-                .Apply<BCalendarWeekly, MCalendarWeekly>(propsAction);
+                .Apply(typeof(ICalendarMonthly), typeof(MCalendarMonthly), BuildProps)
+                .Apply(typeof(ICalendarCategory), typeof(MCalendarCategory), BuildProps)
+                .Apply<BCalendarDaily, MCalendarDaily>(BuildProps)
+                .Apply<BCalendarWeekly, MCalendarWeekly>(BuildProps);
         }
 
         public CalendarTimestamp ParsedValue => Value != null ?
@@ -163,7 +164,7 @@ namespace MASA.Blazor
             }
         }
 
-        public Func<CalendarTimestamp, bool, string> MonthLongFormatter => 
+        public Func<CalendarTimestamp, bool, string> MonthLongFormatter =>
             (_tms, @short) => GetFormatter(new() { TimeZone = "UTC", Month = "long" }, _tms, @short);
 
         public Func<CalendarTimestamp, bool, string> MonthShortFormatter =>
@@ -273,7 +274,7 @@ namespace MASA.Blazor
                 }
 
                 if (!CategoryHideDynamic || !CategoryShowAll)
-                { 
+                {
                     var categoryLength = categories.Count;
 
                     ParsedEvents().ForEach(ev =>
@@ -322,7 +323,7 @@ namespace MASA.Blazor
         private static Dictionary<string, CalendarCategoryMap> AddCategoryMap(int index,
             Dictionary<string, CalendarCategoryMap> categoryMap, string categoryNameStr)
         {
-            if(string.IsNullOrWhiteSpace(categoryNameStr))
+            if (string.IsNullOrWhiteSpace(categoryNameStr))
                 return categoryMap;
 
             if (categoryMap.ContainsKey(categoryNameStr))
@@ -333,12 +334,12 @@ namespace MASA.Blazor
             return categoryMap;
         }
 
-        public void Prev(int amount = 1) => Move(-amount);
+        public void Prev(int amount = 1) => _ = Move(-amount);
 
-        public void Next(int amount = 1) => Move(amount);
+        public void Next(int amount = 1) => _ = Move(amount);
 
         public async Task Move(int amount = 1)
-        { 
+        {
             var moved = CalendarTimestampUtils.DeepCopy(ParsedValue);
             var forward = amount > 0;
             var mover = forward ? CalendarTimestampUtils.NextDay : CalendarTimestampUtils.PrevDay;

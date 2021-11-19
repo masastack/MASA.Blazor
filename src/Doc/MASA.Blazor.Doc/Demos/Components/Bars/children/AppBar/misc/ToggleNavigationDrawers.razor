@@ -1,77 +1,39 @@
-﻿<MContainer Fluid>
-    <MCard class="mx-auto overflow-hidden" Height="400">
-        <MAppBar Absolute>
-            <MAppBarNavIcon @onclick="() => drawer=true"></MAppBarNavIcon>
-            <MAppBarTitle>Others </MAppBarTitle>
-            <MSpacer></MSpacer>
+﻿<MCard class="mx-auto overflow-hidden" Height="400">
+    <MAppBar Color="deep-purple" Dark>
+        <MAppBarNavIcon @onclick="() => drawer=true"></MAppBarNavIcon>
+        <MAppBarTitle>Title</MAppBarTitle>
+    </MAppBar>
 
-            <MButton Icon>
-                <MIcon>mdi-magnify</MIcon>
-            </MButton>
-            <MButton Icon>
-                <MIcon>mdi-heart</MIcon>
-            </MButton>
+    <MNavigationDrawer Absolute Temporary @bind-Value="drawer">
+        <MList Nav Dense>
+            <MListItemGroup ActiveClass="deep-purple--text text--accent-4">
+                <MListItem>
+                    <MListItemIcon>
+                        <MIcon>mdi-home</MIcon>
+                    </MListItemIcon>
+                    <MListItemTitle>
+                        Home
+                    </MListItemTitle>
+                </MListItem>
+                <MListItem>
+                    <MListItemIcon>
+                        <MIcon>mdi-account</MIcon>
+                    </MListItemIcon>
+                    <MListItemTitle>
+                        Account
+                    </MListItemTitle>
+                </MListItem>
+            </MListItemGroup>
+        </MList>
+    </MNavigationDrawer>
 
-
-            <MMenu NudgeBottom="8" Bottom Left>
-                <ActivatorContent>
-                    <MButton Icon @attributes="@context.Attrs">
-                        <MIcon>mdi-dots-vertical</MIcon>
-                    </MButton>
-                </ActivatorContent>
-
-                <ChildContent>
-                    <MList>
-                        <MListItemGroup>
-                            @foreach (var item in titles)
-                            {
-                                <MListItem>
-                                    <MListItemContent>
-                                        <MListItemTitle>
-                                            @item
-                                        </MListItemTitle>
-                                    </MListItemContent>
-                                </MListItem>
-                            }
-                        </MListItemGroup>
-                    </MList>
-                </ChildContent>
-            </MMenu>
-
-        </MAppBar>
-
-        <MNavigationDrawer Absolute Temporary Drawer="drawer">
-            <MList Nav Dense>
-                <MListItemGroup>
-                    <MListItem>
-                        <MListItemIcon>
-                            <MIcon>mdi-home</MIcon>
-                        </MListItemIcon>
-                        <MListItemTitle>
-                            Home
-                        </MListItemTitle>
-                    </MListItem>
-                    <MListItem>
-                        <MListItemIcon>
-                            <MIcon>mdi-account</MIcon>
-                        </MListItemIcon>
-                        <MListItemTitle>
-                            Account
-                        </MListItemTitle>
-                    </MListItem>
-                </MListItemGroup>
-            </MList>
-        </MNavigationDrawer>
-
-    </MCard>
-</MContainer>
+</MCard>
 
 @code {
     bool drawer = false;
-    string group = "";
 
     string[] titles =
-    {
+                    {
     "Click Me",
     "Click Me",
     "Click Me",

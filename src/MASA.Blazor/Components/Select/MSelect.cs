@@ -227,15 +227,15 @@ namespace MASA.Blazor
                 .Apply<BMenu, MMenu>(props =>
                 {
                     props[nameof(MMenu.Value)] = Visible;
-                    props[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, (v) =>
-                    {
-                        Visible = v;
+                    props[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, async (v) =>
+                     {
+                         Visible = v;
 
-                        if (v)
-                        {
-                            InputElement.FocusAsync();
-                        }
-                    });
+                         if (v)
+                         {
+                             await InputElement.FocusAsync();
+                         }
+                     });
                     props[nameof(MMenu.Disabled)] = Disabled || Readonly;
                     props[nameof(MMenu.OffsetY)] = MenuProps?.OffsetY;
                     props[nameof(MMenu.OffsetX)] = MenuProps?.OffsetX;

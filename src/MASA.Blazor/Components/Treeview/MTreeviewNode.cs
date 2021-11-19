@@ -87,7 +87,7 @@ namespace MASA.Blazor
                      props[nameof(Class)] = "m-treeview-node__checkbox";
                      props[nameof(MIcon.Color)] = (IsSelected || IsIndeterminate) ? SelectedColor : null;
                      props[nameof(MIcon.Disabled)] = Disabled;
-                     props[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnCheck);
+                     props[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnCheckAsync);
                  })
                 .Apply<BIcon, MIcon>("toggle", props =>
                 {
@@ -97,7 +97,7 @@ namespace MASA.Blazor
                         .AddIf("m-treeview-node__toggle--loading", () => IsLoading)
                         .Class;
                     props[nameof(Class)] = css;
-                    props[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnToggle);
+                    props[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnToggleAsync);
                 })
                 .Apply(typeof(BTreeviewNodeNode<,,>), typeof(BTreeviewNodeNode<TItem, TKey, MTreeviewNode<TItem, TKey>>))
                 .Apply(typeof(BTreeviewNodeChildrenWrapper<,,>), typeof(BTreeviewNodeChildrenWrapper<TItem, TKey, MTreeviewNode<TItem, TKey>>))
@@ -139,26 +139,26 @@ namespace MASA.Blazor
                 });
         }
 
-        public async Task HandleOnCheck(MouseEventArgs args)
+        public async Task HandleOnCheckAsync(MouseEventArgs args)
         {
             if (IsLoading)
             {
                 return;
             }
 
-            CheckChildren();
+           await CheckChildrenAsync();
             Treeview.UpdateSelected(Key);
             await Treeview.EmitSelectedAsync();
         }
 
-        public async Task HandleOnToggle(MouseEventArgs args)
+        public async Task HandleOnToggleAsync(MouseEventArgs args)
         {
             if (IsLoading)
             {
                 return;
             }
 
-            CheckChildren();
+            await CheckChildrenAsync();
             await OpenAsync();
         }
     }

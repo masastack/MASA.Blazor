@@ -123,6 +123,13 @@ namespace MASA.Blazor
         [Parameter]
         public RenderFragment ActionContent { get; set; }
 
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            Transition ??= "m-snack-transition";
+        }
+
         protected override void SetComponentClass()
         {
             var prefix = "m-snack";
@@ -160,10 +167,6 @@ namespace MASA.Blazor
                         .AddRounded(Rounded, Tile)
                         .AddElevation(Elevation)
                         .AddTheme(IsDark);
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .AddIf("display:none", () => !Value);
                 })
                 .Apply("content", cssBuilder =>
                 {

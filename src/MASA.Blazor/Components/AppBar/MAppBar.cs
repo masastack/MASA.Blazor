@@ -232,7 +232,7 @@ namespace MASA.Blazor
                         .AddIf(() => $"right:{Right.ToUnit()}", () => Right != null);
                 });
 
-            Attributes.Add("data-booted", true);
+            Attributes.Add("data-booted", "true");
         }
 
         protected async override Task OnFirstAfterRenderAsync()

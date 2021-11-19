@@ -112,12 +112,6 @@
       "Description": ""
     },
     {
-      "Name": "Span",
-      "Type": "StringNumber",
-      "Default": "null",
-      "Description": ""
-    },
-    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",

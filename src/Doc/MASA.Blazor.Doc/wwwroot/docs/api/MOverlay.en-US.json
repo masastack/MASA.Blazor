@@ -72,10 +72,6 @@
   ],
   "Events": [
     {
-      "Name": "Click",
-      "Description": ""
-    },
-    {
       "Name": "OnClick",
       "Description": ""
     }
