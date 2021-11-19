@@ -28,8 +28,6 @@ namespace MASA.Blazor.Doc.Services
         private readonly ILanguageService _languageService;
         private readonly HttpClient _httpClient;
         private readonly NavigationManager _navigationManager;
-        private Uri _baseUrl;
-
         private string CurrentLanguage => _languageService.CurrentCulture.Name;
 
         private string CurrentComponentName { get; set; }
@@ -38,9 +36,8 @@ namespace MASA.Blazor.Doc.Services
         {
             _languageService = languageService;
             _httpClient = httpClient;
+            _httpClient.BaseAddress ??= new Uri("http://127.0.0.1:5000");
             _navigationManager = navigationManager;
-            _baseUrl = new Uri("http://localhost:5000");
-
             _languageService.LanguageChanged += async (sender, args) => await InitializeAsync(args.Name);
         }
 
@@ -50,8 +47,7 @@ namespace MASA.Blazor.Doc.Services
             await _menuCache.GetOrAdd(language, async (currentLanguage) =>
             {
                 var menuItems =
-                    await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/meta/menu.{language}.json")
-                        .ToString());
+                    await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>($"_content/MASA.Blazor.Doc/meta/menu.{language}.json");
                 return menuItems;
             });
 
@@ -59,8 +55,7 @@ namespace MASA.Blazor.Doc.Services
             await _componentCache.GetOrAdd(language, async (currentLanguage) =>
             {
                 var components =
-                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>(new Uri(_baseUrl,
-                        $"_content/MASA.Blazor.Doc/meta/components.{language}.json").ToString());
+                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>($"_content/MASA.Blazor.Doc/meta/components.{language}.json");
                 return components.ToDictionary(x => x.Title.ToLower(), x => x);
             });
 
@@ -68,8 +63,7 @@ namespace MASA.Blazor.Doc.Services
             await _styleCache.GetOrAdd(language, async (currentLanguage) =>
             {
                 var styles =
-                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>(new Uri(_baseUrl,
-                        $"_content/MASA.Blazor.Doc/meta/styles-and-animations/components.{language}.json").ToString());
+                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>($"_content/MASA.Blazor.Doc/meta/styles-and-animations/components.{language}.json");
                 return styles.ToDictionary(x => x.Title.ToLower(), x => x);
             });
 
@@ -77,8 +71,7 @@ namespace MASA.Blazor.Doc.Services
             await _demoMenuCache.GetOrAdd(language, async (currentLanguage) =>
             {
                 var menuItems =
-                    await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/meta/demos.{language}.json")
-                        .ToString());
+                    await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>($"_content/MASA.Blazor.Doc/meta/demos.{language}.json");
                 return menuItems;
             });
 
@@ -86,8 +79,7 @@ namespace MASA.Blazor.Doc.Services
             await _docMenuCache.GetOrAdd(language, async (currentLanguage) =>
             {
                 var menuItems =
-                    await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/meta/docs.{language}.json")
-                        .ToString());
+                    await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>($"_content/MASA.Blazor.Doc/meta/docs.{language}.json");
                 return menuItems;
             });
         }
@@ -106,7 +98,7 @@ namespace MASA.Blazor.Doc.Services
         {
             _showCaseCache ??= new ConcurrentCache<string, RenderFragment>();
             var demoTypes =
-                await _httpClient.GetFromJsonAsync<string[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/meta/demoTypes.json").ToString());
+                await _httpClient.GetFromJsonAsync<string[]>($"_content/MASA.Blazor.Doc/meta/demoTypes.json");
             foreach (var type in demoTypes)
             {
                 GetShowCase(type);
@@ -118,7 +110,7 @@ namespace MASA.Blazor.Doc.Services
             CurrentComponentName = componentName;
             await InitializeAsync(CurrentLanguage);
             return _componentCache.TryGetValue(CurrentLanguage, out var component)
-                ? ((await component).TryGetValue(componentName.ToLower(),out var componetModel)?componetModel:null)
+                ? ((await component).TryGetValue(componentName.ToLower(), out var componetModel) ? componetModel : null)
                 : null;
         }
 
@@ -187,11 +179,11 @@ namespace MASA.Blazor.Doc.Services
                     }
                 }
 
-                if(string.IsNullOrEmpty(components.ApiDoc) == false)
+                if (string.IsNullOrEmpty(components.ApiDoc) == false)
                 {
                     contents.Add(ContentsItem.GenerateApi(CurrentLanguage));
                 }
-                
+
                 if (propsList.Any() || miscList.Any())
                 {
                     contents.Add(ContentsItem.GenerateExample(CurrentLanguage));
@@ -301,28 +293,11 @@ namespace MASA.Blazor.Doc.Services
                 {
                     var prev = i == 0 ? null : items[i - 1];
                     var next = i == items.Length - 1 ? null : items[i + 1];
-                    return new[] {prev, next};
+                    return new[] { prev, next };
                 }
             }
 
-            return new DemoMenuItemModel[] {null, null};
-        }
-
-        public async Task<Recommend[]> GetRecommend()
-        {
-            return await _httpClient.GetFromJsonAsync<Recommend[]>(new Uri(_baseUrl,
-                $"_content/MASA.Blazor.Doc/data/recommend.{CurrentLanguage}.json").ToString());
-        }
-
-        public async Task<Product[]> GetProduct()
-        {
-            return await _httpClient.GetFromJsonAsync<Product[]>(new Uri(_baseUrl, $"_content/MASA.Blazor.Doc/data/products.json").ToString());
-        }
-
-        public async Task<MoreProps[]> GetMore()
-        {
-            return await _httpClient.GetFromJsonAsync<MoreProps[]>(new Uri(_baseUrl,
-                $"_content/MASA.Blazor.Doc/data/more-list.{CurrentLanguage}.json").ToString());
+            return new DemoMenuItemModel[] { null, null };
         }
     }
 }
