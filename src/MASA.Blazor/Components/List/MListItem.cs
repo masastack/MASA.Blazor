@@ -84,7 +84,7 @@ namespace MASA.Blazor
         public bool Highlighted { get; set; }
 
         [Parameter]
-        public bool Ripple { get; set; } = true;
+        public bool Ripple { get; set; }
 
         private void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
