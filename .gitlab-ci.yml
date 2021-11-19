@@ -12,7 +12,7 @@ variables:
 packer:
   # image: proget-hz.lonsid.cn/masa-blazor/dotnet/sdk:6.0-forlinux
   #image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0-nodejs14.17.6
-  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100-preview.7-nodejs14.16.1-wasm-tools
+  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100-preview.7-nodejs14.16.1
   stage: packer
   only:
     - develop
@@ -22,7 +22,7 @@ packer:
     - node -v
     - dotnet --version
     - git clone -b develop http://gitlab-hz.lonsid.cn/MASA-Stack/Framework/BlazorComponent.git ./src/BlazorComponent
-    # - dotnet workload install wasm-tools
+    - dotnet workload install wasm-tools
     - dotnet build src
     - dotnet pack src --include-symbols -p:PackageVersion=0.2.$CI_PIPELINE_ID
     - dotnet nuget push "**/*.symbols.nupkg" -k $nugetkey -s https://api.nuget.org/v3/index.json
