@@ -112,7 +112,7 @@
         <MAppBar Height="80"
                  Elevation=0
                  Color="white">
-            <img class="ml-16" src="_content/MASA.Blazor.Doc/img/logo.png" onClick=@(()=>Navigation.NavigateTo(Navigation.BaseUri+"/")) />
+            <img class="ml-16" src="_content/MASA.Blazor.Doc/img/logo.png" />
             <MButton Text Color="black" Class="ml-9" OnClick=@(()=>Navigation.NavigateTo(Navigation.BaseUri+"/docs/introduction/why"))>Docs</MButton>
             <MButton Text Color="black" Class="ml-4">Blog</MButton>
             <MButton Text Color="black" Class="ml-4">Team</MButton>
@@ -533,8 +533,6 @@
 </MApp>
 
 @code {
-    private int _height = 422;
-    private int _width = 422;
     int onboarding = 0;
 
     StringNumber OnBoarding
