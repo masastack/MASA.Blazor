@@ -18,22 +18,23 @@
         <MDivider></MDivider>
         <div class="m-lazy" style="min-height: 52px;">
             <div class="text-end pa-2">
+                @* <span class="m-app-tooltip-btn d-inline-block"> *@
+                @*     <MTooltip Bottom OpenDelay=200> *@
+                @*         <ActivatorContent> *@
+                @*             <MButton Icon aria-label="invert-example-colors" @attributes="@context.Attrs" Label=""> *@
+                @*                 <MIcon>mdi-invert-colors</MIcon> *@
+                @*             </MButton> *@
+                @*         </ActivatorContent> *@
+                @*         <ChildContent> *@
+                @*             <span>反转示例颜色</span> *@
+                @*         </ChildContent> *@
+                @*     </MTooltip> *@
+                @* </span> *@
+
                 <span class="m-app-tooltip-btn d-inline-block">
                     <MTooltip Bottom OpenDelay=200>
                         <ActivatorContent>
-                            <MButton Icon aria-label="invert-example-colors" @attributes="@context.Attrs" Label="">
-                                <MIcon>mdi-invert-colors</MIcon>
-                            </MButton>
-                        </ActivatorContent>
-                        <ChildContent>
-                            <span>反转示例颜色</span>
-                        </ChildContent>
-                    </MTooltip>
-                </span>
-                <span class="m-app-tooltip-btn d-inline-block">
-                    <MTooltip Bottom OpenDelay=200>
-                        <ActivatorContent>
-                            <MButton Icon aria-label="view-in-github" @attributes="@context.Attrs">
+                            <MButton Icon aria-label="view-in-github" Href="@GithubUrlHref" Target="_blank" @attributes="@context.Attrs">
                                 <MIcon>mdi-github</MIcon>
                             </MButton>
                         </ActivatorContent>
@@ -42,6 +43,7 @@
                         </ChildContent>
                     </MTooltip>
                 </span>
+
                 <span class="m-app-tooltip-btn d-inline-block">
                     <MTooltip Bottom OpenDelay=200>
                         <ActivatorContent>

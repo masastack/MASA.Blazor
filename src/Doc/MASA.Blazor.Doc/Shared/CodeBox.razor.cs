@@ -10,15 +10,19 @@ public partial class CodeBox
 {
     private const int Await = 2000;
 
+    // TODO: 'develop' need to replace with 'master'
+    private static string _githubUrlTemplate =
+        "https://github.com/BlazorComponent/MASA.Blazor/blob/develop/src/Doc/MASA.Blazor.Doc/{0}.razor";
+
     private readonly static(string type, string lang) Template = ("template", "html");
     private readonly static(string type, string lang) Code = ("code", "csharp");
     private readonly static(string type, string lang) Style = ("style", "css");
 
     private readonly Dictionary<(string type, string lang), string> _items = new()
     {
-        {Template, null},
-        {Code, null},
-        {Style, null},
+        { Template, null },
+        { Code, null },
+        { Style, null },
     };
 
     private StringNumber _activeItem;
@@ -31,18 +35,6 @@ public partial class CodeBox
     [Inject]
     public IJSRuntime Js { get; set; }
 
-    [Inject]
-    public ILanguageService Lang { get; set; }
-
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
-
-    [Parameter]
-    public bool CodeExpand { get; set; }
-
     [Parameter]
     public string ComponentName { get; set; }
 
@@ -52,17 +44,18 @@ public partial class CodeBox
     [Parameter]
     public int Index { get; set; }
 
-    private string EditUrl =>
-        $"https://github.com/ant-design-blazor/ant-design-blazor/edit/master/site/MASA.Blazor.Doc/Demos/Components/{ComponentName}/demo/{Demo.Name}.razor";
+    private string GithubUrlHref { get; set; }
 
     protected override void OnInitialized()
     {
         _showComponent = Index < 2;
 
-        if (Demo.Type != null)
-        {
-            Component = Service.GetShowCase(Demo.Type);
-        }
+        if (Demo.Type == null) return;
+
+        Component = Service.GetShowCase(Demo.Type);
+
+        var path = Demo.Type.Replace(".", "/");
+        GithubUrlHref = string.Format(_githubUrlTemplate, path);
 
         if (Demo.Code == null) return;
 
