@@ -10,9 +10,8 @@ public partial class CodeBox
 {
     private const int Await = 2000;
 
-    // TODO: 'develop' need to replace with 'master'
     private static string _githubUrlTemplate =
-        "https://github.com/BlazorComponent/MASA.Blazor/blob/develop/src/Doc/MASA.Blazor.Doc/{0}.razor";
+        "https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Doc/MASA.Blazor.Doc/{0}.razor";
 
     private readonly static(string type, string lang) Template = ("template", "html");
     private readonly static(string type, string lang) Code = ("code", "csharp");
