@@ -40,6 +40,12 @@
       "Description": ""
     },
     {
+      "Name": "Linkage",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Ripple",
       "Type": "Boolean",
       "Default": "false",

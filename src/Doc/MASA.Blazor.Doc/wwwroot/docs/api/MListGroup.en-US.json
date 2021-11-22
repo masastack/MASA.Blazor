@@ -40,6 +40,12 @@
       "Description": ""
     },
     {
+      "Name": "Group",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Id",
       "Type": "String",
       "Default": "null",

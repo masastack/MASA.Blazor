@@ -64,6 +64,12 @@
       "Description": ""
     },
     {
+      "Name": "Linkage",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "MaxHeight",
       "Type": "StringNumber",
       "Default": "",

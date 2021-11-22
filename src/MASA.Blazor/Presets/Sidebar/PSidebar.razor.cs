@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,42 +13,45 @@ namespace MASA.Blazor.Presets
     {
         private List<SidebarItem<TItem>> _sidebarItems = new();
 
-        private List<TItem> _items = new();
-        private bool _itemsChanged;
-
         [Parameter]
-        public List<TItem> Items
-        {
-            get => _items;
-            set
-            {
-                _items = value ?? new List<TItem>();
-                _itemsChanged = true;
-            }
-        }
+        public List<TItem> Items { get; set; } = new();
 
-        private StringNumber _value;
         [Parameter]
         public StringNumber Value
         {
             get => _value;
             set
             {
-                if (_value == value) return;
                 _value = value;
-                ValueChanged.InvokeAsync(_value);
+                _listItemGroupValue = value;
             }
         }
 
         private StringNumber _listItemGroupValue;
-        private void ListItemGroupValueChanged(StringNumber v)
+        private StringNumber _value;
+
+        private async Task ListItemGroupValueChanged(StringNumber v)
         {
             _listItemGroupValue = v;
-            Value = v;
+            await UpdateValue(v);
         }
 
         [Parameter]
         public EventCallback<StringNumber> ValueChanged { get; set; }
+
+        private async Task UpdateValue(StringNumber value)
+        {
+            if (ValueChanged.HasDelegate)
+            {
+                await ValueChanged.InvokeAsync(value);
+            }
+            else
+            {
+                Value = value;
+            }
+
+            _listItemGroupValue = Value;
+        }
 
         [Parameter]
         public Func<TItem, StringNumber> Key { get; set; }
@@ -62,51 +66,56 @@ namespace MASA.Blazor.Presets
         public Func<TItem, List<TItem>> Children { get; set; }
 
         [Parameter]
-        public EventCallback<TItem> Click { get; set; }
+        public EventCallback<TItem> OnClick { get; set; }
 
         [Parameter]
         public string Color { get; set; } = "primary";
 
         #region List parameters
 
-        [Parameter] public bool Outlined { get; set; }
+        [Parameter]
+        public bool Outlined { get; set; }
 
-        [Parameter] public bool Shaped { get; set; }
+        [Parameter]
+        public bool Shaped { get; set; }
 
-        [Parameter] public bool Dense { get; set; }
+        [Parameter]
+        public bool Dense { get; set; }
 
-        [Parameter] public bool Flat { get; set; }
+        [Parameter]
+        public bool Flat { get; set; }
 
-        [Parameter] public bool Disabled { get; set; }
+        [Parameter]
+        public bool Disabled { get; set; }
 
-        [Parameter] public bool Nav { get; set; }
+        [Parameter]
+        public bool Nav { get; set; }
 
-        [Parameter] public StringNumber Height { get; set; }
+        [Parameter]
+        public StringNumber Height { get; set; }
 
-        [Parameter] public StringNumber MinHeight { get; set; }
+        [Parameter]
+        public StringNumber MinHeight { get; set; }
 
-        [Parameter] public StringNumber MinWidth { get; set; }
+        [Parameter]
+        public StringNumber MinWidth { get; set; }
 
-        [Parameter] public StringNumber MaxHeight { get; set; }
+        [Parameter]
+        public StringNumber MaxHeight { get; set; }
 
-        [Parameter] public StringNumber MaxWidth { get; set; }
+        [Parameter]
+        public StringNumber MaxWidth { get; set; }
 
-        [Parameter] public StringNumber Width { get; set; }
+        [Parameter]
+        public StringNumber Width { get; set; }
 
         #endregion
 
         protected override void OnInitialized()
         {
             _listItemGroupValue = Value;
-        }
 
-        protected override void OnParametersSet()
-        {
-            if (_sidebarItems.Count == 0 || _itemsChanged)
-            {
-                _sidebarItems = ConvertToSidebarItems(Items, Value);
-                _itemsChanged = false;
-            }
+            _sidebarItems = ConvertToSidebarItems(Items, Value);
         }
 
         private List<SidebarItem<TItem>> ConvertToSidebarItems(List<TItem> items, StringNumber activeValue)
@@ -118,6 +127,7 @@ namespace MASA.Blazor.Presets
                 var title = Title?.Invoke(item);
                 var icon = Icon?.Invoke(item);
                 var value = Key?.Invoke(item);
+                var children = Children?.Invoke(item);
 
                 var sidebarItem = new SidebarItem<TItem>
                 {
@@ -128,7 +138,6 @@ namespace MASA.Blazor.Presets
                     Data = item
                 };
 
-                var children = Children?.Invoke(item);
                 if (children != null && children.Count > 0)
                 {
                     sidebarItem.Children = ConvertToSidebarItems(children, activeValue);

@@ -82,6 +82,12 @@
       "Description": "指定组件为链接。当使用 href 或 **to ** 属性时，这是自动的设置的。"
     },
     {
+      "Name": "Linkage",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Ripple",
       "Type": "Boolean",
       "Default": "false",

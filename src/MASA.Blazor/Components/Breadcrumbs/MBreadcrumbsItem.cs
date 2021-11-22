@@ -20,7 +20,7 @@ namespace MASA.Blazor
                 .Apply(css =>
                 {
                     css.Add("m-breadcrumbs__item")
-                        .AddIf(ActiveClass, () => Disabled);
+                        .AddIf(ActiveClass, () => IsDisabled);
                 });
 
             AbstractProvider

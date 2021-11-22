@@ -86,20 +86,28 @@ namespace MASA.Blazor
         [Parameter]
         public bool Ripple { get; set; }
 
+        public bool IsLinkage => Href != null && (List?.Linkage ?? Linkage);
+
         private void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(Href) && MatchUrl(Href, e.Location) && List != null)
+            if (!IsLinkage) return;
+
+            if (MatchRoute(e.Location))
             {
-                List.Select(this);
+                List?.Select(this);
+                IsActive = true;
             }
         }
 
-        private bool MatchUrl(string href, string location)
+        private bool MatchRoute(string path)
         {
-            var url = NavigationManager.ToAbsoluteUri(href);
-            var matched = string.Equals(url.ToString(), location, StringComparison.OrdinalIgnoreCase);
+            var relativePath = NavigationManager.ToBaseRelativePath(path);
+            if (Href.StartsWith("/"))
+            {
+                Href = Href[1..];
+            }
 
-            return matched;
+            return string.Equals(Href, relativePath, StringComparison.OrdinalIgnoreCase);
         }
 
         internal void Deactive()
@@ -114,6 +122,16 @@ namespace MASA.Blazor
             StateHasChanged();
         }
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            if (IsLinkage && MatchRoute(NavigationManager.Uri))
+            {
+                IsActive = true;
+            }
+        }
+
         protected override void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
@@ -121,18 +139,14 @@ namespace MASA.Blazor
             if (List != null && List.Items.IndexOf(this) == -1)
             {
                 List.Items.Add(this);
-                NavigationManager.LocationChanged += OnLocationChanged;
             }
+
+            NavigationManager.LocationChanged += OnLocationChanged;
         }
 
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
-
-            if (!string.IsNullOrEmpty(Href) && MatchUrl(Href, NavigationManager.Uri))
-            {
-                Active();
-            }
 
             Attributes["ripple"] = IsClickable || Ripple;
         }

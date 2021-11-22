@@ -1,0 +1,14 @@
+﻿<div>
+    <MBreadcrumbs Items="items" Linkage></MBreadcrumbs>
+</div>
+
+@code {
+
+    List<BreadcrumbItem> items = new()
+    {
+        new BreadcrumbItem() {Text = "MASA.Blazor", Href = "/"},
+        new BreadcrumbItem() {Text = "Components", Href = "/components"},
+        new BreadcrumbItem() {Text = "Breadcrumbs", Href = "/components/breadcrumbs"}
+    };
+
+}

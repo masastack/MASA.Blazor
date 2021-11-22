@@ -17,7 +17,7 @@
         @foreach (var item in items)
         {
             <MListGroup
-                Value="item.Active"
+                @bind-Value="item.Active"
                 PrependIcon="@item.Action"
                 NoAction>
                 <ActivatorContent>

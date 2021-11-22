@@ -2,12 +2,20 @@
 @using MASA.Blazor.Doc.Services
 @inherits OwningComponentBase<DemoService>
 @inject ILanguageService LanguageService
-<MList Dense Nav>
+
+<MList Dense Nav Linkage>
     @foreach (var item in MenuItems)
     {
         if (item.Children != null && item.Children.Any())
         {
-            <MListGroup Class="m-list-group--default" PrependIcon="@item.Icon" Color="primary" AppendIcon="mdi-menu-down" NoAction>
+            var group = GenGroup(item.Children);
+
+            <MListGroup AppendIcon="mdi-menu-down"
+                        Class="m-list-group--default"
+                        Color="primary"
+                        Group="@group"
+                        NoAction
+                        PrependIcon="@item.Icon">
                 <ActivatorContent>
                     <MListItemContent>
                         <MListItemTitle>@item.Title</MListItemTitle>
@@ -18,7 +26,12 @@
                     {
                         if (componentItem.Children != null && componentItem.Children.Any())
                         {
-                            <MListGroup Class="m-list-group--default" NoAction SubGroup>
+                            var group2 = GenGroup(componentItem.Children);
+
+                            <MListGroup Class="m-list-group--default"
+                                        Group="@group2"
+                                        NoAction
+                                        SubGroup>
                                 <ActivatorContent>
                                     <MListItemContent>
                                         <MListItemTitle>@FormatComponentTitle(componentItem)</MListItemTitle>
@@ -27,7 +40,7 @@
                                 <ChildContent>
                                     @foreach (var subComponentItem in componentItem.Children)
                                     {
-                                        <MListItem Class="m-list-item--default" Link Href="@subComponentItem.Url">
+                                        <MListItem Class="m-list-item--default" Href="@subComponentItem.Url">
                                             <MListItemContent>
                                                 <MListItemTitle>
                                                     @FormatComponentTitle(subComponentItem)
@@ -40,7 +53,7 @@
                         }
                         else
                         {
-                            <MListItem Class="m-list-item--default" Link Href="@componentItem.Url">
+                            <MListItem Class="m-list-item--default" Href="@componentItem.Url">
                                 <MListItemContent>
                                     <MListItemTitle>
                                         @FormatComponentTitle(componentItem)
@@ -69,7 +82,7 @@
 @code {
 
     [Parameter]
-    public DemoMenuItemModel[] MenuItems { get; set; } = { };
+    public DemoMenuItemModel[] MenuItems { get; set; } = {};
 
     protected override async Task OnInitializedAsync()
     {
@@ -93,4 +106,22 @@
 
         return model.Title;
     }
+
+    string GenGroup(DemoMenuItemModel[] items)
+    {
+        if (items == null || !items.Any()) return string.Empty;
+
+        var groups = new List<string>();
+
+        foreach (var item in items)
+        {
+            if (groups.Contains(item.Url, StringComparer.OrdinalIgnoreCase)) continue;
+
+            groups.Add(GenGroup(item.Children));
+            groups.Add(item.Url);
+        }
+
+        return string.Join("|", groups);
+    }
+
 }

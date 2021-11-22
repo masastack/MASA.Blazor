@@ -10,7 +10,7 @@
         {
             if (item.Children != null)
             {
-                <MListGroup Value="item.Expanded" Color="@Color" PrependIcon="@item.Icon">
+                <MListGroup @bind-Value="item.Expanded" Color="@Color" PrependIcon="@item.Icon">
                     <ActivatorContent>
                         <MListItemTitle>@item.Title</MListItemTitle>
                     </ActivatorContent>
@@ -19,16 +19,18 @@
                         {
                             if (subitem.Children != null)
                             {
-                                <MListGroup Value="subitem.Expanded" Color="@Color" SubGroup NoAction>
+                                <MListGroup @bind-Value="subitem.Expanded" Color="@Color" SubGroup NoAction>
                                     <ActivatorContent>
                                         <MListItemTitle>@subitem.Title</MListItemTitle>
                                     </ActivatorContent>
                                     <ChildContent>
                                         @foreach (var lastitem in subitem.Children)
                                         {
-                                            <MListItem Link Value="lastitem.Key" Click="() => Click.InvokeAsync(lastitem.Data) ">
-                                                <MListItemIcon><MIcon>@lastitem.Icon</MIcon></MListItemIcon>
-                                                <MListItemTitle>@lastitem.Title</MListItemTitle>
+                                            <MListItem Link Value="lastitem.Key" OnClick="() => OnClick.InvokeAsync(lastitem.Data)">
+                                                <MListItemIcon>
+                                                    <MIcon>@lastitem.Icon</MIcon>
+                                                </MListItemIcon>
+                                                <MListItemTitle>@lastitem.Title @lastitem.Expanded</MListItemTitle>
                                             </MListItem>
                                         }
                                     </ChildContent>
@@ -36,8 +38,10 @@
                             }
                             else
                             {
-                                <MListItem Link Value="@subitem.Key" Click="() => Click.InvokeAsync(subitem.Data)">
-                                    <MListItemIcon><MIcon>@subitem.Icon</MIcon></MListItemIcon>
+                                <MListItem Link Value="@subitem.Key" OnClick="() => OnClick.InvokeAsync(subitem.Data)">
+                                    <MListItemIcon>
+                                        <MIcon>@subitem.Icon</MIcon>
+                                    </MListItemIcon>
                                     <MListItemTitle>@subitem.Title</MListItemTitle>
                                 </MListItem>
                             }
@@ -47,8 +51,10 @@
             }
             else
             {
-                <MListItem Link Value="item.Key" Click="() => Click.InvokeAsync(item.Data)">
-                    <MListItemIcon><MIcon>@item.Icon</MIcon></MListItemIcon>
+                <MListItem Link Value="item.Key" OnClick="() => OnClick.InvokeAsync(item.Data)">
+                    <MListItemIcon>
+                        <MIcon>@item.Icon</MIcon>
+                    </MListItemIcon>
                     <MListItemTitle>@item.Title</MListItemTitle>
                 </MListItem>
             }

@@ -9,12 +9,12 @@
             <MListItemTitle>Home</MListItemTitle>
         </MListItem>
 
-        <MListGroup Value="true" PrependIcon="mdi-account-circle">
+        <MListGroup @bind-Value="userExpanded" PrependIcon="mdi-account-circle">
             <ActivatorContent>
                 <MListItemTitle>Users</MListItemTitle>
             </ActivatorContent>
             <ChildContent>
-                <MListGroup Value NoAction SubGroup>
+                <MListGroup @bind-Value="adminExpanded" NoAction SubGroup>
                     <ActivatorContent>
                         <MListItemContent>
                             <MListItemTitle>Admin</MListItemTitle>
@@ -60,19 +60,22 @@
 </MCard>
 
 @code{
-    private Item[] _admins = new Item[]
+    readonly Item[] _admins = new Item[]
     {
        new Item { Text= "Management", Icon= "mdi-account-multiple-outline" },
        new Item { Text= "Settings", Icon= "mdi-cog-outline" }
     };
 
-    private Item[] _cruds = new Item[]
+    readonly Item[] _cruds = new Item[]
     {
        new Item { Text= "Create", Icon= "mdi-plus-outline" },
        new Item { Text= "Read", Icon= "mdi-file-outline" },
        new Item { Text= "Update", Icon= "mdi-update" },
        new Item { Text= "Delete", Icon= "mdi-delete" }
     };
+
+    bool userExpanded = true;
+    bool adminExpanded = true;
 
     class Item
     {
