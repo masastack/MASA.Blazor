@@ -1,11 +1,12 @@
-FROM registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100-preview.7-nodejs14.16.1-wasm-tools
-#FROM registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100-preview.7-nodejs14.16.1
+FROM registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100-preview.7-nodejs14.16.1-wasm-tools  AS base
+
 ENV LANG="zh_CN.UTF-8"
 ENV LANGUAGE="zh_CN:zh"
 ENV ASPNETCORE_URLS=http://0.0.0.0:5000
 WORKDIR /app
 COPY . .
-#RUN dotnet workload install wasm-tools
 RUN dotnet publish "./src/Doc/MASA.Blaozr.Doc.WebAssembly.Host/MASA.Blazor.Doc.WebAssembly.Host.csproj" -c Release -o /app/publish
-WORKDIR /app/publish
-ENTRYPOINT ["dotnet","/app/publish/MASA.Blazor.Doc.WebAssembly.Host.dll"]
+
+FROM caddy:alpine
+WORKDIR /app
+COPY --from=base /app/publish/wwwroot/ /usr/share/caddy/
