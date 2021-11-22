@@ -13,20 +13,20 @@
     </MWindow>
 
     <MCardActions Class="justify-space-between">
-        <MButton Text Click="HandlePrev">
+        <MButton Text OnClick="HandlePrev">
             <MIcon>mdi-chevron-left</MIcon>
         </MButton>
         <MItemGroup @bind-Value="Onboarding" Class="text-center" Mandatory>
             @foreach (var item in Enumerable.Range(0, length))
             {
                 <MItem Value="@item">
-                    <MButton Icon IsActive="context.Active" Click="@context.Toggle">
+                    <MButton Icon IsActive="context.Active" OnClick="@context.Toggle">
                         <MIcon>mdi-record</MIcon>
                     </MButton>
                 </MItem>
             }
         </MItemGroup>
-        <MButton Text Click="HandleNext">
+        <MButton Text OnClick="HandleNext">
             <MIcon>mdi-chevron-right</MIcon>
         </MButton>
     </MCardActions>

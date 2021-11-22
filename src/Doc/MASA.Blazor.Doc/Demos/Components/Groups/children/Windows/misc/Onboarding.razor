@@ -17,7 +17,7 @@
     <MCardActions Class="justify-space-between">
         <MButton
             Text
-            Click="Prev">
+            OnClick="Prev">
             <MIcon>mdi-chevron-left</MIcon>
         </MButton>
         <MItemGroup
@@ -30,7 +30,7 @@
                     <MButton
                         IsActive="@context.Active"
                         Icon
-                        Click="context.Toggle">
+                        OnClick="context.Toggle">
                         <MIcon>mdi-record</MIcon>
                     </MButton>
                 </MItem>
@@ -38,7 +38,7 @@
         </MItemGroup>
         <MButton
             Text
-            Click="Next">
+            OnClick="Next">
             <MIcon>mdi-chevron-right</MIcon>
         </MButton>
     </MCardActions>

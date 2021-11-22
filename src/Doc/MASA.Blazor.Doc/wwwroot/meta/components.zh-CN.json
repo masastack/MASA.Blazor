@@ -4,7 +4,12 @@
     "SubTitle": "提示框",
     "Type": "提示框",
     "Desc": "<p>该组件用于通过使用上下文类型，图标和颜色向用户传达重要信息。这些默认类型有4种变体：<strong>Success</strong>、<strong>Info</strong>、<strong>Warning</strong> 和 <strong>Error</strong>\n。默认图标有助于表示每种类型所描述的不同动作。也可以自定义提示框的许多部分，例如 <strong>Border</strong> 、<strong>Icon</strong> 和 <strong>Color</strong> 也可以自定义以适应几乎任何情况。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MAlert\">MAlert</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MAlert",
+        "Href": "/docs/api/MAlert"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -134,7 +139,7 @@
         "Name": "twitter",
         "Title": "Twitter",
         "Description": "<p>通过将 <strong>Color</strong>、<strong>Dismissible</strong>、<strong>Border</strong>、<strong>Elevation</strong>、<strong>Icon</strong> 和 <strong>ColoredBorder</strong> 属性组合在一起，你可以创建时尚的自定义提醒，比如这个 twitter\n通知。</p>\n",
-        "Code": "<div>\r\n    <div>\r\n        <MAlert @bind-Value=\"_alert\"\r\n                Dismissible\r\n                Color=\"cyan\"\r\n                Border=\"Borders.Left\"\r\n                Elevation=\"2\"\r\n                ColoredBorder\r\n                Icon=\"@(\"mdi-twitter\")\">\r\n            You've got <strong>5</strong> new updates on your timeline!.\r\n        </MAlert>\r\n\r\n        <div class=\"text-center\">\r\n            @if (!_alert)\r\n            {\r\n                <MButton Dark\r\n                         Click=\"()=>_alert = true\">\r\n                    Reset Alert\r\n                </MButton>\r\n            }\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n@code{\r\n    private bool _alert = true;\r\n}",
+        "Code": "<div>\r\n    <div>\r\n        <MAlert @bind-Value=\"_alert\"\r\n                Dismissible\r\n                Color=\"cyan\"\r\n                Border=\"Borders.Left\"\r\n                Elevation=\"2\"\r\n                ColoredBorder\r\n                Icon=\"@(\"mdi-twitter\")\">\r\n            You've got <strong>5</strong> new updates on your timeline!.\r\n        </MAlert>\r\n\r\n        <div class=\"text-center\">\r\n            @if (!_alert)\r\n            {\r\n                <MButton Dark\r\n                         OnClick=\"() => _alert = true\">\r\n                    Reset Alert\r\n                </MButton>\r\n            }\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n@code{\r\n    private bool _alert = true;\r\n}",
         "Type": "Demos.Components.Alert.props.Twitter",
         "Style": "",
         "Debug": false,
@@ -159,7 +164,16 @@
     "SubTitle": "应用程序",
     "Type": "应用程序",
     "Desc": "<p>在 <code>MASA Blazor</code> 中，<code>MApp</code> 组件和 <code>MNavigationDrawer</code>、<code>MAppBar</code>、<code>MFooter</code> 等组件上的 App 属性，帮助你的应用围绕 <code>MMain</code> 组件进行适当的大小调整。 这使你可以创建真正独特的界面，无需因管理布局尺寸而烦恼。 所有应用都需要 <code>MApp</code> 组件。 这是许多 <code>MASA Blazor</code> 组件和功能的挂载点，并确保它将默认的应用主题 （Dark/Light）传递给子组件，并确保在浏览器中对某些点击事件的正确跨浏览器支持。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MApp\">MApp</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MMain\">MMain</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MApp",
+        "Href": "/docs/api/MApp"
+      },
+      {
+        "Name": "MMain",
+        "Href": "/docs/api/MMain"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -182,7 +196,12 @@
     "SubTitle": "长宽比",
     "Type": "长宽比",
     "Desc": "<p><code>MResponsive</code> 组件可用于将任何部分固定到特定的宽高比。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MResponsive\">MResponsive</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MResponsive",
+        "Href": "/docs/api/MResponsive"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -205,7 +224,12 @@
     "SubTitle": "头像",
     "Type": "头像",
     "Desc": "<p>MAvatar 组件通常用于显示用户个人资料图片。 此组件允许您动态添加设置响应图像、图标和文字的边框半径。 ** tile ** 变量可用来显示无边框半径的头像。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MAvatar\">MAvatar</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MAvatar",
+        "Href": "/docs/api/MAvatar"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Avatars.svg",
     "Order": 0,
@@ -295,7 +319,12 @@
     "SubTitle": "徽章",
     "Type": "徽章",
     "Desc": "<p>MBadge组件可以上覆或订阅一个像头像的图标，或者内容上的文本来突出显示用户的信息，或只是提请注意某个特定元素。 徽章中的内容通常包含数字或图标。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MBadge\">MBadge</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MBadge",
+        "Href": "/docs/api/MBadge"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -362,7 +391,12 @@
     "SubTitle": "横幅",
     "Type": "横幅",
     "Desc": "<p>MBanner组件被用来作为向用户发送1-2动作的中间段描述信息。 它有两个变量单行and多行(默认多行展示)。 这些图标可以与您的消息和操作一起使用。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MBanner\">MBanner</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MBanner",
+        "Href": "/docs/api/MBanner"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -440,7 +474,12 @@
     "SubTitle": "应用栏",
     "Type": "应用栏",
     "Desc": "<p>AppBar组件对于任何图形用户界面（GUI）都至关重要，因为它通常是站点导航的主要来源。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MAppBar\">MAppBar</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MAppBar",
+        "Href": "/docs/api/MAppBar"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/AppBars.svg",
     "Order": 0,
@@ -585,7 +624,12 @@
     "SubTitle": "系统栏",
     "Type": "系统栏",
     "Desc": "<p><code>MSystemBar</code> 组件可以用于向用户显示状态。 它看起来像Android系统栏，可以包含图标、空格和一些文本。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MSystemBar",
+        "Href": "/docs/api/MSystemBar"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -652,7 +696,12 @@
     "SubTitle": "工具栏",
     "Type": "工具栏",
     "Desc": "<p><code>MToolbar</code> 组件对于任何 GUI 都是至关重要的，因为它通常是站点导航的主要来源。 工具栏组件与 <code>MNavigationDrawer</code> 和 <code>MCard</code> 配合使用非常有效。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MToolbar\">MToolbar</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MToolbar",
+        "Href": "/docs/api/MToolbar"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -796,7 +845,6 @@
     "SubTitle": "边框",
     "Type": "边框",
     "Desc": "<p>Border component can wrap any content with one side border.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -830,7 +878,16 @@
     "SubTitle": "面包屑导航",
     "Type": "面包屑导航",
     "Desc": "<p>Breadcrumbs 组件适用于页面层级导航</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MBreadcrumbs",
+        "Href": "/docs/api/MBreadcrumbs"
+      },
+      {
+        "Name": "MBreadcrumbsItem",
+        "Href": "/docs/api/MBreadcrumbsItem"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,
@@ -909,7 +966,16 @@
     "SubTitle": "按钮",
     "Type": "按钮",
     "Desc": "<p><code>MButton</code>（按钮）组件采 Material Design 设计主题风格，并增加众多的配置选项替换了标准的 html 按钮。 任何颜色助手类都可以用来改变背景或文字颜色。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MButton\">MButton</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MButton",
+        "Href": "/docs/api/MButton"
+      },
+      {
+        "Name": "MButtonGroup",
+        "Href": "/docs/api/MButtonGroup"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg",
     "Order": 0,
@@ -996,7 +1062,7 @@
         "Name": "plain",
         "Title": "Plain(朴实)",
         "Description": "<p>应用 <strong>Plain</strong> 属性， 按钮将会有较低的基准不透明度, 以响应 <strong>hover(悬停)</strong> 和 <strong>focus(聚焦)</strong> 事件。</p>\n",
-        "Code": "<div class=\"text-center\">\r\n    <MSheet Class=\"px-7 pt-7 pb-4 mx-auto text-center d-inline-block\"\r\n            Color=\"blue-grey darken-3\"\r\n            Dark>\r\n\r\n        <div class=\"grey--text text--lighten-1 text-body-2 mb-4\">\r\n            Are you sure you want to delete this album?\r\n        </div>\r\n\r\n        <MButton Disabled=\"loading\"\r\n                 class=\"ma-1\"\r\n                 Color=\"grey\"\r\n                 Plain>\r\n            Cancel\r\n        </MButton>\r\n\r\n        <MButton Loading=\"loading\"\r\n                 class=\"ma-1\"\r\n                 Color=\"error\"\r\n                 Plain\r\n                 Click=\"Remove\">\r\n            Delete\r\n        </MButton>\r\n    </MSheet>\r\n</div>\r\n\r\n@code {\r\n\r\n    bool loading = false;\r\n\r\n    private async Task Remove()\r\n    {\r\n        loading = true;\r\n\r\n        await Task.Delay(3000);\r\n\r\n        loading = false;\r\n    }\r\n\r\n}",
+        "Code": "<div class=\"text-center\">\r\n    <MSheet Class=\"px-7 pt-7 pb-4 mx-auto text-center d-inline-block\"\r\n            Color=\"blue-grey darken-3\"\r\n            Dark>\r\n\r\n        <div class=\"grey--text text--lighten-1 text-body-2 mb-4\">\r\n            Are you sure you want to delete this album?\r\n        </div>\r\n\r\n        <MButton Disabled=\"loading\"\r\n                 class=\"ma-1\"\r\n                 Color=\"grey\"\r\n                 Plain>\r\n            Cancel\r\n        </MButton>\r\n\r\n        <MButton Loading=\"loading\"\r\n                 class=\"ma-1\"\r\n                 Color=\"error\"\r\n                 Plain\r\n                 OnClick=\"Remove\">\r\n            Delete\r\n        </MButton>\r\n    </MSheet>\r\n</div>\r\n\r\n@code {\r\n\r\n    bool loading = false;\r\n\r\n    private async Task Remove()\r\n    {\r\n        loading = true;\r\n\r\n        await Task.Delay(3000);\r\n\r\n        loading = false;\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Button.props.Plain",
         "Style": "",
         "Debug": false,
@@ -1065,7 +1131,28 @@
     "SubTitle": "卡片",
     "Type": "卡片",
     "Desc": "<p><code>MCard</code> 组件是一个可用于从面板到静态图像的多功能组件。 卡 组件有许多帮助程序组件来尽可能简单地进行标记。 没有列出选项的组件使用Vue的功能组件来更快渲染并充当标记糖以使建筑变得更加容易。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCard\">MCard</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCardActions\">MCardActions</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCardText\">MCardText</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MCard",
+        "Href": "/docs/api/MCard"
+      },
+      {
+        "Name": "MCardActions",
+        "Href": "/docs/api/MCardActions"
+      },
+      {
+        "Name": "MCardSubtitle",
+        "Href": "/docs/api/MCardSubtitle"
+      },
+      {
+        "Name": "MCardText",
+        "Href": "/docs/api/MCardText"
+      },
+      {
+        "Name": "MCardTitle",
+        "Href": "/docs/api/MCardTitle"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Cards.svg",
     "Order": 0,
@@ -1210,7 +1297,12 @@
     "SubTitle": "纸片",
     "Type": "纸片",
     "Desc": "<p><code>MChip</code> 组件用于传送小信息。 使用 <strong>Close</strong> 属性，纸片将变为交互式，允许用户进行交互。 此组件由 <a href=\"/components/chipgroup\">MChipGroup</a> 用于高级选择选项。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MChip\">MChip</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MChip",
+        "Href": "/docs/api/MChip"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chips.svg",
     "Order": 0,
@@ -1388,7 +1480,12 @@
     "SubTitle": "对话框",
     "Type": "对话框",
     "Desc": "<p><code>Dialog</code>组件通知用户有关特定任务，且可能包含关键信息、需要决策或涉及多个任务。减少使用对话框的频率，因为它们具有干扰性。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MDialog\">MDialog</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MDialog",
+        "Href": "/docs/api/MDialog"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -1430,7 +1527,7 @@
         "Name": "scrollable",
         "Title": "可滚动",
         "Description": "<p>一个可滚动内容的对话框示例。</p>\n",
-        "Code": "<MRow Justify=\"@JustifyTypes.Center\">\r\n    <MDialog @bind-Value=\"dialog\"\r\n             Scrollable\r\n             MaxWidth=\"300\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Dark @attributes=\"@context.Attrs\">Open Dialog</MButton>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MCard>\r\n                <MCardTitle>Select Country</MCardTitle>\r\n                <MDivider></MDivider>\r\n                <MCardText Style=\"height: 300px;\">\r\n                    <MCheckbox Label=\"Bahamas\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bahrain\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bangladesh\"></MCheckbox>\r\n                    <MCheckbox Label=\"Barbados\"></MCheckbox>\r\n                    <MCheckbox Label=\"Belarus\"></MCheckbox>\r\n                    <MCheckbox Label=\"Belgium\"></MCheckbox>\r\n                    <MCheckbox Label=\"Belize\"></MCheckbox>\r\n                    <MCheckbox Label=\"Benin\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bhutan\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bolivia\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bosnia and Herzegovina\"></MCheckbox>\r\n                    <MCheckbox Label=\"Botswana\"></MCheckbox>\r\n                    <MCheckbox Label=\"Brazil\"></MCheckbox>\r\n                    <MCheckbox Label=\"Brunei\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bulgaria\"></MCheckbox>\r\n                    <MCheckbox Label=\"Burkina Faso\"></MCheckbox>\r\n                    <MCheckbox Label=\"Burma\"></MCheckbox>\r\n                    <MCheckbox Label=\"Burundi\"></MCheckbox>\r\n                </MCardText>\r\n                <MDivider></MDivider>\r\n                <MCardActions>\r\n                    <MButton Color=\"blue darken-1\"\r\n                             Text\r\n                             Click=\"() => dialog = false\">\r\n                        Close\r\n                    </MButton>\r\n                    <MButton Color=\"blue darken-1\"\r\n                             Text\r\n                             Click=\"() => dialog = false\">\r\n                        Save\r\n                    </MButton>\r\n                </MCardActions>\r\n            </MCard>\r\n        </ChildContent>\r\n    </MDialog>\r\n</MRow>\r\n\r\n@code {\r\n    bool dialog = false;\r\n}",
+        "Code": "<MRow Justify=\"@JustifyTypes.Center\">\r\n    <MDialog @bind-Value=\"dialog\"\r\n             Scrollable\r\n             MaxWidth=\"300\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Dark @attributes=\"@context.Attrs\">Open Dialog</MButton>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MCard>\r\n                <MCardTitle>Select Country</MCardTitle>\r\n                <MDivider></MDivider>\r\n                <MCardText Style=\"height: 300px;\">\r\n                    <MCheckbox Label=\"Bahamas\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bahrain\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bangladesh\"></MCheckbox>\r\n                    <MCheckbox Label=\"Barbados\"></MCheckbox>\r\n                    <MCheckbox Label=\"Belarus\"></MCheckbox>\r\n                    <MCheckbox Label=\"Belgium\"></MCheckbox>\r\n                    <MCheckbox Label=\"Belize\"></MCheckbox>\r\n                    <MCheckbox Label=\"Benin\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bhutan\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bolivia\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bosnia and Herzegovina\"></MCheckbox>\r\n                    <MCheckbox Label=\"Botswana\"></MCheckbox>\r\n                    <MCheckbox Label=\"Brazil\"></MCheckbox>\r\n                    <MCheckbox Label=\"Brunei\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bulgaria\"></MCheckbox>\r\n                    <MCheckbox Label=\"Burkina Faso\"></MCheckbox>\r\n                    <MCheckbox Label=\"Burma\"></MCheckbox>\r\n                    <MCheckbox Label=\"Burundi\"></MCheckbox>\r\n                </MCardText>\r\n                <MDivider></MDivider>\r\n                <MCardActions>\r\n                    <MButton Color=\"blue darken-1\"\r\n                             Text\r\n                             OnClick=\"() => dialog = false\">\r\n                        Close\r\n                    </MButton>\r\n                    <MButton Color=\"blue darken-1\"\r\n                             Text\r\n                             OnClick=\"() => dialog = false\">\r\n                        Save\r\n                    </MButton>\r\n                </MCardActions>\r\n            </MCard>\r\n        </ChildContent>\r\n    </MDialog>\r\n</MRow>\r\n\r\n@code {\r\n    bool dialog = false;\r\n}",
         "Type": "Demos.Components.Dialog.props.Scrollable",
         "Style": "",
         "Debug": false,
@@ -1510,7 +1607,12 @@
     "SubTitle": "分隔线",
     "Type": "分隔线",
     "Desc": "<p><code>MDivider</code> 组件用于分隔列表或布局的各个部分。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MDivider\">MDivider</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MDivider",
+        "Href": "/docs/api/MDivider"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Dividers.svg",
     "Order": 0,
@@ -1578,7 +1680,12 @@
     "SubTitle": "图表",
     "Type": "图表",
     "Desc": "<p><a href=\"https://echarts.apache.org/examples/zh/index.html\">ECharts</a></p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MECharts\">MECharts</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MECharts",
+        "Href": "/docs/api/MECharts"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg",
     "Order": 0,
@@ -1602,7 +1709,24 @@
     "SubTitle": "扩展面板",
     "Type": "扩展面板",
     "Desc": "<p><code>MExpansionPanel</code> 组件有助于减少大量信息的垂直空间占用。 组件的默认功能是仅显示一个扩展面板； 然而，使用 <strong>Multiple</strong> 属性后，扩展面板可以保持打开，直到显式地关闭。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MExpansionPanels",
+        "Href": "/docs/api/MExpansionPanels"
+      },
+      {
+        "Name": "MExpansionPanel",
+        "Href": "/docs/api/MExpansionPanel"
+      },
+      {
+        "Name": "MExpansionPanelHeader",
+        "Href": "/docs/api/MExpansionPanelHeader"
+      },
+      {
+        "Name": "MExpansionPanelContent",
+        "Href": "/docs/api/MExpansionPanelContent"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,
@@ -1725,7 +1849,12 @@
     "SubTitle": "页脚",
     "Type": "页脚",
     "Desc": "<p>MFooter组件用于显示用户可能想要从网站中的任何页面都能访问到的公共信息。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MFooter\">MFooter</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MFooter",
+        "Href": "/docs/api/MFooter"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -1792,7 +1921,12 @@
     "SubTitle": "自动补全",
     "Type": "自动补全",
     "Desc": "<p>v-autocomplete组件提供简单且灵活的自动补全功能 且支持查找大规模数据甚至是从API请求的动态数据</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MAutocomplete",
+        "Href": "/docs/api/MAutocomplete"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Autocomplete.svg",
     "Order": 0,
@@ -1838,7 +1972,12 @@
     "SubTitle": "级联菜单",
     "Type": "级联菜单",
     "Desc": "<p>级联选择器</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCascader\">MCascader</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MCascader",
+        "Href": "/docs/api/MCascader"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -1861,7 +2000,16 @@
     "SubTitle": "复选框",
     "Type": "复选框",
     "Desc": "<p><code>MCheckbox</code>组件使用户能够在两个不同的值之间进行选择。它们非常类似于开关，可以用在复杂的表单和检查表中。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/zh-CN/docs/api/MCheckbox\">MCheckbox</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/zh-CN/docs/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MCheckbox",
+        "Href": "/zh-CN/docs/api/MCheckbox"
+      },
+      {
+        "Name": "MSimpleCheckbox",
+        "Href": "/zh-CN/docs/api/MSimpleCheckbox"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -1939,7 +2087,12 @@
     "SubTitle": "文件上传",
     "Type": "文件上传",
     "Desc": "<p>v-file-input是一个定制的输入组件，它提供了一个干净的选择界面，显示详细的选择信息和上传进度。 它意在直接取代标准文件输入。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MFileInput\">MFileInput</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MFileInput",
+        "Href": "/docs/api/MFileInput"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/FileInput.svg",
     "Order": 0,
@@ -2062,7 +2215,12 @@
     "SubTitle": "表单",
     "Type": "表单",
     "Desc": "<p>表单验证，使用DataAnnotation。Vlaue改变或者表单提交的时候触发验证，也可以手动触发。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MForm\">MForm</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MForm",
+        "Href": "/docs/api/MForm"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Form.svg",
     "Order": 0,
@@ -2083,7 +2241,7 @@
         "Name": "enumerable",
         "Title": "可枚举",
         "Description": "<p>验证可枚举的属性,注意添加[EnumerableValidation]</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_order\" EnableDataAnnotationsValidation>\r\n    <MTextField @bind-Value=\"_order.Title\" Label=\"名称\"></MTextField>\r\n    <MTextField @bind-Value=\"_order.Price\" Label=\"金额\" Type=\"number\"></MTextField>\r\n    @foreach (var person in _order.Persons)\r\n    {\r\n        <MTextField @bind-Value=\"person.Name\" Label=\"姓名\"></MTextField>\r\n        <MTextField @bind-Value=\"person.Age\" Label=\"年龄\"></MTextField>\r\n    }\r\n    <MButton Click=\"()=>SubmitOrder(context)\" Color=\"success\">提交</MButton>\r\n</MForm>\r\n\r\n@code{\r\n    public class Order\r\n    {\r\n        public int Id { get; set; }\r\n        [Required]\r\n        public string Title { get; set; }\r\n        [Range(0, 20.00)]\r\n        public decimal Price { get; set; }\r\n\r\n        [EnumerableValidation]\r\n        public List<Item> Persons { get; set; }\r\n    }\r\n\r\n    public class Item\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        [Required]\r\n        public string Name { get; set; }\r\n\r\n        [Range(25, 100)]\r\n        public int Age { get; set; }\r\n    }\r\n\r\n    private Order _order = new()\r\n    {\r\n        Persons = new List<Item>\r\n        {\r\n            new Item\r\n            {\r\n                Id=1,\r\n                Name=\"jack\"\r\n            },\r\n            new Item\r\n            {\r\n                Id=2\r\n            }\r\n        }\r\n    };\r\n\r\n    public void SubmitOrder(EditContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}\r\n",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_order\" EnableDataAnnotationsValidation>\r\n    <MTextField @bind-Value=\"_order.Title\" Label=\"名称\"></MTextField>\r\n    <MTextField @bind-Value=\"_order.Price\" Label=\"金额\" Type=\"number\"></MTextField>\r\n    @foreach (var person in _order.Persons)\r\n    {\r\n        <MTextField @bind-Value=\"person.Name\" Label=\"姓名\"></MTextField>\r\n        <MTextField @bind-Value=\"person.Age\" Label=\"年龄\"></MTextField>\r\n    }\r\n    <MButton OnClick=\"()=>SubmitOrder(context)\" Color=\"success\">提交</MButton>\r\n</MForm>\r\n\r\n@code{\r\n    public class Order\r\n    {\r\n        public int Id { get; set; }\r\n        [Required]\r\n        public string Title { get; set; }\r\n        [Range(0, 20.00)]\r\n        public decimal Price { get; set; }\r\n\r\n        [EnumerableValidation]\r\n        public List<Item> Persons { get; set; }\r\n    }\r\n\r\n    public class Item\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        [Required]\r\n        public string Name { get; set; }\r\n\r\n        [Range(25, 100)]\r\n        public int Age { get; set; }\r\n    }\r\n\r\n    private Order _order = new()\r\n    {\r\n        Persons = new List<Item>\r\n        {\r\n            new Item\r\n            {\r\n                Id=1,\r\n                Name=\"jack\"\r\n            },\r\n            new Item\r\n            {\r\n                Id=2\r\n            }\r\n        }\r\n    };\r\n\r\n    public void SubmitOrder(EditContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Form.demo.Enumerable",
         "Style": "",
         "Debug": false,
@@ -2094,7 +2252,7 @@
         "Name": "submit",
         "Title": "提交与验证",
         "Description": "<p>手动触发表单验证，需要配合EditContext(context是MForm的子内容的参数)。</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_order\" EnableDataAnnotationsValidation>\r\n    <MTextField @bind-Value=\"_order.Title\" Label=\"名称\"></MTextField>\r\n    <MTextField @bind-Value=\"_order.Price\" Label=\"金额\" Type=\"number\"></MTextField>\r\n    <MSelect @bind-Value=\"_order.Type\"\r\n             Items=\"@items\"\r\n             Label=\"类型\"\r\n             ItemText=\"u => u.Label\"\r\n             ItemValue=\"u => u.Value\"></MSelect>\r\n    <MSelect @bind-Value=\"_order.Types\"\r\n             Items=\"@states\"\r\n             ItemText=\"u => u\"\r\n             ItemValue=\"u => u\"\r\n             Label=\"Select\"\r\n             Multiple>\r\n    </MSelect>\r\n    <MButton Click=\"()=>SubmitOrder(context)\" Color=\"success\">提交</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    public class Order\r\n    {\r\n        public int Id { get; set; }\r\n        [Required]\r\n        public string Title { get; set; }\r\n        [Range(0, 20.00)]\r\n        public decimal Price { get; set; }\r\n        [Required]\r\n        public string Type { get; set; }\r\n        [Required]\r\n        public List<string> Types { get; set; }\r\n    }\r\n\r\n    private Order _order = new();\r\n\r\n    public class Item\r\n    {\r\n        public string Label { get; set; }\r\n        public string Value { get; set; }\r\n        public Item(string label, string value)\r\n        {\r\n            Label = label;\r\n            Value = value;\r\n        }\r\n    }\r\n\r\n    List<Item> items = new()\r\n    {\r\n        new Item(\"Item 1\", \"1\"),\r\n        new Item(\"Item 2\", \"2\")\r\n    };\r\n\r\n    List<string> e6 = new List<string>() { \"Alaska\" };\r\n\r\n    string[] states =\r\n    {\r\n    \"Alabama\", \"Alaska\", \"American Samoa\", \"Arizona\",\r\n    \"Arkansas\", \"California\", \"Colorado\", \"Connecticut\",\r\n    \"Delaware\", \"District of Columbia\", \"Federated States of Micronesia\",\r\n    \"Florida\", \"Georgia\", \"Guam\", \"Hawaii\", \"Idaho\",\r\n    \"Illinois\", \"Indiana\", \"Iowa\", \"Kansas\", \"Kentucky\",\r\n    \"Louisiana\", \"Maine\", \"Marshall Islands\", \"Maryland\",\r\n    \"Massachusetts\", \"Michigan\", \"Minnesota\", \"Mississippi\",\r\n    \"Missouri\", \"Montana\", \"Nebraska\", \"Nevada\",\r\n    \"New Hampshire\", \"New Jersey\", \"New Mexico\", \"New York\",\r\n    \"North Carolina\", \"North Dakota\", \"Northern Mariana Islands\", \"Ohio\",\r\n    \"Oklahoma\", \"Oregon\", \"Palau\", \"Pennsylvania\", \"Puerto Rico\",\r\n    \"Rhode Island\", \"South Carolina\", \"South Dakota\", \"Tennessee\",\r\n    \"Texas\", \"Utah\", \"Vermont\", \"Virgin Island\", \"Virginia\",\r\n    \"Washington\", \"West Virginia\", \"Wisconsin\", \"Wyoming\"\r\n    };\r\n\r\n    public void SubmitOrder(EditContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}\r\n",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_order\" EnableDataAnnotationsValidation>\r\n    <MTextField @bind-Value=\"_order.Title\" Label=\"名称\"></MTextField>\r\n    <MTextField @bind-Value=\"_order.Price\" Label=\"金额\" Type=\"number\"></MTextField>\r\n    <MSelect @bind-Value=\"_order.Type\"\r\n             Items=\"@items\"\r\n             Label=\"类型\"\r\n             ItemText=\"u => u.Label\"\r\n             ItemValue=\"u => u.Value\"></MSelect>\r\n    <MSelect @bind-Value=\"_order.Types\"\r\n             Items=\"@states\"\r\n             ItemText=\"u => u\"\r\n             ItemValue=\"u => u\"\r\n             Label=\"Select\"\r\n             Multiple>\r\n    </MSelect>\r\n    <MButton OnClick=\"()=>SubmitOrder(context)\" Color=\"success\">提交</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    public class Order\r\n    {\r\n        public int Id { get; set; }\r\n        [Required]\r\n        public string Title { get; set; }\r\n        [Range(0, 20.00)]\r\n        public decimal Price { get; set; }\r\n        [Required]\r\n        public string Type { get; set; }\r\n        [Required]\r\n        public List<string> Types { get; set; }\r\n    }\r\n\r\n    private Order _order = new();\r\n\r\n    public class Item\r\n    {\r\n        public string Label { get; set; }\r\n        public string Value { get; set; }\r\n        public Item(string label, string value)\r\n        {\r\n            Label = label;\r\n            Value = value;\r\n        }\r\n    }\r\n\r\n    List<Item> items = new()\r\n    {\r\n        new Item(\"Item 1\", \"1\"),\r\n        new Item(\"Item 2\", \"2\")\r\n    };\r\n\r\n    List<string> e6 = new List<string>() { \"Alaska\" };\r\n\r\n    string[] states =\r\n    {\r\n    \"Alabama\", \"Alaska\", \"American Samoa\", \"Arizona\",\r\n    \"Arkansas\", \"California\", \"Colorado\", \"Connecticut\",\r\n    \"Delaware\", \"District of Columbia\", \"Federated States of Micronesia\",\r\n    \"Florida\", \"Georgia\", \"Guam\", \"Hawaii\", \"Idaho\",\r\n    \"Illinois\", \"Indiana\", \"Iowa\", \"Kansas\", \"Kentucky\",\r\n    \"Louisiana\", \"Maine\", \"Marshall Islands\", \"Maryland\",\r\n    \"Massachusetts\", \"Michigan\", \"Minnesota\", \"Mississippi\",\r\n    \"Missouri\", \"Montana\", \"Nebraska\", \"Nevada\",\r\n    \"New Hampshire\", \"New Jersey\", \"New Mexico\", \"New York\",\r\n    \"North Carolina\", \"North Dakota\", \"Northern Mariana Islands\", \"Ohio\",\r\n    \"Oklahoma\", \"Oregon\", \"Palau\", \"Pennsylvania\", \"Puerto Rico\",\r\n    \"Rhode Island\", \"South Carolina\", \"South Dakota\", \"Tennessee\",\r\n    \"Texas\", \"Utah\", \"Vermont\", \"Virgin Island\", \"Virginia\",\r\n    \"Washington\", \"West Virginia\", \"Wisconsin\", \"Wyoming\"\r\n    };\r\n\r\n    public void SubmitOrder(EditContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Form.demo.Submit",
         "Style": "",
         "Debug": false,
@@ -2108,7 +2266,16 @@
     "SubTitle": "单选按钮",
     "Type": "单选按钮",
     "Desc": "<p><code>MRadio</code> 组件是一个简单的单选按钮。 与 <code>MRadioGroup</code> 组件结合时，您可以提供分组的功能，允许用户从一组预定义的选项中进行选择。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MRadio\">MRadio</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MRadioGroup\">MRadio</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MRadio",
+        "Href": "/docs/api/MRadio"
+      },
+      {
+        "Name": "MRadio",
+        "Href": "/docs/api/MRadioGroup"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg",
     "Order": 0,
@@ -2176,7 +2343,12 @@
     "SubTitle": "范围滑块",
     "Type": "范围滑块",
     "Desc": "<p><code>MRangeSlider</code> 组件是一个更好的可视化数字输入工具。 它用于收集数字数据。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MRangeSlider",
+        "Href": "/docs/api/MRangeSlider"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/RangeSliders.svg",
     "Order": 0,
@@ -2255,7 +2427,12 @@
     "SubTitle": "下拉框",
     "Type": "下拉框",
     "Desc": "<p>选择器组件用于从选项列表中收集用户提供的信息。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/zh-CN/docs/api/MSelect\">MSelect</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MSelect",
+        "Href": "/zh-CN/docs/api/MSelect"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -2377,7 +2554,12 @@
     "SubTitle": "滑块",
     "Type": "滑块",
     "Desc": "<p>v-slider 组件是一个更好的可视化数字输入工具。 它用于收集数字数据。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MSlider\">MSlider</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MSlider",
+        "Href": "/docs/api/MSlider"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sliders.svg",
     "Order": 0,
@@ -2555,7 +2737,12 @@
     "SubTitle": "开关",
     "Type": "开关",
     "Desc": "<p><code>MSwitch</code> 组件使用户能够在两个不同的值之间进行选择。 它们非常类似于一个切换，或开关，虽然视觉上不同于一个复选框。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MSwitch\">MSwitch</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MSwitch",
+        "Href": "/docs/api/MSwitch"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Switch.svg",
     "Order": 0,
@@ -2634,7 +2821,12 @@
     "SubTitle": "多行文本框",
     "Type": "多行文本框",
     "Desc": "<p>多行文本框组件用于收集大量文本数据。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTextarea\">MTextarea</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MTextarea",
+        "Href": "/docs/api/MTextarea"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Textareas.svg",
     "Order": 0,
@@ -2757,7 +2949,12 @@
     "SubTitle": "文本框",
     "Type": "文本框",
     "Desc": "<p>文本框组件用于收集用户提供的信息。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTextField\">MTextField</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MTextField",
+        "Href": "/docs/api/MTextField"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TextField.svg",
     "Order": 0,
@@ -3001,7 +3198,24 @@
     "SubTitle": "网格",
     "Type": "网格",
     "Desc": "<p>MASA.Blazor 配备了一个使用 flexbox 构建的 12 格网格系统。 网格用于在应用的内容中创建特定的布局。 它包含 5 种类型的媒体断点，用于针对特定的屏幕尺寸或方向，xs、sm、md、lg 和 xl。 这些分辨率在视口断点表中定义如下，可以通过自定义断点进行修改。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MContainer\">MContainer</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MRow\">MRow</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCol\">MCol</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MSpacer\">MSpacer</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MContainer",
+        "Href": "/docs/api/MContainer"
+      },
+      {
+        "Name": "MRow",
+        "Href": "/docs/api/MRow"
+      },
+      {
+        "Name": "MCol",
+        "Href": "/docs/api/MCol"
+      },
+      {
+        "Name": "MSpacer",
+        "Href": "/docs/api/MSpacer"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg",
     "Order": 0,
@@ -3223,7 +3437,16 @@
     "SubTitle": "按钮组",
     "Type": "按钮组",
     "Desc": "<p><code>MButtonGroup</code> 组件是专门针对 <code>MButton</code> 构建的 <code>MItemGroup</code> 的简单包装器。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MButton\">MButton</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MButtonGroup",
+        "Href": "/docs/api/MButtonGroup"
+      },
+      {
+        "Name": "MButton",
+        "Href": "/docs/api/MButton"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ButtonGroup.svg",
     "Order": 0,
@@ -3302,7 +3525,16 @@
     "SubTitle": "纸片组",
     "Type": "纸片组",
     "Desc": "<p><code>MChipGroup</code> 通过提供可分组的功能来增强 <code>MChip</code> 组件。 它使用纸片来创建选择组。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MChipGroup\">MChipGroup</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MChip\">MChip</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MChipGroup",
+        "Href": "/docs/api/MChipGroup"
+      },
+      {
+        "Name": "MChip",
+        "Href": "/docs/api/MChip"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chip.svg",
     "Order": 0,
@@ -3381,7 +3613,16 @@
     "SubTitle": "项目组",
     "Type": "项目组",
     "Desc": "<p><code>MItemGroup</code> 提供从任何组件中创建一组可选项的功能。 这是 <code>MTabs</code> 和 <code>Mcarousel</code> 等组件的基本功能。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MItem\">MItem</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MItem",
+        "Href": "/docs/api/MItem"
+      },
+      {
+        "Name": "MItemGroup",
+        "Href": "/docs/api/MItemGroup"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ItemGroup.svg",
     "Order": 0,
@@ -3460,7 +3701,44 @@
     "SubTitle": "列表项目组",
     "Type": "列表项目组",
     "Desc": "<p><code>MListItemGroup</code> 提供创建一组可选择的 <code>MListItem</code> 的能力。<code>MListItemGroup</code> 组件利用其核心的 <code>MItemGroup</code> 来为交互式列表提供一个简洁的接口。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListGroup\">MListGroup</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItem\">MListItem</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemAction\">MListItemAction</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemContent\">MListItemContent</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MListGroup",
+        "Href": "/docs/api/MListGroup"
+      },
+      {
+        "Name": "MListItem",
+        "Href": "/docs/api/MListItem"
+      },
+      {
+        "Name": "MListItemAction",
+        "Href": "/docs/api/MListItemAction"
+      },
+      {
+        "Name": "MListItemActionText",
+        "Href": "/docs/api/MListItemActionText"
+      },
+      {
+        "Name": "MListItemAvatar",
+        "Href": "/docs/api/MListItemAvatar"
+      },
+      {
+        "Name": "MListItemContent",
+        "Href": "/docs/api/MListItemContent"
+      },
+      {
+        "Name": "MListItemGroup",
+        "Href": "/docs/api/MListItemGroup"
+      },
+      {
+        "Name": "MListItemSubtitle",
+        "Href": "/docs/api/MListItemSubtitle"
+      },
+      {
+        "Name": "MListItemTitle",
+        "Href": "/docs/api/MListItemTitle"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -3538,7 +3816,16 @@
     "SubTitle": "幻灯片组",
     "Type": "幻灯片组",
     "Desc": "<p><code>MSlideGroup</code> 组件用于显示伪分页信息。它以 <a href=\"/components/itemgroup\"><strong>MItemGroup</strong></a> 为核心，为 <a href=\"/components/tabs\"><strong>MTabs</strong></a>\n和 <a href=\"/components/chipgroup\"><strong>MChipGroup</strong></a> 等组件提供基础。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MSlideGroup",
+        "Href": "/docs/api/MSlideGroup"
+      },
+      {
+        "Name": "MSlideItem",
+        "Href": "/docs/api/MSlideItem"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -3547,7 +3834,7 @@
         "Name": "index",
         "Title": "使用",
         "Description": "<p>类似于 <code>MWindow</code> 组件，<code>MSideGroup</code> 允许项目根据需要占用尽可能多的空间，允许用户在提供的信息中水平移动。</p>\n",
-        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"700\">\r\n    <MSlideGroup Multiple ShowArrows=\"@(true)\">\r\n        @foreach (var item in Enumerable.Range(1, 25))\r\n        {\r\n            <MSlideItem>\r\n                <MButton Class=\"mx-2\"\r\n                         IsActive=\"@context.Active\"\r\n                         ActiveClass=\"purple white--text\"\r\n                         Depressed\r\n                         Rounded\r\n                         Click=\"@context.Toggle\"\r\n                         RefBack=\"@context.Ref\">\r\n                    Options @item\r\n                </MButton>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>",
+        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"700\">\r\n    <MSlideGroup Multiple ShowArrows=\"@(true)\">\r\n        @foreach (var item in Enumerable.Range(1, 25))\r\n        {\r\n            <MSlideItem>\r\n                <MButton Class=\"mx-2\"\r\n                         IsActive=\"@context.Active\"\r\n                         ActiveClass=\"purple white--text\"\r\n                         Depressed\r\n                         Rounded\r\n                         OnClick=\"@context.Toggle\"\r\n                         RefBack=\"@context.Ref\">\r\n                    Options @item\r\n                </MButton>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>",
         "Type": "Demos.Components.Groups.children.SlideGroup.usage.Index",
         "Style": "",
         "Debug": false,
@@ -3627,7 +3914,16 @@
     "SubTitle": "窗口",
     "Type": "窗口",
     "Desc": "<p><code>MWindow</code> 组件提供了将内容从一个窗格过渡到另一个窗格的基础功能。 其他组件如<code>MTabs</code>、<code>MCarousel</code> 和  <code>MStepper</code> 使用此组件作为其核心。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MWindow\">MWindow</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MWindow",
+        "Href": "/docs/api/MWindow"
+      },
+      {
+        "Name": "MWindowItem",
+        "Href": "/docs/api/MWindowItem"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -3636,7 +3932,7 @@
         "Name": "index",
         "Title": "使用",
         "Description": "<p><code>MWindow</code> 被设计成可以轻松地循环浏览内容，它提供了一个简单的接口来创建真正的自定义实现。</p>\n",
-        "Code": "<MRow Align=\"AlignTypes.Center\">\r\n    <MItemGroup @bind-Value=\"window\"\r\n                Class=\"shrink mr-6\"\r\n                Mandatory>\r\n        @foreach (var item in Enumerable.Range(1, length))\r\n        {\r\n            <MItem Value=\"@item\">\r\n                <div>\r\n                    <MButton IsActive=\"@context.Active\" Icon Click=\"@context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </div>\r\n            </MItem>\r\n        }\r\n    </MItemGroup>\r\n\r\n    <MCol>\r\n        <MWindow Value=\"window\"\r\n                 Class=\"elevation-1\"\r\n                 Vertical>\r\n            @foreach (var item in Enumerable.Range(1, length))\r\n            {\r\n                <MWindowItem Value=\"@item\">\r\n                    <MCard Flat>\r\n                        <MCardText>\r\n                            <MRow Class=\"mb-4\" Align=\"AlignTypes.Center\">\r\n                                <MAvatar Color=\"grey\" Class=\"mr-4\"></MAvatar>\r\n                                <strong class=\"text-h6\">Title @item</strong>\r\n                                <MSpacer/>\r\n                                <MButton Icon>\r\n                                    <MIcon>mdi-account</MIcon>\r\n                                </MButton>\r\n                            </MRow>\r\n\r\n                            <p>\r\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n                            </p>\r\n\r\n                            <p>\r\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n                            </p>\r\n\r\n                            <p>\r\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n                            </p>\r\n                        </MCardText>\r\n                    </MCard>\r\n                </MWindowItem>\r\n            }\r\n        </MWindow>\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    StringNumber window;\r\n\r\n    int length = 3;\r\n}",
+        "Code": "<MRow Align=\"AlignTypes.Center\">\r\n    <MItemGroup @bind-Value=\"window\"\r\n                Class=\"shrink mr-6\"\r\n                Mandatory>\r\n        @foreach (var item in Enumerable.Range(1, length))\r\n        {\r\n            <MItem Value=\"@item\">\r\n                <div>\r\n                    <MButton IsActive=\"@context.Active\" Icon OnClick=\"@context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </div>\r\n            </MItem>\r\n        }\r\n    </MItemGroup>\r\n\r\n    <MCol>\r\n        <MWindow Value=\"window\"\r\n                 Class=\"elevation-1\"\r\n                 Vertical>\r\n            @foreach (var item in Enumerable.Range(1, length))\r\n            {\r\n                <MWindowItem Value=\"@item\">\r\n                    <MCard Flat>\r\n                        <MCardText>\r\n                            <MRow Class=\"mb-4\" Align=\"AlignTypes.Center\">\r\n                                <MAvatar Color=\"grey\" Class=\"mr-4\"></MAvatar>\r\n                                <strong class=\"text-h6\">Title @item</strong>\r\n                                <MSpacer/>\r\n                                <MButton Icon>\r\n                                    <MIcon>mdi-account</MIcon>\r\n                                </MButton>\r\n                            </MRow>\r\n\r\n                            <p>\r\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n                            </p>\r\n\r\n                            <p>\r\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n                            </p>\r\n\r\n                            <p>\r\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n                            </p>\r\n                        </MCardText>\r\n                    </MCard>\r\n                </MWindowItem>\r\n            }\r\n        </MWindow>\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    StringNumber window;\r\n\r\n    int length = 3;\r\n}",
         "Type": "Demos.Components.Groups.children.Windows.usage.Index",
         "Style": "",
         "Debug": false,
@@ -3647,7 +3943,7 @@
         "Name": "customizedArrows",
         "Title": "自定义箭头按钮",
         "Description": "<p>可以用 <code>PrevContent</code> 和 <code>NextContent</code> 槽来自定义窗口中的箭头部分。</p>\n",
-        "Code": "<MWindow ShowArrows>\r\n    <PrevContent>\r\n        <MButton Color=\"success\" Click=\"context\">Previous slide</MButton>\r\n    </PrevContent>\r\n    <NextContent>\r\n        <MButton Color=\"info\" Click=\"context\">Next slide</MButton>\r\n    </NextContent>\r\n    <ChildContent>\r\n        @foreach (var item in Enumerable.Range(1, 5))\r\n        {\r\n            <MWindowItem>\r\n                <MCard Color=\"grey\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <h1 style=\"font-size: 5rem\" class=\"white--text\">Slide @item</h1>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </ChildContent>\r\n</MWindow>",
+        "Code": "<MWindow ShowArrows>\r\n    <PrevContent>\r\n        <MButton Color=\"success\" OnClick=\"context\">Previous slide</MButton>\r\n    </PrevContent>\r\n    <NextContent>\r\n        <MButton Color=\"info\" OnClick=\"context\">Next slide</MButton>\r\n    </NextContent>\r\n    <ChildContent>\r\n        @foreach (var item in Enumerable.Range(1, 5))\r\n        {\r\n            <MWindowItem>\r\n                <MCard Color=\"grey\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <h1 style=\"font-size: 5rem\" class=\"white--text\">Slide @item</h1>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </ChildContent>\r\n</MWindow>",
         "Type": "Demos.Components.Groups.children.Windows.props.CustomizedArrows",
         "Style": "",
         "Debug": false,
@@ -3658,7 +3954,7 @@
         "Name": "reverse",
         "Title": "反转",
         "Description": "<p>反转 <code>MWindow</code> 总是显示反向过渡。</p>\n",
-        "Code": "<MCard Flat Tile>\r\n    <MWindow @bind-Value=\"Onboarding\" Reverse>\r\n        @foreach (var item in Enumerable.Range(0, length))\r\n        {\r\n            <MWindowItem Value=\"@item\">\r\n                <MCard Color=\"grey\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <h1 style=\"font-size: 5rem\" class=\"white--text\">Slide @(item + 1)</h1>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </MWindow>\r\n\r\n    <MCardActions Class=\"justify-space-between\">\r\n        <MButton Text Click=\"HandlePrev\">\r\n            <MIcon>mdi-chevron-left</MIcon>\r\n        </MButton>\r\n        <MItemGroup @bind-Value=\"Onboarding\" Class=\"text-center\" Mandatory>\r\n            @foreach (var item in Enumerable.Range(0, length))\r\n            {\r\n                <MItem Value=\"@item\">\r\n                    <MButton Icon IsActive=\"context.Active\" Click=\"@context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </MItem>\r\n            }\r\n        </MItemGroup>\r\n        <MButton Text Click=\"HandleNext\">\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    int _onboarding = 0;\r\n\r\n    StringNumber Onboarding\r\n    {\r\n        get => _onboarding;\r\n        set => _onboarding = value.AsT1;\r\n    }\r\n\r\n    int length = 3;\r\n\r\n    private void HandleNext()\r\n    {\r\n        _onboarding = _onboarding + 1 == length ? 0 : _onboarding + 1;\r\n    }\r\n\r\n    private void HandlePrev()\r\n    {\r\n        _onboarding = _onboarding - 1 < 0 ? length - 1 : _onboarding - 1;\r\n    }\r\n\r\n}",
+        "Code": "<MCard Flat Tile>\r\n    <MWindow @bind-Value=\"Onboarding\" Reverse>\r\n        @foreach (var item in Enumerable.Range(0, length))\r\n        {\r\n            <MWindowItem Value=\"@item\">\r\n                <MCard Color=\"grey\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <h1 style=\"font-size: 5rem\" class=\"white--text\">Slide @(item + 1)</h1>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </MWindow>\r\n\r\n    <MCardActions Class=\"justify-space-between\">\r\n        <MButton Text OnClick=\"HandlePrev\">\r\n            <MIcon>mdi-chevron-left</MIcon>\r\n        </MButton>\r\n        <MItemGroup @bind-Value=\"Onboarding\" Class=\"text-center\" Mandatory>\r\n            @foreach (var item in Enumerable.Range(0, length))\r\n            {\r\n                <MItem Value=\"@item\">\r\n                    <MButton Icon IsActive=\"context.Active\" OnClick=\"@context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </MItem>\r\n            }\r\n        </MItemGroup>\r\n        <MButton Text OnClick=\"HandleNext\">\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    int _onboarding = 0;\r\n\r\n    StringNumber Onboarding\r\n    {\r\n        get => _onboarding;\r\n        set => _onboarding = value.AsT1;\r\n    }\r\n\r\n    int length = 3;\r\n\r\n    private void HandleNext()\r\n    {\r\n        _onboarding = _onboarding + 1 == length ? 0 : _onboarding + 1;\r\n    }\r\n\r\n    private void HandlePrev()\r\n    {\r\n        _onboarding = _onboarding - 1 < 0 ? length - 1 : _onboarding - 1;\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Groups.children.Windows.props.Reverse",
         "Style": "",
         "Debug": false,
@@ -3669,7 +3965,7 @@
         "Name": "vertical",
         "Title": "垂直",
         "Description": "<p><code>MWindow</code> 可以是垂直的。 垂直窗口有 Y 轴过渡而不是 X 轴过渡。</p>\n",
-        "Code": "<MCard Flat Tile>\r\n    <MWindow @bind-Value=\"Onboarding\" Vertical>\r\n        @foreach (var item in Enumerable.Range(0, length))\r\n        {\r\n            <MWindowItem Value=\"@item\">\r\n                <MCard Color=\"grey\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <h1 style=\"font-size: 5rem\" class=\"white--text\">Slide @(item + 1)</h1>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </MWindow>\r\n\r\n    <MCardActions Class=\"justify-space-between\">\r\n        <MButton Text Click=\"HandlePrev\">\r\n            <MIcon>mdi-chevron-left</MIcon>\r\n        </MButton>\r\n        <MItemGroup @bind-Value=\"Onboarding\" Class=\"text-center\" Mandatory>\r\n            @foreach (var item in Enumerable.Range(0, length))\r\n            {\r\n                <MItem Value=\"@item\">\r\n                    <MButton Icon IsActive=\"context.Active\" Click=\"@context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </MItem>\r\n            }\r\n        </MItemGroup>\r\n        <MButton Text Click=\"HandleNext\">\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    int _onboarding = 0;\r\n\r\n    StringNumber Onboarding\r\n    {\r\n        get => _onboarding;\r\n        set => _onboarding = value.AsT1;\r\n    }\r\n\r\n    int length = 3;\r\n\r\n    private void HandleNext()\r\n    {\r\n        _onboarding = _onboarding + 1 == length ? 0 : _onboarding + 1;\r\n    }\r\n\r\n    private void HandlePrev()\r\n    {\r\n        _onboarding = _onboarding - 1 < 0 ? length - 1 : _onboarding - 1;\r\n    }\r\n\r\n}",
+        "Code": "<MCard Flat Tile>\r\n    <MWindow @bind-Value=\"Onboarding\" Vertical>\r\n        @foreach (var item in Enumerable.Range(0, length))\r\n        {\r\n            <MWindowItem Value=\"@item\">\r\n                <MCard Color=\"grey\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <h1 style=\"font-size: 5rem\" class=\"white--text\">Slide @(item + 1)</h1>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </MWindow>\r\n\r\n    <MCardActions Class=\"justify-space-between\">\r\n        <MButton Text OnClick=\"HandlePrev\">\r\n            <MIcon>mdi-chevron-left</MIcon>\r\n        </MButton>\r\n        <MItemGroup @bind-Value=\"Onboarding\" Class=\"text-center\" Mandatory>\r\n            @foreach (var item in Enumerable.Range(0, length))\r\n            {\r\n                <MItem Value=\"@item\">\r\n                    <MButton Icon IsActive=\"context.Active\" OnClick=\"@context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </MItem>\r\n            }\r\n        </MItemGroup>\r\n        <MButton Text OnClick=\"HandleNext\">\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    int _onboarding = 0;\r\n\r\n    StringNumber Onboarding\r\n    {\r\n        get => _onboarding;\r\n        set => _onboarding = value.AsT1;\r\n    }\r\n\r\n    int length = 3;\r\n\r\n    private void HandleNext()\r\n    {\r\n        _onboarding = _onboarding + 1 == length ? 0 : _onboarding + 1;\r\n    }\r\n\r\n    private void HandlePrev()\r\n    {\r\n        _onboarding = _onboarding - 1 < 0 ? length - 1 : _onboarding - 1;\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Groups.children.Windows.props.Vertical",
         "Style": "",
         "Debug": false,
@@ -3680,7 +3976,7 @@
         "Name": "accountCreation",
         "Title": "创建账户",
         "Description": "<p>创建具有平滑动画的丰富表单。 <code>MWindow</code> 能够自动跟踪当前的选择索引，来改变过渡动画的方向。 这可以通过 <code>Reverse</code> 参数来手动控制。</p>\n",
-        "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"500\">\r\n    <MCardTitle Class=\"text-h6 font-weight-regular justify-space-between\">\r\n        <span>@currentTitle</span>\r\n        <MAvatar Color=\"primary lighten-2\" Class=\"subheading white--text\" Size=\"24\">@step</MAvatar>\r\n    </MCardTitle>\r\n\r\n    <MWindow @bind-Value=\"Step\">\r\n        <MWindowItem Value=\"1\">\r\n            <MCardText>\r\n                <MTextField Label=\"Email\" @bind-Value=\"@email\"></MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    This is the email you will use to login to your Vuetify account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"2\">\r\n            <MCardText>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Confirm Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    Please enter a password for your account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"3\">\r\n            <div class=\"pa-4 text-center\">\r\n                <MImage\r\n                    Class=\"mb-4\"\r\n                    Contain\r\n                    Height=\"128\"\r\n                    Src=\"https://cdn.vuetifyjs.com/images/logos/v.svg\">\r\n                </MImage>\r\n                <h3 class=\"text-h6 font-weight-light mb-2\">\r\n                    Welcome to Vuetify\r\n                </h3>\r\n                <span class=\"text-caption grey--text\">Thanks for signing up!</span>\r\n            </div>\r\n        </MWindowItem>\r\n    </MWindow>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MCardActions>\r\n        <MButton\r\n            Disabled=\"@(step == 1)\"\r\n            Text\r\n            Click=\"() => step--\">\r\n            Back\r\n        </MButton>\r\n        <MSpacer></MSpacer>\r\n        <MButton\r\n            Disabled=\"@(step == 3)\"\r\n            Color=\"primary\"\r\n            Depressed\r\n            Click=\"() => step++\">\r\n            Next\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    string email = \"john@vuetifyjs.com\";\r\n    int step = 1;\r\n\r\n    StringNumber Step\r\n    {\r\n        get => step;\r\n        set => step = value.ToInt32();\r\n    }\r\n\r\n    public string currentTitle\r\n    {\r\n        get => step switch\r\n        {\r\n            1 => \"Sign-Up\",\r\n            2 => \"Create a password\",\r\n            _ => \"Account Created\"\r\n            };\r\n    }\r\n\r\n}",
+        "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"500\">\r\n    <MCardTitle Class=\"text-h6 font-weight-regular justify-space-between\">\r\n        <span>@currentTitle</span>\r\n        <MAvatar Color=\"primary lighten-2\" Class=\"subheading white--text\" Size=\"24\">@step</MAvatar>\r\n    </MCardTitle>\r\n\r\n    <MWindow @bind-Value=\"Step\">\r\n        <MWindowItem Value=\"1\">\r\n            <MCardText>\r\n                <MTextField Label=\"Email\" @bind-Value=\"@email\"></MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    This is the email you will use to login to your Vuetify account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"2\">\r\n            <MCardText>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Confirm Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    Please enter a password for your account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"3\">\r\n            <div class=\"pa-4 text-center\">\r\n                <MImage\r\n                    Class=\"mb-4\"\r\n                    Contain\r\n                    Height=\"128\"\r\n                    Src=\"https://cdn.vuetifyjs.com/images/logos/v.svg\">\r\n                </MImage>\r\n                <h3 class=\"text-h6 font-weight-light mb-2\">\r\n                    Welcome to Vuetify\r\n                </h3>\r\n                <span class=\"text-caption grey--text\">Thanks for signing up!</span>\r\n            </div>\r\n        </MWindowItem>\r\n    </MWindow>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MCardActions>\r\n        <MButton\r\n            Disabled=\"@(step == 1)\"\r\n            Text\r\n            OnClick=\"() => step--\">\r\n            Back\r\n        </MButton>\r\n        <MSpacer></MSpacer>\r\n        <MButton\r\n            Disabled=\"@(step == 3)\"\r\n            Color=\"primary\"\r\n            Depressed\r\n            OnClick=\"() => step++\">\r\n            Next\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    string email = \"john@vuetifyjs.com\";\r\n    int step = 1;\r\n\r\n    StringNumber Step\r\n    {\r\n        get => step;\r\n        set => step = value.ToInt32();\r\n    }\r\n\r\n    public string currentTitle\r\n    {\r\n        get => step switch\r\n        {\r\n            1 => \"Sign-Up\",\r\n            2 => \"Create a password\",\r\n            _ => \"Account Created\"\r\n            };\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Groups.children.Windows.misc.AccountCreation",
         "Style": "",
         "Debug": false,
@@ -3691,7 +3987,7 @@
         "Name": "onboarding",
         "Title": "新手教学",
         "Description": "<p><code>MWindow</code> 使创建自定义组件（如不同样式的幻灯片）变得很轻松。</p>\n",
-        "Code": "<MCard Color=\"black\" Dark Flat Tile>\r\n    <MWindow @bind-Value=\"OnBoarding\">\r\n        @foreach (var item in Enumerable.Range(0, length))\r\n        {\r\n            <MWindowItem Value=\"item\">\r\n                <MCard Color=\"transparent\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <MCardText Class=\"text-center\">\r\n                            Transparent themed, for background-imaged slides. Background color black added for demonstration purposes.\r\n                        </MCardText>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </MWindow>\r\n\r\n    <MCardActions Class=\"justify-space-between\">\r\n        <MButton\r\n            Text\r\n            Click=\"Prev\">\r\n            <MIcon>mdi-chevron-left</MIcon>\r\n        </MButton>\r\n        <MItemGroup\r\n            @bind-Value=\"OnBoarding\"\r\n            Class=\"text-center\"\r\n            Mandatory>\r\n            @foreach (var item in Enumerable.Range(0, length))\r\n            {\r\n                <MItem Value=\"item\">\r\n                    <MButton\r\n                        IsActive=\"@context.Active\"\r\n                        Icon\r\n                        Click=\"context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </MItem>\r\n            }\r\n        </MItemGroup>\r\n        <MButton\r\n            Text\r\n            Click=\"Next\">\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    \r\n    int onboarding = 0;\r\n\r\n    StringNumber OnBoarding\r\n    {\r\n        get => onboarding;\r\n        set => onboarding = value.AsT1;\r\n    }\r\n\r\n    int length = 3;\r\n\r\n    private void Next()\r\n    {\r\n        onboarding = onboarding + 1 == length ? 0 : onboarding + 1;\r\n    }\r\n\r\n    private void Prev()\r\n    {\r\n        onboarding = onboarding - 1 < 0 ? length - 1 : onboarding - 1;\r\n    }\r\n\r\n}",
+        "Code": "<MCard Color=\"black\" Dark Flat Tile>\r\n    <MWindow @bind-Value=\"OnBoarding\">\r\n        @foreach (var item in Enumerable.Range(0, length))\r\n        {\r\n            <MWindowItem Value=\"item\">\r\n                <MCard Color=\"transparent\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <MCardText Class=\"text-center\">\r\n                            Transparent themed, for background-imaged slides. Background color black added for demonstration purposes.\r\n                        </MCardText>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </MWindow>\r\n\r\n    <MCardActions Class=\"justify-space-between\">\r\n        <MButton\r\n            Text\r\n            OnClick=\"Prev\">\r\n            <MIcon>mdi-chevron-left</MIcon>\r\n        </MButton>\r\n        <MItemGroup\r\n            @bind-Value=\"OnBoarding\"\r\n            Class=\"text-center\"\r\n            Mandatory>\r\n            @foreach (var item in Enumerable.Range(0, length))\r\n            {\r\n                <MItem Value=\"item\">\r\n                    <MButton\r\n                        IsActive=\"@context.Active\"\r\n                        Icon\r\n                        OnClick=\"context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </MItem>\r\n            }\r\n        </MItemGroup>\r\n        <MButton\r\n            Text\r\n            OnClick=\"Next\">\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    \r\n    int onboarding = 0;\r\n\r\n    StringNumber OnBoarding\r\n    {\r\n        get => onboarding;\r\n        set => onboarding = value.AsT1;\r\n    }\r\n\r\n    int length = 3;\r\n\r\n    private void Next()\r\n    {\r\n        onboarding = onboarding + 1 == length ? 0 : onboarding + 1;\r\n    }\r\n\r\n    private void Prev()\r\n    {\r\n        onboarding = onboarding - 1 < 0 ? length - 1 : onboarding - 1;\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Groups.children.Windows.misc.Onboarding",
         "Style": "",
         "Debug": false,
@@ -3705,7 +4001,12 @@
     "SubTitle": "悬停",
     "Type": "悬停",
     "Desc": "<p><code>MHover</code>组件为处理任何组件的悬停状态提供了一个干净的接口。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MHover\">MHover</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MHover",
+        "Href": "/docs/api/MHover"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -3761,7 +4062,12 @@
     "SubTitle": "图标",
     "Type": "图标",
     "Desc": "<p><code>MIcon</code> 组件提供了一系列用于为您的应用程序的各个方面提供上下文的胶卷。 对于所有可用图标的列表, 请访问官方的 <a href=\"https://materialdesignicons.com/\">Material Design 图标</a> 页面。\n要使用任何这些图标，只需使用 <code>mdi-</code> 前缀，然后是图标名称。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MIcon\">MIcon</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MIcon",
+        "Href": "/docs/api/MIcon"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,
@@ -3829,7 +4135,12 @@
     "SubTitle": "图像",
     "Type": "图像",
     "Desc": "<p><code>MImage</code>组件包含支持丰富媒体的功能。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MImage\">MImage</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MImage",
+        "Href": "/docs/api/MImage"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -3918,7 +4229,52 @@
     "SubTitle": "列表",
     "Type": "列表",
     "Desc": "<p><code>MList</code> 组件用于显示信息。 它可以包含头像、内容、操作、列表组标题等等。 列表以易于在集合中识别特定项目的方式显示内容。 它们为组织一组文本和图像提供了一致的样式。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MList\">MList</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListGroup\">MListGroup</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItem\">MListItem</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemAction\">MListItemAction</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemContent\">MListItemContent</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MList",
+        "Href": "/docs/api/MList"
+      },
+      {
+        "Name": "MListGroup",
+        "Href": "/docs/api/MListGroup"
+      },
+      {
+        "Name": "MListItem",
+        "Href": "/docs/api/MListItem"
+      },
+      {
+        "Name": "MListItemAction",
+        "Href": "/docs/api/MListItemAction"
+      },
+      {
+        "Name": "MListItemActionText",
+        "Href": "/docs/api/MListItemActionText"
+      },
+      {
+        "Name": "MListItemAvatar",
+        "Href": "/docs/api/MListItemAvatar"
+      },
+      {
+        "Name": "MListItemContent",
+        "Href": "/docs/api/MListItemContent"
+      },
+      {
+        "Name": "MListItemGroup",
+        "Href": "/docs/api/MListItemGroup"
+      },
+      {
+        "Name": "MListItemIcon",
+        "Href": "/docs/api/MListItemIcon"
+      },
+      {
+        "Name": "MListItemSubtitle",
+        "Href": "/docs/api/MListItemSubtitle"
+      },
+      {
+        "Name": "MListItemTitle",
+        "Href": "/docs/api/MListItemTitle"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg",
     "Order": 0,
@@ -4118,7 +4474,12 @@
     "SubTitle": "菜单",
     "Type": "菜单",
     "Desc": "<p><code>MMenu</code> 组件在激活它的元素的位置上展示一个菜单。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MMenu\">MMenu</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MMenu",
+        "Href": "/docs/api/MMenu"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -4284,7 +4645,12 @@
     "SubTitle": "导航抽屉",
     "Type": "导航抽屉",
     "Desc": "<p><code>MNavigationDrawer</code> 是用于导航应用程序的组件。 通常被包装在 <code>MCard</code> 元素中使用。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MNavigationDrawer\">MNavigationDrawer</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MNavigationDrawer",
+        "Href": "/docs/api/MNavigationDrawer"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg",
     "Order": 0,
@@ -4407,7 +4773,12 @@
     "SubTitle": "遮罩层",
     "Type": "遮罩层",
     "Desc": "<p><code>Overlay</code> 组件用于强调特定元素或其中的一部分。 它向用户发出应用程序内状态更改的信号，可用于创建加载程序，对话框等。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MOverlay\">MOverlay</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MOverlay",
+        "Href": "/docs/api/MOverlay"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -4471,7 +4842,7 @@
         "Name": "loader",
         "Title": "加载器",
         "Description": "<p>使用 <code>MOverlay</code> 作为背景，添加进度组件来轻松创建自定义加载器。</p>\n",
-        "Code": "<div class=\"text-center\">\r\n    <MButton Color=\"deep-purple accent-4\"\r\n             Class=\"white--text\"\r\n             Click=\"Toggle\">\r\n        Launch Application\r\n        <MIcon Right>\r\n            mdi-open-in-new\r\n        </MIcon>\r\n    </MButton>\r\n\r\n    <MOverlay Value=\"overlay\">\r\n        <MProgressCircular indeterminate\r\n                           Size=\"64\"></MProgressCircular>\r\n    </MOverlay>\r\n</div>\r\n\r\n@code {\r\n    bool overlay = false;\r\n\r\n    void Toggle(MouseEventArgs args)\r\n    {\r\n        overlay = true;\r\n\r\n        Task.Run(async () =>\r\n        {\r\n            await Task.Delay(3000);\r\n            overlay = false;\r\n\r\n            await InvokeAsync(StateHasChanged);\r\n        });\r\n    }\r\n}",
+        "Code": "<div class=\"text-center\">\r\n    <MButton Color=\"deep-purple accent-4\"\r\n             Class=\"white--text\"\r\n             OnClick=\"Toggle\">\r\n        Launch Application\r\n        <MIcon Right>\r\n            mdi-open-in-new\r\n        </MIcon>\r\n    </MButton>\r\n\r\n    <MOverlay Value=\"overlay\">\r\n        <MProgressCircular indeterminate\r\n                           Size=\"64\"></MProgressCircular>\r\n    </MOverlay>\r\n</div>\r\n\r\n@code {\r\n    bool overlay = false;\r\n\r\n    void Toggle(MouseEventArgs args)\r\n    {\r\n        overlay = true;\r\n\r\n        Task.Run(async () =>\r\n        {\r\n            await Task.Delay(3000);\r\n            overlay = false;\r\n\r\n            await InvokeAsync(StateHasChanged);\r\n        });\r\n    }\r\n}",
         "Type": "Demos.Components.Overlay.misc.Loader",
         "Style": "",
         "Debug": false,
@@ -4485,7 +4856,12 @@
     "SubTitle": "分页",
     "Type": "分页",
     "Desc": "<p><code>MPagination</code> 组件用于分离长数据集，以便用户消化信息。 根据提供的数据量，分页组件将自动缩放。 要维护当前页面，只需提供 Value 属性。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MPagination\">MPagination</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MPagination",
+        "Href": "/docs/api/MPagination"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -4563,7 +4939,12 @@
     "SubTitle": "颜色选择器",
     "Type": "颜色选择器",
     "Desc": "<p><code>MColorPicker</code> 允许你使用各种输入方法来选择颜色。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MColorPicker\">MColorPicker</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MColorPicker",
+        "Href": "/docs/api/MColorPicker"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ColorPicker.svg",
     "Order": 0,
@@ -4642,7 +5023,12 @@
     "SubTitle": "日期选择器",
     "Type": "日期选择器",
     "Desc": "<p><code>MDatePicker</code> 是一个功能齐全的日期选择组件, 它让用户选择一个日期或日期范围。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MDatePicker",
+        "Href": "/docs/api/MDatePicker"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickers.svg",
     "Order": 0,
@@ -4875,7 +5261,12 @@
     "SubTitle": "月份选择器",
     "Type": "月份选择器",
     "Desc": "<p><code>MDatePicker</code>  可以用作一个独立的月份选择器组件。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MDatePicker",
+        "Href": "/docs/api/MDatePicker"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg",
     "Order": 0,
@@ -5009,7 +5400,12 @@
     "SubTitle": "时间选择器",
     "Type": "时间选择器",
     "Desc": "<p><code>MTimePicker</code> 是独立的组件，可以用于许多现有的 MASA Blazor 组件。 它为用户提供了选择时间的视觉表现。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MTimePicker",
+        "Href": "/docs/api/MTimePicker"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TimePickers.svg",
     "Order": 0,
@@ -5176,7 +5572,6 @@
     "SubTitle": "预置组件",
     "Type": "预置组件",
     "Desc": "",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -5254,7 +5649,12 @@
     "SubTitle": "进度环",
     "Type": "进度环",
     "Desc": "<p>该组件用于向用户展示环形的数据。 它也可以设置为不确定的状态来表示加载。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MProgressCircular",
+        "Href": "/docs/api/MProgressCircular"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -5321,7 +5721,6 @@
     "SubTitle": "进度条",
     "Type": "进度条",
     "Desc": "<p>该组件用于将数据环传递给用户。 也可以将其置于不确定状态来描述加载。</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -5476,7 +5875,12 @@
     "SubTitle": "评级",
     "Type": "评级",
     "Desc": "<p>评级组件是构建用户小部件的一个特殊但至关重要的部分。 通过评级收集用户反馈是一种简单的分析工具，可以为您的产品或应用程序提供大量反馈。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MRating\">MRating</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MRating",
+        "Href": "/docs/api/MRating"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -5576,7 +5980,12 @@
     "SubTitle": "工作表",
     "Type": "工作表",
     "Desc": "<p><code>MSheet</code> 组件是许多组件的基础，如 <code>MCard</code>, <code>MToolbar</code>等等。 可用属性是Material Design的基础 - 纸和立面（阴影）的概念。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MSheet\">MSheet</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MSheet",
+        "Href": "/docs/api/MSheet"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sheet.svg",
     "Order": 0,
@@ -5622,7 +6031,12 @@
     "SubTitle": "骨架装载器",
     "Type": "骨架装载器",
     "Desc": "<p>v-skeleton-loader 组件是一个多功能工具，可以在一个项目中填充许多角色。 在其核心部分，该组件向用户提供了一个指示，指出某些东西即将出现但尚未可用。 有超过30个预先定义的选项，可以组合成定制的示例。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MSkeletonLoader",
+        "Href": "/docs/api/MSkeletonLoader"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SkeletonLoader.svg",
     "Order": 0,
@@ -5657,7 +6071,12 @@
     "SubTitle": "消息条",
     "Type": "消息条",
     "Desc": "<p>MSnackbar 组件用于向用户显示快速消息。 Snackbars 支持定位、移除延迟和回调。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MSnackbar",
+        "Href": "/docs/api/MSnackbar"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -5724,7 +6143,12 @@
     "SubTitle": "步骤条",
     "Type": "步骤条",
     "Desc": "<p>v-stepper 组件通过数字步骤显示进度。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MStepper\">MStepper</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MStepper",
+        "Href": "/docs/api/MStepper"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Stepper.svg",
     "Order": 0,
@@ -5767,7 +6191,7 @@
         "Name": "vertical",
         "Title": "垂直",
         "Description": "<p>水平步骤线通过定义的步骤将用户沿Y轴移动。其他地方与水平方向的一致。</p>\n",
-        "Code": "<MStepper Value=\"_step\" Vertical>\r\n    <MStepperStep Step=\"1\" Complete=\"_step>1\">\r\n        Select an app\r\n        <small>Summarize if needed</small>\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"1\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" Click=\"()=>_step=2\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n    <MStepperStep Step=\"2\" Complete=\"_step>2\">\r\n        Configure analytics for this app\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"2\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" Click=\"()=>_step=3\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n    <MStepperStep Step=\"3\" Complete=\"_step>3\">\r\n        Select an ad format and name ad unit\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"3\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" Click=\"()=>_step=4\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n    <MStepperStep Step=\"4\">\r\n        View setup instructions\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"4\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" Click=\"()=>_step=1\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n</MStepper>\r\n\r\n@code {\r\n    private int _step = 1;\r\n}",
+        "Code": "<MStepper Value=\"_step\" Vertical>\r\n    <MStepperStep Step=\"1\" Complete=\"_step>1\">\r\n        Select an app\r\n        <small>Summarize if needed</small>\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"1\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" OnClick=\"()=>_step=2\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n    <MStepperStep Step=\"2\" Complete=\"_step>2\">\r\n        Configure analytics for this app\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"2\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" OnClick=\"()=>_step=3\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n    <MStepperStep Step=\"3\" Complete=\"_step>3\">\r\n        Select an ad format and name ad unit\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"3\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" OnClick=\"()=>_step=4\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n    <MStepperStep Step=\"4\">\r\n        View setup instructions\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"4\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" OnClick=\"()=>_step=1\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n</MStepper>\r\n\r\n@code {\r\n    private int _step = 1;\r\n}",
         "Type": "Demos.Components.Stepper.props.Vertical",
         "Style": "",
         "Debug": false,
@@ -5880,7 +6304,12 @@
     "SubTitle": "副标题",
     "Type": "副标题",
     "Desc": "<p>用于分隔列表的各个部分。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MSubheader\">MSubheader</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MSubheader",
+        "Href": "/docs/api/MSubheader"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -5947,7 +6376,12 @@
     "SubTitle": "数据迭代器",
     "Type": "数据迭代器",
     "Desc": "<p><code>MDataIterator</code> 组件用于显示数据，并且与 <code>MDataTable</code> 组件共享其大部分功能。 功能包括排序、搜索、分页和选择。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MDataIterator\">MDataIterator</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MDataIterator",
+        "Href": "/docs/api/MDataIterator"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataIterators.svg",
     "Order": 0,
@@ -5993,7 +6427,12 @@
     "SubTitle": "数据表格",
     "Type": "数据表格",
     "Desc": "<p><code>MDataTable</code> 组件用于显示表格数据。 功能包括排序，搜索，分页，内容编辑和行选择。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MDataTable\">MDataTable</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MDataTable",
+        "Href": "/docs/api/MDataTable"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataTable.svg",
     "Order": 0,
@@ -6248,7 +6687,12 @@
     "SubTitle": "简单表格",
     "Type": "简单表格",
     "Desc": "<p>MSimpleTable组件是 table 元素的简单封装组件。 在组件中，你可以使用所有常规表元素，如 thead ， tbody ，tr 等。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MSimpleTable",
+        "Href": "/docs/api/MSimpleTable"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SimpleTables.svg",
     "Order": 0,
@@ -6316,7 +6760,28 @@
     "SubTitle": "选项卡",
     "Type": "选项卡",
     "Desc": "<p><code>MTabs</code> 组件用于将内容隐藏在可选择的项目后面。 这也可以用作页面的伪导航，其中选项卡是链接，选项卡项是内容。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTabs\">MTabs</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTab\">MTab</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTabItem\">MTabItem</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTabsItems\">MTabsItems</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MTabs",
+        "Href": "/docs/api/MTabs"
+      },
+      {
+        "Name": "MTab",
+        "Href": "/docs/api/MTab"
+      },
+      {
+        "Name": "MTabItem",
+        "Href": "/docs/api/MTabItem"
+      },
+      {
+        "Name": "MTabsItems",
+        "Href": "/docs/api/MTabsItems"
+      },
+      {
+        "Name": "MTabsSlider",
+        "Href": "/docs/api/MTabsSlider"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tabs.svg",
     "Order": 0,
@@ -6469,7 +6934,7 @@
         "Name": "dynamicTabs",
         "Title": "动态标签",
         "Description": "<p>Tabs can be dynamically added and removed. This allows you to update to any number and the <code>MTabs</code> component will react. In this example when we add a new tab, we automatically change our model to match. As we add more tabs and overflow the container, the selected item will be automatically scrolled into view. Remove all <code>MTabs</code> and the slider will disappear.</p>\n",
-        "Code": "<MCard>\r\n    <MTabs\r\n        @bind-Value=\"tab\"\r\n        BackgroundColor=\"red lighten-2\"\r\n        Dark>\r\n        @foreach (var item in Enumerable.Range(0, Length))\r\n        {\r\n            <MTab Value=\"item\" @key=\"item\">\r\n                Item @(item + 1)\r\n            </MTab>\r\n        }\r\n    </MTabs>\r\n    <MCardText Class=\"text-center\">\r\n        <MButton\r\n            Disabled=\"@(Length == 0)\"\r\n            Text\r\n            Click=\"() => Length--\">\r\n            Remove Tab\r\n        </MButton>\r\n        <MDivider\r\n            Class=\"mx-4\"\r\n            Vertical>\r\n        </MDivider>\r\n        <MButton\r\n            Text\r\n            Click=\"() => Length++\">\r\n            Add Tab\r\n        </MButton>\r\n    </MCardText>\r\n</MCard>\r\n\r\n@code {\r\n\r\n\r\n    int _length = 1;\r\n\r\n    int Length\r\n    {\r\n        get => _length;\r\n        set\r\n        {\r\n            _length = value;\r\n            tab = value - 1;\r\n        }\r\n    }\r\n\r\n    StringNumber tab;\r\n\r\n\r\n\r\n}",
+        "Code": "<MCard>\r\n    <MTabs\r\n        @bind-Value=\"tab\"\r\n        BackgroundColor=\"red lighten-2\"\r\n        Dark>\r\n        @foreach (var item in Enumerable.Range(0, Length))\r\n        {\r\n            <MTab Value=\"item\" @key=\"item\">\r\n                Item @(item + 1)\r\n            </MTab>\r\n        }\r\n    </MTabs>\r\n    <MCardText Class=\"text-center\">\r\n        <MButton\r\n            Disabled=\"@(Length == 0)\"\r\n            Text\r\n            OnClick=\"() => Length--\">\r\n            Remove Tab\r\n        </MButton>\r\n        <MDivider\r\n            Class=\"mx-4\"\r\n            Vertical>\r\n        </MDivider>\r\n        <MButton\r\n            Text\r\n            OnClick=\"() => Length++\">\r\n            Add Tab\r\n        </MButton>\r\n    </MCardText>\r\n</MCard>\r\n\r\n@code {\r\n\r\n\r\n    int _length = 1;\r\n\r\n    int Length\r\n    {\r\n        get => _length;\r\n        set\r\n        {\r\n            _length = value;\r\n            tab = value - 1;\r\n        }\r\n    }\r\n\r\n    StringNumber tab;\r\n\r\n\r\n\r\n}",
         "Type": "Demos.Components.Tabs.misc.DynamicTabs",
         "Style": "",
         "Debug": false,
@@ -6505,7 +6970,12 @@
     "SubTitle": "时间轴",
     "Type": "时间轴",
     "Desc": "<p>MTimeline 对于显示时间顺序信息非常有用。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTimeline\">MTimeline</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MTimeline",
+        "Href": "/docs/api/MTimeline"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -6627,7 +7097,12 @@
     "SubTitle": "工具提示",
     "Type": "工具提示",
     "Desc": "<p>当用户悬停在元素上时， <code>MTooltip</code> 组件可用于传递信息。 您还可以通过 <strong>@bind-Value</strong> 来控制提示的显示。 当激活时，提示将显示用于标识元素的文本，例如其功能的描述。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTooltip\">MTooltip</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MTooltip",
+        "Href": "/docs/api/MTooltip"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tooltip.svg",
     "Order": 0,
@@ -6659,7 +7134,7 @@
         "Name": "visibility",
         "Title": "可见性",
         "Description": "<p>可使用 <strong>@bind-Value</strong> 编程性修改提示可见性。</p>\n",
-        "Code": "<MContainer Fluid\r\n            Class=\"text-center\">\r\n    <MRow Class=\"flex\"\r\n          Justify=\"JustifyTypes.SpaceBetween\">\r\n        <MCol Cols=\"12\">\r\n            <MButton Click=\"() => show = !show\">\r\n                toggle\r\n            </MButton>\r\n        </MCol>\r\n\r\n        <MCol Cols=\"12\" Class=\"mt-12\">\r\n            <MTooltip @bind-Value=\"show\" Top>\r\n                <ActivatorContent>\r\n                    <MButton Icon @attributes=\"@context.Attrs\">\r\n                        <MIcon Color=\"grey lighten-1\">mdi-cart</MIcon>\r\n                    </MButton>\r\n                </ActivatorContent>\r\n                <ChildContent>\r\n                    <span>Programmatic tooltip</span>\r\n                </ChildContent>\r\n            </MTooltip>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n@code\r\n{\r\n    private bool show;\r\n}",
+        "Code": "<MContainer Fluid\r\n            Class=\"text-center\">\r\n    <MRow Class=\"flex\"\r\n          Justify=\"JustifyTypes.SpaceBetween\">\r\n        <MCol Cols=\"12\">\r\n            <MButton OnClick=\"() => show = !show\">\r\n                toggle\r\n            </MButton>\r\n        </MCol>\r\n\r\n        <MCol Cols=\"12\" Class=\"mt-12\">\r\n            <MTooltip @bind-Value=\"show\" Top>\r\n                <ActivatorContent>\r\n                    <MButton Icon @attributes=\"@context.Attrs\">\r\n                        <MIcon Color=\"grey lighten-1\">mdi-cart</MIcon>\r\n                    </MButton>\r\n                </ActivatorContent>\r\n                <ChildContent>\r\n                    <span>Programmatic tooltip</span>\r\n                </ChildContent>\r\n            </MTooltip>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n@code\r\n{\r\n    private bool show;\r\n}",
         "Type": "Demos.Components.Tooltip.props.Visibility",
         "Style": "",
         "Debug": false,
@@ -6673,7 +7148,12 @@
     "SubTitle": "树形视图",
     "Type": "树形视图",
     "Desc": "<p>MTreeview 组件适用于显示大量嵌套数据。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTreeview\">MTreeview</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MTreeview",
+        "Href": "/docs/api/MTreeview"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Treeview.svg",
     "Order": 0,
@@ -6862,7 +7342,12 @@
     "SubTitle": "上传文件",
     "Type": "上传文件",
     "Desc": "<p><code>MUpload</code> 组件是一个特殊的表单，它为选择文件，展示选中文件，展示上传进度提供了美观的界面，旨在取代标准的文件上传表单。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MUpload\">MUpload</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MUpload",
+        "Href": "/docs/api/MUpload"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -6896,7 +7381,12 @@
     "SubTitle": "虚拟滚动条",
     "Type": "虚拟滚动条",
     "Desc": "<p>MVirtualScroll 组件显示一个虚拟，无限 的列表。 它支持动态高度和垂直滚动。</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MVirtualScroll",
+        "Href": "/docs/api/MVirtualScroll"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,

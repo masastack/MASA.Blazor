@@ -1,9 +1,9 @@
 ﻿<MWindow ShowArrows>
     <PrevContent>
-        <MButton Color="success" Click="context">Previous slide</MButton>
+        <MButton Color="success" OnClick="context">Previous slide</MButton>
     </PrevContent>
     <NextContent>
-        <MButton Color="info" Click="context">Next slide</MButton>
+        <MButton Color="info" OnClick="context">Next slide</MButton>
     </NextContent>
     <ChildContent>
         @foreach (var item in Enumerable.Range(1, 5))

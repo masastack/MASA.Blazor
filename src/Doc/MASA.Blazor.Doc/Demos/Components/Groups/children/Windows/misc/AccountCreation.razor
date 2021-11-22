@@ -54,7 +54,7 @@
         <MButton
             Disabled="@(step == 1)"
             Text
-            Click="() => step--">
+            OnClick="() => step--">
             Back
         </MButton>
         <MSpacer></MSpacer>
@@ -62,7 +62,7 @@
             Disabled="@(step == 3)"
             Color="primary"
             Depressed
-            Click="() => step++">
+            OnClick="() => step++">
             Next
         </MButton>
     </MCardActions>

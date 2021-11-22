@@ -8,7 +8,7 @@
         <MTextField @bind-Value="person.Name" Label="姓名"></MTextField>
         <MTextField @bind-Value="person.Age" Label="年龄"></MTextField>
     }
-    <MButton Click="()=>SubmitOrder(context)" Color="success">提交</MButton>
+    <MButton OnClick="()=>SubmitOrder(context)" Color="success">提交</MButton>
 </MForm>
 
 @code{

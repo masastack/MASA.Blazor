@@ -3,7 +3,6 @@
     "Title": "BorderRadius",
     "Type": "BorderRadius",
     "Desc": "<p>Use the border radius auxiliary style to quickly apply the <code>border-radius</code> style to the element</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -80,7 +79,6 @@
     "Title": "Color",
     "Type": "Color",
     "Desc": "<p>Through <strong>sass</strong> and <strong>javascript</strong>, you can use <a href=\"https://material.io/design/color/the-color-system.html#color-theme-creation\">Material Design</a> in the specification All colors. These values can be used in style sheets, component files and actual components through the <strong>color class</strong> system.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -124,7 +122,6 @@
     "Title": "DisplayHelpers",
     "Type": "DisplayHelpers",
     "Desc": "<p>��ʾ������������������ݵ���ʾ�����Ը��ݵ�ǰ��ͼ��ʵ��Ԫ����ʾ��������������ʾ���ݡ�</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -168,7 +165,6 @@
     "Title": "Elevation",
     "Type": "Elevation",
     "Desc": "<p>This tool allows you to control the relative depth, or distance, between the two planes along the z-axis. There are 25 heights in total. You can set the elevation of an element by using the <code>elevation-{n}</code> class, where <code>n</code> is an integer between 0-24 corresponding to the desired altitude.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -201,7 +197,6 @@
     "Title": "Flex",
     "Type": "Flex",
     "Desc": "<p>Control the layout of flex containers with alignment, justification and more with responsive flexbox utilities.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -344,7 +339,6 @@
     "Title": "Float",
     "Type": "Float",
     "Desc": "<p>Applies a custom float across any breakpoint with responsive float utilities.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -377,7 +371,6 @@
     "Title": "Overflow",
     "Type": "Overflow",
     "Desc": "<p>Configure how content overflows when it becomes out of container bounds.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -410,7 +403,6 @@
     "Title": "Spacing",
     "Type": "Spacing",
     "Desc": "<p>Do not update your layout by creating new classes. Auxiliary auxiliary classes modify the filling and edges of elements</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -465,7 +457,6 @@
     "Title": "TextAndTypography",
     "Type": "TextAndTypography",
     "Desc": "<p>Control text size, alignment, wrapping, overflow, transforms and more.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,
@@ -598,7 +589,28 @@
     "Title": "Transitions",
     "Type": "Transitions",
     "Desc": "<p>Smooth animations help make a UI feel great. Using Vue��s transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the <strong>transition</strong> prop.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCard\">MCard</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCardActions\">MCardActions</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCardText\">MCardText</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MCard",
+        "Href": "/docs/api/MCard"
+      },
+      {
+        "Name": "MCardActions",
+        "Href": "/docs/api/MCardActions"
+      },
+      {
+        "Name": "MCardSubtitle",
+        "Href": "/docs/api/MCardSubtitle"
+      },
+      {
+        "Name": "MCardText",
+        "Href": "/docs/api/MCardText"
+      },
+      {
+        "Name": "MCardTitle",
+        "Href": "/docs/api/MCardTitle"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,

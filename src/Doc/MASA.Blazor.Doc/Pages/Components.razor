@@ -27,7 +27,22 @@
             </SectionContent>
         }
 
-        @((MarkupString)_demoComponent.ApiDoc)
+        @if (_demoComponent.Apis != null)
+        {
+            <SectionContent Title="API" Id="api" Level="2" IsAnchor>
+                <ul>
+                    @foreach (var item in _demoComponent.Apis)
+                    {
+                        <li>
+                            <a href="@item.Href" class="app-link text-decoration-none primary--text font-weight-medium d-inline-block">
+                                @item.Name
+                                <MIcon Color="primary" Small>mdi-page-next</MIcon>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </SectionContent>
+        }
 
         @if (PropsList.Any() || EventsList.Any() || ContentsList.Any() || MiscList.Any())
         {

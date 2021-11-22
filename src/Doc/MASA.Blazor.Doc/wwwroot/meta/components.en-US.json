@@ -3,7 +3,6 @@
     "Title": "Alerts",
     "Type": "Alerts",
     "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>、<strong>Info</strong>、<strong>Warning</strong> 和 <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays. Many parts of an alert such as <strong>Border</strong>, <strong>Icon</strong>, and <strong>Color</strong> can also be customized to fit almost any situation.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -133,7 +132,7 @@
         "Name": "twitter",
         "Title": "Twitter",
         "Description": "<p>By combining <strong>Color</strong>, <strong>Dismissible</strong>, <strong>Border</strong>, <strong>Elevation</strong>, <strong>Icon</strong>, and <strong>ColoredBorder</strong> props, you can\ncreate stylish custom alerts such as this Twitter notification.</p>\n",
-        "Code": "<div>\r\n    <div>\r\n        <MAlert @bind-Value=\"_alert\"\r\n                Dismissible\r\n                Color=\"cyan\"\r\n                Border=\"Borders.Left\"\r\n                Elevation=\"2\"\r\n                ColoredBorder\r\n                Icon=\"@(\"mdi-twitter\")\">\r\n            You've got <strong>5</strong> new updates on your timeline!.\r\n        </MAlert>\r\n\r\n        <div class=\"text-center\">\r\n            @if (!_alert)\r\n            {\r\n                <MButton Dark\r\n                         Click=\"()=>_alert = true\">\r\n                    Reset Alert\r\n                </MButton>\r\n            }\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n@code{\r\n    private bool _alert = true;\r\n}",
+        "Code": "<div>\r\n    <div>\r\n        <MAlert @bind-Value=\"_alert\"\r\n                Dismissible\r\n                Color=\"cyan\"\r\n                Border=\"Borders.Left\"\r\n                Elevation=\"2\"\r\n                ColoredBorder\r\n                Icon=\"@(\"mdi-twitter\")\">\r\n            You've got <strong>5</strong> new updates on your timeline!.\r\n        </MAlert>\r\n\r\n        <div class=\"text-center\">\r\n            @if (!_alert)\r\n            {\r\n                <MButton Dark\r\n                         OnClick=\"() => _alert = true\">\r\n                    Reset Alert\r\n                </MButton>\r\n            }\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n@code{\r\n    private bool _alert = true;\r\n}",
         "Type": "Demos.Components.Alert.props.Twitter",
         "Style": "",
         "Debug": false,
@@ -157,7 +156,6 @@
     "Title": "Application",
     "Type": "Application",
     "Desc": "<p>In <code>MASA Blazor</code>, the App properties on the <code>MApp</code> component and <code>MNavigationDrawer</code>, <code>MAppBar</code>, <code>MFooter</code> and other\ncomponents help your application to adjust the size of the <code>MMain</code> component appropriately. This allows you to create\ntruly unique interfaces without worrying about managing layout sizes. All applications need the <code>MApp</code> component. This\nis the mount point for many <code>MASA Blazor</code> components and functions, and ensures that it passes the default application\ntheme (Dark/Light) to the child components, and ensures the correct cross-browser support for certain click events in\nthe browser .</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -179,7 +177,6 @@
     "Title": "AspectRatios",
     "Type": "AspectRatios",
     "Desc": "<p>The <code>MResponsive</code> component can be used to fix any section to a specific aspect ratio</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -201,7 +198,6 @@
     "Title": "Avatars",
     "Type": "Avatars",
     "Desc": "<p>The MAvatar component is usually used to display user profile pictures. This component allows you to dynamically add and set the border radius of response images, icons and text. ** The tile ** variable can be used to display an avatar with no border radius.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Avatars.svg",
     "Order": 0,
@@ -290,7 +286,6 @@
     "Title": "Badges",
     "Type": "Badges",
     "Desc": "<p>The MBadge component overwrites or subscribes to an icon like an avatar or text on the content to highlight the user's information or just draw attention to a specific element. The content in the badge usually contains numbers or icons.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -356,7 +351,6 @@
     "Title": "Banners",
     "Type": "Banners",
     "Desc": "<p>The component is used to send intermittent messages of 1-2 actions to the user. It has two variables, single-line and multi-line (implied). These icons can be used with your messages and actions.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -433,7 +427,6 @@
     "Title": "AppBars",
     "Type": "AppBars",
     "Desc": "<p>appbar component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -576,7 +569,6 @@
     "Title": "SystemBars",
     "Type": "SystemBars",
     "Desc": "<p>The MSystemBar component can be used to display status to the user. It looks like an Android system bar and can contain icons, spaces, and some text.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -642,7 +634,6 @@
     "Title": "Toolbars",
     "Type": "Toolbars",
     "Desc": "<p>Semantic vector graphics.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -785,7 +776,6 @@
     "Title": "Border",
     "Type": "Border",
     "Desc": "<p>Border component can wrap any content with one side border.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -818,7 +808,6 @@
     "Title": "Breadcrumbs",
     "Type": "Breadcrumbs",
     "Desc": "<p>Breadcrumbs component is suitable for page-level navigation.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,
@@ -896,7 +885,16 @@
     "Title": "Buttons",
     "Type": "Buttons",
     "Desc": "<p>The <code>MButton</code> component replaces the standard html button with a material design theme and a multitude of options. Any color\nhelper class can be used to alter the background or text color.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MButton\">MButton</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MButton",
+        "Href": "/docs/api/MButton"
+      },
+      {
+        "Name": "MButtonGroup",
+        "Href": "/docs/api/MButtonGroup"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg",
     "Order": 0,
@@ -983,7 +981,7 @@
         "Name": "plain",
         "Title": "Plain",
         "Description": "<p><strong>Plain</strong> buttons have a lower baseline opacity that reacts to <strong>hover</strong> and <strong>focus</strong>.</p>\n",
-        "Code": "<div class=\"text-center\">\r\n    <MSheet Class=\"px-7 pt-7 pb-4 mx-auto text-center d-inline-block\"\r\n            Color=\"blue-grey darken-3\"\r\n            Dark>\r\n\r\n        <div class=\"grey--text text--lighten-1 text-body-2 mb-4\">\r\n            Are you sure you want to delete this album?\r\n        </div>\r\n\r\n        <MButton Disabled=\"loading\"\r\n                 class=\"ma-1\"\r\n                 Color=\"grey\"\r\n                 Plain>\r\n            Cancel\r\n        </MButton>\r\n\r\n        <MButton Loading=\"loading\"\r\n                 class=\"ma-1\"\r\n                 Color=\"error\"\r\n                 Plain\r\n                 Click=\"Remove\">\r\n            Delete\r\n        </MButton>\r\n    </MSheet>\r\n</div>\r\n\r\n@code {\r\n\r\n    bool loading = false;\r\n\r\n    private async Task Remove()\r\n    {\r\n        loading = true;\r\n\r\n        await Task.Delay(3000);\r\n\r\n        loading = false;\r\n    }\r\n\r\n}",
+        "Code": "<div class=\"text-center\">\r\n    <MSheet Class=\"px-7 pt-7 pb-4 mx-auto text-center d-inline-block\"\r\n            Color=\"blue-grey darken-3\"\r\n            Dark>\r\n\r\n        <div class=\"grey--text text--lighten-1 text-body-2 mb-4\">\r\n            Are you sure you want to delete this album?\r\n        </div>\r\n\r\n        <MButton Disabled=\"loading\"\r\n                 class=\"ma-1\"\r\n                 Color=\"grey\"\r\n                 Plain>\r\n            Cancel\r\n        </MButton>\r\n\r\n        <MButton Loading=\"loading\"\r\n                 class=\"ma-1\"\r\n                 Color=\"error\"\r\n                 Plain\r\n                 OnClick=\"Remove\">\r\n            Delete\r\n        </MButton>\r\n    </MSheet>\r\n</div>\r\n\r\n@code {\r\n\r\n    bool loading = false;\r\n\r\n    private async Task Remove()\r\n    {\r\n        loading = true;\r\n\r\n        await Task.Delay(3000);\r\n\r\n        loading = false;\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Button.props.Plain",
         "Style": "",
         "Debug": false,
@@ -1051,7 +1049,28 @@
     "Title": "Cards",
     "Type": "Cards",
     "Desc": "<p>The MCard component is a versatile component that can be used for anything from a panel to a static image. The card component has numerous helper components to make markup as easy as possible. Components that have no listed options use Vue��s functional component option for faster rendering and serve as markup sugar to make building easier.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCard\">MCard</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCardActions\">MCardActions</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCardText\">MCardText</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MCard",
+        "Href": "/docs/api/MCard"
+      },
+      {
+        "Name": "MCardActions",
+        "Href": "/docs/api/MCardActions"
+      },
+      {
+        "Name": "MCardSubtitle",
+        "Href": "/docs/api/MCardSubtitle"
+      },
+      {
+        "Name": "MCardText",
+        "Href": "/docs/api/MCardText"
+      },
+      {
+        "Name": "MCardTitle",
+        "Href": "/docs/api/MCardTitle"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Cards.svg",
     "Order": 0,
@@ -1195,7 +1214,6 @@
     "Title": "Chips",
     "Type": "Chips",
     "Desc": "<p>The <code>MChip</code> component is used to convey small pieces of information. Using the close property, the chip becomes\ninteractive, allowing user interaction. This component is used by the <a href=\"/components/chipgroup\">MChipGroup</a> for advanced selection options.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chips.svg",
     "Order": 0,
@@ -1372,7 +1390,6 @@
     "Title": "Dialogs",
     "Type": "Dialogs",
     "Desc": "<p>The <code>Dialog</code> component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -1414,7 +1431,7 @@
         "Name": "scrollable",
         "Title": "Scrollable",
         "Description": "<p>Example of a dialog with scrollable content.</p>\n",
-        "Code": "<MRow Justify=\"@JustifyTypes.Center\">\r\n    <MDialog @bind-Value=\"dialog\"\r\n             Scrollable\r\n             MaxWidth=\"300\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Dark @attributes=\"@context.Attrs\">Open Dialog</MButton>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MCard>\r\n                <MCardTitle>Select Country</MCardTitle>\r\n                <MDivider></MDivider>\r\n                <MCardText Style=\"height: 300px;\">\r\n                    <MCheckbox Label=\"Bahamas\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bahrain\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bangladesh\"></MCheckbox>\r\n                    <MCheckbox Label=\"Barbados\"></MCheckbox>\r\n                    <MCheckbox Label=\"Belarus\"></MCheckbox>\r\n                    <MCheckbox Label=\"Belgium\"></MCheckbox>\r\n                    <MCheckbox Label=\"Belize\"></MCheckbox>\r\n                    <MCheckbox Label=\"Benin\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bhutan\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bolivia\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bosnia and Herzegovina\"></MCheckbox>\r\n                    <MCheckbox Label=\"Botswana\"></MCheckbox>\r\n                    <MCheckbox Label=\"Brazil\"></MCheckbox>\r\n                    <MCheckbox Label=\"Brunei\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bulgaria\"></MCheckbox>\r\n                    <MCheckbox Label=\"Burkina Faso\"></MCheckbox>\r\n                    <MCheckbox Label=\"Burma\"></MCheckbox>\r\n                    <MCheckbox Label=\"Burundi\"></MCheckbox>\r\n                </MCardText>\r\n                <MDivider></MDivider>\r\n                <MCardActions>\r\n                    <MButton Color=\"blue darken-1\"\r\n                             Text\r\n                             Click=\"() => dialog = false\">\r\n                        Close\r\n                    </MButton>\r\n                    <MButton Color=\"blue darken-1\"\r\n                             Text\r\n                             Click=\"() => dialog = false\">\r\n                        Save\r\n                    </MButton>\r\n                </MCardActions>\r\n            </MCard>\r\n        </ChildContent>\r\n    </MDialog>\r\n</MRow>\r\n\r\n@code {\r\n    bool dialog = false;\r\n}",
+        "Code": "<MRow Justify=\"@JustifyTypes.Center\">\r\n    <MDialog @bind-Value=\"dialog\"\r\n             Scrollable\r\n             MaxWidth=\"300\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Dark @attributes=\"@context.Attrs\">Open Dialog</MButton>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MCard>\r\n                <MCardTitle>Select Country</MCardTitle>\r\n                <MDivider></MDivider>\r\n                <MCardText Style=\"height: 300px;\">\r\n                    <MCheckbox Label=\"Bahamas\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bahrain\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bangladesh\"></MCheckbox>\r\n                    <MCheckbox Label=\"Barbados\"></MCheckbox>\r\n                    <MCheckbox Label=\"Belarus\"></MCheckbox>\r\n                    <MCheckbox Label=\"Belgium\"></MCheckbox>\r\n                    <MCheckbox Label=\"Belize\"></MCheckbox>\r\n                    <MCheckbox Label=\"Benin\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bhutan\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bolivia\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bosnia and Herzegovina\"></MCheckbox>\r\n                    <MCheckbox Label=\"Botswana\"></MCheckbox>\r\n                    <MCheckbox Label=\"Brazil\"></MCheckbox>\r\n                    <MCheckbox Label=\"Brunei\"></MCheckbox>\r\n                    <MCheckbox Label=\"Bulgaria\"></MCheckbox>\r\n                    <MCheckbox Label=\"Burkina Faso\"></MCheckbox>\r\n                    <MCheckbox Label=\"Burma\"></MCheckbox>\r\n                    <MCheckbox Label=\"Burundi\"></MCheckbox>\r\n                </MCardText>\r\n                <MDivider></MDivider>\r\n                <MCardActions>\r\n                    <MButton Color=\"blue darken-1\"\r\n                             Text\r\n                             OnClick=\"() => dialog = false\">\r\n                        Close\r\n                    </MButton>\r\n                    <MButton Color=\"blue darken-1\"\r\n                             Text\r\n                             OnClick=\"() => dialog = false\">\r\n                        Save\r\n                    </MButton>\r\n                </MCardActions>\r\n            </MCard>\r\n        </ChildContent>\r\n    </MDialog>\r\n</MRow>\r\n\r\n@code {\r\n    bool dialog = false;\r\n}",
         "Type": "Demos.Components.Dialog.props.Scrollable",
         "Style": "",
         "Debug": false,
@@ -1493,7 +1510,6 @@
     "Title": "Dividers",
     "Type": "Dividers",
     "Desc": "<p>The v-divider component is used to separate sections of lists or layouts.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Dividers.svg",
     "Order": 0,
@@ -1560,7 +1576,6 @@
     "Title": "ECharts",
     "Type": "ECharts",
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg",
     "Order": 0,
@@ -1583,7 +1598,24 @@
     "Title": "ExpansionPanels",
     "Type": "ExpansionPanels",
     "Desc": "<p>The <code>MExpansionPanel</code> component is useful for reducing vertical space with large amounts of information. The default\nfunctionality of the component is to only display one expansion-panel body at a time; however, with the <strong>Multiple</strong>\nproperty, the expansion-panel can remain open until explicitly closed.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MExpansionPanels",
+        "Href": "/docs/api/MExpansionPanels"
+      },
+      {
+        "Name": "MExpansionPanel",
+        "Href": "/docs/api/MExpansionPanel"
+      },
+      {
+        "Name": "MExpansionPanelHeader",
+        "Href": "/docs/api/MExpansionPanelHeader"
+      },
+      {
+        "Name": "MExpansionPanelContent",
+        "Href": "/docs/api/MExpansionPanelContent"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,
@@ -1705,7 +1737,6 @@
     "Title": "Footer",
     "Type": "Footer",
     "Desc": "<p>The MFooter component is used to display public information that users may want to access from any page in the website.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -1771,7 +1802,6 @@
     "Title": "Autocomplete",
     "Type": "Autocomplete",
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Autocomplete.svg",
     "Order": 0,
@@ -1816,7 +1846,6 @@
     "Title": "Cascader",
     "Type": "Cascader",
     "Desc": "<p>The <code>Select</code> component is used for collecting user provided information from a list of options.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -1838,7 +1867,16 @@
     "Title": "Checkbox",
     "Type": "Checkbox",
     "Desc": "<p>The <code>MCheckbox</code> component provides users the ability to choose between two distinct values. These are very similar to a switch and can be used in complex forms and checklists.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/en-US/docs/api/MCheckbox\">MCheckbox</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/en-US/docs/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MCheckbox",
+        "Href": "/en-US/docs/api/MCheckbox"
+      },
+      {
+        "Name": "MSimpleCheckbox",
+        "Href": "/en-US/docs/api/MSimpleCheckbox"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -1915,7 +1953,6 @@
     "Title": "FileInput",
     "Type": "FileInput",
     "Desc": "<p>v-file-input��һ�����Ƶ�������������ṩ��һ���ɾ���ѡ����棬��ʾ��ϸ��ѡ����Ϣ���ϴ����ȡ� ������ֱ��ȡ����\u05FC�ļ����롣</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/FileInput.svg",
     "Order": 0,
@@ -2037,7 +2074,6 @@
     "Title": "From",
     "Type": "Form",
     "Desc": "<p>Form validation.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/From.svg",
     "Order": 0,
@@ -2058,7 +2094,7 @@
         "Name": "enumerable",
         "Title": "Enumerable",
         "Description": "<p>Todo...</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_order\" EnableDataAnnotationsValidation>\r\n    <MTextField @bind-Value=\"_order.Title\" Label=\"名称\"></MTextField>\r\n    <MTextField @bind-Value=\"_order.Price\" Label=\"金额\" Type=\"number\"></MTextField>\r\n    @foreach (var person in _order.Persons)\r\n    {\r\n        <MTextField @bind-Value=\"person.Name\" Label=\"姓名\"></MTextField>\r\n        <MTextField @bind-Value=\"person.Age\" Label=\"年龄\"></MTextField>\r\n    }\r\n    <MButton Click=\"()=>SubmitOrder(context)\" Color=\"success\">提交</MButton>\r\n</MForm>\r\n\r\n@code{\r\n    public class Order\r\n    {\r\n        public int Id { get; set; }\r\n        [Required]\r\n        public string Title { get; set; }\r\n        [Range(0, 20.00)]\r\n        public decimal Price { get; set; }\r\n\r\n        [EnumerableValidation]\r\n        public List<Item> Persons { get; set; }\r\n    }\r\n\r\n    public class Item\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        [Required]\r\n        public string Name { get; set; }\r\n\r\n        [Range(25, 100)]\r\n        public int Age { get; set; }\r\n    }\r\n\r\n    private Order _order = new()\r\n    {\r\n        Persons = new List<Item>\r\n        {\r\n            new Item\r\n            {\r\n                Id=1,\r\n                Name=\"jack\"\r\n            },\r\n            new Item\r\n            {\r\n                Id=2\r\n            }\r\n        }\r\n    };\r\n\r\n    public void SubmitOrder(EditContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}\r\n",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_order\" EnableDataAnnotationsValidation>\r\n    <MTextField @bind-Value=\"_order.Title\" Label=\"名称\"></MTextField>\r\n    <MTextField @bind-Value=\"_order.Price\" Label=\"金额\" Type=\"number\"></MTextField>\r\n    @foreach (var person in _order.Persons)\r\n    {\r\n        <MTextField @bind-Value=\"person.Name\" Label=\"姓名\"></MTextField>\r\n        <MTextField @bind-Value=\"person.Age\" Label=\"年龄\"></MTextField>\r\n    }\r\n    <MButton OnClick=\"()=>SubmitOrder(context)\" Color=\"success\">提交</MButton>\r\n</MForm>\r\n\r\n@code{\r\n    public class Order\r\n    {\r\n        public int Id { get; set; }\r\n        [Required]\r\n        public string Title { get; set; }\r\n        [Range(0, 20.00)]\r\n        public decimal Price { get; set; }\r\n\r\n        [EnumerableValidation]\r\n        public List<Item> Persons { get; set; }\r\n    }\r\n\r\n    public class Item\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        [Required]\r\n        public string Name { get; set; }\r\n\r\n        [Range(25, 100)]\r\n        public int Age { get; set; }\r\n    }\r\n\r\n    private Order _order = new()\r\n    {\r\n        Persons = new List<Item>\r\n        {\r\n            new Item\r\n            {\r\n                Id=1,\r\n                Name=\"jack\"\r\n            },\r\n            new Item\r\n            {\r\n                Id=2\r\n            }\r\n        }\r\n    };\r\n\r\n    public void SubmitOrder(EditContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Form.demo.Enumerable",
         "Style": "",
         "Debug": false,
@@ -2069,7 +2105,7 @@
         "Name": "submit",
         "Title": "Sumbit",
         "Description": "<p>Todo...</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_order\" EnableDataAnnotationsValidation>\r\n    <MTextField @bind-Value=\"_order.Title\" Label=\"名称\"></MTextField>\r\n    <MTextField @bind-Value=\"_order.Price\" Label=\"金额\" Type=\"number\"></MTextField>\r\n    <MSelect @bind-Value=\"_order.Type\"\r\n             Items=\"@items\"\r\n             Label=\"类型\"\r\n             ItemText=\"u => u.Label\"\r\n             ItemValue=\"u => u.Value\"></MSelect>\r\n    <MSelect @bind-Value=\"_order.Types\"\r\n             Items=\"@states\"\r\n             ItemText=\"u => u\"\r\n             ItemValue=\"u => u\"\r\n             Label=\"Select\"\r\n             Multiple>\r\n    </MSelect>\r\n    <MButton Click=\"()=>SubmitOrder(context)\" Color=\"success\">提交</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    public class Order\r\n    {\r\n        public int Id { get; set; }\r\n        [Required]\r\n        public string Title { get; set; }\r\n        [Range(0, 20.00)]\r\n        public decimal Price { get; set; }\r\n        [Required]\r\n        public string Type { get; set; }\r\n        [Required]\r\n        public List<string> Types { get; set; }\r\n    }\r\n\r\n    private Order _order = new();\r\n\r\n    public class Item\r\n    {\r\n        public string Label { get; set; }\r\n        public string Value { get; set; }\r\n        public Item(string label, string value)\r\n        {\r\n            Label = label;\r\n            Value = value;\r\n        }\r\n    }\r\n\r\n    List<Item> items = new()\r\n    {\r\n        new Item(\"Item 1\", \"1\"),\r\n        new Item(\"Item 2\", \"2\")\r\n    };\r\n\r\n    List<string> e6 = new List<string>() { \"Alaska\" };\r\n\r\n    string[] states =\r\n    {\r\n    \"Alabama\", \"Alaska\", \"American Samoa\", \"Arizona\",\r\n    \"Arkansas\", \"California\", \"Colorado\", \"Connecticut\",\r\n    \"Delaware\", \"District of Columbia\", \"Federated States of Micronesia\",\r\n    \"Florida\", \"Georgia\", \"Guam\", \"Hawaii\", \"Idaho\",\r\n    \"Illinois\", \"Indiana\", \"Iowa\", \"Kansas\", \"Kentucky\",\r\n    \"Louisiana\", \"Maine\", \"Marshall Islands\", \"Maryland\",\r\n    \"Massachusetts\", \"Michigan\", \"Minnesota\", \"Mississippi\",\r\n    \"Missouri\", \"Montana\", \"Nebraska\", \"Nevada\",\r\n    \"New Hampshire\", \"New Jersey\", \"New Mexico\", \"New York\",\r\n    \"North Carolina\", \"North Dakota\", \"Northern Mariana Islands\", \"Ohio\",\r\n    \"Oklahoma\", \"Oregon\", \"Palau\", \"Pennsylvania\", \"Puerto Rico\",\r\n    \"Rhode Island\", \"South Carolina\", \"South Dakota\", \"Tennessee\",\r\n    \"Texas\", \"Utah\", \"Vermont\", \"Virgin Island\", \"Virginia\",\r\n    \"Washington\", \"West Virginia\", \"Wisconsin\", \"Wyoming\"\r\n    };\r\n\r\n    public void SubmitOrder(EditContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}\r\n",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_order\" EnableDataAnnotationsValidation>\r\n    <MTextField @bind-Value=\"_order.Title\" Label=\"名称\"></MTextField>\r\n    <MTextField @bind-Value=\"_order.Price\" Label=\"金额\" Type=\"number\"></MTextField>\r\n    <MSelect @bind-Value=\"_order.Type\"\r\n             Items=\"@items\"\r\n             Label=\"类型\"\r\n             ItemText=\"u => u.Label\"\r\n             ItemValue=\"u => u.Value\"></MSelect>\r\n    <MSelect @bind-Value=\"_order.Types\"\r\n             Items=\"@states\"\r\n             ItemText=\"u => u\"\r\n             ItemValue=\"u => u\"\r\n             Label=\"Select\"\r\n             Multiple>\r\n    </MSelect>\r\n    <MButton OnClick=\"()=>SubmitOrder(context)\" Color=\"success\">提交</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    public class Order\r\n    {\r\n        public int Id { get; set; }\r\n        [Required]\r\n        public string Title { get; set; }\r\n        [Range(0, 20.00)]\r\n        public decimal Price { get; set; }\r\n        [Required]\r\n        public string Type { get; set; }\r\n        [Required]\r\n        public List<string> Types { get; set; }\r\n    }\r\n\r\n    private Order _order = new();\r\n\r\n    public class Item\r\n    {\r\n        public string Label { get; set; }\r\n        public string Value { get; set; }\r\n        public Item(string label, string value)\r\n        {\r\n            Label = label;\r\n            Value = value;\r\n        }\r\n    }\r\n\r\n    List<Item> items = new()\r\n    {\r\n        new Item(\"Item 1\", \"1\"),\r\n        new Item(\"Item 2\", \"2\")\r\n    };\r\n\r\n    List<string> e6 = new List<string>() { \"Alaska\" };\r\n\r\n    string[] states =\r\n    {\r\n    \"Alabama\", \"Alaska\", \"American Samoa\", \"Arizona\",\r\n    \"Arkansas\", \"California\", \"Colorado\", \"Connecticut\",\r\n    \"Delaware\", \"District of Columbia\", \"Federated States of Micronesia\",\r\n    \"Florida\", \"Georgia\", \"Guam\", \"Hawaii\", \"Idaho\",\r\n    \"Illinois\", \"Indiana\", \"Iowa\", \"Kansas\", \"Kentucky\",\r\n    \"Louisiana\", \"Maine\", \"Marshall Islands\", \"Maryland\",\r\n    \"Massachusetts\", \"Michigan\", \"Minnesota\", \"Mississippi\",\r\n    \"Missouri\", \"Montana\", \"Nebraska\", \"Nevada\",\r\n    \"New Hampshire\", \"New Jersey\", \"New Mexico\", \"New York\",\r\n    \"North Carolina\", \"North Dakota\", \"Northern Mariana Islands\", \"Ohio\",\r\n    \"Oklahoma\", \"Oregon\", \"Palau\", \"Pennsylvania\", \"Puerto Rico\",\r\n    \"Rhode Island\", \"South Carolina\", \"South Dakota\", \"Tennessee\",\r\n    \"Texas\", \"Utah\", \"Vermont\", \"Virgin Island\", \"Virginia\",\r\n    \"Washington\", \"West Virginia\", \"Wisconsin\", \"Wyoming\"\r\n    };\r\n\r\n    public void SubmitOrder(EditContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Form.demo.Submit",
         "Style": "",
         "Debug": false,
@@ -2082,7 +2118,16 @@
     "Title": "Radio",
     "Type": "Radio",
     "Desc": "<p>The <code>MRadio</code> component is a simple radio button. When combined with the <code>MRadioGroup</code> component you can provide\ngroupable functionality to allow users to select from a predefined set of options.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MRadio\">MRadio</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MRadioGroup\">MRadio</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MRadio",
+        "Href": "/docs/api/MRadio"
+      },
+      {
+        "Name": "MRadio",
+        "Href": "/docs/api/MRadioGroup"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg",
     "Order": 0,
@@ -2149,7 +2194,6 @@
     "Title": "RangeSliders",
     "Type": "RangeSliders",
     "Desc": "<p>TODO...</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/RangeSliders.svg",
     "Order": 0,
@@ -2227,7 +2271,6 @@
     "Title": "Select",
     "Type": "Select",
     "Desc": "<p>The <code>Select</code> component is used for collecting user provided information from a list of options.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -2348,7 +2391,6 @@
     "Title": "Sliders",
     "Type": "Sliders",
     "Desc": "<p>TODO...</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sliders.svg",
     "Order": 0,
@@ -2525,7 +2567,12 @@
     "Title": "Switch",
     "Type": "Switch",
     "Desc": "<p>The <code>MSwitch</code> component provides users the ability to choose between two distinct values. These are very similar to a\ntoggle, or on/off switch, though aesthetically different than a checkbox.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MSwitch\">MSwitch</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MSwitch",
+        "Href": "/docs/api/MSwitch"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Switch.svg",
     "Order": 0,
@@ -2603,7 +2650,6 @@
     "Title": "Textareas",
     "Type": "Textareas",
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Textareas.svg",
     "Order": 0,
@@ -2725,7 +2771,6 @@
     "Title": "TextField",
     "Type": "TextField",
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TextField.svg",
     "Order": 0,
@@ -2968,7 +3013,7 @@
     "Title": "Grid",
     "Type": "Grid",
     "Desc": "<p>24 Grids System。</p>\n<h2>Design concept#</h2>\n<p>In most business situations, Ant Design needs to solve a lot of information storage problems within the design area, so based on 12 Grids System, we divided the design area into 24 sections.</p>\n<p>We name the divided area 'box'. We suggest four boxes for horizontal arrangement at most, one at least. Boxes are proportional to the entire screen as shown in the picture above. To ensure a high level of visual comfort, we customize the typography inside of the box based on the box unit.</p>\n<h2>Outline</h2>\n<p>In the grid system, we define the frame outside the information area based on row and column, to ensure that every area can have stable arrangement.</p>\n<p>Following is a brief look at how it works:</p>\n<ul>\n<li>Establish a set of column in the horizontal space defined by row (abbreviated col)</li>\n<li>Your content elements should be placed directly in the col, and only col should be placed directly in row</li>\n<li>The column grid system is a value of 1-24 to represent its range spans. For example, three columns of equal width can be created by <Col span={8} />.</li>\n<li>If the sum of col spans in a row are more than 24, then the overflowing col as a whole will start a new line arrangement.</li>\n</ul>\n<p>Our grid systems base on Flex layout to allow the elements within the parent to be aligned horizontally - left, center, right, wide arrangement, and decentralized arrangement. The Grid system also supports vertical alignment - top aligned, vertically centered, bottom-aligned. You can also define the order of elements by using order.</p>\n<p>Layout uses a 24 grid layout to define the width of each &quot;box&quot;, but does not rigidly adhere to the grid layout.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<p>Row</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>align</td>\n<td>the vertical alignment of the flex layout:：<code>top</code> <code>middle</code> <code>bottom</code></td>\n<td>string</td>\n<td>top</td>\n</tr>\n<tr>\n<td>gutter</td>\n<td>spacing between grids, could be a number or a object like { xs: 8, sm: 16, md: 24}. or you can use array to make horizontal and vertical spacing work at the same time <code>[horizontal, vertical]</code> (supported after 1.5.0)</td>\n<td>number, object, array</td>\n<td>0</td>\n</tr>\n<tr>\n<td>justify</td>\n<td>horizontal arrangement of the flex layout:<code>start</code> <code>end</code> <code>center</code> <code>space-around</code> <code>space-between</code></td>\n<td>string</td>\n<td>start</td>\n</tr>\n<tr>\n<td>type</td>\n<td>layout mode, optional <code>flex</code>， browser support</td>\n<td>string</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>Col</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>offset</td>\n<td>the number of cells to offset Col from the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>order</td>\n<td>raster order, used in flex layout mode</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>pull</td>\n<td>the number of cells that raster is moved to the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>push</td>\n<td>the number of cells that raster is moved to the right</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>span</td>\n<td>raster number of cells to occupy, 0 corresponds to  <code>display: none</code></td>\n<td>string</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xs</td>\n<td><code>&lt;576px</code> and also default setting, could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>sm</td>\n<td><code>≥576px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>md</td>\n<td><code>≥768px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>lg</td>\n<td><code>≥992px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xl</td>\n<td><code>≥1200px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xxl</td>\n<td><code>≥1600px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>The breakpoints of responsive grid follow BootStrap 4 media queries rules(not including <code>occasionally</code> part).</p>\n</section>",
+    "Apis": [],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg",
     "Order": 0,
@@ -3189,7 +3234,16 @@
     "Title": "ButtonGroup",
     "Type": "ButtonGroup",
     "Desc": "<p>The <code>MButtonGroup</code> component is a simple wrapper for <code>MItemGroup</code> built specifically to work with <code>MButton</code>.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MButton\">MButton</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MButtonGroup",
+        "Href": "/docs/api/MButtonGroup"
+      },
+      {
+        "Name": "MButton",
+        "Href": "/docs/api/MButton"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ButtonGroup.svg",
     "Order": 0,
@@ -3267,7 +3321,6 @@
     "Title": "ChipGroup",
     "Type": "ChipGroup",
     "Desc": "<p>The <code>MChipGroup</code> supercharges the <code>MChip</code> component by providing groupable functionality. It is used for creating groups\nof selections using chips.</p>\n<ul>\n<li><a href=\"/docs/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/docs/api/MChip\">MChip</a></li>\n</ul>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chip.svg",
     "Order": 0,
@@ -3345,7 +3398,16 @@
     "Title": "ItemGroup",
     "Type": "ItemGroup",
     "Desc": "<p>The <code>MItemGroup</code> provides the ability to create a group of selectable items out of any component. This is the baseline\nfunctionality for components such as <code>MTabs</code> and <code>MCarousel</code>.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MItem\">MItem</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MItem",
+        "Href": "/docs/api/MItem"
+      },
+      {
+        "Name": "MItemGroup",
+        "Href": "/docs/api/MItemGroup"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ItemGroup.svg",
     "Order": 0,
@@ -3423,7 +3485,44 @@
     "Title": "ListItemGroup",
     "Type": "ListItemGroup",
     "Desc": "<p>The <code>MListItemGroup</code> provides the ability to create a group of selectable <code>MListItem</code>. The <code>MListItemGroup</code> component\nutilizes <code>MItemGroup</code> at its core to provide a clean interface for interactive lists.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListGroup\">MListGroup</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItem\">MListItem</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemAction\">MListItemAction</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemContent\">MListItemContent</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MListGroup",
+        "Href": "/docs/api/MListGroup"
+      },
+      {
+        "Name": "MListItem",
+        "Href": "/docs/api/MListItem"
+      },
+      {
+        "Name": "MListItemAction",
+        "Href": "/docs/api/MListItemAction"
+      },
+      {
+        "Name": "MListItemActionText",
+        "Href": "/docs/api/MListItemActionText"
+      },
+      {
+        "Name": "MListItemAvatar",
+        "Href": "/docs/api/MListItemAvatar"
+      },
+      {
+        "Name": "MListItemContent",
+        "Href": "/docs/api/MListItemContent"
+      },
+      {
+        "Name": "MListItemGroup",
+        "Href": "/docs/api/MListItemGroup"
+      },
+      {
+        "Name": "MListItemSubtitle",
+        "Href": "/docs/api/MListItemSubtitle"
+      },
+      {
+        "Name": "MListItemTitle",
+        "Href": "/docs/api/MListItemTitle"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -3500,7 +3599,16 @@
     "Title": "SlideGroup",
     "Type": "SlideGroup",
     "Desc": "<p>The <code>MSlideGroup</code> component is used to display pseudo paginated information. It uses <a href=\"/components/itemgroup\"><strong>MItemGroup</strong></a> at its core and provides\na baseline for components such as <a href=\"/components/tabs\"><strong>MTabs</strong></a> and <a href=\"/components/chipgroup\"><strong>MChipGroup</strong></a>.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MSlideGroup",
+        "Href": "/docs/api/MSlideGroup"
+      },
+      {
+        "Name": "MSlideItem",
+        "Href": "/docs/api/MSlideItem"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -3509,7 +3617,7 @@
         "Name": "index",
         "Title": "Usage",
         "Description": "<p>Similar to the <code>MWindow</code> component, <code>MSideGroup</code> lets items to take up as much space as needed, allowing the user to move horizontally through the provided information.</p>\n",
-        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"700\">\r\n    <MSlideGroup Multiple ShowArrows=\"@(true)\">\r\n        @foreach (var item in Enumerable.Range(1, 25))\r\n        {\r\n            <MSlideItem>\r\n                <MButton Class=\"mx-2\"\r\n                         IsActive=\"@context.Active\"\r\n                         ActiveClass=\"purple white--text\"\r\n                         Depressed\r\n                         Rounded\r\n                         Click=\"@context.Toggle\"\r\n                         RefBack=\"@context.Ref\">\r\n                    Options @item\r\n                </MButton>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>",
+        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"700\">\r\n    <MSlideGroup Multiple ShowArrows=\"@(true)\">\r\n        @foreach (var item in Enumerable.Range(1, 25))\r\n        {\r\n            <MSlideItem>\r\n                <MButton Class=\"mx-2\"\r\n                         IsActive=\"@context.Active\"\r\n                         ActiveClass=\"purple white--text\"\r\n                         Depressed\r\n                         Rounded\r\n                         OnClick=\"@context.Toggle\"\r\n                         RefBack=\"@context.Ref\">\r\n                    Options @item\r\n                </MButton>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>",
         "Type": "Demos.Components.Groups.children.SlideGroup.usage.Index",
         "Style": "",
         "Debug": false,
@@ -3588,7 +3696,16 @@
     "Title": "Windows",
     "Type": "Windows",
     "Desc": "<p>The <code>MWindow</code> component provides the baseline functionality for transitioning content from 1 pane to another. Other\ncomponents such as <code>MTabs</code>, <code>MCarousel</code> and <code>MStepper</code> utilize this component at their core.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MWindow\">MWindow</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MWindow",
+        "Href": "/docs/api/MWindow"
+      },
+      {
+        "Name": "MWindowItem",
+        "Href": "/docs/api/MWindowItem"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -3597,7 +3714,7 @@
         "Name": "index",
         "Title": "Usage",
         "Description": "<p>Designed to easily cycle through content, <code>MWindow</code> provides a simple interface to create truly custom implementations.</p>\n",
-        "Code": "<MRow Align=\"AlignTypes.Center\">\r\n    <MItemGroup @bind-Value=\"window\"\r\n                Class=\"shrink mr-6\"\r\n                Mandatory>\r\n        @foreach (var item in Enumerable.Range(1, length))\r\n        {\r\n            <MItem Value=\"@item\">\r\n                <div>\r\n                    <MButton IsActive=\"@context.Active\" Icon Click=\"@context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </div>\r\n            </MItem>\r\n        }\r\n    </MItemGroup>\r\n\r\n    <MCol>\r\n        <MWindow Value=\"window\"\r\n                 Class=\"elevation-1\"\r\n                 Vertical>\r\n            @foreach (var item in Enumerable.Range(1, length))\r\n            {\r\n                <MWindowItem Value=\"@item\">\r\n                    <MCard Flat>\r\n                        <MCardText>\r\n                            <MRow Class=\"mb-4\" Align=\"AlignTypes.Center\">\r\n                                <MAvatar Color=\"grey\" Class=\"mr-4\"></MAvatar>\r\n                                <strong class=\"text-h6\">Title @item</strong>\r\n                                <MSpacer/>\r\n                                <MButton Icon>\r\n                                    <MIcon>mdi-account</MIcon>\r\n                                </MButton>\r\n                            </MRow>\r\n\r\n                            <p>\r\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n                            </p>\r\n\r\n                            <p>\r\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n                            </p>\r\n\r\n                            <p>\r\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n                            </p>\r\n                        </MCardText>\r\n                    </MCard>\r\n                </MWindowItem>\r\n            }\r\n        </MWindow>\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    StringNumber window;\r\n\r\n    int length = 3;\r\n}",
+        "Code": "<MRow Align=\"AlignTypes.Center\">\r\n    <MItemGroup @bind-Value=\"window\"\r\n                Class=\"shrink mr-6\"\r\n                Mandatory>\r\n        @foreach (var item in Enumerable.Range(1, length))\r\n        {\r\n            <MItem Value=\"@item\">\r\n                <div>\r\n                    <MButton IsActive=\"@context.Active\" Icon OnClick=\"@context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </div>\r\n            </MItem>\r\n        }\r\n    </MItemGroup>\r\n\r\n    <MCol>\r\n        <MWindow Value=\"window\"\r\n                 Class=\"elevation-1\"\r\n                 Vertical>\r\n            @foreach (var item in Enumerable.Range(1, length))\r\n            {\r\n                <MWindowItem Value=\"@item\">\r\n                    <MCard Flat>\r\n                        <MCardText>\r\n                            <MRow Class=\"mb-4\" Align=\"AlignTypes.Center\">\r\n                                <MAvatar Color=\"grey\" Class=\"mr-4\"></MAvatar>\r\n                                <strong class=\"text-h6\">Title @item</strong>\r\n                                <MSpacer/>\r\n                                <MButton Icon>\r\n                                    <MIcon>mdi-account</MIcon>\r\n                                </MButton>\r\n                            </MRow>\r\n\r\n                            <p>\r\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n                            </p>\r\n\r\n                            <p>\r\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n                            </p>\r\n\r\n                            <p>\r\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n                            </p>\r\n                        </MCardText>\r\n                    </MCard>\r\n                </MWindowItem>\r\n            }\r\n        </MWindow>\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    StringNumber window;\r\n\r\n    int length = 3;\r\n}",
         "Type": "Demos.Components.Groups.children.Windows.usage.Index",
         "Style": "",
         "Debug": false,
@@ -3608,7 +3725,7 @@
         "Name": "customizedArrows",
         "Title": "Customized Arrows",
         "Description": "<p>Arrows can be customized by using <code>PrevContent</code> and <code>NextContent</code> slots.</p>\n",
-        "Code": "<MWindow ShowArrows>\r\n    <PrevContent>\r\n        <MButton Color=\"success\" Click=\"context\">Previous slide</MButton>\r\n    </PrevContent>\r\n    <NextContent>\r\n        <MButton Color=\"info\" Click=\"context\">Next slide</MButton>\r\n    </NextContent>\r\n    <ChildContent>\r\n        @foreach (var item in Enumerable.Range(1, 5))\r\n        {\r\n            <MWindowItem>\r\n                <MCard Color=\"grey\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <h1 style=\"font-size: 5rem\" class=\"white--text\">Slide @item</h1>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </ChildContent>\r\n</MWindow>",
+        "Code": "<MWindow ShowArrows>\r\n    <PrevContent>\r\n        <MButton Color=\"success\" OnClick=\"context\">Previous slide</MButton>\r\n    </PrevContent>\r\n    <NextContent>\r\n        <MButton Color=\"info\" OnClick=\"context\">Next slide</MButton>\r\n    </NextContent>\r\n    <ChildContent>\r\n        @foreach (var item in Enumerable.Range(1, 5))\r\n        {\r\n            <MWindowItem>\r\n                <MCard Color=\"grey\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <h1 style=\"font-size: 5rem\" class=\"white--text\">Slide @item</h1>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </ChildContent>\r\n</MWindow>",
         "Type": "Demos.Components.Groups.children.Windows.props.CustomizedArrows",
         "Style": "",
         "Debug": false,
@@ -3619,7 +3736,7 @@
         "Name": "reverse",
         "Title": "Reverse",
         "Description": "<p>Reverse <code>MWindow</code> always displays reverse transition.</p>\n",
-        "Code": "<MCard Flat Tile>\r\n    <MWindow @bind-Value=\"Onboarding\" Reverse>\r\n        @foreach (var item in Enumerable.Range(0, length))\r\n        {\r\n            <MWindowItem Value=\"@item\">\r\n                <MCard Color=\"grey\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <h1 style=\"font-size: 5rem\" class=\"white--text\">Slide @(item + 1)</h1>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </MWindow>\r\n\r\n    <MCardActions Class=\"justify-space-between\">\r\n        <MButton Text Click=\"HandlePrev\">\r\n            <MIcon>mdi-chevron-left</MIcon>\r\n        </MButton>\r\n        <MItemGroup @bind-Value=\"Onboarding\" Class=\"text-center\" Mandatory>\r\n            @foreach (var item in Enumerable.Range(0, length))\r\n            {\r\n                <MItem Value=\"@item\">\r\n                    <MButton Icon IsActive=\"context.Active\" Click=\"@context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </MItem>\r\n            }\r\n        </MItemGroup>\r\n        <MButton Text Click=\"HandleNext\">\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    int _onboarding = 0;\r\n\r\n    StringNumber Onboarding\r\n    {\r\n        get => _onboarding;\r\n        set => _onboarding = value.AsT1;\r\n    }\r\n\r\n    int length = 3;\r\n\r\n    private void HandleNext()\r\n    {\r\n        _onboarding = _onboarding + 1 == length ? 0 : _onboarding + 1;\r\n    }\r\n\r\n    private void HandlePrev()\r\n    {\r\n        _onboarding = _onboarding - 1 < 0 ? length - 1 : _onboarding - 1;\r\n    }\r\n\r\n}",
+        "Code": "<MCard Flat Tile>\r\n    <MWindow @bind-Value=\"Onboarding\" Reverse>\r\n        @foreach (var item in Enumerable.Range(0, length))\r\n        {\r\n            <MWindowItem Value=\"@item\">\r\n                <MCard Color=\"grey\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <h1 style=\"font-size: 5rem\" class=\"white--text\">Slide @(item + 1)</h1>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </MWindow>\r\n\r\n    <MCardActions Class=\"justify-space-between\">\r\n        <MButton Text OnClick=\"HandlePrev\">\r\n            <MIcon>mdi-chevron-left</MIcon>\r\n        </MButton>\r\n        <MItemGroup @bind-Value=\"Onboarding\" Class=\"text-center\" Mandatory>\r\n            @foreach (var item in Enumerable.Range(0, length))\r\n            {\r\n                <MItem Value=\"@item\">\r\n                    <MButton Icon IsActive=\"context.Active\" OnClick=\"@context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </MItem>\r\n            }\r\n        </MItemGroup>\r\n        <MButton Text OnClick=\"HandleNext\">\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    int _onboarding = 0;\r\n\r\n    StringNumber Onboarding\r\n    {\r\n        get => _onboarding;\r\n        set => _onboarding = value.AsT1;\r\n    }\r\n\r\n    int length = 3;\r\n\r\n    private void HandleNext()\r\n    {\r\n        _onboarding = _onboarding + 1 == length ? 0 : _onboarding + 1;\r\n    }\r\n\r\n    private void HandlePrev()\r\n    {\r\n        _onboarding = _onboarding - 1 < 0 ? length - 1 : _onboarding - 1;\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Groups.children.Windows.props.Reverse",
         "Style": "",
         "Debug": false,
@@ -3630,7 +3747,7 @@
         "Name": "vertical",
         "Title": "Vertical",
         "Description": "<p><code>MWindow</code> can be vertical. Vertical windows have Y axis transition instead of X axis transition.</p>\n",
-        "Code": "<MCard Flat Tile>\r\n    <MWindow @bind-Value=\"Onboarding\" Vertical>\r\n        @foreach (var item in Enumerable.Range(0, length))\r\n        {\r\n            <MWindowItem Value=\"@item\">\r\n                <MCard Color=\"grey\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <h1 style=\"font-size: 5rem\" class=\"white--text\">Slide @(item + 1)</h1>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </MWindow>\r\n\r\n    <MCardActions Class=\"justify-space-between\">\r\n        <MButton Text Click=\"HandlePrev\">\r\n            <MIcon>mdi-chevron-left</MIcon>\r\n        </MButton>\r\n        <MItemGroup @bind-Value=\"Onboarding\" Class=\"text-center\" Mandatory>\r\n            @foreach (var item in Enumerable.Range(0, length))\r\n            {\r\n                <MItem Value=\"@item\">\r\n                    <MButton Icon IsActive=\"context.Active\" Click=\"@context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </MItem>\r\n            }\r\n        </MItemGroup>\r\n        <MButton Text Click=\"HandleNext\">\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    int _onboarding = 0;\r\n\r\n    StringNumber Onboarding\r\n    {\r\n        get => _onboarding;\r\n        set => _onboarding = value.AsT1;\r\n    }\r\n\r\n    int length = 3;\r\n\r\n    private void HandleNext()\r\n    {\r\n        _onboarding = _onboarding + 1 == length ? 0 : _onboarding + 1;\r\n    }\r\n\r\n    private void HandlePrev()\r\n    {\r\n        _onboarding = _onboarding - 1 < 0 ? length - 1 : _onboarding - 1;\r\n    }\r\n\r\n}",
+        "Code": "<MCard Flat Tile>\r\n    <MWindow @bind-Value=\"Onboarding\" Vertical>\r\n        @foreach (var item in Enumerable.Range(0, length))\r\n        {\r\n            <MWindowItem Value=\"@item\">\r\n                <MCard Color=\"grey\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <h1 style=\"font-size: 5rem\" class=\"white--text\">Slide @(item + 1)</h1>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </MWindow>\r\n\r\n    <MCardActions Class=\"justify-space-between\">\r\n        <MButton Text OnClick=\"HandlePrev\">\r\n            <MIcon>mdi-chevron-left</MIcon>\r\n        </MButton>\r\n        <MItemGroup @bind-Value=\"Onboarding\" Class=\"text-center\" Mandatory>\r\n            @foreach (var item in Enumerable.Range(0, length))\r\n            {\r\n                <MItem Value=\"@item\">\r\n                    <MButton Icon IsActive=\"context.Active\" OnClick=\"@context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </MItem>\r\n            }\r\n        </MItemGroup>\r\n        <MButton Text OnClick=\"HandleNext\">\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    int _onboarding = 0;\r\n\r\n    StringNumber Onboarding\r\n    {\r\n        get => _onboarding;\r\n        set => _onboarding = value.AsT1;\r\n    }\r\n\r\n    int length = 3;\r\n\r\n    private void HandleNext()\r\n    {\r\n        _onboarding = _onboarding + 1 == length ? 0 : _onboarding + 1;\r\n    }\r\n\r\n    private void HandlePrev()\r\n    {\r\n        _onboarding = _onboarding - 1 < 0 ? length - 1 : _onboarding - 1;\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Groups.children.Windows.props.Vertical",
         "Style": "",
         "Debug": false,
@@ -3641,7 +3758,7 @@
         "Name": "accountCreation",
         "Title": "Account Creation",
         "Description": "<p>Create rich forms with smooth animations. <code>MWindow</code> automatically tracks the current selection index to automatically change the transition direction. This can be manually controlled with the <code>Reverse</code> prop.</p>\n",
-        "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"500\">\r\n    <MCardTitle Class=\"text-h6 font-weight-regular justify-space-between\">\r\n        <span>@currentTitle</span>\r\n        <MAvatar Color=\"primary lighten-2\" Class=\"subheading white--text\" Size=\"24\">@step</MAvatar>\r\n    </MCardTitle>\r\n\r\n    <MWindow @bind-Value=\"Step\">\r\n        <MWindowItem Value=\"1\">\r\n            <MCardText>\r\n                <MTextField Label=\"Email\" @bind-Value=\"@email\"></MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    This is the email you will use to login to your Vuetify account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"2\">\r\n            <MCardText>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Confirm Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    Please enter a password for your account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"3\">\r\n            <div class=\"pa-4 text-center\">\r\n                <MImage\r\n                    Class=\"mb-4\"\r\n                    Contain\r\n                    Height=\"128\"\r\n                    Src=\"https://cdn.vuetifyjs.com/images/logos/v.svg\">\r\n                </MImage>\r\n                <h3 class=\"text-h6 font-weight-light mb-2\">\r\n                    Welcome to Vuetify\r\n                </h3>\r\n                <span class=\"text-caption grey--text\">Thanks for signing up!</span>\r\n            </div>\r\n        </MWindowItem>\r\n    </MWindow>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MCardActions>\r\n        <MButton\r\n            Disabled=\"@(step == 1)\"\r\n            Text\r\n            Click=\"() => step--\">\r\n            Back\r\n        </MButton>\r\n        <MSpacer></MSpacer>\r\n        <MButton\r\n            Disabled=\"@(step == 3)\"\r\n            Color=\"primary\"\r\n            Depressed\r\n            Click=\"() => step++\">\r\n            Next\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    string email = \"john@vuetifyjs.com\";\r\n    int step = 1;\r\n\r\n    StringNumber Step\r\n    {\r\n        get => step;\r\n        set => step = value.ToInt32();\r\n    }\r\n\r\n    public string currentTitle\r\n    {\r\n        get => step switch\r\n        {\r\n            1 => \"Sign-Up\",\r\n            2 => \"Create a password\",\r\n            _ => \"Account Created\"\r\n            };\r\n    }\r\n\r\n}",
+        "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"500\">\r\n    <MCardTitle Class=\"text-h6 font-weight-regular justify-space-between\">\r\n        <span>@currentTitle</span>\r\n        <MAvatar Color=\"primary lighten-2\" Class=\"subheading white--text\" Size=\"24\">@step</MAvatar>\r\n    </MCardTitle>\r\n\r\n    <MWindow @bind-Value=\"Step\">\r\n        <MWindowItem Value=\"1\">\r\n            <MCardText>\r\n                <MTextField Label=\"Email\" @bind-Value=\"@email\"></MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    This is the email you will use to login to your Vuetify account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"2\">\r\n            <MCardText>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Confirm Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    Please enter a password for your account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"3\">\r\n            <div class=\"pa-4 text-center\">\r\n                <MImage\r\n                    Class=\"mb-4\"\r\n                    Contain\r\n                    Height=\"128\"\r\n                    Src=\"https://cdn.vuetifyjs.com/images/logos/v.svg\">\r\n                </MImage>\r\n                <h3 class=\"text-h6 font-weight-light mb-2\">\r\n                    Welcome to Vuetify\r\n                </h3>\r\n                <span class=\"text-caption grey--text\">Thanks for signing up!</span>\r\n            </div>\r\n        </MWindowItem>\r\n    </MWindow>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MCardActions>\r\n        <MButton\r\n            Disabled=\"@(step == 1)\"\r\n            Text\r\n            OnClick=\"() => step--\">\r\n            Back\r\n        </MButton>\r\n        <MSpacer></MSpacer>\r\n        <MButton\r\n            Disabled=\"@(step == 3)\"\r\n            Color=\"primary\"\r\n            Depressed\r\n            OnClick=\"() => step++\">\r\n            Next\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    string email = \"john@vuetifyjs.com\";\r\n    int step = 1;\r\n\r\n    StringNumber Step\r\n    {\r\n        get => step;\r\n        set => step = value.ToInt32();\r\n    }\r\n\r\n    public string currentTitle\r\n    {\r\n        get => step switch\r\n        {\r\n            1 => \"Sign-Up\",\r\n            2 => \"Create a password\",\r\n            _ => \"Account Created\"\r\n            };\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Groups.children.Windows.misc.AccountCreation",
         "Style": "",
         "Debug": false,
@@ -3652,7 +3769,7 @@
         "Name": "onboarding",
         "Title": "Onboarding",
         "Description": "<p><code>MWindow</code> makes it easy to create custom components such as a different styled stepper.</p>\n",
-        "Code": "<MCard Color=\"black\" Dark Flat Tile>\r\n    <MWindow @bind-Value=\"OnBoarding\">\r\n        @foreach (var item in Enumerable.Range(0, length))\r\n        {\r\n            <MWindowItem Value=\"item\">\r\n                <MCard Color=\"transparent\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <MCardText Class=\"text-center\">\r\n                            Transparent themed, for background-imaged slides. Background color black added for demonstration purposes.\r\n                        </MCardText>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </MWindow>\r\n\r\n    <MCardActions Class=\"justify-space-between\">\r\n        <MButton\r\n            Text\r\n            Click=\"Prev\">\r\n            <MIcon>mdi-chevron-left</MIcon>\r\n        </MButton>\r\n        <MItemGroup\r\n            @bind-Value=\"OnBoarding\"\r\n            Class=\"text-center\"\r\n            Mandatory>\r\n            @foreach (var item in Enumerable.Range(0, length))\r\n            {\r\n                <MItem Value=\"item\">\r\n                    <MButton\r\n                        IsActive=\"@context.Active\"\r\n                        Icon\r\n                        Click=\"context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </MItem>\r\n            }\r\n        </MItemGroup>\r\n        <MButton\r\n            Text\r\n            Click=\"Next\">\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    \r\n    int onboarding = 0;\r\n\r\n    StringNumber OnBoarding\r\n    {\r\n        get => onboarding;\r\n        set => onboarding = value.AsT1;\r\n    }\r\n\r\n    int length = 3;\r\n\r\n    private void Next()\r\n    {\r\n        onboarding = onboarding + 1 == length ? 0 : onboarding + 1;\r\n    }\r\n\r\n    private void Prev()\r\n    {\r\n        onboarding = onboarding - 1 < 0 ? length - 1 : onboarding - 1;\r\n    }\r\n\r\n}",
+        "Code": "<MCard Color=\"black\" Dark Flat Tile>\r\n    <MWindow @bind-Value=\"OnBoarding\">\r\n        @foreach (var item in Enumerable.Range(0, length))\r\n        {\r\n            <MWindowItem Value=\"item\">\r\n                <MCard Color=\"transparent\" Height=\"200\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <MCardText Class=\"text-center\">\r\n                            Transparent themed, for background-imaged slides. Background color black added for demonstration purposes.\r\n                        </MCardText>\r\n                    </MRow>\r\n                </MCard>\r\n            </MWindowItem>\r\n        }\r\n    </MWindow>\r\n\r\n    <MCardActions Class=\"justify-space-between\">\r\n        <MButton\r\n            Text\r\n            OnClick=\"Prev\">\r\n            <MIcon>mdi-chevron-left</MIcon>\r\n        </MButton>\r\n        <MItemGroup\r\n            @bind-Value=\"OnBoarding\"\r\n            Class=\"text-center\"\r\n            Mandatory>\r\n            @foreach (var item in Enumerable.Range(0, length))\r\n            {\r\n                <MItem Value=\"item\">\r\n                    <MButton\r\n                        IsActive=\"@context.Active\"\r\n                        Icon\r\n                        OnClick=\"context.Toggle\">\r\n                        <MIcon>mdi-record</MIcon>\r\n                    </MButton>\r\n                </MItem>\r\n            }\r\n        </MItemGroup>\r\n        <MButton\r\n            Text\r\n            OnClick=\"Next\">\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    \r\n    int onboarding = 0;\r\n\r\n    StringNumber OnBoarding\r\n    {\r\n        get => onboarding;\r\n        set => onboarding = value.AsT1;\r\n    }\r\n\r\n    int length = 3;\r\n\r\n    private void Next()\r\n    {\r\n        onboarding = onboarding + 1 == length ? 0 : onboarding + 1;\r\n    }\r\n\r\n    private void Prev()\r\n    {\r\n        onboarding = onboarding - 1 < 0 ? length - 1 : onboarding - 1;\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Groups.children.Windows.misc.Onboarding",
         "Style": "",
         "Debug": false,
@@ -3665,7 +3782,6 @@
     "Title": "Hover",
     "Type": "Hover",
     "Desc": "<p>The <code>MHover</code> component provides a clean interface for handling the hover state of any component.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -3720,7 +3836,12 @@
     "Title": "Icon",
     "Type": "Icon",
     "Desc": "<p>The <code>MIcon</code> component provides a large set of glyphs to provide context to various aspects of your application. For a\nlist of all available icons, visit the official <a href=\"https://materialdesignicons.com/\">Material Design Icons</a> page. To use\nany of these icons simply use the\n<code>mdi-</code> prefix followed by the icon name.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MIcon\">MIcon</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MIcon",
+        "Href": "/docs/api/MIcon"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,
@@ -3787,7 +3908,6 @@
     "Title": "Image",
     "Type": "Image",
     "Desc": "<p>The <code>MImage</code> component is packed with features to support rich media.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -3875,7 +3995,6 @@
     "Title": "List",
     "Type": "List",
     "Desc": "<p>The <code>MList</code> component is used to display information. It can contain an avatar, content, actions, subheaders and much\nmore. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a\nconsistent styling for organizing groups of text and images.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg",
     "Order": 0,
@@ -4074,7 +4193,12 @@
     "Title": "Menu",
     "Type": "Menu",
     "Desc": "<p>The <code>MMenu</code> component shows a menu at the position of the element used to activate it.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MMenu\">MMenu</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MMenu",
+        "Href": "/docs/api/MMenu"
+      }
+    ],
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -4239,7 +4363,6 @@
     "Title": "NavigationDrawer",
     "Type": "NavigationDrawer",
     "Desc": "<p><code>MNavigationDrawer</code> is a component used to navigate applications. It is usually wrapped and used in the <code>MCard</code> element.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg",
     "Order": 0,
@@ -4361,7 +4484,6 @@
     "Title": "Overlay",
     "Type": "Overlay",
     "Desc": "<p>The <code>Overlay</code> component is used to provide emphasis on a particular element or parts of it. It signals to the user of a state change within the application and can be used for creating loaders, dialogs and more.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -4425,7 +4547,7 @@
         "Name": "loader",
         "Title": "Loader",
         "Description": "<p>Using the <code>MOverlay</code> as a background, add a progress component to easily create a custom loader.</p>\n",
-        "Code": "<div class=\"text-center\">\r\n    <MButton Color=\"deep-purple accent-4\"\r\n             Class=\"white--text\"\r\n             Click=\"Toggle\">\r\n        Launch Application\r\n        <MIcon Right>\r\n            mdi-open-in-new\r\n        </MIcon>\r\n    </MButton>\r\n\r\n    <MOverlay Value=\"overlay\">\r\n        <MProgressCircular indeterminate\r\n                           Size=\"64\"></MProgressCircular>\r\n    </MOverlay>\r\n</div>\r\n\r\n@code {\r\n    bool overlay = false;\r\n\r\n    void Toggle(MouseEventArgs args)\r\n    {\r\n        overlay = true;\r\n\r\n        Task.Run(async () =>\r\n        {\r\n            await Task.Delay(3000);\r\n            overlay = false;\r\n\r\n            await InvokeAsync(StateHasChanged);\r\n        });\r\n    }\r\n}",
+        "Code": "<div class=\"text-center\">\r\n    <MButton Color=\"deep-purple accent-4\"\r\n             Class=\"white--text\"\r\n             OnClick=\"Toggle\">\r\n        Launch Application\r\n        <MIcon Right>\r\n            mdi-open-in-new\r\n        </MIcon>\r\n    </MButton>\r\n\r\n    <MOverlay Value=\"overlay\">\r\n        <MProgressCircular indeterminate\r\n                           Size=\"64\"></MProgressCircular>\r\n    </MOverlay>\r\n</div>\r\n\r\n@code {\r\n    bool overlay = false;\r\n\r\n    void Toggle(MouseEventArgs args)\r\n    {\r\n        overlay = true;\r\n\r\n        Task.Run(async () =>\r\n        {\r\n            await Task.Delay(3000);\r\n            overlay = false;\r\n\r\n            await InvokeAsync(StateHasChanged);\r\n        });\r\n    }\r\n}",
         "Type": "Demos.Components.Overlay.misc.Loader",
         "Style": "",
         "Debug": false,
@@ -4438,7 +4560,6 @@
     "Title": "Pagination",
     "Type": "Pagination",
     "Desc": "<p>The <code>MPagination</code> component is used to separate long data sets so that user data information can be known. Provided the amount, the paging component will automatically scale. The current maintenance page provides value easily.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -4515,7 +4636,6 @@
     "Title": "ColorPickers",
     "Type": "ColorPickers",
     "Desc": "<p>The MColorPicker allows you to select a color using a variety of input methods.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ColorPicker.svg",
     "Order": 0,
@@ -4593,7 +4713,6 @@
     "Title": "DatePickers",
     "Type": "DatePickers",
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickers.svg",
     "Order": 0,
@@ -4825,7 +4944,6 @@
     "Title": "DatePickersMonth",
     "Type": "DatePickersMonth",
     "Desc": "<p><code>MDatePicker</code> can be used as a standalone month picker component.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg",
     "Order": 0,
@@ -4958,7 +5076,6 @@
     "Title": "TimePickers",
     "Type": "TimePickers",
     "Desc": "<p>TODO...</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TimePickers.svg",
     "Order": 0,
@@ -5124,7 +5241,6 @@
     "Title": "Presets",
     "Type": "Presets",
     "Desc": "",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -5201,7 +5317,6 @@
     "Title": "ProgressCircular",
     "Type": "ProgressCircular",
     "Desc": "<p>The component is used to display circular data to users. It also can be put into an indeterminate state to portray loading.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -5267,7 +5382,6 @@
     "Title": "ProgressLinear",
     "Type": "ProgressLinear",
     "Desc": "<p>The component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -5421,7 +5535,6 @@
     "Title": "Rating",
     "Type": "Rating",
     "Desc": "<p>Semantic vector graphics.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -5520,7 +5633,6 @@
     "Title": "Sheet",
     "Type": "Sheet",
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sheet.svg",
     "Order": 0,
@@ -5565,7 +5677,6 @@
     "Title": "SkeletonLoader",
     "Type": "SkeletonLoader",
     "Desc": "<p>The m-app component and the app prop on components like m-navigation-drawer, m-app-bar, m-footer and more, help bootstrap your application with the proper sizing around <m-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The m-app component is REQUIRED for all applications. This is the mount point for many of components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. m-app should only be rendered within your application ONCE.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SkeletonLoader.svg",
     "Order": 0,
@@ -5599,7 +5710,6 @@
     "Title": "Snackbar",
     "Type": "Snackbar",
     "Desc": "<p>The MSnackbar component is used to display quick messages to users. Snackbars supports positioning, removing delays, and callbacks.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -5665,7 +5775,6 @@
     "Title": "Stepper",
     "Type": "Stepper",
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Stepper.svg",
     "Order": 0,
@@ -5708,7 +5817,7 @@
         "Name": "vertical",
         "Title": "Vertical",
         "Description": "<p>Vertical steppers move users along the y-axis and otherwise work exactly the same as their horizontal counterpart.</p>\n",
-        "Code": "<MStepper Value=\"_step\" Vertical>\r\n    <MStepperStep Step=\"1\" Complete=\"_step>1\">\r\n        Select an app\r\n        <small>Summarize if needed</small>\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"1\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" Click=\"()=>_step=2\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n    <MStepperStep Step=\"2\" Complete=\"_step>2\">\r\n        Configure analytics for this app\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"2\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" Click=\"()=>_step=3\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n    <MStepperStep Step=\"3\" Complete=\"_step>3\">\r\n        Select an ad format and name ad unit\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"3\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" Click=\"()=>_step=4\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n    <MStepperStep Step=\"4\">\r\n        View setup instructions\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"4\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" Click=\"()=>_step=1\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n</MStepper>\r\n\r\n@code {\r\n    private int _step = 1;\r\n}",
+        "Code": "<MStepper Value=\"_step\" Vertical>\r\n    <MStepperStep Step=\"1\" Complete=\"_step>1\">\r\n        Select an app\r\n        <small>Summarize if needed</small>\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"1\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" OnClick=\"()=>_step=2\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n    <MStepperStep Step=\"2\" Complete=\"_step>2\">\r\n        Configure analytics for this app\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"2\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" OnClick=\"()=>_step=3\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n    <MStepperStep Step=\"3\" Complete=\"_step>3\">\r\n        Select an ad format and name ad unit\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"3\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" OnClick=\"()=>_step=4\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n    <MStepperStep Step=\"4\">\r\n        View setup instructions\r\n    </MStepperStep>\r\n    <MStepperContent Step=\"4\">\r\n        <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n        <MButton Color=\"primary\" OnClick=\"()=>_step=1\">Continue</MButton>\r\n        <MButton Text>Cancel</MButton>\r\n    </MStepperContent>\r\n</MStepper>\r\n\r\n@code {\r\n    private int _step = 1;\r\n}",
         "Type": "Demos.Components.Stepper.props.Vertical",
         "Style": "",
         "Debug": false,
@@ -5820,7 +5929,6 @@
     "Title": "Subheader",
     "Type": "Subheader",
     "Desc": "<p>The <code>Subheader</code> component is used to separate sections of lists.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -5885,7 +5993,6 @@
     "Title": "DataIterators",
     "Type": "DataIterators",
     "Desc": "<p>TODO...</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataIterators.svg",
     "Order": 0,
@@ -5930,7 +6037,6 @@
     "Title": "DataTable",
     "Type": "DataTable",
     "Desc": "<p>TODO...</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataTable.svg",
     "Order": 0,
@@ -6184,7 +6290,6 @@
     "Title": "SimpleTables",
     "Type": "SimpleTables",
     "Desc": "<p>TODO...</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SimpleTables.svg",
     "Order": 0,
@@ -6251,7 +6356,28 @@
     "Title": "Tabs",
     "Type": "Tabs",
     "Desc": "<p>The <code>MTabs</code> component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation\nfor a page, where the tabs are links and the tab-items are the content.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTabs\">MTabs</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTab\">MTab</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTabItem\">MTabItem</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTabsItems\">MTabsItems</a></li>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MTabs",
+        "Href": "/docs/api/MTabs"
+      },
+      {
+        "Name": "MTab",
+        "Href": "/docs/api/MTab"
+      },
+      {
+        "Name": "MTabItem",
+        "Href": "/docs/api/MTabItem"
+      },
+      {
+        "Name": "MTabsItems",
+        "Href": "/docs/api/MTabsItems"
+      },
+      {
+        "Name": "MTabsSlider",
+        "Href": "/docs/api/MTabsSlider"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tabs.svg",
     "Order": 0,
@@ -6404,7 +6530,7 @@
         "Name": "dynamicTabs",
         "Title": "Dynamic Tabs",
         "Description": "<p>Tabs can be dynamically added and removed. This allows you to update to any number and the <code>MTabs</code> component will react. In this example when we add a new tab, we automatically change our model to match. As we add more tabs and overflow the container, the selected item will be automatically scrolled into view. Remove all <code>MTabs</code> and the slider will disappear.</p>\n",
-        "Code": "<MCard>\r\n    <MTabs\r\n        @bind-Value=\"tab\"\r\n        BackgroundColor=\"red lighten-2\"\r\n        Dark>\r\n        @foreach (var item in Enumerable.Range(0, Length))\r\n        {\r\n            <MTab Value=\"item\" @key=\"item\">\r\n                Item @(item + 1)\r\n            </MTab>\r\n        }\r\n    </MTabs>\r\n    <MCardText Class=\"text-center\">\r\n        <MButton\r\n            Disabled=\"@(Length == 0)\"\r\n            Text\r\n            Click=\"() => Length--\">\r\n            Remove Tab\r\n        </MButton>\r\n        <MDivider\r\n            Class=\"mx-4\"\r\n            Vertical>\r\n        </MDivider>\r\n        <MButton\r\n            Text\r\n            Click=\"() => Length++\">\r\n            Add Tab\r\n        </MButton>\r\n    </MCardText>\r\n</MCard>\r\n\r\n@code {\r\n\r\n\r\n    int _length = 1;\r\n\r\n    int Length\r\n    {\r\n        get => _length;\r\n        set\r\n        {\r\n            _length = value;\r\n            tab = value - 1;\r\n        }\r\n    }\r\n\r\n    StringNumber tab;\r\n\r\n\r\n\r\n}",
+        "Code": "<MCard>\r\n    <MTabs\r\n        @bind-Value=\"tab\"\r\n        BackgroundColor=\"red lighten-2\"\r\n        Dark>\r\n        @foreach (var item in Enumerable.Range(0, Length))\r\n        {\r\n            <MTab Value=\"item\" @key=\"item\">\r\n                Item @(item + 1)\r\n            </MTab>\r\n        }\r\n    </MTabs>\r\n    <MCardText Class=\"text-center\">\r\n        <MButton\r\n            Disabled=\"@(Length == 0)\"\r\n            Text\r\n            OnClick=\"() => Length--\">\r\n            Remove Tab\r\n        </MButton>\r\n        <MDivider\r\n            Class=\"mx-4\"\r\n            Vertical>\r\n        </MDivider>\r\n        <MButton\r\n            Text\r\n            OnClick=\"() => Length++\">\r\n            Add Tab\r\n        </MButton>\r\n    </MCardText>\r\n</MCard>\r\n\r\n@code {\r\n\r\n\r\n    int _length = 1;\r\n\r\n    int Length\r\n    {\r\n        get => _length;\r\n        set\r\n        {\r\n            _length = value;\r\n            tab = value - 1;\r\n        }\r\n    }\r\n\r\n    StringNumber tab;\r\n\r\n\r\n\r\n}",
         "Type": "Demos.Components.Tabs.misc.DynamicTabs",
         "Style": "",
         "Debug": false,
@@ -6439,7 +6565,6 @@
     "Title": "Timeline",
     "Type": "Timeline",
     "Desc": "<p>MTimeline is very useful for displaying chronological information.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -6560,7 +6685,12 @@
     "Title": "Tooltip",
     "Type": "Tooltip",
     "Desc": "<p>The <code>MTooltip</code> component is useful for conveying information when a user hovers over an element. You can also\nprogrammatically control the display of tooltips through a <strong>@bind-Value</strong>. When activated, tooltips display a text\nlabel identifying an element, such as a description of its function.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MTooltip\">MTooltip</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MTooltip",
+        "Href": "/docs/api/MTooltip"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tooltip.svg",
     "Order": 0,
@@ -6592,7 +6722,7 @@
         "Name": "visibility",
         "Title": "Visibility",
         "Description": "<p>Tooltip visibility can be programmatically changed using <strong>@bind-Value</strong>.</p>\n",
-        "Code": "<MContainer Fluid\r\n            Class=\"text-center\">\r\n    <MRow Class=\"flex\"\r\n          Justify=\"JustifyTypes.SpaceBetween\">\r\n        <MCol Cols=\"12\">\r\n            <MButton Click=\"() => show = !show\">\r\n                toggle\r\n            </MButton>\r\n        </MCol>\r\n\r\n        <MCol Cols=\"12\" Class=\"mt-12\">\r\n            <MTooltip @bind-Value=\"show\" Top>\r\n                <ActivatorContent>\r\n                    <MButton Icon @attributes=\"@context.Attrs\">\r\n                        <MIcon Color=\"grey lighten-1\">mdi-cart</MIcon>\r\n                    </MButton>\r\n                </ActivatorContent>\r\n                <ChildContent>\r\n                    <span>Programmatic tooltip</span>\r\n                </ChildContent>\r\n            </MTooltip>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n@code\r\n{\r\n    private bool show;\r\n}",
+        "Code": "<MContainer Fluid\r\n            Class=\"text-center\">\r\n    <MRow Class=\"flex\"\r\n          Justify=\"JustifyTypes.SpaceBetween\">\r\n        <MCol Cols=\"12\">\r\n            <MButton OnClick=\"() => show = !show\">\r\n                toggle\r\n            </MButton>\r\n        </MCol>\r\n\r\n        <MCol Cols=\"12\" Class=\"mt-12\">\r\n            <MTooltip @bind-Value=\"show\" Top>\r\n                <ActivatorContent>\r\n                    <MButton Icon @attributes=\"@context.Attrs\">\r\n                        <MIcon Color=\"grey lighten-1\">mdi-cart</MIcon>\r\n                    </MButton>\r\n                </ActivatorContent>\r\n                <ChildContent>\r\n                    <span>Programmatic tooltip</span>\r\n                </ChildContent>\r\n            </MTooltip>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n@code\r\n{\r\n    private bool show;\r\n}",
         "Type": "Demos.Components.Tooltip.props.Visibility",
         "Style": "",
         "Debug": false,
@@ -6605,7 +6735,6 @@
     "Title": "Treeview",
     "Type": "Treeview",
     "Desc": "<p>The MTreeview component is useful for displaying large amounts of nested data.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Treeview.svg",
     "Order": 0,
@@ -6793,7 +6922,6 @@
     "Title": "Upload",
     "Type": "Upload",
     "Desc": "<p>The <code>MFileInput</code> component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.</p>\n",
-    "ApiDoc": "",
     "Cols": 1,
     "Order": 0,
     "DemoList": [
@@ -6826,7 +6954,12 @@
     "Title": "VirtualScroll",
     "Type": "VirtualScroll",
     "Desc": "<p>The MVirtualScroll component displays a virtual, infinite list. It supports dynamic height and scrolling vertically.</p>\n",
-    "ApiDoc": "<section id=\"api\">\r\n                <h2 class=\"m-heading text-h4 text-sm-h4 mb-3\">\r\n                    <a id=\"#api\" class=\"text-decoration-none text-right text-md-left\">#</a>\r\n                    API\r\n                </h2>\n<ul>\n<li><a class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" href=\"/docs/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n</section>",
+    "Apis": [
+      {
+        "Name": "MVirtualScroll",
+        "Href": "/docs/api/MVirtualScroll"
+      }
+    ],
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,

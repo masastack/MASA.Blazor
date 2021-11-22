@@ -179,7 +179,7 @@ namespace MASA.Blazor.Doc.Services
                     }
                 }
 
-                if (string.IsNullOrEmpty(components.ApiDoc) == false)
+                if (components.Apis != null)
                 {
                     contents.Add(ContentsItem.GenerateApi(CurrentLanguage));
                 }
