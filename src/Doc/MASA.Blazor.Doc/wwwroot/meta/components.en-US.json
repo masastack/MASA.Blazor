@@ -8,11 +8,11 @@
     "DemoList": [
       {
         "Order": 1,
-        "Name": "basic",
+        "Name": "index",
         "Title": "Usage",
         "Description": "<p>Alerts in their simplest form are flat sheets of paper that display a message.</p>\n",
         "Code": "<MSheet Class=\"d-flex align-center justify-center\">\r\n    <MAlert Type=\"AlertTypes.Success\">\r\n        I'm an Alert Usage Example\r\n    </MAlert>\r\n</MSheet>",
-        "Type": "Demos.Components.Alert.usage.Basic",
+        "Type": "Demos.Components.Alert.usage.Index",
         "Style": "",
         "Debug": false,
         "Group": 4

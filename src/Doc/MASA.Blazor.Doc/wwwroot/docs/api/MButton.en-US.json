@@ -88,6 +88,12 @@
       "Description": "Sets the height for the component."
     },
     {
+      "Name": "Href",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Icon",
       "Type": "Boolean",
       "Default": "false",
@@ -119,6 +125,12 @@
     },
     {
       "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Link",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
@@ -206,6 +218,18 @@
       "Type": "String",
       "Default": "null",
       "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Target",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Text",
