@@ -15,6 +15,9 @@ namespace MASA.Blazor.Doc.Shared
 {
     public partial class MainLayout : LayoutComponentBase, IDisposable
     {
+        //TODO:use i18n
+        private bool _isEnglish;
+
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 

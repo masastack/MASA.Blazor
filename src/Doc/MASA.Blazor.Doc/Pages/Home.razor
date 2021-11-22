@@ -1,0 +1,557 @@
+﻿@page "/"
+@layout EmptyLayout
+
+<MApp Style="background-color:#F2F3F5">
+    @*<MCard Flat Tile Color="#F2F3F5">
+        <MAppBar Height="80"
+                 Elevation=0
+                 Color="white">
+            <img class="ml-16" src="_content/MASA.Blazor.Doc_content/MASA.Blazor.Doc/img/logo.png" />
+            <MButton Text Color="black" Class="ml-9" OnClick=@(()=>Navigation.NavigateTo(Navigation.BaseUri+"/docs/introduction/why"))>Docs</MButton>
+            <MButton Text Color="black" Class="ml-4">Blog</MButton>
+            <MButton Text Color="black" Class="ml-4">Team</MButton>
+            <MButton Text Color="black" Class="ml-4">Team</MButton>
+
+            <MSpacer></MSpacer>
+
+            <MTextField TValue="string"
+                        HideDetails="true"
+                        Flat
+                        Solo
+                        Dense
+                        Class="mx-2 mx-md-4 rounded-pill"
+                        BackgroundColor="grey lighten-3"
+                        Color="grey lighten-1"
+                        Placeholder="Search"
+                        Style="max-width: 300px;">
+                <PrependInnerContent>
+                    <MIcon Color="grey lighten-1">mdi-magnify</MIcon>
+                </PrependInnerContent>
+            </MTextField>
+            <img class="ml-6" src="_content/MASA.Blazor.Doc_content/MASA.Blazor.Doc/img/download.png" />
+            @if (!_isEnglinsh)
+            {
+                <img class="ml-6 mr-16" src="_content/MASA.Blazor.Doc_content/MASA.Blazor.Doc/img/chinese.png" @onclick="()=>_isEnglinsh=true" />
+            }
+            else
+            {
+                <img class="ml-6 mr-16" src="_content/MASA.Blazor.Doc_content/MASA.Blazor.Doc/img/englinsh.png" @onclick="()=>_isEnglinsh=false" />
+            }
+        </MAppBar>
+
+        <MRow NoGutters Class="mx-14" Align="AlignTypes.Center" Justify="JustifyTypes.Center">
+            <MCol Class="pl-6" Align="@AlignTypes.Center" Cols=6>
+                <div class="banner-box">
+                    <p class="banner-logo-font">
+                        MASA Blazor
+                    </p>
+                    <div class="banner-detail-box">
+                        <p class="banner-detail-font">
+                            基于Material Design设计和Bl
+                            azorComponent的交互能力提供标准的基础组件库。提供如布局、弹框标准、Loading、全局异常处理等标准场景的预置组件。
+                        </p>
+                    </div>
+                    <div class="banner-btn">
+                        <MButton Rounded
+                                 Dark
+                                 Color="#5C2D91"
+                                 Width="163"
+                                 Height="64"
+                                 Class="text-hos-20">Get Started</MButton>
+                        <MButton Rounded
+                                 Dark
+                                 Outlined
+                                 Color="black"
+                                 Height="64"
+                                 Width="283"
+                                 Class="ml-6 text-hos-20">为什么使用MASA Blazor</MButton>
+                        <MButton Rounded
+                                 Dark
+                                 Color="black"
+                                 Height="64"
+                                 Width="153"
+                                 Class="ml-6 text-hos-20">
+                            <MIcon Left>mdi-github</MIcon>
+                            GitHub
+                        </MButton>
+                    </div>
+                </div>
+            </MCol>
+            <MCol Class="pr-6 d-flex justify-end" Cols=6>
+                <MWindow @bind-Value="OnBoarding">
+                    @foreach (var item in Enumerable.Range(0, length))
+                    {
+                        <MWindowItem Value="item">
+                            <MCard Color="#F2F3F5">
+                                <div class="banner-img-box">
+                                    <img src="_content/MASA.Blazor.Doc_content/MASA.Blazor.Doc/img/banner.png" />
+                                </div>
+                            </MCard>
+                        </MWindowItem>
+                    }
+                </MWindow>
+                <MItemGroup @bind-Value="OnBoarding"
+                            Class="text-center"
+                            Mandatory>
+                    @foreach (var item in Enumerable.Range(0, length))
+                    {
+                        <MItem Value="item">
+                            <MButton IsActive="@context.Active"
+                                 Icon
+                                 Click="context.Toggle">
+                                <MIcon>mdi-record</MIcon>
+                            </MButton>
+                        </MItem>
+                    }
+                </MItemGroup>
+            </MCol>
+        </MRow>
+    </MCard>*@
+
+    <MCard Flat Tile Color="#F2F3F5">
+        <MAppBar Height="80"
+                 Elevation=0
+                 Color="white">
+            <img class="ml-16" src="_content/MASA.Blazor.Doc/img/logo.png" onClick=@(()=>Navigation.NavigateTo(Navigation.BaseUri+"/")) />
+            <MButton Text Color="black" Class="ml-9" OnClick=@(()=>Navigation.NavigateTo(Navigation.BaseUri+"/docs/introduction/why"))>Docs</MButton>
+            <MButton Text Color="black" Class="ml-4">Blog</MButton>
+            <MButton Text Color="black" Class="ml-4">Team</MButton>
+
+            <MSpacer></MSpacer>
+
+            <MTextField TValue="string"
+                        HideDetails="true"
+                        Flat
+                        Solo
+                        Dense
+                        Class="mx-2 mx-md-4 rounded-pill"
+                        BackgroundColor="grey lighten-3"
+                        Color="grey lighten-1"
+                        Placeholder="Search"
+                        Style="max-width: 300px;">
+                <PrependInnerContent>
+                    <MIcon Color="grey lighten-1">mdi-magnify</MIcon>
+                </PrependInnerContent>
+            </MTextField>
+            <img class="ml-6" src="_content/MASA.Blazor.Doc/img/download.png" />
+            @if (!_isEnglish)
+            {
+                <img class="ml-6 mr-16" src="_content/MASA.Blazor.Doc/img/chinese.png" @onclick="()=>_isEnglish=true" />
+            }
+            else
+            {
+                <img class="ml-6 mr-16" src="_content/MASA.Blazor.Doc/img/englinsh.png" @onclick="()=>_isEnglish=false" />
+            }
+        </MAppBar>
+
+        <MWindow @bind-Value="OnBoarding">
+            @foreach (var item in Enumerable.Range(0, length))
+            {
+                <MWindowItem Value="item">
+                    <MCard Color="#F2F3F5">
+                        <MRow NoGutters Class="fill-height mx-14" Align="AlignTypes.Center" Justify="JustifyTypes.Center">
+                            <MCol Align="@AlignTypes.Start" Cols=6>
+                                <div class="banner-box">
+                                    <p class="banner-logo-font">
+                                        MASA Blazor
+                                    </p>
+                                    <div class="banner-detail-box">
+                                        <p class="banner-detail-font">
+                                            基于Material Design设计和Bl
+                                            azorComponent的交互能力提供标准的基础组件库。提供如布局、弹框标准、Loading、全局异常处理等标准场景的预置组件。
+                                        </p>
+                                    </div>
+                                    <div class="banner-btn">
+                                        <MButton Rounded
+                                             Dark
+                                             Color="#5C2D91"
+                                             Height="64"
+                                             OnClick=@(()=>Navigation.NavigateTo(Navigation.BaseUri+"/docs/getting-started/installation"))
+                                             Class="text-hos-20 px-6 py-4">Get Started</MButton>
+                                        <MButton Rounded
+                                             Dark
+                                             Outlined
+                                             Color="black"
+                                             Height="64"
+                                             OnClick=@(()=>Navigation.NavigateTo(Navigation.BaseUri+"/docs/introduction/why"))
+                                             Class="ml-6 text-hos-20 px-6 py-4">为什么使用MASA Blazor</MButton>
+                                        <MButton Rounded
+                                             Dark
+                                             Color="black"
+                                             Height="64"
+                                             Width="153"
+                                             Class="ml-6 text-hos-20 px-6 py-4">
+                                            <MIcon Left>mdi-github</MIcon>
+                                            GitHub
+                                        </MButton>
+                                    </div>
+                                </div>
+                            </MCol>
+                            <MCol Class="pr-6 d-flex justify-center" Cols=6>
+                                <div class="img-box">
+                                    <img src="_content/MASA.Blazor.Doc/img/banner.png" />
+                                </div>
+                            </MCol>
+                        </MRow>
+                    </MCard>
+                </MWindowItem>
+            }
+        </MWindow>
+    </MCard>
+
+    <div class="content">
+        <div class="information">
+            <MRow>
+                <MCol>
+                    <MBorder Color="black" Class="rounded-b-xl mt-1" Width="6" Style="height:28px;">
+                        <p class="ml-5" style="font-weight: 900;font-size: 24px;">Information</p>
+                    </MBorder>
+                </MCol>
+                <MCol Class="d-flex justify-end" Align="AlignTypes.Center">
+                    <span style="color:#86909C80">更多内容</span>
+                    <MIcon Color="#86909C80" Class="">mdi-play</MIcon>
+                </MCol>
+            </MRow>
+        </div>
+        <div class="vedio">
+            <MRow NoGutters>
+                <MCol>
+                    <MImage Src="_content/MASA.Blazor.Doc/img/vedio.png" />
+                </MCol>
+                <MCol Class="ml-6" Align="@AlignTypes.Start">
+                    <div class="vedio-p">Keep things consistent with Styles</div>
+                    <div class="vedio-span">Keep things consistent Keep things consistent Keep things consistent Keep things consistent Keep things consistent </div>
+                </MCol>
+            </MRow>
+        </div>
+        <div class="group">
+            <MSlideGroup ShowArrows="@(true)">
+                @foreach (var item in Enumerable.Range(1, 25))
+                {
+                    var index = item % 4;
+                    <MSlideItem>
+                        <MHover Context="hoverContext">
+                            <MCard Color="@("#fff")"
+                               @attributes="hoverContext.Attrs"
+                               Elevation="@(hoverContext.Hover ? 12 : 0)"
+                               Class="@($"ma-6 {hoverContext.Class} rounded-xl")"
+                               Height="340"
+                               Width="348"
+                               OnClick="@context.Toggle"
+                               RefBack="@context.Ref">
+                                <MImage Src="@($"_content/MASA.Blazor.Doc/img/info{index+1}.png")" Height="283">
+                                </MImage>
+                                <BCardText Class="pt-4 pl-4">
+                                    #三体创意合伙人
+                                </BCardText>
+                            </MCard>
+                        </MHover>
+                    </MSlideItem>
+                }
+            </MSlideGroup>
+        </div>
+        <div class="information">
+            <MRow NoGutters Align="AlignTypes.Center">
+                <MCol Align="AlignTypes.Center">
+                    <MBorder Color="black" Class="rounded-b-xl mt-1" Width="6" Style="height:28px;">
+                        <p class="ml-5" style="font-weight: 900;font-size: 24px;">为什么使用MASA Blazor</p>
+                    </MBorder>
+                </MCol>
+                <MCol Class="d-flex justify-end" Align="AlignTypes.Center">
+                    <span style="color:#86909C80">更多内容</span>
+                    <MIcon Color="#86909C80" Class="">mdi-play</MIcon>
+                </MCol>
+            </MRow>
+        </div>
+        <div class="why-use-blazor">
+            <MRow Justify="JustifyTypes.Center">
+                <MCol Lg="4" Md="6" Sm="12">
+                    <MCard Width="471" Height="470" Color="#F9FAFA" Elevation="0">
+                        <div class="d-flex justify-center pt-16">
+                            <img class="mt-4" src="_content/MASA.Blazor.Doc/img/feature1.png">
+                        </div>
+                        <p class="why-use-blazor-p">丰富组件</p>
+                        <p class="why-use-blazor-span">除基础组件，Vuetify组件外，还有很多实用的预置组件</p>
+                    </MCard>
+                </MCol>
+                <MCol Lg="4" Md="6" Sm="12">
+                    <MCard Width="471" Height="470" Color="#F9FAFA" Elevation="0">
+                        <div class="d-flex justify-center pt-16">
+                            <img class="mt-4" src="_content/MASA.Blazor.Doc/img/feature2.png">
+                        </div>
+                        <p class="why-use-blazor-p">UI设计语言</p>
+                        <p class="why-use-blazor-span">设计风格现代,UI体验非常优秀</p>
+                    </MCard>
+                </MCol>
+                <MCol Lg="4" Md="6" Sm="12">
+                    <MCard Width="471" Height="470" Color="#F9FAFA" Elevation="0">
+                        <div class="d-flex justify-center pt-16">
+                            <img class="mt-4" src="_content/MASA.Blazor.Doc/img/feature3.png">
+                        </div>
+                        <p class="why-use-blazor-p">长期支持</p>
+                        <p class="why-use-blazor-span">全职团队维护,长期提供支持.每周发版</p>
+                    </MCard>
+                </MCol>
+                <MCol Lg="4" Md="6" Sm="12">
+                    <MCard Width="471" Height="470" Color="#F9FAFA" Elevation="0">
+                        <div class="d-flex justify-center pt-16">
+                            <img class="mt-4" src="_content/MASA.Blazor.Doc/img/feature4.png">
+                        </div>
+                        <p class="why-use-blazor-p">简易上手</p>
+                        <p class="why-use-blazor-span">极其丰富详细的上手文档,细节非常到位,免费的视频教程</p>
+                    </MCard>
+                </MCol>
+                <MCol Lg="4" Md="6" Sm="12">
+                    <MCard Width="471" Height="470" Color="#F9FAFA" Elevation="0">
+                        <div class="d-flex justify-center pt-16">
+                            <img class="mt-4" src="_content/MASA.Blazor.Doc/img/feature5.png">
+                        </div>
+                        <p class="why-use-blazor-p">社区活跃鼓励</p>
+                        <p class="why-use-blazor-span">用户参与度实时互动,做出贡献加入我们,构建最开放的开源社区</p>
+                    </MCard>
+                </MCol>
+                <MCol Cols="4" Lg="4" Md="6" Sm="12">
+                    <MCard Width="471" Height="470" Color="#F9FAFA" Elevation="0">
+                        <div class="d-flex justify-center pt-16">
+                            <img class="mt-4" src="_content/MASA.Blazor.Doc/img/feature5.png">
+                        </div>
+                        <p class="why-use-blazor-p">丰富组件</p>
+                        <p class="why-use-blazor-span">除基础组件，Vuetify组件外，还有很多实用的预置组件</p>
+                    </MCard>
+                </MCol>
+            </MRow>
+        </div>
+
+        <div class="information">
+            <MRow>
+                <MCol>
+                    <MBorder Color="black" Class="rounded-b-xl mt-1" Width="6" Style="height:28px;">
+                        <p class="ml-5" style="font-weight: 900;font-size: 24px;">Companies using us</p>
+                    </MBorder>
+                </MCol>
+                <MCol Class="d-flex justify-end" Align="AlignTypes.Center">
+                    <span style="color:#86909C80">更多内容</span>
+                    <MIcon Color="#86909C80" Class="">mdi-play</MIcon>
+                </MCol>
+            </MRow>
+        </div>
+        <div class="slide-group-box">
+            <MSlideGroup ShowArrows="@(true)" Class="pa-4" Mandatory>
+                @foreach (var item in Enumerable.Range(1, 25))
+                {
+                    <MSlideItem>
+                        <MCard Color="@(context.Active ? "grey lighten-2" : "white")"
+                           Class="ma-4 rounded-xl"
+                           Ripple="false"
+                           Height="@(context.Active ? 570 : 422)"
+                           Width="@(context.Active ? 570 : 422)"
+                           OnClick="@context.Toggle"
+                           RefBack="@context.Ref">
+                            @if (!context.Active)
+                            {
+                                <div class="d-flex justify-center pt-12">
+                                    <img src="_content/MASA.Blazor.Doc/img/avatar0.png">
+                                </div>
+                                <p class="user-name">MASA 鬼谷子</p>
+                                <p class="user-description">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet</p>
+                            }
+                            else
+                            {
+                                <div class="d-flex justify-center pt-16">
+                                    <img class="avatar-img" src="_content/MASA.Blazor.Doc/img/avatar0.png">
+                                </div>
+                                <p class="user-name-active">MASA 鬼谷子</p>
+                                <p class="user-description-active">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet</p>
+                            }
+                        </MCard>
+                    </MSlideItem>
+                }
+            </MSlideGroup>
+        </div>
+
+        <div class="comperation-company">
+            <div class="comperation-company-box">
+                <MRow Class="fill-height" Justify="JustifyTypes.Center" Align="AlignTypes.Center">
+                    <MCol Class="d-flex justify-center">
+                        <img src="_content/MASA.Blazor.Doc/img/company1.png">
+                    </MCol>
+                    <MCol Class="d-flex justify-center">
+                        <img src="_content/MASA.Blazor.Doc/img/company2.png">
+                    </MCol>
+                    <MCol Class="d-flex justify-center">
+                        <img src="_content/MASA.Blazor.Doc/img/company3.png">
+                    </MCol>
+                    <MCol Class="d-flex justify-center">
+                        <img src="_content/MASA.Blazor.Doc/img/company4.png">
+                    </MCol>
+                </MRow>
+            </div>
+        </div>
+        <div class="information">
+            <MRow>
+                <MCol>
+                    <MBorder Color="black" Class="rounded-b-xl mt-1" Width="6" Style="height:28px;">
+                        <p class="ml-5" style="font-weight: 900;font-size: 24px;">Fresh Conrent</p>
+                    </MBorder>
+                </MCol>
+                <MCol Class="d-flex justify-end" Align="AlignTypes.Center">
+                    <span style="color:#86909C80">更多内容</span>
+                    <MIcon Color="#86909C80" Class="">mdi-play</MIcon>
+                </MCol>
+            </MRow>
+        </div>
+        <div class="group1 slide-group-box">
+            <MSlideGroup ShowArrows="@(true)">
+                @foreach (var item in Enumerable.Range(1, 25))
+                {
+                    var index = item % 4;
+                    <MSlideItem>
+                        <MHover Context="hoverContext">
+                            <MCard Color="@("#fff")"
+                               @attributes="hoverContext.Attrs"
+                               Class="@($"ma-6 {context.ActiveClass} rounded-xl")"
+                               Height="340"
+                               Width="348"
+                               OnClick="@context.Toggle"
+                               RefBack="@context.Ref"
+                               Elevation="@(hoverContext.Hover ? 12 : 0)">
+                                <MImage Src="@($"_content/MASA.Blazor.Doc/img/info{index+1}.png")" Height="283">
+                                </MImage>
+                                <BCardText Class="pt-4 pl-4">
+                                    #三体创意合伙人
+                                </BCardText>
+                            </MCard>
+                        </MHover>
+                    </MSlideItem>
+                }
+            </MSlideGroup>
+        </div>
+
+        <div class="information">
+            <MRow>
+                <MCol>
+                    <MBorder Color="black" Class="rounded-b-xl mt-1" Width="6" Style="height:28px;">
+                        <p class="ml-5" style="font-weight: 900;font-size: 24px;">The Team</p>
+                    </MBorder>
+                </MCol>
+                <MCol Class="d-flex justify-end" Align="AlignTypes.Center">
+                    <span style="color:#86909C80">更多内容</span>
+                    <MIcon Color="#86909C80" Class="">mdi-play</MIcon>
+                </MCol>
+            </MRow>
+        </div>
+        <div class="group2">
+            <MSlideGroup ShowArrows="@(true)">
+                @foreach (var item in Enumerable.Range(1, 25))
+                {
+                    <MSlideItem>
+                        <MCard Color="#fff"
+                           Class="@($"ma-6 {context.ActiveClass} rounded-xl")"
+                           Width="1166"
+                           OnClick="@context.Toggle"
+                           RefBack="@context.Ref">
+                            <MRow NoGutters Class="fill-height ma-6" Align="AlignTypes.Center">
+                                <MCol Cols="4" Align="AlignTypes.Start">
+                                    <MImage Class="rounded-xl" Src="_content/MASA.Blazor.Doc/img/group1.png" Height="355" Width="355">
+                                    </MImage>
+                                </MCol>
+                                <MCol Cols="8" Align="AlignTypes.Start">
+                                    <div style="font-weight: bold; font-size: 32px; line-height: 38px;">王增星</div>
+                                    <div class="mt-6" style="font-size: 20px;line-height: 23px;">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat </div>
+                                </MCol>
+                            </MRow>
+
+                        </MCard>
+                    </MSlideItem>
+                }
+            </MSlideGroup>
+        </div>
+        <div class="contribution">
+            <MRow Align="AlignTypes.End" Style="font-size: 24px; color: #4E5969;">
+                —  14位资深XXX贡献者  —
+            </MRow>
+            <MRow Class="mt-10" Justify="JustifyTypes.Center">
+                @for (var i = 0; i < 10; i++)
+                {
+                    var index = i+1;
+                    <MCol>
+                        <img src=@($"_content/MASA.Blazor.Doc/img/avatar{index}.png")>
+                    </MCol>
+                }
+            </MRow>
+        </div>
+
+        <div class="thanks">
+            <MRow Justify="JustifyTypes.Center" Align="AlignTypes.End" Style="font-size: 24px; color: #4E5969;">
+                —  Thanks  —
+            </MRow>
+            <MRow Class="mt-10" Justify="JustifyTypes.Center">
+                 <MCol>
+                    <img src="_content/MASA.Blazor.Doc/img/Blazor.png"/>
+                </MCol>
+                <MCol>
+                    <img src="_content/MASA.Blazor.Doc/img/MaterialDesign.png"/>
+                </MCol>
+                <MCol>
+                    <img src="_content/MASA.Blazor.Doc/img/Vuetify.png"/>
+                </MCol>
+                <MCol>
+                    <img src="_content/MASA.Blazor.Doc/img/AntDesignBlazor.png"/>
+                </MCol>
+                <MCol>
+                    <img src="_content/MASA.Blazor.Doc/img/BlazorComponent.png"/>
+                </MCol>
+            </MRow>
+        </div>
+    </div>
+
+    <MFooter Dark Padless Color="#5C2D91" Height="500" Style="padding:0 80px;">
+        <MRow NoGutters Class="fill-height pt-16" Justify="JustifyTypes.Center">
+            <MCol Cols="4" Class="mt-12 d-flex justify-center">
+                <div style="width:200px;">
+                    <p class="ma-6">Contribution Guide</p>
+                    <p class="ma-6">Contribution Guide</p>
+                    <p class="ma-6">Contribution Guide</p>
+                </div>
+            </MCol>
+            <MCol Cols="4" Class="mt-12 d-flex justify-center">
+                <div style="width:200px;">
+                    <p class="ma-6">Blog</p>
+                    <p class="ma-6">Docs</p>
+                    <p class="ma-6">More video</p>
+                </div>
+            </MCol>
+            <MCol Cols="4" Class="mt-12 d-flex justify-center">
+                <div style="width:200px;">
+                    <p class="ma-6">Community</p>
+                    <p class="ma-6">Sina</p>
+                    <p class="ma-6">QQ+WeChat</p>
+                </div>
+            </MCol>
+        </MRow>
+    </MFooter>
+</MApp>
+
+@code {
+    private int _height = 422;
+    private int _width = 422;
+    int onboarding = 0;
+
+    StringNumber OnBoarding
+    {
+        get => onboarding;
+        set => onboarding = value.AsT1;
+    }
+
+    int length = 3;
+
+    private void Next()
+    {
+        onboarding = onboarding + 1 == length ? 0 : onboarding + 1;
+    }
+
+    private void Prev()
+    {
+        onboarding = onboarding - 1 < 0 ? length - 1 : onboarding - 1;
+    }
+}

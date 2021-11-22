@@ -20,6 +20,7 @@ namespace MASA.Blazor.Doc.Shared
     {
         private List<ContentsItem> _items { get; set; } = new();
         private CancellationTokenSource _cancellationTokenSource;
+        private bool _disposed;
 
         protected ContentsItem ActiveItem { get; set; }
 
@@ -87,6 +88,11 @@ namespace MASA.Blazor.Doc.Shared
 
         private async void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
+            if (_disposed)
+            {
+                return;
+            }
+
             ActiveItem = null;
             _items = await Service.GetTitlesAsync(NavigationManager.Uri);
 
@@ -111,6 +117,7 @@ namespace MASA.Blazor.Doc.Shared
 
         protected override void Dispose(bool disposing)
         {
+            _disposed = true;
             NavigationManager.LocationChanged -= OnLocationChanged;
         }
     }
