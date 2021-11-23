@@ -23,3 +23,8 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg
 - [MListItemIcon](/docs/api/MListItemIcon)
 - [MListItemSubtitle](/docs/api/MListItemSubtitle)
 - [MListItemTitle](/docs/api/MListItemTitle)
+
+## Caveats
+
+<!--alert:info-->
+如果您要查找有状态列表项，请查看 [**MListItemGroup**](/components/listitemgroup)。

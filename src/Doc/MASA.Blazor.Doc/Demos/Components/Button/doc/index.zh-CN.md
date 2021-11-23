@@ -14,3 +14,9 @@ cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg
 
 - [MButton](/docs/api/MButton)
 - [MButtonGroup](/docs/api/MButtonGroup)
+
+## Caveats
+
+<!--alert:warning--> 
+当使用 **Dark** 属性时，`MButton` 是唯一一种拥有不同行为的组件。 通常来说，组件使用 **Dark** 属性来表示他们将有深色背景，文本也需要是白色的。 虽然这对
+`MButton` 也是起作用的，但由于禁用状态与白色背景容易造成混淆，建议仅在按钮**为**彩色背景时使用此属性。 If you need white text, simply add the `white--text` class.

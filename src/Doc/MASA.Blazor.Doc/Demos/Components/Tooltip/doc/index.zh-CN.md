@@ -13,3 +13,8 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tooltip.svg
 ## API
 
 - [MTooltip](/docs/api/MTooltip)
+
+## Caveats
+
+<!--alert:info-->
+为了正确定位 `MTooltip`，需要一个位置支撑(`Top` | `Bottom` | `Left` | `Right`)。

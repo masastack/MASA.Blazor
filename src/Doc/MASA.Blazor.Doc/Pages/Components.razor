@@ -27,10 +27,21 @@
             </SectionContent>
         }
 
-        @if (_demoComponent.Apis != null)
+        @if (!string.IsNullOrEmpty(_demoComponent.Apis))
         {
             <SectionContent Title="API" Id="api" Level="2" IsAnchor>
                 @((MarkupString)_demoComponent.Apis.FormatLink())
+            </SectionContent>
+        }
+
+        @if (!string.IsNullOrEmpty(_demoComponent.Caveats))
+        {
+            var type = _demoComponent.Caveats.GetAlertType();
+
+            <SectionContent Title="Caveats" Level="2" IsAnchor>
+                <MAlert Type="@type" Border="Borders.Left" Text Class="m-alert--doc">
+                    @((MarkupString)_demoComponent.Caveats.FormatLink())
+                </MAlert>
             </SectionContent>
         }
 
