@@ -110,6 +110,14 @@
     {
       "Name": "ChildContent",
       "Description": "Default Content"
+    },
+    {
+      "Name": "NextContent",
+      "Description": ""
+    },
+    {
+      "Name": "PrevContent",
+      "Description": ""
     }
   ],
   "Events": [

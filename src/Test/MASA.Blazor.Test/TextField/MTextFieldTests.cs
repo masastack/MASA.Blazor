@@ -14,82 +14,261 @@ namespace MASA.Blazor.Test.TextField
     public class MTextFieldTests : TestBase
     {
         [TestMethod]
-        public void RenderShouldHasNoEmptyComponent()
+        public void RenderNormal()
         {
             // Act
             var cut = RenderComponent<MTextField<string>>();
-            var components = cut.FindComponents<EmptyComponent>();
+            var inputDiv = cut.Find("div");
 
             // Assert
-            Assert.AreEqual(0, components.Count);
+            Assert.AreEqual(4, inputDiv.ClassList.Length);
+            Assert.IsTrue(inputDiv.ClassList.Contains("m-input"));
+            Assert.IsTrue(inputDiv.ClassList.Contains("theme--light"));
+            Assert.IsTrue(inputDiv.ClassList.Contains("m-text-field"));
+            Assert.IsTrue(inputDiv.ClassList.Contains("m-text-field--is-booted"));
+            Assert.IsTrue(inputDiv.ClassList.Contains("m-input"));
+
+        }
+
+        [DataTestMethod]
+        [DataRow("red")]
+        [DataRow("blue")]
+        public void RenderWithColorAndFocus(string color)
+        {
+            // Arrange
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(r => r.Color, color);
+            });
+            var inputDiv = cut.Find("div");
+            var inputElement = cut.Find("input");
+
+            // Act
+            inputElement.Focus();
+
+            // Assert
+            Assert.AreEqual(6, inputDiv.ClassList.Length);
+            Assert.IsTrue(inputDiv.ClassList.Contains(color + "--text"));
         }
 
         [TestMethod]
-        public void RenderShouldHasClasses()
+        public void RenderTextFieldWithFullWidth()
         {
-            // Act
-            var cut = RenderComponent<MTextField<string>>();
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.FullWidth, true);
+            });
             var classes = cut.Instance.CssProvider.GetClass();
+            var hasFullWidthClass = classes.Contains("m-text-field--full-width");
 
             // Assert
-            Assert.AreEqual("m-input theme--light m-text-field m-text-field--is-booted", classes);
+            Assert.IsTrue(hasFullWidthClass);
         }
 
         [TestMethod]
-        public void RenderSoloIsSoloShouldBeTrue()
+        public void RenderTextFieldWithSoloInverted()
         {
-            // Act
+            //Act
             var cut = RenderComponent<MTextField<string>>(props =>
             {
-                props.Add(p => p.Solo, true);
+                props.Add(textfield => textfield.SoloInverted, true);
             });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSoloInvertedClass = classes.Contains("m-text-field--solo-inverted");
 
             // Assert
-            Assert.IsTrue(cut.Instance.IsSolo);
+            Assert.IsTrue(hasSoloInvertedClass);
         }
 
         [TestMethod]
-        public async Task HandleOnChangeValueShouldChange()
+        public void RenderTextFieldWithFlat()
         {
-            // Arrange
-            var cut = RenderComponent<MTextField<string>>();
-            var args = new ChangeEventArgs()
-            {
-                Value = "hello"
-            };
-
-            // Act
-            await cut.Instance.HandleOnChangeAsync(args);
-
-            // Assert
-            Assert.AreEqual("hello", cut.Instance.Value);
-        }
-
-        [TestMethod]
-        public async Task HandleOnChangeValueChangedShouldBeCalled()
-        {
-            // Arrange
-            using var factory = new TestEventCallbackFactory();
-
-            var val = "";
+            //Act
             var cut = RenderComponent<MTextField<string>>(props =>
             {
-                props.Add(p => p.ValueChanged, factory.CreateEventCallback<string>(v =>
-                {
-                    val = v;
-                }));
+                props.Add(textfield => textfield.Flat, true);
             });
-
-            // Act
-            var args = new ChangeEventArgs()
-            {
-                Value = "hello"
-            };
-            await factory.Reciever.InvokeAsync(() => cut.Instance.HandleOnChangeAsync(args));
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFlatClass = classes.Contains("m-text-field--solo-flat");
 
             // Assert
-            Assert.AreEqual("hello", cut.Instance.Value);
-            Assert.AreEqual("hello", val);
+            Assert.IsTrue(hasFlatClass);
         }
+
+        [TestMethod]
+        public void RenderTextFieldWithFilled()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Filled, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFilledClass = classes.Contains("m-text-field--filled");
+
+            // Assert
+            Assert.IsTrue(hasFilledClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithReverse()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Reverse, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasReverseClass = classes.Contains("m-text-field--reverse");
+
+            // Assert
+            Assert.IsTrue(hasReverseClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithOutlined()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Outlined, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOutlinedClass = classes.Contains("m-text-field--outlined");
+
+            // Assert
+            Assert.IsTrue(hasOutlinedClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithRounded()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Rounded, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasRoundedClass = classes.Contains("m-text-field--rounded");
+
+            // Assert
+            Assert.IsTrue(hasRoundedClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithShaped()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Shaped, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasShapedClass = classes.Contains("m-text-field--shaped");
+
+            // Assert
+            Assert.IsTrue(hasShapedClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithIsSolo()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Solo, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hassoloClass = classes.Contains("m-text-field--solo");
+
+            // Assert
+            Assert.IsTrue(hassoloClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithSingleLine()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.SingleLine, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSingleLineClass = classes.Contains("m-text-field--single-line");
+
+            // Assert
+            Assert.IsTrue(hasSingleLineClass);
+        }
+
+        //[TestMethod]
+        //public void RenderWithChildContentt()
+        //{
+        //    // Arrange & Act
+        //    var cut = RenderComponent<MTextField<string>>(props =>
+        //    {
+        //        props.Add(textfield => textfield.ChildContent, "<span>Hello world</span>");
+        //    });
+        //    var contentDiv = cut.Find(".m-text-field");
+
+        //    // Assert
+        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
+        //}
+
+        //[TestMethod]
+        //public void RenderWithPrependInnerContent()
+        //{
+        //    // Arrange & Act
+        //    var cut = RenderComponent<MTextField<string>>(props =>
+        //    {
+        //        props.Add(textfield => textfield.PrependInnerContent, "<span>Hello world</span>");
+        //    });
+        //    var textfieldDiv = cut.Find("");
+
+        //    // Assert
+        //    textfieldDiv.Children.MarkupMatches("<span>Hello world</span>");
+        //}
+
+        //[TestMethod]
+        //public void RenderWithAppendOuterContent()
+        //{
+        //    // Arrange & Act
+        //    var cut = RenderComponent<MTextField<string>>(props =>
+        //    {
+        //        props.Add(textfield => textfield.AppendOuterContent, "<span>Hello world</span>");
+        //    });
+        //    var textfieldDiv = cut.Find("");
+
+        //    // Assert
+        //    textfieldDiv.Children.MarkupMatches("<span>Hello world</span>");
+        //}
+
+        //[TestMethod]
+        //public void RenderWithProgressContent()
+        //{
+        //    // Arrange & Act
+        //    var cut = RenderComponent<MTextField<string>>(props =>
+        //    {
+        //        props.Add(textfield => textfield.ProgressContent, "<span>Hello world</span>");
+        //    });
+        //    var textfieldDiv = cut.Find("");
+
+        //    // Assert
+        //    textfieldDiv.Children.MarkupMatches("<span>Hello world</span>");
+        //}
+
+        //[TestMethod]
+        //public void RenderWithCounterContent()
+        //{
+        //    // Arrange & Act
+        //    var cut = RenderComponent<MTextField<string>>(props =>
+        //    {
+        //        props.Add(textfield => textfield.CounterContent, "<span>Hello world</span>");
+        //    });
+        //    var textfieldDiv = cut.Find("");
+
+        //    // Assert
+        //    textfieldDiv.Children.MarkupMatches("<span>Hello world</span>");
+        //}
     }
 }
