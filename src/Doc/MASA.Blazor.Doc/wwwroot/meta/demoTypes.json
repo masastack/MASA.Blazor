@@ -205,6 +205,7 @@
   "Demos.Components.FormInputs.children.Switch.props.Inset",
   "Demos.Components.FormInputs.children.Switch.props.State",
   "Demos.Components.FormInputs.children.Switch.contents.Label",
+  "Demos.Components.FormInputs.children.Switch.misc.CustomText",
   "Demos.Components.FormInputs.children.TextArea.usage.Index",
   "Demos.Components.FormInputs.children.TextArea.props.AutoGrow",
   "Demos.Components.FormInputs.children.TextArea.props.BackgroundColor",

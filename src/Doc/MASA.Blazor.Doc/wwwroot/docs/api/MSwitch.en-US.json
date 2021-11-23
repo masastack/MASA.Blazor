@@ -106,6 +106,12 @@
       "Description": ""
     },
     {
+      "Name": "LeftText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Light",
       "Type": "Boolean",
       "Default": "false",
@@ -142,6 +148,12 @@
       "Description": ""
     },
     {
+      "Name": "RightText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Rules",
       "Type": "IEnumerable`1",
       "Default": "null",
@@ -162,6 +174,12 @@
     {
       "Name": "SuccessMessages",
       "Type": "List`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "TrackColor",
+      "Type": "String",
       "Default": "null",
       "Description": ""
     },

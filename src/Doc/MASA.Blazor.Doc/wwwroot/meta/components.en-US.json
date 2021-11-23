@@ -2624,6 +2624,17 @@
         "Style": "",
         "Debug": false,
         "Group": 2
+      },
+      {
+        "Order": 0,
+        "Name": "customText",
+        "Title": "CustomText",
+        "Description": "<p>TODO...</p>\n",
+        "Code": "<div>\r\n    <MSwitch @bind-Value=\"_show\" LeftText=\"EN\" RightText=\"中\" Color=\"black\" TrackColor=\"#E5E6EB\"></MSwitch>\r\n</div>\r\n\r\n@code {\r\n    private bool _show = true;\r\n}\r\n",
+        "Type": "Demos.Components.FormInputs.children.Switch.misc.CustomText",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
       }
     ],
     "Children": []
