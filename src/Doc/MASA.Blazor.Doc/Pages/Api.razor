@@ -4,10 +4,6 @@
 @inherits OwningComponentBase<DemoService>
 
 <SectionContent Title="@($"{ComponentName} API")" Id="@ComponentName" IsAnchor>
-    <div class="mb-8">
-        <div class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 m-vuetify-ad m-sheet m-sheet--outlined theme--light rounded" medium="docs" style="width: 100%; min-height: 74px;"></div>
-    </div>
-
     @if (_api != null)
     {
         <SectionContent Title="组件页面" Level="2" IsAnchor>
