@@ -42,7 +42,7 @@ namespace MASA.Blazor.Test.Checkbox
         }
 
         [TestMethod]
-        public void RenderCheckboxWithWithDisabled()
+        public void RenderCheckboxWithDisabled()
         {
             //Act
             var cut = RenderComponent<MCheckbox>(props =>

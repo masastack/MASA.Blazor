@@ -12,7 +12,7 @@ namespace MASA.Blazor.Test.Breadcrumbs
     public class MBreadcrumbsTeste:TestBase
     {
         [TestMethod]
-        public void RenderButtonWithLarge()
+        public void RenderBreadcrumbsWithLarge()
         {
             //Act
             var cut = RenderComponent<MBreadcrumbs>(props =>
@@ -27,22 +27,7 @@ namespace MASA.Blazor.Test.Breadcrumbs
         }
 
         [TestMethod]
-        public void RenderButtonNoWithLarge()
-        {
-            //Act
-            var cut = RenderComponent<MBreadcrumbs>(props =>
-            {
-                props.Add(breadcrumbs => breadcrumbs.Large, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasLargeClass = classes.Contains("m-breadcrumbs");
-
-            // Assert
-            Assert.IsTrue(hasLargeClass);
-        }
-
-        [TestMethod]
-        public void RenderAlertWithWithDark()
+        public void RenderBreadcrumbsWithWithDark()
         {
             //Act
             var cut = RenderComponent<MBreadcrumbs>(props =>
@@ -57,22 +42,7 @@ namespace MASA.Blazor.Test.Breadcrumbs
         }
 
         [TestMethod]
-        public void RenderAlertNoWithWithDark()
-        {
-            //Act
-            var cut = RenderComponent<MBreadcrumbs>(props =>
-            {
-                props.Add(breadcrumbs => breadcrumbs.Dark, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasDarkClass = classes.Contains("m-breadcrumbs");
-
-            // Assert
-            Assert.IsTrue(hasDarkClass);
-        }
-
-        [TestMethod]
-        public void RenderAlertWithWithLight()
+        public void RenderBreadcrumbsWithWithLight()
         {
             //Act
             var cut = RenderComponent<MBreadcrumbs>(props =>
@@ -87,22 +57,7 @@ namespace MASA.Blazor.Test.Breadcrumbs
         }
 
         [TestMethod]
-        public void RenderAlertNoWithWithLight()
-        {
-            //Act
-            var cut = RenderComponent<MBreadcrumbs>(props =>
-            {
-                props.Add(breadcrumbs => breadcrumbs.Light, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasLightClass = classes.Contains("m-breadcrumbs");
-
-            // Assert
-            Assert.IsTrue(hasLightClass);
-        }
-
-        [TestMethod]
-        public void RenderWithChildContentt()
+        public void RenderWithChildContent()
         {
             // Arrange & Act
             var cut = RenderComponent<MBreadcrumbs>(props =>
@@ -114,6 +69,5 @@ namespace MASA.Blazor.Test.Breadcrumbs
             // Assert
             contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
-
     }
 }

@@ -12,6 +12,36 @@ namespace MASA.Blazor.Test.Checkbox
     public class MSimpleCheckboxTests:TestBase
     {
         [TestMethod]
+        public void RenderSimpleCheckboxWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MSimpleCheckbox>(props =>
+            {
+                props.Add(simplecheckbox => simplecheckbox.Dark, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-simple-checkbox");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderSimpleCheckboxWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MSimpleCheckbox>(props =>
+            {
+                props.Add(simplecheckbox => simplecheckbox.Light, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-simple-checkbox");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
         public void RenderSimpleCheckboxWithDisabled()
         {
             //Act
@@ -24,6 +54,21 @@ namespace MASA.Blazor.Test.Checkbox
 
             // Assert
             Assert.IsTrue(hasDisabledClass);
+        }
+
+        [TestMethod]
+        public void RenderSimpleCheckboxWithIndeterminate()
+        {
+            //Act
+            var cut = RenderComponent<MSimpleCheckbox>(props =>
+            {
+                props.Add(simplecheckbox => simplecheckbox.Indeterminate, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIndeterminateClass = classes.Contains("m-simple-checkbox");
+
+            // Assert
+            Assert.IsTrue(hasIndeterminateClass);
         }
 
         [TestMethod]

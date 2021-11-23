@@ -27,10 +27,9 @@ namespace MASA.Blazor.Test.Dialog
         }
 
         [TestMethod]
-        public void RendeDialogWithDark()
+        public void RenderDialogWithDark()
         {
             //Act
-            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MDialog>(props =>
             {
                 props.Add(dialog => dialog.Dark, true);
@@ -43,7 +42,7 @@ namespace MASA.Blazor.Test.Dialog
         }
 
         [TestMethod]
-        public void RendeDialogWithDisabled()
+        public void RenderDialogWithDisabled()
         {
             //Act
             var cut = RenderComponent<MDialog>(props =>
@@ -58,7 +57,7 @@ namespace MASA.Blazor.Test.Dialog
         }
 
         [TestMethod]
-        public void RendeDialogWithFullscreen()
+        public void RenderDialogWithFullscreen()
         {
             //Act
             var cut = RenderComponent<MDialog>(props =>
@@ -73,7 +72,7 @@ namespace MASA.Blazor.Test.Dialog
         }
 
         [TestMethod]
-        public void RendeDialogWithLight()
+        public void RenderDialogWithLight()
         {
             //Act
             var cut = RenderComponent<MDialog>(props =>
@@ -87,8 +86,38 @@ namespace MASA.Blazor.Test.Dialog
             Assert.IsTrue(hasLightClass);
         }
 
+        //[TestMethod]
+        //public void RenderWithMaxWidth()
+        //{
+        //    // Act
+        //    var cut = RenderComponent<MDialog>(props =>
+        //    {
+        //        props.Add(p => p.MaxWidth, 100);
+        //    });
+        //    var inputSlotDiv = cut.Find(".");
+        //    var style = inputSlotDiv.GetAttribute("style");
+
+        //    // Assert
+        //    Assert.AreEqual("height: 64px", style);
+        //}
+
+        //[TestMethod]
+        //public void RenderWithWidth()
+        //{
+        //    // Act
+        //    var cut = RenderComponent<MDialog>(props =>
+        //    {
+        //        props.Add(p => p.Width, 100);
+        //    });
+        //    var inputSlotDiv = cut.Find(".");
+        //    var style = inputSlotDiv.GetAttribute("style");
+
+        //    // Assert
+        //    Assert.AreEqual("width: 64px", style);
+        //}
+
         [TestMethod]
-        public void RendeDialogWithOpenDelay()
+        public void RenderDialogWithOpenDelay()
         {
             //Act
             var cut = RenderComponent<MDialog>(props =>
@@ -103,7 +132,7 @@ namespace MASA.Blazor.Test.Dialog
         }
 
         [TestMethod]
-        public void RendeDialogWithOpenOnFocus()
+        public void RenderDialogWithOpenOnFocus()
         {
             //Act
             var cut = RenderComponent<MDialog>(props =>
@@ -118,7 +147,7 @@ namespace MASA.Blazor.Test.Dialog
         }
 
         [TestMethod]
-        public void RendeDialogWithOpenOnHover()
+        public void RenderDialogWithOpenOnHover()
         {
             //Act
             var cut = RenderComponent<MDialog>(props =>
@@ -133,7 +162,7 @@ namespace MASA.Blazor.Test.Dialog
         }
 
         [TestMethod]
-        public void RendeDialogWithPersistent()
+        public void RenderDialogWithPersistent()
         {
             //Act
             var cut = RenderComponent<MDialog>(props =>
@@ -148,7 +177,7 @@ namespace MASA.Blazor.Test.Dialog
         }
 
         [TestMethod]
-        public void RendeDialogWithScrollable()
+        public void RenderDialogWithScrollable()
         {
             //Act
             var cut = RenderComponent<MDialog>(props =>
@@ -170,40 +199,10 @@ namespace MASA.Blazor.Test.Dialog
         //    {
         //        props.Add(dialog => dialog.ChildContent, "<span>Hello world</span>");
         //    });
-        //    var contentDiv = cut.Find(".");
+        //    var contentDiv = cut.Find(".m-dialog__container");
 
         //    // Assert
         //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
-
-        //[TestMethod]
-        //public void RenderWithWidth()
-        //{
-        //    // Act
-        //    var cut = RenderComponent<MDialog>(props =>
-        //    {
-        //        props.Add(p => p.Width, 100);
-        //    });
-        //    var inputSlotDiv = cut.Find(".");
-        //    var style = inputSlotDiv.GetAttribute("style");
-
-        //    // Assert
-        //    Assert.AreEqual("width: 100px", style);
-        //}
-
-        //[TestMethod]
-        //public void RenderWithMaxWidth()
-        //{
-        //    // Act
-        //    var cut = RenderComponent<MDialog>(props =>
-        //    {
-        //        props.Add(p => p.MaxWidth, 300);
-        //    });
-        //    var inputSlotDiv = cut.Find(".");
-        //    var style = inputSlotDiv.GetAttribute("style");
-
-        //    // Assert
-        //    Assert.AreEqual("max-width:300px", style);
         //}
     }
 }

@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.FileInput
+namespace MASA.Blazor.Test.Breadcrumbs
 {
     [TestClass]
-    public  class MFileInputTests:TestBase
+    public class MBreadcrumbsItemTests:TestBase
     {
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
+using Bunit;
 
 namespace MASA.Blazor.Test.Radio
 {
@@ -16,7 +17,7 @@ namespace MASA.Blazor.Test.Radio
             //Act
             var cut = RenderComponent<MRadio<string>>(props =>
             {
-                props.Add(counter => counter.Dark, true);
+                props.Add(radio => radio.Dark, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasDarkClass = classes.Contains("theme--dark");
@@ -31,7 +32,7 @@ namespace MASA.Blazor.Test.Radio
             //Act
             var cut = RenderComponent<MRadio<string>>(props =>
             {
-                props.Add(counter => counter.Light, true);
+                props.Add(radio => radio.Light, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasLightClass = classes.Contains("theme--light");
@@ -55,6 +56,34 @@ namespace MASA.Blazor.Test.Radio
             Assert.IsTrue(hasIsDisabledClass);
         }
 
-        
+        [TestMethod]
+        public void RenderRadioWithIsReadonly()
+        {
+            //Act
+            var cut = RenderComponent<MRadio<string>>(props =>
+            {
+                props.Add(counter => counter.IsReadonly, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIsDisabledClass = classes.Contains("m-radio");
+
+            // Assert
+            Assert.IsTrue(hasIsDisabledClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioWithRipple()
+        {
+            //Act
+            var cut = RenderComponent<MRadio<string>>(props =>
+            {
+                props.Add(counter => counter.Ripple, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIsDisabledClass = classes.Contains("m-radio");
+
+            // Assert
+            Assert.IsTrue(hasIsDisabledClass);
+        }
     }
 }

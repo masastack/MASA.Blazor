@@ -479,7 +479,7 @@ namespace MASA.Blazor.Test.Button
         }
 
         [TestMethod]
-        public void RenderButtonAndClick()
+        public void RenderButtonAndOnClick()
         {
             // Arrange
             var times = 0;

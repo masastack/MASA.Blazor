@@ -12,7 +12,7 @@ namespace MASA.Blazor.Test.Divider
     public class MDividerTests:TestBase
     {
         [TestMethod]
-        public void RenderDividerWithWithDark()
+        public void RenderDividerWithDark()
         {
             //Act
             var cut = RenderComponent<MDivider>(props =>
@@ -27,22 +27,7 @@ namespace MASA.Blazor.Test.Divider
         }
 
         [TestMethod]
-        public void RenderDividerNoWithWithDark()
-        {
-            //Act
-            var cut = RenderComponent<MDivider>(props =>
-            {
-                props.Add(divider => divider.Dark, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasDarkClass = classes.Contains("m-divider");
-
-            // Assert
-            Assert.IsTrue(hasDarkClass);
-        }
-
-        [TestMethod]
-        public void RenderDividerWithWithLight()
+        public void RenderDividerWithLight()
         {
             //Act
             var cut = RenderComponent<MDivider>(props =>
@@ -57,22 +42,7 @@ namespace MASA.Blazor.Test.Divider
         }
 
         [TestMethod]
-        public void RenderDividerNoWithWithLight()
-        {
-            //Act
-            var cut = RenderComponent<MDivider>(props =>
-            {
-                props.Add(divider => divider.Light, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasLightClass = classes.Contains("m-divider");
-
-            // Assert
-            Assert.IsTrue(hasLightClass);
-        }
-
-        [TestMethod]
-        public void RenderDividerWithWithInset()
+        public void RenderDividerWithInset()
         {
             //Act
             var cut = RenderComponent<MDivider>(props =>
@@ -87,22 +57,7 @@ namespace MASA.Blazor.Test.Divider
         }
 
         [TestMethod]
-        public void RenderDividerNoWithWithInset()
-        {
-            //Act
-            var cut = RenderComponent<MDivider>(props =>
-            {
-                props.Add(divider => divider.Inset, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasInsetClass = classes.Contains("m-divider");
-
-            // Assert
-            Assert.IsTrue(hasInsetClass);
-        }
-
-        [TestMethod]
-        public void RenderDividerWithWithVertical()
+        public void RenderDividerWithVertical()
         {
             //Act
             var cut = RenderComponent<MDivider>(props =>
@@ -111,21 +66,6 @@ namespace MASA.Blazor.Test.Divider
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasVerticalClass = classes.Contains("m-divider--vertical");
-
-            // Assert
-            Assert.IsTrue(hasVerticalClass);
-        }
-
-        [TestMethod]
-        public void RenderDividerNoWithWithVertical()
-        {
-            //Act
-            var cut = RenderComponent<MDivider>(props =>
-            {
-                props.Add(divider => divider.Vertical, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasVerticalClass = classes.Contains("m-divider");
 
             // Assert
             Assert.IsTrue(hasVerticalClass);

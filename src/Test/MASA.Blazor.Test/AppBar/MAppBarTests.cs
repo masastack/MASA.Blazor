@@ -20,10 +20,10 @@ namespace MASA.Blazor.Test.AppBar
                 props.Add(appbar => appbar.Absolute, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var noAbsoluteClass = !classes.Contains("m-app-bar--fixed");
+            var hasAbsoluteClass = classes.Contains("m-app-bar");
 
             // Assert
-            Assert.IsTrue(noAbsoluteClass);
+            Assert.IsTrue(hasAbsoluteClass);
         }
 
         [TestMethod]
