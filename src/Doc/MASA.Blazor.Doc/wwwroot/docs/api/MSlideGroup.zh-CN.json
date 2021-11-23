@@ -86,6 +86,14 @@
     {
       "Name": "ChildContent",
       "Description": "默认插槽"
+    },
+    {
+      "Name": "NextContent",
+      "Description": ""
+    },
+    {
+      "Name": "PrevContent",
+      "Description": ""
     }
   ],
   "Events": [

@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BlazorComponent.Doc.Models;
+﻿using BlazorComponent.Doc.Models;
 using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
 using MASA.Blazor.Doc.Localization;
-using System.Diagnostics;
 
 namespace MASA.Blazor.Doc.Pages
 {
     public partial class Components
     {
+        // TODO: i18n {zh-CN}
+        private static string _githubUrlTemplate =
+            "https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Doc/MASA.Blazor.Doc/Demos/Components/{0}/doc/index.zh-CN.md";
+
         private DemoComponentModel _demoComponent;
         private int _demoIndex;
 
@@ -23,6 +23,8 @@ namespace MASA.Blazor.Doc.Pages
 
         private List<DemoItemModel> MiscList { get; set; }
 
+        private string GithubUrlHref { get; set; }
+        
         [Inject]
         private ILanguageService LanguageService { get; set; }
 
@@ -42,7 +44,7 @@ namespace MASA.Blazor.Doc.Pages
             }
 
             _demoComponent = await Service.GetComponentAsync(Name);
-
+            
             var demos = _demoComponent.DemoList?
                 .Where(x => !x.Debug && !x.Docs.HasValue)
                 .OrderBy(x => x.Order)
@@ -53,6 +55,8 @@ namespace MASA.Blazor.Doc.Pages
             EventsList = demos.Where(demo => demo.Group == DemoGroup.Events).ToList();
             ContentsList = demos.Where(demo => demo.Group == DemoGroup.Contents).ToList();
             MiscList = demos.Where(demo => demo.Group == DemoGroup.Misc).ToList();
+            
+            GithubUrlHref = string.Format(_githubUrlTemplate, _demoComponent.Title);
 
             _demoIndex = 0;
         }

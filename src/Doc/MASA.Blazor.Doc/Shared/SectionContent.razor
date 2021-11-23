@@ -1,5 +1,5 @@
-﻿<section id="@SectionId">
-    <HTag Level="@Level" Title="@FormattedTitle" Href="@SectionId" IsAnchor="IsAnchor" OnClick="HandleOnClick" />
+﻿<section id="@SectionId" class="@Class">
+    <HTag Level="@Level" Title="@FormattedTitle" Href="@SectionId" IsAnchor="IsAnchor" OnClick="HandleOnClick"/>
 
     @ChildContent
 </section>
@@ -8,6 +8,9 @@
 
     [Inject]
     private IJSRuntime Js { get; set; }
+
+    [Parameter]
+    public string Class { get; set; }
 
     [Parameter]
     [EditorRequired]

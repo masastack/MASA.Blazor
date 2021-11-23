@@ -10,6 +10,7 @@ namespace MASA.Blazor.Doc.Utils
             {
                 return null;
             }
+
             char[] whiteSpace = { '\r', '\n', '\f', '\t', '\v' };
             return str.Trim(whiteSpace).Trim();
         }
@@ -27,6 +28,13 @@ namespace MASA.Blazor.Doc.Utils
         public static string FixSpaceForWeb(this string str)
         {
             return str.Replace(" ", "&nbsp;");
+        }
+
+        public static string FormatLink(this string markup)
+        {
+            if (markup == null) return null;
+            
+            return ApisHelper.FormatMarkup(markup);
         }
     }
 }

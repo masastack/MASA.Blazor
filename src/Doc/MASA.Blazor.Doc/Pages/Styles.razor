@@ -3,6 +3,7 @@
 
 @using BlazorComponent.Doc.Models
 @using MASA.Blazor.Doc.Services
+@using MASA.Blazor.Doc.Utils
 @inherits OwningComponentBase<DemoService>
 @inject NavigationManager NavigationManager
 @layout DocLayout
@@ -11,7 +12,7 @@
 {
     <SectionContent Title="@_demoComponent.Title" SubTitle="@_demoComponent.SubTitle" Id="@_demoComponent.Title" Level="1" IsAnchor>
 
-        @((MarkupString)_demoComponent.Desc)
+        @((MarkupString)_demoComponent.Desc.FormatLink())
 
         @if (Usage != null)
         {
@@ -23,17 +24,7 @@
         @if (_demoComponent.Apis != null)
         {
             <SectionContent Title="API" Id="api" Level="2" IsAnchor>
-                <ul>
-                    @foreach (var item in _demoComponent.Apis)
-                    {
-                        <li>
-                            <a href="@item.Href" class="app-link text-decoration-none primary--text font-weight-medium d-inline-block">
-                                @item.Name
-                                <MIcon Color="primary" Small>mdi-page-next</MIcon>
-                            </a>
-                        </li>
-                    }
-                </ul>
+                @((MarkupString)_demoComponent.Apis.FormatLink())
             </SectionContent>
         }
 
