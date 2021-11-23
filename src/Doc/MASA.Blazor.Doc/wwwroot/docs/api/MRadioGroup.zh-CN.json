@@ -148,6 +148,12 @@
       "Description": "单选框行显示"
     },
     {
+      "Name": "Rules",
+      "Type": "IEnumerable`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",

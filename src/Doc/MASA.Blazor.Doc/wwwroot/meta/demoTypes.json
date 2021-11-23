@@ -230,6 +230,7 @@
   "Demos.Components.FormInputs.children.TextField.props.Shaped",
   "Demos.Components.FormInputs.children.TextField.props.SingleLine",
   "Demos.Components.FormInputs.children.TextField.props.Solo",
+  "Demos.Components.FormInputs.children.TextField.props.Validation",
   "Demos.Components.FormInputs.children.TextField.events.IconEvents",
   "Demos.Components.FormInputs.children.TextField.contents.IconSlots",
   "Demos.Components.FormInputs.children.TextField.contents.Label",

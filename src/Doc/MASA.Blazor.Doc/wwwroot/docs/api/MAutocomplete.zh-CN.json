@@ -298,6 +298,12 @@
       "Description": "对指定的组件应用 border-radius 样式。"
     },
     {
+      "Name": "Rules",
+      "Type": "IEnumerable`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Shaped",
       "Type": "Boolean",
       "Default": "false",

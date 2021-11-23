@@ -142,6 +142,12 @@
       "Description": ""
     },
     {
+      "Name": "Rules",
+      "Type": "IEnumerable`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",

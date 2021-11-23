@@ -11,6 +11,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool IsFull { get; set; }
 
+        [EditorRequired]
         [Parameter]
         public Func<TItem, List<TItem>> ItemChildren { get; set; }
 
