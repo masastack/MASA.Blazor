@@ -409,10 +409,10 @@ code[class*=language-], pre[class*=language-] {
     min-height: 32px;
 }
 
-.m-list-group.m-list-group--default .m-list-group__header > .m-list-item__icon {
-    margin-bottom: 6px;
-    margin-top: 6px;
-}
+    .m-list-group.m-list-group--default .m-list-group__header > .m-list-item__icon {
+        margin-bottom: 6px;
+        margin-top: 6px;
+    }
 
 .m-application--is-ltr .m-list--dense.m-list--nav .m-list-group--no-action.m-list-group--sub-group > .m-list-group__items > .m-list-item {
     padding-left: 80px;
@@ -441,14 +441,84 @@ code[class*=language-], pre[class*=language-] {
     height: 36px;
 }
 
-.m-presets-page-header--h-actions > * {
-    margin: 0 4px;
-}
+    .m-presets-page-header--h-actions > * {
+        margin: 0 4px;
+    }
 
-.m-presets-page-header--h-actions > *:last-child {
-    margin-right: 0px;
-}
+        .m-presets-page-header--h-actions > *:last-child {
+            margin-right: 0px;
+        }
 
 .m-sheet.m-stepper:not(.m-sheet--outlined) {
     box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
 }
+
+.m-input--switch--text .m-input--switch__track {
+    border-radius: 17px;
+    height: 34px;
+    width: 64px;
+    top: calc(50% - 17px);
+    left: -2px;
+}
+
+.m-input--switch--text .m-input--switch__thumb {
+    top: calc(50% - 15px);
+    height: 30px;
+    width: 30px;
+}
+
+.m-application--is-ltr .m-input--switch--text.m-input--is-dirty .m-input--selection-controls__ripple, .m-application--is-ltr .m-input--switch--text.m-input--is-dirty .m-input--switch__thumb {
+    transform: translate(30px, 0) !important;
+}
+
+.m-input--switch--text .m-input--switch__left {
+    color: #fff;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    top: calc(50% - 15px);
+    text-align: center;
+    font-size: 14px;
+}
+
+.m-input--switch--text .m-input--switch__right {
+    position: absolute;
+    right: -22px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    top: calc(50% - 15px);
+    font-size: 14px;
+}
+
+.m-input--switch--text.m-input--is-dirty .m-input--switch__left {
+    color: inherit
+}
+
+.m-input--switch--text.m-input--is-dirty .m-input--switch__right {
+    color: #fff
+}
+
+.m-input--switch--text .m-input--selection-controls__ripple {
+    width: 44px;
+    height: 44px;
+    top: calc(50% - 30px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

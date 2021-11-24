@@ -2,6 +2,10 @@
     <MTextarea Filled
                Label="Label"
                AutoGrow
-               Value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.">
+               @bind-Value="_value">
     </MTextarea>
 </MContainer>
+
+@code{
+    private string _value = "The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.";
+}

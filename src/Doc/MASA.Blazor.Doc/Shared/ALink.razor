@@ -1,0 +1,11 @@
+﻿<a href="@Href"
+   target="@Target"
+   class="app-link text-decoration-none primary--text font-weight-medium d-inline-block"
+   @attributes="@Attributes">
+    @ChildContent
+
+    @if (Icon != null)
+    {
+        <MIcon Class="@($"m{(IsSamePage ? "r" : "l")}-1")" Color="primary" Size="@(".875rem")">@Icon</MIcon>
+    }
+</a>

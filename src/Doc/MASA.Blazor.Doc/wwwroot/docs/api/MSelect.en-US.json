@@ -286,6 +286,12 @@
       "Description": "Designates the border-radius applied to the component."
     },
     {
+      "Name": "Rules",
+      "Type": "IEnumerable`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Shaped",
       "Type": "Boolean",
       "Default": "false",

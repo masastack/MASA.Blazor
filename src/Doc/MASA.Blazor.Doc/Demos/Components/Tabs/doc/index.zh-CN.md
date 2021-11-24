@@ -17,3 +17,8 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tabs.svg
 - [MTabItem](/docs/api/MTabItem)
 - [MTabsItems](/docs/api/MTabsItems)
 - [MTabsSlider](/docs/api/MTabsSlider)
+
+## Caveats
+
+<!--alert:warning-->
+当使用 **Dark** 属性和 **不** 提供自定义 **Color** 时，`MTabs`组件会将其颜色默认为 white。

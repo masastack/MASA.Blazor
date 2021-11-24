@@ -20,6 +20,15 @@ namespace MASA.Blazor
         [Parameter]
         public EventCallback<bool> OnChange { get; set; }
 
+        [Parameter]
+        public string LeftText { get; set; }
+
+        [Parameter]
+        public string RightText { get; set; }
+
+        [Parameter]
+        public string TrackColor { get; set; }
+
         public override bool IsDirty => Value;
 
         public Dictionary<string, object> InputAttrs { get; set; } = new();
@@ -30,7 +39,9 @@ namespace MASA.Blazor
 
         public override bool HasColor => Value;
 
-        public string TextColor => IsLoading ? null : ValidationState;
+        public bool HasText => LeftText != null || RightText != null;
+
+        public string TextColor => HasText ? ComputedColor : (IsLoading ? null : ValidationState);
 
         public Task HandleOnBlur(FocusEventArgs args)
         {
@@ -64,7 +75,8 @@ namespace MASA.Blazor
                         .Add($"{prefix}--selection-controls")
                         .Add($"{prefix}--switch")
                         .AddIf($"{prefix}--switch--flat", () => Flat)
-                        .AddIf($"{prefix}--switch--inset", () => Inset);
+                        .AddIf($"{prefix}--switch--inset", () => Inset)
+                        .AddIf($"{prefix}--switch--text", () => HasText);
                 })
                 .Apply("switch", cssBuilder =>
                 {
@@ -81,8 +93,12 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-input--switch__track")
-                        .AddTextColor(TextColor)
+                        .AddTextColor(TrackColor ?? TextColor)
                         .AddTheme(IsDark);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddTextColor(TrackColor ?? TextColor);
                 })
                 .Apply("thumb", cssBuilder =>
                 {
@@ -90,6 +106,20 @@ namespace MASA.Blazor
                         .Add("m-input--switch__thumb")
                         .AddTextColor(TextColor)
                         .AddTheme(IsDark);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddTextColor(TrackColor ?? TextColor);
+                })
+                .Apply("left", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input--switch__left");
+                })
+                .Apply("right", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input--switch__right");
                 });
 
             AbstractProvider

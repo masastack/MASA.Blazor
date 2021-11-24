@@ -107,9 +107,12 @@ namespace MASA.Blazor
                 .ApplyLoadable(Loading, Color, LoaderHeight);
         }
 
-        protected override Task HandleOnClick(MouseEventArgs args)
+        protected override async Task HandleOnClick(MouseEventArgs args)
         {
-            return OnClick.InvokeAsync(args);
+            if (OnClick.HasDelegate)
+            {
+                await OnClick.InvokeAsync(args);
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sliders.svg
 
 ---
 
-v-slider 组件是一个更好的可视化数字输入工具。 它用于收集数字数据。
+`MSlider` 组件是一个更好的可视化数字输入工具。 它用于收集数字数据。
 
 ## API
 

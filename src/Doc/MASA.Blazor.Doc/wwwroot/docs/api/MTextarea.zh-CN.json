@@ -256,6 +256,12 @@
       "Description": ""
     },
     {
+      "Name": "Rules",
+      "Type": "IEnumerable`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Shaped",
       "Type": "Boolean",
       "Default": "false",

@@ -265,6 +265,16 @@ namespace MASA.Blazor
             {
                 App = Document.QuerySelector("[data-app]");
             }
+
+            CheckTValue();
+        }
+
+        protected virtual void CheckTValue()
+        {
+            if (typeof(TValue) != typeof(double))
+            {
+                throw new ArgumentNullException(nameof(TValue), "Only double supported");
+            }
         }
 
         protected override void OnParametersSet()

@@ -56,9 +56,7 @@ namespace MASA.Blazor.Doc.Pages
         {
             if (!string.IsNullOrEmpty(FileName))
             {
-                var baseUrl = new Uri("http://127.0.0.1:5000");
-                var docUrl = new Uri(baseUrl, $"_content/MASA.Blazor.Doc/docs/{(Dir == null ? "" : Dir + "/")}{FileName}.{CurrentLanguage}.json").ToString();
-                _file = await Service.GetDocFileAsync(docUrl);
+                _file = await Service.GetDocFileAsync($"_content/MASA.Blazor.Doc/docs/{(Dir == null ? "" : Dir + "/")}{FileName}.{CurrentLanguage}.json");
                 _waitingHighlight = true;
 
                 //await MainLayout.ChangePrevNextNav(FileName);

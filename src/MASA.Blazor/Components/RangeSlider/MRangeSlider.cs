@@ -194,6 +194,14 @@ namespace MASA.Blazor
             InternalValue = Value;
         }
 
+        protected override void CheckTValue()
+        {
+            if (typeof(TValue) != typeof(double))
+            {
+                throw new ArgumentNullException(nameof(TValue), "Only double supported");
+            }
+        }
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();

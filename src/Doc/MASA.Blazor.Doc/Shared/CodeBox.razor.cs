@@ -10,9 +10,8 @@ public partial class CodeBox
 {
     private const int Await = 2000;
 
-    // TODO: 'develop' need to replace with 'master'
     private static string _githubUrlTemplate =
-        "https://github.com/BlazorComponent/MASA.Blazor/blob/develop/src/Doc/MASA.Blazor.Doc/{0}.razor";
+        "https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Doc/MASA.Blazor.Doc/{0}.razor";
 
     private readonly static(string type, string lang) Template = ("template", "html");
     private readonly static(string type, string lang) Code = ("code", "csharp");
@@ -59,26 +58,27 @@ public partial class CodeBox
 
         if (Demo.Code == null) return;
 
-        var styleIndex = Demo.Code.IndexOf("<style>", StringComparison.Ordinal);
-        var codeIndex = Demo.Code.IndexOf("@code", StringComparison.Ordinal);
+        var styleFrom = Demo.Code.IndexOf("<style", StringComparison.Ordinal);
+        var styleTo = Demo.Code.IndexOf("</style>", StringComparison.Ordinal) + "</style>".Length;
 
-        if (styleIndex > -1)
+        var code = Demo.Code;
+        if (styleFrom > -1 && styleTo > -1)
         {
-            var length = codeIndex > -1 ? codeIndex - styleIndex : 0;
-            _items[Style] = length > 0
-                ? Demo.Code.Substring(styleIndex, length).Trim()
-                : Demo.Code.Substring(styleIndex).Trim();
+            var styleContent = Demo.Code.Substring(styleFrom, styleTo - styleFrom);
+            _items[Style] = styleContent;
+
+            code = code.Replace(styleContent, "");
         }
 
-        if (codeIndex > -1)
+        var index = code.IndexOf("@code");
+        if (index > 0)
         {
-            var length = styleIndex > -1 ? styleIndex : codeIndex;
-            _items[Template] = Demo.Code.Substring(0, length).Trim();
-            _items[Code] = Demo.Code.Substring(codeIndex).Trim();
+            _items[Template] = code.Substring(0, index).Trim();
+            _items[Code] = code.Substring(index).Trim();
         }
         else
         {
-            _items[Template] = Demo.Code.Trim();
+            _items[Template] = code.Trim();
         }
     }
 

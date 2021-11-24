@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.gitlab-ci.yml = ..\.gitlab-ci.yml
 		..\CHANGELOG = ..\CHANGELOG
 		..\README.md = ..\README.md
+		..\README.zh-CN.md = ..\README.zh-CN.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorComponent.Doc.Models", "BlazorComponent\src\Doc\BlazorComponent.Doc.Models\BlazorComponent.Doc.Models.csproj", "{F3F5874D-7868-4B41-8AD1-4E5E0A5FBD0B}"

@@ -154,6 +154,12 @@
       "Description": ""
     },
     {
+      "Name": "Rules",
+      "Type": "IEnumerable`1",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Step",
       "Type": "Double",
       "Default": "",

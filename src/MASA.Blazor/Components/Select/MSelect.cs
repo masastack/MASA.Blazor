@@ -73,15 +73,18 @@ namespace MASA.Blazor
             }
         }
 
+        [EditorRequired]
         [Parameter]
-        public Func<TItem, string> ItemText { get; set; } = null!;
+        public Func<TItem, string> ItemText { get; set; }
+
+        [EditorRequired]
+        [Parameter]
+        public Func<TItem, TItemValue> ItemValue { get; set; }
 
         [Parameter]
-        public Func<TItem, TItemValue> ItemValue { get; set; } = null!;
+        public Func<TItem, bool> ItemDisabled { get; set; } = item => false;
 
-        [Parameter]
-        public Func<TItem, bool> ItemDisabled { get; set; } = (item) => false;
-
+        [EditorRequired]
         [Parameter]
         public IReadOnlyList<TItem> Items { get; set; } = new List<TItem>();
 

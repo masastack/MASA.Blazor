@@ -3,121 +3,147 @@
 @using MASA.Blazor.Doc.Services
 @inherits OwningComponentBase<DemoService>
 
-<h1 class="m-heading text-h3 text-sm-h3 mb-4">
-    <a class="text-decoration-none text-right text-md-left"> # </a> @ComponentName API
-</h1>
-<div class="mb-8">
-    <div class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 m-vuetify-ad m-sheet m-sheet--outlined theme--light rounded" medium="docs" style="width: 100%; min-height: 74px;"></div>
-</div>
-@if (_api != null)
-{
-    <section>
-        <h2 class="m-heading text-h4 text-sm-h4 mb-3">
-            <a class="text-decoration-none text-right text-md-left"> # </a> 组件页面
-        </h2>
-        <ul>
-            @if (_api.Components != null)
-            {
-                foreach (var component in _api.Components)
+<SectionContent Title="@($"{ComponentName} API")" Id="@ComponentName" IsAnchor>
+    @if (_api != null)
+    {
+        <SectionContent Title="组件页面" Level="2" IsAnchor>
+            <ul>
+                @if (_api.Components != null)
                 {
-                    var href = "/components/" + component;
-                    <li><a class="app-link text-decoration-none primary--text font-weight-medium d-inline-block" href="@href">@component</a></li>
+                    foreach (var component in _api.Components)
+                    {
+                        var href = "/components/" + component;
+                        <li>
+                            <ALink Href="@href">@component</ALink>
+                        </li>
+                    }
                 }
-            }
-        </ul>
-        <div>
-            <MRow NoGutters>
-                <MCol>
-                    <h2 class="text-capitalize m-heading text-h4 text-sm-h4 mb-3" id="section-@BlazorComponent.Doc.Extensions.HashHelper.Hash("属性")">
-                        <a class="text-decoration-none text-right text-md-left"> # </a> 属性
-                    </h2>
-                    <MSheet Class="overflow-hidden mb-4" Outlined Rounded="true">
-                        <MDataTable Headers="_headers" Class="api-table" Items="_api.Props" ItemsPerPage="int.MaxValue" HideDefaultFooter>
-                            <ItemContent>
-                                <tr class="regular-row">
-                                    <td>
-                                        <span class="text-mono font-weight-bold" style="color: rgb(128,0,128)">
-                                            @context.Item.Name
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <div class="text-mono" style="color: rgb(43,145,175)">
-                                            @context.Item.Type
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-mono" style="color:blue">
-                                            @context.Item.Default
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="m-markdown">
-                                            <p>
-                                                @context.Item.Description
-                                            </p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ItemContent>
-                        </MDataTable>
-                    </MSheet>
-                </MCol>
-            </MRow>
-            <MRow NoGutters>
-                <MCol>
-                    <h2 class="text-capitalize m-heading text-h4 text-sm-h4 mb-3" id="section-@BlazorComponent.Doc.Extensions.HashHelper.Hash("插槽")">
-                        <a class="text-decoration-none text-right text-md-left"> # </a> 插槽
-                    </h2>
-                    <MSheet Class="overflow-hidden mb-4" Outlined Rounded="true">
-                        <MDataTable Headers="_headers2" Class="api-table" Items="_api.Contents" ItemsPerPage="int.MaxValue" HideDefaultFooter>
-                            <ItemContent>
-                                <tr class="regular-row">
-                                    <td>
-                                        <span class="text-mono font-weight-bold" style="color: rgb(128,0,128)">
-                                            @context.Item.Name
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <div class="m-markdown">
-                                            <p>
-                                                @context.Item.Description
-                                            </p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ItemContent>
-                        </MDataTable>
-                    </MSheet>
-                </MCol>
-            </MRow>
-            <MRow NoGutters>
-                <MCol>
-                    <h2 class="text-capitalize m-heading text-h4 text-sm-h4 mb-3" id="section-@BlazorComponent.Doc.Extensions.HashHelper.Hash("事件")">
-                        <a class="text-decoration-none text-right text-md-left"> # </a> 事件
-                    </h2>
-                    <MSheet Class="overflow-hidden mb-4" Outlined Rounded="true">
-                        <MDataTable Headers="_headers2" Class="api-table" Items="_api.Events" ItemsPerPage="int.MaxValue" HideDefaultFooter>
-                            <ItemContent>
-                                <tr class="regular-row">
-                                    <td>
-                                        <span class="text-mono font-weight-bold" style="color: rgb(128,0,128)">
-                                            @context.Item.Name
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <div class="m-markdown">
-                                            <p>
-                                                @context.Item.Description
-                                            </p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ItemContent>
-                        </MDataTable>
-                    </MSheet>
-                </MCol>
-            </MRow>
-        </div>
-    </section>
-}
+            </ul>
+            <div>
+                <MRow NoGutters>
+                    <MCol>
+                        <h2 class="text-capitalize m-heading text-h4 text-sm-h4 mb-3" id="section-@BlazorComponent.Doc.Extensions.HashHelper.Hash("属性")">
+                            <a class="text-decoration-none text-right text-md-left"> # </a> 属性
+                        </h2>
+                        <MSheet Class="overflow-hidden mb-4" Outlined Rounded="true">
+                            <MDataTable Headers="_headers" Class="api-table" Items="_api.Props" ItemsPerPage="int.MaxValue" HideDefaultFooter>
+                                <ItemContent>
+                                    <tr class="regular-row">
+                                        <td>
+                                            <span class="text-mono font-weight-bold" style="color: rgb(128,0,128)">
+                                                @context.Item.Name
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="text-mono" style="color: rgb(43,145,175)">
+                                                @context.Item.Type
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-mono" style="color:blue">
+                                                @context.Item.Default
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="m-markdown">
+                                                <p>
+                                                    @context.Item.Description
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ItemContent>
+                            </MDataTable>
+                        </MSheet>
+                    </MCol>
+                </MRow>
+                <MRow NoGutters>
+                    <MCol>
+                        <h2 class="text-capitalize m-heading text-h4 text-sm-h4 mb-3" id="section-@BlazorComponent.Doc.Extensions.HashHelper.Hash("插槽")">
+                            <a class="text-decoration-none text-right text-md-left"> # </a> 插槽
+                        </h2>
+                        <MSheet Class="overflow-hidden mb-4" Outlined Rounded="true">
+                            <MDataTable Headers="_headers2" Class="api-table" Items="_api.Contents" ItemsPerPage="int.MaxValue" HideDefaultFooter>
+                                <ItemContent>
+                                    <tr class="regular-row">
+                                        <td>
+                                            <span class="text-mono font-weight-bold" style="color: rgb(128,0,128)">
+                                                @context.Item.Name
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="m-markdown">
+                                                <p>
+                                                    @context.Item.Description
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ItemContent>
+                            </MDataTable>
+                        </MSheet>
+                    </MCol>
+                </MRow>
+                <MRow NoGutters>
+                    <MCol>
+                        <h2 class="text-capitalize m-heading text-h4 text-sm-h4 mb-3" id="section-@BlazorComponent.Doc.Extensions.HashHelper.Hash("事件")">
+                            <a class="text-decoration-none text-right text-md-left"> # </a> 事件
+                        </h2>
+                        <MSheet Class="overflow-hidden mb-4" Outlined Rounded="true">
+                            <MDataTable Headers="_headers2" Class="api-table" Items="_api.Events" ItemsPerPage="int.MaxValue" HideDefaultFooter>
+                                <ItemContent>
+                                    <tr class="regular-row">
+                                        <td>
+                                            <span class="text-mono font-weight-bold" style="color: rgb(128,0,128)">
+                                                @context.Item.Name
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="m-markdown">
+                                                <p>
+                                                    @context.Item.Description
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ItemContent>
+                            </MDataTable>
+                        </MSheet>
+                    </MCol>
+                </MRow>
+            </div>
+        </SectionContent>
+    }
 
+    <SectionContent Class="mt-12" Title="了解更多？">
+        <div class="mb-3">
+            继续学习由
+            <ALink Href="/docs/about/meet-the-team">我们的团队</ALink>
+            选择的相关内容，或通过使用下面的导航链接在页面之间跳转。
+        </div>
+        <MRow Dense>
+            <MCol Span="4">
+                <MSheet Class="overflow-hidden" Outlined Rounded="true" MinHeight="61"></MSheet>
+            </MCol>
+            <MCol Span="4">
+                <MSheet Class="overflow-hidden" Outlined Rounded="true" MinHeight="61"></MSheet>
+            </MCol>
+            <MCol Span="4">
+                <MSheet Class="overflow-hidden" Outlined Rounded="true" MinHeight="61"></MSheet>
+            </MCol>
+        </MRow>
+        <MDivider Class="my-6 mt-7 mb-5"></MDivider>
+        <div class="d-flex mb-4">
+            <a class="text-decoration-none text-body-1">
+                <span class="text-h6 text--primary">←&nbsp;</span>
+                <span>上一页</span>
+            </a>
+            <MSpacer></MSpacer>
+            <a class="text-decoration-none text-body-1">
+                <span>下一页</span>
+                <span class="text-h6 text--primary">&nbsp;→</span>
+            </a>
+        </div>
+        <MSheet Class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 m-vuetify-ad mb-8" Outlined Rounded="true" MinHeight="74" Style="width:100%"></MSheet>
+    </SectionContent>
+</SectionContent>
