@@ -1,51 +1,80 @@
 ﻿@using System.ComponentModel.DataAnnotations
+@using System.Text.Json;
+
 <div>
-    <MButton OnClick="() => _addModal.Show()" Class="mb-1">Open Modal</MButton>
+    <MButton OnClick="() => _addModal.Show()" Class="mb-1">Add User</MButton>
 
-    <MASA.Blazor.Presets.FormModal Visible="_addModal.Visible" Title="新增用户" Width="500" Model="_addModal.Data" OnOk="HandleOnClick" OnCancel="HandleOnCancel">
-        <p>@System.Text.Json.JsonSerializer.Serialize(_addModal.Data)</p>
-
+    <MASA.Blazor.Presets.FormModal Visible="_addModal.Visible"
+                                   Title="User"
+                                   Width="500"
+                                   Model="_addModal.Data"
+                                   OnOk="HandleOnClick"
+                                   OnCancel="HandleOnCancel">
         <MRow>
-            <MCol Span="12">
-                <MTextField @bind-Value="_addModal.Data.UserName" Label="UserName" Dense Outlined/>
+            <MCol Cols="12">
+                <MTextField @bind-Value="_addModal.Data.UserName"
+                            Label="UserName"
+                            Dense
+                            Outlined
+                            HideDetails="@("auto")"/>
             </MCol>
-            <MCol Span="12">
-                <MTextField @bind-Value="_addModal.Data.City" Label="City" Dense Outlined/>
+            <MCol Cols="12">
+                <MTextField @bind-Value="_addModal.Data.City"
+                            Label="City"
+                            Dense
+                            Outlined
+                            HideDetails="@("auto")"/>
             </MCol>
-            <MCol Span="12">
-                <MRadioGroup @bind-Value="_addModal.Data.Gender" Row Dense Style="margin-top: 0">
+            <MCol Cols="12">
+                <MRadioGroup @bind-Value="_addModal.Data.Gender"
+                             Label="Gender:"
+                             Row
+                             Dense
+                             Style="margin-top: 0" 
+                             HideDetails="@("auto")">
                     <MRadio Label="男" Value="0"></MRadio>
                     <MRadio Label="女" Value="1"></MRadio>
                 </MRadioGroup>
             </MCol>
-            <MCol>
-                <MAutocomplete @bind-Value="_addModal.Data.Favorites" Multiple Items="_favorites" ItemValue="r=>r" ItemText="r=>r"></MAutocomplete>
+            <MCol Cols="12">
+                <MAutocomplete @bind-Value="_addModal.Data.Favorites" 
+                               Items="_favorites"
+                               Label="Favorites"
+                               Multiple
+                               ItemValue="r => r"
+                               ItemText="r => r"
+                               HideDetails="@("auto")">
+                </MAutocomplete>
             </MCol>
+        </MRow>
+        <MRow>
+            <MCol>@JsonSerializer.Serialize(_addModal.Data)</MCol>
         </MRow>
     </MASA.Blazor.Presets.FormModal>
 
-    <MRow>
-        <MCol>username: @_user.UserName</MCol>
-        <MCol>city: @_user.City</MCol>
-        <MCol>gender: @_user.Gender</MCol>
-        <MCol>
-            <MButton OnClick="() => _addModal.Show(_user.ShallowCopy())" Color="primary" Text Small>Edit</MButton>
+    <MRow NoGutters Class="pa-2">
+        <MCol Cols="4">username: @_user?.UserName</MCol>
+        <MCol Cols="4">city: @_user?.City</MCol>
+        <MCol Cols="4"></MCol>
+        <MCol Cols="4">gender: @_user?.Gender</MCol>
+        <MCol Cols="4">favorites: @string.Join(",", _user?.Favorites ?? new List<string>())</MCol>
+        <MCol Cols="4">
+            <MButton OnClick="@(() => _addModal.Show(_user?.ShallowCopy()))"
+                     Color="primary"
+                     Disabled="@(_user == null)"
+                     Text
+                     Small>
+                Edit
+            </MButton>
         </MCol>
     </MRow>
 </div>
 
 @code {
-
-    private User _user = new()
-    {
-        UserName = "capdiem",
-        City = "HangZhou",
-        Gender = 0,
-    };
-
-    private List<string> _favorites = new List<string>() {"A", "B", "C", "D"};
-
-    private DataModal<User> _addModal = new();
+    readonly List<string> _favorites = new() { "Basketball", "Football", "Ping-pong", "Badminton" };
+    
+    DataModal<User> _addModal = new();
+    User _user;
 
     private void HandleOnCancel()
     {
@@ -64,7 +93,10 @@
         {
             // Add
         }
+        
         await Task.Delay(1000);
+
+        _user = _addModal.Data;
 
         _addModal.HideLoading();
 
@@ -79,14 +111,15 @@
         [Range(0, 1)]
         public int Gender { get; set; }
 
+        [Required]
         public string City { get; set; }
 
         [Required]
-        public List<string> Favorites { get; set; } = new List<string> { };
+        public List<string> Favorites { get; set; } = new() { };
 
         public User ShallowCopy()
         {
-            var user = (User) this.MemberwiseClone();
+            var user = (User)this.MemberwiseClone();
             user.Favorites = Favorites;
             return user;
         }

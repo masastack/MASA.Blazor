@@ -23,7 +23,11 @@
 
 <MDivider Style="margin: 8px 0"></MDivider>
 
-<MDataTable Headers="headers" Items="desserts" Class="elevation-1" Style="@($"width:{width}%")">
+<MDataTable Headers="headers"
+            Items="desserts"
+            Class="elevation-1"
+            Style="@($"width:{width}%;min-width:400px")"
+            HideDefaultFooter>
     <ItemColContent>
         @if (context.Header.Value == "actions")
         {
@@ -63,10 +67,10 @@
 
     List<Action> actions = new()
     {
-        new Action() {Label = "alert", Icon = "mdi-alert-outline"},
-        new Action() {Label = "heart", Icon = "mdi-heart", Color = "red"},
-        new Action() {Label = "information", Icon = "mdi-information", Disabled = true},
-        new Action() {Label = "check", Icon = "mdi-check"},
+        new Action() { Label = "alert", Icon = "mdi-alert-outline" },
+        new Action() { Label = "heart", Icon = "mdi-heart", Color = "red" },
+        new Action() { Label = "information", Icon = "mdi-information", Disabled = true },
+        new Action() { Label = "check", Icon = "mdi-check" },
     };
 
     List<Dessert> desserts = new()
@@ -130,8 +134,8 @@
             Sortable = false,
             Value = nameof(Dessert.Name)
         },
-        new() {Text = "Calories", Value = nameof(Dessert.Calories)},
-        new() {Text = "Actions", Value = "actions", Sortable = false}
+        new() { Text = "Calories", Value = nameof(Dessert.Calories) },
+        new() { Text = "Actions", Value = "actions", Sortable = false }
     };
 
     public void EditItem(Dessert item)

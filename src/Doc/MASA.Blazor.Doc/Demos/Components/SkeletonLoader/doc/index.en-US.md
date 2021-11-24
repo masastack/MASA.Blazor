@@ -6,4 +6,10 @@ cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SkeletonLoader.svg
 ---
 
-The m-app component and the app prop on components like m-navigation-drawer, m-app-bar, m-footer and more, help bootstrap your application with the proper sizing around <m-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The m-app component is REQUIRED for all applications. This is the mount point for many of components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. m-app should only be rendered within your application ONCE.
+The `MSkeletonLoader` component is a versatile tool that can fill many roles within a project. At its heart, the
+component provides an indication to the user that something is coming but not yet available. There are over 30
+pre-defined options available that can be combined to make custom examples.
+
+## API
+
+- [MSkeletonLoader](/docs/api/MSkeletonLoader)

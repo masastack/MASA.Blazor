@@ -107,15 +107,12 @@
 
     private void Comment()
     {
-        if (string.IsNullOrWhiteSpace(_input))
-            return;
-
         _events.Insert(0,
             new EventDemo
                 {
                     Id = _nonce++,
                     Text = _input,
-                    Time = DateTime.Now.ToString("HH:mm")
+                    Time = DateTime.Now.ToString("HH:mm:ss")
                 });
 
         _input = string.Empty;
