@@ -1,13 +1,19 @@
 ﻿{
   "Components": [
-    "SelectList"
+    "CascaderSelectList"
   ],
   "Props": [
+    {
+      "Name": "Children",
+      "Type": "List`1",
+      "Default": "null",
+      "Description": ""
+    },
     {
       "Name": "Class",
       "Type": "String",
       "Default": "null",
-      "Description": "The class applied to the outermost element of the component"
+      "Description": "应用到组件最外层元素的class"
     },
     {
       "Name": "Disabled",
@@ -61,15 +67,20 @@
       "Name": "Style",
       "Type": "String",
       "Default": "null",
-      "Description": "The style applied to the outermost element of the component"
+      "Description": "应用到组件最外层元素的style"
     },
     {
       "Name": "Value",
-      "Type": "TItemValue",
+      "Type": "TValue",
       "Default": "null",
       "Description": ""
     }
   ],
   "Contents": [],
-  "Events": []
+  "Events": [
+    {
+      "Name": "OnItemClick",
+      "Description": ""
+    }
+  ]
 }

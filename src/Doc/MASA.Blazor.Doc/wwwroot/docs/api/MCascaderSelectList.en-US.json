@@ -1,8 +1,14 @@
 ﻿{
   "Components": [
-    "SelectList"
+    "CascaderSelectList"
   ],
   "Props": [
+    {
+      "Name": "Children",
+      "Type": "List`1",
+      "Default": "null",
+      "Description": ""
+    },
     {
       "Name": "Class",
       "Type": "String",
@@ -65,11 +71,16 @@
     },
     {
       "Name": "Value",
-      "Type": "TItemValue",
+      "Type": "TValue",
       "Default": "null",
       "Description": ""
     }
   ],
   "Contents": [],
-  "Events": []
+  "Events": [
+    {
+      "Name": "OnItemClick",
+      "Description": ""
+    }
+  ]
 }

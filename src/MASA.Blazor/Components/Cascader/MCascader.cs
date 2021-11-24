@@ -15,6 +15,9 @@ namespace MASA.Blazor
         [Parameter]
         public Func<TItem, List<TItem>> ItemChildren { get; set; }
 
+        [Parameter]
+        public Func<TItem, Task> LoadChildren { get; set; }
+
         protected override List<string> FormatText(TValue value)
         {
             return new List<string> { string.Join("/", GetItemByValue(Items, value, IsFull).Select(ItemText)) };
@@ -52,7 +55,7 @@ namespace MASA.Blazor
                 {
                     props[nameof(MListItemGroup.Color)] = "primary";
                 })
-                .Merge(typeof(BSelectList<,,>), typeof(MCascaderSelectOption<TItem, TValue>))
+                .Merge(typeof(BSelectList<,,>), typeof(MCascaderSelectList<TItem, TValue>))
                 .Merge(typeof(BSelectMenu<,,,>), typeof(BCascaderMenu<TItem, TValue, MCascader<TItem, TValue>>))
                 .Apply(typeof(BCascaderMenuBody<,,>), typeof(BCascaderMenuBody<TItem, TValue, MCascader<TItem, TValue>>));
         }

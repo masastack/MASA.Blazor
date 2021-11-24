@@ -1,0 +1,78 @@
+<MCascader @bind-Value="_vaule"
+           Items="_items"
+           ItemText="u => u.Label"
+           ItemValue="u => u.Value"
+           ItemChildren="u => u.Children"
+           LoadChildren="FetchChildrenAsync">
+</MCascader>
+
+@code {
+    public class BCascaderNode
+    {
+        public int Value { get; set; }
+        public string Label { get; set; }
+        public List<BCascaderNode> Children { get; set; } = new();
+    }
+
+    public class Item
+    {
+        public int Id { get; set; }
+        public string Description { get; set; }
+        public int ParentId { get; set; }
+        public int Level { get; set; }
+    }
+
+    private List<Item> _allItems = new()
+        {
+            new Item
+            {
+                Id = 3,
+                Description = "武汉",
+                ParentId = 1,
+                Level = 2
+            },
+            new Item
+            {
+                Id = 4,
+                Description = "武昌区",
+                ParentId = 3,
+                Level = 3
+            },
+            new Item
+            {
+                Id = 5,
+                Description = "黄石",
+                ParentId = 1,
+                Level = 1
+            }
+        };
+
+    private List<BCascaderNode> _items = new List<BCascaderNode>
+    {
+        new BCascaderNode
+        {
+            Value=1,
+            Label="湖北"
+        },
+        new BCascaderNode
+        {
+            Value=2,
+            Label="浙江"
+        }
+    };
+
+    private int _vaule = 4;
+
+    public async Task FetchChildrenAsync(BCascaderNode node)
+    {
+        await Task.Delay(1000);
+        var children = _allItems.Where(item => item.ParentId == node.Value)
+            .Select(item => new BCascaderNode
+                {
+                    Value = item.Id,
+                    Label = item.Description,
+                    Children = item.Level < 3 ? new() : null//We only load children which count equal 0
+                });
+        node.Children = children.Any() ? children.ToList() : null;//Set to null so we will not load any more
+    }
+}
