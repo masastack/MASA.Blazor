@@ -21,7 +21,7 @@ namespace MASA.Blazor.Test.RangeSlider
         //    });
         //    var classes = cut.Instance.CssProvider.GetClass();
         //    var hasDarkClass = classes.Contains("theme--dark");
-        //    // Assert
+        //    //Assert
         //    Assert.IsTrue(hasDarkClass);
         //}
 

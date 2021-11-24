@@ -14,7 +14,7 @@ namespace MASA.Blazor.Test.List
     public class MListItemTests:TestBase
     {
         [TestMethod]
-        public void RendeButtonGroupWithDense()
+        public void RenderListItemWithDense()
         {
             //Act
             var cut = RenderComponent<MListItem>(props =>
@@ -29,7 +29,7 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
-        public void RendeButtonGroupWithDisabled()
+        public void RenderListItemWithDisabled()
         {
             //Act
             var cut = RenderComponent<MListItem>(props =>
@@ -44,7 +44,82 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
-        public void RendeButtonGroupWithSelectable()
+        public void RenderListItemWithInactive()
+        {
+            //Act
+            var cut = RenderComponent<MListItem>(props =>
+            {
+                props.Add(listitem => listitem.Inactive, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasInactiveClass = classes.Contains("m-list-item");
+
+            // Assert
+            Assert.IsTrue(hasInactiveClass);
+        }
+
+        [TestMethod]
+        public void RenderListItemWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MListItem>(props =>
+            {
+                props.Add(listitem => listitem.Dark, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("theme--dark");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderListItemWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MListItem>(props =>
+            {
+                props.Add(listitem => listitem.Light, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderListItemWithLink()
+        {
+            //Act
+            var cut = RenderComponent<MListItem>(props =>
+            {
+                props.Add(listitem => listitem.Link, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasInactiveClass = classes.Contains("m-list-item--link");
+
+            // Assert
+            Assert.IsTrue(hasInactiveClass);
+        }
+
+        [TestMethod]
+        public void RenderListItemWithRipple()
+        {
+            //Act
+            var cut = RenderComponent<MListItem>(props =>
+            {
+                props.Add(listitem => listitem.Ripple, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasRippleClass = classes.Contains("m-list-item");
+
+            // Assert
+            Assert.IsTrue(hasRippleClass);
+        }
+
+        [TestMethod]
+        public void RenderListItemWithSelectable()
         {
             //Act
             var cut = RenderComponent<MListItem>(props =>
@@ -59,22 +134,7 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
-        public void RendeButtonGroupWithTwoLine()
-        {
-            //Act
-            var cut = RenderComponent<MListItem>(props =>
-            {
-                props.Add(listitem => listitem.TwoLine, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasTwoLineClass = classes.Contains("m-list-item--two-line");
-
-            // Assert
-            Assert.IsTrue(hasTwoLineClass);
-        }
-
-        [TestMethod]
-        public void RendeButtonGroupWithThreeLine()
+        public void RenderListItemWithThreeLine()
         {
             //Act
             var cut = RenderComponent<MListItem>(props =>
@@ -89,63 +149,32 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
-        public void RendeButtonGroupWithHighlighted()
+        public void RenderListItemWithTwoLine()
         {
             //Act
             var cut = RenderComponent<MListItem>(props =>
             {
-                props.Add(listitem => listitem.Highlighted, true);
+                props.Add(listitem => listitem.TwoLine, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasHighlightedClass = classes.Contains("m-list-item--highlighted");
+            var hasTwoLineClass = classes.Contains("m-list-item--two-line");
 
             // Assert
-            Assert.IsTrue(hasHighlightedClass);
+            Assert.IsTrue(hasTwoLineClass);
         }
 
         [TestMethod]
-        public void RendeButtonGroupWithInactive()
+        public void RenderWithChildContent()
         {
-            //Act
+            // Arrange & Act
             var cut = RenderComponent<MListItem>(props =>
             {
-                props.Add(listitem => listitem.Inactive, true);
+                props.Add(listitem => listitem.ChildContent, "<span>Hello world</span>");
             });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var noInactiveClass = !classes.Contains("m-list-item--link");
+            var contentDiv = cut.Find(".m-list-item");
 
             // Assert
-            Assert.IsTrue(noInactiveClass);
-        }
-
-        [TestMethod]
-        public void RendeListWithDark()
-        {
-            //Act
-            var cut = RenderComponent<MListItem>(props =>
-            {
-                props.Add(listgroup => listgroup.Dark, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasDarkClass = classes.Contains("theme--dark");
-
-            // Assert
-            Assert.IsTrue(hasDarkClass);
-        }
-
-        [TestMethod]
-        public void RendeListWithLight()
-        {
-            //Act
-            var cut = RenderComponent<MListItem>(props =>
-            {
-                props.Add(listgroup => listgroup.Light, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasDarkClass = classes.Contains("theme--light");
-
-            // Assert
-            Assert.IsTrue(hasDarkClass);
+            contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
     }
 }

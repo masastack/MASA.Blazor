@@ -52,33 +52,136 @@ namespace MASA.Blazor.Test.TextField
         }
 
         [TestMethod]
-        public void RenderTextFieldWithFullWidth()
+        public void RenderTextFieldWithAutofocus()
         {
             //Act
             var cut = RenderComponent<MTextField<string>>(props =>
             {
-                props.Add(textfield => textfield.FullWidth, true);
+                props.Add(textfield => textfield.Autofocus, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasFullWidthClass = classes.Contains("m-text-field--full-width");
+            var hasAutofocusClass = classes.Contains("m-text-field");
 
             // Assert
-            Assert.IsTrue(hasFullWidthClass);
+            Assert.IsTrue(hasAutofocusClass);
         }
 
         [TestMethod]
-        public void RenderTextFieldWithSoloInverted()
+        public void RenderTextFieldWithClearable()
         {
             //Act
             var cut = RenderComponent<MTextField<string>>(props =>
             {
-                props.Add(textfield => textfield.SoloInverted, true);
+                props.Add(textfield => textfield.Clearable, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasSoloInvertedClass = classes.Contains("m-text-field--solo-inverted");
+            var hasClearableClass = classes.Contains("m-text-field");
 
             // Assert
-            Assert.IsTrue(hasSoloInvertedClass);
+            Assert.IsTrue(hasClearableClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithCounter()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Counter, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasCounterClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasCounterClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Dark, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("theme--dark");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithDense()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Dense, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDenseClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasDenseClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithDisabled()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Disabled, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDisabledClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasDisabledClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithError()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Error, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasErrorClass = classes.Contains("m-text-field");
+            // Assert
+            Assert.IsTrue(hasErrorClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithErrorCount()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.ErrorCount, 1);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasErrorCountClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasErrorCountClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithFilled()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Filled, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFilledClass = classes.Contains("m-text-field");
+            // Assert
+            Assert.IsTrue(hasFilledClass);
         }
 
         [TestMethod]
@@ -97,18 +200,138 @@ namespace MASA.Blazor.Test.TextField
         }
 
         [TestMethod]
-        public void RenderTextFieldWithFilled()
+        public void RenderTextFieldWithFullWidth()
         {
             //Act
             var cut = RenderComponent<MTextField<string>>(props =>
             {
-                props.Add(textfield => textfield.Filled, true);
+                props.Add(textfield => textfield.FullWidth, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasFilledClass = classes.Contains("m-text-field--filled");
+            var hasFullWidthClass = classes.Contains("m-text-field--full-width");
 
             // Assert
-            Assert.IsTrue(hasFilledClass);
+            Assert.IsTrue(hasFullWidthClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithHeight()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Height, 2);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLoaderHeightClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasLoaderHeightClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithHideDetails()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.HideDetails, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHideDetailsClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasHideDetailsClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Light, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithLoaderHeight()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.LoaderHeight, 2);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLoaderHeightClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasLoaderHeightClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithLoading()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Loading, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLoadingClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasLoadingClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithOutlined()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Outlined, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOutlinedClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasOutlinedClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithPersistentHint()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.PersistentHint, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPersistentHintClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasPersistentHintClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithReadonly()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Readonly, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasReadonlyClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasReadonlyClass);
         }
 
         [TestMethod]
@@ -124,21 +347,6 @@ namespace MASA.Blazor.Test.TextField
 
             // Assert
             Assert.IsTrue(hasReverseClass);
-        }
-
-        [TestMethod]
-        public void RenderTextFieldWithOutlined()
-        {
-            //Act
-            var cut = RenderComponent<MTextField<string>>(props =>
-            {
-                props.Add(textfield => textfield.Outlined, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasOutlinedClass = classes.Contains("m-text-field--outlined");
-
-            // Assert
-            Assert.IsTrue(hasOutlinedClass);
         }
 
         [TestMethod]
@@ -172,21 +380,6 @@ namespace MASA.Blazor.Test.TextField
         }
 
         [TestMethod]
-        public void RenderTextFieldWithIsSolo()
-        {
-            //Act
-            var cut = RenderComponent<MTextField<string>>(props =>
-            {
-                props.Add(textfield => textfield.Solo, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hassoloClass = classes.Contains("m-text-field--solo");
-
-            // Assert
-            Assert.IsTrue(hassoloClass);
-        }
-
-        [TestMethod]
         public void RenderTextFieldWithSingleLine()
         {
             //Act
@@ -201,74 +394,64 @@ namespace MASA.Blazor.Test.TextField
             Assert.IsTrue(hasSingleLineClass);
         }
 
-        //[TestMethod]
-        //public void RenderWithChildContentt()
-        //{
-        //    // Arrange & Act
-        //    var cut = RenderComponent<MTextField<string>>(props =>
-        //    {
-        //        props.Add(textfield => textfield.ChildContent, "<span>Hello world</span>");
-        //    });
-        //    var contentDiv = cut.Find(".m-text-field");
+        [TestMethod]
+        public void RenderTextFieldWithSolo()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Solo, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSoloClass = classes.Contains("m-text-field--solo");
 
-        //    // Assert
-        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
+            // Assert
+            Assert.IsTrue(hasSoloClass);
+        }
 
-        //[TestMethod]
-        //public void RenderWithPrependInnerContent()
-        //{
-        //    // Arrange & Act
-        //    var cut = RenderComponent<MTextField<string>>(props =>
-        //    {
-        //        props.Add(textfield => textfield.PrependInnerContent, "<span>Hello world</span>");
-        //    });
-        //    var textfieldDiv = cut.Find("");
+        [TestMethod]
+        public void RenderTextFieldWithSoloInverted()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.SoloInverted, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSoloInvertedClass = classes.Contains("m-text-field--solo-inverted");
 
-        //    // Assert
-        //    textfieldDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
+            // Assert
+            Assert.IsTrue(hasSoloInvertedClass);
+        }
 
-        //[TestMethod]
-        //public void RenderWithAppendOuterContent()
-        //{
-        //    // Arrange & Act
-        //    var cut = RenderComponent<MTextField<string>>(props =>
-        //    {
-        //        props.Add(textfield => textfield.AppendOuterContent, "<span>Hello world</span>");
-        //    });
-        //    var textfieldDiv = cut.Find("");
+        [TestMethod]
+        public void RenderTextFieldWithSuccess()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.Success, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSuccessClass = classes.Contains("m-text-field");
 
-        //    // Assert
-        //    textfieldDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
+            // Assert
+            Assert.IsTrue(hasSuccessClass);
+        }
 
-        //[TestMethod]
-        //public void RenderWithProgressContent()
-        //{
-        //    // Arrange & Act
-        //    var cut = RenderComponent<MTextField<string>>(props =>
-        //    {
-        //        props.Add(textfield => textfield.ProgressContent, "<span>Hello world</span>");
-        //    });
-        //    var textfieldDiv = cut.Find("");
+        [TestMethod]
+        public void RenderTextFieldWithValidateOnBlur()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.ValidateOnBlur, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValidateOnBlurClass = classes.Contains("m-text-field");
 
-        //    // Assert
-        //    textfieldDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
-
-        //[TestMethod]
-        //public void RenderWithCounterContent()
-        //{
-        //    // Arrange & Act
-        //    var cut = RenderComponent<MTextField<string>>(props =>
-        //    {
-        //        props.Add(textfield => textfield.CounterContent, "<span>Hello world</span>");
-        //    });
-        //    var textfieldDiv = cut.Find("");
-
-        //    // Assert
-        //    textfieldDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
+            // Assert
+            Assert.IsTrue(hasValidateOnBlurClass);
+        }
     }
 }

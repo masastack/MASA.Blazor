@@ -59,21 +59,21 @@ namespace MASA.Blazor.Test.ChipGroup
             Assert.IsTrue(hasMandatoryClass);
         }
 
-        //[TestMethod]
-        //public void RenderChipGroupWithMax()
-        //{
-        //    //Act
-        //    JSInterop.Mode = JSRuntimeMode.Loose;
-        //    var cut = RenderComponent<MChipGroup>(props =>
-        //    {
-        //        props.Add(chipgroup => chipgroup.Max, 1);
-        //    });
-        //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasMaxClass = classes.Contains("max");
+        [TestMethod]
+        public void RenderChipGroupWithMax()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MChipGroup>(props =>
+            {
+                props.Add(chipgroup => chipgroup.Max, 1);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasMaxClass = classes.Contains("m-chip-group");
 
-        //    // Assert
-        //    Assert.IsTrue(hasMaxClass);
-        //}
+            // Assert
+            Assert.IsTrue(hasMaxClass);
+        }
 
         [TestMethod]
         public void RenderChipGroupWithMultiple()

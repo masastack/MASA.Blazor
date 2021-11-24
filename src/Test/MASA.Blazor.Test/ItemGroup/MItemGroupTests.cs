@@ -31,21 +31,6 @@ namespace MASA.Blazor.Test.ItemGroup
         }
 
         [TestMethod]
-        public void RenderItemGroupNoWithDark()
-        {
-            //Act
-            var cut = RenderComponent<MItemGroup>(props =>
-            {
-                props.Add(itemgroup => itemgroup.Dark, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasdarkClass = classes.Contains("theme--light");
-
-            // Assert
-            Assert.IsTrue(hasdarkClass);
-        }
-
-        [TestMethod]
         public void RenderItemGroupWithLight()
         {
             //Act
@@ -61,18 +46,48 @@ namespace MASA.Blazor.Test.ItemGroup
         }
 
         [TestMethod]
-        public void RenderItemGroupNoWithLight()
+        public void RenderItemGroupWithMandatory()
         {
             //Act
             var cut = RenderComponent<MItemGroup>(props =>
             {
-                props.Add(itemgroup => itemgroup.Light, false);
+                props.Add(itemgroup => itemgroup.Mandatory, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasLightClass = classes.Contains("m-item-group");
+            var hasMandatoryClass = classes.Contains("m-item-group");
 
             // Assert
-            Assert.IsTrue(hasLightClass);
+            Assert.IsTrue(hasMandatoryClass);
+        }
+
+        [TestMethod]
+        public void RenderAlertWithElevation()
+        {
+            //Act
+            var cut = RenderComponent<MItemGroup>(props =>
+            {
+                props.Add(alert => alert.Max, 2);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasElevationClass = classes.Contains("m-item-group");
+
+            // Assert
+            Assert.IsTrue(hasElevationClass);
+        }
+
+        [TestMethod]
+        public void RenderItemGroupWithMultiple()
+        {
+            //Act
+            var cut = RenderComponent<MItemGroup>(props =>
+            {
+                props.Add(itemgroup => itemgroup.Multiple, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasMandatoryClass = classes.Contains("m-item-group");
+
+            // Assert
+            Assert.IsTrue(hasMandatoryClass);
         }
     }
 }

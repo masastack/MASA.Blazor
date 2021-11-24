@@ -14,7 +14,7 @@ namespace MASA.Blazor.Test.List
     public class MListGroupTests:TestBase
     {
         [TestMethod]
-        public void RendeListGroupWithDisabled()
+        public void RenderListGroupWithDisabled()
         {
             //Act
             var cut = RenderComponent<MListGroup>(props =>
@@ -29,7 +29,7 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
-        public void RendeListGroupWithNoAction()
+        public void RenderListGroupWithNoAction()
         {
             //Act
             var cut = RenderComponent<MListGroup>(props =>
@@ -44,7 +44,7 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
-        public void RendeListGroupWithSubGroup()
+        public void RenderListGroupWithSubGroup()
         {
             //Act
             var cut = RenderComponent<MListGroup>(props =>
