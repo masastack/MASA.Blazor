@@ -144,6 +144,7 @@
   "Demos.Components.FormInputs.children.Autocomplete.props.Dense",
   "Demos.Components.FormInputs.children.Autocomplete.props.Filter",
   "Demos.Components.FormInputs.children.Cascader.usage.Index",
+  "Demos.Components.FormInputs.children.Cascader.props.LoadChildren",
   "Demos.Components.FormInputs.children.Checkbox.usage.Index",
   "Demos.Components.FormInputs.children.Checkbox.props.Boolean",
   "Demos.Components.FormInputs.children.Checkbox.props.Color",

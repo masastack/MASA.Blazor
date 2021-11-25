@@ -1,6 +1,6 @@
 ﻿<MSheet Class="mx-auto" MaxWidth="800" Elevation="8">
-    <MSlideGroup ShowArrows="@(true)" Class="pa-4" CenterActive>
-        @foreach (var item in Enumerable.Range(1, 25))
+    <MSlideGroup @bind-Value="model" ShowArrows="@(true)" Class="pa-4" CenterActive>
+        @foreach (var item in Enumerable.Range(1, 15))
         {
             <MSlideItem>
                 <MCard Color="@(context.Active ? "primary" : "grey lighten-1")"
@@ -21,3 +21,7 @@
         }
     </MSlideGroup>
 </MSheet>
+
+@code {
+    StringNumber model;
+}

@@ -41,9 +41,6 @@ namespace MASA.Blazor
         public StringNumber MobileBreakpoint { get; set; }
 
         [Parameter]
-        public string Optional { get; set; }
-
-        [Parameter]
         public bool Right { get; set; }
 
         [Parameter]

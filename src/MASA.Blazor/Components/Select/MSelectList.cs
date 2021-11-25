@@ -39,7 +39,7 @@ namespace MASA.Blazor
                 .Apply<BIcon, MIcon>();
         }
 
-        private async Task OnSelectAsync()
+        protected virtual async Task OnSelectAsync()
         {
             if (Disabled)
             {
