@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using BlazorComponent;
+﻿using BlazorComponent;
 
 namespace MASA.Blazor
 {

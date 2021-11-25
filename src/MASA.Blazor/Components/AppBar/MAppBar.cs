@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -228,49 +229,44 @@ namespace MASA.Blazor
                         .AddIf(() => $"height:{Height.ToUnit()}", () => Height != null)
                         .AddIf(() => $"margin-top:{MarginTop.ToUnit()}", () => MarginTop != null)
                         .AddIf(() => $"transform:translateY({Transform}px)", () => Transform != null)
-                        .AddIf(() => $"left:{Left.ToUnit()}", () => Left != null)
+                        .AddIf(() => $"left:{ComputedLeft.ToUnit()}", () => ComputedLeft != null)
                         .AddIf(() => $"right:{Right.ToUnit()}", () => Right != null);
                 });
 
             Attributes.Add("data-booted", "true");
         }
 
-        protected async override Task OnFirstAfterRenderAsync()
+        protected override void OnInitialized()
         {
-            if (!string.IsNullOrWhiteSpace(ScrollTarget))
-            {
-                DomEventJsInterop.AddEventListener<Element>($"#{ScrollTarget}", "scroll", (e) =>
-                {
+            base.OnInitialized();
 
-                    SavedScroll = CurrentScroll;
-                    CurrentScroll = (int)e.ScrollTop;
-
-                    //todo  ScrollThreshold的作用需要明确 是滚动距离触发scrolling的值还是改变appbar状态scrolltop的值 还是只针对shrink-on-scroll有效
-                    //if (Math.Abs(CurrentScroll - SavedScroll) > ScrollThreshold)//(IScrollable)this.ComputedScrollThreshold() 
-                    Scrolling();
-
-                }, false);
-            }
-            await base.OnFirstAfterRenderAsync();
+            GlobalConfig.Application.PropertyChanged += Application_PropertyChanged;
         }
 
-        protected override void Dispose(bool disposing)
+        private void Application_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(ScrollTarget))
-            {
-                DomEventJsInterop.RemoveEventListener<Element>($"#{ScrollTarget}", "scroll", e =>
-                {
-
-                });
-            }
-
-            base.Dispose(disposing);
+            InvokeStateHasChanged();
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
+                if (!string.IsNullOrWhiteSpace(ScrollTarget))
+                {
+                    DomEventJsInterop.AddEventListener<Element>($"#{ScrollTarget}", "scroll", (e) =>
+                    {
+
+                        SavedScroll = CurrentScroll;
+                        CurrentScroll = (int)e.ScrollTop;
+
+                        //todo  ScrollThreshold的作用需要明确 是滚动距离触发scrolling的值还是改变appbar状态scrolltop的值 还是只针对shrink-on-scroll有效
+                        //if (Math.Abs(CurrentScroll - SavedScroll) > ScrollThreshold)//(IScrollable)this.ComputedScrollThreshold() 
+                        Scrolling();
+
+                    }, false);
+                }
+                
                 UpdateApplication();
             }
 
@@ -319,6 +315,14 @@ namespace MASA.Blazor
             return min + (max - min) * ScrollRatio();
         }
 
+        public StringNumber ComputedLeft => ComputeLeft();
+        public double ComputeLeft()
+        {
+            if (!App || ClippedLeft) return 0;
+
+            return GlobalConfig.Application.Left;
+        }
+
         protected double ComputedOriginalHeightAppBar()
         {
             var height = ComputedContentHeight.ToDouble();
@@ -341,6 +345,19 @@ namespace MASA.Blazor
                 return ScrollThreshold;
 
             return ComputedOriginalHeightAppBar() - (Dense ? 48 : 56);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (!string.IsNullOrWhiteSpace(ScrollTarget))
+            {
+                DomEventJsInterop.RemoveEventListener<Element>($"#{ScrollTarget}", "scroll", e =>
+                {
+
+                });
+            }
+
+            base.Dispose(disposing);
         }
     }
 }

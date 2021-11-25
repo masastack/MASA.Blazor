@@ -5,6 +5,7 @@
 @using BlazorComponent.Doc.Models
 @using MASA.Blazor.Doc.Services
 @using MASA.Blazor.Doc.Utils
+@using System.Web
 @inherits OwningComponentBase<DemoService>
 @layout DocLayout
 
@@ -33,7 +34,21 @@
                     {
                         if (type == AlertTypes.None)
                         {
-                            @((MarkupString)str.FormatLink())
+                            var list2 = str.SplitByCode();
+
+                            foreach (var (lang, str2) in list2)
+                            {
+                                if (lang != null)
+                                {
+                                    <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden">
+                                        <HighlightedCode Code="@HttpUtility.HtmlDecode(str2.RemoveWrapTag().RemoveWrapTag())" CanLoad Language="@lang"></HighlightedCode>
+                                    </MSheet>
+                                }
+                                else
+                                {
+                                    @((MarkupString)str2.FormatLink())
+                                }
+                            }
                         }
                         else
                         {
@@ -45,7 +60,7 @@
                 </SectionContent>
             }
         }
-        
+
         @if (PropsList.Any() || EventsList.Any() || ContentsList.Any() || MiscList.Any())
         {
             var example = DemoItemModel.GenerateExample(LanguageService.CurrentCulture.Name);

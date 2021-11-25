@@ -1,5 +1,5 @@
-﻿using BlazorComponent;
-using MASA.Blazor.Model;
+﻿using System.ComponentModel;
+using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Threading.Tasks;
@@ -141,10 +141,7 @@ namespace MASA.Blazor
 
                 return _height;
             }
-            set
-            {
-                _height = value;
-            }
+            set { _height = value; }
         }
 
         private StringNumber _top;
@@ -161,10 +158,7 @@ namespace MASA.Blazor
 
                 return _top;
             }
-            set
-            {
-                _top = value;
-            }
+            set { _top = value; }
         }
 
         public int? MaxHeight { get; }
@@ -228,13 +222,20 @@ namespace MASA.Blazor
 
         protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             if (Temporary)
             {
                 Value = false;
                 ValueChanged.InvokeAsync(Value);
             }
 
-            base.OnInitialized();
+            GlobalConfig.Application.PropertyChanged += Application_PropertyChanged;
+        }
+
+        private void Application_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            InvokeStateHasChanged();
         }
 
         protected override void SetComponentClass()
@@ -267,7 +268,7 @@ namespace MASA.Blazor
                     styleBuilder
                         .AddHeight(Height)
                         .Add($"top:{(!_isBottom ? Top.ToUnit() : "auto")}")
-                        .AddIf(() => $"maxHeight:calc(100% - {MaxHeight})", () => MaxHeight != null)
+                        .AddIf(() => $"max-height:calc(100% - {ComputedMaxHeight.ToUnit()})", () => ComputedMaxHeight != null)
                         .AddIf(() => $"transform:{translate}({Transform}%)", () => Transform != null)
                         .Add($"width:{(_isMiniVariant ? MiniVariantWidth.ToUnit() : Width.ToUnit())}")
                         .AddBackgroundColor(Color);
@@ -331,6 +332,8 @@ namespace MASA.Blazor
                 Element = await JsInvokeAsync<BlazorComponent.Web.Element>(
                     JsInteropConstants.GetDomInfo, Ref);
                 UpdateApplication(Element);
+
+                await InvokeStateHasChangedAsync();
             }
 
             await base.OnAfterRenderAsync(firstRender);
@@ -338,8 +341,9 @@ namespace MASA.Blazor
 
         protected void UpdateApplication(BlazorComponent.Web.Element element)
         {
-            var val = (!_isActive || IsMobile() || Temporary || element == null) ? 0 :
-                (ComputedWidth().ToDouble() <= 0 ? element.ClientWidth : ComputedWidth().ToDouble());
+            var val = (!_isActive || IsMobile() || Temporary || element == null)
+                ? 0
+                : (ComputedWidth().ToDouble() <= 0 ? element.ClientWidth : ComputedWidth().ToDouble());
 
             if (Right)
                 GlobalConfig.Application.Right = val;
@@ -352,6 +356,22 @@ namespace MASA.Blazor
 
         protected StringNumber ComputedWidth() =>
             _isMiniVariant ? MiniVariantWidth : Width;
+
+        protected StringNumber ComputedMaxHeight
+        {
+            get
+            {
+                if (!HasApp) return null;
+
+                var computedMaxHeight = GlobalConfig.Application.Bottom + GlobalConfig.Application.Footer + GlobalConfig.Application.Bar;
+
+                if (!Clipped) return computedMaxHeight;
+
+                return computedMaxHeight + GlobalConfig.Application.Top;
+            }
+        }
+
+        protected bool HasApp => App && (!IsMobile() && !Temporary);
 
         public override async Task Click(MouseEventArgs e)
         {
