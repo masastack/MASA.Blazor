@@ -3,10 +3,11 @@
     "Title": "Alerts",
     "Type": "Alerts",
     "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>、<strong>Info</strong>、<strong>Warning</strong> 和 <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays. Many parts of an alert such as <strong>Border</strong>, <strong>Icon</strong>, and <strong>Color</strong> can also be customized to fit almost any situation.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-22T16:33:22.8890524+08:00",
+    "LastWriteTime": "2021-11-23T09:48:33.3104036+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -158,17 +159,18 @@
     "Title": "Application",
     "Type": "Application",
     "Desc": "<p>In <code>MASA Blazor</code>, the App properties on the <code>MApp</code> component and <code>MNavigationDrawer</code>, <code>MAppBar</code>, <code>MFooter</code> and other\ncomponents help your application to adjust the size of the <code>MMain</code> component appropriately. This allows you to create\ntruly unique interfaces without worrying about managing layout sizes. All applications need the <code>MApp</code> component. This\nis the mount point for many <code>MASA Blazor</code> components and functions, and ensures that it passes the default application\ntheme (Dark/Light) to the child components, and ensures the correct cross-browser support for certain click events in\nthe browser .</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-10-19T17:27:27.857661+08:00",
+    "LastWriteTime": "2021-11-05T15:50:02.0022519+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "basic",
         "Title": "Default application markup",
         "Description": "<p>This is an example of MASA Blaz or natural application markup. Reset the App property, you can place the element anywhere. The key component that makes your page content and element elements work together is MMain. The MMain component will proceed according to the application you specify. The structure of program components is dynamically resized.\nWhen using Router, it is recommended to put your view in MMain.\nIn the following example, these components can be used as layout elements in your application. These components can be mixed and matched, but only one of each specific component can exist at any time.\nEach application component has a designated position and priority, which affects its position in the layout system.\n<code>MAppBar</code>: placed at the top of the application, priority should be lower than <code>MSystemBar</code>\n<code>MFooter</code>: always placed at the bottom of the application.\n<code>MNavigationDrawer</code>: Can be placed on the left or right side of the application, and can be placed beside or below the <code>MAppBar</code>.</p>\n",
-        "Code": "<MApp>\r\n    <MAppBar App Absolute Flat Class=\"grey lighten-1\">\r\n        <!-- -->\r\n    </MAppBar>\r\n\r\n    <MNavigationDrawer @bind-MiniVariant=\"_mini\" Absolute Style=\"background-color:#F5F5F5\">\r\n        <!-- -->\r\n        \r\n        <MListItem Class=\"px-2\">\r\n            <MButton Icon OnClick=\"() => _mini = !_mini\">\r\n                <MIcon>mdi-chevron-left</MIcon>\r\n            </MButton>\r\n        </MListItem>\r\n    </MNavigationDrawer>\r\n\r\n    <!-- 根据应用组件来调整你的内容 -->\r\n    <MMain Class=\"grey lighten-3\">\r\n        \r\n        <!-- 给应用提供合适的间距 -->\r\n        <MContainer Fluid>\r\n\r\n        </MContainer>\r\n    </MMain>\r\n\r\n    <MFooter App Style=\"padding-left: 256px;\" Class=\"grey lighten-1\">\r\n        <!-- -->\r\n    </MFooter>\r\n</MApp>\r\n\r\n@code{\r\n    private bool _mini = false;\r\n}",
+        "Code": "<MApp>\r\n    <MAppBar App Absolute Flat Style=\"grey lighten-1;\"></MAppBar>\r\n\r\n    <MNavigationDrawer @bind-MiniVariant=\"_mini\" Absolute Style=\"background-color:#F5F5F5\">\r\n        <MListItem Class=\"px-2\">\r\n            <MButton Icon OnClick=\"() => _mini = !_mini\">\r\n                <MIcon>mdi-chevron-left</MIcon>\r\n            </MButton>\r\n        </MListItem>\r\n    </MNavigationDrawer>\r\n\r\n    <MMain Class=\"grey lighten-3\"></MMain>\r\n\r\n    <MFooter Style=\"padding-left: 256px;color:grey lighten-1;\"></MFooter>\r\n</MApp>\r\n\r\n@code{\r\n    private bool _mini = false;\r\n}",
         "Type": "Demos.Components.Application.props.Basic",
         "Style": "",
         "Debug": false,
@@ -181,10 +183,11 @@
     "Title": "AspectRatios",
     "Type": "AspectRatios",
     "Desc": "<p>The <code>MResponsive</code> component can be used to fix any section to a specific aspect ratio</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0736279+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.5458864+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -204,11 +207,12 @@
     "Title": "Avatars",
     "Type": "Avatars",
     "Desc": "<p>The MAvatar component is usually used to display user profile pictures. This component allows you to dynamically add and set the border radius of response images, icons and text. ** The tile ** variable can be used to display an avatar with no border radius.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Avatars.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.074628+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.5488848+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -294,10 +298,11 @@
     "Title": "Badges",
     "Type": "Badges",
     "Desc": "<p>The MBadge component overwrites or subscribes to an icon like an avatar or text on the content to highlight the user's information or just draw attention to a specific element. The content in the badge usually contains numbers or icons.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0755132+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.5578867+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -361,10 +366,11 @@
     "Title": "Banners",
     "Type": "Banners",
     "Desc": "<p>The component is used to send intermittent messages of 1-2 actions to the user. It has two variables, single-line and multi-line (implied). These icons can be used with your messages and actions.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0756284+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.5628865+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -439,10 +445,11 @@
     "Title": "AppBars",
     "Type": "AppBars",
     "Desc": "<p>appbar component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-17T17:29:52.0536672+08:00",
+    "LastWriteTime": "2021-11-18T09:22:16.3308287+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -570,7 +577,7 @@
         "Name": "toggleNavigationDrawers",
         "Title": "Toggle navigation drawers",
         "Description": "<p>Using the functional component <code>MAppBarNavIcon</code> you can toggle the state of other components such as\na <code>MNavigationDrawer</code>.</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCard class=\"mx-auto overflow-hidden\" Height=\"400\">\r\n        <MAppBar Absolute>\r\n            <MAppBarNavIcon @onclick=\"() => drawer=true\"></MAppBarNavIcon>\r\n            <MAppBarTitle>Others </MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n\r\n\r\n            <MMenu NudgeBottom=\"8\" Bottom Left>\r\n                <ActivatorContent>\r\n                    <MButton Icon @attributes=\"@context.Attrs\">\r\n                        <MIcon>mdi-dots-vertical</MIcon>\r\n                    </MButton>\r\n                </ActivatorContent>\r\n\r\n                <ChildContent>\r\n                    <MList>\r\n                        <MListItemGroup>\r\n                            @foreach (var item in titles)\r\n                            {\r\n                                <MListItem>\r\n                                    <MListItemContent>\r\n                                        <MListItemTitle>\r\n                                            @item\r\n                                        </MListItemTitle>\r\n                                    </MListItemContent>\r\n                                </MListItem>\r\n                            }\r\n                        </MListItemGroup>\r\n                    </MList>\r\n                </ChildContent>\r\n            </MMenu>\r\n\r\n        </MAppBar>\r\n\r\n        <MNavigationDrawer Absolute Temporary Drawer=\"drawer\">\r\n            <MList Nav Dense>\r\n                <MListItemGroup>\r\n                    <MListItem>\r\n                        <MListItemIcon>\r\n                            <MIcon>mdi-home</MIcon>\r\n                        </MListItemIcon>\r\n                        <MListItemTitle>\r\n                            Home\r\n                        </MListItemTitle>\r\n                    </MListItem>\r\n                    <MListItem>\r\n                        <MListItemIcon>\r\n                            <MIcon>mdi-account</MIcon>\r\n                        </MListItemIcon>\r\n                        <MListItemTitle>\r\n                            Account\r\n                        </MListItemTitle>\r\n                    </MListItem>\r\n                </MListItemGroup>\r\n            </MList>\r\n        </MNavigationDrawer>\r\n\r\n    </MCard>\r\n</MContainer>\r\n\r\n@code {\r\n    bool drawer = false;\r\n    string group = \"\";\r\n\r\n    string[] titles =\r\n    {\r\n    \"Click Me\",\r\n    \"Click Me\",\r\n    \"Click Me\",\r\n    \"Click Me 2\"\r\n    };\r\n}",
+        "Code": "<MContainer Fluid>\r\n    <MCard class=\"mx-auto overflow-hidden\" Height=\"400\">\r\n        <MAppBar Absolute>\r\n            <MAppBarNavIcon @onclick=\"() => drawer=true\"></MAppBarNavIcon>\r\n            <MAppBarTitle>Others </MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n\r\n\r\n            <MMenu NudgeBottom=\"8\" Bottom Left>\r\n                <ActivatorContent>\r\n                    <MButton Icon @attributes=\"@context.Attrs\">\r\n                        <MIcon>mdi-dots-vertical</MIcon>\r\n                    </MButton>\r\n                </ActivatorContent>\r\n\r\n                <ChildContent>\r\n                    <MList>\r\n                        <MListItemGroup>\r\n                            @foreach (var item in titles)\r\n                            {\r\n                                <MListItem>\r\n                                    <MListItemContent>\r\n                                        <MListItemTitle>\r\n                                            @item\r\n                                        </MListItemTitle>\r\n                                    </MListItemContent>\r\n                                </MListItem>\r\n                            }\r\n                        </MListItemGroup>\r\n                    </MList>\r\n                </ChildContent>\r\n            </MMenu>\r\n\r\n        </MAppBar>\r\n\r\n        <MNavigationDrawer Absolute Temporary @bind-Value=\"drawer\">\r\n            <MList Nav Dense>\r\n                <MListItemGroup>\r\n                    <MListItem>\r\n                        <MListItemIcon>\r\n                            <MIcon>mdi-home</MIcon>\r\n                        </MListItemIcon>\r\n                        <MListItemTitle>\r\n                            Home\r\n                        </MListItemTitle>\r\n                    </MListItem>\r\n                    <MListItem>\r\n                        <MListItemIcon>\r\n                            <MIcon>mdi-account</MIcon>\r\n                        </MListItemIcon>\r\n                        <MListItemTitle>\r\n                            Account\r\n                        </MListItemTitle>\r\n                    </MListItem>\r\n                </MListItemGroup>\r\n            </MList>\r\n        </MNavigationDrawer>\r\n\r\n    </MCard>\r\n</MContainer>\r\n\r\n@code {\r\n    bool drawer = false;\r\n    string[] titles =\r\n    {\r\n    \"Click Me\",\r\n    \"Click Me\",\r\n    \"Click Me\",\r\n    \"Click Me 2\"\r\n    };\r\n}",
         "Type": "Demos.Components.Bars.children.AppBar.misc.ToggleNavigationDrawers",
         "Style": "",
         "Debug": false,
@@ -583,10 +590,11 @@
     "Title": "SystemBars",
     "Type": "SystemBars",
     "Desc": "<p>The MSystemBar component can be used to display status to the user. It looks like an Android system bar and can contain icons, spaces, and some text.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0776289+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.5728856+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -650,10 +658,11 @@
     "Title": "Toolbars",
     "Type": "Toolbars",
     "Desc": "<p>Semantic vector graphics.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0816266+08:00",
+    "LastWriteTime": "2021-11-12T17:14:53.5588656+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -794,10 +803,11 @@
     "Title": "Border",
     "Type": "Border",
     "Desc": "<p>Border component can wrap any content with one side border.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-10-13T10:44:46.0873838+08:00",
+    "LastWriteTime": "2021-09-03T18:29:09.2179422+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -828,14 +838,12 @@
     "Title": "Breadcrumbs",
     "Type": "Breadcrumbs",
     "Desc": "<p>Breadcrumbs component is suitable for page-level navigation.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/docs/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
+    "Caveats": "\n<!--alert:info-->\n<p>By default <code>MBreadcrumbs</code> will disable the linkage with router. You can enable the feature by using *<em>Linkage</em> prop.</p>\n",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/docs/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
-      "Caveats": "\n<!--alert:info-->\n<p>By default <code>MBreadcrumbs</code> will disable the linkage with router. You can enable the feature by using *<em>Linkage</em> prop.</p>\n"
-    },
-    "LastWriteTime": "2021-11-12T13:32:30.0836279+08:00",
+    "LastWriteTime": "2021-11-12T17:14:53.4608659+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -910,14 +918,12 @@
     "Title": "Buttons",
     "Type": "Buttons",
     "Desc": "<p>The <code>MButton</code> component replaces the standard html button with a material design theme and a multitude of options. Any color\nhelper class can be used to alter the background or text color.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MButton\">MButton</a></li>\n<li><a href=\"/docs/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
+    "Caveats": "\n<!--alert:warning--> \n<p><code>MButton</code> is the only component that behaves differently when using the <strong>Dark</strong> prop. Normally components use the <strong>Dark</strong> prop to denote that they have a dark colored background and need their text to be white. While this will work\nfor <code>MButton</code>, it is advised to only use the prop when the button <strong>IS ON</strong> a colored background due to the disabled state\nblending in with white backgrounds. If you need white text, simply add the <code>white--text</code> class.</p>\n",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg",
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MButton\">MButton</a></li>\n<li><a href=\"/docs/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
-      "Caveats": "\n<!--alert:warning--> \n<p><code>MButton</code> is the only component that behaves differently when using the <strong>Dark</strong> prop. Normally components use the <strong>Dark</strong> prop to denote that they have a dark colored background and need their text to be white. While this will work\nfor <code>MButton</code>, it is advised to only use the prop when the button <strong>IS ON</strong> a colored background due to the disabled state\nblending in with white backgrounds. If you need white text, simply add the <code>white--text</code> class.</p>\n"
-    },
-    "LastWriteTime": "2021-11-17T17:29:52.1597474+08:00",
+    "LastWriteTime": "2021-11-18T09:22:16.3088349+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1069,13 +1075,12 @@
     "Title": "Cards",
     "Type": "Cards",
     "Desc": "<p>The MCard component is a versatile component that can be used for anything from a panel to a static image. The card component has numerous helper components to make markup as easy as possible. Components that have no listed options use Vue��s functional component option for faster rendering and serve as markup sugar to make building easier.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MCard\">MCard</a></li>\n<li><a href=\"/docs/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/docs/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/docs/api/MCardText\">MCardText</a></li>\n<li><a href=\"/docs/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Cards.svg",
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MCard\">MCard</a></li>\n<li><a href=\"/docs/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/docs/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/docs/api/MCardText\">MCardText</a></li>\n<li><a href=\"/docs/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-11-12T13:32:30.0886273+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.6188862+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1216,11 +1221,12 @@
     "Title": "Chips",
     "Type": "Chips",
     "Desc": "<p>The <code>MChip</code> component is used to convey small pieces of information. Using the close property, the chip becomes\ninteractive, allowing user interaction. This component is used by the <a href=\"/components/chipgroup\">MChipGroup</a> for advanced selection options.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chips.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T17:18:10.0838705+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.6218858+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1394,10 +1400,11 @@
     "Title": "Dialogs",
     "Type": "Dialogs",
     "Desc": "<p>The <code>Dialog</code> component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-10-29T14:11:50.7074219+08:00",
+    "LastWriteTime": "2021-11-05T15:50:04.4912214+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1516,11 +1523,12 @@
     "Title": "Dividers",
     "Type": "Dividers",
     "Desc": "<p>The v-divider component is used to separate sections of lists or layouts.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Dividers.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0916273+08:00",
+    "LastWriteTime": "2021-11-12T17:14:53.4428661+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1584,11 +1592,12 @@
     "Title": "ECharts",
     "Type": "ECharts",
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-10-13T10:44:46.1023469+08:00",
+    "LastWriteTime": "2021-08-23T17:55:09.6332593+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1608,13 +1617,12 @@
     "Title": "ExpansionPanels",
     "Type": "ExpansionPanels",
     "Desc": "<p>The <code>MExpansionPanel</code> component is useful for reducing vertical space with large amounts of information. The default\nfunctionality of the component is to only display one expansion-panel body at a time; however, with the <strong>Multiple</strong>\nproperty, the expansion-panel can remain open until explicitly closed.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/docs/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/docs/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/docs/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/docs/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/docs/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/docs/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-11-02T09:37:52.1130132+08:00",
+    "LastWriteTime": "2021-11-05T15:50:04.4602205+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1709,7 +1717,7 @@
         "Name": "advanced",
         "Title": "Advanced",
         "Description": "<p>The expansion panel component provides a rich playground to build truly advanced implementations. Here we take advantage of slots in the <code>MExpansionPanelHeader</code>  component to react to the state of being open or closed by fading content in and out.</p>\n",
-        "Code": "<MExpansionPanels>\r\n<MExpansionPanel>\r\n    <MExpansionPanelHeader>\r\n        <MRow NoGutters>\r\n            <MCol Cols=\"4\">\r\n                Trip name\r\n            </MCol>\r\n            <MCol\r\n                Cols=\"8\"\r\n                Class=\"text--secondary\">\r\n                <FadeTransition>\r\n                    @*TODO: Transition need to update, support LeaveAbsolute*@\r\n                    <Element Show=\"context\" Style=\"position: absolute\">\r\n                        <span>\r\n                            Enter a name for the trip\r\n                        </span>\r\n                    </Element>\r\n                </FadeTransition>\r\n                <FadeTransition>\r\n                    <Element Show=\"!context\">\r\n                        <span>\r\n                            @trip.name\r\n                        </span>\r\n                    </Element>\r\n                </FadeTransition>\r\n            </MCol>\r\n        </MRow>\r\n    </MExpansionPanelHeader>\r\n    <MExpansionPanelContent>\r\n        <MTextField\r\n            @bind-Value=\"@trip.name\"\r\n            placeholder=\"Caribbean Cruise\">\r\n        </MTextField>\r\n    </MExpansionPanelContent>\r\n</MExpansionPanel>\r\n\r\n<MExpansionPanel>\r\n    <MExpansionPanelHeader>\r\n        <MRow NoGutters>\r\n            <MCol Cols=\"4\">\r\n                Location\r\n            </MCol>\r\n            <MCol\r\n                Cols=\"8\"\r\n                Class=\"text--secondary\">\r\n                <FadeTransition>\r\n                    <Element Show=\"context\" Style=\"position: absolute\">\r\n                        <span>\r\n                            Select trip destination\r\n                        </span>\r\n                    </Element>\r\n                </FadeTransition>\r\n                <FadeTransition>\r\n                    <Element Show=\"!context\">\r\n                        <span>\r\n                            @trip.location\r\n                        </span>\r\n                    </Element>\r\n                </FadeTransition>\r\n            </MCol>\r\n        </MRow>\r\n    </MExpansionPanelHeader>\r\n    <MExpansionPanelContent>\r\n        <MRow NoGutters>\r\n            <MSpacer></MSpacer>\r\n            <MCol Cols=\"5\">\r\n                <MSelect\r\n                    @bind-Value=\"trip.location\"\r\n                    Items=\"locations\"\r\n                    ItemValue=\"item => item\"\r\n                    ItemText=\"item => item\"\r\n                    Chips\r\n                    Flat\r\n                    Solo>\r\n                </MSelect>\r\n            </MCol>\r\n\r\n            <MDivider\r\n                Vertical\r\n                Class=\"mx-4\">\r\n            </MDivider>\r\n\r\n            <MCol Cols=\"3\">\r\n                Select your destination of choice\r\n                <br>\r\n                <a href=\"/components/expansionpanels#\">Learn more</a>\r\n            </MCol>\r\n        </MRow>\r\n\r\n        <MCardActions>\r\n            <MSpacer></MSpacer>\r\n            <MButton\r\n                Text\r\n                Color=\"secondary\">\r\n                Cancel\r\n            </MButton>\r\n            <MButton\r\n                Text\r\n                Color=\"primary\">\r\n                Save\r\n            </MButton>\r\n        </MCardActions>\r\n    </MExpansionPanelContent>\r\n</MExpansionPanel>\r\n\r\n<MExpansionPanel>\r\n    <MExpansionPanelHeader>\r\n        <MRow NoGutters>\r\n            <MCol Cols=\"4\">\r\n                Start and end dates\r\n            </MCol>\r\n            <MCol\r\n                Cols=\"8\"\r\n                Class=\"text--secondary\">\r\n                <FadeTransition>\r\n                    <Element Show=\"context\" Style=\"position: absolute\">\r\n                        <span>When do you want to travel?</span>\r\n                    </Element>\r\n                </FadeTransition>\r\n                <FadeTransition>\r\n                    <Element Show=\"!context\">\r\n                        <MRow\r\n                            NoGutters\r\n                            Style=\"width: 100%\">\r\n                            <MCol Cols=\"6\">\r\n                                Start date: @(trip.start ?? \"Not set\")\r\n                            </MCol>\r\n                            <MCol Cols=\"6\">\r\n                                End date: @(trip.end ?? \"Not set\")\r\n                            </MCol>\r\n                        </MRow>\r\n                    </Element>\r\n                </FadeTransition>\r\n            </MCol>\r\n        </MRow>\r\n    </MExpansionPanelHeader>\r\n    <MExpansionPanelContent>\r\n        <MRow\r\n            Justify=\"JustifyTypes.SpaceAround\"\r\n            NoGutters>\r\n            <MCol Cols=\"3\">\r\n                <MMenu\r\n                    @bind-Value=\"visible\"\r\n                    CloseOnContentClick=\"false\"\r\n                    OffsetY\r\n                    MinWidth=\"290\">\r\n                    <ActivatorContent>\r\n                        <MTextField\r\n                            @bind-Value=\"trip.start\"\r\n                            Label=\"Start date\"\r\n                            PrependIcon=\"mdi-calendar\"\r\n                            Readonly\r\n                            @attributes=\"@context.Attrs\">\r\n                        </MTextField>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        <MDatePicker\r\n                            @bind-Value=\"date\"\r\n                            NoTitle\r\n                            Scrollable>\r\n                            <ActionsContent>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton\r\n                                    Text\r\n                                    Color=\"primary\"\r\n                                    OnClick=\"() => visible = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton\r\n                                    Text\r\n                                    Color=\"primary\"\r\n                                    OnClick=\"() => { trip.start = date.ToShortDateString(); visible = false;}\">\r\n                                    OK\r\n                                </MButton>\r\n                            </ActionsContent>\r\n                        </MDatePicker>\r\n                    </ChildContent>\r\n                </MMenu>\r\n            </MCol>\r\n\r\n            <MCol Cols=\"3\">\r\n                <MMenu\r\n                    @bind-Value=\"visible2\"\r\n                    CloseOnContentClick=\"false\"\r\n                    OffsetY\r\n                    MinWidth=\"290\">\r\n                    <ActivatorContent>\r\n                        <MTextField\r\n                            @bind-Value=\"trip.end\"\r\n                            Label=\"End date\"\r\n                            PrependIcon=\"mdi-calendar\"\r\n                            Readonly\r\n                            @attributes=\"@context.Attrs\">\r\n                        </MTextField>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        <MDatePicker\r\n                            @bind-Value=\"date2\"\r\n                            NoTitle\r\n                            Scrollable>\r\n                            <ActionsContent>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton\r\n                                    Text\r\n                                    Color=\"primary\"\r\n                                    OnClick=\"() => visible2 = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton\r\n                                    Text\r\n                                    Color=\"primary\"\r\n                                    OnClick=\"() => { trip.end = date2.ToShortDateString(); visible2 = false; }\">\r\n                                    OK\r\n                                </MButton>\r\n                            </ActionsContent>\r\n                        </MDatePicker>\r\n                    </ChildContent>\r\n                </MMenu>\r\n            </MCol>\r\n        </MRow>\r\n    </MExpansionPanelContent>\r\n</MExpansionPanel>\r\n</MExpansionPanels>\r\n\r\n@code {\r\n\r\n    DateOnly date = DateOnly.FromDateTime(DateTime.Now);\r\n    DateOnly date2 = DateOnly.FromDateTime(DateTime.Now);\r\n\r\n    List<string> locations = new() {\"Australia\", \"Barbados\", \"Chile\", \"Denmark\", \"Ecuador\", \"France\"};\r\n\r\n    Trip trip = new();\r\n\r\n    bool visible = false;\r\n    bool visible2 = false;\r\n\r\n    class Trip\r\n    {\r\n        public string name { get; set; }\r\n        public string location { get; set; }\r\n        public string start { get; set; }\r\n        public string end { get; set; }\r\n    }\r\n\r\n}",
+        "Code": "<MExpansionPanels>\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Trip name\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        @*TODO: Transition need to update, support LeaveAbsolute*@\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>\r\n                                Enter a name for the trip\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <span>\r\n                                @trip.name\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MTextField @bind-Value=\"@trip.name\"\r\n                        placeholder=\"Caribbean Cruise\">\r\n            </MTextField>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Location\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>\r\n                                Select trip destination\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <span>\r\n                                @trip.location\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MRow NoGutters>\r\n                <MSpacer></MSpacer>\r\n                <MCol Cols=\"5\">\r\n                    <MSelect @bind-Value=\"trip.location\"\r\n                             Items=\"locations\"\r\n                             ItemValue=\"item => item\"\r\n                             ItemText=\"item => item\"\r\n                             Chips\r\n                             Flat\r\n                             Solo>\r\n                    </MSelect>\r\n                </MCol>\r\n\r\n                <MDivider Vertical\r\n                          Class=\"mx-4\">\r\n                </MDivider>\r\n\r\n                <MCol Cols=\"3\">\r\n                    Select your destination of choice\r\n                    <br>\r\n                    <a href=\"/components/expansionpanels#\">Learn more</a>\r\n                </MCol>\r\n            </MRow>\r\n\r\n            <MCardActions>\r\n                <MSpacer></MSpacer>\r\n                <MButton Text\r\n                         Color=\"secondary\">\r\n                    Cancel\r\n                </MButton>\r\n                <MButton Text\r\n                         Color=\"primary\">\r\n                    Save\r\n                </MButton>\r\n            </MCardActions>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Start and end dates\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>When do you want to travel?</span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <MRow NoGutters\r\n                                  Style=\"width: 100%\">\r\n                                <MCol Cols=\"6\">\r\n                                    Start date: @(trip.start ?? \"Not set\")\r\n                                </MCol>\r\n                                <MCol Cols=\"6\">\r\n                                    End date: @(trip.end ?? \"Not set\")\r\n                                </MCol>\r\n                            </MRow>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MRow Justify=\"JustifyTypes.SpaceAround\"\r\n                  NoGutters>\r\n                <MCol Cols=\"3\">\r\n                    <MMenu @bind-Value=\"visible\"\r\n                           CloseOnContentClick=\"false\"\r\n                           OffsetY\r\n                           MinWidth=\"290\">\r\n                        <ActivatorContent>\r\n                            <MTextField @bind-Value=\"trip.start\"\r\n                                        Label=\"Start date\"\r\n                                        PrependIcon=\"mdi-calendar\"\r\n                                        Readonly\r\n                                        @attributes=\"@context.Attrs\">\r\n                            </MTextField>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MDatePicker @bind-Value=\"date\"\r\n                                         NoTitle\r\n                                         Scrollable>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => visible = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => { trip.start = date.ToShortDateString(); visible = false;}\">\r\n                                    OK\r\n                                </MButton>\r\n                            </MDatePicker>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n\r\n                <MCol Cols=\"3\">\r\n                    <MMenu @bind-Value=\"visible2\"\r\n                           CloseOnContentClick=\"false\"\r\n                           OffsetY\r\n                           MinWidth=\"290\">\r\n                        <ActivatorContent>\r\n                            <MTextField @bind-Value=\"trip.end\"\r\n                                        Label=\"End date\"\r\n                                        PrependIcon=\"mdi-calendar\"\r\n                                        Readonly\r\n                                        @attributes=\"@context.Attrs\">\r\n                            </MTextField>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MDatePicker @bind-Value=\"date2\"\r\n                                         NoTitle\r\n                                         Scrollable>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => visible2 = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => { trip.end = date2.ToShortDateString(); visible2 = false; }\">\r\n                                    OK\r\n                                </MButton>\r\n                            </MDatePicker>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n</MExpansionPanels>\r\n\r\n@code {\r\n\r\n    DateOnly date = DateOnly.FromDateTime(DateTime.Now);\r\n    DateOnly date2 = DateOnly.FromDateTime(DateTime.Now);\r\n\r\n    List<string> locations = new() { \"Australia\", \"Barbados\", \"Chile\", \"Denmark\", \"Ecuador\", \"France\" };\r\n\r\n    Trip trip = new();\r\n\r\n    bool visible = false;\r\n    bool visible2 = false;\r\n\r\n    class Trip\r\n    {\r\n        public string name { get; set; }\r\n        public string location { get; set; }\r\n        public string start { get; set; }\r\n        public string end { get; set; }\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.ExpansionPanels.misc.Advanced",
         "Style": "",
         "Debug": false,
@@ -1733,10 +1741,11 @@
     "Title": "Footer",
     "Type": "Footer",
     "Desc": "<p>The MFooter component is used to display public information that users may want to access from any page in the website.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.6580013+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.1310932+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1800,11 +1809,12 @@
     "Title": "Autocomplete",
     "Type": "Autocomplete",
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Autocomplete.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.6590057+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.1360957+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1846,10 +1856,11 @@
     "Title": "Cascader",
     "Type": "Cascader",
     "Desc": "<p>The <code>Select</code> component is used for collecting user provided information from a list of options.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-24T18:45:49.2469595+08:00",
+    "LastWriteTime": "2021-11-24T14:42:47.282503+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1880,12 +1891,11 @@
     "Title": "Checkbox",
     "Type": "Checkbox",
     "Desc": "<p>The <code>MCheckbox</code> component provides users the ability to choose between two distinct values. These are very similar to a switch and can be used in complex forms and checklists.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/en-US/docs/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/en-US/docs/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/en-US/docs/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/en-US/docs/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-11-12T14:06:52.8350159+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.1450934+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1960,11 +1970,12 @@
     "Title": "FileInput",
     "Type": "FileInput",
     "Desc": "<p>v-file-input��һ�����Ƶ�������������ṩ��һ���ɾ���ѡ����棬��ʾ��ϸ��ѡ����Ϣ���ϴ����ȡ� ������ֱ��ȡ����\u05FC�ļ����롣</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/FileInput.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.8319996+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.1580928+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2083,11 +2094,12 @@
     "Title": "From",
     "Type": "Form",
     "Desc": "<p>Form validation.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/From.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-10-18T13:07:46.3764354+08:00",
+    "LastWriteTime": "2021-11-05T15:50:00.0832747+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2129,13 +2141,12 @@
     "Title": "Radio",
     "Type": "Radio",
     "Desc": "<p>The <code>MRadio</code> component is a simple radio button. When combined with the <code>MRadioGroup</code> component you can provide\ngroupable functionality to allow users to select from a predefined set of options.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MRadio\">MRadio</a></li>\n<li><a href=\"/docs/api/MRadioGroup\">MRadio</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg",
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MRadio\">MRadio</a></li>\n<li><a href=\"/docs/api/MRadioGroup\">MRadio</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-11-12T14:06:52.7990006+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.1630935+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2199,11 +2210,12 @@
     "Title": "RangeSliders",
     "Type": "RangeSliders",
     "Desc": "<p>TODO...</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/RangeSliders.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:48.9354207+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.1680952+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2278,10 +2290,11 @@
     "Title": "Select",
     "Type": "Select",
     "Desc": "<p>The <code>Select</code> component is used for collecting user provided information from a list of options.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-10-29T13:31:00.2400602+08:00",
+    "LastWriteTime": "2021-11-05T15:50:00.1132746+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2400,11 +2413,12 @@
     "Title": "Sliders",
     "Type": "Sliders",
     "Desc": "<p>TODO...</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sliders.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.7730007+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.192094+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2578,13 +2592,12 @@
     "Title": "Switch",
     "Type": "Switch",
     "Desc": "<p>The <code>MSwitch</code> component provides users the ability to choose between two distinct values. These are very similar to a\ntoggle, or on/off switch, though aesthetically different than a checkbox.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MSwitch\">MSwitch</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Switch.svg",
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-11-23T18:27:44.4298634+08:00",
+    "LastWriteTime": "2021-11-23T16:08:41.2566763+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2670,11 +2683,12 @@
     "Title": "Textareas",
     "Type": "Textareas",
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Textareas.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.7110144+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.2090943+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2793,11 +2807,12 @@
     "Title": "TextField",
     "Type": "TextField",
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TextField.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.6990026+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.233094+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2991,7 +3006,7 @@
         "Name": "iconSlots",
         "Title": "IconSlots",
         "Description": "<p>Instead of using <strong>Prepend</strong>/<strong>Append</strong>/<strong>AppendOuter</strong> icons you can use contents to extend input’s functionality.</p>\n",
-        "Code": "<MForm>\r\n    <MContainer>\r\n        <MRow>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_message\"\r\n                            Outlined\r\n                            Clearable\r\n                            Label=\"Message\"\r\n                            Type=\"text\">\r\n                    <PrependContent>\r\n                        <MTooltip Bottom>\r\n                            <ActivatorContent Context=\"activatorContext\">\r\n                                <MIcon @attributes=\"activatorContext.Attrs\">\r\n                                    mdi-help-circle-outline\r\n                                </MIcon>\r\n                            </ActivatorContent>\r\n                            <ChildContent>\r\n                                I'm a tooltip\r\n                            </ChildContent>\r\n                        </MTooltip>\r\n                    </PrependContent>\r\n                    <AppendContent>\r\n                        <img width=\"24\"\r\n                             height=\"24\"\r\n                             src=\"https://cdn.vuetifyjs.com/images/logos/v-alt.svg\"\r\n                             alt=\"\">\r\n                    </AppendContent>\r\n                    <AppendOuterContent>\r\n                        <MMenu Style=\"top: -12px\"\r\n                               OffsetY>\r\n                            <ActivatorContent Context=\"_\">\r\n                                <MButton>\r\n                                    <MIcon Left>\r\n                                        mdi-menu\r\n                                    </MIcon>\r\n                                    Menu\r\n                                </MButton>\r\n                            </ActivatorContent>\r\n                            <ChildContent>\r\n                                <MCard>\r\n                                    <MCardText Class=\"pa-6\">\r\n                                        <MButton Large\r\n                                                 Text\r\n                                                 Color=\"primary\">\r\n                                            <MIcon Left>\r\n                                                mdi-target\r\n                                            </MIcon>Click me\r\n                                        </MButton>\r\n                                    </MCardText>\r\n                                </MCard>\r\n                            </ChildContent>\r\n                        </MMenu>\r\n                    </AppendOuterContent>\r\n                </MTextField>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n\r\n@code {\r\n    private string _message = \"Hey!\";\r\n\r\n}",
+        "Code": "<MForm>\r\n    <MContainer>\r\n        <MRow>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_message\"\r\n                            Outlined\r\n                            Clearable\r\n                            Label=\"Message\"\r\n                            Type=\"text\">\r\n                    <PrependContent>\r\n                        <MTooltip Bottom>\r\n                            <ActivatorContent Context=\"activatorContext\">\r\n                                <MIcon @attributes=\"activatorContext.Attrs\">\r\n                                    mdi-help-circle-outline\r\n                                </MIcon>\r\n                            </ActivatorContent>\r\n                            <ChildContent>\r\n                                I'm a tooltip\r\n                            </ChildContent>\r\n                        </MTooltip>\r\n                    </PrependContent>\r\n                    <AppendContent>\r\n                        <img width=\"24\"\r\n                             height=\"24\"\r\n                             src=\"https://cdn.vuetifyjs.com/images/logos/v-alt.svg\"\r\n                             alt=\"\">\r\n                    </AppendContent>\r\n                    <AppendOuterContent>\r\n                        <MMenu Style=\"top: -12px\"\r\n                               OffsetY>\r\n                            <ActivatorContent Context=\"menu\">\r\n                                <MButton @attributes=\"menu.Attrs\">\r\n                                    <MIcon Left>\r\n                                        mdi-menu\r\n                                    </MIcon>\r\n                                    Menu\r\n                                </MButton>\r\n                            </ActivatorContent>\r\n                            <ChildContent>\r\n                                <MCard>\r\n                                    <MCardText Class=\"pa-6\">\r\n                                        <MButton Large\r\n                                                 Text\r\n                                                 Color=\"primary\">\r\n                                            <MIcon Left>\r\n                                                mdi-target\r\n                                            </MIcon>Click me\r\n                                        </MButton>\r\n                                    </MCardText>\r\n                                </MCard>\r\n                            </ChildContent>\r\n                        </MMenu>\r\n                    </AppendOuterContent>\r\n                </MTextField>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n\r\n@code {\r\n    private string _message = \"Hey!\";\r\n\r\n}",
         "Type": "Demos.Components.FormInputs.children.TextField.contents.IconSlots",
         "Style": "",
         "Debug": false,
@@ -3021,10 +3036,21 @@
       },
       {
         "Order": 3,
+        "Name": "customValidation",
+        "Title": "CustomValidation",
+        "Description": "<p>TODO...</p>\n",
+        "Code": "<MRow Justify=\"JustifyTypes.Center\">\r\n    <MCol Cols=\"12\"\r\n          Sm=\"10\"\r\n          Md=\"8\"\r\n          Lg=\"6\">\r\n        <MCard>\r\n            <MCardText>\r\n                <MTextField @bind-Value=\"_name\"\r\n                            Rules=\"Rules.Name\"\r\n                            ErrorMessages=\"_errorMessages\"\r\n                            Label=\"Full Name\"\r\n                            Placeholder=\"John Doe\"\r\n                            required></MTextField>\r\n                <MTextField @bind-Value=\"_address\"\r\n                            Rules=\"Rules.Address\"\r\n                            Label=\"Address Line\"\r\n                            Placeholder=\"Snowy Rock Pl\"\r\n                            Counter=\"25\"\r\n                            required>\r\n                </MTextField>\r\n                <MTextField @bind-Value=\"_city\"\r\n                            Rules=\"Rules.City\"\r\n                            Label=\"City\"\r\n                            Placeholder=\"El Paso\"\r\n                            required></MTextField>\r\n                <MTextField @bind-Value=\"_state\"\r\n                            Rules=\"Rules.State\"\r\n                            Label=\"State/Province/Region\"\r\n                            required\r\n                            Placeholder=\"TX\"></MTextField>\r\n                <MTextField @bind-Value=\"_zip\"\r\n                            Rules=\"Rules.Zip\"\r\n                            Label=\"ZIP / Postal Code\"\r\n                            required\r\n                            Placeholder=\"79938\"></MTextField>\r\n                <MAutocomplete @bind-Value=\"_country\"\r\n                               Rules=\"Rules.Country\"\r\n                               Items=\"_countries\"\r\n                               ItemValue=\"r=>r\"\r\n                               ItemText=\"r=>r\"\r\n                               Label=\"Country\"\r\n                               Placeholder=\"Select...\"\r\n                               required></MAutocomplete>\r\n            </MCardText>\r\n            <MDivider class=\"mt-12\"></MDivider>\r\n            <MCardActions>\r\n                <MButton Text>\r\n                    Cancel\r\n                </MButton>\r\n                <MSpacer></MSpacer>\r\n                <SlideXReverseTransition>\r\n                    @if (_formHasErrors)\r\n                    {\r\n                        <MTooltip Left>\r\n                            <ActivatorContent>\r\n                                <MButton Icon\r\n                                     Class=\"my-0\"\r\n                                     OnClick=\"ResetForm\"\r\n                                     @attributes=\"context.Attrs\">\r\n                                    <MIcon>mdi-refresh</MIcon>\r\n                                </MButton>\r\n                            </ActivatorContent>\r\n                            <ChildContent>\r\n                                <span>Refresh form</span>\r\n                            </ChildContent>\r\n                        </MTooltip>\r\n                    }\r\n                </SlideXReverseTransition>\r\n                <MButton Color=\"primary\"\r\n                         Text\r\n                         OnClick=\"Submit\">\r\n                    Submit\r\n                </MButton>\r\n            </MCardActions>\r\n        </MCard>\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n    public static class Rules\r\n    {\r\n        public static IEnumerable<Func<string, StringBoolean>> Name => new List<Func<string, StringBoolean>>()\r\n                {\r\n                    v => !string.IsNullOrEmpty(v) ? true : \"This field is required\"\r\n                };\r\n\r\n        public static IEnumerable<Func<string, StringBoolean>> Address => new List<Func<string, StringBoolean>>()\r\n                {\r\n                    v => !string.IsNullOrEmpty(v) ? true : \"This field is required\",\r\n                    v => !string.IsNullOrEmpty(v) && v.Length <= 25 ? true : \"Address must be less than 25 characters\"\r\n                };\r\n\r\n        public static IEnumerable<Func<string, StringBoolean>> City => new List<Func<string, StringBoolean>>()\r\n                {\r\n                    v => !string.IsNullOrEmpty(v) ? true : \"This field is required\"\r\n                };\r\n\r\n        public static IEnumerable<Func<string, StringBoolean>> State => new List<Func<string, StringBoolean>>()\r\n                {\r\n                    v => !string.IsNullOrEmpty(v) ? true : \"This field is required\"\r\n                };\r\n\r\n        public static IEnumerable<Func<string, StringBoolean>> Zip => new List<Func<string, StringBoolean>>()\r\n                {\r\n                    v => !string.IsNullOrEmpty(v) ? true : \"This field is required\"\r\n                };\r\n\r\n        public static IEnumerable<Func<string, StringBoolean>> Country => new List<Func<string, StringBoolean>>()\r\n                {\r\n                    v => !string.IsNullOrEmpty(v) ? true : \"This field is required\"\r\n                };\r\n    }\r\n\r\n    private string _name;\r\n    private string _address;\r\n    private string _city;\r\n    private string _state;\r\n    private string _zip;\r\n    private string _country;\r\n    private List<string> _errorMessages = new();\r\n    private bool _formHasErrors;\r\n    private List<string> _countries = new List<string>()\r\n    {\r\n        \"Afghanistan\", \"Albania\", \"Algeria\", \"Andorra\", \"Angola\", \"Anguilla\", \"Antigua &amp; Barbuda\", \"Argentina\", \"Armenia\", \"Aruba\", \"Australia\", \"Austria\", \"Azerbaijan\", \"Bahamas\", \"Bahrain\", \"Bangladesh\", \"Barbados\", \"Belarus\", \"Belgium\", \"Belize\", \"Benin\", \"Bermuda\", \"Bhutan\", \"Bolivia\", \"Bosnia &amp; Herzegovina\", \"Botswana\", \"Brazil\", \"British Virgin Islands\", \"Brunei\", \"Bulgaria\", \"Burkina Faso\", \"Burundi\", \"Cambodia\", \"Cameroon\", \"Cape Verde\", \"Cayman Islands\", \"Chad\", \"Chile\", \"China\", \"Colombia\", \"Congo\", \"Cook Islands\", \"Costa Rica\", \"Cote D Ivoire\", \"Croatia\", \"Cruise Ship\", \"Cuba\", \"Cyprus\", \"Czech Republic\", \"Denmark\", \"Djibouti\", \"Dominica\", \"Dominican Republic\", \"Ecuador\", \"Egypt\", \"El Salvador\", \"Equatorial Guinea\", \"Estonia\", \"Ethiopia\", \"Falkland Islands\", \"Faroe Islands\", \"Fiji\", \"Finland\", \"France\", \"French Polynesia\", \"French West Indies\", \"Gabon\", \"Gambia\", \"Georgia\", \"Germany\", \"Ghana\", \"Gibraltar\", \"Greece\", \"Greenland\", \"Grenada\", \"Guam\", \"Guatemala\", \"Guernsey\", \"Guinea\", \"Guinea Bissau\", \"Guyana\", \"Haiti\", \"Honduras\", \"Hong Kong\", \"Hungary\", \"Iceland\", \"India\", \"Indonesia\", \"Iran\", \"Iraq\", \"Ireland\", \"Isle of Man\", \"Israel\", \"Italy\", \"Jamaica\", \"Japan\", \"Jersey\", \"Jordan\", \"Kazakhstan\", \"Kenya\", \"Kuwait\", \"Kyrgyz Republic\", \"Laos\", \"Latvia\", \"Lebanon\", \"Lesotho\", \"Liberia\", \"Libya\", \"Liechtenstein\", \"Lithuania\", \"Luxembourg\", \"Macau\", \"Macedonia\", \"Madagascar\", \"Malawi\", \"Malaysia\", \"Maldives\", \"Mali\", \"Malta\", \"Mauritania\", \"Mauritius\", \"Mexico\", \"Moldova\", \"Monaco\", \"Mongolia\", \"Montenegro\", \"Montserrat\", \"Morocco\", \"Mozambique\", \"Namibia\", \"Nepal\", \"Netherlands\", \"Netherlands Antilles\", \"New Caledonia\", \"New Zealand\", \"Nicaragua\", \"Niger\", \"Nigeria\", \"Norway\", \"Oman\", \"Pakistan\", \"Palestine\", \"Panama\", \"Papua New Guinea\", \"Paraguay\", \"Peru\", \"Philippines\", \"Poland\", \"Portugal\", \"Puerto Rico\", \"Qatar\", \"Reunion\", \"Romania\", \"Russia\", \"Rwanda\", \"Saint Pierre &amp; Miquelon\", \"Samoa\", \"San Marino\", \"Satellite\", \"Saudi Arabia\", \"Senegal\", \"Serbia\", \"Seychelles\", \"Sierra Leone\", \"Singapore\", \"Slovakia\", \"Slovenia\", \"South Africa\", \"South Korea\", \"Spain\", \"Sri Lanka\", \"St Kitts &amp; Nevis\", \"St Lucia\", \"St Vincent\", \"St. Lucia\", \"Sudan\", \"Suriname\", \"Swaziland\", \"Sweden\", \"Switzerland\", \"Syria\", \"Taiwan\", \"Tajikistan\", \"Tanzania\", \"Thailand\", \"Timor L\\\"Este\", \"Togo\", \"Tonga\", \"Trinidad &amp; Tobago\", \"Tunisia\", \"Turkey\", \"Turkmenistan\", \"Turks &amp; Caicos\", \"Uganda\", \"Ukraine\", \"United Arab Emirates\", \"United Kingdom\", \"United States\", \"Uruguay\", \"Uzbekistan\", \"Venezuela\", \"Vietnam\", \"Virgin Islands (US)\", \"Yemen\", \"Zambia\", \"Zimbabwe\"\r\n    };\r\n\r\n    public void ResetForm()\r\n    {\r\n        _formHasErrors = false;\r\n    }\r\n\r\n    public void Submit()\r\n    {\r\n\r\n    }\r\n  }\r\n",
+        "Type": "Demos.Components.FormInputs.children.TextField.misc.CustomValidation",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 3,
         "Name": "fullWidthWithCounter",
         "Title": "Full width with counter",
         "Description": "<p>Full width text fields allow you to create boundless inputs. In this example, we use a <code>MDivider</code> to separate the fields.</p>\n",
-        "Code": "<MForm>\r\n    <MAutocomplete\r\n        @bind-Value=\"selected\"\r\n        Items=\"@items\"\r\n        ItemText=\"item => item\"\r\n        ItemValue=\"item => item\"\r\n        Chips\r\n        Label=\"To\"\r\n        FullWidth\r\n        HideDetails=true\r\n        HideNoData\r\n        HideSelected\r\n        Multiple\r\n        SingleLine>\r\n    </MAutocomplete>\r\n    <MDivider></MDivider>\r\n    <MTextField\r\n        Label=\"Subject\"\r\n        @bind-Value=\"@subject\"\r\n        SingleLine\r\n        FullWidth\r\n        HideDetails=true>\r\n    </MTextField>\r\n    <MDivider></MDivider>\r\n    <MTextarea\r\n        @bind-Value=\"title\"\r\n        Label=\"Message\"\r\n        Counter=true\r\n        FullWidth\r\n        SingleLine\r\n        maxlength=\"120\">\r\n    </MTextarea>\r\n</MForm>\r\n\r\n@code {\r\n\r\n    readonly List<string> items = new() {\"Trevor Handsen\", \"Alex Nelson\"};\r\n\r\n    List<string> selected = new() {\"Trevor Handsen\"};\r\n\r\n    string subject = \"Plans for the weekend\";\r\n\r\n    string title = \"Hi,\\nI just wanted to check in and see if you had any plans the upcoming weekend. We are thinking of heading up to Napa\";\r\n\r\n}",
+        "Code": "<MForm>\r\n    <MAutocomplete @bind-Value=\"selected\"\r\n                   Items=\"@items\"\r\n                   ItemText=\"item => item\"\r\n                   ItemValue=\"item => item\"\r\n                   Chips\r\n                   Label=\"To\"\r\n                   FullWidth\r\n                   HideDetails=true\r\n                   HideNoData\r\n                   HideSelected\r\n                   Multiple\r\n                   SingleLine>\r\n    </MAutocomplete>\r\n    <MDivider></MDivider>\r\n    <MTextField Label=\"Subject\"\r\n                @bind-Value=\"@subject\"\r\n                SingleLine\r\n                FullWidth\r\n                HideDetails=true>\r\n    </MTextField>\r\n    <MDivider></MDivider>\r\n    <MTextarea @bind-Value=\"title\"\r\n               Label=\"Message\"\r\n               Counter=true\r\n               FullWidth\r\n               SingleLine\r\n               maxlength=\"120\">\r\n    </MTextarea>\r\n</MForm>\r\n\r\n@code {\r\n\r\n    readonly List<string> items = new() { \"Trevor Handsen\", \"Alex Nelson\" };\r\n\r\n    List<string> selected = new() { \"Trevor Handsen\" };\r\n\r\n    string subject = \"Plans for the weekend\";\r\n\r\n    string title = \"Hi,\\nI just wanted to check in and see if you had any plans the upcoming weekend. We are thinking of heading up to Napa\";\r\n\r\n}",
         "Type": "Demos.Components.FormInputs.children.TextField.misc.FullWidthWithCounter",
         "Style": "",
         "Debug": false,
@@ -3035,7 +3061,7 @@
         "Name": "passwordInput",
         "Title": "Password input",
         "Description": "<p>Using the HTML input type <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password\">password</a> can be\nused with an appended icon and callback to control the visibility.</p>\n",
-        "Code": "<MForm>\r\n    <MContainer Fluid>\r\n        <MRow>\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    @bind-Value=\"_password\"\r\n                    AppendIcon=\"@(_show1 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show1 ? \"text\" : \"password\")\"\r\n                    Label=\"Normal with Hint text\"\r\n                    Hint=\"At least 8 characters\"\r\n                    Counter=\"true\"\r\n                    OnAppendClick=\"() => _show1 = !_show1\">\r\n                </MTextField>\r\n            </MCol>\r\n\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    AppendIcon=\"@(_show2 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show2 ? \"text\" : \"password\")\"\r\n                    Label=\"Visible\"\r\n                    Hint=\"At least 8 characters\"\r\n                    Value=\"@(\"wqfasds\")\"\r\n                    Class=\"input-group--focused\"\r\n                    OnAppendClick=\"() => _show2 = !_show2\">\r\n                </MTextField>\r\n            </MCol>\r\n\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    AppendIcon=\"@(_show3 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show3 ? \"text\" : \"password\")\"\r\n                    Label=\"Not visible\"\r\n                    Hint=\"At least 8 characters\"\r\n                    Value=\"@(\"wqfasds\")\"\r\n                    OnAppendClick=\"() => _show3 = !_show3\">\r\n                </MTextField>\r\n            </MCol>\r\n\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    AppendIcon=\"@(_show4 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show4 ? \"text\" : \"password\")\"\r\n                    Label=\"Error\"\r\n                    Hint=\"At least 8 characters\"\r\n                    Value=\"@(\"Pa\")\"\r\n                    OnAppendClick=\"() => _show4 = !_show4\">\r\n                </MTextField>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n\r\n@code{\r\n    private bool _show1 = false;\r\n    private bool _show2 = true;\r\n    private bool _show3 = false;\r\n    private bool _show4 = false;\r\n    private string _password = \"Password\";\r\n}",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n<MForm EnableDataAnnotationsValidation Model=\"_model\">\r\n    <MContainer Fluid>\r\n        <MRow>\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    @bind-Value=\"_model.Password1\"\r\n                    AppendIcon=\"@(_show1 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show1 ? \"text\" : \"password\")\"\r\n                    Label=\"Normal with Hint text\"\r\n                    Hint=\"At least 8 characters\"\r\n                    Counter=\"true\"\r\n                    OnAppendClick=\"() => _show1 = !_show1\">\r\n                </MTextField>\r\n            </MCol>\r\n\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    @bind-Value=\"_model.Password2\"\r\n                    AppendIcon=\"@(_show2 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show2 ? \"text\" : \"password\")\"\r\n                    Label=\"Visible\"\r\n                    Hint=\"At least 8 characters\"\r\n                    Class=\"input-group--focused\"\r\n                    OnAppendClick=\"() => _show2 = !_show2\">\r\n                </MTextField>\r\n            </MCol>\r\n\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    @bind-Value=\"_model.Password3\"\r\n                    AppendIcon=\"@(_show3 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show3 ? \"text\" : \"password\")\"\r\n                    Label=\"Not visible\"\r\n                    Hint=\"At least 8 characters\"\r\n                    OnAppendClick=\"() => _show3 = !_show3\">\r\n                </MTextField>\r\n            </MCol>\r\n\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    @bind-Value=\"_model.Password4\"\r\n                    AppendIcon=\"@(_show4 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show4 ? \"text\" : \"password\")\"\r\n                    Label=\"Error\"\r\n                    Hint=\"At least 8 characters\"\r\n                    OnAppendClick=\"() => _show4 = !_show4\">\r\n                </MTextField>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n\r\n@code{\r\n    private bool _show1 = false;\r\n    private bool _show2 = true;\r\n    private bool _show3 = false;\r\n    private bool _show4 = false;\r\n    private Model _model = new()\r\n    {\r\n        Password1 = \"Password\",\r\n        Password2 = \"wqfasds\",\r\n        Password3 = \"wqfasds\",\r\n        Password4 = \"Pa\"\r\n    };\r\n\r\n    public class Model\r\n    {\r\n        [Required(ErrorMessage =\"Required.\")]\r\n        [MinLength(8,ErrorMessage =\"Min 8 characters\")]\r\n        public string Password1 { get; set; }\r\n        [Required(ErrorMessage =\"Required.\")]\r\n        [MinLength(8,ErrorMessage =\"Min 8 characters\")]\r\n        public string Password2 { get; set; }\r\n        [Required(ErrorMessage =\"Required.\")]\r\n        [MinLength(8,ErrorMessage =\"Min 8 characters\")]\r\n        public string Password3 { get; set; }\r\n        [Required(ErrorMessage =\"Required.\")]\r\n        public string Password4 { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.FormInputs.children.TextField.misc.PasswordInput",
         "Style": "",
         "Debug": false,
@@ -3047,16 +3073,13 @@
   {
     "Title": "Grid",
     "Type": "Grid",
-    "Desc": "<p>24 Grids System。</p>\n",
+    "Desc": "<p>24 Grids System。</p>\n<h2>Design concept#</h2>\n<p>In most business situations, Ant Design needs to solve a lot of information storage problems within the design area, so based on 12 Grids System, we divided the design area into 24 sections.</p>\n<p>We name the divided area 'box'. We suggest four boxes for horizontal arrangement at most, one at least. Boxes are proportional to the entire screen as shown in the picture above. To ensure a high level of visual comfort, we customize the typography inside of the box based on the box unit.</p>\n<h2>Outline</h2>\n<p>In the grid system, we define the frame outside the information area based on row and column, to ensure that every area can have stable arrangement.</p>\n<p>Following is a brief look at how it works:</p>\n<ul>\n<li>Establish a set of column in the horizontal space defined by row (abbreviated col)</li>\n<li>Your content elements should be placed directly in the col, and only col should be placed directly in row</li>\n<li>The column grid system is a value of 1-24 to represent its range spans. For example, three columns of equal width can be created by <Col span={8} />.</li>\n<li>If the sum of col spans in a row are more than 24, then the overflowing col as a whole will start a new line arrangement.</li>\n</ul>\n<p>Our grid systems base on Flex layout to allow the elements within the parent to be aligned horizontally - left, center, right, wide arrangement, and decentralized arrangement. The Grid system also supports vertical alignment - top aligned, vertically centered, bottom-aligned. You can also define the order of elements by using order.</p>\n<p>Layout uses a 24 grid layout to define the width of each &quot;box&quot;, but does not rigidly adhere to the grid layout.</p>\n",
+    "Apis": "\n<p>Row</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>align</td>\n<td>the vertical alignment of the flex layout:：<code>top</code> <code>middle</code> <code>bottom</code></td>\n<td>string</td>\n<td>top</td>\n</tr>\n<tr>\n<td>gutter</td>\n<td>spacing between grids, could be a number or a object like { xs: 8, sm: 16, md: 24}. or you can use array to make horizontal and vertical spacing work at the same time <code>[horizontal, vertical]</code> (supported after 1.5.0)</td>\n<td>number, object, array</td>\n<td>0</td>\n</tr>\n<tr>\n<td>justify</td>\n<td>horizontal arrangement of the flex layout:<code>start</code> <code>end</code> <code>center</code> <code>space-around</code> <code>space-between</code></td>\n<td>string</td>\n<td>start</td>\n</tr>\n<tr>\n<td>type</td>\n<td>layout mode, optional <code>flex</code>， browser support</td>\n<td>string</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>Col</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>offset</td>\n<td>the number of cells to offset Col from the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>order</td>\n<td>raster order, used in flex layout mode</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>pull</td>\n<td>the number of cells that raster is moved to the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>push</td>\n<td>the number of cells that raster is moved to the right</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>span</td>\n<td>raster number of cells to occupy, 0 corresponds to  <code>display: none</code></td>\n<td>string</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xs</td>\n<td><code>&lt;576px</code> and also default setting, could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>sm</td>\n<td><code>≥576px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>md</td>\n<td><code>≥768px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>lg</td>\n<td><code>≥992px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xl</td>\n<td><code>≥1200px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xxl</td>\n<td><code>≥1600px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>The breakpoints of responsive grid follow BootStrap 4 media queries rules(not including <code>occasionally</code> part).</p>\n",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg",
     "Order": 0,
-    "OtherDocs": {
-      "Design concept#": "\n<p>In most business situations, Ant Design needs to solve a lot of information storage problems within the design area, so based on 12 Grids System, we divided the design area into 24 sections.</p>\n<p>We name the divided area 'box'. We suggest four boxes for horizontal arrangement at most, one at least. Boxes are proportional to the entire screen as shown in the picture above. To ensure a high level of visual comfort, we customize the typography inside of the box based on the box unit.</p>\n",
-      "Outline": "\n<p>In the grid system, we define the frame outside the information area based on row and column, to ensure that every area can have stable arrangement.</p>\n<p>Following is a brief look at how it works:</p>\n<ul>\n<li>Establish a set of column in the horizontal space defined by row (abbreviated col)</li>\n<li>Your content elements should be placed directly in the col, and only col should be placed directly in row</li>\n<li>The column grid system is a value of 1-24 to represent its range spans. For example, three columns of equal width can be created by <Col span={8} />.</li>\n<li>If the sum of col spans in a row are more than 24, then the overflowing col as a whole will start a new line arrangement.</li>\n</ul>\n<p>Our grid systems base on Flex layout to allow the elements within the parent to be aligned horizontally - left, center, right, wide arrangement, and decentralized arrangement. The Grid system also supports vertical alignment - top aligned, vertically centered, bottom-aligned. You can also define the order of elements by using order.</p>\n<p>Layout uses a 24 grid layout to define the width of each &quot;box&quot;, but does not rigidly adhere to the grid layout.</p>\n",
-      "API": "\n<p>Row</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>align</td>\n<td>the vertical alignment of the flex layout:：<code>top</code> <code>middle</code> <code>bottom</code></td>\n<td>string</td>\n<td>top</td>\n</tr>\n<tr>\n<td>gutter</td>\n<td>spacing between grids, could be a number or a object like { xs: 8, sm: 16, md: 24}. or you can use array to make horizontal and vertical spacing work at the same time <code>[horizontal, vertical]</code> (supported after 1.5.0)</td>\n<td>number, object, array</td>\n<td>0</td>\n</tr>\n<tr>\n<td>justify</td>\n<td>horizontal arrangement of the flex layout:<code>start</code> <code>end</code> <code>center</code> <code>space-around</code> <code>space-between</code></td>\n<td>string</td>\n<td>start</td>\n</tr>\n<tr>\n<td>type</td>\n<td>layout mode, optional <code>flex</code>， browser support</td>\n<td>string</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>Col</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>offset</td>\n<td>the number of cells to offset Col from the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>order</td>\n<td>raster order, used in flex layout mode</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>pull</td>\n<td>the number of cells that raster is moved to the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>push</td>\n<td>the number of cells that raster is moved to the right</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>span</td>\n<td>raster number of cells to occupy, 0 corresponds to  <code>display: none</code></td>\n<td>string</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xs</td>\n<td><code>&lt;576px</code> and also default setting, could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>sm</td>\n<td><code>≥576px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>md</td>\n<td><code>≥768px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>lg</td>\n<td><code>≥992px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xl</td>\n<td><code>≥1200px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xxl</td>\n<td><code>≥1600px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>The breakpoints of responsive grid follow BootStrap 4 media queries rules(not including <code>occasionally</code> part).</p>\n"
-    },
-    "LastWriteTime": "2021-11-12T16:38:35.8305896+08:00",
+    "LastWriteTime": "2021-11-12T17:14:52.0838728+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3274,13 +3297,12 @@
     "Title": "ButtonGroup",
     "Type": "ButtonGroup",
     "Desc": "<p>The <code>MButtonGroup</code> component is a simple wrapper for <code>MItemGroup</code> built specifically to work with <code>MButton</code>.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/docs/api/MButton\">MButton</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ButtonGroup.svg",
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/docs/api/MButton\">MButton</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-11-12T13:39:37.8809032+08:00",
+    "LastWriteTime": "2021-11-12T17:14:51.6938761+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3355,11 +3377,12 @@
     "Title": "ChipGroup",
     "Type": "ChipGroup",
     "Desc": "<p>The <code>MChipGroup</code> supercharges the <code>MChip</code> component by providing groupable functionality. It is used for creating groups\nof selections using chips.</p>\n<ul>\n<li><a href=\"/docs/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/docs/api/MChip\">MChip</a></li>\n</ul>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chip.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-03T16:49:05.8906094+08:00",
+    "LastWriteTime": "2021-11-05T15:50:00.2032724+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3434,13 +3457,12 @@
     "Title": "ItemGroup",
     "Type": "ItemGroup",
     "Desc": "<p>The <code>MItemGroup</code> provides the ability to create a group of selectable items out of any component. This is the baseline\nfunctionality for components such as <code>MTabs</code> and <code>MCarousel</code>.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MItem\">MItem</a></li>\n<li><a href=\"/docs/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ItemGroup.svg",
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MItem\">MItem</a></li>\n<li><a href=\"/docs/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-11-04T13:34:00.0771991+08:00",
+    "LastWriteTime": "2021-11-05T15:50:00.2182728+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3515,12 +3537,11 @@
     "Title": "ListItemGroup",
     "Type": "ListItemGroup",
     "Desc": "<p>The <code>MListItemGroup</code> provides the ability to create a group of selectable <code>MListItem</code>. The <code>MListItemGroup</code> component\nutilizes <code>MItemGroup</code> at its core to provide a clean interface for interactive lists.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/docs/api/MListItem\">MListItem</a></li>\n<li><a href=\"/docs/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/docs/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/docs/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/docs/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/docs/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/docs/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/docs/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/docs/api/MListItem\">MListItem</a></li>\n<li><a href=\"/docs/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/docs/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/docs/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/docs/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/docs/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/docs/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/docs/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-11-12T13:39:38.0698762+08:00",
+    "LastWriteTime": "2021-11-12T17:14:51.6278755+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3595,12 +3616,11 @@
     "Title": "SlideGroup",
     "Type": "SlideGroup",
     "Desc": "<p>The <code>MSlideGroup</code> component is used to display pseudo paginated information. It uses <a href=\"/components/itemgroup\"><strong>MItemGroup</strong></a> at its core and provides\na baseline for components such as <a href=\"/components/tabs\"><strong>MTabs</strong></a> and <a href=\"/components/chipgroup\"><strong>MChipGroup</strong></a>.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/docs/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/docs/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-11-12T13:39:38.0618742+08:00",
+    "LastWriteTime": "2021-11-12T17:14:51.6198754+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3618,7 +3638,7 @@
         "Name": "activeClass",
         "Title": "Active class",
         "Description": "<p>The <strong>ActiveClass</strong> property allows you to set custom CSS class on active items.</p>\n",
-        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup ShowArrows=\"@(true)\" Class=\"pa-4\" ActiveClass=\"success\">\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"@($\"ma-4 {context.ActiveClass}\")\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"@context.Toggle\"\r\n                       RefBack=\"@context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>",
+        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup ShowArrows=\"@(true)\" Class=\"pa-4\" ActiveClass=\"success\">\r\n        @foreach (var item in Enumerable.Range(1, 25))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"@($\"ma-4 {context.ActiveClass}\")\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"@context.Toggle\"\r\n                       RefBack=\"@context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>",
         "Type": "Demos.Components.Groups.children.SlideGroup.props.ActiveClass",
         "Style": "",
         "Debug": false,
@@ -3629,7 +3649,7 @@
         "Name": "centerActive",
         "Title": "Center active",
         "Description": "<p>Using the <code>CenterActive</code> prop will make the active item always centered.</p>\n",
-        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup @bind-Value=\"model\" ShowArrows=\"@(true)\" Class=\"pa-4\" CenterActive>\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"@context.Toggle\"\r\n                       RefBack=\"@context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>\r\n\r\n@code {\r\n    StringNumber model;\r\n}",
+        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup ShowArrows=\"@(true)\" Class=\"pa-4\" CenterActive>\r\n        @foreach (var item in Enumerable.Range(1, 25))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"@context.Toggle\"\r\n                       RefBack=\"@context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>",
         "Type": "Demos.Components.Groups.children.SlideGroup.props.CenterActive",
         "Style": "",
         "Debug": false,
@@ -3640,7 +3660,7 @@
         "Name": "customIcons",
         "Title": "Custom icons",
         "Description": "<p>You can add your custom pagination icons instead of arrows using the <code>NextIcon</code> and <code>PrevIcon</code> props.</p>\n",
-        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup @bind-Value=\"model\" ShowArrows=\"@(true)\" Class=\"pa-4\" PrevIcon=\"mdi-minus\" NextIcon=\"mdi-plus\">\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"@context.Toggle\"\r\n                       RefBack=\"@context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>\r\n\r\n@code {\r\n    StringNumber model;\r\n}",
+        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup ShowArrows=\"@(true)\" Class=\"pa-4\" PrevIcon=\"mdi-minus\" NextIcon=\"mdi-plus\">\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"@context.Toggle\"\r\n                       RefBack=\"@context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>",
         "Type": "Demos.Components.Groups.children.SlideGroup.props.CustomIcons",
         "Style": "",
         "Debug": false,
@@ -3651,7 +3671,7 @@
         "Name": "mandatory",
         "Title": "Mandatory",
         "Description": "<p>The <code>Mandatory</code> prop will make the slide group require at least 1 item must be selected.</p>\n",
-        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup @bind-Value=\"model\" ShowArrows=\"@(true)\" Class=\"pa-4\" Mandatory>\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"context.Toggle\"\r\n                       RefBack=\"context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>\r\n\r\n@code {\r\n    StringNumber model;\r\n}",
+        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup ShowArrows=\"@(true)\" Class=\"pa-4\" Mandatory>\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"context.Toggle\"\r\n                       RefBack=\"context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>",
         "Type": "Demos.Components.Groups.children.SlideGroup.props.Mandatory",
         "Style": "",
         "Debug": false,
@@ -3686,12 +3706,11 @@
     "Title": "Windows",
     "Type": "Windows",
     "Desc": "<p>The <code>MWindow</code> component provides the baseline functionality for transitioning content from 1 pane to another. Other\ncomponents such as <code>MTabs</code>, <code>MCarousel</code> and <code>MStepper</code> utilize this component at their core.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MWindow\">MWindow</a></li>\n<li><a href=\"/docs/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MWindow\">MWindow</a></li>\n<li><a href=\"/docs/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-11-12T13:39:37.8828831+08:00",
+    "LastWriteTime": "2021-11-12T17:14:51.2038776+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3766,10 +3785,11 @@
     "Title": "Hover",
     "Type": "Hover",
     "Desc": "<p>The <code>MHover</code> component provides a clean interface for handling the hover state of any component.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T16:38:35.8325907+08:00",
+    "LastWriteTime": "2021-11-12T17:14:51.5758771+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3822,13 +3842,12 @@
     "Title": "Icon",
     "Type": "Icon",
     "Desc": "<p>The <code>MIcon</code> component provides a large set of glyphs to provide context to various aspects of your application. For a\nlist of all available icons, visit the official <a href=\"https://materialdesignicons.com/\">Material Design Icons</a> page. To use\nany of these icons simply use the\n<code>mdi-</code> prefix followed by the icon name.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MIcon\">MIcon</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MIcon\">MIcon</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-11-12T16:38:35.8345908+08:00",
+    "LastWriteTime": "2021-11-12T17:14:51.4958755+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3892,10 +3911,11 @@
     "Title": "Image",
     "Type": "Image",
     "Desc": "<p>The <code>MImage</code> component is packed with features to support rich media.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T16:38:35.8375904+08:00",
+    "LastWriteTime": "2021-11-12T17:14:51.4798759+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3981,11 +4001,12 @@
     "Title": "List",
     "Type": "List",
     "Desc": "<p>The <code>MList</code> component is used to display information. It can contain an avatar, content, actions, subheaders and much\nmore. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a\nconsistent styling for organizing groups of text and images.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T16:38:35.8385907+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.811884+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4181,12 +4202,11 @@
     "Title": "Menu",
     "Type": "Menu",
     "Desc": "<p>The <code>MMenu</code> component shows a menu at the position of the element used to activate it.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MMenu\">MMenu</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MMenu\">MMenu</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-10-29T13:31:00.2440968+08:00",
+    "LastWriteTime": "2021-11-05T15:50:03.3062352+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4349,11 +4369,12 @@
     "Title": "NavigationDrawer",
     "Type": "NavigationDrawer",
     "Desc": "<p><code>MNavigationDrawer</code> is a component used to navigate applications. It is usually wrapped and used in the <code>MCard</code> element.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8246057+08:00",
+    "LastWriteTime": "2021-11-16T15:17:58.2721746+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4472,10 +4493,11 @@
     "Title": "Overlay",
     "Type": "Overlay",
     "Desc": "<p>The <code>Overlay</code> component is used to provide emphasis on a particular element or parts of it. It signals to the user of a state change within the application and can be used for creating loaders, dialogs and more.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8256046+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.8122983+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4550,10 +4572,11 @@
     "Title": "Pagination",
     "Type": "Pagination",
     "Desc": "<p>The <code>MPagination</code> component is used to separate long data sets so that user data information can be known. Provided the amount, the paging component will automatically scale. The current maintenance page provides value easily.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.827605+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.8012987+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4628,11 +4651,12 @@
     "Title": "ColorPickers",
     "Type": "ColorPickers",
     "Desc": "<p>The MColorPicker allows you to select a color using a variety of input methods.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ColorPicker.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8296041+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.0213047+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4707,11 +4731,12 @@
     "Title": "DatePickers",
     "Type": "DatePickers",
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickers.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8326032+08:00",
+    "LastWriteTime": "2021-11-16T15:17:58.306173+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4940,11 +4965,12 @@
     "Title": "DatePickersMonth",
     "Type": "DatePickersMonth",
     "Desc": "<p><code>MDatePicker</code> can be used as a standalone month picker component.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8346068+08:00",
+    "LastWriteTime": "2021-11-16T15:17:58.3101739+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5074,11 +5100,12 @@
     "Title": "TimePickers",
     "Type": "TimePickers",
     "Desc": "<p>TODO...</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TimePickers.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8366046+08:00",
+    "LastWriteTime": "2021-11-16T15:17:58.3331731+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5240,17 +5267,19 @@
   {
     "Title": "Presets",
     "Type": "Presets",
+    "Desc": "",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8376032+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.3653055+08:00",
     "DemoList": [
       {
         "Order": 20,
         "Name": "Actions",
         "Title": "Actions",
         "Description": "",
-        "Code": "@using Action = MASA.Blazor.Presets.Action\r\n<MRow NoGutters>\r\n    <MCol Span=\"12\">\r\n        <MSlider Label=\"宽度\" @bind-Value=\"width\" ThumbLabel=\"@(\"always\")\"></MSlider>\r\n    </MCol>\r\n</MRow>\r\n\r\n<div style=\"@($\"width:{width}%\")\">\r\n    <PActions Items=\"actions\" Text Justify=\"JustifyTypes.SpaceBetween\" Color=\"primary\" Divider>\r\n    </PActions>\r\n</div>\r\n\r\n<MDivider Style=\"margin: 8px 0\"></MDivider>\r\n\r\n<div style=\"@($\"width:{width}%\")\">\r\n    <PActions Depressed Justify=\"JustifyTypes.SpaceBetween\" Color=\"primary\">\r\n        <PAction Label=\"alert\" Icon=\"mdi-alert-outline\"></PAction>\r\n        <PAction Label=\"heart\" Icon=\"mdi-heart\" Color=\"red\" Dark></PAction>\r\n        <PAction Label=\"information\" Icon=\"mdi-information\" Disabled></PAction>\r\n        <PAction Label=\"check\" Icon=\"mdi-check\"></PAction>\r\n    </PActions>\r\n</div>\r\n\r\n<MDivider Style=\"margin: 8px 0\"></MDivider>\r\n\r\n<MDataTable Headers=\"headers\"\r\n            Items=\"desserts\"\r\n            Class=\"elevation-1\"\r\n            Style=\"@($\"width:{width}%;min-width:400px\")\"\r\n            HideDefaultFooter>\r\n    <ItemColContent>\r\n        @if (context.Header.Value == \"actions\")\r\n        {\r\n            List<Action> items = new()\r\n            {\r\n                new Action()\r\n                {\r\n                    Label = \"Edit\",\r\n                    Icon = \"mdi-pencil\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, () => EditItem(context.Item))\r\n                },\r\n                new Action()\r\n                {\r\n                    Label = \"Remove\",\r\n                    Icon = \"mdi-delete\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, () => DeleteItem(context.Item))\r\n                },\r\n                new Action()\r\n                {\r\n                    Label = \"Loading\",\r\n                    Icon = \"mdi-reload\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, async () => await Task.Delay(1000))\r\n                },\r\n            };\r\n\r\n            <PActions Items=\"items\" Small Divider></PActions>\r\n        }\r\n        else\r\n        {\r\n            @context.Value\r\n        }\r\n    </ItemColContent>\r\n</MDataTable>\r\n\r\n@code {\r\n    private double width = 100;\r\n\r\n    List<Action> actions = new()\r\n    {\r\n        new Action() { Label = \"alert\", Icon = \"mdi-alert-outline\" },\r\n        new Action() { Label = \"heart\", Icon = \"mdi-heart\", Color = \"red\" },\r\n        new Action() { Label = \"information\", Icon = \"mdi-information\", Disabled = true },\r\n        new Action() { Label = \"check\", Icon = \"mdi-check\" },\r\n    };\r\n\r\n    List<Dessert> desserts = new()\r\n    {\r\n        new Dessert\r\n        {\r\n            Name = \"Frozen Yogurt\",\r\n            Calories = 159,\r\n            Fat = 6.0,\r\n            Carbs = 24,\r\n            Protein = 4.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Ice cream sandwich\",\r\n            Calories = 237,\r\n            Fat = 9.0,\r\n            Carbs = 37,\r\n            Protein = 4.3\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Eclair\",\r\n            Calories = 262,\r\n            Fat = 16.0,\r\n            Carbs = 23,\r\n            Protein = 6.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Jelly bean\",\r\n            Calories = 375,\r\n            Fat = 0.0,\r\n            Carbs = 94,\r\n            Protein = 0.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Lollipop\",\r\n            Calories = 392,\r\n            Fat = 0.2,\r\n            Carbs = 98,\r\n            Protein = 0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"KitKat\",\r\n            Calories = 518,\r\n            Fat = 26.0,\r\n            Carbs = 65,\r\n            Protein = 7\r\n        }\r\n    };\r\n\r\n    List<DataTableHeader<Dessert>> headers = new()\r\n    {\r\n        new()\r\n        {\r\n            Text = \"Dessert (100g serving)\",\r\n            Align = \"start\",\r\n            Sortable = false,\r\n            Value = nameof(Dessert.Name)\r\n        },\r\n        new() { Text = \"Calories\", Value = nameof(Dessert.Calories) },\r\n        new() { Text = \"Actions\", Value = \"actions\", Sortable = false }\r\n    };\r\n\r\n    public void EditItem(Dessert item)\r\n    {\r\n    }\r\n\r\n    public void DeleteItem(Dessert item)\r\n    {\r\n    }\r\n\r\n    public class Dessert\r\n    {\r\n        public string Name { get; set; }\r\n\r\n        public int Calories { get; set; }\r\n\r\n        public double Fat { get; set; }\r\n\r\n        public int Carbs { get; set; }\r\n\r\n        public double Protein { get; set; }\r\n    }\r\n\r\n}",
+        "Code": "@using Action = MASA.Blazor.Presets.Action\r\n<MRow NoGutters>\r\n    <MCol Span=\"12\">\r\n        <MSlider Label=\"宽度\" @bind-Value=\"width\" ThumbLabel=\"@(\"always\")\"></MSlider>\r\n    </MCol>\r\n</MRow>\r\n\r\n<div style=\"@($\"width:{width}%\")\">\r\n    <PActions Items=\"actions\" Text Justify=\"JustifyTypes.SpaceBetween\" Color=\"primary\" Divider>\r\n    </PActions>\r\n</div>\r\n\r\n<MDivider Style=\"margin: 8px 0\"></MDivider>\r\n\r\n<div style=\"@($\"width:{width}%\")\">\r\n    <PActions Depressed Justify=\"JustifyTypes.SpaceBetween\" Color=\"primary\">\r\n        <PAction Label=\"alert\" Icon=\"mdi-alert-outline\"></PAction>\r\n        <PAction Label=\"heart\" Icon=\"mdi-heart\" Color=\"red\" Dark></PAction>\r\n        <PAction Label=\"information\" Icon=\"mdi-information\" Disabled></PAction>\r\n        <PAction Label=\"check\" Icon=\"mdi-check\"></PAction>\r\n    </PActions>\r\n</div>\r\n\r\n<MDivider Style=\"margin: 8px 0\"></MDivider>\r\n\r\n<MDataTable Headers=\"headers\" Items=\"desserts\" Class=\"elevation-1\" Style=\"@($\"width:{width}%\")\">\r\n    <ItemColContent>\r\n        @if (context.Header.Value == \"actions\")\r\n        {\r\n            List<Action> items = new()\r\n            {\r\n                new Action()\r\n                {\r\n                    Label = \"Edit\",\r\n                    Icon = \"mdi-pencil\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, () => EditItem(context.Item))\r\n                },\r\n                new Action()\r\n                {\r\n                    Label = \"Remove\",\r\n                    Icon = \"mdi-delete\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, () => DeleteItem(context.Item))\r\n                },\r\n                new Action()\r\n                {\r\n                    Label = \"Loading\",\r\n                    Icon = \"mdi-reload\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, async () => await Task.Delay(1000))\r\n                },\r\n            };\r\n\r\n            <PActions Items=\"items\" Small Divider></PActions>\r\n        }\r\n        else\r\n        {\r\n            @context.Value\r\n        }\r\n    </ItemColContent>\r\n</MDataTable>\r\n\r\n@code {\r\n    private double width = 100;\r\n\r\n    List<Action> actions = new()\r\n    {\r\n        new Action() {Label = \"alert\", Icon = \"mdi-alert-outline\"},\r\n        new Action() {Label = \"heart\", Icon = \"mdi-heart\", Color = \"red\"},\r\n        new Action() {Label = \"information\", Icon = \"mdi-information\", Disabled = true},\r\n        new Action() {Label = \"check\", Icon = \"mdi-check\"},\r\n    };\r\n\r\n    List<Dessert> desserts = new()\r\n    {\r\n        new Dessert\r\n        {\r\n            Name = \"Frozen Yogurt\",\r\n            Calories = 159,\r\n            Fat = 6.0,\r\n            Carbs = 24,\r\n            Protein = 4.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Ice cream sandwich\",\r\n            Calories = 237,\r\n            Fat = 9.0,\r\n            Carbs = 37,\r\n            Protein = 4.3\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Eclair\",\r\n            Calories = 262,\r\n            Fat = 16.0,\r\n            Carbs = 23,\r\n            Protein = 6.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Jelly bean\",\r\n            Calories = 375,\r\n            Fat = 0.0,\r\n            Carbs = 94,\r\n            Protein = 0.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Lollipop\",\r\n            Calories = 392,\r\n            Fat = 0.2,\r\n            Carbs = 98,\r\n            Protein = 0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"KitKat\",\r\n            Calories = 518,\r\n            Fat = 26.0,\r\n            Carbs = 65,\r\n            Protein = 7\r\n        }\r\n    };\r\n\r\n    List<DataTableHeader<Dessert>> headers = new()\r\n    {\r\n        new()\r\n        {\r\n            Text = \"Dessert (100g serving)\",\r\n            Align = \"start\",\r\n            Sortable = false,\r\n            Value = nameof(Dessert.Name)\r\n        },\r\n        new() {Text = \"Calories\", Value = nameof(Dessert.Calories)},\r\n        new() {Text = \"Actions\", Value = \"actions\", Sortable = false}\r\n    };\r\n\r\n    public void EditItem(Dessert item)\r\n    {\r\n    }\r\n\r\n    public void DeleteItem(Dessert item)\r\n    {\r\n    }\r\n\r\n    public class Dessert\r\n    {\r\n        public string Name { get; set; }\r\n\r\n        public int Calories { get; set; }\r\n\r\n        public double Fat { get; set; }\r\n\r\n        public int Carbs { get; set; }\r\n\r\n        public double Protein { get; set; }\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Presets.props.Actions",
         "Style": "",
         "Debug": false,
@@ -5271,8 +5300,8 @@
         "Order": 2,
         "Name": "formModal",
         "Title": "FormModal",
-        "Description": "<p>Combine forms and <code>Modal</code> to verify the correctness of data.</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n@using System.Text.Json;\r\n\r\n<div>\r\n    <MButton OnClick=\"() => _addModal.Show()\" Class=\"mb-1\">Add User</MButton>\r\n\r\n    <MASA.Blazor.Presets.FormModal Visible=\"_addModal.Visible\"\r\n                                   Title=\"User\"\r\n                                   Width=\"500\"\r\n                                   Model=\"_addModal.Data\"\r\n                                   OnOk=\"HandleOnClick\"\r\n                                   OnCancel=\"HandleOnCancel\">\r\n        <MRow>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.UserName\"\r\n                            Label=\"UserName\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"@(\"auto\")\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.City\"\r\n                            Label=\"City\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"@(\"auto\")\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MRadioGroup @bind-Value=\"_addModal.Data.Gender\"\r\n                             Label=\"Gender:\"\r\n                             Row\r\n                             Dense\r\n                             Style=\"margin-top: 0\" \r\n                             HideDetails=\"@(\"auto\")\">\r\n                    <MRadio Label=\"男\" Value=\"0\"></MRadio>\r\n                    <MRadio Label=\"女\" Value=\"1\"></MRadio>\r\n                </MRadioGroup>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MAutocomplete @bind-Value=\"_addModal.Data.Favorites\" \r\n                               Items=\"_favorites\"\r\n                               Label=\"Favorites\"\r\n                               Multiple\r\n                               ItemValue=\"r => r\"\r\n                               ItemText=\"r => r\"\r\n                               HideDetails=\"@(\"auto\")\">\r\n                </MAutocomplete>\r\n            </MCol>\r\n        </MRow>\r\n        <MRow>\r\n            <MCol>@JsonSerializer.Serialize(_addModal.Data)</MCol>\r\n        </MRow>\r\n    </MASA.Blazor.Presets.FormModal>\r\n\r\n    <MRow NoGutters Class=\"pa-2\">\r\n        <MCol Cols=\"4\">username: @_user?.UserName</MCol>\r\n        <MCol Cols=\"4\">city: @_user?.City</MCol>\r\n        <MCol Cols=\"4\"></MCol>\r\n        <MCol Cols=\"4\">gender: @_user?.Gender</MCol>\r\n        <MCol Cols=\"4\">favorites: @string.Join(\",\", _user?.Favorites ?? new List<string>())</MCol>\r\n        <MCol Cols=\"4\">\r\n            <MButton OnClick=\"@(() => _addModal.Show(_user?.ShallowCopy()))\"\r\n                     Color=\"primary\"\r\n                     Disabled=\"@(_user == null)\"\r\n                     Text\r\n                     Small>\r\n                Edit\r\n            </MButton>\r\n        </MCol>\r\n    </MRow>\r\n</div>\r\n\r\n@code {\r\n    readonly List<string> _favorites = new() { \"Basketball\", \"Football\", \"Ping-pong\", \"Badminton\" };\r\n    \r\n    DataModal<User> _addModal = new();\r\n    User _user;\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        _addModal.Hide();\r\n    }\r\n\r\n    private async Task HandleOnClick()\r\n    {\r\n        _addModal.ShowLoading();\r\n\r\n        if (_addModal.HasValue)\r\n        {\r\n            // Update\r\n        }\r\n        else\r\n        {\r\n            // Add\r\n        }\r\n        \r\n        await Task.Delay(1000);\r\n\r\n        _user = _addModal.Data;\r\n\r\n        _addModal.HideLoading();\r\n\r\n        _addModal.Hide();\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        [Required]\r\n        public string UserName { get; set; }\r\n\r\n        [Range(0, 1)]\r\n        public int Gender { get; set; }\r\n\r\n        [Required]\r\n        public string City { get; set; }\r\n\r\n        [Required]\r\n        public List<string> Favorites { get; set; } = new() { };\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public class DataModal<T> where T : class, new()\r\n    {\r\n        public bool Visible { get; set; }\r\n\r\n        public T Data { get; private set; }\r\n\r\n        public bool HasValue { get; private set; }\r\n\r\n        public bool Loading { get; private set; }\r\n\r\n        public DataModal()\r\n        {\r\n            Data = new T();\r\n        }\r\n\r\n        public void Show() => Visible = true;\r\n\r\n        /// <summary>\r\n        /// 显示弹窗\r\n        /// </summary>\r\n        /// <param name=\"data\"></param>\r\n        /// <remarks>写入数据之前请确保此对象是拷贝过的</remarks>\r\n        public void Show(T data)\r\n        {\r\n            Visible = true;\r\n            HasValue = true;\r\n            Data = data;\r\n        }\r\n\r\n        public virtual void Hide()\r\n        {\r\n            Visible = false;\r\n            HasValue = false;\r\n            Data = new T();\r\n        }\r\n\r\n        public bool ShowLoading() => Loading = true;\r\n\r\n        public bool HideLoading() => Loading = false;\r\n    }\r\n\r\n    public interface IShallowCopy<T>\r\n    {\r\n        public T ShallowCopy();\r\n    }\r\n\r\n}",
+        "Description": "<p>When requiring users to interact with the application, but without jumping to a new page and interrupting the user's workflow, you can use Modal to create a new floating layer over the current page to get user feedback or display information.</p>\n",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n<div>\r\n    <MButton OnClick=\"() => _addModal.Show()\" Class=\"mb-1\">Open Modal</MButton>\r\n\r\n    <MASA.Blazor.Presets.FormModal Visible=\"_addModal.Visible\" Title=\"新增用户\" Width=\"500\" Model=\"_addModal.Data\" OnOk=\"HandleOnClick\" OnCancel=\"HandleOnCancel\">\r\n        <p>@System.Text.Json.JsonSerializer.Serialize(_addModal.Data)</p>\r\n\r\n        <MRow>\r\n            <MCol Span=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.UserName\" Label=\"UserName\" Dense Outlined/>\r\n            </MCol>\r\n            <MCol Span=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.City\" Label=\"City\" Dense Outlined/>\r\n            </MCol>\r\n            <MCol Span=\"12\">\r\n                <MRadioGroup @bind-Value=\"_addModal.Data.Gender\" Row Dense Style=\"margin-top: 0\">\r\n                    <MRadio Label=\"男\" Value=\"0\"></MRadio>\r\n                    <MRadio Label=\"女\" Value=\"1\"></MRadio>\r\n                </MRadioGroup>\r\n            </MCol>\r\n            <MCol>\r\n                <MAutocomplete @bind-Value=\"_addModal.Data.Favorites\" Multiple Items=\"_favorites\" ItemValue=\"r=>r\" ItemText=\"r=>r\"></MAutocomplete>\r\n            </MCol>\r\n        </MRow>\r\n    </MASA.Blazor.Presets.FormModal>\r\n\r\n    <MRow>\r\n        <MCol>username: @_user.UserName</MCol>\r\n        <MCol>city: @_user.City</MCol>\r\n        <MCol>gender: @_user.Gender</MCol>\r\n        <MCol>\r\n            <MButton OnClick=\"() => _addModal.Show(_user.ShallowCopy())\" Color=\"primary\" Text Small>Edit</MButton>\r\n        </MCol>\r\n    </MRow>\r\n</div>\r\n\r\n@code {\r\n\r\n    private User _user = new()\r\n    {\r\n        UserName = \"capdiem\",\r\n        City = \"HangZhou\",\r\n        Gender = 0,\r\n    };\r\n\r\n    private List<string> _favorites = new List<string>() {\"A\", \"B\", \"C\", \"D\"};\r\n\r\n    private DataModal<User> _addModal = new();\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        _addModal.Hide();\r\n    }\r\n\r\n    private async Task HandleOnClick()\r\n    {\r\n        _addModal.ShowLoading();\r\n\r\n        if (_addModal.HasValue)\r\n        {\r\n            // Update\r\n        }\r\n        else\r\n        {\r\n            // Add\r\n        }\r\n        await Task.Delay(1000);\r\n\r\n        _addModal.HideLoading();\r\n\r\n        _addModal.Hide();\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        [Required]\r\n        public string UserName { get; set; }\r\n\r\n        [Range(0, 1)]\r\n        public int Gender { get; set; }\r\n\r\n        public string City { get; set; }\r\n\r\n        [Required]\r\n        public List<string> Favorites { get; set; } = new List<string> { };\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User) this.MemberwiseClone();\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public class DataModal<T> where T : class, new()\r\n    {\r\n        public bool Visible { get; set; }\r\n\r\n        public T Data { get; private set; }\r\n\r\n        public bool HasValue { get; private set; }\r\n\r\n        public bool Loading { get; private set; }\r\n\r\n        public DataModal()\r\n        {\r\n            Data = new T();\r\n        }\r\n\r\n        public void Show() => Visible = true;\r\n\r\n        /// <summary>\r\n        /// 显示弹窗\r\n        /// </summary>\r\n        /// <param name=\"data\"></param>\r\n        /// <remarks>写入数据之前请确保此对象是拷贝过的</remarks>\r\n        public void Show(T data)\r\n        {\r\n            Visible = true;\r\n            HasValue = true;\r\n            Data = data;\r\n        }\r\n\r\n        public virtual void Hide()\r\n        {\r\n            Visible = false;\r\n            HasValue = false;\r\n            Data = new T();\r\n        }\r\n\r\n        public bool ShowLoading() => Loading = true;\r\n\r\n        public bool HideLoading() => Loading = false;\r\n    }\r\n\r\n    public interface IShallowCopy<T>\r\n    {\r\n        public T ShallowCopy();\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Presets.props.FormModal",
         "Style": "",
         "Debug": false,
@@ -5282,8 +5311,8 @@
         "Order": 1,
         "Name": "modal",
         "Title": "Modal",
-        "Description": "<p>When requiring users to interact with the application, but without jumping to a new page and interrupting the user's\nworkflow, you can use <code>Modal</code> to create a new floating layer over the current page to get user feedback or display\ninformation.</p>\n",
-        "Code": "@using System.Text.Json;\r\n@using MASA.Blazor.Doc.Demos.Components.Border.demo\r\n\r\n<div>\r\n    <MButton OnClick=\"() => _addModal.Show()\" Class=\"mb-1\">Add User</MButton>\r\n\r\n    <MASA.Blazor.Presets.Modal Visible=\"_addModal.Visible\" Title=\"User\"\r\n                               Width=\"500\"\r\n                               ScrollToTopOnHide\r\n                               OnOk=\"HandleOnClick\"\r\n                               OnCancel=\"HandleOnCancel\">\r\n        <MRow>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.UserName\"\r\n                            Label=\"UserName\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"true\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.City\"\r\n                            Label=\"City\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"true\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MRadioGroup @bind-Value=\"_addModal.Data.Gender\"\r\n                             Label=\"Gender:\"\r\n                             Row\r\n                             Dense\r\n                             Style=\"margin-top: 0\"\r\n                             HideDetails=\"true\">\r\n                    <MRadio Label=\"Body\" Value=\"0\"></MRadio>\r\n                    <MRadio Label=\"Girl\" Value=\"1\"></MRadio>\r\n                </MRadioGroup>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MSelect @bind-Value=\"_addModal.Data.Friends\"\r\n                         Items=\"_friends\"\r\n                         Label=\"Friends\"\r\n                         Multiple\r\n                         ItemValue=\"r => r\"\r\n                         ItemText=\"r => r\"\r\n                         HideDetails=\"true\">\r\n                </MSelect>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MAutocomplete @bind-Value=\"_addModal.Data.Favorites\"\r\n                               Items=\"_favorites\"\r\n                               Label=\"Favorites\"\r\n                               Multiple\r\n                               ItemValue=\"r => r\"\r\n                               ItemText=\"r => r\"\r\n                               HideDetails=\"true\">\r\n                </MAutocomplete>\r\n            </MCol>\r\n        </MRow>\r\n        <MRow>\r\n            <MCol>@JsonSerializer.Serialize(_addModal.Data)</MCol>\r\n        </MRow>\r\n    </MASA.Blazor.Presets.Modal>\r\n\r\n    <MRow NoGutters Class=\"pa-2\">\r\n        <MCol Cols=\"4\">username: @_user?.UserName</MCol>\r\n        <MCol Cols=\"4\">city: @_user?.City</MCol>\r\n        <MCol Cols=\"4\">gender: @_user?.Gender</MCol>\r\n        <MCol Cols=\"4\">friends: @string.Join(\",\", _user?.Friends ?? new List<string>())</MCol>\r\n        <MCol Cols=\"4\">favorites: @string.Join(\",\", _user?.Favorites ?? new List<string>())</MCol>\r\n        <MCol Cols=\"4\">\r\n            <MButton OnClick=\"() => _addModal.Show(_user?.ShallowCopy())\"\r\n                     Color=\"primary\"\r\n                     Disabled=\"@(_user == null)\"\r\n                     Text\r\n                     Small>\r\n                Edit\r\n            </MButton>\r\n        </MCol>\r\n    </MRow>\r\n</div>\r\n\r\n@code {\r\n    readonly List<string> _favorites = new() { \"Basketball\", \"Football\", \"Ping-pong\", \"Badminton\" };\r\n    readonly List<string> _friends = new() { \"Rachel Greene\", \"Monica Geller\", \"Joey Tribbiani\", \"Ross Geller\", \"Chandler Bing\", \"Phoebe Buffay\" };\r\n\r\n    DataModal<User> _addModal = new();\r\n    User _user;\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        _addModal.Hide();\r\n    }\r\n\r\n    private async Task HandleOnClick()\r\n    {\r\n        _addModal.ShowLoading();\r\n\r\n        if (_addModal.HasValue)\r\n        {\r\n    // Update\r\n        }\r\n        else\r\n        {\r\n    // Add\r\n        }\r\n\r\n        await Task.Delay(1000);\r\n\r\n        _user = _addModal.Data;\r\n\r\n        _addModal.HideLoading();\r\n\r\n        _addModal.Hide();\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        public string UserName { get; set; }\r\n        public int Gender { get; set; }\r\n        public string City { get; set; }\r\n        public List<string> Favorites { get; set; } = new() { };\r\n        public List<string> Friends { get; set; } = new() { };\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.Friends = Friends;\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public class DataModal<T> where T : class, new()\r\n    {\r\n        public bool Visible { get; set; }\r\n\r\n        public T Data { get; private set; }\r\n\r\n        public bool HasValue { get; private set; }\r\n\r\n        public bool Loading { get; private set; }\r\n\r\n        public DataModal()\r\n        {\r\n            Data = new T();\r\n        }\r\n\r\n        public void Show() => Visible = true;\r\n\r\n        /// <summary>\r\n    /// 显示弹窗\r\n    /// </summary>\r\n    /// <param name=\"data\"></param>\r\n    /// <remarks>写入数据之前请确保此对象是拷贝过的</remarks>\r\n        public void Show(T data)\r\n        {\r\n            Visible = true;\r\n            HasValue = true;\r\n            Data = data;\r\n        }\r\n\r\n        public virtual void Hide()\r\n        {\r\n            Visible = false;\r\n            HasValue = false;\r\n            Data = new T();\r\n        }\r\n\r\n        public bool ShowLoading() => Loading = true;\r\n\r\n        public bool HideLoading() => Loading = false;\r\n    }\r\n\r\n    public interface IShallowCopy<T>\r\n    {\r\n        public T ShallowCopy();\r\n    }\r\n\r\n}",
+        "Description": "<p>When requiring users to interact with the application, but without jumping to a new page and interrupting the user's workflow, you can use Modal to create a new floating layer over the current page to get user feedback or display information.</p>\n",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n<div>\r\n    <MButton OnClick=\"() => _addModal.Show()\" Class=\"mb-1\">Open Modal</MButton>\r\n\r\n    <MASA.Blazor.Presets.Modal Visible=\"_addModal.Visible\" Title=\"新增用户\" Width=\"500\" ScrollToTopOnHide OnOk=\"HandleOnClick\" OnCancel=\"HandleOnCancel\">\r\n        <p>@System.Text.Json.JsonSerializer.Serialize(_addModal.Data)</p>\r\n\r\n        <MRow>\r\n            <MCol Span=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.UserName\" Label=\"UserName\" Dense Outlined />\r\n            </MCol>\r\n            <MCol Span=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.City\" Label=\"City\" Dense Outlined />\r\n            </MCol>\r\n            <MCol Span=\"12\">\r\n                <MRadioGroup @bind-Value=\"_addModal.Data.Gender\" Row Dense Style=\"margin-top: 0\">\r\n                    <MRadio Label=\"男\" Value=\"0\"></MRadio>\r\n                    <MRadio Label=\"女\" Value=\"1\"></MRadio>\r\n                </MRadioGroup>\r\n            </MCol>\r\n            <MCol>\r\n                <MSelect @bind-Value=\"_addModal.Data.GFs\" Multiple Items=\"_gfs\" ItemValue=\"r=>r\" ItemText=\"r=>r\"></MSelect>\r\n            </MCol>\r\n            <MCol>\r\n                <MAutocomplete @bind-Value=\"_addModal.Data.Favorites\" Multiple Items=\"_favorites\" ItemValue=\"r=>r\" ItemText=\"r=>r\"></MAutocomplete>\r\n            </MCol>\r\n        </MRow>\r\n    </MASA.Blazor.Presets.Modal>\r\n\r\n    <MRow>\r\n        <MCol>username: @_user.UserName</MCol>\r\n        <MCol>city: @_user.City</MCol>\r\n        <MCol>gender: @_user.Gender</MCol>\r\n        <MCol>girls: @string.Join(\",\",_user.GFs)</MCol>\r\n        <MCol>favorites: @string.Join(\",\", _user.Favorites)</MCol>\r\n        <MCol><MButton OnClick=\"() => _addModal.Show(_user.ShallowCopy())\" Color=\"primary\" Text Small>Edit</MButton></MCol>\r\n    </MRow>\r\n</div>\r\n\r\n@code {\r\n    private User _user = new()\r\n    {\r\n        UserName = \"capdiem\",\r\n        City = \"HangZhou\",\r\n        Gender = 0,\r\n    };\r\n\r\n    private List<string> _favorites = new List<string>() { \"A\", \"B\", \"C\", \"D\" };\r\n    private List<string> _gfs = new List<string> { \"Girl 1\", \"Girl 2\", \"Girl 3\" };\r\n\r\n    private DataModal<User> _addModal = new();\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        _addModal.Hide();\r\n    }\r\n\r\n    private async Task HandleOnClick()\r\n    {\r\n        _addModal.ShowLoading();\r\n\r\n        if (_addModal.HasValue)\r\n        {\r\n            // Update\r\n        }\r\n        else\r\n        {\r\n            // Add\r\n        }\r\n        await Task.Delay(1000);\r\n\r\n        _addModal.HideLoading();\r\n\r\n        _addModal.Hide();\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        public string UserName { get; set; }\r\n        public int Gender { get; set; }\r\n        public string City { get; set; }\r\n        public List<string> Favorites { get; set; } = new List<string> { };\r\n        public List<string> GFs { get; set; } = new List<string> { };\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.GFs = GFs;\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public class DataModal<T> where T : class, new()\r\n    {\r\n        public bool Visible { get; set; }\r\n\r\n        public T Data { get; private set; }\r\n\r\n        public bool HasValue { get; private set; }\r\n\r\n        public bool Loading { get; private set; }\r\n\r\n        public DataModal()\r\n        {\r\n            Data = new T();\r\n        }\r\n\r\n        public void Show() => Visible = true;\r\n\r\n        /// <summary>\r\n        /// 显示弹窗\r\n        /// </summary>\r\n        /// <param name=\"data\"></param>\r\n        /// <remarks>写入数据之前请确保此对象是拷贝过的</remarks>\r\n        public void Show(T data)\r\n        {\r\n            Visible = true;\r\n            HasValue = true;\r\n            Data = data;\r\n        }\r\n\r\n        public virtual void Hide()\r\n        {\r\n            Visible = false;\r\n            HasValue = false;\r\n            Data = new T();\r\n        }\r\n\r\n        public bool ShowLoading() => Loading = true;\r\n\r\n        public bool HideLoading() => Loading = false;\r\n    }\r\n\r\n    public interface IShallowCopy<T>\r\n    {\r\n        public T ShallowCopy();\r\n    }\r\n}",
         "Type": "Demos.Components.Presets.props.Modal",
         "Style": "",
         "Debug": false,
@@ -5294,7 +5323,7 @@
         "Name": "pageHeader",
         "Title": "PageHeader",
         "Description": "",
-        "Code": "<PPageHeader Title=\"Order\"\r\n             Subtitle=\"This is an order page!\"\r\n             OnBack=\"OnBack\"\r\n             OnSearch=\"OnSearch\">\r\n    <LeftActions>\r\n        <MButton Color=\"primary\"><MIcon Left>mdi-plus</MIcon>Add Order</MButton>\r\n    </LeftActions>\r\n\r\n    <RightActions>\r\n        <MButton Icon OnClick=\"OnClear\">\r\n            <MIcon>mdi-refresh</MIcon>\r\n        </MButton>\r\n    </RightActions>\r\n\r\n    <Filters>\r\n        <MRow Dense>\r\n            <MCol Cols=\"6\">\r\n                <MTextField Label=\"Order ID\"\r\n                            Outlined\r\n                            Dense\r\n                            TValue=\"string\"\r\n                            HideDetails=\"true\">\r\n                </MTextField>\r\n            </MCol>\r\n            <MCol Cols=\"6\">\r\n                <MSelect @bind-Value=\"user\"\r\n                         Outlined\r\n                         Dense\r\n                         Label=\"User\"\r\n                         Items=\"users\"\r\n                         ItemValue=\"i => i\"\r\n                         ItemText=\"i => i\"\r\n                         HideDetails=\"true\">\r\n                </MSelect>\r\n            </MCol>\r\n            <MCol Cols=\"6\">\r\n                <MMenu\r\n                    @bind-Value=\"visible1\"\r\n                    CloseOnContentClick=\"false\"\r\n                    OffsetY\r\n                    MinWidth=\"290\">\r\n                    <ActivatorContent>\r\n                        <MTextField\r\n                            @bind-Value=\"start\"\r\n                            Label=\"Start date\"\r\n                            Outlined\r\n                            Dense\r\n                            Readonly\r\n                            HideDetails=\"true\"\r\n                            @attributes=\"@context.Attrs\">\r\n                        </MTextField>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        <MDatePicker\r\n                            @bind-Value=\"date1\"\r\n                            NoTitle\r\n                            Scrollable>\r\n                            <ActionsContent>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton\r\n                                    Text\r\n                                    Color=\"primary\"\r\n                                    OnClick=\"() => visible1 = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton\r\n                                    Text\r\n                                    Color=\"primary\"\r\n                                    OnClick=\"() => { start = date1.ToShortDateString(); visible1 = false; }\">\r\n                                    OK\r\n                                </MButton>\r\n                            </ActionsContent>\r\n                        </MDatePicker>\r\n                    </ChildContent>\r\n                </MMenu>\r\n            </MCol>\r\n            <MCol Cols=\"6\">\r\n                <MMenu\r\n                    @bind-Value=\"visible2\"\r\n                    CloseOnContentClick=\"false\"\r\n                    OffsetY\r\n                    MinWidth=\"290\">\r\n                    <ActivatorContent>\r\n                        <MTextField\r\n                            @bind-Value=\"end\"\r\n                            Label=\"End date\"\r\n                            Readonly\r\n                            Outlined\r\n                            Dense\r\n                            HideDetails=\"true\"\r\n                            @attributes=\"@context.Attrs\">\r\n                        </MTextField>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        <MDatePicker\r\n                            @bind-Value=\"date2\"\r\n                            NoTitle\r\n                            Scrollable>\r\n                            <ActionsContent>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton\r\n                                    Text\r\n                                    Color=\"primary\"\r\n                                    OnClick=\"() => visible2 = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton\r\n                                    Text\r\n                                    Color=\"primary\"\r\n                                    OnClick=\"() => { end = date2.ToShortDateString(); visible2 = false; }\">\r\n                                    OK\r\n                                </MButton>\r\n                            </ActionsContent>\r\n                        </MDatePicker>\r\n                    </ChildContent>\r\n                </MMenu>\r\n            </MCol>\r\n        </MRow>\r\n    </Filters>\r\n</PPageHeader>\r\n\r\n@code {\r\n    readonly List<string> users = new() { \"Rachel Greene\", \"Monica Geller\", \"Joey Tribbiani\", \"Ross Geller\", \"Chandler Bing\", \"Phoebe Buffay\" };\r\n\r\n    DateOnly date1 = DateOnly.FromDateTime(DateTime.Now);\r\n    DateOnly date2 = DateOnly.FromDateTime(DateTime.Now);\r\n\r\n    bool visible1;\r\n    bool visible2;\r\n\r\n    string orderId;\r\n    string user;\r\n    string start;\r\n    string end;\r\n\r\n    void OnBack()\r\n    {\r\n        // navigate\r\n    }\r\n\r\n    Task OnSearch()\r\n    {\r\n        return Task.Delay(1000);\r\n    }\r\n\r\n    void OnClear()\r\n    {\r\n        orderId = null;\r\n        user = null;\r\n        start = null;\r\n        end = null;\r\n    }\r\n}",
+        "Code": "<PPageHeader Title=\"Order\"\r\n             Subtitle=\"This is an order page!\"\r\n             OnBack=\"OnBack\"\r\n             OnSearch=\"OnSearch\">\r\n    <LeftActions>\r\n        <MButton Color=\"primary\"><MIcon Left>mdi-plus</MIcon>Add Order</MButton>\r\n    </LeftActions>\r\n\r\n    <RightActions>\r\n        <MButton Icon>\r\n            <MIcon>mdi-refresh</MIcon>\r\n        </MButton>\r\n    </RightActions>\r\n\r\n    <Filters>\r\n        <MRow Dense>\r\n            <MCol Span=\"6\">\r\n                <MTextField Label=\"Name\" Outlined Dense TValue=\"string\"></MTextField>\r\n            </MCol>\r\n            <MCol Span=\"6\">\r\n                <MTextField Label=\"Name\" Outlined Dense TValue=\"string\"></MTextField>\r\n            </MCol>\r\n            <MCol Span=\"6\">\r\n                <MTextField Label=\"Name\" Outlined Dense TValue=\"string\"></MTextField>\r\n            </MCol>\r\n            <MCol Span=\"6\">\r\n                <MTextField Label=\"Name\" Outlined Dense TValue=\"string\"></MTextField>\r\n            </MCol>\r\n        </MRow>\r\n    </Filters>\r\n</PPageHeader>\r\n\r\n@code {\r\n\r\n    void OnBack()\r\n    {\r\n    // navigate\r\n    }\r\n\r\n    Task OnSearch()\r\n    {\r\n        return Task.Delay(1000);\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Presets.props.PageHeader",
         "Style": "",
         "Debug": false,
@@ -5318,10 +5347,11 @@
     "Title": "ProgressCircular",
     "Type": "ProgressCircular",
     "Desc": "<p>The component is used to display circular data to users. It also can be put into an indeterminate state to portray loading.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8406035+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.7362988+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5385,10 +5415,11 @@
     "Title": "ProgressLinear",
     "Type": "ProgressLinear",
     "Desc": "<p>The component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8456135+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.7222979+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5540,10 +5571,11 @@
     "Title": "Rating",
     "Type": "Rating",
     "Desc": "<p>Semantic vector graphics.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T13:32:23.167907+08:00",
+    "LastWriteTime": "2021-11-16T15:17:58.3711741+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5640,11 +5672,12 @@
     "Title": "Sheet",
     "Type": "Sheet",
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sheet.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8466114+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.6822982+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -5685,14 +5718,13 @@
   {
     "Title": "SkeletonLoader",
     "Type": "SkeletonLoader",
-    "Desc": "<p>The <code>MSkeletonLoader</code> component is a versatile tool that can fill many roles within a project. At its heart, the\ncomponent provides an indication to the user that something is coming but not yet available. There are over 30\npre-defined options available that can be combined to make custom examples.</p>\n",
+    "Desc": "<p>The m-app component and the app prop on components like m-navigation-drawer, m-app-bar, m-footer and more, help bootstrap your application with the proper sizing around <m-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The m-app component is REQUIRED for all applications. This is the mount point for many of components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. m-app should only be rendered within your application ONCE.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SkeletonLoader.svg",
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-11-16T10:00:07.0756929+08:00",
+    "LastWriteTime": "2021-11-17T10:44:03.0314876+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5723,10 +5755,11 @@
     "Title": "Snackbar",
     "Type": "Snackbar",
     "Desc": "<p>The MSnackbar component is used to display quick messages to users. Snackbars supports positioning, removing delays, and callbacks.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T13:32:23.1699113+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.6722983+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5790,11 +5823,12 @@
     "Title": "Stepper",
     "Type": "Stepper",
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Stepper.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T13:32:23.1739081+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.6582989+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5946,10 +5980,11 @@
     "Title": "Subheader",
     "Type": "Subheader",
     "Desc": "<p>The <code>Subheader</code> component is used to separate sections of lists.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.6112992+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6012,11 +6047,12 @@
     "Title": "DataIterators",
     "Type": "DataIterators",
     "Desc": "<p>TODO...</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataIterators.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.5952995+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6058,11 +6094,12 @@
     "Title": "DataTable",
     "Type": "DataTable",
     "Desc": "<p>TODO...</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataTable.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0826969+08:00",
+    "LastWriteTime": "2021-11-17T17:33:50.2071767+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6313,11 +6350,12 @@
     "Title": "SimpleTables",
     "Type": "SimpleTables",
     "Desc": "<p>TODO...</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SimpleTables.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0836945+08:00",
+    "LastWriteTime": "2021-11-17T17:33:50.164177+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6381,13 +6419,12 @@
     "Title": "Tabs",
     "Type": "Tabs",
     "Desc": "<p>The <code>MTabs</code> component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation\nfor a page, where the tabs are links and the tab-items are the content.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MTabs\">MTabs</a></li>\n<li><a href=\"/docs/api/MTab\">MTab</a></li>\n<li><a href=\"/docs/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/docs/api/MTabsItems\">MTabsItems</a></li>\n<li><a href=\"/docs/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tabs.svg",
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MTabs\">MTabs</a></li>\n<li><a href=\"/docs/api/MTab\">MTab</a></li>\n<li><a href=\"/docs/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/docs/api/MTabsItems\">MTabsItems</a></li>\n<li><a href=\"/docs/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-11-18T17:20:09.724454+08:00",
+    "LastWriteTime": "2021-11-05T15:50:02.5722433+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6572,10 +6609,11 @@
     "Title": "Timeline",
     "Type": "Timeline",
     "Desc": "<p>MTimeline is very useful for displaying chronological information.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0886948+08:00",
+    "LastWriteTime": "2021-11-17T17:33:50.146178+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6681,7 +6719,7 @@
         "Name": "advanced",
         "Title": "Advanced",
         "Description": "<p>Modular components allow you to create highly customized solutions that just work.</p>\n",
-        "Code": "<MContainer Style=\"max-width: 600px;\">\r\n    <MTimeline Dense Clipped>\r\n        <MTimelineItem FillDot Class=\"white--text mb-12\" Color=\"orange\" Large>\r\n            <IconContent>\r\n                <span>JL</span>\r\n            </IconContent>\r\n            <ChildContent>\r\n                <MTextField @bind-Value=\"_input\" HideDetails=\"true\" Flat Label=\"Leave a comment...\" Solo OnKeyDown=\"Comment\">\r\n                    <AppendContent>\r\n                        <MButton Class=\"mx-0\" Depressed OnClick=\"Comment\">\r\n                            Post\r\n                        </MButton>\r\n                    </AppendContent>\r\n                </MTextField>\r\n            </ChildContent>\r\n        </MTimelineItem>\r\n\r\n        @foreach (var item in _events)\r\n        {\r\n            <MTimelineItem Class=\"mb-4\" Color=\"pink\" Small>\r\n                <MRow Justify=\"JustifyTypes.Center\">\r\n                    <MCol Cols=\"7\">@item.Text</MCol>\r\n                    <MCol Class=\"text-right\" Cols=\"5\">@item.Time</MCol>\r\n                </MRow>\r\n            </MTimelineItem>\r\n        }\r\n\r\n        <MTimelineItem Class=\"mb-6\" HideDot>\r\n            <span>Today</span>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Color=\"grey\" IconColor=\"grey lighten-2\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    This order was archived.\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:26 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    <MChip Class=\"white--text ml-0\" Color=\"purple\" Label Small>\r\n                        App\r\n                    </MChip>\r\n                    Digital Downloads fulfilled 1 item.\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Color=\"grey\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    Order confirmation email was sent to John Leider (john@vuetifyjs.com).\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" HideDot>\r\n            <MButton Class=\"mx-0\">Resend Email</MButton>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Color=\"grey\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    A $15.00 USD payment was processed on PayPal Express Checkout\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Color=\"grey\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    John Leider placed this order on Online Store (checkout #1937432132572).\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n    </MTimeline>\r\n</MContainer>\r\n\r\n@code\r\n{\r\n    private class EventDemo\r\n    {\r\n        public int Id { get; set; }\r\n        public string Text { get; set; }\r\n        public string Time { get; set; }\r\n    }\r\n    private List<EventDemo> _events = new List<EventDemo>();\r\n    private string _input = string.Empty;\r\n    private int _nonce = 0;\r\n\r\n    private void Comment()\r\n    {\r\n        _events.Insert(0,\r\n            new EventDemo\r\n                {\r\n                    Id = _nonce++,\r\n                    Text = _input,\r\n                    Time = DateTime.Now.ToString(\"HH:mm:ss\")\r\n                });\r\n\r\n        _input = string.Empty;\r\n    }\r\n}",
+        "Code": "<MContainer Style=\"max-width: 600px;\">\r\n    <MTimeline Dense Clipped>\r\n        <MTimelineItem FillDot Class=\"white--text mb-12\" Color=\"orange\" Large>\r\n            <IconContent>\r\n                <span>JL</span>\r\n            </IconContent>\r\n            <ChildContent>\r\n                <MTextField @bind-Value=\"_input\" HideDetails=\"true\" Flat Label=\"Leave a comment...\" Solo OnKeyDown=\"Comment\">\r\n                    <AppendContent>\r\n                        <MButton Class=\"mx-0\" Depressed OnClick=\"Comment\">\r\n                            Post\r\n                        </MButton>\r\n                    </AppendContent>\r\n                </MTextField>\r\n            </ChildContent>\r\n        </MTimelineItem>\r\n\r\n        @foreach (var item in _events)\r\n        {\r\n            <MTimelineItem Class=\"mb-4\" Color=\"pink\" Small>\r\n                <MRow Justify=\"JustifyTypes.Center\">\r\n                    <MCol Cols=\"7\">@item.Text</MCol>\r\n                    <MCol Class=\"text-right\" Cols=\"5\">@item.Time</MCol>\r\n                </MRow>\r\n            </MTimelineItem>\r\n        }\r\n\r\n        <MTimelineItem Class=\"mb-6\" HideDot>\r\n            <span>Today</span>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Color=\"grey\" IconColor=\"grey lighten-2\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    This order was archived.\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:26 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    <MChip Class=\"white--text ml-0\" Color=\"purple\" Label Small>\r\n                        App\r\n                    </MChip>\r\n                    Digital Downloads fulfilled 1 item.\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Color=\"grey\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    Order confirmation email was sent to John Leider (john@vuetifyjs.com).\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" HideDot>\r\n            <MButton Class=\"mx-0\">Resend Email</MButton>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Color=\"grey\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    A $15.00 USD payment was processed on PayPal Express Checkout\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Color=\"grey\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    John Leider placed this order on Online Store (checkout #1937432132572).\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n    </MTimeline>\r\n</MContainer>\r\n\r\n@code\r\n{\r\n    private class EventDemo\r\n    {\r\n        public int Id { get; set; }\r\n        public string Text { get; set; }\r\n        public string Time { get; set; }\r\n    }\r\n    private List<EventDemo> _events = new List<EventDemo>();\r\n    private string _input = string.Empty;\r\n    private int _nonce = 0;\r\n\r\n    private void Comment()\r\n    {\r\n        if (string.IsNullOrWhiteSpace(_input))\r\n            return;\r\n\r\n        _events.Insert(0,\r\n            new EventDemo\r\n                {\r\n                    Id = _nonce++,\r\n                    Text = _input,\r\n                    Time = DateTime.Now.ToString(\"HH:mm\")\r\n                });\r\n\r\n        _input = string.Empty;\r\n    }\r\n}",
         "Type": "Demos.Components.Timeline.misc.Advanced",
         "Style": "",
         "Debug": false,
@@ -6694,13 +6732,12 @@
     "Title": "Tooltip",
     "Type": "Tooltip",
     "Desc": "<p>The <code>MTooltip</code> component is useful for conveying information when a user hovers over an element. You can also\nprogrammatically control the display of tooltips through a <strong>@bind-Value</strong>. When activated, tooltips display a text\nlabel identifying an element, such as a description of its function.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tooltip.svg",
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MTooltip\">MTooltip</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-10-29T13:31:00.2450964+08:00",
+    "LastWriteTime": "2021-11-05T15:50:02.6882435+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6742,11 +6779,12 @@
     "Title": "Treeview",
     "Type": "Treeview",
     "Desc": "<p>The MTreeview component is useful for displaying large amounts of nested data.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Treeview.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0936951+08:00",
+    "LastWriteTime": "2021-11-17T17:33:50.1261775+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6931,10 +6969,11 @@
     "Title": "Upload",
     "Type": "Upload",
     "Desc": "<p>The <code>MFileInput</code> component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.</p>\n",
+    "Apis": "",
+    "Caveats": "",
     "Cols": 1,
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0946935+08:00",
+    "LastWriteTime": "2021-11-17T17:33:50.0811781+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6965,13 +7004,12 @@
     "Title": "VirtualScroll",
     "Type": "VirtualScroll",
     "Desc": "<p>The MVirtualScroll component displays a virtual, infinite list. It supports dynamic height and scrolling vertically.</p>\n",
+    "Apis": "\n<ul>\n<li><a href=\"/docs/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n",
+    "Caveats": "",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-11-17T14:30:00.36988+08:00",
+    "LastWriteTime": "2021-11-18T09:22:16.1528287+08:00",
     "DemoList": [
       {
         "Order": 0,

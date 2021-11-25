@@ -3,7 +3,7 @@
 @using MASA.Blazor.Doc.Services
 @inherits OwningComponentBase<DemoService>
 
-<SectionContent Title="@($"{ComponentName} API")" Id="@ComponentName" IsAnchor>
+<SectionContent Title="@($"{ComponentName} API")" Id="@ComponentName" IsAnchor Level="1">
     @if (_api != null)
     {
         <SectionContent Title="组件页面" Level="2" IsAnchor>
@@ -115,7 +115,7 @@
         </SectionContent>
     }
 
-    <SectionContent Class="mt-12" Title="了解更多？">
+    <SectionContent Class="mt-12" Title="了解更多？" Level="1">
         <div class="mb-3">
             继续学习由
             <ALink Href="/docs/about/meet-the-team">我们的团队</ALink>
