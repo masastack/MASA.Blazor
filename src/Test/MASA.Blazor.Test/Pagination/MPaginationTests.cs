@@ -13,52 +13,5 @@ namespace MASA.Blazor.Test.Pagination
     [TestClass]
     public class MPaginationTests:TestBase
     {
-        [TestMethod]
-        public void RendePaginationWithCircle()
-        {
-            ////Act
-            //var cut = RenderComponent<MPagination>(props =>
-            //{
-            //    props.Add(pagination => pagination.Circle, true);
-            //});
-            //var classes = cut.Instance.CssProvider.GetClass();
-            //var hasCircleClass = classes.Contains("m-pagination--circle");
-
-            //// Assert
-            //Assert.IsTrue(hasCircleClass);
-        }
-
-
-        [TestMethod]
-        public void RenderPaginationWithDark()
-        {
-            ////Act
-            //var cut = RenderComponent<MPagination>(props =>
-            //{
-            //    props.Add(pagination => pagination.Dark, true);
-            //});
-            //var classes = cut.Instance.CssProvider.GetClass();
-            //var hasDarkClass = classes.Contains("theme--dark");
-
-            //// Assert
-            //Assert.IsTrue(hasDarkClass);
-        }
-
-        [TestMethod]
-        public void RenderPaginationWithLight()
-        {
-            ////Act
-            //var cut = RenderComponent<MPagination>(props =>
-            //{
-            //    props.Add(pagination => pagination.Light, true);
-            //});
-            //var classes = cut.Instance.CssProvider.GetClass();
-            //var hasLightClass = classes.Contains("theme--light");
-
-            //// Assert
-            //Assert.IsTrue(hasLightClass);
-        }
-
-        
     }
 }

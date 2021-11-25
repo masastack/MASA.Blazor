@@ -26,20 +26,20 @@ namespace MASA.Blazor.Test.Overlay
             Assert.IsTrue(hasDarkClass);
         }
 
-        //[TestMethod]
-        //public void RenderOverlayWithLight()
-        //{
-        //    //Act
-        //    var cut = RenderComponent<MOverlay>(props =>
-        //    {
-        //        props.Add(overlay => overlay.Light, false);
-        //    });
-        //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasLightClass = classes.Contains("theme--light");
+        [TestMethod]
+        public void RenderOverlayWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MOverlay>(props =>
+            {
+                props.Add(overlay => overlay.Light, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-overlay");
 
-        //    // Assert
-        //    Assert.IsTrue(hasLightClass);
-        //}
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
 
         [TestMethod]
         public void RenderOverlayWithValue()
@@ -50,10 +50,10 @@ namespace MASA.Blazor.Test.Overlay
                 props.Add(overlay => overlay.Value, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasDarkClass = classes.Contains("m-overlay--active");
+            var hasValueClass = classes.Contains("m-overlay--active");
 
             // Assert
-            Assert.IsTrue(hasDarkClass);
+            Assert.IsTrue(hasValueClass);
         }
 
         [TestMethod]
@@ -65,10 +65,10 @@ namespace MASA.Blazor.Test.Overlay
                 props.Add(overlay => overlay.Absolute, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasDarkClass = classes.Contains("m-overlay--absolute");
+            var hasAbsoluteClass = classes.Contains("m-overlay--absolute");
 
             // Assert
-            Assert.IsTrue(hasDarkClass);
+            Assert.IsTrue(hasAbsoluteClass);
         }
 
         [TestMethod]
@@ -86,25 +86,19 @@ namespace MASA.Blazor.Test.Overlay
             Assert.AreEqual("background-color:#212121;border-color:#212121;opacity:0", style);
         }
 
-        //[TestMethod]
-        //public void RenderButtonAndonClick()
-        //{
-        //    // Arrange
-        //    var times = 0;
-        //    var cut = RenderComponent<MOverlay>(props =>
-        //    {
-        //        props.Add(button => button.OnClick, args =>
-        //        {
-        //            times++;
-        //        });
-        //    });
+        [TestMethod]
+        public void RenderWithZIndex()
+        {
+            // Act
+            var cut = RenderComponent<MOverlay>(props =>
+            {
+                props.Add(p => p.ZIndex, 5);
+            });
+            var overlayDiv = cut.Find(".m-overlay__scrim");
+            var style = overlayDiv.GetAttribute("style");
 
-        //    // Act
-        //    var buttonElement = cut.Find("Mbutton");
-        //    buttonElement.Click();
-
-        //    // Assert
-        //    Assert.AreEqual(1, times);
-        //}
+            // Assert
+            Assert.AreEqual("background-color:#212121;border-color:#212121;opacity:0", style);
+        }
     }
 }

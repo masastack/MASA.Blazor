@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Hover
+namespace MASA.Blazor.Test.Icons
 {
     [TestClass]
-    public class MHoverTests:TestBase
+    public class MIconTests:TestBase
     {
+        
     }
 }
