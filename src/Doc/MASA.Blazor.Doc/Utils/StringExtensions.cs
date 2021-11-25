@@ -34,34 +34,72 @@ namespace MASA.Blazor.Doc.Utils
         public static string FormatLink(this string markup)
         {
             if (markup == null) return null;
-            
+
             return ApisHelper.FormatMarkup(markup);
         }
-        
-        public static AlertTypes GetAlertType(this string markup)
+
+        public static List<(AlertTypes, string)> SplitByAlertType(this string markup)
         {
-            if (markup == null) return AlertTypes.Info;
+            if (markup == null) return null;
+
+            markup = markup.Trim();
 
             var regex = new Regex("<!--alert:\\S+-->");
 
-            var match = regex.Match(markup);
-            if (match.Success)
-            {
-                var from = match.Value.IndexOf(":") + 1;
-                var to = match.Value.IndexOf("-->");
-                var value = match.Value.Substring(from, to - from);
+            List<(AlertTypes, string)> list = new();
 
-                return value.ToLower() switch
+            var matches = regex.Matches(markup).Where(m => m.Success).Select(m => m.Value).ToArray();
+
+            for (int i = 0; i < matches.Length; i++)
+            {
+                var match = matches[i];
+
+                var from = markup.IndexOf(match);
+
+                if (i == 0 && from > 0) // exists string before the first matched alert
                 {
-                    "error" => AlertTypes.Error,
-                    "info" => AlertTypes.Info,
-                    "success" => AlertTypes.Success,
-                    "warning" => AlertTypes.Warning,
-                    _ => AlertTypes.None,
-                };
+                    list.Add((AlertTypes.None, markup[..from]));
+                }
+
+                int to;
+                if (i + 1 < matches.Length)
+                {
+                    var nextMatch = matches[i + 1];
+                    to = markup.IndexOf(nextMatch);
+                }
+                else
+                {
+                    to = markup.Length - 1;
+                }
+
+                var type = GetAlertType(markup);
+                var p = markup.Substring(from, to - from);
+
+                markup = regex.Replace(markup, "", 1);
+
+                list.Add((type, p));
             }
 
-            return AlertTypes.Info;
+            if (!list.Any())
+                list.Add((AlertTypes.None, markup));
+
+            return list;
+        }
+
+        private static AlertTypes GetAlertType(string markup)
+        {
+            var from = markup.IndexOf(":") + 1;
+            var to = markup.IndexOf("-->");
+            var value = markup.Substring(from, to - from);
+
+            return value.ToLower() switch
+            {
+                "error" => AlertTypes.Error,
+                "info" => AlertTypes.Info,
+                "success" => AlertTypes.Success,
+                "warning" => AlertTypes.Warning,
+                _ => AlertTypes.None
+            };
         }
     }
 }

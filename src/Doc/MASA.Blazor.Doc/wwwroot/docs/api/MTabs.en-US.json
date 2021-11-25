@@ -107,7 +107,7 @@
     },
     {
       "Name": "Optional",
-      "Type": "String",
+      "Type": "Boolean",
       "Default": "null",
       "Description": ""
     },

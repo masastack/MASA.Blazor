@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using System.Reflection;
-using System.Threading.Tasks;
 using BlazorComponent.Doc.Extensions;
 using BlazorComponent.Doc.Models;
-using MASA.Blazor.Doc.Demos.Components.Border.demo;
 using MASA.Blazor.Doc.Localization;
 using MASA.Blazor.Doc.Pages;
-using MASA.Blazor.Doc.Shared;
+using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -63,7 +57,8 @@ namespace MASA.Blazor.Doc.Services
             await _styleCache.GetOrAdd(language, async (currentLanguage) =>
             {
                 var styles =
-                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>($"_content/MASA.Blazor.Doc/meta/styles-and-animations/components.{language}.json");
+                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>(
+                        $"_content/MASA.Blazor.Doc/meta/styles-and-animations/components.{language}.json");
                 return styles.ToDictionary(x => x.Title.ToLower(), x => x);
             });
 
@@ -156,7 +151,7 @@ namespace MASA.Blazor.Doc.Services
 
                 foreach (var demo in demoList)
                 {
-                    var href = $"/#section-" + HashHelper.Hash(demo.Title);
+                    var href = demo.Title.HashSection();
                     if (demo.Title.Equals("Usage", StringComparison.OrdinalIgnoreCase) || demo.Title == "使用")
                     {
                         contents.Add(new ContentsItem(demo.Title, href, 2));
@@ -179,9 +174,13 @@ namespace MASA.Blazor.Doc.Services
                     }
                 }
 
-                if (components.Apis != null)
+                if (components.OtherDocs != null)
                 {
-                    contents.Add(ContentsItem.GenerateApi(CurrentLanguage));
+                    foreach (var (title, _) in components.OtherDocs)
+                    {
+                        var href = title.HashSection();
+                        contents.Add(new ContentsItem(title, href, 2));
+                    }
                 }
 
                 if (propsList.Any() || miscList.Any())
