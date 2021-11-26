@@ -1,8 +1,8 @@
 ---
 order: 3
 title:
-  zh-CN: 标签
-  en-US: label
+  zh-CN: 标签页
+  en-US: Tabs
 ---
 
 ## zh-CN

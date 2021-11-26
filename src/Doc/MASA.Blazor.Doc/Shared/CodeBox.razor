@@ -1,4 +1,5 @@
 ﻿@using MASA.Blazor.Doc.Utils
+@using System.Reflection.Metadata.Ecma335
 @inherits OwningComponentBase<MASA.Blazor.Doc.Services.DemoService>
 
 @((MarkupString)Demo.Description.FormatLink())
@@ -65,7 +66,7 @@
                 <MItemGroup @bind-Value="_activeItem" Class="pa-2" Mandatory>
                     @foreach (var ((type, _), content) in _items)
                     {
-                        if (content == null) return;
+                        if (content == null) continue;
 
                         <MItem Value="type">
                             <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.Active"> @type </MButton>
@@ -76,7 +77,7 @@
                 <MWindow Value="_activeItem">
                     @foreach (var ((type, lang), content) in _items)
                     {
-                        if (content == null) return;
+                        if (content == null) continue;
 
                         <MWindowItem Value="@type">
                             <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden my-0">

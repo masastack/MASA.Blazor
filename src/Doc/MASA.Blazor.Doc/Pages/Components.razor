@@ -25,35 +25,35 @@
 
         @if (_demoComponent.OtherDocs != null)
         {
-            foreach (var (title, markup) in _demoComponent.OtherDocs)
+            foreach (var (title, doc) in _demoComponent.OtherDocs)
             {
-                var list = markup.SplitByAlertType();
+                var alerts = doc.SplitByAlertType();
 
                 <SectionContent Title="@title" Id="@title.HashSection()" Level="2" IsAnchor>
-                    @foreach (var (type, str) in list)
+                    @foreach (var (type, alert) in alerts)
                     {
                         if (type == AlertTypes.None)
                         {
-                            var list2 = str.SplitByCode();
+                            var codes = alert.SplitByCode();
 
-                            foreach (var (lang, str2) in list2)
+                            foreach (var (lang, code) in codes)
                             {
                                 if (lang != null)
                                 {
                                     <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden">
-                                        <HighlightedCode Code="@HttpUtility.HtmlDecode(str2.RemoveWrapTag().RemoveWrapTag())" CanLoad Language="@lang"></HighlightedCode>
+                                        <HighlightedCode Code="@HttpUtility.HtmlDecode(code.RemoveWrapTag().RemoveWrapTag())" CanLoad Language="@lang"></HighlightedCode>
                                     </MSheet>
                                 }
                                 else
                                 {
-                                    @((MarkupString)str2.FormatLink())
+                                    @((MarkupString)code.FormatLink())
                                 }
                             }
                         }
                         else
                         {
                             <MAlert Type="@type" Border="Borders.Left" Text Class="m-alert--doc">
-                                @((MarkupString)str.FormatLink())
+                                @((MarkupString)alert.FormatLink())
                             </MAlert>
                         }
                     }
