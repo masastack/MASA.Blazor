@@ -1,11 +1,11 @@
-﻿<MContainer Class="pa-4 text-center">
+﻿<MContainer Class="pa-4 text-center hover-misc-list">
     <MRow Class="fill-height" Align="AlignTypes.Center" Justify="JustifyTypes.Center">
         @foreach (var item in _items)
         {
             <MCol Cols="12" Md="4">
                 <MHover>
-                    <MCard @attributes="context.Attrs" Class="@($"{context.Class} {(context.Hover ? "on-hover" : "")}")" 
-                        Style="@($"transition: opacity .4s ease-in-out; {(context.Hover ? "" : "opacity: 0.6;")}")" Elevation="@(context.Hover ? 12 : 2)">
+                    <MCard @attributes="context.Attrs" Class="@($"{context.Class} {(context.Hover ? "on-hover" : "")}")"
+                           Style="@($"transition: opacity .4s ease-in-out; {(context.Hover ? "" : "opacity: 0.6;")}")" Elevation="@(context.Hover ? 12 : 2)">
                         <MImage Src="@item.Img" Height="225">
                             <MCardTitle Class="text-h6 white--text">
                                 <MRow Class="fill-height flex-column" Justify="JustifyTypes.SpaceBetween">
@@ -40,6 +40,7 @@
 {
     private string[] _icons = new string[3] { "mdi-rewind", "mdi-play", "mdi-fast-forward" };
     private string _transparent = "rgba(255, 255, 255, 0)";
+
     private class ItemDemo
     {
         public string Title { get; set; }
@@ -47,6 +48,7 @@
         public string SubText { get; set; }
         public string Img { get; set; }
     }
+
     private List<ItemDemo> _items = new List<ItemDemo>
     {
         new ItemDemo
@@ -72,3 +74,19 @@
         }
     };
 }
+
+<style>
+
+.hover-misc-list .m-card {
+  transition: opacity .4s ease-in-out;
+}
+
+.hover-misc-list .m-card:not(.on-hover) {
+  opacity: 0.6;
+ }
+
+.hover-misc-list .show-btns {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+</style>

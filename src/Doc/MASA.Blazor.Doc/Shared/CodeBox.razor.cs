@@ -1,6 +1,5 @@
 ﻿using BlazorComponent;
 using BlazorComponent.Doc.Models;
-using MASA.Blazor.Doc.Localization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -71,7 +70,7 @@ public partial class CodeBox
         }
 
         var index = code.IndexOf("@code");
-        if (index > 0)
+        if (index > -1)
         {
             _items[Template] = code.Substring(0, index).Trim();
             _items[Code] = code.Substring(index).Trim();

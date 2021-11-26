@@ -1,5 +1,4 @@
 ﻿using BlazorComponent;
-using MASA.Blazor.Doc.Localization;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
@@ -82,16 +81,12 @@ namespace MASA.Blazor.Doc.Pages
 
         private ApiModel _api;
 
-        private string CurrentLanguage => LanguageService.CurrentCulture.Name;
-
-        [Inject] private ILanguageService LanguageService { get; set; }
-
         protected override async Task OnParametersSetAsync()
         {
             if (!string.IsNullOrEmpty(ComponentName))
             {
                 var baseUrl = new Uri("http://127.0.0.1:5000");
-                var apiUrl = new Uri(baseUrl, $"_content/MASA.Blazor.Doc/docs/api/{ComponentName}.{CurrentLanguage}.json").ToString();
+                var apiUrl = new Uri(baseUrl, $"_content/MASA.Blazor.Doc/docs/api/{ComponentName}.zh-CN.json").ToString();
                 _api = await Service.GetApiAsync(apiUrl);
             }
         }

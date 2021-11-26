@@ -1,27 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..</DockerfileContext>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\BlazorComponent\src\Doc\BlazorComponent.Doc.Models\BlazorComponent.Doc.Models.csproj" />
-    <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
-    <ProjectReference Include="..\MASA.Blazor.Doc\MASA.Blazor.Doc.csproj" />
-  </ItemGroup>
-
-   <!--
-      FIX: NETSDK1148: Found multiple publish output files with the same relative path.
-      https://github.com/dotnet/aspnetcore/issues/29524
-   -->
-  <PropertyGroup>
-    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
-  </PropertyGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\MASA.Blazor.Doc\MASA.Blazor.Doc.csproj" />
+	</ItemGroup>
 
 </Project>

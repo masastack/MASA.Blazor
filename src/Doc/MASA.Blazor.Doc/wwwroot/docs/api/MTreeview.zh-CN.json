@@ -52,6 +52,12 @@
       "Description": ""
     },
     {
+      "Name": "Filter",
+      "Type": "Func`4",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Hoverable",
       "Type": "Boolean",
       "Default": "false",

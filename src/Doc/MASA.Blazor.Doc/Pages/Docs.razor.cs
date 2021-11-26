@@ -5,7 +5,6 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using BlazorComponent.Doc.Models;
 using MASA.Blazor.Doc.Highlight;
-using MASA.Blazor.Doc.Localization;
 using MASA.Blazor.Doc.Services;
 using MASA.Blazor.Doc.Shared;
 using Microsoft.AspNetCore.Components;
@@ -29,10 +28,9 @@ namespace MASA.Blazor.Doc.Pages
         private bool _waitingHighlight = false;
 
 
-        private string CurrentLanguage => LanguageService.CurrentCulture.Name;
+        private string CurrentLanguage => "zh-CN";
 
         [Inject] private NavigationManager NavigationManager { get; set; }
-        [Inject] private ILanguageService LanguageService { get; set; }
         [Inject] private IPrismHighlighter PrismHighlighter { get; set; }
 
         protected override async Task OnInitializedAsync()

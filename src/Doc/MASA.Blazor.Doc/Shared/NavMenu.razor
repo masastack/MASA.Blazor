@@ -1,7 +1,6 @@
 ﻿@using BlazorComponent.Doc.Models
 @using MASA.Blazor.Doc.Services
 @inherits OwningComponentBase<DemoService>
-@inject ILanguageService LanguageService
 
 <MList Dense Nav Linkage>
     @foreach (var item in MenuItems)
@@ -94,7 +93,7 @@
 
     string FormatComponentTitle(DemoMenuItemModel model)
     {
-        if (LanguageService.CurrentCulture.Name == "zh-CN" && !string.IsNullOrEmpty(model.SubTitle))
+        if (!string.IsNullOrEmpty(model.SubTitle))
         {
             if (model.Url.StartsWith("style"))
             {

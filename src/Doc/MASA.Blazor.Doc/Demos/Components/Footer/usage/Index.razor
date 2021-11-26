@@ -22,7 +22,7 @@
 
     <MRow Align="AlignTypes.Center" Justify="JustifyTypes.Center" Class="ma-12">
         <MCol Cols="12" Md="8">
-            <MSelect @bind-Value="_variant" Items="_items" Clearable Label="Variant" ItemText="x => x" ItemValue="x => x"></MSelect>
+            <MSelect @bind-Value="_variant" Items="_items" Label="Variant" ItemText="x => x" ItemValue="x => x"></MSelect>
 
             <MCheckbox @bind-Value="_padless" HideDetails="true" Label="Padless"></MCheckbox>
         </MCol>
@@ -46,10 +46,18 @@
                 dic.Add("Absolute", false);
                 dic.Add("Fixed", false);
             }
+            else if (_variant == "Absolute")
+            {
+                dic.Add("Default", false);
+                dic.Add("Fixed", false);
+            }
             else
             {
-                dic.Add(_variant, true);
+                dic.Add("Default", false);
+                dic.Add("Absolute", false);
             }
+            
+            dic.Add(_variant, true);
 
             return dic;
         }

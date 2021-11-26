@@ -1,8 +1,4 @@
-﻿using MASA.Blazor.Model;
-using System;
-using System.ComponentModel;
-
-namespace BlazorComponent
+﻿namespace MASA.Blazor
 {
     /// <summary>
     /// Cascading this will cause additional render,we may just cascading rtl in the feature

@@ -146,7 +146,7 @@ namespace MASA.Blazor
                 return;
             }
 
-           await CheckChildrenAsync();
+            await CheckChildrenAsync();
             Treeview.UpdateSelected(Key);
             await Treeview.EmitSelectedAsync();
         }
