@@ -12,7 +12,7 @@ namespace MASA.Blazor.Test.ProgressCircular
     public class MProgressCircularTests:TestBase
     {
         [TestMethod]
-        public void RendeProgressCircularWithIndeterminate()
+        public void RenderProgressCircularWithIndeterminate()
         {
             //Act
             var cut = RenderComponent<MProgressCircular>(props =>
@@ -26,35 +26,64 @@ namespace MASA.Blazor.Test.ProgressCircular
             Assert.IsTrue(hasIndeterminateClass);
         }
 
-        //[TestMethod]
-        //public void RenderWithChildContentt()
-        //{
-        //    // Arrange & Act
-        //    var cut = RenderComponent<MProgressCircular>(props =>
-        //    {
-        //        props.Add(list => list.ChildContent, "<span>Hello world</span>");
-        //    });
-        //    var contentDiv = cut.Find(".m-progresscircular");
+        [TestMethod]
+        public void RenderProgressCircularWithRotate()
+        {
+            //Act
+            var cut = RenderComponent<MProgressCircular>(props =>
+            {
+                props.Add(progresscircular => progresscircular.Rotate, 0);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasRotateClass = classes.Contains("m-progress-circular");
 
-        //    // Assert
-        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
+            // Assert
+            Assert.IsTrue(hasRotateClass);
+        }
 
-        //[TestMethod]
-        //public void RenderWithSize()
-        //{
-        //    // Act
-        //    var cut = RenderComponent<MProgressCircular>(props =>
-        //    {
-        //        props.Add(p => p.Rotate, 0);
-        //    });
-        //    var inputSlotDiv = cut.Find("");
-        //    var style = inputSlotDiv.GetAttribute("style");
+        [TestMethod]
+        public void RenderProgressCircularWithSize()
+        {
+            //Act
+            var cut = RenderComponent<MProgressCircular>(props =>
+            {
+                props.Add(progresscircular => progresscircular.Size, 32);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSizeClass = classes.Contains("m-progress-circular");
 
-        //    // Assert
-        //    Assert.AreEqual("transform: rotate(0deg)", style);
-        //}
+            // Assert
+            Assert.IsTrue(hasSizeClass);
+        }
 
+        [TestMethod]
+        public void RenderProgressCircularWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MProgressCircular>(props =>
+            {
+                props.Add(progresscircular => progresscircular.Value, 0);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-progress-circular");
 
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
+
+        [TestMethod]
+        public void RenderProgressCircularWithWidth()
+        {
+            //Act
+            var cut = RenderComponent<MProgressCircular>(props =>
+            {
+                props.Add(progresscircular => progresscircular.Width, 4);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasWidthClass = classes.Contains("m-progress-circular");
+
+            // Assert
+            Assert.IsTrue(hasWidthClass);
+        }
     }
 }

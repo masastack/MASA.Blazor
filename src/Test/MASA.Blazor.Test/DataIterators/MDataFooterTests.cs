@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Bunit;
 
-namespace MASA.Blazor.Test.SkeletonLoader
+namespace MASA.Blazor.Test.DataIterators
 {
     [TestClass]
-    public class MSkeletonLoaderTests:TestBase
+    public class MDataFooterTests:TestBase
     {
     }
 }

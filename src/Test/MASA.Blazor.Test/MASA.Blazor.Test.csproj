@@ -16,7 +16,6 @@
     <Compile Remove="Icon\**" />
     <Compile Remove="ListItemGroup\**" />
     <Compile Remove="Row\**" />
-    <Compile Remove="SimpleTable\**" />
     <Compile Remove="SlideGroup\**" />
     <Compile Remove="Table\**" />
     <Compile Remove="TimePicker\**" />
@@ -31,7 +30,6 @@
     <EmbeddedResource Remove="Icon\**" />
     <EmbeddedResource Remove="ListItemGroup\**" />
     <EmbeddedResource Remove="Row\**" />
-    <EmbeddedResource Remove="SimpleTable\**" />
     <EmbeddedResource Remove="SlideGroup\**" />
     <EmbeddedResource Remove="Table\**" />
     <EmbeddedResource Remove="TimePicker\**" />
@@ -46,7 +44,6 @@
     <None Remove="Icon\**" />
     <None Remove="ListItemGroup\**" />
     <None Remove="Row\**" />
-    <None Remove="SimpleTable\**" />
     <None Remove="SlideGroup\**" />
     <None Remove="Table\**" />
     <None Remove="TimePicker\**" />

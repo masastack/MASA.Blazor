@@ -12,7 +12,7 @@ namespace MASA.Blazor.Test.Subheader
     public class MSubheaderTests:TestBase
     {
         [TestMethod]
-        public void RendeMSubheaderWithInset()
+        public void RenderSubheaderWithInset()
         {
             //Act
             var cut = RenderComponent<MSubheader>(props =>
@@ -55,18 +55,18 @@ namespace MASA.Blazor.Test.Subheader
             Assert.IsTrue(hasLightClass);
         }
 
-        //[TestMethod]
-        //public void RenderWithChildContentt()
-        //{
-        //    // Arrange & Act
-        //    var cut = RenderComponent<MStepper>(props =>
-        //    {
-        //        props.Add(subheader => subheader.ChildContent, "<span>Hello world</span>");
-        //    });
-        //    var contentDiv = cut.Find(".m-subheader ");
+        [TestMethod]
+        public void RenderWithChildContentt()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<MStepper>(props =>
+            {
+                props.Add(subheader => subheader.ChildContent, "<span>Hello world</span>");
+            });
+            var contentDiv = cut.Find(".m-stepper");
 
-        //    // Assert
-        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
+            // Assert
+            contentDiv.Children.MarkupMatches("<span>Hello world</span>");
+        }
     }
 }

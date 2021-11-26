@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Bunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MASA.Blazor.Test.SkeletonLoader
+namespace MASA.Blazor.Test.TimePickers
 {
     [TestClass]
-    public class MSkeletonLoaderTests:TestBase
+    public class MTimePickerTests:TestBase
     {
     }
 }

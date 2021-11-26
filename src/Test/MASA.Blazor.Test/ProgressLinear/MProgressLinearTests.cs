@@ -12,7 +12,7 @@ namespace MASA.Blazor.Test.ProgressLinear
     public class MProgressLinearTests:TestBase
     {
         [TestMethod]
-        public void RendeMProgressLinearWithAbsolute()
+        public void RenderProgressLinearWithAbsolute()
         {
             //Act
             var cut = RenderComponent<MProgressLinear>(props =>
@@ -23,120 +23,6 @@ namespace MASA.Blazor.Test.ProgressLinear
             var hasAbsoluteClass = classes.Contains("m-progress-linear--absolute");
             // Assert
             Assert.IsTrue(hasAbsoluteClass);
-        }
-
-        [TestMethod]
-        public void RendeMProgressLinearWithFixed()
-        {
-            //Act
-            var cut = RenderComponent<MProgressLinear>(props =>
-            {
-                props.Add(progresslinear => progresslinear.Fixed, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasFixedClass = classes.Contains("m-progress-linear--fixed");
-            // Assert
-            Assert.IsTrue(hasFixedClass);
-        }
-
-        [TestMethod]
-        public void RendeMProgressLinearWithQuery()
-        {
-            //Act
-            var cut = RenderComponent<MProgressLinear>(props =>
-            {
-                props.Add(progresslinear => progresslinear.Query, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasQueryClass = classes.Contains("m-progress-linear--query");
-            // Assert
-            Assert.IsTrue(hasQueryClass);
-        }
-
-        [TestMethod]
-        public void RendeMProgressLinearWithRounded()
-        {
-            //Act
-            var cut = RenderComponent<MProgressLinear>(props =>
-            {
-                props.Add(progresslinear => progresslinear.Rounded, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasRoundedClass = classes.Contains("m-progress-linear--rounded");
-            // Assert
-            Assert.IsTrue(hasRoundedClass);
-        }
-
-        [TestMethod]
-        public void RendeMProgressLinearWithStriped()
-        {
-            //Act
-            var cut = RenderComponent<MProgressLinear>(props =>
-            {
-                props.Add(progresslinear => progresslinear.Striped, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasStripedClass = classes.Contains("m-progress-linear--striped");
-            // Assert
-            Assert.IsTrue(hasStripedClass);
-        }
-
-        [TestMethod]
-        public void RendeMProgressLinearWithIsVisible()
-        {
-            //Act
-            var cut = RenderComponent<MProgressLinear>(props =>
-            {
-                props.Add(progresslinear => progresslinear.IsVisible, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasIsVisibleClass = classes.Contains("m-progress-linear--visible");
-            // Assert
-            Assert.IsTrue(hasIsVisibleClass);
-        }
-
-        [TestMethod]
-        public void RenderWithIconContent()
-        {
-            // Arrange & Act
-            var cut = RenderComponent<MProgressLinear>(props =>
-            {
-                props.Add(progresslinear => progresslinear.ChildContent, context => "<span>Hello world</span>");
-            });
-            var progresslinearDiv = cut.Find(".m-progress-linear__content");
-
-            // Assert
-            progresslinearDiv.Children.MarkupMatches("<span>Hello world</span>");
-        }
-
-        [TestMethod]
-        public void RenderProgressLinearWithDark()
-        {
-            //Act
-            var cut = RenderComponent<MProgressLinear>(props =>
-            {
-                props.Add(progresslinear => progresslinear.Dark, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasDarkClass = classes.Contains("theme--dark");
-
-            // Assert
-            Assert.IsTrue(hasDarkClass);
-        }
-
-        [TestMethod]
-        public void RenderProgressLinearWithLight()
-        {
-            //Act
-            var cut = RenderComponent<MProgressLinear>(props =>
-            {
-                props.Add(progresslinear => progresslinear.Light, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasLightClass = classes.Contains("theme--light");
-
-            // Assert
-            Assert.IsTrue(hasLightClass);
         }
 
         [TestMethod]
@@ -155,18 +41,134 @@ namespace MASA.Blazor.Test.ProgressLinear
         }
 
         [TestMethod]
-        public void RenderProgressLinearWithStream()
+        public void RenderProgressLinearWithBackgroundOpacity()
         {
             //Act
             var cut = RenderComponent<MProgressLinear>(props =>
             {
-                props.Add(progresslinear => progresslinear.Stream, true);
+                props.Add(progresslinear => progresslinear.BackgroundOpacity, 0.3);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasStreamClass = classes.Contains("m-progress-linear");
+            var hasBackgroundOpacityClass = classes.Contains("m-progress-linear");
 
             // Assert
-            Assert.IsTrue(hasStreamClass);
+            Assert.IsTrue(hasBackgroundOpacityClass);
+        }
+
+        [TestMethod]
+        public void RenderProgressLinearWithBottom()
+        {
+            //Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                props.Add(progresslinear => progresslinear.Bottom, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBottomClass = classes.Contains("m-progress-linear");
+            // Assert
+            Assert.IsTrue(hasBottomClass);
+        }
+
+        [TestMethod]
+        public void RenderProgressLinearWithBufferValue()
+        {
+            //Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                props.Add(progresslinear => progresslinear.BufferValue, 100);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBufferValueClass = classes.Contains("m-progress-linear");
+
+            // Assert
+            Assert.IsTrue(hasBufferValueClass);
+        }
+
+        [TestMethod]
+        public void RenderProgressLinearWithDark()
+        {
+            //Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                props.Add(progresslinear => progresslinear.Dark, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("theme--dark");
+
+            // Assert
+            Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderProgressLinearWithFixed()
+        {
+            //Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                props.Add(progresslinear => progresslinear.Fixed, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFixedClass = classes.Contains("m-progress-linear--fixed");
+            // Assert
+            Assert.IsTrue(hasFixedClass);
+        }
+
+        [TestMethod]
+        public void RenderWithHeight()
+        {
+            // Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                props.Add(p => p.Height, 4);
+            });
+            var inputSlotDiv = cut.Find(".m-progress-linear");
+            var style = inputSlotDiv.GetAttribute("style");
+
+            // Assert
+            Assert.AreEqual("height:4px", style);
+        }
+
+        [TestMethod]
+        public void RenderProgressLinearWithIndeterminate()
+        {
+            //Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                props.Add(progresslinear => progresslinear.Indeterminate, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIndeterminateClass = classes.Contains("m-progress-linear");
+            // Assert
+            Assert.IsTrue(hasIndeterminateClass);
+        }
+
+        [TestMethod]
+        public void RenderProgressLinearWithLight()
+        {
+            //Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                props.Add(progresslinear => progresslinear.Light, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderProgressLinearWithQuery()
+        {
+            //Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                props.Add(progresslinear => progresslinear.Query, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasQueryClass = classes.Contains("m-progress-linear--query");
+            // Assert
+            Assert.IsTrue(hasQueryClass);
         }
 
         [TestMethod]
@@ -183,5 +185,101 @@ namespace MASA.Blazor.Test.ProgressLinear
             // Assert
             Assert.IsTrue(hasReverseClass);
         }
+
+        [TestMethod]
+        public void RenderProgressLinearWithRounded()
+        {
+            //Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                props.Add(progresslinear => progresslinear.Rounded, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasRoundedClass = classes.Contains("m-progress-linear--rounded");
+            // Assert
+            Assert.IsTrue(hasRoundedClass);
+        }
+
+        [TestMethod]
+        public void RenderProgressLinearWithStream()
+        {
+            //Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                props.Add(progresslinear => progresslinear.Stream, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasStreamClass = classes.Contains("m-progress-linear");
+
+            // Assert
+            Assert.IsTrue(hasStreamClass);
+        }
+
+        [TestMethod]
+        public void RenderProgressLinearWithStriped()
+        {
+            //Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                props.Add(progresslinear => progresslinear.Striped, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasStripedClass = classes.Contains("m-progress-linear--striped");
+            // Assert
+            Assert.IsTrue(hasStripedClass);
+        }
+
+        [TestMethod]
+        public void RenderProgressLinearWithTop()
+        {
+            //Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                props.Add(progresslinear => progresslinear.Top, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTopClass = classes.Contains("m-progress-linear");
+            // Assert
+            Assert.IsTrue(hasTopClass);
+        }
+
+        [TestMethod]
+        public void RenderProgressLinearWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                props.Add(progresslinear => progresslinear.Value, 0);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-progress-linear");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
+
+        [TestMethod]
+        public void RenderWithChildContent()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                props.Add(progresslinear => progresslinear.ChildContent, context => "<span>Hello world</span>");
+            });
+            var progresslinearDiv = cut.Find(".m-progress-linear__content");
+
+            // Assert
+            progresslinearDiv.Children.MarkupMatches("<span>Hello world</span>");
+        }
+
+        
+
+        
+
+        
+
+        
+
+        
     }
 }

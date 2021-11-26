@@ -104,7 +104,7 @@ namespace MASA.Blazor.Test.Footer
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 100px;left:;right:;bottom:", style);
+            Assert.AreEqual("height: 100px", style);
         }
 
         [TestMethod]
@@ -152,7 +152,7 @@ namespace MASA.Blazor.Test.Footer
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: auto;max-height: 100px;left:;right:;bottom:", style);
+            Assert.AreEqual("height: auto;max-height: 100px", style);
         }
 
         [TestMethod]
@@ -168,7 +168,7 @@ namespace MASA.Blazor.Test.Footer
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: auto;max-width: 100px;left:;right:;bottom:", style);
+            Assert.AreEqual("height: auto;max-width: 100px", style);
         }
 
         [TestMethod]
@@ -184,7 +184,7 @@ namespace MASA.Blazor.Test.Footer
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: auto;min-height: 100px;left:;right:;bottom:", style);
+            Assert.AreEqual("height: auto;min-height: 100px", style);
         }
 
         [TestMethod]
@@ -200,7 +200,7 @@ namespace MASA.Blazor.Test.Footer
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: auto;min-width: 100px;left:;right:;bottom:", style);
+            Assert.AreEqual("height: auto;min-width: 100px", style);
         }
 
         [TestMethod]
@@ -216,7 +216,7 @@ namespace MASA.Blazor.Test.Footer
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: auto;width: 100px;left:;right:;bottom:", style);
+            Assert.AreEqual("height: auto;width: 100px", style);
         }
 
         [TestMethod]
