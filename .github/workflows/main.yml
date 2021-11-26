@@ -16,14 +16,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1.8.1
+    - name: git pull
+      uses: actions/checkout@v2
+    - name: setting dotnet 
+      uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.100-preview.7.21379.14
+        dotnet-version: '6.0.x'
+        include-prerelease: true
+    - name: setting tools
+      run: dotnet workload install wasm-tools
     - name: dependencies
       run: git clone -b develop https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
-    - name: Build
+    - name: build
       run: dotnet build src
-#     - name: Test1
-#       run: dotnet test
+
