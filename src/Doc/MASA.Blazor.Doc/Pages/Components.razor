@@ -63,13 +63,13 @@
 
         @if (PropsList.Any() || EventsList.Any() || ContentsList.Any() || MiscList.Any())
         {
-            var example = DemoItemModel.GenerateExample(LanguageService.CurrentCulture.Name);
+            var example = DemoItemModel.GenerateExample("zh-CN");
 
             <SectionContent Title="@example.Title" Id="examples" Level="2" IsAnchor>
 
                 @if (PropsList.Any())
                 {
-                    var props = DemoItemModel.GenerateProps(LanguageService.CurrentCulture.Name);
+                    var props = DemoItemModel.GenerateProps("zh-CN");
 
                     <SectionContent Title="@props.Title" Id="props" Level="3" IsAnchor>
                         @foreach (var item in PropsList)
@@ -84,7 +84,7 @@
 
                 @if (EventsList.Any())
                 {
-                    var contents = DemoItemModel.GenerateEvents(LanguageService.CurrentCulture.Name);
+                    var contents = DemoItemModel.GenerateEvents("zh-CN");
 
                     <SectionContent Title="@contents.Title" Id="events" Level="3" IsAnchor>
                         @foreach (var item in EventsList)
@@ -99,7 +99,7 @@
 
                 @if (ContentsList.Any())
                 {
-                    var contents = DemoItemModel.GenerateContents(LanguageService.CurrentCulture.Name);
+                    var contents = DemoItemModel.GenerateContents("zh-CN");
 
                     <SectionContent Title="@contents.Title" Id="contents" Level="3" IsAnchor>
                         @foreach (var item in ContentsList)
@@ -114,7 +114,7 @@
 
                 @if (MiscList.Any())
                 {
-                    var misc = DemoItemModel.GenerateMisc(LanguageService.CurrentCulture.Name);
+                    var misc = DemoItemModel.GenerateMisc("zh-CN");
 
                     <SectionContent Title="@misc.Title" Id="misc" Level="3" IsAnchor>
                         @foreach (var item in MiscList)

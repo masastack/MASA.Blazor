@@ -1,6 +1,5 @@
 ﻿using BlazorComponent;
 using BlazorComponent.Doc.Models;
-using MASA.Blazor.Doc.Localization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using BlazorComponent;
 using BlazorComponent.Doc.Models;
-using MASA.Blazor.Doc.Localization;
 using MASA.Blazor.Doc.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
@@ -22,9 +21,6 @@ namespace MASA.Blazor.Doc.Shared
         public NavigationManager NavigationManager { get; set; }
 
         [Inject]
-        public ILanguageService LanguageService { get; set; }
-
-        [Inject]
         public IJSRuntime JsInterop { get; set; }
 
         [Parameter]
@@ -32,7 +28,6 @@ namespace MASA.Blazor.Doc.Shared
 
         protected override void OnInitialized()
         {
-            LanguageService.LanguageChanged += OnLanguageChanged;
             NavigationManager.LocationChanged += OnLocationChanged;
         }
 
@@ -49,7 +44,6 @@ namespace MASA.Blazor.Doc.Shared
 
         public void Dispose()
         {
-            LanguageService.LanguageChanged -= OnLanguageChanged;
             NavigationManager.LocationChanged -= OnLocationChanged;
         }
     }
