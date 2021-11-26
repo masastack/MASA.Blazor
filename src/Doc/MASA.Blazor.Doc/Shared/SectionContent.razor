@@ -1,4 +1,5 @@
-﻿<section id="@SectionId" class="@Class">
+﻿@using BlazorComponent.Doc.Extensions
+<section id="@SectionId" class="@Class">
     <HTag Level="@Level" Title="@FormattedTitle" Href="@SectionId" IsAnchor="IsAnchor" OnClick="HandleOnClick"/>
 
     @ChildContent
@@ -34,7 +35,7 @@
 
     private string FormattedTitle => string.IsNullOrEmpty(SubTitle) ? Title : $"{Title}（{SubTitle}）";
 
-    private string SectionId => Id ?? "section-" + BlazorComponent.Doc.Extensions.HashHelper.Hash(Title);
+    private string SectionId => Id ?? Title.HashSection();
 
     private async void HandleOnClick(MouseEventArgs _)
     {
@@ -49,5 +50,4 @@
 
         await Js.InvokeVoidAsync("window.scrollTo", options);
     }
-
 }

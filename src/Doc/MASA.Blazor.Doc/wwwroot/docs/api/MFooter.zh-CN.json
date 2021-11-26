@@ -16,12 +16,6 @@
       "Description": "指定该组件作为应用程序布局的一部分。用于动态调整内容的大小。"
     },
     {
-      "Name": "Bottom",
-      "Type": "Int32",
-      "Default": "0",
-      "Description": "设定组件的底部边距。"
-    },
-    {
       "Name": "Class",
       "Type": "String",
       "Default": "null",
@@ -70,12 +64,6 @@
       "Description": "定位工具栏偏离应用程序的m-navigation-drawer的位置。"
     },
     {
-      "Name": "Left",
-      "Type": "Int32",
-      "Default": "0",
-      "Description": ""
-    },
-    {
       "Name": "Light",
       "Type": "Boolean",
       "Default": "false",
@@ -110,12 +98,6 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "删除页脚中的所有边距。"
-    },
-    {
-      "Name": "Right",
-      "Type": "Int32",
-      "Default": "0",
-      "Description": "设定组件的右侧边距。"
     },
     {
       "Name": "Rounded",

@@ -16,7 +16,7 @@
             };
 
             <li class="@pl text-body-2 py-1 font-weight-regular @exClass">
-                <a @onclick="() => HandleOnClick(item.Href)" @onclick:preventDefault @onclick:stopPropagation class="m-toc-link d-block transition-swing text-decoration-none">
+                <a @onclick="() => HandleOnClick(item.Id)" @onclick:preventDefault @onclick:stopPropagation class="m-toc-link d-block transition-swing text-decoration-none">
                     @item.Title
                 </a>
             </li>

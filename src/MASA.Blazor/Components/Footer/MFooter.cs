@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,7 @@ namespace MASA.Blazor
         public bool Absolute {  get; set; }
 
         [Parameter]
-        public bool App {  get; set;}
+        public bool App {  get; set; }
 
         [Parameter]
         public string Color { get; set; }
@@ -82,31 +83,49 @@ namespace MASA.Blazor
         [Parameter]
         public bool Tile { get; set; }
 
-        [Parameter]
-        public int Right { get; set; }
-
-        [Parameter]
-        public int Left { get; set; }
-
-        [Parameter]
-        public int Bottom { get; set; }
-
         [Inject]
         public GlobalConfig GlobalConfig { get; set; }
 
-        protected bool IsPositioned() => Absolute || Fixed || App;
+        protected StringNumber ComputedBottom => ComputeBottom();
 
-        protected StringNumber ComputedLeft() => !IsPositioned() ?
-            string.Empty :
-            (App && Inset ? Left : 0);
+        protected StringNumber ComputeBottom()
+        {
+            if (!IsPositioned) return null;
 
-        protected StringNumber ComputedRight() => !IsPositioned() ?
-            string.Empty :
-            (App && Inset ? Right : 0);
+            return App && Inset ? GlobalConfig.Application.Bottom : 0;
+        }
 
-        protected StringNumber ComputedBottom() => !IsPositioned() ?
-            string.Empty :
-            (App ? Bottom : 0);
+        protected StringNumber ComputedLeft => ComputeLeft();
+
+        protected StringNumber ComputeLeft()
+        {
+            if (!IsPositioned) return null;
+
+            return App && Inset ? GlobalConfig.Application.Left : 0;
+        }
+
+        protected StringNumber ComputedRight => ComputeRight();
+
+        protected StringNumber ComputeRight()
+        {
+            if (!IsPositioned) return null;
+
+            return App && Inset ? GlobalConfig.Application.Right : 0;
+        }
+        
+        protected bool IsPositioned => Absolute || Fixed || App;
+        
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            GlobalConfig.Application.PropertyChanged += Application_PropertyChanged;
+        }
+
+        private void Application_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            InvokeStateHasChanged();
+        }
 
         protected override void SetComponentClass()
         {
@@ -134,9 +153,9 @@ namespace MASA.Blazor
                         .AddMaxWidth(MaxWidth)
                         .AddMinHeight(MinHeight)
                         .AddMinWidth(MinWidth)
-                        .Add($"left:{ComputedLeft().ToUnit()}")
-                        .Add($"right:{ComputedRight().ToUnit()}")
-                        .Add($"bottom:{ComputedBottom().ToUnit()}");
+                        .AddIf($"left:{ComputedLeft.ToUnit()}", () => ComputedLeft != null)
+                        .AddIf($"right:{ComputedRight.ToUnit()}", () => ComputedRight != null)
+                        .AddIf($"bottom:{ComputedBottom.ToUnit()}", () => ComputedBottom != null);
                 });
         }
 
@@ -159,6 +178,5 @@ namespace MASA.Blazor
             else
                 GlobalConfig.Application.Footer = val;
         }
-
     }
 }

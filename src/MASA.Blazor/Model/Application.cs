@@ -1,14 +1,8 @@
-﻿using BlazorComponent;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
-namespace MASA.Blazor.Model
+namespace MASA.Blazor
 {
-    public class Application: INotifyPropertyChanged
+    public class Application : INotifyPropertyChanged
     {
         private double _bar;
         private double _top;
@@ -21,11 +15,8 @@ namespace MASA.Blazor.Model
 
         public double Bar
         {
-            get
-            { 
-                return _bar;
-            }
-            set
+            get => _bar;
+            internal set
             {
                 if (_bar != value)
                 {
@@ -37,11 +28,8 @@ namespace MASA.Blazor.Model
 
         public double Top
         {
-            get
-            {
-                return _top;
-            }
-            set
+            get => _top;
+            internal set
             {
                 if (_top != value)
                 {
@@ -53,11 +41,8 @@ namespace MASA.Blazor.Model
 
         public double Left
         {
-            get
-            {
-                return _left;
-            }
-            set
+            get => _left;
+            internal set
             {
                 if (_left != value)
                 {
@@ -69,11 +54,8 @@ namespace MASA.Blazor.Model
 
         public double InsetFooter
         {
-            get
-            {
-                return _insetFooter;
-            }
-            set
+            get => _insetFooter;
+            internal set
             {
                 if (_insetFooter != value)
                 {
@@ -85,11 +67,8 @@ namespace MASA.Blazor.Model
 
         public double Right
         {
-            get
-            {
-                return _right;
-            }
-            set
+            get => _right;
+            internal set
             {
                 if (_right != value)
                 {
@@ -101,11 +80,8 @@ namespace MASA.Blazor.Model
 
         public double Bottom
         {
-            get
-            {
-                return _bottom;
-            }
-            set
+            get => _bottom;
+            internal  set
             {
                 if (_bottom != value)
                 {
@@ -117,11 +93,8 @@ namespace MASA.Blazor.Model
 
         public double Footer
         {
-            get
-            {
-                return _footer;
-            }
-            set
+            get => _footer;
+            internal  set
             {
                 if (_footer != value)
                 {
@@ -133,11 +106,8 @@ namespace MASA.Blazor.Model
 
         public bool IsBooted
         {
-            get
-            {
-                return _isBooted;
-            }
-            set
+            get => _isBooted;
+            internal set
             {
                 if (_isBooted != value)
                 {

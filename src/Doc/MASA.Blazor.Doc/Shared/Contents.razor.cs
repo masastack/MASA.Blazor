@@ -80,7 +80,7 @@ namespace MASA.Blazor.Doc.Shared
 
                 if (!string.IsNullOrEmpty(id))
                 {
-                    ActiveItem = _items?.Find(r => r.Href.Contains(id));
+                    ActiveItem = _items?.Find(r => r.Id.Contains(id));
                     await InvokeAsync(StateHasChanged);
                 }
             });
@@ -99,13 +99,12 @@ namespace MASA.Blazor.Doc.Shared
             StateHasChanged();
         }
 
-        private async void HandleOnClick(string href)
+        private async void HandleOnClick(string id)
         {
-            var hash = href.Split("#")[1];
-            var id = "#" + hash;
-            ActiveItem = _items?.Find(r => r.Href.Contains(hash));
+            var domId = "#" + id;
+            ActiveItem = _items?.Find(r => r.Id.Contains(id));
 
-            var element = await Js.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, id);
+            var element = await Js.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, domId);
             var options = new
             {
                 Top = element.OffsetTop,

@@ -40,7 +40,7 @@
 
         </MAppBar>
 
-        <MNavigationDrawer Absolute Temporary Drawer="drawer">
+        <MNavigationDrawer Absolute Temporary @bind-Value="drawer">
             <MList Nav Dense>
                 <MListItemGroup>
                     <MListItem>
@@ -68,8 +68,6 @@
 
 @code {
     bool drawer = false;
-    string group = "";
-
     string[] titles =
     {
     "Click Me",

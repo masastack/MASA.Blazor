@@ -5,6 +5,7 @@
 @using BlazorComponent.Doc.Models
 @using MASA.Blazor.Doc.Services
 @using MASA.Blazor.Doc.Utils
+@using System.Web
 @inherits OwningComponentBase<DemoService>
 @layout DocLayout
 
@@ -13,7 +14,7 @@
     <SectionContent Title="@_demoComponent.Title" SubTitle="@_demoComponent.SubTitle" Id="@_demoComponent.Title" Level="1" IsAnchor>
 
         @((MarkupString)_demoComponent.Desc.FormatLink())
-        
+
         @if (Usage != null)
         {
             var index = _demoIndex++;
@@ -22,22 +23,42 @@
             </SectionContent>
         }
 
-        @if (!string.IsNullOrEmpty(_demoComponent.Apis))
+        @if (_demoComponent.OtherDocs != null)
         {
-            <SectionContent Title="API" Id="api" Level="2" IsAnchor>
-                @((MarkupString)_demoComponent.Apis.FormatLink())
-            </SectionContent>
-        }
+            foreach (var (title, markup) in _demoComponent.OtherDocs)
+            {
+                var list = markup.SplitByAlertType();
 
-        @if (!string.IsNullOrEmpty(_demoComponent.Caveats))
-        {
-            var type = _demoComponent.Caveats.GetAlertType();
+                <SectionContent Title="@title" Id="@title.HashSection()" Level="2" IsAnchor>
+                    @foreach (var (type, str) in list)
+                    {
+                        if (type == AlertTypes.None)
+                        {
+                            var list2 = str.SplitByCode();
 
-            <SectionContent Title="Caveats" Level="2" IsAnchor>
-                <MAlert Type="@type" Border="Borders.Left" Text Class="m-alert--doc">
-                    @((MarkupString)_demoComponent.Caveats.FormatLink())
-                </MAlert>
-            </SectionContent>
+                            foreach (var (lang, str2) in list2)
+                            {
+                                if (lang != null)
+                                {
+                                    <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden">
+                                        <HighlightedCode Code="@HttpUtility.HtmlDecode(str2.RemoveWrapTag().RemoveWrapTag())" CanLoad Language="@lang"></HighlightedCode>
+                                    </MSheet>
+                                }
+                                else
+                                {
+                                    @((MarkupString)str2.FormatLink())
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <MAlert Type="@type" Border="Borders.Left" Text Class="m-alert--doc">
+                                @((MarkupString)str.FormatLink())
+                            </MAlert>
+                        }
+                    }
+                </SectionContent>
+            }
         }
 
         @if (PropsList.Any() || EventsList.Any() || ContentsList.Any() || MiscList.Any())
@@ -109,7 +130,7 @@
         }
     </SectionContent>
 
-    <SectionContent Class="mt-12" Title="了解更多？">
+    <SectionContent Class="mt-12" Title="了解更多？" Level="1">
         <div class="mb-3">
             继续学习由
             <ALink Href="/docs/about/meet-the-team">我们的团队</ALink>

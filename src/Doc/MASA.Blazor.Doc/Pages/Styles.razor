@@ -21,11 +21,28 @@
             </SectionContent>
         }
 
-        @if (_demoComponent.Apis != null)
+        @if (_demoComponent.OtherDocs != null)
         {
-            <SectionContent Title="API" Id="api" Level="2" IsAnchor>
-                @((MarkupString)_demoComponent.Apis.FormatLink())
-            </SectionContent>
+            foreach (var (title, markup) in _demoComponent.OtherDocs)
+            {
+                var list = markup.SplitByAlertType();
+
+                <SectionContent Title="@title" Id="@title.HashSection()" Level="2" IsAnchor>
+                    @foreach (var (type, str) in list)
+                    {
+                        if (type == AlertTypes.None)
+                        {
+                            @((MarkupString)str.FormatLink())
+                        }
+                        else
+                        {
+                            <MAlert Type="@type" Border="Borders.Left" Text Class="m-alert--doc">
+                                @((MarkupString)str.FormatLink())
+                            </MAlert>
+                        }
+                    }
+                </SectionContent>
+            }
         }
 
         @if (PropsList.Any() || MiscList.Any())
