@@ -2,7 +2,7 @@
 using System.Reflection;
 using BlazorComponent.Doc.Extensions;
 using BlazorComponent.Doc.Models;
-using MASA.Blazor.Doc.Localization;
+using MASA.Blazor.Doc.Demos.Components.Border.demo;
 using MASA.Blazor.Doc.Pages;
 using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
@@ -19,20 +19,17 @@ namespace MASA.Blazor.Doc.Services
         private static ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>> _demoMenuCache;
         private static ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>> _docMenuCache;
         private static ConcurrentCache<string, RenderFragment> _showCaseCache;
-        private readonly ILanguageService _languageService;
         private readonly HttpClient _httpClient;
         private readonly NavigationManager _navigationManager;
-        private string CurrentLanguage => _languageService.CurrentCulture.Name;
+        private string CurrentLanguage => "zh-CN";
 
         private string CurrentComponentName { get; set; }
 
-        public DemoService(ILanguageService languageService, HttpClient httpClient, NavigationManager navigationManager)
+        public DemoService(HttpClient httpClient, NavigationManager navigationManager)
         {
-            _languageService = languageService;
             _httpClient = httpClient;
             _httpClient.BaseAddress ??= new Uri("http://127.0.0.1:5000");
             _navigationManager = navigationManager;
-            _languageService.LanguageChanged += async (sender, args) => await InitializeAsync(args.Name);
         }
 
         private async Task InitializeAsync(string language)

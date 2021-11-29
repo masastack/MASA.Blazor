@@ -1,8 +1,8 @@
 ---
 order: 1
 title:
-  zh-CN: 加载子项(TODO)
-  en-US: LoadChildren(TODO)
+  zh-CN: 加载子项
+  en-US: LoadChildren
 ---
 
 ## zh-CN

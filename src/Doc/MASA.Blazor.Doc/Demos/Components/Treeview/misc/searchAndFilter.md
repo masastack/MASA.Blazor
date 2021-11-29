@@ -1,8 +1,8 @@
 ---
 order: 0
 title:
-  zh-CN: 搜索&过滤(TODO)
-  en-US: Search and filter(TODO)
+  zh-CN: 搜索&过滤
+  en-US: Search and filter
 ---
 
 ## zh-CN

@@ -26,9 +26,8 @@ cols: 1
 
 ## 默认应用标记
 
-这是一个默认应用标记的例子。 只要设置 **App** 属性，你可以将布局元素放在任何地方。 The key component to making your page content work together with layout
-elements is `MMain`. The `MMain` component will be dynamically sized depending upon the structure of your designated app
-components. 你可以使用上述任何或所有组件的组合，包括 `MBottomNavigation`。
+这是一个默认应用标记的例子。 只要设置 **App** 属性，你可以将布局元素放在任何地方。此处的关键组件是`MMain`。它将会根据您分配的 app
+组件动态地调整大小。你可以使用上述任何或所有组件的组合，包括 `MBottomNavigation`。
 
 ```html
 <!-- MainLayout.razor -->

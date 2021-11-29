@@ -12,7 +12,7 @@ public static class ApisHelper
         var attrs = "class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" ";
         var regex = new Regex("<a[^>]+href=\"(.*?)\"[^>]*>(.*?)</a>");
 
-        Dictionary<string, string> dic = new();
+        List<(string old, string @new)> list = new();
         regex.Matches(markup).ForEach(m =>
         {
             var v = m.Value;
@@ -28,10 +28,10 @@ public static class ApisHelper
             v = v.Replace("<a ", $"<a {attrs}");
             v = v.Replace("</a>", $"{string.Format(child, css)}</a>");
 
-            dic.Add(m.Value, v);
+            list.Add((m.Value, v));
         });
 
-        dic.ForEach(item => markup = markup.Replace(item.Key, item.Value));
+        list.ForEach(item => markup = markup.Replace(item.old, item.@new));
 
         return markup;
     }

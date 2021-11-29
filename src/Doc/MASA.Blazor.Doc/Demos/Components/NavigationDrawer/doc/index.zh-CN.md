@@ -13,3 +13,9 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg
 ## API
 
 - [MNavigationDrawer](/docs/api/MNavigationDrawer)
+
+## 警告
+
+<!--alert:error-->
+如果使用启用了 **App** 属性的 `MNavigationDrawer`，则不需要像示例中那样使用 **Absolute** 属性。
+<!--/alert:error-->

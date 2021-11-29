@@ -3,7 +3,6 @@ using System.Linq;
 using BlazorComponent.Doc.Models;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-using MASA.Blazor.Doc.Localization;
 
 namespace MASA.Blazor.Doc.Pages
 {
@@ -20,9 +19,6 @@ namespace MASA.Blazor.Doc.Pages
         private List<DemoItemModel> EventsList { get; set; }
 
         private List<DemoItemModel> MiscList { get; set; }
-
-        [Inject]
-        private ILanguageService LanguageService { get; set; }
 
         [Parameter]
         public string Name { get; set; }

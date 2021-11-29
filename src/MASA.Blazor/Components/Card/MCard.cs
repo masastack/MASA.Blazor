@@ -60,13 +60,13 @@ namespace MASA.Blazor
         public string Href { get; set; }
 
         [Parameter]
-        public EventCallback<MouseEventArgs> OnClick { get; set; }
-
-        [Parameter]
         public bool Ripple { get; set; } = true;
 
         [Parameter]
         public string Target { get; set; }
+
+        [Parameter]
+        public EventCallback<MouseEventArgs> OnClick { get; set; }
 
         public bool IsClickable => _router.IsClickable;
 
@@ -79,6 +79,7 @@ namespace MASA.Blazor
             (Tag, Attributes) = _router.GenerateRouteLink();
 
             Attributes["ripple"] = Ripple && IsClickable;
+            Attributes["onclick"] = OnClick;
         }
 
         protected override void SetComponentClass()
@@ -105,14 +106,6 @@ namespace MASA.Blazor
             AbstractProvider.Merge(typeof(BSheetBody<>), typeof(BCardBody<ICard>))
                 .Apply(typeof(BCardProgress<>), typeof(BCardProgress<ICard>))
                 .ApplyLoadable(Loading, Color, LoaderHeight);
-        }
-
-        protected override async Task HandleOnClick(MouseEventArgs args)
-        {
-            if (OnClick.HasDelegate)
-            {
-                await OnClick.InvokeAsync(args);
-            }
         }
     }
 }

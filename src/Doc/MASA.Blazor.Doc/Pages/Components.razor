@@ -25,35 +25,35 @@
 
         @if (_demoComponent.OtherDocs != null)
         {
-            foreach (var (title, markup) in _demoComponent.OtherDocs)
+            foreach (var (title, doc) in _demoComponent.OtherDocs)
             {
-                var list = markup.SplitByAlertType();
+                var alerts = doc.SplitByAlertType();
 
                 <SectionContent Title="@title" Id="@title.HashSection()" Level="2" IsAnchor>
-                    @foreach (var (type, str) in list)
+                    @foreach (var (type, alert) in alerts)
                     {
                         if (type == AlertTypes.None)
                         {
-                            var list2 = str.SplitByCode();
+                            var codes = alert.SplitByCode();
 
-                            foreach (var (lang, str2) in list2)
+                            foreach (var (lang, code) in codes)
                             {
                                 if (lang != null)
                                 {
                                     <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden">
-                                        <HighlightedCode Code="@HttpUtility.HtmlDecode(str2.RemoveWrapTag().RemoveWrapTag())" CanLoad Language="@lang"></HighlightedCode>
+                                        <HighlightedCode Code="@HttpUtility.HtmlDecode(code.RemoveWrapTag().RemoveWrapTag())" CanLoad Language="@lang"></HighlightedCode>
                                     </MSheet>
                                 }
                                 else
                                 {
-                                    @((MarkupString)str2.FormatLink())
+                                    @((MarkupString)code.FormatLink())
                                 }
                             }
                         }
                         else
                         {
                             <MAlert Type="@type" Border="Borders.Left" Text Class="m-alert--doc">
-                                @((MarkupString)str.FormatLink())
+                                @((MarkupString)alert.FormatLink())
                             </MAlert>
                         }
                     }
@@ -63,13 +63,13 @@
 
         @if (PropsList.Any() || EventsList.Any() || ContentsList.Any() || MiscList.Any())
         {
-            var example = DemoItemModel.GenerateExample(LanguageService.CurrentCulture.Name);
+            var example = DemoItemModel.GenerateExample("zh-CN");
 
             <SectionContent Title="@example.Title" Id="examples" Level="2" IsAnchor>
 
                 @if (PropsList.Any())
                 {
-                    var props = DemoItemModel.GenerateProps(LanguageService.CurrentCulture.Name);
+                    var props = DemoItemModel.GenerateProps("zh-CN");
 
                     <SectionContent Title="@props.Title" Id="props" Level="3" IsAnchor>
                         @foreach (var item in PropsList)
@@ -84,7 +84,7 @@
 
                 @if (EventsList.Any())
                 {
-                    var contents = DemoItemModel.GenerateEvents(LanguageService.CurrentCulture.Name);
+                    var contents = DemoItemModel.GenerateEvents("zh-CN");
 
                     <SectionContent Title="@contents.Title" Id="events" Level="3" IsAnchor>
                         @foreach (var item in EventsList)
@@ -99,7 +99,7 @@
 
                 @if (ContentsList.Any())
                 {
-                    var contents = DemoItemModel.GenerateContents(LanguageService.CurrentCulture.Name);
+                    var contents = DemoItemModel.GenerateContents("zh-CN");
 
                     <SectionContent Title="@contents.Title" Id="contents" Level="3" IsAnchor>
                         @foreach (var item in ContentsList)
@@ -114,7 +114,7 @@
 
                 @if (MiscList.Any())
                 {
-                    var misc = DemoItemModel.GenerateMisc(LanguageService.CurrentCulture.Name);
+                    var misc = DemoItemModel.GenerateMisc("zh-CN");
 
                     <SectionContent Title="@misc.Title" Id="misc" Level="3" IsAnchor>
                         @foreach (var item in MiscList)

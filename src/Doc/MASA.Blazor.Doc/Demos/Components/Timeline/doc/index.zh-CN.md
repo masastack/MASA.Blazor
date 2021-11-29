@@ -7,8 +7,9 @@ cols: 1
 
 ---
 
-MTimeline 对于显示时间顺序信息非常有用。
+`MTimeline` 对于显示时间顺序信息非常有用。
 
 ## API
 
 - [MTimeline](/docs/api/MTimeline)
+- [MTimelineItem](/docs/api/MTimelineItem)
