@@ -28,6 +28,12 @@
       "Description": ""
     },
     {
+      "Name": "Locale",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Max",
       "Type": "Nullable`1",
       "Default": "",

@@ -21,11 +21,12 @@
                     <MSpacer></MSpacer>
                     <MButton Text
                              Color="primary"
-                             OnClick="()=>_menu = false">
+                             OnClick="MenuCancel">
                         Cancel
                     </MButton>
                     <MButton Text
-                             Color="primary">
+                             Color="primary"
+                             OnClick="MenuOK">
                         OK
                     </MButton>
                 </MDatePicker>
@@ -52,11 +53,12 @@
                     <MSpacer></MSpacer>
                     <MButton Text
                              Color="primary"
-                             OnClick="()=>_modal = false">
+                             OnClick="ModalCancel">
                         Cancel
                     </MButton>
                     <MButton Text
-                             Color="primary">
+                             Color="primary"
+                             OnClick="ModalOK">
                         OK
                     </MButton>
                 </MDatePicker>
@@ -80,7 +82,8 @@
                             @attributes="context.Attrs"></MTextField>
             </ActivatorContent>
             <ChildContent>
-                <MDatePicker @bind-Value="_date"></MDatePicker>
+                <MDatePicker @bind-Value="_date"
+                    OnInput="()=>_menu2=false"></MDatePicker>
             </ChildContent>
         </MMenu>
     </MCol>
@@ -88,9 +91,34 @@
 </MRow>
 
 @code {
+    private DateOnly _prevDate = DateOnly.FromDateTime(DateTime.Now);
     private DateOnly _date = DateOnly.FromDateTime(DateTime.Now);
     private bool _menu;
     private bool _modal;
     private bool _menu2;
+
+    public void MenuCancel()
+    {
+        _date = _prevDate;
+        _menu = false;
+    }
+
+    public void MenuOK()
+    {
+        _prevDate = _date;
+        _menu = false;
+    }
+
+    public void ModalCancel()
+    {
+        _date = _prevDate;
+        _modal = false;
+    }
+
+    public void ModalOK()
+    {
+        _prevDate = _date;
+        _modal = false;
+    }
 }
 

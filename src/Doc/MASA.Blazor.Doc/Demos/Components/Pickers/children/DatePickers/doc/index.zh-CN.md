@@ -13,3 +13,8 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickers.svg
 ## API
 
 - [MDatePicker](/docs/api/MDatePicker)
+
+## 注意
+
+<!--alert:warning--> 
+`MDatePicker` 接受ISO 8601 **日期** 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） [国际标准](https://www.iso.org/standards.html) 官方网页。

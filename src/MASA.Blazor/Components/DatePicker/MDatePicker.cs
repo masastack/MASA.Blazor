@@ -123,10 +123,13 @@ namespace MASA.Blazor
         public EventCallback<TValue> ValueChanged { get; set; }
 
         [Parameter]
+        public EventCallback OnInput { get; set; }
+
+        [Parameter]
         public Func<DateOnly, string> WeekdayFormat { get; set; }
 
         [Parameter]
-        public Func<int, string> YearFormat { get; set; }
+        public Func<DateOnly, string> YearFormat { get; set; }
 
         [Parameter]
         public string YearIcon { get; set; }
@@ -142,6 +145,9 @@ namespace MASA.Blazor
 
         [Parameter]
         public EventCallback<DatePickerType> OnActivePickerUpdate { get; set; }
+
+        [Parameter]
+        public string Locale { get; set; } = "en-US";
 
         protected DateOnly TableDate
         {
@@ -167,13 +173,13 @@ namespace MASA.Blazor
 
         protected DateOnly? MaxYear => Max != null ? new DateOnly(Max.Value.Year, 1, 1) : null;
 
-        public (Func<int, string> Year, Func<IList<DateOnly>, string> TitleDate) Formatters => (YearFormat, TitleDateFormat ?? DefaultTitleDateFormatter);
+        public (Func<DateOnly, string> Year, Func<IList<DateOnly>, string> TitleDate) Formatters => (YearFormat ?? DateFormatters.Year(Locale), TitleDateFormat ?? DefaultTitleDateFormatter);
 
         public Func<IList<DateOnly>, string> DefaultTitleDateFormatter
         {
             get
             {
-                return values => IsMultiple && values.Count > 1 ? $"{values.Count} selected" : values.Count > 0 ? (Type == DatePickerType.Date ? $"{values[0].DayOfWeek.ToString()[..3]}, {(Landscape ? "<br>" : "")}{DatePickerFormatter.Month(values[0].Month)[..3]} {values[0].Day}" : $"{DatePickerFormatter.Month(values[0].Month)}"
+                return values => IsMultiple && values.Count > 1 ? $"{values.Count} selected" : values.Count > 0 ? (Type == DatePickerType.Date ? $"{values[0].DayOfWeek.ToString()[..3]}, {(Landscape ? "<br>" : "")}{DateFormatters.Month(values[0].Month)[..3]} {values[0].Day}" : $"{DateFormatters.Month(values[0].Month)}"
                 ) : "-";
             }
         }
@@ -237,12 +243,18 @@ namespace MASA.Blazor
                     {
                         OnActivePickerUpdate.InvokeAsync(val);
                     }
+                })
+                .Watch<TValue>(nameof(Value), val =>
+                {
+                    var multipleValue = WrapInArray(val);
+                    TableDate = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now.AddMonths(1)));
                 });
 
             InternalActivePicker = ActivePicker ?? Type;
+
+            //Init TableDate
             var multipleValue = WrapInArray(Value);
-            var date = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now.AddMonths(1)));
-            TableDate = date;
+            TableDate = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now.AddMonths(1)));
         }
 
         private IList<DateOnly> WrapInArray(TValue value)
@@ -295,7 +307,7 @@ namespace MASA.Blazor
                     props[nameof(MDatePickerTitle.Disabled)] = Disabled;
                     props[nameof(MDatePickerTitle.Readonly)] = Readonly;
                     props[nameof(MDatePickerTitle.SelectingYear)] = InternalActivePicker == DatePickerType.Year;
-                    props[nameof(MDatePickerTitle.Year)] = TableDate.Year;
+                    props[nameof(MDatePickerTitle.Year)] = Formatters.Year(new DateOnly(TableDate.Year, 1, 1));
                     props[nameof(MDatePickerTitle.YearIcon)] = YearIcon;
                     props[nameof(MDatePickerTitle.Value)] = MultipleValue.FirstOrDefault();
                     props[nameof(MDatePickerTitle.OnSelectingYearUpdate)] = CreateEventCallback<bool>(value =>
@@ -310,6 +322,7 @@ namespace MASA.Blazor
                     props[nameof(MDatePickerYears.Min)] = MinYear;
                     props[nameof(MDatePickerYears.Max)] = MaxYear;
                     props[nameof(MDatePickerYears.Value)] = TableYear;
+                    props[nameof(MDatePickerYears.Locale)] = Locale;
                     props[nameof(MDatePickerYears.OnInput)] = CreateEventCallback<int>(year =>
                     {
                         TableDate = new DateOnly(year, TableDate.Month, TableDate.Day);
@@ -328,12 +341,13 @@ namespace MASA.Blazor
                     props[nameof(MDatePickerHeader.Max)] = InternalActivePicker == DatePickerType.Date ? MaxMonth : MaxYear;
                     props[nameof(MDatePickerHeader.PrevIcon)] = PrevIcon;
                     props[nameof(MDatePickerHeader.Readonly)] = Readonly;
+                    props[nameof(MDatePickerHeader.Locale)] = Locale;
                     props[nameof(MDatePickerHeader.ActivePicker)] = InternalActivePicker;
-                    props[nameof(MDatePickerHeader.Value)] = new DateOnly(TableYear, TableMonth + 1, 1);
+                    props[nameof(MDatePickerHeader.Value)] = Type == DatePickerType.Date ? new DateOnly(TableYear, TableMonth + 1, 1) : new DateOnly(TableYear, 1, 1);
                     props[nameof(MDatePickerHeader.OnInput)] = CreateEventCallback<DateOnly>(value =>
-                   {
-                       TableDate = value;
-                   });
+                    {
+                        TableDate = value;
+                    });
                     props[nameof(MDatePickerHeader.OnToggle)] = EventCallback.Factory.Create(this, () =>
                     {
                         InternalActivePicker = InternalActivePicker == DatePickerType.Date ? DatePickerType.Month : DatePickerType.Year;
@@ -352,6 +366,7 @@ namespace MASA.Blazor
                     props[nameof(MDatePickerDateTable<TValue>.Min)] = Min;
                     props[nameof(MDatePickerDateTable<TValue>.Max)] = Max;
                     props[nameof(MDatePickerDateTable<TValue>.Range)] = Range;
+                    props[nameof(MDatePickerDateTable<TValue>.Locale)] = Locale;
                     props[nameof(MDatePickerDateTable<TValue>.Readonly)] = Readonly;
                     props[nameof(MDatePickerDateTable<TValue>.Scrollable)] = Scrollable;
                     props[nameof(MDatePickerDateTable<TValue>.ShowAdjacentMonths)] = ShowAdjacentMonths;
@@ -372,6 +387,7 @@ namespace MASA.Blazor
                     props[nameof(MDatePickerMonthTable<TValue>.Light)] = Light;
                     props[nameof(MDatePickerMonthTable<TValue>.Min)] = MinMonth;
                     props[nameof(MDatePickerMonthTable<TValue>.Max)] = MaxMonth;
+                    props[nameof(MDatePickerMonthTable<TValue>.Locale)] = Locale;
                     props[nameof(MDatePickerDateTable<TValue>.Range)] = Range;
                     props[nameof(MDatePickerDateTable<TValue>.Readonly)] = Readonly && Type == DatePickerType.Month;
                     props[nameof(MDatePickerDateTable<TValue>.Scrollable)] = Scrollable;
@@ -413,6 +429,12 @@ namespace MASA.Blazor
                 if (ValueChanged.HasDelegate)
                 {
                     await ValueChanged.InvokeAsync(Value);
+                }
+
+                //REVIEW:  
+                if (OnInput.HasDelegate)
+                {
+                    await OnInput.InvokeAsync();
                 }
             }
         }
@@ -458,6 +480,12 @@ namespace MASA.Blazor
             if (ValueChanged.HasDelegate)
             {
                 await ValueChanged.InvokeAsync(Value);
+            }
+
+            //REVIEW:  
+            if (OnInput.HasDelegate)
+            {
+                await OnInput.InvokeAsync();
             }
         }
     }

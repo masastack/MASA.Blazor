@@ -56,6 +56,9 @@ namespace MASA.Blazor
         [Parameter]
         public EventCallback<DateOnly> OnInput { get; set; }
 
+        [Parameter]
+        public string Locale { get; set; }
+
         [Inject]
         public GlobalConfig GlobalConfig { get; set; }
 

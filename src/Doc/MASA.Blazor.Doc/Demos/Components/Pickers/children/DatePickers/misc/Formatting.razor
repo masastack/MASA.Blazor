@@ -18,10 +18,11 @@
                 </ActivatorContent>
                 <ChildContent>
                     <MDatePicker @bind-Value="Date"
+                                 OnInput="()=>_menu1=false"
                                  NoTitle></MDatePicker>
                 </ChildContent>
             </MMenu>
-            <p>Date in ISO format: <strong> @Date </strong></p>
+            <p>Date in ISO format: <strong> @Date.ToString("yyyy-MM-dd") </strong></p>
         </MCol>
 
         <MCol Cols="12"
@@ -43,10 +44,11 @@
                 </ActivatorContent>
                 <ChildContent>
                     <MDatePicker @bind-Value="Date"
+                                 OnInput="()=>_menu2=false"
                                  NoTitle></MDatePicker>
                 </ChildContent>
             </MMenu>
-            <p>Date in ISO format: <strong> @Date </strong></p>
+            <p>Date in ISO format: <strong> @Date.ToString("yyyy-MM-dd") </strong></p>
         </MCol>
     </MRow>
 </MContainer>
