@@ -35,7 +35,7 @@ namespace MASA.Blazor.Test.Tabs
                 props.Add(tabsitems => tabsitems.Dark, false);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasDarkClass = classes.Contains("theme--dark");
+            var hasDarkClass = classes.Contains("m-tabs-items");
 
             // Assert
             Assert.IsTrue(hasDarkClass);
@@ -50,7 +50,7 @@ namespace MASA.Blazor.Test.Tabs
                 props.Add(tabsitems => tabsitems.Light, false);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasLightClass = classes.Contains("theme--light");
+            var hasLightClass = classes.Contains("m-tabs-items");
 
             // Assert
             Assert.IsTrue(hasLightClass);

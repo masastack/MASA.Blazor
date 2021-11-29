@@ -19,7 +19,6 @@
     <Compile Remove="SlideGroup\**" />
     <Compile Remove="Table\**" />
     <Compile Remove="TimePicker\**" />
-    <Compile Remove="Tooltip\**" />
     <Compile Remove="Upload\**" />
     <Compile Remove="Window\**" />
     <EmbeddedResource Remove="Autocomplete\**" />
@@ -33,7 +32,6 @@
     <EmbeddedResource Remove="SlideGroup\**" />
     <EmbeddedResource Remove="Table\**" />
     <EmbeddedResource Remove="TimePicker\**" />
-    <EmbeddedResource Remove="Tooltip\**" />
     <EmbeddedResource Remove="Upload\**" />
     <EmbeddedResource Remove="Window\**" />
     <None Remove="Autocomplete\**" />
@@ -47,7 +45,6 @@
     <None Remove="SlideGroup\**" />
     <None Remove="Table\**" />
     <None Remove="TimePicker\**" />
-    <None Remove="Tooltip\**" />
     <None Remove="Upload\**" />
     <None Remove="Window\**" />
   </ItemGroup>
@@ -63,10 +60,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Calendar\" />
   </ItemGroup>
 
 </Project>

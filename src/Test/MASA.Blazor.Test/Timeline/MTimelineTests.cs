@@ -12,7 +12,7 @@ namespace MASA.Blazor.Test.Timeline
     public class MTimelineTests:TestBase
     {
         [TestMethod]
-        public void RendeMTimelineWithAlignTop()
+        public void RenderTimelineWithAlignTop()
         {
             //Act
             var cut = RenderComponent<MTimeline>(props =>
@@ -26,7 +26,7 @@ namespace MASA.Blazor.Test.Timeline
         }
 
         [TestMethod]
-        public void RendeMTimelineWithDense()
+        public void RenderTimelineWithDense()
         {
             //Act
             var cut = RenderComponent<MTimeline>(props =>
@@ -40,7 +40,7 @@ namespace MASA.Blazor.Test.Timeline
         }
 
         [TestMethod]
-        public void RendeMTimelineWithReverse()
+        public void RenderTimelineWithReverse()
         {
             //Act
             var cut = RenderComponent<MTimeline>(props =>
@@ -81,6 +81,20 @@ namespace MASA.Blazor.Test.Timeline
 
             // Assert
             Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderWithChildContent()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<MTimeline>(props =>
+            {
+                props.Add(timeline => timeline.ChildContent, "<span>Hello world</span>");
+            });
+            var contentDiv = cut.Find(".m-timeline");
+
+            // Assert
+            contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
     }
 }

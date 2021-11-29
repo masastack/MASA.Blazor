@@ -18,7 +18,7 @@ namespace MASA.Blazor.Test.Tabs
             JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MTabs>(props =>
             {
-                props.Add(tabs => tabs.AlignWithTitle, false);
+                props.Add(tabs => tabs.AlignWithTitle, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasAlignWithTitleClass = classes.Contains("m-tabs");
@@ -34,7 +34,7 @@ namespace MASA.Blazor.Test.Tabs
             JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MTabs>(props =>
             {
-                props.Add(tabs => tabs.CenterActive, false);
+                props.Add(tabs => tabs.CenterActive, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasCenterActiveClass = classes.Contains("m-tabs");
@@ -50,7 +50,7 @@ namespace MASA.Blazor.Test.Tabs
             JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MTabs>(props =>
             {
-                props.Add(tabs => tabs.Centered, false);
+                props.Add(tabs => tabs.Centered, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasCenteredClass = classes.Contains("m-tabs");
@@ -66,7 +66,7 @@ namespace MASA.Blazor.Test.Tabs
             JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MTabs>(props =>
             {
-                props.Add(tabs => tabs.Dark, false);
+                props.Add(tabs => tabs.Dark, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasDarkClass = classes.Contains("m-tabs");
@@ -82,7 +82,7 @@ namespace MASA.Blazor.Test.Tabs
             JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MTabs>(props =>
             {
-                props.Add(tabs => tabs.FixedTabs, false);
+                props.Add(tabs => tabs.FixedTabs, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasFixedTabsClass = classes.Contains("m-tabs");
@@ -98,7 +98,7 @@ namespace MASA.Blazor.Test.Tabs
             JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MTabs>(props =>
             {
-                props.Add(tabs => tabs.Grow, false);
+                props.Add(tabs => tabs.Grow, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasGrowClass = classes.Contains("m-tabs");
@@ -114,7 +114,7 @@ namespace MASA.Blazor.Test.Tabs
             JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MTabs>(props =>
             {
-                props.Add(tabs => tabs.HideSlider, false);
+                props.Add(tabs => tabs.HideSlider, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasHideSliderClass = classes.Contains("m-tabs");
@@ -146,7 +146,7 @@ namespace MASA.Blazor.Test.Tabs
             JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MTabs>(props =>
             {
-                props.Add(tabs => tabs.IconsAndText, false);
+                props.Add(tabs => tabs.IconsAndText, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasIconsAndTextClass = classes.Contains("m-tabs");
@@ -162,7 +162,7 @@ namespace MASA.Blazor.Test.Tabs
             JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MTabs>(props =>
             {
-                props.Add(tabs => tabs.Light, false);
+                props.Add(tabs => tabs.Light, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasLightClass = classes.Contains("theme--light");
@@ -178,7 +178,7 @@ namespace MASA.Blazor.Test.Tabs
             JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MTabs>(props =>
             {
-                props.Add(tabs => tabs.Optional, false);
+                props.Add(tabs => tabs.Optional, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasOptionalClass = classes.Contains("m-tabs");
@@ -194,7 +194,7 @@ namespace MASA.Blazor.Test.Tabs
             JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MTabs>(props =>
             {
-                props.Add(tabs => tabs.Right, false);
+                props.Add(tabs => tabs.Right, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasRightClass = classes.Contains("m-tabs");
@@ -210,7 +210,7 @@ namespace MASA.Blazor.Test.Tabs
             JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MTabs>(props =>
             {
-                props.Add(tabs => tabs.ShowArrows, false);
+                props.Add(tabs => tabs.ShowArrows, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasShowArrowsClass = classes.Contains("m-tabs");
@@ -226,7 +226,7 @@ namespace MASA.Blazor.Test.Tabs
             JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MTabs>(props =>
             {
-                props.Add(tabs => tabs.Vertical, false);
+                props.Add(tabs => tabs.Vertical, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasVerticalClass = classes.Contains("m-tabs");

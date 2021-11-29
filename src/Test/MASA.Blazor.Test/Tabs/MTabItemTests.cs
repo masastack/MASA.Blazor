@@ -17,7 +17,7 @@ namespace MASA.Blazor.Test.Tabs
         //    //Act
         //    var cut = RenderComponent<MTabItem>(props =>
         //    {
-        //        props.Add(tabitem => tabitem.Disabled, false);
+        //        props.Add(tabitem => tabitem.Disabled, true);
         //    });
         //    var classes = cut.Instance.CssProvider.GetClass();
         //    var hasDisabledClass = classes.Contains("m-slide-group__next--disabled");
