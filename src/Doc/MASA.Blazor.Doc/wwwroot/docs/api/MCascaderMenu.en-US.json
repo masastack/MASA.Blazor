@@ -100,6 +100,12 @@
       "Description": ""
     },
     {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "MaxHeight",
       "Type": "StringNumber",
       "Default": "null",

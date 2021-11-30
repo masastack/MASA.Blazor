@@ -14,10 +14,34 @@ using Element = BlazorComponent.Web.Element;
 
 namespace MASA.Blazor
 {
-    public partial class MMenu : BMenu
+    public partial class MMenu : BMenu, IThemeable
     {
         [Parameter]
         public bool Dark { get; set; }
+
+        [Parameter]
+        public bool Light { get; set; }
+
+        [CascadingParameter]
+        public IThemeable Themeable { get; set; }
+
+        public bool IsDark
+        {
+            get
+            {
+                if (Dark)
+                {
+                    return true;
+                }
+
+                if (Light)
+                {
+                    return false;
+                }
+
+                return Themeable != null && Themeable.IsDark;
+            }
+        }
 
         public override string AttachedSelector => Attach ?? ".m-application";
 
@@ -27,7 +51,7 @@ namespace MASA.Blazor
             Origin ??= "top left";
 
             CssProvider
-                .Apply(css => css.Add("m-menu"))
+                .Apply(css => css.Add("m-menu").AddTheme(IsDark))
                 .Apply("content", css =>
                 {
                     css.Add("m-menu__content")

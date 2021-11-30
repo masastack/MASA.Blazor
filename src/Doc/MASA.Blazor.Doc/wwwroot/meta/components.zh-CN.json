@@ -9,7 +9,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-23T09:48:33.3104036+08:00",
+    "LastWriteTime": "2021-11-22T16:33:22.8890524+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -184,7 +184,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.5458864+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0736279+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -211,15 +211,15 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.5488848+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.074628+08:00",
     "DemoList": [
       {
         "Order": 1,
-        "Name": "basic",
+        "Name": "index",
         "Title": "使用",
         "Description": "<p>头像以最简单的形式在圆形容器中显示内容。</p>\n",
         "Code": "<div class=\"text-center\" style=\"width:100%\">\r\n    <MAvatar Color=\"primary\" Size=\"56\">\r\n        <span class=\"white--text\">VJ</span>\r\n    </MAvatar>\r\n</div>",
-        "Type": "Demos.Components.Avatar.usage.Basic",
+        "Type": "Demos.Components.Avatar.usage.Index",
         "Style": "",
         "Debug": false,
         "Group": 4
@@ -273,7 +273,7 @@
         "Name": "menu",
         "Title": "菜单",
         "Description": "<p>你可以将头像和菜单结合起来。</p>\n",
-        "Code": "<MContainer Fluid Style=\"height:300px\">\r\n\t<MRow Justify=\"JustifyTypes.Center\">\r\n\t\t<MMenu Bottom MinWidth=\"200\" Rounded=\"@true\" OffsetY>\r\n\t\t\t<ActivatorContent>\r\n\t\t\t\t<MButton Icon XLarge @attributes=\"@context.Attrs\">\r\n\t\t\t\t\t<MAvatar Color=\"brown\" Size=\"48\">\r\n\t\t\t\t\t\t<span class=\"white--text text-h5\">JD</span>\r\n\t\t\t\t\t</MAvatar>\r\n\t\t\t\t</MButton>\r\n\t\t\t</ActivatorContent>\r\n\t\t\t<ChildContent>\r\n\t\t\t\t<MCard>\r\n\t\t\t\t\t<MListItemContent Class=\"justify-center\">\r\n\t\t\t\t\t\t<div class=\"mx-auto text-center\">\r\n\t\t\t\t\t\t\t<MAvatar Color=\"brown\">\r\n\t\t\t\t\t\t\t\t<span class=\"white--text text-h5\">JD</span>\r\n\t\t\t\t\t\t\t</MAvatar>\r\n\t\t\t\t\t\t\t<h3>John Doe</h3>\r\n\t\t\t\t\t\t\t<p class=\"text-caption mt-1\">john.doe@doe.com</p>\r\n\t\t\t\t\t\t\t<MDivider class=\"my-3\"></MDivider>\r\n\t\t\t\t\t\t\t<MButton Depressed Rounded Text>Edit Account</MButton>\r\n\t\t\t\t\t\t\t<MDivider class=\"my-3\"></MDivider>\r\n\t\t\t\t\t\t\t<MButton Depressed Rounded Text>Disconnect</MButton>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</MListItemContent>\r\n\t\t\t\t</MCard>\r\n\t\t\t</ChildContent>\r\n\t\t</MMenu>\r\n\t</MRow>\r\n</MContainer>",
+        "Code": "<MContainer Fluid Style=\"height:300px\">\r\n\t<MRow Justify=\"JustifyTypes.Center\">\r\n\t\t<MMenu Bottom MinWidth=\"200\" Rounded=\"@true\" OffsetY>\r\n\t\t\t<ActivatorContent>\r\n\t\t\t\t<MButton Icon XLarge @attributes=\"@context.Attrs\">\r\n\t\t\t\t\t<MAvatar Color=\"brown\" Size=\"48\">\r\n\t\t\t\t\t\t<span class=\"white--text text-h5\">@initials</span>\r\n\t\t\t\t\t</MAvatar>\r\n\t\t\t\t</MButton>\r\n\t\t\t</ActivatorContent>\r\n\t\t\t<ChildContent>\r\n\t\t\t\t<MCard>\r\n\t\t\t\t\t<MListItemContent Class=\"justify-center\">\r\n\t\t\t\t\t\t<div class=\"mx-auto text-center\">\r\n\t\t\t\t\t\t\t<MAvatar Color=\"brown\">\r\n\t\t\t\t\t\t\t\t<span class=\"white--text text-h5\">@initials</span>\r\n\t\t\t\t\t\t\t</MAvatar>\r\n\t\t\t\t\t\t\t<h3>@fullName</h3>\r\n\t\t\t\t\t\t\t<p class=\"text-caption mt-1\">@email</p>\r\n\t\t\t\t\t\t\t<MDivider class=\"my-3\"></MDivider>\r\n\t\t\t\t\t\t\t<MButton Depressed Rounded Text>Edit Account</MButton>\r\n\t\t\t\t\t\t\t<MDivider class=\"my-3\"></MDivider>\r\n\t\t\t\t\t\t\t<MButton Depressed Rounded Text>Disconnect</MButton>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</MListItemContent>\r\n\t\t\t\t</MCard>\r\n\t\t\t</ChildContent>\r\n\t\t</MMenu>\r\n\t</MRow>\r\n</MContainer>\r\n\r\n@code {\r\n\tstring initials = \"JD\";\r\n\tstring fullName = \"John Doe\";\r\n\tstring email = \"john.doe@doe.com\";\r\n}",
         "Type": "Demos.Components.Avatar.misc.Menu",
         "Style": "",
         "Debug": false,
@@ -303,7 +303,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-26T09:10:16.2073077+08:00",
+    "LastWriteTime": "2021-11-26T09:53:53.2705332+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -373,7 +373,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.5628865+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0756284+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -448,14 +448,16 @@
     "Title": "AppBars",
     "SubTitle": "应用栏",
     "Type": "应用栏",
-    "Desc": "<p>AppBar组件对于任何图形用户界面（GUI）都至关重要，因为它通常是站点导航的主要来源。</p>\n",
+    "Desc": "<p><code>MAppBar</code> 组件对于任何图形用户界面 (GUI) 都是至关重要的，因为它通常是网站导航的主要来源。<code>MAppBar</code> 和 <code>MNavigationDrawer</code> 结合在一起为应用程序提供站点导航。</p>\n",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/AppBars.svg",
     "Order": 0,
     "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MAppBar\">MAppBar</a></li>\n</ul>\n"
+      "API": "\n<ul>\n<li><a href=\"/docs/api/MAppBar\">MAppBar</a></li>\n<li><a href=\"/docs/api/MAppBarNavIcon\">MAppBarNavIcon</a></li>\n<li><a href=\"/docs/api/MAppBarTitle\">MAppBarTitle</a></li>\n</ul>\n",
+      "功能组件": "\n<ul>\n<li><code>MAppBarNavIcon</code>：专门为与 <a href=\"/components/toolbars\">MToolbar</a> 和 <code>MAppBar</code> 一起使用而创建的样式化图标按钮组件。 在工具栏的左侧显示为汉堡菜单，它通常用于控制导航抽屉的状态。 默认插槽可以用于自定义此组件的图标和功能。</li>\n<li><code>MAppBarTitle</code>：修改过的 <a href=\"/components/toolbars\">MToolbarTitle</a> 组件 ，用于配合 <strong>ShrinkOnScroll</strong> 属性使用。 在小屏幕上，<strong>MToolbarTitle</strong>\n将被截断，但这个组件在展开时使用了绝对定位使其内容可见。 我们不建议您在没有使用 <strong>ShrinkOnScroll</strong> 属性时使用 <code>MAppBarTitle</code> 组件。确实是因为向此组件添加了resize事件，并进行了很多额外的计算。</li>\n</ul>\n",
+      "注意事项": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <strong>Icon</strong> 属性的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将按钮包装在任何容器例如<code>div</code>中，则需要对该容器应用负边距，以便正确对齐它们。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2021-11-18T09:22:16.3308287+08:00",
+    "LastWriteTime": "2021-11-26T13:07:38.017444+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -470,11 +472,11 @@
       },
       {
         "Order": 0,
-        "Name": "collapse",
+        "Name": "collapsibleBars",
         "Title": "可折叠栏",
         "Description": "<p>借助 <strong>Collapse</strong> 和 <strong>CollapseOnScroll</strong> 属性，简单的实现toolbar与用户的交互。</p>\n",
-        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar Collapse=\"!collapseOnScroll\"\r\n             CollapseOnScroll=\"collapseOnScroll\"\r\n             Absolute\r\n             Color=\"deep-purple accent-4\"\r\n             Dark\r\n             ScrollTarget=\"scrolling-sheet-1\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n        <MAppBarTitle>Collapsing Bar</MAppBarTitle>\r\n        <MSpacer></MSpacer>\r\n        <MCheckbox @bind-Value=\"collapseOnScroll\" Color=\"white\" HideDetails=\"true\"></MCheckbox>\r\n    </MAppBar>\r\n    <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-1\">\r\n        <MContainer Style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>\r\n\r\n@code {\r\n    bool collapseOnScroll = true;\r\n}",
-        "Type": "Demos.Components.Bars.children.AppBar.props.Collapse",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar Collapse=\"!collapseOnScroll\"\r\n             CollapseOnScroll=\"collapseOnScroll\"\r\n             Absolute\r\n             Color=\"deep-purple accent-4\"\r\n             Dark\r\n             ScrollTarget=\"#scrolling-sheet-1\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n        <MAppBarTitle>Collapsing Bar</MAppBarTitle>\r\n        <MSpacer></MSpacer>\r\n        <MCheckbox @bind-Value=\"collapseOnScroll\" Color=\"white\" HideDetails=\"true\"></MCheckbox>\r\n    </MAppBar>\r\n    <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-1\">\r\n        <MContainer Style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>\r\n\r\n@code {\r\n    bool collapseOnScroll = true;\r\n}",
+        "Type": "Demos.Components.Bars.children.AppBar.props.CollapsibleBars",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -493,9 +495,9 @@
       {
         "Order": 0,
         "Name": "elevateOnScroll",
-        "Title": "滚动高度（Z轴）",
+        "Title": "滚动时的高度(Z轴)",
         "Description": "<p>使用 <strong>ElevateOnScroll</strong> 属性时，<code>MAppBar</code> 默认的高度为 0dp，当用户开始向下滚动时，高度会升至 4dp。</p>\n",
-        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar ElevateOnScroll Color=\"white\" Absolute ScrollTarget=\"scrolling-sheet-2\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n        <MAppBarTitle>Title</MAppBarTitle>\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n\r\n    </MAppBar>\r\n    <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-2\">\r\n        <MContainer Style=\"height: 1500px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar ElevateOnScroll Color=\"white\" Absolute ScrollTarget=\"#scrolling-sheet-2\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n        <MAppBarTitle>Title</MAppBarTitle>\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n\r\n    </MAppBar>\r\n    <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-2\">\r\n        <MContainer Style=\"height: 1500px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
         "Type": "Demos.Components.Bars.children.AppBar.props.ElevateOnScroll",
         "Style": "",
         "Debug": false,
@@ -504,9 +506,9 @@
       {
         "Order": 0,
         "Name": "fadeImageOnScroll",
-        "Title": "淡入淡出",
+        "Title": "滚动时淡入淡出图像",
         "Description": "<p>The background image of a <code>MAppBar</code> can fade on scroll. Use the <strong>FadeImgOnScroll</strong> property for this.</p>\n",
-        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar Absolute\r\n             Color=\"#6A76AB\"\r\n             Dark\r\n             ShrinkOnScroll\r\n             Prominent\r\n             Src=\"https://picsum.photos/1920/1080?random\"\r\n             FadeImgOnScroll\r\n             ScrollTarget=\"scrolling-sheet-3\">\r\n        <ImgContent>\r\n            <MImage Gradient=\"to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)\"></MImage>\r\n        </ImgContent>\r\n\r\n        <ChildContent>\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MAppBarTitle>Title</MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n\r\n        </ChildContent>\r\n        <ExtensionContent>\r\n            <MTabs AlignWithTitle>\r\n                <MTab>Tab 1</MTab>\r\n                <MTab>Tab 2</MTab>\r\n                <MTab>Tab 3</MTab>\r\n            </MTabs>\r\n        </ExtensionContent>\r\n    </MAppBar>\r\n\r\n    <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-3\">\r\n        <MContainer Style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>\r\n",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar Absolute\r\n             Color=\"#6A76AB\"\r\n             Dark\r\n             ShrinkOnScroll\r\n             Prominent\r\n             Src=\"https://picsum.photos/1920/1080?random\"\r\n             FadeImgOnScroll\r\n             ScrollTarget=\"#scrolling-sheet-3\">\r\n        <ImgContent>\r\n            <MImage Gradient=\"to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)\" @attributes=\"@context\"></MImage>\r\n        </ImgContent>\r\n\r\n        <ChildContent>\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MAppBarTitle>Title</MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n\r\n        </ChildContent>\r\n        <ExtensionContent>\r\n            <MTabs AlignWithTitle>\r\n                <MTab>Tab 1</MTab>\r\n                <MTab>Tab 2</MTab>\r\n                <MTab>Tab 3</MTab>\r\n            </MTabs>\r\n        </ExtensionContent>\r\n    </MAppBar>\r\n\r\n    <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-3\">\r\n        <MContainer Style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
         "Type": "Demos.Components.Bars.children.AppBar.props.FadeImageOnScroll",
         "Style": "",
         "Debug": false,
@@ -517,7 +519,7 @@
         "Name": "hiddenOnScroll",
         "Title": "滚动隐藏",
         "Description": "<p>当设置了<strong>HideOnScroll</strong> 属性，<code>MAppBar</code> 向下滚动时会被隐藏。</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCard Class=\"overflow-hidden\">\r\n        <MAppBar Color=\"teal lighten-3\" Dark Prominent HideOnScroll Absolute ScrollTarget=\"scrolling-sheet-4\">\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MAppBarTitle>Hide On Scroll </MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n\r\n        </MAppBar>\r\n        <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-4\">\r\n            <MContainer Style=\"height: 1000px;\"></MContainer>\r\n        </MSheet>\r\n    </MCard>\r\n</MContainer>\r\n",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar Color=\"teal lighten-3\" Dark Prominent HideOnScroll Absolute ScrollTarget=\"#scrolling-sheet-4\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n        <MAppBarTitle>Title</MAppBarTitle>\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n\r\n    </MAppBar>\r\n    <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-4\">\r\n        <MContainer Style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
         "Type": "Demos.Components.Bars.children.AppBar.props.HiddenOnScroll",
         "Style": "",
         "Debug": false,
@@ -526,9 +528,9 @@
       {
         "Order": 0,
         "Name": "images",
-        "Title": "图片",
+        "Title": "图像",
         "Description": "<p><code>MAppBar</code> 可以包含背景图像。您可以通过 <strong>Src</strong> 属性设置。 如果您需要自定义 <code>MImage</code>，应用栏将为您提供一个 <strong>ImgContent</strong> 插槽。</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCard Class=\"overflow-hidden\">\r\n        Todo...\r\n        <MSheet Class=\"overflow-y-auto\" Color=\"white\" Elevation=\"1\" MaxHeight=\"600\" Id=\"scrolling-sheet-5\">\r\n            <MContainer Style=\"height: 1000px;\"></MContainer>\r\n        </MSheet>\r\n    </MCard>\r\n</MContainer>\r\n\r\n@code {\r\n\r\n}",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar Absolute\r\n             Color=\"#fcb69f\"\r\n             Dark\r\n             ShrinkOnScroll\r\n             Src=\"https://picsum.photos/1920/1080?random\"\r\n             ScrollTarget=\"#scrolling-techniques-5\">\r\n        <ImgContent>\r\n            <MImage Gradient=\"to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)\" @attributes=\"@context\"></MImage>\r\n        </ImgContent>\r\n\r\n        <ChildContent>\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MAppBarTitle>Title</MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n        </ChildContent>\r\n    </MAppBar>\r\n    <MSheet Class=\"overflow-y-auto\" Color=\"white\" Elevation=\"1\" MaxHeight=\"600\" Id=\"scrolling-techniques-5\">\r\n        <MContainer Style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
         "Type": "Demos.Components.Bars.children.AppBar.props.Images",
         "Style": "",
         "Debug": false,
@@ -539,7 +541,7 @@
         "Name": "inverted",
         "Title": "滚动反转",
         "Description": "<p>When using the <strong>InvertedScroll</strong> property, the bar will hide until the user scrolls past the designated threshold. Once\npast the threshold, the <code>MAppBar</code> will continue to display until the users scrolls up past the threshold. If no **\nScrollThreshold** value is supplied a default value of 0 will be used.</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCard Class=\"overflow-hidden\">\r\n        <MAppBar InvertedScroll Absolute ScrollTarget=\"scrolling-sheet-6\">\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MAppBarTitle>Inverted Scrolling </MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n\r\n        </MAppBar>\r\n        <MSheet Class=\"overflow-y-auto\" Color=\"white\" MaxHeight=\"600\" Id=\"scrolling-sheet-6\">\r\n            <MContainer Style=\"height: 1000px;\"></MContainer>\r\n        </MSheet>\r\n    </MCard>\r\n</MContainer>\r\n\r\n@code {\r\n\r\n}",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar Absolute\r\n             Color=\"primary\"\r\n             Dark\r\n             InvertedScroll\r\n             ScrollTarget=\"#scrolling-techniques-8\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MAppBarTitle>Title</MAppBarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n\r\n    </MAppBar>\r\n    <MSheet Id=\"scrolling-techniques-8\"\r\n            Class=\"overflow-y-auto\"\r\n            MaxHeight=\"600\">\r\n        <MContainer Style=\"height: 1500px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
         "Type": "Demos.Components.Bars.children.AppBar.props.Inverted",
         "Style": "",
         "Debug": false,
@@ -550,7 +552,7 @@
         "Name": "prominent",
         "Title": "突出",
         "Description": "<p>一个带有 <strong>Prominent</strong> 属性的 <code>MAppBar</code> 可以被设置为随着用户滚动而收缩。 当用户滚动浏览内容时，这提供了一个平滑的过渡，以减少视觉空间占用。 收缩高度有 <strong>Dense</strong>（紧密，48px）和 <strong>Short</strong>\n（短，56px）两种选择。</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCard Class=\"overflow-hidden\">\r\n        <MAppBar ShrinkOnScroll Absolute ScrollTarget=\"scrolling-sheet-7\">\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MAppBarTitle>Inverted Scrolling </MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n\r\n        </MAppBar>\r\n        <MSheet Class=\"overflow-y-auto\" Color=\"white\" MaxHeight=\"600\" Id=\"scrolling-sheet-7\">\r\n            <MContainer Style=\"height: 1000px;\"></MContainer>\r\n        </MSheet>\r\n    </MCard>\r\n</MContainer>\r\n\r\n@code {\r\n\r\n}",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar\r\n        Absolute\r\n        Color=\"indigo darken-2\"\r\n        Dark\r\n        ShrinkOnScroll\r\n        prominent\r\n        ScrollTarget=\"#scrolling-techniques\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MAppBarTitle>Title</MAppBarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n    </MAppBar>\r\n    <MSheet\r\n        Id=\"scrolling-techniques\"\r\n        Class=\"overflow-y-auto\"\r\n        MaxHeight=\"600\">\r\n        <MContainer style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
         "Type": "Demos.Components.Bars.children.AppBar.props.Prominent",
         "Style": "",
         "Debug": false,
@@ -561,7 +563,7 @@
         "Name": "scrollThreshold",
         "Title": "滚动阈值",
         "Description": "<p><code>MAppBar</code> can have scroll threshold. It will start reacting to scroll only after defined via <strong>ScrollThreshold</strong>\nproperty amount of pixels.</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCard Class=\"overflow-hidden\">\r\n        <MAppBar ShrinkOnScroll ScrollThreshold=\"200\" Absolute ScrollTarget=\"scrolling-sheet-8\">\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MAppBarTitle>ScrollThreshold </MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n\r\n        </MAppBar>\r\n        <MSheet Class=\"overflow-y-auto\" Color=\"white\" MaxHeight=\"600\" Id=\"scrolling-sheet-8\">\r\n            <MContainer Style=\"height: 1000px;\"></MContainer>\r\n        </MSheet>\r\n    </MCard>\r\n</MContainer>\r\n\r\n@code   {\r\n\r\n}",
+        "Code": "<MCard class=\"overflow-hidden\">\r\n    <MAppBar\r\n        Absolute\r\n        Color=\"#43a047\"\r\n        Dark\r\n        ShrinkOnScroll\r\n        Prominent\r\n        Src=\"https://picsum.photos/1920/1080?random\"\r\n        FadeImgOnScroll\r\n        ScrollTarget=\"#scrolling-techniques-55\"\r\n        ScrollThreshold=\"500\">\r\n        <ImgContent>\r\n            <MImage\r\n                @attributes=\"context\"\r\n                Gradient=\"to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)\">\r\n            </MImage>\r\n        </ImgContent>\r\n\r\n        <ChildContent>\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n            <MAppBarTitle>Title</MAppBarTitle>\r\n\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n        </ChildContent>\r\n    </MAppBar>\r\n    <MSheet Id=\"scrolling-techniques-55\"\r\n            Class=\"overflow-y-auto\"\r\n            MaxHeight=\"600\">\r\n        <MContainer style=\"height: 1500px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
         "Type": "Demos.Components.Bars.children.AppBar.props.ScrollThreshold",
         "Style": "",
         "Debug": false,
@@ -570,9 +572,9 @@
       {
         "Order": 1,
         "Name": "menu",
-        "Title": "菜单(TODO)",
+        "Title": "菜单",
         "Description": "<p>您可以通过添加 <strong>MMenu</strong> 来轻松地扩展应用栏的功能。 单击最后一个图标以查看其运行情况。</p>\n",
-        "Code": "<div>\r\n    TODO...\r\n</div>",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar\r\n        Absolute\r\n        Color=\"#6A76AB\"\r\n        Dark\r\n        ShrinkOnScroll\r\n        Prominent\r\n        Src=\"https://picsum.photos/1920/1080?random\"\r\n        FadeImgOnScroll\r\n        ScrollTarget=\"#scrolling-techniques-4\">\r\n        <ImgContent>\r\n            <MImage\r\n                @attributes=\"@context\"\r\n                Gradient=\"to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)\">\r\n            </MImage>\r\n        </ImgContent>\r\n\r\n        <ChildContent>\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n            <MToolbarTitle>Title</MToolbarTitle>\r\n\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n\r\n            <MMenu\r\n                Bottom\r\n                Left>\r\n                <ActivatorContent>\r\n                    <MButton\r\n                        Icon\r\n                        Color=\"yellow\"\r\n                        @attributes=\"@context.Attrs\">\r\n                        <MIcon>mdi-dots-vertical</MIcon>\r\n                    </MButton>\r\n                </ActivatorContent>\r\n\r\n                <ChildContent>\r\n                    <MList>\r\n                        @foreach (var item in items)\r\n                        {\r\n                            <MListItem>\r\n                                <MListItemTitle>@item</MListItemTitle>\r\n                            </MListItem>\r\n                        }\r\n                    </MList>\r\n                </ChildContent>\r\n            </MMenu>\r\n        </ChildContent>\r\n\r\n        <ExtensionContent>\r\n            <MTabs AlignWithTitle>\r\n                <MTab>Tab 1</MTab>\r\n                <MTab>Tab 2</MTab>\r\n                <MTab>Tab 3</MTab>\r\n            </MTabs>\r\n        </ExtensionContent>\r\n    </MAppBar>\r\n    <MSheet\r\n        id=\"scrolling-techniques-4\"\r\n        Class=\"overflow-y-auto\"\r\n        MaxHeight=\"600\">\r\n        <MContainer Style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    readonly List<string> items = new()\r\n    {\r\n        \"Click Me\",\r\n        \"Click Me\",\r\n        \"Click Me\",\r\n        \"Click Me 2\",\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Bars.children.AppBar.misc.Menu",
         "Style": "",
         "Debug": false,
@@ -583,7 +585,7 @@
         "Name": "toggleNavigationDrawers",
         "Title": "切换导航抽屉",
         "Description": "<p>使用函数式组件 <code>MAppBarNavIcon</code> 可以切换其他组件的状态，例如 <code>MNavigationDrawer</code>。</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCard class=\"mx-auto overflow-hidden\" Height=\"400\">\r\n        <MAppBar Absolute>\r\n            <MAppBarNavIcon @onclick=\"() => drawer=true\"></MAppBarNavIcon>\r\n            <MAppBarTitle>Others </MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n\r\n\r\n            <MMenu NudgeBottom=\"8\" Bottom Left>\r\n                <ActivatorContent>\r\n                    <MButton Icon @attributes=\"@context.Attrs\">\r\n                        <MIcon>mdi-dots-vertical</MIcon>\r\n                    </MButton>\r\n                </ActivatorContent>\r\n\r\n                <ChildContent>\r\n                    <MList>\r\n                        <MListItemGroup>\r\n                            @foreach (var item in titles)\r\n                            {\r\n                                <MListItem>\r\n                                    <MListItemContent>\r\n                                        <MListItemTitle>\r\n                                            @item\r\n                                        </MListItemTitle>\r\n                                    </MListItemContent>\r\n                                </MListItem>\r\n                            }\r\n                        </MListItemGroup>\r\n                    </MList>\r\n                </ChildContent>\r\n            </MMenu>\r\n\r\n        </MAppBar>\r\n\r\n        <MNavigationDrawer Absolute Temporary @bind-Value=\"drawer\">\r\n            <MList Nav Dense>\r\n                <MListItemGroup>\r\n                    <MListItem>\r\n                        <MListItemIcon>\r\n                            <MIcon>mdi-home</MIcon>\r\n                        </MListItemIcon>\r\n                        <MListItemTitle>\r\n                            Home\r\n                        </MListItemTitle>\r\n                    </MListItem>\r\n                    <MListItem>\r\n                        <MListItemIcon>\r\n                            <MIcon>mdi-account</MIcon>\r\n                        </MListItemIcon>\r\n                        <MListItemTitle>\r\n                            Account\r\n                        </MListItemTitle>\r\n                    </MListItem>\r\n                </MListItemGroup>\r\n            </MList>\r\n        </MNavigationDrawer>\r\n\r\n    </MCard>\r\n</MContainer>\r\n\r\n@code {\r\n    bool drawer = false;\r\n    string[] titles =\r\n    {\r\n    \"Click Me\",\r\n    \"Click Me\",\r\n    \"Click Me\",\r\n    \"Click Me 2\"\r\n    };\r\n}",
+        "Code": "<MCard\r\n    Class=\"mx-auto overflow-hidden\"\r\n    Height=\"400\">\r\n    <MAppBar\r\n        Color=\"deep-purple\"\r\n        Dark>\r\n        <MAppBarNavIcon @onclick=\"() => drawer = true\"></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Title</MToolbarTitle>\r\n    </MAppBar>\r\n\r\n    <MNavigationDrawer\r\n        @bind-Value=\"drawer\"\r\n        Absolute\r\n        Temporary>\r\n        <MList\r\n            Nav\r\n            Dense>\r\n            <MListItemGroup\r\n                @bind-Value=\"group\"\r\n                ActiveClass=\"deep-purple--text text--accent-4\">\r\n                <MListItem>\r\n                    <MListItemIcon>\r\n                        <MIcon>mdi-home</MIcon>\r\n                    </MListItemIcon>\r\n                    <MListItemTitle>Home</MListItemTitle>\r\n                </MListItem>\r\n\r\n                <MListItem>\r\n                    <MListItemIcon>\r\n                        <MIcon>mdi-account</MIcon>\r\n                    </MListItemIcon>\r\n                    <MListItemTitle>Account</MListItemTitle>\r\n                </MListItem>\r\n            </MListItemGroup>\r\n        </MList>\r\n    </MNavigationDrawer>\r\n</MCard>\r\n\r\n@code {\r\n    bool drawer;\r\n    StringNumber group;\r\n}",
         "Type": "Demos.Components.Bars.children.AppBar.misc.ToggleNavigationDrawers",
         "Style": "",
         "Debug": false,
@@ -602,7 +604,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.5728856+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0776289+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -672,7 +674,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MToolbar\">MToolbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:53.5588656+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0816266+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -817,7 +819,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-09-03T18:29:09.2179422+08:00",
+    "LastWriteTime": "2021-10-13T10:44:46.0873838+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -856,7 +858,7 @@
       "API": "\n<ul>\n<li><a href=\"/docs/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/docs/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>默认情况下，<code>MBreadcrumbs</code> 将禁用路由联动。可以通过 <strong>Linkage</strong> 属性开启路由联动。</p>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:53.4608659+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0836279+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -939,7 +941,7 @@
       "API": "\n<ul>\n<li><a href=\"/docs/api/MButton\">MButton</a></li>\n<li><a href=\"/docs/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p>当使用 <strong>Dark</strong> 属性时，<code>MButton</code> 是唯一一种拥有不同行为的组件。 通常来说，组件使用 <strong>Dark</strong> 属性来表示他们将有深色背景，文本也需要是白色的。 虽然这对\n<code>MButton</code> 也是起作用的，但由于禁用状态与白色背景容易造成混淆，建议仅在按钮<strong>为</strong>彩色背景时使用此属性。 If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2021-11-18T09:22:16.3088349+08:00",
+    "LastWriteTime": "2021-11-17T17:29:52.1597474+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1099,7 +1101,7 @@
       "API": "\n<ul>\n<li><a href=\"/docs/api/MCard\">MCard</a></li>\n<li><a href=\"/docs/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/docs/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/docs/api/MCardText\">MCardText</a></li>\n<li><a href=\"/docs/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "功能组件": "\n<ul>\n<li><code>MCardActions</code>：用于为卡片放置 动作 的容器，如 <a href=\"/components/buttons\">MButton</a> 或 <a href=\"/components/menu\">MMenu</a>。 同时在按钮上使用 个特殊边距\n，以便它们与其他卡片内容区域的匹配。</li>\n<li><code>MCardSubtitle</code>：为卡片字幕提供默认的 <strong>字体大小</strong> 和 <strong>填充</strong>。 字体大小可以以 <a href=\"/styles/textandtypography\">排版类</a> 覆盖。</li>\n<li><code>MCardText</code>：主要用于卡片中的 <strong>文本内容</strong>。 对文本应用填充，将其字体大小减少为 .875rem。</li>\n<li><code>MCardTitle</code>：为卡片字幕提供默认的 字体大小 和 填充。 字体大小可以以 <a href=\"/styles/textandtypography\">排版类</a> 覆盖。</li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.6188862+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0886273+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1247,7 +1249,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.6218858+08:00",
+    "LastWriteTime": "2021-11-16T17:18:10.0838705+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1427,7 +1429,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:04.4912214+08:00",
+    "LastWriteTime": "2021-10-29T14:11:50.7074219+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1553,7 +1555,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:53.4428661+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0916273+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1624,7 +1626,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MECharts\">MECharts</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-08-23T17:55:09.6332593+08:00",
+    "LastWriteTime": "2021-10-13T10:44:46.1023469+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1651,7 +1653,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/docs/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/docs/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/docs/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:04.4602205+08:00",
+    "LastWriteTime": "2021-11-02T09:37:52.1130132+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1776,7 +1778,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1310932+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6580013+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1847,7 +1849,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1360957+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6590057+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1895,7 +1897,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-24T14:42:47.282503+08:00",
+    "LastWriteTime": "2021-11-24T18:45:49.2469595+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1932,7 +1934,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/zh-CN/docs/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/zh-CN/docs/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1450934+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.8350159+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2014,7 +2016,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1580928+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.8319996+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2140,7 +2142,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:00.0832747+08:00",
+    "LastWriteTime": "2021-10-18T13:07:46.3764354+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2189,7 +2191,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MRadio\">MRadio</a></li>\n<li><a href=\"/docs/api/MRadioGroup\">MRadio</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1630935+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.7990006+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2260,7 +2262,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1680952+08:00",
+    "LastWriteTime": "2021-11-12T14:06:48.9354207+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2341,7 +2343,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/zh-CN/docs/api/MSelect\">MSelect</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:00.1132746+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2400602+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2467,7 +2469,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.192094+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.7730007+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2648,7 +2650,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-23T16:08:41.2566763+08:00",
+    "LastWriteTime": "2021-11-23T18:27:44.4298634+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2741,7 +2743,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.2090943+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.7110144+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2867,7 +2869,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.233094+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6990026+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3129,14 +3131,16 @@
     "Title": "Grid",
     "SubTitle": "网格",
     "Type": "网格",
-    "Desc": "<p>MASA.Blazor 配备了一个使用 flexbox 构建的 12 格网格系统。 网格用于在应用的内容中创建特定的布局。 它包含 5 种类型的媒体断点，用于针对特定的屏幕尺寸或方向，xs、sm、md、lg 和 xl。 这些分辨率在视口断点表中定义如下，可以通过自定义断点进行修改。</p>\n",
+    "Desc": "<p>MASA.Blazor 配备了一个使用 flexbox 构建的 12 格网格系统。 网格用于在应用的内容中创建特定的布局。 它包含 5 种类型的媒体断点，用于针对特定的屏幕尺寸或方向，xs、sm、md、lg 和 xl。 这些分辨率在视口断点表中定义如下，可以通过自定义断点进行修改。</p>\n<div\n  class=\"overflow-hidden mb-12 overflow-hidden m-sheet m-sheet--outlined theme--light rounded\"\n>\n  <div class=\"m-data-table theme--light\">\n    <div class=\"m-data-table__wrapper\">\n      <table>\n        <caption class=\"pa-4\">\n          Material Design 断点\n        </caption>\n        <thead>\n          <tr class=\"text-left\">\n            <th>设备</th>\n            <th>代码</th>\n            <th>类型</th>\n            <th>像素范围</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z\"\n                  ></path></svg></span\n              ><span>Extra small (超小号)</span>\n            </td>\n            <td><strong>xs</strong></td>\n            <td>小型号到大型号的手机</td>\n            <td>&lt; 600px</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M19,18H5V6H19M21,4H3C1.89,4 1,4.89 1,6V18A2,2 0 0,0 3,20H21A2,2 0 0,0 23,18V6C23,4.89 22.1,4 21,4Z\"\n                  ></path></svg></span\n              ><span>Small (小号)</span>\n            </td>\n            <td><strong>sm</strong></td>\n            <td>小型号到中型号的平板</td>\n            <td>600px &gt; &lt; 960px</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z\"\n                  ></path></svg></span\n              ><span>Medium (中号)</span>\n            </td>\n            <td><strong>md</strong></td>\n            <td>大型号平板到手提电脑</td>\n            <td>960px &gt; &lt; 1264px*</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z\"\n                  ></path></svg></span\n              ><span>Large (大号)</span>\n            </td>\n            <td><strong>lg</strong></td>\n            <td>桌面端</td>\n            <td>1264px &gt; &lt; 1904px*</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M21,17H3V5H21M21,3H3A2,2 0 0,0 1,5V17A2,2 0 0,0 3,19H8V21H16V19H21A2,2 0 0,0 23,17V5A2,2 0 0,0 21,3Z\"\n                  ></path></svg></span\n              ><span>Extra large (超大号)</span>\n            </td>\n            <td><strong>xl</strong></td>\n            <td>4K 和超宽屏幕</td>\n            <td>&gt; 1904px*</td>\n          </tr>\n        </tbody>\n        <tfoot>\n          <tr>\n            <td colspan=\"4\" class=\"text-caption text-center grey--text\">\n              <em>桌面端上浏览器滚动条的宽度为 * -16px </em>\n            </td>\n          </tr>\n          <tr>\n            <td colspan=\"4\" class=\"text-right text--secondary\">\n              <small class=\"d-block mr-n1 mb-n6\"\n                ><a\n                  href=\"https://material.io/design/layout/responsive-layout-grid.html\"\n                  rel=\"noopener noreferrer\"\n                  target=\"_blank\"\n                  class=\"text-decoration-none d-inline-flex align-center\"\n                  ><span\n                    aria-hidden=\"true\"\n                    class=\"m-icon notranslate mr-1 theme--light\"\n                    style=\"\n                      font-size: 16px;\n                      height: 16px;\n                      width: 16px;\n                      color: inherit;\n                    \"\n                    ><svg\n                      xmlns=\"http://www.w3.org/2000/svg\"\n                      viewBox=\"0 0 24 24\"\n                      role=\"img\"\n                      aria-hidden=\"true\"\n                      class=\"m-icon__svg\"\n                      style=\"font-size: 16px; height: 16px; width: 16px\"\n                    >\n                      <path\n                        d=\"M21,12C21,9.97 20.33,8.09 19,6.38V17.63C20.33,15.97 21,14.09 21,12M17.63,19H6.38C7.06,19.55 7.95,20 9.05,20.41C10.14,20.8 11.13,21 12,21C12.88,21 13.86,20.8 14.95,20.41C16.05,20 16.94,19.55 17.63,19M11,17L7,9V17H11M17,9L13,17H17V9M12,14.53L15.75,7H8.25L12,14.53M17.63,5C15.97,3.67 14.09,3 12,3C9.91,3 8.03,3.67 6.38,5H17.63M5,17.63V6.38C3.67,8.09 3,9.97 3,12C3,14.09 3.67,15.97 5,17.63M23,12C23,15.03 21.94,17.63 19.78,19.78C17.63,21.94 15.03,23 12,23C8.97,23 6.38,21.94 4.22,19.78C2.06,17.63 1,15.03 1,12C1,8.97 2.06,6.38 4.22,4.22C6.38,2.06 8.97,1 12,1C15.03,1 17.63,2.06 19.78,4.22C21.94,6.38 23,8.97 23,12Z\"\n                      ></path></svg></span\n                  ><span>规格</span></a\n                ></small\n              >\n            </td>\n          </tr>\n        </tfoot>\n      </table>\n    </div>\n  </div>\n</div>\n",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg",
     "Order": 0,
     "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MContainer\">MContainer</a></li>\n<li><a href=\"/docs/api/MRow\">MRow</a></li>\n<li><a href=\"/docs/api/MCol\">MCol</a></li>\n<li><a href=\"/docs/api/MSpacer\">MSpacer</a></li>\n</ul>\n"
+      "API": "\n<ul>\n<li><a href=\"/docs/api/MContainer\">MContainer</a></li>\n<li><a href=\"/docs/api/MRow\">MRow</a></li>\n<li><a href=\"/docs/api/MCol\">MCol</a></li>\n<li><a href=\"/docs/api/MSpacer\">MSpacer</a></li>\n</ul>\n",
+      "功能组件": "\n<ul>\n<li><code>MContainer</code>：<code>MContainer</code> 提供了将你的网站内容居中和水平填充的功能。 你还可以使用 <strong>Fluid</strong> 属性将容器在所有视口和设备尺寸上完全扩展。</li>\n<li><code>MCol</code>：<code>MCol</code> 包裹内容，它必须是 <code>MRow</code> 的直接子集。</li>\n<li><code>MRow</code>：<code>MRow</code> 是 <code>MCol</code> 的容器组件。 它使用 <strong>Flex</strong> 属性来控制其内栏的布局和流。 它使用的是 <strong>24px</strong> 的标准间隔。 这可以用 <strong>Dense</strong> 属性来减小，或者用 <strong>NoGutters</strong>\n来完全去除。</li>\n<li><code>MSpacer</code>：<code>MSpacer</code> 是一个基本而又通用的间隔组件，用于分配父子组件之间的剩余宽度。 当一个 <code>MSpacer</code> 放置在子组件之前或之后时，组件将推到其容器的左右两侧。 当多个组件之间使用多个 <code>MSpacer</code> 时，剩余的宽度将均匀地分布在每个 spacer 之间。</li>\n</ul>\n",
+      "Helper Classes": "\n<p><strong>FillHeight</strong> applies <code>height: 100%</code> to an element. When applied to <code>MContainer</code> it will also <code>align-items: center</code>.</p>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:52.0838728+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8305896+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3361,7 +3365,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/docs/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.6938761+08:00",
+    "LastWriteTime": "2021-11-12T13:39:37.8809032+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3443,7 +3447,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/docs/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:00.2032724+08:00",
+    "LastWriteTime": "2021-11-03T16:49:05.8906094+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3525,7 +3529,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MItem\">MItem</a></li>\n<li><a href=\"/docs/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:00.2182728+08:00",
+    "LastWriteTime": "2021-11-04T13:34:00.0771991+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3606,7 +3610,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/docs/api/MListItem\">MListItem</a></li>\n<li><a href=\"/docs/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/docs/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/docs/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/docs/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/docs/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/docs/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/docs/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.6278755+08:00",
+    "LastWriteTime": "2021-11-12T13:39:38.0698762+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3687,7 +3691,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/docs/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.6198754+08:00",
+    "LastWriteTime": "2021-11-12T13:39:38.0618742+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3779,7 +3783,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MWindow\">MWindow</a></li>\n<li><a href=\"/docs/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.2038776+08:00",
+    "LastWriteTime": "2021-11-12T13:39:37.8828831+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3860,7 +3864,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.5758771+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8325907+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3920,7 +3924,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.4958755+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8345908+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3990,7 +3994,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MImage\">MImage</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.4798759+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8375904+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4084,7 +4088,7 @@
       "API": "\n<ul>\n<li><a href=\"/docs/api/MList\">MList</a></li>\n<li><a href=\"/docs/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/docs/api/MListItem\">MListItem</a></li>\n<li><a href=\"/docs/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/docs/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/docs/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/docs/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/docs/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/docs/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/docs/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/docs/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>如果您要查找有状态列表项，请查看 <a href=\"/components/listitemgroup\"><strong>MListItemGroup</strong></a>。</p>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.811884+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8385907+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4286,7 +4290,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:03.3062352+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2440968+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4457,7 +4461,7 @@
       "API": "\n<ul>\n<li><a href=\"/docs/api/MNavigationDrawer\">MNavigationDrawer</a></li>\n</ul>\n",
       "警告": "\n<!--alert:error-->\n<p>如果使用启用了 <strong>App</strong> 属性的 <code>MNavigationDrawer</code>，则不需要像示例中那样使用 <strong>Absolute</strong> 属性。</p>\n<!--/alert:error-->\n"
     },
-    "LastWriteTime": "2021-11-16T15:17:58.2721746+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8246057+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4582,7 +4586,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.8122983+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8256046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4631,8 +4635,8 @@
       {
         "Order": 4,
         "Name": "Advanced",
-        "Title": "Hover",
-        "Description": "<p>使用 <code>MHover</code> 作为背景，添加进度组件来轻松创建自定义加载器。</p>\n",
+        "Title": "高级版",
+        "Description": "<p>使用 <a href=\"/components/hover\">MHover</a> 作为背景，添加进度组件来轻松创建自定义加载器。</p>\n",
         "Code": "<MHover>\r\n    <MCard @attributes=\"context.Attrs\" Class=\"mx-auto\"\r\n           MaxWidth=\"344\">\r\n        <MImage Src=\"https://cdn.vuetifyjs.com/images/cards/forest-art.jpg\"></MImage>\r\n\r\n        <MCardText>\r\n            <h2 class=\"text-h6 primary--text\">\r\n                Magento Forests\r\n            </h2>\r\n            Travel to the best outdoor experience on planet Earth. A vacation you will never forget!\r\n        </MCardText>\r\n\r\n        <MCardTitle>\r\n            <MRating Value=\"4\"\r\n                     Dense\r\n                     Color=\"orange\"\r\n                     BackgroundColor=\"orange\"\r\n                     Hover\r\n                     Class=\"mr-2\"></MRating>\r\n            <span class=\"primary--text text-subtitle-2\">64 Reviews</span>\r\n        </MCardTitle>\r\n\r\n        <FadeTransition>\r\n            <Element Show=\"@context.Hover\" Class=\"text-center\">\r\n                <MOverlay Absolute Value=\"@context.Hover\"\r\n                          Color=\"#036358\">\r\n                    <MButton>See more info</MButton>\r\n                </MOverlay>\r\n            </Element>\r\n        </FadeTransition>\r\n    </MCard>\r\n</MHover>",
         "Type": "Demos.Components.Overlay.misc.Advanced",
         "Style": "",
@@ -4663,7 +4667,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.8012987+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.827605+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4745,7 +4749,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MColorPicker\">MColorPicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.0213047+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8296041+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4827,7 +4831,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:17:58.306173+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8326032+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5063,7 +5067,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:17:58.3101739+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8346068+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5200,7 +5204,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:17:58.3331731+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8366046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5366,7 +5370,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.3653055+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8376032+08:00",
     "DemoList": [
       {
         "Order": 20,
@@ -5447,7 +5451,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.7362988+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8406035+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5515,7 +5519,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.7222979+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8456135+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5673,7 +5677,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:17:58.3711741+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.167907+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5777,7 +5781,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.6822982+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8466114+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -5826,7 +5830,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T10:44:03.0314876+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0756929+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5863,7 +5867,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.6722983+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1699113+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5927,21 +5931,21 @@
     "Title": "Stepper",
     "SubTitle": "步骤条",
     "Type": "步骤条",
-    "Desc": "<p>v-stepper 组件通过数字步骤显示进度。</p>\n",
+    "Desc": "<p><code>MStepper</code> 组件通过数字步骤显示进度。</p>\n",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Stepper.svg",
     "Order": 0,
     "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MStepper\">MStepper</a></li>\n</ul>\n"
+      "API": "\n<ul>\n<li><a href=\"/docs/api/MStepper\">MStepper</a></li>\n<li><a href=\"/docs/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/docs/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/docs/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/docs/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.6582989+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1739081+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "index",
         "Title": "使用",
         "Description": "<p>一个步骤组件适用于多种场景，包括购物车、创建记录等等。</p>\n",
-        "Code": "<MStepper Value=\"_step\">\r\n    <MStepperHeader>\r\n        <MStepperStep Step=\"1\" Complete=\"_step>1\">\r\n            Name of step 1\r\n        </MStepperStep>\r\n        <MDivider></MDivider>\r\n        <MStepperStep Step=\"2\" Complete=\"_step>2\" Editable>\r\n            Name of step 2\r\n        </MStepperStep>\r\n        <MDivider></MDivider>\r\n        <MStepperStep Step=\"3\" Editable>\r\n            Name of step 3\r\n        </MStepperStep>\r\n    </MStepperHeader>\r\n\r\n    <MStepperItems>\r\n        <MStepperContent Step=\"1\">\r\n            <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n            <MButton Color=\"primary\" OnClick=\"()=>_step=2\">Continue</MButton>\r\n            <MButton Text>Cancel</MButton>\r\n        </MStepperContent>\r\n        <MStepperContent Step=\"2\">\r\n            <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n            <MButton Color=\"primary\" OnClick=\"()=>_step=3\">Continue</MButton>\r\n            <MButton Text>Cancel</MButton>\r\n        </MStepperContent>\r\n        <MStepperContent Step=\"3\">\r\n            <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n            <MButton Color=\"primary\" OnClick=\"()=>_step=1\">Continue</MButton>\r\n            <MButton Text>Cancel</MButton>\r\n        </MStepperContent>\r\n    </MStepperItems>\r\n</MStepper>\r\n\r\n@code {\r\n    private int _step = 1;\r\n}",
+        "Code": "<MStepper Value=\"_step\">\r\n    <MStepperHeader>\r\n        <MStepperStep Step=\"1\" Complete=\"_step>1\">\r\n            Name of step 1\r\n        </MStepperStep>\r\n        <MDivider></MDivider>\r\n        <MStepperStep Step=\"2\" Complete=\"_step>2\">\r\n            Name of step 2\r\n        </MStepperStep>\r\n        <MDivider></MDivider>\r\n        <MStepperStep Step=\"3\">\r\n            Name of step 3\r\n        </MStepperStep>\r\n    </MStepperHeader>\r\n\r\n    <MStepperItems>\r\n        <MStepperContent Step=\"1\">\r\n            <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n            <MButton Color=\"primary\" OnClick=\"()=>_step=2\">Continue</MButton>\r\n            <MButton Text>Cancel</MButton>\r\n        </MStepperContent>\r\n        <MStepperContent Step=\"2\">\r\n            <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n            <MButton Color=\"primary\" OnClick=\"()=>_step=3\">Continue</MButton>\r\n            <MButton Text>Cancel</MButton>\r\n        </MStepperContent>\r\n        <MStepperContent Step=\"3\">\r\n            <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n            <MButton Color=\"primary\" OnClick=\"()=>_step=1\">Continue</MButton>\r\n            <MButton Text>Cancel</MButton>\r\n        </MStepperContent>\r\n    </MStepperItems>\r\n</MStepper>\r\n\r\n@code {\r\n    private int _step = 1;\r\n}",
         "Type": "Demos.Components.Stepper.usage.Index",
         "Style": "",
         "Debug": false,
@@ -5985,7 +5989,7 @@
         "Name": "alternativeLabelWithErrors",
         "Title": "错误状态的备用标签",
         "Description": "<p>错误状态同样可以应用于备用标签样式的显示。</p>\n",
-        "Code": "<MStepper AltLabels>\r\n    <MStepperHeader>\r\n        <MStepperStep Step=\"3\"\r\n                      complete>\r\n            Ad type\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Step=\"4\"\r\n                      complete>\r\n            Ad style\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Rules=\"rules\"\r\n                      Step=\"5\">\r\n            Custom channels\r\n            <small>Alert message</small>\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Step=\"6\">\r\n            Get code\r\n        </MStepperStep>\r\n    </MStepperHeader>\r\n</MStepper>\r\n\r\n@code {\r\n    List<Func<bool>> rules = new List<Func<bool>>() { Rule};\r\n    private static bool Rule()\r\n    {\r\n        return false;\r\n    }\r\n}\r\n",
+        "Code": "<MStepper AltLabels>\r\n    <MStepperHeader>\r\n        <MStepperStep Step=\"3\"\r\n                      complete>\r\n            Ad type\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Step=\"4\"\r\n                      complete>\r\n            Ad style\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Rules=\"rules\"\r\n                      Step=\"5\">\r\n            Custom channels\r\n            <small>Alert message</small>\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Step=\"6\">\r\n            Get code\r\n        </MStepperStep>\r\n    </MStepperHeader>\r\n</MStepper>\r\n\r\n@code {\r\n    List<Func<bool>> rules = new() { Rule };\r\n    \r\n    private static bool Rule()\r\n    {\r\n        return false;\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.Stepper.misc.AlternativeLabelWithErrors",
         "Style": "",
         "Debug": false,
@@ -6018,7 +6022,7 @@
         "Name": "errors",
         "Title": "错误状态",
         "Description": "<p>可以显示错误状态来通知用户必须采取的一些行动。</p>\n",
-        "Code": "<MStepper>\r\n    <MStepperHeader>\r\n        <MStepperStep Step=\"1\">\r\n            Ad unit details\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Rules=\"rules\"\r\n                      Step=\"2\">\r\n            Ad templates\r\n            <small>Alert message</small>\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Step=\"3\">\r\n            Ad sizes\r\n        </MStepperStep>\r\n    </MStepperHeader>\r\n</MStepper>\r\n\r\n@code {\r\n    List<Func<bool>> rules = new List<Func<bool>>() { Rule };\r\n    private static bool Rule()\r\n    {\r\n        return false;\r\n    }\r\n}\r\n",
+        "Code": "<MStepper>\r\n    <MStepperHeader>\r\n        <MStepperStep Step=\"1\">\r\n            Ad unit details\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Rules=\"rules\"\r\n                      Step=\"2\">\r\n            Ad templates\r\n            <small>Alert message</small>\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Step=\"3\">\r\n            Ad sizes\r\n        </MStepperStep>\r\n    </MStepperHeader>\r\n</MStepper>\r\n\r\n@code {\r\n    List<Func<bool>> rules = new() { Rule };\r\n\r\n    private static bool Rule()\r\n    {\r\n        return false;\r\n    }\r\n}",
         "Type": "Demos.Components.Stepper.misc.Errors",
         "Style": "",
         "Debug": false,
@@ -6092,7 +6096,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.6112992+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6163,7 +6167,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MDataIterator\">MDataIterator</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.5952995+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6212,7 +6216,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MDataTable\">MDataTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T17:33:50.2071767+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0826969+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6470,7 +6474,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T17:33:50.164177+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0836945+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6542,7 +6546,7 @@
       "API": "\n<ul>\n<li><a href=\"/docs/api/MTabs\">MTabs</a></li>\n<li><a href=\"/docs/api/MTab\">MTab</a></li>\n<li><a href=\"/docs/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/docs/api/MTabsItems\">MTabsItems</a></li>\n<li><a href=\"/docs/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning-->\n<p>当使用 <strong>Dark</strong> 属性和 <strong>不</strong> 提供自定义 <strong>Color</strong> 时，<code>MTabs</code>组件会将其颜色默认为 white。</p>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:02.5722433+08:00",
+    "LastWriteTime": "2021-11-18T17:20:09.724454+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6733,7 +6737,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/docs/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T17:33:50.146178+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0886948+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6860,7 +6864,7 @@
       "API": "\n<ul>\n<li><a href=\"/docs/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>为了正确定位 <code>MTooltip</code>，需要一个位置支撑(<code>Top</code> | <code>Bottom</code> | <code>Left</code> | <code>Right</code>)。</p>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:02.6882435+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2450964+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6909,7 +6913,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MTreeview\">MTreeview</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-25T14:31:26.5721881+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0936951+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7100,7 +7104,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MUpload\">MUpload</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T17:33:50.0811781+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0946935+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7138,7 +7142,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-18T09:22:16.1528287+08:00",
+    "LastWriteTime": "2021-11-17T14:30:00.36988+08:00",
     "DemoList": [
       {
         "Order": 0,

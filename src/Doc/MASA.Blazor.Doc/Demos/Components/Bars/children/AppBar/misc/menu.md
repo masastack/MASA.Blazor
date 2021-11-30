@@ -1,8 +1,8 @@
 ---
 order: 1
 title:
-  zh-CN: 菜单(TODO)
-  en-US: Menu(TODO)
+  zh-CN: 菜单
+  en-US: Menu
 ---
 
 ## zh-CN

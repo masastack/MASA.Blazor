@@ -1,8 +1,8 @@
 ---
 order: 0
 title:
-  zh-CN: 滚动高度（Z轴）
-  en-US: elevate 
+  zh-CN: 滚动时的高度(Z轴)
+  en-US: Elevate on scroll 
 ---
 
 ## zh-CN

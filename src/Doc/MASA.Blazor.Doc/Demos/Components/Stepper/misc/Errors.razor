@@ -21,7 +21,8 @@
 </MStepper>
 
 @code {
-    List<Func<bool>> rules = new List<Func<bool>>() { Rule };
+    List<Func<bool>> rules = new() { Rule };
+
     private static bool Rule()
     {
         return false;

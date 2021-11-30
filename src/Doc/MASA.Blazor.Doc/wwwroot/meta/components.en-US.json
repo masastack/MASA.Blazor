@@ -6,7 +6,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-23T09:48:33.3104036+08:00",
+    "LastWriteTime": "2021-11-22T16:33:22.8890524+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -172,7 +172,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:49.5458864+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0736279+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -196,15 +196,15 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Avatars.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:49.5488848+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.074628+08:00",
     "DemoList": [
       {
         "Order": 1,
-        "Name": "basic",
+        "Name": "index",
         "Title": "Usage",
         "Description": "<p>Avatars in their simplest form display content within a circular container.</p>\n",
         "Code": "<div class=\"text-center\" style=\"width:100%\">\r\n    <MAvatar Color=\"primary\" Size=\"56\">\r\n        <span class=\"white--text\">VJ</span>\r\n    </MAvatar>\r\n</div>",
-        "Type": "Demos.Components.Avatar.usage.Basic",
+        "Type": "Demos.Components.Avatar.usage.Index",
         "Style": "",
         "Debug": false,
         "Group": 4
@@ -258,7 +258,7 @@
         "Name": "menu",
         "Title": "Menu",
         "Description": "<p>You can combine the avatar and the menu.</p>\n",
-        "Code": "<MContainer Fluid Style=\"height:300px\">\r\n\t<MRow Justify=\"JustifyTypes.Center\">\r\n\t\t<MMenu Bottom MinWidth=\"200\" Rounded=\"@true\" OffsetY>\r\n\t\t\t<ActivatorContent>\r\n\t\t\t\t<MButton Icon XLarge @attributes=\"@context.Attrs\">\r\n\t\t\t\t\t<MAvatar Color=\"brown\" Size=\"48\">\r\n\t\t\t\t\t\t<span class=\"white--text text-h5\">JD</span>\r\n\t\t\t\t\t</MAvatar>\r\n\t\t\t\t</MButton>\r\n\t\t\t</ActivatorContent>\r\n\t\t\t<ChildContent>\r\n\t\t\t\t<MCard>\r\n\t\t\t\t\t<MListItemContent Class=\"justify-center\">\r\n\t\t\t\t\t\t<div class=\"mx-auto text-center\">\r\n\t\t\t\t\t\t\t<MAvatar Color=\"brown\">\r\n\t\t\t\t\t\t\t\t<span class=\"white--text text-h5\">JD</span>\r\n\t\t\t\t\t\t\t</MAvatar>\r\n\t\t\t\t\t\t\t<h3>John Doe</h3>\r\n\t\t\t\t\t\t\t<p class=\"text-caption mt-1\">john.doe@doe.com</p>\r\n\t\t\t\t\t\t\t<MDivider class=\"my-3\"></MDivider>\r\n\t\t\t\t\t\t\t<MButton Depressed Rounded Text>Edit Account</MButton>\r\n\t\t\t\t\t\t\t<MDivider class=\"my-3\"></MDivider>\r\n\t\t\t\t\t\t\t<MButton Depressed Rounded Text>Disconnect</MButton>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</MListItemContent>\r\n\t\t\t\t</MCard>\r\n\t\t\t</ChildContent>\r\n\t\t</MMenu>\r\n\t</MRow>\r\n</MContainer>",
+        "Code": "<MContainer Fluid Style=\"height:300px\">\r\n\t<MRow Justify=\"JustifyTypes.Center\">\r\n\t\t<MMenu Bottom MinWidth=\"200\" Rounded=\"@true\" OffsetY>\r\n\t\t\t<ActivatorContent>\r\n\t\t\t\t<MButton Icon XLarge @attributes=\"@context.Attrs\">\r\n\t\t\t\t\t<MAvatar Color=\"brown\" Size=\"48\">\r\n\t\t\t\t\t\t<span class=\"white--text text-h5\">@initials</span>\r\n\t\t\t\t\t</MAvatar>\r\n\t\t\t\t</MButton>\r\n\t\t\t</ActivatorContent>\r\n\t\t\t<ChildContent>\r\n\t\t\t\t<MCard>\r\n\t\t\t\t\t<MListItemContent Class=\"justify-center\">\r\n\t\t\t\t\t\t<div class=\"mx-auto text-center\">\r\n\t\t\t\t\t\t\t<MAvatar Color=\"brown\">\r\n\t\t\t\t\t\t\t\t<span class=\"white--text text-h5\">@initials</span>\r\n\t\t\t\t\t\t\t</MAvatar>\r\n\t\t\t\t\t\t\t<h3>@fullName</h3>\r\n\t\t\t\t\t\t\t<p class=\"text-caption mt-1\">@email</p>\r\n\t\t\t\t\t\t\t<MDivider class=\"my-3\"></MDivider>\r\n\t\t\t\t\t\t\t<MButton Depressed Rounded Text>Edit Account</MButton>\r\n\t\t\t\t\t\t\t<MDivider class=\"my-3\"></MDivider>\r\n\t\t\t\t\t\t\t<MButton Depressed Rounded Text>Disconnect</MButton>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</MListItemContent>\r\n\t\t\t\t</MCard>\r\n\t\t\t</ChildContent>\r\n\t\t</MMenu>\r\n\t</MRow>\r\n</MContainer>\r\n\r\n@code {\r\n\tstring initials = \"JD\";\r\n\tstring fullName = \"John Doe\";\r\n\tstring email = \"john.doe@doe.com\";\r\n}",
         "Type": "Demos.Components.Avatar.misc.Menu",
         "Style": "",
         "Debug": false,
@@ -285,7 +285,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-26T09:10:16.2073077+08:00",
+    "LastWriteTime": "2021-11-26T09:53:53.2705332+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -352,7 +352,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:49.5628865+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0756284+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -430,7 +430,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-18T09:22:16.3308287+08:00",
+    "LastWriteTime": "2021-11-26T13:07:38.017444+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -445,11 +445,11 @@
       },
       {
         "Order": 0,
-        "Name": "collapse",
-        "Title": "collapse",
+        "Name": "collapsibleBars",
+        "Title": "Collapsible bars",
         "Description": "<p>With the <strong>Collapse</strong> and <strong>CollapseOnScroll</strong> props you can easily control the state of toolbar that the user interacts\nwith.</p>\n",
-        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar Collapse=\"!collapseOnScroll\"\r\n             CollapseOnScroll=\"collapseOnScroll\"\r\n             Absolute\r\n             Color=\"deep-purple accent-4\"\r\n             Dark\r\n             ScrollTarget=\"scrolling-sheet-1\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n        <MAppBarTitle>Collapsing Bar</MAppBarTitle>\r\n        <MSpacer></MSpacer>\r\n        <MCheckbox @bind-Value=\"collapseOnScroll\" Color=\"white\" HideDetails=\"true\"></MCheckbox>\r\n    </MAppBar>\r\n    <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-1\">\r\n        <MContainer Style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>\r\n\r\n@code {\r\n    bool collapseOnScroll = true;\r\n}",
-        "Type": "Demos.Components.Bars.children.AppBar.props.Collapse",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar Collapse=\"!collapseOnScroll\"\r\n             CollapseOnScroll=\"collapseOnScroll\"\r\n             Absolute\r\n             Color=\"deep-purple accent-4\"\r\n             Dark\r\n             ScrollTarget=\"#scrolling-sheet-1\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n        <MAppBarTitle>Collapsing Bar</MAppBarTitle>\r\n        <MSpacer></MSpacer>\r\n        <MCheckbox @bind-Value=\"collapseOnScroll\" Color=\"white\" HideDetails=\"true\"></MCheckbox>\r\n    </MAppBar>\r\n    <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-1\">\r\n        <MContainer Style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>\r\n\r\n@code {\r\n    bool collapseOnScroll = true;\r\n}",
+        "Type": "Demos.Components.Bars.children.AppBar.props.CollapsibleBars",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -468,9 +468,9 @@
       {
         "Order": 0,
         "Name": "elevateOnScroll",
-        "Title": "elevate",
+        "Title": "Elevate on scroll",
         "Description": "<p>When using the <strong>ElevateOnScroll</strong> prop, the <code>MAppBar</code> will rest at an elevation of 0dp until the user begins to scroll\ndown. Once scrolling, the bar raises to 4dp.</p>\n",
-        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar ElevateOnScroll Color=\"white\" Absolute ScrollTarget=\"scrolling-sheet-2\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n        <MAppBarTitle>Title</MAppBarTitle>\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n\r\n    </MAppBar>\r\n    <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-2\">\r\n        <MContainer Style=\"height: 1500px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar ElevateOnScroll Color=\"white\" Absolute ScrollTarget=\"#scrolling-sheet-2\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n        <MAppBarTitle>Title</MAppBarTitle>\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n\r\n    </MAppBar>\r\n    <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-2\">\r\n        <MContainer Style=\"height: 1500px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
         "Type": "Demos.Components.Bars.children.AppBar.props.ElevateOnScroll",
         "Style": "",
         "Debug": false,
@@ -479,9 +479,9 @@
       {
         "Order": 0,
         "Name": "fadeImageOnScroll",
-        "Title": "fade",
+        "Title": "Fade image on scroll",
         "Description": "<p>The background image of a <code>MAppBar</code> can fade on scroll. Use the <strong>FadeImgOnScroll</strong> property for this.</p>\n",
-        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar Absolute\r\n             Color=\"#6A76AB\"\r\n             Dark\r\n             ShrinkOnScroll\r\n             Prominent\r\n             Src=\"https://picsum.photos/1920/1080?random\"\r\n             FadeImgOnScroll\r\n             ScrollTarget=\"scrolling-sheet-3\">\r\n        <ImgContent>\r\n            <MImage Gradient=\"to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)\"></MImage>\r\n        </ImgContent>\r\n\r\n        <ChildContent>\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MAppBarTitle>Title</MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n\r\n        </ChildContent>\r\n        <ExtensionContent>\r\n            <MTabs AlignWithTitle>\r\n                <MTab>Tab 1</MTab>\r\n                <MTab>Tab 2</MTab>\r\n                <MTab>Tab 3</MTab>\r\n            </MTabs>\r\n        </ExtensionContent>\r\n    </MAppBar>\r\n\r\n    <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-3\">\r\n        <MContainer Style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>\r\n",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar Absolute\r\n             Color=\"#6A76AB\"\r\n             Dark\r\n             ShrinkOnScroll\r\n             Prominent\r\n             Src=\"https://picsum.photos/1920/1080?random\"\r\n             FadeImgOnScroll\r\n             ScrollTarget=\"#scrolling-sheet-3\">\r\n        <ImgContent>\r\n            <MImage Gradient=\"to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)\" @attributes=\"@context\"></MImage>\r\n        </ImgContent>\r\n\r\n        <ChildContent>\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MAppBarTitle>Title</MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n\r\n        </ChildContent>\r\n        <ExtensionContent>\r\n            <MTabs AlignWithTitle>\r\n                <MTab>Tab 1</MTab>\r\n                <MTab>Tab 2</MTab>\r\n                <MTab>Tab 3</MTab>\r\n            </MTabs>\r\n        </ExtensionContent>\r\n    </MAppBar>\r\n\r\n    <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-3\">\r\n        <MContainer Style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
         "Type": "Demos.Components.Bars.children.AppBar.props.FadeImageOnScroll",
         "Style": "",
         "Debug": false,
@@ -490,9 +490,9 @@
       {
         "Order": 0,
         "Name": "hiddenOnScroll",
-        "Title": "hidden",
+        "Title": "Hidden on scroll",
         "Description": "<p><code>MAppBar</code> can be hidden on scroll. Use the <strong>HideOnScroll</strong> property for this.</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCard Class=\"overflow-hidden\">\r\n        <MAppBar Color=\"teal lighten-3\" Dark Prominent HideOnScroll Absolute ScrollTarget=\"scrolling-sheet-4\">\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MAppBarTitle>Hide On Scroll </MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n\r\n        </MAppBar>\r\n        <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-4\">\r\n            <MContainer Style=\"height: 1000px;\"></MContainer>\r\n        </MSheet>\r\n    </MCard>\r\n</MContainer>\r\n",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar Color=\"teal lighten-3\" Dark Prominent HideOnScroll Absolute ScrollTarget=\"#scrolling-sheet-4\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n        <MAppBarTitle>Title</MAppBarTitle>\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n\r\n    </MAppBar>\r\n    <MSheet Class=\"overflow-y-auto\" MaxHeight=\"600\" Id=\"scrolling-sheet-4\">\r\n        <MContainer Style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
         "Type": "Demos.Components.Bars.children.AppBar.props.HiddenOnScroll",
         "Style": "",
         "Debug": false,
@@ -503,7 +503,7 @@
         "Name": "images",
         "Title": "images",
         "Description": "<p><code>MAppBar</code> can contain background images. You can set source via the <strong>Src</strong> prop. If you need to customize the <code>MImage</code>, the app-bar provides you with an <strong>ImgContent</strong> slot.</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCard Class=\"overflow-hidden\">\r\n        Todo...\r\n        <MSheet Class=\"overflow-y-auto\" Color=\"white\" Elevation=\"1\" MaxHeight=\"600\" Id=\"scrolling-sheet-5\">\r\n            <MContainer Style=\"height: 1000px;\"></MContainer>\r\n        </MSheet>\r\n    </MCard>\r\n</MContainer>\r\n\r\n@code {\r\n\r\n}",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar Absolute\r\n             Color=\"#fcb69f\"\r\n             Dark\r\n             ShrinkOnScroll\r\n             Src=\"https://picsum.photos/1920/1080?random\"\r\n             ScrollTarget=\"#scrolling-techniques-5\">\r\n        <ImgContent>\r\n            <MImage Gradient=\"to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)\" @attributes=\"@context\"></MImage>\r\n        </ImgContent>\r\n\r\n        <ChildContent>\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MAppBarTitle>Title</MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n        </ChildContent>\r\n    </MAppBar>\r\n    <MSheet Class=\"overflow-y-auto\" Color=\"white\" Elevation=\"1\" MaxHeight=\"600\" Id=\"scrolling-techniques-5\">\r\n        <MContainer Style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
         "Type": "Demos.Components.Bars.children.AppBar.props.Images",
         "Style": "",
         "Debug": false,
@@ -514,7 +514,7 @@
         "Name": "inverted",
         "Title": "inverted",
         "Description": "<p>When using the <strong>InvertedScroll</strong> property, the bar will hide until the user scrolls past the designated threshold. Once\npast the threshold, the <code>MAppBar</code> will continue to display until the users scrolls up past the threshold. If no **\nScrollThreshold** value is supplied a default value of 0 will be used.</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCard Class=\"overflow-hidden\">\r\n        <MAppBar InvertedScroll Absolute ScrollTarget=\"scrolling-sheet-6\">\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MAppBarTitle>Inverted Scrolling </MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n\r\n        </MAppBar>\r\n        <MSheet Class=\"overflow-y-auto\" Color=\"white\" MaxHeight=\"600\" Id=\"scrolling-sheet-6\">\r\n            <MContainer Style=\"height: 1000px;\"></MContainer>\r\n        </MSheet>\r\n    </MCard>\r\n</MContainer>\r\n\r\n@code {\r\n\r\n}",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar Absolute\r\n             Color=\"primary\"\r\n             Dark\r\n             InvertedScroll\r\n             ScrollTarget=\"#scrolling-techniques-8\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MAppBarTitle>Title</MAppBarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n\r\n    </MAppBar>\r\n    <MSheet Id=\"scrolling-techniques-8\"\r\n            Class=\"overflow-y-auto\"\r\n            MaxHeight=\"600\">\r\n        <MContainer Style=\"height: 1500px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
         "Type": "Demos.Components.Bars.children.AppBar.props.Inverted",
         "Style": "",
         "Debug": false,
@@ -525,7 +525,7 @@
         "Name": "prominent",
         "Title": "prominent",
         "Description": "<p>An <code>MAppBar</code> with the <strong>Prominent</strong> prop can opt to have its height shrunk as the user scrolls down. This provides a\nsmooth transition to taking up less visual space when the user is scrolling through content. Shrink height has 2\npossible options, <strong>Dense</strong> (48px) and <strong>Short</strong> (56px) sizes.</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCard Class=\"overflow-hidden\">\r\n        <MAppBar ShrinkOnScroll Absolute ScrollTarget=\"scrolling-sheet-7\">\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MAppBarTitle>Inverted Scrolling </MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n\r\n        </MAppBar>\r\n        <MSheet Class=\"overflow-y-auto\" Color=\"white\" MaxHeight=\"600\" Id=\"scrolling-sheet-7\">\r\n            <MContainer Style=\"height: 1000px;\"></MContainer>\r\n        </MSheet>\r\n    </MCard>\r\n</MContainer>\r\n\r\n@code {\r\n\r\n}",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar\r\n        Absolute\r\n        Color=\"indigo darken-2\"\r\n        Dark\r\n        ShrinkOnScroll\r\n        prominent\r\n        ScrollTarget=\"#scrolling-techniques\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MAppBarTitle>Title</MAppBarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n    </MAppBar>\r\n    <MSheet\r\n        Id=\"scrolling-techniques\"\r\n        Class=\"overflow-y-auto\"\r\n        MaxHeight=\"600\">\r\n        <MContainer style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
         "Type": "Demos.Components.Bars.children.AppBar.props.Prominent",
         "Style": "",
         "Debug": false,
@@ -534,9 +534,9 @@
       {
         "Order": 0,
         "Name": "scrollThreshold",
-        "Title": "Scroll Threshold",
+        "Title": "Scroll threshold",
         "Description": "<p><code>MAppBar</code> can have scroll threshold. It will start reacting to scroll only after defined via <strong>ScrollThreshold</strong>\nproperty amount of pixels.</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCard Class=\"overflow-hidden\">\r\n        <MAppBar ShrinkOnScroll ScrollThreshold=\"200\" Absolute ScrollTarget=\"scrolling-sheet-8\">\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MAppBarTitle>ScrollThreshold </MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n\r\n        </MAppBar>\r\n        <MSheet Class=\"overflow-y-auto\" Color=\"white\" MaxHeight=\"600\" Id=\"scrolling-sheet-8\">\r\n            <MContainer Style=\"height: 1000px;\"></MContainer>\r\n        </MSheet>\r\n    </MCard>\r\n</MContainer>\r\n\r\n@code   {\r\n\r\n}",
+        "Code": "<MCard class=\"overflow-hidden\">\r\n    <MAppBar\r\n        Absolute\r\n        Color=\"#43a047\"\r\n        Dark\r\n        ShrinkOnScroll\r\n        Prominent\r\n        Src=\"https://picsum.photos/1920/1080?random\"\r\n        FadeImgOnScroll\r\n        ScrollTarget=\"#scrolling-techniques-55\"\r\n        ScrollThreshold=\"500\">\r\n        <ImgContent>\r\n            <MImage\r\n                @attributes=\"context\"\r\n                Gradient=\"to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)\">\r\n            </MImage>\r\n        </ImgContent>\r\n\r\n        <ChildContent>\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n            <MAppBarTitle>Title</MAppBarTitle>\r\n\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n        </ChildContent>\r\n    </MAppBar>\r\n    <MSheet Id=\"scrolling-techniques-55\"\r\n            Class=\"overflow-y-auto\"\r\n            MaxHeight=\"600\">\r\n        <MContainer style=\"height: 1500px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>",
         "Type": "Demos.Components.Bars.children.AppBar.props.ScrollThreshold",
         "Style": "",
         "Debug": false,
@@ -545,9 +545,9 @@
       {
         "Order": 1,
         "Name": "menu",
-        "Title": "Menu(TODO)",
+        "Title": "Menu",
         "Description": "<p>You can easily extend the functionality of app bar by adding <strong>MMenu</strong> there. Click on last icon to see it in action.</p>\n",
-        "Code": "<div>\r\n    TODO...\r\n</div>",
+        "Code": "<MCard Class=\"overflow-hidden\">\r\n    <MAppBar\r\n        Absolute\r\n        Color=\"#6A76AB\"\r\n        Dark\r\n        ShrinkOnScroll\r\n        Prominent\r\n        Src=\"https://picsum.photos/1920/1080?random\"\r\n        FadeImgOnScroll\r\n        ScrollTarget=\"#scrolling-techniques-4\">\r\n        <ImgContent>\r\n            <MImage\r\n                @attributes=\"@context\"\r\n                Gradient=\"to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)\">\r\n            </MImage>\r\n        </ImgContent>\r\n\r\n        <ChildContent>\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n            <MToolbarTitle>Title</MToolbarTitle>\r\n\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n\r\n            <MMenu\r\n                Bottom\r\n                Left>\r\n                <ActivatorContent>\r\n                    <MButton\r\n                        Icon\r\n                        Color=\"yellow\"\r\n                        @attributes=\"@context.Attrs\">\r\n                        <MIcon>mdi-dots-vertical</MIcon>\r\n                    </MButton>\r\n                </ActivatorContent>\r\n\r\n                <ChildContent>\r\n                    <MList>\r\n                        @foreach (var item in items)\r\n                        {\r\n                            <MListItem>\r\n                                <MListItemTitle>@item</MListItemTitle>\r\n                            </MListItem>\r\n                        }\r\n                    </MList>\r\n                </ChildContent>\r\n            </MMenu>\r\n        </ChildContent>\r\n\r\n        <ExtensionContent>\r\n            <MTabs AlignWithTitle>\r\n                <MTab>Tab 1</MTab>\r\n                <MTab>Tab 2</MTab>\r\n                <MTab>Tab 3</MTab>\r\n            </MTabs>\r\n        </ExtensionContent>\r\n    </MAppBar>\r\n    <MSheet\r\n        id=\"scrolling-techniques-4\"\r\n        Class=\"overflow-y-auto\"\r\n        MaxHeight=\"600\">\r\n        <MContainer Style=\"height: 1000px;\"></MContainer>\r\n    </MSheet>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    readonly List<string> items = new()\r\n    {\r\n        \"Click Me\",\r\n        \"Click Me\",\r\n        \"Click Me\",\r\n        \"Click Me 2\",\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Bars.children.AppBar.misc.Menu",
         "Style": "",
         "Debug": false,
@@ -558,7 +558,7 @@
         "Name": "toggleNavigationDrawers",
         "Title": "Toggle navigation drawers",
         "Description": "<p>Using the functional component <code>MAppBarNavIcon</code> you can toggle the state of other components such as\na <code>MNavigationDrawer</code>.</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCard class=\"mx-auto overflow-hidden\" Height=\"400\">\r\n        <MAppBar Absolute>\r\n            <MAppBarNavIcon @onclick=\"() => drawer=true\"></MAppBarNavIcon>\r\n            <MAppBarTitle>Others </MAppBarTitle>\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-heart</MIcon>\r\n            </MButton>\r\n\r\n\r\n            <MMenu NudgeBottom=\"8\" Bottom Left>\r\n                <ActivatorContent>\r\n                    <MButton Icon @attributes=\"@context.Attrs\">\r\n                        <MIcon>mdi-dots-vertical</MIcon>\r\n                    </MButton>\r\n                </ActivatorContent>\r\n\r\n                <ChildContent>\r\n                    <MList>\r\n                        <MListItemGroup>\r\n                            @foreach (var item in titles)\r\n                            {\r\n                                <MListItem>\r\n                                    <MListItemContent>\r\n                                        <MListItemTitle>\r\n                                            @item\r\n                                        </MListItemTitle>\r\n                                    </MListItemContent>\r\n                                </MListItem>\r\n                            }\r\n                        </MListItemGroup>\r\n                    </MList>\r\n                </ChildContent>\r\n            </MMenu>\r\n\r\n        </MAppBar>\r\n\r\n        <MNavigationDrawer Absolute Temporary @bind-Value=\"drawer\">\r\n            <MList Nav Dense>\r\n                <MListItemGroup>\r\n                    <MListItem>\r\n                        <MListItemIcon>\r\n                            <MIcon>mdi-home</MIcon>\r\n                        </MListItemIcon>\r\n                        <MListItemTitle>\r\n                            Home\r\n                        </MListItemTitle>\r\n                    </MListItem>\r\n                    <MListItem>\r\n                        <MListItemIcon>\r\n                            <MIcon>mdi-account</MIcon>\r\n                        </MListItemIcon>\r\n                        <MListItemTitle>\r\n                            Account\r\n                        </MListItemTitle>\r\n                    </MListItem>\r\n                </MListItemGroup>\r\n            </MList>\r\n        </MNavigationDrawer>\r\n\r\n    </MCard>\r\n</MContainer>\r\n\r\n@code {\r\n    bool drawer = false;\r\n    string[] titles =\r\n    {\r\n    \"Click Me\",\r\n    \"Click Me\",\r\n    \"Click Me\",\r\n    \"Click Me 2\"\r\n    };\r\n}",
+        "Code": "<MCard\r\n    Class=\"mx-auto overflow-hidden\"\r\n    Height=\"400\">\r\n    <MAppBar\r\n        Color=\"deep-purple\"\r\n        Dark>\r\n        <MAppBarNavIcon @onclick=\"() => drawer = true\"></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Title</MToolbarTitle>\r\n    </MAppBar>\r\n\r\n    <MNavigationDrawer\r\n        @bind-Value=\"drawer\"\r\n        Absolute\r\n        Temporary>\r\n        <MList\r\n            Nav\r\n            Dense>\r\n            <MListItemGroup\r\n                @bind-Value=\"group\"\r\n                ActiveClass=\"deep-purple--text text--accent-4\">\r\n                <MListItem>\r\n                    <MListItemIcon>\r\n                        <MIcon>mdi-home</MIcon>\r\n                    </MListItemIcon>\r\n                    <MListItemTitle>Home</MListItemTitle>\r\n                </MListItem>\r\n\r\n                <MListItem>\r\n                    <MListItemIcon>\r\n                        <MIcon>mdi-account</MIcon>\r\n                    </MListItemIcon>\r\n                    <MListItemTitle>Account</MListItemTitle>\r\n                </MListItem>\r\n            </MListItemGroup>\r\n        </MList>\r\n    </MNavigationDrawer>\r\n</MCard>\r\n\r\n@code {\r\n    bool drawer;\r\n    StringNumber group;\r\n}",
         "Type": "Demos.Components.Bars.children.AppBar.misc.ToggleNavigationDrawers",
         "Style": "",
         "Debug": false,
@@ -574,7 +574,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:49.5728856+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0776289+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -641,7 +641,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:53.5588656+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0816266+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -785,7 +785,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-09-03T18:29:09.2179422+08:00",
+    "LastWriteTime": "2021-10-13T10:44:46.0873838+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -823,7 +823,7 @@
       "API": "\n<ul>\n<li><a href=\"/docs/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/docs/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>By default <code>MBreadcrumbs</code> will disable the linkage with router. You can enable the feature by using *<em>Linkage</em> prop.</p>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:53.4608659+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0836279+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -905,7 +905,7 @@
       "API": "\n<ul>\n<li><a href=\"/docs/api/MButton\">MButton</a></li>\n<li><a href=\"/docs/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>MButton</code> is the only component that behaves differently when using the <strong>Dark</strong> prop. Normally components use the <strong>Dark</strong> prop to denote that they have a dark colored background and need their text to be white. While this will work\nfor <code>MButton</code>, it is advised to only use the prop when the button <strong>IS ON</strong> a colored background due to the disabled state\nblending in with white backgrounds. If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2021-11-18T09:22:16.3088349+08:00",
+    "LastWriteTime": "2021-11-17T17:29:52.1597474+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1063,7 +1063,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MCard\">MCard</a></li>\n<li><a href=\"/docs/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/docs/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/docs/api/MCardText\">MCardText</a></li>\n<li><a href=\"/docs/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.6188862+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0886273+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1208,7 +1208,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chips.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:49.6218858+08:00",
+    "LastWriteTime": "2021-11-16T17:18:10.0838705+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1385,7 +1385,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-05T15:50:04.4912214+08:00",
+    "LastWriteTime": "2021-10-29T14:11:50.7074219+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1508,7 +1508,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Dividers.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:53.4428661+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0916273+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1576,7 +1576,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-08-23T17:55:09.6332593+08:00",
+    "LastWriteTime": "2021-10-13T10:44:46.1023469+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1602,7 +1602,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/docs/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/docs/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/docs/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:04.4602205+08:00",
+    "LastWriteTime": "2021-11-02T09:37:52.1130132+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1724,7 +1724,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:30:36.1310932+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6580013+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1792,7 +1792,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Autocomplete.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:30:36.1360957+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6590057+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1837,7 +1837,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-24T14:42:47.282503+08:00",
+    "LastWriteTime": "2021-11-24T18:45:49.2469595+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1873,7 +1873,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/en-US/docs/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/en-US/docs/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1450934+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.8350159+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1952,7 +1952,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/FileInput.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:30:36.1580928+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.8319996+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2075,7 +2075,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/From.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-05T15:50:00.0832747+08:00",
+    "LastWriteTime": "2021-10-18T13:07:46.3764354+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2123,7 +2123,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MRadio\">MRadio</a></li>\n<li><a href=\"/docs/api/MRadioGroup\">MRadio</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1630935+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.7990006+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2191,7 +2191,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/RangeSliders.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:30:36.1680952+08:00",
+    "LastWriteTime": "2021-11-12T14:06:48.9354207+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2269,7 +2269,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-05T15:50:00.1132746+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2400602+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2392,7 +2392,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sliders.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:30:36.192094+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.7730007+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2572,7 +2572,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-23T16:08:41.2566763+08:00",
+    "LastWriteTime": "2021-11-23T18:27:44.4298634+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2662,7 +2662,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Textareas.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:30:36.2090943+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.7110144+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2785,7 +2785,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TextField.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:30:36.233094+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6990026+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3055,7 +3055,7 @@
       "Outline": "\n<p>In the grid system, we define the frame outside the information area based on row and column, to ensure that every area can have stable arrangement.</p>\n<p>Following is a brief look at how it works:</p>\n<ul>\n<li>Establish a set of column in the horizontal space defined by row (abbreviated col)</li>\n<li>Your content elements should be placed directly in the col, and only col should be placed directly in row</li>\n<li>The column grid system is a value of 1-24 to represent its range spans. For example, three columns of equal width can be created by <Col span={8} />.</li>\n<li>If the sum of col spans in a row are more than 24, then the overflowing col as a whole will start a new line arrangement.</li>\n</ul>\n<p>Our grid systems base on Flex layout to allow the elements within the parent to be aligned horizontally - left, center, right, wide arrangement, and decentralized arrangement. The Grid system also supports vertical alignment - top aligned, vertically centered, bottom-aligned. You can also define the order of elements by using order.</p>\n<p>Layout uses a 24 grid layout to define the width of each &quot;box&quot;, but does not rigidly adhere to the grid layout.</p>\n",
       "API": "\n<p>Row</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>align</td>\n<td>the vertical alignment of the flex layout:：<code>top</code> <code>middle</code> <code>bottom</code></td>\n<td>string</td>\n<td>top</td>\n</tr>\n<tr>\n<td>gutter</td>\n<td>spacing between grids, could be a number or a object like { xs: 8, sm: 16, md: 24}. or you can use array to make horizontal and vertical spacing work at the same time <code>[horizontal, vertical]</code> (supported after 1.5.0)</td>\n<td>number, object, array</td>\n<td>0</td>\n</tr>\n<tr>\n<td>justify</td>\n<td>horizontal arrangement of the flex layout:<code>start</code> <code>end</code> <code>center</code> <code>space-around</code> <code>space-between</code></td>\n<td>string</td>\n<td>start</td>\n</tr>\n<tr>\n<td>type</td>\n<td>layout mode, optional <code>flex</code>， browser support</td>\n<td>string</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>Col</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>offset</td>\n<td>the number of cells to offset Col from the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>order</td>\n<td>raster order, used in flex layout mode</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>pull</td>\n<td>the number of cells that raster is moved to the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>push</td>\n<td>the number of cells that raster is moved to the right</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>span</td>\n<td>raster number of cells to occupy, 0 corresponds to  <code>display: none</code></td>\n<td>string</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xs</td>\n<td><code>&lt;576px</code> and also default setting, could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>sm</td>\n<td><code>≥576px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>md</td>\n<td><code>≥768px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>lg</td>\n<td><code>≥992px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xl</td>\n<td><code>≥1200px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xxl</td>\n<td><code>≥1600px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>The breakpoints of responsive grid follow BootStrap 4 media queries rules(not including <code>occasionally</code> part).</p>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:52.0838728+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8305896+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3279,7 +3279,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/docs/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.6938761+08:00",
+    "LastWriteTime": "2021-11-12T13:39:37.8809032+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3358,7 +3358,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chip.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-05T15:50:00.2032724+08:00",
+    "LastWriteTime": "2021-11-03T16:49:05.8906094+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3439,7 +3439,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MItem\">MItem</a></li>\n<li><a href=\"/docs/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:00.2182728+08:00",
+    "LastWriteTime": "2021-11-04T13:34:00.0771991+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3519,7 +3519,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/docs/api/MListItem\">MListItem</a></li>\n<li><a href=\"/docs/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/docs/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/docs/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/docs/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/docs/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/docs/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/docs/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.6278755+08:00",
+    "LastWriteTime": "2021-11-12T13:39:38.0698762+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3599,7 +3599,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/docs/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.6198754+08:00",
+    "LastWriteTime": "2021-11-12T13:39:38.0618742+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3690,7 +3690,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MWindow\">MWindow</a></li>\n<li><a href=\"/docs/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.2038776+08:00",
+    "LastWriteTime": "2021-11-12T13:39:37.8828831+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3768,7 +3768,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:51.5758771+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8325907+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3827,7 +3827,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.4958755+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8345908+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3894,7 +3894,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:51.4798759+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8375904+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3984,7 +3984,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:49.811884+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8385907+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4185,7 +4185,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:03.3062352+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2440968+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4352,7 +4352,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:17:58.2721746+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8246057+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4474,7 +4474,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.8122983+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8256046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4523,8 +4523,8 @@
       {
         "Order": 4,
         "Name": "Advanced",
-        "Title": "悬停",
-        "Description": "<p>Using the <code>MHover</code>, we are able to add a nice scrim over the information card with additional actions the user can take.</p>\n",
+        "Title": "Advanced",
+        "Description": "<p>Using the <a href=\"/components/hover\">MHover</a>, we are able to add a nice scrim over the information card with additional actions the user can take.</p>\n",
         "Code": "<MHover>\r\n    <MCard @attributes=\"context.Attrs\" Class=\"mx-auto\"\r\n           MaxWidth=\"344\">\r\n        <MImage Src=\"https://cdn.vuetifyjs.com/images/cards/forest-art.jpg\"></MImage>\r\n\r\n        <MCardText>\r\n            <h2 class=\"text-h6 primary--text\">\r\n                Magento Forests\r\n            </h2>\r\n            Travel to the best outdoor experience on planet Earth. A vacation you will never forget!\r\n        </MCardText>\r\n\r\n        <MCardTitle>\r\n            <MRating Value=\"4\"\r\n                     Dense\r\n                     Color=\"orange\"\r\n                     BackgroundColor=\"orange\"\r\n                     Hover\r\n                     Class=\"mr-2\"></MRating>\r\n            <span class=\"primary--text text-subtitle-2\">64 Reviews</span>\r\n        </MCardTitle>\r\n\r\n        <FadeTransition>\r\n            <Element Show=\"@context.Hover\" Class=\"text-center\">\r\n                <MOverlay Absolute Value=\"@context.Hover\"\r\n                          Color=\"#036358\">\r\n                    <MButton>See more info</MButton>\r\n                </MOverlay>\r\n            </Element>\r\n        </FadeTransition>\r\n    </MCard>\r\n</MHover>",
         "Type": "Demos.Components.Overlay.misc.Advanced",
         "Style": "",
@@ -4552,7 +4552,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.8012987+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.827605+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4631,7 +4631,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ColorPicker.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.0213047+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8296041+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4710,7 +4710,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickers.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:17:58.306173+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8326032+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4943,7 +4943,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:17:58.3101739+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8346068+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5077,7 +5077,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TimePickers.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:17:58.3331731+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8366046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5242,7 +5242,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.3653055+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8376032+08:00",
     "DemoList": [
       {
         "Order": 20,
@@ -5320,7 +5320,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.7362988+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8406035+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5387,7 +5387,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.7222979+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8456135+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5542,7 +5542,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:17:58.3711741+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.167907+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5643,7 +5643,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sheet.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.6822982+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8466114+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -5691,7 +5691,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T10:44:03.0314876+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0756929+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5725,7 +5725,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.6722983+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1699113+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5788,19 +5788,21 @@
   {
     "Title": "Stepper",
     "Type": "Stepper",
-    "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
+    "Desc": "<p>The <code>MStepper</code> component displays progress through numbered steps.</p>\n",
     "Cols": 1,
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Stepper.svg",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.6582989+08:00",
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/docs/api/MStepper\">MStepper</a></li>\n<li><a href=\"/docs/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/docs/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/docs/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/docs/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2021-11-15T13:32:23.1739081+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "index",
         "Title": "Usage",
         "Description": "<p>A stepper can be used for a multitude of scenarios, including shopping carts, record creation and more.</p>\n",
-        "Code": "<MStepper Value=\"_step\">\r\n    <MStepperHeader>\r\n        <MStepperStep Step=\"1\" Complete=\"_step>1\">\r\n            Name of step 1\r\n        </MStepperStep>\r\n        <MDivider></MDivider>\r\n        <MStepperStep Step=\"2\" Complete=\"_step>2\" Editable>\r\n            Name of step 2\r\n        </MStepperStep>\r\n        <MDivider></MDivider>\r\n        <MStepperStep Step=\"3\" Editable>\r\n            Name of step 3\r\n        </MStepperStep>\r\n    </MStepperHeader>\r\n\r\n    <MStepperItems>\r\n        <MStepperContent Step=\"1\">\r\n            <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n            <MButton Color=\"primary\" OnClick=\"()=>_step=2\">Continue</MButton>\r\n            <MButton Text>Cancel</MButton>\r\n        </MStepperContent>\r\n        <MStepperContent Step=\"2\">\r\n            <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n            <MButton Color=\"primary\" OnClick=\"()=>_step=3\">Continue</MButton>\r\n            <MButton Text>Cancel</MButton>\r\n        </MStepperContent>\r\n        <MStepperContent Step=\"3\">\r\n            <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n            <MButton Color=\"primary\" OnClick=\"()=>_step=1\">Continue</MButton>\r\n            <MButton Text>Cancel</MButton>\r\n        </MStepperContent>\r\n    </MStepperItems>\r\n</MStepper>\r\n\r\n@code {\r\n    private int _step = 1;\r\n}",
+        "Code": "<MStepper Value=\"_step\">\r\n    <MStepperHeader>\r\n        <MStepperStep Step=\"1\" Complete=\"_step>1\">\r\n            Name of step 1\r\n        </MStepperStep>\r\n        <MDivider></MDivider>\r\n        <MStepperStep Step=\"2\" Complete=\"_step>2\">\r\n            Name of step 2\r\n        </MStepperStep>\r\n        <MDivider></MDivider>\r\n        <MStepperStep Step=\"3\">\r\n            Name of step 3\r\n        </MStepperStep>\r\n    </MStepperHeader>\r\n\r\n    <MStepperItems>\r\n        <MStepperContent Step=\"1\">\r\n            <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n            <MButton Color=\"primary\" OnClick=\"()=>_step=2\">Continue</MButton>\r\n            <MButton Text>Cancel</MButton>\r\n        </MStepperContent>\r\n        <MStepperContent Step=\"2\">\r\n            <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n            <MButton Color=\"primary\" OnClick=\"()=>_step=3\">Continue</MButton>\r\n            <MButton Text>Cancel</MButton>\r\n        </MStepperContent>\r\n        <MStepperContent Step=\"3\">\r\n            <MCard Class=\"mb-12\" Height=\"200\" Color=\"grey lighten-1\"></MCard>\r\n            <MButton Color=\"primary\" OnClick=\"()=>_step=1\">Continue</MButton>\r\n            <MButton Text>Cancel</MButton>\r\n        </MStepperContent>\r\n    </MStepperItems>\r\n</MStepper>\r\n\r\n@code {\r\n    private int _step = 1;\r\n}",
         "Type": "Demos.Components.Stepper.usage.Index",
         "Style": "",
         "Debug": false,
@@ -5844,7 +5846,7 @@
         "Name": "alternativeLabelWithErrors",
         "Title": "Alternative label with errors",
         "Description": "<p>The error state can also be applied to the alternative label style.</p>\n",
-        "Code": "<MStepper AltLabels>\r\n    <MStepperHeader>\r\n        <MStepperStep Step=\"3\"\r\n                      complete>\r\n            Ad type\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Step=\"4\"\r\n                      complete>\r\n            Ad style\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Rules=\"rules\"\r\n                      Step=\"5\">\r\n            Custom channels\r\n            <small>Alert message</small>\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Step=\"6\">\r\n            Get code\r\n        </MStepperStep>\r\n    </MStepperHeader>\r\n</MStepper>\r\n\r\n@code {\r\n    List<Func<bool>> rules = new List<Func<bool>>() { Rule};\r\n    private static bool Rule()\r\n    {\r\n        return false;\r\n    }\r\n}\r\n",
+        "Code": "<MStepper AltLabels>\r\n    <MStepperHeader>\r\n        <MStepperStep Step=\"3\"\r\n                      complete>\r\n            Ad type\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Step=\"4\"\r\n                      complete>\r\n            Ad style\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Rules=\"rules\"\r\n                      Step=\"5\">\r\n            Custom channels\r\n            <small>Alert message</small>\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Step=\"6\">\r\n            Get code\r\n        </MStepperStep>\r\n    </MStepperHeader>\r\n</MStepper>\r\n\r\n@code {\r\n    List<Func<bool>> rules = new() { Rule };\r\n    \r\n    private static bool Rule()\r\n    {\r\n        return false;\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.Stepper.misc.AlternativeLabelWithErrors",
         "Style": "",
         "Debug": false,
@@ -5877,7 +5879,7 @@
         "Name": "errors",
         "Title": "Errors",
         "Description": "<p>An error state can be displayed to notify the user of some action that must be taken.</p>\n",
-        "Code": "<MStepper>\r\n    <MStepperHeader>\r\n        <MStepperStep Step=\"1\">\r\n            Ad unit details\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Rules=\"rules\"\r\n                      Step=\"2\">\r\n            Ad templates\r\n            <small>Alert message</small>\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Step=\"3\">\r\n            Ad sizes\r\n        </MStepperStep>\r\n    </MStepperHeader>\r\n</MStepper>\r\n\r\n@code {\r\n    List<Func<bool>> rules = new List<Func<bool>>() { Rule };\r\n    private static bool Rule()\r\n    {\r\n        return false;\r\n    }\r\n}\r\n",
+        "Code": "<MStepper>\r\n    <MStepperHeader>\r\n        <MStepperStep Step=\"1\">\r\n            Ad unit details\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Rules=\"rules\"\r\n                      Step=\"2\">\r\n            Ad templates\r\n            <small>Alert message</small>\r\n        </MStepperStep>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MStepperStep Step=\"3\">\r\n            Ad sizes\r\n        </MStepperStep>\r\n    </MStepperHeader>\r\n</MStepper>\r\n\r\n@code {\r\n    List<Func<bool>> rules = new() { Rule };\r\n\r\n    private static bool Rule()\r\n    {\r\n        return false;\r\n    }\r\n}",
         "Type": "Demos.Components.Stepper.misc.Errors",
         "Style": "",
         "Debug": false,
@@ -5948,7 +5950,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.6112992+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6015,7 +6017,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataIterators.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.5952995+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6061,7 +6063,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataTable.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-17T17:33:50.2071767+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0826969+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6316,7 +6318,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SimpleTables.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-17T17:33:50.164177+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0836945+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6386,7 +6388,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MTabs\">MTabs</a></li>\n<li><a href=\"/docs/api/MTab\">MTab</a></li>\n<li><a href=\"/docs/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/docs/api/MTabsItems\">MTabsItems</a></li>\n<li><a href=\"/docs/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:02.5722433+08:00",
+    "LastWriteTime": "2021-11-18T17:20:09.724454+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6574,7 +6576,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-17T17:33:50.146178+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0886948+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6699,7 +6701,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MTooltip\">MTooltip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:02.6882435+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2450964+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6745,7 +6747,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Treeview.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-25T14:31:26.5721881+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0936951+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6933,7 +6935,7 @@
     "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-17T17:33:50.0811781+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0946935+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6970,7 +6972,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/docs/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-18T09:22:16.1528287+08:00",
+    "LastWriteTime": "2021-11-17T14:30:00.36988+08:00",
     "DemoList": [
       {
         "Order": 0,

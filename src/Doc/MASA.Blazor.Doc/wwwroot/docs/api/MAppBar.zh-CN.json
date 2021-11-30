@@ -227,7 +227,7 @@
     },
     {
       "Name": "ScrollThreshold",
-      "Type": "Int32",
+      "Type": "Double",
       "Default": "0",
       "Description": ""
     },
