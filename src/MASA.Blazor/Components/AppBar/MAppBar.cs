@@ -5,27 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlazorComponent;
+using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using OneOf;
 using Element = BlazorComponent.Web.Element;
 
 namespace MASA.Blazor
 {
-    public partial class MAppBar : MToolbar, IScrollable, IThemeable
+    public partial class MAppBar : MToolbar, IScrollable, IThemeable, IAsyncDisposable
     {
-        private string elevateClass = "m-app-bar--hide-shadow";
-
-        private string collapseClass = "m-toolbar--collapse";
-
-        private string hideScrollClass = "";
-
-        private string invertedClass = "m-app-bar--hide-shadow";
-
-        private string shrinkClass = "v-app-bar--shrink-on-scroll";
-
-        //状态记录标识
-        private bool isElevated, isCollapsed, isHided, isShrinked, isInverted, shouldUpdateState;
+        private bool _isScrollingUp;
+        private bool _isActive;
+        private Scroller _scroller;
 
         [Parameter]
         public bool App { get; set; }
@@ -54,8 +47,11 @@ namespace MASA.Blazor
         public bool CollapseOnScroll { get; set; }
 
         [Parameter]
-        public string ScrollTarget { get; set; }
+        public string ScrollTarget { get; set; } = "window";
 
+        /// <summary>
+        /// Elevates the app-bar when scrolling.
+        /// </summary>
         [Parameter]
         public bool ElevateOnScroll { get; set; }
 
@@ -72,7 +68,9 @@ namespace MASA.Blazor
         public bool ShrinkOnScroll { get; set; }
 
         [Parameter]
-        public int ScrollThreshold { get; set; } = 20;
+        public double ScrollThreshold { get; set; }
+
+        public HtmlElement Target { get; set; }
 
         [Parameter]
         public bool ScrollOffScreen { get; set; }
@@ -81,118 +79,34 @@ namespace MASA.Blazor
         public bool Value { get; set; } = true;
 
         [Inject]
-        public DomEventJsInterop DomEventJsInterop { get; set; }
+        public Document Document { get; set; }
 
         [Inject]
         public GlobalConfig GlobalConfig { get; set; }
 
-        private bool _isActive => Value;
-
-        #region  IScrollable
-        public int CurrentScroll { get; private set; }
-
-        public int SavedScroll { get; private set; }
-
-        public void Scrolling()
+        protected override void OnInitialized()
         {
-            if (ElevateOnScroll)
+            base.OnInitialized();
+
+            Target = Document.QuerySelector(ScrollTarget);
+
+            _scroller = new Scroller(this)
             {
-
-                if (CurrentScroll <= ScrollThreshold && isElevated)
-                {
-                    elevateClass = "m-app-bar--hide-shadow";
-                    isElevated = false;
-                    shouldUpdateState = true;
-                }
-
-                if (CurrentScroll > ScrollThreshold && !isElevated)
-                {
-                    elevateClass = "m-app-bar--is-scrolled";
-                    isElevated = true;
-                    shouldUpdateState = true;
-                }
-
-            }
-
-            if (!Collapse && CollapseOnScroll)
-            {
-                if (CurrentScroll <= ScrollThreshold && isCollapsed)
-                {
-                    collapseClass = "m-toolbar--collapse";
-                    shouldUpdateState = true;
-                    isCollapsed = false;
-                }
-                if (CurrentScroll > ScrollThreshold && !isCollapsed)
-                {
-                    collapseClass = "m-toolbar--collapse m-toolbar--collapsed m-app-bar--is-scrolled";
-                    shouldUpdateState = true;
-                    isCollapsed = true;
-                }
-
-            }
-
-            if (HideOnScroll)
-            {
-                if (CurrentScroll <= ScrollThreshold && isHided)
-                {
-                    hideScrollClass = "";
-                    Transform = 0;
-                    shouldUpdateState = true;
-                    isHided = false;
-                }
-                if (CurrentScroll > ScrollThreshold && !isHided)
-                {
-                    hideScrollClass = "m-app-bar--hide-shadow m-app-bar--is-scrolled";
-                    Transform = -ComputedHeight.ToInt32();
-                    shouldUpdateState = true;
-                    isHided = true;
-                }
-            }
+                IsActive = Value
+            };
 
             if (InvertedScroll)
             {
-                if (CurrentScroll <= ScrollThreshold && isInverted)
-                {
-                    Transform = -ComputedHeight.ToInt32();
-                    invertedClass = "m-app-bar--hide-shadow";
-                    shouldUpdateState = true;
-                    isInverted = false;
-                }
-                if (CurrentScroll > ScrollThreshold && !isInverted)
-                {
-                    Transform = 0;
-                    invertedClass = "m-app-bar--is-scrolled";
-                    shouldUpdateState = true;
-                    isInverted = true;
-                }
-
+                _scroller.IsActive = false;
             }
 
-            if (ShrinkOnScroll)
-            {
-                if (CurrentScroll <= ScrollThreshold && isShrinked)
-                {
-                    shrinkClass = "m-app-bar--shrink-on-scroll";
-                    Prominent = true;
-                    shouldUpdateState = true;
-                    isShrinked = false;
-                }
-                if (CurrentScroll > ScrollThreshold && !isShrinked)
-                {
-                    shrinkClass = "m-app-bar--is-scrolled m-app-bar--shrink-on-scroll";
-                    Prominent = false;
-                    shouldUpdateState = true;
-                    isShrinked = true;
-                }
-            }
-
-            if (shouldUpdateState)
-            {
-                InvokeStateHasChanged();
-                shouldUpdateState = false;
-            }
+            GlobalConfig.Application.PropertyChanged += Application_PropertyChanged;
         }
-        #endregion
+
+        private void Application_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            InvokeStateHasChanged();
+        }
 
         protected override void SetComponentClass()
         {
@@ -216,148 +130,242 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-app-bar")
                         .AddIf("m-app-bar--clipped", () => ClippedLeft || ClippedRight)
-                        .AddIf("m-app-bar--fixed", () => !Absolute && (App || Fixed))
-                        .AddIf(collapseClass, () => !Collapse && CollapseOnScroll)
+                        .AddIf("m-app-bar--fade-img-on-scroll", () => FadeImgOnScroll)
                         .AddIf("m-app-bar--elevate-on-scroll", () => ElevateOnScroll)
-                        .AddIf(elevateClass, () => ElevateOnScroll)
-                        .AddIf(hideScrollClass, () => HideOnScroll)
-                        .AddIf(invertedClass, () => InvertedScroll)
-                        .AddIf(shrinkClass, () => ShrinkOnScroll);
+                        .AddIf("m-app-bar--fixed", () => !Absolute && (App || Fixed))
+                        .AddIf("m-app-bar--hide-shadow", () => HideShadow)
+                        .AddIf("m-app-bar--is-scrolled", () => _scroller.CurrentScroll > 0)
+                        .AddIf("m-app-bar--shrink-on-scroll", () => ShrinkOnScroll);
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf(() => $"height:{Height.ToUnit()}", () => Height != null)
-                        .AddIf(() => $"margin-top:{MarginTop.ToUnit()}", () => MarginTop != null)
-                        .AddIf(() => $"transform:translateY({Transform}px)", () => Transform != null)
-                        .AddIf(() => $"left:{ComputedLeft.ToUnit()}", () => ComputedLeft != null)
-                        .AddIf(() => $"right:{Right.ToUnit()}", () => Right != null);
-                });
+                        .AddIf(() => $"font-size:{ComputedFontSize.ToUnit("rem")}", () => ComputedFontSize != null)
+                        .Add(() => $"margin-top:{ComputedMarginTop}px")
+                        .Add(() => $"transform:translateY({ComputedTransform}px)")
+                        .Add(() => $"left:{ComputedLeft}px")
+                        .Add(() => $"right:{ComputedRight}px");
+                })
+                .Merge("image",
+                    _ => { },
+                    style => { style.AddIf($"opacity: {ComputedOpacity}", () => ComputedOpacity.HasValue); });
 
             Attributes.Add("data-booted", "true");
         }
 
-        protected override void OnInitialized()
+        protected override void OnParametersSet()
         {
-            base.OnInitialized();
+            base.OnParametersSet();
 
-            GlobalConfig.Application.PropertyChanged += Application_PropertyChanged;
-        }
-
-        private void Application_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            InvokeStateHasChanged();
+            _scroller.ScrollThreshold = ScrollThreshold;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                if (!string.IsNullOrWhiteSpace(ScrollTarget))
+                await Target.AddEventListenerAsync("scroll", CreateEventCallback(async () =>
                 {
-                    DomEventJsInterop.AddEventListener<Element>($"#{ScrollTarget}", "scroll", (e) =>
-                    {
+                    if (!CanScroll) return;
 
-                        SavedScroll = CurrentScroll;
-                        CurrentScroll = (int)e.ScrollTop;
+                    await _scroller.OnScroll(ThresholdMet);
+                }), false);
 
-                        //todo  ScrollThreshold的作用需要明确 是滚动距离触发scrolling的值还是改变appbar状态scrolltop的值 还是只针对shrink-on-scroll有效
-                        //if (Math.Abs(CurrentScroll - SavedScroll) > ScrollThreshold)//(IScrollable)this.ComputedScrollThreshold() 
-                        Scrolling();
-
-                    }, false);
-                }
-                
                 UpdateApplication();
             }
 
             await base.OnAfterRenderAsync(firstRender);
         }
 
+        protected bool CanScroll => InvertedScroll ||
+                                    ElevateOnScroll ||
+                                    HideOnScroll ||
+                                    CollapseOnScroll ||
+                                    GlobalConfig.Application.IsBooted ||
+                                    !Value;
+
+        protected double ScrollRatio
+        {
+            get
+            {
+                var threshold = ComputedScrollThreshold;
+
+                return Math.Max((threshold - _scroller.CurrentScroll) / threshold, 0);
+            }
+        }
+
+        protected override StringNumber ComputedContentHeight
+        {
+            get
+            {
+                if (!ShrinkOnScroll)
+                {
+                    return base.ComputedContentHeight;
+                }
+
+                var min = Dense ? 48 : 56;
+                var max = ComputedOriginalHeight;
+
+                return min + (max - min) * ScrollRatio;
+            }
+        }
+
+        protected StringNumber ComputedFontSize
+        {
+            get
+            {
+                if (!IsProminent) return null;
+
+                var min = 1.25;
+                var max = 1.5;
+
+                return min + (max - min) * ScrollRatio;
+            }
+        }
+
+        protected double ComputedLeft
+        {
+            get
+            {
+                if (!App || ClippedLeft) return 0;
+
+                return GlobalConfig.Application.Left;
+            }
+        }
+
+        protected double ComputedMarginTop
+        {
+            get
+            {
+                if (!App) return 0;
+
+                return GlobalConfig.Application.Bar;
+            }
+        }
+
+        protected double? ComputedOpacity
+        {
+            get
+            {
+                if (!FadeImgOnScroll) return null;
+
+                return ScrollRatio;
+            }
+        }
+
+        protected double ComputedOriginalHeight
+        {
+            get
+            {
+                var height = NumberHelper.ParseInt(base.ComputedContentHeight.ToString());
+                if (IsExtended) height += NumberHelper.ParseInt(ExtensionHeight.ToString());
+
+                return height;
+            }
+        }
+
+        protected double ComputedRight
+        {
+            get
+            {
+                if (!App || ClippedLeft) return 0;
+
+                return GlobalConfig.Application.Right;
+            }
+        }
+
+        protected double ComputedScrollThreshold
+        {
+            get
+            {
+                if (ScrollThreshold > 0) return ScrollThreshold;
+
+                return ComputedOriginalHeight - (Dense ? 48 : 56);
+            }
+        }
+
+        protected double ComputedTransform
+        {
+            get
+            {
+                if (!CanScroll ||
+                    (ElevateOnScroll && _scroller.CurrentScroll == 0 && _scroller.IsActive))
+                    return 0;
+
+                if (_scroller.IsActive) return 0;
+
+                var scrollOffScreen = ScrollOffScreen ? ComputedHeight.ToDouble() : ComputedContentHeight.ToDouble();
+
+                return Bottom ? scrollOffScreen : -scrollOffScreen;
+            }
+        }
+
+        public bool HideShadow
+        {
+            get
+            {
+                if (ElevateOnScroll && IsExtended)
+                {
+                    return _scroller.CurrentScroll < ComputedScrollThreshold;
+                }
+
+                if (ElevateOnScroll)
+                {
+                    return _scroller.CurrentScroll == 0 || ComputedTransform < 0;
+                }
+
+                return (!IsExtended || ScrollOffScreen) && ComputedTransform != 0;
+            }
+        }
+
+        protected override bool IsCollapsed
+        {
+            get
+            {
+                if (!CollapseOnScroll)
+                {
+                    return base.IsCollapsed;
+                }
+
+                return _scroller.CurrentScroll > 0;
+            }
+        }
+
+        protected override bool IsProminent => base.IsProminent || ShrinkOnScroll;
+
         protected void UpdateApplication()
         {
-            var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform();
+            var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform;
+
             if (!Bottom)
                 GlobalConfig.Application.Top = val;
             else
                 GlobalConfig.Application.Bottom = val;
         }
 
-        protected double ComputedTransform()
+        protected void ThresholdMet()
         {
-            if (!CanScroll() || _isActive ||
-                (ElevateOnScroll && CurrentScroll == 0 && _isActive))
-                return 0;
-
-            var scrollOffScreen = ScrollOffScreen ? ComputedHeight.ToDouble() : ComputedContentHeightAppBar();
-
-            return Bottom ? scrollOffScreen : -scrollOffScreen;
-        }
-
-        protected bool CanScroll()
-        {
-            return
-                InvertedScroll ||
-                ElevateOnScroll ||
-                HideOnScroll ||
-                CollapseOnScroll ||
-                GlobalConfig.Application.IsBooted ||
-                !Value;
-        }
-
-        protected double ComputedContentHeightAppBar()
-        {
-            if (!ShrinkOnScroll)
-                return ComputedContentHeight.ToInt32();
-
-            var min = Dense ? 48 : 56;
-            var max = ComputedOriginalHeightAppBar();
-
-            return min + (max - min) * ScrollRatio();
-        }
-
-        public StringNumber ComputedLeft => ComputeLeft();
-        public double ComputeLeft()
-        {
-            if (!App || ClippedLeft) return 0;
-
-            return GlobalConfig.Application.Left;
-        }
-
-        protected double ComputedOriginalHeightAppBar()
-        {
-            var height = ComputedContentHeight.ToDouble();
-            if (isElevated)
-                height += ExtensionHeight.ToDouble();
-
-            return height;
-        }
-
-        protected double ScrollRatio()
-        {
-            var threshold = ComputedScrollThreshold();
-
-            return Math.Max((threshold - CurrentScroll) / threshold, 0);
-        }
-
-        protected double ComputedScrollThreshold()
-        {
-            if (ScrollThreshold > 0)
-                return ScrollThreshold;
-
-            return ComputedOriginalHeightAppBar() - (Dense ? 48 : 56);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (!string.IsNullOrWhiteSpace(ScrollTarget))
+            if (InvertedScroll)
             {
-                DomEventJsInterop.RemoveEventListener<Element>($"#{ScrollTarget}", "scroll", e =>
-                {
-
-                });
+                _scroller.IsActive = _scroller.CurrentScroll > ComputedScrollThreshold;
+                return;
             }
 
-            base.Dispose(disposing);
+            if (HideOnScroll)
+            {
+                _scroller.IsActive = _scroller.IsScrollingUp || _scroller.CurrentScroll < ComputedScrollThreshold;
+            }
+
+            if (_scroller.CurrentThreshold < ComputedScrollThreshold) return;
+
+            _scroller.SavedScroll = _scroller.CurrentScroll;
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            if (!Prerendering)
+            {
+                await Target.RemoveEventListenerAsync("scroll");
+            }
         }
     }
 }

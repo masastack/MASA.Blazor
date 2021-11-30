@@ -2,7 +2,7 @@
 order: 0
 title:
   zh-CN: 可折叠栏
-  en-US: collapse 
+  en-US: Collapsible bars
 ---
 
 ## zh-CN

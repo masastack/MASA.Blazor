@@ -14,7 +14,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool Collapse { get; set; }
 
-        public bool IsCollapsed => Collapse;
+        protected virtual bool IsCollapsed => Collapse;
 
         public bool IsExtended => Extended || ExtensionContent != null;
 
@@ -34,7 +34,7 @@ namespace MASA.Blazor
         public string Src { get; set; }
 
         [Parameter]
-        public RenderFragment<ImgProps> ImgContent { get; set; }
+        public RenderFragment<Dictionary<string, object>> ImgContent { get; set; }
 
         [Parameter]
         public bool Short { get; set; }
@@ -42,7 +42,7 @@ namespace MASA.Blazor
         [Parameter]
         public StringNumber ExtensionHeight { get; set; } = 48;
 
-        public StringNumber ComputedContentHeight
+        protected virtual StringNumber ComputedContentHeight
         {
             get
             {
@@ -102,7 +102,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool Extended { get; set; }
 
-        public bool IsProminent => Prominent;
+        protected virtual bool IsProminent => Prominent;
 
         protected override void SetComponentClass()
         {

@@ -2,7 +2,7 @@
 order: 0
 title:
   zh-CN: 滚动隐藏
-  en-US: hidden 
+  en-US: Hidden on scroll
 ---
 
 ## zh-CN
