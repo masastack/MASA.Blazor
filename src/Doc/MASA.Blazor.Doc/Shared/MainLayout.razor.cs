@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-using BlazorComponent;
-using BlazorComponent.Doc.Models;
-using MASA.Blazor.Doc.Services;
+﻿using BlazorComponent.Doc.Models;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
 
 namespace MASA.Blazor.Doc.Shared
 {
-    public partial class MainLayout : LayoutComponentBase, IDisposable
+    public partial class MainLayout : LayoutComponentBase
     {
         //TODO:use i18n
         private bool _isEnglish;
@@ -25,26 +17,5 @@ namespace MASA.Blazor.Doc.Shared
 
         [Parameter]
         public DemoMenuItemModel[] MenuItems { get; set; } = { };
-
-        protected override void OnInitialized()
-        {
-            NavigationManager.LocationChanged += OnLocationChanged;
-        }
-
-        private void OnLanguageChanged(object sender, CultureInfo culture)
-        {
-            //await JsInterop.InvokeVoidAsync("window.MASA.DocSearch.localeChange", culture.Name);
-            //await InvokeAsync(StateHasChanged);
-        }
-
-        private void OnLocationChanged(object sender, LocationChangedEventArgs args)
-        {
-            //_href = NavigationManager.Uri;
-        }
-
-        public void Dispose()
-        {
-            NavigationManager.LocationChanged -= OnLocationChanged;
-        }
     }
 }

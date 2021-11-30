@@ -1,5 +1,4 @@
 ﻿@inherits LayoutComponentBase
-@inject NavigationManager navigationmanager
 
 <CascadingValue Value="this">
     <MApp>
@@ -48,7 +47,7 @@
                         <MImage Contain Class="d-inline-block" MaxHeight="64" Width="180" Src="https://img-cdn.lonsid.co/image/www/img/logo_g_2.png"></MImage>
                     </MCard>
                 </div>
-                <NavMenu></NavMenu>
+                <NavMenu @key="NavigationManager.Uri"></NavMenu>
                 <div class="pt-12"></div>
             </ChildContent>
         </MNavigationDrawer>
