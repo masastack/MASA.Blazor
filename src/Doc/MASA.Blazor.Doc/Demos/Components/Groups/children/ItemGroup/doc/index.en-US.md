@@ -1,7 +1,7 @@
 ---
 category: Components
 type: ItemGroup
-title: ItemGroup
+title: Item groups
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ItemGroup.svg
 ---

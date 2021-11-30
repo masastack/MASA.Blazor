@@ -1,7 +1,7 @@
 ---
 category: Components
 type: ChipGroup
-title: ChipGroup
+title: Chip groups
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chip.svg
 ---

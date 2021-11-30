@@ -1,7 +1,7 @@
 ---
 category: Components
-type: Checkbox
-title: Checkbox
+type: Checkboxes
+title: Checkboxes
 cols: 1
 ---
 

@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Border",
   "Components": [
-    "Border"
+    "Borders"
   ],
   "Props": [
     {

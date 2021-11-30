@@ -1,7 +1,7 @@
 ---
 category: Components
 type: SkeletonLoader
-title: SkeletonLoader
+title: Skeleton loaders
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SkeletonLoader.svg
 ---

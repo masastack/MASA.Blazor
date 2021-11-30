@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "BreadcrumbsItem",
   "Components": [
-    "BreadcrumbsItem"
+    "Breadcrumbs"
   ],
   "Props": [
     {

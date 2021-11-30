@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Timeline
-title: Timeline
+title: Timelines
 cols: 1
 ---
 

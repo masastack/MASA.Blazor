@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Main",
   "Components": [
-    "Main"
+    "Grid system"
   ],
   "Props": [
     {

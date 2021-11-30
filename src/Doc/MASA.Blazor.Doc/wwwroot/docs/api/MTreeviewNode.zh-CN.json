@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "TreeviewNode",
   "Components": [
-    "TreeviewNode"
+    "Treeview"
   ],
   "Props": [
     {

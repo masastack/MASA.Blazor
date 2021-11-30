@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Spacer",
   "Components": [
-    "Spacer"
+    "Grid system"
   ],
   "Props": [
     {

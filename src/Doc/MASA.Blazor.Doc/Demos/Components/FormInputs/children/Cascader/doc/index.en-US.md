@@ -1,7 +1,7 @@
 ---
 category: Components
-type: Cascader
-title: Cascader
+type: Cascaders
+title: Cascaders
 cols: 1
 ---
 

@@ -2,10 +2,13 @@
 category: Components
 subtitle: 月份选择器
 type: 月份选择器
-title: DatePickersMonth
+title: Date pickers month
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg
-
+related:
+  - /components/date-pickers/
+  - /components/menus/
+  - /components/time-pickers/
 ---
 
 `MDatePicker`  可以用作一个独立的月份选择器组件。

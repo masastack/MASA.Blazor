@@ -1,15 +1,11 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MASA.Blazor.Doc.Pages
 {
     public class ApiModel
     {
+        public string Title { get; set; }
         public List<string> Components { get; set; }
         public List<Props> Props { get; set; }
         public List<Props1> Contents { get; set; }
@@ -39,27 +35,30 @@ namespace MASA.Blazor.Doc.Pages
         {
             new DataTableHeader<Props>
             {
-                Value=nameof(Props.Name),
-                Text="Name",
-                Width="20%",
-                Sortable=false
-            },new DataTableHeader<Props>
+                Value = nameof(Props.Name),
+                Text = "Name",
+                Width = "20%",
+                Sortable = false
+            },
+            new DataTableHeader<Props>
             {
-                Value=nameof(Props.Type),
-                Text="Type",
-                Width="15%",
-                Sortable=false
-            },new DataTableHeader<Props>
+                Value = nameof(Props.Type),
+                Text = "Type",
+                Width = "15%",
+                Sortable = false
+            },
+            new DataTableHeader<Props>
             {
-                Value=nameof(Props.Default),
-                Text="Default",
-                Width="12%",
-                Sortable=false
-            },new DataTableHeader<Props>
+                Value = nameof(Props.Default),
+                Text = "Default",
+                Width = "12%",
+                Sortable = false
+            },
+            new DataTableHeader<Props>
             {
-                Value=nameof(Props.Description),
-                Text="Description",
-                Sortable=false
+                Value = nameof(Props.Description),
+                Text = "Description",
+                Sortable = false
             }
         };
 
@@ -67,15 +66,16 @@ namespace MASA.Blazor.Doc.Pages
         {
             new DataTableHeader<Props1>
             {
-                Value=nameof(Props1.Name),
-                Text="Name",
-                Width="20%",
-                Sortable=false
-            },new DataTableHeader<Props1>
+                Value = nameof(Props1.Name),
+                Text = "Name",
+                Width = "20%",
+                Sortable = false
+            },
+            new DataTableHeader<Props1>
             {
-                Value=nameof(Props1.Description),
-                Text="Description",
-                Sortable=false
+                Value = nameof(Props1.Description),
+                Text = "Description",
+                Sortable = false
             }
         };
 

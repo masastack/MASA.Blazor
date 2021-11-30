@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "RadioGroup",
   "Components": [
-    "RadioGroup"
+    "Radio groups"
   ],
   "Props": [
     {

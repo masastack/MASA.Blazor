@@ -66,9 +66,9 @@
     "Children": [
       {
         "Order": 0,
-        "Title": "BorderRadius",
+        "Title": "Border radius",
         "Type": "menuItem",
-        "Url": "styles/borderradius",
+        "Url": "styles/border-radius",
         "Children": []
       },
       {
@@ -80,9 +80,9 @@
       },
       {
         "Order": 0,
-        "Title": "DisplayHelpers",
+        "Title": "Display helpers",
         "Type": "menuItem",
-        "Url": "styles/displayhelpers",
+        "Url": "styles/display-helpers",
         "Children": []
       },
       {
@@ -122,9 +122,9 @@
       },
       {
         "Order": 0,
-        "Title": "TextAndTypography",
+        "Title": "Text and typography",
         "Type": "menuItem",
-        "Url": "styles/textandtypography",
+        "Url": "styles/text-and-typography",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       },
@@ -161,9 +161,9 @@
       },
       {
         "Order": 0,
-        "Title": "AspectRatios",
+        "Title": "Aspect ratios",
         "Type": "menuItem",
-        "Url": "components/aspectratios",
+        "Url": "components/aspect-ratios",
         "Children": []
       },
       {
@@ -196,15 +196,15 @@
         "Children": [
           {
             "Order": 0,
-            "Title": "AppBars",
+            "Title": "App bars",
             "Type": "menuItem",
-            "Url": "components/appbars"
+            "Url": "components/app-bars"
           },
           {
             "Order": 0,
-            "Title": "SystemBars",
+            "Title": "System bars",
             "Type": "menuItem",
-            "Url": "components/systembars"
+            "Url": "components/system-bars"
           },
           {
             "Order": 0,
@@ -216,9 +216,9 @@
       },
       {
         "Order": 0,
-        "Title": "Border",
+        "Title": "Borders",
         "Type": "menuItem",
-        "Url": "components/border",
+        "Url": "components/borders",
         "Children": []
       },
       {
@@ -278,56 +278,56 @@
       },
       {
         "Order": 0,
-        "Title": "ExpansionPanels",
+        "Title": "Expansion panels",
         "Type": "menuItem",
-        "Url": "components/expansionpanels",
+        "Url": "components/expansion-panels",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       },
       {
         "Order": 0,
-        "Title": "Footer",
+        "Title": "Footers",
         "Type": "menuItem",
-        "Url": "components/footer",
+        "Url": "components/footers",
         "Children": []
       },
       {
         "Order": 0,
-        "Title": "FormInputs",
+        "Title": "Form inputs and controls",
         "Type": "menuItem",
-        "Url": "components/forminputs",
+        "Url": "components/form-inputs-and-controls",
         "Children": [
           {
             "Order": 0,
-            "Title": "Autocomplete",
+            "Title": "Autocompletes",
             "Type": "menuItem",
-            "Url": "components/autocomplete",
+            "Url": "components/autocompletes",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Autocomplete.svg"
           },
           {
             "Order": 0,
-            "Title": "Cascader",
+            "Title": "Cascaders",
             "Type": "menuItem",
-            "Url": "components/cascader"
+            "Url": "components/cascaders"
           },
           {
             "Order": 0,
-            "Title": "Checkbox",
+            "Title": "Checkboxes",
             "Type": "menuItem",
-            "Url": "components/checkbox"
+            "Url": "components/checkboxes"
           },
           {
             "Order": 0,
-            "Title": "FileInput",
+            "Title": "File inputs",
             "Type": "menuItem",
-            "Url": "components/fileinput",
+            "Url": "components/file-inputs",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/FileInput.svg"
           },
           {
             "Order": 0,
-            "Title": "From",
+            "Title": "Froms",
             "Type": "menuItem",
-            "Url": "components/from",
+            "Url": "components/froms",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/From.svg"
           },
           {
@@ -339,16 +339,16 @@
           },
           {
             "Order": 0,
-            "Title": "RangeSliders",
+            "Title": "Range sliders",
             "Type": "menuItem",
-            "Url": "components/rangesliders",
+            "Url": "components/range-sliders",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/RangeSliders.svg"
           },
           {
             "Order": 0,
-            "Title": "Select",
+            "Title": "Selects",
             "Type": "menuItem",
-            "Url": "components/select"
+            "Url": "components/selects"
           },
           {
             "Order": 0,
@@ -359,9 +359,9 @@
           },
           {
             "Order": 0,
-            "Title": "Switch",
+            "Title": "Switches",
             "Type": "menuItem",
-            "Url": "components/switch",
+            "Url": "components/switches",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Switch.svg"
           },
           {
@@ -373,18 +373,18 @@
           },
           {
             "Order": 0,
-            "Title": "TextField",
+            "Title": "Text fields",
             "Type": "menuItem",
-            "Url": "components/textfield",
+            "Url": "components/text-fields",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TextField.svg"
           }
         ]
       },
       {
         "Order": 0,
-        "Title": "Grid",
+        "Title": "Grid system",
         "Type": "menuItem",
-        "Url": "components/grid",
+        "Url": "components/grid-system",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg",
         "Children": []
       },
@@ -396,36 +396,36 @@
         "Children": [
           {
             "Order": 0,
-            "Title": "ButtonGroup",
+            "Title": "Button groups",
             "Type": "menuItem",
-            "Url": "components/buttongroup",
+            "Url": "components/button-groups",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ButtonGroup.svg"
           },
           {
             "Order": 0,
-            "Title": "ChipGroup",
+            "Title": "Chip groups",
             "Type": "menuItem",
-            "Url": "components/chipgroup",
+            "Url": "components/chip-groups",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chip.svg"
           },
           {
             "Order": 0,
-            "Title": "ItemGroup",
+            "Title": "Item groups",
             "Type": "menuItem",
-            "Url": "components/itemgroup",
+            "Url": "components/item-groups",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ItemGroup.svg"
           },
           {
             "Order": 0,
-            "Title": "ListItemGroup",
+            "Title": "List item groups",
             "Type": "menuItem",
-            "Url": "components/listitemgroup"
+            "Url": "components/list-item-groups"
           },
           {
             "Order": 0,
-            "Title": "SlideGroup",
+            "Title": "Slide groups",
             "Type": "menuItem",
-            "Url": "components/slidegroup"
+            "Url": "components/slide-groups"
           },
           {
             "Order": 0,
@@ -444,47 +444,47 @@
       },
       {
         "Order": 0,
-        "Title": "Icon",
+        "Title": "Icons",
         "Type": "menuItem",
-        "Url": "components/icon",
+        "Url": "components/icons",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       },
       {
         "Order": 0,
-        "Title": "Image",
+        "Title": "Images",
         "Type": "menuItem",
-        "Url": "components/image",
+        "Url": "components/images",
         "Children": []
       },
       {
         "Order": 0,
-        "Title": "List",
+        "Title": "Lists",
         "Type": "menuItem",
-        "Url": "components/list",
+        "Url": "components/lists",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg",
         "Children": []
       },
       {
         "Order": 0,
-        "Title": "Menu",
+        "Title": "Menus",
         "Type": "menuItem",
-        "Url": "components/menu",
+        "Url": "components/menus",
         "Children": []
       },
       {
         "Order": 0,
-        "Title": "NavigationDrawer",
+        "Title": "Navigation drawers",
         "Type": "menuItem",
-        "Url": "components/navigationdrawer",
+        "Url": "components/navigation-drawers",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg",
         "Children": []
       },
       {
         "Order": 0,
-        "Title": "Overlay",
+        "Title": "Overlays",
         "Type": "menuItem",
-        "Url": "components/overlay",
+        "Url": "components/overlays",
         "Children": []
       },
       {
@@ -503,30 +503,30 @@
         "Children": [
           {
             "Order": 0,
-            "Title": "ColorPickers",
+            "Title": "Color pickers",
             "Type": "menuItem",
-            "Url": "components/colorpickers",
+            "Url": "components/color-pickers",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ColorPicker.svg"
           },
           {
             "Order": 0,
-            "Title": "DatePickers",
+            "Title": "Date pickers",
             "Type": "menuItem",
-            "Url": "components/datepickers",
+            "Url": "components/date-pickers",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickers.svg"
           },
           {
             "Order": 0,
-            "Title": "DatePickersMonth",
+            "Title": "Date pickers month",
             "Type": "menuItem",
-            "Url": "components/datepickersmonth",
+            "Url": "components/date-pickers-month",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg"
           },
           {
             "Order": 0,
-            "Title": "TimePickers",
+            "Title": "Time pickers",
             "Type": "menuItem",
-            "Url": "components/timepickers",
+            "Url": "components/time-pickers",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TimePickers.svg"
           }
         ]
@@ -546,61 +546,61 @@
         "Children": [
           {
             "Order": 0,
-            "Title": "ProgressCircular",
+            "Title": "Progress circular",
             "Type": "menuItem",
-            "Url": "components/progresscircular"
+            "Url": "components/progress-circular"
           },
           {
             "Order": 0,
-            "Title": "ProgressLinear",
+            "Title": "Progress linear",
             "Type": "menuItem",
-            "Url": "components/progresslinear"
+            "Url": "components/progress-linear"
           }
         ]
       },
       {
         "Order": 0,
-        "Title": "Rating",
+        "Title": "Ratings",
         "Type": "menuItem",
-        "Url": "components/rating",
+        "Url": "components/ratings",
         "Children": []
       },
       {
         "Order": 0,
-        "Title": "Sheet",
+        "Title": "Sheets",
         "Type": "menuItem",
-        "Url": "components/sheet",
+        "Url": "components/sheets",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sheet.svg",
         "Children": []
       },
       {
         "Order": 0,
-        "Title": "SkeletonLoader",
+        "Title": "Skeleton loaders",
         "Type": "menuItem",
-        "Url": "components/skeletonloader",
+        "Url": "components/skeleton-loaders",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SkeletonLoader.svg",
         "Children": []
       },
       {
         "Order": 0,
-        "Title": "Snackbar",
+        "Title": "Snackbars",
         "Type": "menuItem",
-        "Url": "components/snackbar",
+        "Url": "components/snackbars",
         "Children": []
       },
       {
         "Order": 0,
-        "Title": "Stepper",
+        "Title": "Steppers",
         "Type": "menuItem",
-        "Url": "components/stepper",
+        "Url": "components/steppers",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Stepper.svg",
         "Children": []
       },
       {
         "Order": 0,
-        "Title": "Subheader",
+        "Title": "Subheaders",
         "Type": "menuItem",
-        "Url": "components/subheader",
+        "Url": "components/subheaders",
         "Children": []
       },
       {
@@ -611,23 +611,23 @@
         "Children": [
           {
             "Order": 0,
-            "Title": "DataIterators",
+            "Title": "Data iterators",
             "Type": "menuItem",
-            "Url": "components/dataiterators",
+            "Url": "components/data-iterators",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataIterators.svg"
           },
           {
             "Order": 0,
-            "Title": "DataTable",
+            "Title": "Data tables",
             "Type": "menuItem",
-            "Url": "components/datatable",
+            "Url": "components/data-tables",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataTable.svg"
           },
           {
             "Order": 0,
-            "Title": "SimpleTables",
+            "Title": "Simple tables",
             "Type": "menuItem",
-            "Url": "components/simpletables",
+            "Url": "components/simple-tables",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SimpleTables.svg"
           }
         ]
@@ -642,16 +642,16 @@
       },
       {
         "Order": 0,
-        "Title": "Timeline",
+        "Title": "Timelines",
         "Type": "menuItem",
-        "Url": "components/timeline",
+        "Url": "components/timelines",
         "Children": []
       },
       {
         "Order": 0,
-        "Title": "Tooltip",
+        "Title": "Tooltips",
         "Type": "menuItem",
-        "Url": "components/tooltip",
+        "Url": "components/tooltips",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tooltip.svg",
         "Children": []
       },
@@ -665,16 +665,16 @@
       },
       {
         "Order": 0,
-        "Title": "Upload",
+        "Title": "Uploads",
         "Type": "menuItem",
-        "Url": "components/upload",
+        "Url": "components/uploads",
         "Children": []
       },
       {
         "Order": 0,
-        "Title": "VirtualScroll",
+        "Title": "Virtual scroller",
         "Type": "menuItem",
-        "Url": "components/virtualscroll",
+        "Url": "components/virtual-scroller",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       }
@@ -691,7 +691,7 @@
         "Order": 0,
         "Title": "Alert",
         "Type": "menuItem",
-        "Url": "docs/api/MAlert",
+        "Url": "docs/api/malert",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -714,7 +714,7 @@
         "Order": 0,
         "Title": "AlertDismissButton",
         "Type": "menuItem",
-        "Url": "docs/api/MAlertDismissButton",
+        "Url": "docs/api/malertdismissbutton",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -737,7 +737,7 @@
         "Order": 0,
         "Title": "AlertIcon",
         "Type": "menuItem",
-        "Url": "docs/api/MAlertIcon",
+        "Url": "docs/api/malerticon",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -760,7 +760,7 @@
         "Order": 0,
         "Title": "App",
         "Type": "menuItem",
-        "Url": "docs/api/MApp",
+        "Url": "docs/api/mapp",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -783,7 +783,7 @@
         "Order": 0,
         "Title": "AppBar",
         "Type": "menuItem",
-        "Url": "docs/api/MAppBar",
+        "Url": "docs/api/mappbar",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -806,7 +806,7 @@
         "Order": 0,
         "Title": "AppBarNavIcon",
         "Type": "menuItem",
-        "Url": "docs/api/MAppBarNavIcon",
+        "Url": "docs/api/mappbarnavicon",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -829,7 +829,7 @@
         "Order": 0,
         "Title": "AppBarTitle",
         "Type": "menuItem",
-        "Url": "docs/api/MAppBarTitle",
+        "Url": "docs/api/mappbartitle",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -852,7 +852,7 @@
         "Order": 0,
         "Title": "Autocomplete",
         "Type": "menuItem",
-        "Url": "docs/api/MAutocomplete",
+        "Url": "docs/api/mautocomplete",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -875,7 +875,7 @@
         "Order": 0,
         "Title": "Avatar",
         "Type": "menuItem",
-        "Url": "docs/api/MAvatar",
+        "Url": "docs/api/mavatar",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -898,7 +898,7 @@
         "Order": 0,
         "Title": "Badge",
         "Type": "menuItem",
-        "Url": "docs/api/MBadge",
+        "Url": "docs/api/mbadge",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -921,7 +921,7 @@
         "Order": 0,
         "Title": "Banner",
         "Type": "menuItem",
-        "Url": "docs/api/MBanner",
+        "Url": "docs/api/mbanner",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -944,7 +944,7 @@
         "Order": 0,
         "Title": "Border",
         "Type": "menuItem",
-        "Url": "docs/api/MBorder",
+        "Url": "docs/api/mborder",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -967,7 +967,7 @@
         "Order": 0,
         "Title": "Breadcrumbs",
         "Type": "menuItem",
-        "Url": "docs/api/MBreadcrumbs",
+        "Url": "docs/api/mbreadcrumbs",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -990,7 +990,7 @@
         "Order": 0,
         "Title": "BreadcrumbsDivider",
         "Type": "menuItem",
-        "Url": "docs/api/MBreadcrumbsDivider",
+        "Url": "docs/api/mbreadcrumbsdivider",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1013,7 +1013,7 @@
         "Order": 0,
         "Title": "BreadcrumbsItem",
         "Type": "menuItem",
-        "Url": "docs/api/MBreadcrumbsItem",
+        "Url": "docs/api/mbreadcrumbsitem",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1036,7 +1036,7 @@
         "Order": 0,
         "Title": "Button",
         "Type": "menuItem",
-        "Url": "docs/api/MButton",
+        "Url": "docs/api/mbutton",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1059,7 +1059,7 @@
         "Order": 0,
         "Title": "ButtonGroup",
         "Type": "menuItem",
-        "Url": "docs/api/MButtonGroup",
+        "Url": "docs/api/mbuttongroup",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1082,7 +1082,7 @@
         "Order": 0,
         "Title": "Calendar",
         "Type": "menuItem",
-        "Url": "docs/api/MCalendar",
+        "Url": "docs/api/mcalendar",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1105,7 +1105,7 @@
         "Order": 0,
         "Title": "CalendarCategory",
         "Type": "menuItem",
-        "Url": "docs/api/MCalendarCategory",
+        "Url": "docs/api/mcalendarcategory",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1128,7 +1128,7 @@
         "Order": 0,
         "Title": "CalendarDaily",
         "Type": "menuItem",
-        "Url": "docs/api/MCalendarDaily",
+        "Url": "docs/api/mcalendardaily",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1151,7 +1151,7 @@
         "Order": 0,
         "Title": "CalendarMonthly",
         "Type": "menuItem",
-        "Url": "docs/api/MCalendarMonthly",
+        "Url": "docs/api/mcalendarmonthly",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1174,7 +1174,7 @@
         "Order": 0,
         "Title": "CalendarWeekly",
         "Type": "menuItem",
-        "Url": "docs/api/MCalendarWeekly",
+        "Url": "docs/api/mcalendarweekly",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1197,7 +1197,7 @@
         "Order": 0,
         "Title": "Card",
         "Type": "menuItem",
-        "Url": "docs/api/MCard",
+        "Url": "docs/api/mcard",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1220,7 +1220,7 @@
         "Order": 0,
         "Title": "CardActions",
         "Type": "menuItem",
-        "Url": "docs/api/MCardActions",
+        "Url": "docs/api/mcardactions",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1243,7 +1243,7 @@
         "Order": 0,
         "Title": "CardSubtitle",
         "Type": "menuItem",
-        "Url": "docs/api/MCardSubtitle",
+        "Url": "docs/api/mcardsubtitle",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1266,7 +1266,7 @@
         "Order": 0,
         "Title": "CardText",
         "Type": "menuItem",
-        "Url": "docs/api/MCardText",
+        "Url": "docs/api/mcardtext",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1289,7 +1289,7 @@
         "Order": 0,
         "Title": "CardTitle",
         "Type": "menuItem",
-        "Url": "docs/api/MCardTitle",
+        "Url": "docs/api/mcardtitle",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1312,7 +1312,7 @@
         "Order": 0,
         "Title": "Cascader",
         "Type": "menuItem",
-        "Url": "docs/api/MCascader",
+        "Url": "docs/api/mcascader",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1335,7 +1335,7 @@
         "Order": 0,
         "Title": "CascaderMenu",
         "Type": "menuItem",
-        "Url": "docs/api/MCascaderMenu",
+        "Url": "docs/api/mcascadermenu",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1358,7 +1358,7 @@
         "Order": 0,
         "Title": "CascaderSelectList",
         "Type": "menuItem",
-        "Url": "docs/api/MCascaderSelectList",
+        "Url": "docs/api/mcascaderselectlist",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1381,7 +1381,7 @@
         "Order": 0,
         "Title": "CascaderSelectOption",
         "Type": "menuItem",
-        "Url": "docs/api/MCascaderSelectOption",
+        "Url": "docs/api/mcascaderselectoption",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1404,7 +1404,7 @@
         "Order": 0,
         "Title": "Checkbox",
         "Type": "menuItem",
-        "Url": "docs/api/MCheckbox",
+        "Url": "docs/api/mcheckbox",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1427,7 +1427,7 @@
         "Order": 0,
         "Title": "Chip",
         "Type": "menuItem",
-        "Url": "docs/api/MChip",
+        "Url": "docs/api/mchip",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1450,7 +1450,7 @@
         "Order": 0,
         "Title": "ChipGroup",
         "Type": "menuItem",
-        "Url": "docs/api/MChipGroup",
+        "Url": "docs/api/mchipgroup",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1473,7 +1473,7 @@
         "Order": 0,
         "Title": "Col",
         "Type": "menuItem",
-        "Url": "docs/api/MCol",
+        "Url": "docs/api/mcol",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1496,7 +1496,7 @@
         "Order": 0,
         "Title": "ColorPicker",
         "Type": "menuItem",
-        "Url": "docs/api/MColorPicker",
+        "Url": "docs/api/mcolorpicker",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1519,7 +1519,7 @@
         "Order": 0,
         "Title": "ColorPickerCanvas",
         "Type": "menuItem",
-        "Url": "docs/api/MColorPickerCanvas",
+        "Url": "docs/api/mcolorpickercanvas",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1542,7 +1542,7 @@
         "Order": 0,
         "Title": "ColorPickerEdit",
         "Type": "menuItem",
-        "Url": "docs/api/MColorPickerEdit",
+        "Url": "docs/api/mcolorpickeredit",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1565,7 +1565,7 @@
         "Order": 0,
         "Title": "ColorPickerPreview",
         "Type": "menuItem",
-        "Url": "docs/api/MColorPickerPreview",
+        "Url": "docs/api/mcolorpickerpreview",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1588,7 +1588,7 @@
         "Order": 0,
         "Title": "Container",
         "Type": "menuItem",
-        "Url": "docs/api/MContainer",
+        "Url": "docs/api/mcontainer",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1611,7 +1611,7 @@
         "Order": 0,
         "Title": "Counter",
         "Type": "menuItem",
-        "Url": "docs/api/MCounter",
+        "Url": "docs/api/mcounter",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1634,7 +1634,7 @@
         "Order": 0,
         "Title": "DataFooter",
         "Type": "menuItem",
-        "Url": "docs/api/MDataFooter",
+        "Url": "docs/api/mdatafooter",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1657,7 +1657,7 @@
         "Order": 0,
         "Title": "DataIterator",
         "Type": "menuItem",
-        "Url": "docs/api/MDataIterator",
+        "Url": "docs/api/mdataiterator",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1680,7 +1680,7 @@
         "Order": 0,
         "Title": "DataTable",
         "Type": "menuItem",
-        "Url": "docs/api/MDataTable",
+        "Url": "docs/api/mdatatable",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1703,7 +1703,7 @@
         "Order": 0,
         "Title": "DataTableHeader",
         "Type": "menuItem",
-        "Url": "docs/api/MDataTableHeader",
+        "Url": "docs/api/mdatatableheader",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1726,7 +1726,7 @@
         "Order": 0,
         "Title": "DataTableRow",
         "Type": "menuItem",
-        "Url": "docs/api/MDataTableRow",
+        "Url": "docs/api/mdatatablerow",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1749,7 +1749,7 @@
         "Order": 0,
         "Title": "DataTableRowGroup",
         "Type": "menuItem",
-        "Url": "docs/api/MDataTableRowGroup",
+        "Url": "docs/api/mdatatablerowgroup",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1772,7 +1772,7 @@
         "Order": 0,
         "Title": "DatePicker",
         "Type": "menuItem",
-        "Url": "docs/api/MDatePicker",
+        "Url": "docs/api/mdatepicker",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1795,7 +1795,7 @@
         "Order": 0,
         "Title": "DatePickerDateTable",
         "Type": "menuItem",
-        "Url": "docs/api/MDatePickerDateTable",
+        "Url": "docs/api/mdatepickerdatetable",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1818,7 +1818,7 @@
         "Order": 0,
         "Title": "DatePickerHeader",
         "Type": "menuItem",
-        "Url": "docs/api/MDatePickerHeader",
+        "Url": "docs/api/mdatepickerheader",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1841,7 +1841,7 @@
         "Order": 0,
         "Title": "DatePickerMonthTable",
         "Type": "menuItem",
-        "Url": "docs/api/MDatePickerMonthTable",
+        "Url": "docs/api/mdatepickermonthtable",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1864,7 +1864,7 @@
         "Order": 0,
         "Title": "DatePickerTable",
         "Type": "menuItem",
-        "Url": "docs/api/MDatePickerTable",
+        "Url": "docs/api/mdatepickertable",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1887,7 +1887,7 @@
         "Order": 0,
         "Title": "DatePickerTitle",
         "Type": "menuItem",
-        "Url": "docs/api/MDatePickerTitle",
+        "Url": "docs/api/mdatepickertitle",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1910,7 +1910,7 @@
         "Order": 0,
         "Title": "DatePickerYears",
         "Type": "menuItem",
-        "Url": "docs/api/MDatePickerYears",
+        "Url": "docs/api/mdatepickeryears",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1933,7 +1933,7 @@
         "Order": 0,
         "Title": "Dialog",
         "Type": "menuItem",
-        "Url": "docs/api/MDialog",
+        "Url": "docs/api/mdialog",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1956,7 +1956,7 @@
         "Order": 0,
         "Title": "Divider",
         "Type": "menuItem",
-        "Url": "docs/api/MDivider",
+        "Url": "docs/api/mdivider",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -1979,7 +1979,7 @@
         "Order": 0,
         "Title": "ECharts",
         "Type": "menuItem",
-        "Url": "docs/api/MECharts",
+        "Url": "docs/api/mecharts",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2002,7 +2002,7 @@
         "Order": 0,
         "Title": "essage",
         "Type": "menuItem",
-        "Url": "docs/api/Message",
+        "Url": "docs/api/message",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2025,7 +2025,7 @@
         "Order": 0,
         "Title": "ExpansionPanel",
         "Type": "menuItem",
-        "Url": "docs/api/MExpansionPanel",
+        "Url": "docs/api/mexpansionpanel",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2048,7 +2048,7 @@
         "Order": 0,
         "Title": "ExpansionPanelContent",
         "Type": "menuItem",
-        "Url": "docs/api/MExpansionPanelContent",
+        "Url": "docs/api/mexpansionpanelcontent",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2071,7 +2071,7 @@
         "Order": 0,
         "Title": "ExpansionPanelHeader",
         "Type": "menuItem",
-        "Url": "docs/api/MExpansionPanelHeader",
+        "Url": "docs/api/mexpansionpanelheader",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2094,7 +2094,7 @@
         "Order": 0,
         "Title": "ExpansionPanels",
         "Type": "menuItem",
-        "Url": "docs/api/MExpansionPanels",
+        "Url": "docs/api/mexpansionpanels",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2117,7 +2117,7 @@
         "Order": 0,
         "Title": "FileInput",
         "Type": "menuItem",
-        "Url": "docs/api/MFileInput",
+        "Url": "docs/api/mfileinput",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2140,7 +2140,7 @@
         "Order": 0,
         "Title": "Footer",
         "Type": "menuItem",
-        "Url": "docs/api/MFooter",
+        "Url": "docs/api/mfooter",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2163,7 +2163,7 @@
         "Order": 0,
         "Title": "Form",
         "Type": "menuItem",
-        "Url": "docs/api/MForm",
+        "Url": "docs/api/mform",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2186,7 +2186,7 @@
         "Order": 0,
         "Title": "HintMessage",
         "Type": "menuItem",
-        "Url": "docs/api/MHintMessage",
+        "Url": "docs/api/mhintmessage",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2209,7 +2209,7 @@
         "Order": 0,
         "Title": "Hover",
         "Type": "menuItem",
-        "Url": "docs/api/MHover",
+        "Url": "docs/api/mhover",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2232,7 +2232,7 @@
         "Order": 0,
         "Title": "Icon",
         "Type": "menuItem",
-        "Url": "docs/api/MIcon",
+        "Url": "docs/api/micon",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2255,7 +2255,7 @@
         "Order": 0,
         "Title": "Image",
         "Type": "menuItem",
-        "Url": "docs/api/MImage",
+        "Url": "docs/api/mimage",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2278,7 +2278,7 @@
         "Order": 0,
         "Title": "Input",
         "Type": "menuItem",
-        "Url": "docs/api/MInput",
+        "Url": "docs/api/minput",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2301,7 +2301,7 @@
         "Order": 0,
         "Title": "Item",
         "Type": "menuItem",
-        "Url": "docs/api/MItem",
+        "Url": "docs/api/mitem",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2324,7 +2324,7 @@
         "Order": 0,
         "Title": "ItemGroup",
         "Type": "menuItem",
-        "Url": "docs/api/MItemGroup",
+        "Url": "docs/api/mitemgroup",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2347,7 +2347,7 @@
         "Order": 0,
         "Title": "Label",
         "Type": "menuItem",
-        "Url": "docs/api/MLabel",
+        "Url": "docs/api/mlabel",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2370,7 +2370,7 @@
         "Order": 0,
         "Title": "List",
         "Type": "menuItem",
-        "Url": "docs/api/MList",
+        "Url": "docs/api/mlist",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2393,7 +2393,7 @@
         "Order": 0,
         "Title": "ListGroup",
         "Type": "menuItem",
-        "Url": "docs/api/MListGroup",
+        "Url": "docs/api/mlistgroup",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2416,7 +2416,7 @@
         "Order": 0,
         "Title": "ListGroupItem",
         "Type": "menuItem",
-        "Url": "docs/api/MListGroupItem",
+        "Url": "docs/api/mlistgroupitem",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2439,7 +2439,7 @@
         "Order": 0,
         "Title": "ListGroupItemIcon",
         "Type": "menuItem",
-        "Url": "docs/api/MListGroupItemIcon",
+        "Url": "docs/api/mlistgroupitemicon",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2462,7 +2462,7 @@
         "Order": 0,
         "Title": "ListItem",
         "Type": "menuItem",
-        "Url": "docs/api/MListItem",
+        "Url": "docs/api/mlistitem",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2485,7 +2485,7 @@
         "Order": 0,
         "Title": "ListItemAction",
         "Type": "menuItem",
-        "Url": "docs/api/MListItemAction",
+        "Url": "docs/api/mlistitemaction",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2508,7 +2508,7 @@
         "Order": 0,
         "Title": "ListItemActionText",
         "Type": "menuItem",
-        "Url": "docs/api/MListItemActionText",
+        "Url": "docs/api/mlistitemactiontext",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2531,7 +2531,7 @@
         "Order": 0,
         "Title": "ListItemAvatar",
         "Type": "menuItem",
-        "Url": "docs/api/MListItemAvatar",
+        "Url": "docs/api/mlistitemavatar",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2554,7 +2554,7 @@
         "Order": 0,
         "Title": "ListItemContent",
         "Type": "menuItem",
-        "Url": "docs/api/MListItemContent",
+        "Url": "docs/api/mlistitemcontent",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2577,7 +2577,7 @@
         "Order": 0,
         "Title": "ListItemGroup",
         "Type": "menuItem",
-        "Url": "docs/api/MListItemGroup",
+        "Url": "docs/api/mlistitemgroup",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2600,7 +2600,7 @@
         "Order": 0,
         "Title": "ListItemIcon",
         "Type": "menuItem",
-        "Url": "docs/api/MListItemIcon",
+        "Url": "docs/api/mlistitemicon",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2623,7 +2623,7 @@
         "Order": 0,
         "Title": "ListItemSubtitle",
         "Type": "menuItem",
-        "Url": "docs/api/MListItemSubtitle",
+        "Url": "docs/api/mlistitemsubtitle",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2646,7 +2646,7 @@
         "Order": 0,
         "Title": "ListItemTitle",
         "Type": "menuItem",
-        "Url": "docs/api/MListItemTitle",
+        "Url": "docs/api/mlistitemtitle",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2669,7 +2669,7 @@
         "Order": 0,
         "Title": "Main",
         "Type": "menuItem",
-        "Url": "docs/api/MMain",
+        "Url": "docs/api/mmain",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2692,7 +2692,7 @@
         "Order": 0,
         "Title": "Menu",
         "Type": "menuItem",
-        "Url": "docs/api/MMenu",
+        "Url": "docs/api/mmenu",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2715,7 +2715,7 @@
         "Order": 0,
         "Title": "Messages",
         "Type": "menuItem",
-        "Url": "docs/api/MMessages",
+        "Url": "docs/api/mmessages",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2738,30 +2738,7 @@
         "Order": 0,
         "Title": "NavigationDrawer",
         "Type": "menuItem",
-        "Url": "docs/api/MNavigationDrawer",
-        "Contents": [
-          {
-            "Id": "section-1029938464",
-            "Title": "Props",
-            "Level": 0
-          },
-          {
-            "Id": "section-444565322",
-            "Title": "Contents",
-            "Level": 0
-          },
-          {
-            "Id": "section-1613329801",
-            "Title": "Events",
-            "Level": 0
-          }
-        ]
-      },
-      {
-        "Order": 0,
-        "Title": "odal",
-        "Type": "menuItem",
-        "Url": "docs/api/Modal",
+        "Url": "docs/api/mnavigationdrawer",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2784,7 +2761,7 @@
         "Order": 0,
         "Title": "Overlay",
         "Type": "menuItem",
-        "Url": "docs/api/MOverlay",
+        "Url": "docs/api/moverlay",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2807,7 +2784,7 @@
         "Order": 0,
         "Title": "Pagination",
         "Type": "menuItem",
-        "Url": "docs/api/MPagination",
+        "Url": "docs/api/mpagination",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2830,7 +2807,7 @@
         "Order": 0,
         "Title": "Picker",
         "Type": "menuItem",
-        "Url": "docs/api/MPicker",
+        "Url": "docs/api/mpicker",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2853,7 +2830,7 @@
         "Order": 0,
         "Title": "Popover",
         "Type": "menuItem",
-        "Url": "docs/api/MPopover",
+        "Url": "docs/api/mpopover",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2876,7 +2853,7 @@
         "Order": 0,
         "Title": "ProgressCircular",
         "Type": "menuItem",
-        "Url": "docs/api/MProgressCircular",
+        "Url": "docs/api/mprogresscircular",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2899,7 +2876,7 @@
         "Order": 0,
         "Title": "ProgressLinear",
         "Type": "menuItem",
-        "Url": "docs/api/MProgressLinear",
+        "Url": "docs/api/mprogresslinear",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2922,7 +2899,7 @@
         "Order": 0,
         "Title": "Radio",
         "Type": "menuItem",
-        "Url": "docs/api/MRadio",
+        "Url": "docs/api/mradio",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2945,7 +2922,7 @@
         "Order": 0,
         "Title": "RadioGroup",
         "Type": "menuItem",
-        "Url": "docs/api/MRadioGroup",
+        "Url": "docs/api/mradiogroup",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2968,7 +2945,7 @@
         "Order": 0,
         "Title": "RangeSlider",
         "Type": "menuItem",
-        "Url": "docs/api/MRangeSlider",
+        "Url": "docs/api/mrangeslider",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -2991,7 +2968,7 @@
         "Order": 0,
         "Title": "Rating",
         "Type": "menuItem",
-        "Url": "docs/api/MRating",
+        "Url": "docs/api/mrating",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3014,7 +2991,7 @@
         "Order": 0,
         "Title": "Responsive",
         "Type": "menuItem",
-        "Url": "docs/api/MResponsive",
+        "Url": "docs/api/mresponsive",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3037,7 +3014,7 @@
         "Order": 0,
         "Title": "Row",
         "Type": "menuItem",
-        "Url": "docs/api/MRow",
+        "Url": "docs/api/mrow",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3060,7 +3037,7 @@
         "Order": 0,
         "Title": "Select",
         "Type": "menuItem",
-        "Url": "docs/api/MSelect",
+        "Url": "docs/api/mselect",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3083,7 +3060,7 @@
         "Order": 0,
         "Title": "SelectList",
         "Type": "menuItem",
-        "Url": "docs/api/MSelectList",
+        "Url": "docs/api/mselectlist",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3106,7 +3083,7 @@
         "Order": 0,
         "Title": "Sheet",
         "Type": "menuItem",
-        "Url": "docs/api/MSheet",
+        "Url": "docs/api/msheet",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3129,7 +3106,7 @@
         "Order": 0,
         "Title": "SimpleCheckbox",
         "Type": "menuItem",
-        "Url": "docs/api/MSimpleCheckbox",
+        "Url": "docs/api/msimplecheckbox",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3152,7 +3129,7 @@
         "Order": 0,
         "Title": "SimpleTable",
         "Type": "menuItem",
-        "Url": "docs/api/MSimpleTable",
+        "Url": "docs/api/msimpletable",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3175,7 +3152,7 @@
         "Order": 0,
         "Title": "SkeletonLoader",
         "Type": "menuItem",
-        "Url": "docs/api/MSkeletonLoader",
+        "Url": "docs/api/mskeletonloader",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3198,7 +3175,7 @@
         "Order": 0,
         "Title": "SlideGroup",
         "Type": "menuItem",
-        "Url": "docs/api/MSlideGroup",
+        "Url": "docs/api/mslidegroup",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3221,7 +3198,7 @@
         "Order": 0,
         "Title": "SlideItem",
         "Type": "menuItem",
-        "Url": "docs/api/MSlideItem",
+        "Url": "docs/api/mslideitem",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3244,7 +3221,7 @@
         "Order": 0,
         "Title": "Slider",
         "Type": "menuItem",
-        "Url": "docs/api/MSlider",
+        "Url": "docs/api/mslider",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3267,7 +3244,7 @@
         "Order": 0,
         "Title": "Snackbar",
         "Type": "menuItem",
-        "Url": "docs/api/MSnackbar",
+        "Url": "docs/api/msnackbar",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3290,7 +3267,7 @@
         "Order": 0,
         "Title": "Spacer",
         "Type": "menuItem",
-        "Url": "docs/api/MSpacer",
+        "Url": "docs/api/mspacer",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3313,7 +3290,7 @@
         "Order": 0,
         "Title": "Stepper",
         "Type": "menuItem",
-        "Url": "docs/api/MStepper",
+        "Url": "docs/api/mstepper",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3336,7 +3313,7 @@
         "Order": 0,
         "Title": "StepperContent",
         "Type": "menuItem",
-        "Url": "docs/api/MStepperContent",
+        "Url": "docs/api/msteppercontent",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3359,7 +3336,7 @@
         "Order": 0,
         "Title": "StepperHeader",
         "Type": "menuItem",
-        "Url": "docs/api/MStepperHeader",
+        "Url": "docs/api/mstepperheader",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3382,7 +3359,7 @@
         "Order": 0,
         "Title": "StepperItems",
         "Type": "menuItem",
-        "Url": "docs/api/MStepperItems",
+        "Url": "docs/api/mstepperitems",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3405,7 +3382,7 @@
         "Order": 0,
         "Title": "StepperStep",
         "Type": "menuItem",
-        "Url": "docs/api/MStepperStep",
+        "Url": "docs/api/mstepperstep",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3428,7 +3405,7 @@
         "Order": 0,
         "Title": "Subheader",
         "Type": "menuItem",
-        "Url": "docs/api/MSubheader",
+        "Url": "docs/api/msubheader",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3451,7 +3428,7 @@
         "Order": 0,
         "Title": "Switch",
         "Type": "menuItem",
-        "Url": "docs/api/MSwitch",
+        "Url": "docs/api/mswitch",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3474,7 +3451,7 @@
         "Order": 0,
         "Title": "SystemBar",
         "Type": "menuItem",
-        "Url": "docs/api/MSystemBar",
+        "Url": "docs/api/msystembar",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3497,7 +3474,7 @@
         "Order": 0,
         "Title": "Tab",
         "Type": "menuItem",
-        "Url": "docs/api/MTab",
+        "Url": "docs/api/mtab",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3520,7 +3497,7 @@
         "Order": 0,
         "Title": "TabItem",
         "Type": "menuItem",
-        "Url": "docs/api/MTabItem",
+        "Url": "docs/api/mtabitem",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3543,7 +3520,7 @@
         "Order": 0,
         "Title": "Table",
         "Type": "menuItem",
-        "Url": "docs/api/MTable",
+        "Url": "docs/api/mtable",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3566,7 +3543,7 @@
         "Order": 0,
         "Title": "TableCol",
         "Type": "menuItem",
-        "Url": "docs/api/MTableCol",
+        "Url": "docs/api/mtablecol",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3589,7 +3566,7 @@
         "Order": 0,
         "Title": "TableFooter",
         "Type": "menuItem",
-        "Url": "docs/api/MTableFooter",
+        "Url": "docs/api/mtablefooter",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3612,7 +3589,7 @@
         "Order": 0,
         "Title": "TableFooterButton",
         "Type": "menuItem",
-        "Url": "docs/api/MTableFooterButton",
+        "Url": "docs/api/mtablefooterbutton",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3635,7 +3612,7 @@
         "Order": 0,
         "Title": "TableHeader",
         "Type": "menuItem",
-        "Url": "docs/api/MTableHeader",
+        "Url": "docs/api/mtableheader",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3658,7 +3635,7 @@
         "Order": 0,
         "Title": "TableLoading",
         "Type": "menuItem",
-        "Url": "docs/api/MTableLoading",
+        "Url": "docs/api/mtableloading",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3681,7 +3658,7 @@
         "Order": 0,
         "Title": "Tabs",
         "Type": "menuItem",
-        "Url": "docs/api/MTabs",
+        "Url": "docs/api/mtabs",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3704,7 +3681,7 @@
         "Order": 0,
         "Title": "TabsBar",
         "Type": "menuItem",
-        "Url": "docs/api/MTabsBar",
+        "Url": "docs/api/mtabsbar",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3727,7 +3704,7 @@
         "Order": 0,
         "Title": "TabsItems",
         "Type": "menuItem",
-        "Url": "docs/api/MTabsItems",
+        "Url": "docs/api/mtabsitems",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3750,7 +3727,7 @@
         "Order": 0,
         "Title": "Textarea",
         "Type": "menuItem",
-        "Url": "docs/api/MTextarea",
+        "Url": "docs/api/mtextarea",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3773,7 +3750,7 @@
         "Order": 0,
         "Title": "TextField",
         "Type": "menuItem",
-        "Url": "docs/api/MTextField",
+        "Url": "docs/api/mtextfield",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3796,7 +3773,7 @@
         "Order": 0,
         "Title": "Timeline",
         "Type": "menuItem",
-        "Url": "docs/api/MTimeline",
+        "Url": "docs/api/mtimeline",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3819,7 +3796,7 @@
         "Order": 0,
         "Title": "TimelineItem",
         "Type": "menuItem",
-        "Url": "docs/api/MTimelineItem",
+        "Url": "docs/api/mtimelineitem",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3842,7 +3819,7 @@
         "Order": 0,
         "Title": "TimePicker",
         "Type": "menuItem",
-        "Url": "docs/api/MTimePicker",
+        "Url": "docs/api/mtimepicker",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3865,7 +3842,7 @@
         "Order": 0,
         "Title": "TimePickerClock",
         "Type": "menuItem",
-        "Url": "docs/api/MTimePickerClock",
+        "Url": "docs/api/mtimepickerclock",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3888,7 +3865,7 @@
         "Order": 0,
         "Title": "TimePickerTitle",
         "Type": "menuItem",
-        "Url": "docs/api/MTimePickerTitle",
+        "Url": "docs/api/mtimepickertitle",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3911,7 +3888,7 @@
         "Order": 0,
         "Title": "Toolbar",
         "Type": "menuItem",
-        "Url": "docs/api/MToolbar",
+        "Url": "docs/api/mtoolbar",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3934,7 +3911,7 @@
         "Order": 0,
         "Title": "ToolbarItems",
         "Type": "menuItem",
-        "Url": "docs/api/MToolbarItems",
+        "Url": "docs/api/mtoolbaritems",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3957,7 +3934,7 @@
         "Order": 0,
         "Title": "ToolbarTitle",
         "Type": "menuItem",
-        "Url": "docs/api/MToolbarTitle",
+        "Url": "docs/api/mtoolbartitle",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -3980,7 +3957,7 @@
         "Order": 0,
         "Title": "Tooltip",
         "Type": "menuItem",
-        "Url": "docs/api/MTooltip",
+        "Url": "docs/api/mtooltip",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -4003,7 +3980,7 @@
         "Order": 0,
         "Title": "Tree",
         "Type": "menuItem",
-        "Url": "docs/api/MTree",
+        "Url": "docs/api/mtree",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -4026,7 +4003,7 @@
         "Order": 0,
         "Title": "TreeItem",
         "Type": "menuItem",
-        "Url": "docs/api/MTreeItem",
+        "Url": "docs/api/mtreeitem",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -4049,7 +4026,7 @@
         "Order": 0,
         "Title": "Treeview",
         "Type": "menuItem",
-        "Url": "docs/api/MTreeview",
+        "Url": "docs/api/mtreeview",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -4072,7 +4049,7 @@
         "Order": 0,
         "Title": "TreeviewNode",
         "Type": "menuItem",
-        "Url": "docs/api/MTreeviewNode",
+        "Url": "docs/api/mtreeviewnode",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -4095,7 +4072,7 @@
         "Order": 0,
         "Title": "Upload",
         "Type": "menuItem",
-        "Url": "docs/api/MUpload",
+        "Url": "docs/api/mupload",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -4118,7 +4095,7 @@
         "Order": 0,
         "Title": "VirtualScroll",
         "Type": "menuItem",
-        "Url": "docs/api/MVirtualScroll",
+        "Url": "docs/api/mvirtualscroll",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -4141,7 +4118,7 @@
         "Order": 0,
         "Title": "Window",
         "Type": "menuItem",
-        "Url": "docs/api/MWindow",
+        "Url": "docs/api/mwindow",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -4164,7 +4141,7 @@
         "Order": 0,
         "Title": "WindowItem",
         "Type": "menuItem",
-        "Url": "docs/api/MWindowItem",
+        "Url": "docs/api/mwindowitem",
         "Contents": [
           {
             "Id": "section-1029938464",

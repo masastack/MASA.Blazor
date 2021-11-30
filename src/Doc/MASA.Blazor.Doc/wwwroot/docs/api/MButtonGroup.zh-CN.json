@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "ButtonGroup",
   "Components": [
-    "ButtonGroup"
+    "Button groups"
   ],
   "Props": [
     {

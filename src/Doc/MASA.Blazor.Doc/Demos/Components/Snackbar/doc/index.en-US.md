@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Snackbar
-title: Snackbar
+title: Snackbars
 cols: 1
 ---
 

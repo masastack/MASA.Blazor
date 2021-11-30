@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "SlideItem",
   "Components": [
-    "SlideItem"
+    "Slide groups"
   ],
   "Props": [
     {

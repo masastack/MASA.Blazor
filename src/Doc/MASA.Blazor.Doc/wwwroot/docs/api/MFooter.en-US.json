@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Footer",
   "Components": [
-    "Footer"
+    "Footers"
   ],
   "Props": [
     {

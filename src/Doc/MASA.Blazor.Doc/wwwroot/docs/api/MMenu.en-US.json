@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Menu",
   "Components": [
-    "Menu"
+    "Menus"
   ],
   "Props": [
     {

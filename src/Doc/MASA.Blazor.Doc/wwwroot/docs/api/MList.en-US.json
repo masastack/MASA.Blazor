@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "List",
   "Components": [
-    "List"
+    "Lists"
   ],
   "Props": [
     {

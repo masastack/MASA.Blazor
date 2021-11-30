@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "ExpansionPanelContent",
   "Components": [
-    "ExpansionPanelContent"
+    "Expansion panels"
   ],
   "Props": [
     {

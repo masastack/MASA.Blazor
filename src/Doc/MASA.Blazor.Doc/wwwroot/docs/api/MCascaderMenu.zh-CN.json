@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "CascaderMenu",
   "Components": [
-    "CascaderMenu"
+    "Cascaders"
   ],
   "Props": [
     {

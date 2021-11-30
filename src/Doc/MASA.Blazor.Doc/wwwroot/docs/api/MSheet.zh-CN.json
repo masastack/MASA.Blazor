@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Sheet",
   "Components": [
-    "Sheet"
+    "Sheets"
   ],
   "Props": [
     {

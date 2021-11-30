@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "SelectList",
   "Components": [
-    "SelectList"
+    "Selects"
   ],
   "Props": [
     {

@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "TimelineItem",
   "Components": [
-    "TimelineItem"
+    "Timelines"
   ],
   "Props": [
     {

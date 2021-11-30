@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Tooltip",
   "Components": [
-    "Tooltip"
+    "Tooltips"
   ],
   "Props": [
     {

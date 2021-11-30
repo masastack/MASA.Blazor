@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Stepper
-title: Stepper
+title: Steppers
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Stepper.svg
 ---

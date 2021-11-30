@@ -2,10 +2,13 @@
 category: Components
 subtitle: 应用栏
 type: 应用栏
-title: AppBars
+title: App bars
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/AppBars.svg
-
+related:
+  - /components/buttons/
+  - /components/icons/
+  - /components/toolbars/
 ---
 
 `MAppBar` 组件对于任何图形用户界面 (GUI) 都是至关重要的，因为它通常是网站导航的主要来源。`MAppBar` 和 `MNavigationDrawer` 结合在一起为应用程序提供站点导航。

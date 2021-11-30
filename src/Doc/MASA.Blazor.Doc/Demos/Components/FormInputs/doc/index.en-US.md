@@ -1,6 +1,6 @@
 ---
 category: Components
 type: FormInputs
-title: FormInputs
+title: Form inputs and controls
 cols: 1
 ---

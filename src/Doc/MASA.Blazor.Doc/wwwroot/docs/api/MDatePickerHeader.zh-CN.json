@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "DatePickerHeader",
   "Components": [
-    "DatePickerHeader"
+    "Date pickers"
   ],
   "Props": [
     {

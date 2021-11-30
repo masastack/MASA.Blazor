@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "ToolbarItems",
   "Components": [
-    "ToolbarItems"
+    "Toolbars"
   ],
   "Props": [
     {

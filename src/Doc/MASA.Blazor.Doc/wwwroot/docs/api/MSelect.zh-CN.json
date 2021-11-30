@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Select",
   "Components": [
-    "Select"
+    "Selects"
   ],
   "Props": [
     {

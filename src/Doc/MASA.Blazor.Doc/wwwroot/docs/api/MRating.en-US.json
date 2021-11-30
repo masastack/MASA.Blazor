@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Rating",
   "Components": [
-    "Rating"
+    "Ratings"
   ],
   "Props": [
     {

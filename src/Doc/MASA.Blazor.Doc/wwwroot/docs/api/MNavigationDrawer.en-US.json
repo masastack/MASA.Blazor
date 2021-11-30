@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "NavigationDrawer",
   "Components": [
-    "NavigationDrawer"
+    "Navigation drawers"
   ],
   "Props": [
     {

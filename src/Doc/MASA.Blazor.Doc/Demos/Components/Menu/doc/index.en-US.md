@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Menu
-title: Menu
+title: Menus
 cols: 1
 ---
 

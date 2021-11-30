@@ -1,7 +1,7 @@
 ---
 category: Components
 type: ListItemGroup
-title: ListItemGroup
+title: List item groups
 cols: 1
 ---
 

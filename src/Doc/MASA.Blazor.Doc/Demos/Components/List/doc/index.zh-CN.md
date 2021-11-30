@@ -2,7 +2,7 @@
 category: Components
 subtitle: 列表
 type: 列表
-title: List
+title: Lists
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg
 

@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Switch
-title: Switch
+title: Switches
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Switch.svg
 ---

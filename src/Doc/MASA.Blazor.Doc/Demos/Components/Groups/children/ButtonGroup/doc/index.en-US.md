@@ -1,7 +1,7 @@
 ---
 category: Components
 type: ButtonGroup
-title: ButtonGroup
+title: Button groups
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ButtonGroup.svg
 ---

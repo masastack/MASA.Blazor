@@ -1,6 +1,8 @@
 ﻿{
+  "Title": "ListItemActionText",
   "Components": [
-    "ListItemActionText"
+    "Lists",
+    "List item groups"
   ],
   "Props": [
     {

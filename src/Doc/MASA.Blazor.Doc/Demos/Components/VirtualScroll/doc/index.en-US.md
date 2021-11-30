@@ -1,7 +1,7 @@
 ---
 category: Components
 type: VirtualScroll
-title: VirtualScroll
+title: Virtual scroller
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
 

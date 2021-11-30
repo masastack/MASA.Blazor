@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Upload
-title: Upload
+title: Uploads
 cols: 1
 ---
 

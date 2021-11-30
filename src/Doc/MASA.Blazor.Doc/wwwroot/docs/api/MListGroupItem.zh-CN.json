@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "ListGroupItem",
   "Components": [
-    "ListGroupItem"
+    "List groups"
   ],
   "Props": [
     {

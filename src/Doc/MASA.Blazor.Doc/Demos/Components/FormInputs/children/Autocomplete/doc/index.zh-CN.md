@@ -2,10 +2,13 @@
 category: Components
 subtitle: 自动补全
 type: 自动补全
-title: Autocomplete
+title: Autocompletes
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Autocomplete.svg
-
+related:
+  - /components/combobox/
+  - /components/forms/
+  - /components/selects/
 ---
 
 `MAutocomplete` 组件提供简单且灵活的自动补全功能 且支持查找大规模数据甚至是从API请求的动态数据

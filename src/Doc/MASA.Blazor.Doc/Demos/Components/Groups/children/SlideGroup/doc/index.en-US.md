@@ -1,7 +1,7 @@
 ---
 category: Components
 type: SlideGroup
-title: SlideGroup
+title: Slide groups
 cols: 1
 ---
 

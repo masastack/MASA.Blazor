@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Textarea",
   "Components": [
-    "Textarea"
+    "Textareas"
   ],
   "Props": [
     {

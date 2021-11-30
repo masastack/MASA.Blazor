@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "DatePickerYears",
   "Components": [
-    "DatePickerYears"
+    "Date pickers"
   ],
   "Props": [
     {

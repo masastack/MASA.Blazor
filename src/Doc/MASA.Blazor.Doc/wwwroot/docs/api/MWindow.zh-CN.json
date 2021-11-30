@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Window",
   "Components": [
-    "Window"
+    "Windows"
   ],
   "Props": [
     {
