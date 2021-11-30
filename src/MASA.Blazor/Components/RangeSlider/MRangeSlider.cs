@@ -96,7 +96,11 @@ namespace MASA.Blazor
                 ThumbPressed = true;
             }
 
-            ActiveThumb = GetIndexOfClosestValue(DoubleInteralValues, value);
+            if (ActiveThumb == null)
+            {
+                ActiveThumb = GetIndexOfClosestValue(DoubleInteralValues, value);
+            }
+
             SetInternalValue(value);
         }
 
@@ -155,7 +159,7 @@ namespace MASA.Blazor
 
         private int? GetIndexOfClosestValue(IList<double> values, double value)
         {
-            if (Math.Abs(values[0] - value) < Math.Abs(values[1] - value))
+            if (Math.Abs(values[0] - value) <= Math.Abs(values[1] - value))
             {
                 return 0;
             }

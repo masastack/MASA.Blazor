@@ -19,7 +19,7 @@ namespace MASA.Blazor
                     return Format;
                 }
 
-                return value => DatePickerFormatter.Month(value.Month)[..3];
+                return DateFormatters.Month(Locale);
             }
         }
 

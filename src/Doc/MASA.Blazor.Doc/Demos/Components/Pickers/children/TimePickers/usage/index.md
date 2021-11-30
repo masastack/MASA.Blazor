@@ -1,7 +1,7 @@
 ---
 order: 0
 title:
-  zh-CN: 时间选择器
+  zh-CN: 使用
   en-US: TimePicker
 ---
 

@@ -15,7 +15,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg
 - [MButton](/docs/api/MButton)
 - [MButtonGroup](/docs/api/MButtonGroup)
 
-## Caveats
+## 注意
 
 <!--alert:warning--> 
 当使用 **Dark** 属性时，`MButton` 是唯一一种拥有不同行为的组件。 通常来说，组件使用 **Dark** 属性来表示他们将有深色背景，文本也需要是白色的。 虽然这对

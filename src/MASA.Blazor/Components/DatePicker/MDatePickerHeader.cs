@@ -61,6 +61,9 @@ namespace MASA.Blazor
         public DatePickerType ActivePicker { get; set; }
 
         [Parameter]
+        public string Locale { get; set; }
+
+        [Parameter]
         public bool Dark { get; set; }
 
         [Parameter]
@@ -122,9 +125,10 @@ namespace MASA.Blazor
                     return Format;
                 }
 
-                return value => ActivePicker == DatePickerType.Date ? $"{DatePickerFormatter.Month(value.Month)} {value.Year}" : $"{value.Year}";
+                return ActivePicker == DatePickerType.Date ? DateFormatters.Date(Locale) : DateFormatters.Year(Locale);
             }
         }
+
 
         public DateOnly CalculateChange(int sign)
         {

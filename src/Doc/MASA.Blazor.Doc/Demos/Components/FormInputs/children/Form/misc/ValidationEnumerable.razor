@@ -1,17 +1,22 @@
 ﻿@using System.ComponentModel.DataAnnotations
 
 <MForm Model="_order" EnableDataAnnotationsValidation>
-    <MTextField @bind-Value="_order.Title" Label="名称"></MTextField>
-    <MTextField @bind-Value="_order.Price" Label="金额" Type="number"></MTextField>
+    <MTextField @bind-Value="_order.Title" Label="Title"></MTextField>
+    <MTextField @bind-Value="_order.Price" Label="Price" Type="number"></MTextField>
     @foreach (var person in _order.Persons)
     {
-        <MTextField @bind-Value="person.Name" Label="姓名"></MTextField>
-        <MTextField @bind-Value="person.Age" Label="年龄"></MTextField>
+        <MCard Flat>
+            <MCardTitle>Person:@person.Id</MCardTitle>
+            <MCardText>
+                <MTextField @bind-Value="person.Name" Label="Name"></MTextField>
+                <MTextField @bind-Value="person.Age" Label="Age"></MTextField>
+            </MCardText>
+        </MCard>
     }
-    <MButton OnClick="()=>SubmitOrder(context)" Color="success">提交</MButton>
+    <MButton OnClick="()=>SubmitOrder(context)" Color="success">Validate</MButton>
 </MForm>
 
-@code{
+@code {
     public class Order
     {
         public int Id { get; set; }
@@ -21,10 +26,10 @@
         public decimal Price { get; set; }
 
         [EnumerableValidation]
-        public List<Item> Persons { get; set; }
+        public List<Person> Persons { get; set; }
     }
 
-    public class Item
+    public class Person
     {
         public int Id { get; set; }
 
@@ -36,20 +41,19 @@
     }
 
     private Order _order = new()
-    {
-        Persons = new List<Item>
         {
-            new Item
+            Persons = new List<Person>
+        {
+            new Person
             {
-                Id=1,
-                Name="jack"
+                Id=1
             },
-            new Item
+            new Person
             {
                 Id=2
             }
         }
-    };
+        };
 
     public void SubmitOrder(EditContext context)
     {

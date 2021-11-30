@@ -34,7 +34,7 @@ namespace MASA.Blazor
                     return Format;
                 }
 
-                return value => value.Day.ToString();
+                return DateFormatters.Day(Locale);
             }
         }
 
