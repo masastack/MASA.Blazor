@@ -26,9 +26,12 @@ namespace MASA.Blazor
         public EventCallback<int> OnInput { get; set; }
 
         [Parameter]
-        public Func<int, string> Format { get; set; }
+        public Func<DateOnly, string> Format { get; set; }
 
-        public Func<int, string> Formatter
+        [Parameter]
+        public string Locale { get; set; }
+
+        public Func<DateOnly, string> Formatter
         {
             get
             {
@@ -37,7 +40,7 @@ namespace MASA.Blazor
                     return Format;
                 }
 
-                return year => $"{year}";
+                return DateFormatters.Year(Locale);
             }
         }
 

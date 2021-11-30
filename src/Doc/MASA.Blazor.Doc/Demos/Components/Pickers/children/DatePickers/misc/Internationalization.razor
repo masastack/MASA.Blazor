@@ -1,4 +1,10 @@
-﻿<div>
-    TODO...
-</div>
+﻿<MRow Justify="JustifyTypes.SpaceAround">
+    <MDatePicker @bind-Value="_picker"
+                 NoTitle
+                 Locale="zh-CN"></MDatePicker>
+</MRow>
+
+  @code {
+    private DateOnly _picker = DateOnly.FromDateTime(DateTime.Now);
+  }
 

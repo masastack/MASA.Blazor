@@ -53,7 +53,7 @@
     },
     {
       "Name": "Year",
-      "Type": "Int32",
+      "Type": "String",
       "Default": "0",
       "Description": ""
     },

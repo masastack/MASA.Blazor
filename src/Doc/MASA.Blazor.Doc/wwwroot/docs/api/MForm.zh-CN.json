@@ -44,6 +44,12 @@
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     }
   ],
   "Contents": [
@@ -55,6 +61,10 @@
   "Events": [
     {
       "Name": "OnSubmit",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
       "Description": ""
     }
   ]

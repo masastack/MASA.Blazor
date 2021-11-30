@@ -45,10 +45,11 @@
                         <MSpacer></MSpacer>
                         <MButton Text
                              Color="primary"
-                             OnClick="()=>_modal2 = false">
+                             OnClick="Cancel">
                             Cancel
                         </MButton>
                         <MButton Text
+                             OnClick="Ok"
                              Color="primary">
                             OK
                         </MButton>
@@ -60,8 +61,21 @@
 </MRow>
 
 @code {
+    private TimeOnly? _prevTime;
     private TimeOnly? _time;
     private bool _menu2;
     private bool _modal2;
+
+    public void Cancel()
+    {
+        _time = _prevTime;
+        _modal2 = false;
+    }
+
+    public void Ok()
+    {
+        _prevTime = _time;
+        _modal2 = false;
+    }
 }
 

@@ -49,6 +49,8 @@ namespace MASA.Blazor
 
         protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             if (Timer == null && Interval > 0)
             {
                 Timer = new Timer();

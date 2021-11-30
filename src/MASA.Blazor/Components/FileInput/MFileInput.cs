@@ -90,14 +90,14 @@ namespace MASA.Blazor
         {
             get
             {
-                if (Value is IBrowserFile file)
+                if (InternalValue is IBrowserFile file)
                 {
                     return new List<IBrowserFile>
                     {
                         file
                     };
                 }
-                else if (Value is IList<IBrowserFile> files)
+                else if (InternalValue is IList<IBrowserFile> files)
                 {
                     return files;
                 }
@@ -214,7 +214,7 @@ namespace MASA.Blazor
             await input.DispatchEventAsync(@event);
         }
 
-        public async Task HandleOnFileChangeAsync(InputFileChangeEventArgs args)
+        public Task HandleOnFileChangeAsync(InputFileChangeEventArgs args)
         {
             if (Multiple)
             {
@@ -225,24 +225,21 @@ namespace MASA.Blazor
                     files.Add(file);
                 }
 
-                Value = (TValue)files;
+                InternalValue = (TValue)files;
             }
             else
             {
                 if (args.FileCount > 0)
                 {
-                    Value = (TValue)args.File;
+                    InternalValue = (TValue)args.File;
                 }
                 else
                 {
-                    Value = default;
+                    InternalValue = default;
                 }
             }
 
-            if (ValueChanged.HasDelegate)
-            {
-                await ValueChanged.InvokeAsync(Value);
-            }
+            return Task.CompletedTask;
         }
 
         public override async Task HandleOnClickAsync(MouseEventArgs args)

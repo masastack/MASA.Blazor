@@ -32,9 +32,6 @@ namespace MASA.Blazor
         public bool Striped { get; set; }
 
         [Parameter]
-        public bool IsVisible { get; set; }
-
-        [Parameter]
         public bool Dark { get; set; }
 
         [Parameter]
@@ -102,6 +99,8 @@ namespace MASA.Blazor
 
         [Inject]
         public Document Document { get; set; }
+
+        protected bool IsVisible { get; set; } = true;
 
         public override async Task HandleOnClickAsync(MouseEventArgs args)
         {
