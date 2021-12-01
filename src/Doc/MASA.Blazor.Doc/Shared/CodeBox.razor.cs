@@ -1,5 +1,5 @@
 ﻿using BlazorComponent;
-using BlazorComponent.Doc.Models;
+using MASA.Blazor.Doc.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 

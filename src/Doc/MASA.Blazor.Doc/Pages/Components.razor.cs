@@ -1,4 +1,4 @@
-﻿using BlazorComponent.Doc.Models;
+﻿using MASA.Blazor.Doc.Models;
 using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor.Doc.Pages

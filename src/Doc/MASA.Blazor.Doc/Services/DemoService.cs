@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Json;
 using System.Reflection;
-using BlazorComponent.Doc.Extensions;
-using BlazorComponent.Doc.Models;
+using MASA.Blazor.Doc.Models.Extensions;
+using MASA.Blazor.Doc.Models;
 using MASA.Blazor.Doc.Demos.Components.Border.demo;
 using MASA.Blazor.Doc.Pages;
 using MASA.Blazor.Doc.Utils;

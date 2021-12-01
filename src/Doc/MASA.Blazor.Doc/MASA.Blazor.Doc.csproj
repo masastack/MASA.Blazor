@@ -10,7 +10,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\BlazorComponent\src\Doc\BlazorComponent.Doc.Models\BlazorComponent.Doc.Models.csproj" />
 	  <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
+	  <ProjectReference Include="..\MASA.Blazor.Doc.Models\MASA.Blazor.Doc.Models.csproj" />
 	</ItemGroup>
 </Project>

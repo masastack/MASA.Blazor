@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using BlazorComponent.Doc.Models;
+using MASA.Blazor.Doc.Models;
 using MASA.Blazor.Doc.Highlight;
 using MASA.Blazor.Doc.Services;
 using MASA.Blazor.Doc.Shared;
