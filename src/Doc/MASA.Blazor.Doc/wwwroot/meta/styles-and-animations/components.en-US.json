@@ -1,12 +1,9 @@
 [
   {
-    "Title": "BorderRadius",
-    "Type": "BorderRadius",
     "Desc": "<p>Use the border radius auxiliary style to quickly apply the <code>border-radius</code> style to the element</p>\n",
-    "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-19T16:53:04.3073404+08:00",
+    "LastWriteTime": "2021-11-16T14:53:16.3151084+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -75,16 +72,17 @@
         "Group": 3
       }
     ],
-    "Children": []
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Title": "Border radius",
+    "Type": "BorderRadius"
   },
   {
-    "Title": "Color",
-    "Type": "Color",
     "Desc": "<p>Through <strong>sass</strong> and <strong>javascript</strong>, you can use <a href=\"https://material.io/design/color/the-color-system.html#color-theme-creation\">Material Design</a> in the specification All colors. These values can be used in style sheets, component files and actual components through the <strong>color class</strong> system.</p>\n",
-    "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-19T16:53:04.3083403+08:00",
+    "LastWriteTime": "2021-11-16T14:53:16.3161073+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -120,16 +118,17 @@
         "Group": 3
       }
     ],
-    "Children": []
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Title": "Color",
+    "Type": "Color"
   },
   {
-    "Title": "DisplayHelpers",
-    "Type": "DisplayHelpers",
     "Desc": "<p>��ʾ������������������ݵ���ʾ�����Ը��ݵ�ǰ��ͼ��ʵ��Ԫ����ʾ��������������ʾ���ݡ�</p>\n",
-    "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-19T16:53:04.3093401+08:00",
+    "LastWriteTime": "2021-11-16T14:53:16.3171054+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -165,16 +164,17 @@
         "Group": 3
       }
     ],
-    "Children": []
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Title": "Display helpers",
+    "Type": "DisplayHelpers"
   },
   {
-    "Title": "Elevation",
-    "Type": "Elevation",
     "Desc": "<p>This tool allows you to control the relative depth, or distance, between the two planes along the z-axis. There are 25 heights in total. You can set the elevation of an element by using the <code>elevation-{n}</code> class, where <code>n</code> is an integer between 0-24 corresponding to the desired altitude.</p>\n",
-    "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-19T16:53:04.3103395+08:00",
+    "LastWriteTime": "2021-11-16T14:53:16.3191074+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -199,16 +199,17 @@
         "Group": 3
       }
     ],
-    "Children": []
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Title": "Elevation",
+    "Type": "Elevation"
   },
   {
-    "Title": "Flex",
-    "Type": "Flex",
     "Desc": "<p>Control the layout of flex containers with alignment, justification and more with responsive flexbox utilities.</p>\n",
-    "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-19T16:53:04.3113405+08:00",
+    "LastWriteTime": "2021-11-16T14:53:16.3201062+08:00",
     "DemoList": [
       {
         "Order": 3,
@@ -343,16 +344,17 @@
         "Group": 3
       }
     ],
-    "Children": []
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Title": "Flex",
+    "Type": "Flex"
   },
   {
-    "Title": "Float",
-    "Type": "Float",
     "Desc": "<p>Applies a custom float across any breakpoint with responsive float utilities.</p>\n",
-    "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-19T16:53:04.3143404+08:00",
+    "LastWriteTime": "2021-11-16T14:53:16.3241058+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -377,16 +379,17 @@
         "Group": 3
       }
     ],
-    "Children": []
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Title": "Float",
+    "Type": "Float"
   },
   {
-    "Title": "Overflow",
-    "Type": "Overflow",
     "Desc": "<p>Configure how content overflows when it becomes out of container bounds.</p>\n",
-    "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-19T16:53:04.3143404+08:00",
+    "LastWriteTime": "2021-11-16T14:53:16.3251068+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -411,16 +414,17 @@
         "Group": 3
       }
     ],
-    "Children": []
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Title": "Overflow",
+    "Type": "Overflow"
   },
   {
-    "Title": "Spacing",
-    "Type": "Spacing",
     "Desc": "<p>Do not update your layout by creating new classes. Auxiliary auxiliary classes modify the filling and edges of elements</p>\n",
-    "Cols": 1,
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-19T16:53:04.3163402+08:00",
+    "LastWriteTime": "2021-11-16T14:53:16.328106+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -467,17 +471,17 @@
         "Group": 3
       }
     ],
-    "Children": []
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Title": "Spacing",
+    "Type": "Spacing"
   },
   {
-    "Title": "TextAndTypography",
-    "Type": "TextAndTypography",
     "Desc": "<p>Control text size, alignment, wrapping, overflow, transforms and more.</p>\n",
-    "Cols": 1,
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-19T16:53:04.3193402+08:00",
+    "LastWriteTime": "2021-11-16T14:53:16.3321055+08:00",
     "DemoList": [
       {
         "Order": 5,
@@ -527,7 +531,7 @@
         "Order": 10,
         "Name": "RTLAlignment",
         "Title": "RTL Alignment",
-        "Description": "<p>When using <a href=\"/docs/features/bidirectionality\">RTL</a>, you may want to keep the alignment regardless of the <strong>rtl</strong> designation. This can be achieved using text alignment helper classes in the following format: <code>text-&lt;breakpoint&gt;-&lt;direction&gt;</code>, where breakpoint can be <code>sm</code>, <code>md</code>, <code>lg</code>, or <code>xl</code> and direction can be <code>left</code> or <code>right</code>. You may also want alignment to respond to rtl which can be done using directions <code>start</code> and <code>end</code>.</p>\n",
+        "Description": "<p>When using <a href=\"/features/bidirectionality\">RTL</a>, you may want to keep the alignment regardless of the <strong>rtl</strong> designation. This can be achieved using text alignment helper classes in the following format: <code>text-&lt;breakpoint&gt;-&lt;direction&gt;</code>, where breakpoint can be <code>sm</code>, <code>md</code>, <code>lg</code>, or <code>xl</code> and direction can be <code>left</code> or <code>right</code>. You may also want alignment to respond to rtl which can be done using directions <code>start</code> and <code>end</code>.</p>\n",
         "Code": "<div>\r\n    <p class=\"text-subtitle-2 text-center\">\r\n        Agnostic RTL Alignment\r\n    </p>\r\n\r\n    <p class=\"text-sm-left\">\r\n        Left aligned text on viewports sized SM (small) or wider for rtl or ltr.\r\n    </p>\r\n    <p class=\"text-md-left\">\r\n        Left aligned text on viewports sized MD (medium) or wider for rtl or ltr.\r\n    </p>\r\n    <p class=\"text-lg-right\">\r\n        Right aligned text on viewports sized LG (large) or wider for rtl or ltr.\r\n    </p>\r\n    <p class=\"text-xl-left\">\r\n        Left aligned text on viewports sized XL (extra-large) or wider for rtl or ltr.\r\n    </p>\r\n\r\n    <p class=\"text-subtitle-2 text-center\">\r\n        Responsive RTL Alignment\r\n    </p>\r\n\r\n    <p class=\"text-start\">\r\n        Left aligned text on ltr and right aligned on rtl.\r\n    </p>\r\n    <p class=\"text-end\">\r\n        Right aligned text on ltr and left aligned on rtl.\r\n    </p>\r\n</div>",
         "Type": "StylesAndAnimations.Styles.TextAndTypography.demo.RTLAlignment",
         "Style": "",
@@ -601,19 +605,20 @@
         "Group": 0
       }
     ],
-    "Children": []
+    "Children": [],
+    "Category": "Components",
+    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
+    "Cols": 1,
+    "Title": "Text and typography",
+    "Type": "TextAndTypography"
   },
   {
-    "Title": "Transitions",
-    "Type": "Transitions",
     "Desc": "<p>Smooth animations help make a UI feel great. Using Vue��s transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the <strong>transition</strong> prop.</p>\n",
-    "Cols": 1,
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Order": 0,
     "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/docs/api/MCard\">MCard</a></li>\n<li><a href=\"/docs/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/docs/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/docs/api/MCardText\">MCardText</a></li>\n<li><a href=\"/docs/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n"
+      "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-19T16:53:04.3213404+08:00",
+    "LastWriteTime": "2021-11-16T14:53:16.3351086+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -737,6 +742,11 @@
         "Group": 3
       }
     ],
-    "Children": []
+    "Children": [],
+    "Category": "Components",
+    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
+    "Cols": 1,
+    "Title": "Transitions",
+    "Type": "Transitions"
   }
 ]

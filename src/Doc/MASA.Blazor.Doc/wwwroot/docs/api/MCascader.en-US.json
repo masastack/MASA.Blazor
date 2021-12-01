@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Cascader",
   "Components": [
-    "Cascader"
+    "Cascaders"
   ],
   "Props": [
     {

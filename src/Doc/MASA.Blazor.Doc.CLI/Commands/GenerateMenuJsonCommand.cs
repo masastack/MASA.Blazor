@@ -208,7 +208,6 @@ namespace MASA.Blazor.Doc.CLI.Commands
                 var categoryComponent = categoryDemoMenuList[lang];
                 var categoryStyle = categoryStyleMenuList[lang];
 
-
                 var componentMenus = new List<DemoMenuItemModel>();
 
                 foreach (var component in categoryComponent)
@@ -219,7 +218,7 @@ namespace MASA.Blazor.Doc.CLI.Commands
                         Title = ConfigWrapper.Config.GenerateRule.Menus.First(menu => menu.Key == component.Key).Descriptions
                             .First(desc => desc.Lang == lang).Description,
                         Type = "component",
-                        Url = component.Key.ToLowerInvariant(),
+                        Url = component.Key.StructureUrl(),
                         Children = component.Value.OrderBy(x => x.Order).ToArray()
                     });
                 }
@@ -234,7 +233,7 @@ namespace MASA.Blazor.Doc.CLI.Commands
                         Title = ConfigWrapper.Config.GenerateRule.Menus.First(menu => menu.Key == style.Key).Descriptions
                             .First(desc => desc.Lang == lang).Description,
                         Type = "component",
-                        Url = style.Key.ToLowerInvariant(),
+                        Url = style.Key.StructureUrl(),
                         Children = style.Value.OrderBy(x => x.Order).ToArray()
                     });
                 }
@@ -322,7 +321,7 @@ namespace MASA.Blazor.Doc.CLI.Commands
                                     {
                                         Order = data["order"].ToObject<int>(),
                                         Title = titleItem["content"].ToString(),
-                                        Url = $"docs/{menuDir.Name}",
+                                        Url = $"{menuDir.Name}".StructureUrl(),
                                         Icon = data["icon"].ToString(),
                                         Type = "menuItem",
                                         Children = GetSubMenuChildren(menuDir, titleItem["lang"].ToString()).OrderBy(r => r.Order)
@@ -337,6 +336,7 @@ namespace MASA.Blazor.Doc.CLI.Commands
             else
             {
                 // 设置首页文档名为UI组件的一级导航的二级导航列表
+                // 同时影响menu.json和demos.json
 
                 var componentI18N = GetComponentI18N(directory);
                 foreach (var group in componentI18N.GroupBy(x => x.Value.Type))
@@ -351,23 +351,23 @@ namespace MASA.Blazor.Doc.CLI.Commands
                             Title = group.Key, // TODO: 似乎无用处
                             Type = "itemGroup",
                             Children = group.Select(x => new DemoMenuItemModel()
+                            {
+                                Title = x.Value.Title,
+                                SubTitle = x.Value.Subtitle,
+                                Url = $"{directory.Name}/{x.Value.Title}".StructureUrl(),
+                                Type = "menuItem",
+                                Order = x.Value.Order,
+                                Cover = x.Value.Cover,
+                                Children = x.Value.Children.Select(y => new DemoMenuItemModel()
                                 {
-                                    Title = x.Value.Title,
-                                    SubTitle = x.Value.SubTitle,
-                                    Url = $"{directory.Name.ToLowerInvariant()}/{x.Value.Title.ToLower()}",
+                                    Title = y.Title,
+                                    SubTitle = y.Subtitle,
+                                    Url = $"{directory.Name}/{y.Title}".StructureUrl(),
                                     Type = "menuItem",
-                                    Order = x.Value.Order,
-                                    Cover = x.Value.Cover,
-                                    Children = x.Value.Children.Select(y => new DemoMenuItemModel()
-                                    {
-                                        Title = y.Title,
-                                        SubTitle = y.SubTitle,
-                                        Url = $"{directory.Name.ToLowerInvariant()}/{y.Title.ToLower()}",
-                                        Type = "menuItem",
-                                        Order = y.Order,
-                                        Cover = y.Cover,
-                                    }).ToArray()
-                                })
+                                    Order = y.Order,
+                                    Cover = y.Cover,
+                                }).ToArray()
+                            })
                                 .OrderBy(x => x.Title, new MenuComparer())
                                 .ToArray(),
                         });
@@ -401,7 +401,7 @@ namespace MASA.Blazor.Doc.CLI.Commands
                         {
                             Order = Convert.ToInt32(data["order"]),
                             Title = data["title"],
-                            Url = $"docs/{menuDir.Name}/{args[0]}",
+                            Url = $"{menuDir.Name}/{args[0]}".StructureUrl(),
                             Type = "menuItem",
                             Contents = titles.Select(r => new ContentsItem
                             {
@@ -470,18 +470,12 @@ namespace MASA.Blazor.Doc.CLI.Commands
                 foreach (FileSystemInfo docItem in (docDir as DirectoryInfo).GetFileSystemInfos().OrderBy(r => r.Name))
                 {
                     var language = docItem.Name.Replace("index.", "").Replace(docItem.Extension, "");
-                    string content = File.ReadAllText(docItem.FullName);
-                    var (meta, desc, _) = DocWrapper.ParseDemoDoc(content);
 
-                    var model = new DemoComponentModel()
-                    {
-                        Title = meta["title"],
-                        SubTitle = meta.TryGetValue("subtitle", out string subtitle) ? subtitle : null,
-                        Type = meta["type"],
-                        Desc = desc,
-                        Cols = meta.TryGetValue("cols", out var cols) ? int.Parse(cols) : (int?)null,
-                        Cover = meta.TryGetValue("cover", out var cover) ? cover : null,
-                    };
+                    var content = File.ReadAllText(docItem.FullName);
+
+                    var (matter, desc, _) = DocWrapper.ParseDemoDoc(content);
+
+                    var model = new DemoComponentModel(matter, desc);
 
                     dict[language] = model;
                 }

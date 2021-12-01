@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "ProgressCircular",
   "Components": [
-    "ProgressCircular"
+    "Progress circulars"
   ],
   "Props": [
     {

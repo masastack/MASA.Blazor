@@ -6,7 +6,7 @@
 
 	<PropertyGroup>
 		<CLIProjectDir>Doc/MASA.Blazor.Doc.CLI</CLIProjectDir>
-		<CLIPath>$(CLIProjectDir)/bin/Debug/net6.0/BlazorComponent.Doc.CLI.dll</CLIPath>
+		<CLIPath>$(CLIProjectDir)/bin/Debug/net6.0/MASA.Blazor.Doc.CLI.dll</CLIPath>
 		<ProjectDir>$(SolutionDir)/Doc/MASA.Blazor.Doc</ProjectDir>
 		<ApplicationIcon />
 		<OutputType>Library</OutputType>

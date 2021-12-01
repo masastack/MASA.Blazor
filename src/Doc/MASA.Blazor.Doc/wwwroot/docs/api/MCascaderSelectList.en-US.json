@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "CascaderSelectList",
   "Components": [
-    "CascaderSelectList"
+    "Cascaders"
   ],
   "Props": [
     {

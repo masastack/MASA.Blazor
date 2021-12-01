@@ -2,7 +2,7 @@
 category: Components
 subtitle: 显示辅助
 type: 显示辅助
-title: DisplayHelpers
+title: Display helpers
 cols: 1
 
 ---

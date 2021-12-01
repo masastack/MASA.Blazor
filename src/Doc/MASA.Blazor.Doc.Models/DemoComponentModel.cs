@@ -3,29 +3,48 @@ using System.Collections.Generic;
 
 namespace MASA.Blazor.Doc.Models
 {
-    public class DemoComponentModel
+    public class DemoComponentModel: DemoFrontMatter
     {
-        public string Title { get; set; }
-
-        public string SubTitle { get; set; }
-
-        public string Type { get; set; }
-
         public string Desc { get; set; }
 
-        public int? Cols { get; set; }
-
-        public string Cover { get; set; }
-
         public int Order { get; set; }
-        
+
         public Dictionary<string, string> OtherDocs { get; set; }
 
         public DateTime LastWriteTime { get; set; }
 
-        public List<DemoItemModel> DemoList { get; set; } = new List<DemoItemModel>();
+        public List<DemoItemModel> DemoList { get; set; } = new();
 
-        public List<DemoComponentModel> Children { get; set; } = new List<DemoComponentModel>();
+        public List<DemoComponentModel> Children { get; set; } = new();
+
+        public DemoComponentModel()
+        {
+        }
+
+        public DemoComponentModel(DemoFrontMatter matter, string desc)
+        {
+            Category = matter.Category;
+            Cols = matter.Cols;
+            Cover = matter.Cover;
+            Desc = desc;
+            Related = matter.Related;
+            Subtitle = matter.Subtitle;
+            Title = matter.Title;
+            Type = matter.Type;
+        }
+
+        public DemoComponentModel(DemoFrontMatter matter, string desc, Dictionary<string, string> otherDocs)
+        {
+            Category = matter.Category;
+            Cols = matter.Cols;
+            Cover = matter.Cover;
+            Desc = desc;
+            OtherDocs = otherDocs;
+            Related = matter.Related;
+            Subtitle = matter.Subtitle;
+            Title = matter.Title;
+            Type = matter.Type;
+        }
     }
 
     public class DemoItemModel

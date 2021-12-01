@@ -5,4 +5,8 @@
 		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="YamlDotNet" Version="11.1.1" />
+	</ItemGroup>
+
 </Project>

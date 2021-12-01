@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "StepperContent",
   "Components": [
-    "StepperContent"
+    "Steppers"
   ],
   "Props": [
     {

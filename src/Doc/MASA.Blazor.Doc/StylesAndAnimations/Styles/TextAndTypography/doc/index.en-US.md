@@ -1,7 +1,7 @@
 ---
 category: Components
 type: TextAndTypography
-title: TextAndTypography
+title: Text and typography
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
 

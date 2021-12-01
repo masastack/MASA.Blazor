@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Components;
 using MASA.Blazor.Doc.Models;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
 
 namespace MASA.Blazor.Doc.Pages
 {

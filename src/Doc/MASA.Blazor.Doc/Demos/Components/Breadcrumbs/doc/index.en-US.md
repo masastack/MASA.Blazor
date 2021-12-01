@@ -10,8 +10,8 @@ Breadcrumbs component is suitable for page-level navigation.
 
 ## API
 
-- [MBreadcrumbs](/docs/api/MBreadcrumbs)
-- [MBreadcrumbsItem](/docs/api/MBreadcrumbsItem)
+- [MBreadcrumbs](/api/MBreadcrumbs)
+- [MBreadcrumbsItem](/api/MBreadcrumbsItem)
 
 ## Caveats
 

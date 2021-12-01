@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Label",
   "Components": [
-    "Label"
+    "Text fields"
   ],
   "Props": [
     {

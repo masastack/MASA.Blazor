@@ -1,6 +1,8 @@
 ﻿{
+  "Title": "ListItemSubtitle",
   "Components": [
-    "ListItemSubtitle"
+    "Lists",
+    "List item groups"
   ],
   "Props": [
     {

@@ -11,8 +11,8 @@ helper class can be used to alter the background or text color.
 
 ## API
 
-- [MButton](/docs/api/MButton)
-- [MButtonGroup](/docs/api/MButtonGroup)
+- [MButton](/api/MButton)
+- [MButtonGroup](/api/MButtonGroup)
 
 ## Caveats
 

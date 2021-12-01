@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "AppBarTitle",
   "Components": [
-    "AppBarTitle"
+    "App bars"
   ],
   "Props": [
     {

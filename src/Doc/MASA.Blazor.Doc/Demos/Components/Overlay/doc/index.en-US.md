@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Overlay
-title: Overlay
+title: Overlays
 cols: 1
 ---
 

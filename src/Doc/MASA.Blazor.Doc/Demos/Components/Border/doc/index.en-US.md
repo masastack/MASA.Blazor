@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Border
-title: Border
+title: Borders
 cols: 1
 ---
 

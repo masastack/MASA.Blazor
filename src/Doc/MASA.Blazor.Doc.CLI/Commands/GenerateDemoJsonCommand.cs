@@ -188,19 +188,12 @@ namespace MASA.Blazor.Doc.CLI.Commands
                 foreach (FileSystemInfo docItem in (docDir as DirectoryInfo).GetFileSystemInfos().OrderBy(r => r.Name))
                 {
                     var language = docItem.Name.Replace("index.", "").Replace(docItem.Extension, "");
-                    string content = File.ReadAllText(docItem.FullName);
-                    var (meta, desc, others) = DocWrapper.ParseDemoDoc(content);
 
-                    var model = new DemoComponentModel()
-                    {
-                        Title = meta["title"],
-                        SubTitle = meta.TryGetValue("subtitle", out string subtitle) ? subtitle : null,
-                        Type = meta["type"],
-                        Desc = desc,
-                        Cols = meta.TryGetValue("cols", out var cols) ? int.Parse(cols) : (int?)null,
-                        Cover = meta.TryGetValue("cover", out var cover) ? cover : null,
-                        OtherDocs = others
-                    };
+                    var content = File.ReadAllText(docItem.FullName);
+
+                    var (matter, desc, otherDocs) = DocWrapper.ParseDemoDoc(content);
+
+                    var model = new DemoComponentModel(matter, desc, otherDocs);
 
                     dict[language] = model;
                 }

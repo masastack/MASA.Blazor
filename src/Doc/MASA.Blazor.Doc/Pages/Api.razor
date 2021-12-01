@@ -1,4 +1,4 @@
-﻿@page "/docs/api/{componentName}"
+﻿@page "/api/{componentName}"
 @layout ApiLayout
 @using MASA.Blazor.Doc.Services
 @inherits OwningComponentBase<DemoService>
@@ -14,7 +14,7 @@
                     {
                         var href = "/components/" + component;
                         <li>
-                            <ALink Href="@href">@component</ALink>
+                            <ALink Href="@href.StructureUrl()">@component</ALink>
                         </li>
                     }
                 }
@@ -118,7 +118,7 @@
     <SectionContent Class="mt-12" Title="了解更多？" Level="1">
         <div class="mb-3">
             继续学习由
-            <ALink Href="/docs/about/meet-the-team">我们的团队</ALink>
+            <ALink Href="/about/meet-the-team">我们的团队</ALink>
             选择的相关内容，或通过使用下面的导航链接在页面之间跳转。
         </div>
         <MRow Dense>

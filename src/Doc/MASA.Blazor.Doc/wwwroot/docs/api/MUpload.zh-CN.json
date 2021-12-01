@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Upload",
   "Components": [
-    "Upload"
+    "Uploads"
   ],
   "Props": [
     {

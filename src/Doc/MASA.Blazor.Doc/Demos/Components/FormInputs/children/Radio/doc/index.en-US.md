@@ -11,5 +11,5 @@ groupable functionality to allow users to select from a predefined set of option
 
 ## API
 
-- [MRadio](/docs/api/MRadio)
-- [MRadio](/docs/api/MRadioGroup)
+- [MRadio](/api/MRadio)
+- [MRadio](/api/MRadioGroup)

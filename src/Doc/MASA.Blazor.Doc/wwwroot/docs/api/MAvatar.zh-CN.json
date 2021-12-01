@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Avatar",
   "Components": [
-    "Avatar"
+    "Avatars"
   ],
   "Props": [
     {

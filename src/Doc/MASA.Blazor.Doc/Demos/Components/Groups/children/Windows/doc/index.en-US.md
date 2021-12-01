@@ -10,5 +10,5 @@ components such as `MTabs`, `MCarousel` and `MStepper` utilize this component at
 
 ## API
 
-- [MWindow](/docs/api/MWindow)
-- [MWindowItem](/docs/api/MWindowItem)
+- [MWindow](/api/MWindow)
+- [MWindowItem](/api/MWindowItem)

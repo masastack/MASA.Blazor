@@ -52,4 +52,9 @@ public static class StringExtensions
 
         return markup.Substring(from, to - from);
     }
+
+    public static string StructureUrl(this string str)
+    {
+        return str.Replace(" ", "-").ToLower();
+    }
 }

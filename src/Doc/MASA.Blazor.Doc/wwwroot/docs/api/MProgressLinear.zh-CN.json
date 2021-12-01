@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "ProgressLinear",
   "Components": [
-    "ProgressLinear"
+    "Progress linears"
   ],
   "Props": [
     {

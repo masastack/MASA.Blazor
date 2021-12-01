@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Dialog",
   "Components": [
-    "Dialog"
+    "Dialogs"
   ],
   "Props": [
     {

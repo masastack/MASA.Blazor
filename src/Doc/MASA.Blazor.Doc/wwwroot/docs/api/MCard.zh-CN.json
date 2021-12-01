@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Card",
   "Components": [
-    "Card"
+    "Cards"
   ],
   "Props": [
     {

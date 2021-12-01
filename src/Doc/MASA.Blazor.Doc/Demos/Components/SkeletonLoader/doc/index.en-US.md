@@ -1,7 +1,7 @@
 ---
 category: Components
 type: SkeletonLoader
-title: SkeletonLoader
+title: Skeleton loaders
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SkeletonLoader.svg
 ---
@@ -12,4 +12,4 @@ pre-defined options available that can be combined to make custom examples.
 
 ## API
 
-- [MSkeletonLoader](/docs/api/MSkeletonLoader)
+- [MSkeletonLoader](/api/MSkeletonLoader)

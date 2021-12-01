@@ -82,7 +82,8 @@ namespace MASA.Blazor.Doc.CLI.Commands
                     Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
                 });
 
-                var configFileDirectory = Path.Combine(Directory.GetCurrentDirectory(), output);
+                var path = Directory.GetCurrentDirectory();
+                var configFileDirectory = Path.Combine(path, output);
                 if (!Directory.Exists(configFileDirectory))
                 {
                     Directory.CreateDirectory(configFileDirectory);

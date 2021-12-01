@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "SystemBar",
   "Components": [
-    "SystemBar"
+    "System bars"
   ],
   "Props": [
     {

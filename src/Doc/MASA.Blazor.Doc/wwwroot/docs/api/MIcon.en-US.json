@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Icon",
   "Components": [
-    "Icon"
+    "Icons"
   ],
   "Props": [
     {

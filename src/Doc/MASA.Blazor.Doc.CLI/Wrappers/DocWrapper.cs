@@ -3,16 +3,11 @@ using Markdig;
 using Markdig.Extensions.Yaml;
 using Markdig.Renderers;
 using Markdig.Syntax;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Pipes;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using MASA.Blazor.Doc.Models;
-using Microsoft.Extensions.CommandLineUtils;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -20,7 +15,7 @@ namespace MASA.Blazor.Doc.CLI.Wrappers
 {
     public class DocWrapper
     {
-        public static(Dictionary<string, string> meta, string desc, Dictionary<string, string> others)
+        public static(DemoFrontMatter meta, string desc, Dictionary<string, string> others)
             ParseDemoDoc(string input)
         {
             var pipeline = new MarkdownPipelineBuilder()
@@ -31,11 +26,12 @@ namespace MASA.Blazor.Doc.CLI.Wrappers
             var document = Markdown.Parse(input, pipeline);
             var yamlBlock = document.Descendants<YamlFrontMatterBlock>().FirstOrDefault();
 
-            Dictionary<string, string> meta = null;
+            DemoFrontMatter meta = null;
             if (yamlBlock != null)
             {
                 var yaml = input.Substring(yamlBlock.Span.Start, yamlBlock.Span.Length).Trim('-');
-                meta = new Deserializer().Deserialize<Dictionary<string, string>>(yaml);
+                var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
+                meta = deserializer.Deserialize<DemoFrontMatter>(yaml);
             }
 
             var currentH2 = string.Empty;
@@ -290,14 +286,5 @@ namespace MASA.Blazor.Doc.CLI.Wrappers
         public bool Debug { get; set; }
 
         public bool? Docs { get; set; }
-    }
-
-    public enum Heading
-    {
-        Description,
-
-        Api,
-
-        Caveats
     }
 }

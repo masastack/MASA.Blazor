@@ -1,7 +1,7 @@
 ---
 category: Components
 type: DatePickersMonth
-title: DatePickersMonth
+title: Date pickers month
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg
 ---

@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Col",
   "Components": [
-    "Col"
+    "Grid system"
   ],
   "Props": [
     {

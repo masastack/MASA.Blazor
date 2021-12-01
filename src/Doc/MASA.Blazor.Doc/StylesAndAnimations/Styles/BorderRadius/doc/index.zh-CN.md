@@ -2,7 +2,7 @@
 category: Components
 subtitle: 边框半径
 type: 边框半径
-title: BorderRadius
+title: Border radius
 cols: 1
 
 ---

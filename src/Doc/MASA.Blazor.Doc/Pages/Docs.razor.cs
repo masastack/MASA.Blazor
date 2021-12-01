@@ -1,89 +1,61 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
+﻿using MASA.Blazor.Doc.Highlight;
 using MASA.Blazor.Doc.Models;
-using MASA.Blazor.Doc.Highlight;
-using MASA.Blazor.Doc.Services;
 using MASA.Blazor.Doc.Shared;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Routing;
 
 namespace MASA.Blazor.Doc.Pages
 {
-    public partial class Docs : IDisposable
+    public partial class Docs
     {
-        [Parameter]
-        public string FileName { get; set; }
+        private string _currentLanguage = "zh-CN";
 
-        [Parameter]
-        public string Dir { get; set; }
+        private string _previousPath;
+
+        private string Path => $"{Category}/{FileName}.{_currentLanguage}";
+
+        private DocFileModel File { get; set; }
+
+        [Inject]
+        private NavigationManager NavigationManager { get; set; }
+
+        [Inject]
+        private IPrismHighlighter PrismHighlighter { get; set; }
 
         [CascadingParameter]
         public MainLayout MainLayout { get; set; }
 
-        private DocFileModel _file;
+        [Parameter]
+        public string Category { get; set; }
 
-        private bool _waitingHighlight = false;
-
-
-        private string CurrentLanguage => "zh-CN";
-
-        [Inject] private NavigationManager NavigationManager { get; set; }
-        [Inject] private IPrismHighlighter PrismHighlighter { get; set; }
+        [Parameter]
+        public string FileName { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            NavigationManager.LocationChanged += OnLocationChanged;
-
             if (string.IsNullOrWhiteSpace(FileName))
             {
-                var currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
-                var newUrl = currentUrl.IndexOf('/') > 0 ? currentUrl.Substring(currentUrl.IndexOf('/') + 1) : currentUrl;
                 var menus = await Service.GetMenuAsync();
-                var current = menus.FirstOrDefault(x => x.Url == newUrl);
+                var current = menus.FirstOrDefault(x => x.Url == Category);
                 if (current != null)
                 {
-                    NavigationManager.NavigateTo($"{CurrentLanguage}/{current.Children[0].Url}");
+                    NavigationManager.NavigateTo(current.Children[0].Url);
                 }
             }
         }
 
-        private async ValueTask SetDocUrl()
-        {
-            if (!string.IsNullOrEmpty(FileName))
-            {
-                _file = await Service.GetDocFileAsync($"_content/MASA.Blazor.Doc/docs/{(Dir == null ? "" : Dir + "/")}{FileName}.{CurrentLanguage}.json");
-                _waitingHighlight = true;
-
-                //await MainLayout.ChangePrevNextNav(FileName);
-
-                //_filePath = $"docs/{FileName}.{CurrentLanguage}.md";
-            }
-        }
-
-        protected override async Task OnParametersSetAsync()
-        {
-            await SetDocUrl();
-        }
-
-        private void OnLocationChanged(object sender, LocationChangedEventArgs args)
-        {
-        }
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (_waitingHighlight)
-            {
-                _waitingHighlight = false;
-                await PrismHighlighter.HighlightAllAsync();
-            }
-        }
+            if (string.IsNullOrWhiteSpace(FileName)) return;
 
-        public void Dispose()
-        {
-            NavigationManager.LocationChanged -= OnLocationChanged;
+            if (_previousPath == Path) return;
+
+            File = await Service.GetDocFileAsync($"_content/MASA.Blazor.Doc/docs/{Path}.json");
+
+            await PrismHighlighter.HighlightAllAsync();
+
+            _previousPath = Path;
+
+            StateHasChanged();
         }
     }
 }

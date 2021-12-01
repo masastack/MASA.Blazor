@@ -1,7 +1,7 @@
 ---
 category: Components
 type: NavigationDrawer
-title: NavigationDrawer
+title: Navigation drawers
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg
 ---

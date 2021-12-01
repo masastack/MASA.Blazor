@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Snackbar",
   "Components": [
-    "Snackbar"
+    "Snackbars"
   ],
   "Props": [
     {

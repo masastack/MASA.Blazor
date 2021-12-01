@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "ColorPickerEdit",
   "Components": [
-    "ColorPickerEdit"
+    "Color pickers"
   ],
   "Props": [
     {
