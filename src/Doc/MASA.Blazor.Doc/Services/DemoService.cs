@@ -109,7 +109,7 @@ namespace MASA.Blazor.Doc.Services
             CurrentComponentName = componentName;
             await InitializeAsync(CurrentLanguage);
             return _styleCache.TryGetValue(CurrentLanguage, out var component)
-                ? (await component)[componentName.ToLower()]
+                ? (await component).TryGetValue(componentName.ToLower(), out var style) ? style : null
                 : null;
         }
 
@@ -143,9 +143,11 @@ namespace MASA.Blazor.Doc.Services
 
             if (contents == null && componentName != null)
             {
-                var components = await GetComponentAsync(componentName);
-                if (components is null) components = await GetStyleAsync(componentName);
-                var demoList = components.DemoList?.OrderBy(r => r.Order).ThenBy(r => r.Name);
+                var component = await GetComponentAsync(componentName);
+                if (component is null) component = await GetStyleAsync(componentName);
+                if (component == null) return new List<ContentsItem>();
+                
+                var demoList = component.DemoList?.OrderBy(r => r.Order).ThenBy(r => r.Name);
 
                 contents = new List<ContentsItem>();
 
@@ -179,9 +181,9 @@ namespace MASA.Blazor.Doc.Services
                     }
                 }
 
-                if (components.OtherDocs != null)
+                if (component.OtherDocs != null)
                 {
-                    foreach (var (title, _) in components.OtherDocs)
+                    foreach (var (title, _) in component.OtherDocs)
                     {
                         var href = title.HashSection();
                         contents.Add(new ContentsItem(title, href, 2));

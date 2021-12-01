@@ -36,10 +36,9 @@ namespace MASA.Blazor.Doc.Pages
             {
                 var menus = await Service.GetMenuAsync();
                 var current = menus.FirstOrDefault(x => x.Url == Category);
-                if (current != null)
-                {
-                    NavigationManager.NavigateTo(current.Children[0].Url);
-                }
+                if (current == null) throw new Exception("No page matched.");
+
+                NavigationManager.NavigateTo(current.Children[0].Url);
             }
         }
 
@@ -51,11 +50,11 @@ namespace MASA.Blazor.Doc.Pages
 
             File = await Service.GetDocFileAsync($"_content/MASA.Blazor.Doc/docs/{Path}.json");
 
+            StateHasChanged();
+
             await PrismHighlighter.HighlightAllAsync();
 
             _previousPath = Path;
-
-            StateHasChanged();
         }
     }
 }

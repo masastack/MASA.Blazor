@@ -7,7 +7,7 @@ cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sheet.svg
 related:
   - /components/cards
-  - /components/grids
+  - /components/grid-system
   - /styles/elevation
 ---
 

@@ -5,7 +5,7 @@ type: 页脚
 title: Footers
 cols: 1
 related:
-  - /components/grids
+  - /components/grid-system
   - /components/buttons
   - /components/toolbars
 ---

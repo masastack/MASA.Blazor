@@ -5,7 +5,7 @@ type: 图像
 title: Images
 cols: 1
 related:
-  - /components/grids
+  - /components/grid-system
   - /components/aspect-ratios
   - /components/parallax
 ---

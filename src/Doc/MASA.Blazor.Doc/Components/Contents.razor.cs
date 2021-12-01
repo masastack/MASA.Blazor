@@ -1,20 +1,12 @@
 ﻿using BlazorComponent;
 using MASA.Blazor.Doc.Models;
-using MASA.Blazor.Doc.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Timers;
-using Timer = System.Timers.Timer;
 using Element = BlazorComponent.Web.Element;
 
-namespace MASA.Blazor.Doc.Shared
+namespace MASA.Blazor.Doc.Components
 {
     public partial class Contents
     {

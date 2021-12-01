@@ -4,22 +4,15 @@
     </Found>
     <NotFound>
         <LayoutView Layout="@typeof(MainLayout)">
-            @if (Result != null)
-            {
-                @Result
-            }
+            <Error></Error>
         </LayoutView>
     </NotFound>
 </Router>
 
 @code{
-
-    RenderFragment Result = r => r.AddContent(0, "对不起，页面不存在！");
-
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
         await Task.Delay(2000);
     }
-
 }

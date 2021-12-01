@@ -7,7 +7,7 @@
                  Fixed
                  Elevation=1
                  Style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(20px);">
-                        <img class="ml-16" src="_content/MASA.Blazor.Doc/img/logo.png" @onclick=@(()=>NavigationManager.NavigateTo(NavigationManager.BaseUri+"/"))/>
+            <img class="ml-16" src="_content/MASA.Blazor.Doc/img/logo.png" @onclick=@(() => NavigationManager.NavigateTo(NavigationManager.BaseUri + "/"))/>
             <MButton Text Color="black" Class="ml-9">Docs</MButton>
             <MButton Text Color="black" Class="ml-4">Blog</MButton>
             <MButton Text Color="black" Class="ml-4">Team</MButton>
@@ -28,14 +28,14 @@
                     <MIcon Color="grey lighten-1">mdi-magnify</MIcon>
                 </PrependInnerContent>
             </MTextField>
-            <img class="ml-6" src="_content/MASA.Blazor.Doc/img/download.png" />
+            <img class="ml-6" src="_content/MASA.Blazor.Doc/img/download.png"/>
             @if (!_isEnglish)
             {
-                <img class="ml-6 mr-16" src="_content/MASA.Blazor.Doc/img/chinese.png" @onclick="()=>_isEnglish=true" />
+                <img class="ml-6 mr-16" src="_content/MASA.Blazor.Doc/img/chinese.png" @onclick="() => _isEnglish = true"/>
             }
             else
             {
-                <img class="ml-6 mr-16" src="_content/MASA.Blazor.Doc/img/englinsh.png" @onclick="()=>_isEnglish=false" />
+                <img class="ml-6 mr-16" src="_content/MASA.Blazor.Doc/img/englinsh.png" @onclick="() => _isEnglish = false"/>
             }
         </MAppBar>
 
@@ -52,9 +52,14 @@
             </ChildContent>
         </MNavigationDrawer>
         <MMain Style="padding: 64px 256px 0px 300px;">
-            <MContainer Class="pa-4 pa-sm-6 pa-md-8" Fluid>
-                @Body
-            </MContainer>
+            <ErrorBoundary @ref="_errorBoundary">
+                <ChildContent>
+                    @Body
+                </ChildContent>
+                <ErrorContent>
+                    <Error></Error>
+                </ErrorContent>
+            </ErrorBoundary>
         </MMain>
         <MNavigationDrawer Clipped Fixed Floating Right Top="64" Class="default-toc py-4 pr-3">
             <PrependContent>

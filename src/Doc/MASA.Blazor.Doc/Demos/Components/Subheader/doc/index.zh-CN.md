@@ -6,7 +6,7 @@ title: Subheaders
 cols: 1
 related:
   - /components/cards
-  - /components/grids
+  - /components/grid-system
   - /components/lists
 ---
 

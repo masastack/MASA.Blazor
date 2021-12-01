@@ -35,7 +35,7 @@
     [Parameter]
     public string Href { get; set; }
 
-    public string Title => UpperFirst(Href.Split("/")[2]);
+    public string Title => UpperFirst(Href.Split("/")[2]).Replace("-", " ");
 
     public string Section => Href.Split("/")[1];
 

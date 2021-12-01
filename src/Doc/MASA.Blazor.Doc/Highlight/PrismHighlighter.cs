@@ -1,8 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using MASA.Blazor.Doc.Components;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using MASA.Blazor.Doc.Shared;
 
 namespace MASA.Blazor.Doc.Highlight
 {

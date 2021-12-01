@@ -1,5 +1,6 @@
 ﻿using MASA.Blazor.Doc.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 
 namespace MASA.Blazor.Doc.Shared
@@ -9,6 +10,8 @@ namespace MASA.Blazor.Doc.Shared
         //TODO:use i18n
         private bool _isEnglish;
 
+        private ErrorBoundary _errorBoundary;
+
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
@@ -17,5 +20,12 @@ namespace MASA.Blazor.Doc.Shared
 
         [Parameter]
         public DemoMenuItemModel[] MenuItems { get; set; } = { };
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+            
+            _errorBoundary?.Recover();
+        }
     }
 }
