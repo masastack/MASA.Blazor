@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:44.3186381+08:00",
+    "LastWriteTime": "2021-11-23T09:48:33.3104036+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -192,7 +192,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:44.3396368+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.5458864+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -224,7 +224,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:44.4436339+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.5488848+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -323,7 +323,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:44.4846312+08:00",
+    "LastWriteTime": "2021-11-26T09:49:26.9691604+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -399,7 +399,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:44.5796271+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.5628865+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -488,7 +488,7 @@
       "功能组件": "\n<ul>\n<li><code>MAppBarNavIcon</code>：专门为与 <a href=\"/components/toolbars\">MToolbar</a> 和 <code>MAppBar</code> 一起使用而创建的样式化图标按钮组件。 在工具栏的左侧显示为汉堡菜单，它通常用于控制导航抽屉的状态。 默认插槽可以用于自定义此组件的图标和功能。</li>\n<li><code>MAppBarTitle</code>：修改过的 <a href=\"/components/toolbars\">MToolbarTitle</a> 组件 ，用于配合 <strong>ShrinkOnScroll</strong> 属性使用。 在小屏幕上，<strong>MToolbarTitle</strong>\n将被截断，但这个组件在展开时使用了绝对定位使其内容可见。 我们不建议您在没有使用 <strong>ShrinkOnScroll</strong> 属性时使用 <code>MAppBarTitle</code> 组件。确实是因为向此组件添加了resize事件，并进行了很多额外的计算。</li>\n</ul>\n",
       "注意事项": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <strong>Icon</strong> 属性的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将按钮包装在任何容器例如<code>div</code>中，则需要对该容器应用负边距，以便正确对齐它们。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:44.6796194+08:00",
+    "LastWriteTime": "2021-11-18T09:22:16.3308287+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -642,7 +642,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:44.7496136+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.5728856+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -719,7 +719,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <code>Icon</code> prop的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。 如果您选择将您的按钮包装在任何容器中，例如`div’， 您需要对容器应用负边距，以便正确对齐。</p>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:44.902605+08:00",
+    "LastWriteTime": "2021-11-12T17:14:53.5588656+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -870,7 +870,7 @@
     "Desc": "<p>Border component can wrap any content with one side border.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-01T10:26:44.9546043+08:00",
+    "LastWriteTime": "2021-09-03T18:29:09.2179422+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -914,7 +914,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>默认情况下，<code>MBreadcrumbs</code> 将禁用路由联动。可以通过 <strong>Linkage</strong> 属性开启路由联动。</p>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:45.0355996+08:00",
+    "LastWriteTime": "2021-11-12T17:14:53.4608659+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1003,7 +1003,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p>当使用 <strong>Dark</strong> 属性时，<code>MButton</code> 是唯一一种拥有不同行为的组件。 通常来说，组件使用 <strong>Dark</strong> 属性来表示他们将有深色背景，文本也需要是白色的。 虽然这对\n<code>MButton</code> 也是起作用的，但由于禁用状态与白色背景容易造成混淆，建议仅在按钮<strong>为</strong>彩色背景时使用此属性。 If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:45.2015887+08:00",
+    "LastWriteTime": "2021-11-18T09:22:16.3088349+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1169,7 +1169,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "功能组件": "\n<ul>\n<li><code>MCardActions</code>：用于为卡片放置 动作 的容器，如 <a href=\"/components/buttons\">MButton</a> 或 <a href=\"/components/menu\">MMenu</a>。 同时在按钮上使用 个特殊边距\n，以便它们与其他卡片内容区域的匹配。</li>\n<li><code>MCardSubtitle</code>：为卡片字幕提供默认的 <strong>字体大小</strong> 和 <strong>填充</strong>。 字体大小可以以 <a href=\"/styles/text-and-typography\">排版类</a> 覆盖。</li>\n<li><code>MCardText</code>：主要用于卡片中的 <strong>文本内容</strong>。 对文本应用填充，将其字体大小减少为 .875rem。</li>\n<li><code>MCardTitle</code>：为卡片字幕提供默认的 字体大小 和 填充。 字体大小可以以 <a href=\"/styles/text-and-typography\">排版类</a> 覆盖。</li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:45.3765793+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.6188862+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1323,7 +1323,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:45.5795674+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.6218858+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1510,7 +1510,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:45.7135603+08:00",
+    "LastWriteTime": "2021-11-05T15:50:04.4912214+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1641,7 +1641,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:45.791556+08:00",
+    "LastWriteTime": "2021-11-12T17:14:53.4428661+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1718,15 +1718,26 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:45.8205552+08:00",
+    "LastWriteTime": "2021-11-30T20:50:56.0082529+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "basic",
-        "Title": "默认图表",
+        "Title": "使用",
         "Description": "<p>图表示例</p>\n",
-        "Code": "<div class=\"text-center\">\r\n    <MECharts Option=\"_option\">\r\n    </MECharts>\r\n</div>\r\n\r\n@code{\r\n    private dynamic _option = new\r\n    {\r\n        Title = new\r\n        {\r\n            Text = \"ECharts 入门示例\"\r\n        },\r\n        Tooltip = new { },\r\n        Legend = new\r\n        {\r\n            Data = new[] { \"销量\" }\r\n        },\r\n        XAxis = new\r\n        {\r\n            Data = new[] { \"衬衫\", \"羊毛衫\", \"雪纺衫\", \"裤子\", \"高跟鞋\", \"袜子\" }\r\n        },\r\n        YAxis = new { },\r\n        Series = new[]\r\n        {\r\n            new \r\n            {\r\n                Name= \"销量\",\r\n                Type= \"bar\",\r\n                Data= new []{ 5, 20, 36, 10, 10, 20 }\r\n            }\r\n        }\r\n    };\r\n}\r\n\r\n",
-        "Type": "Demos.Components.ECharts.demo.Basic",
+        "Code": "<div class=\"text-center align-center\">\r\n    <MECharts Option=\"_option\">\r\n    </MECharts>\r\n</div>\r\n\r\n@code{\r\n    private object _option = new\r\n    {\r\n        Title = new\r\n        {\r\n            Text = \"ECharts 入门示例\"\r\n        },\r\n        Tooltip = new { },\r\n        Legend = new\r\n        {\r\n            Data = new[] { \"销量\" }\r\n        },\r\n        XAxis = new\r\n        {\r\n            Data = new[] { \"衬衫\", \"羊毛衫\", \"雪纺衫\", \"裤子\", \"高跟鞋\", \"袜子\" }\r\n        },\r\n        YAxis = new { },\r\n        Series = new[]\r\n        {\r\n            new \r\n            {\r\n                Name= \"销量\",\r\n                Type= \"bar\",\r\n                Data= new []{ 5, 20, 36, 10, 10, 20 }\r\n            }\r\n        }\r\n    };\r\n}\r\n\r\n",
+        "Type": "Demos.Components.ECharts.usage.Basic",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "heightAndWidth",
+        "Title": "高度和宽度",
+        "Description": "<p>通过 <strong>Height</strong>,<strong>Width</strong> 属性设置宽高</p>\n",
+        "Code": "<MCard>\r\n    <MCardSubtitle>柱状图</MCardSubtitle>\r\n    <MCardText>\r\n        <MRow>\r\n            <MCol>\r\n                <MECharts Width=\"400\" Height=\"300\" Option=\"_option\">\r\n                </MECharts>\r\n            </MCol>\r\n            <MCol>宽高比:400/300</MCol>\r\n        </MRow>\r\n    </MCardText>\r\n</MCard>\r\n\r\n@code {\r\n    private object _option = new\r\n    {\r\n        Title = new\r\n        {\r\n            Text = \"ECharts 入门示例\"\r\n        },\r\n        Tooltip = new { },\r\n        Legend = new\r\n        {\r\n            Data = new[] { \"销量\" }\r\n        },\r\n        XAxis = new\r\n        {\r\n            Data = new[] { \"衬衫\", \"羊毛衫\", \"雪纺衫\", \"裤子\", \"高跟鞋\", \"袜子\" }\r\n        },\r\n        YAxis = new { },\r\n        Series = new[]\r\n                                    {\r\n            new\r\n            {\r\n                Name= \"销量\",\r\n                Type= \"bar\",\r\n                Data= new []{ 5, 20, 36, 10, 10, 20 }\r\n            }\r\n        }\r\n    };\r\n}\r\n\r\n",
+        "Type": "Demos.Components.ECharts.props.HeightAndWidth",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -1746,7 +1757,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:45.954548+08:00",
+    "LastWriteTime": "2021-11-05T15:50:04.4602205+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1878,7 +1889,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:46.0275426+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.1310932+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1955,14 +1966,14 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2021-12-01T10:26:46.0705418+08:00",
+    "LastWriteTime": "2021-11-30T11:17:47.8166256+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "index",
         "Title": "使用",
         "Description": "<p>自动补全组件拓展了v-select并且添加了过滤项目的功能</p>\n",
-        "Code": "<MCard Flat>\r\n    <MContainer Fluid>\r\n        <div>@string.Join(',', _values)</div>\r\n        <MAutocomplete Items=\"_items\" @bind-Value=\"_values\"\r\n                       ItemText=\"r=>r\"\r\n                       ItemValue=\"r=>r\"\r\n                       Clearable\r\n                       Multiple></MAutocomplete>\r\n    </MContainer>\r\n</MCard>\r\n\r\n@code {\r\n    private List<string> _items = new List<string>\r\n    {\r\n        \"foo\", \"fbar\", \"fizz\", \"fbuzz\", \"fiiiizz\"\r\n    };\r\n    private List<string> _values = new List<string>\r\n    {\r\n        \"foo\", \"fbar\"\r\n    };\r\n}\r\n",
+        "Code": "<MAutocomplete Items=\"_items\" @bind-Value=\"_value\"\r\n               ItemText=\"r=>r\"\r\n               ItemValue=\"r=>r\"></MAutocomplete>\r\n\r\n@code {\r\n    private List<string> _items = new List<string>()\r\n    {\r\n        \"Alabama\", \"Alaska\", \"American Samoa\", \"Arizona\",\r\n        \"Arkansas\", \"California\", \"Colorado\", \"Connecticut\",\r\n        \"Delaware\", \"District of Columbia\", \"Federated States of Micronesia\",\r\n        \"Florida\", \"Georgia\", \"Guam\", \"Hawaii\", \"Idaho\",\r\n        \"Illinois\", \"Indiana\", \"Iowa\", \"Kansas\", \"Kentucky\",\r\n        \"Louisiana\", \"Maine\", \"Marshall Islands\", \"Maryland\",\r\n        \"Massachusetts\", \"Michigan\", \"Minnesota\", \"Mississippi\",\r\n        \"Missouri\", \"Montana\", \"Nebraska\", \"Nevada\",\r\n        \"New Hampshire\", \"New Jersey\", \"New Mexico\", \"New York\",\r\n        \"North Carolina\", \"North Dakota\", \"Northern Mariana Islands\", \"Ohio\",\r\n        \"Oklahoma\", \"Oregon\", \"Palau\", \"Pennsylvania\", \"Puerto Rico\",\r\n        \"Rhode Island\", \"South Carolina\", \"South Dakota\", \"Tennessee\",\r\n        \"Texas\", \"Utah\", \"Vermont\", \"Virgin Island\", \"Virginia\",\r\n        \"Washington\", \"West Virginia\", \"Wisconsin\", \"Wyoming\"\r\n    };\r\n    private string _value;\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Autocomplete.usage.Index",
         "Style": "",
         "Debug": false,
@@ -1973,7 +1984,7 @@
         "Name": "dense",
         "Title": "紧凑",
         "Description": "<p>你可以使用dense属性来降低自动补全的高度和缩小列表项的最大高度。</p>\n",
-        "Code": "<MCard Flat>\r\n    <MContainer Fluid>\r\n        <MRow Align=\"@AlignTypes.Center\">\r\n            <MCol Span=\"12\">\r\n                <MAutocomplete @bind-Value=\"_values\"\r\n                               Items=\"_items\"\r\n                               ItemText=\"r=>r\"\r\n                               ItemValue=\"r=>r\"\r\n                               Outlined\r\n                               Dense\r\n                               Chips\r\n                               SmallChips\r\n                               Label=\"Outlined\"\r\n                               Multiple></MAutocomplete>\r\n            </MCol>\r\n            <MCol Span=\"12\">\r\n                <MAutocomplete @bind-Value=\"_values\"\r\n                               Items=\"_items\"\r\n                               ItemText=\"r=>r\"\r\n                               ItemValue=\"r=>r\"\r\n                               Dense\r\n                               Chips\r\n                               Label=\"Solo\"\r\n                               Multiple\r\n                               Solo></MAutocomplete>\r\n            </MCol>\r\n            <MCol Span=\"12\">\r\n                <MAutocomplete @bind-Value=\"_value\"\r\n                               Items=\"_items\"\r\n                               ItemText=\"r=>r\"\r\n                               ItemValue=\"r=>r\"\r\n                               Dense\r\n                               Filled\r\n                               Label=\"Filled\"></MAutocomplete>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MCard>\r\n\r\n@code{\r\n    private List<string> _items = new List<string>\r\n    {\r\n        \"foo\", \"bar\", \"fizz\", \"buzz\"\r\n    };\r\n    private List<string> _values = new List<string>\r\n    {\r\n        \"foo\", \"bar\"\r\n    };\r\n    private string _value = \"foo\";\r\n}\r\n",
+        "Code": "<MCard Flat>\r\n    <MContainer Fluid>\r\n        <MRow Align=\"@AlignTypes.Center\">\r\n            <MCol Cols=\"12\">\r\n                <MAutocomplete @bind-Value=\"_values\"\r\n                               Items=\"_items\"\r\n                               ItemText=\"r=>r\"\r\n                               ItemValue=\"r=>r\"\r\n                               Outlined\r\n                               Dense\r\n                               Chips\r\n                               SmallChips\r\n                               Label=\"Outlined\"\r\n                               Multiple></MAutocomplete>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MAutocomplete @bind-Value=\"_values\"\r\n                               Items=\"_items\"\r\n                               ItemText=\"r=>r\"\r\n                               ItemValue=\"r=>r\"\r\n                               Dense\r\n                               Chips\r\n                               Label=\"Solo\"\r\n                               Multiple\r\n                               Solo></MAutocomplete>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MAutocomplete @bind-Value=\"_value\"\r\n                               Items=\"_items\"\r\n                               ItemText=\"r=>r\"\r\n                               ItemValue=\"r=>r\"\r\n                               Dense\r\n                               Filled\r\n                               Label=\"Filled\"></MAutocomplete>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MCard>\r\n\r\n@code{\r\n    private List<string> _items = new List<string>\r\n    {\r\n        \"foo\", \"bar\", \"fizz\", \"buzz\"\r\n    };\r\n    private List<string> _values = new List<string>\r\n    {\r\n        \"foo\", \"bar\"\r\n    };\r\n    private string _value = \"foo\";\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Autocomplete.props.Dense",
         "Style": "",
         "Debug": false,
@@ -1984,11 +1995,66 @@
         "Name": "filter",
         "Title": "过滤器",
         "Description": "<p>filter属性可以用自定义的逻辑来过滤单独的项目 在这个例子中我们使用name来过滤项目</p>\n",
-        "Code": "<div>\r\n    Todo...\r\n</div>",
+        "Code": "<MCard Class=\"overflow-hidden\"\r\n       Color=\"purple lighten-1\"\r\n       Dark>\r\n    <MToolbar Flat\r\n              Color=\"purple\">\r\n        <MIcon>mdi-account</MIcon>\r\n        <MToolbarTitle class=\"font-weight-light\">\r\n            User Profile\r\n        </MToolbarTitle>\r\n        <MSpacer></MSpacer>\r\n        <MButton Color=\"purple darken-3\"\r\n                 Fab\r\n                 Small\r\n                 OnClick=\"()=>_isEditing = !_isEditing\">\r\n            @if (_isEditing)\r\n            {\r\n                <MIcon>\r\n                    mdi-close\r\n                </MIcon>\r\n            }\r\n            else\r\n            {\r\n                <MIcon>\r\n                    mdi-pencil\r\n                </MIcon>\r\n            }\r\n        </MButton>\r\n    </MToolbar>\r\n    <MCardText>\r\n        <MTextField TValue=\"string\"\r\n                    Disabled=\"!_isEditing\"\r\n                    Color=\"white\"\r\n                    Label=\"Name\"></MTextField>\r\n        <MAutocomplete TItem=\"Model\"\r\n                       TValue=\"int\"\r\n                       TItemValue=\"int\"\r\n                       Disabled=\"!_isEditing\"\r\n                       Items=\"_states\"\r\n                       Filter=\"CustomFilter\"\r\n                       Color=\"white\"\r\n                       ItemText=\"r=>r.Name\"\r\n                       ItemValue=\"r=>r.Id\"\r\n                       Label=\"State\"></MAutocomplete>\r\n    </MCardText>\r\n    <MDivider></MDivider>\r\n    <MCardActions>\r\n        <MSpacer></MSpacer>\r\n        <MButton Disabled=\"!_isEditing\"\r\n                 Color=\"success\"\r\n                 OnClick=\"Save\">\r\n            Save\r\n        </MButton>\r\n    </MCardActions>\r\n    <MSnackbar @bind-Value=\"_hasSaved\"\r\n               Timeout=\"2000\"\r\n               Absolute\r\n               Bottom\r\n               Left>\r\n        Your profile has been updated\r\n    </MSnackbar>\r\n</MCard>\r\n\r\n@code {\r\n    public class Model\r\n    {\r\n        public int Id { get; set; }\r\n        public string Name { get; set; }\r\n        public string Abbr { get; set; }\r\n    }\r\n\r\n    private bool _hasSaved;\r\n    private bool _isEditing;\r\n    private string _model;\r\n    private List<Model> _states = new List<Model>\r\n        {\r\n            new Model\r\n            {\r\n                Name=\"Florida\",\r\n                Abbr=\"FL\",\r\n                Id=1\r\n            },\r\n            new Model\r\n            {\r\n                Name=\"Georgia\",\r\n                Abbr=\"GA\",\r\n                Id=2\r\n            },\r\n            new Model\r\n            {\r\n                Name=\"Nebraska\",\r\n                Abbr=\"NE\",\r\n                Id=3\r\n            },\r\n            new Model\r\n            {\r\n                Name=\"California\",\r\n                Abbr=\"CA\",\r\n                Id=4\r\n            },\r\n            new Model\r\n            {\r\n                Name=\"New York\",\r\n                Abbr=\"NY\",\r\n                Id=5\r\n            }\r\n        };\r\n\r\n    public bool CustomFilter(Model item, string queryText)\r\n    {\r\n        var textOne = item.Name.ToLowerInvariant();\r\n        var textTwo = item.Abbr.ToLowerInvariant();\r\n        var searchText = queryText.ToLowerInvariant();\r\n\r\n        return textOne.IndexOf(searchText) > -1 ||\r\n          textTwo.IndexOf(searchText) > -1;\r\n    }\r\n\r\n    public void Save()\r\n    {\r\n        _isEditing = !_isEditing;\r\n        _hasSaved = true;\r\n    }\r\n}",
         "Type": "Demos.Components.FormInputs.children.Autocomplete.props.Filter",
         "Style": "",
         "Debug": false,
         "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "itemAndSelection",
+        "Title": "项目和选择项",
+        "Description": "<p>你可以使用插槽自定义被选中时的视觉效果。 在这个示例中，我们为 <code>chips</code> 和 <code>list-item</code> 添加了头像。</p>\n",
+        "Code": "<MCard Color=\"blue-grey darken-1\"\r\n       Dark\r\n       Loading=\"IsUpdating\">\r\n    <ProgressContent>\r\n        <MProgressLinear Absolute\r\n                         Color=\"green lighten-3\"\r\n                         Height=\"4\"\r\n                         Indeterminate></MProgressLinear>\r\n    </ProgressContent>\r\n    <ChildContent>\r\n        <MImage Height=\"200\"\r\n                Src=\"https://cdn.vuetifyjs.com/images/cards/dark-beach.jpg\">\r\n            <MRow>\r\n                <MCol Class=\"text-right\"\r\n                      Cols=\"12\">\r\n                    <MMenu Bottom\r\n                           Left\r\n                           Transition=\"slide-y-transition\">\r\n                        <ActivatorContent>\r\n                            <MButton Icon\r\n                                     @attributes=\"context.Attrs\">\r\n                                <MIcon>mdi-dots-vertical</MIcon>\r\n                            </MButton>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MList>\r\n                                <MListItem OnClick=\"()=>IsUpdating = true\">\r\n                                    <MListItemAction>\r\n                                        <MIcon>mdi-cog</MIcon>\r\n                                    </MListItemAction>\r\n                                    <MListItemContent>\r\n                                        <MListItemTitle>Update</MListItemTitle>\r\n                                    </MListItemContent>\r\n                                </MListItem>\r\n                            </MList>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n                <MRow Class=\"pa-4\"\r\n                      Align=\"AlignTypes.Center\"\r\n                      Justify=\"JustifyTypes.Center\">\r\n                    <MCol Class=\"text-center\">\r\n                        <h3 class=\"text-h5\">\r\n                            @_name\r\n                        </h3>\r\n                        <span class=\"grey--text text--lighten-1\">@_title</span>\r\n                    </MCol>\r\n                </MRow>\r\n            </MRow>\r\n        </MImage>\r\n        <MForm>\r\n            <MContainer>\r\n                <MRow>\r\n                    <MCol Cols=\"12\"\r\n                          Md=\"6\">\r\n                        <MTextField @bind-Value=\"_name\"\r\n                                    Disabled=\"IsUpdating\"\r\n                                    Filled\r\n                                    Color=\"blue-grey lighten-2\"\r\n                                    Label=\"Name\"></MTextField>\r\n                    </MCol>\r\n                    <MCol Cols=\"12\"\r\n                          Md=\"6\">\r\n                        <MTextField @bind-Value=\"_title\"\r\n                                    Disabled=\"IsUpdating\"\r\n                                    Filled\r\n                                    Color=\"blue-grey lighten-2\"\r\n                                    Label=\"Title\"></MTextField>\r\n                    </MCol>\r\n                    <MCol Cols=\"12\">\r\n                        <MAutocomplete @bind-Value=\"_friends\"\r\n                                       Disabled=\"IsUpdating\"\r\n                                       Items=\"_people\"\r\n                                       Filled\r\n                                       Chips\r\n                                       Color=\"blue-grey lighten-2\"\r\n                                       Label=\"Select\"\r\n                                       ItemText=\"r=>r.Name\"\r\n                                       ItemValue=\"r=>r.Name\"\r\n                                       Multiple>\r\n                            <SelectionContent Context=\"data\">\r\n                                <MChip Close\r\n                                       OnCloseClick=\"()=>Remove(data.Item)\">\r\n                                    <MAvatar Left>\r\n                                        <MImage Src=\"@data.Item.Avatar\"></MImage>\r\n                                    </MAvatar>\r\n                                    @data.Item.Name\r\n                                </MChip>\r\n                            </SelectionContent>\r\n                            <ItemContent Context=\"data\">\r\n                                @if (data.Item.Header != null)\r\n                                {\r\n                                    <MSubheader>@data.Item.Header</MSubheader>\r\n                                }\r\n                                else if (data.Item.Divider)\r\n                                {\r\n                                    <MDivider></MDivider>\r\n                                }\r\n                                else\r\n                                {\r\n                                    <MListItemAvatar>\r\n                                        <img src=\"@data.Item.Avatar\">\r\n                                    </MListItemAvatar>\r\n                                    <MListItemContent>\r\n                                        <MListItemTitle>\r\n                                            @((MarkupString)data.Item.Name)\r\n                                        </MListItemTitle>\r\n                                        <MListItemSubtitle>\r\n                                            @((MarkupString)data.Item.Group)\r\n                                        </MListItemSubtitle>\r\n                                    </MListItemContent>\r\n                                }\r\n                            </ItemContent>\r\n                        </MAutocomplete>\r\n                    </MCol>\r\n                </MRow>\r\n            </MContainer>\r\n        </MForm>\r\n        <MDivider></MDivider>\r\n        <MCardActions>\r\n            <MSwitch @bind-Value=\"_autoUpdate\"\r\n                     Disabled=\"IsUpdating\"\r\n                     Class=\"mt-0\"\r\n                     Color=\"green lighten-2\"\r\n                     HideDetails=\"true\"\r\n                     Label=\"Auto Update\"></MSwitch>\r\n            <MSpacer></MSpacer>\r\n            <MButton Disabled=\"_autoUpdate\"\r\n                     Loading=\"IsUpdating\"\r\n                     Color=\"blue-grey darken-3\"\r\n                     Depressed\r\n                     OnClick=\"()=>IsUpdating = true\">\r\n                <MIcon Left>\r\n                    mdi-update\r\n                </MIcon>\r\n                Update Now\r\n            </MButton>\r\n        </MCardActions>\r\n    </ChildContent>\r\n</MCard>\r\n\r\n@code {\r\n    private bool _autoUpdate = true;\r\n    private List<string> _friends = new()\r\n        {\r\n            \"Sandra Adams\",\r\n            \"Britta Holt\"\r\n        };\r\n    private bool _isUpdating;\r\n    private string _name = \"Midnight Crew\";\r\n\r\n    public class Person\r\n    {\r\n        public string Header { get; set; }\r\n\r\n        public string Name { get; set; }\r\n\r\n        public string Group { get; set; }\r\n\r\n        public string Avatar { get; set; }\r\n\r\n        public bool Divider { get; set; }\r\n    }\r\n\r\n    private List<Person> _people = new List<Person>\r\n        {\r\n            new Person\r\n            {\r\n                Header=\"Group 1\",\r\n                Name=\"Group 1\"\r\n            },\r\n            new Person\r\n            {\r\n                Name=\"Sandra Adams\",\r\n                Group=\"Group 1\",\r\n                Avatar=\"https://cdn.vuetifyjs.com/images/lists/1.jpg\"\r\n            },\r\n            new Person\r\n            {\r\n                Name=\"Ali Connors\",\r\n                Group=\"Group 1\",\r\n                Avatar=\"https://cdn.vuetifyjs.com/images/lists/2.jpg\"\r\n            },\r\n            new Person\r\n            {\r\n                Name=\"Trevor Hansen\",\r\n                Group=\"Group 1\",\r\n                Avatar=\"https://cdn.vuetifyjs.com/images/lists/3.jpg\"\r\n            },\r\n            new Person\r\n            {\r\n                Name=\"Tucker Smith\",\r\n                Group=\"Group 1\",\r\n                Avatar=\"https://cdn.vuetifyjs.com/images/lists/2.jpg\"\r\n            },\r\n            new Person\r\n            {\r\n                Divider=true,\r\n                Name=\"Group 1\"\r\n            },\r\n            new Person\r\n            {\r\n                Header=\"Group 2\",\r\n                Name=\"Group 1\"\r\n            },\r\n            new Person\r\n            {\r\n                Name=\"Britta Holt\",\r\n                Group=\"Group 2\",\r\n                Avatar=\"https://cdn.vuetifyjs.com/images/lists/4.jpg\"\r\n            },\r\n            new Person\r\n            {\r\n                Name=\"Jane Smith \",\r\n                Group=\"Group 2\",\r\n                Avatar=\"https://cdn.vuetifyjs.com/images/lists/5.jpg\"\r\n            },\r\n            new Person\r\n            {\r\n                Name=\"John Smith\",\r\n                Group=\"Group 2\",\r\n                Avatar=\"https://cdn.vuetifyjs.com/images/lists/1.jpg\"\r\n            },\r\n            new Person\r\n            {\r\n                Name=\"Sandra Williams\",\r\n                Group=\"Group 2\",\r\n                Avatar=\"https://cdn.vuetifyjs.com/images/lists/3.jpg\"\r\n            }\r\n        };\r\n    private string _title = \"The summer breeze\";\r\n\r\n    protected bool IsUpdating\r\n    {\r\n        get\r\n        {\r\n            return _isUpdating;\r\n        }\r\n        set\r\n        {\r\n            _isUpdating = value;\r\n            _ = Task.Run(async () =>\r\n            {\r\n                await Task.Delay(3000);\r\n                _isUpdating = false;\r\n                await InvokeAsync(StateHasChanged);\r\n            });\r\n        }\r\n    }\r\n\r\n    public void Remove(Person item)\r\n    {\r\n        var index = _friends.IndexOf(item.Name);\r\n        if (index >= 0)\r\n        {\r\n            _friends.RemoveAt(index);\r\n        }\r\n    }\r\n    }\r\n",
+        "Type": "Demos.Components.FormInputs.children.Autocomplete.contents.ItemAndSelection",
+        "Style": "",
+        "Debug": false,
+        "Group": 2
+      },
+      {
+        "Order": 0,
+        "Name": "apiSearch",
+        "Title": "API查找",
+        "Description": "<p>轻松绑定动态数据并创建独特的体验。 <code>MAutocomplete</code> 的扩展支持列表使得很容易调节每个方面的输入。</p>\n",
+        "Code": "<MCard Color=\"red lighten-2\"\r\n       Dark>\r\n    <MCardTitle Class=\"text-h5 red lighten-3\">\r\n        Search for Public APIs\r\n    </MCardTitle>\r\n    <MCardText>\r\n        Explore hundreds of free API's ready for consumption! For more information visit\r\n        <a class=\"grey--text text--lighten-3\"\r\n           href=\"https://github.com/toddmotto/public-apis\"\r\n           target=\"_blank\">the GitHub repository</a>.\r\n    </MCardText>\r\n    <MCardText>\r\n        <MAutocomplete TItem=\"Item\"\r\n                       TValue=\"string\"\r\n                       TItemValue=\"string\"\r\n                       @bind-Value=\"_value\"\r\n                       Items=\"Items\"\r\n                       Loading=\"_isLoading\"\r\n                       OnSearchInputUpdate=\"UpdateSearchInputAsync\"\r\n                       OnSelectedItemUpdate=\"UpdateItemAsync\"\r\n                       Color=\"white\"\r\n                       HideNoData\r\n                       HideSelected\r\n                       ItemText=\"r=>r.Description\"\r\n                       ItemValue=\"r=>r.API\"\r\n                       Label=\"Public APIs\"\r\n                       Placeholder=\"Start typing to Search\"\r\n                       PrependIcon=\"mdi-database-search\"></MAutocomplete>\r\n    </MCardText>\r\n    <MDivider></MDivider>\r\n    <ExpandTransition>\r\n        <MList show=\"@_show\"\r\n               class=\"red lighten-3\">\r\n            @for (var i = 0; i < Fields.Count; i++)\r\n            {\r\n                var field = Fields.ElementAt(i);\r\n                <MListItem @key=\"i\">\r\n                    <MListItemContent>\r\n                        <MListItemTitle>\r\n                            @field.Value\r\n                        </MListItemTitle>\r\n                        <MListItemSubtitle>\r\n                            @field.Key\r\n                        </MListItemSubtitle>\r\n                    </MListItemContent>\r\n                </MListItem>\r\n            }\r\n        </MList>\r\n    </ExpandTransition>\r\n    <MCardActions>\r\n        <MSpacer></MSpacer>\r\n        <MButton Disabled=\"_model==null\"\r\n                 Color=\"grey darken-3\"\r\n                 OnClick=\"Clear\">\r\n            Clear\r\n            <MIcon Right>\r\n                mdi-close-circle\r\n            </MIcon>\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n    public class Item\r\n    {\r\n        public string API { get; set; }\r\n\r\n        public string Description { get; set; }\r\n\r\n        public string Auth { get; set; }\r\n\r\n        public string HTPPS { get; set; }\r\n\r\n        public string Cors { get; set; }\r\n\r\n        public string Link { get; set; }\r\n\r\n        public string Category { get; set; }\r\n    }\r\n\r\n    public class Result\r\n    {\r\n        public int Count { get; set; }\r\n\r\n        public List<Item> Entries { get; set; }\r\n    }\r\n\r\n    private int _descriptionLimit = 60;\r\n    private List<Item> _entries = new List<Item>();\r\n    private bool _isLoading;\r\n    private Item _model;\r\n    private string _value;\r\n    private bool _show;\r\n\r\n    [Inject]\r\n    public HttpClient HttpClient { get; set; }\r\n\r\n    protected List<Item> Items\r\n    {\r\n        get\r\n        {\r\n            return _entries.Select(entry =>\r\n            {\r\n                var item = new Item();\r\n\r\n                item.API = entry.API;\r\n                item.Auth = entry.Auth;\r\n                item.Category = entry.Category;\r\n                item.Cors = entry.Cors;\r\n                item.Description = entry.Description.Length > _descriptionLimit ? entry.Description.Substring(0, _descriptionLimit) + \"...\" : entry.Description;\r\n                item.HTPPS = entry.HTPPS;\r\n                item.Link = entry.Link;\r\n\r\n                return item;\r\n            }).ToList();\r\n        }\r\n    }\r\n\r\n    protected Dictionary<string, object> Fields\r\n    {\r\n        get\r\n        {\r\n            if (_model == null)\r\n            {\r\n                return new Dictionary<string, object>();\r\n            }\r\n\r\n            return new Dictionary<string, object>\r\n                {\r\n                    {\"API\",_model.API},\r\n                    {\"Auth\",_model.Auth},\r\n                    {\"Category\",_model.Category},\r\n                    {\"Cors\",_model.Cors},\r\n                    {\"Description\",_model.Description},\r\n                    {\"HTPPS\",_model.HTPPS},\r\n                    {\"Link\",_model.Link}\r\n                };\r\n        }\r\n    }\r\n\r\n    public async Task UpdateSearchInputAsync(string val)\r\n    {\r\n        if (Items.Count > 0)\r\n        {\r\n            return;\r\n        }\r\n\r\n        if (_isLoading)\r\n        {\r\n            return;\r\n        }\r\n\r\n        _isLoading = true;\r\n\r\n        var res = await HttpClient.GetFromJsonAsync<Result>(\"https://api.publicapis.org/entries\");\r\n        _entries = res.Entries.Take(20).ToList();//We can't process too many items now\r\n\r\n        _isLoading = false;\r\n    }\r\n\r\n    public async Task UpdateItemAsync(Item item)\r\n    {\r\n        _model = item;\r\n        await Task.Delay(100);//We will fix this when transition update to javascript\r\n        _show = true;\r\n    }\r\n\r\n    public void Clear()\r\n    {\r\n        _model = null;\r\n        _value = null;\r\n        _show = false;\r\n    }\r\n }\r\n",
+        "Type": "Demos.Components.FormInputs.children.Autocomplete.misc.ApiSearch",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 0,
+        "Name": "asynchronousItems",
+        "Title": "异步项目",
+        "Description": "<p>有时您需要基于搜索查询加载外部的数据。 在赋值autocomplete的属性时使用search-input属性与**.sync修饰符 我们还使用新的 cache-items 属性。 这将保持一个唯一的列表，它的所有项目都被传递到items属性。当使用异步项目和 多个 属性时是必须的** 。</p>\n",
+        "Code": "<MToolbar Dark\r\n          Color=\"teal\">\r\n    <MToolbarTitle>State selection</MToolbarTitle>\r\n    <MAutocomplete @bind-Value=\"_select\"\r\n                   Loading=\"_loading\"\r\n                   Items=\"_items\"\r\n                   OnSearchInputUpdate=\"QuerySelections\"\r\n                   Class=\"mx-4\"\r\n                   Flat\r\n                   HideNoData\r\n                   ItemValue=\"r=>r\"\r\n                   ItemText=\"r=>r\"\r\n                   HideDetails=\"true\"\r\n                   Label=\"What state are you from?\"\r\n                   SoloInverted></MAutocomplete>\r\n    <MButton Icon>\r\n        <MIcon>mdi-dots-vertical</MIcon>\r\n    </MButton>\r\n</MToolbar>\r\n\r\n@code {\r\n    private bool _loading;\r\n    private List<string> _items=new List<string>();\r\n    private List<string> _states = new List<string>()\r\n    {\r\n        \"Alabama\", \"Alaska\", \"American Samoa\", \"Arizona\",\r\n        \"Arkansas\", \"California\", \"Colorado\", \"Connecticut\",\r\n        \"Delaware\", \"District of Columbia\", \"Federated States of Micronesia\",\r\n        \"Florida\", \"Georgia\", \"Guam\", \"Hawaii\", \"Idaho\",\r\n        \"Illinois\", \"Indiana\", \"Iowa\", \"Kansas\", \"Kentucky\",\r\n        \"Louisiana\", \"Maine\", \"Marshall Islands\", \"Maryland\",\r\n        \"Massachusetts\", \"Michigan\", \"Minnesota\", \"Mississippi\",\r\n        \"Missouri\", \"Montana\", \"Nebraska\", \"Nevada\",\r\n        \"New Hampshire\", \"New Jersey\", \"New Mexico\", \"New York\",\r\n        \"North Carolina\", \"North Dakota\", \"Northern Mariana Islands\", \"Ohio\",\r\n        \"Oklahoma\", \"Oregon\", \"Palau\", \"Pennsylvania\", \"Puerto Rico\",\r\n        \"Rhode Island\", \"South Carolina\", \"South Dakota\", \"Tennessee\",\r\n        \"Texas\", \"Utah\", \"Vermont\", \"Virgin Island\", \"Virginia\",\r\n        \"Washington\", \"West Virginia\", \"Wisconsin\", \"Wyoming\"\r\n    };\r\n    private string _select;\r\n\r\n    private async Task QuerySelections(string v)\r\n    {\r\n        if (string.IsNullOrEmpty(v) || v == _select)\r\n        {\r\n            return;\r\n        }\r\n\r\n        _loading = true;\r\n        await Task.Delay(500);\r\n        _items = _states.Where(e => e.ToLowerInvariant().IndexOf(v.ToLowerInvariant()) > -1).ToList();\r\n        _loading = false;\r\n    }\r\n}",
+        "Type": "Demos.Components.FormInputs.children.Autocomplete.misc.AsynchronousItems",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 0,
+        "Name": "cryptocurrencySelector",
+        "Title": "加密货币选择器",
+        "Description": "<p><code>MAutocomplete</code> 组件非常灵活，可以适合任何使用情况。 为no-data, item和selection插槽创建自定义的显示样式以提供独特的用户体验. 使用 插槽 使您能够轻松自定义您的应用程序所需的外观。</p>\n",
+        "Code": "<MToolbar Color=\"orange accent-1\">\r\n    <ChildContent>\r\n        <MAppBarNavIcon Class=\"hidden-sm-and-down\"></MAppBarNavIcon>\r\n        <MToolbarTitle Class=\"text-h6 mr-6 hidden-sm-and-down\">\r\n            Cryptocurrency\r\n        </MToolbarTitle>\r\n        <MAutocomplete @bind-Value=\"_model\"\r\n                       Items=\"_items\"\r\n                       Loading=\"_isLoading\"\r\n                       OnSearchInputUpdate=\"Search\"\r\n                       Chips\r\n                       Clearable\r\n                       HideDetails=\"true\"\r\n                       HideSelected\r\n                       ItemText=\"r=>r.Name\"\r\n                       ItemValue=\"r=>r.Symbol\"\r\n                       Label=\"Search for a coin...\"\r\n                       Solo>\r\n            <NoDataContent>\r\n                <MListItem>\r\n                    <MListItemTitle>\r\n                        Search for your favorite\r\n                        <strong>Cryptocurrency</strong>\r\n                    </MListItemTitle>\r\n                </MListItem>\r\n            </NoDataContent>\r\n            <SelectionContent Context=\"data\">\r\n                <MChip Color=\"blue-grey\"\r\n                       Class=\"white--text\">\r\n                    <MIcon Left>\r\n                        mdi-bitcoin\r\n                    </MIcon>\r\n                    <span>\r\n                        @data.Item.Name\r\n                    </span>\r\n                </MChip>\r\n            </SelectionContent>\r\n            <ItemContent Context=\"data\">\r\n                <MListItemAvatar Color=\"indigo\"\r\n                                 Class=\"text-h5 font-weight-light white--text\">\r\n                    @data.Item.Name[0]\r\n                </MListItemAvatar>\r\n                <MListItemContent>\r\n                    <MListItemTitle>\r\n                        @data.Item.Name\r\n                    </MListItemTitle>\r\n                    <MListItemSubtitle>\r\n                        @data.Item.Symbol\r\n                    </MListItemSubtitle>\r\n                </MListItemContent>\r\n                <MListItemAction>\r\n                    <MIcon>mdi-bitcoin</MIcon>\r\n                </MListItemAction>\r\n            </ItemContent>\r\n        </MAutocomplete>\r\n    </ChildContent>\r\n    <ExtensionContent>\r\n        <MTabs @bind-Value=\"_tab\"\r\n               HideSlider=\"_model!=null\"\r\n               Color=\"blue-grey\"\r\n               SliderColor=\"blue-grey\">\r\n            <MTab Disabled=\"_model==null\">\r\n                News\r\n            </MTab>\r\n            <MTab Disabled=\"_model==null\">\r\n                Trading\r\n            </MTab>\r\n            <MTab Disabled=\"_model==null\">\r\n                Blog\r\n            </MTab>\r\n        </MTabs>\r\n    </ExtensionContent>\r\n</MToolbar>\r\n\r\n@code {\r\n    class Currency\r\n    {\r\n        public string Id { get; set; }\r\n\r\n        public string Symbol { get; set; }\r\n\r\n        public string Name { get; set; }\r\n    }\r\n\r\n    private bool _isLoading;\r\n    private List<Currency> _items = new List<Currency>();\r\n    private string _model;\r\n    private StringNumber _tab;\r\n\r\n    protected string Model\r\n    {\r\n        get\r\n        {\r\n            return _model;\r\n        }\r\n        set\r\n        {\r\n            _model = value;\r\n\r\n            if (value != null)\r\n            {\r\n                _tab = 0;\r\n            }\r\n            else\r\n            {\r\n                _tab = null;\r\n            }\r\n        }\r\n    }\r\n\r\n    [Inject]\r\n    public HttpClient HttpClient { get; set; }\r\n\r\n    public async Task Search(string val)\r\n    {\r\n        if (_items.Count > 0)\r\n        {\r\n            return;\r\n        }\r\n\r\n        _isLoading = true;\r\n        var items = await HttpClient.GetFromJsonAsync<List<Currency>>(\"https://api.coingecko.com/api/v3/coins/list\");\r\n        _items = items.Take(20).ToList();//TODO:Wait for MSelect update\r\n        _isLoading = false;\r\n    }\r\n}",
+        "Type": "Demos.Components.FormInputs.children.Autocomplete.misc.CryptocurrencySelector",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 0,
+        "Name": "stateSelector",
+        "Title": "状态选择器",
+        "Description": "<p>结合使用 <code>MAutocomplete</code> 插槽和过渡，您可以创建一个现代的的可切换的自动补全栏，例如这个状态选择器。</p>\n",
+        "Code": "<MCard>\r\n    <MCardTitle Class=\"text-h5 font-weight-regular blue-grey white--text\">\r\n        Profile\r\n    </MCardTitle>\r\n    <MCardText>\r\n        <MSubheader Class=\"pa-0\">\r\n            Where do you live?\r\n        </MSubheader>\r\n        <MAutocomplete @bind-Value=\"_model\"\r\n                       Hint=\"@(!_isEditing ? \"Click the icon to edit\" : \"Click the icon to save\")\"\r\n                       Items=\"_states\"\r\n                       Readonly=\"!_isEditing\"\r\n                       Label=\"@($\"State — {(_isEditing ? \"Editable\" : \"Readonly\")}\")\"\r\n                       PersistentHint\r\n                       ItemValue=\"r=>r\"\r\n                       ItemText=\"r=>r\"\r\n                       PrependIcon=\"mdi-city\">\r\n            <AppendOuterContent>\r\n                <SlideXReverseTransition>\r\n                    <MIcon key=\"@($\"icon-{_isEditing}\")\"\r\n                           Color=\"@(_isEditing ? \"success\" : \"info\")\"\r\n                           OnClick=\"()=>_isEditing = !_isEditing\">\r\n                        @(_isEditing ? \"mdi-check-outline\" : \"mdi-circle-edit-outline\")\r\n                    </MIcon>\r\n                </SlideXReverseTransition>\r\n            </AppendOuterContent>\r\n        </MAutocomplete>\r\n    </MCardText>\r\n</MCard>\r\n\r\n@code{\r\n    private bool _isEditing;\r\n    private string _model;\r\n     private List<string> _states = new List<string>()\r\n    {\r\n        \"Alabama\", \"Alaska\", \"American Samoa\", \"Arizona\",\r\n        \"Arkansas\", \"California\", \"Colorado\", \"Connecticut\",\r\n        \"Delaware\", \"District of Columbia\", \"Federated States of Micronesia\",\r\n        \"Florida\", \"Georgia\", \"Guam\", \"Hawaii\", \"Idaho\",\r\n        \"Illinois\", \"Indiana\", \"Iowa\", \"Kansas\", \"Kentucky\",\r\n        \"Louisiana\", \"Maine\", \"Marshall Islands\", \"Maryland\",\r\n        \"Massachusetts\", \"Michigan\", \"Minnesota\", \"Mississippi\",\r\n        \"Missouri\", \"Montana\", \"Nebraska\", \"Nevada\",\r\n        \"New Hampshire\", \"New Jersey\", \"New Mexico\", \"New York\",\r\n        \"North Carolina\", \"North Dakota\", \"Northern Mariana Islands\", \"Ohio\",\r\n        \"Oklahoma\", \"Oregon\", \"Palau\", \"Pennsylvania\", \"Puerto Rico\",\r\n        \"Rhode Island\", \"South Carolina\", \"South Dakota\", \"Tennessee\",\r\n        \"Texas\", \"Utah\", \"Vermont\", \"Virgin Island\", \"Virginia\",\r\n        \"Washington\", \"West Virginia\", \"Wisconsin\", \"Wyoming\"\r\n    };\r\n}",
+        "Type": "Demos.Components.FormInputs.children.Autocomplete.misc.StateSelector",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
       }
     ],
     "Children": [],
@@ -2010,18 +2076,29 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:46.0955396+08:00",
+    "LastWriteTime": "2021-11-24T14:42:47.282503+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "index",
         "Title": "使用",
-        "Description": "",
-        "Code": "\r\n<MRow>\r\n    <MCol Span=\"6\">\r\n        <MCascader @bind-Value=\"_vaule\"\r\n                   Items=\"_items\"\r\n                   ItemText=\"u => u.Label\"\r\n                   ItemValue=\"u => u.Value\"\r\n                   ItemChildren=\"u => u.Children\"\r\n                   IsFull=\"true\">\r\n        </MCascader>\r\n    </MCol>\r\n    <MCol Span=\"6\">\r\n        <MCascader Outlined\r\n                   @bind-Value=\"_vaule\"\r\n                   Items=\"_items\"\r\n                   ItemText=\"u => u.Label\"\r\n                   ItemValue=\"u => u.Value\"\r\n                   ItemChildren=\"u => u.Children\">\r\n        </MCascader>\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n    public class BCascaderNode\r\n    {\r\n        public string Value { get; set; }\r\n        public string Label { get; set; }\r\n        public List<BCascaderNode> Children { get; set; }\r\n    }\r\n\r\n    private List<BCascaderNode> _items = new List<BCascaderNode>\r\n{\r\n    new BCascaderNode\r\n    {\r\n    Value=\"111\",\r\n    Label=\"111\",\r\n    Children=new List<BCascaderNode>()\r\n    {\r\n    new BCascaderNode\r\n    {\r\n        Value=\"333\",\r\n        Label=\"333\",\r\n        Children=new List<BCascaderNode>()\r\n        {\r\n            new BCascaderNode\r\n            {\r\n                Value=\"444\",\r\n                Label=\"444\",\r\n            }\r\n        }\r\n    },\r\n    new BCascaderNode\r\n    {\r\n        Value=\"555\",\r\n        Label=\"555\",\r\n        Children=new List<BCascaderNode>()\r\n        {\r\n            new BCascaderNode\r\n            {\r\n                Value=\"666\",\r\n                Label=\"666\",\r\n            }\r\n        }\r\n    }\r\n    }\r\n    },\r\n    new BCascaderNode\r\n    {\r\n    Value=\"222\",\r\n    Label=\"222\"\r\n    },\r\n    new BCascaderNode\r\n    {\r\n    Value=\"777\",\r\n    Label=\"777\"\r\n    },\r\n    new BCascaderNode\r\n    {\r\n    Value=\"888\",\r\n    Label=\"888\"\r\n    },\r\n    new BCascaderNode\r\n    {\r\n    Value=\"999\",\r\n    Label=\"999\"\r\n    },\r\n    new BCascaderNode\r\n    {\r\n    Value=\"101010\",\r\n    Label=\"101010\"\r\n    },\r\n    new BCascaderNode\r\n    {\r\n    Value=\"111111\",\r\n    Label=\"111111\"\r\n    },\r\n    };\r\n\r\n    private string _vaule = \"444\";\r\n}\r\n",
+        "Description": "<p>级联选择器用于选择省市区</p>\n",
+        "Code": "<MCascader @bind-Value=\"_value\"\r\n           Items=\"_items\"\r\n           ItemText=\"u => u.Label\"\r\n           ItemValue=\"u => u.Value\"\r\n           ItemChildren=\"u => u.Children\">\r\n</MCascader>\r\n\r\n@code {\r\n    public class CascaderNode\r\n    {\r\n        public string Value { get; set; }\r\n        public string Label { get; set; }\r\n        public List<CascaderNode> Children { get; set; }\r\n    }\r\n    private string _value;\r\n    private List<CascaderNode> _items = new List<CascaderNode>() {\r\n        new CascaderNode()\r\n        {\r\n            Value = \"1\",\r\n            Label = \"����\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"11\", Label=\"�人\", Children = new List<CascaderNode>(){\r\n                        new CascaderNode{ Value = \"111\", Label=\"�����\", Children = new List<CascaderNode>(){\r\n                            new CascaderNode{ Value = \"1111\", Label=\"�ƺ�¥�ֵ�\"},\r\n                            new CascaderNode{ Value = \"1112\", Label=\"��ɳ�\u07BDֵ�\"}\r\n                        } },\r\n                        new CascaderNode{ Value = \"112\", Label=\"��ɽ��\"}\r\n                    } },\r\n                    new CascaderNode{ Value = \"12\", Label=\"��ʯ\"},\r\n                    new CascaderNode{ Value = \"13\", Label=\"�˲�\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"2\",\r\n            Label = \"�㽭\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"21\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"22\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"23\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"24\", Label=\"����\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"3\",\r\n            Label = \"�Ϻ�\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"31\", Label=\"�����\"},\r\n                    new CascaderNode{ Value = \"32\", Label=\"������\"},\r\n                    new CascaderNode{ Value = \"33\", Label=\"�ֶ�����\"},\r\n                    new CascaderNode{ Value = \"34\", Label=\"������\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"4\",\r\n            Label = \"����\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"41\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"42\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"43\", Label=\"����\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"5\",\r\n            Label = \"����\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"51\", Label=\"�Ͼ�\", Children = new List<CascaderNode>(){\r\n                        new CascaderNode{ Value = \"511\", Label=\"��¥��\"},\r\n                        new CascaderNode{ Value = \"512\", Label=\"������\"}\r\n                    } },\r\n                    new CascaderNode{ Value = \"52\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"53\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"54\", Label=\"����\"}\r\n                }\r\n        }};\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Cascader.usage.Index",
         "Style": "",
         "Debug": false,
         "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "dense",
+        "Title": "密集",
+        "Description": "<p><strong>Dense</strong> 属性用于减少高度</p>\n",
+        "Code": "<MContainer>\r\n    <MRow>\r\n        <MCol Cols=\"4\">\r\n            <MCascader @bind-Value=\"_value\"\r\n                       Dense\r\n                       Items=\"_items\"\r\n                       ItemText=\"u => u.Label\"\r\n                       ItemValue=\"u => u.Value\"\r\n                       ItemChildren=\"u => u.Children\">\r\n            </MCascader>\r\n        </MCol>\r\n        <MSpacer></MSpacer>\r\n    </MRow>\r\n</MContainer>\r\n\r\n@code {\r\n    public class CascaderNode\r\n    {\r\n        public string Value { get; set; }\r\n        public string Label { get; set; }\r\n        public List<CascaderNode> Children { get; set; }\r\n    }\r\n    private string _value;\r\n    private List<CascaderNode> _items = new List<CascaderNode>() {\r\n        new CascaderNode()\r\n        {\r\n            Value = \"1\",\r\n            Label = \"����\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"11\", Label=\"�人\", Children = new List<CascaderNode>(){\r\n                        new CascaderNode{ Value = \"111\", Label=\"�����\", Children = new List<CascaderNode>(){\r\n                            new CascaderNode{ Value = \"1111\", Label=\"�ƺ�¥�ֵ�\"},\r\n                            new CascaderNode{ Value = \"1112\", Label=\"��ɳ�\u07BDֵ�\"}\r\n                        } },\r\n                        new CascaderNode{ Value = \"112\", Label=\"��ɽ��\"}\r\n                    } },\r\n                    new CascaderNode{ Value = \"12\", Label=\"��ʯ\"},\r\n                    new CascaderNode{ Value = \"13\", Label=\"�˲�\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"2\",\r\n            Label = \"�㽭\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"21\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"22\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"23\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"24\", Label=\"����\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"3\",\r\n            Label = \"�Ϻ�\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"31\", Label=\"�����\"},\r\n                    new CascaderNode{ Value = \"32\", Label=\"������\"},\r\n                    new CascaderNode{ Value = \"33\", Label=\"�ֶ�����\"},\r\n                    new CascaderNode{ Value = \"34\", Label=\"������\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"4\",\r\n            Label = \"����\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"41\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"42\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"43\", Label=\"����\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"5\",\r\n            Label = \"����\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"51\", Label=\"�Ͼ�\", Children = new List<CascaderNode>(){\r\n                        new CascaderNode{ Value = \"511\", Label=\"��¥��\"},\r\n                        new CascaderNode{ Value = \"512\", Label=\"������\"}\r\n                    } },\r\n                    new CascaderNode{ Value = \"52\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"53\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"54\", Label=\"����\"}\r\n                }\r\n        }};\r\n}\r\n",
+        "Type": "Demos.Components.FormInputs.children.Cascader.props.Dense",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
       },
       {
         "Order": 0,
@@ -2030,6 +2107,17 @@
         "Description": "<p>LoadChildren 用于动态加载子项</p>\n",
         "Code": "<MCascader @bind-Value=\"_vaule\"\r\n           Items=\"_items\"\r\n           ItemText=\"u => u.Label\"\r\n           ItemValue=\"u => u.Value\"\r\n           ItemChildren=\"u => u.Children\"\r\n           LoadChildren=\"FetchChildrenAsync\">\r\n</MCascader>\r\n\r\n@code {\r\n    public class BCascaderNode\r\n    {\r\n        public int Value { get; set; }\r\n        public string Label { get; set; }\r\n        public List<BCascaderNode> Children { get; set; } = new();\r\n    }\r\n\r\n    public class Item\r\n    {\r\n        public int Id { get; set; }\r\n        public string Description { get; set; }\r\n        public int ParentId { get; set; }\r\n        public int Level { get; set; }\r\n    }\r\n\r\n    private List<Item> _allItems = new()\r\n        {\r\n            new Item\r\n            {\r\n                Id = 3,\r\n                Description = \"武汉\",\r\n                ParentId = 1,\r\n                Level = 2\r\n            },\r\n            new Item\r\n            {\r\n                Id = 4,\r\n                Description = \"武昌区\",\r\n                ParentId = 3,\r\n                Level = 3\r\n            },\r\n            new Item\r\n            {\r\n                Id = 5,\r\n                Description = \"黄石\",\r\n                ParentId = 1,\r\n                Level = 1\r\n            }\r\n        };\r\n\r\n    private List<BCascaderNode> _items = new List<BCascaderNode>\r\n    {\r\n        new BCascaderNode\r\n        {\r\n            Value=1,\r\n            Label=\"湖北\"\r\n        },\r\n        new BCascaderNode\r\n        {\r\n            Value=2,\r\n            Label=\"浙江\"\r\n        }\r\n    };\r\n\r\n    private int _vaule = 4;\r\n\r\n    public async Task FetchChildrenAsync(BCascaderNode node)\r\n    {\r\n        await Task.Delay(1000);\r\n        var children = _allItems.Where(item => item.ParentId == node.Value)\r\n            .Select(item => new BCascaderNode\r\n                {\r\n                    Value = item.Id,\r\n                    Label = item.Description,\r\n                    Children = item.Level < 3 ? new() : null//We only load children which count equal 0\r\n                });\r\n        node.Children = children.Any() ? children.ToList() : null;//Set to null so we will not load any more\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Cascader.props.LoadChildren",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "showAllLevels",
+        "Title": "展示完整路径",
+        "Description": "<p><strong>ShowAllLevels</strong> 用于控制展示所有层级,默认为 <code>true</code>。</p>\n",
+        "Code": "<MRow>\r\n    <MCol>\r\n        <MCascader @bind-Value=\"_value\"\r\n                   Items=\"_items\"\r\n                   ItemText=\"u => u.Label\"\r\n                   ItemValue=\"u => u.Value\"\r\n                   ItemChildren=\"u => u.Children\">\r\n        </MCascader>\r\n    </MCol>\r\n    <MCol>\r\n        <MCascader @bind-Value=\"_value\"\r\n                   Items=\"_items\"\r\n                   ItemText=\"u => u.Label\"\r\n                   ItemValue=\"u => u.Value\"\r\n                   ItemChildren=\"u => u.Children\"\r\n                   ShowAllLevels=\"false\">\r\n        </MCascader>\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n    public class CascaderNode\r\n    {\r\n        public string Value { get; set; }\r\n        public string Label { get; set; }\r\n        public List<CascaderNode> Children { get; set; }\r\n    }\r\n    private string _value;\r\n\r\n    private List<CascaderNode> _items = new List<CascaderNode>() {\r\n        new CascaderNode()\r\n        {\r\n            Value = \"1\",\r\n            Label = \"����\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"11\", Label=\"�人\", Children = new List<CascaderNode>(){\r\n                        new CascaderNode{ Value = \"111\", Label=\"�����\", Children = new List<CascaderNode>(){\r\n                            new CascaderNode{ Value = \"1111\", Label=\"�ƺ�¥�ֵ�\"},\r\n                            new CascaderNode{ Value = \"1112\", Label=\"��ɳ�\u07BDֵ�\"}\r\n                        } },\r\n                        new CascaderNode{ Value = \"112\", Label=\"��ɽ��\"}\r\n                    } },\r\n                    new CascaderNode{ Value = \"12\", Label=\"��ʯ\"},\r\n                    new CascaderNode{ Value = \"13\", Label=\"�˲�\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"2\",\r\n            Label = \"�㽭\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"21\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"22\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"23\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"24\", Label=\"����\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"3\",\r\n            Label = \"�Ϻ�\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"31\", Label=\"�����\"},\r\n                    new CascaderNode{ Value = \"32\", Label=\"������\"},\r\n                    new CascaderNode{ Value = \"33\", Label=\"�ֶ�����\"},\r\n                    new CascaderNode{ Value = \"34\", Label=\"������\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"4\",\r\n            Label = \"����\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"41\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"42\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"43\", Label=\"����\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"5\",\r\n            Label = \"����\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"51\", Label=\"�Ͼ�\", Children = new List<CascaderNode>(){\r\n                        new CascaderNode{ Value = \"511\", Label=\"��¥��\"},\r\n                        new CascaderNode{ Value = \"512\", Label=\"������\"}\r\n                    } },\r\n                    new CascaderNode{ Value = \"52\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"53\", Label=\"����\"},\r\n                    new CascaderNode{ Value = \"54\", Label=\"����\"}\r\n                }\r\n        }};\r\n}\r\n",
+        "Type": "Demos.Components.FormInputs.children.Cascader.props.ShowAllLevels",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -2053,7 +2141,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:46.180536+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.1450934+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2140,7 +2228,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:46.3215273+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.1580928+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2283,7 +2371,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:46.356523+08:00",
+    "LastWriteTime": "2021-11-29T13:01:07.4171321+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2349,7 +2437,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadio</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:46.4225196+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.1630935+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2426,7 +2514,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:46.5055157+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.1680952+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2515,7 +2603,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2021-12-01T10:26:46.6245086+08:00",
+    "LastWriteTime": "2021-11-05T15:50:00.1132746+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2527,6 +2615,17 @@
         "Style": "",
         "Debug": false,
         "Group": 4
+      },
+      {
+        "Order": 1,
+        "Name": "customTextAndValue",
+        "Title": "自定义选项的文本和值",
+        "Description": "<p>您可以在您的项目中指定特定属性的值和文本字段相对应。 默认情况下，将是属性 text 和 value相对应。 而在这个示例中，我们将应用 return-object 属性的方式来返回所选项目的整个对象值。</p>\n",
+        "Code": "<MContainer Fluid>\r\n    <MRow Align=\"AlignTypes.Center\">\r\n        <MCol Cols=\"6\">\r\n            <MSubheader>\r\n                Custom items\r\n            </MSubheader>\r\n        </MCol>\r\n\r\n        <MCol Cols=\"6\">\r\n            <MSelect TItem=\"Model\"\r\n                     TItemValue=\"string\"\r\n                     TValue=\"string\"\r\n                     Hint=\"@($\"{_selected.State}, {_selected.Abbr}\")\"\r\n                     Items=\"_states\"\r\n                     ItemText=\"r=>r.State\"\r\n                     ItemValue=\"r=>r.Abbr\"\r\n                     Label=\"Select\"\r\n                     PersistentHint\r\n                     OnSelectedItemUpdate=\"item=>_selected=item\"\r\n                     SingleLine></MSelect>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n  @code {\r\n    public class Model\r\n    {\r\n        public int Id { get; set; }\r\n        public string State { get; set; }\r\n        public string Abbr { get; set; }\r\n    }\r\n\r\n    private Model _selected = new Model()\r\n        {\r\n            State = \"Florida\",\r\n            Abbr = \"FL\"\r\n        };\r\n    private List<Model> _states = new List<Model>\r\n        {\r\n            new Model\r\n            {\r\n                State=\"Florida\",\r\n                Abbr=\"FL\",\r\n                Id=1\r\n            },\r\n            new Model\r\n            {\r\n                State=\"Georgia\",\r\n                Abbr=\"GA\",\r\n                Id=2\r\n            },\r\n            new Model\r\n            {\r\n                State=\"Nebraska\",\r\n                Abbr=\"NE\",\r\n                Id=3\r\n            },\r\n            new Model\r\n            {\r\n                State=\"California\",\r\n                Abbr=\"CA\",\r\n                Id=4\r\n            },\r\n            new Model\r\n            {\r\n                State=\"New York\",\r\n                Abbr=\"NY\",\r\n                Id=5\r\n            }\r\n        };\r\n  }",
+        "Type": "Demos.Components.FormInputs.children.Select.props.CustomTextAndValue",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
       },
       {
         "Order": 1,
@@ -2544,7 +2643,7 @@
         "Name": "disabled",
         "Title": "禁用",
         "Description": "<p>将 <strong>Disabled</strong> 的属性应用于 <code>MSelect</code> 将阻止用户与组件交互。</p>\n",
-        "Code": "<MRow Align=\"@AlignTypes.Center\">\r\n    <MCol Span=\"12\">\r\n        <MSelect Value=\"@(\"\")\"\r\n                 Items=\"items\"\r\n                 ItemText=\"u => u\"\r\n                 ItemValue=\"u => u\"\r\n                 Disabled\r\n                 Label=\"Disabled\"></MSelect>\r\n    </MCol>\r\n    <MCol Span=\"12\">\r\n        <MSelect Value=\"@(\"\")\"\r\n                 Items=\"items2\"\r\n                 ItemText=\"u => u.Key\"\r\n                 ItemValue=\"u => u.Key\"\r\n                 ItemDisabled=\"u => u.Value\"\r\n                 Label=\"Disabled Item\"></MSelect>\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n    List<string> items = new() { \"Foo\", \"Bar\", \"Fizz\", \"Buzz\" };\r\n\r\n    List<KeyValuePair<string, bool>> items2 = new Dictionary<string, bool>\r\n    {\r\n        { \"Foo\", false },\r\n        { \"Bar\", false },\r\n        { \"Fizz\", true },\r\n        { \"Buzz\", false }\r\n    }.ToList();\r\n}",
+        "Code": "<MRow Align=\"@AlignTypes.Center\">\r\n    <MCol>\r\n        <MSelect @bind-Value=\"_value\"\r\n                 Items=\"items\"\r\n                 ItemText=\"u => u\"\r\n                 ItemValue=\"u => u\"\r\n                 Disabled\r\n                 Label=\"Disabled\"></MSelect>\r\n    </MCol>\r\n    <MCol>\r\n        <MSelect @bind-Value=\"_value\"\r\n                 Items=\"items2\"\r\n                 ItemText=\"u => u.Key\"\r\n                 ItemValue=\"u => u.Key\"\r\n                 ItemDisabled=\"u => u.Value\"\r\n                 Label=\"Disabled Item\"></MSelect>\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n    List<string> items = new() { \"Foo\", \"Bar\", \"Fizz\", \"Buzz\" };\r\n    string _value;\r\n\r\n    List<KeyValuePair<string, bool>> items2 = new Dictionary<string, bool>\r\n    {\r\n        { \"Foo\", false },\r\n        { \"Bar\", false },\r\n        { \"Fizz\", true },\r\n        { \"Buzz\", false }\r\n    }.ToList();\r\n}",
         "Type": "Demos.Components.FormInputs.children.Select.props.Disabled",
         "Style": "",
         "Debug": false,
@@ -2621,7 +2720,7 @@
         "Name": "selection",
         "Title": "选择",
         "Description": "<p><strong>SelectionContent</strong> 可用于自定义选中值在输入中显示的方式。 当您想要像 <code>foo (+20 others)</code> 或不想让选区占用多行时，这是很棒的。</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MSelect @bind-Value=\"_value\"\r\n             Items=\"_items\"\r\n             Label=\"Select Item\"\r\n             ItemValue=\"r=>r\"\r\n             ItemText=\"r=>r\"\r\n             Multiple>\r\n        <SelectionContent Context=\"index\">\r\n            @if (index == 0)\r\n            {\r\n                <MChip>\r\n                    <span>@_value[index]</span>\r\n                </MChip>\r\n            }\r\n\r\n            @if (index == 1)\r\n            {\r\n                <span class=\"grey--text text-caption\">\r\n                    (+@(_value.Count - 1) others)\r\n                </span>\r\n            }\r\n        </SelectionContent>\r\n    </MSelect>\r\n</MContainer>\r\n\r\n@code {\r\n    private List<string> _items  =  new List<string>{\r\n    \"foo\", \"bar\", \"fizz\", \"buzz\", \"fizzbuzz\", \"foobar\"\r\n    };\r\n    private List<string> _value = new List<string>{\r\n    \"foo\", \"bar\", \"fizz\"\r\n    };\r\n    }\r\n",
+        "Code": "<MContainer Fluid>\r\n    <MSelect @bind-Value=\"_value\"\r\n             Items=\"_items\"\r\n             Label=\"Select Item\"\r\n             ItemValue=\"r=>r\"\r\n             ItemText=\"r=>r\"\r\n             Multiple>\r\n        <SelectionContent Context=\"data\">\r\n            @if (data.Index == 0)\r\n            {\r\n                <MChip>\r\n                    <span>@data.Item</span>\r\n                </MChip>\r\n            }\r\n            else if (data.Index == 1)\r\n            {\r\n                <span class=\"grey--text text-caption\">\r\n                    (+@(_value.Count - 1) others)\r\n                </span>\r\n            }\r\n        </SelectionContent>\r\n    </MSelect>\r\n</MContainer>\r\n\r\n@code {\r\n    private List<string> _items = new List<string>{\r\n    \"foo\", \"bar\", \"fizz\", \"buzz\", \"fizzbuzz\", \"foobar\"\r\n    };\r\n    private List<string> _value = new List<string>{\r\n    \"foo\", \"bar\", \"fizz\"\r\n    };\r\n    }\r\n",
         "Type": "Demos.Components.FormInputs.children.Select.contents.Selection",
         "Style": "",
         "Debug": false,
@@ -2646,7 +2745,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:46.8124982+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.192094+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2833,7 +2932,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:46.9004915+08:00",
+    "LastWriteTime": "2021-11-23T16:08:41.2566763+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2932,7 +3031,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:47.0214862+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.2090943+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3064,7 +3163,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:47.3134723+08:00",
+    "LastWriteTime": "2021-11-12T17:30:36.233094+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3341,7 +3440,7 @@
       "功能组件": "\n<ul>\n<li><code>MContainer</code>：<code>MContainer</code> 提供了将你的网站内容居中和水平填充的功能。 你还可以使用 <strong>Fluid</strong> 属性将容器在所有视口和设备尺寸上完全扩展。</li>\n<li><code>MCol</code>：<code>MCol</code> 包裹内容，它必须是 <code>MRow</code> 的直接子集。</li>\n<li><code>MRow</code>：<code>MRow</code> 是 <code>MCol</code> 的容器组件。 它使用 <strong>Flex</strong> 属性来控制其内栏的布局和流。 它使用的是 <strong>24px</strong> 的标准间隔。 这可以用 <strong>Dense</strong> 属性来减小，或者用 <strong>NoGutters</strong>\n来完全去除。</li>\n<li><code>MSpacer</code>：<code>MSpacer</code> 是一个基本而又通用的间隔组件，用于分配父子组件之间的剩余宽度。 当一个 <code>MSpacer</code> 放置在子组件之前或之后时，组件将推到其容器的左右两侧。 当多个组件之间使用多个 <code>MSpacer</code> 时，剩余的宽度将均匀地分布在每个 spacer 之间。</li>\n</ul>\n",
       "Helper Classes": "\n<p><strong>FillHeight</strong> applies <code>height: 100%</code> to an element. When applied to <code>MContainer</code> it will also <code>align-items: center</code>.</p>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:47.5924655+08:00",
+    "LastWriteTime": "2021-11-12T17:14:52.0838728+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3572,7 +3671,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:47.6874474+08:00",
+    "LastWriteTime": "2021-11-12T17:14:51.6938761+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3660,7 +3759,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:47.7354457+08:00",
+    "LastWriteTime": "2021-11-05T15:50:00.2032724+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3748,7 +3847,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:47.8674372+08:00",
+    "LastWriteTime": "2021-11-05T15:50:00.2182728+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3836,7 +3935,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:47.9414318+08:00",
+    "LastWriteTime": "2021-11-12T17:14:51.6278755+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3923,7 +4022,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:48.0304279+08:00",
+    "LastWriteTime": "2021-11-12T17:14:51.6198754+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4021,7 +4120,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:48.0984275+08:00",
+    "LastWriteTime": "2021-11-12T17:14:51.2038776+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4108,7 +4207,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:48.1626265+08:00",
+    "LastWriteTime": "2021-11-12T17:14:51.5758771+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4173,7 +4272,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:48.2484186+08:00",
+    "LastWriteTime": "2021-11-12T17:14:51.4958755+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4250,7 +4349,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:48.3534103+08:00",
+    "LastWriteTime": "2021-11-12T17:14:51.4798759+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4349,7 +4448,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>如果您要查找有状态列表项，请查看 <a href=\"/components/listitemgroup\"><strong>MListItemGroup</strong></a>。</p>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:48.5893958+08:00",
+    "LastWriteTime": "2021-11-12T17:14:49.811884+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4553,7 +4652,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:48.7783869+08:00",
+    "LastWriteTime": "2021-11-05T15:50:03.3062352+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4729,7 +4828,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MNavigationDrawer\">MNavigationDrawer</a></li>\n</ul>\n",
       "警告": "\n<!--alert:error-->\n<p>如果使用启用了 <strong>App</strong> 属性的 <code>MNavigationDrawer</code>，则不需要像示例中那样使用 <strong>Absolute</strong> 属性。</p>\n<!--/alert:error-->\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:48.9173805+08:00",
+    "LastWriteTime": "2021-11-16T15:17:58.2721746+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4861,7 +4960,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:48.9973741+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.8122983+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4948,7 +5047,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:49.0853685+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.8012987+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5035,7 +5134,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MColorPicker\">MColorPicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:49.1643646+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.0213047+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5124,7 +5223,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:49.4063504+08:00",
+    "LastWriteTime": "2021-11-16T15:17:58.306173+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5367,7 +5466,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:49.5273425+08:00",
+    "LastWriteTime": "2021-11-16T15:17:58.3101739+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5510,7 +5609,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:49.7023335+08:00",
+    "LastWriteTime": "2021-11-16T15:17:58.3331731+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5683,7 +5782,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-01T10:26:49.7363322+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.3653055+08:00",
     "DemoList": [
       {
         "Order": 20,
@@ -5770,7 +5869,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:49.8433254+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.7362988+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5846,7 +5945,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:50.0143158+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.7222979+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6010,7 +6109,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:50.0863119+08:00",
+    "LastWriteTime": "2021-11-16T15:17:58.3711741+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6119,7 +6218,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:50.150327+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.6822982+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -6174,7 +6273,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:50.2093062+08:00",
+    "LastWriteTime": "2021-11-17T10:44:03.0314876+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6218,7 +6317,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:50.2783009+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.6722983+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6294,7 +6393,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:50.4522911+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.6582989+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6459,7 +6558,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:50.5222887+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.6112992+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6535,7 +6634,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:50.5562864+08:00",
+    "LastWriteTime": "2021-11-16T15:18:40.5952995+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6590,7 +6689,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:50.8452673+08:00",
+    "LastWriteTime": "2021-11-17T17:33:50.2071767+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6854,7 +6953,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:50.9112667+08:00",
+    "LastWriteTime": "2021-11-17T17:33:50.164177+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6932,7 +7031,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n<li><a href=\"/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning-->\n<p>当使用 <strong>Dark</strong> 属性和 <strong>不</strong> 提供自定义 <strong>Color</strong> 时，<code>MTabs</code>组件会将其颜色默认为 white。</p>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:51.1132533+08:00",
+    "LastWriteTime": "2021-11-05T15:50:02.5722433+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7130,7 +7229,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:51.2462464+08:00",
+    "LastWriteTime": "2021-11-17T17:33:50.146178+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7262,7 +7361,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>为了正确定位 <code>MTooltip</code>，需要一个位置支撑(<code>Top</code> | <code>Bottom</code> | <code>Left</code> | <code>Right</code>)。</p>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:51.2832435+08:00",
+    "LastWriteTime": "2021-11-05T15:50:02.6882435+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7317,7 +7416,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTreeview\">MTreeview</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:51.4922335+08:00",
+    "LastWriteTime": "2021-11-25T14:31:26.5721881+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7515,7 +7614,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MUpload\">MUpload</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:51.5242287+08:00",
+    "LastWriteTime": "2021-11-17T17:33:50.0811781+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7558,7 +7657,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T10:26:51.5562282+08:00",
+    "LastWriteTime": "2021-11-18T09:22:16.1528287+08:00",
     "DemoList": [
       {
         "Order": 0,

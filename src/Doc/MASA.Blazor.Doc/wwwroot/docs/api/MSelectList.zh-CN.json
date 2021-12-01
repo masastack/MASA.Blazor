@@ -71,6 +71,11 @@
       "Description": ""
     }
   ],
-  "Contents": [],
+  "Contents": [
+    {
+      "Name": "ItemContent",
+      "Description": ""
+    }
+  ],
   "Events": []
 }

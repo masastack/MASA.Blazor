@@ -143,6 +143,18 @@
       "Description": ""
     },
     {
+      "Name": "HideNoData",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "HideSelected",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Hint",
       "Type": "String",
       "Default": "null",
@@ -152,12 +164,6 @@
       "Name": "Id",
       "Type": "String",
       "Default": "null",
-      "Description": ""
-    },
-    {
-      "Name": "IsFull",
-      "Type": "Boolean",
-      "Default": "false",
       "Description": ""
     },
     {
@@ -317,6 +323,12 @@
       "Description": ""
     },
     {
+      "Name": "ShowAllLevels",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "SingleLine",
       "Type": "Boolean",
       "Default": "false",
@@ -411,11 +423,19 @@
       "Description": ""
     },
     {
+      "Name": "ItemContent",
+      "Description": ""
+    },
+    {
       "Name": "LabelContent",
       "Description": ""
     },
     {
       "Name": "MessageContent",
+      "Description": ""
+    },
+    {
+      "Name": "NoDataContent",
       "Description": ""
     },
     {
@@ -490,6 +510,10 @@
     },
     {
       "Name": "OnPrependInnerClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnSelectedItemUpdate",
       "Description": ""
     },
     {

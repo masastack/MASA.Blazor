@@ -37,6 +37,9 @@ namespace MASA.Blazor
         [Parameter]
         public double Interval { get; set; } = 500;
 
+        [Parameter]
+        public EventCallback<string> OnSearchInputUpdate { get; set; }
+
         public override Dictionary<string, object> InputAttrs => new()
         {
             { "type", Type },
@@ -44,6 +47,20 @@ namespace MASA.Blazor
             { "value", (Multiple || Chips) ? QueryText : (QueryText ?? string.Join(',', FormatText(Value))) },
             { "autocomplete", "off" }
         };
+
+        public override List<string> Text
+        {
+            get
+            {
+                if (Multiple || Chips)
+                {
+                    return base.Text;
+                }
+
+                //By default,we use value instead
+                return new List<string>();
+            }
+        }
 
         public override IReadOnlyList<TItem> ComputedItems => Items.Where(r => QueryText == null || Filter(r, QueryText)).ToList();
 
@@ -104,10 +121,14 @@ namespace MASA.Blazor
             await base.HandleOnBlurAsync(args);
         }
 
-        public override Task HandleOnChangeAsync(ChangeEventArgs args)
+        public override async Task HandleOnChangeAsync(ChangeEventArgs args)
         {
             QueryText = args.Value.ToString();
-            return Task.CompletedTask;
+
+            if (OnSearchInputUpdate.HasDelegate)
+            {
+                await OnSearchInputUpdate.InvokeAsync(QueryText);
+            }
         }
 
         public override async Task HandleOnInputAsync(ChangeEventArgs args)

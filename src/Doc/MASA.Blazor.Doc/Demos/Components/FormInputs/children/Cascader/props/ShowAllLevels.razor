@@ -1,9 +1,22 @@
-<MCascader @bind-Value="_value"
-           Items="_items"
-           ItemText="u => u.Label"
-           ItemValue="u => u.Value"
-           ItemChildren="u => u.Children">
-</MCascader>
+<MRow>
+    <MCol>
+        <MCascader @bind-Value="_value"
+                   Items="_items"
+                   ItemText="u => u.Label"
+                   ItemValue="u => u.Value"
+                   ItemChildren="u => u.Children">
+        </MCascader>
+    </MCol>
+    <MCol>
+        <MCascader @bind-Value="_value"
+                   Items="_items"
+                   ItemText="u => u.Label"
+                   ItemValue="u => u.Value"
+                   ItemChildren="u => u.Children"
+                   ShowAllLevels="false">
+        </MCascader>
+    </MCol>
+</MRow>
 
 @code {
     public class CascaderNode
@@ -13,6 +26,7 @@
         public List<CascaderNode> Children { get; set; }
     }
     private string _value;
+
     private List<CascaderNode> _items = new List<CascaderNode>() {
         new CascaderNode()
         {

@@ -1,9 +1,17 @@
-<MCascader @bind-Value="_value"
-           Items="_items"
-           ItemText="u => u.Label"
-           ItemValue="u => u.Value"
-           ItemChildren="u => u.Children">
-</MCascader>
+<MContainer>
+    <MRow>
+        <MCol Cols="4">
+            <MCascader @bind-Value="_value"
+                       Dense
+                       Items="_items"
+                       ItemText="u => u.Label"
+                       ItemValue="u => u.Value"
+                       ItemChildren="u => u.Children">
+            </MCascader>
+        </MCol>
+        <MSpacer></MSpacer>
+    </MRow>
+</MContainer>
 
 @code {
     public class CascaderNode

@@ -13,8 +13,6 @@ namespace MASA.Blazor
 {
     public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TItem, TItemValue, TValue>
     {
-        private bool _shouldReformatText = true;
-
         private bool _visible;
         protected bool Visible
         {
@@ -49,30 +47,6 @@ namespace MASA.Blazor
         [Parameter]
         public BMenuProps MenuProps { get; set; }
 
-        [Parameter]
-        public override TValue Value
-        {
-            get => base.Value;
-            set
-            {
-                base.Value = value;
-
-                if (_shouldReformatText && ItemValue != null)
-                {
-                    if (Multiple)
-                    {
-                        Text = FormatText(Values);
-                    }
-                    else
-                    {
-                        Text = FormatText(value);
-                    }
-                }
-
-                _shouldReformatText = true;
-            }
-        }
-
         [EditorRequired]
         [Parameter]
         public Func<TItem, string> ItemText { get; set; }
@@ -95,9 +69,40 @@ namespace MASA.Blazor
         public RenderFragment AppendItemContent { get; set; }
 
         [Parameter]
-        public RenderFragment<int> SelectionContent { get; set; }
+        public RenderFragment<SelectSelectionProps<TItem>> SelectionContent { get; set; }
 
-        public List<string> Text { get; set; } = new();
+        [Parameter]
+        public RenderFragment<SelectListItemProps<TItem>> ItemContent { get; set; }
+
+        [Parameter]
+        public EventCallback<TItem> OnSelectedItemUpdate { get; set; }
+
+        [Parameter]
+        public bool HideSelected { get; set; }
+
+        [Parameter]
+        public bool HideNoData { get; set; }
+
+        [Parameter]
+        public RenderFragment NoDataContent { get; set; }
+
+        public virtual List<string> Text
+        {
+            get
+            {
+                if (Multiple)
+                {
+                    return FormatText(Values);
+                }
+
+                if (InternalValue is TValue value)
+                {
+                    return FormatText(value);
+                }
+
+                return new List<string>();
+            }
+        }
 
         public override bool IsDirty => SelectedItems.Count > 0;
 
@@ -106,8 +111,7 @@ namespace MASA.Blazor
         public override Dictionary<string, object> InputAttrs => new()
         {
             { "type", Type },
-            //TODO:this may change
-            { "value", Chips ? "" : string.Join(',', FormatText(InternalValue)) },
+            { "value", null },
             { "readonly", true }
         };
 
@@ -259,10 +263,16 @@ namespace MASA.Blazor
                 {
                     props[nameof(MList.Dense)] = Dense;
                 })
-                .Apply<BListItem, MListItem>()
+                .Apply<BListItem, MListItem>(props =>
+                {
+                    props[nameof(MListItem.Dense)] = Dense;
+                })
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>()
-                .Apply(typeof(BSelectList<,,>), typeof(MSelectList<TItem, TItemValue, TValue>))
+                .Apply(typeof(BSelectList<,,>), typeof(MSelectList<TItem, TItemValue, TValue>), props =>
+                {
+                    props[nameof(MSelectList<TItem, TItemValue, TValue>.ItemContent)] = ItemContent;
+                })
                 .Apply<BChip, MChip>(props =>
                 {
                     props[nameof(MChip.Close)] = DeletableChips && (!IsDisabled && !IsReadonly);
@@ -270,12 +280,6 @@ namespace MASA.Blazor
                     props[nameof(MChip.Class)] = "m-chip--select";
                     props[nameof(MChip.Small)] = SmallChips;
                 });
-        }
-
-        public override Task HandleOnBlurAsync(FocusEventArgs args)
-        {
-            // SetVisible(false);
-            return base.HandleOnBlurAsync(args);
         }
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
@@ -346,17 +350,14 @@ namespace MASA.Blazor
             InvokeStateHasChanged();
         }
 
-        public Task SetSelectedAsync(string text, TItemValue value)
+        public async Task SetSelectedAsync(string text, TItemValue value)
         {
-            _shouldReformatText = false;
-
             if (Multiple)
             {
                 IList<TItemValue> values = Values;
                 if (!values.Contains(value))
                 {
                     values.Add(value);
-                    Text.Add(text);
                     InternalValue = (TValue)values;
                 }
             }
@@ -365,24 +366,29 @@ namespace MASA.Blazor
                 if (value is TValue val)
                 {
                     InternalValue = val;
-
-                    Text.Clear();
-                    Text.Add(text);
                 }
             }
 
-            return Task.CompletedTask;
+            if (OnSelectedItemUpdate.HasDelegate)
+            {
+                var selectedItem = Items.FirstOrDefault(item => EqualityComparer<TItemValue>.Default.Equals(ItemValue(item), value));
+                await OnSelectedItemUpdate.InvokeAsync(selectedItem);
+            }
+
+            //TODO: Refactor MSelectList
+            StateHasChanged();
         }
 
         public Task RemoveSelectedAsync(string text, TItemValue value)
         {
-            _shouldReformatText = false;
-
             var values = Values;
             values.Remove(value);
 
             Text.Remove(text);
             InternalValue = (TValue)values;
+
+            //TODO: Refactor MSelectList
+            StateHasChanged();
 
             return Task.CompletedTask;
         }

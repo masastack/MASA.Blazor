@@ -1,8 +1,8 @@
 ---
 order: 0
 title:
-  zh-CN: 默认图表
-  en-US: Default ECharts
+  zh-CN: 使用
+  en-US: Usage
 ---
 
 ## zh-CN
