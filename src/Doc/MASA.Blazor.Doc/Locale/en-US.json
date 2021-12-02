@@ -1,4 +1,5 @@
 {
+  "Home": "Home",
   "Docs": "Docs",
   "Blog": "Blog",
   "Team": "Team",
@@ -7,8 +8,8 @@
   "GetStarted": "Get Started",
   "WhyUseMASABlazor": "Why MASA Blazor",
   "VideoTeaching": "Video teaching",
-  "VideoTitle": "MASA Blazor components teaching video",
-  "VideoDesc": "The teaching contents involved in MASA Blazor installation and commissioning are simple and easy to understand. It is suitable for novices on the road to experience and try components.",
+  "VideoTitle": "MASA Blazor teaching video",
+  "VideoDesc": "The video presentation content will create the project in three ways, including creating a blazor server using the MASA Blazor template, Blazor Wasm, and manually adding MASA Blazor.",
   "More": "More",
   "Introduction": "Introduction to Microsoft Blazor",
   "BlazorWebAssembly": "New blazor webassembly capabilities in .net 6",
@@ -31,5 +32,9 @@
   "RelatedArticle4": "Teach you to learn more about dapr 2. Service invocation",
   "Contributors": "Contributor",
   "ContributorsDesc": "5 senior contributors",
-  "Thanks": "Thanks"
+  "Thanks": "Thanks",
+  "MASABlazorCommunity": "MASA Blazor community",
+  "JoinUs": "Join us",
+  "UpdateLog": "Update log",
+  "CommonProblem": "Common problem"
 }

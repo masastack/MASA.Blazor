@@ -95,6 +95,10 @@
     font-size: 1rem !important;
 }
 
+.window-img {
+    border-radius: 0 !important;
+}
+
 @media screen and (max-width: 641px) {
     .app-bar {
         display: none !important;
@@ -385,11 +389,19 @@
         justify-content: start !important;
         padding: 5px;
         text-align: center;
+        padding-top: 35px !important;
+        padding-bottom: 35px !important;
     }
 
         .foot-box p {
             font-size: 12px !important;
             line-height: 14px !important;
+            padding-top: 20px !important;
+            padding-bottom: 20px !important;
+        }
+
+        .foot-box .foot-p {
+            display: none;
         }
 }
 
@@ -694,3 +706,7 @@
     justify-content: space-around;
     align-items: center;
 }
+
+    .foot-box p {
+        padding: 24px 0;
+    }

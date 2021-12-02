@@ -87,7 +87,7 @@
                 @foreach (var item in Enumerable.Range(0, _length))
                 {
                     <MWindowItem Value="item">
-                        <MCard Class="d-flex align-end" Color="#F2F3F5" Height="262" Width="262">
+                        <MCard Class="d-flex align-end rounded-0" Color="#F2F3F5" Height="262" Width="262">
                             <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/banner.png" />
                         </MCard>
                     </MWindowItem>
@@ -356,8 +356,8 @@
                                 <div class="d-flex justify-center">
                                     <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/CompanyUsingUs1.png">
                                 </div>
-                                <p class="user-name">MASA 鬼谷子</p>
-                                <p class="user-description">基于MASA Blazor组件库，我们快速构建了Material Design的管理后台模版，丰富的功能让产品在交互设计上可以展现更多的想象...</p>
+                                <p class="user-name">鬼谷子</p>
+                                <p class="user-description">基于MASA Blazor组件库，我们快速构建了Material Design的管理后台模版，丰富的功能让产品在交互设计上可以展现更多的想象。</p>
                             </div>
                         </MCard>
                     </MCol>
@@ -378,8 +378,8 @@
                                 <div class="d-flex justify-center">
                                     <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/CompanyUsingUs3.png">
                                 </div>
-                                <p class="user-name">祝融</p>
-                                <p class="user-description">基于MASA Blazor组件库，我们快速构建了Material Design的管理后台模版，丰富的功能让产品在交互设计上可以展现更多的想象...</p>
+                                <p class="user-name">梦境</p>
+                                <p class="user-description">大前端时代到处都是基于JS的产品，MASA Blazor 的出现弥补了 C# 开发者制作前端应用的技术空白。有了这个产品，我们可以更加灵活的应对现代软件开发。</p>
                             </div>
                         </MCard>
                     </MCol>
@@ -395,7 +395,7 @@
                     </MCol>
                 </MRow>
             </div>
-            <p class="evaluation-cooperation-p">注：以上排名以首字母进行排序</p>
+            @*<p class="evaluation-cooperation-p">注：以上排名以首字母进行排序</p>*@
         </div>
 
         <div class="related-articles">
@@ -545,19 +545,19 @@
     <MFooter Dark Padless Color="#5C2D91" Height="444" Class="footer">
         <div class="foot-box">
             <div>
-                <p class="pa-3">Contribution Guide</p>
-                <p class="pa-3">GitHub</p>
-                <p class="pa-3">Contribution Guide</p>
+                <p>MASA Blazor pro</p>
+                <p>Blazor Component</p>
+                <p>Material Design</p>
             </div>
             <div>
-                <p class="pa-3">Contribution Guide</p>
-                <p class="pa-3">GitHub</p>
-                <p class="pa-3">Contribution Guide</p>
+                <p >@T("MASABlazorCommunity")</p>
+                <p >@T("JoinUs")</p>
+                <p class="foot-p">&nbsp;</p>
             </div>
             <div>
-                <p class="pa-3">Contribution Guide</p>
-                <p class="pa-3">GitHub</p>
-                <p class="pa-3">Contribution Guide</p>
+                <p >@T("UpdateLog")</p>
+                <p >@T("CommonProblem")</p>
+                <p class="foot-p">&nbsp;</p>
             </div>
         </div>
     </MFooter>
