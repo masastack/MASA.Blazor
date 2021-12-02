@@ -95,6 +95,10 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add($"{prefix}__inner-dot")
                         .AddBackgroundColor(Color);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddBackgroundColor(Color);
                 })
                 .Apply("divider", cssBuilder =>
                 {

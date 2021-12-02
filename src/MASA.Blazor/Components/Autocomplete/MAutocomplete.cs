@@ -14,6 +14,18 @@ namespace MASA.Blazor
     {
         private Func<TItem, string, bool> _filter;
 
+        protected override BMenuProps GetDefaultMenuProps()
+        {
+            var props = base.GetDefaultMenuProps();
+            props.OffsetY = true;
+            
+            // TODO: https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L23
+            // props.OffsetOverflow = true;
+            // props.Transition = false;
+
+            return props;
+        }
+
         protected Timer Timer { get; set; }
 
         [Parameter]
@@ -28,10 +40,7 @@ namespace MASA.Blazor
 
                 return _filter;
             }
-            set
-            {
-                _filter = value;
-            }
+            set { _filter = value; }
         }
 
         [Parameter]
@@ -81,11 +90,7 @@ namespace MASA.Blazor
             base.SetComponentClass();
 
             AbstractProvider
-                .Merge<BMenu, MMenu>(props =>
-                {
-                    props[nameof(MMenu.OffsetY)] = true;
-                    props[nameof(MMenu.CloseOnContentClick)] = false;
-                });
+                .Merge<BMenu, MMenu>();
 
             CssProvider
                 .Merge(cssBuilder =>
@@ -169,6 +174,7 @@ namespace MASA.Blazor
                     {
                         QueryText = null;
                     }
+
                     break;
                 case "Backspace":
                     Visible = true;
@@ -217,6 +223,7 @@ namespace MASA.Blazor
                             InternalValue = default;
                         }
                     }
+
                     break;
                 default:
                     break;
