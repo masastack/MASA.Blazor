@@ -9,7 +9,7 @@ namespace MASA.Blazor
 {
     public partial class MChip : BChip, IThemeable, IChip, ISizeable
     {
-        private ISizeable _sizer;
+        private Sizer _sizer;
 
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
@@ -105,7 +105,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add(prefix)
-                        .Add(_sizer.SizeableClasses())
+                        .Add(_sizer.SizeableClasses)
                         .AddIf($"{prefix}--clickable", () => IsClickable)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--draggable", () => Draggable)

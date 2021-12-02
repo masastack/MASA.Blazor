@@ -315,6 +315,7 @@
   "Demos.Components.Icon.misc.Button",
   "Demos.Components.Icon.misc.FontAwesome",
   "Demos.Components.Icon.misc.MaterialDesign",
+  "Demos.Components.Icon.misc.Svg",
   "Demos.Components.Image.usage.Index",
   "Demos.Components.Image.props.AspectRatio",
   "Demos.Components.Image.props.Contain",

@@ -36,6 +36,10 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--no-action", () => NoAction)
                         .AddIf($"{prefix}--sub-group", () => SubGroup)
                         .AddTextColor(Color);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddTextColor(Color);
                 })
                 .Apply("items", cssBuilder =>
                 {
