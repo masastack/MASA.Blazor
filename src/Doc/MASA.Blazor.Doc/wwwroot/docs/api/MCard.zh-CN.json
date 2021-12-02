@@ -125,12 +125,6 @@
       "Description": "设定组件的最小宽度。"
     },
     {
-      "Name": "OnContextmenuPreventDefault",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Outlined",
       "Type": "Boolean",
       "Default": "false",

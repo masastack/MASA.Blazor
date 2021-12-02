@@ -89,12 +89,6 @@
       "Description": "允许用户跳过任意一步"
     },
     {
-      "Name": "OnContextmenuPreventDefault",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Outlined",
       "Type": "Boolean",
       "Default": "false",

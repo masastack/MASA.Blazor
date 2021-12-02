@@ -1,12 +1,7 @@
-﻿<MRow>
-    <MCol>selectedKey: @selectedKey</MCol>
-    <MCol>selectedItem: @selectedMenu?.Label</MCol>
-</MRow>
-
-<MDivider />
-
-<MASA.Blazor.Presets.PSidebar @bind-Value="selectedKey" Dense
-                              Color="indigo" Items="menus"
+﻿<MASA.Blazor.Presets.PSidebar @bind-Value="selectedKey"
+                              Dense
+                              Color="indigo"
+                              Items="menus"
                               Title="m => m.Label"
                               Icon="m => m.Icon"
                               Key="m => m.Value"
@@ -16,10 +11,8 @@
 </MASA.Blazor.Presets.PSidebar>
 
 @code {
-    private StringNumber selectedKey = "Management";
-    private Menu selectedMenu;
 
-    private static List<Menu> menus = new()
+    static List<Menu> menus = new()
     {
         new Menu() { Label = "Home", Icon = "mdi-home", Value = "Home" },
         new Menu()
@@ -27,33 +20,40 @@
             Label = "Users",
             Icon = "mdi-account-circle",
             Value = "Users",
-            SubMenus = new List<Menu>() {
-                new Menu() {
-                    Label="Admin",
-                    SubMenus = new List<Menu>() {
-                        new Menu(){ Label="Management", Icon="mdi-account-multiple-outline",Value="Management"},
-                        new Menu(){ Label="Settings", Icon="mdi-cog-outline",Value="Settings"},
+            SubMenus = new List<Menu>()
+            {
+                new()
+                {
+                    Label = "Admin",
+                    SubMenus = new List<Menu>()
+                    {
+                        new() { Label = "Management", Icon = "mdi-account-multiple-outline", Value = "Management" },
+                        new() { Label = "Settings", Icon = "mdi-cog-outline", Value = "Settings" },
                     }
                 },
-                new Menu() {
-                    Label="Actions",
-                    SubMenus = new List<Menu>() {
-                        new Menu(){ Label="Create", Icon="mdi-plus-outline",Value="Create"},
-                        new Menu(){ Label="Read", Icon="mdi-file-outline",Value="Read"},
-                        new Menu(){ Label="Update", Icon="mdi-update",Value="Update"},
-                        new Menu(){ Label="Delete", Icon="mdi-delete",Value="Delete"},
+                new()
+                {
+                    Label = "Actions",
+                    SubMenus = new List<Menu>()
+                    {
+                        new() { Label = "Create", Icon = "mdi-plus-outline", Value = "Create" },
+                        new() { Label = "Read", Icon = "mdi-file-outline", Value = "Read" },
+                        new() { Label = "Update", Icon = "mdi-update", Value = "Update" },
+                        new() { Label = "Delete", Icon = "mdi-delete", Value = "Delete" },
                     }
                 },
             }
         },
     };
 
-    private void Click(Menu item)
+    StringNumber selectedKey = "Management";
+
+    void Click(Menu item)
     {
-        selectedMenu = item;
+    // code with clicked item
     }
 
-    public class Menu
+    class Menu
     {
         public string Label { get; set; }
 
@@ -63,4 +63,5 @@
 
         public List<Menu> SubMenus { get; set; }
     }
+
 }

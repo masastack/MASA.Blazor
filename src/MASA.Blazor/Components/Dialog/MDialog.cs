@@ -25,9 +25,6 @@ namespace MASA.Blazor
         public bool Dark { get; set; }
 
         [Parameter]
-        public bool Fullscreen { get; set; } //TODO:watch fullscreen =>(hideScroll or showScroll) and (removeOverlay or genOverlay)
-
-        [Parameter]
         public bool Light { get; set; }
 
         [Parameter]
@@ -60,7 +57,7 @@ namespace MASA.Blazor
             {
                 var attrs = new Dictionary<string, object>
                 {
-                    {"role", "document"}
+                    { "role", "document" }
                 };
                 if (Value)
                 {
@@ -113,15 +110,13 @@ namespace MASA.Blazor
             AbstractProvider
                 .Apply<BOverlay, MOverlay>(props =>
                 {
-                    props[nameof(MOverlay.Value)] = Value;
+                    props[nameof(MOverlay.Value)] = ShowOverlay && Value;
                     props[nameof(MOverlay.ZIndex)] = ZIndex - 1;
                     props[nameof(MOverlay.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
                         if (Persistent)
                         {
-                            _animated = true;
-                            await Task.Delay(150);
-                            _animated = false;
+                            await AnimateClick();
                         }
                         else
                         {
@@ -135,14 +130,30 @@ namespace MASA.Blazor
                 .ApplyDialogDefault();
         }
 
+        private async Task AnimateClick()
+        {
+            _animated = true;
+            StateHasChanged();
+
+            await Task.Delay(150);
+
+            _animated = false;
+            StateHasChanged();
+        }
+
+        public async Task Keydown(KeyboardEventArgs args)
+        {
+            if (args.Key == "Escape")
+            {
+                await Close();
+            }
+        }
+
         protected override async Task Close()
         {
             if (Persistent)
             {
-                _animated = true;
-                await Task.Delay(150);
-                _animated = false;
-
+                await AnimateClick();
                 return;
             }
 

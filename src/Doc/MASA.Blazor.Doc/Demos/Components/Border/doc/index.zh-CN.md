@@ -9,5 +9,9 @@ related:
   - /components/lists
   - /components/radio
 ---
-
+  
 Border component can wrap any content with one side border.
+
+## API
+
+- [MBorder](/api/MBorder)
