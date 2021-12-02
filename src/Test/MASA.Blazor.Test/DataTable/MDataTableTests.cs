@@ -23,12 +23,12 @@ namespace MASA.Blazor.Test.DataTable
         //        props.Add(datatable => datatable.Dense, true);
         //    });
         //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasDenseClass = classes.Contains("m-data-table");
+        //    var hasDenseClass = classes.Contains("m-data-table--dense");
 
         //    // Assert
         //    Assert.IsTrue(hasDenseClass);
         //}
-         
+
         //[TestMethod]
         //public void RenderDataTableWithDisableFiltering()
         //{

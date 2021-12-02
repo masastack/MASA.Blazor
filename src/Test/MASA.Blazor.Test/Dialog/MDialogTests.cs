@@ -86,35 +86,35 @@ namespace MASA.Blazor.Test.Dialog
             Assert.IsTrue(hasLightClass);
         }
 
-        //[TestMethod]
-        //public void RenderWithMaxWidth()
-        //{
-        //    // Act
-        //    var cut = RenderComponent<MDialog>(props =>
-        //    {
-        //        props.Add(p => p.MaxWidth, 100);
-        //    });
-        //    var inputSlotDiv = cut.Find(".");
-        //    var style = inputSlotDiv.GetAttribute("style");
+        [TestMethod]
+        public void RenderDialogWithMaxWidth()
+        {
+            //Act
+            var cut = RenderComponent<MDialog>(props =>
+            {
+                props.Add(alert => alert.MaxWidth, 1);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasMaxWidthClass = classes.Contains("m-dialog__container");
 
-        //    // Assert
-        //    Assert.AreEqual("height: 64px", style);
-        //}
+            // Assert
+            Assert.IsTrue(hasMaxWidthClass);
+        }
 
-        //[TestMethod]
-        //public void RenderWithWidth()
-        //{
-        //    // Act
-        //    var cut = RenderComponent<MDialog>(props =>
-        //    {
-        //        props.Add(p => p.Width, 100);
-        //    });
-        //    var inputSlotDiv = cut.Find(".");
-        //    var style = inputSlotDiv.GetAttribute("style");
+        [TestMethod]
+        public void RenderDialogWithWidth()
+        {
+            //Act
+            var cut = RenderComponent<MDialog>(props =>
+            {
+                props.Add(alert => alert.Width, 64);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasWidthClass = classes.Contains("m-dialog__container");
 
-        //    // Assert
-        //    Assert.AreEqual("width: 64px", style);
-        //}
+            // Assert
+            Assert.IsTrue(hasWidthClass);
+        }
 
         [TestMethod]
         public void RenderDialogWithOpenDelay()
@@ -191,18 +191,6 @@ namespace MASA.Blazor.Test.Dialog
             Assert.IsTrue(hasScrollableClass);
         }
 
-        //[TestMethod]
-        //public void RenderWithChildContent()
-        //{
-        //    // Arrange & Act
-        //    var cut = RenderComponent<MDialog>(props =>
-        //    {
-        //        props.Add(dialog => dialog.ChildContent, "<span>Hello world</span>");
-        //    });
-        //    var contentDiv = cut.Find(".m-dialog__container");
 
-        //    // Assert
-        //    contentDiv.Children.MarkupMatches("<span>Hello world</span>");
-        //}
     }
 }

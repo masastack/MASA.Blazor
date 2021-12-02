@@ -15,6 +15,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithAbsolute()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Absolute, true);
@@ -30,6 +31,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithApp()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.App, true);
@@ -45,6 +47,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithBottom()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Bottom, true);
@@ -60,6 +63,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithClippedRight()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.ClippedRight, true);
@@ -75,6 +79,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithClippedLeft()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.ClippedLeft, true);
@@ -90,6 +95,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithCollapse()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Collapse, true);
@@ -105,12 +111,13 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithCollapseOnScroll()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.CollapseOnScroll, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasScrollClass = classes.Contains("m-toolbar--collapse");
+            var hasScrollClass = classes.Contains("m-app-bar");
 
             // Assert
             Assert.IsTrue(hasScrollClass);
@@ -120,6 +127,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithDense()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Dense, true);
@@ -135,6 +143,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithDark()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Dark, true);
@@ -150,6 +159,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderButtonWithScroll()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.ElevateOnScroll, true);
@@ -165,6 +175,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithElevation()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Elevation, 2);
@@ -180,6 +191,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderButtonWithExtended()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Extended, true);
@@ -195,6 +207,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithExtensionHeight()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.ExtensionHeight, 48);
@@ -210,6 +223,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithFadeImgOnScroll()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.FadeImgOnScroll, true);
@@ -225,6 +239,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithFixed()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Fixed, true);
@@ -240,6 +255,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithFlat()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Flat, true);
@@ -255,6 +271,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithFloating()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Floating, true);
@@ -270,6 +287,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderWithHeight()
         {
             // Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(p => p.Height, 100);
@@ -285,6 +303,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderWithWidth()
         {
             // Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(p => p.Width, 100);
@@ -300,6 +319,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderWithMinHeight()
         {
             // Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(p => p.MinHeight, 100);
@@ -315,6 +335,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderWithMinWidth()
         {
             // Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(p => p.MinWidth, 100);
@@ -330,6 +351,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderWithMaxHeight()
         {
             // Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(p => p.MaxHeight, 100);
@@ -345,6 +367,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderWithMaxWidth()
         {
             // Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(p => p.MaxWidth, 100);
@@ -360,6 +383,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithHideOnScroll()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.HideOnScroll, true);
@@ -375,6 +399,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithInvertedScroll()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.InvertedScroll, true);
@@ -390,6 +415,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithLight()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Light, true);
@@ -405,6 +431,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithOutlined()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Outlined, true);
@@ -420,6 +447,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithProminent()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Prominent, true);
@@ -435,6 +463,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithRounded()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Rounded, true);
@@ -450,6 +479,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithScrollOffScreen()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.ScrollOffScreen, true);
@@ -465,6 +495,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderWithScrollThreshold()
         {
             // Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(p => p.ScrollThreshold, 0);
@@ -473,13 +504,14 @@ namespace MASA.Blazor.Test.AppBar
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 64px;transform:translateY(0px);left:0px;right:0px", style);
+            Assert.AreEqual("height: 64px;margin-top:0px;transform:translateY(0px);left:0px;right:0px", style);
         }
 
         [TestMethod]
         public void RenderAppBarWithShaped()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Shaped, true);
@@ -495,12 +527,13 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderButtonWithShrinkOnScroll()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.ShrinkOnScroll, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasScrollClass = classes.Contains("v-app-bar--shrink-on-scroll");
+            var hasScrollClass = classes.Contains("m-app-bar--shrink-on-scroll");
 
             // Assert
             Assert.IsTrue(hasScrollClass);
@@ -510,6 +543,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithTile()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Tile, true);
@@ -525,6 +559,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderAppBarWithValue()
         {
             //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.Value, true);
@@ -540,6 +575,7 @@ namespace MASA.Blazor.Test.AppBar
         public void RenderWithChildContent()
         {
             // Arrange & Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
             var cut = RenderComponent<MAppBar>(props =>
             {
                 props.Add(appbar => appbar.ChildContent, "<span>Hello world</span>");
