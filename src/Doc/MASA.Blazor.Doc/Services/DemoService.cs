@@ -1,10 +1,8 @@
 ﻿using System.Net.Http.Json;
 using System.Reflection;
-using BlazorComponent.Doc.Extensions;
-using BlazorComponent.Doc.Models;
-using MASA.Blazor.Doc.Demos.Components.Border.demo;
+using MASA.Blazor.Doc.Models;
+using MASA.Blazor.Doc.Models.Extensions;
 using MASA.Blazor.Doc.Pages;
-using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -47,7 +45,7 @@ namespace MASA.Blazor.Doc.Services
             {
                 var components =
                     await _httpClient.GetFromJsonAsync<DemoComponentModel[]>($"_content/MASA.Blazor.Doc/meta/components.{language}.json");
-                return components.ToDictionary(x => x.Title.ToLower(), x => x);
+                return components.ToDictionary(x => x.Title.StructureUrl(), x => x);
             });
 
             _styleCache ??= new ConcurrentCache<string, ValueTask<IDictionary<string, DemoComponentModel>>>();
@@ -56,7 +54,7 @@ namespace MASA.Blazor.Doc.Services
                 var styles =
                     await _httpClient.GetFromJsonAsync<DemoComponentModel[]>(
                         $"_content/MASA.Blazor.Doc/meta/styles-and-animations/components.{language}.json");
-                return styles.ToDictionary(x => x.Title.ToLower(), x => x);
+                return styles.ToDictionary(x => x.Title.StructureUrl(), x => x);
             });
 
             _demoMenuCache ??= new ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>>();
@@ -111,17 +109,27 @@ namespace MASA.Blazor.Doc.Services
             CurrentComponentName = componentName;
             await InitializeAsync(CurrentLanguage);
             return _styleCache.TryGetValue(CurrentLanguage, out var component)
-                ? (await component)[componentName.ToLower()]
+                ? (await component).TryGetValue(componentName.ToLower(), out var style) ? style : null
                 : null;
         }
 
         public async Task<List<ContentsItem>> GetTitlesAsync(string currentUrl)
         {
+            var uri = new Uri(currentUrl);
+            if (!uri.AbsolutePath.StartsWith("/components"))
+            {
+                return new List<ContentsItem>();
+            }
+
             var menuItems = await GetMenuAsync();
             var current = menuItems.SelectMany(r => r.Children).FirstOrDefault(r => r.Url != null && currentUrl.Contains(r.Url));
 
             var contents = current?.Contents;
             var componentName = currentUrl.Split('/')[^1];
+            if (string.IsNullOrEmpty(componentName))
+            {
+                componentName = currentUrl.Split('/')[^2];
+            }
 
             if (componentName.Contains('#'))
             {
@@ -135,9 +143,11 @@ namespace MASA.Blazor.Doc.Services
 
             if (contents == null && componentName != null)
             {
-                var components = await GetComponentAsync(componentName);
-                if (components is null) components = await GetStyleAsync(componentName);
-                var demoList = components.DemoList?.OrderBy(r => r.Order).ThenBy(r => r.Name);
+                var component = await GetComponentAsync(componentName);
+                if (component is null) component = await GetStyleAsync(componentName);
+                if (component == null) return new List<ContentsItem>();
+                
+                var demoList = component.DemoList?.OrderBy(r => r.Order).ThenBy(r => r.Name);
 
                 contents = new List<ContentsItem>();
 
@@ -171,9 +181,9 @@ namespace MASA.Blazor.Doc.Services
                     }
                 }
 
-                if (components.OtherDocs != null)
+                if (component.OtherDocs != null)
                 {
-                    foreach (var (title, _) in components.OtherDocs)
+                    foreach (var (title, _) in component.OtherDocs)
                     {
                         var href = title.HashSection();
                         contents.Add(new ContentsItem(title, href, 2));

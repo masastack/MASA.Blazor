@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "WindowItem",
   "Components": [
-    "WindowItem"
+    "Windows"
   ],
   "Props": [
     {

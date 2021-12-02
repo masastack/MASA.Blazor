@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "CalendarDaily",
   "Components": [
-    "CalendarDaily"
+    "Calendars"
   ],
   "Props": [
     {

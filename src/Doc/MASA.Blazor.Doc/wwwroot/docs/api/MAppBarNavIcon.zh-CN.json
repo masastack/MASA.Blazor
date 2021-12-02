@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "AppBarNavIcon",
   "Components": [
-    "AppBarNavIcon"
+    "App bars"
   ],
   "Props": [
     {

@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Menu
-title: Menu
+title: Menus
 cols: 1
 ---
 
@@ -9,4 +9,4 @@ The `MMenu` component shows a menu at the position of the element used to activa
 
 ## API
 
-- [MMenu](/docs/api/MMenu)
+- [MMenu](/api/MMenu)

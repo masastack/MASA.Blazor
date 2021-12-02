@@ -1,6 +1,8 @@
 ﻿{
+  "Title": "ListItemAction",
   "Components": [
-    "ListItemAction"
+    "Lists",
+    "List item groups"
   ],
   "Props": [
     {

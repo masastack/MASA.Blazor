@@ -1,14 +1,14 @@
 <MRow Align="@AlignTypes.Center">
-    <MCol Span="12">
-        <MSelect Value="@("")"
+    <MCol>
+        <MSelect @bind-Value="_value"
                  Items="items"
                  ItemText="u => u"
                  ItemValue="u => u"
                  Disabled
                  Label="Disabled"></MSelect>
     </MCol>
-    <MCol Span="12">
-        <MSelect Value="@("")"
+    <MCol>
+        <MSelect @bind-Value="_value"
                  Items="items2"
                  ItemText="u => u.Key"
                  ItemValue="u => u.Key"
@@ -19,6 +19,7 @@
 
 @code {
     List<string> items = new() { "Foo", "Bar", "Fizz", "Buzz" };
+    string _value;
 
     List<KeyValuePair<string, bool>> items2 = new Dictionary<string, bool>
     {

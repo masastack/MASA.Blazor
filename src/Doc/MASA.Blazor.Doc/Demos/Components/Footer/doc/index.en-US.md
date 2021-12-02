@@ -1,7 +1,7 @@
 ---
 category: Components
-type: Footer
-title: Footer
+type: Footers
+title: Footers
 cols: 1
 ---
 

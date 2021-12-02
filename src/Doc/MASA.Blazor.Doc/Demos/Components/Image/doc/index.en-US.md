@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Image
-title: Image
+title: Images
 cols: 1
 ---
 

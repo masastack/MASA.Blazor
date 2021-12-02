@@ -1,7 +1,7 @@
 ---
 category: Components
 type: AppBars
-title: AppBars
+title: App bars
 cols: 1
 ---
 

@@ -1,7 +1,7 @@
 ---
 category: Components
-type: Checkbox
-title: Checkbox
+type: Checkboxes
+title: Checkboxes
 cols: 1
 ---
 
@@ -9,5 +9,5 @@ The `MCheckbox` component provides users the ability to choose between two disti
 
 ## API
 
-- [MCheckbox](/en-US/docs/api/MCheckbox)
-- [MSimpleCheckbox](/en-US/docs/api/MSimpleCheckbox)
+- [MCheckbox](/api/MCheckbox)
+- [MSimpleCheckbox](/api/MSimpleCheckbox)

@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Chip",
   "Components": [
-    "Chip"
+    "Chips"
   ],
   "Props": [
     {

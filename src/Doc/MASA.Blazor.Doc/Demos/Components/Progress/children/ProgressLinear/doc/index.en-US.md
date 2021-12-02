@@ -1,7 +1,7 @@
 ---
 category: Components
 type: ProgressLinear
-title: ProgressLinear
+title: Progress linear
 cols: 1
 ---
 

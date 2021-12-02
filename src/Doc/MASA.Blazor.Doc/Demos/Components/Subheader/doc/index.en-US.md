@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Subheader
-title: Subheader
+title: Subheaders
 cols: 1
 ---
 

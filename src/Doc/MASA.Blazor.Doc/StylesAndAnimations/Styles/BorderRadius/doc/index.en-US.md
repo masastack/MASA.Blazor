@@ -1,7 +1,7 @@
 ---
 category: Components
 type: BorderRadius
-title: BorderRadius
+title: Border radius
 cols: 1
 ---
 

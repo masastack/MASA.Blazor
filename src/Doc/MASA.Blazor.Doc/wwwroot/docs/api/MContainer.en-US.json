@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Container",
   "Components": [
-    "Container"
+    "Grid system"
   ],
   "Props": [
     {

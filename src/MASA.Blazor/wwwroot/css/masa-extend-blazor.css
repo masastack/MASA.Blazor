@@ -507,18 +507,21 @@ code[class*=language-], pre[class*=language-] {
     top: calc(50% - 30px);
 }
 
+.m-cascader__menu-body {
+    display: inline-flex
+}
 
+.m-cascader__menu-body-wrapper {
+    vertical-align: top;
+    min-width: 180px;
+    background-color: white;
+    border-right: 1px solid #f0f0f0;
+}
 
+.m-cascader__menu-body-wrapper--dense {
+    min-width: 120px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+.m-cascader__menu-body-wrapper:not(.m-cascader__menu-body-wrapper--dense) .m-list-item {
+    min-height: 56px;
+}

@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "SkeletonLoader",
   "Components": [
-    "SkeletonLoader"
+    "Skeleton loaders"
   ],
   "Props": [
     {

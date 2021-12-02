@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Row",
   "Components": [
-    "Row"
+    "Grid system"
   ],
   "Props": [
     {

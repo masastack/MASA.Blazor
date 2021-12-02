@@ -1,4 +1,4 @@
-﻿@using BlazorComponent.Doc.Models
+﻿@using MASA.Blazor.Doc.Models
 @using MASA.Blazor.Doc.Services
 @inherits OwningComponentBase<DemoService>
 
@@ -81,13 +81,11 @@
 @code {
 
     [Parameter]
-    public DemoMenuItemModel[] MenuItems { get; set; } = {};
+    public DemoMenuItemModel[] MenuItems { get; set; } = { };
 
     protected override async Task OnInitializedAsync()
     {
         MenuItems = await Service.GetMenuAsync();
-
-        StateHasChanged();
         await Service.InitializeDemos();
     }
 
@@ -120,7 +118,6 @@
             groups.Add(item.Url);
         }
 
-        return string.Join("|", groups);
+        return string.Join("|", groups.Where(g => g != string.Empty));
     }
-
 }

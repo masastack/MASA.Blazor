@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "TimePickerClock",
   "Components": [
-    "TimePickerClock"
+    "Timelines"
   ],
   "Props": [
     {

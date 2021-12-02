@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Input",
   "Components": [
-    "Input"
+    "Text fields"
   ],
   "Props": [
     {

@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "App",
   "Components": [
-    "App"
+    "Application"
   ],
   "Props": [
     {

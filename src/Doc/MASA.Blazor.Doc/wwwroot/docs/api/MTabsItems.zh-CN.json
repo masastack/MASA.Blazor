@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "TabsItems",
   "Components": [
-    "TabsItems"
+    "Tabs"
   ],
   "Props": [
     {

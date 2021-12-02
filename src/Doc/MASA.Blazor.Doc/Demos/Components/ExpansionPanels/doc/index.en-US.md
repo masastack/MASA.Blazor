@@ -1,7 +1,7 @@
 ---
 category: Components
 type: ExpansionPanels
-title: ExpansionPanels
+title: Expansion panels
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
 ---
@@ -12,7 +12,7 @@ property, the expansion-panel can remain open until explicitly closed.
 
 ## API
 
-- [MExpansionPanels](/docs/api/MExpansionPanels)
-- [MExpansionPanel](/docs/api/MExpansionPanel)
-- [MExpansionPanelHeader](/docs/api/MExpansionPanelHeader)
-- [MExpansionPanelContent](/docs/api/MExpansionPanelContent)
+- [MExpansionPanels](/api/MExpansionPanels)
+- [MExpansionPanel](/api/MExpansionPanel)
+- [MExpansionPanelHeader](/api/MExpansionPanelHeader)
+- [MExpansionPanelContent](/api/MExpansionPanelContent)

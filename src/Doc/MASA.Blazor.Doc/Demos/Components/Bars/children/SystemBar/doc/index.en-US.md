@@ -1,7 +1,7 @@
 ---
 category: Components
 type: SystemBars
-title: SystemBars
+title: System bars
 cols: 1
 ---
 

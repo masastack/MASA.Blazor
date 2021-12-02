@@ -2,7 +2,7 @@
 category: Components
 subtitle: 列表
 type: 列表
-title: List
+title: Lists
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg
 
@@ -12,17 +12,17 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg
 
 ## API
 
-- [MList](/docs/api/MList)
-- [MListGroup](/docs/api/MListGroup)
-- [MListItem](/docs/api/MListItem)
-- [MListItemAction](/docs/api/MListItemAction)
-- [MListItemActionText](/docs/api/MListItemActionText)
-- [MListItemAvatar](/docs/api/MListItemAvatar)
-- [MListItemContent](/docs/api/MListItemContent)
-- [MListItemGroup](/docs/api/MListItemGroup)
-- [MListItemIcon](/docs/api/MListItemIcon)
-- [MListItemSubtitle](/docs/api/MListItemSubtitle)
-- [MListItemTitle](/docs/api/MListItemTitle)
+- [MList](/api/MList)
+- [MListGroup](/api/MListGroup)
+- [MListItem](/api/MListItem)
+- [MListItemAction](/api/MListItemAction)
+- [MListItemActionText](/api/MListItemActionText)
+- [MListItemAvatar](/api/MListItemAvatar)
+- [MListItemContent](/api/MListItemContent)
+- [MListItemGroup](/api/MListItemGroup)
+- [MListItemIcon](/api/MListItemIcon)
+- [MListItemSubtitle](/api/MListItemSubtitle)
+- [MListItemTitle](/api/MListItemTitle)
 
 ## Caveats
 

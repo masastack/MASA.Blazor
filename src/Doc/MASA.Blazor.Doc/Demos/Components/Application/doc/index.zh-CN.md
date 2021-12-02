@@ -4,7 +4,10 @@ subtitle: 应用程序
 type: 应用程序
 title: Application
 cols: 1
-
+related:
+  - /features/theme
+  - /components/appbars
+  - /components/navigation-drawers
 ---
 
 在 MASA.Blazor 中，`MApp` 组件和 `MNavigationDrawer`、`MAppBar`、`MFooter` 等组件上的 App 属性，帮助你的应用围绕 `MMain` 组件进行适当的大小调整。
@@ -13,8 +16,8 @@ cols: 1
 
 ## API
 
-- [MApp](/docs/api/MApp)
-- [MMain](/docs/api/MMain)
+- [MApp](/api/MApp)
+- [MMain](/api/MMain)
 
 <!--alert:error-->
 为了让你的应用正常工作，你必须将其包裹在 `MApp` 组件中。 该组件是确保正确的跨浏览器兼容性所必需的。

@@ -28,7 +28,7 @@ namespace MASA.Blazor
                 .Apply(typeof(BProgressCircular), typeof(MProgressCircular), props =>
                 {
                     props[nameof(MProgressCircular.Indeterminate)] = true;
-                    props[nameof(MProgressCircular.Size)] = (StringNumber)24;
+                    props[nameof(MProgressCircular.Size)] = (StringNumber)20;
                     props[nameof(MProgressCircular.Width)] = (StringNumber)2;
                 });
         }

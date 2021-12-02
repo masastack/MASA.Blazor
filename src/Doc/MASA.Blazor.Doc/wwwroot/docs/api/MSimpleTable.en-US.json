@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "SimpleTable",
   "Components": [
-    "SimpleTable"
+    "Simple tables"
   ],
   "Props": [
     {

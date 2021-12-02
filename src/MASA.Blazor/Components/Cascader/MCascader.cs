@@ -9,7 +9,7 @@ namespace MASA.Blazor
     public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>, ICascader<TItem, TValue>
     {
         [Parameter]
-        public bool IsFull { get; set; }
+        public bool ShowAllLevels { get; set; } = true;
 
         [EditorRequired]
         [Parameter]
@@ -18,9 +18,12 @@ namespace MASA.Blazor
         [Parameter]
         public Func<TItem, Task> LoadChildren { get; set; }
 
+        [Parameter]
+        public override bool Outlined { get; set; } = true;
+
         protected override List<string> FormatText(TValue value)
         {
-            return new List<string> { string.Join("/", GetItemByValue(Items, value, IsFull).Select(ItemText)) };
+            return new List<string> { string.Join(" / ", GetItemByValue(Items, value, ShowAllLevels).Select(ItemText)) };
         }
 
         protected override void SetComponentClass()
@@ -28,25 +31,28 @@ namespace MASA.Blazor
             base.SetComponentClass();
 
             CssProvider
-                .Apply("cascader-menu-body", styleAction: styleBuilder =>
+                .Merge(cssBuilder =>
                 {
-                    styleBuilder
-                        .Add("display: inline-flex");
+                    cssBuilder
+                        .Add("m-cascader");
                 })
-                .Apply("cascader-menu-body-wrap", styleAction: styleBuilder =>
+                .Apply("menu-body", cssBuilder =>
                 {
-                    styleBuilder
-                        .Add("vertical-align: top")
-                        .Add("min-width: 180px")
-                        .Add("background-color: white")
-                        .Add("border-right: 1px solid #f0f0f0");
+                    cssBuilder
+                        .Add("m-cascader__menu-body");
+                })
+                .Apply("menu-body-wrapper", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-cascader__menu-body-wrapper")
+                        .AddIf("m-cascader__menu-body-wrapper--dense", () => Dense);
                 });
 
             AbstractProvider
                 .Merge<BMenu, MCascaderMenu>(props =>
                 {
                     props[nameof(MCascaderMenu.OffsetY)] = true;
-                    props[nameof(MCascaderMenu.MinWidth)] = (StringNumber)180;
+                    props[nameof(MCascaderMenu.MinWidth)] = (StringNumber)(Dense ? 120 : 180);
                     props[nameof(MCascaderMenu.CloseOnContentClick)] = false;
                     props[nameof(MCascaderMenu.ContentStyle)] = "display:flex";
                 })

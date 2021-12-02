@@ -44,7 +44,7 @@ namespace MASA.Blazor
         }
 
         public override string AttachedSelector => Attach ?? ".m-application";
-
+        
         protected override void SetComponentClass()
         {
             Transition ??= "m-menu-transition";

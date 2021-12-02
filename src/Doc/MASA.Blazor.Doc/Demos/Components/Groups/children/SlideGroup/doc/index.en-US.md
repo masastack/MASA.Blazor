@@ -1,7 +1,7 @@
 ---
 category: Components
 type: SlideGroup
-title: SlideGroup
+title: Slide groups
 cols: 1
 ---
 
@@ -10,5 +10,5 @@ a baseline for components such as [**MTabs**](/components/tabs) and [**MChipGrou
 
 ## API
 
-- [MSlideGroup](/docs/api/MSlideGroup)
-- [MSlideItem](/docs/api/MSlideItem)
+- [MSlideGroup](/api/MSlideGroup)
+- [MSlideItem](/api/MSlideItem)

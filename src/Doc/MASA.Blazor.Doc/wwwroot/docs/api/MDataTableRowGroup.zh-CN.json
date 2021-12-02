@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "DataTableRowGroup",
   "Components": [
-    "DataTableRowGroup"
+    "Data tables"
   ],
   "Props": [
     {

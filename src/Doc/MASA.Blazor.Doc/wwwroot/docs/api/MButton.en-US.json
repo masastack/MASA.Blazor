@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Button",
   "Components": [
-    "Button"
+    "Buttons"
   ],
   "Props": [
     {

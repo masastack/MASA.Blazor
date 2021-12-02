@@ -1,7 +1,7 @@
 ---
 category: Components
 type: ProgressCircular
-title: ProgressCircular
+title: Progress circular
 cols: 1
 ---
 

@@ -2,16 +2,19 @@
 category: Components
 subtitle: 下拉框
 type: 下拉框
-title: Select
+title: Selects
 cols: 1
-
+related:
+  - /components/autocompletes
+  - /components/combobox
+  - /components/forms
 ---
 
 选择器组件用于从选项列表中收集用户提供的信息。
 
 ## API
 
-- [MSelect](/zh-CN/docs/api/MSelect)
+- [MSelect](/api/MSelect)
 
 ## 注意
 

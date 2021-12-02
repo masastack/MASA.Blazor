@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Select
-title: Select
+title: Selects
 cols: 1
 ---
 

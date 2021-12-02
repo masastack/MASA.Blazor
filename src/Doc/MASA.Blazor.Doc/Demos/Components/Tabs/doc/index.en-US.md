@@ -11,8 +11,8 @@ for a page, where the tabs are links and the tab-items are the content.
 
 ## API
 
-- [MTabs](/docs/api/MTabs)
-- [MTab](/docs/api/MTab)
-- [MTabItem](/docs/api/MTabItem)
-- [MTabsItems](/docs/api/MTabsItems)
-- [MTabsSlider](/docs/api/MTabsSlider)
+- [MTabs](/api/MTabs)
+- [MTab](/api/MTab)
+- [MTabItem](/api/MTabItem)
+- [MTabsItems](/api/MTabsItems)
+- [MTabsSlider](/api/MTabsSlider)

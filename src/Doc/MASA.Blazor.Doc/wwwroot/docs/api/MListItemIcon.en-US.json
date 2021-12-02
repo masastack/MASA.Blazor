@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "ListItemIcon",
   "Components": [
-    "ListItemIcon"
+    "Lists"
   ],
   "Props": [
     {

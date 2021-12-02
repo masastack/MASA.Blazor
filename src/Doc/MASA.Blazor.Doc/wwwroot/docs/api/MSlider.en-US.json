@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Slider",
   "Components": [
-    "Slider"
+    "Sliders"
   ],
   "Props": [
     {

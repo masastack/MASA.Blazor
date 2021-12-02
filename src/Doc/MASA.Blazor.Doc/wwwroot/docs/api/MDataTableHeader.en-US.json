@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "DataTableHeader",
   "Components": [
-    "DataTableHeader"
+    "Data tables"
   ],
   "Props": [
     {

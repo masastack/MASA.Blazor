@@ -360,12 +360,10 @@ namespace MASA.Blazor
             _scroller.SavedScroll = _scroller.CurrentScroll;
         }
 
-        public async ValueTask DisposeAsync()
+        public ValueTask DisposeAsync()
         {
-            if (!Prerendering)
-            {
-                await Target.RemoveEventListenerAsync("scroll");
-            }
+            _ = Target.RemoveEventListenerAsync("scroll");
+            return ValueTask.CompletedTask;
         }
     }
 }

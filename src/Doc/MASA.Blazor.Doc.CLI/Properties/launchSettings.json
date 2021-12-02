@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MASA.Blazor.Doc.CLI": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "CalendarWeekly",
   "Components": [
-    "CalendarWeekly"
+    "Calendars"
   ],
   "Props": [
     {

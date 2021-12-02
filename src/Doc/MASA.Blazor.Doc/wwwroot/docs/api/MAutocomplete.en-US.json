@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Autocomplete",
   "Components": [
-    "Autocomplete"
+    "Autocompletes"
   ],
   "Props": [
     {
@@ -145,6 +146,18 @@
       "Name": "HideDetails",
       "Type": "StringBoolean",
       "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "HideNoData",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "HideSelected",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {
@@ -404,11 +417,19 @@
       "Description": ""
     },
     {
+      "Name": "ItemContent",
+      "Description": ""
+    },
+    {
       "Name": "LabelContent",
       "Description": ""
     },
     {
       "Name": "MessageContent",
+      "Description": ""
+    },
+    {
+      "Name": "NoDataContent",
       "Description": ""
     },
     {
@@ -483,6 +504,14 @@
     },
     {
       "Name": "OnPrependInnerClick",
+      "Description": ""
+    },
+    {
+      "Name": "OnSearchInputUpdate",
+      "Description": ""
+    },
+    {
+      "Name": "OnSelectedItemUpdate",
       "Description": ""
     },
     {

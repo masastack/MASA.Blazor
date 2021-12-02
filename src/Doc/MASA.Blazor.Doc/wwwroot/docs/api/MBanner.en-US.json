@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Banner",
   "Components": [
-    "Banner"
+    "Banners"
   ],
   "Props": [
     {

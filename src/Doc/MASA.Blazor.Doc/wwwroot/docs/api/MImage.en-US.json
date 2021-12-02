@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Image",
   "Components": [
-    "Image"
+    "Images"
   ],
   "Props": [
     {

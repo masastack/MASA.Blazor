@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "Switch",
   "Components": [
-    "Switch"
+    "Switches"
   ],
   "Props": [
     {

@@ -47,7 +47,7 @@ namespace MASA.Blazor
         public bool Filled { get; set; }
 
         [Parameter]
-        public bool Outlined { get; set; }
+        public virtual bool Outlined { get; set; }
 
         [Parameter]
         public bool Reverse { get; set; }

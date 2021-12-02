@@ -32,10 +32,7 @@ namespace MASA.Blazor
                 })
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>()
-                .Apply<BListItemIcon, MListItemIcon>(props =>
-                {
-                    props[nameof(Style)] = "margin:12px 0 12px 12px";
-                })
+                .Apply<BListItemIcon, MListItemIcon>()
                 .Apply<BIcon, MIcon>();
         }
 

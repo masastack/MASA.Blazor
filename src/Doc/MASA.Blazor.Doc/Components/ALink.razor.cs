@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace MASA.Blazor.Doc.Shared;
+namespace MASA.Blazor.Doc.Components;
 
 public partial class ALink
 {

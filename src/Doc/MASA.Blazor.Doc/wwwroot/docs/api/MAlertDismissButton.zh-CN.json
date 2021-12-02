@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "AlertDismissButton",
   "Components": [
-    "AlertDismissButton"
+    "Alerts"
   ],
   "Props": [
     {

@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Rating
-title: Rating
+title: Ratings
 cols: 1
 ---
 

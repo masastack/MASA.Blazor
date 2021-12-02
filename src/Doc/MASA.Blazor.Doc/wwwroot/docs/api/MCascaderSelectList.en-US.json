@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "CascaderSelectList",
   "Components": [
-    "CascaderSelectList"
+    "Cascaders"
   ],
   "Props": [
     {
@@ -76,7 +77,12 @@
       "Description": ""
     }
   ],
-  "Contents": [],
+  "Contents": [
+    {
+      "Name": "ItemContent",
+      "Description": ""
+    }
+  ],
   "Events": [
     {
       "Name": "OnItemClick",

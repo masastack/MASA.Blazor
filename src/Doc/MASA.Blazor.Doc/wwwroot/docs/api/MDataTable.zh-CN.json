@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "DataTable",
   "Components": [
-    "DataTable"
+    "Data tables"
   ],
   "Props": [
     {

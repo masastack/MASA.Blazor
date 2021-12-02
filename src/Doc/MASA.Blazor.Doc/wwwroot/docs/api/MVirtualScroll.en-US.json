@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "VirtualScroll",
   "Components": [
-    "VirtualScroll"
+    "Virtual scroller"
   ],
   "Props": [
     {
