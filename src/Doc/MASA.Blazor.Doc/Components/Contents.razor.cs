@@ -99,7 +99,7 @@ namespace MASA.Blazor.Doc.Components
             var element = await Js.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, domId);
             var options = new
             {
-                Top = element.OffsetTop,
+                Top = element.OffsetTop + 32 + 16 + 16,
                 Left = 0,
                 Behavior = "smooth"
             };

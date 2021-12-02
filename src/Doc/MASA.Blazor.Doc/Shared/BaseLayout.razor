@@ -1,0 +1,107 @@
+﻿@inherits LayoutComponentBase
+
+<CascadingValue Value="this">
+    <MApp Style="background:#F2F3F5;">
+        <MAppBar Height="80" Elevation=0 Fixed Color="white" Class="pc app-bar">
+            <img style="cursor:pointer;" class="ml-6" src="https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png" @onclick=@(()=>Navigation.NavigateTo("/")) />
+            <MTabs BackgroundColor="white" Class="mtab-font" Color="black" SliderColor="purple darken-2" Optional>
+                <MTab Class="ml-11"
+                      Style="min-width:40px; text-transform: none"
+                      OnClick="@(() => Navigation.NavigateTo("introduction/why"))">
+                    @T("Docs")
+                </MTab>
+                <MTab Class="ml-4" Style="min-width:40px; text-transform: none" OnClick="@(()=>Toggle("https://masa-blogs.lonsid.cn/categories/Blazor/"))">@T("Blog")</MTab>
+                <MTab Class="ml-4" Style="min-width:40px; text-transform: none">@T("Team")</MTab>
+            </MTabs>
+
+            <MSpacer></MSpacer>
+
+            <MTextField TValue="string"
+                        HideDetails="true"
+                        Class="@($"mx-2 mx-md-4")"
+                        Style="@($"width: 300px; opacity: 0.8; border: 1px solid {_searchBorderColor};")"
+                        @onfocus="@(() => _searchBorderColor = "#C9CDD4")"
+                        @onblur="@(() => _searchBorderColor = "#00000000")"
+                        Flat
+                        Solo
+                        Dense
+                        BackgroundColor="#F2F3F5"
+                        Color="grey lighten-1"
+                        Placeholder="@T("Search")">
+                <PrependInnerContent>
+                    <MIcon Color="grey lighten-1">mdi-magnify</MIcon>
+                </PrependInnerContent>
+            </MTextField>
+
+            <MButton Icon OnClick="TurnLanguage" Class="mr-6">
+                <img src=@("https://cdn.masastack.com/stack/images/website/masa-blazor/"+_languageIcon) />
+            </MButton>
+        </MAppBar>
+
+        <MAppBar Height="56" Elevation=0 Fixed Class="phone-bar" Color="white">
+            <MRow Align="AlignTypes.Center" Justify="JustifyTypes.SpaceBetween" NoGutters>
+                <MMenu OffsetY>
+                    <ActivatorContent>
+                        <MButton @attributes="@context.Attrs" Icon Width="24" Height="24">
+                            <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/toggle.svg" />
+                        </MButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MList>
+                            <MListItem Href="/">
+                                <MListItemContent>
+                                    <MListItemTitle>
+                                        Home
+                                    </MListItemTitle>
+                                </MListItemContent>
+                            </MListItem>
+                            <MListItem Href="/docs/introduction/why">
+                                <MListItemContent>
+                                    <MListItemTitle>
+                                        Docs
+                                    </MListItemTitle>
+                                </MListItemContent>
+                            </MListItem>
+                            <MListItem Href="https://masa-blogs.lonsid.cn/categories/Blazor/" Target="_blank">
+                                <MListItemContent>
+                                    <MListItemTitle>
+                                        Blog
+                                    </MListItemTitle>
+                                </MListItemContent>
+                            </MListItem>
+                            <MListItem>
+                                <MListItemContent>
+                                    <MListItemTitle>
+                                        Team
+                                    </MListItemTitle>
+                                </MListItemContent>
+                            </MListItem>
+                        </MList>
+                    </ChildContent>
+                </MMenu>
+                <div>
+                    <MTextField TValue="string"
+                                HideDetails="true"
+                                Style="@($"width:245px; opacity: 0.8; border: 1px solid {_searchBorderColor};")"
+                                @onfocus="@(() => _searchBorderColor = "#C9CDD4")"
+                                @onblur="@(() => _searchBorderColor = "#00000000")"
+                                Flat
+                                Solo
+                                Dense
+                                BackgroundColor="#F2F3F5"
+                                Color="grey lighten-1"
+                                Placeholder="Search">
+                        <PrependInnerContent>
+                            <MIcon Color="grey lighten-1">mdi-magnify</MIcon>
+                        </PrependInnerContent>
+                    </MTextField>
+                </div>
+                <MButton Icon OnClick="TurnLanguage">
+                    <img src=@("https://cdn.masastack.com/stack/images/website/masa-blazor/"+_languageIcon) />
+                </MButton>
+            </MRow>
+        </MAppBar>
+
+        @Body
+    </MApp>
+</CascadingValue>

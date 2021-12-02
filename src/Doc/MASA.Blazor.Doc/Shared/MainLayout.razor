@@ -1,75 +1,40 @@
 ﻿@inherits LayoutComponentBase
+@layout BaseLayout
+@inject NavigationManager navigationmanager
 
-<CascadingValue Value="this">
-    <MApp>
-        <MAppBar Height="80"
-                 Dark
-                 Fixed
-                 Elevation=1
-                 Style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(20px);">
-            <img class="ml-16" src="_content/MASA.Blazor.Doc/img/logo.png" @onclick=@(() => NavigationManager.NavigateTo(NavigationManager.BaseUri + "/"))/>
-            <MButton Text Color="black" Class="ml-9">Docs</MButton>
-            <MButton Text Color="black" Class="ml-4">Blog</MButton>
-            <MButton Text Color="black" Class="ml-4">Team</MButton>
+<MNavigationDrawer Fixed Floating Width="311" Top="80" Class="pl-4">
+    <ChildContent>
+        <div class="pt-4 pb-3 px-2">
+            <div class="ml-2 mb-3 text-caption font-weight-regular text--secondary" path="premiere-sponsors">高级赞助商</div>
+            <MCard Tag="a" Ripple="false" Tile Class="d-inline-block px-2 py-1 transparent" Flat Link Style="box-shadow:none!important">
+                <MImage Contain Class="d-inline-block" MaxHeight="64" Width="180" Src="https://img-cdn.lonsid.co/image/www/img/logo_g_2.png"></MImage>
+            </MCard>
+        </div>
+        <NavMenu @key="NavigationManager.Uri"></NavMenu>
+        <div class="pt-12"></div>
+    </ChildContent>
+</MNavigationDrawer>
 
-            <MSpacer></MSpacer>
-
-            <MTextField TValue="string"
-                        HideDetails="true"
-                        Flat
-                        Solo
-                        Dense
-                        Class="mx-2 mx-md-4 rounded-pill"
-                        BackgroundColor="grey lighten-3"
-                        Color="grey lighten-1"
-                        Placeholder="Search"
-                        Style="max-width: 300px;">
-                <PrependInnerContent>
-                    <MIcon Color="grey lighten-1">mdi-magnify</MIcon>
-                </PrependInnerContent>
-            </MTextField>
-            <img class="ml-6" src="_content/MASA.Blazor.Doc/img/download.png"/>
-            @if (!_isEnglish)
-            {
-                <img class="ml-6 mr-16" src="_content/MASA.Blazor.Doc/img/chinese.png" @onclick="() => _isEnglish = true"/>
-            }
-            else
-            {
-                <img class="ml-6 mr-16" src="_content/MASA.Blazor.Doc/img/englinsh.png" @onclick="() => _isEnglish = false"/>
-            }
-        </MAppBar>
-
-        <MNavigationDrawer Fixed Floating Width="300" Top="82">
+<MMain Style="padding:0; margin: 80px 329px 0 311px; background:#fff;border-left:1px solid #F2F3F5;">
+    <MContainer Class="pa-4 pa-sm-6 pa-md-8" Fluid>
+        <ErrorBoundary @ref="_errorBoundary">
             <ChildContent>
-                <div class="pt-4 pb-3 px-2">
-                    <div class="ml-2 mb-3 text-caption font-weight-regular text--secondary" path="premiere-sponsors">高级赞助商</div>
-                    <MCard Tag="a" Ripple="false" Tile Class="d-inline-block px-2 py-1 transparent" Flat Link Style="box-shadow:none!important">
-                        <MImage Contain Class="d-inline-block" MaxHeight="64" Width="180" Src="https://img-cdn.lonsid.co/image/www/img/logo_g_2.png"></MImage>
-                    </MCard>
-                </div>
-                <NavMenu @key="NavigationManager.Uri"></NavMenu>
-                <div class="pt-12"></div>
+                @Body
             </ChildContent>
-        </MNavigationDrawer>
-        <MMain Style="padding: 64px 256px 0px 300px;">
-            <ErrorBoundary @ref="_errorBoundary">
-                <ChildContent>
-                    @Body
-                </ChildContent>
-                <ErrorContent>
-                    <Error></Error>
-                </ErrorContent>
-            </ErrorBoundary>
-        </MMain>
-        <MNavigationDrawer Clipped Fixed Floating Right Top="64" Class="default-toc py-4 pr-3">
-            <PrependContent>
-                <div class="mb-2 text-h6 font-weight-medium text--primary" path="contents">目录</div>
-            </PrependContent>
-            <ChildContent>
-                <Contents></Contents>
-                <div class="ml-5">
-                </div>
-            </ChildContent>
-        </MNavigationDrawer>
-    </MApp>
-</CascadingValue>
+            <ErrorContent>
+                <Error></Error>
+            </ErrorContent>
+        </ErrorBoundary>
+    </MContainer>
+</MMain>
+
+<MNavigationDrawer Clipped Fixed Floating Right Top="80" Width="329" Class="default-toc py-4">
+    <PrependContent>
+        <div class="mb-2 text-h6 font-weight-medium text--primary" path="contents">目录</div>
+    </PrependContent>
+    <ChildContent>
+        <Contents></Contents>
+        <div class="ml-5">
+        </div>
+    </ChildContent>
+</MNavigationDrawer>
