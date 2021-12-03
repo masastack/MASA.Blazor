@@ -10,6 +10,19 @@ namespace MASA.Blazor.Doc.Models
 
         public string SubTitle { get; set; }
 
+        public string FullTitle
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(SubTitle))
+                {
+                    return $"{Title} ({SubTitle})";
+                }
+
+                return Title;
+            }
+        }
+
         public string Type { get; set; }
 
         public string Url { get; set; }

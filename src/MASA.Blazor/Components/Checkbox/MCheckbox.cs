@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BlazorComponent;
+using BlazorComponent.Web;
 using MASA.Blazor.Helpers;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -61,6 +62,9 @@ namespace MASA.Blazor
 
         [Parameter]
         public EventCallback<bool> OnChange { get; set; }
+
+        [Inject]
+        public Document Document { get; set; }
 
         public Task HandleOnBlur(FocusEventArgs args)
         {
@@ -130,6 +134,17 @@ namespace MASA.Blazor
                     props[nameof(MIcon.Light)] = Light;
                     props[nameof(MIcon.Color)] = ValidationState;
                 });
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                //It's used to prevent ripple directive,and we may remove this 
+                var inputSlot = Document.QuerySelector(InputSlotElement);
+                await inputSlot.AddEventListenerAsync("mousedown", EventCallback.Empty, stopPropagation: true);
+                await inputSlot.AddEventListenerAsync("mouseup", EventCallback.Empty, stopPropagation: true);
+            }
         }
 
         public override async Task HandleOnClickAsync(MouseEventArgs args)

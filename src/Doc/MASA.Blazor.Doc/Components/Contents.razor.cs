@@ -38,6 +38,15 @@ namespace MASA.Blazor.Doc.Components
             }
         }
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                _items = await Service.GetTitlesAsync(NavigationManager.Uri);
+                StateHasChanged();
+            }
+        }
+
         private void OnScroll(JsonElement obj)
         {
             _cancellationTokenSource?.Cancel();

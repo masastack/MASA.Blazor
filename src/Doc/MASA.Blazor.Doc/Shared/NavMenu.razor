@@ -10,11 +10,11 @@
             var group = GenGroup(item.Children);
 
             <MListGroup AppendIcon="mdi-menu-down"
-                        Class="m-list-group--default"
-                        Color="primary"
-                        Group="@group"
-                        NoAction
-                        PrependIcon="@item.Icon">
+                Class="m-list-group--default"
+                Color="primary"
+                Group="@group"
+                NoAction
+                PrependIcon="@item.Icon">
                 <ActivatorContent>
                     <MListItemContent>
                         <MListItemTitle>@item.Title</MListItemTitle>
@@ -28,9 +28,9 @@
                             var group2 = GenGroup(componentItem.Children);
 
                             <MListGroup Class="m-list-group--default"
-                                        Group="@group2"
-                                        NoAction
-                                        SubGroup>
+                        Group="@group2"
+                        NoAction
+                        SubGroup>
                                 <ActivatorContent>
                                     <MListItemContent>
                                         <MListItemTitle>@FormatComponentTitle(componentItem)</MListItemTitle>
@@ -91,17 +91,7 @@
 
     string FormatComponentTitle(DemoMenuItemModel model)
     {
-        if (!string.IsNullOrEmpty(model.SubTitle))
-        {
-            if (model.Url.StartsWith("style"))
-            {
-                return model.SubTitle;
-            }
-
-            return $"{model.Title}（{model.SubTitle}）";
-        }
-
-        return model.Title;
+        return model.FullTitle;
     }
 
     string GenGroup(DemoMenuItemModel[] items)
