@@ -14,15 +14,27 @@ namespace MASA.Blazor
     public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TItem, TItemValue, TValue>
     {
         private bool _visible;
+
+        protected BMenuProps ComputedMenuProps { get; set; }
+
+        protected virtual BMenuProps GetDefaultMenuProps() => new()
+        {
+            CloseOnClick = true, // TODO: there is false in vuetify code source
+            CloseOnContentClick = false,
+            DisableKeys = true,
+            OpenOnClick = true, // TODO: there is true in vuetify code source
+            MaxHeight = 304,
+        };
+
         protected bool Visible
         {
-            get => MenuProps == null ? _visible : MenuProps.Visible;
+            get => MenuProps == null ? _visible : ComputedMenuProps.Visible;
             set
             {
                 if (MenuProps == null)
                     _visible = value;
                 else
-                    MenuProps.Visible = value;
+                    ComputedMenuProps.Visible = value;
             }
         }
 
@@ -45,7 +57,7 @@ namespace MASA.Blazor
         public bool DeletableChips { get; set; }
 
         [Parameter]
-        public BMenuProps MenuProps { get; set; }
+        public Action<BMenuProps> MenuProps { get; set; }
 
         [EditorRequired]
         [Parameter]
@@ -141,7 +153,7 @@ namespace MASA.Blazor
         }
 
         public IList<TItem> SelectedItems => Items
-                .Where(u => Values.Contains(ItemValue(u))).ToList();
+            .Where(u => Values.Contains(ItemValue(u))).ToList();
 
         public object Menu { get; set; }
 
@@ -164,6 +176,14 @@ namespace MASA.Blazor
             return Items
                 .Where(u => values.Contains(ItemValue(u)))
                 .Select(ItemText).ToList();
+        }
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            ComputedMenuProps = GetDefaultMenuProps();
+            MenuProps?.Invoke(ComputedMenuProps);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -235,44 +255,40 @@ namespace MASA.Blazor
                 {
                     props[nameof(MMenu.Value)] = Visible;
                     props[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, async (v) =>
-                     {
-                         Visible = v;
+                    {
+                        Visible = v;
 
-                         if (v)
-                         {
-                             await InputElement.FocusAsync();
-                         }
-                     });
+                        if (v)
+                        {
+                            await InputElement.FocusAsync();
+                        }
+                    });
                     props[nameof(MMenu.Disabled)] = Disabled || Readonly;
-                    props[nameof(MMenu.OffsetY)] = MenuProps?.OffsetY;
-                    props[nameof(MMenu.OffsetX)] = MenuProps?.OffsetX;
-                    props[nameof(MMenu.CloseOnContentClick)] = false;
-                    props[nameof(MMenu.Top)] = MenuProps?.Top;
-                    props[nameof(MMenu.Right)] = MenuProps?.Right;
-                    props[nameof(MMenu.Bottom)] = MenuProps?.Bottom;
-                    props[nameof(MMenu.Left)] = MenuProps?.Left;
-                    props[nameof(MMenu.NudgeTop)] = MenuProps?.NudgeTop;
-                    props[nameof(MMenu.NudgeRight)] = MenuProps?.NudgeRight;
-                    props[nameof(MMenu.NudgeBottom)] = MenuProps?.NudgeBottom;
-                    props[nameof(MMenu.NudgeLeft)] = MenuProps?.NudgeLeft;
-                    props[nameof(MMenu.NudgeWidth)] = MenuProps?.NudgeWidth;
-                    props[nameof(MMenu.MaxHeight)] = MenuProps?.MaxHeight ?? 400;
-                    props[nameof(MMenu.MinWidth)] = MenuProps?.MinWidth;
+
+                    props[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
+                    props[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;
+                    props[nameof(MMenu.CloseOnContentClick)] = ComputedMenuProps.CloseOnContentClick;
+                    props[nameof(MMenu.DisableKeys)] = ComputedMenuProps.DisableKeys;
+                    props[nameof(MMenu.Left)] = ComputedMenuProps.Left;
+                    props[nameof(MMenu.MaxHeight)] = ComputedMenuProps.MaxHeight;
+                    props[nameof(MMenu.MinWidth)] = ComputedMenuProps.MinWidth;
+                    props[nameof(MMenu.NudgeTop)] = ComputedMenuProps.NudgeTop;
+                    props[nameof(MMenu.NudgeRight)] = ComputedMenuProps.NudgeRight;
+                    props[nameof(MMenu.NudgeBottom)] = ComputedMenuProps.NudgeBottom;
+                    props[nameof(MMenu.NudgeLeft)] = ComputedMenuProps.NudgeLeft;
+                    props[nameof(MMenu.NudgeWidth)] = ComputedMenuProps.NudgeWidth;
+                    props[nameof(MMenu.OffsetX)] = ComputedMenuProps.OffsetX;
+                    props[nameof(MMenu.OffsetY)] = ComputedMenuProps.OffsetY;
+                    props[nameof(MMenu.OpenOnClick)] = ComputedMenuProps.OpenOnClick;
+                    props[nameof(MMenu.Right)] = ComputedMenuProps.Right;
+                    props[nameof(MMenu.Top)] = ComputedMenuProps.Top;
                 })
-                .Apply<BList, MList>(props =>
-                {
-                    props[nameof(MList.Dense)] = Dense;
-                })
-                .Apply<BListItem, MListItem>(props =>
-                {
-                    props[nameof(MListItem.Dense)] = Dense;
-                })
+                .Apply<BList, MList>(props => { props[nameof(MList.Dense)] = Dense; })
+                .Apply<BListItem, MListItem>(props => { props[nameof(MListItem.Dense)] = Dense; })
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>()
-                .Apply(typeof(BSelectList<,,>), typeof(MSelectList<TItem, TItemValue, TValue>), props =>
-                {
-                    props[nameof(MSelectList<TItem, TItemValue, TValue>.ItemContent)] = ItemContent;
-                })
+                .Apply(typeof(BSelectList<,,>), typeof(MSelectList<TItem, TItemValue, TValue>),
+                    props => { props[nameof(MSelectList<TItem, TItemValue, TValue>.ItemContent)] = ItemContent; })
                 .Apply<BChip, MChip>(props =>
                 {
                     props[nameof(MChip.Close)] = DeletableChips && (!IsDisabled && !IsReadonly);
@@ -295,6 +311,7 @@ namespace MASA.Blazor
                     {
                         HighlightIndex = ComputedItems.Count - 1;
                     }
+
                     break;
                 case "ArrowDown":
                     if (HighlightIndex < ComputedItems.Count - 1)
@@ -305,6 +322,7 @@ namespace MASA.Blazor
                     {
                         HighlightIndex = 0;
                     }
+
                     break;
                 case "Enter":
                     if (HighlightIndex > -1 && HighlightIndex < ComputedItems.Count)
@@ -331,6 +349,7 @@ namespace MASA.Blazor
                             }
                         }
                     }
+
                     break;
                 default:
                     break;

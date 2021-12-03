@@ -38,6 +38,15 @@ namespace MASA.Blazor.Doc.Components
             }
         }
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                _items = await Service.GetTitlesAsync(NavigationManager.Uri);
+                StateHasChanged();
+            }
+        }
+
         private void OnScroll(JsonElement obj)
         {
             _cancellationTokenSource?.Cancel();
@@ -99,7 +108,7 @@ namespace MASA.Blazor.Doc.Components
             var element = await Js.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, domId);
             var options = new
             {
-                Top = element.OffsetTop,
+                Top = element.OffsetTop + 32 + 16 + 16,
                 Left = 0,
                 Behavior = "smooth"
             };

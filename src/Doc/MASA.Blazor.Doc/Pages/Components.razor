@@ -134,20 +134,9 @@
             <ALink Href="/about/meet-the-team">我们的团队</ALink>
             选择的相关内容，或通过使用下面的导航链接在页面之间跳转。
         </div>
-        <RelatedPages Related="@_demoComponent?.Related"/>
+        <RelatedPages Related="@_demoComponent?.Related" />
         <MDivider Class="my-6 mt-7 mb-5"></MDivider>
-        <div class="d-flex mb-4">
-            <a class="text-decoration-none text-body-1">
-                <span class="text-h6 text--primary">←&nbsp;</span>
-                <span>上一页</span>
-            </a>
-            <MSpacer></MSpacer>
-            <a class="text-decoration-none text-body-1">
-                <span>下一页</span>
-                <span class="text-h6 text--primary">&nbsp;→</span>
-            </a>
-        </div>
-        <MSheet Class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 m-vuetify-ad mb-8" Outlined Rounded="true" MinHeight="74" Style="width:100%"></MSheet>
+        <BottomNav></BottomNav>
         <div>
             <div class="blue-grey--text text--darken-1 d-flexalign-center justify-space-between">
                 <div class="font-weight-medium d-flex align-baseline grow flex-wrap">
