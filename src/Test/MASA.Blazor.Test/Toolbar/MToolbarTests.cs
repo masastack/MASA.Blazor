@@ -258,20 +258,6 @@ namespace MASA.Blazor.Test.Toolbar
         }
 
         [TestMethod]
-        public void RenderToolbarWithOnContextmenuPreventDefault()
-        {
-            //Act
-            var cut = RenderComponent<MToolbar>(props =>
-            {
-                props.Add(toolbar => toolbar.OnContextmenuPreventDefault, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasOnContextmenuPreventDefaultClass = classes.Contains("m-toolbar");
-            // Assert
-            Assert.IsTrue(hasOnContextmenuPreventDefaultClass);
-        }
-
-        [TestMethod]
         public void RenderToolbarWithOutlined()
         {
             //Act

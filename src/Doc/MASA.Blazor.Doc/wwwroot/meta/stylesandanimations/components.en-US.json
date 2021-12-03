@@ -3,7 +3,7 @@
     "Desc": "<p>Use the border radius auxiliary style to quickly apply the <code>border-radius</code> style to the element</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-02T15:04:04.5876518+08:00",
+    "LastWriteTime": "2021-12-03T15:32:05.2134833+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -82,7 +82,7 @@
     "Desc": "<p>Through <strong>sass</strong> and <strong>javascript</strong>, you can use <a href=\"https://material.io/design/color/the-color-system.html#color-theme-creation\">Material Design</a> in the specification All colors. These values can be used in style sheets, component files and actual components through the <strong>color class</strong> system.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-02T15:04:04.5966516+08:00",
+    "LastWriteTime": "2021-12-03T15:32:05.2214823+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -128,7 +128,7 @@
     "Desc": "<p>��ʾ������������������ݵ���ʾ�����Ը��ݵ�ǰ��ͼ��ʵ��Ԫ����ʾ��������������ʾ���ݡ�</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-02T15:04:04.6086525+08:00",
+    "LastWriteTime": "2021-12-03T15:32:05.2334817+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -174,7 +174,7 @@
     "Desc": "<p>This tool allows you to control the relative depth, or distance, between the two planes along the z-axis. There are 25 heights in total. You can set the elevation of an element by using the <code>elevation-{n}</code> class, where <code>n</code> is an integer between 0-24 corresponding to the desired altitude.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-02T15:04:04.6246508+08:00",
+    "LastWriteTime": "2021-12-03T15:32:05.2484821+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -209,7 +209,7 @@
     "Desc": "<p>Control the layout of flex containers with alignment, justification and more with responsive flexbox utilities.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-02T15:04:04.6326508+08:00",
+    "LastWriteTime": "2021-12-03T15:32:05.2554819+08:00",
     "DemoList": [
       {
         "Order": 3,
@@ -354,7 +354,7 @@
     "Desc": "<p>Applies a custom float across any breakpoint with responsive float utilities.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-02T15:04:04.6666536+08:00",
+    "LastWriteTime": "2021-12-03T15:32:05.2854851+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -389,7 +389,7 @@
     "Desc": "<p>Configure how content overflows when it becomes out of container bounds.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-02T15:04:04.6766751+08:00",
+    "LastWriteTime": "2021-12-03T15:32:05.2924815+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -424,7 +424,7 @@
     "Desc": "<p>Do not update your layout by creating new classes. Auxiliary auxiliary classes modify the filling and edges of elements</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-02T15:04:04.6926496+08:00",
+    "LastWriteTime": "2021-12-03T15:32:05.3074806+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -481,7 +481,7 @@
     "Desc": "<p>Control text size, alignment, wrapping, overflow, transforms and more.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-02T15:04:04.7206493+08:00",
+    "LastWriteTime": "2021-12-03T15:32:05.3434814+08:00",
     "DemoList": [
       {
         "Order": 5,
@@ -618,7 +618,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-02T15:04:04.7516495+08:00",
+    "LastWriteTime": "2021-12-03T15:32:05.3764824+08:00",
     "DemoList": [
       {
         "Order": 0,
