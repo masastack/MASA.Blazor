@@ -200,8 +200,8 @@ namespace MASA.Blazor.Doc.CLI.Commands
         void GenerateApiFiles(string output,string[] languages)
         {
             var assembly = typeof(MApp).Assembly;//Assembly.LoadFile(assemblyPath);
-            var ComponentBaseType = typeof(ComponentBase);
-            var componentTypes = assembly.GetTypes().Where(type => ComponentBaseType.IsAssignableFrom(type) && type.Name.StartsWith("M"));
+            var componentBaseType = typeof(ComponentBase);
+            var componentTypes = assembly.GetTypes().Where(type => componentBaseType.IsAssignableFrom(type) && type.Name.StartsWith("M"));
             var apis = new List<Api>();
 
             foreach (var componentType in componentTypes)

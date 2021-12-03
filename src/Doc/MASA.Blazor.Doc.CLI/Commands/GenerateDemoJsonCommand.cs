@@ -43,11 +43,11 @@ namespace MASA.Blazor.Doc.CLI.Commands
                     output = "./";
                 }
 
-                string demoDirectory = Path.Combine(Directory.GetCurrentDirectory(), source);
+                string demosDirectory = Path.Combine(Directory.GetCurrentDirectory(), source);
 
                 try
                 {
-                    GenerateFiles(demoDirectory, output);
+                    GenerateFiles(demosDirectory, output);
                 }
                 catch (Exception ex)
                 {
@@ -59,125 +59,114 @@ namespace MASA.Blazor.Doc.CLI.Commands
             });
         }
 
-        private void GenerateFiles(string demoDirectory, string output)
+        private void GenerateFiles(string demosDirectory, string output)
         {
-            DirectoryInfo demoDirectoryInfo = new DirectoryInfo(demoDirectory);
-            if (!demoDirectoryInfo.Attributes.HasFlag(FileAttributes.Directory))
+            var outputDirectory = Path.Combine(Directory.GetCurrentDirectory(), output);
+            if (!Directory.Exists(outputDirectory))
             {
-                Console.WriteLine("{0} is not a directory", demoDirectory);
+                Directory.CreateDirectory(outputDirectory);
+            }
+
+            var demosDirectoryInfo = new DirectoryInfo(demosDirectory);
+            if (!demosDirectoryInfo.Attributes.HasFlag(FileAttributes.Directory))
+            {
+                Console.WriteLine("{0} is not a directory", demosDirectory);
                 return;
             }
 
-            List<Dictionary<string, DemoComponentModel>> componentList = new();
-            List<string> demoTypes = new();
-
-            var directories = demoDirectoryInfo.GetFileSystemInfos()
-                .SelectMany(x => (x as DirectoryInfo).GetFileSystemInfos()).OrderBy(r => r.Name);
-
-            foreach (FileSystemInfo component in directories)
+            //Components,StylesAndAnimations
+            foreach (DirectoryInfo componentsDirectory in demosDirectoryInfo.GetFileSystemInfos())
             {
-                if (!(component is DirectoryInfo componentDirectory)) continue;
+                var componentsDirectoryName = componentsDirectory.Name.ToLower();
 
-                Dictionary<string, DemoComponentModel> componentDic = new();
-                Dictionary<string, List<DemoItemModel>> demoDic = new();
-
-                var childrenDir = componentDirectory.GetFileSystemInfos("children")?.FirstOrDefault();
-                if (childrenDir != null && childrenDir.Exists)
+                var componentModels = new List<Dictionary<string, DemoComponentModel>>();
+                var demoTypes = new List<string>();
+                foreach (var fileSystemInfo in componentsDirectory.GetFileSystemInfos())
                 {
-                    var subDemoDirectoryInfo = (childrenDir as DirectoryInfo);
+                    if (fileSystemInfo is not DirectoryInfo componentDirectory) continue;
 
-                    var subDirectories = subDemoDirectoryInfo.GetFileSystemInfos().OrderBy(r => r.Name);
-
-                    foreach (var subComponent in subDirectories)
+                    if (componentDirectory.GetFileSystemInfos("children")?.FirstOrDefault() is DirectoryInfo childrenDirectory && childrenDirectory.Exists)
                     {
-                        // TODO: check
-
-                        if (!(subComponent is DirectoryInfo subComponentDirectory)) continue;
-
-                        var subComponentDic = FormatDocDir(subComponentDirectory);
-
-                        (demoDic, var subTypes) = FormatDemoDir(subComponentDirectory, demoDirectoryInfo);
-
-                        demoTypes.AddRange(subTypes);
-
-                        foreach (var (language, demoItems) in demoDic)
+                        foreach (var subComponentFileSystemInfo in childrenDirectory.GetFileSystemInfos().OrderBy(r => r.Name))
                         {
-                            if (!subComponentDic.ContainsKey(language)) continue;
+                            if (subComponentFileSystemInfo is not DirectoryInfo subComponentDirectory) continue;
 
-                            subComponentDic[language].DemoList.AddRange(demoItems);
-                            subComponentDic[language].LastWriteTime = subComponentDirectory.LastWriteTime;
+                            var subDemoComponentModels = GetComponentModels(subComponentDirectory);
+                            (var demoComponents, var types) = GetDemos(subComponentDirectory, demosDirectoryInfo);
+                            demoTypes.AddRange(types);
+
+                            foreach (var (language, demoItems) in demoComponents)
+                            {
+                                if (!subDemoComponentModels.ContainsKey(language)) continue;
+
+                                subDemoComponentModels[language].DemoList.AddRange(demoItems);
+                                subDemoComponentModels[language].LastWriteTime = subComponentDirectory.LastWriteTime;
+                            }
+
+                            componentModels.Add(subDemoComponentModels);
+                        }
+                    }
+                    else
+                    {
+                        var demoComponentModels = GetComponentModels(componentDirectory);
+                        (var demoComponents, var types) = GetDemos(componentDirectory, demosDirectoryInfo);
+                        demoTypes.AddRange(types);
+
+                        foreach (var (language, demoItems) in demoComponents)
+                        {
+                            if (!demoComponentModels.ContainsKey(language)) continue;
+
+                            demoComponentModels[language].DemoList.AddRange(demoItems);
+                            demoComponentModels[language].LastWriteTime = componentDirectory.LastWriteTime;
                         }
 
-                        componentList.Add(subComponentDic);
+                        componentModels.Add(demoComponentModels);
                     }
                 }
-                else
+
+                var componentI18NModels = componentModels
+                    .SelectMany(x => x).GroupBy(x => x.Key);
+                foreach (var componentI18NModel in componentI18NModels)
                 {
-                    componentDic = FormatDocDir(componentDirectory);
-                    (demoDic, var types) = FormatDemoDir(componentDirectory, demoDirectoryInfo);
-                    demoTypes.AddRange(types);
-
-                    foreach (var (language, demoItems) in demoDic)
+                    var demoComponentModels = componentI18NModel.Select(x => x.Value);
+                    string componentJson = JsonSerializer.Serialize(demoComponentModels, new JsonSerializerOptions()
                     {
-                        if (!componentDic.ContainsKey(language)) continue;
+                        WriteIndented = true,
+                        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+                        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                    });
 
-                        componentDic[language].DemoList.AddRange(demoItems);
-                        componentDic[language].LastWriteTime = componentDirectory.LastWriteTime;
+                    //components.{lang}.json
+                    var componentsOutputDirectory = Path.Combine(outputDirectory, componentsDirectoryName);
+                    if (!Directory.Exists(componentsOutputDirectory))
+                    {
+                        Directory.CreateDirectory(componentsOutputDirectory);
                     }
 
-                    componentList.Add(componentDic);
+                    var componentsJsonFilePath = Path.Combine(outputDirectory, componentsDirectoryName, $"components.{componentI18NModel.Key}.json");
+                    File.WriteAllText(componentsJsonFilePath, componentJson);
+                    Console.WriteLine("Generate demo file to {0}", componentsJsonFilePath);
                 }
-            }
 
-            string configFileDirectory = Path.Combine(Directory.GetCurrentDirectory(), output);
+                //demoTypes.json
+                var demoTypesOutputDirectory = Path.Combine(outputDirectory, componentsDirectoryName);
+                if (!Directory.Exists(demoTypesOutputDirectory))
+                {
+                    Directory.CreateDirectory(demoTypesOutputDirectory);
+                }
+                var demoTypesFilePath = Path.Combine(outputDirectory, componentsDirectoryName, $"demoTypes.json");
 
-            if (!Directory.Exists(configFileDirectory))
-            {
-                Directory.CreateDirectory(configFileDirectory);
-            }
-
-            var componentI18N = componentList
-                .SelectMany(x => x).GroupBy(x => x.Key);
-
-            foreach (IGrouping<string, KeyValuePair<string, DemoComponentModel>> componentDic in componentI18N)
-            {
-                IEnumerable<DemoComponentModel> components = componentDic.Select(x => x.Value);
-                string componentJson = JsonSerializer.Serialize(components, new JsonSerializerOptions()
+                var demoTypesJson = JsonSerializer.Serialize(demoTypes, new JsonSerializerOptions()
                 {
                     WriteIndented = true,
                     DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                     Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
                 });
-
-                string configFilePath = Path.Combine(configFileDirectory, $"components.{componentDic.Key}.json");
-
-                if (File.Exists(configFilePath))
-                {
-                    File.Delete(configFilePath);
-                }
-
-                File.WriteAllText(configFilePath, componentJson);
-
-                Console.WriteLine("Generate demo file to {0}", configFilePath);
+                File.WriteAllText(demoTypesFilePath, demoTypesJson);
             }
-
-            var demoJson = JsonSerializer.Serialize(demoTypes, new JsonSerializerOptions()
-            {
-                WriteIndented = true,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-            });
-
-            string demoFilePath = Path.Combine(configFileDirectory, $"demoTypes.json");
-            if (File.Exists(demoFilePath))
-            {
-                File.Delete(demoFilePath);
-            }
-
-            File.WriteAllText(demoFilePath, demoJson);
         }
 
-        private Dictionary<string, DemoComponentModel> FormatDocDir(DirectoryInfo componentDirectory)
+        private Dictionary<string, DemoComponentModel> GetComponentModels(DirectoryInfo componentDirectory)
         {
             Dictionary<string, DemoComponentModel> dict = new();
 
@@ -202,7 +191,7 @@ namespace MASA.Blazor.Doc.CLI.Commands
             return dict;
         }
 
-        private(Dictionary<string, List<DemoItemModel>>, List<string> demoTypes) FormatDemoDir(DirectoryInfo componentDirectory,
+        private (Dictionary<string, List<DemoItemModel>>, List<string> demoTypes) GetDemos(DirectoryInfo componentDirectory,
             DirectoryInfo demosDirectory)
         {
             List<string> demoTypes = new();

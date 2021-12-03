@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Globalization;
+using System.Net;
 using System.Net.Http;
 using MASA.Blazor.Doc.Services;
 using Microsoft.AspNetCore.Builder;
@@ -27,7 +28,11 @@ namespace MASA.Blazor.Doc.Server
 
             services.AddMasaBlazor();
 
+            services.AddHttpContextAccessor();
+
             services.AddHttpClient<DemoService>(c => c.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68"));
+
+            services.AddLocalization();
 
             services.AddMasaBlazorDocs();
         }
@@ -47,6 +52,17 @@ namespace MASA.Blazor.Doc.Server
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseRequestLocalization(opts =>
+            {
+                var supportedCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("en-US"),
+                    new CultureInfo("zh-CN")
+                };
+                opts.SupportedCultures = supportedCultures;
+                opts.SupportedUICultures = supportedCultures;
+            });
 
             app.UseEndpoints(endpoints =>
             {

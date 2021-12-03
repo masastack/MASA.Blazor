@@ -216,7 +216,7 @@
     },
     {
       "Name": "MenuProps",
-      "Type": "BMenuProps",
+      "Type": "Action`1",
       "Default": "",
       "Description": ""
     },

@@ -44,7 +44,7 @@ namespace MASA.Blazor.Doc.Services
             await _componentCache.GetOrAdd(language, async (currentLanguage) =>
             {
                 var components =
-                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>($"_content/MASA.Blazor.Doc/meta/components.{language}.json");
+                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>($"_content/MASA.Blazor.Doc/meta/components/components.{language}.json");
                 return components.ToDictionary(x => x.Title.StructureUrl(), x => x);
             });
 
@@ -53,7 +53,7 @@ namespace MASA.Blazor.Doc.Services
             {
                 var styles =
                     await _httpClient.GetFromJsonAsync<DemoComponentModel[]>(
-                        $"_content/MASA.Blazor.Doc/meta/styles-and-animations/components.{language}.json");
+                        $"_content/MASA.Blazor.Doc/meta/stylesandanimations/components.{language}.json");
                 return styles.ToDictionary(x => x.Title.StructureUrl(), x => x);
             });
 
@@ -88,7 +88,7 @@ namespace MASA.Blazor.Doc.Services
         {
             _showCaseCache ??= new ConcurrentCache<string, RenderFragment>();
             var demoTypes =
-                await _httpClient.GetFromJsonAsync<string[]>($"_content/MASA.Blazor.Doc/meta/demoTypes.json");
+                await _httpClient.GetFromJsonAsync<string[]>($"_content/MASA.Blazor.Doc/meta/components/demoTypes.json");
             foreach (var type in demoTypes)
             {
                 GetShowCase(type);

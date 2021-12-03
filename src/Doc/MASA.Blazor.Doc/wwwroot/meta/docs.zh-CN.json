@@ -2,6 +2,7 @@
   {
     "Order": 8,
     "Title": "关于",
+    "FullTitle": "关于",
     "Type": "menuItem",
     "Url": "about",
     "Icon": "mdi-vuetify",
@@ -9,6 +10,7 @@
       {
         "Order": 0,
         "Title": "认识开发团队",
+        "FullTitle": "认识开发团队",
         "Type": "menuItem",
         "Url": "about/meet-the-team",
         "Contents": [
@@ -27,6 +29,7 @@
       {
         "Order": 1,
         "Title": "赞助商和支持者",
+        "FullTitle": "赞助商和支持者",
         "Type": "menuItem",
         "Url": "about/sponsors-backers",
         "Contents": [
@@ -55,6 +58,7 @@
       {
         "Order": 2,
         "Title": "安全披露",
+        "FullTitle": "安全披露",
         "Type": "menuItem",
         "Url": "about/security-disclosure",
         "Contents": [
@@ -78,6 +82,7 @@
       {
         "Order": 3,
         "Title": "行为准则",
+        "FullTitle": "行为准则",
         "Type": "menuItem",
         "Url": "about/code-conduct",
         "Contents": [
@@ -113,6 +118,7 @@
   {
     "Order": 5,
     "Title": "API",
+    "FullTitle": "API",
     "Type": "menuItem",
     "Url": "api",
     "Icon": "mdi-flask-outline",
@@ -120,6 +126,7 @@
       {
         "Order": 0,
         "Title": "Alert",
+        "FullTitle": "Alert",
         "Type": "menuItem",
         "Url": "api/malert",
         "Contents": [
@@ -143,6 +150,7 @@
       {
         "Order": 0,
         "Title": "AlertDismissButton",
+        "FullTitle": "AlertDismissButton",
         "Type": "menuItem",
         "Url": "api/malertdismissbutton",
         "Contents": [
@@ -166,6 +174,7 @@
       {
         "Order": 0,
         "Title": "AlertIcon",
+        "FullTitle": "AlertIcon",
         "Type": "menuItem",
         "Url": "api/malerticon",
         "Contents": [
@@ -189,6 +198,7 @@
       {
         "Order": 0,
         "Title": "App",
+        "FullTitle": "App",
         "Type": "menuItem",
         "Url": "api/mapp",
         "Contents": [
@@ -212,6 +222,7 @@
       {
         "Order": 0,
         "Title": "AppBar",
+        "FullTitle": "AppBar",
         "Type": "menuItem",
         "Url": "api/mappbar",
         "Contents": [
@@ -235,6 +246,7 @@
       {
         "Order": 0,
         "Title": "AppBarNavIcon",
+        "FullTitle": "AppBarNavIcon",
         "Type": "menuItem",
         "Url": "api/mappbarnavicon",
         "Contents": [
@@ -258,6 +270,7 @@
       {
         "Order": 0,
         "Title": "AppBarTitle",
+        "FullTitle": "AppBarTitle",
         "Type": "menuItem",
         "Url": "api/mappbartitle",
         "Contents": [
@@ -281,6 +294,7 @@
       {
         "Order": 0,
         "Title": "Autocomplete",
+        "FullTitle": "Autocomplete",
         "Type": "menuItem",
         "Url": "api/mautocomplete",
         "Contents": [
@@ -304,6 +318,7 @@
       {
         "Order": 0,
         "Title": "Avatar",
+        "FullTitle": "Avatar",
         "Type": "menuItem",
         "Url": "api/mavatar",
         "Contents": [
@@ -327,6 +342,7 @@
       {
         "Order": 0,
         "Title": "Badge",
+        "FullTitle": "Badge",
         "Type": "menuItem",
         "Url": "api/mbadge",
         "Contents": [
@@ -350,6 +366,7 @@
       {
         "Order": 0,
         "Title": "Banner",
+        "FullTitle": "Banner",
         "Type": "menuItem",
         "Url": "api/mbanner",
         "Contents": [
@@ -373,6 +390,7 @@
       {
         "Order": 0,
         "Title": "Border",
+        "FullTitle": "Border",
         "Type": "menuItem",
         "Url": "api/mborder",
         "Contents": [
@@ -396,6 +414,7 @@
       {
         "Order": 0,
         "Title": "Breadcrumbs",
+        "FullTitle": "Breadcrumbs",
         "Type": "menuItem",
         "Url": "api/mbreadcrumbs",
         "Contents": [
@@ -419,6 +438,7 @@
       {
         "Order": 0,
         "Title": "BreadcrumbsDivider",
+        "FullTitle": "BreadcrumbsDivider",
         "Type": "menuItem",
         "Url": "api/mbreadcrumbsdivider",
         "Contents": [
@@ -442,6 +462,7 @@
       {
         "Order": 0,
         "Title": "BreadcrumbsItem",
+        "FullTitle": "BreadcrumbsItem",
         "Type": "menuItem",
         "Url": "api/mbreadcrumbsitem",
         "Contents": [
@@ -465,6 +486,7 @@
       {
         "Order": 0,
         "Title": "Button",
+        "FullTitle": "Button",
         "Type": "menuItem",
         "Url": "api/mbutton",
         "Contents": [
@@ -488,6 +510,7 @@
       {
         "Order": 0,
         "Title": "ButtonGroup",
+        "FullTitle": "ButtonGroup",
         "Type": "menuItem",
         "Url": "api/mbuttongroup",
         "Contents": [
@@ -511,6 +534,7 @@
       {
         "Order": 0,
         "Title": "Calendar",
+        "FullTitle": "Calendar",
         "Type": "menuItem",
         "Url": "api/mcalendar",
         "Contents": [
@@ -534,6 +558,7 @@
       {
         "Order": 0,
         "Title": "CalendarCategory",
+        "FullTitle": "CalendarCategory",
         "Type": "menuItem",
         "Url": "api/mcalendarcategory",
         "Contents": [
@@ -557,6 +582,7 @@
       {
         "Order": 0,
         "Title": "CalendarDaily",
+        "FullTitle": "CalendarDaily",
         "Type": "menuItem",
         "Url": "api/mcalendardaily",
         "Contents": [
@@ -580,6 +606,7 @@
       {
         "Order": 0,
         "Title": "CalendarMonthly",
+        "FullTitle": "CalendarMonthly",
         "Type": "menuItem",
         "Url": "api/mcalendarmonthly",
         "Contents": [
@@ -603,6 +630,7 @@
       {
         "Order": 0,
         "Title": "CalendarWeekly",
+        "FullTitle": "CalendarWeekly",
         "Type": "menuItem",
         "Url": "api/mcalendarweekly",
         "Contents": [
@@ -626,6 +654,7 @@
       {
         "Order": 0,
         "Title": "Card",
+        "FullTitle": "Card",
         "Type": "menuItem",
         "Url": "api/mcard",
         "Contents": [
@@ -649,6 +678,7 @@
       {
         "Order": 0,
         "Title": "CardActions",
+        "FullTitle": "CardActions",
         "Type": "menuItem",
         "Url": "api/mcardactions",
         "Contents": [
@@ -672,6 +702,7 @@
       {
         "Order": 0,
         "Title": "CardSubtitle",
+        "FullTitle": "CardSubtitle",
         "Type": "menuItem",
         "Url": "api/mcardsubtitle",
         "Contents": [
@@ -695,6 +726,7 @@
       {
         "Order": 0,
         "Title": "CardText",
+        "FullTitle": "CardText",
         "Type": "menuItem",
         "Url": "api/mcardtext",
         "Contents": [
@@ -718,6 +750,7 @@
       {
         "Order": 0,
         "Title": "CardTitle",
+        "FullTitle": "CardTitle",
         "Type": "menuItem",
         "Url": "api/mcardtitle",
         "Contents": [
@@ -741,6 +774,7 @@
       {
         "Order": 0,
         "Title": "Cascader",
+        "FullTitle": "Cascader",
         "Type": "menuItem",
         "Url": "api/mcascader",
         "Contents": [
@@ -764,6 +798,7 @@
       {
         "Order": 0,
         "Title": "CascaderMenu",
+        "FullTitle": "CascaderMenu",
         "Type": "menuItem",
         "Url": "api/mcascadermenu",
         "Contents": [
@@ -787,6 +822,7 @@
       {
         "Order": 0,
         "Title": "CascaderSelectList",
+        "FullTitle": "CascaderSelectList",
         "Type": "menuItem",
         "Url": "api/mcascaderselectlist",
         "Contents": [
@@ -810,6 +846,7 @@
       {
         "Order": 0,
         "Title": "CascaderSelectOption",
+        "FullTitle": "CascaderSelectOption",
         "Type": "menuItem",
         "Url": "api/mcascaderselectoption",
         "Contents": [
@@ -833,6 +870,7 @@
       {
         "Order": 0,
         "Title": "Checkbox",
+        "FullTitle": "Checkbox",
         "Type": "menuItem",
         "Url": "api/mcheckbox",
         "Contents": [
@@ -856,6 +894,7 @@
       {
         "Order": 0,
         "Title": "Chip",
+        "FullTitle": "Chip",
         "Type": "menuItem",
         "Url": "api/mchip",
         "Contents": [
@@ -879,6 +918,7 @@
       {
         "Order": 0,
         "Title": "ChipGroup",
+        "FullTitle": "ChipGroup",
         "Type": "menuItem",
         "Url": "api/mchipgroup",
         "Contents": [
@@ -902,6 +942,7 @@
       {
         "Order": 0,
         "Title": "Col",
+        "FullTitle": "Col",
         "Type": "menuItem",
         "Url": "api/mcol",
         "Contents": [
@@ -925,6 +966,7 @@
       {
         "Order": 0,
         "Title": "ColorPicker",
+        "FullTitle": "ColorPicker",
         "Type": "menuItem",
         "Url": "api/mcolorpicker",
         "Contents": [
@@ -948,6 +990,7 @@
       {
         "Order": 0,
         "Title": "ColorPickerCanvas",
+        "FullTitle": "ColorPickerCanvas",
         "Type": "menuItem",
         "Url": "api/mcolorpickercanvas",
         "Contents": [
@@ -971,6 +1014,7 @@
       {
         "Order": 0,
         "Title": "ColorPickerEdit",
+        "FullTitle": "ColorPickerEdit",
         "Type": "menuItem",
         "Url": "api/mcolorpickeredit",
         "Contents": [
@@ -994,6 +1038,7 @@
       {
         "Order": 0,
         "Title": "ColorPickerPreview",
+        "FullTitle": "ColorPickerPreview",
         "Type": "menuItem",
         "Url": "api/mcolorpickerpreview",
         "Contents": [
@@ -1017,6 +1062,7 @@
       {
         "Order": 0,
         "Title": "Container",
+        "FullTitle": "Container",
         "Type": "menuItem",
         "Url": "api/mcontainer",
         "Contents": [
@@ -1040,6 +1086,7 @@
       {
         "Order": 0,
         "Title": "Counter",
+        "FullTitle": "Counter",
         "Type": "menuItem",
         "Url": "api/mcounter",
         "Contents": [
@@ -1063,6 +1110,7 @@
       {
         "Order": 0,
         "Title": "DataFooter",
+        "FullTitle": "DataFooter",
         "Type": "menuItem",
         "Url": "api/mdatafooter",
         "Contents": [
@@ -1086,6 +1134,7 @@
       {
         "Order": 0,
         "Title": "DataIterator",
+        "FullTitle": "DataIterator",
         "Type": "menuItem",
         "Url": "api/mdataiterator",
         "Contents": [
@@ -1109,6 +1158,7 @@
       {
         "Order": 0,
         "Title": "DataTable",
+        "FullTitle": "DataTable",
         "Type": "menuItem",
         "Url": "api/mdatatable",
         "Contents": [
@@ -1132,6 +1182,7 @@
       {
         "Order": 0,
         "Title": "DataTableHeader",
+        "FullTitle": "DataTableHeader",
         "Type": "menuItem",
         "Url": "api/mdatatableheader",
         "Contents": [
@@ -1155,6 +1206,7 @@
       {
         "Order": 0,
         "Title": "DataTableRow",
+        "FullTitle": "DataTableRow",
         "Type": "menuItem",
         "Url": "api/mdatatablerow",
         "Contents": [
@@ -1178,6 +1230,7 @@
       {
         "Order": 0,
         "Title": "DataTableRowGroup",
+        "FullTitle": "DataTableRowGroup",
         "Type": "menuItem",
         "Url": "api/mdatatablerowgroup",
         "Contents": [
@@ -1201,6 +1254,7 @@
       {
         "Order": 0,
         "Title": "DatePicker",
+        "FullTitle": "DatePicker",
         "Type": "menuItem",
         "Url": "api/mdatepicker",
         "Contents": [
@@ -1224,6 +1278,7 @@
       {
         "Order": 0,
         "Title": "DatePickerDateTable",
+        "FullTitle": "DatePickerDateTable",
         "Type": "menuItem",
         "Url": "api/mdatepickerdatetable",
         "Contents": [
@@ -1247,6 +1302,7 @@
       {
         "Order": 0,
         "Title": "DatePickerHeader",
+        "FullTitle": "DatePickerHeader",
         "Type": "menuItem",
         "Url": "api/mdatepickerheader",
         "Contents": [
@@ -1270,6 +1326,7 @@
       {
         "Order": 0,
         "Title": "DatePickerMonthTable",
+        "FullTitle": "DatePickerMonthTable",
         "Type": "menuItem",
         "Url": "api/mdatepickermonthtable",
         "Contents": [
@@ -1293,6 +1350,7 @@
       {
         "Order": 0,
         "Title": "DatePickerTable",
+        "FullTitle": "DatePickerTable",
         "Type": "menuItem",
         "Url": "api/mdatepickertable",
         "Contents": [
@@ -1316,6 +1374,7 @@
       {
         "Order": 0,
         "Title": "DatePickerTitle",
+        "FullTitle": "DatePickerTitle",
         "Type": "menuItem",
         "Url": "api/mdatepickertitle",
         "Contents": [
@@ -1339,6 +1398,7 @@
       {
         "Order": 0,
         "Title": "DatePickerYears",
+        "FullTitle": "DatePickerYears",
         "Type": "menuItem",
         "Url": "api/mdatepickeryears",
         "Contents": [
@@ -1362,6 +1422,7 @@
       {
         "Order": 0,
         "Title": "Dialog",
+        "FullTitle": "Dialog",
         "Type": "menuItem",
         "Url": "api/mdialog",
         "Contents": [
@@ -1385,6 +1446,7 @@
       {
         "Order": 0,
         "Title": "Divider",
+        "FullTitle": "Divider",
         "Type": "menuItem",
         "Url": "api/mdivider",
         "Contents": [
@@ -1408,6 +1470,7 @@
       {
         "Order": 0,
         "Title": "ECharts",
+        "FullTitle": "ECharts",
         "Type": "menuItem",
         "Url": "api/mecharts",
         "Contents": [
@@ -1431,6 +1494,7 @@
       {
         "Order": 0,
         "Title": "enu",
+        "FullTitle": "enu",
         "Type": "menuItem",
         "Url": "api/menu",
         "Contents": [
@@ -1454,6 +1518,7 @@
       {
         "Order": 0,
         "Title": "essage",
+        "FullTitle": "essage",
         "Type": "menuItem",
         "Url": "api/message",
         "Contents": [
@@ -1477,6 +1542,7 @@
       {
         "Order": 0,
         "Title": "essages",
+        "FullTitle": "essages",
         "Type": "menuItem",
         "Url": "api/messages",
         "Contents": [
@@ -1500,6 +1566,7 @@
       {
         "Order": 0,
         "Title": "ExpansionPanel",
+        "FullTitle": "ExpansionPanel",
         "Type": "menuItem",
         "Url": "api/mexpansionpanel",
         "Contents": [
@@ -1523,6 +1590,7 @@
       {
         "Order": 0,
         "Title": "ExpansionPanelContent",
+        "FullTitle": "ExpansionPanelContent",
         "Type": "menuItem",
         "Url": "api/mexpansionpanelcontent",
         "Contents": [
@@ -1546,6 +1614,7 @@
       {
         "Order": 0,
         "Title": "ExpansionPanelHeader",
+        "FullTitle": "ExpansionPanelHeader",
         "Type": "menuItem",
         "Url": "api/mexpansionpanelheader",
         "Contents": [
@@ -1569,6 +1638,7 @@
       {
         "Order": 0,
         "Title": "ExpansionPanels",
+        "FullTitle": "ExpansionPanels",
         "Type": "menuItem",
         "Url": "api/mexpansionpanels",
         "Contents": [
@@ -1592,6 +1662,7 @@
       {
         "Order": 0,
         "Title": "FileInput",
+        "FullTitle": "FileInput",
         "Type": "menuItem",
         "Url": "api/mfileinput",
         "Contents": [
@@ -1615,6 +1686,7 @@
       {
         "Order": 0,
         "Title": "Footer",
+        "FullTitle": "Footer",
         "Type": "menuItem",
         "Url": "api/mfooter",
         "Contents": [
@@ -1638,6 +1710,7 @@
       {
         "Order": 0,
         "Title": "Form",
+        "FullTitle": "Form",
         "Type": "menuItem",
         "Url": "api/mform",
         "Contents": [
@@ -1661,6 +1734,7 @@
       {
         "Order": 0,
         "Title": "HintMessage",
+        "FullTitle": "HintMessage",
         "Type": "menuItem",
         "Url": "api/mhintmessage",
         "Contents": [
@@ -1684,6 +1758,7 @@
       {
         "Order": 0,
         "Title": "Hover",
+        "FullTitle": "Hover",
         "Type": "menuItem",
         "Url": "api/mhover",
         "Contents": [
@@ -1707,6 +1782,7 @@
       {
         "Order": 0,
         "Title": "Icon",
+        "FullTitle": "Icon",
         "Type": "menuItem",
         "Url": "api/micon",
         "Contents": [
@@ -1730,6 +1806,7 @@
       {
         "Order": 0,
         "Title": "Image",
+        "FullTitle": "Image",
         "Type": "menuItem",
         "Url": "api/mimage",
         "Contents": [
@@ -1753,6 +1830,7 @@
       {
         "Order": 0,
         "Title": "Input",
+        "FullTitle": "Input",
         "Type": "menuItem",
         "Url": "api/minput",
         "Contents": [
@@ -1776,6 +1854,7 @@
       {
         "Order": 0,
         "Title": "Item",
+        "FullTitle": "Item",
         "Type": "menuItem",
         "Url": "api/mitem",
         "Contents": [
@@ -1799,6 +1878,7 @@
       {
         "Order": 0,
         "Title": "ItemGroup",
+        "FullTitle": "ItemGroup",
         "Type": "menuItem",
         "Url": "api/mitemgroup",
         "Contents": [
@@ -1822,6 +1902,7 @@
       {
         "Order": 0,
         "Title": "Label",
+        "FullTitle": "Label",
         "Type": "menuItem",
         "Url": "api/mlabel",
         "Contents": [
@@ -1845,6 +1926,7 @@
       {
         "Order": 0,
         "Title": "List",
+        "FullTitle": "List",
         "Type": "menuItem",
         "Url": "api/mlist",
         "Contents": [
@@ -1868,6 +1950,7 @@
       {
         "Order": 0,
         "Title": "ListGroup",
+        "FullTitle": "ListGroup",
         "Type": "menuItem",
         "Url": "api/mlistgroup",
         "Contents": [
@@ -1891,6 +1974,7 @@
       {
         "Order": 0,
         "Title": "ListGroupItem",
+        "FullTitle": "ListGroupItem",
         "Type": "menuItem",
         "Url": "api/mlistgroupitem",
         "Contents": [
@@ -1914,6 +1998,7 @@
       {
         "Order": 0,
         "Title": "ListGroupItemIcon",
+        "FullTitle": "ListGroupItemIcon",
         "Type": "menuItem",
         "Url": "api/mlistgroupitemicon",
         "Contents": [
@@ -1937,6 +2022,7 @@
       {
         "Order": 0,
         "Title": "ListItem",
+        "FullTitle": "ListItem",
         "Type": "menuItem",
         "Url": "api/mlistitem",
         "Contents": [
@@ -1960,6 +2046,7 @@
       {
         "Order": 0,
         "Title": "ListItemAction",
+        "FullTitle": "ListItemAction",
         "Type": "menuItem",
         "Url": "api/mlistitemaction",
         "Contents": [
@@ -1983,6 +2070,7 @@
       {
         "Order": 0,
         "Title": "ListItemActionText",
+        "FullTitle": "ListItemActionText",
         "Type": "menuItem",
         "Url": "api/mlistitemactiontext",
         "Contents": [
@@ -2006,6 +2094,7 @@
       {
         "Order": 0,
         "Title": "ListItemAvatar",
+        "FullTitle": "ListItemAvatar",
         "Type": "menuItem",
         "Url": "api/mlistitemavatar",
         "Contents": [
@@ -2029,6 +2118,7 @@
       {
         "Order": 0,
         "Title": "ListItemContent",
+        "FullTitle": "ListItemContent",
         "Type": "menuItem",
         "Url": "api/mlistitemcontent",
         "Contents": [
@@ -2052,6 +2142,7 @@
       {
         "Order": 0,
         "Title": "ListItemGroup",
+        "FullTitle": "ListItemGroup",
         "Type": "menuItem",
         "Url": "api/mlistitemgroup",
         "Contents": [
@@ -2075,6 +2166,7 @@
       {
         "Order": 0,
         "Title": "ListItemIcon",
+        "FullTitle": "ListItemIcon",
         "Type": "menuItem",
         "Url": "api/mlistitemicon",
         "Contents": [
@@ -2098,6 +2190,7 @@
       {
         "Order": 0,
         "Title": "ListItemSubtitle",
+        "FullTitle": "ListItemSubtitle",
         "Type": "menuItem",
         "Url": "api/mlistitemsubtitle",
         "Contents": [
@@ -2121,6 +2214,7 @@
       {
         "Order": 0,
         "Title": "ListItemTitle",
+        "FullTitle": "ListItemTitle",
         "Type": "menuItem",
         "Url": "api/mlistitemtitle",
         "Contents": [
@@ -2144,6 +2238,7 @@
       {
         "Order": 0,
         "Title": "Main",
+        "FullTitle": "Main",
         "Type": "menuItem",
         "Url": "api/mmain",
         "Contents": [
@@ -2167,6 +2262,7 @@
       {
         "Order": 0,
         "Title": "Menu",
+        "FullTitle": "Menu",
         "Type": "menuItem",
         "Url": "api/mmenu",
         "Contents": [
@@ -2190,6 +2286,7 @@
       {
         "Order": 0,
         "Title": "Messages",
+        "FullTitle": "Messages",
         "Type": "menuItem",
         "Url": "api/mmessages",
         "Contents": [
@@ -2213,6 +2310,7 @@
       {
         "Order": 0,
         "Title": "MSelectOption",
+        "FullTitle": "MSelectOption",
         "Type": "menuItem",
         "Url": "api/mselectoption",
         "Contents": [
@@ -2236,6 +2334,7 @@
       {
         "Order": 0,
         "Title": "MTabsSlider",
+        "FullTitle": "MTabsSlider",
         "Type": "menuItem",
         "Url": "api/mtabsslider",
         "Contents": [
@@ -2259,6 +2358,7 @@
       {
         "Order": 0,
         "Title": "NavigationDrawer",
+        "FullTitle": "NavigationDrawer",
         "Type": "menuItem",
         "Url": "api/mnavigationdrawer",
         "Contents": [
@@ -2282,6 +2382,7 @@
       {
         "Order": 0,
         "Title": "odal",
+        "FullTitle": "odal",
         "Type": "menuItem",
         "Url": "api/modal",
         "Contents": [
@@ -2305,6 +2406,7 @@
       {
         "Order": 0,
         "Title": "Overlay",
+        "FullTitle": "Overlay",
         "Type": "menuItem",
         "Url": "api/moverlay",
         "Contents": [
@@ -2328,6 +2430,7 @@
       {
         "Order": 0,
         "Title": "Pagination",
+        "FullTitle": "Pagination",
         "Type": "menuItem",
         "Url": "api/mpagination",
         "Contents": [
@@ -2351,6 +2454,7 @@
       {
         "Order": 0,
         "Title": "Picker",
+        "FullTitle": "Picker",
         "Type": "menuItem",
         "Url": "api/mpicker",
         "Contents": [
@@ -2374,6 +2478,7 @@
       {
         "Order": 0,
         "Title": "Popover",
+        "FullTitle": "Popover",
         "Type": "menuItem",
         "Url": "api/mpopover",
         "Contents": [
@@ -2397,6 +2502,7 @@
       {
         "Order": 0,
         "Title": "ProgressCircular",
+        "FullTitle": "ProgressCircular",
         "Type": "menuItem",
         "Url": "api/mprogresscircular",
         "Contents": [
@@ -2420,6 +2526,7 @@
       {
         "Order": 0,
         "Title": "ProgressLinear",
+        "FullTitle": "ProgressLinear",
         "Type": "menuItem",
         "Url": "api/mprogresslinear",
         "Contents": [
@@ -2443,6 +2550,7 @@
       {
         "Order": 0,
         "Title": "Radio",
+        "FullTitle": "Radio",
         "Type": "menuItem",
         "Url": "api/mradio",
         "Contents": [
@@ -2466,6 +2574,7 @@
       {
         "Order": 0,
         "Title": "RadioGroup",
+        "FullTitle": "RadioGroup",
         "Type": "menuItem",
         "Url": "api/mradiogroup",
         "Contents": [
@@ -2489,6 +2598,7 @@
       {
         "Order": 0,
         "Title": "RangeSlider",
+        "FullTitle": "RangeSlider",
         "Type": "menuItem",
         "Url": "api/mrangeslider",
         "Contents": [
@@ -2512,6 +2622,7 @@
       {
         "Order": 0,
         "Title": "Rating",
+        "FullTitle": "Rating",
         "Type": "menuItem",
         "Url": "api/mrating",
         "Contents": [
@@ -2535,6 +2646,7 @@
       {
         "Order": 0,
         "Title": "Responsive",
+        "FullTitle": "Responsive",
         "Type": "menuItem",
         "Url": "api/mresponsive",
         "Contents": [
@@ -2558,6 +2670,7 @@
       {
         "Order": 0,
         "Title": "Row",
+        "FullTitle": "Row",
         "Type": "menuItem",
         "Url": "api/mrow",
         "Contents": [
@@ -2581,6 +2694,7 @@
       {
         "Order": 0,
         "Title": "Select",
+        "FullTitle": "Select",
         "Type": "menuItem",
         "Url": "api/mselect",
         "Contents": [
@@ -2604,6 +2718,7 @@
       {
         "Order": 0,
         "Title": "SelectList",
+        "FullTitle": "SelectList",
         "Type": "menuItem",
         "Url": "api/mselectlist",
         "Contents": [
@@ -2627,6 +2742,7 @@
       {
         "Order": 0,
         "Title": "Sheet",
+        "FullTitle": "Sheet",
         "Type": "menuItem",
         "Url": "api/msheet",
         "Contents": [
@@ -2650,6 +2766,7 @@
       {
         "Order": 0,
         "Title": "SimpleCheckbox",
+        "FullTitle": "SimpleCheckbox",
         "Type": "menuItem",
         "Url": "api/msimplecheckbox",
         "Contents": [
@@ -2673,6 +2790,7 @@
       {
         "Order": 0,
         "Title": "SimpleTable",
+        "FullTitle": "SimpleTable",
         "Type": "menuItem",
         "Url": "api/msimpletable",
         "Contents": [
@@ -2696,6 +2814,7 @@
       {
         "Order": 0,
         "Title": "SkeletonLoader",
+        "FullTitle": "SkeletonLoader",
         "Type": "menuItem",
         "Url": "api/mskeletonloader",
         "Contents": [
@@ -2719,6 +2838,7 @@
       {
         "Order": 0,
         "Title": "SlideGroup",
+        "FullTitle": "SlideGroup",
         "Type": "menuItem",
         "Url": "api/mslidegroup",
         "Contents": [
@@ -2742,6 +2862,7 @@
       {
         "Order": 0,
         "Title": "SlideItem",
+        "FullTitle": "SlideItem",
         "Type": "menuItem",
         "Url": "api/mslideitem",
         "Contents": [
@@ -2765,6 +2886,7 @@
       {
         "Order": 0,
         "Title": "Slider",
+        "FullTitle": "Slider",
         "Type": "menuItem",
         "Url": "api/mslider",
         "Contents": [
@@ -2788,6 +2910,7 @@
       {
         "Order": 0,
         "Title": "Snackbar",
+        "FullTitle": "Snackbar",
         "Type": "menuItem",
         "Url": "api/msnackbar",
         "Contents": [
@@ -2811,6 +2934,7 @@
       {
         "Order": 0,
         "Title": "Spacer",
+        "FullTitle": "Spacer",
         "Type": "menuItem",
         "Url": "api/mspacer",
         "Contents": [
@@ -2834,6 +2958,7 @@
       {
         "Order": 0,
         "Title": "Stepper",
+        "FullTitle": "Stepper",
         "Type": "menuItem",
         "Url": "api/mstepper",
         "Contents": [
@@ -2857,6 +2982,7 @@
       {
         "Order": 0,
         "Title": "StepperContent",
+        "FullTitle": "StepperContent",
         "Type": "menuItem",
         "Url": "api/msteppercontent",
         "Contents": [
@@ -2880,6 +3006,7 @@
       {
         "Order": 0,
         "Title": "StepperHeader",
+        "FullTitle": "StepperHeader",
         "Type": "menuItem",
         "Url": "api/mstepperheader",
         "Contents": [
@@ -2903,6 +3030,7 @@
       {
         "Order": 0,
         "Title": "StepperItems",
+        "FullTitle": "StepperItems",
         "Type": "menuItem",
         "Url": "api/mstepperitems",
         "Contents": [
@@ -2926,6 +3054,7 @@
       {
         "Order": 0,
         "Title": "StepperStep",
+        "FullTitle": "StepperStep",
         "Type": "menuItem",
         "Url": "api/mstepperstep",
         "Contents": [
@@ -2949,6 +3078,7 @@
       {
         "Order": 0,
         "Title": "Subheader",
+        "FullTitle": "Subheader",
         "Type": "menuItem",
         "Url": "api/msubheader",
         "Contents": [
@@ -2972,6 +3102,7 @@
       {
         "Order": 0,
         "Title": "Switch",
+        "FullTitle": "Switch",
         "Type": "menuItem",
         "Url": "api/mswitch",
         "Contents": [
@@ -2995,6 +3126,7 @@
       {
         "Order": 0,
         "Title": "SystemBar",
+        "FullTitle": "SystemBar",
         "Type": "menuItem",
         "Url": "api/msystembar",
         "Contents": [
@@ -3018,6 +3150,7 @@
       {
         "Order": 0,
         "Title": "Tab",
+        "FullTitle": "Tab",
         "Type": "menuItem",
         "Url": "api/mtab",
         "Contents": [
@@ -3041,6 +3174,7 @@
       {
         "Order": 0,
         "Title": "TabItem",
+        "FullTitle": "TabItem",
         "Type": "menuItem",
         "Url": "api/mtabitem",
         "Contents": [
@@ -3064,6 +3198,7 @@
       {
         "Order": 0,
         "Title": "Table",
+        "FullTitle": "Table",
         "Type": "menuItem",
         "Url": "api/mtable",
         "Contents": [
@@ -3087,6 +3222,7 @@
       {
         "Order": 0,
         "Title": "TableCol",
+        "FullTitle": "TableCol",
         "Type": "menuItem",
         "Url": "api/mtablecol",
         "Contents": [
@@ -3110,6 +3246,7 @@
       {
         "Order": 0,
         "Title": "TableFooter",
+        "FullTitle": "TableFooter",
         "Type": "menuItem",
         "Url": "api/mtablefooter",
         "Contents": [
@@ -3133,6 +3270,7 @@
       {
         "Order": 0,
         "Title": "TableFooterButton",
+        "FullTitle": "TableFooterButton",
         "Type": "menuItem",
         "Url": "api/mtablefooterbutton",
         "Contents": [
@@ -3156,6 +3294,7 @@
       {
         "Order": 0,
         "Title": "TableHeader",
+        "FullTitle": "TableHeader",
         "Type": "menuItem",
         "Url": "api/mtableheader",
         "Contents": [
@@ -3179,6 +3318,7 @@
       {
         "Order": 0,
         "Title": "TableLoading",
+        "FullTitle": "TableLoading",
         "Type": "menuItem",
         "Url": "api/mtableloading",
         "Contents": [
@@ -3202,6 +3342,7 @@
       {
         "Order": 0,
         "Title": "Tabs",
+        "FullTitle": "Tabs",
         "Type": "menuItem",
         "Url": "api/mtabs",
         "Contents": [
@@ -3225,6 +3366,7 @@
       {
         "Order": 0,
         "Title": "TabsBar",
+        "FullTitle": "TabsBar",
         "Type": "menuItem",
         "Url": "api/mtabsbar",
         "Contents": [
@@ -3248,6 +3390,7 @@
       {
         "Order": 0,
         "Title": "TabsItems",
+        "FullTitle": "TabsItems",
         "Type": "menuItem",
         "Url": "api/mtabsitems",
         "Contents": [
@@ -3271,6 +3414,7 @@
       {
         "Order": 0,
         "Title": "Textarea",
+        "FullTitle": "Textarea",
         "Type": "menuItem",
         "Url": "api/mtextarea",
         "Contents": [
@@ -3294,6 +3438,7 @@
       {
         "Order": 0,
         "Title": "TextField",
+        "FullTitle": "TextField",
         "Type": "menuItem",
         "Url": "api/mtextfield",
         "Contents": [
@@ -3317,6 +3462,7 @@
       {
         "Order": 0,
         "Title": "Timeline",
+        "FullTitle": "Timeline",
         "Type": "menuItem",
         "Url": "api/mtimeline",
         "Contents": [
@@ -3340,6 +3486,7 @@
       {
         "Order": 0,
         "Title": "TimelineItem",
+        "FullTitle": "TimelineItem",
         "Type": "menuItem",
         "Url": "api/mtimelineitem",
         "Contents": [
@@ -3363,6 +3510,7 @@
       {
         "Order": 0,
         "Title": "TimePicker",
+        "FullTitle": "TimePicker",
         "Type": "menuItem",
         "Url": "api/mtimepicker",
         "Contents": [
@@ -3386,6 +3534,7 @@
       {
         "Order": 0,
         "Title": "TimePickerClock",
+        "FullTitle": "TimePickerClock",
         "Type": "menuItem",
         "Url": "api/mtimepickerclock",
         "Contents": [
@@ -3409,6 +3558,7 @@
       {
         "Order": 0,
         "Title": "TimePickerTitle",
+        "FullTitle": "TimePickerTitle",
         "Type": "menuItem",
         "Url": "api/mtimepickertitle",
         "Contents": [
@@ -3432,6 +3582,7 @@
       {
         "Order": 0,
         "Title": "Toolbar",
+        "FullTitle": "Toolbar",
         "Type": "menuItem",
         "Url": "api/mtoolbar",
         "Contents": [
@@ -3455,6 +3606,7 @@
       {
         "Order": 0,
         "Title": "ToolbarItems",
+        "FullTitle": "ToolbarItems",
         "Type": "menuItem",
         "Url": "api/mtoolbaritems",
         "Contents": [
@@ -3478,6 +3630,7 @@
       {
         "Order": 0,
         "Title": "ToolbarTitle",
+        "FullTitle": "ToolbarTitle",
         "Type": "menuItem",
         "Url": "api/mtoolbartitle",
         "Contents": [
@@ -3501,6 +3654,7 @@
       {
         "Order": 0,
         "Title": "Tooltip",
+        "FullTitle": "Tooltip",
         "Type": "menuItem",
         "Url": "api/mtooltip",
         "Contents": [
@@ -3524,6 +3678,7 @@
       {
         "Order": 0,
         "Title": "Tree",
+        "FullTitle": "Tree",
         "Type": "menuItem",
         "Url": "api/mtree",
         "Contents": [
@@ -3547,6 +3702,7 @@
       {
         "Order": 0,
         "Title": "TreeItem",
+        "FullTitle": "TreeItem",
         "Type": "menuItem",
         "Url": "api/mtreeitem",
         "Contents": [
@@ -3570,6 +3726,7 @@
       {
         "Order": 0,
         "Title": "Treeview",
+        "FullTitle": "Treeview",
         "Type": "menuItem",
         "Url": "api/mtreeview",
         "Contents": [
@@ -3593,6 +3750,7 @@
       {
         "Order": 0,
         "Title": "TreeviewNode",
+        "FullTitle": "TreeviewNode",
         "Type": "menuItem",
         "Url": "api/mtreeviewnode",
         "Contents": [
@@ -3616,6 +3774,7 @@
       {
         "Order": 0,
         "Title": "Upload",
+        "FullTitle": "Upload",
         "Type": "menuItem",
         "Url": "api/mupload",
         "Contents": [
@@ -3639,6 +3798,7 @@
       {
         "Order": 0,
         "Title": "VirtualScroll",
+        "FullTitle": "VirtualScroll",
         "Type": "menuItem",
         "Url": "api/mvirtualscroll",
         "Contents": [
@@ -3662,6 +3822,7 @@
       {
         "Order": 0,
         "Title": "Window",
+        "FullTitle": "Window",
         "Type": "menuItem",
         "Url": "api/mwindow",
         "Contents": [
@@ -3685,6 +3846,7 @@
       {
         "Order": 0,
         "Title": "WindowItem",
+        "FullTitle": "WindowItem",
         "Type": "menuItem",
         "Url": "api/mwindowitem",
         "Contents": [
@@ -3710,6 +3872,7 @@
   {
     "Order": 2,
     "Title": "特性",
+    "FullTitle": "特性",
     "Type": "menuItem",
     "Url": "features",
     "Icon": "mdi-image-edit-outline",
@@ -3717,6 +3880,7 @@
       {
         "Order": 2,
         "Title": "响应式显示",
+        "FullTitle": "响应式显示",
         "Type": "menuItem",
         "Url": "features/breakpoints",
         "Contents": []
@@ -3724,6 +3888,7 @@
       {
         "Order": 3,
         "Title": "全局配置",
+        "FullTitle": "全局配置",
         "Type": "menuItem",
         "Url": "features/gloabl-config",
         "Contents": [
@@ -3737,6 +3902,7 @@
       {
         "Order": 4,
         "Title": "图标字体",
+        "FullTitle": "图标字体",
         "Type": "menuItem",
         "Url": "features/icon-fonts",
         "Contents": [
@@ -3750,6 +3916,7 @@
       {
         "Order": 5,
         "Title": "国际化多语言 (i18n)",
+        "FullTitle": "国际化多语言 (i18n)",
         "Type": "menuItem",
         "Url": "features/internationalization",
         "Contents": [
@@ -3763,6 +3930,7 @@
       {
         "Order": 6,
         "Title": "布局",
+        "FullTitle": "布局",
         "Type": "menuItem",
         "Url": "features/layouts",
         "Contents": [
@@ -3788,6 +3956,7 @@
   {
     "Order": 1,
     "Title": "快速入门",
+    "FullTitle": "快速入门",
     "Type": "menuItem",
     "Url": "getting-started",
     "Icon": "mdi-speedometer",
@@ -3795,6 +3964,7 @@
       {
         "Order": 0,
         "Title": "安装",
+        "FullTitle": "安装",
         "Type": "menuItem",
         "Url": "getting-started/installation",
         "Contents": [
@@ -3828,6 +3998,7 @@
       {
         "Order": 1,
         "Title": "浏览器支持",
+        "FullTitle": "浏览器支持",
         "Type": "menuItem",
         "Url": "getting-started/browser-support",
         "Contents": [
@@ -3841,6 +4012,7 @@
       {
         "Order": 5,
         "Title": "发行说明",
+        "FullTitle": "发行说明",
         "Type": "menuItem",
         "Url": "getting-started/release-notes",
         "Contents": []
@@ -3848,6 +4020,7 @@
       {
         "Order": 6,
         "Title": "贡献",
+        "FullTitle": "贡献",
         "Type": "menuItem",
         "Url": "getting-started/contributing",
         "Contents": [
@@ -3863,6 +4036,7 @@
   {
     "Order": 0,
     "Title": "介绍",
+    "FullTitle": "介绍",
     "Type": "menuItem",
     "Url": "introduction",
     "Icon": "mdi-script-text-outline",
@@ -3870,6 +4044,7 @@
       {
         "Order": 0,
         "Title": "为什么选择 MASA Blazor?",
+        "FullTitle": "为什么选择 MASA Blazor?",
         "Type": "menuItem",
         "Url": "introduction/why",
         "Contents": [
@@ -3895,6 +4070,7 @@
   {
     "Order": 3,
     "Title": "样式和动画",
+    "FullTitle": "样式和动画",
     "Type": "menuItem",
     "Url": "styles-and-animations",
     "Icon": "mdi-palette-outline",
@@ -3903,72 +4079,81 @@
         "Order": 0,
         "Title": "Border radius",
         "SubTitle": "边框半径",
+        "FullTitle": "Border radius (边框半径)",
         "Type": "menuItem",
-        "Url": "styles/border-radius",
+        "Url": "stylesandanimations/border-radius",
         "Children": []
       },
       {
         "Order": 0,
         "Title": "Color",
         "SubTitle": "颜色",
+        "FullTitle": "Color (颜色)",
         "Type": "menuItem",
-        "Url": "styles/color",
+        "Url": "stylesandanimations/color",
         "Children": []
       },
       {
         "Order": 0,
         "Title": "Display helpers",
         "SubTitle": "显示辅助",
+        "FullTitle": "Display helpers (显示辅助)",
         "Type": "menuItem",
-        "Url": "styles/display-helpers",
+        "Url": "stylesandanimations/display-helpers",
         "Children": []
       },
       {
         "Order": 0,
         "Title": "Elevation",
         "SubTitle": "海拔",
+        "FullTitle": "Elevation (海拔)",
         "Type": "menuItem",
-        "Url": "styles/elevation",
+        "Url": "stylesandanimations/elevation",
         "Children": []
       },
       {
         "Order": 0,
         "Title": "Flex",
         "SubTitle": "弹性布局",
+        "FullTitle": "Flex (弹性布局)",
         "Type": "menuItem",
-        "Url": "styles/flex",
+        "Url": "stylesandanimations/flex",
         "Children": []
       },
       {
         "Order": 0,
         "Title": "Float",
         "SubTitle": "浮动",
+        "FullTitle": "Float (浮动)",
         "Type": "menuItem",
-        "Url": "styles/float",
+        "Url": "stylesandanimations/float",
         "Children": []
       },
       {
         "Order": 0,
         "Title": "Overflow",
         "SubTitle": "溢出",
+        "FullTitle": "Overflow (溢出)",
         "Type": "menuItem",
-        "Url": "styles/overflow",
+        "Url": "stylesandanimations/overflow",
         "Children": []
       },
       {
         "Order": 0,
         "Title": "Spacing",
         "SubTitle": "间距",
+        "FullTitle": "Spacing (间距)",
         "Type": "menuItem",
-        "Url": "styles/spacing",
+        "Url": "stylesandanimations/spacing",
         "Children": []
       },
       {
         "Order": 0,
         "Title": "Text and typography",
         "SubTitle": "文本和排版",
+        "FullTitle": "Text and typography (文本和排版)",
         "Type": "menuItem",
-        "Url": "styles/text-and-typography",
+        "Url": "stylesandanimations/text-and-typography",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       },
@@ -3976,8 +4161,9 @@
         "Order": 0,
         "Title": "Transitions",
         "SubTitle": "过渡动画",
+        "FullTitle": "Transitions (过渡动画)",
         "Type": "menuItem",
-        "Url": "styles/transitions",
+        "Url": "stylesandanimations/transitions",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       }
@@ -3986,14 +4172,15 @@
   {
     "Order": 4,
     "Title": "UI 组件",
+    "FullTitle": "UI 组件",
     "Type": "menuItem",
-    "Url": "ui-components",
     "Icon": "mdi-view-dashboard-outline",
     "Children": [
       {
         "Order": 0,
         "Title": "Alerts",
         "SubTitle": "提示框",
+        "FullTitle": "Alerts (提示框)",
         "Type": "menuItem",
         "Url": "components/alerts",
         "Children": []
@@ -4002,6 +4189,7 @@
         "Order": 0,
         "Title": "Application",
         "SubTitle": "应用程序",
+        "FullTitle": "Application (应用程序)",
         "Type": "menuItem",
         "Url": "components/application",
         "Children": []
@@ -4010,6 +4198,7 @@
         "Order": 0,
         "Title": "Aspect ratios",
         "SubTitle": "长宽比",
+        "FullTitle": "Aspect ratios (长宽比)",
         "Type": "menuItem",
         "Url": "components/aspect-ratios",
         "Children": []
@@ -4018,6 +4207,7 @@
         "Order": 0,
         "Title": "Avatars",
         "SubTitle": "头像",
+        "FullTitle": "Avatars (头像)",
         "Type": "menuItem",
         "Url": "components/avatars",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Avatars.svg",
@@ -4027,6 +4217,7 @@
         "Order": 0,
         "Title": "Badges",
         "SubTitle": "徽章",
+        "FullTitle": "Badges (徽章)",
         "Type": "menuItem",
         "Url": "components/badges",
         "Children": []
@@ -4035,6 +4226,7 @@
         "Order": 0,
         "Title": "Banners",
         "SubTitle": "横幅",
+        "FullTitle": "Banners (横幅)",
         "Type": "menuItem",
         "Url": "components/banners",
         "Children": []
@@ -4043,13 +4235,14 @@
         "Order": 0,
         "Title": "Bars",
         "SubTitle": "栏",
+        "FullTitle": "Bars (栏)",
         "Type": "menuItem",
-        "Url": "components/bars",
         "Children": [
           {
             "Order": 0,
             "Title": "App bars",
             "SubTitle": "应用栏",
+            "FullTitle": "App bars (应用栏)",
             "Type": "menuItem",
             "Url": "components/app-bars",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/AppBars.svg"
@@ -4058,6 +4251,7 @@
             "Order": 0,
             "Title": "System bars",
             "SubTitle": "系统栏",
+            "FullTitle": "System bars (系统栏)",
             "Type": "menuItem",
             "Url": "components/system-bars"
           },
@@ -4065,6 +4259,7 @@
             "Order": 0,
             "Title": "Toolbars",
             "SubTitle": "工具栏",
+            "FullTitle": "Toolbars (工具栏)",
             "Type": "menuItem",
             "Url": "components/toolbars"
           }
@@ -4074,6 +4269,7 @@
         "Order": 0,
         "Title": "Borders",
         "SubTitle": "边框",
+        "FullTitle": "Borders (边框)",
         "Type": "menuItem",
         "Url": "components/borders",
         "Children": []
@@ -4082,6 +4278,7 @@
         "Order": 0,
         "Title": "Breadcrumbs",
         "SubTitle": "面包屑导航",
+        "FullTitle": "Breadcrumbs (面包屑导航)",
         "Type": "menuItem",
         "Url": "components/breadcrumbs",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
@@ -4091,6 +4288,7 @@
         "Order": 0,
         "Title": "Buttons",
         "SubTitle": "按钮",
+        "FullTitle": "Buttons (按钮)",
         "Type": "menuItem",
         "Url": "components/buttons",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg",
@@ -4100,6 +4298,7 @@
         "Order": 0,
         "Title": "Cards",
         "SubTitle": "卡片",
+        "FullTitle": "Cards (卡片)",
         "Type": "menuItem",
         "Url": "components/cards",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Cards.svg",
@@ -4109,6 +4308,7 @@
         "Order": 0,
         "Title": "Chips",
         "SubTitle": "纸片",
+        "FullTitle": "Chips (纸片)",
         "Type": "menuItem",
         "Url": "components/chips",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chips.svg",
@@ -4118,6 +4318,7 @@
         "Order": 0,
         "Title": "Dialogs",
         "SubTitle": "对话框",
+        "FullTitle": "Dialogs (对话框)",
         "Type": "menuItem",
         "Url": "components/dialogs",
         "Children": []
@@ -4126,6 +4327,7 @@
         "Order": 0,
         "Title": "Dividers",
         "SubTitle": "分隔线",
+        "FullTitle": "Dividers (分隔线)",
         "Type": "menuItem",
         "Url": "components/dividers",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Dividers.svg",
@@ -4135,6 +4337,7 @@
         "Order": 0,
         "Title": "ECharts",
         "SubTitle": "图表",
+        "FullTitle": "ECharts (图表)",
         "Type": "menuItem",
         "Url": "components/echarts",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg",
@@ -4144,6 +4347,7 @@
         "Order": 0,
         "Title": "Expansion panels",
         "SubTitle": "扩展面板",
+        "FullTitle": "Expansion panels (扩展面板)",
         "Type": "menuItem",
         "Url": "components/expansion-panels",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
@@ -4153,6 +4357,7 @@
         "Order": 0,
         "Title": "Footers",
         "SubTitle": "页脚",
+        "FullTitle": "Footers (页脚)",
         "Type": "menuItem",
         "Url": "components/footers",
         "Children": []
@@ -4161,13 +4366,14 @@
         "Order": 0,
         "Title": "Form inputs & controls",
         "SubTitle": "表单和控制",
+        "FullTitle": "Form inputs & controls (表单和控制)",
         "Type": "menuItem",
-        "Url": "components/form-inputs-&-controls",
         "Children": [
           {
             "Order": 0,
             "Title": "Autocompletes",
             "SubTitle": "自动补全",
+            "FullTitle": "Autocompletes (自动补全)",
             "Type": "menuItem",
             "Url": "components/autocompletes",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Autocomplete.svg"
@@ -4176,6 +4382,7 @@
             "Order": 0,
             "Title": "Cascaders",
             "SubTitle": "级联菜单",
+            "FullTitle": "Cascaders (级联菜单)",
             "Type": "menuItem",
             "Url": "components/cascaders"
           },
@@ -4183,6 +4390,7 @@
             "Order": 0,
             "Title": "Checkboxes",
             "SubTitle": "复选框",
+            "FullTitle": "Checkboxes (复选框)",
             "Type": "menuItem",
             "Url": "components/checkboxes"
           },
@@ -4190,6 +4398,7 @@
             "Order": 0,
             "Title": "File inputs",
             "SubTitle": "文件上传",
+            "FullTitle": "File inputs (文件上传)",
             "Type": "menuItem",
             "Url": "components/file-inputs",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/FileInput.svg"
@@ -4198,6 +4407,7 @@
             "Order": 0,
             "Title": "Forms",
             "SubTitle": "表单",
+            "FullTitle": "Forms (表单)",
             "Type": "menuItem",
             "Url": "components/forms",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Form.svg"
@@ -4206,6 +4416,7 @@
             "Order": 0,
             "Title": "Radio",
             "SubTitle": "单选按钮",
+            "FullTitle": "Radio (单选按钮)",
             "Type": "menuItem",
             "Url": "components/radio",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg"
@@ -4214,6 +4425,7 @@
             "Order": 0,
             "Title": "Range sliders",
             "SubTitle": "范围滑块",
+            "FullTitle": "Range sliders (范围滑块)",
             "Type": "menuItem",
             "Url": "components/range-sliders",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/RangeSliders.svg"
@@ -4222,6 +4434,7 @@
             "Order": 0,
             "Title": "Selects",
             "SubTitle": "下拉框",
+            "FullTitle": "Selects (下拉框)",
             "Type": "menuItem",
             "Url": "components/selects"
           },
@@ -4229,6 +4442,7 @@
             "Order": 0,
             "Title": "Sliders",
             "SubTitle": "滑块",
+            "FullTitle": "Sliders (滑块)",
             "Type": "menuItem",
             "Url": "components/sliders",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sliders.svg"
@@ -4237,6 +4451,7 @@
             "Order": 0,
             "Title": "Switches",
             "SubTitle": "开关",
+            "FullTitle": "Switches (开关)",
             "Type": "menuItem",
             "Url": "components/switches",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Switch.svg"
@@ -4245,6 +4460,7 @@
             "Order": 0,
             "Title": "Textareas",
             "SubTitle": "多行文本框",
+            "FullTitle": "Textareas (多行文本框)",
             "Type": "menuItem",
             "Url": "components/textareas",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Textareas.svg"
@@ -4253,6 +4469,7 @@
             "Order": 0,
             "Title": "Text fields",
             "SubTitle": "文本框",
+            "FullTitle": "Text fields (文本框)",
             "Type": "menuItem",
             "Url": "components/text-fields",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TextField.svg"
@@ -4263,6 +4480,7 @@
         "Order": 0,
         "Title": "Grid system",
         "SubTitle": "网格",
+        "FullTitle": "Grid system (网格)",
         "Type": "menuItem",
         "Url": "components/grid-system",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg",
@@ -4272,13 +4490,14 @@
         "Order": 0,
         "Title": "Groups",
         "SubTitle": "组",
+        "FullTitle": "Groups (组)",
         "Type": "menuItem",
-        "Url": "components/groups",
         "Children": [
           {
             "Order": 0,
             "Title": "Button groups",
             "SubTitle": "按钮组",
+            "FullTitle": "Button groups (按钮组)",
             "Type": "menuItem",
             "Url": "components/button-groups",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ButtonGroup.svg"
@@ -4287,6 +4506,7 @@
             "Order": 0,
             "Title": "Chip groups",
             "SubTitle": "纸片组",
+            "FullTitle": "Chip groups (纸片组)",
             "Type": "menuItem",
             "Url": "components/chip-groups",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chip.svg"
@@ -4295,6 +4515,7 @@
             "Order": 0,
             "Title": "Item groups",
             "SubTitle": "项目组",
+            "FullTitle": "Item groups (项目组)",
             "Type": "menuItem",
             "Url": "components/item-groups",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ItemGroup.svg"
@@ -4303,6 +4524,7 @@
             "Order": 0,
             "Title": "List item groups",
             "SubTitle": "列表项目组",
+            "FullTitle": "List item groups (列表项目组)",
             "Type": "menuItem",
             "Url": "components/list-item-groups"
           },
@@ -4310,6 +4532,7 @@
             "Order": 0,
             "Title": "Slide groups",
             "SubTitle": "幻灯片组",
+            "FullTitle": "Slide groups (幻灯片组)",
             "Type": "menuItem",
             "Url": "components/slide-groups"
           },
@@ -4317,6 +4540,7 @@
             "Order": 0,
             "Title": "Windows",
             "SubTitle": "窗口",
+            "FullTitle": "Windows (窗口)",
             "Type": "menuItem",
             "Url": "components/windows"
           }
@@ -4326,6 +4550,7 @@
         "Order": 0,
         "Title": "Hover",
         "SubTitle": "悬停",
+        "FullTitle": "Hover (悬停)",
         "Type": "menuItem",
         "Url": "components/hover",
         "Children": []
@@ -4334,6 +4559,7 @@
         "Order": 0,
         "Title": "Icons",
         "SubTitle": "图标",
+        "FullTitle": "Icons (图标)",
         "Type": "menuItem",
         "Url": "components/icons",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
@@ -4343,6 +4569,7 @@
         "Order": 0,
         "Title": "Images",
         "SubTitle": "图像",
+        "FullTitle": "Images (图像)",
         "Type": "menuItem",
         "Url": "components/images",
         "Children": []
@@ -4351,6 +4578,7 @@
         "Order": 0,
         "Title": "Lists",
         "SubTitle": "列表",
+        "FullTitle": "Lists (列表)",
         "Type": "menuItem",
         "Url": "components/lists",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg",
@@ -4360,6 +4588,7 @@
         "Order": 0,
         "Title": "Menus",
         "SubTitle": "菜单",
+        "FullTitle": "Menus (菜单)",
         "Type": "menuItem",
         "Url": "components/menus",
         "Children": []
@@ -4368,6 +4597,7 @@
         "Order": 0,
         "Title": "Navigation drawers",
         "SubTitle": "导航抽屉",
+        "FullTitle": "Navigation drawers (导航抽屉)",
         "Type": "menuItem",
         "Url": "components/navigation-drawers",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg",
@@ -4377,6 +4607,7 @@
         "Order": 0,
         "Title": "Overlays",
         "SubTitle": "遮罩层",
+        "FullTitle": "Overlays (遮罩层)",
         "Type": "menuItem",
         "Url": "components/overlays",
         "Children": []
@@ -4385,6 +4616,7 @@
         "Order": 0,
         "Title": "Pagination",
         "SubTitle": "分页",
+        "FullTitle": "Pagination (分页)",
         "Type": "menuItem",
         "Url": "components/pagination",
         "Children": []
@@ -4393,14 +4625,15 @@
         "Order": 0,
         "Title": "Pickers",
         "SubTitle": "选择器",
+        "FullTitle": "Pickers (选择器)",
         "Type": "menuItem",
-        "Url": "components/pickers",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Pickers.svg",
         "Children": [
           {
             "Order": 0,
             "Title": "Color pickers",
             "SubTitle": "颜色选择器",
+            "FullTitle": "Color pickers (颜色选择器)",
             "Type": "menuItem",
             "Url": "components/color-pickers",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ColorPicker.svg"
@@ -4409,6 +4642,7 @@
             "Order": 0,
             "Title": "Date pickers",
             "SubTitle": "日期选择器",
+            "FullTitle": "Date pickers (日期选择器)",
             "Type": "menuItem",
             "Url": "components/date-pickers",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickers.svg"
@@ -4417,6 +4651,7 @@
             "Order": 0,
             "Title": "Date pickers month",
             "SubTitle": "月份选择器",
+            "FullTitle": "Date pickers month (月份选择器)",
             "Type": "menuItem",
             "Url": "components/date-pickers-month",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg"
@@ -4425,6 +4660,7 @@
             "Order": 0,
             "Title": "Time pickers",
             "SubTitle": "时间选择器",
+            "FullTitle": "Time pickers (时间选择器)",
             "Type": "menuItem",
             "Url": "components/time-pickers",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TimePickers.svg"
@@ -4435,6 +4671,7 @@
         "Order": 0,
         "Title": "Presets",
         "SubTitle": "预置组件",
+        "FullTitle": "Presets (预置组件)",
         "Type": "menuItem",
         "Url": "components/presets",
         "Children": []
@@ -4443,13 +4680,14 @@
         "Order": 0,
         "Title": "Progress",
         "SubTitle": "进度条",
+        "FullTitle": "Progress (进度条)",
         "Type": "menuItem",
-        "Url": "components/progress",
         "Children": [
           {
             "Order": 0,
             "Title": "Progress circular",
             "SubTitle": "进度环",
+            "FullTitle": "Progress circular (进度环)",
             "Type": "menuItem",
             "Url": "components/progress-circular"
           },
@@ -4457,6 +4695,7 @@
             "Order": 0,
             "Title": "Progress linear",
             "SubTitle": "进度条",
+            "FullTitle": "Progress linear (进度条)",
             "Type": "menuItem",
             "Url": "components/progress-linear"
           }
@@ -4466,6 +4705,7 @@
         "Order": 0,
         "Title": "Ratings",
         "SubTitle": "评级",
+        "FullTitle": "Ratings (评级)",
         "Type": "menuItem",
         "Url": "components/ratings",
         "Children": []
@@ -4474,6 +4714,7 @@
         "Order": 0,
         "Title": "Sheets",
         "SubTitle": "工作表",
+        "FullTitle": "Sheets (工作表)",
         "Type": "menuItem",
         "Url": "components/sheets",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sheet.svg",
@@ -4483,6 +4724,7 @@
         "Order": 0,
         "Title": "Skeleton loaders",
         "SubTitle": "骨架装载器",
+        "FullTitle": "Skeleton loaders (骨架装载器)",
         "Type": "menuItem",
         "Url": "components/skeleton-loaders",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SkeletonLoader.svg",
@@ -4492,6 +4734,7 @@
         "Order": 0,
         "Title": "Snackbars",
         "SubTitle": "消息条",
+        "FullTitle": "Snackbars (消息条)",
         "Type": "menuItem",
         "Url": "components/snackbars",
         "Children": []
@@ -4500,6 +4743,7 @@
         "Order": 0,
         "Title": "Steppers",
         "SubTitle": "步骤条",
+        "FullTitle": "Steppers (步骤条)",
         "Type": "menuItem",
         "Url": "components/steppers",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Stepper.svg",
@@ -4509,6 +4753,7 @@
         "Order": 0,
         "Title": "Subheaders",
         "SubTitle": "副标题",
+        "FullTitle": "Subheaders (副标题)",
         "Type": "menuItem",
         "Url": "components/subheaders",
         "Children": []
@@ -4517,13 +4762,14 @@
         "Order": 0,
         "Title": "Tables",
         "SubTitle": "表格",
+        "FullTitle": "Tables (表格)",
         "Type": "menuItem",
-        "Url": "components/tables",
         "Children": [
           {
             "Order": 0,
             "Title": "Data iterators",
             "SubTitle": "数据迭代器",
+            "FullTitle": "Data iterators (数据迭代器)",
             "Type": "menuItem",
             "Url": "components/data-iterators",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataIterators.svg"
@@ -4532,6 +4778,7 @@
             "Order": 0,
             "Title": "Data tables",
             "SubTitle": "数据表格",
+            "FullTitle": "Data tables (数据表格)",
             "Type": "menuItem",
             "Url": "components/data-tables",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataTable.svg"
@@ -4540,6 +4787,7 @@
             "Order": 0,
             "Title": "Simple tables",
             "SubTitle": "简单表格",
+            "FullTitle": "Simple tables (简单表格)",
             "Type": "menuItem",
             "Url": "components/simple-tables",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SimpleTables.svg"
@@ -4550,6 +4798,7 @@
         "Order": 0,
         "Title": "Tabs",
         "SubTitle": "选项卡",
+        "FullTitle": "Tabs (选项卡)",
         "Type": "menuItem",
         "Url": "components/tabs",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tabs.svg",
@@ -4559,6 +4808,7 @@
         "Order": 0,
         "Title": "Timelines",
         "SubTitle": "时间轴",
+        "FullTitle": "Timelines (时间轴)",
         "Type": "menuItem",
         "Url": "components/timelines",
         "Children": []
@@ -4567,6 +4817,7 @@
         "Order": 0,
         "Title": "Tooltips",
         "SubTitle": "工具提示",
+        "FullTitle": "Tooltips (工具提示)",
         "Type": "menuItem",
         "Url": "components/tooltips",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tooltip.svg",
@@ -4576,6 +4827,7 @@
         "Order": 0,
         "Title": "Treeview",
         "SubTitle": "树形视图",
+        "FullTitle": "Treeview (树形视图)",
         "Type": "menuItem",
         "Url": "components/treeview",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Treeview.svg",
@@ -4585,6 +4837,7 @@
         "Order": 0,
         "Title": "Uploads",
         "SubTitle": "上传文件",
+        "FullTitle": "Uploads (上传文件)",
         "Type": "menuItem",
         "Url": "components/uploads",
         "Children": []
@@ -4593,6 +4846,7 @@
         "Order": 0,
         "Title": "Virtual scroller",
         "SubTitle": "虚拟滚动条",
+        "FullTitle": "Virtual scroller (虚拟滚动条)",
         "Type": "menuItem",
         "Url": "components/virtual-scroller",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
