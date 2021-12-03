@@ -1,5 +1,5 @@
 ﻿<AppSheet MinHeight="@((StringNumber)61)">
-    <MListItem Href="@Href">
+    <MListItem Href="@Href" Disabled="@Disabled">
         <MListItemIcon>
             <MIcon Color="@Color">@Icon</MIcon>
         </MListItemIcon>
@@ -12,6 +12,23 @@
 </AppSheet>
 
 @code {
+
+    #region Unsupport hrefs
+
+    // TODO: Delete the code if unsupported hrefs is empty.
+
+    readonly List<string> _unsupportedHrefs = new()
+    {
+        "/getting-started/wireframes",
+        "/features/theme",
+        "/components/carousels",
+        "/components/parallax",
+        "/components/selection-controls"
+    };
+
+    bool Disabled => _unsupportedHrefs.Contains(Href);
+
+    #endregion
 
     readonly Dictionary<string, (string icon, string color)> _categories = new()
     {
@@ -53,4 +70,5 @@
 
         return chr.ToString().ToUpper() + str[1..];
     }
+
 }

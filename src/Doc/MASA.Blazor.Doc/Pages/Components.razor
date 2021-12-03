@@ -38,9 +38,7 @@
                             {
                                 if (lang != null)
                                 {
-                                    <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden">
-                                        <HighlightedCode Code="@HttpUtility.HtmlDecode(code.RemoveWrapTag().RemoveWrapTag())" CanLoad Language="@lang"></HighlightedCode>
-                                    </MSheet>
+                                    <AppCode Code="@HttpUtility.HtmlDecode(code.RemoveWrapTag().RemoveWrapTag())" Language="@lang"></AppCode>
                                 }
                                 else
                                 {

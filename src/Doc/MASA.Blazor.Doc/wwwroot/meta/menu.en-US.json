@@ -78,10 +78,10 @@
       },
       {
         "Order": 0,
-        "Title": "Color",
-        "FullTitle": "Color",
+        "Title": "Colors",
+        "FullTitle": "Colors",
         "Type": "menuItem",
-        "Url": "stylesandanimations/color",
+        "Url": "stylesandanimations/colors",
         "Children": []
       },
       {

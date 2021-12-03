@@ -3,7 +3,7 @@
     "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>、<strong>Info</strong>、<strong>Warning</strong> 和 <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays. Many parts of an alert such as <strong>Border</strong>, <strong>Icon</strong>, and <strong>Color</strong> can also be customized to fit almost any situation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-23T09:48:33.3104036+08:00",
+    "LastWriteTime": "2021-11-22T16:33:22.8890524+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -171,7 +171,7 @@
     "Desc": "<p>The <code>MResponsive</code> component can be used to fix any section to a specific aspect ratio</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:49.5458864+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0736279+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -195,7 +195,7 @@
     "Desc": "<p>The MAvatar component is usually used to display user profile pictures. This component allows you to dynamically add and set the border radius of response images, icons and text. ** The tile ** variable can be used to display an avatar with no border radius.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:49.5488848+08:00",
+    "LastWriteTime": "2021-11-30T11:20:37.745403+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -286,7 +286,7 @@
     "Desc": "<p>The MBadge component overwrites or subscribes to an icon like an avatar or text on the content to highlight the user's information or just draw attention to a specific element. The content in the badge usually contains numbers or icons.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-26T09:49:26.9691604+08:00",
+    "LastWriteTime": "2021-11-26T09:53:53.2705332+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -354,7 +354,7 @@
     "Desc": "<p>The component is used to send intermittent messages of 1-2 actions to the user. It has two variables, single-line and multi-line (implied). These icons can be used with your messages and actions.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:49.5628865+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0756284+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -433,7 +433,7 @@
     "Desc": "<p>appbar component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-18T09:22:16.3308287+08:00",
+    "LastWriteTime": "2021-11-26T13:07:38.017444+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -560,7 +560,7 @@
         "Order": 1,
         "Name": "toggleNavigationDrawers",
         "Title": "Toggle navigation drawers",
-        "Description": "<p>Using the functional component <code>MAppBarNavIcon</code> you can toggle the state of other components such as\na <code>MNavigationDrawer</code>.</p>\n",
+        "Description": "<p>Using the functional component <code>MAppBarNavIcon</code> you can toggle the state of other components such as\na <a href=\"%22/components/navigation-drawers%22\"><strong>MNavigationDrawer</strong></a>.</p>\n",
         "Code": "<MCard\r\n    Class=\"mx-auto overflow-hidden\"\r\n    Height=\"400\">\r\n    <MAppBar\r\n        Color=\"deep-purple\"\r\n        Dark>\r\n        <MAppBarNavIcon @onclick=\"() => drawer = true\"></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Title</MToolbarTitle>\r\n    </MAppBar>\r\n\r\n    <MNavigationDrawer\r\n        @bind-Value=\"drawer\"\r\n        Absolute\r\n        Temporary>\r\n        <MList\r\n            Nav\r\n            Dense>\r\n            <MListItemGroup\r\n                @bind-Value=\"group\"\r\n                ActiveClass=\"deep-purple--text text--accent-4\">\r\n                <MListItem>\r\n                    <MListItemIcon>\r\n                        <MIcon>mdi-home</MIcon>\r\n                    </MListItemIcon>\r\n                    <MListItemTitle>Home</MListItemTitle>\r\n                </MListItem>\r\n\r\n                <MListItem>\r\n                    <MListItemIcon>\r\n                        <MIcon>mdi-account</MIcon>\r\n                    </MListItemIcon>\r\n                    <MListItemTitle>Account</MListItemTitle>\r\n                </MListItem>\r\n            </MListItemGroup>\r\n        </MList>\r\n    </MNavigationDrawer>\r\n</MCard>\r\n\r\n@code {\r\n    bool drawer;\r\n    StringNumber group;\r\n}",
         "Type": "Demos.Components.Bars.children.AppBar.misc.ToggleNavigationDrawers",
         "Style": "",
@@ -578,7 +578,7 @@
     "Desc": "<p>The MSystemBar component can be used to display status to the user. It looks like an Android system bar and can contain icons, spaces, and some text.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:49.5728856+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0776289+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -643,10 +643,10 @@
     "Type": "SystemBars"
   },
   {
-    "Desc": "<p>Semantic vector graphics.</p>\n",
+    "Desc": "<p>The <code>MToolbar</code> component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site\nnavigation. The toolbar component works great in conjunction with <a href=\"/components/navigation-drawers\"><strong>MNavigationDrawer</strong></a> and <a href=\"/components/cards\"><strong>MCard</strong></a>.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:53.5588656+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0816266+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -663,7 +663,7 @@
         "Order": 1,
         "Name": "background",
         "Title": "Background",
-        "Description": "<p>Rating can be given different sizing options to fit a multitude of scenarios.</p>\n",
+        "Description": "<p>Toolbars can display a background as opposed to a solid color using the src prop. This can be modified further by using\nthe img slot and providing your own <a href=\"/components/images\"><strong>MImage</strong></a> component. Backgrounds can be faded using\na <a href=\"/components/app-bars\">MAppBar</a>.</p>\n",
         "Code": "<div>\r\n    <MToolbar Dark\r\n               Prominent\r\n               Src=\"https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>MASA Blazor</MToolbarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-export</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n</div>",
         "Type": "Demos.Components.Bars.children.Toolbar.props.Background",
         "Style": "",
@@ -706,7 +706,7 @@
       {
         "Order": 1,
         "Name": "extensitionHeight",
-        "Title": "ExtensitionHeight",
+        "Title": "Extenstion height",
         "Description": "<p>The extension’s height can be customized.</p>\n",
         "Code": "<MCard\r\n    Color=\"grey lighten-4\"\r\n    Flat\r\n    Height=\"200\"\r\n    Tile\r\n  >\r\n    <MToolbar\r\n      Extended\r\n      ExtensionHeight=\"100\"\r\n    >\r\n      <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n      <MToolbarTitle>Title</MToolbarTitle>\r\n\r\n      <MSpacer></MSpacer>\r\n\r\n      <MButton Icon>\r\n        <MIcon>mdi-magnify</MIcon>\r\n      </MButton>\r\n\r\n      <MButton Icon>\r\n        <MIcon>mdi-heart</MIcon>\r\n      </MButton>\r\n\r\n      <MButton Icon>\r\n        <MIcon>mdi-dots-vertical</MIcon>\r\n      </MButton>\r\n    </MToolbar>\r\n  </MCard>",
         "Type": "Demos.Components.Bars.children.Toolbar.props.ExtensitionHeight",
@@ -739,8 +739,8 @@
       {
         "Order": 1,
         "Name": "prominentToolbars",
-        "Title": "ProminentToolbars",
-        "Description": "<p>Prominent toolbars increase the v-toolbar's height to 128px and positions the v-toolbar-title towards the bottom of the container. This is expanded upon in v-app with the ability to shrink a prominent toolbar to a dense or short one.</p>\n",
+        "Title": "Prominent toolbars",
+        "Description": "<p>Prominent toolbars increase the v-toolbar's height to 128px and positions the v-toolbar-title towards the bottom of the\ncontainer. This is expanded upon in <a href=\"/components/application\"><strong>MApp</strong></a> with the ability to shrink a prominent toolbar\nto a <strong>dense</strong> or <strong>short</strong> one.</p>\n",
         "Code": "<MCard\r\n    Color=\"grey lighten-4\"\r\n    Flat\r\n    Height=\"200\"\r\n    Tile\r\n  >\r\n    <MToolbar\r\n      Prominent\r\n      Extended\r\n    >\r\n      <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n      <MToolbarTitle>Title</MToolbarTitle>\r\n\r\n      <MSpacer></MSpacer>\r\n\r\n      <MButton Icon>\r\n        <MIcon>mdi-magnify</MIcon>\r\n      </MButton>\r\n\r\n      <MButton Icon>\r\n        <MIcon>mdi-heart</MIcon>\r\n      </MButton>\r\n\r\n      <MButton Icon>\r\n        <MIcon>mdi-dots-vertical</MIcon>\r\n      </MButton>\r\n    </MToolbar>\r\n  </MCard>",
         "Type": "Demos.Components.Bars.children.Toolbar.props.ProminentToolbars",
         "Style": "",
@@ -784,14 +784,19 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/components/footer",
+      "/components/tabs"
+    ],
     "Title": "Toolbars",
     "Type": "Toolbars"
   },
   {
-    "Desc": "<p>Border component can wrap any content with one side border.</p>\n",
+    "Desc": "<p>The Border component can add an extra border to anything.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-03T11:13:26.7334586+08:00",
+    "LastWriteTime": "2021-12-02T13:33:53.2800713+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -829,15 +834,15 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>By default <code>MBreadcrumbs</code> will disable the linkage with router. You can enable the feature by using *<em>Linkage</em> prop.</p>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:53.4608659+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0836279+08:00",
     "DemoList": [
       {
         "Order": 0,
-        "Name": "basic",
+        "Name": "index",
         "Title": "Usage",
         "Description": "<p>By default, breadcrumbs use a text divider. This can be any string.</p>\n",
-        "Code": "<div class=\"d-flex align-center\">\r\n    Items:\r\n    <MBreadcrumbs Items=\"items\"></MBreadcrumbs>\r\n</div>\r\n\r\n<div class=\"d-flex align-center\">\r\n    Markup:\r\n    <MBreadcrumbs>\r\n        <MBreadcrumbsItem Href=\"#breadcrumbs_dashboard\">Dashboard</MBreadcrumbsItem>\r\n        <MBreadcrumbsItem Href=\"#breadcrumbs_link_1\" Text=\"Link 1\"></MBreadcrumbsItem>\r\n        <MBreadcrumbsItem Href=\"#breadcrumbs_link_2\" Disabled>Link 2</MBreadcrumbsItem>\r\n    </MBreadcrumbs>\r\n</div>\r\n\r\n    @code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n        {\r\n            new BreadcrumbItem() { Text = \"Dashboard\", Disabled = false, Href = \"breadcrumbs_dashboard\" },\r\n            new BreadcrumbItem() { Text = \"Link 1\", Disabled = false, Href = \"breadcrumbs_link_1\" },\r\n            new BreadcrumbItem() { Text = \"Link 2\", Disabled = true, Href = \"breadcrumbs_link_2\" }\r\n        };\r\n    }\r\n",
-        "Type": "Demos.Components.Breadcrumbs.usage.Basic",
+        "Code": "<div class=\"d-flex align-center\">\r\n    Items:\r\n    <MBreadcrumbs Items=\"items\"></MBreadcrumbs>\r\n</div>\r\n\r\n<div class=\"d-flex align-center\">\r\n    Markup:\r\n    <MBreadcrumbs>\r\n        <MBreadcrumbsItem Href=\"/components/breadcrumbs#breadcrumbs_dashboard\">Dashboard</MBreadcrumbsItem>\r\n        <MBreadcrumbsItem Href=\"/components/breadcrumbs#breadcrumbs_link_1\" Text=\"Link 1\"></MBreadcrumbsItem>\r\n        <MBreadcrumbsItem Href=\"/components/breadcrumbs#breadcrumbs_link_2\" Disabled>Link 2</MBreadcrumbsItem>\r\n    </MBreadcrumbs>\r\n</div>\r\n\r\n    @code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n        {\r\n            new BreadcrumbItem() { Text = \"Dashboard\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_dashboard\" },\r\n            new BreadcrumbItem() { Text = \"Link 1\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_link_1\" },\r\n            new BreadcrumbItem() { Text = \"Link 2\", Disabled = true, Href = \"/components/breadcrumbs#breadcrumbs_link_2\" }\r\n        };\r\n    }\r\n",
+        "Type": "Demos.Components.Breadcrumbs.usage.Index",
         "Style": "",
         "Debug": false,
         "Group": 4
@@ -847,7 +852,7 @@
         "Name": "divider",
         "Title": "Divider",
         "Description": "<p>Breadcrumbs Basic Usage</p>\n",
-        "Code": "<div>\r\n    <MBreadcrumbs Items=\"items\" Divider=\".\"></MBreadcrumbs>\r\n\r\n    <MBreadcrumbs Items=\"items\" Divider=\"-\"></MBreadcrumbs>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
+        "Code": "<div>\r\n    <MBreadcrumbs Items=\"items\" Divider=\".\"></MBreadcrumbs>\r\n\r\n    <MBreadcrumbs Items=\"items\" Divider=\"-\"></MBreadcrumbs>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"/components/breadcrumbs#breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Breadcrumbs.props.Divider",
         "Style": "",
         "Debug": false,
@@ -858,7 +863,7 @@
         "Name": "large",
         "Title": "Large",
         "Description": "<p>Breadcrumbs Basic Usage</p>\n",
-        "Code": "<div>\r\n    <MBreadcrumbs Items=\"items\"></MBreadcrumbs>\r\n\r\n    <MBreadcrumbs Items=\"items\" Large></MBreadcrumbs>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
+        "Code": "<div>\r\n    <MBreadcrumbs Items=\"items\"></MBreadcrumbs>\r\n\r\n    <MBreadcrumbs Items=\"items\" Large></MBreadcrumbs>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"/components/breadcrumbs#breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Breadcrumbs.props.Large",
         "Style": "",
         "Debug": false,
@@ -880,7 +885,7 @@
         "Name": "icon-dividers",
         "Title": "Icon Dividers",
         "Description": "<p>For the icon variant, breadcrumbs can use any icon in Material Design Icons.</p>\n",
-        "Code": "<div>\r\n    <MBreadcrumbs Items=\"items\">\r\n        <DividerContent>\r\n            <MIcon>mdi-forward</MIcon>\r\n        </DividerContent>\r\n    </MBreadcrumbs>\r\n\r\n    <MBreadcrumbs Items=\"items\">\r\n        <DividerContent>\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </DividerContent>\r\n    </MBreadcrumbs>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
+        "Code": "<div>\r\n    <MBreadcrumbs Items=\"items\">\r\n        <DividerContent>\r\n            <MIcon>mdi-forward</MIcon>\r\n        </DividerContent>\r\n    </MBreadcrumbs>\r\n\r\n    <MBreadcrumbs Items=\"items\">\r\n        <DividerContent>\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </DividerContent>\r\n    </MBreadcrumbs>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"/components/breadcrumbs#breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Breadcrumbs.contents.IconDividers",
         "Style": "",
         "Debug": false,
@@ -891,7 +896,7 @@
         "Name": "item",
         "Title": "Item",
         "Description": "<p>You can use the <code>item</code> slot to customize each breadcrumb.</p>\n",
-        "Code": "<MBreadcrumbs Items=\"items\">\r\n    <ItemContent>\r\n        <MBreadcrumbsItem Href=\"@context.Href\" Disabled=\"context.Disabled\">\r\n            @context.Text.ToUpper()\r\n        </MBreadcrumbsItem>\r\n    </ItemContent>\r\n</MBreadcrumbs>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
+        "Code": "<MBreadcrumbs Items=\"items\">\r\n    <ItemContent>\r\n        <MBreadcrumbsItem Href=\"@context.Href\" Disabled=\"context.Disabled\">\r\n            @context.Text.ToUpper()\r\n        </MBreadcrumbsItem>\r\n    </ItemContent>\r\n</MBreadcrumbs>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"/components/breadcrumbs#breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Breadcrumbs.contents.Item",
         "Style": "",
         "Debug": false,
@@ -912,7 +917,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>MButton</code> is the only component that behaves differently when using the <strong>Dark</strong> prop. Normally components use the <strong>Dark</strong> prop to denote that they have a dark colored background and need their text to be white. While this will work\nfor <code>MButton</code>, it is advised to only use the prop when the button <strong>IS ON</strong> a colored background due to the disabled state\nblending in with white backgrounds. If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2021-11-18T09:22:16.3088349+08:00",
+    "LastWriteTime": "2021-11-17T17:29:52.1597474+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1071,7 +1076,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.6188862+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0886273+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1088,7 +1093,7 @@
         "Order": 0,
         "Name": "loading",
         "Title": "Loading",
-        "Description": "<p>Cards can be set to a loading state when processing a user action. This disables further actions and provides visual feedback with an indeterminate  <a href=\"/components/progresslinear\">MProgressLinear</a></p>\n",
+        "Description": "<p>Cards can be set to a loading state when processing a user action. This disables further actions and provides visual feedback with an indeterminate  <a href=\"/components/progress-linear\">MProgressLinear</a></p>\n",
         "Code": "<MCard Class=\"mx-auto my-12\" MaxWidth=\"374\" Loading=@_loading>\r\n    <ProgressContent>\r\n        <MProgressLinear Color=\"deep-purple\" Height=\"10\" Indeterminate />\r\n    </ProgressContent>\r\n\r\n    <ChildContent>\r\n\r\n        <MImage Alt=\"example\" Height=\"250\" Src=\"https://cdn.vuetifyjs.com/images/cards/cooking.png\" />\r\n\r\n        <MCardTitle>Cafe Badilico</MCardTitle>\r\n\r\n        <MCardText>\r\n            <MRow Align=@AlignTypes.Center Class=\"mx-0\">\r\n                <MRating Value=4.5 Color=\"amber\" Dense HalfIncrements Readonly Size=14></MRating>\r\n                <div class=\"grey--text ms-4\">4.5 (413)</div>\r\n            </MRow>\r\n            <div class=\"my-4 text-subtitle-1\">$ • Italian, Cafe </div>\r\n            <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>\r\n        </MCardText>\r\n\r\n        <MDivider Class=\"mx-4\"></MDivider>\r\n\r\n        <MCardTitle>Tonight's availability</MCardTitle>\r\n\r\n        <MCardText>\r\n            <MChipGroup Value=@_selection ActiveClass=\"deep-purple accent-4 white--text\" Column>\r\n                <MChip OnClick=\"()=>_selection=0\">5:30PM</MChip>\r\n                <MChip OnClick=\"()=>_selection=1\">7:30PM</MChip>\r\n                <MChip OnClick=\"()=>_selection=2\">8:00PM</MChip>\r\n                <MChip OnClick=\"()=>_selection=3\">9:00PM</MChip>\r\n            </MChipGroup>\r\n        </MCardText>\r\n\r\n        <MCardActions>\r\n            <MButton Color=\"deep-purple lighten-2\" Text @onclick=\"Reserve\">Reserve</MButton>\r\n        </MCardActions>\r\n\r\n    </ChildContent>\r\n</MCard>\r\n\r\n@code {\r\n    StringBoolean _loading;\r\n\r\n    int _selection = 1;\r\n\r\n    async Task Reserve()\r\n    {\r\n        _loading = true;\r\n        await Task.Delay(2000);\r\n        _loading = false;\r\n    }\r\n}",
         "Type": "Demos.Components.Card.props.Loading",
         "Style": "",
@@ -1198,7 +1203,7 @@
         "Order": 10,
         "Name": "weatherCard",
         "Title": "Weather card",
-        "Description": "<p>Using <a href=\"/components/list\">MListItem</a> and a <a href=\"/components/sliders\">MSlider</a>, we are able to create a unique weather card.\nThe list components ensure that we have consistent spacing and functionality while the slider component allows us to\nprovide a useful interface of selection to the user.</p>\n",
+        "Description": "<p>Using <a href=\"/components/lists\">MListItem</a> and a <a href=\"/components/sliders\">MSlider</a>, we are able to create a unique weather card.\nThe list components ensure that we have consistent spacing and functionality while the slider component allows us to\nprovide a useful interface of selection to the user.</p>\n",
         "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"400\">\r\n\r\n    <MListItem TwoLine>\r\n        <MListItemContent>\r\n            <MListItemTitle class=\"text-h5\">\r\n                San Francisco\r\n            </MListItemTitle>\r\n            <MListItemSubtitle>Mon, 12:30 PM, Mostly sunny</MListItemSubtitle>\r\n        </MListItemContent>\r\n    </MListItem>\r\n\r\n    <MCardText>\r\n        <MRow Align=AlignTypes.Center>\r\n            <MCol Class=\"text-h2\" Cols=\"6\">\r\n                23&deg;C\r\n            </MCol>\r\n            <MCol Cols=\"6\">\r\n                <MImage Src=\"https://cdn.vuetifyjs.com/images/cards/sun.png\" alt=\"Sunny image\" Width=92 />\r\n            </MCol>\r\n        </MRow>\r\n    </MCardText>\r\n\r\n    <MListItem>\r\n        <MListItemIcon>\r\n            <MIcon>mdi-send</MIcon>\r\n        </MListItemIcon>\r\n        <MListItemSubtitle>23 km/h</MListItemSubtitle>\r\n    </MListItem>\r\n\r\n    <MListItem>\r\n        <MListItemIcon>\r\n            <MIcon>mdi-cloud-download</MIcon>\r\n        </MListItemIcon>\r\n        <MListItemSubtitle>48%</MListItemSubtitle>\r\n    </MListItem>\r\n\r\n    <MSlider Value=_time Max=6 TickLabels=_labels Class=\"mx-4\" Ticks=true>\r\n    </MSlider>\r\n    <MList Class=\"transparent\">\r\n        @foreach (var forecast in _forecasts)\r\n        {\r\n            <MListItem key=\"@forecast.Day\">\r\n\r\n                <MListItemTitle>@forecast.Day</MListItemTitle>\r\n\r\n                <MListItemIcon>\r\n                    <MIcon>\r\n                        @forecast.Icon\r\n                    </MIcon>\r\n                </MListItemIcon>\r\n\r\n                <MListItemSubtitle Class=\"text-right\">\r\n                    @forecast.Temp\r\n                </MListItemSubtitle>\r\n\r\n            </MListItem>\r\n        }\r\n    </MList>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MCardActions>\r\n        <MButton Text>\r\n            Full Report\r\n        </MButton>\r\n    </MCardActions>\r\n\r\n</MCard>\r\n\r\n@code {\r\n    List<string> _labels = new List<string> { \"SU\", \"MO\", \"TU\", \"WED\", \"TH\", \"FR\", \"SR\" };\r\n\r\n    double _time = 0;\r\n\r\n    Forecast[] _forecasts = new[]\r\n        {\r\n        new Forecast\r\n        {\r\n            Day=\"Tuesday\",\r\n            Icon=\"mdi-white-balance-sunny\",\r\n            Temp=\"24\\xB0/12\\xB0\"\r\n        },\r\n         new Forecast\r\n        {\r\n            Day=\"Wednesday\",\r\n            Icon=\"mdi-white-balance-sunny\",\r\n            Temp=\"22\\xB0/14\\xB0\"\r\n        },\r\n         new Forecast\r\n        {\r\n            Day=\"Thursday\",\r\n            Icon=\"mdi-cloud\",\r\n            Temp=\"25\\xB0/15\\xB0\"\r\n        },\r\n    };\r\n\r\n    class Forecast\r\n    {\r\n        public string Day { get; set; }\r\n        public string Icon { get; set; }\r\n        public string Temp { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.Card.misc.WeatherCard",
         "Style": "",
@@ -1214,10 +1219,10 @@
     "Type": "Cards"
   },
   {
-    "Desc": "<p>The <code>MChip</code> component is used to convey small pieces of information. Using the close property, the chip becomes\ninteractive, allowing user interaction. This component is used by the <a href=\"/components/chipgroup\">MChipGroup</a> for advanced selection options.</p>\n",
+    "Desc": "<p>The <code>MChip</code> component is used to convey small pieces of information. Using the close property, the chip becomes\ninteractive, allowing user interaction. This component is used by the <a href=\"/components/chip-groups\">MChipGroup</a> for advanced selection options.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:49.6218858+08:00",
+    "LastWriteTime": "2021-11-16T17:18:10.0838705+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1396,7 +1401,7 @@
     "Desc": "<p>The <code>Dialog</code> component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-05T15:50:04.4912214+08:00",
+    "LastWriteTime": "2021-10-29T14:11:50.7074219+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1519,7 +1524,7 @@
     "Desc": "<p>The v-divider component is used to separate sections of lists or layouts.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:53.4428661+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0916273+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1588,7 +1593,7 @@
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-30T20:50:56.0082529+08:00",
+    "LastWriteTime": "2021-12-01T19:22:48.728436+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1626,7 +1631,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:04.4602205+08:00",
+    "LastWriteTime": "2021-11-02T09:37:52.1130132+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1721,7 +1726,7 @@
         "Name": "advanced",
         "Title": "Advanced",
         "Description": "<p>The expansion panel component provides a rich playground to build truly advanced implementations. Here we take advantage of slots in the <code>MExpansionPanelHeader</code>  component to react to the state of being open or closed by fading content in and out.</p>\n",
-        "Code": "<MExpansionPanels>\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Trip name\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        @*TODO: Transition need to update, support LeaveAbsolute*@\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>\r\n                                Enter a name for the trip\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <span>\r\n                                @trip.name\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MTextField @bind-Value=\"@trip.name\"\r\n                        placeholder=\"Caribbean Cruise\">\r\n            </MTextField>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Location\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>\r\n                                Select trip destination\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <span>\r\n                                @trip.location\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MRow NoGutters>\r\n                <MSpacer></MSpacer>\r\n                <MCol Cols=\"5\">\r\n                    <MSelect @bind-Value=\"trip.location\"\r\n                             Items=\"locations\"\r\n                             ItemValue=\"item => item\"\r\n                             ItemText=\"item => item\"\r\n                             Chips\r\n                             Flat\r\n                             Solo>\r\n                    </MSelect>\r\n                </MCol>\r\n\r\n                <MDivider Vertical\r\n                          Class=\"mx-4\">\r\n                </MDivider>\r\n\r\n                <MCol Cols=\"3\">\r\n                    Select your destination of choice\r\n                    <br>\r\n                    <a href=\"/components/expansionpanels#\">Learn more</a>\r\n                </MCol>\r\n            </MRow>\r\n\r\n            <MCardActions>\r\n                <MSpacer></MSpacer>\r\n                <MButton Text\r\n                         Color=\"secondary\">\r\n                    Cancel\r\n                </MButton>\r\n                <MButton Text\r\n                         Color=\"primary\">\r\n                    Save\r\n                </MButton>\r\n            </MCardActions>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Start and end dates\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>When do you want to travel?</span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <MRow NoGutters\r\n                                  Style=\"width: 100%\">\r\n                                <MCol Cols=\"6\">\r\n                                    Start date: @(trip.start ?? \"Not set\")\r\n                                </MCol>\r\n                                <MCol Cols=\"6\">\r\n                                    End date: @(trip.end ?? \"Not set\")\r\n                                </MCol>\r\n                            </MRow>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MRow Justify=\"JustifyTypes.SpaceAround\"\r\n                  NoGutters>\r\n                <MCol Cols=\"3\">\r\n                    <MMenu @bind-Value=\"visible\"\r\n                           CloseOnContentClick=\"false\"\r\n                           OffsetY\r\n                           MinWidth=\"290\">\r\n                        <ActivatorContent>\r\n                            <MTextField @bind-Value=\"trip.start\"\r\n                                        Label=\"Start date\"\r\n                                        PrependIcon=\"mdi-calendar\"\r\n                                        Readonly\r\n                                        @attributes=\"@context.Attrs\">\r\n                            </MTextField>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MDatePicker @bind-Value=\"date\"\r\n                                         NoTitle\r\n                                         Scrollable>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => visible = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => { trip.start = date.ToShortDateString(); visible = false;}\">\r\n                                    OK\r\n                                </MButton>\r\n                            </MDatePicker>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n\r\n                <MCol Cols=\"3\">\r\n                    <MMenu @bind-Value=\"visible2\"\r\n                           CloseOnContentClick=\"false\"\r\n                           OffsetY\r\n                           MinWidth=\"290\">\r\n                        <ActivatorContent>\r\n                            <MTextField @bind-Value=\"trip.end\"\r\n                                        Label=\"End date\"\r\n                                        PrependIcon=\"mdi-calendar\"\r\n                                        Readonly\r\n                                        @attributes=\"@context.Attrs\">\r\n                            </MTextField>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MDatePicker @bind-Value=\"date2\"\r\n                                         NoTitle\r\n                                         Scrollable>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => visible2 = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => { trip.end = date2.ToShortDateString(); visible2 = false; }\">\r\n                                    OK\r\n                                </MButton>\r\n                            </MDatePicker>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n</MExpansionPanels>\r\n\r\n@code {\r\n\r\n    DateOnly date = DateOnly.FromDateTime(DateTime.Now);\r\n    DateOnly date2 = DateOnly.FromDateTime(DateTime.Now);\r\n\r\n    List<string> locations = new() { \"Australia\", \"Barbados\", \"Chile\", \"Denmark\", \"Ecuador\", \"France\" };\r\n\r\n    Trip trip = new();\r\n\r\n    bool visible = false;\r\n    bool visible2 = false;\r\n\r\n    class Trip\r\n    {\r\n        public string name { get; set; }\r\n        public string location { get; set; }\r\n        public string start { get; set; }\r\n        public string end { get; set; }\r\n    }\r\n\r\n}",
+        "Code": "<MExpansionPanels>\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Trip name\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        @*TODO: Transition need to update, support LeaveAbsolute*@\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>\r\n                                Enter a name for the trip\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <span>\r\n                                @trip.name\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MTextField @bind-Value=\"@trip.name\"\r\n                        placeholder=\"Caribbean Cruise\">\r\n            </MTextField>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Location\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>\r\n                                Select trip destination\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <span>\r\n                                @trip.location\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MRow NoGutters>\r\n                <MSpacer></MSpacer>\r\n                <MCol Cols=\"5\">\r\n                    <MSelect @bind-Value=\"trip.location\"\r\n                             Items=\"locations\"\r\n                             ItemValue=\"item => item\"\r\n                             ItemText=\"item => item\"\r\n                             Chips\r\n                             Flat\r\n                             Solo>\r\n                    </MSelect>\r\n                </MCol>\r\n\r\n                <MDivider Vertical\r\n                          Class=\"mx-4\">\r\n                </MDivider>\r\n\r\n                <MCol Cols=\"3\">\r\n                    Select your destination of choice\r\n                    <br>\r\n                    <a href=\"/components/expansion-panels#\">Learn more</a>\r\n                </MCol>\r\n            </MRow>\r\n\r\n            <MCardActions>\r\n                <MSpacer></MSpacer>\r\n                <MButton Text\r\n                         Color=\"secondary\">\r\n                    Cancel\r\n                </MButton>\r\n                <MButton Text\r\n                         Color=\"primary\">\r\n                    Save\r\n                </MButton>\r\n            </MCardActions>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Start and end dates\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>When do you want to travel?</span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <MRow NoGutters\r\n                                  Style=\"width: 100%\">\r\n                                <MCol Cols=\"6\">\r\n                                    Start date: @(trip.start ?? \"Not set\")\r\n                                </MCol>\r\n                                <MCol Cols=\"6\">\r\n                                    End date: @(trip.end ?? \"Not set\")\r\n                                </MCol>\r\n                            </MRow>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MRow Justify=\"JustifyTypes.SpaceAround\"\r\n                  NoGutters>\r\n                <MCol Cols=\"3\">\r\n                    <MMenu @bind-Value=\"visible\"\r\n                           CloseOnContentClick=\"false\"\r\n                           OffsetY\r\n                           MinWidth=\"290\">\r\n                        <ActivatorContent>\r\n                            <MTextField @bind-Value=\"trip.start\"\r\n                                        Label=\"Start date\"\r\n                                        PrependIcon=\"mdi-calendar\"\r\n                                        Readonly\r\n                                        @attributes=\"@context.Attrs\">\r\n                            </MTextField>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MDatePicker @bind-Value=\"date\"\r\n                                         NoTitle\r\n                                         Scrollable>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => visible = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => { trip.start = date.ToShortDateString(); visible = false;}\">\r\n                                    OK\r\n                                </MButton>\r\n                            </MDatePicker>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n\r\n                <MCol Cols=\"3\">\r\n                    <MMenu @bind-Value=\"visible2\"\r\n                           CloseOnContentClick=\"false\"\r\n                           OffsetY\r\n                           MinWidth=\"290\">\r\n                        <ActivatorContent>\r\n                            <MTextField @bind-Value=\"trip.end\"\r\n                                        Label=\"End date\"\r\n                                        PrependIcon=\"mdi-calendar\"\r\n                                        Readonly\r\n                                        @attributes=\"@context.Attrs\">\r\n                            </MTextField>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MDatePicker @bind-Value=\"date2\"\r\n                                         NoTitle\r\n                                         Scrollable>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => visible2 = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => { trip.end = date2.ToShortDateString(); visible2 = false; }\">\r\n                                    OK\r\n                                </MButton>\r\n                            </MDatePicker>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n</MExpansionPanels>\r\n\r\n@code {\r\n\r\n    DateOnly date = DateOnly.FromDateTime(DateTime.Now);\r\n    DateOnly date2 = DateOnly.FromDateTime(DateTime.Now);\r\n\r\n    List<string> locations = new() { \"Australia\", \"Barbados\", \"Chile\", \"Denmark\", \"Ecuador\", \"France\" };\r\n\r\n    Trip trip = new();\r\n\r\n    bool visible = false;\r\n    bool visible2 = false;\r\n\r\n    class Trip\r\n    {\r\n        public string name { get; set; }\r\n        public string location { get; set; }\r\n        public string start { get; set; }\r\n        public string end { get; set; }\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.ExpansionPanels.misc.Advanced",
         "Style": "",
         "Debug": false,
@@ -1750,7 +1755,7 @@
     "Desc": "<p>The MFooter component is used to display public information that users may want to access from any page in the website.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:30:36.1310932+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6580013+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1818,7 +1823,7 @@
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-30T11:17:47.8166256+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6590057+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1920,7 +1925,7 @@
     "Desc": "<p>The <code>Select</code> component is used for collecting user provided information from a list of options.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-24T14:42:47.282503+08:00",
+    "LastWriteTime": "2021-11-24T18:45:49.2469595+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1979,7 +1984,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1450934+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.8350159+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2030,7 +2035,7 @@
         "Name": "labelContent",
         "Title": "Label content",
         "Description": "<p><code>MCheckbox</code> labels can be defined in <strong>LabelContent</strong> - that will allow to use HTML content.</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCheckbox @bind-Value=\"checkbox\">\r\n        <LabelContent>\r\n            <div>\r\n                I agree that\r\n                <MTooltip Bottom>\r\n                    <ActivatorContent>\r\n                        <a target=\"_blank\" href=\"https://vuetifyjs.com\" @attributes=\"@context.Attrs\">Vuetify</a>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        Opens in new window\r\n                    </ChildContent>\r\n                </MTooltip>\r\n                is awesome\r\n            </div>\r\n        </LabelContent>\r\n    </MCheckbox>\r\n</MContainer>\r\n\r\n@code {\r\n    bool checkbox = false;\r\n}",
+        "Code": "<MContainer Fluid>\r\n    <MCheckbox @bind-Value=\"checkbox\">\r\n        <LabelContent>\r\n            <div>\r\n                I agree that\r\n                <MTooltip Bottom>\r\n                    <ActivatorContent>\r\n                        <a target=\"_blank\" href=\"https://vuetifyjs.com\" @attributes=\"@context.Attrs\">MASA.Blazor</a>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        Opens in new window\r\n                    </ChildContent>\r\n                </MTooltip>\r\n                is awesome\r\n            </div>\r\n        </LabelContent>\r\n    </MCheckbox>\r\n</MContainer>\r\n\r\n@code {\r\n    bool checkbox = false;\r\n}",
         "Type": "Demos.Components.FormInputs.children.Checkbox.contents.LabelContent",
         "Style": "",
         "Debug": false,
@@ -2058,7 +2063,7 @@
     "Desc": "<p>v-file-input��һ�����Ƶ�������������ṩ��һ���ɾ���ѡ����棬��ʾ��ϸ��ѡ����Ϣ���ϴ����ȡ� ������ֱ��ȡ����\u05FC�ļ����롣</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:30:36.1580928+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.8319996+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2193,7 +2198,7 @@
     "Desc": "<p>Form validation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-29T13:01:07.4171321+08:00",
+    "LastWriteTime": "2021-11-30T11:20:37.8234266+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2253,7 +2258,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadio</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1630935+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.7990006+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2322,7 +2327,7 @@
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:30:36.1680952+08:00",
+    "LastWriteTime": "2021-11-12T14:06:48.9354207+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2402,7 +2407,7 @@
     "Desc": "<p>The <code>Select</code> component is used for collecting user provided information from a list of options.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-05T15:50:00.1132746+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2400602+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2536,7 +2541,7 @@
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:30:36.192094+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.7730007+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2717,7 +2722,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-23T16:08:41.2566763+08:00",
+    "LastWriteTime": "2021-11-23T18:27:44.4298634+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2808,7 +2813,7 @@
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:30:36.2090943+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.7110144+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2932,7 +2937,7 @@
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:30:36.233094+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6990026+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3203,7 +3208,7 @@
       "Outline": "\n<p>In the grid system, we define the frame outside the information area based on row and column, to ensure that every area can have stable arrangement.</p>\n<p>Following is a brief look at how it works:</p>\n<ul>\n<li>Establish a set of column in the horizontal space defined by row (abbreviated col)</li>\n<li>Your content elements should be placed directly in the col, and only col should be placed directly in row</li>\n<li>The column grid system is a value of 1-24 to represent its range spans. For example, three columns of equal width can be created by <Col span={8} />.</li>\n<li>If the sum of col spans in a row are more than 24, then the overflowing col as a whole will start a new line arrangement.</li>\n</ul>\n<p>Our grid systems base on Flex layout to allow the elements within the parent to be aligned horizontally - left, center, right, wide arrangement, and decentralized arrangement. The Grid system also supports vertical alignment - top aligned, vertically centered, bottom-aligned. You can also define the order of elements by using order.</p>\n<p>Layout uses a 24 grid layout to define the width of each &quot;box&quot;, but does not rigidly adhere to the grid layout.</p>\n",
       "API": "\n<p>Row</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>align</td>\n<td>the vertical alignment of the flex layout:：<code>top</code> <code>middle</code> <code>bottom</code></td>\n<td>string</td>\n<td>top</td>\n</tr>\n<tr>\n<td>gutter</td>\n<td>spacing between grids, could be a number or a object like { xs: 8, sm: 16, md: 24}. or you can use array to make horizontal and vertical spacing work at the same time <code>[horizontal, vertical]</code> (supported after 1.5.0)</td>\n<td>number, object, array</td>\n<td>0</td>\n</tr>\n<tr>\n<td>justify</td>\n<td>horizontal arrangement of the flex layout:<code>start</code> <code>end</code> <code>center</code> <code>space-around</code> <code>space-between</code></td>\n<td>string</td>\n<td>start</td>\n</tr>\n<tr>\n<td>type</td>\n<td>layout mode, optional <code>flex</code>， browser support</td>\n<td>string</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>Col</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>offset</td>\n<td>the number of cells to offset Col from the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>order</td>\n<td>raster order, used in flex layout mode</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>pull</td>\n<td>the number of cells that raster is moved to the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>push</td>\n<td>the number of cells that raster is moved to the right</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>span</td>\n<td>raster number of cells to occupy, 0 corresponds to  <code>display: none</code></td>\n<td>string</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xs</td>\n<td><code>&lt;576px</code> and also default setting, could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>sm</td>\n<td><code>≥576px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>md</td>\n<td><code>≥768px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>lg</td>\n<td><code>≥992px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xl</td>\n<td><code>≥1200px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xxl</td>\n<td><code>≥1600px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>The breakpoints of responsive grid follow BootStrap 4 media queries rules(not including <code>occasionally</code> part).</p>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:52.0838728+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8305896+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3428,7 +3433,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.6938761+08:00",
+    "LastWriteTime": "2021-11-12T13:39:37.8809032+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3508,7 +3513,7 @@
     "Desc": "<p>The <code>MChipGroup</code> supercharges the <code>MChip</code> component by providing groupable functionality. It is used for creating groups\nof selections using chips.</p>\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-05T15:50:00.2032724+08:00",
+    "LastWriteTime": "2021-11-03T16:49:05.8906094+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3590,7 +3595,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:00.2182728+08:00",
+    "LastWriteTime": "2021-11-04T13:34:00.0771991+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3672,7 +3677,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.6278755+08:00",
+    "LastWriteTime": "2021-11-12T13:39:38.0698762+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3748,12 +3753,12 @@
     "Type": "ListItemGroup"
   },
   {
-    "Desc": "<p>The <code>MSlideGroup</code> component is used to display pseudo paginated information. It uses <a href=\"/components/itemgroup\"><strong>MItemGroup</strong></a> at its core and provides\na baseline for components such as <a href=\"/components/tabs\"><strong>MTabs</strong></a> and <a href=\"/components/chipgroup\"><strong>MChipGroup</strong></a>.</p>\n",
+    "Desc": "<p>The <code>MSlideGroup</code> component is used to display pseudo paginated information. It uses <a href=\"/components/item-groups\"><strong>MItemGroup</strong></a> at its core and provides\na baseline for components such as <a href=\"/components/tabs\"><strong>MTabs</strong></a> and <a href=\"/components/chip-groups\"><strong>MChipGroup</strong></a>.</p>\n",
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.6198754+08:00",
+    "LastWriteTime": "2021-11-12T13:39:38.0618742+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3845,7 +3850,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.2038776+08:00",
+    "LastWriteTime": "2021-11-12T13:39:37.8828831+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3896,7 +3901,7 @@
         "Name": "accountCreation",
         "Title": "Account Creation",
         "Description": "<p>Create rich forms with smooth animations. <code>MWindow</code> automatically tracks the current selection index to automatically change the transition direction. This can be manually controlled with the <code>Reverse</code> prop.</p>\n",
-        "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"500\">\r\n    <MCardTitle Class=\"text-h6 font-weight-regular justify-space-between\">\r\n        <span>@currentTitle</span>\r\n        <MAvatar Color=\"primary lighten-2\" Class=\"subheading white--text\" Size=\"24\">@step</MAvatar>\r\n    </MCardTitle>\r\n\r\n    <MWindow @bind-Value=\"Step\">\r\n        <MWindowItem Value=\"1\">\r\n            <MCardText>\r\n                <MTextField Label=\"Email\" @bind-Value=\"@email\"></MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    This is the email you will use to login to your Vuetify account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"2\">\r\n            <MCardText>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Confirm Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    Please enter a password for your account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"3\">\r\n            <div class=\"pa-4 text-center\">\r\n                <MImage\r\n                    Class=\"mb-4\"\r\n                    Contain\r\n                    Height=\"128\"\r\n                    Src=\"https://cdn.vuetifyjs.com/images/logos/v.svg\">\r\n                </MImage>\r\n                <h3 class=\"text-h6 font-weight-light mb-2\">\r\n                    Welcome to Vuetify\r\n                </h3>\r\n                <span class=\"text-caption grey--text\">Thanks for signing up!</span>\r\n            </div>\r\n        </MWindowItem>\r\n    </MWindow>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MCardActions>\r\n        <MButton\r\n            Disabled=\"@(step == 1)\"\r\n            Text\r\n            OnClick=\"() => step--\">\r\n            Back\r\n        </MButton>\r\n        <MSpacer></MSpacer>\r\n        <MButton\r\n            Disabled=\"@(step == 3)\"\r\n            Color=\"primary\"\r\n            Depressed\r\n            OnClick=\"() => step++\">\r\n            Next\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    string email = \"john@vuetifyjs.com\";\r\n    int step = 1;\r\n\r\n    StringNumber Step\r\n    {\r\n        get => step;\r\n        set => step = value.ToInt32();\r\n    }\r\n\r\n    public string currentTitle\r\n    {\r\n        get => step switch\r\n        {\r\n            1 => \"Sign-Up\",\r\n            2 => \"Create a password\",\r\n            _ => \"Account Created\"\r\n            };\r\n    }\r\n\r\n}",
+        "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"500\">\r\n    <MCardTitle Class=\"text-h6 font-weight-regular justify-space-between\">\r\n        <span>@currentTitle</span>\r\n        <MAvatar Color=\"primary lighten-2\" Class=\"subheading white--text\" Size=\"24\">@step</MAvatar>\r\n    </MCardTitle>\r\n\r\n    <MWindow @bind-Value=\"Step\">\r\n        <MWindowItem Value=\"1\">\r\n            <MCardText>\r\n                <MTextField Label=\"Email\" @bind-Value=\"@email\"></MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    This is the email you will use to login to your MASA.Blazor account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"2\">\r\n            <MCardText>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Confirm Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    Please enter a password for your account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"3\">\r\n            <div class=\"pa-4 text-center\">\r\n                <MImage\r\n                    Class=\"mb-4\"\r\n                    Contain\r\n                    Height=\"25\"\r\n                    Src=\"https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png\">\r\n                </MImage>\r\n                <h3 class=\"text-h6 font-weight-light mb-2\">\r\n                    Welcome to MASA.Blazor\r\n                </h3>\r\n                <span class=\"text-caption grey--text\">Thanks for signing up!</span>\r\n            </div>\r\n        </MWindowItem>\r\n    </MWindow>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MCardActions>\r\n        <MButton\r\n            Disabled=\"@(step == 1)\"\r\n            Text\r\n            OnClick=\"() => step--\">\r\n            Back\r\n        </MButton>\r\n        <MSpacer></MSpacer>\r\n        <MButton\r\n            Disabled=\"@(step == 3)\"\r\n            Color=\"primary\"\r\n            Depressed\r\n            OnClick=\"() => step++\">\r\n            Next\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    string email = \"john@vuetifyjs.com\";\r\n    int step = 1;\r\n\r\n    StringNumber Step\r\n    {\r\n        get => step;\r\n        set => step = value.ToInt32();\r\n    }\r\n\r\n    public string currentTitle\r\n    {\r\n        get => step switch\r\n        {\r\n            1 => \"Sign-Up\",\r\n            2 => \"Create a password\",\r\n            _ => \"Account Created\"\r\n            };\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Groups.children.Windows.misc.AccountCreation",
         "Style": "",
         "Debug": false,
@@ -3924,7 +3929,7 @@
     "Desc": "<p>The <code>MHover</code> component provides a clean interface for handling the hover state of any component.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:51.5758771+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8325907+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3983,7 +3988,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.4958755+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8345908+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4001,7 +4006,7 @@
         "Name": "click",
         "Title": "Click",
         "Description": "<p>Binding any click event to <code>MIcon</code> will automatically change the cursor to a pointer.</p>\n",
-        "Code": "<MCard>\r\n    <MToolbar\r\n        Color=\"pink\"\r\n        Dark\r\n        Dense\r\n        Flat>\r\n        <MToolbarTitle Class=\"text-body-2\">\r\n            Upcoming Changes\r\n        </MToolbarTitle>\r\n    </MToolbar>\r\n    <MCardText>\r\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n    </MCardText>\r\n\r\n    <MCardActions>\r\n        <MSpacer></MSpacer>\r\n        <MIcon\r\n            Large\r\n            OnClick=\"Next\">\r\n            mdi-chevron-right\r\n        </MIcon>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n<MSnackbar @bind-Value=\"show\">\r\n    You clicked next!\r\n</MSnackbar>\r\n\r\n@code {\r\n\r\n    bool show;\r\n\r\n    void Next()\r\n    {\r\n        show = true;\r\n    }\r\n\r\n}",
+        "Code": "<MCard>\r\n    <MToolbar\r\n        Color=\"pink\"\r\n        Dark\r\n        Dense\r\n        Flat>\r\n        <MToolbarTitle Class=\"text-body-2\">\r\n            Upcoming Changes\r\n        </MToolbarTitle>\r\n    </MToolbar>\r\n    <MCardText>\r\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n    </MCardText>\r\n\r\n    <MCardActions>\r\n        <MSpacer></MSpacer>\r\n        <MIcon\r\n            Large\r\n            OnClick=\"Next\">\r\n            mdi-chevron-right\r\n        </MIcon>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n<MSnackbar @bind-Value=\"show\" Top>\r\n    You clicked next!\r\n</MSnackbar>\r\n\r\n@code {\r\n\r\n    bool show;\r\n\r\n    void Next()\r\n    {\r\n        show = true;\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Icon.events.Click",
         "Style": "",
         "Debug": false,
@@ -4063,7 +4068,7 @@
     "Desc": "<p>The <code>MImage</code> component is packed with features to support rich media.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:51.4798759+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8375904+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4124,7 +4129,7 @@
         "Order": 2,
         "Name": "placeholder",
         "Title": "Placeholder",
-        "Description": "<p><code>MImage</code> has a special <strong>PlaceholderContent</strong> slot for placeholder to display while image’s loading.</p>\n",
+        "Description": "<p><code>MImage</code> has a special <strong>PlaceholderContent</strong> slot for placeholder to display while image’s loading. Note: the example\nbelow has bad <strong>Src</strong> which won’t load for you to see placeholder. \n``</p>\n",
         "Code": "<MRow Justify=\"@JustifyTypes.Center\">\r\n    <MImage MaxHeight=\"300\"\r\n            MaxWidth=\"500\"\r\n            Src=\"https://bad.src/not/valid\"\r\n            LazySrc=\"https://picsum.photos/id/11/100/60\">\r\n        <PlaceholderContent>\r\n            <MRow Class=\"fill-height ma-0\"\r\n                  Align=\"@AlignTypes.Center\"\r\n                  Justify=\"@JustifyTypes.Center\">\r\n                <MProgressCircular Indeterminate></MProgressCircular>\r\n            </MRow>\r\n        </PlaceholderContent>\r\n    </MImage>\r\n</MRow>",
         "Type": "Demos.Components.Image.contents.Placeholder",
         "Style": "",
@@ -4153,13 +4158,13 @@
     "Desc": "<p>The <code>MList</code> component is used to display information. It can contain an avatar, content, actions, subheaders and much\nmore. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a\nconsistent styling for organizing groups of text and images.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T17:14:49.811884+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8385907+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "index",
         "Title": "Usage",
-        "Description": "<p>Lists come in three main variations. single-line (default), two-line and three-line. The line declaration specifies the minimum height of the item and can also be controlled from v-list with the same prop.</p>\n",
+        "Description": "<p>Lists come in three main variations. single-line (default), two-line and three-line. The line declaration specifies the\nminimum height of the item and can also be controlled from <code>MList</code> with the same prop.</p>\n",
         "Code": "<MCard Class=\"mx-auto\"\r\n        MaxWidth=\"400\"\r\n        Tile>\r\n    <MListItem>\r\n        <MListItemContent>\r\n            <MListItemTitle>Single-line item</MListItemTitle>\r\n        </MListItemContent>\r\n    </MListItem>\r\n\r\n    <MListItem TwoLine>\r\n        <MListItemContent>\r\n            <MListItemTitle>Two-line item</MListItemTitle>\r\n            <MListItemSubtitle>Secondary text</MListItemSubtitle>\r\n        </MListItemContent>\r\n    </MListItem>\r\n\r\n    <MListItem ThreeLine>\r\n        <MListItemContent>\r\n            <MListItemTitle>Three-line item</MListItemTitle>\r\n            <MListItemSubtitle>\r\n                Secondary line text Lorem ipsum dolor sit amet,\r\n            </MListItemSubtitle>\r\n            <MListItemSubtitle>\r\n                consectetur adipiscing elit.\r\n            </MListItemSubtitle>\r\n        </MListItemContent>\r\n    </MListItem>\r\n</MCard>\r\n",
         "Type": "Demos.Components.List.usage.Index",
         "Style": "",
@@ -4203,7 +4208,7 @@
         "Order": 4,
         "Name": "nav",
         "Title": "Nav",
-        "Description": "<p>Lists can receive an alternative <strong>nav</strong> styling that reduces the width <code>MListitem</code> takes up as well as adding a border radius.</p>\n",
+        "Description": "<p>Lists can receive an alternative <strong>Nav</strong> styling that reduces the width <code>MListitem</code> takes up as well as adding a border\nradius.</p>\n",
         "Code": "<MCard Class=\"mx-auto\"\r\n       Width=\"256\"\r\n       tile>\r\n    <MNavigationDrawer permanent>\r\n        <MList>\r\n            <MListItem>\r\n                <MListItemAvatar>\r\n                    <MImage Src=\"https://cdn.vuetifyjs.com/images/john.png\"></MImage>\r\n                </MListItemAvatar>\r\n            </MListItem>\r\n\r\n            <MListItem Link>\r\n                <MListItemContent>\r\n                    <MListItemTitle class=\"text-h6\">\r\n                        John Leider\r\n                    </MListItemTitle>\r\n                    <MListItemSubtitle>john@vuetifyjs.com</MListItemSubtitle>\r\n                </MListItemContent>\r\n\r\n                <MListItemAction>\r\n                    <MIcon>mdi-menu-down</MIcon>\r\n                </MListItemAction>\r\n            </MListItem>\r\n        </MList>\r\n        <MDivider></MDivider>\r\n        <MList Nav\r\n               Dense>\r\n            <MListItemGroup @bind-Value=\"_selectedItem\"\r\n                            Color=\"primary\">\r\n                @foreach (var item in _items)\r\n                {\r\n                    <MListItem>\r\n                        <MListItemIcon>\r\n                            <MIcon>@item.Icon</MIcon>\r\n                        </MListItemIcon>\r\n\r\n                        <MListItemContent>\r\n                            <MListItemTitle>@item.Text</MListItemTitle>\r\n                        </MListItemContent>\r\n                    </MListItem>\r\n                }\r\n            </MListItemGroup>\r\n        </MList>\r\n    </MNavigationDrawer>\r\n</MCard>\r\n\r\n@code{\r\n    private StringNumber _selectedItem = 0;\r\n    private Item[] _items = new Item[]\r\n    {\r\n       new Item { Text= \"My Files\", Icon= \"mdi-folder\" },\r\n       new Item { Text= \"Shared with me\", Icon= \"mdi-account-multiple\" },\r\n       new Item { Text= \"Starred\", Icon= \"mdi-star\" },\r\n       new Item { Text= \"Recent\", Icon= \"mdi-history\" },\r\n       new Item { Text= \"Offline\", Icon= \"mdi-check-circle\" },\r\n       new Item { Text= \"Uploads\", Icon= \"mdi-upload\" },\r\n       new Item { Text= \"Backups\", Icon= \"mdi-cloud-upload\" }\r\n\r\n    };\r\n\r\n    class Item\r\n    {\r\n        public string Text { get; set; }\r\n        public string Icon { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.List.props.Nav",
         "Style": "",
@@ -4236,7 +4241,7 @@
         "Order": 7,
         "Name": "subGroup",
         "Title": "Sub group",
-        "Description": "<p>Using the <code>MListGroup</code> component you can create up to 2 levels in depth using the <code>SubGroup</code> prop.</p>\n",
+        "Description": "<p>Using the <code>MListGroup</code> component you can create up to 2 levels in depth using the <strong>SubGroup</strong> prop.</p>\n",
         "Code": "<MCard Class=\"mx-auto\"\r\n       Width=\"300\">\r\n    <MList>\r\n        <MListItem>\r\n            <MListItemIcon>\r\n                <MIcon>mdi-home</MIcon>\r\n            </MListItemIcon>\r\n\r\n            <MListItemTitle>Home</MListItemTitle>\r\n        </MListItem>\r\n\r\n        <MListGroup @bind-Value=\"userExpanded\" PrependIcon=\"mdi-account-circle\">\r\n            <ActivatorContent>\r\n                <MListItemTitle>Users</MListItemTitle>\r\n            </ActivatorContent>\r\n            <ChildContent>\r\n                <MListGroup @bind-Value=\"adminExpanded\" NoAction SubGroup>\r\n                    <ActivatorContent>\r\n                        <MListItemContent>\r\n                            <MListItemTitle>Admin</MListItemTitle>\r\n                        </MListItemContent>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        @foreach (var item in _admins)\r\n                        {\r\n                            <MListItem Link>\r\n                                <MListItemTitle>@item.Text</MListItemTitle>\r\n\r\n                                <MListItemIcon>\r\n                                    <MIcon>@item.Icon</MIcon>\r\n                                </MListItemIcon>\r\n                            </MListItem>\r\n                        }\r\n                    </ChildContent>\r\n                </MListGroup>\r\n\r\n                <MListGroup NoAction\r\n                            SubGroup>\r\n                    <ActivatorContent>\r\n                        <MListItemContent>\r\n                            <MListItemTitle>Actions</MListItemTitle>\r\n                        </MListItemContent>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        @foreach (var item in _cruds)\r\n                        {\r\n                            <MListItem Link>\r\n                                <MListItemTitle>@item.Text</MListItemTitle>\r\n\r\n                                <MListItemIcon>\r\n                                    <MIcon>@item.Icon</MIcon>\r\n                                </MListItemIcon>\r\n                            </MListItem>\r\n                        }\r\n                    </ChildContent>\r\n                </MListGroup>\r\n            </ChildContent>\r\n        </MListGroup>\r\n    </MList>\r\n</MCard>\r\n\r\n@code{\r\n    readonly Item[] _admins = new Item[]\r\n    {\r\n       new Item { Text= \"Management\", Icon= \"mdi-account-multiple-outline\" },\r\n       new Item { Text= \"Settings\", Icon= \"mdi-cog-outline\" }\r\n    };\r\n\r\n    readonly Item[] _cruds = new Item[]\r\n    {\r\n       new Item { Text= \"Create\", Icon= \"mdi-plus-outline\" },\r\n       new Item { Text= \"Read\", Icon= \"mdi-file-outline\" },\r\n       new Item { Text= \"Update\", Icon= \"mdi-update\" },\r\n       new Item { Text= \"Delete\", Icon= \"mdi-delete\" }\r\n    };\r\n\r\n    bool userExpanded = true;\r\n    bool adminExpanded = true;\r\n\r\n    class Item\r\n    {\r\n        public string Text { get; set; }\r\n        public string Icon { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.List.props.SubGroup",
         "Style": "",
@@ -4246,7 +4251,7 @@
       {
         "Order": 8,
         "Name": "threeLine",
-        "Title": "ThreeLine",
+        "Title": "Three line",
         "Description": "<p>For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis.</p>\n",
         "Code": "<MCard MaxWidth=\"450\"\r\n        Class=\"mx-auto\">\r\n    <MToolbar Color=\"cyan\"\r\n               Dark>\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Inbox</MToolbarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n\r\n    <MList ThreeLine>\r\n        @foreach (var item in _items)\r\n        {\r\n            @if (item.Header != null)\r\n            {\r\n                <MSubheader>@item.Header</MSubheader>\r\n            }\r\n            else if (item.Divider)\r\n            {\r\n                <MDivider Inset=\"item.Inset\"></MDivider>\r\n            }\r\n            else\r\n            {\r\n                <MListItem>\r\n                    <MListItemAvatar>\r\n                        <MImage Src=\"@item.Avatar\"></MImage>\r\n                    </MListItemAvatar>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>@((MarkupString)item.Title)</MListItemTitle>\r\n                        <MListItemSubtitle>@((MarkupString)item.SubTitle)</MListItemSubtitle>\r\n                    </MListItemContent>\r\n                </MListItem>\r\n            }\r\n        }\r\n    </MList>\r\n</MCard>\r\n\r\n@code{\r\n    private Item[] _items = new Item[]\r\n    {\r\n       new Item { Header=\"Today\" },\r\n       new Item\r\n       {\r\n           Avatar=\"https://cdn.vuetifyjs.com/images/lists/1.jpg\",\r\n           Title=\"Brunch this weekend?\",\r\n           SubTitle=\"<span class=\\\"text--primary\\\">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?\"\r\n       },\r\n       new Item\r\n       {\r\n           Divider=true,\r\n           Inset=true\r\n       },\r\n       new Item\r\n       {\r\n           Avatar=\"https://cdn.vuetifyjs.com/images/lists/2.jpg\",\r\n           Title=\"Summer BBQ <span class=\\\"grey--text text--lighten-1\\\">4</span>\",\r\n           SubTitle=\"<span class=\\\"text--primary\\\">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.\"\r\n       },\r\n       new Item\r\n       {\r\n           Divider=true,\r\n           Inset=true\r\n       },\r\n       new Item\r\n       {\r\n           Avatar=\"https://cdn.vuetifyjs.com/images/lists/3.jpg\",\r\n           Title=\"Oui oui\",\r\n           SubTitle=\"<span class=\\\"text--primary\\\">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?\"\r\n       },\r\n       new Item\r\n       {\r\n           Divider=true,\r\n           Inset=true\r\n       },\r\n       new Item\r\n       {\r\n           Avatar=\"https://cdn.vuetifyjs.com/images/lists/4.jpg\",\r\n           Title=\"Birthday gift\",\r\n           SubTitle=\"<span class=\\\"text--primary\\\">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?\"\r\n       },\r\n       new Item\r\n       {\r\n           Divider=true,\r\n           Inset=true\r\n       },\r\n       new Item\r\n       {\r\n           Avatar=\"https://cdn.vuetifyjs.com/images/lists/5.jpg\",\r\n           Title=\"Recipe to try\",\r\n           SubTitle=\"<span class=\\\"text--primary\\\">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.\"\r\n       }\r\n    };\r\n\r\n    class Item\r\n    {\r\n        public string Header { get; set; }\r\n        public string Avatar { get; set; }\r\n        public string Title { get; set; }\r\n        public string SubTitle { get; set; }\r\n        public bool Divider { get; set; }\r\n        public bool Inset { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.List.props.ThreeLine",
@@ -4257,7 +4262,7 @@
       {
         "Order": 9,
         "Name": "twoLinesAndSubheader",
-        "Title": "TwoLinesAndSubheader",
+        "Title": "Two lines and subheader",
         "Description": "<p>Lists can contain subheaders, dividers, and can contain 1 or more lines. The subtitle will overflow with ellipsis if it extends past one line.</p>\n",
         "Code": "<MCard MaxWidth=\"600\"\r\n       Class=\"mx-auto\">\r\n    <MToolbar Color=\"light-blue\"\r\n              Dark>\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>My files</MToolbarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-view-module</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n\r\n    <MList Subheader\r\n           TwoLine>\r\n        <MSubheader Inset>Folders</MSubheader>\r\n\r\n        @foreach (var item in _folders)\r\n        {\r\n            <MListItem>\r\n                <MListItemAvatar>\r\n                    <MIcon Class=\"grey lighten-1\"\r\n                           Dark>\r\n                        mdi-folder\r\n                    </MIcon>\r\n                </MListItemAvatar>\r\n\r\n                <MListItemContent>\r\n                    <MListItemTitle>@item.Title</MListItemTitle>\r\n\r\n                    <MListItemSubtitle>@item.SubTitle</MListItemSubtitle>\r\n                </MListItemContent>\r\n\r\n                <MListItemAction>\r\n                    <MButton Icon>\r\n                        <MIcon Color=\"grey lighten-1\">mdi-information</MIcon>\r\n                    </MButton>\r\n                </MListItemAction>\r\n            </MListItem>\r\n\r\n        }\r\n\r\n\r\n        <MDivider Inset></MDivider>\r\n\r\n        <MSubheader Inset>Files</MSubheader>\r\n\r\n        @foreach (var item in _files)\r\n        {\r\n            <MListItem>\r\n                <MListItemAvatar>\r\n                    <MIcon Class=\"@item.Color\"\r\n                           Dark>@item.Icon</MIcon>\r\n                </MListItemAvatar>\r\n\r\n                <MListItemContent>\r\n                    <MListItemTitle>@item.Title</MListItemTitle>\r\n\r\n                    <MListItemSubtitle>@item.SubTitle</MListItemSubtitle>\r\n                </MListItemContent>\r\n\r\n                <MListItemAction>\r\n                    <MButton Icon>\r\n                        <MIcon Color=\"grey lighten-1\">mdi-information</MIcon>\r\n                    </MButton>\r\n                </MListItemAction>\r\n            </MListItem>\r\n        }\r\n    </MList>\r\n</MCard>\r\n\r\n@code{\r\n    private Item[] _files = new Item[]\r\n    {\r\n       new Item \r\n       {\r\n          Color= \"blue\",\r\n          Icon= \"mdi-clipboard-text\",\r\n          SubTitle= \"Jan 20, 2014\",\r\n          Title= \"Vacation itinerary\",\r\n       },\r\n        new Item \r\n        {\r\n          Color= \"amber\",\r\n          Icon= \"mdi-gesture-tap-button\",\r\n          SubTitle= \"Jan 10, 2014\",\r\n          Title= \"Kitchen remodel\",\r\n        }\r\n    };\r\n\r\n    private Item[] _folders = new Item[]\r\n    {\r\n       new Item \r\n       {\r\n          SubTitle= \"Jan 9, 2014\",\r\n          Title= \"Photos\",\r\n       },\r\n       new Item \r\n       {\r\n          SubTitle= \"Jan 17, 2014\",\r\n          Title= \"Recipes\",\r\n       },\r\n       new Item\r\n       {\r\n          SubTitle= \"Jan 28, 2014\",\r\n          Title= \"Work\",\r\n       },\r\n    };\r\n\r\n    class Item\r\n    {\r\n        public string Color { get; set; }\r\n        public string Icon { get; set; }\r\n        public string Title { get; set; }\r\n        public string SubTitle { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.List.props.TwoLinesAndSubheader",
@@ -4269,7 +4274,7 @@
         "Order": 10,
         "Name": "expansionLists",
         "Title": "Expansion Lists",
-        "Description": "<p>A list can contain a group of items which will display on click utilizing <code>MListGroup</code>'s <strong>ActivatorContent</strong>. Expansion\nlists are also used within the <a href=\"/components/navigationdrawer\">MNavigationDrawer</a> component.</p>\n",
+        "Description": "<p>A list can contain a group of items which will display on click utilizing <code>MListGroup</code>'s <strong>ActivatorContent</strong>. Expansion\nlists are also used within the <a href=\"/components/navigation-drawers\">MNavigationDrawer</a> component.</p>\n",
         "Code": "<MCard Class=\"mx-auto\"\r\n       MaxWidth=\"500\">\r\n    <MToolbar Color=\"teal\"\r\n              Dark>\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Topics</MToolbarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n\r\n    <MList>\r\n        @foreach (var item in items)\r\n        {\r\n            <MListGroup\r\n                @bind-Value=\"item.Active\"\r\n                PrependIcon=\"@item.Action\"\r\n                NoAction>\r\n                <ActivatorContent>\r\n                    <MListItemContent>\r\n                        <MListItemTitle>@item.Title</MListItemTitle>\r\n                    </MListItemContent>\r\n                </ActivatorContent>\r\n\r\n                <ChildContent>\r\n                    @foreach (var subItem in item.Items)\r\n                    {\r\n                        <MListItem\r\n                            Value=\"subItem.Title\">\r\n                            <MListItemContent>\r\n                                <MListItemTitle>@item.Title</MListItemTitle>\r\n                            </MListItemContent>\r\n                        </MListItem>\r\n                    }\r\n                </ChildContent>\r\n            </MListGroup>\r\n        }\r\n    </MList>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    List<Item> items = new List<Item>()\r\n    {\r\n        new Item()\r\n        {\r\n            Action = \"mdi-ticket\",\r\n            Items = new List<Item>() {new Item(\"List Item\")},\r\n            Title = \"Attractions\"\r\n        },\r\n        new Item()\r\n        {\r\n            Action = \"mdi-silverware-fork-knife\",\r\n            Active = true,\r\n            Items = new List<Item>() {new Item(\"Breakfast & brunch\"), new Item(\"New American\"), new Item(\"Sushi\")},\r\n            Title = \"Dining\"\r\n        },\r\n        new Item()\r\n        {\r\n            Action = \"mdi-school\",\r\n            Items = new List<Item>() {new Item(\"List Item\")},\r\n            Title = \"Education\"\r\n        },\r\n        new Item()\r\n        {\r\n            Action = \"mdi-run\",\r\n            Items = new List<Item>() {new Item(\"List Item\")},\r\n            Title = \"Family\"\r\n        },\r\n        new Item()\r\n        {\r\n            Action = \"mdi-bottle-tonic-plus\",\r\n            Items = new List<Item>() {new Item(\"List Item\")},\r\n            Title = \"Health\"\r\n        },\r\n        new Item()\r\n        {\r\n            Action = \"mdi-content-cut\",\r\n            Items = new List<Item>() {new Item(\"List Item\")},\r\n            Title = \"Attractions\"\r\n        },\r\n        new Item()\r\n        {\r\n            Action = \"mdi-tag\",\r\n            Items = new List<Item>() {new Item(\"List Item\")},\r\n            Title = \"Attractions\"\r\n        },\r\n    };\r\n\r\n    class Item\r\n    {\r\n        public string Title { get; set; }\r\n\r\n        public string Action { get; set; }\r\n\r\n        public bool Active { get; set; }\r\n\r\n        public List<Item> Items { get; set; } = new List<Item>();\r\n\r\n        public Item()\r\n        {\r\n        }\r\n\r\n        public Item(string title)\r\n        {\r\n            Title = title;\r\n        }\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.List.contents.ExpansionLists",
         "Style": "",
@@ -4280,7 +4285,7 @@
         "Order": 11,
         "Name": "actionsAndItemGroups",
         "Title": "Action and item groups",
-        "Description": "<p>A <strong>ThreeLine</strong> list with actions. Utilizing <code>MListItemGroup</code>, easily connect actions to your tiles.</p>\n",
+        "Description": "<p>A <strong>ThreeLine</strong> list with actions. Utilizing <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>, easily connect actions to your tiles.</p>\n",
         "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"400\">\r\n    <MToolbar Color=\"purple\" Dark>\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Settings</MToolbarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n\r\n    <MList\r\n        Subheader\r\n        ThreeLine>\r\n        <MSubheader>User Controls</MSubheader>\r\n\r\n        <MListItem>\r\n            <MListItemContent>\r\n                <MListItemTitle>Content filtering</MListItemTitle>\r\n                <MListItemSubtitle>Set the content filtering level to restrict appts that can be downloaded</MListItemSubtitle>\r\n            </MListItemContent>\r\n        </MListItem>\r\n\r\n        <MListItem>\r\n            <MListItemContent>\r\n                <MListItemTitle>Password</MListItemTitle>\r\n                <MListItemSubtitle>Require password for purchase or use password to restrict purchase</MListItemSubtitle>\r\n            </MListItemContent>\r\n        </MListItem>\r\n    </MList>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MList\r\n        Flat\r\n        Subheader\r\n        ThreeLine>\r\n        <MSubheader>General</MSubheader>\r\n\r\n        <MListItemGroup\r\n            @bind-Values=\"settings\"\r\n            Multiple\r\n            ActiveClass=\"\">\r\n            <MListItem>\r\n                <ItemContent>\r\n                    <MListItemAction>\r\n                        <MCheckbox IsActive=\"@context.Active\"></MCheckbox>\r\n                    </MListItemAction>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>Notifications</MListItemTitle>\r\n                        <MListItemSubtitle>Notify me about updates to apps or games that I downloaded</MListItemSubtitle>\r\n                    </MListItemContent>\r\n                </ItemContent>\r\n            </MListItem>\r\n\r\n            <MListItem>\r\n                <ItemContent>\r\n                    <MListItemAction>\r\n                        <MCheckbox IsActive=\"@context.Active\"></MCheckbox>\r\n                    </MListItemAction>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>Sound</MListItemTitle>\r\n                        <MListItemSubtitle>Auto-update apps at any time. Data charges may apply</MListItemSubtitle>\r\n                    </MListItemContent>\r\n                </ItemContent>\r\n            </MListItem>\r\n\r\n            <MListItem>\r\n                <ItemContent>\r\n                    <MListItemAction>\r\n                        <MCheckbox IsActive=\"@context.Active\"></MCheckbox>\r\n                    </MListItemAction>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>Auto-add widgets</MListItemTitle>\r\n                        <MListItemSubtitle>Automatically add home screen widgets when downloads complete</MListItemSubtitle>\r\n                    </MListItemContent>\r\n                </ItemContent>\r\n            </MListItem>\r\n        </MListItemGroup>\r\n    </MList>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    List<StringNumber> settings = new();\r\n\r\n}",
         "Type": "Demos.Components.List.misc.ActionsAndItemGroups",
         "Style": "",
@@ -4347,6 +4352,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg",
     "Cols": 1,
+    "Related": [
+      "/components/item-groups",
+      "/components/list-item-groups",
+      "/components/subheaders"
+    ],
     "Title": "Lists",
     "Type": "List"
   },
@@ -4356,7 +4366,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:03.3062352+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2440968+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4523,13 +4533,13 @@
     "Desc": "<p><code>MNavigationDrawer</code> is a component used to navigate applications. It is usually wrapped and used in the <code>MCard</code> element.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:17:58.2721746+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8246057+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "index",
         "Title": "Usage",
-        "Description": "<p>Navigation navigation is mainly used to host links to pages in your application. It is common to pair drawers with\nthe <a href=\"/components/list\">MList</a> component using the <strong>Nav</strong> property.</p>\n",
+        "Description": "<p>Navigation navigation is mainly used to host links to pages in your application. It is common to pair drawers with\nthe <a href=\"/components/lists\">MList</a> component using the <strong>Nav</strong> property.</p>\n",
         "Code": "<MCard Height=\"400\"\r\n       Width=\"256\"\r\n       Class=\"mx-auto\">\r\n    <MNavigationDrawer Permanent>\r\n        <MListItem>\r\n            <MListItemContent>\r\n                <MListItemTitle class=\"text-h6\">\r\n                    Application\r\n                </MListItemTitle>\r\n                <MListItemSubtitle>\r\n                    subtext\r\n                </MListItemSubtitle>\r\n            </MListItemContent>\r\n        </MListItem>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MList Dense\r\n               Nav>\r\n            @foreach (var item in _items)\r\n            {\r\n                <MListItem Link>\r\n                    <MListItemIcon>\r\n                        <MIcon>@item.Icon</MIcon>\r\n                    </MListItemIcon>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>@item.Title</MListItemTitle>\r\n                    </MListItemContent>\r\n                </MListItem>\r\n            }\r\n        </MList>\r\n    </MNavigationDrawer>\r\n</MCard>\r\n\r\n@code{\r\n    class Item\r\n    {\r\n        public string Title { get; set; }\r\n        public string Icon { get; set; }\r\n    }\r\n\r\n    private Item[] _items = new Item[]\r\n    {\r\n         new Item{ Title= \"Dashboard\", Icon= \"mdi-view-dashboard\" },\r\n         new Item { Title= \"Photos\", Icon= \"mdi-image\" },\r\n         new Item { Title= \"About\", Icon= \"mdi-help-box\" }\r\n    };\r\n}\r\n\r\n\r\n\r\n",
         "Type": "Demos.Components.NavigationDrawer.usage.Index",
         "Style": "",
@@ -4647,7 +4657,7 @@
     "Desc": "<p>The <code>Overlay</code> component is used to provide emphasis on a particular element or parts of it. It signals to the user of a state change within the application and can be used for creating loaders, dialogs and more.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.8122983+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8256046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4719,6 +4729,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/cards",
+      "/components/sheets",
+      "/components/dialogs"
+    ],
     "Title": "Overlays",
     "Type": "Overlay"
   },
@@ -4726,7 +4741,7 @@
     "Desc": "<p>The <code>MPagination</code> component is used to separate long data sets so that user data information can be known. Provided the amount, the paging component will automatically scale. The current maintenance page provides value easily.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.8012987+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.827605+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4805,7 +4820,7 @@
     "Desc": "<p>The MColorPicker allows you to select a color using a variety of input methods.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.0213047+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8296041+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4885,7 +4900,7 @@
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:17:58.306173+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8326032+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5119,7 +5134,7 @@
     "Desc": "<p><code>MDatePicker</code> can be used as a standalone month picker component.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:17:58.3101739+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8346068+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5254,7 +5269,7 @@
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:17:58.3331731+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8366046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5421,7 +5436,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.3653055+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8376032+08:00",
     "DemoList": [
       {
         "Order": 20,
@@ -5500,7 +5515,7 @@
     "Desc": "<p>The component is used to display circular data to users. It also can be put into an indeterminate state to portray loading.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.7362988+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8406035+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5568,7 +5583,7 @@
     "Desc": "<p>The component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.7222979+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8456135+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5724,7 +5739,7 @@
     "Desc": "<p>Semantic vector graphics.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:17:58.3711741+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.167907+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5825,7 +5840,7 @@
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.6822982+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8466114+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -5874,7 +5889,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T10:44:03.0314876+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0756929+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5910,7 +5925,7 @@
     "Desc": "<p>The MSnackbar component is used to display quick messages to users. Snackbars supports positioning, removing delays, and callbacks.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.6722983+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1699113+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5980,7 +5995,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.6582989+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1739081+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6137,7 +6152,7 @@
     "Desc": "<p>The <code>Subheader</code> component is used to separate sections of lists.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.6112992+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6204,7 +6219,7 @@
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.5952995+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6251,7 +6266,7 @@
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-17T17:33:50.2071767+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0826969+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6507,7 +6522,7 @@
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-17T17:33:50.164177+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0836945+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6578,7 +6593,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n<li><a href=\"/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:02.5722433+08:00",
+    "LastWriteTime": "2021-11-18T17:20:09.724454+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6768,7 +6783,7 @@
     "Desc": "<p>MTimeline is very useful for displaying chronological information.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-17T17:33:50.146178+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0886948+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6893,7 +6908,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:02.6882435+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2450964+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6940,7 +6955,7 @@
     "Desc": "<p>The MTreeview component is useful for displaying large amounts of nested data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-25T14:31:26.5721881+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0936951+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7130,7 +7145,7 @@
     "Desc": "<p>The <code>MFileInput</code> component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-17T17:33:50.0811781+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0946935+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7167,7 +7182,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-18T09:22:16.1528287+08:00",
+    "LastWriteTime": "2021-11-17T14:30:00.36988+08:00",
     "DemoList": [
       {
         "Order": 0,

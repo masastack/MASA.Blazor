@@ -138,6 +138,10 @@ ol, ul {
     padding: 12px 50px 12px 16px;
 }
 
+.m-sheet.app-code:not(:hover) .m-btn--copy .m-icon {
+    opacity: .4;
+}
+
     .m-sheet.app-code code[class*=language], .m-sheet.app-code pre[class*=language] {
         background: none;
         font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;

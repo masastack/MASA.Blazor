@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-Shaped lists have rounded borders on one side of the `MListItem`.
+形状列表在 `MListItem` 的一侧具有圆形边界。
 
 ## en-US
 

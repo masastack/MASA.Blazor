@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-You can make `MList` items rounded.
+你可以让 `MList` 项变成圆角。
 
 ## en-US
 

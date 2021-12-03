@@ -10,11 +10,11 @@
             var group = GenGroup(item.Children);
 
             <MListGroup AppendIcon="mdi-menu-down"
-                Class="m-list-group--default"
-                Color="primary"
-                Group="@group"
-                NoAction
-                PrependIcon="@item.Icon">
+                        Class="m-list-group--default"
+                        Color="primary"
+                        Group="@group"
+                        NoAction
+                        PrependIcon="@item.Icon">
                 <ActivatorContent>
                     <MListItemContent>
                         <MListItemTitle>@item.Title</MListItemTitle>
@@ -28,9 +28,9 @@
                             var group2 = GenGroup(componentItem.Children);
 
                             <MListGroup Class="m-list-group--default"
-                        Group="@group2"
-                        NoAction
-                        SubGroup>
+                                        Group="@group2"
+                                        NoAction
+                                        SubGroup>
                                 <ActivatorContent>
                                     <MListItemContent>
                                         <MListItemTitle>@FormatComponentTitle(componentItem)</MListItemTitle>
@@ -102,12 +102,14 @@
 
         foreach (var item in items)
         {
-            if (groups.Contains(item.Url, StringComparer.OrdinalIgnoreCase)) continue;
-
             groups.Add(GenGroup(item.Children));
+
+            if (item.Url == null || groups.Contains(item.Url, StringComparer.OrdinalIgnoreCase)) continue;
+
             groups.Add(item.Url);
         }
 
         return string.Join("|", groups.Where(g => g != string.Empty));
     }
+
 }

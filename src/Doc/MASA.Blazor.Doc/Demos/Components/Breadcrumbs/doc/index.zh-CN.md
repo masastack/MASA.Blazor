@@ -18,7 +18,7 @@ Breadcrumbs 组件适用于页面层级导航
 - [MBreadcrumbs](/api/MBreadcrumbs)
 - [MBreadcrumbsItem](/api/MBreadcrumbsItem)
 
-## Caveats
+## 注意
 
 <!--alert:info-->
 默认情况下，`MBreadcrumbs` 将禁用路由联动。可以通过 **Linkage** 属性开启路由联动。

@@ -6,7 +6,7 @@ title: Application
 cols: 1
 related:
   - /features/theme
-  - /components/appbars
+  - /components/app-bars
   - /components/navigation-drawers
 ---
 
@@ -24,7 +24,7 @@ related:
 <!--/alert:error-->
 
 <!--alert:info-->
-如果你在应用中使用多个布局，你需要确保每个包含 Vuetify 组件的根布局文件在其模板的根部有一个 `MApp`。
+如果你在应用中使用多个布局，你需要确保每个包含组件的根布局文件在其模板的根部有一个 `MApp`。
 <!--/alert:info-->
 
 ## 默认应用标记
@@ -70,11 +70,11 @@ related:
 
 每一个应用组件都有一个指定的位置和优先级，影响布局系统中的位置。
 
-- [MAppBar](/components/appbars)：总是放在应用顶部，优先级低于 `MSystemBar`。
+- [MAppBar](/components/app-bars)：总是放在应用顶部，优先级低于 `MSystemBar`。
 - MBottomNavigation：总是放在应用底部，优先级高于 `MFooter`。
 - [MFooter](/components/footer)：总是放在应用底部，优先级低于 `MBottomNavigation`。
-- [MNavigationDrawer](/components/navigationdrawer)：可以放置在应用的左边或右边，并且可以配置在 `MAppBar` 的旁边或下面。
-- [MSystemBar](/components/systembars)：总是放在应用顶部，优先级高于 `MAppBar`。
+- [MNavigationDrawer](/components/navigation-drawers)：可以放置在应用的左边或右边，并且可以配置在 `MAppBar` 的旁边或下面。
+- [MSystemBar](/components/system-bars)：总是放在应用顶部，优先级高于 `MAppBar`。
 
 ## 应用服务
 
@@ -97,3 +97,7 @@ double Top { get; }
  
  Console.WriteLine(GlobalConfig.Application.Footer); // 60
 ```
+
+<!--alert:error-->
+为了让你的应用正常工作，你必须将其包裹在 `MApp` 组件中。 该组件是确保正确的跨浏览器兼容性所必需的。
+<!--/alert:error-->

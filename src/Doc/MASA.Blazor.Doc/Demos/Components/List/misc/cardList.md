@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-A list can be combined with a card.
+一个列表可以和一张卡片结合起来。
 
 ## en-US
 

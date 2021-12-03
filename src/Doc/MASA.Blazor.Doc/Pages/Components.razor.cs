@@ -52,7 +52,7 @@ namespace MASA.Blazor.Doc.Pages
             ContentsList = demos.Where(demo => demo.Group == DemoGroup.Contents).ToList();
             MiscList = demos.Where(demo => demo.Group == DemoGroup.Misc).ToList();
             
-            GithubUrlHref = string.Format(_githubUrlTemplate, _demoComponent.Title);
+            GithubUrlHref = string.Format(_githubUrlTemplate, _demoComponent.Type);
 
             _demoIndex = 0;
         }

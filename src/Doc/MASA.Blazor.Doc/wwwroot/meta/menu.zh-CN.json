@@ -216,11 +216,11 @@
       },
       {
         "Order": 0,
-        "Title": "Color",
+        "Title": "Colors",
         "SubTitle": "颜色",
-        "FullTitle": "Color (颜色)",
+        "FullTitle": "Colors (颜色)",
         "Type": "menuItem",
-        "Url": "stylesandanimations/color",
+        "Url": "stylesandanimations/colors",
         "Children": []
       },
       {

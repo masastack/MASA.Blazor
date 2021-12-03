@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-23T09:48:33.3104036+08:00",
+    "LastWriteTime": "2021-11-22T16:33:22.8890524+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -167,10 +167,10 @@
     "Desc": "<p>在 MASA.Blazor 中，<code>MApp</code> 组件和 <code>MNavigationDrawer</code>、<code>MAppBar</code>、<code>MFooter</code> 等组件上的 App 属性，帮助你的应用围绕 <code>MMain</code> 组件进行适当的大小调整。\n这使你可以创建真正独特的界面，无需因管理布局尺寸而烦恼。 所有应用都需要 <code>MApp</code> 组件。 这是许多 <code>MASA Blazor</code> 组件和功能的挂载点，并确保它将默认的应用主题\n（Dark/Light）传递给子组件，并确保在浏览器中对某些点击事件的正确跨浏览器支持。</p>\n",
     "Order": 0,
     "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/api/MApp\">MApp</a></li>\n<li><a href=\"/api/MMain\">MMain</a></li>\n</ul>\n<!--alert:error-->\n<p>为了让你的应用正常工作，你必须将其包裹在 <code>MApp</code> 组件中。 该组件是确保正确的跨浏览器兼容性所必需的。</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p>如果你在应用中使用多个布局，你需要确保每个包含 Vuetify 组件的根布局文件在其模板的根部有一个 <code>MApp</code>。</p>\n<!--/alert:info-->\n",
+      "API": "\n<ul>\n<li><a href=\"/api/MApp\">MApp</a></li>\n<li><a href=\"/api/MMain\">MMain</a></li>\n</ul>\n<!--alert:error-->\n<p>为了让你的应用正常工作，你必须将其包裹在 <code>MApp</code> 组件中。 该组件是确保正确的跨浏览器兼容性所必需的。</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p>如果你在应用中使用多个布局，你需要确保每个包含组件的根布局文件在其模板的根部有一个 <code>MApp</code>。</p>\n<!--/alert:info-->\n",
       "默认应用标记": "\n<p>这是一个默认应用标记的例子。 只要设置 <strong>App</strong> 属性，你可以将布局元素放在任何地方。此处的关键组件是<code>MMain</code>。它将会根据您分配的 app\n组件动态地调整大小。你可以使用上述任何或所有组件的组合，包括 <code>MBottomNavigation</code>。</p>\n<pre><code class=\"language-html\">&lt;!-- MainLayout.razor --&gt;\n@inherits LayoutComponentBase\n\n&lt;MApp&gt;\n  &lt;MNavigationDrawer App&gt;\n    &lt;!-- --&gt;\n  &lt;/MNavigationDrawer&gt;\n\n  &lt;MAppBar App&gt;\n    &lt;!-- --&gt;\n  &lt;/MAppBar&gt;\n\n  &lt;!-- 根据应用组件来调整你的内容 --&gt;\n  &lt;MMain&gt;\n    &lt;!-- 给应用提供合适的间距 --&gt;\n    &lt;MContainer Fluid&gt;\n        @Body\n    &lt;/MContainer&gt;\n  &lt;/MMain&gt;\n\n  &lt;MFooter App&gt;\n    &lt;!-- --&gt;\n  &lt;/MFooter&gt;\n&lt;/MApp&gt;\n</code></pre>\n<!--alert:info-->\n<p>设置 <strong>App</strong> 属性会自动给布局元素设置 position: <strong>fixed</strong>。 如果你的应用程序需要一个绝对定位元素，你可以使用 <strong>Absolute</strong> 属性来覆盖这个功能。</p>\n<!--/alert:info-->\n",
-      "应用组件": "\n<p>以下是所有支持 <strong>App</strong> 属性的组件列表，这些组件可以在你的应用中用作布局元素。 这些组件可以混合和匹配，并且每个特定组件在任何时候都只能存在一个。 不过，你可以把它们换掉，布局也能适应。\n有关如何构建各种布局的一些示例，请查看预制布局页面。</p>\n<p>每一个应用组件都有一个指定的位置和优先级，影响布局系统中的位置。</p>\n<ul>\n<li><a href=\"/components/appbars\">MAppBar</a>：总是放在应用顶部，优先级低于 <code>MSystemBar</code>。</li>\n<li>MBottomNavigation：总是放在应用底部，优先级高于 <code>MFooter</code>。</li>\n<li><a href=\"/components/footer\">MFooter</a>：总是放在应用底部，优先级低于 <code>MBottomNavigation</code>。</li>\n<li><a href=\"/components/navigationdrawer\">MNavigationDrawer</a>：可以放置在应用的左边或右边，并且可以配置在 <code>MAppBar</code> 的旁边或下面。</li>\n<li><a href=\"/components/systembars\">MSystemBar</a>：总是放在应用顶部，优先级高于 <code>MAppBar</code>。</li>\n</ul>\n",
-      "应用服务": "\n<p>应用服务用于配置你的布局。 它与 <code>MMain</code> 组件通信，以便它能够正确地调整应用内容。 它有一些可以访问的属性：</p>\n<pre><code class=\"language-c#\">double Bar { get; }\ndouble Bottom { get; }\ndouble Footer { get; }\ndouble InsetFooter { get; }\ndouble Left { get; }\ndouble Right { get; }\ndouble Top { get; }\n</code></pre>\n<p>当你使用 <strong>App</strong> 属性添加和删除组件时，这些值会自动更新。 它们是不可编辑的，并且以只读状态存在。 你可以通过引用 <strong>Application</strong> 对象的应用属性来访问这些值。</p>\n<pre><code class=\"language-c#\"> [Inject] public GlobalConfig GlobalConfig { get; set; }\n \n Console.WriteLine(GlobalConfig.Application.Footer); // 60\n</code></pre>\n"
+      "应用组件": "\n<p>以下是所有支持 <strong>App</strong> 属性的组件列表，这些组件可以在你的应用中用作布局元素。 这些组件可以混合和匹配，并且每个特定组件在任何时候都只能存在一个。 不过，你可以把它们换掉，布局也能适应。\n有关如何构建各种布局的一些示例，请查看预制布局页面。</p>\n<p>每一个应用组件都有一个指定的位置和优先级，影响布局系统中的位置。</p>\n<ul>\n<li><a href=\"/components/app-bars\">MAppBar</a>：总是放在应用顶部，优先级低于 <code>MSystemBar</code>。</li>\n<li>MBottomNavigation：总是放在应用底部，优先级高于 <code>MFooter</code>。</li>\n<li><a href=\"/components/footer\">MFooter</a>：总是放在应用底部，优先级低于 <code>MBottomNavigation</code>。</li>\n<li><a href=\"/components/navigation-drawers\">MNavigationDrawer</a>：可以放置在应用的左边或右边，并且可以配置在 <code>MAppBar</code> 的旁边或下面。</li>\n<li><a href=\"/components/system-bars\">MSystemBar</a>：总是放在应用顶部，优先级高于 <code>MAppBar</code>。</li>\n</ul>\n",
+      "应用服务": "\n<p>应用服务用于配置你的布局。 它与 <code>MMain</code> 组件通信，以便它能够正确地调整应用内容。 它有一些可以访问的属性：</p>\n<pre><code class=\"language-c#\">double Bar { get; }\ndouble Bottom { get; }\ndouble Footer { get; }\ndouble InsetFooter { get; }\ndouble Left { get; }\ndouble Right { get; }\ndouble Top { get; }\n</code></pre>\n<p>当你使用 <strong>App</strong> 属性添加和删除组件时，这些值会自动更新。 它们是不可编辑的，并且以只读状态存在。 你可以通过引用 <strong>Application</strong> 对象的应用属性来访问这些值。</p>\n<pre><code class=\"language-c#\"> [Inject] public GlobalConfig GlobalConfig { get; set; }\n \n Console.WriteLine(GlobalConfig.Application.Footer); // 60\n</code></pre>\n<!--alert:error-->\n<p>为了让你的应用正常工作，你必须将其包裹在 <code>MApp</code> 组件中。 该组件是确保正确的跨浏览器兼容性所必需的。</p>\n<!--/alert:error-->\n"
     },
     "LastWriteTime": "0001-01-01T00:00:00",
     "DemoList": [],
@@ -179,7 +179,7 @@
     "Cols": 1,
     "Related": [
       "/features/theme",
-      "/components/appbars",
+      "/components/app-bars",
       "/components/navigation-drawers"
     ],
     "Subtitle": "应用程序",
@@ -192,7 +192,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.5458864+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0736279+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -224,7 +224,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.5488848+08:00",
+    "LastWriteTime": "2021-11-30T11:20:37.745403+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -323,7 +323,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-26T09:49:26.9691604+08:00",
+    "LastWriteTime": "2021-11-26T09:53:53.2705332+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -399,7 +399,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.5628865+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0756284+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -488,7 +488,7 @@
       "功能组件": "\n<ul>\n<li><code>MAppBarNavIcon</code>：专门为与 <a href=\"/components/toolbars\">MToolbar</a> 和 <code>MAppBar</code> 一起使用而创建的样式化图标按钮组件。 在工具栏的左侧显示为汉堡菜单，它通常用于控制导航抽屉的状态。 默认插槽可以用于自定义此组件的图标和功能。</li>\n<li><code>MAppBarTitle</code>：修改过的 <a href=\"/components/toolbars\">MToolbarTitle</a> 组件 ，用于配合 <strong>ShrinkOnScroll</strong> 属性使用。 在小屏幕上，<strong>MToolbarTitle</strong>\n将被截断，但这个组件在展开时使用了绝对定位使其内容可见。 我们不建议您在没有使用 <strong>ShrinkOnScroll</strong> 属性时使用 <code>MAppBarTitle</code> 组件。确实是因为向此组件添加了resize事件，并进行了很多额外的计算。</li>\n</ul>\n",
       "注意事项": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <strong>Icon</strong> 属性的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将按钮包装在任何容器例如<code>div</code>中，则需要对该容器应用负边距，以便正确对齐它们。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2021-11-18T09:22:16.3308287+08:00",
+    "LastWriteTime": "2021-11-26T13:07:38.017444+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -615,7 +615,7 @@
         "Order": 1,
         "Name": "toggleNavigationDrawers",
         "Title": "切换导航抽屉",
-        "Description": "<p>使用函数式组件 <code>MAppBarNavIcon</code> 可以切换其他组件的状态，例如 <code>MNavigationDrawer</code>。</p>\n",
+        "Description": "<p>使用函数式组件 <code>MAppBarNavIcon</code> 可以切换其他组件的状态，例如 <a href=\"%22/components/navigation-drawers%22\"><strong>MNavigationDrawer</strong></a>。</p>\n",
         "Code": "<MCard\r\n    Class=\"mx-auto overflow-hidden\"\r\n    Height=\"400\">\r\n    <MAppBar\r\n        Color=\"deep-purple\"\r\n        Dark>\r\n        <MAppBarNavIcon @onclick=\"() => drawer = true\"></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Title</MToolbarTitle>\r\n    </MAppBar>\r\n\r\n    <MNavigationDrawer\r\n        @bind-Value=\"drawer\"\r\n        Absolute\r\n        Temporary>\r\n        <MList\r\n            Nav\r\n            Dense>\r\n            <MListItemGroup\r\n                @bind-Value=\"group\"\r\n                ActiveClass=\"deep-purple--text text--accent-4\">\r\n                <MListItem>\r\n                    <MListItemIcon>\r\n                        <MIcon>mdi-home</MIcon>\r\n                    </MListItemIcon>\r\n                    <MListItemTitle>Home</MListItemTitle>\r\n                </MListItem>\r\n\r\n                <MListItem>\r\n                    <MListItemIcon>\r\n                        <MIcon>mdi-account</MIcon>\r\n                    </MListItemIcon>\r\n                    <MListItemTitle>Account</MListItemTitle>\r\n                </MListItem>\r\n            </MListItemGroup>\r\n        </MList>\r\n    </MNavigationDrawer>\r\n</MCard>\r\n\r\n@code {\r\n    bool drawer;\r\n    StringNumber group;\r\n}",
         "Type": "Demos.Components.Bars.children.AppBar.misc.ToggleNavigationDrawers",
         "Style": "",
@@ -642,7 +642,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.5728856+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0776289+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -713,13 +713,13 @@
     "Type": "系统栏"
   },
   {
-    "Desc": "<p><code>MToolbar</code> 组件对于任何 GUI 都是至关重要的，因为它通常是站点导航的主要来源。 工具栏组件与 <code>MNavigationDrawer</code> 和 <code>MCard</code> 配合使用非常有效。</p>\n",
+    "Desc": "<p><code>MToolbar</code> 组件对于任何 GUI 都是至关重要的，因为它通常是站点导航的主要来源。 工具栏组件与 <a href=\"/components/navigation-drawers\"><strong>MNavigationDrawer</strong></a> 和 <a href=\"/components/cards\"><strong>MCard</strong></a> 配合使用非常有效。</p>\n",
     "Order": 0,
     "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n</ul>\n",
-      "Caveats": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <code>Icon</code> prop的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。 如果您选择将您的按钮包装在任何容器中，例如`div’， 您需要对容器应用负边距，以便正确对齐。</p>\n"
+      "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
+      "注意": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <code>Icon</code> prop的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将您的按钮包装在任何容器中，例如<code>div</code>， 您需要对容器应用负边距，以便正确对齐。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:53.5588656+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0816266+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -736,7 +736,7 @@
         "Order": 1,
         "Name": "background",
         "Title": "背景",
-        "Description": "<p>工具栏可以使用 src 属性显示背景而不是纯色。 这可以通过使用 img 插槽并提供您自己的 <code>MImage</code> 组件来修改。 可以使用 <a href=\"/components/appbars\">MAppBar</a> 使背景淡入淡出</p>\n",
+        "Description": "<p>工具栏可以使用 src 属性显示背景而不是纯色。 这可以通过使用 img 插槽并提供您自己的 <a href=\"/components/images\"><strong>MImage</strong></a> 组件来修改。\n可以使用 <a href=\"/components/app-bars\">MAppBar</a> 使背景淡入淡出</p>\n",
         "Code": "<div>\r\n    <MToolbar Dark\r\n               Prominent\r\n               Src=\"https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg\">\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>MASA Blazor</MToolbarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-export</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n</div>",
         "Type": "Demos.Components.Bars.children.Toolbar.props.Background",
         "Style": "",
@@ -779,7 +779,7 @@
       {
         "Order": 1,
         "Name": "extensitionHeight",
-        "Title": "拓展高度",
+        "Title": "扩展高度",
         "Description": "<p>扩展的高度可以定制。</p>\n",
         "Code": "<MCard\r\n    Color=\"grey lighten-4\"\r\n    Flat\r\n    Height=\"200\"\r\n    Tile\r\n  >\r\n    <MToolbar\r\n      Extended\r\n      ExtensionHeight=\"100\"\r\n    >\r\n      <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n      <MToolbarTitle>Title</MToolbarTitle>\r\n\r\n      <MSpacer></MSpacer>\r\n\r\n      <MButton Icon>\r\n        <MIcon>mdi-magnify</MIcon>\r\n      </MButton>\r\n\r\n      <MButton Icon>\r\n        <MIcon>mdi-heart</MIcon>\r\n      </MButton>\r\n\r\n      <MButton Icon>\r\n        <MIcon>mdi-dots-vertical</MIcon>\r\n      </MButton>\r\n    </MToolbar>\r\n  </MCard>",
         "Type": "Demos.Components.Bars.children.Toolbar.props.ExtensitionHeight",
@@ -813,7 +813,7 @@
         "Order": 1,
         "Name": "prominentToolbars",
         "Title": "突出的工具栏",
-        "Description": "<p>突出的工具栏将 <code>MToolbar</code> 的高度增加到 128px ，并将 <code>MToolbarTitle</code> 放置到容器底部。 在 <code>MApp</code> 中扩展了这个功能，能够将 prominent 的工具栏缩小到 紧凑 工具栏或 短 工具栏。</p>\n",
+        "Description": "<p>突出的工具栏将 <code>MToolbar</code> 的高度增加到 128px ，并将 <code>MToolbarTitle</code> 放置到容器底部。 在 <a href=\"/components/application\"><strong>MApp</strong></a> 中扩展了这个功能，能够将\nprominent 的工具栏缩小到 <strong>紧凑</strong> 工具栏或 <strong>短</strong> 工具栏。</p>\n",
         "Code": "<MCard\r\n    Color=\"grey lighten-4\"\r\n    Flat\r\n    Height=\"200\"\r\n    Tile\r\n  >\r\n    <MToolbar\r\n      Prominent\r\n      Extended\r\n    >\r\n      <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n      <MToolbarTitle>Title</MToolbarTitle>\r\n\r\n      <MSpacer></MSpacer>\r\n\r\n      <MButton Icon>\r\n        <MIcon>mdi-magnify</MIcon>\r\n      </MButton>\r\n\r\n      <MButton Icon>\r\n        <MIcon>mdi-heart</MIcon>\r\n      </MButton>\r\n\r\n      <MButton Icon>\r\n        <MIcon>mdi-dots-vertical</MIcon>\r\n      </MButton>\r\n    </MToolbar>\r\n  </MCard>",
         "Type": "Demos.Components.Bars.children.Toolbar.props.ProminentToolbars",
         "Style": "",
@@ -867,12 +867,12 @@
     "Type": "工具栏"
   },
   {
-    "Desc": "<p>Border component can wrap any content with one side border.</p>\n",
+    "Desc": "<p>边框组件可以给任何内容添加一个额外的边框。</p>\n",
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-03T11:13:26.7334586+08:00",
+    "LastWriteTime": "2021-12-02T13:33:53.2800713+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -914,17 +914,17 @@
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
-      "Caveats": "\n<!--alert:info-->\n<p>默认情况下，<code>MBreadcrumbs</code> 将禁用路由联动。可以通过 <strong>Linkage</strong> 属性开启路由联动。</p>\n"
+      "注意": "\n<!--alert:info-->\n<p>默认情况下，<code>MBreadcrumbs</code> 将禁用路由联动。可以通过 <strong>Linkage</strong> 属性开启路由联动。</p>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:53.4608659+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0836279+08:00",
     "DemoList": [
       {
         "Order": 0,
-        "Name": "basic",
+        "Name": "index",
         "Title": "使用",
         "Description": "<p>默认情况下，面包屑导航使用文本分隔符。 可以是任何字符串。</p>\n",
-        "Code": "<div class=\"d-flex align-center\">\r\n    Items:\r\n    <MBreadcrumbs Items=\"items\"></MBreadcrumbs>\r\n</div>\r\n\r\n<div class=\"d-flex align-center\">\r\n    Markup:\r\n    <MBreadcrumbs>\r\n        <MBreadcrumbsItem Href=\"#breadcrumbs_dashboard\">Dashboard</MBreadcrumbsItem>\r\n        <MBreadcrumbsItem Href=\"#breadcrumbs_link_1\" Text=\"Link 1\"></MBreadcrumbsItem>\r\n        <MBreadcrumbsItem Href=\"#breadcrumbs_link_2\" Disabled>Link 2</MBreadcrumbsItem>\r\n    </MBreadcrumbs>\r\n</div>\r\n\r\n    @code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n        {\r\n            new BreadcrumbItem() { Text = \"Dashboard\", Disabled = false, Href = \"breadcrumbs_dashboard\" },\r\n            new BreadcrumbItem() { Text = \"Link 1\", Disabled = false, Href = \"breadcrumbs_link_1\" },\r\n            new BreadcrumbItem() { Text = \"Link 2\", Disabled = true, Href = \"breadcrumbs_link_2\" }\r\n        };\r\n    }\r\n",
-        "Type": "Demos.Components.Breadcrumbs.usage.Basic",
+        "Code": "<div class=\"d-flex align-center\">\r\n    Items:\r\n    <MBreadcrumbs Items=\"items\"></MBreadcrumbs>\r\n</div>\r\n\r\n<div class=\"d-flex align-center\">\r\n    Markup:\r\n    <MBreadcrumbs>\r\n        <MBreadcrumbsItem Href=\"/components/breadcrumbs#breadcrumbs_dashboard\">Dashboard</MBreadcrumbsItem>\r\n        <MBreadcrumbsItem Href=\"/components/breadcrumbs#breadcrumbs_link_1\" Text=\"Link 1\"></MBreadcrumbsItem>\r\n        <MBreadcrumbsItem Href=\"/components/breadcrumbs#breadcrumbs_link_2\" Disabled>Link 2</MBreadcrumbsItem>\r\n    </MBreadcrumbs>\r\n</div>\r\n\r\n    @code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n        {\r\n            new BreadcrumbItem() { Text = \"Dashboard\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_dashboard\" },\r\n            new BreadcrumbItem() { Text = \"Link 1\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_link_1\" },\r\n            new BreadcrumbItem() { Text = \"Link 2\", Disabled = true, Href = \"/components/breadcrumbs#breadcrumbs_link_2\" }\r\n        };\r\n    }\r\n",
+        "Type": "Demos.Components.Breadcrumbs.usage.Index",
         "Style": "",
         "Debug": false,
         "Group": 4
@@ -934,7 +934,7 @@
         "Name": "divider",
         "Title": "分隔线",
         "Description": "<p>可以使用 divider 属性来设置面包屑分隔符。</p>\n",
-        "Code": "<div>\r\n    <MBreadcrumbs Items=\"items\" Divider=\".\"></MBreadcrumbs>\r\n\r\n    <MBreadcrumbs Items=\"items\" Divider=\"-\"></MBreadcrumbs>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
+        "Code": "<div>\r\n    <MBreadcrumbs Items=\"items\" Divider=\".\"></MBreadcrumbs>\r\n\r\n    <MBreadcrumbs Items=\"items\" Divider=\"-\"></MBreadcrumbs>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"/components/breadcrumbs#breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Breadcrumbs.props.Divider",
         "Style": "",
         "Debug": false,
@@ -945,7 +945,7 @@
         "Name": "large",
         "Title": "大号",
         "Description": "<p>大的面包屑具有较大的字体。</p>\n",
-        "Code": "<div>\r\n    <MBreadcrumbs Items=\"items\"></MBreadcrumbs>\r\n\r\n    <MBreadcrumbs Items=\"items\" Large></MBreadcrumbs>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
+        "Code": "<div>\r\n    <MBreadcrumbs Items=\"items\"></MBreadcrumbs>\r\n\r\n    <MBreadcrumbs Items=\"items\" Large></MBreadcrumbs>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"/components/breadcrumbs#breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Breadcrumbs.props.Large",
         "Style": "",
         "Debug": false,
@@ -967,7 +967,7 @@
         "Name": "icon-dividers",
         "Title": "图标分隔符",
         "Description": "<p>对于图标变量，面包屑可以使用Material设计中的任何图标。</p>\n",
-        "Code": "<div>\r\n    <MBreadcrumbs Items=\"items\">\r\n        <DividerContent>\r\n            <MIcon>mdi-forward</MIcon>\r\n        </DividerContent>\r\n    </MBreadcrumbs>\r\n\r\n    <MBreadcrumbs Items=\"items\">\r\n        <DividerContent>\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </DividerContent>\r\n    </MBreadcrumbs>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
+        "Code": "<div>\r\n    <MBreadcrumbs Items=\"items\">\r\n        <DividerContent>\r\n            <MIcon>mdi-forward</MIcon>\r\n        </DividerContent>\r\n    </MBreadcrumbs>\r\n\r\n    <MBreadcrumbs Items=\"items\">\r\n        <DividerContent>\r\n            <MIcon>mdi-chevron-right</MIcon>\r\n        </DividerContent>\r\n    </MBreadcrumbs>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"/components/breadcrumbs#breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Breadcrumbs.contents.IconDividers",
         "Style": "",
         "Debug": false,
@@ -978,7 +978,7 @@
         "Name": "item",
         "Title": "项目",
         "Description": "<p>您可以使用 <code>item</code> 插槽自定义每个面包屑。</p>\n",
-        "Code": "<MBreadcrumbs Items=\"items\">\r\n    <ItemContent>\r\n        <MBreadcrumbsItem Href=\"@context.Href\" Disabled=\"context.Disabled\">\r\n            @context.Text.ToUpper()\r\n        </MBreadcrumbsItem>\r\n    </ItemContent>\r\n</MBreadcrumbs>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
+        "Code": "<MBreadcrumbs Items=\"items\">\r\n    <ItemContent>\r\n        <MBreadcrumbsItem Href=\"@context.Href\" Disabled=\"context.Disabled\">\r\n            @context.Text.ToUpper()\r\n        </MBreadcrumbsItem>\r\n    </ItemContent>\r\n</MBreadcrumbs>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_dashboard\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"/components/breadcrumbs#breadcrumbs_link_1\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"/components/breadcrumbs#breadcrumbs_link_2\"}\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Breadcrumbs.contents.Item",
         "Style": "",
         "Debug": false,
@@ -1005,7 +1005,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p>当使用 <strong>Dark</strong> 属性时，<code>MButton</code> 是唯一一种拥有不同行为的组件。 通常来说，组件使用 <strong>Dark</strong> 属性来表示他们将有深色背景，文本也需要是白色的。 虽然这对\n<code>MButton</code> 也是起作用的，但由于禁用状态与白色背景容易造成混淆，建议仅在按钮<strong>为</strong>彩色背景时使用此属性。 If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2021-11-18T09:22:16.3088349+08:00",
+    "LastWriteTime": "2021-11-17T17:29:52.1597474+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1156,7 +1156,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg",
     "Cols": 1,
     "Related": [
-      "/components/buttongroups",
+      "/components/button-groups",
       "/components/icons",
       "/components/floating-action-buttons"
     ],
@@ -1169,9 +1169,9 @@
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
-      "功能组件": "\n<ul>\n<li><code>MCardActions</code>：用于为卡片放置 动作 的容器，如 <a href=\"/components/buttons\">MButton</a> 或 <a href=\"/components/menu\">MMenu</a>。 同时在按钮上使用 个特殊边距\n，以便它们与其他卡片内容区域的匹配。</li>\n<li><code>MCardSubtitle</code>：为卡片字幕提供默认的 <strong>字体大小</strong> 和 <strong>填充</strong>。 字体大小可以以 <a href=\"/styles/text-and-typography\">排版类</a> 覆盖。</li>\n<li><code>MCardText</code>：主要用于卡片中的 <strong>文本内容</strong>。 对文本应用填充，将其字体大小减少为 .875rem。</li>\n<li><code>MCardTitle</code>：为卡片字幕提供默认的 字体大小 和 填充。 字体大小可以以 <a href=\"/styles/text-and-typography\">排版类</a> 覆盖。</li>\n</ul>\n"
+      "功能组件": "\n<ul>\n<li><code>MCardActions</code>：用于为卡片放置 动作 的容器，如 <a href=\"/components/buttons\">MButton</a> 或 <a href=\"/components/menus\">MMenu</a>。 同时在按钮上使用 个特殊边距\n，以便它们与其他卡片内容区域的匹配。</li>\n<li><code>MCardSubtitle</code>：为卡片字幕提供默认的 <strong>字体大小</strong> 和 <strong>填充</strong>。 字体大小可以以 <a href=\"/styles/text-and-typography\">排版类</a> 覆盖。</li>\n<li><code>MCardText</code>：主要用于卡片中的 <strong>文本内容</strong>。 对文本应用填充，将其字体大小减少为 .875rem。</li>\n<li><code>MCardTitle</code>：为卡片字幕提供默认的 字体大小 和 填充。 字体大小可以以 <a href=\"/styles/text-and-typography\">排版类</a> 覆盖。</li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.6188862+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0886273+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1188,7 +1188,7 @@
         "Order": 0,
         "Name": "loading",
         "Title": "加载",
-        "Description": "<p>处理用户操作时，卡片可以设置为加载状态。 这会禁用进一步的操作，并通过 <a href=\"/components/progresslinear\">MProgressLinear</a> 提供视觉反馈</p>\n",
+        "Description": "<p>处理用户操作时，卡片可以设置为加载状态。 这会禁用进一步的操作，并通过 <a href=\"/components/progress-linear\">MProgressLinear</a> 提供视觉反馈</p>\n",
         "Code": "<MCard Class=\"mx-auto my-12\" MaxWidth=\"374\" Loading=@_loading>\r\n    <ProgressContent>\r\n        <MProgressLinear Color=\"deep-purple\" Height=\"10\" Indeterminate />\r\n    </ProgressContent>\r\n\r\n    <ChildContent>\r\n\r\n        <MImage Alt=\"example\" Height=\"250\" Src=\"https://cdn.vuetifyjs.com/images/cards/cooking.png\" />\r\n\r\n        <MCardTitle>Cafe Badilico</MCardTitle>\r\n\r\n        <MCardText>\r\n            <MRow Align=@AlignTypes.Center Class=\"mx-0\">\r\n                <MRating Value=4.5 Color=\"amber\" Dense HalfIncrements Readonly Size=14></MRating>\r\n                <div class=\"grey--text ms-4\">4.5 (413)</div>\r\n            </MRow>\r\n            <div class=\"my-4 text-subtitle-1\">$ • Italian, Cafe </div>\r\n            <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>\r\n        </MCardText>\r\n\r\n        <MDivider Class=\"mx-4\"></MDivider>\r\n\r\n        <MCardTitle>Tonight's availability</MCardTitle>\r\n\r\n        <MCardText>\r\n            <MChipGroup Value=@_selection ActiveClass=\"deep-purple accent-4 white--text\" Column>\r\n                <MChip OnClick=\"()=>_selection=0\">5:30PM</MChip>\r\n                <MChip OnClick=\"()=>_selection=1\">7:30PM</MChip>\r\n                <MChip OnClick=\"()=>_selection=2\">8:00PM</MChip>\r\n                <MChip OnClick=\"()=>_selection=3\">9:00PM</MChip>\r\n            </MChipGroup>\r\n        </MCardText>\r\n\r\n        <MCardActions>\r\n            <MButton Color=\"deep-purple lighten-2\" Text @onclick=\"Reserve\">Reserve</MButton>\r\n        </MCardActions>\r\n\r\n    </ChildContent>\r\n</MCard>\r\n\r\n@code {\r\n    StringBoolean _loading;\r\n\r\n    int _selection = 1;\r\n\r\n    async Task Reserve()\r\n    {\r\n        _loading = true;\r\n        await Task.Delay(2000);\r\n        _loading = false;\r\n    }\r\n}",
         "Type": "Demos.Components.Card.props.Loading",
         "Style": "",
@@ -1298,7 +1298,7 @@
         "Order": 10,
         "Name": "weatherCard",
         "Title": "天气卡片",
-        "Description": "<p>使用 <a href=\"/components/list\">MListItem</a> 和 <a href=\"/components/sliders\">MSlider</a>，我们能够创建一个独特的天气卡。\n列表组件确保我们具有一致的间距和功能，而滑块组件允许我们为用户提供有用的选择界面。</p>\n",
+        "Description": "<p>使用 <a href=\"/components/lists\">MListItem</a> 和 <a href=\"/components/sliders\">MSlider</a>，我们能够创建一个独特的天气卡。\n列表组件确保我们具有一致的间距和功能，而滑块组件允许我们为用户提供有用的选择界面。</p>\n",
         "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"400\">\r\n\r\n    <MListItem TwoLine>\r\n        <MListItemContent>\r\n            <MListItemTitle class=\"text-h5\">\r\n                San Francisco\r\n            </MListItemTitle>\r\n            <MListItemSubtitle>Mon, 12:30 PM, Mostly sunny</MListItemSubtitle>\r\n        </MListItemContent>\r\n    </MListItem>\r\n\r\n    <MCardText>\r\n        <MRow Align=AlignTypes.Center>\r\n            <MCol Class=\"text-h2\" Cols=\"6\">\r\n                23&deg;C\r\n            </MCol>\r\n            <MCol Cols=\"6\">\r\n                <MImage Src=\"https://cdn.vuetifyjs.com/images/cards/sun.png\" alt=\"Sunny image\" Width=92 />\r\n            </MCol>\r\n        </MRow>\r\n    </MCardText>\r\n\r\n    <MListItem>\r\n        <MListItemIcon>\r\n            <MIcon>mdi-send</MIcon>\r\n        </MListItemIcon>\r\n        <MListItemSubtitle>23 km/h</MListItemSubtitle>\r\n    </MListItem>\r\n\r\n    <MListItem>\r\n        <MListItemIcon>\r\n            <MIcon>mdi-cloud-download</MIcon>\r\n        </MListItemIcon>\r\n        <MListItemSubtitle>48%</MListItemSubtitle>\r\n    </MListItem>\r\n\r\n    <MSlider Value=_time Max=6 TickLabels=_labels Class=\"mx-4\" Ticks=true>\r\n    </MSlider>\r\n    <MList Class=\"transparent\">\r\n        @foreach (var forecast in _forecasts)\r\n        {\r\n            <MListItem key=\"@forecast.Day\">\r\n\r\n                <MListItemTitle>@forecast.Day</MListItemTitle>\r\n\r\n                <MListItemIcon>\r\n                    <MIcon>\r\n                        @forecast.Icon\r\n                    </MIcon>\r\n                </MListItemIcon>\r\n\r\n                <MListItemSubtitle Class=\"text-right\">\r\n                    @forecast.Temp\r\n                </MListItemSubtitle>\r\n\r\n            </MListItem>\r\n        }\r\n    </MList>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MCardActions>\r\n        <MButton Text>\r\n            Full Report\r\n        </MButton>\r\n    </MCardActions>\r\n\r\n</MCard>\r\n\r\n@code {\r\n    List<string> _labels = new List<string> { \"SU\", \"MO\", \"TU\", \"WED\", \"TH\", \"FR\", \"SR\" };\r\n\r\n    double _time = 0;\r\n\r\n    Forecast[] _forecasts = new[]\r\n        {\r\n        new Forecast\r\n        {\r\n            Day=\"Tuesday\",\r\n            Icon=\"mdi-white-balance-sunny\",\r\n            Temp=\"24\\xB0/12\\xB0\"\r\n        },\r\n         new Forecast\r\n        {\r\n            Day=\"Wednesday\",\r\n            Icon=\"mdi-white-balance-sunny\",\r\n            Temp=\"22\\xB0/14\\xB0\"\r\n        },\r\n         new Forecast\r\n        {\r\n            Day=\"Thursday\",\r\n            Icon=\"mdi-cloud\",\r\n            Temp=\"25\\xB0/15\\xB0\"\r\n        },\r\n    };\r\n\r\n    class Forecast\r\n    {\r\n        public string Day { get; set; }\r\n        public string Icon { get; set; }\r\n        public string Temp { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.Card.misc.WeatherCard",
         "Style": "",
@@ -1320,12 +1320,12 @@
     "Type": "卡片"
   },
   {
-    "Desc": "<p><code>MChip</code> 组件用于传送小信息。 使用 <strong>Close</strong> 属性，纸片将变为交互式，允许用户进行交互。 此组件由 <a href=\"/components/chipgroup\">MChipGroup</a> 用于高级选择选项。</p>\n",
+    "Desc": "<p><code>MChip</code> 组件用于传送小信息。 使用 <strong>Close</strong> 属性，纸片将变为交互式，允许用户进行交互。 此组件由 <a href=\"/components/chip-groups\">MChipGroup</a> 用于高级选择选项。</p>\n",
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.6218858+08:00",
+    "LastWriteTime": "2021-11-16T17:18:10.0838705+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1512,7 +1512,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:04.4912214+08:00",
+    "LastWriteTime": "2021-10-29T14:11:50.7074219+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1643,7 +1643,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:53.4428661+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0916273+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1720,7 +1720,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-30T20:50:56.0082529+08:00",
+    "LastWriteTime": "2021-12-01T19:22:48.728436+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1759,7 +1759,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:04.4602205+08:00",
+    "LastWriteTime": "2021-11-02T09:37:52.1130132+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1854,7 +1854,7 @@
         "Name": "advanced",
         "Title": "高级版",
         "Description": "<p>扩展面板为构建真正高级的实现提供了丰富的平台。 在这里，我们可以利用 <code>MExpansionPanelHeader</code> 组件中的插槽，通过淡入淡出内容来响应打开或关闭的状态。</p>\n",
-        "Code": "<MExpansionPanels>\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Trip name\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        @*TODO: Transition need to update, support LeaveAbsolute*@\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>\r\n                                Enter a name for the trip\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <span>\r\n                                @trip.name\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MTextField @bind-Value=\"@trip.name\"\r\n                        placeholder=\"Caribbean Cruise\">\r\n            </MTextField>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Location\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>\r\n                                Select trip destination\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <span>\r\n                                @trip.location\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MRow NoGutters>\r\n                <MSpacer></MSpacer>\r\n                <MCol Cols=\"5\">\r\n                    <MSelect @bind-Value=\"trip.location\"\r\n                             Items=\"locations\"\r\n                             ItemValue=\"item => item\"\r\n                             ItemText=\"item => item\"\r\n                             Chips\r\n                             Flat\r\n                             Solo>\r\n                    </MSelect>\r\n                </MCol>\r\n\r\n                <MDivider Vertical\r\n                          Class=\"mx-4\">\r\n                </MDivider>\r\n\r\n                <MCol Cols=\"3\">\r\n                    Select your destination of choice\r\n                    <br>\r\n                    <a href=\"/components/expansionpanels#\">Learn more</a>\r\n                </MCol>\r\n            </MRow>\r\n\r\n            <MCardActions>\r\n                <MSpacer></MSpacer>\r\n                <MButton Text\r\n                         Color=\"secondary\">\r\n                    Cancel\r\n                </MButton>\r\n                <MButton Text\r\n                         Color=\"primary\">\r\n                    Save\r\n                </MButton>\r\n            </MCardActions>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Start and end dates\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>When do you want to travel?</span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <MRow NoGutters\r\n                                  Style=\"width: 100%\">\r\n                                <MCol Cols=\"6\">\r\n                                    Start date: @(trip.start ?? \"Not set\")\r\n                                </MCol>\r\n                                <MCol Cols=\"6\">\r\n                                    End date: @(trip.end ?? \"Not set\")\r\n                                </MCol>\r\n                            </MRow>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MRow Justify=\"JustifyTypes.SpaceAround\"\r\n                  NoGutters>\r\n                <MCol Cols=\"3\">\r\n                    <MMenu @bind-Value=\"visible\"\r\n                           CloseOnContentClick=\"false\"\r\n                           OffsetY\r\n                           MinWidth=\"290\">\r\n                        <ActivatorContent>\r\n                            <MTextField @bind-Value=\"trip.start\"\r\n                                        Label=\"Start date\"\r\n                                        PrependIcon=\"mdi-calendar\"\r\n                                        Readonly\r\n                                        @attributes=\"@context.Attrs\">\r\n                            </MTextField>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MDatePicker @bind-Value=\"date\"\r\n                                         NoTitle\r\n                                         Scrollable>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => visible = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => { trip.start = date.ToShortDateString(); visible = false;}\">\r\n                                    OK\r\n                                </MButton>\r\n                            </MDatePicker>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n\r\n                <MCol Cols=\"3\">\r\n                    <MMenu @bind-Value=\"visible2\"\r\n                           CloseOnContentClick=\"false\"\r\n                           OffsetY\r\n                           MinWidth=\"290\">\r\n                        <ActivatorContent>\r\n                            <MTextField @bind-Value=\"trip.end\"\r\n                                        Label=\"End date\"\r\n                                        PrependIcon=\"mdi-calendar\"\r\n                                        Readonly\r\n                                        @attributes=\"@context.Attrs\">\r\n                            </MTextField>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MDatePicker @bind-Value=\"date2\"\r\n                                         NoTitle\r\n                                         Scrollable>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => visible2 = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => { trip.end = date2.ToShortDateString(); visible2 = false; }\">\r\n                                    OK\r\n                                </MButton>\r\n                            </MDatePicker>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n</MExpansionPanels>\r\n\r\n@code {\r\n\r\n    DateOnly date = DateOnly.FromDateTime(DateTime.Now);\r\n    DateOnly date2 = DateOnly.FromDateTime(DateTime.Now);\r\n\r\n    List<string> locations = new() { \"Australia\", \"Barbados\", \"Chile\", \"Denmark\", \"Ecuador\", \"France\" };\r\n\r\n    Trip trip = new();\r\n\r\n    bool visible = false;\r\n    bool visible2 = false;\r\n\r\n    class Trip\r\n    {\r\n        public string name { get; set; }\r\n        public string location { get; set; }\r\n        public string start { get; set; }\r\n        public string end { get; set; }\r\n    }\r\n\r\n}",
+        "Code": "<MExpansionPanels>\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Trip name\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        @*TODO: Transition need to update, support LeaveAbsolute*@\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>\r\n                                Enter a name for the trip\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <span>\r\n                                @trip.name\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MTextField @bind-Value=\"@trip.name\"\r\n                        placeholder=\"Caribbean Cruise\">\r\n            </MTextField>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Location\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>\r\n                                Select trip destination\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <span>\r\n                                @trip.location\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MRow NoGutters>\r\n                <MSpacer></MSpacer>\r\n                <MCol Cols=\"5\">\r\n                    <MSelect @bind-Value=\"trip.location\"\r\n                             Items=\"locations\"\r\n                             ItemValue=\"item => item\"\r\n                             ItemText=\"item => item\"\r\n                             Chips\r\n                             Flat\r\n                             Solo>\r\n                    </MSelect>\r\n                </MCol>\r\n\r\n                <MDivider Vertical\r\n                          Class=\"mx-4\">\r\n                </MDivider>\r\n\r\n                <MCol Cols=\"3\">\r\n                    Select your destination of choice\r\n                    <br>\r\n                    <a href=\"/components/expansion-panels#\">Learn more</a>\r\n                </MCol>\r\n            </MRow>\r\n\r\n            <MCardActions>\r\n                <MSpacer></MSpacer>\r\n                <MButton Text\r\n                         Color=\"secondary\">\r\n                    Cancel\r\n                </MButton>\r\n                <MButton Text\r\n                         Color=\"primary\">\r\n                    Save\r\n                </MButton>\r\n            </MCardActions>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Start and end dates\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>When do you want to travel?</span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <MRow NoGutters\r\n                                  Style=\"width: 100%\">\r\n                                <MCol Cols=\"6\">\r\n                                    Start date: @(trip.start ?? \"Not set\")\r\n                                </MCol>\r\n                                <MCol Cols=\"6\">\r\n                                    End date: @(trip.end ?? \"Not set\")\r\n                                </MCol>\r\n                            </MRow>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MRow Justify=\"JustifyTypes.SpaceAround\"\r\n                  NoGutters>\r\n                <MCol Cols=\"3\">\r\n                    <MMenu @bind-Value=\"visible\"\r\n                           CloseOnContentClick=\"false\"\r\n                           OffsetY\r\n                           MinWidth=\"290\">\r\n                        <ActivatorContent>\r\n                            <MTextField @bind-Value=\"trip.start\"\r\n                                        Label=\"Start date\"\r\n                                        PrependIcon=\"mdi-calendar\"\r\n                                        Readonly\r\n                                        @attributes=\"@context.Attrs\">\r\n                            </MTextField>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MDatePicker @bind-Value=\"date\"\r\n                                         NoTitle\r\n                                         Scrollable>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => visible = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => { trip.start = date.ToShortDateString(); visible = false;}\">\r\n                                    OK\r\n                                </MButton>\r\n                            </MDatePicker>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n\r\n                <MCol Cols=\"3\">\r\n                    <MMenu @bind-Value=\"visible2\"\r\n                           CloseOnContentClick=\"false\"\r\n                           OffsetY\r\n                           MinWidth=\"290\">\r\n                        <ActivatorContent>\r\n                            <MTextField @bind-Value=\"trip.end\"\r\n                                        Label=\"End date\"\r\n                                        PrependIcon=\"mdi-calendar\"\r\n                                        Readonly\r\n                                        @attributes=\"@context.Attrs\">\r\n                            </MTextField>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MDatePicker @bind-Value=\"date2\"\r\n                                         NoTitle\r\n                                         Scrollable>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => visible2 = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => { trip.end = date2.ToShortDateString(); visible2 = false; }\">\r\n                                    OK\r\n                                </MButton>\r\n                            </MDatePicker>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n</MExpansionPanels>\r\n\r\n@code {\r\n\r\n    DateOnly date = DateOnly.FromDateTime(DateTime.Now);\r\n    DateOnly date2 = DateOnly.FromDateTime(DateTime.Now);\r\n\r\n    List<string> locations = new() { \"Australia\", \"Barbados\", \"Chile\", \"Denmark\", \"Ecuador\", \"France\" };\r\n\r\n    Trip trip = new();\r\n\r\n    bool visible = false;\r\n    bool visible2 = false;\r\n\r\n    class Trip\r\n    {\r\n        public string name { get; set; }\r\n        public string location { get; set; }\r\n        public string start { get; set; }\r\n        public string end { get; set; }\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.ExpansionPanels.misc.Advanced",
         "Style": "",
         "Debug": false,
@@ -1891,7 +1891,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1310932+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6580013+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1968,7 +1968,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2021-11-30T11:17:47.8166256+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6590057+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2078,7 +2078,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-24T14:42:47.282503+08:00",
+    "LastWriteTime": "2021-11-24T18:45:49.2469595+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2143,7 +2143,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1450934+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.8350159+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2194,7 +2194,7 @@
         "Name": "labelContent",
         "Title": "Label content",
         "Description": "<p><code>MCheckbox</code> 文本可以在<strong>LabelContent</strong>中定义-这将允许使用HTML内容。</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCheckbox @bind-Value=\"checkbox\">\r\n        <LabelContent>\r\n            <div>\r\n                I agree that\r\n                <MTooltip Bottom>\r\n                    <ActivatorContent>\r\n                        <a target=\"_blank\" href=\"https://vuetifyjs.com\" @attributes=\"@context.Attrs\">Vuetify</a>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        Opens in new window\r\n                    </ChildContent>\r\n                </MTooltip>\r\n                is awesome\r\n            </div>\r\n        </LabelContent>\r\n    </MCheckbox>\r\n</MContainer>\r\n\r\n@code {\r\n    bool checkbox = false;\r\n}",
+        "Code": "<MContainer Fluid>\r\n    <MCheckbox @bind-Value=\"checkbox\">\r\n        <LabelContent>\r\n            <div>\r\n                I agree that\r\n                <MTooltip Bottom>\r\n                    <ActivatorContent>\r\n                        <a target=\"_blank\" href=\"https://vuetifyjs.com\" @attributes=\"@context.Attrs\">MASA.Blazor</a>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        Opens in new window\r\n                    </ChildContent>\r\n                </MTooltip>\r\n                is awesome\r\n            </div>\r\n        </LabelContent>\r\n    </MCheckbox>\r\n</MContainer>\r\n\r\n@code {\r\n    bool checkbox = false;\r\n}",
         "Type": "Demos.Components.FormInputs.children.Checkbox.contents.LabelContent",
         "Style": "",
         "Debug": false,
@@ -2230,7 +2230,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1580928+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.8319996+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2373,7 +2373,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-29T13:01:07.4171321+08:00",
+    "LastWriteTime": "2021-11-30T11:20:37.8234266+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2439,7 +2439,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadio</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1630935+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.7990006+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2516,7 +2516,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.1680952+08:00",
+    "LastWriteTime": "2021-11-12T14:06:48.9354207+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2605,7 +2605,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2021-11-05T15:50:00.1132746+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2400602+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2747,7 +2747,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.192094+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.7730007+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2934,7 +2934,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-23T16:08:41.2566763+08:00",
+    "LastWriteTime": "2021-11-23T18:27:44.4298634+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3033,7 +3033,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.2090943+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.7110144+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3165,7 +3165,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:30:36.233094+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6990026+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3442,7 +3442,7 @@
       "功能组件": "\n<ul>\n<li><code>MContainer</code>：<code>MContainer</code> 提供了将你的网站内容居中和水平填充的功能。 你还可以使用 <strong>Fluid</strong> 属性将容器在所有视口和设备尺寸上完全扩展。</li>\n<li><code>MCol</code>：<code>MCol</code> 包裹内容，它必须是 <code>MRow</code> 的直接子集。</li>\n<li><code>MRow</code>：<code>MRow</code> 是 <code>MCol</code> 的容器组件。 它使用 <strong>Flex</strong> 属性来控制其内栏的布局和流。 它使用的是 <strong>24px</strong> 的标准间隔。 这可以用 <strong>Dense</strong> 属性来减小，或者用 <strong>NoGutters</strong>\n来完全去除。</li>\n<li><code>MSpacer</code>：<code>MSpacer</code> 是一个基本而又通用的间隔组件，用于分配父子组件之间的剩余宽度。 当一个 <code>MSpacer</code> 放置在子组件之前或之后时，组件将推到其容器的左右两侧。 当多个组件之间使用多个 <code>MSpacer</code> 时，剩余的宽度将均匀地分布在每个 spacer 之间。</li>\n</ul>\n",
       "Helper Classes": "\n<p><strong>FillHeight</strong> applies <code>height: 100%</code> to an element. When applied to <code>MContainer</code> it will also <code>align-items: center</code>.</p>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:52.0838728+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8305896+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3673,7 +3673,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.6938761+08:00",
+    "LastWriteTime": "2021-11-12T13:39:37.8809032+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3761,7 +3761,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:00.2032724+08:00",
+    "LastWriteTime": "2021-11-03T16:49:05.8906094+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3849,7 +3849,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:00.2182728+08:00",
+    "LastWriteTime": "2021-11-04T13:34:00.0771991+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3937,7 +3937,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.6278755+08:00",
+    "LastWriteTime": "2021-11-12T13:39:38.0698762+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4019,12 +4019,12 @@
     "Type": "列表项目组"
   },
   {
-    "Desc": "<p><code>MSlideGroup</code> 组件用于显示伪分页信息。它以 <a href=\"/components/itemgroup\"><strong>MItemGroup</strong></a> 为核心，为 <a href=\"/components/tabs\"><strong>MTabs</strong></a>\n和 <a href=\"/components/chipgroup\"><strong>MChipGroup</strong></a> 等组件提供基础。</p>\n",
+    "Desc": "<p><code>MSlideGroup</code> 组件用于显示伪分页信息。它以 <a href=\"/components/item-groups\"><strong>MItemGroup</strong></a> 为核心，为 <a href=\"/components/tabs\"><strong>MTabs</strong></a>\n和 <a href=\"/components/chip-groups\"><strong>MChipGroup</strong></a> 等组件提供基础。</p>\n",
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.6198754+08:00",
+    "LastWriteTime": "2021-11-12T13:39:38.0618742+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4041,7 +4041,7 @@
         "Order": 1,
         "Name": "activeClass",
         "Title": "激活类",
-        "Description": "<p>The <strong>ActiveClass</strong> property allows you to set custom CSS class on active items.</p>\n",
+        "Description": "<p><strong>ActiveClass</strong> 属性允许您在激活的项上设置自定义的 CSS 类。</p>\n",
         "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup ShowArrows=\"@(true)\" Class=\"pa-4\" ActiveClass=\"success\">\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"@($\"ma-4 {context.ActiveClass}\")\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"@context.Toggle\"\r\n                       RefBack=\"@context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>",
         "Type": "Demos.Components.Groups.children.SlideGroup.props.ActiveClass",
         "Style": "",
@@ -4122,7 +4122,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.2038776+08:00",
+    "LastWriteTime": "2021-11-12T13:39:37.8828831+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4173,7 +4173,7 @@
         "Name": "accountCreation",
         "Title": "创建账户",
         "Description": "<p>创建具有平滑动画的丰富表单。 <code>MWindow</code> 能够自动跟踪当前的选择索引，来改变过渡动画的方向。 这可以通过 <code>Reverse</code> 参数来手动控制。</p>\n",
-        "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"500\">\r\n    <MCardTitle Class=\"text-h6 font-weight-regular justify-space-between\">\r\n        <span>@currentTitle</span>\r\n        <MAvatar Color=\"primary lighten-2\" Class=\"subheading white--text\" Size=\"24\">@step</MAvatar>\r\n    </MCardTitle>\r\n\r\n    <MWindow @bind-Value=\"Step\">\r\n        <MWindowItem Value=\"1\">\r\n            <MCardText>\r\n                <MTextField Label=\"Email\" @bind-Value=\"@email\"></MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    This is the email you will use to login to your Vuetify account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"2\">\r\n            <MCardText>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Confirm Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    Please enter a password for your account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"3\">\r\n            <div class=\"pa-4 text-center\">\r\n                <MImage\r\n                    Class=\"mb-4\"\r\n                    Contain\r\n                    Height=\"128\"\r\n                    Src=\"https://cdn.vuetifyjs.com/images/logos/v.svg\">\r\n                </MImage>\r\n                <h3 class=\"text-h6 font-weight-light mb-2\">\r\n                    Welcome to Vuetify\r\n                </h3>\r\n                <span class=\"text-caption grey--text\">Thanks for signing up!</span>\r\n            </div>\r\n        </MWindowItem>\r\n    </MWindow>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MCardActions>\r\n        <MButton\r\n            Disabled=\"@(step == 1)\"\r\n            Text\r\n            OnClick=\"() => step--\">\r\n            Back\r\n        </MButton>\r\n        <MSpacer></MSpacer>\r\n        <MButton\r\n            Disabled=\"@(step == 3)\"\r\n            Color=\"primary\"\r\n            Depressed\r\n            OnClick=\"() => step++\">\r\n            Next\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    string email = \"john@vuetifyjs.com\";\r\n    int step = 1;\r\n\r\n    StringNumber Step\r\n    {\r\n        get => step;\r\n        set => step = value.ToInt32();\r\n    }\r\n\r\n    public string currentTitle\r\n    {\r\n        get => step switch\r\n        {\r\n            1 => \"Sign-Up\",\r\n            2 => \"Create a password\",\r\n            _ => \"Account Created\"\r\n            };\r\n    }\r\n\r\n}",
+        "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"500\">\r\n    <MCardTitle Class=\"text-h6 font-weight-regular justify-space-between\">\r\n        <span>@currentTitle</span>\r\n        <MAvatar Color=\"primary lighten-2\" Class=\"subheading white--text\" Size=\"24\">@step</MAvatar>\r\n    </MCardTitle>\r\n\r\n    <MWindow @bind-Value=\"Step\">\r\n        <MWindowItem Value=\"1\">\r\n            <MCardText>\r\n                <MTextField Label=\"Email\" @bind-Value=\"@email\"></MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    This is the email you will use to login to your MASA.Blazor account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"2\">\r\n            <MCardText>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Confirm Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    Please enter a password for your account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"3\">\r\n            <div class=\"pa-4 text-center\">\r\n                <MImage\r\n                    Class=\"mb-4\"\r\n                    Contain\r\n                    Height=\"25\"\r\n                    Src=\"https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png\">\r\n                </MImage>\r\n                <h3 class=\"text-h6 font-weight-light mb-2\">\r\n                    Welcome to MASA.Blazor\r\n                </h3>\r\n                <span class=\"text-caption grey--text\">Thanks for signing up!</span>\r\n            </div>\r\n        </MWindowItem>\r\n    </MWindow>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MCardActions>\r\n        <MButton\r\n            Disabled=\"@(step == 1)\"\r\n            Text\r\n            OnClick=\"() => step--\">\r\n            Back\r\n        </MButton>\r\n        <MSpacer></MSpacer>\r\n        <MButton\r\n            Disabled=\"@(step == 3)\"\r\n            Color=\"primary\"\r\n            Depressed\r\n            OnClick=\"() => step++\">\r\n            Next\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    string email = \"john@vuetifyjs.com\";\r\n    int step = 1;\r\n\r\n    StringNumber Step\r\n    {\r\n        get => step;\r\n        set => step = value.ToInt32();\r\n    }\r\n\r\n    public string currentTitle\r\n    {\r\n        get => step switch\r\n        {\r\n            1 => \"Sign-Up\",\r\n            2 => \"Create a password\",\r\n            _ => \"Account Created\"\r\n            };\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Groups.children.Windows.misc.AccountCreation",
         "Style": "",
         "Debug": false,
@@ -4209,7 +4209,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.5758771+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8325907+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4274,7 +4274,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.4958755+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8345908+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4292,7 +4292,7 @@
         "Name": "click",
         "Title": "单击",
         "Description": "<p>将任何单击事件绑定到 <code>MIcon</code> 将自动将光标更改为指针。</p>\n",
-        "Code": "<MCard>\r\n    <MToolbar\r\n        Color=\"pink\"\r\n        Dark\r\n        Dense\r\n        Flat>\r\n        <MToolbarTitle Class=\"text-body-2\">\r\n            Upcoming Changes\r\n        </MToolbarTitle>\r\n    </MToolbar>\r\n    <MCardText>\r\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n    </MCardText>\r\n\r\n    <MCardActions>\r\n        <MSpacer></MSpacer>\r\n        <MIcon\r\n            Large\r\n            OnClick=\"Next\">\r\n            mdi-chevron-right\r\n        </MIcon>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n<MSnackbar @bind-Value=\"show\">\r\n    You clicked next!\r\n</MSnackbar>\r\n\r\n@code {\r\n\r\n    bool show;\r\n\r\n    void Next()\r\n    {\r\n        show = true;\r\n    }\r\n\r\n}",
+        "Code": "<MCard>\r\n    <MToolbar\r\n        Color=\"pink\"\r\n        Dark\r\n        Dense\r\n        Flat>\r\n        <MToolbarTitle Class=\"text-body-2\">\r\n            Upcoming Changes\r\n        </MToolbarTitle>\r\n    </MToolbar>\r\n    <MCardText>\r\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n    </MCardText>\r\n\r\n    <MCardActions>\r\n        <MSpacer></MSpacer>\r\n        <MIcon\r\n            Large\r\n            OnClick=\"Next\">\r\n            mdi-chevron-right\r\n        </MIcon>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n<MSnackbar @bind-Value=\"show\" Top>\r\n    You clicked next!\r\n</MSnackbar>\r\n\r\n@code {\r\n\r\n    bool show;\r\n\r\n    void Next()\r\n    {\r\n        show = true;\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Icon.events.Click",
         "Style": "",
         "Debug": false,
@@ -4362,7 +4362,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:51.4798759+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8375904+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4423,7 +4423,7 @@
         "Order": 2,
         "Name": "placeholder",
         "Title": "占位符",
-        "Description": "<p><code>MImage</code> 有一个特别的 <strong>PlaceholderContent</strong> 插槽，在图像加载时占位显示。</p>\n",
+        "Description": "<p><code>MImage</code> 有一个特别的 <strong>PlaceholderContent</strong> 插槽，在图像加载时占位显示。 注意：下面的例子有一个错误的 <strong>Src</strong>，因此图片不会加载，以方便你观察占位符。</p>\n",
         "Code": "<MRow Justify=\"@JustifyTypes.Center\">\r\n    <MImage MaxHeight=\"300\"\r\n            MaxWidth=\"500\"\r\n            Src=\"https://bad.src/not/valid\"\r\n            LazySrc=\"https://picsum.photos/id/11/100/60\">\r\n        <PlaceholderContent>\r\n            <MRow Class=\"fill-height ma-0\"\r\n                  Align=\"@AlignTypes.Center\"\r\n                  Justify=\"@JustifyTypes.Center\">\r\n                <MProgressCircular Indeterminate></MProgressCircular>\r\n            </MRow>\r\n        </PlaceholderContent>\r\n    </MImage>\r\n</MRow>",
         "Type": "Demos.Components.Image.contents.Placeholder",
         "Style": "",
@@ -4434,7 +4434,7 @@
         "Order": 3,
         "Name": "grid",
         "Title": "栅格",
-        "Description": "<p>You can use <code>MImage</code> to make, for example, a picture gallery.</p>\n",
+        "Description": "<p>您可以使用 <code>MImage</code> 来制作图片库。</p>\n",
         "Code": "<div>\r\n    <MRow>\r\n        @for (var index = 0; index < 9; index++)\r\n        {\r\n            var localVariable = index;\r\n            <MCol Cols=\"4\">\r\n                <MImage Src=\"@(\"https://picsum.photos/500/300?image=\" + (localVariable * 5 + 10))\"\r\n                        LazySrc=\"@(\"https://picsum.photos/500/6?image=\" + (localVariable * 5 + 10))\" AspectRatio=\"1\"\r\n                        Class=\"grey lighten-2\">\r\n                    <PlaceholderContent>\r\n                        <MRow Class=\"fill-height ma-0\"\r\n                              Align=\"@AlignTypes.Center\"\r\n                              Justify=\"@JustifyTypes.Center\">\r\n                            <MProgressCircular Indeterminate></MProgressCircular>\r\n                        </MRow>\r\n                    </PlaceholderContent>\r\n                </MImage>\r\n            </MCol>\r\n        }\r\n    </MRow>\r\n</div>",
         "Type": "Demos.Components.Image.misc.Grid",
         "Style": "",
@@ -4459,15 +4459,15 @@
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
-      "Caveats": "\n<!--alert:info-->\n<p>如果您要查找有状态列表项，请查看 <a href=\"/components/listitemgroup\"><strong>MListItemGroup</strong></a>。</p>\n"
+      "注意": "\n<!--alert:info-->\n<p>如果您要查找有状态列表项，请查看 <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>。</p>\n"
     },
-    "LastWriteTime": "2021-11-12T17:14:49.811884+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8385907+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "index",
         "Title": "使用",
-        "Description": "<p>列表有三种基本形式。 单行 (默认), 双行 和 三行. 行声明指定了项目的最小高度，也可以使用相同的属性从 v-list 中进行控制。</p>\n",
+        "Description": "<p>列表有三种基本形式。 单行 (默认), 双行 和 三行. 行声明指定了项目的最小高度，也可以使用相同的属性从 <code>MList</code> 中进行控制。</p>\n",
         "Code": "<MCard Class=\"mx-auto\"\r\n        MaxWidth=\"400\"\r\n        Tile>\r\n    <MListItem>\r\n        <MListItemContent>\r\n            <MListItemTitle>Single-line item</MListItemTitle>\r\n        </MListItemContent>\r\n    </MListItem>\r\n\r\n    <MListItem TwoLine>\r\n        <MListItemContent>\r\n            <MListItemTitle>Two-line item</MListItemTitle>\r\n            <MListItemSubtitle>Secondary text</MListItemSubtitle>\r\n        </MListItemContent>\r\n    </MListItem>\r\n\r\n    <MListItem ThreeLine>\r\n        <MListItemContent>\r\n            <MListItemTitle>Three-line item</MListItemTitle>\r\n            <MListItemSubtitle>\r\n                Secondary line text Lorem ipsum dolor sit amet,\r\n            </MListItemSubtitle>\r\n            <MListItemSubtitle>\r\n                consectetur adipiscing elit.\r\n            </MListItemSubtitle>\r\n        </MListItemContent>\r\n    </MListItem>\r\n</MCard>\r\n",
         "Type": "Demos.Components.List.usage.Index",
         "Style": "",
@@ -4500,7 +4500,7 @@
         "Order": 3,
         "Name": "flat",
         "Title": "扁平",
-        "Description": "<p>Items don’t change when selected in <code>MList</code> with <strong>Flat</strong> property.</p>\n",
+        "Description": "<p>在 <strong>Flat</strong> 属性的 <code>MList</code> 中选择时，项目不会发生变化。</p>\n",
         "Code": "<MCard Class=\"mx-auto\"\r\n       MaxWidth=\"300\"\r\n       tile>\r\n    <MList Flat>\r\n        <MSubheader>REPORTS</MSubheader>\r\n        <MListItemGroup @bind-Value=\"_selectedItem\"\r\n                        Color=\"primary\">\r\n            @foreach (var item in _items)\r\n            {\r\n                <MListItem >\r\n                    <MListItemIcon>\r\n                        <MIcon>\r\n                            @item.Icon\r\n                        </MIcon>\r\n                    </MListItemIcon>\r\n                    <MListItemContent>\r\n                        <MListItemTitle>@item.Text</MListItemTitle>\r\n                    </MListItemContent>\r\n                </MListItem>\r\n            }\r\n        </MListItemGroup>\r\n    </MList>\r\n</MCard>\r\n\r\n@code{\r\n    private StringNumber _selectedItem = 1;\r\n    private Item[] _items = new Item[]\r\n    {\r\n       new Item { Text= \"Real-Time\", Icon= \"mdi-clock\" },\r\n       new Item { Text= \"Audience\", Icon= \"mdi-account\" },\r\n       new Item { Text= \"Conversions\", Icon= \"mdi-flag\" }\r\n    };\r\n\r\n    class Item\r\n    {\r\n        public string Text { get; set; }\r\n        public string Icon { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.List.props.Flat",
         "Style": "",
@@ -4511,7 +4511,7 @@
         "Order": 4,
         "Name": "nav",
         "Title": "导航列表",
-        "Description": "<p>Lists can receive an alternative <strong>nav</strong> styling that reduces the width <code>MListitem</code> takes up as well as adding a border radius.</p>\n",
+        "Description": "<p>列表可以接受一个替代的 <strong>Nav</strong> 样式，它减少了 <code>MListItem</code> 的宽度，并增加了一个边框半径。</p>\n",
         "Code": "<MCard Class=\"mx-auto\"\r\n       Width=\"256\"\r\n       tile>\r\n    <MNavigationDrawer permanent>\r\n        <MList>\r\n            <MListItem>\r\n                <MListItemAvatar>\r\n                    <MImage Src=\"https://cdn.vuetifyjs.com/images/john.png\"></MImage>\r\n                </MListItemAvatar>\r\n            </MListItem>\r\n\r\n            <MListItem Link>\r\n                <MListItemContent>\r\n                    <MListItemTitle class=\"text-h6\">\r\n                        John Leider\r\n                    </MListItemTitle>\r\n                    <MListItemSubtitle>john@vuetifyjs.com</MListItemSubtitle>\r\n                </MListItemContent>\r\n\r\n                <MListItemAction>\r\n                    <MIcon>mdi-menu-down</MIcon>\r\n                </MListItemAction>\r\n            </MListItem>\r\n        </MList>\r\n        <MDivider></MDivider>\r\n        <MList Nav\r\n               Dense>\r\n            <MListItemGroup @bind-Value=\"_selectedItem\"\r\n                            Color=\"primary\">\r\n                @foreach (var item in _items)\r\n                {\r\n                    <MListItem>\r\n                        <MListItemIcon>\r\n                            <MIcon>@item.Icon</MIcon>\r\n                        </MListItemIcon>\r\n\r\n                        <MListItemContent>\r\n                            <MListItemTitle>@item.Text</MListItemTitle>\r\n                        </MListItemContent>\r\n                    </MListItem>\r\n                }\r\n            </MListItemGroup>\r\n        </MList>\r\n    </MNavigationDrawer>\r\n</MCard>\r\n\r\n@code{\r\n    private StringNumber _selectedItem = 0;\r\n    private Item[] _items = new Item[]\r\n    {\r\n       new Item { Text= \"My Files\", Icon= \"mdi-folder\" },\r\n       new Item { Text= \"Shared with me\", Icon= \"mdi-account-multiple\" },\r\n       new Item { Text= \"Starred\", Icon= \"mdi-star\" },\r\n       new Item { Text= \"Recent\", Icon= \"mdi-history\" },\r\n       new Item { Text= \"Offline\", Icon= \"mdi-check-circle\" },\r\n       new Item { Text= \"Uploads\", Icon= \"mdi-upload\" },\r\n       new Item { Text= \"Backups\", Icon= \"mdi-cloud-upload\" }\r\n\r\n    };\r\n\r\n    class Item\r\n    {\r\n        public string Text { get; set; }\r\n        public string Icon { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.List.props.Nav",
         "Style": "",
@@ -4522,7 +4522,7 @@
         "Order": 5,
         "Name": "rounded",
         "Title": "圆角",
-        "Description": "<p>You can make <code>MList</code> items rounded.</p>\n",
+        "Description": "<p>你可以让 <code>MList</code> 项变成圆角。</p>\n",
         "Code": "<MCard Class=\"mx-auto\"\r\n       MaxWidth=\"300\"\r\n       tile>\r\n    <MList Rounded>\r\n        <MSubheader>REPORTS</MSubheader>\r\n        <MListItemGroup @bind-Value=\"_selectedItem\"\r\n                        Color=\"primary\">\r\n            @foreach (var item in _items)\r\n            {\r\n                <MListItem>\r\n                    <MListItemIcon>\r\n                        <MIcon>\r\n                            @item.Icon\r\n                        </MIcon>\r\n                    </MListItemIcon>\r\n                    <MListItemContent>\r\n                        <MListItemTitle>@item.Text</MListItemTitle>\r\n                    </MListItemContent>\r\n                </MListItem>\r\n            }\r\n        </MListItemGroup>\r\n    </MList>\r\n</MCard>\r\n\r\n@code{\r\n    private StringNumber _selectedItem = 1;\r\n    private Item[] _items = new Item[]\r\n    {\r\n       new Item { Text= \"Real-Time\", Icon= \"mdi-clock\" },\r\n       new Item { Text= \"Audience\", Icon= \"mdi-account\" },\r\n       new Item { Text= \"Conversions\", Icon= \"mdi-flag\" }\r\n    };\r\n\r\n    class Item\r\n    {\r\n        public string Text { get; set; }\r\n        public string Icon { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.List.props.Rounded",
         "Style": "",
@@ -4533,7 +4533,7 @@
         "Order": 6,
         "Name": "shapedLists",
         "Title": "形状列表",
-        "Description": "<p>Shaped lists have rounded borders on one side of the <code>MListItem</code>.</p>\n",
+        "Description": "<p>形状列表在 <code>MListItem</code> 的一侧具有圆形边界。</p>\n",
         "Code": "<MCard Class=\"mx-auto\"\r\n       MaxWidth=\"300\"\r\n       tile>\r\n    <MList Shaped>\r\n        <MSubheader>REPORTS</MSubheader>\r\n        <MListItemGroup @bind-Value=\"_selectedItem\"\r\n                        Color=\"primary\">\r\n            @foreach (var item in _items)\r\n            {\r\n                <MListItem >\r\n                    <MListItemIcon>\r\n                        <MIcon>\r\n                            @item.Icon\r\n                        </MIcon>\r\n                    </MListItemIcon>\r\n                    <MListItemContent>\r\n                        <MListItemTitle>@item.Text</MListItemTitle>\r\n                    </MListItemContent>\r\n                </MListItem>\r\n            }\r\n        </MListItemGroup>\r\n    </MList>\r\n</MCard>\r\n\r\n@code{\r\n    private StringNumber _selectedItem = 1;\r\n    private Item[] _items = new Item[]\r\n    {\r\n       new Item { Text= \"Real-Time\", Icon= \"mdi-clock\" },\r\n       new Item { Text= \"Audience\", Icon= \"mdi-account\" },\r\n       new Item { Text= \"Conversions\", Icon= \"mdi-flag\" }\r\n    };\r\n\r\n    class Item\r\n    {\r\n        public string Text { get; set; }\r\n        public string Icon { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.List.props.ShapedLists",
         "Style": "",
@@ -4544,7 +4544,7 @@
         "Order": 7,
         "Name": "subGroup",
         "Title": "嵌套列表",
-        "Description": "<p>Using the <code>MListGroup</code> component you can create up to 2 levels in depth using the <code>SubGroup</code> prop.</p>\n",
+        "Description": "<p>使用 <code>MListGroup</code> 组件，您可以使用 <strong>SubGroup</strong> 属性创建多达 2 级的深度。</p>\n",
         "Code": "<MCard Class=\"mx-auto\"\r\n       Width=\"300\">\r\n    <MList>\r\n        <MListItem>\r\n            <MListItemIcon>\r\n                <MIcon>mdi-home</MIcon>\r\n            </MListItemIcon>\r\n\r\n            <MListItemTitle>Home</MListItemTitle>\r\n        </MListItem>\r\n\r\n        <MListGroup @bind-Value=\"userExpanded\" PrependIcon=\"mdi-account-circle\">\r\n            <ActivatorContent>\r\n                <MListItemTitle>Users</MListItemTitle>\r\n            </ActivatorContent>\r\n            <ChildContent>\r\n                <MListGroup @bind-Value=\"adminExpanded\" NoAction SubGroup>\r\n                    <ActivatorContent>\r\n                        <MListItemContent>\r\n                            <MListItemTitle>Admin</MListItemTitle>\r\n                        </MListItemContent>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        @foreach (var item in _admins)\r\n                        {\r\n                            <MListItem Link>\r\n                                <MListItemTitle>@item.Text</MListItemTitle>\r\n\r\n                                <MListItemIcon>\r\n                                    <MIcon>@item.Icon</MIcon>\r\n                                </MListItemIcon>\r\n                            </MListItem>\r\n                        }\r\n                    </ChildContent>\r\n                </MListGroup>\r\n\r\n                <MListGroup NoAction\r\n                            SubGroup>\r\n                    <ActivatorContent>\r\n                        <MListItemContent>\r\n                            <MListItemTitle>Actions</MListItemTitle>\r\n                        </MListItemContent>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        @foreach (var item in _cruds)\r\n                        {\r\n                            <MListItem Link>\r\n                                <MListItemTitle>@item.Text</MListItemTitle>\r\n\r\n                                <MListItemIcon>\r\n                                    <MIcon>@item.Icon</MIcon>\r\n                                </MListItemIcon>\r\n                            </MListItem>\r\n                        }\r\n                    </ChildContent>\r\n                </MListGroup>\r\n            </ChildContent>\r\n        </MListGroup>\r\n    </MList>\r\n</MCard>\r\n\r\n@code{\r\n    readonly Item[] _admins = new Item[]\r\n    {\r\n       new Item { Text= \"Management\", Icon= \"mdi-account-multiple-outline\" },\r\n       new Item { Text= \"Settings\", Icon= \"mdi-cog-outline\" }\r\n    };\r\n\r\n    readonly Item[] _cruds = new Item[]\r\n    {\r\n       new Item { Text= \"Create\", Icon= \"mdi-plus-outline\" },\r\n       new Item { Text= \"Read\", Icon= \"mdi-file-outline\" },\r\n       new Item { Text= \"Update\", Icon= \"mdi-update\" },\r\n       new Item { Text= \"Delete\", Icon= \"mdi-delete\" }\r\n    };\r\n\r\n    bool userExpanded = true;\r\n    bool adminExpanded = true;\r\n\r\n    class Item\r\n    {\r\n        public string Text { get; set; }\r\n        public string Icon { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.List.props.SubGroup",
         "Style": "",
@@ -4555,7 +4555,7 @@
         "Order": 8,
         "Name": "threeLine",
         "Title": "三行",
-        "Description": "<p>For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis.</p>\n",
+        "Description": "<p>对于三行列表，字幕将垂直夹在 2 行，然后省略。</p>\n",
         "Code": "<MCard MaxWidth=\"450\"\r\n        Class=\"mx-auto\">\r\n    <MToolbar Color=\"cyan\"\r\n               Dark>\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Inbox</MToolbarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n\r\n    <MList ThreeLine>\r\n        @foreach (var item in _items)\r\n        {\r\n            @if (item.Header != null)\r\n            {\r\n                <MSubheader>@item.Header</MSubheader>\r\n            }\r\n            else if (item.Divider)\r\n            {\r\n                <MDivider Inset=\"item.Inset\"></MDivider>\r\n            }\r\n            else\r\n            {\r\n                <MListItem>\r\n                    <MListItemAvatar>\r\n                        <MImage Src=\"@item.Avatar\"></MImage>\r\n                    </MListItemAvatar>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>@((MarkupString)item.Title)</MListItemTitle>\r\n                        <MListItemSubtitle>@((MarkupString)item.SubTitle)</MListItemSubtitle>\r\n                    </MListItemContent>\r\n                </MListItem>\r\n            }\r\n        }\r\n    </MList>\r\n</MCard>\r\n\r\n@code{\r\n    private Item[] _items = new Item[]\r\n    {\r\n       new Item { Header=\"Today\" },\r\n       new Item\r\n       {\r\n           Avatar=\"https://cdn.vuetifyjs.com/images/lists/1.jpg\",\r\n           Title=\"Brunch this weekend?\",\r\n           SubTitle=\"<span class=\\\"text--primary\\\">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?\"\r\n       },\r\n       new Item\r\n       {\r\n           Divider=true,\r\n           Inset=true\r\n       },\r\n       new Item\r\n       {\r\n           Avatar=\"https://cdn.vuetifyjs.com/images/lists/2.jpg\",\r\n           Title=\"Summer BBQ <span class=\\\"grey--text text--lighten-1\\\">4</span>\",\r\n           SubTitle=\"<span class=\\\"text--primary\\\">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.\"\r\n       },\r\n       new Item\r\n       {\r\n           Divider=true,\r\n           Inset=true\r\n       },\r\n       new Item\r\n       {\r\n           Avatar=\"https://cdn.vuetifyjs.com/images/lists/3.jpg\",\r\n           Title=\"Oui oui\",\r\n           SubTitle=\"<span class=\\\"text--primary\\\">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?\"\r\n       },\r\n       new Item\r\n       {\r\n           Divider=true,\r\n           Inset=true\r\n       },\r\n       new Item\r\n       {\r\n           Avatar=\"https://cdn.vuetifyjs.com/images/lists/4.jpg\",\r\n           Title=\"Birthday gift\",\r\n           SubTitle=\"<span class=\\\"text--primary\\\">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?\"\r\n       },\r\n       new Item\r\n       {\r\n           Divider=true,\r\n           Inset=true\r\n       },\r\n       new Item\r\n       {\r\n           Avatar=\"https://cdn.vuetifyjs.com/images/lists/5.jpg\",\r\n           Title=\"Recipe to try\",\r\n           SubTitle=\"<span class=\\\"text--primary\\\">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.\"\r\n       }\r\n    };\r\n\r\n    class Item\r\n    {\r\n        public string Header { get; set; }\r\n        public string Avatar { get; set; }\r\n        public string Title { get; set; }\r\n        public string SubTitle { get; set; }\r\n        public bool Divider { get; set; }\r\n        public bool Inset { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.List.props.ThreeLine",
         "Style": "",
@@ -4566,7 +4566,7 @@
         "Order": 9,
         "Name": "twoLinesAndSubheader",
         "Title": "两行和副标题",
-        "Description": "<p>Lists can contain subheaders, dividers, and can contain 1 or more lines. The subtitle will overflow with ellipsis if it extends past one line.</p>\n",
+        "Description": "<p>列表组件可以包含列表组标题，分割线，以及1行或者更多行，如果副标题文本溢出则会以省略号的形式截断文本。</p>\n",
         "Code": "<MCard MaxWidth=\"600\"\r\n       Class=\"mx-auto\">\r\n    <MToolbar Color=\"light-blue\"\r\n              Dark>\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>My files</MToolbarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-view-module</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n\r\n    <MList Subheader\r\n           TwoLine>\r\n        <MSubheader Inset>Folders</MSubheader>\r\n\r\n        @foreach (var item in _folders)\r\n        {\r\n            <MListItem>\r\n                <MListItemAvatar>\r\n                    <MIcon Class=\"grey lighten-1\"\r\n                           Dark>\r\n                        mdi-folder\r\n                    </MIcon>\r\n                </MListItemAvatar>\r\n\r\n                <MListItemContent>\r\n                    <MListItemTitle>@item.Title</MListItemTitle>\r\n\r\n                    <MListItemSubtitle>@item.SubTitle</MListItemSubtitle>\r\n                </MListItemContent>\r\n\r\n                <MListItemAction>\r\n                    <MButton Icon>\r\n                        <MIcon Color=\"grey lighten-1\">mdi-information</MIcon>\r\n                    </MButton>\r\n                </MListItemAction>\r\n            </MListItem>\r\n\r\n        }\r\n\r\n\r\n        <MDivider Inset></MDivider>\r\n\r\n        <MSubheader Inset>Files</MSubheader>\r\n\r\n        @foreach (var item in _files)\r\n        {\r\n            <MListItem>\r\n                <MListItemAvatar>\r\n                    <MIcon Class=\"@item.Color\"\r\n                           Dark>@item.Icon</MIcon>\r\n                </MListItemAvatar>\r\n\r\n                <MListItemContent>\r\n                    <MListItemTitle>@item.Title</MListItemTitle>\r\n\r\n                    <MListItemSubtitle>@item.SubTitle</MListItemSubtitle>\r\n                </MListItemContent>\r\n\r\n                <MListItemAction>\r\n                    <MButton Icon>\r\n                        <MIcon Color=\"grey lighten-1\">mdi-information</MIcon>\r\n                    </MButton>\r\n                </MListItemAction>\r\n            </MListItem>\r\n        }\r\n    </MList>\r\n</MCard>\r\n\r\n@code{\r\n    private Item[] _files = new Item[]\r\n    {\r\n       new Item \r\n       {\r\n          Color= \"blue\",\r\n          Icon= \"mdi-clipboard-text\",\r\n          SubTitle= \"Jan 20, 2014\",\r\n          Title= \"Vacation itinerary\",\r\n       },\r\n        new Item \r\n        {\r\n          Color= \"amber\",\r\n          Icon= \"mdi-gesture-tap-button\",\r\n          SubTitle= \"Jan 10, 2014\",\r\n          Title= \"Kitchen remodel\",\r\n        }\r\n    };\r\n\r\n    private Item[] _folders = new Item[]\r\n    {\r\n       new Item \r\n       {\r\n          SubTitle= \"Jan 9, 2014\",\r\n          Title= \"Photos\",\r\n       },\r\n       new Item \r\n       {\r\n          SubTitle= \"Jan 17, 2014\",\r\n          Title= \"Recipes\",\r\n       },\r\n       new Item\r\n       {\r\n          SubTitle= \"Jan 28, 2014\",\r\n          Title= \"Work\",\r\n       },\r\n    };\r\n\r\n    class Item\r\n    {\r\n        public string Color { get; set; }\r\n        public string Icon { get; set; }\r\n        public string Title { get; set; }\r\n        public string SubTitle { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.List.props.TwoLinesAndSubheader",
         "Style": "",
@@ -4577,7 +4577,7 @@
         "Order": 10,
         "Name": "expansionLists",
         "Title": "可展开的列表",
-        "Description": "<p>A list can contain a group of items which will display on click utilizing <code>MListGroup</code>'s <strong>ActivatorContent</strong>. Expansion\nlists are also used within the <a href=\"/components/navigationdrawer\">MNavigationDrawer</a> component.</p>\n",
+        "Description": "<p>列表可以包含一组项目，这些项目将在单击<code>MListGroup</code>的<strong>ActivatorContent</strong>时显示。扩展列表也用于 <a href=\"/components/navigation-drawers\">MNavigationDrawer</a> 组件中。</p>\n",
         "Code": "<MCard Class=\"mx-auto\"\r\n       MaxWidth=\"500\">\r\n    <MToolbar Color=\"teal\"\r\n              Dark>\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Topics</MToolbarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n\r\n    <MList>\r\n        @foreach (var item in items)\r\n        {\r\n            <MListGroup\r\n                @bind-Value=\"item.Active\"\r\n                PrependIcon=\"@item.Action\"\r\n                NoAction>\r\n                <ActivatorContent>\r\n                    <MListItemContent>\r\n                        <MListItemTitle>@item.Title</MListItemTitle>\r\n                    </MListItemContent>\r\n                </ActivatorContent>\r\n\r\n                <ChildContent>\r\n                    @foreach (var subItem in item.Items)\r\n                    {\r\n                        <MListItem\r\n                            Value=\"subItem.Title\">\r\n                            <MListItemContent>\r\n                                <MListItemTitle>@item.Title</MListItemTitle>\r\n                            </MListItemContent>\r\n                        </MListItem>\r\n                    }\r\n                </ChildContent>\r\n            </MListGroup>\r\n        }\r\n    </MList>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    List<Item> items = new List<Item>()\r\n    {\r\n        new Item()\r\n        {\r\n            Action = \"mdi-ticket\",\r\n            Items = new List<Item>() {new Item(\"List Item\")},\r\n            Title = \"Attractions\"\r\n        },\r\n        new Item()\r\n        {\r\n            Action = \"mdi-silverware-fork-knife\",\r\n            Active = true,\r\n            Items = new List<Item>() {new Item(\"Breakfast & brunch\"), new Item(\"New American\"), new Item(\"Sushi\")},\r\n            Title = \"Dining\"\r\n        },\r\n        new Item()\r\n        {\r\n            Action = \"mdi-school\",\r\n            Items = new List<Item>() {new Item(\"List Item\")},\r\n            Title = \"Education\"\r\n        },\r\n        new Item()\r\n        {\r\n            Action = \"mdi-run\",\r\n            Items = new List<Item>() {new Item(\"List Item\")},\r\n            Title = \"Family\"\r\n        },\r\n        new Item()\r\n        {\r\n            Action = \"mdi-bottle-tonic-plus\",\r\n            Items = new List<Item>() {new Item(\"List Item\")},\r\n            Title = \"Health\"\r\n        },\r\n        new Item()\r\n        {\r\n            Action = \"mdi-content-cut\",\r\n            Items = new List<Item>() {new Item(\"List Item\")},\r\n            Title = \"Attractions\"\r\n        },\r\n        new Item()\r\n        {\r\n            Action = \"mdi-tag\",\r\n            Items = new List<Item>() {new Item(\"List Item\")},\r\n            Title = \"Attractions\"\r\n        },\r\n    };\r\n\r\n    class Item\r\n    {\r\n        public string Title { get; set; }\r\n\r\n        public string Action { get; set; }\r\n\r\n        public bool Active { get; set; }\r\n\r\n        public List<Item> Items { get; set; } = new List<Item>();\r\n\r\n        public Item()\r\n        {\r\n        }\r\n\r\n        public Item(string title)\r\n        {\r\n            Title = title;\r\n        }\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.List.contents.ExpansionLists",
         "Style": "",
@@ -4588,7 +4588,7 @@
         "Order": 11,
         "Name": "actionsAndItemGroups",
         "Title": "操作和项目组",
-        "Description": "<p>A <strong>ThreeLine</strong> list with actions. Utilizing <code>MListItemGroup</code>, easily connect actions to your tiles.</p>\n",
+        "Description": "<p>可操作的 <strong>ThreeLine</strong> 列表。 利用 <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>，轻松将动作连接到图块。</p>\n",
         "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"400\">\r\n    <MToolbar Color=\"purple\" Dark>\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Settings</MToolbarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n\r\n    <MList\r\n        Subheader\r\n        ThreeLine>\r\n        <MSubheader>User Controls</MSubheader>\r\n\r\n        <MListItem>\r\n            <MListItemContent>\r\n                <MListItemTitle>Content filtering</MListItemTitle>\r\n                <MListItemSubtitle>Set the content filtering level to restrict appts that can be downloaded</MListItemSubtitle>\r\n            </MListItemContent>\r\n        </MListItem>\r\n\r\n        <MListItem>\r\n            <MListItemContent>\r\n                <MListItemTitle>Password</MListItemTitle>\r\n                <MListItemSubtitle>Require password for purchase or use password to restrict purchase</MListItemSubtitle>\r\n            </MListItemContent>\r\n        </MListItem>\r\n    </MList>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MList\r\n        Flat\r\n        Subheader\r\n        ThreeLine>\r\n        <MSubheader>General</MSubheader>\r\n\r\n        <MListItemGroup\r\n            @bind-Values=\"settings\"\r\n            Multiple\r\n            ActiveClass=\"\">\r\n            <MListItem>\r\n                <ItemContent>\r\n                    <MListItemAction>\r\n                        <MCheckbox IsActive=\"@context.Active\"></MCheckbox>\r\n                    </MListItemAction>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>Notifications</MListItemTitle>\r\n                        <MListItemSubtitle>Notify me about updates to apps or games that I downloaded</MListItemSubtitle>\r\n                    </MListItemContent>\r\n                </ItemContent>\r\n            </MListItem>\r\n\r\n            <MListItem>\r\n                <ItemContent>\r\n                    <MListItemAction>\r\n                        <MCheckbox IsActive=\"@context.Active\"></MCheckbox>\r\n                    </MListItemAction>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>Sound</MListItemTitle>\r\n                        <MListItemSubtitle>Auto-update apps at any time. Data charges may apply</MListItemSubtitle>\r\n                    </MListItemContent>\r\n                </ItemContent>\r\n            </MListItem>\r\n\r\n            <MListItem>\r\n                <ItemContent>\r\n                    <MListItemAction>\r\n                        <MCheckbox IsActive=\"@context.Active\"></MCheckbox>\r\n                    </MListItemAction>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>Auto-add widgets</MListItemTitle>\r\n                        <MListItemSubtitle>Automatically add home screen widgets when downloads complete</MListItemSubtitle>\r\n                    </MListItemContent>\r\n                </ItemContent>\r\n            </MListItem>\r\n        </MListItemGroup>\r\n    </MList>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    List<StringNumber> settings = new();\r\n\r\n}",
         "Type": "Demos.Components.List.misc.ActionsAndItemGroups",
         "Style": "",
@@ -4599,7 +4599,7 @@
         "Order": 12,
         "Name": "actionStack",
         "Title": "操作栈",
-        "Description": "<p>A list can contain a stack within an action. This is useful when you need to display meta text next to your action item.</p>\n",
+        "Description": "<p>列表组件可以包含一个操作栈。当你需要在你的动作项目旁边显示数据文本时，这是非常有用的。</p>\n",
         "Code": "<MCard\r\n    Class=\"mx-auto\"\r\n    MaxWidth=\"500\">\r\n    <MToolbar\r\n        Color=\"pink\"\r\n        Dark>\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Inbox</MToolbarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-checkbox-marked-circle</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n\r\n    <MList TwoLine>\r\n        <MListItemGroup\r\n            @bind-Values=\"selected\"\r\n            ActiveClass=\"pink--text\"\r\n            multiple>\r\n            @foreach (var (item, index) in items.Select((item, index) => (item, index)))\r\n            {\r\n                <MListItem Value=\"@item.title\">\r\n                    <ItemContent>\r\n                        <MListItemContent>\r\n                            <MListItemTitle>@item.title</MListItemTitle>\r\n                            <MListItemSubtitle Class=\"text--primary\">@item.headline</MListItemSubtitle>\r\n                            <MListItemSubtitle>@item.subtitle</MListItemSubtitle>\r\n                        </MListItemContent>\r\n\r\n                        <MListItemAction>\r\n                            <MListItemActionText>@item.action</MListItemActionText>\r\n\r\n                            @if (!context.Active)\r\n                            {\r\n                                <MIcon Color=\"grey lighten-1\">\r\n                                    mdi-star-outline\r\n                                </MIcon>\r\n                            }\r\n                            else\r\n                            {\r\n                                <MIcon Color=\"yellow darken-3\">\r\n                                    mdi-star\r\n                                </MIcon>\r\n                            }\r\n                        </MListItemAction>\r\n                    </ItemContent>\r\n                </MListItem>\r\n\r\n                @if (index < items.Count - 1)\r\n                {\r\n                    <MDivider/>\r\n                }\r\n            }\r\n        </MListItemGroup>\r\n    </MList>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    List<StringNumber> selected = new();\r\n\r\n    List<(string action, string headline, string subtitle, string title)> items = new List<(string action, string headline, string subtitle, string title)>()\r\n    {\r\n        (\"15 min\", \"Brunch this weekend?\",\"I'll be in your neighborhood doing errands this weekend. Do you want to hang out?\", \"Ali Connors\"),\r\n        (\"hr\",\"Summer BBQ\",\"Wish I could come, but I'm out of town this weekend.\", \"me, Scrott, Jennifer\"),\r\n        (\"6 hr\", \"Oui oui\",\"Do you have Paris recommendations? Have you ever been?\", \"Sandra Adams\"),\r\n        (\"12 hr\", \"Birthday gift\",\"Have any ideas about what we should get Heidi for her birthday?\", \"Trevor Hansen\"),\r\n        (\"18hr\",\"Recipe to try\",\"We should eat this: Grate, Squash, Corn, and tomatillo Tacos.\", \"Britta Holt\"),\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.List.misc.ActionStack",
         "Style": "",
@@ -4610,7 +4610,7 @@
         "Order": 13,
         "Name": "cardList",
         "Title": "卡片列表",
-        "Description": "<p>A list can be combined with a card.</p>\n",
+        "Description": "<p>一个列表可以和一张卡片结合起来。</p>\n",
         "Code": "  <MCard\r\n    MaxWidth=\"375\"\r\n    Class=\"mx-auto\"\r\n  >\r\n    <MImage\r\n      Src=\"https://cdn.vuetifyjs.com/images/lists/ali.png\"\r\n      Height=\"300\"\r\n      Dark\r\n    >\r\n      <MRow class=\"fill-height\">\r\n        <MCardTitle>\r\n          <MButton\r\n            Dark\r\n            Icon\r\n          >\r\n            <MIcon>mdi-chevron-left</MIcon>\r\n          </MButton>\r\n\r\n          <MSpacer></MSpacer>\r\n\r\n          <MButton\r\n            Dark\r\n            Icon\r\n            Class=\"mr-4\"\r\n          >\r\n            <MIcon>mdi-pencil</MIcon>\r\n          </MButton>\r\n\r\n          <MButton\r\n            Dark\r\n            Icon\r\n          >\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n          </MButton>\r\n        </MCardTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MCardTitle Class=\"white--text pl-12 pt-12\">\r\n          <div class=\"text-h4 pl-12 pt-12\">\r\n            Ali Conners\r\n          </div>\r\n        </MCardTitle>\r\n      </MRow>\r\n    </MImage>\r\n\r\n    <MList TwoLine>\r\n      <MListItem>\r\n        <MListItemIcon>\r\n          <MIcon Color=\"indigo\">\r\n            mdi-phone\r\n          </MIcon>\r\n        </MListItemIcon>\r\n\r\n        <MListItemContent>\r\n          <MListItemTitle>(650) 555-1234</MListItemTitle>\r\n          <MListItemSubtitle>Mobile</MListItemSubtitle>\r\n        </MListItemContent>\r\n\r\n        <MListItemIcon>\r\n          <MIcon>mdi-message-text</MIcon>\r\n        </MListItemIcon>\r\n      </MListItem>\r\n\r\n      <MListItem>\r\n        <MListItemAction></MListItemAction>\r\n\r\n        <MListItemContent>\r\n          <MListItemTitle>(323) 555-6789</MListItemTitle>\r\n          <MListItemSubtitle>Work</MListItemSubtitle>\r\n        </MListItemContent>\r\n\r\n        <MListItemIcon>\r\n          <MIcon>mdi-message-text</MIcon>\r\n        </MListItemIcon>\r\n      </MListItem>\r\n\r\n      <MDivider Inset></MDivider>\r\n\r\n      <MListItem>\r\n        <MListItemIcon>\r\n          <MIcon Color=\"indigo\">\r\n            mdi-email\r\n          </MIcon>\r\n        </MListItemIcon>\r\n\r\n        <MListItemContent>\r\n          <MListItemTitle>aliconnors@example.com</MListItemTitle>\r\n          <MListItemSubtitle>Personal</MListItemSubtitle>\r\n        </MListItemContent>\r\n      </MListItem>\r\n\r\n      <MListItem>\r\n        <MListItemAction></MListItemAction>\r\n\r\n        <MListItemContent>\r\n          <MListItemTitle>ali_connors@example.com</MListItemTitle>\r\n          <MListItemSubtitle>Work</MListItemSubtitle>\r\n        </MListItemContent>\r\n      </MListItem>\r\n\r\n      <MDivider Inset></MDivider>\r\n\r\n      <MListItem>\r\n        <MListItemIcon>\r\n          <MIcon Color=\"indigo\">\r\n            mdi-map-marker\r\n          </MIcon>\r\n        </MListItemIcon>\r\n\r\n        <MListItemContent>\r\n          <MListItemTitle>1400 Main Street</MListItemTitle>\r\n          <MListItemSubtitle>Orlando, FL 79938</MListItemSubtitle>\r\n        </MListItemContent>\r\n      </MListItem>\r\n    </MList>\r\n  </MCard>",
         "Type": "Demos.Components.List.misc.CardList",
         "Style": "",
@@ -4621,7 +4621,7 @@
         "Order": 14,
         "Name": "simpleAvatarList",
         "Title": "简单头像列表",
-        "Description": "<p>A simple list utilizing <code>MistItemIcon</code>, <code>MListItemTitle</code> and <code>MListItemAvatar</code>.</p>\n",
+        "Description": "<p>一个简单的列表利用 <code>MistItemIcon</code>, <code>MListItemTitle</code> 和 <code>MListItemAvatar</code>。</p>\n",
         "Code": "<MCard\r\n    MaxWidth=\"500\"\r\n    Class=\"mx-auto\">\r\n    <MToolbar\r\n        Color=\"indigo\"\r\n        Dark>\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Inbox</MToolbarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n    <MList>\r\n        @foreach (var item in items)\r\n        {\r\n            <MListItem >\r\n                <MListItemIcon>\r\n                    @if (item.icon)\r\n                    {\r\n                        <MIcon Color=\"pink\">\r\n                            mdi-star\r\n                        </MIcon>\r\n                    }\r\n                </MListItemIcon>\r\n\r\n                <MListItemContent>\r\n                    <MListItemTitle>@item.title</MListItemTitle>\r\n                </MListItemContent>\r\n\r\n                <MListItemAvatar>\r\n                    <MImage Src=\"@item.avatar\"></MImage>\r\n                </MListItemAvatar>\r\n            </MListItem>\r\n        }\r\n    </MList>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    List<(bool icon, string title, string avatar)> items = new List<(bool icon, string title, string avatar)>()\r\n    {\r\n        new(true, \"Jason Oner\", \"https://cdn.vuetifyjs.com/images/lists/1.jpg\"),\r\n        new(false, \"Travis Howard\", \"https://cdn.vuetifyjs.com/images/lists/2.jpg\"),\r\n        new(false, \"Ali Connors\", \"https://cdn.vuetifyjs.com/images/lists/3.jpg\"),\r\n        new(false, \"Cindy Baker\", \"https://cdn.vuetifyjs.com/images/lists/4.jpg\"),\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.List.misc.SimpleAvatarList",
         "Style": "",
@@ -4632,7 +4632,7 @@
         "Order": 15,
         "Name": "singleLineList",
         "Title": "单行列表",
-        "Description": "<p>Here we combine <code>MListItemAvatar</code> and <code>MLlistItemIcon</code> in a single-line list.</p>\n",
+        "Description": "<p>在这里，我们结合了单行列表中的 <code>MListItemAvatar</code> 和 <code>MLlistItemIcon</code>。</p>\n",
         "Code": "<MCard\r\n    Class=\"mx-auto\"\r\n    MaxWidth=\"500\">\r\n    <MToolbar\r\n        Color=\"deep-purple accent-4\"\r\n        Dark>\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>New Chat</MToolbarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n\r\n    <MList Subheader>\r\n        <MSubheader>Recent chat</MSubheader>\r\n\r\n        @foreach (var chat in recent)\r\n        {\r\n            <MListItem>\r\n                <MListItemAvatar>\r\n                    <MImage\r\n                        alt=\"@($\"{chat.title} avatar\")\"\r\n                        Src=\"@chat.avatar\">\r\n                    </MImage>\r\n                </MListItemAvatar>\r\n\r\n                <MListItemContent>\r\n                    <MListItemTitle>@chat.title</MListItemTitle>\r\n                </MListItemContent>\r\n\r\n                <MListItemIcon>\r\n                    <MIcon Color=\"@(chat.active ? \"deep-purple accent-4\" : \"grey\")\">\r\n                        mdi-message-outline\r\n                    </MIcon>\r\n                </MListItemIcon>\r\n            </MListItem>\r\n        }\r\n    </MList>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MList Subheader>\r\n        <MSubheader>Previous chats</MSubheader>\r\n\r\n        @foreach (var chat in previous)\r\n        {\r\n            <MListItem>\r\n                <MListItemAvatar>\r\n                    <MImage\r\n                        alt=\"@($\"{chat.title} avatar\")\"\r\n                        Src=\"@chat.avatar\">\r\n                    </MImage>\r\n                </MListItemAvatar>\r\n\r\n                <MListItemContent>\r\n                    <MListItemTitle>@chat.title</MListItemTitle>\r\n                </MListItemContent>\r\n            </MListItem>\r\n        }\r\n    </MList>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    List<(bool active, string avatar, string title)> recent = new List<(bool active, string avatar, string title)>()\r\n    {\r\n        new(true, \"https://cdn.vuetifyjs.com/images/lists/1.jpg\", \"Jason Oner\"),\r\n        new(true, \"https://cdn.vuetifyjs.com/images/lists/2.jpg\", \"Mike Carlson\"),\r\n        new(false, \"https://cdn.vuetifyjs.com/images/lists/3.jpg\", \"Cindy Baker\"),\r\n        new(false, \"https://cdn.vuetifyjs.com/images/lists/4.jpg\", \"Ali Connors\"),\r\n    };\r\n\r\n    List<(string title, string avatar)> previous = new List<(string title, string avatar)>()\r\n    {\r\n        new(\"Travis Howard\", \"https://cdn.vuetifyjs.com/images/lists/5.jpg\")\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.List.misc.SingleLineList",
         "Style": "",
@@ -4643,7 +4643,7 @@
         "Order": 16,
         "Name": "subheadingsAndDividers",
         "Title": "列表组标题和分割线",
-        "Description": "<p>Lists can contain multiple subheaders and dividers.</p>\n",
+        "Description": "<p>列表可以包含多个子标头和分隔符。</p>\n",
         "Code": "<MCard\r\n    MaxWidth=\"475\"\r\n    Class=\"mx-auto\">\r\n    <MToolbar\r\n        Color=\"teal\"\r\n        Dark>\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Settings</MToolbarTitle>\r\n    </MToolbar>\r\n\r\n    <MList\r\n        TwoLine\r\n        Subheader>\r\n        <MSubheader>General</MSubheader>\r\n\r\n        <MListItem>\r\n            <MListItemContent>\r\n                <MListItemTitle>Profile photo</MListItemTitle>\r\n                <MListItemSubtitle>Change your Google+ profile photo</MListItemSubtitle>\r\n            </MListItemContent>\r\n        </MListItem>\r\n\r\n        <MListItem>\r\n            <MListItemContent>\r\n                <MListItemTitle>Show your status</MListItemTitle>\r\n                <MListItemSubtitle>Your status is visible to everyone</MListItemSubtitle>\r\n            </MListItemContent>\r\n        </MListItem>\r\n    </MList>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MList\r\n        Subheader\r\n        TwoLine\r\n        Flat>\r\n        <MSubheader>Hangout notifications</MSubheader>\r\n\r\n        <MListItemGroup\r\n            @bind-Values=\"settings\"\r\n            multiple>\r\n            <MListItem>\r\n                <ItemContent>\r\n                    <MListItemAction>\r\n                        <MCheckbox\r\n                            IsActive=\"context.Active\"\r\n                            Color=\"primary\">\r\n                        </MCheckbox>\r\n                    </MListItemAction>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>Notifications</MListItemTitle>\r\n                        <MListItemSubtitle>Allow notifications</MListItemSubtitle>\r\n                    </MListItemContent>\r\n                </ItemContent>\r\n            </MListItem>\r\n\r\n            <MListItem>\r\n                <ItemContent>\r\n                    <MListItemAction>\r\n                        <MCheckbox\r\n                            IsActive=\"context.Active\"\r\n                            Color=\"primary\">\r\n                        </MCheckbox>\r\n                    </MListItemAction>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>Sound</MListItemTitle>\r\n                        <MListItemSubtitle>Hangouts message</MListItemSubtitle>\r\n                    </MListItemContent>\r\n                </ItemContent>\r\n            </MListItem>\r\n\r\n            <MListItem>\r\n                <ItemContent>\r\n                    <MListItemAction>\r\n                        <MCheckbox\r\n                            IsActive=\"context.Active\"\r\n                            Color=\"primary\">\r\n                        </MCheckbox>\r\n                    </MListItemAction>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>Video sounds</MListItemTitle>\r\n                        <MListItemSubtitle>Hangouts video call</MListItemSubtitle>\r\n                    </MListItemContent>\r\n                </ItemContent>\r\n            </MListItem>\r\n\r\n            <MListItem>\r\n                <ItemContent>\r\n                    <MListItemAction>\r\n                        <MCheckbox\r\n                            IsActive=\"context.Active\"\r\n                            Color=\"primary\">\r\n                        </MCheckbox>\r\n                    </MListItemAction>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>Invites</MListItemTitle>\r\n                        <MListItemSubtitle>Notify when receiving invites</MListItemSubtitle>\r\n                    </MListItemContent>\r\n                </ItemContent>\r\n            </MListItem>\r\n        </MListItemGroup>\r\n    </MList>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    List<StringNumber> settings = new();\r\n\r\n}",
         "Type": "Demos.Components.List.misc.SubheadingsAndDividers",
         "Style": "",
@@ -4655,6 +4655,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg",
     "Cols": 1,
+    "Related": [
+      "/components/item-groups",
+      "/components/list-item-groups",
+      "/components/subheaders"
+    ],
     "Subtitle": "列表",
     "Title": "Lists",
     "Type": "列表"
@@ -4665,7 +4670,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:03.3062352+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2440968+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4841,13 +4846,13 @@
       "API": "\n<ul>\n<li><a href=\"/api/MNavigationDrawer\">MNavigationDrawer</a></li>\n</ul>\n",
       "警告": "\n<!--alert:error-->\n<p>如果使用启用了 <strong>App</strong> 属性的 <code>MNavigationDrawer</code>，则不需要像示例中那样使用 <strong>Absolute</strong> 属性。</p>\n<!--/alert:error-->\n"
     },
-    "LastWriteTime": "2021-11-16T15:17:58.2721746+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8246057+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "index",
         "Title": "使用",
-        "Description": "<p>导航抽屉主要用于存放您应用程序中页面的链接。通常使用 <strong>Nav</strong> 属性将抽屉与 <a href=\"/components/list\">MList</a> 组件配对使用。</p>\n",
+        "Description": "<p>导航抽屉主要用于存放您应用程序中页面的链接。通常使用 <strong>Nav</strong> 属性将抽屉与 <a href=\"/components/lists\">MList</a> 组件配对使用。</p>\n",
         "Code": "<MCard Height=\"400\"\r\n       Width=\"256\"\r\n       Class=\"mx-auto\">\r\n    <MNavigationDrawer Permanent>\r\n        <MListItem>\r\n            <MListItemContent>\r\n                <MListItemTitle class=\"text-h6\">\r\n                    Application\r\n                </MListItemTitle>\r\n                <MListItemSubtitle>\r\n                    subtext\r\n                </MListItemSubtitle>\r\n            </MListItemContent>\r\n        </MListItem>\r\n\r\n        <MDivider></MDivider>\r\n\r\n        <MList Dense\r\n               Nav>\r\n            @foreach (var item in _items)\r\n            {\r\n                <MListItem Link>\r\n                    <MListItemIcon>\r\n                        <MIcon>@item.Icon</MIcon>\r\n                    </MListItemIcon>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>@item.Title</MListItemTitle>\r\n                    </MListItemContent>\r\n                </MListItem>\r\n            }\r\n        </MList>\r\n    </MNavigationDrawer>\r\n</MCard>\r\n\r\n@code{\r\n    class Item\r\n    {\r\n        public string Title { get; set; }\r\n        public string Icon { get; set; }\r\n    }\r\n\r\n    private Item[] _items = new Item[]\r\n    {\r\n         new Item{ Title= \"Dashboard\", Icon= \"mdi-view-dashboard\" },\r\n         new Item { Title= \"Photos\", Icon= \"mdi-image\" },\r\n         new Item { Title= \"About\", Icon= \"mdi-help-box\" }\r\n    };\r\n}\r\n\r\n\r\n\r\n",
         "Type": "Demos.Components.NavigationDrawer.usage.Index",
         "Style": "",
@@ -4973,7 +4978,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.8122983+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8256046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5046,9 +5051,9 @@
     "Category": "Components",
     "Cols": 1,
     "Related": [
-      "/components/forms",
-      "/components/selection-controls",
-      "/components/selects"
+      "/components/cards",
+      "/components/sheets",
+      "/components/dialogs"
     ],
     "Subtitle": "遮罩层",
     "Title": "Overlays",
@@ -5060,7 +5065,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.8012987+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.827605+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5147,7 +5152,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MColorPicker\">MColorPicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.0213047+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8296041+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5221,7 +5226,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ColorPicker.svg",
     "Cols": 1,
     "Related": [
-      "/components/menu",
+      "/components/menus",
       "/styles/colors",
       "/features/theme"
     ],
@@ -5236,7 +5241,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2021-11-16T15:17:58.306173+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8326032+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5479,7 +5484,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2021-11-16T15:17:58.3101739+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8346068+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5622,7 +5627,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:17:58.3331731+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8366046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5795,7 +5800,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T15:18:40.3653055+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8376032+08:00",
     "DemoList": [
       {
         "Order": 20,
@@ -5882,7 +5887,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.7362988+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8406035+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5958,7 +5963,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.7222979+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8456135+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6122,7 +6127,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:17:58.3711741+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.167907+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6231,7 +6236,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.6822982+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8466114+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -6286,7 +6291,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T10:44:03.0314876+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0756929+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6330,7 +6335,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.6722983+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1699113+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6406,7 +6411,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.6582989+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1739081+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6571,7 +6576,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.6112992+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6647,7 +6652,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T15:18:40.5952995+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6702,7 +6707,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T17:33:50.2071767+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0826969+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6966,7 +6971,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T17:33:50.164177+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0836945+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7042,9 +7047,9 @@
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n<li><a href=\"/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n",
-      "Caveats": "\n<!--alert:warning-->\n<p>当使用 <strong>Dark</strong> 属性和 <strong>不</strong> 提供自定义 <strong>Color</strong> 时，<code>MTabs</code>组件会将其颜色默认为 white。</p>\n"
+      "注意": "\n<!--alert:warning-->\n<p>当使用 <strong>Dark</strong> 属性和 <strong>不</strong> 提供自定义 <strong>Color</strong> 时，<code>MTabs</code>组件会将其颜色默认为 white。</p>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:02.5722433+08:00",
+    "LastWriteTime": "2021-11-18T17:20:09.724454+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7242,7 +7247,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T17:33:50.146178+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0886948+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7372,9 +7377,9 @@
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
-      "Caveats": "\n<!--alert:info-->\n<p>为了正确定位 <code>MTooltip</code>，需要一个位置支撑(<code>Top</code> | <code>Bottom</code> | <code>Left</code> | <code>Right</code>)。</p>\n"
+      "注意": "\n<!--alert:info-->\n<p>为了正确定位 <code>MTooltip</code>，需要一个位置支撑(<code>Top</code> | <code>Bottom</code> | <code>Left</code> | <code>Right</code>)。</p>\n"
     },
-    "LastWriteTime": "2021-11-05T15:50:02.6882435+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2450964+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7429,7 +7434,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTreeview\">MTreeview</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-25T14:31:26.5721881+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0936951+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7627,7 +7632,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MUpload\">MUpload</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T17:33:50.0811781+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0946935+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7670,7 +7675,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-18T09:22:16.1528287+08:00",
+    "LastWriteTime": "2021-11-17T14:30:00.36988+08:00",
     "DemoList": [
       {
         "Order": 0,

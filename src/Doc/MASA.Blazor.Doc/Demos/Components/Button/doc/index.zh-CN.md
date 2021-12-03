@@ -6,7 +6,7 @@ title: Buttons
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg
 related:
-  - /components/buttongroups
+  - /components/button-groups
   - /components/icons
   - /components/floating-action-buttons
 ---

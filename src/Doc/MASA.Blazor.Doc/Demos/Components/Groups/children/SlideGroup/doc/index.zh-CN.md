@@ -10,8 +10,8 @@ related:
   - /components/tabs
 ---
 
-`MSlideGroup` 组件用于显示伪分页信息。它以 [**MItemGroup**](/components/itemgroup) 为核心，为 [**MTabs**](/components/tabs)
-和 [**MChipGroup**](/components/chipgroup) 等组件提供基础。
+`MSlideGroup` 组件用于显示伪分页信息。它以 [**MItemGroup**](/components/item-groups) 为核心，为 [**MTabs**](/components/tabs)
+和 [**MChipGroup**](/components/chip-groups) 等组件提供基础。
 
 ## API
 

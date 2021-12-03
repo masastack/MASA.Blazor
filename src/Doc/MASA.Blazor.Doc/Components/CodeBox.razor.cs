@@ -7,8 +7,6 @@ namespace MASA.Blazor.Doc.Components;
 
 public partial class CodeBox
 {
-    private const int Await = 2000;
-
     private static string _githubUrlTemplate =
         "https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Doc/MASA.Blazor.Doc/{0}.razor";
 
@@ -24,7 +22,6 @@ public partial class CodeBox
     };
 
     private StringNumber _activeItem;
-    private bool _clicked;
     private bool _expend;
     private bool _showComponent;
 
@@ -92,16 +89,5 @@ public partial class CodeBox
                 StateHasChanged();
             }
         }
-    }
-
-    private async Task Copy(string text)
-    {
-        _clicked = true;
-
-        await Js.InvokeVoidAsync(JsInteropConstants.Copy, text);
-
-        await Task.Delay(Await);
-
-        _clicked = false;
     }
 }
