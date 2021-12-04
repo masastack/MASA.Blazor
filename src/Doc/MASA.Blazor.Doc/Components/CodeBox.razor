@@ -7,17 +7,6 @@
 @if (Component != null)
 {
     <MSheet Outlined Rounded="true" Class="mb-9 m-example">
-        <MSheet Rounded="true" Class="pa-4">
-            @if (_showComponent)
-            {
-                @Component
-            }
-            else
-            {
-                <div class="text-center">Loading...</div>
-            }
-        </MSheet>
-        <MDivider></MDivider>
         <div class="m-lazy" style="min-height: 52px;">
             <div class="text-end pa-2">
                 @* <span class="m-app-tooltip-btn d-inline-block"> *@
@@ -60,9 +49,10 @@
                 </span>
             </div>
         </div>
-        <MDivider></MDivider>
+
         <ExpandTransition>
             <Element Show="_expend">
+                <MDivider></MDivider>
                 <MItemGroup @bind-Value="_activeItem" Class="pa-2" Mandatory>
                     @foreach (var ((type, _), content) in _items)
                     {
@@ -80,33 +70,24 @@
                         if (content == null) continue;
 
                         <MWindowItem Value="@type">
-                            <MSheet Outlined Color="grey lighten-5" Class="app-code overflow-hidden my-0">
-                                <HighlightedCode Code="@content" CanLoad Language="@lang"></HighlightedCode>
-                                <MButton Class="m-btn--copy mr-n2 mt-n2"
-                                         Style="background-color:inherit"
-                                         Absolute Icon Right Rounded Top
-                                         Disabled="_clicked"
-                                         OnClick="() => Copy(content)">
-                                    <FadeTransition>
-                                        <Element Show="_clicked">
-                                            <MIcon Color="grey">
-                                                mdi-check
-                                            </MIcon>
-                                        </Element>
-                                    </FadeTransition>
-                                    <FadeTransition>
-                                        <Element Show="!_clicked" Style="position: absolute;">
-                                            <MIcon Color="grey">
-                                                mdi-content-copy
-                                            </MIcon>
-                                        </Element>
-                                    </FadeTransition>
-                                </MButton>
-                            </MSheet>
+                            <AppCode Code="@content" Language="@lang" Class="my-0"></AppCode>
                         </MWindowItem>
                     }
                 </MWindow>
             </Element>
         </ExpandTransition>
+
+        <MDivider></MDivider>
+
+        <MSheet Rounded="true" Class="pa-4">
+            @if (_showComponent)
+            {
+                @Component
+            }
+            else
+            {
+                <div class="text-center">Loading...</div>
+            }
+        </MSheet>
     </MSheet>
 }

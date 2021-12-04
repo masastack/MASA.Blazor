@@ -24,7 +24,7 @@ namespace MASA.Blazor.Doc.CLI.Commands
             { "Breadcrumbs", new string[] { "Breadcrumbs" } },
             { "BreadcrumbsDivider", new string[] { "Breadcrumbs" } },
             { "BreadcrumbsItem", new string[] { "Breadcrumbs" } },
-            { "Button", new string[] { "Buttons" } },
+            { "Button", new string[] { "Buttons", "Button Groups" } },
             { "ButtonGroup", new string[] { "Button groups" } },
             { "Calendar", new string[] { "Calendars" } },
             { "CalendarDaily", new string[] { "Calendars" } },

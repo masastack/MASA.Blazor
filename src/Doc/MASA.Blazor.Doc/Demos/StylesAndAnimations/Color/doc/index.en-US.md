@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Color
-title: Color
+title: Colors
 cols: 1
 ---
 

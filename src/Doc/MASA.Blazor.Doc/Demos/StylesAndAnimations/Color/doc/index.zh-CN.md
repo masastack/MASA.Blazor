@@ -2,7 +2,7 @@
 category: Components
 subtitle: 颜色
 type: 颜色
-title: Color
+title: Colors
 cols: 1
 
 ---

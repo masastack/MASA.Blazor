@@ -5,4 +5,4 @@ title: Borders
 cols: 1
 ---
 
-Border component can wrap any content with one side border.
+The Border component can add an extra border to anything.

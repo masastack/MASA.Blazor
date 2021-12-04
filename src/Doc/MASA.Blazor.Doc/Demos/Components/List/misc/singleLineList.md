@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-Here we combine `MListItemAvatar` and `MLlistItemIcon` in a single-line list.
+在这里，我们结合了单行列表中的 `MListItemAvatar` 和 `MLlistItemIcon`。
 
 ## en-US
 

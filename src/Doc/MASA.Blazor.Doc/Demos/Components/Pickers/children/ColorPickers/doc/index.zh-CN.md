@@ -6,7 +6,7 @@ title: Color pickers
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ColorPicker.svg
 related:
-  - /components/menu
+  - /components/menus
   - /styles/colors
   - /features/theme
 ---

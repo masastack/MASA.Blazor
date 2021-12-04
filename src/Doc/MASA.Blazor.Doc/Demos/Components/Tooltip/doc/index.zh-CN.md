@@ -17,7 +17,7 @@ related:
 
 - [MTooltip](/api/MTooltip)
 
-## Caveats
+## 注意
 
 <!--alert:info-->
 为了正确定位 `MTooltip`，需要一个位置支撑(`Top` | `Bottom` | `Left` | `Right`)。

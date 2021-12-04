@@ -21,7 +21,7 @@ related:
 - [MTabsItems](/api/MTabsItems)
 - [MTabsSlider](/api/MTabsSlider)
 
-## Caveats
+## 注意
 
 <!--alert:warning-->
 当使用 **Dark** 属性和 **不** 提供自定义 **Color** 时，`MTabs`组件会将其颜色默认为 white。

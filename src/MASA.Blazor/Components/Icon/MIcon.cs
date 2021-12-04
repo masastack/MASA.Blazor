@@ -10,6 +10,16 @@ namespace MASA.Blazor
 {
     public partial class MIcon : BIcon, IThemeable, IIcon, ISizeable
     {
+        private readonly Dictionary<string, string> _sizeMap = new()
+        {
+            { nameof(XSmall), "12px" },
+            { nameof(Small), "16px" },
+            { "Default", "24px" },
+            { nameof(Medium), "28px" },
+            { nameof(Large), "36px" },
+            { nameof(XLarge), "40px" },
+        };
+
         /// <summary>
         /// Attention! End with a space
         /// </summary>
@@ -65,18 +75,27 @@ namespace MASA.Blazor
             }
         }
 
-        private string GetSize()
+        public  bool Medium => false;
+
+        public string GetSize()
         {
-            return _sizer.GetSize() ?? Size?.ToUnit();
-        }
+            var sizes = new Dictionary<string, bool>()
+            {
+                { nameof(XSmall), XSmall },
+                { nameof(Small), Small },
+                { nameof(Medium), Medium },
+                { nameof(Large), Large },
+                { nameof(XLarge), XLarge },
+            };
 
-        private Sizer _sizer;
+            var key = sizes.FirstOrDefault(item => item.Value).Key;
 
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
+            if (key != null && _sizeMap.TryGetValue(key, out var px))
+            {
+                return px;
+            }
 
-            _sizer = new Sizer(this);
+            return Size?.ToUnit();
         }
 
         protected override void SetComponentClass()
