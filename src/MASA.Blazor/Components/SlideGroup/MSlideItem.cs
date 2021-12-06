@@ -13,7 +13,7 @@ namespace MASA.Blazor
         {
             await base.ToggleItem();
 
-            await (ItemGroup as BSlideGroup)?.SetWidths();
+            await (ItemGroup as BSlideGroup)?.SetWidths(Value);
         }
     }
 }
