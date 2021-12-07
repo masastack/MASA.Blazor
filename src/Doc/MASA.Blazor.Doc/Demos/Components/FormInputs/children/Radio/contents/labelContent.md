@@ -1,7 +1,7 @@
 ---
 order: 1
 title:
-  zh-CN: LabelContent
+  zh-CN: 标签
   en-US: LabelContent
 ---
 

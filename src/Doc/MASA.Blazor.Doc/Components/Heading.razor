@@ -1,31 +1,31 @@
 ﻿@if (Level == 1)
 {
     <h1 class="@_class" @attributes="@Attributes">
-        <AnchorableTitle Title="@Title" Href="@Href" Disabled="@(!IsAnchor)" OnClick="OnClick"></AnchorableTitle>
+        <AnchorableTitle Href="@Href" OnClick="OnClick">@ChildContent</AnchorableTitle>
     </h1>
 }
 else if (Level == 3)
 {
     <h3 class="@_class" @attributes="@Attributes">
-        <AnchorableTitle Title="@Title" Href="@Href" Disabled="@(!IsAnchor)" OnClick="OnClick"></AnchorableTitle>
+        <AnchorableTitle Href="@Href" OnClick="OnClick">@ChildContent</AnchorableTitle>
     </h3>
 }
 else if (Level == 4)
 {
     <h4 class="@_class" @attributes="@Attributes">
-        <AnchorableTitle Title="@Title" Href="@Href" Disabled="@(!IsAnchor)" OnClick="OnClick"></AnchorableTitle>
+        <AnchorableTitle Href="@Href" OnClick="OnClick">@ChildContent</AnchorableTitle>
     </h4>
 }
 else if (Level == 5)
 {
     <h5 class="@_class" @attributes="@Attributes">
-        <AnchorableTitle Title="@Title" Href="@Href" Disabled="@(!IsAnchor)" OnClick="OnClick"></AnchorableTitle>
+        <AnchorableTitle Href="@Href" OnClick="OnClick">@ChildContent</AnchorableTitle>
     </h5>
 }
 else
 {
     <h2 class="@_class" @attributes="@Attributes">
-        <AnchorableTitle Title="@Title" Href="@Href" Disabled="@(!IsAnchor)" OnClick="OnClick"></AnchorableTitle>
+        <AnchorableTitle Href="@Href" OnClick="OnClick">@ChildContent</AnchorableTitle>
     </h2>
 }
 
@@ -34,27 +34,21 @@ else
     private string _class = "";
 
     [Parameter]
-    public int Level { get; set; }
+    [EditorRequired]
+    public RenderFragment ChildContent { get; set; }
 
     [Parameter]
     public string Href { get; set; }
-
+    
     [Parameter]
-    public bool IsAnchor { get; set; }
+    public int Level { get; set; }
 
     [Parameter]
     public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-    [Parameter]
-    [EditorRequired]
-    public string Title { get; set; }
-
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> Attributes { get; set; }
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
-
+    
     protected override void OnParametersSet()
     {
         _class = Level switch {

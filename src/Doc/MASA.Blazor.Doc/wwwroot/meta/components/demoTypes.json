@@ -177,7 +177,7 @@
   "Demos.Components.FormInputs.children.Radio.props.Color",
   "Demos.Components.FormInputs.children.Radio.props.Direction",
   "Demos.Components.FormInputs.children.Radio.props.Mandatory",
-  "Demos.Components.FormInputs.children.Radio.misc.LabelContent",
+  "Demos.Components.FormInputs.children.Radio.contents.LabelContent",
   "Demos.Components.FormInputs.children.RangeSlider.usage.Index",
   "Demos.Components.FormInputs.children.RangeSlider.props.Disabled",
   "Demos.Components.FormInputs.children.RangeSlider.props.MinAndMax",

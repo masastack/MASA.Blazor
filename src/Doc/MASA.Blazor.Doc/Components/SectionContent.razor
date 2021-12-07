@@ -1,6 +1,8 @@
 ﻿@using MASA.Blazor.Doc.Models.Extensions
+@using MASA.Blazor.Doc.Utils
+
 <section id="@SectionId" class="@Class">
-    <HTag Level="@Level" Title="@FormattedTitle" Href="@SectionId" IsAnchor="IsAnchor" OnClick="HandleOnClick"/>
+    <Heading Level="@Level" Href="@Hash" OnClick="HandleOnClick">@FormattedTitle</Heading>
 
     @ChildContent
 </section>
@@ -9,6 +11,9 @@
 
     [Inject]
     private IJSRuntime Js { get; set; }
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
 
     [Parameter]
     public string Class { get; set; }
@@ -35,19 +40,15 @@
 
     private string FormattedTitle => string.IsNullOrEmpty(SubTitle) ? Title : $"{Title}（{SubTitle}）";
 
+    private string Hash => "#" + SectionId;
+
     private string SectionId => Id ?? Title.HashSection();
 
-    private async void HandleOnClick(MouseEventArgs _)
+    private async Task HandleOnClick(MouseEventArgs _)
     {
-        var element = await Js.InvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, "#" + SectionId);
-
-        var options = new
-        {
-            Top = element.OffsetTop,
-            Left = 0,
-            Behavior = "smooth"
-        };
-
-        await Js.InvokeVoidAsync("window.scrollTo", options);
+        // if TODO:[issue](https://github.com/dotnet/aspnetcore/issues/36605) fixed, use 
+        // NavigationManager.NavigateToHash(Hash);
+        // else
+        await Js.ScrollToHash(Hash);
     }
 }

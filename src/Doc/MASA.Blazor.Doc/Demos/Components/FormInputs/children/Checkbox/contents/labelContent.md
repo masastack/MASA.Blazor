@@ -1,8 +1,8 @@
 ---
 order: 5
 title:
-  zh-CN: Label content
-  en-US: Label content
+  zh-CN: Label
+  en-US: 标签
 ---
 
 ## zh-CN

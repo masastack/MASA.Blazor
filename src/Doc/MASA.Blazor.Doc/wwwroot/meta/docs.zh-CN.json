@@ -3969,18 +3969,33 @@
         "Url": "getting-started/installation",
         "Contents": [
           {
+            "Id": "section-1739819480",
+            "Title": "安装 Masa.Template 模板",
+            "Level": 0
+          },
+          {
+            "Id": "section-430380796",
+            "Title": "创建项目",
+            "Level": 0
+          },
+          {
+            "Id": "section-1572239414",
+            "Title": "启动项目",
+            "Level": 0
+          },
+          {
             "Id": "section-324942799",
             "Title": "创建一个 Blazor Server 项目",
             "Level": 0
           },
           {
             "Id": "section-1125899332",
-            "Title": "安装 Nuget 包",
+            "Title": "安装 NuGet 包",
             "Level": 0
           },
           {
-            "Id": "section-185387894",
-            "Title": "引入样式、字体、脚本",
+            "Id": "section-141901483",
+            "Title": "引入资源文件",
             "Level": 0
           },
           {
@@ -3989,8 +4004,13 @@
             "Level": 0
           },
           {
-            "Id": "section-15755789",
-            "Title": "全局配置",
+            "Id": "section-14069023",
+            "Title": "全局引用",
+            "Level": 0
+          },
+          {
+            "Id": "section-2695973",
+            "Title": "使用",
             "Level": 0
           }
         ]
