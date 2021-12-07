@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -12,23 +13,22 @@ namespace MASA.Blazor.Doc.Utils
 {
     public class I18nHelper
     {
-        public static void AddLang()
+        public static async Task GetLocalesAndAddLang(HttpClient httpClient)
         {
-            var root = new DirectoryInfo(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Locale"));
-            FileInfo[] files = root.GetFiles();
-
-            if (files.Length > 0)
+            var languageDict = await httpClient.GetFromJsonAsync<Dictionary<string, string[]>>("_content/MASA.Blazor.Doc/locale/languages.json");
+            if (languageDict?.Count > 0)
             {
+                string[] languages = languageDict["SupportLanguages"];
+
                 var defaultLanguage = CultureInfo.CurrentCulture.Name;
 
-                foreach (var file in files)
+                foreach (var language in languages)
                 {
-                    var language = file.Name[..file.Name.LastIndexOf('.')];
-                    var content = File.ReadAllText(file.FullName);
+                    var content = await httpClient.GetFromJsonAsync<Dictionary<string, string>>($"_content/MASA.Blazor.Doc/locale/{language}.json");
 
                     var isDefaultLanguage = defaultLanguage == language;
 
-                    I18n.AddLang(language, JsonSerializer.Deserialize<Dictionary<string, string>>(content), isDefaultLanguage);
+                    I18n.AddLang(language, content, isDefaultLanguage);
                 }
             }
         }
