@@ -1,5 +1,7 @@
-﻿using BlazorComponent.Components;
+﻿using BlazorComponent;
+using BlazorComponent.Components;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor.Doc.Shared
 {
-    public partial class BaseLayout
+    public partial class BaseLayout : IDisposable
     {
         private bool _isChinese;
         private string _searchBorderColor = "#00000000";
@@ -24,6 +26,8 @@ namespace MASA.Blazor.Doc.Shared
 
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
+
+        public StringNumber SelectTab { get; set; }
 
         private void TurnLanguage()
         {
@@ -46,6 +50,20 @@ namespace MASA.Blazor.Doc.Shared
             _isChinese = CultureInfo.CurrentCulture.Name == "zh-CN";
             var lang = _isChinese ? "zh-CN" : "en-US";
             ChangeLanguage(lang);
+
+            Navigation.LocationChanged += OnLocationChanged;
+        }
+
+        private void OnLocationChanged(object sender, LocationChangedEventArgs e)
+        {
+            if (Navigation.BaseUri == e.Location)
+                SelectTab = null;
+            else if (e.Location.Contains("meet-the-team"))
+                SelectTab = 2;
+            else
+                SelectTab = 0;
+
+            StateHasChanged();
         }
 
         public string T(string key)
@@ -53,12 +71,9 @@ namespace MASA.Blazor.Doc.Shared
             return I18n.LanguageMap.GetValueOrDefault(key);
         }
 
-        private async Task Toggle(string url)
+        public void Dispose()
         {
-            if (!string.IsNullOrWhiteSpace(url))
-            {
-                await JSRuntime.InvokeVoidAsync("window.open", url);
-            }
+            Navigation.LocationChanged -= OnLocationChanged;
         }
     }
 }

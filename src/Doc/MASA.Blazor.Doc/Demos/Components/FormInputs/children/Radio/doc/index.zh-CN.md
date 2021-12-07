@@ -16,4 +16,4 @@ related:
 ## API
 
 - [MRadio](/api/MRadio)
-- [MRadio](/api/MRadioGroup)
+- [MRadioGroup](/api/MRadioGroup)

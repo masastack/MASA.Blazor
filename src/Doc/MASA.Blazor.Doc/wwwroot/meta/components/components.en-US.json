@@ -560,7 +560,7 @@
         "Order": 1,
         "Name": "toggleNavigationDrawers",
         "Title": "Toggle navigation drawers",
-        "Description": "<p>Using the functional component <code>MAppBarNavIcon</code> you can toggle the state of other components such as\na <a href=\"%22/components/navigation-drawers%22\"><strong>MNavigationDrawer</strong></a>.</p>\n",
+        "Description": "<p>Using the functional component <code>MAppBarNavIcon</code> you can toggle the state of other components such as\na <a href=\"/components/navigation-drawers\"><strong>MNavigationDrawer</strong></a>.</p>\n",
         "Code": "<MCard\r\n    Class=\"mx-auto overflow-hidden\"\r\n    Height=\"400\">\r\n    <MAppBar\r\n        Color=\"deep-purple\"\r\n        Dark>\r\n        <MAppBarNavIcon @onclick=\"() => drawer = true\"></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Title</MToolbarTitle>\r\n    </MAppBar>\r\n\r\n    <MNavigationDrawer\r\n        @bind-Value=\"drawer\"\r\n        Absolute\r\n        Temporary>\r\n        <MList\r\n            Nav\r\n            Dense>\r\n            <MListItemGroup\r\n                @bind-Value=\"group\"\r\n                ActiveClass=\"deep-purple--text text--accent-4\">\r\n                <MListItem>\r\n                    <MListItemIcon>\r\n                        <MIcon>mdi-home</MIcon>\r\n                    </MListItemIcon>\r\n                    <MListItemTitle>Home</MListItemTitle>\r\n                </MListItem>\r\n\r\n                <MListItem>\r\n                    <MListItemIcon>\r\n                        <MIcon>mdi-account</MIcon>\r\n                    </MListItemIcon>\r\n                    <MListItemTitle>Account</MListItemTitle>\r\n                </MListItem>\r\n            </MListItemGroup>\r\n        </MList>\r\n    </MNavigationDrawer>\r\n</MCard>\r\n\r\n@code {\r\n    bool drawer;\r\n    StringNumber group;\r\n}",
         "Type": "Demos.Components.Bars.children.AppBar.misc.ToggleNavigationDrawers",
         "Style": "",
@@ -834,7 +834,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>By default <code>MBreadcrumbs</code> will disable the linkage with router. You can enable the feature by using *<em>Linkage</em> prop.</p>\n"
     },
-    "LastWriteTime": "2021-11-12T13:32:30.0836279+08:00",
+    "LastWriteTime": "2021-12-06T14:29:50.6435346+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1715,7 +1715,7 @@
         "Name": "readonly",
         "Title": "Readonly",
         "Description": "<p>ExpansionPanels Basic Usage</p>\n",
-        "Code": "<div>\r\n    <div class=\"d-flex\">\r\n        <MCheckbox @bind-Value=\"_readonly\" Label=\"Readonly\"></MCheckbox>\r\n    </div>\r\n\r\n    <MExpansionPanels @bind-Values=\"panel\" Readonly=\"_readonly\" Multiple>\r\n        <MExpansionPanel>\r\n            <MExpansionPanelHeader>Panel 1</MExpansionPanelHeader>\r\n            <MExpansionPanelContent>\r\n                Some content\r\n            </MExpansionPanelContent>\r\n        </MExpansionPanel>\r\n\r\n        <MExpansionPanel>\r\n            <MExpansionPanelHeader>Panel 2</MExpansionPanelHeader>\r\n            <MExpansionPanelContent>\r\n                Some content\r\n            </MExpansionPanelContent>\r\n        </MExpansionPanel>\r\n\r\n        <MExpansionPanel>\r\n            <MExpansionPanelHeader>Panel 3</MExpansionPanelHeader>\r\n            <MExpansionPanelContent>\r\n                Some content\r\n            </MExpansionPanelContent>\r\n        </MExpansionPanel>\r\n    </MExpansionPanels>\r\n</div>\r\n\r\n\r\n@code {\r\n    List<StringNumber> panel = new() {0, 1};\r\n\r\n    bool _readonly = true;\r\n}",
+        "Code": "<div>\r\n    <div class=\"d-flex\">\r\n        <MCheckbox @bind-Value=\"_readonly\" Label=\"Readonly\"></MCheckbox>\r\n    </div>\r\n\r\n    <MExpansionPanels @bind-Values=\"panel\" Readonly=\"_readonly\" Multiple>\r\n        <MExpansionPanel>\r\n            <MExpansionPanelHeader>Panel 1</MExpansionPanelHeader>\r\n            <MExpansionPanelContent>\r\n                Some content\r\n            </MExpansionPanelContent>\r\n        </MExpansionPanel>\r\n\r\n        <MExpansionPanel>\r\n            <MExpansionPanelHeader>Panel 2</MExpansionPanelHeader>\r\n            <MExpansionPanelContent>\r\n                Some content\r\n            </MExpansionPanelContent>\r\n        </MExpansionPanel>\r\n\r\n        <MExpansionPanel>\r\n            <MExpansionPanelHeader>Panel 3</MExpansionPanelHeader>\r\n            <MExpansionPanelContent>\r\n                Some content\r\n            </MExpansionPanelContent>\r\n        </MExpansionPanel>\r\n    </MExpansionPanels>\r\n</div>\r\n\r\n\r\n@code {\r\n    List<StringNumber> panel = new() {0, 1};\r\n\r\n    bool _readonly;\r\n}",
         "Type": "Demos.Components.ExpansionPanels.props.Readonly",
         "Style": "",
         "Debug": false,
@@ -2033,9 +2033,9 @@
       {
         "Order": 5,
         "Name": "labelContent",
-        "Title": "Label content",
+        "Title": "标签",
         "Description": "<p><code>MCheckbox</code> labels can be defined in <strong>LabelContent</strong> - that will allow to use HTML content.</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCheckbox @bind-Value=\"checkbox\">\r\n        <LabelContent>\r\n            <div>\r\n                I agree that\r\n                <MTooltip Bottom>\r\n                    <ActivatorContent>\r\n                        <a target=\"_blank\" href=\"https://vuetifyjs.com\" @attributes=\"@context.Attrs\">MASA.Blazor</a>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        Opens in new window\r\n                    </ChildContent>\r\n                </MTooltip>\r\n                is awesome\r\n            </div>\r\n        </LabelContent>\r\n    </MCheckbox>\r\n</MContainer>\r\n\r\n@code {\r\n    bool checkbox = false;\r\n}",
+        "Code": "<MContainer Fluid>\r\n    <MCheckbox @bind-Value=\"checkbox\">\r\n        <LabelContent>\r\n            <div>\r\n                I agree that\r\n                <MTooltip Bottom>\r\n                    <ActivatorContent>\r\n                        <a target=\"_blank\" href=\"https://masa-blazor-docs-dev.lonsid.cn\" @attributes=\"@context.Attrs\">MASA.Blazor</a>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        Opens in new window\r\n                    </ChildContent>\r\n                </MTooltip>\r\n                is awesome\r\n            </div>\r\n        </LabelContent>\r\n    </MCheckbox>\r\n</MContainer>\r\n\r\n@code {\r\n    bool checkbox = false;\r\n}",
         "Type": "Demos.Components.FormInputs.children.Checkbox.contents.LabelContent",
         "Style": "",
         "Debug": false,
@@ -2258,7 +2258,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadio</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T14:06:52.7990006+08:00",
+    "LastWriteTime": "2021-12-06T15:30:34.82121+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2310,10 +2310,10 @@
         "Title": "LabelContent",
         "Description": "<p>Radio Group labels can be defined in <strong>LabelContent</strong> - that will allow to use HTML content.</p>\n",
         "Code": "<MContainer fluid>\r\n    <MRadioGroup @bind-Value=\"radios\">\r\n        <LabelContent>\r\n            <div>Your favourite <strong>search engine</strong></div>\r\n        </LabelContent>\r\n        <ChildContent>\r\n            <MRadio Value=\"@(\"Google\")\">\r\n                <LabelContent>\r\n                    <div>Of course it's <strong class=\"success--text\">Google</strong></div>\r\n                </LabelContent>\r\n            </MRadio>\r\n            <MRadio Value=\"@(\"Duckduckgo\")\">\r\n                <LabelContent>\r\n                    <div>Definitely <strong class=\"primary--text\">Duckduckgo</strong></div>\r\n                </LabelContent>\r\n            </MRadio>\r\n        </ChildContent>\r\n    </MRadioGroup>\r\n</MContainer>\r\n\r\n@code {\r\n\r\n    string radios;\r\n\r\n}",
-        "Type": "Demos.Components.FormInputs.children.Radio.misc.LabelContent",
+        "Type": "Demos.Components.FormInputs.children.Radio.contents.LabelContent",
         "Style": "",
         "Debug": false,
-        "Group": 3
+        "Group": 2
       }
     ],
     "Children": [],
@@ -4847,7 +4847,7 @@
       {
         "Order": 2,
         "Name": "elevation",
-        "Title": "Elevation",
+        "Title": "Elevation(TODO)",
         "Description": "<p>Adjust the Elevation of the <code>MColorPicker</code> component using the <strong>Elevation</strong> or <strong>Flat</strong> prop. The <strong>Flat</strong> is\nequivalent to setting <strong>Elevation</strong> to 0.</p>\n",
         "Code": "<MRow Justify=\"JustifyTypes.SpaceAround\"\r\n      Align=\"AlignTypes.Center\">\r\n    <MColorPicker Flat></MColorPicker>\r\n    <MColorPicker Elevation=\"15\"></MColorPicker>\r\n</MRow>\r\n",
         "Type": "Demos.Components.Pickers.children.ColorPickers.props.Elevation",

@@ -15,7 +15,7 @@ namespace MASA.Blazor.Doc.Pages
     public partial class Home
     {
         private int _onboarding = 0;
-        private int _length = 4;
+        private int _length = 1;
 
         [CascadingParameter]
         public BaseLayout BaseLayout { get; set; }

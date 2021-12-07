@@ -50,7 +50,7 @@
 }*/
 
 /*home css*/
-* {
+body {
     font-family: Roboto,'Microsoft YaHei';
 }
 
@@ -413,11 +413,6 @@
         margin-bottom: 0 !important;
     }
 
-.banner-btn button {
-    border-radius: 52px;
-    margin: 0 125px;
-}
-
 .banner {
     margin: 80px 80px 0 80px !important;
 }
@@ -497,7 +492,6 @@
 
 .video video {
     width: 100%;
-    height: 490px;
 }
 
 .video-p {
@@ -636,13 +630,13 @@
 .user-description {
     font-style: normal;
     font-weight: normal;
-    font-size: 24px;
-    line-height: 36px;
+    font-size: 20px;
+    line-height: 30px;
     text-align: justify;
     letter-spacing: 0.5px;
     color: #86909C;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -710,3 +704,50 @@
     .foot-box p {
         padding: 24px 0;
     }
+
+.activeNavClass {
+    background-color: #5c2d91;
+    border-color: #5c2d91;
+}
+
+/*.m-list-item.m-list-item--link.m-list-item--active.m-list-item--default {
+    background-color: #5c2d91;
+    color: #fff;
+}*/
+
+
+/*doc nav*/
+.doc-nav-list .m-list-item__icon:first-child {
+    margin-right: 4px !important;
+}
+
+.doc-nav-list .m-list-item__title {
+    font-size: 14px !important;
+}
+
+.doc-nav-list .theme--light.m-icon {
+    color: currentColor;
+}
+
+.doc-nav-list .m-list-group--sub-group .m-list-group__header {
+    padding-left: 8px !important;
+}
+
+.doc-nav-list .m-list-group--sub-group .m-list-group__items .m-list-item {
+    padding-left: 36px !important;
+}
+
+
+.doc-nav-list .m-list-group--no-action > .m-list-group__items > .m-list-item {
+    padding-left: 36px !important;
+}
+
+.doc-nav-list .m-list-group--no-action.m-list-group--sub-group > .m-list-group__items > .m-list-item {
+    padding-left: 60px !important;
+}
+
+.doc-nav-list .m-icon__svg .m-icon {
+    font-size: 24px !important;
+    height: 24px !important;
+    width: 24px !important;
+}

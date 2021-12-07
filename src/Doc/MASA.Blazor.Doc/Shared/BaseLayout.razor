@@ -4,14 +4,14 @@
     <MApp Style="background:#F2F3F5;">
         <MAppBar Height="80" Elevation=0 Fixed Color="white" Class="pc app-bar">
             <img style="cursor:pointer;" class="ml-6" src="https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png" @onclick=@(()=>Navigation.NavigateTo("/")) />
-            <MTabs BackgroundColor="white" Class="mtab-font" Color="black" SliderColor="purple darken-2" Optional>
-                <MTab Class="ml-11"
+            <MTabs BackgroundColor="white" Class="mtab-font ml-16" Color="black" SliderColor="purple darken-2" Optional @bind-Value="SelectTab">
+                <MTab Class="ml-2"
                       Style="min-width:40px; text-transform: none"
-                      OnClick="@(() => Navigation.NavigateTo("introduction/why"))">
+                      Href="introduction/why">
                     @T("Docs")
                 </MTab>
-                <MTab Class="ml-4" Style="min-width:40px; text-transform: none" OnClick="@(()=>Toggle("https://masa-blogs.lonsid.cn/categories/Blazor/"))">@T("Blog")</MTab>
-                <MTab Class="ml-4" Style="min-width:40px; text-transform: none">@T("Team")</MTab>
+                <MTab Class="ml-4" Style="min-width:40px; text-transform: none" Href="https://masa-blogs.lonsid.cn/categories/Blazor/" Target="_blank">@T("Blog")</MTab>
+                <MTab Class="ml-4" Style="min-width:40px; text-transform: none" Href="about/meet-the-team">@T("Team")</MTab>
             </MTabs>
 
             <MSpacer></MSpacer>
@@ -58,14 +58,14 @@
                             <MListItem Href="/docs/introduction/why">
                                 <MListItemContent>
                                     <MListItemTitle>
-                                         @T("Docs")
+                                        @T("Docs")
                                     </MListItemTitle>
                                 </MListItemContent>
                             </MListItem>
                             <MListItem Href="https://masa-blogs.lonsid.cn/categories/Blazor/" Target="_blank">
                                 <MListItemContent>
                                     <MListItemTitle>
-                                         @T("Blog")
+                                        @T("Blog")
                                     </MListItemTitle>
                                 </MListItemContent>
                             </MListItem>
