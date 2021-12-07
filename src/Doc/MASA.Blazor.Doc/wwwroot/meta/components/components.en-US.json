@@ -3,7 +3,7 @@
     "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>、<strong>Info</strong>、<strong>Warning</strong> 和 <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays. Many parts of an alert such as <strong>Border</strong>, <strong>Icon</strong>, and <strong>Color</strong> can also be customized to fit almost any situation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-22T16:33:22.8890524+08:00",
+    "LastWriteTime": "2021-11-22T17:46:20.6336992+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -171,7 +171,7 @@
     "Desc": "<p>The <code>MResponsive</code> component can be used to fix any section to a specific aspect ratio</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0736279+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.4382487+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -195,7 +195,7 @@
     "Desc": "<p>The MAvatar component is usually used to display user profile pictures. This component allows you to dynamically add and set the border radius of response images, icons and text. ** The tile ** variable can be used to display an avatar with no border radius.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-30T11:20:37.745403+08:00",
+    "LastWriteTime": "2021-12-02T18:38:45.4260729+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -286,7 +286,7 @@
     "Desc": "<p>The MBadge component overwrites or subscribes to an icon like an avatar or text on the content to highlight the user's information or just draw attention to a specific element. The content in the badge usually contains numbers or icons.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-26T09:53:53.2705332+08:00",
+    "LastWriteTime": "2021-11-26T16:40:15.5637749+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -354,7 +354,7 @@
     "Desc": "<p>The component is used to send intermittent messages of 1-2 actions to the user. It has two variables, single-line and multi-line (implied). These icons can be used with your messages and actions.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0756284+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.4462475+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -433,7 +433,7 @@
     "Desc": "<p>appbar component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-26T13:07:38.017444+08:00",
+    "LastWriteTime": "2021-11-22T17:46:11.4558363+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -578,7 +578,7 @@
     "Desc": "<p>The MSystemBar component can be used to display status to the user. It looks like an Android system bar and can contain icons, spaces, and some text.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0776289+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.4502473+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -646,7 +646,7 @@
     "Desc": "<p>The <code>MToolbar</code> component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site\nnavigation. The toolbar component works great in conjunction with <a href=\"/components/navigation-drawers\"><strong>MNavigationDrawer</strong></a> and <a href=\"/components/cards\"><strong>MCard</strong></a>.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0816266+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.4602468+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -796,7 +796,7 @@
     "Desc": "<p>The Border component can add an extra border to anything.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-02T13:33:53.2800713+08:00",
+    "LastWriteTime": "2021-12-02T18:38:45.4654435+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -834,7 +834,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>By default <code>MBreadcrumbs</code> will disable the linkage with router. You can enable the feature by using *<em>Linkage</em> prop.</p>\n"
     },
-    "LastWriteTime": "2021-11-12T13:32:30.0836279+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.4642468+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -917,7 +917,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>MButton</code> is the only component that behaves differently when using the <strong>Dark</strong> prop. Normally components use the <strong>Dark</strong> prop to denote that they have a dark colored background and need their text to be white. While this will work\nfor <code>MButton</code>, it is advised to only use the prop when the button <strong>IS ON</strong> a colored background due to the disabled state\nblending in with white backgrounds. If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2021-11-17T17:29:52.1597474+08:00",
+    "LastWriteTime": "2021-11-22T17:46:11.4758353+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1076,7 +1076,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:32:30.0886273+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.4752459+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1222,7 +1222,7 @@
     "Desc": "<p>The <code>MChip</code> component is used to convey small pieces of information. Using the close property, the chip becomes\ninteractive, allowing user interaction. This component is used by the <a href=\"/components/chip-groups\">MChipGroup</a> for advanced selection options.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T17:18:10.0838705+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.4772465+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1401,7 +1401,7 @@
     "Desc": "<p>The <code>Dialog</code> component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-10-29T14:11:50.7074219+08:00",
+    "LastWriteTime": "2021-11-09T10:30:56.7828998+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1524,7 +1524,7 @@
     "Desc": "<p>The v-divider component is used to separate sections of lists or layouts.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0916273+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.4842458+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1593,7 +1593,7 @@
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-01T19:22:48.728436+08:00",
+    "LastWriteTime": "2021-12-02T18:38:45.4850728+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1631,7 +1631,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-02T09:37:52.1130132+08:00",
+    "LastWriteTime": "2021-11-09T10:30:56.7909558+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1755,7 +1755,7 @@
     "Desc": "<p>The MFooter component is used to display public information that users may want to access from any page in the website.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.6580013+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.4882464+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1823,7 +1823,7 @@
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.6590057+08:00",
+    "LastWriteTime": "2021-12-02T18:38:45.4921918+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1925,7 +1925,7 @@
     "Desc": "<p>The <code>Select</code> component is used for collecting user provided information from a list of options.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-24T18:45:49.2469595+08:00",
+    "LastWriteTime": "2021-11-26T16:40:15.5747737+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1984,7 +1984,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T14:06:52.8350159+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.4982453+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2063,7 +2063,7 @@
     "Desc": "<p>v-file-input��һ�����Ƶ�������������ṩ��һ���ɾ���ѡ����棬��ʾ��ϸ��ѡ����Ϣ���ϴ����ȡ� ������ֱ��ȡ����\u05FC�ļ����롣</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.8319996+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.5062458+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2198,7 +2198,7 @@
     "Desc": "<p>Form validation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-30T11:20:37.8234266+08:00",
+    "LastWriteTime": "2021-12-02T18:38:45.5140733+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2258,7 +2258,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadio</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T14:06:52.7990006+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.5102456+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2327,7 +2327,7 @@
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:48.9354207+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.5142452+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2407,7 +2407,7 @@
     "Desc": "<p>The <code>Select</code> component is used for collecting user provided information from a list of options.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-10-29T13:31:00.2400602+08:00",
+    "LastWriteTime": "2021-11-09T10:30:56.8009066+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2541,7 +2541,7 @@
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.7730007+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.5302456+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2722,7 +2722,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-23T18:27:44.4298634+08:00",
+    "LastWriteTime": "2021-11-23T18:21:16.3588668+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2813,7 +2813,7 @@
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.7110144+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.5422448+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2937,7 +2937,7 @@
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.6990026+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.5582455+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3208,7 +3208,7 @@
       "Outline": "\n<p>In the grid system, we define the frame outside the information area based on row and column, to ensure that every area can have stable arrangement.</p>\n<p>Following is a brief look at how it works:</p>\n<ul>\n<li>Establish a set of column in the horizontal space defined by row (abbreviated col)</li>\n<li>Your content elements should be placed directly in the col, and only col should be placed directly in row</li>\n<li>The column grid system is a value of 1-24 to represent its range spans. For example, three columns of equal width can be created by <Col span={8} />.</li>\n<li>If the sum of col spans in a row are more than 24, then the overflowing col as a whole will start a new line arrangement.</li>\n</ul>\n<p>Our grid systems base on Flex layout to allow the elements within the parent to be aligned horizontally - left, center, right, wide arrangement, and decentralized arrangement. The Grid system also supports vertical alignment - top aligned, vertically centered, bottom-aligned. You can also define the order of elements by using order.</p>\n<p>Layout uses a 24 grid layout to define the width of each &quot;box&quot;, but does not rigidly adhere to the grid layout.</p>\n",
       "API": "\n<p>Row</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>align</td>\n<td>the vertical alignment of the flex layout:：<code>top</code> <code>middle</code> <code>bottom</code></td>\n<td>string</td>\n<td>top</td>\n</tr>\n<tr>\n<td>gutter</td>\n<td>spacing between grids, could be a number or a object like { xs: 8, sm: 16, md: 24}. or you can use array to make horizontal and vertical spacing work at the same time <code>[horizontal, vertical]</code> (supported after 1.5.0)</td>\n<td>number, object, array</td>\n<td>0</td>\n</tr>\n<tr>\n<td>justify</td>\n<td>horizontal arrangement of the flex layout:<code>start</code> <code>end</code> <code>center</code> <code>space-around</code> <code>space-between</code></td>\n<td>string</td>\n<td>start</td>\n</tr>\n<tr>\n<td>type</td>\n<td>layout mode, optional <code>flex</code>， browser support</td>\n<td>string</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>Col</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>offset</td>\n<td>the number of cells to offset Col from the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>order</td>\n<td>raster order, used in flex layout mode</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>pull</td>\n<td>the number of cells that raster is moved to the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>push</td>\n<td>the number of cells that raster is moved to the right</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>span</td>\n<td>raster number of cells to occupy, 0 corresponds to  <code>display: none</code></td>\n<td>string</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xs</td>\n<td><code>&lt;576px</code> and also default setting, could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>sm</td>\n<td><code>≥576px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>md</td>\n<td><code>≥768px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>lg</td>\n<td><code>≥992px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xl</td>\n<td><code>≥1200px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xxl</td>\n<td><code>≥1600px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>The breakpoints of responsive grid follow BootStrap 4 media queries rules(not including <code>occasionally</code> part).</p>\n"
     },
-    "LastWriteTime": "2021-11-12T16:38:35.8305896+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.5722435+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3433,7 +3433,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:39:37.8809032+08:00",
+    "LastWriteTime": "2021-11-09T15:11:03.9854873+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3513,7 +3513,7 @@
     "Desc": "<p>The <code>MChipGroup</code> supercharges the <code>MChip</code> component by providing groupable functionality. It is used for creating groups\nof selections using chips.</p>\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-03T16:49:05.8906094+08:00",
+    "LastWriteTime": "2021-11-09T10:30:56.8128962+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3595,7 +3595,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-04T13:34:00.0771991+08:00",
+    "LastWriteTime": "2021-11-09T10:30:56.8178968+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3677,7 +3677,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:39:38.0698762+08:00",
+    "LastWriteTime": "2021-11-09T15:11:04.0310546+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3758,7 +3758,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:39:38.0618742+08:00",
+    "LastWriteTime": "2021-11-09T15:11:04.0260553+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3850,7 +3850,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:39:37.8828831+08:00",
+    "LastWriteTime": "2021-11-09T15:11:03.9940545+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3929,7 +3929,7 @@
     "Desc": "<p>The <code>MHover</code> component provides a clean interface for handling the hover state of any component.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T16:38:35.8325907+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.5762437+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3988,7 +3988,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T16:38:35.8345908+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.5812427+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4068,7 +4068,7 @@
     "Desc": "<p>The <code>MImage</code> component is packed with features to support rich media.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T16:38:35.8375904+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.5862436+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4158,7 +4158,7 @@
     "Desc": "<p>The <code>MList</code> component is used to display information. It can contain an avatar, content, actions, subheaders and much\nmore. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a\nconsistent styling for organizing groups of text and images.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T16:38:35.8385907+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.5872434+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4366,7 +4366,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-10-29T13:31:00.2440968+08:00",
+    "LastWriteTime": "2021-11-09T10:30:56.8818969+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4533,7 +4533,7 @@
     "Desc": "<p><code>MNavigationDrawer</code> is a component used to navigate applications. It is usually wrapped and used in the <code>MCard</code> element.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8246057+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.5982443+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4657,7 +4657,7 @@
     "Desc": "<p>The <code>Overlay</code> component is used to provide emphasis on a particular element or parts of it. It signals to the user of a state change within the application and can be used for creating loaders, dialogs and more.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8256046+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.6022439+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4741,7 +4741,7 @@
     "Desc": "<p>The <code>MPagination</code> component is used to separate long data sets so that user data information can be known. Provided the amount, the paging component will automatically scale. The current maintenance page provides value easily.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.827605+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.6072447+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4820,7 +4820,7 @@
     "Desc": "<p>The MColorPicker allows you to select a color using a variety of input methods.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8296041+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.6152445+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4847,7 +4847,7 @@
       {
         "Order": 2,
         "Name": "elevation",
-        "Title": "Elevation",
+        "Title": "Elevation(TODO)",
         "Description": "<p>Adjust the Elevation of the <code>MColorPicker</code> component using the <strong>Elevation</strong> or <strong>Flat</strong> prop. The <strong>Flat</strong> is\nequivalent to setting <strong>Elevation</strong> to 0.</p>\n",
         "Code": "<MRow Justify=\"JustifyTypes.SpaceAround\"\r\n      Align=\"AlignTypes.Center\">\r\n    <MColorPicker Flat></MColorPicker>\r\n    <MColorPicker Elevation=\"15\"></MColorPicker>\r\n</MRow>\r\n",
         "Type": "Demos.Components.Pickers.children.ColorPickers.props.Elevation",
@@ -4900,7 +4900,7 @@
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8326032+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.6252434+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5134,7 +5134,7 @@
     "Desc": "<p><code>MDatePicker</code> can be used as a standalone month picker component.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8346068+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.6312442+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5269,7 +5269,7 @@
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8366046+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.6402418+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5436,7 +5436,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8376032+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.6412417+08:00",
     "DemoList": [
       {
         "Order": 20,
@@ -5515,7 +5515,7 @@
     "Desc": "<p>The component is used to display circular data to users. It also can be put into an indeterminate state to portray loading.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8406035+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.6512445+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5583,7 +5583,7 @@
     "Desc": "<p>The component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8456135+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.6602416+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5739,7 +5739,7 @@
     "Desc": "<p>Semantic vector graphics.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T13:32:23.167907+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.664242+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5840,7 +5840,7 @@
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8466114+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.6672411+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -5889,7 +5889,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T10:00:07.0756929+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.6712414+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5925,7 +5925,7 @@
     "Desc": "<p>The MSnackbar component is used to display quick messages to users. Snackbars supports positioning, removing delays, and callbacks.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T13:32:23.1699113+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.6742414+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5995,7 +5995,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-15T13:32:23.1739081+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.6882408+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6152,7 +6152,7 @@
     "Desc": "<p>The <code>Subheader</code> component is used to separate sections of lists.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.6942419+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6219,7 +6219,7 @@
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.696243+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6266,7 +6266,7 @@
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0826969+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.7142401+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6522,7 +6522,7 @@
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0836945+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.7182404+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6593,7 +6593,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n<li><a href=\"/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-18T17:20:09.724454+08:00",
+    "LastWriteTime": "2021-10-27T09:49:56.6089698+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6783,7 +6783,7 @@
     "Desc": "<p>MTimeline is very useful for displaying chronological information.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0886948+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.7312393+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6908,7 +6908,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-10-29T13:31:00.2450964+08:00",
+    "LastWriteTime": "2021-11-09T10:30:56.9398975+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6955,7 +6955,7 @@
     "Desc": "<p>The MTreeview component is useful for displaying large amounts of nested data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0936951+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.745241+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7145,7 +7145,7 @@
     "Desc": "<p>The <code>MFileInput</code> component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0946935+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.7472409+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7182,7 +7182,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T14:30:00.36988+08:00",
+    "LastWriteTime": "2021-11-17T17:23:13.7512402+08:00",
     "DemoList": [
       {
         "Order": 0,

@@ -2,20 +2,14 @@
 @layout BaseLayout
 @inject NavigationManager navigationmanager
 
-<MNavigationDrawer Fixed Floating Width="311" Top="80" Class="pl-4">
+<MNavigationDrawer Fixed Floating Width="270" Top="80" Class="pl-5 pb-6">
     <ChildContent>
-        <div class="pt-4 pb-3 px-2">
-            <div class="ml-2 mb-3 text-caption font-weight-regular text--secondary" path="premiere-sponsors">高级赞助商</div>
-            <MCard Tag="a" Ripple="false" Tile Class="d-inline-block px-2 py-1 transparent" Flat Link Style="box-shadow:none!important">
-                <MImage Contain Class="d-inline-block" MaxHeight="64" Width="180" Src="https://img-cdn.lonsid.co/image/www/img/logo_g_2.png"></MImage>
-            </MCard>
-        </div>
         <NavMenu @key="NavigationManager.Uri"></NavMenu>
         <div class="pt-12"></div>
     </ChildContent>
 </MNavigationDrawer>
 
-<MMain Style="padding:0; margin: 80px 329px 0 311px; background:#fff;border-left:1px solid #F2F3F5;">
+<MMain Style="padding:0; margin: 80px 329px 0 270px; background:#fff;">
     <MContainer Class="pa-4 pa-sm-6 pa-md-8" Fluid>
         <ErrorBoundary @ref="_errorBoundary">
             <ChildContent>
@@ -30,11 +24,15 @@
 
 <MNavigationDrawer Clipped Fixed Floating Right Top="80" Width="329" Class="default-toc py-4">
     <PrependContent>
-        <div class="mb-2 text-h6 font-weight-medium text--primary" path="contents">目录</div>
+        <div class="mb-2 text-h6 font-weight-medium text--primary ml-6" path="contents">目录</div>
     </PrependContent>
     <ChildContent>
         <Contents></Contents>
-        <div class="ml-5">
+        <div class="pt-4 pb-3 ml-6">
+            <div class="ml-2 mb-3 text-caption font-weight-regular text--secondary" path="premiere-sponsors">高级赞助商</div>
+            <MCard Tag="a" Ripple="false" Tile Class="d-inline-block px-2 py-1 transparent" Flat Link Style="box-shadow:none!important">
+                <MImage Contain Class="d-inline-block" MaxHeight="64" Width="180" Src="https://cdn.masastack.com/stack/images/website/masa-blazor/lsd-logo.png"></MImage>
+            </MCard>
         </div>
     </ChildContent>
 </MNavigationDrawer>

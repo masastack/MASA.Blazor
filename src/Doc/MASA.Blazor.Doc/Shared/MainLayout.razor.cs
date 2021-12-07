@@ -7,8 +7,6 @@ namespace MASA.Blazor.Doc.Shared
 {
     public partial class MainLayout : LayoutComponentBase
     {
-
-
         private ErrorBoundary _errorBoundary;
 
         [Inject]

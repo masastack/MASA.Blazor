@@ -2,19 +2,19 @@
 @using MASA.Blazor.Doc.Services
 @inherits OwningComponentBase<DemoService>
 
-<MList Dense Nav Linkage>
+<MList Nav Linkage Class="doc-nav-list mt-4">
     @foreach (var item in MenuItems)
     {
         if (item.Children != null && item.Children.Any())
         {
             var group = GenGroup(item.Children);
 
-            <MListGroup AppendIcon="mdi-menu-down"
-                        Class="m-list-group--default"
-                        Color="primary"
-                        Group="@group"
-                        NoAction
-                        PrependIcon="@item.Icon">
+            <MListGroup AppendIcon="M8.33398 10.3335L12.5007 14.5002L16.6673 10.3335H8.33398Z"
+                Class="m-list-group--default"
+                Group="@group"
+                Color="#5C2D91"
+                NoAction
+                PrependIcon="@item.Icon">
                 <ActivatorContent>
                     <MListItemContent>
                         <MListItemTitle>@item.Title</MListItemTitle>
@@ -28,9 +28,10 @@
                             var group2 = GenGroup(componentItem.Children);
 
                             <MListGroup Class="m-list-group--default"
-                                        Group="@group2"
-                                        NoAction
-                                        SubGroup>
+                        Group="@group2"
+                        NoAction
+                        Color="#5C2D91"
+                        SubGroup>
                                 <ActivatorContent>
                                     <MListItemContent>
                                         <MListItemTitle>@FormatComponentTitle(componentItem)</MListItemTitle>
@@ -83,6 +84,9 @@
     [Parameter]
     public DemoMenuItemModel[] MenuItems { get; set; } = { };
 
+    [CascadingParameter]
+    public BaseLayout BaseLayout { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         MenuItems = await Service.GetMenuAsync();
@@ -111,5 +115,4 @@
 
         return string.Join("|", groups.Where(g => g != string.Empty));
     }
-
 }

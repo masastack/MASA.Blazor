@@ -20,7 +20,7 @@
                          Color="#5C2D91"
                          Height="64"
                          Class="text-20 mb-6 px-6"
-                         OnClick="@(() => Navigation.NavigateTo("getting-started/installation"))">
+                         Href="getting-started/installation">
                     @T("GetStarted")
                 </MButton>
                 <MButton Dark
@@ -28,12 +28,14 @@
                          Color="black"
                          Height="64"
                          Class="text-20 px-6 mb-6 mx-6"
-                         OnClick="@(() => Navigation.NavigateTo("introduction/why"))">
+                         Href="introduction/why">
                     @T("WhyUseMASABlazor")
                 </MButton>
                 <MButton Dark
                          Color="black"
                          Height="64"
+                         Href="https://github.com/BlazorComponent/MASA.Blazor"
+                         Target="_blank"
                          Class="text-20 px-6 mb-6">
                     <MIcon Left>mdi-github</MIcon>
                     GitHub
@@ -45,7 +47,7 @@
                 @foreach (var item in Enumerable.Range(0, _length))
                 {
                     <MWindowItem Value="item">
-                        <MCard Class="d-flex align-end" Color="#F2F3F5" MinHeight="262" MinWidth="262" Width="644" Height="644">
+                        <MCard Class="d-flex align-end rounded-0" Color="#F2F3F5" MinHeight="262" MinWidth="262" Width="644" Height="644">
                             <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/banner.png" />
                         </MCard>
                     </MWindowItem>
@@ -93,23 +95,24 @@
                     </MWindowItem>
                 }
             </MWindow>
-            <MItemGroup @bind-Value="OnBoarding"
-                        Class="text-center d-flex align-end"
-                        Mandatory>
+            @*等有了多张图片在使用
+                <MItemGroup @bind-Value="OnBoarding"
+                Class="text-center d-flex align-end"
+                Mandatory>
                 @foreach (var item in Enumerable.Range(0, _length))
                 {
-                    <MItem Value="item">
-                        @if (context.Active)
-                        {
-                            <img style="width:14px;height:3.5px; margin:0 2px;" src="https://cdn.masastack.com/stack/images/website/masa-blazor/SelectPoint.png" />
-                        }
-                        else
-                        {
-                            <img style="cursor:pointer; width:3.5px;height:3.5px; margin:0 2px;" src="https://cdn.masastack.com/stack/images/website/masa-blazor/Point.png" @onclick="context.Toggle" />
-                        }
-                    </MItem>
+                <MItem Value="item">
+                @if (context.Active)
+                {
+                <img style="width:14px;height:3.5px; margin:0 2px;" src="https://cdn.masastack.com/stack/images/website/masa-blazor/SelectPoint.png" />
                 }
-            </MItemGroup>
+                else
+                {
+                <img style="cursor:pointer; width:3.5px;height:3.5px; margin:0 2px;" src="https://cdn.masastack.com/stack/images/website/masa-blazor/Point.png" @onclick="context.Toggle" />
+                }
+                </MItem>
+                }
+                </MItemGroup>*@
         </div>
         <div class="mt-6">
             <MRow NoGutters Class="mt-6" Justify="JustifyTypes.Center">
@@ -118,13 +121,15 @@
                          Color="#5C2D91"
                          Height="44"
                          Class="text-14 rounded-lg mr-3"
-                         OnClick="@(() => Navigation.NavigateTo("getting-started/installation"))">
+                         Href="getting-started/installation">
                     @T("GetStarted")
                 </MButton>
                 <MButton Dark
                          Color="black"
                          Width="130"
                          Height="44"
+                         Href="https://github.com/BlazorComponent/MASA.Blazor"
+                         Target="_blank"
                          Class="rounded-lg text-14 ml-3">
                     <MIcon Left>mdi-github</MIcon>
                     GitHub
@@ -137,7 +142,7 @@
                          Width="285"
                          Height="44"
                          Class="text-14 rounded-lg"
-                         OnClick="@(() => Navigation.NavigateTo("introduction/why"))">
+                         Href="introduction/why">
                     @T("WhyUseMASABlazor")
                 </MButton>
             </MRow>
@@ -154,8 +159,6 @@
                         </MBorder>
                     </MCol>
                     <MCol Class="d-flex justify-end" Align="AlignTypes.Center">
-                        <span class="box-title-more" style="color:#86909C80">@T("More")</span>
-                        <MIcon Color="#86909C80">mdi-play</MIcon>
                     </MCol>
                 </MRow>
             </div>
@@ -176,7 +179,7 @@
 
             <div class="video-group">
                 <MRow NoGutters>
-                    <MCol Lg="3" Md="6" Sm="12">
+                    <MCol Lg="3" Md="6" Sm="12" Class="pa-3">
                         <MHover Context="hoverContext">
                             <MCard Color="#F7F8FA"
                                    @attributes="hoverContext.Attrs"
@@ -191,11 +194,11 @@
                             </MCard>
                         </MHover>
                     </MCol>
-                    <MCol Lg="3" Md="6" Sm="12">
+                    <MCol Lg="3" Md="6" Sm="12" Class="pa-3">
                         <MHover Context="hoverContext">
                             <MCard Color="#F7F8FA"
                                    @attributes="hoverContext.Attrs"
-                                   Class="mx-3 rounded-lg"
+                                   Class="rounded-lg"
                                    OnClick="@(() => Toggle("https://docs.microsoft.com/zh-cn/events/dotnetconf-2021/new-blazor-webassembly-capabilities-in-net-6"))"
                                    Elevation="@(hoverContext.Hover ? 5 : 0)">
                                 <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/info2.png")" Height="288">
@@ -206,11 +209,11 @@
                             </MCard>
                         </MHover>
                     </MCol>
-                    <MCol Lg="3" Md="6" Sm="12">
+                    <MCol Lg="3" Md="6" Sm="12" Class="pa-3">
                         <MHover Context="hoverContext">
                             <MCard Color="#F7F8FA"
                                    @attributes="hoverContext.Attrs"
-                                   Class="mx-3 rounded-lg"
+                                   Class="rounded-lg"
                                    OnClick="@(() => Toggle("https://www.dotnetconf.net/agenda"))"
                                    Elevation="@(hoverContext.Hover ? 5 : 0)">
                                 <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/info3.png")" Height="288">
@@ -221,11 +224,11 @@
                             </MCard>
                         </MHover>
                     </MCol>
-                    <MCol Lg="3" Md="6" Sm="12">
+                    <MCol Lg="3" Md="6" Sm="12" Class="pa-3">
                         <MHover Context="hoverContext">
                             <MCard Color="#F7F8FA"
                                    @attributes="hoverContext.Attrs"
-                                   Class="mx-3 rounded-lg"
+                                   Class="rounded-lg"
                                    OnClick="@(() => Toggle("https://docs.microsoft.com/zh-cn/aspnet/core/blazor/?view=aspnetcore-6.0"))"
                                    Elevation="@(hoverContext.Hover ? 5 : 0)">
                                 <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/info1.png")" Height="288">
@@ -249,8 +252,6 @@
                         </MBorder>
                     </MCol>
                     <MCol Cols="4" Class="d-flex justify-end" Align="AlignTypes.Center">
-                        <span class="box-title-more" style="color:#86909C80">@T("More")</span>
-                        <MIcon Color="#86909C80" Class="">mdi-play</MIcon>
                     </MCol>
                 </MRow>
             </div>
@@ -323,11 +324,17 @@
                     </MCol>
                     <MCol Lg="4" Md="6" Sm="12" Class="pa-3">
                         <MCard Width="470" Height="470" Color="#5C2D91" Elevation="24">
-                            <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/MasaBlazor.png" Class="d-flex align-center">
+                            <MCol Class="fill-height d-flex flex-column justify-space-between pa-0">
+                                <div>
+                                    <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/masa.png"></MImage>
+                                </div>
                                 <div style="font-size: 26px;line-height: 30px; letter-spacing: 2px; color:#fff; text-align: center;">
                                     @("<MCard Elevation=24 />")
                                 </div>
-                            </MImage>
+                                <div>
+                                    <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/blazor.png"></MImage>
+                                </div>
+                            </MCol>
                         </MCard>
                     </MCol>
                 </MRow>
@@ -343,8 +350,6 @@
                         </MBorder>
                     </MCol>
                     <MCol Class="d-flex justify-end" Align="AlignTypes.Center">
-                        <span class="box-title-more" style="color:#86909C80">@T("More")</span>
-                        <MIcon Color="#86909C80" Class="">mdi-play</MIcon>
                     </MCol>
                 </MRow>
             </div>
@@ -407,8 +412,10 @@
                         </MBorder>
                     </MCol>
                     <MCol Class="d-flex justify-end" Align="AlignTypes.Center">
-                        <span class="box-title-more" style="color:#86909C80">@T("More")</span>
-                        <MIcon Color="#86909C80" Class="">mdi-play</MIcon>
+                        <div style="cursor:pointer;" @onclick="@(()=>Toggle("https://masalabs.github.io/categories/Dapr/"))">
+                            <span class="box-title-more" style="color:#86909C80">@T("More")</span>
+                            <MIcon Color="#86909C80" Class="">mdi-play</MIcon>
+                        </div>
                     </MCol>
                 </MRow>
             </div>
@@ -495,8 +502,6 @@
                         </MBorder>
                     </MCol>
                     <MCol Class="d-flex justify-end" Align="AlignTypes.Center">
-                        <span class="box-title-more" style="color:#86909C80">@T("More")</span>
-                        <MIcon Color="#86909C80" Class="">mdi-play</MIcon>
                     </MCol>
                 </MRow>
             </div>
@@ -524,19 +529,19 @@
             </MRow>
             <MRow Justify="JustifyTypes.Center">
                 <MCol>
-                    <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/AntDesignBlazor.png" />
-                </MCol>
-                <MCol>
                     <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/Blazor.png" />
-                </MCol>
-                <MCol>
-                    <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/BlazorComponent.png" />
                 </MCol>
                 <MCol>
                     <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/MaterialDesign.png" />
                 </MCol>
                 <MCol>
                     <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/Vuetify.png" />
+                </MCol>
+                <MCol>
+                    <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/AntDesignBlazor.png" />
+                </MCol>
+                <MCol>
+                    <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/BlazorComponent.png" />
                 </MCol>
             </MRow>
         </div>
@@ -550,13 +555,13 @@
                 <p>Material Design</p>
             </div>
             <div>
-                <p >@T("MASABlazorCommunity")</p>
-                <p >@T("JoinUs")</p>
+                <p>@T("MASABlazorCommunity")</p>
+                <p>@T("JoinUs")</p>
                 <p class="foot-p">&nbsp;</p>
             </div>
             <div>
-                <p >@T("UpdateLog")</p>
-                <p >@T("CommonProblem")</p>
+                <p>@T("UpdateLog")</p>
+                <p>@T("CommonProblem")</p>
                 <p class="foot-p">&nbsp;</p>
             </div>
         </div>
