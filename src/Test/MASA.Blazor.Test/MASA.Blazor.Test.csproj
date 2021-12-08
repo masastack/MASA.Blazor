@@ -10,6 +10,7 @@
   <ItemGroup>
     <Compile Remove="Autocomplete\**" />
     <Compile Remove="ButtonGroup\**" />
+    <Compile Remove="Cascader\**" />
     <Compile Remove="Col\**" />
     <Compile Remove="DataIterator\**" />
     <Compile Remove="Icon\**" />
@@ -18,9 +19,11 @@
     <Compile Remove="SlideGroup\**" />
     <Compile Remove="Table\**" />
     <Compile Remove="TimePicker\**" />
+    <Compile Remove="Upload\**" />
     <Compile Remove="Window\**" />
     <EmbeddedResource Remove="Autocomplete\**" />
     <EmbeddedResource Remove="ButtonGroup\**" />
+    <EmbeddedResource Remove="Cascader\**" />
     <EmbeddedResource Remove="Col\**" />
     <EmbeddedResource Remove="DataIterator\**" />
     <EmbeddedResource Remove="Icon\**" />
@@ -29,9 +32,11 @@
     <EmbeddedResource Remove="SlideGroup\**" />
     <EmbeddedResource Remove="Table\**" />
     <EmbeddedResource Remove="TimePicker\**" />
+    <EmbeddedResource Remove="Upload\**" />
     <EmbeddedResource Remove="Window\**" />
     <None Remove="Autocomplete\**" />
     <None Remove="ButtonGroup\**" />
+    <None Remove="Cascader\**" />
     <None Remove="Col\**" />
     <None Remove="DataIterator\**" />
     <None Remove="Icon\**" />
@@ -40,6 +45,7 @@
     <None Remove="SlideGroup\**" />
     <None Remove="Table\**" />
     <None Remove="TimePicker\**" />
+    <None Remove="Upload\**" />
     <None Remove="Window\**" />
   </ItemGroup>
 
@@ -50,7 +56,6 @@
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.7" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.7" />
     <PackageReference Include="coverlet.collector" Version="3.1.0" />
-    <PackageReference Include="Ninject" Version="3.3.4" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.AspNetCore.Components;
 using Bunit;
 
 namespace MASA.Blazor.Test.VirtualScroller
@@ -12,6 +11,5 @@ namespace MASA.Blazor.Test.VirtualScroller
     [TestClass]
     public class MVirtualScrollerTests:TestBase
     {
-        
     }
 }

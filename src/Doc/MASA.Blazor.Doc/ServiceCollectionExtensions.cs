@@ -17,9 +17,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<DemoService>();
             services.AddScoped<IPrismHighlighter, PrismHighlighter>();
 
-            I18nHelper.AddLang();
-            services.AddScoped<I18n>(); 
-
             return services;
         }
     }
