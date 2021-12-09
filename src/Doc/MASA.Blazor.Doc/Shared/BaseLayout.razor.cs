@@ -17,6 +17,9 @@ namespace MASA.Blazor.Doc.Shared
         private bool _isChinese;
         private string _searchBorderColor = "#00000000";
         private string _languageIcon;
+        private bool _isShowMiniLogo = true;
+
+        public StringNumber SelectTab { get; set; } = 0;
 
         [Inject]
         public I18n I18n { get; set; }
@@ -27,7 +30,19 @@ namespace MASA.Blazor.Doc.Shared
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
 
-        public StringNumber SelectTab { get; set; }
+        [Parameter]
+        public bool Drawer { get; set; } = true;
+
+        [Parameter]
+        public bool Temporary { get; set; } = true;
+
+        public void UpdateNav(bool drawer, bool temporary = true)
+        {
+            Drawer = drawer;
+            Temporary = temporary;
+
+            InvokeAsync(StateHasChanged);
+        }
 
         private void TurnLanguage()
         {
@@ -56,14 +71,20 @@ namespace MASA.Blazor.Doc.Shared
 
         private void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
-            if (Navigation.BaseUri == e.Location)
-                SelectTab = null;
-            else if (e.Location.Contains("meet-the-team"))
-                SelectTab = 2;
+            if (e.Location == Navigation.BaseUri)
+                _isShowMiniLogo = true;
             else
-                SelectTab = 0;
+                _isShowMiniLogo = false;
+
+            if (e.Location.Contains("meet-the-team"))
+                SelectTab = 3;
 
             StateHasChanged();
+        }
+
+        private void ShowDraw()
+        {
+            UpdateNav(true);
         }
 
         public string T(string key)
@@ -74,6 +95,8 @@ namespace MASA.Blazor.Doc.Shared
         public void Dispose()
         {
             Navigation.LocationChanged -= OnLocationChanged;
+
+            GC.SuppressFinalize(this);
         }
     }
 }

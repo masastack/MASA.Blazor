@@ -53,23 +53,26 @@
                     </MWindowItem>
                 }
             </MWindow>
-            <MItemGroup @bind-Value="OnBoarding"
+            @if (_length > 1)
+            {
+                <MItemGroup @bind-Value="OnBoarding"
                         Class="text-center d-flex align-end"
                         Mandatory>
-                @foreach (var item in Enumerable.Range(0, _length))
-                {
-                    <MItem Value="item">
-                        @if (context.Active)
-                        {
-                            <img class="mx-1" src="https://cdn.masastack.com/stack/images/website/masa-blazor/SelectPoint.png" />
-                        }
-                        else
-                        {
-                            <img style="cursor:pointer;" class="mx-1" src="https://cdn.masastack.com/stack/images/website/masa-blazor/Point.png" @onclick="context.Toggle" />
-                        }
-                    </MItem>
-                }
-            </MItemGroup>
+                    @foreach (var item in Enumerable.Range(0, _length))
+                    {
+                        <MItem Value="item">
+                            @if (context.Active)
+                            {
+                                <img class="mx-1" src="https://cdn.masastack.com/stack/images/website/masa-blazor/SelectPoint.png" />
+                            }
+                            else
+                            {
+                                <img style="cursor:pointer;" class="mx-1" src="https://cdn.masastack.com/stack/images/website/masa-blazor/Point.png" @onclick="context.Toggle" />
+                            }
+                        </MItem>
+                    }
+                </MItemGroup>
+            }
         </MCol>
     </MRow>
 
@@ -84,7 +87,7 @@
                 @T("MASABlazorDescription")
             </p>
         </div>
-        <div class="d-flex justify-end">
+        <div class="d-flex justify-center">
             <MWindow @bind-Value="OnBoarding">
                 @foreach (var item in Enumerable.Range(0, _length))
                 {
@@ -95,24 +98,26 @@
                     </MWindowItem>
                 }
             </MWindow>
-            @*等有了多张图片在使用
+            @if (_length > 1)
+            {
                 <MItemGroup @bind-Value="OnBoarding"
-                Class="text-center d-flex align-end"
-                Mandatory>
-                @foreach (var item in Enumerable.Range(0, _length))
-                {
-                <MItem Value="item">
-                @if (context.Active)
-                {
-                <img style="width:14px;height:3.5px; margin:0 2px;" src="https://cdn.masastack.com/stack/images/website/masa-blazor/SelectPoint.png" />
-                }
-                else
-                {
-                <img style="cursor:pointer; width:3.5px;height:3.5px; margin:0 2px;" src="https://cdn.masastack.com/stack/images/website/masa-blazor/Point.png" @onclick="context.Toggle" />
-                }
-                </MItem>
-                }
-                </MItemGroup>*@
+                        Class="text-center d-flex align-end"
+                        Mandatory>
+                    @foreach (var item in Enumerable.Range(0, _length))
+                    {
+                        <MItem Value="item">
+                            @if (context.Active)
+                            {
+                                <img style="width:14px;height:3.5px; margin:0 2px;" src="https://cdn.masastack.com/stack/images/website/masa-blazor/SelectPoint.png" />
+                            }
+                            else
+                            {
+                                <img style="cursor:pointer; width:3.5px;height:3.5px; margin:0 2px;" src="https://cdn.masastack.com/stack/images/website/masa-blazor/Point.png" @onclick="context.Toggle" />
+                            }
+                        </MItem>
+                    }
+                </MItemGroup>
+            }
         </div>
         <div class="mt-6">
             <MRow NoGutters Class="mt-6" Justify="JustifyTypes.Center">
@@ -447,7 +452,7 @@
                                    Width="348"
                                    OnClick="@(() => Toggle("https://www.cnblogs.com/doddgu/p/dapr-learning-2.html"))"
                                    Elevation="@(hoverContext.Hover ? 5 : 0)">
-                                <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/dapr1.png")" Height="288">
+                                <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/dapr2.png")" Height="288">
                                 </MImage>
                                 <MCardText Class="pt-4 px-4 text-truncate fs-18">
                                     @T("RelatedArticle2")
@@ -464,7 +469,7 @@
                                    Width="348"
                                    OnClick="@(() => Toggle("https://www.cnblogs.com/doddgu/p/dapr-learning-3.html"))"
                                    Elevation="@(hoverContext.Hover ? 5 : 0)">
-                                <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/dapr1.png")" Height="288">
+                                <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/dapr3.png")" Height="288">
                                 </MImage>
                                 <MCardText Class="pt-4 px-4 text-truncate fs-18">
                                     @T("RelatedArticle3")
@@ -481,7 +486,7 @@
                                    Width="348"
                                    OnClick="@(() => Toggle("https://www.cnblogs.com/doddgu/p/dapr-learning-4.html"))"
                                    Elevation="@(hoverContext.Hover ? 5 : 0)">
-                                <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/dapr1.png")" Height="288">
+                                <MImage Src="@($"https://cdn.masastack.com/stack/images/website/masa-blazor/dapr4.png")" Height="288">
                                 </MImage>
                                 <MCardText Class="pt-4 px-4 text-truncate fs-18">
                                     @T("RelatedArticle4")
