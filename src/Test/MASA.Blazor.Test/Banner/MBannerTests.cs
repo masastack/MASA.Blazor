@@ -12,57 +12,12 @@ namespace MASA.Blazor.Test.Banner
     public class MBannerTests:TestBase
     {
         [TestMethod]
-        public void RenderButtonWithSingleLine()
-        {
-            //Act
-            var cut = RenderComponent<MBanner>(props =>
-            {
-                props.Add(banner => banner.SingleLine, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasSingleLineClass = classes.Contains("m-banner--single-line");
-
-            // Assert
-            Assert.IsTrue(hasSingleLineClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonNoWithSingleLine()
-        {
-            //Act
-            var cut = RenderComponent<MBanner>(props =>
-            {
-                props.Add(banner => banner.SingleLine, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasSingleLineClass = classes.Contains("m-banner");
-
-            // Assert
-            Assert.IsTrue(hasSingleLineClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonWithApp()
+        public void RenderBannerWithApp()
         {
             //Act
             var cut = RenderComponent<MBanner>(props =>
             {
                 props.Add(banner => banner.App, true);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasAppClass = classes.Contains("m-banner--sticky");
-
-            // Assert
-            Assert.IsTrue(hasAppClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonNoWithApp()
-        {
-            //Act
-            var cut = RenderComponent<MBanner>(props =>
-            {
-                props.Add(banner => banner.App, false);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasAppClass = classes.Contains("m-banner");
@@ -72,37 +27,23 @@ namespace MASA.Blazor.Test.Banner
         }
 
         [TestMethod]
-        public void RenderButtonWithSticky()
+        public void RenderBannerWithColor()
         {
             //Act
             var cut = RenderComponent<MBanner>(props =>
             {
-                props.Add(banner => banner.Sticky, true);
+                string color = "color";
+                props.Add(banner => banner.Color, color);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasStickyClass = classes.Contains("m-banner--sticky");
+            var hasColorClass = classes.Contains("m-banner");
 
             // Assert
-            Assert.IsTrue(hasStickyClass);
+            Assert.IsTrue(hasColorClass);
         }
 
         [TestMethod]
-        public void RenderButtonNoWithSticky()
-        {
-            //Act
-            var cut = RenderComponent<MBanner>(props =>
-            {
-                props.Add(banner => banner.Sticky, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasStickyClass = classes.Contains("m-banner");
-
-            // Assert
-            Assert.IsTrue(hasStickyClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonWithDark()
+        public void RenderBannerWithDark()
         {
             //Act
             var cut = RenderComponent<MBanner>(props =>
@@ -117,22 +58,54 @@ namespace MASA.Blazor.Test.Banner
         }
 
         [TestMethod]
-        public void RenderButtonNoWithDark()
+        public void RenderBannerWithElevation()
         {
             //Act
             var cut = RenderComponent<MBanner>(props =>
             {
-                props.Add(banner => banner.Dark, false);
+                props.Add(banner => banner.Elevation, 24);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasdarkClass = classes.Contains("m-banner");
+            var hasElevationClass = classes.Contains("elevation");
 
             // Assert
-            Assert.IsTrue(hasdarkClass);
+            Assert.IsTrue(hasElevationClass);
         }
 
         [TestMethod]
-        public void RenderButtonWithLight()
+        public void RenderBannerWithIcon()
+        {
+            //Act
+            var cut = RenderComponent<MBanner>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(banner => banner.Icon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIconClass = classes.Contains("m-banner");
+
+            // Assert
+            Assert.IsTrue(hasIconClass);
+        }
+
+        [TestMethod]
+        public void RenderBannerWithIconColor()
+        {
+            //Act
+            var cut = RenderComponent<MBanner>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(banner => banner.IconColor, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIconColorClass = classes.Contains("m-banner");
+
+            // Assert
+            Assert.IsTrue(hasIconColorClass);
+        }
+
+        [TestMethod]
+        public void RenderBannerWithLight()
         {
             //Act
             var cut = RenderComponent<MBanner>(props =>
@@ -147,18 +120,33 @@ namespace MASA.Blazor.Test.Banner
         }
 
         [TestMethod]
-        public void RenderButtonNoWithLight()
+        public void RenderBannerWithSingleLine()
         {
             //Act
             var cut = RenderComponent<MBanner>(props =>
             {
-                props.Add(banner => banner.Light, false);
+                props.Add(banner => banner.SingleLine, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasLightClass = classes.Contains("m-banner");
+            var hasSingleLineClass = classes.Contains("m-banner--single-line");
 
             // Assert
-            Assert.IsTrue(hasLightClass);
+            Assert.IsTrue(hasSingleLineClass);
+        }
+
+        [TestMethod]
+        public void RenderBannerWithSticky()
+        {
+            //Act
+            var cut = RenderComponent<MBanner>(props =>
+            {
+                props.Add(banner => banner.Sticky, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasStickyClass = classes.Contains("m-banner--sticky");
+
+            // Assert
+            Assert.IsTrue(hasStickyClass);
         }
 
         [TestMethod]
@@ -171,21 +159,6 @@ namespace MASA.Blazor.Test.Banner
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var noValueClass = !classes.Contains("display:none");
-
-            // Assert
-            Assert.IsTrue(noValueClass);
-        }
-
-        [TestMethod]
-        public void RenderButtonNoWithValue()
-        {
-            //Act
-            var cut = RenderComponent<MBanner>(props =>
-            {
-                props.Add(banner => banner.Value, false);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var noValueClass = !classes.Contains("m-banner__wrapper");
 
             // Assert
             Assert.IsTrue(noValueClass);
@@ -233,19 +206,6 @@ namespace MASA.Blazor.Test.Banner
             bannerDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
 
-        [TestMethod]
-        public void RenderBannerWithElevation()
-        {
-            //Act
-            var cut = RenderComponent<MBanner>(props =>
-            {
-                props.Add(banner => banner.Elevation, 24);
-            });
-            var classes = cut.Instance.CssProvider.GetClass();
-            var hasElevationClass = classes.Contains("elevation");
-
-            // Assert
-            Assert.IsTrue(hasElevationClass);
-        }
+        
     }
 }

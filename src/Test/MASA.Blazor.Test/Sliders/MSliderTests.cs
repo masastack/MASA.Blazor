@@ -342,6 +342,183 @@ namespace MASA.Blazor.Test.Slider
         }
 
         [TestMethod]
+        public void RenderSliderWithAppendIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSlider<double>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(slider => slider.AppendIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppendIconClass = classes.Contains("m-input__slider");
+
+            // Assert
+            Assert.IsTrue(hasAppendIconClass);
+        }
+
+        [TestMethod]
+        public void RenderSliderWithBackgroundColor()
+        {
+            //Act
+            var cut = RenderComponent<MSlider<double>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(slider => slider.BackgroundColor, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBackgroundColorClass = classes.Contains("m-input__slider");
+
+            // Assert
+            Assert.IsTrue(hasBackgroundColorClass);
+        }
+
+        [TestMethod]
+        public void RenderSliderWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MSlider<double>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(slider => slider.Color, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-input__slider");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderSliderWithHint()
+        {
+            //Act
+            var cut = RenderComponent<MSlider<double>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(slider => slider.Hint, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHintClass = classes.Contains("m-input__slider");
+
+            // Assert
+            Assert.IsTrue(hasHintClass);
+        }
+
+        [TestMethod]
+        public void RenderSliderWithId()
+        {
+            //Act
+            var cut = RenderComponent<MSlider<double>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(slider => slider.Id, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIdClass = classes.Contains("m-input__slider");
+
+            // Assert
+            Assert.IsTrue(hasIdClass);
+        }
+
+        [TestMethod]
+        public void RenderSliderWithLabel()
+        {
+            //Act
+            var cut = RenderComponent<MSlider<double>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(slider => slider.Label, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLabelClass = classes.Contains("m-input__slider");
+
+            // Assert
+            Assert.IsTrue(hasLabelClass);
+        }
+
+        [TestMethod]
+        public void RenderSliderWithPrependIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSlider<double>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(slider => slider.PrependIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrependIconClass = classes.Contains("m-input__slider");
+
+            // Assert
+            Assert.IsTrue(hasPrependIconClass);
+        }
+
+        [TestMethod]
+        public void RenderSliderWithThumbColor()
+        {
+            //Act
+            var cut = RenderComponent<MSlider<double>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(slider => slider.ThumbColor, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasThumbColorClass = classes.Contains("m-input__slider");
+
+            // Assert
+            Assert.IsTrue(hasThumbColorClass);
+        }
+
+        [TestMethod]
+        public void RenderSliderWithThumbSize()
+        {
+            //Act
+            var cut = RenderComponent<MSlider<double>>(props =>
+            {
+                props.Add(slider => slider.ThumbSize, 32);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasThumbSizeClass = classes.Contains("m-input__slider");
+
+            // Assert
+            Assert.IsTrue(hasThumbSizeClass);
+        }
+
+        [TestMethod]
+        public void RenderSliderWithTrackColor()
+        {
+            //Act
+            var cut = RenderComponent<MSlider<double>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(slider => slider.TrackColor, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTrackColorClass = classes.Contains("m-input__slider");
+
+            // Assert
+            Assert.IsTrue(hasTrackColorClass);
+        }
+
+        [TestMethod]
+        public void RenderSliderWithTrackFillColor()
+        {
+            //Act
+            var cut = RenderComponent<MSlider<double>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(slider => slider.TrackFillColor, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTrackFillColorClass = classes.Contains("m-input__slider");
+
+            // Assert
+            Assert.IsTrue(hasTrackFillColorClass);
+        }
+
+        [TestMethod]
         public void RenderWithThumbLabelContent()
         {
             // Arrange & Act

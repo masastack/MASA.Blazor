@@ -539,5 +539,243 @@ namespace MASA.Blazor.Test.FileInput
             // Assert
             Assert.IsTrue(hasValidateOnBlurClass);
         }
+
+        [TestMethod]
+        public void RenderFileInputWithAppendIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFileInput<IBrowserFile>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(fileinput => fileinput.AppendIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppendIconClass = classes.Contains("m-file-input");
+
+            // Assert
+            Assert.IsTrue(hasAppendIconClass);
+        }
+
+        [TestMethod]
+        public void RenderFileInputWithAppendOuterIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFileInput<IBrowserFile>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(fileinput => fileinput.AppendOuterIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppendOuterIconClass = classes.Contains("m-file-input");
+
+            // Assert
+            Assert.IsTrue(hasAppendOuterIconClass);
+        }
+
+        [TestMethod]
+        public void RenderFileInputWithBackgroundColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFileInput<IBrowserFile>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(fileinput => fileinput.BackgroundColor, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBackgroundColorClass = classes.Contains("m-file-input");
+
+            // Assert
+            Assert.IsTrue(hasBackgroundColorClass);
+        }
+
+        [TestMethod]
+        public void RenderFileInputWithClearIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFileInput<IBrowserFile>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(fileinput => fileinput.ClearIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasClearIconClass = classes.Contains("m-file-input");
+
+            // Assert
+            Assert.IsTrue(hasClearIconClass);
+        }
+
+        [TestMethod]
+        public void RenderFileInputWithColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFileInput<IBrowserFile>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(fileinput => fileinput.Color, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-file-input");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderFileInputWithHint()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFileInput<IBrowserFile>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(fileinput => fileinput.Hint, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHintClass = classes.Contains("m-file-input");
+
+            // Assert
+            Assert.IsTrue(hasHintClass);
+        }
+
+        [TestMethod]
+        public void RenderFileInputWithId()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFileInput<IBrowserFile>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(fileinput => fileinput.Id, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIdClass = classes.Contains("m-file-input");
+
+            // Assert
+            Assert.IsTrue(hasIdClass);
+        }
+
+        [TestMethod]
+        public void RenderFileInputWithLabel()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFileInput<IBrowserFile>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(fileinput => fileinput.Label, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLabelClass = classes.Contains("m-file-input");
+
+            // Assert
+            Assert.IsTrue(hasLabelClass);
+        }
+
+        [TestMethod]
+        public void RenderFileInputWithPlaceholder()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFileInput<IBrowserFile>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(fileinput => fileinput.Placeholder, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPlaceholderClass = classes.Contains("m-file-input");
+
+            // Assert
+            Assert.IsTrue(hasPlaceholderClass);
+        }
+
+        [TestMethod]
+        public void RenderFileInputWithPrefix()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFileInput<IBrowserFile>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(fileinput => fileinput.Prefix, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrefixClass = classes.Contains("m-file-input");
+
+            // Assert
+            Assert.IsTrue(hasPrefixClass);
+        }
+
+        [TestMethod]
+        public void RenderFileInputWithPrependIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFileInput<IBrowserFile>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(fileinput => fileinput.PrependIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrependIconClass = classes.Contains("m-file-input");
+
+            // Assert
+            Assert.IsTrue(hasPrependIconClass);
+        }
+
+        [TestMethod]
+        public void RenderFileInputWithPrependInnerIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFileInput<IBrowserFile>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(fileinput => fileinput.PrependInnerIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrependInnerIconClass = classes.Contains("m-file-input");
+
+            // Assert
+            Assert.IsTrue(hasPrependInnerIconClass);
+        }
+
+        [TestMethod]
+        public void RenderFileInputWithSuffix()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFileInput<IBrowserFile>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(fileinput => fileinput.Suffix, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSuffixClass = classes.Contains("m-file-input");
+
+            // Assert
+            Assert.IsTrue(hasSuffixClass);
+        }
+
+        [TestMethod]
+        public void RenderFileInputWithType()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFileInput<IBrowserFile>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(fileinput => fileinput.Type, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTypeClass = classes.Contains("m-file-input");
+
+            // Assert
+            Assert.IsTrue(hasTypeClass);
+        }
     }
 }

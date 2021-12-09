@@ -540,5 +540,89 @@ namespace MASA.Blazor.Test.Menu
             // Assert
             Assert.IsTrue(hasPositionYClass);
         }
+
+        [TestMethod]
+        public void RenderMenuWithAttach()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MMenu>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(menu => menu.Attach, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAttachClass = classes.Contains("m-menu");
+
+            // Assert
+            Assert.IsTrue(hasAttachClass);
+        }
+
+        [TestMethod]
+        public void RenderMenuWithContentClass()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MMenu>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(menu => menu.ContentClass, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasContentClassClass = classes.Contains("m-menu");
+
+            // Assert
+            Assert.IsTrue(hasContentClassClass);
+        }
+
+        [TestMethod]
+        public void RenderMenuWithLight()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MMenu>(props =>
+            {
+                props.Add(menu => menu.Light, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("theme--light");
+
+            // Assert
+            Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderMenuWithOrigin()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MMenu>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(menu => menu.Origin, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOriginClass = classes.Contains("m-menu");
+
+            // Assert
+            Assert.IsTrue(hasOriginClass);
+        }
+
+        [TestMethod]
+        public void RenderMenuWithTransition()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MMenu>(props =>
+            {
+                string icon = "m-menu-transition";
+                props.Add(menu => menu.Transition, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTransitionClass = classes.Contains("m-menu");
+
+            // Assert
+            Assert.IsTrue(hasTransitionClass);
+        }
     }
 }

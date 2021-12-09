@@ -14,14 +14,14 @@ namespace MASA.Blazor.Test.RangeSlider
         //[TestMethod]
         //public void RenderRangeSliderWithDark()
         //{
-        //    //Act
+        //    Act
         //    var cut = RenderComponent<MRangeSlider<string>>(props =>
         //    {
         //        props.Add(rangeslider => rangeslider.Dark, true);
         //    });
         //    var classes = cut.Instance.CssProvider.GetClass();
         //    var hasDarkClass = classes.Contains("theme--dark");
-        //    //Assert
+        //    Assert
         //    Assert.IsTrue(hasDarkClass);
         //}
 

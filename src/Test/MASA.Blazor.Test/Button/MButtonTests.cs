@@ -27,6 +27,22 @@ namespace MASA.Blazor.Test.Button
         }
 
         [TestMethod]
+        public void RenderButtonWithActiveClass()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                string activeClass = "button";
+                props.Add(button => button.ActiveClass, activeClass);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasActiveClassClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasActiveClassClass);
+        }
+
+        [TestMethod]
         public void RenderButtonWithBlock()
         {
             //Act
@@ -54,6 +70,22 @@ namespace MASA.Blazor.Test.Button
 
             // Assert
             Assert.IsTrue(hasBottomClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                string button = "color";
+                props.Add(button => button.Color, button);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
         }
 
         [TestMethod]
@@ -147,6 +179,22 @@ namespace MASA.Blazor.Test.Button
         }
 
         [TestMethod]
+        public void RenderButtonWithHref()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                string href = "href";
+                props.Add(button => button.Href, href);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHrefClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasHrefClass);
+        }
+
+        [TestMethod]
         public void RenderWithHeight()
         {
             // Act
@@ -234,6 +282,21 @@ namespace MASA.Blazor.Test.Button
 
             // Assert
             Assert.IsTrue(hasLoadingClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonWithLink()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                props.Add(button => button.Link, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLinkClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasLinkClass);
         }
 
         [TestMethod]
@@ -389,6 +452,38 @@ namespace MASA.Blazor.Test.Button
         }
 
         [TestMethod]
+        public void RenderButtonWithTag()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                string tag = "botton";
+                props.Add(button => button.Tag, tag);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTagClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasTagClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonWithTarget()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                string target = "target";
+                props.Add(button => button.Target, target);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTargetClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasTargetClass);
+        }
+
+        [TestMethod]
         public void RenderButtonWithSmall()
         {
             //Act
@@ -446,6 +541,38 @@ namespace MASA.Blazor.Test.Button
 
             // Assert
             Assert.IsTrue(hasTopClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonWithType()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                string type = "type";
+                props.Add(button => button.Type, type);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTypeClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasTypeClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MButton>(props =>
+            {
+                string value = "value";
+                props.Add(button => button.Value, value);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
         }
 
         [TestMethod]

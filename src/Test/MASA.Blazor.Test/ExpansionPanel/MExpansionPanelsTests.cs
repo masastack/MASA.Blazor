@@ -27,12 +27,28 @@ namespace MASA.Blazor.Test.ExpansionPanel
         }
 
         [TestMethod]
+        public void RenderExpansionPanelsWithActiveClass()
+        {
+            //Act
+            var cut = RenderComponent<MExpansionPanels>(props =>
+            {
+                string activeclass = "m-item--active";
+                props.Add(expansionpanels => expansionpanels.ActiveClass, activeclass);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasActiveClassClass = classes.Contains("m-expansion-panels");
+
+            // Assert
+            Assert.IsTrue(hasActiveClassClass);
+        }
+
+        [TestMethod]
         public void RenderExpansionPanelsWithDisabled()
         {
             //Act
             var cut = RenderComponent<MExpansionPanels>(props =>
             {
-                props.Add(appbar => appbar.Disabled, true);
+                props.Add(expansionpanels => expansionpanels.Disabled, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasDisabledClass = classes.Contains("m-expansion-panels");
@@ -47,7 +63,7 @@ namespace MASA.Blazor.Test.ExpansionPanel
             //Act
             var cut = RenderComponent<MExpansionPanels>(props =>
             {
-                props.Add(appbar => appbar.Flat, true);
+                props.Add(expansionpanels => expansionpanels.Flat, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasFlatClass = classes.Contains("m-expansion-panels--flat");
@@ -62,7 +78,7 @@ namespace MASA.Blazor.Test.ExpansionPanel
             //Act
             var cut = RenderComponent<MExpansionPanels>(props =>
             {
-                props.Add(appbar => appbar.Focusable, true);
+                props.Add(expansionpanels => expansionpanels.Focusable, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasFocusableClass = classes.Contains("m-expansion-panels--focusable");
@@ -77,7 +93,7 @@ namespace MASA.Blazor.Test.ExpansionPanel
             //Act
             var cut = RenderComponent<MExpansionPanels>(props =>
             {
-                props.Add(appbar => appbar.Hover, true);
+                props.Add(expansionpanels => expansionpanels.Hover, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasHoverClass = classes.Contains("m-expansion-panels--hover");
@@ -92,7 +108,7 @@ namespace MASA.Blazor.Test.ExpansionPanel
             //Act
             var cut = RenderComponent<MExpansionPanels>(props =>
             {
-                props.Add(appbar => appbar.Inset, true);
+                props.Add(expansionpanels => expansionpanels.Inset, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasInsetClass = classes.Contains("m-expansion-panels--inset");
@@ -107,7 +123,7 @@ namespace MASA.Blazor.Test.ExpansionPanel
             //Act
             var cut = RenderComponent<MExpansionPanels>(props =>
             {
-                props.Add(appbar => appbar.Mandatory, true);
+                props.Add(expansionpanels => expansionpanels.Mandatory, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasMandatoryClass = classes.Contains("m-expansion-panels");
@@ -122,7 +138,7 @@ namespace MASA.Blazor.Test.ExpansionPanel
             //Act
             var cut = RenderComponent<MExpansionPanels>(props =>
             {
-                props.Add(alert => alert.Max, 2);
+                props.Add(expansionpanels => expansionpanels.Max, 2);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasMaxClass = classes.Contains("");
@@ -137,7 +153,7 @@ namespace MASA.Blazor.Test.ExpansionPanel
             //Act
             var cut = RenderComponent<MExpansionPanels>(props =>
             {
-                props.Add(appbar => appbar.Multiple, true);
+                props.Add(expansionpanels => expansionpanels.Multiple, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasMultipleClass = classes.Contains("m-expansion-panels");
@@ -152,7 +168,7 @@ namespace MASA.Blazor.Test.ExpansionPanel
             //Act
             var cut = RenderComponent<MExpansionPanels>(props =>
             {
-                props.Add(appbar => appbar.Popout, true);
+                props.Add(expansionpanels => expansionpanels.Popout, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasPopoutClass = classes.Contains("m-expansion-panels--popout");
@@ -167,7 +183,7 @@ namespace MASA.Blazor.Test.ExpansionPanel
             //Act
             var cut = RenderComponent<MExpansionPanels>(props =>
             {
-                props.Add(appbar => appbar.Readonly, true);
+                props.Add(expansionpanels => expansionpanels.Readonly, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasReadonlyClass = classes.Contains("m-expansion-panels");
@@ -177,12 +193,28 @@ namespace MASA.Blazor.Test.ExpansionPanel
         }
 
         [TestMethod]
+        public void RenderExpansionPanelsWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MExpansionPanels>(props =>
+            {
+                string value = "panels";
+                props.Add(expansionpanels => expansionpanels.Value, value);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-expansion-panels");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
+
+        [TestMethod]
         public void RenderExpansionPanelsWithTile()
         {
             //Act
             var cut = RenderComponent<MExpansionPanels>(props =>
             {
-                props.Add(appbar => appbar.Tile, true);
+                props.Add(expansionpanels => expansionpanels.Tile, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasTileClass = classes.Contains("m-expansion-panels--tile");

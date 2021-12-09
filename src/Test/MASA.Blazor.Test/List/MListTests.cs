@@ -314,6 +314,22 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
+        public void RenderListWithTag()
+        {
+            //Act
+            var cut = RenderComponent<MList>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(list => list.Tag, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTagClass = classes.Contains("m-list");
+
+            // Assert
+            Assert.IsTrue(hasTagClass);
+        }
+
+        [TestMethod]
         public void RenderWithChildContentt()
         {
             // Arrange & Act

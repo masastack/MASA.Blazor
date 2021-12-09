@@ -205,9 +205,116 @@ namespace MASA.Blazor.Test.Radio
                 props.Add(radiogroup => radiogroup.ValidateOnBlur, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasSuccessClass = classes.Contains("m-input--radio-group");
+            var hasValidateOnBlurClass = classes.Contains("m-input--radio-group");
             // Assert
-            Assert.IsTrue(hasSuccessClass);
+            Assert.IsTrue(hasValidateOnBlurClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioGroupWithAppendIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MRadioGroup<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(radiogroup => radiogroup.AppendIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppendIconClass = classes.Contains("m-input--radio-group");
+            // Assert
+            Assert.IsTrue(hasAppendIconClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioGroupWithBackgroundColor()
+        {
+            //Act
+            var cut = RenderComponent<MRadioGroup<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(radiogroup => radiogroup.BackgroundColor, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBackgroundColorClass = classes.Contains("m-input--radio-group");
+            // Assert
+            Assert.IsTrue(hasBackgroundColorClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioGroupWithHint()
+        {
+            //Act
+            var cut = RenderComponent<MRadioGroup<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(radiogroup => radiogroup.Hint, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHintClass = classes.Contains("m-input--radio-group");
+            // Assert
+            Assert.IsTrue(hasHintClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioGroupWithId()
+        {
+            //Act
+            var cut = RenderComponent<MRadioGroup<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(radiogroup => radiogroup.Id, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIdClass = classes.Contains("m-input--radio-group");
+            // Assert
+            Assert.IsTrue(hasIdClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioGroupWithLabel()
+        {
+            //Act
+            var cut = RenderComponent<MRadioGroup<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(radiogroup => radiogroup.Label, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLabelClass = classes.Contains("m-input--radio-group");
+            // Assert
+            Assert.IsTrue(hasLabelClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioGroupWithPrependIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MRadioGroup<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(radiogroup => radiogroup.PrependIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrependIconClass = classes.Contains("m-input--radio-group");
+            // Assert
+            Assert.IsTrue(hasPrependIconClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioGroupWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MRadioGroup<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(radiogroup => radiogroup.Value, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-input--radio-group");
+            // Assert
+            Assert.IsTrue(hasValueClass);
         }
     }
 }

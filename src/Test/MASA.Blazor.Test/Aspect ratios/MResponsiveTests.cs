@@ -17,7 +17,7 @@ namespace MASA.Blazor.Test.Responsive
             //Act
             var cut = RenderComponent<MResponsive>(props =>
             {
-                props.Add(rating => rating.AspectRatio, 16 / 9D);
+                props.Add(responsive => responsive.AspectRatio, 16 / 9D);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasReadonlyClass = classes.Contains("m-responsive");
@@ -113,6 +113,22 @@ namespace MASA.Blazor.Test.Responsive
 
             // Assert
             Assert.AreEqual("max-height: 100px", style);
+        }
+
+        [TestMethod]
+        public void RenderResponsiveWithContentClass()
+        {
+            //Act
+            var cut = RenderComponent<MResponsive>(props =>
+            {
+                string ContentClass = "responsive";
+                props.Add(responsive => responsive.ContentClass, ContentClass);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasContentClassClass = classes.Contains("m-responsive");
+
+            // Assert
+            Assert.IsTrue(hasContentClassClass);
         }
     }
 }

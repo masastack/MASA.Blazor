@@ -27,6 +27,21 @@ namespace MASA.Blazor.Test.Image
         }
 
         [TestMethod]
+        public void RenderImageWithAspectRatio()
+        {
+            //Act
+            var cut = RenderComponent<MImage>(props =>
+            {
+                props.Add(image => image.AspectRatio, 1.7778);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAspectRatioClass = classes.Contains("m-image");
+
+            // Assert
+            Assert.IsTrue(hasAspectRatioClass);
+        }
+
+        [TestMethod]
         public void RenderImageWithDark()
         {
             //Act
@@ -39,6 +54,38 @@ namespace MASA.Blazor.Test.Image
 
             // Assert
             Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderImageWithGradient()
+        {
+            //Act
+            var cut = RenderComponent<MImage>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(counter => counter.Gradient, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasGradientClass = classes.Contains("m-image");
+
+            // Assert
+            Assert.IsTrue(hasGradientClass);
+        }
+
+        [TestMethod]
+        public void RenderImageWithPosition()
+        {
+            //Act
+            var cut = RenderComponent<MImage>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(counter => counter.Position, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPositionClass = classes.Contains("m-image");
+
+            // Assert
+            Assert.IsTrue(hasPositionClass);
         }
 
         [TestMethod]

@@ -44,6 +44,23 @@ namespace MASA.Blazor.Test.SystemBar
         }
 
         [TestMethod]
+        public void RenderSystemBarWithColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSystemBar>(props =>
+            {
+                string color= "color";
+                props.Add(systembar => systembar.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-system-bar");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
         public void RenderSystemBarWithDark()
         {
             //Act

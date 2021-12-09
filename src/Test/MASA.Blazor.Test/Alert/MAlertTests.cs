@@ -311,5 +311,85 @@ namespace MASA.Blazor.Test.Alert
             // Assert
             contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
+
+        [TestMethod]
+        public void RenderAlertWithCloseIcon()
+        {
+            //Act
+            var cut = RenderComponent<MAlert>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(alert => alert.CloseIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasCloseIconClass = classes.Contains("m-alert");
+
+            // Assert
+            Assert.IsTrue(hasCloseIconClass);
+        }
+
+        [TestMethod]
+        public void RenderAlertWithCloseLabel()
+        {
+            //Act
+            var cut = RenderComponent<MAlert>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(alert => alert.CloseLabel, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasCloseLabelClass = classes.Contains("m-alert");
+
+            // Assert
+            Assert.IsTrue(hasCloseLabelClass);
+        }
+
+        [TestMethod]
+        public void RenderAlertWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MAlert>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(alert => alert.Color, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-alert");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderAlertWithTag()
+        {
+            //Act
+            var cut = RenderComponent<MAlert>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(alert => alert.Tag, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTagClass = classes.Contains("m-alert");
+
+            // Assert
+            Assert.IsTrue(hasTagClass);
+        }
+
+        [TestMethod]
+        public void RenderAlertWithTransition()
+        {
+            //Act
+            var cut = RenderComponent<MAlert>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(alert => alert.Transition, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTransitionClass = classes.Contains("m-alert");
+
+            // Assert
+            Assert.IsTrue(hasTransitionClass);
+        }
     }
 }

@@ -316,6 +316,23 @@ namespace MASA.Blazor.Test.NavigationDrawer
         }
 
         [TestMethod]
+        public void RenderNavigationDrawerWithColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MNavigationDrawer>(props =>
+            {
+                string color = "color";
+                props.Add(navigationdrawer => navigationdrawer.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-navigation-drawer");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
         public void RenderWithWidth()
         {
             // Act

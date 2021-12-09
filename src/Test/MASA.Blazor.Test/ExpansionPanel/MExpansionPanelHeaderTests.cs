@@ -11,5 +11,6 @@ namespace MASA.Blazor.Test.ExpansionPanel
     [TestClass]
     public  class MExpansionPanelHeaderTests:TestBase
     {
+        
     }
 }

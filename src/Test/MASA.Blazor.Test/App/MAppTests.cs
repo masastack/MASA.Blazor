@@ -76,6 +76,23 @@ namespace MASA.Blazor.Test.App
             // Assert
             Assert.IsTrue(hasLeftToRightClass);
         }
+
+        [TestMethod]
+        public void RenderAppWithId()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MApp>(props =>
+            {
+                string id = "app";
+                props.Add(app => app.Id, id);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIdClass = classes.Contains("m-app");
+
+            // Assert
+            Assert.IsTrue(hasIdClass);
+        }
     }
 
 }

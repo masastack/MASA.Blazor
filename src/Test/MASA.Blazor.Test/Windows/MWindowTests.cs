@@ -115,5 +115,69 @@ namespace MASA.Blazor.Test.Windows
             // Assert
             Assert.IsTrue(hasVerticalClass);
         }
+
+        [TestMethod]
+        public void RenderWindowWithActiveClass()
+        {
+            //Act
+            var cut = RenderComponent<MWindow>(props =>
+            {
+                string active = "m-window-item--active";
+                props.Add(window => window.ActiveClass, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasActiveClassClass = classes.Contains("m-window");
+
+            // Assert
+            Assert.IsTrue(hasActiveClassClass);
+        }
+
+        [TestMethod]
+        public void RenderWindowWithNextIcon()
+        {
+            //Act
+            var cut = RenderComponent<MWindow>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(window => window.NextIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasNextIconClass = classes.Contains("m-window");
+
+            // Assert
+            Assert.IsTrue(hasNextIconClass);
+        }
+
+        [TestMethod]
+        public void RenderWindowWithPrevIcon()
+        {
+            //Act
+            var cut = RenderComponent<MWindow>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(window => window.PrevIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrevIconClass = classes.Contains("m-window");
+
+            // Assert
+            Assert.IsTrue(hasPrevIconClass);
+        }
+
+        [TestMethod]
+        public void RenderWindowWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MWindow>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(window => window.Value, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-window");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
     }
 }

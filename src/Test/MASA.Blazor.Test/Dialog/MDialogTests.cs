@@ -12,6 +12,22 @@ namespace MASA.Blazor.Test.Dialog
     public class MDialogTests:TestBase
     {
         [TestMethod]
+        public void RenderDialogWithAttach()
+        {
+            //Act
+            var cut = RenderComponent<MDialog>(props =>
+            {
+                string attach = "dialog";
+                props.Add(dialog => dialog.Attach, attach);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAttachClass = classes.Contains("m-dialog");
+
+            // Assert
+            Assert.IsTrue(hasAttachClass);
+        }
+
+        [TestMethod]
         public void RenderDialogWithCloseDelay()
         {
             //Act
@@ -69,6 +85,21 @@ namespace MASA.Blazor.Test.Dialog
 
             // Assert
             Assert.IsTrue(hasFullscreenClass);
+        }
+
+        [TestMethod]
+        public void RenderDialogWithHideOverlay()
+        {
+            //Act
+            var cut = RenderComponent<MDialog>(props =>
+            {
+                props.Add(dialog => dialog.HideOverlay, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHideOverlayClass = classes.Contains("m-dialog");
+
+            // Assert
+            Assert.IsTrue(hasHideOverlayClass);
         }
 
         [TestMethod]
@@ -191,6 +222,36 @@ namespace MASA.Blazor.Test.Dialog
             Assert.IsTrue(hasScrollableClass);
         }
 
+        [TestMethod]
+        public void RenderDialogWithTransition()
+        {
+            //Act
+            var cut = RenderComponent<MDialog>(props =>
+            {
+                string transition = "dialog-transition";
+                props.Add(dialog => dialog.Transition, transition);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTransitionClass = classes.Contains("m-dialog");
 
+            // Assert
+            Assert.IsTrue(hasTransitionClass);
+        }
+
+        [TestMethod]
+        public void RenderDialogWithValue()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MDialog>(props =>
+            {
+                props.Add(dialog => dialog.Value, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-dialog");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
     }
 }

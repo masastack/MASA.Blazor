@@ -13,8 +13,6 @@ namespace MASA.Blazor.Test.ItemGroup
     [TestClass]
     public class MItemGroupTests:TestBase
     {
-
-
         [TestMethod]
         public void RenderItemGroupWithDark()
         {
@@ -61,7 +59,7 @@ namespace MASA.Blazor.Test.ItemGroup
         }
 
         [TestMethod]
-        public void RenderAlertWithElevation()
+        public void RenderItemGroupWithElevation()
         {
             //Act
             var cut = RenderComponent<MItemGroup>(props =>
@@ -88,6 +86,53 @@ namespace MASA.Blazor.Test.ItemGroup
 
             // Assert
             Assert.IsTrue(hasMandatoryClass);
+        }
+
+        [TestMethod]
+        public void RenderItemGroupWithActiveClass()
+        {
+            //Act
+            var cut = RenderComponent<MItemGroup>(props =>
+            {
+                string active = "m-item--active";
+                props.Add(itemgroup => itemgroup.ActiveClass, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasActiveClassClass = classes.Contains("m-item-group");
+
+            // Assert
+            Assert.IsTrue(hasActiveClassClass);
+        }
+
+        [TestMethod]
+        public void RenderItemGroupWithMax()
+        {
+            //Act
+            var cut = RenderComponent<MItemGroup>(props =>
+            {
+                props.Add(itemgroup => itemgroup.Max, 2);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasMaxClass = classes.Contains("m-item-group");
+
+            // Assert
+            Assert.IsTrue(hasMaxClass);
+        }
+
+        [TestMethod]
+        public void RenderItemGroupWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MItemGroup>(props =>
+            {
+                string active = "m-item--active";
+                props.Add(itemgroup => itemgroup.Value, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-item-group");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
         }
     }
 }

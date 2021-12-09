@@ -13,5 +13,20 @@ namespace MASA.Blazor.Test.Pagination
     [TestClass]
     public class MPaginationTests:TestBase
     {
+        //[TestMethod]
+        //public void RenderPaginationWithCircle()
+        //{
+        //    //Act
+        //    JSInterop.Mode = JSRuntimeMode.Loose;
+        //    var cut = RenderComponent<MPagination>(props =>
+        //    {
+        //        props.Add(pagination => pagination.Circle, true);
+        //    });
+        //    var classes = cut.Instance.CssProvider.GetClass();
+        //    var hasCircleClass = classes.Contains("m-pagination");
+
+        //    // Assert
+        //    Assert.IsTrue(hasCircleClass);
+        //}
     }
 }

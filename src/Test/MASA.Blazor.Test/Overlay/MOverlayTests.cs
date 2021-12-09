@@ -12,6 +12,22 @@ namespace MASA.Blazor.Test.Overlay
     public class MOverlayTests:TestBase
     {
         [TestMethod]
+        public void RenderOverlayWithColor()
+        {
+            //Act
+            string color = "color";
+            var cut = RenderComponent<MOverlay>(props =>
+            {
+                props.Add(overlay => overlay.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("theme--dark");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
         public void RenderOverlayWithDark()
         {
             //Act

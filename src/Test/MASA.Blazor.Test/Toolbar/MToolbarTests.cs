@@ -54,6 +54,21 @@ namespace MASA.Blazor.Test.Toolbar
         }
 
         [TestMethod]
+        public void RenderToolbarWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MToolbar>(props =>
+            {
+                string color = "color";
+                props.Add(toolbar => toolbar.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-toolbar");
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
         public void RenderToolbarWithDark()
         {
             //Act
@@ -325,6 +340,21 @@ namespace MASA.Blazor.Test.Toolbar
             var hasShortClass = classes.Contains("m-toolbar");
             // Assert
             Assert.IsTrue(hasShortClass);
+        }
+
+        [TestMethod]
+        public void RenderToolbarWithTag()
+        {
+            //Act
+            var cut = RenderComponent<MToolbar>(props =>
+            {
+                string tag = "sheaderrc";
+                props.Add(toolbar => toolbar.Tag, tag);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTagClass = classes.Contains("m-toolbar");
+            // Assert
+            Assert.IsTrue(hasTagClass);
         }
 
         [TestMethod]

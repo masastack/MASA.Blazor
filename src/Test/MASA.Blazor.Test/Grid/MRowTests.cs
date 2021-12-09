@@ -11,5 +11,20 @@ namespace MASA.Blazor.Test.Grid
     [TestClass]
     public class MRowTests:TestBase
     {
+        //[TestMethod]
+        //public void RenderRowWithNoGutters()
+        //{
+        //    //Act
+        //    JSInterop.Mode = JSRuntimeMode.Loose;
+        //    var cut = RenderComponent<MRow>(props =>
+        //    {
+        //        props.Add(row => row.NoGutters, true);
+        //    });
+        //    var classes = cut.Instance.CssProvider.GetClass();
+        //    var hasNoGuttersClass = classes.Contains("m-row");
+
+        //    // Assert
+        //    Assert.IsTrue(hasNoGuttersClass);
+        //}
     }
 }

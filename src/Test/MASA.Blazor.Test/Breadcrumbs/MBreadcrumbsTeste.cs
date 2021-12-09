@@ -27,7 +27,7 @@ namespace MASA.Blazor.Test.Breadcrumbs
         }
 
         [TestMethod]
-        public void RenderBreadcrumbsWithWithDark()
+        public void RenderBreadcrumbsWithDark()
         {
             //Act
             var cut = RenderComponent<MBreadcrumbs>(props =>
@@ -39,6 +39,22 @@ namespace MASA.Blazor.Test.Breadcrumbs
 
             // Assert
             Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderBreadcrumbsWithDivider()
+        {
+            //Act
+            var cut = RenderComponent<MBreadcrumbs>(props =>
+            {
+                string breadcrumbs = "divider";
+                props.Add(breadcrumbs => breadcrumbs.Divider, breadcrumbs);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDividerClass = classes.Contains("m-breadcrumbs");
+
+            // Assert
+            Assert.IsTrue(hasDividerClass);
         }
 
         [TestMethod]

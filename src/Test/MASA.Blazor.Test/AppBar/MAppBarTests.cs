@@ -124,6 +124,23 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
+        public void RenderAppBarWithColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                string color = "color";
+                props.Add(appbar => appbar.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
         public void RenderAppBarWithDense()
         {
             //Act
@@ -156,7 +173,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonWithScroll()
+        public void RenderAppBarWithScroll()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -188,7 +205,7 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonWithExtended()
+        public void RenderAppBarWithExtended()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -197,10 +214,10 @@ namespace MASA.Blazor.Test.AppBar
                 props.Add(appbar => appbar.Extended, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasScrollClass = classes.Contains("m-app-bar");
+            var hasExtendedClass = classes.Contains("m-app-bar");
 
             // Assert
-            Assert.IsTrue(hasScrollClass);
+            Assert.IsTrue(hasExtendedClass);
         }
 
         [TestMethod]
@@ -213,10 +230,10 @@ namespace MASA.Blazor.Test.AppBar
                 props.Add(appbar => appbar.ExtensionHeight, 48);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasElevationClass = classes.Contains("m-app-bar");
+            var hasExtensionHeightClass = classes.Contains("m-app-bar");
 
             // Assert
-            Assert.IsTrue(hasElevationClass);
+            Assert.IsTrue(hasExtensionHeightClass);
         }
 
         [TestMethod]
@@ -492,6 +509,23 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
+        public void RenderAppBarWithScrollTarget()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                string appbar = "window";
+                props.Add(appbar => appbar.ScrollTarget, appbar);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasScrollTargetClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasScrollTargetClass);
+        }
+
+        [TestMethod]
         public void RenderWithScrollThreshold()
         {
             // Act
@@ -524,7 +558,23 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
-        public void RenderButtonWithShrinkOnScroll()
+        public void RenderAppBarWithShort()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                props.Add(appbar => appbar.Short, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasShortClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasShortClass);
+        }
+
+        [TestMethod]
+        public void RenderAppBarWithShrinkOnScroll()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -540,6 +590,23 @@ namespace MASA.Blazor.Test.AppBar
         }
 
         [TestMethod]
+        public void RenderAppBarWithTag()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAppBar>(props =>
+            {
+                string tag = "header";
+                props.Add(appbar => appbar.Tag, tag);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTagClass = classes.Contains("m-app-bar");
+
+            // Assert
+            Assert.IsTrue(hasTagClass);
+        }
+
+        [TestMethod]
         public void RenderAppBarWithTile()
         {
             //Act
@@ -549,10 +616,10 @@ namespace MASA.Blazor.Test.AppBar
                 props.Add(appbar => appbar.Tile, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
-            var hasRoundedClass = classes.Contains("rounded");
+            var hasTileClass = classes.Contains("rounded");
 
             // Assert
-            Assert.IsTrue(hasRoundedClass);
+            Assert.IsTrue(hasTileClass);
         }
 
         [TestMethod]

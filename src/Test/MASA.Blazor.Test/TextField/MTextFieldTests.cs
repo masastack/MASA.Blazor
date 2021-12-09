@@ -453,5 +453,248 @@ namespace MASA.Blazor.Test.TextField
             // Assert
             Assert.IsTrue(hasValidateOnBlurClass);
         }
+
+        [TestMethod]
+        public void RenderTextFieldWithAppendIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textfield => textfield.AppendIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppendIconClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasAppendIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithAppendOuterIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textfield => textfield.AppendOuterIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppendOuterIconClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasAppendOuterIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithBackgroundColor()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textfield => textfield.BackgroundColor, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBackgroundColorClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasBackgroundColorClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithClearIcon()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textfield => textfield.ClearIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasClearIconClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasClearIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithHint()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textfield => textfield.Hint, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHintClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasHintClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithId()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textfield => textfield.Id, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIdClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasIdClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithLabel()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textfield => textfield.Label, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLabelClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasLabelClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithPersistentPlaceholder()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                props.Add(textfield => textfield.PersistentPlaceholder, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPersistentPlaceholderClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasPersistentPlaceholderClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithPlaceholder()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textfield => textfield.Placeholder, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPlaceholderClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasPlaceholderClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithPrefix()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textfield => textfield.Prefix, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrefixClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasPrefixClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithPrependIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textfield => textfield.PrependIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrependIconClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasPrependIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithPrependInnerIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textfield => textfield.PrependInnerIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrependInnerIconClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasPrependInnerIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithSuffix()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textfield => textfield.Suffix, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSuffixClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasSuffixClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithType()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textfield => textfield.Type, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTypeClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasTypeClass);
+        }
+
+        [TestMethod]
+        public void RenderTextFieldWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MTextField<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textfield => textfield.Value, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-text-field");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
     }
 }

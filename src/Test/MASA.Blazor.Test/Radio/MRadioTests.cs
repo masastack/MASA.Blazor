@@ -85,5 +85,101 @@ namespace MASA.Blazor.Test.Radio
             // Assert
             Assert.IsTrue(hasIsDisabledClass);
         }
+
+        [TestMethod]
+        public void RenderRadioWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MRadio<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(counter => counter.Color, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-radio");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioWithId()
+        {
+            //Act
+            var cut = RenderComponent<MRadio<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(counter => counter.Id, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIdClass = classes.Contains("m-radio");
+
+            // Assert
+            Assert.IsTrue(hasIdClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioWithLabel()
+        {
+            //Act
+            var cut = RenderComponent<MRadio<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(counter => counter.Label, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLabelClass = classes.Contains("m-radio");
+
+            // Assert
+            Assert.IsTrue(hasLabelClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioWithOffIcon()
+        {
+            //Act
+            var cut = RenderComponent<MRadio<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(counter => counter.OffIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOffIconClass = classes.Contains("m-radio");
+
+            // Assert
+            Assert.IsTrue(hasOffIconClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioWithOnIcon()
+        {
+            //Act
+            var cut = RenderComponent<MRadio<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(counter => counter.OnIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOnIconClass = classes.Contains("m-radio");
+
+            // Assert
+            Assert.IsTrue(hasOnIconClass);
+        }
+
+        [TestMethod]
+        public void RenderRadioWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MRadio<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(counter => counter.Value, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-radio");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
     }
 }

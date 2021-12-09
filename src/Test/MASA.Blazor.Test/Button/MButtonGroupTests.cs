@@ -12,6 +12,38 @@ namespace MASA.Blazor.Test.Button
     public class MButtonGroupTests:TestBase
     {
         [TestMethod]
+        public void RenderButtonGroupWithActiveClass()
+        {
+            //Act
+            var cut = RenderComponent<MButtonGroup>(props =>
+            {
+                string activeclass = "m-item--active";
+                props.Add(buttongroup => buttongroup.ActiveClass, activeclass);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasActiveClassClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasActiveClassClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonGroupWithBackgroundColor()
+        {
+            //Act
+            var cut = RenderComponent<MButtonGroup>(props =>
+            {
+                string color = "backdroundcolor";
+                props.Add(buttongroup => buttongroup.BackgroundColor, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBackgroundColorClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasBackgroundColorClass);
+        }
+
+        [TestMethod]
         public void RenderButtonGroupWithBorderless()
         {
             //Act
@@ -24,6 +56,22 @@ namespace MASA.Blazor.Test.Button
 
             // Assert
             Assert.IsTrue(hasBorderlessClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonGroupWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MButtonGroup>(props =>
+            {
+                string color = "color";
+                props.Add(buttongroup => buttongroup.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
         }
 
         [TestMethod]
@@ -102,6 +150,22 @@ namespace MASA.Blazor.Test.Button
         }
 
         [TestMethod]
+        public void RenderButtonGroupWithMax()
+        {
+            //Act
+            var cut = RenderComponent<MButtonGroup>(props =>
+            {
+                string max = "max";
+                props.Add(buttongroup => buttongroup.Max, max);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasMaxClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasMaxClass);
+        }
+
+        [TestMethod]
         public void RenderButtonGroupWithMultiple()
         {
             //Act
@@ -159,6 +223,22 @@ namespace MASA.Blazor.Test.Button
 
             // Assert
             Assert.IsTrue(hasTileClass);
+        }
+
+        [TestMethod]
+        public void RenderButtonGroupWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MButtonGroup>(props =>
+            {
+                string value = "value";
+                props.Add(buttongroup => buttongroup.Value, value);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-btn");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
         }
 
         [TestMethod]

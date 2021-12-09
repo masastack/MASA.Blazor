@@ -27,6 +27,70 @@ namespace MASA.Blazor.Test.Windows
         }
 
         [TestMethod]
+        public void RenderWindowItemWithActiveClass()
+        {
+            //Act
+            var cut = RenderComponent<MWindowItem>(props =>
+            {
+                string active = "active";
+                props.Add(windowitem => windowitem.ActiveClass, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasActiveClassClass = classes.Contains("m-window-item");
+
+            // Assert
+            Assert.IsTrue(hasActiveClassClass);
+        }
+
+        [TestMethod]
+        public void RenderWindowItemWithReverseTransition()
+        {
+            //Act
+            var cut = RenderComponent<MWindowItem>(props =>
+            {
+                string active = "active";
+                props.Add(windowitem => windowitem.ReverseTransition, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasReverseTransitionClass = classes.Contains("m-window-item");
+
+            // Assert
+            Assert.IsTrue(hasReverseTransitionClass);
+        }
+
+        [TestMethod]
+        public void RenderWindowItemWithTransition()
+        {
+            //Act
+            var cut = RenderComponent<MWindowItem>(props =>
+            {
+                string active = "active";
+                props.Add(windowitem => windowitem.Transition, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTransitionClass = classes.Contains("m-window-item");
+
+            // Assert
+            Assert.IsTrue(hasTransitionClass);
+        }
+
+        [TestMethod]
+        public void RenderWindowItemWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MWindowItem>(props =>
+            {
+                string active = "active";
+                props.Add(windowitem => windowitem.Value, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-window-item");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
+
+        [TestMethod]
         public void RenderWithChildContent()
         {
             // Arrange & Act

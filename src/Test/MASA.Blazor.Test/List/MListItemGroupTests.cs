@@ -14,6 +14,54 @@ namespace MASA.Blazor.Test.List
     public  class MListItemGroupTests:TestBase
     {
         [TestMethod]
+        public void RenderListItemGroupWithActiveClass()
+        {
+            //Act
+            var cut = RenderComponent<MListItemGroup>(props =>
+            {
+                string active = "m-item--active";
+                props.Add(listitemgroup => listitemgroup.ActiveClass, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasActiveClassClass = classes.Contains("m-list-item-group");
+
+            // Assert
+            Assert.IsTrue(hasActiveClassClass);
+        }
+
+        [TestMethod]
+        public void RenderListItemGroupWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MListItemGroup>(props =>
+            {
+                string active = "m-item--active";
+                props.Add(listitemgroup => listitemgroup.Color, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-list-item-group");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderListItemGroupWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MListItemGroup>(props =>
+            {
+                string active = "m-item--active";
+                props.Add(listitemgroup => listitemgroup.Value, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-list-item-group");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
+
+        [TestMethod]
         public void RenderListItemGroupWithDark()
         {
             //Act

@@ -100,5 +100,69 @@ namespace MASA.Blazor.Test.Checkbox
             // Assert
             Assert.IsTrue(hasValueClass);
         }
+
+        [TestMethod]
+        public void RenderSimpleCheckboxWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MSimpleCheckbox>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(simplecheckbox => simplecheckbox.Color, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-simple-checkbox");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderSimpleCheckboxWithIndeterminateIcon()
+        {
+            //Act
+            var cut = RenderComponent<MSimpleCheckbox>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(simplecheckbox => simplecheckbox.IndeterminateIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIndeterminateIconClass = classes.Contains("m-simple-checkbox");
+
+            // Assert
+            Assert.IsTrue(hasIndeterminateIconClass);
+        }
+
+        [TestMethod]
+        public void RenderSimpleCheckboxWithOffIcon()
+        {
+            //Act
+            var cut = RenderComponent<MSimpleCheckbox>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(simplecheckbox => simplecheckbox.OffIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOffIconClass = classes.Contains("m-simple-checkbox");
+
+            // Assert
+            Assert.IsTrue(hasOffIconClass);
+        }
+
+        [TestMethod]
+        public void RenderSimpleCheckboxWithOnIcon()
+        {
+            //Act
+            var cut = RenderComponent<MSimpleCheckbox>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(simplecheckbox => simplecheckbox.OnIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOnIconClass = classes.Contains("m-simple-checkbox");
+
+            // Assert
+            Assert.IsTrue(hasOnIconClass);
+        }
     }
 }

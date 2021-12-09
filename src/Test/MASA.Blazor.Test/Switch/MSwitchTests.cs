@@ -221,5 +221,117 @@ namespace MASA.Blazor.Test.Switch
             // Assert
             Assert.IsTrue(hasValueClass);
         }
+
+        [TestMethod]
+        public void RenderSwitchWithAppendIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSwitch>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(Switch => Switch.AppendIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppendIconClass = classes.Contains("m-input--switch");
+            // Assert
+            Assert.IsTrue(hasAppendIconClass);
+        }
+
+        [TestMethod]
+        public void RenderSwitchWithBackgroundColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSwitch>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(Switch => Switch.BackgroundColor, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBackgroundColorClass = classes.Contains("m-input--switch");
+            // Assert
+            Assert.IsTrue(hasBackgroundColorClass);
+        }
+
+        [TestMethod]
+        public void RenderSwitchWithColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSwitch>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(Switch => Switch.Color, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-input--switch");
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderSwitchWithHint()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSwitch>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(Switch => Switch.Hint, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHintClass = classes.Contains("m-input--switch");
+            // Assert
+            Assert.IsTrue(hasHintClass);
+        }
+
+        [TestMethod]
+        public void RenderSwitchWithId()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSwitch>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(Switch => Switch.Id, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIdClass = classes.Contains("m-input--switch");
+            // Assert
+            Assert.IsTrue(hasIdClass);
+        }
+
+        [TestMethod]
+        public void RenderSwitchWithLabel()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSwitch>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(Switch => Switch.Label, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLabelClass = classes.Contains("m-input--switch");
+            // Assert
+            Assert.IsTrue(hasLabelClass);
+        }
+
+        [TestMethod]
+        public void RenderSwitchWithPrependIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSwitch>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(Switch => Switch.PrependIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrependIconClass = classes.Contains("m-input--switch");
+            // Assert
+            Assert.IsTrue(hasPrependIconClass);
+        }
     }
 }

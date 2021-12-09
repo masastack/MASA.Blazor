@@ -12,7 +12,7 @@ namespace MASA.Blazor.Test.Grid
     public class MContainerTests:TestBase
     {
         [TestMethod]
-        public void RenderFooterWithAbsolute()
+        public void RenderContainerWithFluid()
         {
             //Act
             var cut = RenderComponent<MContainer>(props =>
@@ -24,6 +24,38 @@ namespace MASA.Blazor.Test.Grid
 
             // Assert
             Assert.IsTrue(hasFluidClass);
+        }
+
+        [TestMethod]
+        public void RenderContainerWithId()
+        {
+            //Act
+            var cut = RenderComponent<MContainer>(props =>
+            {
+                string id = "container";
+                props.Add(container => container.Id, id);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIdClass = classes.Contains("container");
+
+            // Assert
+            Assert.IsTrue(hasIdClass);
+        }
+
+        [TestMethod]
+        public void RenderContainerWithTag()
+        {
+            //Act
+            var cut = RenderComponent<MContainer>(props =>
+            {
+                string id = "container";
+                props.Add(container => container.Tag, id);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTagClass = classes.Contains("container");
+
+            // Assert
+            Assert.IsTrue(hasTagClass);
         }
 
         [TestMethod]

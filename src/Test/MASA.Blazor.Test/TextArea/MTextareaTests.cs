@@ -464,5 +464,234 @@ namespace MASA.Blazor.Test.TextArea
             // Assert
             Assert.IsTrue(hasValidateOnBlurClass);
         }
+
+        [TestMethod]
+        public void RenderTextareaWithAppendIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.AppendIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppendIconClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasAppendIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTextareaWithAppendOuterIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.AppendOuterIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppendOuterIconClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasAppendOuterIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTextareaWithBackgroundColor()
+        {
+            //Act
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.BackgroundColor, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBackgroundColorClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasBackgroundColorClass);
+        }
+
+        [TestMethod]
+        public void RenderTextareaWithClearIcon()
+        {
+            //Act
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.ClearIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasClearIconClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasClearIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTextareaWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.Color, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderTextareaWithHint()
+        {
+            //Act
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.Hint, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHintClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasHintClass);
+        }
+
+        [TestMethod]
+        public void RenderTextareaWithId()
+        {
+            //Act
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.Id, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIdClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasIdClass);
+        }
+
+        [TestMethod]
+        public void RenderTextareaWithLabel()
+        {
+            //Act
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.Label, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLabelClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasLabelClass);
+        }
+
+        [TestMethod]
+        public void RenderTextareaWithPlaceholder()
+        {
+            //Act
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.Placeholder, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPlaceholderClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasPlaceholderClass);
+        }
+
+        [TestMethod]
+        public void RenderTextareaWithPrefix()
+        {
+            //Act
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.Prefix, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrefixClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasPrefixClass);
+        }
+
+        [TestMethod]
+        public void RenderTextareaWithPrependIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.PrependIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrependIconClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasPrependIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTextareaWithPrependInnerIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.PrependInnerIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrependInnerIconClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasPrependInnerIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTextareaWithSuffix()
+        {
+            //Act
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.Suffix, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSuffixClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasSuffixClass);
+        }
+
+        [TestMethod]
+        public void RenderTextareaWithType()
+        {
+            //Act
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.Type, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTypeClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasTypeClass);
+        }
+
+        [TestMethod]
+        public void RenderTextareaWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MTextarea>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(textarea => textarea.Value, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-textarea");
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
     }
 }

@@ -164,6 +164,102 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
+        public void RenderListItemWithActiveClass()
+        {
+            //Act
+            var cut = RenderComponent<MListItem>(props =>
+            {
+                string active = "listitem";
+                props.Add(listitem => listitem.ActiveClass, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasActiveClassClass = classes.Contains("m-list-item");
+
+            // Assert
+            Assert.IsTrue(hasActiveClassClass);
+        }
+
+        [TestMethod]
+        public void RenderListItemWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MListItem>(props =>
+            {
+                string active = "listitem";
+                props.Add(listitem => listitem.Color, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-list-item");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderListItemWithHref()
+        {
+            //Act
+            var cut = RenderComponent<MListItem>(props =>
+            {
+                string href = "listitem";
+                props.Add(listitem => listitem.Href, href);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHrefClass = classes.Contains("m-list-item");
+
+            // Assert
+            Assert.IsTrue(hasHrefClass);
+        }
+
+        [TestMethod]
+        public void RenderListItemWithTag()
+        {
+            //Act
+            var cut = RenderComponent<MListItem>(props =>
+            {
+                string href = "listitem";
+                props.Add(listitem => listitem.Tag, href);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTagClass = classes.Contains("m-list-item");
+
+            // Assert
+            Assert.IsTrue(hasTagClass);
+        }
+
+        [TestMethod]
+        public void RenderListItemWithTarget()
+        {
+            //Act
+            var cut = RenderComponent<MListItem>(props =>
+            {
+                string href = "listitem";
+                props.Add(listitem => listitem.Target, href);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTargetClass = classes.Contains("m-list-item");
+
+            // Assert
+            Assert.IsTrue(hasTargetClass);
+        }
+
+        [TestMethod]
+        public void RenderListItemWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MListItem>(props =>
+            {
+                string href = "listitem";
+                props.Add(listitem => listitem.Value, href);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-list-item");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
+
+        [TestMethod]
         public void RenderWithChildContent()
         {
             // Arrange & Act

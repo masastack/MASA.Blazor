@@ -57,5 +57,85 @@ namespace MASA.Blazor.Test.List
             // Assert
             Assert.IsTrue(hasSubGroupClass);
         }
+
+        [TestMethod]
+        public void RenderListGroupWithActiveClass()
+        {
+            //Act
+            var cut = RenderComponent<MListGroup>(props =>
+            {
+                string active = "active-class";
+                props.Add(listgroup => listgroup.ActiveClass, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasActiveClassClass = classes.Contains("m-list-group");
+
+            // Assert
+            Assert.IsTrue(hasActiveClassClass);
+        }
+
+        [TestMethod]
+        public void RenderListGroupWithAppendIcon()
+        {
+            //Act
+            var cut = RenderComponent<MListGroup>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(listgroup => listgroup.AppendIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppendIconClass = classes.Contains("m-list-group");
+
+            // Assert
+            Assert.IsTrue(hasAppendIconClass);
+        }
+
+        [TestMethod]
+        public void RenderListGroupWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MListGroup>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(listgroup => listgroup.Color, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-list-group");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderListGroupWithGroup()
+        {
+            //Act
+            var cut = RenderComponent<MListGroup>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(listgroup => listgroup.Group, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasGroupClass = classes.Contains("m-list-group");
+
+            // Assert
+            Assert.IsTrue(hasGroupClass);
+        }
+
+        [TestMethod]
+        public void RenderListGroupWithPrependIcon()
+        {
+            //Act
+            var cut = RenderComponent<MListGroup>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(listgroup => listgroup.PrependIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrependIconClass = classes.Contains("m-list-group");
+
+            // Assert
+            Assert.IsTrue(hasPrependIconClass);
+        }
     }
 }

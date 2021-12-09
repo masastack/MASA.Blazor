@@ -54,5 +54,20 @@ namespace MASA.Blazor.Test.Form
             // Assert
             Assert.IsTrue(hasReadonlyClass);
         }
+
+        [TestMethod]
+        public void RenderFormWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MForm>(props =>
+            {
+                props.Add(form => form.Value, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-form");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
     }
 }

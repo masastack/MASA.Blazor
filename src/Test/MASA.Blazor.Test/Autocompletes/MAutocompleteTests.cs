@@ -570,5 +570,344 @@ namespace MASA.Blazor.Test.Autocompletes
             // Assert
             Assert.IsTrue(hasValidateOnBlurClass);
         }
+
+        [TestMethod]
+        public void RenderAutocompleteWithAppendIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string appendicon="mdi-star";
+                props.Add(autocomplete => autocomplete.AppendIcon, appendicon);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppendIconClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasAppendIconClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithAppendOuterIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string appendoutericon = "mdi-star";
+                props.Add(autocomplete => autocomplete.AppendOuterIcon, appendoutericon);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppendOuterIconClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasAppendOuterIconClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithBackgroundColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string backgroundcolor = "mdi-star";
+                props.Add(autocomplete => autocomplete.BackgroundColor, backgroundcolor);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBackgroundColorClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasBackgroundColorClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithClearIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string clearicon = "mdi-star";
+                props.Add(autocomplete => autocomplete.ClearIcon, clearicon);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasClearIconClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasClearIconClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string color = "mdi-star";
+                props.Add(autocomplete => autocomplete.Color, color);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithErrorCount()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                props.Add(autocomplete => autocomplete.ErrorCount, 1);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasErrorCountClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasErrorCountClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithHideNoData()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                props.Add(autocomplete => autocomplete.HideNoData, true);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHideNoDataClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasHideNoDataClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithHideSelected()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                props.Add(autocomplete => autocomplete.HideSelected, true);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHideSelectedClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasHideSelectedClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithHint()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string hint = "hint";
+                props.Add(autocomplete => autocomplete.Hint, hint);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHintClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasHintClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithId()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string id = "id";
+                props.Add(autocomplete => autocomplete.Id, id);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIdClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasIdClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithLabel()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string label = "label";
+                props.Add(autocomplete => autocomplete.Label, label);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLabelClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasLabelClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithPlaceholder()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string p = "autocomplete";
+                props.Add(autocomplete => autocomplete.Placeholder, p);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPlaceholderClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasPlaceholderClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithPrefix()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string p = "autocomplete";
+                props.Add(autocomplete => autocomplete.Prefix, p);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrefixClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasPrefixClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithPrependIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string p = "mdi-star";
+                props.Add(autocomplete => autocomplete.PrependIcon, p);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrependIconClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasPrependIconClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithPrependInnerIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string p = "mdi-star";
+                props.Add(autocomplete => autocomplete.PrependInnerIcon, p);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrependInnerIconClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasPrependInnerIconClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithSuffix()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string p = "mdi-star";
+                props.Add(autocomplete => autocomplete.Suffix, p);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSuffixClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasSuffixClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithType()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string p = "mdi-star";
+                props.Add(autocomplete => autocomplete.Type, p);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTypeClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasTypeClass);
+        }
+
+        [TestMethod]
+        public void RenderAutocompleteWithValue()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MAutocomplete<string, string, string>>(props =>
+            {
+                string p = "mdi-star";
+                props.Add(autocomplete => autocomplete.Value, p);
+                props.Add(autocomplete => autocomplete.ItemText, item => item);
+                props.Add(autocomplete => autocomplete.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-autocomplete");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
     }
 }

@@ -12,6 +12,22 @@ namespace MASA.Blazor.Test.Avatar
     public class MAvatarTest:TestBase
     {
         [TestMethod]
+        public void RenderAvatarWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MAvatar>(props =>
+            {
+                string id = "avatar";
+                props.Add(avatar => avatar.Color, id);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-avatar");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
         public void RenderAvatarWithLeft()
         {
             //Act
@@ -83,6 +99,21 @@ namespace MASA.Blazor.Test.Avatar
 
             // Assert
             Assert.IsTrue(hasRoundedClass);
+        }
+
+        [TestMethod]
+        public void RenderAvatarWithTile()
+        {
+            //Act
+            var cut = RenderComponent<MAvatar>(props =>
+            {
+                props.Add(avatar => avatar.Tile, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTileClass = classes.Contains("m-avatar");
+
+            // Assert
+            Assert.IsTrue(hasTileClass);
         }
 
         [TestMethod]

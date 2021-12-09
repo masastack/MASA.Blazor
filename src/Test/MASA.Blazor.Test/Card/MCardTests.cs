@@ -12,6 +12,22 @@ namespace MASA.Blazor.Test.Card
     public class MCardTests:TestBase
     {
         [TestMethod]
+        public void RenderCardWithActiveClass()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                string activeclass = "card";
+                props.Add(card => card.ActiveClass, activeclass);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasActiveClassClass = classes.Contains("m-card");
+
+            // Assert
+            Assert.IsTrue(hasActiveClassClass);
+        }
+
+        [TestMethod]
         public void RenderCardWithDark()
         {
             //Act
@@ -24,6 +40,22 @@ namespace MASA.Blazor.Test.Card
 
             // Assert
             Assert.IsTrue(hasDarkClass);
+        }
+
+        [TestMethod]
+        public void RenderCardWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                string color = "card";
+                props.Add(card => card.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-card");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
         }
 
         [TestMethod]
@@ -117,6 +149,38 @@ namespace MASA.Blazor.Test.Card
         }
 
         [TestMethod]
+        public void RenderCardWithHref()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                string href = "card";
+                props.Add(card => card.Href, href);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHrefClass = classes.Contains("m-card");
+
+            // Assert
+            Assert.IsTrue(hasHrefClass);
+        }
+
+        [TestMethod]
+        public void RenderCardWithImg()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                string img = "card";
+                props.Add(card => card.Img, img);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasImgClass = classes.Contains("m-card");
+
+            // Assert
+            Assert.IsTrue(hasImgClass);
+        }
+
+        [TestMethod]
         public void RenderCardWithLight()
         {
             //Act
@@ -129,6 +193,21 @@ namespace MASA.Blazor.Test.Card
 
             // Assert
             Assert.IsTrue(hasLightClass);
+        }
+
+        [TestMethod]
+        public void RenderCardWithLink()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                props.Add(card => card.Link, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLinkClass = classes.Contains("m-card");
+
+            // Assert
+            Assert.IsTrue(hasLinkClass);
         }
 
         [TestMethod]
@@ -294,6 +373,38 @@ namespace MASA.Blazor.Test.Card
 
             // Assert
             Assert.IsTrue(hasShapedClass);
+        }
+
+        [TestMethod]
+        public void RenderCardWithTag()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                string tag = "card";
+                props.Add(card => card.Tag, tag);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTagClass = classes.Contains("m-card");
+
+            // Assert
+            Assert.IsTrue(hasTagClass);
+        }
+
+        [TestMethod]
+        public void RenderCardWithTarget()
+        {
+            //Act
+            var cut = RenderComponent<MCard>(props =>
+            {
+                string target = "card";
+                props.Add(card => card.Target, target);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTargetClass = classes.Contains("m-card");
+
+            // Assert
+            Assert.IsTrue(hasTargetClass);
         }
 
         [TestMethod]

@@ -106,5 +106,73 @@ namespace MASA.Blazor.Test.ChipGroup
             // Assert
             Assert.IsTrue(hasShowArrowsClass);
         }
+
+        [TestMethod]
+        public void RenderChipGroupWithActiveClass()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MChipGroup>(props =>
+            {
+                string active = "m-slide-item--active";
+                props.Add(chipgroup => chipgroup.ActiveClass, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasActiveClassClass = classes.Contains("m-chip-group");
+
+            // Assert
+            Assert.IsTrue(hasActiveClassClass);
+        }
+
+        [TestMethod]
+        public void RenderChipGroupWithNextIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MChipGroup>(props =>
+            {
+                string icon = "m-slide-item--active";
+                props.Add(chipgroup => chipgroup.NextIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasNextIconClass = classes.Contains("m-chip-group");
+
+            // Assert
+            Assert.IsTrue(hasNextIconClass);
+        }
+
+        [TestMethod]
+        public void RenderChipGroupWithPrevIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MChipGroup>(props =>
+            {
+                string icon = "m-slide-item--active";
+                props.Add(chipgroup => chipgroup.PrevIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrevIconClass = classes.Contains("m-chip-group");
+
+            // Assert
+            Assert.IsTrue(hasPrevIconClass);
+        }
+
+        [TestMethod]
+        public void RenderChipGroupWithValue()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MChipGroup>(props =>
+            {
+                string icon = "m-slide-item--active";
+                props.Add(chipgroup => chipgroup.Value, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-chip-group");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
     }
 }

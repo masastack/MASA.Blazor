@@ -588,5 +588,289 @@ namespace MASA.Blazor.Test.Select
             //Assert
             Assert.IsTrue(hasValidateOnBlurClass);
         }
+
+        [TestMethod]
+        public void RenderSelectWithAppendIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(select => select.AppendIcon, icon);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppendIconClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasAppendIconClass);
+        }
+
+        [TestMethod]
+        public void RenderSelectWithAppendOuterIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(select => select.AppendOuterIcon, icon);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAppendOuterIconClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasAppendOuterIconClass);
+        }
+
+        [TestMethod]
+        public void RenderSelectWithBackgroundColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(select => select.BackgroundColor, icon);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBackgroundColorClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasBackgroundColorClass);
+        }
+
+        [TestMethod]
+        public void RenderSelectWithClearIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(select => select.ClearIcon, icon);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasClearIconClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasClearIconClass);
+        }
+
+        [TestMethod]
+        public void RenderSelectWithColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(select => select.Color, icon);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderSelectWithHideSelected()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                props.Add(select => select.HideSelected, true);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHideSelectedClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasHideSelectedClass);
+        }
+
+        [TestMethod]
+        public void RenderSelectWithHint()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(select => select.Hint, icon);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHintClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasHintClass);
+        }
+
+        [TestMethod]
+        public void RenderSelectWithId()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(select => select.Id, icon);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIdClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasIdClass);
+        }
+
+        [TestMethod]
+        public void RenderSelectWithLabel()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(select => select.Label, icon);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLabelClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasLabelClass);
+        }
+
+        [TestMethod]
+        public void RenderSelectWithPlaceholder()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(select => select.Placeholder, icon);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPlaceholderClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasPlaceholderClass);
+        }
+
+        [TestMethod]
+        public void RenderSelectWithPrefix()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(select => select.Prefix, icon);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrefixClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasPrefixClass);
+        }
+
+        [TestMethod]
+        public void RenderSelectWithPrependIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(select => select.PrependIcon, icon);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrependIconClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasPrependIconClass);
+        }
+
+        [TestMethod]
+        public void RenderSelectWithPrependInnerIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(select => select.PrependInnerIcon, icon);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrependInnerIconClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasPrependInnerIconClass);
+        }
+
+        [TestMethod]
+        public void RenderSelectWithType()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(select => select.Type, icon);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTypeClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasTypeClass);
+        }
+
+        [TestMethod]
+        public void RenderSelectWithValue()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MSelect<string, string, string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(select => select.Value, icon);
+                props.Add(select => select.ItemText, item => item);
+                props.Add(select => select.ItemValue, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-select");
+
+            //Assert
+            Assert.IsTrue(hasValueClass);
+        }
     }
 }

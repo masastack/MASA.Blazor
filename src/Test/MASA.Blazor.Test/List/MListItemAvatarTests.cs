@@ -179,6 +179,22 @@ namespace MASA.Blazor.Test.List
         }
 
         [TestMethod]
+        public void RenderListItemAvatarWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MListItemAvatar>(props =>
+            {
+                string color = "listitemavatar";
+                props.Add(listitemavatar => listitemavatar.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-list-item__avatar");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
         public void RenderWithWidth()
         {
             // Act

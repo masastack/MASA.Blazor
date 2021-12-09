@@ -44,6 +44,23 @@ namespace MASA.Blazor.Test.Footer
         }
 
         [TestMethod]
+        public void RenderFooterWithColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFooter>(props =>
+            {
+                string color = "footer";
+                props.Add(footer => footer.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-footer");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
         public void RenderFooterWithDark()
         {
             //Act
@@ -265,6 +282,21 @@ namespace MASA.Blazor.Test.Footer
 
             // Assert
             Assert.IsTrue(hasTileClass);
+        }
+
+        [TestMethod]
+        public void RenderWithChildContent()
+        {
+            // Arrange & Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MFooter>(props =>
+            {
+                props.Add(button => button.ChildContent, "<span>Hello world</span>");
+            });
+            var contentDiv = cut.Find(".m-footer");
+
+            // Assert
+            contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
     }
 }

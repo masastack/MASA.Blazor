@@ -57,6 +57,22 @@ namespace MASA.Blazor.Test.Badge
         }
 
         [TestMethod]
+        public void RenderBadgeWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MBadge>(props =>
+            {
+                string color = "color";
+                props.Add(badge => badge.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-badge");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
         public void RenderBadgeWithDot()
         {
             //Act
@@ -84,6 +100,22 @@ namespace MASA.Blazor.Test.Badge
 
             // Assert
             Assert.IsTrue(hasdarkClass);
+        }
+
+        [TestMethod]
+        public void RenderBadgeWithIcon()
+        {
+            //Act
+            var cut = RenderComponent<MBadge>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(badge => badge.Icon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIconClass = classes.Contains("m-badge");
+
+            // Assert
+            Assert.IsTrue(hasIconClass);
         }
 
         [TestMethod]
@@ -174,6 +206,22 @@ namespace MASA.Blazor.Test.Badge
 
             // Assert
             Assert.IsTrue(hasTileClass);
+        }
+
+        [TestMethod]
+        public void RenderBadgeWithTransition()
+        {
+            //Act
+            var cut = RenderComponent<MBadge>(props =>
+            {
+                var transition = "mdi-star";
+                props.Add(badge => badge.Transition, transition);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTransitionClass = classes.Contains("m-badge");
+
+            // Assert
+            Assert.IsTrue(hasTransitionClass);
         }
 
         [TestMethod]
