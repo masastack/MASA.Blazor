@@ -83,6 +83,12 @@
       "Description": "设定组件的高度。"
     },
     {
+      "Name": "HideOverlay",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Id",
       "Type": "String",
       "Default": "null",
@@ -119,8 +125,14 @@
       "Description": "将抽屉放置在右侧"
     },
     {
+      "Name": "ShowOverlay",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Src",
-      "Type": "OneOf`2",
+      "Type": "String",
       "Default": "",
       "Description": "指定一个 MImage 作为组件的背景。"
     },

@@ -30,12 +30,6 @@
       "Description": "将组件向底部对齐。"
     },
     {
-      "Name": "Button",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Class",
       "Type": "String",
       "Default": "null",

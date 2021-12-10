@@ -29,12 +29,6 @@
       "Description": ""
     },
     {
-      "Name": "Button",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Class",
       "Type": "String",
       "Default": "null",
