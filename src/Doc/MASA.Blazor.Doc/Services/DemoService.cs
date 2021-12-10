@@ -1,8 +1,10 @@
-﻿using System.Net.Http.Json;
+﻿using System.Globalization;
+using System.Net.Http.Json;
 using System.Reflection;
 using MASA.Blazor.Doc.Models;
 using MASA.Blazor.Doc.Models.Extensions;
 using MASA.Blazor.Doc.Pages;
+using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -19,7 +21,8 @@ namespace MASA.Blazor.Doc.Services
         private static ConcurrentCache<string, RenderFragment> _showCaseCache;
         private readonly HttpClient _httpClient;
         private readonly NavigationManager _navigationManager;
-        private string CurrentLanguage => "zh-CN";
+
+        private string CurrentLanguage { get; set; } = "zh-CN";
 
         private string CurrentComponentName { get; set; }
 
@@ -28,6 +31,11 @@ namespace MASA.Blazor.Doc.Services
             _httpClient = httpClient;
             _httpClient.BaseAddress ??= new Uri("http://127.0.0.1:5000");
             _navigationManager = navigationManager;
+        }
+
+        public void ChangeLanguage(string language)
+        {
+            CurrentLanguage = language;
         }
 
         private async Task InitializeAsync(string language)
@@ -146,7 +154,7 @@ namespace MASA.Blazor.Doc.Services
                 var component = await GetComponentAsync(componentName);
                 if (component is null) component = await GetStyleAsync(componentName);
                 if (component == null) return new List<ContentsItem>();
-                
+
                 var demoList = component.DemoList?.OrderBy(r => r.Order).ThenBy(r => r.Name);
 
                 contents = new List<ContentsItem>();

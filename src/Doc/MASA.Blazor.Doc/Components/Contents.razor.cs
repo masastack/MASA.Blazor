@@ -1,8 +1,11 @@
 ﻿using BlazorComponent;
 using MASA.Blazor.Doc.Models;
+using MASA.Blazor.Doc.Shared;
+using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
+using System.Globalization;
 using System.Text.Json;
 using Element = BlazorComponent.Web.Element;
 
@@ -25,6 +28,12 @@ namespace MASA.Blazor.Doc.Components
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
+        [Inject]
+        public GlobalConfigs GlobalConfig { get; set; }
+
+        [CascadingParameter]
+        public bool IsChinese { get; set; }
+
         protected override void OnInitialized()
         {
             NavigationManager.LocationChanged += OnLocationChanged;
@@ -38,13 +47,10 @@ namespace MASA.Blazor.Doc.Components
             }
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override async Task OnParametersSetAsync()
         {
-            if (firstRender)
-            {
-                _items = await Service.GetTitlesAsync(NavigationManager.Uri);
-                StateHasChanged();
-            }
+            Service.ChangeLanguage(GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name);
+            _items = await Service.GetTitlesAsync(NavigationManager.Uri);
         }
 
         private void OnScroll(JsonElement obj)
@@ -95,6 +101,7 @@ namespace MASA.Blazor.Doc.Components
             }
 
             ActiveItem = null;
+            Service.ChangeLanguage(GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name);
             _items = await Service.GetTitlesAsync(NavigationManager.Uri);
 
             StateHasChanged();

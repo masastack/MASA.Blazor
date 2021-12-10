@@ -9,12 +9,16 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MASA.Blazor.Doc.Services;
+using MASA.Blazor.Doc.Utils;
 
 namespace MASA.Blazor.Doc.Shared
 {
     public partial class BaseLayout : IDisposable
     {
-        private bool _isChinese;
+        [Parameter]
+        public bool IsChinese { get; set; }
+
         private string _searchBorderColor = "#00000000";
         private string _languageIcon;
         private bool _isShowMiniLogo = true;
@@ -25,10 +29,13 @@ namespace MASA.Blazor.Doc.Shared
         public I18n I18n { get; set; }
 
         [Inject]
+        public DemoService DemoService { get; set; }
+
+        [Inject]
         public NavigationManager Navigation { get; set; }
 
         [Inject]
-        public IJSRuntime JSRuntime { get; set; }
+        public GlobalConfigs GlobalConfig { get; set; }
 
         [Parameter]
         public bool Drawer { get; set; } = true;
@@ -46,24 +53,34 @@ namespace MASA.Blazor.Doc.Shared
 
         private void TurnLanguage()
         {
-            _isChinese = !_isChinese;
-            var lang = _isChinese ? "zh-CN" : "en-US";
+            IsChinese = !IsChinese;
+            var lang = IsChinese ? "zh-CN" : "en-US";
+
             ChangeLanguage(lang);
+
+            GlobalConfig.Language = lang;
+            GlobalConfig.SaveChanges();
         }
 
         private void ChangeLanguage(string lang)
         {
             _languageIcon = $"{lang}.png";
-
             I18n.SetLang(lang);
         }
 
         protected override void OnInitialized()
         {
-            base.OnInitialized();
+            string lang = GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name;
+            if (GlobalConfig.Language != null)
+                lang = GlobalConfig.Language;
+            else if(GlobalConfigs.StaticLanguage is not null)
+                lang= GlobalConfigs.StaticLanguage;
+            else
+                lang = CultureInfo.CurrentCulture.Name;
 
-            _isChinese = CultureInfo.CurrentCulture.Name == "zh-CN";
-            var lang = _isChinese ? "zh-CN" : "en-US";
+
+            IsChinese = lang == "zh-CN";
+
             ChangeLanguage(lang);
 
             Navigation.LocationChanged += OnLocationChanged;

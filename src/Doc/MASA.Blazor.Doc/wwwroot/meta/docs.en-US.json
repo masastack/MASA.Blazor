@@ -4,8 +4,116 @@
     "Title": "About",
     "FullTitle": "About",
     "Type": "menuItem",
+    "Url": "about",
     "Icon": "M9.52702 17.976H10.1781V13.2736H9.52702C9.16745 13.2736 8.87598 12.9822 8.87598 12.6226V11.0675C8.87598 10.708 9.16745 10.4165 9.52702 10.4165H13.1729C13.5324 10.4165 13.8239 10.708 13.8239 11.0675V17.976H14.4749C14.8345 17.976 15.126 18.2675 15.126 18.6271V20.1821C15.126 20.5417 14.8345 20.8332 14.4749 20.8332H9.52702C9.16745 20.8332 8.87598 20.5417 8.87598 20.1821V18.6271C8.87598 18.2675 9.16745 17.976 9.52702 17.976ZM12.001 4.1665C10.7065 4.1665 9.65723 5.21582 9.65723 6.51025C9.65723 7.80469 10.7065 8.854 12.001 8.854C13.2954 8.854 14.3447 7.80469 14.3447 6.51025C14.3447 5.21582 13.2954 4.1665 12.001 4.1665Z",
-    "Children": []
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "认识开发团队",
+        "FullTitle": "认识开发团队",
+        "Type": "menuItem",
+        "Url": "about/meet-the-team",
+        "Contents": [
+          {
+            "Id": "section-2752060",
+            "Title": "公司",
+            "Level": 0
+          },
+          {
+            "Id": "section-273179784",
+            "Title": "核心团队",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 1,
+        "Title": "赞助商和支持者",
+        "FullTitle": "赞助商和支持者",
+        "Type": "menuItem",
+        "Url": "about/sponsors-backers",
+        "Contents": [
+          {
+            "Id": "section-566833907",
+            "Title": "一次性捐助",
+            "Level": 0
+          },
+          {
+            "Id": "section-1634511342",
+            "Title": "定期捐助",
+            "Level": 0
+          },
+          {
+            "Id": "section-1774691940",
+            "Title": "当前项目赞助商",
+            "Level": 0
+          },
+          {
+            "Id": "section-551317378",
+            "Title": "粗略的",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 2,
+        "Title": "安全披露",
+        "FullTitle": "安全披露",
+        "Type": "menuItem",
+        "Url": "about/security-disclosure",
+        "Contents": [
+          {
+            "Id": "section-1311803195",
+            "Title": "报告错误",
+            "Level": 0
+          },
+          {
+            "Id": "section-1617616350",
+            "Title": "披露政策",
+            "Level": 0
+          },
+          {
+            "Id": "section-353316886",
+            "Title": "对本政策的建议",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 3,
+        "Title": "行为准则",
+        "FullTitle": "行为准则",
+        "Type": "menuItem",
+        "Url": "about/code-conduct",
+        "Contents": [
+          {
+            "Id": "section-481594336",
+            "Title": "我们的承诺",
+            "Level": 0
+          },
+          {
+            "Id": "section-483008717",
+            "Title": "我们的责任",
+            "Level": 0
+          },
+          {
+            "Id": "section-4415869",
+            "Title": "范围",
+            "Level": 0
+          },
+          {
+            "Id": "section-2138638003",
+            "Title": "具体措施",
+            "Level": 0
+          },
+          {
+            "Id": "section-3220308",
+            "Title": "归属",
+            "Level": 0
+          }
+        ]
+      }
+    ]
   },
   {
     "Order": 5,
@@ -3716,16 +3824,139 @@
     "Title": "Getting started",
     "FullTitle": "Getting started",
     "Type": "menuItem",
+    "Url": "getting-started",
     "Icon": "M11.993 4.1665C7.39297 4.1665 3.66797 7.89984 3.66797 12.4998C3.66797 17.0998 7.39297 20.8332 11.993 20.8332C16.6013 20.8332 20.3346 17.0998 20.3346 12.4998C20.3346 7.89984 16.6013 4.1665 11.993 4.1665ZM12.0013 19.1665C8.31797 19.1665 5.33464 16.1832 5.33464 12.4998C5.33464 8.8165 8.31797 5.83317 12.0013 5.83317C15.6846 5.83317 18.668 8.8165 18.668 12.4998C18.668 16.1832 15.6846 19.1665 12.0013 19.1665ZM12.418 8.33317H11.168V13.3332L15.543 15.9582L16.168 14.9332L12.418 12.7082V8.33317Z",
-    "Children": []
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "安装",
+        "FullTitle": "安装",
+        "Type": "menuItem",
+        "Url": "getting-started/installation",
+        "Contents": [
+          {
+            "Id": "section-1739819480",
+            "Title": "安装 Masa.Template 模板",
+            "Level": 0
+          },
+          {
+            "Id": "section-430380796",
+            "Title": "创建项目",
+            "Level": 0
+          },
+          {
+            "Id": "section-1572239414",
+            "Title": "启动项目",
+            "Level": 0
+          },
+          {
+            "Id": "section-324942799",
+            "Title": "创建一个 Blazor Server 项目",
+            "Level": 0
+          },
+          {
+            "Id": "section-1125899332",
+            "Title": "安装 NuGet 包",
+            "Level": 0
+          },
+          {
+            "Id": "section-141901483",
+            "Title": "引入资源文件",
+            "Level": 0
+          },
+          {
+            "Id": "section-165353384",
+            "Title": "注入相关服务",
+            "Level": 0
+          },
+          {
+            "Id": "section-14069023",
+            "Title": "全局引用",
+            "Level": 0
+          },
+          {
+            "Id": "section-2695973",
+            "Title": "使用",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 1,
+        "Title": "浏览器支持",
+        "FullTitle": "浏览器支持",
+        "Type": "menuItem",
+        "Url": "getting-started/browser-support",
+        "Contents": [
+          {
+            "Id": "section-484859015",
+            "Title": "浏览器",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 5,
+        "Title": "发行说明",
+        "FullTitle": "发行说明",
+        "Type": "menuItem",
+        "Url": "getting-started/release-notes",
+        "Contents": []
+      },
+      {
+        "Order": 6,
+        "Title": "贡献",
+        "FullTitle": "贡献",
+        "Type": "menuItem",
+        "Url": "getting-started/contributing",
+        "Contents": [
+          {
+            "Id": "section-1311834339",
+            "Title": "报告问题",
+            "Level": 0
+          }
+        ]
+      }
+    ]
   },
   {
     "Order": 0,
     "Title": "Introduction",
     "FullTitle": "Introduction",
     "Type": "menuItem",
+    "Url": "introduction",
     "Icon": "M6.25098 20.3332V5.229C6.25098 4.36605 6.95052 3.6665 7.81348 3.6665H17.1885C18.0514 3.6665 18.751 4.36605 18.751 5.229V20.3332L12.501 16.6873L6.25098 20.3332Z",
-    "Children": []
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "为什么选择 MASA Blazor?",
+        "FullTitle": "为什么选择 MASA Blazor?",
+        "Type": "menuItem",
+        "Url": "introduction/why",
+        "Contents": [
+          {
+            "Id": "section-1946702414",
+            "Title": "Blazor 是什么？",
+            "Level": 0
+          },
+          {
+            "Id": "section-1967431728",
+            "Title": "MASA Blazor 是什么？",
+            "Level": 0
+          },
+          {
+            "Id": "section-1421632437",
+            "Title": "为什么选择 MASA Blazor？",
+            "Level": 0
+          },
+          {
+            "Id": "section-350316207",
+            "Title": "优势：",
+            "Level": 0
+          }
+        ]
+      }
+    ]
   },
   {
     "Order": 3,

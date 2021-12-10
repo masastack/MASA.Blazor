@@ -1,19 +1,24 @@
 ﻿using MASA.Blazor.Doc.Highlight;
 using MASA.Blazor.Doc.Models;
 using MASA.Blazor.Doc.Shared;
+using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor.Doc.Pages
 {
     public partial class Docs
     {
-        private string _currentLanguage = "zh-CN";
-
         private string _previousPath;
 
-        private string Path => $"{Category}/{FileName}.{_currentLanguage}";
+        private string Path => $"{Category}/{FileName}.{GlobalConfig.Language ?? System.Globalization.CultureInfo.CurrentCulture.Name}";
 
         private DocFileModel File { get; set; }
+
+        [CascadingParameter]
+        public bool IsChinese { get; set; }
+
+        [Inject]
+        public GlobalConfigs GlobalConfig { get; set; }
 
         [Inject]
         private NavigationManager NavigationManager { get; set; }

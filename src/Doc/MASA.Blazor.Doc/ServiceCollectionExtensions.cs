@@ -14,6 +14,10 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddMasaBlazor();
 
+            services.AddScoped<I18n>();
+            services.AddScoped<GlobalConfigs>();
+            services.AddScoped<CookieStorage>();
+
             services.AddScoped<DemoService>();
             services.AddScoped<IPrismHighlighter, PrismHighlighter>();
 
