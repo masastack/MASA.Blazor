@@ -44,14 +44,16 @@ namespace MASA.Blazor.Doc.Server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime)
         {
-            _httpClient.BaseAddress ??= new Uri("http://127.0.0.1:5000/");
+            //_httpClient.BaseAddress ??= new Uri("http://127.0.0.1:5000/");
 
             if (env.IsDevelopment())
             {
+                _httpClient.BaseAddress = new Uri(Configuration["ASPNETCORE_URLS"]);
                 app.UseDeveloperExceptionPage();
             }
             else
             {
+                _httpClient.BaseAddress = new Uri(Configuration["BaseAddress"]);
                 app.UseExceptionHandler("/Error");
             }
 
