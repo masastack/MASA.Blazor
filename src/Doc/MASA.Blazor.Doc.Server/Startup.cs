@@ -48,9 +48,11 @@ namespace MASA.Blazor.Doc.Server
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                _httpClient.BaseAddress = new Uri(Configuration["urls"] ?? "http://127.0.0.1:5000/");
             }
             else
             {
+                _httpClient.BaseAddress = new Uri(Configuration["BaseAddress"] ?? "http://127.0.0.1:5000/");
                 app.UseExceptionHandler("/Error");
             }
 
@@ -58,11 +60,11 @@ namespace MASA.Blazor.Doc.Server
 
             app.UseRouting();
 
-            _httpClient.BaseAddress = new Uri(Configuration["urls"] ?? "http://127.0.0.1:5000");
+
             app.UseRequestLocalization(async opts =>
             {
                 var supportedCultures = new List<CultureInfo>();
-                
+
                 var languageDict = await _httpClient.GetFromJsonAsync<Dictionary<string, string[]>>("_content/MASA.Blazor.Doc/locale/languages.json");
                 if (languageDict?.Count > 0)
                 {

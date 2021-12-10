@@ -32,7 +32,7 @@
 
 
 /*scrollbar*/
-/*::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     border-radius: 15px;
     margin: 5px 0;
 }
@@ -47,7 +47,7 @@
     margin: 5px 0;
     border-radius: 15px;
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(170 168 168)), color-stop(0.72, rgb(170 168 168)), color-stop(0.86, rgb(170 168 168)));
-}*/
+}
 
 /*home css*/
 body {
@@ -99,7 +99,7 @@ body {
     border-radius: 0 !important;
 }
 
-@media screen and (max-width: 641px) {
+@media screen and (max-width: 1264px) {
     .app-bar {
         display: none !important;
     }
@@ -108,9 +108,61 @@ body {
         display: block !important;
     }
 
+    .baselayout-m-app {
+        background-color: #fff !important;
+    }
+
+    .mainlayout-m-main {
+        margin: 80px 80px 0 80px !important;
+    }
+
+    .doc-nav-left {
+        /*transform: translateX(-100%);*/
+        top: 0px !important;
+        width: 313px !important;
+        margin-left: 0 !important;
+    }
+
+    .doc-nav-right {
+        transform: translateX(100%) !important;
+    }
+}
+
+@media screen and (max-width: 641px) {
+    .baselayout-m-app {
+        background-color: #fff !important;
+    }
+
+    .app-bar {
+        display: none !important;
+    }
+
+    .phone-bar {
+        display: block !important;
+    }
+
+        .phone-bar .m-toolbar__content {
+            padding: 4px;
+        }
+
+    .doc-nav-left {
+        /*transform: translateX(-100%);*/
+        top: 0px !important;
+        width: 313px !important;
+        margin-left: 0 !important;
+    }
+
+    .doc-nav-right {
+        transform: translateX(100%) !important;
+    }
+
+    .mainlayout-m-main {
+        margin: 112px 0 0 0 !important;
+    }
+
     .app-banner {
         display: block !important;
-        margin: 80px 16px 0 16px !important;
+        margin: 120px 16px 0 16px !important;
     }
 
     .banner {
@@ -414,7 +466,7 @@ body {
     }
 
 .banner {
-    margin: 80px 80px 0 80px !important;
+    margin: 106px 80px 0 80px !important;
 }
 
 .banner-detail-box {
