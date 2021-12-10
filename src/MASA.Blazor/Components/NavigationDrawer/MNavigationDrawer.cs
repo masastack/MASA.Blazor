@@ -315,7 +315,7 @@ namespace MASA.Blazor
                 .Apply<BOverlay, MOverlay>(props =>
                 {
                     props[nameof(MOverlay.ZIndex)] = 7;
-                    props[nameof(MOverlay.Absolute)] = true;
+                    props[nameof(MOverlay.Absolute)] = !Fixed;
                     props[nameof(MOverlay.Value)] = _isOverlay;
                     props[nameof(MOverlay.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {

@@ -17,9 +17,6 @@ namespace MASA.Blazor
         public bool Bottom { get; set; }
 
         [Parameter]
-        public bool Button { get; set; }
-
-        [Parameter]
         public bool Depressed { get; set; }
 
         [Parameter]
