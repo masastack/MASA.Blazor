@@ -53,11 +53,7 @@ namespace MASA.Blazor
                     props[nameof(MListGroupItem.IsActive)] = IsActive;
                     props[nameof(MListGroupItem.Link)] = true;
                     props[nameof(MListGroupItem.Dark)] = Dark;
-                    
-                    if (IsActive)
-                    {
-                        props[nameof(MListGroupItem.Class)] = ActiveClass;
-                    }
+                    props[nameof(MListGroupItem.Class)] = IsActive ? ActiveClass : "";
                 })
                 .Apply<BListItemIcon, MListGroupItemIcon>("prepend", props => { props[nameof(MListGroupItemIcon.Type)] = "prepend"; })
                 .Apply<BIcon, MIcon>(props => { props[nameof(MIcon.Dark)] = Dark; })

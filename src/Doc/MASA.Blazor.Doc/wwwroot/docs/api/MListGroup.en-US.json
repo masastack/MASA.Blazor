@@ -90,8 +90,16 @@
       "Description": ""
     },
     {
+      "Name": "AppendIconContent",
+      "Description": ""
+    },
+    {
       "Name": "ChildContent",
       "Description": "Default Content"
+    },
+    {
+      "Name": "PrependIconContent",
+      "Description": ""
     }
   ],
   "Events": [
