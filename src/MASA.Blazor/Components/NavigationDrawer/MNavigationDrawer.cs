@@ -181,11 +181,6 @@ namespace MASA.Blazor
         {
             base.OnInitialized();
 
-            if (Temporary)
-            {
-                UpdateValue(false);
-            }
-
             GlobalConfig.Application.PropertyChanged += Application_PropertyChanged;
         }
 
@@ -216,7 +211,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--open", () => IsActive)
                         .AddIf($"{prefix}--open-on-hover", () => ExpandOnHover)
                         .AddIf($"{prefix}--right", () => Right)
-                        .AddIf($"{prefix}--temporary", () => InternalShowOverlay) //
+                        .AddIf($"{prefix}--temporary", () => Temporary) //
                         .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
@@ -269,21 +264,18 @@ namespace MASA.Blazor
                 })
                 .Apply<BOverlay, MOverlay>(props =>
                 {
-                    props[nameof(MOverlay.ZIndex)] = 7;
+                    props[nameof(MOverlay.ZIndex)] = ZIndex;
                     props[nameof(MOverlay.Absolute)] = !Fixed;
                     props[nameof(MOverlay.Value)] = InternalShowOverlay;
-                    props[nameof(MOverlay.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
-                    {
-                        if (Temporary)
-                        {
-                            UpdateValue(false);
-                        }
-                    });
                 });
         }
+        
+        protected int ZIndex { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
+            
             if (firstRender)
             {
                 Element = await JsInvokeAsync<BlazorComponent.Web.Element>(
@@ -293,7 +285,11 @@ namespace MASA.Blazor
                 await InvokeStateHasChangedAsync();
             }
 
-            await base.OnAfterRenderAsync(firstRender);
+            if (_valueChangedToTrue)
+            {
+                ZIndex = await ActiveZIndex();
+                _valueChangedToTrue = false;
+            }
         }
 
         protected void UpdateApplication(BlazorComponent.Web.Element element)
@@ -309,8 +305,7 @@ namespace MASA.Blazor
         }
 
 
-        protected StringNumber ComputedWidth() =>
-            IsMiniVariant ? MiniVariantWidth : Width;
+        protected StringNumber ComputedWidth() => IsMiniVariant ? MiniVariantWidth : Width;
 
         protected StringNumber ComputedMaxHeight
         {
@@ -341,5 +336,7 @@ namespace MASA.Blazor
 
             UpdateApplication(Element);
         }
+
+        private Task<int> ActiveZIndex() => JsInvokeAsync<int>(JsInteropConstants.GetZIndex, Ref);
     }
 }

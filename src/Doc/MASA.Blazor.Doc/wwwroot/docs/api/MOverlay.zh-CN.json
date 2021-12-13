@@ -71,10 +71,5 @@
       "Description": "默认插槽"
     }
   ],
-  "Events": [
-    {
-      "Name": "OnClick",
-      "Description": ""
-    }
-  ]
+  "Events": []
 }
