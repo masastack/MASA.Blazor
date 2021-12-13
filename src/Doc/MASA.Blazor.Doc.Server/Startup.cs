@@ -44,8 +44,6 @@ namespace MASA.Blazor.Doc.Server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime)
         {
-            //_httpClient.BaseAddress ??= new Uri("http://127.0.0.1:5000/");
-
             if (env.IsDevelopment())
             {
                 _httpClient.BaseAddress = new Uri(Configuration["ASPNETCORE_URLS"]);
@@ -53,7 +51,7 @@ namespace MASA.Blazor.Doc.Server
             }
             else
             {
-                _httpClient.BaseAddress = new Uri(Configuration["BaseAddress"]);
+                _httpClient.BaseAddress = new Uri("http://127.0.0.1:5000");
                 app.UseExceptionHandler("/Error");
             }
 
@@ -63,19 +61,13 @@ namespace MASA.Blazor.Doc.Server
 
             app.UseMiddleware<CookieMiddleware>();
 
-            app.UseRequestLocalization(async opts =>
+            app.UseRequestLocalization(opts =>
             {
-                var supportedCultures = new List<CultureInfo>();
-
-                var languageDict = await _httpClient.GetFromJsonAsync<Dictionary<string, string[]>>("_content/MASA.Blazor.Doc/locale/languages.json");
-                if (languageDict?.Count > 0)
+                var supportedCultures = new List<CultureInfo>
                 {
-                    string[] languages = languageDict["SupportLanguages"];
-                    foreach (var language in languages)
-                    {
-                        supportedCultures.Add(new CultureInfo(language));
-                    }
-                }
+                    new CultureInfo("zh-CN"),
+                    new CultureInfo("en-US")
+                };
 
                 opts.SupportedCultures = supportedCultures;
                 opts.SupportedUICultures = supportedCultures;

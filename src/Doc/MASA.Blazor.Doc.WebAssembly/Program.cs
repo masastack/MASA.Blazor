@@ -18,7 +18,7 @@ var httpClient = new HttpClient()
     BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
 };
 
-builder.Services.AddScoped(sp => httpClient);
+builder.Services.AddSingleton(sp => httpClient);
 
 #region i18n settings
 
