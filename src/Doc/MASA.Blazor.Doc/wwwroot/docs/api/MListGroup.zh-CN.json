@@ -90,8 +90,16 @@
       "Description": ""
     },
     {
+      "Name": "AppendIconContent",
+      "Description": ""
+    },
+    {
       "Name": "ChildContent",
       "Description": "默认插槽"
+    },
+    {
+      "Name": "PrependIconContent",
+      "Description": ""
     }
   ],
   "Events": [

@@ -1,5 +1,7 @@
 ﻿using BlazorComponent;
+using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
+using System.Globalization;
 
 namespace MASA.Blazor.Doc.Pages
 {
@@ -28,8 +30,14 @@ namespace MASA.Blazor.Doc.Pages
 
     public partial class Api
     {
+        [Inject]
+        public GlobalConfigs GlobalConfig { get; set; }
+
         [Parameter]
         public string ComponentName { get; set; }
+
+        [CascadingParameter]
+        public bool IsChinese { get; set; }
 
         private List<DataTableHeader<Props>> _headers = new List<DataTableHeader<Props>>
         {
@@ -85,8 +93,9 @@ namespace MASA.Blazor.Doc.Pages
         {
             if (!string.IsNullOrEmpty(ComponentName))
             {
+                string lang = GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name;
                 var baseUrl = new Uri("http://127.0.0.1:5000");
-                var apiUrl = new Uri(baseUrl, $"_content/MASA.Blazor.Doc/docs/api/{ComponentName}.zh-CN.json").ToString();
+                var apiUrl = new Uri(baseUrl, $"_content/MASA.Blazor.Doc/docs/api/{ComponentName}.{lang}.json").ToString();
                 _api = await Service.GetApiAsync(apiUrl);
             }
         }

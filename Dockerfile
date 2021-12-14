@@ -6,3 +6,4 @@ WORKDIR /app
 COPY . .
 RUN dotnet build src/Doc/MASA.Blazor.Doc.Server -c Release
 ENTRYPOINT ["dotnet","./src/Doc/MASA.Blazor.Doc.Server/bin/Release/net6.0/MASA.Blazor.Doc.Server.dll"]
+

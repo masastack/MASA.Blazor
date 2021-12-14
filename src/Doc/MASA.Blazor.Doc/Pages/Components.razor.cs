@@ -1,5 +1,8 @@
 ﻿using MASA.Blazor.Doc.Models;
+using MASA.Blazor.Doc.Shared;
+using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
+using System.Globalization;
 
 namespace MASA.Blazor.Doc.Pages
 {
@@ -23,9 +26,15 @@ namespace MASA.Blazor.Doc.Pages
         private List<DemoItemModel> MiscList { get; set; }
 
         private string GithubUrlHref { get; set; }
-        
+
         [Parameter]
         public string Name { get; set; }
+
+        [CascadingParameter]
+        public bool IsChinese { get; set; }
+
+        [Inject]
+        public GlobalConfigs GlobalConfig { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
@@ -39,8 +48,9 @@ namespace MASA.Blazor.Doc.Pages
                 Name = Name.Split("#")[0];
             }
 
+            Service.ChangeLanguage(GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name);
             _demoComponent = await Service.GetComponentAsync(Name);
-            
+
             var demos = _demoComponent.DemoList?
                 .Where(x => !x.Debug && !x.Docs.HasValue)
                 .OrderBy(x => x.Order)
@@ -51,7 +61,7 @@ namespace MASA.Blazor.Doc.Pages
             EventsList = demos.Where(demo => demo.Group == DemoGroup.Events).ToList();
             ContentsList = demos.Where(demo => demo.Group == DemoGroup.Contents).ToList();
             MiscList = demos.Where(demo => demo.Group == DemoGroup.Misc).ToList();
-            
+
             GithubUrlHref = string.Format(_githubUrlTemplate, _demoComponent.Type);
 
             _demoIndex = 0;

@@ -7,9 +7,7 @@ title: 安装
 
 > MASA 系列所有产品均基于.Net 6.0 开发,请确保已安装 [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0) 。
 
-<video controls preload="none" poster="Install MasaBlazor">
-      <source src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" type="video/mp4">
-</videos>
+<iframe src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" scrolling="no" width="800px" height="600px" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 # Cli 创建
 

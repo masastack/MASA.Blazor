@@ -161,6 +161,18 @@
       "Description": ""
     },
     {
+      "Name": "OnItemSelect",
+      "Type": "Action`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OnToggleSelectAll",
+      "Type": "Action`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Page",
       "Type": "Int32",
       "Default": "0",

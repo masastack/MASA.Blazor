@@ -83,6 +83,12 @@
       "Description": "Sets the height for the component."
     },
     {
+      "Name": "HideOverlay",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Id",
       "Type": "String",
       "Default": "null",
@@ -119,8 +125,14 @@
       "Description": ""
     },
     {
+      "Name": "ShowOverlay",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Src",
-      "Type": "OneOf`2",
+      "Type": "String",
       "Default": "",
       "Description": ""
     },

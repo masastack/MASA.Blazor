@@ -69,4 +69,3 @@ deploy-test:
     - kubectl set image deployment/masa-blazor-docs-wasm masa-blazor-docs-wasm=$IMAGEWASM -n test-masa-blazor
   retry: 2
   when: manual
-    

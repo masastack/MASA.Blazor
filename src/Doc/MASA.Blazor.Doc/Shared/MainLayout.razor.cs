@@ -52,16 +52,8 @@ namespace MASA.Blazor.Doc.Shared
                 {
                     DomEventJsInterop.AddEventListener<Window>("window", "resize", OnResize, false);
 
-                    if (_window.InnerWidth <= 1264)
-                    {
-                        _isCanHideDrawerByLocationChanged = true;
-                        BaseLayout.UpdateNav(false);
-                    }
-                    else
-                    {
-                        _isCanHideDrawerByLocationChanged = false;
-                        BaseLayout.UpdateNav(true, false);    
-                    }
+                    _isCanHideDrawerByLocationChanged = _window.InnerWidth <= 1264;
+                    BaseLayout.UpdateNav(!_isCanHideDrawerByLocationChanged, _isCanHideDrawerByLocationChanged);
                 }
             }
         }
@@ -78,14 +70,8 @@ namespace MASA.Blazor.Doc.Shared
         {
             await Task.Run(() =>
             {
-                if (window.InnerWidth <= 1264)
-                {
-                    BaseLayout.UpdateNav(false, true);
-                }
-                else
-                {
-                    BaseLayout.UpdateNav(true, false);
-                }
+                _isCanHideDrawerByLocationChanged = window.InnerWidth <= 1264;
+                BaseLayout.UpdateNav(!_isCanHideDrawerByLocationChanged, _isCanHideDrawerByLocationChanged);
             });
         }
 

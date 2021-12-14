@@ -3,8 +3,9 @@ using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using BlazorComponent.Components;
-using MASA.Blazor.Doc.Services;
 using MASA.Blazor.Doc.Utils;
+using MASA.Blazor.Doc.Middleware;
+using MASA.Blazor.Doc.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -38,8 +39,6 @@ namespace MASA.Blazor.Doc.Server
             services.AddHttpClient<DemoService>(c => c.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68"));
 
             services.AddMasaBlazorDocs();
-
-            services.AddScoped<I18n>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,12 +46,12 @@ namespace MASA.Blazor.Doc.Server
         {
             if (env.IsDevelopment())
             {
+                _httpClient.BaseAddress = new Uri(Configuration["ASPNETCORE_URLS"]);
                 app.UseDeveloperExceptionPage();
-                _httpClient.BaseAddress = new Uri(Configuration["urls"] ?? "http://127.0.0.1:5000/");
             }
             else
             {
-                _httpClient.BaseAddress = new Uri(Configuration["BaseAddress"] ?? "http://127.0.0.1:5000/");
+                _httpClient.BaseAddress = new Uri("http://127.0.0.1:5000");
                 app.UseExceptionHandler("/Error");
             }
 
@@ -60,20 +59,15 @@ namespace MASA.Blazor.Doc.Server
 
             app.UseRouting();
 
+            app.UseMiddleware<CookieMiddleware>();
 
-            app.UseRequestLocalization(async opts =>
+            app.UseRequestLocalization(opts =>
             {
-                var supportedCultures = new List<CultureInfo>();
-
-                var languageDict = await _httpClient.GetFromJsonAsync<Dictionary<string, string[]>>("_content/MASA.Blazor.Doc/locale/languages.json");
-                if (languageDict?.Count > 0)
+                var supportedCultures = new List<CultureInfo>
                 {
-                    string[] languages = languageDict["SupportLanguages"];
-                    foreach (var language in languages)
-                    {
-                        supportedCultures.Add(new CultureInfo(language));
-                    }
-                }
+                    new CultureInfo("zh-CN"),
+                    new CultureInfo("en-US")
+                };
 
                 opts.SupportedCultures = supportedCultures;
                 opts.SupportedUICultures = supportedCultures;

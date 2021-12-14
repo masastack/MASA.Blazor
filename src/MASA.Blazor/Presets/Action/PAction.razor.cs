@@ -12,13 +12,15 @@ namespace MASA.Blazor.Presets
     {
         private bool _loading;
         private bool _set;
+        private bool _visible = true;
+        private bool _visibleChanged = true;
 
         private ElementReference ButtonRef { get; set; }
         private MButton ButtonForwardRef { get; set; }
         private ElementReference IconRef { get; set; }
         private MIcon IconForwardRef { get; set; }
         private ElementReference LabelRef { get; set; }
-        
+
         internal double BtnWidth { get; set; }
         internal double IconWidth { get; set; }
         internal double LabelWidth { get; set; }
@@ -55,7 +57,16 @@ namespace MASA.Blazor.Presets
         public string Tip { get; set; }
 
         [Parameter]
-        public bool Visible { get; set; } = true;
+        public bool Visible
+        {
+            get => _visible;
+            set
+            {
+                if (_visible != value) _visibleChanged = true;
+
+                _visible = value;
+            }
+        }
 
         private ActionTypes ActionType => Actions?.Type ?? ActionTypes.IconLabel;
 
@@ -70,11 +81,11 @@ namespace MASA.Blazor.Presets
         private bool Plain => Actions?.Plain ?? false;
 
         private bool Rounded => Actions?.Rounded ?? false;
-        
+
         private bool ShowIcon => ActionType == ActionTypes.Icon || ActionType == ActionTypes.IconLabel;
 
         private bool ShowLabel => ActionType == ActionTypes.Label || ActionType == ActionTypes.IconLabel;
-        
+
         private bool Small => Actions?.Small ?? false;
 
         private bool Text => Actions?.Text ?? false;
@@ -88,7 +99,7 @@ namespace MASA.Blazor.Presets
         private bool XLarge => Actions?.XLarge ?? false;
 
         internal double IconBtnWidth => IconWidth + SpaceWidth;
-        
+
         internal double LabelBtnWidth => LabelWidth + SpaceWidth;
 
         protected override void OnInitialized()
@@ -117,20 +128,29 @@ namespace MASA.Blazor.Presets
         {
             await base.OnAfterRenderAsync(firstRender);
 
-            if (firstRender)
+            if (_visibleChanged)
             {
-                ButtonRef = ButtonForwardRef.Ref;
-                IconRef = IconForwardRef.Ref;
-            }
-
-            if (LabelRef.Context != null)
-            {
-                if (!_set)
+                if (ButtonRef.Context == null && ButtonForwardRef != null)
                 {
-                    await ResetWidths();
-                    await Actions.CheckWidths();
-                    _set = true;
+                    ButtonRef = ButtonForwardRef.Ref;
                 }
+
+                if (IconRef.Context == null && IconForwardRef != null)
+                {
+                    IconRef = IconForwardRef.Ref;
+                }
+
+                if (LabelRef.Context != null)
+                {
+                    if (!_set)
+                    {
+                        await ResetWidths();
+                        await Actions.CheckWidths();
+                        _set = true;
+                    }
+                }
+
+                _visibleChanged = false;
             }
         }
 

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MASA.Blazor.Doc.Models;
+using MASA.Blazor.Doc.Utils;
+using System.Globalization;
 
 namespace MASA.Blazor.Doc.Pages
 {
@@ -20,6 +22,12 @@ namespace MASA.Blazor.Doc.Pages
         [Parameter]
         public string Name { get; set; }
 
+        [CascadingParameter]
+        public bool IsChinese { get; set; }
+
+        [Inject]
+        public GlobalConfigs GlobalConfig { get; set; }
+
         protected override async Task OnParametersSetAsync()
         {
             if (Name.Contains('?'))
@@ -32,6 +40,7 @@ namespace MASA.Blazor.Doc.Pages
                 Name = Name.Split("#")[0];
             }
 
+            Service.ChangeLanguage(GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name);
             _demoComponent = await Service.GetStyleAsync(Name);
 
             var demos = _demoComponent.DemoList?

@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;display=swap" media="all">
-    <link href="_content/MASA.Blazor.Doc/css/demo.css" rel="stylesheet" />
+    <link href="_content/MASA.Blazor.Doc/css/doc.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
     <style>
         .spinner {
@@ -185,12 +185,12 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"></script>
     <script>
         window.BlazorComponent.Prism = {};
-        window.BlazorComponent.Prism.highlight = function (code, language,component,codeElement) {
-            setTimeout(function(){
-                var highlightCode= Prism.highlight(code, Prism.languages[language], language);
-                codeElement.innerHTML=highlightCode;
+        window.BlazorComponent.Prism.highlight = function (code, language, component, codeElement) {
+            setTimeout(function () {
+                var highlightCode = Prism.highlight(code, Prism.languages[language], language);
+                codeElement.innerHTML = highlightCode;
                 component.invokeMethodAsync('OnAfterHighlighted');
-            },0);
+            }, 0);
         }
 
         window.BlazorComponent.Prism.highlightAll = function () {
@@ -215,11 +215,11 @@
             Prism.highlightAll();
         }
 
-        window.testUploadFile = function(element) {
+        window.testUploadFile = function (element) {
             let result = []
 
-            if(element){
-                for(let i = 0; i< element.files.length; i++){
+            if (element) {
+                for (let i = 0; i < element.files.length; i++) {
                     var file = element.files[i]
 
                     // TODO: oss here
@@ -237,6 +237,23 @@
             }
 
             return result;
+        }
+
+        window.setCookie = (name, value) => {
+            var Days = 30;
+            var exp = new Date();
+            exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+            document.cookie = `${name}=${escape(value.toString())};path=/;expires=${exp.toUTCString()}`;
+        }
+
+        window.getCookie = (name) => {
+            const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
+            const arr = document.cookie.match(reg);
+            if (arr) {
+                return unescape(arr[2]);
+            }
+
+            return null;
         }
     </script>
 </body>

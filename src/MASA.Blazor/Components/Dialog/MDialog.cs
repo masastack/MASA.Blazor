@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Element = BlazorComponent.Web.Element;
 
 namespace MASA.Blazor
@@ -112,22 +113,16 @@ namespace MASA.Blazor
                 {
                     props[nameof(MOverlay.Value)] = ShowOverlay && Value;
                     props[nameof(MOverlay.ZIndex)] = ZIndex - 1;
-                    props[nameof(MOverlay.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
-                    {
-                        if (Persistent)
-                        {
-                            await AnimateClick();
-                        }
-                        else
-                        {
-                            await UpdateValue(false);
-                        }
-
-                        if (OnOutsideClick.HasDelegate)
-                            await OnOutsideClick.InvokeAsync();
-                    });
                 })
                 .ApplyDialogDefault();
+        }
+
+        private async Task AfterShowContent()
+        {
+            await JsInvokeAsync(JsInteropConstants.AddOutsideClickEventListener,
+                DotNetObjectReference.Create(new Invoker<object>(OutsideClick)),
+                new[] { Document.QuerySelector(DialogRef).Selector },
+                new[] { Document.QuerySelector(OverlayRef).Selector });
         }
 
         private async Task AnimateClick()
@@ -160,6 +155,29 @@ namespace MASA.Blazor
             await base.Close();
         }
 
+        private bool CloseConditional()
+        {
+            return IsActive;
+        }
+
+        protected async Task OutsideClick(object _)
+        {
+            if (!CloseConditional()) return;
+            
+            if (OnOutsideClick.HasDelegate)
+                await OnOutsideClick.InvokeAsync();
+
+            if (Persistent)
+            {
+                await AnimateClick();
+                return;
+            }
+
+            await UpdateValue(false);
+
+            await InvokeStateHasChangedAsync();
+        }
+
         public override async Task ShowLazyContent()
         {
             if (!ShowContent && Value)
@@ -168,15 +186,20 @@ namespace MASA.Blazor
                 Value = false;
 
                 StateHasChanged();
+                await Task.Delay(16);
 
+                await AfterShowContent();
                 Value = true;
 
-                var overlayElement = ((BDomComponentBase)Overlay.Instance).Ref;
-                await JsInvokeAsync(JsInteropConstants.AddElementTo, overlayElement, AttachSelector);
-                await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachSelector);
-
+                await MoveContentTo();
                 StateHasChanged();
             }
+        }
+
+        private async Task MoveContentTo()
+        {
+            await JsInvokeAsync(JsInteropConstants.AddElementTo, OverlayRef, AttachSelector);
+            await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachSelector);
         }
     }
 }

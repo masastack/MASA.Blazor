@@ -71,10 +71,5 @@
       "Description": "Default Content"
     }
   ],
-  "Events": [
-    {
-      "Name": "OnClick",
-      "Description": ""
-    }
-  ]
+  "Events": []
 }
