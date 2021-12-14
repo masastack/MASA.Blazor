@@ -128,12 +128,12 @@ namespace MASA.Blazor
         private async Task AnimateClick()
         {
             _animated = true;
-            StateHasChanged();
+            await InvokeStateHasChangedAsync();
 
             await Task.Delay(150);
 
             _animated = false;
-            StateHasChanged();
+            await InvokeStateHasChangedAsync();
         }
 
         public async Task Keydown(KeyboardEventArgs args)
@@ -185,14 +185,14 @@ namespace MASA.Blazor
                 ShowContent = true;
                 Value = false;
 
-                StateHasChanged();
+                await InvokeStateHasChangedAsync();
                 await Task.Delay(16);
 
                 await AfterShowContent();
                 Value = true;
 
                 await MoveContentTo();
-                StateHasChanged();
+                await InvokeStateHasChangedAsync();
             }
         }
 
