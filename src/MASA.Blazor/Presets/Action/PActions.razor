@@ -7,13 +7,9 @@
         {
             @foreach (var (a,i) in VisibleItems.Select((a, i) => (a,i)))
             {
-                <PAction Color="@a.Color"
-                         Disabled="@a.Disabled"
-                         Icon="@a.Icon"
-                         Label="@a.Label"
-                         OnClick="@a.OnClick"
-                         Visible="@a.Visible">
-                </PAction>
+                <CascadingValue Value="a" Name="_p_action_data">
+                    <PAction />
+                </CascadingValue>
 
                 @if (Divider && i < VisibleItems.Count() - 1)
                 {

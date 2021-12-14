@@ -7,33 +7,42 @@
         <ActivatorContent>
             <span style="padding: 4px;@Style" class="@Class">
                 <MButton Color="@ComputedColor"
-                         Dark="Dark"
-                         Depressed="@Depressed"
-                         Disabled="Disabled"
+                         Dark="@ComputedDark"
+                         Depressed="@ComputedDepressed"
+                         Disabled="@ComputedDisabled"
                          Icon="(ActionType == ActionTypes.Icon)"
-                         Large="@Large"
-                         Light="@Light"
+                         Large="@ComputedLarge"
+                         Light="@ComputedLight"
                          Loading="@_loading"
-                         Outlined="@Outlined"
-                         Plain="@Plain"
-                         Rounded="@Rounded"
-                         Small="@Small"
-                         Text="@Text"
-                         Tile="@Tile"
-                         XLarge="@XLarge"
-                         XSmall="@XSmall"
-                         OnClick="HandleClick"
+                         Outlined="@ComputedOutlined"
+                         Plain="@ComputedPlain"
+                         Rounded="@ComputedRounded"
+                         Small="@ComputedSmall"
+                         Text="@ComputedText"
+                         Tile="@ComputedTile"
+                         XLarge="@ComputedXLarge"
+                         XSmall="@ComputedXSmall"
+                         OnClick="HandleOnClick"
                          @ref="ButtonForwardRef"
                          @attributes="context.Attrs">
 
                     @if (ShowIcon)
                     {
-                        <MIcon Left="ActionType == ActionTypes.IconLabel" @ref="IconForwardRef">@Icon</MIcon>
+                        <MIcon Left="ActionType == ActionTypes.IconLabel" @ref="IconForwardRef">@ComputedIcon</MIcon>
                     }
 
                     @if (ShowLabel)
                     {
-                        <span @ref="LabelRef">@Label</span>
+                        <span @ref="LabelRef">
+                            @if (ChildContent != default)
+                            {
+                                @ChildContent
+                            }
+                            else
+                            {
+                                @ComputedLabel
+                            }
+                        </span>
                     }
 
                 </MButton>
@@ -41,7 +50,18 @@
         </ActivatorContent>
 
         <ChildContent>
-            @(Tip ?? Label)
+            @if (ComputedTip != default)
+            {
+                @ComputedTip
+            }
+            else if (ChildContent != default)
+            {
+                @ChildContent
+            }
+            else
+            {
+                @ComputedLabel
+            }
         </ChildContent>
     </MTooltip>
 }

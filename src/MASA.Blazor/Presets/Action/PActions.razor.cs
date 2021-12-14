@@ -22,12 +22,6 @@ public partial class PActions
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public string Color { get; set; }
-
-    [Parameter]
-    public bool Depressed { get; set; }
-
-    [Parameter]
     public bool Divider { get; set; }
 
     [Parameter]
@@ -35,34 +29,7 @@ public partial class PActions
 
     [Parameter]
     public JustifyTypes Justify { get; set; }
-
-    [Parameter]
-    public bool Large { get; set; }
-
-    [Parameter]
-    public bool Outlined { get; set; }
-
-    [Parameter]
-    public bool Plain { get; set; }
-
-    [Parameter]
-    public bool Rounded { get; set; }
-
-    [Parameter]
-    public bool Small { get; set; }
-
-    [Parameter]
-    public bool Text { get; set; }
-
-    [Parameter]
-    public bool Tile { get; set; }
-
-    [Parameter]
-    public bool XSmall { get; set; }
-
-    [Parameter]
-    public bool XLarge { get; set; }
-
+    
     private IEnumerable<Action> VisibleItems => Items?.Where(item => item.Visible);
 
     private string JustifyClass => Justify switch
