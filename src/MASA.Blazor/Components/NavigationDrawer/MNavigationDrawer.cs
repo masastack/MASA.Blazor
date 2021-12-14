@@ -254,19 +254,19 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyNavigationDrawerDefault()
-                .Apply(typeof(IImage), typeof(MImage), props =>
+                .Apply(typeof(IImage), typeof(MImage), attrs =>
                 {
-                    props[nameof(MImage.Src)] = Src;
-                    props[nameof(MImage.Height)] = (StringNumber)"100%";
-                    props[nameof(MImage.Width)] = (StringNumber)"100%";
-                    props[nameof(MImage.Dark)] = Dark;
-                    props[nameof(MImage.Light)] = Light;
+                    attrs[nameof(MImage.Src)] = Src;
+                    attrs[nameof(MImage.Height)] = (StringNumber)"100%";
+                    attrs[nameof(MImage.Width)] = (StringNumber)"100%";
+                    attrs[nameof(MImage.Dark)] = Dark;
+                    attrs[nameof(MImage.Light)] = Light;
                 })
-                .Apply<BOverlay, MOverlay>(props =>
+                .Apply<BOverlay, MOverlay>(attrs =>
                 {
-                    props[nameof(MOverlay.ZIndex)] = ZIndex;
-                    props[nameof(MOverlay.Absolute)] = !Fixed;
-                    props[nameof(MOverlay.Value)] = InternalShowOverlay;
+                    attrs[nameof(MOverlay.ZIndex)] = ZIndex;
+                    attrs[nameof(MOverlay.Absolute)] = !Fixed;
+                    attrs[nameof(MOverlay.Value)] = InternalShowOverlay;
                 });
         }
         

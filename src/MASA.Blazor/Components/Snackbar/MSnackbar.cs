@@ -181,11 +181,11 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplySnackbarDefault()
-                .Apply<BButton, MButton>(props =>
+                .Apply<BButton, MButton>(attrs =>
                 {
-                    props[nameof(Class)] = "m-snack__btn";
-                    props[nameof(MButton.Text)] = true;
-                    props[nameof(MButton.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
+                    attrs[nameof(Class)] = "m-snack__btn";
+                    attrs[nameof(MButton.Text)] = true;
+                    attrs[nameof(MButton.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
                     {
                         Value = false;
                         Timer.Stop();

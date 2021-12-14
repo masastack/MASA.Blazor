@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-22T16:33:22.8890524+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3546167+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -161,7 +161,8 @@
     ],
     "Subtitle": "提示框",
     "Title": "Alerts",
-    "Type": "提示框"
+    "Type": "提示框",
+    "FullTitle": "Alerts（提示框）"
   },
   {
     "Desc": "<p>在 MASA.Blazor 中，<code>MApp</code> 组件和 <code>MNavigationDrawer</code>、<code>MAppBar</code>、<code>MFooter</code> 等组件上的 App 属性，帮助你的应用围绕 <code>MMain</code> 组件进行适当的大小调整。\n这使你可以创建真正独特的界面，无需因管理布局尺寸而烦恼。 所有应用都需要 <code>MApp</code> 组件。 这是许多 <code>MASA Blazor</code> 组件和功能的挂载点，并确保它将默认的应用主题\n（Dark/Light）传递给子组件，并确保在浏览器中对某些点击事件的正确跨浏览器支持。</p>\n",
@@ -184,7 +185,8 @@
     ],
     "Subtitle": "应用程序",
     "Title": "Application",
-    "Type": "应用程序"
+    "Type": "应用程序",
+    "FullTitle": "Application（应用程序）"
   },
   {
     "Desc": "<p><code>MResponsive</code> 组件可用于将任何部分固定到特定的宽高比。</p>\n",
@@ -192,7 +194,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:32:30.0736279+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3566126+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -216,7 +218,8 @@
     ],
     "Subtitle": "长宽比",
     "Title": "Aspect ratios",
-    "Type": "长宽比"
+    "Type": "长宽比",
+    "FullTitle": "Aspect ratios（长宽比）"
   },
   {
     "Desc": "<p>MAvatar 组件通常用于显示用户个人资料图片。 此组件允许您动态添加设置响应图像、图标和文字的边框半径。 ** tile ** 变量可用来显示无边框半径的头像。</p>\n",
@@ -224,7 +227,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-30T11:20:37.745403+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3604912+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -315,7 +318,8 @@
     ],
     "Subtitle": "头像",
     "Title": "Avatars",
-    "Type": "头像"
+    "Type": "头像",
+    "FullTitle": "Avatars（头像）"
   },
   {
     "Desc": "<p>MBadge组件可以上覆或订阅一个像头像的图标，或者内容上的文本来突出显示用户的信息，或只是提请注意某个特定元素。 徽章中的内容通常包含数字或图标。</p>\n",
@@ -323,7 +327,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-26T09:53:53.2705332+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3634834+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -391,7 +395,8 @@
     ],
     "Subtitle": "徽章",
     "Title": "Badges",
-    "Type": "徽章"
+    "Type": "徽章",
+    "FullTitle": "Badges（徽章）"
   },
   {
     "Desc": "<p>MBanner组件被用来作为向用户发送1-2动作的中间段描述信息。 它有两个变量单行and多行(默认多行展示)。 这些图标可以与您的消息和操作一起使用。</p>\n",
@@ -399,7 +404,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:32:30.0756284+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3664752+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -478,7 +483,8 @@
     ],
     "Subtitle": "横幅",
     "Title": "Banners",
-    "Type": "横幅"
+    "Type": "横幅",
+    "FullTitle": "Banners（横幅）"
   },
   {
     "Desc": "<p><code>MAppBar</code> 组件对于任何图形用户界面 (GUI) 都是至关重要的，因为它通常是网站导航的主要来源。<code>MAppBar</code> 和 <code>MNavigationDrawer</code> 结合在一起为应用程序提供站点导航。</p>\n",
@@ -488,7 +494,7 @@
       "功能组件": "\n<ul>\n<li><code>MAppBarNavIcon</code>：专门为与 <a href=\"/components/toolbars\">MToolbar</a> 和 <code>MAppBar</code> 一起使用而创建的样式化图标按钮组件。 在工具栏的左侧显示为汉堡菜单，它通常用于控制导航抽屉的状态。 默认插槽可以用于自定义此组件的图标和功能。</li>\n<li><code>MAppBarTitle</code>：修改过的 <a href=\"/components/toolbars\">MToolbarTitle</a> 组件 ，用于配合 <strong>ShrinkOnScroll</strong> 属性使用。 在小屏幕上，<strong>MToolbarTitle</strong>\n将被截断，但这个组件在展开时使用了绝对定位使其内容可见。 我们不建议您在没有使用 <strong>ShrinkOnScroll</strong> 属性时使用 <code>MAppBarTitle</code> 组件。确实是因为向此组件添加了resize事件，并进行了很多额外的计算。</li>\n</ul>\n",
       "注意事项": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <strong>Icon</strong> 属性的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将按钮包装在任何容器例如<code>div</code>中，则需要对该容器应用负边距，以便正确对齐它们。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2021-11-26T13:07:38.017444+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3734607+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -634,7 +640,8 @@
     ],
     "Subtitle": "应用栏",
     "Title": "App bars",
-    "Type": "应用栏"
+    "Type": "应用栏",
+    "FullTitle": "App bars（应用栏）"
   },
   {
     "Desc": "<p><code>MSystemBar</code> 组件可以用于向用户显示状态。 它看起来像Android系统栏，可以包含图标、空格和一些文本。</p>\n",
@@ -642,7 +649,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:32:30.0776289+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3759449+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -710,7 +717,8 @@
     ],
     "Subtitle": "系统栏",
     "Title": "System bars",
-    "Type": "系统栏"
+    "Type": "系统栏",
+    "FullTitle": "System bars（系统栏）"
   },
   {
     "Desc": "<p><code>MToolbar</code> 组件对于任何 GUI 都是至关重要的，因为它通常是站点导航的主要来源。 工具栏组件与 <a href=\"/components/navigation-drawers\"><strong>MNavigationDrawer</strong></a> 和 <a href=\"/components/cards\"><strong>MCard</strong></a> 配合使用非常有效。</p>\n",
@@ -719,7 +727,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <code>Icon</code> prop的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将您的按钮包装在任何容器中，例如<code>div</code>， 您需要对容器应用负边距，以便正确对齐。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2021-11-12T13:32:30.0816266+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3822109+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -864,7 +872,8 @@
     ],
     "Subtitle": "工具栏",
     "Title": "Toolbars",
-    "Type": "工具栏"
+    "Type": "工具栏",
+    "FullTitle": "Toolbars（工具栏）"
   },
   {
     "Desc": "<p>边框组件可以给任何内容添加一个额外的边框。</p>\n",
@@ -872,7 +881,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-02T13:33:53.2800713+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3832083+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -907,7 +916,8 @@
     ],
     "Subtitle": "边框",
     "Title": "Borders",
-    "Type": "边框"
+    "Type": "边框",
+    "FullTitle": "Borders（边框）"
   },
   {
     "Desc": "<p>Breadcrumbs 组件适用于页面层级导航</p>\n",
@@ -916,7 +926,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>默认情况下，<code>MBreadcrumbs</code> 将禁用路由联动。可以通过 <strong>Linkage</strong> 属性开启路由联动。</p>\n"
     },
-    "LastWriteTime": "2021-12-06T14:29:50.6435346+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.387313+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -996,7 +1006,8 @@
     ],
     "Subtitle": "面包屑导航",
     "Title": "Breadcrumbs",
-    "Type": "面包屑导航"
+    "Type": "面包屑导航",
+    "FullTitle": "Breadcrumbs（面包屑导航）"
   },
   {
     "Desc": "<p><code>MButton</code>（按钮）组件采 Material Design 设计主题风格，并增加众多的配置选项替换了标准的 html 按钮。 任何颜色助手类都可以用来改变背景或文字颜色。</p>\n",
@@ -1005,7 +1016,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p>当使用 <strong>Dark</strong> 属性时，<code>MButton</code> 是唯一一种拥有不同行为的组件。 通常来说，组件使用 <strong>Dark</strong> 属性来表示他们将有深色背景，文本也需要是白色的。 虽然这对\n<code>MButton</code> 也是起作用的，但由于禁用状态与白色背景容易造成混淆，建议仅在按钮<strong>为</strong>彩色背景时使用此属性。 If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2021-11-17T17:29:52.1597474+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3936467+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1162,7 +1173,8 @@
     ],
     "Subtitle": "按钮",
     "Title": "Buttons",
-    "Type": "按钮"
+    "Type": "按钮",
+    "FullTitle": "Buttons（按钮）"
   },
   {
     "Desc": "<p><code>MCard</code> 组件是一个可用于从面板到静态图像的多功能组件。 卡 组件有许多帮助程序组件来尽可能简单地进行标记。 没有列出选项的组件使用Vue的功能组件来更快渲染并充当标记糖以使建筑变得更加容易。</p>\n",
@@ -1171,7 +1183,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "功能组件": "\n<ul>\n<li><code>MCardActions</code>：用于为卡片放置 动作 的容器，如 <a href=\"/components/buttons\">MButton</a> 或 <a href=\"/components/menus\">MMenu</a>。 同时在按钮上使用 个特殊边距\n，以便它们与其他卡片内容区域的匹配。</li>\n<li><code>MCardSubtitle</code>：为卡片字幕提供默认的 <strong>字体大小</strong> 和 <strong>填充</strong>。 字体大小可以以 <a href=\"/styles/text-and-typography\">排版类</a> 覆盖。</li>\n<li><code>MCardText</code>：主要用于卡片中的 <strong>文本内容</strong>。 对文本应用填充，将其字体大小减少为 .875rem。</li>\n<li><code>MCardTitle</code>：为卡片字幕提供默认的 字体大小 和 填充。 字体大小可以以 <a href=\"/styles/text-and-typography\">排版类</a> 覆盖。</li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:32:30.0886273+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3996619+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1317,7 +1329,8 @@
     ],
     "Subtitle": "卡片",
     "Title": "Cards",
-    "Type": "卡片"
+    "Type": "卡片",
+    "FullTitle": "Cards（卡片）"
   },
   {
     "Desc": "<p><code>MChip</code> 组件用于传送小信息。 使用 <strong>Close</strong> 属性，纸片将变为交互式，允许用户进行交互。 此组件由 <a href=\"/components/chip-groups\">MChipGroup</a> 用于高级选择选项。</p>\n",
@@ -1325,7 +1338,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T17:18:10.0838705+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.406848+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1504,7 +1517,8 @@
     ],
     "Subtitle": "纸片",
     "Title": "Chips",
-    "Type": "纸片"
+    "Type": "纸片",
+    "FullTitle": "Chips（纸片）"
   },
   {
     "Desc": "<p><code>Dialog</code>组件通知用户有关特定任务，且可能包含关键信息、需要决策或涉及多个任务。减少使用对话框的频率，因为它们具有干扰性。</p>\n",
@@ -1512,7 +1526,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-10-29T14:11:50.7074219+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4118292+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1635,7 +1649,8 @@
     ],
     "Subtitle": "对话框",
     "Title": "Dialogs",
-    "Type": "对话框"
+    "Type": "对话框",
+    "FullTitle": "Dialogs（对话框）"
   },
   {
     "Desc": "<p><code>MDivider</code> 组件用于分隔列表或布局的各个部分。</p>\n",
@@ -1643,7 +1658,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:32:30.0916273+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4148034+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1712,7 +1727,8 @@
     ],
     "Subtitle": "分隔线",
     "Title": "Dividers",
-    "Type": "分隔线"
+    "Type": "分隔线",
+    "FullTitle": "Dividers（分隔线）"
   },
   {
     "Desc": "<p><a href=\"https://echarts.apache.org/examples/zh/index.html\">ECharts</a></p>\n",
@@ -1720,7 +1736,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-01T19:22:48.728436+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4168146+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1751,7 +1767,8 @@
     "Cols": 1,
     "Subtitle": "图表",
     "Title": "ECharts",
-    "Type": "图表"
+    "Type": "图表",
+    "FullTitle": "ECharts（图表）"
   },
   {
     "Desc": "<p><code>MExpansionPanel</code> 组件有助于减少大量信息的垂直空间占用。 组件的默认功能是仅显示一个扩展面板； 然而，使用 <strong>Multiple</strong> 属性后，扩展面板可以保持打开，直到显式地关闭。</p>\n",
@@ -1759,7 +1776,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-02T09:37:52.1130132+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.421801+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1883,7 +1900,8 @@
     ],
     "Subtitle": "扩展面板",
     "Title": "Expansion panels",
-    "Type": "扩展面板"
+    "Type": "扩展面板",
+    "FullTitle": "Expansion panels（扩展面板）"
   },
   {
     "Desc": "<p>MFooter组件用于显示用户可能想要从网站中的任何页面都能访问到的公共信息。</p>\n",
@@ -1891,7 +1909,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T14:06:52.6580013+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4247931+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1959,7 +1977,8 @@
     ],
     "Subtitle": "页脚",
     "Title": "Footers",
-    "Type": "页脚"
+    "Type": "页脚",
+    "FullTitle": "Footers（页脚）"
   },
   {
     "Desc": "<p><code>MAutocomplete</code> 组件提供简单且灵活的自动补全功能 且支持查找大规模数据甚至是从API请求的动态数据</p>\n",
@@ -1968,7 +1987,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2021-11-12T14:06:52.6590057+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4297825+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2070,7 +2089,8 @@
     ],
     "Subtitle": "自动补全",
     "Title": "Autocompletes",
-    "Type": "自动补全"
+    "Type": "自动补全",
+    "FullTitle": "Autocompletes（自动补全）"
   },
   {
     "Desc": "<p>级联选择器</p>\n",
@@ -2078,7 +2098,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-24T18:45:49.2469595+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4327763+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2135,7 +2155,8 @@
     ],
     "Subtitle": "级联菜单",
     "Title": "Cascaders",
-    "Type": "级联菜单"
+    "Type": "级联菜单",
+    "FullTitle": "Cascaders（级联菜单）"
   },
   {
     "Desc": "<p><code>MCheckbox</code>组件使用户能够在两个不同的值之间进行选择。它们非常类似于开关，可以用在复杂的表单和检查表中。</p>\n",
@@ -2143,7 +2164,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T14:06:52.8350159+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4367647+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2222,7 +2243,8 @@
     ],
     "Subtitle": "复选框",
     "Title": "Checkboxes",
-    "Type": "复选框"
+    "Type": "复选框",
+    "FullTitle": "Checkboxes（复选框）"
   },
   {
     "Desc": "<p>v-file-input是一个定制的输入组件，它提供了一个干净的选择界面，显示详细的选择信息和上传进度。 它意在直接取代标准文件输入。</p>\n",
@@ -2230,7 +2252,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T14:06:52.8319996+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4422509+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2365,7 +2387,8 @@
     ],
     "Subtitle": "文件上传",
     "Title": "File inputs",
-    "Type": "文件上传"
+    "Type": "文件上传",
+    "FullTitle": "File inputs（文件上传）"
   },
   {
     "Desc": "<p>表单验证，使用DataAnnotation。Value改变或者表单提交的时候触发验证，也可以手动触发。</p>\n",
@@ -2373,7 +2396,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-30T11:20:37.8234266+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4446381+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2431,7 +2454,8 @@
     ],
     "Subtitle": "表单",
     "Title": "Forms",
-    "Type": "表单"
+    "Type": "表单",
+    "FullTitle": "Forms（表单）"
   },
   {
     "Desc": "<p><code>MRadio</code> 组件是一个简单的单选按钮。 与 <code>MRadioGroup</code> 组件结合时，您可以提供分组的功能，允许用户从一组预定义的选项中进行选择。</p>\n",
@@ -2439,7 +2463,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadioGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-10T13:01:47.8478778+08:00",
+    "LastWriteTime": "2021-12-13T17:07:44.9237179+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2508,7 +2532,8 @@
     ],
     "Subtitle": "单选按钮",
     "Title": "Radio",
-    "Type": "单选按钮"
+    "Type": "单选按钮",
+    "FullTitle": "Radio（单选按钮）"
   },
   {
     "Desc": "<p><code>MRangeSlider</code> 组件是一个更好的可视化数字输入工具。 它用于收集数字数据。</p>\n",
@@ -2516,7 +2541,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T14:06:48.9354207+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4513035+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2596,7 +2621,8 @@
     ],
     "Subtitle": "范围滑块",
     "Title": "Range sliders",
-    "Type": "范围滑块"
+    "Type": "范围滑块",
+    "FullTitle": "Range sliders（范围滑块）"
   },
   {
     "Desc": "<p>选择器组件用于从选项列表中收集用户提供的信息。</p>\n",
@@ -2605,7 +2631,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2021-10-29T13:31:00.2400602+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4573984+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2739,7 +2765,8 @@
     ],
     "Subtitle": "下拉框",
     "Title": "Selects",
-    "Type": "下拉框"
+    "Type": "下拉框",
+    "FullTitle": "Selects（下拉框）"
   },
   {
     "Desc": "<p><code>MSlider</code> 组件是一个更好的可视化数字输入工具。 它用于收集数字数据。</p>\n",
@@ -2747,7 +2774,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T14:06:52.7730007+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4647547+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2926,7 +2953,8 @@
     ],
     "Subtitle": "滑块",
     "Title": "Sliders",
-    "Type": "滑块"
+    "Type": "滑块",
+    "FullTitle": "Sliders（滑块）"
   },
   {
     "Desc": "<p><code>MSwitch</code> 组件使用户能够在两个不同的值之间进行选择。 它们非常类似于一个切换，或开关，虽然视觉上不同于一个复选框。</p>\n",
@@ -2934,7 +2962,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-23T18:27:44.4298634+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4692618+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3025,7 +3053,8 @@
     ],
     "Subtitle": "开关",
     "Title": "Switches",
-    "Type": "开关"
+    "Type": "开关",
+    "FullTitle": "Switches（开关）"
   },
   {
     "Desc": "<p>多行文本框组件用于收集大量文本数据。</p>\n",
@@ -3033,7 +3062,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T14:06:52.7110144+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4742484+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3157,7 +3186,8 @@
     ],
     "Subtitle": "多行文本框",
     "Title": "Textareas",
-    "Type": "多行文本框"
+    "Type": "多行文本框",
+    "FullTitle": "Textareas（多行文本框）"
   },
   {
     "Desc": "<p>文本框组件用于收集用户提供的信息。</p>\n",
@@ -3165,7 +3195,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T14:06:52.6990026+08:00",
+    "LastWriteTime": "2021-12-14T15:01:03.0189799+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3432,7 +3462,8 @@
     ],
     "Subtitle": "文本框",
     "Title": "Text fields",
-    "Type": "文本框"
+    "Type": "文本框",
+    "FullTitle": "Text fields（文本框）"
   },
   {
     "Desc": "<p>MASA.Blazor 配备了一个使用 flexbox 构建的 12 格网格系统。 网格用于在应用的内容中创建特定的布局。 它包含 5 种类型的媒体断点，用于针对特定的屏幕尺寸或方向，xs、sm、md、lg 和 xl。 这些分辨率在视口断点表中定义如下，可以通过自定义断点进行修改。</p>\n<div\n  class=\"overflow-hidden mb-12 overflow-hidden m-sheet m-sheet--outlined theme--light rounded\"\n>\n  <div class=\"m-data-table theme--light\">\n    <div class=\"m-data-table__wrapper\">\n      <table>\n        <caption class=\"pa-4\">\n          Material Design 断点\n        </caption>\n        <thead>\n          <tr class=\"text-left\">\n            <th>设备</th>\n            <th>代码</th>\n            <th>类型</th>\n            <th>像素范围</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z\"\n                  ></path></svg></span\n              ><span>Extra small (超小号)</span>\n            </td>\n            <td><strong>xs</strong></td>\n            <td>小型号到大型号的手机</td>\n            <td>&lt; 600px</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M19,18H5V6H19M21,4H3C1.89,4 1,4.89 1,6V18A2,2 0 0,0 3,20H21A2,2 0 0,0 23,18V6C23,4.89 22.1,4 21,4Z\"\n                  ></path></svg></span\n              ><span>Small (小号)</span>\n            </td>\n            <td><strong>sm</strong></td>\n            <td>小型号到中型号的平板</td>\n            <td>600px &gt; &lt; 960px</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z\"\n                  ></path></svg></span\n              ><span>Medium (中号)</span>\n            </td>\n            <td><strong>md</strong></td>\n            <td>大型号平板到手提电脑</td>\n            <td>960px &gt; &lt; 1264px*</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z\"\n                  ></path></svg></span\n              ><span>Large (大号)</span>\n            </td>\n            <td><strong>lg</strong></td>\n            <td>桌面端</td>\n            <td>1264px &gt; &lt; 1904px*</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M21,17H3V5H21M21,3H3A2,2 0 0,0 1,5V17A2,2 0 0,0 3,19H8V21H16V19H21A2,2 0 0,0 23,17V5A2,2 0 0,0 21,3Z\"\n                  ></path></svg></span\n              ><span>Extra large (超大号)</span>\n            </td>\n            <td><strong>xl</strong></td>\n            <td>4K 和超宽屏幕</td>\n            <td>&gt; 1904px*</td>\n          </tr>\n        </tbody>\n        <tfoot>\n          <tr>\n            <td colspan=\"4\" class=\"text-caption text-center grey--text\">\n              <em>桌面端上浏览器滚动条的宽度为 * -16px </em>\n            </td>\n          </tr>\n          <tr>\n            <td colspan=\"4\" class=\"text-right text--secondary\">\n              <small class=\"d-block mr-n1 mb-n6\"\n                ><a\n                  href=\"https://material.io/design/layout/responsive-layout-grid.html\"\n                  rel=\"noopener noreferrer\"\n                  target=\"_blank\"\n                  class=\"text-decoration-none d-inline-flex align-center\"\n                  ><span\n                    aria-hidden=\"true\"\n                    class=\"m-icon notranslate mr-1 theme--light\"\n                    style=\"\n                      font-size: 16px;\n                      height: 16px;\n                      width: 16px;\n                      color: inherit;\n                    \"\n                    ><svg\n                      xmlns=\"http://www.w3.org/2000/svg\"\n                      viewBox=\"0 0 24 24\"\n                      role=\"img\"\n                      aria-hidden=\"true\"\n                      class=\"m-icon__svg\"\n                      style=\"font-size: 16px; height: 16px; width: 16px\"\n                    >\n                      <path\n                        d=\"M21,12C21,9.97 20.33,8.09 19,6.38V17.63C20.33,15.97 21,14.09 21,12M17.63,19H6.38C7.06,19.55 7.95,20 9.05,20.41C10.14,20.8 11.13,21 12,21C12.88,21 13.86,20.8 14.95,20.41C16.05,20 16.94,19.55 17.63,19M11,17L7,9V17H11M17,9L13,17H17V9M12,14.53L15.75,7H8.25L12,14.53M17.63,5C15.97,3.67 14.09,3 12,3C9.91,3 8.03,3.67 6.38,5H17.63M5,17.63V6.38C3.67,8.09 3,9.97 3,12C3,14.09 3.67,15.97 5,17.63M23,12C23,15.03 21.94,17.63 19.78,19.78C17.63,21.94 15.03,23 12,23C8.97,23 6.38,21.94 4.22,19.78C2.06,17.63 1,15.03 1,12C1,8.97 2.06,6.38 4.22,4.22C6.38,2.06 8.97,1 12,1C15.03,1 17.63,2.06 19.78,4.22C21.94,6.38 23,8.97 23,12Z\"\n                      ></path></svg></span\n                  ><span>规格</span></a\n                ></small\n              >\n            </td>\n          </tr>\n        </tfoot>\n      </table>\n    </div>\n  </div>\n</div>\n",
@@ -3442,7 +3473,7 @@
       "功能组件": "\n<ul>\n<li><code>MContainer</code>：<code>MContainer</code> 提供了将你的网站内容居中和水平填充的功能。 你还可以使用 <strong>Fluid</strong> 属性将容器在所有视口和设备尺寸上完全扩展。</li>\n<li><code>MCol</code>：<code>MCol</code> 包裹内容，它必须是 <code>MRow</code> 的直接子集。</li>\n<li><code>MRow</code>：<code>MRow</code> 是 <code>MCol</code> 的容器组件。 它使用 <strong>Flex</strong> 属性来控制其内栏的布局和流。 它使用的是 <strong>24px</strong> 的标准间隔。 这可以用 <strong>Dense</strong> 属性来减小，或者用 <strong>NoGutters</strong>\n来完全去除。</li>\n<li><code>MSpacer</code>：<code>MSpacer</code> 是一个基本而又通用的间隔组件，用于分配父子组件之间的剩余宽度。 当一个 <code>MSpacer</code> 放置在子组件之前或之后时，组件将推到其容器的左右两侧。 当多个组件之间使用多个 <code>MSpacer</code> 时，剩余的宽度将均匀地分布在每个 spacer 之间。</li>\n</ul>\n",
       "Helper Classes": "\n<p><strong>FillHeight</strong> applies <code>height: 100%</code> to an element. When applied to <code>MContainer</code> it will also <code>align-items: center</code>.</p>\n"
     },
-    "LastWriteTime": "2021-11-12T16:38:35.8305896+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4943852+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3665,7 +3696,8 @@
     ],
     "Subtitle": "网格",
     "Title": "Grid system",
-    "Type": "网格"
+    "Type": "网格",
+    "FullTitle": "Grid system（网格）"
   },
   {
     "Desc": "<p><code>MButtonGroup</code> 组件是专门针对 <code>MButton</code> 构建的 <code>MItemGroup</code> 的简单包装器。</p>\n",
@@ -3673,7 +3705,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:39:37.8809032+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4981061+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3753,7 +3785,8 @@
     ],
     "Subtitle": "按钮组",
     "Title": "Button groups",
-    "Type": "按钮组"
+    "Type": "按钮组",
+    "FullTitle": "Button groups（按钮组）"
   },
   {
     "Desc": "<p><code>MChipGroup</code> 通过提供可分组的功能来增强 <code>MChip</code> 组件。 它使用纸片来创建选择组。</p>\n",
@@ -3761,7 +3794,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-03T16:49:05.8906094+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5006278+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3841,7 +3874,8 @@
     ],
     "Subtitle": "纸片组",
     "Title": "Chip groups",
-    "Type": "纸片组"
+    "Type": "纸片组",
+    "FullTitle": "Chip groups（纸片组）"
   },
   {
     "Desc": "<p><code>MItemGroup</code> 提供从任何组件中创建一组可选项的功能。 这是 <code>MTabs</code> 和 <code>Mcarousel</code> 等组件的基本功能。</p>\n",
@@ -3849,7 +3883,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-04T13:34:00.0771991+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5053894+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3929,7 +3963,8 @@
     ],
     "Subtitle": "项目组",
     "Title": "Item groups",
-    "Type": "项目组"
+    "Type": "项目组",
+    "FullTitle": "Item groups（项目组）"
   },
   {
     "Desc": "<p><code>MListItemGroup</code> 提供创建一组可选择的 <code>MListItem</code> 的能力。<code>MListItemGroup</code> 组件利用其核心的 <code>MItemGroup</code> 来为交互式列表提供一个简洁的接口。</p>\n",
@@ -3937,7 +3972,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:39:38.0698762+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.509099+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4016,7 +4051,8 @@
     ],
     "Subtitle": "列表项目组",
     "Title": "List item groups",
-    "Type": "列表项目组"
+    "Type": "列表项目组",
+    "FullTitle": "List item groups（列表项目组）"
   },
   {
     "Desc": "<p><code>MSlideGroup</code> 组件用于显示伪分页信息。它以 <a href=\"/components/item-groups\"><strong>MItemGroup</strong></a> 为核心，为 <a href=\"/components/tabs\"><strong>MTabs</strong></a>\n和 <a href=\"/components/chip-groups\"><strong>MChipGroup</strong></a> 等组件提供基础。</p>\n",
@@ -4024,7 +4060,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:39:38.0618742+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5130925+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4114,7 +4150,8 @@
     ],
     "Subtitle": "幻灯片组",
     "Title": "Slide groups",
-    "Type": "幻灯片组"
+    "Type": "幻灯片组",
+    "FullTitle": "Slide groups（幻灯片组）"
   },
   {
     "Desc": "<p><code>MWindow</code> 组件提供了将内容从一个窗格过渡到另一个窗格的基础功能。 其他组件如<code>MTabs</code>、<code>MCarousel</code> 和  <code>MStepper</code> 使用此组件作为其核心。</p>\n",
@@ -4122,7 +4159,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:39:37.8828831+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5166526+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4201,7 +4238,8 @@
     ],
     "Subtitle": "窗口",
     "Title": "Windows",
-    "Type": "窗口"
+    "Type": "窗口",
+    "FullTitle": "Windows（窗口）"
   },
   {
     "Desc": "<p><code>MHover</code>组件为处理任何组件的悬停状态提供了一个干净的接口。</p>\n",
@@ -4209,7 +4247,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T16:38:35.8325907+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5200087+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4266,7 +4304,8 @@
     ],
     "Subtitle": "悬停",
     "Title": "Hover",
-    "Type": "悬停"
+    "Type": "悬停",
+    "FullTitle": "Hover（悬停）"
   },
   {
     "Desc": "<p><code>MIcon</code> 组件提供了一系列用于为您的应用程序的各个方面提供上下文的胶卷。 对于所有可用图标的列表, 请访问官方的 <a href=\"https://materialdesignicons.com/\">Material Design 图标</a> 页面。\n要使用任何这些图标，只需使用 <code>mdi-</code> 前缀，然后是图标名称。</p>\n",
@@ -4274,7 +4313,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T16:38:35.8345908+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5239111+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4354,7 +4393,8 @@
     ],
     "Subtitle": "图标",
     "Title": "Icons",
-    "Type": "图标"
+    "Type": "图标",
+    "FullTitle": "Icons（图标）"
   },
   {
     "Desc": "<p><code>MImage</code>组件包含支持丰富媒体的功能。</p>\n",
@@ -4362,7 +4402,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T16:38:35.8375904+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5281338+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4452,7 +4492,8 @@
     ],
     "Subtitle": "图像",
     "Title": "Images",
-    "Type": "图像"
+    "Type": "图像",
+    "FullTitle": "Images（图像）"
   },
   {
     "Desc": "<p><code>MList</code> 组件用于显示信息。 它可以包含头像、内容、操作、列表组标题等等。 列表以易于在集合中识别特定项目的方式显示内容。 它们为组织一组文本和图像提供了一致的样式。</p>\n",
@@ -4461,7 +4502,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>如果您要查找有状态列表项，请查看 <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>。</p>\n"
     },
-    "LastWriteTime": "2021-11-12T16:38:35.8385907+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5352989+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4662,7 +4703,8 @@
     ],
     "Subtitle": "列表",
     "Title": "Lists",
-    "Type": "列表"
+    "Type": "列表",
+    "FullTitle": "Lists（列表）"
   },
   {
     "Desc": "<p><code>MMenu</code> 组件在激活它的元素的位置上展示一个菜单。</p>\n",
@@ -4670,7 +4712,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-10-29T13:31:00.2440968+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5432123+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4837,7 +4879,8 @@
     ],
     "Subtitle": "菜单",
     "Title": "Menus",
-    "Type": "菜单"
+    "Type": "菜单",
+    "FullTitle": "Menus（菜单）"
   },
   {
     "Desc": "<p><code>MNavigationDrawer</code> 是用于导航应用程序的组件。 通常被包装在 <code>MCard</code> 元素中使用。</p>\n",
@@ -4846,7 +4889,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MNavigationDrawer\">MNavigationDrawer</a></li>\n</ul>\n",
       "警告": "\n<!--alert:error-->\n<p>如果使用启用了 <strong>App</strong> 属性的 <code>MNavigationDrawer</code>，则不需要像示例中那样使用 <strong>Absolute</strong> 属性。</p>\n<!--/alert:error-->\n"
     },
-    "LastWriteTime": "2021-11-15T10:24:19.8246057+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5483313+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4970,7 +5013,8 @@
     ],
     "Subtitle": "导航抽屉",
     "Title": "Navigation drawers",
-    "Type": "导航抽屉"
+    "Type": "导航抽屉",
+    "FullTitle": "Navigation drawers（导航抽屉）"
   },
   {
     "Desc": "<p><code>Overlay</code> 组件用于强调特定元素或其中的一部分。 它向用户发出应用程序内状态更改的信号，可用于创建加载程序，对话框等。</p>\n",
@@ -4978,7 +5022,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-15T10:24:19.8256046+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5513233+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5057,7 +5101,8 @@
     ],
     "Subtitle": "遮罩层",
     "Title": "Overlays",
-    "Type": "遮罩层"
+    "Type": "遮罩层",
+    "FullTitle": "Overlays（遮罩层）"
   },
   {
     "Desc": "<p><code>MPagination</code> 组件用于分离长数据集，以便用户消化信息。 根据提供的数据量，分页组件将自动缩放。 要维护当前页面，只需提供 Value 属性。</p>\n",
@@ -5065,7 +5110,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-15T10:24:19.827605+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5552401+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5144,95 +5189,8 @@
     ],
     "Subtitle": "分页",
     "Title": "Pagination",
-    "Type": "分页"
-  },
-  {
-    "Desc": "<p><code>MColorPicker</code> 允许你使用各种输入方法来选择颜色。</p>\n",
-    "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/api/MColorPicker\">MColorPicker</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2021-12-10T13:01:47.8671114+08:00",
-    "DemoList": [
-      {
-        "Order": 0,
-        "Name": "index",
-        "Title": "使用(TODO)",
-        "Description": "",
-        "Code": "TODO",
-        "Type": "Demos.Components.Pickers.children.ColorPickers.usage.Index",
-        "Style": "",
-        "Debug": false,
-        "Group": 4
-      },
-      {
-        "Order": 1,
-        "Name": "canvas",
-        "Title": "画布",
-        "Description": "<p>可以使用 <strong>HideCanvas</strong> 属性隐藏画布，也可以使用 <strong>CanvasHeight</strong> 属性设置其高度。 选择点的大小可以用 <strong>DotSize</strong> 属性来控制。</p>\n",
-        "Code": "<MRow Justify=\"JustifyTypes.SpaceAround\">\r\n    <MColorPicker Class=\"ma-2\"\r\n                  HideCanvas></MColorPicker>\r\n    <MColorPicker Class=\"ma-2\"\r\n                  CanvasHeight=\"300\"></MColorPicker>\r\n    <MColorPicker Class=\"ma-2\"\r\n                  DotSize=\"30\"></MColorPicker>\r\n</MRow>\r\n",
-        "Type": "Demos.Components.Pickers.children.ColorPickers.props.Canvas",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 2,
-        "Name": "elevation",
-        "Title": "海拔(TODO)",
-        "Description": "<p>使用 <strong>Elevation</strong> 或 <strong>Flat</strong> 属性调整 <code>MColorPicker</code> 组件的海拔。 设置 <strong>Flat</strong> 相当于将 <strong>Elevation</strong> 设置为0。</p>\n",
-        "Code": "<MRow Justify=\"JustifyTypes.SpaceAround\"\r\n      Align=\"AlignTypes.Center\">\r\n    <MColorPicker Flat></MColorPicker>\r\n    <MColorPicker Elevation=\"15\"></MColorPicker>\r\n</MRow>\r\n",
-        "Type": "Demos.Components.Pickers.children.ColorPickers.props.Elevation",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 3,
-        "Name": "inputs",
-        "Title": "输入（TODO:正在完善）",
-        "Description": "<p>数字输入可以用 <strong>HideInputs</strong> 属性隐藏，滑块可以用 <strong>HideSliders</strong> 属性隐藏。 \n你也可以使用 <strong>HideModeSwitch</strong> 属性隐藏模式切换图标。 模式也可以通过 <strong>Mode</strong> 属性进行外部控制。</p>\n",
-        "Code": "<MRow Justify=\"JustifyTypes.SpaceAround\">\r\n    <MColorPicker Class=\"ma-2\"\r\n                  HideInputs></MColorPicker>\r\n    <MColorPicker Class=\"ma-2\"></MColorPicker>\r\n    <MRow Class=\"ma-2\"\r\n          Style=\"flex: 0 0 auto\">\r\n        <MColorPicker Mode=\"_mode\"></MColorPicker>\r\n        <MSelect @bind-Value=\"_mode\"\r\n                 Items=\"_modes\"\r\n                 ItemValue=\"r=>r\"\r\n                 ItemText=\"r=>Enum.GetName(typeof(ColorTypes),r)\"\r\n                 Style=\"max-width: 300px\"></MSelect>\r\n    </MRow>\r\n</MRow>\r\n\r\n@code {\r\n    private ColorTypes _mode = ColorTypes.HSLA;\r\n    private List<ColorTypes> _modes = new List<ColorTypes>\r\n    {\r\n        ColorTypes.HSLA,\r\n        ColorTypes.RGBA,\r\n        ColorTypes.HEXA\r\n    };\r\n}\r\n",
-        "Type": "Demos.Components.Pickers.children.ColorPickers.props.Inputs",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 4,
-        "Name": "model",
-        "Title": "模型(TODO)",
-        "Description": "<p><code>MColorPicker</code> 使用 <strong>@bind-Value</strong> 属性来控制显示的颜色。 它支持十六进制字符串，如 <strong>#FF00FF</strong> 和 <strong>#FF00FF00</strong>，以及表示 <strong>RGBA</strong>、<strong>HSLA</strong> 和 <strong>HSVA</strong>\n值的对象。</p>\n",
-        "Code": "TODO",
-        "Type": "Demos.Components.Pickers.children.ColorPickers.props.Model",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 5,
-        "Name": "swatches",
-        "Title": "色板(TODO)",
-        "Description": "<p>使用 <strong>ShowSwatches</strong> 属性，你可以显示一个色板供用户选择。 也可以使用 <strong>Swatches</strong> 属性自定义显示什么颜色。该属性接受一个二维数组，其中第一维定义一列，第二维通过提供 rgba\n十六进制字符串定义从上到下的色板。 你也可以使用 <strong>SwatchesMaxHeight</strong> 属性设置色板部分的最大高度。</p>\n",
-        "Code": "TODO",
-        "Type": "Demos.Components.Pickers.children.ColorPickers.props.Swatches",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ColorPicker.svg",
-    "Cols": 1,
-    "Related": [
-      "/components/menus",
-      "/styles/colors",
-      "/features/theme"
-    ],
-    "Subtitle": "颜色选择器",
-    "Title": "Color pickers",
-    "Type": "颜色选择器"
+    "Type": "分页",
+    "FullTitle": "Pagination（分页）"
   },
   {
     "Desc": "<p><code>MDatePicker</code> 是一个功能齐全的日期选择组件, 它让用户选择一个日期或日期范围。</p>\n",
@@ -5241,7 +5199,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2021-11-15T10:24:19.8326032+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5682044+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5402,7 +5360,7 @@
         "Name": "activePicker",
         "Title": "激活的选择器",
         "Description": "<p>您可以创建一个生日选择器-默认情况下从年份选择器开始，限制日期范围，并在选择日期后关闭选择器菜单，使之成为完美的生日选择器。</p>\n",
-        "Code": "<div>\r\n    <div class=\"mb-6\">Active picker: <code> @_activePicker </code></div>\r\n    <MMenu @bind-Value=\"_menu\"\r\n           CloseOnContentClick=\"false\"\r\n           Transition=\"scale-transition\"\r\n           OffsetY\r\n           MinWidth=\"@(\"auto\")\">\r\n        <ActivatorContent>\r\n            <MTextField @bind-Value=\"_date\"\r\n                        Label=\"Birthday date\"\r\n                        PrependIcon=\"mdi-calendar\"\r\n                        Readonly\r\n                        @attributes=\"context.Attrs\"></MTextField>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MDatePicker @bind-Value=\"_date\"\r\n                         ActivePicker=\"_activePicker\"\r\n                         OnActivePickerUpdate=\"val=>_activePicker=val\"\r\n                         Max=\"DateOnly.FromDateTime(DateTime.Now)\"\r\n                         Min=\"new DateOnly(1950,1,1)\"></MDatePicker>\r\n        </ChildContent>\r\n    </MMenu>\r\n</div>\r\n\r\n  @code {\r\n    private DatePickerType _activePicker = DatePickerType.Year;\r\n    private DateOnly _date = DateOnly.FromDateTime(DateTime.Now);\r\n    private bool _menu;\r\n  }\r\n",
+        "Code": "<div>\r\n    <div class=\"mb-6\">Active picker: <code> @_activePicker </code></div>\r\n    <MMenu @bind-Value=\"_menu\"\r\n           CloseOnContentClick=\"false\"\r\n           Transition=\"scale-transition\"\r\n           OffsetY\r\n           MinWidth=\"@(\"auto\")\">\r\n        <ActivatorContent>\r\n            <MTextField @bind-Value=\"_date\"\r\n                        Label=\"Birthday date\"\r\n                        PrependIcon=\"mdi-calendar\"\r\n                        Readonly\r\n                        @attributes=\"context.Attrs\"></MTextField>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MDatePicker @bind-Value=\"_date\"\r\n                         ActivePicker=\"_activePicker\"\r\n                         OnActivePickerUpdate=\"val=>_activePicker=val\"\r\n                         Max=\"DateOnly.FromDateTime(DateTime.Now)\"\r\n                         OnInput=\"()=>_menu=false\"\r\n                         Min=\"new DateOnly(1950,1,1)\"></MDatePicker>\r\n        </ChildContent>\r\n    </MMenu>\r\n</div>\r\n\r\n  @code {\r\n    private DatePickerType _activePicker = DatePickerType.Year;\r\n    private DateOnly _date = DateOnly.FromDateTime(DateTime.Now);\r\n    private bool _menu;\r\n  }\r\n",
         "Type": "Demos.Components.Pickers.children.DatePickers.misc.ActivePicker",
         "Style": "",
         "Debug": false,
@@ -5475,7 +5433,8 @@
     ],
     "Subtitle": "日期选择器",
     "Title": "Date pickers",
-    "Type": "日期选择器"
+    "Type": "日期选择器",
+    "FullTitle": "Date pickers（日期选择器）"
   },
   {
     "Desc": "<p><code>MDatePicker</code>  可以用作一个独立的月份选择器组件。</p>\n",
@@ -5484,7 +5443,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2021-11-15T10:24:19.8346068+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5741885+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5619,7 +5578,8 @@
     ],
     "Subtitle": "月份选择器",
     "Title": "Date pickers month",
-    "Type": "月份选择器"
+    "Type": "月份选择器",
+    "FullTitle": "Date pickers month（月份选择器）"
   },
   {
     "Desc": "<p><code>MTimePicker</code> 是独立的组件，可以用于许多现有的 MASA Blazor 组件。 它为用户提供了选择时间的视觉表现。</p>\n",
@@ -5627,7 +5587,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-15T10:24:19.8366046+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5801729+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5795,12 +5755,13 @@
     ],
     "Subtitle": "时间选择器",
     "Title": "Time pickers",
-    "Type": "时间选择器"
+    "Type": "时间选择器",
+    "FullTitle": "Time pickers（时间选择器）"
   },
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8376032+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5821676+08:00",
     "DemoList": [
       {
         "Order": 20,
@@ -5879,7 +5840,8 @@
     ],
     "Subtitle": "预置组件",
     "Title": "Presets",
-    "Type": "预置组件"
+    "Type": "预置组件",
+    "FullTitle": "Presets（预置组件）"
   },
   {
     "Desc": "<p>该组件用于向用户展示环形的数据。 它也可以设置为不确定的状态来表示加载。</p>\n",
@@ -5887,7 +5849,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-15T10:24:19.8406035+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5885434+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5955,7 +5917,8 @@
     ],
     "Subtitle": "进度环",
     "Title": "Progress circular",
-    "Type": "进度环"
+    "Type": "进度环",
+    "FullTitle": "Progress circular（进度环）"
   },
   {
     "Desc": "<p>该组件用于将数据环传递给用户。 也可以将其置于不确定状态来描述加载。</p>\n",
@@ -5963,7 +5926,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-15T10:24:19.8456135+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5946966+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6119,7 +6082,8 @@
     ],
     "Subtitle": "进度条",
     "Title": "Progress linear",
-    "Type": "进度条"
+    "Type": "进度条",
+    "FullTitle": "Progress linear（进度条）"
   },
   {
     "Desc": "<p>评级组件是构建用户小部件的一个特殊但至关重要的部分。 通过评级收集用户反馈是一种简单的分析工具，可以为您的产品或应用程序提供大量反馈。</p>\n",
@@ -6127,7 +6091,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-15T13:32:23.167907+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5976887+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6228,7 +6192,8 @@
     ],
     "Subtitle": "评级",
     "Title": "Ratings",
-    "Type": "评级"
+    "Type": "评级",
+    "FullTitle": "Ratings（评级）"
   },
   {
     "Desc": "<p><code>MSheet</code> 组件是许多组件的基础，如 <a href=\"/components/cards\">MCard</a>, <a href=\"/components/toolbars\">MToolbar</a>等等。 可用属性是Material Design的基础 - 纸和立面（阴影）的概念。</p>\n",
@@ -6236,7 +6201,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-15T10:24:19.8466114+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.600766+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -6283,7 +6248,8 @@
     ],
     "Subtitle": "工作表",
     "Title": "Sheets",
-    "Type": "工作表"
+    "Type": "工作表",
+    "FullTitle": "Sheets（工作表）"
   },
   {
     "Desc": "<p><code>MSkeletonLoader</code> 组件是一个多功能工具，可以在一个项目中填充许多角色。 在其核心部分，该组件向用户提供了一个指示，指出某些东西即将出现但尚未可用。 有超过30个预先定义的选项，可以组合成定制的示例。</p>\n",
@@ -6291,7 +6257,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T10:00:07.0756929+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6037537+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6327,7 +6293,8 @@
     ],
     "Subtitle": "骨架装载器",
     "Title": "Skeleton loaders",
-    "Type": "骨架装载器"
+    "Type": "骨架装载器",
+    "FullTitle": "Skeleton loaders（骨架装载器）"
   },
   {
     "Desc": "<p>MSnackbar 组件用于向用户显示快速消息。 Snackbars 支持定位、移除延迟和回调。</p>\n",
@@ -6335,7 +6302,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-15T13:32:23.1699113+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6067483+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6403,7 +6370,8 @@
     ],
     "Subtitle": "消息条",
     "Title": "Snackbars",
-    "Type": "消息条"
+    "Type": "消息条",
+    "FullTitle": "Snackbars（消息条）"
   },
   {
     "Desc": "<p><code>MStepper</code> 组件通过数字步骤显示进度。</p>\n",
@@ -6411,7 +6379,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-15T13:32:23.1739081+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6127294+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6568,7 +6536,8 @@
     ],
     "Subtitle": "步骤条",
     "Title": "Steppers",
-    "Type": "步骤条"
+    "Type": "步骤条",
+    "FullTitle": "Steppers（步骤条）"
   },
   {
     "Desc": "<p>用于分隔列表的各个部分。</p>\n",
@@ -6576,7 +6545,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6167184+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6644,7 +6613,8 @@
     ],
     "Subtitle": "副标题",
     "Title": "Subheaders",
-    "Type": "副标题"
+    "Type": "副标题",
+    "FullTitle": "Subheaders（副标题）"
   },
   {
     "Desc": "<p><code>MDataIterator</code> 组件用于显示数据，并且与 <code>MDataTable</code> 组件共享其大部分功能。 功能包括排序、搜索、分页和选择。</p>\n",
@@ -6652,7 +6622,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6187134+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6699,7 +6669,8 @@
     ],
     "Subtitle": "数据迭代器",
     "Title": "Data iterators",
-    "Type": "数据迭代器"
+    "Type": "数据迭代器",
+    "FullTitle": "Data iterators（数据迭代器）"
   },
   {
     "Desc": "<p><code>MDataTable</code> 组件用于显示表格数据。 功能包括排序，搜索，分页，内容编辑和行选择。</p>\n",
@@ -6707,7 +6678,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T10:00:07.0826969+08:00",
+    "LastWriteTime": "2021-12-07T18:57:49.4275655+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6963,7 +6934,8 @@
     ],
     "Subtitle": "数据表格",
     "Title": "Data tables",
-    "Type": "数据表格"
+    "Type": "数据表格",
+    "FullTitle": "Data tables（数据表格）"
   },
   {
     "Desc": "<p>MSimpleTable组件是 table 元素的简单封装组件。 在组件中，你可以使用所有常规表元素，如 thead ， tbody ，tr 等。</p>\n",
@@ -6971,7 +6943,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T10:00:07.0836945+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6336767+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7040,7 +7012,8 @@
     ],
     "Subtitle": "简单表格",
     "Title": "Simple tables",
-    "Type": "简单表格"
+    "Type": "简单表格",
+    "FullTitle": "Simple tables（简单表格）"
   },
   {
     "Desc": "<p><code>MTabs</code> 组件用于将内容隐藏在可选择的项目后面。 这也可以用作页面的伪导航，其中选项卡是链接，选项卡项是内容。</p>\n",
@@ -7049,7 +7022,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n<li><a href=\"/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当使用 <strong>Dark</strong> 属性和 <strong>不</strong> 提供自定义 <strong>Color</strong> 时，<code>MTabs</code>组件会将其颜色默认为 white。</p>\n"
     },
-    "LastWriteTime": "2021-11-18T17:20:09.724454+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6418628+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7239,7 +7212,8 @@
     ],
     "Subtitle": "选项卡",
     "Title": "Tabs",
-    "Type": "选项卡"
+    "Type": "选项卡",
+    "FullTitle": "Tabs（选项卡）"
   },
   {
     "Desc": "<p><code>MTimeline</code> 对于显示时间顺序信息非常有用。</p>\n",
@@ -7247,7 +7221,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T10:00:07.0886948+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6473153+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7370,7 +7344,8 @@
     ],
     "Subtitle": "时间轴",
     "Title": "Timelines",
-    "Type": "时间轴"
+    "Type": "时间轴",
+    "FullTitle": "Timelines（时间轴）"
   },
   {
     "Desc": "<p>当用户悬停在元素上时， <code>MTooltip</code> 组件可用于传递信息。 您还可以通过 <strong>@bind-Value</strong> 来控制提示的显示。 当激活时，提示将显示用于标识元素的文本，例如其功能的描述。</p>\n",
@@ -7379,7 +7354,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>为了正确定位 <code>MTooltip</code>，需要一个位置支撑(<code>Top</code> | <code>Bottom</code> | <code>Left</code> | <code>Right</code>)。</p>\n"
     },
-    "LastWriteTime": "2021-10-29T13:31:00.2450964+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6494788+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7426,7 +7401,8 @@
     ],
     "Subtitle": "工具提示",
     "Title": "Tooltips",
-    "Type": "工具提示"
+    "Type": "工具提示",
+    "FullTitle": "Tooltips（工具提示）"
   },
   {
     "Desc": "<p>MTreeview 组件适用于显示大量嵌套数据。</p>\n",
@@ -7434,7 +7410,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTreeview\">MTreeview</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T10:00:07.0936951+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6568904+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7624,7 +7600,8 @@
     ],
     "Subtitle": "树形视图",
     "Title": "Treeview",
-    "Type": "树形视图"
+    "Type": "树形视图",
+    "FullTitle": "Treeview（树形视图）"
   },
   {
     "Desc": "<p><code>MUpload</code> 组件是一个特殊的表单，它为选择文件，展示选中文件，展示上传进度提供了美观的界面，旨在取代标准的文件上传表单。</p>\n",
@@ -7632,7 +7609,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MUpload\">MUpload</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T10:00:07.0946935+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6588862+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7667,7 +7644,8 @@
     ],
     "Subtitle": "上传文件",
     "Title": "Uploads",
-    "Type": "上传文件"
+    "Type": "上传文件",
+    "FullTitle": "Uploads（上传文件）"
   },
   {
     "Desc": "<p>MVirtualScroll 组件显示一个虚拟，无限 的列表。 它支持动态高度和垂直滚动。</p>\n",
@@ -7675,7 +7653,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T14:30:00.36988+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6608809+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7711,6 +7689,7 @@
     ],
     "Subtitle": "虚拟滚动条",
     "Title": "Virtual scroller",
-    "Type": "虚拟滚动条"
+    "Type": "虚拟滚动条",
+    "FullTitle": "Virtual scroller（虚拟滚动条）"
   }
 ]

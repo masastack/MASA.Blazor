@@ -16,8 +16,6 @@ namespace MASA.Blazor
 {
     public partial class MAppBar : MToolbar, IScrollable, IThemeable, IAsyncDisposable
     {
-        private bool _isScrollingUp;
-        private bool _isActive;
         private Scroller _scroller;
 
         [Parameter]

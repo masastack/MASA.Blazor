@@ -134,19 +134,19 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyDataIteratorDefault<TItem>()
-                .Apply<BDataFooter, MDataFooter>(props =>
+                .Apply<BDataFooter, MDataFooter>(attrs =>
                 {
-                    props[nameof(MDataFooter.PageTextContent)] = PageTextContent;
-                    props[nameof(MDataFooter.Options)] = InternalOptions;
-                    props[nameof(MDataFooter.Pagination)] = Pagination;
-                    props[nameof(MDataFooter.OnOptionsUpdate)] =
+                    attrs[nameof(MDataFooter.PageTextContent)] = PageTextContent;
+                    attrs[nameof(MDataFooter.Options)] = InternalOptions;
+                    attrs[nameof(MDataFooter.Pagination)] = Pagination;
+                    attrs[nameof(MDataFooter.OnOptionsUpdate)] =
                         EventCallback.Factory.Create<Action<DataOptions>>(this, options => UpdateOptions(options));
 
                     if (FooterProps != null)
                     {
                         foreach (var prop in FooterProps)
                         {
-                            props[prop.Key] = prop.Value;
+                            attrs[prop.Key] = prop.Value;
                         }
                     }
                 });

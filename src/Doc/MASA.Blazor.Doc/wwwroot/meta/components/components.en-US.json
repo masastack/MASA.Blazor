@@ -3,7 +3,7 @@
     "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>、<strong>Info</strong>、<strong>Warning</strong> 和 <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays. Many parts of an alert such as <strong>Border</strong>, <strong>Icon</strong>, and <strong>Color</strong> can also be customized to fit almost any situation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-22T16:33:22.8890524+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3546167+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -153,7 +153,8 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Alerts",
-    "Type": "Alerts"
+    "Type": "Alerts",
+    "FullTitle": "Alerts"
   },
   {
     "Desc": "<p>In <code>MASA Blazor</code>, the App properties on the <code>MApp</code> component and <code>MNavigationDrawer</code>, <code>MAppBar</code>, <code>MFooter</code> and other\ncomponents help your application to adjust the size of the <code>MMain</code> component appropriately. This allows you to create\ntruly unique interfaces without worrying about managing layout sizes. All applications need the <code>MApp</code> component. This\nis the mount point for many <code>MASA Blazor</code> components and functions, and ensures that it passes the default application\ntheme (Dark/Light) to the child components, and ensures the correct cross-browser support for certain click events in\nthe browser .</p>\n",
@@ -165,13 +166,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Application",
-    "Type": "Application"
+    "Type": "Application",
+    "FullTitle": "Application"
   },
   {
     "Desc": "<p>The <code>MResponsive</code> component can be used to fix any section to a specific aspect ratio</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0736279+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3566126+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -189,13 +191,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Aspect ratios",
-    "Type": "AspectRatios"
+    "Type": "AspectRatios",
+    "FullTitle": "Aspect ratios"
   },
   {
     "Desc": "<p>The MAvatar component is usually used to display user profile pictures. This component allows you to dynamically add and set the border radius of response images, icons and text. ** The tile ** variable can be used to display an avatar with no border radius.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-30T11:20:37.745403+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3604912+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -280,13 +283,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Avatars.svg",
     "Cols": 1,
     "Title": "Avatars",
-    "Type": "Avatars"
+    "Type": "Avatars",
+    "FullTitle": "Avatars"
   },
   {
     "Desc": "<p>The MBadge component overwrites or subscribes to an icon like an avatar or text on the content to highlight the user's information or just draw attention to a specific element. The content in the badge usually contains numbers or icons.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-26T09:53:53.2705332+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3634834+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -348,13 +352,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Badges",
-    "Type": "Badges"
+    "Type": "Badges",
+    "FullTitle": "Badges"
   },
   {
     "Desc": "<p>The component is used to send intermittent messages of 1-2 actions to the user. It has two variables, single-line and multi-line (implied). These icons can be used with your messages and actions.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0756284+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3664752+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -427,13 +432,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Banners",
-    "Type": "Banners"
+    "Type": "Banners",
+    "FullTitle": "Banners"
   },
   {
     "Desc": "<p>appbar component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-26T13:07:38.017444+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3734607+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -572,13 +578,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "App bars",
-    "Type": "AppBars"
+    "Type": "AppBars",
+    "FullTitle": "App bars"
   },
   {
     "Desc": "<p>The MSystemBar component can be used to display status to the user. It looks like an Android system bar and can contain icons, spaces, and some text.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0776289+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3759449+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -640,13 +647,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "System bars",
-    "Type": "SystemBars"
+    "Type": "SystemBars",
+    "FullTitle": "System bars"
   },
   {
     "Desc": "<p>The <code>MToolbar</code> component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site\nnavigation. The toolbar component works great in conjunction with <a href=\"/components/navigation-drawers\"><strong>MNavigationDrawer</strong></a> and <a href=\"/components/cards\"><strong>MCard</strong></a>.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0816266+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3822109+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -790,13 +798,14 @@
       "/components/tabs"
     ],
     "Title": "Toolbars",
-    "Type": "Toolbars"
+    "Type": "Toolbars",
+    "FullTitle": "Toolbars"
   },
   {
     "Desc": "<p>The Border component can add an extra border to anything.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-02T13:33:53.2800713+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3832083+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -825,7 +834,8 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Borders",
-    "Type": "Border"
+    "Type": "Border",
+    "FullTitle": "Borders"
   },
   {
     "Desc": "<p>Breadcrumbs component is suitable for page-level navigation.</p>\n",
@@ -834,7 +844,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>By default <code>MBreadcrumbs</code> will disable the linkage with router. You can enable the feature by using *<em>Linkage</em> prop.</p>\n"
     },
-    "LastWriteTime": "2021-12-06T14:29:50.6435346+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.387313+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -908,7 +918,8 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Cols": 1,
     "Title": "Breadcrumbs",
-    "Type": "Breadcrumbs"
+    "Type": "Breadcrumbs",
+    "FullTitle": "Breadcrumbs"
   },
   {
     "Desc": "<p>The <code>MButton</code> component replaces the standard html button with a material design theme and a multitude of options. Any color\nhelper class can be used to alter the background or text color.</p>\n",
@@ -917,7 +928,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>MButton</code> is the only component that behaves differently when using the <strong>Dark</strong> prop. Normally components use the <strong>Dark</strong> prop to denote that they have a dark colored background and need their text to be white. While this will work\nfor <code>MButton</code>, it is advised to only use the prop when the button <strong>IS ON</strong> a colored background due to the disabled state\nblending in with white backgrounds. If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2021-11-17T17:29:52.1597474+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3936467+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1068,7 +1079,8 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg",
     "Cols": 1,
     "Title": "Buttons",
-    "Type": "Buttons"
+    "Type": "Buttons",
+    "FullTitle": "Buttons"
   },
   {
     "Desc": "<p>The MCard component is a versatile component that can be used for anything from a panel to a static image. The card component has numerous helper components to make markup as easy as possible. Components that have no listed options use Vue��s functional component option for faster rendering and serve as markup sugar to make building easier.</p>\n",
@@ -1076,7 +1088,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:32:30.0886273+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.3996619+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1216,13 +1228,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Cards.svg",
     "Cols": 1,
     "Title": "Cards",
-    "Type": "Cards"
+    "Type": "Cards",
+    "FullTitle": "Cards"
   },
   {
     "Desc": "<p>The <code>MChip</code> component is used to convey small pieces of information. Using the close property, the chip becomes\ninteractive, allowing user interaction. This component is used by the <a href=\"/components/chip-groups\">MChipGroup</a> for advanced selection options.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T17:18:10.0838705+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.406848+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1395,13 +1408,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chips.svg",
     "Cols": 1,
     "Title": "Chips",
-    "Type": "Chips"
+    "Type": "Chips",
+    "FullTitle": "Chips"
   },
   {
     "Desc": "<p>The <code>Dialog</code> component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-10-29T14:11:50.7074219+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4118292+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1518,13 +1532,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Dialogs",
-    "Type": "Dialogs"
+    "Type": "Dialogs",
+    "FullTitle": "Dialogs"
   },
   {
     "Desc": "<p>The v-divider component is used to separate sections of lists or layouts.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T13:32:30.0916273+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4148034+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1587,13 +1602,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Dividers.svg",
     "Cols": 1,
     "Title": "Dividers",
-    "Type": "Dividers"
+    "Type": "Dividers",
+    "FullTitle": "Dividers"
   },
   {
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-01T19:22:48.728436+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4168146+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1623,7 +1639,8 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg",
     "Cols": 1,
     "Title": "ECharts",
-    "Type": "ECharts"
+    "Type": "ECharts",
+    "FullTitle": "ECharts"
   },
   {
     "Desc": "<p>The <code>MExpansionPanel</code> component is useful for reducing vertical space with large amounts of information. The default\nfunctionality of the component is to only display one expansion-panel body at a time; however, with the <strong>Multiple</strong>\nproperty, the expansion-panel can remain open until explicitly closed.</p>\n",
@@ -1631,7 +1648,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-02T09:37:52.1130132+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.421801+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1749,13 +1766,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Cols": 1,
     "Title": "Expansion panels",
-    "Type": "ExpansionPanels"
+    "Type": "ExpansionPanels",
+    "FullTitle": "Expansion panels"
   },
   {
     "Desc": "<p>The MFooter component is used to display public information that users may want to access from any page in the website.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.6580013+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4247931+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1817,13 +1835,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Footers",
-    "Type": "Footers"
+    "Type": "Footers",
+    "FullTitle": "Footers"
   },
   {
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.6590057+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4297825+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1919,13 +1938,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Autocomplete.svg",
     "Cols": 1,
     "Title": "Autocompletes",
-    "Type": "Autocompletes"
+    "Type": "Autocompletes",
+    "FullTitle": "Autocompletes"
   },
   {
     "Desc": "<p>The <code>Select</code> component is used for collecting user provided information from a list of options.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-24T18:45:49.2469595+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4327763+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1976,7 +1996,8 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Cascaders",
-    "Type": "Cascaders"
+    "Type": "Cascaders",
+    "FullTitle": "Cascaders"
   },
   {
     "Desc": "<p>The <code>MCheckbox</code> component provides users the ability to choose between two distinct values. These are very similar to a switch and can be used in complex forms and checklists.</p>\n",
@@ -1984,7 +2005,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T14:06:52.8350159+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4367647+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2057,13 +2078,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Checkboxes",
-    "Type": "Checkboxes"
+    "Type": "Checkboxes",
+    "FullTitle": "Checkboxes"
   },
   {
     "Desc": "<p>v-file-input��һ�����Ƶ�������������ṩ��һ���ɾ���ѡ����棬��ʾ��ϸ��ѡ����Ϣ���ϴ����ȡ� ������ֱ��ȡ����\u05FC�ļ����롣</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.8319996+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4422509+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2192,13 +2214,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/FileInput.svg",
     "Cols": 1,
     "Title": "File inputs",
-    "Type": "FileInput"
+    "Type": "FileInput",
+    "FullTitle": "File inputs"
   },
   {
     "Desc": "<p>Form validation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-30T11:20:37.8234266+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4446381+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2250,7 +2273,8 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/From.svg",
     "Cols": 1,
     "Title": "Froms",
-    "Type": "Form"
+    "Type": "Form",
+    "FullTitle": "Froms"
   },
   {
     "Desc": "<p>The <code>MRadio</code> component is a simple radio button. When combined with the <code>MRadioGroup</code> component you can provide\ngroupable functionality to allow users to select from a predefined set of options.</p>\n",
@@ -2258,7 +2282,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadio</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-10T13:01:47.8478778+08:00",
+    "LastWriteTime": "2021-12-13T17:07:44.9237179+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2321,13 +2345,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg",
     "Cols": 1,
     "Title": "Radio",
-    "Type": "Radio"
+    "Type": "Radio",
+    "FullTitle": "Radio"
   },
   {
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:48.9354207+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4513035+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2401,13 +2426,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/RangeSliders.svg",
     "Cols": 1,
     "Title": "Range sliders",
-    "Type": "RangeSliders"
+    "Type": "RangeSliders",
+    "FullTitle": "Range sliders"
   },
   {
     "Desc": "<p>The <code>Select</code> component is used for collecting user provided information from a list of options.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-10-29T13:31:00.2400602+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4573984+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2535,13 +2561,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Selects",
-    "Type": "Select"
+    "Type": "Select",
+    "FullTitle": "Selects"
   },
   {
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.7730007+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4647547+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2714,7 +2741,8 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sliders.svg",
     "Cols": 1,
     "Title": "Sliders",
-    "Type": "Sliders"
+    "Type": "Sliders",
+    "FullTitle": "Sliders"
   },
   {
     "Desc": "<p>The <code>MSwitch</code> component provides users the ability to choose between two distinct values. These are very similar to a\ntoggle, or on/off switch, though aesthetically different than a checkbox.</p>\n",
@@ -2722,7 +2750,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-23T18:27:44.4298634+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4692618+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2807,13 +2835,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Switch.svg",
     "Cols": 1,
     "Title": "Switches",
-    "Type": "Switch"
+    "Type": "Switch",
+    "FullTitle": "Switches"
   },
   {
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.7110144+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4742484+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2931,13 +2960,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Textareas.svg",
     "Cols": 1,
     "Title": "Textareas",
-    "Type": "Textareas"
+    "Type": "Textareas",
+    "FullTitle": "Textareas"
   },
   {
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T14:06:52.6990026+08:00",
+    "LastWriteTime": "2021-12-14T15:01:03.0189799+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3198,7 +3228,8 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TextField.svg",
     "Cols": 1,
     "Title": "Text fields",
-    "Type": "TextField"
+    "Type": "TextField",
+    "FullTitle": "Text fields"
   },
   {
     "Desc": "<p>24 Grids System。</p>\n",
@@ -3208,7 +3239,7 @@
       "Outline": "\n<p>In the grid system, we define the frame outside the information area based on row and column, to ensure that every area can have stable arrangement.</p>\n<p>Following is a brief look at how it works:</p>\n<ul>\n<li>Establish a set of column in the horizontal space defined by row (abbreviated col)</li>\n<li>Your content elements should be placed directly in the col, and only col should be placed directly in row</li>\n<li>The column grid system is a value of 1-24 to represent its range spans. For example, three columns of equal width can be created by <Col span={8} />.</li>\n<li>If the sum of col spans in a row are more than 24, then the overflowing col as a whole will start a new line arrangement.</li>\n</ul>\n<p>Our grid systems base on Flex layout to allow the elements within the parent to be aligned horizontally - left, center, right, wide arrangement, and decentralized arrangement. The Grid system also supports vertical alignment - top aligned, vertically centered, bottom-aligned. You can also define the order of elements by using order.</p>\n<p>Layout uses a 24 grid layout to define the width of each &quot;box&quot;, but does not rigidly adhere to the grid layout.</p>\n",
       "API": "\n<p>Row</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>align</td>\n<td>the vertical alignment of the flex layout:：<code>top</code> <code>middle</code> <code>bottom</code></td>\n<td>string</td>\n<td>top</td>\n</tr>\n<tr>\n<td>gutter</td>\n<td>spacing between grids, could be a number or a object like { xs: 8, sm: 16, md: 24}. or you can use array to make horizontal and vertical spacing work at the same time <code>[horizontal, vertical]</code> (supported after 1.5.0)</td>\n<td>number, object, array</td>\n<td>0</td>\n</tr>\n<tr>\n<td>justify</td>\n<td>horizontal arrangement of the flex layout:<code>start</code> <code>end</code> <code>center</code> <code>space-around</code> <code>space-between</code></td>\n<td>string</td>\n<td>start</td>\n</tr>\n<tr>\n<td>type</td>\n<td>layout mode, optional <code>flex</code>， browser support</td>\n<td>string</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>Col</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>offset</td>\n<td>the number of cells to offset Col from the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>order</td>\n<td>raster order, used in flex layout mode</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>pull</td>\n<td>the number of cells that raster is moved to the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>push</td>\n<td>the number of cells that raster is moved to the right</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>span</td>\n<td>raster number of cells to occupy, 0 corresponds to  <code>display: none</code></td>\n<td>string</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xs</td>\n<td><code>&lt;576px</code> and also default setting, could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>sm</td>\n<td><code>≥576px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>md</td>\n<td><code>≥768px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>lg</td>\n<td><code>≥992px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xl</td>\n<td><code>≥1200px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xxl</td>\n<td><code>≥1600px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>The breakpoints of responsive grid follow BootStrap 4 media queries rules(not including <code>occasionally</code> part).</p>\n"
     },
-    "LastWriteTime": "2021-11-12T16:38:35.8305896+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4943852+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3425,7 +3456,8 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg",
     "Cols": 1,
     "Title": "Grid system",
-    "Type": "Grid"
+    "Type": "Grid",
+    "FullTitle": "Grid system"
   },
   {
     "Desc": "<p>The <code>MButtonGroup</code> component is a simple wrapper for <code>MItemGroup</code> built specifically to work with <code>MButton</code>.</p>\n",
@@ -3433,7 +3465,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:39:37.8809032+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.4981061+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3507,13 +3539,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ButtonGroup.svg",
     "Cols": 1,
     "Title": "Button groups",
-    "Type": "ButtonGroup"
+    "Type": "ButtonGroup",
+    "FullTitle": "Button groups"
   },
   {
     "Desc": "<p>The <code>MChipGroup</code> supercharges the <code>MChip</code> component by providing groupable functionality. It is used for creating groups\nof selections using chips.</p>\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-03T16:49:05.8906094+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5006278+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3587,7 +3620,8 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chip.svg",
     "Cols": 1,
     "Title": "Chip groups",
-    "Type": "ChipGroup"
+    "Type": "ChipGroup",
+    "FullTitle": "Chip groups"
   },
   {
     "Desc": "<p>The <code>MItemGroup</code> provides the ability to create a group of selectable items out of any component. This is the baseline\nfunctionality for components such as <code>MTabs</code> and <code>MCarousel</code>.</p>\n",
@@ -3595,7 +3629,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-04T13:34:00.0771991+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5053894+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3669,7 +3703,8 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ItemGroup.svg",
     "Cols": 1,
     "Title": "Item groups",
-    "Type": "ItemGroup"
+    "Type": "ItemGroup",
+    "FullTitle": "Item groups"
   },
   {
     "Desc": "<p>The <code>MListItemGroup</code> provides the ability to create a group of selectable <code>MListItem</code>. The <code>MListItemGroup</code> component\nutilizes <code>MItemGroup</code> at its core to provide a clean interface for interactive lists.</p>\n",
@@ -3677,7 +3712,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:39:38.0698762+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.509099+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3750,7 +3785,8 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "List item groups",
-    "Type": "ListItemGroup"
+    "Type": "ListItemGroup",
+    "FullTitle": "List item groups"
   },
   {
     "Desc": "<p>The <code>MSlideGroup</code> component is used to display pseudo paginated information. It uses <a href=\"/components/item-groups\"><strong>MItemGroup</strong></a> at its core and provides\na baseline for components such as <a href=\"/components/tabs\"><strong>MTabs</strong></a> and <a href=\"/components/chip-groups\"><strong>MChipGroup</strong></a>.</p>\n",
@@ -3758,7 +3794,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:39:38.0618742+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5130925+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3842,7 +3878,8 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Slide groups",
-    "Type": "SlideGroup"
+    "Type": "SlideGroup",
+    "FullTitle": "Slide groups"
   },
   {
     "Desc": "<p>The <code>MWindow</code> component provides the baseline functionality for transitioning content from 1 pane to another. Other\ncomponents such as <code>MTabs</code>, <code>MCarousel</code> and <code>MStepper</code> utilize this component at their core.</p>\n",
@@ -3850,7 +3887,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T13:39:37.8828831+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5166526+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3923,13 +3960,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Windows",
-    "Type": "Windows"
+    "Type": "Windows",
+    "FullTitle": "Windows"
   },
   {
     "Desc": "<p>The <code>MHover</code> component provides a clean interface for handling the hover state of any component.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T16:38:35.8325907+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5200087+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3980,7 +4018,8 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Hover",
-    "Type": "Hover"
+    "Type": "Hover",
+    "FullTitle": "Hover"
   },
   {
     "Desc": "<p>The <code>MIcon</code> component provides a large set of glyphs to provide context to various aspects of your application. For a\nlist of all available icons, visit the official <a href=\"https://materialdesignicons.com/\">Material Design Icons</a> page. To use\nany of these icons simply use the\n<code>mdi-</code> prefix followed by the icon name.</p>\n",
@@ -3988,7 +4027,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-12T16:38:35.8345908+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5239111+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4062,13 +4101,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Cols": 1,
     "Title": "Icons",
-    "Type": "Icon"
+    "Type": "Icon",
+    "FullTitle": "Icons"
   },
   {
     "Desc": "<p>The <code>MImage</code> component is packed with features to support rich media.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T16:38:35.8375904+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5281338+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4152,13 +4192,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Images",
-    "Type": "Image"
+    "Type": "Image",
+    "FullTitle": "Images"
   },
   {
     "Desc": "<p>The <code>MList</code> component is used to display information. It can contain an avatar, content, actions, subheaders and much\nmore. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a\nconsistent styling for organizing groups of text and images.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-12T16:38:35.8385907+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5352989+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4358,7 +4399,8 @@
       "/components/subheaders"
     ],
     "Title": "Lists",
-    "Type": "List"
+    "Type": "List",
+    "FullTitle": "Lists"
   },
   {
     "Desc": "<p>The <code>MMenu</code> component shows a menu at the position of the element used to activate it.</p>\n",
@@ -4366,7 +4408,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-10-29T13:31:00.2440968+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5432123+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4527,13 +4569,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Menus",
-    "Type": "Menu"
+    "Type": "Menu",
+    "FullTitle": "Menus"
   },
   {
     "Desc": "<p><code>MNavigationDrawer</code> is a component used to navigate applications. It is usually wrapped and used in the <code>MCard</code> element.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8246057+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5483313+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4651,13 +4694,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg",
     "Cols": 1,
     "Title": "Navigation drawers",
-    "Type": "NavigationDrawer"
+    "Type": "NavigationDrawer",
+    "FullTitle": "Navigation drawers"
   },
   {
     "Desc": "<p>The <code>Overlay</code> component is used to provide emphasis on a particular element or parts of it. It signals to the user of a state change within the application and can be used for creating loaders, dialogs and more.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8256046+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5513233+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4735,13 +4779,14 @@
       "/components/dialogs"
     ],
     "Title": "Overlays",
-    "Type": "Overlay"
+    "Type": "Overlay",
+    "FullTitle": "Overlays"
   },
   {
     "Desc": "<p>The <code>MPagination</code> component is used to separate long data sets so that user data information can be known. Provided the amount, the paging component will automatically scale. The current maintenance page provides value easily.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.827605+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5552401+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4814,93 +4859,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Pagination",
-    "Type": "Pagination"
-  },
-  {
-    "Desc": "<p>The MColorPicker allows you to select a color using a variety of input methods.</p>\n",
-    "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-12-10T13:01:47.8671114+08:00",
-    "DemoList": [
-      {
-        "Order": 0,
-        "Name": "index",
-        "Title": "Usage(TODO)",
-        "Description": "",
-        "Code": "TODO",
-        "Type": "Demos.Components.Pickers.children.ColorPickers.usage.Index",
-        "Style": "",
-        "Debug": false,
-        "Group": 4
-      },
-      {
-        "Order": 1,
-        "Name": "canvas",
-        "Title": "Canvas",
-        "Description": "<p>canvas can be hidden with the <strong>HideCanvas</strong> prop, and you can set its height with the prop <strong>CanvasHeight</strong>. \nThe size of the selection dot can be controlled with the <strong>DotSize</strong> prop.</p>\n",
-        "Code": "<MRow Justify=\"JustifyTypes.SpaceAround\">\r\n    <MColorPicker Class=\"ma-2\"\r\n                  HideCanvas></MColorPicker>\r\n    <MColorPicker Class=\"ma-2\"\r\n                  CanvasHeight=\"300\"></MColorPicker>\r\n    <MColorPicker Class=\"ma-2\"\r\n                  DotSize=\"30\"></MColorPicker>\r\n</MRow>\r\n",
-        "Type": "Demos.Components.Pickers.children.ColorPickers.props.Canvas",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 2,
-        "Name": "elevation",
-        "Title": "Elevation(TODO)",
-        "Description": "<p>Adjust the Elevation of the <code>MColorPicker</code> component using the <strong>Elevation</strong> or <strong>Flat</strong> prop. The <strong>Flat</strong> is\nequivalent to setting <strong>Elevation</strong> to 0.</p>\n",
-        "Code": "<MRow Justify=\"JustifyTypes.SpaceAround\"\r\n      Align=\"AlignTypes.Center\">\r\n    <MColorPicker Flat></MColorPicker>\r\n    <MColorPicker Elevation=\"15\"></MColorPicker>\r\n</MRow>\r\n",
-        "Type": "Demos.Components.Pickers.children.ColorPickers.props.Elevation",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 3,
-        "Name": "inputs",
-        "Title": "Inputs(TODO:正在完善)",
-        "Description": "<p>The number inputs can be hidden with the <strong>HideInputs</strong> prop, and the sliders can be hidden with the <strong>HideSliders</strong> prop. \nYou can also hide the mode switch icon with the <strong>HideModeSwitch</strong> prop. \nThe mode can also be controlled externally through the <strong>Mode</strong> prop.</p>\n",
-        "Code": "<MRow Justify=\"JustifyTypes.SpaceAround\">\r\n    <MColorPicker Class=\"ma-2\"\r\n                  HideInputs></MColorPicker>\r\n    <MColorPicker Class=\"ma-2\"></MColorPicker>\r\n    <MRow Class=\"ma-2\"\r\n          Style=\"flex: 0 0 auto\">\r\n        <MColorPicker Mode=\"_mode\"></MColorPicker>\r\n        <MSelect @bind-Value=\"_mode\"\r\n                 Items=\"_modes\"\r\n                 ItemValue=\"r=>r\"\r\n                 ItemText=\"r=>Enum.GetName(typeof(ColorTypes),r)\"\r\n                 Style=\"max-width: 300px\"></MSelect>\r\n    </MRow>\r\n</MRow>\r\n\r\n@code {\r\n    private ColorTypes _mode = ColorTypes.HSLA;\r\n    private List<ColorTypes> _modes = new List<ColorTypes>\r\n    {\r\n        ColorTypes.HSLA,\r\n        ColorTypes.RGBA,\r\n        ColorTypes.HEXA\r\n    };\r\n}\r\n",
-        "Type": "Demos.Components.Pickers.children.ColorPickers.props.Inputs",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 4,
-        "Name": "model",
-        "Title": "Model(TODO)",
-        "Description": "<p>The <code>MColorPicker</code> uses the <strong>@bind-Value</strong> prop to control the color displayed. It supports hex strings such as **\n#FF00FF** and <strong>#FF00FF00</strong>, and objects representing <strong>RGBA</strong>, <strong>HSLA</strong> and <strong>HSVA</strong> values.</p>\n",
-        "Code": "TODO",
-        "Type": "Demos.Components.Pickers.children.ColorPickers.props.Model",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 5,
-        "Name": "swatches",
-        "Title": "Swatches(TODO)",
-        "Description": "<p>Using the <strong>ShowSwatches</strong> prop you can display an array of color swatches that users can pick from. It is also possible\nto customize what colors are shown using the <strong>Swatches</strong> prop. This prop accepts a two-dimensional array, where the\nfirst dimension defines a column, and second dimension defines the swatches from top to bottom by providing rgba hex\nstrings. You can also set the max height of the swatches section with the <strong>SwatchesMaxHeight</strong> prop.</p>\n",
-        "Code": "TODO",
-        "Type": "Demos.Components.Pickers.children.ColorPickers.props.Swatches",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ColorPicker.svg",
-    "Cols": 1,
-    "Title": "Color pickers",
-    "Type": "ColorPickers"
+    "Type": "Pagination",
+    "FullTitle": "Pagination"
   },
   {
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8326032+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5682044+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5061,7 +5027,7 @@
         "Name": "activePicker",
         "Title": "Active picker",
         "Description": "<p>You can create a birthday picker - starting with year picker by default, restricting dates range and closing the picker\nmenu after selecting the day make the perfect birthday picker.</p>\n",
-        "Code": "<div>\r\n    <div class=\"mb-6\">Active picker: <code> @_activePicker </code></div>\r\n    <MMenu @bind-Value=\"_menu\"\r\n           CloseOnContentClick=\"false\"\r\n           Transition=\"scale-transition\"\r\n           OffsetY\r\n           MinWidth=\"@(\"auto\")\">\r\n        <ActivatorContent>\r\n            <MTextField @bind-Value=\"_date\"\r\n                        Label=\"Birthday date\"\r\n                        PrependIcon=\"mdi-calendar\"\r\n                        Readonly\r\n                        @attributes=\"context.Attrs\"></MTextField>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MDatePicker @bind-Value=\"_date\"\r\n                         ActivePicker=\"_activePicker\"\r\n                         OnActivePickerUpdate=\"val=>_activePicker=val\"\r\n                         Max=\"DateOnly.FromDateTime(DateTime.Now)\"\r\n                         Min=\"new DateOnly(1950,1,1)\"></MDatePicker>\r\n        </ChildContent>\r\n    </MMenu>\r\n</div>\r\n\r\n  @code {\r\n    private DatePickerType _activePicker = DatePickerType.Year;\r\n    private DateOnly _date = DateOnly.FromDateTime(DateTime.Now);\r\n    private bool _menu;\r\n  }\r\n",
+        "Code": "<div>\r\n    <div class=\"mb-6\">Active picker: <code> @_activePicker </code></div>\r\n    <MMenu @bind-Value=\"_menu\"\r\n           CloseOnContentClick=\"false\"\r\n           Transition=\"scale-transition\"\r\n           OffsetY\r\n           MinWidth=\"@(\"auto\")\">\r\n        <ActivatorContent>\r\n            <MTextField @bind-Value=\"_date\"\r\n                        Label=\"Birthday date\"\r\n                        PrependIcon=\"mdi-calendar\"\r\n                        Readonly\r\n                        @attributes=\"context.Attrs\"></MTextField>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MDatePicker @bind-Value=\"_date\"\r\n                         ActivePicker=\"_activePicker\"\r\n                         OnActivePickerUpdate=\"val=>_activePicker=val\"\r\n                         Max=\"DateOnly.FromDateTime(DateTime.Now)\"\r\n                         OnInput=\"()=>_menu=false\"\r\n                         Min=\"new DateOnly(1950,1,1)\"></MDatePicker>\r\n        </ChildContent>\r\n    </MMenu>\r\n</div>\r\n\r\n  @code {\r\n    private DatePickerType _activePicker = DatePickerType.Year;\r\n    private DateOnly _date = DateOnly.FromDateTime(DateTime.Now);\r\n    private bool _menu;\r\n  }\r\n",
         "Type": "Demos.Components.Pickers.children.DatePickers.misc.ActivePicker",
         "Style": "",
         "Debug": false,
@@ -5128,13 +5094,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickers.svg",
     "Cols": 1,
     "Title": "Date pickers",
-    "Type": "DatePickers"
+    "Type": "DatePickers",
+    "FullTitle": "Date pickers"
   },
   {
     "Desc": "<p><code>MDatePicker</code> can be used as a standalone month picker component.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8346068+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5741885+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5263,13 +5230,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg",
     "Cols": 1,
     "Title": "Date pickers month",
-    "Type": "DatePickersMonth"
+    "Type": "DatePickersMonth",
+    "FullTitle": "Date pickers month"
   },
   {
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8366046+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5801729+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5431,12 +5399,13 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TimePickers.svg",
     "Cols": 1,
     "Title": "Time pickers",
-    "Type": "TimePickers"
+    "Type": "TimePickers",
+    "FullTitle": "Time pickers"
   },
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8376032+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5821676+08:00",
     "DemoList": [
       {
         "Order": 20,
@@ -5509,13 +5478,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Presets",
-    "Type": "Presets"
+    "Type": "Presets",
+    "FullTitle": "Presets"
   },
   {
     "Desc": "<p>The component is used to display circular data to users. It also can be put into an indeterminate state to portray loading.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8406035+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5885434+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5577,13 +5547,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Progress circular",
-    "Type": "ProgressCircular"
+    "Type": "ProgressCircular",
+    "FullTitle": "Progress circular"
   },
   {
     "Desc": "<p>The component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8456135+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5946966+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5733,13 +5704,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Progress linear",
-    "Type": "ProgressLinear"
+    "Type": "ProgressLinear",
+    "FullTitle": "Progress linear"
   },
   {
     "Desc": "<p>Semantic vector graphics.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T13:32:23.167907+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.5976887+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5834,13 +5806,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Ratings",
-    "Type": "Rating"
+    "Type": "Rating",
+    "FullTitle": "Ratings"
   },
   {
     "Desc": "<p>In Vuetify, the v-app component and the app prop on components like v-navigation-drawer, v-app-bar, v-footer and more, help bootstrap your application with the proper sizing around <v-main> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The v-app component is REQUIRED for all applications. This is the mount point for many of Vuetify��s components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. v-app should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T10:24:19.8466114+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.600766+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -5881,7 +5854,8 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sheet.svg",
     "Cols": 1,
     "Title": "Sheets",
-    "Type": "Sheet"
+    "Type": "Sheet",
+    "FullTitle": "Sheets"
   },
   {
     "Desc": "<p>The <code>MSkeletonLoader</code> component is a versatile tool that can fill many roles within a project. At its heart, the\ncomponent provides an indication to the user that something is coming but not yet available. There are over 30\npre-defined options available that can be combined to make custom examples.</p>\n",
@@ -5889,7 +5863,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-16T10:00:07.0756929+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6037537+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5919,13 +5893,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SkeletonLoader.svg",
     "Cols": 1,
     "Title": "Skeleton loaders",
-    "Type": "SkeletonLoader"
+    "Type": "SkeletonLoader",
+    "FullTitle": "Skeleton loaders"
   },
   {
     "Desc": "<p>The MSnackbar component is used to display quick messages to users. Snackbars supports positioning, removing delays, and callbacks.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T13:32:23.1699113+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6067483+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5987,7 +5962,8 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Snackbars",
-    "Type": "Snackbar"
+    "Type": "Snackbar",
+    "FullTitle": "Snackbars"
   },
   {
     "Desc": "<p>The <code>MStepper</code> component displays progress through numbered steps.</p>\n",
@@ -5995,7 +5971,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-15T13:32:23.1739081+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6127294+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6146,13 +6122,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Stepper.svg",
     "Cols": 1,
     "Title": "Steppers",
-    "Type": "Stepper"
+    "Type": "Stepper",
+    "FullTitle": "Steppers"
   },
   {
     "Desc": "<p>The <code>Subheader</code> component is used to separate sections of lists.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6167184+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6213,13 +6190,14 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Subheaders",
-    "Type": "Subheader"
+    "Type": "Subheader",
+    "FullTitle": "Subheaders"
   },
   {
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6187134+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6260,13 +6238,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataIterators.svg",
     "Cols": 1,
     "Title": "Data iterators",
-    "Type": "DataIterators"
+    "Type": "DataIterators",
+    "FullTitle": "Data iterators"
   },
   {
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0826969+08:00",
+    "LastWriteTime": "2021-12-07T18:57:49.4275655+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6516,13 +6495,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataTable.svg",
     "Cols": 1,
     "Title": "Data tables",
-    "Type": "DataTable"
+    "Type": "DataTable",
+    "FullTitle": "Data tables"
   },
   {
     "Desc": "<p>TODO...</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0836945+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6336767+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6585,7 +6565,8 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SimpleTables.svg",
     "Cols": 1,
     "Title": "Simple tables",
-    "Type": "SimpleTables"
+    "Type": "SimpleTables",
+    "FullTitle": "Simple tables"
   },
   {
     "Desc": "<p>The <code>MTabs</code> component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation\nfor a page, where the tabs are links and the tab-items are the content.</p>\n",
@@ -6593,7 +6574,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n<li><a href=\"/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-18T17:20:09.724454+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6418628+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6777,13 +6758,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tabs.svg",
     "Cols": 1,
     "Title": "Tabs",
-    "Type": "Tabs"
+    "Type": "Tabs",
+    "FullTitle": "Tabs"
   },
   {
     "Desc": "<p>MTimeline is very useful for displaying chronological information.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0886948+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6473153+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6900,7 +6882,8 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Timelines",
-    "Type": "Timeline"
+    "Type": "Timeline",
+    "FullTitle": "Timelines"
   },
   {
     "Desc": "<p>The <code>MTooltip</code> component is useful for conveying information when a user hovers over an element. You can also\nprogrammatically control the display of tooltips through a <strong>@bind-Value</strong>. When activated, tooltips display a text\nlabel identifying an element, such as a description of its function.</p>\n",
@@ -6908,7 +6891,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-10-29T13:31:00.2450964+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6494788+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6949,13 +6932,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tooltip.svg",
     "Cols": 1,
     "Title": "Tooltips",
-    "Type": "Tooltip"
+    "Type": "Tooltip",
+    "FullTitle": "Tooltips"
   },
   {
     "Desc": "<p>The MTreeview component is useful for displaying large amounts of nested data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0936951+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6568904+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7139,13 +7123,14 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Treeview.svg",
     "Cols": 1,
     "Title": "Treeview",
-    "Type": "Treeview"
+    "Type": "Treeview",
+    "FullTitle": "Treeview"
   },
   {
     "Desc": "<p>The <code>MFileInput</code> component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-11-16T10:00:07.0946935+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6588862+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7174,7 +7159,8 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Uploads",
-    "Type": "Upload"
+    "Type": "Upload",
+    "FullTitle": "Uploads"
   },
   {
     "Desc": "<p>The MVirtualScroll component displays a virtual, infinite list. It supports dynamic height and scrolling vertically.</p>\n",
@@ -7182,7 +7168,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-11-17T14:30:00.36988+08:00",
+    "LastWriteTime": "2021-12-06T12:39:16.6608809+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7212,6 +7198,7 @@
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Cols": 1,
     "Title": "Virtual scroller",
-    "Type": "VirtualScroll"
+    "Type": "VirtualScroll",
+    "FullTitle": "Virtual scroller"
   }
 ]

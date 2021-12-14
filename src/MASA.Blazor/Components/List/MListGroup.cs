@@ -48,16 +48,27 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply<BListItem, MListGroupItem>(props =>
+                .Apply<BListItem, MListItem>(attrs =>
                 {
-                    props[nameof(MListGroupItem.IsActive)] = IsActive;
-                    props[nameof(MListGroupItem.Link)] = true;
-                    props[nameof(MListGroupItem.Dark)] = Dark;
-                    props[nameof(MListGroupItem.Class)] = IsActive ? ActiveClass : "";
+                    attrs[nameof(MListItem.IsActive)] = IsActive;
+                    attrs[nameof(MListItem.Link)] = true;
+                    attrs[nameof(MListItem.Dark)] = Dark;
+                    attrs[nameof(MListItem.Class)] = IsActive ? ActiveClass + " " + "m-list-group__header" : "m-list-group__header";
+                    attrs["role"] = "button";
+                    attrs["aria-expanded"] = IsActive;
                 })
-                .Apply<BListItemIcon, MListGroupItemIcon>("prepend", props => { props[nameof(MListGroupItemIcon.Type)] = "prepend"; })
-                .Apply<BIcon, MIcon>(props => { props[nameof(MIcon.Dark)] = Dark; })
-                .Apply<BListItemIcon, MListGroupItemIcon>("append", props => { props[nameof(MListGroupItemIcon.Type)] = "append"; });
+                .Apply<BListItemIcon, MListItemIcon>("prepend", attrs =>
+                {
+                    attrs[nameof(MListItemIcon.Class)] = "m-list-group__header__prepend-icon";
+                })
+                .Apply<BIcon, MIcon>(attrs =>
+                {
+                    attrs[nameof(MIcon.Dark)] = Dark;
+                })
+                .Apply<BListItemIcon, MListItemIcon>("append", attrs =>
+                {
+                    attrs[nameof(MListItemIcon.Class)] = "m-list-group__header__append-icon";
+                });
         }
 
         protected override void OnParametersSet()

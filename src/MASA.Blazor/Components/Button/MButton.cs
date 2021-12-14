@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace MASA.Blazor
 {
-    public class MButton : BButton, IThemeable
+    public class MButton : BButton, IButton, IThemeable
     {
         public bool Default { get; set; } = true;
 
@@ -79,7 +79,6 @@ namespace MASA.Blazor
 
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
-
         public override bool IsDark
         {
             get

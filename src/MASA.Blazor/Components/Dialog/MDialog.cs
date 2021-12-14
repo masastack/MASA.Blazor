@@ -109,10 +109,10 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply<BOverlay, MOverlay>(props =>
+                .Apply<BOverlay, MOverlay>(attrs =>
                 {
-                    props[nameof(MOverlay.Value)] = ShowOverlay && Value;
-                    props[nameof(MOverlay.ZIndex)] = ZIndex - 1;
+                    attrs[nameof(MOverlay.Value)] = ShowOverlay && Value;
+                    attrs[nameof(MOverlay.ZIndex)] = ZIndex - 1;
                 })
                 .ApplyDialogDefault();
         }

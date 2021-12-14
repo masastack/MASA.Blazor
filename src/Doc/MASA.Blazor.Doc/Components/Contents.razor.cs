@@ -93,7 +93,12 @@ namespace MASA.Blazor.Doc.Components
             });
         }
 
-        private async void OnLocationChanged(object sender, LocationChangedEventArgs e)
+        private void OnLocationChanged(object sender, LocationChangedEventArgs e)
+        {
+            _ = UpdateItemsAsync();
+        }
+
+        private async Task UpdateItemsAsync()
         {
             if (_disposed)
             {
@@ -104,7 +109,7 @@ namespace MASA.Blazor.Doc.Components
             Service.ChangeLanguage(GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name);
             _items = await Service.GetTitlesAsync(NavigationManager.Uri);
 
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
 
         private async void HandleOnClick(string id)

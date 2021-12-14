@@ -421,47 +421,47 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyTextFieldDefault<TValue>()
-                .ApplyTextFieldCounter(typeof(MCounter), props =>
+                .ApplyTextFieldCounter(typeof(MCounter), attrs =>
                 {
-                    props[nameof(MCounter.Dark)] = Dark;
-                    props[nameof(MCounter.Light)] = Light;
-                    props[nameof(MCounter.Max)] = Max;
-                    props[nameof(MCounter.Value)] = ComputedCounterValue;
+                    attrs[nameof(MCounter.Dark)] = Dark;
+                    attrs[nameof(MCounter.Light)] = Light;
+                    attrs[nameof(MCounter.Max)] = Max;
+                    attrs[nameof(MCounter.Value)] = ComputedCounterValue;
                 })
-                .ApplyTextFieldLabel(typeof(MLabel), props =>
+                .ApplyTextFieldLabel(typeof(MLabel), attrs =>
                 {
-                    props[nameof(MLabel.Absolute)] = true;
-                    props[nameof(MLabel.Focused)] = !IsSingle && (IsFocused || ValidationState != null);
+                    attrs[nameof(MLabel.Absolute)] = true;
+                    attrs[nameof(MLabel.Focused)] = !IsSingle && (IsFocused || ValidationState != null);
                     //TODO:left,right
-                    props[nameof(MLabel.Value)] = LabelValue;
+                    attrs[nameof(MLabel.Value)] = LabelValue;
                 })
-                .ApplyTextFieldProcessLinear(typeof(MProgressLinear), props =>
+                .ApplyTextFieldProcessLinear(typeof(MProgressLinear), attrs =>
                  {
-                     props[nameof(MProgressLinear.Absolute)] = true;
-                     props[nameof(MProgressLinear.Color)] = (Loading == true || Loading == "") ? (Color ?? "primary") : Loading.ToString();
-                     props[nameof(MProgressLinear.Height)] = LoaderHeight;
-                     props[nameof(MProgressLinear.Indeterminate)] = true;
+                     attrs[nameof(MProgressLinear.Absolute)] = true;
+                     attrs[nameof(MProgressLinear.Color)] = (Loading == true || Loading == "") ? (Color ?? "primary") : Loading.ToString();
+                     attrs[nameof(MProgressLinear.Height)] = LoaderHeight;
+                     attrs[nameof(MProgressLinear.Indeterminate)] = true;
                  })
-                .ApplyTextFieldClearIcon(typeof(MIcon), props =>
+                .ApplyTextFieldClearIcon(typeof(MIcon), attrs =>
                  {
-                     props[nameof(MIcon.Color)] = ValidationState;
-                     props[nameof(MIcon.Dark)] = Dark;
-                     props[nameof(MIcon.Disabled)] = Disabled;
-                     props[nameof(MIcon.Light)] = Light;
+                     attrs[nameof(MIcon.Color)] = ValidationState;
+                     attrs[nameof(MIcon.Dark)] = Dark;
+                     attrs[nameof(MIcon.Disabled)] = Disabled;
+                     attrs[nameof(MIcon.Light)] = Light;
                  })
-                .ApplyTextFieldAppendOuterIcon(typeof(MIcon), props =>
+                .ApplyTextFieldAppendOuterIcon(typeof(MIcon), attrs =>
                 {
-                    props[nameof(MIcon.Color)] = ValidationState;
-                    props[nameof(MIcon.Dark)] = Dark;
-                    props[nameof(MIcon.Disabled)] = Disabled;
-                    props[nameof(MIcon.Light)] = Light;
+                    attrs[nameof(MIcon.Color)] = ValidationState;
+                    attrs[nameof(MIcon.Dark)] = Dark;
+                    attrs[nameof(MIcon.Disabled)] = Disabled;
+                    attrs[nameof(MIcon.Light)] = Light;
                 })
-                .ApplyTextFieldPrependInnerIcon(typeof(MIcon), props =>
+                .ApplyTextFieldPrependInnerIcon(typeof(MIcon), attrs =>
                 {
-                    props[nameof(MIcon.Color)] = ValidationState;
-                    props[nameof(MIcon.Dark)] = Dark;
-                    props[nameof(MIcon.Disabled)] = Disabled;
-                    props[nameof(MIcon.Light)] = Light;
+                    attrs[nameof(MIcon.Color)] = ValidationState;
+                    attrs[nameof(MIcon.Dark)] = Dark;
+                    attrs[nameof(MIcon.Disabled)] = Disabled;
+                    attrs[nameof(MIcon.Light)] = Light;
                 });
         }
     }

@@ -128,16 +128,16 @@ namespace MASA.Blazor
                 .Apply(typeof(BImageContent<>), typeof(BImageContent<MImage>))
                 .Apply(typeof(BPlaceholderSlot<>), typeof(BPlaceholderSlot<MImage>))
                 .Merge(typeof(BResponsiveBody<>), typeof(BImageBody<MImage>))
-                .Apply<BResponsive, MResponsive>(props =>
+                .Apply<BResponsive, MResponsive>(attrs =>
                 {
-                    props[nameof(Dimensions)] = Dimensions;
-                    props[nameof(AspectRatio)] = AspectRatio;
-                    props[nameof(ContentClass)] = ContentClass;
-                    props[nameof(Height)] = Height;
-                    props[nameof(MinHeight)] = MinHeight;
-                    props[nameof(MaxHeight)] = MaxHeight;
-                    props[nameof(MinWidth)] = MinWidth;
-                    props[nameof(MaxWidth)] = MaxWidth;
+                    attrs[nameof(Dimensions)] = Dimensions;
+                    attrs[nameof(AspectRatio)] = AspectRatio;
+                    attrs[nameof(ContentClass)] = ContentClass;
+                    attrs[nameof(Height)] = Height;
+                    attrs[nameof(MinHeight)] = MinHeight;
+                    attrs[nameof(MaxHeight)] = MaxHeight;
+                    attrs[nameof(MinWidth)] = MinWidth;
+                    attrs[nameof(MaxWidth)] = MaxWidth;
                 });
         }
 

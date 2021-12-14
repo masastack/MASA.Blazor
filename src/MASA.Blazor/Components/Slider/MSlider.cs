@@ -99,6 +99,30 @@ namespace MASA.Blazor
         [Parameter]
         public RenderFragment ProgressContent { get; set; }
 
+        [Parameter]
+        public override TValue Value
+        {
+            get
+            {
+                return base.Value;
+            }
+            set
+            {
+                if (EqualityComparer<TValue>.Default.Equals(value, base.Value))
+                {
+                    return;
+                }
+
+                var val = Min;
+                if (value is double v)
+                {
+                    val = v;
+                }
+
+                InternalValue = RoundValue(Math.Min(Math.Max(val, Min), Max)) is TValue roundedValue ? roundedValue : default;
+            }
+        }
+
         protected double DoubleInteralValue
         {
             get

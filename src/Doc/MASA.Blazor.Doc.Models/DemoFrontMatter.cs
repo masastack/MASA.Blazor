@@ -24,5 +24,13 @@ namespace MASA.Blazor.Doc.Models
 
         [YamlMember(Alias = "type")]
         public string Type { get; set; }
+
+        public string FullTitle
+        {
+            get
+            {
+                return string.IsNullOrEmpty(Subtitle) ? Title : $"{Title}（{Subtitle}）";
+            }
+        }
     }
 }

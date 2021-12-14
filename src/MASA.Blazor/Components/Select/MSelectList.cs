@@ -12,23 +12,23 @@ namespace MASA.Blazor
             base.SetComponentClass();
 
             AbstractProvider
-                .Apply<BListItem, MListItem>(props =>
+                .Apply<BListItem, MListItem>(attrs =>
                 {
-                    props[nameof(MListItem.Value)] = (StringNumber)Key;
-                    props[nameof(MListItem.Link)] = true;
-                    props[nameof(MListItem.IsActive)] = Selected;
-                    props[nameof(MListItem.Disabled)] = Disabled;
-                    props[nameof(MListItem.Highlighted)] = Highlighted;
+                    attrs[nameof(MListItem.Value)] = (StringNumber)Key;
+                    attrs[nameof(MListItem.Link)] = true;
+                    attrs[nameof(MListItem.IsActive)] = Selected;
+                    attrs[nameof(MListItem.Disabled)] = Disabled;
+                    attrs[nameof(MListItem.Highlighted)] = Highlighted;
 
-                    if (!Disabled) props[nameof(MListItem.Color)] = Selected ? "primary" : null;
+                    if (!Disabled) attrs[nameof(MListItem.Color)] = Selected ? "primary" : null;
 
-                    props[nameof(MListItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, OnSelectAsync);
+                    attrs[nameof(MListItem.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, OnSelectAsync);
                 })
                 .Apply<BListItemAction, MListItemAction>()
-                .Apply(typeof(ICheckbox), typeof(MSimpleCheckbox), props =>
+                .Apply(typeof(BSimpleCheckbox), typeof(MSimpleCheckbox), attrs =>
                 {
-                    props[nameof(MSimpleCheckbox.Value)] = Selected;
-                    props[nameof(MSimpleCheckbox.OnInput)] = EventCallback.Factory.Create<bool>(this, OnSelectAsync);
+                    attrs[nameof(MSimpleCheckbox.Value)] = Selected;
+                    attrs[nameof(MSimpleCheckbox.OnInput)] = EventCallback.Factory.Create<bool>(this, OnSelectAsync);
                 })
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>()

@@ -152,10 +152,10 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .Merge(typeof(BSheetBody<>), typeof(BToolbarBody<IToolbar>))
-                .Apply(typeof(IImage), typeof(MImage), props =>
+                .Apply(typeof(IImage), typeof(MImage), attrs =>
                 {
-                    props[nameof(MImage.Height)] = ComputedHeight;
-                    props[nameof(MImage.Src)] = Src;
+                    attrs[nameof(MImage.Height)] = ComputedHeight;
+                    attrs[nameof(MImage.Src)] = Src;
                 });
         }
     }

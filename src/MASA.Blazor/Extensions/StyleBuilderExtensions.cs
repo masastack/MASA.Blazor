@@ -138,4 +138,5 @@ namespace BlazorComponent
                         .AddSize("max-width", measurable.MaxWidth);
         }
     }
+
 }

@@ -13,12 +13,12 @@ namespace MASA.Blazor
         {
           return  abstractProvider
                 .Apply(typeof(BLoadableProgress<>), typeof(BLoadableProgress<ILoadable>))
-                 .Apply(typeof(BProgressLinear),typeof(MProgressLinear), props =>
+                 .Apply(typeof(BProgressLinear),typeof(MProgressLinear), attrs =>
                  {
-                     props[nameof(MProgressLinear.Absolute)] = true;
-                     props[nameof(MProgressLinear.Color)] = (loading == true || loading == "") ? (color ?? "primary") : loading.ToString();
-                     props[nameof(MProgressLinear.Height)] = loaderHeight;
-                     props[nameof(MProgressLinear.Indeterminate)] = true;
+                     attrs[nameof(MProgressLinear.Absolute)] = true;
+                     attrs[nameof(MProgressLinear.Color)] = (loading == true || loading == "") ? (color ?? "primary") : loading.ToString();
+                     attrs[nameof(MProgressLinear.Height)] = loaderHeight;
+                     attrs[nameof(MProgressLinear.Indeterminate)] = true;
                  });
         }
     }

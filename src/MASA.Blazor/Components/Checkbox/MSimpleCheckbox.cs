@@ -66,11 +66,11 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply(typeof(BIcon), typeof(MIcon), props =>
+                .Apply(typeof(BIcon), typeof(MIcon), attrs =>
                 {
-                    props[nameof(MIcon.Disabled)] = Disabled;
-                    props[nameof(MIcon.Dark)] = Dark;
-                    props[nameof(MIcon.Light)] = Light;
+                    attrs[nameof(MIcon.Disabled)] = Disabled;
+                    attrs[nameof(MIcon.Dark)] = Dark;
+                    attrs[nameof(MIcon.Light)] = Light;
                 });
         }
     }

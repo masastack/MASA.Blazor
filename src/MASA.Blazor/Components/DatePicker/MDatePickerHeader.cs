@@ -188,19 +188,19 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyDatePickerHeaderDefault()
-                .Apply<BButton, MButton>(props =>
+                .Apply<BButton, MButton>(attrs =>
                 {
-                    var change = props.Index;
+                    var change = attrs.Index;
                     var calculateChange = CalculateChange(change);
                     var disabled = Disabled || (change < 0 && Min != null && calculateChange < Min) || (change > 0 && Max != null && calculateChange > Max);
 
-                    props[nameof(MButton.Dark)] = Dark;
-                    props[nameof(MButton.Disabled)] = disabled;
-                    props[nameof(MButton.Icon)] = true;
-                    props[nameof(MButton.Light)] = Light;
+                    attrs[nameof(MButton.Dark)] = Dark;
+                    attrs[nameof(MButton.Disabled)] = disabled;
+                    attrs[nameof(MButton.Icon)] = true;
+                    attrs[nameof(MButton.Light)] = Light;
 
-                    props[nameof(MButton.StopPropagation)] = true;
-                    props[nameof(MButton.OnClick)] = CreateEventCallback<MouseEventArgs>(async args =>
+                    attrs[nameof(MButton.StopPropagation)] = true;
+                    attrs[nameof(MButton.OnClick)] = CreateEventCallback<MouseEventArgs>(async args =>
                     {
                         if (OnInput.HasDelegate)
                         {

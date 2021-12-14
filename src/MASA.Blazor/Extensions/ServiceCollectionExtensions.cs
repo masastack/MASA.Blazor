@@ -13,6 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddBlazorComponent();
             services.TryAddSingleton<IExceptionFilterProvider, ExceptionFilterProvider>();
             services.TryAddScoped<GlobalConfig>();
+            services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
 
             return services;
         }
@@ -27,6 +28,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddBlazorComponent();
             services.TryAddSingleton<IExceptionFilterProvider, ExceptionFilterProvider>();
             services.TryAddScoped<GlobalConfig>();
+            services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
 
             return services;
         }

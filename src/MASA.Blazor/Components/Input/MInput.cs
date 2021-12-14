@@ -158,36 +158,36 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyInputDefault<TValue>()
-                .ApplyInputPrependIcon(typeof(MIcon), props =>
+                .ApplyInputPrependIcon(typeof(MIcon), attrs =>
                 {
-                    props[nameof(MIcon.Color)] = ValidationState;
-                    props[nameof(MIcon.Dark)] = Dark;
-                    props[nameof(MIcon.Disabled)] = IsDisabled;
-                    props[nameof(MIcon.Light)] = Light;
+                    attrs[nameof(MIcon.Color)] = ValidationState;
+                    attrs[nameof(MIcon.Dark)] = Dark;
+                    attrs[nameof(MIcon.Disabled)] = IsDisabled;
+                    attrs[nameof(MIcon.Light)] = Light;
                 })
-                .ApplyInputLabel(typeof(MLabel), props =>
+                .ApplyInputLabel(typeof(MLabel), attrs =>
                  {
-                     props[nameof(MLabel.Color)] = ValidationState;
-                     props[nameof(MLabel.Dark)] = Dark;
-                     props[nameof(MLabel.Disabled)] = IsDisabled;
-                     props[nameof(MLabel.Focused)] = HasState;
-                     props[nameof(MLabel.For)] = Id;
-                     props[nameof(MLabel.Light)] = Light;
+                     attrs[nameof(MLabel.Color)] = ValidationState;
+                     attrs[nameof(MLabel.Dark)] = Dark;
+                     attrs[nameof(MLabel.Disabled)] = IsDisabled;
+                     attrs[nameof(MLabel.Focused)] = HasState;
+                     attrs[nameof(MLabel.For)] = Id;
+                     attrs[nameof(MLabel.Light)] = Light;
                  })
-                .ApplyInputMessages(typeof(MMessages), props =>
+                .ApplyInputMessages(typeof(MMessages), attrs =>
                  {
-                     props[nameof(MMessages.Color)] = HasHint ? "" : ValidationState;
-                     props[nameof(MMessages.Dark)] = Dark;
-                     props[nameof(MMessages.Light)] = Light;
-                     props[nameof(MMessages.Value)] = MessagesToDisplay;
-                     props[nameof(MMessages.ChildContent)] = MessageContent;
+                     attrs[nameof(MMessages.Color)] = HasHint ? "" : ValidationState;
+                     attrs[nameof(MMessages.Dark)] = Dark;
+                     attrs[nameof(MMessages.Light)] = Light;
+                     attrs[nameof(MMessages.Value)] = MessagesToDisplay;
+                     attrs[nameof(MMessages.ChildContent)] = MessageContent;
                  })
-                .ApplyInputAppendIcon(typeof(MIcon), props =>
+                .ApplyInputAppendIcon(typeof(MIcon), attrs =>
                 {
-                    props[nameof(MIcon.Color)] = ValidationState;
-                    props[nameof(MIcon.Dark)] = Dark;
-                    props[nameof(MIcon.Disabled)] = IsDisabled;
-                    props[nameof(MIcon.Light)] = Light;
+                    attrs[nameof(MIcon.Color)] = ValidationState;
+                    attrs[nameof(MIcon.Dark)] = Dark;
+                    attrs[nameof(MIcon.Disabled)] = IsDisabled;
+                    attrs[nameof(MIcon.Light)] = Light;
                 });
         }
     }

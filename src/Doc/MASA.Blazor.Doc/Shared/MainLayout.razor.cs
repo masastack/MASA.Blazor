@@ -31,7 +31,6 @@ namespace MASA.Blazor.Doc.Shared
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
-
             _errorBoundary?.Recover();
         }
 

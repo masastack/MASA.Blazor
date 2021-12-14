@@ -10,9 +10,9 @@ public partial class CodeBox
     private static string _githubUrlTemplate =
         "https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Doc/MASA.Blazor.Doc/{0}.razor";
 
-    private readonly static(string type, string lang) Template = ("template", "html");
-    private readonly static(string type, string lang) Code = ("code", "csharp");
-    private readonly static(string type, string lang) Style = ("style", "css");
+    private readonly static (string type, string lang) Template = ("template", "html");
+    private readonly static (string type, string lang) Code = ("code", "csharp");
+    private readonly static (string type, string lang) Style = ("style", "css");
 
     private readonly Dictionary<(string type, string lang), string> _items = new()
     {

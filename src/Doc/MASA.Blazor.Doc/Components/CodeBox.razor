@@ -2,92 +2,83 @@
 @using System.Reflection.Metadata.Ecma335
 @inherits OwningComponentBase<MASA.Blazor.Doc.Services.DemoService>
 
+
 @((MarkupString)Demo.Description.FormatLink())
 
 @if (Component != null)
 {
     <MSheet Outlined Rounded="true" Class="mb-9 m-example">
-        <div class="m-lazy" style="min-height: 52px;">
-            <div class="text-end pa-2">
-                @* <span class="m-app-tooltip-btn d-inline-block"> *@
-                @*     <MTooltip Bottom OpenDelay=200> *@
-                @*         <ActivatorContent> *@
-                @*             <MButton Icon aria-label="invert-example-colors" @attributes="@context.Attrs" Label=""> *@
-                @*                 <MIcon>mdi-invert-colors</MIcon> *@
-                @*             </MButton> *@
-                @*         </ActivatorContent> *@
-                @*         <ChildContent> *@
-                @*             <span>反转示例颜色</span> *@
-                @*         </ChildContent> *@
-                @*     </MTooltip> *@
-                @* </span> *@
+        @if (_showComponent)
+        {
+            <div class="m-lazy" style="min-height: 52px;">
+                <div class="text-end pa-2">
+                    <span class="m-app-tooltip-btn d-inline-block">
+                        <MTooltip Bottom OpenDelay=200>
+                            <ActivatorContent>
+                                <MButton Icon aria-label="view-in-github" Href="@GithubUrlHref" Target="_blank" @attributes="@context.Attrs">
+                                    <MIcon>mdi-github</MIcon>
+                                </MButton>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <span>在 Github 上查看</span>
+                            </ChildContent>
+                        </MTooltip>
+                    </span>
 
-                <span class="m-app-tooltip-btn d-inline-block">
-                    <MTooltip Bottom OpenDelay=200>
-                        <ActivatorContent>
-                            <MButton Icon aria-label="view-in-github" Href="@GithubUrlHref" Target="_blank" @attributes="@context.Attrs">
-                                <MIcon>mdi-github</MIcon>
-                            </MButton>
-                        </ActivatorContent>
-                        <ChildContent>
-                            <span>在 Github 上查看</span>
-                        </ChildContent>
-                    </MTooltip>
-                </span>
-
-                <span class="m-app-tooltip-btn d-inline-block">
-                    <MTooltip Bottom OpenDelay=200>
-                        <ActivatorContent>
-                            <MButton Icon OnClick="() => _expend = !_expend" aria-label="view-source" @attributes="@context.Attrs">
-                                <MIcon>mdi-code-tags</MIcon>
-                            </MButton>
-                        </ActivatorContent>
-                        <ChildContent>
-                            <span>查看源代码</span>
-                        </ChildContent>
-                    </MTooltip>
-                </span>
+                    <span class="m-app-tooltip-btn d-inline-block">
+                        <MTooltip Bottom OpenDelay=200>
+                            <ActivatorContent>
+                                <MButton Icon OnClick="() => _expend = !_expend" aria-label="view-source" @attributes="@context.Attrs">
+                                    <MIcon>mdi-code-tags</MIcon>
+                                </MButton>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <span>查看源代码</span>
+                            </ChildContent>
+                        </MTooltip>
+                    </span>
+                </div>
             </div>
-        </div>
 
-        <ExpandTransition>
-            <Element Show="_expend">
-                <MDivider></MDivider>
-                <MItemGroup @bind-Value="_activeItem" Class="pa-2" Mandatory>
-                    @foreach (var ((type, _), content) in _items)
-                    {
-                        if (content == null) continue;
+            <ExpandTransition>
+                <Element Show="_expend">
+                    <MDivider></MDivider>
+                    <MItemGroup @bind-Value="_activeItem" Class="pa-2" Mandatory>
+                        @foreach (var ((type, _), content) in _items)
+                        {
+                            if (content == null) continue;
 
-                        <MItem Value="type">
-                            <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.Active"> @type </MButton>
-                        </MItem>
-                    }
-                </MItemGroup>
-                <MDivider></MDivider>
-                <MWindow Value="_activeItem">
-                    @foreach (var ((type, lang), content) in _items)
-                    {
-                        if (content == null) continue;
+                            <MItem Value="type">
+                                <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.Active"> @type </MButton>
+                            </MItem>
+                        }
+                    </MItemGroup>
+                    <MDivider></MDivider>
+                    <MWindow Value="_activeItem">
+                        @foreach (var ((type, lang), content) in _items)
+                        {
+                            if (content == null) continue;
 
-                        <MWindowItem Value="@type">
-                            <AppCode Code="@content" Language="@lang" Class="my-0"></AppCode>
-                        </MWindowItem>
-                    }
-                </MWindow>
-            </Element>
-        </ExpandTransition>
+                            <MWindowItem Value="@type">
+                                <AppCode Code="@content" Language="@lang" Class="my-0"></AppCode>
+                            </MWindowItem>
+                        }
+                    </MWindow>
+                </Element>
+            </ExpandTransition>
 
-        <MDivider></MDivider>
+            <MDivider></MDivider>
 
-        <MSheet Rounded="true" Class="pa-4">
-            @if (_showComponent)
-            {
-                @Component
-            }
-            else
-            {
-                <div class="text-center">Loading...</div>
-            }
-        </MSheet>
+            <MSheet Rounded="true" Class="pa-4">
+                @if (_showComponent)
+                {
+                    @Component
+                }
+            </MSheet>
+        }
+        else
+        {
+            <div class="text-center mt-10 mb-10">Loading...</div>
+        }
     </MSheet>
 }

@@ -34,11 +34,10 @@ namespace MASA.Blazor.Doc.Components
 
         private void OnLocationChanged(object sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
         {
-            UpdatePrevAndNext();
-            _ = InvokeAsync(StateHasChanged);
+            _ = UpdatePrevAndNextAsync();
         }
 
-        private void UpdatePrevAndNext()
+        private async Task UpdatePrevAndNextAsync()
         {
             if (_menuItems.Count == 0)
             {
@@ -53,14 +52,15 @@ namespace MASA.Blazor.Doc.Components
 
             _prevItem = prevIndex >= 0 ? _menuItems[prevIndex] : new DemoMenuItemModel();
             _nextItem = nextIndex >= 0 && nextIndex <= _menuItems.Count - 1 ? _menuItems[nextIndex] : new DemoMenuItemModel();
+
+            await InvokeAsync(StateHasChanged);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                UpdatePrevAndNext();
-                await InvokeAsync(StateHasChanged);
+                await UpdatePrevAndNextAsync();
             }
         }
 

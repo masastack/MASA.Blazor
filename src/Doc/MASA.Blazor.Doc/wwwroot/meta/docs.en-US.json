@@ -4460,14 +4460,6 @@
         "Children": [
           {
             "Order": 0,
-            "Title": "Color pickers",
-            "FullTitle": "Color pickers",
-            "Type": "menuItem",
-            "Url": "components/color-pickers",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ColorPicker.svg"
-          },
-          {
-            "Order": 0,
             "Title": "Date pickers",
             "FullTitle": "Date pickers",
             "Type": "menuItem",

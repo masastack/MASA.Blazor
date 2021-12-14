@@ -123,17 +123,17 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyBannerDefault()
-                .Apply<BAvatar, MAvatar>(props =>
+                .Apply<BAvatar, MAvatar>(attrs =>
                 {
-                    props[nameof(Class)] = "m-banner__icon";
-                    props[nameof(MAvatar.Color)] = Color;
-                    props[nameof(MAvatar.Size)] = (StringNumber)40;
-                    props["onclick"] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnIconClickAsync);
+                    attrs[nameof(Class)] = "m-banner__icon";
+                    attrs[nameof(MAvatar.Color)] = Color;
+                    attrs[nameof(MAvatar.Size)] = (StringNumber)40;
+                    attrs["onclick"] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnIconClickAsync);
                 })
-                .Apply<BIcon, MIcon>(props =>
+                .Apply<BIcon, MIcon>(attrs =>
                 {
-                    props[nameof(MIcon.Size)] = (StringNumber)28;
-                    props[nameof(MIcon.Color)] = IconColor;
+                    attrs[nameof(MIcon.Size)] = (StringNumber)28;
+                    attrs[nameof(MIcon.Color)] = IconColor;
                 });
         }
 

@@ -25,13 +25,15 @@ namespace MASA.Blazor
             base.SetComponentClass();
 
             AbstractProvider
-                .Apply(typeof(BProgressCircular), typeof(MProgressCircular), props =>
+                .Apply(typeof(BProgressCircular), typeof(MProgressCircular), attrs =>
                 {
-                    props[nameof(MProgressCircular.Indeterminate)] = true;
-                    props[nameof(MProgressCircular.Size)] = (StringNumber)20;
-                    props[nameof(MProgressCircular.Width)] = (StringNumber)2;
+                    attrs[nameof(MProgressCircular.Indeterminate)] = true;
+                    attrs[nameof(MProgressCircular.Size)] = (StringNumber)20;
+                    attrs[nameof(MProgressCircular.Width)] = (StringNumber)2;
                 });
         }
+
+        protected override bool Selected => false;
 
         protected override async Task OnSelectAsync()
         {

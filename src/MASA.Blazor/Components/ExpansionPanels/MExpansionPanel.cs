@@ -31,7 +31,7 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply<BBreadcrumbsItem, MBreadcrumbsItem>(props => { props[nameof(MBreadcrumbsItem.Class)] = "m-breadcrumbs__item"; });
+                .Apply<BBreadcrumbsItem, MBreadcrumbsItem>(attrs => { attrs[nameof(MBreadcrumbsItem.Class)] = "m-breadcrumbs__item"; });
         }
     }
 }

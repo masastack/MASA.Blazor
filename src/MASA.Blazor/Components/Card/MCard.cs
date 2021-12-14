@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace MASA.Blazor
 {
-    public partial class MCard : MSheet, ICard, ILoadable, IRoutable, ISheet
+    public partial class MCard : MSheet, ICard, IRoutable, ISheet, ILoadable
     {
         private IRoutable _router;
 

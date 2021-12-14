@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace MASA.Blazor
 {
-    public partial class MIcon : BIcon, IThemeable, IIcon, ISizeable
+    public partial class MIcon : BIcon, IIcon, IThemeable, ISizeable
     {
         private readonly Dictionary<string, string> _sizeMap = new()
         {
@@ -54,7 +54,6 @@ namespace MASA.Blazor
 
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
-
         public IDictionary<string, object> Attrs => Attributes;
 
         public bool IsDark
@@ -75,7 +74,7 @@ namespace MASA.Blazor
             }
         }
 
-        public  bool Medium => false;
+        public bool Medium => false;
 
         public string GetSize()
         {

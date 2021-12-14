@@ -241,7 +241,7 @@
     {
       "Name": "Value",
       "Type": "TValue",
-      "Default": "",
+      "Default": "null",
       "Description": ""
     },
     {
