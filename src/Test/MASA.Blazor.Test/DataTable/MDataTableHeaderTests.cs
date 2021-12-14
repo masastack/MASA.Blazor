@@ -85,5 +85,37 @@ namespace MASA.Blazor.Test.DataTable
             // Assert
             Assert.IsTrue(hasSomeItemsClass);
         }
+
+        [TestMethod]
+        public void RenderDataTableHeaderWithCheckboxColor()
+        {
+            //Act
+            var cut = RenderComponent<MDataTableHeader>(props =>
+            {
+                string color = "color";
+                props.Add(datatableheader => datatableheader.CheckboxColor, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasCheckboxColorClass = classes.Contains("m-data-table-header");
+
+            // Assert
+            Assert.IsTrue(hasCheckboxColorClass);
+        }
+
+        [TestMethod]
+        public void RenderDataTableHeaderWithSortIcon()
+        {
+            //Act
+            var cut = RenderComponent<MDataTableHeader>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(datatableheader => datatableheader.SortIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSortIconClass = classes.Contains("m-data-table-header");
+
+            // Assert
+            Assert.IsTrue(hasSortIconClass);
+        }
     }
 }

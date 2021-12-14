@@ -14,5 +14,6 @@ namespace MASA.Blazor.Test.Stepper
     [TestClass]
     public class MStepperContentTests:TestBase
     {
+
     }
 }

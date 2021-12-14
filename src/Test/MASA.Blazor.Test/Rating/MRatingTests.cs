@@ -234,5 +234,107 @@ namespace MASA.Blazor.Test.Rating
             // Assert
             Assert.IsTrue(hasXSmallClass);
         }
+
+        [TestMethod]
+        public void RenderRatingWithBackgroundColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MRating>(props =>
+            {
+                string color = "mdi-star";
+                props.Add(rating => rating.BackgroundColor, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBackgroundColorClass = classes.Contains("m-rating");
+
+            // Assert
+            Assert.IsTrue(hasBackgroundColorClass);
+        }
+
+        [TestMethod]
+        public void RenderRatingWithColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MRating>(props =>
+            {
+                string color = "mdi-star";
+                props.Add(rating => rating.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-rating");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderRatingWithEmptyIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MRating>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(rating => rating.EmptyIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasEmptyIconClass = classes.Contains("m-rating");
+
+            // Assert
+            Assert.IsTrue(hasEmptyIconClass);
+        }
+
+        [TestMethod]
+        public void RenderRatingWithFullIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MRating>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(rating => rating.FullIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasFullIconClass = classes.Contains("m-rating");
+
+            // Assert
+            Assert.IsTrue(hasFullIconClass);
+        }
+
+        [TestMethod]
+        public void RenderRatingWithHalfIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MRating>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(rating => rating.HalfIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHalfIconClass = classes.Contains("m-rating");
+
+            // Assert
+            Assert.IsTrue(hasHalfIconClass);
+        }
+
+        [TestMethod]
+        public void RenderRatingWithIconLabel()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MRating>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(rating => rating.IconLabel, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIconLabelClass = classes.Contains("m-rating");
+
+            // Assert
+            Assert.IsTrue(hasIconLabelClass);
+        }
     }
 }

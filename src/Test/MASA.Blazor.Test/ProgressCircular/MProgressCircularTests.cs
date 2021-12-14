@@ -85,5 +85,21 @@ namespace MASA.Blazor.Test.ProgressCircular
             // Assert
             Assert.IsTrue(hasWidthClass);
         }
+
+        [TestMethod]
+        public void RenderProgressCircularWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MProgressCircular>(props =>
+            {
+                string color = "color";
+                props.Add(progresscircular => progresscircular.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-progress-circular");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
     }
 }

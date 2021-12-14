@@ -186,5 +186,22 @@ namespace MASA.Blazor.Test.ColorPicker
             // Assert
             Assert.AreEqual("max-width: 300px", style);
         }
+
+        [TestMethod]
+        public void RenderColorPickerWithValue()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MColorPicker>(props =>
+            {
+                string value = "color-picker";
+                props.Add(colorpicker => colorpicker.Value, value);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-color-picker");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
     }
 }

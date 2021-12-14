@@ -355,5 +355,35 @@ namespace MASA.Blazor.Test.Snackbar
             // Assert
             Assert.IsTrue(hasValueClass);
         }
+
+        [TestMethod]
+        public void RenderSnackbarWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MSnackbar>(props =>
+            {
+                string color = "color";
+                props.Add(snackbar => snackbar.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-snack");
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderSnackbarWithTransition()
+        {
+            //Act
+            var cut = RenderComponent<MSnackbar>(props =>
+            {
+                string transition = "m-snack-transition";
+                props.Add(snackbar => snackbar.Transition, transition);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTransitionClass = classes.Contains("m-snack");
+            // Assert
+            Assert.IsTrue(hasTransitionClass);
+        }
     }
 }

@@ -252,5 +252,132 @@ namespace MASA.Blazor.Test.DatePicker
             // Assert
             Assert.IsTrue(hasWidthClass);
         }
+
+        [TestMethod]
+        public void RenderDatePickerWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MDatePicker<string>>(props =>
+            {
+                string color = "m-picker--date";
+                props.Add(datepicker => datepicker.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-picker--date");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderDatePickerWithHeaderColor()
+        {
+            //Act
+            var cut = RenderComponent<MDatePicker<string>>(props =>
+            {
+                string color = "m-picker--date";
+                props.Add(datepicker => datepicker.HeaderColor, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasHeaderColorClass = classes.Contains("m-picker--date");
+
+            // Assert
+            Assert.IsTrue(hasHeaderColorClass);
+        }
+
+        [TestMethod]
+        public void RenderDatePickerWithLocale()
+        {
+            //Act
+            var cut = RenderComponent<MDatePicker<string>>(props =>
+            {
+                string locale = "en-US";
+                props.Add(datepicker => datepicker.Locale, locale);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLocaleClass = classes.Contains("m-picker--date");
+
+            // Assert
+            Assert.IsTrue(hasLocaleClass);
+        }
+
+        [TestMethod]
+        public void RenderDatePickerWithNextIcon()
+        {
+            //Act
+            var cut = RenderComponent<MDatePicker<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(datepicker => datepicker.NextIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasNextIconClass = classes.Contains("m-picker--date");
+
+            // Assert
+            Assert.IsTrue(hasNextIconClass);
+        }
+
+        [TestMethod]
+        public void RenderDatePickerWithPrevIcon()
+        {
+            //Act
+            var cut = RenderComponent<MDatePicker<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(datepicker => datepicker.PrevIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrevIconClass = classes.Contains("m-picker--date");
+
+            // Assert
+            Assert.IsTrue(hasPrevIconClass);
+        }
+
+        //[TestMethod]
+        //public void RenderDatePickerWithRange()
+        //{
+        //    //Act
+        //    var cut = RenderComponent<MDatePicker<string>>(props =>
+        //    {
+        //        props.Add(datepicker => datepicker.Range, true);
+        //    });
+        //    var classes = cut.Instance.CssProvider.GetClass();
+        //    var hasRangeClass = classes.Contains("m-picker--date");
+
+        //    // Assert
+        //    Assert.IsTrue(hasRangeClass);
+        //}
+
+        [TestMethod]
+        public void RenderDatePickerWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MDatePicker<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(datepicker => datepicker.Value, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-picker--date");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
+
+        [TestMethod]
+        public void RenderDatePickerWithYearIcon()
+        {
+            //Act
+            var cut = RenderComponent<MDatePicker<string>>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(datepicker => datepicker.YearIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasYearIconClass = classes.Contains("m-picker--date");
+
+            // Assert
+            Assert.IsTrue(hasYearIconClass);
+        }
     }
 }

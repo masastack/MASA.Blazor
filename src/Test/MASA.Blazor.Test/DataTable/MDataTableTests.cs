@@ -23,7 +23,7 @@ namespace MASA.Blazor.Test.DataTable
         //        props.Add(datatable => datatable.Dense, true);
         //    });
         //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasDenseClass = classes.Contains("m-data-table--dense");
+        //    var hasDenseClass = classes.Contains("m-data-table");
 
         //    // Assert
         //    Assert.IsTrue(hasDenseClass);
@@ -39,7 +39,7 @@ namespace MASA.Blazor.Test.DataTable
         //        props.Add(datatable => datatable.DisableFiltering, true);
         //    });
         //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasDisableFilteringClass = classes.Contains("m-data-table");
+        //    var hasDisableFilteringClass = classes.Contains("data-table-select");
 
         //    // Assert
         //    Assert.IsTrue(hasDisableFilteringClass);
@@ -55,7 +55,7 @@ namespace MASA.Blazor.Test.DataTable
         //        props.Add(datatable => datatable.DisablePagination, true);
         //    });
         //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasDisablePaginationClass = classes.Contains("m-data-table");
+        //    var hasDisablePaginationClass = classes.Contains("data-table-select");
 
         //    // Assert
         //    Assert.IsTrue(hasDisablePaginationClass);
@@ -71,7 +71,7 @@ namespace MASA.Blazor.Test.DataTable
         //        props.Add(datatable => datatable.DisableSort, true);
         //    });
         //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasDisableSortClass = classes.Contains("m-data-table");
+        //    var hasDisableSortClass = classes.Contains("data-table-select");
 
         //    // Assert
         //    Assert.IsTrue(hasDisableSortClass);
@@ -103,7 +103,7 @@ namespace MASA.Blazor.Test.DataTable
         //        props.Add(datatable => datatable.HeadersLength, 10);
         //    });
         //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasHeadersLengthClass = classes.Contains("m-data-table");
+        //    var hasHeadersLengthClass = classes.Contains("data-table-select");
 
         //    // Assert
         //    Assert.IsTrue(hasHeadersLengthClass);

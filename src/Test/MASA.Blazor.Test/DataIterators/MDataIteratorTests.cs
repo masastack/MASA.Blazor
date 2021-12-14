@@ -218,5 +218,124 @@ namespace MASA.Blazor.Test.DataIterators
             // Assert
             Assert.IsTrue(hasSortDescClass);
         }
+
+        [TestMethod]
+        public void RenderDataIteratorWithGroupBy()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MDataIterator<string>>(props =>
+            {
+                string groupby = "en-US";
+                props.Add(dataiterator => dataiterator.GroupBy, groupby);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasGroupByClass = classes.Contains("m-data-iterator");
+
+            // Assert
+            Assert.IsTrue(hasGroupByClass);
+        }
+
+        [TestMethod]
+        public void RenderDataIteratorWithLoadingText()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MDataIterator<string>>(props =>
+            {
+                string Loading = "Loading... Please wait";
+                props.Add(dataiterator => dataiterator.LoadingText, Loading);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLoadingTextClass = classes.Contains("m-data-iterator");
+
+            // Assert
+            Assert.IsTrue(hasLoadingTextClass);
+        }
+
+        [TestMethod]
+        public void RenderDataIteratorWithLocale()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MDataIterator<string>>(props =>
+            {
+                string locale = "en-US";
+                props.Add(dataiterator => dataiterator.Locale, locale);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLocaleClass = classes.Contains("m-data-iterator");
+
+            // Assert
+            Assert.IsTrue(hasLocaleClass);
+        }
+
+        [TestMethod]
+        public void RenderDataIteratorWithNoDataText()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MDataIterator<string>>(props =>
+            {
+                string nodatatext = "No data available";
+                props.Add(dataiterator => dataiterator.NoDataText, nodatatext);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasNoDataTextClass = classes.Contains("m-data-iterator");
+
+            // Assert
+            Assert.IsTrue(hasNoDataTextClass);
+        }
+
+        [TestMethod]
+        public void RenderDataIteratorWithNoResultsText()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MDataIterator<string>>(props =>
+            {
+                string noresultstext = "No matching records found";
+                props.Add(dataiterator => dataiterator.NoResultsText, noresultstext);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasNoResultsTextClass = classes.Contains("m-data-iterator");
+
+            // Assert
+            Assert.IsTrue(hasNoResultsTextClass);
+        }
+
+        [TestMethod]
+        public void RenderDataIteratorWithSearch()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MDataIterator<string>>(props =>
+            {
+                string search = "search";
+                props.Add(dataiterator => dataiterator.Search, search);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSearchClass = classes.Contains("m-data-iterator");
+
+            // Assert
+            Assert.IsTrue(hasSearchClass);
+        }
+
+        [TestMethod]
+        public void RenderDataIteratorWithSortBy()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MDataIterator<string>>(props =>
+            {
+                string sortby = "sortby";
+                props.Add(dataiterator => dataiterator.SortBy, sortby);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSortByClass = classes.Contains("m-data-iterator");
+
+            // Assert
+            Assert.IsTrue(hasSortByClass);
+        }
     }
 }

@@ -174,6 +174,36 @@ namespace MASA.Blazor.Test.Sheet
         }
 
         [TestMethod]
+        public void RenderSheetWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MSheet>(props =>
+            {
+                string color = "mdi-star";
+                props.Add(sheet => sheet.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-sheet");
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderSheetWithTag()
+        {
+            //Act
+            var cut = RenderComponent<MSheet>(props =>
+            {
+                string tag = "div";
+                props.Add(sheet => sheet.Tag, tag);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTagClass = classes.Contains("m-sheet");
+            // Assert
+            Assert.IsTrue(hasTagClass);
+        }
+
+        [TestMethod]
         public void RenderSheetWithTile()
         {
             //Act

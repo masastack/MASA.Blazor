@@ -259,6 +259,38 @@ namespace MASA.Blazor.Test.ProgressLinear
         }
 
         [TestMethod]
+        public void RenderProgressLinearWithBackgroundColor()
+        {
+            //Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                string color = "primary";
+                props.Add(progresslinear => progresslinear.BackgroundColor, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBackgroundColorClass = classes.Contains("m-progress-linear");
+
+            // Assert
+            Assert.IsTrue(hasBackgroundColorClass);
+        }
+
+        [TestMethod]
+        public void RenderProgressLinearWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MProgressLinear>(props =>
+            {
+                string color = "primary";
+                props.Add(progresslinear => progresslinear.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-progress-linear");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
         public void RenderWithChildContent()
         {
             // Arrange & Act

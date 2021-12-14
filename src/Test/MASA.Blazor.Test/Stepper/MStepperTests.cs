@@ -262,6 +262,36 @@ namespace MASA.Blazor.Test.Stepper
         }
 
         [TestMethod]
+        public void RenderStepperWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MStepper>(props =>
+            {
+                string color = "color";
+                props.Add(stepper => stepper.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-stepper");
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderStepperWithTag()
+        {
+            //Act
+            var cut = RenderComponent<MStepper>(props =>
+            {
+                string tag = "tag";
+                props.Add(stepper => stepper.Tag, tag);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTagClass = classes.Contains("m-stepper");
+            // Assert
+            Assert.IsTrue(hasTagClass);
+        }
+
+        [TestMethod]
         public void RenderWithChildContentt()
         {
             // Arrange & Act
