@@ -12,7 +12,7 @@ namespace MASA.Blazor.Test.Tabs
     public class MTabsTests:TestBase
     {
         [TestMethod]
-        public void RenderTabsWithAlignWithTitle()
+        public void RenderTabsWithTitle()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -28,7 +28,7 @@ namespace MASA.Blazor.Test.Tabs
         }
 
         [TestMethod]
-        public void RenderTabsWithAlignWithCenterActive()
+        public void RenderTabsWithCenterActive()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -44,7 +44,7 @@ namespace MASA.Blazor.Test.Tabs
         }
 
         [TestMethod]
-        public void RenderTabsWithAlignWithCentered()
+        public void RenderTabsWithCentered()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -60,7 +60,7 @@ namespace MASA.Blazor.Test.Tabs
         }
 
         [TestMethod]
-        public void RenderTabsWithAlignWithDark()
+        public void RenderTabsWithDark()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -76,7 +76,7 @@ namespace MASA.Blazor.Test.Tabs
         }
 
         [TestMethod]
-        public void RenderTabsWithAlignWithFixedTabs()
+        public void RenderTabsWithFixedTabs()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -92,7 +92,7 @@ namespace MASA.Blazor.Test.Tabs
         }
 
         [TestMethod]
-        public void RenderTabsWithAlignWithGrow()
+        public void RenderTabsWithGrow()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -108,7 +108,7 @@ namespace MASA.Blazor.Test.Tabs
         }
 
         [TestMethod]
-        public void RenderTabsWithAlignWithHideSlider()
+        public void RenderTabsWithHideSlider()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -140,7 +140,7 @@ namespace MASA.Blazor.Test.Tabs
         }
 
         [TestMethod]
-        public void RenderTabsWithAlignWithIconsAndText()
+        public void RenderTabsWithIconsAndText()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -156,7 +156,7 @@ namespace MASA.Blazor.Test.Tabs
         }
 
         [TestMethod]
-        public void RenderTabsWithAlignWithLight()
+        public void RenderTabsWithLight()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -172,7 +172,7 @@ namespace MASA.Blazor.Test.Tabs
         }
 
         [TestMethod]
-        public void RenderTabsWithAlignWithOptional()
+        public void RenderTabsWithOptional()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -188,7 +188,7 @@ namespace MASA.Blazor.Test.Tabs
         }
 
         [TestMethod]
-        public void RenderTabsWithAlignWithRight()
+        public void RenderTabsWithRight()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -204,7 +204,7 @@ namespace MASA.Blazor.Test.Tabs
         }
 
         [TestMethod]
-        public void RenderTabsWithAlignWithShowArrows()
+        public void RenderTabsWithShowArrows()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -220,7 +220,7 @@ namespace MASA.Blazor.Test.Tabs
         }
 
         [TestMethod]
-        public void RenderTabsWithAlignWithVertical()
+        public void RenderTabsWithVertical()
         {
             //Act
             JSInterop.Mode = JSRuntimeMode.Loose;
@@ -249,6 +249,157 @@ namespace MASA.Blazor.Test.Tabs
 
             // Assert
             Assert.IsTrue(hasSliderSizeClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsWithActiveClass()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTabs>(props =>
+            {
+                string active = "active-class";
+                props.Add(tabs => tabs.ActiveClass, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasActiveClassClass = classes.Contains("m-tabs");
+
+            // Assert
+            Assert.IsTrue(hasActiveClassClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsWithAlignWithTitle()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTabs>(props =>
+            {
+                props.Add(tabs => tabs.AlignWithTitle, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAlignWithTitleClass = classes.Contains("m-tabs");
+
+            // Assert
+            Assert.IsTrue(hasAlignWithTitleClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsWithBackgroundColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTabs>(props =>
+            {
+                string color = "color";
+                props.Add(tabs => tabs.BackgroundColor, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasBackgroundColorClass = classes.Contains("m-tabs");
+
+            // Assert
+            Assert.IsTrue(hasBackgroundColorClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsWithColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTabs>(props =>
+            {
+                string color = "color";
+                props.Add(tabs => tabs.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-tabs");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsWithMobileBreakpoint()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTabs>(props =>
+            {
+                props.Add(tabs => tabs.MobileBreakpoint, 1);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasMobileBreakpointClass = classes.Contains("m-tabs");
+
+            // Assert
+            Assert.IsTrue(hasMobileBreakpointClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsWithNextIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTabs>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(tabs => tabs.NextIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasNextIconClass = classes.Contains("m-tabs");
+
+            // Assert
+            Assert.IsTrue(hasNextIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsWithPrevIcon()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTabs>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(tabs => tabs.PrevIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrevIconClass = classes.Contains("m-tabs");
+
+            // Assert
+            Assert.IsTrue(hasPrevIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsWithSliderColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTabs>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(tabs => tabs.SliderColor, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSliderColorClass = classes.Contains("m-tabs");
+
+            // Assert
+            Assert.IsTrue(hasSliderColorClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsWithValue()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTabs>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(tabs => tabs.Value, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-tabs");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
         }
     }
 }

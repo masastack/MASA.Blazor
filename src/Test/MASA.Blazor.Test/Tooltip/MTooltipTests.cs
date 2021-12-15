@@ -367,5 +367,89 @@ namespace MASA.Blazor.Test.Tooltip
             // Assert
             Assert.IsTrue(hasZIndexClass);
         }
+
+        [TestMethod]
+        public void RenderTooltipWithAttach()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTooltip>(props =>
+            {
+                string attach = "m-app";
+                props.Add(tooltip => tooltip.Attach, attach);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasAttachClass = classes.Contains("m-tooltip");
+
+            // Assert
+            Assert.IsTrue(hasAttachClass);
+        }
+
+        [TestMethod]
+        public void RenderTooltipWithColor()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTooltip>(props =>
+            {
+                string color = "color";
+                props.Add(tooltip => tooltip.Color, color);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-tooltip");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderTooltipWithTag()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTooltip>(props =>
+            {
+                string tag = "span";
+                props.Add(tooltip => tooltip.Tag, tag);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTagClass = classes.Contains("m-tooltip");
+
+            // Assert
+            Assert.IsTrue(hasTagClass);
+        }
+
+        [TestMethod]
+        public void RenderTooltipWithTransition()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTooltip>(props =>
+            {
+                string transition = "transition";
+                props.Add(tooltip => tooltip.Transition, transition);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasTransitionClass = classes.Contains("m-tooltip");
+
+            // Assert
+            Assert.IsTrue(hasTransitionClass);
+        }
+
+        [TestMethod]
+        public void RenderTooltipWithValue()
+        {
+            //Act
+            JSInterop.Mode = JSRuntimeMode.Loose;
+            var cut = RenderComponent<MTooltip>(props =>
+            {
+                props.Add(tooltip => tooltip.Value, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-tooltip");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
     }
 }

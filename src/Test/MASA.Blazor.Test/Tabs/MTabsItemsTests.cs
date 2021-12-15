@@ -101,19 +101,128 @@ namespace MASA.Blazor.Test.Tabs
             Assert.IsTrue(hasMaxClass);
         }
 
-        //[TestMethod]
-        //public void RenderTabsItemsWithMultiple()
-        //{
-        //    //Act
-        //    var cut = RenderComponent<MTabsItems>(props =>
-        //    {
-        //        props.Add(tabsitems => tabsitems.Reverse, false);
-        //    });
-        //    var classes = cut.Instance.CssProvider.GetClass();
-        //    var hasMultipleClass = classes.Contains("m-tabs-items");
+        [TestMethod]
+        public void RenderTabsItemsWithActiveClass()
+        {
+            //Act
+            var cut = RenderComponent<MTabsItems>(props =>
+            {
+                string active = "active-class";
+                props.Add(tabsitems => tabsitems.ActiveClass, active);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasActiveClassClass = classes.Contains("m-tabs-items");
 
-        //    // Assert
-        //    Assert.IsTrue(hasMultipleClass);
-        //}
+            // Assert
+            Assert.IsTrue(hasActiveClassClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsItemsWithNextIcon()
+        {
+            //Act
+            var cut = RenderComponent<MTabsItems>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(tabsitems => tabsitems.NextIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasNextIconClass = classes.Contains("m-tabs-items");
+
+            // Assert
+            Assert.IsTrue(hasNextIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsItemsWithPrevIcon()
+        {
+            //Act
+            var cut = RenderComponent<MTabsItems>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(tabsitems => tabsitems.PrevIcon, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasPrevIconClass = classes.Contains("m-tabs-items");
+
+            // Assert
+            Assert.IsTrue(hasPrevIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsItemsWithReverse()
+        {
+            //Act
+            var cut = RenderComponent<MTabsItems>(props =>
+            {
+                props.Add(tabsitems => tabsitems.Reverse, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasReverseClass = classes.Contains("m-tabs-items");
+
+            // Assert
+            Assert.IsTrue(hasReverseClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsItemsWithShowArrows()
+        {
+            //Act
+            var cut = RenderComponent<MTabsItems>(props =>
+            {
+                props.Add(tabsitems => tabsitems.ShowArrows, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasShowArrowsClass = classes.Contains("m-tabs-items");
+
+            // Assert
+            Assert.IsTrue(hasShowArrowsClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsItemsWithShowArrowsOnHover()
+        {
+            //Act
+            var cut = RenderComponent<MTabsItems>(props =>
+            {
+                props.Add(tabsitems => tabsitems.ShowArrowsOnHover, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasShowArrowsOnHoverClass = classes.Contains("m-tabs-items");
+
+            // Assert
+            Assert.IsTrue(hasShowArrowsOnHoverClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsItemsWithValue()
+        {
+            //Act
+            var cut = RenderComponent<MTabsItems>(props =>
+            {
+                string icon = "mdi-star";
+                props.Add(tabsitems => tabsitems.Value, icon);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasValueClass = classes.Contains("m-tabs-items");
+
+            // Assert
+            Assert.IsTrue(hasValueClass);
+        }
+
+        [TestMethod]
+        public void RenderTabsItemsWithVertical()
+        {
+            //Act
+            var cut = RenderComponent<MTabsItems>(props =>
+            {
+                props.Add(tabsitems => tabsitems.Vertical, true);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasVerticalClass = classes.Contains("m-tabs-items");
+
+            // Assert
+            Assert.IsTrue(hasVerticalClass);
+        }
     }
 }

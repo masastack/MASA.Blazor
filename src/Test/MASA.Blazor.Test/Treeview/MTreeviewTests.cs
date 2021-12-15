@@ -188,5 +188,141 @@ namespace MASA.Blazor.Test.Treeview
             // Assert
             Assert.IsTrue(hasShapedClass);
         }
+
+        [TestMethod]
+        public void RenderTreeviewWithActiveClass()
+        {
+            //Act
+            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            {
+                string active = "m-treeview-node--active";
+                props.Add(treeview => treeview.ActiveClass, active);
+                props.Add(treeview => treeview.ItemKey, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasActiveClassClass = classes.Contains("m-treeview");
+
+            // Assert
+            Assert.IsTrue(hasActiveClassClass);
+        }
+
+        [TestMethod]
+        public void RenderTreeviewWithColor()
+        {
+            //Act
+            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            {
+                string color = "primary";
+                props.Add(treeview => treeview.Color, color);
+                props.Add(treeview => treeview.ItemKey, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasColorClass = classes.Contains("m-treeview");
+
+            // Assert
+            Assert.IsTrue(hasColorClass);
+        }
+
+        [TestMethod]
+        public void RenderTreeviewWithExpandIcon()
+        {
+            //Act
+            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            {
+                string icon = "mdi-menu-down";
+                props.Add(treeview => treeview.ExpandIcon, icon);
+                props.Add(treeview => treeview.ItemKey, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasExpandIconClass = classes.Contains("m-treeview");
+
+            // Assert
+            Assert.IsTrue(hasExpandIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTreeviewWithIndeterminateIcon()
+        {
+            //Act
+            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            {
+                string icon = "mdi-minus-box";
+                props.Add(treeview => treeview.IndeterminateIcon, icon);
+                props.Add(treeview => treeview.ItemKey, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasIndeterminateIconClass = classes.Contains("m-treeview");
+
+            // Assert
+            Assert.IsTrue(hasIndeterminateIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTreeviewWithLoadingIcon()
+        {
+            //Act
+            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            {
+                string icon = "mdi-cached";
+                props.Add(treeview => treeview.LoadingIcon, icon);
+                props.Add(treeview => treeview.ItemKey, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLoadingIconClass = classes.Contains("m-treeview");
+
+            // Assert
+            Assert.IsTrue(hasLoadingIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTreeviewWithOffIcon()
+        {
+            //Act
+            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            {
+                string icon = "mdi-checkbox-blank-outline";
+                props.Add(treeview => treeview.OffIcon, icon);
+                props.Add(treeview => treeview.ItemKey, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOffIconClass = classes.Contains("m-treeview");
+
+            // Assert
+            Assert.IsTrue(hasOffIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTreeviewWithOnIcon()
+        {
+            //Act
+            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            {
+                string icon = "mdi-checkbox-marked";
+                props.Add(treeview => treeview.OnIcon, icon);
+                props.Add(treeview => treeview.ItemKey, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasOnIconClass = classes.Contains("m-treeview");
+
+            // Assert
+            Assert.IsTrue(hasOnIconClass);
+        }
+
+        [TestMethod]
+        public void RenderTreeviewWithSelectedColor()
+        {
+            //Act
+            var cut = RenderComponent<MTreeview<string, string>>(props =>
+            {
+                string color = "accent";
+                props.Add(treeview => treeview.SelectedColor, color);
+                props.Add(treeview => treeview.ItemKey, item => item);
+            });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasSelectedColorClass = classes.Contains("m-treeview");
+
+            // Assert
+            Assert.IsTrue(hasSelectedColorClass);
+        }
     }
 }
