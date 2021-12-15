@@ -155,9 +155,7 @@ namespace MASA.Blazor.Presets
         protected override void OnInitialized()
         {
             if (Visible)
-            {
-                Actions.Register(this);
-            }
+                Actions?.Register(this);
         }
 
         protected override void OnParametersSet()
@@ -165,20 +163,16 @@ namespace MASA.Blazor.Presets
             base.OnParametersSet();
 
             if (Visible)
-            {
-                Actions.Register(this);
-            }
+                Actions?.Register(this);
             else
-            {
-                Actions.Unregister(this);
-            }
+                Actions?.Unregister(this);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
 
-            if (_visibleChanged)
+            if (Actions != default && _visibleChanged)
             {
                 if (ButtonRef.Context == null && ButtonForwardRef != null)
                 {
