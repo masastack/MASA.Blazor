@@ -120,7 +120,14 @@ namespace MASA.Blazor
                         .AddBackgroundColor(Color)
                         .AddTextColor(Color, () => Outlined)
                         .AddTextColor(TextColor);
-                }, styleBuilder => { styleBuilder.AddIf("display:none", () => !Active); })
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddIf("display:none", () => !Active)
+                        .AddBackgroundColor(Color)
+                        .AddTextColor(Color, () => Outlined)
+                        .AddTextColor(Color);
+                })
                 .Apply("content", cssBuilder =>
                 {
                     cssBuilder
