@@ -21,7 +21,7 @@ public partial class DocLayout
         NavigationManager.LocationChanged += OnLocationChanged;
     }
 
-    private async void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    private async void OnLocationChanged(object sender, LocationChangedEventArgs e)
     {
         await ScrollToFragment();
     }

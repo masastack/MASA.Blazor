@@ -39,19 +39,19 @@ namespace MASA.Blazor
         }
 
         [Parameter]
-        public bool Absolute {  get; set; }
+        public bool Absolute { get; set; }
 
         [Parameter]
-        public bool App {  get; set; }
+        public bool App { get; set; }
 
         [Parameter]
         public string Color { get; set; }
 
         [Parameter]
-        public StringNumber Elevation {  get; set; }
+        public StringNumber Elevation { get; set; }
 
         [Parameter]
-        public bool Fixed {  get; set; }
+        public bool Fixed { get; set; }
 
         [Parameter]
         public StringNumber Height { get; set; } = "auto";
@@ -112,20 +112,8 @@ namespace MASA.Blazor
 
             return App && Inset ? GlobalConfig.Application.Right : 0;
         }
-        
+
         protected bool IsPositioned => Absolute || Fixed || App;
-        
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            GlobalConfig.Application.PropertyChanged += Application_PropertyChanged;
-        }
-
-        private void Application_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            InvokeStateHasChanged();
-        }
 
         protected override void SetComponentClass()
         {
@@ -159,24 +147,37 @@ namespace MASA.Blazor
                 });
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override async Task OnParametersSetAsync()
         {
-            if (firstRender)
-            {
-                var _documentElement = await JsInvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, Ref);
-                UpdateApplication(_documentElement?.ClientHeight ?? 0);
-            }
-
-            await base.OnAfterRenderAsync(firstRender);
+            await UpdateApplicationAsync();
         }
 
-        protected void UpdateApplication(double clientHeight)
+        protected async Task UpdateApplicationAsync()
         {
-            var val = Height.ToDouble() > 0 ? Height.ToDouble() : clientHeight;
+            var val = Height.ToDouble() > 0 ? Height.ToDouble() : await GetClientHeightAsync();
             if (Inset)
                 GlobalConfig.Application.InsetFooter = val;
             else
                 GlobalConfig.Application.Footer = val;
+        }
+
+        private async Task<double> GetClientHeightAsync()
+        {
+            var element = await JsInvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, Ref);
+            return element.ClientHeight;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            RemoveApplication();
+        }
+
+        private void RemoveApplication()
+        {
+            if (Inset)
+                GlobalConfig.Application.InsetFooter = 0;
+            else
+                GlobalConfig.Application.Footer = 0;
         }
     }
 }

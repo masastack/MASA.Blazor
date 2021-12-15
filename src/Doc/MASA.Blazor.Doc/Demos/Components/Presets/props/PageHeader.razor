@@ -34,83 +34,69 @@
                 </MSelect>
             </MCol>
             <MCol Cols="6">
-                <MMenu
-                    @bind-Value="visible1"
-                    CloseOnContentClick="false"
-                    OffsetY
-                    MinWidth="290">
+                <MMenu @bind-Value="visible1"
+                       CloseOnContentClick="false"
+                       OffsetY
+                       MinWidth="290">
                     <ActivatorContent>
-                        <MTextField
-                            @bind-Value="start"
-                            Label="Start date"
-                            Outlined
-                            Dense
-                            Readonly
-                            HideDetails="true"
-                            @attributes="@context.Attrs">
+                        <MTextField @bind-Value="start"
+                                    Label="Start date"
+                                    Outlined
+                                    Dense
+                                    Readonly
+                                    HideDetails="true"
+                                    @attributes="@context.Attrs">
                         </MTextField>
                     </ActivatorContent>
                     <ChildContent>
-                        <MDatePicker
-                            @bind-Value="date1"
-                            NoTitle
-                            Scrollable>
-                            <ActionsContent>
-                                <MSpacer></MSpacer>
-                                <MButton
-                                    Text
-                                    Color="primary"
-                                    OnClick="() => visible1 = false">
-                                    Cancel
-                                </MButton>
-                                <MButton
-                                    Text
-                                    Color="primary"
-                                    OnClick="() => { start = date1.ToShortDateString(); visible1 = false; }">
-                                    OK
-                                </MButton>
-                            </ActionsContent>
+                        <MDatePicker @bind-Value="date1"
+                                     NoTitle
+                                     Scrollable>
+                            <MSpacer></MSpacer>
+                            <MButton Text
+                                     Color="primary"
+                                     OnClick="() => visible1 = false">
+                                Cancel
+                            </MButton>
+                            <MButton Text
+                                     Color="primary"
+                                     OnClick="() => { start = date1.ToShortDateString(); visible1 = false; }">
+                                OK
+                            </MButton>
                         </MDatePicker>
                     </ChildContent>
                 </MMenu>
             </MCol>
             <MCol Cols="6">
-                <MMenu
-                    @bind-Value="visible2"
-                    CloseOnContentClick="false"
-                    OffsetY
-                    MinWidth="290">
+                <MMenu @bind-Value="visible2"
+                       CloseOnContentClick="false"
+                       OffsetY
+                       MinWidth="290">
                     <ActivatorContent>
-                        <MTextField
-                            @bind-Value="end"
-                            Label="End date"
-                            Readonly
-                            Outlined
-                            Dense
-                            HideDetails="true"
-                            @attributes="@context.Attrs">
+                        <MTextField @bind-Value="end"
+                                    Label="End date"
+                                    Readonly
+                                    Outlined
+                                    Dense
+                                    HideDetails="true"
+                                    @attributes="@context.Attrs">
                         </MTextField>
                     </ActivatorContent>
                     <ChildContent>
-                        <MDatePicker
-                            @bind-Value="date2"
-                            NoTitle
-                            Scrollable>
-                            <ActionsContent>
-                                <MSpacer></MSpacer>
-                                <MButton
-                                    Text
-                                    Color="primary"
-                                    OnClick="() => visible2 = false">
-                                    Cancel
-                                </MButton>
-                                <MButton
-                                    Text
-                                    Color="primary"
-                                    OnClick="() => { end = date2.ToShortDateString(); visible2 = false; }">
-                                    OK
-                                </MButton>
-                            </ActionsContent>
+                        <MDatePicker @bind-Value="date2"
+                                     NoTitle
+                                     Scrollable>
+                            <MSpacer></MSpacer>
+                            <MButton Text
+                                     Color="primary"
+                                     OnClick="() => visible2 = false">
+                                Cancel
+                            </MButton>
+                            <MButton Text
+                                     Color="primary"
+                                     OnClick="() => { end = date2.ToShortDateString(); visible2 = false; }">
+                                OK
+                            </MButton>
                         </MDatePicker>
                     </ChildContent>
                 </MMenu>
@@ -128,7 +114,6 @@
     bool visible1;
     bool visible2;
 
-    string orderId;
     string user;
     string start;
     string end;
@@ -145,7 +130,6 @@
 
     void OnClear()
     {
-        orderId = null;
         user = null;
         start = null;
         end = null;

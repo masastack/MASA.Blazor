@@ -1,14 +1,14 @@
 ﻿@inherits LayoutComponentBase
 @layout BaseLayout
 
-<MNavigationDrawer DisableResizeWatcher @bind-Value="BaseLayout.Drawer" Floating Fixed Temporary="BaseLayout.Temporary" Width="333" Top="80" Class="doc-nav-left pl-5 pb-6">
+<MNavigationDrawer DisableResizeWatcher @bind-Value="BaseLayout.Drawer" Permanent Floating Fixed Width="333" App Clipped Class="doc-nav-left pl-5 pb-6">
     <ChildContent>
         <NavMenu @key="NavigationManager.Uri"></NavMenu>
         <div class="pt-12"></div>
     </ChildContent>
 </MNavigationDrawer>
 
-<MMain Class="mainlayout-m-main" Style="padding:0; margin: 80px 329px 0 333px; background:#fff;">
+<MMain Class="mainlayout-m-main" Style="background:#fff;">
     <MContainer Class="pa-4 pa-sm-6 pa-md-8" Fluid>
         <ErrorBoundary @ref="_errorBoundary">
             <ChildContent>
@@ -21,7 +21,7 @@
     </MContainer>
 </MMain>
 
-<MNavigationDrawer Clipped Fixed Floating Right Top="80" Width="329" Height="@("100vh")" Class="doc-nav-right default-toc py-4" Style="max-height: calc(100% - 80px);">
+<MNavigationDrawer Clipped Fixed Floating Right App Width="329" Value Height="@("100vh")" Class="doc-nav-right default-toc py-4" Style="max-height: calc(100% - 80px);">
     <PrependContent>
         <div class="mb-2 text-h6 font-weight-medium text--primary ml-6" path="contents">目录</div>
     </PrependContent>
@@ -30,7 +30,7 @@
         <div class="pt-4 pb-3 ml-6">
             <div class="ml-2 mb-3 text-caption font-weight-regular text--secondary" path="premiere-sponsors">高级赞助商</div>
             <MCard Tag="a" Ripple="false" Tile Class="d-inline-block px-2 py-1 transparent" Flat Link Style="box-shadow:none!important">
-                <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/lsd-logo.png"/>
+                <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/lsd-logo.png" />
             </MCard>
         </div>
     </ChildContent>

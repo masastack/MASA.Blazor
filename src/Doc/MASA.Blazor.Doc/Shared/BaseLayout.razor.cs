@@ -16,9 +16,6 @@ namespace MASA.Blazor.Doc.Shared
 {
     public partial class BaseLayout : IDisposable
     {
-        [Parameter]
-        public bool IsChinese { get; set; }
-
         private string _searchBorderColor = "#00000000";
         private string _languageIcon;
         private bool _isShowMiniLogo = true;
@@ -37,10 +34,10 @@ namespace MASA.Blazor.Doc.Shared
         [Inject]
         public GlobalConfigs GlobalConfig { get; set; }
 
-        [Parameter]
+        public bool IsChinese { get; set; }
+
         public bool Drawer { get; set; } = true;
 
-        [Parameter]
         public bool Temporary { get; set; } = true;
 
         public void UpdateNav(bool drawer, bool temporary = true)
