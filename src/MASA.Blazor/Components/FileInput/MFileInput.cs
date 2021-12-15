@@ -25,9 +25,6 @@ namespace MASA.Blazor
         [Parameter]
         public RenderFragment<(int index, string text)> SelectionContent { get; set; }
 
-        [Inject]
-        public Document Document { get; set; }
-
         [Parameter]
         public bool Multiple { get; set; }
 
