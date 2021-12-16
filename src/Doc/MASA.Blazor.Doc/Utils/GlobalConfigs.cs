@@ -20,6 +20,7 @@ namespace MASA.Blazor.Doc.Utils
         public static string LanguageCookieKey { get; set; } = "GlobalConfigs_Language";
 
         public static string StaticLanguage { get; set; }
+
         public string Language { get; set; }
 
         public void Initialize(IRequestCookieCollection cookies)

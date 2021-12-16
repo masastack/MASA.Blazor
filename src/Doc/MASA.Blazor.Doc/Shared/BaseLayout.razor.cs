@@ -91,7 +91,7 @@ namespace MASA.Blazor.Doc.Shared
                 _isShowMiniLogo = false;
 
             if (e.Location.Contains("meet-the-team"))
-                SelectTab = 3;
+                SelectTab = 2;
 
             StateHasChanged();
         }
