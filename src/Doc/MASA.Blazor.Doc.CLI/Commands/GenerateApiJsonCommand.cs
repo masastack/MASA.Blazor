@@ -25,7 +25,7 @@ namespace MASA.Blazor.Doc.CLI.Commands
             { "BreadcrumbsDivider", new string[] { "Breadcrumbs" } },
             { "BreadcrumbsItem", new string[] { "Breadcrumbs" } },
             { "Button", new string[] { "Buttons", "Button Groups" } },
-            { "ButtonGroup", new string[] { "Button groups" } },
+            { "ButtonGroup", new string[] { "Button groups", "Buttons" } },
             { "Calendar", new string[] { "Calendars" } },
             { "CalendarDaily", new string[] { "Calendars" } },
             { "CalendarMonthly", new string[] { "Calendars" } },
@@ -174,8 +174,8 @@ namespace MASA.Blazor.Doc.CLI.Commands
                 "assembly Path", "[Required] The Path of assembly file.");
 
             var outputArgument = command.Argument(
-                "output", "[Required] The directory where the json file to output");        
-          
+                "output", "[Required] The directory where the json file to output");
+
             command.OnExecute(() =>
             {
                 string assemblyPath = assemblyDirArgument.Value;
@@ -191,13 +191,13 @@ namespace MASA.Blazor.Doc.CLI.Commands
                 {
                     output = "./";
                 }
-                GenerateApiFiles(output,new[] { "zh-CN", "en-US" });
+                GenerateApiFiles(output, new[] { "zh-CN", "en-US" });
 
                 return 0;
-            });         
+            });
         }
 
-        void GenerateApiFiles(string output,string[] languages)
+        void GenerateApiFiles(string output, string[] languages)
         {
             var assembly = typeof(MApp).Assembly;//Assembly.LoadFile(assemblyPath);
             var componentBaseType = typeof(ComponentBase);
@@ -283,14 +283,14 @@ namespace MASA.Blazor.Doc.CLI.Commands
 
                     foreach (var prop in api.Props)
                     {
-                        if(propDescriptionMap.ContainsKey(prop.Name))
+                        if (propDescriptionMap.ContainsKey(prop.Name))
                         {
                             prop.Description = propDescriptionMap[prop.Name];
                         }
                     }
                     foreach (var content in api.Contents)
                     {
-                        if(contentDescriptionMap.ContainsKey(content.Name))
+                        if (contentDescriptionMap.ContainsKey(content.Name))
                         {
                             content.Description = contentDescriptionMap[content.Name];
                         }

@@ -16,3 +16,4 @@ related:
 ## API
 
 - [MSlider](/api/MSlider)
+- [MRangeSlider](/api/MRangeSlider)

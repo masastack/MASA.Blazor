@@ -13,7 +13,7 @@ namespace MASA.Blazor.Doc.Pages
     {
         // TODO: i18n {zh-CN}
         private static string _githubUrlTemplate =
-            "https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Doc/MASA.Blazor.Doc/Demos/Components/{0}/doc/index.zh-CN.md";
+            "https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Doc/MASA.Blazor.Doc/Demos/Components";
 
         private DemoComponentModel _demoComponent;
         private int _demoIndex;
@@ -68,8 +68,7 @@ namespace MASA.Blazor.Doc.Pages
             ContentsList = demos.Where(demo => demo.Group == DemoGroup.Contents).ToList();
             MiscList = demos.Where(demo => demo.Group == DemoGroup.Misc).ToList();
 
-            GithubUrlHref = string.Format(_githubUrlTemplate, _demoComponent.Type);
-
+            GithubUrlHref = _githubUrlTemplate;
             _demoIndex = 0;
         }
 

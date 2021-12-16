@@ -6,7 +6,7 @@ title: Snackbars
 cols: 1
 related:
   - /components/buttons
-  - /styles/colors
+  - /stylesandanimations/colors
   - /components/forms
 ---
 

@@ -16,3 +16,4 @@ related:
 ## API
 
 - [MDataIterator](/api/MDataIterator)
+- [MDataFooter](/api/MDataFooter)

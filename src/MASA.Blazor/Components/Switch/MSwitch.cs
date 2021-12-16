@@ -29,6 +29,33 @@ namespace MASA.Blazor
         [Parameter]
         public string TrackColor { get; set; }
 
+        // according to spec, should still show
+        // a color when disabled and active
+        public override string ValidationState
+        {
+            get
+            {
+                if (HasError && ShouldValidate)
+                {
+                    return "error";
+                }
+
+                if (HasSuccess)
+                {
+                    return "success";
+                }
+
+                if (HasColor)
+                {
+                    return ComputedColor;
+                }
+
+                return "";
+            }
+        }
+
+        public override string ComputedColor => Color ?? (IsDark ? "white" : "primary");
+
         public override bool IsDirty => Value;
 
         public Dictionary<string, object> InputAttrs { get; set; } = new();

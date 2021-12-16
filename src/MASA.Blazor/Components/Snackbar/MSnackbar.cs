@@ -86,6 +86,13 @@ namespace MASA.Blazor
         {
             get
             {
+                // Snackbar is dark by default
+                // override themeable logic.
+                if (HasBackground)
+                {
+                    return !Light;
+                }
+
                 if (Dark)
                 {
                     return true;
@@ -122,6 +129,14 @@ namespace MASA.Blazor
 
         [Parameter]
         public RenderFragment ActionContent { get; set; }
+
+        protected bool HasBackground
+        {
+            get
+            {
+                return !Text && !Outlined;
+            }
+        }
 
         protected override void OnParametersSet()
         {
