@@ -138,33 +138,33 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyRatingDefault()
-                .Apply<BIcon, MIcon>(props =>
+                .Apply<BIcon, MIcon>(attrs =>
                 {
-                    var itemIndex = props.Index;
+                    var itemIndex = attrs.Index;
                     var ratingItem = CreateProps(itemIndex);
 
-                    props[nameof(MIcon.Size)] = Size;
-                    props[nameof(MIcon.Icon)] = true;
-                    props[nameof(MIcon.Small)] = Small;
-                    props[nameof(MIcon.XLarge)] = XLarge;
-                    props[nameof(MIcon.Large)] = Large;
-                    props[nameof(MIcon.XSmall)] = XSmall;
-                    props[nameof(MIcon.Dark)] = Dark;
-                    props[nameof(MIcon.Light)] = Light;
-                    props[nameof(MIcon.Color)] = GetColor(ratingItem);
-                    props[nameof(MIcon.Tag)] = "button";
-                    props["ripple"] = true;
+                    attrs[nameof(MIcon.Size)] = Size;
+                    attrs[nameof(MIcon.Icon)] = true;
+                    attrs[nameof(MIcon.Small)] = Small;
+                    attrs[nameof(MIcon.XLarge)] = XLarge;
+                    attrs[nameof(MIcon.Large)] = Large;
+                    attrs[nameof(MIcon.XSmall)] = XSmall;
+                    attrs[nameof(MIcon.Dark)] = Dark;
+                    attrs[nameof(MIcon.Light)] = Light;
+                    attrs[nameof(MIcon.Color)] = GetColor(ratingItem);
+                    attrs[nameof(MIcon.Tag)] = "button";
+                    attrs["ripple"] = true;
                     if (IconLabel != null)
                     {
-                        props["aria-label"] = string.Format(IconLabel, itemIndex, Length);
+                        attrs["aria-label"] = string.Format(IconLabel, itemIndex, Length);
                     }
 
-                    props["onexclick"] = EventCallback.Factory.Create(this, ratingItem.Click);
-                    props["onexmouseenter"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
+                    attrs["onexclick"] = EventCallback.Factory.Create(this, ratingItem.Click);
+                    attrs["onexmouseenter"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
                         async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseEnter));
-                    props["onexmouseleave"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
+                    attrs["onexmouseleave"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
                         async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseLeave));
-                    props["onexmousemove"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
+                    attrs["onexmousemove"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
                         async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseMove));
                 });
         }

@@ -11,6 +11,8 @@ namespace MASA.Blazor
 {
     public class MRangeSlider<TValue> : MSlider<IList<TValue>>, IRangeSlider<TValue>
     {
+        private IList<TValue> _lazyValue;
+
         [Parameter]
         public override IList<TValue> Value
         {
@@ -195,9 +197,23 @@ namespace MASA.Blazor
         {
             base.OnInitialized();
 
-            InternalValue = Value;
-        }
+            Watcher
+                .Watch<IList<TValue>>(nameof(Value), val =>
+                {
+                    if (!ListComparer.Equals(val, _lazyValue))
+                    {
+                        _lazyValue = val;
+                        DoubleInteralValues = val.Select(val => Convert.ToDouble(val)).ToList();
+                    }
+                });
 
+            //So watcher should before Initialized
+            if (!ListComparer.Equals(Value, _lazyValue))
+            {
+                _lazyValue = Value;
+                DoubleInteralValues = Value.Select(val => Convert.ToDouble(val)).ToList();
+            }
+        }
         protected override void CheckTValue()
         {
             if (typeof(TValue) != typeof(double))

@@ -11,12 +11,6 @@
       "Description": "应用 position: absolute 样式到组件."
     },
     {
-      "Name": "ActiveClass",
-      "Type": "String",
-      "Default": "null",
-      "Description": ""
-    },
-    {
       "Name": "Block",
       "Type": "Boolean",
       "Default": "false",
@@ -98,12 +92,6 @@
       "Name": "Id",
       "Type": "String",
       "Default": "null",
-      "Description": ""
-    },
-    {
-      "Name": "IsActive",
-      "Type": "Boolean",
-      "Default": "false",
       "Description": ""
     },
     {
@@ -247,12 +235,6 @@
     {
       "Name": "Type",
       "Type": "String",
-      "Default": "null",
-      "Description": ""
-    },
-    {
-      "Name": "Value",
-      "Type": "StringNumber",
       "Default": "null",
       "Description": ""
     },

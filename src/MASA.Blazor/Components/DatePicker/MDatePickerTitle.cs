@@ -120,9 +120,9 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyDatePickerTitleDefault()
-                .Apply<BIcon, MIcon>(props =>
+                .Apply<BIcon, MIcon>(attrs =>
                 {
-                    props[nameof(MIcon.Dark)] = true;
+                    attrs[nameof(MIcon.Dark)] = true;
                 });
         }
     }

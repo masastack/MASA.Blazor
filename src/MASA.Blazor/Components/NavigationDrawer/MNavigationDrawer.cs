@@ -177,17 +177,23 @@ namespace MASA.Blazor
 
         protected bool IsBottom => Bottom && IsMobile;
 
-        protected override void OnInitialized()
+        protected StringNumber ComputedTop
         {
-            base.OnInitialized();
+            get
+            {
+                if (!HasApp)
+                {
+                    return 0;
+                }
 
-            GlobalConfig.Application.PropertyChanged += Application_PropertyChanged;
+                var computedTop = GlobalConfig.Application.Bar;
+                computedTop += Clipped ? GlobalConfig.Application.Top : 0;
+
+                return computedTop;
+            }
         }
 
-        private void Application_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            InvokeStateHasChanged();
-        }
+        protected int ZIndex { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -218,7 +224,7 @@ namespace MASA.Blazor
                     var translate = IsBottom ? "translateY" : "translateX";
                     styleBuilder
                         .AddHeight(Height)
-                        .Add($"top:{(!IsBottom ? Top.ToUnit() : "auto")}")
+                        .Add(() => $"top:{(!IsBottom ? ComputedTop.ToUnit() : "auto")}")
                         .AddIf(() => $"max-height:calc(100% - {ComputedMaxHeight.ToUnit()})", () => ComputedMaxHeight != null)
                         .AddIf(() => $"transform:{translate}({Transform}%)", () => Transform != null)
                         .Add($"width:{(IsMiniVariant ? MiniVariantWidth.ToUnit() : Width.ToUnit())}")
@@ -254,49 +260,32 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyNavigationDrawerDefault()
-                .Apply(typeof(IImage), typeof(MImage), props =>
+                .Apply(typeof(IImage), typeof(MImage), attrs =>
                 {
-                    props[nameof(MImage.Src)] = Src;
-                    props[nameof(MImage.Height)] = (StringNumber)"100%";
-                    props[nameof(MImage.Width)] = (StringNumber)"100%";
-                    props[nameof(MImage.Dark)] = Dark;
-                    props[nameof(MImage.Light)] = Light;
+                    attrs[nameof(MImage.Src)] = Src;
+                    attrs[nameof(MImage.Height)] = (StringNumber)"100%";
+                    attrs[nameof(MImage.Width)] = (StringNumber)"100%";
+                    attrs[nameof(MImage.Dark)] = Dark;
+                    attrs[nameof(MImage.Light)] = Light;
                 })
-                .Apply<BOverlay, MOverlay>(props =>
+                .Apply<BOverlay, MOverlay>(attrs =>
                 {
-                    props[nameof(MOverlay.ZIndex)] = ZIndex;
-                    props[nameof(MOverlay.Absolute)] = !Fixed;
-                    props[nameof(MOverlay.Value)] = InternalShowOverlay;
+                    attrs[nameof(MOverlay.ZIndex)] = ZIndex;
+                    attrs[nameof(MOverlay.Absolute)] = !Fixed;
+                    attrs[nameof(MOverlay.Value)] = InternalShowOverlay;
                 });
         }
-        
-        protected int ZIndex { get; set; }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override async Task OnParametersSetAsync()
         {
-            await base.OnAfterRenderAsync(firstRender);
-            
-            if (firstRender)
-            {
-                Element = await JsInvokeAsync<BlazorComponent.Web.Element>(
-                    JsInteropConstants.GetDomInfo, Ref);
-                UpdateApplication(Element);
-
-                await InvokeStateHasChangedAsync();
-            }
-
-            if (_valueChangedToTrue)
-            {
-                ZIndex = await ActiveZIndex();
-                _valueChangedToTrue = false;
-            }
+            await UpdateApplicationAsync();
         }
 
-        protected void UpdateApplication(BlazorComponent.Web.Element element)
+        protected async Task UpdateApplicationAsync()
         {
-            var val = (!IsActive || IsMobile || Temporary || element == null)
+            var val = (!IsActive || IsMobile || Temporary)
                 ? 0
-                : (ComputedWidth().ToDouble() <= 0 ? element.ClientWidth : ComputedWidth().ToDouble());
+                : (ComputedWidth().ToDouble() <= 0 ? await GetClientWidthAsync() : ComputedWidth().ToDouble());
 
             if (Right)
                 GlobalConfig.Application.Right = val;
@@ -304,6 +293,23 @@ namespace MASA.Blazor
                 GlobalConfig.Application.Left = val;
         }
 
+        private async Task<double> GetClientWidthAsync()
+        {
+            var element = await JsInvokeAsync<BlazorComponent.Web.Element>(
+                   JsInteropConstants.GetDomInfo, Ref);
+            return element.ClientWidth;
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (_valueChangedToTrue)
+            {
+                ZIndex = await ActiveZIndex();
+                _valueChangedToTrue = false;
+            }
+        }
 
         protected StringNumber ComputedWidth() => IsMiniVariant ? MiniVariantWidth : Width;
 
@@ -330,13 +336,21 @@ namespace MASA.Blazor
                 MiniVariant = false;
                 await MiniVariantChanged.InvokeAsync(_miniVariant);
             }
-
-            Element = await JsInvokeAsync<BlazorComponent.Web.Element>(
-                JsInteropConstants.GetDomInfo, Ref);
-
-            UpdateApplication(Element);
         }
 
         private Task<int> ActiveZIndex() => JsInvokeAsync<int>(JsInteropConstants.GetZIndex, Ref);
+
+        protected override void Dispose(bool disposing)
+        {
+            RemoveApplication();
+        }
+
+        private void RemoveApplication()
+        {
+            if (Right)
+                GlobalConfig.Application.Right = 0;
+            else
+                GlobalConfig.Application.Left = 0;
+        }
     }
 }

@@ -369,7 +369,11 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CssProvider
-                .Apply("m-picker--time")
+                .Apply(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-picker--time");
+                })
                 .Apply("container", cssBuilder =>
                 {
                     cssBuilder
@@ -402,35 +406,35 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyTimePickerDefault()
-                .Apply(typeof(BPicker), typeof(MPicker), props =>
+                .Apply(typeof(BPicker), typeof(MPicker), attrs =>
                 {
-                    props[nameof(MPicker.Color)] = HeaderColor ?? Color;
-                    props[nameof(MPicker.Dark)] = Dark;
-                    props[nameof(MPicker.Elevation)] = Elevation;
-                    props[nameof(MPicker.Flat)] = Flat;
-                    props[nameof(MPicker.FullWidth)] = FullWidth;
-                    props[nameof(MPicker.Landscape)] = Landscape;
-                    props[nameof(MPicker.Light)] = Light;
-                    props[nameof(MPicker.Width)] = Width;
-                    props[nameof(MPicker.NoTitle)] = NoTitle;
+                    attrs[nameof(MPicker.Color)] = HeaderColor ?? Color;
+                    attrs[nameof(MPicker.Dark)] = Dark;
+                    attrs[nameof(MPicker.Elevation)] = Elevation;
+                    attrs[nameof(MPicker.Flat)] = Flat;
+                    attrs[nameof(MPicker.FullWidth)] = FullWidth;
+                    attrs[nameof(MPicker.Landscape)] = Landscape;
+                    attrs[nameof(MPicker.Light)] = Light;
+                    attrs[nameof(MPicker.Width)] = Width;
+                    attrs[nameof(MPicker.NoTitle)] = NoTitle;
                 })
-                .Apply(typeof(BTimePickerTitle), typeof(MTimePickerTitle), props =>
+                .Apply(typeof(BTimePickerTitle), typeof(MTimePickerTitle), attrs =>
                 {
-                    props[nameof(MTimePickerTitle.AmPm)] = IsAmPm;
-                    props[nameof(MTimePickerTitle.AmPmReadonly)] = IsAmPm && !AmPmInTitle;
-                    props[nameof(MTimePickerTitle.Disabled)] = Disabled;
-                    props[nameof(MTimePickerTitle.Hour)] = InputHour;
-                    props[nameof(MTimePickerTitle.Minute)] = InputMinute;
-                    props[nameof(MTimePickerTitle.Second)] = InputSecond;
-                    props[nameof(MTimePickerTitle.Period)] = Period;
-                    props[nameof(MTimePickerTitle.Readonly)] = Readonly;
-                    props[nameof(MTimePickerTitle.UseSeconds)] = UseSeconds;
-                    props[nameof(MTimePickerTitle.Selecting)] = Selecting;
-                    props[nameof(MTimePickerTitle.OnSelectingUpdate)] = CreateEventCallback<SelectingTimes>(value =>
+                    attrs[nameof(MTimePickerTitle.AmPm)] = IsAmPm;
+                    attrs[nameof(MTimePickerTitle.AmPmReadonly)] = IsAmPm && !AmPmInTitle;
+                    attrs[nameof(MTimePickerTitle.Disabled)] = Disabled;
+                    attrs[nameof(MTimePickerTitle.Hour)] = InputHour;
+                    attrs[nameof(MTimePickerTitle.Minute)] = InputMinute;
+                    attrs[nameof(MTimePickerTitle.Second)] = InputSecond;
+                    attrs[nameof(MTimePickerTitle.Period)] = Period;
+                    attrs[nameof(MTimePickerTitle.Readonly)] = Readonly;
+                    attrs[nameof(MTimePickerTitle.UseSeconds)] = UseSeconds;
+                    attrs[nameof(MTimePickerTitle.Selecting)] = Selecting;
+                    attrs[nameof(MTimePickerTitle.OnSelectingUpdate)] = CreateEventCallback<SelectingTimes>(value =>
                     {
                         Selecting = value;
                     });
-                    props[nameof(MTimePickerTitle.OnPeriodUpdate)] = CreateEventCallback<TimePeriod>(async value =>
+                    attrs[nameof(MTimePickerTitle.OnPeriodUpdate)] = CreateEventCallback<TimePeriod>(async value =>
                     {
                         await SetPeriodAsync(value);
 
@@ -440,24 +444,24 @@ namespace MASA.Blazor
                         }
                     });
                 })
-                .Apply(typeof(BTimePickerClock), typeof(MTimePickerClock), props =>
+                .Apply(typeof(BTimePickerClock), typeof(MTimePickerClock), attrs =>
                 {
-                    props[nameof(MTimePickerClock.AllowedValues)] = Selecting == SelectingTimes.Hour ? IsAllowedHourCb : (Selecting == SelectingTimes.Minute ? IsAllowedMinuteCb : IsAllowedSecondCb);
-                    props[nameof(MTimePickerClock.Color)] = Color;
-                    props[nameof(MTimePickerClock.Dark)] = Dark;
-                    props[nameof(MTimePickerClock.Disabled)] = Disabled;
-                    props[nameof(MTimePickerClock.Double)] = Selecting == SelectingTimes.Hour && !IsAmPm;
+                    attrs[nameof(MTimePickerClock.AllowedValues)] = Selecting == SelectingTimes.Hour ? IsAllowedHourCb : (Selecting == SelectingTimes.Minute ? IsAllowedMinuteCb : IsAllowedSecondCb);
+                    attrs[nameof(MTimePickerClock.Color)] = Color;
+                    attrs[nameof(MTimePickerClock.Dark)] = Dark;
+                    attrs[nameof(MTimePickerClock.Disabled)] = Disabled;
+                    attrs[nameof(MTimePickerClock.Double)] = Selecting == SelectingTimes.Hour && !IsAmPm;
                     Func<int, string> format = Selecting == SelectingTimes.Hour ? (IsAmPm ? Convert24To12 : val => $"{val}") : val => Pad(val);
-                    props[nameof(MTimePickerClock.Format)] = format;
-                    props[nameof(MTimePickerClock.Light)] = Light;
-                    props[nameof(MTimePickerClock.Max)] = Selecting == SelectingTimes.Hour ? (IsAmPm && Period == TimePeriod.Am ? 11 : 23) : 59;
-                    props[nameof(MTimePickerClock.Min)] = Selecting == SelectingTimes.Hour && IsAmPm && Period == TimePeriod.Pm ? 12 : 0;
-                    props[nameof(MTimePickerClock.Readonly)] = Readonly;
-                    props[nameof(MTimePickerClock.Scrollable)] = Scrollable;
-                    props[nameof(MTimePickerClock.Step)] = Selecting == SelectingTimes.Hour ? 1 : 5;
-                    props[nameof(MTimePickerClock.Value)] = Selecting == SelectingTimes.Hour ? InputHour : (Selecting == SelectingTimes.Minute ? InputMinute : InputSecond);
-                    props[nameof(MTimePickerClock.OnInput)] = CreateEventCallback<int>(HandleOnInputAsync);
-                    props[nameof(MTimePickerClock.OnChange)] = CreateEventCallback<int>(HandleOnChangeAsync);
+                    attrs[nameof(MTimePickerClock.Format)] = format;
+                    attrs[nameof(MTimePickerClock.Light)] = Light;
+                    attrs[nameof(MTimePickerClock.Max)] = Selecting == SelectingTimes.Hour ? (IsAmPm && Period == TimePeriod.Am ? 11 : 23) : 59;
+                    attrs[nameof(MTimePickerClock.Min)] = Selecting == SelectingTimes.Hour && IsAmPm && Period == TimePeriod.Pm ? 12 : 0;
+                    attrs[nameof(MTimePickerClock.Readonly)] = Readonly;
+                    attrs[nameof(MTimePickerClock.Scrollable)] = Scrollable;
+                    attrs[nameof(MTimePickerClock.Step)] = Selecting == SelectingTimes.Hour ? 1 : 5;
+                    attrs[nameof(MTimePickerClock.Value)] = Selecting == SelectingTimes.Hour ? InputHour : (Selecting == SelectingTimes.Minute ? InputMinute : InputSecond);
+                    attrs[nameof(MTimePickerClock.OnInput)] = CreateEventCallback<int>(HandleOnInputAsync);
+                    attrs[nameof(MTimePickerClock.OnChange)] = CreateEventCallback<int>(HandleOnChangeAsync);
                 });
         }
     }

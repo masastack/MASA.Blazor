@@ -22,9 +22,6 @@ namespace MASA.Blazor
         public StringNumber Elevation { get; set; }
 
         [Parameter]
-        public RenderFragment ChildContent { get; set; }
-
-        [Parameter]
         public string Color { get; set; }
 
         [Parameter]

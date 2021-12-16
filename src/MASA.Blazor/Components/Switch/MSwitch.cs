@@ -127,7 +127,7 @@ namespace MASA.Blazor
                 .Apply(typeof(BSwitchSwitch<>), typeof(BSwitchSwitch<MSwitch>))
                 .Apply(typeof(BSelectableInput<>), typeof(BSelectableInput<MSwitch>))
                 .Apply(typeof(BRippleableRipple<>), typeof(BRippleableRipple<MSwitch>))
-                .Apply<BProgressCircular, MProgressCircular>(props =>
+                .Apply<BProgressCircular, MProgressCircular>(attrs =>
                 {
                     if (!IsLoading) return;
 
@@ -143,10 +143,10 @@ namespace MASA.Blazor
                         color = Color ?? "primary";
                     }
 
-                    props[nameof(MProgressCircular.Color)] = color;
-                    props[nameof(MProgressCircular.Indeterminate)] = true;
-                    props[nameof(MProgressCircular.Size)] = (StringNumber)16;
-                    props[nameof(MProgressCircular.Width)] = (StringNumber)2;
+                    attrs[nameof(MProgressCircular.Color)] = color;
+                    attrs[nameof(MProgressCircular.Indeterminate)] = true;
+                    attrs[nameof(MProgressCircular.Size)] = (StringNumber)16;
+                    attrs[nameof(MProgressCircular.Width)] = (StringNumber)2;
                 })
                 .Apply(typeof(BSwitchProgress<>), typeof(BSwitchProgress<MSwitch>));
         }

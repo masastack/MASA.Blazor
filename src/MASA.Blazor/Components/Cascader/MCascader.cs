@@ -21,6 +21,10 @@ namespace MASA.Blazor
         [Parameter]
         public override bool Outlined { get; set; } = true;
 
+        public TItem LoadingItem { get; private set; }
+
+        public Dictionary<int, List<TItem>> ChildrenItems { get; } = new Dictionary<int, List<TItem>>();
+
         protected override List<string> FormatText(TValue value)
         {
             return new List<string> { string.Join(" / ", GetItemByValue(Items, value, ShowAllLevels).Select(ItemText)) };
@@ -49,21 +53,44 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Merge<BMenu, MCascaderMenu>(props =>
+                .Merge<BMenu, MCascaderMenu>(attrs =>
                 {
-                    props[nameof(MCascaderMenu.OffsetY)] = true;
-                    props[nameof(MCascaderMenu.MinWidth)] = (StringNumber)(Dense ? 120 : 180);
-                    props[nameof(MCascaderMenu.CloseOnContentClick)] = false;
-                    props[nameof(MCascaderMenu.ContentStyle)] = "display:flex";
+                    attrs[nameof(MCascaderMenu.OffsetY)] = true;
+                    attrs[nameof(MCascaderMenu.MinWidth)] = (StringNumber)(Dense ? 120 : 180);
+                    attrs[nameof(MCascaderMenu.CloseOnContentClick)] = false;
+                    attrs[nameof(MCascaderMenu.ContentStyle)] = "display:flex";
                 })
                 .Apply<BList, MList>()
-                .Apply<BItemGroup, MListItemGroup>(props =>
+                .Apply<BItemGroup, MListItemGroup>(attrs =>
                 {
-                    props[nameof(MListItemGroup.Color)] = "primary";
+                    attrs[nameof(MListItemGroup.Color)] = "primary";
                 })
                 .Merge(typeof(BSelectList<,,>), typeof(MCascaderSelectList<TItem, TValue>))
                 .Merge(typeof(BSelectMenu<,,,>), typeof(BCascaderMenu<TItem, TValue, MCascader<TItem, TValue>>))
                 .Apply(typeof(BCascaderMenuBody<,,>), typeof(BCascaderMenuBody<TItem, TValue, MCascader<TItem, TValue>>));
+        }
+
+        public async Task HandleOnItemClickAsync(TItem item, int level)
+        {
+            var children = ItemChildren(item);
+
+            if (LoadChildren != null && children != null && children.Count == 0)
+            {
+                LoadingItem = item;
+                await LoadChildren(item);
+                LoadingItem = default;
+
+                children = ItemChildren(item);
+            }
+
+            if (children != null && children.Count > 0)
+            {
+                ChildrenItems[level] = children;
+            }
+            else
+            {
+                ChildrenItems.Remove(level);
+            }
         }
 
         private List<TItem> GetItemByValue(IEnumerable<TItem> items, TValue value, bool isFull)

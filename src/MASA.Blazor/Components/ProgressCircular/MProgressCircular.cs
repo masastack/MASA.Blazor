@@ -23,12 +23,12 @@ namespace MASA.Blazor
 
         public string StrokeDashOffset => $"{(100 - NormalizedValue) / 100 * Circumference}px";
 
-        public Dictionary<string, object> SvgAttributes => new()
+        public Dictionary<string, object> SvgAttrs => new()
         {
             { "viewBox", $"{ViewBoxSize} {ViewBoxSize} {ViewBoxSize * 2} {ViewBoxSize * 2}" }
         };
 
-        public Dictionary<string, object> CircleAttributes => new()
+        public Dictionary<string, object> CircleAttrs => new()
         {
             { "fill", "transparent" },
             { "cx", $"{ViewBoxSize * 2}" },

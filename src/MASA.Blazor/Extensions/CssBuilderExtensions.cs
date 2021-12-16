@@ -168,7 +168,7 @@ namespace BlazorComponent
 
         public static CssBuilder AddTheme(this CssBuilder cssBuilder, MASA.Blazor.IThemeable themeable)
         {
-            if(themeable.Dark)
+            if (themeable.Dark)
             {
                 cssBuilder.Add("theme--dark");
             }
@@ -179,7 +179,7 @@ namespace BlazorComponent
 
         public static CssBuilder AddElevatable(this CssBuilder cssBuilder, IElevatable elevatable)
         {
-            if(elevatable.Elevation is not null && int.TryParse(elevatable.Elevation.ToString(), out var number))
+            if (elevatable.Elevation is not null && int.TryParse(elevatable.Elevation.ToString(), out var number))
             {
                 cssBuilder.Add($"elevation-{number}");
             }
@@ -209,8 +209,7 @@ namespace BlazorComponent
                 }
             }
 
-            return cssBuilder;      
+            return cssBuilder;
         }
-
     }
 }

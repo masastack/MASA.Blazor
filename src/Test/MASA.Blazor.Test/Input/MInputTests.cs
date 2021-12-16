@@ -89,7 +89,75 @@ namespace MASA.Blazor.Test.Input
         [TestMethod]
         public void RenderInputNoWithWithLight()
         {
-            //Act
+            // Act
+            var cut = RenderComponent<TestInput>(props =>
+            {
+                props.Add(r => r.MockValidationState, "error");
+            });
+            var abstractProvider = cut.Instance.AbstractProvider;
+            var label = abstractProvider.GetMetadata<BLabel>();
+
+            // Assert
+            Assert.AreEqual("error", cut.Instance.ValidationState);
+            Assert.IsTrue(label.Attributes.ContainsKey("Color"));
+            Assert.AreEqual("error", label.Attributes["Color"]);
+        }
+
+        [DataTestMethod]
+        [DataRow("")]
+        [DataRow("red")]
+        [DataRow("blue")]
+        [DataRow("#fff")]
+        public void RenderColorComputedColorShouldBeColor(string color)
+        {
+            // Act
+            var cut = RenderComponent<TestInput>(props =>
+            {
+                props.Add(r => r.Color, color);
+            });
+
+            // Assert
+            Assert.AreEqual(color, cut.Instance.ComputedColor);
+        }
+
+        [TestMethod]
+        public void RenderComputedColorShouldBePrimary()
+        {
+            // Act
+            var cut = RenderComponent<TestInput>();
+
+            // Assert
+            Assert.AreEqual("primary", cut.Instance.ComputedColor);
+        }
+
+        [TestMethod]
+        public void RenderIsDarkComputedColorShouldBeWhite()
+        {
+            // Act
+            var cut = RenderComponent<TestInput>(props =>
+            {
+                props.Add(r => r.MockIsDark, true);
+            });
+
+            // Assert
+            Assert.IsTrue(cut.Instance.IsDark);
+            Assert.AreEqual("white", cut.Instance.ComputedColor);
+        }
+
+        [TestMethod]
+        public void RenderIsDarkShouldBeFalse()
+        {
+            // Act
+            var cut = RenderComponent<MInput<string>>();
+
+            // Assert
+            Assert.IsFalse(cut.Instance.IsDark);
+        }
+
+        [TestMethod]
+        public void RenderDarkIsDarkShouldBeTrue()
+        {
+            // Act
             var cut = RenderComponent<MInput<string>>(props =>
             {
                 props.Add(input => input.Light, false);

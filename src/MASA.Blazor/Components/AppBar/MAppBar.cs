@@ -16,8 +16,6 @@ namespace MASA.Blazor
 {
     public partial class MAppBar : MToolbar, IScrollable, IThemeable, IAsyncDisposable
     {
-        private bool _isScrollingUp;
-        private bool _isActive;
         private Scroller _scroller;
 
         [Parameter]
@@ -99,13 +97,6 @@ namespace MASA.Blazor
             {
                 _scroller.IsActive = false;
             }
-
-            GlobalConfig.Application.PropertyChanged += Application_PropertyChanged;
-        }
-
-        private void Application_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            InvokeStateHasChanged();
         }
 
         protected override void SetComponentClass()
@@ -157,6 +148,7 @@ namespace MASA.Blazor
             base.OnParametersSet();
 
             _scroller.ScrollThreshold = ScrollThreshold;
+            UpdateApplication();
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -169,8 +161,6 @@ namespace MASA.Blazor
 
                     await _scroller.OnScroll(ThresholdMet);
                 }), false);
-
-                UpdateApplication();
             }
 
             await base.OnAfterRenderAsync(firstRender);
@@ -362,8 +352,17 @@ namespace MASA.Blazor
 
         public ValueTask DisposeAsync()
         {
+            RemoveApplication();
             _ = Target.RemoveEventListenerAsync("scroll");
             return ValueTask.CompletedTask;
+        }
+
+        private void RemoveApplication()
+        {
+            if (!Bottom)
+                GlobalConfig.Application.Top = 0;
+            else
+                GlobalConfig.Application.Bottom = 0;
         }
     }
 }

@@ -117,18 +117,18 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyDataTableHeaderDefault()
-                .Apply<BSimpleCheckbox, MSimpleCheckbox>(props =>
+                .Apply<BSimpleCheckbox, MSimpleCheckbox>(attrs =>
                 {
-                    props[nameof(Class)] = "m-data-table__checkbox";
-                    props[nameof(MSimpleCheckbox.Value)] = EveryItem;
-                    props[nameof(MSimpleCheckbox.Indeterminate)] = !EveryItem && SomeItems;
-                    props[nameof(MSimpleCheckbox.Color)] = CheckboxColor;
-                    props[nameof(MSimpleCheckbox.OnInput)] = OnToggleSelectAll;
+                    attrs[nameof(Class)] = "m-data-table__checkbox";
+                    attrs[nameof(MSimpleCheckbox.Value)] = EveryItem;
+                    attrs[nameof(MSimpleCheckbox.Indeterminate)] = !EveryItem && SomeItems;
+                    attrs[nameof(MSimpleCheckbox.Color)] = CheckboxColor;
+                    attrs[nameof(MSimpleCheckbox.OnInput)] = OnToggleSelectAll;
                 })
-                .Apply<BIcon, MIcon>(props =>
+                .Apply<BIcon, MIcon>(attrs =>
                 {
-                    props[nameof(Class)] = "m-data-table-header__icon";
-                    props[nameof(MIcon.Size)] = (StringNumber)18;
+                    attrs[nameof(Class)] = "m-data-table-header__icon";
+                    attrs[nameof(MIcon.Size)] = (StringNumber)18;
                 });
         }
     }

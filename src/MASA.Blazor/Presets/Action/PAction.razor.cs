@@ -26,11 +26,21 @@ namespace MASA.Blazor.Presets
         internal double LabelWidth { get; set; }
         internal double SpaceWidth { get; set; }
 
+        internal double IconBtnWidth => IconWidth + SpaceWidth;
+
+        internal double LabelBtnWidth => LabelWidth + SpaceWidth;
+
         [Inject]
         public DomEventJsInterop DomEventJsInterop { get; set; }
 
         [CascadingParameter]
         public PActions Actions { get; set; }
+
+        [CascadingParameter(Name = "_p_action_data")]
+        public Action Data { get; set; }
+
+        [Parameter]
+        public RenderFragment ChildContent { get; set; }
 
         [Parameter]
         public string Color { get; set; }
@@ -39,10 +49,16 @@ namespace MASA.Blazor.Presets
         public bool Dark { get; set; }
 
         [Parameter]
+        public bool Depressed { get; set; }
+
+        [Parameter]
         public bool Disabled { get; set; }
 
         [Parameter]
         public string Label { get; set; }
+
+        [Parameter]
+        public bool Large { get; set; }
 
         [Parameter]
         public bool Light { get; set; }
@@ -52,6 +68,24 @@ namespace MASA.Blazor.Presets
 
         [Parameter]
         public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+        [Parameter]
+        public bool Outlined { get; set; }
+
+        [Parameter]
+        public bool Plain { get; set; }
+
+        [Parameter]
+        public bool Rounded { get; set; }
+
+        [Parameter]
+        public bool Small { get; set; }
+
+        [Parameter]
+        public bool Text { get; set; }
+
+        [Parameter]
+        public bool Tile { get; set; }
 
         [Parameter]
         public string Tip { get; set; }
@@ -68,46 +102,60 @@ namespace MASA.Blazor.Presets
             }
         }
 
+        [Parameter]
+        public bool XSmall { get; set; }
+
+        [Parameter]
+        public bool XLarge { get; set; }
+
         private ActionTypes ActionType => Actions?.Type ?? ActionTypes.IconLabel;
 
-        private string ComputedColor => Color ?? Actions?.Color;
+        private string ComputedColor => Data?.Color ?? Color;
 
-        private bool Depressed => Actions?.Depressed ?? false;
+        private bool ComputedDark => Data?.Dark ?? Dark;
 
-        private bool Large => Actions?.Large ?? false;
+        private bool ComputedDepressed => Data?.Depressed ?? Depressed;
 
-        private bool Outlined => Actions?.Outlined ?? false;
+        private bool ComputedDisabled => Data?.Disabled ?? Disabled;
 
-        private bool Plain => Actions?.Plain ?? false;
+        private string ComputedIcon => Data?.Icon ?? Icon;
 
-        private bool Rounded => Actions?.Rounded ?? false;
+        private bool ComputedLight => Data?.Light ?? Light;
+
+        private string ComputedLabel => Data?.Label ?? Label;
+
+        private bool ComputedLarge => Data?.Large ?? Large;
+
+        private EventCallback<MouseEventArgs> ComputedOnClick => Data?.OnClick ?? OnClick;
+
+        private bool ComputedOutlined => Data?.Outlined ?? Outlined;
+
+        private bool ComputedPlain => Data?.Plain ?? Plain;
+
+        private bool ComputedRounded => Data?.Rounded ?? Rounded;
+
+        private bool ComputedSmall => Data?.Small ?? Small;
+
+        private bool ComputedText => Data?.Text ?? Text;
+
+        private bool ComputedTile => Data?.Tile ?? Tile;
+
+        private string ComputedTip => Data?.Tip ?? Tip;
+
+        private bool ComputedXSmall => Data?.XSmall ?? XSmall;
+
+        private bool ComputedXLarge => Data?.XLarge ?? XLarge;
 
         private bool ShowIcon => ActionType == ActionTypes.Icon || ActionType == ActionTypes.IconLabel;
 
         private bool ShowLabel => ActionType == ActionTypes.Label || ActionType == ActionTypes.IconLabel;
 
-        private bool Small => Actions?.Small ?? false;
-
-        private bool Text => Actions?.Text ?? false;
-
-        private bool Tile => Actions?.Tile ?? false;
-
         private bool TooltipDisabled => ActionType != ActionTypes.Icon || Disabled;
-
-        private bool XSmall => Actions?.XSmall ?? false;
-
-        private bool XLarge => Actions?.XLarge ?? false;
-
-        internal double IconBtnWidth => IconWidth + SpaceWidth;
-
-        internal double LabelBtnWidth => LabelWidth + SpaceWidth;
 
         protected override void OnInitialized()
         {
             if (Visible)
-            {
-                Actions.Register(this);
-            }
+                Actions?.Register(this);
         }
 
         protected override void OnParametersSet()
@@ -115,20 +163,16 @@ namespace MASA.Blazor.Presets
             base.OnParametersSet();
 
             if (Visible)
-            {
-                Actions.Register(this);
-            }
+                Actions?.Register(this);
             else
-            {
-                Actions.Unregister(this);
-            }
+                Actions?.Unregister(this);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
 
-            if (_visibleChanged)
+            if (Actions != default && _visibleChanged)
             {
                 if (ButtonRef.Context == null && ButtonForwardRef != null)
                 {
@@ -168,15 +212,15 @@ namespace MASA.Blazor.Presets
             return rect.Width;
         }
 
-        private async Task HandleClick(MouseEventArgs args)
+        private async Task HandleOnClick(MouseEventArgs args)
         {
-            if (OnClick.HasDelegate)
+            if (ComputedOnClick.HasDelegate)
             {
                 _loading = true;
 
                 try
                 {
-                    await OnClick.InvokeAsync();
+                    await ComputedOnClick.InvokeAsync();
                 }
                 finally
                 {

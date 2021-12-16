@@ -12,18 +12,6 @@ namespace MASA.Blazor
         [Inject]
         public GlobalConfig GlobalConfig { get; set; }
 
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            GlobalConfig.Application.PropertyChanged += Application_PropertyChanged;
-        }
-
-        private void Application_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            InvokeStateHasChanged();
-        }
-
         protected override void SetComponentClass()
         {
             CssProvider
@@ -47,7 +35,8 @@ namespace MASA.Blazor
 
             Attributes.Add("data-booted", true);
             GlobalConfig.Application.IsBooted = true;
-            AbstractProvider.ApplyMainDefault();
+            AbstractProvider
+                .ApplyMainDefault();
         }
     }
 }

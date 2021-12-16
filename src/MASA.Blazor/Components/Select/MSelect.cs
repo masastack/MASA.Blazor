@@ -196,6 +196,12 @@ namespace MASA.Blazor
             }
         }
 
+        public override Task HandleOnAppendClickAsync(MouseEventArgs args)
+        {
+            Visible = true;
+            return base.HandleOnAppendClickAsync(args);
+        }
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -251,10 +257,10 @@ namespace MASA.Blazor
                 .Apply(typeof(BSelectHiddenInput<,,,>), typeof(BSelectHiddenInput<TItem, TItemValue, TValue, MSelect<TItem, TItemValue, TValue>>))
                 .Apply(typeof(BSelectMenu<,,,>), typeof(BSelectMenu<TItem, TItemValue, TValue, MSelect<TItem, TItemValue, TValue>>))
                 .Apply(typeof(BSelectSelections<,,,>), typeof(BSelectSelections<TItem, TItemValue, TValue, MSelect<TItem, TItemValue, TValue>>))
-                .Apply<BMenu, MMenu>(props =>
+                .Apply<BMenu, MMenu>(attrs =>
                 {
-                    props[nameof(MMenu.Value)] = Visible;
-                    props[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, async (v) =>
+                    attrs[nameof(MMenu.Value)] = Visible;
+                    attrs[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, async (v) =>
                     {
                         Visible = v;
 
@@ -263,38 +269,38 @@ namespace MASA.Blazor
                             await InputElement.FocusAsync();
                         }
                     });
-                    props[nameof(MMenu.Disabled)] = Disabled || Readonly;
+                    attrs[nameof(MMenu.Disabled)] = Disabled || Readonly;
 
-                    props[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
-                    props[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;
-                    props[nameof(MMenu.CloseOnContentClick)] = ComputedMenuProps.CloseOnContentClick;
-                    props[nameof(MMenu.DisableKeys)] = ComputedMenuProps.DisableKeys;
-                    props[nameof(MMenu.Left)] = ComputedMenuProps.Left;
-                    props[nameof(MMenu.MaxHeight)] = ComputedMenuProps.MaxHeight;
-                    props[nameof(MMenu.MinWidth)] = ComputedMenuProps.MinWidth;
-                    props[nameof(MMenu.NudgeTop)] = ComputedMenuProps.NudgeTop;
-                    props[nameof(MMenu.NudgeRight)] = ComputedMenuProps.NudgeRight;
-                    props[nameof(MMenu.NudgeBottom)] = ComputedMenuProps.NudgeBottom;
-                    props[nameof(MMenu.NudgeLeft)] = ComputedMenuProps.NudgeLeft;
-                    props[nameof(MMenu.NudgeWidth)] = ComputedMenuProps.NudgeWidth;
-                    props[nameof(MMenu.OffsetX)] = ComputedMenuProps.OffsetX;
-                    props[nameof(MMenu.OffsetY)] = ComputedMenuProps.OffsetY;
-                    props[nameof(MMenu.OpenOnClick)] = ComputedMenuProps.OpenOnClick;
-                    props[nameof(MMenu.Right)] = ComputedMenuProps.Right;
-                    props[nameof(MMenu.Top)] = ComputedMenuProps.Top;
+                    attrs[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
+                    attrs[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;
+                    attrs[nameof(MMenu.CloseOnContentClick)] = ComputedMenuProps.CloseOnContentClick;
+                    attrs[nameof(MMenu.DisableKeys)] = ComputedMenuProps.DisableKeys;
+                    attrs[nameof(MMenu.Left)] = ComputedMenuProps.Left;
+                    attrs[nameof(MMenu.MaxHeight)] = ComputedMenuProps.MaxHeight;
+                    attrs[nameof(MMenu.MinWidth)] = ComputedMenuProps.MinWidth;
+                    attrs[nameof(MMenu.NudgeTop)] = ComputedMenuProps.NudgeTop;
+                    attrs[nameof(MMenu.NudgeRight)] = ComputedMenuProps.NudgeRight;
+                    attrs[nameof(MMenu.NudgeBottom)] = ComputedMenuProps.NudgeBottom;
+                    attrs[nameof(MMenu.NudgeLeft)] = ComputedMenuProps.NudgeLeft;
+                    attrs[nameof(MMenu.NudgeWidth)] = ComputedMenuProps.NudgeWidth;
+                    attrs[nameof(MMenu.OffsetX)] = ComputedMenuProps.OffsetX;
+                    attrs[nameof(MMenu.OffsetY)] = ComputedMenuProps.OffsetY;
+                    attrs[nameof(MMenu.OpenOnClick)] = ComputedMenuProps.OpenOnClick;
+                    attrs[nameof(MMenu.Right)] = ComputedMenuProps.Right;
+                    attrs[nameof(MMenu.Top)] = ComputedMenuProps.Top;
                 })
-                .Apply<BList, MList>(props => { props[nameof(MList.Dense)] = Dense; })
-                .Apply<BListItem, MListItem>(props => { props[nameof(MListItem.Dense)] = Dense; })
+                .Apply<BList, MList>(attrs => { attrs[nameof(MList.Dense)] = Dense; })
+                .Apply<BListItem, MListItem>(attrs => { attrs[nameof(MListItem.Dense)] = Dense; })
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>()
                 .Apply(typeof(BSelectList<,,>), typeof(MSelectList<TItem, TItemValue, TValue>),
-                    props => { props[nameof(MSelectList<TItem, TItemValue, TValue>.ItemContent)] = ItemContent; })
-                .Apply<BChip, MChip>(props =>
+                    attrs => { attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemContent)] = ItemContent; })
+                .Apply<BChip, MChip>(attrs =>
                 {
-                    props[nameof(MChip.Close)] = DeletableChips && (!IsDisabled && !IsReadonly);
-                    props[nameof(MChip.Disabled)] = IsDisabled;
-                    props[nameof(MChip.Class)] = "m-chip--select";
-                    props[nameof(MChip.Small)] = SmallChips;
+                    attrs[nameof(MChip.Close)] = DeletableChips && (!IsDisabled && !IsReadonly);
+                    attrs[nameof(MChip.Disabled)] = IsDisabled;
+                    attrs[nameof(MChip.Class)] = "m-chip--select";
+                    attrs[nameof(MChip.Small)] = SmallChips;
                 });
         }
 

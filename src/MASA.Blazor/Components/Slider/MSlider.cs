@@ -14,6 +14,19 @@ namespace MASA.Blazor
     public class MSlider<TValue> : MInput<TValue>, ISlider<TValue>
     {
         [Parameter]
+        public override TValue Value
+        {
+            get
+            {
+                return GetValue<TValue>();
+            }
+            set
+            {
+                SetValue(value);
+            }
+        }
+
+        [Parameter]
         public bool Vertical { get; set; }
 
         [Inject]
@@ -107,7 +120,8 @@ namespace MASA.Blazor
             }
             set
             {
-                InternalValue = value is TValue val ? val : default;
+                var val = RoundValue(Math.Min(Math.Max(value, Min), Max));
+                InternalValue = val is TValue v ? v : default;
             }
         }
 
@@ -275,6 +289,14 @@ namespace MASA.Blazor
             {
                 throw new ArgumentNullException(nameof(TValue), "Only double supported");
             }
+
+            //We will move this to other place when watcher finished
+            Watcher
+                .Watch<TValue>(nameof(Value), val =>
+                {
+                    DoubleInteralValue = Convert.ToDouble(val);
+                });
+            InternalValue = Value;
         }
 
         protected override void OnParametersSet()
@@ -353,7 +375,7 @@ namespace MASA.Blazor
                 ThumbPressed = true;
             }
 
-            DoubleInteralValue = RoundValue(await ParseMouseMoveAsync(args));
+            DoubleInteralValue = await ParseMouseMoveAsync(args);
         }
 
         protected async Task<double> ParseMouseMoveAsync(MouseEventArgs args)

@@ -3,13 +3,18 @@ order: 0
 title: 安装
 ---
 
-让我们从 MASA Blazor 开始吧，这是 .NET Core Blazor 框架的 UI 组件库，用于构建功能丰富、快速的应用程序。
+让我们从 MASA Blazor 开始吧，MASA Blazor是 .NET Blazor 框架的 UI 组件库，用于构建功能丰富、快速的应用程序。
 
-> MASA 系列所有产品均基于.Net 6.0 开发,请确保已安装 [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0) 。
+# 先决条件
+
+MASA 系列所有产品均基于.Net 6.0 开发,请确保已安装 [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0) 。
+
+# 演示视频
+视频内容为MASA Blazor模板创建Blazor Server演示视频，可选择查看或者直接查看CLI创建部分。
 
 <iframe src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" scrolling="no" width="800px" height="600px" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
-# Cli 创建
+# CLI 创建
 
 ## 安装 Masa.Template 模板
 

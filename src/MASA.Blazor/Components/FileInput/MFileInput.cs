@@ -25,9 +25,6 @@ namespace MASA.Blazor
         [Parameter]
         public RenderFragment<(int index, string text)> SelectionContent { get; set; }
 
-        [Inject]
-        public Document Document { get; set; }
-
         [Parameter]
         public bool Multiple { get; set; }
 
@@ -198,7 +195,7 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply(typeof(BChip), typeof(MChip), props => { props[nameof(MChip.Small)] = SmallChips; })
+                .Apply(typeof(BChip), typeof(MChip), attrs => { attrs[nameof(MChip.Small)] = SmallChips; })
                 .Merge(typeof(BTextFieldInput<,>), typeof(BFileInputInput<TValue, MFileInput<TValue>>))
                 .Apply(typeof(BFileInputSelections<,>), typeof(BFileInputSelections<TValue, MFileInput<TValue>>))
                 .Apply(typeof(BFileInputChips<,>), typeof(BFileInputChips<TValue, MFileInput<TValue>>))

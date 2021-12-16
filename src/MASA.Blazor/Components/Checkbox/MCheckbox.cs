@@ -127,12 +127,12 @@ namespace MASA.Blazor
                 .Apply(typeof(BCheckboxCheckbox), typeof(BCheckboxCheckbox))
                 .Apply(typeof(BSelectableInput<>), typeof(BSelectableInput<MCheckbox>))
                 .Apply(typeof(BRippleableRipple<>), typeof(BRippleableRipple<MCheckbox>))
-                .Apply(typeof(BIcon), typeof(MIcon), props =>
+                .Apply(typeof(BIcon), typeof(MIcon), attrs =>
                 {
-                    props[nameof(MIcon.Dense)] = Dense;
-                    props[nameof(MIcon.Dark)] = Dark;
-                    props[nameof(MIcon.Light)] = Light;
-                    props[nameof(MIcon.Color)] = ValidationState;
+                    attrs[nameof(MIcon.Dense)] = Dense;
+                    attrs[nameof(MIcon.Dark)] = Dark;
+                    attrs[nameof(MIcon.Light)] = Light;
+                    attrs[nameof(MIcon.Color)] = ValidationState;
                 });
         }
 

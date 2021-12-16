@@ -23,9 +23,6 @@ namespace MASA.Blazor
         [Parameter]
         public int Rows { get; set; } = 5;
 
-        [Inject]
-        public Document Document { get; set; }
-
         public override string Tag => "textarea";
 
         protected double ElementHeight { get; set; }

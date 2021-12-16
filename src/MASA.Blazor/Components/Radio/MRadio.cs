@@ -78,10 +78,10 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply<BIcon, MIcon>(props =>
+                .Apply<BIcon, MIcon>(attrs =>
                 {
-                    props[nameof(MIcon.Color)] = Color;
-                    props[nameof(MIcon.IsActive)] = IsActive;
+                    attrs[nameof(MIcon.Color)] = Color;
+                    attrs[nameof(MIcon.IsActive)] = IsActive;
                 })
                 .Apply<BLabel, MLabel>();
 

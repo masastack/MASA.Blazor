@@ -19,10 +19,7 @@ namespace MASA.Blazor
                         prop[attr.Key] = attr.Value;
                     }
                 })
-                .Apply<BIcon, MIcon>(prop =>
-                {
-
-                });
+                .Apply<BIcon, MIcon>();
 
             await base.OnInitializedAsync();
         }

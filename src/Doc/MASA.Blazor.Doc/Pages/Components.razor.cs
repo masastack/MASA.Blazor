@@ -1,7 +1,10 @@
-﻿using MASA.Blazor.Doc.Models;
+﻿using BlazorComponent;
+using MASA.Blazor.Doc.Models;
 using MASA.Blazor.Doc.Shared;
 using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using System.Diagnostics;
 using System.Globalization;
 
 namespace MASA.Blazor.Doc.Pages
@@ -36,6 +39,9 @@ namespace MASA.Blazor.Doc.Pages
         [Inject]
         public GlobalConfigs GlobalConfig { get; set; }
 
+        [Inject]
+        public IJSRuntime Js { get; set; }
+
         protected override async Task OnParametersSetAsync()
         {
             if (Name.Contains('?'))
@@ -65,6 +71,20 @@ namespace MASA.Blazor.Doc.Pages
             GithubUrlHref = string.Format(_githubUrlTemplate, _demoComponent.Type);
 
             _demoIndex = 0;
+        }
+
+        public async Task ScrollToAsync(string target)
+        {
+            var element = await Js.InvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, "#" + target);
+
+            var options = new
+            {
+                Top = element.OffsetTop,
+                Left = 0,
+                Behavior = "smooth"
+            };
+
+            await Js.InvokeVoidAsync("window.scrollTo", options);
         }
     }
 }

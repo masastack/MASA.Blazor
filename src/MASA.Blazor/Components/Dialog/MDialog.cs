@@ -109,10 +109,10 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply<BOverlay, MOverlay>(props =>
+                .Apply<BOverlay, MOverlay>(attrs =>
                 {
-                    props[nameof(MOverlay.Value)] = ShowOverlay && Value;
-                    props[nameof(MOverlay.ZIndex)] = ZIndex - 1;
+                    attrs[nameof(MOverlay.Value)] = ShowOverlay && Value;
+                    attrs[nameof(MOverlay.ZIndex)] = ZIndex - 1;
                 })
                 .ApplyDialogDefault();
         }
@@ -128,12 +128,12 @@ namespace MASA.Blazor
         private async Task AnimateClick()
         {
             _animated = true;
-            StateHasChanged();
+            await InvokeStateHasChangedAsync();
 
             await Task.Delay(150);
 
             _animated = false;
-            StateHasChanged();
+            await InvokeStateHasChangedAsync();
         }
 
         public async Task Keydown(KeyboardEventArgs args)
@@ -185,14 +185,14 @@ namespace MASA.Blazor
                 ShowContent = true;
                 Value = false;
 
-                StateHasChanged();
+                await InvokeStateHasChangedAsync();
                 await Task.Delay(16);
 
                 await AfterShowContent();
                 Value = true;
 
                 await MoveContentTo();
-                StateHasChanged();
+                await InvokeStateHasChangedAsync();
             }
         }
 
