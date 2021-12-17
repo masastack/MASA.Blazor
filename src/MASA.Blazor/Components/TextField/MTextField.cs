@@ -14,6 +14,9 @@ namespace MASA.Blazor
     public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
     {
         private string _badInput;
+        private CancellationTokenSource _cancellationTokenSource;
+        private bool _pending;
+        private bool _shouldRender = true;
 
         [Parameter]
         public virtual bool Clearable { get; set; }
@@ -408,6 +411,28 @@ namespace MASA.Blazor
             }
         }
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                var tasks = new Task[3];
+
+                tasks[0] = SetLabelWidthAsync();
+                tasks[1] = SetPrefixWidthAsync();
+                tasks[2] = SetPrependWidthAsync();
+
+                if (tasks.All(task => task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Canceled))
+                {
+                    return;
+                }
+
+                await Task.WhenAll(tasks);
+                StateHasChanged();
+            }
+        }
+
         private async Task SetLabelWidthAsync()
         {
             if (!Outlined)
@@ -455,26 +480,6 @@ namespace MASA.Blazor
 
             var prependInner = Document.QuerySelector(PrependInnerElement);
             PrependWidth = await prependInner.GetPropAsync<double>("offsetWidth");
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                var tasks = new Task[3];
-
-                tasks[0] = SetLabelWidthAsync();
-                tasks[1] = SetPrefixWidthAsync();
-                tasks[2] = SetPrependWidthAsync();
-
-                if (tasks.All(task => task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Canceled))
-                {
-                    return;
-                }
-
-                await Task.WhenAll(tasks);
-                StateHasChanged();
-            }
         }
 
         public virtual async Task HandleOnAppendOuterClickAsync(MouseEventArgs args)
@@ -533,8 +538,50 @@ namespace MASA.Blazor
 
         public virtual Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            //REVIEW:How to deal with oninput event?
+            var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
+            if (success)
+            {
+                _badInput = null;
+                InternalValue = val;
+
+                //We use pending so NextTick will not be called too more times
+                if (!_pending)
+                {
+                    _pending = true;
+                    NextTick(async () =>
+                    {
+                        //We prevent render here to avoid continuous render
+                        _shouldRender = false;
+
+                        _cancellationTokenSource?.Cancel();
+                        _cancellationTokenSource = new CancellationTokenSource();
+                        await Task.Delay(300, _cancellationTokenSource.Token);
+
+                        _shouldRender = true;
+                        if (OnInput.HasDelegate)
+                        {
+                            await OnInput.InvokeAsync(Value);
+                        }
+                        else
+                        {
+                            StateHasChanged();
+                        }
+
+                        _pending = false;
+                    });
+                }
+            }
+            else
+            {
+                _badInput = args.Value.ToString();
+            }
+
             return Task.CompletedTask;
+        }
+
+        protected override bool ShouldRender()
+        {
+            return _shouldRender;
         }
 
         public virtual async Task HandleOnFocusAsync(FocusEventArgs args)
