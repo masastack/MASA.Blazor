@@ -113,6 +113,24 @@
       "Description": ""
     },
     {
+      "Name": "MobileBreakpoint",
+      "Type": "OneOf`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OverlayColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OverlayOpacity",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Permanent",
       "Type": "Boolean",
       "Default": "false",
@@ -120,12 +138,6 @@
     },
     {
       "Name": "Right",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "ShowOverlay",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
@@ -149,15 +161,15 @@
       "Description": "The style applied to the outermost element of the component"
     },
     {
-      "Name": "Temporary",
-      "Type": "Boolean",
-      "Default": "false",
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
-      "Name": "Top",
-      "Type": "StringNumber",
-      "Default": "",
+      "Name": "Temporary",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {

@@ -27,9 +27,9 @@ namespace MASA.Blazor
         public Document Document { get; set; }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
-        protected override bool IsRtl => GlobalConfig.RTL;
+        protected override bool IsRtl => MasaBlazor.RTL;
 
         protected override void SetComponentClass()
         {

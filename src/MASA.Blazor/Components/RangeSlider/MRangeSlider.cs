@@ -268,7 +268,7 @@ namespace MASA.Blazor
 
         private void GetTrackStyle(StyleBuilder styleBuilder, double startLength, double endLength, double startPadding = 0, double endPadding = 0)
         {
-            var startDir = Vertical ? (GlobalConfig.RTL ? "top" : "bottom") : (GlobalConfig.RTL ? "right" : "left");
+            var startDir = Vertical ? (MasaBlazor.RTL ? "top" : "bottom") : (MasaBlazor.RTL ? "right" : "left");
             var endDir = Vertical ? "height" : "width";
 
             var start = $"calc({startLength}% + {startPadding}px)";
@@ -295,7 +295,7 @@ namespace MASA.Blazor
             var index = styleBuilder.Index;
 
             var direction = Vertical ? "top" : "left";
-            var value = GlobalConfig.RTL ? 100 - InputWidths[index] : InputWidths[index];
+            var value = MasaBlazor.RTL ? 100 - InputWidths[index] : InputWidths[index];
             value = Vertical ? 100 - value : value;
 
             styleBuilder

@@ -42,7 +42,7 @@ namespace MASA.Blazor
         public bool Fixed { get; set; }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         private StringNumber ComputedHeight => Height != null ?
             (Regex.IsMatch(Height.ToString(), "^[0-9]*$") ? Height.ToInt32() : Height) :
@@ -61,7 +61,7 @@ namespace MASA.Blazor
                         .AddIf("m-system-bar--absolute", () => Absolute)
                         .AddIf("m-system-bar--fixed", () => !Absolute && (App || Fixed))
                         .AddIf("m-system-bar--window", () => Window);
-                }, styleBuilder => 
+                }, styleBuilder =>
                 {
                     styleBuilder
                         .Add($"height:{ComputedHeight.ToUnit()}");
@@ -78,7 +78,12 @@ namespace MASA.Blazor
 
         protected void UpdateApplication(BlazorComponent.Web.Element element)
         {
-            GlobalConfig.Application.Bar = element != null ?
+            if (!App)
+            {
+                return;
+            }
+
+            MasaBlazor.Application.Bar = element != null ?
                 element.ClientHeight : ComputedHeight.ToDouble();
         }
 

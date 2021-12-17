@@ -44,7 +44,10 @@ namespace MASA.Blazor
         }
 
         [Inject]
-        protected HeadJsInterop HeadJsInterop { get; set; }
+        public HeadJsInterop HeadJsInterop { get; set; }
+
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; }
 
         protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();
 
@@ -79,6 +82,14 @@ namespace MASA.Blazor
                 });
 
             Attributes.Add("data-app", true);
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await MasaBlazor.Breakpoint.InitAsync();
+            }
         }
     }
 }

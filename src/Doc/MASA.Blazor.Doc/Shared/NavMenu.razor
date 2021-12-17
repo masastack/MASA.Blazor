@@ -4,79 +4,79 @@
 @using System.Globalization;
 @inherits OwningComponentBase<DemoService>
 
-<MList Nav Linkage Class="doc-nav-list mt-4">
+<MList Nav Linkage  Class="mt-4">
     @foreach (var item in MenuItems)
     {
         if (item.Children != null && item.Children.Any())
         {
             var group = GenGroup(item.Children);
 
-                    <MListGroup AppendIcon="M8.33398 10.3335L12.5007 14.5002L16.6673 10.3335H8.33398Z"
+            <MListGroup AppendIcon="M8.33398 10.3335L12.5007 14.5002L16.6673 10.3335H8.33398Z"
                 Class="m-list-group--default"
                 Group="@group"
                 Color="#5C2D91"
                 NoAction
                 PrependIcon="@item.Icon">
-                        <ActivatorContent>
-                            <MListItemContent>
-                                <MListItemTitle>@item.Title</MListItemTitle>
-                            </MListItemContent>
-                        </ActivatorContent>
-                        <ChildContent>
+                <ActivatorContent>
+                    <MListItemContent>
+                        <MListItemTitle>@item.Title</MListItemTitle>
+                    </MListItemContent>
+                </ActivatorContent>
+                <ChildContent>
                     @foreach (var componentItem in item.Children)
                     {
                         if (componentItem.Children != null && componentItem.Children.Any())
                         {
                             var group2 = GenGroup(componentItem.Children);
 
-                                            <MListGroup Class="m-list-group--default"
+                            <MListGroup Class="m-list-group--default"
                         Group="@group2"
                         NoAction
                         Color="#5C2D91"
                         SubGroup>
-                                                <ActivatorContent>
-                                                    <MListItemContent>
-                                                        <MListItemTitle>@FormatComponentTitle(componentItem)</MListItemTitle>
-                                                    </MListItemContent>
-                                                </ActivatorContent>
-                                                <ChildContent>
+                                <ActivatorContent>
+                                    <MListItemContent>
+                                        <MListItemTitle>@FormatComponentTitle(componentItem)</MListItemTitle>
+                                    </MListItemContent>
+                                </ActivatorContent>
+                                <ChildContent>
                                     @foreach (var subComponentItem in componentItem.Children)
                                     {
-                                                            <MListItem Class="m-list-item--default" Href="@subComponentItem.Url">
-                                                                <MListItemContent>
-                                                                    <MListItemTitle>
+                                        <MListItem Class="m-list-item--default" Href="@subComponentItem.Url">
+                                            <MListItemContent>
+                                                <MListItemTitle>
                                                     @FormatComponentTitle(subComponentItem)
-                                                                    </MListItemTitle>
-                                                                </MListItemContent>
-                                                            </MListItem>
+                                                </MListItemTitle>
+                                            </MListItemContent>
+                                        </MListItem>
                                     }
-                                                </ChildContent>
-                                            </MListGroup>
+                                </ChildContent>
+                            </MListGroup>
                         }
                         else
                         {
-                                            <MListItem Class="m-list-item--default" Href="@componentItem.Url">
-                                                <MListItemContent>
-                                                    <MListItemTitle>
+                            <MListItem Class="m-list-item--default" Href="@componentItem.Url">
+                                <MListItemContent>
+                                    <MListItemTitle>
                                         @FormatComponentTitle(componentItem)
-                                                    </MListItemTitle>
-                                                </MListItemContent>
-                                            </MListItem>
+                                    </MListItemTitle>
+                                </MListItemContent>
+                            </MListItem>
                         }
                     }
-                        </ChildContent>
-                    </MListGroup>
+                </ChildContent>
+            </MListGroup>
         }
         else
         {
-                    <MListItem Class="m-list-item--default" Link Href="@item.Url">
-                        <MListItemIcon>
-                            <MIcon>@item.Icon</MIcon>
-                        </MListItemIcon>
-                        <MListItemContent>
-                            <MListItemTitle>@item.Title</MListItemTitle>
-                        </MListItemContent>
-                    </MListItem>
+            <MListItem Class="m-list-item--default" Link Href="@item.Url">
+                <MListItemIcon>
+                    <MIcon>@item.Icon</MIcon>
+                </MListItemIcon>
+                <MListItemContent>
+                    <MListItemTitle>@item.Title</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
         }
     }
 </MList>

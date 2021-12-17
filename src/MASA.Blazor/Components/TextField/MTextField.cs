@@ -123,7 +123,7 @@ namespace MASA.Blazor
         public EventCallback<MouseEventArgs> OnClearClick { get; set; }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         [Inject]
         public Document Document { get; set; }
@@ -247,7 +247,7 @@ namespace MASA.Blazor
                     offset -= PrependWidth;
                 }
 
-                return GlobalConfig.RTL == Reverse ? (offset, "auto") : ("auto", offset);
+                return MasaBlazor.RTL == Reverse ? (offset, "auto") : ("auto", offset);
             }
         }
 

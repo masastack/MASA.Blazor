@@ -80,7 +80,7 @@ namespace MASA.Blazor
         public Document Document { get; set; }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         protected override void OnInitialized()
         {
@@ -151,6 +151,21 @@ namespace MASA.Blazor
             UpdateApplication();
         }
 
+        private void UpdateApplication()
+        {
+            if (!App)
+            {
+                return;
+            }
+
+            var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform;
+
+            if (!Bottom)
+                MasaBlazor.Application.Top = val;
+            else
+                MasaBlazor.Application.Bottom = val;
+        }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -170,7 +185,7 @@ namespace MASA.Blazor
                                     ElevateOnScroll ||
                                     HideOnScroll ||
                                     CollapseOnScroll ||
-                                    GlobalConfig.Application.IsBooted ||
+                                    MasaBlazor.Application.IsBooted ||
                                     !Value;
 
         protected double ScrollRatio
@@ -218,7 +233,7 @@ namespace MASA.Blazor
             {
                 if (!App || ClippedLeft) return 0;
 
-                return GlobalConfig.Application.Left;
+                return MasaBlazor.Application.Left;
             }
         }
 
@@ -228,7 +243,7 @@ namespace MASA.Blazor
             {
                 if (!App) return 0;
 
-                return GlobalConfig.Application.Bar;
+                return MasaBlazor.Application.Bar;
             }
         }
 
@@ -259,7 +274,7 @@ namespace MASA.Blazor
             {
                 if (!App || ClippedLeft) return 0;
 
-                return GlobalConfig.Application.Right;
+                return MasaBlazor.Application.Right;
             }
         }
 
@@ -322,16 +337,6 @@ namespace MASA.Blazor
 
         protected override bool IsProminent => base.IsProminent || ShrinkOnScroll;
 
-        protected void UpdateApplication()
-        {
-            var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform;
-
-            if (!Bottom)
-                GlobalConfig.Application.Top = val;
-            else
-                GlobalConfig.Application.Bottom = val;
-        }
-
         protected void ThresholdMet()
         {
             if (InvertedScroll)
@@ -360,9 +365,9 @@ namespace MASA.Blazor
         private void RemoveApplication()
         {
             if (!Bottom)
-                GlobalConfig.Application.Top = 0;
+                MasaBlazor.Application.Top = 0;
             else
-                GlobalConfig.Application.Bottom = 0;
+                MasaBlazor.Application.Bottom = 0;
         }
     }
 }

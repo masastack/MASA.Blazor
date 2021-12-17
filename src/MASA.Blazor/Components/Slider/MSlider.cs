@@ -48,7 +48,7 @@ namespace MASA.Blazor
         public StringBoolean Ticks { get; set; } = false;
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         [Parameter]
         public string TrackColor { get; set; }
@@ -461,7 +461,7 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     //TODO: change here
-                    var startDir = Vertical ? GlobalConfig.RTL ? "bottom" : "top" : GlobalConfig.RTL ? "left" : "right";
+                    var startDir = Vertical ? MasaBlazor.RTL ? "bottom" : "top" : MasaBlazor.RTL ? "left" : "right";
                     var endDir = Vertical ? "height" : "width";
 
                     var start = "0px";
@@ -484,8 +484,8 @@ namespace MASA.Blazor
                     var endDir = Vertical ? "top" : "right";
                     var valueDir = Vertical ? "height" : "width";
 
-                    var start = GlobalConfig.RTL ? "auto" : "0";
-                    var end = GlobalConfig.RTL ? "0" : "auto";
+                    var start = MasaBlazor.RTL ? "auto" : "0";
+                    var end = MasaBlazor.RTL ? "0" : "auto";
                     var value = IsDisabled ? $"calc({InputWidth}% - 10px)" : $"{InputWidth}%";
 
                     styleBuilder
@@ -504,15 +504,15 @@ namespace MASA.Blazor
                 .Apply("tick", cssBuilder =>
                 {
                     var width = cssBuilder.Index * (100 / NumTicks);
-                    var filled = GlobalConfig.RTL ? (100 - InputWidth) < width : width < InputWidth;
+                    var filled = MasaBlazor.RTL ? (100 - InputWidth) < width : width < InputWidth;
 
                     cssBuilder
                         .Add("m-slider__tick")
                         .AddIf("m-slider__tick--filled", () => filled);
                 }, styleBuilder =>
                 {
-                    var direction = Vertical ? "bottom" : (GlobalConfig.RTL ? "right" : "left");
-                    var offsetDirection = Vertical ? (GlobalConfig.RTL ? "left" : "right") : "top";
+                    var direction = Vertical ? "bottom" : (MasaBlazor.RTL ? "right" : "left");
+                    var offsetDirection = Vertical ? (MasaBlazor.RTL ? "left" : "right") : "top";
                     var width = styleBuilder.Index * (100 / NumTicks);
 
                     styleBuilder
@@ -577,7 +577,7 @@ namespace MASA.Blazor
         protected virtual void GetThumbContainerStyles(StyleBuilder styleBuilder)
         {
             var direction = Vertical ? "top" : "left";
-            var value = GlobalConfig.RTL ? 100 - InputWidth : InputWidth;
+            var value = MasaBlazor.RTL ? 100 - InputWidth : InputWidth;
             value = Vertical ? 100 - value : value;
 
             styleBuilder
@@ -592,7 +592,7 @@ namespace MASA.Blazor
 
             if (firstRender)
             {
-                GlobalConfig.OnRTLChange += OnRTLChange;
+                MasaBlazor.OnRTLChange += OnRTLChange;
             }
         }
 
@@ -658,7 +658,7 @@ namespace MASA.Blazor
             var steps = Max - Min / step;
             if (directionCodes.Contains(args.Code))
             {
-                var increase = GlobalConfig.RTL ? new string[] { "left", "up" } : new string[] { "right", "up" };
+                var increase = MasaBlazor.RTL ? new string[] { "left", "up" } : new string[] { "right", "up" };
                 var direction = increase.Contains(args.Code) ? 1 : -1;
                 var multiplier = args.ShiftKey ? 3 : (args.CtrlKey ? 2 : 1);
 

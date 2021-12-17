@@ -10,7 +10,7 @@ namespace MASA.Blazor
         public RenderFragment ChildContent { get; set; }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -22,10 +22,10 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .Add($"padding-top:{GlobalConfig.Application.Top + GlobalConfig.Application.Bar}px")
-                        .Add($"padding-right:{GlobalConfig.Application.Right}px")
-                        .Add($"padding-bottom:{GlobalConfig.Application.Footer + GlobalConfig.Application.InsetFooter + GlobalConfig.Application.Bottom}px")
-                        .Add($"padding-left:{GlobalConfig.Application.Left}px");
+                        .Add($"padding-top:{MasaBlazor.Application.Top + MasaBlazor.Application.Bar}px")
+                        .Add($"padding-right:{MasaBlazor.Application.Right}px")
+                        .Add($"padding-bottom:{MasaBlazor.Application.Footer + MasaBlazor.Application.InsetFooter + MasaBlazor.Application.Bottom}px")
+                        .Add($"padding-left:{MasaBlazor.Application.Left}px");
                 })
                 .Apply("wrap", cssBuilder =>
                 {
@@ -34,7 +34,7 @@ namespace MASA.Blazor
                 });
 
             Attributes.Add("data-booted", true);
-            GlobalConfig.Application.IsBooted = true;
+            MasaBlazor.Application.IsBooted = true;
             AbstractProvider
                 .ApplyMainDefault();
         }

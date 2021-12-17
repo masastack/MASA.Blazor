@@ -113,6 +113,24 @@
       "Description": "指定mini属性开期时指定的宽度"
     },
     {
+      "Name": "MobileBreakpoint",
+      "Type": "OneOf`2",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OverlayColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OverlayOpacity",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Permanent",
       "Type": "Boolean",
       "Default": "false",
@@ -123,12 +141,6 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "将抽屉放置在右侧"
-    },
-    {
-      "Name": "ShowOverlay",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
     },
     {
       "Name": "Src",
@@ -149,16 +161,16 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Temporary",
       "Type": "Boolean",
       "Default": "false",
       "Description": "临时抽屉位于其应用之上，并使用稀松布（叠加）来使背景变暗"
-    },
-    {
-      "Name": "Top",
-      "Type": "StringNumber",
-      "Default": "",
-      "Description": ""
     },
     {
       "Name": "Touchless",

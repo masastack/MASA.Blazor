@@ -60,7 +60,7 @@ namespace MASA.Blazor
         public string Locale { get; set; }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         public bool IsDark
         {
@@ -144,7 +144,7 @@ namespace MASA.Blazor
         {
             get
             {
-                return IsReversing == !GlobalConfig.RTL ? "tab-reverse-transition" : "tab-transition";
+                return IsReversing == !MasaBlazor.RTL ? "tab-reverse-transition" : "tab-transition";
             }
         }
 

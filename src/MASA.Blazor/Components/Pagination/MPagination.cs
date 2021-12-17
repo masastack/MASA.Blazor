@@ -77,7 +77,7 @@ namespace MASA.Blazor
         public string Color { get; set; } = "primary";
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         [Inject]
         public Document Document { get; set; }
@@ -150,8 +150,8 @@ namespace MASA.Blazor
         public string GetIcon(int index)
         {
             return index == (int)PaginationIconTypes.First ?
-                (GlobalConfig.RTL ? NextIcon : PrevIcon) :
-                (GlobalConfig.RTL ? PrevIcon : NextIcon);
+                (MasaBlazor.RTL ? NextIcon : PrevIcon) :
+                (MasaBlazor.RTL ? PrevIcon : NextIcon);
         }
 
         public IEnumerable<StringNumber> GetItems()

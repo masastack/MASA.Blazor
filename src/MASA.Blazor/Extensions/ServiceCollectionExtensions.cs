@@ -12,7 +12,19 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddBlazorComponent();
             services.TryAddSingleton<IExceptionFilterProvider, ExceptionFilterProvider>();
-            services.TryAddScoped<GlobalConfig>();
+            services.TryAddScoped<MasaBlazor>();
+            services.TryAddScoped(serviceProvider => new Breakpoint(serviceProvider.GetService<Window>())
+            {
+                MobileBreakpoint = 1264,
+                ScrollBarWidth = 16,
+                Thresholds = new BreakpointThresholds
+                {
+                    Xs = 600,
+                    Sm = 960,
+                    Md = 1280,
+                    Lg = 1920
+                }
+            });
             services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
 
             return services;
@@ -27,7 +39,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddBlazorComponent();
             services.TryAddSingleton<IExceptionFilterProvider, ExceptionFilterProvider>();
-            services.TryAddScoped<GlobalConfig>();
+            services.TryAddScoped<MasaBlazor>();
             services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
 
             return services;

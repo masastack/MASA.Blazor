@@ -67,7 +67,7 @@ namespace MASA.Blazor
         public RenderFragment<(int PageStart, int PageStop, int ItemsLength)> PageTextContent { get; set; }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         public IEnumerable<DataItemsPerPageOption> ComputedDataItemsPerPageOptions
         {
@@ -82,7 +82,7 @@ namespace MASA.Blazor
             }
         }
 
-        public bool RTL => GlobalConfig.RTL;
+        public bool RTL => MasaBlazor.RTL;
 
         public bool DisableNextPageIcon
         {
@@ -96,7 +96,7 @@ namespace MASA.Blazor
         {
             if (firstRender)
             {
-                GlobalConfig.OnRTLChange += OnRTLChange;
+                MasaBlazor.OnRTLChange += OnRTLChange;
             }
         }
 
