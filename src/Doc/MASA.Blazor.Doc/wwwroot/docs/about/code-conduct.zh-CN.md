@@ -3,7 +3,7 @@ order: 3
 title: 行为准则
 ---
 
-如有关于我们的 行为准则的问题或疑虑，请联系我们[support@vuetifyjs.com]()。
+如有关于我们的 行为准则的问题或疑虑，请联系我们[support@masablazor.com]()。
 
 ## 我们的承诺
 
