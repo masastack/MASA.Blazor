@@ -35,14 +35,7 @@ namespace Microsoft.Extensions.DependencyInjection
             var builder = new MasaBlazorOptionsBuilder(services);
             builderAction?.Invoke(builder);
 
-            InitBlazorComponentVariables(builder.Options);
-
-            services.AddBlazorComponent();
-            services.TryAddSingleton<IExceptionFilterProvider, ExceptionFilterProvider>();
-            services.TryAddScoped<MasaBlazor>();
-            services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
-
-            return services;
+            return services.AddMasaBlazor(builder.Options);
         }
 
         private static void InitBlazorComponentVariables(MasaBlazorOptions options)
