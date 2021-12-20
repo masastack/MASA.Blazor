@@ -15,7 +15,6 @@ namespace MASA.Blazor
     {
         private string _badInput;
         private CancellationTokenSource _cancellationTokenSource;
-        private bool _pending;
         private bool _shouldRender = true;
 
         [Parameter]
@@ -536,47 +535,36 @@ namespace MASA.Blazor
             }
         }
 
-        public virtual Task HandleOnInputAsync(ChangeEventArgs args)
+        public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
         {
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+
+            //Since event will call StateHasChanged,we should prevent it
+            //So that,view will not change untill 300 seconds no actions
+            _shouldRender = false;
+            await Task.Delay(300, _cancellationTokenSource.Token);
+
             var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
             if (success)
             {
                 _badInput = null;
                 InternalValue = val;
 
-                //We use pending so NextTick will not be called too more times
-                if (!_pending)
+                _shouldRender = true;
+                if (OnInput.HasDelegate)
                 {
-                    _pending = true;
-                    NextTick(async () =>
-                    {
-                        //We prevent render here to avoid continuous render
-                        _shouldRender = false;
-
-                        _cancellationTokenSource?.Cancel();
-                        _cancellationTokenSource = new CancellationTokenSource();
-                        await Task.Delay(300, _cancellationTokenSource.Token);
-
-                        _shouldRender = true;
-                        if (OnInput.HasDelegate)
-                        {
-                            await OnInput.InvokeAsync(Value);
-                        }
-                        else
-                        {
-                            StateHasChanged();
-                        }
-
-                        _pending = false;
-                    });
+                    await OnInput.InvokeAsync(Value);
+                }
+                else
+                {
+                    StateHasChanged();
                 }
             }
             else
             {
                 _badInput = args.Value.ToString();
             }
-
-            return Task.CompletedTask;
         }
 
         protected override bool ShouldRender()
