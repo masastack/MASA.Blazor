@@ -188,10 +188,11 @@ namespace MASA.Blazor
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
+
             if (firstRender)
             {
                 await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
-
                 await (Menu as MMenu)?.UpdateActivator(InputSlotElement);
             }
         }

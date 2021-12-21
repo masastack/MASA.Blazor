@@ -144,32 +144,6 @@ namespace MASA.Blazor
 
         protected double LabelWidth { get; set; }
 
-        public int ComputeLabeLength
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Label))
-                {
-                    return 0;
-                }
-
-                var length = 0;
-                for (int i = 0; i < Label.Length; i++)
-                {
-                    if (Label[i] > 127)
-                    {
-                        length += 2;
-                    }
-                    else
-                    {
-                        length += 1;
-                    }
-                }
-
-                return length + 1;
-            }
-        }
-
         public string LegendInnerHTML => "&#8203;";
 
         public bool HasCounter => Counter != false && Counter != null;
