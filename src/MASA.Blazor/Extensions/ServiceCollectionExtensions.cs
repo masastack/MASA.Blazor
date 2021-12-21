@@ -13,6 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddBlazorComponent();
             services.TryAddSingleton<IExceptionFilterProvider, ExceptionFilterProvider>();
             services.TryAddScoped<MasaBlazor>();
+            services.TryAddScoped<Application>();
             services.TryAddScoped(serviceProvider => new Breakpoint(serviceProvider.GetService<Window>())
             {
                 MobileBreakpoint = 1264,

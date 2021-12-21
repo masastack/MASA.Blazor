@@ -87,5 +87,20 @@ namespace MASA.Blazor
                 element.ClientHeight : ComputedHeight.ToDouble();
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            RemoveApplication();
+        }
+
+        private void RemoveApplication()
+        {
+            if (!App)
+            {
+                return;
+            }
+
+            MasaBlazor.Application.Bar = 0;
+        }
     }
 }

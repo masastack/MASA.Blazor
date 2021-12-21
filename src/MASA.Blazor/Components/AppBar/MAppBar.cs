@@ -364,6 +364,11 @@ namespace MASA.Blazor
 
         private void RemoveApplication()
         {
+            if (!App)
+            {
+                return;
+            }
+
             if (!Bottom)
                 MasaBlazor.Application.Top = 0;
             else

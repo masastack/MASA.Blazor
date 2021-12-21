@@ -188,12 +188,28 @@ namespace MASA.Blazor
                 var name = MasaBlazor.Breakpoint.Name;
                 var mobileBreakpoint = MasaBlazor.Breakpoint.MobileBreakpoint;
 
-                if (mobileBreakpoint.Value == MobileBreakpoint.Value)
+                if (Equals(mobileBreakpoint.Value, MobileBreakpoint.Value))
                 {
                     return mobile;
                 }
 
                 return mobileBreakpoint.IsT1 ? width < mobileBreakpoint.AsT1 : name == mobileBreakpoint.AsT0;
+            }
+        }
+
+        protected bool ReactsToResize
+        {
+            get
+            {
+                return !DisableResizeWatcher && !Stateless;
+            }
+        }
+
+        protected bool ReactsToMobile
+        {
+            get
+            {
+                return App && !DisableResizeWatcher && !Permanent && !Stateless && !Temporary;
             }
         }
 
@@ -214,6 +230,11 @@ namespace MASA.Blazor
                         IsActive = val;
                     }
                 })
+                .Watch<bool>(nameof(IsActive), () =>
+                {
+                    //We will remove this when mixins applicationable finished
+                    _ = UpdateApplicationAsync();
+                })
                 .Watch<bool>(nameof(ExpandOnHover), UpdateMiniVariant)
                 .Watch<bool>(nameof(IsMouseover), val =>
                 {
@@ -229,6 +250,11 @@ namespace MASA.Blazor
         {
             await InvokeAsync(async () =>
             {
+                if (!ReactsToResize || !ReactsToMobile)
+                {
+                    return;
+                }
+
                 //We will change this when watcher finished
                 IsActive = !IsMobile;
                 if (ValueChanged.HasDelegate)
@@ -421,6 +447,11 @@ namespace MASA.Blazor
 
         private void RemoveApplication()
         {
+            if (!App)
+            {
+                return;
+            }
+
             if (Right)
                 MasaBlazor.Application.Right = 0;
             else

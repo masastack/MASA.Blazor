@@ -184,6 +184,11 @@ namespace MASA.Blazor
 
         private void RemoveApplication()
         {
+            if (!App)
+            {
+                return;
+            }
+
             if (Inset)
                 MasaBlazor.Application.InsetFooter = 0;
             else
