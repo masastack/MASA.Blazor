@@ -1,9 +1,9 @@
-﻿@page "/api/{componentName}"
+﻿@page "/api/{ApiName}"
 @layout ApiLayout
 @using MASA.Blazor.Doc.Services
 @inherits OwningComponentBase<DemoService>
 
-<SectionContent Title="@($"{ComponentName} API")" Id="@ComponentName" IsAnchor Level="1">
+<SectionContent Title="@($"{ApiName} API")" Id="@ApiName" IsAnchor Level="1">
     @if (_api != null)
     {
         <SectionContent Title="组件页面" Level="2" IsAnchor>

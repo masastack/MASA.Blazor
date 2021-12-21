@@ -860,14 +860,6 @@
       },
       {
         "Order": 0,
-        "Title": "Uploads",
-        "FullTitle": "Uploads",
-        "Type": "menuItem",
-        "Url": "components/uploads",
-        "Children": []
-      },
-      {
-        "Order": 0,
         "Title": "Virtual scroller",
         "FullTitle": "Virtual scroller",
         "Type": "menuItem",
@@ -2235,30 +2227,6 @@
         "FullTitle": "ECharts",
         "Type": "menuItem",
         "Url": "api/mecharts",
-        "Contents": [
-          {
-            "Id": "section-1029938464",
-            "Title": "Props",
-            "Level": 0
-          },
-          {
-            "Id": "section-444565322",
-            "Title": "Contents",
-            "Level": 0
-          },
-          {
-            "Id": "section-1613329801",
-            "Title": "Events",
-            "Level": 0
-          }
-        ]
-      },
-      {
-        "Order": 0,
-        "Title": "essage",
-        "FullTitle": "essage",
-        "Type": "menuItem",
-        "Url": "api/message",
         "Contents": [
           {
             "Id": "section-1029938464",
@@ -4419,30 +4387,6 @@
         "FullTitle": "TreeviewNode",
         "Type": "menuItem",
         "Url": "api/mtreeviewnode",
-        "Contents": [
-          {
-            "Id": "section-1029938464",
-            "Title": "Props",
-            "Level": 0
-          },
-          {
-            "Id": "section-444565322",
-            "Title": "Contents",
-            "Level": 0
-          },
-          {
-            "Id": "section-1613329801",
-            "Title": "Events",
-            "Level": 0
-          }
-        ]
-      },
-      {
-        "Order": 0,
-        "Title": "Upload",
-        "FullTitle": "Upload",
-        "Type": "menuItem",
-        "Url": "api/mupload",
         "Contents": [
           {
             "Id": "section-1029938464",

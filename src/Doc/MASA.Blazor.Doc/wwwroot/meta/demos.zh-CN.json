@@ -984,23 +984,6 @@
     ]
   },
   {
-    "Order": 47,
-    "Title": "上传文件",
-    "FullTitle": "上传文件",
-    "Type": "itemGroup",
-    "Children": [
-      {
-        "Order": 0,
-        "Title": "Uploads",
-        "SubTitle": "上传文件",
-        "FullTitle": "Uploads (上传文件)",
-        "Type": "menuItem",
-        "Url": "components/uploads",
-        "Children": []
-      }
-    ]
-  },
-  {
     "Order": 48,
     "Title": "虚拟滚动条",
     "FullTitle": "虚拟滚动条",

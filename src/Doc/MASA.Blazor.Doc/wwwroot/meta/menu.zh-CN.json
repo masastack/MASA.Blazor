@@ -961,15 +961,6 @@
       },
       {
         "Order": 0,
-        "Title": "Uploads",
-        "SubTitle": "上传文件",
-        "FullTitle": "Uploads (上传文件)",
-        "Type": "menuItem",
-        "Url": "components/uploads",
-        "Children": []
-      },
-      {
-        "Order": 0,
         "Title": "Virtual scroller",
         "SubTitle": "虚拟滚动条",
         "FullTitle": "Virtual scroller (虚拟滚动条)",
@@ -2338,78 +2329,6 @@
         "FullTitle": "ECharts",
         "Type": "menuItem",
         "Url": "api/mecharts",
-        "Contents": [
-          {
-            "Id": "section-3122241",
-            "Title": "属性",
-            "Level": 0
-          },
-          {
-            "Id": "section-3374707",
-            "Title": "插槽",
-            "Level": 0
-          },
-          {
-            "Id": "section-2654231",
-            "Title": "事件",
-            "Level": 0
-          }
-        ]
-      },
-      {
-        "Order": 0,
-        "Title": "enu",
-        "FullTitle": "enu",
-        "Type": "menuItem",
-        "Url": "api/menu",
-        "Contents": [
-          {
-            "Id": "section-3122241",
-            "Title": "属性",
-            "Level": 0
-          },
-          {
-            "Id": "section-3374707",
-            "Title": "插槽",
-            "Level": 0
-          },
-          {
-            "Id": "section-2654231",
-            "Title": "事件",
-            "Level": 0
-          }
-        ]
-      },
-      {
-        "Order": 0,
-        "Title": "essage",
-        "FullTitle": "essage",
-        "Type": "menuItem",
-        "Url": "api/message",
-        "Contents": [
-          {
-            "Id": "section-3122241",
-            "Title": "属性",
-            "Level": 0
-          },
-          {
-            "Id": "section-3374707",
-            "Title": "插槽",
-            "Level": 0
-          },
-          {
-            "Id": "section-2654231",
-            "Title": "事件",
-            "Level": 0
-          }
-        ]
-      },
-      {
-        "Order": 0,
-        "Title": "essages",
-        "FullTitle": "essages",
-        "Type": "menuItem",
-        "Url": "api/messages",
         "Contents": [
           {
             "Id": "section-3122241",
@@ -4618,30 +4537,6 @@
         "FullTitle": "TreeviewNode",
         "Type": "menuItem",
         "Url": "api/mtreeviewnode",
-        "Contents": [
-          {
-            "Id": "section-3122241",
-            "Title": "属性",
-            "Level": 0
-          },
-          {
-            "Id": "section-3374707",
-            "Title": "插槽",
-            "Level": 0
-          },
-          {
-            "Id": "section-2654231",
-            "Title": "事件",
-            "Level": 0
-          }
-        ]
-      },
-      {
-        "Order": 0,
-        "Title": "Upload",
-        "FullTitle": "Upload",
-        "Type": "menuItem",
-        "Url": "api/mupload",
         "Contents": [
           {
             "Id": "section-3122241",
