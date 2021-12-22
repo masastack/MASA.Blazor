@@ -60,7 +60,7 @@ namespace MASA.Blazor
 
         private async Task CalculateInputHeight()
         {
-            var input = Document.QuerySelector(InputElement);
+            var input = Document.GetElementByReference(InputElement);
             var height = await input.GetScrollHeightWithoutHeight();
             var minheight = Rows * RowHeight.ToInt32() * 1.0;
 

@@ -380,7 +380,7 @@ namespace MASA.Blazor
 
         protected async Task<double> ParseMouseMoveAsync(MouseEventArgs args)
         {
-            var track = Document.QuerySelector(TrackElement);
+            var track = Document.GetElementByReference(TrackElement);
             var rect = await track.GetBoundingClientRectAsync();
 
             var tractStart = Vertical ? rect.Top : rect.Left;

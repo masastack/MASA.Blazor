@@ -137,7 +137,7 @@ namespace MASA.Blazor
         {
             if (firstRender)
             {
-                var el = Document.QuerySelector(Ref);
+                var el = Document.GetElementByReference(Ref);
                 var width = await el.ParentElement.GetPropAsync<double?>("clientWidth");
                 if (width != null)
                 {

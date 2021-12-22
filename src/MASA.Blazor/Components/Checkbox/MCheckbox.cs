@@ -141,7 +141,7 @@ namespace MASA.Blazor
             if (firstRender)
             {
                 //It's used to prevent ripple directive,and we may remove this 
-                var inputSlot = Document.QuerySelector(InputSlotElement);
+                var inputSlot = Document.GetElementByReference(InputSlotElement);
                 await inputSlot.AddEventListenerAsync("mousedown", EventCallback.Empty, stopPropagation: true);
                 await inputSlot.AddEventListenerAsync("mouseup", EventCallback.Empty, stopPropagation: true);
             }
