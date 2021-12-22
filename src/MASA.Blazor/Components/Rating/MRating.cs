@@ -235,7 +235,7 @@ namespace MASA.Blazor
         {
             if (HalfIncrements)
             {
-                var target = Document.QuerySelector(args.Target.ElementReference);
+                var target = Document.GetElementByReference(args.Target.ElementReference);
                 if (target != null)
                 {
                     var rect = await target.GetBoundingClientRectAsync();

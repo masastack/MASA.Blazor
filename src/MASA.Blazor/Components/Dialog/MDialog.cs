@@ -121,8 +121,8 @@ namespace MASA.Blazor
         {
             await JsInvokeAsync(JsInteropConstants.AddOutsideClickEventListener,
                 DotNetObjectReference.Create(new Invoker<object>(OutsideClick)),
-                new[] { Document.QuerySelector(DialogRef).Selector },
-                new[] { Document.QuerySelector(OverlayRef).Selector });
+                new[] { Document.GetElementByReference(DialogRef).Selector },
+                new[] { Document.GetElementByReference(OverlayRef).Selector });
         }
 
         private async Task AnimateClick()

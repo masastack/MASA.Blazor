@@ -419,10 +419,10 @@ namespace MASA.Blazor
                 return;
             }
 
-            var label = Document.QuerySelector(LabelReference.Ref);
+            var label = Document.GetElementByReference(LabelReference.Ref);
             var scrollWidth = await label.GetPropAsync<double>("scrollWidth");
 
-            var element = Document.QuerySelector(Ref);
+            var element = Document.GetElementByReference(Ref);
             var offsetWidth = await element.GetPropAsync<double>("offsetWidth");
 
             LabelWidth = Math.Min(scrollWidth * 0.75 + 6, offsetWidth - 24);
@@ -435,7 +435,7 @@ namespace MASA.Blazor
                 return;
             }
 
-            var prefix = Document.QuerySelector(PrefixElement);
+            var prefix = Document.GetElementByReference(PrefixElement);
             PrefixWidth = await prefix.GetPropAsync<double>("offsetWidth");
         }
 
@@ -451,7 +451,7 @@ namespace MASA.Blazor
                 return;
             }
 
-            var prependInner = Document.QuerySelector(PrependInnerElement);
+            var prependInner = Document.GetElementByReference(PrependInnerElement);
             PrependWidth = await prependInner.GetPropAsync<double>("offsetWidth");
         }
 
