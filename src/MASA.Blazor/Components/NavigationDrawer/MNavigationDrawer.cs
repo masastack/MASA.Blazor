@@ -248,6 +248,12 @@ namespace MASA.Blazor
 
         private async Task OnBreakpointOnUpdate()
         {
+            NextTick(async () =>
+            {
+                //When window resize,we should update ZIndex for Overlay 
+                ZIndex = await GetActiveZIndexAsync();
+            });
+
             await InvokeAsync(async () =>
             {
                 if (!ReactsToResize || !ReactsToMobile)
@@ -267,6 +273,8 @@ namespace MASA.Blazor
                 }
             });
         }
+
+        private Task<int> GetActiveZIndexAsync() => JsInvokeAsync<int>(JsInteropConstants.GetZIndex, Ref);
 
         private void UpdateMiniVariant(bool val)
         {
@@ -424,8 +432,6 @@ namespace MASA.Blazor
                 ZIndex = await GetActiveZIndexAsync();
             }
         }
-
-        private Task<int> GetActiveZIndexAsync() => JsInvokeAsync<int>(JsInteropConstants.GetZIndex, Ref);
 
         public override async Task HandleOnClickAsync(MouseEventArgs e)
         {
