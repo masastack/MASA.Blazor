@@ -7,11 +7,6 @@ namespace MASA.Blazor
     {
         public Dimensions Dimensions { get; set; }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
-        }
-
         protected override void SetComponentClass()
         {
             CssProvider
