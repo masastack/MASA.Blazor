@@ -7138,42 +7138,6 @@
     "FullTitle": "Treeview"
   },
   {
-    "Desc": "<p>The <code>MFileInput</code> component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.</p>\n",
-    "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6588862+08:00",
-    "DemoList": [
-      {
-        "Order": 0,
-        "Name": "index",
-        "Title": "Usage",
-        "Description": "",
-        "Code": "@using System.IO;\r\n\r\n<MSwitch @bind-Value=\"chips\" Label=\"Use chips\"></MSwitch>\r\n\r\n<MUpload Files=\"@files\" OnUpload=\"HandleUpload\" Multiple ShowSize Counter Chips=\"chips\" Accept=\"image/*\" @ref=\"_uploadElementReference\">\r\n    <ActivatorContent>\r\n        <MButton Color=\"primary\">Upload</MButton>\r\n    </ActivatorContent>\r\n</MUpload>\r\n\r\n@code {\r\n    protected MUpload _uploadElementReference;\r\n\r\n    bool chips = false;\r\n\r\n    List<UploadFile> files = new List<UploadFile>()\r\n    {\r\n    new UploadFile { FileName =\"defaultFileName1\", Url = \"https://picsum.photos/510/300?random\", Uploaded = true, IsImage = true },\r\n    new UploadFile { FileName = \"defaultFileNam2\", Url = \"https://picsum.photos/520/300?random\", Uploaded = true, IsImage = true }\r\n    };\r\n\r\n    [Inject]\r\n    public IJSRuntime JsRuntime { get; set; }\r\n\r\n    async Task HandleUpload(List<UploadFile> uploadFiles)\r\n    {\r\n        var result = await JsRuntime.InvokeAsync<List<UploadFile>>(\"testUploadFile\", _uploadElementReference.Element);\r\n        for (int i = 0; i < result.Count; i++)\r\n        {\r\n            var item = result[i];\r\n            uploadFiles[i].Uploaded = item.Uploaded;\r\n            uploadFiles[i].Url = item.Url;\r\n            uploadFiles[i].Error = item.Error;\r\n        }\r\n\r\n        files.AddRange(uploadFiles);\r\n    }\r\n\r\n    // javascript:\r\n    //\r\n    // window.testUploadFile = function(element) {\r\n    //     let result = []\r\n    //\r\n    //     if(element){\r\n    //         for(let i = 0; i< element.files.length; i++){\r\n    //             var file = element.files[i]\r\n    //\r\n    //             // TODO: oss here\r\n    //\r\n    //             let fileInfo = {\r\n    //                 fileName: file.name,\r\n    //                 uploaded: true,\r\n    //                 error: null,\r\n    //                 url: \"\",\r\n    //                 value: null\r\n    //             }\r\n    //\r\n    //             result.push(fileInfo)\r\n    //         }\r\n    //     }\r\n    //\r\n    //     return result;\r\n    // }\r\n}",
-        "Type": "Demos.Components.Upload.usage.Index",
-        "Style": "",
-        "Debug": false,
-        "Group": 4
-      },
-      {
-        "Order": 1,
-        "Name": "picture",
-        "Title": "Picture",
-        "Description": "",
-        "Code": "@using System.IO;\r\n\r\n<MUpload Files=\"@files\" OnUpload=\"HandleUpload\" Multiple Card Accept=\"image/*\">\r\n    <ActivatorContent>\r\n        @if (files.Count == 0)\r\n                {\r\n        <MCard Height=\"102\" Width=\"102\" Outlined Style=\"display:flex;align-items:center;justify-content:center;border-style:dashed;cursor:pointer;\">\r\n            <MButton Icon><MIcon>mdi-plus</MIcon></MButton>\r\n        </MCard>\r\n        }\r\n    </ActivatorContent>\r\n</MUpload>\r\n\r\n@code {\r\n    List<UploadFile> files = new List<UploadFile>()\r\n    {\r\n    new UploadFile { FileName =\"defaultFileName1\", Url = \"https://picsum.photos/510/300?random\", Uploaded = true, IsImage = true },\r\n    };\r\n\r\n    async Task HandleUpload(List<UploadFile> uploadFiles)\r\n    {\r\n        // TODO: upload to server\r\n\r\n        foreach (var file in uploadFiles)\r\n        {\r\n            var buffers = new byte[file.BrowserFile.Size];\r\n            await file.BrowserFile.OpenReadStream().ReadAsync(buffers);\r\n            // todo with buffers\r\n\r\n            bool succeed = true;\r\n            if (succeed)\r\n            {\r\n                // succeed to upload\r\n                file.Uploaded = true;\r\n                //file.Url = \"\";\r\n            }\r\n            else\r\n            {\r\n                // failed to upload\r\n                file.Error = \"Error happens\";\r\n            }\r\n        }\r\n\r\n        files.AddRange(uploadFiles);\r\n    }\r\n}",
-        "Type": "Demos.Components.Upload.props.Picture",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cols": 1,
-    "Title": "Uploads",
-    "Type": "Upload",
-    "FullTitle": "Uploads"
-  },
-  {
     "Desc": "<p>The MVirtualScroll component displays a virtual, infinite list. It supports dynamic height and scrolling vertically.</p>\n",
     "Order": 0,
     "OtherDocs": {
