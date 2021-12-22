@@ -88,45 +88,13 @@ namespace MASA.Blazor
 
         public bool IsLinkage => Href != null && (List?.Linkage ?? Linkage);
 
-        private void OnLocationChanged(object sender, LocationChangedEventArgs e)
-        {
-        }
-
-        private bool MatchRoute(string path)
-        {
-            var relativePath = NavigationManager.ToBaseRelativePath(path);
-            if (Href.StartsWith("/"))
-            {
-                Href = Href[1..];
-            }
-
-            return string.Equals(Href, relativePath, StringComparison.OrdinalIgnoreCase);
-        }
-
-        internal void Deactive()
-        {
-            IsActive = false;
-            StateHasChanged();
-        }
-
-        internal void Active()
-        {
-            IsActive = true;
-            StateHasChanged();
-        }
-
         protected override void OnInitialized()
         {
             base.OnInitialized();
 
-            if (IsLinkage && MatchRoute(NavigationManager.Uri))
-            {
-                IsActive = true;
-            }
-        }
+            NavigationManager.LocationChanged += OnLocationChanged;
 
-        protected override void OnAfterRender(bool firstRender)
-        {
+            UpdateActiveForLinkage();
         }
 
         protected override void OnParametersSet()
@@ -170,9 +138,34 @@ namespace MASA.Blazor
                 });
         }
 
+        private bool MatchRoute(string path)
+        {
+            var relativePath = NavigationManager.ToBaseRelativePath(path);
+            if (Href.StartsWith("/"))
+            {
+                Href = Href[1..];
+            }
+
+            return string.Equals(Href, relativePath, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private void OnLocationChanged(object sender, LocationChangedEventArgs e)
+        {
+            UpdateActiveForLinkage();
+            
+            StateHasChanged();
+        }
+
+        private void UpdateActiveForLinkage()
+        {
+            if (IsLinkage)
+            {
+                IsActive = MatchRoute(NavigationManager.Uri);
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
-            List?.Items?.Remove(this);
             NavigationManager.LocationChanged -= OnLocationChanged;
 
             base.Dispose(disposing);
