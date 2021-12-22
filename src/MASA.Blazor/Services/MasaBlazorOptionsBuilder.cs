@@ -21,15 +21,16 @@ namespace MASA.Blazor
             Services.AddSingleton<IExceptionFilter, TExceptionFilter>();
             return this;
         }
+
         public MasaBlazorOptionsBuilder UseDarkTheme()
         {
             Options.DarkTheme = true;
             return this;
         }
 
-        public MasaBlazorOptionsBuilder UseTheme(ThemeOptions options)
+        public MasaBlazorOptionsBuilder UseTheme(Action<ThemeOptions> themeOptionsAction)
         {
-            Options.Theme = options;
+            themeOptionsAction?.Invoke(Options.Theme);
             return this;
         }
     }
