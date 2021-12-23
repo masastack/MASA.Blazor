@@ -14,20 +14,6 @@ namespace MASA.Blazor
     {
         private Func<TItem, string, bool> _filter;
 
-        protected override BMenuProps GetDefaultMenuProps()
-        {
-            var props = base.GetDefaultMenuProps();
-            props.OffsetY = true;
-            
-            // TODO: https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L23
-            // props.OffsetOverflow = true;
-            // props.Transition = false;
-
-            return props;
-        }
-
-        protected Timer Timer { get; set; }
-
         [Parameter]
         public Func<TItem, string, bool> Filter
         {
@@ -42,9 +28,6 @@ namespace MASA.Blazor
             }
             set { _filter = value; }
         }
-
-        [Parameter]
-        public double Interval { get; set; } = 500;
 
         [Parameter]
         public EventCallback<string> OnSearchInputUpdate { get; set; }
@@ -71,19 +54,19 @@ namespace MASA.Blazor
             }
         }
 
-        public override IReadOnlyList<TItem> ComputedItems => Items.Where(r => QueryText == null || Filter(r, QueryText)).ToList();
-
-        protected override void OnInitialized()
+        protected override BMenuProps GetDefaultMenuProps()
         {
-            base.OnInitialized();
+            var props = base.GetDefaultMenuProps();
+            props.OffsetY = true;
 
-            if (Timer == null && Interval > 0)
-            {
-                Timer = new Timer();
-                Timer.Interval = Interval;
-                Timer.Elapsed += Timer_Elapsed;
-            }
+            // TODO: https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L23
+            // props.OffsetOverflow = true;
+            // props.Transition = false;
+
+            return props;
         }
+
+        public override IReadOnlyList<TItem> ComputedItems => Items.Where(r => QueryText == null || Filter(r, QueryText)).ToList();
 
         protected override void SetComponentClass()
         {
@@ -105,20 +88,6 @@ namespace MASA.Blazor
                 });
         }
 
-        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            InvokeAsync(async () =>
-            {
-                var args = new ChangeEventArgs()
-                {
-                    Value = QueryText
-                };
-                await base.HandleOnInputAsync(args);
-
-                Timer.Stop();
-            });
-        }
-
         public override async Task HandleOnBlurAsync(FocusEventArgs args)
         {
             QueryText = default;
@@ -126,41 +95,17 @@ namespace MASA.Blazor
             await base.HandleOnBlurAsync(args);
         }
 
-        public override async Task HandleOnChangeAsync(ChangeEventArgs args)
-        {
-            QueryText = args.Value.ToString();
-
-            if (OnSearchInputUpdate.HasDelegate)
-            {
-                await OnSearchInputUpdate.InvokeAsync(QueryText);
-            }
-        }
-
         public override async Task HandleOnInputAsync(ChangeEventArgs args)
         {
             QueryText = args.Value.ToString();
             HighlightIndex = -1;
 
-            if (OnInput.HasDelegate)
+            if (OnSearchInputUpdate.HasDelegate)
             {
-                if (Timer != null && Interval > 0)
-                {
-                    if (!Timer.Enabled)
-                    {
-                        Timer.Start();
-                    }
-                    else
-                    {
-                        //restart
-                        Timer.Stop();
-                        Timer.Start();
-                    }
-                }
-                else
-                {
-                    await base.HandleOnInputAsync(args);
-                }
+                await OnSearchInputUpdate.InvokeAsync(QueryText);
             }
+
+            await base.HandleOnInputAsync(args);
         }
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
@@ -228,12 +173,6 @@ namespace MASA.Blazor
                 default:
                     break;
             }
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            Timer?.Dispose();
-            base.Dispose(disposing);
         }
     }
 }
