@@ -25,10 +25,10 @@ namespace MASA.Blazor.Presets
         };
 
         [Parameter]
-        public bool Visible { get; set; }
+        public bool Value { get; set; }
 
         [Parameter]
-        public EventCallback<bool> VisibleChanged { get; set; }
+        public EventCallback<bool> ValueChanged { get; set; }
 
         [Parameter]
         public AlertTypes Type { get; set; }
@@ -41,9 +41,13 @@ namespace MASA.Blazor.Presets
 
         private async Task HandleOnClick()
         {
-            if (VisibleChanged.HasDelegate)
+            if (ValueChanged.HasDelegate)
             {
-                await VisibleChanged.InvokeAsync(false);
+                await ValueChanged.InvokeAsync(false);
+            }
+            else
+            {
+                Value = false;
             }
         }
     }

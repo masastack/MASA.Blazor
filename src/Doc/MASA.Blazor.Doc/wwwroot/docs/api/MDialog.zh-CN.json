@@ -23,6 +23,12 @@
       "Description": ""
     },
     {
+      "Name": "ContentClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Dark",
       "Type": "Boolean",
       "Default": "false",
@@ -80,6 +86,12 @@
       "Name": "OpenOnHover",
       "Type": "Boolean",
       "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Origin",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {

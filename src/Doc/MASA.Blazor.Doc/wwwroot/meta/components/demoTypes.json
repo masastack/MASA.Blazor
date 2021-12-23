@@ -424,6 +424,7 @@
   "Demos.Components.Pickers.children.TimePickers.misc.DialogAndMenu",
   "Demos.Components.Presets.props.Actions",
   "Demos.Components.Presets.props.Confirm",
+  "Demos.Components.Presets.props.Drawer",
   "Demos.Components.Presets.props.FormModal",
   "Demos.Components.Presets.props.Modal",
   "Demos.Components.Presets.props.PageHeader",
