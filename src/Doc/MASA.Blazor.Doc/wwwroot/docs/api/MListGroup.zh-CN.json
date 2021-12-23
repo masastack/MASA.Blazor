@@ -43,7 +43,7 @@
     },
     {
       "Name": "Group",
-      "Type": "String",
+      "Type": "List`1",
       "Default": "null",
       "Description": ""
     },

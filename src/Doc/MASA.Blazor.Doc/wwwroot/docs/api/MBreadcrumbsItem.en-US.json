@@ -23,6 +23,12 @@
       "Description": ""
     },
     {
+      "Name": "Exact",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Href",
       "Type": "String",
       "Default": "null",

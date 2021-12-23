@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
@@ -68,35 +69,12 @@ namespace MASA.Blazor
             }
         }
 
-        [CascadingParameter]
-        public BList List { get; set; }
-
-        [CascadingParameter]
-        public BNavigationDrawer NavigationDrawer { get; set; }
-
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        [CascadingParameter]
-        public BListGroup ListGroup { get; set; }
-
         [Parameter]
         public bool Highlighted { get; set; }
 
         [Parameter]
         public bool Ripple { get; set; }
-
-        public bool IsLinkage => Href != null && (List?.Linkage ?? Linkage);
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            NavigationManager.LocationChanged += OnLocationChanged;
-
-            UpdateActiveForLinkage();
-        }
-
+        
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -136,39 +114,6 @@ namespace MASA.Blazor
                         .AddTextColor(Color)
                         .AddTheme(IsDark);
                 });
-        }
-
-        private bool MatchRoute(string path)
-        {
-            var relativePath = NavigationManager.ToBaseRelativePath(path);
-            if (Href.StartsWith("/"))
-            {
-                Href = Href[1..];
-            }
-
-            return string.Equals(Href, relativePath, StringComparison.OrdinalIgnoreCase);
-        }
-
-        private void OnLocationChanged(object sender, LocationChangedEventArgs e)
-        {
-            UpdateActiveForLinkage();
-            
-            StateHasChanged();
-        }
-
-        private void UpdateActiveForLinkage()
-        {
-            if (IsLinkage)
-            {
-                IsActive = MatchRoute(NavigationManager.Uri);
-            }
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            NavigationManager.LocationChanged -= OnLocationChanged;
-
-            base.Dispose(disposing);
         }
     }
 }

@@ -966,7 +966,7 @@
         "Name": "linkage",
         "Title": "路由联动",
         "Description": "",
-        "Code": "<div>\r\n    <MBreadcrumbs Items=\"items\" Linkage></MBreadcrumbs>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"MASA.Blazor\", Href = \"/\"},\r\n        new BreadcrumbItem() {Text = \"Components\", Href = \"/components\"},\r\n        new BreadcrumbItem() {Text = \"Breadcrumbs\", Href = \"/components/breadcrumbs\"}\r\n    };\r\n\r\n}",
+        "Code": "<MBreadcrumbs Items=\"items\" Linkage></MBreadcrumbs>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() { Text = \"MASA.Blazor\", Href = \"/\", Exact = true },\r\n        new BreadcrumbItem() { Text = \"Components\", Href = \"/components\", Exact = true },\r\n        new BreadcrumbItem() { Text = \"Breadcrumbs\", Href = \"/components/breadcrumbs\" }\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Breadcrumbs.props.Linkage",
         "Style": "",
         "Debug": false,

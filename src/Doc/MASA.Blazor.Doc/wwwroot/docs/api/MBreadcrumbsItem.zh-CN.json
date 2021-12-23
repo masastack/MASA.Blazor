@@ -23,6 +23,12 @@
       "Description": "移除组件的单击或 target 功能。"
     },
     {
+      "Name": "Exact",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Href",
       "Type": "String",
       "Default": "null",
