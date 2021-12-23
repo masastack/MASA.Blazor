@@ -68,6 +68,8 @@ namespace MASA.Blazor
 
         public override IReadOnlyList<TItem> ComputedItems => Items.Where(r => QueryText == null || Filter(r, QueryText)).ToList();
 
+        public override bool IsDirty => !string.IsNullOrEmpty(QueryText) || base.IsDirty;
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -173,6 +175,16 @@ namespace MASA.Blazor
                 default:
                     break;
             }
+        }
+
+        public override async Task HandleOnClearClickAsync(MouseEventArgs args)
+        {
+            if (!string.IsNullOrEmpty(QueryText))
+            {
+                QueryText = null;
+            }
+
+            await base.HandleOnClearClickAsync(args);
         }
     }
 }
