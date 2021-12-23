@@ -91,6 +91,17 @@ namespace MASA.Blazor
 
         public virtual bool IsLabelActive => IsDirty;
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            Watcher
+                .Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), () =>
+                {
+                    Validate();
+                });
+        }
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
