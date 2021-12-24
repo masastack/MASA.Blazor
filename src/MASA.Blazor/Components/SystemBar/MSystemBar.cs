@@ -68,21 +68,24 @@ namespace MASA.Blazor
                 });
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override async Task OnParametersSetAsync()
         {
-            if (firstRender)
-                UpdateApplication(await JsInvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, Ref));
-
-            await base.OnAfterRenderAsync(firstRender);
+            await UpdateApplicationAsync();
         }
 
-        protected void UpdateApplication(BlazorComponent.Web.Element element)
+        protected async Task UpdateApplicationAsync()
         {
             if (!App)
             {
                 return;
             }
 
+            if (Ref.Id == null)
+            {
+                return;
+            }
+
+            var element = await JsInvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, Ref);
             MasaBlazor.Application.Bar = element != null ?
                 element.ClientHeight : ComputedHeight.ToDouble();
         }

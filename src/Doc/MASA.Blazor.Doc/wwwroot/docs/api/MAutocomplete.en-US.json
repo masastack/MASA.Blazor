@@ -173,12 +173,6 @@
       "Description": ""
     },
     {
-      "Name": "Interval",
-      "Type": "Double",
-      "Default": "",
-      "Description": ""
-    },
-    {
       "Name": "ItemDisabled",
       "Type": "Func`2",
       "Default": "null",

@@ -37,7 +37,7 @@ namespace MASA.Blazor
         public Breakpoints Name { get; private set; }
         public double Height { get; private set; }
         public double Width { get; private set; }
-        public bool Mobile { get; private set; } = true;
+        public bool Mobile { get; private set; }
         public OneOf<Breakpoints, double> MobileBreakpoint { get; set; }
         public BreakpointThresholds Thresholds { get; set; }
         public double ScrollBarWidth { get; set; }

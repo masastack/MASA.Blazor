@@ -16,6 +16,10 @@ namespace MASA.Blazor
 {
     public partial class MAppBar : MToolbar, IScrollable, IThemeable, IAsyncDisposable
     {
+        private readonly string[] _applicationProperties = new string[]
+        {
+            "IsBooted","Left","Bar","Right"
+        };
         private Scroller _scroller;
 
         [Parameter]
@@ -81,105 +85,6 @@ namespace MASA.Blazor
 
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            Target = Document.QuerySelector(ScrollTarget);
-
-            _scroller = new Scroller(this)
-            {
-                IsActive = Value
-            };
-
-            if (InvertedScroll)
-            {
-                _scroller.IsActive = false;
-            }
-        }
-
-        protected override void SetComponentClass()
-        {
-            base.SetComponentClass();
-
-            if (InvertedScroll)
-            {
-                Transform = -ComputedHeight.ToInt32();
-            }
-
-            if (ShrinkOnScroll)
-            {
-                Dense = false;
-                Flat = false;
-                Prominent = true;
-            }
-
-            CssProvider
-                .Merge(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-app-bar")
-                        .AddIf("m-app-bar--clipped", () => ClippedLeft || ClippedRight)
-                        .AddIf("m-app-bar--fade-img-on-scroll", () => FadeImgOnScroll)
-                        .AddIf("m-app-bar--elevate-on-scroll", () => ElevateOnScroll)
-                        .AddIf("m-app-bar--fixed", () => !Absolute && (App || Fixed))
-                        .AddIf("m-app-bar--hide-shadow", () => HideShadow)
-                        .AddIf("m-app-bar--is-scrolled", () => _scroller.CurrentScroll > 0)
-                        .AddIf("m-app-bar--shrink-on-scroll", () => ShrinkOnScroll);
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .AddIf(() => $"font-size:{ComputedFontSize.ToUnit("rem")}", () => ComputedFontSize != null)
-                        .Add(() => $"margin-top:{ComputedMarginTop}px")
-                        .Add(() => $"transform:translateY({ComputedTransform}px)")
-                        .Add(() => $"left:{ComputedLeft}px")
-                        .Add(() => $"right:{ComputedRight}px");
-                })
-                .Merge("image",
-                    _ => { },
-                    style => { style.AddIf($"opacity: {ComputedOpacity}", () => ComputedOpacity.HasValue); });
-
-            Attributes.Add("data-booted", "true");
-        }
-
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            _scroller.ScrollThreshold = ScrollThreshold;
-            UpdateApplication();
-        }
-
-        private void UpdateApplication()
-        {
-            if (!App)
-            {
-                return;
-            }
-
-            var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform;
-
-            if (!Bottom)
-                MasaBlazor.Application.Top = val;
-            else
-                MasaBlazor.Application.Bottom = val;
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                await Target.AddEventListenerAsync("scroll", CreateEventCallback(async () =>
-                {
-                    if (!CanScroll) return;
-
-                    await _scroller.OnScroll(ThresholdMet);
-                }), false);
-            }
-
-            await base.OnAfterRenderAsync(firstRender);
-        }
 
         protected bool CanScroll => InvertedScroll ||
                                     ElevateOnScroll ||
@@ -337,6 +242,114 @@ namespace MASA.Blazor
 
         protected override bool IsProminent => base.IsProminent || ShrinkOnScroll;
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            Target = Document.QuerySelector(ScrollTarget);
+
+            _scroller = new Scroller(this)
+            {
+                IsActive = Value
+            };
+            if (InvertedScroll)
+            {
+                _scroller.IsActive = false;
+            }
+
+            MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
+        }
+
+        private void ApplicationPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (_applicationProperties.Contains(e.PropertyName))
+            {
+                InvokeStateHasChanged();
+            }
+        }
+
+        protected override void SetComponentClass()
+        {
+            base.SetComponentClass();
+
+            if (InvertedScroll)
+            {
+                Transform = -ComputedHeight.ToInt32();
+            }
+
+            if (ShrinkOnScroll)
+            {
+                Dense = false;
+                Flat = false;
+                Prominent = true;
+            }
+
+            CssProvider
+                .Merge(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-app-bar")
+                        .AddIf("m-app-bar--clipped", () => ClippedLeft || ClippedRight)
+                        .AddIf("m-app-bar--fade-img-on-scroll", () => FadeImgOnScroll)
+                        .AddIf("m-app-bar--elevate-on-scroll", () => ElevateOnScroll)
+                        .AddIf("m-app-bar--fixed", () => !Absolute && (App || Fixed))
+                        .AddIf("m-app-bar--hide-shadow", () => HideShadow)
+                        .AddIf("m-app-bar--is-scrolled", () => _scroller.CurrentScroll > 0)
+                        .AddIf("m-app-bar--shrink-on-scroll", () => ShrinkOnScroll);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddIf(() => $"font-size:{ComputedFontSize.ToUnit("rem")}", () => ComputedFontSize != null)
+                        .Add(() => $"margin-top:{ComputedMarginTop}px")
+                        .Add(() => $"transform:translateY({ComputedTransform}px)")
+                        .Add(() => $"left:{ComputedLeft}px")
+                        .Add(() => $"right:{ComputedRight}px");
+                })
+                .Merge("image",
+                    _ => { },
+                    style => { style.AddIf($"opacity: {ComputedOpacity}", () => ComputedOpacity.HasValue); });
+
+            Attributes.Add("data-booted", "true");
+        }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+            _scroller.ScrollThreshold = ScrollThreshold;
+
+            UpdateApplication();
+        }
+
+        private void UpdateApplication()
+        {
+            if (!App)
+            {
+                return;
+            }
+
+            var val = InvertedScroll ? 0 : ComputedHeight.ToDouble() + ComputedTransform;
+
+            if (!Bottom)
+                MasaBlazor.Application.Top = val;
+            else
+                MasaBlazor.Application.Bottom = val;
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await Target.AddEventListenerAsync("scroll", CreateEventCallback(async () =>
+                {
+                    if (!CanScroll) return;
+
+                    await _scroller.OnScroll(ThresholdMet);
+                }), false);
+            }
+
+            await base.OnAfterRenderAsync(firstRender);
+        }
+
         protected void ThresholdMet()
         {
             if (InvertedScroll)
@@ -351,13 +364,13 @@ namespace MASA.Blazor
             }
 
             if (_scroller.CurrentThreshold < ComputedScrollThreshold) return;
-
             _scroller.SavedScroll = _scroller.CurrentScroll;
         }
 
         public ValueTask DisposeAsync()
         {
             RemoveApplication();
+            MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
             _ = Target.RemoveEventListenerAsync("scroll");
             return ValueTask.CompletedTask;
         }

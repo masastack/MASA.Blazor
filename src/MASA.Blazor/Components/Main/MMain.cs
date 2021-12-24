@@ -10,8 +10,6 @@ namespace MASA.Blazor
         {
             "Top","Bar","Right","Footer","InsetFooter","Bottom","Left"
         };
-        private readonly DelayTask _delayTask = new(100);
-        private bool _shouldRender = true;
 
         [Parameter]
         public RenderFragment ChildContent { get; set; }
@@ -27,21 +25,10 @@ namespace MASA.Blazor
 
         private void OnApplicationPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            //We will change this when really data-driven finished
-            _shouldRender = false;
-            _ = _delayTask.Run(async () =>
-              {
-                  _shouldRender = true;
-                  if (_applicationProperties.Contains(e.PropertyName))
-                  {
-                      await InvokeStateHasChangedAsync();
-                  }
-              });
-        }
-
-        protected override bool ShouldRender()
-        {
-            return _shouldRender;
+            if (_applicationProperties.Contains(e.PropertyName))
+            {
+                InvokeStateHasChanged();
+            }
         }
 
         protected override void SetComponentClass()
@@ -66,9 +53,20 @@ namespace MASA.Blazor
                 });
 
             Attributes.Add("data-booted", true);
-            MasaBlazor.Application.IsBooted = true;
+
             AbstractProvider
                 .ApplyMainDefault();
+        }
+
+        protected override void OnParametersSet()
+        {
+            MasaBlazor.Application.IsBooted = true;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            MasaBlazor.Application.PropertyChanged -= OnApplicationPropertyChanged;
+            base.Dispose(disposing);
         }
     }
 }

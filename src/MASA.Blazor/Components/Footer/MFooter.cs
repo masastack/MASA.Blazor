@@ -11,6 +11,11 @@ namespace MASA.Blazor
 {
     public partial class MFooter : BFooter, IThemeable
     {
+        private readonly string[] _applicationProperties = new string[]
+        {
+            "Bottom","Left","Right"
+        };
+
         [Parameter]
         public bool Dark { get; set; }
 
@@ -115,6 +120,20 @@ namespace MASA.Blazor
 
         protected bool IsPositioned => Absolute || Fixed || App;
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
+        }
+
+        private void ApplicationPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (_applicationProperties.Contains(e.PropertyName))
+            {
+                InvokeStateHasChanged();
+            }
+        }
+
         protected override void SetComponentClass()
         {
             CssProvider
@@ -180,6 +199,7 @@ namespace MASA.Blazor
         protected override void Dispose(bool disposing)
         {
             RemoveApplication();
+            MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
         }
 
         private void RemoveApplication()

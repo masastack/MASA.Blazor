@@ -9,6 +9,11 @@ namespace MASA.Blazor
 {
     public partial class MNavigationDrawer : BNavigationDrawer, INavigationDrawer
     {
+        private readonly string[] _applicationProperties = new string[]
+        {
+            "Bottom","Footer","Bar","Top"
+        };
+
         [Parameter]
         public bool Bottom { get; set; }
 
@@ -244,6 +249,7 @@ namespace MASA.Blazor
             Init();
 
             MasaBlazor.Breakpoint.OnUpdate += OnBreakpointOnUpdate;
+            MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
         }
 
         private async Task OnBreakpointOnUpdate()
@@ -254,27 +260,31 @@ namespace MASA.Blazor
                 ZIndex = await GetActiveZIndexAsync();
             });
 
-            await InvokeAsync(async () =>
+            if (!ReactsToResize || !ReactsToMobile)
             {
-                if (!ReactsToResize || !ReactsToMobile)
-                {
-                    return;
-                }
+                return;
+            }
 
-                //We will change this when watcher finished
-                IsActive = !IsMobile;
-                if (ValueChanged.HasDelegate)
-                {
-                    await ValueChanged.InvokeAsync(IsActive);
-                }
-                else
-                {
-                    StateHasChanged();
-                }
-            });
+            IsActive = !IsMobile;
+            if (ValueChanged.HasDelegate)
+            {
+                await ValueChanged.InvokeAsync(IsActive);
+            }
+            else
+            {
+                await InvokeStateHasChangedAsync();
+            }
         }
 
         private Task<int> GetActiveZIndexAsync() => JsInvokeAsync<int>(JsInteropConstants.GetZIndex, Ref);
+
+        private void ApplicationPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (_applicationProperties.Contains(e.PropertyName))
+            {
+                InvokeStateHasChanged();
+            }
+        }
 
         private void UpdateMiniVariant(bool val)
         {
@@ -401,7 +411,7 @@ namespace MASA.Blazor
                 return;
             }
 
-            var val = (!IsActive || IsMobile || Temporary || Ref.Id == null)
+            var val = (!IsActive || IsMobile || Temporary)
                 ? 0
                 : (ComputedWidth.ToDouble() <= 0 ? await GetClientWidthAsync() : ComputedWidth.ToDouble());
 
@@ -449,6 +459,7 @@ namespace MASA.Blazor
         {
             RemoveApplication();
             MasaBlazor.Breakpoint.OnUpdate -= OnBreakpointOnUpdate;
+            MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
         }
 
         private void RemoveApplication()
