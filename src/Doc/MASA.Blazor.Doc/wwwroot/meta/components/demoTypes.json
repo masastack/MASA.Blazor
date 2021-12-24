@@ -125,6 +125,7 @@
   "Demos.Components.Divider.misc.View",
   "Demos.Components.ECharts.usage.Basic",
   "Demos.Components.ECharts.props.HeightAndWidth",
+  "Demos.Components.ECharts.props.Responsive",
   "Demos.Components.ExpansionPanels.usage.Index",
   "Demos.Components.ExpansionPanels.props.Accordion",
   "Demos.Components.ExpansionPanels.props.Disabled",

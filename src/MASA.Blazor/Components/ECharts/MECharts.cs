@@ -9,13 +9,25 @@ using System.Threading.Tasks;
 
 namespace MASA.Blazor
 {
-    public class MECharts : BECharts
+    public class MECharts : BECharts, IDisposable
     {
         [Parameter]
         public StringNumber Width { get; set; } = 600;
 
         [Parameter]
         public StringNumber Height { get; set; } = 400;
+
+        [Parameter]
+        public StringNumber MinWidth { get; set; }
+
+        [Parameter]
+        public StringNumber MinHeight { get; set; }
+
+        [Parameter]
+        public StringNumber MaxWidth { get; set; }
+
+        [Parameter]
+        public StringNumber MaxHeight { get; set; }
 
         [Parameter]
         public object Option { get; set; } = new { };
@@ -27,21 +39,23 @@ namespace MASA.Blazor
                 {
                     styleBuilder
                         .AddWidth(Width)
-                        .AddHeight(Height);
+                        .AddHeight(Height)
+                        .AddMinWidth(MinWidth)
+                        .AddMinHeight(MinHeight)
+                        .AddMaxHeight(MaxHeight)
+                        .AddMaxWidth(MaxWidth);
                 });
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            try
+            if (IsDisposed)
             {
-                var echarts = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/MASA.Blazor/js/echarts.js");
-                await echarts.InvokeVoidAsync("init", Ref, Option);
+                return;
             }
-            catch (Exception ex)
-            {
-                throw new Exception("Echarts is not found,see masa blazor doc for help", ex);
-            }
+
+            var echarts = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/MASA.Blazor/js/echarts-helper.js");
+            await echarts.InvokeVoidAsync("init", Ref, Option);
         }
     }
 }

@@ -1759,6 +1759,17 @@
         "Style": "",
         "Debug": false,
         "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "responsive",
+        "Title": "自适应",
+        "Description": "<p>当组件刷新或者窗体调整时，ECharts会重新渲染。</p>\n",
+        "Code": "<MECharts Width=\"@(\"100%\")\" Height=\"300\" MinWidth=\"200\" Option=\"_option\">\r\n</MECharts>\r\n\r\n@code {\r\n    private object _option = new\r\n    {\r\n        Title = new\r\n        {\r\n            Text = \"ECharts 入门示例\"\r\n        },\r\n        Tooltip = new { },\r\n        Legend = new\r\n        {\r\n            Data = new[] { \"销量\" }\r\n        },\r\n        XAxis = new\r\n        {\r\n            Data = new[] { \"衬衫\", \"羊毛衫\", \"雪纺衫\", \"裤子\", \"高跟鞋\", \"袜子\" }\r\n        },\r\n        YAxis = new { },\r\n        Series = new[]\r\n                                                                            {\r\n            new\r\n            {\r\n                Name= \"销量\",\r\n                Type= \"bar\",\r\n                Data= new []{ 5, 20, 36, 10, 10, 20 }\r\n            }\r\n        }\r\n    };\r\n}\r\n\r\n",
+        "Type": "Demos.Components.ECharts.props.Responsive",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
       }
     ],
     "Children": [],
