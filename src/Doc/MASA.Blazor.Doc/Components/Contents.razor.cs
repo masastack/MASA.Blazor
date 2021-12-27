@@ -1,4 +1,5 @@
 ﻿using BlazorComponent;
+using BlazorComponent.Web;
 using MASA.Blazor.Doc.Models;
 using MASA.Blazor.Doc.Shared;
 using MASA.Blazor.Doc.Utils;

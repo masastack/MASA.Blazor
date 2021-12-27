@@ -1,4 +1,5 @@
 ﻿using BlazorComponent;
+using BlazorComponent.Web;
 using MASA.Blazor.Doc.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;

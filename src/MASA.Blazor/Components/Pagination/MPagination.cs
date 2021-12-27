@@ -138,10 +138,10 @@ namespace MASA.Blazor
             if (firstRender)
             {
                 var el = Document.GetElementByReference(Ref);
-                var width = await el.ParentElement.GetPropAsync<double?>("clientWidth");
-                if (width != null)
+                var clientWidth = await el.ParentElement.GetClientWidthAsync();
+                if (clientWidth != null)
                 {
-                    _maxButtons = Convert.ToInt32(Math.Floor((width.Value - 96.0) / 42.0));
+                    _maxButtons = Convert.ToInt32(Math.Floor((clientWidth.Value - 96.0) / 42.0));
                     StateHasChanged();
                 }
             }

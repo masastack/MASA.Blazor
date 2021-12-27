@@ -420,12 +420,22 @@ namespace MASA.Blazor
             }
 
             var label = Document.GetElementByReference(LabelReference.Ref);
-            var scrollWidth = await label.GetPropAsync<double>("scrollWidth");
+            var scrollWidth = await label.GetScrollWidthAsync();
+
+            if (scrollWidth == null)
+            {
+                return;
+            }
 
             var element = Document.GetElementByReference(Ref);
-            var offsetWidth = await element.GetPropAsync<double>("offsetWidth");
+            var offsetWidth = await element.GetOffsetWidthAsync();
 
-            LabelWidth = Math.Min(scrollWidth * 0.75 + 6, offsetWidth - 24);
+            if (offsetWidth == null)
+            {
+                return;
+            }
+
+            LabelWidth = Math.Min(scrollWidth.Value * 0.75 + 6, offsetWidth.Value - 24);
         }
 
         private async Task SetPrefixWidthAsync()
@@ -436,7 +446,14 @@ namespace MASA.Blazor
             }
 
             var prefix = Document.GetElementByReference(PrefixElement);
-            PrefixWidth = await prefix.GetPropAsync<double>("offsetWidth");
+            var offsetWidth = await prefix.GetOffsetWidthAsync();
+
+            if (offsetWidth == null)
+            {
+                return;
+            }
+
+            PrefixWidth = offsetWidth.Value;
         }
 
         private async Task SetPrependWidthAsync()
@@ -452,7 +469,14 @@ namespace MASA.Blazor
             }
 
             var prependInner = Document.GetElementByReference(PrependInnerElement);
-            PrependWidth = await prependInner.GetPropAsync<double>("offsetWidth");
+            var offsetWidth = await prependInner.GetOffsetWidthAsync();
+
+            if (offsetWidth == null)
+            {
+                return;
+            }
+
+            PrependWidth = offsetWidth.Value;
         }
 
         public virtual async Task HandleOnAppendOuterClickAsync(MouseEventArgs args)

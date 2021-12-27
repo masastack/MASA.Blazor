@@ -129,18 +129,18 @@ namespace MASA.Blazor
 
         private async Task<double> GetClientHeightAsync()
         {
-            var clientHeight = await Document.GetPropAsync<double>("clientHeight");
-            var innerHeight = await Window.GetPropAsync<string>("innerHeight");
+            var clientHeight = await Document.GetClientHeightAsync();
+            var innerHeight = await Window.GetInnerHeightAsync();
 
-            return Math.Max(clientHeight, innerHeight is null ? 0 : Convert.ToDouble(innerHeight));
+            return Math.Max(clientHeight ?? 0, innerHeight ?? 0);
         }
 
         private async Task<double> GetClientWidthAsync()
         {
-            var clientWidth = await Document.GetPropAsync<double>("clientWidth");
-            var innerWidth = await Window.GetPropAsync<string>("innerWidth");
+            var clientWidth = await Document.GetClientWidthAsync();
+            var innerWidth = await Window.GetInnerWidthAsync();
 
-            return Math.Max(clientWidth, innerWidth is null ? 0 : Convert.ToDouble(innerWidth));
+            return Math.Max(clientWidth ?? 0, innerWidth ?? 0);
         }
 
         private async Task HandleOnResizeAsync()

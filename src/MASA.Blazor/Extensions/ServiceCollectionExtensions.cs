@@ -1,4 +1,5 @@
 ﻿using BlazorComponent;
+using BlazorComponent.Web;
 using MASA.Blazor;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 

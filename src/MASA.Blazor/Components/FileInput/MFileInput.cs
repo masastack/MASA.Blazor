@@ -147,7 +147,7 @@ namespace MASA.Blazor
                 return $"{bytes} B";
             }
 
-            var prefix = binary ? new string[] {"Ki", "Mi", "Gi"} : new string[] {"k", "M", "G"};
+            var prefix = binary ? new string[] { "Ki", "Mi", "Gi" } : new string[] { "k", "M", "G" };
             var unit = -1;
             var size = Convert.ToDecimal(bytes);
 
@@ -207,8 +207,7 @@ namespace MASA.Blazor
             await base.HandleOnPrependClickAsync(args);
             var input = Document.GetElementByReference(InputFile.Element.Value);
             var @event = new MouseEvent("click");
-            @event.StopPropagation();
-            await input.DispatchEventAsync(@event);
+            await input.DispatchEventAsync(@event, stopPropagation: true);
         }
 
         public Task HandleOnFileChangeAsync(InputFileChangeEventArgs args)
@@ -245,8 +244,7 @@ namespace MASA.Blazor
 
             var input = Document.GetElementByReference(InputFile.Element.Value);
             var @event = new MouseEvent("click");
-            @event.StopPropagation();
-            await input.DispatchEventAsync(@event);
+            await input.DispatchEventAsync(@event, stopPropagation: true);
         }
 
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)
