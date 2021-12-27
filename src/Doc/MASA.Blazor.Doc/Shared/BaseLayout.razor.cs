@@ -19,8 +19,34 @@ namespace MASA.Blazor.Doc.Shared
         private string _searchBorderColor = "#00000000";
         private string _languageIcon;
         private bool _isShowMiniLogo = true;
+        private StringNumber _selectTab = 0;
 
-        public StringNumber SelectTab { get; set; } = 0;
+        public StringNumber SelectTab
+        {
+            get
+            {
+                var url = Navigation.Uri;
+                if (url == Navigation.BaseUri)
+                {
+                    return 0;
+                }
+                else if (url.Contains("about/meet-the-team"))
+                {
+                    return 2;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            set
+            {
+                if (value != null && value.AsT1 != 3 && value.AsT1 != 4)
+                {
+                    _selectTab = value;
+                }
+            }
+        }
 
         [Inject]
         public I18n I18n { get; set; }
@@ -70,8 +96,8 @@ namespace MASA.Blazor.Doc.Shared
             string lang = GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name;
             if (GlobalConfig.Language != null)
                 lang = GlobalConfig.Language;
-            else if(GlobalConfigs.StaticLanguage is not null)
-                lang= GlobalConfigs.StaticLanguage;
+            else if (GlobalConfigs.StaticLanguage is not null)
+                lang = GlobalConfigs.StaticLanguage;
             else
                 lang = CultureInfo.CurrentCulture.Name;
 
@@ -92,6 +118,8 @@ namespace MASA.Blazor.Doc.Shared
 
             if (e.Location.Contains("meet-the-team"))
                 SelectTab = 2;
+            else if (e.Location != Navigation.BaseUri)
+                SelectTab = 1;
 
             StateHasChanged();
         }
