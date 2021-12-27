@@ -59,7 +59,6 @@ namespace MASA.Blazor
             var props = base.GetDefaultMenuProps();
             props.OffsetY = true;
 
-            // TODO: https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L23
             // props.OffsetOverflow = true;
             // props.Transition = false;
 

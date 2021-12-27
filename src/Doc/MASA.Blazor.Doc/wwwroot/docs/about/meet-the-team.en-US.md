@@ -10,14 +10,14 @@ MASA Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团
  MASA Blazor（公司）是一家全职开源企业。 您可以通过在 GitHub 上赞助 MASA Blazor 来支持他们。
 
 <div class="mb-8">
-	<a href="https://github.com/sponsors/johnleider?utm_source=vuetifyads&utm_medium=promoted-ad" rel="noopener" target="_blank" class="text-decoration-none">
-		<div class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 m-vuetify-ad--promoted m-sheet m-sheet--outlined theme--dark rounded transparent" style="max-width: 640px; width: 100%; min-height: 52px;">
+	<a href="https://github.com/sponsors/johnleider?utm_source=MASA Blazorads&utm_medium=promoted-ad" rel="noopener" target="_blank" class="text-decoration-none">
+		<div class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 m-MASA Blazor-ad--promoted m-sheet m-sheet--outlined theme--dark rounded transparent" style="max-width: 640px; width: 100%; min-height: 52px;">
 			<div class="m-image m-responsive flex-1-1-auto rounded theme--dark" style="max-height: 56px;">
 				<div class="m-responsive__sizer" style="padding-bottom: 8.75%;"></div>
 				<div class="m-image__image m-image__image--cover" style="background-image: url(https://cdn.cosmicjs.com/e331c610-d8bd-11ea-8d02-d3e2c968eb26-github-promoted.png); background-position: center center;"></div>
 				<div class="m-responsive__content" style="width: 640px;">
 					<div class="d-flex align-center fill-height">
-						<div aria-label="Link to Vuetify - GitHub Sponsors" role="img" class="m-image m-responsive mx-2 theme--dark" style="height: 56px; max-width: 56px;">
+						<div aria-label="Link to MASA Blazor - GitHub Sponsors" role="img" class="m-image m-responsive mx-2 theme--dark" style="height: 56px; max-width: 56px;">
 							<div class="m-responsive__sizer" style="padding-bottom: 100%;"></div>
 							<div class="m-image__image m-image__image--contain" style="background-image: url(https://cdn.cosmicjs.com/a55ed6c0-d746-11ea-8d04-338192d0d6f9-github.png); background-position: center center;"></div>
 							<div class="m-responsive__content" style="width: 56px;"></div>
@@ -160,13 +160,13 @@ MASA Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团
 
 <div class="mb-8">
     <a href="" rel="noopener" target="_blank" class="text-decoration-none">
-        <div class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 m-vuetify-ad--promoted m-sheet m-sheet--outlined theme--dark rounded transparent" style="max-width: 640px; width: 100%; min-height: 52px;">
+        <div class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 m-MASA Blazor-ad--promoted m-sheet m-sheet--outlined theme--dark rounded transparent" style="max-width: 640px; width: 100%; min-height: 52px;">
             <div class="m-image m-responsive flex-1-1-auto rounded theme--dark" style="max-height: 56px;">
                 <div class="m-responsive__sizer" style="padding-bottom: 8.75%;"></div>
                 <div class="m-image__image m-image__image--cover" style="background-image: url(https://cdn.cosmicjs.com/d622e8e0-e165-11ea-88aa-0bae7ba3a376-oc-banner.png); background-position: center center;"></div>
                 <div class="m-responsive__content" style="width: 640px;">
                     <div class="d-flex align-center fill-height">
-                        <div aria-label="Link to Vuetify - Open Collective" role="img" class="m-image m-responsive mx-2 theme--dark" style="height: 56px; max-width: 56px;">
+                        <div aria-label="Link to MASA Blazor - Open Collective" role="img" class="m-image m-responsive mx-2 theme--dark" style="height: 56px; max-width: 56px;">
                             <div class="m-responsive__sizer" style="padding-bottom: 100%;"></div>
                             <div class="m-image__image m-image__image--contain" style="background-image: url(https://cdn.cosmicjs.com/cea92700-e165-11ea-88aa-0bae7ba3a376-oc-logo.svg); background-position: center center;"></div>
                             <div class="m-responsive__content" style="width: 48px;"></div>

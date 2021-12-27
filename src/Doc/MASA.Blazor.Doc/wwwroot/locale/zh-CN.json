@@ -15,7 +15,7 @@
   "BlazorWebAssembly": ".NET 6 中新的 Blazor WebAssembly 功能",
   "Conf": "Conf大会议程",
   "RichComponents": "丰富组件",
-  "RichComponentsDesc": "除与Vuetify基础组件1:1还原外，还有很多实用的预置组件",
+  "RichComponentsDesc": "除与MASA Blazor基础组件1:1还原外，还有很多实用的预置组件",
   "UIDesignLanguage": "UI设计语言",
   "UIDesignLanguageDesc": "设计风格现代，UI体验非常优秀",
   "LongTermSupport": "长期支持",

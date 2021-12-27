@@ -9,7 +9,7 @@ title: 安全披露
 
  MASA Blazor团队和社区认真对待 MASA Blazor中的所有安全漏洞。 我们赞赏你的努力和负责任的披露，并将尽一切努力承认你的贡献。
 
-要报告一个安全问题，请发送邮件 [security@vuetifyjs.com]() 并在主题行中包含单词 "SECURITY"
+要报告一个安全问题，请发送邮件 [security@MASA Blazorjs.com]() 并在主题行中包含单词 "SECURITY"
 
  MASA Blazor团队将发送回复，说明处理您报告的下一步步骤。  MASA Blazor 团队将发送回复，说明下一步处理您的报告的步骤。在对您的报告作出初步回复后，安全团队将随时向您通报修复的进展和完整的公告，并可能要求您提供额外的信息或指导。
 

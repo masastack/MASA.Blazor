@@ -22,7 +22,7 @@ MASA Blazor 是一个 MIT 许可 的开源项目，可以完全免费使用。 �
 
 ## 当前项目赞助商
 
-我们感谢所有项目赞助商对 MASA Blazor 的持续支持。 If you have any questions about sponsorship, please reach out to [sponsor@vuetifyjs.com]() for more information.
+我们感谢所有项目赞助商对 MASA Blazor 的持续支持。 If you have any questions about sponsorship, please reach out to [sponsor@MASA Blazorjs.com]() for more information.
 
 <br>
 
@@ -80,4 +80,4 @@ MASA Blazor 是一个 MIT 许可 的开源项目，可以完全免费使用。 �
 
 <br>
 
-如果您对赞助有任何疑问，请联系 [sponsor@vuetifyjs.com]() 了解更多信息。
+如果您对赞助有任何疑问，请联系 [sponsor@MASA Blazorjs.com]() 了解更多信息。

@@ -75,7 +75,7 @@ namespace BlazorComponent
 
                 if (colors.Length == 2)
                 {
-                    // TODO: 是否需要正则表达式验证格式，Vuetify没有
+                    // TODO: 是否需要正则表达式验证格式
                     // {darken|lighten|accent}-{1|2}
 
                     var secondColor = colors[1];

@@ -19,10 +19,10 @@ namespace MASA.Blazor
 
         protected virtual BMenuProps GetDefaultMenuProps() => new()
         {
-            CloseOnClick = true, // TODO: there is false in vuetify code source
+            CloseOnClick = true, 
             CloseOnContentClick = false,
             DisableKeys = true,
-            OpenOnClick = true, // TODO: there is true in vuetify code source
+            OpenOnClick = true, 
             MaxHeight = 304,
         };
 
