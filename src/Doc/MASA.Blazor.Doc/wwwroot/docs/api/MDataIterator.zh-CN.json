@@ -1,7 +1,8 @@
 ﻿{
   "Title": "DataIterator",
   "Components": [
-    "Data iterators"
+    "Data iterators",
+    "Data tables"
   ],
   "Props": [
     {

@@ -1,7 +1,8 @@
 ﻿{
   "Title": "SimpleCheckbox",
   "Components": [
-    "Checkboxes"
+    "Checkboxes",
+    "Data tables"
   ],
   "Props": [
     {
