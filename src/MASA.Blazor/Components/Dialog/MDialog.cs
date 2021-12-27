@@ -17,8 +17,6 @@ namespace MASA.Blazor
 
         protected override string AttachSelector => Attach ?? ".m-application";
 
-        public bool ShowContent { get; set; }
-
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
 
@@ -129,7 +127,7 @@ namespace MASA.Blazor
             await JsInvokeAsync(JsInteropConstants.AddOutsideClickEventListener,
                 DotNetObjectReference.Create(new Invoker<object>(OutsideClick)),
                 new[] { Document.GetElementByReference(DialogRef).Selector },
-                new[] { Document.GetElementByReference(OverlayRef).Selector });
+                new[] { Document.GetElementByReference(OverlayRef!.Value).Selector });
         }
 
         private async Task AnimateClick()
@@ -185,7 +183,7 @@ namespace MASA.Blazor
             await InvokeStateHasChangedAsync();
         }
 
-        public override async Task ShowLazyContent()
+        protected override async Task ShowLazyContent()
         {
             if (!ShowContent && Value)
             {

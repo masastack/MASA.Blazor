@@ -16,7 +16,7 @@ namespace MASA.Blazor
 
         protected override async Task MoveContentTo()
         {
-            await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, Attach ?? ".m-application");
+            await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachedSelector);
         }
 
         protected override void SetComponentClass()

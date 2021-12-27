@@ -78,7 +78,6 @@ public partial class PDrawer
     [Parameter]
     public string Title { get; set; }
 
-    [EditorRequired]
     [Parameter]
     public bool Value { get; set; }
 
