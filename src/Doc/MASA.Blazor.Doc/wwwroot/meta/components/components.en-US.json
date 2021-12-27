@@ -5343,7 +5343,7 @@
         "Name": "noTitle",
         "Title": "NoTitle",
         "Description": "<p>You can remove picker’s title.</p>\n",
-        "Code": "<MRow Justify=\"JustifyTypes.Center\">\r\n    <MTimePicker @bind-Value=\"_picker\"\r\n                 NoTitle></MTimePicker>\r\n    <MTimePicker @bind-Value=\"_picker\"\r\n                 Landscape\r\n                 NoTitle></MTimePicker>\r\n</MRow>\r\n\r\n@code {\r\n    private TimeOnly? _picker;\r\n}\r\n\r\n",
+        "Code": "<MRow Justify=\"JustifyTypes.SpaceAround\">\r\n    <MTimePicker @bind-Value=\"_picker\"\r\n                 NoTitle></MTimePicker>\r\n    <MTimePicker @bind-Value=\"_picker\"\r\n                 Landscape\r\n                 NoTitle></MTimePicker>\r\n</MRow>\r\n\r\n@code {\r\n    private TimeOnly? _picker;\r\n}\r\n\r\n",
         "Type": "Demos.Components.Pickers.children.TimePickers.props.NoTitle",
         "Style": "",
         "Debug": false,
