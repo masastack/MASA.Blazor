@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Todo...
+The autocomplete component extends `MSelect` and adds the ability to filter items.

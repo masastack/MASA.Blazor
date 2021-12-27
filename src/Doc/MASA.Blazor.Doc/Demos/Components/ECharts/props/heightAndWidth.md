@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Todo...
+**Height** and **Width** property set chart height,width

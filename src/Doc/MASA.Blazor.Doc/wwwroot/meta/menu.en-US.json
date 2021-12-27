@@ -9,29 +9,29 @@
     "Children": [
       {
         "Order": 0,
-        "Title": "为什么选择 MASA Blazor?",
-        "FullTitle": "为什么选择 MASA Blazor?",
+        "Title": "Why MASA Blazor?",
+        "FullTitle": "Why MASA Blazor?",
         "Type": "menuItem",
         "Url": "introduction/why",
         "Contents": [
           {
-            "Id": "section-1946702414",
-            "Title": "Blazor 是什么？",
+            "Id": "section-104900371",
+            "Title": "What is Blazor?",
             "Level": 0
           },
           {
-            "Id": "section-1967431728",
-            "Title": "MASA Blazor 是什么？",
+            "Id": "section-651644490",
+            "Title": "MASA Blazor What is it?",
             "Level": 0
           },
           {
-            "Id": "section-1421632437",
-            "Title": "为什么选择 MASA Blazor？",
+            "Id": "section-766816228",
+            "Title": "Why choose MASA Blazor?",
             "Level": 0
           },
           {
-            "Id": "section-350316207",
-            "Title": "优势：",
+            "Id": "section-600803347",
+            "Title": "Advantage:",
             "Level": 0
           }
         ]
@@ -48,90 +48,70 @@
     "Children": [
       {
         "Order": 0,
-        "Title": "安装",
-        "FullTitle": "安装",
+        "Title": "Install",
+        "FullTitle": "Install",
         "Type": "menuItem",
         "Url": "getting-started/installation",
         "Contents": [
           {
-            "Id": "section-1739819480",
-            "Title": "安装 Masa.Template 模板",
+            "Id": "section-741625053",
+            "Title": "Prerequisites",
             "Level": 0
           },
           {
-            "Id": "section-430380796",
-            "Title": "创建项目",
+            "Id": "section-118153470",
+            "Title": "Presentation",
             "Level": 0
           },
           {
-            "Id": "section-1572239414",
-            "Title": "启动项目",
+            "Id": "section-1675574707",
+            "Title": "CLI Creation",
             "Level": 0
           },
           {
-            "Id": "section-324942799",
-            "Title": "创建一个 Blazor Server 项目",
+            "Id": "section-1748997071",
+            "Title": "Create manually",
             "Level": 0
           },
           {
-            "Id": "section-1125899332",
-            "Title": "安装 NuGet 包",
-            "Level": 0
-          },
-          {
-            "Id": "section-141901483",
-            "Title": "引入资源文件",
-            "Level": 0
-          },
-          {
-            "Id": "section-165353384",
-            "Title": "注入相关服务",
-            "Level": 0
-          },
-          {
-            "Id": "section-14069023",
-            "Title": "全局引用",
-            "Level": 0
-          },
-          {
-            "Id": "section-2695973",
-            "Title": "使用",
+            "Id": "section-2023003",
+            "Title": "Use",
             "Level": 0
           }
         ]
       },
       {
         "Order": 1,
-        "Title": "浏览器支持",
-        "FullTitle": "浏览器支持",
+        "Title": "Brower Support",
+        "FullTitle": "Brower Support",
         "Type": "menuItem",
         "Url": "getting-started/browser-support",
         "Contents": [
           {
-            "Id": "section-484859015",
-            "Title": "浏览器",
+            "Id": "section-1933372243",
+            "Title": "Browsers",
             "Level": 0
           }
         ]
       },
       {
         "Order": 5,
-        "Title": "发行说明",
-        "FullTitle": "发行说明",
+        "Title": "Release Notes",
+        "FullTitle": "Release Notes",
         "Type": "menuItem",
         "Url": "getting-started/release-notes",
         "Contents": []
       },
       {
         "Order": 6,
-        "Title": "贡献",
-        "FullTitle": "贡献",
+        "Title": "Contributing",
+        "FullTitle": "Contributing",
         "Type": "menuItem",
         "Url": "getting-started/contributing",
         "Contents": [
           {
-            "Id": "section-1311834339",
-            "Title": "报告问题",
+            "Id": "section-319027029",
+            "Title": "Report issue",
             "Level": 0
           }
         ]
@@ -176,8 +156,8 @@
         "Url": "features/internationalization",
         "Contents": [
           {
-            "Id": "section-1681655181",
-            "Title": "语言支持",
+            "Id": "section-234275541",
+            "Title": "Getting started",
             "Level": 0
           }
         ]
@@ -4501,65 +4481,65 @@
           },
           {
             "Id": "section-1793324546",
-            "Title": "Core Team",
+            "Title": "Core team",
             "Level": 0
           }
         ]
       },
       {
         "Order": 2,
-        "Title": "安全披露",
-        "FullTitle": "安全披露",
+        "Title": "Security disclosure",
+        "FullTitle": "Security disclosure",
         "Type": "menuItem",
         "Url": "about/security-disclosure",
         "Contents": [
           {
-            "Id": "section-1311803195",
-            "Title": "报告错误",
+            "Id": "section-1286244968",
+            "Title": "Report error",
             "Level": 0
           },
           {
-            "Id": "section-1617616350",
-            "Title": "披露政策",
+            "Id": "section-1000666677",
+            "Title": "Disclosure policy",
             "Level": 0
           },
           {
-            "Id": "section-353316886",
-            "Title": "对本政策的建议",
+            "Id": "section-2086107424",
+            "Title": "Suggestions for this policy",
             "Level": 0
           }
         ]
       },
       {
         "Order": 3,
-        "Title": "行为准则",
-        "FullTitle": "行为准则",
+        "Title": "Code of conduct",
+        "FullTitle": "Code of conduct",
         "Type": "menuItem",
         "Url": "about/code-conduct",
         "Contents": [
           {
-            "Id": "section-481594336",
-            "Title": "我们的承诺",
+            "Id": "section-777597002",
+            "Title": "Our Standards",
             "Level": 0
           },
           {
-            "Id": "section-483008717",
-            "Title": "我们的责任",
+            "Id": "section-2075130716",
+            "Title": "Our Responsibilities",
             "Level": 0
           },
           {
-            "Id": "section-4415869",
-            "Title": "范围",
+            "Id": "section-1879716848",
+            "Title": "Scope",
             "Level": 0
           },
           {
-            "Id": "section-2138638003",
-            "Title": "具体措施",
+            "Id": "section-292134780",
+            "Title": "Enforcement",
             "Level": 0
           },
           {
-            "Id": "section-3220308",
-            "Title": "归属",
+            "Id": "section-1984097011",
+            "Title": "Attribution",
             "Level": 0
           }
         ]

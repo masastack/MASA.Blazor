@@ -1,35 +1,33 @@
 ﻿---
 order: 2
-title: 安全披露
+title: Security disclosure
 ---
 
-本文件概述了 MASA Blazor 项目的安全程序和一般政策。
+This document outlines the safety procedures and general policies of the MASA Blazor project. 
 
-## 报告错误
+## Report error 
 
- MASA Blazor团队和社区认真对待 MASA Blazor中的所有安全漏洞。 我们赞赏你的努力和负责任的披露，并将尽一切努力承认你的贡献。
+The MASA Blazor team and community take all security vulnerabilities in MASA Blazor seriously. We appreciate your efforts and responsible disclosure, and will make every effort to recognize your contribution.
 
-要报告一个安全问题，请发送邮件 [security@MASA Blazorjs.com]() 并在主题行中包含单词 "SECURITY"
+To report a security issue, please email [opensource@masastack.com]() and include the word "SECURITY" in the subject line
 
- MASA Blazor团队将发送回复，说明处理您报告的下一步步骤。  MASA Blazor 团队将发送回复，说明下一步处理您的报告的步骤。在对您的报告作出初步回复后，安全团队将随时向您通报修复的进展和完整的公告，并可能要求您提供额外的信息或指导。
-
-向维护模块的人或团队报告第三方模块中的安全漏洞。 您也可以通过 [节点安全项目](). 报告脆弱性。
+The MASA Blazor team will send a response explaining the next steps in processing your report. The MASA Blazor team will send a response explaining the next steps in processing your report. After an initial response to your report, the security team will keep you informed of the progress of the repair and the complete announcement, and may ask you to provide additional information or guidance. 
 
 <br>
 
-## 披露政策
+## Disclosure policy
 
-当安全小组收到安全漏洞报告时，他们将把它分配给一个主要处理器。 此人将协调修复和释放程序，涉及下列步骤：
+When the security team receives a security vulnerability report, they will assign it to a primary processor. This person will coordinate the repair and release procedures, involving the following steps:
 
-- 确认问题并确定受影响的版本。
-- 审计代码，以发现任何潜在的类似问题。
-- 为所有仍在维护中的版本准备修复。这些修复将尽快发布到 npm 中。
+- Identify the problem and determine the affected version.
+- Audit the code to discover any potential similar issues. 
+- Prepare fixes for all versions that are still under maintenance. These fixes will be published as soon as possible. 
 
 <br>
 
-## 对本政策的建议
+## Suggestions for this policy
 
-如果您有关于如何改进这个过程的建议，请使用 [issue creator]() 提交拉取请求。
+If you have suggestions on how to improve this process, please submit using [issue](https://github.com/BlazorComponent/MASA.Blazor/issues). 
 
 
 

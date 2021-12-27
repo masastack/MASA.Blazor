@@ -5,7 +5,7 @@ title: Internationalization (i18n)
 
 MASA Blazor will support component language internationalization (i18n) in the future. When you boot the application, you can use the current option to specify the available area and the currently active area.
 
-## 语言支持
+## Getting started
 
 Currently MASA Blazor only supports Simplified Chinese (zhHans), and the following languages will be supported soon:
 

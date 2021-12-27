@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-TODO...
+Chip groups make it easy for users to select filtering options for more complex implementations. By default MChipGroup will overflow to the right but can be changed to a column only mode.

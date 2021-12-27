@@ -1,9 +1,9 @@
 ---
 order: 5
-title: 发行说明
+title: Release Notes
 ---
 
 
 
-目前我们是不定期更新，以下是新的功能和修复的 bug 情况。
+Currently we are updating from time to time. The following are new features and bugs that have been fixed. 
 

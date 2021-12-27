@@ -127,7 +127,7 @@
     "FullTitle": "Colors"
   },
   {
-    "Desc": "<p>��ʾ������������������ݵ���ʾ�����Ը��ݵ�ǰ��ͼ��ʵ��Ԫ����ʾ��������������ʾ���ݡ�</p>\n",
+    "Desc": "<p>The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.</p>\n",
     "Order": 0,
     "OtherDocs": {},
     "LastWriteTime": "2021-12-06T12:39:16.6677454+08:00",

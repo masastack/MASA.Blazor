@@ -11,4 +11,5 @@ title:
 
 ## en-US
 
-TODO...
+You can specify the specific properties within your items array correspond to the text and value fields. 
+By default, this is text and value. In this example we also use the return-object prop which will return the entire object of the selected item on selection.

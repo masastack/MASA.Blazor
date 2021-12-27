@@ -1,40 +1,50 @@
 ﻿---
 order: 0
-title: 为什么选择 MASA Blazor?
+title: Why MASA Blazor?
 ---
 
-## Blazor 是什么？
+## What is Blazor?
 
-Blazor 是一个使用 .NET 生成交互式客户端 Web UI 的框架：
+Blazor is a framework that uses .NET to generate interactive client-side Web UI:
 
-- 使用 C# 代替 JavaScript 来创建信息丰富的交互式 UI。
-- 共享使用 .NET 编写的服务器端和客户端应用逻辑。
-- 将 UI 呈现为 HTML 和 CSS，以支持众多浏览器，其中包括移动浏览器。
-- 与新式托管平台（如 Docker）集成。
-使用 .NET 进行客户端 Web 开发可提供以下优势：
-- 使用 C# 代替 JavaScript 来编写代码。
-- 利用现有的 .NET 库生态系统。
-- 在服务器和客户端之间共享应用逻辑。
-- 受益于 .NET 的性能、可靠性和安全性。
-- 在 Windows、Linux 和 macOS 上使用 Visual Studio 保持高效工作。
-- 以一组稳定、功能丰富且易用的通用语言、框架和工具为基础来进行生成。
+- Use C# instead of JavaScript to create an informative and interactive UI.
+- Share server-side and client-side application logic written in .NET.
+- Render the UI as HTML and CSS to support many browsers, including mobile browsers.
+- Integrate with modern hosting platforms (such as Docker).
 
-## MASA Blazor 是什么？
+<br/>
 
-基于Material Design设计和BlazorComponent的交互能力提供标准的基础组件库。提供如布局、弹框标准、Loading、全局异常处理等标准场景的预置组件。从更多实际场景出发，满足更多用户和场景的需求，缩短开发周期，提高开发效率，并提供一整套Web解决方案 - MASA Blazor Pro。
+Using .NET for client-side web development provides the following advantages:
+- Use C# instead of JavaScript to write code.
+- Leverage the existing .NET library ecosystem.
+- Share application logic between server and client.
+- Benefit from the performance, reliability and security of .NET.
+- Use Visual Studio on Windows, Linux, and macOS to stay productive.
+- It is generated based on a set of stable, feature-rich and easy-to-use common languages, frameworks and tools.
 
-## 为什么选择 MASA Blazor？
+<br/>
 
-&emsp;MASA Blazor 基于Material设计规范，每一个组件都经过精心设计，具有模块化、响应式和优秀的性能。   
+## MASA Blazor What is it?
 
-&emsp;MASA Blazor 是由一支专业的全职技术团队进行定期维护升级，高效的响应速度，多元化的解决方案，并提供企业级支持。目前已在知名企业使用，且MASA团队自研的MASA Stack产品线也将持续使用，除了可以保证项目质量，还可以持续的增加新的组件和功能。   
+Provide a standard basic component library based on Material Design design and BlazorComponent's interactive capabilities. Provides preset components for standard scenarios such as layout, frame standard, Loading, and global exception handling. Starting from more practical scenarios, to meet the needs of more users and scenarios, shorten the development cycle, improve development efficiency, and provide a complete set of Web solutions-MASA Blazor Pro.
 
-&emsp;MASA Stack除了为开发者提供众多中台类开源项目，其最基础的组成部分之一MASA Blazor也希望可以打造成最实用的组件库。    
+<br/>
 
-## 优势：
-- 丰富组件：包含MASA Blazor 1:1还原的基础组件，以及很多实用的预置组件和.Net深度集成功能，包括Url、面包屑、导航三联动，高级搜索，i18n等。
-- UI设计语言：设计风格现代，UI 多端体验设计优秀。
-- 专业示例：MASA Blazor Pro提供多种常见场景的预设布局。
-- 简易上手：丰富详细的上手文档，免费的视频教程（制作中）。
-- 社区活跃鼓励：用户参与实时互动，做出贡献加入我们，构建最开放的开源社区。
-- 长期支持：全职团队维护，并提供企业级支持。
+## Why choose MASA Blazor?
+
+MASA Blazor is based on Material design specifications, and each component is carefully designed, with modularity, responsiveness and excellent performance.   
+
+MASA Blazor is regularly maintained and upgraded by a professional full-time technical team, efficient response speed, diversified solutions, and enterprise-level support. At present, it has been used in well-known companies, and the MASA Stack product line developed by the MASA team will continue to be used. In addition to ensuring the quality of the project, it can also continue to add new components and functions.   
+
+In addition to providing developers with many middle- and Taiwan-based open source projects, MASA Stack, one of its most basic components, MASA Blazor, also hopes to be the most practical component library.    
+
+<br/>
+
+## Advantage:
+
+- Rich components: Contains basic components of MASA Blazor 1:1 restoration, as well as many practical preset components and deep integration of .Net functions, including Url, breadcrumbs, navigation three linkages, advanced search, i18n, etc.
+- UI design language: modern design style, excellent UI multi-end experience design.
+- Professional example: MASA Blazor Pro provides preset layouts for a variety of common scenes.
+- Easy to get started: rich and detailed getting started documents, free video tutorials (in production).
+- Active community encouragement: users participate in real-time interaction, make contributions to join us, and build the most open open source community.
+- Long-term support: full-time team maintenance, and provide enterprise-level support. 
