@@ -203,27 +203,30 @@ namespace MASA.Blazor.Doc.Pages
                 Value = nameof(Props.Name),
                 Text = "Name",
                 Width = "20%",
-                Sortable = false
+                Sortable = false,
             },
             new DataTableHeader<Props>
             {
                 Value = nameof(Props.Type),
                 Text = "Type",
                 Width = "15%",
-                Sortable = false
+                Sortable = false,
+                Filterable = false
             },
             new DataTableHeader<Props>
             {
                 Value = nameof(Props.Default),
                 Text = "Default",
                 Width = "12%",
-                Sortable = false
+                Sortable = false,
+                Filterable = false
             },
             new DataTableHeader<Props>
             {
                 Value = nameof(Props.Description),
                 Text = "Description",
-                Sortable = false
+                Sortable = false,
+                Filterable = false
             }
         };
 
@@ -240,11 +243,15 @@ namespace MASA.Blazor.Doc.Pages
             {
                 Value = nameof(Props1.Description),
                 Text = "Description",
-                Sortable = false
+                Sortable = false,
+                Filterable = false
             }
         };
 
         private ApiModel _api;
+        private string _propsSearch;
+        private string _contentsSearch;
+        private string _eventsSearch;
 
         protected override async Task OnParametersSetAsync()
         {

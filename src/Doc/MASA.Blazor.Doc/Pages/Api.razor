@@ -25,8 +25,17 @@
                         <h2 class="text-capitalize m-heading text-h4 text-sm-h4 mb-3" id="@("属性".HashSection())">
                             <a class="text-decoration-none text-right text-md-left"> # </a> 属性
                         </h2>
+                        <div class="d-flex mb-2">
+                            <MTextField @bind-Value="_propsSearch" Placeholder="Filter" BackgroundColor="grey lighten-3" Dense HideDetails="true" Clearable Class="rounded-lg m-text-field--solo-flat" SingleLine Solo>
+                                <PrependInnerContent>
+                                    <MIcon Class="mr-2" Color="grey">
+                                        mdi-magnify
+                                    </MIcon>
+                                </PrependInnerContent>
+                            </MTextField>
+                        </div>
                         <MSheet Class="overflow-hidden mb-4" Outlined Rounded="true">
-                            <MDataTable Headers="_headers" Class="api-table" Items="_api.Props" ItemsPerPage="int.MaxValue" HideDefaultFooter>
+                            <MDataTable Search="@_propsSearch" Headers="_headers" Class="api-table" Items="_api.Props" ItemsPerPage="int.MaxValue" HideDefaultFooter>
                                 <ItemContent>
                                     <tr class="regular-row">
                                         <td>
@@ -62,8 +71,17 @@
                         <h2 class="text-capitalize m-heading text-h4 text-sm-h4 mb-3" id="@("插槽".HashSection())">
                             <a class="text-decoration-none text-right text-md-left"> # </a> 插槽
                         </h2>
+                        <div class="d-flex mb-2">
+                            <MTextField @bind-Value="_contentsSearch" Placeholder="Filter" BackgroundColor="grey lighten-3" Dense HideDetails="true" Clearable Class="rounded-lg m-text-field--solo-flat" SingleLine Solo>
+                                <PrependInnerContent>
+                                    <MIcon Class="mr-2" Color="grey">
+                                        mdi-magnify
+                                    </MIcon>
+                                </PrependInnerContent>
+                            </MTextField>
+                        </div>
                         <MSheet Class="overflow-hidden mb-4" Outlined Rounded="true">
-                            <MDataTable Headers="_headers2" Class="api-table" Items="_api.Contents" ItemsPerPage="int.MaxValue" HideDefaultFooter>
+                            <MDataTable Search="@_contentsSearch" Headers="_headers2" Class="api-table" Items="_api.Contents" ItemsPerPage="int.MaxValue" HideDefaultFooter>
                                 <ItemContent>
                                     <tr class="regular-row">
                                         <td>
@@ -89,8 +107,17 @@
                         <h2 class="text-capitalize m-heading text-h4 text-sm-h4 mb-3" id="@("事件".HashSection())">
                             <a class="text-decoration-none text-right text-md-left"> # </a> 事件
                         </h2>
+                        <div class="d-flex mb-2">
+                            <MTextField @bind-Value="_eventsSearch" Placeholder="Filter" BackgroundColor="grey lighten-3" Dense HideDetails="true" Clearable Class="rounded-lg m-text-field--solo-flat" SingleLine Solo>
+                                <PrependInnerContent>
+                                    <MIcon Class="mr-2" Color="grey">
+                                        mdi-magnify
+                                    </MIcon>
+                                </PrependInnerContent>
+                            </MTextField>
+                        </div>
                         <MSheet Class="overflow-hidden mb-4" Outlined Rounded="true">
-                            <MDataTable Headers="_headers2" Class="api-table" Items="_api.Events" ItemsPerPage="int.MaxValue" HideDefaultFooter>
+                            <MDataTable Search="@_eventsSearch" Headers="_headers2" Class="api-table" Items="_api.Events" ItemsPerPage="int.MaxValue" HideDefaultFooter>
                                 <ItemContent>
                                     <tr class="regular-row">
                                         <td>
