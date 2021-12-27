@@ -27,35 +27,6 @@
         ]
       },
       {
-        "Order": 1,
-        "Title": "赞助商和支持者",
-        "FullTitle": "赞助商和支持者",
-        "Type": "menuItem",
-        "Url": "about/sponsors-backers",
-        "Contents": [
-          {
-            "Id": "section-566833907",
-            "Title": "一次性捐助",
-            "Level": 0
-          },
-          {
-            "Id": "section-1634511342",
-            "Title": "定期捐助",
-            "Level": 0
-          },
-          {
-            "Id": "section-1774691940",
-            "Title": "当前项目赞助商",
-            "Level": 0
-          },
-          {
-            "Id": "section-551317378",
-            "Title": "粗略的",
-            "Level": 0
-          }
-        ]
-      },
-      {
         "Order": 2,
         "Title": "安全披露",
         "FullTitle": "安全披露",
