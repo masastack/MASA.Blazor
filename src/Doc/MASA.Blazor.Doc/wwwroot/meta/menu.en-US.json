@@ -4489,19 +4489,19 @@
     "Children": [
       {
         "Order": 0,
-        "Title": "认识开发团队",
-        "FullTitle": "认识开发团队",
+        "Title": "Meet the team",
+        "FullTitle": "Meet the team",
         "Type": "menuItem",
         "Url": "about/meet-the-team",
         "Contents": [
           {
-            "Id": "section-2752060",
-            "Title": "公司",
+            "Id": "section-2011246401",
+            "Title": "Company",
             "Level": 0
           },
           {
-            "Id": "section-273179784",
-            "Title": "核心团队",
+            "Id": "section-1793324546",
+            "Title": "Core Team",
             "Level": 0
           }
         ]

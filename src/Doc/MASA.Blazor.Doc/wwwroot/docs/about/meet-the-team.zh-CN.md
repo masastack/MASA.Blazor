@@ -3,35 +3,13 @@ order: 0
 title: 认识开发团队
 ---
 
-MASA Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团队，不断努力为开发人员带来更好的体验。 请记住，下面并不是所有有助于使 MASA Blazor 变得更强的所有人的详尽列表。 感谢您 的支持，感谢您使用 MASA Blazor ！
+MASA Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团队，不断努力为开发人员带来更好的体验。 请记住，下面并不是所有有助于使 MASA Blazor 变得更强的所有人的详尽列表。 感谢您的支持，感谢您使用 MASA Blazor ！
 
 ## 公司
 
- MASA Blazor（公司）是一家全职开源企业。 您可以通过在 GitHub 上赞助 MASA Blazor 来支持他们。
+数闪科技（公司）是一家全职开源企业。 您可以通过在 GitHub 上赞助 MASA Blazor 来支持他们。
 
 <div class="mb-8">
-	<a href="https://github.com/sponsors/johnleider?utm_source=MASA Blazorads&utm_medium=promoted-ad" rel="noopener" target="_blank" class="text-decoration-none">
-		<div class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 m-MASA Blazor-ad--promoted m-sheet m-sheet--outlined theme--dark rounded transparent" style="max-width: 640px; width: 100%; min-height: 52px;">
-			<div class="m-image m-responsive flex-1-1-auto rounded theme--dark" style="max-height: 56px;">
-				<div class="m-responsive__sizer" style="padding-bottom: 8.75%;"></div>
-				<div class="m-image__image m-image__image--cover" style="background-image: url(https://cdn.cosmicjs.com/e331c610-d8bd-11ea-8d02-d3e2c968eb26-github-promoted.png); background-position: center center;"></div>
-				<div class="m-responsive__content" style="width: 640px;">
-					<div class="d-flex align-center fill-height">
-						<div aria-label="Link to MASA Blazor - GitHub Sponsors" role="img" class="m-image m-responsive mx-2 theme--dark" style="height: 56px; max-width: 56px;">
-							<div class="m-responsive__sizer" style="padding-bottom: 100%;"></div>
-							<div class="m-image__image m-image__image--contain" style="background-image: url(https://cdn.cosmicjs.com/a55ed6c0-d746-11ea-8d04-338192d0d6f9-github.png); background-position: center center;"></div>
-							<div class="m-responsive__content" style="width: 56px;"></div>
-						</div>
-						<div class="m-markdown text-subtitle-2 text-sm-h6 font-weight-light">
-							<p>Support  MASA Blazor by 
-								<strong>sponsoring on GitHub</strong>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</a>
 </div>
 
 <div class="container team-members">
@@ -80,7 +58,7 @@ MASA Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团
                         </div>
                         <div class="text-subtitle d-flex align-center my-2"><span aria-hidden="true" class="m-icon notranslate m-icon--left theme--light"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="m-icon__svg">
                                     <path d="M20 7H16V5L14 3H10L8 5V7H4C2.9 7 2 7.9 2 9V14C2 14.75 2.4 15.38 3 15.73V19C3 20.11 3.89 21 5 21H19C20.11 21 21 20.11 21 19V15.72C21.59 15.37 22 14.73 22 14V9C22 7.9 21.1 7 20 7M10 5H14V7H10V5M4 9H20V14H15V11H9V14H4V9M13 15H11V13H13V15M19 19H5V16H9V17H15V16H19V19Z"></path>
-                                </svg></span> CEO @ MASA Blazor </div>
+                                </svg></span> CEO @ ShuShan,LONSID</div>
                         <div class="text-subtitle d-flex align-center my-2"><span aria-hidden="true" class="m-icon notranslate m-icon--left theme--light"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="m-icon__svg">
                                     <path d="M12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5M12,2A7,7 0 0,1 19,9C19,14.25 12,22 12,22C12,22 5,14.25 5,9A7,7 0 0,1 12,2M12,4A5,5 0 0,0 7,9C7,10 7,12 12,18.71C17,12 17,10 17,9A5,5 0 0,0 12,4Z"></path>
                                 </svg></span> Wenzhou,CN </div>
@@ -134,7 +112,7 @@ MASA Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团
                         <!---->
                         <div class="text-subtitle d-flex align-center my-2"><span aria-hidden="true" class="m-icon notranslate m-icon--left theme--light"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="m-icon__svg">
                                     <path d="M20 7H16V5L14 3H10L8 5V7H4C2.9 7 2 7.9 2 9V14C2 14.75 2.4 15.38 3 15.73V19C3 20.11 3.89 21 5 21H19C20.11 21 21 20.11 21 19V15.72C21.59 15.37 22 14.73 22 14V9C22 7.9 21.1 7 20 7M10 5H14V7H10V5M4 9H20V14H15V11H9V14H4V9M13 15H11V13H13V15M19 19H5V16H9V17H15V16H19V19Z"></path>
-                                </svg></span> COO @ MASA Blazor </div>
+                                </svg></span> CTO @ ShuShan </div>
                         <div class="text-subtitle d-flex align-center my-2"><span aria-hidden="true" class="m-icon notranslate m-icon--left theme--light"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="m-icon__svg">
                                     <path d="M12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5M12,2A7,7 0 0,1 19,9C19,14.25 12,22 12,22C12,22 5,14.25 5,9A7,7 0 0,1 12,2M12,4A5,5 0 0,0 7,9C7,10 7,12 12,18.71C17,12 17,10 17,9A5,5 0 0,0 12,4Z"></path>
                                 </svg></span> Hangzhou,CN </div>
@@ -159,26 +137,6 @@ MASA Blazor 不是 一个个人秀。 我们有一个非常活跃和投入的团
 核心开发团队是开放源码开发人员，帮助引导 MASA Blazor 及其生态系统的方向。
 
 <div class="mb-8">
-    <a href="" rel="noopener" target="_blank" class="text-decoration-none">
-        <div class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 m-MASA Blazor-ad--promoted m-sheet m-sheet--outlined theme--dark rounded transparent" style="max-width: 640px; width: 100%; min-height: 52px;">
-            <div class="m-image m-responsive flex-1-1-auto rounded theme--dark" style="max-height: 56px;">
-                <div class="m-responsive__sizer" style="padding-bottom: 8.75%;"></div>
-                <div class="m-image__image m-image__image--cover" style="background-image: url(https://cdn.cosmicjs.com/d622e8e0-e165-11ea-88aa-0bae7ba3a376-oc-banner.png); background-position: center center;"></div>
-                <div class="m-responsive__content" style="width: 640px;">
-                    <div class="d-flex align-center fill-height">
-                        <div aria-label="Link to MASA Blazor - Open Collective" role="img" class="m-image m-responsive mx-2 theme--dark" style="height: 56px; max-width: 56px;">
-                            <div class="m-responsive__sizer" style="padding-bottom: 100%;"></div>
-                            <div class="m-image__image m-image__image--contain" style="background-image: url(https://cdn.cosmicjs.com/cea92700-e165-11ea-88aa-0bae7ba3a376-oc-logo.svg); background-position: center center;"></div>
-                            <div class="m-responsive__content" style="width: 48px;"></div>
-                        </div>
-                        <div class="m-markdown text-subtitle-2 text-sm-h6 font-weight-light">
-                            <p>Sponsor MASA Blazor development on <strong>Open Collective</strong></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
  </div>
 
 <div class="container team-members">
