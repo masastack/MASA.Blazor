@@ -3,7 +3,7 @@
     "Desc": "<p>Use the border radius auxiliary style to quickly apply the <code>border-radius</code> style to the element</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6647589+08:00",
+    "LastWriteTime": "2021-12-28T18:04:27.6253357+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -83,7 +83,7 @@
     "Desc": "<p>Through <strong>sass</strong> and <strong>javascript</strong>, you can use <a href=\"https://material.io/design/color/the-color-system.html#color-theme-creation\">Material Design</a> in the specification All colors. These values can be used in style sheets, component files and actual components through the <strong>color class</strong> system.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6657511+08:00",
+    "LastWriteTime": "2021-12-28T18:04:27.6268839+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -130,7 +130,7 @@
     "Desc": "<p>The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6677454+08:00",
+    "LastWriteTime": "2021-12-28T18:04:27.6298748+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -177,7 +177,7 @@
     "Desc": "<p>This tool allows you to control the relative depth, or distance, between the two planes along the z-axis. There are 25 heights in total. You can set the elevation of an element by using the <code>elevation-{n}</code> class, where <code>n</code> is an integer between 0-24 corresponding to the desired altitude.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6707373+08:00",
+    "LastWriteTime": "2021-12-28T18:04:27.6338751+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -213,7 +213,7 @@
     "Desc": "<p>Control the layout of flex containers with alignment, justification and more with responsive flexbox utilities.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6717357+08:00",
+    "LastWriteTime": "2021-12-28T18:04:27.6358756+08:00",
     "DemoList": [
       {
         "Order": 3,
@@ -359,7 +359,7 @@
     "Desc": "<p>Applies a custom float across any breakpoint with responsive float utilities.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6777181+08:00",
+    "LastWriteTime": "2021-12-28T18:04:27.6446333+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -395,7 +395,7 @@
     "Desc": "<p>Configure how content overflows when it becomes out of container bounds.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.679715+08:00",
+    "LastWriteTime": "2021-12-28T18:04:27.6471781+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -431,7 +431,7 @@
     "Desc": "<p>Do not update your layout by creating new classes. Auxiliary auxiliary classes modify the filling and edges of elements</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6827053+08:00",
+    "LastWriteTime": "2021-12-28T18:04:27.6511794+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -489,7 +489,7 @@
     "Desc": "<p>Control text size, alignment, wrapping, overflow, transforms and more.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6884452+08:00",
+    "LastWriteTime": "2021-12-28T18:04:27.6592166+08:00",
     "DemoList": [
       {
         "Order": 5,
@@ -627,7 +627,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.694173+08:00",
+    "LastWriteTime": "2021-12-28T18:04:27.6672279+08:00",
     "DemoList": [
       {
         "Order": 0,

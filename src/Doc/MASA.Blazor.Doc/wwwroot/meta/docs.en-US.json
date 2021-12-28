@@ -3706,6 +3706,30 @@
             "Level": 0
           }
         ]
+      },
+      {
+        "Order": 6,
+        "Title": "Layouts",
+        "FullTitle": "Layouts",
+        "Type": "menuItem",
+        "Url": "features/layouts",
+        "Contents": [
+          {
+            "Id": "section-2695973",
+            "Title": "使用",
+            "Level": 0
+          },
+          {
+            "Id": "section-1862222372",
+            "Title": "Combining layout components",
+            "Level": 0
+          },
+          {
+            "Id": "section-2038487652",
+            "Title": "Dynamic layouts",
+            "Level": 0
+          }
+        ]
       }
     ]
   },

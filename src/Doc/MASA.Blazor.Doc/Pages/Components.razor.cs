@@ -1,4 +1,5 @@
 ﻿using BlazorComponent;
+using BlazorComponent.Components;
 using MASA.Blazor.Doc.Models;
 using MASA.Blazor.Doc.Shared;
 using MASA.Blazor.Doc.Utils;
@@ -42,6 +43,9 @@ namespace MASA.Blazor.Doc.Pages
         [Inject]
         public IJSRuntime Js { get; set; }
 
+        [Inject]
+        public I18n I18n { get; set; }
+
         protected override async Task OnParametersSetAsync()
         {
             if (Name.Contains('?'))
@@ -70,6 +74,11 @@ namespace MASA.Blazor.Doc.Pages
 
             GithubUrlHref = _githubUrlTemplate;
             _demoIndex = 0;
+        }
+
+        public string T(string key)
+        {
+            return I18n.LanguageMap.GetValueOrDefault(key);
         }
     }
 }

@@ -38,5 +38,11 @@
   "UpdateLog": "Update log",
   "CommonProblem": "Common problem",
   "MoreVideo": "More Video",
-  "Contact": "QQ+WeChat"
+  "Contact": "QQ+WeChat",
+  "Compontents.Footer.ReadyForMore": "Ready for more?",
+  "Compontents.Footer.ReadyForMore.Desc.Front": "Continue your learning with related content selected by the",
+  "Compontents.Footer.ReadyForMore.Desc.Middle": "Team",
+  "Compontents.Footer.ReadyForMore.Desc.End": "or move between pages by using the navigation links below.",
+  "Compontents.Footer.Edit.Front": "Edit this page on",
+  "Compontents.Footer.UpdateTime": "Last updated:"
 }

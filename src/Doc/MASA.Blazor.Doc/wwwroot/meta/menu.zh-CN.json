@@ -135,20 +135,6 @@
         "Contents": []
       },
       {
-        "Order": 3,
-        "Title": "全局配置",
-        "FullTitle": "全局配置",
-        "Type": "menuItem",
-        "Url": "features/gloabl-config",
-        "Contents": [
-          {
-            "Id": "section-3122241",
-            "Title": "属性",
-            "Level": 0
-          }
-        ]
-      },
-      {
         "Order": 4,
         "Title": "图标字体",
         "FullTitle": "图标字体",
