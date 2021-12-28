@@ -14,19 +14,6 @@ namespace MASA.Blazor
     public class MSlider<TValue> : MInput<TValue>, ISlider<TValue>
     {
         [Parameter]
-        public override TValue Value
-        {
-            get
-            {
-                return GetValue<TValue>();
-            }
-            set
-            {
-                SetValue(value);
-            }
-        }
-
-        [Parameter]
         public bool Vertical { get; set; }
 
         [Inject]
@@ -99,9 +86,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public EventCallback<FocusEventArgs> OnBlur { get; set; }
-
-        [Parameter]
-        public EventCallback<TValue> OnChange { get; set; }
 
         [Parameter]
         public bool InverseLabel { get; set; }
@@ -267,9 +251,32 @@ namespace MASA.Blazor
             { "tabindex", IsDisabled ? -1 : 0 }
         };
 
-        TValue ISlider<TValue>.InternalValue => InternalValue;
-
         public bool ShowThumbLabelContainer => IsFocused || IsActive || ThumbLabel == "always";
+
+        protected override void OnWatcherInitialized()
+        {
+            Watcher
+                .Watch<TValue>(nameof(Value), val =>
+                {
+                    //Value may not between min and max
+                    //If that so,we should invoke ValueChanged 
+                    var roundedVal = ConvertDoubleToTValue(RoundValue(Math.Min(Math.Max(Convert.ToDouble(val), Min), Max)));
+                    if (!EqualityComparer<TValue>.Default.Equals(val, roundedVal) && ValueChanged.HasDelegate)
+                    {
+                        NextTick(async () =>
+                        {
+                            await ValueChanged.InvokeAsync(roundedVal);
+                        });
+                    }
+
+                    LazyValue = roundedVal;
+                });
+        }
+
+        private static TValue ConvertDoubleToTValue(double val)
+        {
+            return val is TValue value ? value : default;
+        }
 
         protected override void OnInitialized()
         {
@@ -289,14 +296,6 @@ namespace MASA.Blazor
             {
                 throw new ArgumentNullException(nameof(TValue), "Only double supported");
             }
-
-            //We will move this to other place when watcher finished
-            Watcher
-                .Watch<TValue>(nameof(Value), val =>
-                {
-                    DoubleInteralValue = Convert.ToDouble(val);
-                });
-            InternalValue = Value;
         }
 
         protected override void OnParametersSet()
@@ -318,7 +317,6 @@ namespace MASA.Blazor
             }
 
             await ThumbElement.FocusAsync();
-
             await HandleOnMouseMoveAsync(args);
         }
 

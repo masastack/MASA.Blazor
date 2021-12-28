@@ -135,12 +135,12 @@ namespace MASA.Blazor
         {
             get
             {
-                if (Value is IList<TItemValue> values)
+                if (InternalValue is IList<TItemValue> values)
                 {
                     return values;
                 }
 
-                if (Value is TItemValue value)
+                if (InternalValue is TItemValue value)
                 {
                     return new List<TItemValue>
                     {

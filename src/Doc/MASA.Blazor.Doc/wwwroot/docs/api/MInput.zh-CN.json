@@ -201,6 +201,10 @@
       "Description": ""
     },
     {
+      "Name": "OnChange",
+      "Description": ""
+    },
+    {
       "Name": "OnClick",
       "Description": ""
     },

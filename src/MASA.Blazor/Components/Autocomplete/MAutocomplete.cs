@@ -36,7 +36,7 @@ namespace MASA.Blazor
         {
             { "type", Type },
             //TODO:this can be more simple
-            { "value", (Multiple || Chips) ? QueryText : (QueryText ?? string.Join(',', FormatText(Value))) },
+            { "value", (Multiple || Chips) ? QueryText : (QueryText ?? string.Join(',', FormatText(InternalValue))) },
             { "autocomplete", "off" }
         };
 

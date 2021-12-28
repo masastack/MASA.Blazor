@@ -98,9 +98,6 @@ namespace MASA.Blazor
         public EventCallback<TValue> OnInput { get; set; }
 
         [Parameter]
-        public EventCallback<TValue> OnChange { get; set; }
-
-        [Parameter]
         public RenderFragment ProgressContent { get; set; }
 
         [Parameter]
@@ -168,7 +165,7 @@ namespace MASA.Blazor
         public virtual Dictionary<string, object> InputAttrs => new(Attributes)
         {
             { "type", Type },
-            { "value", _badInput == null ? Value : _badInput }
+            { "value", _badInput == null ? InternalValue : _badInput }
         };
 
         public virtual StringNumber ComputedCounterValue
@@ -372,18 +369,6 @@ namespace MASA.Blazor
                 });
         }
 
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            //When use @bind-Value,ValueChanged can not be used
-            //While in this way,@bind-Value can work with OnChange
-            if (OnChange.HasDelegate)
-            {
-                ValueChanged = OnChange;
-            }
-        }
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
@@ -552,7 +537,7 @@ namespace MASA.Blazor
                 _shouldRender = true;
                 if (OnInput.HasDelegate)
                 {
-                    await OnInput.InvokeAsync(Value);
+                    await OnInput.InvokeAsync(InternalValue);
                 }
                 else
                 {

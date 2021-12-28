@@ -11,21 +11,6 @@ namespace MASA.Blazor
 {
     public class MRangeSlider<TValue> : MSlider<IList<TValue>>, IRangeSlider<TValue>
     {
-        private IList<TValue> _lazyValue;
-
-        [Parameter]
-        public override IList<TValue> Value
-        {
-            get
-            {
-                return GetValue<IList<TValue>>(new List<TValue> { default, default });
-            }
-            set
-            {
-                SetValue(value);
-            }
-        }
-
         public ElementReference SecondThumbElement { get; set; }
 
         protected IList<double> InputWidths
@@ -57,9 +42,22 @@ namespace MASA.Blazor
                     val = new List<double> { val[1], val[0] };
                 }
 
-                InternalValue = val is IList<TValue> internalVal ? internalVal : default;
+                var internalValue = val is IList<TValue> internalVal ? internalVal : default;
+                if (ListComparer.Equals(internalValue, InternalValue))
+                {
+                    //We will remove this when watcher finished
+                    return;
+                }
+
+                InternalValue = new List<TValue>(internalValue);
             }
         }
+
+        protected override IList<TValue> LazyValue { get; set; } = new List<TValue>()
+        {
+            default,
+            default
+        };
 
         protected int? ActiveThumb { get; set; }
 
@@ -193,27 +191,33 @@ namespace MASA.Blazor
             await base.HandleOnBlurAsync(args);
         }
 
-        protected override void OnInitialized()
+        protected override void OnWatcherInitialized()
         {
-            base.OnInitialized();
-
             Watcher
                 .Watch<IList<TValue>>(nameof(Value), val =>
                 {
-                    if (!ListComparer.Equals(val, _lazyValue))
+                    //Value may not between min and max
+                    //If that so,we should invoke ValueChanged 
+                    var roundedVal = val.Select(v => ConvertDoubleToTValue(RoundValue(Math.Min(Math.Max(Convert.ToDouble(v), Min), Max)))).ToList();
+                    if (!ListComparer.Equals(val, roundedVal) && ValueChanged.HasDelegate)
                     {
-                        _lazyValue = val;
-                        DoubleInteralValues = val.Select(val => Convert.ToDouble(val)).ToList();
+                        NextTick(async () =>
+                        {
+                            await ValueChanged.InvokeAsync(roundedVal);
+                        });
                     }
-                });
 
-            //So watcher should before Initialized
-            if (!ListComparer.Equals(Value, _lazyValue))
-            {
-                _lazyValue = Value;
-                DoubleInteralValues = Value.Select(val => Convert.ToDouble(val)).ToList();
-            }
+                    //It's a reference type
+                    //We will change this when watcher finished
+                    LazyValue = new List<TValue>(roundedVal);
+                });
         }
+
+        private static TValue ConvertDoubleToTValue(double val)
+        {
+            return val is TValue value ? value : default;
+        }
+
         protected override void CheckTValue()
         {
             if (typeof(TValue) != typeof(double))
