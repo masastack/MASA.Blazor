@@ -7,7 +7,7 @@ title: 安装
 
 ## 先决条件
 
-MASA 系列所有产品均基于.Net 6.0 开发,请确保已安装 [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0) 。
+MASA 系列所有产品均基于.Net 6.0 开发,请确保已安装 <a href="https://dotnet.microsoft.com/download/dotnet/6.0" target="_blank">.NET 6.0</a>。
 
 <br/>
 

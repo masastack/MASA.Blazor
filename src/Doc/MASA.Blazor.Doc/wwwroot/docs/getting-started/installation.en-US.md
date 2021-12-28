@@ -7,7 +7,7 @@ Let's start with MASA Blazor. MASA Blazor is the UI component library of the .NE
 
 ## Prerequisites
 
-All products of the MASA series are developed based on .Net 6.0, please make sure that you have installed [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0) 。
+All products of the MASA series are developed based on .Net 6.0, please make sure that you have installed <a href="https://dotnet.microsoft.com/download/dotnet/6.0" target="_blank">.NET 6.0</a> 。
 
 <br/>
 
