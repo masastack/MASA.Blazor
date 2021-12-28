@@ -1,7 +1,8 @@
 ﻿{
   "Title": "MRangeSlider",
   "Components": [
-    "Range sliders"
+    "Range sliders",
+    "Sliders"
   ],
   "Props": [
     {
