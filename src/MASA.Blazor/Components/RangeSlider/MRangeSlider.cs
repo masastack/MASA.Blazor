@@ -35,21 +35,18 @@ namespace MASA.Blazor
                 {
                     if (ActiveThumb != null)
                     {
-                        var toFocusElement = ActiveThumb == 1 ? ThumbElement : SecondThumbElement;
-                        toFocusElement.FocusAsync();
+                        NextTick(async () =>
+                        {
+                            var toFocusElement = ActiveThumb == 1 ? ThumbElement : SecondThumbElement;
+                            await toFocusElement.FocusAsync();
+                        });
                     }
 
                     val = new List<double> { val[1], val[0] };
                 }
 
                 var internalValue = val is IList<TValue> internalVal ? internalVal : default;
-                if (ListComparer.Equals(internalValue, InternalValue))
-                {
-                    //We will remove this when watcher finished
-                    return;
-                }
-
-                InternalValue = new List<TValue>(internalValue);
+                InternalValue = internalValue;
             }
         }
 
@@ -79,11 +76,6 @@ namespace MASA.Blazor
                 var value = await ParseMouseMoveAsync(args);
                 await ReevaluateSelectedAsync(value);
                 SetInternalValue(value);
-
-                if (OnChange.HasDelegate)
-                {
-                    await OnChange.InvokeAsync(InternalValue);
-                }
             }
         }
 
@@ -123,24 +115,21 @@ namespace MASA.Blazor
             DoubleInteralValues = values;
         }
 
-        public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+        public override Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
             if (ActiveThumb == null)
             {
-                return;
+                return Task.CompletedTask;
             }
 
             var value = ParseKeyDown(args, DoubleInteralValues[ActiveThumb.Value]);
             if (value == null)
             {
-                return;
+                return Task.CompletedTask;
             }
 
             SetInternalValue(value.AsT2);
-            if (OnChange.HasDelegate)
-            {
-                await OnChange.InvokeAsync(InternalValue);
-            }
+            return Task.CompletedTask;
         }
 
         public override async Task HandleOnSliderMouseDownAsync(ExMouseEventArgs args)
@@ -159,7 +148,7 @@ namespace MASA.Blazor
 
         private int? GetIndexOfClosestValue(IList<double> values, double value)
         {
-            if (Math.Abs(values[0] - value) <= Math.Abs(values[1] - value))
+            if (Math.Abs(values[0] - value) < Math.Abs(values[1] - value))
             {
                 return 0;
             }
@@ -207,9 +196,7 @@ namespace MASA.Blazor
                         });
                     }
 
-                    //It's a reference type
-                    //We will change this when watcher finished
-                    LazyValue = new List<TValue>(roundedVal);
+                    LazyValue = roundedVal;
                 });
         }
 
