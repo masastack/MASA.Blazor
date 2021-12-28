@@ -20,6 +20,7 @@ packer:
   stage: packer
   only:
     - develop
+    - tags
   script:
     - ls 
     - ls src/
