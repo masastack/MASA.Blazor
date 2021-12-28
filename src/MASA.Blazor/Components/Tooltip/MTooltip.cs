@@ -39,6 +39,7 @@ namespace MASA.Blazor
                         .Add($"{prefix}__content")
                         .AddIf("menuable__content__active", () => Value)
                         .AddIf($"{prefix}__content--fixed", () => ActivatorFixed)
+                        .Add(ContentClass)
                         .AddBackgroundColor(Color);
                 }, styleBuilder =>
                 {
