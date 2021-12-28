@@ -18,9 +18,9 @@ packer:
   #image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0-nodejs14.17.6
   image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100-preview.7-nodejs14.16.1
   stage: packer
-  only:
-    - develop
-    - tags
+  rules:
+    - if: $CI_COMMIT_TAG !=""
+    - if: $CI_COMMIT_BRANCH == "develop" 
   script:
     - ls 
     - ls src/
