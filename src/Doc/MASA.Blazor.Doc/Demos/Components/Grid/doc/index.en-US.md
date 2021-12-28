@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Grid
-title: Grid
+title: Grid system
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg
 ---
@@ -9,7 +9,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg
 24 Grids System。
 
 
-## Design concept#
+## Design concept
 
 In most business situations, Ant Design needs to solve a lot of information storage problems within the design area, so based on 12 Grids System, we divided the design area into 24 sections.
 

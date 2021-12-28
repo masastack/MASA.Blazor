@@ -25,9 +25,6 @@ namespace MASA.Blazor
         [Parameter]
         public RenderFragment<(int index, string text)> SelectionContent { get; set; }
 
-        [Inject]
-        public Document Document { get; set; }
-
         [Parameter]
         public bool Multiple { get; set; }
 
@@ -90,14 +87,14 @@ namespace MASA.Blazor
         {
             get
             {
-                if (Value is IBrowserFile file)
+                if (InternalValue is IBrowserFile file)
                 {
                     return new List<IBrowserFile>
                     {
                         file
                     };
                 }
-                else if (Value is IList<IBrowserFile> files)
+                else if (InternalValue is IList<IBrowserFile> files)
                 {
                     return files;
                 }
@@ -150,7 +147,7 @@ namespace MASA.Blazor
                 return $"{bytes} B";
             }
 
-            var prefix = binary ? new string[] {"Ki", "Mi", "Gi"} : new string[] {"k", "M", "G"};
+            var prefix = binary ? new string[] { "Ki", "Mi", "Gi" } : new string[] { "k", "M", "G" };
             var unit = -1;
             var size = Convert.ToDecimal(bytes);
 
@@ -198,7 +195,7 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply(typeof(BChip), typeof(MChip), props => { props[nameof(MChip.Small)] = SmallChips; })
+                .Apply(typeof(BChip), typeof(MChip), attrs => { attrs[nameof(MChip.Small)] = SmallChips; })
                 .Merge(typeof(BTextFieldInput<,>), typeof(BFileInputInput<TValue, MFileInput<TValue>>))
                 .Apply(typeof(BFileInputSelections<,>), typeof(BFileInputSelections<TValue, MFileInput<TValue>>))
                 .Apply(typeof(BFileInputChips<,>), typeof(BFileInputChips<TValue, MFileInput<TValue>>))
@@ -208,13 +205,12 @@ namespace MASA.Blazor
         public override async Task HandleOnPrependClickAsync(MouseEventArgs args)
         {
             await base.HandleOnPrependClickAsync(args);
-            var input = Document.QuerySelector(InputFile.Element.Value);
+            var input = Document.GetElementByReference(InputFile.Element.Value);
             var @event = new MouseEvent("click");
-            @event.StopPropagation();
-            await input.DispatchEventAsync(@event);
+            await input.DispatchEventAsync(@event, stopPropagation: true);
         }
 
-        public async Task HandleOnFileChangeAsync(InputFileChangeEventArgs args)
+        public Task HandleOnFileChangeAsync(InputFileChangeEventArgs args)
         {
             if (Multiple)
             {
@@ -225,39 +221,35 @@ namespace MASA.Blazor
                     files.Add(file);
                 }
 
-                Value = (TValue)files;
+                InternalValue = (TValue)files;
             }
             else
             {
                 if (args.FileCount > 0)
                 {
-                    Value = (TValue)args.File;
+                    InternalValue = (TValue)args.File;
                 }
                 else
                 {
-                    Value = default;
+                    InternalValue = default;
                 }
             }
 
-            if (ValueChanged.HasDelegate)
-            {
-                await ValueChanged.InvokeAsync(Value);
-            }
+            return Task.CompletedTask;
         }
 
         public override async Task HandleOnClickAsync(MouseEventArgs args)
         {
             await base.HandleOnClickAsync(args);
 
-            var input = Document.QuerySelector(InputFile.Element.Value);
+            var input = Document.GetElementByReference(InputFile.Element.Value);
             var @event = new MouseEvent("click");
-            @event.StopPropagation();
-            await input.DispatchEventAsync(@event);
+            await input.DispatchEventAsync(@event, stopPropagation: true);
         }
 
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
-            var input = Document.QuerySelector(InputFile.Element.Value);
+            var input = Document.GetElementByReference(InputFile.Element.Value);
             await input.SetPropertyAsync("value", "");
 
             await base.HandleOnClearClickAsync(args);

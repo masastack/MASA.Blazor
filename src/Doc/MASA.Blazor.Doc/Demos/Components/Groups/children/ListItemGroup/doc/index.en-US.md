@@ -1,7 +1,7 @@
 ---
 category: Components
 type: ListItemGroup
-title: ListItemGroup
+title: List item groups
 cols: 1
 ---
 
@@ -10,12 +10,12 @@ utilizes `MItemGroup` at its core to provide a clean interface for interactive l
 
 ## API
 
-- [MListGroup](/docs/api/MListGroup)
-- [MListItem](/docs/api/MListItem)
-- [MListItemAction](/docs/api/MListItemAction)
-- [MListItemActionText](/docs/api/MListItemActionText)
-- [MListItemAvatar](/docs/api/MListItemAvatar)
-- [MListItemContent](/docs/api/MListItemContent)
-- [MListItemGroup](/docs/api/MListItemGroup)
-- [MListItemSubtitle](/docs/api/MListItemSubtitle)
-- [MListItemTitle](/docs/api/MListItemTitle)
+- [MListGroup](/api/MListGroup)
+- [MListItem](/api/MListItem)
+- [MListItemAction](/api/MListItemAction)
+- [MListItemActionText](/api/MListItemActionText)
+- [MListItemAvatar](/api/MListItemAvatar)
+- [MListItemContent](/api/MListItemContent)
+- [MListItemGroup](/api/MListItemGroup)
+- [MListItemSubtitle](/api/MListItemSubtitle)
+- [MListItemTitle](/api/MListItemTitle)

@@ -1,4 +1,5 @@
 ﻿{
+  "Title": "MTabs",
   "Components": [
     "Tabs"
   ],
@@ -107,7 +108,7 @@
     },
     {
       "Name": "Optional",
-      "Type": "String",
+      "Type": "Boolean",
       "Default": "null",
       "Description": ""
     },
@@ -163,12 +164,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<StringNumber>",
       "Description": ""
     }
   ]

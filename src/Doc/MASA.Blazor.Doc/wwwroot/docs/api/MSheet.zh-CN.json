@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MSheet",
   "Components": [
-    "Sheet"
+    "Sheets"
   ],
   "Props": [
     {
@@ -70,12 +71,6 @@
       "Description": "设定组件的最小宽度。"
     },
     {
-      "Name": "OnContextmenuPreventDefault",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Outlined",
       "Type": "Boolean",
       "Default": "false",
@@ -121,6 +116,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

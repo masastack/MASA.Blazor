@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MStepper",
   "Components": [
-    "Stepper"
+    "Steppers"
   ],
   "Props": [
     {
@@ -88,12 +89,6 @@
       "Description": ""
     },
     {
-      "Name": "OnContextmenuPreventDefault",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Outlined",
       "Type": "Boolean",
       "Default": "false",
@@ -151,12 +146,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Int32>",
       "Description": ""
     }
   ]

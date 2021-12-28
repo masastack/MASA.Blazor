@@ -24,7 +24,7 @@
                     if (color_variant.Length == 2)
                     {
                         var v = color_variant[1];
-                        // TODO: 是否需要正则表达式验证格式，Vuetify没有
+                        // TODO: 是否需要正则表达式验证格式
                         // {darken|lighten|accent}-{1|2}
 
                         if (!string.IsNullOrWhiteSpace(v))

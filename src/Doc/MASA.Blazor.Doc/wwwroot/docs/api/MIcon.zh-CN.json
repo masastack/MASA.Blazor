@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MIcon",
   "Components": [
-    "Icon"
+    "Icons"
   ],
   "Props": [
     {
@@ -109,12 +110,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     }
   ]

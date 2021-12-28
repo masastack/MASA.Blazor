@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MRating",
   "Components": [
-    "Rating"
+    "Ratings"
   ],
   "Props": [
     {
@@ -67,6 +68,12 @@
       "Name": "Hover",
       "Type": "Boolean",
       "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "IconLabel",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
@@ -139,16 +146,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "ItemContent",
+      "Type": "RenderFragment<RatingItem>",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Double>",
       "Description": ""
     }
   ]

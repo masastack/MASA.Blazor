@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MContainer",
   "Components": [
-    "Container"
+    "Grid system"
   ],
   "Props": [
     {
@@ -37,6 +38,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

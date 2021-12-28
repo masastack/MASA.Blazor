@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Pagination
+title: MPagination
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

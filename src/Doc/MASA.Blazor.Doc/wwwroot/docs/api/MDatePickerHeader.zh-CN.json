@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MDatePickerHeader",
   "Components": [
-    "DatePickerHeader"
+    "Date pickers"
   ],
   "Props": [
     {
@@ -35,7 +36,7 @@
     },
     {
       "Name": "Format",
-      "Type": "Func`2",
+      "Type": "Func<DateOnly,String>",
       "Default": "null",
       "Description": ""
     },
@@ -52,14 +53,20 @@
       "Description": ""
     },
     {
+      "Name": "Locale",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Max",
-      "Type": "Nullable`1",
+      "Type": "Nullable<DateOnly>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "Min",
-      "Type": "Nullable`1",
+      "Type": "Nullable<DateOnly>",
       "Default": "",
       "Description": ""
     },
@@ -97,16 +104,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "OnInput",
+      "Type": "EventCallback<DateOnly>",
       "Description": ""
     },
     {
       "Name": "OnToggle",
+      "Type": "EventCallback",
       "Description": ""
     }
   ]

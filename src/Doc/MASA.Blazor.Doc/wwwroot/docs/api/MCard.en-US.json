@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MCard",
   "Components": [
-    "Card"
+    "Cards"
   ],
   "Props": [
     {
@@ -124,12 +125,6 @@
       "Description": "Sets the minimum width for the component."
     },
     {
-      "Name": "OnContextmenuPreventDefault",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Outlined",
       "Type": "Boolean",
       "Default": "false",
@@ -193,16 +188,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "ProgressContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     }
   ]

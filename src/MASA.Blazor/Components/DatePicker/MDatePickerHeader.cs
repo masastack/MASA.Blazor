@@ -61,6 +61,9 @@ namespace MASA.Blazor
         public DatePickerType ActivePicker { get; set; }
 
         [Parameter]
+        public string Locale { get; set; }
+
+        [Parameter]
         public bool Dark { get; set; }
 
         [Parameter]
@@ -88,13 +91,13 @@ namespace MASA.Blazor
         }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
-        public bool RTL => GlobalConfig.RTL;
+        public bool RTL => MasaBlazor.RTL;
 
         protected bool IsReversing { get; set; }
 
-        public string Transition => IsReversing == !GlobalConfig.RTL ? "tab-reverse-transition" : "tab-transition";
+        public string Transition => IsReversing == !MasaBlazor.RTL ? "tab-reverse-transition" : "tab-transition";
 
         public Dictionary<string, object> ButtonAttrs => new()
         {
@@ -122,9 +125,10 @@ namespace MASA.Blazor
                     return Format;
                 }
 
-                return value => ActivePicker == DatePickerType.Date ? $"{DatePickerFormatter.Month(value.Month)} {value.Year}" : $"{value.Year}";
+                return ActivePicker == DatePickerType.Date ? DateFormatters.Date(Locale) : DateFormatters.Year(Locale);
             }
         }
+
 
         public DateOnly CalculateChange(int sign)
         {
@@ -184,19 +188,19 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyDatePickerHeaderDefault()
-                .Apply<BButton, MButton>(props =>
+                .Apply<BButton, MButton>(attrs =>
                 {
-                    var change = props.Index;
+                    var change = attrs.Index;
                     var calculateChange = CalculateChange(change);
                     var disabled = Disabled || (change < 0 && Min != null && calculateChange < Min) || (change > 0 && Max != null && calculateChange > Max);
 
-                    props[nameof(MButton.Dark)] = Dark;
-                    props[nameof(MButton.Disabled)] = disabled;
-                    props[nameof(MButton.Icon)] = true;
-                    props[nameof(MButton.Light)] = Light;
+                    attrs[nameof(MButton.Dark)] = Dark;
+                    attrs[nameof(MButton.Disabled)] = disabled;
+                    attrs[nameof(MButton.Icon)] = true;
+                    attrs[nameof(MButton.Light)] = Light;
 
-                    props[nameof(MButton.StopPropagation)] = true;
-                    props[nameof(MButton.OnClick)] = CreateEventCallback<MouseEventArgs>(async args =>
+                    attrs[nameof(MButton.StopPropagation)] = true;
+                    attrs[nameof(MButton.OnClick)] = CreateEventCallback<MouseEventArgs>(async args =>
                     {
                         if (OnInput.HasDelegate)
                         {

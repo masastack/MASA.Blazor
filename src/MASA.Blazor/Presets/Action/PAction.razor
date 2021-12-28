@@ -1,44 +1,67 @@
 ﻿@namespace MASA.Blazor.Presets
 @inherits BDomComponentBase
 
-<MTooltip Top Disabled="TooltipDisabled">
-    <ActivatorContent>
-        <span style="padding: 4px;@Style" class="@Class">
-            <MButton Color="@ComputedColor"
-                     Dark="Dark"
-                     Depressed="@Depressed"
-                     Disabled="Disabled"
-                     Icon="(ActionType == ActionTypes.Icon)"
-                     Large="@Large"
-                     Light="@Light"
-                     Loading="@_loading"
-                     Outlined="@Outlined"
-                     Plain="@Plain"
-                     Rounded="@Rounded"
-                     Small="@Small"
-                     Text="@Text"
-                     Tile="@Tile"
-                     XLarge="@XLarge"
-                     XSmall="@XSmall"
-                     OnClick="HandleClick"
-                     @ref="ButtonForwardRef"
-                     @attributes="context.Attrs">
+@if (Visible)
+{
+    <MTooltip Top Disabled="TooltipDisabled">
+        <ActivatorContent>
+            <span style="padding: 4px;@Style" class="@Class">
+                <MButton Color="@ComputedColor"
+                         Dark="@ComputedDark"
+                         Depressed="@ComputedDepressed"
+                         Disabled="@ComputedDisabled"
+                         Icon="(ActionType == ActionTypes.Icon)"
+                         Large="@ComputedLarge"
+                         Light="@ComputedLight"
+                         Loading="@_loading"
+                         Outlined="@ComputedOutlined"
+                         Plain="@ComputedPlain"
+                         Rounded="@ComputedRounded"
+                         Small="@ComputedSmall"
+                         Text="@ComputedText"
+                         Tile="@ComputedTile"
+                         XLarge="@ComputedXLarge"
+                         XSmall="@ComputedXSmall"
+                         OnClick="HandleOnClick"
+                         @ref="ButtonForwardRef"
+                         @attributes="context.Attrs">
 
-                @if (ShowIcon)
-                {
-                    <MIcon Left="ActionType == ActionTypes.IconLabel" @ref="IconForwardRef">@Icon</MIcon>
-                }
+                    @if (ShowIcon)
+                    {
+                        <MIcon Left="ActionType == ActionTypes.IconLabel" @ref="IconForwardRef">@ComputedIcon</MIcon>
+                    }
 
-                @if (ShowLabel)
-                {
-                    <span @ref="LabelRef">@Label</span>
-                }
+                    @if (ShowLabel)
+                    {
+                        <span @ref="LabelRef">
+                            @if (ChildContent != default)
+                            {
+                                @ChildContent
+                            }
+                            else
+                            {
+                                @ComputedLabel
+                            }
+                        </span>
+                    }
 
-            </MButton>
-        </span>
-    </ActivatorContent>
+                </MButton>
+            </span>
+        </ActivatorContent>
 
-    <ChildContent>
-        @(Tip ?? Label)
-    </ChildContent>
-</MTooltip>
+        <ChildContent>
+            @if (ComputedTip != default)
+            {
+                @ComputedTip
+            }
+            else if (ChildContent != default)
+            {
+                @ChildContent
+            }
+            else
+            {
+                @ComputedLabel
+            }
+        </ChildContent>
+    </MTooltip>
+}

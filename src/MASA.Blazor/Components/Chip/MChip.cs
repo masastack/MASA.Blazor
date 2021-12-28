@@ -9,7 +9,7 @@ namespace MASA.Blazor
 {
     public partial class MChip : BChip, IThemeable, IChip, ISizeable
     {
-        private ISizeable _sizer;
+        private Sizer _sizer;
 
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
@@ -105,7 +105,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add(prefix)
-                        .Add(_sizer.SizeableClasses())
+                        .Add(_sizer.SizeableClasses)
                         .AddIf($"{prefix}--clickable", () => IsClickable)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--draggable", () => Draggable)
@@ -120,7 +120,14 @@ namespace MASA.Blazor
                         .AddBackgroundColor(Color)
                         .AddTextColor(Color, () => Outlined)
                         .AddTextColor(TextColor);
-                }, styleBuilder => { styleBuilder.AddIf("display:none", () => !Active); })
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddIf("display:none", () => !Active)
+                        .AddBackgroundColor(Color)
+                        .AddTextColor(Color, () => Outlined)
+                        .AddTextColor(Color);
+                })
                 .Apply("content", cssBuilder =>
                 {
                     cssBuilder
@@ -129,21 +136,21 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyChipDefault()
-                .Apply<BIcon, MIcon>("close", props =>
+                .Apply<BIcon, MIcon>("close", attrs =>
                 {
-                    props[nameof(Class)] = "m-chip__close";
-                    props[nameof(MIcon.Right)] = true;
-                    props[nameof(MIcon.Size)] = (StringNumber)18;
-                    props[nameof(MIcon.OnClick)] = OnCloseClick;
-                    props[nameof(MIcon.Attributes)] = new Dictionary<string, object>()
+                    attrs[nameof(Class)] = "m-chip__close";
+                    attrs[nameof(MIcon.Right)] = true;
+                    attrs[nameof(MIcon.Size)] = (StringNumber)18;
+                    attrs[nameof(MIcon.OnClick)] = OnCloseClick;
+                    attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>()
                     {
                         {"aria-label", CloseLabel}
                     };
                 })
-                .Apply<BIcon, MIcon>("filter", props =>
+                .Apply<BIcon, MIcon>("filter", attrs =>
                 {
-                    props[nameof(Class)] = "m-chip__filter";
-                    props[nameof(MIcon.Left)] = true;
+                    attrs[nameof(Class)] = "m-chip__filter";
+                    attrs[nameof(MIcon.Left)] = true;
                 });
         }
     }

@@ -95,6 +95,10 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add($"{prefix}__inner-dot")
                         .AddBackgroundColor(Color);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddBackgroundColor(Color);
                 })
                 .Apply("divider", cssBuilder =>
                 {
@@ -111,11 +115,11 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyTimelineItemDefault()
-                .Apply<BIcon, MIcon>(props =>
+                .Apply<BIcon, MIcon>(attrs =>
                 {
-                    props[nameof(MIcon.Color)] = IconColor;
-                    props[nameof(MIcon.Dark)] = !IsDark;
-                    props[nameof(MIcon.Small)] = Small;
+                    attrs[nameof(MIcon.Color)] = IconColor;
+                    attrs[nameof(MIcon.Dark)] = !IsDark;
+                    attrs[nameof(MIcon.Small)] = Small;
                 });
         }
     }

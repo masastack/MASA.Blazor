@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MSwitch",
   "Components": [
-    "Switch"
+    "Switches"
   ],
   "Props": [
     {
@@ -59,7 +60,7 @@
     },
     {
       "Name": "ErrorMessages",
-      "Type": "List`1",
+      "Type": "List<String>",
       "Default": "null",
       "Description": ""
     },
@@ -106,6 +107,12 @@
       "Description": ""
     },
     {
+      "Name": "LeftText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Light",
       "Type": "Boolean",
       "Default": "false",
@@ -119,7 +126,7 @@
     },
     {
       "Name": "Messages",
-      "Type": "List`1",
+      "Type": "List<String>",
       "Default": "null",
       "Description": ""
     },
@@ -142,6 +149,18 @@
       "Description": ""
     },
     {
+      "Name": "RightText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Rules",
+      "Type": "IEnumerable<Func`2>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",
@@ -155,7 +174,13 @@
     },
     {
       "Name": "SuccessMessages",
-      "Type": "List`1",
+      "Type": "List<String>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "TrackColor",
+      "Type": "String",
       "Default": "null",
       "Description": ""
     },
@@ -173,7 +198,7 @@
     },
     {
       "Name": "ValueExpression",
-      "Type": "Expression`1",
+      "Type": "Expression<Func`1>",
       "Default": "",
       "Description": ""
     }
@@ -181,52 +206,64 @@
   "Contents": [
     {
       "Name": "AppendContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "LabelContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "MessageContent",
+      "Type": "RenderFragment<String>",
       "Description": ""
     },
     {
       "Name": "PrependContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnAppendClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnChange",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     },
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnMouseDown",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnMouseUp",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnPrependClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

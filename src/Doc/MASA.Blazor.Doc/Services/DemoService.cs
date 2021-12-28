@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Globalization;
 using System.Net.Http.Json;
 using System.Reflection;
-using System.Threading.Tasks;
-using BlazorComponent.Doc.Extensions;
-using BlazorComponent.Doc.Models;
-using MASA.Blazor.Doc.Demos.Components.Border.demo;
-using MASA.Blazor.Doc.Localization;
+using MASA.Blazor.Doc.Models;
+using MASA.Blazor.Doc.Models.Extensions;
 using MASA.Blazor.Doc.Pages;
-using MASA.Blazor.Doc.Shared;
+using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -25,20 +19,23 @@ namespace MASA.Blazor.Doc.Services
         private static ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>> _demoMenuCache;
         private static ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>> _docMenuCache;
         private static ConcurrentCache<string, RenderFragment> _showCaseCache;
-        private readonly ILanguageService _languageService;
         private readonly HttpClient _httpClient;
         private readonly NavigationManager _navigationManager;
-        private string CurrentLanguage => _languageService.CurrentCulture.Name;
+
+        private string CurrentLanguage { get; set; } = "zh-CN";
 
         private string CurrentComponentName { get; set; }
 
-        public DemoService(ILanguageService languageService, HttpClient httpClient, NavigationManager navigationManager)
+        public DemoService(HttpClient httpClient, NavigationManager navigationManager)
         {
-            _languageService = languageService;
             _httpClient = httpClient;
             _httpClient.BaseAddress ??= new Uri("http://127.0.0.1:5000");
             _navigationManager = navigationManager;
-            _languageService.LanguageChanged += async (sender, args) => await InitializeAsync(args.Name);
+        }
+
+        public void ChangeLanguage(string language)
+        {
+            CurrentLanguage = language;
         }
 
         private async Task InitializeAsync(string language)
@@ -55,16 +52,17 @@ namespace MASA.Blazor.Doc.Services
             await _componentCache.GetOrAdd(language, async (currentLanguage) =>
             {
                 var components =
-                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>($"_content/MASA.Blazor.Doc/meta/components.{language}.json");
-                return components.ToDictionary(x => x.Title.ToLower(), x => x);
+                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>($"_content/MASA.Blazor.Doc/meta/components/components.{language}.json");
+                return components.ToDictionary(x => x.Title.StructureUrl(), x => x);
             });
 
             _styleCache ??= new ConcurrentCache<string, ValueTask<IDictionary<string, DemoComponentModel>>>();
             await _styleCache.GetOrAdd(language, async (currentLanguage) =>
             {
                 var styles =
-                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>($"_content/MASA.Blazor.Doc/meta/styles-and-animations/components.{language}.json");
-                return styles.ToDictionary(x => x.Title.ToLower(), x => x);
+                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>(
+                        $"_content/MASA.Blazor.Doc/meta/stylesandanimations/components.{language}.json");
+                return styles.ToDictionary(x => x.Title.StructureUrl(), x => x);
             });
 
             _demoMenuCache ??= new ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>>();
@@ -98,7 +96,7 @@ namespace MASA.Blazor.Doc.Services
         {
             _showCaseCache ??= new ConcurrentCache<string, RenderFragment>();
             var demoTypes =
-                await _httpClient.GetFromJsonAsync<string[]>($"_content/MASA.Blazor.Doc/meta/demoTypes.json");
+                await _httpClient.GetFromJsonAsync<string[]>($"_content/MASA.Blazor.Doc/meta/components/demoTypes.json");
             foreach (var type in demoTypes)
             {
                 GetShowCase(type);
@@ -119,17 +117,23 @@ namespace MASA.Blazor.Doc.Services
             CurrentComponentName = componentName;
             await InitializeAsync(CurrentLanguage);
             return _styleCache.TryGetValue(CurrentLanguage, out var component)
-                ? (await component)[componentName.ToLower()]
+                ? (await component).TryGetValue(componentName.ToLower(), out var style) ? style : null
                 : null;
         }
 
         public async Task<List<ContentsItem>> GetTitlesAsync(string currentUrl)
         {
             var menuItems = await GetMenuAsync();
-            var current = menuItems.SelectMany(r => r.Children).FirstOrDefault(r => r.Url != null && currentUrl.Contains(r.Url));
+            var current = menuItems
+                .SelectMany(r => r.Children)
+                .FirstOrDefault(r => r.Url != null && currentUrl.Contains(r.Url, StringComparison.OrdinalIgnoreCase));
 
             var contents = current?.Contents;
             var componentName = currentUrl.Split('/')[^1];
+            if (string.IsNullOrEmpty(componentName))
+            {
+                componentName = currentUrl.Split('/')[^2];
+            }
 
             if (componentName.Contains('#'))
             {
@@ -143,9 +147,11 @@ namespace MASA.Blazor.Doc.Services
 
             if (contents == null && componentName != null)
             {
-                var components = await GetComponentAsync(componentName);
-                if (components is null) components = await GetStyleAsync(componentName);
-                var demoList = components.DemoList?.OrderBy(r => r.Order).ThenBy(r => r.Name);
+                var component = await GetComponentAsync(componentName);
+                if (component is null) component = await GetStyleAsync(componentName);
+                if (component == null) return new List<ContentsItem>();
+
+                var demoList = component.DemoList?.OrderBy(r => r.Order).ThenBy(r => r.Name);
 
                 contents = new List<ContentsItem>();
 
@@ -156,7 +162,7 @@ namespace MASA.Blazor.Doc.Services
 
                 foreach (var demo in demoList)
                 {
-                    var href = $"/#section-" + HashHelper.Hash(demo.Title);
+                    var href = demo.Title.HashSection();
                     if (demo.Title.Equals("Usage", StringComparison.OrdinalIgnoreCase) || demo.Title == "使用")
                     {
                         contents.Add(new ContentsItem(demo.Title, href, 2));
@@ -179,9 +185,13 @@ namespace MASA.Blazor.Doc.Services
                     }
                 }
 
-                if (components.Apis != null)
+                if (component.OtherDocs != null)
                 {
-                    contents.Add(ContentsItem.GenerateApi(CurrentLanguage));
+                    foreach (var (title, _) in component.OtherDocs)
+                    {
+                        var href = title.HashSection();
+                        contents.Add(new ContentsItem(title, href, 2));
+                    }
                 }
 
                 if (propsList.Any() || miscList.Any())

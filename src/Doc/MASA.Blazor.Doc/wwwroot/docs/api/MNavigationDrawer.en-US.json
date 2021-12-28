@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MNavigationDrawer",
   "Components": [
-    "NavigationDrawer"
+    "Navigation drawers"
   ],
   "Props": [
     {
@@ -82,6 +83,12 @@
       "Description": "Sets the height for the component."
     },
     {
+      "Name": "HideOverlay",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Id",
       "Type": "String",
       "Default": "null",
@@ -106,6 +113,24 @@
       "Description": ""
     },
     {
+      "Name": "MobileBreakpoint",
+      "Type": "OneOf<Breakpoints,Double>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OverlayColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OverlayOpacity",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Permanent",
       "Type": "Boolean",
       "Default": "false",
@@ -119,7 +144,7 @@
     },
     {
       "Name": "Src",
-      "Type": "OneOf`2",
+      "Type": "String",
       "Default": "",
       "Description": ""
     },
@@ -136,15 +161,15 @@
       "Description": "The style applied to the outermost element of the component"
     },
     {
-      "Name": "Temporary",
-      "Type": "Boolean",
-      "Default": "false",
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
-      "Name": "Top",
-      "Type": "StringNumber",
-      "Default": "",
+      "Name": "Temporary",
+      "Type": "Boolean",
+      "Default": "false",
       "Description": ""
     },
     {
@@ -169,28 +194,34 @@
   "Contents": [
     {
       "Name": "AppendContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "ImgContent",
+      "Type": "RenderFragment<Dictionary`2>",
       "Description": ""
     },
     {
       "Name": "PrependContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "MiniVariantChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

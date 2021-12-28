@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MNavigationDrawer",
   "Components": [
-    "NavigationDrawer"
+    "Navigation drawers"
   ],
   "Props": [
     {
@@ -82,6 +83,12 @@
       "Description": "设定组件的高度。"
     },
     {
+      "Name": "HideOverlay",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Id",
       "Type": "String",
       "Default": "null",
@@ -106,6 +113,24 @@
       "Description": "指定mini属性开期时指定的宽度"
     },
     {
+      "Name": "MobileBreakpoint",
+      "Type": "OneOf<Breakpoints,Double>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OverlayColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OverlayOpacity",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Permanent",
       "Type": "Boolean",
       "Default": "false",
@@ -119,7 +144,7 @@
     },
     {
       "Name": "Src",
-      "Type": "OneOf`2",
+      "Type": "String",
       "Default": "",
       "Description": "指定一个 MImage 作为组件的背景。"
     },
@@ -136,16 +161,16 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Temporary",
       "Type": "Boolean",
       "Default": "false",
       "Description": "临时抽屉位于其应用之上，并使用稀松布（叠加）来使背景变暗"
-    },
-    {
-      "Name": "Top",
-      "Type": "StringNumber",
-      "Default": "",
-      "Description": ""
     },
     {
       "Name": "Touchless",
@@ -169,28 +194,34 @@
   "Contents": [
     {
       "Name": "AppendContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "ImgContent",
+      "Type": "RenderFragment<Dictionary`2>",
       "Description": ""
     },
     {
       "Name": "PrependContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "MiniVariantChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

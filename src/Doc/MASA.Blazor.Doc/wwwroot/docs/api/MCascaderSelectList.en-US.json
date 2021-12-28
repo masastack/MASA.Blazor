@@ -1,0 +1,94 @@
+﻿{
+  "Title": "MCascaderSelectList",
+  "Components": [
+    "Cascaders"
+  ],
+  "Props": [
+    {
+      "Name": "Children",
+      "Type": "List<TItem>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Highlighted",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Icon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Item",
+      "Type": "TItem",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Key",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Label",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Loading",
+      "Type": "StringBoolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Value",
+      "Type": "TValue",
+      "Default": "null",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ItemContent",
+      "Type": "RenderFragment<SelectListItemProps`1>",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnItemClick",
+      "Type": "EventCallback<TItem>",
+      "Description": ""
+    }
+  ]
+}

@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-A simple list utilizing `MistItemIcon`, `MListItemTitle` and `MListItemAvatar`.
+一个简单的列表利用 `MistItemIcon`, `MListItemTitle` 和 `MListItemAvatar`。
 
 ## en-US
 

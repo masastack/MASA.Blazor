@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MTimelineItem",
   "Components": [
-    "TimelineItem"
+    "Timelines"
   ],
   "Props": [
     {
@@ -91,14 +92,17 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "IconContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "OppositeContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],

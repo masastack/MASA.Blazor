@@ -15,10 +15,10 @@ namespace MASA.Blazor
             base.SetComponentClass();
 
             AbstractProvider
-                .Merge<BPopover>(props =>
+                .Merge<BPopover>(attrs =>
                 {
-                    props[nameof(BPopover.PreventDefault)] = true;
-                    props[nameof(BPopover.Style)] = Value ? "display:flex;" : "";
+                    attrs[nameof(BPopover.PreventDefault)] = true;
+                    attrs[nameof(BPopover.Style)] = Value ? "display:flex;" : "";
                 });
         }
     }

@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<CLIProjectDir>Doc/MASA.Blazor.Doc.CLI</CLIProjectDir>
+		<CLIPath>$(CLIProjectDir)/bin/Debug/net6.0/MASA.Blazor.Doc.CLI.dll</CLIPath>
+		<ProjectDir>$(SolutionDir)/Doc/MASA.Blazor.Doc</ProjectDir>
+		<ApplicationIcon />
+		<OutputType>Library</OutputType>
+		<StartupObject />
+	</PropertyGroup>
+	
+	<Target Name="RunCli" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug'">
+		<Copy SourceFiles="@(DocFiles)" DestinationFolder="$(ProjectDir)\wwwroot\docs\%(RecursiveDir)" ContinueOnError="true" />
+		<Exec WorkingDirectory="$(SolutionDir)" Command="dotnet build $(CLIProjectDir)" />
+		<Exec WorkingDirectory="$(SolutionDir)" Command="dotnet $(CLIPath) demo2json $(ProjectDir)/Demos $(ProjectDir)/wwwroot/meta" />
+		<Exec WorkingDirectory="$(SolutionDir)" Command="dotnet $(CLIPath) api2json  $(SolutionDir)/MASA.Blazor/bin/Debug/net6.0/MASA.Blazor.dll ./Doc/MASA.Blazor.Doc/wwwroot/docs/api" />
+		<Exec WorkingDirectory="$(SolutionDir)" Command="dotnet $(CLIPath) menu2json $(ProjectDir)/Demos $(ProjectDir)/wwwroot/docs $(ProjectDir)/wwwroot/meta" />
+		<Exec WorkingDirectory="$(SolutionDir)" Command="dotnet $(CLIPath) docs2html $(ProjectDir)/wwwroot/docs ./Doc/MASA.Blazor.Doc/wwwroot/docs" />
+	</Target>
+</Project>

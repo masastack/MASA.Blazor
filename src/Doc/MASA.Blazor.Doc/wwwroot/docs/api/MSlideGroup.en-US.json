@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MSlideGroup",
   "Components": [
-    "SlideGroup"
+    "Slide groups"
   ],
   "Props": [
     {
@@ -77,7 +78,7 @@
     },
     {
       "Name": "Values",
-      "Type": "List`1",
+      "Type": "List<StringNumber>",
       "Default": "null",
       "Description": ""
     }
@@ -85,16 +86,29 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
+    },
+    {
+      "Name": "NextContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "PrevContent",
+      "Type": "RenderFragment",
+      "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<StringNumber>",
       "Description": ""
     },
     {
       "Name": "ValuesChanged",
+      "Type": "EventCallback<List`1>",
       "Description": ""
     }
   ]

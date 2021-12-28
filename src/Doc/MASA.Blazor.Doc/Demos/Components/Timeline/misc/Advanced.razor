@@ -57,7 +57,7 @@
         <MTimelineItem Class="mb-4" Color="grey" Small>
             <MRow Justify="JustifyTypes.SpaceBetween">
                 <MCol Cols="7">
-                    Order confirmation email was sent to John Leider (john@vuetifyjs.com).
+                    Order confirmation email was sent to doddgu (gushoudao@masastack.com).
                 </MCol>
                 <MCol Class="text-right" Cols="5">
                     15:25 EDT
@@ -107,15 +107,12 @@
 
     private void Comment()
     {
-        if (string.IsNullOrWhiteSpace(_input))
-            return;
-
         _events.Insert(0,
             new EventDemo
                 {
                     Id = _nonce++,
                     Text = _input,
-                    Time = DateTime.Now.ToString("HH:mm")
+                    Time = DateTime.Now.ToString("HH:mm:ss")
                 });
 
         _input = string.Empty;

@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-You can use `MImage` to make, for example, a picture gallery.
+您可以使用 `MImage` 来制作图片库。
 
 ## en-US
 

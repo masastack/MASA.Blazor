@@ -8,18 +8,22 @@ using System.Reflection;
 
 namespace MASA.Blazor
 {
-    public partial class MIcon : BIcon, IThemeable, IIcon
+    public partial class MIcon : BIcon, IIcon, IThemeable, ISizeable
     {
-        private const string XSMALL = "12px";
-        private const string SMALL = "16px";
-        private const string DENSE = "20px";
-        private const string LARGE = "36px";
-        private const string XLARGE = "40px";
+        private readonly Dictionary<string, string> _sizeMap = new()
+        {
+            { nameof(XSmall), "12px" },
+            { nameof(Small), "16px" },
+            { "Default", "24px" },
+            { nameof(Medium), "28px" },
+            { nameof(Large), "36px" },
+            { nameof(XLarge), "40px" },
+        };
 
         /// <summary>
         /// Attention! End with a space
         /// </summary>
-        private static string[] _arrFa5Prefix = new string[] { "fa ", "fad ", "fak ", "fab ", "fal ", "far ", "fas " };
+        private static string[] _arrFa5Prefix = new string[] { "fa ", "fad ", "fak ", "fab ", "fal ", "far ", "fas ", "mi" };
 
         /// <summary>
         /// 36px
@@ -50,7 +54,6 @@ namespace MASA.Blazor
 
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
-
         public IDictionary<string, object> Attrs => Attributes;
 
         public bool IsDark
@@ -71,6 +74,29 @@ namespace MASA.Blazor
             }
         }
 
+        public bool Medium => false;
+
+        public string GetSize()
+        {
+            var sizes = new Dictionary<string, bool>()
+            {
+                { nameof(XSmall), XSmall },
+                { nameof(Small), Small },
+                { nameof(Medium), Medium },
+                { nameof(Large), Large },
+                { nameof(XLarge), XLarge },
+            };
+
+            var key = sizes.FirstOrDefault(item => item.Value).Key;
+
+            if (key != null && _sizeMap.TryGetValue(key, out var px))
+            {
+                return px;
+            }
+
+            return Size?.ToUnit();
+        }
+
         protected override void SetComponentClass()
         {
             CssProvider
@@ -86,25 +112,27 @@ namespace MASA.Blazor
                         .AddTheme(IsDark)
                         .AddTextColor(Color, () => IsActive)
                         .AddFirstIf((() => Icon, () => _arrFa5Prefix.Any(prefix => Icon.StartsWith(prefix))),
-                        (() => $"mdi {Icon}", () => Icon.StartsWith("mdi-")),
-                        (() => $"material-icons", () => !string.IsNullOrWhiteSpace(NewChildren)));
+                            (() => $"mdi {Icon}", () => Icon.StartsWith("mdi-")),
+                            (() => $"material-icons", () => !string.IsNullOrWhiteSpace(NewChildren)));
                 }, styleBuilder =>
                 {
-                    styleBuilder
-                        .AddTextColor(Color, () => IsActive)
-                        .AddFirstIf(
-                            (() => $"font-size: {Size.ToUnit()}", () => Size != null),
-                            (() => $"font-size: {XLARGE}", () => XLarge),
-                            (() => $"font-size: {LARGE}", () => Large),
-                            (() => $"font-size: {DENSE}", () => Dense),
-                            (() => $"font-size: {SMALL}", () => Small),
-                            (() => $"font-size: {XSMALL}", () => XSmall)
-                        );
-                }).Apply("m-icon-svg", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-icon__svg");
-                });
+                    styleBuilder = styleBuilder.AddTextColor(Color, () => IsActive);
+
+                    var fontSize = GetSize();
+                    styleBuilder.AddIf($"font-size:{fontSize}", () => fontSize != null);
+                }).Apply("svg",
+                    cssBuilder => { cssBuilder.Add("m-icon__svg"); },
+                    styleBuilder =>
+                    {
+                        var size = GetSize();
+                        if (size != null)
+                        {
+                            styleBuilder
+                                .Add($"font-size:{size}")
+                                .Add($"height:{size}")
+                                .Add($"width:{size}");
+                        }
+                    });
 
             AbstractProvider
                 .Apply(typeof(BButtonIconSlot<>), typeof(BButtonIconSlot<MIcon>))

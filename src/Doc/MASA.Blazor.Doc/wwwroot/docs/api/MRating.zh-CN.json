@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MRating",
   "Components": [
-    "Rating"
+    "Ratings"
   ],
   "Props": [
     {
@@ -68,6 +69,12 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "将鼠标悬停在图标上时提供视觉反馈"
+    },
+    {
+      "Name": "IconLabel",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
     },
     {
       "Name": "Id",
@@ -139,16 +146,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "ItemContent",
+      "Type": "RenderFragment<RatingItem>",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Double>",
       "Description": ""
     }
   ]

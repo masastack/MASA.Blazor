@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MBreadcrumbsItem",
   "Components": [
-    "BreadcrumbsItem"
+    "Breadcrumbs"
   ],
   "Props": [
     {
@@ -20,6 +21,12 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "移除组件的单击或 target 功能。"
+    },
+    {
+      "Name": "Exact",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Href",
@@ -79,6 +86,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

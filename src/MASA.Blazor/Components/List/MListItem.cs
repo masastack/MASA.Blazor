@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
@@ -68,82 +69,12 @@ namespace MASA.Blazor
             }
         }
 
-        [CascadingParameter]
-        public BList List { get; set; }
-
-        [CascadingParameter]
-        public BNavigationDrawer NavigationDrawer { get; set; }
-
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        [CascadingParameter]
-        public BListGroup ListGroup { get; set; }
-
         [Parameter]
         public bool Highlighted { get; set; }
 
         [Parameter]
         public bool Ripple { get; set; }
-
-        public bool IsLinkage => Href != null && (List?.Linkage ?? Linkage);
-
-        private void OnLocationChanged(object sender, LocationChangedEventArgs e)
-        {
-            if (!IsLinkage) return;
-
-            if (MatchRoute(e.Location))
-            {
-                List?.Select(this);
-                IsActive = true;
-            }
-        }
-
-        private bool MatchRoute(string path)
-        {
-            var relativePath = NavigationManager.ToBaseRelativePath(path);
-            if (Href.StartsWith("/"))
-            {
-                Href = Href[1..];
-            }
-
-            return string.Equals(Href, relativePath, StringComparison.OrdinalIgnoreCase);
-        }
-
-        internal void Deactive()
-        {
-            IsActive = false;
-            StateHasChanged();
-        }
-
-        internal void Active()
-        {
-            IsActive = true;
-            StateHasChanged();
-        }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            if (IsLinkage && MatchRoute(NavigationManager.Uri))
-            {
-                IsActive = true;
-            }
-        }
-
-        protected override void OnAfterRender(bool firstRender)
-        {
-            base.OnAfterRender(firstRender);
-
-            if (List != null && List.Items.IndexOf(this) == -1)
-            {
-                List.Items.Add(this);
-            }
-
-            NavigationManager.LocationChanged += OnLocationChanged;
-        }
-
+        
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -183,14 +114,6 @@ namespace MASA.Blazor
                         .AddTextColor(Color)
                         .AddTheme(IsDark);
                 });
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            List?.Items?.Remove(this);
-            NavigationManager.LocationChanged -= OnLocationChanged;
-
-            base.Dispose(disposing);
         }
     }
 }

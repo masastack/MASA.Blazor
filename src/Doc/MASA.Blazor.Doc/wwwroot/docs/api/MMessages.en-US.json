@@ -1,4 +1,5 @@
 ﻿{
+  "Title": "MMessages",
   "Components": [
     "Messages"
   ],
@@ -41,7 +42,7 @@
     },
     {
       "Name": "Value",
-      "Type": "List`1",
+      "Type": "List<String>",
       "Default": "null",
       "Description": ""
     }
@@ -49,6 +50,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment<String>",
       "Description": "Default Content"
     }
   ],

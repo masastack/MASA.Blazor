@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MProgressLinear",
   "Components": [
-    "ProgressLinear"
+    "Progress linears"
   ],
   "Props": [
     {
@@ -82,12 +83,6 @@
       "Description": ""
     },
     {
-      "Name": "IsVisible",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Light",
       "Type": "Boolean",
       "Default": "false",
@@ -145,12 +140,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment<Double>",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "OnChange",
+      "Type": "EventCallback<Double>",
       "Description": ""
     }
   ]

@@ -1,8 +1,9 @@
 ﻿using System.Reflection;
+using BlazorComponent.Components;
+using MASA.Blazor.Doc;
 using MASA.Blazor.Doc.Highlight;
-using MASA.Blazor.Doc.Localization;
-using MASA.Blazor.Doc.Routing;
 using MASA.Blazor.Doc.Services;
+using MASA.Blazor.Doc.Utils;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -12,9 +13,11 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddMasaBlazor();
 
-            services.AddSingleton<RouteManager>();
+            services.AddScoped<I18n>();
+            services.AddScoped<GlobalConfigs>();
+            services.AddScoped<CookieStorage>();
+
             services.AddScoped<DemoService>();
-            services.AddSingleton<ILanguageService>(new InAssemblyLanguageService(Assembly.GetExecutingAssembly()));
             services.AddScoped<IPrismHighlighter, PrismHighlighter>();
 
             return services;

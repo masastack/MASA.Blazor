@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Responsive
+title: MResponsive
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

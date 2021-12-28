@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MToolbar",
   "Components": [
-    "Toolbar"
+    "Toolbars"
   ],
   "Props": [
     {
@@ -118,12 +119,6 @@
       "Description": "Sets the minimum width for the component."
     },
     {
-      "Name": "OnContextmenuPreventDefault",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Outlined",
       "Type": "Boolean",
       "Default": "false",
@@ -187,14 +182,17 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "ExtensionContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ImgContent",
+      "Type": "RenderFragment<Dictionary`2>",
       "Description": ""
     }
   ],

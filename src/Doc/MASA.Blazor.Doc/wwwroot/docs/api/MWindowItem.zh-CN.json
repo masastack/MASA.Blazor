@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MWindowItem",
   "Components": [
-    "WindowItem"
+    "Windows"
   ],
   "Props": [
     {
@@ -61,6 +62,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

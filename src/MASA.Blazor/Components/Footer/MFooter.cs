@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,11 @@ namespace MASA.Blazor
 {
     public partial class MFooter : BFooter, IThemeable
     {
+        private readonly string[] _applicationProperties = new string[]
+        {
+            "Bottom","Left","Right"
+        };
+
         [Parameter]
         public bool Dark { get; set; }
 
@@ -38,19 +44,19 @@ namespace MASA.Blazor
         }
 
         [Parameter]
-        public bool Absolute {  get; set; }
+        public bool Absolute { get; set; }
 
         [Parameter]
-        public bool App {  get; set;}
+        public bool App { get; set; }
 
         [Parameter]
         public string Color { get; set; }
 
         [Parameter]
-        public StringNumber Elevation {  get; set; }
+        public StringNumber Elevation { get; set; }
 
         [Parameter]
-        public bool Fixed {  get; set; }
+        public bool Fixed { get; set; }
 
         [Parameter]
         public StringNumber Height { get; set; } = "auto";
@@ -82,31 +88,51 @@ namespace MASA.Blazor
         [Parameter]
         public bool Tile { get; set; }
 
-        [Parameter]
-        public int Right { get; set; }
-
-        [Parameter]
-        public int Left { get; set; }
-
-        [Parameter]
-        public int Bottom { get; set; }
-
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
-        protected bool IsPositioned() => Absolute || Fixed || App;
+        protected StringNumber ComputedBottom => ComputeBottom();
 
-        protected StringNumber ComputedLeft() => !IsPositioned() ?
-            string.Empty :
-            (App && Inset ? Left : 0);
+        protected StringNumber ComputeBottom()
+        {
+            if (!IsPositioned) return null;
 
-        protected StringNumber ComputedRight() => !IsPositioned() ?
-            string.Empty :
-            (App && Inset ? Right : 0);
+            return App && Inset ? MasaBlazor.Application.Bottom : 0;
+        }
 
-        protected StringNumber ComputedBottom() => !IsPositioned() ?
-            string.Empty :
-            (App ? Bottom : 0);
+        protected StringNumber ComputedLeft => ComputeLeft();
+
+        protected StringNumber ComputeLeft()
+        {
+            if (!IsPositioned) return null;
+
+            return App && Inset ? MasaBlazor.Application.Left : 0;
+        }
+
+        protected StringNumber ComputedRight => ComputeRight();
+
+        protected StringNumber ComputeRight()
+        {
+            if (!IsPositioned) return null;
+
+            return App && Inset ? MasaBlazor.Application.Right : 0;
+        }
+
+        protected bool IsPositioned => Absolute || Fixed || App;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
+        }
+
+        private void ApplicationPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (_applicationProperties.Contains(e.PropertyName))
+            {
+                InvokeStateHasChanged();
+            }
+        }
 
         protected override void SetComponentClass()
         {
@@ -134,31 +160,59 @@ namespace MASA.Blazor
                         .AddMaxWidth(MaxWidth)
                         .AddMinHeight(MinHeight)
                         .AddMinWidth(MinWidth)
-                        .Add($"left:{ComputedLeft().ToUnit()}")
-                        .Add($"right:{ComputedRight().ToUnit()}")
-                        .Add($"bottom:{ComputedBottom().ToUnit()}");
+                        .AddIf($"left:{ComputedLeft.ToUnit()}", () => ComputedLeft != null)
+                        .AddIf($"right:{ComputedRight.ToUnit()}", () => ComputedRight != null)
+                        .AddIf($"bottom:{ComputedBottom.ToUnit()}", () => ComputedBottom != null);
                 });
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override async Task OnParametersSetAsync()
         {
-            if (firstRender)
+            await UpdateApplicationAsync();
+        }
+
+        protected async Task UpdateApplicationAsync()
+        {
+            if (!App)
             {
-                var _documentElement = await JsInvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, Ref);
-                UpdateApplication(_documentElement?.ClientHeight ?? 0);
+                return;
             }
 
-            await base.OnAfterRenderAsync(firstRender);
-        }
-
-        protected void UpdateApplication(double clientHeight)
-        {
-            var val = Height.ToDouble() > 0 ? Height.ToDouble() : clientHeight;
+            var val = Height.ToDouble() > 0 ? Height.ToDouble() : await GetClientHeightAsync();
             if (Inset)
-                GlobalConfig.Application.InsetFooter = val;
+                MasaBlazor.Application.InsetFooter = val;
             else
-                GlobalConfig.Application.Footer = val;
+                MasaBlazor.Application.Footer = val;
         }
 
+        private async Task<double> GetClientHeightAsync()
+        {
+            if (Ref.Id == null)
+            {
+                return 0;
+            }
+
+            var element = await JsInvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, Ref);
+            return element.ClientHeight;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            RemoveApplication();
+            MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
+        }
+
+        private void RemoveApplication()
+        {
+            if (!App)
+            {
+                return;
+            }
+
+            if (Inset)
+                MasaBlazor.Application.InsetFooter = 0;
+            else
+                MasaBlazor.Application.Footer = 0;
+        }
     }
 }

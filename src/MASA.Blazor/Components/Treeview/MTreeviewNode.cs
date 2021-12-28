@@ -82,22 +82,22 @@ namespace MASA.Blazor
                 });
 
             AbstractProvider
-                .Apply<BIcon, MIcon>("checkbox", props =>
+                .Apply<BIcon, MIcon>("checkbox", attrs =>
                  {
-                     props[nameof(Class)] = "m-treeview-node__checkbox";
-                     props[nameof(MIcon.Color)] = (IsSelected || IsIndeterminate) ? SelectedColor : null;
-                     props[nameof(MIcon.Disabled)] = Disabled;
-                     props[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnCheckAsync);
+                     attrs[nameof(Class)] = "m-treeview-node__checkbox";
+                     attrs[nameof(MIcon.Color)] = (IsSelected || IsIndeterminate) ? SelectedColor : null;
+                     attrs[nameof(MIcon.Disabled)] = Disabled;
+                     attrs[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnCheckAsync);
                  })
-                .Apply<BIcon, MIcon>("toggle", props =>
+                .Apply<BIcon, MIcon>("toggle", attrs =>
                 {
                     var css = new CssBuilder()
                         .Add("m-treeview-node__toggle")
                         .AddIf("m-treeview-node__toggle--open", () => IsOpen)
                         .AddIf("m-treeview-node__toggle--loading", () => IsLoading)
                         .Class;
-                    props[nameof(Class)] = css;
-                    props[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnToggleAsync);
+                    attrs[nameof(Class)] = css;
+                    attrs[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnToggleAsync);
                 })
                 .Apply(typeof(BTreeviewNodeNode<,,>), typeof(BTreeviewNodeNode<TItem, TKey, MTreeviewNode<TItem, TKey>>))
                 .Apply(typeof(BTreeviewNodeChildrenWrapper<,,>), typeof(BTreeviewNodeChildrenWrapper<TItem, TKey, MTreeviewNode<TItem, TKey>>))
@@ -109,33 +109,33 @@ namespace MASA.Blazor
                 .Apply(typeof(BTreeviewNodePrependSlot<,,>), typeof(BTreeviewNodePrependSlot<TItem, TKey, MTreeviewNode<TItem, TKey>>))
                 .Apply(typeof(BTreeviewNodeLabel<,,>), typeof(BTreeviewNodeLabel<TItem, TKey, MTreeviewNode<TItem, TKey>>))
                 .Apply(typeof(BTreeviewNodeAppendSlot<,,>), typeof(BTreeviewNodeAppendSlot<TItem, TKey, MTreeviewNode<TItem, TKey>>))
-                .Apply(typeof(BTreeviewNode<,>), typeof(MTreeviewNode<TItem, TKey>), props =>
+                .Apply(typeof(BTreeviewNode<,>), typeof(MTreeviewNode<TItem, TKey>), attrs =>
                 {
-                    props[nameof(Activatable)] = Activatable;
-                    props[nameof(ActiveClass)] = ActiveClass;
-                    props[nameof(Selectable)] = Selectable;
-                    props[nameof(SelectedColor)] = SelectedColor;
-                    props[nameof(Color)] = Color;
-                    props[nameof(ExpandIcon)] = ExpandIcon;
-                    props[nameof(IndeterminateIcon)] = IndeterminateIcon;
-                    props[nameof(OffIcon)] = OffIcon;
-                    props[nameof(OnIcon)] = OnIcon;
-                    props[nameof(LoadingIcon)] = LoadingIcon;
-                    props[nameof(ItemKey)] = ItemKey;
-                    props[nameof(ItemText)] = ItemText;
-                    props[nameof(ItemDisabled)] = ItemDisabled;
-                    props[nameof(ItemChildren)] = ItemChildren;
+                    attrs[nameof(Activatable)] = Activatable;
+                    attrs[nameof(ActiveClass)] = ActiveClass;
+                    attrs[nameof(Selectable)] = Selectable;
+                    attrs[nameof(SelectedColor)] = SelectedColor;
+                    attrs[nameof(Color)] = Color;
+                    attrs[nameof(ExpandIcon)] = ExpandIcon;
+                    attrs[nameof(IndeterminateIcon)] = IndeterminateIcon;
+                    attrs[nameof(OffIcon)] = OffIcon;
+                    attrs[nameof(OnIcon)] = OnIcon;
+                    attrs[nameof(LoadingIcon)] = LoadingIcon;
+                    attrs[nameof(ItemKey)] = ItemKey;
+                    attrs[nameof(ItemText)] = ItemText;
+                    attrs[nameof(ItemDisabled)] = ItemDisabled;
+                    attrs[nameof(ItemChildren)] = ItemChildren;
                     //TODO:transition
-                    props[nameof(LoadChildren)] = LoadChildren;
-                    props[nameof(OpenOnClick)] = OpenOnClick;
-                    props[nameof(Rounded)] = Rounded;
-                    props[nameof(Shaped)] = Shaped;
-                    props[nameof(Level)] = Level + 1;
-                    props[nameof(SelectionType)] = SelectionType;
-                    props[nameof(ParentIsDisabled)] = ParentIsDisabled;
-                    props[nameof(AppendContent)] = AppendContent;
-                    props[nameof(LabelContent)] = LabelContent;
-                    props[nameof(PrependContent)] = PrependContent;
+                    attrs[nameof(LoadChildren)] = LoadChildren;
+                    attrs[nameof(OpenOnClick)] = OpenOnClick;
+                    attrs[nameof(Rounded)] = Rounded;
+                    attrs[nameof(Shaped)] = Shaped;
+                    attrs[nameof(Level)] = Level + 1;
+                    attrs[nameof(SelectionType)] = SelectionType;
+                    attrs[nameof(ParentIsDisabled)] = ParentIsDisabled;
+                    attrs[nameof(AppendContent)] = AppendContent;
+                    attrs[nameof(LabelContent)] = LabelContent;
+                    attrs[nameof(PrependContent)] = PrependContent;
                 });
         }
 
@@ -146,7 +146,7 @@ namespace MASA.Blazor
                 return;
             }
 
-           await CheckChildrenAsync();
+            await CheckChildrenAsync();
             Treeview.UpdateSelected(Key);
             await Treeview.EmitSelectedAsync();
         }

@@ -1,4 +1,5 @@
 ﻿{
+  "Title": "MECharts",
   "Components": [
     "ECharts"
   ],
@@ -20,6 +21,30 @@
       "Type": "String",
       "Default": "null",
       "Description": ""
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最大高度。"
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最小高度。"
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最小宽度。"
     },
     {
       "Name": "Option",

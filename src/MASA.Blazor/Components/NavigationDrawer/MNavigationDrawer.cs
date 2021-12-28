@@ -1,14 +1,80 @@
-﻿using BlazorComponent;
-using MASA.Blazor.Model;
+﻿using System.ComponentModel;
+using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Threading.Tasks;
+using OneOf;
 
 namespace MASA.Blazor
 {
     public partial class MNavigationDrawer : BNavigationDrawer, INavigationDrawer
     {
-        private StringNumber _height;
+        private readonly string[] _applicationProperties = new string[]
+        {
+            "Bottom","Footer","Bar","Top"
+        };
+
+        [Parameter]
+        public bool Bottom { get; set; }
+
+        [Parameter]
+        public bool Clipped { get; set; }
+
+        [Parameter]
+        public bool DisableResizeWatcher { get; set; }
+
+        [Parameter]
+        public bool DisableRouteWatcher { get; set; }
+
+        [Parameter]
+        public bool Floating { get; set; }
+
+        [Parameter]
+        public StringNumber Height
+        {
+            get
+            {
+                return GetValue<StringNumber>(App ? "100vh" : "100%");
+            }
+            set
+            {
+                SetValue(value);
+            }
+        }
+
+        [Parameter]
+        public StringNumber MiniVariantWidth { get; set; } = 56;
+
+        [Parameter]
+        public bool Right { get; set; }
+
+        [Parameter]
+        public bool Touchless { get; set; }
+
+        [Parameter]
+        public StringNumber Width { get; set; } = "256px";
+
+        [Parameter]
+        public string Color { get; set; }
+
+        [Parameter]
+        public OneOf<Breakpoints, double> MobileBreakpoint
+        {
+            get
+            {
+                return GetValue(MasaBlazor.Breakpoint.MobileBreakpoint);
+            }
+            set
+            {
+                SetValue(value);
+            }
+        }
+
+        [Parameter]
+        public string OverlayColor { get; set; }
+
+        [Parameter]
+        public StringNumber OverlayOpacity { get; set; }
 
         [Parameter]
         public bool Dark { get; set; }
@@ -37,148 +103,61 @@ namespace MASA.Blazor
             }
         }
 
-        /// <summary>
-        /// Applies position: absolute to the component.
-        /// </summary>
         [Parameter]
         public bool Absolute { get; set; }
 
-        /// <summary>
-        /// Expands from the bottom of the screen on mobile devices
-        /// </summary>
-        [Parameter]
-        public bool Bottom { get; set; }
-
-        [Parameter]
-        public bool Clipped { get; set; }
-
-        [Parameter]
-        public bool DisableResizeWatcher { get; set; }
-
-        [Parameter]
-        public bool DisableRouteWatcher { get; set; }
-
-        [Parameter]
-        public bool Permanent { get; set; }
-
-        [Parameter]
-        public bool Stateless { get; set; }
-
-        [Parameter]
-        public bool Touchless { get; set; }
-
-        /// <summary>
-        /// Designates the width assigned when the mini prop is turned on
-        /// </summary>
-        [Parameter]
-        public StringNumber MiniVariantWidth { get; set; } = 56;
-
-        /// <summary>
-        /// A floating drawer has no visible container (no border-right)
-        /// </summary>
-        [Parameter]
-        public bool Floating { get; set; }
-
-        private bool _value = true;
-
-        [Parameter]
-        public bool Value
-        {
-            get => _value;
-            set
-            {
-                if (value == _value) return;
-                _value = value;
-            }
-        }
-
-        public bool _isActive => Value;
-
-        protected bool _isOverlay => Value && Temporary;
-
-        [Parameter]
-        public EventCallback<bool> ValueChanged { get; set; }
-
-        /// <summary>
-        /// Designates the component as part of the application layout. Used for dynamically adjusting content sizing.
-        /// Components using this prop should reside outside of v-main component to function properly.
-        /// You can find more information about layouts on the application page. 
-        /// Note: this prop automatically applies position: fixed to the layout element.
-        /// You can overwrite this functionality by using the absolute prop
-        /// </summary>
-        [Parameter]
-        public bool App { get; set; }
-
-        /// <summary>
-        /// Applies position: fixed to the component.
-        /// </summary>
         [Parameter]
         public bool Fixed { get; set; }
 
-        /// <summary>
-        /// This should be down in next version
-        /// </summary>
-        public bool Mobile { get; }
-
-        /// <summary>
-        /// Places the navigation drawer on the right
-        /// </summary>
         [Parameter]
-        public bool Right { get; set; }
+        public RenderFragment AppendContent { get; set; }
 
-        /// <summary>
-        /// Sets the height of the navigation drawer
-        /// </summary>
         [Parameter]
-        public StringNumber Height
+        public RenderFragment PrependContent { get; set; }
+
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; }
+
+        protected StringNumber ComputedMaxHeight
         {
             get
             {
-                if (_height == null)
-                {
-                    return App ? "100vh" : "100%";
-                }
+                if (!HasApp) return null;
 
-                return _height;
-            }
-            set
-            {
-                _height = value;
+                var computedMaxHeight = MasaBlazor.Application.Bottom + MasaBlazor.Application.Footer + MasaBlazor.Application.Bar;
+
+                if (!Clipped) return computedMaxHeight;
+
+                return computedMaxHeight + MasaBlazor.Application.Top;
             }
         }
 
-        private StringNumber _top;
-
-        [Parameter]
-        public StringNumber Top
+        protected StringNumber ComputedTop
         {
             get
             {
-                if (_top == null)
-                {
-                    return !_isBottom ? "0" : "auto";
-                }
-
-                return _top;
-            }
-            set
-            {
-                _top = value;
-            }
-        }
-
-        public int? MaxHeight { get; }
-
-        public int? Transform
-        {
-            get
-            {
-                if (_isActive)
+                if (!HasApp)
                 {
                     return 0;
                 }
 
-                if (_isBottom)
+                var computedTop = MasaBlazor.Application.Bar;
+                computedTop += Clipped ? MasaBlazor.Application.Top : 0;
+
+                return computedTop;
+            }
+        }
+
+        protected StringNumber ComputedTransform
+        {
+            get
+            {
+                if (IsActive)
+                {
+                    return 0;
+                }
+
+                if (IsBottom)
                 {
                     return 100;
                 }
@@ -187,54 +166,157 @@ namespace MASA.Blazor
             }
         }
 
-        /// <summary>
-        /// Sets the width for the component.
-        /// </summary>
-        [Parameter]
-        public StringNumber Width { get; set; } = "256px";
-
-        [Parameter]
-        public RenderFragment AppendContent { get; set; }
-
-        [Parameter]
-        public RenderFragment PrependContent { get; set; }
-
-        [Parameter]
-        public string Color { get; set; }
-
-        [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
-
-        [Parameter]
-        public bool MiniVariant
+        protected StringNumber ComputedWidth
         {
-            get => _miniVariant;
-            set
+            get
             {
-                if (value == _miniVariant) return;
-                _miniVariant = value;
+                return IsMiniVariant ? MiniVariantWidth : Width;
             }
         }
 
-        [Parameter]
-        public EventCallback<bool> MiniVariantChanged { get; set; }
+        protected bool HasApp => App && (!IsMobile && !Temporary);
 
-        protected BlazorComponent.Web.Element Element = null;
+        protected bool IsBottom => Bottom && IsMobile;
 
-        protected bool _isMiniVariant =>
-            (!ExpandOnHover && MiniVariant) || (ExpandOnHover && !_isMouseover);
+        protected bool IsMiniVariant => (!ExpandOnHover && MiniVariant) || (ExpandOnHover && !IsMouseover);
 
-        protected bool _isBottom => Bottom && Mobile;
+        //TODO: reactsToClick,reactsToMobile,reactsToResize,reactsToResize
+
+        protected int ZIndex { get; set; }
+
+        protected override bool IsMobileBreakpoint
+        {
+            get
+            {
+                var mobile = MasaBlazor.Breakpoint.Mobile;
+                var width = MasaBlazor.Breakpoint.Width;
+                var name = MasaBlazor.Breakpoint.Name;
+                var mobileBreakpoint = MasaBlazor.Breakpoint.MobileBreakpoint;
+
+                if (Equals(mobileBreakpoint.Value, MobileBreakpoint.Value))
+                {
+                    return mobile;
+                }
+
+                return mobileBreakpoint.IsT1 ? width < mobileBreakpoint.AsT1 : name == mobileBreakpoint.AsT0;
+            }
+        }
+
+        protected bool ReactsToResize
+        {
+            get
+            {
+                return !DisableResizeWatcher && !Stateless;
+            }
+        }
+
+        protected bool ReactsToMobile
+        {
+            get
+            {
+                return App && !DisableResizeWatcher && !Permanent && !Stateless && !Temporary;
+            }
+        }
 
         protected override void OnInitialized()
         {
-            if (Temporary)
+            base.OnInitialized();
+
+            Watcher
+                .Watch<bool>(nameof(Value), val =>
+                {
+                    if (Permanent)
+                    {
+                        return;
+                    }
+
+                    if (val != IsActive)
+                    {
+                        IsActive = val;
+                    }
+                })
+                .Watch<bool>(nameof(IsActive), () =>
+                {
+                    //We will remove this when mixins applicationable finished
+                    _ = UpdateApplicationAsync();
+                })
+                .Watch<bool>(nameof(ExpandOnHover), UpdateMiniVariant)
+                .Watch<bool>(nameof(IsMouseover), val =>
+                {
+                    UpdateMiniVariant(!val);
+                });
+
+            Init();
+
+            MasaBlazor.Breakpoint.OnUpdate += OnBreakpointOnUpdate;
+            MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
+        }
+
+        private async Task OnBreakpointOnUpdate()
+        {
+            NextTick(async () =>
             {
-                Value = false;
-                ValueChanged.InvokeAsync(Value);
+                //When window resize,we should update ZIndex for Overlay 
+                ZIndex = await GetActiveZIndexAsync();
+            });
+
+            if (!ReactsToResize || !ReactsToMobile)
+            {
+                return;
             }
 
-            base.OnInitialized();
+            IsActive = !IsMobile;
+            if (ValueChanged.HasDelegate)
+            {
+                await ValueChanged.InvokeAsync(IsActive);
+            }
+            else
+            {
+                await InvokeStateHasChangedAsync();
+            }
+        }
+
+        private Task<int> GetActiveZIndexAsync() => JsInvokeAsync<int>(JsInteropConstants.GetZIndex, Ref);
+
+        private void ApplicationPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (_applicationProperties.Contains(e.PropertyName))
+            {
+                InvokeStateHasChanged();
+            }
+        }
+
+        private void UpdateMiniVariant(bool val)
+        {
+            if (MiniVariant != val)
+            {
+                MiniVariant = val;
+                if (MiniVariantChanged.HasDelegate)
+                {
+                    MiniVariantChanged.InvokeAsync(val);
+                }
+            }
+        }
+
+        private void Init()
+        {
+            if (Permanent)
+            {
+                IsActive = true;
+            }
+            else if (Stateless)
+            {
+                IsActive = Value;
+            }
+            else if (!Temporary)
+            {
+                IsActive = !IsMobile;
+            }
+
+            if (ExpandOnHover)
+            {
+                UpdateMiniVariant(true);
+            }
         }
 
         protected override void SetComponentClass()
@@ -249,27 +331,28 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--absolute", () => Absolute)
                         .AddIf($"{prefix}--bottom", () => Bottom)
                         .AddIf($"{prefix}--clipped", () => Clipped)
-                        .AddIf($"{prefix}--close", () => !_isActive)
+                        .AddIf($"{prefix}--close", () => !IsActive)
                         .AddIf($"{prefix}--fixed", () => !Absolute && (App || Fixed))
                         .AddIf($"{prefix}--floating", () => Floating)
-                        .AddIf($"{prefix}--is-mobile", () => Mobile)
-                        .AddIf($"{prefix}--is-mouseover", () => _isMouseover)
-                        .AddIf($"{prefix}--mini-variant", () => _isMiniVariant)
-                        .AddIf($"{prefix}--custom-mini-variant", () => MiniVariantWidth.IsT1 && MiniVariantWidth.AsT1 != 56)
-                        .AddIf($"{prefix}--open", () => _isActive)
+                        .AddIf($"{prefix}--is-mobile", () => IsMobile)
+                        .AddIf($"{prefix}--is-mouseover", () => IsMouseover)
+                        .AddIf($"{prefix}--mini-variant", () => IsMiniVariant)
+                        .AddIf($"{prefix}--custom-mini-variant", () => MiniVariantWidth.ToDouble() != 56)
+                        .AddIf($"{prefix}--open", () => IsActive)
                         .AddIf($"{prefix}--open-on-hover", () => ExpandOnHover)
                         .AddIf($"{prefix}--right", () => Right)
-                        .AddIf($"{prefix}--temporary", () => Temporary)
-                        .AddTheme(IsDark);
+                        .AddIf($"{prefix}--temporary", () => Temporary) //
+                        .AddTheme(IsDark)
+                        .AddBackgroundColor(Color);
                 }, styleBuilder =>
                 {
-                    var translate = _isBottom ? "translateY" : "translateX";
+                    var translate = IsBottom ? "translateY" : "translateX";
                     styleBuilder
                         .AddHeight(Height)
-                        .Add($"top:{(!_isBottom ? Top.ToUnit() : "auto")}")
-                        .AddIf(() => $"maxHeight:calc(100% - {MaxHeight})", () => MaxHeight != null)
-                        .AddIf(() => $"transform:{translate}({Transform}%)", () => Transform != null)
-                        .Add($"width:{(_isMiniVariant ? MiniVariantWidth.ToUnit() : Width.ToUnit())}")
+                        .Add(() => $"top:{(!IsBottom ? ComputedTop.ToUnit() : "auto")}")
+                        .AddIf(() => $"max-height:calc(100% - {ComputedMaxHeight.ToUnit()})", () => ComputedMaxHeight != null)
+                        .AddIf(() => $"transform:{translate}({ComputedTransform.ToUnit("%")})", () => ComputedTransform != null)
+                        .AddWidth(ComputedWidth)
                         .AddBackgroundColor(Color);
                 })
                 .Apply("content", cssBuilder =>
@@ -302,69 +385,94 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyNavigationDrawerDefault()
-                .Apply(typeof(IImage), typeof(MImage), props =>
+                .Apply(typeof(IImage), typeof(MImage), attrs =>
                 {
-                    props[nameof(MImage.Src)] = Src.Match(t0 => t0, t1 => t1.Src);
-                    props[nameof(MImage.LazySrc)] = Src.IsT1 ? Src.AsT1.LazySrc : string.Empty;
-                    props[nameof(MImage.Height)] = (StringNumber)"100%";
-                    props[nameof(MImage.Width)] = (StringNumber)"100%";
-                    props[nameof(MImage.Dark)] = Dark;
-                    props[nameof(MImage.Light)] = Light;
+                    attrs[nameof(MImage.Src)] = Src;
+                    attrs[nameof(MImage.Height)] = (StringNumber)"100%";
+                    attrs[nameof(MImage.Width)] = (StringNumber)"100%";
                 })
-                .Apply<BOverlay, MOverlay>(props =>
+                .Apply<BOverlay, MOverlay>(attrs =>
                 {
-                    props[nameof(MOverlay.ZIndex)] = 7;
-                    props[nameof(MOverlay.Absolute)] = true;
-                    props[nameof(MOverlay.Value)] = _isOverlay;
-                    props[nameof(MOverlay.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
-                    {
-                        Value = !Value;
-                        await ValueChanged.InvokeAsync(Value);
-                    });
+                    attrs[nameof(MOverlay.ZIndex)] = ZIndex;
+                    attrs[nameof(MOverlay.Absolute)] = !Fixed;
+                    attrs[nameof(MOverlay.Value)] = ShowOverlay;
                 });
+        }
+
+        protected override async Task OnParametersSetAsync()
+        {
+            await UpdateApplicationAsync();
+        }
+
+        protected async Task UpdateApplicationAsync()
+        {
+            if (!App)
+            {
+                return;
+            }
+
+            var val = (!IsActive || IsMobile || Temporary)
+                ? 0
+                : (ComputedWidth.ToDouble() <= 0 ? await GetClientWidthAsync() : ComputedWidth.ToDouble());
+
+            if (Right)
+                MasaBlazor.Application.Right = val;
+            else
+                MasaBlazor.Application.Left = val;
+        }
+
+        private async Task<double> GetClientWidthAsync()
+        {
+            if (Ref.Id == null)
+            {
+                return 0;
+            }
+
+            var element = await JsInvokeAsync<BlazorComponent.Web.Element>(
+                   JsInteropConstants.GetDomInfo, Ref);
+            return element.ClientWidth;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
+
             if (firstRender)
             {
-                Element = await JsInvokeAsync<BlazorComponent.Web.Element>(
-                    JsInteropConstants.GetDomInfo, Ref);
-                UpdateApplication(Element);
+                ZIndex = await GetActiveZIndexAsync();
             }
-
-            await base.OnAfterRenderAsync(firstRender);
         }
 
-        protected void UpdateApplication(BlazorComponent.Web.Element element)
-        {
-            var val = (!_isActive || IsMobile() || Temporary || element == null) ? 0 :
-                (ComputedWidth().ToDouble() <= 0 ? element.ClientWidth : ComputedWidth().ToDouble());
-
-            if (Right)
-                GlobalConfig.Application.Right = val;
-            else
-                GlobalConfig.Application.Left = val;
-        }
-
-        protected bool IsMobile() =>
-            !Stateless && !Permanent && Mobile;
-
-        protected StringNumber ComputedWidth() =>
-            _isMiniVariant ? MiniVariantWidth : Width;
-
-        public override async Task Click(MouseEventArgs e)
+        public override async Task HandleOnClickAsync(MouseEventArgs e)
         {
             if (MiniVariant)
             {
                 MiniVariant = false;
-                await MiniVariantChanged.InvokeAsync(_miniVariant);
+                if (MiniVariantChanged.HasDelegate)
+                {
+                    await MiniVariantChanged.InvokeAsync(MiniVariant);
+                }
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            RemoveApplication();
+            MasaBlazor.Breakpoint.OnUpdate -= OnBreakpointOnUpdate;
+            MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
+        }
+
+        private void RemoveApplication()
+        {
+            if (!App)
+            {
+                return;
             }
 
-            Element = await JsInvokeAsync<BlazorComponent.Web.Element>(
-                JsInteropConstants.GetDomInfo, Ref);
-
-            UpdateApplication(Element);
+            if (Right)
+                MasaBlazor.Application.Right = 0;
+            else
+                MasaBlazor.Application.Left = 0;
         }
     }
 }

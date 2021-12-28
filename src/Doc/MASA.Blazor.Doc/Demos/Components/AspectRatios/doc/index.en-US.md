@@ -1,7 +1,7 @@
 ---
 category: Components
 type: AspectRatios
-title: AspectRatios
+title: Aspect ratios
 cols: 1
 ---
 

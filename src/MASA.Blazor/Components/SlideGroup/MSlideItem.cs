@@ -9,11 +9,10 @@ namespace MASA.Blazor
         {
         }
 
-        protected override async Task ToggleItem()
+        protected override async Task ToggleAsync()
         {
-            await base.ToggleItem();
-
-            await (ItemGroup as BSlideGroup)?.SetWidths();
+            await base.ToggleAsync();
+            await (ItemGroup as BSlideGroup)?.SetWidths(Value);
         }
     }
 }

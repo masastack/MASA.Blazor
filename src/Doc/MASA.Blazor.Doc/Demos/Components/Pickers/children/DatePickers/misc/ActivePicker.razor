@@ -17,6 +17,7 @@
                          ActivePicker="_activePicker"
                          OnActivePickerUpdate="val=>_activePicker=val"
                          Max="DateOnly.FromDateTime(DateTime.Now)"
+                         OnInput="()=>_menu=false"
                          Min="new DateOnly(1950,1,1)"></MDatePicker>
         </ChildContent>
     </MMenu>

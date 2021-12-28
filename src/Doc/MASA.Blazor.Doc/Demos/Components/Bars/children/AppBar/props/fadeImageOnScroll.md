@@ -1,8 +1,8 @@
 ---
 order: 0
 title:
-  zh-CN: 淡入淡出
-  en-US: fade 
+  zh-CN: 滚动时淡入淡出图像
+  en-US: Fade image on scroll
 ---
 
 ## zh-CN

@@ -37,7 +37,7 @@ namespace MASA.Blazor
         public EventCallback<bool> OnSelectingYearUpdate { get; set; }
 
         [Parameter]
-        public int Year { get; set; }
+        public string Year { get; set; }
 
         [Parameter]
         public string YearIcon { get; set; }
@@ -120,9 +120,9 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyDatePickerTitleDefault()
-                .Apply<BIcon, MIcon>(props =>
+                .Apply<BIcon, MIcon>(attrs =>
                 {
-                    props[nameof(MIcon.Dark)] = true;
+                    attrs[nameof(MIcon.Dark)] = true;
                 });
         }
     }

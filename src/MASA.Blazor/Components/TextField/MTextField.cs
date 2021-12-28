@@ -1,4 +1,5 @@
 ﻿using BlazorComponent;
+using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System;
@@ -13,6 +14,8 @@ namespace MASA.Blazor
     public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
     {
         private string _badInput;
+        private CancellationTokenSource _cancellationTokenSource;
+        private bool _shouldRender = true;
 
         [Parameter]
         public virtual bool Clearable { get; set; }
@@ -47,7 +50,7 @@ namespace MASA.Blazor
         public bool Filled { get; set; }
 
         [Parameter]
-        public bool Outlined { get; set; }
+        public virtual bool Outlined { get; set; }
 
         [Parameter]
         public bool Reverse { get; set; }
@@ -95,9 +98,6 @@ namespace MASA.Blazor
         public EventCallback<TValue> OnInput { get; set; }
 
         [Parameter]
-        public EventCallback<TValue> OnChange { get; set; }
-
-        [Parameter]
         public RenderFragment ProgressContent { get; set; }
 
         [Parameter]
@@ -120,6 +120,13 @@ namespace MASA.Blazor
 
         [Parameter]
         public EventCallback<MouseEventArgs> OnClearClick { get; set; }
+
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; }
+
+        [Inject]
+        public Document Document { get; set; }
+
         public bool IsBooted { get; set; } = true;
 
         public bool IsEnclosed => Filled || IsSolo || Outlined;
@@ -132,34 +139,7 @@ namespace MASA.Blazor
 
         public virtual ElementReference InputElement { get; set; }
 
-        //TODO:
-        public int LabelWidth => LabelValue ? ComputeLabeLength * 6 : 0;
-
-        public int ComputeLabeLength
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Label))
-                {
-                    return 0;
-                }
-
-                var length = 0;
-                for (int i = 0; i < Label.Length; i++)
-                {
-                    if (Label[i] > 127)
-                    {
-                        length += 2;
-                    }
-                    else
-                    {
-                        length += 1;
-                    }
-                }
-
-                return length + 1;
-            }
-        }
+        protected double LabelWidth { get; set; }
 
         public string LegendInnerHTML => "&#8203;";
 
@@ -185,7 +165,7 @@ namespace MASA.Blazor
         public virtual Dictionary<string, object> InputAttrs => new(Attributes)
         {
             { "type", Type },
-            { "value", _badInput == null ? Value : _badInput }
+            { "value", _badInput == null ? InternalValue : _badInput }
         };
 
         public virtual StringNumber ComputedCounterValue
@@ -225,109 +205,30 @@ namespace MASA.Blazor
             }
         }
 
-        protected override void OnParametersSet()
+        protected double PrefixWidth { get; set; }
+
+        protected double PrependWidth { get; set; }
+
+        protected (StringNumber left, StringNumber right) LabelPosition
         {
-            base.OnParametersSet();
-
-            //When use @bind-Value,ValueChanged can not be used
-            //While in this way,@bind-Value can work with OnChange
-            if (OnChange.HasDelegate)
+            get
             {
-                ValueChanged = OnChange;
-            }
-        }
+                var offset = (Prefix != null && !LabelValue) ? PrefixWidth : 0;
 
-        public virtual async Task HandleOnAppendOuterClickAsync(MouseEventArgs args)
-        {
-            if (OnAppendOuterClick.HasDelegate)
-            {
-                await OnAppendOuterClick.InvokeAsync(args);
-            }
-        }
-
-        public virtual async Task HandleOnPrependInnerClickAsync(MouseEventArgs args)
-        {
-            if (OnPrependInnerClick.HasDelegate)
-            {
-                await OnPrependInnerClick.InvokeAsync(args);
-            }
-        }
-
-        public override async Task HandleOnClickAsync(MouseEventArgs args)
-        {
-            if (IsFocused || IsDisabled)
-            {
-                return;
-            }
-
-            await InputElement.FocusAsync();
-        }
-
-        public virtual Task HandleOnChangeAsync(ChangeEventArgs args)
-        {
-            var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
-
-            if (success)
-            {
-                _badInput = null;
-                InternalValue = val;
-            }
-            else
-            {
-                _badInput = args.Value.ToString();
-            }
-
-            return Task.CompletedTask;
-        }
-
-        public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
-        {
-            _badInput = null;
-            IsFocused = false;
-
-            if (OnBlur.HasDelegate)
-            {
-                await OnBlur.InvokeAsync(args);
-            }
-        }
-
-        public virtual Task HandleOnInputAsync(ChangeEventArgs args)
-        {
-            //REVIEW:How to deal with oninput event?
-            return Task.CompletedTask;
-        }
-
-        public virtual async Task HandleOnFocusAsync(FocusEventArgs args)
-        {
-            if (!IsFocused)
-            {
-                IsFocused = true;
-                if (OnFocus.HasDelegate)
+                if (LabelValue && PrependWidth > 0)
                 {
-                    await OnFocus.InvokeAsync(args);
+                    offset -= PrependWidth;
                 }
+
+                return MasaBlazor.RTL == Reverse ? (offset, "auto") : ("auto", offset);
             }
         }
 
-        public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
-        {
-            if (OnKeyDown.HasDelegate)
-            {
-                await OnKeyDown.InvokeAsync(args);
-            }
-        }
+        public BLabel LabelReference { get; set; }
 
-        public virtual async Task HandleOnClearClickAsync(MouseEventArgs args)
-        {
-            await InputElement.FocusAsync();
+        public ElementReference PrefixElement { get; set; }
 
-            InternalValue = default;
-
-            if (OnClearClick.HasDelegate)
-            {
-                await OnClearClick.InvokeAsync(args);
-            }
-        }
+        public ElementReference PrependInnerElement { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -421,48 +322,269 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyTextFieldDefault<TValue>()
-                .ApplyTextFieldCounter(typeof(MCounter), props =>
+                .ApplyTextFieldCounter(typeof(MCounter), attrs =>
                 {
-                    props[nameof(MCounter.Dark)] = Dark;
-                    props[nameof(MCounter.Light)] = Light;
-                    props[nameof(MCounter.Max)] = Max;
-                    props[nameof(MCounter.Value)] = ComputedCounterValue;
+                    attrs[nameof(MCounter.Dark)] = Dark;
+                    attrs[nameof(MCounter.Light)] = Light;
+                    attrs[nameof(MCounter.Max)] = Max;
+                    attrs[nameof(MCounter.Value)] = ComputedCounterValue;
                 })
-                .ApplyTextFieldLabel(typeof(MLabel), props =>
+                .ApplyTextFieldLabel(typeof(MLabel), attrs =>
                 {
-                    props[nameof(MLabel.Absolute)] = true;
-                    props[nameof(MLabel.Focused)] = !IsSingle && (IsFocused || ValidationState != null);
-                    //TODO:left,right
-                    props[nameof(MLabel.Value)] = LabelValue;
+                    var (left, right) = LabelPosition;
+
+                    attrs[nameof(MLabel.Absolute)] = true;
+                    attrs[nameof(MLabel.Focused)] = !IsSingle && (IsFocused || ValidationState != null);
+                    attrs[nameof(MLabel.Left)] = left;
+                    attrs[nameof(MLabel.Right)] = right;
+                    attrs[nameof(MLabel.Value)] = LabelValue;
                 })
-                .ApplyTextFieldProcessLinear(typeof(MProgressLinear), props =>
+                .ApplyTextFieldProcessLinear(typeof(MProgressLinear), attrs =>
                  {
-                     props[nameof(MProgressLinear.Absolute)] = true;
-                     props[nameof(MProgressLinear.Color)] = (Loading == true || Loading == "") ? (Color ?? "primary") : Loading.ToString();
-                     props[nameof(MProgressLinear.Height)] = LoaderHeight;
-                     props[nameof(MProgressLinear.Indeterminate)] = true;
+                     attrs[nameof(MProgressLinear.Absolute)] = true;
+                     attrs[nameof(MProgressLinear.Color)] = (Loading == true || Loading == "") ? (Color ?? "primary") : Loading.ToString();
+                     attrs[nameof(MProgressLinear.Height)] = LoaderHeight;
+                     attrs[nameof(MProgressLinear.Indeterminate)] = true;
                  })
-                .ApplyTextFieldClearIcon(typeof(MIcon), props =>
+                .ApplyTextFieldClearIcon(typeof(MIcon), attrs =>
                  {
-                     props[nameof(MIcon.Color)] = ValidationState;
-                     props[nameof(MIcon.Dark)] = Dark;
-                     props[nameof(MIcon.Disabled)] = Disabled;
-                     props[nameof(MIcon.Light)] = Light;
+                     attrs[nameof(MIcon.Color)] = ValidationState;
+                     attrs[nameof(MIcon.Dark)] = Dark;
+                     attrs[nameof(MIcon.Disabled)] = Disabled;
+                     attrs[nameof(MIcon.Light)] = Light;
                  })
-                .ApplyTextFieldAppendOuterIcon(typeof(MIcon), props =>
+                .ApplyTextFieldAppendOuterIcon(typeof(MIcon), attrs =>
                 {
-                    props[nameof(MIcon.Color)] = ValidationState;
-                    props[nameof(MIcon.Dark)] = Dark;
-                    props[nameof(MIcon.Disabled)] = Disabled;
-                    props[nameof(MIcon.Light)] = Light;
+                    attrs[nameof(MIcon.Color)] = ValidationState;
+                    attrs[nameof(MIcon.Dark)] = Dark;
+                    attrs[nameof(MIcon.Disabled)] = Disabled;
+                    attrs[nameof(MIcon.Light)] = Light;
                 })
-                .ApplyTextFieldPrependInnerIcon(typeof(MIcon), props =>
+                .ApplyTextFieldPrependInnerIcon(typeof(MIcon), attrs =>
                 {
-                    props[nameof(MIcon.Color)] = ValidationState;
-                    props[nameof(MIcon.Dark)] = Dark;
-                    props[nameof(MIcon.Disabled)] = Disabled;
-                    props[nameof(MIcon.Light)] = Light;
+                    attrs[nameof(MIcon.Color)] = ValidationState;
+                    attrs[nameof(MIcon.Dark)] = Dark;
+                    attrs[nameof(MIcon.Disabled)] = Disabled;
+                    attrs[nameof(MIcon.Light)] = Light;
                 });
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                var tasks = new Task[3];
+
+                tasks[0] = SetLabelWidthAsync();
+                tasks[1] = SetPrefixWidthAsync();
+                tasks[2] = SetPrependWidthAsync();
+
+                if (tasks.All(task => task.Status == TaskStatus.RanToCompletion || task.Status == TaskStatus.Canceled))
+                {
+                    return;
+                }
+
+                await Task.WhenAll(tasks);
+                StateHasChanged();
+            }
+        }
+
+        private async Task SetLabelWidthAsync()
+        {
+            if (!Outlined)
+            {
+                return;
+            }
+
+            //No label
+            if (LabelReference == null || LabelReference.Ref.Id == null)
+            {
+                return;
+            }
+
+            var label = Document.GetElementByReference(LabelReference.Ref);
+            var scrollWidth = await label.GetScrollWidthAsync();
+
+            if (scrollWidth == null)
+            {
+                return;
+            }
+
+            var element = Document.GetElementByReference(Ref);
+            var offsetWidth = await element.GetOffsetWidthAsync();
+
+            if (offsetWidth == null)
+            {
+                return;
+            }
+
+            LabelWidth = Math.Min(scrollWidth.Value * 0.75 + 6, offsetWidth.Value - 24);
+        }
+
+        private async Task SetPrefixWidthAsync()
+        {
+            if (PrefixElement.Id == null)
+            {
+                return;
+            }
+
+            var prefix = Document.GetElementByReference(PrefixElement);
+            var offsetWidth = await prefix.GetOffsetWidthAsync();
+
+            if (offsetWidth == null)
+            {
+                return;
+            }
+
+            PrefixWidth = offsetWidth.Value;
+        }
+
+        private async Task SetPrependWidthAsync()
+        {
+            if (!Outlined)
+            {
+                return;
+            }
+
+            if (PrependInnerElement.Id == null)
+            {
+                return;
+            }
+
+            var prependInner = Document.GetElementByReference(PrependInnerElement);
+            var offsetWidth = await prependInner.GetOffsetWidthAsync();
+
+            if (offsetWidth == null)
+            {
+                return;
+            }
+
+            PrependWidth = offsetWidth.Value;
+        }
+
+        public virtual async Task HandleOnAppendOuterClickAsync(MouseEventArgs args)
+        {
+            if (OnAppendOuterClick.HasDelegate)
+            {
+                await OnAppendOuterClick.InvokeAsync(args);
+            }
+        }
+
+        public virtual async Task HandleOnPrependInnerClickAsync(MouseEventArgs args)
+        {
+            if (OnPrependInnerClick.HasDelegate)
+            {
+                await OnPrependInnerClick.InvokeAsync(args);
+            }
+        }
+
+        public override async Task HandleOnClickAsync(MouseEventArgs args)
+        {
+            if (IsFocused || IsDisabled)
+            {
+                return;
+            }
+
+            await InputElement.FocusAsync();
+        }
+
+        public virtual Task HandleOnChangeAsync(ChangeEventArgs args)
+        {
+            var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
+
+            if (success)
+            {
+                _badInput = null;
+                InternalValue = val;
+            }
+            else
+            {
+                _badInput = args.Value.ToString();
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
+        {
+            _badInput = null;
+            IsFocused = false;
+
+            if (OnBlur.HasDelegate)
+            {
+                await OnBlur.InvokeAsync(args);
+            }
+        }
+
+        public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
+        {
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+
+            //Since event will call StateHasChanged,we should prevent it
+            //So that,view will not change untill 300 seconds no actions
+            _shouldRender = false;
+            await Task.Delay(300, _cancellationTokenSource.Token);
+
+            var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
+            if (success)
+            {
+                _badInput = null;
+                InternalValue = val;
+
+                _shouldRender = true;
+                if (OnInput.HasDelegate)
+                {
+                    await OnInput.InvokeAsync(InternalValue);
+                }
+                else
+                {
+                    StateHasChanged();
+                }
+            }
+            else
+            {
+                _badInput = args.Value.ToString();
+            }
+        }
+
+        protected override bool ShouldRender()
+        {
+            return _shouldRender;
+        }
+
+        public virtual async Task HandleOnFocusAsync(FocusEventArgs args)
+        {
+            if (!IsFocused)
+            {
+                IsFocused = true;
+                if (OnFocus.HasDelegate)
+                {
+                    await OnFocus.InvokeAsync(args);
+                }
+            }
+        }
+
+        public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+        {
+            if (OnKeyDown.HasDelegate)
+            {
+                await OnKeyDown.InvokeAsync(args);
+            }
+        }
+
+        public virtual async Task HandleOnClearClickAsync(MouseEventArgs args)
+        {
+            await InputElement.FocusAsync();
+
+            InternalValue = default;
+
+            if (OnClearClick.HasDelegate)
+            {
+                await OnClearClick.InvokeAsync(args);
+            }
         }
     }
 }

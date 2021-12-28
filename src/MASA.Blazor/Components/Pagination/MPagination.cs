@@ -77,7 +77,7 @@ namespace MASA.Blazor
         public string Color { get; set; } = "primary";
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         [Inject]
         public Document Document { get; set; }
@@ -137,11 +137,11 @@ namespace MASA.Blazor
         {
             if (firstRender)
             {
-                var el = Document.QuerySelector(Ref);
-                var width = await el.ParentElement.GetPropAsync<double?>("clientWidth");
-                if (width != null)
+                var el = Document.GetElementByReference(Ref);
+                var clientWidth = await el.ParentElement.GetClientWidthAsync();
+                if (clientWidth != null)
                 {
-                    _maxButtons = Convert.ToInt32(Math.Floor((width.Value - 96.0) / 42.0));
+                    _maxButtons = Convert.ToInt32(Math.Floor((clientWidth.Value - 96.0) / 42.0));
                     StateHasChanged();
                 }
             }
@@ -150,8 +150,8 @@ namespace MASA.Blazor
         public string GetIcon(int index)
         {
             return index == (int)PaginationIconTypes.First ?
-                (GlobalConfig.RTL ? NextIcon : PrevIcon) :
-                (GlobalConfig.RTL ? PrevIcon : NextIcon);
+                (MasaBlazor.RTL ? NextIcon : PrevIcon) :
+                (MasaBlazor.RTL ? PrevIcon : NextIcon);
         }
 
         public IEnumerable<StringNumber> GetItems()

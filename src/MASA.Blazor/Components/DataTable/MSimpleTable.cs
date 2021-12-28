@@ -27,9 +27,6 @@ namespace MASA.Blazor
         public RenderFragment WrapperContent { get; set; }
 
         [Parameter]
-        public RenderFragment ChildContent { get; set; }
-
-        [Parameter]
         public bool Dark { get; set; }
 
         [Parameter]

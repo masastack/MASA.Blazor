@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MForm",
   "Components": [
-    "Form"
+    "Forms"
   ],
   "Props": [
     {
@@ -44,17 +45,30 @@
       "Type": "String",
       "Default": "null",
       "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     }
   ],
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment<EditContext>",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "OnSubmit",
+      "Type": "EventCallback<EventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

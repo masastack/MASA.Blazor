@@ -1,144 +1,22 @@
 ﻿@inherits LayoutComponentBase
-@inject NavigationManager navigationmanager
+@layout BaseLayout
 
-<CascadingValue Value="this">
-    <MApp>
-        <MAppBar Flat Fixed Color="white" Class="m-bar--underline" Left="300">
-            <div class="flex-1-1-auto d-flex align-center justify-end">
-                <MTextField TValue="string" HideDetails="true" Flat Solo Dense Class="mx-2 mx-md-4 rounded-lg" BackgroundColor="grey lighten-3" Placeholder="搜索(按 回车)" Style="max-width: 450px;">
-                    <PrependInnerContent>
-                        <MIcon Class="ml-1 mr-2">mdi-magnify</MIcon>
-                    </PrependInnerContent>
-                </MTextField>
-                <MDivider Vertical Class="mx-2 my-auto" Inset Style="height:16px"></MDivider>
-                <MMenu Bottom ContentClass="rounded" Left MaxHeight=500 OffsetY OpenOnHover Transition="slide-y-transition">
-                    <ActivatorContent>
-                        <MButton Text  @attributes="@context.Attrs" Class="v-btn--app text--secondary text-capitalize font-weight-regular px-2">
-                            学习
-                            <MIcon Class="hidden-sm-and-down" Size=14>
-                                mdi-chevron-down
-                            </MIcon>
-                        </MButton>
-                    </ActivatorContent>
-                    <ChildContent>
-                        <MSheet Class="overflow-hidden" Outlined Rounded=true>
-                            <MList Dense Expand Nav>
-                                <MSubheader Class="text--primary font-weight-black text-uppercase">
-                                    开发文档
-                                </MSubheader>
-                                <MListItem Href="docs/introduction/why" target="_blank" Class="v-list-item--default" Color="primary">
-                                    <MListItemContent>
-                                        <MListItemTitle>
-                                            指南
-                                        </MListItemTitle>
-                                    </MListItemContent>
-                                </MListItem>
-                               @* <MDivider Class="mt-3 mb-2 ml-2 mr-n2"></MDivider>*@
-                            </MList>
-                        </MSheet>
-                    </ChildContent>
-                </MMenu>
-                <MMenu Bottom ContentClass="rounded" Left MaxHeight=500 OffsetY OpenOnHover Transition="slide-y-transition">
-                    <ActivatorContent>
-                        <MButton Text  @attributes="@context.Attrs" Class="v-btn--app text--secondary text-capitalize font-weight-regular px-2">
-                            支持
-                            <MIcon Class="hidden-sm-and-down" Size=14>
-                                mdi-chevron-down
-                            </MIcon>
-                        </MButton>
-                    </ActivatorContent>
-                    <ChildContent>
-                        <MSheet Class="overflow-hidden" Outlined Rounded=true>
-                            <MList Dense Expand Nav>
-                                <MSubheader Class="text--primary font-weight-black text-uppercase">
-                                    社区支持
-                                </MSubheader>
-                                <MListItem Href="http://gitlab-hz.lonsid.cn/MASA-Stack/Framework/MASA.Blazor" Class="v-list-item--default" Color="primary">
-                                    <MListItemContent>
-                                        <MListItemTitle>
-                                            热门讨论
-                                        </MListItemTitle>
-                                    </MListItemContent>
-                                </MListItem>
-                                <MDivider Class="mt-3 mb-2 ml-2 mr-n2"></MDivider>
-                                <MSubheader Class="text--primary font-weight-black text-uppercase">
-                                    资源和链接
-                                </MSubheader>
-                                <MListItem Href="http://gitlab-hz.lonsid.cn/MASA-Stack/Framework/MASA.Blazor" Class="v-list-item--default" Color="primary">
-                                    <MListItemContent>
-                                        <MListItemTitle>
-                                            发送错误报告
-                                        </MListItemTitle>
-                                    </MListItemContent>
-                                </MListItem>
-                                 <MListItem Href="http://gitlab-hz.lonsid.cn/MASA-Stack/Framework/MASA.Blazor" Class="v-list-item--default" Color="primary">
-                                    <MListItemContent>
-                                        <MListItemTitle>
-                                            GitHub上的问题
-                                        </MListItemTitle>
-                                    </MListItemContent>
-                                </MListItem>
-                                 <MListItem Href="https://stackoverflow.com/search?q=MASA.Blazor" Class="v-list-item--default" Color="primary">
-                                    <MListItemContent>
-                                        <MListItemTitle>
-                                           Stack Overflow（一个技术问答网站）
-                                        </MListItemTitle>
-                                    </MListItemContent>
-                                </MListItem>
-                            </MList>
-                        </MSheet>
-                    </ChildContent>
-                </MMenu>
-                <MButton Text Class="m-btn--app text--secondary text-capitalize font-weight-regular px-2" Href="docs/about/meet-the-team" target="_blank">
-                    <span>我们的团队</span>
-                </MButton>
-                <MDivider Vertical Class="mx-2 my-auto" Inset Style="height:16px"></MDivider>
-                <MButton Icon Rounded>
-                    <MIcon>mdi-cog-outline</MIcon>
-                </MButton>
-                <MButton Icon Rounded>
-                    <MIcon>mdi-translate</MIcon>
-                </MButton>
-            </div>
-        </MAppBar>
-        <MNavigationDrawer Fixed Floating Width="300">
-            <PrependContent>
-                <MToolbar Flat Class="m-bar--underline">
-                    <MListItem Class="pa-0 mx-n1">
-                        <MImage Width="40" Class="shrink" Src="https://cdn.masastack.com/images/logo/MASA.Blazor/96.png"></MImage>
-                        <span style="font-weight:bold;font-size:larger;margin-left:3px;padding:3px;">MASA Blazor</span>
-                        <MSpacer></MSpacer>
-                        <MLabel>
-                            <span>v0.2.0</span>
-                        </MLabel>
-                    </MListItem>
-                </MToolbar>
-            </PrependContent>
-            <ChildContent>
-                <div class="pt-4 pb-3 px-2">
-                    <div class="ml-2 mb-3 text-caption font-weight-regular text--secondary" path="premiere-sponsors">高级赞助商</div>
-                    <MCard Tag="a" Ripple="false" Tile Class="d-inline-block px-2 py-1 transparent" Flat Link Style="box-shadow:none!important">
-                        <MImage Contain Class="d-inline-block" MaxHeight="64" Width="180" Src="https://img-cdn.lonsid.co/image/www/img/logo_g_2.png"></MImage>
-                    </MCard>
-                </div>
-                <NavMenu></NavMenu>
-                <div class="pt-12"></div>
-            </ChildContent>
-        </MNavigationDrawer>
-        <MMain Style="padding: 64px 256px 0px 300px;">
-            <MContainer Class="pa-4 pa-sm-6 pa-md-8" Fluid>
-                @Body
-            </MContainer>
-        </MMain>
-        <MNavigationDrawer Clipped Fixed Floating Right Top="64" Class="default-toc py-4 pr-3">
-            <PrependContent>
-                <div class="mb-2 text-h6 font-weight-medium text--primary" path="contents">目录</div>
-            </PrependContent>
-            <ChildContent>
-                <Contents></Contents>
-                <div class="ml-5">
-                </div>
-            </ChildContent>
-        </MNavigationDrawer>
-    </MApp>
-</CascadingValue>
+<MNavigationDrawer @bind-Value="BaseLayout.Drawer" Floating Fixed Width="333" App Clipped>
+    <ChildContent>
+        <NavMenu @key="NavigationManager.Uri"></NavMenu>
+        <div class="pt-12"></div>
+    </ChildContent>
+</MNavigationDrawer>
+
+<MMain Class="mainlayout-m-main">
+    <ErrorBoundary @ref="_errorBoundary">
+        <ChildContent>
+            @Body
+        </ChildContent>
+        <ErrorContent>
+            <Error></Error>
+        </ErrorContent>
+    </ErrorBoundary>
+</MMain>
+
+<Toc />

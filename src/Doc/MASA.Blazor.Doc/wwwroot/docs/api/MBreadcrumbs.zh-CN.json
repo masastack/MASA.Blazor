@@ -1,4 +1,5 @@
 ﻿{
+  "Title": "MBreadcrumbs",
   "Components": [
     "Breadcrumbs"
   ],
@@ -29,7 +30,7 @@
     },
     {
       "Name": "Items",
-      "Type": "IReadOnlyList`1",
+      "Type": "IReadOnlyList<BreadcrumbItem>",
       "Default": "",
       "Description": ""
     },
@@ -61,14 +62,17 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "DividerContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ItemContent",
+      "Type": "RenderFragment<BreadcrumbItem>",
       "Description": ""
     }
   ],

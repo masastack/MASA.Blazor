@@ -1,25 +1,27 @@
+@using MASA.Blazor.Doc.Utils
+@inject GlobalConfigs ScopGlobalConfig
+
 <Router AppAssembly="@typeof(MainLayout).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="routeData" DefaultLayout="@typeof(MainLayout)" />
     </Found>
     <NotFound>
         <LayoutView Layout="@typeof(MainLayout)">
-            @if (Result != null)
-            {
-                @Result
-            }
+            <Error></Error>
         </LayoutView>
     </NotFound>
 </Router>
 
-@code{
-
-    RenderFragment Result = r => r.AddContent(0, "对不起，页面不存在！");
+@code {
+    [Parameter]
+    public GlobalConfigs GlobalConfig { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        await Task.Delay(2000);
-    }
+        ScopGlobalConfig.Bind(GlobalConfig);
 
+        //why?
+        //await Task.Delay(2000);
+    }
 }

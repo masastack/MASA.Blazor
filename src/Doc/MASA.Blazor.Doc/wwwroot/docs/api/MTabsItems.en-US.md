@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: TabsItems
+title: MTabsItems
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

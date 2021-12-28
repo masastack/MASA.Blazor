@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: ExpansionPanel
+title: MExpansionPanel
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

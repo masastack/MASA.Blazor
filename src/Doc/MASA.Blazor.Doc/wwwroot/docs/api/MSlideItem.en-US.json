@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MSlideItem",
   "Components": [
-    "SlideItem"
+    "Slide groups"
   ],
   "Props": [
     {
@@ -49,6 +50,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment<ItemContext>",
       "Description": "Default Content"
     }
   ],

@@ -1,14 +1,14 @@
 <MRow>
-    <MCol Span="6">
+    <MCol Cols="6">
         <MSelect @bind-Value="@value1"
                  Label="Standard"
                  Items="@items"
                  ItemText="u => u.Label"
                  ItemValue="u => u.Value"
-                 MenuProps="new BMenuProps(){OffsetY = true}">
+                 MenuProps="props => props.OffsetY = true">
         </MSelect>
     </MCol>
-    <MCol Span="6">
+    <MCol Cols="6">
         <MSelect @bind-Value="@value2"
                  Items="@items"
                  Label="Filled style"
@@ -17,8 +17,8 @@
                  Filled>
         </MSelect>
     </MCol>
-    
-    <MCol Span="6">
+
+    <MCol Cols="6">
         <MSelect @bind-Value="@value3"
                  Label="Outlined style"
                  Outlined
@@ -27,7 +27,7 @@
                  ItemValue="u => u.Value">
         </MSelect>
     </MCol>
-    <MCol Span="6">
+    <MCol Cols="6">
         <MSelect @bind-Value="@value4"
                  Label="Solo style"
                  Solo
@@ -57,10 +57,11 @@
     }
 
     List<Item> items = new()
-        {
-            new Item("Foo", "1"),
-            new Item("Bar", "2"),
-            new Item("Fizz", "3"),
-            new Item("Buzz", "4"),
-        };
+    {
+        new Item("Foo", "1"),
+        new Item("Bar", "2"),
+        new Item("Fizz", "3"),
+        new Item("Buzz", "4"),
+    };
+
 }

@@ -1,4 +1,5 @@
 ﻿{
+  "Title": "MTabs",
   "Components": [
     "Tabs"
   ],
@@ -107,7 +108,7 @@
     },
     {
       "Name": "Optional",
-      "Type": "String",
+      "Type": "Boolean",
       "Default": "null",
       "Description": "不需要活动项目。 在将 v-tab 用作 router-link 时有用"
     },
@@ -163,12 +164,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<StringNumber>",
       "Description": ""
     }
   ]

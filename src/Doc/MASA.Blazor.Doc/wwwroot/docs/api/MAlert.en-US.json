@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MAlert",
   "Components": [
-    "Alert"
+    "Alerts"
   ],
   "Props": [
     {
@@ -187,12 +188,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

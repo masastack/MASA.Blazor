@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Col
+title: MCol
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

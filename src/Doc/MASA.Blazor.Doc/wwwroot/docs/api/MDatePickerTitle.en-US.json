@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MDatePickerTitle",
   "Components": [
-    "DatePickerTitle"
+    "Date pickers"
   ],
   "Props": [
     {
@@ -53,7 +54,7 @@
     },
     {
       "Name": "Year",
-      "Type": "Int32",
+      "Type": "String",
       "Default": "0",
       "Description": ""
     },
@@ -68,6 +69,7 @@
   "Events": [
     {
       "Name": "OnSelectingYearUpdate",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

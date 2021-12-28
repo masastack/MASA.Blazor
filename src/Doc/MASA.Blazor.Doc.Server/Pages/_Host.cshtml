@@ -1,6 +1,8 @@
 ﻿@page "/"
 @using MASA.Blazor.Doc
+@using MASA.Blazor.Doc.Utils
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject GlobalConfigs GlobalConfig
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,18 +11,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MASA Blazor</title>
     <base href="~/" />
-    <link rel="icon" href="https://cdn.masastack.com/images/logo/MASA.Blazor/96.png" type="image/x-icon">
+    <link rel="icon" href="https://cdn.masastack.com/stack/images/website/masa-blazor/miniLogo.png" type="image/x-icon">
     <link href="_content/MASA.Blazor/css/masa-blazor.css" rel="stylesheet">
     <link href="_content/MASA.Blazor/css/masa-extend-blazor.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;display=swap" media="all">
-    <link href="_content/MASA.Blazor.Doc/css/demo.css" rel="stylesheet" />
+    <link href="_content/MASA.Blazor.Doc/css/doc.css" rel="stylesheet" />
+    <link href="_content/MASA.Blazor.Doc/masa-icon.css" rel="stylesheet" />
+    <link href="_content/MASA.Blazor.Doc/MASA.Blazor.Doc.bundle.scp.css" rel="stylesheet"/>
 </head>
 <body>
     <app>
-        <component type="typeof(App)" render-mode="ServerPrerendered" />
+        <component type="typeof(App)" param-GlobalConfig="@GlobalConfig" render-mode="ServerPrerendered" />
     </app>
 
     <script src="_framework/blazor.server.js"></script>
@@ -59,28 +63,18 @@
             Prism.highlightAll();
         }
 
-        window.testUploadFile = function(element) {
-            let result = []
+        window.setCookie = function(name,value){
+             document.cookie = `${name}=${escape(value.toString())};path=/;}`;
+        }
 
-            if(element){
-                for(let i = 0; i< element.files.length; i++){
-                    var file = element.files[i]
-
-                    // TODO: oss here
-
-                    let fileInfo = {
-                        fileName: file.name,
-                        uploaded: true,
-                        error: null,
-                        url: "",
-                        value: null
-                    }
-
-                    result.push(fileInfo)
-                }
+        window.getCookie = function(name){
+            const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
+            const arr = document.cookie.match(reg);
+            if (arr) {
+                return unescape(arr[2]);
             }
 
-            return result;
+            return null;
         }
     </script>
 </body>

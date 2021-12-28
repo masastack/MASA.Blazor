@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MItem",
   "Components": [
-    "Item"
+    "Item groups"
   ],
   "Props": [
     {
@@ -49,6 +50,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment<ItemContext>",
       "Description": "默认插槽"
     }
   ],

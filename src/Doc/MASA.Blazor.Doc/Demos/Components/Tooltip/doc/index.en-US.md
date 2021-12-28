@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Tooltip
-title: Tooltip
+title: Tooltips
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tooltip.svg
 ---
@@ -12,4 +12,4 @@ label identifying an element, such as a description of its function.
 
 ## API
 
-- [MTooltip](/docs/api/MTooltip)
+- [MTooltip](/api/MTooltip)

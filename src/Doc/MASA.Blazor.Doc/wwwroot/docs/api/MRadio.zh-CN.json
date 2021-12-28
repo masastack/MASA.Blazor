@@ -1,4 +1,5 @@
 ﻿{
+  "Title": "MRadio",
   "Components": [
     "Radio"
   ],
@@ -91,24 +92,29 @@
   "Contents": [
     {
       "Name": "LabelContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnBlur",
+      "Type": "EventCallback<FocusEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnChange",
+      "Type": "EventCallback<ChangeEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnFocus",
+      "Type": "EventCallback<FocusEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnKeyDown",
+      "Type": "EventCallback<KeyboardEventArgs>",
       "Description": ""
     }
   ]

@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MToolbarTitle",
   "Components": [
-    "ToolbarTitle"
+    "Toolbars"
   ],
   "Props": [
     {
@@ -25,6 +26,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

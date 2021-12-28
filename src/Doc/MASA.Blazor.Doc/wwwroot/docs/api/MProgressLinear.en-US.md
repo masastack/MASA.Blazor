@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: ProgressLinear
+title: MProgressLinear
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MDialog",
   "Components": [
-    "Dialog"
+    "Dialogs"
   ],
   "Props": [
     {
@@ -22,6 +23,12 @@
       "Description": ""
     },
     {
+      "Name": "ContentClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Dark",
       "Type": "Boolean",
       "Default": "false",
@@ -35,6 +42,12 @@
     },
     {
       "Name": "Fullscreen",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "HideOverlay",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
@@ -76,6 +89,12 @@
       "Description": ""
     },
     {
+      "Name": "Origin",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Persistent",
       "Type": "Boolean",
       "Default": "false",
@@ -109,20 +128,24 @@
   "Contents": [
     {
       "Name": "ActivatorContent",
+      "Type": "RenderFragment<ActivatorProps>",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "OnOutsideClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

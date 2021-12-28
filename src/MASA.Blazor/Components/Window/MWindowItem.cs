@@ -51,8 +51,8 @@ namespace MASA.Blazor
             {
                 WindowGroup.TransitionCount++;
 
-                var el = Document.QuerySelector(WindowGroup.Ref);
-                await el.UpdateWindowTransitionAsync(true);
+                var el = Document.GetElementByReference(WindowGroup.Ref);
+                await el?.UpdateWindowTransitionAsync(true);
             }
             else
             {
@@ -74,16 +74,16 @@ namespace MASA.Blazor
 
                 if (WindowGroup.TransitionCount == 0)
                 {
-                    var el = Document.QuerySelector(WindowGroup.Ref);
-                    await el.UpdateWindowTransitionAsync(false);
+                    var el = Document.GetElementByReference(WindowGroup.Ref);
+                    await el?.UpdateWindowTransitionAsync(false);
                 }
             }
         }
 
         protected override async Task OnEnterTo()
         {
-            var el = Document.QuerySelector(WindowGroup.Ref);
-            await el.UpdateWindowTransitionAsync(true, Ref);
+            var el = Document.GetElementByReference(WindowGroup.Ref);
+            await el?.UpdateWindowTransitionAsync(true, Ref);
         }
 
         protected override void SetComponentClass()

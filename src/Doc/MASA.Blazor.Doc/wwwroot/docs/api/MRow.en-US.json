@@ -1,65 +1,66 @@
 ﻿{
+  "Title": "MRow",
   "Components": [
-    "Row"
+    "Grid system"
   ],
   "Props": [
     {
       "Name": "Align",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignContent",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignContentLg",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignContentMd",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignContentSm",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignContentXl",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignLg",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignMd",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignSm",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignXl",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": ""
     },
@@ -83,7 +84,7 @@
     },
     {
       "Name": "Gutter",
-      "Type": "OneOf`6",
+      "Type": "OneOf<Int32,Dictionary`2,ValueTuple`2,ValueTuple`2,ValueTuple`2,ValueTuple`2>",
       "Default": "",
       "Description": ""
     },
@@ -95,31 +96,31 @@
     },
     {
       "Name": "Justify",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "JustifyLg",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "JustifyMd",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "JustifySm",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "JustifyXl",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": ""
     },
@@ -157,12 +158,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "OnBreakpoint",
+      "Type": "EventCallback<BreakpointType>",
       "Description": ""
     }
   ]

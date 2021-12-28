@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Switch
-title: Switch
+title: Switches
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Switch.svg
 ---
@@ -11,4 +11,4 @@ toggle, or on/off switch, though aesthetically different than a checkbox.
 
 ## API
 
-- [MSwitch](/docs/api/MSwitch)
+- [MSwitch](/api/MSwitch)

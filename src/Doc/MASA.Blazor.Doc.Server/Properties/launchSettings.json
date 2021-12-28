@@ -3,7 +3,6 @@
     "MASA.Blazor.Doc.Server": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "components/presets",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

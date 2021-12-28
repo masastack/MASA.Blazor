@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MSkeletonLoader",
   "Components": [
-    "SkeletonLoader"
+    "Skeleton loaders"
   ],
   "Props": [
     {
@@ -101,7 +102,7 @@
     },
     {
       "Name": "Types",
-      "Type": "Dictionary`2",
+      "Type": "Dictionary<String,String>",
       "Default": "",
       "Description": "将与预定义选项结合使用的自定义类型对象。"
     },
@@ -115,6 +116,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

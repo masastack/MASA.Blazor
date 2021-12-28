@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MFooter",
   "Components": [
-    "Footer"
+    "Footers"
   ],
   "Props": [
     {
@@ -13,12 +14,6 @@
       "Name": "App",
       "Type": "Boolean",
       "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "Bottom",
-      "Type": "Int32",
-      "Default": "0",
       "Description": ""
     },
     {
@@ -70,12 +65,6 @@
       "Description": ""
     },
     {
-      "Name": "Left",
-      "Type": "Int32",
-      "Default": "0",
-      "Description": ""
-    },
-    {
       "Name": "Light",
       "Type": "Boolean",
       "Default": "false",
@@ -112,12 +101,6 @@
       "Description": ""
     },
     {
-      "Name": "Right",
-      "Type": "Int32",
-      "Default": "0",
-      "Description": ""
-    },
-    {
       "Name": "Rounded",
       "Type": "StringBoolean",
       "Default": "",
@@ -145,6 +128,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

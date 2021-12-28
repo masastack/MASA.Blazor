@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MAlert",
   "Components": [
-    "Alert"
+    "Alerts"
   ],
   "Props": [
     {
@@ -187,12 +188,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

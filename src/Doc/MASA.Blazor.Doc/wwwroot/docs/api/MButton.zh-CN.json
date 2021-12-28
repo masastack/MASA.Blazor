@@ -1,6 +1,8 @@
 ﻿{
+  "Title": "MButton",
   "Components": [
-    "Button"
+    "Buttons",
+    "Button Groups"
   ],
   "Props": [
     {
@@ -26,12 +28,6 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "将组件向底部对齐。"
-    },
-    {
-      "Name": "Button",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
     },
     {
       "Name": "Class",
@@ -283,16 +279,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "LoaderContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     }
   ]

@@ -1,11 +1,12 @@
 ﻿{
+  "Title": "MCol",
   "Components": [
-    "Col"
+    "Grid system"
   ],
   "Props": [
     {
       "Name": "Align",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": ""
     },
@@ -133,6 +134,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

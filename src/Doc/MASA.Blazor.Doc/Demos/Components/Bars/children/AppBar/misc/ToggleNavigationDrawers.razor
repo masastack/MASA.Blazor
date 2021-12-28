@@ -1,42 +1,43 @@
-﻿<MCard class="mx-auto overflow-hidden" Height="400">
-    <MAppBar Color="deep-purple" Dark>
-        <MAppBarNavIcon @onclick="() => drawer=true"></MAppBarNavIcon>
-        <MAppBarTitle>Title</MAppBarTitle>
+﻿<MCard
+    Class="mx-auto overflow-hidden"
+    Height="400">
+    <MAppBar
+        Color="deep-purple"
+        Dark>
+        <MAppBarNavIcon @onclick="() => drawer = true"></MAppBarNavIcon>
+
+        <MToolbarTitle>Title</MToolbarTitle>
     </MAppBar>
 
-    <MNavigationDrawer Absolute Temporary @bind-Value="drawer">
-        <MList Nav Dense>
-            <MListItemGroup ActiveClass="deep-purple--text text--accent-4">
+    <MNavigationDrawer
+        @bind-Value="drawer"
+        Absolute
+        Temporary>
+        <MList
+            Nav
+            Dense>
+            <MListItemGroup
+                @bind-Value="group"
+                ActiveClass="deep-purple--text text--accent-4">
                 <MListItem>
                     <MListItemIcon>
                         <MIcon>mdi-home</MIcon>
                     </MListItemIcon>
-                    <MListItemTitle>
-                        Home
-                    </MListItemTitle>
+                    <MListItemTitle>Home</MListItemTitle>
                 </MListItem>
+
                 <MListItem>
                     <MListItemIcon>
                         <MIcon>mdi-account</MIcon>
                     </MListItemIcon>
-                    <MListItemTitle>
-                        Account
-                    </MListItemTitle>
+                    <MListItemTitle>Account</MListItemTitle>
                 </MListItem>
             </MListItemGroup>
         </MList>
     </MNavigationDrawer>
-
 </MCard>
 
 @code {
-    bool drawer = false;
-
-    string[] titles =
-                    {
-    "Click Me",
-    "Click Me",
-    "Click Me",
-    "Click Me 2"
-    };
+    bool drawer;
+    StringNumber group;
 }

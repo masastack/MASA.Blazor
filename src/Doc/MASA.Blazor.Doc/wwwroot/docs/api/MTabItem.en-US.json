@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MTabItem",
   "Components": [
-    "TabItem"
+    "Tabs"
   ],
   "Props": [
     {
@@ -61,6 +62,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

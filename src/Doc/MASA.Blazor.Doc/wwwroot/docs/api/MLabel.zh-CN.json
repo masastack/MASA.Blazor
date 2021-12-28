@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MLabel",
   "Components": [
-    "Label"
+    "Text fields"
   ],
   "Props": [
     {
@@ -97,6 +98,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

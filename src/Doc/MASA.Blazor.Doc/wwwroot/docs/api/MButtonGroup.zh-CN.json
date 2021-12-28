@@ -1,6 +1,8 @@
 ﻿{
+  "Title": "MButtonGroup",
   "Components": [
-    "ButtonGroup"
+    "Button groups",
+    "Buttons"
   ],
   "Props": [
     {
@@ -113,7 +115,7 @@
     },
     {
       "Name": "Values",
-      "Type": "List`1",
+      "Type": "List<StringNumber>",
       "Default": "",
       "Description": "组件的指定 model 值。"
     }
@@ -121,16 +123,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<StringNumber>",
       "Description": ""
     },
     {
       "Name": "ValuesChanged",
+      "Type": "EventCallback<List`1>",
       "Description": ""
     }
   ]

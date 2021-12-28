@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Icon
-title: Icon
+title: Icons
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
 ---
@@ -13,4 +13,4 @@ any of these icons simply use the
 
 ## API
 
-- [MIcon](/docs/api/MIcon)
+- [MIcon](/api/MIcon)

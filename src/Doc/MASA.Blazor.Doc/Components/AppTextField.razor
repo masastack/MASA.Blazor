@@ -1,0 +1,33 @@
+﻿<MTextField
+    Value="Value"
+    ValueChanged="ValueChanged"
+    BackgroundColor="grey lighten-3"
+    Flat
+    Class="rounded-lg"
+    Dense
+    HideDetails="true"
+    Solo
+    Placeholder="Filter"
+    @attributes="@Attributes">
+    <PrependInnerContent>
+        <MIcon Class="mr-2" Color="grey">
+            @Icon
+        </MIcon>
+    </PrependInnerContent>
+</MTextField>
+
+@code {
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> Attributes { get; set; }
+
+    [Parameter]
+    public string Icon { get; set; }
+
+    [Parameter]
+    public string Value { get; set; }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+}

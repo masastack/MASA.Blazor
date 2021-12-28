@@ -32,9 +32,6 @@ namespace MASA.Blazor
         public bool Striped { get; set; }
 
         [Parameter]
-        public bool IsVisible { get; set; }
-
-        [Parameter]
         public bool Dark { get; set; }
 
         [Parameter]
@@ -103,6 +100,8 @@ namespace MASA.Blazor
         [Inject]
         public Document Document { get; set; }
 
+        protected bool IsVisible { get; set; } = true;
+
         public override async Task HandleOnClickAsync(MouseEventArgs args)
         {
             if (!Reactive)
@@ -110,7 +109,7 @@ namespace MASA.Blazor
                 return;
             }
 
-            var el = Document.QuerySelector(Ref);
+            var el = Document.GetElementByReference(Ref);
             var rect = await el.GetBoundingClientRectAsync();
 
             //TODO this.internalValue = e.offsetX / width * 100

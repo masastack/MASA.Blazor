@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MDataTableHeader",
   "Components": [
-    "DataTableHeader"
+    "Data tables"
   ],
   "Props": [
     {
@@ -29,7 +30,7 @@
     },
     {
       "Name": "Headers",
-      "Type": "List`1",
+      "Type": "List<DataTableHeader>",
       "Default": "null",
       "Description": ""
     },
@@ -79,24 +80,29 @@
   "Contents": [
     {
       "Name": "DataTableSelectContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "HeaderColContent",
+      "Type": "RenderFragment<DataTableHeader>",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnGroup",
+      "Type": "EventCallback<String>",
       "Description": ""
     },
     {
       "Name": "OnSort",
+      "Type": "EventCallback<String>",
       "Description": ""
     },
     {
       "Name": "OnToggleSelectAll",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

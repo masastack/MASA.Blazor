@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MImage",
   "Components": [
-    "Image"
+    "Images"
   ],
   "Props": [
     {
@@ -115,10 +116,12 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "PlaceholderContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],

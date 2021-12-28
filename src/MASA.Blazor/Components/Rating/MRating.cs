@@ -39,6 +39,9 @@ namespace MASA.Blazor
         public bool Hover { get; set; }
 
         [Parameter]
+        public string IconLabel { get; set; }
+
+        [Parameter]
         public bool Readonly { get; set; }
 
         [Parameter]
@@ -104,7 +107,7 @@ namespace MASA.Blazor
         }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         [Inject]
         public Document Document { get; set; }
@@ -120,39 +123,48 @@ namespace MASA.Blazor
 
         protected override void SetComponentClass()
         {
+            BackgroundColor ??= "accent";
+            Color ??= "primary";
+
             CssProvider
                 .Apply(cssBuilder =>
-                 {
-                     cssBuilder
+                {
+                    cssBuilder
                         .Add("m-rating")
                         .AddIf("m-rating--readonly", () => Readonly)
                         .AddIf("m-rating--dense", () => Dense)
                         .AddTheme(IsDark);
-                 });
+                });
 
             AbstractProvider
                 .ApplyRatingDefault()
-                .Apply<BIcon, MIcon>(props =>
+                .Apply<BIcon, MIcon>(attrs =>
                 {
-                    var itemIndex = props.Index;
+                    var itemIndex = attrs.Index;
                     var ratingItem = CreateProps(itemIndex);
 
-                    props[nameof(MIcon.Size)] = Size;
-                    props[nameof(MIcon.Icon)] = true;
-                    props[nameof(MIcon.Small)] = Small;
-                    props[nameof(MIcon.XLarge)] = XLarge;
-                    props[nameof(MIcon.Large)] = Large;
-                    props[nameof(MIcon.XSmall)] = XSmall;
-                    props[nameof(MIcon.Dark)] = Dark;
-                    props[nameof(MIcon.Light)] = Light;
-                    props[nameof(MIcon.Color)] = GetColor(ratingItem);
-                    props[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () => { }); //TODO Icon 暂不支持exclick事件显示button
-                    props["onexclick"] = EventCallback.Factory.Create(this, ratingItem.Click);
-                    props["onexmouseenter"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
+                    attrs[nameof(MIcon.Size)] = Size;
+                    attrs[nameof(MIcon.Icon)] = true;
+                    attrs[nameof(MIcon.Small)] = Small;
+                    attrs[nameof(MIcon.XLarge)] = XLarge;
+                    attrs[nameof(MIcon.Large)] = Large;
+                    attrs[nameof(MIcon.XSmall)] = XSmall;
+                    attrs[nameof(MIcon.Dark)] = Dark;
+                    attrs[nameof(MIcon.Light)] = Light;
+                    attrs[nameof(MIcon.Color)] = GetColor(ratingItem);
+                    attrs[nameof(MIcon.Tag)] = "button";
+                    attrs["ripple"] = true;
+                    if (IconLabel != null)
+                    {
+                        attrs["aria-label"] = string.Format(IconLabel, itemIndex, Length);
+                    }
+
+                    attrs["onexclick"] = EventCallback.Factory.Create(this, ratingItem.Click);
+                    attrs["onexmouseenter"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
                         async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseEnter));
-                    props["onexmouseleave"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
-                       async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseLeave));
-                    props["onexmousemove"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
+                    attrs["onexmouseleave"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
+                        async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseLeave));
+                    attrs["onexmousemove"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
                         async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseMove));
                 });
         }
@@ -182,9 +194,7 @@ namespace MASA.Blazor
             var isFull = _isHovering ? item.IsHovered : item.IsFilled;
             var isHalf = _isHovering ? item.IsHalfHovered : item.IsHalfFilled;
 
-            return isFull ?
-                FullIcon :
-                (isHalf != null && (bool)isHalf ? HalfIcon : EmptyIcon);
+            return isFull ? FullIcon : (isHalf != null && (bool)isHalf ? HalfIcon : EmptyIcon);
         }
 
         private string GetColor(RatingItem props)
@@ -216,7 +226,7 @@ namespace MASA.Blazor
         private async Task<double> GenHoverIndex(int i, ExMouseEventArgs args)
         {
             var isHalf = await IsHalfEvent(args);
-            isHalf = HalfIncrements && GlobalConfig.RTL ? !isHalf : isHalf;
+            isHalf = HalfIncrements && MasaBlazor.RTL ? !isHalf : isHalf;
 
             return i + (isHalf ? 0.5 : 1);
         }
@@ -225,7 +235,7 @@ namespace MASA.Blazor
         {
             if (HalfIncrements)
             {
-                var target = Document.QuerySelector(args.Target.ElementReference);
+                var target = Document.GetElementByReference(args.Target.ElementReference);
                 if (target != null)
                 {
                     var rect = await target.GetBoundingClientRectAsync();

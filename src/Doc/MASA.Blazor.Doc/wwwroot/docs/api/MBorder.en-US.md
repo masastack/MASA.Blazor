@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Border
+title: MBorder
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

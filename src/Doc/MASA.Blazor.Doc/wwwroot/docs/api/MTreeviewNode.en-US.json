@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MTreeviewNode",
   "Components": [
-    "TreeviewNode"
+    "Treeview"
   ],
   "Props": [
     {
@@ -53,25 +54,25 @@
     },
     {
       "Name": "ItemChildren",
-      "Type": "Func`2",
+      "Type": "Func<TItem,List`1>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "ItemDisabled",
-      "Type": "Func`2",
+      "Type": "Func<TItem,Boolean>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "ItemKey",
-      "Type": "Func`2",
+      "Type": "Func<TItem,TKey>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "ItemText",
-      "Type": "Func`2",
+      "Type": "Func<TItem,String>",
       "Default": "null",
       "Description": ""
     },
@@ -83,7 +84,7 @@
     },
     {
       "Name": "LoadChildren",
-      "Type": "Func`2",
+      "Type": "Func<TItem,Task>",
       "Default": "null",
       "Description": ""
     },
@@ -157,14 +158,17 @@
   "Contents": [
     {
       "Name": "AppendContent",
+      "Type": "RenderFragment<TreeviewItem`1>",
       "Description": ""
     },
     {
       "Name": "LabelContent",
+      "Type": "RenderFragment<TreeviewItem`1>",
       "Description": ""
     },
     {
       "Name": "PrependContent",
+      "Type": "RenderFragment<TreeviewItem`1>",
       "Description": ""
     }
   ],

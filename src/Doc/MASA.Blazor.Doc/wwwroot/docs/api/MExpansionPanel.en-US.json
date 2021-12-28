@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MExpansionPanel",
   "Components": [
-    "ExpansionPanel"
+    "Expansion panels"
   ],
   "Props": [
     {
@@ -55,6 +56,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

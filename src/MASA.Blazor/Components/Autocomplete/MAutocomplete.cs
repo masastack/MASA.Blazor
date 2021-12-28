@@ -14,8 +14,6 @@ namespace MASA.Blazor
     {
         private Func<TItem, string, bool> _filter;
 
-        protected Timer Timer { get; set; }
-
         [Parameter]
         public Func<TItem, string, bool> Filter
         {
@@ -28,45 +26,55 @@ namespace MASA.Blazor
 
                 return _filter;
             }
-            set
-            {
-                _filter = value;
-            }
+            set { _filter = value; }
         }
 
         [Parameter]
-        public double Interval { get; set; } = 500;
+        public EventCallback<string> OnSearchInputUpdate { get; set; }
 
         public override Dictionary<string, object> InputAttrs => new()
         {
             { "type", Type },
             //TODO:this can be more simple
-            { "value", (Multiple || Chips) ? QueryText : (QueryText ?? string.Join(',', FormatText(Value))) },
+            { "value", (Multiple || Chips) ? QueryText : (QueryText ?? string.Join(',', FormatText(InternalValue))) },
             { "autocomplete", "off" }
         };
 
-        public override IReadOnlyList<TItem> ComputedItems => Items.Where(r => QueryText == null || Filter(r, QueryText)).ToList();
-
-        protected override void OnInitialized()
+        public override List<string> Text
         {
-            if (Timer == null && Interval > 0)
+            get
             {
-                Timer = new Timer();
-                Timer.Interval = Interval;
-                Timer.Elapsed += Timer_Elapsed;
+                if (Multiple || Chips)
+                {
+                    return base.Text;
+                }
+
+                //By default,we use value instead
+                return new List<string>();
             }
         }
+
+        protected override BMenuProps GetDefaultMenuProps()
+        {
+            var props = base.GetDefaultMenuProps();
+            props.OffsetY = true;
+
+            // props.OffsetOverflow = true;
+            // props.Transition = false;
+
+            return props;
+        }
+
+        public override IReadOnlyList<TItem> ComputedItems => Items.Where(r => QueryText == null || Filter(r, QueryText)).ToList();
+
+        public override bool IsDirty => !string.IsNullOrEmpty(QueryText) || base.IsDirty;
 
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
 
             AbstractProvider
-                .Merge<BMenu, MMenu>(props =>
-                {
-                    props[nameof(MMenu.OffsetY)] = true;
-                    props[nameof(MMenu.CloseOnContentClick)] = false;
-                });
+                .Merge<BMenu, MMenu>();
 
             CssProvider
                 .Merge(cssBuilder =>
@@ -81,20 +89,6 @@ namespace MASA.Blazor
                 });
         }
 
-        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            InvokeAsync(async () =>
-            {
-                var args = new ChangeEventArgs()
-                {
-                    Value = QueryText
-                };
-                await base.HandleOnInputAsync(args);
-
-                Timer.Stop();
-            });
-        }
-
         public override async Task HandleOnBlurAsync(FocusEventArgs args)
         {
             QueryText = default;
@@ -102,37 +96,17 @@ namespace MASA.Blazor
             await base.HandleOnBlurAsync(args);
         }
 
-        public override Task HandleOnChangeAsync(ChangeEventArgs args)
-        {
-            QueryText = args.Value.ToString();
-            return Task.CompletedTask;
-        }
-
         public override async Task HandleOnInputAsync(ChangeEventArgs args)
         {
             QueryText = args.Value.ToString();
             HighlightIndex = -1;
 
-            if (OnInput.HasDelegate)
+            if (OnSearchInputUpdate.HasDelegate)
             {
-                if (Timer != null && Interval > 0)
-                {
-                    if (!Timer.Enabled)
-                    {
-                        Timer.Start();
-                    }
-                    else
-                    {
-                        //restart
-                        Timer.Stop();
-                        Timer.Start();
-                    }
-                }
-                else
-                {
-                    await base.HandleOnInputAsync(args);
-                }
+                await OnSearchInputUpdate.InvokeAsync(QueryText);
             }
+
+            await base.HandleOnInputAsync(args);
         }
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
@@ -146,6 +120,7 @@ namespace MASA.Blazor
                     {
                         QueryText = null;
                     }
+
                     break;
                 case "Backspace":
                     Visible = true;
@@ -194,16 +169,21 @@ namespace MASA.Blazor
                             InternalValue = default;
                         }
                     }
+
                     break;
                 default:
                     break;
             }
         }
 
-        protected override void Dispose(bool disposing)
+        public override async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
-            Timer?.Dispose();
-            base.Dispose(disposing);
+            if (!string.IsNullOrEmpty(QueryText))
+            {
+                QueryText = null;
+            }
+
+            await base.HandleOnClearClickAsync(args);
         }
     }
 }

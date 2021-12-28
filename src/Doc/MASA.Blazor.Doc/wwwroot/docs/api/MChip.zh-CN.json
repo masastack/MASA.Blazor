@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MChip",
   "Components": [
-    "Chip"
+    "Chips"
   ],
   "Props": [
     {
@@ -187,16 +188,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnCloseClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     }
   ]

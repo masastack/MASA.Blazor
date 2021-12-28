@@ -1,8 +1,8 @@
 ---
 order: 1
 title:
-  zh-CN: 拓展高度
-  en-US: ExtensitionHeight
+  zh-CN: 扩展高度
+  en-US: Extenstion height
 ---
 
 ## zh-CN

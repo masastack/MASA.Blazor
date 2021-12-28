@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: SimpleTable
+title: MSimpleTable
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

@@ -1,6 +1,8 @@
 ﻿{
+  "Title": "MListItem",
   "Components": [
-    "ListItem"
+    "Lists",
+    "List item groups"
   ],
   "Props": [
     {
@@ -38,6 +40,12 @@
       "Type": "Boolean",
       "Default": "false",
       "Description": "禁用组件"
+    },
+    {
+      "Name": "Exact",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     },
     {
       "Name": "Highlighted",
@@ -139,16 +147,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "ItemContent",
+      "Type": "RenderFragment<ItemContext>",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     }
   ]

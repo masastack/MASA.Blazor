@@ -1,5 +1,5 @@
 ﻿<MSheet Class="mx-auto" MaxWidth="800" Elevation="8">
-    <MSlideGroup ShowArrows="@(true)" Class="pa-4" Mandatory>
+    <MSlideGroup @bind-Value="model" ShowArrows="@(true)" Class="pa-4" Mandatory>
         @foreach (var item in Enumerable.Range(1, 15))
         {
             <MSlideItem>
@@ -21,3 +21,7 @@
         }
     </MSlideGroup>
 </MSheet>
+
+@code {
+    StringNumber model;
+}

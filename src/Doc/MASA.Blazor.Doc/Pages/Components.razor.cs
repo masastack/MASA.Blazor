@@ -1,15 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BlazorComponent.Doc.Models;
+﻿using BlazorComponent;
+using MASA.Blazor.Doc.Models;
+using MASA.Blazor.Doc.Shared;
+using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
-using MASA.Blazor.Doc.Localization;
+using Microsoft.JSInterop;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace MASA.Blazor.Doc.Pages
 {
     public partial class Components
     {
+        // TODO: i18n {zh-CN}
+        private static string _githubUrlTemplate =
+            "https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Doc/MASA.Blazor.Doc/Demos/Components";
+
         private DemoComponentModel _demoComponent;
         private int _demoIndex;
 
@@ -23,11 +28,19 @@ namespace MASA.Blazor.Doc.Pages
 
         private List<DemoItemModel> MiscList { get; set; }
 
-        [Inject]
-        private ILanguageService LanguageService { get; set; }
+        private string GithubUrlHref { get; set; }
 
         [Parameter]
         public string Name { get; set; }
+
+        [CascadingParameter]
+        public bool IsChinese { get; set; }
+
+        [Inject]
+        public GlobalConfigs GlobalConfig { get; set; }
+
+        [Inject]
+        public IJSRuntime Js { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
@@ -41,6 +54,7 @@ namespace MASA.Blazor.Doc.Pages
                 Name = Name.Split("#")[0];
             }
 
+            Service.ChangeLanguage(GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name);
             _demoComponent = await Service.GetComponentAsync(Name);
 
             var demos = _demoComponent.DemoList?
@@ -54,6 +68,7 @@ namespace MASA.Blazor.Doc.Pages
             ContentsList = demos.Where(demo => demo.Group == DemoGroup.Contents).ToList();
             MiscList = demos.Where(demo => demo.Group == DemoGroup.Misc).ToList();
 
+            GithubUrlHref = _githubUrlTemplate;
             _demoIndex = 0;
         }
     }

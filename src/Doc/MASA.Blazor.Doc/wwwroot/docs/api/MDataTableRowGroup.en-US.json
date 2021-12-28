@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MDataTableRowGroup",
   "Components": [
-    "DataTableRowGroup"
+    "Data tables"
   ],
   "Props": [
     {
@@ -13,18 +14,22 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "ColumnHeaderContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "RowContentContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "RowHeaderContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],

@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: ProgressCircular
+title: MProgressCircular
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

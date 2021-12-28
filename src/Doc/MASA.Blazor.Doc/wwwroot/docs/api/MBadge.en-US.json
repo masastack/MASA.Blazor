@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MBadge",
   "Components": [
-    "Badge"
+    "Badges"
   ],
   "Props": [
     {
@@ -133,10 +134,12 @@
   "Contents": [
     {
       "Name": "BadgeContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

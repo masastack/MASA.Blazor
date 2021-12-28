@@ -67,7 +67,7 @@ namespace MASA.Blazor
         public RenderFragment<(int PageStart, int PageStop, int ItemsLength)> PageTextContent { get; set; }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         public IEnumerable<DataItemsPerPageOption> ComputedDataItemsPerPageOptions
         {
@@ -82,7 +82,7 @@ namespace MASA.Blazor
             }
         }
 
-        public bool RTL => GlobalConfig.RTL;
+        public bool RTL => MasaBlazor.RTL;
 
         public bool DisableNextPageIcon
         {
@@ -96,7 +96,7 @@ namespace MASA.Blazor
         {
             if (firstRender)
             {
-                GlobalConfig.OnRTLChange += OnRTLChange;
+                MasaBlazor.OnRTLChange += OnRTLChange;
             }
         }
 
@@ -149,7 +149,7 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyDataFooterDefault()
-                .Apply(typeof(ISelect<,,>), typeof(MSelect<DataItemsPerPageOption, int, int>), props =>
+                .Apply(typeof(ISelect<,,>), typeof(MSelect<DataItemsPerPageOption, int, int>), attrs =>
                 {
                     var value = Options.ItemsPerPage;
                     var first = ComputedDataItemsPerPageOptions.FirstOrDefault(r => r.Value == value);
@@ -161,15 +161,15 @@ namespace MASA.Blazor
                     Func<DataItemsPerPageOption, int> itemValue = r => r.Value;
                     Func<DataItemsPerPageOption, string> itemText = r => r.Text;
 
-                    props[nameof(MSelect<DataItemsPerPageOption, int, int>.Disabled)] = DisableItemsPerPage;
-                    props[nameof(MSelect<DataItemsPerPageOption, int, int>.Items)] = ComputedDataItemsPerPageOptions.ToList();
-                    props[nameof(MSelect<DataItemsPerPageOption, int, int>.Value)] = value;
-                    props[nameof(MSelect<DataItemsPerPageOption, int, int>.ItemValue)] = itemValue;
-                    props[nameof(MSelect<DataItemsPerPageOption, int, int>.ItemText)] = itemText;
-                    props[nameof(MSelect<DataItemsPerPageOption, int, int>.HideDetails)] = (StringBoolean)true;
+                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.Disabled)] = DisableItemsPerPage;
+                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.Items)] = ComputedDataItemsPerPageOptions.ToList();
+                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.Value)] = value;
+                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.ItemValue)] = itemValue;
+                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.ItemText)] = itemText;
+                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.HideDetails)] = (StringBoolean)true;
                     //TODO:auto
-                    props[nameof(MSelect<DataItemsPerPageOption, int, int>.MinWidth)] = (StringNumber)"75px";
-                    props[nameof(MSelect<DataItemsPerPageOption, int, int>.OnChange)] = EventCallback.Factory.Create<int>(this, HandleOnChangeItemsPerPageAsync);
+                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.MinWidth)] = (StringNumber)"75px";
+                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.OnChange)] = EventCallback.Factory.Create<int>(this, HandleOnChangeItemsPerPageAsync);
                 })
                 .Apply<BButton, MButton>()
                 .Apply<BIcon, MIcon>();

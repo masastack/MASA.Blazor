@@ -1,9 +1,14 @@
 ---
 
 order: 0
-title: Avatar
+title: MAvatar
 
 ---
+ 
+## 组件页面
+ 
+组件页面
+ 
  
 ## 属性
  

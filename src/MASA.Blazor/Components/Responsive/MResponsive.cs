@@ -7,11 +7,6 @@ namespace MASA.Blazor
     {
         public Dimensions Dimensions { get; set; }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
-        }
-
         protected override void SetComponentClass()
         {
             CssProvider
@@ -68,8 +63,8 @@ namespace MASA.Blazor
             }
 
             var paddingBottom = (1 / ratio).ToString("P2");
-
-            return $"padding-bottom: {paddingBottom}";
+            
+            return $"padding-bottom: {paddingBottom.Replace(" ", "")}";
         }
     }
 }

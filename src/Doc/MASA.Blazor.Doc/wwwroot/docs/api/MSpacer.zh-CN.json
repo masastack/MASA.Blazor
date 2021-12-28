@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MSpacer",
   "Components": [
-    "Spacer"
+    "Grid system"
   ],
   "Props": [
     {

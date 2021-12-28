@@ -6,78 +6,27 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="Resources\en-US.json" />
-		<EmbeddedResource Include="Resources\zh-CN.json" />
+	  <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="Pages\Index.razor" />
-		<None Include="Shared\MainLayout.razor" />
-		<None Include="Shared\SurveyPrompt.razor" />
-		<None Include="wwwroot\docs\assets\blazor.svg" />
-		<None Include="wwwroot\docs\assets\logo.svg" />
-		<None Include="wwwroot\js\docsearch.js" />
-		<None Include="wwwroot\js\prism.js" />
-		<None Remove="Demos\Components\Grid\demo\orderFirstAndLast.md" />
-	</ItemGroup>
-
 
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0-preview.7.21378.6" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0-preview.7.21378.6" />
-	</ItemGroup>
-
-	<PropertyGroup>
-		<CLIProjectDir>BlazorComponent/src/Doc/BlazorComponent.Doc.CLI</CLIProjectDir>
-		<CLIPath>$(CLIProjectDir)/bin/Debug/net6.0/BlazorComponent.Doc.CLI.dll</CLIPath>
-		<ProjectDir>$(SolutionDir)/Doc/MASA.Blazor.Doc</ProjectDir>
-		<ApplicationIcon />
-		<OutputType>Library</OutputType>
-		<StartupObject />
-	</PropertyGroup>
-
-	<ItemGroup>
-		<DocFiles Include="$(SolutionDir)docs\**\*.*" />
-		<DocFiles Include="$(SolutionDir)\CHANGELOG.*.*" />
+	  <ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
+	  <ProjectReference Include="..\MASA.Blazor.Doc.Models\MASA.Blazor.Doc.Models.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj" />
-		<ProjectReference Include="..\..\BlazorComponent\src\Doc\BlazorComponent.Doc.Models\BlazorComponent.Doc.Models.csproj" />
-		<ProjectReference Include="..\..\MASA.Blazor\MASA.Blazor.csproj" />
+	  <Content Update="wwwroot\locale\en-US.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\locale\languages.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\locale\zh-CN.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
-
-	<ItemGroup>
-		<Content Update="Shared\CodeBox.razor">
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		</Content>
-		<Content Update="Shared\HighlightedCode.razor">
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		</Content>
-		<Content Update="Shared\Recommend.razor">
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Demos\Components\FormInputs\children\Autocomplete\contents" />
-		<Folder Include="Demos\Components\FormInputs\children\Autocomplete\misc" />
-		<Folder Include="wwwroot\meta\" />
-	</ItemGroup>
-
-	<Target Name="RunCli" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug'">
-		<Copy SourceFiles="@(DocFiles)" DestinationFolder="$(ProjectDir)\wwwroot\docs\%(RecursiveDir)" ContinueOnError="true" />
-		<Exec WorkingDirectory="$(SolutionDir)" Command="dotnet build $(CLIProjectDir)" />
-		<Exec WorkingDirectory="$(SolutionDir)" Command="dotnet $(CLIPath) demo2json $(ProjectDir)/Demos $(ProjectDir)/wwwroot/meta" />
-		<Exec WorkingDirectory="$(SolutionDir)" Command="dotnet $(CLIPath) demo2json $(ProjectDir)/StylesAndAnimations $(ProjectDir)/wwwroot/meta/styles-and-animations" />
-		<Exec WorkingDirectory="$(SolutionDir)" Command="dotnet $(CLIPath) api2json  $(SolutionDir)/MASA.Blazor/bin/Debug/net6.0/MASA.Blazor.dll ./Doc/MASA.Blazor.Doc/wwwroot/docs/api" />
-		<Exec WorkingDirectory="$(SolutionDir)" Command="dotnet $(CLIPath) menu2json $(ProjectDir)/Demos $(ProjectDir)/wwwroot/docs $(ProjectDir)/StylesAndAnimations $(ProjectDir)/wwwroot/meta" />
-		<Exec WorkingDirectory="$(SolutionDir)" Command="dotnet $(CLIPath) docs2html $(ProjectDir)/wwwroot/docs ./Doc/MASA.Blazor.Doc/wwwroot/docs" />
-	</Target>
-
-
 </Project>

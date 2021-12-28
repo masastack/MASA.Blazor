@@ -1,17 +1,18 @@
-﻿@page "/styles/{name}"
-@page "/styles"
+﻿@page "/stylesandanimations/{name}"
+@page "/stylesandanimations"
 
-@using BlazorComponent.Doc.Models
+@using MASA.Blazor.Doc.Models
 @using MASA.Blazor.Doc.Services
+@using MASA.Blazor.Doc.Utils
 @inherits OwningComponentBase<DemoService>
 @inject NavigationManager NavigationManager
 @layout DocLayout
 
 @if (_demoComponent != null)
 {
-    <SectionContent Title="@_demoComponent.Title" SubTitle="@_demoComponent.SubTitle" Id="@_demoComponent.Title" Level="1" IsAnchor>
+    <SectionContent Title="@_demoComponent.Title" SubTitle="@_demoComponent.Subtitle" Id="@_demoComponent.Title" Level="1" IsAnchor>
 
-        @((MarkupString)_demoComponent.Desc)
+        @((MarkupString)_demoComponent.Desc.FormatLink())
 
         @if (Usage != null)
         {
@@ -20,32 +21,39 @@
             </SectionContent>
         }
 
-        @if (_demoComponent.Apis != null)
+        @if (_demoComponent.OtherDocs != null)
         {
-            <SectionContent Title="API" Id="api" Level="2" IsAnchor>
-                <ul>
-                    @foreach (var item in _demoComponent.Apis)
+            foreach (var (title, markup) in _demoComponent.OtherDocs)
+            {
+                var list = markup.SplitByAlertType();
+
+                <SectionContent Title="@title" Id="@title.HashSection()" Level="2" IsAnchor>
+                    @foreach (var (type, str) in list)
                     {
-                        <li>
-                            <a href="@item.Href" class="app-link text-decoration-none primary--text font-weight-medium d-inline-block">
-                                @item.Name
-                                <MIcon Color="primary" Small>mdi-page-next</MIcon>
-                            </a>
-                        </li>
+                        if (type == AlertTypes.None)
+                        {
+                            @((MarkupString)str.FormatLink())
+                        }
+                        else
+                        {
+                            <MAlert Type="@type" Border="Borders.Left" Text Class="m-alert--doc">
+                                @((MarkupString)str.FormatLink())
+                            </MAlert>
+                        }
                     }
-                </ul>
-            </SectionContent>
+                </SectionContent>
+            }
         }
 
         @if (PropsList.Any() || MiscList.Any())
         {
-            var example = DemoItemModel.GenerateExample(LanguageService.CurrentCulture.Name);
+            var example = DemoItemModel.GenerateExample("zh-CN");
 
             <SectionContent Title="@example.Title" Id="examples" Level="2" IsAnchor>
 
                 @if (PropsList.Any())
                 {
-                    var props = DemoItemModel.GenerateProps(LanguageService.CurrentCulture.Name);
+                    var props = DemoItemModel.GenerateProps("zh-CN");
 
                     <SectionContent Title="@props.Title" Id="props" Level="3" IsAnchor>
                         @foreach (var item in PropsList)
@@ -59,7 +67,7 @@
 
                 @if (EventsList.Any())
                 {
-                    var contents = DemoItemModel.GenerateEvents(LanguageService.CurrentCulture.Name);
+                    var contents = DemoItemModel.GenerateEvents("zh-CN");
 
                     <SectionContent Title="@contents.Title" Id="events" Level="3" IsAnchor>
                         @foreach (var item in EventsList)
@@ -73,7 +81,7 @@
 
                 @if (ContentsList.Any())
                 {
-                    var contents = DemoItemModel.GenerateContents(LanguageService.CurrentCulture.Name);
+                    var contents = DemoItemModel.GenerateContents("zh-CN");
 
                     <SectionContent Title="@contents.Title" Id="contents" Level="3" IsAnchor>
                         @foreach (var item in ContentsList)
@@ -87,7 +95,7 @@
 
                 @if (MiscList.Any())
                 {
-                    var misc = DemoItemModel.GenerateMisc(LanguageService.CurrentCulture.Name);
+                    var misc = DemoItemModel.GenerateMisc("zh-CN");
 
                     <SectionContent Title="@misc.Title" Id="misc" Level="3" IsAnchor>
                         @foreach (var item in MiscList)

@@ -12,4 +12,4 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg
 
 ## API
 
-- [MECharts](/docs/api/MECharts)
+- [MECharts](/api/MECharts)

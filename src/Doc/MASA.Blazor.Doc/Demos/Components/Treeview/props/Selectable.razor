@@ -1,4 +1,4 @@
-﻿<MTreeview TItem="Data" TKey="int" Selectable @bind-Value="_value" Items="_data" ItemText="r=>r.Name" ItemChildren="r=>r.Children" ItemKey="r=>r.Id" OnInput="HandleOnInput">
+﻿<MTreeview TItem="Data" TKey="int" Selectable @bind-Value="_value" Items="_data" ItemText="r=>r.Name" ItemChildren="r=>r.Children" ItemKey="r=>r.Id">
 </MTreeview>
 
 @code {
@@ -50,7 +50,7 @@
                     new Data
                     {
                         Id=6,
-                        Name="vuetify :",
+                        Name="MASA Blazor :",
                         Children=new List<Data>
                         {
                             new Data
@@ -87,15 +87,15 @@
                                     new Data
                                     {
                                         Id=12,
-                                        Name="v-btn : ts"
+                                        Name="MButton : cs"
                                     },new Data
                                     {
                                         Id=13,
-                                        Name="v-card : ts"
+                                        Name="MCard : cs"
                                     },new Data
                                     {
                                         Id=14,
-                                        Name="v-window : ts"
+                                        Name="MWindow : cs"
                                     }
                                 }
                             }
@@ -162,11 +162,4 @@
             }
         }
     };
-
-    private List<Data> _selected = new();
-
-    public void HandleOnInput(List<Data> selected)
-    {
-        _selected = selected;
-    }
 }

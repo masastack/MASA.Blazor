@@ -1,7 +1,7 @@
 ---
 category: Components
 type: ButtonGroup
-title: ButtonGroup
+title: Button groups
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ButtonGroup.svg
 ---
@@ -10,5 +10,5 @@ The `MButtonGroup` component is a simple wrapper for `MItemGroup` built specific
 
 ## API
 
-- [MButtonGroup](/docs/api/MButtonGroup)
-- [MButton](/docs/api/MButton)
+- [MButtonGroup](/api/MButtonGroup)
+- [MButton](/api/MButton)

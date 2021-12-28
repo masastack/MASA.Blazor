@@ -4,7 +4,7 @@
 			<ActivatorContent>
 				<MButton Icon XLarge @attributes="@context.Attrs">
 					<MAvatar Color="brown" Size="48">
-						<span class="white--text text-h5">JD</span>
+						<span class="white--text text-h5">@initials</span>
 					</MAvatar>
 				</MButton>
 			</ActivatorContent>
@@ -13,10 +13,10 @@
 					<MListItemContent Class="justify-center">
 						<div class="mx-auto text-center">
 							<MAvatar Color="brown">
-								<span class="white--text text-h5">JD</span>
+								<span class="white--text text-h5">@initials</span>
 							</MAvatar>
-							<h3>John Doe</h3>
-							<p class="text-caption mt-1">john.doe@doe.com</p>
+							<h3>@fullName</h3>
+							<p class="text-caption mt-1">@email</p>
 							<MDivider class="my-3"></MDivider>
 							<MButton Depressed Rounded Text>Edit Account</MButton>
 							<MDivider class="my-3"></MDivider>
@@ -28,3 +28,9 @@
 		</MMenu>
 	</MRow>
 </MContainer>
+
+@code {
+	string initials = "JD";
+	string fullName = "John Doe";
+	string email = "john.doe@doe.com";
+}

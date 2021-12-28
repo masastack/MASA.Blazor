@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: StepperItems
+title: MStepperItems
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

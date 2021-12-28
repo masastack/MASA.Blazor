@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Badge
+title: MBadge
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

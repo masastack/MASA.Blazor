@@ -1,6 +1,8 @@
 ﻿{
+  "Title": "MButton",
   "Components": [
-    "Button"
+    "Buttons",
+    "Button Groups"
   ],
   "Props": [
     {
@@ -23,12 +25,6 @@
     },
     {
       "Name": "Bottom",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "Button",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
@@ -283,16 +279,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "LoaderContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     }
   ]

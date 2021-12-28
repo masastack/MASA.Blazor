@@ -1,4 +1,5 @@
 ﻿{
+  "Title": "MPagination",
   "Components": [
     "Pagination"
   ],
@@ -86,18 +87,22 @@
   "Events": [
     {
       "Name": "OnInput",
+      "Type": "EventCallback<Int32>",
       "Description": ""
     },
     {
       "Name": "OnNext",
+      "Type": "EventCallback",
       "Description": ""
     },
     {
       "Name": "OnPrevious",
+      "Type": "EventCallback",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Int32>",
       "Description": ""
     }
   ]

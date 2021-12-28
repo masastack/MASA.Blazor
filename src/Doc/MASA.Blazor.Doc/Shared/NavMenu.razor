@@ -1,19 +1,20 @@
-﻿@using BlazorComponent.Doc.Models
+﻿@using MASA.Blazor.Doc.Models
 @using MASA.Blazor.Doc.Services
+@using MASA.Blazor.Doc.Utils
+@using System.Globalization;
 @inherits OwningComponentBase<DemoService>
-@inject ILanguageService LanguageService
 
-<MList Dense Nav Linkage>
+<MList Nav Linkage Class="mt-4">
     @foreach (var item in MenuItems)
     {
         if (item.Children != null && item.Children.Any())
         {
             var group = GenGroup(item.Children);
 
-            <MListGroup AppendIcon="mdi-menu-down"
+            <MListGroup AppendIcon="M8.33398 10.3335L12.5007 14.5002L16.6673 10.3335H8.33398Z"
                         Class="m-list-group--default"
-                        Color="primary"
                         Group="@group"
+                        Color="#5C2D91"
                         NoAction
                         PrependIcon="@item.Icon">
                 <ActivatorContent>
@@ -31,6 +32,7 @@
                             <MListGroup Class="m-list-group--default"
                                         Group="@group2"
                                         NoAction
+                                        Color="#5C2D91"
                                         SubGroup>
                                 <ActivatorContent>
                                     <MListItemContent>
@@ -40,7 +42,7 @@
                                 <ChildContent>
                                     @foreach (var subComponentItem in componentItem.Children)
                                     {
-                                        <MListItem Class="m-list-item--default" Href="@subComponentItem.Url">
+                                        <MListItem Class="m-list-item--default" Href="@subComponentItem.Url" Exact>
                                             <MListItemContent>
                                                 <MListItemTitle>
                                                     @FormatComponentTitle(subComponentItem)
@@ -53,7 +55,7 @@
                         }
                         else
                         {
-                            <MListItem Class="m-list-item--default" Href="@componentItem.Url">
+                            <MListItem Class="m-list-item--default" Href="@componentItem.Url" Exact>
                                 <MListItemContent>
                                     <MListItemTitle>
                                         @FormatComponentTitle(componentItem)
@@ -82,46 +84,42 @@
 @code {
 
     [Parameter]
-    public DemoMenuItemModel[] MenuItems { get; set; } = {};
+    public DemoMenuItemModel[] MenuItems { get; set; } = { };
 
-    protected override async Task OnInitializedAsync()
+    [CascadingParameter]
+    public bool IsChinese { get; set; }
+
+    [Inject]
+    public GlobalConfigs GlobalConfig { get; set; }
+
+    protected override async Task OnParametersSetAsync()
     {
+        Service.ChangeLanguage(GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name);
         MenuItems = await Service.GetMenuAsync();
-
-        StateHasChanged();
         await Service.InitializeDemos();
     }
 
     string FormatComponentTitle(DemoMenuItemModel model)
     {
-        if (LanguageService.CurrentCulture.Name == "zh-CN" && !string.IsNullOrEmpty(model.SubTitle))
-        {
-            if (model.Url.StartsWith("style"))
-            {
-                return model.SubTitle;
-            }
-
-            return $"{model.Title}（{model.SubTitle}）";
-        }
-
-        return model.Title;
+        return model.FullTitle;
     }
 
-    string GenGroup(DemoMenuItemModel[] items)
+    List<string> GenGroup(DemoMenuItemModel[] items)
     {
-        if (items == null || !items.Any()) return string.Empty;
+        if (items == null || !items.Any()) return new List<string>();
 
         var groups = new List<string>();
 
         foreach (var item in items)
         {
-            if (groups.Contains(item.Url, StringComparer.OrdinalIgnoreCase)) continue;
+            groups.AddRange(GenGroup(item.Children));
 
-            groups.Add(GenGroup(item.Children));
+            if (item.Url == null || groups.Contains(item.Url, StringComparer.OrdinalIgnoreCase)) continue;
+
             groups.Add(item.Url);
         }
 
-        return string.Join("|", groups);
+        return groups;
     }
 
 }

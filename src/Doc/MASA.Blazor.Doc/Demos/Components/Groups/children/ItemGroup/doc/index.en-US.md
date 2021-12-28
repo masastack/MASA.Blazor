@@ -1,7 +1,7 @@
 ---
 category: Components
 type: ItemGroup
-title: ItemGroup
+title: Item groups
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ItemGroup.svg
 ---
@@ -11,5 +11,5 @@ functionality for components such as `MTabs` and `MCarousel`.
 
 ## API
 
-- [MItem](/docs/api/MItem)
-- [MItemGroup](/docs/api/MItemGroup)
+- [MItem](/api/MItem)
+- [MItemGroup](/api/MItemGroup)

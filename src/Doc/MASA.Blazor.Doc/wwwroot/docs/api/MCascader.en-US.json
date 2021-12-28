@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MCascader",
   "Components": [
-    "Cascader"
+    "Cascaders"
   ],
   "Props": [
     {
@@ -65,7 +66,7 @@
     },
     {
       "Name": "CounterValue",
-      "Type": "Func`2",
+      "Type": "Func<TValue,Int32>",
       "Default": "null",
       "Description": ""
     },
@@ -107,7 +108,7 @@
     },
     {
       "Name": "ErrorMessages",
-      "Type": "List`1",
+      "Type": "List<String>",
       "Default": "null",
       "Description": ""
     },
@@ -142,6 +143,18 @@
       "Description": ""
     },
     {
+      "Name": "HideNoData",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "HideSelected",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Hint",
       "Type": "String",
       "Default": "null",
@@ -154,38 +167,32 @@
       "Description": ""
     },
     {
-      "Name": "IsFull",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "ItemChildren",
-      "Type": "Func`2",
+      "Type": "Func<TItem,List`1>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "ItemDisabled",
-      "Type": "Func`2",
+      "Type": "Func<TItem,Boolean>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "Items",
-      "Type": "IReadOnlyList`1",
+      "Type": "IReadOnlyList<TItem>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "ItemText",
-      "Type": "Func`2",
+      "Type": "Func<TItem,String>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "ItemValue",
-      "Type": "Func`2",
+      "Type": "Func<TItem,TValue>",
       "Default": "",
       "Description": ""
     },
@@ -202,6 +209,12 @@
       "Description": ""
     },
     {
+      "Name": "LoadChildren",
+      "Type": "Func<TItem,Task>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "LoaderHeight",
       "Type": "StringNumber",
       "Default": "null",
@@ -215,13 +228,13 @@
     },
     {
       "Name": "MenuProps",
-      "Type": "BMenuProps",
+      "Type": "Action<BMenuProps>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "Messages",
-      "Type": "List`1",
+      "Type": "List<String>",
       "Default": "null",
       "Description": ""
     },
@@ -298,7 +311,19 @@
       "Description": "Designates the border-radius applied to the component."
     },
     {
+      "Name": "Rules",
+      "Type": "IEnumerable<Func`2>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Shaped",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ShowAllLevels",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
@@ -341,7 +366,7 @@
     },
     {
       "Name": "SuccessMessages",
-      "Type": "List`1",
+      "Type": "List<String>",
       "Default": "null",
       "Description": ""
     },
@@ -371,7 +396,7 @@
     },
     {
       "Name": "ValueExpression",
-      "Type": "Expression`1",
+      "Type": "Expression<Func`1>",
       "Default": "null",
       "Description": ""
     }
@@ -379,108 +404,149 @@
   "Contents": [
     {
       "Name": "AppendContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "AppendItemContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "AppendOuterContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "CounterContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ItemContent",
+      "Type": "RenderFragment<SelectListItemProps`1>",
       "Description": ""
     },
     {
       "Name": "LabelContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "MessageContent",
+      "Type": "RenderFragment<String>",
+      "Description": ""
+    },
+    {
+      "Name": "NoDataContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "PrependContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "PrependInnerContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "PrependItemContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ProgressContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "SelectionContent",
+      "Type": "RenderFragment<SelectSelectionProps`1>",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnAppendClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnAppendOuterClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnBlur",
+      "Type": "EventCallback<FocusEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnChange",
+      "Type": "EventCallback<TValue>",
       "Description": ""
     },
     {
       "Name": "OnClearClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnFocus",
+      "Type": "EventCallback<FocusEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnInput",
+      "Type": "EventCallback<TValue>",
       "Description": ""
     },
     {
       "Name": "OnKeyDown",
+      "Type": "EventCallback<KeyboardEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnMouseDown",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnMouseUp",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnPrependClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnPrependInnerClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnSelectedItemUpdate",
+      "Type": "EventCallback<TItem>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<TValue>",
       "Description": ""
     }
   ]

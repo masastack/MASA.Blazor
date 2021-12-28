@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Dialog
+title: MDialog
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

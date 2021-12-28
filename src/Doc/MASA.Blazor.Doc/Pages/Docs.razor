@@ -1,12 +1,10 @@
-﻿@page "/docs/{fileName}"
-@page "/docs"
-@page "/docs/{dir}/{fileName}"
+﻿@page "/{category}"
+@page "/{category}/{fileName}"
 @using MASA.Blazor.Doc.Services
 @inherits OwningComponentBase<DemoService>
 @layout DocLayout
 
-@if (_file != null)
+@if (File != null)
 {
-    @((MarkupString) _file.Html)
+    @((MarkupString)File.Html)
 }
-

@@ -277,91 +277,91 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyDataTableDefault<TItem>()
-                .Apply(typeof(BDataTableHeader), typeof(MDataTableHeader), props =>
+                .Apply(typeof(BDataTableHeader), typeof(MDataTableHeader), attrs =>
                 {
                     foreach (var prop in HeaderProps)
                     {
-                        props[prop.Key] = prop.Value;
+                        attrs[prop.Key] = prop.Value;
                     }
 
-                    props[nameof(MDataTableHeader.Headers)] = ComputedHeaders.ToList<DataTableHeader>();
-                    props[nameof(MDataTableHeader.Options)] = InternalOptions;
-                    props[nameof(MDataTableHeader.ShowGroupBy)] = ShowGroupBy;
-                    props[nameof(MDataTableHeader.CheckboxColor)] = CheckboxColor;
-                    props[nameof(MDataTableHeader.SomeItems)] = SomeItems;
-                    props[nameof(MDataTableHeader.EveryItem)] = EveryItem;
-                    props[nameof(MDataTableHeader.SingleSelect)] = SingleSelect;
-                    props[nameof(MDataTableHeader.DisableSort)] = DisableSort;
-                    props[nameof(MDataTableHeader.HeaderColContent)] = HeaderColContent;
-                    props[nameof(MDataTableHeader.OnToggleSelectAll)] = EventCallback.Factory.Create<bool>(this, ToggleSelectAll);
-                    props[nameof(MDataTableHeader.OnSort)] = EventCallback.Factory.Create<string>(this, Sort);
-                    props[nameof(MDataTableHeader.OnGroup)] = EventCallback.Factory.Create<string>(this, Group);
+                    attrs[nameof(MDataTableHeader.Headers)] = ComputedHeaders.ToList<DataTableHeader>();
+                    attrs[nameof(MDataTableHeader.Options)] = InternalOptions;
+                    attrs[nameof(MDataTableHeader.ShowGroupBy)] = ShowGroupBy;
+                    attrs[nameof(MDataTableHeader.CheckboxColor)] = CheckboxColor;
+                    attrs[nameof(MDataTableHeader.SomeItems)] = SomeItems;
+                    attrs[nameof(MDataTableHeader.EveryItem)] = EveryItem;
+                    attrs[nameof(MDataTableHeader.SingleSelect)] = SingleSelect;
+                    attrs[nameof(MDataTableHeader.DisableSort)] = DisableSort;
+                    attrs[nameof(MDataTableHeader.HeaderColContent)] = HeaderColContent;
+                    attrs[nameof(MDataTableHeader.OnToggleSelectAll)] = EventCallback.Factory.Create<bool>(this, ToggleSelectAll);
+                    attrs[nameof(MDataTableHeader.OnSort)] = EventCallback.Factory.Create<string>(this, Sort);
+                    attrs[nameof(MDataTableHeader.OnGroup)] = EventCallback.Factory.Create<string>(this, Group);
                 })
-                .Apply(typeof(BProgressLinear), typeof(MProgressLinear), props =>
+                .Apply(typeof(BProgressLinear), typeof(MProgressLinear), attrs =>
                 {
-                    props[nameof(MProgressLinear.Absolute)] = true;
-                    props[nameof(MProgressLinear.Color)] = (Loading == true || Loading == "") ? "primary" : Loading.AsT0;
-                    props[nameof(MProgressLinear.Height)] = LoaderHeight;
-                    props[nameof(MProgressLinear.Indeterminate)] = true;
+                    attrs[nameof(MProgressLinear.Absolute)] = true;
+                    attrs[nameof(MProgressLinear.Color)] = (Loading == true || Loading == "") ? "primary" : Loading.AsT0;
+                    attrs[nameof(MProgressLinear.Height)] = LoaderHeight;
+                    attrs[nameof(MProgressLinear.Indeterminate)] = true;
                 })
-                .Apply<BSimpleTable, MSimpleTable>(props =>
+                .Apply<BSimpleTable, MSimpleTable>(attrs =>
                 {
-                    props[nameof(Height)] = Height;
-                    props[nameof(FixedHeader)] = FixedHeader;
-                    props[nameof(Dense)] = Dense;
-                    props[nameof(Class)] = Class;
-                    props[nameof(Style)] = Style;
-                    props[nameof(FixedRight)] = FixedRight;
-                    props[nameof(Width)] = Width;
+                    attrs[nameof(Height)] = Height;
+                    attrs[nameof(FixedHeader)] = FixedHeader;
+                    attrs[nameof(Dense)] = Dense;
+                    attrs[nameof(Class)] = Class;
+                    attrs[nameof(Style)] = Style;
+                    attrs[nameof(FixedRight)] = FixedRight;
+                    attrs[nameof(Width)] = Width;
                 })
-                .Apply<BSimpleCheckbox, MSimpleCheckbox>(props =>
+                .Apply<BSimpleCheckbox, MSimpleCheckbox>(attrs =>
                 {
-                    var item = (TItem)props.Data;
-                    props[nameof(Class)] = "m-data-table__checkbox";
-                    props[nameof(MSimpleCheckbox.Disabled)] = !IsSelectable(item);
-                    props[nameof(MSimpleCheckbox.Value)] = IsSelected(item);
-                    props[nameof(MSimpleCheckbox.Color)] = CheckboxColor ?? "";
-                    props[nameof(MSimpleCheckbox.OnInput)] = EventCallback.Factory.Create<bool>(this, val =>
+                    var item = (TItem)attrs.Data;
+                    attrs[nameof(Class)] = "m-data-table__checkbox";
+                    attrs[nameof(MSimpleCheckbox.Disabled)] = !IsSelectable(item);
+                    attrs[nameof(MSimpleCheckbox.Value)] = IsSelected(item);
+                    attrs[nameof(MSimpleCheckbox.Color)] = CheckboxColor ?? "";
+                    attrs[nameof(MSimpleCheckbox.OnInput)] = EventCallback.Factory.Create<bool>(this, val =>
                    {
                        Select(item, val);
                    });
                 })
-                .Apply(typeof(BDataTableRow<>), typeof(MDataTableRow<TItem>), props =>
+                .Apply(typeof(BDataTableRow<>), typeof(MDataTableRow<TItem>), attrs =>
                 {
-                    props[nameof(MDataTableRow<TItem>.Headers)] = ComputedHeaders;
-                    props[nameof(MDataTableRow<TItem>.IsSelected)] = (Func<TItem, bool>)IsSelected;
-                    props[nameof(MDataTableRow<TItem>.ItemColContent)] = ItemColContent;
-                    props[nameof(MDataTableRow<TItem>.IsExpanded)] = (Func<TItem, bool>)IsExpanded;
-                    props[nameof(MDataTableRow<TItem>.Stripe)] = Stripe;
+                    attrs[nameof(MDataTableRow<TItem>.Headers)] = ComputedHeaders;
+                    attrs[nameof(MDataTableRow<TItem>.IsSelected)] = (Func<TItem, bool>)IsSelected;
+                    attrs[nameof(MDataTableRow<TItem>.ItemColContent)] = ItemColContent;
+                    attrs[nameof(MDataTableRow<TItem>.IsExpanded)] = (Func<TItem, bool>)IsExpanded;
+                    attrs[nameof(MDataTableRow<TItem>.Stripe)] = Stripe;
                 })
                 .Apply(typeof(BDataTableRowGroup), typeof(MDataTableRowGroup))
-                .Apply<BIcon, MIcon>("expand-icon", props =>
+                .Apply<BIcon, MIcon>("expand-icon", attrs =>
                 {
-                    var item = (TItem)props.Data;
+                    var item = (TItem)attrs.Data;
                     var expanded = IsExpanded(item);
                     var @class = IsExpanded(item) ? "m-data-table__expand-icon m-data-table__expand-icon--active" : "m-data-table__expand-icon";
-                    props[nameof(Class)] = @class;
+                    attrs[nameof(Class)] = @class;
                     //TODO:StopPropagation
-                    props[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
+                    attrs[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
                     {
                         Expand(item, !expanded);
                     });
                 })
-                .Apply<BButton, MButton>("group-toggle", props =>
+                .Apply<BButton, MButton>("group-toggle", attrs =>
                 {
-                    var group = (string)props.Data;
-                    props[nameof(Class)] = "ma-0";
-                    props[nameof(MButton.Icon)] = true;
-                    props[nameof(MButton.Small)] = true;
-                    props[nameof(MButton.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, args => ToggleGroup(group));
+                    var group = (string)attrs.Data;
+                    attrs[nameof(Class)] = "ma-0";
+                    attrs[nameof(MButton.Icon)] = true;
+                    attrs[nameof(MButton.Small)] = true;
+                    attrs[nameof(MButton.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, args => ToggleGroup(group));
                 })
                 .Apply<BIcon, MIcon>("group-toggle-icon")
-                .Apply<BButton, MButton>("group-remove", props =>
+                .Apply<BButton, MButton>("group-remove", attrs =>
                 {
-                    props[nameof(Class)] = "ma-0";
-                    props[nameof(MButton.Icon)] = true;
-                    props[nameof(MButton.Small)] = true;
-                    props[nameof(MButton.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, RemoveGroup);
+                    attrs[nameof(Class)] = "ma-0";
+                    attrs[nameof(MButton.Icon)] = true;
+                    attrs[nameof(MButton.Small)] = true;
+                    attrs[nameof(MButton.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, RemoveGroup);
                 })
                 .Apply<BIcon, MIcon>("group-remove-icon");
         }

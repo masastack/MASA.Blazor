@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MDataTable",
   "Components": [
-    "DataTable"
+    "Data tables"
   ],
   "Props": [
     {
@@ -29,25 +30,25 @@
     },
     {
       "Name": "CustomFilter",
-      "Type": "Func`4",
+      "Type": "Func<IEnumerable`1,IEnumerable`1,String,IEnumerable`1>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "CustomGroup",
-      "Type": "Func`5",
+      "Type": "Func<IEnumerable`1,IEnumerable`1,IList`1,IList`1,IEnumerable`1>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "CustomItemFilter",
-      "Type": "Func`4",
+      "Type": "Func<Object,String,TItem,Boolean>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "CustomSort",
-      "Type": "Func`6",
+      "Type": "Func<IEnumerable`1,IEnumerable`1,IList`1,List`1,String,IEnumerable`1>",
       "Default": "null",
       "Description": ""
     },
@@ -77,7 +78,7 @@
     },
     {
       "Name": "Expanded",
-      "Type": "List`1",
+      "Type": "List<TItem>",
       "Default": "null",
       "Description": ""
     },
@@ -101,31 +102,31 @@
     },
     {
       "Name": "FooterProps",
-      "Type": "Dictionary`2",
+      "Type": "Dictionary<String,Object>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "GroupBy",
-      "Type": "OneOf`2",
+      "Type": "OneOf<String,IList`1>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "GroupDesc",
-      "Type": "IList`1",
+      "Type": "IList<Boolean>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "HeaderProps",
-      "Type": "Dictionary`2",
+      "Type": "Dictionary<String,Object>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "Headers",
-      "Type": "IEnumerable`1",
+      "Type": "IEnumerable<DataTableHeader`1>",
       "Default": "null",
       "Description": ""
     },
@@ -167,13 +168,13 @@
     },
     {
       "Name": "ItemKey",
-      "Type": "Func`2",
+      "Type": "Func<TItem,String>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "Items",
-      "Type": "IEnumerable`1",
+      "Type": "IEnumerable<TItem>",
       "Default": "null",
       "Description": ""
     },
@@ -185,7 +186,7 @@
     },
     {
       "Name": "ItemValues",
-      "Type": "IEnumerable`1",
+      "Type": "IEnumerable<ItemValue`1>",
       "Default": "null",
       "Description": ""
     },
@@ -238,6 +239,18 @@
       "Description": ""
     },
     {
+      "Name": "OnItemSelect",
+      "Type": "Action<TItem,Boolean>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OnToggleSelectAll",
+      "Type": "Action<IEnumerable`1,Boolean>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Page",
       "Type": "Int32",
       "Default": "0",
@@ -251,7 +264,7 @@
     },
     {
       "Name": "SelectableKey",
-      "Type": "Func`2",
+      "Type": "Func<TItem,Boolean>",
       "Default": "null",
       "Description": ""
     },
@@ -293,13 +306,13 @@
     },
     {
       "Name": "SortBy",
-      "Type": "OneOf`2",
+      "Type": "OneOf<String,IList`1>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "SortDesc",
-      "Type": "OneOf`2",
+      "Type": "OneOf<Boolean,IList`1>",
       "Default": "",
       "Description": ""
     },
@@ -317,7 +330,7 @@
     },
     {
       "Name": "Value",
-      "Type": "IEnumerable`1",
+      "Type": "IEnumerable<TItem>",
       "Default": "null",
       "Description": ""
     },
@@ -331,100 +344,124 @@
   "Contents": [
     {
       "Name": "BodyAppendContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "BodyPrependContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "CaptionContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment<ValueTuple`3>",
       "Description": "Default Content"
     },
     {
       "Name": "ExpandedItemContent",
+      "Type": "RenderFragment<ValueTuple`2>",
       "Description": ""
     },
     {
       "Name": "FootContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "FooterContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "GroupContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "GroupHeaderContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "HeaderColContent",
+      "Type": "RenderFragment<DataTableHeader>",
       "Description": ""
     },
     {
       "Name": "HeaderContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ItemColContent",
+      "Type": "RenderFragment<ItemColProps`1>",
       "Description": ""
     },
     {
       "Name": "ItemContent",
+      "Type": "RenderFragment<ItemProps`1>",
       "Description": ""
     },
     {
       "Name": "ItemDataTableExpandContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ItemDataTableSelectContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "LoadingContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "NoDataContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "NoResultsContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "PageTextContent",
+      "Type": "RenderFragment<ValueTuple`3>",
       "Description": ""
     },
     {
       "Name": "ProgressContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "TopContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnOptionsUpdate",
+      "Type": "EventCallback<DataOptions>",
       "Description": ""
     },
     {
       "Name": "OnPageCount",
+      "Type": "EventCallback<Int32>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<IEnumerable`1>",
       "Description": ""
     }
   ]

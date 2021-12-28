@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MTab",
   "Components": [
-    "Tab"
+    "Tabs"
   ],
   "Props": [
     {
@@ -22,6 +23,12 @@
       "Description": ""
     },
     {
+      "Name": "Href",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Id",
       "Type": "String",
       "Default": "null",
@@ -29,6 +36,12 @@
     },
     {
       "Name": "IsActive",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Link",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
@@ -46,6 +59,18 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Target",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Value",
       "Type": "StringNumber",
       "Default": "null",
@@ -55,12 +80,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     }
   ]

@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MMain",
   "Components": [
-    "Main"
+    "Grid system"
   ],
   "Props": [
     {
@@ -25,6 +26,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

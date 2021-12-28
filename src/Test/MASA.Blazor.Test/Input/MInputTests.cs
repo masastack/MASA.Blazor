@@ -14,14 +14,16 @@ namespace MASA.Blazor.Test.Input
     public class MInputTests : TestBase
     {
         [TestMethod]
-        public void RenderShouldHasNoEmptyComponent()
+        public void RenderNormal()
         {
-            // Act
+            // Arrange & Act
             var cut = RenderComponent<MInput<string>>();
-            var components = cut.FindComponents<EmptyComponent>();
+            var inputDiv = cut.Find("div");
 
             // Assert
-            Assert.AreEqual(0, components.Count);
+            Assert.AreEqual(2, inputDiv.ClassList.Length);
+            Assert.IsTrue(inputDiv.ClassList.Contains("m-input"));
+            Assert.IsTrue(inputDiv.ClassList.Contains("theme--light"));
         }
 
         [TestMethod]
@@ -40,66 +42,52 @@ namespace MASA.Blazor.Test.Input
         }
 
         [TestMethod]
-        public void RenderShouldHasClasses()
+        public void RenderInputWithWithDark()
         {
-            // Act
-            var cut = RenderComponent<MInput<string>>();
+            //Act
+            var cut = RenderComponent<MInput<string>>(props =>
+            {
+                props.Add(input => input.Dark, true);
+            });
             var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("theme--dark");
 
             // Assert
-            Assert.AreEqual("m-input theme--light", classes);
+            Assert.IsTrue(hasDarkClass);
         }
 
         [TestMethod]
-        public void RenderIsDisabledShouldHasClasses()
+        public void RenderInputNoWithWithDark()
         {
-            // Act
-            var cut = RenderComponent<TestInput>(props =>
+            //Act
+            var cut = RenderComponent<MInput<string>>(props =>
             {
-                props.Add(p => p.MockIsDisabled, true);
+                props.Add(input => input.Dark, false);
             });
-            var input = cut.Instance;
-            var classes = input.CssProvider.GetClass();
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasDarkClass = classes.Contains("m-input");
 
             // Assert
-            Assert.IsTrue(input.IsDisabled);
-            Assert.AreEqual("m-input m-input--is-disabled theme--light", classes);
+            Assert.IsTrue(hasDarkClass);
         }
 
         [TestMethod]
-        public void RenderHasStateShouldHasClasses()
+        public void RenderInputWithWithLight()
         {
-            // Act
-            var cut = RenderComponent<TestInput>(props =>
+            //Act
+            var cut = RenderComponent<MInput<string>>(props =>
             {
-                props.Add(r => r.MockHasState, true);
+                props.Add(input => input.Light, true);
             });
-            var input = cut.Instance;
-            var classes = input.CssProvider.GetClass();
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("theme--light");
 
             // Assert
-            Assert.IsTrue(input.HasState);
-            Assert.AreEqual("m-input m-input--has-state theme--light", classes);
+            Assert.IsTrue(hasLightClass);
         }
 
         [TestMethod]
-        public void RenderHideDetailsShouldHasClasses()
-        {
-            // Act
-            var cut = RenderComponent<TestInput>(props =>
-            {
-                props.Add(r => r.MockShowDetails, false);
-            });
-            var input = cut.Instance;
-            var classes = input.CssProvider.GetClass();
-
-            // Assert
-            Assert.IsFalse(input.ShowDetails);
-            Assert.AreEqual("m-input m-input--hide-details theme--light", classes);
-        }
-
-        [TestMethod]
-        public void RenderValidationStateShouldPassedToLabel()
+        public void RenderInputNoWithWithLight()
         {
             // Act
             var cut = RenderComponent<TestInput>(props =>
@@ -111,8 +99,8 @@ namespace MASA.Blazor.Test.Input
 
             // Assert
             Assert.AreEqual("error", cut.Instance.ValidationState);
-            Assert.IsTrue(label.Properties.ContainsKey("Color"));
-            Assert.AreEqual("error", label.Properties["Color"]);
+            Assert.IsTrue(label.Attributes.ContainsKey("Color"));
+            Assert.AreEqual("error", label.Attributes["Color"]);
         }
 
         [DataTestMethod]
@@ -172,41 +160,43 @@ namespace MASA.Blazor.Test.Input
             // Act
             var cut = RenderComponent<MInput<string>>(props =>
             {
-                props.Add(r => r.Dark, true);
+                props.Add(input => input.Light, false);
             });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-input");
 
             // Assert
-            Assert.IsTrue(cut.Instance.IsDark);
+            Assert.IsTrue(hasLightClass);
         }
 
         [TestMethod]
-        public void RenderThemeableIsDarkShouldBeTrue()
+        public void RenderInputWithWithDense()
         {
-            // Arrange
-            var mock = new Mock<IThemeable>();
-            mock.Setup(r => r.IsDark).Returns(true);
-
-            // Act
+            //Act
             var cut = RenderComponent<MInput<string>>(props =>
             {
-                props.AddCascadingValue(mock.Object);
+                props.Add(input => input.Dense, true);
             });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-input--dense");
 
             // Assert
-            Assert.IsTrue(cut.Instance.IsDark);
+            Assert.IsTrue(hasLightClass);
         }
 
         [TestMethod]
-        public void RenderLightIsDarkShouldBeFalse()
+        public void RenderInputNoWithWithDense()
         {
-            // Act
+            //Act
             var cut = RenderComponent<MInput<string>>(props =>
             {
-                props.Add(r => r.Light, true);
+                props.Add(input => input.Dense, false);
             });
+            var classes = cut.Instance.CssProvider.GetClass();
+            var hasLightClass = classes.Contains("m-input");
 
             // Assert
-            Assert.IsFalse(cut.Instance.IsDark);
+            Assert.IsTrue(hasLightClass);
         }
     }
 }

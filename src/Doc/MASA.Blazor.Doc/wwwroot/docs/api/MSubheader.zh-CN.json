@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MSubheader",
   "Components": [
-    "Subheader"
+    "Subheaders"
   ],
   "Props": [
     {
@@ -43,6 +44,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

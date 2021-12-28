@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MForm",
   "Components": [
-    "Form"
+    "Forms"
   ],
   "Props": [
     {
@@ -44,17 +45,30 @@
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
     }
   ],
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment<EditContext>",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "OnSubmit",
+      "Type": "EventCallback<EventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

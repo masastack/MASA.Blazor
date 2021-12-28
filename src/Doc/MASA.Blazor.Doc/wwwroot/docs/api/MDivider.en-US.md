@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Divider
+title: MDivider
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

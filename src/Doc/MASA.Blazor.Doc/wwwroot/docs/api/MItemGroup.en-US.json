@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MItemGroup",
   "Components": [
-    "ItemGroup"
+    "Item groups"
   ],
   "Props": [
     {
@@ -65,7 +66,7 @@
     },
     {
       "Name": "Values",
-      "Type": "List`1",
+      "Type": "List<StringNumber>",
       "Default": "",
       "Description": ""
     }
@@ -73,16 +74,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<StringNumber>",
       "Description": ""
     },
     {
       "Name": "ValuesChanged",
+      "Type": "EventCallback<List`1>",
       "Description": ""
     }
   ]

@@ -6,22 +6,29 @@ namespace MASA.Blazor
 {
     public partial class MMain : BMain, IMain
     {
+        private readonly string[] _applicationProperties = new string[]
+        {
+            "Top","Bar","Right","Footer","InsetFooter","Bottom","Left"
+        };
+
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
-
-            GlobalConfig.Application.PropertyChanged += Application_PropertyChanged;
+            MasaBlazor.Application.PropertyChanged += OnApplicationPropertyChanged;
         }
 
-        private void Application_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnApplicationPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            InvokeStateHasChanged();
+            if (_applicationProperties.Contains(e.PropertyName))
+            {
+                InvokeStateHasChanged();
+            }
         }
 
         protected override void SetComponentClass()
@@ -34,10 +41,10 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .Add($"padding-top:{GlobalConfig.Application.Top + GlobalConfig.Application.Bar}px")
-                        .Add($"padding-right:{GlobalConfig.Application.Right}px")
-                        .Add($"padding-bottom:{GlobalConfig.Application.Footer + GlobalConfig.Application.InsetFooter + GlobalConfig.Application.Bottom}px")
-                        .Add($"padding-left:{GlobalConfig.Application.Left}px");
+                        .Add($"padding-top:{MasaBlazor.Application.Top + MasaBlazor.Application.Bar}px")
+                        .Add($"padding-right:{MasaBlazor.Application.Right}px")
+                        .Add($"padding-bottom:{MasaBlazor.Application.Footer + MasaBlazor.Application.InsetFooter + MasaBlazor.Application.Bottom}px")
+                        .Add($"padding-left:{MasaBlazor.Application.Left}px");
                 })
                 .Apply("wrap", cssBuilder =>
                 {
@@ -46,8 +53,20 @@ namespace MASA.Blazor
                 });
 
             Attributes.Add("data-booted", true);
-            GlobalConfig.Application.IsBooted = true;
-            AbstractProvider.ApplyMainDefault();
+
+            AbstractProvider
+                .ApplyMainDefault();
+        }
+
+        protected override void OnParametersSet()
+        {
+            MasaBlazor.Application.IsBooted = true;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            MasaBlazor.Application.PropertyChanged -= OnApplicationPropertyChanged;
+            base.Dispose(disposing);
         }
     }
 }

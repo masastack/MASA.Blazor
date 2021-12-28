@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MDataTableRow",
   "Components": [
-    "DataTableRow"
+    "Data tables"
   ],
   "Props": [
     {
@@ -11,7 +12,7 @@
     },
     {
       "Name": "Headers",
-      "Type": "List`1",
+      "Type": "List<DataTableHeader`1>",
       "Default": "null",
       "Description": ""
     },
@@ -29,13 +30,13 @@
     },
     {
       "Name": "IsExpanded",
-      "Type": "Func`2",
+      "Type": "Func<TItem,Boolean>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "IsSelected",
-      "Type": "Func`2",
+      "Type": "Func<TItem,Boolean>",
       "Default": "null",
       "Description": ""
     },
@@ -67,10 +68,12 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "ItemColContent",
+      "Type": "RenderFragment<ItemColProps`1>",
       "Description": ""
     }
   ],

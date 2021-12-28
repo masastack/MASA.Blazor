@@ -13,18 +13,28 @@ namespace MASA.Blazor
 {
     public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TItem, TItemValue, TValue>
     {
-        private bool _shouldReformatText = true;
-
         private bool _visible;
+
+        protected BMenuProps ComputedMenuProps { get; set; }
+
+        protected virtual BMenuProps GetDefaultMenuProps() => new()
+        {
+            CloseOnClick = true, 
+            CloseOnContentClick = false,
+            DisableKeys = true,
+            OpenOnClick = true, 
+            MaxHeight = 304,
+        };
+
         protected bool Visible
         {
-            get => MenuProps == null ? _visible : MenuProps.Visible;
+            get => MenuProps == null ? _visible : ComputedMenuProps.Visible;
             set
             {
                 if (MenuProps == null)
                     _visible = value;
                 else
-                    MenuProps.Visible = value;
+                    ComputedMenuProps.Visible = value;
             }
         }
 
@@ -47,41 +57,20 @@ namespace MASA.Blazor
         public bool DeletableChips { get; set; }
 
         [Parameter]
-        public BMenuProps MenuProps { get; set; }
+        public Action<BMenuProps> MenuProps { get; set; }
+
+        [EditorRequired]
+        [Parameter]
+        public Func<TItem, string> ItemText { get; set; }
+
+        [EditorRequired]
+        [Parameter]
+        public Func<TItem, TItemValue> ItemValue { get; set; }
 
         [Parameter]
-        public override TValue Value
-        {
-            get => base.Value;
-            set
-            {
-                base.Value = value;
+        public Func<TItem, bool> ItemDisabled { get; set; } = item => false;
 
-                if (_shouldReformatText && ItemValue != null)
-                {
-                    if (Multiple)
-                    {
-                        Text = FormatText(Values);
-                    }
-                    else
-                    {
-                        Text = FormatText(value);
-                    }
-                }
-
-                _shouldReformatText = true;
-            }
-        }
-
-        [Parameter]
-        public Func<TItem, string> ItemText { get; set; } = null!;
-
-        [Parameter]
-        public Func<TItem, TItemValue> ItemValue { get; set; } = null!;
-
-        [Parameter]
-        public Func<TItem, bool> ItemDisabled { get; set; } = (item) => false;
-
+        [EditorRequired]
         [Parameter]
         public IReadOnlyList<TItem> Items { get; set; } = new List<TItem>();
 
@@ -92,9 +81,40 @@ namespace MASA.Blazor
         public RenderFragment AppendItemContent { get; set; }
 
         [Parameter]
-        public RenderFragment<int> SelectionContent { get; set; }
+        public RenderFragment<SelectSelectionProps<TItem>> SelectionContent { get; set; }
 
-        public List<string> Text { get; set; } = new();
+        [Parameter]
+        public RenderFragment<SelectListItemProps<TItem>> ItemContent { get; set; }
+
+        [Parameter]
+        public EventCallback<TItem> OnSelectedItemUpdate { get; set; }
+
+        [Parameter]
+        public bool HideSelected { get; set; }
+
+        [Parameter]
+        public bool HideNoData { get; set; }
+
+        [Parameter]
+        public RenderFragment NoDataContent { get; set; }
+
+        public virtual List<string> Text
+        {
+            get
+            {
+                if (Multiple)
+                {
+                    return FormatText(Values);
+                }
+
+                if (InternalValue is TValue value)
+                {
+                    return FormatText(value);
+                }
+
+                return new List<string>();
+            }
+        }
 
         public override bool IsDirty => SelectedItems.Count > 0;
 
@@ -103,8 +123,7 @@ namespace MASA.Blazor
         public override Dictionary<string, object> InputAttrs => new()
         {
             { "type", Type },
-            //TODO:this may change
-            { "value", Chips ? "" : string.Join(',', FormatText(InternalValue)) },
+            { "value", null },
             { "readonly", true }
         };
 
@@ -116,12 +135,12 @@ namespace MASA.Blazor
         {
             get
             {
-                if (Value is IList<TItemValue> values)
+                if (InternalValue is IList<TItemValue> values)
                 {
                     return values;
                 }
 
-                if (Value is TItemValue value)
+                if (InternalValue is TItemValue value)
                 {
                     return new List<TItemValue>
                     {
@@ -134,7 +153,7 @@ namespace MASA.Blazor
         }
 
         public IList<TItem> SelectedItems => Items
-                .Where(u => Values.Contains(ItemValue(u))).ToList();
+            .Where(u => Values.Contains(ItemValue(u))).ToList();
 
         public object Menu { get; set; }
 
@@ -159,14 +178,29 @@ namespace MASA.Blazor
                 .Select(ItemText).ToList();
         }
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            ComputedMenuProps = GetDefaultMenuProps();
+            MenuProps?.Invoke(ComputedMenuProps);
+        }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
+
             if (firstRender)
             {
                 await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
-
                 await (Menu as MMenu)?.UpdateActivator(InputSlotElement);
             }
+        }
+
+        public override Task HandleOnAppendClickAsync(MouseEventArgs args)
+        {
+            Visible = true;
+            return base.HandleOnAppendClickAsync(args);
         }
 
         protected override void SetComponentClass()
@@ -224,55 +258,51 @@ namespace MASA.Blazor
                 .Apply(typeof(BSelectHiddenInput<,,,>), typeof(BSelectHiddenInput<TItem, TItemValue, TValue, MSelect<TItem, TItemValue, TValue>>))
                 .Apply(typeof(BSelectMenu<,,,>), typeof(BSelectMenu<TItem, TItemValue, TValue, MSelect<TItem, TItemValue, TValue>>))
                 .Apply(typeof(BSelectSelections<,,,>), typeof(BSelectSelections<TItem, TItemValue, TValue, MSelect<TItem, TItemValue, TValue>>))
-                .Apply<BMenu, MMenu>(props =>
+                .Apply<BMenu, MMenu>(attrs =>
                 {
-                    props[nameof(MMenu.Value)] = Visible;
-                    props[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, async (v) =>
-                     {
-                         Visible = v;
+                    attrs[nameof(MMenu.Value)] = Visible;
+                    attrs[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, async (v) =>
+                    {
+                        Visible = v;
 
-                         if (v)
-                         {
-                             await InputElement.FocusAsync();
-                         }
-                     });
-                    props[nameof(MMenu.Disabled)] = Disabled || Readonly;
-                    props[nameof(MMenu.OffsetY)] = MenuProps?.OffsetY;
-                    props[nameof(MMenu.OffsetX)] = MenuProps?.OffsetX;
-                    props[nameof(MMenu.CloseOnContentClick)] = false;
-                    props[nameof(MMenu.Top)] = MenuProps?.Top;
-                    props[nameof(MMenu.Right)] = MenuProps?.Right;
-                    props[nameof(MMenu.Bottom)] = MenuProps?.Bottom;
-                    props[nameof(MMenu.Left)] = MenuProps?.Left;
-                    props[nameof(MMenu.NudgeTop)] = MenuProps?.NudgeTop;
-                    props[nameof(MMenu.NudgeRight)] = MenuProps?.NudgeRight;
-                    props[nameof(MMenu.NudgeBottom)] = MenuProps?.NudgeBottom;
-                    props[nameof(MMenu.NudgeLeft)] = MenuProps?.NudgeLeft;
-                    props[nameof(MMenu.NudgeWidth)] = MenuProps?.NudgeWidth;
-                    props[nameof(MMenu.MaxHeight)] = MenuProps?.MaxHeight ?? 400;
-                    props[nameof(MMenu.MinWidth)] = MenuProps?.MinWidth;
+                        if (v)
+                        {
+                            await InputElement.FocusAsync();
+                        }
+                    });
+                    attrs[nameof(MMenu.Disabled)] = Disabled || Readonly;
+
+                    attrs[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
+                    attrs[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;
+                    attrs[nameof(MMenu.CloseOnContentClick)] = ComputedMenuProps.CloseOnContentClick;
+                    attrs[nameof(MMenu.DisableKeys)] = ComputedMenuProps.DisableKeys;
+                    attrs[nameof(MMenu.Left)] = ComputedMenuProps.Left;
+                    attrs[nameof(MMenu.MaxHeight)] = ComputedMenuProps.MaxHeight;
+                    attrs[nameof(MMenu.MinWidth)] = ComputedMenuProps.MinWidth;
+                    attrs[nameof(MMenu.NudgeTop)] = ComputedMenuProps.NudgeTop;
+                    attrs[nameof(MMenu.NudgeRight)] = ComputedMenuProps.NudgeRight;
+                    attrs[nameof(MMenu.NudgeBottom)] = ComputedMenuProps.NudgeBottom;
+                    attrs[nameof(MMenu.NudgeLeft)] = ComputedMenuProps.NudgeLeft;
+                    attrs[nameof(MMenu.NudgeWidth)] = ComputedMenuProps.NudgeWidth;
+                    attrs[nameof(MMenu.OffsetX)] = ComputedMenuProps.OffsetX;
+                    attrs[nameof(MMenu.OffsetY)] = ComputedMenuProps.OffsetY;
+                    attrs[nameof(MMenu.OpenOnClick)] = ComputedMenuProps.OpenOnClick;
+                    attrs[nameof(MMenu.Right)] = ComputedMenuProps.Right;
+                    attrs[nameof(MMenu.Top)] = ComputedMenuProps.Top;
                 })
-                .Apply<BList, MList>(props =>
-                {
-                    props[nameof(MList.Dense)] = Dense;
-                })
-                .Apply<BListItem, MListItem>()
+                .Apply<BList, MList>(attrs => { attrs[nameof(MList.Dense)] = Dense; })
+                .Apply<BListItem, MListItem>(attrs => { attrs[nameof(MListItem.Dense)] = Dense; })
                 .Apply<BListItemContent, MListItemContent>()
                 .Apply<BListItemTitle, MListItemTitle>()
-                .Apply(typeof(BSelectList<,,>), typeof(MSelectList<TItem, TItemValue, TValue>))
-                .Apply<BChip, MChip>(props =>
+                .Apply(typeof(BSelectList<,,>), typeof(MSelectList<TItem, TItemValue, TValue>),
+                    attrs => { attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemContent)] = ItemContent; })
+                .Apply<BChip, MChip>(attrs =>
                 {
-                    props[nameof(MChip.Close)] = DeletableChips && (!IsDisabled && !IsReadonly);
-                    props[nameof(MChip.Disabled)] = IsDisabled;
-                    props[nameof(MChip.Class)] = "m-chip--select";
-                    props[nameof(MChip.Small)] = SmallChips;
+                    attrs[nameof(MChip.Close)] = DeletableChips && (!IsDisabled && !IsReadonly);
+                    attrs[nameof(MChip.Disabled)] = IsDisabled;
+                    attrs[nameof(MChip.Class)] = "m-chip--select";
+                    attrs[nameof(MChip.Small)] = SmallChips;
                 });
-        }
-
-        public override Task HandleOnBlurAsync(FocusEventArgs args)
-        {
-            // SetVisible(false);
-            return base.HandleOnBlurAsync(args);
         }
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
@@ -288,6 +318,7 @@ namespace MASA.Blazor
                     {
                         HighlightIndex = ComputedItems.Count - 1;
                     }
+
                     break;
                 case "ArrowDown":
                     if (HighlightIndex < ComputedItems.Count - 1)
@@ -298,6 +329,7 @@ namespace MASA.Blazor
                     {
                         HighlightIndex = 0;
                     }
+
                     break;
                 case "Enter":
                     if (HighlightIndex > -1 && HighlightIndex < ComputedItems.Count)
@@ -324,6 +356,7 @@ namespace MASA.Blazor
                             }
                         }
                     }
+
                     break;
                 default:
                     break;
@@ -343,17 +376,14 @@ namespace MASA.Blazor
             InvokeStateHasChanged();
         }
 
-        public Task SetSelectedAsync(string text, TItemValue value)
+        public async Task SetSelectedAsync(string text, TItemValue value)
         {
-            _shouldReformatText = false;
-
             if (Multiple)
             {
                 IList<TItemValue> values = Values;
                 if (!values.Contains(value))
                 {
                     values.Add(value);
-                    Text.Add(text);
                     InternalValue = (TValue)values;
                 }
             }
@@ -362,24 +392,29 @@ namespace MASA.Blazor
                 if (value is TValue val)
                 {
                     InternalValue = val;
-
-                    Text.Clear();
-                    Text.Add(text);
                 }
             }
 
-            return Task.CompletedTask;
+            if (OnSelectedItemUpdate.HasDelegate)
+            {
+                var selectedItem = Items.FirstOrDefault(item => EqualityComparer<TItemValue>.Default.Equals(ItemValue(item), value));
+                await OnSelectedItemUpdate.InvokeAsync(selectedItem);
+            }
+
+            //TODO: Refactor MSelectList
+            StateHasChanged();
         }
 
         public Task RemoveSelectedAsync(string text, TItemValue value)
         {
-            _shouldReformatText = false;
-
             var values = Values;
             values.Remove(value);
 
             Text.Remove(text);
             InternalValue = (TValue)values;
+
+            //TODO: Refactor MSelectList
+            StateHasChanged();
 
             return Task.CompletedTask;
         }

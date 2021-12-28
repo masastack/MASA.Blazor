@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MSelectList",
   "Components": [
-    "SelectList"
+    "Selects"
   ],
   "Props": [
     {
@@ -52,6 +53,12 @@
       "Description": ""
     },
     {
+      "Name": "Loading",
+      "Type": "StringBoolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",
@@ -64,6 +71,12 @@
       "Description": ""
     }
   ],
-  "Contents": [],
+  "Contents": [
+    {
+      "Name": "ItemContent",
+      "Type": "RenderFragment<SelectListItemProps`1>",
+      "Description": ""
+    }
+  ],
   "Events": []
 }

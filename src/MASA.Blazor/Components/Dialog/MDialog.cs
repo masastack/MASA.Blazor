@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 using Element = BlazorComponent.Web.Element;
 
 namespace MASA.Blazor
@@ -16,19 +17,20 @@ namespace MASA.Blazor
 
         protected override string AttachSelector => Attach ?? ".m-application";
 
-        public bool ShowContent { get; set; }
-
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
+
+        [Parameter]
+        public string ContentClass { get; set; }
 
         [Parameter]
         public bool Dark { get; set; }
 
         [Parameter]
-        public bool Fullscreen { get; set; } //TODO:watch fullscreen =>(hideScroll or showScroll) and (removeOverlay or genOverlay)
+        public bool Light { get; set; }
 
         [Parameter]
-        public bool Light { get; set; }
+        public string Origin { get; set; } = "center center";
 
         [Parameter]
         public bool Scrollable { get; set; }
@@ -60,7 +62,7 @@ namespace MASA.Blazor
             {
                 var attrs = new Dictionary<string, object>
                 {
-                    {"role", "document"}
+                    { "role", "document" }
                 };
                 if (Value)
                 {
@@ -97,6 +99,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add(prefix)
+                        .Add(ContentClass)
                         .AddIf($"{prefix}--active", () => Value)
                         .AddIf($"{prefix}--persistent", () => Persistent)
                         .AddIf($"{prefix}--fullscreen", () => Fullscreen)
@@ -105,67 +108,103 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .Add("transform-origin: center center")
+                        .Add($"transform-origin: {Origin}")
                         .AddWidth(Width)
                         .AddMaxWidth(MaxWidth);
                 });
 
             AbstractProvider
-                .Apply<BOverlay, MOverlay>(props =>
+                .Apply<BOverlay, MOverlay>(attrs =>
                 {
-                    props[nameof(MOverlay.Value)] = Value;
-                    props[nameof(MOverlay.ZIndex)] = ZIndex - 1;
-                    props[nameof(MOverlay.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, async () =>
-                    {
-                        if (Persistent)
-                        {
-                            _animated = true;
-                            await Task.Delay(150);
-                            _animated = false;
-                        }
-                        else
-                        {
-                            await UpdateValue(false);
-                        }
-
-                        if (OnOutsideClick.HasDelegate)
-                            await OnOutsideClick.InvokeAsync();
-                    });
+                    attrs[nameof(MOverlay.Value)] = ShowOverlay && Value;
+                    attrs[nameof(MOverlay.ZIndex)] = ZIndex - 1;
                 })
                 .ApplyDialogDefault();
+        }
+
+        private async Task AfterShowContent()
+        {
+            await JsInvokeAsync(JsInteropConstants.AddOutsideClickEventListener,
+                DotNetObjectReference.Create(new Invoker<object>(OutsideClick)),
+                new[] { Document.GetElementByReference(DialogRef).Selector },
+                new[] { Document.GetElementByReference(OverlayRef!.Value).Selector });
+        }
+
+        private async Task AnimateClick()
+        {
+            _animated = true;
+            await InvokeStateHasChangedAsync();
+
+            await Task.Delay(150);
+
+            _animated = false;
+            await InvokeStateHasChangedAsync();
+        }
+
+        public async Task Keydown(KeyboardEventArgs args)
+        {
+            if (args.Key == "Escape")
+            {
+                await Close();
+            }
         }
 
         protected override async Task Close()
         {
             if (Persistent)
             {
-                _animated = true;
-                await Task.Delay(150);
-                _animated = false;
-
+                await AnimateClick();
                 return;
             }
 
             await base.Close();
         }
 
-        public override async Task ShowLazyContent()
+        private bool CloseConditional()
+        {
+            return IsActive;
+        }
+
+        protected async Task OutsideClick(object _)
+        {
+            if (!CloseConditional()) return;
+
+            if (OnOutsideClick.HasDelegate)
+                await OnOutsideClick.InvokeAsync();
+
+            if (Persistent)
+            {
+                await AnimateClick();
+                return;
+            }
+
+            await UpdateValue(false);
+
+            await InvokeStateHasChangedAsync();
+        }
+
+        protected override async Task ShowLazyContent()
         {
             if (!ShowContent && Value)
             {
                 ShowContent = true;
                 Value = false;
 
-                StateHasChanged();
+                await InvokeStateHasChangedAsync();
+                await Task.Delay(16);
 
+                await AfterShowContent();
                 Value = true;
 
-                var overlayElement = ((BDomComponentBase)Overlay.Instance).Ref;
-                await JsInvokeAsync(JsInteropConstants.AddElementTo, overlayElement, AttachSelector);
-                await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachSelector);
-
-                StateHasChanged();
+                await MoveContentTo();
+                await InvokeStateHasChangedAsync();
             }
+        }
+
+        private async Task MoveContentTo()
+        {
+            await JsInvokeAsync(JsInteropConstants.AddElementTo, OverlayRef, AttachSelector);
+            await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachSelector);
         }
     }
 }

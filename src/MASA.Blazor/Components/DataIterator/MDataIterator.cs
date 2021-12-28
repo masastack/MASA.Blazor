@@ -80,24 +80,24 @@ namespace MASA.Blazor
         [Parameter]
         public IEnumerable<TItem> Value
         {
-            get
-            {
-                return GetValue<IEnumerable<TItem>>();
-            }
-            set
-            {
-                SetValue(value);
-            }
+            get => GetValue<IEnumerable<TItem>>();
+            set => SetValue(value);
         }
 
         [Parameter]
         public EventCallback<IEnumerable<TItem>> ValueChanged { get; set; }
 
-        public bool EveryItem => SelectableItems.Any() && SelectableItems.All(item => IsSelected(item));
+        [Parameter]
+        public Action<TItem, bool> OnItemSelect { get; set; }
 
-        public bool SomeItems => SelectableItems.Any(item => IsSelected(item));
+        [Parameter]
+        public Action<IEnumerable<TItem>, bool> OnToggleSelectAll { get; set; }
 
-        public IEnumerable<TItem> SelectableItems => ComputedItems.Where(item => IsSelectable(item));
+        public bool EveryItem => SelectableItems.Any() && SelectableItems.All(IsSelected);
+
+        public bool SomeItems => SelectableItems.Any(IsSelected);
+
+        public IEnumerable<TItem> SelectableItems => ComputedItems.Where(IsSelectable);
 
         public bool IsEmpty => !Items.Any() || Pagination.ItemsLength == 0;
 
@@ -134,18 +134,19 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyDataIteratorDefault<TItem>()
-                .Apply<BDataFooter, MDataFooter>(props =>
+                .Apply<BDataFooter, MDataFooter>(attrs =>
                 {
-                    props[nameof(MDataFooter.PageTextContent)] = PageTextContent;
-                    props[nameof(MDataFooter.Options)] = InternalOptions;
-                    props[nameof(MDataFooter.Pagination)] = Pagination;
-                    props[nameof(MDataFooter.OnOptionsUpdate)] = EventCallback.Factory.Create<Action<DataOptions>>(this, options => UpdateOptions(options));
+                    attrs[nameof(MDataFooter.PageTextContent)] = PageTextContent;
+                    attrs[nameof(MDataFooter.Options)] = InternalOptions;
+                    attrs[nameof(MDataFooter.Pagination)] = Pagination;
+                    attrs[nameof(MDataFooter.OnOptionsUpdate)] =
+                        EventCallback.Factory.Create<Action<DataOptions>>(this, options => UpdateOptions(options));
 
                     if (FooterProps != null)
                     {
                         foreach (var prop in FooterProps)
                         {
-                            props[prop.Key] = prop.Value;
+                            attrs[prop.Key] = prop.Value;
                         }
                     }
                 });
@@ -218,22 +219,10 @@ namespace MASA.Blazor
             }
 
             Selection[key] = value;
-            if (ValueChanged.HasDelegate)
-            {
-                bool IsSelected(TItem item)
-                {
-                    var key = ItemKey(item);
-                    if (Selection.ContainsKey(key))
-                    {
-                        return Selection[key];
-                    }
 
-                    return false;
-                }
+            UpdateSelectedItemsAsValue();
 
-                var selectedItems = Items.Where(IsSelected);
-                ValueChanged.InvokeAsync(selectedItems);
-            }
+            OnItemSelect?.Invoke(item, value);
         }
 
         public bool IsSelectable(TItem item)
@@ -245,10 +234,21 @@ namespace MASA.Blazor
         {
             foreach (var item in SelectableItems)
             {
-                if (!IsSelectable(item)) continue;
-
                 var key = ItemKey?.Invoke(item);
                 Selection[key] = value;
+            }
+            
+            UpdateSelectedItemsAsValue();
+            
+            OnToggleSelectAll?.Invoke(SelectableItems, value);
+        }
+
+        private void UpdateSelectedItemsAsValue()
+        {
+            if (ValueChanged.HasDelegate)
+            {
+                var selectedItems = Items.Where(IsSelected);
+                ValueChanged.InvokeAsync(selectedItems);
             }
         }
     }

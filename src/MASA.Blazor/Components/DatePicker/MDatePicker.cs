@@ -123,10 +123,13 @@ namespace MASA.Blazor
         public EventCallback<TValue> ValueChanged { get; set; }
 
         [Parameter]
+        public EventCallback OnInput { get; set; }
+
+        [Parameter]
         public Func<DateOnly, string> WeekdayFormat { get; set; }
 
         [Parameter]
-        public Func<int, string> YearFormat { get; set; }
+        public Func<DateOnly, string> YearFormat { get; set; }
 
         [Parameter]
         public string YearIcon { get; set; }
@@ -142,6 +145,9 @@ namespace MASA.Blazor
 
         [Parameter]
         public EventCallback<DatePickerType> OnActivePickerUpdate { get; set; }
+
+        [Parameter]
+        public string Locale { get; set; } = "en-US";
 
         protected DateOnly TableDate
         {
@@ -167,13 +173,13 @@ namespace MASA.Blazor
 
         protected DateOnly? MaxYear => Max != null ? new DateOnly(Max.Value.Year, 1, 1) : null;
 
-        public (Func<int, string> Year, Func<IList<DateOnly>, string> TitleDate) Formatters => (YearFormat, TitleDateFormat ?? DefaultTitleDateFormatter);
+        public (Func<DateOnly, string> Year, Func<IList<DateOnly>, string> TitleDate) Formatters => (YearFormat ?? DateFormatters.Year(Locale), TitleDateFormat ?? DefaultTitleDateFormatter);
 
         public Func<IList<DateOnly>, string> DefaultTitleDateFormatter
         {
             get
             {
-                return values => IsMultiple && values.Count > 1 ? $"{values.Count} selected" : values.Count > 0 ? (Type == DatePickerType.Date ? $"{values[0].DayOfWeek.ToString()[..3]}, {(Landscape ? "<br>" : "")}{DatePickerFormatter.Month(values[0].Month)[..3]} {values[0].Day}" : $"{DatePickerFormatter.Month(values[0].Month)}"
+                return values => IsMultiple && values.Count > 1 ? $"{values.Count} selected" : values.Count > 0 ? (Type == DatePickerType.Date ? $"{values[0].DayOfWeek.ToString()[..3]}, {(Landscape ? "<br>" : "")}{DateFormatters.Month(values[0].Month)[..3]} {values[0].Day}" : $"{DateFormatters.Month(values[0].Month)}"
                 ) : "-";
             }
         }
@@ -237,12 +243,18 @@ namespace MASA.Blazor
                     {
                         OnActivePickerUpdate.InvokeAsync(val);
                     }
+                })
+                .Watch<TValue>(nameof(Value), val =>
+                {
+                    var multipleValue = WrapInArray(val);
+                    TableDate = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now.AddMonths(1)));
                 });
 
             InternalActivePicker = ActivePicker ?? Type;
+
+            //Init TableDate
             var multipleValue = WrapInArray(Value);
-            var date = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now.AddMonths(1)));
-            TableDate = date;
+            TableDate = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now.AddMonths(1)));
         }
 
         private IList<DateOnly> WrapInArray(TValue value)
@@ -277,107 +289,111 @@ namespace MASA.Blazor
 
             AbstractProvider
                 .ApplyDatePickerDefault()
-                .Apply(typeof(BPicker), typeof(MPicker), props =>
+                .Apply(typeof(BPicker), typeof(MPicker), attrs =>
                 {
-                    props[nameof(MPicker.Color)] = HeaderColor ?? Color;
-                    props[nameof(MPicker.Dark)] = Dark;
-                    props[nameof(MPicker.Elevation)] = Elevation;
-                    props[nameof(MPicker.Flat)] = Flat;
-                    props[nameof(MPicker.FullWidth)] = FullWidth;
-                    props[nameof(MPicker.Landscape)] = Landscape;
-                    props[nameof(MPicker.Light)] = Light;
-                    props[nameof(MPicker.Width)] = Width;
-                    props[nameof(MPicker.NoTitle)] = NoTitle;
+                    attrs[nameof(MPicker.Color)] = HeaderColor ?? Color;
+                    attrs[nameof(MPicker.Dark)] = Dark;
+                    attrs[nameof(MPicker.Elevation)] = Elevation;
+                    attrs[nameof(MPicker.Flat)] = Flat;
+                    attrs[nameof(MPicker.FullWidth)] = FullWidth;
+                    attrs[nameof(MPicker.Landscape)] = Landscape;
+                    attrs[nameof(MPicker.Light)] = Light;
+                    attrs[nameof(MPicker.Width)] = Width;
+                    attrs[nameof(MPicker.NoTitle)] = NoTitle;
                 })
-                .Apply(typeof(BDatePickerTitle), typeof(MDatePickerTitle), props =>
+                .Apply(typeof(BDatePickerTitle), typeof(MDatePickerTitle), attrs =>
                 {
-                    props[nameof(MDatePickerTitle.Date)] = Formatters.TitleDate(MultipleValue);
-                    props[nameof(MDatePickerTitle.Disabled)] = Disabled;
-                    props[nameof(MDatePickerTitle.Readonly)] = Readonly;
-                    props[nameof(MDatePickerTitle.SelectingYear)] = InternalActivePicker == DatePickerType.Year;
-                    props[nameof(MDatePickerTitle.Year)] = TableDate.Year;
-                    props[nameof(MDatePickerTitle.YearIcon)] = YearIcon;
-                    props[nameof(MDatePickerTitle.Value)] = MultipleValue.FirstOrDefault();
-                    props[nameof(MDatePickerTitle.OnSelectingYearUpdate)] = CreateEventCallback<bool>(value =>
+                    attrs[nameof(MDatePickerTitle.Date)] = Formatters.TitleDate(MultipleValue);
+                    attrs[nameof(MDatePickerTitle.Disabled)] = Disabled;
+                    attrs[nameof(MDatePickerTitle.Readonly)] = Readonly;
+                    attrs[nameof(MDatePickerTitle.SelectingYear)] = InternalActivePicker == DatePickerType.Year;
+                    attrs[nameof(MDatePickerTitle.Year)] = Formatters.Year(new DateOnly(TableDate.Year, 1, 1));
+                    attrs[nameof(MDatePickerTitle.YearIcon)] = YearIcon;
+                    attrs[nameof(MDatePickerTitle.Value)] = MultipleValue.FirstOrDefault();
+                    attrs[nameof(MDatePickerTitle.OnSelectingYearUpdate)] = CreateEventCallback<bool>(value =>
                     {
                         InternalActivePicker = value ? DatePickerType.Year : Type;
                     });
                 })
-                .Apply(typeof(BDatePickerYears), typeof(MDatePickerYears), props =>
+                .Apply(typeof(BDatePickerYears), typeof(MDatePickerYears), attrs =>
                 {
-                    props[nameof(MDatePickerYears.Color)] = Color;
-                    props[nameof(MDatePickerYears.Format)] = YearFormat;
-                    props[nameof(MDatePickerYears.Min)] = MinYear;
-                    props[nameof(MDatePickerYears.Max)] = MaxYear;
-                    props[nameof(MDatePickerYears.Value)] = TableYear;
-                    props[nameof(MDatePickerYears.OnInput)] = CreateEventCallback<int>(year =>
+                    attrs[nameof(MDatePickerYears.Color)] = Color;
+                    attrs[nameof(MDatePickerYears.Format)] = YearFormat;
+                    attrs[nameof(MDatePickerYears.Min)] = MinYear;
+                    attrs[nameof(MDatePickerYears.Max)] = MaxYear;
+                    attrs[nameof(MDatePickerYears.Value)] = TableYear;
+                    attrs[nameof(MDatePickerYears.Locale)] = Locale;
+                    attrs[nameof(MDatePickerYears.OnInput)] = CreateEventCallback<int>(year =>
                     {
                         TableDate = new DateOnly(year, TableDate.Month, TableDate.Day);
                         InternalActivePicker = DatePickerType.Month;
                     });
                 })
-                .Apply(typeof(BDatePickerHeader), typeof(MDatePickerHeader), props =>
+                .Apply(typeof(BDatePickerHeader), typeof(MDatePickerHeader), attrs =>
                 {
-                    props[nameof(MDatePickerHeader.NextIcon)] = NextIcon;
-                    props[nameof(MDatePickerHeader.Color)] = Color;
-                    props[nameof(MDatePickerHeader.Dark)] = Dark;
-                    props[nameof(MDatePickerHeader.Disabled)] = Disabled;
-                    props[nameof(MDatePickerHeader.Format)] = HeaderDateFormat;
-                    props[nameof(MDatePickerHeader.Light)] = Light;
-                    props[nameof(MDatePickerHeader.Min)] = InternalActivePicker == DatePickerType.Date ? MinMonth : MinYear;
-                    props[nameof(MDatePickerHeader.Max)] = InternalActivePicker == DatePickerType.Date ? MaxMonth : MaxYear;
-                    props[nameof(MDatePickerHeader.PrevIcon)] = PrevIcon;
-                    props[nameof(MDatePickerHeader.Readonly)] = Readonly;
-                    props[nameof(MDatePickerHeader.ActivePicker)] = InternalActivePicker;
-                    props[nameof(MDatePickerHeader.Value)] = new DateOnly(TableYear, TableMonth + 1, 1);
-                    props[nameof(MDatePickerHeader.OnInput)] = CreateEventCallback<DateOnly>(value =>
-                   {
-                       TableDate = value;
-                   });
-                    props[nameof(MDatePickerHeader.OnToggle)] = EventCallback.Factory.Create(this, () =>
+                    attrs[nameof(MDatePickerHeader.NextIcon)] = NextIcon;
+                    attrs[nameof(MDatePickerHeader.Color)] = Color;
+                    attrs[nameof(MDatePickerHeader.Dark)] = Dark;
+                    attrs[nameof(MDatePickerHeader.Disabled)] = Disabled;
+                    attrs[nameof(MDatePickerHeader.Format)] = HeaderDateFormat;
+                    attrs[nameof(MDatePickerHeader.Light)] = Light;
+                    attrs[nameof(MDatePickerHeader.Min)] = InternalActivePicker == DatePickerType.Date ? MinMonth : MinYear;
+                    attrs[nameof(MDatePickerHeader.Max)] = InternalActivePicker == DatePickerType.Date ? MaxMonth : MaxYear;
+                    attrs[nameof(MDatePickerHeader.PrevIcon)] = PrevIcon;
+                    attrs[nameof(MDatePickerHeader.Readonly)] = Readonly;
+                    attrs[nameof(MDatePickerHeader.Locale)] = Locale;
+                    attrs[nameof(MDatePickerHeader.ActivePicker)] = InternalActivePicker;
+                    attrs[nameof(MDatePickerHeader.Value)] = Type == DatePickerType.Date ? new DateOnly(TableYear, TableMonth + 1, 1) : new DateOnly(TableYear, 1, 1);
+                    attrs[nameof(MDatePickerHeader.OnInput)] = CreateEventCallback<DateOnly>(value =>
+                    {
+                        TableDate = value;
+                    });
+                    attrs[nameof(MDatePickerHeader.OnToggle)] = EventCallback.Factory.Create(this, () =>
                     {
                         InternalActivePicker = InternalActivePicker == DatePickerType.Date ? DatePickerType.Month : DatePickerType.Year;
                     });
                 })
-                .Apply<BDatePickerTable, MDatePickerDateTable<TValue>>("date-table", props =>
+                .Apply<BDatePickerTable, MDatePickerDateTable<TValue>>("date-table", attrs =>
                 {
-                    props[nameof(MDatePickerDateTable<TValue>.AllowedDates)] = AllowedDates;
-                    props[nameof(MDatePickerDateTable<TValue>.Color)] = Color;
-                    props[nameof(MDatePickerDateTable<TValue>.Current)] = Current;
-                    props[nameof(MDatePickerDateTable<TValue>.Dark)] = Dark;
-                    props[nameof(MDatePickerDateTable<TValue>.Disabled)] = Disabled;
-                    props[nameof(MDatePickerDateTable<TValue>.FirstDayOfWeek)] = FirstDayOfWeek;
-                    props[nameof(MDatePickerDateTable<TValue>.Format)] = DayFormat;
-                    props[nameof(MDatePickerDateTable<TValue>.Light)] = Light;
-                    props[nameof(MDatePickerDateTable<TValue>.Min)] = Min;
-                    props[nameof(MDatePickerDateTable<TValue>.Max)] = Max;
-                    props[nameof(MDatePickerDateTable<TValue>.Range)] = Range;
-                    props[nameof(MDatePickerDateTable<TValue>.Readonly)] = Readonly;
-                    props[nameof(MDatePickerDateTable<TValue>.Scrollable)] = Scrollable;
-                    props[nameof(MDatePickerDateTable<TValue>.ShowAdjacentMonths)] = ShowAdjacentMonths;
-                    props[nameof(MDatePickerDateTable<TValue>.ShowWeek)] = ShowWeek;
-                    props[nameof(MDatePickerDateTable<TValue>.TableDate)] = new DateOnly(TableYear, TableMonth + 1, 1);
-                    props[nameof(MDatePickerDateTable<TValue>.Value)] = IsMultiple ? MultipleValue : Value;
-                    props[nameof(MDatePickerDateTable<TValue>.WeekdayFormat)] = WeekdayFormat;
-                    props[nameof(MDatePickerDateTable<TValue>.OnInput)] = EventCallback.Factory.Create<DateOnly>(this, OnDateClickAsync);
+                    attrs[nameof(MDatePickerDateTable<TValue>.AllowedDates)] = AllowedDates;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Color)] = Color;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Current)] = Current;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Dark)] = Dark;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Disabled)] = Disabled;
+                    attrs[nameof(MDatePickerDateTable<TValue>.FirstDayOfWeek)] = FirstDayOfWeek;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Format)] = DayFormat;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Light)] = Light;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Min)] = Min;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Max)] = Max;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Range)] = Range;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Locale)] = Locale;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Readonly)] = Readonly;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Scrollable)] = Scrollable;
+                    attrs[nameof(MDatePickerDateTable<TValue>.ShowAdjacentMonths)] = ShowAdjacentMonths;
+                    attrs[nameof(MDatePickerDateTable<TValue>.ShowWeek)] = ShowWeek;
+                    attrs[nameof(MDatePickerDateTable<TValue>.TableDate)] = new DateOnly(TableYear, TableMonth + 1, 1);
+                    attrs[nameof(MDatePickerDateTable<TValue>.Value)] = IsMultiple ? MultipleValue : Value;
+                    attrs[nameof(MDatePickerDateTable<TValue>.WeekdayFormat)] = WeekdayFormat;
+                    attrs[nameof(MDatePickerDateTable<TValue>.OnInput)] = EventCallback.Factory.Create<DateOnly>(this, OnDateClickAsync);
                 })
-                .Apply<BDatePickerTable, MDatePickerMonthTable<TValue>>("month-table", props =>
+                .Apply<BDatePickerTable, MDatePickerMonthTable<TValue>>("month-table", attrs =>
                 {
-                    props[nameof(MDatePickerMonthTable<TValue>.AllowedDates)] = Type == DatePickerType.Month ? AllowedDates : null;
-                    props[nameof(MDatePickerMonthTable<TValue>.Color)] = Color;
-                    props[nameof(MDatePickerDateTable<TValue>.Current)] = Current;
-                    props[nameof(MDatePickerMonthTable<TValue>.Dark)] = Dark;
-                    props[nameof(MDatePickerMonthTable<TValue>.Disabled)] = Disabled;
-                    props[nameof(MDatePickerDateTable<TValue>.Format)] = MonthFormat;
-                    props[nameof(MDatePickerMonthTable<TValue>.Light)] = Light;
-                    props[nameof(MDatePickerMonthTable<TValue>.Min)] = MinMonth;
-                    props[nameof(MDatePickerMonthTable<TValue>.Max)] = MaxMonth;
-                    props[nameof(MDatePickerDateTable<TValue>.Range)] = Range;
-                    props[nameof(MDatePickerDateTable<TValue>.Readonly)] = Readonly && Type == DatePickerType.Month;
-                    props[nameof(MDatePickerDateTable<TValue>.Scrollable)] = Scrollable;
-                    props[nameof(MDatePickerMonthTable<TValue>.Value)] = IsMultiple ? MultipleValue : Value;
-                    props[nameof(MDatePickerMonthTable<TValue>.TableDate)] = new DateOnly(TableYear, 1, 1);
-                    props[nameof(MDatePickerMonthTable<TValue>.OnInput)] = EventCallback.Factory.Create<DateOnly>(this, OnMonthClickAsync);
+                    attrs[nameof(MDatePickerMonthTable<TValue>.AllowedDates)] = Type == DatePickerType.Month ? AllowedDates : null;
+                    attrs[nameof(MDatePickerMonthTable<TValue>.Color)] = Color;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Current)] = Current;
+                    attrs[nameof(MDatePickerMonthTable<TValue>.Dark)] = Dark;
+                    attrs[nameof(MDatePickerMonthTable<TValue>.Disabled)] = Disabled;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Format)] = MonthFormat;
+                    attrs[nameof(MDatePickerMonthTable<TValue>.Light)] = Light;
+                    attrs[nameof(MDatePickerMonthTable<TValue>.Min)] = MinMonth;
+                    attrs[nameof(MDatePickerMonthTable<TValue>.Max)] = MaxMonth;
+                    attrs[nameof(MDatePickerMonthTable<TValue>.Locale)] = Locale;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Range)] = Range;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Readonly)] = Readonly && Type == DatePickerType.Month;
+                    attrs[nameof(MDatePickerDateTable<TValue>.Scrollable)] = Scrollable;
+                    attrs[nameof(MDatePickerMonthTable<TValue>.Value)] = IsMultiple ? MultipleValue : Value;
+                    attrs[nameof(MDatePickerMonthTable<TValue>.TableDate)] = new DateOnly(TableYear, 1, 1);
+                    attrs[nameof(MDatePickerMonthTable<TValue>.OnInput)] = EventCallback.Factory.Create<DateOnly>(this, OnMonthClickAsync);
                 });
         }
 
@@ -413,6 +429,12 @@ namespace MASA.Blazor
                 if (ValueChanged.HasDelegate)
                 {
                     await ValueChanged.InvokeAsync(Value);
+                }
+
+                //REVIEW:  
+                if (OnInput.HasDelegate)
+                {
+                    await OnInput.InvokeAsync();
                 }
             }
         }
@@ -458,6 +480,12 @@ namespace MASA.Blazor
             if (ValueChanged.HasDelegate)
             {
                 await ValueChanged.InvokeAsync(Value);
+            }
+
+            //REVIEW:  
+            if (OnInput.HasDelegate)
+            {
+                await OnInput.InvokeAsync();
             }
         }
     }

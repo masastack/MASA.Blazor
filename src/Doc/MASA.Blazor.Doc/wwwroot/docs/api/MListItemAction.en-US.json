@@ -1,6 +1,8 @@
 ﻿{
+  "Title": "MListItemAction",
   "Components": [
-    "ListItemAction"
+    "Lists",
+    "List item groups"
   ],
   "Props": [
     {
@@ -25,6 +27,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

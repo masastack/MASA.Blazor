@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BlazorComponent;
+using BlazorComponent.Web;
 using MASA.Blazor.Helpers;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -48,7 +49,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool IsActive
         {
-            get => _isActive ?? Value;
+            get => _isActive ?? InternalValue;
             set
             {
                 _isActive = value;
@@ -59,8 +60,8 @@ namespace MASA.Blazor
         [Parameter]
         public bool? Ripple { get; set; }
 
-        [Parameter]
-        public EventCallback<bool> OnChange { get; set; }
+        [Inject]
+        public Document Document { get; set; }
 
         public Task HandleOnBlur(FocusEventArgs args)
         {
@@ -123,29 +124,30 @@ namespace MASA.Blazor
                 .Apply(typeof(BCheckboxCheckbox), typeof(BCheckboxCheckbox))
                 .Apply(typeof(BSelectableInput<>), typeof(BSelectableInput<MCheckbox>))
                 .Apply(typeof(BRippleableRipple<>), typeof(BRippleableRipple<MCheckbox>))
-                .Apply(typeof(BIcon), typeof(MIcon), props =>
+                .Apply(typeof(BIcon), typeof(MIcon), attrs =>
                 {
-                    props[nameof(MIcon.Dense)] = Dense;
-                    props[nameof(MIcon.Dark)] = Dark;
-                    props[nameof(MIcon.Light)] = Light;
-                    props[nameof(MIcon.Color)] = ValidationState;
+                    attrs[nameof(MIcon.Dense)] = Dense;
+                    attrs[nameof(MIcon.Dark)] = Dark;
+                    attrs[nameof(MIcon.Light)] = Light;
+                    attrs[nameof(MIcon.Color)] = ValidationState;
                 });
         }
 
-        public override async Task HandleOnClickAsync(MouseEventArgs args)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            Value = !Value;
-            if (OnChange.HasDelegate)
+            if (firstRender)
             {
-                await OnChange.InvokeAsync(Value);
+                //It's used to prevent ripple directive,and we may remove this 
+                var inputSlot = Document.GetElementByReference(InputSlotElement);
+                await inputSlot.AddEventListenerAsync("mousedown", EventCallback.Empty, stopPropagation: true);
+                await inputSlot.AddEventListenerAsync("mouseup", EventCallback.Empty, stopPropagation: true);
             }
-            else
-            {
-                if (ValueChanged.HasDelegate)
-                {
-                    await ValueChanged.InvokeAsync(Value);
-                }
-            }
+        }
+
+        public override Task HandleOnClickAsync(MouseEventArgs args)
+        {
+            InternalValue = !InternalValue;
+            return Task.CompletedTask;
         }
     }
 }

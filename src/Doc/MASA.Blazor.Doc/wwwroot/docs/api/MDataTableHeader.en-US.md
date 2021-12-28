@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: DataTableHeader
+title: MDataTableHeader
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

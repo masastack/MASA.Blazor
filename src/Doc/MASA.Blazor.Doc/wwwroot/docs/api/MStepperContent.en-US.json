@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MStepperContent",
   "Components": [
-    "StepperContent"
+    "Steppers"
   ],
   "Props": [
     {
@@ -31,6 +32,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MBanner",
   "Components": [
-    "Banner"
+    "Banners"
   ],
   "Props": [
     {
@@ -85,24 +86,29 @@
   "Contents": [
     {
       "Name": "ActionsContent",
+      "Type": "RenderFragment<Action>",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "IconContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnIconClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

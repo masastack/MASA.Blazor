@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MSimpleTable",
   "Components": [
-    "SimpleTable"
+    "Simple tables"
   ],
   "Props": [
     {
@@ -67,18 +68,22 @@
   "Contents": [
     {
       "Name": "BottomContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "TopContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "WrapperContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],

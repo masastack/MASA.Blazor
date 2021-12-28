@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MBorder",
   "Components": [
-    "Border"
+    "Borders"
   ],
   "Props": [
     {
@@ -67,6 +68,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

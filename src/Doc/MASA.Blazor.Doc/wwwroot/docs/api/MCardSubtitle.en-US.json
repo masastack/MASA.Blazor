@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MCardSubtitle",
   "Components": [
-    "CardSubtitle"
+    "Cards"
   ],
   "Props": [
     {
@@ -25,6 +26,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

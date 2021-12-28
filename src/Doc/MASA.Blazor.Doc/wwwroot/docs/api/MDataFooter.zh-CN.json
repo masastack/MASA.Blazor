@@ -1,6 +1,8 @@
 ﻿{
+  "Title": "MDataFooter",
   "Components": [
-    "DataFooter"
+    "Data iterators",
+    "Data Tables"
   ],
   "Props": [
     {
@@ -41,7 +43,7 @@
     },
     {
       "Name": "ItemsPerPageOptions",
-      "Type": "IEnumerable`1",
+      "Type": "IEnumerable<OneOf`2>",
       "Default": "null",
       "Description": ""
     },
@@ -109,16 +111,19 @@
   "Contents": [
     {
       "Name": "PageTextContent",
+      "Type": "RenderFragment<ValueTuple`3>",
       "Description": ""
     },
     {
       "Name": "PrependContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnOptionsUpdate",
+      "Type": "EventCallback<Action`1>",
       "Description": ""
     }
   ]

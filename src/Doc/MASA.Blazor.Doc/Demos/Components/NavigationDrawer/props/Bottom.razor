@@ -23,7 +23,7 @@
 
     <MNavigationDrawer @bind-Value="_drawer" Absolute Bottom Temporary>
         <MList Nav Dense>
-            <MListItemGroup Value="_value" ValueChanged="() => _drawer = false" ActiveClass="deep-purple--text text--accent-4">
+            <MListItemGroup Value="_value" ValueChanged="ValueChanged" ActiveClass="deep-purple--text text--accent-4">
                 <MListItem>
                     <MListItemTitle>Foo</MListItemTitle>
                 </MListItem>
@@ -52,4 +52,10 @@
 {
     private bool _drawer = false;
     private StringNumber _value = default;
+
+    void ValueChanged(StringNumber value)
+    {
+        _value = value;
+        _drawer = false;
+    }
 }

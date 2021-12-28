@@ -1,0 +1,21 @@
+﻿<MRow Dense>
+    @foreach (var item in Related)
+    {
+        <MCol @key="item" Cols="12" Sm="6" Lg="4">
+            <RelatedPage Href="@item"></RelatedPage>
+        </MCol>
+    }
+</MRow>
+
+@code {
+
+    [EditorRequired]
+    [Parameter]
+    public string[] Related { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        Related ??= new string[] { };
+    }
+
+}

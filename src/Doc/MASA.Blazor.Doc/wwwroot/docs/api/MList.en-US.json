@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MList",
   "Components": [
-    "List"
+    "Lists"
   ],
   "Props": [
     {
@@ -157,6 +158,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

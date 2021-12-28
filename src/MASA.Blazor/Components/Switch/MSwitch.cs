@@ -18,9 +18,42 @@ namespace MASA.Blazor
         public bool Inset { get; set; }
 
         [Parameter]
-        public EventCallback<bool> OnChange { get; set; }
+        public string LeftText { get; set; }
 
-        public override bool IsDirty => Value;
+        [Parameter]
+        public string RightText { get; set; }
+
+        [Parameter]
+        public string TrackColor { get; set; }
+
+        // according to spec, should still show
+        // a color when disabled and active
+        public override string ValidationState
+        {
+            get
+            {
+                if (HasError && ShouldValidate)
+                {
+                    return "error";
+                }
+
+                if (HasSuccess)
+                {
+                    return "success";
+                }
+
+                if (HasColor)
+                {
+                    return ComputedColor;
+                }
+
+                return "";
+            }
+        }
+
+        public override string ComputedColor => Color ?? (IsDark ? "white" : "primary");
+
+        public override bool IsDirty => InternalValue;
 
         public Dictionary<string, object> InputAttrs { get; set; } = new();
 
@@ -28,9 +61,11 @@ namespace MASA.Blazor
 
         public bool? Ripple { get; set; }
 
-        public override bool HasColor => Value;
+        public override bool HasColor => InternalValue;
 
-        public string TextColor => IsLoading ? null : ValidationState;
+        public bool HasText => LeftText != null || RightText != null;
+
+        public string TextColor => HasText ? ComputedColor : (IsLoading ? null : ValidationState);
 
         public Task HandleOnBlur(FocusEventArgs args)
         {
@@ -64,7 +99,8 @@ namespace MASA.Blazor
                         .Add($"{prefix}--selection-controls")
                         .Add($"{prefix}--switch")
                         .AddIf($"{prefix}--switch--flat", () => Flat)
-                        .AddIf($"{prefix}--switch--inset", () => Inset);
+                        .AddIf($"{prefix}--switch--inset", () => Inset)
+                        .AddIf($"{prefix}--switch--text", () => HasText);
                 })
                 .Apply("switch", cssBuilder =>
                 {
@@ -81,8 +117,12 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-input--switch__track")
-                        .AddTextColor(TextColor)
+                        .AddTextColor(TrackColor ?? TextColor)
                         .AddTheme(IsDark);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddTextColor(TrackColor ?? TextColor);
                 })
                 .Apply("thumb", cssBuilder =>
                 {
@@ -90,6 +130,20 @@ namespace MASA.Blazor
                         .Add("m-input--switch__thumb")
                         .AddTextColor(TextColor)
                         .AddTheme(IsDark);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddTextColor(TrackColor ?? TextColor);
+                })
+                .Apply("left", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input--switch__left");
+                })
+                .Apply("right", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input--switch__right");
                 });
 
             AbstractProvider
@@ -97,7 +151,7 @@ namespace MASA.Blazor
                 .Apply(typeof(BSwitchSwitch<>), typeof(BSwitchSwitch<MSwitch>))
                 .Apply(typeof(BSelectableInput<>), typeof(BSelectableInput<MSwitch>))
                 .Apply(typeof(BRippleableRipple<>), typeof(BRippleableRipple<MSwitch>))
-                .Apply<BProgressCircular, MProgressCircular>(props =>
+                .Apply<BProgressCircular, MProgressCircular>(attrs =>
                 {
                     if (!IsLoading) return;
 
@@ -113,28 +167,18 @@ namespace MASA.Blazor
                         color = Color ?? "primary";
                     }
 
-                    props[nameof(MProgressCircular.Color)] = color;
-                    props[nameof(MProgressCircular.Indeterminate)] = true;
-                    props[nameof(MProgressCircular.Size)] = (StringNumber)16;
-                    props[nameof(MProgressCircular.Width)] = (StringNumber)2;
+                    attrs[nameof(MProgressCircular.Color)] = color;
+                    attrs[nameof(MProgressCircular.Indeterminate)] = true;
+                    attrs[nameof(MProgressCircular.Size)] = (StringNumber)16;
+                    attrs[nameof(MProgressCircular.Width)] = (StringNumber)2;
                 })
                 .Apply(typeof(BSwitchProgress<>), typeof(BSwitchProgress<MSwitch>));
         }
 
-        public override async Task HandleOnClickAsync(MouseEventArgs args)
+        public override Task HandleOnClickAsync(MouseEventArgs args)
         {
-            Value = !Value;
-            if (OnChange.HasDelegate)
-            {
-                await OnChange.InvokeAsync(Value);
-            }
-            else
-            {
-                if (ValueChanged.HasDelegate)
-                {
-                    await ValueChanged.InvokeAsync(Value);
-                }
-            }
+            InternalValue = !InternalValue;
+            return Task.CompletedTask;
         }
     }
 }

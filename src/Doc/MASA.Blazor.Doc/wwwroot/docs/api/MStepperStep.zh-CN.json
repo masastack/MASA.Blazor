@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MStepperStep",
   "Components": [
-    "StepperStep"
+    "Steppers"
   ],
   "Props": [
     {
@@ -53,7 +54,7 @@
     },
     {
       "Name": "Rules",
-      "Type": "List`1",
+      "Type": "List<Func`1>",
       "Default": "",
       "Description": ""
     },
@@ -73,12 +74,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     }
   ]

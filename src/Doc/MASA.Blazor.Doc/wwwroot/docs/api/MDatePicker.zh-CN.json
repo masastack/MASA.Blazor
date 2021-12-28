@@ -1,17 +1,18 @@
 ﻿{
+  "Title": "MDatePicker",
   "Components": [
-    "DatePicker"
+    "Date pickers"
   ],
   "Props": [
     {
       "Name": "ActivePicker",
-      "Type": "Nullable`1",
+      "Type": "Nullable<DatePickerType>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "AllowedDates",
-      "Type": "Func`2",
+      "Type": "Func<DateOnly,Boolean>",
       "Default": "null",
       "Description": ""
     },
@@ -35,7 +36,7 @@
     },
     {
       "Name": "DayFormat",
-      "Type": "Func`2",
+      "Type": "Func<DateOnly,Boolean>",
       "Default": "null",
       "Description": ""
     },
@@ -77,7 +78,7 @@
     },
     {
       "Name": "HeaderDateFormat",
-      "Type": "Func`2",
+      "Type": "Func<DateOnly,String>",
       "Default": "null",
       "Description": ""
     },
@@ -100,20 +101,26 @@
       "Description": ""
     },
     {
+      "Name": "Locale",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Max",
-      "Type": "Nullable`1",
+      "Type": "Nullable<DateOnly>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "Min",
-      "Type": "Nullable`1",
+      "Type": "Nullable<DateOnly>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "MonthFormat",
-      "Type": "Func`2",
+      "Type": "Func<DateOnly,String>",
       "Default": "null",
       "Description": ""
     },
@@ -179,7 +186,7 @@
     },
     {
       "Name": "ShowCurrent",
-      "Type": "OneOf`2",
+      "Type": "OneOf<DateOnly,Boolean>",
       "Default": "",
       "Description": ""
     },
@@ -197,7 +204,7 @@
     },
     {
       "Name": "TitleDateFormat",
-      "Type": "Func`2",
+      "Type": "Func<IList`1,String>",
       "Default": "null",
       "Description": ""
     },
@@ -215,7 +222,7 @@
     },
     {
       "Name": "WeekdayFormat",
-      "Type": "Func`2",
+      "Type": "Func<DateOnly,String>",
       "Default": "null",
       "Description": ""
     },
@@ -227,7 +234,7 @@
     },
     {
       "Name": "YearFormat",
-      "Type": "Func`2",
+      "Type": "Func<DateOnly,String>",
       "Default": "null",
       "Description": ""
     },
@@ -241,20 +248,29 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "OnActivePickerUpdate",
+      "Type": "EventCallback<DatePickerType>",
+      "Description": ""
+    },
+    {
+      "Name": "OnInput",
+      "Type": "EventCallback",
       "Description": ""
     },
     {
       "Name": "OnPickerDateUpdate",
+      "Type": "EventCallback<DateOnly>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<TValue>",
       "Description": ""
     }
   ]

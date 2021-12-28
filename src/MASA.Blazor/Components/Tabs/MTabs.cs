@@ -41,9 +41,6 @@ namespace MASA.Blazor
         public StringNumber MobileBreakpoint { get; set; }
 
         [Parameter]
-        public string Optional { get; set; }
-
-        [Parameter]
         public bool Right { get; set; }
 
         [Parameter]
@@ -113,12 +110,12 @@ namespace MASA.Blazor
                     styleBuilder => styleBuilder.AddBackgroundColor(SliderColor));
 
             AbstractProvider
-                .Apply<BSlideGroup, MTabsBar>(props =>
+                .Apply<BSlideGroup, MTabsBar>(attrs =>
                 {
-                    props[nameof(MTabsBar.ActiveClass)] = ActiveClass;
-                    props[nameof(MTabsBar.CenterActive)] = CenterActive;
-                    props[nameof(MTabsBar.BackgroundColor)] = BackgroundColor;
-                    props[nameof(MTabsBar.IsDark)] = IsDark;
+                    attrs[nameof(MTabsBar.ActiveClass)] = ActiveClass;
+                    attrs[nameof(MTabsBar.CenterActive)] = CenterActive;
+                    attrs[nameof(MTabsBar.BackgroundColor)] = BackgroundColor;
+                    attrs[nameof(MTabsBar.IsDark)] = IsDark;
                 })
                 .Apply(typeof(BTabsSlider<>), typeof(BTabsSlider<MTabs>))
                 .Apply<BItem, MSlideItem>()

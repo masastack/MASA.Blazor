@@ -1,4 +1,5 @@
 ﻿{
+  "Title": "MHover",
   "Components": [
     "Hover"
   ],
@@ -49,12 +50,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment<HoverProps>",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MVirtualScroll",
   "Components": [
-    "VirtualScroll"
+    "Virtual scroller"
   ],
   "Props": [
     {
@@ -23,7 +24,7 @@
     },
     {
       "Name": "Items",
-      "Type": "ICollection`1",
+      "Type": "ICollection<TItem>",
       "Default": "[]",
       "Description": "The array of items to display"
     },
@@ -79,6 +80,7 @@
   "Contents": [
     {
       "Name": "ItemContent",
+      "Type": "RenderFragment<TItem>",
       "Description": ""
     }
   ],

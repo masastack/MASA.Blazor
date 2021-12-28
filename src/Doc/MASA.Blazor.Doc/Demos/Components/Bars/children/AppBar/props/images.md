@@ -1,7 +1,7 @@
 ---
 order: 0
 title:
-  zh-CN: 图片
+  zh-CN: 图像
   en-US: images 
 ---
 

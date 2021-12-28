@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MResponsive",
   "Components": [
-    "Responsive"
+    "Grid system"
   ],
   "Props": [
     {
@@ -73,6 +74,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-Lists can contain multiple subheaders and dividers.
+列表可以包含多个子标头和分隔符。
 
 ## en-US
 

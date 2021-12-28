@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MSnackbar",
   "Components": [
-    "Snackbar"
+    "Snackbars"
   ],
   "Props": [
     {
@@ -151,20 +152,24 @@
   "Contents": [
     {
       "Name": "ActionContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "OnClosed",
+      "Type": "EventCallback",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

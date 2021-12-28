@@ -9,14 +9,25 @@ namespace MASA.Blazor
     public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>, ICascader<TItem, TValue>
     {
         [Parameter]
-        public bool IsFull { get; set; }
+        public bool ShowAllLevels { get; set; } = true;
 
+        [EditorRequired]
         [Parameter]
         public Func<TItem, List<TItem>> ItemChildren { get; set; }
 
+        [Parameter]
+        public Func<TItem, Task> LoadChildren { get; set; }
+
+        [Parameter]
+        public override bool Outlined { get; set; } = true;
+
+        public TItem LoadingItem { get; private set; }
+
+        public Dictionary<int, List<TItem>> ChildrenItems { get; } = new Dictionary<int, List<TItem>>();
+
         protected override List<string> FormatText(TValue value)
         {
-            return new List<string> { string.Join("/", GetItemByValue(Items, value, IsFull).Select(ItemText)) };
+            return new List<string> { string.Join(" / ", GetItemByValue(Items, value, ShowAllLevels).Select(ItemText)) };
         }
 
         protected override void SetComponentClass()
@@ -24,36 +35,62 @@ namespace MASA.Blazor
             base.SetComponentClass();
 
             CssProvider
-                .Apply("cascader-menu-body", styleAction: styleBuilder =>
+                .Merge(cssBuilder =>
                 {
-                    styleBuilder
-                        .Add("display: inline-flex");
+                    cssBuilder
+                        .Add("m-cascader");
                 })
-                .Apply("cascader-menu-body-wrap", styleAction: styleBuilder =>
+                .Apply("menu-body", cssBuilder =>
                 {
-                    styleBuilder
-                        .Add("vertical-align: top")
-                        .Add("min-width: 180px")
-                        .Add("background-color: white")
-                        .Add("border-right: 1px solid #f0f0f0");
+                    cssBuilder
+                        .Add("m-cascader__menu-body");
+                })
+                .Apply("menu-body-wrapper", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-cascader__menu-body-wrapper")
+                        .AddIf("m-cascader__menu-body-wrapper--dense", () => Dense);
                 });
 
             AbstractProvider
-                .Merge<BMenu, MCascaderMenu>(props =>
+                .Merge<BMenu, MCascaderMenu>(attrs =>
                 {
-                    props[nameof(MCascaderMenu.OffsetY)] = true;
-                    props[nameof(MCascaderMenu.MinWidth)] = (StringNumber)180;
-                    props[nameof(MCascaderMenu.CloseOnContentClick)] = false;
-                    props[nameof(MCascaderMenu.ContentStyle)] = "display:flex";
+                    attrs[nameof(MCascaderMenu.OffsetY)] = true;
+                    attrs[nameof(MCascaderMenu.MinWidth)] = (StringNumber)(Dense ? 120 : 180);
+                    attrs[nameof(MCascaderMenu.CloseOnContentClick)] = false;
+                    attrs[nameof(MCascaderMenu.ContentStyle)] = "display:flex";
                 })
                 .Apply<BList, MList>()
-                .Apply<BItemGroup, MListItemGroup>(props =>
+                .Apply<BItemGroup, MListItemGroup>(attrs =>
                 {
-                    props[nameof(MListItemGroup.Color)] = "primary";
+                    attrs[nameof(MListItemGroup.Color)] = "primary";
                 })
-                .Merge(typeof(BSelectList<,,>), typeof(MCascaderSelectOption<TItem, TValue>))
+                .Merge(typeof(BSelectList<,,>), typeof(MCascaderSelectList<TItem, TValue>))
                 .Merge(typeof(BSelectMenu<,,,>), typeof(BCascaderMenu<TItem, TValue, MCascader<TItem, TValue>>))
                 .Apply(typeof(BCascaderMenuBody<,,>), typeof(BCascaderMenuBody<TItem, TValue, MCascader<TItem, TValue>>));
+        }
+
+        public async Task HandleOnItemClickAsync(TItem item, int level)
+        {
+            var children = ItemChildren(item);
+
+            if (LoadChildren != null && children != null && children.Count == 0)
+            {
+                LoadingItem = item;
+                await LoadChildren(item);
+                LoadingItem = default;
+
+                children = ItemChildren(item);
+            }
+
+            if (children != null && children.Count > 0)
+            {
+                ChildrenItems[level] = children;
+            }
+            else
+            {
+                ChildrenItems.Remove(level);
+            }
         }
 
         private List<TItem> GetItemByValue(IEnumerable<TItem> items, TValue value, bool isFull)

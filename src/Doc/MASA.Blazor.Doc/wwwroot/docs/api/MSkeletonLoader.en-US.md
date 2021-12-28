@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: SkeletonLoader
+title: MSkeletonLoader
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

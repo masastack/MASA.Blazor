@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: SlideItem
+title: MSlideItem
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

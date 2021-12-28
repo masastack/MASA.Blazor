@@ -11,19 +11,6 @@ namespace MASA.Blazor
 {
     public class MRangeSlider<TValue> : MSlider<IList<TValue>>, IRangeSlider<TValue>
     {
-        [Parameter]
-        public override IList<TValue> Value
-        {
-            get
-            {
-                return GetValue<IList<TValue>>(new List<TValue> { default, default });
-            }
-            set
-            {
-                SetValue(value);
-            }
-        }
-
         public ElementReference SecondThumbElement { get; set; }
 
         protected IList<double> InputWidths
@@ -48,16 +35,26 @@ namespace MASA.Blazor
                 {
                     if (ActiveThumb != null)
                     {
-                        var toFocusElement = ActiveThumb == 1 ? ThumbElement : SecondThumbElement;
-                        toFocusElement.FocusAsync();
+                        NextTick(async () =>
+                        {
+                            var toFocusElement = ActiveThumb == 1 ? ThumbElement : SecondThumbElement;
+                            await toFocusElement.FocusAsync();
+                        });
                     }
 
                     val = new List<double> { val[1], val[0] };
                 }
 
-                InternalValue = val is IList<TValue> internalVal ? internalVal : default;
+                var internalValue = val is IList<TValue> internalVal ? internalVal : default;
+                InternalValue = internalValue;
             }
         }
+
+        protected override IList<TValue> LazyValue { get; set; } = new List<TValue>()
+        {
+            default,
+            default
+        };
 
         protected int? ActiveThumb { get; set; }
 
@@ -79,11 +76,6 @@ namespace MASA.Blazor
                 var value = await ParseMouseMoveAsync(args);
                 await ReevaluateSelectedAsync(value);
                 SetInternalValue(value);
-
-                if (OnChange.HasDelegate)
-                {
-                    await OnChange.InvokeAsync(InternalValue);
-                }
             }
         }
 
@@ -96,7 +88,11 @@ namespace MASA.Blazor
                 ThumbPressed = true;
             }
 
-            ActiveThumb = GetIndexOfClosestValue(DoubleInteralValues, value);
+            if (ActiveThumb == null)
+            {
+                ActiveThumb = GetIndexOfClosestValue(DoubleInteralValues, value);
+            }
+
             SetInternalValue(value);
         }
 
@@ -119,24 +115,21 @@ namespace MASA.Blazor
             DoubleInteralValues = values;
         }
 
-        public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+        public override Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
             if (ActiveThumb == null)
             {
-                return;
+                return Task.CompletedTask;
             }
 
             var value = ParseKeyDown(args, DoubleInteralValues[ActiveThumb.Value]);
             if (value == null)
             {
-                return;
+                return Task.CompletedTask;
             }
 
             SetInternalValue(value.AsT2);
-            if (OnChange.HasDelegate)
-            {
-                await OnChange.InvokeAsync(InternalValue);
-            }
+            return Task.CompletedTask;
         }
 
         public override async Task HandleOnSliderMouseDownAsync(ExMouseEventArgs args)
@@ -187,11 +180,37 @@ namespace MASA.Blazor
             await base.HandleOnBlurAsync(args);
         }
 
-        protected override void OnInitialized()
+        protected override void OnWatcherInitialized()
         {
-            base.OnInitialized();
+            Watcher
+                .Watch<IList<TValue>>(nameof(Value), val =>
+                {
+                    //Value may not between min and max
+                    //If that so,we should invoke ValueChanged 
+                    var roundedVal = val.Select(v => ConvertDoubleToTValue(RoundValue(Math.Min(Math.Max(Convert.ToDouble(v), Min), Max)))).ToList();
+                    if (!ListComparer.Equals(val, roundedVal) && ValueChanged.HasDelegate)
+                    {
+                        NextTick(async () =>
+                        {
+                            await ValueChanged.InvokeAsync(roundedVal);
+                        });
+                    }
 
-            InternalValue = Value;
+                    LazyValue = roundedVal;
+                });
+        }
+
+        private static TValue ConvertDoubleToTValue(double val)
+        {
+            return val is TValue value ? value : default;
+        }
+
+        protected override void CheckTValue()
+        {
+            if (typeof(TValue) != typeof(double))
+            {
+                throw new ArgumentNullException(nameof(TValue), "Only double supported");
+            }
         }
 
         protected override void SetComponentClass()
@@ -240,7 +259,7 @@ namespace MASA.Blazor
 
         private void GetTrackStyle(StyleBuilder styleBuilder, double startLength, double endLength, double startPadding = 0, double endPadding = 0)
         {
-            var startDir = Vertical ? (GlobalConfig.RTL ? "top" : "bottom") : (GlobalConfig.RTL ? "right" : "left");
+            var startDir = Vertical ? (MasaBlazor.RTL ? "top" : "bottom") : (MasaBlazor.RTL ? "right" : "left");
             var endDir = Vertical ? "height" : "width";
 
             var start = $"calc({startLength}% + {startPadding}px)";
@@ -267,7 +286,7 @@ namespace MASA.Blazor
             var index = styleBuilder.Index;
 
             var direction = Vertical ? "top" : "left";
-            var value = GlobalConfig.RTL ? 100 - InputWidths[index] : InputWidths[index];
+            var value = MasaBlazor.RTL ? 100 - InputWidths[index] : InputWidths[index];
             value = Vertical ? 100 - value : value;
 
             styleBuilder

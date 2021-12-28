@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MBreadcrumbsDivider",
   "Components": [
-    "BreadcrumbsDivider"
+    "Breadcrumbs"
   ],
   "Props": [
     {
@@ -31,6 +32,7 @@
   "Contents": [
     {
       "Name": "DividerContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],

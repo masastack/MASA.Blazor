@@ -1,6 +1,8 @@
 ﻿{
+  "Title": "MListItemActionText",
   "Components": [
-    "ListItemActionText"
+    "Lists",
+    "List item groups"
   ],
   "Props": [
     {
@@ -25,6 +27,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

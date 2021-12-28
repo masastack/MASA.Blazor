@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MTimePickerTitle",
   "Components": [
-    "TimePickerTitle"
+    "Timelines"
   ],
   "Props": [
     {
@@ -29,7 +30,7 @@
     },
     {
       "Name": "Hour",
-      "Type": "Nullable`1",
+      "Type": "Nullable<Int32>",
       "Default": "",
       "Description": ""
     },
@@ -41,7 +42,7 @@
     },
     {
       "Name": "Minute",
-      "Type": "Nullable`1",
+      "Type": "Nullable<Int32>",
       "Default": "",
       "Description": ""
     },
@@ -59,7 +60,7 @@
     },
     {
       "Name": "Second",
-      "Type": "Nullable`1",
+      "Type": "Nullable<Int32>",
       "Default": "",
       "Description": ""
     },
@@ -86,10 +87,12 @@
   "Events": [
     {
       "Name": "OnPeriodUpdate",
+      "Type": "EventCallback<TimePeriod>",
       "Description": ""
     },
     {
       "Name": "OnSelectingUpdate",
+      "Type": "EventCallback<SelectingTimes>",
       "Description": ""
     }
   ]

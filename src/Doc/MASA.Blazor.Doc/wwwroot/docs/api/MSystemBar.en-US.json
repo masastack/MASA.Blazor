@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MSystemBar",
   "Components": [
-    "SystemBar"
+    "System bars"
   ],
   "Props": [
     {
@@ -79,12 +80,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     }
   ]

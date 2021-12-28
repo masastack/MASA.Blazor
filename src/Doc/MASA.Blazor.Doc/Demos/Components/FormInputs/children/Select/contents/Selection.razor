@@ -5,15 +5,14 @@
              ItemValue="r=>r"
              ItemText="r=>r"
              Multiple>
-        <SelectionContent Context="index">
-            @if (index == 0)
+        <SelectionContent Context="data">
+            @if (data.Index == 0)
             {
                 <MChip>
-                    <span>@_value[index]</span>
+                    <span>@data.Item</span>
                 </MChip>
             }
-
-            @if (index == 1)
+            else if (data.Index == 1)
             {
                 <span class="grey--text text-caption">
                     (+@(_value.Count - 1) others)
@@ -24,7 +23,7 @@
 </MContainer>
 
 @code {
-    private List<string> _items  =  new List<string>{
+    private List<string> _items = new List<string>{
     "foo", "bar", "fizz", "buzz", "fizzbuzz", "foobar"
     };
     private List<string> _value = new List<string>{

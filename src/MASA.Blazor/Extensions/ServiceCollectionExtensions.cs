@@ -1,7 +1,6 @@
 ﻿using BlazorComponent;
+using BlazorComponent.Web;
 using MASA.Blazor;
-using MASA.Blazor.Model;
-using System;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -14,7 +13,21 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddBlazorComponent();
             services.TryAddSingleton<IExceptionFilterProvider, ExceptionFilterProvider>();
-            services.TryAddScoped<GlobalConfig>();
+            services.TryAddScoped<MasaBlazor>();
+            services.TryAddScoped<Application>();
+            services.TryAddScoped(serviceProvider => new Breakpoint(serviceProvider.GetService<Window>())
+            {
+                MobileBreakpoint = 1264,
+                ScrollBarWidth = 16,
+                Thresholds = new BreakpointThresholds
+                {
+                    Xs = 600,
+                    Sm = 960,
+                    Md = 1280,
+                    Lg = 1920
+                }
+            });
+            services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
 
             return services;
         }
@@ -24,13 +37,7 @@ namespace Microsoft.Extensions.DependencyInjection
             var builder = new MasaBlazorOptionsBuilder(services);
             builderAction?.Invoke(builder);
 
-            InitBlazorComponentVariables(builder.Options);
-
-            services.AddBlazorComponent();
-            services.TryAddSingleton<IExceptionFilterProvider, ExceptionFilterProvider>();
-            services.TryAddScoped<GlobalConfig>();
-
-            return services;
+            return services.AddMasaBlazor(builder.Options);
         }
 
         private static void InitBlazorComponentVariables(MasaBlazorOptions options)

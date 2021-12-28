@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Image
+title: MImage
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

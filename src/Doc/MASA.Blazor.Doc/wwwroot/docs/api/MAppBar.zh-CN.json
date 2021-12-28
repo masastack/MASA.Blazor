@@ -1,6 +1,7 @@
 ﻿{
+  "Title": "MAppBar",
   "Components": [
-    "AppBar"
+    "App bars"
   ],
   "Props": [
     {
@@ -184,12 +185,6 @@
       "Description": "设定组件的最小宽度。"
     },
     {
-      "Name": "OnContextmenuPreventDefault",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Outlined",
       "Type": "Boolean",
       "Default": "false",
@@ -227,7 +222,7 @@
     },
     {
       "Name": "ScrollThreshold",
-      "Type": "Int32",
+      "Type": "Double",
       "Default": "0",
       "Description": ""
     },
@@ -289,14 +284,17 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "ExtensionContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ImgContent",
+      "Type": "RenderFragment<Dictionary`2>",
       "Description": ""
     }
   ],
