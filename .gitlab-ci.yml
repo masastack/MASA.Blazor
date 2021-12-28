@@ -100,7 +100,7 @@ packer-prd:
 
 docker-prd:
   image: docker:17.05.0
-  stage: docker
+  stage: docker-prd
   only:
     - tags
   before_script:
