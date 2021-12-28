@@ -1,0 +1,12 @@
+﻿<a href="@ComputedHref"
+   target="@Target"
+   class="app-link text-decoration-none primary--text font-weight-medium d-inline-block"
+   @onclick="OnClick"
+   @attributes="@Attributes">
+    @ChildContent
+
+    @if (!HideIcon && Icon != null)
+    {
+        <MIcon Class="@($"m{(IsSamePage ? "r" : "l")}-1")" Color="primary" Size="@(".875rem")">@Icon</MIcon>
+    }
+</a>

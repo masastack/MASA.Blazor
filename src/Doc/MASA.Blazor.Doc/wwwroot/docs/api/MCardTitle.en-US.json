@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "CardTitle",
+  "Title": "MCardTitle",
   "Components": [
     "Cards"
   ],
@@ -26,6 +26,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

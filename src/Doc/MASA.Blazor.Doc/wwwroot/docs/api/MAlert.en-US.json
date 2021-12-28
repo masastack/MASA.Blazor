@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Alert",
+  "Title": "MAlert",
   "Components": [
     "Alerts"
   ],
@@ -188,12 +188,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Snackbar
+title: MSnackbar
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

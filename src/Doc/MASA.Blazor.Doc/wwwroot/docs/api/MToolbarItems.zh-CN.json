@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "ToolbarItems",
+  "Title": "MToolbarItems",
   "Components": [
     "Toolbars"
   ],
@@ -26,6 +26,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

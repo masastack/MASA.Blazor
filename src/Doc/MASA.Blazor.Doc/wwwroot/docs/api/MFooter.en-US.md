@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Footer
+title: MFooter
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

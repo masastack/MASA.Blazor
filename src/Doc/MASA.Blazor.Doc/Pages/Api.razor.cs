@@ -2,32 +2,10 @@
 using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using System.Globalization;
+using MASA.Blazor.Doc.Models;
 
 namespace MASA.Blazor.Doc.Pages
 {
-    public class ApiModel
-    {
-        public string Title { get; set; }
-        public List<string> Components { get; set; }
-        public List<Props> Props { get; set; }
-        public List<Props1> Contents { get; set; }
-        public List<Props1> Events { get; set; }
-    }
-
-    public class Props
-    {
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string Default { get; set; }
-        public string Description { get; set; }
-    }
-
-    public class Props1
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-    }
-
     public partial class Api
     {
         private readonly static string[] StandardApiNames =
@@ -196,62 +174,7 @@ namespace MASA.Blazor.Doc.Pages
         [CascadingParameter]
         public bool IsChinese { get; set; }
 
-        private List<DataTableHeader<Props>> _headers = new List<DataTableHeader<Props>>
-        {
-            new DataTableHeader<Props>
-            {
-                Value = nameof(Props.Name),
-                Text = "Name",
-                Width = "20%",
-                Sortable = false,
-            },
-            new DataTableHeader<Props>
-            {
-                Value = nameof(Props.Type),
-                Text = "Type",
-                Width = "15%",
-                Sortable = false,
-                Filterable = false
-            },
-            new DataTableHeader<Props>
-            {
-                Value = nameof(Props.Default),
-                Text = "Default",
-                Width = "12%",
-                Sortable = false,
-                Filterable = false
-            },
-            new DataTableHeader<Props>
-            {
-                Value = nameof(Props.Description),
-                Text = "Description",
-                Sortable = false,
-                Filterable = false
-            }
-        };
-
-        private List<DataTableHeader<Props1>> _headers2 = new List<DataTableHeader<Props1>>
-        {
-            new DataTableHeader<Props1>
-            {
-                Value = nameof(Props1.Name),
-                Text = "Name",
-                Width = "20%",
-                Sortable = false
-            },
-            new DataTableHeader<Props1>
-            {
-                Value = nameof(Props1.Description),
-                Text = "Description",
-                Sortable = false,
-                Filterable = false
-            }
-        };
-
         private ApiModel _api;
-        private string _propsSearch;
-        private string _contentsSearch;
-        private string _eventsSearch;
 
         protected override async Task OnParametersSetAsync()
         {
@@ -266,6 +189,35 @@ namespace MASA.Blazor.Doc.Pages
             var baseUrl = new Uri("http://127.0.0.1:5000");
             var apiUrl = new Uri(baseUrl, $"_content/MASA.Blazor.Doc/docs/api/{ApiName}.{lang}.json").ToString();
             _api = await Service.GetApiAsync(apiUrl);
+        }
+
+        private (string id, string title, List<ApiColumn> apiData) FormatSection(string section)
+        {
+            var id = section;
+            var title = section;
+            
+            if (IsChinese)
+            {
+                id = null;
+                
+                title = section switch
+                {
+                    "props" => "属性",
+                    "events" => "事件",
+                    "contents" => "插槽",
+                    _ => throw new ArgumentOutOfRangeException(nameof(section), section, null)
+                };
+            }
+
+            var apiData = section switch 
+            {
+                "props" => _api.Props,
+                "events" => _api.Events,
+                "contents" => _api.Contents,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+
+            return (id, title, apiData);
         }
     }
 }

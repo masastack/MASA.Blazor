@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Image",
+  "Title": "MImage",
   "Components": [
     "Images"
   ],
@@ -116,10 +116,12 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "PlaceholderContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],

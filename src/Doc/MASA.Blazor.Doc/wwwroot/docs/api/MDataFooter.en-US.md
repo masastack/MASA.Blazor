@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: DataFooter
+title: MDataFooter
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

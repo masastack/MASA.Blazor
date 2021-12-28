@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Container",
+  "Title": "MContainer",
   "Components": [
     "Grid system"
   ],
@@ -38,6 +38,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

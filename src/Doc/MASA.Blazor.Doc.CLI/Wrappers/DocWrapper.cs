@@ -243,7 +243,7 @@ namespace MASA.Blazor.Doc.CLI.Wrappers
 
             html = Regex.Replace(html, "<h2>(?<title>.*)<\\/h2>", m =>
                 $@"
-            </section><section id={GetSectionId(m.Groups["title"].ToString())}><h2>{m.Groups["title"]}</h2>");
+            </section><section id={m.Groups["title"].ToString().HashSection()}><h2>{m.Groups["title"]}</h2>");
 
             html = new Regex("<\\/section>").Replace(html, $"<div class={divClass}>&nbsp;</div>", 1);
 
@@ -266,12 +266,9 @@ namespace MASA.Blazor.Doc.CLI.Wrappers
             //    </div>
             //");
 
-            return (order, title, html);
-        }
+            html = $"<section id=\"{title.HashSection()}\">{html}</section>";
 
-        private static string GetSectionId(string title)
-        {
-            return $"\"{title.HashSection()}\"";
+            return (order, title, html);
         }
     }
 

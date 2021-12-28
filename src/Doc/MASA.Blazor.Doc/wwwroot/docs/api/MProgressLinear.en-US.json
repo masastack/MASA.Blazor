@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "ProgressLinear",
+  "Title": "MProgressLinear",
   "Components": [
     "Progress linears"
   ],
@@ -140,12 +140,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment<Double>",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "OnChange",
+      "Type": "EventCallback<Double>",
       "Description": ""
     }
   ]

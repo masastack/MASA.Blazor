@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Dialog",
+  "Title": "MDialog",
   "Components": [
     "Dialogs"
   ],
@@ -128,20 +128,24 @@
   "Contents": [
     {
       "Name": "ActivatorContent",
+      "Type": "RenderFragment<ActivatorProps>",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "OnOutsideClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

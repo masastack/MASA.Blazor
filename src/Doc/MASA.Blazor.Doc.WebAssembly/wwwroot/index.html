@@ -216,30 +216,6 @@
             Prism.highlightAll();
         }
 
-        window.testUploadFile = function (element) {
-            let result = []
-
-            if (element) {
-                for (let i = 0; i < element.files.length; i++) {
-                    var file = element.files[i]
-
-                    // TODO: oss here
-
-                    let fileInfo = {
-                        fileName: file.name,
-                        uploaded: true,
-                        error: null,
-                        url: "",
-                        value: null
-                    }
-
-                    result.push(fileInfo)
-                }
-            }
-
-            return result;
-        }
-
         window.setCookie = (name, value) => {
             var Days = 30;
             var exp = new Date();

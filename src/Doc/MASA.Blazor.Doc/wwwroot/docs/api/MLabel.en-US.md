@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Label
+title: MLabel
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

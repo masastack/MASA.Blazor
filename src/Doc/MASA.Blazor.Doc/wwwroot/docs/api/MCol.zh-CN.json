@@ -1,12 +1,12 @@
 ﻿{
-  "Title": "Col",
+  "Title": "MCol",
   "Components": [
     "Grid system"
   ],
   "Props": [
     {
       "Name": "Align",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": "应用 align-items css 属性。可用的选项是start, center, end, auto, baseline 和 stretch。"
     },
@@ -134,6 +134,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

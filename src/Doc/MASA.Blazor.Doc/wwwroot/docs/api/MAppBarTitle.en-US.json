@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "AppBarTitle",
+  "Title": "MAppBarTitle",
   "Components": [
     "App bars"
   ],
@@ -44,6 +44,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

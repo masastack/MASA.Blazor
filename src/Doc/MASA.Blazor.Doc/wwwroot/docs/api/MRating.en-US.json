@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Rating",
+  "Title": "MRating",
   "Components": [
     "Ratings"
   ],
@@ -146,16 +146,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "ItemContent",
+      "Type": "RenderFragment<RatingItem>",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Double>",
       "Description": ""
     }
   ]

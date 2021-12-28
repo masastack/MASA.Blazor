@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: SlideGroup
+title: MSlideGroup
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

@@ -1,24 +1,24 @@
 ﻿{
-  "Title": "TimePicker",
+  "Title": "MTimePicker",
   "Components": [
     "Timelines"
   ],
   "Props": [
     {
       "Name": "AllowedHours",
-      "Type": "OneOf`2",
+      "Type": "OneOf<Func`2,List`1>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "AllowedMinutes",
-      "Type": "OneOf`2",
+      "Type": "OneOf<Func`2,List`1>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "AllowedSeconds",
-      "Type": "OneOf`2",
+      "Type": "OneOf<Func`2,List`1>",
       "Default": "",
       "Description": ""
     },
@@ -102,13 +102,13 @@
     },
     {
       "Name": "Max",
-      "Type": "Nullable`1",
+      "Type": "Nullable<TimeOnly>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "Min",
-      "Type": "Nullable`1",
+      "Type": "Nullable<TimeOnly>",
       "Default": "",
       "Description": ""
     },
@@ -144,7 +144,7 @@
     },
     {
       "Name": "Value",
-      "Type": "Nullable`1",
+      "Type": "Nullable<TimeOnly>",
       "Default": "",
       "Description": ""
     },
@@ -158,20 +158,24 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "OnChange",
+      "Type": "EventCallback<Nullable`1>",
       "Description": ""
     },
     {
       "Name": "OnPeriodUpdate",
+      "Type": "EventCallback<TimePeriod>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Nullable`1>",
       "Description": ""
     }
   ]

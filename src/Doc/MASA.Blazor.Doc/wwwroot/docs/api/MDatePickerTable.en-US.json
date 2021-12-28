@@ -1,12 +1,12 @@
 ﻿{
-  "Title": "DatePickerTable",
+  "Title": "MDatePickerTable",
   "Components": [
     "Date pickers"
   ],
   "Props": [
     {
       "Name": "AllowedDates",
-      "Type": "Func`2",
+      "Type": "Func<DateOnly,Boolean>",
       "Default": "null",
       "Description": ""
     },
@@ -42,7 +42,7 @@
     },
     {
       "Name": "Format",
-      "Type": "Func`2",
+      "Type": "Func<DateOnly,String>",
       "Default": "null",
       "Description": ""
     },
@@ -66,13 +66,13 @@
     },
     {
       "Name": "Max",
-      "Type": "Nullable`1",
+      "Type": "Nullable<DateOnly>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "Min",
-      "Type": "Nullable`1",
+      "Type": "Nullable<DateOnly>",
       "Default": "",
       "Description": ""
     },
@@ -111,6 +111,7 @@
   "Events": [
     {
       "Name": "OnInput",
+      "Type": "EventCallback<DateOnly>",
       "Description": ""
     }
   ]

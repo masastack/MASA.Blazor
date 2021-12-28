@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Checkbox
+title: MCheckbox
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

@@ -1,66 +1,66 @@
 ﻿{
-  "Title": "Row",
+  "Title": "MRow",
   "Components": [
     "Grid system"
   ],
   "Props": [
     {
       "Name": "Align",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": "应用 align-items css 属性。可用的选项是 start, center, end, baseline 和 stretch。"
     },
     {
       "Name": "AlignContent",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": "应用 align-content 属性。可用的选项是： start, center, end, space-between, space-around 和 stretch。"
     },
     {
       "Name": "AlignContentLg",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": "在更大和更大的断点上更改 align-content 属性。"
     },
     {
       "Name": "AlignContentMd",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": "在中等和较大的断点上更改 align-content 属性。"
     },
     {
       "Name": "AlignContentSm",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": "在较小和较大的断点处更改 align-content 属性。"
     },
     {
       "Name": "AlignContentXl",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": "在更大和更大的断点上更改 align-content 属性。"
     },
     {
       "Name": "AlignLg",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": "在中等和更高的断点上更改 align-items 属性。"
     },
     {
       "Name": "AlignMd",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": "在较小和较大的断点处更改 align-items 属性。"
     },
     {
       "Name": "AlignSm",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": "在更大和更大的断点上更改 align-items 属性。"
     },
     {
       "Name": "AlignXl",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": "在更大和更大的断点上更改 align-items 属性。"
     },
@@ -84,7 +84,7 @@
     },
     {
       "Name": "Gutter",
-      "Type": "OneOf`6",
+      "Type": "OneOf<Int32,Dictionary`2,ValueTuple`2,ValueTuple`2,ValueTuple`2,ValueTuple`2>",
       "Default": "",
       "Description": ""
     },
@@ -96,31 +96,31 @@
     },
     {
       "Name": "Justify",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": "应用 justify-content css 属性。可用选项是 start, center, end, space-between 和 space-around。"
     },
     {
       "Name": "JustifyLg",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": "在更大和更大的断点上更改 justify-content 属性。"
     },
     {
       "Name": "JustifyMd",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": "在中等和更高的断点上更改 justify-content 属性。"
     },
     {
       "Name": "JustifySm",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": "在较小和较大的断点上更改 justify-content 属性。"
     },
     {
       "Name": "JustifyXl",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": "在更大和更大的断点上更改 justify-content 属性。"
     },
@@ -158,12 +158,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "OnBreakpoint",
+      "Type": "EventCallback<BreakpointType>",
       "Description": ""
     }
   ]

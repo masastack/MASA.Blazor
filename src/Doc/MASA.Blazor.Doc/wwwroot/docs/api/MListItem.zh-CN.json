@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "ListItem",
+  "Title": "MListItem",
   "Components": [
     "Lists",
     "List item groups"
@@ -147,16 +147,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "ItemContent",
+      "Type": "RenderFragment<ItemContext>",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     }
   ]

@@ -10,6 +10,12 @@
     <MSheet Outlined Rounded="true" Class="mb-9 m-example">
         @if (_showComponent)
         {
+            <MSheet Rounded="true" Class="pa-4">
+                @Component
+            </MSheet>
+
+            <MDivider></MDivider>
+
             <div class="m-lazy" style="min-height: 52px;">
                 <div class="text-end pa-2">
                     <span class="m-app-tooltip-btn d-inline-block">
@@ -66,15 +72,6 @@
                     </MWindow>
                 </Element>
             </ExpandTransition>
-
-            <MDivider></MDivider>
-
-            <MSheet Rounded="true" Class="pa-4">
-                @if (_showComponent)
-                {
-                    @Component
-                }
-            </MSheet>
         }
         else
         {

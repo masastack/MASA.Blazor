@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Timeline",
+  "Title": "MTimeline",
   "Components": [
     "Timelines"
   ],
@@ -56,6 +56,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

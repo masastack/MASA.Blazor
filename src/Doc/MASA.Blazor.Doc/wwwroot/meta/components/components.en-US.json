@@ -3,7 +3,7 @@
     "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>、<strong>Info</strong>、<strong>Warning</strong> 和 <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays. Many parts of an alert such as <strong>Border</strong>, <strong>Icon</strong>, and <strong>Color</strong> can also be customized to fit almost any situation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:52.9499733+08:00",
+    "LastWriteTime": "2021-11-22T16:33:22.8890524+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -119,7 +119,7 @@
         "Order": 8,
         "Name": "transition",
         "Title": "Transition",
-        "Description": "<p>The <strong>Transition</strong> prop allows you to apply a transition to the alert which is viewable when the component hides and\nshows. For more information, you can check out any of <a href=\"/styles/transitions\">prebuilt transitions</a>.</p>\n",
+        "Description": "<p>The <strong>Transition</strong> prop allows you to apply a transition to the alert which is viewable when the component hides and\nshows. For more information, you can check out any of <a href=\"/stylesandanimations/transitions\">prebuilt transitions</a>.</p>\n",
         "Code": "<div>\r\n    <div class=\"text-center mb-4\">\r\n        <MButton Color=\"primary\"\r\n                 OnClick=\"()=>_alert = !_alert\">\r\n            Toggle\r\n        </MButton>\r\n    </div>\r\n    <MAlert Value=\"_alert\"\r\n            Color=\"pink\"\r\n            Dark\r\n            Border=\"Borders.Top\"\r\n            Icon=\"@(\"mdi-home\")\"\r\n            Transition=\"scale-transition\">\r\n        Phasellus tempus. Fusce ac felis sit amet ligula pharetra condimentum. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. Pellentesque posuere. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo.\r\n\r\n        Phasellus nec sem in justo pellentesque facilisis. Phasellus magna. Cras risus ipsum, faucibus ut, ullamcorper id, varius ac, leo. In hac habitasse platea dictumst. Praesent turpis.\r\n    </MAlert>\r\n</div>\r\n\r\n  @code {\r\n    private bool _alert = true;\r\n  }",
         "Type": "Demos.Components.Alert.props.Transition",
         "Style": "",
@@ -173,7 +173,7 @@
     "Desc": "<p>The <code>MResponsive</code> component can be used to fix any section to a specific aspect ratio</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:52.9517428+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0736279+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -198,7 +198,7 @@
     "Desc": "<p>The MAvatar component is usually used to display user profile pictures. This component allows you to dynamically add and set the border radius of response images, icons and text. ** The tile ** variable can be used to display an avatar with no border radius.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:52.956272+08:00",
+    "LastWriteTime": "2021-11-30T11:20:37.745403+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -290,7 +290,7 @@
     "Desc": "<p>The MBadge component overwrites or subscribes to an icon like an avatar or text on the content to highlight the user's information or just draw attention to a specific element. The content in the badge usually contains numbers or icons.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:52.9587735+08:00",
+    "LastWriteTime": "2021-11-26T09:53:53.2705332+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -359,7 +359,7 @@
     "Desc": "<p>The component is used to send intermittent messages of 1-2 actions to the user. It has two variables, single-line and multi-line (implied). These icons can be used with your messages and actions.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:52.9627066+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0756284+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -439,7 +439,7 @@
     "Desc": "<p>appbar component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:52.969705+08:00",
+    "LastWriteTime": "2021-11-26T13:07:38.017444+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -585,7 +585,7 @@
     "Desc": "<p>The MSystemBar component can be used to display status to the user. It looks like an Android system bar and can contain icons, spaces, and some text.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:52.972708+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0776289+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -654,7 +654,7 @@
     "Desc": "<p>The <code>MToolbar</code> component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site\nnavigation. The toolbar component works great in conjunction with <a href=\"/components/navigation-drawers\"><strong>MNavigationDrawer</strong></a> and <a href=\"/components/cards\"><strong>MCard</strong></a>.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:52.9797082+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0816266+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -805,7 +805,7 @@
     "Desc": "<p>The Border component can add an extra border to anything.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:52.981708+08:00",
+    "LastWriteTime": "2021-12-02T13:33:53.2800713+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -844,7 +844,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>By default <code>MBreadcrumbs</code> will disable the linkage with router. You can enable the feature by using *<em>Linkage</em> prop.</p>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:52.9857081+08:00",
+    "LastWriteTime": "2021-12-06T14:29:50.6435346+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -928,7 +928,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>MButton</code> is the only component that behaves differently when using the <strong>Dark</strong> prop. Normally components use the <strong>Dark</strong> prop to denote that they have a dark colored background and need their text to be white. While this will work\nfor <code>MButton</code>, it is advised to only use the prop when the button <strong>IS ON</strong> a colored background due to the disabled state\nblending in with white backgrounds. If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:52.9937052+08:00",
+    "LastWriteTime": "2021-11-17T17:29:52.1597474+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1088,7 +1088,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:52.999741+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0886273+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1235,7 +1235,7 @@
     "Desc": "<p>The <code>MChip</code> component is used to convey small pieces of information. Using the close property, the chip becomes\ninteractive, allowing user interaction. This component is used by the <a href=\"/components/chip-groups\">MChipGroup</a> for advanced selection options.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.0087401+08:00",
+    "LastWriteTime": "2021-11-16T17:18:10.0838705+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1415,7 +1415,7 @@
     "Desc": "<p>The <code>Dialog</code> component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.0147077+08:00",
+    "LastWriteTime": "2021-10-29T14:11:50.7074219+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1539,7 +1539,7 @@
     "Desc": "<p>The MDivider component is used to separate sections of lists or layouts.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.0178022+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0916273+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1611,7 +1611,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.0197083+08:00",
+    "LastWriteTime": "2021-12-01T19:22:48.728436+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1661,7 +1661,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.0247395+08:00",
+    "LastWriteTime": "2021-11-02T09:37:52.1130132+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1786,7 +1786,7 @@
     "Desc": "<p>The MFooter component is used to display public information that users may want to access from any page in the website.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.0279255+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6580013+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1858,7 +1858,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:error--> \n<p>When using objects for the <strong>Items</strong> prop, you must associate <strong>ItemText</strong> and <strong>ItemValue</strong> with existing properties on your objects. These values are defaulted to  <strong>Text</strong> and <strong>Value</strong> and can be changed.</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p>The <strong>Auto</strong> property of <strong>MenuProps</strong> is only supported for the default input style.</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>Browser autocomplete is set to off by default, may vary by browser and may be ignored.  <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.0327041+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6590057+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1961,7 +1961,7 @@
     "Desc": "<p>The <code>MCascader</code> component is used for multiple select link.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.0357069+08:00",
+    "LastWriteTime": "2021-11-24T18:45:49.2469595+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2021,7 +2021,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.0407428+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.8350159+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2101,7 +2101,7 @@
     "Desc": "<p>The <code>MFileInput</code>  component is a specialized input that provides a clean interface for selecting files, \nshowing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.0467044+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.8319996+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2237,7 +2237,7 @@
     "Desc": "<p>When it comes to form validation, MASA Blazor has a multitude of integrations and baked in functionality.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.0497085+08:00",
+    "LastWriteTime": "2021-11-30T11:20:37.8234266+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2298,7 +2298,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadio</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.0527057+08:00",
+    "LastWriteTime": "2021-12-10T13:01:47.8478778+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2368,7 +2368,7 @@
     "Desc": "<p>The MSlider component is a better visualization of the number input. It is used for gathering numerical user data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.0567043+08:00",
+    "LastWriteTime": "2021-11-12T14:06:48.9354207+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2449,7 +2449,7 @@
     "Desc": "<p>The <code>Select</code> component is used for collecting user provided information from a list of options.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.0637153+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2400602+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2584,7 +2584,7 @@
     "Desc": "<p>The MSlider component is a better visualization of the number input. It is used for gathering numerical user data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.0737044+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.7730007+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2766,7 +2766,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.0777036+08:00",
+    "LastWriteTime": "2021-11-23T18:27:44.4298634+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2858,7 +2858,7 @@
     "Desc": "<p>Textarea components are used for collecting large amounts of textual data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-27T11:46:40.4246366+08:00",
+    "LastWriteTime": "2021-12-23T14:51:09.3686614+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2866,7 +2866,7 @@
         "Title": "Usage",
         "Description": "<p><code>MTextarea</code> in its simplest form is a multi-line text-field, useful for larger amounts of text.</p>\n",
         "Code": "<MContainer Fluid>\r\n    <MRow>\r\n        <MCol\r\n            Cols=\"12\"\r\n            Md=\"6\">\r\n            <MTextarea\r\n                Name=\"input-7-1\"\r\n                Label=\"Default style\"\r\n                @bind-Value=\"value1\"\r\n                Hint=\"Hint text\">\r\n            </MTextarea>\r\n        </MCol>\r\n        <MCol\r\n            Cols=\"12\"\r\n            Md=\"6\">\r\n            <MTextarea\r\n                Solo\r\n                Name=\"input-7-4\"\r\n                Label=\"Solo textarea\">\r\n            </MTextarea>\r\n        </MCol>\r\n        <MCol\r\n            Cols=\"12\"\r\n            Md=\"6\">\r\n            <MTextarea\r\n                Filled\r\n                Name=\"input-7-4\"\r\n                Label=\"Filled textarea\"\r\n                @bind-Value=\"value3\">\r\n            </MTextarea>\r\n        </MCol>\r\n        <MCol\r\n            Cols=\"12\"\r\n            Md=\"6\">\r\n            <MTextarea\r\n                Outlined\r\n                Name=\"input-7-4\"\r\n                Label=\"Outlined textarea\"\r\n                @bind-Value=\"value4\">\r\n            </MTextarea>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n@code {\r\n    string value1 = \"The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.\";\r\n    string value3 = \"The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.\";\r\n    string value4 = \"The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.\";\r\n}",
-        "Type": "Demos.Components.FormInputs.children.TextArea.usage.Index",
+        "Type": "Demos.Components.FormInputs.children.Textarea.usage.Index",
         "Style": "",
         "Debug": false,
         "Group": 4
@@ -2877,7 +2877,7 @@
         "Title": "Auto grow",
         "Description": "<p>When using the <strong>AutoGrow</strong> prop, textarea’s will automatically increase in size when the contained text exceeds its size.</p>\n",
         "Code": "<MContainer Fluid>\r\n    <MTextarea Filled\r\n               Label=\"Label\"\r\n               AutoGrow\r\n               @bind-Value=\"_value\">\r\n    </MTextarea>\r\n</MContainer>\r\n\r\n@code{\r\n    private string _value = \"The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.\";\r\n}",
-        "Type": "Demos.Components.FormInputs.children.TextArea.props.AutoGrow",
+        "Type": "Demos.Components.FormInputs.children.Textarea.props.AutoGrow",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -2888,7 +2888,7 @@
         "Title": "Background color",
         "Description": "<p>The <strong>BackgroundColor</strong> and <strong>Color</strong>s give you more control over styling <code>MTextarea</code>'s.</p>\n",
         "Code": "<MContainer>\r\n    <MTextarea BackgroundColor=\"light-blue\"\r\n               Color=\"black\"\r\n               Label=\"Label\">\r\n    </MTextarea>\r\n\r\n    <MTextarea BackgroundColor=\"grey lighten-2\"\r\n               Color=\"cyan\"\r\n               Label=\"Label\">\r\n    </MTextarea>\r\n\r\n    <MTextarea BackgroundColor=\"amber lighten-4\"\r\n               Color=\"orange orange-darken-4\"\r\n               Label=\"Label\">\r\n    </MTextarea>\r\n</MContainer>",
-        "Type": "Demos.Components.FormInputs.children.TextArea.props.BackgroundColor",
+        "Type": "Demos.Components.FormInputs.children.Textarea.props.BackgroundColor",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -2899,7 +2899,7 @@
         "Title": "Browser autocomplete",
         "Description": "<p>The <strong>Autocomplete</strong> prop gives you the option to enable the browser to predict user input.</p>\n",
         "Code": "<MContainer Fluid>\r\n    <MTextarea autocomplete=\"email\"\r\n               Label=\"Email\">\r\n    </MTextarea>\r\n</MContainer>",
-        "Type": "Demos.Components.FormInputs.children.TextArea.props.BrowserAutocomplete",
+        "Type": "Demos.Components.FormInputs.children.Textarea.props.BrowserAutocomplete",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -2910,7 +2910,7 @@
         "Title": "Clearable",
         "Description": "<p>You can clear the text from a <code>MTextarea</code> by using the <strong>Clearable</strong> prop, and customize the icon used with the <strong>ClearableIcon</strong> prop.</p>\n",
         "Code": "<MContainer Fluid>\r\n    <MTextarea Clearable\r\n               ClearIcon=\"mdi-close-circle\"\r\n               Label=\"Text\"\r\n               @bind-Value=\"_value\">\r\n    </MTextarea>\r\n</MContainer>\r\n\r\n@code{\r\n    private string _value = \"This is clearable text.\";\r\n}",
-        "Type": "Demos.Components.FormInputs.children.TextArea.props.Clearable",
+        "Type": "Demos.Components.FormInputs.children.Textarea.props.Clearable",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -2921,7 +2921,7 @@
         "Title": "Counter",
         "Description": "<p>The <strong>Counter</strong> prop informs the user of a character limit for the <code>MTextarea</code>.</p>\n",
         "Code": "<MContainer Fluid>\r\n    <MTextarea Counter=\"true\"\r\n               Label=\"Text\"\r\n               Rules=\"_rules\"\r\n               @bind-Value=\"_value\">\r\n    </MTextarea>\r\n</MContainer>\r\n\r\n@code {\r\n    private string _value = \"Hello!\";\r\n    private List<Func<string, StringBoolean>> _rules = new()\r\n        {\r\n            v => v.Length <= 25 ? true : \"Max 25 characters\"\r\n        };\r\n}",
-        "Type": "Demos.Components.FormInputs.children.TextArea.props.Counter",
+        "Type": "Demos.Components.FormInputs.children.Textarea.props.Counter",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -2932,7 +2932,7 @@
         "Title": "Icon",
         "Description": "<p>The <strong>AppendIcon</strong> and <strong>PrependIcon</strong> props help add context to <code>MTextarea</code>.</p>\n",
         "Code": "<MContainer>\r\n    <MRow>\r\n        <MCol Cols=\"12\"\r\n              Sm=\"6\">\r\n            <MTextarea Class=\"mx-2\"\r\n                       Label=\"prepend-icon\"\r\n                       PrependIcon=\"mdi-comment\"\r\n                       Rows=\"1\">\r\n            </MTextarea>\r\n        </MCol>\r\n        <MCol Cols=\"12\"\r\n              Sm=\"6\">\r\n            <MTextarea Class=\"mx-2\"\r\n                       Label=\"append-icon\"\r\n                       Rows=\"1\"\r\n                       AppendIcon=\"mdi-comment\">\r\n            </MTextarea>\r\n        </MCol>\r\n        <MCol Cols=\"12\"\r\n              Sm=\"6\">\r\n            <MTextarea Class=\"mx-2\"\r\n                       Label=\"prepend-inner-icon\"\r\n                       PrependInnerIcon=\"mdi-comment\"\r\n                       Rows=\"1\">\r\n            </MTextarea>\r\n        </MCol>\r\n        <MCol Cols=\"12\"\r\n              Sm=\"6\">\r\n            <MTextarea Class=\"mx-2\"\r\n                       Label=\"append-outer-icon\"\r\n                       AppendOuterIcon=\"mdi-comment\"\r\n                       Rows=\"1\">\r\n            </MTextarea>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>",
-        "Type": "Demos.Components.FormInputs.children.TextArea.props.Icon",
+        "Type": "Demos.Components.FormInputs.children.Textarea.props.Icon",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -2943,7 +2943,7 @@
         "Title": "NoResize",
         "Description": "<p><code>MTextarea</code>'s have the option to remain the same size regardless of their content’s size, using the <strong>NoResize</strong> prop.</p>\n",
         "Code": "<MContainer Fluid>\r\n    <MTextarea Label=\"Text\"\r\n               NoResize\r\n               Rows=\"1\"\r\n               Value=\"@_value\">\r\n    </MTextarea>\r\n</MContainer>\r\n\r\n@code{\r\n    private string _value = \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\";\r\n}",
-        "Type": "Demos.Components.FormInputs.children.TextArea.props.NoResize",
+        "Type": "Demos.Components.FormInputs.children.Textarea.props.NoResize",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -2954,7 +2954,7 @@
         "Title": "Rows",
         "Description": "<p>The <strong>Rows</strong> prop allows you to define how many rows the textarea has, when combined with the <strong>RowHeight</strong> prop you can\nfurther customize your rows by defining their height.</p>\n",
         "Code": "<MContainer Fluid>\r\n    <MRow>\r\n        <MCol Cols=\"12\"\r\n              Sm=\"6\">\r\n            <MTextarea Label=\"One row\"\r\n                       AutoGrow\r\n                       Outlined\r\n                       Rows=\"1\"\r\n                       RowHeight=\"15\">\r\n            </MTextarea>\r\n        </MCol>\r\n        <MCol Cols=\"12\"\r\n              Sm=\"6\">\r\n            <MTextarea Filled\r\n                       AutoGrow\r\n                       Label=\"Two rows\"\r\n                       Rows=\"2\"\r\n                       RowHeight=\"20\">\r\n            </MTextarea>\r\n        </MCol>\r\n        <MCol Cols=\"12\"\r\n              Sm=\"6\">\r\n            <MTextarea Label=\"Three rows\"\r\n                       AutoGrow\r\n                       Outlined\r\n                       Rows=\"3\"\r\n                       RowHeight=\"25\"\r\n                       Shaped>\r\n            </MTextarea>\r\n        </MCol>\r\n        <MCol Cols=\"12\"\r\n              Sm=\"6\">\r\n            <MTextarea Filled\r\n                       AutoGrow\r\n                       Label=\"Four rows\"\r\n                       Rows=\"4\"\r\n                       RowHeight=\"30\"\r\n                       Shaped>\r\n            </MTextarea>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>",
-        "Type": "Demos.Components.FormInputs.children.TextArea.props.Row",
+        "Type": "Demos.Components.FormInputs.children.Textarea.props.Row",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -2965,7 +2965,7 @@
         "Title": "Signup form",
         "Description": "<p>Utilizing alternative input styles, you can create amazing interfaces that are easy to build and easy to use.</p>\n",
         "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MCard\r\n    Class=\"mx-auto\"\r\n    Style=\"max-width: 500px;\">\r\n    <MSystemBar\r\n        Color=\"deep-purple darken-4\"\r\n        Dark>\r\n        <MSpacer></MSpacer>\r\n        <MIcon Small>\r\n            mdi-square\r\n        </MIcon>\r\n        <MIcon\r\n            Class=\"ml-1\"\r\n            Small>\r\n            mdi-circle\r\n        </MIcon>\r\n        <MIcon\r\n            Class=\"ml-1\"\r\n            Small>\r\n            mdi-triangle\r\n        </MIcon>\r\n    </MSystemBar>\r\n    <MToolbar\r\n        Color=\"deep-purple accent-4\"\r\n        Cards\r\n        Dark\r\n        Flat>\r\n        <MButton Icon>\r\n            <MIcon>mdi-arrow-left</MIcon>\r\n        </MButton>\r\n        <MCardTitle Class=\"text-h6 font-weight-regular\">\r\n            Sign up\r\n        </MCardTitle>\r\n        <MSpacer></MSpacer>\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n    <MForm\r\n        @ref=\"form\"\r\n        Model=\"model\"\r\n        Class=\"pa-4 pt-6\"\r\n        EnableDataAnnotationsValidation>\r\n        <MTextField\r\n            @bind-Value=\"model.Password\"\r\n            Filled\r\n            Color=\"deep-purple\"\r\n            Counter=\"6\"\r\n            Label=\"Password\"\r\n            Style=\"min-height: 96px\"\r\n            Type=\"password\">\r\n        </MTextField>\r\n        <MTextField\r\n            @bind-Value=\"model.Phone\"\r\n            Filled\r\n            Color=\"deep-purple\"\r\n            Label=\"Phone number\">\r\n        </MTextField>\r\n        <MTextField\r\n            @bind-Value=\"model.Email\"\r\n            Filled\r\n            Color=\"deep-purple\"\r\n            Label=\"Email address\"\r\n            Type=\"email\">\r\n        </MTextField>\r\n        <MTextarea\r\n            @bind-Value=\"model.Bio\"\r\n            AutoGrow\r\n            Filled\r\n            Color=\"deep-purple\"\r\n            Label=\"Bio\"\r\n            Rows=\"1\">\r\n        </MTextarea>\r\n        <MCheckbox\r\n            @bind-Value=\"model.Agreement\"\r\n            Color=\"deep-purple\">\r\n            <LabelContent>\r\n                I agree to the\r\n                <a\r\n                    href=\"#\" @onclick=\"() => dialog = true\" @onclick:stopPropagation>\r\n                    Terms of Service\r\n                </a>\r\n                and\r\n                <a\r\n                    href=\"#\" @onclick=\"() => dialog = true\" @onclick:stopPropagation>\r\n                    Privacy Policy\r\n                </a>*\r\n\r\n            </LabelContent>\r\n        </MCheckbox>\r\n    </MForm>\r\n    <MDivider></MDivider>\r\n    <MCardActions>\r\n        <MButton\r\n            Text\r\n            OnClick=\"@(() => model.Clear())\">\r\n            Clear\r\n        </MButton>\r\n        <MSpacer></MSpacer>\r\n        <MButton\r\n            Disabled=\"!IsValid\"\r\n            Class=\"white--text\"\r\n            Color=\"deep-purple accent-4\"\r\n            Depressed\r\n            OnClick=\"() => form.EditContext.Validate()\">\r\n            Submit\r\n        </MButton>\r\n    </MCardActions>\r\n    <MDialog\r\n        @bind-Value=\"dialog\"\r\n        Absolute\r\n        MaxWidth=\"400\"\r\n        Persistent>\r\n        <MCard>\r\n            <MCardTitle Class=\"text-h5 grey lighten-3\">\r\n                Legal\r\n            </MCardTitle>\r\n            <MCardText>\r\n                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n            </MCardText>\r\n            <MDivider></MDivider>\r\n            <MCardActions>\r\n                <MButton\r\n                    Text\r\n                    OnClick=\"() => {model.Agreement = false; dialog = false;}\">\r\n                    No\r\n                </MButton>\r\n                <MSpacer></MSpacer>\r\n                <MButton\r\n                    Class=\"white--text\"\r\n                    Color=\"deep-purple accent-4\"\r\n                    OnClick=\"() => {model.Agreement = true; dialog = false;}\">\r\n                    Yes\r\n                </MButton>\r\n            </MCardActions>\r\n        </MCard>\r\n    </MDialog>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    static string bio = \"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts\";\r\n\r\n    bool dialog;\r\n    MForm form;\r\n    Signup model = new() {Bio = bio};\r\n\r\n    bool IsValid => form != null && form.EditContext.IsModified() && form.EditContext.Validate(); // is right usage?\r\n\r\n    public class Signup\r\n    {\r\n        [Required]\r\n        [MaxLength(6)]\r\n        [MinLength(6)]\r\n        public string Password { get; set; }\r\n\r\n        [Required]\r\n        [Phone]\r\n        public string Phone { get; set; }\r\n\r\n        [Required]\r\n        [EmailAddress]\r\n        public string Email { get; set; }\r\n\r\n        public string Bio { get; set; }\r\n\r\n        [Required]\r\n        [Range(typeof(bool), \"true\", \"true\", ErrorMessage = \"The field is required\")] // just for demo\r\n        public bool Agreement { get; set; }\r\n\r\n        public void Clear()\r\n        {\r\n            Password = null;\r\n            Phone = null;\r\n            Email = null;\r\n            Bio = null;\r\n            Agreement = false;\r\n        }\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.FormInputs.children.TextArea.misc.SignupForm",
+        "Type": "Demos.Components.FormInputs.children.Textarea.misc.SignupForm",
         "Style": "",
         "Debug": false,
         "Group": 3
@@ -2983,7 +2983,7 @@
     "Desc": "<p>Text fields components are used for collecting user provided information.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.0980246+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6990026+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3255,7 +3255,7 @@
       "Outline": "\n<p>In the grid system, we define the frame outside the information area based on row and column, to ensure that every area can have stable arrangement.</p>\n<p>Following is a brief look at how it works:</p>\n<ul>\n<li>Establish a set of column in the horizontal space defined by row (abbreviated col)</li>\n<li>Your content elements should be placed directly in the col, and only col should be placed directly in row</li>\n<li>The column grid system is a value of 1-24 to represent its range spans. For example, three columns of equal width can be created by <Col span={8} />.</li>\n<li>If the sum of col spans in a row are more than 24, then the overflowing col as a whole will start a new line arrangement.</li>\n</ul>\n<p>Our grid systems base on Flex layout to allow the elements within the parent to be aligned horizontally - left, center, right, wide arrangement, and decentralized arrangement. The Grid system also supports vertical alignment - top aligned, vertically centered, bottom-aligned. You can also define the order of elements by using order.</p>\n<p>Layout uses a 24 grid layout to define the width of each &quot;box&quot;, but does not rigidly adhere to the grid layout.</p>\n",
       "API": "\n<p>Row</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>align</td>\n<td>the vertical alignment of the flex layout:：<code>top</code> <code>middle</code> <code>bottom</code></td>\n<td>string</td>\n<td>top</td>\n</tr>\n<tr>\n<td>gutter</td>\n<td>spacing between grids, could be a number or a object like { xs: 8, sm: 16, md: 24}. or you can use array to make horizontal and vertical spacing work at the same time <code>[horizontal, vertical]</code> (supported after 1.5.0)</td>\n<td>number, object, array</td>\n<td>0</td>\n</tr>\n<tr>\n<td>justify</td>\n<td>horizontal arrangement of the flex layout:<code>start</code> <code>end</code> <code>center</code> <code>space-around</code> <code>space-between</code></td>\n<td>string</td>\n<td>start</td>\n</tr>\n<tr>\n<td>type</td>\n<td>layout mode, optional <code>flex</code>， browser support</td>\n<td>string</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>Col</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>offset</td>\n<td>the number of cells to offset Col from the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>order</td>\n<td>raster order, used in flex layout mode</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>pull</td>\n<td>the number of cells that raster is moved to the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>push</td>\n<td>the number of cells that raster is moved to the right</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>span</td>\n<td>raster number of cells to occupy, 0 corresponds to  <code>display: none</code></td>\n<td>string</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xs</td>\n<td><code>&lt;576px</code> and also default setting, could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>sm</td>\n<td><code>≥576px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>md</td>\n<td><code>≥768px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>lg</td>\n<td><code>≥992px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xl</td>\n<td><code>≥1200px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xxl</td>\n<td><code>≥1600px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>The breakpoints of responsive grid follow BootStrap 4 media queries rules(not including <code>occasionally</code> part).</p>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.1097108+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8305896+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3393,7 +3393,7 @@
         "Order": 5,
         "Name": "marginHelpers",
         "Title": "Margin helpers",
-        "Description": "<p>Using the <a href=\"stylesandanimations/flex\">auto margin helper utilities</a> you can force sibling columns away from each other.</p>\n",
+        "Description": "<p>Using the <a href=\"/stylesandanimations/flex#auto-margins\">auto margin helper utilities</a> you can force sibling columns away from each other.</p>\n",
         "Code": "<div class=\"ma-5 pa-5\">\r\n    <MContainer Class=\"grey lighten-5\">\r\n        <MRow>\r\n            <MCol Md=\"4\">\r\n                <MCard Class=\"pa-2\"\r\n                       Outlined\r\n                       tile>\r\n                    .col-md-4\r\n                </MCard>\r\n            </MCol>\r\n            <MCol Md=\"4\"\r\n                  Class=\"ml-auto\">\r\n                <MCard Class=\"pa-2\"\r\n                       Outlined\r\n                       tile>\r\n                    .col-md-4 .ml-auto\r\n                </MCard>\r\n            </MCol>\r\n        </MRow>\r\n        <MRow>\r\n            <MCol Md=\"3\"\r\n                  Class=\"ml-md-auto\">\r\n                <MCard Class=\"pa-2\"\r\n                       Outlined\r\n                       tile>\r\n                    .col-md-3 .ml-md-auto\r\n                </MCard>\r\n            </MCol>\r\n            <MCol Md=\"3\"\r\n                  Class=\"ml-md-auto\">\r\n                <MCard Class=\"pa-2\"\r\n                       Outlined\r\n                       tile>\r\n                    .col-md-3 .ml-md-auto\r\n                </MCard>\r\n            </MCol>\r\n        </MRow>\r\n        <MRow>\r\n            <MCol Class=\"mr-auto\" Cols=\"@(\"auto\")\"> \r\n                <MCard Class=\"pa-2\"\r\n                       Outlined\r\n                       tile>\r\n                    .col-auto .mr-auto\r\n                </MCard>\r\n            </MCol>\r\n            <MCol Cols=\"@(\"auto\")\">\r\n                <MCard Class=\"pa-2\"\r\n                       Outlined\r\n                       tile>\r\n                    .col-auto\r\n                </MCard>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</div>\r\n",
         "Type": "Demos.Components.Grid.misc.MarginHelpers",
         "Style": "",
@@ -3481,7 +3481,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.1137069+08:00",
+    "LastWriteTime": "2021-11-12T13:39:37.8809032+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3562,7 +3562,7 @@
     "Desc": "<p>The <code>MChipGroup</code> supercharges the <code>MChip</code> component by providing groupable functionality. It is used for creating groups\nof selections using chips.</p>\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.118716+08:00",
+    "LastWriteTime": "2021-12-16T15:57:07.6431404+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3656,7 +3656,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.1237077+08:00",
+    "LastWriteTime": "2021-11-04T13:34:00.0771991+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3739,7 +3739,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.1277077+08:00",
+    "LastWriteTime": "2021-11-12T13:39:38.0698762+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3821,7 +3821,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.1320572+08:00",
+    "LastWriteTime": "2021-11-12T13:39:38.0618742+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3914,7 +3914,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.1357077+08:00",
+    "LastWriteTime": "2021-11-12T13:39:37.8828831+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3994,7 +3994,7 @@
     "Desc": "<p>The <code>MHover</code> component provides a clean interface for handling the hover state of any component.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.1387152+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8325907+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4054,7 +4054,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.1427064+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8345908+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4135,7 +4135,7 @@
     "Desc": "<p>The <code>MImage</code> component is packed with features to support rich media.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.1477069+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8375904+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4226,7 +4226,7 @@
     "Desc": "<p>The <code>MList</code> component is used to display information. It can contain an avatar, content, actions, subheaders and much\nmore. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a\nconsistent styling for organizing groups of text and images.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.1583314+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8385907+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4435,7 +4435,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.166707+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2440968+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4540,7 +4540,7 @@
         "Order": 13,
         "Name": "rounded",
         "Title": "Rounded",
-        "Description": "<p>Menus can have their border-radius set by the <strong>Rounded</strong> prop. Additional information about rounded classes is on the\n<a href=\"/styles/borderradius\">Border Radius</a> page.</p>\n",
+        "Description": "<p>Menus can have their border-radius set by the <strong>Rounded</strong> prop. Additional information about rounded classes is on the\n<a href=\"/stylesandanimations/borderradius\">Border Radius</a> page.</p>\n",
         "Code": "<MRow Justify=\"@JustifyTypes.SpaceAround\">\r\n    @foreach (var item in _btns)\r\n    {\r\n        var index = Array.IndexOf(_btns, item);\r\n        <MMenu Rounded=\"@item.rounded\" OffsetY @key=\"@item.text\">\r\n            <ActivatorContent>\r\n                <MButton Color=\"@_colors[index]\"\r\n                         Class=\"white--text ma-5\"\r\n                         @attributes=\"@context.Attrs\">\r\n                    @item.text Radius\r\n                </MButton>\r\n            </ActivatorContent>\r\n            <ChildContent>\r\n                <MList>\r\n                    @for (int i = 0; i < 4; i++)\r\n                    {\r\n                        <MListItem Link>\r\n                            <MListItemTitle>@($\"Item {i}\")</MListItemTitle>\r\n                        </MListItem>\r\n                    }\r\n                </MList>\r\n            </ChildContent>\r\n        </MMenu>\r\n    }\r\n</MRow>\r\n\r\n@code {\r\n\r\n    (string text, string rounded)[] _btns =\r\n    {\r\n        (\"Removed\", \"0\"),\r\n        (\"Large\", \"lg\"),\r\n        (\"Custom\", \"b-xl\"),\r\n    };\r\n\r\n    string[] _colors =\r\n    {\r\n        \"deep-purple accent-4\", \"error\", \"teal darken-1\"\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Menu.props.Rounded",
         "Style": "",
@@ -4603,7 +4603,7 @@
     "Desc": "<p><code>MNavigationDrawer</code> is a component used to navigate applications. It is usually wrapped and used in the <code>MCard</code> element.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.1737078+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8246057+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4728,7 +4728,7 @@
     "Desc": "<p>The <code>Overlay</code> component is used to provide emphasis on a particular element or parts of it. It signals to the user of a state change within the application and can be used for creating loaders, dialogs and more.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.1777086+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8256046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4813,7 +4813,7 @@
     "Desc": "<p>The <code>MPagination</code> component is used to separate long data sets so that user data information can be known. Provided the amount, the paging component will automatically scale. The current maintenance page provides value easily.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.1827055+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.827605+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4893,7 +4893,7 @@
     "Desc": "<p>MDatePicker is a fully featured date selection component that lets users select a date, or range of dates.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.1947187+08:00",
+    "LastWriteTime": "2021-12-21T15:40:53.4692275+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5128,7 +5128,7 @@
     "Desc": "<p><code>MDatePicker</code> can be used as a standalone month picker component.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.201714+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8346068+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5264,7 +5264,7 @@
     "Desc": "<p>The MTimePicker is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting the time.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.2103084+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8366046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5432,7 +5432,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.211309+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8376032+08:00",
     "DemoList": [
       {
         "Order": 20,
@@ -5523,7 +5523,7 @@
     "Desc": "<p>The component is used to display circular data to users. It also can be put into an indeterminate state to portray loading.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.217888+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8406035+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5592,7 +5592,7 @@
     "Desc": "<p>The component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.223981+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8456135+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5749,7 +5749,7 @@
     "Desc": "<p>Semantic vector graphics.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.2268872+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.167907+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5851,7 +5851,7 @@
     "Desc": "<p>The MSheet component is the baseline for numerous components such as MCard, MToolbar, and more. The available properties form the foundation of Material Design—the concept of paper and elevation (shadows).</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.2298882+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8466114+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -5901,7 +5901,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.2318873+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0756929+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5938,7 +5938,7 @@
     "Desc": "<p>The MSnackbar component is used to display quick messages to users. Snackbars supports positioning, removing delays, and callbacks.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.2352953+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1699113+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6009,7 +6009,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.2418971+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1739081+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6167,7 +6167,7 @@
     "Desc": "<p>The <code>Subheader</code> component is used to separate sections of lists.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.2448949+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6235,7 +6235,7 @@
     "Desc": "<p>The MDataIterator component is used for displaying data, and shares a majority of its functionality with the MDataTable component. Features include sorting, searching, pagination, and selection.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.2468955+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6283,7 +6283,7 @@
     "Desc": "<p>The MDataTable component is used for displaying tabular data. Features include sorting, searching, pagination, content-editing, and row selection.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.2578879+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0826969+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6540,7 +6540,7 @@
     "Desc": "<p>The MSimpleTable component is a simple wrapper component around the <table> element. Inside the component you can use all the regular table elements such as <thead>, <tbody>, <tr>, etc.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.2609083+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0836945+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6612,7 +6612,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n<li><a href=\"/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.2679057+08:00",
+    "LastWriteTime": "2021-11-18T17:20:09.724454+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6803,7 +6803,7 @@
     "Desc": "<p>MTimeline is very useful for displaying chronological information.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.274923+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0886948+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6929,7 +6929,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.2771856+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2450964+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6977,7 +6977,7 @@
     "Desc": "<p>The MTreeview component is useful for displaying large amounts of nested data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T13:46:53.2849207+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0936951+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7170,7 +7170,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-17T13:46:53.28892+08:00",
+    "LastWriteTime": "2021-11-17T14:30:00.36988+08:00",
     "DemoList": [
       {
         "Order": 0,

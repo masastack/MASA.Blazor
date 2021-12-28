@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Stepper",
+  "Title": "MStepper",
   "Components": [
     "Steppers"
   ],
@@ -146,12 +146,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Int32>",
       "Description": ""
     }
   ]

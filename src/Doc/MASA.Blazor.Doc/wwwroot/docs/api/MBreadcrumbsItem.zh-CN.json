@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "BreadcrumbsItem",
+  "Title": "MBreadcrumbsItem",
   "Components": [
     "Breadcrumbs"
   ],
@@ -86,6 +86,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Toolbar",
+  "Title": "MToolbar",
   "Components": [
     "Toolbars"
   ],
@@ -182,14 +182,17 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "ExtensionContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ImgContent",
+      "Type": "RenderFragment<Dictionary`2>",
       "Description": ""
     }
   ],

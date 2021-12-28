@@ -120,7 +120,12 @@ h1 + p {
     font-weight: 300;
 }
 
+
 .markdown-body > section section {
+    margin-bottom: 3rem;
+}
+
+.markdown-body > div section section {
     margin-bottom: 3rem;
 }
 

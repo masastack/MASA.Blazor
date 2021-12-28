@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: RangeSlider
+title: MRangeSlider
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

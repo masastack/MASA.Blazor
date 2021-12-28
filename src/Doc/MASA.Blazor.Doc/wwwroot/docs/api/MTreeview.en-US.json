@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Treeview",
+  "Title": "MTreeview",
   "Components": [
     "Treeview"
   ],
@@ -12,7 +12,7 @@
     },
     {
       "Name": "Active",
-      "Type": "List`1",
+      "Type": "List<TKey>",
       "Default": "null",
       "Description": ""
     },
@@ -72,31 +72,31 @@
     },
     {
       "Name": "ItemChildren",
-      "Type": "Func`2",
+      "Type": "Func<TItem,List`1>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "ItemDisabled",
-      "Type": "Func`2",
+      "Type": "Func<TItem,Boolean>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "ItemKey",
-      "Type": "Func`2",
+      "Type": "Func<TItem,TKey>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "Items",
-      "Type": "List`1",
+      "Type": "List<TItem>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "ItemText",
-      "Type": "Func`2",
+      "Type": "Func<TItem,String>",
       "Default": "null",
       "Description": ""
     },
@@ -108,7 +108,7 @@
     },
     {
       "Name": "LoadChildren",
-      "Type": "Func`2",
+      "Type": "Func<TItem,Task>",
       "Default": "null",
       "Description": ""
     },
@@ -138,7 +138,7 @@
     },
     {
       "Name": "Open",
-      "Type": "List`1",
+      "Type": "List<TKey>",
       "Default": "null",
       "Description": ""
     },
@@ -204,7 +204,7 @@
     },
     {
       "Name": "Value",
-      "Type": "List`1",
+      "Type": "List<TKey>",
       "Default": "null",
       "Description": ""
     }
@@ -212,40 +212,49 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "LabelContent",
+      "Type": "RenderFragment<TreeviewItem`1>",
       "Description": ""
     },
     {
       "Name": "PrependContent",
+      "Type": "RenderFragment<TreeviewItem`1>",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "ActiveChanged",
+      "Type": "EventCallback<List`1>",
       "Description": ""
     },
     {
       "Name": "OnActiveUpdate",
+      "Type": "EventCallback<List`1>",
       "Description": ""
     },
     {
       "Name": "OnInput",
+      "Type": "EventCallback<List`1>",
       "Description": ""
     },
     {
       "Name": "OnOpenUpdate",
+      "Type": "EventCallback<List`1>",
       "Description": ""
     },
     {
       "Name": "OpenChanged",
+      "Type": "EventCallback<List`1>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<List`1>",
       "Description": ""
     }
   ]

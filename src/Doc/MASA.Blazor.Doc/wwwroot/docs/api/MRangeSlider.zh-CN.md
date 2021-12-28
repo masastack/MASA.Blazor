@@ -1,9 +1,14 @@
 ---
 
 order: 0
-title: RangeSlider
+title: MRangeSlider
 
 ---
+ 
+## 组件页面
+ 
+组件页面
+ 
  
 ## 属性
  

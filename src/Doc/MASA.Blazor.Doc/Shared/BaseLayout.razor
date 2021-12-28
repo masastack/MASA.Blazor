@@ -2,8 +2,8 @@
 
 <CascadingValue Value="this">
     <CascadingValue Value="@IsChinese">
-        <MApp Class="baselayout-m-app" Style="background:#F2F3F5;">
-            <MAppBar App Height="80" Elevation=0 Fixed Color="white" Class="pc app-bar" ClippedLeft ClippedRight>
+        <MApp Class="baselayout-m-app">
+            <MAppBar App Height="80" Elevation=0 Color="white" Class="pc app-bar" ClippedLeft ClippedRight>
                 <img style="cursor:pointer;" class="ml-6" src="https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png" @onclick=@(()=>{ Navigation.NavigateTo("/"); SelectTab = 0;}) />
                 <MTabs BackgroundColor="white" Class="mtab-font" Style="margin-left:120px;" Color="black" SliderColor="purple darken-2" @bind-Value="SelectTab">
                     <MTab Style="text-transform: none"
@@ -43,7 +43,7 @@
                 </MButton>
             </MAppBar>
 
-            <MAppBar App Height="106" Elevation=0 Fixed Class="phone-bar" Color="white" ClippedLeft ClippedRight>
+            <MAppBar App Height="106" Elevation=0 Class="phone-bar" Color="white" ClippedLeft ClippedRight>
                 <div class="d-flex flex-column" style="width:100%;">
                     <MRow Align="AlignTypes.Center" Justify="JustifyTypes.SpaceBetween" NoGutters>
                         @if (!_isShowMiniLogo)

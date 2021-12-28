@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Chip
+title: MChip
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

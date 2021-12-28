@@ -71,19 +71,5 @@ namespace MASA.Blazor.Doc.Pages
             GithubUrlHref = _githubUrlTemplate;
             _demoIndex = 0;
         }
-
-        public async Task ScrollToAsync(string target)
-        {
-            var element = await Js.InvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, "#" + target);
-
-            var options = new
-            {
-                Top = element.OffsetTop,
-                Left = 0,
-                Behavior = "smooth"
-            };
-
-            await Js.InvokeVoidAsync("window.scrollTo", options);
-        }
     }
 }

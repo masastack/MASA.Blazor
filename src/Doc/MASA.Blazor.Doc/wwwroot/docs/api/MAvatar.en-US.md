@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Avatar
+title: MAvatar
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

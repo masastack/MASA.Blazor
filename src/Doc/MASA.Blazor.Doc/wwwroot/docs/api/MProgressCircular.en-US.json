@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "ProgressCircular",
+  "Title": "MProgressCircular",
   "Components": [
     "Progress circulars"
   ],
@@ -62,6 +62,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Border",
+  "Title": "MBorder",
   "Components": [
     "Borders"
   ],
@@ -68,6 +68,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

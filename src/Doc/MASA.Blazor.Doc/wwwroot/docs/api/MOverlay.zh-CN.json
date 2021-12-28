@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Overlay",
+  "Title": "MOverlay",
   "Components": [
     "Overlay"
   ],
@@ -68,6 +68,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

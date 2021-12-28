@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Footer",
+  "Title": "MFooter",
   "Components": [
     "Footers"
   ],
@@ -128,6 +128,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

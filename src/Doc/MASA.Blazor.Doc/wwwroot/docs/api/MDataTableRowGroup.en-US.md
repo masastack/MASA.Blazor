@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: DataTableRowGroup
+title: MDataTableRowGroup
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

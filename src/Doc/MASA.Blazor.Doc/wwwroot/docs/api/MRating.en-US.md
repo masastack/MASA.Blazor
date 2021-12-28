@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Rating
+title: MRating
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: SimpleCheckbox
+title: MSimpleCheckbox
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

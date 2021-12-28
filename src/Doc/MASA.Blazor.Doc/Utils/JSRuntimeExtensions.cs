@@ -10,7 +10,7 @@ public static class JsRuntimeExtensions
 
         var options = new
         {
-            Top = element.OffsetTop,
+            Top = element.AbsoluteTop - 80,
             Left = 0,
             Behavior = "smooth"
         };

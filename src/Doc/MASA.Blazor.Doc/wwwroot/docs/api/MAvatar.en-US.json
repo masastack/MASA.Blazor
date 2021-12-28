@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Avatar",
+  "Title": "MAvatar",
   "Components": [
     "Avatars"
   ],
@@ -98,6 +98,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

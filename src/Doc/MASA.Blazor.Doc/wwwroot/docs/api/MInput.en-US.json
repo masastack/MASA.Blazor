@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Input",
+  "Title": "MInput",
   "Components": [
     "Text fields"
   ],
@@ -60,7 +60,7 @@
     },
     {
       "Name": "ErrorMessages",
-      "Type": "List`1",
+      "Type": "List<String>",
       "Default": "null",
       "Description": ""
     },
@@ -108,7 +108,7 @@
     },
     {
       "Name": "Messages",
-      "Type": "List`1",
+      "Type": "List<String>",
       "Default": "null",
       "Description": ""
     },
@@ -132,7 +132,7 @@
     },
     {
       "Name": "Rules",
-      "Type": "IEnumerable`1",
+      "Type": "IEnumerable<Func`2>",
       "Default": "null",
       "Description": ""
     },
@@ -150,7 +150,7 @@
     },
     {
       "Name": "SuccessMessages",
-      "Type": "List`1",
+      "Type": "List<String>",
       "Default": "null",
       "Description": ""
     },
@@ -168,7 +168,7 @@
     },
     {
       "Name": "ValueExpression",
-      "Type": "Expression`1",
+      "Type": "Expression<Func`1>",
       "Default": "null",
       "Description": ""
     }
@@ -176,52 +176,64 @@
   "Contents": [
     {
       "Name": "AppendContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "LabelContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "MessageContent",
+      "Type": "RenderFragment<String>",
       "Description": ""
     },
     {
       "Name": "PrependContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnAppendClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnChange",
+      "Type": "EventCallback<TValue>",
       "Description": ""
     },
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnMouseDown",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnMouseUp",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnPrependClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<TValue>",
       "Description": ""
     }
   ]

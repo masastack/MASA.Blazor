@@ -1,9 +1,14 @@
 ---
 
 order: 0
-title: Snackbar
+title: MSnackbar
 
 ---
+ 
+## 组件页面
+ 
+组件页面
+ 
  
 ## 属性
  

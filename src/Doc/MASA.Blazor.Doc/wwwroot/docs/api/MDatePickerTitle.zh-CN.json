@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "DatePickerTitle",
+  "Title": "MDatePickerTitle",
   "Components": [
     "Date pickers"
   ],
@@ -69,6 +69,7 @@
   "Events": [
     {
       "Name": "OnSelectingYearUpdate",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

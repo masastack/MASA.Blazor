@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "SlideItem",
+  "Title": "MSlideItem",
   "Components": [
     "Slide groups"
   ],
@@ -50,6 +50,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment<ItemContext>",
       "Description": "默认插槽"
     }
   ],

@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "NavigationDrawer",
+  "Title": "MNavigationDrawer",
   "Components": [
     "Navigation drawers"
   ],
@@ -114,7 +114,7 @@
     },
     {
       "Name": "MobileBreakpoint",
-      "Type": "OneOf`2",
+      "Type": "OneOf<Breakpoints,Double>",
       "Default": "null",
       "Description": ""
     },
@@ -194,28 +194,34 @@
   "Contents": [
     {
       "Name": "AppendContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "ImgContent",
+      "Type": "RenderFragment<Dictionary`2>",
       "Description": ""
     },
     {
       "Name": "PrependContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "MiniVariantChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

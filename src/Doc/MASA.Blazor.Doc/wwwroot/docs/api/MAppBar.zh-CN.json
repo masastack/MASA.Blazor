@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "AppBar",
+  "Title": "MAppBar",
   "Components": [
     "App bars"
   ],
@@ -284,14 +284,17 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "ExtensionContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ImgContent",
+      "Type": "RenderFragment<Dictionary`2>",
       "Description": ""
     }
   ],
