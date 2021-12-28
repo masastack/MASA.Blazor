@@ -3,6 +3,7 @@ stages:
   - docker
   - deploy-dev
   - deploy-test
+  - packer-prd
   - docker-prd
   - deploy-prd
 
@@ -18,9 +19,8 @@ packer:
   #image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0-nodejs14.17.6
   image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100-preview.7-nodejs14.16.1
   stage: packer
-  rules:
-    - if: $CI_COMMIT_TAG !=""
-    - if: $CI_COMMIT_BRANCH == "develop" 
+  only:
+    - develop 
   script:
     - ls 
     - ls src/
@@ -74,6 +74,29 @@ deploy-test:
     - kubectl set image deployment/masa-blazor-docs-wasm masa-blazor-docs-wasm=$IMAGEWASM -n test-masa-blazor
   retry: 2
   when: manual
+
+packer-prd:
+  # image: proget-hz.lonsid.cn/masa-blazor/dotnet/sdk:6.0-forlinux
+  #image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0-nodejs14.17.6
+  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100-preview.7-nodejs14.16.1
+  stage: packer-prd
+  only:
+    - tags 
+  script:
+    - ls 
+    - ls src/
+    - node -v
+    - dotnet --version
+    - git clone -b develop http://gitlab-hz.lonsid.cn/MASA-Stack/Framework/BlazorComponent.git ./src/BlazorComponent
+    - dotnet workload install wasm-tools
+    - dotnet build src
+    - dotnet pack src --include-symbols -p:PackageVersion=$CI_COMMIT_TAG
+    - dotnet nuget push "**/*.symbols.nupkg" -k $nugetkey -s https://api.nuget.org/v3/index.json
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - ./src/BlazorComponent
+  retry: 2
 
 docker-prd:
   image: docker:17.05.0
