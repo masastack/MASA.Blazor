@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿<p align="center">
+﻿﻿﻿﻿﻿﻿﻿<p align="center">
   <a href="https://masa-blazor-docs-dev.lonsid.cn" target="_blank">
     <img alt="MASA Blazor Logo" width="150" src="./imgs/logo.png">
   </a>
@@ -188,6 +188,6 @@ QQ群 | 微信群 | 微信公众号 | 微信客服
 
 ## 许可声明
 
-[![MASABlazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/MASA.Blazor/blob/develop/LICENSE) 
+[![MASA.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/MASA.Blazor/blob/develop/LICENSE) 
 
 Copyright (c) 2021-present MASA.Blazor 
