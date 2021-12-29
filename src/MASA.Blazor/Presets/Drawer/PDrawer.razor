@@ -10,7 +10,10 @@
         @ActivatorContent?.Invoke(context)
     </ActivatorContent>
     <ChildContent>
-        <MCard Elevation="0" Height="@("100%")">
+        <MCard Class="@ContentClass"
+               Style="@ContentStyle"
+               Elevation="0"
+               Height="@("100%")">
             <MCardTitle>
                 @Title
                 <MSpacer></MSpacer>
