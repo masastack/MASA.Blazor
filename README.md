@@ -187,6 +187,6 @@ This project adopts the code of conduct defined in the "Contributors Convention"
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT)
+[![BlazorComponent](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](http://opensource.org/licenses/MIT)
 
 Copyright (c) 2021-present MASA.Blazor
