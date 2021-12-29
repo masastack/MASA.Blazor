@@ -23,9 +23,6 @@ namespace MASA.Blazor.Doc.Pages
         [Inject]
         public IJSRuntime JSRuntime { get; set; } = default!;
 
-        [Inject]
-        public NavigationManager Navigation { get; set; }
-
         public StringNumber OnBoarding
         {
             get => _onboarding;

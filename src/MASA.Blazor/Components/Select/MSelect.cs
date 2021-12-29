@@ -19,10 +19,10 @@ namespace MASA.Blazor
 
         protected virtual BMenuProps GetDefaultMenuProps() => new()
         {
-            CloseOnClick = true, 
+            CloseOnClick = true,
             CloseOnContentClick = false,
             DisableKeys = true,
-            OpenOnClick = true, 
+            OpenOnClick = true,
             MaxHeight = 304,
         };
 
@@ -400,9 +400,11 @@ namespace MASA.Blazor
                 var selectedItem = Items.FirstOrDefault(item => EqualityComparer<TItemValue>.Default.Equals(ItemValue(item), value));
                 await OnSelectedItemUpdate.InvokeAsync(selectedItem);
             }
-
-            //TODO: Refactor MSelectList
-            StateHasChanged();
+            else
+            {
+                //TODO: Refactor MSelectList
+                StateHasChanged();
+            }
         }
 
         public Task RemoveSelectedAsync(string text, TItemValue value)

@@ -56,12 +56,10 @@
     private async Task Show(MouseEventArgs args)
     {
         showMenu = false;
-        StateHasChanged();
         await Task.Delay(16);
         
         X = args.ClientX;
         Y = args.ClientY;
         showMenu = true;
-        StateHasChanged();
     }
 }

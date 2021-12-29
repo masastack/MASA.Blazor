@@ -71,22 +71,10 @@
       "Description": "The class applied to the outermost element of the component"
     },
     {
-      "Name": "DefaultBreakpoint",
-      "Type": "BreakpointType",
-      "Default": "",
-      "Description": ""
-    },
-    {
       "Name": "Dense",
       "Type": "Boolean",
       "Default": "false",
       "Description": "Decreases component’s height."
-    },
-    {
-      "Name": "Gutter",
-      "Type": "OneOf<Int32,Dictionary`2,ValueTuple`2,ValueTuple`2,ValueTuple`2,ValueTuple`2>",
-      "Default": "",
-      "Description": ""
     },
     {
       "Name": "Id",
@@ -141,18 +129,6 @@
       "Type": "String",
       "Default": "div",
       "Description": ""
-    },
-    {
-      "Name": "Type",
-      "Type": "String",
-      "Default": "null",
-      "Description": ""
-    },
-    {
-      "Name": "Wrap",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
     }
   ],
   "Contents": [
@@ -162,11 +138,5 @@
       "Description": "Default Content"
     }
   ],
-  "Events": [
-    {
-      "Name": "OnBreakpoint",
-      "Type": "EventCallback<BreakpointType>",
-      "Description": ""
-    }
-  ]
+  "Events": []
 }

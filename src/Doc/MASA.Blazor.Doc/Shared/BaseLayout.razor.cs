@@ -52,9 +52,6 @@ namespace MASA.Blazor.Doc.Shared
         public I18n I18n { get; set; }
 
         [Inject]
-        public DemoService DemoService { get; set; }
-
-        [Inject]
         public NavigationManager Navigation { get; set; }
 
         [Inject]
@@ -70,8 +67,6 @@ namespace MASA.Blazor.Doc.Shared
         {
             Drawer = drawer;
             Temporary = temporary;
-
-            InvokeAsync(StateHasChanged);
         }
 
         private void TurnLanguage()
@@ -111,17 +106,23 @@ namespace MASA.Blazor.Doc.Shared
 
         private void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
+            var isShowMiniLogo = _isShowMiniLogo;
+
             if (e.Location == Navigation.BaseUri)
                 _isShowMiniLogo = true;
             else
                 _isShowMiniLogo = false;
 
+            var selectTab = SelectTab;
             if (e.Location.Contains("meet-the-team"))
                 SelectTab = 2;
             else if (e.Location != Navigation.BaseUri)
                 SelectTab = 1;
 
-            StateHasChanged();
+            if (isShowMiniLogo != _isShowMiniLogo || selectTab != _selectTab)
+            {
+                _ = InvokeAsync(StateHasChanged);
+            }
         }
 
         private void ShowDraw()
@@ -137,8 +138,6 @@ namespace MASA.Blazor.Doc.Shared
         public void Dispose()
         {
             Navigation.LocationChanged -= OnLocationChanged;
-
-            GC.SuppressFinalize(this);
         }
     }
 }

@@ -71,22 +71,10 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
-      "Name": "DefaultBreakpoint",
-      "Type": "BreakpointType",
-      "Default": "",
-      "Description": ""
-    },
-    {
       "Name": "Dense",
       "Type": "Boolean",
       "Default": "false",
       "Description": "减少组件的高度。"
-    },
-    {
-      "Name": "Gutter",
-      "Type": "OneOf<Int32,Dictionary`2,ValueTuple`2,ValueTuple`2,ValueTuple`2,ValueTuple`2>",
-      "Default": "",
-      "Description": ""
     },
     {
       "Name": "Id",
@@ -141,18 +129,6 @@
       "Type": "String",
       "Default": "div",
       "Description": "指定在根元素上使用的自定义标签。"
-    },
-    {
-      "Name": "Type",
-      "Type": "String",
-      "Default": "null",
-      "Description": ""
-    },
-    {
-      "Name": "Wrap",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
     }
   ],
   "Contents": [
@@ -162,11 +138,5 @@
       "Description": "默认插槽"
     }
   ],
-  "Events": [
-    {
-      "Name": "OnBreakpoint",
-      "Type": "EventCallback<BreakpointType>",
-      "Description": ""
-    }
-  ]
+  "Events": []
 }

@@ -47,19 +47,19 @@ namespace MASA.Blazor.Doc.Pages
             }
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override async Task OnParametersSetAsync()
         {
             if (string.IsNullOrWhiteSpace(FileName)) return;
 
             if (_previousPath == Path) return;
+            _previousPath = Path;
 
             File = await Service.GetDocFileAsync($"_content/MASA.Blazor.Doc/docs/{Path}.json");
+        }
 
-            StateHasChanged();
-
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
             await PrismHighlighter.HighlightAllAsync();
-
-            _previousPath = Path;
         }
     }
 }
