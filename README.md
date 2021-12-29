@@ -183,7 +183,7 @@ The Digital Flash technical team is an efficient, stable and innovative team. Th
 
 ## Code of conduct 
 
-This project adopts the code of conduct defined in the "Contributors Convention" to clarify the expected behavior of our community. For more information, see  [.NET Foundation Code of Conduct](https://dotnetfoundation.org/code-of-conduct).
+This project adopts the code of conduct defined in the "Contributors Convention" to clarify the expected behavior of our community. For more information, see  [MASA Stack Community Code of Conduct](https://github.com/masastack/community/blob/main/CODE-OF-CONDUCT.md).
 
 ## License
 

@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿<p align="center">
+﻿﻿﻿﻿﻿﻿<p align="center">
   <a href="https://masa-blazor-docs-dev.lonsid.cn" target="_blank">
     <img alt="MASA Blazor Logo" width="150" src="./imgs/logo.png">
   </a>
@@ -184,7 +184,7 @@ QQ群 | 微信群 | 微信公众号 | 微信客服
 
 ## 行为准则
 
-本项目采用了《贡献者公约》所定义的行为准则，以明确我们社区的预期行为。更多信息请见 [.NET Foundation Code of Conduct](https://dotnetfoundation.org/code-of-conduct).
+本项目采用了《贡献者公约》所定义的行为准则，以明确我们社区的预期行为。更多信息请见 [MASA Stack Community Code of Conduct](https://github.com/masastack/community/blob/main/CODE-OF-CONDUCT.md).
 
 ## 许可声明
 
