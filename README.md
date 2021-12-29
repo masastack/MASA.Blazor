@@ -173,9 +173,9 @@ Thanks to all the friends who have contributed to this project.
 
 ## Interactive 
 
-QQ group | WX group | WX public account| WX Customer Service
-:---:|:---:|:---:|:---:
-![masa.blazor-qq](./imgs/masa.blazor-qq-group.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-group.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-public-account.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-customer-service.png)
+QQ group | WX public account| WX Customer Service
+:---:|:---:|:---:
+![masa.blazor-qq](./imgs/masa.blazor-qq-group.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-public-account.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-customer-service.png)
 
 ## Development team
 

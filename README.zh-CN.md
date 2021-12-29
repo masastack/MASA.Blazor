@@ -173,9 +173,9 @@ services.AddMasaBlazor();
 
 ## 交流
 
-QQ群 | 微信群 | 微信公众号 | 微信客服
-:---:|:---:|:---:|:---:
-![masa.blazor-qq](./imgs/masa.blazor-qq-group.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-group.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-public-account.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-customer-service.png)
+QQ群 | 微信公众号 | 微信客服
+:---:|:---:|:---:
+![masa.blazor-qq](./imgs/masa.blazor-qq-group.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-public-account.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-customer-service.png)
 
 
 ## 开发团队
