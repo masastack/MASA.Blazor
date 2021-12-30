@@ -184,7 +184,7 @@ namespace MASA.Blazor.Test.NavigationDrawer
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 100px;top:0;transform:translateX(0%);width:256px", style);
+            Assert.AreEqual("height: 100px;top:0px;transform:translateX(-100%);width:256px", style);
         }
 
         [TestMethod]
@@ -232,7 +232,7 @@ namespace MASA.Blazor.Test.NavigationDrawer
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 100%;top:0;transform:translateX(0%);width:256px", style);
+            Assert.AreEqual("height: 100%;top:0px;transform:translateX(-100%);width:256px", style);
         }
 
         [TestMethod]
@@ -345,7 +345,7 @@ namespace MASA.Blazor.Test.NavigationDrawer
             var style = inputSlotDiv.GetAttribute("style");
 
             // Assert
-            Assert.AreEqual("height: 100%;top:0;transform:translateX(0%);width:100px", style);
+            Assert.AreEqual("height: 100%;top:0px;transform:translateX(-100%);width:100px", style);
         }
     }
 }
