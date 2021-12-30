@@ -1,12 +1,13 @@
 ﻿---
 order: 1
-title: 浏览器支持
+title: Brower Support
 ---
 
-MASA Blazor 是一个渐进式的框架，试图将 Web 开发推向新的高度。 为了最好地完成这项任务，必须在支持 Internet Explorer 的旧版本方面做出一些牺牲。 这不是兼容浏览器的详尽列表，而是主要的目标浏览器。
+MASA Blazor is a progressive framework that attempts to push web development to the next level. 
+In order to best accomplish this task, some sacrifices had to be made in terms of support for older versions of Internet Explorer. 
+This is not an exhaustive list of compatible browsers, but the main targeted ones.
 
-
-## 浏览器
+## Browsers
 
 <div class="overflow-hidden mb-4 m-sheet m-sheet--outlined theme--light rounded">
 	<div class="m-data-table theme--light">
@@ -14,34 +15,34 @@ MASA Blazor 是一个渐进式的框架，试图将 Web 开发推向新的高度
 			<table>
 				<thead>
 					<tr>
-						<th>浏览器名称</th>
-						<th>支持状态</th>
+						<th>Browser</th>
+						<th>Status</th>
 					</tr>
 				</thead> 
 				<tbody>
 					<tr>
 						<td>Chromium (Chrome, Edge Insider)</td> 
-						<td>支持</td>
+						<td>Supported</td>
 					</tr>
 					<tr>
 						<td>Edge</td> 
-						<td>支持</td>
+						<td>Supported</td>
 					</tr> 
 					<tr>
 						<td>Firefox</td> 
-						<td>支持</td>
+						<td>Supported</td>
 					</tr>
 					<tr>
 						<td>Safari 10+</td> 
-						<td>支持</td>
+						<td>Supported</td>
 					</tr>
 					<tr>
 						<td>IE11/Safari 9</td>
-						<td>不支持</td>
+						<td>Supported with polyfill</td>
 					</tr> 
 					<tr>
 						<td>IE9 / IE10</td> 
-						<td>不支持</td>
+						<td>Not supported</td>
 					</tr>
 				</tbody>
 			</table>

@@ -23,7 +23,7 @@ namespace MASA.Blazor
         /// <summary>
         /// Attention! End with a space
         /// </summary>
-        private static string[] _arrFa5Prefix = new string[] { "fa ", "fad ", "fak ", "fab ", "fal ", "far ", "fas " };
+        private static string[] _arrFa5Prefix = new string[] { "fa ", "fad ", "fak ", "fab ", "fal ", "far ", "fas ", "mi" };
 
         /// <summary>
         /// 36px

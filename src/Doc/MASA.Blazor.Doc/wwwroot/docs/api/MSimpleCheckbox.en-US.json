@@ -1,7 +1,8 @@
 ﻿{
-  "Title": "SimpleCheckbox",
+  "Title": "MSimpleCheckbox",
   "Components": [
-    "Checkboxes"
+    "Checkboxes",
+    "Data Tables"
   ],
   "Props": [
     {
@@ -87,6 +88,7 @@
   "Events": [
     {
       "Name": "OnInput",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

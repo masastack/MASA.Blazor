@@ -17,152 +17,153 @@ namespace MASA.Blazor.Doc.CLI.Commands
     {
         private static readonly Dictionary<string, string[]> _dic = new()
         {
-            { "Avatar", new string[] { "Avatars" } },
-            { "Badge", new string[] { "Badges" } },
-            { "Banner", new string[] { "Banners" } },
-            { "Border", new string[] { "Borders" } },
-            { "Breadcrumbs", new string[] { "Breadcrumbs" } },
-            { "BreadcrumbsDivider", new string[] { "Breadcrumbs" } },
-            { "BreadcrumbsItem", new string[] { "Breadcrumbs" } },
-            { "Button", new string[] { "Buttons", "Button Groups" } },
-            { "ButtonGroup", new string[] { "Button groups" } },
-            { "Calendar", new string[] { "Calendars" } },
-            { "CalendarDaily", new string[] { "Calendars" } },
-            { "CalendarMonthly", new string[] { "Calendars" } },
-            { "CalendarWeekly", new string[] { "Calendars" } },
-            { "Card", new string[] { "Cards" } },
-            { "CardActions", new string[] { "Cards" } },
-            { "CardSubtitle", new string[] { "Cards" } },
-            { "CardText", new string[] { "Cards" } },
-            { "CardTitle", new string[] { "Cards" } },
-            { "Cascader", new string[] { "Cascaders" } },
-            { "CascaderMenu", new string[] { "Cascaders" } },
-            { "CascaderSelectList", new string[] { "Cascaders" } },
-            { "CascaderSelectOption", new string[] { "Cascaders" } },
-            { "Checkbox", new string[] { "Checkboxes" } },
-            { "Chip", new string[] { "Chips" } },
-            { "ChipGroup", new string[] { "Chip groups" } },
-            { "Col", new string[] { "Grid system" } },
-            { "ColorPicker", new string[] { "Color pickers" } },
-            { "ColorPickerCanvas", new string[] { "Color pickers" } },
-            { "ColorPickerEdit", new string[] { "Color pickers" } },
-            { "ColorPickerPreview", new string[] { "Color pickers" } },
-            { "Container", new string[] { "Grid system" } },
-            { "DataFooter", new string[] { "Data iterators" } },
-            { "DataIterator", new string[] { "Data iterators" } },
-            { "DataTable", new string[] { "Data tables" } },
-            { "DataTableHeader", new string[] { "Data tables" } },
-            { "DataTableRow", new string[] { "Data tables" } },
-            { "DataTableRowGroup", new string[] { "Data tables" } },
-            { "DatePicker", new string[] { "Date pickers" } },
-            { "DatePickerDateTable", new string[] { "Date pickers" } },
-            { "DatePickerHeader", new string[] { "Date pickers" } },
-            { "DatePickerMonthTable", new string[] { "Date pickers" } },
-            { "DatePickerTable", new string[] { "Date pickers" } },
-            { "DatePickerTitle", new string[] { "Date pickers" } },
-            { "DatePickerYears", new string[] { "Date pickers" } },
-            { "Dialog", new string[] { "Dialogs" } },
-            { "Divider", new string[] { "Dividers" } },
-            { "ECharts", new string[] { "ECharts" } },
-            { "Message", new string[] { "Presets" } },
-            { "ExpansionPanel", new string[] { "Expansion panels" } },
-            { "ExpansionPanelContent", new string[] { "Expansion panels" } },
-            { "ExpansionPanelHeader", new string[] { "Expansion panels" } },
-            { "ExpansionPanels", new string[] { "Expansion panels" } },
-            { "FileInput", new string[] { "File inputs" } },
-            { "Footer", new string[] { "Footers" } },
-            { "Form", new string[] { "Forms" } },
-            { "Hover", new string[] { "Hover" } },
-            { "Icon", new string[] { "Icons" } },
-            { "Image", new string[] { "Images" } },
-            { "Input", new string[] { "Text fields" } },
-            { "Item", new string[] { "Item groups" } },
-            { "ItemGroup", new string[] { "Item groups" } },
-            { "Label", new string[] { "Text fields" } },
-            { "List", new string[] { "Lists" } },
-            { "ListGroup", new string[] { "Lists", "List item groups" } },
-            { "ListItem", new string[] { "Lists", "List item groups" } },
-            { "ListItemAction", new string[] { "Lists", "List item groups" } },
-            { "ListItemActionText", new string[] { "Lists", "List item groups" } },
-            { "ListItemAvatar", new string[] { "Lists", "List item groups" } },
-            { "ListItemContent", new string[] { "Lists", "List item groups" } },
-            { "ListItemGroup", new string[] { "Lists", "List item groups" } },
-            { "ListItemIcon", new string[] { "Lists" } },
-            { "ListItemSubtitle", new string[] { "Lists", "List item groups" } },
-            { "ListItemTitle", new string[] { "Lists", "List item groups" } },
-            { "Main", new string[] { "Grid system" } },
-            { "Menu", new string[] { "Menus" } },
-            { "Messages", new string[] { "Messages" } },
-            { "NavigationDrawer", new string[] { "Navigation drawers" } },
-            { "Modal", new string[] { "Presets" } },
-            { "Overlay", new string[] { "Overlay" } },
-            { "Pagination", new string[] { "Pagination" } },
-            { "ProgressCircular", new string[] { "Progress circulars" } },
-            { "ProgressLinear", new string[] { "Progress linears" } },
-            { "Radio", new string[] { "Radio" } },
-            { "RadioGroup", new string[] { "Radio groups" } },
-            { "RangeSlider", new string[] { "Range sliders" } },
-            { "Rating", new string[] { "Ratings" } },
-            { "Responsive", new string[] { "Grid system" } },
-            { "Row", new string[] { "Grid system" } },
-            { "Select", new string[] { "Selects" } },
-            { "SelectList", new string[] { "Selects" } },
-            { "SelectOption", new string[] { "Selects" } },
-            { "Sheet", new string[] { "Sheets" } },
-            { "SimpleCheckbox", new string[] { "Checkboxes" } },
-            { "SimpleTable", new string[] { "Simple tables" } },
-            { "SkeletonLoader", new string[] { "Skeleton loaders" } },
-            { "SlideGroup", new string[] { "Slide groups" } },
-            { "SlideItem", new string[] { "Slide groups" } },
-            { "Slider", new string[] { "Sliders" } },
-            { "Snackbar", new string[] { "Snackbars" } },
-            { "Spacer", new string[] { "Grid system" } },
-            { "Stepper", new string[] { "Steppers" } },
-            { "StepperContent", new string[] { "Steppers" } },
-            { "StepperHeader", new string[] { "Steppers" } },
-            { "StepperItems", new string[] { "Steppers" } },
-            { "StepperStep", new string[] { "Steppers" } },
-            { "Subheader", new string[] { "Subheaders" } },
-            { "Switch", new string[] { "Switches" } },
-            { "SystemBar", new string[] { "System bars" } },
-            { "Tab", new string[] { "Tabs" } },
-            { "TabItem", new string[] { "Tabs" } },
-            { "Table", new string[] { "Data tables" } },
-            { "TableCol", new string[] { "Data tables" } },
-            { "TableFooter", new string[] { "Data tables" } },
-            { "TableFooterButton", new string[] { "Data tables" } },
-            { "TableHeader", new string[] { "Data tables" } },
-            { "TableLoading", new string[] { "Data tables" } },
-            { "Tabs", new string[] { "Tabs" } },
-            { "TabsBar", new string[] { "Tabs" } },
-            { "TabsItems", new string[] { "Tabs" } },
-            { "TabsSlider", new string[] { "Tabs" } },
-            { "Textarea", new string[] { "Textareas" } },
-            { "TextField", new string[] { "Text fields" } },
-            { "Timeline", new string[] { "Timelines" } },
-            { "TimelineItem", new string[] { "Timelines" } },
-            { "TimePicker", new string[] { "Timelines" } },
-            { "TimePickerClock", new string[] { "Timelines" } },
-            { "TimePickerTitle", new string[] { "Timelines" } },
-            { "Toolbar", new string[] { "Toolbars" } },
-            { "ToolbarItems", new string[] { "Toolbars" } },
-            { "ToolbarTitle", new string[] { "Toolbars" } },
-            { "Tooltip", new string[] { "Tooltips" } },
-            { "Treeview", new string[] { "Treeview" } },
-            { "TreeviewNode", new string[] { "Treeview" } },
-            { "Upload", new string[] { "Uploads" } },
-            { "VirtualScroll", new string[] { "Virtual scroller" } },
-            { "Window", new string[] { "Windows" } },
-            { "WindowItem", new string[] { "Windows" } },
-            { "Alert", new string[] { "Alerts" } },
-            { "AlertDismissButton", new string[] { "Alerts" } },
-            { "AlertIcon", new string[] { "Alerts" } },
-            { "App", new string[] { "Application" } },
-            { "AppBar", new string[] { "App bars" } },
-            { "AppBarNavIcon", new string[] { "App bars" } },
-            { "AppBarTitle", new string[] { "App bars" } },
-            { "Autocomplete", new string[] { "Autocompletes" } },
+            { "MAvatar", new string[] { "Avatars" } },
+            { "MBadge", new string[] { "Badges" } },
+            { "MBanner", new string[] { "Banners" } },
+            { "MBorder", new string[] { "Borders" } },
+            { "MBreadcrumbs", new string[] { "Breadcrumbs" } },
+            { "MBreadcrumbsDivider", new string[] { "Breadcrumbs" } },
+            { "MBreadcrumbsItem", new string[] { "Breadcrumbs" } },
+            { "MButton", new string[] { "Buttons", "Button Groups" } },
+            { "MButtonGroup", new string[] { "Button groups", "Buttons" } },
+            { "MCalendar", new string[] { "Calendars" } },
+            { "MCalendarDaily", new string[] { "Calendars" } },
+            { "MCalendarMonthly", new string[] { "Calendars" } },
+            { "MCalendarWeekly", new string[] { "Calendars" } },
+            { "MCard", new string[] { "Cards" } },
+            { "MCardActions", new string[] { "Cards" } },
+            { "MCardSubtitle", new string[] { "Cards" } },
+            { "MCardText", new string[] { "Cards" } },
+            { "MCardTitle", new string[] { "Cards" } },
+            { "MCascader", new string[] { "Cascaders" } },
+            { "MCascaderMenu", new string[] { "Cascaders" } },
+            { "MCascaderSelectList", new string[] { "Cascaders" } },
+            { "MCascaderSelectOption", new string[] { "Cascaders" } },
+            { "MCheckbox", new string[] { "Checkboxes" } },
+            { "MChip", new string[] { "Chips" } },
+            { "MChipGroup", new string[] { "Chip groups" } },
+            { "MCol", new string[] { "Grid system" } },
+            { "MColorPicker", new string[] { "Color pickers" } },
+            { "MColorPickerCanvas", new string[] { "Color pickers" } },
+            { "MColorPickerEdit", new string[] { "Color pickers" } },
+            { "MColorPickerPreview", new string[] { "Color pickers" } },
+            { "MContainer", new string[] { "Grid system" } },
+            { "MDataFooter", new string[] { "Data iterators", "Data Tables" } },
+            { "MDataIterator", new string[] { "Data iterators" } },
+            { "MDataTable", new string[] { "Data tables" } },
+            { "MDataTableHeader", new string[] { "Data tables" } },
+            { "MDataTableRow", new string[] { "Data tables" } },
+            { "MDataTableRowGroup", new string[] { "Data tables" } },
+            { "MDatePicker", new string[] { "Date pickers" } },
+            { "MDatePickerDateTable", new string[] { "Date pickers" } },
+            { "MDatePickerHeader", new string[] { "Date pickers" } },
+            { "MDatePickerMonthTable", new string[] { "Date pickers" } },
+            { "MDatePickerTable", new string[] { "Date pickers" } },
+            { "MDatePickerTitle", new string[] { "Date pickers" } },
+            { "MDatePickerYears", new string[] { "Date pickers" } },
+            { "MDialog", new string[] { "Dialogs" } },
+            { "MDivider", new string[] { "Dividers" } },
+            { "MECharts", new string[] { "ECharts" } },
+            { "MMessage", new string[] { "Presets" } },
+            { "MExpansionPanel", new string[] { "Expansion panels" } },
+            { "MExpansionPanelContent", new string[] { "Expansion panels" } },
+            { "MExpansionPanelHeader", new string[] { "Expansion panels" } },
+            { "MExpansionPanels", new string[] { "Expansion panels" } },
+            { "MFileInput", new string[] { "File inputs" } },
+            { "MFooter", new string[] { "Footers" } },
+            { "MForm", new string[] { "Forms" } },
+            { "MHover", new string[] { "Hover" } },
+            { "MIcon", new string[] { "Icons" } },
+            { "MImage", new string[] { "Images" } },
+            { "MInput", new string[] { "Text fields" } },
+            { "MItem", new string[] { "Item groups" } },
+            { "MItemGroup", new string[] { "Item groups" } },
+            { "MLabel", new string[] { "Text fields" } },
+            { "MList", new string[] { "Lists" } },
+            { "MListGroup", new string[] { "Lists", "List item groups" } },
+            { "MListItem", new string[] { "Lists", "List item groups" } },
+            { "MListItemAction", new string[] { "Lists", "List item groups" } },
+            { "MListItemActionText", new string[] { "Lists", "List item groups" } },
+            { "MListItemAvatar", new string[] { "Lists", "List item groups" } },
+            { "MListItemContent", new string[] { "Lists", "List item groups" } },
+            { "MListItemGroup", new string[] { "Lists", "List item groups" } },
+            { "MListItemIcon", new string[] { "Lists" } },
+            { "MListItemSubtitle", new string[] { "Lists", "List item groups" } },
+            { "MListItemTitle", new string[] { "Lists", "List item groups" } },
+            { "MMain", new string[] { "Grid system" } },
+            { "MMenu", new string[] { "Menus" } },
+            { "MMessages", new string[] { "Messages" } },
+            { "MNavigationDrawer", new string[] { "Navigation drawers" } },
+            { "MModal", new string[] { "Presets" } },
+            { "MOverlay", new string[] { "Overlay" } },
+            { "MPagination", new string[] { "Pagination" } },
+            { "MProgressCircular", new string[] { "Progress circulars" } },
+            { "MProgressLinear", new string[] { "Progress linears" } },
+            { "MRadio", new string[] { "Radio" } },
+            { "MRadioGroup", new string[] { "Radio groups" } },
+            { "MRangeSlider", new string[] { "Range sliders" } },
+            { "MRating", new string[] { "Ratings" } },
+            { "MResponsive", new string[] { "Grid system" } },
+            { "MRow", new string[] { "Grid system" } },
+            { "MSelect", new string[] { "Selects" } },
+            { "MSelectList", new string[] { "Selects" } },
+            { "MSelectOption", new string[] { "Selects" } },
+            { "MSheet", new string[] { "Sheets" } },
+            { "MSimpleCheckbox", new string[] { "Checkboxes", "Data Tables" } },
+            { "MSimpleTable", new string[] { "Simple tables" } },
+            { "MSkeletonLoader", new string[] { "Skeleton loaders" } },
+            { "MSlideGroup", new string[] { "Slide groups" } },
+            { "MSlideItem", new string[] { "Slide groups" } },
+            { "MSlider", new string[] { "Sliders" } },
+            { "MSnackbar", new string[] { "Snackbars" } },
+            { "MSpacer", new string[] { "Grid system" } },
+            { "MStepper", new string[] { "Steppers" } },
+            { "MStepperContent", new string[] { "Steppers" } },
+            { "MStepperHeader", new string[] { "Steppers" } },
+            { "MStepperItems", new string[] { "Steppers" } },
+            { "MStepperStep", new string[] { "Steppers" } },
+            { "MSubheader", new string[] { "Subheaders" } },
+            { "MSwitch", new string[] { "Switches" } },
+            { "MSystemBar", new string[] { "System bars" } },
+            { "MTab", new string[] { "Tabs" } },
+            { "MTabItem", new string[] { "Tabs" } },
+            { "MTable", new string[] { "Data tables" } },
+            { "MTableCol", new string[] { "Data tables" } },
+            { "MTableFooter", new string[] { "Data tables" } },
+            { "MTableFooterButton", new string[] { "Data tables" } },
+            { "MTableHeader", new string[] { "Data tables" } },
+            { "MTableLoading", new string[] { "Data tables" } },
+            { "MTabs", new string[] { "Tabs" } },
+            { "MTabsBar", new string[] { "Tabs" } },
+            { "MTabsItems", new string[] { "Tabs" } },
+            { "MTabsSlider", new string[] { "Tabs" } },
+            { "MTextarea", new string[] { "Textareas" } },
+            { "MTextField", new string[] { "Text fields" } },
+            { "MTimeline", new string[] { "Timelines" } },
+            { "MTimelineItem", new string[] { "Timelines" } },
+            { "MTimePicker", new string[] { "Timelines" } },
+            { "MTimePickerClock", new string[] { "Timelines" } },
+            { "MTimePickerTitle", new string[] { "Timelines" } },
+            { "MToolbar", new string[] { "Toolbars" } },
+            { "MToolbarItems", new string[] { "Toolbars" } },
+            { "MToolbarTitle", new string[] { "Toolbars" } },
+            { "MTooltip", new string[] { "Tooltips" } },
+            { "MTreeview", new string[] { "Treeview" } },
+            { "MTreeviewNode", new string[] { "Treeview" } },
+            { "MUpload", new string[] { "Uploads" } },
+            { "MVirtualScroll", new string[] { "Virtual scroller" } },
+            { "MWindow", new string[] { "Windows" } },
+            { "MWindowItem", new string[] { "Windows" } },
+            { "MAlert", new string[] { "Alerts" } },
+            { "MAlertDismissButton", new string[] { "Alerts" } },
+            { "MAlertIcon", new string[] { "Alerts" } },
+            { "MApp", new string[] { "Application" } },
+            { "MAppBar", new string[] { "App bars" } },
+            { "MAppBarNavIcon", new string[] { "App bars" } },
+            { "MAppBarTitle", new string[] { "App bars" } },
+            { "MAutocomplete", new string[] { "Autocompletes" } },
         };
+
         public string Name => "api2json";
 
         public void Execute(CommandLineApplication command)
@@ -174,8 +175,8 @@ namespace MASA.Blazor.Doc.CLI.Commands
                 "assembly Path", "[Required] The Path of assembly file.");
 
             var outputArgument = command.Argument(
-                "output", "[Required] The directory where the json file to output");        
-          
+                "output", "[Required] The directory where the json file to output");
+
             command.OnExecute(() =>
             {
                 string assemblyPath = assemblyDirArgument.Value;
@@ -191,25 +192,30 @@ namespace MASA.Blazor.Doc.CLI.Commands
                 {
                     output = "./";
                 }
-                GenerateApiFiles(output,new[] { "zh-CN", "en-US" });
+
+                GenerateApiFiles(output, new[] { "zh-CN", "en-US" });
 
                 return 0;
-            });         
+            });
         }
 
-        void GenerateApiFiles(string output,string[] languages)
+        void GenerateApiFiles(string output, string[] languages)
         {
-            var assembly = typeof(MApp).Assembly;//Assembly.LoadFile(assemblyPath);
+            var assembly = typeof(MApp).Assembly; //Assembly.LoadFile(assemblyPath);
             var componentBaseType = typeof(ComponentBase);
             var componentTypes = assembly.GetTypes().Where(type => componentBaseType.IsAssignableFrom(type) && type.Name.StartsWith("M"));
             var apis = new List<Api>();
 
             foreach (var componentType in componentTypes)
             {
-                var paramterProps = componentType.GetProperties().Where(prop => prop.CustomAttributes.Any(attribute => attribute.AttributeType == typeof(ParameterAttribute)));
-                var contentProps = paramterProps.Where(prop => prop.PropertyType == typeof(RenderFragment) || (prop.PropertyType.IsGenericType && prop.PropertyType == typeof(RenderFragment<>).MakeGenericType(prop.PropertyType.GenericTypeArguments[0])));
-                var eventProps = paramterProps.Where(prop => prop.PropertyType == typeof(EventCallback) || (prop.PropertyType.IsGenericType && prop.PropertyType == typeof(EventCallback<>).MakeGenericType(prop.PropertyType.GenericTypeArguments[0])));
-                var defaultProps = paramterProps.Where(props => contentProps.Any(cprops => cprops == props) is false && eventProps.Any(eprops => eprops == props) is false);
+                var paramterProps = componentType.GetProperties().Where(prop =>
+                    prop.CustomAttributes.Any(attribute => attribute.AttributeType == typeof(ParameterAttribute)));
+                var contentProps = paramterProps.Where(prop => prop.PropertyType == typeof(RenderFragment) || (prop.PropertyType.IsGenericType &&
+                    prop.PropertyType == typeof(RenderFragment<>).MakeGenericType(prop.PropertyType.GenericTypeArguments[0])));
+                var eventProps = paramterProps.Where(prop => prop.PropertyType == typeof(EventCallback) || (prop.PropertyType.IsGenericType &&
+                    prop.PropertyType == typeof(EventCallback<>).MakeGenericType(prop.PropertyType.GenericTypeArguments[0])));
+                var defaultProps = paramterProps.Where(props =>
+                    contentProps.Any(cprops => cprops == props) is false && eventProps.Any(eprops => eprops == props) is false);
 
                 var title = GetComponentName(componentType);
 
@@ -224,21 +230,22 @@ namespace MASA.Blazor.Doc.CLI.Commands
                 {
                     Title = title,
                     Components = components,
-                    Props = defaultProps.Where(prop => IgnorePrpps(prop.Name)).Select(prop => new Prop
+                    Props = defaultProps.Where(prop => IgnoreProps(prop.Name)).Select(prop => new Prop
                     {
                         Name = prop.Name,
-                        Type = prop.PropertyType.Name,
-                        Default = GetDefaultValue(prop.PropertyType),
+                        Type = GetType(prop.PropertyType),
                         Description = "",
                     }).OrderBy(p => p.Name).ToArray(),
                     Contents = contentProps.Select(prop => new Content
                     {
                         Name = prop.Name,
+                        Type = GetType(prop.PropertyType),
                         Description = ""
                     }).OrderBy(content => content.Name).ToArray(),
                     Events = eventProps.Select(prop => new Event
                     {
                         Name = prop.Name,
+                        Type = GetType(prop.PropertyType),
                         Description = ""
                     }).OrderBy(e => e.Name).ToArray(),
                 };
@@ -257,15 +264,18 @@ namespace MASA.Blazor.Doc.CLI.Commands
                 };
 
                 var basepath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                var propDescriptionMap = JsonSerializer.Deserialize<string[][]>(File.ReadAllText($"{basepath}/ApiSettings/propDefaultDescription.{language}.json"))
-                                                        .ToDictionary(prop => prop[0], prop => prop[1]);
+                var propDescriptionMap = JsonSerializer
+                    .Deserialize<string[][]>(File.ReadAllText($"{basepath}/ApiSettings/propDefaultDescription.{language}.json"))
+                    .ToDictionary(prop => prop[0], prop => prop[1]);
 
-                var contentDescriptionMap = JsonSerializer.Deserialize<string[][]>(File.ReadAllText($"{basepath}/ApiSettings/contentDefaultDescription.{language}.json"))
-                                                        .ToDictionary(prop => prop[0], prop => prop[1]);
+                var contentDescriptionMap = JsonSerializer
+                    .Deserialize<string[][]>(File.ReadAllText($"{basepath}/ApiSettings/contentDefaultDescription.{language}.json"))
+                    .ToDictionary(prop => prop[0], prop => prop[1]);
 
                 foreach (var api in apis)
                 {
-                    var file = files.FirstOrDefault(f => f.Contains($"M{api.Title}.{language}.json"));
+                    var file = files.FirstOrDefault(f => f.Contains($"{api.Title}.{language}.json"));
+
                     if (file is not null)
                     {
                         var oldApi = JsonSerializer.Deserialize<Api>(File.ReadAllText(file));
@@ -279,18 +289,19 @@ namespace MASA.Blazor.Doc.CLI.Commands
                             }
                         }
                     }
-                    else file = $"{output}/M{api.Title}.{language}.json";
+                    else file = $"{output}/{api.Title}.{language}.json";
 
                     foreach (var prop in api.Props)
                     {
-                        if(propDescriptionMap.ContainsKey(prop.Name))
+                        if (propDescriptionMap.ContainsKey(prop.Name))
                         {
                             prop.Description = propDescriptionMap[prop.Name];
                         }
                     }
+
                     foreach (var content in api.Contents)
                     {
-                        if(contentDescriptionMap.ContainsKey(content.Name))
+                        if (contentDescriptionMap.ContainsKey(content.Name))
                         {
                             content.Description = contentDescriptionMap[content.Name];
                         }
@@ -299,7 +310,7 @@ namespace MASA.Blazor.Doc.CLI.Commands
                     File.WriteAllText(file, JsonSerializer.Serialize(api, jsonOption), Encoding.UTF8);
 
                     //md
-                    var mdFile = $"{output}/M{api.Title}.{language}.md";
+                    var mdFile = $"{output}/{api.Title}.{language}.md";
                     var mdContent = JsonSerializer.Deserialize<List<string>>(File.ReadAllText($"{basepath}/ApiSettings/mdContent.{language}.json"));
                     mdContent[mdContent.IndexOf("[title]")] = $"title: {api.Title}";
                     File.WriteAllLines(mdFile, mdContent);
@@ -309,11 +320,12 @@ namespace MASA.Blazor.Doc.CLI.Commands
 
         string GetComponentName(Type componentType)
         {
-            if (componentType.IsGenericType) return componentType.Name.Remove(componentType.Name.IndexOf('`')).Remove(0, 1);
-            else return componentType.Name.Remove(0, 1);
+            return componentType.IsGenericType
+                ? componentType.Name.Remove(componentType.Name.IndexOf('`'))
+                : componentType.Name;
         }
 
-        bool IgnorePrpps(string name)
+        bool IgnoreProps(string name)
         {
             return name != "Attributes" && name != "RefBack";
         }
@@ -327,6 +339,14 @@ namespace MASA.Blazor.Doc.CLI.Commands
                 else return "";
             }
             else return "null";
+        }
+
+        string GetType(Type type)
+        {
+            return type.IsGenericType
+                ? type.Name.Split("`")[0] +
+                  $"<{string.Join(",", type.GenericTypeArguments.Select(t => t.Name))}>"
+                : type.Name;
         }
     }
 
@@ -357,14 +377,18 @@ namespace MASA.Blazor.Doc.CLI.Commands
     public class Content
     {
         public string Name { get; set; }
+
+        public string Type { get; set; }
+
         public string Description { get; set; }
     }
 
     public class Event
     {
         public string Name { get; set; }
+
+        public string Type { get; set; }
+
         public string Description { get; set; }
     }
 }
-
-

@@ -11,6 +11,11 @@ namespace MASA.Blazor
 {
     public partial class MFooter : BFooter, IThemeable
     {
+        private readonly string[] _applicationProperties = new string[]
+        {
+            "Bottom","Left","Right"
+        };
+
         [Parameter]
         public bool Dark { get; set; }
 
@@ -84,7 +89,7 @@ namespace MASA.Blazor
         public bool Tile { get; set; }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         protected StringNumber ComputedBottom => ComputeBottom();
 
@@ -92,7 +97,7 @@ namespace MASA.Blazor
         {
             if (!IsPositioned) return null;
 
-            return App && Inset ? GlobalConfig.Application.Bottom : 0;
+            return App && Inset ? MasaBlazor.Application.Bottom : 0;
         }
 
         protected StringNumber ComputedLeft => ComputeLeft();
@@ -101,7 +106,7 @@ namespace MASA.Blazor
         {
             if (!IsPositioned) return null;
 
-            return App && Inset ? GlobalConfig.Application.Left : 0;
+            return App && Inset ? MasaBlazor.Application.Left : 0;
         }
 
         protected StringNumber ComputedRight => ComputeRight();
@@ -110,10 +115,24 @@ namespace MASA.Blazor
         {
             if (!IsPositioned) return null;
 
-            return App && Inset ? GlobalConfig.Application.Right : 0;
+            return App && Inset ? MasaBlazor.Application.Right : 0;
         }
 
         protected bool IsPositioned => Absolute || Fixed || App;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
+        }
+
+        private void ApplicationPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (_applicationProperties.Contains(e.PropertyName))
+            {
+                InvokeStateHasChanged();
+            }
+        }
 
         protected override void SetComponentClass()
         {
@@ -154,15 +173,25 @@ namespace MASA.Blazor
 
         protected async Task UpdateApplicationAsync()
         {
+            if (!App)
+            {
+                return;
+            }
+
             var val = Height.ToDouble() > 0 ? Height.ToDouble() : await GetClientHeightAsync();
             if (Inset)
-                GlobalConfig.Application.InsetFooter = val;
+                MasaBlazor.Application.InsetFooter = val;
             else
-                GlobalConfig.Application.Footer = val;
+                MasaBlazor.Application.Footer = val;
         }
 
         private async Task<double> GetClientHeightAsync()
         {
+            if (Ref.Id == null)
+            {
+                return 0;
+            }
+
             var element = await JsInvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, Ref);
             return element.ClientHeight;
         }
@@ -170,14 +199,20 @@ namespace MASA.Blazor
         protected override void Dispose(bool disposing)
         {
             RemoveApplication();
+            MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
         }
 
         private void RemoveApplication()
         {
+            if (!App)
+            {
+                return;
+            }
+
             if (Inset)
-                GlobalConfig.Application.InsetFooter = 0;
+                MasaBlazor.Application.InsetFooter = 0;
             else
-                GlobalConfig.Application.Footer = 0;
+                MasaBlazor.Application.Footer = 0;
         }
     }
 }

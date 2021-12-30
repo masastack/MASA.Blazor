@@ -32,12 +32,12 @@ public partial class DocLayout
 
         var fragment = uri.Fragment;
 
-        if (fragment.StartsWith('#'))
+        if (fragment.StartsWith('#') && fragment != "#")
         {
             await Js.ScrollToHash(fragment);
         }
     }
-    
+
     public void Dispose()
     {
         NavigationManager.LocationChanged -= OnLocationChanged;

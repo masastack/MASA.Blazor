@@ -123,14 +123,10 @@ namespace MASA.Blazor.Doc.Services
 
         public async Task<List<ContentsItem>> GetTitlesAsync(string currentUrl)
         {
-            var uri = new Uri(currentUrl);
-            if (!uri.AbsolutePath.StartsWith("/components"))
-            {
-                return new List<ContentsItem>();
-            }
-
             var menuItems = await GetMenuAsync();
-            var current = menuItems.SelectMany(r => r.Children).FirstOrDefault(r => r.Url != null && currentUrl.Contains(r.Url));
+            var current = menuItems
+                .SelectMany(r => r.Children)
+                .FirstOrDefault(r => r.Url != null && currentUrl.Contains(r.Url, StringComparison.OrdinalIgnoreCase));
 
             var contents = current?.Contents;
             var componentName = currentUrl.Split('/')[^1];

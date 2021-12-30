@@ -8,31 +8,31 @@ namespace MASA.Blazor
     //Todo：Crossover mode to be perfected
     public partial class MImage : MResponsive, IImage, IThemeable
     {
-        [Parameter] 
+        [Parameter]
         public bool Contain { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public string Src { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public string LazySrc { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public string Gradient { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public RenderFragment PlaceholderContent { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public bool Dark { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public bool Light { get; set; }
 
-        [CascadingParameter] 
+        [CascadingParameter]
         public IThemeable Themeable { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public string Position { get; set; } = "center center";
 
         public bool IsDark
@@ -63,10 +63,7 @@ namespace MASA.Blazor
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (firstRender)
-            {
-                await base.OnAfterRenderAsync(firstRender);
-            }
+            await base.OnAfterRenderAsync(firstRender);
 
             if (!string.IsNullOrEmpty(LazySrc) && IsLoading && Dimensions == null)
             {
@@ -117,9 +114,9 @@ namespace MASA.Blazor
                         .AddIf("m-image__image--cover", () => !Contain);
                 }, styleBuilder =>
                 {
-                    string backgroud = GetBackgroudImage();
+                    var url = GetBackgroundImageUrl();
                     styleBuilder
-                        .AddIf(backgroud, () => !string.IsNullOrEmpty(backgroud))
+                        .AddIf(GetBackgroundImage(url), () => !string.IsNullOrEmpty(url))
                         .AddIf($"background-position: {Position}", () => !string.IsNullOrEmpty(Position));
                 })
                 .Apply("placeholder", cssBuilder => { cssBuilder.Add("m-image__placeholder"); });
@@ -141,21 +138,31 @@ namespace MASA.Blazor
                 });
         }
 
-        private string GetBackgroudImage()
+        private string GetBackgroundImageUrl()
         {
-            if (string.IsNullOrEmpty(Src) && string.IsNullOrEmpty(LazySrc) && string.IsNullOrEmpty(Gradient))
+            if (string.IsNullOrEmpty(Src) && string.IsNullOrEmpty(LazySrc))
             {
-                return string.Empty;
+                return null;
             }
 
-            StringBuilder stringBuilder = new StringBuilder();
+            return IsLoading || IsError ? LazySrc : CurrentSrc;
+        }
+
+        private string GetBackgroundImage(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+            {
+                return null;
+            }
+
+            StringBuilder stringBuilder = new();
             stringBuilder.Append("background-image:");
+
             if (!string.IsNullOrEmpty(Gradient))
             {
                 stringBuilder.Append($"linear-gradient({Gradient}),");
             }
 
-            var url = IsLoading || IsError ? LazySrc : CurrentSrc;
             stringBuilder.Append($"url({url})");
             return stringBuilder.ToString();
         }

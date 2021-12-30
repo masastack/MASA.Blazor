@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "VirtualScroll",
+  "Title": "MVirtualScroll",
   "Components": [
     "Virtual scroller"
   ],
@@ -24,7 +24,7 @@
     },
     {
       "Name": "Items",
-      "Type": "ICollection`1",
+      "Type": "ICollection<TItem>",
       "Default": "[]",
       "Description": "要显示的项目数组"
     },
@@ -80,6 +80,7 @@
   "Contents": [
     {
       "Name": "ItemContent",
+      "Type": "RenderFragment<TItem>",
       "Description": ""
     }
   ],

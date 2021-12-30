@@ -16,7 +16,7 @@ namespace MASA.Blazor
 
         protected override async Task MoveContentTo()
         {
-            await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, Attach ?? ".m-application");
+            await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachedSelector);
         }
 
         protected override void SetComponentClass()
@@ -39,6 +39,7 @@ namespace MASA.Blazor
                         .Add($"{prefix}__content")
                         .AddIf("menuable__content__active", () => Value)
                         .AddIf($"{prefix}__content--fixed", () => ActivatorFixed)
+                        .Add(ContentClass)
                         .AddBackgroundColor(Color);
                 }, styleBuilder =>
                 {

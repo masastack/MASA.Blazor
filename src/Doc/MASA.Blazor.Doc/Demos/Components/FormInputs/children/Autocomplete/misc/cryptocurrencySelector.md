@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Todo...
+The `MAutocomplete` component is extremely flexible and can fit in just about any use-case. Create custom displays for no-data, item and selection slots to provide a unique user experience. Using slots enables you to easily customize the desired look for your application.

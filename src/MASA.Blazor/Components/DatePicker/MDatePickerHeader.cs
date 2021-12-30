@@ -91,13 +91,13 @@ namespace MASA.Blazor
         }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
-        public bool RTL => GlobalConfig.RTL;
+        public bool RTL => MasaBlazor.RTL;
 
         protected bool IsReversing { get; set; }
 
-        public string Transition => IsReversing == !GlobalConfig.RTL ? "tab-reverse-transition" : "tab-transition";
+        public string Transition => IsReversing == !MasaBlazor.RTL ? "tab-reverse-transition" : "tab-transition";
 
         public Dictionary<string, object> ButtonAttrs => new()
         {

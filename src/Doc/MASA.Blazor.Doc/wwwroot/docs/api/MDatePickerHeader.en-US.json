@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "DatePickerHeader",
+  "Title": "MDatePickerHeader",
   "Components": [
     "Date pickers"
   ],
@@ -36,7 +36,7 @@
     },
     {
       "Name": "Format",
-      "Type": "Func`2",
+      "Type": "Func<DateOnly,String>",
       "Default": "null",
       "Description": ""
     },
@@ -60,13 +60,13 @@
     },
     {
       "Name": "Max",
-      "Type": "Nullable`1",
+      "Type": "Nullable<DateOnly>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "Min",
-      "Type": "Nullable`1",
+      "Type": "Nullable<DateOnly>",
       "Default": "",
       "Description": ""
     },
@@ -104,16 +104,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "OnInput",
+      "Type": "EventCallback<DateOnly>",
       "Description": ""
     },
     {
       "Name": "OnToggle",
+      "Type": "EventCallback",
       "Description": ""
     }
   ]

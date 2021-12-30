@@ -25,6 +25,9 @@ namespace MASA.Blazor
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
 
+        [CascadingParameter]
+        public MApp App { get; set; }
+
         public bool IsDark
         {
             get
@@ -39,19 +42,23 @@ namespace MASA.Blazor
                     return false;
                 }
 
-                return Themeable != null && Themeable.IsDark;
+                return App != null && App.IsDark;
             }
         }
 
         public override string AttachedSelector => Attach ?? ".m-application";
-        
+
         protected override void SetComponentClass()
         {
             Transition ??= "m-menu-transition";
             Origin ??= "top left";
 
             CssProvider
-                .Apply(css => css.Add("m-menu").AddTheme(IsDark))
+                .Apply(css =>
+                {
+                    css
+                        .Add("m-menu");
+                })
                 .Apply("content", css =>
                 {
                     css.Add("m-menu__content")
@@ -59,7 +66,8 @@ namespace MASA.Blazor
                         .AddIf("m-menu__content--fixed", () => ActivatorFixed)
                         .AddIf("menuable__content__active", () => Value)
                         .AddRounded(Tile ? "0" : Rounded)
-                        .Add(ContentClass);
+                        .Add(ContentClass)
+                        .AddTheme(IsDark);
                 }, style =>
                 {
                     style

@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-`MFileInput` 组件的核心是一个基于 `MTextField` 拓展的基本容器。
+`MFileInput` 组件的核心是一个基于 [MTextField](/components/text-fields) 拓展的基本容器。
 
 ## en-US
 
-At its core, the `MFileInput` component is a basic container that extends `MTextField`.
+At its core, the `MFileInput` component is a basic container that extends [MTextField](/components/text-fields).

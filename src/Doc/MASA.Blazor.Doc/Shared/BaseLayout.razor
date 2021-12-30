@@ -2,10 +2,10 @@
 
 <CascadingValue Value="this">
     <CascadingValue Value="@IsChinese">
-        <MApp Class="baselayout-m-app" Style="background:#F2F3F5;">
-            <MAppBar Height="80" Elevation=0 Fixed Color="white" Class="pc app-bar" ClippedLeft ClippedRight>
+        <MApp Class="baselayout-m-app">
+            <MAppBar App Height="80" Elevation=0 Color="white" Class="pc app-bar" ClippedLeft ClippedRight>
                 <img style="cursor:pointer;" class="ml-6" src="https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png" @onclick=@(()=>{ Navigation.NavigateTo("/"); SelectTab = 0;}) />
-                <MTabs BackgroundColor="white" Class="mtab-font" Style="margin-left:120px;" Color="black" SliderColor="purple darken-2" Optional @bind-Value="SelectTab">
+                <MTabs BackgroundColor="white" Class="mtab-font" Style="margin-left:120px;" Color="black" SliderColor="purple darken-2" @bind-Value="SelectTab">
                     <MTab Style="text-transform: none"
                           Href="/">
                         @T("Home")
@@ -14,8 +14,9 @@
                           Href="introduction/why">
                         @T("Docs")
                     </MTab>
-                    <MTab Style="text-transform: none" Href="https://masa-blogs.lonsid.cn/categories/Blazor/" Target="_blank">@T("Blog")</MTab>
                     <MTab Style="text-transform: none" Href="about/meet-the-team">@T("Team")</MTab>
+                    <MTab Style="text-transform: none" Href="https://blogs.masastack.com/categories/Blazor/" Target="_blank">@T("Blog")</MTab>
+                    <MTab Style="text-transform: none" Href="http://blazor-pro.masastack.com/" Target="_blank">Pro</MTab>
                 </MTabs>
 
                 <MSpacer></MSpacer>
@@ -42,7 +43,7 @@
                 </MButton>
             </MAppBar>
 
-            <MAppBar Height="106" Elevation=0 Fixed Class="phone-bar" Color="white"  ClippedLeft ClippedRight>
+            <MAppBar App Height="106" Elevation=0 Class="phone-bar" Color="white" ClippedLeft ClippedRight>
                 <div class="d-flex flex-column" style="width:100%;">
                     <MRow Align="AlignTypes.Center" Justify="JustifyTypes.SpaceBetween" NoGutters>
                         @if (!_isShowMiniLogo)
@@ -55,7 +56,6 @@
                                 <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/miniLogo.png" />
                             </MButton>
                         }
-
 
                         <div>
                             <MTextField TValue="string"
@@ -80,24 +80,16 @@
                         </MButton>
                     </MRow>
                     <MRow NoGutters>
-                        <MTabs Height="40" BackgroundColor="white" Class="mtab-font" Color="black" SliderColor="purple darken-2" Optional @bind-Value="SelectTab">
-                            <MTab Class=""
-                                  Style="text-transform: none"
-                                  Href="/">
-                                @T("Home")
-                            </MTab>
-                            <MTab Class=""
-                                  Style="text-transform: none"
-                                  Href="introduction/why">
-                                @T("Docs")
-                            </MTab>
-                            <MTab Class="" Style="text-transform: none" Href="https://masa-blogs.lonsid.cn/categories/Blazor/" Target="_blank">@T("Blog")</MTab>
-                            <MTab Class="" Style="text-transform: none" Href="about/meet-the-team">@T("Team")</MTab>
+                        <MTabs ShowArrows="true" Height="40" BackgroundColor="white" Class="mtab-font" Color="black" SliderColor="purple darken-2" Optional @bind-Value="SelectTab">
+                            <MTab Style="text-transform: none;" Href="/">@T("Home")</MTab>
+                            <MTab Style="text-transform: none;" Href="introduction/why">@T("Docs")</MTab>
+                            <MTab Style="text-transform: none;" Href="about/meet-the-team">@T("Team")</MTab>
+                            <MTab Style="text-transform: none;" Href="https://blogs.masastack.com/categories/Blazor/" Target="_blank">@T("Blog")</MTab>
+                            <MTab Style="text-transform: none;" Href="http://blazor-pro.masastack.com/" Target="_blank">Pro</MTab>
                         </MTabs>
                     </MRow>
                 </div>
             </MAppBar>
-
             @Body
         </MApp>
     </CascadingValue>

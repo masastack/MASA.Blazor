@@ -120,7 +120,12 @@ h1 + p {
     font-weight: 300;
 }
 
+
 .markdown-body > section section {
+    margin-bottom: 3rem;
+}
+
+.markdown-body > div section section {
     margin-bottom: 3rem;
 }
 
@@ -529,3 +534,33 @@ code[class*=language-], pre[class*=language-] {
 .m-cascader__menu-body-wrapper:not(.m-cascader__menu-body-wrapper--dense) .m-list-item {
     min-height: 56px;
 }
+
+.m-dialog--drawer {
+    border-radius: 0;
+    margin: 0;
+    height: 100%;
+    position: fixed;
+    overflow-y: auto;
+    top: 0;
+}
+
+.m-dialog--drawer.m-dialog--drawer-right {
+    right: 0;
+}
+
+.m-dialog--drawer.m-dialog--drawer-left {
+    left: 0;
+}
+
+.m-dialog.m-dialog--drawer {
+    max-height: 100%;
+}
+
+.dialog-right-transition-enter, .dialog-right-transition-leave-to {
+    transform: translateX(100%);
+}
+
+.dialog-left-transition-enter, .dialog-left-transition-leave-to {
+    transform: translateX(-100%);
+}
+

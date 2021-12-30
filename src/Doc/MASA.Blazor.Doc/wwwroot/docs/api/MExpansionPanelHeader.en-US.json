@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "ExpansionPanelHeader",
+  "Title": "MExpansionPanelHeader",
   "Components": [
     "Expansion panels"
   ],
@@ -56,16 +56,19 @@
   "Contents": [
     {
       "Name": "ActionsContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment<Boolean>",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     }
   ]

@@ -127,7 +127,7 @@
     "FullTitle": "Colors"
   },
   {
-    "Desc": "<p>��ʾ������������������ݵ���ʾ�����Ը��ݵ�ǰ��ͼ��ʵ��Ԫ����ʾ��������������ʾ���ݡ�</p>\n",
+    "Desc": "<p>The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.</p>\n",
     "Order": 0,
     "OtherDocs": {},
     "LastWriteTime": "2021-12-03T15:41:56.1934376+08:00",
@@ -622,7 +622,7 @@
     "FullTitle": "Text and typography"
   },
   {
-    "Desc": "<p>Smooth animations help make a UI feel great. Using Vue��s transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the <strong>transition</strong> prop.</p>\n",
+    "Desc": "<p>Smooth animations help make a UI feel great. Using MASA Blazor transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the <strong>transition</strong> prop.</p>\n",
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n"

@@ -17,9 +17,9 @@ namespace MASA.Blazor
         public bool Light { get; set; }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
-        public bool InternalReverse => GlobalConfig.RTL ? !Reverse : Reverse;
+        public bool InternalReverse => MasaBlazor.RTL ? !Reverse : Reverse;
 
         public string ComputedTransition
         {

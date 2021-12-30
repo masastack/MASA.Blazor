@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Card",
+  "Title": "MCard",
   "Components": [
     "Cards"
   ],
@@ -188,16 +188,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "ProgressContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     }
   ]

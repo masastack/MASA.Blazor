@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "BreadcrumbsItem",
+  "Title": "MBreadcrumbsItem",
   "Components": [
     "Breadcrumbs"
   ],
@@ -18,6 +18,12 @@
     },
     {
       "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Exact",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
@@ -80,6 +86,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

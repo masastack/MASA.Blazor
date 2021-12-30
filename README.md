@@ -173,9 +173,9 @@ Thanks to all the friends who have contributed to this project.
 
 ## Interactive 
 
-QQ group | WX group | WX public account| WX Customer Service
-:---:|:---:|:---:|:---:
-![masa.blazor-qq](./imgs/masa.blazor-qq-group.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-group.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-public-account.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-customer-service.png)
+QQ group | WX public account| WX Customer Service
+:---:|:---:|:---:
+![masa.blazor-qq](./imgs/masa.blazor-qq-group.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-public-account.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-customer-service.png)
 
 ## Development team
 
@@ -183,10 +183,10 @@ The Digital Flash technical team is an efficient, stable and innovative team. Th
 
 ## Code of conduct 
 
-This project adopts the code of conduct defined in the "Contributors Convention" to clarify the expected behavior of our community. For more information, see  [.NET Foundation Code of Conduct](https://dotnetfoundation.org/code-of-conduct).
+This project adopts the code of conduct defined in the "Contributors Convention" to clarify the expected behavior of our community. For more information, see  [MASA Stack Community Code of Conduct](https://github.com/masastack/community/blob/main/CODE-OF-CONDUCT.md).
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT)
+[![MASA.Blazor](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/BlazorComponent/MASA.Blazor/blob/develop/LICENSE)
 
 Copyright (c) 2021-present MASA.Blazor

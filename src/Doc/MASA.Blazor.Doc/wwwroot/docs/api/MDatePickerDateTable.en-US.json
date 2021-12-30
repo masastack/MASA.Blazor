@@ -1,12 +1,12 @@
 ﻿{
-  "Title": "DatePickerDateTable",
+  "Title": "MDatePickerDateTable",
   "Components": [
     "Date pickers"
   ],
   "Props": [
     {
       "Name": "AllowedDates",
-      "Type": "Func`2",
+      "Type": "Func<DateOnly,Boolean>",
       "Default": "null",
       "Description": ""
     },
@@ -48,7 +48,7 @@
     },
     {
       "Name": "Format",
-      "Type": "Func`2",
+      "Type": "Func<DateOnly,String>",
       "Default": "null",
       "Description": ""
     },
@@ -72,13 +72,13 @@
     },
     {
       "Name": "Max",
-      "Type": "Nullable`1",
+      "Type": "Nullable<DateOnly>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "Min",
-      "Type": "Nullable`1",
+      "Type": "Nullable<DateOnly>",
       "Default": "",
       "Description": ""
     },
@@ -126,7 +126,7 @@
     },
     {
       "Name": "WeekdayFormat",
-      "Type": "Func`2",
+      "Type": "Func<DateOnly,String>",
       "Default": "null",
       "Description": ""
     }
@@ -135,10 +135,12 @@
   "Events": [
     {
       "Name": "OnDaySelected",
+      "Type": "EventCallback<Int32>",
       "Description": ""
     },
     {
       "Name": "OnInput",
+      "Type": "EventCallback<DateOnly>",
       "Description": ""
     }
   ]

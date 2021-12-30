@@ -19,7 +19,7 @@
                     Cols="12"
                     Sm="6">
                     <MTextField
-                        @bind-Value="model.first"
+                        @bind-Value="model.First"
                         Color="purple darken-2"
                         Label="First name">
                     </MTextField>
@@ -28,14 +28,14 @@
                     Cols="12"
                     Sm="6">
                     <MTextField
-                        @bind-Value="model.last"
+                        @bind-Value="model.Last"
                         Color="blue darken-2"
                         Label="Last name">
                     </MTextField>
                 </MCol>
                 <MCol Cols="12">
                     <MTextarea
-                        @bind-Value="model.bio"
+                        @bind-Value="model.Bio"
                         Color="teal">
                         <LabelContent>
                             <div>
@@ -48,7 +48,7 @@
                     Cols="12"
                     Sm="6">
                     <MSelect
-                        @bind-Value="model.favoriteAnimal"
+                        @bind-Value="model.FavoriteAnimal"
                         Items="animals"
                         ItemText="item => item"
                         ItemValue="item => item"
@@ -60,7 +60,7 @@
                     Cols="12"
                     Sm="6">
                     <MSlider
-                        @bind-Value="model.age"
+                        @bind-Value="model.Age"
                         Color="orange"
                         Label="Age"
                         Hint="Be honest"
@@ -71,7 +71,7 @@
                 </MCol>
                 <MCol Cols="12">
                     <MCheckbox
-                        @bind-Value="model.terms"
+                        @bind-Value="model.Terms"
                         Color="green">
                         <LabelContent>
                             <div @onclick:stopPropagation>
@@ -104,7 +104,6 @@
                 Disabled="!FormIsValid"
                 Text
                 Color="primary"
-                Type="submit"
                 OnClick="Submit">
                 Register
             </MButton>
@@ -188,32 +187,32 @@
     public class Model
     {
         [Required]
-        public string first { get; set; }
+        public string First { get; set; }
 
         [Required]
-        public string last { get; set; }
+        public string Last { get; set; }
 
         [Required]
         [Range(0, 10, ErrorMessage = "I don't believe you!")]
-        public double age { get; set; }
+        public double Age { get; set; }
 
-        public string bio { get; set; }
+        public string Bio { get; set; }
 
         [Required]
-        public string favoriteAnimal { get; set; }
+        public string FavoriteAnimal { get; set; }
 
         [Required]
         [Range(typeof(bool), "true", "true", ErrorMessage = "The field is required")] // just for demo
-        public bool terms { get; set; }
+        public bool Terms { get; set; }
 
         public void Reset()
         {
-            first = default;
-            last = default;
-            age = default;
-            bio = default;
-            favoriteAnimal = default;
-            terms = default;
+            First = default;
+            Last = default;
+            Age = default;
+            Bio = default;
+            FavoriteAnimal = default;
+            Terms = default;
         }
     }
 

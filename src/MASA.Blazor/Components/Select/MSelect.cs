@@ -19,10 +19,10 @@ namespace MASA.Blazor
 
         protected virtual BMenuProps GetDefaultMenuProps() => new()
         {
-            CloseOnClick = true, // TODO: there is false in vuetify code source
+            CloseOnClick = true,
             CloseOnContentClick = false,
             DisableKeys = true,
-            OpenOnClick = true, // TODO: there is true in vuetify code source
+            OpenOnClick = true,
             MaxHeight = 304,
         };
 
@@ -135,12 +135,12 @@ namespace MASA.Blazor
         {
             get
             {
-                if (Value is IList<TItemValue> values)
+                if (InternalValue is IList<TItemValue> values)
                 {
                     return values;
                 }
 
-                if (Value is TItemValue value)
+                if (InternalValue is TItemValue value)
                 {
                     return new List<TItemValue>
                     {
@@ -188,10 +188,11 @@ namespace MASA.Blazor
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
+
             if (firstRender)
             {
                 await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
-
                 await (Menu as MMenu)?.UpdateActivator(InputSlotElement);
             }
         }
@@ -399,9 +400,11 @@ namespace MASA.Blazor
                 var selectedItem = Items.FirstOrDefault(item => EqualityComparer<TItemValue>.Default.Equals(ItemValue(item), value));
                 await OnSelectedItemUpdate.InvokeAsync(selectedItem);
             }
-
-            //TODO: Refactor MSelectList
-            StateHasChanged();
+            else
+            {
+                //TODO: Refactor MSelectList
+                StateHasChanged();
+            }
         }
 
         public Task RemoveSelectedAsync(string text, TItemValue value)

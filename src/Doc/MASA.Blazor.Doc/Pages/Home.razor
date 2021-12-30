@@ -400,6 +400,9 @@
                     <MCol Class="d-flex justify-center">
                         <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/lsd-logo.png">
                     </MCol>
+                    <MCol>
+                        <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/bgy-logo.png">
+                    </MCol>
                     <MCol Class="d-flex justify-center">
                         <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/sskj-logo.png">
                     </MCol>
@@ -553,7 +556,7 @@
     </div>
 
     <MFooter Dark Padless Color="#5C2D91" Height="444" Class="footer">
-        <div class="foot-box">
+        <MRow NoGutters Class="foot-box">
             <div>
                 <p>MASA Blazor pro</p>
                 <p>Blazor Component</p>
@@ -562,13 +565,16 @@
             <div>
                 <p>@T("MASABlazorCommunity")</p>
                 <p>@T("JoinUs")</p>
-                <p class="foot-p">&nbsp;</p>
+                <p>@T("MoreVideo")</p>
             </div>
             <div>
                 <p>@T("UpdateLog")</p>
                 <p>@T("CommonProblem")</p>
-                <p class="foot-p">&nbsp;</p>
+                <p>@T("Contact")</p>
             </div>
-        </div>
+        </MRow>
+        <MRow NoGutters Class="pb-12" Style="background-color:#5C2D91;" Justify="JustifyTypes.Center">
+            <a href="https://beian.miit.gov.cn/" target="_blank" style="text-decoration:none;font-size:14px;color:#fff;opacity:0.5;">浙ICP备2021013592号-1</a>
+        </MRow>
     </MFooter>
 </div>

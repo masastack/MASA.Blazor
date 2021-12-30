@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "ListGroup",
+  "Title": "MListGroup",
   "Components": [
     "Lists",
     "List item groups"
@@ -43,7 +43,7 @@
     },
     {
       "Name": "Group",
-      "Type": "String",
+      "Type": "List<String>",
       "Default": "null",
       "Description": ""
     },
@@ -87,24 +87,29 @@
   "Contents": [
     {
       "Name": "ActivatorContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "AppendIconContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "PrependIconContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

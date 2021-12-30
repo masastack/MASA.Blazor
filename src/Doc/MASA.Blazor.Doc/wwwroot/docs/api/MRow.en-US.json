@@ -1,66 +1,66 @@
 ﻿{
-  "Title": "Row",
+  "Title": "MRow",
   "Components": [
     "Grid system"
   ],
   "Props": [
     {
       "Name": "Align",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignContent",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignContentLg",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignContentMd",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignContentSm",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignContentXl",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignContentTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignLg",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignMd",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignSm",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "AlignXl",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<AlignTypes>",
       "Default": "null",
       "Description": ""
     },
@@ -71,22 +71,10 @@
       "Description": "The class applied to the outermost element of the component"
     },
     {
-      "Name": "DefaultBreakpoint",
-      "Type": "BreakpointType",
-      "Default": "",
-      "Description": ""
-    },
-    {
       "Name": "Dense",
       "Type": "Boolean",
       "Default": "false",
       "Description": "Decreases component’s height."
-    },
-    {
-      "Name": "Gutter",
-      "Type": "OneOf`6",
-      "Default": "",
-      "Description": ""
     },
     {
       "Name": "Id",
@@ -96,31 +84,31 @@
     },
     {
       "Name": "Justify",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "JustifyLg",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "JustifyMd",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "JustifySm",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": ""
     },
     {
       "Name": "JustifyXl",
-      "Type": "StringEnum`1",
+      "Type": "StringEnum<JustifyTypes>",
       "Default": "null",
       "Description": ""
     },
@@ -141,30 +129,14 @@
       "Type": "String",
       "Default": "div",
       "Description": ""
-    },
-    {
-      "Name": "Type",
-      "Type": "String",
-      "Default": "null",
-      "Description": ""
-    },
-    {
-      "Name": "Wrap",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
     }
   ],
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],
-  "Events": [
-    {
-      "Name": "OnBreakpoint",
-      "Description": ""
-    }
-  ]
+  "Events": []
 }

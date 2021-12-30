@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Badge",
+  "Title": "MBadge",
   "Components": [
     "Badges"
   ],
@@ -134,10 +134,12 @@
   "Contents": [
     {
       "Name": "BadgeContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

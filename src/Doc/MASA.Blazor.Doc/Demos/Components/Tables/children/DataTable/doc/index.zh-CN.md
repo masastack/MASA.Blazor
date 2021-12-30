@@ -16,3 +16,6 @@ related:
 ## API
 
 - [MDataTable](/api/MDataTable)
+- [MDataTableHeader](/api/MDataTableHeader)
+- [MDataFooter](/api/MDataFooter)
+- [MSimpleCheckbox](/api/MSimpleCheckbox)

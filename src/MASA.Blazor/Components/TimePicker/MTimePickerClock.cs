@@ -134,9 +134,9 @@ namespace MASA.Blazor
 
         protected bool IsDragging { get; set; }
 
-        protected HtmlElement Clock => Document.QuerySelector(Ref);
+        protected HtmlElement Clock => Document.GetElementByReference(Ref);
 
-        protected HtmlElement InnerClock => Document.QuerySelector(InnerClockElement);
+        protected HtmlElement InnerClock => Document.GetElementByReference(InnerClockElement);
 
         protected double InnerRadiusScale => 0.62;
 
@@ -384,7 +384,7 @@ namespace MASA.Blazor
             {
                 if (Scrollable)
                 {
-                    var el = Document.QuerySelector(Ref);
+                    var el = Document.GetElementByReference(Ref);
                     await el.AddEventListenerAsync("wheel", CreateEventCallback<WheelEventArgs>(HandleOnWheelAsync), false, new EventListenerActions() { PreventDefault = true });
                 }
             }

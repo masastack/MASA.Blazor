@@ -1,32 +1,24 @@
 ﻿@page "/components/{name}"
 @page "/components"
 @using MASA.Blazor.Doc.Models
-@using MASA.Blazor.Doc.Services
 @using MASA.Blazor.Doc.Utils
 @using System.Web
+@using System.Globalization
 @inherits OwningComponentBase<DemoService>
 @layout DocLayout
 
 @if (_demoComponent != null)
 {
-    <section id="@_demoComponent.Title">
-        <h1 class="m-heading text-h3 text-sm-h3 mb-4">
-            <a herf="@_demoComponent.FullTitle" class="text-decoration-none text-right text-md-left" @onclick="async () => await ScrollToAsync(_demoComponent.Title)"> # </a>
-            @_demoComponent.FullTitle
-        </h1>
+    <SectionContent Title="@_demoComponent.Title" SubTitle="@_demoComponent.Subtitle" Id="@_demoComponent.Title" Level="1" IsAnchor>
 
         @((MarkupString)_demoComponent.Desc.FormatLink())
 
         @if (Usage != null)
         {
             var index = _demoIndex++;
-            <section id="@Usage.Title.HashSection()">
-                <h1 class="m-heading text-h4 text-sm-h4 mb-3">
-                    <a herf="@Usage.Title.HashSection()" class="text-decoration-none text-right text-md-left" @onclick="async () => await ScrollToAsync(Usage.Title.HashSection())"> # </a>
-                    @Usage.Title
-                </h1>
-                <CodeBox @key="_demoComponent.Title" Index="index" Demo="Usage" ComponentName="@_demoComponent.Title"></CodeBox>
-            </section>
+            <SectionContent Title="@Usage.Title" Level="2" IsAnchor>
+                <CodeBox Index="index" Demo="Usage" @key="_demoComponent.Title" ComponentName="@_demoComponent.Title"></CodeBox>
+            </SectionContent>
         }
 
         @if (_demoComponent.OtherDocs != null)
@@ -35,11 +27,7 @@
             {
                 var alerts = doc.SplitByAlertType();
 
-                <section id="@title.HashSection()">
-                    <h1 class="m-heading text-h4 text-sm-h4 mb-3">
-                        <a herf="@title.HashSection()" class="text-decoration-none text-right text-md-left" @onclick="async () => await ScrollToAsync(title.HashSection())"> # </a>
-                        @title
-                    </h1>
+                <SectionContent Title="@title" Id="@title.HashSection()" Level="2" IsAnchor>
                     @foreach (var (type, alert) in alerts)
                     {
                         if (type == AlertTypes.None)
@@ -65,138 +53,99 @@
                             </MAlert>
                         }
                     }
-                </section>
+                </SectionContent>
             }
         }
 
         @if (PropsList.Any() || EventsList.Any() || ContentsList.Any() || MiscList.Any())
         {
-            var example = DemoItemModel.GenerateExample("zh-CN");
+            var lang = GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name;
+            var example = DemoItemModel.GenerateExample(lang);
 
-            <section id="examples">
-                <h1 class="m-heading text-h4 text-sm-h4 mb-3">
-                    <a herf="@example.Title.HashSection()" class="text-decoration-none text-right text-md-left" @onclick="@(async () => await ScrollToAsync("examples"))"> # </a>
-                    @example.Title
-                </h1>
+            <SectionContent Title="@example.Title" Id="examples" Level="2" IsAnchor>
                 @if (PropsList.Any())
                 {
-                    var props = DemoItemModel.GenerateProps("zh-CN");
+                    var props = DemoItemModel.GenerateProps(lang);
 
-                    <section id="props">
-                        <h1 class="m-heading text-h5 mb-2">
-                            <a herf="#props" class="text-decoration-none text-right text-md-left" @onclick="@(async () => await ScrollToAsync("props"))"> # </a>
-                            @props.Title
-                        </h1>
+                    <SectionContent Title="@props.Title" Id="props" Level="3" IsAnchor>
                         @foreach (var item in PropsList)
                         {
                             var index = _demoIndex++;
-                            <section id="@item.Title.HashSection()">
-                                <h1 class="m-heading text-h6 mb-2">
-                                    <a herf="@item.Title.HashSection()" class="text-decoration-none text-right text-md-left" @onclick="@(async () => await ScrollToAsync(item.Title.HashSection()))"> # </a>
-                                    @item.Title
-                                </h1>
+                            <SectionContent Title="@item.Title" Level="4" IsAnchor>
                                 <CodeBox @key="@($"{_demoComponent.Title}-{item.Title}")" Index="index" Demo="item" ComponentName="@_demoComponent?.Title"></CodeBox>
-                            </section>
+                            </SectionContent>
                         }
-                    </section>
+                    </SectionContent>
                 }
                 @if (EventsList.Any())
                 {
-                    var events = DemoItemModel.GenerateEvents("zh-CN");
+                    var events = DemoItemModel.GenerateEvents(lang);
 
-                    <section id="events">
-                        <h1 class="m-heading text-h5 mb-2">
-                            <a herf="#events" class="text-decoration-none text-right text-md-left" @onclick="@(async () => await ScrollToAsync("events"))"> # </a>
-                            @events.Title
-                        </h1>
+                    <SectionContent Title="@events.Title" Id="events" Level="3" IsAnchor>
                         @foreach (var item in EventsList)
                         {
                             var index = _demoIndex++;
-                            <section id="@item.Title.HashSection()">
-                                <h1 class="m-heading text-h6 mb-2">
-                                    <a herf="@item.Title.HashSection()" class="text-decoration-none text-right text-md-left" @onclick="@(async () => await ScrollToAsync(item.Title.HashSection()))"> # </a>
-                                    @item.Title
-                                </h1>
+                            <SectionContent Title="@item.Title" Level="4" IsAnchor>
                                 <CodeBox @key="@($"{_demoComponent.Title}-{item.Title}")" Index="index" Demo="item" ComponentName="@_demoComponent?.Title"></CodeBox>
-                            </section>
+                            </SectionContent>
                         }
-                    </section>
+                    </SectionContent>
                 }
                 @if (ContentsList.Any())
                 {
-                    var contents = DemoItemModel.GenerateContents("zh-CN");
+                    var contents = DemoItemModel.GenerateContents(lang);
 
-                    <section id="contents">
-                        <h1 class="m-heading text-h5 mb-2">
-                            <a herf="#contents" class="text-decoration-none text-right text-md-left" @onclick="@(async () => await ScrollToAsync("contents"))"> # </a>
-                            @contents.Title
-                        </h1>
+                    <SectionContent Title="@contents.Title" Id="contents" Level="3" IsAnchor>
                         @foreach (var item in ContentsList)
                         {
                             var index = _demoIndex++;
-                            <section id="@item.Title.HashSection()">
-                                <h1 class="m-heading text-h6 mb-2">
-                                    <a herf="@item.Title.HashSection()" class="text-decoration-none text-right text-md-left" @onclick="@(async () => await ScrollToAsync(item.Title.HashSection()))"> # </a>
-                                    @item.Title
-                                </h1>
+                            <SectionContent Title="@item.Title" Level="4" IsAnchor>
                                 <CodeBox @key="@($"{_demoComponent.Title}-{item.Title}")" Index="index" Demo="item" ComponentName="@_demoComponent?.Title"></CodeBox>
-                            </section>
+                            </SectionContent>
                         }
-                    </section>
+                    </SectionContent>
                 }
                 @if (MiscList.Any())
                 {
-                    var misc = DemoItemModel.GenerateMisc("zh-CN");
+                    var misc = DemoItemModel.GenerateMisc(lang);
 
-                    <section id="misc">
-                        <h1 class="m-heading text-h5 mb-2">
-                            <a herf="#misc" class="text-decoration-none text-right text-md-left" @onclick="@(async () => await ScrollToAsync("misc"))"> # </a>
-                            @misc.Title
-                        </h1>
+                    <SectionContent Title="@misc.Title" Id="misc" Level="3" IsAnchor>
                         @foreach (var item in MiscList)
                         {
                             var index = _demoIndex++;
-                            <section id="@item.Title.HashSection()">
-                                <h1 class="m-heading text-h6 mb-2">
-                                    <a herf="@item.Title.HashSection()" class="text-decoration-none text-right text-md-left" @onclick="@(async () => await ScrollToAsync(item.Title.HashSection()))"> # </a>
-                                    @item.Title
-                                </h1>
+                            <SectionContent Title="@item.Title" Level="4" IsAnchor>
                                 <CodeBox @key="@($"{_demoComponent.Title}-{item.Title}")" Index="index" Demo="item" ComponentName="@_demoComponent?.Title"></CodeBox>
-                            </section>
+                            </SectionContent>
                         }
-                    </section>
+                    </SectionContent>
                 }
-            </section>
+            </SectionContent>
         }
-    </section>
-    <section id="@("了解更多？".HashSection())" class="mt-12">
-        <h1 class="m-heading text-h3 text-sm-h3 mb-4">
-            <a herf="@("了解更多？".HashSection())" class="text-decoration-none text-right text-md-left" @onclick="@(async () => await ScrollToAsync("了解更多？".HashSection()))"> # </a>
-            了解更多？
-        </h1>
+    </SectionContent>
+    <SectionContent Class="mt-12" Title="@T("Compontents.Footer.ReadyForMore")" Level="1">
         <div class="mb-3">
-            继续学习由
-            <ALink Href="/about/meet-the-team">我们的团队</ALink>
-            选择的相关内容，或通过使用下面的导航链接在页面之间跳转。
+            @T("Compontents.Footer.ReadyForMore.Desc.Front")
+            <AppLink Href="/about/meet-the-team">@T("Compontents.Footer.ReadyForMore.Desc.Middle")</AppLink>
+            @T("Compontents.Footer.ReadyForMore.Desc.End")
         </div>
-        <RelatedPages Related="@_demoComponent?.Related" />
+        <RelatedPages Related="@_demoComponent?.Related"/>
         <MDivider Class="my-6 mt-7 mb-5"></MDivider>
         <BottomNav></BottomNav>
         <div>
             <div class="blue-grey--text text--darken-1 d-flexalign-center justify-space-between">
                 <div class="font-weight-medium d-flex align-baseline grow flex-wrap">
                     <span class="mb-2 mb-md-0">
-                        在
-                        <ALink Href="@GithubUrlHref">Github</ALink>
-                        上编辑此页面
+                        @T("Compontents.Footer.Edit.Front")
+                        <AppLink Href="@GithubUrlHref">Github</AppLink>
+                        @T("Compontents.Footer.Edit.End")
                     </span>
                     <div class="spacer hidden-sm-and-down"></div>
                     <div class="text-body-2">
-                        <span class="font-weight-medium mr-1">最后更新：</span>
+                        <span class="font-weight-medium mr-1">@T("Compontents.Footer.UpdateTime")</span>
                         <span class="text--secondary">@_demoComponent.LastWriteTime</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </SectionContent>
 }

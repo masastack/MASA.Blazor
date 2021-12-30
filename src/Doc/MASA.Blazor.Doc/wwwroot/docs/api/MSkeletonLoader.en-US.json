@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "SkeletonLoader",
+  "Title": "MSkeletonLoader",
   "Components": [
     "Skeleton loaders"
   ],
@@ -102,7 +102,7 @@
     },
     {
       "Name": "Types",
-      "Type": "Dictionary`2",
+      "Type": "Dictionary<String,String>",
       "Default": "",
       "Description": ""
     },
@@ -116,6 +116,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

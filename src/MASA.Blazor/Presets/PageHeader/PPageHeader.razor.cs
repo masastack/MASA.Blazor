@@ -7,14 +7,14 @@ namespace MASA.Blazor.Presets
     {
         private bool _loading;
 
-        private bool _showFilters = true;
-        
+        private bool _showFilters;
+
         private bool ShowFilters
         {
             get => Filters != null && _showFilters;
             set => _showFilters = value;
         }
-        
+
         [Parameter]
         public string Class { get; set; }
 
@@ -32,7 +32,10 @@ namespace MASA.Blazor.Presets
 
         [Parameter]
         public RenderFragment RightActions { get; set; }
-        
+
+        [Parameter]
+        public bool ShowFiltersByDefault { get; set; }
+
         [Parameter]
         public string Style { get; set; }
 
@@ -47,6 +50,11 @@ namespace MASA.Blazor.Presets
 
         [Parameter]
         public RenderFragment TitleFragment { get; set; }
+
+        protected override void OnInitialized()
+        {
+            _showFilters = ShowFiltersByDefault;
+        }
 
         private async Task HandleOnBack()
         {

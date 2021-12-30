@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Button",
+  "Title": "MButton",
   "Components": [
     "Buttons",
     "Button Groups"
@@ -279,16 +279,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "LoaderContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     }
   ]

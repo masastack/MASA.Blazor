@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Dialog",
+  "Title": "MDialog",
   "Components": [
     "Dialogs"
   ],
@@ -20,6 +20,12 @@
       "Name": "CloseDelay",
       "Type": "Int32",
       "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "ContentClass",
+      "Type": "String",
+      "Default": "null",
       "Description": ""
     },
     {
@@ -83,6 +89,12 @@
       "Description": ""
     },
     {
+      "Name": "Origin",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
       "Name": "Persistent",
       "Type": "Boolean",
       "Default": "false",
@@ -116,20 +128,24 @@
   "Contents": [
     {
       "Name": "ActivatorContent",
+      "Type": "RenderFragment<ActivatorProps>",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "OnOutsideClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

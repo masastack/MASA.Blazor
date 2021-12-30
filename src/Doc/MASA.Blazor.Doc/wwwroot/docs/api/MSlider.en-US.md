@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Slider
+title: MSlider
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

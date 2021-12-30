@@ -6,4 +6,6 @@ cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/FileInput.svg
 ---
 
-v-file-input��һ�����Ƶ�������������ṩ��һ���ɾ���ѡ����棬��ʾ��ϸ��ѡ����Ϣ���ϴ����ȡ� ������ֱ��ȡ����׼�ļ����롣
+
+The `MFileInput`  component is a specialized input that provides a clean interface for selecting files, 
+showing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.

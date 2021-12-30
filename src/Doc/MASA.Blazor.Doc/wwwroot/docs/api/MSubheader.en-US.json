@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Subheader",
+  "Title": "MSubheader",
   "Components": [
     "Subheaders"
   ],
@@ -44,6 +44,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

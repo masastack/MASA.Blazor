@@ -11,4 +11,4 @@ switch可以自定义文本
 
 ## en-US
 
-TODO...
+switch customize show text

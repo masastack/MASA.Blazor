@@ -49,7 +49,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool IsActive
         {
-            get => _isActive ?? Value;
+            get => _isActive ?? InternalValue;
             set
             {
                 _isActive = value;
@@ -59,9 +59,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool? Ripple { get; set; }
-
-        [Parameter]
-        public EventCallback<bool> OnChange { get; set; }
 
         [Inject]
         public Document Document { get; set; }
@@ -141,26 +138,16 @@ namespace MASA.Blazor
             if (firstRender)
             {
                 //It's used to prevent ripple directive,and we may remove this 
-                var inputSlot = Document.QuerySelector(InputSlotElement);
+                var inputSlot = Document.GetElementByReference(InputSlotElement);
                 await inputSlot.AddEventListenerAsync("mousedown", EventCallback.Empty, stopPropagation: true);
                 await inputSlot.AddEventListenerAsync("mouseup", EventCallback.Empty, stopPropagation: true);
             }
         }
 
-        public override async Task HandleOnClickAsync(MouseEventArgs args)
+        public override Task HandleOnClickAsync(MouseEventArgs args)
         {
-            Value = !Value;
-            if (OnChange.HasDelegate)
-            {
-                await OnChange.InvokeAsync(Value);
-            }
-            else
-            {
-                if (ValueChanged.HasDelegate)
-                {
-                    await ValueChanged.InvokeAsync(Value);
-                }
-            }
+            InternalValue = !InternalValue;
+            return Task.CompletedTask;
         }
     }
 }

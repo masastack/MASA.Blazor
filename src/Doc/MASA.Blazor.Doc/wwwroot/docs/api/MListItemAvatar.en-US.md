@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: ListItemAvatar
+title: MListItemAvatar
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

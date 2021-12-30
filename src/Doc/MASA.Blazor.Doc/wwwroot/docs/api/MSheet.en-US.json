@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Sheet",
+  "Title": "MSheet",
   "Components": [
     "Sheets"
   ],
@@ -116,6 +116,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

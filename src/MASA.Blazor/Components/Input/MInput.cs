@@ -55,6 +55,9 @@ namespace MASA.Blazor
         public StringNumber Height { get; set; }
 
         [Parameter]
+        public EventCallback<TValue> OnChange { get; set; }
+
+        [Parameter]
         public bool Dark { get; set; }
 
         [Parameter]
@@ -85,11 +88,22 @@ namespace MASA.Blazor
         {
             get
             {
-                return Convert.ToString(Value).Length > 0;
+                return Convert.ToString(InternalValue).Length > 0;
             }
         }
 
         public virtual bool IsLabelActive => IsDirty;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            Watcher
+                .Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), () =>
+                {
+                    Validate();
+                });
+        }
 
         protected override void SetComponentClass()
         {
@@ -189,6 +203,18 @@ namespace MASA.Blazor
                     attrs[nameof(MIcon.Disabled)] = IsDisabled;
                     attrs[nameof(MIcon.Light)] = Light;
                 });
+        }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            //When use @bind-Value,ValueChanged can not be used
+            //While in this way,@bind-Value can work with OnChange
+            if (OnChange.HasDelegate)
+            {
+                ValueChanged = OnChange;
+            }
         }
     }
 }

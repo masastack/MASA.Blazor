@@ -39,6 +39,8 @@ namespace MASA.Blazor.Doc.Server
             services.AddHttpClient<DemoService>(c => c.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68"));
 
             services.AddMasaBlazorDocs();
+
+            I18nHelper.AddLang();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,11 +73,6 @@ namespace MASA.Blazor.Doc.Server
 
                 opts.SupportedCultures = supportedCultures;
                 opts.SupportedUICultures = supportedCultures;
-            });
-
-            appLifetime.ApplicationStarted.Register(async () =>
-            {
-                await I18nHelper.GetLocalesAndAddLang(_httpClient);
             });
 
             app.UseEndpoints(endpoints =>

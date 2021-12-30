@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "DataTableRowGroup",
+  "Title": "MDataTableRowGroup",
   "Components": [
     "Data tables"
   ],
@@ -14,18 +14,22 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     },
     {
       "Name": "ColumnHeaderContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "RowContentContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "RowHeaderContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],

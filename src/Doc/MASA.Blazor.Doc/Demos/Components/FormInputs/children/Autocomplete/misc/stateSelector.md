@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Todo...
+Using a combination of MAutocomplete slots and transitions, you can create a stylish toggleable autocomplete field such as this state selector.

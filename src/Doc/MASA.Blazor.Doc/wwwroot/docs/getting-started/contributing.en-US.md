@@ -1,18 +1,18 @@
 ---
 order: 6
-title: 贡献
+title: Contributing
 ---
 
-MASA Blazor 是由一个可以提交问题、创建请求并提供反馈的出色社区促成的。 我们的工作是让您能够创建令人惊叹的应用程序。 很多时候，你会遇到一些可以改进的东西。 也许你发现了一个 bug，或者你有一个关于额外功能的想法。 太棒了！ 克隆 MASA Blazor 仓库即可开始在开发环境中工作。
+MASA Blazor is an open source project, our goal is to allow you to easily create amazing applications. Anyone can submit issues and create requests for better development of MASA Blazor. Many times, you will encounter some problems that can be improved. Maybe it is a bug or you have better ideas about the use and function of the components. All can be raised on Github. 
 
-## 报告问题
+## Report issue
 
-此仓库的问题列表仅适用于错误报告和功能请求。 不符合规定的问题将立即关闭。 在报告问题之前：
+The list of issues in this repository is only applicable to bug reports and feature requests. The non-compliance issues will be closed immediately. Before reporting a problem:
 
-- 搜索相似的 [issues](https://github.com/BlazorComponent/MASA.Blazor/issues), 它可能已经被解答了。
-- 尝试使用 [最新](https://github.com/BlazorComponent/MASA.Blazor) 的版本在可克隆的仓库中以生产预期行为进行复现。
-- 请确保复现的是 **最小化** 和简洁的(代码逻辑)。
+- Search for similar [issues](https://github.com/BlazorComponent/MASA.Blazor/issues), it may have been answered.
+- Try to use the [main](https://github.com/BlazorComponent/MASA.Blazor) version to replicate the expected behavior in the cloneable warehouse.
+- Please make sure that the reproduction is minimal and concise (code logic).
 
-这些步骤确保我们掌握一切必要的信息，以便迅速细分和解决你的问题。 复制完成后，使用 [MASA Blazor Issue Creator]() 提交一个新问题。
+These steps ensure that we have all the necessary information in order to quickly segment and solve your problem.
 
-在撰写问题时，请提供尽可能详细的信息。 请注意，“复制步骤”应该是另一个开发人员在单击您的复制链接后应该采取的一系列操作，而不是回忆您是如何发现错误的。
+When writing the question, please provide as much information as possible. Please note that the "reappear step" should be a series of actions that another developer should take after clicking your copy link, not a recollection of how you found the error. 

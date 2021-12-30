@@ -13,10 +13,10 @@
 
     <MContainer Class="py-0">
         <MRow Align="AlignTypes.Center" Justify="JustifyTypes.Start">
-            @foreach(var item in Selections())
+            @foreach (var item in Selections())
             {
                 <MCol Class="shrink" Id="@item.Text">
-                    <MChip Disabled="loading" Close OnCloseClick="() => selected?.Remove(selected.FirstOrDefault(x => x.Text == item.Text))">
+                    <MChip Disabled="loading" Close OnCloseClick="() => Selected?.Remove(Selected.FirstOrDefault(x => x.Text == item.Text))">
                         <MIcon Left>@item.Icon</MIcon>
                         @item.Text
                     </MChip>
@@ -37,11 +37,11 @@
     }
 
     <MList>
-        @foreach(var item in Categories())
+        @foreach (var item in Categories())
         {
-            @if (!selected.Any(x => x.Text.Equals(item.Text)))
+            @if (!Selected.Any(x => x.Text.Equals(item.Text)))
             {
-                <MListItem Id="@item.Text" Disabled="loading" OnClick="() => selected.Add(item)">
+                <MListItem Id="@item.Text" Disabled="loading" OnClick="() =>{ Selected.Add(item);search=string.Empty;}">
                     <MListItemAvatar>
                         <MIcon Disabled="loading">@item.Icon</MIcon>
                     </MListItemAvatar>
@@ -55,7 +55,7 @@
 
     <MCardActions>
         <MSpacer></MSpacer>
-        <MButton Disabled="selected.Count == 0" Loading="loading" Color="purple" Text OnClick="Next">
+        <MButton Disabled="Selected.Count == 0" Loading="loading" Color="purple" Text OnClick="Next">
             Next
         </MButton>
     </MCardActions>
@@ -66,8 +66,9 @@
     private Timer Timer { get; set; }
     private bool loading = false;
     private string search = string.Empty;
-    private List<Selection> selected = new();
     private MTextField<string> _search;
+    private List<Selection> _selected = new();
+
     private class Selection
     {
         public string Text { get; set; }
@@ -75,15 +76,28 @@
     }
 
     private List<Selection> Items = new()
-    {
-        new() { Text = "Nature", Icon = "mdi-nature" },
-        new() { Text = "Nightlife", Icon = "mdi-glass-wine" },
-        new() { Text = "November", Icon = "mdi-calendar-range" },
-        new() { Text = "Portland", Icon = "mdi-map-marker" },
-        new() { Text = "Biking", Icon = "mdi-bike" }
-    };
+        {
+            new() { Text = "Nature", Icon = "mdi-nature" },
+            new() { Text = "Nightlife", Icon = "mdi-glass-wine" },
+            new() { Text = "November", Icon = "mdi-calendar-range" },
+            new() { Text = "Portland", Icon = "mdi-map-marker" },
+            new() { Text = "Biking", Icon = "mdi-bike" }
+        };
 
-    private bool allSelected() => selected.Count == Items.Count;
+    private List<Selection> Selected
+    {
+        get
+        {
+            return _selected;
+        }
+        set
+        {
+            search = "";
+            _selected = value;
+        }
+    }
+
+    private bool allSelected() => Selected.Count == Items.Count;
 
     private List<Selection> Categories()
     {
@@ -96,7 +110,7 @@
         return Items.Where(x => x.Text.ToLower().Contains(ent)).ToList();
     }
 
-    private List<Selection> Selections() => selected;
+    private List<Selection> Selections() => Selected;
 
     private void Next()
     {
@@ -105,21 +119,21 @@
         if (Timer == null)
         {
             Timer = new Timer
-            {
-                Interval = 2000
-            };
+                {
+                    Interval = 2000
+                };
             Timer.Elapsed += Timer_Elapsed;
         }
 
         Timer.Start();
     }
-    
+
     private async void Timer_Elapsed(object sender, ElapsedEventArgs e)
     {
         await InvokeAsync(() =>
         {
             search = string.Empty;
-            selected = new ();
+            Selected = new();
             loading = false;
             Timer.Stop();
 

@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Todo...
+With the power of slots, you can customize the visual output of the select. In this example we add a profile picture for both the chips and list items.

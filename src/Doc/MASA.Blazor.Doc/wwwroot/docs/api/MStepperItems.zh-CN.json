@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "StepperItems",
+  "Title": "MStepperItems",
   "Components": [
     "Steppers"
   ],
@@ -26,6 +26,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],

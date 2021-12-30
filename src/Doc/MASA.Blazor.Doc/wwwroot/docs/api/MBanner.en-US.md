@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Banner
+title: MBanner
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

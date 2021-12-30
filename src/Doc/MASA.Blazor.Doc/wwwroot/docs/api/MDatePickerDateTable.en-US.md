@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: DatePickerDateTable
+title: MDatePickerDateTable
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Textarea",
+  "Title": "MTextarea",
   "Components": [
     "Textareas"
   ],
@@ -66,7 +66,7 @@
     },
     {
       "Name": "CounterValue",
-      "Type": "Func`2",
+      "Type": "Func<String,Int32>",
       "Default": "null",
       "Description": ""
     },
@@ -102,7 +102,7 @@
     },
     {
       "Name": "ErrorMessages",
-      "Type": "List`1",
+      "Type": "List<String>",
       "Default": "null",
       "Description": ""
     },
@@ -174,7 +174,7 @@
     },
     {
       "Name": "Messages",
-      "Type": "List`1",
+      "Type": "List<String>",
       "Default": "null",
       "Description": ""
     },
@@ -258,7 +258,7 @@
     },
     {
       "Name": "Rules",
-      "Type": "IEnumerable`1",
+      "Type": "IEnumerable<Func`2>",
       "Default": "null",
       "Description": ""
     },
@@ -300,7 +300,7 @@
     },
     {
       "Name": "SuccessMessages",
-      "Type": "List`1",
+      "Type": "List<String>",
       "Default": "null",
       "Description": ""
     },
@@ -330,7 +330,7 @@
     },
     {
       "Name": "ValueExpression",
-      "Type": "Expression`1",
+      "Type": "Expression<Func`1>",
       "Default": "null",
       "Description": ""
     }
@@ -338,96 +338,119 @@
   "Contents": [
     {
       "Name": "AppendContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "AppendOuterContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     },
     {
       "Name": "CounterContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "LabelContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "MessageContent",
+      "Type": "RenderFragment<String>",
       "Description": ""
     },
     {
       "Name": "PrependContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "PrependInnerContent",
+      "Type": "RenderFragment",
       "Description": ""
     },
     {
       "Name": "ProgressContent",
+      "Type": "RenderFragment",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnAppendClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnAppendOuterClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnBlur",
+      "Type": "EventCallback<FocusEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnChange",
+      "Type": "EventCallback<String>",
       "Description": ""
     },
     {
       "Name": "OnClearClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnFocus",
+      "Type": "EventCallback<FocusEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnInput",
+      "Type": "EventCallback<String>",
       "Description": ""
     },
     {
       "Name": "OnKeyDown",
+      "Type": "EventCallback<KeyboardEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnMouseDown",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnMouseUp",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnPrependClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "OnPrependInnerClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     },
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<String>",
       "Description": ""
     }
   ]

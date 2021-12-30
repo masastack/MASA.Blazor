@@ -1,4 +1,5 @@
 ﻿using BlazorComponent;
+using BlazorComponent.Components;
 using MASA.Blazor.Doc.Models;
 using MASA.Blazor.Doc.Shared;
 using MASA.Blazor.Doc.Utils;
@@ -13,7 +14,7 @@ namespace MASA.Blazor.Doc.Pages
     {
         // TODO: i18n {zh-CN}
         private static string _githubUrlTemplate =
-            "https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Doc/MASA.Blazor.Doc/Demos/Components/{0}/doc/index.zh-CN.md";
+            "https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Doc/MASA.Blazor.Doc/Demos/Components";
 
         private DemoComponentModel _demoComponent;
         private int _demoIndex;
@@ -42,6 +43,9 @@ namespace MASA.Blazor.Doc.Pages
         [Inject]
         public IJSRuntime Js { get; set; }
 
+        [Inject]
+        public I18n I18n { get; set; }
+
         protected override async Task OnParametersSetAsync()
         {
             if (Name.Contains('?'))
@@ -68,23 +72,13 @@ namespace MASA.Blazor.Doc.Pages
             ContentsList = demos.Where(demo => demo.Group == DemoGroup.Contents).ToList();
             MiscList = demos.Where(demo => demo.Group == DemoGroup.Misc).ToList();
 
-            GithubUrlHref = string.Format(_githubUrlTemplate, _demoComponent.Type);
-
+            GithubUrlHref = _githubUrlTemplate;
             _demoIndex = 0;
         }
 
-        public async Task ScrollToAsync(string target)
+        public string T(string key)
         {
-            var element = await Js.InvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, "#" + target);
-
-            var options = new
-            {
-                Top = element.OffsetTop,
-                Left = 0,
-                Behavior = "smooth"
-            };
-
-            await Js.InvokeVoidAsync("window.scrollTo", options);
+            return I18n.LanguageMap.GetValueOrDefault(key);
         }
     }
 }

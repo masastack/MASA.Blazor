@@ -7,7 +7,7 @@ cols: 1
 related:
   - /components/dialogs
   - /components/tooltips
-  - /styles/transitions
+  - /stylesandanimations/transitions
 ---
 
 `MMenu` 组件在激活它的元素的位置上展示一个菜单。

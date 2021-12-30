@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-TODO...
+You can use **Dense** prop to reduce the field height and lower max height of list items.

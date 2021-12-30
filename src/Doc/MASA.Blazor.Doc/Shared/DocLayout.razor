@@ -1,12 +1,15 @@
 ﻿@inherits LayoutComponentBase
 @layout MainLayout
 
-<MContainer Class="pa-4 pa-sm-6 pa-md-8" Fluid>
-    <div class="m-responsive mx-auto overflow-visible" style="max-width: 868px;">
-        <div class="m-responsive__content">
-            <div class="markdown-body">
-                @Body
-            </div>
+<MContainer
+    Class="pa-4 pa-sm-6 pa-md-8"
+    Fluid
+    Tag="section">
+    <MResponsive
+        MaxWidth="868"
+        Class="mx-auto overflow-visible">
+        <div class="markdown-body">
+            @Body
         </div>
-    </div>
+    </MResponsive>
 </MContainer>

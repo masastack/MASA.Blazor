@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: ButtonGroup
+title: MButtonGroup
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

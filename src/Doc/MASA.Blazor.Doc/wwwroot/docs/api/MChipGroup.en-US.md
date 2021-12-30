@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: ChipGroup
+title: MChipGroup
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

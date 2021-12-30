@@ -57,7 +57,7 @@ namespace MASA.Blazor
         {
             // if no value provided and mandatory
             // assign first item
-            if (Value == null)
+            if (InternalValue == null)
             {
                 if (!Mandatory) return;
 
@@ -65,13 +65,13 @@ namespace MASA.Blazor
                 if (item == null) return;
 
                 _ = UpdateItemsState(item);
-                
+
                 return;
             }
 
             foreach (var radio in Items)
             {
-                if (EqualityComparer<TValue>.Default.Equals(radio.Value, Value))
+                if (EqualityComparer<TValue>.Default.Equals(radio.Value, InternalValue))
                 {
                     radio.Active();
                 }
@@ -93,7 +93,7 @@ namespace MASA.Blazor
             SetActiveRadio();
         }
 
-        public async Task UpdateItemsState(BRadio<TValue> radio)
+        public Task UpdateItemsState(BRadio<TValue> radio)
         {
             foreach (var item in Items)
             {
@@ -107,11 +107,8 @@ namespace MASA.Blazor
                 }
             }
 
-            Value = radio.Value;
-            if (ValueChanged.HasDelegate)
-            {
-                await ValueChanged.InvokeAsync(radio.Value);
-            }
+            InternalValue = radio.Value;
+            return Task.CompletedTask;
         }
     }
 }

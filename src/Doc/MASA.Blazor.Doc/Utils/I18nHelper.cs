@@ -33,5 +33,27 @@ namespace MASA.Blazor.Doc.Utils
                 }
             }
         }
+
+        public static void AddLang()
+        {
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var content = File.ReadAllText(Path.Combine(path, "wwwroot/locale/languages.json"));
+            var languageDict = JsonSerializer.Deserialize<Dictionary<string, string[]>>(content);
+
+            if (languageDict?.Count > 0)
+            {
+                string[] languages = languageDict["SupportLanguages"];
+                var defaultLanguage = CultureInfo.CurrentCulture.Name;
+
+                foreach (var language in languages)
+                {
+                    var languageContent = File.ReadAllText(Path.Combine(path, $"wwwroot/locale/{language}.json"));
+
+                    var isDefaultLanguage = defaultLanguage == language;
+
+                    I18n.AddLang(language, JsonSerializer.Deserialize<Dictionary<string, string>>(languageContent), isDefaultLanguage);
+                }
+            }
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Hover",
+  "Title": "MHover",
   "Components": [
     "Hover"
   ],
@@ -50,12 +50,14 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment<HoverProps>",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

@@ -109,7 +109,7 @@ namespace MASA.Blazor
                 return;
             }
 
-            var el = Document.QuerySelector(Ref);
+            var el = Document.GetElementByReference(Ref);
             var rect = await el.GetBoundingClientRectAsync();
 
             //TODO this.internalValue = e.offsetX / width * 100

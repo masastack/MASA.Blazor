@@ -17,16 +17,20 @@ namespace MASA.Blazor
 
         protected override string AttachSelector => Attach ?? ".m-application";
 
-        public bool ShowContent { get; set; }
-
         [CascadingParameter]
         public IThemeable Themeable { get; set; }
+
+        [Parameter]
+        public string ContentClass { get; set; }
 
         [Parameter]
         public bool Dark { get; set; }
 
         [Parameter]
         public bool Light { get; set; }
+
+        [Parameter]
+        public string Origin { get; set; } = "center center";
 
         [Parameter]
         public bool Scrollable { get; set; }
@@ -95,6 +99,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add(prefix)
+                        .Add(ContentClass)
                         .AddIf($"{prefix}--active", () => Value)
                         .AddIf($"{prefix}--persistent", () => Persistent)
                         .AddIf($"{prefix}--fullscreen", () => Fullscreen)
@@ -103,7 +108,7 @@ namespace MASA.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .Add("transform-origin: center center")
+                        .Add($"transform-origin: {Origin}")
                         .AddWidth(Width)
                         .AddMaxWidth(MaxWidth);
                 });
@@ -121,8 +126,8 @@ namespace MASA.Blazor
         {
             await JsInvokeAsync(JsInteropConstants.AddOutsideClickEventListener,
                 DotNetObjectReference.Create(new Invoker<object>(OutsideClick)),
-                new[] { Document.QuerySelector(DialogRef).Selector },
-                new[] { Document.QuerySelector(OverlayRef).Selector });
+                new[] { Document.GetElementByReference(DialogRef).Selector },
+                new[] { Document.GetElementByReference(OverlayRef!.Value).Selector });
         }
 
         private async Task AnimateClick()
@@ -163,7 +168,7 @@ namespace MASA.Blazor
         protected async Task OutsideClick(object _)
         {
             if (!CloseConditional()) return;
-            
+
             if (OnOutsideClick.HasDelegate)
                 await OnOutsideClick.InvokeAsync();
 
@@ -178,7 +183,7 @@ namespace MASA.Blazor
             await InvokeStateHasChangedAsync();
         }
 
-        public override async Task ShowLazyContent()
+        protected override async Task ShowLazyContent()
         {
             if (!ShowContent && Value)
             {

@@ -1,12 +1,12 @@
 ﻿{
-  "Title": "CascaderSelectList",
+  "Title": "MCascaderSelectList",
   "Components": [
     "Cascaders"
   ],
   "Props": [
     {
       "Name": "Children",
-      "Type": "List`1",
+      "Type": "List<TItem>",
       "Default": "null",
       "Description": ""
     },
@@ -80,12 +80,14 @@
   "Contents": [
     {
       "Name": "ItemContent",
+      "Type": "RenderFragment<SelectListItemProps`1>",
       "Description": ""
     }
   ],
   "Events": [
     {
       "Name": "OnItemClick",
+      "Type": "EventCallback<TItem>",
       "Description": ""
     }
   ]

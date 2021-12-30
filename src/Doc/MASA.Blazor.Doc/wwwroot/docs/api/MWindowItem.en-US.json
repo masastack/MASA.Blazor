@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "WindowItem",
+  "Title": "MWindowItem",
   "Components": [
     "Windows"
   ],
@@ -62,6 +62,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],

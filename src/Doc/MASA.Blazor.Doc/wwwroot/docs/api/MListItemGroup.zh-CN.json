@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "ListItemGroup",
+  "Title": "MListItemGroup",
   "Components": [
     "Lists",
     "List item groups"
@@ -73,7 +73,7 @@
     },
     {
       "Name": "Values",
-      "Type": "List`1",
+      "Type": "List<StringNumber>",
       "Default": "",
       "Description": ""
     }
@@ -81,16 +81,19 @@
   "Contents": [
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "默认插槽"
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<StringNumber>",
       "Description": ""
     },
     {
       "Name": "ValuesChanged",
+      "Type": "EventCallback<List`1>",
       "Description": ""
     }
   ]

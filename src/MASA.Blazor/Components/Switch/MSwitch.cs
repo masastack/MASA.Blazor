@@ -18,9 +18,6 @@ namespace MASA.Blazor
         public bool Inset { get; set; }
 
         [Parameter]
-        public EventCallback<bool> OnChange { get; set; }
-
-        [Parameter]
         public string LeftText { get; set; }
 
         [Parameter]
@@ -29,7 +26,34 @@ namespace MASA.Blazor
         [Parameter]
         public string TrackColor { get; set; }
 
-        public override bool IsDirty => Value;
+        // according to spec, should still show
+        // a color when disabled and active
+        public override string ValidationState
+        {
+            get
+            {
+                if (HasError && ShouldValidate)
+                {
+                    return "error";
+                }
+
+                if (HasSuccess)
+                {
+                    return "success";
+                }
+
+                if (HasColor)
+                {
+                    return ComputedColor;
+                }
+
+                return "";
+            }
+        }
+
+        public override string ComputedColor => Color ?? (IsDark ? "white" : "primary");
+
+        public override bool IsDirty => InternalValue;
 
         public Dictionary<string, object> InputAttrs { get; set; } = new();
 
@@ -37,7 +61,7 @@ namespace MASA.Blazor
 
         public bool? Ripple { get; set; }
 
-        public override bool HasColor => Value;
+        public override bool HasColor => InternalValue;
 
         public bool HasText => LeftText != null || RightText != null;
 
@@ -151,20 +175,10 @@ namespace MASA.Blazor
                 .Apply(typeof(BSwitchProgress<>), typeof(BSwitchProgress<MSwitch>));
         }
 
-        public override async Task HandleOnClickAsync(MouseEventArgs args)
+        public override Task HandleOnClickAsync(MouseEventArgs args)
         {
-            Value = !Value;
-            if (OnChange.HasDelegate)
-            {
-                await OnChange.InvokeAsync(Value);
-            }
-            else
-            {
-                if (ValueChanged.HasDelegate)
-                {
-                    await ValueChanged.InvokeAsync(Value);
-                }
-            }
+            InternalValue = !InternalValue;
+            return Task.CompletedTask;
         }
     }
 }

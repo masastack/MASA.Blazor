@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "DatePickerYears",
+  "Title": "MDatePickerYears",
   "Components": [
     "Date pickers"
   ],
@@ -18,7 +18,7 @@
     },
     {
       "Name": "Format",
-      "Type": "Func`2",
+      "Type": "Func<DateOnly,String>",
       "Default": "null",
       "Description": ""
     },
@@ -36,13 +36,13 @@
     },
     {
       "Name": "Max",
-      "Type": "Nullable`1",
+      "Type": "Nullable<DateOnly>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "Min",
-      "Type": "Nullable`1",
+      "Type": "Nullable<DateOnly>",
       "Default": "",
       "Description": ""
     },
@@ -63,6 +63,7 @@
   "Events": [
     {
       "Name": "OnInput",
+      "Type": "EventCallback<Int32>",
       "Description": ""
     }
   ]

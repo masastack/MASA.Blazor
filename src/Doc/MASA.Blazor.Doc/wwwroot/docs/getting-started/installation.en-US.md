@@ -1,68 +1,93 @@
 ---
 order: 0
-title: 安装
+title: Install
 ---
 
-让我们从 MASA Blazor 开始吧，这是 .NET Core Blazor 框架的 UI 组件库，用于构建功能丰富、快速的应用程序。
+Let's start with MASA Blazor. MASA Blazor is the UI component library of the .NET Blazor framework for building feature-rich and fast applications.
 
-> MASA 系列所有产品均基于.Net 6.0 开发,请确保已安装 [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0) 。
+## Prerequisites
 
-<video controls preload="none" poster="Install MasaBlazor">
-      <source src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" type="video/mp4">
-</videos>
+All products of the MASA series are developed based on .Net 6.0, please make sure that you have installed <a href="https://dotnet.microsoft.com/download/dotnet/6.0" target="_blank">.NET 6.0</a> 。
 
-# Cli 创建
+<br/>
 
-## 安装 Masa.Template 模板
 
-MASA.Template,包含 MASA 系列所有项目模板。MASA Blazor 对应模板名为`masab`
+## Presentation
+
+The video content is the MASA Blazor template to create the Blazor Server demo video, you can choose to view or directly view the CLI creation part. 
+
+<iframe src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" scrolling="no" width="800px" height="600px" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+<br/>
+
+
+## CLI Creation
+
+### Install Masa.Template
+
+MASA.Template, contains all project templates of the MASA series. The corresponding template of MASA Blazor is named `masab` 
 
 ```
 dotnet new --install MASA.Template
 ```
 
-## 创建项目
+<br/>
 
-根据项目模板名创建项目，并指定输出目录，即项目的根文件夹。
+
+### Create project
+
+Create a project based on the project template name and specify the output directory, which is the root folder of the project. 
 
 ```
 dotnet new masab -o MasaBlazorApp
 ```
 
-> 默认为 Server 模式，通过参数--Mode WebAssembly 创建 WebAssembly 模式项目。
+> The default is Server mode, through the parameter --Mode WebAssembly to create a WebAssembly mode project. 
 
-## 启动项目
+<br/>
 
-通过命令`cd MasaBlazorApp`切换到 MasaBlazorApp 目录下 。
-`dotnet run`启动项目，根据程序输出打开对应网址，即可看到 MASA Blazor 模板项目的效果。
+### Startup project
 
-# 手动创建
+Switch to the MasaBlazorApp directory by command `cd MasaBlazorApp`. 
+Start the project with `dotnet run`, open the corresponding URL according to the program output, and you can see the effect of the MASA Blazor template project. 
 
-## 创建一个 Blazor Server 项目
+<br/>
 
-在命令行界面中创建名为 `BlazorApp` 的新 Blazor 应用:
+
+## Create manually
+
+### Create a Blazor Server project
+
+Create a new Blazor application named BlazorApp in the command line interface: 
 
 ```sh
 $ dotnet new blazorserver -o BlazorApp
 ```
-或
+
+or
+
 ```sh
 $ dotnet new blazorwasm -o BlazorApp
 ```
 
-> `blazorserver`为 Blazor Server App 短名称。`blazorwasm`为 Blazor WebAssembly App 短名称
+> `blazorserver` is Blazor Server App template shortname。`blazorwasm` is Blazor WebAssembly App template shortname
 
-## 安装 NuGet 包
+<br/>
+
+### Install NuGet package
 
 ```sh
 $ dotnet add package MASA.Blazor
 ```
 
-## 引入资源文件
+<br/>
 
-### Blazor Server
+### Import resource files
 
-在 `Pages/_Host.cshtml` 中引入资源文件：
+####  Blazor Server
+
+in `Pages/_Host.cshtml` import resource files：
 
 ```html
 <!--masa blazor css style-->
@@ -77,9 +102,11 @@ rel="stylesheet">
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
 
-### Blazor WebAssembly
+<br/>
 
-在`wwwroot\index.html`中引入资源文件：
+#### Blazor WebAssembly
+
+in `wwwroot\index.html` import resource files：
 
 ```html
 <link href="_content/MASA.Blazor/css/masa-blazor.css" rel="stylesheet" />
@@ -93,30 +120,37 @@ rel="stylesheet">
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
 
-## 注入相关服务
+<br/>
 
-在 Program.cs 中添加 MASA.Blazor 相关服务：
+### Inject services 
+
+Program.cs file add MASA.Blazor related services：
 
 ```c#
 // Add services to the container.
 builder.Services.AddMasaBlazor();
 ```
 
-## 全局引用
+<br/>
 
-修改 `_Imports.razor` 文件,添加以下内容:
+### Global reference
+
+update `_Imports.razor` file,Add:
 
 ```c#
 @using MASA.Blazor
 ```
 
-修改 `Shared/MainLayout.razor` 文件，设置 MApp 为根元素：
+update `Shared/MainLayout.razor` file，set MApp as root element：
 
 ```html
 <MApp> //layout </MApp>
 ```
 
-## 使用
+<br/>
 
-参考官方文档[组件](https://masa-blazor-docs-dev.lonsid.cn/components/application),加入相关组件。
-`dotnet run`启动项目即可看到 MasaBlazor 效果。
+## Use
+
+Refer to official documents [Component](https://masa-blazor-docs-dev.lonsid.cn/components/application),Add related components。
+`dotnet run` start project Preview the MasaBlazor。
+

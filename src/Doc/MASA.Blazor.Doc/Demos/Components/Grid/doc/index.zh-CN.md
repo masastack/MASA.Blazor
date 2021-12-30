@@ -6,9 +6,9 @@ title: Grid system
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg
 related:
-  - /styles/flex
+  - /stylesandanimations/flex
   - /features/breakpoints
-  - /styles/display
+  - /stylesandanimations/display
 ---
 
 MASA.Blazor 配备了一个使用 flexbox 构建的 12 格网格系统。 网格用于在应用的内容中创建特定的布局。 它包含 5 种类型的媒体断点，用于针对特定的屏幕尺寸或方向，xs、sm、md、lg 和 xl。 这些分辨率在视口断点表中定义如下，可以通过自定义断点进行修改。
@@ -200,3 +200,20 @@ MASA.Blazor 配备了一个使用 flexbox 构建的 12 格网格系统。 网格
 ## Helper Classes
 
 **FillHeight** applies `height: 100%` to an element. When applied to `MContainer` it will also `align-items: center`.
+
+## 注意
+
+<!--alert:info--> 
+1.x 网格系统已被废弃，请改用 2.x 网格系统。 1.x 网格的文档可以在 v1.5 文档 中找到。
+<!--alert:info--> 
+
+<!--alert:info--> 
+网格组件上基于断点的属性以 `andUp` 的方式工作。 考虑 **xs** 断点已经被删除的情况， 这将会影响到 **offset**、**justify**、**align** 和 `MCol` 上的断点属性。
+
+- 像 **justify-sm** 和 **justify-md** 这样的属性仍然存在，但 **justify-xs** 会变成 **justify**。
+- `MCol` 上不存在 **xs** 属性。 与此对应的是 **cols** 属性。
+<!--alert:info--> 
+
+<!--alert:info--> 
+当在 IE11 使用网格系统时，你需要设置一个显式的 `height`，因为 `min-height` 不足进而导致非预期结果。
+<!--alert:info--> 

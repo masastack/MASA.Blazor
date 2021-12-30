@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Todo...
+Easily hook up dynamic data and create a unique experience. The MAutocomplete's expansive prop list makes it easy to fine tune every aspect of the input.

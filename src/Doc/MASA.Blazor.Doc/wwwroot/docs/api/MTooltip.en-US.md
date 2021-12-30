@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Tooltip
+title: MTooltip
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

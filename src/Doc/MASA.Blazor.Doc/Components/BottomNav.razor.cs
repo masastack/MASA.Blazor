@@ -1,8 +1,10 @@
 ﻿using MASA.Blazor.Doc.Models;
 using MASA.Blazor.Doc.Services;
+using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,7 @@ namespace MASA.Blazor.Doc.Components
         private List<DemoMenuItemModel> _menuItems = new();
         private DemoMenuItemModel _prevItem = new();
         private DemoMenuItemModel _nextItem = new();
+        private int _currentIndex;
 
         [Inject]
         public DemoService DemoService { get; set; }
@@ -21,15 +24,27 @@ namespace MASA.Blazor.Doc.Components
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
-        protected override async Task OnInitializedAsync()
-        {
-            if (_menuItems.Count == 0)
-            {
-                var menus = await DemoService.GetMenuAsync();
-                VisitMenuItems(menus, ref _menuItems);
-            }
+        [Inject]
+        public GlobalConfigs GlobalConfig { get; set; }
 
+        [CascadingParameter]
+        public bool IsChinese { get; set; }
+
+        protected override void OnInitialized()
+        {
             NavigationManager.LocationChanged += OnLocationChanged;
+        }
+
+        protected override async Task OnParametersSetAsync()
+        {
+            base.OnParametersSet();
+            DemoService.ChangeLanguage(GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name);
+            var menus = await DemoService.GetMenuAsync();
+            _menuItems.Clear();
+
+            VisitMenuItems(menus, ref _menuItems);
+
+            UpdatePrevAndNextItem();
         }
 
         private void OnLocationChanged(object sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
@@ -45,15 +60,19 @@ namespace MASA.Blazor.Doc.Components
             }
 
             var currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
-            var currentIndex = _menuItems.FindIndex(item => item.Url == currentUrl);
+            _currentIndex = _menuItems.FindIndex(item => item.Url == currentUrl);
+            UpdatePrevAndNextItem();
 
-            var prevIndex = currentIndex - 1;
-            var nextIndex = currentIndex + 1;
+            await InvokeAsync(StateHasChanged);
+        }
+
+        private void UpdatePrevAndNextItem()
+        {
+            var prevIndex = _currentIndex - 1;
+            var nextIndex = _currentIndex + 1;
 
             _prevItem = prevIndex >= 0 ? _menuItems[prevIndex] : new DemoMenuItemModel();
             _nextItem = nextIndex >= 0 && nextIndex <= _menuItems.Count - 1 ? _menuItems[nextIndex] : new DemoMenuItemModel();
-
-            await InvokeAsync(StateHasChanged);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -68,14 +87,13 @@ namespace MASA.Blazor.Doc.Components
         {
             foreach (var menu in menus)
             {
-                if (!string.IsNullOrEmpty(menu.Url))
-                {
-                    menuItems.Add(menu);
-                }
-
                 if (menu.Children != null && menu.Children.Length > 0)
                 {
                     VisitMenuItems(menu.Children, ref menuItems);
+                }
+                else
+                {
+                    menuItems.Add(menu);
                 }
             }
         }

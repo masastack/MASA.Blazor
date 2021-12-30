@@ -14,6 +14,8 @@ namespace MASA.Blazor
     public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
     {
         private string _badInput;
+        private CancellationTokenSource _cancellationTokenSource;
+        private bool _shouldRender = true;
 
         [Parameter]
         public virtual bool Clearable { get; set; }
@@ -96,9 +98,6 @@ namespace MASA.Blazor
         public EventCallback<TValue> OnInput { get; set; }
 
         [Parameter]
-        public EventCallback<TValue> OnChange { get; set; }
-
-        [Parameter]
         public RenderFragment ProgressContent { get; set; }
 
         [Parameter]
@@ -123,7 +122,7 @@ namespace MASA.Blazor
         public EventCallback<MouseEventArgs> OnClearClick { get; set; }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         [Inject]
         public Document Document { get; set; }
@@ -141,32 +140,6 @@ namespace MASA.Blazor
         public virtual ElementReference InputElement { get; set; }
 
         protected double LabelWidth { get; set; }
-
-        public int ComputeLabeLength
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Label))
-                {
-                    return 0;
-                }
-
-                var length = 0;
-                for (int i = 0; i < Label.Length; i++)
-                {
-                    if (Label[i] > 127)
-                    {
-                        length += 2;
-                    }
-                    else
-                    {
-                        length += 1;
-                    }
-                }
-
-                return length + 1;
-            }
-        }
 
         public string LegendInnerHTML => "&#8203;";
 
@@ -192,7 +165,7 @@ namespace MASA.Blazor
         public virtual Dictionary<string, object> InputAttrs => new(Attributes)
         {
             { "type", Type },
-            { "value", _badInput == null ? Value : _badInput }
+            { "value", _badInput == null ? InternalValue : _badInput }
         };
 
         public virtual StringNumber ComputedCounterValue
@@ -247,7 +220,7 @@ namespace MASA.Blazor
                     offset -= PrependWidth;
                 }
 
-                return GlobalConfig.RTL == Reverse ? (offset, "auto") : ("auto", offset);
+                return MasaBlazor.RTL == Reverse ? (offset, "auto") : ("auto", offset);
             }
         }
 
@@ -396,69 +369,10 @@ namespace MASA.Blazor
                 });
         }
 
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            //When use @bind-Value,ValueChanged can not be used
-            //While in this way,@bind-Value can work with OnChange
-            if (OnChange.HasDelegate)
-            {
-                ValueChanged = OnChange;
-            }
-        }
-
-        private async Task SetLabelWidthAsync()
-        {
-            if (!Outlined)
-            {
-                return;
-            }
-
-            //No label
-            if (LabelReference == null || LabelReference.Ref.Id == null)
-            {
-                return;
-            }
-
-            var label = Document.QuerySelector(LabelReference.Ref);
-            var scrollWidth = await label.GetPropAsync<double>("scrollWidth");
-
-            var element = Document.QuerySelector(Ref);
-            var offsetWidth = await element.GetPropAsync<double>("offsetWidth");
-
-            LabelWidth = Math.Min(scrollWidth * 0.75 + 6, offsetWidth - 24);
-        }
-
-        private async Task SetPrefixWidthAsync()
-        {
-            if (PrefixElement.Id == null)
-            {
-                return;
-            }
-
-            var prefix = Document.QuerySelector(PrefixElement);
-            PrefixWidth = await prefix.GetPropAsync<double>("offsetWidth");
-        }
-
-        private async Task SetPrependWidthAsync()
-        {
-            if (!Outlined)
-            {
-                return;
-            }
-
-            if (PrependInnerElement.Id == null)
-            {
-                return;
-            }
-
-            var prependInner = Document.QuerySelector(PrependInnerElement);
-            PrependWidth = await prependInner.GetPropAsync<double>("offsetWidth");
-        }
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
+
             if (firstRender)
             {
                 var tasks = new Task[3];
@@ -475,6 +389,79 @@ namespace MASA.Blazor
                 await Task.WhenAll(tasks);
                 StateHasChanged();
             }
+        }
+
+        private async Task SetLabelWidthAsync()
+        {
+            if (!Outlined)
+            {
+                return;
+            }
+
+            //No label
+            if (LabelReference == null || LabelReference.Ref.Id == null)
+            {
+                return;
+            }
+
+            var label = Document.GetElementByReference(LabelReference.Ref);
+            var scrollWidth = await label.GetScrollWidthAsync();
+
+            if (scrollWidth == null)
+            {
+                return;
+            }
+
+            var element = Document.GetElementByReference(Ref);
+            var offsetWidth = await element.GetOffsetWidthAsync();
+
+            if (offsetWidth == null)
+            {
+                return;
+            }
+
+            LabelWidth = Math.Min(scrollWidth.Value * 0.75 + 6, offsetWidth.Value - 24);
+        }
+
+        private async Task SetPrefixWidthAsync()
+        {
+            if (PrefixElement.Id == null)
+            {
+                return;
+            }
+
+            var prefix = Document.GetElementByReference(PrefixElement);
+            var offsetWidth = await prefix.GetOffsetWidthAsync();
+
+            if (offsetWidth == null)
+            {
+                return;
+            }
+
+            PrefixWidth = offsetWidth.Value;
+        }
+
+        private async Task SetPrependWidthAsync()
+        {
+            if (!Outlined)
+            {
+                return;
+            }
+
+            if (PrependInnerElement.Id == null)
+            {
+                return;
+            }
+
+            var prependInner = Document.GetElementByReference(PrependInnerElement);
+            var offsetWidth = await prependInner.GetOffsetWidthAsync();
+
+            if (offsetWidth == null)
+            {
+                return;
+            }
+
+            PrependWidth = offsetWidth.Value;
         }
 
         public virtual async Task HandleOnAppendOuterClickAsync(MouseEventArgs args)
@@ -531,10 +518,41 @@ namespace MASA.Blazor
             }
         }
 
-        public virtual Task HandleOnInputAsync(ChangeEventArgs args)
+        public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            //REVIEW:How to deal with oninput event?
-            return Task.CompletedTask;
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+
+            //Since event will call StateHasChanged,we should prevent it
+            //So that,view will not change untill 300 seconds no actions
+            _shouldRender = false;
+            await Task.Delay(300, _cancellationTokenSource.Token);
+
+            var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
+            if (success)
+            {
+                _badInput = null;
+                InternalValue = val;
+
+                _shouldRender = true;
+                if (OnInput.HasDelegate)
+                {
+                    await OnInput.InvokeAsync(InternalValue);
+                }
+                else
+                {
+                    StateHasChanged();
+                }
+            }
+            else
+            {
+                _badInput = args.Value.ToString();
+            }
+        }
+
+        protected override bool ShouldRender()
+        {
+            return _shouldRender;
         }
 
         public virtual async Task HandleOnFocusAsync(FocusEventArgs args)

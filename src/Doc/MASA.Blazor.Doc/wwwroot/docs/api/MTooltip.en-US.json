@@ -1,5 +1,5 @@
 ﻿{
-  "Title": "Tooltip",
+  "Title": "MTooltip",
   "Components": [
     "Tooltips"
   ],
@@ -45,6 +45,11 @@
       "Type": "String",
       "Default": "null",
       "Description": "Applies specified color to the control - it can be the name of material color (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5))."
+    },
+    {
+      "Name": "ContentClass",
+      "Type": "String",
+      "Description": ""
     },
     {
       "Name": "Disabled",
@@ -150,13 +155,13 @@
     },
     {
       "Name": "PositionX",
-      "Type": "Nullable`1",
+      "Type": "Nullable<Double>",
       "Default": "",
       "Description": ""
     },
     {
       "Name": "PositionY",
-      "Type": "Nullable`1",
+      "Type": "Nullable<Double>",
       "Default": "",
       "Description": ""
     },
@@ -206,16 +211,19 @@
   "Contents": [
     {
       "Name": "ActivatorContent",
+      "Type": "RenderFragment<ActivatorProps>",
       "Description": ""
     },
     {
       "Name": "ChildContent",
+      "Type": "RenderFragment",
       "Description": "Default Content"
     }
   ],
   "Events": [
     {
       "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
       "Description": ""
     }
   ]

@@ -912,22 +912,6 @@
     ]
   },
   {
-    "Order": 47,
-    "Title": "Upload",
-    "FullTitle": "Upload",
-    "Type": "itemGroup",
-    "Children": [
-      {
-        "Order": 0,
-        "Title": "Uploads",
-        "FullTitle": "Uploads",
-        "Type": "menuItem",
-        "Url": "components/uploads",
-        "Children": []
-      }
-    ]
-  },
-  {
     "Order": 48,
     "Title": "VirtualScroll",
     "FullTitle": "VirtualScroll",

@@ -107,7 +107,7 @@ namespace MASA.Blazor
         }
 
         [Inject]
-        public GlobalConfig GlobalConfig { get; set; }
+        public MasaBlazor MasaBlazor { get; set; }
 
         [Inject]
         public Document Document { get; set; }
@@ -226,7 +226,7 @@ namespace MASA.Blazor
         private async Task<double> GenHoverIndex(int i, ExMouseEventArgs args)
         {
             var isHalf = await IsHalfEvent(args);
-            isHalf = HalfIncrements && GlobalConfig.RTL ? !isHalf : isHalf;
+            isHalf = HalfIncrements && MasaBlazor.RTL ? !isHalf : isHalf;
 
             return i + (isHalf ? 0.5 : 1);
         }
@@ -235,7 +235,7 @@ namespace MASA.Blazor
         {
             if (HalfIncrements)
             {
-                var target = Document.QuerySelector(args.Target.ElementReference);
+                var target = Document.GetElementByReference(args.Target.ElementReference);
                 if (target != null)
                 {
                     var rect = await target.GetBoundingClientRectAsync();

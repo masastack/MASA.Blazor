@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: Window
+title: MWindow
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  

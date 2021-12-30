@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-自动补全组件拓展了v-select并且添加了过滤项目的功能
+自动补全组件拓展了 `MSelect` 并且添加了过滤项目的功能
 
 ## en-US
 
-Todo...
+The autocomplete component extends `MSelect` and adds the ability to filter items.

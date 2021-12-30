@@ -10,3 +10,4 @@ title:
 **ShowAllLevels** 用于控制展示所有层级,默认为 `true`。
 
 ## en-US
+**ShowAllLevels** control show all level ,default value `true`。

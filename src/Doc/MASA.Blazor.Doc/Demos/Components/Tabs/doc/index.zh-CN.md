@@ -25,3 +25,8 @@ related:
 
 <!--alert:warning-->
 当使用 **Dark** 属性和 **不** 提供自定义 **Color** 时，`MTabs`组件会将其颜色默认为 white。
+<!--alert:warning-->
+
+<!--alert:warning-->
+当使用包含必填输入字段的 `MTabItem` 时，你必须使用 **eager** prop 来验证尚未显示的必填字段。
+<!--alert:warning-->

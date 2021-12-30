@@ -1,9 +1,13 @@
 ---
 
 order: 0
-title: BreadcrumbsItem
+title: MBreadcrumbsItem
 
 ---
+ 
+## Component Pages
+ 
+Component Pages
  
 ## Props
  
