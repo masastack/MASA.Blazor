@@ -360,10 +360,10 @@
           },
           {
             "Order": 0,
-            "Title": "Froms",
-            "FullTitle": "Froms",
+            "Title": "Forms",
+            "FullTitle": "Forms",
             "Type": "menuItem",
-            "Url": "components/froms",
+            "Url": "components/forms",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/From.svg"
           },
           {

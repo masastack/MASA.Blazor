@@ -4264,8 +4264,8 @@
       {
         "Order": 0,
         "Title": "Grid system",
-        "SubTitle": "网格",
-        "FullTitle": "Grid system (网格)",
+        "SubTitle": "网格系统",
+        "FullTitle": "Grid system (网格系统)",
         "Type": "menuItem",
         "Url": "components/grid-system",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg",

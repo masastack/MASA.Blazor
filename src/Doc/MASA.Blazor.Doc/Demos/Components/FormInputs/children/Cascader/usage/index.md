@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-TODO...
+The cascade selector is used to select provinces and municipalities

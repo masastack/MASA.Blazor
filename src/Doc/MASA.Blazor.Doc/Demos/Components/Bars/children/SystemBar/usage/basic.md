@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-`v-system-bar` in its simplest form displays a small container with default theme.
+`MSystemBar` in its simplest form displays a small container with default theme.

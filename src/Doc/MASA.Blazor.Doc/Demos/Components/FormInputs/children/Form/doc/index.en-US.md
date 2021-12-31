@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Form
-title: Froms
+title: Forms
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/From.svg
 ---

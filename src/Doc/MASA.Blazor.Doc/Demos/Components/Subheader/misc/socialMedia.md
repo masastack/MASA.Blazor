@@ -2,7 +2,7 @@
 order: 2
 title:
   zh-CN: 社交媒体
-  en-US: #Social media
+  en-US: Social media
 ---
 
 ## zh-CN

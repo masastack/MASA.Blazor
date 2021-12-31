@@ -10,7 +10,7 @@ related:
   - /components/navigation-drawers
 ---
 
-在 MASA.Blazor 中，`MApp` 组件和 `MNavigationDrawer`、`MAppBar`、`MFooter` 等组件上的 App 属性，帮助你的应用围绕 `MMain` 组件进行适当的大小调整。
+在 MASA Blazor 中，`MApp` 组件和 `MNavigationDrawer`、`MAppBar`、`MFooter` 等组件上的 App 属性，帮助你的应用围绕 `MMain` 组件进行适当的大小调整。
 这使你可以创建真正独特的界面，无需因管理布局尺寸而烦恼。 所有应用都需要 `MApp` 组件。 这是许多 `MASA Blazor` 组件和功能的挂载点，并确保它将默认的应用主题
 （Dark/Light）传递给子组件，并确保在浏览器中对某些点击事件的正确跨浏览器支持。
 
@@ -20,7 +20,8 @@ related:
 - [MMain](/api/MMain)
 
 <!--alert:error-->
-为了让你的应用正常工作，你必须将其包裹在 `MApp` 组件中。 该组件是确保正确的跨浏览器兼容性所必需的。
+为了让你的应用正常工作，你必须将其包裹在 `MApp` 组件中。 该组件是确保正确的跨浏览器兼容性所必需的。 MASA Blazor 不支持在一个页面上有多个孤立的 
+MASA.Blazor 实例。 `MApp` 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。
 <!--/alert:error-->
 
 <!--alert:info-->
@@ -72,7 +73,7 @@ related:
 
 - [MAppBar](/components/app-bars)：总是放在应用顶部，优先级低于 `MSystemBar`。
 - MBottomNavigation：总是放在应用底部，优先级高于 `MFooter`。
-- [MFooter](/components/footer)：总是放在应用底部，优先级低于 `MBottomNavigation`。
+- [MFooter](/components/footers)：总是放在应用底部，优先级低于 `MBottomNavigation`。
 - [MNavigationDrawer](/components/navigation-drawers)：可以放置在应用的左边或右边，并且可以配置在 `MAppBar` 的旁边或下面。
 - [MSystemBar](/components/system-bars)：总是放在应用顶部，优先级高于 `MAppBar`。
 

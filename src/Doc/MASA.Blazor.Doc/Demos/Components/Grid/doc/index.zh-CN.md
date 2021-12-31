@@ -1,12 +1,12 @@
 ---
 category: Components
-subtitle: 网格
-type: 网格
+subtitle: 网格系统
+type: 网格系统
 title: Grid system
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg
 related:
-  - /stylesandanimations/flex
+  - /stylesandanimations/flex                      
   - /features/breakpoints
   - /stylesandanimations/display
 ---
@@ -189,7 +189,7 @@ MASA.Blazor 配备了一个使用 flexbox 构建的 12 格网格系统。 网格
 - [MCol](/api/MCol)
 - [MSpacer](/api/MSpacer)
 
-## 功能组件
+## 子组件
 
 - `MContainer`：`MContainer` 提供了将你的网站内容居中和水平填充的功能。 你还可以使用 **Fluid** 属性将容器在所有视口和设备尺寸上完全扩展。
 - `MCol`：`MCol` 包裹内容，它必须是 `MRow` 的直接子集。

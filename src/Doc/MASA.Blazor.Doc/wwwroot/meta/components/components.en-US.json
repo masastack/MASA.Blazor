@@ -3,7 +3,7 @@
     "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>、<strong>Info</strong>、<strong>Warning</strong> 和 <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays. Many parts of an alert such as <strong>Border</strong>, <strong>Icon</strong>, and <strong>Color</strong> can also be customized to fit almost any situation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.3546167+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.8499854+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -131,7 +131,7 @@
         "Name": "twitter",
         "Title": "Twitter",
         "Description": "<p>By combining <strong>Color</strong>, <strong>Dismissible</strong>, <strong>Border</strong>, <strong>Elevation</strong>, <strong>Icon</strong>, and <strong>ColoredBorder</strong> props, you can\ncreate stylish custom alerts such as this Twitter notification.</p>\n",
-        "Code": "<div>\r\n    <div>\r\n        <MAlert @bind-Value=\"_alert\"\r\n                Dismissible\r\n                Color=\"cyan\"\r\n                Border=\"Borders.Left\"\r\n                Elevation=\"2\"\r\n                ColoredBorder\r\n                Icon=\"@(\"mdi-twitter\")\">\r\n            You've got <strong>5</strong> new updates on your timeline!.\r\n        </MAlert>\r\n\r\n        <div class=\"text-center\">\r\n            @if (!_alert)\r\n            {\r\n                <MButton Dark\r\n                         OnClick=\"() => _alert = true\">\r\n                    Reset Alert\r\n                </MButton>\r\n            }\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n@code{\r\n    private bool _alert = true;\r\n}",
+        "Code": "<div>\r\n    <div>\r\n        <MAlert @bind-Value=\"_alert\"\r\n                Dismissible\r\n                Color=\"cyan\"\r\n                Border=\"Borders.Left\"\r\n                Elevation=\"2\"\r\n                ColoredBorder\r\n                Icon=\"@(\"mdi-twitter\")\">\r\n            You've got <strong>5</strong> new updates on your timeline!\r\n        </MAlert>\r\n\r\n        <div class=\"text-center\">\r\n            @if (!_alert)\r\n            {\r\n                <MButton Dark\r\n                         OnClick=\"() => _alert = true\">\r\n                    Reset Alert\r\n                </MButton>\r\n            }\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n@code{\r\n    private bool _alert = true;\r\n}",
         "Type": "Demos.Components.Alert.props.Twitter",
         "Style": "",
         "Debug": false,
@@ -157,9 +157,14 @@
     "FullTitle": "Alerts"
   },
   {
-    "Desc": "<p>In <code>MASA Blazor</code>, the App properties on the <code>MApp</code> component and <code>MNavigationDrawer</code>, <code>MAppBar</code>, <code>MFooter</code> and other\ncomponents help your application to adjust the size of the <code>MMain</code> component appropriately. This allows you to create\ntruly unique interfaces without worrying about managing layout sizes. All applications need the <code>MApp</code> component. This\nis the mount point for many <code>MASA Blazor</code> components and functions, and ensures that it passes the default application\ntheme (Dark/Light) to the child components, and ensures the correct cross-browser support for certain click events in\nthe browser .</p>\n",
+    "Desc": "<p>In MASA Blazor, the MApp component and the app prop on components like <code>MNavigationDrawer</code>, <code>MAppBar</code>, <code>MFooter</code> and more, \nhelp bootstrap your application with the proper sizing around <MMain> component. This allows you to create truly unique \ninterfaces without the hassle of managing your layout sizing. The <code>MApp</code> component is REQUIRED for all applications. \nThis is the mount point for many of MASA Blazor's components and functionality and ensures that it propagates the default \napplication variant (dark/light) to children components and also ensures proper cross-browser support for certain click \nevents in browsers like Safari. <code>MApp</code> should only be rendered within your application ONCE.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MApp\">MApp</a></li>\n<li><a href=\"/api/MMain\">MMain</a></li>\n</ul>\n<!--alert:error-->\n<p>In order for your application to work properly, you must wrap it in a <code>MApp</code> component. This component is required for ensuring \nproper cross-browser compatibility. MASA Blazor doesn't support multiple isolated MASA Blazor instances on a page. <code>MApp</code> can exist \nanywhere inside the body of your app, however, there should only be one and it must be the parent of ALL MASA Blazor components.</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p>If you are using multiple layouts in your application you will need to ensure each root layout file that will contain MASA Blazor \ncomponents has a MApp at the root of its template.</p>\n<!--/alert:info-->\n",
+      "Default application markup": "\n<p>This is an example of the default application markup for MASA Blazor. You can place your layout elements anywhere, \nas long as you apply the app property. The key component to making your page content work together with layout elements \nis <code>MMain</code>. The <code>MMain</code> component will be dynamically sized depending upon the structure of your designated app components. \nYou can use combinations of any or all of the above components including <code>MBottomNavigation</code>.</p>\n<pre><code class=\"language-html\">&lt;!-- MainLayout.razor --&gt;\n@inherits LayoutComponentBase\n\n&lt;MApp&gt;\n  &lt;MNavigationDrawer App&gt;\n    &lt;!-- --&gt;\n  &lt;/MNavigationDrawer&gt;\n\n  &lt;MAppBar App&gt;\n    &lt;!-- --&gt;\n  &lt;/MAppBar&gt;\n\n  &lt;!-- Sizes your content based upon application components --&gt;\n  &lt;MMain&gt;\n    &lt;!-- Provides the application the proper gutter --&gt;\n    &lt;MContainer Fluid&gt;\n        @Body\n    &lt;/MContainer&gt;\n  &lt;/MMain&gt;\n\n  &lt;MFooter App&gt;\n    &lt;!-- --&gt;\n  &lt;/MFooter&gt;\n&lt;/MApp&gt;\n</code></pre>\n<!--alert:info-->\n<p>Applying the <strong>App</strong> prop automatically applies position: <strong>fixed</strong> to the layout element. If your application calls for an absolute element, \nyou can overwrite this functionality by using the <strong>Absolute</strong> prop.</p>\n<!--/alert:info-->\n",
+      "Application components": "\n<p>Below is a list of all the components that support the <strong>App</strong> prop and can be used as layout elements in your application. \nThese can be mixed and matched and only <strong>one</strong> of each particular component should exist at any time. You can, however, \nswap them out and the layout will accommodate.</p>\n<p>Each of these application components have a designated location and priority that it affects within the layout system.</p>\n<ul>\n<li><a href=\"/components/app-bars\">MAppBar</a>: Is always placed at the top of an application with a lower priority than <code>MSystemBar</code>.</li>\n<li>MBottomNavigation: Is always placed at the bottom of an application with a higher priority than <code>MFooter</code>.</li>\n<li><a href=\"/components/footers\">MFooter</a>: Is always placed at the bottom of an application with a lower priority than <code>MBottomNavigation</code>.</li>\n<li><a href=\"/components/navigation-drawers\">MNavigationDrawer</a>: Can be placed on the left or right side of an application and can be configured to sit next to or below <code>MAppBar</code>.</li>\n<li><a href=\"/components/system-bars\">MSystemBar</a>: Is always placed at the top of an application with higher priority than  <code>MAppBar</code>.</li>\n</ul>\n",
+      "Application service": "\n<p>The application service is used to configure your MASA Blazor layout. It communicates with the <code>MMain</code> component so that it's able to properly size the application content. \nIt has a number of properties that can be accessed:</p>\n<pre><code class=\"language-c#\">double Bar { get; }\ndouble Bottom { get; }\ndouble Footer { get; }\ndouble InsetFooter { get; }\ndouble Left { get; }\ndouble Right { get; }\ndouble Top { get; }\n</code></pre>\n<p>These values are automatically updated when you add and remove components with the <strong>App</strong> prop. They are NOT editable and exist in a READONLY state. \nYou can access these values by referencing the <strong>Application</strong> property.</p>\n<pre><code class=\"language-c#\"> [Inject] public GlobalConfig GlobalConfig { get; set; }\n \n Console.WriteLine(GlobalConfig.Application.Footer); // 60\n</code></pre>\n<!--alert:error-->\n<p>In order for your application to work properly, you must wrap it in a <code>MApp</code> component.</p>\n<!--/alert:error-->\n"
+    },
     "LastWriteTime": "0001-01-01T00:00:00",
     "DemoList": [],
     "Children": [],
@@ -173,7 +178,7 @@
     "Desc": "<p>The <code>MResponsive</code> component can be used to fix any section to a specific aspect ratio</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.3566126+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.8522321+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -198,7 +203,7 @@
     "Desc": "<p>The MAvatar component is usually used to display user profile pictures. This component allows you to dynamically add and set the border radius of response images, icons and text. ** The tile ** variable can be used to display an avatar with no border radius.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.3604912+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.8573155+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -249,7 +254,7 @@
         "Name": "businesscard",
         "Title": "BusinessCard",
         "Description": "<p>Using the tile prop, we can create a business card.</p>\n",
-        "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"434\" Tile>\r\n\t<MImage Height=\"@(\"100%\")\" Src=\"https://cdn.masastack.com/stack/images/website/masa-blazor/cards/server-room.jpg\">\r\n\t\t<MRow Align=\"AlignTypes.End\" Class=\"fill-height\">\r\n\t\t\t<MCol Align=\"AlignTypes.Start\" Class=\"pa-0\" Cols=\"12\">\r\n\t\t\t\t<MAvatar Class=\"profile\" Color=\"grey\" Size=\"164\" Tile>\r\n\t\t\t\t\t<MImage Src=\"https://cdn.masastack.com/stack/images/website/masa-blazor/profiles/marcus.png\"></MImage>\r\n\t\t\t\t</MAvatar>\r\n\t\t\t</MCol>\r\n\t\t\t<MCol Class=\"py-0\">\r\n\t\t\t\t<MListItem Color=\"rgba(0, 0, 0, .4)\" Dark>\r\n\t\t\t\t\t<MListItemContent>\r\n\t\t\t\t\t\t<MListItemTitle Class=\"text-h6\">Marcus Obrien</MListItemTitle>\r\n\t\t\t\t\t\t<MListItemSubtitle>Network Engineer</MListItemSubtitle>\r\n\t\t\t\t\t</MListItemContent>\r\n\t\t\t\t</MListItem>\r\n\t\t\t</MCol>\r\n\t\t</MRow>\r\n\t</MImage>\r\n</MCard>",
+        "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"434\" Tile>\r\n\t<MImage Height=\"@(\"100%\")\" Src=\"https://cdn.masastack.com/stack/images/website/masa-blazor/cards/server-room.jpg\">\r\n\t\t<MRow Align=\"AlignTypes.End\" Class=\"fill-height\">\r\n\t\t\t<MCol Align=\"AlignTypes.Start\" Class=\"pa-0\" Cols=\"12\">\r\n\t\t\t\t<MAvatar Class=\"profile\" Color=\"grey\" Size=\"164\" Tile>\r\n\t\t\t\t\t@*<MImage Src=\"https://cdn.masastack.com/stack/images/website/masa-blazor/profiles/marcus1.png\"></MImage>*@\r\n\t\t\t\t\t<MImage Src=\"_content/MASA.Blazor.Doc/marcus1.png\"></MImage>\r\n\t\t\t\t</MAvatar>\r\n\t\t\t</MCol>\r\n\t\t\t<MCol Class=\"py-0\">\r\n\t\t\t\t<MListItem Color=\"rgba(0, 0, 0, .4)\" Dark>\r\n\t\t\t\t\t<MListItemContent>\r\n\t\t\t\t\t\t<MListItemTitle Class=\"text-h6\">Marcus Obrien</MListItemTitle>\r\n\t\t\t\t\t\t<MListItemSubtitle>Network Engineer</MListItemSubtitle>\r\n\t\t\t\t\t</MListItemContent>\r\n\t\t\t\t</MListItem>\r\n\t\t\t</MCol>\r\n\t\t</MRow>\r\n\t</MImage>\r\n</MCard>",
         "Type": "Demos.Components.Avatar.misc.BusinessCard",
         "Style": "",
         "Debug": false,
@@ -290,7 +295,7 @@
     "Desc": "<p>The MBadge component overwrites or subscribes to an icon like an avatar or text on the content to highlight the user's information or just draw attention to a specific element. The content in the badge usually contains numbers or icons.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.3634834+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.8609857+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -359,7 +364,7 @@
     "Desc": "<p>The component is used to send intermittent messages of 1-2 actions to the user. It has two variables, single-line and multi-line (implied). These icons can be used with your messages and actions.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.3664752+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.8639861+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -439,7 +444,7 @@
     "Desc": "<p>appbar component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.3734607+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.8719855+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -585,7 +590,7 @@
     "Desc": "<p>The MSystemBar component can be used to display status to the user. It looks like an Android system bar and can contain icons, spaces, and some text.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.3759449+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.8760609+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -635,7 +640,7 @@
         "Order": 1,
         "Name": "basic",
         "Title": "Usage",
-        "Description": "<p><code>v-system-bar</code> in its simplest form displays a small container with default theme.</p>\n",
+        "Description": "<p><code>MSystemBar</code> in its simplest form displays a small container with default theme.</p>\n",
         "Code": "<MRow Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n    <MContainer Fluid>\r\n        <MCard Height=\"200\" Img=\"https://cdn.masastack.com/stack/images/website/masa-blazor/home/masa_layout1.svg\">\r\n            <MSystemBar Color=\"orange\" Height=\"30\">\r\n                <MIcon>mdi-message</MIcon>\r\n                <span>10 unread messages</span>\r\n                <MSpacer></MSpacer>\r\n                <MIcon>mdi-wifi-strength-4</MIcon>\r\n                <MIcon>mdi-signal-cellular-outline</MIcon>\r\n                <MIcon>mdi-battery</MIcon>\r\n                <span>12:30</span>\r\n            </MSystemBar>\r\n        </MCard>\r\n    </MContainer>\r\n</MRow>\r\n\r\n",
         "Type": "Demos.Components.Bars.children.SystemBar.usage.Basic",
         "Style": "",
@@ -654,7 +659,7 @@
     "Desc": "<p>The <code>MToolbar</code> component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site\nnavigation. The toolbar component works great in conjunction with <a href=\"/components/navigation-drawers\"><strong>MNavigationDrawer</strong></a> and <a href=\"/components/cards\"><strong>MCard</strong></a>.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.3822109+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.8825195+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -805,7 +810,7 @@
     "Desc": "<p>The Border component can add an extra border to anything.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.3832083+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.8842529+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -844,7 +849,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>By default <code>MBreadcrumbs</code> will disable the linkage with router. You can enable the feature by using *<em>Linkage</em> prop.</p>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.387313+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.8879853+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -884,7 +889,7 @@
         "Name": "linkage",
         "Title": "Linkage",
         "Description": "",
-        "Code": "<MBreadcrumbs Items=\"items\" Linkage></MBreadcrumbs>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() { Text = \"MASA.Blazor\", Href = \"/\", Exact = true },\r\n        new BreadcrumbItem() { Text = \"Components\", Href = \"/components\", Exact = true },\r\n        new BreadcrumbItem() { Text = \"Breadcrumbs\", Href = \"/components/breadcrumbs\" }\r\n    };\r\n\r\n}",
+        "Code": "<MBreadcrumbs Items=\"items\" Linkage></MBreadcrumbs>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() { Text = \"MASA.Blazor\", Href = \"/\", Exact = true },\r\n        new BreadcrumbItem() { Text = \"Borders\", Href = \"/components/borders\", Exact = true },\r\n        new BreadcrumbItem() { Text = \"Breadcrumbs\", Href = \"/components/breadcrumbs\" }\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Breadcrumbs.props.Linkage",
         "Style": "",
         "Debug": false,
@@ -928,7 +933,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>MButton</code> is the only component that behaves differently when using the <strong>Dark</strong> prop. Normally components use the <strong>Dark</strong> prop to denote that they have a dark colored background and need their text to be white. While this will work\nfor <code>MButton</code>, it is advised to only use the prop when the button <strong>IS ON</strong> a colored background due to the disabled state\nblending in with white backgrounds. If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.3936467+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.8955929+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1088,7 +1093,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-21T10:23:43.4779762+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9020593+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1235,7 +1240,7 @@
     "Desc": "<p>The <code>MChip</code> component is used to convey small pieces of information. Using the close property, the chip becomes\ninteractive, allowing user interaction. This component is used by the <a href=\"/components/chip-groups\">MChipGroup</a> for advanced selection options.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.406848+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9110594+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1415,7 +1420,7 @@
     "Desc": "<p>The <code>Dialog</code> component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.4118292+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9170628+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1539,7 +1544,7 @@
     "Desc": "<p>The MDivider component is used to separate sections of lists or layouts.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.4148034+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9211152+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1611,7 +1616,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4168146+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9230607+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1661,7 +1666,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.421801+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9293367+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1786,7 +1791,7 @@
     "Desc": "<p>The MFooter component is used to display public information that users may want to access from any page in the website.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.4247931+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9340595+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1858,7 +1863,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:error--> \n<p>When using objects for the <strong>Items</strong> prop, you must associate <strong>ItemText</strong> and <strong>ItemValue</strong> with existing properties on your objects. These values are defaulted to  <strong>Text</strong> and <strong>Value</strong> and can be changed.</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p>The <strong>Auto</strong> property of <strong>MenuProps</strong> is only supported for the default input style.</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>Browser autocomplete is set to off by default, may vary by browser and may be ignored.  <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4297825+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9400597+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1961,13 +1966,13 @@
     "Desc": "<p>The <code>MCascader</code> component is used for multiple select link.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.4327763+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9431851+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "index",
         "Title": "Usage",
-        "Description": "<p>TODO...</p>\n",
+        "Description": "<p>The cascade selector is used to select provinces and municipalities</p>\n",
         "Code": "<MCascader @bind-Value=\"_value\"\r\n           Items=\"_items\"\r\n           ItemText=\"u => u.Label\"\r\n           ItemValue=\"u => u.Value\"\r\n           ItemChildren=\"u => u.Children\">\r\n</MCascader>\r\n\r\n@code {\r\n    public class CascaderNode\r\n    {\r\n        public string Value { get; set; }\r\n        public string Label { get; set; }\r\n        public List<CascaderNode> Children { get; set; }\r\n    }\r\n    private string _value;\r\n    private List<CascaderNode> _items = new List<CascaderNode>() {\r\n        new CascaderNode()\r\n        {\r\n            Value = \"1\",\r\n            Label = \"湖北\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"11\", Label=\"武汉\", Children = new List<CascaderNode>(){\r\n                        new CascaderNode{ Value = \"111\", Label=\"武昌区\", Children = new List<CascaderNode>(){\r\n                            new CascaderNode{ Value = \"1111\", Label=\"黄鹤楼街道\"},\r\n                            new CascaderNode{ Value = \"1112\", Label=\"白沙洲街道\"}\r\n                        } },\r\n                        new CascaderNode{ Value = \"112\", Label=\"洪山区\"}\r\n                    } },\r\n                    new CascaderNode{ Value = \"12\", Label=\"黄石\"},\r\n                    new CascaderNode{ Value = \"13\", Label=\"宜昌\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"2\",\r\n            Label = \"浙江\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"21\", Label=\"杭州\"},\r\n                    new CascaderNode{ Value = \"22\", Label=\"温州\"},\r\n                    new CascaderNode{ Value = \"23\", Label=\"义乌\"},\r\n                    new CascaderNode{ Value = \"24\", Label=\"宁波\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"3\",\r\n            Label = \"上海\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"31\", Label=\"徐汇区\"},\r\n                    new CascaderNode{ Value = \"32\", Label=\"黄浦区\"},\r\n                    new CascaderNode{ Value = \"33\", Label=\"浦东新区\"},\r\n                    new CascaderNode{ Value = \"34\", Label=\"崇明区\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"4\",\r\n            Label = \"北京\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"41\", Label=\"朝阳\"},\r\n                    new CascaderNode{ Value = \"42\", Label=\"东城\"},\r\n                    new CascaderNode{ Value = \"43\", Label=\"西城\"}\r\n                }\r\n        }, new CascaderNode()\r\n        {\r\n            Value = \"5\",\r\n            Label = \"江苏\",\r\n            Children = new List<CascaderNode>() {\r\n                    new CascaderNode{ Value = \"51\", Label=\"南京\", Children = new List<CascaderNode>(){\r\n                        new CascaderNode{ Value = \"511\", Label=\"鼓楼区\"},\r\n                        new CascaderNode{ Value = \"512\", Label=\"玄武区\"}\r\n                    } },\r\n                    new CascaderNode{ Value = \"52\", Label=\"苏州\"},\r\n                    new CascaderNode{ Value = \"53\", Label=\"无锡\"},\r\n                    new CascaderNode{ Value = \"54\", Label=\"扬州\"}\r\n                }\r\n        }};\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Cascader.usage.Index",
         "Style": "",
@@ -2021,7 +2026,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4367647+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9470863+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2101,7 +2106,7 @@
     "Desc": "<p>The <code>MFileInput</code>  component is a specialized input that provides a clean interface for selecting files, \nshowing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.4422509+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9530614+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2237,7 +2242,7 @@
     "Desc": "<p>When it comes to form validation, MASA Blazor has a multitude of integrations and baked in functionality.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.4446381+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9570595+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2288,9 +2293,9 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/From.svg",
     "Cols": 1,
-    "Title": "Froms",
+    "Title": "Forms",
     "Type": "Form",
-    "FullTitle": "Froms"
+    "FullTitle": "Forms"
   },
   {
     "Desc": "<p>The <code>MRadio</code> component is a simple radio button. When combined with the <code>MRadioGroup</code> component you can provide\ngroupable functionality to allow users to select from a predefined set of options.</p>\n",
@@ -2298,7 +2303,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadio</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-13T17:07:44.9237179+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9610626+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2368,7 +2373,7 @@
     "Desc": "<p>The MSlider component is a better visualization of the number input. It is used for gathering numerical user data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.4513035+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9650684+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2449,7 +2454,7 @@
     "Desc": "<p>The <code>Select</code> component is used for collecting user provided information from a list of options.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.4573984+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9716794+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2584,7 +2589,7 @@
     "Desc": "<p>The MSlider component is a better visualization of the number input. It is used for gathering numerical user data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.4647547+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9800606+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2766,7 +2771,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4692618+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9850596+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2858,7 +2863,7 @@
     "Desc": "<p>Textarea components are used for collecting large amounts of textual data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-23T12:47:41.7751916+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.0051889+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2983,7 +2988,7 @@
     "Desc": "<p>Text fields components are used for collecting user provided information.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-14T15:01:03.0189799+08:00",
+    "LastWriteTime": "2021-12-27T10:11:32.9993159+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3248,14 +3253,15 @@
     "FullTitle": "Text fields"
   },
   {
-    "Desc": "<p>24 Grids System。</p>\n",
+    "Desc": "<p>MASA.Blazor comes with a 12 point grid system built using flexbox. The grid is used to create specific layouts within an application’s content. It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations, xs, sm, md, lg and xl. \nThese resolutions are defined below in the Viewport Breakpoints table and can be modified by customizing the <a href=\"features/breakpoints\">Breakpoint service</a></p>\n<div\n  class=\"overflow-hidden mb-12 overflow-hidden m-sheet m-sheet--outlined theme--light rounded\"\n>\n  <div class=\"m-data-table theme--light\">\n    <div class=\"m-data-table__wrapper\">\n      <table>\n        <caption class=\"pa-4\">\n          Material Design Breakpoints\n        </caption>\n        <thead>\n          <tr class=\"text-left\">\n            <th>Device</th>\n            <th>Code</th>\n            <th>Type</th>\n            <th>Range</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z\"\n                  ></path></svg></span\n              ><span>Extra small</span>\n            </td>\n            <td><strong>xs</strong></td>\n            <td>Small to large phone</td>\n            <td>&lt; 600px</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M19,18H5V6H19M21,4H3C1.89,4 1,4.89 1,6V18A2,2 0 0,0 3,20H21A2,2 0 0,0 23,18V6C23,4.89 22.1,4 21,4Z\"\n                  ></path></svg></span\n              ><span>Small</span>\n            </td>\n            <td><strong>sm</strong></td>\n            <td>Small to medium tablet</td>\n            <td>600px &gt; &lt; 960px</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z\"\n                  ></path></svg></span\n              ><span>Medium</span>\n            </td>\n            <td><strong>md</strong></td>\n            <td>Large tablet to laptop</td>\n            <td>960px &gt; &lt; 1264px*</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z\"\n                  ></path></svg></span\n              ><span>Large</span>\n            </td>\n            <td><strong>lg</strong></td>\n            <td>Desktop</td>\n            <td>1264px &gt; &lt; 1904px*</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M21,17H3V5H21M21,3H3A2,2 0 0,0 1,5V17A2,2 0 0,0 3,19H8V21H16V19H21A2,2 0 0,0 23,17V5A2,2 0 0,0 21,3Z\"\n                  ></path></svg></span\n              ><span>Extra large</span>\n            </td>\n            <td><strong>xl</strong></td>\n            <td>4k and ultra-wide</td>\n            <td>&gt; 1904px*</td>\n          </tr>\n        </tbody>\n        <tfoot>\n          <tr>\n            <td colspan=\"4\" class=\"text-caption text-center grey--text\">\n              <em>* -16px on desktop for browser scrollbar</em>\n            </td>\n          </tr>\n          <tr>\n            <td colspan=\"4\" class=\"text-right text--secondary\">\n              <small class=\"d-block mr-n1 mb-n6\"\n                ><a\n                  href=\"https://material.io/design/layout/responsive-layout-grid.html\"\n                  rel=\"noopener noreferrer\"\n                  target=\"_blank\"\n                  class=\"text-decoration-none d-inline-flex align-center\"\n                  ><span\n                    aria-hidden=\"true\"\n                    class=\"m-icon notranslate mr-1 theme--light\"\n                    style=\"\n                      font-size: 16px;\n                      height: 16px;\n                      width: 16px;\n                      color: inherit;\n                    \"\n                    ><svg\n                      xmlns=\"http://www.w3.org/2000/svg\"\n                      viewBox=\"0 0 24 24\"\n                      role=\"img\"\n                      aria-hidden=\"true\"\n                      class=\"m-icon__svg\"\n                      style=\"font-size: 16px; height: 16px; width: 16px\"\n                    >\n                      <path\n                        d=\"M21,12C21,9.97 20.33,8.09 19,6.38V17.63C20.33,15.97 21,14.09 21,12M17.63,19H6.38C7.06,19.55 7.95,20 9.05,20.41C10.14,20.8 11.13,21 12,21C12.88,21 13.86,20.8 14.95,20.41C16.05,20 16.94,19.55 17.63,19M11,17L7,9V17H11M17,9L13,17H17V9M12,14.53L15.75,7H8.25L12,14.53M17.63,5C15.97,3.67 14.09,3 12,3C9.91,3 8.03,3.67 6.38,5H17.63M5,17.63V6.38C3.67,8.09 3,9.97 3,12C3,14.09 3.67,15.97 5,17.63M23,12C23,15.03 21.94,17.63 19.78,19.78C17.63,21.94 15.03,23 12,23C8.97,23 6.38,21.94 4.22,19.78C2.06,17.63 1,15.03 1,12C1,8.97 2.06,6.38 4.22,4.22C6.38,2.06 8.97,1 12,1C15.03,1 17.63,2.06 19.78,4.22C21.94,6.38 23,8.97 23,12Z\"\n                      ></path></svg></span\n                  ><span>规格</span></a\n                ></small\n              >\n            </td>\n          </tr>\n        </tfoot>\n      </table>\n    </div>\n  </div>\n</div>\n",
     "Order": 0,
     "OtherDocs": {
-      "Design concept": "\n<p>In most business situations, Ant Design needs to solve a lot of information storage problems within the design area, so based on 12 Grids System, we divided the design area into 24 sections.</p>\n<p>We name the divided area 'box'. We suggest four boxes for horizontal arrangement at most, one at least. Boxes are proportional to the entire screen as shown in the picture above. To ensure a high level of visual comfort, we customize the typography inside of the box based on the box unit.</p>\n",
-      "Outline": "\n<p>In the grid system, we define the frame outside the information area based on row and column, to ensure that every area can have stable arrangement.</p>\n<p>Following is a brief look at how it works:</p>\n<ul>\n<li>Establish a set of column in the horizontal space defined by row (abbreviated col)</li>\n<li>Your content elements should be placed directly in the col, and only col should be placed directly in row</li>\n<li>The column grid system is a value of 1-24 to represent its range spans. For example, three columns of equal width can be created by <Col span={8} />.</li>\n<li>If the sum of col spans in a row are more than 24, then the overflowing col as a whole will start a new line arrangement.</li>\n</ul>\n<p>Our grid systems base on Flex layout to allow the elements within the parent to be aligned horizontally - left, center, right, wide arrangement, and decentralized arrangement. The Grid system also supports vertical alignment - top aligned, vertically centered, bottom-aligned. You can also define the order of elements by using order.</p>\n<p>Layout uses a 24 grid layout to define the width of each &quot;box&quot;, but does not rigidly adhere to the grid layout.</p>\n",
-      "API": "\n<p>Row</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>align</td>\n<td>the vertical alignment of the flex layout:：<code>top</code> <code>middle</code> <code>bottom</code></td>\n<td>string</td>\n<td>top</td>\n</tr>\n<tr>\n<td>gutter</td>\n<td>spacing between grids, could be a number or a object like { xs: 8, sm: 16, md: 24}. or you can use array to make horizontal and vertical spacing work at the same time <code>[horizontal, vertical]</code> (supported after 1.5.0)</td>\n<td>number, object, array</td>\n<td>0</td>\n</tr>\n<tr>\n<td>justify</td>\n<td>horizontal arrangement of the flex layout:<code>start</code> <code>end</code> <code>center</code> <code>space-around</code> <code>space-between</code></td>\n<td>string</td>\n<td>start</td>\n</tr>\n<tr>\n<td>type</td>\n<td>layout mode, optional <code>flex</code>， browser support</td>\n<td>string</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>Col</p>\n<table>\n<thead>\n<tr>\n<th>Property</th>\n<th>Description</th>\n<th>Type</th>\n<th>Default</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>offset</td>\n<td>the number of cells to offset Col from the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>order</td>\n<td>raster order, used in flex layout mode</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>pull</td>\n<td>the number of cells that raster is moved to the left</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>push</td>\n<td>the number of cells that raster is moved to the right</td>\n<td>int</td>\n<td>0</td>\n</tr>\n<tr>\n<td>span</td>\n<td>raster number of cells to occupy, 0 corresponds to  <code>display: none</code></td>\n<td>string</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xs</td>\n<td><code>&lt;576px</code> and also default setting, could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>sm</td>\n<td><code>≥576px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>md</td>\n<td><code>≥768px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>lg</td>\n<td><code>≥992px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xl</td>\n<td><code>≥1200px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n<tr>\n<td>xxl</td>\n<td><code>≥1600px</code> could be a span value or an object containing above props</td>\n<td>int</td>\n<td>-</td>\n</tr>\n</tbody>\n</table>\n<p>The breakpoints of responsive grid follow BootStrap 4 media queries rules(not including <code>occasionally</code> part).</p>\n"
+      "API": "\n<ul>\n<li><a href=\"/api/MContainer\">MContainer</a></li>\n<li><a href=\"/api/MRow\">MRow</a></li>\n<li><a href=\"/api/MCol\">MCol</a></li>\n<li><a href=\"/api/MSpacer\">MSpacer</a></li>\n</ul>\n",
+      "Sub-components": "\n<ul>\n<li><code>MContainer</code>：<code>MContainer</code> provides the ability to center and horizontally pad your site’s contents. You can also use the <strong>fluid</strong> prop to fully extend the container across all viewport and device sizes.</li>\n<li><code>MCol</code>：<code>MCol</code> is a content holder that must be a direct child of <code>MRow</code>.</li>\n<li><code>MRow</code>：<code>MRow</code> is a wrapper component for <code>MCol</code>. It utilizes <strong>Flex</strong> properties to control the layout and flow of its inner columns. It uses a standard gutter of <strong>24px</strong>. This can be reduced with the <strong>Dense</strong> prop or removed completely with <strong>NoGutters</strong>.</li>\n<li><code>MSpacer</code>：<code>MSpacer</code>  is a basic yet versatile spacing component used to distribute remaining width in-between a parents child components. When placing a single <code>MSpacer</code> before or after the child components, the components will push to the right and left of its container.  When more than one <code>MSpacer</code>'s are used between multiple components, the remaining width is evenly distributed between each spacer.</li>\n</ul>\n",
+      "Helper Classes": "\n<p><strong>FillHeight</strong> applies <code>height: 100%</code> to an element. When applied to <code>MContainer</code> it will also <code>align-items: center</code>.</p>\n",
+      "Caveats": "\n<!--alert:info--> \n<p>1.x grid system has been deprecated in favor of the 2.x grid system.</p>\n<!--alert:info--> \n<!--alert:info--> \n<p>Breakpoints based props on grid components work in an <code>andUp</code> fashion. With this in mind the <strong>xs</strong> breakpoint is assumed and has been removed from the props context. This applies to <strong>offset</strong>、<strong>justify</strong>、<strong>align</strong> and single breakpoint props on <code>MCol</code>.</p>\n<ul>\n<li>Props like <strong>justify-sm</strong> and <strong>justify-md</strong> exist,but <strong>justify-xs</strong> does not, it is simply <strong>justify</strong>。</li>\n<li>The <strong>xs</strong> prop does not exist on <code>MCol</code>. The equivalent to this is the <strong>cols</strong> prop.</li>\n</ul>\n<!--alert:info--> \n<!--alert:info--> \n<p>When using the grid system with IE11 you will need to set an explicit <code>height</code> as <code>min-height</code> will not suffice and cause undesired results.</p>\n<!--alert:info--> \n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4943852+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.0180591+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3481,7 +3487,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4981061+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.022268+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3562,7 +3568,7 @@
     "Desc": "<p>The <code>MChipGroup</code> supercharges the <code>MChip</code> component by providing groupable functionality. It is used for creating groups\nof selections using chips.</p>\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-17T11:52:46.6383271+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.0270598+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3656,7 +3662,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5053894+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.0320618+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3739,7 +3745,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.509099+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.0363098+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3821,7 +3827,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5130925+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.0410637+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3914,7 +3920,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5166526+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.0450926+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3994,7 +4000,7 @@
     "Desc": "<p>The <code>MHover</code> component provides a clean interface for handling the hover state of any component.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.5200087+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.0480625+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4054,7 +4060,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5239111+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.053562+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4138,7 +4144,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info--> \n<p>The MImage component uses the Intersect directive which requires a Polyfill for IE11 and Safari. If a browser that does not support this functionality is detected, the image will still load as normal.</p>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5281338+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.0580593+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4229,7 +4235,7 @@
     "Desc": "<p>The <code>MList</code> component is used to display information. It can contain an avatar, content, actions, subheaders and much\nmore. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a\nconsistent styling for organizing groups of text and images.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.5352989+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.0671797+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4438,7 +4444,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5432123+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.0760617+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4608,7 +4614,7 @@
     "OtherDocs": {
       "Caveats": "\n<!--alert:error-->\n<p>If you are using <code>MNavigationDrawer</code> with <strong>App</strong> property enabled, you don't need to use <strong>Absolute</strong> prop as in examples.</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p>The <strong>ExpandOnHover</strong> prop does not alter the content area of <strong>MMain</strong>. To have content area respond to <strong>ExpandOnHover</strong>, bind <strong>OnMiniVariantUpdate</strong> to a data prop.</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2021-12-20T16:42:15.0043908+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.0820591+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4733,7 +4739,7 @@
     "Desc": "<p>The <code>Overlay</code> component is used to provide emphasis on a particular element or parts of it. It signals to the user of a state change within the application and can be used for creating loaders, dialogs and more.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.5513233+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.0850589+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4818,7 +4824,7 @@
     "Desc": "<p>The <code>MPagination</code> component is used to separate long data sets so that user data information can be known. Provided the amount, the paging component will automatically scale. The current maintenance page provides value easily.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.5552401+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.0890599+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4898,7 +4904,7 @@
     "Desc": "<p>MDatePicker is a fully featured date selection component that lets users select a date, or range of dates.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.5682044+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1020622+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5133,7 +5139,7 @@
     "Desc": "<p><code>MDatePicker</code> can be used as a standalone month picker component.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.5741885+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1075683+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5269,7 +5275,7 @@
     "Desc": "<p>The MTimePicker is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting the time.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.5801729+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1140698+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5437,7 +5443,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.5821676+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1160601+08:00",
     "DemoList": [
       {
         "Order": 20,
@@ -5528,7 +5534,7 @@
     "Desc": "<p>The component is used to display circular data to users. It also can be put into an indeterminate state to portray loading.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.5885434+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1230614+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5597,7 +5603,7 @@
     "Desc": "<p>The component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.5946966+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1310912+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5754,7 +5760,7 @@
     "Desc": "<p>Semantic vector graphics.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.5976887+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1340672+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5856,7 +5862,7 @@
     "Desc": "<p>The MSheet component is the baseline for numerous components such as MCard, MToolbar, and more. The available properties form the foundation of Material Design—the concept of paper and elevation (shadows).</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.600766+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1370601+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -5906,7 +5912,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.6037537+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1402061+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5943,7 +5949,7 @@
     "Desc": "<p>The MSnackbar component is used to display quick messages to users. Snackbars supports positioning, removing delays, and callbacks.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6067483+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1430591+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6014,7 +6020,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.6127294+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1502661+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6171,8 +6177,10 @@
   {
     "Desc": "<p>The <code>Subheader</code> component is used to separate sections of lists.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6167184+08:00",
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2021-12-27T10:11:33.1530593+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6221,6 +6229,7 @@
       {
         "Order": 2,
         "Name": "socialMedia",
+        "Title": "Social media",
         "Description": "<p>Use subheadings in social media interactions.</p>\n",
         "Code": "<MCard Flat Tile>\r\n    <MToolbar Color=\"cyan\" Dark>\r\n        <MAppBarNavIcon></MAppBarNavIcon>\r\n\r\n        <MToolbarTitle>Application</MToolbarTitle>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n\r\n    @foreach (var type in types)\r\n    {\r\n        <MContainer Class=\"grey lighten-4\" Fluid>\r\n            <MSubheader>@type</MSubheader>\r\n\r\n            <MRow>\r\n                <MSpacer></MSpacer>\r\n                @foreach (var card in cards)\r\n                {\r\n                    <MCol Cols=\"12\" Sm=\"6\" Md=\"4\">\r\n                        <MCard>\r\n                            <MImage Src=\"@($\"https://picsum.photos/200/300?image={GetImage()}\")\" Height=\"300\">\r\n                                <span class=\"text-h5 white--text pl-4 pt-4 d-inline-block\">@card</span>\r\n                            </MImage>\r\n\r\n                            <MCardActions Class=\"white justify-center\">\r\n                                @foreach (var social in socials)\r\n                                {\r\n                                    <MButton Color=\"@social.Color\" Class=\"white-text\" Fab Icon Small>\r\n                                        <MIcon>@social.Icon</MIcon>\r\n                                    </MButton>\r\n                                }\r\n                            </MCardActions>\r\n                        </MCard>\r\n                    </MCol>\r\n                }\r\n            </MRow>\r\n        </MContainer>\r\n    }\r\n</MCard>\r\n\r\n@code\r\n{\r\n    string[] cards = new string[3] {\"Good\", \"Best\", \"Finest\"};\r\n    \r\n    List<Social> socials = new List<Social>\r\n    {\r\n        new Social {Icon = \"mdi-facebook\", Color = \"indigo\"},\r\n        new Social {Icon = \"mdi-linkedin\", Color = \"cyan darken-1\"},\r\n        new Social {Icon = \"mdi-instagram\", Color = \"red lighten-3\"}\r\n    };\r\n    \r\n    string[] types = new string[2] {\"Places to Be\", \"Places to See\"};\r\n\r\n    double GetImage()\r\n    {\r\n        var min = 550;\r\n        var max = 560;\r\n        var random = new Random();\r\n        var num = random.Next(1, 100) * 0.01;\r\n\r\n        return Math.Floor(num * (max - min + 1)) + min;\r\n    }\r\n    \r\n    public class Social\r\n    {\r\n        public string Icon { get; set; }\r\n        public string Color { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.Subheader.misc.SocialMedia",
@@ -6232,6 +6241,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/cards",
+      "/components/grid-system",
+      "/components/lists"
+    ],
     "Title": "Subheaders",
     "Type": "Subheader",
     "FullTitle": "Subheaders"
@@ -6240,7 +6254,7 @@
     "Desc": "<p>The MDataIterator component is used for displaying data, and shares a majority of its functionality with the MDataTable component. Features include sorting, searching, pagination, and selection.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6187134+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1550589+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6288,7 +6302,7 @@
     "Desc": "<p>The MDataTable component is used for displaying tabular data. Features include sorting, searching, pagination, content-editing, and row selection.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-07T18:57:49.4275655+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1670622+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6545,7 +6559,7 @@
     "Desc": "<p>The MSimpleTable component is a simple wrapper component around the <table> element. Inside the component you can use all the regular table elements such as <thead>, <tbody>, <tr>, etc.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6336767+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1710602+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6618,7 +6632,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n<li><a href=\"/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p>When using the <strong>Dark</strong> prop and <strong>NOT</strong> providing a custom <strong>color</strong>, the <code>MTabs</code> component will default its color to white.</p>\n<!--alert:warning--> \n<!--alert:warning--> \n<p>When using <code>MTabItem</code>'s that contain required input fields you must use the <strong>eager</strong> prop in order to validate the required fields that are not yet visible.</p>\n<!--alert:warning--> \n"
     },
-    "LastWriteTime": "2021-12-22T14:08:26.2341388+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1800592+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6809,7 +6823,7 @@
     "Desc": "<p>MTimeline is very useful for displaying chronological information.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6473153+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1860927+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6935,7 +6949,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.6494788+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1890635+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6983,7 +6997,7 @@
     "Desc": "<p>The MTreeview component is useful for displaying large amounts of nested data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.6568904+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.1980605+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7176,7 +7190,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.6608809+08:00",
+    "LastWriteTime": "2021-12-27T10:11:33.2000596+08:00",
     "DemoList": [
       {
         "Order": 0,
