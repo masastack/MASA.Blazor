@@ -185,5 +185,19 @@ namespace MASA.Blazor
 
             await base.HandleOnClearClickAsync(args);
         }
+
+        public override Task SetSelectedAsync(string text, TItemValue value)
+        {
+            QueryText = default;
+            HighlightIndex = -1;
+            return base.SetSelectedAsync(text, value);
+        }
+
+        public override Task RemoveSelectedAsync(string text, TItemValue value)
+        {
+            QueryText = default;
+            HighlightIndex = -1;
+            return base.RemoveSelectedAsync(text, value);
+        }
     }
 }

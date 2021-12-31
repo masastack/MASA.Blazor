@@ -376,7 +376,7 @@ namespace MASA.Blazor
             InvokeStateHasChanged();
         }
 
-        public async Task SetSelectedAsync(string text, TItemValue value)
+        public virtual async Task SetSelectedAsync(string text, TItemValue value)
         {
             if (Multiple)
             {
@@ -407,7 +407,7 @@ namespace MASA.Blazor
             }
         }
 
-        public Task RemoveSelectedAsync(string text, TItemValue value)
+        public virtual Task RemoveSelectedAsync(string text, TItemValue value)
         {
             var values = Values;
             values.Remove(value);
