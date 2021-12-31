@@ -492,18 +492,7 @@ namespace MASA.Blazor
 
         public virtual Task HandleOnChangeAsync(ChangeEventArgs args)
         {
-            var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
-
-            if (success)
-            {
-                _badInput = null;
-                InternalValue = val;
-            }
-            else
-            {
-                _badInput = args.Value.ToString();
-            }
-
+            //Since we bind value with input event,we removed this
             return Task.CompletedTask;
         }
 
