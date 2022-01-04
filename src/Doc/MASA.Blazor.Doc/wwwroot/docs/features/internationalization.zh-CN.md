@@ -119,7 +119,7 @@ void Example()
 - 添加 MasaI18n 中间件：
 
 ```c#
-app.UseMasaI18nForServer();
+app.UseMasaI18n();
 ```
 
 - 在`_Host.cshtml`中为`App.razor`组件添加`I18nConfig`参数
@@ -200,11 +200,9 @@ await builder.Services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress, "
 ```c#
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 await builder.Services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress, "{i18n config file path}");
+builder.RootComponents.Add(typeof(App), "#app", await builder.Services.GetMasaI18nParameter());
 
-var host = builder.Build();
-builder.RootComponents.Add(typeof(App), "#app", host.Services.GetMasaI18nParameter());
-await host.Services.UseMasaI18nForWasm();
-await host.RunAsync();
+await builder.Build().RunAsync();
 ```
 
 - 当用户切换语言时，将值赋值给`I18nConfig.Language`。

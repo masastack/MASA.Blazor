@@ -120,7 +120,7 @@ void Example()
 - Add MasaI18n middleware:
 
 ```c#
-app.UseMasaI18nForServer();
+app.UseMasaI18n();
 ```
 
 - Add the `I18nConfig` parameter to the `App.razor` component in `_Host.cshtml`
@@ -201,11 +201,9 @@ await builder.Services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress, "
 ```c#
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 await builder.Services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress, "{i18n config file path}");
+builder.RootComponents.Add(typeof(App), "#app", await builder.Services.GetMasaI18nParameter());
 
-var host = builder.Build();
-builder.RootComponents.Add(typeof(App), "#app", host.Services.GetMasaI18nParameter());
-await host.Services.UseMasaI18nForWasm();
-await host.RunAsync();
+await builder.Build().RunAsync();
 ```
 
 - When the user switches languages, assign the value to `I18nConfig.Language`.

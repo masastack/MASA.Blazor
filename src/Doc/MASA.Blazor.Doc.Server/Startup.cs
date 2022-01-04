@@ -37,7 +37,7 @@ namespace MASA.Blazor.Doc.Server
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseMasaI18nForServer();
+            app.UseMasaI18n();
 
             app.UseStaticFiles();
 
