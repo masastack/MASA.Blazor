@@ -41,7 +41,7 @@ packer:
 docker:
   image: docker:17.05.0
   stage: docker
-  tag:
+  tags:
     - linux-masa
   only:
     - develop
