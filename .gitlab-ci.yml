@@ -41,7 +41,8 @@ packer:
 docker:
   image: docker:17.05.0
   stage: docker
-  tag: linux-masa
+  tag:
+    - linux-masa
   only:
     - develop
   before_script:
