@@ -84,7 +84,7 @@ namespace MASA.Blazor
             }
         }
 
-        public virtual bool IsDirty
+        protected virtual bool IsDirty
         {
             get
             {

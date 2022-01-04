@@ -21,13 +21,12 @@ namespace MASA.Blazor
         [Parameter]
         public override bool Outlined { get; set; } = true;
 
-        public TItem LoadingItem { get; private set; }
-
-        public Dictionary<int, List<TItem>> ChildrenItems { get; } = new Dictionary<int, List<TItem>>();
-
-        protected override List<string> FormatText(TValue value)
+        protected override IList<TItem> SelectedItems
         {
-            return new List<string> { string.Join(" / ", GetItemByValue(Items, value, ShowAllLevels).Select(ItemText)) };
+            get
+            {
+                return FindSelectedItems(Items).ToList();
+            }
         }
 
         protected override void SetComponentClass()
@@ -39,93 +38,90 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-cascader");
-                })
-                .Apply("menu-body", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-cascader__menu-body");
-                })
-                .Apply("menu-body-wrapper", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-cascader__menu-body-wrapper")
-                        .AddIf("m-cascader__menu-body-wrapper--dense", () => Dense);
                 });
 
             AbstractProvider
-                .Merge<BMenu, MCascaderMenu>(attrs =>
+                .ApplyCascaderDefault<TItem, TValue>()
+                .Merge<BMenu, MMenu>(attrs =>
                 {
-                    attrs[nameof(MCascaderMenu.OffsetY)] = true;
-                    attrs[nameof(MCascaderMenu.MinWidth)] = (StringNumber)(Dense ? 120 : 180);
-                    attrs[nameof(MCascaderMenu.CloseOnContentClick)] = false;
-                    attrs[nameof(MCascaderMenu.ContentStyle)] = "display:flex";
+                    attrs[nameof(MMenu.OffsetY)] = true;
+                    attrs[nameof(MMenu.MinWidth)] = (StringNumber)(Dense ? 120 : 180);
+                    attrs[nameof(MMenu.CloseOnContentClick)] = false;
+                    attrs[nameof(MMenu.ContentStyle)] = "display:flex";
                 })
-                .Apply<BList, MList>()
-                .Apply<BItemGroup, MListItemGroup>(attrs =>
+                .Apply(typeof(BCascaderList<,>), typeof(MCascaderList<TItem, TValue>), attrs =>
                 {
-                    attrs[nameof(MListItemGroup.Color)] = "primary";
-                })
-                .Merge(typeof(BSelectList<,,>), typeof(MCascaderSelectList<TItem, TValue>))
-                .Merge(typeof(BSelectMenu<,,,>), typeof(BCascaderMenu<TItem, TValue, MCascader<TItem, TValue>>))
-                .Apply(typeof(BCascaderMenuBody<,,>), typeof(BCascaderMenuBody<TItem, TValue, MCascader<TItem, TValue>>));
+                    attrs[nameof(Dense)] = Dense;
+                    attrs[nameof(ItemText)] = ItemText;
+                    attrs[nameof(LoadChildren)] = LoadChildren;
+                    attrs[nameof(ItemChildren)] = ItemChildren;
+                    attrs[nameof(MCascaderList<TItem, TValue>.OnSelect)] = CreateEventCallback<TItem>(SelectItemsAsync);
+                });
         }
 
-        public async Task HandleOnItemClickAsync(TItem item, int level)
+        protected IEnumerable<TItem> FindSelectedItems(IEnumerable<TItem> items)
         {
-            var children = ItemChildren(item);
-
-            if (LoadChildren != null && children != null && children.Count == 0)
+            var selectedItems = items.Where(item => InternalValues.Contains(ItemValue(item)));
+            if (selectedItems.Any())
             {
-                LoadingItem = item;
-                await LoadChildren(item);
-                LoadingItem = default;
-
-                children = ItemChildren(item);
+                return selectedItems;
             }
-
-            if (children != null && children.Count > 0)
-            {
-                ChildrenItems[level] = children;
-            }
-            else
-            {
-                ChildrenItems.Remove(level);
-            }
-        }
-
-        private List<TItem> GetItemByValue(IEnumerable<TItem> items, TValue value, bool isFull)
-        {
-            var results = new List<TItem>();
 
             foreach (var item in items)
             {
-                if (results.Any()) break;
-
-                if (ItemValue(item).Equals(value))
+                var children = ItemChildren(item);
+                if (children != null && children.Any())
                 {
-                    results.Add(item);
-                    break;
-                }
-                else
-                {
-                    var children = ItemChildren(item);
-                    if (children != null && children.Any())
+                    var childrenSelectedItems = FindSelectedItems(children);
+                    if (childrenSelectedItems.Any())
                     {
-                        var result = GetItemByValue(children, value, isFull);
-                        if (result.Any())
-                        {
-                            if (isFull)
-                            {
-                                results.Add(item);
-                            }
+                        return childrenSelectedItems;
+                    }
+                }
+            }
 
-                            results.AddRange(result);
+            return Array.Empty<TItem>();
+        }
+
+        protected override string GetText(TItem item)
+        {
+            if (!ShowAllLevels)
+            {
+                return base.GetText(item);
+            }
+
+            var allLevelItems = new List<TItem>();
+            FindAllLevelItems(item, ComputedItems, ref allLevelItems);
+
+            allLevelItems.Reverse();
+            return string.Join(" / ", allLevelItems.Select(base.GetText));
+        }
+
+        private bool FindAllLevelItems(TItem item, IList<TItem> searchItems, ref List<TItem> allLevelItems)
+        {
+            if (searchItems.Contains(item))
+            {
+                allLevelItems.Add(item);
+                return true;
+            }
+            else
+            {
+                foreach (var searchItem in searchItems)
+                {
+                    var children = ItemChildren(searchItem);
+                    if (children != null && children.Count > 0)
+                    {
+                        var find = FindAllLevelItems(item, children, ref allLevelItems);
+                        if (find)
+                        {
+                            allLevelItems.Add(searchItem);
+                            return true;
                         }
                     }
                 }
             }
 
-            return results;
+            return false;
         }
     }
 }

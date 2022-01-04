@@ -13,51 +13,31 @@ namespace MASA.Blazor
 {
     public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TItem, TItemValue, TValue>
     {
-        private bool _visible;
-
-        protected BMenuProps ComputedMenuProps { get; set; }
-
-        protected virtual BMenuProps GetDefaultMenuProps() => new()
-        {
-            CloseOnClick = true,
-            CloseOnContentClick = false,
-            DisableKeys = true,
-            OpenOnClick = true,
-            MaxHeight = 304,
-        };
-
-        protected bool Visible
-        {
-            get => MenuProps == null ? _visible : ComputedMenuProps.Visible;
-            set
-            {
-                if (MenuProps == null)
-                    _visible = value;
-                else
-                    ComputedMenuProps.Visible = value;
-            }
-        }
-
-        [Parameter]
-        public StringNumber MinWidth { get; set; }
-
-        [Parameter]
-        public bool Multiple { get; set; }
-
         [Parameter]
         public override string AppendIcon { get; set; } = "mdi-menu-down";
+
+        //TODO:Attach,CacheItems
 
         [Parameter]
         public bool Chips { get; set; }
 
         [Parameter]
-        public bool SmallChips { get; set; }
-
-        [Parameter]
         public bool DeletableChips { get; set; }
 
+        //TODO: DisableLookup,Eager
+
         [Parameter]
-        public Action<BMenuProps> MenuProps { get; set; }
+        public bool HideSelected { get; set; }
+
+        [EditorRequired]
+        [Parameter]
+        public IList<TItem> Items { get; set; } = new List<TItem>();
+
+        [Parameter]
+        public string ItemColor { get; set; } = "primary";
+
+        [Parameter]
+        public Func<TItem, bool> ItemDisabled { get; set; } = item => false;
 
         [EditorRequired]
         [Parameter]
@@ -68,70 +48,86 @@ namespace MASA.Blazor
         public Func<TItem, TItemValue> ItemValue { get; set; }
 
         [Parameter]
-        public Func<TItem, bool> ItemDisabled { get; set; } = item => false;
-
-        [EditorRequired]
-        [Parameter]
-        public IReadOnlyList<TItem> Items { get; set; } = new List<TItem>();
+        public Action<BMenuProps> MenuProps { get; set; }
 
         [Parameter]
-        public RenderFragment PrependItemContent { get; set; }
+        public bool Multiple { get; set; }
+
+        //TODO:OpenOnClear
 
         [Parameter]
-        public RenderFragment AppendItemContent { get; set; }
+        public bool SmallChips { get; set; }
 
+        //TODO:remove this
         [Parameter]
-        public RenderFragment<SelectSelectionProps<TItem>> SelectionContent { get; set; }
+        public StringNumber MinWidth { get; set; }
 
+        //Filterable
         [Parameter]
-        public RenderFragment<SelectListItemProps<TItem>> ItemContent { get; set; }
+        public string NoDataText { get; set; } = "No data available";
 
         [Parameter]
         public EventCallback<TItem> OnSelectedItemUpdate { get; set; }
 
         [Parameter]
-        public bool HideSelected { get; set; }
+        public RenderFragment AppendItemContent { get; set; }
 
         [Parameter]
-        public bool HideNoData { get; set; }
+        public RenderFragment<SelectListItemProps<TItem>> ItemContent { get; set; }
 
         [Parameter]
         public RenderFragment NoDataContent { get; set; }
 
-        public virtual List<string> Text
+        [Parameter]
+        public RenderFragment PrependItemContent { get; set; }
+
+        [Parameter]
+        public RenderFragment<SelectSelectionProps<TItem>> SelectionContent { get; set; }
+
+        bool ISelect<TItem, TItemValue, TValue>.HasChips => HasChips;
+
+        IList<TItem> ISelect<TItem, TItemValue, TValue>.ComputedItems => ComputedItems;
+
+        IList<TItemValue> ISelect<TItem, TItemValue, TValue>.InternalValues => InternalValues;
+
+        object ISelect<TItem, TItemValue, TValue>.Menu
         {
-            get
+            set
             {
-                if (Multiple)
-                {
-                    return FormatText(Values);
-                }
-
-                if (InternalValue is TValue value)
-                {
-                    return FormatText(value);
-                }
-
-                return new List<string>();
+                Menu = value;
             }
         }
 
-        public override bool IsDirty => SelectedItems.Count > 0;
+        IList<TItem> ISelect<TItem, TItemValue, TValue>.SelectedItems => SelectedItems;
 
-        public int HighlightIndex { get; set; } = -1;
+        string ISelect<TItem, TItemValue, TValue>.GetText(TItem item) => GetText(item);
 
-        public override Dictionary<string, object> InputAttrs => new()
+        TItemValue ISelect<TItem, TItemValue, TValue>.GetValue(TItem item) => GetValue(item);
+
+        bool ISelect<TItem, TItemValue, TValue>.GetDisabled(TItem item) => GetDisabled(item);
+
+        protected bool IsMenuActive { get; set; }
+
+        protected int SelectedIndex { get; set; } = -1;
+
+        protected object Menu { get; set; }
+
+        protected BMenuProps ComputedMenuProps { get; set; }
+
+        protected bool HasChips => Chips || SmallChips;
+
+        protected override bool IsDirty => SelectedItems.Count > 0;
+
+        protected override Dictionary<string, object> InputAttrs => new()
         {
             { "type", Type },
             { "value", null },
             { "readonly", true }
         };
 
-        public virtual IReadOnlyList<TItem> ComputedItems => Items;
+        protected virtual IList<TItem> ComputedItems => Items;
 
-        public string QueryText { get; set; }
-
-        public IList<TItemValue> Values
+        protected IList<TItemValue> InternalValues
         {
             get
             {
@@ -152,30 +148,38 @@ namespace MASA.Blazor
             }
         }
 
-        public IList<TItem> SelectedItems => Items
-            .Where(u => Values.Contains(ItemValue(u))).ToList();
-
-        public object Menu { get; set; }
-
-        protected virtual List<string> FormatText(TValue value)
+        protected virtual IList<TItem> SelectedItems
         {
-            //TODO:set default expression
-            if (ItemValue == null || ItemText == null)
+            get
             {
-                return Text;
+                return Items.Where(item => InternalValues.Contains(ItemValue(item))).ToList();
             }
-
-            //why list?
-            return Items
-                .Where(u => ItemValue(u).Equals(value))
-                .Select(ItemText).ToList();
         }
 
-        protected virtual List<string> FormatText(IEnumerable<TItemValue> values)
+        protected virtual bool MenuCanShow => true;
+
+        protected virtual BMenuProps GetDefaultMenuProps() => new()
         {
-            return Items
-                .Where(u => values.Contains(ItemValue(u)))
-                .Select(ItemText).ToList();
+            CloseOnClick = true,
+            CloseOnContentClick = false,
+            DisableKeys = true,
+            OpenOnClick = true,
+            MaxHeight = 304,
+        };
+
+        protected virtual string GetText(TItem item)
+        {
+            return item == null ? null : ItemText(item);
+        }
+
+        protected TItemValue GetValue(TItem item)
+        {
+            return ItemValue(item);
+        }
+
+        protected bool GetDisabled(TItem item)
+        {
+            return ItemDisabled(item);
         }
 
         protected override void OnInitialized()
@@ -184,23 +188,6 @@ namespace MASA.Blazor
 
             ComputedMenuProps = GetDefaultMenuProps();
             MenuProps?.Invoke(ComputedMenuProps);
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
-
-            if (firstRender)
-            {
-                await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
-                await (Menu as MMenu)?.UpdateActivator(InputSlotElement);
-            }
-        }
-
-        public override Task HandleOnAppendClickAsync(MouseEventArgs args)
-        {
-            Visible = true;
-            return base.HandleOnAppendClickAsync(args);
         }
 
         protected override void SetComponentClass()
@@ -212,7 +199,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-select")
-                        .AddIf("m-select--is-menu-active", () => Visible)
+                        .AddIf("m-select--is-menu-active", () => IsMenuActive)
                         .AddIf("m-select--is-multi", () => Multiple)
                         .AddIf("m-select--chips", () => Chips)
                         .AddIf("m-select--chips--small", () => SmallChips)
@@ -227,51 +214,38 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m-select__slot");
                 })
-                .Apply("selector", cssBuilder =>
+                .Apply("selections", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-select__selections");
-                }, styleBuilder =>
-                {
-                    styleBuilder
-                        .Add("m-select__selection--comma");
                 })
-                .Apply("select-arrow", cssBuilder =>
+                .Apply("selection-comma", cssBuilder =>
                 {
-                    cssBuilder
-                        .Add("m-input__append-inner");
-                })
-                .Apply("select-arrow-icon", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-input__icon m-input__icon--append");
-                })
-                .Apply("selected", cssBuilder =>
-                {
+                    //TODO: color,disabled
                     cssBuilder
                         .Add("m-select__selection")
                         .Add("m-select__selection--comma");
+                })
+                .Apply("input-wrapper", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-select__selections__input-wrapper");
                 });
 
             AbstractProvider
-                .Merge(typeof(BInputDefaultSlot<,>), typeof(BSelectDefaultSlot<TItem, TItemValue, TValue>))
-                .Apply(typeof(BSelectHiddenInput<,,,>), typeof(BSelectHiddenInput<TItem, TItemValue, TValue, MSelect<TItem, TItemValue, TValue>>))
-                .Apply(typeof(BSelectMenu<,,,>), typeof(BSelectMenu<TItem, TItemValue, TValue, MSelect<TItem, TItemValue, TValue>>))
-                .Apply(typeof(BSelectSelections<,,,>), typeof(BSelectSelections<TItem, TItemValue, TValue, MSelect<TItem, TItemValue, TValue>>))
+                .ApplySelectDefault<TItem, TItemValue, TValue>()
                 .Apply<BMenu, MMenu>(attrs =>
                 {
-                    attrs[nameof(MMenu.Value)] = Visible;
-                    attrs[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, async (v) =>
+                    attrs[nameof(MMenu.Value)] = MenuCanShow && IsMenuActive;
+                    attrs[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, async val =>
                     {
-                        Visible = v;
-
-                        if (v)
+                        IsMenuActive = val;
+                        if (val && !IsFocused && !IsDisabled)
                         {
                             await InputElement.FocusAsync();
                         }
                     });
                     attrs[nameof(MMenu.Disabled)] = Disabled || Readonly;
-
                     attrs[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
                     attrs[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;
                     attrs[nameof(MMenu.CloseOnContentClick)] = ComputedMenuProps.CloseOnContentClick;
@@ -290,12 +264,24 @@ namespace MASA.Blazor
                     attrs[nameof(MMenu.Right)] = ComputedMenuProps.Right;
                     attrs[nameof(MMenu.Top)] = ComputedMenuProps.Top;
                 })
-                .Apply<BList, MList>(attrs => { attrs[nameof(MList.Dense)] = Dense; })
-                .Apply<BListItem, MListItem>(attrs => { attrs[nameof(MListItem.Dense)] = Dense; })
-                .Apply<BListItemContent, MListItemContent>()
-                .Apply<BListItemTitle, MListItemTitle>()
-                .Apply(typeof(BSelectList<,,>), typeof(MSelectList<TItem, TItemValue, TValue>),
-                    attrs => { attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemContent)] = ItemContent; })
+                .Apply(typeof(BSelectList<,,>), typeof(MSelectList<TItem, TItemValue, TValue>), attrs =>
+                {
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.Action)] = Multiple;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.Color)] = ItemColor;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.Dense)] = Dense;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.HideSelected)] = HideSelected;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.Items)] = ComputedItems;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemDisabled)] = ItemDisabled;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemText)] = ItemText;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemValue)] = ItemValue;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.NoDataText)] = NoDataText;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.SelectedItems)] = SelectedItems;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.OnSelect)] = CreateEventCallback<TItem>(SelectItemsAsync);
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemContent)] = ItemContent;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.PrependItemContent)] = PrependItemContent;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.AppendItemContent)] = AppendItemContent;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.SelectedIndex)] = SelectedIndex;
+                })
                 .Apply<BChip, MChip>(attrs =>
                 {
                     attrs[nameof(MChip.Close)] = DeletableChips && (!IsDisabled && !IsReadonly);
@@ -305,91 +291,30 @@ namespace MASA.Blazor
                 });
         }
 
-        public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+        protected virtual async Task SelectItemsAsync(TItem item)
         {
-            switch (args.Code)
+            var value = ItemValue(item);
+            if (!Multiple)
             {
-                case "ArrowUp":
-                    if (HighlightIndex > 0)
-                    {
-                        HighlightIndex--;
-                    }
-                    else
-                    {
-                        HighlightIndex = ComputedItems.Count - 1;
-                    }
-
-                    break;
-                case "ArrowDown":
-                    if (HighlightIndex < ComputedItems.Count - 1)
-                    {
-                        HighlightIndex++;
-                    }
-                    else
-                    {
-                        HighlightIndex = 0;
-                    }
-
-                    break;
-                case "Enter":
-                    if (HighlightIndex > -1 && HighlightIndex < ComputedItems.Count)
-                    {
-                        var item = ComputedItems[HighlightIndex];
-
-                        var label = ItemText(item);
-                        var val = ItemValue(item);
-
-                        if (!Multiple)
-                        {
-                            Visible = false;
-                            await SetSelectedAsync(label, val);
-                        }
-                        else
-                        {
-                            if (Values.Contains(val))
-                            {
-                                await RemoveSelectedAsync(label, val);
-                            }
-                            else
-                            {
-                                await SetSelectedAsync(label, val);
-                            }
-                        }
-                    }
-
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        public override async Task HandleOnClickAsync(MouseEventArgs args)
-        {
-            //TODO:try focus
-            await InputElement.FocusAsync();
-            await base.HandleOnClickAsync(args);
-        }
-
-        public void SetVisible(bool visible)
-        {
-            Visible = visible;
-            InvokeStateHasChanged();
-        }
-
-        public virtual async Task SetSelectedAsync(string text, TItemValue value)
-        {
-            if (Multiple)
-            {
-                IList<TItemValue> values = Values;
-                if (!values.Contains(value))
+                if (value is TValue val)
                 {
-                    values.Add(value);
-                    InternalValue = (TValue)values;
+                    InternalValue = val;
                 }
+                IsMenuActive = false;
             }
             else
             {
-                if (value is TValue val)
+                var internalValues = InternalValues.ToList();
+                if (internalValues.Contains(value))
+                {
+                    internalValues.Remove(value);
+                }
+                else
+                {
+                    internalValues.Add(value);
+                }
+
+                if (internalValues is TValue val)
                 {
                     InternalValue = val;
                 }
@@ -397,36 +322,77 @@ namespace MASA.Blazor
 
             if (OnSelectedItemUpdate.HasDelegate)
             {
-                var selectedItem = Items.FirstOrDefault(item => EqualityComparer<TItemValue>.Default.Equals(ItemValue(item), value));
-                await OnSelectedItemUpdate.InvokeAsync(selectedItem);
-            }
-            else
-            {
-                //TODO: Refactor MSelectList
-                StateHasChanged();
+                await OnSelectedItemUpdate.InvokeAsync(item);
             }
         }
 
-        public virtual Task RemoveSelectedAsync(string text, TItemValue value)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            var values = Values;
-            values.Remove(value);
+            await base.OnAfterRenderAsync(firstRender);
 
-            Text.Remove(text);
-            InternalValue = (TValue)values;
+            if (firstRender)
+            {
+                await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
+                await (Menu as MMenu)?.UpdateActivator(InputSlotElement);
+            }
+        }
 
-            //TODO: Refactor MSelectList
-            StateHasChanged();
+        public override Task HandleOnAppendClickAsync(MouseEventArgs args)
+        {
+            IsMenuActive = true;
+            return base.HandleOnAppendClickAsync(args);
+        }
 
-            return Task.CompletedTask;
+        public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+        {
+            switch (args.Code)
+            {
+                case "ArrowUp":
+                    ChangeSelectedIndex(-1);
+                    break;
+                case "ArrowDown":
+                    ChangeSelectedIndex(+1);
+                    break;
+                case "Enter":
+                    if (IsMenuActive)
+                    {
+                        if (SelectedIndex > -1 && SelectedIndex < ComputedItems.Count)
+                        {
+                            var item = ComputedItems[SelectedIndex];
+                            await SelectItemsAsync(item);
+                        }
+                    }
+                    else
+                    {
+                        IsMenuActive = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void ChangeSelectedIndex(int change)
+        {
+            var index = SelectedIndex + change;
+            if (index > ComputedItems.Count - 1)
+            {
+                //Back to first
+                index = 0;
+            }
+            else if (index < 0)
+            {
+                //Go to last
+                index = ComputedItems.Count - 1;
+            }
+
+            SelectedIndex = index;
         }
 
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
             if (Multiple)
             {
-                await InputElement.FocusAsync();
-
                 IList<TItemValue> values = new List<TItemValue>();
                 InternalValue = (TValue)values;
             }

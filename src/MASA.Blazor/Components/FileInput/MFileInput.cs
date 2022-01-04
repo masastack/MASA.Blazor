@@ -43,7 +43,7 @@ namespace MASA.Blazor
         [Parameter]
         public string Accept { get; set; }
 
-        public override Dictionary<string, object> InputAttrs => new()
+        protected override Dictionary<string, object> InputAttrs => new()
         {
             { "type", "file" },
             { "accept", Accept }
@@ -117,7 +117,7 @@ namespace MASA.Blazor
             }
         }
 
-        public override bool IsDirty => Files.Count > 0;
+        protected override bool IsDirty => Files.Count > 0;
 
         protected override void OnInitialized()
         {

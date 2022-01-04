@@ -5,6 +5,11 @@
   ],
   "Props": [
     {
+      "Name": "AllowOverflow",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "AppendIcon",
       "Type": "String",
       "Default": "null",
@@ -20,6 +25,11 @@
       "Name": "Autofocus",
       "Type": "Boolean",
       "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "AutoSelectFirst",
+      "Type": "Boolean",
       "Description": ""
     },
     {
@@ -120,7 +130,7 @@
     },
     {
       "Name": "Filter",
-      "Type": "Func<TItem,String,Boolean>",
+      "Type": "Func<TItem,String,String,Boolean>",
       "Default": "",
       "Description": ""
     },
@@ -151,7 +161,6 @@
     {
       "Name": "HideNoData",
       "Type": "Boolean",
-      "Default": "false",
       "Description": ""
     },
     {
@@ -173,6 +182,11 @@
       "Description": ""
     },
     {
+      "Name": "ItemColor",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "ItemDisabled",
       "Type": "Func<TItem,Boolean>",
       "Default": "null",
@@ -180,7 +194,7 @@
     },
     {
       "Name": "Items",
-      "Type": "IReadOnlyList<TItem>",
+      "Type": "IList<TItem>",
       "Default": "",
       "Description": ""
     },
@@ -242,6 +256,16 @@
       "Name": "Multiple",
       "Type": "Boolean",
       "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "NoDataText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "NoFilter",
+      "Type": "Boolean",
       "Description": ""
     },
     {
@@ -308,6 +332,11 @@
       "Name": "Rules",
       "Type": "IEnumerable<Func`2>",
       "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "SearchInput",
+      "Type": "String",
       "Description": ""
     },
     {

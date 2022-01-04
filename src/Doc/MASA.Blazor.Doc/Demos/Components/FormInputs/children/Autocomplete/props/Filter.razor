@@ -104,7 +104,7 @@
             }
         };
 
-    public bool CustomFilter(Model item, string queryText)
+    public bool CustomFilter(Model item, string queryText, string text)
     {
         var textOne = item.Name.ToLowerInvariant();
         var textTwo = item.Abbr.ToLowerInvariant();

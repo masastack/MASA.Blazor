@@ -88,13 +88,9 @@
                                 </MChip>
                             </SelectionContent>
                             <ItemContent Context="data">
-                                @if (data.Item.Header != null)
+                                @if (data.Item is not object)
                                 {
-                                    <MSubheader>@data.Item.Header</MSubheader>
-                                }
-                                else if (data.Item.Divider)
-                                {
-                                    <MDivider></MDivider>
+                                    <MListItemContent>@data.Item</MListItemContent>
                                 }
                                 else
                                 {

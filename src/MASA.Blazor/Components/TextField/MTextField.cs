@@ -162,7 +162,7 @@ namespace MASA.Blazor
 
         public virtual string Tag => "input";
 
-        public virtual Dictionary<string, object> InputAttrs => new(Attributes)
+        protected virtual Dictionary<string, object> InputAttrs => new(Attributes)
         {
             { "type", Type },
             { "value", _badInput == null ? InternalValue : _badInput }
@@ -229,6 +229,10 @@ namespace MASA.Blazor
         public ElementReference PrefixElement { get; set; }
 
         public ElementReference PrependInnerElement { get; set; }
+
+        bool ITextField<TValue>.IsDirty => IsDirty;
+
+        Dictionary<string, object> ITextField<TValue>.InputAttrs => InputAttrs;
 
         protected override void SetComponentClass()
         {
@@ -566,8 +570,6 @@ namespace MASA.Blazor
 
         public virtual async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
-            await InputElement.FocusAsync();
-
             InternalValue = default;
 
             if (OnClearClick.HasDelegate)

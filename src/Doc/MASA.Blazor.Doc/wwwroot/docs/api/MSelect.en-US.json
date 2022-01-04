@@ -143,12 +143,6 @@
       "Description": ""
     },
     {
-      "Name": "HideNoData",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "HideSelected",
       "Type": "Boolean",
       "Default": "false",
@@ -167,6 +161,11 @@
       "Description": ""
     },
     {
+      "Name": "ItemColor",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "ItemDisabled",
       "Type": "Func<TItem,Boolean>",
       "Default": "null",
@@ -174,7 +173,7 @@
     },
     {
       "Name": "Items",
-      "Type": "IReadOnlyList<TItem>",
+      "Type": "IList<TItem>",
       "Default": "",
       "Description": ""
     },
@@ -236,6 +235,11 @@
       "Name": "Multiple",
       "Type": "Boolean",
       "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "NoDataText",
+      "Type": "String",
       "Description": ""
     },
     {

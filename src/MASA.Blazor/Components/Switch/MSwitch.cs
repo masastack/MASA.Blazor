@@ -53,7 +53,7 @@ namespace MASA.Blazor
 
         public override string ComputedColor => Color ?? (IsDark ? "white" : "primary");
 
-        public override bool IsDirty => InternalValue;
+        protected override bool IsDirty => InternalValue;
 
         public Dictionary<string, object> InputAttrs { get; set; } = new();
 

@@ -27,7 +27,7 @@ namespace MASA.Blazor
 
         protected double ElementHeight { get; set; }
 
-        public override Dictionary<string, object> InputAttrs => new(Attributes)
+        protected override Dictionary<string, object> InputAttrs => new(Attributes)
         {
             { "rows", Rows },
             { "style", AutoGrow && ElementHeight > 0 ? $"height:{ElementHeight}px" : null }

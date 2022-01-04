@@ -10,18 +10,24 @@ using Timer = System.Timers.Timer;
 
 namespace MASA.Blazor
 {
-    public class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, TItemValue, TValue>
+    public class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, TItemValue, TValue>, IAutocomplete<TItem, TItemValue, TValue>
     {
-        private Func<TItem, string, bool> _filter;
+        private Func<TItem, string, string, bool> _filter;
 
         [Parameter]
-        public Func<TItem, string, bool> Filter
+        public bool AllowOverflow { get; set; } = true;
+
+        [Parameter]
+        public bool AutoSelectFirst { get; set; }
+
+        [Parameter]
+        public Func<TItem, string, string, bool> Filter
         {
             get
             {
                 if (_filter == null)
                 {
-                    _filter = (item, query) => ItemText(item).ToLower().IndexOf(query.ToLower()) > -1;
+                    _filter = (item, query, text) => text.ToLower().IndexOf(query.ToLower()) > -1;
                 }
 
                 return _filter;
@@ -30,29 +36,90 @@ namespace MASA.Blazor
         }
 
         [Parameter]
+        public bool HideNoData { get; set; }
+
+        [Parameter]
+        public bool NoFilter { get; set; }
+
+        [Parameter]
+        public string SearchInput { get; set; }
+
+        [Parameter]
         public EventCallback<string> OnSearchInputUpdate { get; set; }
 
-        public override Dictionary<string, object> InputAttrs => new()
-        {
-            { "type", Type },
-            //TODO:this can be more simple
-            { "value", (Multiple || Chips) ? QueryText : (QueryText ?? string.Join(',', FormatText(InternalValue))) },
-            { "autocomplete", "off" }
-        };
+        protected override IList<TItem> ComputedItems => FilteredItems;
 
-        public override List<string> Text
+        protected IList<TItemValue> SelectedValues
         {
             get
             {
-                if (Multiple || Chips)
-                {
-                    return base.Text;
-                }
-
-                //By default,we use value instead
-                return new List<string>();
+                return SelectedItems.Select(GetValue).ToList();
             }
         }
+
+        protected bool HasDisplayedItems
+        {
+            get
+            {
+                return HideSelected ? FilteredItems.Any(item => !HasItem(item)) : FilteredItems.Count > 0;
+            }
+        }
+
+        protected bool HasItem(TItem item)
+        {
+            return SelectedValues.IndexOf(GetValue(item)) > -1;
+        }
+
+        protected IList<TItem> FilteredItems
+        {
+            get
+            {
+                if (!IsSearching || NoFilter || InternalSearch == null)
+                {
+                    return Items;
+                }
+
+                return Items.Where(item => Filter(item, InternalSearch, GetText(item) ?? "")).ToList();
+            }
+        }
+
+        protected bool IsSearching
+        {
+            get
+            {
+                return (Multiple && SearchIsDirty) || (SearchIsDirty && InternalSearch != GetText(SelectedItem));
+            }
+        }
+
+        protected TItem SelectedItem
+        {
+            get
+            {
+                if (Multiple)
+                {
+                    return default;
+                }
+
+                return SelectedItems.FirstOrDefault();
+            }
+        }
+
+        protected bool SearchIsDirty
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(InternalSearch);
+            }
+        }
+
+        protected string InternalSearch { get; set; }
+
+        protected override Dictionary<string, object> InputAttrs => new()
+        {
+            { "type", Type },
+            { "value", InternalSearch ?? GetText(SelectedItem) },
+            { "autocomplete", "off" }
+        };
 
         protected override BMenuProps GetDefaultMenuProps()
         {
@@ -65,48 +132,70 @@ namespace MASA.Blazor
             return props;
         }
 
-        public override IReadOnlyList<TItem> ComputedItems => Items.Where(r => QueryText == null || Filter(r, QueryText)).ToList();
+        protected override bool IsDirty => SearchIsDirty || base.IsDirty;
 
-        public override bool IsDirty => !string.IsNullOrEmpty(QueryText) || base.IsDirty;
+        protected bool HasSlot => HasChips || SelectionContent != null;
+
+        bool IAutocomplete<TItem, TItemValue, TValue>.HasSlot => HasSlot;
+
+        protected override bool MenuCanShow
+        {
+            get
+            {
+                return HasDisplayedItems || !HideNoData;
+            }
+        }
+
+        protected override void OnWatcherInitialized()
+        {
+            base.OnWatcherInitialized();
+
+            Watcher
+                .Watch<string>(nameof(SearchInput), val =>
+                {
+                    InternalSearch = val;
+                });
+        }
 
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
-
-            AbstractProvider
-                .Merge<BMenu, MMenu>();
 
             CssProvider
                 .Merge(cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-autocomplete");
-                })
-                .Apply("mask", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-list-item__mask");
                 });
+
+            AbstractProvider
+                .ApplyAutocompleteDefault<TItem, TItemValue, TValue>()
+                .Merge(typeof(BSelectList<,,>), typeof(MSelectList<TItem, TItemValue, TValue>), attrs =>
+                {
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.SearchInput)] = InternalSearch;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.NoFilter)] = NoFilter || !IsSearching || FilteredItems.Count == 0;
+                });
+        }
+
+        protected override async Task SelectItemsAsync(TItem item)
+        {
+            await base.SelectItemsAsync(item);
+            InternalSearch = null;
         }
 
         public override async Task HandleOnBlurAsync(FocusEventArgs args)
         {
-            QueryText = default;
-            HighlightIndex = -1;
+            InternalSearch = null;
             await base.HandleOnBlurAsync(args);
         }
 
         public override async Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            QueryText = args.Value.ToString();
-            HighlightIndex = -1;
-
+            InternalSearch = args.Value.ToString();
             if (OnSearchInputUpdate.HasDelegate)
             {
-                await OnSearchInputUpdate.InvokeAsync(QueryText);
+                await OnSearchInputUpdate.InvokeAsync(InternalSearch);
             }
-
-            await base.HandleOnInputAsync(args);
         }
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
@@ -115,61 +204,24 @@ namespace MASA.Blazor
 
             switch (args.Code)
             {
-                case "Enter":
-                    if (!Multiple)
-                    {
-                        QueryText = null;
-                    }
-
-                    break;
                 case "Backspace":
-                    Visible = true;
+                    IsMenuActive = true;
                     if (Multiple)
                     {
-                        var values = Values;
-                        if (values.Count > 0 && string.IsNullOrEmpty(QueryText))
+                        var internalValues = InternalValues;
+                        if (internalValues.Count > 0 && string.IsNullOrEmpty(InternalSearch))
                         {
-                            values.RemoveAt(values.Count - 1);
-
-                            //Since EditContext validate model,we should update outside value of model first
-                            if (OnChange.HasDelegate)
-                            {
-                                await OnChange.InvokeAsync((TValue)values);
-                            }
-                            else
-                            {
-                                //We don't want render twice
-                                if (ValueChanged.HasDelegate)
-                                {
-                                    await ValueChanged.InvokeAsync((TValue)values);
-                                }
-                            }
-
-                            InternalValue = (TValue)values;
+                            internalValues.RemoveAt(internalValues.Count - 1);
+                            InternalValue = (TValue)internalValues;
                         }
                     }
                     else
                     {
-                        if (Chips && !EqualityComparer<TValue>.Default.Equals(InternalValue, default) && string.IsNullOrEmpty(QueryText))
+                        if (Chips && !EqualityComparer<TValue>.Default.Equals(InternalValue, default) && string.IsNullOrEmpty(InternalSearch))
                         {
-                            //Since EditContext validate model,we should update outside value of model first
-                            if (OnChange.HasDelegate)
-                            {
-                                await OnChange.InvokeAsync(default);
-                            }
-                            else
-                            {
-                                //We don't want render twice
-                                if (ValueChanged.HasDelegate)
-                                {
-                                    await ValueChanged.InvokeAsync(default);
-                                }
-                            }
-
                             InternalValue = default;
                         }
                     }
-
                     break;
                 default:
                     break;
@@ -178,26 +230,12 @@ namespace MASA.Blazor
 
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
-            if (!string.IsNullOrEmpty(QueryText))
+            if (!string.IsNullOrEmpty(InternalSearch))
             {
-                QueryText = null;
+                InternalSearch = null;
             }
 
             await base.HandleOnClearClickAsync(args);
-        }
-
-        public override Task SetSelectedAsync(string text, TItemValue value)
-        {
-            QueryText = default;
-            HighlightIndex = -1;
-            return base.SetSelectedAsync(text, value);
-        }
-
-        public override Task RemoveSelectedAsync(string text, TItemValue value)
-        {
-            QueryText = default;
-            HighlightIndex = -1;
-            return base.RemoveSelectedAsync(text, value);
         }
     }
 }

@@ -46,12 +46,14 @@ namespace MASA.Blazor
             { typeof(BTimePickerClock), typeof(MTimePickerClock) },
             { typeof(BTimePickerTitle), typeof(MTimePickerTitle) },
             { typeof(BTooltip), typeof(MTooltip) },
+            { typeof(BDivider), typeof(MDivider) },
+            { typeof(BSubheader), typeof(MSubheader) },
 
         };
         private readonly Dictionary<Type, Type> _genericMapper = new()
         {
             { typeof(BSelectList<,,>), typeof(MSelectList<,,>) },
-            { typeof(BCascaderList<,>), typeof(MCascaderSelectList<,>) },
+            { typeof(BCascaderList<,>), typeof(MCascaderList<,>) },
             { typeof(BDataTableRow<>), typeof(MDataTableRow<>) },
             { typeof(BTreeviewNode<,>), typeof(MTreeviewNode<,>) },
         };
