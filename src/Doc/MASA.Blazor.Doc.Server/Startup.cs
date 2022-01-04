@@ -1,23 +1,9 @@
 ﻿using System.Globalization;
-using System.Net;
-using System.Net.Http;
-using System.Reflection;
-using BlazorComponent.Components;
-using MASA.Blazor.Doc.Utils;
-using MASA.Blazor.Doc.Middleware;
-using MASA.Blazor.Doc.Services;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace MASA.Blazor.Doc.Server
 {
     public class Startup
     {
-        private readonly HttpClient _httpClient = new HttpClient();
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,14 +19,10 @@ namespace MASA.Blazor.Doc.Server
             services.AddServerSideBlazor();
 
             services.AddMasaBlazor();
+            services.AddMasaI18nForServer(languageDirectory:"wwwroot/locale");
 
             services.AddHttpContextAccessor();
-
-            services.AddHttpClient<DemoService>(c => c.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68"));
-
-            services.AddMasaBlazorDocs();
-
-            I18nHelper.AddLang();
+            services.AddMasaBlazorDocs(Configuration["ASPNETCORE_URLS"]);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,20 +30,18 @@ namespace MASA.Blazor.Doc.Server
         {
             if (env.IsDevelopment())
             {
-                _httpClient.BaseAddress = new Uri(Configuration["ASPNETCORE_URLS"]);
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                _httpClient.BaseAddress = new Uri("http://127.0.0.1:5000");
                 app.UseExceptionHandler("/Error");
             }
+
+            app.UseMasaI18nForServer();
 
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseMiddleware<CookieMiddleware>();
 
             app.UseRequestLocalization(opts =>
             {

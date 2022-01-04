@@ -1,4 +1,5 @@
-﻿using MASA.Blazor.Doc.Highlight;
+﻿using BlazorComponent.I18n;
+using MASA.Blazor.Doc.Highlight;
 using MASA.Blazor.Doc.Models;
 using MASA.Blazor.Doc.Shared;
 using MASA.Blazor.Doc.Utils;
@@ -10,7 +11,7 @@ namespace MASA.Blazor.Doc.Pages
     {
         private string _previousPath;
 
-        private string Path => $"{Category}/{FileName}.{GlobalConfig.Language ?? System.Globalization.CultureInfo.CurrentCulture.Name}";
+        private string Path => $"{Category}/{FileName}.{I18nConfig.Language ?? System.Globalization.CultureInfo.CurrentCulture.Name}";
 
         private DocFileModel File { get; set; }
 
@@ -18,7 +19,7 @@ namespace MASA.Blazor.Doc.Pages
         public bool IsChinese { get; set; }
 
         [Inject]
-        public GlobalConfigs GlobalConfig { get; set; }
+        public I18nConfig I18nConfig { get; set; }
 
         [Inject]
         private NavigationManager NavigationManager { get; set; }

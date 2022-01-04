@@ -1,16 +1,10 @@
 ﻿using BlazorComponent;
-using BlazorComponent.Components;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BlazorComponent.I18n;
 using MASA.Blazor.Doc.Services;
 using MASA.Blazor.Doc.Utils;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
+using System.Globalization;
 
 namespace MASA.Blazor.Doc.Shared
 {
@@ -55,7 +49,7 @@ namespace MASA.Blazor.Doc.Shared
         public NavigationManager Navigation { get; set; }
 
         [Inject]
-        public GlobalConfigs GlobalConfig { get; set; }
+        public I18nConfig I18nConfig { get; set; }
 
         public bool IsChinese { get; set; }
 
@@ -76,8 +70,7 @@ namespace MASA.Blazor.Doc.Shared
 
             ChangeLanguage(lang);
 
-            GlobalConfig.Language = lang;
-            GlobalConfig.SaveChanges();
+            I18nConfig.Language = lang;
         }
 
         private void ChangeLanguage(string lang)
@@ -88,14 +81,7 @@ namespace MASA.Blazor.Doc.Shared
 
         protected override void OnInitialized()
         {
-            string lang = GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name;
-            if (GlobalConfig.Language != null)
-                lang = GlobalConfig.Language;
-            else if (GlobalConfigs.StaticLanguage is not null)
-                lang = GlobalConfigs.StaticLanguage;
-            else
-                lang = CultureInfo.CurrentCulture.Name;
-
+            string lang = I18nConfig.Language ?? CultureInfo.CurrentCulture.Name;
 
             IsChinese = lang == "zh-CN";
 

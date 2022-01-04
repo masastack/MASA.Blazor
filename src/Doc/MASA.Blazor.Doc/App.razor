@@ -1,5 +1,5 @@
-@using MASA.Blazor.Doc.Utils
-@inject GlobalConfigs ScopGlobalConfig
+@using BlazorComponent.I18n
+@inject I18nConfig ScopI18nConfig
 
 <Router AppAssembly="@typeof(MainLayout).Assembly">
     <Found Context="routeData">
@@ -14,14 +14,10 @@
 
 @code {
     [Parameter]
-    public GlobalConfigs GlobalConfig { get; set; }
+    public I18nConfig I18nConfig { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        await base.OnInitializedAsync();
-        ScopGlobalConfig.Bind(GlobalConfig);
-
-        //why?
-        //await Task.Delay(2000);
+        ScopI18nConfig.Bind(I18nConfig);
     }
 }

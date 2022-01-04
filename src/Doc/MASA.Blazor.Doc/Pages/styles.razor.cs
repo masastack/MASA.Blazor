@@ -2,6 +2,7 @@
 using MASA.Blazor.Doc.Models;
 using MASA.Blazor.Doc.Utils;
 using System.Globalization;
+using BlazorComponent.I18n;
 
 namespace MASA.Blazor.Doc.Pages
 {
@@ -26,7 +27,7 @@ namespace MASA.Blazor.Doc.Pages
         public bool IsChinese { get; set; }
 
         [Inject]
-        public GlobalConfigs GlobalConfig { get; set; }
+        public I18nConfig I18nConfig { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
@@ -40,7 +41,7 @@ namespace MASA.Blazor.Doc.Pages
                 Name = Name.Split("#")[0];
             }
 
-            Service.ChangeLanguage(GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name);
+            Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
             _demoComponent = await Service.GetStyleAsync(Name);
 
             var demos = _demoComponent.DemoList?

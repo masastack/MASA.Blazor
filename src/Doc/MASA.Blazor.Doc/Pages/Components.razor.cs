@@ -1,5 +1,5 @@
 ﻿using BlazorComponent;
-using BlazorComponent.Components;
+using BlazorComponent.I18n;
 using MASA.Blazor.Doc.Models;
 using MASA.Blazor.Doc.Shared;
 using MASA.Blazor.Doc.Utils;
@@ -38,7 +38,7 @@ namespace MASA.Blazor.Doc.Pages
         public bool IsChinese { get; set; }
 
         [Inject]
-        public GlobalConfigs GlobalConfig { get; set; }
+        public I18nConfig I18nConfig { get; set; }
 
         [Inject]
         public IJSRuntime Js { get; set; }
@@ -58,7 +58,7 @@ namespace MASA.Blazor.Doc.Pages
                 Name = Name.Split("#")[0];
             }
 
-            Service.ChangeLanguage(GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name);
+            Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
             _demoComponent = await Service.GetComponentAsync(Name);
 
             var demos = _demoComponent.DemoList?
@@ -78,7 +78,7 @@ namespace MASA.Blazor.Doc.Pages
 
         public string T(string key)
         {
-            return I18n.LanguageMap.GetValueOrDefault(key);
+            return I18n.T(key);
         }
     }
 }

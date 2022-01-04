@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Text.Json;
 using BlazorComponent;
+using BlazorComponent.I18n;
 using BlazorComponent.Web;
 using MASA.Blazor.Doc.Components;
 using MASA.Blazor.Doc.Models;
@@ -26,7 +27,7 @@ public partial class Toc : OwningComponentBase<DemoService>
     public DomEventJsInterop DomEventJsInterop { get; set; }
 
     [Inject]
-    public GlobalConfigs GlobalConfig { get; set; }
+    public I18nConfig I18nConfig { get; set; }
 
     [Inject]
     public IJSRuntime Js { get; set; }
@@ -52,7 +53,7 @@ public partial class Toc : OwningComponentBase<DemoService>
 
     protected override async Task OnParametersSetAsync()
     {
-        Service.ChangeLanguage(GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name);
+        Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
         Items = await Service.GetTitlesAsync(NavigationManager.Uri);
     }
 
@@ -125,7 +126,7 @@ public partial class Toc : OwningComponentBase<DemoService>
         }
 
         ActiveItem = null;
-        Service.ChangeLanguage(GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name);
+        Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
         Items = await Service.GetTitlesAsync(NavigationManager.Uri);
 
         await InvokeAsync(StateHasChanged);

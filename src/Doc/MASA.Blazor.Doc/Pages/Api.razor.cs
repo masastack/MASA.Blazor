@@ -1,4 +1,5 @@
 ﻿using BlazorComponent;
+using BlazorComponent.I18n;
 using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using System.Globalization;
@@ -166,7 +167,7 @@ namespace MASA.Blazor.Doc.Pages
         };
 
         [Inject]
-        public GlobalConfigs GlobalConfig { get; set; }
+        public I18nConfig I18nConfig { get; set; }
 
         [Parameter]
         public string ApiName { get; set; }
@@ -185,9 +186,8 @@ namespace MASA.Blazor.Doc.Pages
 
             ApiName = StandardApiNames.FirstOrDefault(api => api.Equals(ApiName, StringComparison.OrdinalIgnoreCase));
 
-            var lang = GlobalConfig.Language ?? CultureInfo.CurrentCulture.Name;
-            var baseUrl = new Uri("http://127.0.0.1:5000");
-            var apiUrl = new Uri(baseUrl, $"_content/MASA.Blazor.Doc/docs/api/{ApiName}.{lang}.json").ToString();
+            var lang = I18nConfig.Language ?? CultureInfo.CurrentCulture.Name;
+            var apiUrl = $"_content/MASA.Blazor.Doc/docs/api/{ApiName}.{lang}.json";
             _api = await Service.GetApiAsync(apiUrl);
         }
 

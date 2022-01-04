@@ -42,11 +42,11 @@
 
     private string Hash => "#" + SectionId;
 
-    private string SectionId => Id ?? Title.HashSection();
+    private string SectionId => Id ?? Title?.HashSection() ?? "";
 
     private async Task HandleOnClick(MouseEventArgs _)
     {
-        // if TODO:[issue](https://github.com/dotnet/aspnetcore/issues/36605) fixed, use 
+        // if TODO:[issue](https://github.com/dotnet/aspnetcore/issues/36605) fixed, use
         // NavigationManager.NavigateToHash(Hash);
         // else
         await Js.ScrollToHash(Hash);

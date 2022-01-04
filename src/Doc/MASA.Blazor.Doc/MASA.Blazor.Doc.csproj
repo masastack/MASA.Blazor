@@ -7,6 +7,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -20,9 +21,6 @@
 
 	<ItemGroup>
 	  <Content Update="wwwroot\locale\en-US.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="wwwroot\locale\languages.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Update="wwwroot\locale\zh-CN.json">

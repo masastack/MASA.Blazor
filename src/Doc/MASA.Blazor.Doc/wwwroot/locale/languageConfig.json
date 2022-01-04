@@ -1,0 +1,13 @@
+{
+  "DefaultLanguage": "zh-CN",
+  "Languages": [
+    {
+      "Value": "zh-CN",
+      "FilePath": "_content/MASA.Blazor.Doc/locale/zh-CN.json"
+    },
+    {
+      "Value": "en-US",
+      "FilePath": "_content/MASA.Blazor.Doc/locale/en-US.json"
+    }
+  ]
+}
