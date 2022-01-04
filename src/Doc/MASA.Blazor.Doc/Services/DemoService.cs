@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Net;
 using System.Net.Http.Json;
 using System.Reflection;
 using MASA.Blazor.Doc.Models;
@@ -87,9 +88,14 @@ namespace MASA.Blazor.Doc.Services
             return _httpClient.GetFromJsonAsync<ApiModel>(apiUrl);
         }
 
-        public Task<DocFileModel> GetDocFileAsync(string docUrl)
+        public async Task<DocFileModel> GetDocFileAsync(string docUrl)
         {
-            return _httpClient.GetFromJsonAsync<DocFileModel>(docUrl);
+            var httpMessage = new HttpRequestMessage(HttpMethod.Get, docUrl);
+            var httpResponseMessage = await _httpClient.SendAsync(httpMessage);
+
+            var result = await ProcessResponseAsync<DocFileModel>(httpResponseMessage);
+
+            return result;
         }
 
         public async Task InitializeDemos()
@@ -308,6 +314,29 @@ namespace MASA.Blazor.Doc.Services
             }
 
             return new DemoMenuItemModel[] { null, null };
+        }
+
+        private static async Task<TValue> ProcessResponseAsync<TValue>(HttpResponseMessage response)
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.Accepted:
+                    case HttpStatusCode.NoContent:
+                        return default;
+                    default:
+                        return await response.Content.ReadFromJsonAsync<TValue>();
+                }
+            }
+            else if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return default;
+            }
+            else
+            {
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
         }
     }
 }

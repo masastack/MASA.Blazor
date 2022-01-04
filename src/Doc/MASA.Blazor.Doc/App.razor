@@ -1,16 +1,16 @@
 @using BlazorComponent.I18n
 @inject I18nConfig ScopI18nConfig
 
-<Router AppAssembly="@typeof(MainLayout).Assembly">
+<Microsoft.AspNetCore.Components.Routing.Router AppAssembly="@typeof(MainLayout).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="routeData" DefaultLayout="@typeof(MainLayout)" />
     </Found>
     <NotFound>
         <LayoutView Layout="@typeof(MainLayout)">
-            <Error></Error>
+            <MASA.Blazor.Doc.Pages.NotFound></MASA.Blazor.Doc.Pages.NotFound>
         </LayoutView>
     </NotFound>
-</Router>
+</Microsoft.AspNetCore.Components.Routing.Router>
 
 @code {
     [Parameter]
