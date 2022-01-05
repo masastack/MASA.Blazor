@@ -159,6 +159,11 @@
             "Id": "section-1681655181",
             "Title": "语言支持",
             "Level": 0
+          },
+          {
+            "Id": "section-813742858",
+            "Title": "使用MASA Blazor已内置支持的I18n功能",
+            "Level": 0
           }
         ]
       },

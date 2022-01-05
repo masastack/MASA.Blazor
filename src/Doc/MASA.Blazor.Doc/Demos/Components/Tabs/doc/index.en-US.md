@@ -15,7 +15,6 @@ for a page, where the tabs are links and the tab-items are the content.
 - [MTab](/api/MTab)
 - [MTabItem](/api/MTabItem)
 - [MTabsItems](/api/MTabsItems)
-- [MTabsSlider](/api/MTabsSlider)
 
 ## Caveats
 

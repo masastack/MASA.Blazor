@@ -5540,7 +5540,7 @@
         "Order": 0,
         "Name": "index",
         "Title": "Usage",
-        "Description": "<p>In its simplest form, v-progress-circular displays a circular progress bar. Use the value prop to control the progress.</p>\n",
+        "Description": "<p>In its simplest form, <code>MProgressCircular</code> displays a circular progress bar. Use the <strong>value</strong> prop to control the progress.</p>\n",
         "Code": "<div class=\"text-center\">\r\n    <MProgressCircular Value=\"20\" Size=\"40\"></MProgressCircular>\r\n    <MProgressCircular Value=\"40\" Size=\"40\"></MProgressCircular>\r\n    <MProgressCircular Value=\"60\" Size=\"40\"></MProgressCircular>\r\n    <MProgressCircular Value=\"80\" Size=\"40\"></MProgressCircular>\r\n    <MProgressCircular Value=\"100\" Size=\"40\"></MProgressCircular>\r\n</div>\r\n\r\n<style>\r\n\t.m-progress-circular {\r\n      margin: 1rem;\r\n    }\r\n</style>",
         "Type": "Demos.Components.Progress.children.ProgressCircular.usage.Index",
         "Style": "",
@@ -6629,7 +6629,7 @@
     "Desc": "<p>The <code>MTabs</code> component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation\nfor a page, where the tabs are links and the tab-items are the content.</p>\n",
     "Order": 0,
     "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n<li><a href=\"/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n",
+      "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p>When using the <strong>Dark</strong> prop and <strong>NOT</strong> providing a custom <strong>color</strong>, the <code>MTabs</code> component will default its color to white.</p>\n<!--alert:warning--> \n<!--alert:warning--> \n<p>When using <code>MTabItem</code>'s that contain required input fields you must use the <strong>eager</strong> prop in order to validate the required fields that are not yet visible.</p>\n<!--alert:warning--> \n"
     },
     "LastWriteTime": "2021-12-27T10:11:33.1800592+08:00",
@@ -6638,7 +6638,7 @@
         "Order": 0,
         "Name": "index",
         "Title": "Usage",
-        "Description": "<p>The <code>MTabs</code> component is a styled extension of <a href=\"/components/itemgroup\"><strong>MItemGroup</strong></a>. It provides an easy to use\ninterface for organizing groups of content.</p>\n",
+        "Description": "<p>The <code>MTabs</code> component is a styled extension of <a href=\"/components/item-groups\"><strong>MItemGroup</strong></a>. It provides an easy to use\ninterface for organizing groups of content.</p>\n",
         "Code": "<MTabs>\r\n    <MTab>Item One</MTab>\r\n    <MTab>Item Two</MTab>\r\n    <MTab>Item Three</MTab>\r\n</MTabs>",
         "Type": "Demos.Components.Tabs.usage.Index",
         "Style": "",

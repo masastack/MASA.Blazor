@@ -19,7 +19,6 @@ related:
 - [MTab](/api/MTab)
 - [MTabItem](/api/MTabItem)
 - [MTabsItems](/api/MTabsItems)
-- [MTabsSlider](/api/MTabsSlider)
 
 ## 注意
 

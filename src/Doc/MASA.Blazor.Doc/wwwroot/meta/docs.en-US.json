@@ -3704,6 +3704,11 @@
             "Id": "section-234275541",
             "Title": "Getting started",
             "Level": 0
+          },
+          {
+            "Id": "section-259103556",
+            "Title": "Use the I18n function that MASA Blazor has built-in support",
+            "Level": 0
           }
         ]
       },

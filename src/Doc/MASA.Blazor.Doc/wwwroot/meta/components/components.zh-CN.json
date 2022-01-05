@@ -5890,7 +5890,7 @@
         "Order": 0,
         "Name": "index",
         "Title": "使用",
-        "Description": "<p>In its simplest form, v-progress-circular displays a circular progress bar. Use the value prop to control the progress.</p>\n",
+        "Description": "<p><code>MProgressCircular</code> 以其最简单的形式显示圆形进度条。使用 <strong>value</strong> 属性控制进度。</p>\n",
         "Code": "<div class=\"text-center\">\r\n    <MProgressCircular Value=\"20\" Size=\"40\"></MProgressCircular>\r\n    <MProgressCircular Value=\"40\" Size=\"40\"></MProgressCircular>\r\n    <MProgressCircular Value=\"60\" Size=\"40\"></MProgressCircular>\r\n    <MProgressCircular Value=\"80\" Size=\"40\"></MProgressCircular>\r\n    <MProgressCircular Value=\"100\" Size=\"40\"></MProgressCircular>\r\n</div>\r\n\r\n<style>\r\n\t.m-progress-circular {\r\n      margin: 1rem;\r\n    }\r\n</style>",
         "Type": "Demos.Components.Progress.children.ProgressCircular.usage.Index",
         "Style": "",
@@ -7054,7 +7054,7 @@
     "Desc": "<p><code>MTabs</code> 组件用于将内容隐藏在可选择的项目后面。 这也可以用作页面的伪导航，其中选项卡是链接，选项卡项是内容。</p>\n",
     "Order": 0,
     "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n<li><a href=\"/api/MTabsSlider\">MTabsSlider</a></li>\n</ul>\n",
+      "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当使用 <strong>Dark</strong> 属性和 <strong>不</strong> 提供自定义 <strong>Color</strong> 时，<code>MTabs</code>组件会将其颜色默认为 white。</p>\n<!--alert:warning-->\n<!--alert:warning-->\n<p>当使用包含必填输入字段的 <code>MTabItem</code> 时，你必须使用 <strong>eager</strong> prop 来验证尚未显示的必填字段。</p>\n<!--alert:warning-->\n"
     },
     "LastWriteTime": "2021-12-27T10:11:33.1800592+08:00",
@@ -7063,7 +7063,7 @@
         "Order": 0,
         "Name": "index",
         "Title": "使用",
-        "Description": "<p><code>MTabs</code> 组件是 <a href=\"/components/itemgroup\"><strong>MItemGroup</strong></a> 的样式扩展。 它提供了一个易于使用的接口来组织内容组。</p>\n",
+        "Description": "<p><code>MTabs</code> 组件是 <a href=\"/components/item-groups\"><strong>MItemGroup</strong></a> 的样式扩展。 它提供了一个易于使用的接口来组织内容组。</p>\n",
         "Code": "<MTabs>\r\n    <MTab>Item One</MTab>\r\n    <MTab>Item Two</MTab>\r\n    <MTab>Item Three</MTab>\r\n</MTabs>",
         "Type": "Demos.Components.Tabs.usage.Index",
         "Style": "",
