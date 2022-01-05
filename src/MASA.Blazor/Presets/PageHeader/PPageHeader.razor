@@ -93,7 +93,7 @@
     <SlideYTransition>
         <Element Show="ShowFilters" Class="m-presets-page-header--content">
             <MDivider Style="margin: 10px 0 16px 0;"/>
-            @Filters
+            @Filters?.Invoke((HandleOnEnter, HandleOnSearchWithDelay))
         </Element>
     </SlideYTransition>
 </div>

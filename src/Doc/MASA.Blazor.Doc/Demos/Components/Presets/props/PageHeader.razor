@@ -1,7 +1,8 @@
 ﻿<PPageHeader Title="Order"
              Subtitle="This is an order page!"
              OnBack="OnBack"
-             OnSearch="OnSearch">
+             OnSearch="OnSearch"
+             ShowFiltersByDefault>
     <LeftActions>
         <MButton Color="primary"><MIcon Left>mdi-plus</MIcon>Add Order</MButton>
     </LeftActions>
@@ -12,14 +13,16 @@
         </MButton>
     </RightActions>
 
-    <Filters>
+    <Filters Context="filter">
         <MRow Dense>
             <MCol Cols="6">
-                <MTextField Label="Order ID"
+                <MTextField @bind-Value="orderId"
+                            Label="Order ID"
                             Outlined
                             Dense
                             TValue="string"
-                            HideDetails="true">
+                            HideDetails="true"
+                            OnKeyDown="@filter.onEnter">
                 </MTextField>
             </MCol>
             <MCol Cols="6">
@@ -30,7 +33,11 @@
                          Items="users"
                          ItemValue="i => i"
                          ItemText="i => i"
-                         HideDetails="true">
+                         HideDetails="true"
+                         TItem="string"
+                         TValue="string"
+                         TItemValue="string"
+                         OnSelectedItemUpdate="_ => filter.onSearch()">
                 </MSelect>
             </MCol>
             <MCol Cols="6">
@@ -60,7 +67,7 @@
                             </MButton>
                             <MButton Text
                                      Color="primary"
-                                     OnClick="() => { start = date1.ToShortDateString(); visible1 = false; }">
+                                     OnClick="() => StartDateClick(filter.onSearch)">
                                 OK
                             </MButton>
                         </MDatePicker>
@@ -94,7 +101,7 @@
                             </MButton>
                             <MButton Text
                                      Color="primary"
-                                     OnClick="() => { end = date2.ToShortDateString(); visible2 = false; }">
+                                     OnClick="() => EndDateClick(filter.onSearch)">
                                 OK
                             </MButton>
                         </MDatePicker>
@@ -114,9 +121,24 @@
     bool visible1;
     bool visible2;
 
+    string orderId;
     string user;
     string start;
     string end;
+    
+    async Task StartDateClick(Func<Task> onSearch)
+    {
+        start = date1.ToShortDateString(); 
+        visible1 = false;
+        await onSearch();
+    }
+
+    async Task EndDateClick(Func<Task> onSearch)
+    {
+        end = date2.ToShortDateString(); 
+        visible2 = false;
+        await onSearch();
+    }
 
     void OnBack()
     {
@@ -130,8 +152,10 @@
 
     void OnClear()
     {
+        orderId = null;
         user = null;
         start = null;
         end = null;
     }
+
 }
