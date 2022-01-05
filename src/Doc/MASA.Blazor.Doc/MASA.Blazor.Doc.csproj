@@ -20,6 +20,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Update="wwwroot\locale\config\languageConfig.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Update="wwwroot\locale\en-US.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>

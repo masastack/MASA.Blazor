@@ -180,15 +180,11 @@ await builder.Services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress, "
 ```
 {
   "DefaultLanguage": "zh-CN",
+  "LanguageFileDirectoryForServer": "wwwroot/i18n/", 
+  "LanguageFileDirectoryForWasm": "i18n/", 
   "Languages": [
-    {
-      "Value": "zh-CN",
-      "FilePath": "_content/MASA.Blazor.Doc/locale/zh-CN.json"
-    },
-    {
-      "Value": "en-US",
-      "FilePath": "_content/MASA.Blazor.Doc/locale/en-US.json"
-    }
+    "zh-CN",
+    "en-US"
   ]
 }
 ```
