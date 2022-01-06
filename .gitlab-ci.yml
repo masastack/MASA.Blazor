@@ -47,6 +47,7 @@ docker:
   only:
     - branches
   script:
+    - ls
     - docker build -f Dockerfile.wasm -t $IMAGEWASM .
     - docker push $IMAGEWASM
 # docker:
