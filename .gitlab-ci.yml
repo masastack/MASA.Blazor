@@ -48,6 +48,7 @@ docker:
     - branches
   script:
     - ls
+    - docker images && docker ps -a 
     - docker build -f Dockerfile.wasm -t $IMAGEWASM .
     - docker push $IMAGEWASM
 # docker:
