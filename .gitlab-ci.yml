@@ -39,36 +39,47 @@ packer:
   retry: 2
 
 docker:
-  image: docker:17.05.0
   stage: docker
-  # tags:
-  #   - linux-masa
-  only:
-    - develop
+  tags:
+    - linux-masa
   before_script:
     - docker login -u $CI_ALI_REGISTRY_USER -p $CI_ALI_REGISTRY_PASSWD $CI_ALI_REGISTRY_DOMAIN
-  services:
-    - name: registry.cn-hangzhou.aliyuncs.com/masa/library:docker-17.05.01-dind
-  script:
-    - docker build -t $IMAGE .
-    - docker push $IMAGE
-  retry: 2
-
-dockerwasm:
-  image: docker:17.05.0
-  stage: docker
-  # tags:
-  #   - linux-masa
   only:
-    - develop
-  before_script:
-    - docker login -u $CI_ALI_REGISTRY_USER -p $CI_ALI_REGISTRY_PASSWD $CI_ALI_REGISTRY_DOMAIN
-  services:
-    - name: registry.cn-hangzhou.aliyuncs.com/masa/library:docker-17.05.01-dind
+    - branches
   script:
     - docker build -f Dockerfile.wasm -t $IMAGEWASM .
     - docker push $IMAGEWASM
-  retry: 2
+# docker:
+#   image: docker:17.05.0
+#   stage: docker
+#   # tags:
+#   #   - linux-masa
+#   only:
+#     - develop
+#   before_script:
+#     - docker login -u $CI_ALI_REGISTRY_USER -p $CI_ALI_REGISTRY_PASSWD $CI_ALI_REGISTRY_DOMAIN
+#   services:
+#     - name: registry.cn-hangzhou.aliyuncs.com/masa/library:docker-17.05.01-dind
+#   script:
+#     - docker build -t $IMAGE .
+#     - docker push $IMAGE
+#   retry: 2
+
+# dockerwasm:
+#   image: docker:17.05.0
+#   stage: docker
+#   # tags:
+#   #   - linux-masa
+#   only:
+#     - develop
+#   before_script:
+#     - docker login -u $CI_ALI_REGISTRY_USER -p $CI_ALI_REGISTRY_PASSWD $CI_ALI_REGISTRY_DOMAIN
+#   services:
+#     - name: registry.cn-hangzhou.aliyuncs.com/masa/library:docker-17.05.01-dind
+#   script:
+#     - docker build -f Dockerfile.wasm -t $IMAGEWASM .
+#     - docker push $IMAGEWASM
+#   retry: 2
 
 deploy-dev:
   # image: proget-hz.lonsid.cn/masa-images/library/kubectl:1.17.2-newack
