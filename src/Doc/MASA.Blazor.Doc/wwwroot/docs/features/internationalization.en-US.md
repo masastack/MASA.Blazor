@@ -61,10 +61,10 @@ Currently MASA Blazor only supports Simplified Chinese (zhHans), and the followi
 - Add service dependency I18n:
 
 ```c#
-services.AddMasaI18nForServer(languageDirectory:"{i18n local directory path}");
+services.AddMasaI18nForServer("{i18n local directory path}");
 ```
 
-- `i18n local directory path` is the physical path of the folder where i18n resource files are placed. For example, if you place an i18n resource file under the path of `wwwroot/i18n`, the code is written as `services.AddMasaI18nForServer(languageDirectory:"wwwroot/i18n");`.
+- `i18n local directory path` is the physical path of the folder where i18n resource files are placed. For example, if you place the i18n resource file under the path of `wwwroot/i18n`, the code is written as `services.AddMasaI18nForServer("wwwroot/i18n");`.
 
 ```
 - Pages 
@@ -81,6 +81,7 @@ services.AddMasaI18nForServer(languageDirectory:"{i18n local directory path}");
 
     ```
     {
+      "$DefaultLanguage": "true",
       "Home": "首页",
       "Docs": "文档",
       "Blog": "博客",
@@ -100,6 +101,7 @@ services.AddMasaI18nForServer(languageDirectory:"{i18n local directory path}");
         "Search": "Search",
     }
     ```
+> `$DefaultLanguage` is the preset key, you can set the current language as the default language
 
 - I18n usage example
 
@@ -161,10 +163,10 @@ I18nConfig.Language = "en-US";
 
 ```c#
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
-await builder.Services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress, "{i18n config file path}");
+await builder.Services.AddMasaI18nForWasmAsync($"{builder.HostEnvironment.BaseAddress}/{i18n directory api}");
 ```
 
-- `i18n config file path` is the physical path of the i18n configuration file. For example, if you place the i18n configuration file under the path of `wwwroot/i18n`, the code is written as `services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress,"i18n/languageConfig.json")`.
+- `i18n directory api` is the routing address of the folder where i18n resource files are placed. For example, if you place the i18n resource file under the path of `wwwroot/i18n`, the code is written as `await builder.Services.AddMasaI18nForWasmAsync($"{builder.HostEnvironment.BaseAddress}/i18n")`.
 
 ```
 - Pages 
@@ -179,16 +181,13 @@ await builder.Services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress, "
 - `languageConfig.json` configuration file format is as follows
 
 ```
-{
-  "DefaultLanguage": "zh-CN",
-  "LanguageFileDirectoryForServer": "wwwroot/i18n/", 
-  "LanguageFileDirectoryForWasm": "i18n/", 
-  "Languages": [
-    "zh-CN",
-    "en-US"
-  ]
-}
+[
+  "zh-CN",
+  "en-US"
+]
 ```
+
+> Note: `languageConfig.json` must be in the same directory as the i18n resource file
 
 ### If you want to save the user's i18n language configuration on the browser side so that the previous language configuration effect can be used every time the user visits, the program.cs code is changed to the following:
 
@@ -196,8 +195,8 @@ await builder.Services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress, "
 
 ```c#
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
-await builder.Services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress, "{i18n config file path}");
-builder.RootComponents.Add(typeof(App), "#app", await builder.Services.GetMasaI18nParameter());
+await builder.Services.AddMasaI18nForWasmAsync($"builder.HostEnvironment.BaseAddress/{i18n config file path}");
+builder.RootComponents.Add(typeof(App), "#app", await builder.Services.GetMasaI18nParameterAsync());
 
 await builder.Build().RunAsync();
 ```

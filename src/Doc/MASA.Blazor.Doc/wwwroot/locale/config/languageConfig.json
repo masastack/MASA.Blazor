@@ -1,9 +1,0 @@
-{
-  "DefaultLanguage": "zh-CN",
-  "LanguageFileDirectoryForServer": "wwwroot/locale/",
-  "LanguageFileDirectoryForWasm": "_content/MASA.Blazor.Doc/locale/",
-  "Languages": [
-    "zh-CN",
-    "en-US"
-  ]
-}

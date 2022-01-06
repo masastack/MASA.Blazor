@@ -19,7 +19,7 @@ namespace MASA.Blazor.Doc.Server
             services.AddServerSideBlazor();
 
             services.AddMasaBlazor();
-            services.AddMasaI18nForServer("wwwroot/locale/config/languageConfig.json");
+            services.AddMasaI18nForServer("wwwroot/locale");
 
             services.AddHttpContextAccessor();
             services.AddMasaBlazorDocs(Configuration["ASPNETCORE_URLS"]);

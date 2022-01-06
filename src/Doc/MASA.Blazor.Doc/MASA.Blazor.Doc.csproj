@@ -20,11 +20,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Update="wwwroot\locale\config\languageConfig.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
 	  <Content Update="wwwroot\locale\en-US.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\locale\languageConfig.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Update="wwwroot\locale\zh-CN.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

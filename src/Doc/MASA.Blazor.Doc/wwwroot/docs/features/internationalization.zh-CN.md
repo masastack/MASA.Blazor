@@ -61,10 +61,10 @@ MASA Blazor 未来将支持组件的语言国际化（i18n）。 让您在引导
 - 添加服务依赖I18n:
 
 ```c#
-services.AddMasaI18nForServer(languageDirectory:"{i18n local directory path}");
+services.AddMasaI18nForServer("{i18n local directory path}");
 ```
 
-- `i18n local directory path`为放置i18n资源文件的文件夹物理路径。例如,您在`wwwroot/i18n`路径下放置了i18n资源文件，则代码写为`services.AddMasaI18nForServer(languageDirectory:"wwwroot/i18n");`。
+- `i18n local directory path`为放置i18n资源文件的文件夹物理路径。例如,您在`wwwroot/i18n`路径下放置了i18n资源文件，则代码写为`services.AddMasaI18nForServer("wwwroot/i18n");`。
 
 ```
 - Pages 
@@ -81,6 +81,7 @@ services.AddMasaI18nForServer(languageDirectory:"{i18n local directory path}");
 
     ```
     {
+      "$DefaultLanguage": "true",
       "Home": "首页",
       "Docs": "文档",
       "Blog": "博客",
@@ -100,6 +101,8 @@ services.AddMasaI18nForServer(languageDirectory:"{i18n local directory path}");
         "Search": "Search",
     }
     ```
+
+> `$DefaultLanguage`是预置key，可以设置当前语言为默认语言
 
 - I18n使用示例
 
@@ -160,10 +163,10 @@ I18nConfig.Language = "en-US";
 
 ```c#
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
-await builder.Services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress, "{i18n config file path}");
+await builder.Services.AddMasaI18nForWasmAsync($"builder.HostEnvironment.BaseAddress/{i18n directory api}");
 ```
 
-- `i18n config file path` 为i18n配置文件物理路径。例如,您在`wwwroot/i18n`路径下放置了i18n配置文件，则代码写为`services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress,"i18n/languageConfig.json")`。
+- `i18n directory api` 为放置i18n资源文件的文件夹路由地址。例如,您在`wwwroot/i18n`路径下放置了i18n资源文件，则代码写为`await builder.Services.AddMasaI18nForWasmAsync($"{builder.HostEnvironment.BaseAddress}/i18n")`。
 
 ```
 - Pages 
@@ -178,16 +181,13 @@ await builder.Services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress, "
 - `languageConfig.json`配置文件格式如下
 
 ```
-{
-  "DefaultLanguage": "zh-CN",
-  "LanguageFileDirectoryForServer": "wwwroot/i18n/", 
-  "LanguageFileDirectoryForWasm": "i18n/", 
-  "Languages": [
-    "zh-CN",
-    "en-US"
-  ]
-}
+[
+  "zh-CN",
+  "en-US"
+]
 ```
+
+> 注意：`languageConfig.json`必须与i18n资源文件在同一目录下
 
 ### 如果您想在浏览器端保存用户的i18n语言配置来达到每次用户访问都可以使用之前的语言配置效果，program.cs代码改为如下：
 
@@ -195,8 +195,8 @@ await builder.Services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress, "
 
 ```c#
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
-await builder.Services.AddMasaI18nForWasm(builder.HostEnvironment.BaseAddress, "{i18n config file path}");
-builder.RootComponents.Add(typeof(App), "#app", await builder.Services.GetMasaI18nParameter());
+await builder.Services.AddMasaI18nForWasmAsync($"builder.HostEnvironment.BaseAddress/{i18n config file path}");
+builder.RootComponents.Add(typeof(App), "#app", await builder.Services.GetMasaI18nParameterAsync());
 
 await builder.Build().RunAsync();
 ```
