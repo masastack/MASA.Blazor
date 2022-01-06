@@ -8,7 +8,7 @@ stages:
   - deploy-prd
 
 variables:
-  DOCKER_HOST: tcp://localhost:2375/
+  #DOCKER_HOST: tcp://localhost:2375/
   IMAGE: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:0.2.$CI_PIPELINE_ID
   IMAGEWASM: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:0.2.$CI_PIPELINE_ID-wasm
   IMAGE_PRD: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:$CI_COMMIT_TAG
