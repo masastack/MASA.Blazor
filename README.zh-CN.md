@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿<p align="center">
+﻿﻿﻿﻿﻿﻿﻿﻿<p align="center">
   <a href="https://masa-blazor-docs-dev.lonsid.cn" target="_blank">
     <img alt="MASA Blazor Logo" width="150" src="./imgs/logo.png">
   </a>
@@ -39,29 +39,55 @@ MASA Blazor 基于Material设计规范，每一个组件都经过精心设计，
 
 ## 快速使用
 
-- 开发环境搭建
-	- 安装[.NET SDK 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
-	- 安装[Visual Studio Code](https://code.visualstudio.com/Download/)或[Visual Studio 2022](https://docs.microsoft.com/en-us/visualstudio/releases/2022/release-notes)
+### 开发环境搭建
 
-- 创建 Blazor Server 或 Blazor WebAssembly 项目
+- 安装[.NET SDK 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
+- 安装[Visual Studio Code](https://code.visualstudio.com/Download/)或[Visual Studio 2022](https://docs.microsoft.com/en-us/visualstudio/releases/2022/release-notes)
 
-	- Blazor Server
+### CLI
 
-		```shell
-		dotnet new blazorserver -o BlazorApp
-		```
+**Install Template**
 
-	- Blazor WebAssembly
-
-		```shell
-		dotnet new blazorwasm -o BlazorApp
-		```
-
-- 进入项目根目录
-
-```shell
-cd BlazorApp
+```c#
+dotnet new --install MASA.Template
 ```
+
+**Create Project**
+
+- Blazor Server
+
+	```shell
+	dotnet new masabp -o MASA.Test
+	```
+
+- Blazor Server + RCL(Razor class libraries)
+
+	```shell
+	dotnet new blazorwasm -o BlazorApp
+	```
+	
+- Blazor WebAssembly(Coming soon...)
+
+**Go to the Server project directory**
+
+```c#
+cd MASA.Test\MASA.Test.Server
+```
+
+**Run**
+
+```c#
+dotnet run
+```
+
+
+
+![masabp](.\imgs\masabp.gif)
+
+
+
+### 现有项目
+
 - 安装Nuget包
 
 ```shell

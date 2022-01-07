@@ -39,33 +39,52 @@ MASA Blazor is based on the Material design specification, and each component is
 
 # Getting started
 
-- Development environment setup
+### Development environment setup
 
-	- Install [.NET SDK 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
-    - Install [Visual Studio Code](https://code.visualstudio.com/Download/) or [Visual Studio 2022](https://docs.microsoft.com/en-us/visualstudio/releases/2022/release-notes)
+- Install [.NET SDK 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
+- Install [Visual Studio Code](https://code.visualstudio.com/Download/) or [Visual Studio 2022](https://docs.microsoft.com/en-us/visualstudio/releases/2022/release-notes)
 
+**Install Template**
 
-- Create a Blazor Server or Blazor WebAssembly project 
-
-	- Blazor Server
-
-		```shell
-		dotnet new blazorserver -o BlazorApp
-		```
-
-	- Blazor WebAssembly
-
-		```shell
-		dotnet new blazorwasm -o BlazorApp
-		```
-
-- Enter the project root directory
-
-```shell
-cd BlazorApp
+```c#
+dotnet new --install MASA.Template
 ```
 
-- Install Nuget package 
+**Create Project**
+
+- Blazor Server
+
+  ```shell
+  dotnet new masabp -o MASA.Test
+  ```
+
+- Blazor Server + RCL(Razor class libraries)
+
+  ```shell
+  dotnet new blazorwasm -o BlazorApp
+  ```
+
+- Blazor WebAssembly(Coming soon...)
+
+**Go to the Server project directory**
+
+```c#
+cd MASA.Test\MASA.Test.Server
+```
+
+**Run**
+
+```c#
+dotnet run
+```
+
+![masabp](.\imgs\masabp.gif)
+
+
+
+### Existing Project
+
+* Install Nuget package 
 
 ```shell
 dotnet add package MASA.Blazor
