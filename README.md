@@ -78,7 +78,7 @@ cd MASA.Test\MASA.Test.Server
 dotnet run
 ```
 
-![masabp](.\imgs\masabp.gif)
+![masabp](imgs/masabp.gif)
 
 
 
