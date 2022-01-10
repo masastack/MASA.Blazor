@@ -50,16 +50,7 @@ namespace MASA.Blazor
         public StringNumber MinWidth { get; set; }
 
         [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
-
-        [Parameter]
         public StringNumber Elevation { get; set; }
-
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
 
         private bool IsLoading => ChildContent is null || Loading;
 
@@ -74,7 +65,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--boilerplate", () => Boilerplate)
                         .AddIf($"{prefix}--is-loading", () => IsLoading)
                         .AddIf($"{prefix}--tile", () => Tile)
-                        .AddTheme(this)
+                        .AddTheme(IsDark)
                         .AddElevatable(this);
                 }, styleBuilder =>
                 {

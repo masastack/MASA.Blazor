@@ -53,8 +53,7 @@ public partial class Toc : OwningComponentBase<DemoService>
 
     protected override async Task OnParametersSetAsync()
     {
-        Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
-        Items = await Service.GetTitlesAsync(NavigationManager.Uri);
+        await UpdateItemsAsync();
     }
 
     private async void HandleOnClick(string id)
@@ -67,9 +66,12 @@ public partial class Toc : OwningComponentBase<DemoService>
 
     private void OnLocationChanged(object sender, LocationChangedEventArgs e)
     {
-        _ = UpdateItemsAsync();
+        _ = InvokeAsync(async () =>
+         {
+             await UpdateItemsAsync();
+             StateHasChanged();
+         });
     }
-
     private void OnScroll(JsonElement obj)
     {
         _cancellationTokenSource?.Cancel();
@@ -80,10 +82,10 @@ public partial class Toc : OwningComponentBase<DemoService>
             await Task.Delay(300, _cancellationTokenSource.Token);
 
             var window = await Js.InvokeAsync<Window>(JsInteropConstants.GetWindow);
-            
+
             // API page
             var doms = await Js.InvokeAsync<List<Dom>>(JsInteropConstants.GetBoundingClientRects, ".markdown-body > div section section");
-            
+
             // Other pages
             if (!doms.Any())
             {
@@ -128,8 +130,6 @@ public partial class Toc : OwningComponentBase<DemoService>
         ActiveItem = null;
         Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
         Items = await Service.GetTitlesAsync(NavigationManager.Uri);
-
-        await InvokeAsync(StateHasChanged);
     }
 
     protected override void Dispose(bool disposing)

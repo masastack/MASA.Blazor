@@ -11,14 +11,8 @@ namespace MASA.Blazor
     {
         private Sizer _sizer;
 
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
-
         [Parameter]
         public string Color { get; set; }
-
-        [Parameter]
-        public bool Dark { get; set; }
 
         [Parameter]
         public bool Draggable { get; set; }
@@ -34,9 +28,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool Large { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
 
         [Parameter]
         public bool Outlined { get; set; }
@@ -61,24 +52,6 @@ namespace MASA.Blazor
 
         public bool IsClickable => _router.IsClickable || ItemGroup != null;
 
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
-
         public bool IsLink => _router.IsLink;
 
         public int Tabindex => _router.Tabindex;
@@ -97,7 +70,7 @@ namespace MASA.Blazor
         protected override void SetComponentClass()
         {
             CloseIcon ??= "mdi-close-circle";
-            
+
             var prefix = "m-chip";
 
             CssProvider

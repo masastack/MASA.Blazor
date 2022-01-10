@@ -4,7 +4,6 @@
 @using MASA.Blazor.Doc.Utils
 @using System.Web
 @using System.Globalization
-@inherits OwningComponentBase<DemoService>
 @layout DocLayout
 
 @if (_demoComponent != null)
@@ -128,7 +127,7 @@
             <AppLink Href="/about/meet-the-team">@T("Compontents.Footer.ReadyForMore.Desc.Middle")</AppLink>
             @T("Compontents.Footer.ReadyForMore.Desc.End")
         </div>
-        <RelatedPages Related="@_demoComponent?.Related"/>
+        <RelatedPages Related="@_demoComponent?.Related" />
         <MDivider Class="my-6 mt-7 mb-5"></MDivider>
         <BottomNav></BottomNav>
         <div>

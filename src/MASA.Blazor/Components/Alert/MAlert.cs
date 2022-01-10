@@ -60,32 +60,6 @@ namespace MASA.Blazor
         [Parameter]
         public StringNumber Width { get; set; }
 
-        [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
-
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
-
         private string ComputedType => Type != AlertTypes.None ? Type.ToString().ToLower() : "";
 
         private string ComputedColor => Color ?? ComputedType;

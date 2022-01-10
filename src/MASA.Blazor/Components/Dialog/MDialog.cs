@@ -17,17 +17,8 @@ namespace MASA.Blazor
 
         protected override string AttachSelector => Attach ?? ".m-application";
 
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
-
         [Parameter]
         public string ContentClass { get; set; }
-
-        [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
 
         [Parameter]
         public string Origin { get; set; } = "center center";
@@ -37,24 +28,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public string Transition { get; set; } = "dialog-transition";
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
 
         public Dictionary<string, object> ContentAttrs
         {

@@ -5,8 +5,8 @@ namespace MASA.Blazor
 {
     public partial class MCardText : BCardText
     {
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
+        [CascadingParameter(Name = "IsDark")]
+        public bool CascadingIsDark { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -17,7 +17,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-card__text")
-                       .AddTheme(Themeable.IsDark);
+                       .AddTheme(CascadingIsDark);
                 });
         }
     }

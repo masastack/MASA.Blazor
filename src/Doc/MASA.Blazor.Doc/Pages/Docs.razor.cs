@@ -27,9 +27,6 @@ namespace MASA.Blazor.Doc.Pages
         [Inject]
         private IPrismHighlighter PrismHighlighter { get; set; }
 
-        [CascadingParameter]
-        public MainLayout MainLayout { get; set; }
-
         [Parameter]
         public string Category { get; set; }
 

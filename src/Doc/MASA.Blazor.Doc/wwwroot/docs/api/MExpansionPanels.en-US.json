@@ -23,6 +23,11 @@
       "Description": "The class applied to the outermost element of the component"
     },
     {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Description": "Applies the dark theme variant to the component."
+    },
+    {
       "Name": "Disabled",
       "Type": "Boolean",
       "Default": "false",
@@ -56,6 +61,11 @@
       "Name": "Inset",
       "Type": "Boolean",
       "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
       "Description": ""
     },
     {

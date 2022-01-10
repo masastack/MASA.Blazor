@@ -12,9 +12,6 @@ namespace MASA.Blazor.Doc.Shared
     {
         private ErrorBoundary _errorBoundary;
 
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
         [CascadingParameter]
         public BaseLayout BaseLayout { get; set; }
 

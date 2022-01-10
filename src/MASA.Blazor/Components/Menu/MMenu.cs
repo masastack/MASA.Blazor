@@ -16,35 +16,7 @@ namespace MASA.Blazor
 {
     public partial class MMenu : BMenu, IThemeable
     {
-        [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
-
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
-
-        [CascadingParameter]
-        public MApp App { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return App != null && App.IsDark;
-            }
-        }
+        
 
         public override string AttachedSelector => Attach ?? ".m-application";
 

@@ -29,9 +29,19 @@
       "Description": "删除水平分页并根据需要包装项目"
     },
     {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
       "Name": "Id",
       "Type": "String",
       "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
       "Description": ""
     },
     {

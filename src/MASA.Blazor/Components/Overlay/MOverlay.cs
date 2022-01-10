@@ -7,15 +7,6 @@ namespace MASA.Blazor
     public partial class MOverlay : BOverlay, IThemeable, IOverlay
     {
         [Parameter]
-        public bool Dark { get; set; } = true;
-
-        [Parameter]
-        public bool Light { get; set; }
-
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
-
-        [Parameter]
         public RenderFragment ChildContent { get; set; }
 
         [Parameter]
@@ -29,24 +20,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public int ZIndex { get; set; } = 5;
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
 
         protected override void SetComponentClass()
         {

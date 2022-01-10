@@ -42,15 +42,6 @@ namespace MASA.Blazor
         public string Color { get; set; }
 
         [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
-
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
-
-        [Parameter]
         public Func<DateOnly, string> Format { get; set; }
 
         [Parameter]
@@ -61,24 +52,6 @@ namespace MASA.Blazor
 
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
 
         public int DisplayedMonth => TableDate.Month - 1;
 

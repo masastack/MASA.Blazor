@@ -9,19 +9,7 @@ namespace MASA.Blazor
     {
         [Parameter]
         public string Color { get; set; }
-
-        [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
-
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
-
-        public bool IsDark => Dark ?
-            true :
-            (Light ? false : Themeable != null && Themeable.IsDark);
+       
 
         [Parameter]
         public StringNumber Height { get; set; }

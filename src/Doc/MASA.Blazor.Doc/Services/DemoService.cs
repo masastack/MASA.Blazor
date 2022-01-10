@@ -20,12 +20,12 @@ namespace MASA.Blazor.Doc.Services
         private static ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>> _demoMenuCache;
         private static ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>> _docMenuCache;
         private static ConcurrentCache<string, RenderFragment> _showCaseCache;
+        private ConcurrentCache<string, ValueTask<string[]>> _demoTypesCache;
+        private ConcurrentCache<string, ValueTask<DocFileModel>> _docFileCache;
         private readonly HttpClient _httpClient;
         private readonly NavigationManager _navigationManager;
 
         private string CurrentLanguage { get; set; } = "zh-CN";
-
-        private string CurrentComponentName { get; set; }
 
         public DemoService(HttpClient httpClient, NavigationManager navigationManager)
         {
@@ -81,6 +81,15 @@ namespace MASA.Blazor.Doc.Services
                     await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>($"_content/MASA.Blazor.Doc/meta/docs.{language}.json");
                 return menuItems;
             });
+
+            _demoTypesCache ??= new ConcurrentCache<string, ValueTask<string[]>>();
+            await _demoTypesCache.GetOrAdd(language, async (currentLanguage) =>
+            {
+                var demoTypes =
+                await _httpClient.GetFromJsonAsync<string[]>($"_content/MASA.Blazor.Doc/meta/components/demoTypes.json");
+
+                return demoTypes;
+            });
         }
 
         public Task<ApiModel> GetApiAsync(string apiUrl)
@@ -90,19 +99,20 @@ namespace MASA.Blazor.Doc.Services
 
         public async Task<DocFileModel> GetDocFileAsync(string docUrl)
         {
-            var httpMessage = new HttpRequestMessage(HttpMethod.Get, docUrl);
-            var httpResponseMessage = await _httpClient.SendAsync(httpMessage);
+            _docFileCache ??= new ConcurrentCache<string, ValueTask<DocFileModel>>();
+            var docFileTask = await _docFileCache.GetOrAdd(docUrl, async (currentDocUrl) =>
+               {
+                   var docFile = await _httpClient.GetFromJsonAsync<DocFileModel>(currentDocUrl);
+                   return docFile;
+               });
 
-            var result = await ProcessResponseAsync<DocFileModel>(httpResponseMessage);
-
-            return result;
+            return docFileTask;
         }
 
         public async Task InitializeDemos()
         {
             _showCaseCache ??= new ConcurrentCache<string, RenderFragment>();
-            var demoTypes =
-                await _httpClient.GetFromJsonAsync<string[]>($"_content/MASA.Blazor.Doc/meta/components/demoTypes.json");
+            var demoTypes = _demoTypesCache.TryGetValue("any", out var demosTypesTask) ? await demosTypesTask : Array.Empty<string>();
             foreach (var type in demoTypes)
             {
                 GetShowCase(type);
@@ -111,7 +121,6 @@ namespace MASA.Blazor.Doc.Services
 
         public async Task<DemoComponentModel> GetComponentAsync(string componentName)
         {
-            CurrentComponentName = componentName;
             await InitializeAsync(CurrentLanguage);
             return _componentCache.TryGetValue(CurrentLanguage, out var component)
                 ? ((await component).TryGetValue(componentName.ToLower(), out var componetModel) ? componetModel : null)
@@ -120,7 +129,6 @@ namespace MASA.Blazor.Doc.Services
 
         public async Task<DemoComponentModel> GetStyleAsync(string componentName)
         {
-            CurrentComponentName = componentName;
             await InitializeAsync(CurrentLanguage);
             return _styleCache.TryGetValue(CurrentLanguage, out var component)
                 ? (await component).TryGetValue(componentName.ToLower(), out var style) ? style : null
@@ -253,12 +261,6 @@ namespace MASA.Blazor.Doc.Services
             return string.IsNullOrEmpty(originalUrl) ? "/" : originalUrl.Split('/')[0];
         }
 
-        public string GetCurrentUrl()
-        {
-            var currentUrl = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
-            return currentUrl;
-        }
-
         public RenderFragment GetShowCase(string type)
         {
             _showCaseCache ??= new ConcurrentCache<string, RenderFragment>();
@@ -277,66 +279,6 @@ namespace MASA.Blazor.Doc.Services
 
                 return ShowCase;
             });
-        }
-
-        public async Task<DemoMenuItemModel[]> GetPrevNextMenu(string type, string currentTitle)
-        {
-            await InitializeAsync(CurrentLanguage);
-            var items = Array.Empty<DemoMenuItemModel>();
-
-            if (type.ToLowerInvariant() == "docs")
-            {
-                items = _docMenuCache.TryGetValue(CurrentLanguage, out var menuItems)
-                    ? (await menuItems).OrderBy(x => x.Order).ToArray()
-                    : Array.Empty<DemoMenuItemModel>();
-                currentTitle = $"docs/{currentTitle}";
-            }
-            else
-            {
-                items = _demoMenuCache.TryGetValue(CurrentLanguage, out var menuItems)
-                    ? (await menuItems)
-                    .OrderBy(x => x.Order)
-                    .SelectMany(x => x.Children)
-                    .ToArray()
-                    : Array.Empty<DemoMenuItemModel>();
-
-                currentTitle = $"components/{currentTitle}";
-            }
-
-            for (var i = 0; i < items.Length; i++)
-            {
-                if (currentTitle.Equals(items[i].Url, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    var prev = i == 0 ? null : items[i - 1];
-                    var next = i == items.Length - 1 ? null : items[i + 1];
-                    return new[] { prev, next };
-                }
-            }
-
-            return new DemoMenuItemModel[] { null, null };
-        }
-
-        private static async Task<TValue> ProcessResponseAsync<TValue>(HttpResponseMessage response)
-        {
-            if (response.IsSuccessStatusCode)
-            {
-                switch (response.StatusCode)
-                {
-                    case HttpStatusCode.Accepted:
-                    case HttpStatusCode.NoContent:
-                        return default;
-                    default:
-                        return await response.Content.ReadFromJsonAsync<TValue>();
-                }
-            }
-            else if (response.StatusCode == HttpStatusCode.NotFound)
-            {
-                return default;
-            }
-            else
-            {
-                throw new Exception(await response.Content.ReadAsStringAsync());
-            }
         }
     }
 }

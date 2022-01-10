@@ -24,34 +24,7 @@ namespace MASA.Blazor
         public RenderFragment PlaceholderContent { get; set; }
 
         [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
-
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
-
-        [Parameter]
         public string Position { get; set; } = "center center";
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
 
         private string CurrentSrc { get; set; }
 

@@ -52,27 +52,7 @@ namespace MASA.Blazor
         [Parameter]
         public bool IsActive { get; set; } = true;
 
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
         public IDictionary<string, object> Attrs => Attributes;
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
 
         public bool Medium => false;
 

@@ -7,7 +7,7 @@ using OneOf;
 
 namespace MASA.Blazor
 {
-    public partial class MNavigationDrawer : BNavigationDrawer, INavigationDrawer
+    public partial class MNavigationDrawer : BNavigationDrawer, INavigationDrawer, IHandleEvent
     {
         private readonly string[] _applicationProperties = new string[]
         {
@@ -77,33 +77,6 @@ namespace MASA.Blazor
         public StringNumber OverlayOpacity { get; set; }
 
         [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
-
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
-
-        [Parameter]
         public bool Absolute { get; set; }
 
         [Parameter]
@@ -117,6 +90,9 @@ namespace MASA.Blazor
 
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
+
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
 
         protected StringNumber ComputedMaxHeight
         {
@@ -218,6 +194,14 @@ namespace MASA.Blazor
             }
         }
 
+        protected bool ReactsToRoute
+        {
+            get
+            {
+                return !DisableRouteWatcher && !Stateless && (Temporary || IsMobile);
+            }
+        }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -240,7 +224,7 @@ namespace MASA.Blazor
                     //We will remove this when mixins applicationable finished
                     _ = UpdateApplicationAsync();
                 })
-                .Watch<bool>(nameof(ExpandOnHover), UpdateMiniVariant)
+                .Watch<bool>(nameof(ExpandOnHover), val => UpdateMiniVariant(val, false))
                 .Watch<bool>(nameof(IsMouseover), val =>
                 {
                     UpdateMiniVariant(!val);
@@ -250,6 +234,23 @@ namespace MASA.Blazor
 
             MasaBlazor.Breakpoint.OnUpdate += OnBreakpointOnUpdate;
             MasaBlazor.Application.PropertyChanged += ApplicationPropertyChanged;
+            NavigationManager.LocationChanged += OnLocationChanged;
+        }
+
+        private async void OnLocationChanged(object sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+        {
+            if (ReactsToRoute && CloseConditional())
+            {
+                IsActive = false;
+                if (ValueChanged.HasDelegate)
+                {
+                    await ValueChanged.InvokeAsync(false);
+                }
+                else
+                {
+                    StateHasChanged();
+                }
+            }
         }
 
         private async Task OnBreakpointOnUpdate()
@@ -286,7 +287,7 @@ namespace MASA.Blazor
             }
         }
 
-        private void UpdateMiniVariant(bool val)
+        private void UpdateMiniVariant(bool val, bool shouldRender = true)
         {
             if (MiniVariant != val)
             {
@@ -294,6 +295,13 @@ namespace MASA.Blazor
                 if (MiniVariantChanged.HasDelegate)
                 {
                     MiniVariantChanged.InvokeAsync(val);
+                }
+                else
+                {
+                    if (shouldRender)
+                    {
+                        StateHasChanged();
+                    }
                 }
             }
         }
@@ -315,7 +323,7 @@ namespace MASA.Blazor
 
             if (ExpandOnHover)
             {
-                UpdateMiniVariant(true);
+                UpdateMiniVariant(true, false);
             }
         }
 
@@ -443,16 +451,15 @@ namespace MASA.Blazor
             }
         }
 
-        public override async Task HandleOnClickAsync(MouseEventArgs e)
+        async Task IHandleEvent.HandleEventAsync(EventCallbackWorkItem item, object? arg)
         {
-            if (MiniVariant)
-            {
-                MiniVariant = false;
-                if (MiniVariantChanged.HasDelegate)
-                {
-                    await MiniVariantChanged.InvokeAsync(MiniVariant);
-                }
-            }
+            await item.InvokeAsync(arg);
+        }
+
+        public override Task HandleOnClickAsync(MouseEventArgs e)
+        {
+            UpdateMiniVariant(false);
+            return Task.CompletedTask;
         }
 
         protected override void Dispose(bool disposing)
@@ -460,6 +467,7 @@ namespace MASA.Blazor
             RemoveApplication();
             MasaBlazor.Breakpoint.OnUpdate -= OnBreakpointOnUpdate;
             MasaBlazor.Application.PropertyChanged -= ApplicationPropertyChanged;
+            NavigationManager.LocationChanged -= OnLocationChanged;
         }
 
         private void RemoveApplication()

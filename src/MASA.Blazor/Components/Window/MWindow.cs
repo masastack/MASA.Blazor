@@ -10,12 +10,6 @@ namespace MASA.Blazor
 {
     public partial class MWindow : BWindow
     {
-        [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
-
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
 

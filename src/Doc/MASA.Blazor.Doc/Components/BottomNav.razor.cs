@@ -44,8 +44,7 @@ namespace MASA.Blazor.Doc.Components
             _menuItems.Clear();
 
             VisitMenuItems(menus, ref _menuItems);
-
-            UpdatePrevAndNextItem();
+            await UpdatePrevAndNextAsync();
         }
 
         private void OnLocationChanged(object sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
@@ -60,11 +59,17 @@ namespace MASA.Blazor.Doc.Components
                 return;
             }
 
+            var currentIndex = _currentIndex;
+
             var currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
             _currentIndex = _menuItems.FindIndex(item => item.Url == currentUrl);
-            UpdatePrevAndNextItem();
 
-            await InvokeAsync(StateHasChanged);
+            //CurrentIndex may be updated by OnParametersSetAsync
+            if (currentIndex != _currentIndex)
+            {
+                UpdatePrevAndNextItem();
+                await InvokeAsync(StateHasChanged);
+            }
         }
 
         private void UpdatePrevAndNextItem()

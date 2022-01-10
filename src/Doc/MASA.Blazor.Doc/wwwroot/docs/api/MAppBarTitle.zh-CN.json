@@ -11,6 +11,11 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
       "Name": "For",
       "Type": "String",
       "Default": "null",
@@ -20,6 +25,11 @@
       "Name": "Id",
       "Type": "String",
       "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
       "Description": ""
     },
     {

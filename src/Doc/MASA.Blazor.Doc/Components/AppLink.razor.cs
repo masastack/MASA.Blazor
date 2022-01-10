@@ -9,9 +9,6 @@ public partial class AppLink
     [Inject]
     public IJSRuntime Js { get; set; }
 
-    [Inject]
-    private NavigationManager NavigationManager { get; set; }
-
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> Attributes { get; set; }
 

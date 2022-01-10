@@ -50,9 +50,6 @@ namespace MASA.Blazor
         public bool Centered { get; set; }
 
         [Parameter]
-        public bool Outlined { get; set; }
-
-        [Parameter]
         public bool Left { get; set; }
 
         [Parameter]
@@ -62,9 +59,6 @@ namespace MASA.Blazor
         public bool Right { get; set; }
 
         [Parameter]
-        public bool Text { get; set; }
-
-        [Parameter]
         public bool Top { get; set; }
 
         [Parameter]
@@ -72,40 +66,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool Shaped { get; set; }
-
-        [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
-
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
-
-        public bool IsDark
-        {
-            get
-            {
-                // Snackbar is dark by default
-                // override themeable logic.
-                if (HasBackground)
-                {
-                    return !Light;
-                }
-
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
 
         [Parameter]
         public int Timeout { get; set; } = 5000;
@@ -130,13 +90,7 @@ namespace MASA.Blazor
         [Parameter]
         public RenderFragment ActionContent { get; set; }
 
-        protected bool HasBackground
-        {
-            get
-            {
-                return !Text && !Outlined;
-            }
-        }
+        
 
         protected override void OnParametersSet()
         {

@@ -48,20 +48,7 @@ namespace MASA.Blazor
         public bool Right { get; set; }
 
         [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
-
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
-
-        [Parameter]
         public RenderFragment BadgeContent { get; set; }
-
-        public bool IsDark => Dark ? 
-            true : 
-            (Light ? false : Themeable != null && Themeable.IsDark);
 
         private int Offset => OverLap ?
             (Dot ? 8 : 12) :
@@ -84,12 +71,12 @@ namespace MASA.Blazor
 
         protected string ComputedTop => Bottom ? ComputedYOffset : Auto;
 
-        protected string ComputedLeft => Right ? 
+        protected string ComputedLeft => Right ?
             (Left ? ComputedXOffset : Auto) :
             (Left ? Auto : ComputedXOffset);
 
-        protected string ComputedRight => Right ? 
-            (Left ? Auto : ComputedXOffset) : 
+        protected string ComputedRight => Right ?
+            (Left ? Auto : ComputedXOffset) :
             (!Left ? Auto : ComputedXOffset);
 
         protected override void SetComponentClass()
@@ -117,12 +104,12 @@ namespace MASA.Blazor
                     cssBuilder
                         .Add("m--badge__wrapper");
                 })
-                .Apply("badge", cssBuilder => 
+                .Apply("badge", cssBuilder =>
                 {
                     cssBuilder
                         .Add("m-badge__badge")
                         .AddBackgroundColor(Color);
-                }, styleBuilder => 
+                }, styleBuilder =>
                 {
                     styleBuilder
                         .AddIf(() => $"bottom:{ComputedBottom}", () => !InLine)
@@ -136,5 +123,5 @@ namespace MASA.Blazor
                 .ApplyBadgeDefault()
                 .Apply<BIcon, MIcon>();
         }
-    } 
+    }
 }

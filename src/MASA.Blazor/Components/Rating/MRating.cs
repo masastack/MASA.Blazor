@@ -74,37 +74,13 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool Large { get; set; }
-
-        [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
-
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
+        
 
         private double _hoverIndex = -1;
 
         protected bool _isHovering => Hover && _hoverIndex >= 0;
 
-        public bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
+        
 
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }

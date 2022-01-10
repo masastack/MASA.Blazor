@@ -64,11 +64,7 @@ namespace MASA.Blazor
         [Parameter]
         public string Color { get; set; }
 
-        [Parameter]
-        public bool Dark { get; set; }
-
-        [Parameter]
-        public bool Light { get; set; }
+        
 
         [Parameter]
         public StringNumber Elevation { get; set; }

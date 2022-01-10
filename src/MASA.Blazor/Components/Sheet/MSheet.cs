@@ -11,26 +11,6 @@ namespace MASA.Blazor
         [Parameter]
         public bool Shaped { get; set; }
 
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
-        public override bool IsDark
-        {
-            get
-            {
-                if (Dark)
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
-
         [Parameter]
         public StringNumber Elevation { get; set; }
 

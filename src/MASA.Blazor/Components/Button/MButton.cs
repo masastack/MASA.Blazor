@@ -77,26 +77,6 @@ namespace MASA.Blazor
         [Parameter]
         public bool Ripple { get; set; } = true;
 
-        [CascadingParameter]
-        public IThemeable Themeable { get; set; }
-        public override bool IsDark
-        {
-            get
-            {
-                if (Dark || (Matched && (ItemGroup as MButtonGroup).IsDark))
-                {
-                    return true;
-                }
-
-                if (Light)
-                {
-                    return false;
-                }
-
-                return Themeable != null && Themeable.IsDark;
-            }
-        }
-
         protected virtual bool HasBackground => !(Icon || Plain || Outlined || Text);
 
         protected bool IsRound => Icon || Fab;

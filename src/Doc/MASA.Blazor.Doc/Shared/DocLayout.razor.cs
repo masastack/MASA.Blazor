@@ -12,12 +12,8 @@ public partial class DocLayout
     [Inject]
     private NavigationManager NavigationManager { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        await base.OnInitializedAsync();
-
-        await ScrollToFragment();
-
         NavigationManager.LocationChanged += OnLocationChanged;
     }
 
@@ -36,6 +32,11 @@ public partial class DocLayout
         {
             await Js.ScrollToHash(fragment);
         }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await ScrollToFragment();
     }
 
     public void Dispose()

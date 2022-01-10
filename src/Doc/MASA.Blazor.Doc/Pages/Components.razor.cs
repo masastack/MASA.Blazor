@@ -1,6 +1,7 @@
 ﻿using BlazorComponent;
 using BlazorComponent.I18n;
 using MASA.Blazor.Doc.Models;
+using MASA.Blazor.Doc.Services;
 using MASA.Blazor.Doc.Shared;
 using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
@@ -45,6 +46,9 @@ namespace MASA.Blazor.Doc.Pages
 
         [Inject]
         public I18n I18n { get; set; }
+
+        [Inject]
+        public DemoService Service { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
