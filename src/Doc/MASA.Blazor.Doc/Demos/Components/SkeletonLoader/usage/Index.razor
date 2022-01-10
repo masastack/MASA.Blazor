@@ -1,9 +1,12 @@
-﻿<MSheet
-    Color="grey lighten-4"
-    Class="pa-3">
-    <MSkeletonLoader
-        Class="mx-auto"
-        MaxWidth="300"
-        Type="card">
+﻿<MSheet Color="@($"grey {(IsDark?"darken-2":"lighten-4")}")"
+        Class="pa-3">
+    <MSkeletonLoader Class="mx-auto"
+                     MaxWidth="300"
+                     Type="card">
     </MSkeletonLoader>
 </MSheet>
+
+@code {
+    [CascadingParameter(Name = "IsDark")]
+    public bool IsDark { get; set; }
+}
