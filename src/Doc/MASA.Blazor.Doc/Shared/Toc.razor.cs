@@ -35,7 +35,7 @@ public partial class Toc : OwningComponentBase<DemoService>
     [Inject]
     public NavigationManager NavigationManager { get; set; }
 
-    [CascadingParameter]
+    [CascadingParameter(Name ="Lang")]
     public bool IsChinese { get; set; }
 
     protected override void OnInitialized()

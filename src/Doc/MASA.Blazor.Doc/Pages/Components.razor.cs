@@ -35,7 +35,7 @@ namespace MASA.Blazor.Doc.Pages
         [Parameter]
         public string Name { get; set; }
 
-        [CascadingParameter]
+        [CascadingParameter(Name = "Lang")]
         public bool IsChinese { get; set; }
 
         [Inject]

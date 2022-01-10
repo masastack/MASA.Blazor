@@ -1,7 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
 <CascadingValue Value="this" IsFixed>
-    <CascadingValue Value="@IsChinese">
+    <CascadingValue Value="@IsChinese" Name="Lang">
         <MApp Class="baselayout-m-app">
             <MAppBar App Height="80" Elevation=0 Color="white" Class="pc app-bar" ClippedLeft ClippedRight>
                 <img style="cursor:pointer;" class="ml-6" src="https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png" @onclick=@(()=>{ Navigation.NavigateTo("/"); SelectTab = 0;}) />

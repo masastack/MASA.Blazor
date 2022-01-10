@@ -23,6 +23,9 @@ namespace MASA.Blazor.Doc.Pages
         [Inject]
         public IJSRuntime JSRuntime { get; set; } = default!;
 
+        [CascadingParameter(Name = "Lang")]
+        public bool IsChinese { get; set; }
+
         public StringNumber OnBoarding
         {
             get => _onboarding;

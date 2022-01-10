@@ -172,7 +172,7 @@ namespace MASA.Blazor.Doc.Pages
         [Parameter]
         public string ApiName { get; set; }
 
-        [CascadingParameter]
+        [CascadingParameter(Name = "Lang")]
         public bool IsChinese { get; set; }
 
         private ApiModel _api;

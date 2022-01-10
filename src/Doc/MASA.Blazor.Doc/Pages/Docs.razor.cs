@@ -15,7 +15,7 @@ namespace MASA.Blazor.Doc.Pages
 
         private DocFileModel File { get; set; }
 
-        [CascadingParameter]
+        [CascadingParameter(Name = "Lang")]
         public bool IsChinese { get; set; }
 
         [Inject]

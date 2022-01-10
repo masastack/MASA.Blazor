@@ -87,7 +87,7 @@
     [Parameter]
     public DemoMenuItemModel[] MenuItems { get; set; } = { };
 
-    [CascadingParameter]
+    [CascadingParameter(Name ="Lang")]
     public bool IsChinese { get; set; }
 
     [Inject]
