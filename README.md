@@ -131,7 +131,7 @@ services.AddMasaBlazor();
 </MApp>
 ```
 
-> See more ：[https://masa-blazor-docs-dev.lonsid.cn](https://masa-blazor-docs-dev.lonsid.cn "https://masa-blazor-docs-dev.lonsid.cn")
+> See more ：[https://blazor.masastack.com/](https://blazor.masastack.com/ "https://blazor.masastack.com/")
 
 # Related resources
 
