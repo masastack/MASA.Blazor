@@ -24,6 +24,7 @@ public partial class CodeBox
     private StringNumber _activeItem;
     private bool _expend;
     private bool _showComponent;
+    private bool _isDark;
 
     private RenderFragment Component { get; set; }
 

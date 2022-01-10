@@ -10,7 +10,7 @@
     <MSheet Outlined Rounded="true" Class="mb-9 m-example">
         @if (_showComponent)
         {
-            <MSheet Rounded="true" Class="pa-4">
+            <MSheet Dark="_isDark" Rounded="true" Class="pa-4">
                 @Component
             </MSheet>
 
@@ -18,6 +18,24 @@
 
             <div class="m-lazy" style="min-height: 52px;">
                 <div class="text-end pa-2">
+                    <span class="m-app-tooltip-btn d-inline-block">
+                        <MTooltip Bottom>
+                            <ActivatorContent>
+                                <button @onclick="()=>_isDark=!_isDark" @attributes="context.Attrs" type="button" class="m-btn m-btn--icon m-btn--round theme--light m-size--default" aria-label="invert-example-colors">
+                                    <span class="m-btn__content">
+                                        <span aria-hidden="true" class="m-icon notranslate theme--light">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" class="m-icon__svg">
+                                                <path d="M12,19.58V19.58C10.4,19.58 8.89,18.96 7.76,17.83C6.62,16.69 6,15.19 6,13.58C6,12 6.62,10.47 7.76,9.34L12,5.1M17.66,7.93L12,2.27V2.27L6.34,7.93C3.22,11.05 3.22,16.12 6.34,19.24C7.9,20.8 9.95,21.58 12,21.58C14.05,21.58 16.1,20.8 17.66,19.24C20.78,16.12 20.78,11.05 17.66,7.93Z"></path>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </button>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <span>反转示例颜色</span>
+                            </ChildContent>
+                        </MTooltip>
+                    </span>
                     <span class="m-app-tooltip-btn d-inline-block">
                         <MTooltip Bottom OpenDelay=200>
                             <ActivatorContent>

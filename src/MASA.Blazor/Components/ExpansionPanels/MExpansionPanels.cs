@@ -17,7 +17,8 @@ namespace MASA.Blazor
                         .AddIf("m-expansion-panels--focusable", () => Focusable)
                         .AddIf("m-expansion-panels--inset", () => Inset)
                         .AddIf("m-expansion-panels--popout", () => Popout)
-                        .AddIf("m-expansion-panels--tile", () => Tile);
+                        .AddIf("m-expansion-panels--tile", () => Tile)
+                        .AddTheme(IsDark);
                 });
         }
     }
