@@ -42,8 +42,6 @@ namespace MASA.Blazor
         [Parameter]
         public bool ThreeLine { get; set; }
 
-        
-
         [Parameter]
         public bool Highlighted { get; set; }
 
@@ -73,7 +71,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--link", () => IsClickable && !Inactive)
                         .AddIf($"{prefix}--active {ComputedActiveClass}", () =>
                         {
-                            if (IsActive) return true;
+                            if (InternalIsActive) return true;
 
                             if (!Link) return false;
 

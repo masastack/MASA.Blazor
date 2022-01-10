@@ -20,7 +20,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-expansion-panel")
-                        .AddIf($"m-expansion-panel--active {ComputedActiveClass}", () => IsActive)
+                        .AddIf($"m-expansion-panel--active {ComputedActiveClass}", () => InternalIsActive)
                         .AddIf("m-expansion-panel--next-active", () => NextActive)
                         .AddIf("m-expansion-panel--disabled", () => IsDisabled);
                 })

@@ -111,7 +111,7 @@ namespace MASA.Blazor
                         .AddIf("m-btn--text", () => Text)
                         .AddIf("m-btn--tile", () => Tile)
                         .AddIf("m-btn--top", () => Top)
-                        .AddIf($"m-btn--active {ComputedActiveClass}", () => IsActive)
+                        .AddIf($"m-btn--active {ComputedActiveClass}", () => InternalIsActive)
                         .AddFirstIf(
                             ("m-size--x-large", () => XLarge),
                             ("m-size--large", () => Large),

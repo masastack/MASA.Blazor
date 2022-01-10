@@ -88,7 +88,7 @@ namespace MASA.Blazor
                         .AddIf($"{prefix}--outlined", () => Outlined)
                         .AddIf($"{prefix}--pill", () => Pill)
                         .AddIf($"{prefix}--removable", () => Close)
-                        .AddIf($"{prefix}--active {ComputedActiveClass}", () => IsActive)
+                        .AddIf($"{prefix}--active {ComputedActiveClass}", () => InternalIsActive)
                         .AddTheme(IsDark)
                         .AddBackgroundColor(Color)
                         .AddTextColor(Color, () => Outlined)

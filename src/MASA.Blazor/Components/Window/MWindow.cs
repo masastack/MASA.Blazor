@@ -22,7 +22,7 @@ namespace MASA.Blazor
                 //TODO:isBooted
 
                 var axis = Vertical ? "y" : "x";
-                var reverse = InternalReverse;//TODO:isReverse
+                var reverse = InternalReverse ? !IsReverse : IsReverse;
                 var direction = reverse ? "-reverse" : "";
 
                 return $"m-window-{axis}{direction}-transition";

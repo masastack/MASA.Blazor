@@ -93,7 +93,7 @@ namespace MASA.Blazor
                 {
                     cssBuilder
                         .Add("m-window-item")
-                        .AddIf("m-window-item--active", () => IsActive);
+                        .AddIf("m-window-item--active", () => InternalIsActive);
                 });
         }
     }
