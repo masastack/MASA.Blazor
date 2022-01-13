@@ -6299,7 +6299,7 @@
         "Name": "index",
         "Title": "使用",
         "Description": "<p><code>MSkeletonLoader</code> 组件为用户提供了一个内容即将到来/加载的视觉指示器。 这比传统的全屏加载器要好。</p>\n",
-        "Code": "<MSheet\r\n    Color=\"grey lighten-4\"\r\n    Class=\"pa-3\">\r\n    <MSkeletonLoader\r\n        Class=\"mx-auto\"\r\n        MaxWidth=\"300\"\r\n        Type=\"card\">\r\n    </MSkeletonLoader>\r\n</MSheet>",
+        "Code": "<MSheet Color=\"@($\"grey {(IsDark?\"darken-2\":\"lighten-4\")}\")\"\r\n        Class=\"pa-3\">\r\n    <MSkeletonLoader Class=\"mx-auto\"\r\n                     MaxWidth=\"300\"\r\n                     Type=\"card\">\r\n    </MSkeletonLoader>\r\n</MSheet>\r\n\r\n@code {\r\n    [CascadingParameter(Name = \"IsDark\")]\r\n    public bool IsDark { get; set; }\r\n}",
         "Type": "Demos.Components.SkeletonLoader.usage.Index",
         "Style": "",
         "Debug": false,

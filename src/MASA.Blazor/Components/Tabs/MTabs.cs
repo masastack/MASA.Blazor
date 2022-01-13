@@ -42,7 +42,6 @@ namespace MASA.Blazor
 
         [Parameter]
         public bool Right { get; set; }
-        
 
         protected override void SetComponentClass()
         {
@@ -84,6 +83,7 @@ namespace MASA.Blazor
                     styleBuilder => styleBuilder.AddBackgroundColor(SliderColor));
 
             AbstractProvider
+                .ApplyTabsDefault()
                 .Apply<BSlideGroup, MTabsBar>(attrs =>
                 {
                     attrs[nameof(MTabsBar.ActiveClass)] = ActiveClass;
@@ -91,7 +91,6 @@ namespace MASA.Blazor
                     attrs[nameof(MTabsBar.BackgroundColor)] = BackgroundColor;
                     attrs[nameof(MTabsBar.IsDark)] = IsDark;
                 })
-                .Apply(typeof(BTabsSlider<>), typeof(BTabsSlider<MTabs>))
                 .Apply<BItem, MSlideItem>()
                 .Apply<BTab, MTab>()
                 .Apply<BWindow, MTabsItems>()

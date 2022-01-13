@@ -48,6 +48,7 @@ namespace MASA.Blazor
             { typeof(BTooltip), typeof(MTooltip) },
             { typeof(BDivider), typeof(MDivider) },
             { typeof(BSubheader), typeof(MSubheader) },
+            { typeof(BTab), typeof(MTab) },
 
         };
         private readonly Dictionary<Type, Type> _genericMapper = new()

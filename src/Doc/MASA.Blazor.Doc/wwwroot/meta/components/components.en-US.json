@@ -5919,7 +5919,7 @@
         "Name": "index",
         "Title": "Usage",
         "Description": "<p>The <code>MSkeletonLoader</code> component provides a user with a visual indicator that content is coming / loading. This is better\nreceived than traditional full-screen loaders.</p>\n",
-        "Code": "<MSheet\r\n    Color=\"grey lighten-4\"\r\n    Class=\"pa-3\">\r\n    <MSkeletonLoader\r\n        Class=\"mx-auto\"\r\n        MaxWidth=\"300\"\r\n        Type=\"card\">\r\n    </MSkeletonLoader>\r\n</MSheet>",
+        "Code": "<MSheet Color=\"@($\"grey {(IsDark?\"darken-2\":\"lighten-4\")}\")\"\r\n        Class=\"pa-3\">\r\n    <MSkeletonLoader Class=\"mx-auto\"\r\n                     MaxWidth=\"300\"\r\n                     Type=\"card\">\r\n    </MSkeletonLoader>\r\n</MSheet>\r\n\r\n@code {\r\n    [CascadingParameter(Name = \"IsDark\")]\r\n    public bool IsDark { get; set; }\r\n}",
         "Type": "Demos.Components.SkeletonLoader.usage.Index",
         "Style": "",
         "Debug": false,
