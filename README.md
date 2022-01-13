@@ -52,29 +52,33 @@ dotnet new --install MASA.Template
 
 **Create Project**
 
-- Blazor Server
+* Blazor Server
 
-  ```shell
-  dotnet new masabp -o MASA.Test
-  ```
+```shell
+dotnet new masabp -o MASA.Test
+```
 
-- Blazor Server + RCL(Razor class libraries)
+- Blazor WebAssembly
 
-  ```shell
-  dotnet new blazorwasm -o BlazorApp
-  ```
+```shell
+dotnet new masabp --mode Wasm -o Masa.TestWasm
+```
 
-- Blazor WebAssembly(Coming soon...)
+- Blazor RCL
+
+```shell
+dotnet new masabp --mode ServerAndWasm -o Masa.TestRcl
+```
 
 **Go to the Server project directory**
 
-```c#
-cd MASA.Test\MASA.Test.Server
+```shell
+cd MASA.Test
 ```
 
 **Run**
 
-```c#
+```shell
 dotnet run
 ```
 

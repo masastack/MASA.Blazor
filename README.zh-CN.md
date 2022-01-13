@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿<p align="center">
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<p align="center">
   <a href="https://masa-blazor-docs-dev.lonsid.cn" target="_blank">
     <img alt="MASA Blazor Logo" width="150" src="./imgs/logo.png">
   </a>
@@ -54,29 +54,31 @@ dotnet new --install MASA.Template
 
 **Create Project**
 
-- Blazor Server
+```shell
+dotnet new masabp -o MASA.Test
+```
 
-	```shell
-	dotnet new masabp -o MASA.Test
-	```
+- Blazor WebAssembly
 
-- Blazor Server + RCL(Razor class libraries)
+```shell
+dotnet new masabp --mode Wasm -o Masa.TestWasm
+```
 
-	```shell
-	dotnet new blazorwasm -o BlazorApp
-	```
-	
-- Blazor WebAssembly(Coming soon...)
+- Blazor RCL
+
+```shell
+dotnet new masabp --mode ServerAndWasm -o Masa.TestRcl
+```
 
 **Go to the Server project directory**
 
-```c#
+```shell
 cd MASA.Test\MASA.Test.Server
 ```
 
 **Run**
 
-```c#
+```shell
 dotnet run
 ```
 
