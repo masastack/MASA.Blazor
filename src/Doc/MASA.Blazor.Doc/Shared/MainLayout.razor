@@ -14,7 +14,14 @@
             @Body
         </ChildContent>
         <ErrorContent>
-            <Error></Error>
+            @if (context is HttpRequestException requestException && requestException.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                <NotFound></NotFound>
+            }
+            else
+            {
+                <Error></Error>
+            }
         </ErrorContent>
     </ErrorBoundary>
 </MMain>
