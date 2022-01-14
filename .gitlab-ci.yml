@@ -132,6 +132,8 @@ packer-prd:
 docker-prd:
   image: docker:17.05.0
   stage: docker-prd
+  tags:
+    - linux-masa
   only:
     - tags
   before_script:
