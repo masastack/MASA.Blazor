@@ -115,10 +115,20 @@ namespace MASA.Blazor
             Watcher
                 .Watch<IEnumerable<TItem>>(nameof(Value), val =>
                 {
+                    var keys = new List<string>();
+
                     foreach (var item in val)
                     {
                         var key = ItemKey(item);
                         Selection[key] = true;
+
+                        keys.Add(key);
+                    }
+
+                    // Unselect those in selection but not in Value when updating Value
+                    foreach (var (key, _) in Selection)
+                    {
+                        Selection[key] = keys.Contains(key);
                     }
                 });
         }
