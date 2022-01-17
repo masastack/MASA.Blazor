@@ -50,7 +50,7 @@ docker:
   script:
     - ls
     - docker images && docker ps -a 
-    - docker build --build-arg OSSCONFIG=$(OSSUTILCONFIG) -f Dockerfile.wasm -t $IMAGEWASM .
+    - docker build --build-arg OSSCONFIG=$OSSUTILCONFIG -f Dockerfile.wasm -t $IMAGEWASM .
     - docker push $IMAGEWASM
 # docker:
 #   image: docker:17.05.0
