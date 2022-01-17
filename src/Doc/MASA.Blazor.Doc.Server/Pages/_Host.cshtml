@@ -33,7 +33,7 @@
     <script src="_content/MASA.Blazor.Doc/js/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"></script>
     <script>
-        Blazor.start().then(() = >{
+        Blazor.start().then(function() {
             window.BlazorComponent.Prism = {};
             window.BlazorComponent.Prism.highlight = function(code, language, component, codeElement) {
                 setTimeout(function() {
