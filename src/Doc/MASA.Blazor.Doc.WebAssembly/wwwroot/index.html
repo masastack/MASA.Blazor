@@ -180,58 +180,58 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script src="_content/BlazorComponent/js/blazor-component.js"></script>
     <script src="_content/MASA.Blazor.Doc/js/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"></script>
     <script>
-        window.BlazorComponent.Prism = {};
-        window.BlazorComponent.Prism.highlight = function (code, language, component, codeElement) {
-            setTimeout(function () {
-                var highlightCode = Prism.highlight(code, Prism.languages[language], language);
-                codeElement.innerHTML = highlightCode;
-                component.invokeMethodAsync('OnAfterHighlighted');
-            }, 0);
-        }
-
-        window.BlazorComponent.Prism.highlightAll = function () {
-            var pres = document.querySelectorAll("pre");
-
-            for (var i = 0; i < pres.length; i++) {
-                let pre = pres[i];
-
-                let parent = pre.parentElement;
-                if (parent.classList[0] == "app-code") {
-                    break;
+        Blazor.start()
+            .then(() => {
+                window.BlazorComponent.Prism = {};
+                window.BlazorComponent.Prism.highlight = function (code, language, component, codeElement) {
+                    setTimeout(function () {
+                        var highlightCode = Prism.highlight(code, Prism.languages[language], language);
+                        codeElement.innerHTML = highlightCode;
+                        component.invokeMethodAsync('OnAfterHighlighted');
+                    }, 0);
                 }
 
-                let div = document.createElement("div");
-                div.className = "app-code overflow-hidden m-sheet m-sheet--outlined theme--light rounded grey lighten-5";
-                div.style = "opacity:0.85"
+                window.BlazorComponent.Prism.highlightAll = function () {
+                    var pres = document.querySelectorAll("pre");
 
-                parent.replaceChild(div, pre);
-                div.appendChild(pre);
-            }
+                    for (var i = 0; i < pres.length; i++) {
+                        let pre = pres[i];
 
-            Prism.highlightAll();
-        }
+                        let parent = pre.parentElement;
+                        if (parent.classList[0] == "app-code") {
+                            break;
+                        }
 
-        window.setCookie = (name, value) => {
-            var Days = 30;
-            var exp = new Date();
-            exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-            document.cookie = `${name}=${escape(value.toString())};path=/;expires=${exp.toUTCString()}`;
-        }
+                        let div = document.createElement("div");
+                        div.className = "app-code overflow-hidden m-sheet m-sheet--outlined theme--light rounded grey lighten-5";
+                        div.style = "opacity:0.85"
 
-        window.getCookie = (name) => {
-            const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
-            const arr = document.cookie.match(reg);
-            if (arr) {
-                return unescape(arr[2]);
-            }
+                        parent.replaceChild(div, pre);
+                        div.appendChild(pre);
+                    }
 
-            return null;
-        }
+                    Prism.highlightAll();
+                }
+
+                window.setCookie = function (name, value) {
+                    document.cookie = `${name}=${escape(value.toString())};path=/;}`;
+                }
+
+                window.getCookie = function (name) {
+                    const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
+                    const arr = document.cookie.match(reg);
+                    if (arr) {
+                        return unescape(arr[2]);
+                    }
+
+                    return null;
+                }
+            })
     </script>
 </body>
 </html>

@@ -21,62 +21,69 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;display=swap" media="all">
     <link href="_content/MASA.Blazor.Doc/css/doc.css" rel="stylesheet" />
     <link href="_content/MASA.Blazor.Doc/masa-icon.css" rel="stylesheet" />
-    <link href="_content/MASA.Blazor.Doc/MASA.Blazor.Doc.bundle.scp.css" rel="stylesheet"/>
+    <link href="_content/MASA.Blazor.Doc/MASA.Blazor.Doc.bundle.scp.css" rel="stylesheet" />
 </head>
 <body>
     <app>
         <component type="typeof(App)" param-I18nConfig="@I18nConfig" render-mode="ServerPrerendered" />
     </app>
 
-    <script src="_framework/blazor.server.js"></script>
+    <script src="_framework/blazor.server.js" autostart="false"></script>
     <script src="_content/BlazorComponent/js/blazor-component.js"></script>
     <script src="_content/MASA.Blazor.Doc/js/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"></script>
     <script>
-        window.BlazorComponent.Prism = {};
-        window.BlazorComponent.Prism.highlight = function (code, language,component,codeElement) {
-            setTimeout(function(){
-                var highlightCode= Prism.highlight(code, Prism.languages[language], language);
-                codeElement.innerHTML=highlightCode;
-                component.invokeMethodAsync('OnAfterHighlighted');
-            },0);
-        }
+        Blazor.start().then(() = >{
+            window.BlazorComponent.Prism = {};
+            window.BlazorComponent.Prism.highlight = function(code, language, component, codeElement) {
+                setTimeout(function() {
+                    var highlightCode = Prism.highlight(code, Prism.languages[language], language);
+                    codeElement.innerHTML = highlightCode;
+                    component.invokeMethodAsync('OnAfterHighlighted');
+                },0);
+            }
 
-        window.BlazorComponent.Prism.highlightAll = function () {
-            var pres = document.querySelectorAll("pre");
+            window.BlazorComponent.Prism.highlightAll = function() {
+                var pres = document.querySelectorAll("pre");
 
-            for (var i = 0; i < pres.length; i++) {
-                let pre = pres[i];
+                for (var i = 0; i < pres.length; i++) {
+                    let pre = pres[i];
 
-                let parent = pre.parentElement;
-                if (parent.classList[0] == "app-code") {
-                    break;
+                    let parent = pre.parentElement;
+                    if (parent.classList[0] == "app-code") {
+                        break;
+                    }
+
+                    let div = document.createElement("div");
+                    div.className = "app-code overflow-hidden m-sheet m-sheet--outlined theme--light rounded grey lighten-5";
+                    div.style = "opacity:0.85"
+
+                    parent.replaceChild(div, pre);
+                    div.appendChild(pre);
                 }
 
-                let div = document.createElement("div");
-                div.className = "app-code overflow-hidden m-sheet m-sheet--outlined theme--light rounded grey lighten-5";
-                div.style = "opacity:0.85"
-
-                parent.replaceChild(div, pre);
-                div.appendChild(pre);
+                Prism.highlightAll();
             }
 
-            Prism.highlightAll();
-        }
-
-        window.setCookie = function(name,value){
-             document.cookie = `${name}=${escape(value.toString())};path=/;}`;
-        }
-
-        window.getCookie = function(name){
-            const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
-            const arr = document.cookie.match(reg);
-            if (arr) {
-                return unescape(arr[2]);
+            window.setCookie = function(name, value) {
+                document.cookie = `$ {
+                    name
+                } = $ {
+                    escape(value.toString())
+                };
+                path = /;}`;
             }
 
-            return null;
-        }
+            window.getCookie = function(name){
+                const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
+                const arr = document.cookie.match(reg);
+                if (arr) {
+                    return unescape(arr[2]);
+                }
+
+                return null;
+            }
+        })
     </script>
 </body>
 </html>
