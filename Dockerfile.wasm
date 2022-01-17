@@ -3,7 +3,7 @@
 FROM registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100_nodejs16_wasm_emsdk AS base
 WORKDIR /app
 COPY . .
-RUN dotnet publish "./src/Doc/MASA.Blazor.Doc.WebAssembly/MASA.Blazor.Doc.WebAssembly.csproj" -c Release -o /app/publish &&cd /app/publish &&ls && tree
+RUN dotnet publish "./src/Doc/MASA.Blazor.Doc.WebAssembly/MASA.Blazor.Doc.WebAssembly.csproj" -c Release -o /app/publish &&cd /app/publish &&ls 
 
 FROM caddy:alpine
 WORKDIR /app
