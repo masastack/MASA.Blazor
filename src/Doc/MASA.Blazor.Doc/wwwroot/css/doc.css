@@ -445,11 +445,14 @@ body {
         padding-bottom: 35px !important;
     }
 
-        .foot-box p {
+        .foot-box a {
             font-size: 12px !important;
             line-height: 14px !important;
             padding-top: 20px !important;
             padding-bottom: 20px !important;
+            text-decoration: none;
+            color: #fff !important;
+            display: block;
         }
 
         .foot-box .foot-p {
@@ -750,8 +753,11 @@ body {
     align-items: center;
 }
 
-    .foot-box p {
+    .foot-box a {
         padding: 24px 0;
+        text-decoration: none;
+        color: #fff !important;
+        display: block;
     }
 
 .activeNavClass {
