@@ -9,7 +9,7 @@ namespace MASA.Blazor
     {
         [Parameter]
         public string Color { get; set; }
-       
+
 
         [Parameter]
         public StringNumber Height { get; set; }
@@ -68,14 +68,19 @@ namespace MASA.Blazor
                 return;
             }
 
+            var height = ComputedHeight.ToDouble();
+            MasaBlazor.Application.Bar = height > 0 ? height : await GetClientHeightAsync();
+        }
+
+        private async Task<double> GetClientHeightAsync()
+        {
             if (Ref.Id == null)
             {
-                return;
+                return 0;
             }
 
             var element = await JsInvokeAsync<BlazorComponent.Web.Element>(JsInteropConstants.GetDomInfo, Ref);
-            MasaBlazor.Application.Bar = element != null ?
-                element.ClientHeight : ComputedHeight.ToDouble();
+            return element?.ClientHeight ?? 0;
         }
 
         protected override void Dispose(bool disposing)

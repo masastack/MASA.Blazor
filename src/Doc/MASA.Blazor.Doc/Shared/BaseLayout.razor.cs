@@ -5,6 +5,7 @@ using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace MASA.Blazor.Doc.Shared
 {
@@ -50,6 +51,28 @@ namespace MASA.Blazor.Doc.Shared
 
         [Inject]
         public I18nConfig I18nConfig { get; set; }
+
+        protected bool ShowBar { get; set; } = true;
+
+        protected string BaseUrl
+        {
+            get
+            {
+                return Regex.Replace(Navigation.Uri, "http(s)?://", "");
+            }
+        }
+
+        protected bool IsWasm => BaseUrl == "blazor-wasm.masastack.com/";
+
+        protected bool IsServer => BaseUrl == "localhost:5000/";
+
+        protected string WasmUrl => IsWasm ? null : "https://blazor-wasm.masastack.com/";
+
+        protected string ServerUrl => IsServer ? null : "https://blazor.masastack.com/";
+
+        protected string WasmStyle => IsWasm ? "text-decoration:none;color: gray;cursor: default;" : $"text-decoration:none;";
+
+        protected string ServerStyle => IsServer ? "text-decoration:none;color: gray;cursor: default;" : $"text-decoration:none;";
 
         public bool IsChinese { get; set; }
 
