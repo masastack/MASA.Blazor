@@ -6,7 +6,7 @@ ENV  OSSCONFIG ${OSSCONFIG}
 WORKDIR /app
 COPY . .
 RUN dotnet publish "./src/Doc/MASA.Blazor.Doc.WebAssembly/MASA.Blazor.Doc.WebAssembly.csproj" -c Release -o /app/publish 
-RUN cd /app/publish &&  && ossutil  cp  -rf wwwroot/  oss://masa-blazor-wasm/test/ --config-file (echo $OSSCONFIG | base64 --decode)
+RUN cd /app/publish && ossutil  cp  -rf wwwroot/  oss://masa-blazor-wasm/test/ --config-file (echo $OSSCONFIG | base64 --decode)
 
 FROM caddy:alpine
 WORKDIR /app
