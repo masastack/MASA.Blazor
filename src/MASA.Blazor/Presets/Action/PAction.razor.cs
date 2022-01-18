@@ -10,26 +10,6 @@ namespace MASA.Blazor.Presets
 {
     public partial class PAction : BDomComponentBase
     {
-        private bool _loading;
-        private bool _set;
-        private bool _visible = true;
-        private bool _visibleChanged = true;
-
-        private ElementReference ButtonRef { get; set; }
-        private MButton ButtonForwardRef { get; set; }
-        private ElementReference IconRef { get; set; }
-        private MIcon IconForwardRef { get; set; }
-        private ElementReference LabelRef { get; set; }
-
-        internal double BtnWidth { get; set; }
-        internal double IconWidth { get; set; }
-        internal double LabelWidth { get; set; }
-        internal double SpaceWidth { get; set; }
-
-        internal double IconBtnWidth => IconWidth + SpaceWidth;
-
-        internal double LabelBtnWidth => LabelWidth + SpaceWidth;
-
         [Inject]
         public DomEventJsInterop DomEventJsInterop { get; set; }
 
@@ -38,6 +18,9 @@ namespace MASA.Blazor.Presets
 
         [CascadingParameter(Name = "_p_action_data")]
         public Action Data { get; set; }
+
+        [Parameter] 
+        public ActionTypes? Type { get; set; }
 
         [Parameter]
         public RenderFragment ChildContent { get; set; }
@@ -107,8 +90,28 @@ namespace MASA.Blazor.Presets
 
         [Parameter]
         public bool XLarge { get; set; }
+        
+        private bool _loading;
+        private bool _set;
+        private bool _visible = true;
+        private bool _visibleChanged = true;
 
-        private ActionTypes ActionType => Actions?.Type ?? ActionTypes.IconLabel;
+        private ElementReference ButtonRef { get; set; }
+        private MButton ButtonForwardRef { get; set; }
+        private ElementReference IconRef { get; set; }
+        private MIcon IconForwardRef { get; set; }
+        private ElementReference LabelRef { get; set; }
+
+        internal double BtnWidth { get; set; }
+        internal double IconWidth { get; set; }
+        internal double LabelWidth { get; set; }
+        internal double SpaceWidth { get; set; }
+
+        internal double IconBtnWidth => IconWidth + SpaceWidth;
+
+        internal double LabelBtnWidth => LabelWidth + SpaceWidth;
+
+        private ActionTypes ActionType => Actions?.Type ?? Type ?? ActionTypes.IconLabel;
 
         private string ComputedColor => Data?.Color ?? Color;
 
@@ -228,14 +231,5 @@ namespace MASA.Blazor.Presets
                 }
             }
         }
-    }
-
-    internal enum ActionTypes
-    {
-        Icon = 1,
-
-        Label,
-
-        IconLabel
     }
 }
