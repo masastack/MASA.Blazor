@@ -32,7 +32,10 @@ namespace MASA.Blazor
 
                 return _filter;
             }
-            set { _filter = value; }
+            set
+            {
+                _filter = value;
+            }
         }
 
         [Parameter]
@@ -95,11 +98,6 @@ namespace MASA.Blazor
         {
             get
             {
-                if (Multiple)
-                {
-                    return default;
-                }
-
                 return SelectedItems.FirstOrDefault();
             }
         }
@@ -117,7 +115,7 @@ namespace MASA.Blazor
         protected override Dictionary<string, object> InputAttrs => new()
         {
             { "type", Type },
-            { "value", InternalSearch ?? GetText(SelectedItem) },
+            { "value", InternalSearch ?? (HasSlot || Multiple ? null : GetText(SelectedItem)) },
             { "autocomplete", "off" }
         };
 
