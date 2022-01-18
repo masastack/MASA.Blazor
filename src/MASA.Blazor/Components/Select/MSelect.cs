@@ -281,6 +281,7 @@ namespace MASA.Blazor
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.PrependItemContent)] = PrependItemContent;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.AppendItemContent)] = AppendItemContent;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.SelectedIndex)] = SelectedIndex;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.NoDataContent)] = NoDataContent;
                 })
                 .Apply<BChip, MChip>(attrs =>
                 {
