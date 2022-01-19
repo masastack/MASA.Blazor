@@ -1,4 +1,5 @@
 ﻿using BlazorComponent;
+using BlazorComponent.I18n;
 using MASA.Blazor.Doc.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -39,6 +40,9 @@ public partial class CodeBox
 
     [Parameter]
     public int Index { get; set; }
+
+    [Inject]
+    public I18n I18n { get; set; }
 
     private string GithubUrlHref { get; set; }
 
@@ -90,5 +94,10 @@ public partial class CodeBox
                 StateHasChanged();
             }
         }
+    }
+
+    protected string T(string key)
+    {
+        return I18n.T(key);
     }
 }

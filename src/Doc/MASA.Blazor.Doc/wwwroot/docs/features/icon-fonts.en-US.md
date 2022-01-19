@@ -3,7 +3,7 @@ order: 4
 title: Icon Fonts
 ---
 
-MASA Blazor supports booting Material Design icons, Material icons, Font Awesome 4 and Font Awesome 5 By default, the application will use <a href="https://materialdesignicons.com" target="_blank">Material Design 图标</a> by default.
+MASA Blazor supports booting Material Design icons, Material icons, Font Awesome 4 and Font Awesome 5 By default, the application will use <a href="https://materialdesignicons.com" target="_blank">Material Design Icon</a> by default.
 
 ## Usage
 

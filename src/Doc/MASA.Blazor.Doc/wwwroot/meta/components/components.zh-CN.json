@@ -1848,7 +1848,7 @@
         "Order": 5,
         "Name": "model",
         "Title": "外部控制",
-        "Description": "<p>可以通过修改 v-model 来从外部控制扩展面板。 它的值对应于当前打开的扩展面板索引（从0开始）。 如果使用 multiple 属性，则是一个包含打开项索引的数组。</p>\n",
+        "Description": "<p>可以通过修改 @bind-Value 来从外部控制扩展面板。 它的值对应于当前打开的扩展面板索引（从0开始）。 如果使用 multiple 属性，则是一个包含打开项索引的数组。</p>\n",
         "Code": "<div>\r\n    <div class=\"text-center d-flex pb-4\">\r\n        <MButton OnClick=\"All\">\r\n            all\r\n        </MButton>\r\n        <div>[@string.Join(\",\", panel)]</div>\r\n        <MButton OnClick=\"None\">\r\n            none\r\n        </MButton>\r\n    </div>\r\n\r\n    <MExpansionPanels\r\n        @bind-Values=\"panel\"\r\n        Multiple>\r\n        @foreach (var i in Enumerable.Range(0, items))\r\n        {\r\n            <MExpansionPanel @key=\"i\">\r\n                <MExpansionPanelHeader>Header @(i + 1)</MExpansionPanelHeader>\r\n                <MExpansionPanelContent>\r\n                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\r\n                </MExpansionPanelContent>\r\n            </MExpansionPanel>\r\n        }\r\n    </MExpansionPanels>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<StringNumber> panel = new();\r\n\r\n    int items = 5;\r\n\r\n    void All()\r\n    {\r\n        panel = Enumerable.Range(0, 5).Select(i => (StringNumber)i).ToList();\r\n    }\r\n\r\n    void None()\r\n    {\r\n        panel.Clear();\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.ExpansionPanels.props.Model",
         "Style": "",

@@ -47,5 +47,8 @@
   "Compontents.Footer.UpdateTime": "Last updated:",
   "Settings": "Settings",
   "Mode": "Mode",
-  "LanguageSettings": "Language settings"
+  "LanguageSettings": "Language settings",
+  "InvertExampleColors": "Invert example colors",
+  "ViewOnGithub": "View on github",
+  "ViewSource": "View source"
 }

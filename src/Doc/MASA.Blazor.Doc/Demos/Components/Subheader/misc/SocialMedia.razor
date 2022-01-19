@@ -22,7 +22,7 @@
                 {
                     <MCol Cols="12" Sm="6" Md="4">
                         <MCard>
-                            <MImage Src="@($"https://picsum.photos/200/300?image={GetImage()}")" Height="300">
+                            <MImage Src="@($"https://picsum.photos/200/300?image={GetImage(type,card)}")" Height="300">
                                 <span class="text-h5 white--text pl-4 pt-4 d-inline-block">@card</span>
                             </MImage>
 
@@ -55,14 +55,12 @@
     
     string[] types = new string[2] {"Places to Be", "Places to See"};
 
-    double GetImage()
+    double GetImage(string type, string card)
     {
-        var min = 550;
-        var max = 560;
-        var random = new Random();
-        var num = random.Next(1, 100) * 0.01;
+        var row = Array.IndexOf(types, type);
+        var col = Array.IndexOf(cards, card)+1;
 
-        return Math.Floor(num * (max - min + 1)) + min;
+        return 550 + types.Length * row + col;
     }
     
     public class Social
