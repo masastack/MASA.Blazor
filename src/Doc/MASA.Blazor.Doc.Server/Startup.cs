@@ -22,7 +22,8 @@ namespace MASA.Blazor.Doc.Server
             services.AddMasaI18nForServer("wwwroot/locale");
 
             services.AddHttpContextAccessor();
-            services.AddMasaBlazorDocs(Configuration["ASPNETCORE_URLS"]);
+
+            services.AddMasaBlazorDocs(Configuration["ASPNETCORE_URLS"]?.Replace("0.0.0.0", "127.0.0.1") ?? "http://localhost:5000");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
