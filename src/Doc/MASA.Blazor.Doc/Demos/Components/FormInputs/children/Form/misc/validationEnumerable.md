@@ -2,7 +2,7 @@
 order: 1
 title:
   zh-CN: 验证集合
-  en-US: ValidationEnumerable
+  en-US: Validation enumerable
 ---
 
 ## zh-CN

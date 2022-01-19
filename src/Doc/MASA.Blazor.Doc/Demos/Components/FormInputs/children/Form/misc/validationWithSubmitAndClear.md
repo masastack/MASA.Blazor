@@ -2,7 +2,7 @@
 order: 0
 title:
   zh-CN: 提交与验证 & 清除
-  en-US: ValidationWithSubmitAndClear
+  en-US: Validation with submit & clear
 ---
 
 ## zh-CN
