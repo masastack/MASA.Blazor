@@ -11,14 +11,6 @@ namespace MASA.Blazor
 {
     public partial class MStepper : MSheet
     {
-        protected bool IsReverse { get; set; }
-
-        protected bool IsBooted { get; set; } = true;
-
-        protected List<MStepperStep> Steps = new();
-
-        protected List<MStepperContent> Content = new();
-
         [Parameter]
         public bool Flat { get; set; }
 
@@ -36,7 +28,7 @@ namespace MASA.Blazor
         {
             get
             {
-                return GetValue<int>(1);
+                return GetValue(1);
             }
             set
             {
@@ -46,6 +38,32 @@ namespace MASA.Blazor
 
         [Parameter]
         public EventCallback<int> ValueChanged { get; set; }
+
+        protected bool IsReverse { get; set; }
+
+        protected bool IsBooted { get; set; } = true;
+
+        protected List<MStepperStep> Steps = new();
+
+        protected List<MStepperContent> Content = new();
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            Watcher
+                .Watch<int>(nameof(Value), (newVal, oldVal) =>
+                {
+                    IsReverse = newVal < oldVal;
+
+                    if (oldVal != 0)
+                    {
+                        IsBooted = true;
+                    }
+
+                    UpdateView();
+                });
+        }
 
         protected override void SetComponentClass()
         {
@@ -61,22 +79,6 @@ namespace MASA.Blazor
                         .AddIf("m-stepper--vertical", () => Vertical)
                         .AddIf("m-stepper--alt-labels", () => AltLabels)
                         .AddIf("m-stepper--non-linear", () => NonLinear);
-                });
-        }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            Watcher
-                .Watch<int>(nameof(Value), (oldVal, newVal) =>
-                {
-                    IsReverse = newVal < oldVal;
-
-                    if (oldVal != 0)
-                        IsBooted = true;
-
-                    UpdateView();
                 });
         }
 
