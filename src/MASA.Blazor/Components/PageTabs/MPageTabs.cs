@@ -31,6 +31,8 @@ namespace MASA.Blazor
 
         bool IPageTabs.IsActive(PageTabItem item) => IsActive(item);
 
+        void IPageTabs.Close(PageTabItem item) => Close(item);
+
         Task IPageTabs.HandleOnOnReloadAsync(MouseEventArgs args) => HandleOnOnReloadAsync(args);
 
         Task IPageTabs.HandleOnCloseLeftAsync(MouseEventArgs args) => HandleOnCloseLeftAsync(args);
@@ -115,7 +117,7 @@ namespace MASA.Blazor
                 .Apply(typeof(BIcon), typeof(MIcon), attrs =>
                 {
                     var item = (PageTabItem)attrs.Data;
-                    attrs[nameof(MIcon.OnClick)] = CreateEventCallback<MouseEventArgs>(async args => await CloseAsync(item));
+                    attrs[nameof(MIcon.OnClick)] = CreateEventCallback<MouseEventArgs>(args => Close(item));
                     attrs["__internal_stopPropagation_onclick"] = true;
                 });
         }
@@ -131,19 +133,17 @@ namespace MASA.Blazor
             IsMenuActive = true;
         }
 
-        protected Task CloseAsync(PageTabItem item)
+        protected void Close(PageTabItem item)
         {
             Debug.Assert(item != null);
 
             PageTabItemManager.Close(item);
             if (IsActive(item))
             {
-                //Active item has been closed,goto first or default
+                //Active item has been closed,goto last or default
                 var lastItem = ComputedItems.FirstOrDefault();
                 NavigationManager.NavigateTo(lastItem?.Url ?? "");
             }
-
-            return Task.CompletedTask;
         }
 
         protected bool IsActive(PageTabItem item)
@@ -159,7 +159,7 @@ namespace MASA.Blazor
             return Task.CompletedTask;
         }
 
-        protected async Task HandleOnCloseLeftAsync(MouseEventArgs args)
+        protected Task HandleOnCloseLeftAsync(MouseEventArgs args)
         {
             var startIndex = 0;
             var endIndex = ComputedItems.IndexOf(MenuActiveItem);
@@ -169,12 +169,14 @@ namespace MASA.Blazor
                 var items = ComputedItems.Take(endIndex);
                 foreach (var item in items)
                 {
-                    await CloseAsync(item);
+                    Close(item);
                 }
             }
+
+            return Task.CompletedTask;
         }
 
-        protected async Task HandleOnCloseRightAsync(MouseEventArgs args)
+        protected Task HandleOnCloseRightAsync(MouseEventArgs args)
         {
             var startIndex = ComputedItems.IndexOf(MenuActiveItem) + 1;
             var endIndex = ComputedItems.Count;
@@ -184,9 +186,11 @@ namespace MASA.Blazor
                 var items = ComputedItems.Skip(startIndex).Take(endIndex - startIndex);
                 foreach (var item in items)
                 {
-                    await CloseAsync(item);
+                    Close(item);
                 }
             }
+
+            return Task.CompletedTask;
         }
 
         protected async Task HandleOnCloseOtherAsync(MouseEventArgs args)
