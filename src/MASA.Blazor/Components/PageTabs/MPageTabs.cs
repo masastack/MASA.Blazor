@@ -1,5 +1,6 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
@@ -69,15 +70,16 @@ namespace MASA.Blazor
             //REVIEW: Is this ok? 
             HideSlider = true;
             NavigationManager.LocationChanged += OnLocationChanged;
-
-            //By default,open the first page
-            var firstItem = Items.FirstOrDefault();
-            PageTabItemManager.Open(firstItem);
         }
 
-        private void OnLocationChanged(object sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+        private void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
-            var url = NavigationManager.ToBaseRelativePath(e.Location);
+            Open(e.Location);
+        }
+
+        private void Open(string uri)
+        {
+            var url = NavigationManager.ToBaseRelativePath(uri);
             var item = Items.FirstOrDefault(item => item.Url == url);
 
             if (item != null && !PageTabItemManager.IsOpened(item))
@@ -92,7 +94,18 @@ namespace MASA.Blazor
             base.SetComponentClass();
 
             CssProvider
-                .Apply("page-item", styleAction: styleBuilder =>
+                .Merge(cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-page-tabs");
+                })
+                .Apply("page-item", cssBuilder =>
+                {
+                    var isActive = (bool)cssBuilder.Data;
+                    cssBuilder
+                        .Add("m-page-tabs__page-item")
+                        .AddIf("m-page-tabs__page-item--is-active", () => isActive);
+                }, styleBuilder =>
                 {
                     var isActive = (bool)styleBuilder.Data;
                     styleBuilder
@@ -134,6 +147,16 @@ namespace MASA.Blazor
                 });
         }
 
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+            if (firstRender)
+            {
+                Open(NavigationManager.Uri);
+            }
+        }
+
         protected async Task ShowMenuAsync(double clientX, double clientY, PageTabItem item)
         {
             //We will change this when menu been refactored
@@ -148,6 +171,11 @@ namespace MASA.Blazor
         protected void Close(PageTabItem item)
         {
             Debug.Assert(item != null);
+
+            if (!item.Closable)
+            {
+                return;
+            }
 
             PageTabItemManager.Close(item);
             if (IsActive(item))
