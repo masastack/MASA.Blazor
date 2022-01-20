@@ -583,3 +583,11 @@ code[class*=language-], pre[class*=language-] {
     flex: 1 1;
     width: 100%;
 }
+
+.m-page-tabs__content .m-list.m-list--dense {
+    padding: 4px 0;
+}
+
+.m-page-tabs__content .m-list-item.m-list-item--dense {
+    min-height: 30px
+}

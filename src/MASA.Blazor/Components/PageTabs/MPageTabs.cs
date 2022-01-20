@@ -45,7 +45,10 @@ namespace MASA.Blazor
         {
             get
             {
-                return Items.Where(PageTabItemManager.IsOpened).OrderBy(PageTabItemManager.OpenedTime).ToList();
+                return Items.Where(PageTabItemManager.IsOpened)
+                    .OrderBy(item => item.Closable)
+                    .ThenBy(PageTabItemManager.OpenedTime)
+                    .ToList();
             }
         }
 
@@ -113,12 +116,21 @@ namespace MASA.Blazor
                     });
                     attrs[nameof(BMenu.PositionX)] = MenuPosition.X;
                     attrs[nameof(BMenu.PositionY)] = MenuPosition.Y;
+                    attrs[nameof(MMenu.ContentClass)] = "m-page-tabs__content";
                 })
                 .Apply(typeof(BIcon), typeof(MIcon), attrs =>
                 {
                     var item = (PageTabItem)attrs.Data;
                     attrs[nameof(MIcon.OnClick)] = CreateEventCallback<MouseEventArgs>(args => Close(item));
                     attrs["__internal_stopPropagation_onclick"] = true;
+                })
+                .Apply(typeof(BList), typeof(MList), attrs =>
+                {
+                    attrs[nameof(MList.Dense)] = true;
+                })
+                .Apply(typeof(BListItem), typeof(MListItem), attrs =>
+                {
+                    attrs[nameof(MList.Dense)] = true;
                 });
         }
 
