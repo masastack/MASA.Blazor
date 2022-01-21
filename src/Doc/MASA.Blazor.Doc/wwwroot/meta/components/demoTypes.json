@@ -503,6 +503,7 @@
   "Demos.Components.Tables.children.DataTable.contents.Header",
   "Demos.Components.Tables.children.DataTable.contents.Item",
   "Demos.Components.Tables.children.DataTable.contents.SimpleCheckbox",
+  "Demos.Components.Tables.children.DataTable.misc.ComplexTypeProp",
   "Demos.Components.Tables.children.DataTable.misc.CRUDActions",
   "Demos.Components.Tables.children.DataTable.misc.EditDialog",
   "Demos.Components.Tables.children.DataTable.misc.ExpandableRow",
