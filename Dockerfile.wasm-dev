@@ -1,0 +1,11 @@
+FROM registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100_nodejs16_wasm_emsdk_ossutil AS base
+#ARG OSSCONFIG=""
+#ENV  OSSCONFIG ${OSSCONFIG}
+WORKDIR /app
+COPY . .
+RUN dotnet publish "./src/Doc/MASA.Blazor.Doc.WebAssembly/MASA.Blazor.Doc.WebAssembly.csproj" -c Release -o /app/publish 
+#RUN cd /app/publish && echo $OSSCONFIG | base64 --decode >>test.config &&/usr/local/bin/ossutil  cp  -rf wwwroot/  oss://masa-blazor-wasm/test/ --config-file test.config
+
+FROM caddy:alpine
+WORKDIR /app
+COPY --from=base /app/publish/wwwroot /usr/share/caddy/
