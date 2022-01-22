@@ -127,8 +127,10 @@ docker-prd:
     - linux-masa
   before_script:
     - docker login -u $CI_ALI_REGISTRY_USER -p $CI_ALI_REGISTRY_PASSWD $CI_ALI_REGISTRY_DOMAIN
-  only:
-    - tags
+  # only:
+  #   - tags
+  rules:
+    - if: "CI_COMMIT_TAG"
   script:
     - echo $CI_COMMIT_BRANCH $CI_COMMIT_TAG
     - echo $OSS_TEST |wc -L
