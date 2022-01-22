@@ -41,7 +41,6 @@ namespace MASA.Blazor
         [Parameter]
         public bool SoloInverted { get; set; }
 
-        public bool IsSolo => Solo || SoloInverted;
 
         [Parameter]
         public bool Flat { get; set; }
@@ -126,6 +125,8 @@ namespace MASA.Blazor
 
         [Inject]
         public Document Document { get; set; }
+
+        public bool IsSolo => Solo || SoloInverted;
 
         public bool IsBooted { get; set; } = true;
 
@@ -494,10 +495,12 @@ namespace MASA.Blazor
             await InputElement.FocusAsync();
         }
 
-        public virtual Task HandleOnChangeAsync(ChangeEventArgs args)
+        public virtual async Task HandleOnChangeAsync(ChangeEventArgs args)
         {
-            //Since we bind value with input event,we removed this
-            return Task.CompletedTask;
+            if (OnChange.HasDelegate)
+            {
+                await OnChange.InvokeAsync(InternalValue);
+            }
         }
 
         public virtual async Task HandleOnBlurAsync(FocusEventArgs args)

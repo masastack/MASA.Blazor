@@ -16,6 +16,15 @@ namespace MASA.Blazor
         [Parameter]
         public string BackgroundColor { get; set; }
 
+        [Parameter]
+        public bool Dense { get; set; }
+
+        [Parameter]
+        public StringNumber Height { get; set; }
+
+        [Parameter]
+        public EventCallback<TValue> OnChange { get; set; }
+
         public virtual string ComputedColor => IsDisabled ? "" : Color ?? (IsDark ? "white" : "primary");
 
         public virtual bool HasColor { get; }
@@ -47,16 +56,6 @@ namespace MASA.Blazor
                 return "";
             }
         }
-
-        [Parameter]
-        public bool Dense { get; set; }
-
-        [Parameter]
-        public StringNumber Height { get; set; }
-
-        [Parameter]
-        public EventCallback<TValue> OnChange { get; set; }
-
 
         protected virtual bool IsDirty
         {
@@ -177,18 +176,6 @@ namespace MASA.Blazor
                     attrs[nameof(MIcon.Disabled)] = IsDisabled;
                     attrs[nameof(MIcon.Light)] = Light;
                 });
-        }
-
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
-            //When use @bind-Value,ValueChanged can not be used
-            //While in this way,@bind-Value can work with OnChange
-            if (OnChange.HasDelegate)
-            {
-                ValueChanged = OnChange;
-            }
         }
     }
 }
