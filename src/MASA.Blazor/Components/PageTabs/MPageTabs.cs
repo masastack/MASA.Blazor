@@ -193,7 +193,7 @@ namespace MASA.Blazor
 
         protected Task HandleOnOnReloadAsync(MouseEventArgs args)
         {
-            PageTabItemManager.Close(MenuActiveItem);
+            PageTabItemManager.Reload(MenuActiveItem);
             NavigationManager.NavigateTo(MenuActiveItem.Url);
 
             return Task.CompletedTask;
