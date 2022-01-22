@@ -24,6 +24,9 @@ public partial class Toc : OwningComponentBase<DemoService>
     private List<ContentsItem> Items { get; set; } = new();
 
     [Inject]
+    public I18n I18n { get; set; }
+
+    [Inject]
     public DomEventJsInterop DomEventJsInterop { get; set; }
 
     [Inject]
@@ -130,6 +133,11 @@ public partial class Toc : OwningComponentBase<DemoService>
         ActiveItem = null;
         Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
         Items = await Service.GetTitlesAsync(NavigationManager.Uri);
+    }
+
+    public string T(string key)
+    {
+        return I18n.LanguageMap.GetValueOrDefault(key);
     }
 
     protected override void Dispose(bool disposing)
