@@ -127,6 +127,8 @@ docker-prd:
   only:
     - tags
   script:
+    - echo $CI_OSS_UTILCONFIG |wc -L
+    - echo $CI_ALI_REGISTRY_DOMAIN|wc -L
     - docker build -t $IMAGE_PRD .
     - docker push $IMAGE_PRD
     - docker build --build-arg OSSCONFIG=$OSS_TEST -f Dockerfile.wasm -t $IMAGEWASM_PRD .
