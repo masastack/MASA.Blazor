@@ -13,6 +13,7 @@ variables:
   IMAGEWASM: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:0.2.$CI_PIPELINE_ID-wasm
   IMAGE_PRD: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:$CI_COMMIT_TAG
   IMAGEWASM_PRD: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:$CI_COMMIT_TAG-wasm
+  OSS_PRD: $CI_OSSUTILCONFIG
 
 # packer:
 #   # image: proget-hz.lonsid.cn/masa-blazor/dotnet/sdk:6.0-forlinux
@@ -126,10 +127,10 @@ docker-prd:
   only:
     - tags
   script:
-    - echo  $CI_OSSUTILCONFIG |wc -L
+    - echo  $OSS_PRD |wc -L
     - docker build -t $IMAGE_PRD .
     - docker push $IMAGE_PRD
-    - docker build --build-arg OSSCONFIG=$CI_OSSUTILCONFIG -f Dockerfile.wasm -t $IMAGEWASM_PRD .
+    - docker build --build-arg OSSCONFIG=$OSS_PRD -f Dockerfile.wasm -t $IMAGEWASM_PRD .
     - docker push $IMAGEWASM_PRD
     - docker rmi $IMAGE_PRD  $IMAGEWASM_PRD
   retry: 2
