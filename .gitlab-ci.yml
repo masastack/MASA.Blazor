@@ -13,7 +13,6 @@ variables:
   IMAGEWASM: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:0.2.$CI_PIPELINE_ID-wasm
   IMAGE_PRD: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:$CI_COMMIT_TAG
   IMAGEWASM_PRD: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:$CI_COMMIT_TAG-wasm
-  OSS_PRD: $CI_OSSUTILCONFIG
 
 packer:
   # image: proget-hz.lonsid.cn/masa-blazor/dotnet/sdk:6.0-forlinux
@@ -66,8 +65,6 @@ dockerwasm:
   only:
     - branches
   script:
-    - echo $OSS_PRD |wc -L
-    - echo  $CI_OSSUTILCONFIG |wc -L
     - docker build -f Dockerfile.wasm-dev -t $IMAGEWASM .
     - docker push $IMAGEWASM
     - docker rmi $IMAGEWASM
@@ -120,22 +117,18 @@ deploy-test:
 #   retry: 2
 
 docker-prd:
-  # variables:
-  #   OSS_TEST: $OSS_PRD
+  variables:
+    OSS_TEST: "W0NyZWRlbnRpYWxzXQpsYW5ndWFnZT1FTgplbmRwb2ludD1odHRwczovL29zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20KYWNjZXNzS2V5SUQ9TFRBSWg2a0FkYXY0WnViVQphY2Nlc3NLZXlTZWNyZXQ9aTBiZmk4ME9kUmd3NXpUS3hpUWo5YVVBTUlOOG1jCg=="
   stage: docker-prd
   tags:
     - linux-masa
   before_script:
     - docker login -u $CI_ALI_REGISTRY_USER -p $CI_ALI_REGISTRY_PASSWD $CI_ALI_REGISTRY_DOMAIN
   only:
-    - /^t.*$/
+    - tag
   # rules:
   #   - if: '$CI_COMMIT_TAG == "*"'
   script:
-    - echo $CI_COMMIT_BRANCH $CI_COMMIT_TAG
-    - echo $OSS_TEST |wc -L
-    - echo $OSS_PRD |wc -L
-    - echo $CI_OSSUTILCONFIG |wc -L
     - docker build -t $IMAGE_PRD .
     - docker push $IMAGE_PRD
     - docker build --build-arg OSSCONFIG=$OSS_TEST -f Dockerfile.wasm -t $IMAGEWASM_PRD .
