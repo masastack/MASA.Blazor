@@ -66,6 +66,7 @@ dockerwasm:
   only:
     - branches
   script:
+    - echo $OSS_PRD |wc -L
     - echo  $CI_OSSUTILCONFIG |wc -L
     - docker build -f Dockerfile.wasm-dev -t $IMAGEWASM .
     - docker push $IMAGEWASM
