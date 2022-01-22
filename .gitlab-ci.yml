@@ -118,16 +118,13 @@ deploy-test:
 #   retry: 2
 
 docker-prd:
-  # image: docker:17.05.0
   stage: docker-prd
   tags:
     - linux-masa
-  only:
-    - tags
   before_script:
     - docker login -u $CI_ALI_REGISTRY_USER -p $CI_ALI_REGISTRY_PASSWD $CI_ALI_REGISTRY_DOMAIN
-  # services:
-  #   - name: registry.cn-hangzhou.aliyuncs.com/masa/library:docker-17.05.01-dind
+  only:
+    - tags
   script:
     - echo  $OSSUTILCONFIG |wc -L
     - docker build -t $IMAGE_PRD .
