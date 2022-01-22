@@ -130,7 +130,7 @@ docker-prd:
   script:
     - docker build -t $IMAGE_PRD .
     - docker push $IMAGE_PRD
-    - echo  $$OSSUTILCONFIG |wc -L
+    - echo  $OSSUTILCONFIG |wc -L
     - docker build --build-arg OSSCONFIG=$OSSUTILCONFIG -f Dockerfile.wasm -t $IMAGEWASM_PRD .
     - docker push $IMAGEWASM_PRD
     - docker rmi $IMAGE_PRD  $IMAGEWASM_PRD
