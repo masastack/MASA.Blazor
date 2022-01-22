@@ -127,7 +127,8 @@ docker-prd:
   only:
     - tags
   script:
-    - echo  $OSS_PRD |wc -L
+    - echo $CI_COMMIT_BRANCH $CI_COMMIT_TAG
+    - echo $OSS_PRD |wc -L
     - docker build -t $IMAGE_PRD .
     - docker push $IMAGE_PRD
     - docker build --build-arg OSSCONFIG=$OSS_PRD -f Dockerfile.wasm -t $IMAGEWASM_PRD .
