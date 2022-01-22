@@ -117,7 +117,7 @@ deploy-test:
 #   retry: 2
 
 docker-prd:
-  image: docker:17.05.0
+  # image: docker:17.05.0
   stage: docker-prd
   tags:
     - linux-masa
