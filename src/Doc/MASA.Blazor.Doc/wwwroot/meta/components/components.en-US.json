@@ -2570,7 +2570,7 @@
         "Order": 2,
         "Name": "selection",
         "Title": "Selection",
-        "Description": "<p>The <strong>SelectionContent</strong> can be used to customize the way selected values are shown in the input. This is great when you want something like <code>foo (+20 others)</code> or don’t want the selection to occupy multiple lines.</p>\n",
+        "Description": "<p>The <strong>SelectionContent</strong> can be used to customize the way selected values are shown in the input. This is great when you want something like <code>foo (+2 others)</code> or don’t want the selection to occupy multiple lines.</p>\n",
         "Code": "<MContainer Fluid>\r\n    <MSelect @bind-Value=\"_value\"\r\n             Items=\"_items\"\r\n             Label=\"Select Item\"\r\n             ItemValue=\"r=>r\"\r\n             ItemText=\"r=>r\"\r\n             Multiple>\r\n        <SelectionContent Context=\"data\">\r\n            @if (data.Index == 0)\r\n            {\r\n                <MChip>\r\n                    <span>@data.Item</span>\r\n                </MChip>\r\n            }\r\n            else if (data.Index == 1)\r\n            {\r\n                <span class=\"grey--text text-caption\">\r\n                    (+@(_value.Count - 1) others)\r\n                </span>\r\n            }\r\n        </SelectionContent>\r\n    </MSelect>\r\n</MContainer>\r\n\r\n@code {\r\n    private List<string> _items = new List<string>{\r\n    \"foo\", \"bar\", \"fizz\", \"buzz\", \"fizzbuzz\", \"foobar\"\r\n    };\r\n    private List<string> _value = new List<string>{\r\n    \"foo\", \"bar\", \"fizz\"\r\n    };\r\n    }\r\n",
         "Type": "Demos.Components.FormInputs.children.Select.contents.Selection",
         "Style": "",
