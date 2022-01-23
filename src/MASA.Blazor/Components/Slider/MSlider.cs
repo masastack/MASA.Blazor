@@ -409,7 +409,14 @@ namespace MASA.Blazor
             var offset = Min % StepNumeric;
 
             var newValue = Math.Round((value - offset) / StepNumeric) * StepNumeric + offset;
-            return Math.Round(Math.Min(newValue, Max), decimals);
+            var rounded = Math.Round(Math.Min(newValue, Max), decimals);
+            if (rounded == 0)
+            {
+                //Avoid -0
+                rounded = Math.Abs(rounded);
+            }
+
+            return rounded;
         }
 
         protected virtual bool IsThumbActive(int index)
