@@ -102,12 +102,12 @@ namespace MASA.Blazor
 
         public void UnRegisterStep(MStepperStep stepperStep)
         {
-            Steps.RemoveAll(step => step != stepperStep);
+            Steps.Remove(stepperStep);
         }
 
         public void UnRegisterContent(MStepperContent stepperContent)
         {
-            Content.RemoveAll(content => content != stepperContent);
+            Content.Remove(stepperContent);
         }
 
         public void UpdateView()
