@@ -169,7 +169,7 @@ namespace MASA.Blazor
                     attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.HideDetails)] = (StringBoolean)true;
                     //TODO:auto
                     attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.MinWidth)] = (StringNumber)"75px";
-                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.OnChange)] = EventCallback.Factory.Create<int>(this, HandleOnChangeItemsPerPageAsync);
+                    attrs[nameof(MSelect<DataItemsPerPageOption, int, int>.ValueChanged)] = EventCallback.Factory.Create<int>(this, HandleOnChangeItemsPerPageAsync);
                 })
                 .Apply<BButton, MButton>()
                 .Apply<BIcon, MIcon>();
