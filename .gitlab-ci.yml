@@ -87,7 +87,7 @@ deploy-test:
   when: manual
 
 packer-prd:
-  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100-preview.7-nodejs14.16.1
+  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100_nodejs14_wasm_v1
   stage: packer-prd
   only:
     - tags 
@@ -109,7 +109,6 @@ packer-prd:
 
 docker-prd:
   variables:
-    OSS_TEST: "W0NyZWRlbnRpYWxzXQpsYW5ndWFnZT1FTgplbmRwb2ludD1odHRwczovL29zcy1jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20KYWNjZXNzS2V5SUQ9TFRBSWg2a0FkYXY0WnViVQphY2Nlc3NLZXlTZWNyZXQ9aTBiZmk4ME9kUmd3NXpUS3hpUWo5YVVBTUlOOG1jCg=="
   stage: docker-prd
   tags:
     - linux-masa
