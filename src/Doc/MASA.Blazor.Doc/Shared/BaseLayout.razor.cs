@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace MASA.Blazor.Doc.Shared
 {
-    public partial class BaseLayout : IDisposable
+    public partial class BaseLayout : IDisposable, IHandleEvent
     {
         private string _searchBorderColor = "#00000000";
         private string _languageIcon;
@@ -52,6 +52,9 @@ namespace MASA.Blazor.Doc.Shared
         [Inject]
         public I18nConfig I18nConfig { get; set; }
 
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; }
+
         public bool IsChinese { get; set; }
 
         public bool Drawer { get; set; } = true;
@@ -82,6 +85,11 @@ namespace MASA.Blazor.Doc.Shared
             I18n.SetLang(lang);
         }
 
+        async Task IHandleEvent.HandleEventAsync(EventCallbackWorkItem item, object? arg)
+        {
+            await item.InvokeAsync(arg);
+        }
+
         protected override void OnInitialized()
         {
             string lang = I18nConfig.Language ?? CultureInfo.CurrentCulture.Name;
@@ -108,7 +116,7 @@ namespace MASA.Blazor.Doc.Shared
             else if (e.Location != Navigation.BaseUri)
                 SelectTab = 1;
 
-            if (isShowMiniLogo != _isShowMiniLogo || selectTab != _selectTab)
+            if ((isShowMiniLogo != _isShowMiniLogo || selectTab != _selectTab) && MasaBlazor.Breakpoint.Mobile)
             {
                 _ = InvokeAsync(StateHasChanged);
             }

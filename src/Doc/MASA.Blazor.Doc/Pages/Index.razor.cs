@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MASA.Blazor.Doc.Pages
 {
-    public partial class Index : IDisposable
+    public partial class Index 
     {
         private Recommend[] _recommends = { };
 

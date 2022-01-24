@@ -4,6 +4,7 @@ using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using System.Globalization;
 using MASA.Blazor.Doc.Models;
+using MASA.Blazor.Doc.Services;
 
 namespace MASA.Blazor.Doc.Pages
 {
@@ -174,6 +175,9 @@ namespace MASA.Blazor.Doc.Pages
 
         [CascadingParameter(Name = "Lang")]
         public bool IsChinese { get; set; }
+
+        [Inject]
+        public DemoService Service { get; set; }
 
         private ApiModel _api;
 

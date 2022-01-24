@@ -3,6 +3,7 @@ using MASA.Blazor.Doc.Models;
 using MASA.Blazor.Doc.Utils;
 using System.Globalization;
 using BlazorComponent.I18n;
+using MASA.Blazor.Doc.Services;
 
 namespace MASA.Blazor.Doc.Pages
 {
@@ -28,6 +29,9 @@ namespace MASA.Blazor.Doc.Pages
 
         [Inject]
         public I18nConfig I18nConfig { get; set; }
+
+        [Inject]
+        public DemoService Service { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {

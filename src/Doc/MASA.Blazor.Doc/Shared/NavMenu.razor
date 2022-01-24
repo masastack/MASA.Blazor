@@ -83,7 +83,6 @@
 </MList>
 
 @code {
-
     [Parameter]
     public DemoMenuItemModel[] MenuItems { get; set; } = { };
 
@@ -97,7 +96,6 @@
     {
         Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
         MenuItems = await Service.GetMenuAsync();
-        await Service.InitializeDemos();
     }
 
     string FormatComponentTitle(DemoMenuItemModel model)

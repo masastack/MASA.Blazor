@@ -50,6 +50,11 @@ namespace MASA.Blazor.Doc.Pages
         [Inject]
         public DemoService Service { get; set; }
 
+        protected override async Task OnInitializedAsync()
+        {
+            await Service.InitializeDemos();
+        }
+
         protected override async Task OnParametersSetAsync()
         {
             if (Name.Contains('?'))

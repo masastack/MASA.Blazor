@@ -1,6 +1,7 @@
 ﻿using BlazorComponent.I18n;
 using MASA.Blazor.Doc.Highlight;
 using MASA.Blazor.Doc.Models;
+using MASA.Blazor.Doc.Services;
 using MASA.Blazor.Doc.Shared;
 using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
@@ -32,6 +33,9 @@ namespace MASA.Blazor.Doc.Pages
 
         [Parameter]
         public string FileName { get; set; }
+
+        [Inject]
+        public DemoService Service { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
