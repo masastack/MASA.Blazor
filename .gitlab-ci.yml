@@ -84,7 +84,6 @@ deploy-test:
     - kubectl set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n test-masa-blazor
     - kubectl set image deployment/masa-blazor-docs-wasm masa-blazor-docs-wasm=$IMAGEWASM -n test-masa-blazor
   retry: 2
-  when: manual
 
 packer-prd:
   image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100_nodejs14_wasm_v1
