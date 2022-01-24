@@ -164,7 +164,7 @@ namespace MASA.Blazor
                 Value = false;
 
                 await InvokeStateHasChangedAsync();
-                await Task.Delay(16);
+                await Task.Delay(BROWSER_RENDER_INTERVAL);
 
                 await AfterShowContent();
                 Value = true;

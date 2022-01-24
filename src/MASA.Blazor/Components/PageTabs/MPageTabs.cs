@@ -162,7 +162,7 @@ namespace MASA.Blazor
             //We will change this when menu been refactored
             MenuActiveItem = item;
             IsMenuActive = false;
-            await Task.Delay(16);
+            await Task.Delay(BROWSER_RENDER_INTERVAL);
 
             MenuPosition = (clientX, clientY);
             IsMenuActive = true;

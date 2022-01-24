@@ -1,15 +1,12 @@
 ﻿using BlazorComponent;
 using BlazorComponent.I18n;
-using MASA.Blazor.Doc.Services;
-using MASA.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using System.Globalization;
-using System.Text.RegularExpressions;
 
 namespace MASA.Blazor.Doc.Shared
 {
-    public partial class BaseLayout : IDisposable, IHandleEvent
+    public partial class BaseLayout : IDisposable
     {
         private string _searchBorderColor = "#00000000";
         private string _languageIcon;
@@ -83,11 +80,6 @@ namespace MASA.Blazor.Doc.Shared
         {
             _languageIcon = $"{lang}.png";
             I18n.SetLang(lang);
-        }
-
-        async Task IHandleEvent.HandleEventAsync(EventCallbackWorkItem item, object? arg)
-        {
-            await item.InvokeAsync(arg);
         }
 
         protected override void OnInitialized()

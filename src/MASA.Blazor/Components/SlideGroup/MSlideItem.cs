@@ -8,11 +8,5 @@ namespace MASA.Blazor
         public MSlideItem() : base(GroupType.SlideGroup)
         {
         }
-
-        protected override async Task ToggleAsync()
-        {
-            await base.ToggleAsync();
-            await (ItemGroup as BSlideGroup)?.SetWidths(Value);
-        }
     }
 }
