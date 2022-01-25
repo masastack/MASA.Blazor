@@ -23,4 +23,8 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="MASA.Blazor96_96.png" Pack="true" PackagePath=""/>
+	</ItemGroup>
 </Project>
