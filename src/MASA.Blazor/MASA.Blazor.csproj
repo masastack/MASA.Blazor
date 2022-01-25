@@ -7,7 +7,7 @@
 		<RepositoryType>gitlab</RepositoryType>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<PackageIcon>MASA.Blazor32_32.png</PackageIcon>
+		<PackageIcon>MASA.Blazor96_96.png</PackageIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -22,13 +22,5 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Update="MASA.Blazor32_32.png">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
 	</ItemGroup>
 </Project>
