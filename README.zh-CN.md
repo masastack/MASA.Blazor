@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<p align="center">
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<p align="center">
   <a href="https://masa-blazor-docs-dev.lonsid.cn" target="_blank">
     <img alt="MASA Blazor Logo" width="150" src="./imgs/logo.png">
   </a>
@@ -149,6 +149,11 @@ services.AddMasaBlazor();
 
 ## 本地开发
 
+### 开发环境搭建
+
+- Install [.NET SDK 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
+- Install [Visual Studio Code](https://code.visualstudio.com/Download/) or [Visual Studio 2022](https://docs.microsoft.com/en-us/visualstudio/releases/2022/release-notes)
+
 ### 克隆代码
 
 ```shell
@@ -163,6 +168,10 @@ git clone git@github.com:BlazorComponent/BlazorComponent.git
 cd Doc/MASA.Blazor.Doc.Server
 dotnet run
 ```
+
+### 访问
+
+推荐使用 chrome 或 edge 访问 `http://localhost:5000/`
 
 
 

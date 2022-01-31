@@ -148,6 +148,11 @@ services.AddMasaBlazor();
 
 ## Local development
 
+### Development environment setup
+
+- Install [.NET SDK 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
+- Install [Visual Studio Code](https://code.visualstudio.com/Download/) or [Visual Studio 2022](https://docs.microsoft.com/en-us/visualstudio/releases/2022/release-notes)
+
 ### Clone code
 
 ```shell
@@ -162,6 +167,10 @@ git clone git@github.com:BlazorComponent/BlazorComponent.git
 cd Doc/MASA.Blazor.Doc.Server
 dotnet run
 ```
+
+### Visit
+
+Recommended use chrome or edge to visit `http://localhost:5000/`
 
 
 
