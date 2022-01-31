@@ -23,9 +23,14 @@ English| [简体中文](./README.zh-CN.md)
 
 Provide a standard basic component library based on Material design specifications and BlazorComponent's interactive capabilities. Provides preset components for standard scenarios such as layout, frame standard, Loading, and global exception handling. Starting from more practical scenarios, to meet the needs of more users and scenarios, and to minimize the time cost of developers. Shorten the development cycle and improve development efficiency. And provide a set of examples of Web solutions - [MASA Blazor Pro](https://github.com/BlazorComponent/MASA.Blazor.Pro) has a variety of common scenes and preset layouts and other exciting content.
 
+
+
 ## Why choose MASA Blazor?
 
 MASA Blazor is based on the Material design specification, and each component is carefully designed, with modularity, responsiveness and excellent performance. MASA Blazor is regularly maintained and upgraded by a professional full-time technical team, efficient response speed, diversified solutions, long-term support, and enterprise-level support. At present, it has been used in several well-known companies, and the follow-up MASA Stack product series will continue to be used. In addition to ensuring the quality of the project, it can also continue to add new components and functions. In addition to providing developers with many mid- and Taiwan-based open source projects, MASA Stack, one of its most basic components, MASA Blazor, also hopes to be the most practical component library.
+
+
+
 ## Feature
 
 - Rich components: Contains the basic components of Vuetify 1:1 restoration, as well as many practical preset components and deep integration functions of .Net, including three linkages of Url, breadcrumbs, navigation, advanced search, i18n, etc.
@@ -35,6 +40,8 @@ MASA Blazor is based on the Material design specification, and each component is
 - Active community encouragement: users participate in real-time interaction, make contributions to join us, and build the most open open source community
 - Long-term support: full-time team maintenance, long-term support, and enterprise-level support
 - Choice of well-known companies: This technology framework has been chosen by many well-known companies, and the MASA Stack product line will continue to be used in the future, and new functions will continue to be added
+
+
 
 
 # Getting started
@@ -86,7 +93,7 @@ dotnet run
 
 
 
-### Existing Project
+### Existing project
 
 * Install Nuget package 
 
@@ -137,6 +144,27 @@ services.AddMasaBlazor();
 
 > See more ：[https://blazor.masastack.com/](https://blazor.masastack.com/ "https://blazor.masastack.com/")
 
+
+
+## Local development
+
+### Clone code
+
+```shell
+git clone git@github.com:BlazorComponent/MASA.Blazor.git
+cd MASA.Blazor/src
+git clone git@github.com:BlazorComponent/BlazorComponent.git
+```
+
+### Run doc server
+
+```shell
+cd Doc/MASA.Blazor.Doc.Server
+dotnet run
+```
+
+
+
 # Related resources
 
 - [Blazor official document](https://docs.microsoft.com/en-us/aspnet/core/blazor/?WT.mc_id=DT-MVP-5004174)
@@ -149,10 +177,14 @@ services.AddMasaBlazor();
 - [Exercise-data binding and events ](https://docs.microsoft.com/en-us/learn/modules/build-blazor-webassembly-visual-studio-code/7-exercise-razor-binding?WT.mc_id=DT-MVP-5004174)
 - [Summarize](https://docs.microsoft.com/en-us/learn/modules/build-blazor-webassembly-visual-studio-code/8-summary?WT.mc_id=DT-MVP-5004174)
 
+
+
 # Related projects 
 
 - [BlazorComponent（Unstyled underlying component framework）](https://github.com/BlazorComponent/BlazorComponent)
 - [MASA Blazor Pro（Contains examples of various business scenarios）](https://github.com/BlazorComponent/MASA.Blazor.Pro)
+
+
 
 ## Supported browsers
 
@@ -179,12 +211,16 @@ services.AddMasaBlazor();
 
 > Due to WebAssembly restriction, Blazor WebAssembly doesn't support IE browser, but Blazor Server supports IE 11† with additional polyfills. See official documentation
 
+
+
 ## How to contribute 
 
-1. Clone
+1. Fork & Clone
 2. Create Feature_xxx branch
 3. Commit with commit message, like `feat:add MButton`
 4. Create Pull Request
+
+
 
 ## Contributors
 
@@ -193,6 +229,8 @@ Thanks to all the friends who have contributed to this project.
 <a href="https://github.com/BlazorComponent/MASA.Blazor/graphs/contributors"> 
     <img src="https://contrib.rocks/image?repo=BlazorComponent/MASA.Blazor" /> 
 </a>
+
+
 
 ## Interactive 
 
@@ -204,9 +242,13 @@ QQ group | WX public account| WX Customer Service
 
 The Digital Flash technical team is an efficient, stable and innovative team. The team adheres to the original intention of enriching the Blazor ecosystem, and it is the pursuit of the Digital Flash technical team to continue to work hard to bring a better experience to the developers. Thank you for your support and use.
 
+
+
 ## Code of conduct 
 
 This project adopts the code of conduct defined in the "Contributors Convention" to clarify the expected behavior of our community. For more information, see  [MASA Stack Community Code of Conduct](https://github.com/masastack/community/blob/main/CODE-OF-CONDUCT.md).
+
+
 
 ## License
 
