@@ -380,6 +380,11 @@ namespace MASA.Blazor
 
             if (firstRender)
             {
+                //OnAfterRender doesn't indicate DOM ready
+                //So we should wait a little time
+                //We may remove this when dialog been refactored
+                await Task.Delay(16 * 3);
+
                 var tasks = new Task[3];
 
                 tasks[0] = SetLabelWidthAsync();
