@@ -1,7 +1,7 @@
 ﻿@inject IJSRuntime Js;
 
 <MSheet Color="@Color" Dark="IsDark" Rounded="Rounded" Class="@($"app-code overflow-hidden {Class}")" Outlined>
-    <HighlightedCode CanLoad Code="@Code" Language="@Language"></HighlightedCode>
+    <HighlightedCode @key="Code" CanLoad Code="@Code" Language="@Language"></HighlightedCode>
 
     <MButton Class="m-btn--copy mr-n2 mt-n2"
              Style="background-color:inherit"
