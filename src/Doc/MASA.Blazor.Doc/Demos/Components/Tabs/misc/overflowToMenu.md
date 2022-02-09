@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-You can use a menu to hold additional tabs, swapping them out on the fly.
+您可以使用菜单来保存其他选项卡，并在运行时将其交换。
 
 ## en-US
 

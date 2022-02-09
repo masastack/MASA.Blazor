@@ -197,9 +197,9 @@ MASA.Blazor 配备了一个使用 flexbox 构建的 12 格网格系统。 网格
   来完全去除。
 - `MSpacer`：`MSpacer` 是一个基本而又通用的间隔组件，用于分配父子组件之间的剩余宽度。 当一个 `MSpacer` 放置在子组件之前或之后时，组件将推到其容器的左右两侧。 当多个组件之间使用多个 `MSpacer` 时，剩余的宽度将均匀地分布在每个 spacer 之间。
 
-## Helper Classes
+## 辅助类
 
-**FillHeight** applies `height: 100%` to an element. When applied to `MContainer` it will also `align-items: center`.
+**FillHeight**将`height:100%`应用于元素。当应用于`MContainer`时，它还包括`align items:center`。
 
 ## 注意
 

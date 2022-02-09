@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-The background image of a `MAppBar` can fade on scroll. Use the **FadeImgOnScroll** property for this.
+`MAppBar`的背景图像可以在滚动时淡出。使用**FadeImgOnScroll**属性进行此操作。
 
 ## en-US
 

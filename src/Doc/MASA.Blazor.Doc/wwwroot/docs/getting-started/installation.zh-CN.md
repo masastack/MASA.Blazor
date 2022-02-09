@@ -92,10 +92,9 @@ $ dotnet add package MASA.Blazor
 <link href="_content/MASA.Blazor/css/masa-blazor.css" rel="stylesheet" />
 <link href="_content/MASA.Blazor/css/masa-extend-blazor.css" rel="stylesheet" />
 <!--icon file,import need to use-->
-<link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@6.x/css/materialdesignicons.min.css"
-rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
-<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" />
+<link href="https://cdn.masastack.com/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
 <!--js(should lay the end of file)-->
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```

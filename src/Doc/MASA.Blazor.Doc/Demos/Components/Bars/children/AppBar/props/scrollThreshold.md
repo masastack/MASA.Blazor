@@ -7,8 +7,7 @@ title:
 
 ## zh-CN
 
-`MAppBar` can have scroll threshold. It will start reacting to scroll only after defined via **ScrollThreshold**
-property amount of pixels.
+`MAppBar`可以有滚动阈值。只有在通过**ScrollThreshold**属性定义像素量后，它才会开始对滚动做出反应。
 
 ## en-US
 

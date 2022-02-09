@@ -42,7 +42,7 @@ In addition to providing developers with many middle- and Taiwan-based open sour
 
 ## Advantage:
 
-- Rich components: Contains basic components of MASA Blazor 1:1 restoration, as well as many practical preset components and deep integration of .Net functions, including Url, breadcrumbs, navigation three linkages, advanced search, i18n, etc.
+- Rich components: Contains basic components of Vuetify 1:1 restoration, as well as many practical preset components and deep integration of .Net functions, including Url, breadcrumbs, navigation three linkages, advanced search, i18n, etc.
 - UI design language: modern design style, excellent UI multi-end experience design.
 - Professional example: MASA Blazor Pro provides preset layouts for a variety of common scenes.
 - Easy to get started: rich and detailed getting started documents, free video tutorials (in production).
