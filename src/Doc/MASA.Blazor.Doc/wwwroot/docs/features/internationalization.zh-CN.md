@@ -115,44 +115,19 @@ void Example()
     var home = I18n.T("Home");//获取键值Home对应语言的值，此方法调用将返回"首页";
 }
 ```
-### 如果您想在浏览器端保存用户的i18n语言配置来达到每次用户访问都可以使用之前的语言配置效果，则可增加如下操作
+#### 如果您想在浏览器端保存用户的i18n语言配置来达到每次用户访问都可以使用之前的语言配置效果，则改为如下操作
 
 <br/>
 
-- 添加 MasaI18n 中间件：
+ ```c#
+ @inject I18nConfig I18nConfig
+ @inject I18n I18n
 
-```c#
-app.UseMasaI18n();
-```
-
-- 在`_Host.cshtml`中为`App.razor`组件添加`I18nConfig`参数
-
-```c#
-@inject I18nConfig I18nConfig
-
-<component type="typeof(App)" param-I18nConfig="@I18nConfig" render-mode="ServerPrerendered" />
-```
-
-- 在`App.razor`组件中同步`I18nConfig`数据（在您访问blazor项目时，由于http请求是在建立blazor连接之前就已经Response（如果您在App.razor设置的是ServerPrerendered预呈现，则此次http请求会执行一次呈现Blazor的代码，将会顺带Response静态的视图给客户端,在blazor建立SignalR连接后服务端会主动再次呈现一次），所以建立blazor后容器创建的实例与http请求时创建的不是同一个实例（注意：不包含预呈现，预呈现时将会是同一个实例），因此需要两边的实例同步下数据）
-
-```c#
-@inject I18n I18n
-@inject I18nConfig ScopI18nConfig
-
-[Parameter]
-public I18nConfig I18nConfig { get; set; }
-
-protected override void OnInitialized()
+void Example()
 {
-    ScopI18nConfig.Bind(I18nConfig);
-    I18n.SetLang(I18nConfig.Language);
+    I18nConfig.Language = "en-US";//将语言切换成en-US
+    var home = I18n.T("Home");//获取键值Home对应语言的值，此方法调用将返回"Home";
 }
-```
-
-- 当用户切换语言时，将值赋值给`I18nConfig.Language`。比如用户将语言设置为en-US：
-
-```c#
-I18nConfig.Language = "en-US";
 ```
 
 ### 在Blazor WebAssembly项目中支持MasaI18n
@@ -189,25 +164,5 @@ await builder.Services.AddMasaI18nForWasmAsync($"builder.HostEnvironment.BaseAdd
 
 > 注意：`languageConfig.json`必须与i18n资源文件在同一目录下
 
-### 如果您想在浏览器端保存用户的i18n语言配置来达到每次用户访问都可以使用之前的语言配置效果，program.cs代码改为如下：
+- I18n使用示例请参考Blazor Server模式，使用方式与Blazor Server模式一致
 
-<br/>
-
-```c#
-var builder = WebAssemblyHostBuilder.CreateDefault(args);
-await builder.Services.AddMasaI18nForWasmAsync($"builder.HostEnvironment.BaseAddress/{i18n config file path}");
-builder.RootComponents.Add(typeof(App), "#app", await builder.Services.GetMasaI18nParameterAsync());
-
-await builder.Build().RunAsync();
-```
-
-- 当用户切换语言时，将值赋值给`I18nConfig.Language`。
-
-```c#
-@inject I18nConfig 18nConfig
-
-void SwitchLanguage(string language)
-{
-    I18nConfig.Language = language;
-}
-```

@@ -1,6 +1,3 @@
-@using BlazorComponent.I18n
-@inject I18nConfig ScopI18nConfig
-
 <Microsoft.AspNetCore.Components.Routing.Router AppAssembly="@typeof(MainLayout).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="routeData" DefaultLayout="@typeof(MainLayout)" />
@@ -11,13 +8,3 @@
         </LayoutView>
     </NotFound>
 </Microsoft.AspNetCore.Components.Routing.Router>
-
-@code {
-    [Parameter]
-    public I18nConfig I18nConfig { get; set; }
-
-    protected override void OnInitialized()
-    {
-        ScopI18nConfig.Bind(I18nConfig);
-    }
-}

@@ -21,8 +21,6 @@ namespace MASA.Blazor.Doc.Server
             services.AddMasaBlazor();
             services.AddMasaI18nForServer("wwwroot/locale");
 
-            services.AddHttpContextAccessor();
-
             services.AddMasaBlazorDocs(Configuration["ASPNETCORE_URLS"]?.Replace("0.0.0.0", "127.0.0.1") ?? "http://localhost:5000");
         }
 
@@ -37,8 +35,6 @@ namespace MASA.Blazor.Doc.Server
             {
                 app.UseExceptionHandler("/Error");
             }
-
-            app.UseMasaI18n();
 
             app.UseStaticFiles();
 

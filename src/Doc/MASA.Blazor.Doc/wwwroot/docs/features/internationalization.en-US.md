@@ -115,45 +115,20 @@ void Example()
 }
 ```
 
-### If you want to save the user's i18n language configuration on the browser side so that the previous language configuration effect can be used every time the user visits, you can add the following operations
+#### If you want to save the user's i18n language configuration on the browser side to achieve the effect of using the previous language configuration every time the user accesses, then do the following instead
 
 <br/>
 
-- Add MasaI18n middleware:
-
-```c#
-app.UseMasaI18n();
-```
-
-- Add the `I18nConfig` parameter to the `App.razor` component in `_Host.cshtml`
-
-```c#
+````c#
 @inject I18nConfig I18nConfig
-
-<component type="typeof(App)" param-I18nConfig="@I18nConfig" render-mode="ServerPrerendered" />
-```
-
-- Synchronize the `I18nConfig` data in the `App.razor` component (when you access the blazor project, because the http request is the response before the blazor connection is established (if you set the ServerPrerendered pre-render in App.razor, this time The http request will execute the code that presents Blazor once, and the static view of the Response will be given to the client by the way. After the SignalR connection is established in blazor, the server will take the initiative to present it again), so the instance created by the container after the establishment of blazor is the same as the one created during the http request It is not the same instance (note: pre-rendering is not included, it will be the same instance during pre-rendering), so the data needs to be synchronized between the two instances)
-
-```c#
 @inject I18n I18n
-@inject I18nConfig ScopI18nConfig
 
-[Parameter]
-public I18nConfig I18nConfig { get; set; }
-
-protected override void OnInitialized()
+void Example()
 {
-    ScopI18nConfig.Bind(I18nConfig);
-    I18n.SetLang(I18nConfig.Language);
+    I18nConfig.Language = "en-US";//Switch the language to en-US
+    var home = I18n.T("Home");//Get the value of the language corresponding to the key value Home, this method call will return "Home";
 }
-```
-
-- When the user switches languages, assign the value to `I18nConfig.Language`. For example, the user sets the language to en-US:
-
-```c#
-I18nConfig.Language = "en-US";
-```
+````
 
 ### Support MasaI18n in Blazor WebAssembly project
 
@@ -189,25 +164,4 @@ await builder.Services.AddMasaI18nForWasmAsync($"{builder.HostEnvironment.BaseAd
 
 > Note: `languageConfig.json` must be in the same directory as the i18n resource file
 
-### If you want to save the user's i18n language configuration on the browser side so that the previous language configuration effect can be used every time the user visits, the program.cs code is changed to the following:
-
-<br/>
-
-```c#
-var builder = WebAssemblyHostBuilder.CreateDefault(args);
-await builder.Services.AddMasaI18nForWasmAsync($"builder.HostEnvironment.BaseAddress/{i18n config file path}");
-builder.RootComponents.Add(typeof(App), "#app", await builder.Services.GetMasaI18nParameterAsync());
-
-await builder.Build().RunAsync();
-```
-
-- When the user switches languages, assign the value to `I18nConfig.Language`.
-
-```c#
-@inject I18nConfig 18nConfig
-
-void SwitchLanguage(string language)
-{
-    I18nConfig.Language = language;
-}
-```
+- For an example of using I18n, please refer to Blazor Server mode, the usage method is the same as Blazor Server mode
