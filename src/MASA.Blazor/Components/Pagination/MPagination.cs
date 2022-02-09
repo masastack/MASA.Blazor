@@ -134,14 +134,40 @@ namespace MASA.Blazor
                 return Enumerable.Empty<StringNumber>();
             }
 
-            var maxLength = Math.Min(Math.Min(Math.Max(0, TotalVisible == null ? Length : TotalVisible.ToInt32()), Length), _maxButtons == 0 ? Length : Math.Max(0, _maxButtons));
+            int Min(int v1, int v2, int v3)
+            {
+                var min = Math.Min(v1, v2);
+                return Math.Min(min, v3);
+            }
+
+            int Max(StringNumber v1, StringNumber v2, int v)
+            {
+                int max;
+
+                if (v1 == null || v2 == null)
+                {
+                    max = 0;
+                }
+                else
+                {
+                    max = Math.Max(v1.ToInt32(), v2.ToInt32());
+                }
+
+                //Use v to ensure max always greater than 0
+                return max == 0 ? v : max;
+            }
+
+            var maxLength = Min(
+                Max(0, TotalVisible, Length),
+                Max(0, _maxButtons, Length),
+                Length);
+
             if (Length <= maxLength)
             {
                 return Range(1, Length);
             }
 
             var items = new List<StringNumber>();
-
             var even = maxLength % 2 == 0 ? 1 : 0;
             var left = Convert.ToInt32(Math.Floor(maxLength / 2M));
             var right = Length - left + 1 + even;
