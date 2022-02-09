@@ -79,7 +79,6 @@ namespace MASA.Blazor.Doc.Shared
         private void ChangeLanguage(string lang)
         {
             _languageIcon = $"{lang}.png";
-            I18n.SetLang(lang);
         }
 
         protected override void OnInitialized()
