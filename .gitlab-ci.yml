@@ -37,7 +37,7 @@ packer:
 docker:
   stage: docker
   tags:
-    - linux-masa
+    - linux-shell
   before_script:
     - docker login -u $CI_ALI_REGISTRY_USER -p $CI_ALI_REGISTRY_PASSWD $CI_ALI_REGISTRY_DOMAIN
   only:
@@ -53,7 +53,7 @@ docker:
 dockerwasm:
   stage: docker
   tags:
-    - linux-masa
+    - linux-shell
   before_script:
     - docker login -u $CI_ALI_REGISTRY_USER -p $CI_ALI_REGISTRY_PASSWD $CI_ALI_REGISTRY_DOMAIN
   only:
