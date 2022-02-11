@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100_nodejs14_wasm_v1 AS base
+FROM registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100_nodejs16_wasm_emsdk_ossutil AS base
 #ARG OSSCONFIG=""
 #ENV  OSSCONFIG ${OSSCONFIG}
 WORKDIR /app
