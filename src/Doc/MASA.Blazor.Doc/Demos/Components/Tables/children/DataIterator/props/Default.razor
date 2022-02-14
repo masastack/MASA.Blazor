@@ -21,7 +21,7 @@
                             <MCardTitle>
                                 <h4>@item.Name</h4>
                             </MCardTitle>
-                            <MSwitch Value="expanded" OnChange="expand" Label="@(expanded?"Expanded":"Closed")" Class="pl-4 mt-0"></MSwitch>
+                            <MSwitch Value="expanded" ValueChanged="expand" Label="@(expanded?"Expanded":"Closed")" Class="pl-4 mt-0"></MSwitch>
                             <MDivider></MDivider>
                             @if (expanded)
                             {
