@@ -109,7 +109,7 @@
     }
 
     [Inject]
-    public HttpClient HttpClient { get; set; }
+    public IHttpClientFactory HttpClientFactory { get; set; }
 
     public async Task Search(string val)
     {
@@ -119,7 +119,8 @@
         }
 
         _isLoading = true;
-        var items = await HttpClient.GetFromJsonAsync<List<Currency>>("https://api.coingecko.com/api/v3/coins/list");
+        var httpClient = HttpClientFactory.CreateClient("doc");
+        var items = await httpClient.GetFromJsonAsync<List<Currency>>("/_content/MASA.Blazor.Doc/list.json");
         _items = items.Take(20).ToList();//TODO:Wait for MSelect update
         _isLoading = false;
     }

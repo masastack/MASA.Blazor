@@ -15,7 +15,7 @@
   "BlazorWebAssembly": "New blazor webassembly capabilities in .net 6",
   "Conf": ".NET Conf",
   "RichComponents": "Rich components",
-  "RichComponentsDesc": "In addition to 1:1 restoration with the basic components of MASA Blazor, there are also many useful preset components ",
+  "RichComponentsDesc": "In addition to 1:1 restoration with the basic components of Vuetify, there are also many useful preset components ",
   "UIDesignLanguage": "UI design language",
   "UIDesignLanguageDesc": "The design style is modern and the UI experience is excellent",
   "LongTermSupport": "Long term support",

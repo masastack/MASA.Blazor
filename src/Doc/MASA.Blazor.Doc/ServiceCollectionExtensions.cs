@@ -20,6 +20,10 @@ namespace Microsoft.Extensions.DependencyInjection
                 c.BaseAddress = new Uri(baseUri);
             });
             services.AddScoped<IPrismHighlighter, PrismHighlighter>();
+            services.AddHttpClient("doc", httpClient =>
+            {
+                httpClient.BaseAddress = new Uri(baseUri);
+            });
 
             return services;
         }

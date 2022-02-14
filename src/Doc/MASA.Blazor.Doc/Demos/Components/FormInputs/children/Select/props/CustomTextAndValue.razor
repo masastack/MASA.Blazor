@@ -10,6 +10,7 @@
             <MSelect TItem="Model"
                      TItemValue="string"
                      TValue="string"
+                     @bind-Value="_select"
                      Hint="@($"{_selected.State}, {_selected.Abbr}")"
                      Items="_states"
                      ItemText="r=>r.State"
@@ -29,7 +30,7 @@
         public string State { get; set; }
         public string Abbr { get; set; }
     }
-
+    private string _select = "FL";
     private Model _selected = new Model()
         {
             State = "Florida",
