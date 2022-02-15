@@ -64,8 +64,6 @@ namespace MASA.Blazor
         [Parameter]
         public string Color { get; set; }
 
-        
-
         [Parameter]
         public StringNumber Elevation { get; set; }
 
@@ -176,7 +174,7 @@ namespace MASA.Blazor
             get
             {
                 return values => IsMultiple && values.Count > 1 ? $"{values.Count} selected" : values.Count > 0 ? (Type == DatePickerType.Date ? $"{values[0].DayOfWeek.ToString()[..3]}, {(Landscape ? "<br>" : "")}{DateFormatters.Month(values[0].Month)[..3]} {values[0].Day}" : $"{DateFormatters.Month(values[0].Month)}"
-                ) : "-";
+                ) : "&nbsp;";
             }
         }
 
@@ -243,14 +241,14 @@ namespace MASA.Blazor
                 .Watch<TValue>(nameof(Value), val =>
                 {
                     var multipleValue = WrapInArray(val);
-                    TableDate = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now.AddMonths(1)));
+                    TableDate = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now));
                 });
 
             InternalActivePicker = ActivePicker ?? Type;
 
             //Init TableDate
             var multipleValue = WrapInArray(Value);
-            TableDate = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now.AddMonths(1)));
+            TableDate = multipleValue.Count > 0 ? multipleValue[multipleValue.Count - 1] : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now));
         }
 
         private IList<DateOnly> WrapInArray(TValue value)
