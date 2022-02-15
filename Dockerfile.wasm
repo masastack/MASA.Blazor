@@ -10,5 +10,4 @@ RUN cd /app/publish && echo $OSSCONFIG | base64 --decode >test.config &&/usr/loc
 
 FROM caddy:alpine
 WORKDIR /app
-COPY Caddyfile /etc/caddy/
 COPY --from=base /app/publish/wwwroot /usr/share/caddy/
