@@ -8,5 +8,5 @@ RUN dotnet publish "./src/Doc/MASA.Blazor.Doc.WebAssembly/MASA.Blazor.Doc.WebAss
 
 FROM caddy:alpine
 WORKDIR /app
-RUN sed -i 'N;13 a try_files {path} /index.html/*' /etc/caddy/Caddyfile
+COPY Caddyfile /etc/caddy/ 
 COPY --from=base /app/publish/wwwroot /usr/share/caddy/
