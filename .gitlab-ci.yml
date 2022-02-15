@@ -130,6 +130,5 @@ deploy-prd:
     - tags
   script:
     - kubectl set image deployment/masa-blazor masa-blazor=$IMAGE_PRD -n masa-blazor
-    - kubectl set image deployment/masa-blazor-wasm masa-blazor-wasm=$IMAGEWASM_PRD -n masa-blazor
   retry: 2
   when: manual  
