@@ -83,10 +83,12 @@ namespace MASA.Blazor
             var matchCurrentUrlItem = Items.FirstOrDefault(MatchCurrentUrl);
             if (matchCurrentUrlItem != null)
             {
-                var internalItem = InternalItems.FirstOrDefault(IsActive);
+                var activeUrl = (matchCurrentUrlItem.Match == PageTabsMatch.Prefix && matchCurrentUrlItem.Target == PageTabsTarget.Self) ? NavigationManager.ToAbsoluteUri(matchCurrentUrlItem.Url).AbsoluteUri : CurrentUrl;
+
+                var internalItem = InternalItems.FirstOrDefault(item => item.Url == activeUrl);
                 if (internalItem == null)
                 {
-                    internalItem = new PageTabItem(matchCurrentUrlItem.Name, CurrentUrl, matchCurrentUrlItem.Icon ?? "", matchCurrentUrlItem.Closable);
+                    internalItem = new PageTabItem(matchCurrentUrlItem.Name, activeUrl, matchCurrentUrlItem.Icon ?? "", matchCurrentUrlItem.Closable, matchCurrentUrlItem.Match, matchCurrentUrlItem.Target);
                     InternalItems.Add(internalItem);
                 }
 
@@ -223,7 +225,7 @@ namespace MASA.Blazor
 
         protected bool IsActive(PageTabItem item)
         {
-            return item.Url == CurrentUrl;
+            return item.Url == CurrentUrl || (item.Match == PageTabsMatch.Prefix && item.Target == PageTabsTarget.Self && UrlHelper.MatchPrefix(item.Url, CurrentUrl));
         }
 
         protected Task HandleOnOnReloadAsync(MouseEventArgs args)
