@@ -41,7 +41,6 @@ namespace MASA.Blazor
         [Parameter]
         public bool SoloInverted { get; set; }
 
-
         [Parameter]
         public bool Flat { get; set; }
 
@@ -535,20 +534,18 @@ namespace MASA.Blazor
                 _badInput = null;
                 InternalValue = val;
 
-                _shouldRender = true;
                 if (OnInput.HasDelegate)
                 {
                     await OnInput.InvokeAsync(InternalValue);
-                }
-                else
-                {
-                    StateHasChanged();
                 }
             }
             else
             {
                 _badInput = args.Value.ToString();
             }
+
+            _shouldRender = true;
+            StateHasChanged();
         }
 
         protected override bool ShouldRender()
