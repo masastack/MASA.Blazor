@@ -32,7 +32,7 @@ namespace MASA.Blazor
 
         bool IPageTabs.IsActive(PageTabItem item) => IsActive(item);
 
-        void IPageTabs.Close(PageTabItem item) => Close(item);
+        void IPageTabs.Close(PageTabItem item) => CloseTab(item);
 
         Task IPageTabs.HandleOnOnReloadAsync(MouseEventArgs args) => HandleOnOnReloadAsync(args);
 
@@ -46,7 +46,7 @@ namespace MASA.Blazor
         {
             get
             {
-                return Items.Where(PageTabItemManager.IsOpened)
+                return InternalItems.Where(PageTabItemManager.IsOpened)
                     .OrderBy(item => item.Closable)
                     .ThenBy(PageTabItemManager.OpenedTime)
                     .ToList();
@@ -55,7 +55,7 @@ namespace MASA.Blazor
 
         protected bool NoActiveItem => !ComputedItems.Any(IsActive);
 
-        protected string CurrentUrl => NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        protected string CurrentUrl => NavigationManager.Uri;
 
         protected bool IsMenuActive { get; set; }
 
@@ -63,25 +63,59 @@ namespace MASA.Blazor
 
         protected PageTabItem MenuActiveItem { get; set; }
 
+        protected IList<PageTabItem> InternalItems { get; set; } = new List<PageTabItem>();
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
 
-            //REVIEW: Is this ok? 
             HideSlider = true;
             NavigationManager.LocationChanged += OnLocationChanged;
         }
 
         private void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
-            Open(e.Location);
+            OpenMatchCurrentUrlTab();
         }
 
-        private void Open(string uri)
+        private void OpenMatchCurrentUrlTab()
         {
-            var url = NavigationManager.ToBaseRelativePath(uri);
-            var item = Items.FirstOrDefault(item => item.Url == url);
+            var matchCurrentUrlItem = Items.FirstOrDefault(MatchCurrentUrl);
+            if (matchCurrentUrlItem != null)
+            {
+                var internalItem = InternalItems.FirstOrDefault(IsActive);
+                if (internalItem == null)
+                {
+                    internalItem = new PageTabItem(matchCurrentUrlItem.Name, CurrentUrl, matchCurrentUrlItem.Icon ?? "", matchCurrentUrlItem.Closable);
+                    InternalItems.Add(internalItem);
+                }
 
+                OpenTab(internalItem);
+            }
+        }
+
+        private bool MatchCurrentUrl(PageTabItem item)
+        {
+            var url = NavigationManager.ToAbsoluteUri(item.Url).AbsoluteUri;
+            var matched = false;
+
+            switch (item.Match)
+            {
+                case PageTabsMatch.Prefix:
+                    matched = UrlHelper.MatchPrefix(url, CurrentUrl);
+                    break;
+                case PageTabsMatch.All:
+                    matched = UrlHelper.Match(url, CurrentUrl);
+                    break;
+                default:
+                    break;
+            }
+
+            return matched;
+        }
+
+        private void OpenTab(PageTabItem item)
+        {
             if (item != null && !PageTabItemManager.IsOpened(item))
             {
                 PageTabItemManager.Open(item);
@@ -134,7 +168,7 @@ namespace MASA.Blazor
                 .Apply(typeof(BIcon), typeof(MIcon), attrs =>
                 {
                     var item = (PageTabItem)attrs.Data;
-                    attrs[nameof(MIcon.OnClick)] = CreateEventCallback<MouseEventArgs>(args => Close(item));
+                    attrs[nameof(MIcon.OnClick)] = CreateEventCallback<MouseEventArgs>(args => CloseTab(item));
                     attrs["__internal_stopPropagation_onclick"] = true;
                 })
                 .Apply(typeof(BList), typeof(MList), attrs =>
@@ -153,7 +187,8 @@ namespace MASA.Blazor
 
             if (firstRender)
             {
-                Open(NavigationManager.Uri);
+                //By default,the tab matched current url should be opened
+                OpenMatchCurrentUrlTab();
             }
         }
 
@@ -168,7 +203,7 @@ namespace MASA.Blazor
             IsMenuActive = true;
         }
 
-        protected void Close(PageTabItem item)
+        protected void CloseTab(PageTabItem item)
         {
             Debug.Assert(item != null);
 
@@ -181,7 +216,7 @@ namespace MASA.Blazor
             if (IsActive(item))
             {
                 //Active item has been closed,goto last or default
-                var lastItem = ComputedItems.FirstOrDefault();
+                var lastItem = ComputedItems.LastOrDefault();
                 NavigationManager.NavigateTo(lastItem?.Url ?? "");
             }
         }
@@ -209,7 +244,7 @@ namespace MASA.Blazor
                 var items = ComputedItems.Take(endIndex);
                 foreach (var item in items)
                 {
-                    Close(item);
+                    CloseTab(item);
                 }
             }
 
@@ -226,7 +261,7 @@ namespace MASA.Blazor
                 var items = ComputedItems.Skip(startIndex).Take(endIndex - startIndex);
                 foreach (var item in items)
                 {
-                    Close(item);
+                    CloseTab(item);
                 }
             }
 
