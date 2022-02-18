@@ -1,7 +1,7 @@
 ﻿{
   "Title": "MTimePickerTitle",
   "Components": [
-    "Timelines"
+    "Time pickers"
   ],
   "Props": [
     {

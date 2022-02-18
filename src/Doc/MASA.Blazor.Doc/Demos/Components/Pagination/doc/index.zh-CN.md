@@ -5,7 +5,7 @@ type: 分页
 title: Pagination
 cols: 1
 related:
-  - /components/data-iterator
+  - /components/data-iterators
   - /components/data-tables
   - /components/lists
 ---

@@ -1,7 +1,7 @@
 ﻿{
   "Title": "MMain",
   "Components": [
-    "Grid system"
+    "Application"
   ],
   "Props": [
     {

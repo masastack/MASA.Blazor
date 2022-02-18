@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Todo...
+Verify the collection properties and add [enumerable validation]

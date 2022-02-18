@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Todo...
+The internal `MForm` component makes it easy to add validation to form input. All input components have a * * rule * * prop, which accepts different types of group functions, Boolean values and strings. These allow you to specify that the input is invalid__ or__ Conditions. Whenever the input value is changed, each function in the array will receive a new value and each array element will be scored. If the function or array element returns false or string, and the verification fails, the string value will be displayed as an error message.

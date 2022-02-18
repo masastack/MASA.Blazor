@@ -6,7 +6,7 @@ title: Toolbars
 cols: 1
 related:
   - /components/buttons
-  - /components/footer
+  - /components/footers
   - /components/tabs
 ---
 

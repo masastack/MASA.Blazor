@@ -8,7 +8,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TextField.svg
 related:
   - /components/forms
   - /components/selects
-  - /components/textarea
+  - /components/textareas
 ---
 
 文本框组件用于收集用户提供的信息。

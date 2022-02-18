@@ -4,6 +4,10 @@ type: Buttons
 title: Buttons
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg
+related:
+  - /components/button-groups
+  - /components/icons
+  - /components/floating-action-buttons
 ---
 
 The `MButton` component replaces the standard html button with a material design theme and a multitude of options. Any color

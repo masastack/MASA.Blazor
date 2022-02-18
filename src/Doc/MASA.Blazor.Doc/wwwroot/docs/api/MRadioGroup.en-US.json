@@ -1,7 +1,7 @@
 ﻿{
   "Title": "MRadioGroup",
   "Components": [
-    "Radio groups"
+    "Radio"
   ],
   "Props": [
     {

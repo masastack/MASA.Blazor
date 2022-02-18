@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-使用[外边距工具类](/stylesandanimations/flex#auto-margins)可以强行把同级列分开。
+使用[外边距工具类](/stylesandanimations/flex)可以强行把同级列分开。
 
 ## en-US
 
-Using the [auto margin helper utilities](/stylesandanimations/flex#auto-margins) you can force sibling columns away from each other.
+Using the [auto margin helper utilities](/stylesandanimations/flex) you can force sibling columns away from each other.

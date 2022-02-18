@@ -4,6 +4,10 @@ type: Grid
 title: Grid system
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg
+related:
+  - /stylesandanimations/flex                      
+  - /features/breakpoints
+  - /stylesandanimations/display-helpers
 ---
 
 MASA.Blazor comes with a 12 point grid system built using flexbox. The grid is used to create specific layouts within an application’s content. It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations, xs, sm, md, lg and xl. 

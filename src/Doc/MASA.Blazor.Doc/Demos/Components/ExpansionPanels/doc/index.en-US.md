@@ -4,6 +4,10 @@ type: ExpansionPanels
 title: Expansion panels
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
+related:
+  - /components/cards
+  - /components/data-tables
+  - /components/lists
 ---
 
 The `MExpansionPanel` component is useful for reducing vertical space with large amounts of information. The default

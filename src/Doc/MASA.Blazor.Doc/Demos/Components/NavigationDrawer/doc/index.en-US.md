@@ -4,6 +4,10 @@ type: NavigationDrawer
 title: Navigation drawers
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg
+related:
+  - /components/lists
+  - /components/icons
+  - /getting-started/wireframes
 ---
 
 `MNavigationDrawer` is a component used to navigate applications. It is usually wrapped and used in the `MCard` element.

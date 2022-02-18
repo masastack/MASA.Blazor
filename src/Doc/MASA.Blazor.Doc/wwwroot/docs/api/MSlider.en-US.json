@@ -1,7 +1,8 @@
 ﻿{
   "Title": "MSlider",
   "Components": [
-    "Sliders"
+    "Sliders",
+    "Range sliders"
   ],
   "Props": [
     {

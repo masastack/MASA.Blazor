@@ -1,7 +1,8 @@
 ﻿{
   "Title": "MChip",
   "Components": [
-    "Chips"
+    "Chips",
+    "Chip groups"
   ],
   "Props": [
     {

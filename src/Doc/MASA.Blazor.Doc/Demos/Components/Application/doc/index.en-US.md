@@ -100,9 +100,9 @@ These values are automatically updated when you add and remove components with t
 You can access these values by referencing the **Application** property.
 
 ```c#
- [Inject] public GlobalConfig GlobalConfig { get; set; }
+ [Inject] public MasaBlazor MasaBlazor { get; set; }
  
- Console.WriteLine(GlobalConfig.Application.Footer); // 60
+ Console.WriteLine(MasaBlazor.Application.Footer); // 60
 ```
 
 <!--alert:error-->

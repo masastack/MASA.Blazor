@@ -3,6 +3,10 @@ category: Components
 type: ListItemGroup
 title: List item groups
 cols: 1
+related:
+  - /components/lists
+  - /components/item-groups
+  - /components/cards
 ---
 
 The `MListItemGroup` provides the ability to create a group of selectable `MListItem`. The `MListItemGroup` component

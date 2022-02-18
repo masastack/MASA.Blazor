@@ -4,6 +4,10 @@ type: Autocompletes
 title: Autocompletes
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Autocomplete.svg
+related:
+  - /components/combobox
+  - /components/forms
+  - /components/selects
 ---
 
 The MAutocomplete component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.

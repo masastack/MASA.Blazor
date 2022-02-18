@@ -2,7 +2,7 @@
 order: 1
 title:
   zh-CN: 自定义选项的文本和值
-  en-US: CustomTextAndValue
+  en-US: Custom text and value
 ---
 
 ## zh-CN

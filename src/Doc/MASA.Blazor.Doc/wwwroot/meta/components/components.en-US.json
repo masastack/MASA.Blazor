@@ -2,7 +2,9 @@
   {
     "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>、<strong>Info</strong>、<strong>Warning</strong> 和 <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays. Many parts of an alert such as <strong>Border</strong>, <strong>Icon</strong>, and <strong>Color</strong> can also be customized to fit almost any situation.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.3546167+08:00",
     "DemoList": [
       {
@@ -152,6 +154,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/components/icons",
+      "/components/dialogs"
+    ],
     "Title": "Alerts",
     "Type": "Alerts",
     "FullTitle": "Alerts"
@@ -163,7 +170,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MApp\">MApp</a></li>\n<li><a href=\"/api/MMain\">MMain</a></li>\n</ul>\n<!--alert:error-->\n<p>In order for your application to work properly, you must wrap it in a <code>MApp</code> component. This component is required for ensuring \nproper cross-browser compatibility. MASA Blazor doesn't support multiple isolated MASA Blazor instances on a page. <code>MApp</code> can exist \nanywhere inside the body of your app, however, there should only be one and it must be the parent of ALL MASA Blazor components.</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p>If you are using multiple layouts in your application you will need to ensure each root layout file that will contain MASA Blazor \ncomponents has a MApp at the root of its template.</p>\n<!--/alert:info-->\n",
       "Default application markup": "\n<p>This is an example of the default application markup for MASA Blazor. You can place your layout elements anywhere, \nas long as you apply the app property. The key component to making your page content work together with layout elements \nis <code>MMain</code>. The <code>MMain</code> component will be dynamically sized depending upon the structure of your designated app components. \nYou can use combinations of any or all of the above components including <code>MBottomNavigation</code>.</p>\n<pre><code class=\"language-html\">&lt;!-- MainLayout.razor --&gt;\n@inherits LayoutComponentBase\n\n&lt;MApp&gt;\n  &lt;MNavigationDrawer App&gt;\n    &lt;!-- --&gt;\n  &lt;/MNavigationDrawer&gt;\n\n  &lt;MAppBar App&gt;\n    &lt;!-- --&gt;\n  &lt;/MAppBar&gt;\n\n  &lt;!-- Sizes your content based upon application components --&gt;\n  &lt;MMain&gt;\n    &lt;!-- Provides the application the proper gutter --&gt;\n    &lt;MContainer Fluid&gt;\n        @Body\n    &lt;/MContainer&gt;\n  &lt;/MMain&gt;\n\n  &lt;MFooter App&gt;\n    &lt;!-- --&gt;\n  &lt;/MFooter&gt;\n&lt;/MApp&gt;\n</code></pre>\n<!--alert:info-->\n<p>Applying the <strong>App</strong> prop automatically applies position: <strong>fixed</strong> to the layout element. If your application calls for an absolute element, \nyou can overwrite this functionality by using the <strong>Absolute</strong> prop.</p>\n<!--/alert:info-->\n",
       "Application components": "\n<p>Below is a list of all the components that support the <strong>App</strong> prop and can be used as layout elements in your application. \nThese can be mixed and matched and only <strong>one</strong> of each particular component should exist at any time. You can, however, \nswap them out and the layout will accommodate.</p>\n<p>Each of these application components have a designated location and priority that it affects within the layout system.</p>\n<ul>\n<li><a href=\"/components/app-bars\">MAppBar</a>: Is always placed at the top of an application with a lower priority than <code>MSystemBar</code>.</li>\n<li>MBottomNavigation: Is always placed at the bottom of an application with a higher priority than <code>MFooter</code>.</li>\n<li><a href=\"/components/footers\">MFooter</a>: Is always placed at the bottom of an application with a lower priority than <code>MBottomNavigation</code>.</li>\n<li><a href=\"/components/navigation-drawers\">MNavigationDrawer</a>: Can be placed on the left or right side of an application and can be configured to sit next to or below <code>MAppBar</code>.</li>\n<li><a href=\"/components/system-bars\">MSystemBar</a>: Is always placed at the top of an application with higher priority than  <code>MAppBar</code>.</li>\n</ul>\n",
-      "Application service": "\n<p>The application service is used to configure your MASA Blazor layout. It communicates with the <code>MMain</code> component so that it's able to properly size the application content. \nIt has a number of properties that can be accessed:</p>\n<pre><code class=\"language-c#\">double Bar { get; }\ndouble Bottom { get; }\ndouble Footer { get; }\ndouble InsetFooter { get; }\ndouble Left { get; }\ndouble Right { get; }\ndouble Top { get; }\n</code></pre>\n<p>These values are automatically updated when you add and remove components with the <strong>App</strong> prop. They are NOT editable and exist in a READONLY state. \nYou can access these values by referencing the <strong>Application</strong> property.</p>\n<pre><code class=\"language-c#\"> [Inject] public GlobalConfig GlobalConfig { get; set; }\n \n Console.WriteLine(GlobalConfig.Application.Footer); // 60\n</code></pre>\n<!--alert:error-->\n<p>In order for your application to work properly, you must wrap it in a <code>MApp</code> component.</p>\n<!--/alert:error-->\n"
+      "Application service": "\n<p>The application service is used to configure your MASA Blazor layout. It communicates with the <code>MMain</code> component so that it's able to properly size the application content. \nIt has a number of properties that can be accessed:</p>\n<pre><code class=\"language-c#\">double Bar { get; }\ndouble Bottom { get; }\ndouble Footer { get; }\ndouble InsetFooter { get; }\ndouble Left { get; }\ndouble Right { get; }\ndouble Top { get; }\n</code></pre>\n<p>These values are automatically updated when you add and remove components with the <strong>App</strong> prop. They are NOT editable and exist in a READONLY state. \nYou can access these values by referencing the <strong>Application</strong> property.</p>\n<pre><code class=\"language-c#\"> [Inject] public MasaBlazor MasaBlazor { get; set; }\n \n Console.WriteLine(MasaBlazor.Application.Footer); // 60\n</code></pre>\n<!--alert:error-->\n<p>In order for your application to work properly, you must wrap it in a <code>MApp</code> component.</p>\n<!--/alert:error-->\n"
     },
     "LastWriteTime": "0001-01-01T00:00:00",
     "DemoList": [],
@@ -177,7 +184,9 @@
   {
     "Desc": "<p>The <code>MResponsive</code> component can be used to fix any section to a specific aspect ratio</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.3566126+08:00",
     "DemoList": [
       {
@@ -195,6 +204,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/cards",
+      "/components/sheets",
+      "/components/images"
+    ],
     "Title": "Aspect ratios",
     "Type": "AspectRatios",
     "FullTitle": "Aspect ratios"
@@ -202,7 +216,9 @@
   {
     "Desc": "<p>The MAvatar component is usually used to display user profile pictures. This component allows you to dynamically add and set the border radius of response images, icons and text. ** The tile ** variable can be used to display an avatar with no border radius.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.3604912+08:00",
     "DemoList": [
       {
@@ -287,6 +303,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Avatars.svg",
     "Cols": 1,
+    "Related": [
+      "/components/badges",
+      "/components/icons",
+      "/components/lists"
+    ],
     "Title": "Avatars",
     "Type": "Avatars",
     "FullTitle": "Avatars"
@@ -294,7 +315,9 @@
   {
     "Desc": "<p>The MBadge component overwrites or subscribes to an icon like an avatar or text on the content to highlight the user's information or just draw attention to a specific element. The content in the badge usually contains numbers or icons.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.3634834+08:00",
     "DemoList": [
       {
@@ -356,6 +379,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/avatars",
+      "/components/icons",
+      "/components/toolbars"
+    ],
     "Title": "Badges",
     "Type": "Badges",
     "FullTitle": "Badges"
@@ -363,7 +391,9 @@
   {
     "Desc": "<p>The component is used to send intermittent messages of 1-2 actions to the user. It has two variables, single-line and multi-line (implied). These icons can be used with your messages and actions.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.3664752+08:00",
     "DemoList": [
       {
@@ -436,6 +466,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/alerts",
+      "/components/icons",
+      "/components/snackbars"
+    ],
     "Title": "Banners",
     "Type": "Banners",
     "FullTitle": "Banners"
@@ -443,7 +478,11 @@
   {
     "Desc": "<p>appbar component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MAppBar\">MAppBar</a></li>\n<li><a href=\"/api/MAppBarNavIcon\">MAppBarNavIcon</a></li>\n<li><a href=\"/api/MAppBarTitle\">MAppBarTitle</a></li>\n</ul>\n",
+      "�������": "\n<ul>\n<li><code>MAppBarNavIcon</code>��A stylized icon button component created specifically for use with [MToolbar] (/components/toolbars) and 'MAppBar'. The hamburger menu is displayed on the left side of the toolbar, which is usually used to control the status of the navigation drawer. The default slot can be used to customize the icons and functions of this component.</li>\n<li><code>MAppBarTitle</code>��The modified [MToolbarTitle] (/components/toolbars) component is used in conjunction with the * * shrinkonscroll * * attribute. On the small screen, * * MToolbarTitle**\nWill be truncated, but this component uses absolute positioning when expanding to make its contents visible. We do not recommend that you use the 'MAppbarTitle' component without using the * * shrinkonscroll * * attribute. It's really because the resize event was added to this component and a lot of additional calculations were done.</li>\n</ul>\n",
+      "ע������": "\n<!--alert:warning-->\n<p>When 'MButton' with <strong>icon</strong> attribute is used inside 'MToolbar' and 'MAppbar', they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap the buttons in any container, such as' div ', you need to apply a negative margin to the container in order to align them correctly.</p>\n<!--/alert:warning-->\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.3734607+08:00",
     "DemoList": [
       {
@@ -582,6 +621,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/components/icons",
+      "/components/toolbars"
+    ],
     "Title": "App bars",
     "Type": "AppBars",
     "FullTitle": "App bars"
@@ -589,7 +633,9 @@
   {
     "Desc": "<p>The MSystemBar component can be used to display status to the user. It looks like an Android system bar and can contain icons, spaces, and some text.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.3759449+08:00",
     "DemoList": [
       {
@@ -651,6 +697,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/components/toolbars",
+      "/components/tabs"
+    ],
     "Title": "System bars",
     "Type": "SystemBars",
     "FullTitle": "System bars"
@@ -658,7 +709,10 @@
   {
     "Desc": "<p>The <code>MToolbar</code> component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site\nnavigation. The toolbar component works great in conjunction with <a href=\"/components/navigation-drawers\"><strong>MNavigationDrawer</strong></a> and <a href=\"/components/cards\"><strong>MCard</strong></a>.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
+      "ע��": "\n<!--alert:warning-->\n<p>When 'MButton' with 'icon' prop is used inside 'MToolbar' and 'MAppbar', they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap your buttons in any container, such as' div ', you need to apply a negative margin to the container for proper alignment.</p>\n<!--/alert:warning-->\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.3822109+08:00",
     "DemoList": [
       {
@@ -799,7 +853,7 @@
     "Cols": 1,
     "Related": [
       "/components/buttons",
-      "/components/footer",
+      "/components/footers",
       "/components/tabs"
     ],
     "Title": "Toolbars",
@@ -809,7 +863,9 @@
   {
     "Desc": "<p>The Border component can add an extra border to anything.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.3832083+08:00",
     "DemoList": [
       {
@@ -838,6 +894,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/cards",
+      "/components/lists",
+      "/components/radio"
+    ],
     "Title": "Borders",
     "Type": "Border",
     "FullTitle": "Borders"
@@ -922,6 +983,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/components/navigation-drawers",
+      "/components/icons"
+    ],
     "Title": "Breadcrumbs",
     "Type": "Breadcrumbs",
     "FullTitle": "Breadcrumbs"
@@ -1083,6 +1149,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg",
     "Cols": 1,
+    "Related": [
+      "/components/button-groups",
+      "/components/icons",
+      "/components/floating-action-buttons"
+    ],
     "Title": "Buttons",
     "Type": "Buttons",
     "FullTitle": "Buttons"
@@ -1091,7 +1162,8 @@
     "Desc": "<p>The MCard component is a versatile component that can be used for anything from a panel to a static image. The card component has numerous helper components to make markup as easy as possible. Components that have no listed options use MASA Blazor functional component option for faster rendering and serve as markup sugar to make building easier.</p>\n",
     "Order": 0,
     "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n"
+      "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
+      "�������": "\n<ul>\n<li><code>MCardActions</code>:A container used to place actions for cards, such as [MButton] (/components/buttons) or [MMenu] (/components/menu). Use a special margin on the button at the same time\nSo that they match other card content areas.</li>\n<li><code>MCardSubtitle</code>:Provide default <strong>font size</strong> and <strong>fill</strong> for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n<li><code>MCardText</code>:It is mainly used for <strong>text content</strong> in cards. Apply padding to the text and reduce its font size to. 875rem.</li>\n<li><code>MCardTitle</code>:Provide default font size and padding for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n</ul>\n"
     },
     "LastWriteTime": "2021-12-21T10:23:43.4779762+08:00",
     "DemoList": [
@@ -1232,6 +1304,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Cards.svg",
     "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/components/images",
+      "/stylesandanimations/text-and-typography"
+    ],
     "Title": "Cards",
     "Type": "Cards",
     "FullTitle": "Cards"
@@ -1239,7 +1316,9 @@
   {
     "Desc": "<p>The <code>MChip</code> component is used to convey small pieces of information. Using the close property, the chip becomes\ninteractive, allowing user interaction. This component is used by the <a href=\"/components/chip-groups\">MChipGroup</a> for advanced selection options.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.406848+08:00",
     "DemoList": [
       {
@@ -1412,6 +1491,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chips.svg",
     "Cols": 1,
+    "Related": [
+      "/components/avatars",
+      "/components/icons",
+      "/components/selects"
+    ],
     "Title": "Chips",
     "Type": "Chips",
     "FullTitle": "Chips"
@@ -1419,7 +1503,9 @@
   {
     "Desc": "<p>The <code>Dialog</code> component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.4118292+08:00",
     "DemoList": [
       {
@@ -1536,6 +1622,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/components/cards",
+      "/components/menus"
+    ],
     "Title": "Dialogs",
     "Type": "Dialogs",
     "FullTitle": "Dialogs"
@@ -1543,7 +1634,9 @@
   {
     "Desc": "<p>The MDivider component is used to separate sections of lists or layouts.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.4148034+08:00",
     "DemoList": [
       {
@@ -1606,6 +1699,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Dividers.svg",
     "Cols": 1,
+    "Related": [
+      "/components/lists",
+      "/components/navigation-drawers",
+      "/components/toolbars"
+    ],
     "Title": "Dividers",
     "Type": "Dividers",
     "FullTitle": "Dividers"
@@ -1783,6 +1881,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Cols": 1,
+    "Related": [
+      "/components/cards",
+      "/components/data-tables",
+      "/components/lists"
+    ],
     "Title": "Expansion panels",
     "Type": "ExpansionPanels",
     "FullTitle": "Expansion panels"
@@ -1790,7 +1893,9 @@
   {
     "Desc": "<p>The MFooter component is used to display public information that users may want to access from any page in the website.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.4247931+08:00",
     "DemoList": [
       {
@@ -1852,6 +1957,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/grid-system",
+      "/components/buttons",
+      "/components/toolbars"
+    ],
     "Title": "Footers",
     "Type": "Footers",
     "FullTitle": "Footers"
@@ -1958,6 +2068,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Autocomplete.svg",
     "Cols": 1,
+    "Related": [
+      "/components/combobox",
+      "/components/forms",
+      "/components/selects"
+    ],
     "Title": "Autocompletes",
     "Type": "Autocompletes",
     "FullTitle": "Autocompletes"
@@ -1965,7 +2080,9 @@
   {
     "Desc": "<p>The <code>MCascader</code> component is used for multiple select link.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.4327763+08:00",
     "DemoList": [
       {
@@ -2016,6 +2133,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/treeview",
+      "/components/forms",
+      "/components/selects"
+    ],
     "Title": "Cascaders",
     "Type": "Cascaders",
     "FullTitle": "Cascaders"
@@ -2098,6 +2220,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/switches",
+      "/components/forms",
+      "/components/text-fields"
+    ],
     "Title": "Checkboxes",
     "Type": "Checkboxes",
     "FullTitle": "Checkboxes"
@@ -2105,7 +2232,9 @@
   {
     "Desc": "<p>The <code>MFileInput</code>  component is a specialized input that provides a clean interface for selecting files, \nshowing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.4422509+08:00",
     "DemoList": [
       {
@@ -2234,6 +2363,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/FileInput.svg",
     "Cols": 1,
+    "Related": [
+      "/components/text-fields",
+      "/components/forms",
+      "/components/icons"
+    ],
     "Title": "File inputs",
     "Type": "FileInput",
     "FullTitle": "File inputs"
@@ -2241,14 +2375,16 @@
   {
     "Desc": "<p>When it comes to form validation, MASA Blazor has a multitude of integrations and baked in functionality.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.4446381+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "basic",
         "Title": "Usage",
-        "Description": "<p>Todo...</p>\n",
+        "Description": "<p>The internal <code>MForm</code> component makes it easy to add validation to form input. All input components have a * * rule * * prop, which accepts different types of group functions, Boolean values and strings. These allow you to specify that the input is invalid__ or__ Conditions. Whenever the input value is changed, each function in the array will receive a new value and each array element will be scored. If the function or array element returns false or string, and the verification fails, the string value will be displayed as an error message.</p>\n",
         "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_form\" EnableDataAnnotationsValidation>\r\n    <MContainer>\r\n        <MRow>\r\n            <MCol Cols=\"12\"\r\n                  Md=\"4\">\r\n                <MTextField @bind-Value=\"_form.Firstname\"\r\n                            Counter=\"10\"\r\n                            Label=\"First name\"\r\n                            required></MTextField>\r\n            </MCol>\r\n\r\n            <MCol Cols=\"12\"\r\n                  Md=\"4\">\r\n                <MTextField @bind-Value=\"_form.Lastname\"\r\n                            Counter=\"10\"\r\n                            Label=\"Last name\"\r\n                            required></MTextField>\r\n            </MCol>\r\n\r\n            <MCol Cols=\"12\"\r\n                  Md=\"4\">\r\n                <MTextField @bind-Value=\"_form.Email\"\r\n                            Label=\"E-mail\"\r\n                            required></MTextField>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n@code {\r\n    public class Form\r\n    {\r\n        [Required(ErrorMessage = \"Name is required\")]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Firstname { get; set; }\r\n\r\n        [Required(ErrorMessage = \"Name is required\")]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Lastname { get; set; }\r\n\r\n        [Required(ErrorMessage = \"E-mail is required\")]\r\n        [EmailAddress(ErrorMessage = \"E-mail must be valid\")]\r\n        public string Email { get; set; }\r\n    }\r\n\r\n    private Form _form = new();\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Form.usage.Basic",
         "Style": "",
@@ -2259,7 +2395,7 @@
         "Order": 0,
         "Name": "rules",
         "Title": "Rules",
-        "Description": "<p>Todo...</p>\n",
+        "Description": "<p>Rules allow you to apply custom validation on all form components. These are verified in order, and * * maximum * * errors will be displayed each time, so please make sure you sort the rules accordingly.</p>\n",
         "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MContainer>\r\n    <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n        <MCol Cols=\"12\"\r\n              Md=\"4\">\r\n            <MForm @ref=\"_form\">\r\n                <MTextField @bind-Value=\"Model\"\r\n                            Rules=\"ModelRules\"\r\n                            Counter=\"Convert.ToInt32(_max)\"\r\n                            Label=\"First name\"></MTextField>\r\n            </MForm>\r\n        </MCol>\r\n\r\n        <MCol Cols=\"12\"\r\n              Md=\"6\">\r\n            <MSlider @bind-Value=\"Max\"\r\n                     Label=\"Max characters\">\r\n            </MSlider>\r\n\r\n            <MCheckbox @bind-Value=\"_allowSpaces\"\r\n                       Label=\"Allow spaces\"></MCheckbox>\r\n\r\n            <MTextField @bind-Value=\"Match\"\r\n                        Label=\"Value must match\"></MTextField>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n@code {\r\n    private MForm _form;\r\n    private string _model;\r\n    private string _match;\r\n    private bool _allowSpaces;\r\n    private double _max;\r\n\r\n    protected string Match\r\n    {\r\n        get\r\n        {\r\n            return _match;\r\n        }\r\n        set\r\n        {\r\n            _match = value;\r\n            _ = _form.ValidateAsync();\r\n        }\r\n    }\r\n\r\n    protected double Max\r\n    {\r\n        get\r\n        {\r\n            return _max;\r\n        }\r\n        set\r\n        {\r\n            _max = value;\r\n           _ = _form.ValidateAsync();\r\n        }\r\n    }\r\n\r\n    protected string Model\r\n    {\r\n        get\r\n        {\r\n            return _model;\r\n        }\r\n        set\r\n        {\r\n            _model = value;\r\n            _ = _form.ValidateAsync();\r\n        }\r\n    }\r\n\r\n    protected List<Func<string, StringBoolean>> ModelRules\r\n    {\r\n        get\r\n        {\r\n            var rules = new List<Func<string, StringBoolean>>();\r\n\r\n            if (Max > 0)\r\n            {\r\n                Func<string, StringBoolean> rule = v => v?.Length <= Max ? true : $\"A maximum of {Max} characters is allowed\";\r\n                rules.Add(rule);\r\n            }\r\n\r\n            if (!_allowSpaces)\r\n            {\r\n                Func<string, StringBoolean> rule = v => v?.IndexOf(' ') < 0 ? true : \"No spaces are allowed\";\r\n                rules.Add(rule);\r\n            }\r\n\r\n            if (!string.IsNullOrEmpty(Match))\r\n            {\r\n                Func<string, StringBoolean> rule = v => !string.IsNullOrEmpty(v) && v == Match ? true : \"Values do not match\";\r\n                rules.Add(rule);\r\n            }\r\n\r\n            return rules;\r\n        }\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Form.props.Rules",
         "Style": "",
@@ -2270,7 +2406,7 @@
         "Order": 1,
         "Name": "validationEnumerable",
         "Title": "Validation enumerable",
-        "Description": "<p>Todo...</p>\n",
+        "Description": "<p>Verify the collection properties and add [enumerable validation]</p>\n",
         "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_order\" EnableDataAnnotationsValidation>\r\n    <MTextField @bind-Value=\"_order.Title\" Label=\"Title\"></MTextField>\r\n    <MTextField @bind-Value=\"_order.Price\" Label=\"Price\" Type=\"number\"></MTextField>\r\n    @foreach (var person in _order.Persons)\r\n    {\r\n        <MCard Flat>\r\n            <MCardTitle>Person:@person.Id</MCardTitle>\r\n            <MCardText>\r\n                <MTextField @bind-Value=\"person.Name\" Label=\"Name\"></MTextField>\r\n                <MTextField @bind-Value=\"person.Age\" Label=\"Age\"></MTextField>\r\n            </MCardText>\r\n        </MCard>\r\n    }\r\n    <MButton OnClick=\"()=>SubmitOrder(context)\" Color=\"success\">Validate</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    public class Order\r\n    {\r\n        public int Id { get; set; }\r\n        [Required]\r\n        public string Title { get; set; }\r\n        [Range(0, 20.00)]\r\n        public decimal Price { get; set; }\r\n\r\n        [EnumerableValidation]\r\n        public List<Person> Persons { get; set; }\r\n    }\r\n\r\n    public class Person\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        [Required]\r\n        public string Name { get; set; }\r\n\r\n        [Range(25, 100)]\r\n        public int Age { get; set; }\r\n    }\r\n\r\n    private Order _order = new()\r\n        {\r\n            Persons = new List<Person>\r\n        {\r\n            new Person\r\n            {\r\n                Id=1\r\n            },\r\n            new Person\r\n            {\r\n                Id=2\r\n            }\r\n        }\r\n        };\r\n\r\n    public void SubmitOrder(EditContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Form.misc.ValidationEnumerable",
         "Style": "",
@@ -2281,7 +2417,7 @@
         "Order": 0,
         "Name": "validationWithSubmitAndClear",
         "Title": "Validation with submit & clear",
-        "Description": "<p>Todo...</p>\n",
+        "Description": "<p><code>MForm</code> component has three functions, which can be accessed by setting ref on the component. Ref allows us to access the internal methods of components, such as <code>&lt;MForm @ref = &quot;_form&quot; &gt; </code>_ form.Validate() validates all inputs and returns whether they are valid.<em>form.Reset() clears all inputs and resets validation errors.</em> form.Resetvalidation() will only reset input validation without changing their state.</p>\n",
         "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm @bind-Value=\"_valid\" Model=\"_model\" EnableDataAnnotationsValidation @ref=\"_form\">\r\n    <MTextField @bind-Value=\"_model.Name\"\r\n                Counter=\"10\"\r\n                Label=\"Name\"\r\n                required></MTextField>\r\n    <MTextField @bind-Value=\"_model.Email\"\r\n                Label=\"E-mail\"\r\n                required></MTextField>\r\n    <MSelect @bind-Value=\"_model.Item\"\r\n             Items=\"@_items\"\r\n             Label=\"Item\"\r\n             ItemText=\"u => u\"\r\n             ItemValue=\"u => u\"></MSelect>\r\n    <MCheckbox @bind-Value=\"_model.Agree\"\r\n               Label=\"Do you agree?\"\r\n               required></MCheckbox>\r\n    <MButton Disabled=\"!_valid\" Color=\"success\" Class=\"mr-4\" OnClick=\"ValidateAsync\">Validate</MButton>\r\n    <MButton Color=\"error\" Class=\"mr-4\" OnClick=\"ResetAsync\">Reset Form</MButton>\r\n    <MButton Color=\"warning\" OnClick=\"ResetValidationAsync\">Reset Validation</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    class Model\r\n    {\r\n        [Required]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Name { get; set; }\r\n        [Required]\r\n        [EmailAddress]\r\n        public string Email { get; set; }\r\n        [Required]\r\n        public string Item { get; set; }\r\n        [RegularExpression(\"True\", ErrorMessage = \"You must agree to continue!\")]\r\n        public bool Agree { get; set; }\r\n    }\r\n    private bool _valid = true;\r\n    private MForm _form;\r\n    private Model _model = new();\r\n\r\n    List<string> _items = new()\r\n        {\r\n            \"Item 1\",\r\n            \"Item 2\",\r\n            \"Item 3\",\r\n            \"Item 4\"\r\n        };\r\n\r\n    async Task ValidateAsync()\r\n    {\r\n        await _form.ValidateAsync();\r\n    }\r\n\r\n    async Task ResetAsync()\r\n    {\r\n        await _form.ResetAsync();\r\n    }\r\n\r\n    async Task ResetValidationAsync()\r\n    {\r\n        await _form.ResetValidationAsync();\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Form.misc.ValidationWithSubmitAndClear",
         "Style": "",
@@ -2293,6 +2429,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/From.svg",
     "Cols": 1,
+    "Related": [
+      "/components/selects",
+      "/components/selection-controls",
+      "/components/text-fields"
+    ],
     "Title": "Forms",
     "Type": "Form",
     "FullTitle": "Forms"
@@ -2301,7 +2442,7 @@
     "Desc": "<p>The <code>MRadio</code> component is a simple radio button. When combined with the <code>MRadioGroup</code> component you can provide\ngroupable functionality to allow users to select from a predefined set of options.</p>\n",
     "Order": 0,
     "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadio</a></li>\n</ul>\n"
+      "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadioGroup</a></li>\n</ul>\n"
     },
     "LastWriteTime": "2022-01-06T09:23:47.879038+08:00",
     "DemoList": [
@@ -2365,6 +2506,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg",
     "Cols": 1,
+    "Related": [
+      "/components/button-groups",
+      "/components/forms",
+      "/components/checkboxes"
+    ],
     "Title": "Radio",
     "Type": "Radio",
     "FullTitle": "Radio"
@@ -2372,7 +2518,9 @@
   {
     "Desc": "<p>The MSlider component is a better visualization of the number input. It is used for gathering numerical user data.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.4513035+08:00",
     "DemoList": [
       {
@@ -2446,6 +2594,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/RangeSliders.svg",
     "Cols": 1,
+    "Related": [
+      "/components/forms",
+      "/components/selects",
+      "/components/sliders"
+    ],
     "Title": "Range sliders",
     "Type": "RangeSliders",
     "FullTitle": "Range sliders"
@@ -2453,7 +2606,10 @@
   {
     "Desc": "<p>The <code>Select</code> component is used for collecting user provided information from a list of options.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
+      "ע��": "\n<!--alert:info--> \n<p>The default setting of browser auto completion is off, which may be changed or ignored by different browsers. <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p>The <strong>Auto</strong> attribute of <strong>menupprops</strong> only supports the default input style.</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>When using an object as the attribute of <strong>items</strong>, you must use <strong>itemtext</strong> and <strong>itemvalue</strong> to associate with the incoming object. These values are <strong>text</strong> and <strong>value</strong> by default and can be changed.</p>\n<!--/alert:error--> \n"
+    },
     "LastWriteTime": "2022-01-10T13:36:42.7941608+08:00",
     "DemoList": [
       {
@@ -2470,7 +2626,7 @@
       {
         "Order": 1,
         "Name": "customTextAndValue",
-        "Title": "CustomTextAndValue",
+        "Title": "Custom text and value",
         "Description": "<p>You can specify the specific properties within your items array correspond to the text and value fields. \nBy default, this is text and value. In this example we also use the return-object prop which will return the entire object of the selected item on selection.</p>\n",
         "Code": "<MContainer Fluid>\r\n    <MRow Align=\"AlignTypes.Center\">\r\n        <MCol Cols=\"6\">\r\n            <MSubheader>\r\n                Custom items\r\n            </MSubheader>\r\n        </MCol>\r\n\r\n        <MCol Cols=\"6\">\r\n            <MSelect TItem=\"Model\"\r\n                     TItemValue=\"string\"\r\n                     TValue=\"string\"\r\n                     @bind-Value=\"_select\"\r\n                     Hint=\"@($\"{_selected.State}, {_selected.Abbr}\")\"\r\n                     Items=\"_states\"\r\n                     ItemText=\"r=>r.State\"\r\n                     ItemValue=\"r=>r.Abbr\"\r\n                     Label=\"Select\"\r\n                     PersistentHint\r\n                     OnSelectedItemUpdate=\"item=>_selected=item\"\r\n                     SingleLine></MSelect>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n  @code {\r\n    public class Model\r\n    {\r\n        public int Id { get; set; }\r\n        public string State { get; set; }\r\n        public string Abbr { get; set; }\r\n    }\r\n    private string _select = \"FL\";\r\n    private Model _selected = new Model()\r\n        {\r\n            State = \"Florida\",\r\n            Abbr = \"FL\"\r\n        };\r\n    private List<Model> _states = new List<Model>\r\n        {\r\n            new Model\r\n            {\r\n                State=\"Florida\",\r\n                Abbr=\"FL\",\r\n                Id=1\r\n            },\r\n            new Model\r\n            {\r\n                State=\"Georgia\",\r\n                Abbr=\"GA\",\r\n                Id=2\r\n            },\r\n            new Model\r\n            {\r\n                State=\"Nebraska\",\r\n                Abbr=\"NE\",\r\n                Id=3\r\n            },\r\n            new Model\r\n            {\r\n                State=\"California\",\r\n                Abbr=\"CA\",\r\n                Id=4\r\n            },\r\n            new Model\r\n            {\r\n                State=\"New York\",\r\n                Abbr=\"NY\",\r\n                Id=5\r\n            }\r\n        };\r\n  }",
         "Type": "Demos.Components.FormInputs.children.Select.props.CustomTextAndValue",
@@ -2558,7 +2714,7 @@
       {
         "Order": 2,
         "Name": "appendAndPrependItem",
-        "Title": "AppendAndPrependItem",
+        "Title": "Append and prepend item",
         "Description": "<p>The <code>MSelect</code> components can be optionally expanded with prepended and appended items. This is perfect for customized <strong>select-all</strong> functionality.</p>\n",
         "Code": "<MContainer Fluid>\r\n    <MSelect @bind-Value=\"_selectedFruits\"\r\n             Items=\"_fruits\"\r\n             Label=\"Favorite Fruits\"\r\n             ItemValue=\"r=>r\"\r\n             ItemText=\"r=>r\"\r\n             Multiple>\r\n        <PrependItemContent>\r\n            <MListItem OnClick=\"Toggle\">\r\n                <MListItemAction>\r\n                    <MIcon Color=\"@(_selectedFruits.Count > 0 ? \"indigo darken-4\" : \"\")\">\r\n                        @Icon\r\n                    </MIcon>\r\n                </MListItemAction>\r\n                <MListItemContent>\r\n                    <MListItemTitle>\r\n                        Select All\r\n                    </MListItemTitle>\r\n                </MListItemContent>\r\n            </MListItem>\r\n            <MDivider Class=\"mt-2\"></MDivider>\r\n        </PrependItemContent>\r\n        <AppendItemContent>\r\n            <MDivider Class=\"mb-2\"></MDivider>\r\n            <MListItem Disabled>\r\n                <MListItemAvatar Color=\"grey lighten-3\">\r\n                    <MIcon>\r\n                        mdi-food-apple\r\n                    </MIcon>\r\n                </MListItemAvatar>\r\n                @if (LikesAllFruit)\r\n                {\r\n                    <MListItemContent>\r\n                        <MListItemTitle>\r\n                            Holy smokes, someone call the fruit police!\r\n                        </MListItemTitle>\r\n                    </MListItemContent>\r\n                }\r\n                else if (LikesSomeFruit)\r\n                {\r\n                    <MListItemContent>\r\n                        <MListItemTitle>\r\n                            Fruit Count\r\n                        </MListItemTitle>\r\n                        <MListItemSubtitle>\r\n                            {{ _selectedFruits.length }}\r\n                        </MListItemSubtitle>\r\n                    </MListItemContent>\r\n                }\r\n                else\r\n                {\r\n                    <MListItemContent v-else>\r\n                        <MListItemTitle>\r\n                            How could you not like fruit?\r\n                        </MListItemTitle>\r\n                        <MListItemSubtitle>\r\n                            Go ahead, make a selection above!\r\n                        </MListItemSubtitle>\r\n                    </MListItemContent>\r\n                }\r\n            </MListItem>\r\n        </AppendItemContent>\r\n    </MSelect>\r\n</MContainer>\r\n\r\n@code {\r\n    private List<string> _fruits = new List<string>\r\n\r\n      {\r\n    \"Apples\",\r\n    \"Apricots\",\r\n    \"Avocado\",\r\n    \"Bananas\",\r\n    \"Blueberries\",\r\n    \"Blackberries\",\r\n    \"Boysenberries\",\r\n    \"Bread fruit\",\r\n    \"Cantaloupes (cantalope)\",\r\n    \"Cherries\",\r\n    \"Cranberries\",\r\n    \"Cucumbers\",\r\n    \"Currants\",\r\n    \"Dates\",\r\n    \"Eggplant\",\r\n    \"Figs\",\r\n    \"Grapes\",\r\n    \"Grapefruit\",\r\n    \"Guava\",\r\n    \"Honeydew melons\",\r\n    \"Huckleberries\",\r\n    \"Kiwis\",\r\n    \"Kumquat\",\r\n    \"Lemons\",\r\n    \"Limes\",\r\n    \"Mangos\",\r\n    \"Mulberries\",\r\n    \"Muskmelon\",\r\n    \"Nectarines\",\r\n    \"Olives\",\r\n    \"Oranges\",\r\n    \"Papaya\",\r\n    \"Peaches\",\r\n    \"Pears\",\r\n    \"Persimmon\",\r\n    \"Pineapple\",\r\n    \"Plums\",\r\n    \"Pomegranate\",\r\n    \"Raspberries\",\r\n    \"Rose Apple\",\r\n    \"Starfruit\",\r\n    \"Strawberries\",\r\n    \"Tangerines\",\r\n    \"Tomatoes\",\r\n    \"Watermelons\",\r\n    \"Zucchini\"\r\n    };\r\n    private List<string> _selectedFruits = new List<string>();\r\n\r\n    public bool LikesAllFruit => _selectedFruits.Count == _fruits.Count;\r\n\r\n    public bool LikesSomeFruit => _selectedFruits.Count > 0 && !LikesAllFruit;\r\n\r\n    public string Icon\r\n    {\r\n        get\r\n        {\r\n            if (LikesAllFruit)\r\n            {\r\n                return \"mdi-close-box\";\r\n            }\r\n\r\n            if (LikesSomeFruit)\r\n            {\r\n                return \"mdi-minus-box\";\r\n            }\r\n\r\n            return \"mdi-checkbox-blank-outline\";\r\n        }\r\n    }\r\n\r\n    public void Toggle()\r\n    {\r\n        if (LikesAllFruit)\r\n        {\r\n            _selectedFruits = new List<string>();\r\n        }\r\n        else\r\n        {\r\n            _selectedFruits = new List<string>();\r\n            _selectedFruits.AddRange(_fruits);\r\n        }\r\n    }\r\n  }",
         "Type": "Demos.Components.FormInputs.children.Select.contents.AppendAndPrependItem",
@@ -2581,6 +2737,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/autocompletes",
+      "/components/combobox",
+      "/components/forms"
+    ],
     "Title": "Selects",
     "Type": "Select",
     "FullTitle": "Selects"
@@ -2588,7 +2749,9 @@
   {
     "Desc": "<p>The MSlider component is a better visualization of the number input. It is used for gathering numerical user data.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.4647547+08:00",
     "DemoList": [
       {
@@ -2761,6 +2924,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sliders.svg",
     "Cols": 1,
+    "Related": [
+      "/components/forms",
+      "/components/selects",
+      "/components/range-sliders"
+    ],
     "Title": "Sliders",
     "Type": "Sliders",
     "FullTitle": "Sliders"
@@ -2855,6 +3023,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Switch.svg",
     "Cols": 1,
+    "Related": [
+      "/components/checkboxes",
+      "/components/forms",
+      "/components/radio"
+    ],
     "Title": "Switches",
     "Type": "Switch",
     "FullTitle": "Switches"
@@ -2862,7 +3035,9 @@
   {
     "Desc": "<p>Textarea components are used for collecting large amounts of textual data.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2022-01-06T09:23:47.9009796+08:00",
     "DemoList": [
       {
@@ -2980,6 +3155,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Textareas.svg",
     "Cols": 1,
+    "Related": [
+      "/components/forms",
+      "/components/selects",
+      "/components/text-fields"
+    ],
     "Title": "Textareas",
     "Type": "Textareas",
     "FullTitle": "Textareas"
@@ -2987,7 +3167,9 @@
   {
     "Desc": "<p>Text fields components are used for collecting user provided information.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-14T15:01:03.0189799+08:00",
     "DemoList": [
       {
@@ -3248,6 +3430,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TextField.svg",
     "Cols": 1,
+    "Related": [
+      "/components/forms",
+      "/components/selects",
+      "/components/textareas"
+    ],
     "Title": "Text fields",
     "Type": "TextField",
     "FullTitle": "Text fields"
@@ -3399,7 +3586,7 @@
         "Order": 5,
         "Name": "marginHelpers",
         "Title": "Margin helpers",
-        "Description": "<p>Using the <a href=\"/stylesandanimations/flex#auto-margins\">auto margin helper utilities</a> you can force sibling columns away from each other.</p>\n",
+        "Description": "<p>Using the <a href=\"/stylesandanimations/flex\">auto margin helper utilities</a> you can force sibling columns away from each other.</p>\n",
         "Code": "<div class=\"ma-5 pa-5\">\r\n    <MContainer Class=\"grey lighten-5\">\r\n        <MRow>\r\n            <MCol Md=\"4\">\r\n                <MCard Class=\"pa-2\"\r\n                       Outlined\r\n                       tile>\r\n                    .col-md-4\r\n                </MCard>\r\n            </MCol>\r\n            <MCol Md=\"4\"\r\n                  Class=\"ml-auto\">\r\n                <MCard Class=\"pa-2\"\r\n                       Outlined\r\n                       tile>\r\n                    .col-md-4 .ml-auto\r\n                </MCard>\r\n            </MCol>\r\n        </MRow>\r\n        <MRow>\r\n            <MCol Md=\"3\"\r\n                  Class=\"ml-md-auto\">\r\n                <MCard Class=\"pa-2\"\r\n                       Outlined\r\n                       tile>\r\n                    .col-md-3 .ml-md-auto\r\n                </MCard>\r\n            </MCol>\r\n            <MCol Md=\"3\"\r\n                  Class=\"ml-md-auto\">\r\n                <MCard Class=\"pa-2\"\r\n                       Outlined\r\n                       tile>\r\n                    .col-md-3 .ml-md-auto\r\n                </MCard>\r\n            </MCol>\r\n        </MRow>\r\n        <MRow>\r\n            <MCol Class=\"mr-auto\" Cols=\"@(\"auto\")\"> \r\n                <MCard Class=\"pa-2\"\r\n                       Outlined\r\n                       tile>\r\n                    .col-auto .mr-auto\r\n                </MCard>\r\n            </MCol>\r\n            <MCol Cols=\"@(\"auto\")\">\r\n                <MCard Class=\"pa-2\"\r\n                       Outlined\r\n                       tile>\r\n                    .col-auto\r\n                </MCard>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</div>\r\n",
         "Type": "Demos.Components.Grid.misc.MarginHelpers",
         "Style": "",
@@ -3477,6 +3664,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg",
     "Cols": 1,
+    "Related": [
+      "/stylesandanimations/flex",
+      "/features/breakpoints",
+      "/stylesandanimations/display-helpers"
+    ],
     "Title": "Grid system",
     "Type": "Grid",
     "FullTitle": "Grid system"
@@ -3560,14 +3752,21 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ButtonGroup.svg",
     "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/components/icons",
+      "/components/selection-controls"
+    ],
     "Title": "Button groups",
     "Type": "ButtonGroup",
     "FullTitle": "Button groups"
   },
   {
-    "Desc": "<p>The <code>MChipGroup</code> supercharges the <code>MChip</code> component by providing groupable functionality. It is used for creating groups\nof selections using chips.</p>\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n",
+    "Desc": "<p>The <code>MChipGroup</code> supercharges the <code>MChip</code> component by providing groupable functionality. It is used for creating groups\nof selections using chips.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2022-01-06T09:23:47.9059654+08:00",
     "DemoList": [
       {
@@ -3652,6 +3851,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chip.svg",
     "Cols": 1,
+    "Related": [
+      "/components/chips",
+      "/components/slide-groups",
+      "/components/item-groups"
+    ],
     "Title": "Chip groups",
     "Type": "ChipGroup",
     "FullTitle": "Chip groups"
@@ -3735,6 +3939,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ItemGroup.svg",
     "Cols": 1,
+    "Related": [
+      "/components/button-groups",
+      "/components/carousels",
+      "/components/tabs"
+    ],
     "Title": "Item groups",
     "Type": "ItemGroup",
     "FullTitle": "Item groups"
@@ -3817,6 +4026,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/lists",
+      "/components/item-groups",
+      "/components/cards"
+    ],
     "Title": "List item groups",
     "Type": "ListItemGroup",
     "FullTitle": "List item groups"
@@ -3910,6 +4124,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/icons",
+      "/components/carousels",
+      "/components/tabs"
+    ],
     "Title": "Slide groups",
     "Type": "SlideGroup",
     "FullTitle": "Slide groups"
@@ -3992,6 +4211,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/carousels",
+      "/components/steppers",
+      "/components/tabs"
+    ],
     "Title": "Windows",
     "Type": "Windows",
     "FullTitle": "Windows"
@@ -3999,7 +4223,9 @@
   {
     "Desc": "<p>The <code>MHover</code> component provides a clean interface for handling the hover state of any component.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.5200087+08:00",
     "DemoList": [
       {
@@ -4050,6 +4276,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/cards",
+      "/components/images",
+      "/components/tooltips"
+    ],
     "Title": "Hover",
     "Type": "Hover",
     "FullTitle": "Hover"
@@ -4133,6 +4364,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Cols": 1,
+    "Related": [
+      "/features/icon-fonts",
+      "/components/buttons",
+      "/components/cards"
+    ],
     "Title": "Icons",
     "Type": "Icon",
     "FullTitle": "Icons"
@@ -4227,6 +4463,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/grid-system",
+      "/components/aspect-ratios",
+      "/components/parallax"
+    ],
     "Title": "Images",
     "Type": "Image",
     "FullTitle": "Images"
@@ -4234,7 +4475,10 @@
   {
     "Desc": "<p>The <code>MList</code> component is used to display information. It can contain an avatar, content, actions, subheaders and much\nmore. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a\nconsistent styling for organizing groups of text and images.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
+      "ע��": "\n<!--alert:info-->\n<p>If you want to find a list item with status, please check <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>��</p>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.5352989+08:00",
     "DemoList": [
       {
@@ -4549,7 +4793,7 @@
         "Order": 13,
         "Name": "rounded",
         "Title": "Rounded",
-        "Description": "<p>Menus can have their border-radius set by the <strong>Rounded</strong> prop. Additional information about rounded classes is on the\n<a href=\"/stylesandanimations/borderradius\">Border Radius</a> page.</p>\n",
+        "Description": "<p>Menus can have their border-radius set by the <strong>Rounded</strong> prop. Additional information about rounded classes is on the\n<a href=\"/stylesandanimations/border-radius\">Border Radius</a> page.</p>\n",
         "Code": "<MRow Justify=\"@JustifyTypes.SpaceAround\">\r\n    @foreach (var item in _btns)\r\n    {\r\n        var index = Array.IndexOf(_btns, item);\r\n        <MMenu Rounded=\"@item.rounded\" OffsetY @key=\"@item.text\">\r\n            <ActivatorContent>\r\n                <MButton Color=\"@_colors[index]\"\r\n                         Class=\"white--text ma-5\"\r\n                         @attributes=\"@context.Attrs\">\r\n                    @item.text Radius\r\n                </MButton>\r\n            </ActivatorContent>\r\n            <ChildContent>\r\n                <MList>\r\n                    @for (int i = 0; i < 4; i++)\r\n                    {\r\n                        <MListItem Link>\r\n                            <MListItemTitle>@($\"Item {i}\")</MListItemTitle>\r\n                        </MListItem>\r\n                    }\r\n                </MList>\r\n            </ChildContent>\r\n        </MMenu>\r\n    }\r\n</MRow>\r\n\r\n@code {\r\n\r\n    (string text, string rounded)[] _btns =\r\n    {\r\n        (\"Removed\", \"0\"),\r\n        (\"Large\", \"lg\"),\r\n        (\"Custom\", \"b-xl\"),\r\n    };\r\n\r\n    string[] _colors =\r\n    {\r\n        \"deep-purple accent-4\", \"error\", \"teal darken-1\"\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Menu.props.Rounded",
         "Style": "",
@@ -4604,6 +4848,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/dialogs",
+      "/components/tooltips",
+      "/stylesandanimations/transitions"
+    ],
     "Title": "Menus",
     "Type": "Menu",
     "FullTitle": "Menus"
@@ -4665,7 +4914,7 @@
         "Name": "image",
         "Title": "Image",
         "Description": "<p>Apply a custom background to the drawer through the <strong>Src</strong> attribute. If you need to customize the properties\nof <code>MImage</code>, you can use the <strong>ImgContent</strong>.</p>\n",
-        "Code": "<MCard Class=\"mx-auto\" Height=\"300\" Width=\"300\">\r\n    <MNavigationDrawer Absolute Dark Src=\"@(\"https://cdn.masastack.com/stack/images/website/masa-blazor/backgrounds/bg-2.png\")\" Width=\"@(\"100%\")\" Permanent>\r\n        <MList Dark>\r\n            @foreach (var item in _items)\r\n            {\r\n                <MListItem Link Dark>\r\n                    <MListItemIcon>\r\n                        <MIcon Dark>@item[0]</MIcon>\r\n                    </MListItemIcon>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>@item[1]</MListItemTitle>\r\n                    </MListItemContent>\r\n                </MListItem>\r\n            }\r\n            \r\n        </MList>\r\n    </MNavigationDrawer>\r\n</MCard>\r\n\r\n@code\r\n{\r\n    private string[][] _items = new string[3][]\r\n    {\r\n        new string[2] {\"mdi-email\", \"Inbox\"},\r\n        new string[2]{\"mdi-account-supervisor-circle\", \"Supervisors\" },\r\n        new string[2]{ \"mdi-clock-start\", \"Clock-in\" }\r\n    };\r\n}",
+        "Code": "<MCard Class=\"mx-auto\" Height=\"300\" Width=\"300\">\r\n    <MNavigationDrawer Absolute Dark Src=\"@(\"/_content/MASA.Blazor.Doc/backgrounds/bg-2.png\")\" Width=\"@(\"100%\")\" Permanent>\r\n        <MList Dark>\r\n            @foreach (var item in _items)\r\n            {\r\n                <MListItem Link Dark>\r\n                    <MListItemIcon>\r\n                        <MIcon Dark>@item[0]</MIcon>\r\n                    </MListItemIcon>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>@item[1]</MListItemTitle>\r\n                    </MListItemContent>\r\n                </MListItem>\r\n            }\r\n            \r\n        </MList>\r\n    </MNavigationDrawer>\r\n</MCard>\r\n\r\n@code\r\n{\r\n    private string[][] _items = new string[3][]\r\n    {\r\n        new string[2] {\"mdi-email\", \"Inbox\"},\r\n        new string[2]{\"mdi-account-supervisor-circle\", \"Supervisors\" },\r\n        new string[2]{ \"mdi-clock-start\", \"Clock-in\" }\r\n    };\r\n}",
         "Type": "Demos.Components.NavigationDrawer.props.Image",
         "Style": "",
         "Debug": false,
@@ -4731,6 +4980,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg",
     "Cols": 1,
+    "Related": [
+      "/components/lists",
+      "/components/icons",
+      "/getting-started/wireframes"
+    ],
     "Title": "Navigation drawers",
     "Type": "NavigationDrawer",
     "FullTitle": "Navigation drawers"
@@ -4738,7 +4992,9 @@
   {
     "Desc": "<p>The <code>Overlay</code> component is used to provide emphasis on a particular element or parts of it. It signals to the user of a state change within the application and can be used for creating loaders, dialogs and more.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.5513233+08:00",
     "DemoList": [
       {
@@ -4823,7 +5079,9 @@
   {
     "Desc": "<p>The <code>MPagination</code> component is used to separate long data sets so that user data information can be known. Provided the amount, the paging component will automatically scale. The current maintenance page provides value easily.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.5552401+08:00",
     "DemoList": [
       {
@@ -4896,6 +5154,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/data-iterators",
+      "/components/data-tables",
+      "/components/lists"
+    ],
     "Title": "Pagination",
     "Type": "Pagination",
     "FullTitle": "Pagination"
@@ -4903,7 +5166,10 @@
   {
     "Desc": "<p>MDatePicker is a fully featured date selection component that lets users select a date, or range of dates.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
+      "ע��": "\n<!--alert:warning--> \n<p><code>Mdatepicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.5682044+08:00",
     "DemoList": [
       {
@@ -5131,6 +5397,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickers.svg",
     "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/components/text-fields",
+      "/components/time-pickers"
+    ],
     "Title": "Date pickers",
     "Type": "DatePickers",
     "FullTitle": "Date pickers"
@@ -5138,7 +5409,10 @@
   {
     "Desc": "<p><code>MDatePicker</code> can be used as a standalone month picker component.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
+      "ע��": "\n<!--alert:warning--> \n<p><code>MDatePicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.5741885+08:00",
     "DemoList": [
       {
@@ -5267,6 +5541,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg",
     "Cols": 1,
+    "Related": [
+      "/components/date-pickers",
+      "/components/menus",
+      "/components/time-pickers"
+    ],
     "Title": "Date pickers month",
     "Type": "DatePickersMonth",
     "FullTitle": "Date pickers month"
@@ -5274,7 +5553,9 @@
   {
     "Desc": "<p>The MTimePicker is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting the time.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.5801729+08:00",
     "DemoList": [
       {
@@ -5436,6 +5717,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TimePickers.svg",
     "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/components/date-pickers",
+      "/components/text-fields"
+    ],
     "Title": "Time pickers",
     "Type": "TimePickers",
     "FullTitle": "Time pickers"
@@ -5533,7 +5819,9 @@
   {
     "Desc": "<p>The component is used to display circular data to users. It also can be put into an indeterminate state to portray loading.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.5885434+08:00",
     "DemoList": [
       {
@@ -5595,6 +5883,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/cards",
+      "/components/progress-linear",
+      "/components/lists"
+    ],
     "Title": "Progress circular",
     "Type": "ProgressCircular",
     "FullTitle": "Progress circular"
@@ -5602,7 +5895,9 @@
   {
     "Desc": "<p>The component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.5946966+08:00",
     "DemoList": [
       {
@@ -5752,6 +6047,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/cards",
+      "/components/progress-circular",
+      "/components/lists"
+    ],
     "Title": "Progress linear",
     "Type": "ProgressLinear",
     "FullTitle": "Progress linear"
@@ -5759,7 +6059,9 @@
   {
     "Desc": "<p>Semantic vector graphics.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.5976887+08:00",
     "DemoList": [
       {
@@ -5854,6 +6156,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/cards",
+      "/components/icons",
+      "/components/lists"
+    ],
     "Title": "Ratings",
     "Type": "Rating",
     "FullTitle": "Ratings"
@@ -5861,7 +6168,9 @@
   {
     "Desc": "<p>The MSheet component is the baseline for numerous components such as MCard, MToolbar, and more. The available properties form the foundation of Material Design—the concept of paper and elevation (shadows).</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.600766+08:00",
     "DemoList": [
       {
@@ -5902,6 +6211,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sheet.svg",
     "Cols": 1,
+    "Related": [
+      "/components/cards",
+      "/components/grid-system",
+      "/stylesandanimations/elevation"
+    ],
     "Title": "Sheets",
     "Type": "Sheet",
     "FullTitle": "Sheets"
@@ -5941,6 +6255,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SkeletonLoader.svg",
     "Cols": 1,
+    "Related": [
+      "/components/cards",
+      "/components/progress-circular",
+      "/components/buttons"
+    ],
     "Title": "Skeleton loaders",
     "Type": "SkeletonLoader",
     "FullTitle": "Skeleton loaders"
@@ -5948,7 +6267,9 @@
   {
     "Desc": "<p>The MSnackbar component is used to display quick messages to users. Snackbars supports positioning, removing delays, and callbacks.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.6067483+08:00",
     "DemoList": [
       {
@@ -6010,6 +6331,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/stylesandanimations/colors",
+      "/components/forms"
+    ],
     "Title": "Snackbars",
     "Type": "Snackbar",
     "FullTitle": "Snackbars"
@@ -6170,6 +6496,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Stepper.svg",
     "Cols": 1,
+    "Related": [
+      "/components/tabs",
+      "/components/buttons",
+      "/components/windows"
+    ],
     "Title": "Steppers",
     "Type": "Stepper",
     "FullTitle": "Steppers"
@@ -6253,7 +6584,9 @@
   {
     "Desc": "<p>The MDataIterator component is used for displaying data, and shares a majority of its functionality with the MDataTable component. Features include sorting, searching, pagination, and selection.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.6187134+08:00",
     "DemoList": [
       {
@@ -6294,6 +6627,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataIterators.svg",
     "Cols": 1,
+    "Related": [
+      "/components/data-tables",
+      "/components/simple-tables",
+      "/components/toolbars"
+    ],
     "Title": "Data iterators",
     "Type": "DataIterators",
     "FullTitle": "Data iterators"
@@ -6301,7 +6639,9 @@
   {
     "Desc": "<p>The MDataTable component is used for displaying tabular data. Features include sorting, searching, pagination, content-editing, and row selection.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n<li><a href=\"/api/MDataTableHeader\">MDataTableHeader</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-07T18:57:49.4275655+08:00",
     "DemoList": [
       {
@@ -6551,6 +6891,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataTable.svg",
     "Cols": 1,
+    "Related": [
+      "/components/data-iterators",
+      "/components/simple-tables",
+      "/components/lists"
+    ],
     "Title": "Data tables",
     "Type": "DataTable",
     "FullTitle": "Data tables"
@@ -6558,7 +6903,9 @@
   {
     "Desc": "<p>The MSimpleTable component is a simple wrapper component around the <table> element. Inside the component you can use all the regular table elements such as <thead>, <tbody>, <tr>, etc.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.6336767+08:00",
     "DemoList": [
       {
@@ -6621,6 +6968,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SimpleTables.svg",
     "Cols": 1,
+    "Related": [
+      "/components/data-iterators",
+      "/components/data-tables",
+      "/components/lists"
+    ],
     "Title": "Simple tables",
     "Type": "SimpleTables",
     "FullTitle": "Simple tables"
@@ -6815,6 +7167,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tabs.svg",
     "Cols": 1,
+    "Related": [
+      "/components/icons",
+      "/components/toolbars",
+      "/components/windows"
+    ],
     "Title": "Tabs",
     "Type": "Tabs",
     "FullTitle": "Tabs"
@@ -6822,7 +7179,9 @@
   {
     "Desc": "<p>MTimeline is very useful for displaying chronological information.</p>\n",
     "Order": 0,
-    "OtherDocs": {},
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
+    },
     "LastWriteTime": "2021-12-06T12:39:16.6473153+08:00",
     "DemoList": [
       {
@@ -6929,7 +7288,7 @@
         "Name": "advanced",
         "Title": "Advanced",
         "Description": "<p>Modular components allow you to create highly customized solutions that just work.</p>\n",
-        "Code": "@using Microsoft.AspNetCore.Components.Web\r\n\r\n<MContainer Style=\"max-width: 600px;\">\r\n    <MTimeline Dense Clipped>\r\n        <MTimelineItem FillDot Class=\"white--text mb-12\" Color=\"orange\" Large>\r\n            <IconContent>\r\n                <span>JL</span>\r\n            </IconContent>\r\n            <ChildContent>\r\n                <MTextField @bind-Value=\"_input\" HideDetails=\"true\" Flat Label=\"Leave a comment...\" Solo OnKeyDown=\"HandleOnKeyDown\">\r\n                    <AppendContent>\r\n                        <MButton Class=\"mx-0\" Depressed OnClick=\"Comment\">\r\n                            Post\r\n                        </MButton>\r\n                    </AppendContent>\r\n                </MTextField>\r\n            </ChildContent>\r\n        </MTimelineItem>\r\n\r\n        @foreach (var item in _events)\r\n        {\r\n            <MTimelineItem Class=\"mb-4\" Color=\"pink\" Small>\r\n                <MRow Justify=\"JustifyTypes.Center\">\r\n                    <MCol Cols=\"7\">@item.Text</MCol>\r\n                    <MCol Class=\"text-right\" Cols=\"5\">@item.Time</MCol>\r\n                </MRow>\r\n            </MTimelineItem>\r\n        }\r\n\r\n        <MTimelineItem Class=\"mb-6\" HideDot>\r\n            <span>Today</span>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Color=\"grey\" IconColor=\"grey lighten-2\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    This order was archived.\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:26 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    <MChip Class=\"white--text ml-0\" Color=\"purple\" Label Small>\r\n                        App\r\n                    </MChip>\r\n                    Digital Downloads fulfilled 1 item.\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Color=\"grey\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    Order confirmation email was sent to doddgu (gushoudao@masastack.com).\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" HideDot>\r\n            <MButton Class=\"mx-0\">Resend Email</MButton>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Color=\"grey\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    A $15.00 USD payment was processed on PayPal Express Checkout\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Color=\"grey\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    John Leider placed this order on Online Store (checkout #1937432132572).\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n    </MTimeline>\r\n</MContainer>\r\n\r\n@code\r\n{\r\n    private class EventDemo\r\n    {\r\n        public int Id { get; set; }\r\n        public string Text { get; set; }\r\n        public string Time { get; set; }\r\n    }\r\n    private List<EventDemo> _events = new List<EventDemo>();\r\n    private string _input = string.Empty;\r\n    private int _nonce = 0;\r\n\r\n    private void HandleOnKeyDown(KeyboardEventArgs args)\r\n    {\r\n        if (args.Code==\"Enter\")\n        {\r\n            Comment();\n        }\r\n    }\r\n\r\n    private void Comment()\r\n    {\r\n        _events.Insert(0,\r\n            new EventDemo\r\n                {\r\n                    Id = _nonce++,\r\n                    Text = _input,\r\n                    Time = DateTime.Now.ToString(\"HH:mm:ss\")\r\n                });\r\n\r\n        _input = string.Empty;\r\n    }\r\n}",
+        "Code": "@using Microsoft.AspNetCore.Components.Web\r\n\r\n<MContainer Style=\"max-width: 600px;\">\r\n    <MTimeline Dense Clipped>\r\n        <MTimelineItem FillDot Class=\"white--text mb-12\" Color=\"orange\" Large>\r\n            <IconContent>\r\n                <span>JL</span>\r\n            </IconContent>\r\n            <ChildContent>\r\n                <MTextField @bind-Value=\"_input\" HideDetails=\"true\" Flat Label=\"Leave a comment...\" Solo OnKeyDown=\"HandleOnKeyDown\">\r\n                    <AppendContent>\r\n                        <MButton Class=\"mx-0\" Depressed OnClick=\"Comment\">\r\n                            Post\r\n                        </MButton>\r\n                    </AppendContent>\r\n                </MTextField>\r\n            </ChildContent>\r\n        </MTimelineItem>\r\n\r\n        @foreach (var item in _events)\r\n        {\r\n            <MTimelineItem Class=\"mb-4\" Color=\"pink\" Small>\r\n                <MRow Justify=\"JustifyTypes.Center\">\r\n                    <MCol Cols=\"7\">@item.Text</MCol>\r\n                    <MCol Class=\"text-right\" Cols=\"5\">@item.Time</MCol>\r\n                </MRow>\r\n            </MTimelineItem>\r\n        }\r\n\r\n        <MTimelineItem Class=\"mb-6\" HideDot>\r\n            <span>Today</span>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Color=\"grey\" IconColor=\"grey lighten-2\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    This order was archived.\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:26 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    <MChip Class=\"white--text ml-0\" Color=\"purple\" Label Small>\r\n                        App\r\n                    </MChip>\r\n                    Digital Downloads fulfilled 1 item.\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Color=\"grey\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    Order confirmation email was sent to doddgu (gushoudao@masastack.com).\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" HideDot>\r\n            <MButton Class=\"mx-0\">Resend Email</MButton>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Class=\"mb-4\" Color=\"grey\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    A $15.00 USD payment was processed on PayPal Express Checkout\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n\r\n        <MTimelineItem Color=\"grey\" Small>\r\n            <MRow Justify=\"JustifyTypes.SpaceBetween\">\r\n                <MCol Cols=\"7\">\r\n                    John Leider placed this order on Online Store (checkout #1937432132572).\r\n                </MCol>\r\n                <MCol Class=\"text-right\" Cols=\"5\">\r\n                    15:25 EDT\r\n                </MCol>\r\n            </MRow>\r\n        </MTimelineItem>\r\n    </MTimeline>\r\n</MContainer>\r\n\r\n@code\r\n{\r\n    private class EventDemo\r\n    {\r\n        public int Id { get; set; }\r\n        public string Text { get; set; }\r\n        public string Time { get; set; }\r\n    }\r\n    private List<EventDemo> _events = new List<EventDemo>();\r\n    private string _input = string.Empty;\r\n    private int _nonce = 0;\r\n\r\n    private void HandleOnKeyDown(KeyboardEventArgs args)\r\n    {\r\n        if (args.Key == \"Enter\")\r\n        {\r\n            Comment();\r\n        }\r\n    }\r\n\r\n    private void Comment()\r\n    {\r\n        _events.Insert(0,\r\n            new EventDemo\r\n                {\r\n                    Id = _nonce++,\r\n                    Text = _input,\r\n                    Time = DateTime.Now.ToString(\"HH:mm:ss\")\r\n                });\r\n\r\n        _input = string.Empty;\r\n    }\r\n}",
         "Type": "Demos.Components.Timeline.misc.Advanced",
         "Style": "",
         "Debug": false,
@@ -6939,6 +7298,11 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
+    "Related": [
+      "/components/cards",
+      "/components/icons",
+      "/components/grid-system"
+    ],
     "Title": "Timelines",
     "Type": "Timeline",
     "FullTitle": "Timelines"
@@ -6947,7 +7311,8 @@
     "Desc": "<p>The <code>MTooltip</code> component is useful for conveying information when a user hovers over an element. You can also\nprogrammatically control the display of tooltips through a <strong>@bind-Value</strong>. When activated, tooltips display a text\nlabel identifying an element, such as a description of its function.</p>\n",
     "Order": 0,
     "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n"
+      "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
+      "ע��": "\n<!--alert:info-->\n<p>In order to correctly position 'MTooltip', a position support (<code>top</code> | 'bottom <code>|' left</code> | 'right') is required.</p>\n"
     },
     "LastWriteTime": "2021-12-06T12:39:16.6494788+08:00",
     "DemoList": [
@@ -6989,6 +7354,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tooltip.svg",
     "Cols": 1,
+    "Related": [
+      "/components/badges",
+      "/components/icons",
+      "/components/menus"
+    ],
     "Title": "Tooltips",
     "Type": "Tooltip",
     "FullTitle": "Tooltips"
@@ -7180,6 +7550,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Treeview.svg",
     "Cols": 1,
+    "Related": [
+      "/components/lists",
+      "/components/list-item-groups",
+      "/components/timelines"
+    ],
     "Title": "Treeview",
     "Type": "Treeview",
     "FullTitle": "Treeview"
@@ -7219,6 +7594,11 @@
     "Category": "Components",
     "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Cols": 1,
+    "Related": [
+      "/components/lists",
+      "/components/data-tables",
+      "/components/data-iterators"
+    ],
     "Title": "Virtual scroller",
     "Type": "VirtualScroll",
     "FullTitle": "Virtual scroller"

@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Todo...
+Rules allow you to apply custom validation on all form components. These are verified in order, and * * maximum * * errors will be displayed each time, so please make sure you sort the rules accordingly.

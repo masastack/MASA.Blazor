@@ -94,9 +94,9 @@ double Top { get; }
 当你使用 **App** 属性添加和删除组件时，这些值会自动更新。 它们是不可编辑的，并且以只读状态存在。 你可以通过引用 **Application** 对象的应用属性来访问这些值。
 
 ```c#
- [Inject] public GlobalConfig GlobalConfig { get; set; }
+ [Inject] public MasaBlazor MasaBlazor { get; set; }
  
- Console.WriteLine(GlobalConfig.Application.Footer); // 60
+ Console.WriteLine(MasaBlazor.Application.Footer); // 60
 ```
 
 <!--alert:error-->

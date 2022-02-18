@@ -4,6 +4,10 @@ type: Icon
 title: Icons
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
+related:
+  - /features/icon-fonts
+  - /components/buttons
+  - /components/cards
 ---
 
 The `MIcon` component provides a large set of glyphs to provide context to various aspects of your application. For a

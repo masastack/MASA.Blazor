@@ -4,6 +4,10 @@ type: Tabs
 title: Tabs
 cols: 1
 cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tabs.svg
+related:
+  - /components/icons
+  - /components/toolbars
+  - /components/windows
 ---
 
 The `MTabs` component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation

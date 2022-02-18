@@ -1,7 +1,8 @@
 ﻿{
   "Title": "MDatePicker",
   "Components": [
-    "Date pickers"
+    "Date pickers",
+    "Date pickers month"
   ],
   "Props": [
     {
