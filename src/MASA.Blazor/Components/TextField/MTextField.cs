@@ -567,6 +567,7 @@ namespace MASA.Blazor
 
         public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
+            
             if (OnKeyDown.HasDelegate)
             {
                 await OnKeyDown.InvokeAsync(args);

@@ -1,11 +1,13 @@
-﻿<MContainer Style="max-width: 600px;">
+﻿@using Microsoft.AspNetCore.Components.Web
+
+<MContainer Style="max-width: 600px;">
     <MTimeline Dense Clipped>
         <MTimelineItem FillDot Class="white--text mb-12" Color="orange" Large>
             <IconContent>
                 <span>JL</span>
             </IconContent>
             <ChildContent>
-                <MTextField @bind-Value="_input" HideDetails="true" Flat Label="Leave a comment..." Solo OnKeyDown="Comment">
+                <MTextField @bind-Value="_input" HideDetails="true" Flat Label="Leave a comment..." Solo OnKeyDown="HandleOnKeyDown">
                     <AppendContent>
                         <MButton Class="mx-0" Depressed OnClick="Comment">
                             Post
@@ -104,6 +106,14 @@
     private List<EventDemo> _events = new List<EventDemo>();
     private string _input = string.Empty;
     private int _nonce = 0;
+
+    private void HandleOnKeyDown(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+        {
+            Comment();
+        }
+    }
 
     private void Comment()
     {
