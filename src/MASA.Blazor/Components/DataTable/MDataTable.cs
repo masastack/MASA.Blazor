@@ -194,6 +194,8 @@ namespace MASA.Blazor
         //TODO:we will change this
         public DataOptions Options => InternalOptions;
 
+        protected bool IsFixedRight => FixedRight && ComputedItems.Any();
+
         public Task HandleOnRowClickAsync(MouseEventArgs args)
         {
             return Task.CompletedTask;
@@ -311,7 +313,7 @@ namespace MASA.Blazor
                     attrs[nameof(Dense)] = Dense;
                     attrs[nameof(Class)] = Class;
                     attrs[nameof(Style)] = Style;
-                    attrs[nameof(FixedRight)] = FixedRight;
+                    attrs[nameof(FixedRight)] = IsFixedRight;
                     attrs[nameof(Width)] = Width;
                 })
                 .Apply<BSimpleCheckbox, MSimpleCheckbox>(attrs =>
