@@ -1,7 +1,13 @@
-﻿
-<div>
+﻿<div>
     <MFileInput TValue="List<IBrowserFile>"
                 Multiple
+                OnChange="HandleOnChange"
                 Label="File input"></MFileInput>
 </div>
 
+@code {
+    private void HandleOnChange(List<IBrowserFile> files)
+    {
+        //Other code
+    }
+}
