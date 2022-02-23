@@ -138,7 +138,10 @@ namespace MASA.Blazor
                 throw new ArgumentException("Multiple TValue should be List<IBrowserFile>");
             }
 
-            ValueChanged = OnChange;
+            if (OnChange.HasDelegate)
+            {
+                ValueChanged = OnChange;
+            }
         }
 
         public string HumanReadableFileSize(long bytes, bool binary = false)
