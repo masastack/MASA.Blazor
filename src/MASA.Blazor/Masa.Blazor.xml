@@ -1,0 +1,347 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Masa.Blazor</name>
+    </assembly>
+    <members>
+        <member name="P:Masa.Blazor.MAppBar.Height">
+            <summary>
+            Sets the height of the navigation drawer
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MAppBar.MaxHeight">
+            <summary>
+            This should be down in next version
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MAppBar.Width">
+            <summary>
+            Sets the width for the component.
+            </summary>
+        </member>
+        <member name="T:Masa.Blazor.MApp">
+            <summary>
+            Root for application
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MApp.LeftToRight">
+            <summary>
+            Whether to display from left to right
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MApp.Dark">
+            <summary>
+            Whether dark theme
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MCard.Dark">
+            <summary>
+            Whether dark theme
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MFooter.Dark">
+            <summary>
+            Whether dark theme
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MCol.Align">
+            <summary>
+            'auto', 'start', 'end', 'center', 'baseline', 'stretch'
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MContainer.Fluid">
+            <summary>
+            Removes viewport maximum-width size breakpoints
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MRow.NoGutters">
+            <summary>
+            Removes the gutter between v-cols.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MRow.Dense">
+            <summary>
+            Reduces the gutter between v-cols.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MRow.AlignContent">
+            <summary>
+            'start', 'end', 'center','space-between', 'space-around', 'stretch'
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MIcon.Dense">
+            <summary>
+            20px
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MIcon.Disabled">
+            <summary>
+            TODO: Disable the input
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MIcon.Large">
+            <summary>
+            36px
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MIcon.Small">
+            <summary>
+            16px
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MIcon.Tag">
+            <summary>
+            TODO: Specifies a custom tag to be used
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MIcon.XLarge">
+            <summary>
+            40px
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MIcon.XSmall">
+            <summary>
+            12px
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.Outlined">
+            <summary>
+            Removes elevation (box-shadow) and adds a thin border.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.Shaped">
+            <summary>
+            Provides an alternative active style for v-list-item
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.Dense">
+            <summary>
+            Lowers max height of list tiles
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.Disabled">
+            <summary>
+            Disables all children v-list-item components
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.Flat">
+            <summary>
+            Remove the highlighted background on active v-list-items
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.Nav">
+            <summary>
+            An alternative styling that reduces v-list-item width and rounds the corners. Typically used with v-navigation-drawer
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.Rounded">
+            <summary>
+            Rounds the v-list-item edges
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.Subheader">
+            <summary>
+            Removes top padding. Used when previous sibling is a header
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.TwoLine">
+            <summary>
+            Increases list-item height for two lines. This prop uses line-clamp and is not supported in all browsers.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.ThreeLine">
+            <summary>
+            Increases list-item height for three lines. This prop uses line-clamp and is not supported in all browsers.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.Height">
+            <summary>
+            Sets the height for the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.MinHeight">
+            <summary>
+            Sets the maximum height for the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.MinWidth">
+            <summary>
+            Sets the minimum width for the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.MaxHeight">
+            <summary>
+            Sets the maximum height for the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.MaxWidth">
+            <summary>
+            Sets the maximum width for the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MList.Width">
+            <summary>
+            Sets the width for the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MListItem.Dense">
+            <summary>
+            Lowers max height of list tiles
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MListItem.Disabled">
+            <summary>
+            Disables the component
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MListItem.Inactive">
+            <summary>
+            If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MListItem.IsClickable">
+            <summary>
+            This should be down in next version
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MListItem.Selectable">
+            <summary>
+            Allow text selection inside v-list-item. This prop uses user-select
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MListItem.TwoLine">
+            <summary>
+            Increases list-item height for two lines. This prop uses line-clamp and is not supported in all browsers.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MListItem.ThreeLine">
+            <summary>
+            Increases list-item height for three lines. This prop uses line-clamp and is not supported in all browsers.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavCard.Height">
+            <summary>
+            Sets the height for the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavCard.MinHeight">
+            <summary>
+            Sets the maximum height for the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavCard.MinWidth">
+            <summary>
+            Sets the minimum width for the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavCard.MaxHeight">
+            <summary>
+            Sets the maximum height for the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavCard.MaxWidth">
+            <summary>
+            Sets the maximum width for the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavCard.Width">
+            <summary>
+            Sets the width for the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.Absolute">
+            <summary>
+            Applies position: absolute to the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.IsBottom">
+            <summary>
+            Expands from the bottom of the screen on mobile devices
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.App">
+            <summary>
+            Designates the component as part of the application layout. Used for dynamically adjusting content sizing.
+            Components using this prop should reside outside of v-main component to function properly.
+            You can find more information about layouts on the application page. 
+            Note: this prop automatically applies position: fixed to the layout element.
+            You can overwrite this functionality by using the absolute prop
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.Fixed">
+            <summary>
+            Applies position: fixed to the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.Floating">
+            <summary>
+            A floating drawer has no visible container (no border-right)
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.Mobile">
+            <summary>
+            This should be down in next version
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.IsMouseover">
+            <summary>
+            This should be down in next version
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.IsMiniVariant">
+            <summary>
+            This should be down in next version
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.MiniVariantWidth">
+            <summary>
+            Designates the width assigned when the mini prop is turned on
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.ExpandOnHover">
+            <summary>
+            Collapses the drawer to a mini-variant until hovering with the mouse
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.Right">
+            <summary>
+            Places the navigation drawer on the right
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.Temporary">
+            <summary>
+            A temporary drawer sits above its application and uses a scrim (overlay) to darken the background
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.Height">
+            <summary>
+            Sets the height of the navigation drawer
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.MaxHeight">
+            <summary>
+            This should be down in next version
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MNavigationDrawer.Width">
+            <summary>
+            Sets the width for the component.
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MTree`1.Dark">
+            <summary>
+            Whether dark theme
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MasaBlazorOptions.DarkTheme">
+            <summary>
+            Default is false
+            </summary>
+        </member>
+        <member name="P:Masa.Blazor.MasaBlazorOptions.Theme">
+            <summary>
+            The theme options
+            </summary>
+        </member>
+    </members>
+</doc>
