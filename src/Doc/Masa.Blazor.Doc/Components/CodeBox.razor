@@ -1,0 +1,93 @@
+﻿@using Masa.Blazor.Doc.Utils
+@using System.Reflection.Metadata.Ecma335
+@inherits OwningComponentBase<Masa.Blazor.Doc.Services.DemoService>
+
+
+@((MarkupString)Demo.Description.FormatLink())
+
+@if (Component != null)
+{
+    <MSheet Outlined Rounded="true" Class="mb-9 m-example">
+        @if (_showComponent)
+        {
+            <MSheet Dark="_isDark" Rounded="true" Class="pa-4">
+                @Component
+            </MSheet>
+
+            <MDivider></MDivider>
+
+            <div class="m-lazy" style="min-height: 52px;">
+                <div class="text-end pa-2">
+                    <span class="m-app-tooltip-btn d-inline-block">
+                        <MTooltip Bottom OpenDelay=200>
+                            <ActivatorContent>
+                                <MButton Icon @onclick="()=>_isDark=!_isDark" @attributes="context.Attrs" aria-label="invert-example-colors">
+                                    <MIcon>mdi-invert-colors</MIcon>
+                                </MButton>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <span>@T("InvertExampleColors")</span>
+                            </ChildContent>
+                        </MTooltip>
+                    </span>
+                    <span class="m-app-tooltip-btn d-inline-block">
+                        <MTooltip Bottom OpenDelay=200>
+                            <ActivatorContent>
+                                <MButton Icon aria-label="view-in-github" Href="@GithubUrlHref" Target="_blank" @attributes="@context.Attrs">
+                                    <MIcon>mdi-github</MIcon>
+                                </MButton>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <span>@T("ViewOnGithub")</span>
+                            </ChildContent>
+                        </MTooltip>
+                    </span>
+
+                    <span class="m-app-tooltip-btn d-inline-block">
+                        <MTooltip Bottom OpenDelay=200>
+                            <ActivatorContent>
+                                <MButton Icon OnClick="() => _expend = !_expend" aria-label="view-source" @attributes="@context.Attrs">
+                                    <MIcon>mdi-code-tags</MIcon>
+                                </MButton>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <span>@T("ViewSource")</span>
+                            </ChildContent>
+                        </MTooltip>
+                    </span>
+                </div>
+            </div>
+
+            <ExpandTransition>
+                <Element Show="_expend">
+                    <MDivider></MDivider>
+                    <MItemGroup @bind-Value="_activeItem" Class="pa-2" Mandatory>
+                        @foreach (var ((type, _), content) in _items)
+                        {
+                            if (content == null) continue;
+
+                            <MItem Value="type">
+                                <MButton Text Class="mr-2" OnClick="context.Toggle" IsActive="context.Active"> @type </MButton>
+                            </MItem>
+                        }
+                    </MItemGroup>
+                    <MDivider></MDivider>
+                    <MWindow Value="_activeItem">
+                        @foreach (var ((type, lang), content) in _items)
+                        {
+                            if (content == null) continue;
+
+                            <MWindowItem Value="@type">
+                                <AppCode Code="@content" Language="@lang" Class="my-0"></AppCode>
+                            </MWindowItem>
+                        }
+                    </MWindow>
+                </Element>
+            </ExpandTransition>
+        }
+        else
+        {
+            <div class="text-center mt-10 mb-10">Loading...</div>
+        }
+    </MSheet>
+}

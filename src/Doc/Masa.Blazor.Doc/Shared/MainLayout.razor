@@ -1,0 +1,29 @@
+﻿@inherits LayoutComponentBase
+@layout BaseLayout
+
+<MNavigationDrawer @bind-Value="BaseLayout.Drawer" Floating Fixed Width="333" App Clipped>
+    <ChildContent>
+        <NavMenu></NavMenu>
+        <div class="pt-12"></div>
+    </ChildContent>
+</MNavigationDrawer>
+
+<MMain Class="mainlayout-m-main">
+    <ErrorBoundary @ref="_errorBoundary">
+        <ChildContent>
+            @Body
+        </ChildContent>
+        <ErrorContent>
+            @if (context is HttpRequestException requestException && requestException.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                <NotFound></NotFound>
+            }
+            else
+            {
+                <Error></Error>
+            }
+        </ErrorContent>
+    </ErrorBoundary>
+</MMain>
+
+<Toc />

@@ -1,0 +1,468 @@
+﻿{
+  "Title": "MDataTable",
+  "Components": [
+    "Data tables"
+  ],
+  "Props": [
+    {
+      "Name": "Caption",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "CheckboxColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "CustomFilter",
+      "Type": "Func<IEnumerable`1,IEnumerable`1,String,IEnumerable`1>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "CustomGroup",
+      "Type": "Func<IEnumerable`1,IEnumerable`1,IList`1,IList`1,IEnumerable`1>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "CustomItemFilter",
+      "Type": "Func<Object,String,TItem,Boolean>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "CustomSort",
+      "Type": "Func<IEnumerable`1,IEnumerable`1,IList`1,List`1,String,IEnumerable`1>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "减少组件的高度。"
+    },
+    {
+      "Name": "DisableFiltering",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "DisablePagination",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "DisableSort",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Expanded",
+      "Type": "List<TItem>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ExpandIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "FixedHeader",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "FixedRight",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "FooterProps",
+      "Type": "Dictionary<String,Object>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "GroupBy",
+      "Type": "OneOf<String,IList`1>",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "GroupDesc",
+      "Type": "IList<Boolean>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "HeaderProps",
+      "Type": "Dictionary<String,Object>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Headers",
+      "Type": "IEnumerable<DataTableHeader`1>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "HeadersLength",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "HideDefaultFooter",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "HideDefaultHeader",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemKey",
+      "Type": "Func<TItem,String>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Items",
+      "Type": "IEnumerable<TItem>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemsPerPage",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "ItemValues",
+      "Type": "IEnumerable<ItemValue`1>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "LoaderHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Loading",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "LoadingText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Locale",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "MultiSort",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "MustSort",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "NoDataText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "NoResultsText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OnItemSelect",
+      "Type": "Action<TItem,Boolean>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OnToggleSelectAll",
+      "Type": "Action<IEnumerable`1,Boolean>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Page",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Search",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "SelectableKey",
+      "Type": "Func<TItem,Boolean>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ServerItemsLength",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "ShowExpand",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ShowGroupBy",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ShowSelect",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SingleExpand",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SingleSelect",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SortBy",
+      "Type": "OneOf<String,IList`1>",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "SortDesc",
+      "Type": "OneOf<Boolean,IList`1>",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Stripe",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "IEnumerable<TItem>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最小宽度。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "BodyAppendContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "BodyPrependContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "CaptionContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment<ValueTuple`3>",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "ExpandedItemContent",
+      "Type": "RenderFragment<ValueTuple`2>",
+      "Description": ""
+    },
+    {
+      "Name": "FootContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "FooterContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "GroupContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "GroupHeaderContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "HeaderColContent",
+      "Type": "RenderFragment<DataTableHeader>",
+      "Description": ""
+    },
+    {
+      "Name": "HeaderContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ItemColContent",
+      "Type": "RenderFragment<ItemColProps`1>",
+      "Description": ""
+    },
+    {
+      "Name": "ItemContent",
+      "Type": "RenderFragment<ItemProps`1>",
+      "Description": ""
+    },
+    {
+      "Name": "ItemDataTableExpandContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ItemDataTableSelectContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "LoadingContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "NoDataContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "NoResultsContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "PageTextContent",
+      "Type": "RenderFragment<ValueTuple`3>",
+      "Description": ""
+    },
+    {
+      "Name": "ProgressContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "TopContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnOptionsUpdate",
+      "Type": "EventCallback<DataOptions>",
+      "Description": ""
+    },
+    {
+      "Name": "OnPageCount",
+      "Type": "EventCallback<Int32>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<IEnumerable`1>",
+      "Description": ""
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+﻿{
+  "Title": "MResponsive",
+  "Components": [
+    "Aspect ratios"
+  ],
+  "Props": [
+    {
+      "Name": "AspectRatio",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "ContentClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Description": "Applies the dark theme variant to the component."
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the height for the component."
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the maximum height for the component."
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the maximum width for the component."
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the minimum height for the component."
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the minimum width for the component."
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the width for the component."
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": []
+}

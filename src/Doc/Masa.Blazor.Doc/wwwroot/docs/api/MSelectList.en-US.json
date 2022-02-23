@@ -1,0 +1,120 @@
+﻿{
+  "Title": "MSelectList",
+  "Components": [
+    "Selects"
+  ],
+  "Props": [
+    {
+      "Name": "Action",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Description": "Applies specified color to the control - it can be the name of material color (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5))."
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Description": "Decreases component’s height."
+    },
+    {
+      "Name": "HideSelected",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemDisabled",
+      "Type": "Func<TItem,Boolean>",
+      "Description": ""
+    },
+    {
+      "Name": "Items",
+      "Type": "IList<TItem>",
+      "Description": ""
+    },
+    {
+      "Name": "ItemText",
+      "Type": "Func<TItem,String>",
+      "Description": ""
+    },
+    {
+      "Name": "ItemValue",
+      "Type": "Func<TItem,TItemValue>",
+      "Description": ""
+    },
+    {
+      "Name": "NoDataText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "NoFilter",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "SearchInput",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedIndex",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedItems",
+      "Type": "IEnumerable<TItem>",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "AppendItemContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ItemContent",
+      "Type": "RenderFragment<SelectListItemProps`1>",
+      "Description": ""
+    },
+    {
+      "Name": "NoDataContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "PrependItemContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnSelect",
+      "Type": "EventCallback<TItem>",
+      "Description": ""
+    }
+  ]
+}

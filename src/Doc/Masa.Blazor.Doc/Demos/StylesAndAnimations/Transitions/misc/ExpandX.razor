@@ -1,0 +1,37 @@
+﻿<MRow Justify=JustifyTypes.Center>
+
+    <MCol Class="shrink">
+
+        <MButton Class="ma-2" Color="primary" OnClick="_=>_expand=!_expand">
+            Expand Transition
+        </MButton>
+
+        <ExpandTransition>
+            <MCard Show=@_expand Height=100 Width=100 class="mx-auto secondary">
+            </MCard>
+        </ExpandTransition>
+
+    </MCol>
+
+    <div class="mx-4 hidden-sm-and-down"></div>
+
+    <MCol Class="shrink">
+
+        <MButton Class="ma-2" Color="secondary" OnClick="_=>_expand2=!_expand2">
+            Expand X Transition
+        </MButton>
+
+        <ExpandTransition>
+            <MCard Show=@_expand2 Height=100 Width=100 class="mx-auto secondary">
+            </MCard>
+        </ExpandTransition>
+
+    </MCol>
+
+</MRow>
+
+
+@code {
+    bool _expand = false;
+    bool _expand2 = false;
+}

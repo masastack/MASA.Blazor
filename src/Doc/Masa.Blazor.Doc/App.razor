@@ -1,0 +1,10 @@
+<Microsoft.AspNetCore.Components.Routing.Router AppAssembly="@typeof(MainLayout).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="@typeof(MainLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <Masa.Blazor.Doc.Pages.NotFound></Masa.Blazor.Doc.Pages.NotFound>
+        </LayoutView>
+    </NotFound>
+</Microsoft.AspNetCore.Components.Routing.Router>

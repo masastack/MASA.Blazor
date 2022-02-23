@@ -1,0 +1,25 @@
+﻿<MFooter Padless Dark>
+    <MCard Flat Tile Dark Class="flex">
+        <MCardTitle Class="teal">
+            <strong class="subheading">Get connected with us on social networks!</strong>
+
+            <MSpacer></MSpacer>
+
+            @foreach (var icon in _icons)
+            {
+                <MButton Class="mx-4" Dark Icon>
+                    <MIcon Size="24">@icon</MIcon>
+                </MButton>
+            }
+        </MCardTitle>
+
+        <MCardText Class="py-2 white--text text-center">
+            @DateTime.Now.Year - <strong>MASA Blazor</strong>
+        </MCardText>
+    </MCard>
+</MFooter>
+
+@code
+{
+    private string[] _icons = new string[4] { "mdi-facebook", "mdi-twitter", "mdi-linkedin", "mdi-instagram" };
+}

@@ -1,0 +1,70 @@
+﻿{
+  "Title": "MProgressCircular",
+  "Components": [
+    "Progress circular"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "Applies specified color to the control - it can be the name of material color (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5))."
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Indeterminate",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Rotate",
+      "Type": "StringNumber",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Size",
+      "Type": "StringNumber",
+      "Default": "32",
+      "Description": "Set the height and width of the component ."
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Value",
+      "Type": "StringNumber",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "4",
+      "Description": "Sets the width for the component."
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": []
+}

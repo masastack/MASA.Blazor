@@ -1,0 +1,302 @@
+﻿{
+  "Title": "MAppBar",
+  "Components": [
+    "App bars"
+  ],
+  "Props": [
+    {
+      "Name": "Absolute",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "应用 position: absolute 样式到组件."
+    },
+    {
+      "Name": "App",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定该组件作为应用程序布局的一部分。用于动态调整内容的大小。使用此属性的组件只有位于 v-main 组件的 外部才能正常运行。您可以在 应用程序页面 获取更多有关布局的信息。注意： 使用此属性会自动应用position: fixed 到布局元素上。您可以使用 absolute 属性 来覆盖这个功能。"
+    },
+    {
+      "Name": "Bottom",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向底部对齐。"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "ClippedLeft",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定位于左侧的应用程序的 v-navigation-drawer 在应用程序栏下方。"
+    },
+    {
+      "Name": "ClippedRight",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定位于右侧的应用程序的 v-navigation-drawer 在应用程序栏下方。"
+    },
+    {
+      "Name": "Collapse",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将工具栏置于折叠状态，以减小其最大宽度。"
+    },
+    {
+      "Name": "CollapseOnScroll",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "减少组件的高度。"
+    },
+    {
+      "Name": "ElevateOnScroll",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Elevation",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "组件的海拔可接受 0 到 24 之间的值。"
+    },
+    {
+      "Name": "Extended",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ExtensionHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "FadeImgOnScroll",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Fixed",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "给组件应用 position: fixed"
+    },
+    {
+      "Name": "Flat",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "删除工具栏的框阴影。"
+    },
+    {
+      "Name": "Floating",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将 display: inline-flex 应用于组件。"
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "HideOnScroll",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "InvertedScroll",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Left",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "将 left: 应用于组件。"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "MarginTop",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "将 margin-top: 应用于组件。"
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大高度。"
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小高度。"
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "Outlined",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使背景透明并使用薄边框。"
+    },
+    {
+      "Name": "Prominent",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将工具栏内容的高度增加到 128px。"
+    },
+    {
+      "Name": "Right",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Rounded",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": "对指定的组件应用 border-radius 样式。"
+    },
+    {
+      "Name": "ScrollOffScreen",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ScrollTarget",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ScrollThreshold",
+      "Type": "Double",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Shaped",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Short",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ShrinkOnScroll",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Src",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Tile",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "删除组件的border-radius样式"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "ExtensionContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ImgContent",
+      "Type": "RenderFragment<Dictionary`2>",
+      "Description": ""
+    }
+  ],
+  "Events": []
+}

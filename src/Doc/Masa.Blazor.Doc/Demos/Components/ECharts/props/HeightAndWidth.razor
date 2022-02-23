@@ -1,0 +1,42 @@
+﻿<MCard>
+    <MCardSubtitle>柱状图</MCardSubtitle>
+    <MCardText>
+        <MRow>
+            <MCol>
+                <MECharts Width="400" Height="300" Option="_option">
+                </MECharts>
+            </MCol>
+            <MCol>宽高比:400/300</MCol>
+        </MRow>
+    </MCardText>
+</MCard>
+
+@code {
+    private object _option = new
+    {
+        Title = new
+        {
+            Text = "ECharts 入门示例"
+        },
+        Tooltip = new { },
+        Legend = new
+        {
+            Data = new[] { "销量" }
+        },
+        XAxis = new
+        {
+            Data = new[] { "衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子" }
+        },
+        YAxis = new { },
+        Series = new[]
+                                    {
+            new
+            {
+                Name= "销量",
+                Type= "bar",
+                Data= new []{ 5, 20, 36, 10, 10, 20 }
+            }
+        }
+    };
+}
+

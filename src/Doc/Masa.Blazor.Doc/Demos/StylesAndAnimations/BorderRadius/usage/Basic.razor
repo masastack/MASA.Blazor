@@ -1,0 +1,29 @@
+﻿<div class="text-center">
+    <MSlider @bind-Value="_model" Max="@(_rounded.Count - 1)" TickLabels="_rounded"></MSlider>
+
+    <div class="py-3"></div>
+
+    <MSheet Class="@($"mx-auto transition-swing secondary {Radius()}")" MaxWidth="@(_model == 6 ? 128 : 256)"
+        Elevation="12" Height="128" Width="@("100%")"></MSheet>
+
+    <div class="py-3"></div>
+
+    <code class="text-subtitle-1">@Radius()</code>
+</div>
+
+@code {
+    private double _model = 3;
+    private List<string> _rounded = new() { "0", "sm", "md", "lg", "xl", "pill", "circle" };
+
+    private string Radius()
+    {
+        var rounded = "rounded";
+        var value = _rounded[(int)_model];
+        if (value != "md")
+        {
+            rounded += $"-{value}";
+        }
+
+        return rounded;
+    }
+}

@@ -1,0 +1,109 @@
+﻿{
+  "Title": "MPagination",
+  "Components": [
+    "Pagination"
+  ],
+  "Props": [
+    {
+      "Name": "Circle",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "Applies specified color to the control - it can be the name of material color (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5))."
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Applies the dark theme variant to the component."
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Length",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "NextIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PrevIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "TotalVisible",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    }
+  ],
+  "Contents": [],
+  "Events": [
+    {
+      "Name": "OnInput",
+      "Type": "EventCallback<Int32>",
+      "Description": ""
+    },
+    {
+      "Name": "OnNext",
+      "Type": "EventCallback",
+      "Description": ""
+    },
+    {
+      "Name": "OnPrevious",
+      "Type": "EventCallback",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Int32>",
+      "Description": ""
+    }
+  ]
+}

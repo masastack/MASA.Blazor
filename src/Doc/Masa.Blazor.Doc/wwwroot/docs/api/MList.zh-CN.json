@@ -1,0 +1,166 @@
+﻿{
+  "Title": "MList",
+  "Components": [
+    "Lists"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "减少组件的高度。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "禁用所有子级的 v-list-item 组件"
+    },
+    {
+      "Name": "Elevation",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "组件的海拔可接受 0 到 24 之间的值。"
+    },
+    {
+      "Name": "Expand",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Flat",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "删除活动的 v-list-item 上突出显示的背景"
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Linkage",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大高度。"
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小高度。"
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "Nav",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "另一种样式可以减小 v-list-item 的宽度并圆角化。 通常与 v-navigation-drawer 一起使用"
+    },
+    {
+      "Name": "Outlined",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使背景透明并使用薄边框。"
+    },
+    {
+      "Name": "Rounded",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "对指定的组件应用 border-radius 样式。"
+    },
+    {
+      "Name": "Shaped",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "为 v-list-item 提供一个可选的活动样式。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Subheader",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "会移除上边距（top padding），当前面只有一个列表组标题的时候使用"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ThreeLine",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "增加三行的列表项高度。 该属性使用 line-clamp ，并非所有浏览器都支持。"
+    },
+    {
+      "Name": "TwoLine",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "增加两行的列表项高度。 该属性使用 line-clamp ，并非所有浏览器都支持。"
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": []
+}

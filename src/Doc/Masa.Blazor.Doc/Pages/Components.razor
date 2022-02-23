@@ -1,0 +1,150 @@
+﻿@page "/components/{name}"
+@page "/components"
+@using Masa.Blazor.Doc.Models
+@using Masa.Blazor.Doc.Utils
+@using System.Web
+@using System.Globalization
+@layout DocLayout
+
+@if (_demoComponent != null)
+{
+    <SectionContent Title="@_demoComponent.Title" SubTitle="@_demoComponent.Subtitle" Id="@_demoComponent.Title" Level="1" IsAnchor>
+
+        @((MarkupString)_demoComponent.Desc.FormatLink())
+
+        @if (Usage != null)
+        {
+            var index = _demoIndex++;
+            <SectionContent Title="@Usage.Title" Level="2" IsAnchor>
+                <CodeBox Index="index" Demo="Usage" @key="_demoComponent.Title" ComponentName="@_demoComponent.Title"></CodeBox>
+            </SectionContent>
+        }
+
+        @if (_demoComponent.OtherDocs != null)
+        {
+            foreach (var (title, doc) in _demoComponent.OtherDocs)
+            {
+                var alerts = doc.SplitByAlertType();
+
+                <SectionContent Title="@title" Id="@title.HashSection()" Level="2" IsAnchor>
+                    @foreach (var (type, alert) in alerts)
+                    {
+                        if (type == AlertTypes.None)
+                        {
+                            var codes = alert.SplitByCode();
+
+                            foreach (var (lang, code) in codes)
+                            {
+                                if (lang != null)
+                                {
+                                    <AppCode Code="@HttpUtility.HtmlDecode(code.RemoveWrapTag().RemoveWrapTag())" Language="@lang"></AppCode>
+                                }
+                                else
+                                {
+                                    @((MarkupString)code.FormatLink())
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <MAlert Type="@type" Border="Borders.Left" Text Class="m-alert--doc">
+                                @((MarkupString)alert.FormatLink())
+                            </MAlert>
+                        }
+                    }
+                </SectionContent>
+            }
+        }
+
+        @if (PropsList.Any() || EventsList.Any() || ContentsList.Any() || MiscList.Any())
+        {
+            var lang = I18nConfig.Language ?? CultureInfo.CurrentCulture.Name;
+            var example = DemoItemModel.GenerateExample(lang);
+
+            <SectionContent Title="@example.Title" Id="examples" Level="2" IsAnchor>
+                @if (PropsList.Any())
+                {
+                    var props = DemoItemModel.GenerateProps(lang);
+
+                    <SectionContent Title="@props.Title" Id="props" Level="3" IsAnchor>
+                        @foreach (var item in PropsList)
+                        {
+                            var index = _demoIndex++;
+                            <SectionContent Title="@item.Title" Level="4" IsAnchor>
+                                <CodeBox @key="@($"{_demoComponent.Title}-{item.Title}")" Index="index" Demo="item" ComponentName="@_demoComponent?.Title"></CodeBox>
+                            </SectionContent>
+                        }
+                    </SectionContent>
+                }
+                @if (EventsList.Any())
+                {
+                    var events = DemoItemModel.GenerateEvents(lang);
+
+                    <SectionContent Title="@events.Title" Id="events" Level="3" IsAnchor>
+                        @foreach (var item in EventsList)
+                        {
+                            var index = _demoIndex++;
+                            <SectionContent Title="@item.Title" Level="4" IsAnchor>
+                                <CodeBox @key="@($"{_demoComponent.Title}-{item.Title}")" Index="index" Demo="item" ComponentName="@_demoComponent?.Title"></CodeBox>
+                            </SectionContent>
+                        }
+                    </SectionContent>
+                }
+                @if (ContentsList.Any())
+                {
+                    var contents = DemoItemModel.GenerateContents(lang);
+
+                    <SectionContent Title="@contents.Title" Id="contents" Level="3" IsAnchor>
+                        @foreach (var item in ContentsList)
+                        {
+                            var index = _demoIndex++;
+                            <SectionContent Title="@item.Title" Level="4" IsAnchor>
+                                <CodeBox @key="@($"{_demoComponent.Title}-{item.Title}")" Index="index" Demo="item" ComponentName="@_demoComponent?.Title"></CodeBox>
+                            </SectionContent>
+                        }
+                    </SectionContent>
+                }
+                @if (MiscList.Any())
+                {
+                    var misc = DemoItemModel.GenerateMisc(lang);
+
+                    <SectionContent Title="@misc.Title" Id="misc" Level="3" IsAnchor>
+                        @foreach (var item in MiscList)
+                        {
+                            var index = _demoIndex++;
+                            <SectionContent Title="@item.Title" Level="4" IsAnchor>
+                                <CodeBox @key="@($"{_demoComponent.Title}-{item.Title}")" Index="index" Demo="item" ComponentName="@_demoComponent?.Title"></CodeBox>
+                            </SectionContent>
+                        }
+                    </SectionContent>
+                }
+            </SectionContent>
+        }
+    </SectionContent>
+    <SectionContent Class="mt-12" Title="@T("Compontents.Footer.ReadyForMore")" Level="1">
+        <div class="mb-3">
+            @T("Compontents.Footer.ReadyForMore.Desc.Front")
+            <AppLink Href="/about/meet-the-team">@T("Compontents.Footer.ReadyForMore.Desc.Middle")</AppLink>
+            @T("Compontents.Footer.ReadyForMore.Desc.End")
+        </div>
+        <RelatedPages Related="@_demoComponent?.Related" />
+        <MDivider Class="my-6 mt-7 mb-5"></MDivider>
+        <BottomNav></BottomNav>
+        <div>
+            <div class="blue-grey--text text--darken-1 d-flexalign-center justify-space-between">
+                <div class="font-weight-medium d-flex align-baseline grow flex-wrap">
+                    <span class="mb-2 mb-md-0">
+                        @T("Compontents.Footer.Edit.Front")
+                        <AppLink Href="@GithubUrlHref">Github</AppLink>
+                        @T("Compontents.Footer.Edit.End")
+                    </span>
+                    <div class="spacer hidden-sm-and-down"></div>
+                    <div class="text-body-2">
+                        <span class="font-weight-medium mr-1">@T("Compontents.Footer.UpdateTime")</span>
+                        <span class="text--secondary">@_demoComponent.LastWriteTime</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </SectionContent>
+}

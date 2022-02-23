@@ -1,0 +1,110 @@
+﻿{
+  "Title": "MTimelineItem",
+  "Components": [
+    "Timelines"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "FillDot",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "从点容器中删除填充"
+    },
+    {
+      "Name": "HideDot",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "隐藏时间线内点的显示"
+    },
+    {
+      "Name": "Icon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "为点容器指定图标"
+    },
+    {
+      "Name": "IconColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。 你可以在 colors page 中找到内置类的列表。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Large",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "大尺寸的点"
+    },
+    {
+      "Name": "Left",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "显式地将项目设置为左方向"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Right",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "显式地将项目设置为右方向"
+    },
+    {
+      "Name": "Small",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "小尺寸的点"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "IconContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "OppositeContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": []
+}

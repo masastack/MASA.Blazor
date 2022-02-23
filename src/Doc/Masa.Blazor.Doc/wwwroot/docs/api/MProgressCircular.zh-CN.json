@@ -1,0 +1,70 @@
+﻿{
+  "Title": "MProgressCircular",
+  "Components": [
+    "Progress circular"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Indeterminate",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "恒定动画，加载进度未知时使用。"
+    },
+    {
+      "Name": "Rotate",
+      "Type": "StringNumber",
+      "Default": "0",
+      "Description": "以度为单位旋转圆的起点"
+    },
+    {
+      "Name": "Size",
+      "Type": "StringNumber",
+      "Default": "32",
+      "Description": "设置组件的高度和宽度."
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "StringNumber",
+      "Default": "0",
+      "Description": "当前进度的百分比值"
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "4",
+      "Description": "设定组件的最小宽度。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": []
+}

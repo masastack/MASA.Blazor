@@ -1,0 +1,36 @@
+﻿<div class="d-flex align-center justify-center">
+    <MECharts Option="_option">
+    </MECharts>
+</div>
+
+@code{
+    private object _option = new
+    {
+        Title = new
+        {
+            Left = "center",
+            Text = "ECharts 入门示例"
+        },
+        Tooltip = new { },
+        Legend = new
+        {
+            Right="20px",
+            Data = new[] { "销量" }
+        },
+        XAxis = new
+        {
+            Data = new[] { "衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子" }
+        },
+        YAxis = new { },
+        Series = new[]
+        {
+            new 
+            {
+                Name= "销量",
+                Type= "bar",
+                Data= new []{ 5, 20, 36, 10, 10, 20 }
+            }
+        }
+    };
+}
+

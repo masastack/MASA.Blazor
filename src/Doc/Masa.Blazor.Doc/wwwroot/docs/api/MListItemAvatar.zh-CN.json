@@ -1,0 +1,113 @@
+﻿{
+  "Title": "MListItemAvatar",
+  "Components": [
+    "Lists",
+    "List item groups"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "Horizontal",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使用另一种水平样式。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Left",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定头像在组件左侧。它被诸如 v-chip 和 v-btn 等组件绑在一起。"
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大高度。"
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小高度。"
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "Right",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定头像在组件的右侧。它被诸如 v-chip 和 v-btn 等组件绑在一起。"
+    },
+    {
+      "Name": "Rounded",
+      "Type": "StringBoolean",
+      "Default": "false",
+      "Description": "对指定的组件应用 border-radius 样式。"
+    },
+    {
+      "Name": "Size",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设置组件的高度和宽度."
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tile",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "删除组件的border-radius样式"
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": []
+}

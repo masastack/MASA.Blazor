@@ -1,0 +1,115 @@
+﻿{
+  "Title": "MBanner",
+  "Components": [
+    "Banners"
+  ],
+  "Props": [
+    {
+      "Name": "App",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "当在 m-main 中使用时，将参考和依据 m-toolbar 和 m-system-bar的高度来计算距离顶部位置。"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Elevation",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "组件的海拔可接受 0 到 24 之间的值。"
+    },
+    {
+      "Name": "Icon",
+      "Type": "String",
+      "Default": "undefined",
+      "Description": "指定特定的图标。"
+    },
+    {
+      "Name": "IconColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SingleLine",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "强制横幅变为一行。"
+    },
+    {
+      "Name": "Sticky",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "组件应用 position: sticky（常绿浏览器）。你能够在 MDN documentation for sticky position 浏览更多信息。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "true",
+      "Description": "控制组件可见还是隐藏。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ActionsContent",
+      "Type": "RenderFragment<Action>",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "IconContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnIconClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    }
+  ]
+}

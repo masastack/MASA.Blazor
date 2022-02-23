@@ -1,0 +1,130 @@
+﻿{
+  "Title": "MDataFooter",
+  "Components": [
+    "Data iterators",
+    "Data Tables"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "DisableItemsPerPage",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "DisablePagination",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "FirstIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemsPerPageAllText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemsPerPageOptions",
+      "Type": "IEnumerable<OneOf`2>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemsPerPageText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "LastIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "NextIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Options",
+      "Type": "DataOptions",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PageText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Pagination",
+      "Type": "DataPagination",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PrevIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ShowCurrentPage",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ShowFirstLastPage",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "PageTextContent",
+      "Type": "RenderFragment<ValueTuple`3>",
+      "Description": ""
+    },
+    {
+      "Name": "PrependContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnOptionsUpdate",
+      "Type": "EventCallback<Action`1>",
+      "Description": ""
+    }
+  ]
+}

@@ -1,0 +1,270 @@
+﻿{
+  "Title": "MSwitch",
+  "Components": [
+    "Switches"
+  ],
+  "Props": [
+    {
+      "Name": "AppendIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "在组件上附加一个图标，使用与 v-icon 相同的语法"
+    },
+    {
+      "Name": "BackgroundColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "减少组件的高度。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Error",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ErrorCount",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "ErrorMessages",
+      "Type": "List<String>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Flat",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "显示没有海拔的组件。 拇指的默认海拔为 4dp，flat 重置它"
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "HideDetails",
+      "Type": "StringBoolean",
+      "Default": "false",
+      "Description": "隐藏提示和验证错误。当设置为 auto 时，只有在有信息（提示、错误信息、计数器值等）要显示时，才会显示信息。"
+    },
+    {
+      "Name": "Hint",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Inset",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "扩展 v-switch 轨迹以包含缩略图"
+    },
+    {
+      "Name": "Label",
+      "Type": "String",
+      "Default": "null",
+      "Description": "设置输入标签"
+    },
+    {
+      "Name": "LeftText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Loading",
+      "Type": "StringBoolean",
+      "Default": "false",
+      "Description": "显示循环进度条。 可以是指定将哪种颜色应用于进度栏的字符串（任何 material color 或主题颜色――primary, secondary, success, info, warning, error），也可以是使用组件颜色的布尔值 （由颜色属性设置 - 如果是由组件支持） 或主色"
+    },
+    {
+      "Name": "Messages",
+      "Type": "List<String>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "PersistentHint",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "PrependIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "RightText",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Rules",
+      "Type": "IEnumerable<Func`2>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Success",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SuccessMessages",
+      "Type": "List<String>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "TrackColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ValidateOnBlur",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ValueExpression",
+      "Type": "Expression<Func`1>",
+      "Default": "",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "AppendContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "LabelContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "MessageContent",
+      "Type": "RenderFragment<String>",
+      "Description": ""
+    },
+    {
+      "Name": "PrependContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnAppendClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnChange",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    },
+    {
+      "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnMouseDown",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnMouseUp",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnPrependClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    }
+  ]
+}

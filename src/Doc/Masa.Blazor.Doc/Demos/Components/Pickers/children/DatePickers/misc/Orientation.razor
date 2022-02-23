@@ -1,0 +1,12 @@
+﻿<MRow Align="AlignTypes.Center">
+    <MCheckbox @bind-Value="_landscape"
+               Label="Landscape"></MCheckbox>
+    <MDatePicker @bind-Value="_picker"
+                 Landscape="_landscape"></MDatePicker>
+</MRow>
+
+  @code {
+    private DateOnly _picker = DateOnly.FromDateTime(DateTime.Now);
+    private bool _landscape;
+  }
+

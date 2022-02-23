@@ -1,0 +1,13 @@
+﻿<MRow Justify="JustifyTypes.SpaceAround"
+      Align="AlignTypes.Center">
+    <MTimePicker @bind-Value="_picker"
+                 UseSeconds></MTimePicker>
+    <MTimePicker @bind-Value="_picker"
+                 Landscape
+                 UseSeconds></MTimePicker>
+</MRow>
+
+@code {
+    private TimeOnly? _picker;
+}
+

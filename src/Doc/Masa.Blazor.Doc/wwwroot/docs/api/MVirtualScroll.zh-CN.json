@@ -1,0 +1,88 @@
+﻿{
+  "Title": "MVirtualScroll",
+  "Components": [
+    "Virtual scroller"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Items",
+      "Type": "ICollection<TItem>",
+      "Default": "[]",
+      "Description": "要显示的项目数组"
+    },
+    {
+      "Name": "ItemSize",
+      "Type": "Single",
+      "Default": "50",
+      "Description": "每个项的像素高度"
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最大高度。"
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最小高度。"
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "OverscanCount",
+      "Type": "Int32",
+      "Default": "3",
+      "Description": "在可见区域之前和之后呈现的额外项数"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "设定组件的最小宽度。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ItemContent",
+      "Type": "RenderFragment<TItem>",
+      "Description": ""
+    }
+  ],
+  "Events": []
+}

@@ -1,0 +1,208 @@
+﻿{
+  "Title": "MChip",
+  "Components": [
+    "Chips",
+    "Chip groups"
+  ],
+  "Props": [
+    {
+      "Name": "Active",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Close",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "添加删除按钮"
+    },
+    {
+      "Name": "CloseIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "更改用于 close 纸片的默认图标"
+    },
+    {
+      "Name": "CloseLabel",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "禁用纸片，使其不可选择"
+    },
+    {
+      "Name": "Draggable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "是否可以被鼠标拖拽。"
+    },
+    {
+      "Name": "Filter",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "选中时显示选择图标。"
+    },
+    {
+      "Name": "FilterIcon",
+      "Type": "String",
+      "Default": "mdi-check",
+      "Description": "更改用于 filter 纸片的默认图标。"
+    },
+    {
+      "Name": "Href",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "IsActive",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Label",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "移除圆形边缘"
+    },
+    {
+      "Name": "Large",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使组件尺寸变的巨大。"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Link",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Outlined",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使背景透明并使用薄边框。"
+    },
+    {
+      "Name": "Pill",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Ripple",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Small",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使组件尺寸变的小。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Target",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "TextColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "XLarge",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使组件尺寸变的无比巨大。"
+    },
+    {
+      "Name": "XSmall",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使组件尺寸变的更小。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnCloseClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    }
+  ]
+}

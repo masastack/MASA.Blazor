@@ -1,0 +1,207 @@
+﻿{
+  "Title": "MCard",
+  "Components": [
+    "Cards"
+  ],
+  "Props": [
+    {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": "配置在链接激活时应用的 CSS 类。"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "移除组件的单击或 target 功能。"
+    },
+    {
+      "Name": "Elevation",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "组件的海拔可接受 0 到 24 之间的值。"
+    },
+    {
+      "Name": "Flat",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "移除卡片的海拔。"
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "Hover",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "悬停时将应用 4dp 的海拔（默认值为 2dp）。"
+    },
+    {
+      "Name": "Href",
+      "Type": "String",
+      "Default": "null",
+      "Description": "指定组件为锚点并应用 href 属性。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Img",
+      "Type": "String",
+      "Default": "null",
+      "Description": "指定卡片的背景图。对于更高级的实现，建议您使用 MImage 组件。"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "为组件设置浅色主题。"
+    },
+    {
+      "Name": "Link",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定组件为链接。当使用 href 或 **to ** 属性时，这是自动的设置的。"
+    },
+    {
+      "Name": "LoaderHeight",
+      "Type": "StringNumber",
+      "Default": "4",
+      "Description": "指定加载器的高度"
+    },
+    {
+      "Name": "Loading",
+      "Type": "StringBoolean",
+      "Default": "false",
+      "Description": "显示线性进度条。可以是指定将哪种颜色应用于进度条的字符串（任何 material 色彩——主要（primary）, 次要（secondary）, 成功（success）, 信息（info），警告（warning），错误（error）），或者使用组件的布尔值 color（由色彩属性设置——如果它被组件支持的话）还可以是原色。"
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大高度。"
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小高度。"
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "Outlined",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使背景透明并使用薄边框。"
+    },
+    {
+      "Name": "Raised",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定较高的默认海拔（8dp）。"
+    },
+    {
+      "Name": "Ripple",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Rounded",
+      "Type": "StringBoolean",
+      "Default": "null",
+      "Description": "对指定的组件应用 border-radius 样式。"
+    },
+    {
+      "Name": "Shaped",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "在卡片的左上角和右下角应用较大的边框半径。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "div",
+      "Description": "指定在根元素上使用的自定义标签。"
+    },
+    {
+      "Name": "Target",
+      "Type": "String",
+      "Default": "null",
+      "Description": "指定 target 属性。只在使用 href 属性时应用。"
+    },
+    {
+      "Name": "Tile",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "删除组件的border-radius样式"
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "ProgressContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    }
+  ]
+}

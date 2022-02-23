@@ -1,0 +1,39 @@
+﻿@using Masa.Blazor.Doc.Services
+@inherits OwningComponentBase<DemoService>
+
+<MNavigationDrawer Clipped App Floating Right Width="256" Class="doc-nav-right default-toc py-4 pr-3" Id="default-toc">
+    <PrependContent>
+        <div class="mb-2 text-h6 font-weight-medium text--primary" path="contents">@T("Contents")</div>
+    </PrependContent>
+    <ChildContent>
+        <ul class="mb-6">
+            @if (Items != null)
+            {
+                @foreach (var item in Items)
+                {
+                    var exClass = item == ActiveItem ? " purple--text darken-2 router-link-active" : "text--disabled";
+                    var pl = item.Level switch 
+                    {
+                        3 => "pl-6",
+                        4 => "pl-9",
+                        5 => "pl-12",
+                        _ => "pl-3"
+                        };
+
+                    <li class="@pl text-body-2 py-1 font-weight-regular @exClass">
+                        <a @onclick="() => HandleOnClick(item.Id)" @onclick:preventDefault @onclick:stopPropagation class="m-toc-link d-block transition-swing text-decoration-none">
+                            @item.Title
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+
+        <div class="ml-5">
+            <div class="ml-2 mb-3 text-caption font-weight-regular text--secondary" path="premiere-sponsors">@T("SeniorSponsor")</div>
+            <MCard Tag="a" Ripple="false" Tile Class="d-inline-block px-2 py-1 transparent" Flat Link Style="box-shadow:none!important">
+                <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/lsd-logo.png" alt=""/>
+            </MCard>
+        </div>
+    </ChildContent>
+</MNavigationDrawer>

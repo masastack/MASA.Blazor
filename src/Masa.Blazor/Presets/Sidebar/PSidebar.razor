@@ -1,0 +1,63 @@
+﻿@namespace Masa.Blazor.Presets
+@typeparam TItem
+
+<MList Outlined="Outlined" Shaped="Shaped" Dense="Dense"
+       Flat="Flat" Disabled="Disabled" Nav="Nav"
+       Height="Height" MinHeight="MinHeight" MinWidth="MinWidth"
+       MaxHeight="MaxHeight" MaxWidth="MaxWidth" Width="Width">
+    <MListItemGroup Value="_listItemGroupValue" ValueChanged="ListItemGroupValueChanged" Mandatory Color="@Color">
+        @foreach (var item in _sidebarItems)
+        {
+            if (item.Children != null)
+            {
+                <MListGroup @bind-Value="item.Expanded" Color="@Color" PrependIcon="@item.Icon">
+                    <ActivatorContent>
+                        <MListItemTitle>@item.Title</MListItemTitle>
+                    </ActivatorContent>
+                    <ChildContent>
+                        @foreach (var subitem in item.Children)
+                        {
+                            if (subitem.Children != null)
+                            {
+                                <MListGroup @bind-Value="subitem.Expanded" Color="@Color" SubGroup NoAction>
+                                    <ActivatorContent>
+                                        <MListItemTitle>@subitem.Title</MListItemTitle>
+                                    </ActivatorContent>
+                                    <ChildContent>
+                                        @foreach (var lastitem in subitem.Children)
+                                        {
+                                            <MListItem Link Value="lastitem.Key" OnClick="() => OnClick.InvokeAsync(lastitem.Data)">
+                                                <MListItemIcon>
+                                                    <MIcon>@lastitem.Icon</MIcon>
+                                                </MListItemIcon>
+                                                <MListItemTitle>@lastitem.Title</MListItemTitle>
+                                            </MListItem>
+                                        }
+                                    </ChildContent>
+                                </MListGroup>
+                            }
+                            else
+                            {
+                                <MListItem Link Value="@subitem.Key" OnClick="() => OnClick.InvokeAsync(subitem.Data)">
+                                    <MListItemIcon>
+                                        <MIcon>@subitem.Icon</MIcon>
+                                    </MListItemIcon>
+                                    <MListItemTitle>@subitem.Title</MListItemTitle>
+                                </MListItem>
+                            }
+                        }
+                    </ChildContent>
+                </MListGroup>
+            }
+            else
+            {
+                <MListItem Link Value="item.Key" OnClick="() => OnClick.InvokeAsync(item.Data)">
+                    <MListItemIcon>
+                        <MIcon>@item.Icon</MIcon>
+                    </MListItemIcon>
+                    <MListItemTitle>@item.Title</MListItemTitle>
+                </MListItem>
+            }
+        }
+    </MListItemGroup>
+</MList>

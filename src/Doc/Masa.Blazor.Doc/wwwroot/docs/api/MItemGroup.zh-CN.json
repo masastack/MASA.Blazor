@@ -1,0 +1,93 @@
+﻿{
+  "Title": "MItemGroup",
+  "Components": [
+    "Item groups"
+  ],
+  "Props": [
+    {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Mandatory",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "强制始终选择一个值（如果可用）。"
+    },
+    {
+      "Name": "Max",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Multiple",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "允许多个选择。value 属性必须是 array。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Values",
+      "Type": "List<StringNumber>",
+      "Default": "",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<StringNumber>",
+      "Description": ""
+    },
+    {
+      "Name": "ValuesChanged",
+      "Type": "EventCallback<List`1>",
+      "Description": ""
+    }
+  ]
+}

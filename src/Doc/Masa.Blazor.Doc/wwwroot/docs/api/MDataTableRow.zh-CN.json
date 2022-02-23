@@ -1,0 +1,81 @@
+﻿{
+  "Title": "MDataTableRow",
+  "Components": [
+    "Data tables"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Headers",
+      "Type": "List<DataTableHeader`1>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Index",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "IsExpanded",
+      "Type": "Func<TItem,Boolean>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "IsSelected",
+      "Type": "Func<TItem,Boolean>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Item",
+      "Type": "TItem",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Stripe",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "ItemColContent",
+      "Type": "RenderFragment<ItemColProps`1>",
+      "Description": ""
+    }
+  ],
+  "Events": []
+}

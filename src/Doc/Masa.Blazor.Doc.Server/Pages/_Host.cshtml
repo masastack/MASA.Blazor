@@ -1,0 +1,88 @@
+﻿@page "/"
+@using BlazorComponent.I18n
+@using Masa.Blazor.Doc
+@using Masa.Blazor.Doc.Utils
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MASA Blazor</title>
+    <base href="~/" />
+    <link rel="icon" href="https://cdn.masastack.com/stack/images/website/masa-blazor/miniLogo.png" type="image/x-icon">
+    <link href="_content/Masa.Blazor/css/masa-blazor.css" rel="stylesheet">
+    <link href="_content/Masa.Blazor/css/masa-extend-blazor.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
+    <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;display=swap" media="all">
+    <link href="_content/Masa.Blazor.Doc/css/doc.css" rel="stylesheet" />
+    <link href="_content/Masa.Blazor.Doc/masa-icon.css" rel="stylesheet" />
+    <link href="_content/Masa.Blazor.Doc/Masa.Blazor.Doc.bundle.scp.css" rel="stylesheet" />
+</head>
+<body>
+    <app>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </app>
+
+    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+    <script src="_content/Masa.Blazor.Doc/js/prism.js"></script>
+    <script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>
+    <script>
+        Blazor.start().then(function() {
+            window.BlazorComponent.Prism = {};
+            window.BlazorComponent.Prism.highlight = function(code, language, component, codeElement) {
+                setTimeout(function() {
+                    var highlightCode = Prism.highlight(code, Prism.languages[language], language);
+                    codeElement.innerHTML = highlightCode;
+                    component.invokeMethodAsync('OnAfterHighlighted');
+                },0);
+            }
+
+            window.BlazorComponent.Prism.highlightAll = function() {
+                var pres = document.querySelectorAll("pre");
+
+                for (var i = 0; i < pres.length; i++) {
+                    let pre = pres[i];
+
+                    let parent = pre.parentElement;
+                    if (parent.classList[0] == "app-code") {
+                        break;
+                    }
+
+                    let div = document.createElement("div");
+                    div.className = "app-code overflow-hidden m-sheet m-sheet--outlined theme--light rounded grey lighten-5";
+                    div.style = "opacity:0.85"
+
+                    parent.replaceChild(div, pre);
+                    div.appendChild(pre);
+                }
+
+                Prism.highlightAll();
+            }
+
+            window.setCookie = function(name, value) {
+                document.cookie = `$ {
+                    name
+                } = $ {
+                    escape(value.toString())
+                };
+                path = /;}`;
+            }
+
+            window.getCookie = function(name){
+                const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
+                const arr = document.cookie.match(reg);
+                if (arr) {
+                    return unescape(arr[2]);
+                }
+
+                return null;
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+﻿@namespace Masa.Blazor.Presets
+
+<Masa.Blazor.Presets.Modal Visible="Visible" Title="@Title" Width="Width" MaxWidth="MaxWidth" ShowActions="ShowActions" ScrollToTopOnHide="ScrollToTopOnHide" OkText="@OkText" CancelText="@CancelText" OnCancel="OnCancel" OnOk="HandleOnOk" @attributes="Attributes">
+    @if (Visible)
+    {
+        <MForm @ref="_form" Model="Model" EnableDataAnnotationsValidation>
+            @ChildContent
+        </MForm>
+    }
+</Masa.Blazor.Presets.Modal>

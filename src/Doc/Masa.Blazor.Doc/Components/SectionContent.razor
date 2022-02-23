@@ -1,0 +1,54 @@
+﻿@using Masa.Blazor.Doc.Models.Extensions
+@using Masa.Blazor.Doc.Utils
+
+<section id="@SectionId" class="@Class">
+    <Heading Level="@Level" Href="@Hash" OnClick="HandleOnClick">@FormattedTitle</Heading>
+
+    @ChildContent
+</section>
+
+@code {
+
+    [Inject]
+    private IJSRuntime Js { get; set; }
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+
+    [Parameter]
+    public string Class { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public int Level { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string SubTitle { get; set; }
+
+    [Parameter]
+    public string Id { get; set; }
+
+    [Parameter]
+    public bool IsAnchor { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private string FormattedTitle => string.IsNullOrEmpty(SubTitle) ? Title : $"{Title}（{SubTitle}）";
+
+    private string Hash => "#" + SectionId;
+
+    private string SectionId => Id ?? Title?.HashSection() ?? "";
+
+    private async Task HandleOnClick(MouseEventArgs _)
+    {
+        // if TODO:[issue](https://github.com/dotnet/aspnetcore/issues/36605) fixed, use
+        // NavigationManager.NavigateToHash(Hash);
+        // else
+        await Js.ScrollToHash(Hash);
+    }
+}

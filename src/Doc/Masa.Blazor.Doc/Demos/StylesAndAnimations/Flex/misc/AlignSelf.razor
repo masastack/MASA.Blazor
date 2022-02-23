@@ -1,0 +1,19 @@
+﻿<div>
+    @foreach (var j in _justify)
+    {
+        <MCard Class="d-flex mb-6" Color="grey lighten-2" Flat Height="100" Tile>
+            @for (var i = 1; i <= 3; i++)
+            {
+                var n = i;
+                <MCard Class="@($"pa-2 {(n == 2 ? $"align-self-{j}": "")}")" Outlined Tile>
+                    @(n == 2 ? "Aligned flex item": "Flex item")
+                </MCard>
+            }
+        </MCard>
+    }
+</div>
+
+@code
+{
+    private List<string> _justify = new() { "start", "end", "center", "baseline", "auto", "stretch" };
+}

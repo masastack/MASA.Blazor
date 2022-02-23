@@ -1,0 +1,176 @@
+﻿{
+  "Title": "MTreeviewNode",
+  "Components": [
+    "Treeview"
+  ],
+  "Props": [
+    {
+      "Name": "Activatable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "Applies specified color to the control - it can be the name of material color (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5))."
+    },
+    {
+      "Name": "ExpandIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "IndeterminateIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Item",
+      "Type": "TItem",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemChildren",
+      "Type": "Func<TItem,List`1>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemDisabled",
+      "Type": "Func<TItem,Boolean>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemKey",
+      "Type": "Func<TItem,TKey>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemText",
+      "Type": "Func<TItem,String>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Level",
+      "Type": "Int32",
+      "Default": "0",
+      "Description": ""
+    },
+    {
+      "Name": "LoadChildren",
+      "Type": "Func<TItem,Task>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "LoadingIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OffIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OnIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnClick",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ParentIsDisabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Rounded",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Designates the border-radius applied to the component."
+    },
+    {
+      "Name": "Selectable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "SelectionType",
+      "Type": "SelectionType",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Shaped",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "AppendContent",
+      "Type": "RenderFragment<TreeviewItem`1>",
+      "Description": ""
+    },
+    {
+      "Name": "LabelContent",
+      "Type": "RenderFragment<TreeviewItem`1>",
+      "Description": ""
+    },
+    {
+      "Name": "PrependContent",
+      "Type": "RenderFragment<TreeviewItem`1>",
+      "Description": ""
+    }
+  ],
+  "Events": []
+}

@@ -1,0 +1,142 @@
+﻿{
+  "Title": "MRow",
+  "Components": [
+    "Grid system"
+  ],
+  "Props": [
+    {
+      "Name": "Align",
+      "Type": "StringEnum<AlignTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignContent",
+      "Type": "StringEnum<AlignContentTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignContentLg",
+      "Type": "StringEnum<AlignContentTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignContentMd",
+      "Type": "StringEnum<AlignContentTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignContentSm",
+      "Type": "StringEnum<AlignContentTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignContentXl",
+      "Type": "StringEnum<AlignContentTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignLg",
+      "Type": "StringEnum<AlignTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignMd",
+      "Type": "StringEnum<AlignTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignSm",
+      "Type": "StringEnum<AlignTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "AlignXl",
+      "Type": "StringEnum<AlignTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Decreases component’s height."
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Justify",
+      "Type": "StringEnum<JustifyTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "JustifyLg",
+      "Type": "StringEnum<JustifyTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "JustifyMd",
+      "Type": "StringEnum<JustifyTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "JustifySm",
+      "Type": "StringEnum<JustifyTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "JustifyXl",
+      "Type": "StringEnum<JustifyTypes>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "NoGutters",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "div",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": []
+}

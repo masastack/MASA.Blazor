@@ -1,0 +1,124 @@
+﻿@using BlazorComponent.I18n
+@using Masa.Blazor.Doc.Models
+@using Masa.Blazor.Doc.Services
+@using Masa.Blazor.Doc.Utils
+@using System.Globalization;
+@inherits OwningComponentBase<DemoService>
+
+<MList Nav Linkage Class="mt-4">
+    @foreach (var item in MenuItems)
+    {
+        if (item.Children != null && item.Children.Any())
+        {
+            var group = GenGroup(item.Children);
+
+            <MListGroup AppendIcon="M8.33398 10.3335L12.5007 14.5002L16.6673 10.3335H8.33398Z"
+                        Class="m-list-group--default"
+                        Group="@group"
+                        Color="#5C2D91"
+                        NoAction
+                        PrependIcon="@item.Icon">
+                <ActivatorContent>
+                    <MListItemContent>
+                        <MListItemTitle>@item.Title</MListItemTitle>
+                    </MListItemContent>
+                </ActivatorContent>
+                <ChildContent>
+                    @foreach (var componentItem in item.Children)
+                    {
+                        if (componentItem.Children != null && componentItem.Children.Any())
+                        {
+                            var group2 = GenGroup(componentItem.Children);
+
+                            <MListGroup Class="m-list-group--default"
+                                        Group="@group2"
+                                        NoAction
+                                        Color="#5C2D91"
+                                        SubGroup>
+                                <ActivatorContent>
+                                    <MListItemContent>
+                                        <MListItemTitle>@FormatComponentTitle(componentItem)</MListItemTitle>
+                                    </MListItemContent>
+                                </ActivatorContent>
+                                <ChildContent>
+                                    @foreach (var subComponentItem in componentItem.Children)
+                                    {
+                                        <MListItem Class="m-list-item--default" Href="@subComponentItem.Url" Exact>
+                                            <MListItemContent>
+                                                <MListItemTitle>
+                                                    @FormatComponentTitle(subComponentItem)
+                                                </MListItemTitle>
+                                            </MListItemContent>
+                                        </MListItem>
+                                    }
+                                </ChildContent>
+                            </MListGroup>
+                        }
+                        else
+                        {
+                            <MListItem Class="m-list-item--default" Href="@componentItem.Url" Exact>
+                                <MListItemContent>
+                                    <MListItemTitle>
+                                        @FormatComponentTitle(componentItem)
+                                    </MListItemTitle>
+                                </MListItemContent>
+                            </MListItem>
+                        }
+                    }
+                </ChildContent>
+            </MListGroup>
+        }
+        else
+        {
+            <MListItem Class="m-list-item--default" Link Href="@item.Url">
+                <MListItemIcon>
+                    <MIcon>@item.Icon</MIcon>
+                </MListItemIcon>
+                <MListItemContent>
+                    <MListItemTitle>@item.Title</MListItemTitle>
+                </MListItemContent>
+            </MListItem>
+        }
+    }
+</MList>
+
+@code {
+    [Parameter]
+    public DemoMenuItemModel[] MenuItems { get; set; } = { };
+
+    [CascadingParameter(Name ="Lang")]
+    public bool IsChinese { get; set; }
+
+    [Inject]
+    public I18nConfig I18nConfig { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
+        MenuItems = await Service.GetMenuAsync();
+    }
+
+    string FormatComponentTitle(DemoMenuItemModel model)
+    {
+        return model.FullTitle;
+    }
+
+    List<string> GenGroup(DemoMenuItemModel[] items)
+    {
+        if (items == null || !items.Any()) return new List<string>();
+
+        var groups = new List<string>();
+
+        foreach (var item in items)
+        {
+            groups.AddRange(GenGroup(item.Children));
+
+            if (item.Url == null || groups.Contains(item.Url, StringComparer.OrdinalIgnoreCase)) continue;
+
+            groups.Add(item.Url);
+        }
+
+        return groups;
+    }
+
+}

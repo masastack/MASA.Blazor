@@ -1,0 +1,88 @@
+﻿{
+  "Title": "MVirtualScroll",
+  "Components": [
+    "Virtual scroller"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the height for the component."
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Items",
+      "Type": "ICollection<TItem>",
+      "Default": "[]",
+      "Description": "The array of items to display"
+    },
+    {
+      "Name": "ItemSize",
+      "Type": "Single",
+      "Default": "50",
+      "Description": "The height of each item"
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the maximum height for the component."
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the maximum width for the component."
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the minimum height for the component."
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the minimum width for the component."
+    },
+    {
+      "Name": "OverscanCount",
+      "Type": "Int32",
+      "Default": "3",
+      "Description": "The number of extra items rendered before and after the visible area "
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "Sets the width for the component."
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ItemContent",
+      "Type": "RenderFragment<TItem>",
+      "Description": ""
+    }
+  ],
+  "Events": []
+}

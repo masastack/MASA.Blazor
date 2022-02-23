@@ -1,0 +1,57 @@
+﻿@page "/api/{ApiName}"
+@layout ApiLayout
+
+<div>
+    <SectionContent Title="@($"{ApiName} API")" Id="@ApiName" IsAnchor Level="1">
+        @if (_api != null)
+        {
+            <SectionContent Title="组件页面" Level="2" IsAnchor>
+                <ul>
+                    @if (_api.Components != null)
+                    {
+                        foreach (var component in _api.Components)
+                        {
+                            var href = "/components/" + component;
+                            <li>
+                                <AppLink Href="@href.StructureUrl()">@component</AppLink>
+                            </li>
+                        }
+                    }
+                </ul>
+            </SectionContent>
+
+            @foreach (var item in new[] { "props", "contents", "events" })
+            {
+                var (id, title, apiData) = FormatSection(item);
+
+                if (apiData.Any())
+                {
+                    <SectionContent Id="@id" Title="@title" Level="2" IsAnchor>
+                        <ApiSection ApiData="@apiData" Section="@item"></ApiSection>
+                    </SectionContent>
+                }
+            }
+        }
+
+        <SectionContent Class="mt-12" Title="了解更多？" Level="1">
+            <div class="mb-3">
+                继续学习由
+                <AppLink Href="/about/meet-the-team">我们的团队</AppLink>
+                选择的相关内容，或通过使用下面的导航链接在页面之间跳转。
+            </div>
+            <MDivider Class="my-6 mt-7 mb-5"></MDivider>
+            <div class="d-flex mb-4">
+                <a class="text-decoration-none text-body-1">
+                    <span class="text-h6 text--primary">←&nbsp;</span>
+                    <span>上一页</span>
+                </a>
+                <MSpacer></MSpacer>
+                <a class="text-decoration-none text-body-1">
+                    <span>下一页</span>
+                    <span class="text-h6 text--primary">&nbsp;→</span>
+                </a>
+            </div>
+            <MSheet Class="m-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2 mb-8" Outlined Rounded="true" MinHeight="74" Style="width:100%"></MSheet>
+        </SectionContent>
+    </SectionContent>
+</div>

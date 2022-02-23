@@ -1,0 +1,54 @@
+﻿<MContainer>
+    <MCard Class="mx-auto"
+           MaxWidth="344">
+        <MToolbar Color="deep-purple accent-4"
+                  Dark
+                  Prominent>
+
+            <MAppBarNavIcon></MAppBarNavIcon>
+
+            <MToolbarTitle>My Files</MToolbarTitle>
+
+            <MButton Absolute
+                     Bottom
+                     Color="white"
+                     Fab
+                     Left
+                     Light>
+                <MIcon>mdi-plus</MIcon>
+            </MButton>
+
+            <MSpacer></MSpacer>
+
+            <MButton Icon>
+                <MIcon>mdi-share-variant</MIcon>
+            </MButton>
+
+            <MButton Icon>
+                <MIcon>mdi-magnify</MIcon>
+            </MButton>
+
+            <MButton Icon>
+                <MIcon>mdi-dots-vertical</MIcon>
+            </MButton>
+        </MToolbar>
+
+        <MContainer Style="height: 400px;">
+            <MRow Class="fill-height"
+                  AlignContent="@AlignContentTypes.Center"
+                  Justify="@JustifyTypes.Center">
+                <MCol Class="text-subtitle-1 text-center"
+                      Cols="12">
+                    Getting your files
+                </MCol>
+                <MCol Cols="6">
+                    <MProgressLinear Color="deep-purple accent-4"
+                                     Indeterminate
+                                     Rounded
+                                     Height="6">
+                    </MProgressLinear>
+                </MCol>
+            </MRow>
+        </MContainer>
+    </MCard>
+</MContainer>

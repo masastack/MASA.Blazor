@@ -1,0 +1,113 @@
+﻿@page "/stylesandanimations/{name}"
+@page "/stylesandanimations"
+
+@using Masa.Blazor.Doc.Models
+@using Masa.Blazor.Doc.Services
+@using Masa.Blazor.Doc.Utils
+@inject NavigationManager NavigationManager
+@layout DocLayout
+
+@if (_demoComponent != null)
+{
+    <SectionContent Title="@_demoComponent.Title" SubTitle="@_demoComponent.Subtitle" Id="@_demoComponent.Title" Level="1" IsAnchor>
+
+        @((MarkupString)_demoComponent.Desc.FormatLink())
+
+        @if (Usage != null)
+        {
+            <SectionContent Title="@Usage.Title" Level="2" IsAnchor>
+                <CodeBox Demo="Usage" ComponentName="@_demoComponent.Title"></CodeBox>
+            </SectionContent>
+        }
+
+        @if (_demoComponent.OtherDocs != null)
+        {
+            foreach (var (title, markup) in _demoComponent.OtherDocs)
+            {
+                var list = markup.SplitByAlertType();
+
+                <SectionContent Title="@title" Id="@title.HashSection()" Level="2" IsAnchor>
+                    @foreach (var (type, str) in list)
+                    {
+                        if (type == AlertTypes.None)
+                        {
+                            @((MarkupString)str.FormatLink())
+                        }
+                        else
+                        {
+                            <MAlert Type="@type" Border="Borders.Left" Text Class="m-alert--doc">
+                                @((MarkupString)str.FormatLink())
+                            </MAlert>
+                        }
+                    }
+                </SectionContent>
+            }
+        }
+
+        @if (PropsList.Any() || MiscList.Any())
+        {
+            var example = DemoItemModel.GenerateExample("zh-CN");
+
+            <SectionContent Title="@example.Title" Id="examples" Level="2" IsAnchor>
+
+                @if (PropsList.Any())
+                {
+                    var props = DemoItemModel.GenerateProps("zh-CN");
+
+                    <SectionContent Title="@props.Title" Id="props" Level="3" IsAnchor>
+                        @foreach (var item in PropsList)
+                        {
+                            <SectionContent Title="@item.Title" Level="4" IsAnchor>
+                                <CodeBox Demo="item" ComponentName="@_demoComponent?.Title" @key="@($"{_demoComponent.Title}-{item.Title}")"></CodeBox>
+                            </SectionContent>
+                        }
+                    </SectionContent>
+                }
+
+                @if (EventsList.Any())
+                {
+                    var contents = DemoItemModel.GenerateEvents("zh-CN");
+
+                    <SectionContent Title="@contents.Title" Id="events" Level="3" IsAnchor>
+                        @foreach (var item in EventsList)
+                        {
+                            <SectionContent Title="@item.Title" Level="4" IsAnchor>
+                                <CodeBox Demo="item" ComponentName="@_demoComponent?.Title" @key="@($"{_demoComponent.Title}-{item.Title}")"></CodeBox>
+                            </SectionContent>
+                        }
+                    </SectionContent>
+                }
+
+                @if (ContentsList.Any())
+                {
+                    var contents = DemoItemModel.GenerateContents("zh-CN");
+
+                    <SectionContent Title="@contents.Title" Id="contents" Level="3" IsAnchor>
+                        @foreach (var item in ContentsList)
+                        {
+                            <SectionContent Title="@item.Title" Level="4" IsAnchor>
+                                <CodeBox Demo="item" ComponentName="@_demoComponent?.Title" @key="@($"{_demoComponent.Title}-{item.Title}")"></CodeBox>
+                            </SectionContent>
+                        }
+                    </SectionContent>
+                }
+
+                @if (MiscList.Any())
+                {
+                    var misc = DemoItemModel.GenerateMisc("zh-CN");
+
+                    <SectionContent Title="@misc.Title" Id="misc" Level="3" IsAnchor>
+                        @foreach (var item in MiscList)
+                        {
+                            <SectionContent Title="@item.Title" Level="4" IsAnchor>
+                                <CodeBox Demo="item" ComponentName="@_demoComponent?.Title" @key="@($"{_demoComponent.Title}-{item.Title}")"></CodeBox>
+                            </SectionContent>
+                        }
+                    </SectionContent>
+                }
+
+            </SectionContent>
+        }
+
+    </SectionContent>
+}

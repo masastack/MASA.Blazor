@@ -1,0 +1,30 @@
+﻿<div class="text-center">
+    <MButton Dark
+           Color="red darken-2"
+           OnClick="Show">
+        Open Snackbar
+    </MButton>
+
+    <MSnackbar @bind-Value="_show"
+               MultiLine Dark>
+        <ChildContent>
+            Hello, I'm a snackbar
+        </ChildContent>
+        <ActionContent>
+            <MButton Color="red"
+                   Text
+                   OnClick="()=>_show = false">
+                Close
+            </MButton>
+        </ActionContent>
+    </MSnackbar>
+</div>
+
+@code{
+    private bool _show;
+
+    public void Show()
+    {
+        _show = true;
+    }
+}

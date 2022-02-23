@@ -1,0 +1,17 @@
+﻿@namespace Masa.Blazor.Presets
+
+<MSnackbar Value="Value" ValueChanged="ValueChanged" Timeout="Timeout" Top>
+    <ActionContent>
+        <MButton Icon OnClick="HandleOnClick">
+            <MIcon>mdi-close</MIcon>
+        </MButton>
+    </ActionContent>
+    <ChildContent>
+        @if (Type != AlertTypes.None)
+        {
+            <MIcon Color="@IconColor" Style="margin-right: 4px">@Icon</MIcon>
+        }
+
+        @ChildContent
+    </ChildContent>
+</MSnackbar>

@@ -1,0 +1,261 @@
+﻿{
+  "Title": "MTreeview",
+  "Components": [
+    "Treeview"
+  ],
+  "Props": [
+    {
+      "Name": "Activatable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Active",
+      "Type": "List<TKey>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "减少组件的高度。"
+    },
+    {
+      "Name": "ExpandIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Hoverable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "IndeterminateIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemChildren",
+      "Type": "Func<TItem,List`1>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemDisabled",
+      "Type": "Func<TItem,Boolean>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemKey",
+      "Type": "Func<TItem,TKey>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Items",
+      "Type": "List<TItem>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ItemText",
+      "Type": "Func<TItem,String>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "LoadChildren",
+      "Type": "Func<TItem,Task>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "LoadingIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "MultipleActive",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OffIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OnIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Open",
+      "Type": "List<TKey>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OpenAll",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "OpenOnClick",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "ParentIsDisabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Rounded",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "对指定的组件应用 border-radius 样式。"
+    },
+    {
+      "Name": "Search",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Selectable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SelectedColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "SelectionType",
+      "Type": "SelectionType",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Shaped",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "List<TKey>",
+      "Default": "null",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "LabelContent",
+      "Type": "RenderFragment<TreeviewItem`1>",
+      "Description": ""
+    },
+    {
+      "Name": "PrependContent",
+      "Type": "RenderFragment<TreeviewItem`1>",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "ActiveChanged",
+      "Type": "EventCallback<List`1>",
+      "Description": ""
+    },
+    {
+      "Name": "OnActiveUpdate",
+      "Type": "EventCallback<List`1>",
+      "Description": ""
+    },
+    {
+      "Name": "OnInput",
+      "Type": "EventCallback<List`1>",
+      "Description": ""
+    },
+    {
+      "Name": "OnOpenUpdate",
+      "Type": "EventCallback<List`1>",
+      "Description": ""
+    },
+    {
+      "Name": "OpenChanged",
+      "Type": "EventCallback<List`1>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<List`1>",
+      "Description": ""
+    }
+  ]
+}

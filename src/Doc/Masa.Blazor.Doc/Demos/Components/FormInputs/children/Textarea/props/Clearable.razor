@@ -1,0 +1,11 @@
+﻿<MContainer Fluid>
+    <MTextarea Clearable
+               ClearIcon="mdi-close-circle"
+               Label="Text"
+               @bind-Value="_value">
+    </MTextarea>
+</MContainer>
+
+@code{
+    private string _value = "This is clearable text.";
+}

@@ -1,0 +1,166 @@
+﻿{
+  "Title": "MListItem",
+  "Components": [
+    "Lists",
+    "List item groups"
+  ],
+  "Props": [
+    {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Dense",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "减少组件的高度。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "禁用组件"
+    },
+    {
+      "Name": "Exact",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Highlighted",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Href",
+      "Type": "String",
+      "Default": "null",
+      "Description": "指定组件为锚点并应用 href 属性。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Inactive",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "如果设置了该属性，即使有to/href或者@click，列表块也不会响应链接。"
+    },
+    {
+      "Name": "IsActive",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Link",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "指定组件为链接。当使用 href 或 **to ** 属性时，这是自动的设置的。"
+    },
+    {
+      "Name": "Linkage",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Ripple",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Selectable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "允许在 v-list-item 中选择文本。 该属性使用 user-select"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Target",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ThreeLine",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "增加三行的列表项高度。 该属性使用 line-clamp ，并非所有浏览器都支持。"
+    },
+    {
+      "Name": "TwoLine",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "增加两行的列表项高度。 该属性使用 line-clamp ，并非所有浏览器都支持。"
+    },
+    {
+      "Name": "Value",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "ItemContent",
+      "Type": "RenderFragment<ItemContext>",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    }
+  ]
+}

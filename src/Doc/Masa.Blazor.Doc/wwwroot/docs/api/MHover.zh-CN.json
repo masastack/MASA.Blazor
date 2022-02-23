@@ -1,0 +1,64 @@
+﻿{
+  "Title": "MHover",
+  "Components": [
+    "Hover"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "CloseDelay",
+      "Type": "StringNumber",
+      "Default": "0",
+      "Description": "关闭组件前等待的毫秒数。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "关闭悬停功能"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "OpenDelay",
+      "Type": "StringNumber",
+      "Default": "0",
+      "Description": "在打开组件之前等待的毫秒数。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "控制组件是可见的还是隐藏的。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment<HoverProps>",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+﻿{
+  "Title": "MDataTableHeader",
+  "Components": [
+    "Data tables"
+  ],
+  "Props": [
+    {
+      "Name": "CheckboxColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "DisableSort",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "EveryItem",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Headers",
+      "Type": "List<DataTableHeader>",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Options",
+      "Type": "DataOptions",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "ShowGroupBy",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SingleSelect",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SomeItems",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "SortIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "The style applied to the outermost element of the component"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "DataTableSelectContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "HeaderColContent",
+      "Type": "RenderFragment<DataTableHeader>",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnGroup",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    },
+    {
+      "Name": "OnSort",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    },
+    {
+      "Name": "OnToggleSelectAll",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    }
+  ]
+}

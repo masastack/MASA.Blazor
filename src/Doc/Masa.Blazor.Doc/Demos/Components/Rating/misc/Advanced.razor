@@ -1,0 +1,125 @@
+﻿@using BlazorComponent.Web;
+
+<MCard Class="mx-auto overflow-hidden" Style="max-width: 600px;">
+    <MRow>
+        <MCol Class="d-flex" Cols="6">
+            <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/ratings/fortnite1.png"></MImage>
+        </MCol>
+        <MCol Cols="6">
+            <MContainer Class="pa-0 pl-2" Style="margin: -4px 0">
+                <MRow>
+                    <MCol Class="d-flex" Cols="7">
+                        <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/ratings/fortnite2.png"></MImage>
+                    </MCol>
+                    <MCol Class="d-flex" Cols="5">
+                        <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/ratings/fortnite3.png"></MImage>
+                    </MCol>
+                    <MCol Class="d-flex" Cols="5">
+                        <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/ratings/fortnite4.png"></MImage>
+                    </MCol>
+                    <MCol Class="d-flex" Cols="7">
+                        <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/ratings/fortnite5.png"></MImage>
+                    </MCol>
+                </MRow>
+            </MContainer>
+        </MCol>
+    </MRow>
+
+    <MCardTitle Class="align-start">
+        <div>
+            <span class="text-h5">FORTNITE</span>
+            <div class="grey--text font-weight-light">
+                Video game
+            </div>
+        </div>
+        <MSpacer></MSpacer>
+        <MDialog @bind-Value="_dialog" Width="400">
+            <ActivatorContent>
+                <MIcon @attributes="@context.Attrs">mdi-share-variant</MIcon>
+            </ActivatorContent>
+            <ChildContent>
+                <MCard>
+                    <MCardTitle>
+                        <span class="text-h6 font-weight-bold">Share</span>
+                        <MSpacer></MSpacer>
+                        <MButton Class="mx-0" Icon OnClick="() => _dialog = false">
+                            <MIcon>mdi-close-circle-outline</MIcon>
+                        </MButton>
+                    </MCardTitle>
+                    <MList>
+                        <MListItem>
+                            <MListItemAction>
+                                <MIcon Color="indigo">mdi-facebook</MIcon>
+                            </MListItemAction>
+                            <MCardTitle>Facebook</MCardTitle>
+                        </MListItem>
+                        <MListItem>
+                            <MListItemAction>
+                                <MIcon Color="cyan">mdi-twitter</MIcon>
+                            </MListItemAction>
+                            <MCardTitle>Twitter</MCardTitle>
+                        </MListItem>
+                        <MListItem>
+                            <MListItemAction>
+                                <MIcon Color="cyan">mdi-email</MIcon>
+                            </MListItemAction>
+                            <MCardTitle>Email</MCardTitle>
+                        </MListItem>
+                    </MList>
+                    <MTextField @ref="_ref" Label="@(_copied ? "Link copied" : "Click to copy link")"
+                                Class="pa-4" Readonly Value="@("https://g.co/kgs/nkrK43")" OnFocus="Copy">
+                    </MTextField>
+                </MCard>
+            </ChildContent>
+        </MDialog>
+    </MCardTitle>
+
+    <MDivider></MDivider>
+    <MCardActions>
+        <span class="pl-2 grey--text text--darken-2 font-weight-light text-caption">
+            16,544 reviews
+        </span>
+        <MSpacer></MSpacer>
+        <MRating @bind-Value="_rating" Length="10" Readonly Items="_items">
+            <ItemContent Context="props">
+                <MIcon Large Color="@(props.IsFilled ? "purple darken-4" : "")">
+                    @($"mdi-numeric-{props.Index}-box")
+                </MIcon>
+            </ItemContent>
+        </MRating>
+    </MCardActions>
+    <div class="pa-4 pt-0 text-caption">
+        <em>Portions of the materials used are trademarks and/or copyrighted works of Epic Games, Inc. All rights reserved by Epic. This material is not official and is not endorsed by Epic.</em>
+    </div>
+</MCard>
+
+@code
+{
+    [Inject]
+    public Document Document { get; set; }
+
+    private bool _copied = false;
+    private bool _dialog = false;
+    private double _rating = 10;
+    private MTextField<string> _ref;
+
+    private List<RatingItem> _items = new List<RatingItem>
+    {
+        new RatingItem {Index = 1, IsFilled = true},
+        new RatingItem {Index = 2, IsFilled = true},
+        new RatingItem {Index = 3, IsFilled = true},
+        new RatingItem {Index = 4, IsFilled = true},
+        new RatingItem {Index = 5, IsFilled = true},
+        new RatingItem {Index = 6, IsFilled = true},
+        new RatingItem {Index = 7, IsFilled = true},
+        new RatingItem {Index = 8, IsFilled = true},
+        new RatingItem {Index = 9, IsFilled = true},
+        new RatingItem {Index = 10, IsFilled = true}
+    };
+
+    private async Task Copy(FocusEventArgs args)
+    {
+        await Document.ExecCommandAsync("selectAll", false, null);
+        _copied = await Document.ExecCommandAsync<bool>("copy", false, null);
+    }
+}

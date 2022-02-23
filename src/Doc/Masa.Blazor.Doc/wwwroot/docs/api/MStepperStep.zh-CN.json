@@ -1,0 +1,88 @@
+﻿{
+  "Title": "MStepperStep",
+  "Components": [
+    "Steppers"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Complete",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "标记为已完成"
+    },
+    {
+      "Name": "CompleteIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "步骤标记为已完成时显示的图标"
+    },
+    {
+      "Name": "Editable",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "标记为可编辑"
+    },
+    {
+      "Name": "EditIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "步骤可编辑时显示的图标"
+    },
+    {
+      "Name": "ErrorIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "步骤错误时显示的图标"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Rules",
+      "Type": "List<Func`1>",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "Step",
+      "Type": "Int32",
+      "Default": "",
+      "Description": "步骤圈内显示的内容"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    }
+  ]
+}

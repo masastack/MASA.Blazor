@@ -1,0 +1,178 @@
+﻿@using System.Text.Json;
+
+<div>
+    <MButton OnClick="() => _addModal.Show()" Class="mb-1">Add User</MButton>
+
+    <Masa.Blazor.Presets.Modal Visible="_addModal.Visible" Title="User"
+                               Width="500"
+                               ScrollToTopOnHide
+                               OnOk="HandleOnClick"
+                               OnCancel="HandleOnCancel">
+        <MRow>
+            <MCol Cols="12">
+                <MTextField @bind-Value="_addModal.Data.UserName"
+                            Label="UserName"
+                            Dense
+                            Outlined
+                            HideDetails="true"/>
+            </MCol>
+            <MCol Cols="12">
+                <MTextField @bind-Value="_addModal.Data.City"
+                            Label="City"
+                            Dense
+                            Outlined
+                            HideDetails="true"/>
+            </MCol>
+            <MCol Cols="12">
+                <MRadioGroup @bind-Value="_addModal.Data.Gender"
+                             Label="Gender:"
+                             Row
+                             Dense
+                             Style="margin-top: 0"
+                             HideDetails="true">
+                    <MRadio Label="Body" Value="0"></MRadio>
+                    <MRadio Label="Girl" Value="1"></MRadio>
+                </MRadioGroup>
+            </MCol>
+            <MCol Cols="12">
+                <MSelect @bind-Value="_addModal.Data.Friends"
+                         Items="_friends"
+                         Label="Friends"
+                         Multiple
+                         ItemValue="r => r"
+                         ItemText="r => r"
+                         HideDetails="true">
+                </MSelect>
+            </MCol>
+            <MCol Cols="12">
+                <MAutocomplete @bind-Value="_addModal.Data.Favorites"
+                               Items="_favorites"
+                               Label="Favorites"
+                               Multiple
+                               ItemValue="r => r"
+                               ItemText="r => r"
+                               HideDetails="true">
+                </MAutocomplete>
+            </MCol>
+        </MRow>
+        <MRow>
+            <MCol>@JsonSerializer.Serialize(_addModal.Data)</MCol>
+        </MRow>
+    </Masa.Blazor.Presets.Modal>
+
+    <MRow NoGutters Class="pa-2">
+        <MCol Cols="4">username: @_user?.UserName</MCol>
+        <MCol Cols="4">city: @_user?.City</MCol>
+        <MCol Cols="4">gender: @_user?.Gender</MCol>
+        <MCol Cols="4">friends: @string.Join(",", _user?.Friends ?? new List<string>())</MCol>
+        <MCol Cols="4">favorites: @string.Join(",", _user?.Favorites ?? new List<string>())</MCol>
+        <MCol Cols="4">
+            <MButton OnClick="() => _addModal.Show(_user?.ShallowCopy())"
+                     Color="primary"
+                     Disabled="@(_user == null)"
+                     Text
+                     Small>
+                Edit
+            </MButton>
+        </MCol>
+    </MRow>
+</div>
+
+@code {
+    readonly List<string> _favorites = new() { "Basketball", "Football", "Ping-pong", "Badminton" };
+    readonly List<string> _friends = new() { "Rachel Greene", "Monica Geller", "Joey Tribbiani", "Ross Geller", "Chandler Bing", "Phoebe Buffay" };
+
+    DataModal<User> _addModal = new();
+    User _user;
+
+    private void HandleOnCancel()
+    {
+        _addModal.Hide();
+    }
+
+    private async Task HandleOnClick()
+    {
+        _addModal.ShowLoading();
+
+        if (_addModal.HasValue)
+        {
+    // Update
+        }
+        else
+        {
+    // Add
+        }
+
+        await Task.Delay(1000);
+
+        _user = _addModal.Data;
+
+        _addModal.HideLoading();
+
+        _addModal.Hide();
+    }
+
+    public class User : IShallowCopy<User>
+    {
+        public string UserName { get; set; }
+        public int Gender { get; set; }
+        public string City { get; set; }
+        public List<string> Favorites { get; set; } = new() { };
+        public List<string> Friends { get; set; } = new() { };
+
+        public User ShallowCopy()
+        {
+            var user = (User)this.MemberwiseClone();
+            user.Friends = Friends;
+            user.Favorites = Favorites;
+            return user;
+        }
+    }
+
+    public class DataModal<T> where T : class, new()
+    {
+        public bool Visible { get; set; }
+
+        public T Data { get; private set; }
+
+        public bool HasValue { get; private set; }
+
+        public bool Loading { get; private set; }
+
+        public DataModal()
+        {
+            Data = new T();
+        }
+
+        public void Show() => Visible = true;
+
+        /// <summary>
+    /// 显示弹窗
+    /// </summary>
+    /// <param name="data"></param>
+    /// <remarks>写入数据之前请确保此对象是拷贝过的</remarks>
+        public void Show(T data)
+        {
+            Visible = true;
+            HasValue = true;
+            Data = data;
+        }
+
+        public virtual void Hide()
+        {
+            Visible = false;
+            HasValue = false;
+            Data = new T();
+        }
+
+        public bool ShowLoading() => Loading = true;
+
+        public bool HideLoading() => Loading = false;
+    }
+
+    public interface IShallowCopy<T>
+    {
+        public T ShallowCopy();
+    }
+
+}

@@ -1,0 +1,298 @@
+﻿{
+  "Title": "MButton",
+  "Components": [
+    "Buttons",
+    "Button Groups"
+  ],
+  "Props": [
+    {
+      "Name": "Absolute",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "应用 position: absolute 样式到组件."
+    },
+    {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Block",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将按钮扩大到可用空间的 100％。"
+    },
+    {
+      "Name": "Bottom",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向底部对齐。"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Depressed",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "移除按钮的阴影效果。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "移除组件的单击或 target 功能。"
+    },
+    {
+      "Name": "Elevation",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": "组件的海拔可接受 0 到 24 之间的值。"
+    },
+    {
+      "Name": "Fab",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将按钮指定为浮动动作按钮。按钮会变圆。"
+    },
+    {
+      "Name": "Fixed",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "给组件应用 position: fixed"
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "Href",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Icon",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将按钮指定为图标。按钮将变成圆形，并应用text属性。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "IsActive",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Large",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使组件尺寸变的巨大。"
+    },
+    {
+      "Name": "Left",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向左对齐。 这应该与 absolute 或 fixed 属性一起使用。"
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Link",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Loading",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "添加一个加载图标动画。"
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大高度。"
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小高度。"
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "Outlined",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使背景透明并使用薄边框。"
+    },
+    {
+      "Name": "Plain",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "移除悬停在按钮上时应用的默认背景变化。"
+    },
+    {
+      "Name": "Right",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向右对齐。这应该与 absolute 或 fixed 属性一起使用。"
+    },
+    {
+      "Name": "Ripple",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Rounded",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "对指定的组件应用 border-radius 样式。"
+    },
+    {
+      "Name": "Shaped",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Small",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使组件尺寸变的小。"
+    },
+    {
+      "Name": "StopPropagation",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Tag",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Target",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Text",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使背景透明。当使用color属性时，颜色将应用于按钮文本而不是背景。"
+    },
+    {
+      "Name": "Tile",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "删除组件的border-radius样式"
+    },
+    {
+      "Name": "Top",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将组件向顶部对齐。"
+    },
+    {
+      "Name": "Type",
+      "Type": "String",
+      "Default": "null",
+      "Description": "设置按钮的type属性。"
+    },
+    {
+      "Name": "Value",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "XLarge",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使组件尺寸变的无比巨大。"
+    },
+    {
+      "Name": "XSmall",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "使组件尺寸变的更小。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "LoaderContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    }
+  ]
+}

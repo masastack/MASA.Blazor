@@ -1,0 +1,9 @@
+﻿@page "/{category}"
+@page "/{category}/{fileName}"
+@using Masa.Blazor.Doc.Services
+@layout DocLayout
+
+@if (File != null)
+{
+    @((MarkupString)File.Html)
+}

@@ -1,0 +1,52 @@
+﻿<MCard Class="mx-auto" MaxWidth="450">
+    <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/cards/house.jpg" AspectRatio="16 / 9"></MImage>
+    <MCardTitle>
+        <div class="text-h4 mb-2">Welcome Home...</div>
+        <div class="text-h6 font-weight-regular grey--text">Monday, 12:30 PM, Mostly Sunny</div>
+    </MCardTitle>
+    <MRow Class="px-4 grey--text" Align="AlignTypes.Center">
+        <MAvatar Size="24" Class="mr-4">
+            <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/weather/part-cloud-48px.png" Contain></MImage>
+        </MAvatar>
+
+        <span>81° / 62°</span>
+    </MRow>
+    
+    <MDivider Class="mt-6 mx-4"></MDivider>
+
+    <MCardText>
+        <MChip Class="mr-2" OnClick="Lights">
+            <MIcon Left>mdi-brightness-5</MIcon>
+            Turn on Lights
+        </MChip>
+        <MChip Class="mr-2" OnClick="Alarm">
+            <MIcon Left>mdi-alarm-check</MIcon>
+            Set alarm
+        </MChip>
+        <MChip Class="mr-2" OnClick="Blinds">
+            <MIcon Left>mdi-blinds</MIcon>
+            Close blinds
+        </MChip>
+    </MCardText>
+</MCard>
+
+@code
+{
+    [Inject]
+    private IJSRuntime Js { get; set; }
+
+    private void Alarm()
+    {
+        Js.InvokeVoidAsync("alert", "Toggling lights...");
+    }
+
+    private void Blinds()
+    {
+        Js.InvokeVoidAsync("alert", "Toggling lights...");
+    }
+
+    private void Lights()
+    {
+        Js.InvokeVoidAsync("alert", "Toggling lights...");
+    }
+}

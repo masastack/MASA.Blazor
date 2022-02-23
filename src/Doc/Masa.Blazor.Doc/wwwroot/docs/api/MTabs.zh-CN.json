@@ -1,0 +1,178 @@
+﻿{
+  "Title": "MTabs",
+  "Components": [
+    "Tabs"
+  ],
+  "Props": [
+    {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Default": "null",
+      "Description": "active-class 在子组件（children ）被激活时应用。"
+    },
+    {
+      "Name": "AlignWithTitle",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "让v-tabs与工具栏标题对齐"
+    },
+    {
+      "Name": "BackgroundColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": "更改组件的背景颜色。"
+    },
+    {
+      "Name": "CenterActive",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "强制所选标签以居中"
+    },
+    {
+      "Name": "Centered",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将选项卡居中"
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Default": "null",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "FixedTabs",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "v-tabs-item min-width 160px, max-width 360px"
+    },
+    {
+      "Name": "Grow",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "强制 v-tab 占用所有可用空间"
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "HideSlider",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "隐藏生成的 v-tabs-slider"
+    },
+    {
+      "Name": "IconsAndText",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将堆叠图标和文字垂直"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "MobileBreakpoint",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": ""
+    },
+    {
+      "Name": "NextIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "左分页图标"
+    },
+    {
+      "Name": "Optional",
+      "Type": "Boolean",
+      "Default": "null",
+      "Description": "不需要活动项目。 在将 v-tab 用作 router-link 时有用"
+    },
+    {
+      "Name": "PrevIcon",
+      "Type": "String",
+      "Default": "null",
+      "Description": "右分页图标"
+    },
+    {
+      "Name": "Right",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "将选项向右侧对齐"
+    },
+    {
+      "Name": "ShowArrows",
+      "Type": "StringBoolean",
+      "Default": "false",
+      "Description": "如果选项卡项目超出其容器，则显示分页箭头。 对于移动设备，仅在使用此属性时才会显示箭头。"
+    },
+    {
+      "Name": "SliderColor",
+      "Type": "String",
+      "Default": "null",
+      "Description": "更改自动生成的 v-tabs-slider 的背景颜色"
+    },
+    {
+      "Name": "SliderSize",
+      "Type": "StringNumber",
+      "Default": "",
+      "Description": "更改滑块的大小，水平 height，垂直 width。"
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Default": "null",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "StringNumber",
+      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Vertical",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "垂直堆叠选项卡。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<StringNumber>",
+      "Description": ""
+    }
+  ]
+}
