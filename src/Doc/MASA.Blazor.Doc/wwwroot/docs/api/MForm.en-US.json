@@ -62,8 +62,18 @@
   ],
   "Events": [
     {
+      "Name": "OnInvalidSubmit",
+      "Type": "EventCallback",
+      "Description": ""
+    },
+    {
       "Name": "OnSubmit",
       "Type": "EventCallback<EventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnValidSubmit",
+      "Type": "EventCallback",
       "Description": ""
     },
     {

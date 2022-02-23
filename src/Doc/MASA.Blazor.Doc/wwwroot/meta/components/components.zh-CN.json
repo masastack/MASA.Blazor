@@ -2270,7 +2270,7 @@
         "Name": "index",
         "Title": "使用",
         "Description": "<p><code>MFileInput</code> 组件的核心是一个基于 <a href=\"/components/text-fields\">MTextField</a> 拓展的基本容器。</p>\n",
-        "Code": "\r\n<MFileInput TValue=\"IBrowserFile\"></MFileInput>\r\n\r\n",
+        "Code": "<MFileInput TValue=\"IBrowserFile\" OnChange=\"HandleOnChange\"></MFileInput>\r\n\r\n@code {\r\n    private void HandleOnChange(IBrowserFile file)\r\n    {\r\n        //other code\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.FileInput.usage.Index",
         "Style": "",
         "Debug": false,
@@ -2325,7 +2325,7 @@
         "Name": "multiple",
         "Title": "多选",
         "Description": "<p>启用 <strong>Multiple（多选）</strong> 属性可以使<code>MFileInput</code>同时包含多个文件。</p>\n",
-        "Code": "\r\n<div>\r\n    <MFileInput TValue=\"List<IBrowserFile>\"\r\n                Multiple\r\n                Label=\"File input\"></MFileInput>\r\n</div>\r\n\r\n",
+        "Code": "<div>\r\n    <MFileInput TValue=\"List<IBrowserFile>\"\r\n                Multiple\r\n                OnChange=\"HandleOnChange\"\r\n                Label=\"File input\"></MFileInput>\r\n</div>\r\n\r\n@code {\r\n    private void HandleOnChange(List<IBrowserFile> files)\r\n    {\r\n        //Other code\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.FileInput.props.Multiple",
         "Style": "",
         "Debug": false,
@@ -2430,6 +2430,17 @@
         "Style": "",
         "Debug": false,
         "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "validation",
+        "Title": "验证",
+        "Description": "<p>验证也可以通过submit按钮来触发。</p>\n",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_model\" EnableDataAnnotationsValidation OnValidSubmit=\"HandleOnValidSubmit\"\r\n       OnInvalidSubmit=\"HandleOnInvalidSubmit\">\r\n    <MTextField @bind-Value=\"_model.Name\"\r\n                Counter=\"10\"\r\n                Label=\"Name\"\r\n                required></MTextField>\r\n    <MTextField @bind-Value=\"_model.Email\"\r\n                Label=\"E-mail\"\r\n                required></MTextField>\r\n    <MSelect @bind-Value=\"_model.Item\"\r\n             Items=\"@_items\"\r\n             Label=\"Item\"\r\n             ItemText=\"u => u\"\r\n             ItemValue=\"u => u\"></MSelect>\r\n    <MCheckbox @bind-Value=\"_model.Agree\"\r\n               Label=\"Do you agree?\"\r\n               required></MCheckbox>\r\n    <MButton Type=\"submit\">Submit</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    class Model\r\n    {\r\n        [Required]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Name { get; set; }\r\n        [Required]\r\n        [EmailAddress]\r\n        public string Email { get; set; }\r\n        [Required]\r\n        public string Item { get; set; }\r\n        [RegularExpression(\"True\", ErrorMessage = \"You must agree to continue!\")]\r\n        public bool Agree { get; set; }\r\n    }\r\n    private bool _valid = true;\r\n    private MForm _form;\r\n    private Model _model = new();\r\n\r\n    List<string> _items = new()\r\n        {\r\n            \"Item 1\",\r\n            \"Item 2\",\r\n            \"Item 3\",\r\n            \"Item 4\"\r\n        };\r\n\r\n    private void HandleOnValidSubmit()\r\n    {\r\n        //valid\r\n    }\r\n\r\n    private void HandleOnInvalidSubmit()\r\n    {\r\n        //invalid\r\n    }\r\n}\r\n",
+        "Type": "Demos.Components.FormInputs.children.Form.misc.Validation",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
       },
       {
         "Order": 1,
