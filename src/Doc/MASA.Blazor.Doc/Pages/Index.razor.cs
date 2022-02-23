@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading.Tasks;
-using MASA.Blazor.Doc.Services;
+using Masa.Blazor.Doc.Services;
 using Microsoft.AspNetCore.Components;
 
-namespace MASA.Blazor.Doc.Pages
+namespace Masa.Blazor.Doc.Pages
 {
     public partial class Index 
     {

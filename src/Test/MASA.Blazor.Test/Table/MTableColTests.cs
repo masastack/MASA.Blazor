@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Table
+namespace Masa.Blazor.Test.Table
 {
     [TestClass]
     public class MTableColTests:TestBase

@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MTabItem : MWindowItem, ITabItem
     {

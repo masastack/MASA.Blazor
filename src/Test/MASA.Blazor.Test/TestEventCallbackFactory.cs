@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test
+namespace Masa.Blazor.Test
 {
     public class TestEventCallbackFactory : IDisposable
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Overlay
+namespace Masa.Blazor.Test.Overlay
 {
     [TestClass]
     public class MOverlayTests:TestBase

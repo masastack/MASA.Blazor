@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
 using Element = BlazorComponent.Web.Element;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MMenu : BMenu, IThemeable
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.ProgressCircular
+namespace Masa.Blazor.Test.ProgressCircular
 {
     [TestClass]
     public class MProgressCircularTests:TestBase

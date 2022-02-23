@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MCard : MSheet, ICard, IRoutable, ISheet, ILoadable
     {

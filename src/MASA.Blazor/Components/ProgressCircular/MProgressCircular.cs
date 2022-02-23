@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MProgressCircular : BProgressCircular, IProgressCircular
     {

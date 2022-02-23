@@ -9,7 +9,7 @@ using BlazorComponent;
 using Moq;
 using Microsoft.AspNetCore.Components;
 
-namespace MASA.Blazor.Test.App
+namespace Masa.Blazor.Test.App
 {
     [TestClass]
     public class MAppTests : TestBase

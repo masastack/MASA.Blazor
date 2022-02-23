@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
-using MASA.Blazor.Doc.Models;
-using MASA.Blazor.Doc.Utils;
+using Masa.Blazor.Doc.Models;
+using Masa.Blazor.Doc.Utils;
 using System.Globalization;
 using BlazorComponent.I18n;
-using MASA.Blazor.Doc.Services;
+using Masa.Blazor.Doc.Services;
 
-namespace MASA.Blazor.Doc.Pages
+namespace Masa.Blazor.Doc.Pages
 {
     public partial class Styles
     {

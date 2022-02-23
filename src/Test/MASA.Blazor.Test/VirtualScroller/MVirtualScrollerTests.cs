@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Bunit;
 
-namespace MASA.Blazor.Test.VirtualScroller
+namespace Masa.Blazor.Test.VirtualScroller
 {
     [TestClass]
     public class MVirtualScrollerTests:TestBase

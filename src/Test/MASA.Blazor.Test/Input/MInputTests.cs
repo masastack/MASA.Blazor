@@ -8,7 +8,7 @@ using Bunit;
 using BlazorComponent;
 using Moq;
 
-namespace MASA.Blazor.Test.Input
+namespace Masa.Blazor.Test.Input
 {
     [TestClass]
     public class MInputTests : TestBase

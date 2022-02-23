@@ -1,4 +1,4 @@
-﻿using MASA.Blazor.Doc.CLI.Interfaces;
+﻿using Masa.Blazor.Doc.CLI.Interfaces;
 using Microsoft.Extensions.CommandLineUtils;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Doc.CLI.Commands
+namespace Masa.Blazor.Doc.CLI.Commands
 {
     public class GenerateIconsToJsonCommand : IAppCommand
     {

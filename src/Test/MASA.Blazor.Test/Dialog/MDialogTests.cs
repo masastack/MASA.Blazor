@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Dialog
+namespace Masa.Blazor.Test.Dialog
 {
     [TestClass]
     public class MDialogTests:TestBase

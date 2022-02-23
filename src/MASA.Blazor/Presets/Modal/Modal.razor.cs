@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Presets
+namespace Masa.Blazor.Presets
 {
     public partial class Modal
     {

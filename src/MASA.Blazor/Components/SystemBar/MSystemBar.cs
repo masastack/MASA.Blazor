@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MSystemBar : BSystemBar, IThemeable
     {

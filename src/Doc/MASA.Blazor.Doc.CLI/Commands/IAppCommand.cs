@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Doc.CLI.Interfaces
+namespace Masa.Blazor.Doc.CLI.Interfaces
 {
     public interface IAppCommand
     {

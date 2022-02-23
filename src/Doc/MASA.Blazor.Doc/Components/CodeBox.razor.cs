@@ -1,15 +1,15 @@
 ﻿using BlazorComponent;
 using BlazorComponent.I18n;
-using MASA.Blazor.Doc.Models;
+using Masa.Blazor.Doc.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace MASA.Blazor.Doc.Components;
+namespace Masa.Blazor.Doc.Components;
 
 public partial class CodeBox
 {
     private static string _githubUrlTemplate =
-        "https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Doc/MASA.Blazor.Doc/{0}.razor";
+        "https://github.com/BlazorComponent/Masa.Blazor/blob/main/src/Doc/Masa.Blazor.Doc/{0}.razor";
 
     private readonly static (string type, string lang) Template = ("template", "html");
     private readonly static (string type, string lang) Code = ("code", "csharp");

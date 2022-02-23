@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Presets
+namespace Masa.Blazor.Presets
 {
     public partial class FormModal
     {

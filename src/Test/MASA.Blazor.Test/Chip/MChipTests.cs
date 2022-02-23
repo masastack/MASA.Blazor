@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Chip
+namespace Masa.Blazor.Test.Chip
 {
     [TestClass]
     public class MChipTests:TestBase

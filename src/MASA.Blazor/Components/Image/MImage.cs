@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     //Todo：Crossover mode to be perfected
     public partial class MImage : MResponsive, IImage, IThemeable

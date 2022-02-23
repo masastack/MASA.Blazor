@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MHover : BHover
     {

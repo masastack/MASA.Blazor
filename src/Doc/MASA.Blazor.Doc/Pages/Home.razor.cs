@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BlazorComponent;
 using BlazorComponent.Components;
-using MASA.Blazor.Doc.Shared;
+using Masa.Blazor.Doc.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace MASA.Blazor.Doc.Pages
+namespace Masa.Blazor.Doc.Pages
 {
     public partial class Home
     {

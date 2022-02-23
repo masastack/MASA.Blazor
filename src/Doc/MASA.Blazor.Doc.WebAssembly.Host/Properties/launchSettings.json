@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "MASA.Blaozr.Doc.WebAssembly.Host": {
+    "Masa.Blaozr.Doc.WebAssembly.Host": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

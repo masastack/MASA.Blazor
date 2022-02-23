@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MASA.Blazor.Test.TimePickers
+namespace Masa.Blazor.Test.TimePickers
 {
     [TestClass]
     public class MTimePickerTests:TestBase

@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public class MAppBarTitle : BLabel
     {

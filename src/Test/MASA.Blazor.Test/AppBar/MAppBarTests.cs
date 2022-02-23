@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.AppBar
+namespace Masa.Blazor.Test.AppBar
 {
     [TestClass]
     public class MAppBarTests:TestBase

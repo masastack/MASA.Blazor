@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BlazorComponent.Web;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MStepperContent : BStepperContent, IAsyncDisposable
     {

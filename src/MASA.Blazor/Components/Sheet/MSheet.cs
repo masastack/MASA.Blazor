@@ -1,7 +1,7 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MSheet : BSheet, IThemeable, BlazorComponent.ISheet
     {

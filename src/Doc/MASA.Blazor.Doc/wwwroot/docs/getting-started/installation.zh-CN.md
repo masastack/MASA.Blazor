@@ -24,10 +24,10 @@ MASA 系列所有产品均基于.Net 6.0 开发,请确保已安装 <a href="http
 
 ## 安装 Masa.Template 模板
 
-MASA.Template,包含 MASA 系列所有项目模板。MASA Blazor 对应模板名为`masab`
+Masa.Template,包含 MASA 系列所有项目模板。MASA Blazor 对应模板名为`masab`
 
 ```
-dotnet new --install MASA.Template
+dotnet new --install Masa.Template
 ```
 
 <br/>
@@ -76,7 +76,7 @@ $ dotnet new blazorwasm -o BlazorApp
 ### 安装 NuGet 包
 
 ```sh
-$ dotnet add package MASA.Blazor
+$ dotnet add package Masa.Blazor
 ```
 
 <br/>
@@ -89,8 +89,8 @@ $ dotnet add package MASA.Blazor
 
 ```html
 <!--masa blazor css style-->
-<link href="_content/MASA.Blazor/css/masa-blazor.css" rel="stylesheet" />
-<link href="_content/MASA.Blazor/css/masa-extend-blazor.css" rel="stylesheet" />
+<link href="_content/Masa.Blazor/css/masa-blazor.css" rel="stylesheet" />
+<link href="_content/Masa.Blazor/css/masa-extend-blazor.css" rel="stylesheet" />
 <!--icon file,import need to use-->
 <link href="https://cdn.masastack.com/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
@@ -106,8 +106,8 @@ $ dotnet add package MASA.Blazor
 在`wwwroot\index.html`中引入资源文件：
 
 ```html
-<link href="_content/MASA.Blazor/css/masa-blazor.css" rel="stylesheet" />
-<link href="_content/MASA.Blazor/css/masa-extend-blazor.css" rel="stylesheet" />
+<link href="_content/Masa.Blazor/css/masa-blazor.css" rel="stylesheet" />
+<link href="_content/Masa.Blazor/css/masa-extend-blazor.css" rel="stylesheet" />
 <link
   href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css"
   rel="stylesheet"
@@ -121,7 +121,7 @@ $ dotnet add package MASA.Blazor
 
 ### 注入相关服务
 
-在 Program.cs 中添加 MASA.Blazor 相关服务：
+在 Program.cs 中添加 Masa.Blazor 相关服务：
 
 ```c#
 // Add services to the container.
@@ -135,7 +135,7 @@ builder.Services.AddMasaBlazor();
 修改 `_Imports.razor` 文件,添加以下内容:
 
 ```c#
-@using MASA.Blazor
+@using Masa.Blazor
 ```
 
 修改 `Shared/MainLayout.razor` 文件，设置 MApp 为根元素：

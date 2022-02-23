@@ -1,8 +1,8 @@
-﻿using MASA.Blazor.Doc.Models;
-using MASA.Blazor.Doc.Services;
+﻿using Masa.Blazor.Doc.Models;
+using Masa.Blazor.Doc.Services;
 using Microsoft.AspNetCore.Components;
 
-namespace MASA.Blazor.Doc.Components;
+namespace Masa.Blazor.Doc.Components;
 
 public partial class ApiTable
 {

@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Element = BlazorComponent.Web.Element;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MTooltip : BTooltip, ITooltip
     {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public class MDataTableHeader : BDataTableHeader, IDataTableHeader
     {

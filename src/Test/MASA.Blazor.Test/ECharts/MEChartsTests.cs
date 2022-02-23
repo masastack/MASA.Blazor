@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.ECharts
+namespace Masa.Blazor.Test.ECharts
 {
     [TestClass]
     public class MEChartsTests:TestBase

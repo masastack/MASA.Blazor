@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Divider
+namespace Masa.Blazor.Test.Divider
 {
     [TestClass]
     public class MDividerTests:TestBase

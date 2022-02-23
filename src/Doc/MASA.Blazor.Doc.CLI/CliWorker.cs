@@ -1,6 +1,6 @@
-﻿using MASA.Blazor.Doc.CLI.Commands;
-using MASA.Blazor.Doc.CLI.Interfaces;
-using MASA.Blazor.Doc.CLI.Wrappers;
+﻿using Masa.Blazor.Doc.CLI.Commands;
+using Masa.Blazor.Doc.CLI.Interfaces;
+using Masa.Blazor.Doc.CLI.Wrappers;
 using Microsoft.Extensions.CommandLineUtils;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Doc.CLI
+namespace Masa.Blazor.Doc.CLI
 {
     public class CliWorker
     {

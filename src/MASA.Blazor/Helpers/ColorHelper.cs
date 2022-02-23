@@ -1,4 +1,4 @@
-﻿namespace MASA.Blazor.Helpers
+﻿namespace Masa.Blazor.Helpers
 {
     public static class ColorHelper
     {

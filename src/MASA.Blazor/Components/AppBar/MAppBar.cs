@@ -12,7 +12,7 @@ using Microsoft.JSInterop;
 using OneOf;
 using Element = BlazorComponent.Web.Element;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MAppBar : MToolbar, IScrollable, IThemeable, IAsyncDisposable
     {

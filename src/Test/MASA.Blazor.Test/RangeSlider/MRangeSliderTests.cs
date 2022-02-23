@@ -6,7 +6,7 @@ using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.RangeSlider
+namespace Masa.Blazor.Test.RangeSlider
 {
     [TestClass]
     public class MRangeSliderTests:TestBase

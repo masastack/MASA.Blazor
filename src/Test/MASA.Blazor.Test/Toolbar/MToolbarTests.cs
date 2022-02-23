@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Bunit;
 
-namespace MASA.Blazor.Test.Toolbar
+namespace Masa.Blazor.Test.Toolbar
 {
     [TestClass]
     public class MToolbarTests:TestBase

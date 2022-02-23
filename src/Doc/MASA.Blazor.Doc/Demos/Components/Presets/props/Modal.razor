@@ -3,7 +3,7 @@
 <div>
     <MButton OnClick="() => _addModal.Show()" Class="mb-1">Add User</MButton>
 
-    <MASA.Blazor.Presets.Modal Visible="_addModal.Visible" Title="User"
+    <Masa.Blazor.Presets.Modal Visible="_addModal.Visible" Title="User"
                                Width="500"
                                ScrollToTopOnHide
                                OnOk="HandleOnClick"
@@ -58,7 +58,7 @@
         <MRow>
             <MCol>@JsonSerializer.Serialize(_addModal.Data)</MCol>
         </MRow>
-    </MASA.Blazor.Presets.Modal>
+    </Masa.Blazor.Presets.Modal>
 
     <MRow NoGutters Class="pa-2">
         <MCol Cols="4">username: @_user?.UserName</MCol>

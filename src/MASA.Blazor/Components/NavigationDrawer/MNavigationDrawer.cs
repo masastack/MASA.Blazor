@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components.Web;
 using System.Threading.Tasks;
 using OneOf;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MNavigationDrawer : BNavigationDrawer, INavigationDrawer, IHandleEvent
     {

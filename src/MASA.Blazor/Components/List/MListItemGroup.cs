@@ -1,8 +1,8 @@
 ﻿using BlazorComponent;
-using MASA.Blazor.Helpers;
+using Masa.Blazor.Helpers;
 using Microsoft.AspNetCore.Components;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MListItemGroup : MItemGroup
     {

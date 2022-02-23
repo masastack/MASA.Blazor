@@ -28,7 +28,7 @@ jobs:
     - name: build
       run: dotnet build src
     - name: publish
-      run: dotnet publish src/Doc/MASA.Blazor.Doc.WebAssembly/MASA.Blazor.Doc.WebAssembly.csproj
+      run: dotnet publish src/Doc/Masa.Blazor.Doc.WebAssembly/Masa.Blazor.Doc.WebAssembly.csproj
     - name: setup oss
       uses: manyuanrong/setup-ossutil@v2.0
       with:
@@ -36,5 +36,5 @@ jobs:
         access-key-id: ${{ secrets.ACCESS_KEY_ID }}
         access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
     - name: deploy oss
-      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/src/Doc/MASA.Blazor.Doc.WebAssembly/bin/Debug/net6.0/publish/wwwroot/ oss://masa-blazor-wasm-dev/
+      run: ossutil cp -rf /home/runner/work/Masa.Blazor/Masa.Blazor/src/Doc/Masa.Blazor.Doc.WebAssembly/bin/Debug/net6.0/publish/wwwroot/ oss://masa-blazor-wasm-dev/
 

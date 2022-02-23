@@ -21,7 +21,7 @@ related:
 
 <!--alert:error-->
 为了让你的应用正常工作，你必须将其包裹在 `MApp` 组件中。 该组件是确保正确的跨浏览器兼容性所必需的。 MASA Blazor 不支持在一个页面上有多个孤立的 
-MASA.Blazor 实例。 `MApp` 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。
+Masa.Blazor 实例。 `MApp` 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。
 <!--/alert:error-->
 
 <!--alert:info-->

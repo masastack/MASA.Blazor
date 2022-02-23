@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Avatar
+namespace Masa.Blazor.Test.Avatar
 {
     [TestClass]
     public class MAvatarTest:TestBase

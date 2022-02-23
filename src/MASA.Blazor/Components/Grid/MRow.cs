@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MASA.Blazor.Extensions;
+using Masa.Blazor.Extensions;
 using OneOf;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MRow : BRow
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Doc.Models.Extensions
+namespace Masa.Blazor.Doc.Models.Extensions
 {
     internal class HashHelper
     {

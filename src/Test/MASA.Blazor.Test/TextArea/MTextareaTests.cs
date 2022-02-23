@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bunit;
 
-namespace MASA.Blazor.Test.Textarea
+namespace Masa.Blazor.Test.Textarea
 {
     [TestClass]
     public class MTextAreaTests:TestBase

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Button
+namespace Masa.Blazor.Test.Button
 {
     [TestClass]
     public class MButtonTests : TestBase

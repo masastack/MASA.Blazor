@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     //TODO:该组件需要完善
     public partial class MRadioGroup<TValue> : MInput<TValue>

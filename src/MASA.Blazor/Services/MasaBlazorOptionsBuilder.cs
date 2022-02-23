@@ -1,7 +1,7 @@
 ﻿using BlazorComponent;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public class MasaBlazorOptionsBuilder
     {

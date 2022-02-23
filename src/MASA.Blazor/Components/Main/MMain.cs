@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using System.ComponentModel;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MMain : BMain, IMain
     {

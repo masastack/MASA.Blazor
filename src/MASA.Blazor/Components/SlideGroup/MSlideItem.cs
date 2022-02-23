@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using BlazorComponent;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public class MSlideItem : BItem
     {

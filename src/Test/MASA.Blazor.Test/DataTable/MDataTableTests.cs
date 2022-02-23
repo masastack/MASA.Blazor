@@ -8,7 +8,7 @@ using Bunit;
 using BlazorComponent;
 using Moq;
 
-namespace MASA.Blazor.Test.DataTable
+namespace Masa.Blazor.Test.DataTable
 {
     [TestClass]
     public class MDataTableTests:TestBase

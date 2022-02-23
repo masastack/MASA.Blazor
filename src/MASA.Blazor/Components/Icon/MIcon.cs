@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MIcon : BIcon, IIcon, IThemeable, ISizeable
     {

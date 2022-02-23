@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public class MButton : BButton, IButton, IThemeable
     {

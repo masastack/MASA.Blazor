@@ -7,7 +7,7 @@ using BlazorComponent;
 using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MTextarea : MTextField<string>
     {

@@ -1,7 +1,7 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MCardText : BCardText
     {

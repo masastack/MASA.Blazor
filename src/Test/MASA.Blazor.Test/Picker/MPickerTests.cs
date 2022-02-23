@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Picker
+namespace Masa.Blazor.Test.Picker
 {
     [TestClass]
     public class MPickerTests:TestBase

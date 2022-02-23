@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.DataIterator
+namespace Masa.Blazor.Test.DataIterator
 {
     [TestClass]
     public class MDataFooterTests:TestBase

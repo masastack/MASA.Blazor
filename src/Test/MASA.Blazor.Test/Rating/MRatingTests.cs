@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Bunit;
 
-namespace MASA.Blazor.Test.Rating
+namespace Masa.Blazor.Test.Rating
 {
     [TestClass]
     public class MRatingTests:TestBase

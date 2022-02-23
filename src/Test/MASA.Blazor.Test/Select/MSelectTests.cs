@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 
-namespace MASA.Blazor.Test.Select
+namespace Masa.Blazor.Test.Select
 {
     [TestClass]
     public class MSelectTests:TestBase

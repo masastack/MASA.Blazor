@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MASA.Blazor.Doc.CLI
+namespace Masa.Blazor.Doc.CLI
 {
     class Program
     {

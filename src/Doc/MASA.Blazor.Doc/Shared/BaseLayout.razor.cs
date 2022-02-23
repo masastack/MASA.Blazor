@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using System.Globalization;
 
-namespace MASA.Blazor.Doc.Shared
+namespace Masa.Blazor.Doc.Shared
 {
     public partial class BaseLayout : IDisposable
     {

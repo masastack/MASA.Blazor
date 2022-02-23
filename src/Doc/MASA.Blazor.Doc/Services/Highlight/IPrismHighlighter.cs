@@ -1,8 +1,8 @@
-﻿using MASA.Blazor.Doc.Components;
+﻿using Masa.Blazor.Doc.Components;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace MASA.Blazor.Doc.Highlight
+namespace Masa.Blazor.Doc.Highlight
 {
     public interface IPrismHighlighter
     {

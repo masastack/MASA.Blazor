@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Autocomplete
+namespace Masa.Blazor.Test.Autocomplete
 {
     [TestClass]
     public class MAutocompleteTests:TestBase

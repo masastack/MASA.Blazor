@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MASA.Blazor.Test.NavigationDrawer
+namespace Masa.Blazor.Test.NavigationDrawer
 {
     [TestClass]
     public class MNavigationDrawerTests:TestBase

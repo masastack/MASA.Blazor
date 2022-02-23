@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace MASA.Blazor.Doc.Server
+namespace Masa.Blazor.Doc.Server
 {
     public class Startup
     {

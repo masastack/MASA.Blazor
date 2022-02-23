@@ -12,4 +12,4 @@ title:
 
 ## en-US
 
-Many of MASA.Blazor’s components contain a transition prop which allows you to specify your own.
+Many of Masa.Blazor’s components contain a transition prop which allows you to specify your own.

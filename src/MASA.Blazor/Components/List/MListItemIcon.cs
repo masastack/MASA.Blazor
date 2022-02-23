@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BlazorComponent;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MListItemIcon : BListItemIcon
     {

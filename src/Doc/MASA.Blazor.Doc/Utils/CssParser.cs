@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MASA.Blazor.Doc.Utils
+namespace Masa.Blazor.Doc.Utils
 {
     public class CSSParser : List<KeyValuePair<string, List<KeyValuePair<string, string>>>>
     {

@@ -26,10 +26,10 @@ The video content is the MASA Blazor template to create the Blazor Server demo v
 
 ### Install Masa.Template
 
-MASA.Template, contains all project templates of the MASA series. The corresponding template of MASA Blazor is named `masab` 
+Masa.Template, contains all project templates of the MASA series. The corresponding template of MASA Blazor is named `masab` 
 
 ```
-dotnet new --install MASA.Template
+dotnet new --install Masa.Template
 ```
 
 <br/>
@@ -78,7 +78,7 @@ $ dotnet new blazorwasm -o BlazorApp
 ### Install NuGet package
 
 ```sh
-$ dotnet add package MASA.Blazor
+$ dotnet add package Masa.Blazor
 ```
 
 <br/>
@@ -91,8 +91,8 @@ in `Pages/_Host.cshtml` import resource files：
 
 ```html
 <!--masa blazor css style-->
-<link href="_content/MASA.Blazor/css/masa-blazor.css" rel="stylesheet" />
-<link href="_content/MASA.Blazor/css/masa-extend-blazor.css" rel="stylesheet" />
+<link href="_content/Masa.Blazor/css/masa-blazor.css" rel="stylesheet" />
+<link href="_content/Masa.Blazor/css/masa-extend-blazor.css" rel="stylesheet" />
 <!--icon file,import need to use-->
 <link href="https://cdn.masastack.com/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
@@ -108,8 +108,8 @@ in `Pages/_Host.cshtml` import resource files：
 in `wwwroot\index.html` import resource files：
 
 ```html
-<link href="_content/MASA.Blazor/css/masa-blazor.css" rel="stylesheet" />
-<link href="_content/MASA.Blazor/css/masa-extend-blazor.css" rel="stylesheet" />
+<link href="_content/Masa.Blazor/css/masa-blazor.css" rel="stylesheet" />
+<link href="_content/Masa.Blazor/css/masa-extend-blazor.css" rel="stylesheet" />
 <link
   href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css"
   rel="stylesheet"
@@ -123,7 +123,7 @@ in `wwwroot\index.html` import resource files：
 
 ### Inject services 
 
-Program.cs file add MASA.Blazor related services：
+Program.cs file add Masa.Blazor related services：
 
 ```c#
 // Add services to the container.
@@ -137,7 +137,7 @@ builder.Services.AddMasaBlazor();
 update `_Imports.razor` file,Add:
 
 ```c#
-@using MASA.Blazor
+@using Masa.Blazor
 ```
 
 update `Shared/MainLayout.razor` file，set MApp as root element：

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Bunit;
 
-namespace MASA.Blazor.Test.Stepper
+namespace Masa.Blazor.Test.Stepper
 {
     [TestClass]
     public class MStepperHeaderTests:TestBase

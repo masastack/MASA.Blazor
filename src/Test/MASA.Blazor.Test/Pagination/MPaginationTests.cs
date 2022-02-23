@@ -8,7 +8,7 @@ using Bunit;
 using BlazorComponent;
 using Moq;
 
-namespace MASA.Blazor.Test.Pagination
+namespace Masa.Blazor.Test.Pagination
 {
     [TestClass]
     public class MPaginationTests:TestBase

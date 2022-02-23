@@ -7,7 +7,7 @@ using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 using OneOf;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MList : BList, IThemeable
     {

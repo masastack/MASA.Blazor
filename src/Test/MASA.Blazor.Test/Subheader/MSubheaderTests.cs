@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bunit;
 
-namespace MASA.Blazor.Test.Subheader
+namespace Masa.Blazor.Test.Subheader
 {
     [TestClass]
     public class MSubheaderTests:TestBase

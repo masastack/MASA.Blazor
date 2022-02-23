@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Doc.Models
+namespace Masa.Blazor.Doc.Models
 {
     public class ConfigModel
     {

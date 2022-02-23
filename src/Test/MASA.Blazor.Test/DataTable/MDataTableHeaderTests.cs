@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MASA.Blazor.Test.DataTable
+namespace Masa.Blazor.Test.DataTable
 {
     [TestClass]
     public  class MDataTableHeaderTests:TestBase

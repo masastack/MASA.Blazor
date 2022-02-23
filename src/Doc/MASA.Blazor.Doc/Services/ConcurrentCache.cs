@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace MASA.Blazor.Doc.Services
+namespace Masa.Blazor.Doc.Services
 {
     public class ConcurrentCache<TKey, TValue>
     {

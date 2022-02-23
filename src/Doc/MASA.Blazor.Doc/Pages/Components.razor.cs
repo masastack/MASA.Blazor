@@ -1,21 +1,21 @@
 ﻿using BlazorComponent;
 using BlazorComponent.I18n;
-using MASA.Blazor.Doc.Models;
-using MASA.Blazor.Doc.Services;
-using MASA.Blazor.Doc.Shared;
-using MASA.Blazor.Doc.Utils;
+using Masa.Blazor.Doc.Models;
+using Masa.Blazor.Doc.Services;
+using Masa.Blazor.Doc.Shared;
+using Masa.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Diagnostics;
 using System.Globalization;
 
-namespace MASA.Blazor.Doc.Pages
+namespace Masa.Blazor.Doc.Pages
 {
     public partial class Components
     {
         // TODO: i18n {zh-CN}
         private static string _githubUrlTemplate =
-            "https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Doc/MASA.Blazor.Doc/Demos/Components";
+            "https://github.com/BlazorComponent/Masa.Blazor/blob/main/src/Doc/Masa.Blazor.Doc/Demos/Components";
 
         private DemoComponentModel _demoComponent;
         private int _demoIndex;

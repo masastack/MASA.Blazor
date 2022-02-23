@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public class MTab : BTab
     {

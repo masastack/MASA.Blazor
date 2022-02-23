@@ -2,14 +2,14 @@
 using System.Net;
 using System.Net.Http.Json;
 using System.Reflection;
-using MASA.Blazor.Doc.Models;
-using MASA.Blazor.Doc.Models.Extensions;
-using MASA.Blazor.Doc.Pages;
-using MASA.Blazor.Doc.Utils;
+using Masa.Blazor.Doc.Models;
+using Masa.Blazor.Doc.Models.Extensions;
+using Masa.Blazor.Doc.Pages;
+using Masa.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace MASA.Blazor.Doc.Services
+namespace Masa.Blazor.Doc.Services
 {
     public class DemoService
     {
@@ -62,7 +62,7 @@ namespace MASA.Blazor.Doc.Services
             await _demoTypesCache.GetOrAdd(CurrentLanguage, async (currentLanguage) =>
             {
                 var demoTypes =
-                await _httpClient.GetFromJsonAsync<string[]>($"_content/MASA.Blazor.Doc/meta/components/demoTypes.json");
+                await _httpClient.GetFromJsonAsync<string[]>($"_content/Masa.Blazor.Doc/meta/components/demoTypes.json");
 
                 return demoTypes;
             });
@@ -80,7 +80,7 @@ namespace MASA.Blazor.Doc.Services
             await _componentCache.GetOrAdd(CurrentLanguage, async (currentLanguage) =>
             {
                 var components =
-                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>($"_content/MASA.Blazor.Doc/meta/components/components.{CurrentLanguage}.json");
+                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>($"_content/Masa.Blazor.Doc/meta/components/components.{CurrentLanguage}.json");
                 return components.ToDictionary(x => x.Title.StructureUrl(), x => x);
             });
 
@@ -96,7 +96,7 @@ namespace MASA.Blazor.Doc.Services
             {
                 var styles =
                     await _httpClient.GetFromJsonAsync<DemoComponentModel[]>(
-                        $"_content/MASA.Blazor.Doc/meta/stylesandanimations/components.{CurrentLanguage}.json");
+                        $"_content/Masa.Blazor.Doc/meta/stylesandanimations/components.{CurrentLanguage}.json");
                 return styles.ToDictionary(x => x.Title.StructureUrl(), x => x);
             });
 
@@ -217,7 +217,7 @@ namespace MASA.Blazor.Doc.Services
             await _menuCache.GetOrAdd(CurrentLanguage, async (currentLanguage) =>
             {
                 var menuItems =
-                    await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>($"_content/MASA.Blazor.Doc/meta/menu.{CurrentLanguage}.json");
+                    await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>($"_content/Masa.Blazor.Doc/meta/menu.{CurrentLanguage}.json");
                 return menuItems;
             });
 

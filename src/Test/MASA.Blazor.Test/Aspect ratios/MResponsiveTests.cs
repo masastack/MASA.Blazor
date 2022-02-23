@@ -6,7 +6,7 @@ using Bunit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Responsive
+namespace Masa.Blazor.Test.Responsive
 {
     [TestClass]
     public class MResponsiveTests : TestBase

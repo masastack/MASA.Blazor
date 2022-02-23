@@ -6,7 +6,7 @@ using Bunit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Border
+namespace Masa.Blazor.Test.Border
 {
     [TestClass]
     public  class MBorderTests:TestBase

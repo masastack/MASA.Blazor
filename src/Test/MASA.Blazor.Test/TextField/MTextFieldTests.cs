@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.TextField
+namespace Masa.Blazor.Test.TextField
 {
     [TestClass]
     public class MTextFieldTests : TestBase

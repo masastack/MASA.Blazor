@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
-namespace MASA.Blazor.Presets
+namespace Masa.Blazor.Presets
 {
     public partial class PAction : BDomComponentBase
     {

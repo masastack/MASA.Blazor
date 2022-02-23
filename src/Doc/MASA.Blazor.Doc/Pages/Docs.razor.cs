@@ -1,12 +1,12 @@
 ﻿using BlazorComponent.I18n;
-using MASA.Blazor.Doc.Highlight;
-using MASA.Blazor.Doc.Models;
-using MASA.Blazor.Doc.Services;
-using MASA.Blazor.Doc.Shared;
-using MASA.Blazor.Doc.Utils;
+using Masa.Blazor.Doc.Highlight;
+using Masa.Blazor.Doc.Models;
+using Masa.Blazor.Doc.Services;
+using Masa.Blazor.Doc.Shared;
+using Masa.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 
-namespace MASA.Blazor.Doc.Pages
+namespace Masa.Blazor.Doc.Pages
 {
     public partial class Docs
     {
@@ -56,7 +56,7 @@ namespace MASA.Blazor.Doc.Pages
             if (_previousPath == Path) return;
             _previousPath = Path;
 
-            File = await Service.GetDocFileAsync($"_content/MASA.Blazor.Doc/docs/{Path}.json");
+            File = await Service.GetDocFileAsync($"_content/Masa.Blazor.Doc/docs/{Path}.json");
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

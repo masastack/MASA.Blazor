@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.FileInput
+namespace Masa.Blazor.Test.FileInput
 {
     [TestClass]
     public  class MFileInputTests:TestBase

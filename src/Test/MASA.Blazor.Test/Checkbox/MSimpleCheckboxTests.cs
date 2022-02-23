@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Checkbox
+namespace Masa.Blazor.Test.Checkbox
 {
     [TestClass]
     public class MSimpleCheckboxTests:TestBase

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Breadcrumbs
+namespace Masa.Blazor.Test.Breadcrumbs
 {
     [TestClass]
     public class MBreadcrumbsTeste:TestBase

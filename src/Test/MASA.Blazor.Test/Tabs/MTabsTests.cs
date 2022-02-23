@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Bunit;
 
-namespace MASA.Blazor.Test.Tabs
+namespace Masa.Blazor.Test.Tabs
 {
     [TestClass]
     public class MTabsTests:TestBase

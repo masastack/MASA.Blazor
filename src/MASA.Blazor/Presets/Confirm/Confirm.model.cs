@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace MASA.Blazor.Presets
+namespace Masa.Blazor.Presets
 {
     public partial class Confirm
     {

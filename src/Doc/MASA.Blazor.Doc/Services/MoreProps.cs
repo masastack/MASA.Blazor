@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MASA.Blazor.Doc.Services
+namespace Masa.Blazor.Doc.Services
 {
     public class MoreProps
     {

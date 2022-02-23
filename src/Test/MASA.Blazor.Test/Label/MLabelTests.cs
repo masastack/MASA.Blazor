@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Label
+namespace Masa.Blazor.Test.Label
 {
     [TestClass]
     public class MLabelTests:TestBase

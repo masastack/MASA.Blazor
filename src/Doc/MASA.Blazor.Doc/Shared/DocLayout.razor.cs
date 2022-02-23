@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
 
-namespace MASA.Blazor.Doc.Shared;
+namespace Masa.Blazor.Doc.Shared;
 
 public partial class DocLayout
 {

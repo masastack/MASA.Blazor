@@ -1,6 +1,6 @@
 ﻿using BlazorComponent;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public class MasaBlazorOptions
     {

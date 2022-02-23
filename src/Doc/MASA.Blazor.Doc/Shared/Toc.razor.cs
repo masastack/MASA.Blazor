@@ -3,16 +3,16 @@ using System.Text.Json;
 using BlazorComponent;
 using BlazorComponent.I18n;
 using BlazorComponent.Web;
-using MASA.Blazor.Doc.Components;
-using MASA.Blazor.Doc.Models;
-using MASA.Blazor.Doc.Services;
-using MASA.Blazor.Doc.Utils;
+using Masa.Blazor.Doc.Components;
+using Masa.Blazor.Doc.Models;
+using Masa.Blazor.Doc.Services;
+using Masa.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
 using Element = BlazorComponent.Web.Element;
 
-namespace MASA.Blazor.Doc.Shared;
+namespace Masa.Blazor.Doc.Shared;
 
 public partial class Toc : OwningComponentBase<DemoService>
 {

@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.3546167+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.0735395+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -168,7 +168,7 @@
     "Desc": "<p>在 MASA Blazor 中，<code>MApp</code> 组件和 <code>MNavigationDrawer</code>、<code>MAppBar</code>、<code>MFooter</code> 等组件上的 App 属性，帮助你的应用围绕 <code>MMain</code> 组件进行适当的大小调整。\n这使你可以创建真正独特的界面，无需因管理布局尺寸而烦恼。 所有应用都需要 <code>MApp</code> 组件。 这是许多 <code>MASA Blazor</code> 组件和功能的挂载点，并确保它将默认的应用主题\n（Dark/Light）传递给子组件，并确保在浏览器中对某些点击事件的正确跨浏览器支持。</p>\n",
     "Order": 0,
     "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/api/MApp\">MApp</a></li>\n<li><a href=\"/api/MMain\">MMain</a></li>\n</ul>\n<!--alert:error-->\n<p>为了让你的应用正常工作，你必须将其包裹在 <code>MApp</code> 组件中。 该组件是确保正确的跨浏览器兼容性所必需的。 MASA Blazor 不支持在一个页面上有多个孤立的 \nMASA.Blazor 实例。 <code>MApp</code> 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p>如果你在应用中使用多个布局，你需要确保每个包含组件的根布局文件在其模板的根部有一个 <code>MApp</code>。</p>\n<!--/alert:info-->\n",
+      "API": "\n<ul>\n<li><a href=\"/api/MApp\">MApp</a></li>\n<li><a href=\"/api/MMain\">MMain</a></li>\n</ul>\n<!--alert:error-->\n<p>为了让你的应用正常工作，你必须将其包裹在 <code>MApp</code> 组件中。 该组件是确保正确的跨浏览器兼容性所必需的。 MASA Blazor 不支持在一个页面上有多个孤立的 \nMasa.Blazor 实例。 <code>MApp</code> 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p>如果你在应用中使用多个布局，你需要确保每个包含组件的根布局文件在其模板的根部有一个 <code>MApp</code>。</p>\n<!--/alert:info-->\n",
       "默认应用标记": "\n<p>这是一个默认应用标记的例子。 只要设置 <strong>App</strong> 属性，你可以将布局元素放在任何地方。此处的关键组件是<code>MMain</code>。它将会根据您分配的 app\n组件动态地调整大小。你可以使用上述任何或所有组件的组合，包括 <code>MBottomNavigation</code>。</p>\n<pre><code class=\"language-html\">&lt;!-- MainLayout.razor --&gt;\n@inherits LayoutComponentBase\n\n&lt;MApp&gt;\n  &lt;MNavigationDrawer App&gt;\n    &lt;!-- --&gt;\n  &lt;/MNavigationDrawer&gt;\n\n  &lt;MAppBar App&gt;\n    &lt;!-- --&gt;\n  &lt;/MAppBar&gt;\n\n  &lt;!-- 根据应用组件来调整你的内容 --&gt;\n  &lt;MMain&gt;\n    &lt;!-- 给应用提供合适的间距 --&gt;\n    &lt;MContainer Fluid&gt;\n        @Body\n    &lt;/MContainer&gt;\n  &lt;/MMain&gt;\n\n  &lt;MFooter App&gt;\n    &lt;!-- --&gt;\n  &lt;/MFooter&gt;\n&lt;/MApp&gt;\n</code></pre>\n<!--alert:info-->\n<p>设置 <strong>App</strong> 属性会自动给布局元素设置 position: <strong>fixed</strong>。 如果你的应用程序需要一个绝对定位元素，你可以使用 <strong>Absolute</strong> 属性来覆盖这个功能。</p>\n<!--/alert:info-->\n",
       "应用组件": "\n<p>以下是所有支持 <strong>App</strong> 属性的组件列表，这些组件可以在你的应用中用作布局元素。 这些组件可以混合和匹配，并且每个特定组件在任何时候都只能存在一个。 不过，你可以把它们换掉，布局也能适应。\n有关如何构建各种布局的一些示例，请查看预制布局页面。</p>\n<p>每一个应用组件都有一个指定的位置和优先级，影响布局系统中的位置。</p>\n<ul>\n<li><a href=\"/components/app-bars\">MAppBar</a>：总是放在应用顶部，优先级低于 <code>MSystemBar</code>。</li>\n<li>MBottomNavigation：总是放在应用底部，优先级高于 <code>MFooter</code>。</li>\n<li><a href=\"/components/footers\">MFooter</a>：总是放在应用底部，优先级低于 <code>MBottomNavigation</code>。</li>\n<li><a href=\"/components/navigation-drawers\">MNavigationDrawer</a>：可以放置在应用的左边或右边，并且可以配置在 <code>MAppBar</code> 的旁边或下面。</li>\n<li><a href=\"/components/system-bars\">MSystemBar</a>：总是放在应用顶部，优先级高于 <code>MAppBar</code>。</li>\n</ul>\n",
       "应用服务": "\n<p>应用服务用于配置你的布局。 它与 <code>MMain</code> 组件通信，以便它能够正确地调整应用内容。 它有一些可以访问的属性：</p>\n<pre><code class=\"language-c#\">double Bar { get; }\ndouble Bottom { get; }\ndouble Footer { get; }\ndouble InsetFooter { get; }\ndouble Left { get; }\ndouble Right { get; }\ndouble Top { get; }\n</code></pre>\n<p>当你使用 <strong>App</strong> 属性添加和删除组件时，这些值会自动更新。 它们是不可编辑的，并且以只读状态存在。 你可以通过引用 <strong>Application</strong> 对象的应用属性来访问这些值。</p>\n<pre><code class=\"language-c#\"> [Inject] public MasaBlazor MasaBlazor { get; set; }\n \n Console.WriteLine(MasaBlazor.Application.Footer); // 60\n</code></pre>\n<!--alert:error-->\n<p>为了让你的应用正常工作，你必须将其包裹在 <code>MApp</code> 组件中。 该组件是确保正确的跨浏览器兼容性所必需的。</p>\n<!--/alert:error-->\n"
@@ -194,7 +194,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.3566126+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.0755468+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -227,7 +227,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.3604912+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.0795361+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -327,7 +327,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.3634834+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.0825361+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -404,7 +404,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.3664752+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.0865375+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -494,7 +494,7 @@
       "功能组件": "\n<ul>\n<li><code>MAppBarNavIcon</code>：专门为与 <a href=\"/components/toolbars\">MToolbar</a> 和 <code>MAppBar</code> 一起使用而创建的样式化图标按钮组件。 在工具栏的左侧显示为汉堡菜单，它通常用于控制导航抽屉的状态。 默认插槽可以用于自定义此组件的图标和功能。</li>\n<li><code>MAppBarTitle</code>：修改过的 <a href=\"/components/toolbars\">MToolbarTitle</a> 组件 ，用于配合 <strong>ShrinkOnScroll</strong> 属性使用。 在小屏幕上，<strong>MToolbarTitle</strong>\n将被截断，但这个组件在展开时使用了绝对定位使其内容可见。 我们不建议您在没有使用 <strong>ShrinkOnScroll</strong> 属性时使用 <code>MAppBarTitle</code> 组件。确实是因为向此组件添加了resize事件，并进行了很多额外的计算。</li>\n</ul>\n",
       "注意事项": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <strong>Icon</strong> 属性的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将按钮包装在任何容器例如<code>div</code>中，则需要对该容器应用负边距，以便正确对齐它们。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.3734607+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.0925357+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -649,7 +649,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.3759449+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.0955356+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -727,7 +727,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <code>Icon</code> prop的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将您的按钮包装在任何容器中，例如<code>div</code>， 您需要对容器应用负边距，以便正确对齐。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.3822109+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1015358+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -881,7 +881,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.3832083+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1035362+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -926,7 +926,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>默认情况下，<code>MBreadcrumbs</code> 将禁用路由联动。可以通过 <strong>Linkage</strong> 属性开启路由联动。</p>\n"
     },
-    "LastWriteTime": "2022-01-06T09:23:47.8311669+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1075367+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -966,7 +966,7 @@
         "Name": "linkage",
         "Title": "路由联动",
         "Description": "",
-        "Code": "<MBreadcrumbs Items=\"items\" Linkage></MBreadcrumbs>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() { Text = \"MASA.Blazor\", Href = \"/\", Exact = true },\r\n        new BreadcrumbItem() { Text = \"Borders\", Href = \"/components/borders\", Exact = true },\r\n        new BreadcrumbItem() { Text = \"Breadcrumbs\", Href = \"/components/breadcrumbs\" }\r\n    };\r\n\r\n}",
+        "Code": "<MBreadcrumbs Items=\"items\" Linkage></MBreadcrumbs>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() { Text = \"Masa.Blazor\", Href = \"/\", Exact = true },\r\n        new BreadcrumbItem() { Text = \"Borders\", Href = \"/components/borders\", Exact = true },\r\n        new BreadcrumbItem() { Text = \"Breadcrumbs\", Href = \"/components/breadcrumbs\" }\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Breadcrumbs.props.Linkage",
         "Style": "",
         "Debug": false,
@@ -1016,7 +1016,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p>当使用 <strong>Dark</strong> 属性时，<code>MButton</code> 是唯一一种拥有不同行为的组件。 通常来说，组件使用 <strong>Dark</strong> 属性来表示他们将有深色背景，文本也需要是白色的。 虽然这对\n<code>MButton</code> 也是起作用的，但由于禁用状态与白色背景容易造成混淆，建议仅在按钮<strong>为</strong>彩色背景时使用此属性。 If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.3936467+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1135356+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1183,7 +1183,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "功能组件": "\n<ul>\n<li><code>MCardActions</code>：用于为卡片放置 动作 的容器，如 <a href=\"/components/buttons\">MButton</a> 或 <a href=\"/components/menus\">MMenu</a>。 同时在按钮上使用 个特殊边距\n，以便它们与其他卡片内容区域的匹配。</li>\n<li><code>MCardSubtitle</code>：为卡片字幕提供默认的 <strong>字体大小</strong> 和 <strong>填充</strong>。 字体大小可以以 <a href=\"/stylesandanimations/text-and-typography\">排版类</a> 覆盖。</li>\n<li><code>MCardText</code>：主要用于卡片中的 <strong>文本内容</strong>。 对文本应用填充，将其字体大小减少为 .875rem。</li>\n<li><code>MCardTitle</code>：为卡片字幕提供默认的 字体大小 和 填充。 字体大小可以以 <a href=\"/stylesandanimations/text-and-typography\">排版类</a> 覆盖。</li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-21T10:23:43.4779762+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.119537+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1338,7 +1338,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.406848+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1275362+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1526,7 +1526,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4118292+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1335395+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1658,7 +1658,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4148034+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1365364+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1736,7 +1736,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4168146+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1385369+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1787,7 +1787,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.421801+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1445355+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1920,7 +1920,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4247931+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1465361+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1998,7 +1998,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4297825+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1525356+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2071,7 +2071,7 @@
         "Name": "cryptocurrencySelector",
         "Title": "加密货币选择器",
         "Description": "<p><code>MAutocomplete</code> 组件非常灵活，可以适合任何使用情况。 为no-data, item和selection插槽创建自定义的显示样式以提供独特的用户体验. 使用 插槽 使您能够轻松自定义您的应用程序所需的外观。</p>\n",
-        "Code": "<MToolbar Color=\"orange accent-1\">\r\n    <ChildContent>\r\n        <MAppBarNavIcon Class=\"hidden-sm-and-down\"></MAppBarNavIcon>\r\n        <MToolbarTitle Class=\"text-h6 mr-6 hidden-sm-and-down\">\r\n            Cryptocurrency\r\n        </MToolbarTitle>\r\n        <MAutocomplete @bind-Value=\"_model\"\r\n                       Items=\"_items\"\r\n                       Loading=\"_isLoading\"\r\n                       OnSearchInputUpdate=\"Search\"\r\n                       Chips\r\n                       Clearable\r\n                       HideDetails=\"true\"\r\n                       HideSelected\r\n                       ItemText=\"r=>r.Name\"\r\n                       ItemValue=\"r=>r.Symbol\"\r\n                       Label=\"Search for a coin...\"\r\n                       Solo>\r\n            <NoDataContent>\r\n                <MListItem>\r\n                    <MListItemTitle>\r\n                        Search for your favorite\r\n                        <strong>Cryptocurrency</strong>\r\n                    </MListItemTitle>\r\n                </MListItem>\r\n            </NoDataContent>\r\n            <SelectionContent Context=\"data\">\r\n                <MChip Color=\"blue-grey\"\r\n                       Class=\"white--text\">\r\n                    <MIcon Left>\r\n                        mdi-bitcoin\r\n                    </MIcon>\r\n                    <span>\r\n                        @data.Item.Name\r\n                    </span>\r\n                </MChip>\r\n            </SelectionContent>\r\n            <ItemContent Context=\"data\">\r\n                <MListItemAvatar Color=\"indigo\"\r\n                                 Class=\"text-h5 font-weight-light white--text\">\r\n                    @data.Item.Name[0]\r\n                </MListItemAvatar>\r\n                <MListItemContent>\r\n                    <MListItemTitle>\r\n                        @data.Item.Name\r\n                    </MListItemTitle>\r\n                    <MListItemSubtitle>\r\n                        @data.Item.Symbol\r\n                    </MListItemSubtitle>\r\n                </MListItemContent>\r\n                <MListItemAction>\r\n                    <MIcon>mdi-bitcoin</MIcon>\r\n                </MListItemAction>\r\n            </ItemContent>\r\n        </MAutocomplete>\r\n    </ChildContent>\r\n    <ExtensionContent>\r\n        <MTabs @bind-Value=\"_tab\"\r\n               HideSlider=\"_model==null\"\r\n               Color=\"blue-grey\"\r\n               SliderColor=\"blue-grey\">\r\n            <MTab Disabled=\"_model==null\">\r\n                News\r\n            </MTab>\r\n            <MTab Disabled=\"_model==null\">\r\n                Trading\r\n            </MTab>\r\n            <MTab Disabled=\"_model==null\">\r\n                Blog\r\n            </MTab>\r\n        </MTabs>\r\n    </ExtensionContent>\r\n</MToolbar>\r\n\r\n@code {\r\n    class Currency\r\n    {\r\n        public string Id { get; set; }\r\n\r\n        public string Symbol { get; set; }\r\n\r\n        public string Name { get; set; }\r\n    }\r\n\r\n    private bool _isLoading;\r\n    private List<Currency> _items = new List<Currency>();\r\n    private string _model;\r\n    private StringNumber _tab;\r\n\r\n    protected string Model\r\n    {\r\n        get\r\n        {\r\n            return _model;\r\n        }\r\n        set\r\n        {\r\n            _model = value;\r\n\r\n            if (value != null)\r\n            {\r\n                _tab = 0;\r\n            }\r\n            else\r\n            {\r\n                _tab = null;\r\n            }\r\n        }\r\n    }\r\n\r\n    [Inject]\r\n    public IHttpClientFactory HttpClientFactory { get; set; }\r\n\r\n    public async Task Search(string val)\r\n    {\r\n        if (_items.Count > 0)\r\n        {\r\n            return;\r\n        }\r\n\r\n        _isLoading = true;\r\n        var httpClient = HttpClientFactory.CreateClient(\"doc\");\r\n        var items = await httpClient.GetFromJsonAsync<List<Currency>>(\"/_content/MASA.Blazor.Doc/list.json\");\r\n        _items = items.Take(20).ToList();//TODO:Wait for MSelect update\r\n        _isLoading = false;\r\n    }\r\n}",
+        "Code": "<MToolbar Color=\"orange accent-1\">\r\n    <ChildContent>\r\n        <MAppBarNavIcon Class=\"hidden-sm-and-down\"></MAppBarNavIcon>\r\n        <MToolbarTitle Class=\"text-h6 mr-6 hidden-sm-and-down\">\r\n            Cryptocurrency\r\n        </MToolbarTitle>\r\n        <MAutocomplete @bind-Value=\"_model\"\r\n                       Items=\"_items\"\r\n                       Loading=\"_isLoading\"\r\n                       OnSearchInputUpdate=\"Search\"\r\n                       Chips\r\n                       Clearable\r\n                       HideDetails=\"true\"\r\n                       HideSelected\r\n                       ItemText=\"r=>r.Name\"\r\n                       ItemValue=\"r=>r.Symbol\"\r\n                       Label=\"Search for a coin...\"\r\n                       Solo>\r\n            <NoDataContent>\r\n                <MListItem>\r\n                    <MListItemTitle>\r\n                        Search for your favorite\r\n                        <strong>Cryptocurrency</strong>\r\n                    </MListItemTitle>\r\n                </MListItem>\r\n            </NoDataContent>\r\n            <SelectionContent Context=\"data\">\r\n                <MChip Color=\"blue-grey\"\r\n                       Class=\"white--text\">\r\n                    <MIcon Left>\r\n                        mdi-bitcoin\r\n                    </MIcon>\r\n                    <span>\r\n                        @data.Item.Name\r\n                    </span>\r\n                </MChip>\r\n            </SelectionContent>\r\n            <ItemContent Context=\"data\">\r\n                <MListItemAvatar Color=\"indigo\"\r\n                                 Class=\"text-h5 font-weight-light white--text\">\r\n                    @data.Item.Name[0]\r\n                </MListItemAvatar>\r\n                <MListItemContent>\r\n                    <MListItemTitle>\r\n                        @data.Item.Name\r\n                    </MListItemTitle>\r\n                    <MListItemSubtitle>\r\n                        @data.Item.Symbol\r\n                    </MListItemSubtitle>\r\n                </MListItemContent>\r\n                <MListItemAction>\r\n                    <MIcon>mdi-bitcoin</MIcon>\r\n                </MListItemAction>\r\n            </ItemContent>\r\n        </MAutocomplete>\r\n    </ChildContent>\r\n    <ExtensionContent>\r\n        <MTabs @bind-Value=\"_tab\"\r\n               HideSlider=\"_model==null\"\r\n               Color=\"blue-grey\"\r\n               SliderColor=\"blue-grey\">\r\n            <MTab Disabled=\"_model==null\">\r\n                News\r\n            </MTab>\r\n            <MTab Disabled=\"_model==null\">\r\n                Trading\r\n            </MTab>\r\n            <MTab Disabled=\"_model==null\">\r\n                Blog\r\n            </MTab>\r\n        </MTabs>\r\n    </ExtensionContent>\r\n</MToolbar>\r\n\r\n@code {\r\n    class Currency\r\n    {\r\n        public string Id { get; set; }\r\n\r\n        public string Symbol { get; set; }\r\n\r\n        public string Name { get; set; }\r\n    }\r\n\r\n    private bool _isLoading;\r\n    private List<Currency> _items = new List<Currency>();\r\n    private string _model;\r\n    private StringNumber _tab;\r\n\r\n    protected string Model\r\n    {\r\n        get\r\n        {\r\n            return _model;\r\n        }\r\n        set\r\n        {\r\n            _model = value;\r\n\r\n            if (value != null)\r\n            {\r\n                _tab = 0;\r\n            }\r\n            else\r\n            {\r\n                _tab = null;\r\n            }\r\n        }\r\n    }\r\n\r\n    [Inject]\r\n    public IHttpClientFactory HttpClientFactory { get; set; }\r\n\r\n    public async Task Search(string val)\r\n    {\r\n        if (_items.Count > 0)\r\n        {\r\n            return;\r\n        }\r\n\r\n        _isLoading = true;\r\n        var httpClient = HttpClientFactory.CreateClient(\"doc\");\r\n        var items = await httpClient.GetFromJsonAsync<List<Currency>>(\"/_content/Masa.Blazor.Doc/list.json\");\r\n        _items = items.Take(20).ToList();//TODO:Wait for MSelect update\r\n        _isLoading = false;\r\n    }\r\n}",
         "Type": "Demos.Components.FormInputs.children.Autocomplete.misc.CryptocurrencySelector",
         "Style": "",
         "Debug": false,
@@ -2109,7 +2109,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4327763+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1555358+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2175,7 +2175,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4367647+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1595359+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2226,7 +2226,7 @@
         "Name": "labelContent",
         "Title": "Label",
         "Description": "<p><code>MCheckbox</code> 文本可以在<strong>LabelContent</strong>中定义-这将允许使用HTML内容。</p>\n",
-        "Code": "<MContainer Fluid>\r\n    <MCheckbox @bind-Value=\"checkbox\">\r\n        <LabelContent>\r\n            <div>\r\n                I agree that\r\n                <MTooltip Bottom>\r\n                    <ActivatorContent>\r\n                        <a target=\"_blank\" href=\"https://masa-blazor-docs-dev.lonsid.cn\" @attributes=\"@context.Attrs\">MASA.Blazor</a>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        Opens in new window\r\n                    </ChildContent>\r\n                </MTooltip>\r\n                is awesome\r\n            </div>\r\n        </LabelContent>\r\n    </MCheckbox>\r\n</MContainer>\r\n\r\n@code {\r\n    bool checkbox = false;\r\n}",
+        "Code": "<MContainer Fluid>\r\n    <MCheckbox @bind-Value=\"checkbox\">\r\n        <LabelContent>\r\n            <div>\r\n                I agree that\r\n                <MTooltip Bottom>\r\n                    <ActivatorContent>\r\n                        <a target=\"_blank\" href=\"https://masa-blazor-docs-dev.lonsid.cn\" @attributes=\"@context.Attrs\">Masa.Blazor</a>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        Opens in new window\r\n                    </ChildContent>\r\n                </MTooltip>\r\n                is awesome\r\n            </div>\r\n        </LabelContent>\r\n    </MCheckbox>\r\n</MContainer>\r\n\r\n@code {\r\n    bool checkbox = false;\r\n}",
         "Type": "Demos.Components.FormInputs.children.Checkbox.contents.LabelContent",
         "Style": "",
         "Debug": false,
@@ -2263,7 +2263,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4422509+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1655367+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2407,7 +2407,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4446381+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1685357+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2436,7 +2436,7 @@
         "Name": "validation",
         "Title": "验证",
         "Description": "<p>验证也可以通过submit按钮来触发。</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_model\" EnableDataAnnotationsValidation OnValidSubmit=\"HandleOnValidSubmit\"\r\n       OnInvalidSubmit=\"HandleOnInvalidSubmit\">\r\n    <MTextField @bind-Value=\"_model.Name\"\r\n                Counter=\"10\"\r\n                Label=\"Name\"\r\n                required></MTextField>\r\n    <MTextField @bind-Value=\"_model.Email\"\r\n                Label=\"E-mail\"\r\n                required></MTextField>\r\n    <MSelect @bind-Value=\"_model.Item\"\r\n             Items=\"@_items\"\r\n             Label=\"Item\"\r\n             ItemText=\"u => u\"\r\n             ItemValue=\"u => u\"></MSelect>\r\n    <MCheckbox @bind-Value=\"_model.Agree\"\r\n               Label=\"Do you agree?\"\r\n               required></MCheckbox>\r\n    <MButton Type=\"submit\">Submit</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    class Model\r\n    {\r\n        [Required]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Name { get; set; }\r\n        [Required]\r\n        [EmailAddress]\r\n        public string Email { get; set; }\r\n        [Required]\r\n        public string Item { get; set; }\r\n        [RegularExpression(\"True\", ErrorMessage = \"You must agree to continue!\")]\r\n        public bool Agree { get; set; }\r\n    }\r\n    private bool _valid = true;\r\n    private MForm _form;\r\n    private Model _model = new();\r\n\r\n    List<string> _items = new()\r\n        {\r\n            \"Item 1\",\r\n            \"Item 2\",\r\n            \"Item 3\",\r\n            \"Item 4\"\r\n        };\r\n\r\n    private void HandleOnValidSubmit()\r\n    {\r\n        //valid\r\n    }\r\n\r\n    private void HandleOnInvalidSubmit()\r\n    {\r\n        //invalid\r\n    }\r\n}\r\n",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_model\" EnableDataAnnotationsValidation OnValidSubmit=\"HandleOnValidSubmit\"\r\n       OnInvalidSubmit=\"HandleOnInvalidSubmit\">\r\n    <MTextField @bind-Value=\"_model.Name\"\r\n                Counter=\"10\"\r\n                Label=\"Name\"></MTextField>\r\n    <MTextField @bind-Value=\"_model.Email\"\r\n                Label=\"E-mail\"></MTextField>\r\n    <MSelect @bind-Value=\"_model.Item\"\r\n             Items=\"@_items\"\r\n             Label=\"Item\"\r\n             ItemText=\"u => u\"\r\n             ItemValue=\"u => u\"></MSelect>\r\n    <MCheckbox @bind-Value=\"_model.Agree\"\r\n               Label=\"Do you agree?\"></MCheckbox>\r\n    <MButton Type=\"submit\">Submit</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    class Model\r\n    {\r\n        [Required]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Name { get; set; }\r\n        [Required]\r\n        [EmailAddress]\r\n        public string Email { get; set; }\r\n        [Required]\r\n        public string Item { get; set; }\r\n        [RegularExpression(\"True\", ErrorMessage = \"You must agree to continue!\")]\r\n        public bool Agree { get; set; }\r\n    }\r\n    private bool _valid = true;\r\n    private MForm _form;\r\n    private Model _model = new();\r\n\r\n    List<string> _items = new()\r\n        {\r\n            \"Item 1\",\r\n            \"Item 2\",\r\n            \"Item 3\",\r\n            \"Item 4\"\r\n        };\r\n\r\n    private void HandleOnValidSubmit()\r\n    {\r\n        //valid\r\n    }\r\n\r\n    private void HandleOnInvalidSubmit()\r\n    {\r\n        //invalid\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Form.misc.Validation",
         "Style": "",
         "Debug": false,
@@ -2485,7 +2485,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadioGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-01-06T09:23:47.879038+08:00",
+    "LastWriteTime": "2021-12-16T10:54:26.8668495+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2563,7 +2563,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4513035+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.175537+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2653,7 +2653,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2022-01-10T13:36:42.7941608+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1815356+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2796,7 +2796,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4647547+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1885355+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2984,7 +2984,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4692618+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.1925369+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3084,7 +3084,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-01-06T09:23:47.9009796+08:00",
+    "LastWriteTime": "2021-12-29T08:52:56.9812082+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3217,7 +3217,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-14T15:01:03.0189799+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2085385+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3411,7 +3411,7 @@
         "Name": "iconSlots",
         "Title": "图标插槽",
         "Description": "<p>可以使用插槽来扩展输入的功能，而不是使用 <strong>Prepend</strong>/<strong>Append</strong>/<strong>AppendOuter</strong> 图标。</p>\n",
-        "Code": "<MForm>\r\n    <MContainer>\r\n        <MRow>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_message\"\r\n                            Outlined\r\n                            Clearable\r\n                            Label=\"Message\"\r\n                            Type=\"text\">\r\n                    <PrependContent>\r\n                        <MTooltip Bottom>\r\n                            <ActivatorContent Context=\"activatorContext\">\r\n                                <MIcon @attributes=\"activatorContext.Attrs\">\r\n                                    mdi-help-circle-outline\r\n                                </MIcon>\r\n                            </ActivatorContent>\r\n                            <ChildContent>\r\n                                I'm a tooltip\r\n                            </ChildContent>\r\n                        </MTooltip>\r\n                    </PrependContent>\r\n                    <AppendContent>\r\n                        <img width=\"24\"\r\n                             height=\"24\"\r\n                             src=\"_content/MASA.Blazor.Doc/masa.png\"\r\n                             alt=\"\">\r\n                    </AppendContent>\r\n                    <AppendOuterContent>\r\n                        <MMenu Style=\"top: -12px\"\r\n                               OffsetY>\r\n                            <ActivatorContent Context=\"menu\">\r\n                                <MButton @attributes=\"menu.Attrs\">\r\n                                    <MIcon Left>\r\n                                        mdi-menu\r\n                                    </MIcon>\r\n                                    Menu\r\n                                </MButton>\r\n                            </ActivatorContent>\r\n                            <ChildContent>\r\n                                <MCard>\r\n                                    <MCardText Class=\"pa-6\">\r\n                                        <MButton Large\r\n                                                 Text\r\n                                                 Color=\"primary\">\r\n                                            <MIcon Left>\r\n                                                mdi-target\r\n                                            </MIcon>Click me\r\n                                        </MButton>\r\n                                    </MCardText>\r\n                                </MCard>\r\n                            </ChildContent>\r\n                        </MMenu>\r\n                    </AppendOuterContent>\r\n                </MTextField>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n\r\n@code {\r\n    private string _message = \"Hey!\";\r\n\r\n}",
+        "Code": "<MForm>\r\n    <MContainer>\r\n        <MRow>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_message\"\r\n                            Outlined\r\n                            Clearable\r\n                            Label=\"Message\"\r\n                            Type=\"text\">\r\n                    <PrependContent>\r\n                        <MTooltip Bottom>\r\n                            <ActivatorContent Context=\"activatorContext\">\r\n                                <MIcon @attributes=\"activatorContext.Attrs\">\r\n                                    mdi-help-circle-outline\r\n                                </MIcon>\r\n                            </ActivatorContent>\r\n                            <ChildContent>\r\n                                I'm a tooltip\r\n                            </ChildContent>\r\n                        </MTooltip>\r\n                    </PrependContent>\r\n                    <AppendContent>\r\n                        <img width=\"24\"\r\n                             height=\"24\"\r\n                             src=\"_content/Masa.Blazor.Doc/masa.png\"\r\n                             alt=\"\">\r\n                    </AppendContent>\r\n                    <AppendOuterContent>\r\n                        <MMenu Style=\"top: -12px\"\r\n                               OffsetY>\r\n                            <ActivatorContent Context=\"menu\">\r\n                                <MButton @attributes=\"menu.Attrs\">\r\n                                    <MIcon Left>\r\n                                        mdi-menu\r\n                                    </MIcon>\r\n                                    Menu\r\n                                </MButton>\r\n                            </ActivatorContent>\r\n                            <ChildContent>\r\n                                <MCard>\r\n                                    <MCardText Class=\"pa-6\">\r\n                                        <MButton Large\r\n                                                 Text\r\n                                                 Color=\"primary\">\r\n                                            <MIcon Left>\r\n                                                mdi-target\r\n                                            </MIcon>Click me\r\n                                        </MButton>\r\n                                    </MCardText>\r\n                                </MCard>\r\n                            </ChildContent>\r\n                        </MMenu>\r\n                    </AppendOuterContent>\r\n                </MTextField>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n\r\n@code {\r\n    private string _message = \"Hey!\";\r\n\r\n}",
         "Type": "Demos.Components.FormInputs.children.TextField.contents.IconSlots",
         "Style": "",
         "Debug": false,
@@ -3488,7 +3488,7 @@
     "FullTitle": "Text fields（文本框）"
   },
   {
-    "Desc": "<p>MASA.Blazor 配备了一个使用 flexbox 构建的 12 格网格系统。 网格用于在应用的内容中创建特定的布局。 它包含 5 种类型的媒体断点，用于针对特定的屏幕尺寸或方向，xs、sm、md、lg 和 xl。 这些分辨率在视口断点表中定义如下，可以通过自定义断点进行修改。</p>\n<div\n  class=\"overflow-hidden mb-12 overflow-hidden m-sheet m-sheet--outlined theme--light rounded\"\n>\n  <div class=\"m-data-table theme--light\">\n    <div class=\"m-data-table__wrapper\">\n      <table>\n        <caption class=\"pa-4\">\n          Material Design 断点\n        </caption>\n        <thead>\n          <tr class=\"text-left\">\n            <th>设备</th>\n            <th>代码</th>\n            <th>类型</th>\n            <th>像素范围</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z\"\n                  ></path></svg></span\n              ><span>Extra small (超小号)</span>\n            </td>\n            <td><strong>xs</strong></td>\n            <td>小型号到大型号的手机</td>\n            <td>&lt; 600px</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M19,18H5V6H19M21,4H3C1.89,4 1,4.89 1,6V18A2,2 0 0,0 3,20H21A2,2 0 0,0 23,18V6C23,4.89 22.1,4 21,4Z\"\n                  ></path></svg></span\n              ><span>Small (小号)</span>\n            </td>\n            <td><strong>sm</strong></td>\n            <td>小型号到中型号的平板</td>\n            <td>600px &gt; &lt; 960px</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z\"\n                  ></path></svg></span\n              ><span>Medium (中号)</span>\n            </td>\n            <td><strong>md</strong></td>\n            <td>大型号平板到手提电脑</td>\n            <td>960px &gt; &lt; 1264px*</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z\"\n                  ></path></svg></span\n              ><span>Large (大号)</span>\n            </td>\n            <td><strong>lg</strong></td>\n            <td>桌面端</td>\n            <td>1264px &gt; &lt; 1904px*</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M21,17H3V5H21M21,3H3A2,2 0 0,0 1,5V17A2,2 0 0,0 3,19H8V21H16V19H21A2,2 0 0,0 23,17V5A2,2 0 0,0 21,3Z\"\n                  ></path></svg></span\n              ><span>Extra large (超大号)</span>\n            </td>\n            <td><strong>xl</strong></td>\n            <td>4K 和超宽屏幕</td>\n            <td>&gt; 1904px*</td>\n          </tr>\n        </tbody>\n        <tfoot>\n          <tr>\n            <td colspan=\"4\" class=\"text-caption text-center grey--text\">\n              <em>桌面端上浏览器滚动条的宽度为 * -16px </em>\n            </td>\n          </tr>\n          <tr>\n            <td colspan=\"4\" class=\"text-right text--secondary\">\n              <small class=\"d-block mr-n1 mb-n6\"\n                ><a\n                  href=\"https://material.io/design/layout/responsive-layout-grid.html\"\n                  rel=\"noopener noreferrer\"\n                  target=\"_blank\"\n                  class=\"text-decoration-none d-inline-flex align-center\"\n                  ><span\n                    aria-hidden=\"true\"\n                    class=\"m-icon notranslate mr-1 theme--light\"\n                    style=\"\n                      font-size: 16px;\n                      height: 16px;\n                      width: 16px;\n                      color: inherit;\n                    \"\n                    ><svg\n                      xmlns=\"http://www.w3.org/2000/svg\"\n                      viewBox=\"0 0 24 24\"\n                      role=\"img\"\n                      aria-hidden=\"true\"\n                      class=\"m-icon__svg\"\n                      style=\"font-size: 16px; height: 16px; width: 16px\"\n                    >\n                      <path\n                        d=\"M21,12C21,9.97 20.33,8.09 19,6.38V17.63C20.33,15.97 21,14.09 21,12M17.63,19H6.38C7.06,19.55 7.95,20 9.05,20.41C10.14,20.8 11.13,21 12,21C12.88,21 13.86,20.8 14.95,20.41C16.05,20 16.94,19.55 17.63,19M11,17L7,9V17H11M17,9L13,17H17V9M12,14.53L15.75,7H8.25L12,14.53M17.63,5C15.97,3.67 14.09,3 12,3C9.91,3 8.03,3.67 6.38,5H17.63M5,17.63V6.38C3.67,8.09 3,9.97 3,12C3,14.09 3.67,15.97 5,17.63M23,12C23,15.03 21.94,17.63 19.78,19.78C17.63,21.94 15.03,23 12,23C8.97,23 6.38,21.94 4.22,19.78C2.06,17.63 1,15.03 1,12C1,8.97 2.06,6.38 4.22,4.22C6.38,2.06 8.97,1 12,1C15.03,1 17.63,2.06 19.78,4.22C21.94,6.38 23,8.97 23,12Z\"\n                      ></path></svg></span\n                  ><span>规格</span></a\n                ></small\n              >\n            </td>\n          </tr>\n        </tfoot>\n      </table>\n    </div>\n  </div>\n</div>\n",
+    "Desc": "<p>Masa.Blazor 配备了一个使用 flexbox 构建的 12 格网格系统。 网格用于在应用的内容中创建特定的布局。 它包含 5 种类型的媒体断点，用于针对特定的屏幕尺寸或方向，xs、sm、md、lg 和 xl。 这些分辨率在视口断点表中定义如下，可以通过自定义断点进行修改。</p>\n<div\n  class=\"overflow-hidden mb-12 overflow-hidden m-sheet m-sheet--outlined theme--light rounded\"\n>\n  <div class=\"m-data-table theme--light\">\n    <div class=\"m-data-table__wrapper\">\n      <table>\n        <caption class=\"pa-4\">\n          Material Design 断点\n        </caption>\n        <thead>\n          <tr class=\"text-left\">\n            <th>设备</th>\n            <th>代码</th>\n            <th>类型</th>\n            <th>像素范围</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z\"\n                  ></path></svg></span\n              ><span>Extra small (超小号)</span>\n            </td>\n            <td><strong>xs</strong></td>\n            <td>小型号到大型号的手机</td>\n            <td>&lt; 600px</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M19,18H5V6H19M21,4H3C1.89,4 1,4.89 1,6V18A2,2 0 0,0 3,20H21A2,2 0 0,0 23,18V6C23,4.89 22.1,4 21,4Z\"\n                  ></path></svg></span\n              ><span>Small (小号)</span>\n            </td>\n            <td><strong>sm</strong></td>\n            <td>小型号到中型号的平板</td>\n            <td>600px &gt; &lt; 960px</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z\"\n                  ></path></svg></span\n              ><span>Medium (中号)</span>\n            </td>\n            <td><strong>md</strong></td>\n            <td>大型号平板到手提电脑</td>\n            <td>960px &gt; &lt; 1264px*</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z\"\n                  ></path></svg></span\n              ><span>Large (大号)</span>\n            </td>\n            <td><strong>lg</strong></td>\n            <td>桌面端</td>\n            <td>1264px &gt; &lt; 1904px*</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M21,17H3V5H21M21,3H3A2,2 0 0,0 1,5V17A2,2 0 0,0 3,19H8V21H16V19H21A2,2 0 0,0 23,17V5A2,2 0 0,0 21,3Z\"\n                  ></path></svg></span\n              ><span>Extra large (超大号)</span>\n            </td>\n            <td><strong>xl</strong></td>\n            <td>4K 和超宽屏幕</td>\n            <td>&gt; 1904px*</td>\n          </tr>\n        </tbody>\n        <tfoot>\n          <tr>\n            <td colspan=\"4\" class=\"text-caption text-center grey--text\">\n              <em>桌面端上浏览器滚动条的宽度为 * -16px </em>\n            </td>\n          </tr>\n          <tr>\n            <td colspan=\"4\" class=\"text-right text--secondary\">\n              <small class=\"d-block mr-n1 mb-n6\"\n                ><a\n                  href=\"https://material.io/design/layout/responsive-layout-grid.html\"\n                  rel=\"noopener noreferrer\"\n                  target=\"_blank\"\n                  class=\"text-decoration-none d-inline-flex align-center\"\n                  ><span\n                    aria-hidden=\"true\"\n                    class=\"m-icon notranslate mr-1 theme--light\"\n                    style=\"\n                      font-size: 16px;\n                      height: 16px;\n                      width: 16px;\n                      color: inherit;\n                    \"\n                    ><svg\n                      xmlns=\"http://www.w3.org/2000/svg\"\n                      viewBox=\"0 0 24 24\"\n                      role=\"img\"\n                      aria-hidden=\"true\"\n                      class=\"m-icon__svg\"\n                      style=\"font-size: 16px; height: 16px; width: 16px\"\n                    >\n                      <path\n                        d=\"M21,12C21,9.97 20.33,8.09 19,6.38V17.63C20.33,15.97 21,14.09 21,12M17.63,19H6.38C7.06,19.55 7.95,20 9.05,20.41C10.14,20.8 11.13,21 12,21C12.88,21 13.86,20.8 14.95,20.41C16.05,20 16.94,19.55 17.63,19M11,17L7,9V17H11M17,9L13,17H17V9M12,14.53L15.75,7H8.25L12,14.53M17.63,5C15.97,3.67 14.09,3 12,3C9.91,3 8.03,3.67 6.38,5H17.63M5,17.63V6.38C3.67,8.09 3,9.97 3,12C3,14.09 3.67,15.97 5,17.63M23,12C23,15.03 21.94,17.63 19.78,19.78C17.63,21.94 15.03,23 12,23C8.97,23 6.38,21.94 4.22,19.78C2.06,17.63 1,15.03 1,12C1,8.97 2.06,6.38 4.22,4.22C6.38,2.06 8.97,1 12,1C15.03,1 17.63,2.06 19.78,4.22C21.94,6.38 23,8.97 23,12Z\"\n                      ></path></svg></span\n                  ><span>规格</span></a\n                ></small\n              >\n            </td>\n          </tr>\n        </tfoot>\n      </table>\n    </div>\n  </div>\n</div>\n",
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MContainer\">MContainer</a></li>\n<li><a href=\"/api/MRow\">MRow</a></li>\n<li><a href=\"/api/MCol\">MCol</a></li>\n<li><a href=\"/api/MSpacer\">MSpacer</a></li>\n</ul>\n",
@@ -3496,13 +3496,13 @@
       "辅助类": "\n<p><strong>FillHeight</strong>将<code>height:100%</code>应用于元素。当应用于<code>MContainer</code>时，它还包括<code>align items:center</code>。</p>\n",
       "注意": "\n<!--alert:info--> \n<p>1.x 网格系统已被废弃，请改用 2.x 网格系统。 1.x 网格的文档可以在 v1.5 文档 中找到。</p>\n<!--alert:info--> \n<!--alert:info--> \n<p>网格组件上基于断点的属性以 <code>andUp</code> 的方式工作。 考虑 <strong>xs</strong> 断点已经被删除的情况， 这将会影响到 <strong>offset</strong>、<strong>justify</strong>、<strong>align</strong> 和 <code>MCol</code> 上的断点属性。</p>\n<ul>\n<li>像 <strong>justify-sm</strong> 和 <strong>justify-md</strong> 这样的属性仍然存在，但 <strong>justify-xs</strong> 会变成 <strong>justify</strong>。</li>\n<li><code>MCol</code> 上不存在 <strong>xs</strong> 属性。 与此对应的是 <strong>cols</strong> 属性。</li>\n</ul>\n<!--alert:info--> \n<!--alert:info--> \n<p>当在 IE11 使用网格系统时，你需要设置一个显式的 <code>height</code>，因为 <code>min-height</code> 不足进而导致非预期结果。</p>\n<!--alert:info--> \n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4943852+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2175362+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "index",
         "Title": "使用",
-        "Description": "<p>MASA.Blazor 网格深受 <a href=\"https://getbootstrap.com/docs/4.0/layout/grid/\">Bootstrap 网格</a> 的启发。 它使用一系列的容器、行、列来整合内容的布局和排列。 如果你不熟悉\nflexbox，<a href=\"https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background\">阅读 CSS Tricks flexbox 指南</a>，了解背景、术语、指南和代码片段。</p>\n",
+        "Description": "<p>Masa.Blazor 网格深受 <a href=\"https://getbootstrap.com/docs/4.0/layout/grid/\">Bootstrap 网格</a> 的启发。 它使用一系列的容器、行、列来整合内容的布局和排列。 如果你不熟悉\nflexbox，<a href=\"https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background\">阅读 CSS Tricks flexbox 指南</a>，了解背景、术语、指南和代码片段。</p>\n",
         "Code": "<MContainer Class=\"grey lighten-5\">\r\n    <MRow NoGutters>\r\n        @for (var i = 0; i < 3; i++)\r\n        {\r\n            <MCol Cols=\"12\"\r\n                  Sm=\"4\">\r\n                <MCard Class=\"pa-2\"\r\n                       Outlined\r\n                       tile>\r\n                    One of three columns\r\n                </MCard>\r\n            </MCol>\r\n        }\r\n    </MRow>\r\n</MContainer>\r\n",
         "Type": "Demos.Components.Grid.usage.Index",
         "Style": "",
@@ -3728,7 +3728,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.4981061+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2215386+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3817,7 +3817,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-01-06T09:23:47.9059654+08:00",
+    "LastWriteTime": "2021-12-16T10:54:26.8714751+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3917,7 +3917,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5053894+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2285359+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4006,7 +4006,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.509099+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2315352+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4094,7 +4094,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5130925+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2355355+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4193,7 +4193,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5166526+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2395359+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4244,7 +4244,7 @@
         "Name": "accountCreation",
         "Title": "创建账户",
         "Description": "<p>创建具有平滑动画的丰富表单。 <code>MWindow</code> 能够自动跟踪当前的选择索引，来改变过渡动画的方向。 这可以通过 <code>Reverse</code> 参数来手动控制。</p>\n",
-        "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"500\">\r\n    <MCardTitle Class=\"text-h6 font-weight-regular justify-space-between\">\r\n        <span>@currentTitle</span>\r\n        <MAvatar Color=\"primary lighten-2\" Class=\"subheading white--text\" Size=\"24\">@step</MAvatar>\r\n    </MCardTitle>\r\n\r\n    <MWindow @bind-Value=\"Step\">\r\n        <MWindowItem Value=\"1\">\r\n            <MCardText>\r\n                <MTextField Label=\"Email\" @bind-Value=\"@email\"></MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    This is the email you will use to login to your MASA.Blazor account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"2\">\r\n            <MCardText>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Confirm Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    Please enter a password for your account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"3\">\r\n            <div class=\"pa-4 text-center\">\r\n                <MImage\r\n                    Class=\"mb-4\"\r\n                    Contain\r\n                    Height=\"25\"\r\n                    Src=\"https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png\">\r\n                </MImage>\r\n                <h3 class=\"text-h6 font-weight-light mb-2\">\r\n                    Welcome to MASA Blazor\r\n                </h3>\r\n                <span class=\"text-caption grey--text\">Thanks for signing up!</span>\r\n            </div>\r\n        </MWindowItem>\r\n    </MWindow>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MCardActions>\r\n        <MButton\r\n            Disabled=\"@(step == 1)\"\r\n            Text\r\n            OnClick=\"() => step--\">\r\n            Back\r\n        </MButton>\r\n        <MSpacer></MSpacer>\r\n        <MButton\r\n            Disabled=\"@(step == 3)\"\r\n            Color=\"primary\"\r\n            Depressed\r\n            OnClick=\"() => step++\">\r\n            Next\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    string email = \"john@masablazor.com\";\r\n    int step = 1;\r\n\r\n    StringNumber Step\r\n    {\r\n        get => step;\r\n        set => step = value.ToInt32();\r\n    }\r\n\r\n    public string currentTitle\r\n    {\r\n        get => step switch\r\n        {\r\n            1 => \"Sign-Up\",\r\n            2 => \"Create a password\",\r\n            _ => \"Account Created\"\r\n            };\r\n    }\r\n\r\n}",
+        "Code": "<MCard Class=\"mx-auto\" MaxWidth=\"500\">\r\n    <MCardTitle Class=\"text-h6 font-weight-regular justify-space-between\">\r\n        <span>@currentTitle</span>\r\n        <MAvatar Color=\"primary lighten-2\" Class=\"subheading white--text\" Size=\"24\">@step</MAvatar>\r\n    </MCardTitle>\r\n\r\n    <MWindow @bind-Value=\"Step\">\r\n        <MWindowItem Value=\"1\">\r\n            <MCardText>\r\n                <MTextField Label=\"Email\" @bind-Value=\"@email\"></MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    This is the email you will use to login to your Masa.Blazor account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"2\">\r\n            <MCardText>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <MTextField\r\n                    TValue=\"string\"\r\n                    Label=\"Confirm Password\"\r\n                    Type=\"password\">\r\n                </MTextField>\r\n                <span class=\"text-caption grey--text text--darken-1\">\r\n                    Please enter a password for your account\r\n                </span>\r\n            </MCardText>\r\n        </MWindowItem>\r\n\r\n        <MWindowItem Value=\"3\">\r\n            <div class=\"pa-4 text-center\">\r\n                <MImage\r\n                    Class=\"mb-4\"\r\n                    Contain\r\n                    Height=\"25\"\r\n                    Src=\"https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png\">\r\n                </MImage>\r\n                <h3 class=\"text-h6 font-weight-light mb-2\">\r\n                    Welcome to MASA Blazor\r\n                </h3>\r\n                <span class=\"text-caption grey--text\">Thanks for signing up!</span>\r\n            </div>\r\n        </MWindowItem>\r\n    </MWindow>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MCardActions>\r\n        <MButton\r\n            Disabled=\"@(step == 1)\"\r\n            Text\r\n            OnClick=\"() => step--\">\r\n            Back\r\n        </MButton>\r\n        <MSpacer></MSpacer>\r\n        <MButton\r\n            Disabled=\"@(step == 3)\"\r\n            Color=\"primary\"\r\n            Depressed\r\n            OnClick=\"() => step++\">\r\n            Next\r\n        </MButton>\r\n    </MCardActions>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    string email = \"john@masablazor.com\";\r\n    int step = 1;\r\n\r\n    StringNumber Step\r\n    {\r\n        get => step;\r\n        set => step = value.ToInt32();\r\n    }\r\n\r\n    public string currentTitle\r\n    {\r\n        get => step switch\r\n        {\r\n            1 => \"Sign-Up\",\r\n            2 => \"Create a password\",\r\n            _ => \"Account Created\"\r\n            };\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Groups.children.Windows.misc.AccountCreation",
         "Style": "",
         "Debug": false,
@@ -4281,7 +4281,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5200087+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2425356+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4347,7 +4347,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5239111+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2465357+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4437,7 +4437,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>MImage 组件使用 Intersect 指令，IE11 和 Safari需要 Polyfill。 如果检测到浏览器不支持此功能, 图像仍将以正常方式加载。</p>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5281338+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2505355+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4537,7 +4537,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>如果您要查找有状态列表项，请查看 <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>。</p>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5352989+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2585361+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4747,7 +4747,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5432123+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2645359+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4874,7 +4874,7 @@
         "Order": 11,
         "Name": "customTransitions",
         "Title": "自定义过渡",
-        "Description": "<p>MASA.Blazor 有三个标准过渡，<strong>scale</strong>，<strong>slide-x</strong> 和 <strong>slide-y</strong>。您也可以创建自己的过渡并作为过渡参数传递。</p>\n",
+        "Description": "<p>Masa.Blazor 有三个标准过渡，<strong>scale</strong>，<strong>slide-x</strong> 和 <strong>slide-y</strong>。您也可以创建自己的过渡并作为过渡参数传递。</p>\n",
         "Code": "<MRow Justify=\"JustifyTypes.SpaceAround\">\r\n    <MMenu\r\n        Bottom\r\n        Origin=\"center center\"\r\n        Transition=\"scale-transition\">\r\n        <ActivatorContent>\r\n            <MButton\r\n                Color=\"primary\"\r\n                Dark\r\n                @attributes=\"@context.Attrs\">\r\n                Scale Transition\r\n            </MButton>\r\n        </ActivatorContent>\r\n\r\n        <ChildContent>\r\n            <MList>\r\n                @foreach (var item in items)\r\n                {\r\n                    <MListItem>\r\n                        <MListItemContent>\r\n                            <MListItemTitle>\r\n                                @item\r\n                            </MListItemTitle>\r\n                        </MListItemContent>\r\n                    </MListItem>\r\n                }\r\n            </MList>\r\n        </ChildContent>\r\n    </MMenu>\r\n\r\n    <MMenu\r\n        Transition=\"slide-x-transition\"\r\n        Bottom\r\n        Right>\r\n        <ActivatorContent>\r\n            <MButton\r\n                Class=\"deep-orange\"\r\n                Color=\"primary\"\r\n                Dark\r\n                @attributes=\"@context.Attrs\">\r\n                Slide X Transition\r\n            </MButton>\r\n        </ActivatorContent>\r\n\r\n        <ChildContent>\r\n            <MList>\r\n                @foreach (var item in items)\r\n                {\r\n                    <MListItem>\r\n                        <MListItemContent>\r\n                            <MListItemTitle>\r\n                                @item\r\n                            </MListItemTitle>\r\n                        </MListItemContent>\r\n                    </MListItem>\r\n                }\r\n            </MList>\r\n        </ChildContent>\r\n    </MMenu>\r\n\r\n    <MMenu\r\n        Transition=\"slide-y-transition\"\r\n        Bottom>\r\n        <ActivatorContent>\r\n            <MButton\r\n                Class=\"purple\"\r\n                Color=\"primary\"\r\n                Dark\r\n                @attributes=\"@context.Attrs\">\r\n                Slide Y Transition\r\n            </MButton>\r\n        </ActivatorContent>\r\n\r\n        <ChildContent>\r\n            <MList>\r\n                @foreach (var item in items)\r\n                {\r\n                    <MListItem>\r\n                        <MListItemContent>\r\n                            <MListItemTitle>\r\n                                @item\r\n                            </MListItemTitle>\r\n                        </MListItemContent>\r\n                    </MListItem>\r\n                }\r\n            </MList>\r\n        </ChildContent>\r\n    </MMenu>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    string[] items =\r\n    {\r\n        \"Click Me\",\r\n        \"Click Me\",\r\n        \"Click Me\",\r\n        \"Click Me 2\"\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Menu.misc.CustomTransitions",
         "Style": "",
@@ -4924,7 +4924,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MNavigationDrawer\">MNavigationDrawer</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error-->\n<p>如果使用启用了 <strong>App</strong> 属性的 <code>MNavigationDrawer</code>，则不需要像示例中那样使用 <strong>Absolute</strong> 属性。</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p><strong>ExtensionOnHover</strong> 参数不会改变<strong>MMain</strong>的内容区域。 要使内容区域响应<strong>ExtensionOnHover</strong>，请绑定<strong>OnMiniVariantUpdate</strong> 到数据。</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2021-12-20T16:42:15.0043908+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2695355+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4975,7 +4975,7 @@
         "Name": "image",
         "Title": "图像",
         "Description": "<p>通过 <strong>Src</strong> 属性将自定义背景应用于抽屉。 如果你需要自定义 <code>MImage</code> 的属性，你可以使用 <strong>ImgContent</strong>。</p>\n",
-        "Code": "<MCard Class=\"mx-auto\" Height=\"300\" Width=\"300\">\r\n    <MNavigationDrawer Absolute Dark Src=\"@(\"/_content/MASA.Blazor.Doc/backgrounds/bg-2.png\")\" Width=\"@(\"100%\")\" Permanent>\r\n        <MList Dark>\r\n            @foreach (var item in _items)\r\n            {\r\n                <MListItem Link Dark>\r\n                    <MListItemIcon>\r\n                        <MIcon Dark>@item[0]</MIcon>\r\n                    </MListItemIcon>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>@item[1]</MListItemTitle>\r\n                    </MListItemContent>\r\n                </MListItem>\r\n            }\r\n            \r\n        </MList>\r\n    </MNavigationDrawer>\r\n</MCard>\r\n\r\n@code\r\n{\r\n    private string[][] _items = new string[3][]\r\n    {\r\n        new string[2] {\"mdi-email\", \"Inbox\"},\r\n        new string[2]{\"mdi-account-supervisor-circle\", \"Supervisors\" },\r\n        new string[2]{ \"mdi-clock-start\", \"Clock-in\" }\r\n    };\r\n}",
+        "Code": "<MCard Class=\"mx-auto\" Height=\"300\" Width=\"300\">\r\n    <MNavigationDrawer Absolute Dark Src=\"@(\"/_content/Masa.Blazor.Doc/backgrounds/bg-2.png\")\" Width=\"@(\"100%\")\" Permanent>\r\n        <MList Dark>\r\n            @foreach (var item in _items)\r\n            {\r\n                <MListItem Link Dark>\r\n                    <MListItemIcon>\r\n                        <MIcon Dark>@item[0]</MIcon>\r\n                    </MListItemIcon>\r\n\r\n                    <MListItemContent>\r\n                        <MListItemTitle>@item[1]</MListItemTitle>\r\n                    </MListItemContent>\r\n                </MListItem>\r\n            }\r\n            \r\n        </MList>\r\n    </MNavigationDrawer>\r\n</MCard>\r\n\r\n@code\r\n{\r\n    private string[][] _items = new string[3][]\r\n    {\r\n        new string[2] {\"mdi-email\", \"Inbox\"},\r\n        new string[2]{\"mdi-account-supervisor-circle\", \"Supervisors\" },\r\n        new string[2]{ \"mdi-clock-start\", \"Clock-in\" }\r\n    };\r\n}",
         "Type": "Demos.Components.NavigationDrawer.props.Image",
         "Style": "",
         "Debug": false,
@@ -5057,7 +5057,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5513233+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2725356+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5145,7 +5145,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5552401+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2755356+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5234,7 +5234,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5682044+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2865363+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5478,7 +5478,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5741885+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2915356+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5622,7 +5622,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5801729+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2975357+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5796,14 +5796,14 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-06T12:39:16.5821676+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.2995363+08:00",
     "DemoList": [
       {
         "Order": 20,
         "Name": "Actions",
         "Title": "操作",
         "Description": "<p>提供一组响应式的操作按钮。</p>\n",
-        "Code": "@using Action = MASA.Blazor.Presets.Action\r\n<MRow NoGutters>\r\n    <MCol Cols=\"12\">\r\n        <MSlider Label=\"宽度\" @bind-Value=\"width\" ThumbLabel=\"@(\"always\")\"></MSlider>\r\n    </MCol>\r\n</MRow>\r\n\r\n<div style=\"@($\"width:{width}%\")\">\r\n    <PActions Items=\"actions\" Justify=\"JustifyTypes.SpaceBetween\" Divider>\r\n    </PActions>\r\n</div>\r\n\r\n<MDivider Style=\"margin: 8px 0\"></MDivider>\r\n\r\n<div style=\"@($\"width:{width}%\")\">\r\n    <PActions Justify=\"JustifyTypes.SpaceBetween\">\r\n        <PAction Label=\"alert\" Icon=\"mdi-alert-outline\"></PAction>\r\n        <PAction Label=\"heart\" Icon=\"mdi-heart\" Color=\"red\" Dark></PAction>\r\n        <PAction Label=\"information\" Icon=\"mdi-information\" Disabled></PAction>\r\n        <PAction Label=\"check\" Icon=\"mdi-check\"></PAction>\r\n    </PActions>\r\n</div>\r\n\r\n<MDivider Style=\"margin: 8px 0\"></MDivider>\r\n\r\n<MDataTable Headers=\"headers\"\r\n            Items=\"desserts\"\r\n            Class=\"elevation-1\"\r\n            Style=\"@($\"width:{width}%;min-width:400px\")\"\r\n            HideDefaultFooter>\r\n    <ItemColContent>\r\n        @if (context.Header.Value == \"actions\")\r\n        {\r\n            List<Action> items = new()\r\n            {\r\n                new Action()\r\n                {\r\n                    Label = \"Edit\",\r\n                    Icon = \"mdi-pencil\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, () => EditItem(context.Item))\r\n                },\r\n                new Action()\r\n                {\r\n                    Label = \"Remove\",\r\n                    Icon = \"mdi-delete\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, () => DeleteItem(context.Item))\r\n                },\r\n                new Action()\r\n                {\r\n                    Label = \"Loading\",\r\n                    Icon = \"mdi-reload\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, async () => await Task.Delay(1000))\r\n                },\r\n            };\r\n\r\n            <PActions Items=\"items\" Small Divider></PActions>\r\n        }\r\n        else\r\n        {\r\n            @context.Value\r\n        }\r\n    </ItemColContent>\r\n</MDataTable>\r\n\r\n@code {\r\n    private double width = 100;\r\n\r\n    List<Action> actions = new()\r\n    {\r\n        new Action() { Label = \"alert\", Icon = \"mdi-alert-outline\" },\r\n        new Action() { Label = \"heart\", Icon = \"mdi-heart\", Color = \"red\", Dark = true },\r\n        new Action() { Label = \"information\", Icon = \"mdi-information\", Disabled = true },\r\n        new Action() { Label = \"check\", Icon = \"mdi-check\" },\r\n    };\r\n\r\n    List<Dessert> desserts = new()\r\n    {\r\n        new Dessert\r\n        {\r\n            Name = \"Frozen Yogurt\",\r\n            Calories = 159,\r\n            Fat = 6.0,\r\n            Carbs = 24,\r\n            Protein = 4.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Ice cream sandwich\",\r\n            Calories = 237,\r\n            Fat = 9.0,\r\n            Carbs = 37,\r\n            Protein = 4.3\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Eclair\",\r\n            Calories = 262,\r\n            Fat = 16.0,\r\n            Carbs = 23,\r\n            Protein = 6.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Jelly bean\",\r\n            Calories = 375,\r\n            Fat = 0.0,\r\n            Carbs = 94,\r\n            Protein = 0.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Lollipop\",\r\n            Calories = 392,\r\n            Fat = 0.2,\r\n            Carbs = 98,\r\n            Protein = 0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"KitKat\",\r\n            Calories = 518,\r\n            Fat = 26.0,\r\n            Carbs = 65,\r\n            Protein = 7\r\n        }\r\n    };\r\n\r\n    List<DataTableHeader<Dessert>> headers = new()\r\n    {\r\n        new()\r\n        {\r\n            Text = \"Dessert (100g serving)\",\r\n            Align = \"start\",\r\n            Sortable = false,\r\n            Value = nameof(Dessert.Name)\r\n        },\r\n        new() { Text = \"Calories\", Value = nameof(Dessert.Calories) },\r\n        new() { Text = \"Actions\", Value = \"actions\", Sortable = false }\r\n    };\r\n\r\n    public void EditItem(Dessert item)\r\n    {\r\n    }\r\n\r\n    public void DeleteItem(Dessert item)\r\n    {\r\n    }\r\n\r\n    public class Dessert\r\n    {\r\n        public string Name { get; set; }\r\n\r\n        public int Calories { get; set; }\r\n\r\n        public double Fat { get; set; }\r\n\r\n        public int Carbs { get; set; }\r\n\r\n        public double Protein { get; set; }\r\n    }\r\n\r\n}",
+        "Code": "@using Action = Masa.Blazor.Presets.Action\r\n<MRow NoGutters>\r\n    <MCol Cols=\"12\">\r\n        <MSlider Label=\"宽度\" @bind-Value=\"width\" ThumbLabel=\"@(\"always\")\"></MSlider>\r\n    </MCol>\r\n</MRow>\r\n\r\n<div style=\"@($\"width:{width}%\")\">\r\n    <PActions Items=\"actions\" Justify=\"JustifyTypes.SpaceBetween\" Divider>\r\n    </PActions>\r\n</div>\r\n\r\n<MDivider Style=\"margin: 8px 0\"></MDivider>\r\n\r\n<div style=\"@($\"width:{width}%\")\">\r\n    <PActions Justify=\"JustifyTypes.SpaceBetween\">\r\n        <PAction Label=\"alert\" Icon=\"mdi-alert-outline\"></PAction>\r\n        <PAction Label=\"heart\" Icon=\"mdi-heart\" Color=\"red\" Dark></PAction>\r\n        <PAction Label=\"information\" Icon=\"mdi-information\" Disabled></PAction>\r\n        <PAction Label=\"check\" Icon=\"mdi-check\"></PAction>\r\n    </PActions>\r\n</div>\r\n\r\n<MDivider Style=\"margin: 8px 0\"></MDivider>\r\n\r\n<MDataTable Headers=\"headers\"\r\n            Items=\"desserts\"\r\n            Class=\"elevation-1\"\r\n            Style=\"@($\"width:{width}%;min-width:400px\")\"\r\n            HideDefaultFooter>\r\n    <ItemColContent>\r\n        @if (context.Header.Value == \"actions\")\r\n        {\r\n            List<Action> items = new()\r\n            {\r\n                new Action()\r\n                {\r\n                    Label = \"Edit\",\r\n                    Icon = \"mdi-pencil\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, () => EditItem(context.Item))\r\n                },\r\n                new Action()\r\n                {\r\n                    Label = \"Remove\",\r\n                    Icon = \"mdi-delete\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, () => DeleteItem(context.Item))\r\n                },\r\n                new Action()\r\n                {\r\n                    Label = \"Loading\",\r\n                    Icon = \"mdi-reload\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, async () => await Task.Delay(1000))\r\n                },\r\n            };\r\n\r\n            <PActions Items=\"items\" Small Divider></PActions>\r\n        }\r\n        else\r\n        {\r\n            @context.Value\r\n        }\r\n    </ItemColContent>\r\n</MDataTable>\r\n\r\n@code {\r\n    private double width = 100;\r\n\r\n    List<Action> actions = new()\r\n    {\r\n        new Action() { Label = \"alert\", Icon = \"mdi-alert-outline\" },\r\n        new Action() { Label = \"heart\", Icon = \"mdi-heart\", Color = \"red\", Dark = true },\r\n        new Action() { Label = \"information\", Icon = \"mdi-information\", Disabled = true },\r\n        new Action() { Label = \"check\", Icon = \"mdi-check\" },\r\n    };\r\n\r\n    List<Dessert> desserts = new()\r\n    {\r\n        new Dessert\r\n        {\r\n            Name = \"Frozen Yogurt\",\r\n            Calories = 159,\r\n            Fat = 6.0,\r\n            Carbs = 24,\r\n            Protein = 4.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Ice cream sandwich\",\r\n            Calories = 237,\r\n            Fat = 9.0,\r\n            Carbs = 37,\r\n            Protein = 4.3\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Eclair\",\r\n            Calories = 262,\r\n            Fat = 16.0,\r\n            Carbs = 23,\r\n            Protein = 6.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Jelly bean\",\r\n            Calories = 375,\r\n            Fat = 0.0,\r\n            Carbs = 94,\r\n            Protein = 0.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Lollipop\",\r\n            Calories = 392,\r\n            Fat = 0.2,\r\n            Carbs = 98,\r\n            Protein = 0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"KitKat\",\r\n            Calories = 518,\r\n            Fat = 26.0,\r\n            Carbs = 65,\r\n            Protein = 7\r\n        }\r\n    };\r\n\r\n    List<DataTableHeader<Dessert>> headers = new()\r\n    {\r\n        new()\r\n        {\r\n            Text = \"Dessert (100g serving)\",\r\n            Align = \"start\",\r\n            Sortable = false,\r\n            Value = nameof(Dessert.Name)\r\n        },\r\n        new() { Text = \"Calories\", Value = nameof(Dessert.Calories) },\r\n        new() { Text = \"Actions\", Value = \"actions\", Sortable = false }\r\n    };\r\n\r\n    public void EditItem(Dessert item)\r\n    {\r\n    }\r\n\r\n    public void DeleteItem(Dessert item)\r\n    {\r\n    }\r\n\r\n    public class Dessert\r\n    {\r\n        public string Name { get; set; }\r\n\r\n        public int Calories { get; set; }\r\n\r\n        public double Fat { get; set; }\r\n\r\n        public int Carbs { get; set; }\r\n\r\n        public double Protein { get; set; }\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Presets.props.Actions",
         "Style": "",
         "Debug": false,
@@ -5836,7 +5836,7 @@
         "Name": "formModal",
         "Title": "表单对话框",
         "Description": "<p>将表单和<code>Modal</code>结合，验证数据正确性。</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n@using System.Text.Json;\r\n\r\n<div>\r\n    <MButton OnClick=\"() => _addModal.Show()\" Class=\"mb-1\">Add User</MButton>\r\n\r\n    <MASA.Blazor.Presets.FormModal Visible=\"_addModal.Visible\"\r\n                                   Title=\"User\"\r\n                                   Width=\"500\"\r\n                                   Model=\"_addModal.Data\"\r\n                                   OnOk=\"HandleOnClick\"\r\n                                   OnCancel=\"HandleOnCancel\">\r\n        <MRow>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.UserName\"\r\n                            Label=\"UserName\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"@(\"auto\")\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.City\"\r\n                            Label=\"City\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"@(\"auto\")\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MRadioGroup @bind-Value=\"_addModal.Data.Gender\"\r\n                             Label=\"Gender:\"\r\n                             Row\r\n                             Dense\r\n                             Style=\"margin-top: 0\" \r\n                             HideDetails=\"@(\"auto\")\">\r\n                    <MRadio Label=\"男\" Value=\"0\"></MRadio>\r\n                    <MRadio Label=\"女\" Value=\"1\"></MRadio>\r\n                </MRadioGroup>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MAutocomplete @bind-Value=\"_addModal.Data.Favorites\" \r\n                               Items=\"_favorites\"\r\n                               Label=\"Favorites\"\r\n                               Multiple\r\n                               ItemValue=\"r => r\"\r\n                               ItemText=\"r => r\"\r\n                               HideDetails=\"@(\"auto\")\">\r\n                </MAutocomplete>\r\n            </MCol>\r\n        </MRow>\r\n        <MRow>\r\n            <MCol>@JsonSerializer.Serialize(_addModal.Data)</MCol>\r\n        </MRow>\r\n    </MASA.Blazor.Presets.FormModal>\r\n\r\n    <MRow NoGutters Class=\"pa-2\">\r\n        <MCol Cols=\"4\">username: @_user?.UserName</MCol>\r\n        <MCol Cols=\"4\">city: @_user?.City</MCol>\r\n        <MCol Cols=\"4\"></MCol>\r\n        <MCol Cols=\"4\">gender: @_user?.Gender</MCol>\r\n        <MCol Cols=\"4\">favorites: @string.Join(\",\", _user?.Favorites ?? new List<string>())</MCol>\r\n        <MCol Cols=\"4\">\r\n            <MButton OnClick=\"@(() => _addModal.Show(_user?.ShallowCopy()))\"\r\n                     Color=\"primary\"\r\n                     Disabled=\"@(_user == null)\"\r\n                     Text\r\n                     Small>\r\n                Edit\r\n            </MButton>\r\n        </MCol>\r\n    </MRow>\r\n</div>\r\n\r\n@code {\r\n    readonly List<string> _favorites = new() { \"Basketball\", \"Football\", \"Ping-pong\", \"Badminton\" };\r\n    \r\n    DataModal<User> _addModal = new();\r\n    User _user;\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        _addModal.Hide();\r\n    }\r\n\r\n    private async Task HandleOnClick()\r\n    {\r\n        _addModal.ShowLoading();\r\n\r\n        if (_addModal.HasValue)\r\n        {\r\n            // Update\r\n        }\r\n        else\r\n        {\r\n            // Add\r\n        }\r\n        \r\n        await Task.Delay(1000);\r\n\r\n        _user = _addModal.Data;\r\n\r\n        _addModal.HideLoading();\r\n\r\n        _addModal.Hide();\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        [Required]\r\n        public string UserName { get; set; }\r\n\r\n        [Range(0, 1)]\r\n        public int Gender { get; set; }\r\n\r\n        [Required]\r\n        public string City { get; set; }\r\n\r\n        [Required]\r\n        public List<string> Favorites { get; set; } = new() { };\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public class DataModal<T> where T : class, new()\r\n    {\r\n        public bool Visible { get; set; }\r\n\r\n        public T Data { get; private set; }\r\n\r\n        public bool HasValue { get; private set; }\r\n\r\n        public bool Loading { get; private set; }\r\n\r\n        public DataModal()\r\n        {\r\n            Data = new T();\r\n        }\r\n\r\n        public void Show() => Visible = true;\r\n\r\n        /// <summary>\r\n        /// 显示弹窗\r\n        /// </summary>\r\n        /// <param name=\"data\"></param>\r\n        /// <remarks>写入数据之前请确保此对象是拷贝过的</remarks>\r\n        public void Show(T data)\r\n        {\r\n            Visible = true;\r\n            HasValue = true;\r\n            Data = data;\r\n        }\r\n\r\n        public virtual void Hide()\r\n        {\r\n            Visible = false;\r\n            HasValue = false;\r\n            Data = new T();\r\n        }\r\n\r\n        public bool ShowLoading() => Loading = true;\r\n\r\n        public bool HideLoading() => Loading = false;\r\n    }\r\n\r\n    public interface IShallowCopy<T>\r\n    {\r\n        public T ShallowCopy();\r\n    }\r\n\r\n}",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n@using System.Text.Json;\r\n\r\n<div>\r\n    <MButton OnClick=\"() => _addModal.Show()\" Class=\"mb-1\">Add User</MButton>\r\n\r\n    <Masa.Blazor.Presets.FormModal Visible=\"_addModal.Visible\"\r\n                                   Title=\"User\"\r\n                                   Width=\"500\"\r\n                                   Model=\"_addModal.Data\"\r\n                                   OnOk=\"HandleOnClick\"\r\n                                   OnCancel=\"HandleOnCancel\">\r\n        <MRow>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.UserName\"\r\n                            Label=\"UserName\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"@(\"auto\")\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.City\"\r\n                            Label=\"City\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"@(\"auto\")\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MRadioGroup @bind-Value=\"_addModal.Data.Gender\"\r\n                             Label=\"Gender:\"\r\n                             Row\r\n                             Dense\r\n                             Style=\"margin-top: 0\" \r\n                             HideDetails=\"@(\"auto\")\">\r\n                    <MRadio Label=\"男\" Value=\"0\"></MRadio>\r\n                    <MRadio Label=\"女\" Value=\"1\"></MRadio>\r\n                </MRadioGroup>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MAutocomplete @bind-Value=\"_addModal.Data.Favorites\" \r\n                               Items=\"_favorites\"\r\n                               Label=\"Favorites\"\r\n                               Multiple\r\n                               ItemValue=\"r => r\"\r\n                               ItemText=\"r => r\"\r\n                               HideDetails=\"@(\"auto\")\">\r\n                </MAutocomplete>\r\n            </MCol>\r\n        </MRow>\r\n        <MRow>\r\n            <MCol>@JsonSerializer.Serialize(_addModal.Data)</MCol>\r\n        </MRow>\r\n    </Masa.Blazor.Presets.FormModal>\r\n\r\n    <MRow NoGutters Class=\"pa-2\">\r\n        <MCol Cols=\"4\">username: @_user?.UserName</MCol>\r\n        <MCol Cols=\"4\">city: @_user?.City</MCol>\r\n        <MCol Cols=\"4\"></MCol>\r\n        <MCol Cols=\"4\">gender: @_user?.Gender</MCol>\r\n        <MCol Cols=\"4\">favorites: @string.Join(\",\", _user?.Favorites ?? new List<string>())</MCol>\r\n        <MCol Cols=\"4\">\r\n            <MButton OnClick=\"@(() => _addModal.Show(_user?.ShallowCopy()))\"\r\n                     Color=\"primary\"\r\n                     Disabled=\"@(_user == null)\"\r\n                     Text\r\n                     Small>\r\n                Edit\r\n            </MButton>\r\n        </MCol>\r\n    </MRow>\r\n</div>\r\n\r\n@code {\r\n    readonly List<string> _favorites = new() { \"Basketball\", \"Football\", \"Ping-pong\", \"Badminton\" };\r\n    \r\n    DataModal<User> _addModal = new();\r\n    User _user;\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        _addModal.Hide();\r\n    }\r\n\r\n    private async Task HandleOnClick()\r\n    {\r\n        _addModal.ShowLoading();\r\n\r\n        if (_addModal.HasValue)\r\n        {\r\n            // Update\r\n        }\r\n        else\r\n        {\r\n            // Add\r\n        }\r\n        \r\n        await Task.Delay(1000);\r\n\r\n        _user = _addModal.Data;\r\n\r\n        _addModal.HideLoading();\r\n\r\n        _addModal.Hide();\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        [Required]\r\n        public string UserName { get; set; }\r\n\r\n        [Range(0, 1)]\r\n        public int Gender { get; set; }\r\n\r\n        [Required]\r\n        public string City { get; set; }\r\n\r\n        [Required]\r\n        public List<string> Favorites { get; set; } = new() { };\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public class DataModal<T> where T : class, new()\r\n    {\r\n        public bool Visible { get; set; }\r\n\r\n        public T Data { get; private set; }\r\n\r\n        public bool HasValue { get; private set; }\r\n\r\n        public bool Loading { get; private set; }\r\n\r\n        public DataModal()\r\n        {\r\n            Data = new T();\r\n        }\r\n\r\n        public void Show() => Visible = true;\r\n\r\n        /// <summary>\r\n        /// 显示弹窗\r\n        /// </summary>\r\n        /// <param name=\"data\"></param>\r\n        /// <remarks>写入数据之前请确保此对象是拷贝过的</remarks>\r\n        public void Show(T data)\r\n        {\r\n            Visible = true;\r\n            HasValue = true;\r\n            Data = data;\r\n        }\r\n\r\n        public virtual void Hide()\r\n        {\r\n            Visible = false;\r\n            HasValue = false;\r\n            Data = new T();\r\n        }\r\n\r\n        public bool ShowLoading() => Loading = true;\r\n\r\n        public bool HideLoading() => Loading = false;\r\n    }\r\n\r\n    public interface IShallowCopy<T>\r\n    {\r\n        public T ShallowCopy();\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Presets.props.FormModal",
         "Style": "",
         "Debug": false,
@@ -5847,7 +5847,7 @@
         "Name": "modal",
         "Title": "对话框",
         "Description": "<p>需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 <code>Modal</code> 在当前页面正中打开一个浮层，承载相应的操作。</p>\n",
-        "Code": "@using System.Text.Json;\r\n\r\n<div>\r\n    <MButton OnClick=\"() => _addModal.Show()\" Class=\"mb-1\">Add User</MButton>\r\n\r\n    <MASA.Blazor.Presets.Modal Visible=\"_addModal.Visible\" Title=\"User\"\r\n                               Width=\"500\"\r\n                               ScrollToTopOnHide\r\n                               OnOk=\"HandleOnClick\"\r\n                               OnCancel=\"HandleOnCancel\">\r\n        <MRow>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.UserName\"\r\n                            Label=\"UserName\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"true\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.City\"\r\n                            Label=\"City\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"true\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MRadioGroup @bind-Value=\"_addModal.Data.Gender\"\r\n                             Label=\"Gender:\"\r\n                             Row\r\n                             Dense\r\n                             Style=\"margin-top: 0\"\r\n                             HideDetails=\"true\">\r\n                    <MRadio Label=\"Body\" Value=\"0\"></MRadio>\r\n                    <MRadio Label=\"Girl\" Value=\"1\"></MRadio>\r\n                </MRadioGroup>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MSelect @bind-Value=\"_addModal.Data.Friends\"\r\n                         Items=\"_friends\"\r\n                         Label=\"Friends\"\r\n                         Multiple\r\n                         ItemValue=\"r => r\"\r\n                         ItemText=\"r => r\"\r\n                         HideDetails=\"true\">\r\n                </MSelect>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MAutocomplete @bind-Value=\"_addModal.Data.Favorites\"\r\n                               Items=\"_favorites\"\r\n                               Label=\"Favorites\"\r\n                               Multiple\r\n                               ItemValue=\"r => r\"\r\n                               ItemText=\"r => r\"\r\n                               HideDetails=\"true\">\r\n                </MAutocomplete>\r\n            </MCol>\r\n        </MRow>\r\n        <MRow>\r\n            <MCol>@JsonSerializer.Serialize(_addModal.Data)</MCol>\r\n        </MRow>\r\n    </MASA.Blazor.Presets.Modal>\r\n\r\n    <MRow NoGutters Class=\"pa-2\">\r\n        <MCol Cols=\"4\">username: @_user?.UserName</MCol>\r\n        <MCol Cols=\"4\">city: @_user?.City</MCol>\r\n        <MCol Cols=\"4\">gender: @_user?.Gender</MCol>\r\n        <MCol Cols=\"4\">friends: @string.Join(\",\", _user?.Friends ?? new List<string>())</MCol>\r\n        <MCol Cols=\"4\">favorites: @string.Join(\",\", _user?.Favorites ?? new List<string>())</MCol>\r\n        <MCol Cols=\"4\">\r\n            <MButton OnClick=\"() => _addModal.Show(_user?.ShallowCopy())\"\r\n                     Color=\"primary\"\r\n                     Disabled=\"@(_user == null)\"\r\n                     Text\r\n                     Small>\r\n                Edit\r\n            </MButton>\r\n        </MCol>\r\n    </MRow>\r\n</div>\r\n\r\n@code {\r\n    readonly List<string> _favorites = new() { \"Basketball\", \"Football\", \"Ping-pong\", \"Badminton\" };\r\n    readonly List<string> _friends = new() { \"Rachel Greene\", \"Monica Geller\", \"Joey Tribbiani\", \"Ross Geller\", \"Chandler Bing\", \"Phoebe Buffay\" };\r\n\r\n    DataModal<User> _addModal = new();\r\n    User _user;\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        _addModal.Hide();\r\n    }\r\n\r\n    private async Task HandleOnClick()\r\n    {\r\n        _addModal.ShowLoading();\r\n\r\n        if (_addModal.HasValue)\r\n        {\r\n    // Update\r\n        }\r\n        else\r\n        {\r\n    // Add\r\n        }\r\n\r\n        await Task.Delay(1000);\r\n\r\n        _user = _addModal.Data;\r\n\r\n        _addModal.HideLoading();\r\n\r\n        _addModal.Hide();\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        public string UserName { get; set; }\r\n        public int Gender { get; set; }\r\n        public string City { get; set; }\r\n        public List<string> Favorites { get; set; } = new() { };\r\n        public List<string> Friends { get; set; } = new() { };\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.Friends = Friends;\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public class DataModal<T> where T : class, new()\r\n    {\r\n        public bool Visible { get; set; }\r\n\r\n        public T Data { get; private set; }\r\n\r\n        public bool HasValue { get; private set; }\r\n\r\n        public bool Loading { get; private set; }\r\n\r\n        public DataModal()\r\n        {\r\n            Data = new T();\r\n        }\r\n\r\n        public void Show() => Visible = true;\r\n\r\n        /// <summary>\r\n    /// 显示弹窗\r\n    /// </summary>\r\n    /// <param name=\"data\"></param>\r\n    /// <remarks>写入数据之前请确保此对象是拷贝过的</remarks>\r\n        public void Show(T data)\r\n        {\r\n            Visible = true;\r\n            HasValue = true;\r\n            Data = data;\r\n        }\r\n\r\n        public virtual void Hide()\r\n        {\r\n            Visible = false;\r\n            HasValue = false;\r\n            Data = new T();\r\n        }\r\n\r\n        public bool ShowLoading() => Loading = true;\r\n\r\n        public bool HideLoading() => Loading = false;\r\n    }\r\n\r\n    public interface IShallowCopy<T>\r\n    {\r\n        public T ShallowCopy();\r\n    }\r\n\r\n}",
+        "Code": "@using System.Text.Json;\r\n\r\n<div>\r\n    <MButton OnClick=\"() => _addModal.Show()\" Class=\"mb-1\">Add User</MButton>\r\n\r\n    <Masa.Blazor.Presets.Modal Visible=\"_addModal.Visible\" Title=\"User\"\r\n                               Width=\"500\"\r\n                               ScrollToTopOnHide\r\n                               OnOk=\"HandleOnClick\"\r\n                               OnCancel=\"HandleOnCancel\">\r\n        <MRow>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.UserName\"\r\n                            Label=\"UserName\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"true\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.City\"\r\n                            Label=\"City\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"true\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MRadioGroup @bind-Value=\"_addModal.Data.Gender\"\r\n                             Label=\"Gender:\"\r\n                             Row\r\n                             Dense\r\n                             Style=\"margin-top: 0\"\r\n                             HideDetails=\"true\">\r\n                    <MRadio Label=\"Body\" Value=\"0\"></MRadio>\r\n                    <MRadio Label=\"Girl\" Value=\"1\"></MRadio>\r\n                </MRadioGroup>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MSelect @bind-Value=\"_addModal.Data.Friends\"\r\n                         Items=\"_friends\"\r\n                         Label=\"Friends\"\r\n                         Multiple\r\n                         ItemValue=\"r => r\"\r\n                         ItemText=\"r => r\"\r\n                         HideDetails=\"true\">\r\n                </MSelect>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MAutocomplete @bind-Value=\"_addModal.Data.Favorites\"\r\n                               Items=\"_favorites\"\r\n                               Label=\"Favorites\"\r\n                               Multiple\r\n                               ItemValue=\"r => r\"\r\n                               ItemText=\"r => r\"\r\n                               HideDetails=\"true\">\r\n                </MAutocomplete>\r\n            </MCol>\r\n        </MRow>\r\n        <MRow>\r\n            <MCol>@JsonSerializer.Serialize(_addModal.Data)</MCol>\r\n        </MRow>\r\n    </Masa.Blazor.Presets.Modal>\r\n\r\n    <MRow NoGutters Class=\"pa-2\">\r\n        <MCol Cols=\"4\">username: @_user?.UserName</MCol>\r\n        <MCol Cols=\"4\">city: @_user?.City</MCol>\r\n        <MCol Cols=\"4\">gender: @_user?.Gender</MCol>\r\n        <MCol Cols=\"4\">friends: @string.Join(\",\", _user?.Friends ?? new List<string>())</MCol>\r\n        <MCol Cols=\"4\">favorites: @string.Join(\",\", _user?.Favorites ?? new List<string>())</MCol>\r\n        <MCol Cols=\"4\">\r\n            <MButton OnClick=\"() => _addModal.Show(_user?.ShallowCopy())\"\r\n                     Color=\"primary\"\r\n                     Disabled=\"@(_user == null)\"\r\n                     Text\r\n                     Small>\r\n                Edit\r\n            </MButton>\r\n        </MCol>\r\n    </MRow>\r\n</div>\r\n\r\n@code {\r\n    readonly List<string> _favorites = new() { \"Basketball\", \"Football\", \"Ping-pong\", \"Badminton\" };\r\n    readonly List<string> _friends = new() { \"Rachel Greene\", \"Monica Geller\", \"Joey Tribbiani\", \"Ross Geller\", \"Chandler Bing\", \"Phoebe Buffay\" };\r\n\r\n    DataModal<User> _addModal = new();\r\n    User _user;\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        _addModal.Hide();\r\n    }\r\n\r\n    private async Task HandleOnClick()\r\n    {\r\n        _addModal.ShowLoading();\r\n\r\n        if (_addModal.HasValue)\r\n        {\r\n    // Update\r\n        }\r\n        else\r\n        {\r\n    // Add\r\n        }\r\n\r\n        await Task.Delay(1000);\r\n\r\n        _user = _addModal.Data;\r\n\r\n        _addModal.HideLoading();\r\n\r\n        _addModal.Hide();\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        public string UserName { get; set; }\r\n        public int Gender { get; set; }\r\n        public string City { get; set; }\r\n        public List<string> Favorites { get; set; } = new() { };\r\n        public List<string> Friends { get; set; } = new() { };\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.Friends = Friends;\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public class DataModal<T> where T : class, new()\r\n    {\r\n        public bool Visible { get; set; }\r\n\r\n        public T Data { get; private set; }\r\n\r\n        public bool HasValue { get; private set; }\r\n\r\n        public bool Loading { get; private set; }\r\n\r\n        public DataModal()\r\n        {\r\n            Data = new T();\r\n        }\r\n\r\n        public void Show() => Visible = true;\r\n\r\n        /// <summary>\r\n    /// 显示弹窗\r\n    /// </summary>\r\n    /// <param name=\"data\"></param>\r\n    /// <remarks>写入数据之前请确保此对象是拷贝过的</remarks>\r\n        public void Show(T data)\r\n        {\r\n            Visible = true;\r\n            HasValue = true;\r\n            Data = data;\r\n        }\r\n\r\n        public virtual void Hide()\r\n        {\r\n            Visible = false;\r\n            HasValue = false;\r\n            Data = new T();\r\n        }\r\n\r\n        public bool ShowLoading() => Loading = true;\r\n\r\n        public bool HideLoading() => Loading = false;\r\n    }\r\n\r\n    public interface IShallowCopy<T>\r\n    {\r\n        public T ShallowCopy();\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Presets.props.Modal",
         "Style": "",
         "Debug": false,
@@ -5869,7 +5869,7 @@
         "Name": "sidebar",
         "Title": "侧边栏",
         "Description": "<p>因为<code>MList</code>，<code>MListGroup</code>，<code>MListItem</code>和<code>MListItemGroup</code>这些组件的联系比较松散，无法通过一个给定的值来达到 <code>MListGroup</code> 自动展开的效果。因此做了一个这样的组件。</p>\n",
-        "Code": "<MASA.Blazor.Presets.PSidebar @bind-Value=\"selectedKey\"\r\n                              Dense\r\n                              Color=\"indigo\"\r\n                              Items=\"menus\"\r\n                              Title=\"m => m.Label\"\r\n                              Icon=\"m => m.Icon\"\r\n                              Key=\"m => m.Value\"\r\n                              Children=\"m => m.SubMenus\"\r\n                              TItem=\"Menu\"\r\n                              OnClick=\"Click\">\r\n</MASA.Blazor.Presets.PSidebar>\r\n\r\n@code {\r\n\r\n    static List<Menu> menus = new()\r\n    {\r\n        new Menu() { Label = \"Home\", Icon = \"mdi-home\", Value = \"Home\" },\r\n        new Menu()\r\n        {\r\n            Label = \"Users\",\r\n            Icon = \"mdi-account-circle\",\r\n            Value = \"Users\",\r\n            SubMenus = new List<Menu>()\r\n            {\r\n                new()\r\n                {\r\n                    Label = \"Admin\",\r\n                    SubMenus = new List<Menu>()\r\n                    {\r\n                        new() { Label = \"Management\", Icon = \"mdi-account-multiple-outline\", Value = \"Management\" },\r\n                        new() { Label = \"Settings\", Icon = \"mdi-cog-outline\", Value = \"Settings\" },\r\n                    }\r\n                },\r\n                new()\r\n                {\r\n                    Label = \"Actions\",\r\n                    SubMenus = new List<Menu>()\r\n                    {\r\n                        new() { Label = \"Create\", Icon = \"mdi-plus-outline\", Value = \"Create\" },\r\n                        new() { Label = \"Read\", Icon = \"mdi-file-outline\", Value = \"Read\" },\r\n                        new() { Label = \"Update\", Icon = \"mdi-update\", Value = \"Update\" },\r\n                        new() { Label = \"Delete\", Icon = \"mdi-delete\", Value = \"Delete\" },\r\n                    }\r\n                },\r\n            }\r\n        },\r\n    };\r\n\r\n    StringNumber selectedKey = \"Management\";\r\n\r\n    void Click(Menu item)\r\n    {\r\n    // code with clicked item\r\n    }\r\n\r\n    class Menu\r\n    {\r\n        public string Label { get; set; }\r\n\r\n        public string Value { get; set; }\r\n\r\n        public string Icon { get; set; }\r\n\r\n        public List<Menu> SubMenus { get; set; }\r\n    }\r\n\r\n}",
+        "Code": "<Masa.Blazor.Presets.PSidebar @bind-Value=\"selectedKey\"\r\n                              Dense\r\n                              Color=\"indigo\"\r\n                              Items=\"menus\"\r\n                              Title=\"m => m.Label\"\r\n                              Icon=\"m => m.Icon\"\r\n                              Key=\"m => m.Value\"\r\n                              Children=\"m => m.SubMenus\"\r\n                              TItem=\"Menu\"\r\n                              OnClick=\"Click\">\r\n</Masa.Blazor.Presets.PSidebar>\r\n\r\n@code {\r\n\r\n    static List<Menu> menus = new()\r\n    {\r\n        new Menu() { Label = \"Home\", Icon = \"mdi-home\", Value = \"Home\" },\r\n        new Menu()\r\n        {\r\n            Label = \"Users\",\r\n            Icon = \"mdi-account-circle\",\r\n            Value = \"Users\",\r\n            SubMenus = new List<Menu>()\r\n            {\r\n                new()\r\n                {\r\n                    Label = \"Admin\",\r\n                    SubMenus = new List<Menu>()\r\n                    {\r\n                        new() { Label = \"Management\", Icon = \"mdi-account-multiple-outline\", Value = \"Management\" },\r\n                        new() { Label = \"Settings\", Icon = \"mdi-cog-outline\", Value = \"Settings\" },\r\n                    }\r\n                },\r\n                new()\r\n                {\r\n                    Label = \"Actions\",\r\n                    SubMenus = new List<Menu>()\r\n                    {\r\n                        new() { Label = \"Create\", Icon = \"mdi-plus-outline\", Value = \"Create\" },\r\n                        new() { Label = \"Read\", Icon = \"mdi-file-outline\", Value = \"Read\" },\r\n                        new() { Label = \"Update\", Icon = \"mdi-update\", Value = \"Update\" },\r\n                        new() { Label = \"Delete\", Icon = \"mdi-delete\", Value = \"Delete\" },\r\n                    }\r\n                },\r\n            }\r\n        },\r\n    };\r\n\r\n    StringNumber selectedKey = \"Management\";\r\n\r\n    void Click(Menu item)\r\n    {\r\n    // code with clicked item\r\n    }\r\n\r\n    class Menu\r\n    {\r\n        public string Label { get; set; }\r\n\r\n        public string Value { get; set; }\r\n\r\n        public string Icon { get; set; }\r\n\r\n        public List<Menu> SubMenus { get; set; }\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Presets.props.Sidebar",
         "Style": "",
         "Debug": false,
@@ -5895,7 +5895,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5885434+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.3045355+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5972,7 +5972,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5946966+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.310535+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6137,7 +6137,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.5976887+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.3135346+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6247,7 +6247,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.600766+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.3155351+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -6303,7 +6303,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.6037537+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.3185358+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6348,7 +6348,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.6067483+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.3205365+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6425,7 +6425,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.6127294+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.3265353+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6591,7 +6591,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.6167184+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.329548+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6668,7 +6668,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.6187134+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.331536+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6724,7 +6724,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n<li><a href=\"/api/MDataTableHeader\">MDataTableHeader</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T18:57:49.4275655+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.3415357+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6989,7 +6989,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.6336767+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.3445355+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7068,7 +7068,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当使用 <strong>Dark</strong> 属性和 <strong>不</strong> 提供自定义 <strong>Color</strong> 时，<code>MTabs</code>组件会将其颜色默认为 white。</p>\n<!--alert:warning-->\n<!--alert:warning-->\n<p>当使用包含必填输入字段的 <code>MTabItem</code> 时，你必须使用 <strong>eager</strong> prop 来验证尚未显示的必填字段。</p>\n<!--alert:warning-->\n"
     },
-    "LastWriteTime": "2021-12-22T14:08:26.2341388+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.3515356+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7267,7 +7267,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.6473153+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.3565363+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7400,7 +7400,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>为了正确定位 <code>MTooltip</code>，需要一个位置支撑(<code>Top</code> | <code>Bottom</code> | <code>Left</code> | <code>Right</code>)。</p>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.6494788+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.3585347+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7456,7 +7456,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTreeview\">MTreeview</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.6568904+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.3655416+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7655,7 +7655,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-06T12:39:16.6608809+08:00",
+    "LastWriteTime": "2021-12-07T09:49:39.3685356+08:00",
     "DemoList": [
       {
         "Order": 0,

@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Bunit;
 
-namespace MASA.Blazor.Test.Switch
+namespace Masa.Blazor.Test.Switch
 {
     [TestClass]
     public class MSwitchTests:TestBase

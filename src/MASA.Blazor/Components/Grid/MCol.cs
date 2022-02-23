@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using MASA.Blazor.Extensions;
+using Masa.Blazor.Extensions;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MCol : BCol
     {

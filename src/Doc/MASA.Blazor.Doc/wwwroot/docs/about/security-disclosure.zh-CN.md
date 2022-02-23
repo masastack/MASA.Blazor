@@ -27,7 +27,7 @@ MASA Blazor团队将发送回复，说明处理您报告的下一步步骤。  M
 
 ## 对本政策的建议
 
-如果您有关于如何改进这个过程的建议，请使用 <a href="https://github.com/BlazorComponent/MASA.Blazor/issues" target="_blank">issue</a> 请求。
+如果您有关于如何改进这个过程的建议，请使用 <a href="https://github.com/BlazorComponent/Masa.Blazor/issues" target="_blank">issue</a> 请求。
 
 
 

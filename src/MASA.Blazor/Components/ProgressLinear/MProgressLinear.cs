@@ -8,7 +8,7 @@ using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MProgressLinear : BProgressLinear, IProgressLinear
     {

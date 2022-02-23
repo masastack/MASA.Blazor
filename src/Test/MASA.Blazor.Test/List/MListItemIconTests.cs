@@ -8,7 +8,7 @@ using Bunit;
 using BlazorComponent;
 using Moq;
 
-namespace MASA.Blazor.Test.List
+namespace Masa.Blazor.Test.List
 {
     [TestClass]
     public class MListItemIconTests:TestBase

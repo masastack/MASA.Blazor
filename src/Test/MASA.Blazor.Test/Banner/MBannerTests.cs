@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Banner
+namespace Masa.Blazor.Test.Banner
 {
     [TestClass]
     public class MBannerTests:TestBase

@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "MASA.Blazor.Doc.WebAssembly": {
+    "Masa.Blazor.Doc.WebAssembly": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

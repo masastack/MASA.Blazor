@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Bunit;
 
-namespace MASA.Blazor.Test.SlideGroups
+namespace Masa.Blazor.Test.SlideGroups
 {
     [TestClass]
     public  class MSlideItemTests:TestBase

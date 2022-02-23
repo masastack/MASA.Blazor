@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bunit;
 
-namespace MASA.Blazor.Test.Main
+namespace Masa.Blazor.Test.Main
 {
     [TestClass]
     public class MMainTests : TestBase

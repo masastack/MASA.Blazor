@@ -1,4 +1,4 @@
-﻿using MASA.Blazor;
+﻿using Masa.Blazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;

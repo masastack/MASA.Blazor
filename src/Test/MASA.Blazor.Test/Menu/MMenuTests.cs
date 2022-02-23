@@ -8,7 +8,7 @@ using Bunit;
 using BlazorComponent;
 using Moq;
 
-namespace MASA.Blazor.Test.Menu
+namespace Masa.Blazor.Test.Menu
 {
     [TestClass]
     public class MMenuTests:TestBase

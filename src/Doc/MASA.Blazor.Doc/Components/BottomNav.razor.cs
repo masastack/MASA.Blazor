@@ -1,7 +1,7 @@
 ﻿using BlazorComponent.I18n;
-using MASA.Blazor.Doc.Models;
-using MASA.Blazor.Doc.Services;
-using MASA.Blazor.Doc.Utils;
+using Masa.Blazor.Doc.Models;
+using Masa.Blazor.Doc.Services;
+using Masa.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Doc.Components
+namespace Masa.Blazor.Doc.Components
 {
     public partial class BottomNav : IDisposable
     {

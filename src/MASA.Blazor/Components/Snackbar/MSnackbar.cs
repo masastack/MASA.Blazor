@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Web;
 using System.Timers;
 using Timer = System.Timers.Timer;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MSnackbar : BSnackbar, IThemeable, ISnackbar
     {

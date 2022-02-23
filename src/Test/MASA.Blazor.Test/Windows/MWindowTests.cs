@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Bunit;
 
-namespace MASA.Blazor.Test.Windows
+namespace Masa.Blazor.Test.Windows
 {
     [TestClass]
     public  class MWindowTests:TestBase

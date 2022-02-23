@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using BlazorComponent;
 using BlazorComponent.Web;
-using MASA.Blazor.Helpers;
+using Masa.Blazor.Helpers;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MCheckbox : MInput<bool>, IThemeable, ICheckbox
     {

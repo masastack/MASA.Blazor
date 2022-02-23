@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Bunit;
 
-namespace MASA.Blazor.Test.Grid
+namespace Masa.Blazor.Test.Grid
 {
     [TestClass]
     public class MColTests:TestBase

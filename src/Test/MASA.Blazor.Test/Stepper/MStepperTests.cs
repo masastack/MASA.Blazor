@@ -10,7 +10,7 @@ using Moq;
 using Microsoft.AspNetCore.Components;
 
 
-namespace MASA.Blazor.Test.Stepper
+namespace Masa.Blazor.Test.Stepper
 {
     [TestClass]
     public class MStepperTests:TestBase

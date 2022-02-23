@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Bunit;
 
-namespace MASA.Blazor.Test.Radio
+namespace Masa.Blazor.Test.Radio
 {
     [TestClass]
     public class MRadioGroupTests:TestBase

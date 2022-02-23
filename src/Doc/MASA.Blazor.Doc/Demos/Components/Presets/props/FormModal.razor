@@ -4,7 +4,7 @@
 <div>
     <MButton OnClick="() => _addModal.Show()" Class="mb-1">Add User</MButton>
 
-    <MASA.Blazor.Presets.FormModal Visible="_addModal.Visible"
+    <Masa.Blazor.Presets.FormModal Visible="_addModal.Visible"
                                    Title="User"
                                    Width="500"
                                    Model="_addModal.Data"
@@ -50,7 +50,7 @@
         <MRow>
             <MCol>@JsonSerializer.Serialize(_addModal.Data)</MCol>
         </MRow>
-    </MASA.Blazor.Presets.FormModal>
+    </Masa.Blazor.Presets.FormModal>
 
     <MRow NoGutters Class="pa-2">
         <MCol Cols="4">username: @_user?.UserName</MCol>

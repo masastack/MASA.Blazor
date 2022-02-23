@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "MASA.Blazor.Doc.Server": {
+    "Masa.Blazor.Doc.Server": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

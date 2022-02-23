@@ -1,4 +1,4 @@
-﻿using MASA.Blazor.Doc.Models.Extensions;
+﻿using Masa.Blazor.Doc.Models.Extensions;
 using Markdig;
 using Markdig.Extensions.Yaml;
 using Markdig.Renderers;
@@ -7,11 +7,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using MASA.Blazor.Doc.Models;
+using Masa.Blazor.Doc.Models;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace MASA.Blazor.Doc.CLI.Wrappers
+namespace Masa.Blazor.Doc.CLI.Wrappers
 {
     public class DocWrapper
     {

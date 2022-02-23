@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Doc.Server
+namespace Masa.Blazor.Doc.Server
 {
     public class Program
     {

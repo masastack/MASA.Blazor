@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MBanner : BBanner, IBanner
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Messages
+namespace Masa.Blazor.Test.Messages
 {
     [TestClass]
     public class MMessagesTests:TestBase

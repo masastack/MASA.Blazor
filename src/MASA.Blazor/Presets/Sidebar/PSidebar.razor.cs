@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Presets
+namespace Masa.Blazor.Presets
 {
     public partial class PSidebar<TItem>
     {

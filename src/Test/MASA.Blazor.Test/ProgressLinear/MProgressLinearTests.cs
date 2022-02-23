@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Bunit;
 
-namespace MASA.Blazor.Test.ProgressLinear
+namespace Masa.Blazor.Test.ProgressLinear
 {
     [TestClass]
     public class MProgressLinearTests:TestBase

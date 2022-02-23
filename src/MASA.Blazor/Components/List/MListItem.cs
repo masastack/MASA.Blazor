@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MListItem : BListItem, IThemeable
     {

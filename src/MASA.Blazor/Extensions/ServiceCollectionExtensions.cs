@@ -1,6 +1,6 @@
 ﻿using BlazorComponent;
 using BlazorComponent.Web;
-using MASA.Blazor;
+using Masa.Blazor;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection

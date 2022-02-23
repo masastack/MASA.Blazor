@@ -8,7 +8,7 @@ using Bunit;
 using BlazorComponent;
 using Moq;
 
-namespace MASA.Blazor.Test.Treeview
+namespace Masa.Blazor.Test.Treeview
 {
     [TestClass]
     public class MTreeviewTests:TestBase

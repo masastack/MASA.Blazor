@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
 using BlazorComponent;
-using MASA.Blazor.Helpers;
+using Masa.Blazor.Helpers;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using OneOf;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public class MAlert : BAlert, IThemeable
     {

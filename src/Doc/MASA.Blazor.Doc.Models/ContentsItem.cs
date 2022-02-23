@@ -1,4 +1,4 @@
-﻿namespace MASA.Blazor.Doc.Models
+﻿namespace Masa.Blazor.Doc.Models
 {
     public class ContentsItem
     {

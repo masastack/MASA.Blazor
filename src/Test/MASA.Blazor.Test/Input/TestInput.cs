@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Input
+namespace Masa.Blazor.Test.Input
 {
     /// <summary>
     /// Use to test SetComponentClass

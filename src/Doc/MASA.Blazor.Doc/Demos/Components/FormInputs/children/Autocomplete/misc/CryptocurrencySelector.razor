@@ -120,7 +120,7 @@
 
         _isLoading = true;
         var httpClient = HttpClientFactory.CreateClient("doc");
-        var items = await httpClient.GetFromJsonAsync<List<Currency>>("/_content/MASA.Blazor.Doc/list.json");
+        var items = await httpClient.GetFromJsonAsync<List<Currency>>("/_content/Masa.Blazor.Doc/list.json");
         _items = items.Take(20).ToList();//TODO:Wait for MSelect update
         _isLoading = false;
     }

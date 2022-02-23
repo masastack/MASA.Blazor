@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Counter
+namespace Masa.Blazor.Test.Counter
 {
     [TestClass]
     public class MCounterTests:TestBase

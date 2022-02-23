@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MRating : BRating, IRating
     {

@@ -8,7 +8,7 @@ using Bunit;
 using BlazorComponent;
 using Moq;
 
-namespace MASA.Blazor.Test.DatePicker
+namespace Masa.Blazor.Test.DatePicker
 {
     [TestClass]
     public class MDatePickerTests:TestBase

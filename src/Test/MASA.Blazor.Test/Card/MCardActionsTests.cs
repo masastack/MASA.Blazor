@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Card
+namespace Masa.Blazor.Test.Card
 {
     [TestClass]
     public class MCardActionsTests:TestBase

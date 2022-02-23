@@ -1,4 +1,4 @@
-﻿using MASA.Blazor.Doc.Models;
+﻿using Masa.Blazor.Doc.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Doc.CLI.Wrappers
+namespace Masa.Blazor.Doc.CLI.Wrappers
 {
     public class ConfigWrapper
     {

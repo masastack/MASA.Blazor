@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public class Application : INotifyPropertyChanged
     {

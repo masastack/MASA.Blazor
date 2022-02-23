@@ -1,6 +1,6 @@
-﻿using MASA.Blazor.Doc.CLI.Interfaces;
-using MASA.Blazor.Doc.CLI.Wrappers;
-using MASA.Blazor.Doc.Models;
+﻿using Masa.Blazor.Doc.CLI.Interfaces;
+using Masa.Blazor.Doc.CLI.Wrappers;
+using Masa.Blazor.Doc.Models;
 using Microsoft.Extensions.CommandLineUtils;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Doc.CLI.Commands
+namespace Masa.Blazor.Doc.CLI.Commands
 {
     public class GenerateDocsToHtmlCommand : IAppCommand
     {

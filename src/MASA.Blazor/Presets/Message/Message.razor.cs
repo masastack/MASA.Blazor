@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using BlazorComponent;
 
-namespace MASA.Blazor.Presets
+namespace Masa.Blazor.Presets
 {
     public partial class Message
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Image
+namespace Masa.Blazor.Test.Image
 {
     [TestClass]
     public class MImageTests:TestBase

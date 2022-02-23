@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using System.Threading.Tasks;
 using BlazorComponent;
 
-namespace MASA.Blazor.Presets
+namespace Masa.Blazor.Presets
 {
     public partial class PConfirm
     {

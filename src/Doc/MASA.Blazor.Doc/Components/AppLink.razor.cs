@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 
-namespace MASA.Blazor.Doc.Components;
+namespace Masa.Blazor.Doc.Components;
 
 public partial class AppLink
 {

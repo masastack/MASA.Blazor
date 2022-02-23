@@ -9,8 +9,8 @@ MASA Blazor is an open source project, our goal is to allow you to easily create
 
 The list of issues in this repository is only applicable to bug reports and feature requests. The non-compliance issues will be closed immediately. Before reporting a problem:
 
-- Search for similar [issues](https://github.com/BlazorComponent/MASA.Blazor/issues), it may have been answered.
-- Try to use the [main](https://github.com/BlazorComponent/MASA.Blazor) version to replicate the expected behavior in the cloneable warehouse.
+- Search for similar [issues](https://github.com/BlazorComponent/Masa.Blazor/issues), it may have been answered.
+- Try to use the [main](https://github.com/BlazorComponent/Masa.Blazor) version to replicate the expected behavior in the cloneable warehouse.
 - Please make sure that the reproduction is minimal and concise (code logic).
 
 These steps ensure that we have all the necessary information in order to quickly segment and solve your problem.

@@ -8,7 +8,7 @@ using Bunit;
 using BlazorComponent;
 using Moq;
 
-namespace MASA.Blazor.Test.Alert
+namespace Masa.Blazor.Test.Alert
 {
     [TestClass]
     public class MAlertTests : TestBase

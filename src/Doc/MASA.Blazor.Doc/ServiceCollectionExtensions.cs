@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using BlazorComponent.Components;
-using MASA.Blazor.Doc;
-using MASA.Blazor.Doc.Highlight;
-using MASA.Blazor.Doc.Services;
+using Masa.Blazor.Doc;
+using Masa.Blazor.Doc.Highlight;
+using Masa.Blazor.Doc.Services;
 using Microsoft.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection

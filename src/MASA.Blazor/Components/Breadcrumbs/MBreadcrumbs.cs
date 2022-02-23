@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public class MBreadcrumbs : BBreadcrumbs
     {

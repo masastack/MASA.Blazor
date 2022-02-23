@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Doc.Services
+namespace Masa.Blazor.Doc.Services
 {
     public static class BlazorMode
     {

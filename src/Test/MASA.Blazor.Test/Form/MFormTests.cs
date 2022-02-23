@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Form
+namespace Masa.Blazor.Test.Form
 {
     [TestClass]
     public class MFormTests:TestBase

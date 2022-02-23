@@ -2,7 +2,7 @@
 using System.Linq;
 using BlazorComponent;
 
-namespace MASA.Blazor.Extensions
+namespace Masa.Blazor.Extensions
 {
     public static class StringEnumExtensions
     {

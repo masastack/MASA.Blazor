@@ -6,7 +6,7 @@ using System.Text;
 using Bunit;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.SystemBar
+namespace Masa.Blazor.Test.SystemBar
 {
     [TestClass]
     public class MSystemBarTests:TestBase

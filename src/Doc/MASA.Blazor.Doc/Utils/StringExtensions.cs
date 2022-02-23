@@ -4,7 +4,7 @@ using System.Xml.Schema;
 using BlazorComponent;
 using Microsoft.VisualBasic;
 
-namespace MASA.Blazor.Doc.Utils
+namespace Masa.Blazor.Doc.Utils
 {
     public static class StringExtensions
     {

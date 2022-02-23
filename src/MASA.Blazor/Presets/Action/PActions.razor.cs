@@ -3,9 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
-using Action = MASA.Blazor.Presets.Action;
+using Action = Masa.Blazor.Presets.Action;
 
-namespace MASA.Blazor.Presets;
+namespace Masa.Blazor.Presets;
 
 public partial class PActions
 {

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace MASA.Blazor.Doc.Models.Extensions;
+namespace Masa.Blazor.Doc.Models.Extensions;
 
 public static class StringExtensions
 {

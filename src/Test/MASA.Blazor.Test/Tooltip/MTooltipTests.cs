@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Bunit;
 
-namespace MASA.Blazor.Test.Tooltip
+namespace Masa.Blazor.Test.Tooltip
 {
     [TestClass]
     public class MTooltipTests:TestBase

@@ -1,4 +1,4 @@
-﻿namespace MASA.Blazor
+﻿namespace Masa.Blazor
 {
     /// <summary>
     /// Cascading this will cause additional render,we may just cascading rtl in the feature

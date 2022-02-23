@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Doc.CLI.Comparers
+namespace Masa.Blazor.Doc.CLI.Comparers
 {
     public class MenuComparer : IComparer<string>
     {

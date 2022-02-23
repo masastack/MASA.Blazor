@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using BlazorComponent;
 
-namespace MASA.Blazor.Doc.Utils;
+namespace Masa.Blazor.Doc.Utils;
 
 public static class ApisHelper
 {

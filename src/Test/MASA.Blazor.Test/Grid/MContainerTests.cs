@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Grid
+namespace Masa.Blazor.Test.Grid
 {
     [TestClass]
     public class MContainerTests:TestBase

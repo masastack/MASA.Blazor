@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using Element = BlazorComponent.Web.Element;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MDialog : BDialog, IDialog, IThemeable
     {

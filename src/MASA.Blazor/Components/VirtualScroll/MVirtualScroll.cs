@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using System;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public class MVirtualScroll<TItem> : BVirtualScroll<TItem>, IMeasurable
     {

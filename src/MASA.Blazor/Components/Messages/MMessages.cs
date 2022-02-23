@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MMessages : BMessages, IThemeable
     {

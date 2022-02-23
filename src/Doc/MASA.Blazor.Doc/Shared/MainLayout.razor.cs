@@ -1,12 +1,12 @@
 ﻿using BlazorComponent;
 using BlazorComponent.Web;
-using MASA.Blazor.Doc.Models;
+using Masa.Blazor.Doc.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 
-namespace MASA.Blazor.Doc.Shared
+namespace Masa.Blazor.Doc.Shared
 {
     public partial class MainLayout : LayoutComponentBase
     {

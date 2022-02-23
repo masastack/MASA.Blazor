@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using System;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public partial class MPicker : BPicker, IThemeable, IPicker
     {

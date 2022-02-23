@@ -1,7 +1,7 @@
 ﻿using BlazorComponent;
 using System.Text.Json.Serialization;
 
-namespace MASA.Blazor.Doc.Components
+namespace Masa.Blazor.Doc.Components
 {
     public class Dom
     {

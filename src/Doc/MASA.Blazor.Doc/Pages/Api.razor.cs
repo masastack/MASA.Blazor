@@ -1,12 +1,12 @@
 ﻿using BlazorComponent;
 using BlazorComponent.I18n;
-using MASA.Blazor.Doc.Utils;
+using Masa.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using System.Globalization;
-using MASA.Blazor.Doc.Models;
-using MASA.Blazor.Doc.Services;
+using Masa.Blazor.Doc.Models;
+using Masa.Blazor.Doc.Services;
 
-namespace MASA.Blazor.Doc.Pages
+namespace Masa.Blazor.Doc.Pages
 {
     public partial class Api
     {
@@ -191,7 +191,7 @@ namespace MASA.Blazor.Doc.Pages
             ApiName = StandardApiNames.FirstOrDefault(api => api.Equals(ApiName, StringComparison.OrdinalIgnoreCase));
 
             var lang = I18nConfig.Language ?? CultureInfo.CurrentCulture.Name;
-            var apiUrl = $"_content/MASA.Blazor.Doc/docs/api/{ApiName}.{lang}.json";
+            var apiUrl = $"_content/Masa.Blazor.Doc/docs/api/{ApiName}.{lang}.json";
             _api = await Service.GetApiAsync(apiUrl);
         }
 

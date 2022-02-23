@@ -8,7 +8,7 @@ using Bunit;
 using BlazorComponent;
 using Moq;
 
-namespace MASA.Blazor.Test.Autocompletes
+namespace Masa.Blazor.Test.Autocompletes
 {
     [TestClass]
     public class MAutocompleteTests:TestBase

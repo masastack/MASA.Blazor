@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor
+namespace Masa.Blazor
 {
     public class MECharts : BECharts, IDisposable
     {
@@ -54,7 +54,7 @@ namespace MASA.Blazor
                 return;
             }
 
-            var echarts = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/MASA.Blazor/js/echarts-helper.js");
+            var echarts = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/echarts-helper.js");
             await echarts.InvokeVoidAsync("init", Ref, Option);
         }
     }

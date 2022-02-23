@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Icons
+namespace Masa.Blazor.Test.Icons
 {
     [TestClass]
     public class MIconTests:TestBase

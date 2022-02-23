@@ -1,4 +1,4 @@
-﻿namespace MASA.Blazor;
+﻿namespace Masa.Blazor;
 
 public class Sizer : ISizeable
 {

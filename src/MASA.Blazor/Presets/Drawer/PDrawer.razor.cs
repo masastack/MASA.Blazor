@@ -1,7 +1,7 @@
 ﻿using BlazorComponent;
 using Microsoft.AspNetCore.Components;
 
-namespace MASA.Blazor.Presets;
+namespace Masa.Blazor.Presets;
 
 public partial class PDrawer
 {

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bunit;
 
-namespace MASA.Blazor.Test.Timeline
+namespace Masa.Blazor.Test.Timeline
 {
     [TestClass]
     public class MTimelineTests:TestBase

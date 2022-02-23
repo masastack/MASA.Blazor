@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MASA.Blazor.Test.Snackbar
+namespace Masa.Blazor.Test.Snackbar
 {
     [TestClass]
     public class MSnackbarTests:TestBase

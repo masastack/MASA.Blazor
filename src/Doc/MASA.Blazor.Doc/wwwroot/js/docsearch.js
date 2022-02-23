@@ -1,14 +1,14 @@
 if (window.MASA === undefined)
     window.MASA = {}
 
-window.MASA.DocSearch = {
+window.Masa.DocSearch = {
     instance: {},
     init: locale => {
         if (!docsearch) {
             return;
         }
         const lang = locale === 'zh-CN' ? 'cn' : 'en';
-        window.MASA.DocSearch.instance = docsearch({
+        window.Masa.DocSearch.instance = docsearch({
             apiKey: '93dc26e7c963c887f9b096b349dd47ce',
             indexName: 'masa-blazor-docs',
             appId: 'C9UTAZSOWW',
@@ -25,10 +25,10 @@ window.MASA.DocSearch = {
         });
     },
     localeChange: locale => {
-        if (!docsearch || !window.MASA.DocSearch.instance) {
+        if (!docsearch || !window.Masa.DocSearch.instance) {
             return;
         }
         const lang = locale === 'zh-CN' ? 'cn' : 'en';
-        window.MASA.DocSearch.instance.algoliaOptions.facetFilters = [`tags:${lang}`]
+        window.Masa.DocSearch.instance.algoliaOptions.facetFilters = [`tags:${lang}`]
     }
 };

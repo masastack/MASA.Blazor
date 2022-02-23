@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Bunit;
 
-namespace MASA.Blazor.Test.Sheet
+namespace Masa.Blazor.Test.Sheet
 {
     [TestClass]
     public class MSheetTests:TestBase

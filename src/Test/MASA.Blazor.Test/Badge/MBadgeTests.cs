@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MASA.Blazor.Test.Badge
+namespace Masa.Blazor.Test.Badge
 {
     [TestClass]
     public class MBadgeTests:TestBase

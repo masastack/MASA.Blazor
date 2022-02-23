@@ -8,11 +8,11 @@
 
 ​	单元测试可以保证代码的正确性和稳定性。在测试驱动开发中，测试是先行的。单元测试会给出代码用例，程序的编写必须符合代码用例。在开发过程中，我们难免会对代码进行更改，如果改出了bug，单元测试可以第一时间发现问题。单元测试还可以测出边界情况，程序正常运行时很少涉及边界值，单元测试能够增强程序的健壮性。所以，单元测试是十分重要的。
 
-## 3、如何对MASA.Blazor进行单元测试？
+## 3、如何对Masa.Blazor进行单元测试？
 
 ### 2.1 前期准备
 
-​	MASA.Blazor是一个Blazor的组件库。然而，与其它组件库不同，MASA.Blazor是抽象组件库BlazorComponent的一个实现。
+​	Masa.Blazor是一个Blazor的组件库。然而，与其它组件库不同，Masa.Blazor是抽象组件库BlazorComponent的一个实现。
 
 ​	开发工具：
 
@@ -22,12 +22,12 @@
 ### 2.2 项目结构
 
 ```
-MASA.Blazor
+Masa.Blazor
 ├── ...
 ├── src
 │   ├── Test
-│	│   └── MASA.Blazor.Test 测试项目
-│   └──  MASA.Blazor 组件库
+│	│   └── Masa.Blazor.Test 测试项目
+│   └──  Masa.Blazor 组件库
 ├── ...
 ```
 
