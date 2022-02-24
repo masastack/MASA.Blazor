@@ -12,50 +12,49 @@ namespace Masa.Blazor
 {
     public partial class MCol : BCol
     {
-        [Parameter] 
+        [Parameter]
         public StringNumber Sm { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public StringNumber Md { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public StringNumber Lg { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public StringNumber Xl { get; set; }
 
         /// <summary>
         /// 'auto', 'start', 'end', 'center', 'baseline', 'stretch'
         /// </summary>
         [Parameter]
-        public 
-        StringEnum<AlignTypes> Align { get; set; }
+        public StringEnum<AlignTypes> Align { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public StringNumber OrderLg { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public StringNumber OrderMd { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public StringNumber OrderSm { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public StringNumber OrderXl { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public StringNumber OffsetLg { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public StringNumber OffsetMd { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public StringNumber OffsetSm { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public StringNumber OffsetXl { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public StringNumber Flex { get; set; }
 
         protected override void SetComponentClass()
@@ -89,22 +88,22 @@ namespace Masa.Blazor
                             ("align-self-end", AlignTypes.End),
                             ("align-self-baseline", AlignTypes.Baseline),
                             ("align-self-stretch", AlignTypes.Stretch)), () => Align != null)
-                        .AddIf(SetHostFlexStyle, () => Flex != null);
+                        .AddIf(GetFlexStyle, () => Flex != null);
                 });
         }
 
-        private string SetHostFlexStyle()
+        private string GetFlexStyle()
         {
-            return this.Flex.Match(str =>
+            return Flex.Match(t0 =>
                 {
-                    if (Regex.Match(str, "^\\d+(\\.\\d+)?(px|em|rem|%)$").Success)
+                    if (Regex.Match(t0, "^\\d+(\\.\\d+)?(px|em|rem|%)$").Success)
                     {
-                        return $"flex: 0 0 {str}";
+                        return $"flex: 0 0 {t0}";
                     }
 
-                    return $"flex: {str}";
+                    return $"flex: {t0}";
                 },
-                num => $"flex: {num} {num} auto",
+                t1 => $"flex: {t1} {t1} auto",
                 _ => string.Empty);
         }
     }
