@@ -16,8 +16,6 @@ namespace Masa.Blazor
             "Bottom","Left","Right"
         };
 
-        
-
         [Parameter]
         public bool Absolute { get; set; }
 
@@ -66,31 +64,34 @@ namespace Masa.Blazor
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
 
-        protected StringNumber ComputedBottom => ComputeBottom();
-
-        protected StringNumber ComputeBottom()
+        protected StringNumber ComputedBottom
         {
-            if (!IsPositioned) return null;
+            get
+            {
+                if (!IsPositioned) return null;
 
-            return App && Inset ? MasaBlazor.Application.Bottom : 0;
+                return App && Inset ? MasaBlazor.Application.Bottom : 0;
+            }
         }
 
-        protected StringNumber ComputedLeft => ComputeLeft();
-
-        protected StringNumber ComputeLeft()
+        protected StringNumber ComputedLeft
         {
-            if (!IsPositioned) return null;
+            get
+            {
+                if (!IsPositioned) return null;
 
-            return App && Inset ? MasaBlazor.Application.Left : 0;
+                return App && Inset ? MasaBlazor.Application.Left : 0;
+            }
         }
 
-        protected StringNumber ComputedRight => ComputeRight();
-
-        protected StringNumber ComputeRight()
+        protected StringNumber ComputedRight
         {
-            if (!IsPositioned) return null;
+            get
+            {
+                if (!IsPositioned) return null;
 
-            return App && Inset ? MasaBlazor.Application.Right : 0;
+                return App && Inset ? MasaBlazor.Application.Right : 0;
+            }
         }
 
         protected bool IsPositioned => Absolute || Fixed || App;
@@ -155,9 +156,13 @@ namespace Masa.Blazor
 
             var val = Height.ToDouble() > 0 ? Height.ToDouble() : await GetClientHeightAsync();
             if (Inset)
+            {
                 MasaBlazor.Application.InsetFooter = val;
+            }
             else
+            {
                 MasaBlazor.Application.Footer = val;
+            }
         }
 
         private async Task<double> GetClientHeightAsync()
@@ -185,9 +190,13 @@ namespace Masa.Blazor
             }
 
             if (Inset)
+            {
                 MasaBlazor.Application.InsetFooter = 0;
+            }
             else
+            {
                 MasaBlazor.Application.Footer = 0;
+            }
         }
     }
 }
