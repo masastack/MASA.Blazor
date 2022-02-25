@@ -125,6 +125,14 @@ namespace Masa.Blazor
             { "readonly", true }
         };
 
+        public override Dictionary<string, object> InputSlotAttrs
+        {
+            get
+            {
+                return (Menu as MMenu)?.ActivatorEvents;
+            }
+        }
+
         protected virtual IList<TItem> ComputedItems => Items;
 
         protected IList<TItemValue> InternalValues
@@ -334,7 +342,7 @@ namespace Masa.Blazor
             if (firstRender)
             {
                 await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
-                await (Menu as MMenu)?.UpdateActivator(InputSlotElement);
+                (Menu as MMenu)?.UpdateActivator(InputSlotElement);
             }
         }
 

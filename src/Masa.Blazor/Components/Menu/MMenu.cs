@@ -16,8 +16,6 @@ namespace Masa.Blazor
 {
     public partial class MMenu : BMenu, IThemeable
     {
-        
-
         public override string AttachedSelector => Attach ?? ".m-application";
 
         protected override void SetComponentClass()

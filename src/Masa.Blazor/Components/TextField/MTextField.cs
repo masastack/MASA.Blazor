@@ -234,6 +234,8 @@ namespace Masa.Blazor
 
         Dictionary<string, object> ITextField<TValue>.InputAttrs => InputAttrs;
 
+        public virtual Dictionary<string, object> InputSlotAttrs { get; } = new();
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -567,7 +569,7 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
-            
+
             if (OnKeyDown.HasDelegate)
             {
                 await OnKeyDown.InvokeAsync(args);
