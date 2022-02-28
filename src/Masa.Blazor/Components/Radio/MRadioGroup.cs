@@ -60,7 +60,7 @@ namespace Masa.Blazor
             {
                 if (!Mandatory) return;
 
-                var item = Items.FirstOrDefault(item => !item.IsDisabled);
+                var item = Items.FirstOrDefault(item => !item.Disabled);
                 if (item == null) return;
 
                 _ = UpdateItemsState(item);

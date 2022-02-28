@@ -47,7 +47,7 @@ namespace Masa.Blazor.Test.Radio
             //Act
             var cut = RenderComponent<MRadio<string>>(props =>
             {
-                props.Add(counter => counter.IsDisabled, true);
+                props.Add(counter => counter.Disabled, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasIsDisabledClass = classes.Contains("m-radio--is-disabled");
@@ -62,7 +62,7 @@ namespace Masa.Blazor.Test.Radio
             //Act
             var cut = RenderComponent<MRadio<string>>(props =>
             {
-                props.Add(counter => counter.IsReadonly, true);
+                props.Add(counter => counter.Readonly, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasIsDisabledClass = classes.Contains("m-radio");

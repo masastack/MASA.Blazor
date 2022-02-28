@@ -35,7 +35,7 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add(prefix)
-                        .AddIf($"{prefix}--is-disabled", () => IsDisabled || (RadioGroup != null && RadioGroup.IsDisabled))
+                        .AddIf($"{prefix}--is-disabled", () => Disabled || InputIsDisabled)
                         .AddIf($"{prefix}--is-focused", () => IsFocused)
                         .AddTheme(IsDark);
                 })
