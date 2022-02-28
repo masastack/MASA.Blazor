@@ -129,7 +129,7 @@ namespace Masa.Blazor
         {
             get
             {
-                return (Menu as MMenu)?.ActivatorEvents;
+                return (Menu as MMenu)?.GenActivatorAttributes();
             }
         }
 
