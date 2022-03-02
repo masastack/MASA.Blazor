@@ -52,6 +52,7 @@ namespace Masa.Blazor
             get => _isActive ?? InternalValue;
             set
             {
+                //REVIEW:What's this? 
                 _isActive = value;
                 InternalValue = value;
             }
@@ -144,10 +145,9 @@ namespace Masa.Blazor
             }
         }
 
-        public override Task HandleOnClickAsync(MouseEventArgs args)
+        public override async Task HandleOnClickAsync(MouseEventArgs args)
         {
-            InternalValue = !InternalValue;
-            return Task.CompletedTask;
+            await SetInternalValueAsync(!InternalValue);
         }
     }
 }

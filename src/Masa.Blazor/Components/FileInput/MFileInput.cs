@@ -215,7 +215,7 @@ namespace Masa.Blazor
             await input.DispatchEventAsync(@event, stopPropagation: true);
         }
 
-        public Task HandleOnFileChangeAsync(InputFileChangeEventArgs args)
+        public async Task HandleOnFileChangeAsync(InputFileChangeEventArgs args)
         {
             if (Multiple)
             {
@@ -226,21 +226,19 @@ namespace Masa.Blazor
                     files.Add(file);
                 }
 
-                InternalValue = (TValue)files;
+                await SetInternalValueAsync((TValue)files);
             }
             else
             {
                 if (args.FileCount > 0)
                 {
-                    InternalValue = (TValue)args.File;
+                    await SetInternalValueAsync((TValue)args.File);
                 }
                 else
                 {
-                    InternalValue = default;
+                    await SetInternalValueAsync(default);
                 }
             }
-
-            return Task.CompletedTask;
         }
 
         public override async Task HandleOnClickAsync(MouseEventArgs args)

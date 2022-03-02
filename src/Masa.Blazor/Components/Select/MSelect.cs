@@ -299,7 +299,7 @@ namespace Masa.Blazor
             {
                 if (value is TValue val)
                 {
-                    InternalValue = val;
+                    await SetInternalValueAsync(val);
                 }
                 IsMenuActive = false;
             }
@@ -317,7 +317,7 @@ namespace Masa.Blazor
 
                 if (internalValues is TValue val)
                 {
-                    InternalValue = val;
+                    await SetInternalValueAsync(val);
                 }
             }
 
@@ -395,7 +395,7 @@ namespace Masa.Blazor
             if (Multiple)
             {
                 IList<TItemValue> values = new List<TItemValue>();
-                InternalValue = (TValue)values;
+                await SetInternalValueAsync((TValue)values);
             }
             else
             {

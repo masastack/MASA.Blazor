@@ -253,6 +253,12 @@ namespace Masa.Blazor
 
         public bool ShowThumbLabelContainer => IsFocused || IsActive || ThumbLabel == "always";
 
+        protected virtual async Task SetInternalValueAsync(double internalValue)
+        {
+            var val = RoundValue(Math.Min(Math.Max(internalValue, Min), Max));
+            await SetInternalValueAsync(val is TValue v ? v : default);
+        }
+
         protected override void OnWatcherInitialized()
         {
             Watcher
@@ -373,7 +379,8 @@ namespace Masa.Blazor
                 ThumbPressed = true;
             }
 
-            DoubleInteralValue = await ParseMouseMoveAsync(args);
+            var val = await ParseMouseMoveAsync(args);
+            await SetInternalValueAsync(val);
         }
 
         protected async Task<double> ParseMouseMoveAsync(MouseEventArgs args)
@@ -638,7 +645,7 @@ namespace Masa.Blazor
                 return;
             }
 
-            DoubleInteralValue = RoundValue(value.AsT2);
+            await SetInternalValueAsync(value.AsT2);
             if (OnChange.HasDelegate)
             {
                 await OnChange.InvokeAsync(InternalValue);

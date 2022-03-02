@@ -92,7 +92,7 @@ namespace Masa.Blazor
             SetActiveRadio();
         }
 
-        public Task UpdateItemsState(BRadio<TValue> radio)
+        public async Task UpdateItemsState(BRadio<TValue> radio)
         {
             foreach (var item in Items)
             {
@@ -106,8 +106,7 @@ namespace Masa.Blazor
                 }
             }
 
-            InternalValue = radio.Value;
-            return Task.CompletedTask;
+            await SetInternalValueAsync(radio.Value);
         }
     }
 }

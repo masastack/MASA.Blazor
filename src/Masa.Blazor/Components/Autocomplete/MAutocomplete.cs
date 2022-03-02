@@ -210,14 +210,14 @@ namespace Masa.Blazor
                         if (internalValues.Count > 0 && string.IsNullOrEmpty(InternalSearch))
                         {
                             internalValues.RemoveAt(internalValues.Count - 1);
-                            InternalValue = (TValue)internalValues;
+                            await SetInternalValueAsync((TValue)internalValues);
                         }
                     }
                     else
                     {
                         if (Chips && !EqualityComparer<TValue>.Default.Equals(InternalValue, default) && string.IsNullOrEmpty(InternalSearch))
                         {
-                            InternalValue = default;
+                            await SetInternalValueAsync(default);
                         }
                     }
                     break;

@@ -520,19 +520,19 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
         {
+            //Since event will call StateHasChanged,we should prevent it
+            //So that,view will not change untill 300ms no actions
+            _shouldRender = false;
+
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource = new CancellationTokenSource();
-
-            //Since event will call StateHasChanged,we should prevent it
-            //So that,view will not change untill 300 seconds no actions
-            _shouldRender = false;
             await Task.Delay(300, _cancellationTokenSource.Token);
 
             var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
             if (success)
             {
                 _badInput = null;
-                InternalValue = val;
+                await SetInternalValueAsync(val);
 
                 if (OnInput.HasDelegate)
                 {
@@ -567,7 +567,7 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
-            
+
             if (OnKeyDown.HasDelegate)
             {
                 await OnKeyDown.InvokeAsync(args);
@@ -576,7 +576,7 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
-            InternalValue = default;
+            await SetInternalValueAsync(default);
 
             if (OnClearClick.HasDelegate)
             {

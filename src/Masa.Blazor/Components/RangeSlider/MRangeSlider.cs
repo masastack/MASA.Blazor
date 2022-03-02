@@ -27,27 +27,6 @@ namespace Masa.Blazor
             {
                 return InternalValue is IList<double> val ? val : default;
             }
-            set
-            {
-                var val = value.Select(v => RoundValue(Math.Min(Math.Max(v, Min), Max))).ToList();
-
-                if (val[0] > val[1] || val[1] < val[0])
-                {
-                    if (ActiveThumb != null)
-                    {
-                        NextTick(async () =>
-                        {
-                            var toFocusElement = ActiveThumb == 1 ? ThumbElement : SecondThumbElement;
-                            await toFocusElement.FocusAsync();
-                        });
-                    }
-
-                    val = new List<double> { val[1], val[0] };
-                }
-
-                var internalValue = val is IList<TValue> internalVal ? internalVal : default;
-                InternalValue = internalValue;
-            }
         }
 
         protected override IList<TValue> LazyValue { get; set; } = new List<TValue>()
@@ -75,7 +54,7 @@ namespace Masa.Blazor
 
                 var value = await ParseMouseMoveAsync(args);
                 await ReevaluateSelectedAsync(value);
-                SetInternalValue(value);
+                await SetInternalValueAsync(value);
             }
         }
 
@@ -93,10 +72,10 @@ namespace Masa.Blazor
                 ActiveThumb = GetIndexOfClosestValue(DoubleInteralValues, value);
             }
 
-            SetInternalValue(value);
+            await SetInternalValueAsync(value);
         }
 
-        private void SetInternalValue(double value)
+        protected override async Task SetInternalValueAsync(double value)
         {
             var values = new List<double>();
 
@@ -112,24 +91,37 @@ namespace Masa.Blazor
                 }
             }
 
-            DoubleInteralValues = values;
+            var val = values.Select(v => RoundValue(Math.Min(Math.Max(v, Min), Max))).ToList();
+
+            if (val[0] > val[1] || val[1] < val[0])
+            {
+                if (ActiveThumb != null)
+                {
+                    var toFocusElement = ActiveThumb == 1 ? ThumbElement : SecondThumbElement;
+                    await toFocusElement.FocusAsync();
+                }
+
+                val = new List<double> { val[1], val[0] };
+            }
+
+            var internalValue = val is IList<TValue> internalVal ? internalVal : default;
+            await SetInternalValueAsync(internalValue);
         }
 
-        public override Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+        public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
             if (ActiveThumb == null)
             {
-                return Task.CompletedTask;
+                return;
             }
 
             var value = ParseKeyDown(args, DoubleInteralValues[ActiveThumb.Value]);
             if (value == null)
             {
-                return Task.CompletedTask;
+                return;
             }
 
-            SetInternalValue(value.AsT2);
-            return Task.CompletedTask;
+            await SetInternalValueAsync(value.AsT2);
         }
 
         public override async Task HandleOnSliderMouseDownAsync(ExMouseEventArgs args)

@@ -175,10 +175,9 @@ namespace Masa.Blazor
                 .Apply(typeof(BSwitchProgress<>), typeof(BSwitchProgress<MSwitch>));
         }
 
-        public override Task HandleOnClickAsync(MouseEventArgs args)
+        public override async Task HandleOnClickAsync(MouseEventArgs args)
         {
-            InternalValue = !InternalValue;
-            return Task.CompletedTask;
+            await SetInternalValueAsync(!InternalValue);
         }
     }
 }
