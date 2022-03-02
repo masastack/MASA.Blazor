@@ -37,7 +37,7 @@ namespace Masa.Blazor
                 {
                     { "role", "document" }
                 };
-                if (Value)
+                if (IsActive)
                 {
                     attrs.Add("tabindex", 0);
                 }
@@ -61,7 +61,7 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add($"{prefix}__content")
-                        .AddIf($"{prefix}__content--active", () => Value)
+                        .AddIf($"{prefix}__content--active", () => IsActive)
                         .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
@@ -73,7 +73,7 @@ namespace Masa.Blazor
                     cssBuilder
                         .Add(prefix)
                         .Add(ContentClass)
-                        .AddIf($"{prefix}--active", () => Value)
+                        .AddIf($"{prefix}--active", () => IsActive)
                         .AddIf($"{prefix}--persistent", () => Persistent)
                         .AddIf($"{prefix}--fullscreen", () => Fullscreen)
                         .AddIf($"{prefix}--scrollable", () => Scrollable)
@@ -89,7 +89,7 @@ namespace Masa.Blazor
             AbstractProvider
                 .Apply<BOverlay, MOverlay>(attrs =>
                 {
-                    attrs[nameof(MOverlay.Value)] = ShowOverlay && Value;
+                    attrs[nameof(MOverlay.Value)] = ShowOverlay && IsActive;
                     attrs[nameof(MOverlay.ZIndex)] = ZIndex - 1;
                 })
                 .ApplyDialogDefault();
@@ -151,23 +151,23 @@ namespace Masa.Blazor
                 return;
             }
 
-            await UpdateValueAsync(false);
+            await SetIsActiveAsync(false);
 
             await InvokeStateHasChangedAsync();
         }
 
         protected override async Task ShowLazyContent()
         {
-            if (!ShowContent && Value)
+            if (!ShowContent && IsActive)
             {
                 ShowContent = true;
-                Value = false;
+                IsActive = false;
 
                 await InvokeStateHasChangedAsync();
                 await Task.Delay(BROWSER_RENDER_INTERVAL);
 
                 await AfterShowContent();
-                Value = true;
+                IsActive = true;
 
                 await MoveContentTo();
                 await InvokeStateHasChangedAsync();

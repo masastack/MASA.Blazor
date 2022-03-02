@@ -119,6 +119,11 @@
       "Description": ""
     },
     {
+      "Name": "Value",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "Width",
       "Type": "StringNumber",
       "Default": "",

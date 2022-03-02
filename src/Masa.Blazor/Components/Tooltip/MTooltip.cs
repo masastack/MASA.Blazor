@@ -37,7 +37,7 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add($"{prefix}__content")
-                        .AddIf("menuable__content__active", () => Value)
+                        .AddIf("menuable__content__active", () => IsActive)
                         .AddIf($"{prefix}__content--fixed", () => ActivatorFixed)
                         .Add(ContentClass)
                         .AddBackgroundColor(Color);
@@ -48,7 +48,7 @@ namespace Masa.Blazor
                         .AddMinWidth(MinWidth)
                         .Add($"left:{CalculatedLeft}px")
                         .Add($"top:{CalculatedTop}px")
-                        .Add($"opacity:{(Value ? 0.9 : 0)}")
+                        .Add($"opacity:{(IsActive ? 0.9 : 0)}")
                         .Add($"z-index:{InternalZIndex}")
                         .AddBackgroundColor(Color);
                 });

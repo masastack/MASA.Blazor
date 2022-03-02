@@ -36,7 +36,7 @@ namespace Masa.Blazor
                     css.Add("m-menu__content")
                         .AddIf("m-menu__content--auto", () => Auto)
                         .AddIf("m-menu__content--fixed", () => ActivatorFixed)
-                        .AddIf("menuable__content__active", () => Value)
+                        .AddIf("menuable__content__active", () => IsActive)
                         .AddRounded(Tile ? "0" : Rounded)
                         .Add(ContentClass)
                         .AddTheme(IsDark);
