@@ -118,11 +118,11 @@ namespace Masa.Blazor
         {
             if (args.Key == "Escape")
             {
-                await Close();
+                await CloseAsync();
             }
         }
 
-        protected override async Task Close()
+        protected override async Task CloseAsync()
         {
             if (Persistent)
             {
@@ -130,7 +130,7 @@ namespace Masa.Blazor
                 return;
             }
 
-            await base.Close();
+            await base.CloseAsync();
         }
 
         private bool CloseConditional()
@@ -151,7 +151,7 @@ namespace Masa.Blazor
                 return;
             }
 
-            await UpdateValue(false);
+            await UpdateValueAsync(false);
 
             await InvokeStateHasChangedAsync();
         }

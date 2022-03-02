@@ -334,7 +334,7 @@ namespace Masa.Blazor
             if (firstRender)
             {
                 await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
-                await (Menu as MMenu)?.UpdateActivator(InputSlotElement);
+                await (Menu as MMenu)?.UpdateActivatorAsync(InputSlotElement);
             }
         }
 
