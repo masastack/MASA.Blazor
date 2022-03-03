@@ -371,6 +371,11 @@ namespace Masa.Blazor
                 default:
                     break;
             }
+
+            if (OnKeyDown.HasDelegate)
+            {
+                await OnKeyDown.InvokeAsync(args);
+            }
         }
 
         private void ChangeSelectedIndex(int change)
