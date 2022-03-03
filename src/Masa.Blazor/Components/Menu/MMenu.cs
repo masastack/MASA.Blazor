@@ -16,8 +16,6 @@ namespace Masa.Blazor
 {
     public partial class MMenu : BMenu, IThemeable
     {
-        
-
         public override string AttachedSelector => Attach ?? ".m-application";
 
         protected override void SetComponentClass()
@@ -26,23 +24,23 @@ namespace Masa.Blazor
             Origin ??= "top left";
 
             CssProvider
-                .Apply(css =>
+                .Apply(cssBuilder =>
                 {
-                    css
+                    cssBuilder
                         .Add("m-menu");
                 })
-                .Apply("content", css =>
+                .Apply("content", cssBuilder =>
                 {
-                    css.Add("m-menu__content")
+                    cssBuilder.Add("m-menu__content")
                         .AddIf("m-menu__content--auto", () => Auto)
                         .AddIf("m-menu__content--fixed", () => ActivatorFixed)
                         .AddIf("menuable__content__active", () => IsActive)
                         .AddRounded(Tile ? "0" : Rounded)
                         .Add(ContentClass)
                         .AddTheme(IsDark);
-                }, style =>
+                }, styleBuilder =>
                 {
-                    style
+                    styleBuilder
                         .AddIf($"max-height:{CalculatedMaxHeight}", () => CalculatedMaxHeight != null)
                         .AddIf($"min-width:{CalculatedMinWidth}", () => CalculatedMinWidth != null)
                         .AddIf($"max-width:{CalculatedMaxWidth}", () => CalculatedMaxWidth != null)
