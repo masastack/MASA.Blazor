@@ -55,7 +55,7 @@ namespace Masa.Blazor.Presets
         public EventCallback<MouseEventArgs> OnCancel { get; set; }
 
         [Parameter]
-        public RenderFragment Actions { get; set; }
+        public RenderFragment ActionsContent { get; set; }
 
         [Parameter]
         public bool ScrollToTopOnHide { get; set; }

@@ -7,46 +7,10 @@ using System.Threading.Tasks;
 
 namespace Masa.Blazor.Presets
 {
-    public partial class FormModal
+    public partial class FormModal: Modal
     {
         private MForm _form;
         private Func<MouseEventArgs, Task> _debounceHandleOnOk;
-
-        [Parameter]
-        public bool Visible { get; set; }
-
-        [Parameter]
-        public StringNumber Width { get; set; }
-
-        [Parameter]
-        public StringNumber MaxWidth { get; set; }
-
-        [Parameter]
-        public string Title { get; set; }
-
-        [Parameter]
-        public RenderFragment ChildContent { get; set; }
-
-        [Parameter]
-        public bool ShowActions { get; set; } = true;
-
-        [Parameter]
-        public string OkText { get; set; } = "确定";
-
-        [Parameter]
-        public string CancelText { get; set; } = "取消";
-
-        [Parameter]
-        public EventCallback<MouseEventArgs> OnOk { get; set; }
-
-        [Parameter]
-        public EventCallback<MouseEventArgs> OnCancel { get; set; }
-
-        [Parameter]
-        public RenderFragment Actions { get; set; }
-
-        [Parameter]
-        public bool ScrollToTopOnHide { get; set; }
 
         [Parameter]
         public object Model { get; set; }
@@ -62,8 +26,6 @@ namespace Masa.Blazor.Presets
             _debounceHandleOnOk = DebounceEvent<MouseEventArgs>(
                 async (e) => await OnOk.InvokeAsync(e),
                 TimeSpan.FromMilliseconds(DebounceInterval));
-
-            base.OnInitialized();
         }
 
         private async Task HandleOnOk(MouseEventArgs args)
