@@ -54,7 +54,7 @@ namespace Masa.Blazor
                 });
         }
 
-        protected override Task MoveContentTo()
+        protected override Task MoveContentToAsync()
         {
             return JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachedSelector);
         }

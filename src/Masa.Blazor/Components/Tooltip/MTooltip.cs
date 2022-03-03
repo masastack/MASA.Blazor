@@ -14,7 +14,7 @@ namespace Masa.Blazor
     {
         public override string AttachedSelector => Attach ?? ".m-application";
 
-        protected override async Task MoveContentTo()
+        protected override async Task MoveContentToAsync()
         {
             await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachedSelector);
         }
