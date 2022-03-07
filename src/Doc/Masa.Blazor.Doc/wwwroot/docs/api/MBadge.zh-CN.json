@@ -65,10 +65,9 @@
       "Description": ""
     },
     {
-      "Name": "InLine",
+      "Name": "Inline",
       "Type": "Boolean",
-      "Default": "false",
-      "Description": "移动徽章，使其与包装元素保持一致。支持使用 left prop。"
+      "Description": ""
     },
     {
       "Name": "Left",

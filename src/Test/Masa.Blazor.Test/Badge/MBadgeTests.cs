@@ -107,7 +107,7 @@ namespace Masa.Blazor.Test.Badge
             //Act
             var cut = RenderComponent<MBadge>(props =>
             {
-                props.Add(badge => badge.InLine, true);
+                props.Add(badge => badge.Inline, true);
             });
             var classes = cut.Instance.CssProvider.GetClass();
             var hasInLineClass = classes.Contains("m-badge--inline");

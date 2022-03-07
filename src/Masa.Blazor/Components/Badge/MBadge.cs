@@ -93,7 +93,7 @@ namespace Masa.Blazor
                         .AddIf("m-badge--bottom", () => Bottom)
                         .AddIf("m-badge--dot", () => Dot)
                         .AddIf("m-badge--icon", () => !string.IsNullOrWhiteSpace(Icon))
-                        .AddIf("m-badge--inline", () => InLine)
+                        .AddIf("m-badge--inline", () => Inline)
                         .AddIf("m-badge--left", () => Left)
                         .AddIf("m-badge--overlap", () => OverLap)
                         .AddIf("m-badge--tile", () => Tile)
@@ -112,10 +112,10 @@ namespace Masa.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
-                        .AddIf(() => $"bottom:{ComputedBottom}", () => !InLine)
-                        .AddIf(() => $"left:{ComputedLeft}", () => !InLine)
-                        .AddIf(() => $"right:{ComputedRight}", () => !InLine)
-                        .AddIf(() => $"top:{ComputedTop}", () => !InLine)
+                        .AddIf(() => $"bottom:{ComputedBottom}", () => !Inline)
+                        .AddIf(() => $"left:{ComputedLeft}", () => !Inline)
+                        .AddIf(() => $"right:{ComputedRight}", () => !Inline)
+                        .AddIf(() => $"top:{ComputedTop}", () => !Inline)
                         .AddBackgroundColor(Color);
                 });
 
