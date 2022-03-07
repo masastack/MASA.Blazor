@@ -73,7 +73,7 @@ pipeline {
             }
             steps {
                 sh '''
-                    echo $KUBE_CONFIG_DEV | base64 --decode >> ./config
+                    echo $KUBE_CONFIG_DEV | base64 -d > ./config
                     kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
                     '''
             }
@@ -119,7 +119,7 @@ pipeline {
             }
             steps {
                 sh '''
-                    echo $KUBE_CONFIG_PRD | base64 --decode >> ./config
+                    echo $KUBE_CONFIG_PRD | base64 -d > ./config
                     kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
                     '''       
             }
