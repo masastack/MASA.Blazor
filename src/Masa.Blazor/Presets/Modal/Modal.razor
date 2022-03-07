@@ -23,13 +23,13 @@
             <MDivider />
 
             <MCardActions>
-                <MSpacer />
                 @if (ActionsContent != default)
                 {
                     @ActionsContent
                 }
                 else
                 {
+                    <MSpacer />
                     <MButton Text Disabled="_loading" OnClick="HandleOnCancel">@CancelText</MButton>
                     <MButton Text Color="primary" OnClick="HandleOnOk" Loading="_loading">@OkText</MButton>
                 }
