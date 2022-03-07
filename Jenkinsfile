@@ -15,6 +15,14 @@ pipeline {
                 returnStdout: true,
                 script: 'echo  ${NEW_ALI_REGISTRY}"/masa/masa-blazor-docs:"${GIT_BRANCH}'
             )}"""
+        IMAGEWASM = """${sh(
+                returnStdout: true,
+                script: 'echo  ${NEW_ALI_REGISTRY}"/masa/masa-blazor-docs-wasm:0.2."${BUILD_ID}'
+            )}"""
+        IMAGEWASM_PRD = """${sh(
+                returnStdout: true,
+                script: 'echo  ${NEW_ALI_REGISTRY}"/masa/masa-blazor-docs-wasm:"${GIT_BRANCH}'
+            )}"""
         NEW_ALI_REGISTRY_AUTH = credentials('NEW_ALI_REGISTRY_AUTH')
         KUBE_CONFIG_DEV = credentials('k8s-ack')
         KUBE_CONFIG_PRD = credentials('k8s-ack-prd')
@@ -56,6 +64,22 @@ pipeline {
                     '''
             }    
         }
+        stage('dockerwasm-dev') {
+            options {
+                retry (2)
+            }
+            when {
+                branch 'develop'
+            } 
+            steps {
+                sh '''
+                    docker login $NEW_ALI_REGISTRY --username=$NEW_ALI_REGISTRY_AUTH_USR -p $NEW_ALI_REGISTRY_AUTH_PSW
+                    docker build -f Dockerfile.wasm-dev -t $IMAGEWASM .
+                    docker push $IMAGEWASM
+                    docker rmi $IMAGEWASM
+                   '''
+            }
+        }
         stage('deploy-dev') {
             when {
                 branch 'develop'
@@ -64,6 +88,7 @@ pipeline {
                 sh '''
                     echo $KUBE_CONFIG_DEV | base64 -d > ./config
                     kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
+                    kubectl --kubeconfig ./config set image deployment/masa-blazor-docs-wasm masa-blazor-docs-wasm=$IMAGEWASM -n masa-blazor
                     '''
             }
         }
@@ -75,6 +100,7 @@ pipeline {
                 sh '''
                     echo $KUBE_CONFIG_DEV | base64 -d > ./config
                     kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
+                    kubectl --kubeconfig ./config set image deployment/masa-blazor-docs-wasm masa-blazor-docs-wasm=$IMAGEWASM -n masa-blazor
                     '''
             }
         }
@@ -113,6 +139,22 @@ pipeline {
                     '''         
             }    
         }
+        stage('dockerwasm-prd') {
+            options {
+                retry (2)
+            }
+            when {
+                buildingTag()
+            } 
+            steps {
+                sh '''
+                    docker login $NEW_ALI_REGISTRY --username=$NEW_ALI_REGISTRY_AUTH_USR -p $NEW_ALI_REGISTRY_AUTH_PSW
+                    docker build -f Dockerfile.wasm-dev -t $IMAGEWASM_PRD .
+                    docker push $IMAGEWASM_PRD
+                    docker rmi $IMAGEWASM_PRD
+                   '''
+            }
+        }
         stage('deploy-prd') {
             when {
                 buildingTag()
@@ -120,7 +162,7 @@ pipeline {
             steps {
                 sh '''
                     echo $KUBE_CONFIG_PRD | base64 -d > ./config
-                    kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
+                    kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE_PRD -n masa-blazor
                     '''       
             }
         }
