@@ -77,7 +77,6 @@ pipeline {
                     docker build -f Dockerfile.wasm-dev -t $IMAGEWASM .
                     docker push $IMAGEWASM
                     docker rmi $IMAGEWASM
-                    rm -rf ./src/BlazorComponent
                    '''
             }
         }
