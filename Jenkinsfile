@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'k8s-slave-pipeline'
+        label 'ecs-agent'
     }
     options {
             timeout(time: 30, unit: 'MINUTES')
@@ -29,18 +29,15 @@ pipeline {
                 branch 'develop'
             }
             steps{
-                container('dotnet-sdk') {
-                    sh '''
-                          ls src/
-                          node -v
-                          dotnet --version
-                          git clone -b develop https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
-                          dotnet build src
-                          dotnet pack src --include-symbols -p:PackageVersion=0.2."${BUILD_ID}"
-                          dotnet nuget push "**/*.symbols.nupkg" -k $NUGET_KEY -s https://api.nuget.org/v3/index.json
-                       '''
-                           
-                }
+                sh '''
+                    ls src/
+                    node -v
+                    dotnet --version
+                    git clone -b develop https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
+                    dotnet build src
+                    dotnet pack src --include-symbols -p:PackageVersion=0.2."${BUILD_ID}"
+                    dotnet nuget push "**/*.symbols.nupkg" -k $NUGET_KEY -s https://api.nuget.org/v3/index.json
+                    '''                    
             }
         }
         stage('docker-dev') {
@@ -51,42 +48,34 @@ pipeline {
                 branch 'develop'
             } 
             steps {
-                container('docker') {
-                    sh '''
-                          docker login $NEW_ALI_REGISTRY --username=$NEW_ALI_REGISTRY_AUTH_USR -p $NEW_ALI_REGISTRY_AUTH_PSW
-                          docker build -t $IMAGE .
-                          docker push $IMAGE
-                          docker rmi  $IMAGE
-                       '''
-                }
+                sh '''
+                    docker login $NEW_ALI_REGISTRY --username=$NEW_ALI_REGISTRY_AUTH_USR -p $NEW_ALI_REGISTRY_AUTH_PSW
+                    docker build -t $IMAGE .
+                    docker push $IMAGE
+                    docker rmi  $IMAGE
+                    '''
             }    
         }
-        //发布开发环境
         stage('deploy-dev') {
             when {
                 branch 'develop'
             }
             steps {
-                container('kubectl') {
-                    sh '''
-                          echo $KUBE_CONFIG_DEV | base64 --decode >> ./config
-                          kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
-                       '''
-                }
+                sh '''
+                    echo $KUBE_CONFIG_DEV | base64 -d > ./config
+                    kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
+                    '''
             }
         }
-        //发布测试环境
         stage('deploy-test') {
             when {
                 branch 'develop'
             }
             steps {
-                container('kubectl') {
-                    sh '''
-                          echo $KUBE_CONFIG_DEV | base64 --decode >> ./config
-                          kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
-                       '''
-                }
+                sh '''
+                    echo $KUBE_CONFIG_DEV | base64 --decode >> ./config
+                    kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
+                    '''
             }
         }
         stage('packer-prd') {
@@ -97,18 +86,15 @@ pipeline {
                 buildingTag()
             }
             steps{
-                container('dotnet-sdk') {
-                    sh '''
-                          ls src/
-                          node -v
-                          dotnet --version
-                          git clone -b develop https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
-                          dotnet build src
-                          dotnet pack src --include-symbols -p:PackageVersion=${GIT_BRANCH}"
-                          dotnet nuget push "**/*.symbols.nupkg" -k $NUGET_KEY -s https://api.nuget.org/v3/index.json
-                       '''
-                           
-                }
+                sh '''
+                    ls src/
+                    node -v
+                    dotnet --version
+                    git clone -b develop https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
+                    dotnet build src
+                    dotnet pack src --include-symbols -p:PackageVersion=${GIT_BRANCH}"
+                    dotnet nuget push "**/*.symbols.nupkg" -k $NUGET_KEY -s https://api.nuget.org/v3/index.json
+                    '''
             }
         }
         stage('docker-prd') {
@@ -118,15 +104,13 @@ pipeline {
             when {
                 buildingTag()
             } 
-            steps {
-                container('docker') {
-                    sh '''
-                          docker login $NEW_ALI_REGISTRY --username=$NEW_ALI_REGISTRY_AUTH_USR -p $NEW_ALI_REGISTRY_AUTH_PSW
-                          docker build -t $IMAGE_PRD .
-                          docker push $IMAGE_PRD
-                          docker rmi  $IMAGE_PRD
-                       '''
-                }
+            steps {     
+                 sh '''
+                    docker login $NEW_ALI_REGISTRY --username=$NEW_ALI_REGISTRY_AUTH_USR -p $NEW_ALI_REGISTRY_AUTH_PSW
+                    docker build -t $IMAGE_PRD .
+                    docker push $IMAGE_PRD
+                    docker rmi  $IMAGE_PRD
+                    '''         
             }    
         }
         stage('deploy-prd') {
@@ -134,12 +118,10 @@ pipeline {
                 buildingTag()
             }
             steps {
-                container('kubectl') {
-                    sh '''
-                          echo $KUBE_CONFIG_PRD | base64 --decode >> ./config
-                          kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
-                       '''
-                }
+                sh '''
+                    echo $KUBE_CONFIG_PRD | base64 --decode >> ./config
+                    kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
+                    '''       
             }
         }
     }
