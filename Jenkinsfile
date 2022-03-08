@@ -77,6 +77,7 @@ pipeline {
                     docker build -f Dockerfile.wasm-dev -t $IMAGEWASM .
                     docker push $IMAGEWASM
                     docker rmi $IMAGEWASM
+                    rm -rf /src/BlazorComponent/
                    '''
             }
         }
@@ -152,6 +153,7 @@ pipeline {
                     docker build -f Dockerfile.wasm-dev -t $IMAGEWASM_PRD .
                     docker push $IMAGEWASM_PRD
                     docker rmi $IMAGEWASM_PRD
+                    rm -rf /src/BlazorComponent/
                    '''
             }
         }
