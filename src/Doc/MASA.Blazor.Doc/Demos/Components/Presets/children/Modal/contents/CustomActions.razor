@@ -1,0 +1,50 @@
+﻿<PModal @bind-Value="value"
+        Title="Title"
+        Width="500"
+        OnOk="OnOk"
+        OnCancel="OnCancel"
+        OnDelete="OnDelete">
+    <ActivatorContent>
+        <MButton @attributes="@context.Attrs">Activator</MButton>
+    </ActivatorContent>
+    <ChildContent>
+        Content
+    </ChildContent>
+    <DeleteContent Context="delete">
+        <MButton Icon Color="error" OnClick="delete.click" Disabled="delete.loading">
+            <MIcon>mdi-delete</MIcon>
+        </MButton>
+    </DeleteContent>
+    <CancelContent Context="cancel">
+        <MButton Icon OnClick="cancel.click" Disabled="cancel.loading">
+            <MIcon>mdi-cancel</MIcon>
+        </MButton>
+    </CancelContent>
+    <OkContent Context="ok">
+        <MButton Icon Color="primary" OnClick="ok.click" Disabled="ok.loading" Loading="ok.loading">
+            <MIcon>mdi-check</MIcon>
+        </MButton>
+    </OkContent>
+</PModal>
+
+@code {
+
+    private bool value;
+
+    private async Task OnOk()
+    {
+        await Task.Delay(1000);
+        value = false;
+    }
+
+    private void OnCancel()
+    {
+        value = false;
+    }
+
+    private void OnDelete()
+    {
+        value = false;
+    }
+
+}

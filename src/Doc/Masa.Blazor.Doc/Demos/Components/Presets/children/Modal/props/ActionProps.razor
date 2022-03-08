@@ -1,0 +1,39 @@
+﻿<PModal @bind-Value="value" 
+        Title="Title"
+        Width="500"
+        OkProps="props => props.Outlined = true"
+        CancelProps="@(props => props.Color = "orange")"
+        DeleteProps="@(props => props.Style = "font-weight:bold;")"
+        OnOk="OnOk" 
+        OnCancel="OnCancel" 
+        OnDelete="OnDelete">
+    <ActivatorContent>
+        <MButton @attributes="@context.Attrs">Activator</MButton>
+    </ActivatorContent>
+    <ChildContent>
+        Content
+    </ChildContent>
+</PModal>
+
+@code {
+
+    private bool value;
+
+    private async Task OnOk()
+    {
+        await Task.Delay(1000);
+
+        value = false;
+    }
+
+    private void OnCancel()
+    {
+        value = false;
+    }
+
+    private void OnDelete()
+    {
+        value = false;
+    }
+
+}

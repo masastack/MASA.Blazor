@@ -1,0 +1,102 @@
+﻿@namespace Masa.Blazor.Presets
+
+<MDialog Value="Value"
+         ValueChanged="ValueChanged"
+         ContentClass="@Class"
+         MaxWidth="@MaxWidth"
+         Persistent="Persistent"
+         Scrollable
+         Transition="@Transition"
+         Width="@Width">
+    <ActivatorContent>
+        @ActivatorContent?.Invoke(context)
+    </ActivatorContent>
+    <ChildContent>
+        <MCard Class="@ContentClass"
+               Style="@ContentStyle"
+               Elevation="Elevation"
+               Height="@Height">
+            <MCardTitle Class="@HeaderClass" Style="@HeaderStyle">
+                @Title
+                <MSpacer></MSpacer>
+                <MButton Icon OnClick="HandleOnCancel">
+                    <MIcon>mdi-close</MIcon>
+                </MButton>
+            </MCardTitle>
+
+            <MDivider />
+
+            <MCardText Class="@BodyClass"
+                       Style="@($"padding: 24px; {BodyStyle}")"
+                       @ref="BodyRef">
+                @if (FormModel == null)
+                {
+                    @ChildContent
+                }
+                else
+                {
+                    <MForm @ref="Form" Model="FormModel" EnableDataAnnotationsValidation>
+                        @ChildContent
+                    </MForm>
+                }
+            </MCardText>
+
+            @if (HasActions)
+            {
+                <MDivider />
+
+                <MCardActions Class="@ActionsClass" Style="@ActionsStyle">
+                    @if (OnDelete.HasDelegate)
+                    {
+                        if (DeleteContent != null)
+                        {
+                            @DeleteContent((HandleOnDelete, Loading))
+                        }
+                        else
+                        {
+                            <ModalButton Props="ComputedDeleteButtonProps"
+                                         OnClick="HandleOnDelete">
+                                @DeleteText
+                            </ModalButton>
+                        }
+                    }
+
+                    <MSpacer />
+
+                    @if (OnCancel.HasDelegate && !HideCancelAction)
+                    {
+                        if (CancelContent != null)
+                        {
+                            @CancelContent((HandleOnCancel, Loading))
+                        }
+                        else
+                        {
+                            <ModalButton Props="ComputedCancelButtonProps"
+                                         Disabled="_okLoading"
+                                         OnClick="HandleOnCancel">
+                                @CancelText
+                            </ModalButton>
+                        }
+                    }
+
+                    @if (OnOk.HasDelegate)
+                    {
+                        if (OkContent != null)
+                        {
+                            @OkContent((HandleOnOk, Loading))
+                        }
+                        else
+                        {
+                            <ModalButton Props="ComputedOkButtonProps"
+                                         Disabled="_okLoading"
+                                         Loading="_okLoading"
+                                         OnClick="HandleOnOk">
+                                @OkText
+                            </ModalButton>
+                        }
+                    }
+                </MCardActions>
+            }
+        </MCard>
+    </ChildContent>
+</MDialog>

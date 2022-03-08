@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.0735395+08:00",
+    "LastWriteTime": "2021-11-22T16:33:22.8890524+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -194,7 +194,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.0755468+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0736279+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -227,7 +227,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.0795361+08:00",
+    "LastWriteTime": "2021-11-30T11:20:37.745403+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -327,7 +327,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.0825361+08:00",
+    "LastWriteTime": "2021-11-26T09:53:53.2705332+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -404,7 +404,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.0865375+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0756284+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -494,7 +494,7 @@
       "功能组件": "\n<ul>\n<li><code>MAppBarNavIcon</code>：专门为与 <a href=\"/components/toolbars\">MToolbar</a> 和 <code>MAppBar</code> 一起使用而创建的样式化图标按钮组件。 在工具栏的左侧显示为汉堡菜单，它通常用于控制导航抽屉的状态。 默认插槽可以用于自定义此组件的图标和功能。</li>\n<li><code>MAppBarTitle</code>：修改过的 <a href=\"/components/toolbars\">MToolbarTitle</a> 组件 ，用于配合 <strong>ShrinkOnScroll</strong> 属性使用。 在小屏幕上，<strong>MToolbarTitle</strong>\n将被截断，但这个组件在展开时使用了绝对定位使其内容可见。 我们不建议您在没有使用 <strong>ShrinkOnScroll</strong> 属性时使用 <code>MAppBarTitle</code> 组件。确实是因为向此组件添加了resize事件，并进行了很多额外的计算。</li>\n</ul>\n",
       "注意事项": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <strong>Icon</strong> 属性的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将按钮包装在任何容器例如<code>div</code>中，则需要对该容器应用负边距，以便正确对齐它们。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.0925357+08:00",
+    "LastWriteTime": "2021-11-26T13:07:38.017444+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -649,7 +649,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.0955356+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0776289+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -727,7 +727,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <code>Icon</code> prop的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将您的按钮包装在任何容器中，例如<code>div</code>， 您需要对容器应用负边距，以便正确对齐。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1015358+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0816266+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -881,7 +881,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1035362+08:00",
+    "LastWriteTime": "2021-12-02T13:33:53.2800713+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -926,7 +926,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>默认情况下，<code>MBreadcrumbs</code> 将禁用路由联动。可以通过 <strong>Linkage</strong> 属性开启路由联动。</p>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1075367+08:00",
+    "LastWriteTime": "2021-12-06T14:29:50.6435346+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1016,7 +1016,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p>当使用 <strong>Dark</strong> 属性时，<code>MButton</code> 是唯一一种拥有不同行为的组件。 通常来说，组件使用 <strong>Dark</strong> 属性来表示他们将有深色背景，文本也需要是白色的。 虽然这对\n<code>MButton</code> 也是起作用的，但由于禁用状态与白色背景容易造成混淆，建议仅在按钮<strong>为</strong>彩色背景时使用此属性。 If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1135356+08:00",
+    "LastWriteTime": "2021-11-17T17:29:52.1597474+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1183,7 +1183,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "功能组件": "\n<ul>\n<li><code>MCardActions</code>：用于为卡片放置 动作 的容器，如 <a href=\"/components/buttons\">MButton</a> 或 <a href=\"/components/menus\">MMenu</a>。 同时在按钮上使用 个特殊边距\n，以便它们与其他卡片内容区域的匹配。</li>\n<li><code>MCardSubtitle</code>：为卡片字幕提供默认的 <strong>字体大小</strong> 和 <strong>填充</strong>。 字体大小可以以 <a href=\"/stylesandanimations/text-and-typography\">排版类</a> 覆盖。</li>\n<li><code>MCardText</code>：主要用于卡片中的 <strong>文本内容</strong>。 对文本应用填充，将其字体大小减少为 .875rem。</li>\n<li><code>MCardTitle</code>：为卡片字幕提供默认的 字体大小 和 填充。 字体大小可以以 <a href=\"/stylesandanimations/text-and-typography\">排版类</a> 覆盖。</li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.119537+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0886273+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1338,7 +1338,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1275362+08:00",
+    "LastWriteTime": "2021-11-16T17:18:10.0838705+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1526,7 +1526,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1335395+08:00",
+    "LastWriteTime": "2021-10-29T14:11:50.7074219+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1658,7 +1658,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1365364+08:00",
+    "LastWriteTime": "2021-11-12T13:32:30.0916273+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1736,7 +1736,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1385369+08:00",
+    "LastWriteTime": "2021-12-01T19:22:48.728436+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1787,7 +1787,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1445355+08:00",
+    "LastWriteTime": "2021-11-02T09:37:52.1130132+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1920,7 +1920,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1465361+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6580013+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1998,7 +1998,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1525356+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6590057+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2109,7 +2109,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1555358+08:00",
+    "LastWriteTime": "2021-11-24T18:45:49.2469595+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2175,7 +2175,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1595359+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.8350159+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2263,7 +2263,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1655367+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.8319996+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2407,7 +2407,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1685357+08:00",
+    "LastWriteTime": "2021-11-30T11:20:37.8234266+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2485,7 +2485,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadioGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-16T10:54:26.8668495+08:00",
+    "LastWriteTime": "2021-12-10T13:01:47.8478778+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2563,7 +2563,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.175537+08:00",
+    "LastWriteTime": "2021-11-12T14:06:48.9354207+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2653,7 +2653,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1815356+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2400602+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2796,7 +2796,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1885355+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.7730007+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2984,7 +2984,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.1925369+08:00",
+    "LastWriteTime": "2021-11-23T18:27:44.4298634+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3084,7 +3084,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-29T08:52:56.9812082+08:00",
+    "LastWriteTime": "2021-12-23T14:51:09.3686614+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3217,7 +3217,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2085385+08:00",
+    "LastWriteTime": "2021-11-12T14:06:52.6990026+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3496,7 +3496,7 @@
       "辅助类": "\n<p><strong>FillHeight</strong>将<code>height:100%</code>应用于元素。当应用于<code>MContainer</code>时，它还包括<code>align items:center</code>。</p>\n",
       "注意": "\n<!--alert:info--> \n<p>1.x 网格系统已被废弃，请改用 2.x 网格系统。 1.x 网格的文档可以在 v1.5 文档 中找到。</p>\n<!--alert:info--> \n<!--alert:info--> \n<p>网格组件上基于断点的属性以 <code>andUp</code> 的方式工作。 考虑 <strong>xs</strong> 断点已经被删除的情况， 这将会影响到 <strong>offset</strong>、<strong>justify</strong>、<strong>align</strong> 和 <code>MCol</code> 上的断点属性。</p>\n<ul>\n<li>像 <strong>justify-sm</strong> 和 <strong>justify-md</strong> 这样的属性仍然存在，但 <strong>justify-xs</strong> 会变成 <strong>justify</strong>。</li>\n<li><code>MCol</code> 上不存在 <strong>xs</strong> 属性。 与此对应的是 <strong>cols</strong> 属性。</li>\n</ul>\n<!--alert:info--> \n<!--alert:info--> \n<p>当在 IE11 使用网格系统时，你需要设置一个显式的 <code>height</code>，因为 <code>min-height</code> 不足进而导致非预期结果。</p>\n<!--alert:info--> \n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2175362+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8305896+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3728,7 +3728,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2215386+08:00",
+    "LastWriteTime": "2021-11-12T13:39:37.8809032+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3817,7 +3817,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-16T10:54:26.8714751+08:00",
+    "LastWriteTime": "2021-12-16T15:57:07.6431404+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3917,7 +3917,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2285359+08:00",
+    "LastWriteTime": "2021-11-04T13:34:00.0771991+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4006,7 +4006,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2315352+08:00",
+    "LastWriteTime": "2021-11-12T13:39:38.0698762+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4094,7 +4094,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2355355+08:00",
+    "LastWriteTime": "2021-11-12T13:39:38.0618742+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4193,7 +4193,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2395359+08:00",
+    "LastWriteTime": "2021-11-12T13:39:37.8828831+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4281,7 +4281,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2425356+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8325907+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4347,7 +4347,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2465357+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8345908+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4437,7 +4437,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>MImage 组件使用 Intersect 指令，IE11 和 Safari需要 Polyfill。 如果检测到浏览器不支持此功能, 图像仍将以正常方式加载。</p>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2505355+08:00",
+    "LastWriteTime": "2022-02-08T17:01:16.1054538+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4537,7 +4537,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>如果您要查找有状态列表项，请查看 <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>。</p>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2585361+08:00",
+    "LastWriteTime": "2021-11-12T16:38:35.8385907+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4747,7 +4747,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2645359+08:00",
+    "LastWriteTime": "2022-01-22T18:09:54.5976176+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4924,7 +4924,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MNavigationDrawer\">MNavigationDrawer</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error-->\n<p>如果使用启用了 <strong>App</strong> 属性的 <code>MNavigationDrawer</code>，则不需要像示例中那样使用 <strong>Absolute</strong> 属性。</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p><strong>ExtensionOnHover</strong> 参数不会改变<strong>MMain</strong>的内容区域。 要使内容区域响应<strong>ExtensionOnHover</strong>，请绑定<strong>OnMiniVariantUpdate</strong> 到数据。</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2695355+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8246057+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5057,7 +5057,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2725356+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8256046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5145,7 +5145,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2755356+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.827605+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5234,7 +5234,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2865363+08:00",
+    "LastWriteTime": "2021-12-21T15:40:53.4692275+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5478,7 +5478,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2915356+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8346068+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5622,7 +5622,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.2975357+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8366046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5796,59 +5796,221 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2021-12-07T09:49:39.2995363+08:00",
+    "LastWriteTime": "2022-03-08T15:46:53.0647392+08:00",
     "DemoList": [
       {
-        "Order": 20,
-        "Name": "Actions",
-        "Title": "操作",
-        "Description": "<p>提供一组响应式的操作按钮。</p>\n",
-        "Code": "@using Action = Masa.Blazor.Presets.Action\r\n<MRow NoGutters>\r\n    <MCol Cols=\"12\">\r\n        <MSlider Label=\"宽度\" @bind-Value=\"width\" ThumbLabel=\"@(\"always\")\"></MSlider>\r\n    </MCol>\r\n</MRow>\r\n\r\n<div style=\"@($\"width:{width}%\")\">\r\n    <PActions Items=\"actions\" Justify=\"JustifyTypes.SpaceBetween\" Divider>\r\n    </PActions>\r\n</div>\r\n\r\n<MDivider Style=\"margin: 8px 0\"></MDivider>\r\n\r\n<div style=\"@($\"width:{width}%\")\">\r\n    <PActions Justify=\"JustifyTypes.SpaceBetween\">\r\n        <PAction Label=\"alert\" Icon=\"mdi-alert-outline\"></PAction>\r\n        <PAction Label=\"heart\" Icon=\"mdi-heart\" Color=\"red\" Dark></PAction>\r\n        <PAction Label=\"information\" Icon=\"mdi-information\" Disabled></PAction>\r\n        <PAction Label=\"check\" Icon=\"mdi-check\"></PAction>\r\n    </PActions>\r\n</div>\r\n\r\n<MDivider Style=\"margin: 8px 0\"></MDivider>\r\n\r\n<MDataTable Headers=\"headers\"\r\n            Items=\"desserts\"\r\n            Class=\"elevation-1\"\r\n            Style=\"@($\"width:{width}%;min-width:400px\")\"\r\n            HideDefaultFooter>\r\n    <ItemColContent>\r\n        @if (context.Header.Value == \"actions\")\r\n        {\r\n            List<Action> items = new()\r\n            {\r\n                new Action()\r\n                {\r\n                    Label = \"Edit\",\r\n                    Icon = \"mdi-pencil\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, () => EditItem(context.Item))\r\n                },\r\n                new Action()\r\n                {\r\n                    Label = \"Remove\",\r\n                    Icon = \"mdi-delete\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, () => DeleteItem(context.Item))\r\n                },\r\n                new Action()\r\n                {\r\n                    Label = \"Loading\",\r\n                    Icon = \"mdi-reload\",\r\n                    OnClick = EventCallback.Factory.Create<MouseEventArgs>(this, async () => await Task.Delay(1000))\r\n                },\r\n            };\r\n\r\n            <PActions Items=\"items\" Small Divider></PActions>\r\n        }\r\n        else\r\n        {\r\n            @context.Value\r\n        }\r\n    </ItemColContent>\r\n</MDataTable>\r\n\r\n@code {\r\n    private double width = 100;\r\n\r\n    List<Action> actions = new()\r\n    {\r\n        new Action() { Label = \"alert\", Icon = \"mdi-alert-outline\" },\r\n        new Action() { Label = \"heart\", Icon = \"mdi-heart\", Color = \"red\", Dark = true },\r\n        new Action() { Label = \"information\", Icon = \"mdi-information\", Disabled = true },\r\n        new Action() { Label = \"check\", Icon = \"mdi-check\" },\r\n    };\r\n\r\n    List<Dessert> desserts = new()\r\n    {\r\n        new Dessert\r\n        {\r\n            Name = \"Frozen Yogurt\",\r\n            Calories = 159,\r\n            Fat = 6.0,\r\n            Carbs = 24,\r\n            Protein = 4.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Ice cream sandwich\",\r\n            Calories = 237,\r\n            Fat = 9.0,\r\n            Carbs = 37,\r\n            Protein = 4.3\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Eclair\",\r\n            Calories = 262,\r\n            Fat = 16.0,\r\n            Carbs = 23,\r\n            Protein = 6.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Jelly bean\",\r\n            Calories = 375,\r\n            Fat = 0.0,\r\n            Carbs = 94,\r\n            Protein = 0.0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"Lollipop\",\r\n            Calories = 392,\r\n            Fat = 0.2,\r\n            Carbs = 98,\r\n            Protein = 0\r\n        },\r\n        new Dessert\r\n        {\r\n            Name = \"KitKat\",\r\n            Calories = 518,\r\n            Fat = 26.0,\r\n            Carbs = 65,\r\n            Protein = 7\r\n        }\r\n    };\r\n\r\n    List<DataTableHeader<Dessert>> headers = new()\r\n    {\r\n        new()\r\n        {\r\n            Text = \"Dessert (100g serving)\",\r\n            Align = \"start\",\r\n            Sortable = false,\r\n            Value = nameof(Dessert.Name)\r\n        },\r\n        new() { Text = \"Calories\", Value = nameof(Dessert.Calories) },\r\n        new() { Text = \"Actions\", Value = \"actions\", Sortable = false }\r\n    };\r\n\r\n    public void EditItem(Dessert item)\r\n    {\r\n    }\r\n\r\n    public void DeleteItem(Dessert item)\r\n    {\r\n    }\r\n\r\n    public class Dessert\r\n    {\r\n        public string Name { get; set; }\r\n\r\n        public int Calories { get; set; }\r\n\r\n        public double Fat { get; set; }\r\n\r\n        public int Carbs { get; set; }\r\n\r\n        public double Protein { get; set; }\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.props.Actions",
+        "Order": 1,
+        "Name": "index",
+        "Title": "使用",
+        "Description": "",
+        "Code": "<PDrawer Title=\"Title\" Width=\"500\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PDrawer>",
+        "Type": "Demos.Components.Presets.children.Drawer.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "actionProps",
+        "Title": "操作属性",
+        "Description": "",
+        "Code": "<PDrawer @bind-Value=\"value\"\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         OkProps=\"props => props.Outlined = true\"\r\n         CancelProps=\"@(props => props.Color = \"orange\")\"\r\n         DeleteProps=\"@(props => props.Style = \"font-weight:bold;\")\"\r\n         OnOk=\"OnOk\"\r\n         OnCancel=\"OnCancel\"\r\n         OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n    private async Task OnOk()\r\n    {\r\n        await Task.Delay(1000);\r\n\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.Drawer.props.ActionProps",
         "Style": "",
         "Debug": false,
         "Group": 0
       },
+      {
+        "Order": 0,
+        "Name": "actions",
+        "Title": "操作",
+        "Description": "",
+        "Code": "<MSwitch @bind-Value=\"hideCancelAction\" Label=\"HideCancelAction\"></MSwitch>\r\n\r\n<PDrawer @bind-Value=\"value\"\r\n         HideCancelAction=\"hideCancelAction\"\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         OnOk=\"OnOk\"\r\n         OnCancel=\"OnCancel\"\r\n         OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n    private bool hideCancelAction;\r\n\r\n    private async Task OnOk()\r\n    {\r\n        await Task.Delay(1000);\r\n\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.Drawer.props.Actions",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "formModel",
+        "Title": "FormModel",
+        "Description": "",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MSwitch @bind-Value=\"throwException\" Label=\"throw exception when calling OnOK\"></MSwitch>\r\n\r\n<MButton OnClick=\"ShowModal\">Show Modal</MButton>\r\n@if (user != null)\r\n{\r\n    <div>\r\n        @System.Text.Json.JsonSerializer.Serialize(user)\r\n        <MButton Color=\"primary\" Text OnClick=\"EditModal\">edit</MButton>\r\n    </div>\r\n}\r\n\r\n<PDrawer @bind-Value=\"value\"\r\n         FormModel=\"userModel\"\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         OnOk=\"HandleOnOk\"\r\n         OnCancel=\"HandleOnCancel\">\r\n    <MRow>\r\n        <MCol Cols=\"12\">\r\n            <MTextField @bind-Value=\"userModel.UserName\"\r\n                        Label=\"UserName\"\r\n                        Dense\r\n                        Outlined\r\n                        HideDetails=\"@(\"auto\")\" />\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MTextField @bind-Value=\"userModel.City\"\r\n                        Label=\"City\"\r\n                        Dense\r\n                        Outlined\r\n                        HideDetails=\"@(\"auto\")\" />\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MRadioGroup @bind-Value=\"userModel.Gender\"\r\n                         Label=\"Gender:\"\r\n                         Row\r\n                         Dense\r\n                         Style=\"margin-top: 0\"\r\n                         HideDetails=\"@(\"auto\")\">\r\n                <MRadio Label=\"男\" Value=\"0\"></MRadio>\r\n                <MRadio Label=\"女\" Value=\"1\"></MRadio>\r\n            </MRadioGroup>\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MAutocomplete @bind-Value=\"userModel.Favorites\"\r\n                           Items=\"favorites\"\r\n                           Label=\"Favorites\"\r\n                           Multiple\r\n                           ItemValue=\"r => r\"\r\n                           ItemText=\"r => r\"\r\n                           Dense\r\n                           Outlined\r\n                           HideDetails=\"@(\"auto\")\">\r\n            </MAutocomplete>\r\n        </MCol>\r\n        @if (exception != null)\r\n        {\r\n            <MCol Cols=\"12\">\r\n                @exception.Message\r\n            </MCol>\r\n        }\r\n    </MRow>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    readonly List<string> favorites = new() { \"Basketball\", \"Football\", \"Ping-pong\", \"Badminton\" };\r\n\r\n    User user;\r\n    User userModel;\r\n\r\n    private bool value;\r\n    private bool throwException;\r\n    private Exception exception;\r\n\r\n    private void ShowModal()\r\n    {\r\n        userModel = new User();\r\n        value = true;\r\n    }\r\n\r\n    private void EditModal()\r\n    {\r\n        userModel = user.ShallowCopy();\r\n        value = true;\r\n    }\r\n\r\n    private async Task HandleOnOk(ModalActionEventArgs args)\r\n    {\r\n        try\r\n        {\r\n            // logic in real world here\r\n            await Task.Delay(1000);\r\n\r\n            if (throwException)\r\n            {\r\n                throw new Exception(\"Something wrong here!\");\r\n            }\r\n\r\n            user = userModel.ShallowCopy();\r\n\r\n            value = false;\r\n        }\r\n        catch (Exception e)\r\n        {\r\n            args.Cancel();\r\n            exception = e;\r\n        }\r\n    }\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        value = false;\r\n        exception = null;\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        [Required]\r\n        public string UserName { get; set; }\r\n\r\n        [Range(0, 1)]\r\n        public int Gender { get; set; }\r\n\r\n        [Required]\r\n        public string City { get; set; }\r\n\r\n        [Required]\r\n        public List<string> Favorites { get; set; }\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public interface IShallowCopy<T>\r\n    {\r\n        public T ShallowCopy();\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.Drawer.props.FormModel",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "left",
+        "Title": "抽屉",
+        "Description": "",
+        "Code": "<MSwitch @bind-Value=\"left\" Label=\"Left\"></MSwitch>\r\n\r\n<PDrawer Left=\"left\"\r\n         Title=\"Drawer here!\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        <MSimpleTable Dense>\r\n            <thead>\r\n            <tr>\r\n                <th class=\"text-left\">\r\n                    Name\r\n                </th>\r\n                <th class=\"text-left\">\r\n                    Calories\r\n                </th>\r\n            </tr>\r\n            </thead>\r\n            <tbody>\r\n            @foreach (var item in _desserts)\r\n            {\r\n                <tr @key=\"item\">\r\n                    <td>@item.name</td>\r\n                    <td>@item.calories</td>\r\n                </tr>\r\n            }\r\n            </tbody>\r\n        </MSimpleTable>\r\n    </ChildContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    bool left;\r\n\r\n    private List<(string name, int calories)> _desserts = new()\r\n    {\r\n        (\"Frozen Yogurt\", 159),\r\n        (\"Ice cream sandwich\", 237),\r\n        (\"Eclair\", 262),\r\n        (\"Cupcake\", 305),\r\n        (\"Gingerbread\", 356),\r\n        (\"Jelly bean\", 375),\r\n        (\"Lollipop\", 392),\r\n        (\"Honeycomb\", 408),\r\n        (\"Donut\", 452),\r\n        (\"KitKat\", 518),\r\n    };\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.Drawer.props.Left",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "scrollToTopOnHide",
+        "Title": "自动滚动到顶部",
+        "Description": "",
+        "Code": "<MSwitch @bind-Value=\"autoScrollToTop\" Label=\"AutoScrollToTop\"></MSwitch>\r\n\r\n<PDrawer @bind-Value=\"value\"\r\n         AutoScrollToTop=\"autoScrollToTop\"\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         BodyStyle=\"height: 250px\"\r\n         OnCancel=\"() => value = false\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n    </ChildContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n    private bool autoScrollToTop;\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.Drawer.props.ScrollToTopOnHide",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "withoutActivator",
+        "Title": "没有触发器",
+        "Description": "",
+        "Code": "<MButton OnClick=\"() => value = true\">Show Modal</MButton>\r\n\r\n<PDrawer @bind-Value=\"value\"\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         OnCancel=\"() => value = false\">\r\n    Content\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.Drawer.props.WithoutActivator",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "customActions",
+        "Title": "自定义操作",
+        "Description": "",
+        "Code": "<PDrawer @bind-Value=\"value\"\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         OnOk=\"OnOk\"\r\n         OnCancel=\"OnCancel\"\r\n         OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n    <DeleteContent Context=\"delete\">\r\n        <MButton Icon Color=\"error\" OnClick=\"delete.click\" Disabled=\"delete.loading\">\r\n            <MIcon>mdi-delete</MIcon>\r\n        </MButton>\r\n    </DeleteContent>\r\n    <CancelContent Context=\"cancel\">\r\n        <MButton Icon OnClick=\"cancel.click\" Disabled=\"cancel.loading\">\r\n            <MIcon>mdi-cancel</MIcon>\r\n        </MButton>\r\n    </CancelContent>\r\n    <OkContent Context=\"ok\">\r\n        <MButton Icon Color=\"primary\" OnClick=\"ok.click\" Disabled=\"ok.loading\" Loading=\"ok.loading\">\r\n            <MIcon>mdi-check</MIcon>\r\n        </MButton>\r\n    </OkContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n    private async Task OnOk()\r\n    {\r\n        await Task.Delay(1000);\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.Drawer.contents.CustomActions",
+        "Style": "",
+        "Debug": false,
+        "Group": 2
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/dialogs",
+      "/components/buttons",
+      "/components/icons"
+    ],
+    "Subtitle": "抽屉",
+    "Title": "Drawers",
+    "Type": "Drawers",
+    "FullTitle": "Drawers（抽屉）"
+  },
+  {
+    "Desc": "<p>需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 <code>Modal</code> 在当前页面正中打开一个浮层，承载相应的操作。</p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n"
+    },
+    "LastWriteTime": "2022-03-08T14:10:09.6500617+08:00",
+    "DemoList": [
+      {
+        "Order": 1,
+        "Name": "index",
+        "Title": "使用",
+        "Description": "",
+        "Code": "<PModal Title=\"Title\" Width=\"500\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PModal>",
+        "Type": "Demos.Components.Presets.children.Modal.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "actionProps",
+        "Title": "操作属性",
+        "Description": "",
+        "Code": "<PModal @bind-Value=\"value\" \r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        OkProps=\"props => props.Outlined = true\"\r\n        CancelProps=\"@(props => props.Color = \"orange\")\"\r\n        DeleteProps=\"@(props => props.Style = \"font-weight:bold;\")\"\r\n        OnOk=\"OnOk\" \r\n        OnCancel=\"OnCancel\" \r\n        OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n    private async Task OnOk()\r\n    {\r\n        await Task.Delay(1000);\r\n\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.Modal.props.ActionProps",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "actions",
+        "Title": "操作",
+        "Description": "",
+        "Code": "<MSwitch @bind-Value=\"hideCancelAction\" Label=\"HideCancelAction\"></MSwitch>\r\n\r\n<PModal @bind-Value=\"value\" \r\n        HideCancelAction=\"hideCancelAction\" \r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        OnOk=\"OnOk\" \r\n        OnCancel=\"OnCancel\" \r\n        OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n    private bool hideCancelAction;\r\n\r\n    private async Task OnOk()\r\n    {\r\n        await Task.Delay(1000);\r\n\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.Modal.props.Actions",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "formModel",
+        "Title": "FormModel",
+        "Description": "",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MSwitch @bind-Value=\"throwException\" Label=\"throw exception when calling OnOK\"></MSwitch>\r\n\r\n<MButton OnClick=\"ShowModal\">Show Modal</MButton>\r\n@if (user != null)\r\n{\r\n    <div>\r\n        @System.Text.Json.JsonSerializer.Serialize(user)\r\n        <MButton Color=\"primary\" Text OnClick=\"EditModal\">edit</MButton>\r\n    </div>\r\n}\r\n\r\n<PModal @bind-Value=\"value\"\r\n        FormModel=\"userModel\"\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        OnOk=\"HandleOnOk\"\r\n        OnCancel=\"HandleOnCancel\">\r\n    <MRow>\r\n        <MCol Cols=\"12\">\r\n            <MTextField @bind-Value=\"userModel.UserName\"\r\n                        Label=\"UserName\"\r\n                        Dense\r\n                        Outlined\r\n                        HideDetails=\"@(\"auto\")\" />\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MTextField @bind-Value=\"userModel.City\"\r\n                        Label=\"City\"\r\n                        Dense\r\n                        Outlined\r\n                        HideDetails=\"@(\"auto\")\" />\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MRadioGroup @bind-Value=\"userModel.Gender\"\r\n                         Label=\"Gender:\"\r\n                         Row\r\n                         Dense\r\n                         Style=\"margin-top: 0\"\r\n                         HideDetails=\"@(\"auto\")\">\r\n                <MRadio Label=\"男\" Value=\"0\"></MRadio>\r\n                <MRadio Label=\"女\" Value=\"1\"></MRadio>\r\n            </MRadioGroup>\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MAutocomplete @bind-Value=\"userModel.Favorites\"\r\n                           Items=\"favorites\"\r\n                           Label=\"Favorites\"\r\n                           Multiple\r\n                           ItemValue=\"r => r\"\r\n                           ItemText=\"r => r\"\r\n                           Dense\r\n                           Outlined\r\n                           HideDetails=\"@(\"auto\")\">\r\n            </MAutocomplete>\r\n        </MCol>\r\n        @if (exception != null)\r\n        {\r\n            <MCol Cols=\"12\">\r\n                @exception.Message\r\n            </MCol>\r\n        }\r\n    </MRow>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    readonly List<string> favorites = new() { \"Basketball\", \"Football\", \"Ping-pong\", \"Badminton\" };\r\n\r\n    User user;\r\n    User userModel;\r\n\r\n    private bool value;\r\n    private bool throwException;\r\n    private Exception exception;\r\n\r\n    private void ShowModal()\r\n    {\r\n        userModel = new User();\r\n        value = true;\r\n    }\r\n\r\n    private void EditModal()\r\n    {\r\n        userModel = user.ShallowCopy();\r\n        value = true;\r\n    }\r\n\r\n    private async Task HandleOnOk(ModalActionEventArgs args)\r\n    {\r\n        try\r\n        {\r\n            // logic in real world here\r\n            await Task.Delay(1000);\r\n\r\n            if (throwException)\r\n            {\r\n                throw new Exception(\"Something wrong here!\");\r\n            }\r\n\r\n            user = userModel.ShallowCopy();\r\n\r\n            value = false;\r\n        }\r\n        catch (Exception e)\r\n        {\r\n            args.Cancel();\r\n            exception = e;\r\n        }\r\n    }\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        value = false;\r\n        exception = null;\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        [Required]\r\n        public string UserName { get; set; }\r\n\r\n        [Range(0, 1)]\r\n        public int Gender { get; set; }\r\n\r\n        [Required]\r\n        public string City { get; set; }\r\n\r\n        [Required]\r\n        public List<string> Favorites { get; set; }\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public interface IShallowCopy<T>\r\n    {\r\n        public T ShallowCopy();\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.Modal.props.FormModel",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "scrollToTopOnHide",
+        "Title": "自动滚动到顶部",
+        "Description": "",
+        "Code": "<MSwitch @bind-Value=\"autoScrollToTop\" Label=\"AutoScrollToTop\"></MSwitch>\r\n\r\n<PModal @bind-Value=\"value\"\r\n        AutoScrollToTop=\"autoScrollToTop\"\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        BodyStyle=\"height: 250px\"\r\n        OnCancel=\"() => value = false\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n    </ChildContent>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n    private bool autoScrollToTop;\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.Modal.props.ScrollToTopOnHide",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "withoutActivator",
+        "Title": "没有触发器",
+        "Description": "",
+        "Code": "<MButton OnClick=\"() => value = true\">Show Modal</MButton>\r\n\r\n<PModal @bind-Value=\"value\"\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        OnCancel=\"() => value = false\">\r\n    Content\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.Modal.props.WithoutActivator",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "customActions",
+        "Title": "自定义操作",
+        "Description": "",
+        "Code": "<PModal @bind-Value=\"value\"\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        OnOk=\"OnOk\"\r\n        OnCancel=\"OnCancel\"\r\n        OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n    <DeleteContent Context=\"delete\">\r\n        <MButton Icon Color=\"error\" OnClick=\"delete.click\" Disabled=\"delete.loading\">\r\n            <MIcon>mdi-delete</MIcon>\r\n        </MButton>\r\n    </DeleteContent>\r\n    <CancelContent Context=\"cancel\">\r\n        <MButton Icon OnClick=\"cancel.click\" Disabled=\"cancel.loading\">\r\n            <MIcon>mdi-cancel</MIcon>\r\n        </MButton>\r\n    </CancelContent>\r\n    <OkContent Context=\"ok\">\r\n        <MButton Icon Color=\"primary\" OnClick=\"ok.click\" Disabled=\"ok.loading\" Loading=\"ok.loading\">\r\n            <MIcon>mdi-check</MIcon>\r\n        </MButton>\r\n    </OkContent>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n    private async Task OnOk()\r\n    {\r\n        await Task.Delay(1000);\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.Modal.contents.CustomActions",
+        "Style": "",
+        "Debug": false,
+        "Group": 2
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/dialogs",
+      "/components/form-modals",
+      "/components/drawers"
+    ],
+    "Subtitle": "对话框",
+    "Title": "Modals",
+    "Type": "Modals",
+    "FullTitle": "Modals（对话框）"
+  },
+  {
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-03-08T11:13:46.3053558+08:00",
+    "DemoList": [
       {
         "Order": 0,
         "Name": "confirm",
         "Title": "确认框",
         "Description": "<p>提供标准类型的确认对话框。</p>\n",
         "Code": "@using AlertTypes = BlazorComponent.AlertTypes\r\n\r\n<div class=\"d-flex justify-space-between\">\r\n    <MButton Color=\"primary\" OnClick=\"() => Show()\">Default</MButton>\r\n    <MButton Color=\"success\" OnClick=\"() => Show(AlertTypes.Success)\">Success</MButton>\r\n    <MButton Color=\"info\" OnClick=\"() => Show(AlertTypes.Info)\">Info</MButton>\r\n    <MButton Color=\"warning\" OnClick=\"() => Show(AlertTypes.Warning)\">Warning</MButton>\r\n    <MButton Color=\"error\" OnClick=\"() => Show(AlertTypes.Error)\">Error</MButton>\r\n</div>\r\n\r\n<PConfirm Visible=\"visible\"\r\n          Title=\"确认操作\"\r\n          Type=\"type\"\r\n          OnCancel=\"Hide\"\r\n          OnOk=\"Ok\">\r\n    您确认该操作吗？\r\n</PConfirm>\r\n\r\n@code {\r\n\r\n    AlertTypes type = 0;\r\n    bool visible;\r\n\r\n    void Show(AlertTypes t = 0)\r\n    {\r\n        type = t;\r\n        visible = true;\r\n    }\r\n\r\n    void Hide()\r\n    {\r\n        visible = false;\r\n    }\r\n\r\n    void Ok()\r\n    {\r\n        visible = false;\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.props.Confirm",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "drawer",
-        "Title": "抽屉",
-        "Description": "",
-        "Code": "<MSwitch @bind-Value=\"left\" Label=\"Left Drawer\"></MSwitch>\r\n\r\n<PDrawer Left=\"left\"\r\n         Title=\"Drawer here!\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Toggle Drawer</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        <MSimpleTable Dense>\r\n            <thead>\r\n            <tr>\r\n                <th class=\"text-left\">\r\n                    Name\r\n                </th>\r\n                <th class=\"text-left\">\r\n                    Calories\r\n                </th>\r\n            </tr>\r\n            </thead>\r\n            <tbody>\r\n            @foreach (var item in _desserts)\r\n            {\r\n                <tr @key=\"item\">\r\n                    <td>@item.name</td>\r\n                    <td>@item.calories</td>\r\n                </tr>\r\n            }\r\n            </tbody>\r\n        </MSimpleTable>\r\n    </ChildContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    bool left;\r\n\r\n    private List<(string name, int calories)> _desserts = new()\r\n    {\r\n        (\"Frozen Yogurt\", 159),\r\n        (\"Ice cream sandwich\", 237),\r\n        (\"Eclair\", 262),\r\n        (\"Cupcake\", 305),\r\n        (\"Gingerbread\", 356),\r\n        (\"Jelly bean\", 375),\r\n        (\"Lollipop\", 392),\r\n        (\"Honeycomb\", 408),\r\n        (\"Donut\", 452),\r\n        (\"KitKat\", 518),\r\n    };\r\n\r\n}",
-        "Type": "Demos.Components.Presets.props.Drawer",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 2,
-        "Name": "formModal",
-        "Title": "表单对话框",
-        "Description": "<p>将表单和<code>Modal</code>结合，验证数据正确性。</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n@using System.Text.Json;\r\n\r\n<div>\r\n    <MButton OnClick=\"() => _addModal.Show()\" Class=\"mb-1\">Add User</MButton>\r\n\r\n    <Masa.Blazor.Presets.FormModal Visible=\"_addModal.Visible\"\r\n                                   Title=\"User\"\r\n                                   Width=\"500\"\r\n                                   Model=\"_addModal.Data\"\r\n                                   OnOk=\"HandleOnClick\"\r\n                                   OnCancel=\"HandleOnCancel\">\r\n        <MRow>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.UserName\"\r\n                            Label=\"UserName\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"@(\"auto\")\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.City\"\r\n                            Label=\"City\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"@(\"auto\")\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MRadioGroup @bind-Value=\"_addModal.Data.Gender\"\r\n                             Label=\"Gender:\"\r\n                             Row\r\n                             Dense\r\n                             Style=\"margin-top: 0\" \r\n                             HideDetails=\"@(\"auto\")\">\r\n                    <MRadio Label=\"男\" Value=\"0\"></MRadio>\r\n                    <MRadio Label=\"女\" Value=\"1\"></MRadio>\r\n                </MRadioGroup>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MAutocomplete @bind-Value=\"_addModal.Data.Favorites\" \r\n                               Items=\"_favorites\"\r\n                               Label=\"Favorites\"\r\n                               Multiple\r\n                               ItemValue=\"r => r\"\r\n                               ItemText=\"r => r\"\r\n                               HideDetails=\"@(\"auto\")\">\r\n                </MAutocomplete>\r\n            </MCol>\r\n        </MRow>\r\n        <MRow>\r\n            <MCol>@JsonSerializer.Serialize(_addModal.Data)</MCol>\r\n        </MRow>\r\n    </Masa.Blazor.Presets.FormModal>\r\n\r\n    <MRow NoGutters Class=\"pa-2\">\r\n        <MCol Cols=\"4\">username: @_user?.UserName</MCol>\r\n        <MCol Cols=\"4\">city: @_user?.City</MCol>\r\n        <MCol Cols=\"4\"></MCol>\r\n        <MCol Cols=\"4\">gender: @_user?.Gender</MCol>\r\n        <MCol Cols=\"4\">favorites: @string.Join(\",\", _user?.Favorites ?? new List<string>())</MCol>\r\n        <MCol Cols=\"4\">\r\n            <MButton OnClick=\"@(() => _addModal.Show(_user?.ShallowCopy()))\"\r\n                     Color=\"primary\"\r\n                     Disabled=\"@(_user == null)\"\r\n                     Text\r\n                     Small>\r\n                Edit\r\n            </MButton>\r\n        </MCol>\r\n    </MRow>\r\n</div>\r\n\r\n@code {\r\n    readonly List<string> _favorites = new() { \"Basketball\", \"Football\", \"Ping-pong\", \"Badminton\" };\r\n    \r\n    DataModal<User> _addModal = new();\r\n    User _user;\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        _addModal.Hide();\r\n    }\r\n\r\n    private async Task HandleOnClick()\r\n    {\r\n        _addModal.ShowLoading();\r\n\r\n        if (_addModal.HasValue)\r\n        {\r\n            // Update\r\n        }\r\n        else\r\n        {\r\n            // Add\r\n        }\r\n        \r\n        await Task.Delay(1000);\r\n\r\n        _user = _addModal.Data;\r\n\r\n        _addModal.HideLoading();\r\n\r\n        _addModal.Hide();\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        [Required]\r\n        public string UserName { get; set; }\r\n\r\n        [Range(0, 1)]\r\n        public int Gender { get; set; }\r\n\r\n        [Required]\r\n        public string City { get; set; }\r\n\r\n        [Required]\r\n        public List<string> Favorites { get; set; } = new() { };\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public class DataModal<T> where T : class, new()\r\n    {\r\n        public bool Visible { get; set; }\r\n\r\n        public T Data { get; private set; }\r\n\r\n        public bool HasValue { get; private set; }\r\n\r\n        public bool Loading { get; private set; }\r\n\r\n        public DataModal()\r\n        {\r\n            Data = new T();\r\n        }\r\n\r\n        public void Show() => Visible = true;\r\n\r\n        /// <summary>\r\n        /// 显示弹窗\r\n        /// </summary>\r\n        /// <param name=\"data\"></param>\r\n        /// <remarks>写入数据之前请确保此对象是拷贝过的</remarks>\r\n        public void Show(T data)\r\n        {\r\n            Visible = true;\r\n            HasValue = true;\r\n            Data = data;\r\n        }\r\n\r\n        public virtual void Hide()\r\n        {\r\n            Visible = false;\r\n            HasValue = false;\r\n            Data = new T();\r\n        }\r\n\r\n        public bool ShowLoading() => Loading = true;\r\n\r\n        public bool HideLoading() => Loading = false;\r\n    }\r\n\r\n    public interface IShallowCopy<T>\r\n    {\r\n        public T ShallowCopy();\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.props.FormModal",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 1,
-        "Name": "modal",
-        "Title": "对话框",
-        "Description": "<p>需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 <code>Modal</code> 在当前页面正中打开一个浮层，承载相应的操作。</p>\n",
-        "Code": "@using System.Text.Json;\r\n\r\n<div>\r\n    <MButton OnClick=\"() => _addModal.Show()\" Class=\"mb-1\">Add User</MButton>\r\n\r\n    <Masa.Blazor.Presets.Modal Visible=\"_addModal.Visible\" Title=\"User\"\r\n                               Width=\"500\"\r\n                               ScrollToTopOnHide\r\n                               OnOk=\"HandleOnClick\"\r\n                               OnCancel=\"HandleOnCancel\">\r\n        <MRow>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.UserName\"\r\n                            Label=\"UserName\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"true\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MTextField @bind-Value=\"_addModal.Data.City\"\r\n                            Label=\"City\"\r\n                            Dense\r\n                            Outlined\r\n                            HideDetails=\"true\"/>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MRadioGroup @bind-Value=\"_addModal.Data.Gender\"\r\n                             Label=\"Gender:\"\r\n                             Row\r\n                             Dense\r\n                             Style=\"margin-top: 0\"\r\n                             HideDetails=\"true\">\r\n                    <MRadio Label=\"Body\" Value=\"0\"></MRadio>\r\n                    <MRadio Label=\"Girl\" Value=\"1\"></MRadio>\r\n                </MRadioGroup>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MSelect @bind-Value=\"_addModal.Data.Friends\"\r\n                         Items=\"_friends\"\r\n                         Label=\"Friends\"\r\n                         Multiple\r\n                         ItemValue=\"r => r\"\r\n                         ItemText=\"r => r\"\r\n                         HideDetails=\"true\">\r\n                </MSelect>\r\n            </MCol>\r\n            <MCol Cols=\"12\">\r\n                <MAutocomplete @bind-Value=\"_addModal.Data.Favorites\"\r\n                               Items=\"_favorites\"\r\n                               Label=\"Favorites\"\r\n                               Multiple\r\n                               ItemValue=\"r => r\"\r\n                               ItemText=\"r => r\"\r\n                               HideDetails=\"true\">\r\n                </MAutocomplete>\r\n            </MCol>\r\n        </MRow>\r\n        <MRow>\r\n            <MCol>@JsonSerializer.Serialize(_addModal.Data)</MCol>\r\n        </MRow>\r\n    </Masa.Blazor.Presets.Modal>\r\n\r\n    <MRow NoGutters Class=\"pa-2\">\r\n        <MCol Cols=\"4\">username: @_user?.UserName</MCol>\r\n        <MCol Cols=\"4\">city: @_user?.City</MCol>\r\n        <MCol Cols=\"4\">gender: @_user?.Gender</MCol>\r\n        <MCol Cols=\"4\">friends: @string.Join(\",\", _user?.Friends ?? new List<string>())</MCol>\r\n        <MCol Cols=\"4\">favorites: @string.Join(\",\", _user?.Favorites ?? new List<string>())</MCol>\r\n        <MCol Cols=\"4\">\r\n            <MButton OnClick=\"() => _addModal.Show(_user?.ShallowCopy())\"\r\n                     Color=\"primary\"\r\n                     Disabled=\"@(_user == null)\"\r\n                     Text\r\n                     Small>\r\n                Edit\r\n            </MButton>\r\n        </MCol>\r\n    </MRow>\r\n</div>\r\n\r\n@code {\r\n    readonly List<string> _favorites = new() { \"Basketball\", \"Football\", \"Ping-pong\", \"Badminton\" };\r\n    readonly List<string> _friends = new() { \"Rachel Greene\", \"Monica Geller\", \"Joey Tribbiani\", \"Ross Geller\", \"Chandler Bing\", \"Phoebe Buffay\" };\r\n\r\n    DataModal<User> _addModal = new();\r\n    User _user;\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        _addModal.Hide();\r\n    }\r\n\r\n    private async Task HandleOnClick()\r\n    {\r\n        _addModal.ShowLoading();\r\n\r\n        if (_addModal.HasValue)\r\n        {\r\n    // Update\r\n        }\r\n        else\r\n        {\r\n    // Add\r\n        }\r\n\r\n        await Task.Delay(1000);\r\n\r\n        _user = _addModal.Data;\r\n\r\n        _addModal.HideLoading();\r\n\r\n        _addModal.Hide();\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        public string UserName { get; set; }\r\n        public int Gender { get; set; }\r\n        public string City { get; set; }\r\n        public List<string> Favorites { get; set; } = new() { };\r\n        public List<string> Friends { get; set; } = new() { };\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.Friends = Friends;\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public class DataModal<T> where T : class, new()\r\n    {\r\n        public bool Visible { get; set; }\r\n\r\n        public T Data { get; private set; }\r\n\r\n        public bool HasValue { get; private set; }\r\n\r\n        public bool Loading { get; private set; }\r\n\r\n        public DataModal()\r\n        {\r\n            Data = new T();\r\n        }\r\n\r\n        public void Show() => Visible = true;\r\n\r\n        /// <summary>\r\n    /// 显示弹窗\r\n    /// </summary>\r\n    /// <param name=\"data\"></param>\r\n    /// <remarks>写入数据之前请确保此对象是拷贝过的</remarks>\r\n        public void Show(T data)\r\n        {\r\n            Visible = true;\r\n            HasValue = true;\r\n            Data = data;\r\n        }\r\n\r\n        public virtual void Hide()\r\n        {\r\n            Visible = false;\r\n            HasValue = false;\r\n            Data = new T();\r\n        }\r\n\r\n        public bool ShowLoading() => Loading = true;\r\n\r\n        public bool HideLoading() => Loading = false;\r\n    }\r\n\r\n    public interface IShallowCopy<T>\r\n    {\r\n        public T ShallowCopy();\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.props.Modal",
+        "Type": "Demos.Components.Presets.children.NotGrouped.props.Confirm",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -5859,7 +6021,7 @@
         "Title": "页头",
         "Description": "<p>一个比较通用的页头，包括了标题，副标题，操作按钮和搜索栏。</p>\n",
         "Code": "<PPageHeader Title=\"Order\"\r\n             Subtitle=\"This is an order page!\"\r\n             OnBack=\"OnBack\"\r\n             OnSearch=\"OnSearch\"\r\n             ShowFiltersByDefault>\r\n    <LeftActions>\r\n        <MButton Color=\"primary\"><MIcon Left>mdi-plus</MIcon>Add Order</MButton>\r\n    </LeftActions>\r\n\r\n    <RightActions>\r\n        <MButton Icon OnClick=\"OnClear\">\r\n            <MIcon>mdi-refresh</MIcon>\r\n        </MButton>\r\n    </RightActions>\r\n\r\n    <Filters Context=\"filter\">\r\n        <MRow Dense>\r\n            <MCol Cols=\"6\">\r\n                <MTextField @bind-Value=\"orderId\"\r\n                            Label=\"Order ID\"\r\n                            Outlined\r\n                            Dense\r\n                            TValue=\"string\"\r\n                            HideDetails=\"true\"\r\n                            OnKeyDown=\"@filter.onEnter\">\r\n                </MTextField>\r\n            </MCol>\r\n            <MCol Cols=\"6\">\r\n                <MSelect @bind-Value=\"user\"\r\n                         Outlined\r\n                         Dense\r\n                         Label=\"User\"\r\n                         Items=\"users\"\r\n                         ItemValue=\"i => i\"\r\n                         ItemText=\"i => i\"\r\n                         HideDetails=\"true\"\r\n                         TItem=\"string\"\r\n                         TValue=\"string\"\r\n                         TItemValue=\"string\"\r\n                         OnSelectedItemUpdate=\"_ => filter.onSearch()\">\r\n                </MSelect>\r\n            </MCol>\r\n            <MCol Cols=\"6\">\r\n                <MMenu @bind-Value=\"visible1\"\r\n                       CloseOnContentClick=\"false\"\r\n                       OffsetY\r\n                       MinWidth=\"290\">\r\n                    <ActivatorContent>\r\n                        <MTextField @bind-Value=\"start\"\r\n                                    Label=\"Start date\"\r\n                                    Outlined\r\n                                    Dense\r\n                                    Readonly\r\n                                    HideDetails=\"true\"\r\n                                    @attributes=\"@context.Attrs\">\r\n                        </MTextField>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        <MDatePicker @bind-Value=\"date1\"\r\n                                     NoTitle\r\n                                     Scrollable>\r\n                            <MSpacer></MSpacer>\r\n                            <MButton Text\r\n                                     Color=\"primary\"\r\n                                     OnClick=\"() => visible1 = false\">\r\n                                Cancel\r\n                            </MButton>\r\n                            <MButton Text\r\n                                     Color=\"primary\"\r\n                                     OnClick=\"() => StartDateClick(filter.onSearch)\">\r\n                                OK\r\n                            </MButton>\r\n                        </MDatePicker>\r\n                    </ChildContent>\r\n                </MMenu>\r\n            </MCol>\r\n            <MCol Cols=\"6\">\r\n                <MMenu @bind-Value=\"visible2\"\r\n                       CloseOnContentClick=\"false\"\r\n                       OffsetY\r\n                       MinWidth=\"290\">\r\n                    <ActivatorContent>\r\n                        <MTextField @bind-Value=\"end\"\r\n                                    Label=\"End date\"\r\n                                    Readonly\r\n                                    Outlined\r\n                                    Dense\r\n                                    HideDetails=\"true\"\r\n                                    @attributes=\"@context.Attrs\">\r\n                        </MTextField>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        <MDatePicker @bind-Value=\"date2\"\r\n                                     NoTitle\r\n                                     Scrollable>\r\n                            <MSpacer></MSpacer>\r\n                            <MButton Text\r\n                                     Color=\"primary\"\r\n                                     OnClick=\"() => visible2 = false\">\r\n                                Cancel\r\n                            </MButton>\r\n                            <MButton Text\r\n                                     Color=\"primary\"\r\n                                     OnClick=\"() => EndDateClick(filter.onSearch)\">\r\n                                OK\r\n                            </MButton>\r\n                        </MDatePicker>\r\n                    </ChildContent>\r\n                </MMenu>\r\n            </MCol>\r\n        </MRow>\r\n    </Filters>\r\n</PPageHeader>\r\n\r\n@code {\r\n    readonly List<string> users = new() { \"Rachel Greene\", \"Monica Geller\", \"Joey Tribbiani\", \"Ross Geller\", \"Chandler Bing\", \"Phoebe Buffay\" };\r\n\r\n    DateOnly date1 = DateOnly.FromDateTime(DateTime.Now);\r\n    DateOnly date2 = DateOnly.FromDateTime(DateTime.Now);\r\n\r\n    bool visible1;\r\n    bool visible2;\r\n\r\n    string orderId;\r\n    string user;\r\n    string start;\r\n    string end;\r\n    \r\n    async Task StartDateClick(Func<Task> onSearch)\r\n    {\r\n        start = date1.ToShortDateString(); \r\n        visible1 = false;\r\n        await onSearch();\r\n    }\r\n\r\n    async Task EndDateClick(Func<Task> onSearch)\r\n    {\r\n        end = date2.ToShortDateString(); \r\n        visible2 = false;\r\n        await onSearch();\r\n    }\r\n\r\n    void OnBack()\r\n    {\r\n        // navigate\r\n    }\r\n\r\n    Task OnSearch()\r\n    {\r\n        return Task.Delay(1000);\r\n    }\r\n\r\n    void OnClear()\r\n    {\r\n        orderId = null;\r\n        user = null;\r\n        start = null;\r\n        end = null;\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.props.PageHeader",
+        "Type": "Demos.Components.Presets.children.NotGrouped.props.PageHeader",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -5870,7 +6032,7 @@
         "Title": "侧边栏",
         "Description": "<p>因为<code>MList</code>，<code>MListGroup</code>，<code>MListItem</code>和<code>MListItemGroup</code>这些组件的联系比较松散，无法通过一个给定的值来达到 <code>MListGroup</code> 自动展开的效果。因此做了一个这样的组件。</p>\n",
         "Code": "<Masa.Blazor.Presets.PSidebar @bind-Value=\"selectedKey\"\r\n                              Dense\r\n                              Color=\"indigo\"\r\n                              Items=\"menus\"\r\n                              Title=\"m => m.Label\"\r\n                              Icon=\"m => m.Icon\"\r\n                              Key=\"m => m.Value\"\r\n                              Children=\"m => m.SubMenus\"\r\n                              TItem=\"Menu\"\r\n                              OnClick=\"Click\">\r\n</Masa.Blazor.Presets.PSidebar>\r\n\r\n@code {\r\n\r\n    static List<Menu> menus = new()\r\n    {\r\n        new Menu() { Label = \"Home\", Icon = \"mdi-home\", Value = \"Home\" },\r\n        new Menu()\r\n        {\r\n            Label = \"Users\",\r\n            Icon = \"mdi-account-circle\",\r\n            Value = \"Users\",\r\n            SubMenus = new List<Menu>()\r\n            {\r\n                new()\r\n                {\r\n                    Label = \"Admin\",\r\n                    SubMenus = new List<Menu>()\r\n                    {\r\n                        new() { Label = \"Management\", Icon = \"mdi-account-multiple-outline\", Value = \"Management\" },\r\n                        new() { Label = \"Settings\", Icon = \"mdi-cog-outline\", Value = \"Settings\" },\r\n                    }\r\n                },\r\n                new()\r\n                {\r\n                    Label = \"Actions\",\r\n                    SubMenus = new List<Menu>()\r\n                    {\r\n                        new() { Label = \"Create\", Icon = \"mdi-plus-outline\", Value = \"Create\" },\r\n                        new() { Label = \"Read\", Icon = \"mdi-file-outline\", Value = \"Read\" },\r\n                        new() { Label = \"Update\", Icon = \"mdi-update\", Value = \"Update\" },\r\n                        new() { Label = \"Delete\", Icon = \"mdi-delete\", Value = \"Delete\" },\r\n                    }\r\n                },\r\n            }\r\n        },\r\n    };\r\n\r\n    StringNumber selectedKey = \"Management\";\r\n\r\n    void Click(Menu item)\r\n    {\r\n    // code with clicked item\r\n    }\r\n\r\n    class Menu\r\n    {\r\n        public string Label { get; set; }\r\n\r\n        public string Value { get; set; }\r\n\r\n        public string Icon { get; set; }\r\n\r\n        public List<Menu> SubMenus { get; set; }\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.props.Sidebar",
+        "Type": "Demos.Components.Presets.children.NotGrouped.props.Sidebar",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -5881,13 +6043,13 @@
     "Cols": 1,
     "Related": [
       "/components/buttons",
-      "/components/dialogs",
-      "/components/forms"
+      "/components/text-fields",
+      "/components/lists"
     ],
-    "Subtitle": "预置组件",
-    "Title": "Presets",
-    "Type": "预置组件",
-    "FullTitle": "Presets（预置组件）"
+    "Subtitle": "未分组的",
+    "Title": "Not Grouped",
+    "Type": "NotGrouped",
+    "FullTitle": "Not Grouped（未分组的）"
   },
   {
     "Desc": "<p>该组件用于向用户展示环形的数据。 它也可以设置为不确定的状态来表示加载。</p>\n",
@@ -5895,7 +6057,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.3045355+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8406035+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5972,7 +6134,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.310535+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8456135+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6137,7 +6299,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.3135346+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.167907+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6247,7 +6409,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.3155351+08:00",
+    "LastWriteTime": "2021-11-15T10:24:19.8466114+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -6303,7 +6465,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.3185358+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0756929+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6348,7 +6510,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.3205365+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1699113+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6425,7 +6587,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.3265353+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1739081+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6591,7 +6753,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.329548+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6668,7 +6830,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.331536+08:00",
+    "LastWriteTime": "2021-11-15T13:32:23.1759058+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6724,7 +6886,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n<li><a href=\"/api/MDataTableHeader\">MDataTableHeader</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.3415357+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0826969+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6989,7 +7151,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.3445355+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0836945+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7068,7 +7230,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当使用 <strong>Dark</strong> 属性和 <strong>不</strong> 提供自定义 <strong>Color</strong> 时，<code>MTabs</code>组件会将其颜色默认为 white。</p>\n<!--alert:warning-->\n<!--alert:warning-->\n<p>当使用包含必填输入字段的 <code>MTabItem</code> 时，你必须使用 <strong>eager</strong> prop 来验证尚未显示的必填字段。</p>\n<!--alert:warning-->\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.3515356+08:00",
+    "LastWriteTime": "2021-11-18T17:20:09.724454+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7267,7 +7429,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.3565363+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0886948+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7400,7 +7562,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>为了正确定位 <code>MTooltip</code>，需要一个位置支撑(<code>Top</code> | <code>Bottom</code> | <code>Left</code> | <code>Right</code>)。</p>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.3585347+08:00",
+    "LastWriteTime": "2021-10-29T13:31:00.2450964+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7456,7 +7618,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTreeview\">MTreeview</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.3655416+08:00",
+    "LastWriteTime": "2021-11-16T10:00:07.0936951+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7655,7 +7817,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2021-12-07T09:49:39.3685356+08:00",
+    "LastWriteTime": "2021-11-17T14:30:00.36988+08:00",
     "DemoList": [
       {
         "Order": 0,
