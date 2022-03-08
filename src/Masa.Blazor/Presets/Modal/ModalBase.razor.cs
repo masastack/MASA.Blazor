@@ -115,13 +115,13 @@ namespace Masa.Blazor.Presets
         public EventCallback<ModalActionEventArgs> OnDelete { get; set; }
 
         [Parameter]
-        public RenderFragment<(Func<MouseEventArgs, Task> click, bool loading)> OkContent { get; set; }
+        public RenderFragment<(Func<MouseEventArgs, Task> Click, bool Loading)> OkContent { get; set; }
 
         [Parameter]
-        public RenderFragment<(Func<MouseEventArgs, Task> click, bool loading)> DeleteContent { get; set; }
+        public RenderFragment<(Func<MouseEventArgs, Task> Click, bool Loading)> DeleteContent { get; set; }
 
         [Parameter]
-        public RenderFragment<(Func<MouseEventArgs, Task> click, bool loading)> CancelContent { get; set; }
+        public RenderFragment<(Func<MouseEventArgs, Task> Click, bool Loading)> CancelContent { get; set; }
 
         #endregion
 
@@ -149,9 +149,9 @@ namespace Masa.Blazor.Presets
 
             await base.SetParametersAsync(parameters);
 
-            OkText ??= "确定";
-            CancelText ??= "取消";
-            DeleteText ??= "删除";
+            OkText ??= "OK";
+            CancelText ??= "Cancel";
+            DeleteText ??= "Delete";
 
             ComputedOkButtonProps = GetDefaultOkButtonProps();
             ComputedCancelButtonProps = GetDefaultCancelButtonProps();

@@ -39,8 +39,8 @@
                          Dense
                          Style="margin-top: 0"
                          HideDetails="@("auto")">
-                <MRadio Label="男" Value="0"></MRadio>
-                <MRadio Label="女" Value="1"></MRadio>
+                <MRadio Label="Male" Value="0"></MRadio>
+                <MRadio Label="Female" Value="1"></MRadio>
             </MRadioGroup>
         </MCol>
         <MCol Cols="12">
@@ -138,9 +138,9 @@
         }
     }
 
-    public interface IShallowCopy<T>
+    public interface IShallowCopy<T> where T : new() 
     {
-        public T ShallowCopy();
+        T ShallowCopy();
     }
 
 }
