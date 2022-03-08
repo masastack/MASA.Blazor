@@ -44,7 +44,6 @@ pipeline {
                     cd src/BlazorComponent
                     git pull origin develop
                     cd ..&&cd ..
-                    //git clone -b develop https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
                     dotnet build src
                     dotnet pack src --include-symbols -p:PackageVersion=0.2."${BUILD_ID}"
                     dotnet nuget push "**/*.symbols.nupkg" -k $NUGET_KEY -s https://api.nuget.org/v3/index.json
