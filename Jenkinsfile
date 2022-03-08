@@ -102,8 +102,8 @@ pipeline {
             steps {
                 sh '''
                     echo $KUBE_CONFIG_DEV | base64 -d > ./config
-                    kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
-                    kubectl --kubeconfig ./config set image deployment/masa-blazor-docs-wasm masa-blazor-docs-wasm=$IMAGEWASM -n masa-blazor
+                    kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n test-masa-blazor
+                    kubectl --kubeconfig ./config set image deployment/masa-blazor-docs-wasm masa-blazor-docs-wasm=$IMAGEWASM -n test-masa-blazor
                     '''
             }
         }
