@@ -230,7 +230,6 @@ namespace Masa.Blazor.Doc.CLI.Commands
                          .Replace("Demo", "")
                          .ToLower()))
             {
-                
                 List<FileSystemInfo> showCaseFiles = demo.ToList();
                 FileSystemInfo razorFile = showCaseFiles.FirstOrDefault(x => x.Extension == ".razor");
                 FileSystemInfo descriptionFile = showCaseFiles.FirstOrDefault(x => x.Extension == ".md");
@@ -243,7 +242,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
                 (DescriptionYaml meta, string style, Dictionary<string, string> descriptions) descriptionContent =
                     descriptionFile != null ? DocWrapper.ParseDescription(File.ReadAllText(descriptionFile.FullName)) : default;
                 
-                Console.WriteLine($"{descriptionFile.FullName}");
+                Console.WriteLine($"md:{descriptionFile?.Name} razor:{razorFile?.Name}");
 
                 foreach (var (language, value) in descriptionContent.meta.Title)
                 {
