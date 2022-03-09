@@ -85,10 +85,10 @@ namespace Masa.Blazor.Presets
         [Parameter]
         public StringNumber Width { get; set; }
 
-        #region ok,cancel,delete
+        #region save,cancel,delete
 
         [Parameter]
-        public Action<ModalButtonProps> OkProps { get; set; }
+        public Action<ModalButtonProps> SaveProps { get; set; }
 
         [Parameter]
         public Action<ModalButtonProps> CancelProps { get; set; }
@@ -97,7 +97,7 @@ namespace Masa.Blazor.Presets
         public Action<ModalButtonProps> DeleteProps { get; set; }
 
         [Parameter]
-        public string OkText { get; set; }
+        public string SaveText { get; set; }
 
         [Parameter]
         public string CancelText { get; set; }
@@ -106,7 +106,7 @@ namespace Masa.Blazor.Presets
         public string DeleteText { get; set; }
 
         [Parameter]
-        public EventCallback<ModalActionEventArgs> OnOk { get; set; }
+        public EventCallback<ModalActionEventArgs> OnSave { get; set; }
 
         [Parameter]
         public EventCallback<ModalActionEventArgs> OnCancel { get; set; }
@@ -115,7 +115,7 @@ namespace Masa.Blazor.Presets
         public EventCallback<ModalActionEventArgs> OnDelete { get; set; }
 
         [Parameter]
-        public RenderFragment<(Func<MouseEventArgs, Task> Click, bool Loading)> OkContent { get; set; }
+        public RenderFragment<(Func<MouseEventArgs, Task> Click, bool Loading)> SaveContent { get; set; }
 
         [Parameter]
         public RenderFragment<(Func<MouseEventArgs, Task> Click, bool Loading)> DeleteContent { get; set; }
@@ -125,19 +125,19 @@ namespace Masa.Blazor.Presets
 
         #endregion
 
-        private bool _okLoading;
+        private bool _saveLoading;
         private bool _scrolledToTop;
-        private Func<MouseEventArgs, Task> _debounceHandleOnOk;
+        private Func<MouseEventArgs, Task> _debounceHandleOnSave;
 
         private MCardText BodyRef { get; set; }
 
-        private bool Loading => _okLoading; // may add the _deleteLoading in the future 
+        private bool Loading => _saveLoading; // may add the _deleteLoading in the future 
 
-        protected bool HasActions => OnDelete.HasDelegate || OnOk.HasDelegate;
+        protected bool HasActions => OnDelete.HasDelegate || OnSave.HasDelegate;
 
         protected MForm Form { get; set; }
 
-        protected ModalButtonProps ComputedOkButtonProps { get; set; }
+        protected ModalButtonProps ComputedSaveButtonProps { get; set; }
 
         protected ModalButtonProps ComputedCancelButtonProps { get; set; }
 
@@ -149,29 +149,29 @@ namespace Masa.Blazor.Presets
 
             await base.SetParametersAsync(parameters);
 
-            OkText ??= "OK";
+            SaveText ??= "Save";
             CancelText ??= "Cancel";
             DeleteText ??= "Delete";
 
-            ComputedOkButtonProps = GetDefaultOkButtonProps();
+            ComputedSaveButtonProps = GetDefaultSaveButtonProps();
             ComputedCancelButtonProps = GetDefaultCancelButtonProps();
             ComputedDeleteButtonProps = GetDefaultDeleteButtonProps();
 
-            OkProps?.Invoke(ComputedOkButtonProps);
+            SaveProps?.Invoke(ComputedSaveButtonProps);
             CancelProps?.Invoke(ComputedCancelButtonProps);
             DeleteProps?.Invoke(ComputedDeleteButtonProps);
         }
 
         protected override void OnInitialized()
         {
-            _debounceHandleOnOk = DebounceEvent<MouseEventArgs>(
+            _debounceHandleOnSave = DebounceEvent<MouseEventArgs>(
                 async (_) =>
                 {
                     var args = new ModalActionEventArgs();
 
-                    _okLoading = true;
-                    await OnOk.InvokeAsync(args);
-                    _okLoading = false;
+                    _saveLoading = true;
+                    await OnSave.InvokeAsync(args);
+                    _saveLoading = false;
 
                     if (args.Cancelled) return;
 
@@ -200,18 +200,18 @@ namespace Masa.Blazor.Presets
             }
         }
 
-        protected virtual async Task HandleOnOk(MouseEventArgs args)
+        protected virtual async Task HandleOnSave(MouseEventArgs args)
         {
             if (Form != null)
             {
                 if (Form.EditContext.Validate())
                 {
-                    await _debounceHandleOnOk(args);
+                    await _debounceHandleOnSave(args);
                 }
             }
             else
             {
-                await _debounceHandleOnOk(args);
+                await _debounceHandleOnSave(args);
             }
         }
 
@@ -240,7 +240,7 @@ namespace Masa.Blazor.Presets
             }
         }
 
-        protected virtual ModalButtonProps GetDefaultOkButtonProps() => new()
+        protected virtual ModalButtonProps GetDefaultSaveButtonProps() => new()
         {
             Color = "primary",
             Text = true,

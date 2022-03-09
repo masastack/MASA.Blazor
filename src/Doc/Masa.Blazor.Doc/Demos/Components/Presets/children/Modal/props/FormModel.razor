@@ -15,7 +15,7 @@
         FormModel="userModel"
         Title="Title"
         Width="500"
-        OnOk="HandleOnOk"
+        OnSave="HandleOnSave"
         OnCancel="HandleOnCancel">
     <MRow>
         <MCol Cols="12">
@@ -87,7 +87,7 @@
         value = true;
     }
 
-    private async Task HandleOnOk(ModalActionEventArgs args)
+    private async Task HandleOnSave(ModalActionEventArgs args)
     {
         try
         {

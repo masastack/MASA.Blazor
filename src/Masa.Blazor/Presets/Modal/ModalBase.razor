@@ -72,26 +72,26 @@
                         else
                         {
                             <ModalButton Props="ComputedCancelButtonProps"
-                                         Disabled="_okLoading"
+                                         Disabled="_saveLoading"
                                          OnClick="HandleOnCancel">
                                 @CancelText
                             </ModalButton>
                         }
                     }
 
-                    @if (OnOk.HasDelegate)
+                    @if (OnSave.HasDelegate)
                     {
-                        if (OkContent != null)
+                        if (SaveContent != null)
                         {
-                            @OkContent((HandleOnOk, Loading))
+                            @SaveContent((HandleOnSave, Loading))
                         }
                         else
                         {
-                            <ModalButton Props="ComputedOkButtonProps"
-                                         Disabled="_okLoading"
-                                         Loading="_okLoading"
-                                         OnClick="HandleOnOk">
-                                @OkText
+                            <ModalButton Props="ComputedSaveButtonProps"
+                                         Disabled="_saveLoading"
+                                         Loading="_saveLoading"
+                                         OnClick="HandleOnSave">
+                                @SaveText
                             </ModalButton>
                         }
                     }

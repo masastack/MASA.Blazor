@@ -1,10 +1,10 @@
 ﻿<PModal @bind-Value="value" 
         Title="Title"
         Width="500"
-        OkProps="props => props.Outlined = true"
+        SaveProps="props => props.Outlined = true"
         CancelProps="@(props => props.Color = "orange")"
         DeleteProps="@(props => props.Style = "font-weight:bold;")"
-        OnOk="OnOk" 
+        OnSave="OnSave" 
         OnCancel="OnCancel" 
         OnDelete="OnDelete">
     <ActivatorContent>
@@ -19,7 +19,7 @@
 
     private bool value;
 
-    private async Task OnOk()
+    private async Task OnSave()
     {
         await Task.Delay(1000);
 

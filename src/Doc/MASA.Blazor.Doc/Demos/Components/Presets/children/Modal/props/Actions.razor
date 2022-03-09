@@ -4,7 +4,7 @@
         HideCancelAction="hideCancelAction" 
         Title="Title"
         Width="500"
-        OnOk="OnOk" 
+        OnSave="OnSave" 
         OnCancel="OnCancel" 
         OnDelete="OnDelete">
     <ActivatorContent>
@@ -20,7 +20,7 @@
     private bool value;
     private bool hideCancelAction;
 
-    private async Task OnOk()
+    private async Task OnSave()
     {
         await Task.Delay(1000);
 

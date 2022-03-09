@@ -1,7 +1,7 @@
 ﻿<PModal @bind-Value="value"
         Title="Title"
         Width="500"
-        OnOk="OnOk"
+        OnSave="OnSave"
         OnCancel="OnCancel"
         OnDelete="OnDelete">
     <ActivatorContent>
@@ -20,18 +20,18 @@
             <MIcon>mdi-cancel</MIcon>
         </MButton>
     </CancelContent>
-    <OkContent Context="ok">
-        <MButton Icon Color="primary" OnClick="ok.Click" Disabled="ok.Loading" Loading="ok.Loading">
+    <SaveContent Context="save">
+        <MButton Icon Color="primary" OnClick="save.Click" Disabled="save.Loading" Loading="save.Loading">
             <MIcon>mdi-check</MIcon>
         </MButton>
-    </OkContent>
+    </SaveContent>
 </PModal>
 
 @code {
 
     private bool value;
 
-    private async Task OnOk()
+    private async Task OnSave()
     {
         await Task.Delay(1000);
         value = false;
