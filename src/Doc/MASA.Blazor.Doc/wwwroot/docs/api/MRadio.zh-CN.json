@@ -23,27 +23,14 @@
       "Description": "将暗色主题变量应用到组件。"
     },
     {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "Id",
       "Type": "String",
       "Default": "null",
-      "Description": ""
-    },
-    {
-      "Name": "IsActive",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "IsDisabled",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "IsReadonly",
-      "Type": "Boolean",
-      "Default": "false",
       "Description": ""
     },
     {
@@ -68,6 +55,11 @@
       "Name": "OnIcon",
       "Type": "String",
       "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Readonly",
+      "Type": "Boolean",
       "Description": ""
     },
     {

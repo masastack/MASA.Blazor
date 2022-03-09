@@ -65,9 +65,8 @@
       "Description": ""
     },
     {
-      "Name": "InLine",
+      "Name": "Inline",
       "Type": "Boolean",
-      "Default": "false",
       "Description": ""
     },
     {
