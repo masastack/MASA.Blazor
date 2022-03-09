@@ -239,6 +239,8 @@ namespace Masa.Blazor.Doc.CLI.Commands
 
                 (DescriptionYaml meta, string style, Dictionary<string, string> descriptions) descriptionContent =
                     descriptionFile != null ? DocWrapper.ParseDescription(File.ReadAllText(descriptionFile.FullName)) : default;
+                
+                Console.WriteLine($"{descriptionFile.FullName}");
 
                 foreach (var (language, value) in descriptionContent.meta.Title)
                 {
