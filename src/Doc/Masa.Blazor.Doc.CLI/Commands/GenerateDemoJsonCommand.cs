@@ -81,7 +81,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
 
                 var componentModels = new List<Dictionary<string, DemoComponentModel>>();
                 var demoTypes = new List<string>();
-                foreach (var fileSystemInfo in componentsDirectory.GetFileSystemInfos())
+                foreach (var fileSystemInfo in componentsDirectory.GetFileSystemInfos().OrderBy(info => info.Name))
                 {
                     if (fileSystemInfo is not DirectoryInfo componentDirectory) continue;
 
