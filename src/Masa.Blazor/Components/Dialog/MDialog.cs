@@ -21,13 +21,13 @@ namespace Masa.Blazor
         public string ContentClass { get; set; }
 
         [Parameter]
-        public string Origin { get; set; } = "center center";
+        public string Origin { get; set; }
 
         [Parameter]
         public bool Scrollable { get; set; }
 
         [Parameter]
-        public string Transition { get; set; } = "dialog-transition";
+        public string Transition { get; set; }
 
         public Dictionary<string, object> ContentAttrs
         {
@@ -44,6 +44,14 @@ namespace Masa.Blazor
 
                 return attrs;
             }
+        }
+
+        public override async Task SetParametersAsync(ParameterView parameters)
+        {
+            await base.SetParametersAsync(parameters);
+
+            Origin ??= "center center";
+            Transition ??= "dialog-transition";
         }
 
         protected override void SetComponentClass()
