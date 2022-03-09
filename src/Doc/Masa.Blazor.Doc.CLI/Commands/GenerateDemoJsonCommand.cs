@@ -220,6 +220,8 @@ namespace Masa.Blazor.Doc.CLI.Commands
         {
             if (dir == null || !dir.Exists) return;
 
+            Console.WriteLine(dir.FullName);
+
             foreach (IGrouping<string, FileSystemInfo> demo in (dir as DirectoryInfo).GetFileSystemInfos()
                      .OrderBy(r => r.Name)
                      .GroupBy(x => x.Name.Replace(x.Extension, "")
@@ -228,6 +230,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
                          .Replace("Demo", "")
                          .ToLower()))
             {
+                
                 List<FileSystemInfo> showCaseFiles = demo.ToList();
                 FileSystemInfo razorFile = showCaseFiles.FirstOrDefault(x => x.Extension == ".razor");
                 FileSystemInfo descriptionFile = showCaseFiles.FirstOrDefault(x => x.Extension == ".md");
