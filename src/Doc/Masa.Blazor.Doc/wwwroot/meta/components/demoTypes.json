@@ -430,6 +430,7 @@
   "Demos.Components.Presets.children.CopyableText.usage.Index",
   "Demos.Components.Presets.children.CopyableText.props.Icon",
   "Demos.Components.Presets.children.CopyableText.props.Text",
+  "Demos.Components.Presets.children.CopyableText.props.TextTruncate",
   "Demos.Components.Presets.children.CopyableText.props.Tooltip",
   "Demos.Components.Presets.children.Drawer.usage.Index",
   "Demos.Components.Presets.children.Drawer.props.ActionProps",

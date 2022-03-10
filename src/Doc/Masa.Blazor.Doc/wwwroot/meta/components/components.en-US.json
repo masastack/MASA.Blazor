@@ -5828,6 +5828,17 @@
       },
       {
         "Order": 0,
+        "Name": "textTruncate",
+        "Title": "Text truncate",
+        "Description": "",
+        "Code": "<div style=\"width: 150px;\">\r\n    <PCopyableText ContentClass=\"text-truncate\"\r\n                   ContentStyle=\"display:inline-block;vertical-align:top;width:100%;\">\r\n        There is a text that can be copied.\r\n    </PCopyableText>\r\n</div>",
+        "Type": "Demos.Components.Presets.children.CopyableText.props.TextTruncate",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
         "Name": "tooltip",
         "Title": "Tooltip",
         "Description": "",
