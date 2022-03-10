@@ -591,3 +591,26 @@ code[class*=language-], pre[class*=language-] {
 .m-page-tabs__content .m-list-item.m-list-item--dense {
     min-height: 30px
 }
+
+.m-presets-block-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.m-presets-block-text .m-presets-block-text__primary {
+}
+
+.m-presets-block-text .m-presets-block-text__secondary {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: .75rem;
+    line-height: 16px;
+}
+
+.m-presets-copyable-text {
+}
+
+.m-presets-copyable-text .m-presets-copyable-text__content {
+}
+
+.m-presets-copyable-text .m-presets-copyable-text__icon {
+}

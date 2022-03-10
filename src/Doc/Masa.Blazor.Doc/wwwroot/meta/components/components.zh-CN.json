@@ -5794,9 +5794,126 @@
     "FullTitle": "Time pickers（时间选择器）"
   },
   {
+    "Desc": "<p>将相同类型的两个数据并列显示。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-09T17:07:02.0041596+08:00",
+    "LastWriteTime": "2022-03-10T17:18:57.0159013+08:00",
+    "DemoList": [
+      {
+        "Order": 1,
+        "Name": "index",
+        "Title": "使用",
+        "Description": "",
+        "Code": "<PBlockText Primary=\"@DateOnly.FromDateTime(DateTime.Now).ToString()\"\r\n            Secondary=\"@TimeOnly.FromDateTime(DateTime.Now).ToString()\">\r\n</PBlockText>",
+        "Type": "Demos.Components.Presets.children.BlockText.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "tags",
+        "Title": "标签",
+        "Description": "",
+        "Code": "<PBlockText Primary=\"MASA Blazor\"\r\n            Secondary=\"A UI component library\"\r\n            Tags=\"@tags\">\r\n</PBlockText>\r\n\r\n@code {\r\n\r\n    static IEnumerable<BlockTextTag> tags = new List<BlockTextTag>()\r\n    {\r\n        new(\"Blazor\", \"green\", \"white\"),\r\n        new(\"Material Design\", \"purple\", true)\r\n    };\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.BlockText.props.Tags",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "contents",
+        "Title": "自定义内容",
+        "Description": "",
+        "Code": "<PBlockText>\r\n    <PrimaryContent>\r\n        <PCopyableText>MASA.Blazor</PCopyableText>\r\n    </PrimaryContent>\r\n    <SecondaryContent>\r\n        <PCopyableText>A UI component library</PCopyableText>\r\n    </SecondaryContent>\r\n</PBlockText>",
+        "Type": "Demos.Components.Presets.children.BlockText.contents.Contents",
+        "Style": "",
+        "Debug": false,
+        "Group": 2
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/chips",
+      "/components/copyable-text",
+      "/components/ellipsis-text"
+    ],
+    "Subtitle": "文本块",
+    "Title": "Block text",
+    "Type": "BlockText",
+    "FullTitle": "Block text（文本块）"
+  },
+  {
+    "Desc": "<p>在文本后提供可以复制内容的图标按钮。</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-03-10T18:52:58.0606241+08:00",
+    "DemoList": [
+      {
+        "Order": 1,
+        "Name": "index",
+        "Title": "使用",
+        "Description": "",
+        "Code": "<PCopyableText>\r\n    There is a text that can be copied.\r\n</PCopyableText>",
+        "Type": "Demos.Components.Presets.children.CopyableText.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "icon",
+        "Title": "图标",
+        "Description": "",
+        "Code": "<PCopyableText CopyIcon=\"mdi-clipboard-text\"\r\n               CopyIconColor=\"orange\"\r\n               CopiedIcon=\"mdi-check-circle\">\r\n    Custom icons.\r\n</PCopyableText>",
+        "Type": "Demos.Components.Presets.children.CopyableText.props.Icon",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "text",
+        "Title": "复制的内容",
+        "Description": "",
+        "Code": "<PCopyableText Text=\"Text that you specific\">\r\n    Copy the text that you specific by parameter Text.\r\n</PCopyableText>",
+        "Type": "Demos.Components.Presets.children.CopyableText.props.Text",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "tooltip",
+        "Title": "提示",
+        "Description": "",
+        "Code": "<PCopyableText Tooltip=\"Do you wanna copy?\"\r\n               TooltipClass=\"orange\">\r\n    Custom tooltip.\r\n</PCopyableText>",
+        "Type": "Demos.Components.Presets.children.CopyableText.props.Tooltip",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/icons",
+      "/components/tooltips",
+      "/components/block-text"
+    ],
+    "Subtitle": "可复制的文本",
+    "Title": "Copyable text",
+    "Type": "CopyableText",
+    "FullTitle": "Copyable text（可复制的文本）"
+  },
+  {
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-03-10T17:08:06.4945893+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5906,7 +6023,7 @@
     "OtherDocs": {
       "API": "\n"
     },
-    "LastWriteTime": "2022-03-09T17:07:02.0261547+08:00",
+    "LastWriteTime": "2022-03-10T17:08:06.502587+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6002,7 +6119,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-09T17:07:02.0321579+08:00",
+    "LastWriteTime": "2022-03-10T17:08:06.502587+08:00",
     "DemoList": [
       {
         "Order": 0,
