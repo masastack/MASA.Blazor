@@ -10,8 +10,29 @@
         "Title": "Presets",
         "FullTitle": "Presets",
         "Type": "menuItem",
-        "Url": "components/presets",
-        "Children": []
+        "Children": [
+          {
+            "Order": 0,
+            "Title": "Drawers",
+            "FullTitle": "Drawers",
+            "Type": "menuItem",
+            "Url": "components/drawers"
+          },
+          {
+            "Order": 0,
+            "Title": "Modals",
+            "FullTitle": "Modals",
+            "Type": "menuItem",
+            "Url": "components/modals"
+          },
+          {
+            "Order": 0,
+            "Title": "Not Grouped",
+            "FullTitle": "Not Grouped",
+            "Type": "menuItem",
+            "Url": "components/not-grouped"
+          }
+        ]
       }
     ]
   },

@@ -451,7 +451,7 @@ namespace Masa.Blazor
             }
         }
 
-        async Task IHandleEvent.HandleEventAsync(EventCallbackWorkItem item, object? arg)
+        async Task IHandleEvent.HandleEventAsync(EventCallbackWorkItem item, object arg)
         {
             await item.InvokeAsync(arg);
         }
