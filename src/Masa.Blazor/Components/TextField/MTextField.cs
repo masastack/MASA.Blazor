@@ -2,12 +2,6 @@
 using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor
 {
@@ -524,9 +518,9 @@ namespace Masa.Blazor
             //So that,view will not change untill 300ms no actions
             _shouldRender = false;
 
-            _cancellationTokenSource?.Cancel();
-            _cancellationTokenSource = new CancellationTokenSource();
-            await Task.Delay(300, _cancellationTokenSource.Token);
+            //_cancellationTokenSource?.Cancel();
+            //_cancellationTokenSource = new CancellationTokenSource();
+            //await Task.Delay(300, _cancellationTokenSource.Token);
 
             var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
             if (success)
@@ -545,7 +539,7 @@ namespace Masa.Blazor
             }
 
             _shouldRender = true;
-            StateHasChanged();
+            //StateHasChanged();
         }
 
         protected override bool ShouldRender()
