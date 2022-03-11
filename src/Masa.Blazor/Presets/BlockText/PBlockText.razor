@@ -1,0 +1,42 @@
+﻿@namespace Masa.Blazor.Presets
+
+<div class="m-presets-block-text @Class" style="@Style">
+    <div class="m-presets-block-text__primary @PrimaryClass" style="@PrimaryStyle">
+        @if (PrimaryContent is not null)
+        {
+            @PrimaryContent
+        }
+        else
+        {
+            @Primary
+        }
+    </div>
+    <div class="d-flex align-items-center">
+        @foreach (var tag in Tags!)
+        {
+            <MChip @key="tag"
+                   Class="@($"mr-1 {tag.Class}")"
+                   Color="@tag.Color"
+                   Label
+                   Outlined="@tag.Outlined"
+                   TextColor="@tag.TextColor"
+                   XSmall>
+                @tag.Text
+            </MChip>
+        }
+
+        @if (Secondary != default || SecondaryContent is not null)
+        {
+            <span class="m-presets-block-text__secondary @SecondaryClass" style="@SecondaryStyle">
+                @if (SecondaryContent is not null)
+                {
+                    @SecondaryContent
+                }
+                else
+                {
+                    @Secondary
+                }
+            </span>
+        }
+    </div>
+</div>

@@ -14,6 +14,22 @@
         "Children": [
           {
             "Order": 0,
+            "Title": "Block text",
+            "SubTitle": "文本块",
+            "FullTitle": "Block text (文本块)",
+            "Type": "menuItem",
+            "Url": "components/block-text"
+          },
+          {
+            "Order": 0,
+            "Title": "Copyable text",
+            "SubTitle": "可复制的文本",
+            "FullTitle": "Copyable text (可复制的文本)",
+            "Type": "menuItem",
+            "Url": "components/copyable-text"
+          },
+          {
+            "Order": 0,
             "Title": "Drawers",
             "SubTitle": "抽屉",
             "FullTitle": "Drawers (抽屉)",

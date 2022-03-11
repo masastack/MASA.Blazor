@@ -1,0 +1,28 @@
+﻿@namespace Masa.Blazor.Presets
+
+<div class="text-no-wrap m-presets-copyable-text @Class" style="@Style">
+    <span class="m-presets-copyable-text__content @ContentClass"
+          style="@ContentStyle"
+          @ref="Ref">
+        @ChildContent
+    </span>
+
+    <MTooltip ContentClass="@TooltipClass"
+              ContentStyle="@TooltipStyle"
+              Disabled="@DisableTooltip" 
+              Top>
+        <ActivatorContent>
+            <MIcon Class="m-presets-copyable-text__icon"
+                   Color="@CopyIconColor"
+                   Disabled="_copying"
+                   Small
+                   OnClick="HandleOnCopy"
+                   @attributes="@context.Attrs">
+                @Icon
+            </MIcon>
+        </ActivatorContent>
+        <ChildContent>
+            @Tooltip
+        </ChildContent>
+    </MTooltip>
+</div>

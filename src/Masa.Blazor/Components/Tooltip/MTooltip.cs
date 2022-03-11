@@ -44,6 +44,7 @@ namespace Masa.Blazor
                 }, styleBuilder =>
                 {
                     styleBuilder
+                        .Add(ContentStyle)
                         .AddMaxWidth(MaxWidth)
                         .AddMinWidth(MinWidth)
                         .Add($"left:{CalculatedLeft}px")
