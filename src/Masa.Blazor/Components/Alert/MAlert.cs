@@ -133,7 +133,8 @@ namespace Masa.Blazor
                         .AddMinHeight(MinHeight)
                         .AddWidth(Width)
                         .AddMaxWidth(MaxWidth)
-                        .AddMinWidth(MinWidth);
+                        .AddMinWidth(MinWidth)
+                        .AddIf("display:none", () => Transition == null && !Value);
                 })
                 .Apply("wrapper", cssBuilder => { cssBuilder.Add("m-alert__wrapper"); })
                 .Apply("content", cssBuilder => { cssBuilder.Add("m-alert__content"); })
