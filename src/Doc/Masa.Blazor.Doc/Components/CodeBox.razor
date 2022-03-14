@@ -59,7 +59,7 @@
             </div>
 
             <ExpandTransition>
-                <Element Show="_expend">
+                <ShowTransitionElement Value="_expend">
                     <MDivider></MDivider>
                     <MItemGroup @bind-Value="_activeItem" Class="pa-2" Mandatory>
                         @foreach (var ((type, _), content) in _items)
@@ -82,7 +82,7 @@
                             </MWindowItem>
                         }
                     </MWindow>
-                </Element>
+                </ShowTransitionElement>
             </ExpandTransition>
         }
         else

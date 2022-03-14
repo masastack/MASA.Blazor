@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.5754762+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.2065632+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -187,7 +187,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.5764785+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.2085675+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -219,7 +219,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.5794771+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.2145629+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -318,7 +318,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.5814788+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.2185568+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -394,7 +394,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.5834789+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.2245589+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -483,7 +483,7 @@
       "�������": "\n<ul>\n<li><code>MAppBarNavIcon</code>��A stylized icon button component created specifically for use with [MToolbar] (/components/toolbars) and 'MAppBar'. The hamburger menu is displayed on the left side of the toolbar, which is usually used to control the status of the navigation drawer. The default slot can be used to customize the icons and functions of this component.</li>\n<li><code>MAppBarTitle</code>��The modified [MToolbarTitle] (/components/toolbars) component is used in conjunction with the * * shrinkonscroll * * attribute. On the small screen, * * MToolbarTitle**\nWill be truncated, but this component uses absolute positioning when expanding to make its contents visible. We do not recommend that you use the 'MAppbarTitle' component without using the * * shrinkonscroll * * attribute. It's really because the resize event was added to this component and a lot of additional calculations were done.</li>\n</ul>\n",
       "ע������": "\n<!--alert:warning-->\n<p>When 'MButton' with <strong>icon</strong> attribute is used inside 'MToolbar' and 'MAppbar', they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap the buttons in any container, such as' div ', you need to apply a negative margin to the container in order to align them correctly.</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.5874773+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.2335632+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -636,7 +636,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.5894856+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.2385323+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -713,7 +713,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
       "ע��": "\n<!--alert:warning-->\n<p>When 'MButton' with 'icon' prop is used inside 'MToolbar' and 'MAppbar', they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap your buttons in any container, such as' div ', you need to apply a negative margin to the container for proper alignment.</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.5934776+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.2475582+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -866,7 +866,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.5944752+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.2505642+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -910,7 +910,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>By default <code>MBreadcrumbs</code> will disable the linkage with router. You can enable the feature by using *<em>Linkage</em> prop.</p>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.5974782+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.2565646+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -999,7 +999,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>MButton</code> is the only component that behaves differently when using the <strong>Dark</strong> prop. Normally components use the <strong>Dark</strong> prop to denote that they have a dark colored background and need their text to be white. While this will work\nfor <code>MButton</code>, it is advised to only use the prop when the button <strong>IS ON</strong> a colored background due to the disabled state\nblending in with white backgrounds. If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6004786+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.2655645+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1165,7 +1165,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "�������": "\n<ul>\n<li><code>MCardActions</code>:A container used to place actions for cards, such as [MButton] (/components/buttons) or [MMenu] (/components/menu). Use a special margin on the button at the same time\nSo that they match other card content areas.</li>\n<li><code>MCardSubtitle</code>:Provide default <strong>font size</strong> and <strong>fill</strong> for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n<li><code>MCardText</code>:It is mainly used for <strong>text content</strong> in cards. Apply padding to the text and reduce its font size to. 875rem.</li>\n<li><code>MCardTitle</code>:Provide default font size and padding for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.604476+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.2745625+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1319,7 +1319,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6094761+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.285563+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1506,7 +1506,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.613478+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.2925622+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1637,7 +1637,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6154786+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.2985308+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1714,7 +1714,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6165863+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.3015384+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1764,7 +1764,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6206454+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.3085626+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1859,7 +1859,7 @@
         "Name": "advanced",
         "Title": "Advanced",
         "Description": "<p>The expansion panel component provides a rich playground to build truly advanced implementations. Here we take advantage of slots in the <code>MExpansionPanelHeader</code>  component to react to the state of being open or closed by fading content in and out.</p>\n",
-        "Code": "<MExpansionPanels>\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Trip name\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        @*TODO: Transition need to update, support LeaveAbsolute*@\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>\r\n                                Enter a name for the trip\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <span>\r\n                                @trip.name\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MTextField @bind-Value=\"@trip.name\"\r\n                        placeholder=\"Caribbean Cruise\">\r\n            </MTextField>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Location\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>\r\n                                Select trip destination\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <span>\r\n                                @trip.location\r\n                            </span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MRow NoGutters>\r\n                <MSpacer></MSpacer>\r\n                <MCol Cols=\"5\">\r\n                    <MSelect @bind-Value=\"trip.location\"\r\n                             Items=\"locations\"\r\n                             ItemValue=\"item => item\"\r\n                             ItemText=\"item => item\"\r\n                             Chips\r\n                             Flat\r\n                             Solo>\r\n                    </MSelect>\r\n                </MCol>\r\n\r\n                <MDivider Vertical\r\n                          Class=\"mx-4\">\r\n                </MDivider>\r\n\r\n                <MCol Cols=\"3\">\r\n                    Select your destination of choice\r\n                    <br>\r\n                    <a href=\"/components/expansion-panels\">Learn more</a>\r\n                </MCol>\r\n            </MRow>\r\n\r\n            <MCardActions>\r\n                <MSpacer></MSpacer>\r\n                <MButton Text\r\n                         Color=\"secondary\">\r\n                    Cancel\r\n                </MButton>\r\n                <MButton Text\r\n                         Color=\"primary\">\r\n                    Save\r\n                </MButton>\r\n            </MCardActions>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Start and end dates\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        <Element Show=\"context\" Style=\"position: absolute\">\r\n                            <span>When do you want to travel?</span>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <Element Show=\"!context\">\r\n                            <MRow NoGutters\r\n                                  Style=\"width: 100%\">\r\n                                <MCol Cols=\"6\">\r\n                                    Start date: @(trip.start ?? \"Not set\")\r\n                                </MCol>\r\n                                <MCol Cols=\"6\">\r\n                                    End date: @(trip.end ?? \"Not set\")\r\n                                </MCol>\r\n                            </MRow>\r\n                        </Element>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MRow Justify=\"JustifyTypes.SpaceAround\"\r\n                  NoGutters>\r\n                <MCol Cols=\"3\">\r\n                    <MMenu @bind-Value=\"visible\"\r\n                           CloseOnContentClick=\"false\"\r\n                           OffsetY\r\n                           MinWidth=\"290\">\r\n                        <ActivatorContent>\r\n                            <MTextField @bind-Value=\"trip.start\"\r\n                                        Label=\"Start date\"\r\n                                        PrependIcon=\"mdi-calendar\"\r\n                                        Readonly\r\n                                        @attributes=\"@context.Attrs\">\r\n                            </MTextField>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MDatePicker @bind-Value=\"date\"\r\n                                         NoTitle\r\n                                         Scrollable>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => visible = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => { trip.start = date.ToShortDateString(); visible = false;}\">\r\n                                    OK\r\n                                </MButton>\r\n                            </MDatePicker>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n\r\n                <MCol Cols=\"3\">\r\n                    <MMenu @bind-Value=\"visible2\"\r\n                           CloseOnContentClick=\"false\"\r\n                           OffsetY\r\n                           MinWidth=\"290\">\r\n                        <ActivatorContent>\r\n                            <MTextField @bind-Value=\"trip.end\"\r\n                                        Label=\"End date\"\r\n                                        PrependIcon=\"mdi-calendar\"\r\n                                        Readonly\r\n                                        @attributes=\"@context.Attrs\">\r\n                            </MTextField>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MDatePicker @bind-Value=\"date2\"\r\n                                         NoTitle\r\n                                         Scrollable>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => visible2 = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => { trip.end = date2.ToShortDateString(); visible2 = false; }\">\r\n                                    OK\r\n                                </MButton>\r\n                            </MDatePicker>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n</MExpansionPanels>\r\n\r\n@code {\r\n\r\n    DateOnly date = DateOnly.FromDateTime(DateTime.Now);\r\n    DateOnly date2 = DateOnly.FromDateTime(DateTime.Now);\r\n\r\n    List<string> locations = new() { \"Australia\", \"Barbados\", \"Chile\", \"Denmark\", \"Ecuador\", \"France\" };\r\n\r\n    Trip trip = new();\r\n\r\n    bool visible = false;\r\n    bool visible2 = false;\r\n\r\n    class Trip\r\n    {\r\n        public string name { get; set; }\r\n        public string location { get; set; }\r\n        public string start { get; set; }\r\n        public string end { get; set; }\r\n    }\r\n\r\n}",
+        "Code": "<MExpansionPanels>\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Trip name\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        @*TODO: Transition need to update, support LeaveAbsolute*@\r\n                        <ShowTransitionElement Value=\"context\" Style=\"position: absolute\">\r\n                            <span>\r\n                                Enter a name for the trip\r\n                            </span>\r\n                        </ShowTransitionElement>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <ShowTransitionElement Value=\"!context\">\r\n                            <span>\r\n                                @trip.name\r\n                            </span>\r\n                        </ShowTransitionElement>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MTextField @bind-Value=\"@trip.name\"\r\n                        placeholder=\"Caribbean Cruise\">\r\n            </MTextField>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Location\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        <ShowTransitionElement Value=\"context\" Style=\"position: absolute\">\r\n                            <span>\r\n                                Select trip destination\r\n                            </span>\r\n                        </ShowTransitionElement>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <ShowTransitionElement Value=\"!context\">\r\n                            <span>\r\n                                @trip.location\r\n                            </span>\r\n                        </ShowTransitionElement>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MRow NoGutters>\r\n                <MSpacer></MSpacer>\r\n                <MCol Cols=\"5\">\r\n                    <MSelect @bind-Value=\"trip.location\"\r\n                             Items=\"locations\"\r\n                             ItemValue=\"item => item\"\r\n                             ItemText=\"item => item\"\r\n                             Chips\r\n                             Flat\r\n                             Solo>\r\n                    </MSelect>\r\n                </MCol>\r\n\r\n                <MDivider Vertical\r\n                          Class=\"mx-4\">\r\n                </MDivider>\r\n\r\n                <MCol Cols=\"3\">\r\n                    Select your destination of choice\r\n                    <br>\r\n                    <a href=\"/components/expansion-panels\">Learn more</a>\r\n                </MCol>\r\n            </MRow>\r\n\r\n            <MCardActions>\r\n                <MSpacer></MSpacer>\r\n                <MButton Text\r\n                         Color=\"secondary\">\r\n                    Cancel\r\n                </MButton>\r\n                <MButton Text\r\n                         Color=\"primary\">\r\n                    Save\r\n                </MButton>\r\n            </MCardActions>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n\r\n    <MExpansionPanel>\r\n        <MExpansionPanelHeader>\r\n            <MRow NoGutters>\r\n                <MCol Cols=\"4\">\r\n                    Start and end dates\r\n                </MCol>\r\n                <MCol Cols=\"8\"\r\n                      Class=\"text--secondary\">\r\n                    <FadeTransition>\r\n                        <ShowTransitionElement Value=\"context\" Style=\"position: absolute\">\r\n                            <span>When do you want to travel?</span>\r\n                        </ShowTransitionElement>\r\n                    </FadeTransition>\r\n                    <FadeTransition>\r\n                        <ShowTransitionElement Value=\"!context\">\r\n                            <MRow NoGutters\r\n                                  Style=\"width: 100%\">\r\n                                <MCol Cols=\"6\">\r\n                                    Start date: @(trip.start ?? \"Not set\")\r\n                                </MCol>\r\n                                <MCol Cols=\"6\">\r\n                                    End date: @(trip.end ?? \"Not set\")\r\n                                </MCol>\r\n                            </MRow>\r\n                        </ShowTransitionElement>\r\n                    </FadeTransition>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelHeader>\r\n        <MExpansionPanelContent>\r\n            <MRow Justify=\"JustifyTypes.SpaceAround\"\r\n                  NoGutters>\r\n                <MCol Cols=\"3\">\r\n                    <MMenu @bind-Value=\"visible\"\r\n                           CloseOnContentClick=\"false\"\r\n                           OffsetY\r\n                           MinWidth=\"290\">\r\n                        <ActivatorContent>\r\n                            <MTextField @bind-Value=\"trip.start\"\r\n                                        Label=\"Start date\"\r\n                                        PrependIcon=\"mdi-calendar\"\r\n                                        Readonly\r\n                                        @attributes=\"@context.Attrs\">\r\n                            </MTextField>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MDatePicker @bind-Value=\"date\"\r\n                                         NoTitle\r\n                                         Scrollable>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => visible = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => { trip.start = date.ToShortDateString(); visible = false;}\">\r\n                                    OK\r\n                                </MButton>\r\n                            </MDatePicker>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n\r\n                <MCol Cols=\"3\">\r\n                    <MMenu @bind-Value=\"visible2\"\r\n                           CloseOnContentClick=\"false\"\r\n                           OffsetY\r\n                           MinWidth=\"290\">\r\n                        <ActivatorContent>\r\n                            <MTextField @bind-Value=\"trip.end\"\r\n                                        Label=\"End date\"\r\n                                        PrependIcon=\"mdi-calendar\"\r\n                                        Readonly\r\n                                        @attributes=\"@context.Attrs\">\r\n                            </MTextField>\r\n                        </ActivatorContent>\r\n                        <ChildContent>\r\n                            <MDatePicker @bind-Value=\"date2\"\r\n                                         NoTitle\r\n                                         Scrollable>\r\n                                <MSpacer></MSpacer>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => visible2 = false\">\r\n                                    Cancel\r\n                                </MButton>\r\n                                <MButton Text\r\n                                         Color=\"primary\"\r\n                                         OnClick=\"() => { trip.end = date2.ToShortDateString(); visible2 = false; }\">\r\n                                    OK\r\n                                </MButton>\r\n                            </MDatePicker>\r\n                        </ChildContent>\r\n                    </MMenu>\r\n                </MCol>\r\n            </MRow>\r\n        </MExpansionPanelContent>\r\n    </MExpansionPanel>\r\n</MExpansionPanels>\r\n\r\n@code {\r\n\r\n    DateOnly date = DateOnly.FromDateTime(DateTime.Now);\r\n    DateOnly date2 = DateOnly.FromDateTime(DateTime.Now);\r\n\r\n    List<string> locations = new() { \"Australia\", \"Barbados\", \"Chile\", \"Denmark\", \"Ecuador\", \"France\" };\r\n\r\n    Trip trip = new();\r\n\r\n    bool visible = false;\r\n    bool visible2 = false;\r\n\r\n    class Trip\r\n    {\r\n        public string name { get; set; }\r\n        public string location { get; set; }\r\n        public string start { get; set; }\r\n        public string end { get; set; }\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.ExpansionPanels.misc.Advanced",
         "Style": "",
         "Debug": false,
@@ -1896,7 +1896,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6227758+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.3135662+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1973,7 +1973,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:error--> \n<p>When using objects for the <strong>Items</strong> prop, you must associate <strong>ItemText</strong> and <strong>ItemValue</strong> with existing properties on your objects. These values are defaulted to  <strong>Text</strong> and <strong>Value</strong> and can be changed.</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p>The <strong>Auto</strong> property of <strong>MenuProps</strong> is only supported for the default input style.</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>Browser autocomplete is set to off by default, may vary by browser and may be ignored.  <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6265634+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.3215648+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2083,7 +2083,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6281681+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.3245644+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2148,7 +2148,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6308126+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.3305624+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2235,7 +2235,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6338146+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.3385315+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2378,7 +2378,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.635814+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.3445634+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2455,7 +2455,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadioGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6378141+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.3485641+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2532,7 +2532,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6408119+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.3545652+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2621,7 +2621,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "ע��": "\n<!--alert:info--> \n<p>The default setting of browser auto completion is off, which may be changed or ignored by different browsers. <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p>The <strong>Auto</strong> attribute of <strong>menupprops</strong> only supports the default input style.</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>When using an object as the attribute of <strong>items</strong>, you must use <strong>itemtext</strong> and <strong>itemvalue</strong> to associate with the incoming object. These values are <strong>text</strong> and <strong>value</strong> by default and can be changed.</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6448218+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.362564+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2763,7 +2763,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6498116+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.3735313+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2803,7 +2803,7 @@
         "Name": "discrete",
         "Title": "Discrete",
         "Description": "<p>Discrete sliders offer a thumb label that displays the exact current amount. Using the <strong>Step</strong> prop you can disallow selecting values outside of steps.</p>\n",
-        "Code": "<MCard>\r\n    <MCardText>\r\n        <MSlider @bind-Value=\"_value\"\r\n                 Step=\"10\"\r\n                 ThumbLabel=\"true\"\r\n                 Ticks=\"true\"></MSlider>\r\n    </MCardText>\r\n</MCard>\r\n\r\n  @code {\r\n    private double _value = 0;\r\n  }",
+        "Code": "<MCard>\r\n    <MCardText>\r\n        <MSlider TValue=\"double\"\r\n                 Step=\"10\"\r\n                 ThumbLabel=\"true\"\r\n                 Class=\"test\"\r\n                 Ticks=\"true\"></MSlider>\r\n    </MCardText>\r\n</MCard>\r\n\r\n@code {\r\n    private double _value = 0;\r\n  }",
         "Type": "Demos.Components.FormInputs.children.Slider.props.Discrete",
         "Style": "",
         "Debug": false,
@@ -2950,7 +2950,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6518182+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.3795615+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3049,7 +3049,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6628117+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.4035621+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3181,7 +3181,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6598118+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.3965647+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3459,7 +3459,7 @@
       "Helper Classes": "\n<p><strong>FillHeight</strong> applies <code>height: 100%</code> to an element. When applied to <code>MContainer</code> it will also <code>align-items: center</code>.</p>\n",
       "Caveats": "\n<!--alert:info--> \n<p>1.x grid system has been deprecated in favor of the 2.x grid system.</p>\n<!--alert:info--> \n<!--alert:info--> \n<p>Breakpoints based props on grid components work in an <code>andUp</code> fashion. With this in mind the <strong>xs</strong> breakpoint is assumed and has been removed from the props context. This applies to <strong>offset</strong>、<strong>justify</strong>、<strong>align</strong> and single breakpoint props on <code>MCol</code>.</p>\n<ul>\n<li>Props like <strong>justify-sm</strong> and <strong>justify-md</strong> exist,but <strong>justify-xs</strong> does not, it is simply <strong>justify</strong>。</li>\n<li>The <strong>xs</strong> prop does not exist on <code>MCol</code>. The equivalent to this is the <strong>cols</strong> prop.</li>\n</ul>\n<!--alert:info--> \n<!--alert:info--> \n<p>When using the grid system with IE11 you will need to set an explicit <code>height</code> as <code>min-height</code> will not suffice and cause undesired results.</p>\n<!--alert:info--> \n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6698204+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.4175625+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3690,7 +3690,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6718812+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.4235643+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3778,7 +3778,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6748204+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.4295636+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3877,14 +3877,14 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6768107+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.4345642+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "index",
         "Title": "Usage",
         "Description": "<p>The core usage of the <code>MItemGroup</code> is to create groups of anything that should be controlled by a <strong>Value</strong>.</p>\n",
-        "Code": "<MItemGroup>\r\n    <MContainer>\r\n        <MRow>\r\n            @foreach (var i in Enumerable.Range(0, 3))\r\n            {\r\n                <MCol Cols=\"4\" @key=\"i\">\r\n                    <MItem>\r\n                        @{\r\n                            <MCard Class=\"d-flex align-center\" \r\n                                   Color=\"@(context.Active ? \"primary\" : \"\")\"\r\n                                   OnClick=\"context.Toggle\" \r\n                                   Dark \r\n                                   Height=\"200\">\r\n                                <ScrollYTransition>\r\n                                    <Element Show=\"context.Active\" Class=\"text-h2 flex-grow-1 text-center\">\r\n                                        Active\r\n                                    </Element>\r\n                                </ScrollYTransition>\r\n                            </MCard>\r\n                        }\r\n                    </MItem>\r\n                </MCol>\r\n            }\r\n        </MRow>\r\n    </MContainer>\r\n</MItemGroup>",
+        "Code": "<MItemGroup>\r\n    <MContainer>\r\n        <MRow>\r\n            @foreach (var i in Enumerable.Range(0, 3))\r\n            {\r\n                <MCol Cols=\"4\" @key=\"i\">\r\n                    <MItem>\r\n                        @{\r\n                            <MCard Class=\"d-flex align-center\" \r\n                                   Color=\"@(context.Active ? \"primary\" : \"\")\"\r\n                                   OnClick=\"context.Toggle\" \r\n                                   Dark \r\n                                   Height=\"200\">\r\n                                <ScrollYTransition>\r\n                                    <ShowTransitionElement Value=\"context.Active\" Class=\"text-h2 flex-grow-1 text-center\">\r\n                                        Active\r\n                                    </ShowTransitionElement>\r\n                                </ScrollYTransition>\r\n                            </MCard>\r\n                        }\r\n                    </MItem>\r\n                </MCol>\r\n            }\r\n        </MRow>\r\n    </MContainer>\r\n</MItemGroup>",
         "Type": "Demos.Components.Groups.children.ItemGroup.usage.Index",
         "Style": "",
         "Debug": false,
@@ -3895,7 +3895,7 @@
         "Name": "activeClass",
         "Title": "Active class",
         "Description": "<p>The <strong>ActiveClass</strong> property allows you to set custom CSS class on active items.</p>\n",
-        "Code": "<MItemGroup ActiveClass=\"error\">\r\n    <MContainer>\r\n        <MRow>\r\n            @foreach (var n in Enumerable.Range(0, 3))\r\n            {\r\n                <MCol\r\n                    @key=\"n\"\r\n                    Cols=\"12\"\r\n                    Md=\"4\">\r\n                    <MItem>\r\n                        <MCard\r\n                            Class=\"@($\"d-flex align-center {context.ActiveClass}\")\"\r\n                            Dark\r\n                            Height=\"200\"\r\n                            OnClick=\"context.Toggle\"\r\n                            RefBack=\"context.Ref\">\r\n                            <ScrollYTransition>\r\n                                <Element Show=\"context.Active\" Class=\"text-h2 flex-grow-1 text-center\">\r\n                                    Active\r\n                                </Element>\r\n                            </ScrollYTransition>\r\n                        </MCard>\r\n                    </MItem>\r\n                </MCol>\r\n            }\r\n        </MRow>\r\n    </MContainer>\r\n</MItemGroup>",
+        "Code": "<MItemGroup ActiveClass=\"error\">\r\n    <MContainer>\r\n        <MRow>\r\n            @foreach (var n in Enumerable.Range(0, 3))\r\n            {\r\n                <MCol\r\n                    @key=\"n\"\r\n                    Cols=\"12\"\r\n                    Md=\"4\">\r\n                    <MItem>\r\n                        <MCard\r\n                            Class=\"@($\"d-flex align-center {context.ActiveClass}\")\"\r\n                            Dark\r\n                            Height=\"200\"\r\n                            OnClick=\"context.Toggle\"\r\n                            RefBack=\"context.Ref\">\r\n                            <ScrollYTransition>\r\n                                <ShowTransitionElement Value=\"context.Active\" Class=\"text-h2 flex-grow-1 text-center\">\r\n                                    Active\r\n                                </ShowTransitionElement>\r\n                            </ScrollYTransition>\r\n                        </MCard>\r\n                    </MItem>\r\n                </MCol>\r\n            }\r\n        </MRow>\r\n    </MContainer>\r\n</MItemGroup>",
         "Type": "Demos.Components.Groups.children.ItemGroup.props.ActiveClass",
         "Style": "",
         "Debug": false,
@@ -3906,7 +3906,7 @@
         "Name": "mandatory",
         "Title": "Mandatory",
         "Description": "<p><strong>Mandatory</strong> item groups must have at least 1 item selected.</p>\n",
-        "Code": "<MItemGroup Mandatory>\r\n    <MContainer>\r\n        <MRow>\r\n            @foreach (var i in Enumerable.Range(0, 3))\r\n            {\r\n                <MCol Cols=\"4\" @key=\"i\">\r\n                    <MItem>\r\n                        <MCard Color=\"@(context.Active ? \"primary\" : \"\")\"\r\n                               Class=\"d-flex align-center\"\r\n                               Dark\r\n                               Height=\"200\"\r\n                               OnClick=\"context.Toggle\">\r\n                            <ScrollYTransition>\r\n                                <Element Show=\"context.Active\" Class=\"text-h2 flex-grow-1 text-center\">\r\n                                    Active\r\n                                </Element>\r\n                            </ScrollYTransition>\r\n                        </MCard>\r\n                    </MItem>\r\n                </MCol>\r\n            }\r\n        </MRow>\r\n    </MContainer>\r\n</MItemGroup>",
+        "Code": "<MItemGroup Mandatory>\r\n    <MContainer>\r\n        <MRow>\r\n            @foreach (var i in Enumerable.Range(0, 3))\r\n            {\r\n                <MCol Cols=\"4\" @key=\"i\">\r\n                    <MItem>\r\n                        <MCard Color=\"@(context.Active ? \"primary\" : \"\")\"\r\n                               Class=\"d-flex align-center\"\r\n                               Dark\r\n                               Height=\"200\"\r\n                               OnClick=\"context.Toggle\">\r\n                            <ScrollYTransition>\r\n                                <ShowTransitionElement Value=\"context.Active\" Class=\"text-h2 flex-grow-1 text-center\">\r\n                                    Active\r\n                                </ShowTransitionElement>\r\n                            </ScrollYTransition>\r\n                        </MCard>\r\n                    </MItem>\r\n                </MCol>\r\n            }\r\n        </MRow>\r\n    </MContainer>\r\n</MItemGroup>",
         "Type": "Demos.Components.Groups.children.ItemGroup.props.Mandatory",
         "Style": "",
         "Debug": false,
@@ -3917,7 +3917,7 @@
         "Name": "multiple",
         "Title": "Multiple",
         "Description": "<p>Item groups can have <strong>Multiple</strong> items selected.</p>\n",
-        "Code": "<MItemGroup Multiple>\r\n    <MContainer>\r\n        <MRow>\r\n            @foreach (var i in Enumerable.Range(0, 3))\r\n            {\r\n                <MCol Cols=\"4\" @key=\"i\">\r\n                    <MItem>\r\n                        <MCard Color=\"@(context.Active ? \"primary\" : \"\")\"\r\n                               Class=\"d-flex align-center\"\r\n                               Dark\r\n                               Height=\"200\"\r\n                               OnClick=\"context.Toggle\">\r\n                            <ScrollYTransition>\r\n                                <Element Show=\"context.Active\" Class=\"text-h2 flex-grow-1 text-center\">\r\n                                    Active\r\n                                </Element>\r\n                            </ScrollYTransition>\r\n                        </MCard>\r\n                    </MItem>\r\n                </MCol>\r\n            }\r\n        </MRow>\r\n    </MContainer>\r\n</MItemGroup>",
+        "Code": "<MItemGroup Multiple>\r\n    <MContainer>\r\n        <MRow>\r\n            @foreach (var i in Enumerable.Range(0, 3))\r\n            {\r\n                <MCol Cols=\"4\" @key=\"i\">\r\n                    <MItem>\r\n                        <MCard Color=\"@(context.Active ? \"primary\" : \"\")\"\r\n                               Class=\"d-flex align-center\"\r\n                               Dark\r\n                               Height=\"200\"\r\n                               OnClick=\"context.Toggle\">\r\n                            <ScrollYTransition>\r\n                                <ShowTransitionElement Value=\"context.Active\" Class=\"text-h2 flex-grow-1 text-center\">\r\n                                    Active\r\n                                </ShowTransitionElement>\r\n                            </ScrollYTransition>\r\n                        </MCard>\r\n                    </MItem>\r\n                </MCol>\r\n            }\r\n        </MRow>\r\n    </MContainer>\r\n</MItemGroup>",
         "Type": "Demos.Components.Groups.children.ItemGroup.props.Multiple",
         "Style": "",
         "Debug": false,
@@ -3965,7 +3965,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6798233+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.4405607+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4052,7 +4052,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.682814+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.4465614+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4070,7 +4070,7 @@
         "Name": "activeClass",
         "Title": "Active class",
         "Description": "<p>The <strong>ActiveClass</strong> property allows you to set custom CSS class on active items.</p>\n",
-        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup ShowArrows=\"@(true)\" Class=\"pa-4\" ActiveClass=\"success\">\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"@($\"ma-4 {context.ActiveClass}\")\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"@context.Toggle\"\r\n                       RefBack=\"@context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>",
+        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup ShowArrows=\"@(true)\" Class=\"pa-4\" ActiveClass=\"success\">\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"@($\"ma-4 {context.ActiveClass}\")\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"@context.Toggle\"\r\n                       RefBack=\"@context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <ShowTransitionElement Value=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </ShowTransitionElement>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>",
         "Type": "Demos.Components.Groups.children.SlideGroup.props.ActiveClass",
         "Style": "",
         "Debug": false,
@@ -4081,7 +4081,7 @@
         "Name": "centerActive",
         "Title": "Center active",
         "Description": "<p>Using the <code>CenterActive</code> prop will make the active item always centered.</p>\n",
-        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup @bind-Value=\"model\" ShowArrows=\"@(true)\" Class=\"pa-4\" CenterActive>\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"@context.Toggle\"\r\n                       RefBack=\"@context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>\r\n\r\n@code {\r\n    StringNumber model;\r\n}",
+        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup @bind-Value=\"model\" ShowArrows=\"@(true)\" Class=\"pa-4\" CenterActive>\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"@context.Toggle\"\r\n                       RefBack=\"@context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <ShowTransitionElement Value=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </ShowTransitionElement>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>\r\n\r\n@code {\r\n    StringNumber model;\r\n}",
         "Type": "Demos.Components.Groups.children.SlideGroup.props.CenterActive",
         "Style": "",
         "Debug": false,
@@ -4092,7 +4092,7 @@
         "Name": "customIcons",
         "Title": "Custom icons",
         "Description": "<p>You can add your custom pagination icons instead of arrows using the <code>NextIcon</code> and <code>PrevIcon</code> props.</p>\n",
-        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup @bind-Value=\"model\" ShowArrows=\"@(true)\" Class=\"pa-4\" PrevIcon=\"mdi-minus\" NextIcon=\"mdi-plus\">\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"@context.Toggle\"\r\n                       RefBack=\"@context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>\r\n\r\n@code {\r\n    StringNumber model;\r\n}",
+        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup @bind-Value=\"model\" ShowArrows=\"@(true)\" Class=\"pa-4\" PrevIcon=\"mdi-minus\" NextIcon=\"mdi-plus\">\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"@context.Toggle\"\r\n                       RefBack=\"@context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <ShowTransitionElement Value=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </ShowTransitionElement>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>\r\n\r\n@code {\r\n    StringNumber model;\r\n}",
         "Type": "Demos.Components.Groups.children.SlideGroup.props.CustomIcons",
         "Style": "",
         "Debug": false,
@@ -4103,7 +4103,7 @@
         "Name": "mandatory",
         "Title": "Mandatory",
         "Description": "<p>The <code>Mandatory</code> prop will make the slide group require at least 1 item must be selected.</p>\n",
-        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup @bind-Value=\"model\" ShowArrows=\"@(true)\" Class=\"pa-4\" Mandatory>\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"context.Toggle\"\r\n                       RefBack=\"context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>\r\n\r\n@code {\r\n    StringNumber model;\r\n}",
+        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup @bind-Value=\"model\" ShowArrows=\"@(true)\" Class=\"pa-4\" Mandatory>\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"context.Toggle\"\r\n                       RefBack=\"context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <ShowTransitionElement Value=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </ShowTransitionElement>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>\r\n\r\n@code {\r\n    StringNumber model;\r\n}",
         "Type": "Demos.Components.Groups.children.SlideGroup.props.Mandatory",
         "Style": "",
         "Debug": false,
@@ -4114,7 +4114,7 @@
         "Name": "multiple",
         "Title": "Multiple",
         "Description": "<p>You can select multiple items by setting the <code>Multiple</code> prop.</p>\n",
-        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup @bind-Values=\"model\" ShowArrows=\"@(true)\" Class=\"pa-4\" Multiple>\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem Value=\"@item\">\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"context.Toggle\"\r\n                       RefBack=\"context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>\r\n\r\n@code {\r\n\r\n    List<StringNumber> model = new();\r\n\r\n}",
+        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup @bind-Values=\"model\" ShowArrows=\"@(true)\" Class=\"pa-4\" Multiple>\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem Value=\"@item\">\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"context.Toggle\"\r\n                       RefBack=\"context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <ShowTransitionElement Value=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </ShowTransitionElement>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n</MSheet>\r\n\r\n@code {\r\n\r\n    List<StringNumber> model = new();\r\n\r\n}",
         "Type": "Demos.Components.Groups.children.SlideGroup.props.Multiple",
         "Style": "",
         "Debug": false,
@@ -4125,7 +4125,7 @@
         "Name": "pseudoCarousel",
         "Title": "Pseudo Carousel",
         "Description": "<p>Customize the slide group to creatively display information on sheets. Using the selection, we can display auxillary information easily for the user.</p>\n",
-        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup @bind-Value=\"model\" ShowArrows=\"@(true)\" Class=\"pa-4\">\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"context.Toggle\"\r\n                       RefBack=\"context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <Element Show=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </Element>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n\r\n    @if (model != null)\r\n    {\r\n        <MSheet Height=\"200\" Tile>\r\n            <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                <h3 class=\"text-h6\">\r\n                    Selected @model\r\n                </h3>\r\n            </MRow>\r\n        </MSheet>\r\n    }\r\n</MSheet>\r\n\r\n@code {\r\n\r\n    StringNumber model;\r\n\r\n}",
+        "Code": "<MSheet Class=\"mx-auto\" MaxWidth=\"800\" Elevation=\"8\">\r\n    <MSlideGroup @bind-Value=\"model\" ShowArrows=\"@(true)\" Class=\"pa-4\">\r\n        @foreach (var item in Enumerable.Range(1, 15))\r\n        {\r\n            <MSlideItem>\r\n                <MCard Color=\"@(context.Active ? \"primary\" : \"grey lighten-1\")\"\r\n                       Class=\"ma-4\"\r\n                       Height=\"200\"\r\n                       Width=\"100\"\r\n                       OnClick=\"context.Toggle\"\r\n                       RefBack=\"context.Ref\">\r\n                    <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                        <ScaleTransition>\r\n                            <ShowTransitionElement Value=\"context.Active\">\r\n                                <MIcon Color=\"white\" Size=\"48\">mdi-close-circle-outline</MIcon>\r\n                            </ShowTransitionElement>\r\n                        </ScaleTransition>\r\n                    </MRow>\r\n                </MCard>\r\n            </MSlideItem>\r\n        }\r\n    </MSlideGroup>\r\n\r\n    @if (model != null)\r\n    {\r\n        <MSheet Height=\"200\" Tile>\r\n            <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                <h3 class=\"text-h6\">\r\n                    Selected @model\r\n                </h3>\r\n            </MRow>\r\n        </MSheet>\r\n    }\r\n</MSheet>\r\n\r\n@code {\r\n\r\n    StringNumber model;\r\n\r\n}",
         "Type": "Demos.Components.Groups.children.SlideGroup.misc.PseudoCarousel",
         "Style": "",
         "Debug": false,
@@ -4150,7 +4150,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6849088+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.4525321+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4237,7 +4237,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6868108+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.4565627+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4277,7 +4277,7 @@
         "Name": "transition",
         "Title": "Transition",
         "Description": "<p>Create highly customized components in response to user interaction.</p>\n",
-        "Code": "<MHover Class=\"hover-misc-transition\">\r\n    <MCard @attributes=\"context.Attrs\" Class=\"@($\"mx-auto {context.Class}\")\" Color=\"grey lighten-4\" MaxWidth=\"600\">\r\n        <MImage Src=\"https://cdn.masastack.com/stack/images/website/masa-blazor/cards/kitchen.png\" AspectRatio=\"@((double)16/9)\">\r\n            <ExpandTransition>\r\n                <Element Show=\"@context.Hover\" Class=\"transition-fast-in-fast-out orange darken-2 m-card--reveal text-h2 white--text\"\r\n                         Style=\"height: 100%;display: flex;\">\r\n                    $14.99\r\n                </Element>\r\n            </ExpandTransition>\r\n        </MImage>\r\n        <MCardText Class=\"pt-6\" Style=\"position:relative;\">\r\n            <MButton Absolute Color=\"orange\" Class=\"white--text\" Fab Large Right Top>\r\n                <MIcon>mdi-cart</MIcon>\r\n            </MButton>\r\n            <div class=\"font-weight-light grey--text text-h6 mb-2\">\r\n                For the perfect meal\r\n            </div>\r\n            <h3 class=\"text-h4 font-weight-light orange--text mb-2\">\r\n                QW cooking utensils\r\n            </h3>\r\n            <div class=\"font-weight-light text-h6 mb-2\">\r\n                Our Vintage kitchen utensils delight any chef.<br>\r\n                Made of bamboo by hand\r\n            </div>\r\n        </MCardText>\r\n    </MCard>\r\n</MHover>\r\n\r\n<style>\r\n\r\n.hover-misc-transition .m-card--reveal {\r\n  align-items: center;\r\n  bottom: 0;\r\n  justify-content: center;\r\n  opacity: .5;\r\n  position: absolute;\r\n  width: 100%;\r\n}\r\n</style>",
+        "Code": "<MHover Class=\"hover-misc-transition\">\r\n    <MCard @attributes=\"context.Attrs\" Class=\"@($\"mx-auto {context.Class}\")\" Color=\"grey lighten-4\" MaxWidth=\"600\">\r\n        <MImage Src=\"https://cdn.masastack.com/stack/images/website/masa-blazor/cards/kitchen.png\" AspectRatio=\"@((double)16/9)\">\r\n            <ExpandTransition>\r\n                <ShowTransitionElement Value=\"@context.Hover\" Class=\"transition-fast-in-fast-out orange darken-2 m-card--reveal text-h2 white--text\"\r\n                         Style=\"height: 100%;display: flex;\">\r\n                    $14.99\r\n                </ShowTransitionElement>\r\n            </ExpandTransition>\r\n        </MImage>\r\n        <MCardText Class=\"pt-6\" Style=\"position:relative;\">\r\n            <MButton Absolute Color=\"orange\" Class=\"white--text\" Fab Large Right Top>\r\n                <MIcon>mdi-cart</MIcon>\r\n            </MButton>\r\n            <div class=\"font-weight-light grey--text text-h6 mb-2\">\r\n                For the perfect meal\r\n            </div>\r\n            <h3 class=\"text-h4 font-weight-light orange--text mb-2\">\r\n                QW cooking utensils\r\n            </h3>\r\n            <div class=\"font-weight-light text-h6 mb-2\">\r\n                Our Vintage kitchen utensils delight any chef.<br>\r\n                Made of bamboo by hand\r\n            </div>\r\n        </MCardText>\r\n    </MCard>\r\n</MHover>\r\n\r\n<style>\r\n\r\n.hover-misc-transition .m-card--reveal {\r\n  align-items: center;\r\n  bottom: 0;\r\n  justify-content: center;\r\n  opacity: .5;\r\n  position: absolute;\r\n  width: 100%;\r\n}\r\n</style>",
         "Type": "Demos.Components.Hover.misc.Transition",
         "Style": "",
         "Debug": false,
@@ -4302,7 +4302,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6888143+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.4615624+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4391,7 +4391,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info--> \n<p>The MImage component uses the Intersect directive which requires a Polyfill for IE11 and Safari. If a browser that does not support this functionality is detected, the image will still load as normal.</p>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6918197+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.4685337+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4490,7 +4490,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "ע��": "\n<!--alert:info-->\n<p>If you want to find a list item with status, please check <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>��</p>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.6969223+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.4805649+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4699,7 +4699,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7008114+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.4905606+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4874,7 +4874,7 @@
     "OtherDocs": {
       "Caveats": "\n<!--alert:error-->\n<p>If you are using <code>MNavigationDrawer</code> with <strong>App</strong> property enabled, you don't need to use <strong>Absolute</strong> prop as in examples.</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p>The <strong>ExpandOnHover</strong> prop does not alter the content area of <strong>MMain</strong>. To have content area respond to <strong>ExpandOnHover</strong>, bind <strong>OnMiniVariantUpdate</strong> to a data prop.</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7048129+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.498566+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5006,7 +5006,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7068108+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.5035642+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5057,7 +5057,7 @@
         "Name": "Advanced",
         "Title": "Advanced",
         "Description": "<p>Using the <a href=\"/components/hover\">MHover</a>, we are able to add a nice scrim over the information card with additional actions the user can take.</p>\n",
-        "Code": "<MHover>\r\n    <MCard @attributes=\"context.Attrs\" Class=\"mx-auto\"\r\n           MaxWidth=\"344\">\r\n        <MImage Src=\"https://cdn.masastack.com/stack/images/website/masa-blazor/cards/forest-art.jpg\"></MImage>\r\n\r\n        <MCardText>\r\n            <h2 class=\"text-h6 primary--text\">\r\n                Magento Forests\r\n            </h2>\r\n            Travel to the best outdoor experience on planet Earth. A vacation you will never forget!\r\n        </MCardText>\r\n\r\n        <MCardTitle>\r\n            <MRating Value=\"4\"\r\n                     Dense\r\n                     Color=\"orange\"\r\n                     BackgroundColor=\"orange\"\r\n                     Hover\r\n                     Class=\"mr-2\"></MRating>\r\n            <span class=\"primary--text text-subtitle-2\">64 Reviews</span>\r\n        </MCardTitle>\r\n\r\n        <FadeTransition>\r\n            <Element Show=\"@context.Hover\" Class=\"text-center\">\r\n                <MOverlay Absolute Value=\"@context.Hover\"\r\n                          Color=\"#036358\">\r\n                    <MButton>See more info</MButton>\r\n                </MOverlay>\r\n            </Element>\r\n        </FadeTransition>\r\n    </MCard>\r\n</MHover>",
+        "Code": "<MHover>\r\n    <MCard @attributes=\"context.Attrs\" Class=\"mx-auto\"\r\n           MaxWidth=\"344\">\r\n        <MImage Src=\"https://cdn.masastack.com/stack/images/website/masa-blazor/cards/forest-art.jpg\"></MImage>\r\n\r\n        <MCardText>\r\n            <h2 class=\"text-h6 primary--text\">\r\n                Magento Forests\r\n            </h2>\r\n            Travel to the best outdoor experience on planet Earth. A vacation you will never forget!\r\n        </MCardText>\r\n\r\n        <MCardTitle>\r\n            <MRating Value=\"4\"\r\n                     Dense\r\n                     Color=\"orange\"\r\n                     BackgroundColor=\"orange\"\r\n                     Hover\r\n                     Class=\"mr-2\"></MRating>\r\n            <span class=\"primary--text text-subtitle-2\">64 Reviews</span>\r\n        </MCardTitle>\r\n\r\n        <FadeTransition>\r\n            <ShowTransitionElement Value=\"@context.Hover\" Class=\"text-center\">\r\n                <MOverlay Absolute Value=\"@context.Hover\"\r\n                          Color=\"#036358\">\r\n                    <MButton>See more info</MButton>\r\n                </MOverlay>\r\n            </ShowTransitionElement>\r\n        </FadeTransition>\r\n    </MCard>\r\n</MHover>",
         "Type": "Demos.Components.Overlay.misc.Advanced",
         "Style": "",
         "Debug": false,
@@ -5093,7 +5093,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7088109+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.5085603+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5181,7 +5181,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "ע��": "\n<!--alert:warning--> \n<p><code>Mdatepicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7148136+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.5225636+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5424,7 +5424,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "ע��": "\n<!--alert:warning--> \n<p><code>MDatePicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.718811+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.5305641+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5567,7 +5567,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.722814+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.5405638+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5740,7 +5740,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-09T17:07:02.0041596+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.5485657+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5849,7 +5849,7 @@
     "OtherDocs": {
       "API": "\n"
     },
-    "LastWriteTime": "2022-03-09T17:07:02.0261547+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.5545644+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5944,7 +5944,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-09T17:07:02.0321579+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.5565625+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5998,7 +5998,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7278276+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.5635298+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6074,7 +6074,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7318136+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.5735281+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6213,7 +6213,7 @@
         "Name": "toolbarLoader",
         "Title": "Toolbar loader",
         "Description": "<p>Using the <strong>Absolute</strong> prop we are able to position the <code>MProgressLinear</code> component at the bottom of the <strong>MToolbar</strong>.\nWe also use the <strong>Active</strong> prop which allows us to control the visibility of the progress.</p>\n",
-        "Code": "<MContainer>\r\n    <MCard Class=\"mx-auto mt-6\"\r\n           Width=\"344\">\r\n        <MSystemBar>\r\n            <MSpacer></MSpacer>\r\n            <MIcon>mdi-square</MIcon>\r\n            <MIcon>mdi-circle</MIcon>\r\n            <MIcon>mdi-triangle</MIcon>\r\n        </MSystemBar>\r\n\r\n        <MToolbar>\r\n            <MButton Icon>\r\n                <MIcon>mdi-arrow-left</MIcon>\r\n            </MButton>\r\n\r\n            <MToolbarTitle>My Recipes</MToolbarTitle>\r\n\r\n            <MProgressLinear Active=\"_loading\"\r\n                            Indeterminate=\"_loading\"\r\n                            Absolute\r\n                            Bottom\r\n                            Color=\"deep-purple accent-4\">\r\n            </MProgressLinear>\r\n\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n        </MToolbar>\r\n\r\n        <MContainer Style=\"height: 282px;\">\r\n            <MRow Class=\"fill-height\"\r\n                  Align=\"AlignTypes.Center\"\r\n                  Justify=\"JustifyTypes.Center\">\r\n\t\t\t\t<ScaleTransition>\r\n\t\t\t\t\t<Element Show=\"!_loading\" Class=\"text-center\">\r\n\t\t\t\t\t\t<MButton Color=\"primary\" OnClick=\"()=>Loading(true)\">\r\n                        Start loading\r\n                    </MButton>\r\n\t\t\t\t\t</Element>\r\n\t\t\t\t</ScaleTransition>\r\n            </MRow>\r\n        </MContainer>\r\n    </MCard>\r\n</MContainer>\r\n\r\n@code {\r\n    private bool _loading = false;\r\n\r\n    private void Loading(bool val)\r\n    {\r\n        if (!val) return;\r\n\r\n        _loading = true;\r\n\r\n        Task.Run(async () =>\r\n        {\r\n            await Task.Delay(3000);\r\n            _loading = false;\r\n\r\n            await InvokeAsync(StateHasChanged);\r\n        });\r\n    }\r\n}\r\n\r\n",
+        "Code": "<MContainer>\r\n    <MCard Class=\"mx-auto mt-6\"\r\n           Width=\"344\">\r\n        <MSystemBar>\r\n            <MSpacer></MSpacer>\r\n            <MIcon>mdi-square</MIcon>\r\n            <MIcon>mdi-circle</MIcon>\r\n            <MIcon>mdi-triangle</MIcon>\r\n        </MSystemBar>\r\n\r\n        <MToolbar>\r\n            <MButton Icon>\r\n                <MIcon>mdi-arrow-left</MIcon>\r\n            </MButton>\r\n\r\n            <MToolbarTitle>My Recipes</MToolbarTitle>\r\n\r\n            <MProgressLinear Active=\"_loading\"\r\n                            Indeterminate=\"_loading\"\r\n                            Absolute\r\n                            Bottom\r\n                            Color=\"deep-purple accent-4\">\r\n            </MProgressLinear>\r\n\r\n            <MSpacer></MSpacer>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n        </MToolbar>\r\n\r\n        <MContainer Style=\"height: 282px;\">\r\n            <MRow Class=\"fill-height\"\r\n                  Align=\"AlignTypes.Center\"\r\n                  Justify=\"JustifyTypes.Center\">\r\n\t\t\t\t<ScaleTransition>\r\n\t\t\t\t\t<ShowTransitionElement Value=\"!_loading\" Class=\"text-center\">\r\n\t\t\t\t\t\t<MButton Color=\"primary\" OnClick=\"()=>Loading(true)\">\r\n                        Start loading\r\n                    </MButton>\r\n\t\t\t\t\t</ShowTransitionElement>\r\n\t\t\t\t</ScaleTransition>\r\n            </MRow>\r\n        </MContainer>\r\n    </MCard>\r\n</MContainer>\r\n\r\n@code {\r\n    private bool _loading = false;\r\n\r\n    private void Loading(bool val)\r\n    {\r\n        if (!val) return;\r\n\r\n        _loading = true;\r\n\r\n        Task.Run(async () =>\r\n        {\r\n            await Task.Delay(3000);\r\n            _loading = false;\r\n\r\n            await InvokeAsync(StateHasChanged);\r\n        });\r\n    }\r\n}\r\n\r\n",
         "Type": "Demos.Components.Progress.children.ProgressLinear.misc.ToolbarLoader",
         "Style": "",
         "Debug": false,
@@ -6238,7 +6238,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7338135+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.5785633+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6347,7 +6347,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7358116+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.5825614+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -6402,7 +6402,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7378107+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.5865618+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6446,7 +6446,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7388104+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.5915625+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6522,7 +6522,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7438108+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.600563+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6687,7 +6687,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7458139+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.6055638+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6763,7 +6763,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7468136+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.6085621+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6818,7 +6818,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n<li><a href=\"/api/MDataTableHeader\">MDataTableHeader</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7548152+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.6255302+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7082,7 +7082,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7568106+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.6295625+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7160,7 +7160,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p>When using the <strong>Dark</strong> prop and <strong>NOT</strong> providing a custom <strong>color</strong>, the <code>MTabs</code> component will default its color to white.</p>\n<!--alert:warning--> \n<!--alert:warning--> \n<p>When using <code>MTabItem</code>'s that contain required input fields you must use the <strong>eager</strong> prop in order to validate the required fields that are not yet visible.</p>\n<!--alert:warning--> \n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7628094+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.6415639+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7358,7 +7358,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.766813+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.649562+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7490,7 +7490,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "ע��": "\n<!--alert:info-->\n<p>In order to correctly position 'MTooltip', a position support (<code>top</code> | 'bottom <code>|' left</code> | 'right') is required.</p>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7678139+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.65256+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7543,7 +7543,7 @@
     "Desc": "<p>The MTreeview component is useful for displaying large amounts of nested data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-09T16:56:01.7738118+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.6645629+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7741,7 +7741,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-09T16:56:01.7748114+08:00",
+    "LastWriteTime": "2022-03-10T15:41:13.6665636+08:00",
     "DemoList": [
       {
         "Order": 0,

@@ -31,20 +31,20 @@
             }
         </span>
 
-        <MSpacer/>
+        <MSpacer />
 
         <div class="m-presets-page-header--h-actions">
             @LeftActions
 
             @if (LeftActions != null && Filters != null)
             {
-                <MDivider Vertical Style="margin: 0 8px"/>
+                <MDivider Vertical Style="margin: 0 8px" />
             }
 
             @if (Filters != null)
             {
                 <SlideXReverseTransition>
-                    <Element Show="ShowFilters">
+                    <ShowTransitionElement Value="ShowFilters">
                         @RightActions
 
                         <MTooltip Top>
@@ -57,7 +57,7 @@
                                 <span>搜索</span>
                             </ChildContent>
                         </MTooltip>
-                    </Element>
+                    </ShowTransitionElement>
                 </SlideXReverseTransition>
 
                 @if (ShowFilters)
@@ -91,9 +91,9 @@
     </div>
 
     <SlideYTransition>
-        <Element Show="ShowFilters" Class="m-presets-page-header--content">
-            <MDivider Style="margin: 10px 0 16px 0;"/>
+        <ShowTransitionElement Value="ShowFilters" Class="m-presets-page-header--content">
+            <MDivider Style="margin: 10px 0 16px 0;" />
             @Filters?.Invoke((HandleOnEnter, HandleOnSearchWithDelay))
-        </Element>
+        </ShowTransitionElement>
     </SlideYTransition>
 </div>

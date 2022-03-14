@@ -9,18 +9,18 @@
                       Class="text--secondary">
                     <FadeTransition>
                         @*TODO: Transition need to update, support LeaveAbsolute*@
-                        <Element Show="context" Style="position: absolute">
+                        <ShowTransitionElement Value="context" Style="position: absolute">
                             <span>
                                 Enter a name for the trip
                             </span>
-                        </Element>
+                        </ShowTransitionElement>
                     </FadeTransition>
                     <FadeTransition>
-                        <Element Show="!context">
+                        <ShowTransitionElement Value="!context">
                             <span>
                                 @trip.name
                             </span>
-                        </Element>
+                        </ShowTransitionElement>
                     </FadeTransition>
                 </MCol>
             </MRow>
@@ -41,18 +41,18 @@
                 <MCol Cols="8"
                       Class="text--secondary">
                     <FadeTransition>
-                        <Element Show="context" Style="position: absolute">
+                        <ShowTransitionElement Value="context" Style="position: absolute">
                             <span>
                                 Select trip destination
                             </span>
-                        </Element>
+                        </ShowTransitionElement>
                     </FadeTransition>
                     <FadeTransition>
-                        <Element Show="!context">
+                        <ShowTransitionElement Value="!context">
                             <span>
                                 @trip.location
                             </span>
-                        </Element>
+                        </ShowTransitionElement>
                     </FadeTransition>
                 </MCol>
             </MRow>
@@ -105,12 +105,12 @@
                 <MCol Cols="8"
                       Class="text--secondary">
                     <FadeTransition>
-                        <Element Show="context" Style="position: absolute">
+                        <ShowTransitionElement Value="context" Style="position: absolute">
                             <span>When do you want to travel?</span>
-                        </Element>
+                        </ShowTransitionElement>
                     </FadeTransition>
                     <FadeTransition>
-                        <Element Show="!context">
+                        <ShowTransitionElement Value="!context">
                             <MRow NoGutters
                                   Style="width: 100%">
                                 <MCol Cols="6">
@@ -120,7 +120,7 @@
                                     End date: @(trip.end ?? "Not set")
                                 </MCol>
                             </MRow>
-                        </Element>
+                        </ShowTransitionElement>
                     </FadeTransition>
                 </MCol>
             </MRow>
