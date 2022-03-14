@@ -39,51 +39,14 @@ namespace Masa.Blazor
             }
         }
 
-        protected override async Task OnBeforeTransition()
+        protected override async Task OnLeave(BlazorComponent.Element element)
         {
-            if (InTransition)
-            {
-                return;
-            }
-
-            InTransition = true;
-            if (WindowGroup.TransitionCount == 0)
-            {
-                WindowGroup.TransitionCount++;
-
-                var el = Document.GetElementByReference(WindowGroup.Ref);
-                await el?.UpdateWindowTransitionAsync(true);
-            }
-            else
-            {
-                WindowGroup.TransitionCount++;
-            }
+            await WindowGroup.OnLeave.InvokeAsync(element);
         }
 
-        protected override async Task OnAfterTransition()
+        protected override async Task OnEnterTo(BlazorComponent.Element element)
         {
-            if (!InTransition)
-            {
-                return;
-            }
-
-            InTransition = false;
-            if (WindowGroup.TransitionCount > 0)
-            {
-                WindowGroup.TransitionCount--;
-
-                if (WindowGroup.TransitionCount == 0)
-                {
-                    var el = Document.GetElementByReference(WindowGroup.Ref);
-                    await el?.UpdateWindowTransitionAsync(false);
-                }
-            }
-        }
-
-        protected override async Task OnEnterTo()
-        {
-            var el = Document.GetElementByReference(WindowGroup.Ref);
-            await el?.UpdateWindowTransitionAsync(true, Ref);
+            await WindowGroup.OnEnterTo.InvokeAsync(element);
         }
 
         protected override void SetComponentClass()
