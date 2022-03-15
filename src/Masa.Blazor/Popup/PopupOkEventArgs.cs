@@ -4,14 +4,14 @@ public class PopupOkEventArgs
 {
     protected PopupOkEventArgs()
     {
-        Cancelled = false;
+        IsCanceled = false;
     }
 
-    public bool Cancelled { get; private set; }
+    public bool IsCanceled { get; private set; }
 
     public void Cancel()
     {
-        Cancelled = true;
+        IsCanceled = true;
     }
 }
 

@@ -4,10 +4,10 @@ public class ModalActionEventArgs
 {
     public ModalActionEventArgs()
     {
-        Cancelled = false;
+        IsCanceled = false;
     }
 
-    public bool Cancelled { get; private set; }
+    public bool IsCanceled { get; private set; }
 
     /// <summary>
     /// Cancel the next operation.
@@ -18,6 +18,6 @@ public class ModalActionEventArgs
     /// </remarks>
     public void Cancel()
     {
-        Cancelled = true;
+        IsCanceled = true;
     }
 }

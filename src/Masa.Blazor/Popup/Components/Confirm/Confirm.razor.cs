@@ -89,7 +89,7 @@ public partial class Confirm : AlertingPopupComponentBase
             _okLoading = false;
         }
 
-        if (args.Cancelled is false)
+        if (args.IsCanceled is false)
         {
             Visible = false;
             await SetResult(true);
