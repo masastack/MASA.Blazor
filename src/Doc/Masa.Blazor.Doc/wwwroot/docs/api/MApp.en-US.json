@@ -5,10 +5,20 @@
   ],
   "Props": [
     {
+      "Name": "AlertParameters",
+      "Type": "Action<AlertParameters>",
+      "Description": ""
+    },
+    {
       "Name": "Class",
       "Type": "String",
       "Default": "null",
       "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "ConfirmParameters",
+      "Type": "Action<ConfirmParameters>",
+      "Description": ""
     },
     {
       "Name": "Dark",
@@ -32,6 +42,11 @@
       "Name": "Light",
       "Type": "Boolean",
       "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "PromptParameters",
+      "Type": "Action<PromptParameters>",
       "Description": ""
     },
     {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#nullable enable
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BlazorComponent;
 using Microsoft.AspNetCore.Components;
@@ -10,17 +11,30 @@ namespace Masa.Blazor
     /// </summary>
     public partial class MApp : BApp, IThemeable
     {
-        /// <summary>
-        /// Whether to display from left to right
-        /// </summary>
-        [Parameter]
-        public bool LeftToRight { get; set; } = true;
-
         [Inject]
         public HeadJsInterop HeadJsInterop { get; set; }
 
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
+
+        #region for PopupService
+
+        [Parameter]
+        public Action<AlertParameters>? AlertParameters { get; set; }
+
+        [Parameter]
+        public Action<ConfirmParameters>? ConfirmParameters { get; set; }
+
+        [Parameter]
+        public Action<PromptParameters>? PromptParameters { get; set; }
+
+        #endregion
+
+        /// <summary>
+        /// Whether to display from left to right
+        /// </summary>
+        [Parameter]
+        public bool LeftToRight { get; set; } = true;
 
         protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();
 

@@ -4423,6 +4423,13 @@
             "FullTitle": "Not Grouped",
             "Type": "menuItem",
             "Url": "components/not-grouped"
+          },
+          {
+            "Order": 0,
+            "Title": "Popup service",
+            "FullTitle": "Popup service",
+            "Type": "menuItem",
+            "Url": "components/popup-service"
           }
         ]
       },

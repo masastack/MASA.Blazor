@@ -5797,7 +5797,7 @@
     "Desc": "<p>将相同类型的两个数据并列显示。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-10T17:18:57.0159013+08:00",
+    "LastWriteTime": "2022-03-11T10:03:20.6545422+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5850,7 +5850,7 @@
     "Desc": "<p>在文本后提供可以复制内容的图标按钮。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-10T18:52:58.0606241+08:00",
+    "LastWriteTime": "2022-03-11T10:03:20.6925831+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6178,6 +6178,59 @@
     "Title": "Not Grouped",
     "Type": "NotGrouped",
     "FullTitle": "Not Grouped（未分组的）"
+  },
+  {
+    "Desc": "<p>提供全局服务调用Alert、Confirm和Prompt等弹出层组件。</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-03-15T13:50:32.8919024+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "alert",
+        "Title": "警告消息弹窗",
+        "Description": "",
+        "Code": "@inject IPopupService PopupService\r\n\r\n<MAlert Type=\"AlertTypes.Info\">\r\n    <div>\r\n        在 <code>MApp</code> 组件通过 <code>AlertParameters</code> 设置Alert的默认样式和行为。\r\n    </div>\r\n    <div>\r\n        例如：<code>AlertParameters=\"param => { param.Right = true; }\"</code>。\r\n    </div>\r\n</MAlert>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowBasic\">Basic Alert</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup @bind-Value=\"alertType\">\r\n    <MRadio Value=\"AlertTypes.Success\" Label=\"@nameof(AlertTypes.Success)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Warning\" Label=\"@nameof(AlertTypes.Warning)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Error\" Label=\"@nameof(AlertTypes.Error)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Info\" Label=\"@nameof(AlertTypes.Info)\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"ShowTyped\">Typed Alert</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowException\">Exception Alert</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowCustom\">Custom Alert</MButton>\r\n\r\n@code {\r\n\r\n    AlertTypes alertType = AlertTypes.None;\r\n\r\n    private Task ShowBasic()\r\n    {\r\n        return PopupService.AlertAsync(\"This is the alert content!\");\r\n    }\r\n\r\n    private Task ShowTyped()\r\n    {\r\n        return PopupService.AlertAsync(\"This is the alert content!\", alertType);\r\n    }\r\n\r\n    private Task ShowException()\r\n    {\r\n        try\r\n        {\r\n            throw new Exception(\"something wrong!\");\r\n        }\r\n        catch (Exception e)\r\n        {\r\n            return PopupService.AlertAsync(e);\r\n        }\r\n    }\r\n\r\n    private Task ShowCustom()\r\n    {\r\n        return PopupService.AlertAsync(param =>\r\n        {\r\n            param.Centered = true;\r\n            param.Content = \"This is the alert content!\";\r\n            param.Color = \"error\";\r\n            param.Light = true;\r\n            param.Outlined = true;\r\n            param.Right = true;\r\n            param.Top = true;\r\n            param.ActionProps = a =>\r\n            {\r\n                a.Small = true;\r\n                a.Color = \"error\";\r\n            };\r\n        });\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.PopupService.props.Alert",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "confirm",
+        "Title": "确认弹窗",
+        "Description": "",
+        "Code": "@inject IPopupService PopupService\r\n\r\n<MAlert Type=\"AlertTypes.Info\">\r\n    <div>\r\n        在 <code>MApp</code> 组件通过 <code>ConfirmParameters</code> 设置Confirm的默认样式和行为。\r\n    </div>\r\n    <div>\r\n        例如：<code>ConfirmParameters=\"@@(\"param => { param.OkText = \"Confirm\"; })\"</code>。\r\n    </div>\r\n</MAlert>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowBasic\">Basic Confirm</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup @bind-Value=\"alertType\">\r\n    <MRadio Value=\"AlertTypes.Success\" Label=\"@nameof(AlertTypes.Success)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Warning\" Label=\"@nameof(AlertTypes.Warning)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Error\" Label=\"@nameof(AlertTypes.Error)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Info\" Label=\"@nameof(AlertTypes.Info)\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"ShowTyped\">Typed Confirm</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MCheckbox @bind-Value=\"throwException\" Label=\"Throw exception\"></MCheckbox>\r\n<MButton OnClick=\"ShowAsync\">Async Confirm</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowCustom\">Custom Confirm</MButton>\r\n\r\n@code {\r\n\r\n    private AlertTypes alertType = AlertTypes.None;\r\n    private bool throwException;\r\n\r\n    private async Task ShowBasic()\r\n    {\r\n        var confirmed = await PopupService.ConfirmAsync(\"Title\", \"This is the confirm content!\");\r\n\r\n        await HandleConfirmResult(confirmed);\r\n    }\r\n\r\n    private async Task ShowTyped()\r\n    {\r\n        var confirmed = await PopupService.ConfirmAsync(\r\n            \"Title\",\r\n            \"This is the confirm content!\",\r\n            alertType);\r\n\r\n        await HandleConfirmResult(confirmed);\r\n    }\r\n\r\n    private async Task ShowAsync()\r\n    {\r\n        await PopupService.ConfirmAsync(\r\n            \"Title\",\r\n            \"This is the confirm content!\",\r\n            async args =>\r\n            {\r\n                try\r\n                {\r\n                    await Task.Delay(1000);\r\n\r\n                    if (throwException)\r\n                    {\r\n                        throw new Exception(\"something wrong!\");\r\n                    }\r\n\r\n                    await PopupService.AlertAsync(\"Handle onOk successfully!\", AlertTypes.Success);\r\n                }\r\n                catch (Exception e)\r\n                {\r\n                    args.Cancel();\r\n\r\n                    await PopupService.AlertAsync(e);\r\n                }\r\n            });\r\n    }\r\n\r\n    private async Task ShowCustom()\r\n    {\r\n        var confirmed = await PopupService.ConfirmAsync(param =>\r\n        {\r\n            param.Title = \"Title\";\r\n            param.Content = \"This is the confirm content!\";\r\n            param.OkText = \"Confirm\";\r\n            param.CancelText = \"Ignore\";\r\n        });\r\n\r\n        await HandleConfirmResult(confirmed);\r\n    }\r\n\r\n    private async Task HandleConfirmResult(bool confirmed)\r\n    {\r\n        if (confirmed)\r\n        {\r\n            await PopupService.AlertAsync(\"Ok was clicked!\", AlertTypes.Info);\r\n        }\r\n        else\r\n        {\r\n            await PopupService.AlertAsync(\"Cancel was clicked!\", AlertTypes.Warning);\r\n        }\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.PopupService.props.Confirm",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "prompt",
+        "Title": "输入弹窗",
+        "Description": "",
+        "Code": "@inject IPopupService PopupService\r\n\r\n<MAlert Type=\"AlertTypes.Info\">\r\n    <div>\r\n        在 <code>MApp</code> 组件通过 <code>PromptParameters</code> 设置Prompt的默认样式和行为。\r\n    </div>\r\n    <div>\r\n        例如：<code>PromptParameters=\"@@(\"param => { param.OkText = \"Confirm\"; })\"</code>。\r\n    </div>\r\n</MAlert>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowBasic\">Basic Prompt</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MCheckbox @bind-Value=\"throwException\" Label=\"Throw exception\"></MCheckbox>\r\n<MButton OnClick=\"ShowAsync\">Async Prompt</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowCustom\">Custom Prompt</MButton>\r\n\r\n@code {\r\n\r\n    private bool throwException;\r\n    private readonly string checkInput = \"identity\";\r\n\r\n    private async Task ShowBasic()\r\n    {\r\n        var confirmed = await PopupService.PromptAsync(\r\n            \"Title\",\r\n            $\"Enter \\\"{checkInput}\\\" in the input box below to confirm the operation\"\r\n            );\r\n\r\n        await HandlePromptResult(confirmed);\r\n    }\r\n\r\n    private async Task ShowAsync()\r\n    {\r\n        await PopupService.PromptAsync(\r\n            \"Title\",\r\n            $\"Enter \\\"{checkInput}\\\" in the input box below to confirm the operation\",\r\n            async args =>\r\n            {\r\n                try\r\n                {\r\n                    if (args.Value == checkInput)\r\n                    {\r\n                        await PopupService.AlertAsync($\"Input('{args.Value}') is equal to '{checkInput}'\", AlertTypes.Info);\r\n                        \r\n                        await Task.Delay(1000);\r\n\r\n                        if (throwException)\r\n                        {\r\n                            throw new Exception(\"something wrong!\");\r\n                        }\r\n                    }\r\n                    else\r\n                    {\r\n                        await PopupService.AlertAsync($\"Input('{args.Value}') is no equal to '{checkInput}'\", AlertTypes.Error);\r\n                        args.Cancel();\r\n                    }\r\n                }\r\n                catch (Exception e)\r\n                {\r\n                    args.Cancel();\r\n\r\n                    await PopupService.AlertAsync(e);\r\n                }\r\n            });\r\n    }\r\n\r\n    private async Task ShowCustom()\r\n    {\r\n        var input = await PopupService.PromptAsync(param =>\r\n        {\r\n            param.Title = \"Title\";\r\n            param.Content = $\"Enter \\\"{checkInput}\\\" in the input box below to confirm the operation\";\r\n            param.OkText = \"Confirm\";\r\n            param.CancelText = \"Ignore\";\r\n        });\r\n\r\n        await HandlePromptResult(input);\r\n    }\r\n\r\n    private async Task HandlePromptResult(string input)\r\n    {\r\n        if (input is null)\r\n        {\r\n            await PopupService.AlertAsync(\"Cancel was clicked\", AlertTypes.Warning);\r\n        }\r\n        else if (input == checkInput)\r\n        {\r\n            await PopupService.AlertAsync($\"Input('{input}') is equal to '{checkInput}'\", AlertTypes.Info);\r\n        }\r\n        else\r\n        {\r\n            await PopupService.AlertAsync($\"Input('{input}') is no equal to '{checkInput}'\", AlertTypes.Error);\r\n        }\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.PopupService.props.Prompt",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/dialogs",
+      "/components/buttons",
+      "/components/snackbars"
+    ],
+    "Subtitle": "弹出层服务",
+    "Title": "Popup service",
+    "Type": "PopupService",
+    "FullTitle": "Popup service（弹出层服务）"
   },
   {
     "Desc": "<p>该组件用于向用户展示环形的数据。 它也可以设置为不确定的状态来表示加载。</p>\n",
