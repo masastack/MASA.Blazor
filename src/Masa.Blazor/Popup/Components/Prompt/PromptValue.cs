@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System.ComponentModel.DataAnnotations;
 
-namespace Masa.Blazor;
+namespace Masa.Blazor.Popup.Components;
 
 public class PromptValue
 {

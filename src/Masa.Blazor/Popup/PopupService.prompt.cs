@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Popup.Components;
+
+namespace Masa.Blazor;
 
 public partial class PopupService
 {

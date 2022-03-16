@@ -1,5 +1,5 @@
 ﻿#nullable enable
-namespace Masa.Blazor;
+namespace Masa.Blazor.Popup.Components;
 
 public class AlertingPopupComponentBase : PopupComponentBase
 {

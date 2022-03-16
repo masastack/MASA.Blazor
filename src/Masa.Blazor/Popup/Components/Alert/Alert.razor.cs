@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using Masa.Blazor.Presets;
 
-namespace Masa.Blazor;
+namespace Masa.Blazor.Popup.Components;
 
 public partial class Alert : AlertingPopupComponentBase
 {

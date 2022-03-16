@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BlazorComponent;
+using Masa.Blazor.Popup.Components;
 using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor

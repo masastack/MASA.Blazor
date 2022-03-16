@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor;
+﻿namespace Masa.Blazor.Popup.Components;
 
 public class AlertParameters : Alert
 {

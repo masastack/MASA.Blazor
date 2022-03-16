@@ -2,7 +2,7 @@
 
 #nullable enable
 
-namespace Masa.Blazor;
+namespace Masa.Blazor.Popup.Components;
 
 public partial class Prompt : PopupComponentBase
 {
