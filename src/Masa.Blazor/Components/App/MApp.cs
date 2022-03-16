@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BlazorComponent;
+using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor
@@ -21,6 +22,9 @@ namespace Masa.Blazor
 
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
+
+        [Inject]
+        public Window Window { get; set; }
 
         protected ThemeCssBuilder ThemeCssBuilder { get; } = new ThemeCssBuilder();
 
@@ -62,6 +66,7 @@ namespace Masa.Blazor
             if (firstRender)
             {
                 await MasaBlazor.Breakpoint.InitAsync();
+                await Window.InitializeAsync();
             }
         }
     }
