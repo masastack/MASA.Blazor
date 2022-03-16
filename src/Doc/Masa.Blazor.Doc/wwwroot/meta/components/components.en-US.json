@@ -2803,7 +2803,7 @@
         "Name": "discrete",
         "Title": "Discrete",
         "Description": "<p>Discrete sliders offer a thumb label that displays the exact current amount. Using the <strong>Step</strong> prop you can disallow selecting values outside of steps.</p>\n",
-        "Code": "<MCard>\r\n    <MCardText>\r\n        <MSlider TValue=\"double\"\r\n                 Step=\"10\"\r\n                 ThumbLabel=\"true\"\r\n                 Class=\"test\"\r\n                 Ticks=\"true\"></MSlider>\r\n    </MCardText>\r\n</MCard>\r\n\r\n@code {\r\n    private double _value = 0;\r\n  }",
+        "Code": "<MCard>\r\n    <MCardText>\r\n        <MSlider TValue=\"double\"\r\n                 Step=\"10\"\r\n                 ThumbLabel=\"true\"\r\n                 Ticks=\"true\"></MSlider>\r\n    </MCardText>\r\n</MCard>\r\n\r\n@code {\r\n    private double _value = 0;\r\n  }",
         "Type": "Demos.Components.FormInputs.children.Slider.props.Discrete",
         "Style": "",
         "Debug": false,
@@ -5740,10 +5740,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-<<<<<<< HEAD
-    "LastWriteTime": "2022-03-10T15:41:13.5485657+08:00",
-=======
-    "LastWriteTime": "2022-03-11T10:03:20.6545422+08:00",
+    "LastWriteTime": "2022-03-16T17:17:44.3465033+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5794,7 +5791,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-11T10:03:20.6925831+08:00",
+    "LastWriteTime": "2022-03-16T17:17:44.3575035+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5867,8 +5864,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-10T17:08:06.4945893+08:00",
->>>>>>> origin/develop
+    "LastWriteTime": "2022-03-10T15:41:13.5485657+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5977,11 +5973,7 @@
     "OtherDocs": {
       "API": "\n"
     },
-<<<<<<< HEAD
     "LastWriteTime": "2022-03-10T15:41:13.5545644+08:00",
-=======
-    "LastWriteTime": "2022-03-10T17:08:06.502587+08:00",
->>>>>>> origin/develop
     "DemoList": [
       {
         "Order": 1,
@@ -6076,11 +6068,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-<<<<<<< HEAD
     "LastWriteTime": "2022-03-10T15:41:13.5565625+08:00",
-=======
-    "LastWriteTime": "2022-03-10T17:08:06.502587+08:00",
->>>>>>> origin/develop
     "DemoList": [
       {
         "Order": 0,
@@ -6131,7 +6119,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-15T13:50:32.8919024+08:00",
+    "LastWriteTime": "2022-03-16T17:17:44.3605029+08:00",
     "DemoList": [
       {
         "Order": 0,
