@@ -27,6 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     Lg = 1920
                 }
             });
+            services.TryAddScoped<IPopupService, PopupService>();
             services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
 
             return services;

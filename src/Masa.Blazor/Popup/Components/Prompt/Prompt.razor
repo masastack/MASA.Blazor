@@ -1,0 +1,53 @@
+﻿@namespace Masa.Blazor.Popup.Components
+@inherits PopupComponentBase
+@using Masa.Blazor.Presets
+
+<MDialog Value="Visible"
+         Width="420"
+         Persistent="true"
+         @attributes="@Attributes">
+    <MCard>
+        @if (!string.IsNullOrEmpty(Title))
+        {
+            <MCardTitle Class="@TitleClass" Style="@TitleStyle">
+                @Title
+            </MCardTitle>
+        }
+
+        <MCardText Class="@($"pb-0 {ContentClass}")" Style="@ContentStyle">
+            @if (!string.IsNullOrEmpty(Content))
+            {
+                @Content
+            }
+
+            <MForm @ref="_form"
+                   Class="pt-2"
+                   Model="_promptValue"
+                   EnableDataAnnotationsValidation
+                   OnSubmit="HandleOnSubmit">
+                <MTextarea @bind-Value="_promptValue.Value"
+                           AutoGrow
+                           Dense
+                           HideDetails="@("auto")"
+                           Outlined
+                           Placeholder="@Placeholder"
+                           Rows="1">
+                </MTextarea>
+            </MForm>
+        </MCardText>
+
+        <MCardActions Class="@ActionsClass" Style="@($"justify-content:end; {ActionsStyle}")">
+            <ModalButton Props="ComputedCancelButtonProps"
+                         Disabled="_okLoading"
+                         OnClick="HandleOnCancel">
+                @CancelText
+            </ModalButton>
+            <ModalButton Props="ComputedOkButtonProps"
+                         Disabled="_okLoading"
+                         Loading="_okLoading"
+                         OnClick="HandleOnOk">
+                @OkText
+            </ModalButton>
+        </MCardActions>
+    </MCard>
+</MDialog>

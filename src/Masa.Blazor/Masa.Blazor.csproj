@@ -25,6 +25,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="Masa.Blazor96_96.png" Pack="true" PackagePath=""/>
+		<None Include="Masa.Blazor96_96.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 </Project>

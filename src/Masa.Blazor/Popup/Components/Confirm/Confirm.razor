@@ -1,0 +1,42 @@
+﻿@namespace Masa.Blazor.Popup.Components
+@inherits AlertingPopupComponentBase
+@using Masa.Blazor.Presets
+
+<MDialog Value="Visible"
+         Width="420"
+         Persistent="true"
+         @attributes="@Attributes">
+    <MCard>
+        @if (!string.IsNullOrEmpty(Title))
+        {
+            <MCardTitle Class="@TitleClass" Style="@TitleStyle">
+                @if (!string.IsNullOrEmpty(ComputedIcon))
+                {
+                    <MIcon Color="@ComputedIconColor" Class="mr-2">@ComputedIcon</MIcon>
+                }
+                @Title
+            </MCardTitle>
+        }
+
+        @if (!string.IsNullOrEmpty(Content))
+        {
+            <MCardText Class="@($"pb-0 {ContentClass}")" Style="@ContentStyle">
+                @Content
+            </MCardText>
+        }
+
+        <MCardActions Class="@ActionsClass" Style="@($"justify-content:end; {ActionsStyle}")">
+            <ModalButton Props="ComputedCancelButtonProps"
+                         Disabled="_okLoading"
+                         OnClick="HandleOnCancel">
+                @CancelText
+            </ModalButton>
+            <ModalButton Props="ComputedOkButtonProps"
+                         Disabled="_okLoading"
+                         Loading="_okLoading"
+                         OnClick="HandleOnOk">
+                @OkText
+            </ModalButton>
+        </MCardActions>
+    </MCard>
+</MDialog>

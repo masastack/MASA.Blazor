@@ -173,7 +173,7 @@ namespace Masa.Blazor.Presets
                     await OnSave.InvokeAsync(args);
                     _saveLoading = false;
 
-                    if (args.Cancelled) return;
+                    if (args.IsCanceled) return;
 
                     if (Form != null)
                     {

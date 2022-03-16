@@ -1,0 +1,42 @@
+﻿@namespace Masa.Blazor.Popup.Components
+@inherits AlertingPopupComponentBase
+@using Masa.Blazor.Presets
+
+<MSnackbar @bind-Value="Visible"
+           Bottom="@(Bottom ?? false)"
+           Centered="@(Centered ?? false)"
+           Color="@ComputedColor"
+           ContentClass="@ContentClass"
+           Dark="@(Dark ?? false)"
+           Elevation="@Elevation"
+           Height="@Height"
+           Left="@(Left ?? false)"
+           Light="@(Light ?? false)"
+           MultiLine="@(MultiLine ?? false)"
+           Outlined="@(Outlined ?? false)"
+           Right="@(Right ?? false)"
+           Rounded="@(Rounded ?? false)"
+           Shaped="@(Shaped ?? false)"
+           Text="@(Text ?? false)"
+           Tile="@(Tile ?? false)"
+           Timeout="@(Timeout ?? 0)"
+           Top="@(Top ?? false)"
+           Vertical="@(Vertical ?? false)"
+           Width="@Width"
+           @attributes="@Attributes"
+           OnClosed="@HandleOnClosed">
+    <ChildContent>
+        @if (!string.IsNullOrEmpty(ComputedIcon))
+        {
+            <MIcon Color="@ComputedIconColor" Class="mr-2">@ComputedIcon</MIcon>
+        }
+
+        @Content
+    </ChildContent>
+    <ActionContent>
+        <ModalButton Props="ComputedActionButtonProps"
+                     OnClick="HandleOnAction">
+            @ActionText
+        </ModalButton>
+    </ActionContent>
+</MSnackbar>

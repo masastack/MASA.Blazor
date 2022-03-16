@@ -4494,6 +4494,14 @@
             "FullTitle": "Not Grouped (未分组的)",
             "Type": "menuItem",
             "Url": "components/not-grouped"
+          },
+          {
+            "Order": 0,
+            "Title": "Popup service",
+            "SubTitle": "弹出层服务",
+            "FullTitle": "Popup service (弹出层服务)",
+            "Type": "menuItem",
+            "Url": "components/popup-service"
           }
         ]
       },
