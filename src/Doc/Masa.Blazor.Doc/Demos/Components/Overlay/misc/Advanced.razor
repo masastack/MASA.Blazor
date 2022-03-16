@@ -21,12 +21,12 @@
         </MCardTitle>
 
         <FadeTransition>
-            <Element Show="@context.Hover" Class="text-center">
+            <ShowTransitionElement Value="@context.Hover" Class="text-center">
                 <MOverlay Absolute Value="@context.Hover"
                           Color="#036358">
                     <MButton>See more info</MButton>
                 </MOverlay>
-            </Element>
+            </ShowTransitionElement>
         </FadeTransition>
     </MCard>
 </MHover>

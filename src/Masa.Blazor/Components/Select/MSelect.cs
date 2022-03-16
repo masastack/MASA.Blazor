@@ -158,6 +158,8 @@ namespace Masa.Blazor
 
         protected virtual bool MenuCanShow => true;
 
+        protected override Dictionary<string, object> InputSlotAttrs => (Menu as MMenu)?.ActivatorAttributes;
+
         protected virtual BMenuProps GetDefaultMenuProps() => new()
         {
             CloseOnClick = true,
@@ -236,6 +238,7 @@ namespace Masa.Blazor
                 .ApplySelectDefault<TItem, TItemValue, TValue>()
                 .Apply<BMenu, MMenu>(attrs =>
                 {
+                    attrs[nameof(MMenu.ExternalActivator)] = true;
                     attrs[nameof(MMenu.Value)] = MenuCanShow && IsMenuActive;
                     attrs[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, async val =>
                     {
@@ -299,7 +302,7 @@ namespace Masa.Blazor
             {
                 if (value is TValue val)
                 {
-                    await SetInternalValueAsync(val);
+                    InternalValue = val;
                 }
                 IsMenuActive = false;
             }
@@ -317,7 +320,7 @@ namespace Masa.Blazor
 
                 if (internalValues is TValue val)
                 {
-                    await SetInternalValueAsync(val);
+                    InternalValue = val;
                 }
             }
 
@@ -334,7 +337,7 @@ namespace Masa.Blazor
             if (firstRender)
             {
                 await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
-                await (Menu as MMenu)?.UpdateActivator(InputSlotElement);
+                //await (Menu as MMenu)?.UpdateActivatorAsync(InputSlotElement);
             }
         }
 
@@ -371,11 +374,6 @@ namespace Masa.Blazor
                 default:
                     break;
             }
-
-            if (OnKeyDown.HasDelegate)
-            {
-                await OnKeyDown.InvokeAsync(args);
-            }
         }
 
         private void ChangeSelectedIndex(int change)
@@ -400,7 +398,7 @@ namespace Masa.Blazor
             if (Multiple)
             {
                 IList<TItemValue> values = new List<TItemValue>();
-                await SetInternalValueAsync((TValue)values);
+                InternalValue = (TValue)values;
             }
             else
             {

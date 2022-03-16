@@ -248,7 +248,7 @@ namespace Masa.Blazor
         public Dictionary<string, object> ThumbAttrs => new()
         {
             { "role", "slider" },
-            { "tabindex", IsDisabled ? -1 : 0 }
+            { "tabindex", IsDisabled ? -1 : 0}
         };
 
         public bool ShowThumbLabelContainer => IsFocused || IsActive || ThumbLabel == "always";

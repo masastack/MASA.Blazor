@@ -63,6 +63,11 @@
       "Description": "禁用提示"
     },
     {
+      "Name": "ExternalActivator",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "Id",
       "Type": "String",
       "Default": "null",

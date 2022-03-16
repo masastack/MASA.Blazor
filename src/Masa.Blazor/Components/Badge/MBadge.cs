@@ -116,7 +116,8 @@ namespace Masa.Blazor
                         .AddIf(() => $"left:{ComputedLeft}", () => !Inline)
                         .AddIf(() => $"right:{ComputedRight}", () => !Inline)
                         .AddIf(() => $"top:{ComputedTop}", () => !Inline)
-                        .AddBackgroundColor(Color);
+                        .AddBackgroundColor(Color)
+                        .AddIf("display:none", () => Transition == null && !Value);
                 });
 
             AbstractProvider

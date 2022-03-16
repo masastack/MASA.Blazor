@@ -89,6 +89,11 @@
       "Description": ""
     },
     {
+      "Name": "ExternalActivator",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "Id",
       "Type": "String",
       "Default": "null",

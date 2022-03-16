@@ -38,11 +38,11 @@
                   Align="AlignTypes.Center"
                   Justify="JustifyTypes.Center">
 				<ScaleTransition>
-					<Element Show="!_loading" Class="text-center">
+					<ShowTransitionElement Value="!_loading" Class="text-center">
 						<MButton Color="primary" OnClick="()=>Loading(true)">
                         Start loading
                     </MButton>
-					</Element>
+					</ShowTransitionElement>
 				</ScaleTransition>
             </MRow>
         </MContainer>

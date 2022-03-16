@@ -9,18 +9,18 @@
              Disabled="clicked"
              OnClick="@Copy">
         <FadeTransition>
-            <Element Show="clicked">
+            <ShowTransitionElement Value="clicked">
                 <MIcon Color="grey">
                     mdi-check
                 </MIcon>
-            </Element>
+            </ShowTransitionElement>
         </FadeTransition>
         <FadeTransition>
-            <Element Show="!clicked" Style="position: absolute;">
+            <ShowTransitionElement Value="!clicked" Style="position: absolute;">
                 <MIcon Color="grey">
                     mdi-content-copy
                 </MIcon>
-            </Element>
+            </ShowTransitionElement>
         </FadeTransition>
     </MButton>
 </MSheet>
