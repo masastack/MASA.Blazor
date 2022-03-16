@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿#nullable enable
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BlazorComponent;
+using Masa.Blazor.Popup.Components;
 using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components;
 
@@ -11,6 +13,25 @@ namespace Masa.Blazor
     /// </summary>
     public partial class MApp : BApp, IThemeable
     {
+        [Inject]
+        public HeadJsInterop HeadJsInterop { get; set; }
+
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; }
+
+        #region for PopupService
+
+        [Parameter]
+        public Action<AlertParameters>? AlertParameters { get; set; }
+
+        [Parameter]
+        public Action<ConfirmParameters>? ConfirmParameters { get; set; }
+
+        [Parameter]
+        public Action<PromptParameters>? PromptParameters { get; set; }
+
+        #endregion
+
         /// <summary>
         /// Whether to display from left to right
         /// </summary>

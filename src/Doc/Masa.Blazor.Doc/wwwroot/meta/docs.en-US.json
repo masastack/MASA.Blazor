@@ -4391,6 +4391,20 @@
         "Children": [
           {
             "Order": 0,
+            "Title": "Block text",
+            "FullTitle": "Block text",
+            "Type": "menuItem",
+            "Url": "components/block-text"
+          },
+          {
+            "Order": 0,
+            "Title": "Copyable text",
+            "FullTitle": "Copyable text",
+            "Type": "menuItem",
+            "Url": "components/copyable-text"
+          },
+          {
+            "Order": 0,
             "Title": "Drawers",
             "FullTitle": "Drawers",
             "Type": "menuItem",
@@ -4409,6 +4423,13 @@
             "FullTitle": "Not Grouped",
             "Type": "menuItem",
             "Url": "components/not-grouped"
+          },
+          {
+            "Order": 0,
+            "Title": "Popup service",
+            "FullTitle": "Popup service",
+            "Type": "menuItem",
+            "Url": "components/popup-service"
           }
         ]
       },

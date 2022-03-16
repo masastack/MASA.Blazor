@@ -2,12 +2,6 @@
 using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor
 {
@@ -549,7 +543,7 @@ namespace Masa.Blazor
             }
 
             _shouldRender = true;
-            StateHasChanged();
+            //StateHasChanged();
         }
 
         protected override bool ShouldRender()

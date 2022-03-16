@@ -52,6 +52,11 @@
       "Description": ""
     },
     {
+      "Name": "ContentStyle",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "Disabled",
       "Type": "Boolean",
       "Default": "false",

@@ -46,7 +46,7 @@ pipeline {
                     cd ..&&cd ..
                     dotnet build src
                     dotnet pack src --include-symbols -p:PackageVersion=0.2."${BUILD_ID}"
-                    dotnet nuget push "**/*.symbols.nupkg" -k $NUGET_KEY -s https://api.nuget.org/v3/index.json
+                    dotnet nuget push "**/*.symbols.nupkg"  --skip-duplicate -k $NUGET_KEY -s https://api.nuget.org/v3/index.json
                     '''                    
             }
         }
