@@ -13,21 +13,17 @@ namespace Masa.Blazor
 {
     public partial class MDialog : BDialog, IDialog, IThemeable
     {
-        private bool _animated = false;
-
-        protected override string AttachSelector => Attach ?? ".m-application";
-
         [Parameter]
         public string ContentClass { get; set; }
 
         [Parameter]
-        public string Origin { get; set; }
+        public string Origin { get; set; } = "center center";
 
         [Parameter]
         public bool Scrollable { get; set; }
 
         [Parameter]
-        public string Transition { get; set; }
+        public string Transition { get; set; } = "dialog-transition";
 
         public Dictionary<string, object> ContentAttrs
         {
@@ -37,7 +33,8 @@ namespace Masa.Blazor
                 {
                     { "role", "document" }
                 };
-                if (Value)
+
+                if (IsActive)
                 {
                     attrs.Add("tabindex", 0);
                 }
@@ -46,13 +43,11 @@ namespace Masa.Blazor
             }
         }
 
-        public override async Task SetParametersAsync(ParameterView parameters)
-        {
-            await base.SetParametersAsync(parameters);
+        bool IDialog.IsBooted => IsBooted;
 
-            Origin ??= "center center";
-            Transition ??= "dialog-transition";
-        }
+        protected override string AttachSelector => Attach ?? ".m-application";
+
+        protected bool Animated { get; set; }
 
         protected override void SetComponentClass()
         {
@@ -69,7 +64,7 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add($"{prefix}__content")
-                        .AddIf($"{prefix}__content--active", () => Value)
+                        .AddIf($"{prefix}__content--active", () => IsActive)
                         .AddTheme(IsDark);
                 }, styleBuilder =>
                 {
@@ -81,11 +76,11 @@ namespace Masa.Blazor
                     cssBuilder
                         .Add(prefix)
                         .Add(ContentClass)
-                        .AddIf($"{prefix}--active", () => Value)
+                        .AddIf($"{prefix}--active", () => IsActive)
                         .AddIf($"{prefix}--persistent", () => Persistent)
                         .AddIf($"{prefix}--fullscreen", () => Fullscreen)
                         .AddIf($"{prefix}--scrollable", () => Scrollable)
-                        .AddIf($"{prefix}--animated", () => _animated);
+                        .AddIf($"{prefix}--animated", () => Animated);
                 }, styleBuilder =>
                 {
                     styleBuilder
@@ -97,95 +92,18 @@ namespace Masa.Blazor
             AbstractProvider
                 .Apply<BOverlay, MOverlay>(attrs =>
                 {
-                    attrs[nameof(MOverlay.Value)] = ShowOverlay && Value;
+                    attrs[nameof(MOverlay.Value)] = ShowOverlay && IsActive;
                     attrs[nameof(MOverlay.ZIndex)] = ZIndex - 1;
                 })
                 .ApplyDialogDefault();
-        }
-
-        private async Task AfterShowContent()
-        {
-            await JsInvokeAsync(JsInteropConstants.AddOutsideClickEventListener,
-                DotNetObjectReference.Create(new Invoker<object>(OutsideClick)),
-                new[] { Document.GetElementByReference(DialogRef).Selector },
-                new[] { Document.GetElementByReference(OverlayRef!.Value).Selector });
-        }
-
-        private async Task AnimateClick()
-        {
-            _animated = true;
-            await InvokeStateHasChangedAsync();
-
-            await Task.Delay(150);
-
-            _animated = false;
-            await InvokeStateHasChangedAsync();
         }
 
         public async Task Keydown(KeyboardEventArgs args)
         {
             if (args.Key == "Escape")
             {
-                await Close();
+                await SetIsActiveAsync(false);
             }
-        }
-
-        protected override async Task Close()
-        {
-            if (Persistent)
-            {
-                await AnimateClick();
-                return;
-            }
-
-            await base.Close();
-        }
-
-        private bool CloseConditional()
-        {
-            return IsActive;
-        }
-
-        protected async Task OutsideClick(object _)
-        {
-            if (!CloseConditional()) return;
-
-            if (OnOutsideClick.HasDelegate)
-                await OnOutsideClick.InvokeAsync();
-
-            if (Persistent)
-            {
-                await AnimateClick();
-                return;
-            }
-
-            await UpdateValue(false);
-
-            await InvokeStateHasChangedAsync();
-        }
-
-        protected override async Task ShowLazyContent()
-        {
-            if (!ShowContent && Value)
-            {
-                ShowContent = true;
-                Value = false;
-
-                await InvokeStateHasChangedAsync();
-                await Task.Delay(BROWSER_RENDER_INTERVAL);
-
-                await AfterShowContent();
-                Value = true;
-
-                await MoveContentTo();
-                await InvokeStateHasChangedAsync();
-            }
-        }
-
-        private async Task MoveContentTo()
-        {
-            await JsInvokeAsync(JsInteropConstants.AddElementTo, OverlayRef, AttachSelector);
-            await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachSelector);
         }
     }
 }
