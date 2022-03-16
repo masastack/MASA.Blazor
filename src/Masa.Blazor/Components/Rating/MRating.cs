@@ -74,13 +74,13 @@ namespace Masa.Blazor
 
         [Parameter]
         public bool Large { get; set; }
-        
+
 
         private double _hoverIndex = -1;
 
         protected bool _isHovering => Hover && _hoverIndex >= 0;
 
-        
+
 
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
@@ -142,6 +142,7 @@ namespace Masa.Blazor
                         async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseLeave));
                     attrs["onexmousemove"] = EventCallback.Factory.Create<ExMouseEventArgs>(this,
                         async args => await HandleOnExMouseEventAsync(args, itemIndex, MouseType.MouseMove));
+                    attrs["return-target"] = true;
                 });
         }
 
