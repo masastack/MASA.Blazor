@@ -12,12 +12,17 @@ namespace Masa.Blazor
 {
     public partial class MTooltip : BTooltip, ITooltip
     {
-        public override string AttachedSelector => Attach ?? ".m-application";
+        protected override string AttachSelector => Attach ?? ".m-application";
 
-        protected override async Task MoveContentTo()
+        ElementReference ITooltip.ContentElement
         {
-            await JsInvokeAsync(JsInteropConstants.AddElementTo, ContentRef, AttachedSelector);
+            set
+            {
+                ContentElement = value;
+            }
         }
+
+        bool IMenuable.IsBooted => IsBooted;
 
         protected override void SetComponentClass()
         {
@@ -37,7 +42,7 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add($"{prefix}__content")
-                        .AddIf("menuable__content__active", () => Value)
+                        .AddIf("menuable__content__active", () => IsActive)
                         .AddIf($"{prefix}__content--fixed", () => ActivatorFixed)
                         .Add(ContentClass)
                         .AddBackgroundColor(Color);
@@ -48,8 +53,8 @@ namespace Masa.Blazor
                         .AddMinWidth(MinWidth)
                         .Add($"left:{CalculatedLeft}px")
                         .Add($"top:{CalculatedTop}px")
-                        .Add($"opacity:{(Value ? 0.9 : 0)}")
-                        .Add($"z-index:{InternalZIndex}")
+                        .Add($"opacity:{(IsActive ? 0.9 : 0)}")
+                        .Add($"z-index:{ComputedZIndex}")
                         .AddBackgroundColor(Color);
                 });
 
