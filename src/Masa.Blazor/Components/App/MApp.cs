@@ -1,5 +1,4 @@
-﻿#nullable enable
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BlazorComponent;
 using Masa.Blazor.Popup.Components;
@@ -13,12 +12,6 @@ namespace Masa.Blazor
     /// </summary>
     public partial class MApp : BApp, IThemeable
     {
-        [Inject]
-        public HeadJsInterop HeadJsInterop { get; set; }
-
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
-
         #region for PopupService
 
         [Parameter]

@@ -12,6 +12,9 @@ namespace Masa.Blazor
 {
     public partial class MTooltip : BTooltip, ITooltip
     {
+        [Parameter]
+        public string ContentStyle { get; set; }
+
         protected override string AttachSelector => Attach ?? ".m-application";
 
         ElementReference ITooltip.ContentElement
