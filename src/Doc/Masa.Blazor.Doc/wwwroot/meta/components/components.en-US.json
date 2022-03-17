@@ -972,7 +972,7 @@
         "Name": "item",
         "Title": "Item",
         "Description": "<p>You can use the <code>item</code> slot to customize each breadcrumb.</p>\n",
-        "Code": "<MBreadcrumbs Items=\"items\">\r\n    <ItemContent>\r\n        <MBreadcrumbsItem Href=\"@context.Href\" Disabled=\"context.Disabled\">\r\n            @context.Text.ToUpper()\r\n        </MBreadcrumbsItem>\r\n    </ItemContent>\r\n</MBreadcrumbs>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"/components/breadcrumbs\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"/components/breadcrumbs\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"/components/breadcrumbs\"}\r\n    };\r\n\r\n}",
+        "Code": "<MBreadcrumbs Items=\"items\">\r\n    <ItemContent>\r\n        <MBreadcrumbsItem Href=\"@context.Href\" Disabled=\"context.Disabled\" Context=\"itemContext\">\r\n            @context.Text.ToUpper()\r\n        </MBreadcrumbsItem>\r\n    </ItemContent>\r\n</MBreadcrumbs>\r\n\r\n@code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n    {\r\n        new BreadcrumbItem() {Text = \"Dashboard\", Disabled = false, Href = \"/components/breadcrumbs\"},\r\n        new BreadcrumbItem() {Text = \"Link 1\", Disabled = false, Href = \"/components/breadcrumbs\"},\r\n        new BreadcrumbItem() {Text = \"Link 2\", Disabled = true, Href = \"/components/breadcrumbs\"}\r\n    };\r\n\r\n}",
         "Type": "Demos.Components.Breadcrumbs.contents.Item",
         "Style": "",
         "Debug": false,
@@ -6119,7 +6119,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T14:06:00.9833138+08:00",
+    "LastWriteTime": "2022-03-17T16:18:26.4723354+08:00",
     "DemoList": [
       {
         "Order": 0,
