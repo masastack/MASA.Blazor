@@ -23,7 +23,10 @@ public class PDrawer : ModalBase
         Width = "33.33%";
 
         await base.SetParametersAsync(parameters);
+    }
 
+    protected override void OnParametersSet()
+    {
         BodyStyle = $"overflow-y: auto;padding: 24px;{ComputedContentHeight}";
 
         if (!Class.Contains("m-dialog--drawer"))
@@ -36,11 +39,8 @@ public class PDrawer : ModalBase
             Class += $" {ComputedClass}";
         }
 
-        if (HasActions)
-        {
-            Persistent = true;
-        }
-
         Transition = ComputedTransition;
+
+        base.OnParametersSet();
     }
 }

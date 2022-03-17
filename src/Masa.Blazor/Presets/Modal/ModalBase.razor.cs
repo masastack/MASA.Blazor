@@ -228,6 +228,10 @@ namespace Masa.Blazor.Presets
                 
                 await OnCancel.InvokeAsync(args);
             }
+            else
+            {
+                Value = false;
+            }
         }
 
         protected virtual async Task HandleOnDelete(MouseEventArgs _)
@@ -237,6 +241,16 @@ namespace Masa.Blazor.Presets
                 var args = new ModalActionEventArgs();
 
                 await OnDelete.InvokeAsync(args);
+            }
+        }
+
+        private async Task InternalValueChanged(bool value)
+        {
+            Value = value;
+
+            if (ValueChanged.HasDelegate)
+            {
+                await ValueChanged.InvokeAsync(value);
             }
         }
 
