@@ -120,7 +120,7 @@ namespace Masa.Blazor.Doc.Shared
 
         public string T(string key)
         {
-            return I18n.LanguageMap.GetValueOrDefault(key);
+            return I18n.T(key);
         }
 
         public void Dispose()
