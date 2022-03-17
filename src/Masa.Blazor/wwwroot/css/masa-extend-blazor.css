@@ -601,9 +601,9 @@ code[class*=language-], pre[class*=language-] {
 }
 
 .m-presets-block-text .m-presets-block-text__secondary {
-    color: rgba(0, 0, 0, 0.6);
     font-size: .75rem;
     line-height: 16px;
+    opacity: 0.6;
 }
 
 .m-presets-copyable-text {
