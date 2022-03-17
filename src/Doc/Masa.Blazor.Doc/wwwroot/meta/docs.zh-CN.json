@@ -4066,6 +4066,15 @@
       },
       {
         "Order": 0,
+        "Title": "Bottom sheets",
+        "SubTitle": "底部工作表",
+        "FullTitle": "Bottom sheets (底部工作表)",
+        "Type": "menuItem",
+        "Url": "components/bottom-sheets",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Breadcrumbs",
         "SubTitle": "面包屑导航",
         "FullTitle": "Breadcrumbs (面包屑导航)",
