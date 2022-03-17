@@ -1,6 +1,6 @@
 ﻿---
 order: 0
 title:
-  zh-CN: 确认弹窗
+  zh-CN: 确认
   en-US: Confirm
 ---
