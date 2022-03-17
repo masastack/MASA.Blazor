@@ -1,6 +1,6 @@
 ﻿<MBreadcrumbs Items="items">
     <ItemContent>
-        <MBreadcrumbsItem Href="@context.Href" Disabled="context.Disabled">
+        <MBreadcrumbsItem Href="@context.Href" Disabled="context.Disabled" Context="itemContext">
             @context.Text.ToUpper()
         </MBreadcrumbsItem>
     </ItemContent>

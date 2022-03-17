@@ -86,7 +86,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
-      "Type": "RenderFragment",
+      "Type": "RenderFragment<ValueTuple`2>",
       "Description": "默认插槽"
     }
   ],
