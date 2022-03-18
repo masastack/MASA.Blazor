@@ -379,6 +379,14 @@
       },
       {
         "Order": 0,
+        "Title": "Bottom sheets",
+        "FullTitle": "Bottom sheets",
+        "Type": "menuItem",
+        "Url": "components/bottom-sheets",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Breadcrumbs",
         "FullTitle": "Breadcrumbs",
         "Type": "menuItem",
