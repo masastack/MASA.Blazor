@@ -47,8 +47,6 @@ namespace Masa.Blazor
 
         protected override string AttachSelector => Attach ?? ".m-application";
 
-        protected bool Animated { get; set; }
-
         protected override void SetComponentClass()
         {
             var prefix = "m-dialog";
