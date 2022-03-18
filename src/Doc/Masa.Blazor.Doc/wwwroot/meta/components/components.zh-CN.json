@@ -920,6 +920,94 @@
     "FullTitle": "Borders（边框）"
   },
   {
+    "Desc": "<p>底部表单是一个经过修改的 <code>MDialog</code> , 从屏幕的底部滑出，类似于 <code>MBottomNavigation</code>。 底部导航组件用于按钮和特定的应用程序级操作，而底部工作表可以包含任何内容。</p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MBottomSheet\">MBottomSheet</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-03-17T19:28:07.1817963+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "使用",
+        "Description": "<p>在这里，我们将显示一个示例操作列表，它可能出现在应用程序中。</p>\n",
+        "Code": "<div class=\"text-center\">\r\n    <MBottomSheet @bind-Value=\"sheet\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"purple\" Dark @attributes=\"@context.Attrs\">Open Playground</MButton>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MSheet Class=\"text-center\" Height=\"200\">\r\n                <MButton Class=\"mt-6\" Color=\"error\" OnClick=\"() => sheet = !sheet\">Close</MButton>\r\n            </MSheet>\r\n        </ChildContent>\r\n    </MBottomSheet>\r\n</div>\r\n\r\n@code {\r\n\r\n    bool sheet;\r\n\r\n}",
+        "Type": "Demos.Components.BottomSheets.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "inset",
+        "Title": "嵌入",
+        "Description": "<p>底部工作表可以被嵌入，将桌面上的最大宽度减少到70%。 可以使用 <strong>Width</strong> 参数来进一步手动减少这种情况。</p>\n",
+        "Code": "<div class=\"text-center\">\r\n    <MBottomSheet\r\n        @bind-Value=\"sheet\"\r\n        Inset>\r\n        <ActivatorContent>\r\n            <MButton\r\n                Color=\"orange\"\r\n                Dark\r\n                @attributes=\"@context.Attrs\">\r\n                Open Inset\r\n            </MButton>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MSheet\r\n                Class=\"text-center\"\r\n                Height=\"200\">\r\n                <MButton\r\n                    Class=\"mt-6\"\r\n                    Text\r\n                    Color=\"error\"\r\n                    OnClick=\"() => sheet = !sheet\">\r\n                    close\r\n                </MButton>\r\n                <div class=\"my-3\">\r\n                    This is a bottom sheet using the inset prop\r\n                </div>\r\n            </MSheet>\r\n        </ChildContent>\r\n    </MBottomSheet>\r\n</div>\r\n\r\n@code {\r\n\r\n    bool sheet;\r\n\r\n}",
+        "Type": "Demos.Components.BottomSheets.props.Inset",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "model",
+        "Title": "模型",
+        "Description": "<p>底部工作表可以使用 <strong>@bind-Value</strong> 来控制。 你可以使用它来关闭他们，或者如果你不能使用 <code>ActivatorContent</code> 插槽。</p>\n",
+        "Code": "<div class=\"text-center\">\r\n    <MButton\r\n        Color=\"blue\"\r\n        Dark\r\n        OnClick=\"() => sheet = !sheet\">\r\n        Open bind-Value\r\n    </MButton>\r\n    <MBottomSheet @bind-Value=\"sheet\">\r\n        <MSheet\r\n            Class=\"text-center\"\r\n            Height=\"200\">\r\n            <MButton\r\n                Class=\"mt-6\"\r\n                Text\r\n                Color=\"red\"\r\n                OnClick=\"() => sheet = !sheet\">\r\n                close\r\n            </MButton>\r\n            <div class=\"py-3\">\r\n                This is a bottom sheet using the controlled by v-model instead of activator\r\n            </div>\r\n        </MSheet>\r\n    </MBottomSheet>\r\n</div>\r\n\r\n@code {\r\n\r\n    bool sheet;\r\n\r\n}",
+        "Type": "Demos.Components.BottomSheets.props.Model",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "persistent",
+        "Title": "保留",
+        "Description": "<p>保留的底部工作表无法通过在外部单击来关闭。</p>\n",
+        "Code": "<div class=\"text-center\">\r\n    <MBottomSheet\r\n        @bind-Value=\"sheet\"\r\n        Persistent>\r\n        <ActivatorContent>\r\n            <MButton\r\n                Color=\"green\"\r\n                Dark\r\n                @attributes=\"@context.Attrs\">\r\n                Open Persistent\r\n            </MButton>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MSheet\r\n                Class=\"text-center\"\r\n                Height=\"200\">\r\n                <MButton\r\n                    Class=\"mt-6\"\r\n                    Text\r\n                    Color=\"error\"\r\n                    OnClick=\"() => sheet = !sheet\">\r\n                    close\r\n                </MButton>\r\n                <div class=\"py-3\">\r\n                    This is a bottom sheet using the persistent prop\r\n                </div>\r\n            </MSheet>\r\n        </ChildContent>\r\n    </MBottomSheet>\r\n</div>\r\n\r\n@code {\r\n\r\n    bool sheet;\r\n\r\n}",
+        "Type": "Demos.Components.BottomSheets.props.Persistent",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "musicPlayer",
+        "Title": "音乐播放器",
+        "Description": "<p>使用嵌入式底部工作表，你可以制作一些实用的组件，比如这个简单的音乐播放器。</p>\n",
+        "Code": "@inject MasaBlazor MasaBlazor\r\n\r\n<div class=\"text-center\">\r\n    <MBottomSheet Inset>\r\n        <ActivatorContent>\r\n            <MButton\r\n                Color=\"red\"\r\n                Dark\r\n                @attributes=\"@context.Attrs\">\r\n                Open Player\r\n            </MButton>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MCard Tile>\r\n                <MProgressLinear\r\n                    Value=\"50\"\r\n                    Class=\"my-0\"\r\n                    Height=\"3\">\r\n                </MProgressLinear>\r\n\r\n                <MList>\r\n                    <MListItem>\r\n                        <MListItemContent>\r\n                            <MListItemTitle>The Walker</MListItemTitle>\r\n                            <MListItemSubtitle>Fitz & The Trantrums</MListItemSubtitle>\r\n                        </MListItemContent>\r\n\r\n                        <MSpacer></MSpacer>\r\n\r\n                        <MListItemIcon>\r\n                            <MButton Icon>\r\n                                <MIcon>mdi-rewind</MIcon>\r\n                            </MButton>\r\n                        </MListItemIcon>\r\n\r\n                        <MListItemIcon Class=\"@(MasaBlazor.Breakpoint.MdAndUp ? \"mx-5\" : \"\")\">\r\n                            <MButton Icon>\r\n                                <MIcon>mdi-pause</MIcon>\r\n                            </MButton>\r\n                        </MListItemIcon>\r\n\r\n                        <MListItemIcon\r\n                            Class=\"@($\"ml-0 {(MasaBlazor.Breakpoint.MdAndUp ? \"mr-3\" : \"\")}\")\">\r\n                            <MButton Icon>\r\n                                <MIcon>mdi-fast-forward</MIcon>\r\n                            </MButton>\r\n                        </MListItemIcon>\r\n                    </MListItem>\r\n                </MList>\r\n            </MCard>\r\n        </ChildContent>\r\n    </MBottomSheet>\r\n</div>",
+        "Type": "Demos.Components.BottomSheets.misc.MusicPlayer",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 0,
+        "Name": "openInList",
+        "Title": "在列表中打开",
+        "Description": "<p>通过将功能列表合并到底部表单中，您可以创建一个简单的 ‘open in’ 组件。</p>\n",
+        "Code": "<div class=\"text-center\">\r\n    <MBottomSheet @bind-Value=\"sheet\">\r\n        <ActivatorContent>\r\n            <MButton\r\n                Color=\"purple\"\r\n                Dark\r\n                @attributes=\"@context.Attrs\">\r\n                Open In\r\n            </MButton>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MList>\r\n                <MSubheader>Open in</MSubheader>\r\n                @foreach (var tile in tiles)\r\n                {\r\n                    <MListItem @key=\"@tile\"\r\n                               OnClick=\"() => sheet = false\">\r\n                        <MListItemAvatar>\r\n                            <MAvatar\r\n                                Size=\"32\"\r\n                                Tile>\r\n                                <img\r\n                                    src=\"@($\"https://cdn.vuetifyjs.com/images/bottom-sheets/{tile.img}\")\"\r\n                                    alt=\"@tile.title\">\r\n                            </MAvatar>\r\n                        </MListItemAvatar>\r\n                        <MListItemTitle>@tile.title</MListItemTitle>\r\n                    </MListItem>\r\n                }\r\n            </MList>\r\n        </ChildContent>\r\n    </MBottomSheet>\r\n</div>\r\n\r\n@code {\r\n\r\n    bool sheet;\r\n\r\n    static readonly List<(string img, string title)> tiles = new()\r\n    {\r\n        (\"keep.png\", \"Keep\"),\r\n        (\"inbox.png\", \"Inbox\"),\r\n        (\"hangouts.png\", \"Hangouts\"),\r\n        (\"messenger.png\", \"Messenger\"),\r\n        (\"google.png\", \"Google+\"),\r\n    };\r\n\r\n}",
+        "Type": "Demos.Components.BottomSheets.misc.OpenInList",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/dialogs",
+      "/components/lists",
+      "/components/menus"
+    ],
+    "Subtitle": "底部工作表",
+    "Title": "Bottom sheets",
+    "Type": "底部工作表",
+    "FullTitle": "Bottom sheets（底部工作表）"
+  },
+  {
     "Desc": "<p>Breadcrumbs 组件适用于页面层级导航</p>\n",
     "Order": 0,
     "OtherDocs": {
@@ -932,7 +1020,7 @@
         "Order": 0,
         "Name": "index",
         "Title": "使用",
-        "Description": "<p>默认情况下，面包屑导航使用文本分隔符。 可以是任何字符串。</p>\n",
+        "Description": "<p>在这里，我们将显示一个示例操作列表，它可能出现在应用程序中。</p>\n",
         "Code": "<div class=\"d-flex align-center\">\r\n    Items:\r\n    <MBreadcrumbs Items=\"items\"></MBreadcrumbs>\r\n</div>\r\n\r\n<div class=\"d-flex align-center\">\r\n    Markup:\r\n    <MBreadcrumbs>\r\n        <MBreadcrumbsItem Href=\"/components/breadcrumbs\">Dashboard</MBreadcrumbsItem>\r\n        <MBreadcrumbsItem Href=\"/components/breadcrumbs\" Text=\"Link 1\"></MBreadcrumbsItem>\r\n        <MBreadcrumbsItem Href=\"/components/breadcrumbs\" Disabled>Link 2</MBreadcrumbsItem>\r\n    </MBreadcrumbs>\r\n</div>\r\n\r\n    @code {\r\n\r\n    List<BreadcrumbItem> items = new()\r\n        {\r\n            new BreadcrumbItem() { Text = \"Dashboard\", Disabled = false, Href = \"/components/breadcrumbs\" },\r\n            new BreadcrumbItem() { Text = \"Link 1\", Disabled = false, Href = \"/components/breadcrumbs\" },\r\n            new BreadcrumbItem() { Text = \"Link 2\", Disabled = true, Href = \"/components/breadcrumbs\" }\r\n        };\r\n    }\r\n",
         "Type": "Demos.Components.Breadcrumbs.usage.Index",
         "Style": "",
