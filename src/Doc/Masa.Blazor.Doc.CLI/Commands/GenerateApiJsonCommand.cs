@@ -95,7 +95,6 @@ namespace Masa.Blazor.Doc.CLI.Commands
             { "MMenu", new string[] { "Menus" } },
             { "MMessages", new string[] { "Messages" } },
             { "MNavigationDrawer", new string[] { "Navigation drawers" } },
-            { "MModal", new string[] { "Presets" } },
             { "MOverlay", new string[] { "Overlays" } },
             { "MPagination", new string[] { "Pagination" } },
             { "MProgressCircular", new string[] { "Progress circular" } },
