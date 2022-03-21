@@ -6,7 +6,7 @@ title: Modals
 cols: 1
 related:
   - /components/dialogs
-  - /components/form-modals
+  - /components/popup-service
   - /components/drawers
 ---
 

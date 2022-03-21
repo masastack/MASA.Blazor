@@ -6205,7 +6205,7 @@
     "Cols": 1,
     "Related": [
       "/components/dialogs",
-      "/components/form-modals",
+      "/components/popup-service",
       "/components/drawers"
     ],
     "Subtitle": "对话框",

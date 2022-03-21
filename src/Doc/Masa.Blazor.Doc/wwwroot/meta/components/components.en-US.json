@@ -6143,7 +6143,7 @@
     "Cols": 1,
     "Related": [
       "/components/dialogs",
-      "/components/form-modals",
+      "/components/popup-service",
       "/components/drawers"
     ],
     "Title": "Modals",
