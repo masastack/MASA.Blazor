@@ -102,7 +102,6 @@ namespace Masa.Blazor.Doc.Pages
             "MMenu",
             "MMessages",
             "MNavigationDrawer",
-            "Modal",
             "MOverlay",
             "MPagination",
             "MPicker",
