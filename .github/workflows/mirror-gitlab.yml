@@ -1,0 +1,15 @@
+name: Mirror to Giltab
+
+on: [push, delete, create]
+
+jobs:
+  to_gitlab:
+    runs-on: ubuntu-latest
+    steps:                                            
+      - uses: actions/checkout@v1
+      - uses: yesolutions/mirror-action@master
+        with:
+          REMOTE: '${{ secrets.GITLAB_ADDER }}/cicd/masa.blazor.git'
+          GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+          GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
+          
