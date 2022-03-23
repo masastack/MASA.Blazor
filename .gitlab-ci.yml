@@ -6,15 +6,18 @@ stages:
   - packer-prd
   - docker-prd
   - deploy-prd
+  - tag
 
 variables:
   IMAGE: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:0.2.$CI_PIPELINE_ID
+  IMAGE_PRD: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:$CI_COMMIT_TAG
 
 packer:
-  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100_nodejs14_wasm_v1
   stage: packer
+  tags:
+    - linux-shell
   only:
-    - develop 
+    - main 
   script:
     - ls 
     - ls src/
@@ -43,13 +46,15 @@ docker:
     - docker build -t $IMAGE .
     - docker push $IMAGE
     - docker rmi  $IMAGE
+  after_script:
+    - rm -rf ./src/BlazorComponent
   retry: 2
 
 deploy-dev:
   image: portainer/kubectl-shell
   stage: deploy-dev
   only:
-    - develop
+    - main
   script:
     - echo $KUBE_CONFIG_DEV | base64 -d > ./config
     - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
@@ -59,24 +64,21 @@ deploy-test:
   image: portainer/kubectl-shell
   stage: deploy-test
   only:
-    - develop
+    - main
   script:
     - echo $KUBE_CONFIG_DEV | base64 -d > ./config
     - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n test-masa-blazor
   retry: 2
 
 packer-prd:
-  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100_nodejs14_wasm_v1
   stage: packer-prd
+  tags:
+    - linux-shell
   only:
     - tags 
   script:
-    - ls 
-    - ls src/
-    - node -v
     - dotnet --version
     - git clone -b develop https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
-    - dotnet workload install wasm-tools
     - dotnet build src
     - dotnet pack src --include-symbols -p:PackageVersion=$CI_COMMIT_TAG
     - dotnet nuget push "**/*.symbols.nupkg" -k $nugetkey -s https://api.nuget.org/v3/index.json
@@ -109,3 +111,17 @@ deploy-prd:
     - kubectl --kubeconfig ./config set image deployment/masa-blazor masa-blazor=$IMAGE_PRD -n masa-blazor
   retry: 2
   when: manual  
+
+tag-push:
+  stage: tag
+  tags:
+    - linux-shell
+  only:
+    - tags
+  script:
+    - cd ./src/BlazorComponent
+    - echo $CI_COMMIT_TAG
+    - git tag $CI_COMMIT_TAG
+    - git push origin $CI_COMMIT_TAG
+  after_script:
+    - rm -rf ./src/BlazorComponent
