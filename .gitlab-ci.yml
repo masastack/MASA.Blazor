@@ -13,6 +13,11 @@ variables:
   IMAGE_PRD: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:$CI_COMMIT_TAG
 
 packer:
+<<<<<<< HEAD
+=======
+  tags:
+    - linux-shell
+>>>>>>> 4b0b86328f1c801e7e566c6eef83d1ad08984eee
   stage: packer
   tags:
     - linux-shell
@@ -71,6 +76,11 @@ deploy-test:
   retry: 2
 
 packer-prd:
+<<<<<<< HEAD
+=======
+  tags:
+    - linux-shell
+>>>>>>> 4b0b86328f1c801e7e566c6eef83d1ad08984eee
   stage: packer-prd
   tags:
     - linux-shell
