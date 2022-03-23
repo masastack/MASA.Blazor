@@ -11,7 +11,8 @@ variables:
   IMAGE: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:0.2.$CI_PIPELINE_ID
 
 packer:
-  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:6.0.100_nodejs14_wasm_v1
+  tags:
+    - linux-shell
   stage: packer
   only:
     - develop 
