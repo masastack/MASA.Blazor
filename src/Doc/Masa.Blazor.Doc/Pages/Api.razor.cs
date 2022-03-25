@@ -82,6 +82,7 @@ namespace Masa.Blazor.Doc.Pages
             "MIcon",
             "MImage",
             "MInput",
+            "MOtpInput",
             "MItem",
             "MItemGroup",
             "MLabel",

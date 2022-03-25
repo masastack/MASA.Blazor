@@ -426,6 +426,14 @@
           },
           {
             "Order": 0,
+            "Title": "OTP Input",
+            "FullTitle": "OTP Input",
+            "Type": "menuItem",
+            "Url": "components/otp-input",
+            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg"
+          },
+          {
+            "Order": 0,
             "Title": "Radio",
             "FullTitle": "Radio",
             "Type": "menuItem",

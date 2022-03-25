@@ -77,6 +77,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
             { "MIcon", new string[] { "Icons" } },
             { "MImage", new string[] { "Images" } },
             { "MInput", new string[] { "Text fields" } },
+            { "MOtpInput", new string[] { "OTP input" } },
             { "MItem", new string[] { "Item groups" } },
             { "MItemGroup", new string[] { "Item groups" } },
             { "MLabel", new string[] { "Text fields" } },
