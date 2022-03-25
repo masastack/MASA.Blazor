@@ -1,0 +1,107 @@
+﻿{
+  "Title": "MEditor",
+  "Components": [
+    "Editor"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "ElementClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ElementStyle",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "IsMarkdown",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Options",
+      "Type": "Object",
+      "Description": ""
+    },
+    {
+      "Name": "Placeholder",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ReadOnly",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Theme",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ToolBarClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ToolBarStyle",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "String",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "EditorContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
+      "Name": "ToolBarContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnBlur",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnFocus",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnReady",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    }
+  ]
+}

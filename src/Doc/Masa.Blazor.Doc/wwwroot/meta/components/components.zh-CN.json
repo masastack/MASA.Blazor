@@ -1870,6 +1870,101 @@
     "FullTitle": "ECharts（图表）"
   },
   {
+    "Desc": "<p><a href=\"https://quilljs.com/\">Editor</a></p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-03-25T15:57:43.8472556+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "basic",
+        "Title": "使用",
+        "Description": "<p>富文本编辑器示例</p>\n",
+        "Code": "<MEditor>\n</MEditor>\n\n@code{\n    \n}\n\n",
+        "Type": "Demos.Components.Editor.usage.Basic",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "binding",
+        "Title": "双向绑定",
+        "Description": "<p>双向绑定。</p>\n",
+        "Code": "<MEditor @bind-Value=\"EditorContent\">\n</MEditor>\n<div>@EditorContent</div>\n@code {\n    string EditorContent=\"Hello MEditor!\";\n}\n\n",
+        "Type": "Demos.Components.Editor.props.Binding",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "height",
+        "Title": "自定义高度",
+        "Description": "<p>通过 <strong>ElementStyle</strong> 属性设置高度</p>\n",
+        "Code": "<MEditor ElementStyle=\"height:200px\">\n    <EditorContent>\n        @((MarkupString)@EditorContent)\n    </EditorContent>\n</MEditor>\n\n@code {\n    string EditorContent=\"Hello Blazor!\";\n}\n\n",
+        "Type": "Demos.Components.Editor.props.Height",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "markdown",
+        "Title": "markdown",
+        "Description": "<p>支持markdown解析。</p>\n",
+        "Code": "<MEditor IsMarkdown>\n</MEditor>\n\n@code {\n\n}\n\n",
+        "Type": "Demos.Components.Editor.props.Markdown",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "readOnly",
+        "Title": "只读",
+        "Description": "<p>只读。</p>\n",
+        "Code": "<MEditor ReadOnly>\n</MEditor>\n\n@code {\n\n}\n\n",
+        "Type": "Demos.Components.Editor.props.ReadOnly",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "toolBar",
+        "Title": "自定义工具栏",
+        "Description": "<p>自定义工具栏。</p>\n",
+        "Code": "<MEditor>\r\n    <ToolBarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolBarContent>\r\n</MEditor>\r\n\r\n@code {\r\n\r\n}\r\n\r\n",
+        "Type": "Demos.Components.Editor.props.ToolBar",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 5,
+        "Name": "method",
+        "Title": "方法",
+        "Description": "<p>一些方法示例。</p>\n",
+        "Code": "<MEditor @ref=\"@Editor\" @bind-Value=\"EditorContent\" Placeholder=\"请输入内容\" ElementStyle=\"height:100px\">\n    <ToolBarContent>\n        <select class=\"ql-header\">\n            <option selected=\"\"></option>\n            <option value=\"1\"></option>\n            <option value=\"2\"></option>\n            <option value=\"3\"></option>\n            <option value=\"4\"></option>\n            <option value=\"5\"></option>\n        </select>\n        <span class=\"ql-formats\">\n            <button class=\"ql-bold\"></button>\n            <button class=\"ql-italic\"></button>\n            <button class=\"ql-underline\"></button>\n            <button class=\"ql-strike\"></button>\n        </span>\n        <span class=\"ql-formats\">\n            <select class=\"ql-color\"></select>\n            <select class=\"ql-background\"></select>\n        </span>\n        <span class=\"ql-formats\">\n            <button class=\"ql-list\" value=\"ordered\"></button>\n            <button class=\"ql-list\" value=\"bullet\"></button>\n        </span>\n        <span class=\"ql-formats\">\n            <button class=\"ql-link\"></button>\n        </span>\n    </ToolBarContent>\n</MEditor>\n<MRow Align=\"@AlignTypes.Center\"\n      Justify=\"@JustifyTypes.SpaceAround\" Class=\"mt-10\">\n      <MButton Depressed Color=\"primary\" @onclick=\"GetTextAsync\">\n        获取文本\n    </MButton>\n    <MButton Depressed Color=\"primary\" @onclick=\"GetContentAsync\">\n        获取内容\n    </MButton>\n    <MButton Depressed Color=\"primary\" @onclick=\"GetHtmlAsync\">\n        获取html\n    </MButton>\n    <MButton Depressed Color=\"primary\" @onclick=\"SetHtmlAsync\">\n        设置html\n    </MButton>\n</MRow>\n<MAlert Border=\"Borders.Top\"\n            ColoredBorder\n            Type=\"AlertTypes.Info\"\n            Elevation=\"2\" \n            Class=\"mt-10\">\n        @ViewContent\n</MAlert>\n\n@code {\r\n    MEditor Editor;\r\n    string EditorContent = @\"Hello MEditor\";\n    string ViewContent;\n\n    public async Task GetTextAsync()\n    {\n        ViewContent = await this.Editor.GetTextAsync();\n    }\n    public async Task GetContentAsync()\n    {\n        ViewContent = await this.Editor.GetContentAsync();\n    }\n    public async Task GetHtmlAsync()\n    {\n        ViewContent = await this.Editor.GetHtmlAsync();\n    }\n\n    public async Task SetHtmlAsync()\n    {\n        string html =\n            @\"<a href='https://www.baidu.com/'>\" +\n            \"<img src='https://www.baidu.com/img/flexible/logo/pc/result.png' /></a>\";\n\n        await this.Editor.SetHtmlAsync(html);\n    }\n\n\n}",
+        "Type": "Demos.Components.Editor.misc.Method",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg",
+    "Cols": 1,
+    "Subtitle": "富文本编辑器",
+    "Title": "Editor",
+    "Type": "富文本编辑器",
+    "FullTitle": "Editor（富文本编辑器）"
+  },
+  {
     "Desc": "<p><code>MExpansionPanel</code> 组件有助于减少大量信息的垂直空间占用。 组件的默认功能是仅显示一个扩展面板； 然而，使用 <strong>Multiple</strong> 属性后，扩展面板可以保持打开，直到显式地关闭。</p>\n",
     "Order": 0,
     "OtherDocs": {

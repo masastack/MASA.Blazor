@@ -480,6 +480,16 @@
       },
       {
         "Order": 0,
+        "Title": "Editor",
+        "SubTitle": "富文本编辑器",
+        "FullTitle": "Editor (富文本编辑器)",
+        "Type": "menuItem",
+        "Url": "components/editor",
+        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Expansion panels",
         "SubTitle": "扩展面板",
         "FullTitle": "Expansion panels (扩展面板)",
@@ -2309,6 +2319,35 @@
         "FullTitle": "MECharts",
         "Type": "menuItem",
         "Url": "api/mecharts",
+        "Contents": [
+          {
+            "Id": "section-292649107",
+            "Title": "组件页面",
+            "Level": 0
+          },
+          {
+            "Id": "section-3122241",
+            "Title": "属性",
+            "Level": 0
+          },
+          {
+            "Id": "section-3374707",
+            "Title": "插槽",
+            "Level": 0
+          },
+          {
+            "Id": "section-2654231",
+            "Title": "事件",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
+        "Title": "MEditor",
+        "FullTitle": "MEditor",
+        "Type": "menuItem",
+        "Url": "api/meditor",
         "Contents": [
           {
             "Id": "section-292649107",
