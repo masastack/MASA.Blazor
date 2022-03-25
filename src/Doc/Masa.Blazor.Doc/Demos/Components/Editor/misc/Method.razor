@@ -1,0 +1,81 @@
+﻿<MEditor @ref="@Editor" @bind-Value="EditorContent" Placeholder="请输入内容" ElementStyle="height:100px">
+    <ToolBarContent>
+        <select class="ql-header">
+            <option selected=""></option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
+            <option value="4"></option>
+            <option value="5"></option>
+        </select>
+        <span class="ql-formats">
+            <button class="ql-bold"></button>
+            <button class="ql-italic"></button>
+            <button class="ql-underline"></button>
+            <button class="ql-strike"></button>
+        </span>
+        <span class="ql-formats">
+            <select class="ql-color"></select>
+            <select class="ql-background"></select>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-list" value="ordered"></button>
+            <button class="ql-list" value="bullet"></button>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-link"></button>
+        </span>
+    </ToolBarContent>
+</MEditor>
+<MRow Align="@AlignTypes.Center"
+      Justify="@JustifyTypes.SpaceAround" Class="mt-10">
+      <MButton Depressed Color="primary" @onclick="GetTextAsync">
+        获取文本
+    </MButton>
+    <MButton Depressed Color="primary" @onclick="GetContentAsync">
+        获取内容
+    </MButton>
+    <MButton Depressed Color="primary" @onclick="GetHtmlAsync">
+        获取html
+    </MButton>
+    <MButton Depressed Color="primary" @onclick="SetHtmlAsync">
+        设置html
+    </MButton>
+</MRow>
+<MAlert Border="Borders.Top"
+            ColoredBorder
+            Type="AlertTypes.Info"
+            Elevation="2" 
+            Class="mt-10">
+        @ViewContent
+</MAlert>
+
+@code {
+    MEditor Editor;
+    string EditorContent = @"Hello MEditor";
+    string ViewContent;
+
+    public async Task GetTextAsync()
+    {
+        ViewContent = await this.Editor.GetTextAsync();
+    }
+    public async Task GetContentAsync()
+    {
+        ViewContent = await this.Editor.GetContentAsync();
+    }
+    public async Task GetHtmlAsync()
+    {
+        ViewContent = await this.Editor.GetHtmlAsync();
+    }
+
+    public async Task SetHtmlAsync()
+    {
+        string html =
+            @"<a href='https://www.baidu.com/'>" +
+            "<img src='https://www.baidu.com/img/flexible/logo/pc/result.png' /></a>";
+
+        await this.Editor.SetHtmlAsync(html);
+    }
+
+
+}
