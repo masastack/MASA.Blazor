@@ -13,8 +13,6 @@ namespace Masa.Blazor
     public class MEditor : BEditor, IDisposable
     {
 
-        [Parameter]
-        public object Options { get; set; } = new { };
         /// <summary>
         /// 是否只读
         /// </summary>
