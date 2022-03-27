@@ -23,7 +23,6 @@
 
 export function init(quillElement,obj, toolBar, readOnly,
     placeholder, theme, isMarkdown) {
-    console.log(toolBar);
     if (!Quill || !quillElement) return;
     /*Quill.register('modules/blotFormatter', QuillBlotFormatter.default);*/
     var options = {

@@ -60,6 +60,7 @@ namespace Masa.Blazor
         private bool _editorRendered = false;
 
         private IJSObjectReference QuillHelper;
+        private DotNetObjectReference<MEditor> ObjRef;
 
         protected override async Task OnInitializedAsync()
         {
@@ -83,23 +84,14 @@ namespace Masa.Blazor
             }
             await CreateEditor();
         }
-        //protected override async Task OnParametersSetAsync()
-        //{
-        //    await base.OnParametersSetAsync();
-        //    if (_waitingUpdate && _editorRendered)
-        //    {
-        //        _waitingUpdate = false;
-        //        await SetHtmlAsync(_value);
-        //    }
-        //}
         public async Task CreateEditor()
         {
-            var objRef = DotNetObjectReference.Create(this);
+            ObjRef = DotNetObjectReference.Create(this);
             QuillHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/quill-helper.js");
             await QuillHelper.InvokeVoidAsync("init",
-                EditorElement,
-                objRef,
-                ToolBar,
+                ContentRef,
+                ObjRef,
+                ToolbarRef,
                 ReadOnly,
                 Placeholder,
                 Theme,
@@ -145,35 +137,44 @@ namespace Masa.Blazor
         }
         public override async Task<string> GetTextAsync()
         {
-            return await QuillHelper.InvokeAsync<string>("getText", EditorElement);
+            return await QuillHelper.InvokeAsync<string>("getText", ContentRef);
         }
         public override async Task<string> GetHtmlAsync()
         {
-            return await QuillHelper.InvokeAsync<string>("getHtml", EditorElement);
+            return await QuillHelper.InvokeAsync<string>("getHtml", ContentRef);
         }
         public override async Task<string> GetContentAsync()
         {
-            return await QuillHelper.InvokeAsync<string>("getContent", EditorElement);
+            return await QuillHelper.InvokeAsync<string>("getContent", ContentRef);
         }
 
         public async Task SetContentAsync(string Content)
         {
-            await QuillHelper.InvokeAsync<string>("setContent", EditorElement, Content);
+            await QuillHelper.InvokeAsync<string>("setContent", ContentRef, Content);
         }
 
         public async Task SetHtmlAsync(string quillHtml)
         {
-            await QuillHelper.InvokeAsync<string>("setHtml", EditorElement, quillHtml);
+            await QuillHelper.InvokeAsync<string>("setHtml", ContentRef, quillHtml);
         }
 
         public async Task InsertImageAsync(string imageURL)
         {
-            await QuillHelper.InvokeAsync<string>("insertImage", EditorElement, imageURL);
+            await QuillHelper.InvokeAsync<string>("insertImage", ContentRef, imageURL);
         }
 
         public async Task EnableEditorAsync(bool mode)
         {
-            await QuillHelper.InvokeAsync<string>("enableEditor", EditorElement, mode);
+            await QuillHelper.InvokeAsync<string>("enableEditor", ContentRef, mode);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (ObjRef != null)
+            {
+                ObjRef.Dispose();
+                ObjRef = null;
+            }
+            base.Dispose(disposing);
         }
     }
 }
