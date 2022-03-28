@@ -461,6 +461,15 @@
           },
           {
             "Order": 0,
+            "Title": "OTP Input",
+            "SubTitle": "OTP Input",
+            "FullTitle": "OTP Input (OTP Input)",
+            "Type": "menuItem",
+            "Url": "components/otp-input",
+            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg"
+          },
+          {
+            "Order": 0,
             "Title": "Radio",
             "SubTitle": "单选按钮",
             "FullTitle": "Radio (单选按钮)",
