@@ -62,12 +62,12 @@ namespace Masa.Blazor
         [Parameter]
         public EventCallback<MouseEventArgs> OnFocus { get; set; }
 
-        private string _value;
-        private bool _waitingUpdate = false;
-        private bool _editorRendered = false;
+        private string _value { get; set; }
+        private bool _waitingUpdate { get; set; } = false;
+        private bool _editorRendered { get; set; } = false;
 
-        private IJSObjectReference QuillHelper;
-        private DotNetObjectReference<MEditor> ObjRef;
+        private IJSObjectReference QuillHelper { get; set; }
+        private DotNetObjectReference<MEditor> ObjRef { get; set; }
 
         protected override async Task OnInitializedAsync()
         {

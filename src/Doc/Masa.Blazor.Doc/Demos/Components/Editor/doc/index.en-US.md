@@ -3,7 +3,6 @@ category: Components
 type: Editor
 title: Editor
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Editor.svg
 ---
 
 [Editor](https://quilljs.com/) Rich text editor based on quilljs encapsulation
