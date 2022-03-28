@@ -12,22 +12,24 @@ namespace Masa.Blazor
 {
     public class MEditor : BEditor, IAsyncDisposable
     {
+        /// <summary>
+        /// 是否开启Markdown
+        /// </summary>
+        [Parameter]
+        public bool Markdown { get; set; }
 
         /// <summary>
         /// 是否只读
         /// </summary>
         [Parameter]
         public bool ReadOnly { get; set; }
+
         /// <summary>
         /// 主题
         /// </summary>
         [Parameter]
         public string Theme { get; set; } = "snow";
-        /// <summary>
-        /// 是否开启Markdown
-        /// </summary>
-        [Parameter]
-        public bool Markdown { get; set; }
+
         /// <summary>
         /// 数据双向绑定
         /// </summary>
@@ -44,17 +46,22 @@ namespace Masa.Blazor
                 }
             }
         }
+
         /// <summary>
         /// 编辑器内容便变更回调
         /// </summary>
         [Parameter]
         public EventCallback<string> ValueChanged { get; set; }
-        [Parameter]
-        public EventCallback<MouseEventArgs> OnReady { get; set; }
+
         [Parameter]
         public EventCallback<MouseEventArgs> OnBlur { get; set; }
+
+        [Parameter]
+        public EventCallback<MouseEventArgs> OnReady { get; set; }
+
         [Parameter]
         public EventCallback<MouseEventArgs> OnFocus { get; set; }
+
         private string _value;
         private bool _waitingUpdate = false;
         private bool _editorRendered = false;
