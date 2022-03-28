@@ -57,9 +57,9 @@
 </MAlert>
 
 @code {
-    MEditor Editor;
-    string EditorContent = @"Hello MEditor";
-    string ViewContent;
+    private MEditor Editor { get; set; }
+    private string EditorContent { get; set; } = @"Hello MEditor";
+    private string ViewContent { get; set; }
 
     public async Task GetTextAsync()
     {
