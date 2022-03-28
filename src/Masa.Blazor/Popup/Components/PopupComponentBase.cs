@@ -1,7 +1,7 @@
 ﻿#nullable enable
 namespace Masa.Blazor.Popup.Components;
 
-public class PopupComponentBase : ComponentBase
+public class PopupComponentBase : BComponentBase
 {
     [CascadingParameter]
     protected MApp? MApp { get; set; }
@@ -18,6 +18,11 @@ public class PopupComponentBase : ComponentBase
     {
         base.OnInitialized();
 
-        Visible = true;
+        NextTick(() =>
+        {
+            Visible = true;
+            StateHasChanged();
+            return Task.CompletedTask;
+        });
     }
 }
