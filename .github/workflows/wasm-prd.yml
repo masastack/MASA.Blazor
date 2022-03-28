@@ -1,12 +1,8 @@
-name: build
+name: deploy-wasm-prd
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  release:
+    types: [ created ]
 
 jobs:
   build:
@@ -22,7 +18,7 @@ jobs:
     - name: setting tools
       run: dotnet workload install wasm-tools
     - name: dependencies
-      run: git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
+      run: git clone -b develop https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
     - name: build
       run: dotnet build src
     - name: publish
@@ -34,6 +30,4 @@ jobs:
         access-key-id: ${{ secrets.ACCESS_KEY_ID }}
         access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
     - name: deploy oss
-      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/src/Doc/Masa.Blazor.Doc.WebAssembly/bin/Debug/net6.0/publish/wwwroot/ oss://masa-blazor-wasm-dev/
-
-      
+      run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/src/Doc/Masa.Blazor.Doc.WebAssembly/bin/Debug/net6.0/publish/wwwroot/ oss://masa-blazor-wasm/

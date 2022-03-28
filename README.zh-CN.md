@@ -10,7 +10,7 @@
 
 一套基于Material设计规范和BlazorComponent的交互能力提供标准的基础组件库
 
-[![Masa.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/Masa.Blazor/blob/develop/LICENSE) 
+[![MASA.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/Masa.Blazor/blob/develop/LICENSE) 
 [![.NET](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/main.yml/badge.svg)](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/main.yml)
 [![Nuget](https://img.shields.io/nuget/v/Masa.Blazor)](https://www.nuget.org/packages/Masa.Blazor)
 [![Nuget](https://img.shields.io/nuget/dt/Masa.Blazor)](https://www.nuget.org/packages/Masa.Blazor)

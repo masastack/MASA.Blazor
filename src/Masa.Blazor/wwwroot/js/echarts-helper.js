@@ -4,7 +4,7 @@ export function init(container, option) {
 
     if (echarts && container) {
         container._chart = echarts.init(container, null, { renderer: 'svg' });
-        container._chart.setOption(option);
+        container._chart.setOption(option, true);
 
         if (!container._init) {
             container._init = true;

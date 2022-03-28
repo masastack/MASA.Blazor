@@ -50,12 +50,6 @@ namespace Masa.Blazor
         [Parameter]
         public bool XSmall { get; set; }
 
-        public bool IsClickable => _router.IsClickable || ItemGroup != null;
-
-        public bool IsLink => _router.IsLink;
-
-        public int Tabindex => _router.Tabindex;
-
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
@@ -64,7 +58,7 @@ namespace Masa.Blazor
 
             Attributes["ripple"] = Ripple && IsClickable;
             Attributes["draggable"] = Draggable ? "true" : null;
-            Attributes["tabindex"] = ItemGroup != null && !Disabled ? 0 : Tabindex;
+            Attributes["tabindex"] = Matched && !Disabled ? 0 : Tabindex;
         }
 
         protected override void SetComponentClass()
