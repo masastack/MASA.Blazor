@@ -1,15 +1,13 @@
-﻿ <div>
+﻿<div>
     <div class="ma-auto position-relative" style="max-width: 300px">
-      <MOtpInput OtpValue="@otp" Disabled="@isLoading" OnFinish="OnFinish"></MOtpInput>
+        <MOtpInput OtpValue="@otp" Disabled="@isLoading" OnFinish="OnFinish"></MOtpInput>
 
-      <MOverlay Absolute Value="@isLoading">
-          <MProgressCircular Indeterminate Color="primary">
-
-          </MProgressCircular>
-      </MOverlay>
+        <MOverlay Absolute Value="@isLoading">
+            <MProgressCircular Indeterminate Color="primary"></MProgressCircular>
+        </MOverlay>
     </div>
     <div>
-      Expected value: <span class="font-weight-bold"> @expectedOtp </span>
+        Expected value: <span class="font-weight-bold"> @expectedOtp </span>
     </div>
     <div class="text--caption">Type or copy/paste.</div>
 
@@ -18,11 +16,11 @@
             @text
         </ChildContent>
     </MSnackbar>
-  </div>
+</div>
 <style type="text/css">
- .position-relative {
-   position: relative;
- }
+    .position-relative {
+        position: relative;
+    }
 </style>
 @code {
     string otp = "";

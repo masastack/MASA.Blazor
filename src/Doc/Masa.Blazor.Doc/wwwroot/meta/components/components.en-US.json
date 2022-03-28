@@ -2542,7 +2542,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOtpInput\">MOtpInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-25T10:45:44.9562897+08:00",
+    "LastWriteTime": "2022-03-25T15:09:55.7641239+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2560,7 +2560,7 @@
         "Name": "darkTheme",
         "Title": "Dark theme",
         "Description": "<p>Applied dark theme, listen to value fill to affect button component.</p>\n",
-        "Code": "<MCard Flat>\r\n    <MCardText>\r\n        <MContainer Fluid class=\"green lighten-2\">\r\n            <MRow >\r\n                <MCol Cols=\"9\">\r\n                    <div class=\"ma-auto\" style=\"max-width: 300px\">\r\n                        <MOtpInput @bind-value=\"@otp\" Length=\"@length\" Dark></MOtpInput>\r\n                    </div>\r\n                </MCol>\r\n                <MCol Cols=\"2\" class=\"my-3\">\r\n                    <MButton Block Disabled=\"!isActive\"> Ready</MButton>\r\n                </MCol>\r\n            </MRow>\r\n        </MContainer>\r\n    </MCardText>\r\n</MCard>\r\n\r\n@code {\r\n    string otp = \"\";\r\n    int length = 7;\r\n    bool isActive => otp.Length == this.length;\r\n}",
+        "Code": "<MCard Flat>\r\n    <MCardText>\r\n        <MContainer Fluid class=\"green lighten-2\">\r\n            <MRow>\r\n                <MCol Cols=\"9\">\r\n                    <div class=\"ma-auto\" style=\"max-width: 300px\">\r\n                        <MOtpInput @bind-value=\"@otp\" Length=\"@length\" Dark></MOtpInput>\r\n                    </div>\r\n                </MCol>\r\n                <MCol Cols=\"2\" class=\"my-3\">\r\n                    <MButton Block Disabled=\"!isActive\"> Ready</MButton>\r\n                </MCol>\r\n            </MRow>\r\n        </MContainer>\r\n    </MCardText>\r\n</MCard>\r\n\r\n@code {\r\n    string otp = \"\";\r\n    int length = 7;\r\n    bool isActive => otp.Length == this.length;\r\n}",
         "Type": "Demos.Components.FormInputs.children.OtpInput.props.DarkTheme",
         "Style": "",
         "Debug": false,
@@ -2571,7 +2571,7 @@
         "Name": "finishEvent",
         "Title": "Finish event",
         "Description": "<p>You can easily compose a loader to process the OTP input when completed insertion.</p>\n",
-        "Code": " <div>\r\n    <div class=\"ma-auto position-relative\" style=\"max-width: 300px\">\r\n      <MOtpInput OtpValue=\"@otp\" Disabled=\"@isLoading\" OnFinish=\"OnFinish\"></MOtpInput>\r\n\r\n      <MOverlay Absolute Value=\"@isLoading\">\r\n          <MProgressCircular Indeterminate Color=\"primary\">\r\n\r\n          </MProgressCircular>\r\n      </MOverlay>\r\n    </div>\r\n    <div>\r\n      Expected value: <span class=\"font-weight-bold\"> @expectedOtp </span>\r\n    </div>\r\n    <div class=\"text--caption\">Type or copy/paste.</div>\r\n\r\n    <MSnackbar Color=\"@snackbarColor\" Timeout=\"2000\" Value=\"@snackbar\">\r\n        <ChildContent>\r\n            @text\r\n        </ChildContent>\r\n    </MSnackbar>\r\n  </div>\r\n<style type=\"text/css\">\r\n .position-relative {\r\n   position: relative;\r\n }\r\n</style>\r\n@code {\r\n    string otp = \"\";\r\n    bool isLoading;\r\n    string expectedOtp = \"133707\";\r\n    string snackbarColor = \"default\";\r\n    bool snackbar = false;\r\n    string text = \"\";\r\n\r\n    public async Task OnFinish(string value)\r\n    {\r\n        this.snackbar = false;\r\n        this.isLoading = true;\r\n        await Task.Delay(3500);\r\n        this.isLoading = false;\r\n        this.snackbarColor = (value == this.expectedOtp) ? \"success\" : \"warning\";\r\n        this.text = $\"Processed OTP with {value} ({snackbarColor})\";\r\n        this.snackbar = true;\r\n    }\r\n}",
+        "Code": "<div>\r\n    <div class=\"ma-auto position-relative\" style=\"max-width: 300px\">\r\n        <MOtpInput OtpValue=\"@otp\" Disabled=\"@isLoading\" OnFinish=\"OnFinish\"></MOtpInput>\r\n\r\n        <MOverlay Absolute Value=\"@isLoading\">\r\n            <MProgressCircular Indeterminate Color=\"primary\"></MProgressCircular>\r\n        </MOverlay>\r\n    </div>\r\n    <div>\r\n        Expected value: <span class=\"font-weight-bold\"> @expectedOtp </span>\r\n    </div>\r\n    <div class=\"text--caption\">Type or copy/paste.</div>\r\n\r\n    <MSnackbar Color=\"@snackbarColor\" Timeout=\"2000\" Value=\"@snackbar\">\r\n        <ChildContent>\r\n            @text\r\n        </ChildContent>\r\n    </MSnackbar>\r\n</div>\r\n<style type=\"text/css\">\r\n    .position-relative {\r\n        position: relative;\r\n    }\r\n</style>\r\n@code {\r\n    string otp = \"\";\r\n    bool isLoading;\r\n    string expectedOtp = \"133707\";\r\n    string snackbarColor = \"default\";\r\n    bool snackbar = false;\r\n    string text = \"\";\r\n\r\n    public async Task OnFinish(string value)\r\n    {\r\n        this.snackbar = false;\r\n        this.isLoading = true;\r\n        await Task.Delay(3500);\r\n        this.isLoading = false;\r\n        this.snackbarColor = (value == this.expectedOtp) ? \"success\" : \"warning\";\r\n        this.text = $\"Processed OTP with {value} ({snackbarColor})\";\r\n        this.snackbar = true;\r\n    }\r\n}",
         "Type": "Demos.Components.FormInputs.children.OtpInput.props.FinishEvent",
         "Style": "",
         "Debug": false,
@@ -2582,7 +2582,7 @@
         "Name": "hiddenInput",
         "Title": "Hidden input",
         "Description": "<p>The entered value can be hidden with type=&quot;password&quot;</p>\n",
-        "Code": "<div class=\"ma-auto\" style=\"max-width: 260px\">\r\n    <MOtpInput @OtpValue=\"@otp\" Type=\"password\" Length=\"5\" Dark></MOtpInput>\r\n    <v-otp-input\r\n      v-model=\"otp\"\r\n      type=\"password\"\r\n      length=\"5\"\r\n      dark\r\n    ></v-otp-input>\r\n  </div>\r\n@code {\r\n    string otp = \"\";\r\n}",
+        "Code": "<div class=\"ma-auto\" style=\"max-width: 260px\">\r\n    <MOtpInput @OtpValue=\"@otp\" Type=\"BOtpInputType.Password\" Length=\"5\" Dark></MOtpInput>\r\n</div>\r\n@code {\r\n    string otp = \"\";\r\n}",
         "Type": "Demos.Components.FormInputs.children.OtpInput.props.HiddenInput",
         "Style": "",
         "Debug": false,
