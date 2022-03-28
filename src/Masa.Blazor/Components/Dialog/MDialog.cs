@@ -95,13 +95,5 @@ namespace Masa.Blazor
                 })
                 .ApplyDialogDefault();
         }
-
-        public async Task Keydown(KeyboardEventArgs args)
-        {
-            if (args.Key == "Escape")
-            {
-                await SetIsActiveAsync(false);
-            }
-        }
     }
 }
