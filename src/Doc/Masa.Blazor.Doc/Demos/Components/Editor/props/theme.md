@@ -2,7 +2,7 @@
 order: 0
 title:
   zh-CN: 主题
-  en-US: theme
+  en-US: Theme
 ---
 
 ## zh-CN

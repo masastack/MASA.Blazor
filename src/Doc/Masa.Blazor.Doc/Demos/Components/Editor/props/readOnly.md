@@ -2,7 +2,7 @@
 order: 0
 title:
   zh-CN: 只读
-  en-US: readOnly
+  en-US: Readonly
 ---
 
 ## zh-CN

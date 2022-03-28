@@ -42,9 +42,9 @@ export function init(quillElement,obj, toolBar, readOnly,
     obj.invokeMethodAsync("HandleRenderedAsync");
     editor.on('selection-change', range => {
         if (!range) {
-            obj.invokeMethodAsync('HandleOnBlurAsync', editor);
+            obj.invokeMethodAsync('HandleOnBlurAsync');
         } else {
-            obj.invokeMethodAsync('HandleOnFocusAsync', editor);
+            obj.invokeMethodAsync('HandleOnFocusAsync');
         }
     })
     editor.on('text-change', (delta, oldDelta, source) => {

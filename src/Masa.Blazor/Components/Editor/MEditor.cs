@@ -73,7 +73,7 @@ namespace Masa.Blazor
         {
             await base.OnInitializedAsync();
             Watcher
-                .Watch<string>(nameof(_value), async val =>
+                .Watch<string>(nameof(Value), async val =>
                 {
                     if (_waitingUpdate && _editorRendered)
                     {
@@ -82,6 +82,7 @@ namespace Masa.Blazor
                     }
                 });
         }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
@@ -91,6 +92,7 @@ namespace Masa.Blazor
             }
             await CreateEditor();
         }
+
         public async Task CreateEditor()
         {
             ObjRef = DotNetObjectReference.Create(this);
@@ -105,6 +107,7 @@ namespace Masa.Blazor
                 Markdown);
             if(!string.IsNullOrEmpty(Value)) await SetHtmlAsync(Value);
         }
+
         [JSInvokable]
         public async Task HandleRenderedAsync()
         {
@@ -114,6 +117,7 @@ namespace Masa.Blazor
                 await OnReady.InvokeAsync();
             }
         }
+
         [JSInvokable]
         public async Task HandleInputAsync(string value)
         {
@@ -126,6 +130,7 @@ namespace Masa.Blazor
             }
 
         }
+
         [JSInvokable]
         public async Task HandleOnBlurAsync()
         {
@@ -134,6 +139,7 @@ namespace Masa.Blazor
                 await OnBlur.InvokeAsync();
             }
         }
+
         [JSInvokable]
         public async Task HandleOnFocusAsync()
         {
@@ -142,14 +148,17 @@ namespace Masa.Blazor
                 await OnFocus.InvokeAsync();
             }
         }
+
         public override async Task<string> GetTextAsync()
         {
             return await QuillHelper.InvokeAsync<string>("getText", ContentRef);
         }
+
         public override async Task<string> GetHtmlAsync()
         {
             return await QuillHelper.InvokeAsync<string>("getHtml", ContentRef);
         }
+
         public override async Task<string> GetContentAsync()
         {
             return await QuillHelper.InvokeAsync<string>("getContent", ContentRef);
@@ -174,10 +183,12 @@ namespace Masa.Blazor
         {
             await QuillHelper.InvokeAsync<string>("enableEditor", ContentRef, true);
         }
+
         public async Task DisableAsync()
         {
             await QuillHelper.InvokeAsync<string>("enableEditor", ContentRef, false);
         }
+
         public async ValueTask DisposeAsync()
         {
             try
@@ -194,10 +205,6 @@ namespace Masa.Blazor
             catch (Exception)
             {
             }
-            
-            
         }
-
-       
     }
 }
