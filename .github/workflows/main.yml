@@ -22,7 +22,7 @@ jobs:
     - name: setting tools
       run: dotnet workload install wasm-tools
     - name: dependencies
-      run: git clone -b develop https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
+      run: git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
     - name: build
       run: dotnet build src
     - name: publish
