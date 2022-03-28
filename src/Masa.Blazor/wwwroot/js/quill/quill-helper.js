@@ -23,7 +23,6 @@
 
 export function init(quillElement,obj, toolBar, readOnly,
     placeholder, theme, isMarkdown) {
-    console.log("toolBar", toolBar);
     if (!Quill || !quillElement) return;
     var options = {
         modules: {
