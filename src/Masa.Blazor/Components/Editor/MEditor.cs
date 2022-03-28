@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Masa.Blazor
 {
-    public class MEditor : BEditor, IDisposable
+    public class MEditor : BEditor, IAsyncDisposable
     {
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Masa.Blazor
         /// 是否开启Markdown
         /// </summary>
         [Parameter]
-        public bool IsMarkdown { get; set; }
+        public bool Markdown { get; set; }
         /// <summary>
         /// 数据双向绑定
         /// </summary>
@@ -87,7 +87,7 @@ namespace Masa.Blazor
         public async Task CreateEditor()
         {
             ObjRef = DotNetObjectReference.Create(this);
-            QuillHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/quill-helper.js");
+            QuillHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/quill/quill-helper.js");
             await QuillHelper.InvokeVoidAsync("init",
                 ContentRef,
                 ObjRef,
@@ -95,7 +95,7 @@ namespace Masa.Blazor
                 ReadOnly,
                 Placeholder,
                 Theme,
-                IsMarkdown);
+                Markdown);
             if(!string.IsNullOrEmpty(Value)) await SetHtmlAsync(Value);
         }
         [JSInvokable]
@@ -163,18 +163,34 @@ namespace Masa.Blazor
             await QuillHelper.InvokeAsync<string>("insertImage", ContentRef, imageURL);
         }
 
-        public async Task EnableEditorAsync(bool mode)
+        public async Task EnableAsync()
         {
-            await QuillHelper.InvokeAsync<string>("enableEditor", ContentRef, mode);
+            await QuillHelper.InvokeAsync<string>("enableEditor", ContentRef, true);
         }
-        protected override void Dispose(bool disposing)
+        public async Task DisableAsync()
         {
-            if (ObjRef != null)
+            await QuillHelper.InvokeAsync<string>("enableEditor", ContentRef, false);
+        }
+        public async ValueTask DisposeAsync()
+        {
+            try
             {
-                ObjRef.Dispose();
-                ObjRef = null;
+                if (ObjRef != null)
+                {
+                    ObjRef.Dispose();
+                }
+                if (QuillHelper != null)
+                {
+                    await QuillHelper.DisposeAsync();
+                }
             }
-            base.Dispose(disposing);
+            catch (Exception)
+            {
+            }
+            
+            
         }
+
+       
     }
 }

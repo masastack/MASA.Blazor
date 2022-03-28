@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-自定义工具栏。
+通过ToolbarContent插槽自定义工具栏。
 
 ## en-US
 
-toolBar.
+Customize toolbars through toolbarcontent slots.

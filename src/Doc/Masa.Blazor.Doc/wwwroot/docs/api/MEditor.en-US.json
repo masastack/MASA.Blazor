@@ -25,7 +25,7 @@
       "Description": ""
     },
     {
-      "Name": "IsMarkdown",
+      "Name": "Markdown",
       "Type": "Boolean",
       "Description": ""
     },
@@ -66,11 +66,6 @@
     }
   ],
   "Contents": [
-    {
-      "Name": "EditorContent",
-      "Type": "RenderFragment",
-      "Description": ""
-    },
     {
       "Name": "ToolbarContent",
       "Type": "RenderFragment",

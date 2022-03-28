@@ -1,5 +1,5 @@
-﻿<MEditor @ref="@Editor" @bind-Value="EditorContent" Placeholder="请输入内容" ElementStyle="height:100px">
-    <ToolBarContent>
+﻿<MEditor @ref="@Editor" @bind-Value="EditorContent" Placeholder="请输入内容" ContentStyle="height:100px">
+    <ToolbarContent>
         <select class="ql-header">
             <option selected=""></option>
             <option value="1"></option>
@@ -25,7 +25,7 @@
         <span class="ql-formats">
             <button class="ql-link"></button>
         </span>
-    </ToolBarContent>
+    </ToolbarContent>
 </MEditor>
 <MRow Align="@AlignTypes.Center"
       Justify="@JustifyTypes.SpaceAround" Class="mt-10">
@@ -40,6 +40,12 @@
     </MButton>
     <MButton Depressed Color="primary" @onclick="SetHtmlAsync">
         设置html
+    </MButton>
+    <MButton Depressed Color="primary" @onclick="DisableAsync">
+        禁用
+    </MButton>
+    <MButton Depressed Color="primary" @onclick="EnableAsync">
+        启用
     </MButton>
 </MRow>
 <MAlert Border="Borders.Top"
@@ -76,6 +82,12 @@
 
         await this.Editor.SetHtmlAsync(html);
     }
-
-
+    public async Task DisableAsync()
+    {
+        await this.Editor.DisableAsync();
+    }
+    public async Task EnableAsync()
+    {
+        await this.Editor.EnableAsync();
+    }
 }

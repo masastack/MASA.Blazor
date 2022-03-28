@@ -23,15 +23,13 @@
 
 export function init(quillElement,obj, toolBar, readOnly,
     placeholder, theme, isMarkdown) {
+    console.log("toolBar", toolBar);
     if (!Quill || !quillElement) return;
-    /*Quill.register('modules/blotFormatter', QuillBlotFormatter.default);*/
     var options = {
         modules: {
             toolbar: toolBar.childNodes.length == 0 ? defaultToolbar : toolBar,
             "emoji-toolbar": true,
             "emoji-shortname": true,
-            /*"emoji-textarea": true,*/
-            /*blotFormatter: {}*/
         },
         placeholder: placeholder,
         readOnly: readOnly,
@@ -45,13 +43,12 @@ export function init(quillElement,obj, toolBar, readOnly,
     obj.invokeMethodAsync("HandleRenderedAsync");
     editor.on('selection-change', range => {
         if (!range) {
-            obj.invokeMethodAsync('HandleOnBlurAsync', this.quill);
+            obj.invokeMethodAsync('HandleOnBlurAsync', editor);
         } else {
-            obj.invokeMethodAsync('HandleOnFocusAsync', this.quill);
+            obj.invokeMethodAsync('HandleOnFocusAsync', editor);
         }
     })
     editor.on('text-change', (delta, oldDelta, source) => {
-
         const text = editor.getText();
         const html = editor.root.innerHTML;
         obj.invokeMethodAsync('HandleInputAsync', html);

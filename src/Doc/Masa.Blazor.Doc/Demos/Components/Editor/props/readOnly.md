@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-只读。
+是否将编辑器实例设置为只读模式。
 
 ## en-US
 
-readOnly.
+Whether to set the editor instance to read-only mode.
