@@ -40,12 +40,6 @@ public partial class Confirm : AlertingPopupComponentBase
 
     protected override void OnParametersSet()
     {
-        if (!Visible)
-        {
-            base.OnParametersSet();
-            return;
-        }
-
         if (_defaultParameters is null && MApp?.ConfirmParameters is not null)
         {
             _defaultParameters = new ConfirmParameters();

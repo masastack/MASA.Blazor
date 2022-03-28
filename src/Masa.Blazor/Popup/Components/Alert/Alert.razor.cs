@@ -106,12 +106,6 @@ public partial class Alert : AlertingPopupComponentBase
 
     protected override void OnParametersSet()
     {
-        if (!Visible)
-        {
-            base.OnParametersSet();
-            return;
-        }
-
         if (_defaultParameters is null && MApp?.AlertParameters is not null)
         {
             _defaultParameters = new AlertParameters();
