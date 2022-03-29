@@ -449,6 +449,14 @@
       },
       {
         "Order": 0,
+        "Title": "Editor",
+        "FullTitle": "Editor",
+        "Type": "menuItem",
+        "Url": "components/editor",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Expansion panels",
         "FullTitle": "Expansion panels",
         "Type": "menuItem",
@@ -2226,6 +2234,35 @@
         "FullTitle": "MECharts",
         "Type": "menuItem",
         "Url": "api/mecharts",
+        "Contents": [
+          {
+            "Id": "section-389932261",
+            "Title": "Component Pages",
+            "Level": 0
+          },
+          {
+            "Id": "section-1029938464",
+            "Title": "Props",
+            "Level": 0
+          },
+          {
+            "Id": "section-444565322",
+            "Title": "Contents",
+            "Level": 0
+          },
+          {
+            "Id": "section-1613329801",
+            "Title": "Events",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
+        "Title": "MEditor",
+        "FullTitle": "MEditor",
+        "Type": "menuItem",
+        "Url": "api/meditor",
         "Contents": [
           {
             "Id": "section-389932261",

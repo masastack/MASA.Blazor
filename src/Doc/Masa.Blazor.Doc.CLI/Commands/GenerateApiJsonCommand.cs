@@ -65,6 +65,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
             { "MDialog", new string[] { "Dialogs" } },
             { "MDivider", new string[] { "Dividers" } },
             { "MECharts", new string[] { "ECharts" } },
+            { "MEditor", new string[] { "Editor" } },
             { "MMessage", new string[] { "Presets" } },
             { "MExpansionPanel", new string[] { "Expansion panels" } },
             { "MExpansionPanelContent", new string[] { "Expansion panels" } },
