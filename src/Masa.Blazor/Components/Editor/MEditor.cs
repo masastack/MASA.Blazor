@@ -44,6 +44,7 @@ namespace Masa.Blazor
                     _value = value;
                     _waitingUpdate = true;
                 }
+                SetValue(value);
             }
         }
 
