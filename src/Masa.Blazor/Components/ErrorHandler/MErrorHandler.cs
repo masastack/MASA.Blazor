@@ -24,6 +24,12 @@ namespace Masa.Blazor
 
         protected Exception? Exception { get; set; }
 
+        protected override void OnParametersSet()
+        {
+            Exception = null;
+            Recover();
+        }
+
         protected override async Task OnErrorAsync(Exception exception)
         {
             Exception = exception;
@@ -46,19 +52,28 @@ namespace Masa.Blazor
 
         public async Task HandlerExceptionAsync(Exception exception)
         {
-
             await OnErrorAsync(exception);
-
-            //if (OnErrorHandleAsync is null && IsShowDetail)
-            {
-
-                StateHasChanged();
-            }
+            StateHasChanged();
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            builder.AddContent(0, ChildContent);
+            if (IsShow || OnErrorHandleAsync != null || CurrentException == null)
+            {
+                builder.AddContent(0, ChildContent);
+            }
+            if (OnErrorHandleAsync == null && !IsShow && CurrentException != null)
+            {
+                if (ErrorContent != null)
+                {
+                    builder.AddContent(1, ErrorContent!(CurrentException));
+                    return;
+                }
+
+                builder.OpenElement(2, "div");
+                builder.AddAttribute(3, "class", "blazor-error-boundary");
+                builder.CloseElement();
+            }
         }
     }
 }
