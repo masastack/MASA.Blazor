@@ -1401,6 +1401,35 @@
       },
       {
         "Order": 0,
+        "Title": "MErrorHandler",
+        "FullTitle": "MErrorHandler",
+        "Type": "menuItem",
+        "Url": "api/merrorhandler",
+        "Contents": [
+          {
+            "Id": "section-389932261",
+            "Title": "Component Pages",
+            "Level": 0
+          },
+          {
+            "Id": "section-1029938464",
+            "Title": "Props",
+            "Level": 0
+          },
+          {
+            "Id": "section-444565322",
+            "Title": "Contents",
+            "Level": 0
+          },
+          {
+            "Id": "section-1613329801",
+            "Title": "Events",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
         "Title": "MExpansionPanel",
         "FullTitle": "MExpansionPanel",
         "Type": "menuItem",
@@ -4138,6 +4167,14 @@
         "Type": "menuItem",
         "Url": "components/echarts",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Error Handle",
+        "FullTitle": "Error Handle",
+        "Type": "menuItem",
+        "Url": "components/error-handle",
         "Children": []
       },
       {

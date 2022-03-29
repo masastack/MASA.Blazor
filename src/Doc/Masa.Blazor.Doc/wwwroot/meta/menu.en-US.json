@@ -449,6 +449,14 @@
       },
       {
         "Order": 0,
+        "Title": "Error Handle",
+        "FullTitle": "Error Handle",
+        "Type": "menuItem",
+        "Url": "components/error-handle",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Expansion panels",
         "FullTitle": "Expansion panels",
         "Type": "menuItem",
@@ -2218,6 +2226,35 @@
         "FullTitle": "MECharts",
         "Type": "menuItem",
         "Url": "api/mecharts",
+        "Contents": [
+          {
+            "Id": "section-389932261",
+            "Title": "Component Pages",
+            "Level": 0
+          },
+          {
+            "Id": "section-1029938464",
+            "Title": "Props",
+            "Level": 0
+          },
+          {
+            "Id": "section-444565322",
+            "Title": "Contents",
+            "Level": 0
+          },
+          {
+            "Id": "section-1613329801",
+            "Title": "Events",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
+        "Title": "MErrorHandler",
+        "FullTitle": "MErrorHandler",
+        "Type": "menuItem",
+        "Url": "api/merrorhandler",
         "Contents": [
           {
             "Id": "section-389932261",

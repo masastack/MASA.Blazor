@@ -1,0 +1,44 @@
+﻿{
+  "Title": "MErrorHandler",
+  "Components": [
+    "ErrorHandler"
+  ],
+  "Props": [
+    {
+      "Name": "IsShow",
+      "Type": "Boolean",
+      "Default": "true",
+      "Description": "Whether the error message is displayed"
+    },
+    {
+      "Name": "IsShowDetail",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Whether to display an error detail message"
+    },
+    {
+      "Name": "MaximumErrorCount",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "OnErrorHandleAsync",
+      "Type": "Func<Exception,Task>",
+      "Default": "null",
+      "Description": "Customize error message handling"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "Default Content"
+    },
+    {
+      "Name": "ErrorContent",
+      "Type": "RenderFragment<Exception>",
+      "Description": ""
+    }
+  ],
+  "Events": []
+}

@@ -1870,6 +1870,66 @@
     "FullTitle": "ECharts（图表）"
   },
   {
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MErrorHandler\">MErrorHandler</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-03-28T19:09:01.9745441+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "异常处理",
+        "Description": "<p>异常统一处理。</p>\n",
+        "Code": "<MErrorHandler >\r\n<MButton @onclick=\"BtnClick\">点击测试</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
+        "Type": "Demos.Components.ErrorHandler.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "isShow",
+        "Title": "是否显示异常信息",
+        "Description": "<p>true 显示，false 不显示，默认显示</p>\n",
+        "Code": "<MErrorHandler IsShow=\"true\">\r\n<MButton @onclick=\"BtnClick\">点击测试</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
+        "Type": "Demos.Components.ErrorHandler.props.IsShow",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "isShowDetail",
+        "Title": "是否显示异常详细信息",
+        "Description": "<p>true 显示，false 不显示， 默认不显示</p>\n",
+        "Code": "<MErrorHandler IsShowDetail=\"true\">\r\n<MButton @onclick=\"BtnClick\">点击测试</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
+        "Type": "Demos.Components.ErrorHandler.props.IsShowDetail",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "onErrorHandleAsync",
+        "Title": "自定义异常处理",
+        "Description": "<p>自定义异常处理Func&lt;Exception,Task&gt;。</p>\n",
+        "Code": "<MErrorHandler OnErrorHandleAsync=\"CustomErrorHandleAsync\">\r\n<MButton @onclick=\"BtnClick\">自定义异常处理</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n\r\n    private async Task CustomErrorHandleAsync(Exception exception)\r\n    {\r\n        //todo\r\n        await Task.CompletedTask;\r\n    }\r\n}",
+        "Type": "Demos.Components.ErrorHandler.props.OnErrorHandleAsync",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Subtitle": "异常处理",
+    "Title": "ErrorHandler",
+    "Type": "异常处理",
+    "FullTitle": "ErrorHandler（异常处理）"
+  },
+  {
     "Desc": "<p><code>MExpansionPanel</code> 组件有助于减少大量信息的垂直空间占用。 组件的默认功能是仅显示一个扩展面板； 然而，使用 <strong>Multiple</strong> 属性后，扩展面板可以保持打开，直到显式地关闭。</p>\n",
     "Order": 0,
     "OtherDocs": {

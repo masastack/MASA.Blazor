@@ -70,6 +70,7 @@ namespace Masa.Blazor.Doc.Pages
             "MDialog",
             "MDivider",
             "MECharts",
+            "MErrorHandler",
             "MExpansionPanel",
             "MExpansionPanelContent",
             "MExpansionPanelHeader",

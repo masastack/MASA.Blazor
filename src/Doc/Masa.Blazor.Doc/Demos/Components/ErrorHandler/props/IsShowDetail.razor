@@ -1,0 +1,10 @@
+﻿<MErrorHandler IsShowDetail="true">
+<MButton @onclick="BtnClick">点击测试</MButton>
+</MErrorHandler>
+@code
+{
+    private void BtnClick()
+    {
+        throw new Exception("throw error!");
+    }
+}

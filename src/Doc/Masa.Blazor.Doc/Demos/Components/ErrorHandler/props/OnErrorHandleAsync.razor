@@ -1,0 +1,16 @@
+﻿<MErrorHandler OnErrorHandleAsync="CustomErrorHandleAsync">
+<MButton @onclick="BtnClick">自定义异常处理</MButton>
+</MErrorHandler>
+@code
+{
+    private void BtnClick()
+    {
+        throw new Exception("throw error!");
+    }
+
+    private async Task CustomErrorHandleAsync(Exception exception)
+    {
+        //todo
+        await Task.CompletedTask;
+    }
+}

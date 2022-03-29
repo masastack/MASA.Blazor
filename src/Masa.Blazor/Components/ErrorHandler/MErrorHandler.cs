@@ -8,7 +8,7 @@ using BlazorComponent;
 
 namespace Masa.Blazor
 {
-    public class MErrorLogger : ErrorBoundaryBase, IErrorLogger
+    public class MErrorHandler : ErrorBoundaryBase, IErrorHandler
     {
         [Inject]
         public IPopupService PopupService { get; set; }
