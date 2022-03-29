@@ -482,8 +482,7 @@
             "SubTitle": "OTP Input",
             "FullTitle": "OTP Input (OTP Input)",
             "Type": "menuItem",
-            "Url": "components/otp-input",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg"
+            "Url": "components/otp-input"
           },
           {
             "Order": 0,
@@ -709,6 +708,23 @@
   },
   {
     "Order": 27,
+    "Title": "Markdown编辑器",
+    "FullTitle": "Markdown编辑器",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "Markdown",
+        "SubTitle": "Markdown编辑器",
+        "FullTitle": "Markdown (Markdown编辑器)",
+        "Type": "menuItem",
+        "Url": "components/markdown",
+        "Children": []
+      }
+    ]
+  },
+  {
+    "Order": 28,
     "Title": "菜单",
     "FullTitle": "菜单",
     "Type": "itemGroup",
@@ -725,7 +741,7 @@
     ]
   },
   {
-    "Order": 28,
+    "Order": 29,
     "Title": "导航抽屉",
     "FullTitle": "导航抽屉",
     "Type": "itemGroup",
@@ -743,7 +759,7 @@
     ]
   },
   {
-    "Order": 29,
+    "Order": 30,
     "Title": "遮罩层",
     "FullTitle": "遮罩层",
     "Type": "itemGroup",
@@ -760,7 +776,7 @@
     ]
   },
   {
-    "Order": 31,
+    "Order": 32,
     "Title": "选择器",
     "FullTitle": "选择器",
     "Type": "itemGroup",
@@ -805,7 +821,7 @@
     ]
   },
   {
-    "Order": 33,
+    "Order": 34,
     "Title": "评级",
     "FullTitle": "评级",
     "Type": "itemGroup",
@@ -822,7 +838,7 @@
     ]
   },
   {
-    "Order": 34,
+    "Order": 35,
     "Title": "进度条",
     "FullTitle": "进度条",
     "Type": "itemGroup",
@@ -855,7 +871,7 @@
     ]
   },
   {
-    "Order": 35,
+    "Order": 36,
     "Title": "分页",
     "FullTitle": "分页",
     "Type": "itemGroup",
@@ -872,7 +888,7 @@
     ]
   },
   {
-    "Order": 36,
+    "Order": 37,
     "Title": "工作表",
     "FullTitle": "工作表",
     "Type": "itemGroup",
@@ -890,7 +906,7 @@
     ]
   },
   {
-    "Order": 38,
+    "Order": 39,
     "Title": "步骤条",
     "FullTitle": "步骤条",
     "Type": "itemGroup",
@@ -908,7 +924,7 @@
     ]
   },
   {
-    "Order": 39,
+    "Order": 40,
     "Title": "骨架装载器",
     "FullTitle": "骨架装载器",
     "Type": "itemGroup",
@@ -926,7 +942,7 @@
     ]
   },
   {
-    "Order": 40,
+    "Order": 41,
     "Title": "副标题",
     "FullTitle": "副标题",
     "Type": "itemGroup",
@@ -943,7 +959,7 @@
     ]
   },
   {
-    "Order": 41,
+    "Order": 42,
     "Title": "消息条",
     "FullTitle": "消息条",
     "Type": "itemGroup",
@@ -960,7 +976,7 @@
     ]
   },
   {
-    "Order": 42,
+    "Order": 43,
     "Title": "选项卡",
     "FullTitle": "选项卡",
     "Type": "itemGroup",
@@ -978,7 +994,7 @@
     ]
   },
   {
-    "Order": 43,
+    "Order": 44,
     "Title": "表格",
     "FullTitle": "表格",
     "Type": "itemGroup",
@@ -1022,7 +1038,7 @@
     ]
   },
   {
-    "Order": 44,
+    "Order": 45,
     "Title": "时间轴",
     "FullTitle": "时间轴",
     "Type": "itemGroup",
@@ -1039,7 +1055,7 @@
     ]
   },
   {
-    "Order": 47,
+    "Order": 48,
     "Title": "树形视图",
     "FullTitle": "树形视图",
     "Type": "itemGroup",
@@ -1057,7 +1073,7 @@
     ]
   },
   {
-    "Order": 48,
+    "Order": 49,
     "Title": "工具提示",
     "FullTitle": "工具提示",
     "Type": "itemGroup",
@@ -1075,7 +1091,7 @@
     ]
   },
   {
-    "Order": 50,
+    "Order": 51,
     "Title": "虚拟滚动条",
     "FullTitle": "虚拟滚动条",
     "Type": "itemGroup",

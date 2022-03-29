@@ -101,6 +101,7 @@ namespace Masa.Blazor.Doc.Pages
             "MListItemSubtitle",
             "MListItemTitle",
             "MMain",
+            "MMarkdown",
             "MMenu",
             "MMessages",
             "MNavigationDrawer",

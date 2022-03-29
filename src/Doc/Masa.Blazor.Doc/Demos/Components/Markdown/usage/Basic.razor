@@ -1,0 +1,8 @@
+﻿<MMarkdown @bind-Value="_value" @bind-Html="_html" >
+</MMarkdown>
+<div>@_value</div>
+<div>@_html</div>
+@code{
+    private string _value = "Hello Blazor!";
+    private string _html;
+}
