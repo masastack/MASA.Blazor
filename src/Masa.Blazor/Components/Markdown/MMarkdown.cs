@@ -13,7 +13,7 @@ namespace Masa.Blazor
     public class MMarkdown : BMarkdown, IAsyncDisposable
     {
         [Parameter]
-        public string Value
+        public override string Value
         {
             get => _value;
             set
@@ -23,11 +23,9 @@ namespace Masa.Blazor
                     _value = value;
                     _wattingUpdate = true;
                 }
+                SetValue(value);
             }
         }
-        
-        [Parameter]
-        public string Html { get; set; }
 
         [Parameter]
         public Dictionary<string, object> Options { get; set; }
@@ -51,11 +49,12 @@ namespace Masa.Blazor
         private bool _editorRendered = false;
         private bool _wattingUpdate = false;
         private string _value;
-
         private bool _afterFirstRender = false;
 
         private DotNetObjectReference<MMarkdown> ObjRef { get; set; }
+
         private IJSObjectReference VditorHelper { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
@@ -65,11 +64,12 @@ namespace Masa.Blazor
                     if (_wattingUpdate && _editorRendered)
                     {
                         _wattingUpdate = false;
-                        await SetValue(_value, true);
+                        await SetValueAsync(_value, true);
                     }
                 });
 
         }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
@@ -78,54 +78,49 @@ namespace Masa.Blazor
                 return;
             }
             _afterFirstRender = true;
-            await CreateMarkdown();
+            await CreateMarkdownAsync();
         }
 
-        public async Task CreateMarkdown()
+        public async Task CreateMarkdownAsync()
         {
             ObjRef = DotNetObjectReference.Create(this);
             VditorHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/vditor/vditor-helper.js");
             await VditorHelper.InvokeVoidAsync("init", Ref, ObjRef, Value, Options);
         }
 
-        public ValueTask<string> GetValue()
+        public async ValueTask<string> GetValueAsync()
         {
-            return VditorHelper.InvokeAsync<string>("getValue", Ref);
+            return await VditorHelper.InvokeAsync<string>("getValue", Ref);
         }
 
-        public ValueTask<string> GetHtml()
+        public async ValueTask<string> GetHtmlAsync()
         {
-            return VditorHelper.InvokeAsync<string>("getHtml", Ref);
+            return await VditorHelper.InvokeAsync<string>("getHtml", Ref);
         }
 
-        public async Task SetValue(string value, bool clearStack = false)
+        public async Task SetValueAsync(string value, bool clearStack = false)
         {
             await VditorHelper.InvokeVoidAsync("setValue", Ref, value, clearStack);
         }
 
-        public async Task InsertValue(string value, bool render = true)
+        public async Task InsertValueAsync(string value, bool render = true)
         {
             await VditorHelper.InvokeVoidAsync("insertValue", Ref, value, render);
         }
 
-        public async Task Destroy()
-        {
-            await VditorHelper.InvokeVoidAsync("destroy", Ref);
-        }
-
         [JSInvokable]
-        public async Task HandleRendered()
+        public async Task HandleRenderedAsync()
         {
             _editorRendered = true;
             if (!string.IsNullOrWhiteSpace(Value) && HtmlChanged.HasDelegate)
             {
-                Html = await GetHtml();
+                Html = await GetHtmlAsync();
                 await HtmlChanged.InvokeAsync(Html);
             }
         }
 
         [JSInvokable]
-        public async Task HandleInput(string value)
+        public async Task HandleInputAsync(string value)
         {
             _value = value;
             _wattingUpdate = false;
@@ -137,69 +132,70 @@ namespace Masa.Blazor
 
             if (HtmlChanged.HasDelegate)
             {
-                Html = await GetHtml();
+                Html = await GetHtmlAsync();
                 await HtmlChanged.InvokeAsync(Html);
             }
         }
 
         [JSInvokable]
-        public void HandleFocus(string value)
+        public async Task HandleFocusAsync(string value)
         {
             if (OnFocus.HasDelegate)
             {
-                OnFocus.InvokeAsync(value);
+                await OnFocus.InvokeAsync(value);
             }
         }
 
         [JSInvokable]
-        public void HandleBlur(string value)
+        public async Task HandleBlurAsync(string value)
         {
             if (OnBlur.HasDelegate)
             {
-                OnBlur.InvokeAsync(value);
+                await OnBlur.InvokeAsync(value);
             }
         }
 
         [JSInvokable]
-        public void HandleEscPress(string value)
+        public async Task HandleEscPressAsync(string value)
         {
             if (OnEscPress.HasDelegate)
             {
-                OnEscPress.InvokeAsync(value);
+                await OnEscPress.InvokeAsync(value);
             }
         }
 
         [JSInvokable]
-        public void HandleCtrlEnterPress(string value)
+        public async Task HandleCtrlEnterPressAsync(string value)
         {
             if (OnCtrlEnterPress.HasDelegate)
             {
-                OnCtrlEnterPress.InvokeAsync(value);
+                await OnCtrlEnterPress.InvokeAsync(value);
             }
         }
 
         [JSInvokable]
-        public void HandleSelect(string value)
+        public async Task HandleSelectAsync(string value)
         {
             if (OnSelect.HasDelegate)
             {
-                OnSelect.InvokeAsync(value);
+                await OnSelect.InvokeAsync(value);
             }
         }
 
         [JSInvokable]
-        public void HandleToolbarButtonClick(string btnName)
+        public async Task HandleToolbarButtonClickAsync(string btnName)
         {
             if (OnToolbarButtonClick.HasDelegate)
             {
-                OnToolbarButtonClick.InvokeAsync(btnName);
+                await OnToolbarButtonClick.InvokeAsync(btnName);
             }
         }
+
         public async ValueTask DisposeAsync()
         {
             try
             {
-                await Destroy();
+                await VditorHelper.InvokeVoidAsync("destroy", Ref);
                 if (ObjRef != null)
                 {
                     ObjRef.Dispose();

@@ -6,12 +6,10 @@
 
     protected override void OnInitialized()
     {
-        _options.Add("upload", new
+        _options.Add("counter", new
         {
-            url = "api/upload",
-            max = 2 * 1024 * 1024,
-            accept = "image/*",
-            multiple = true,
+            enable = true,
+            type = "markdown"
         });
         base.OnInitialized();
     }

@@ -6,7 +6,7 @@ title: Markdown
 cols: 1
 ---
 
-基于vditor封装的[Markdown](https://github.com/Vanessa219/vditor)
+基于[vditor](https://github.com/Vanessa219/vditor)封装
 
 ## css文件
 

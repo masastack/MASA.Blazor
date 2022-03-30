@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-配置 **Options** 属性设置工具栏
+配置 [Options](https://ld246.com/article/1549638745630#options) 属性设置工具栏
 
 ## en-US
 
-Configure **Options** attribute to set toolbar
+Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set toolbar

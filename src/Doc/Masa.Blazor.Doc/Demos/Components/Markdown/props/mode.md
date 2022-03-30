@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-配置 **Options** 属性设置模式
+配置 [Options](https://ld246.com/article/1549638745630#options) 属性设置模式
 
 ## en-US
 
-Configure **Options** attribute to set mode
+Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set mode

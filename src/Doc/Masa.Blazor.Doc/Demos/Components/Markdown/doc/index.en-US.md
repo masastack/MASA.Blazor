@@ -5,7 +5,7 @@ title: Markdown
 cols: 1
 ---
 
-[Markdown](https://github.com/Vanessa219/vditor) editor based on vditor encapsulation
+Packaging based on [vditor](https://github.com/Vanessa219/vditor)
 
 ## CSS file
 

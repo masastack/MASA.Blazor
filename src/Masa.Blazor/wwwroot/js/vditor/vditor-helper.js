@@ -18,11 +18,11 @@ const defaultOptions = {
 
 
 export function init(domRef, obj, value, options) {
-    if (options&&options.hasOwnProperty('toolbar')) {
+    if (options && options.hasOwnProperty('toolbar')) {
         options.toolbar.forEach(btn => {
             if (typeof btn == 'object') {
                 btn.click = () => {
-                    obj.invokeMethodAsync('HandleToolbarButtonClick', btn.name);
+                    obj.invokeMethodAsync('HandleToolbarButtonClickAsync', btn.name);
                 }
             }
         })
@@ -32,25 +32,25 @@ export function init(domRef, obj, value, options) {
         ...options,
         value,
         after: () => {
-            obj.invokeMethodAsync('HandleRendered', value);
+            obj.invokeMethodAsync('HandleRenderedAsync', value);
         },
         input: (value) => {
-            obj.invokeMethodAsync('HandleInput', value);
+            obj.invokeMethodAsync('HandleInputAsync', value);
         },
         focus: (value) => {
-            obj.invokeMethodAsync('HandleFocus', value);
+            obj.invokeMethodAsync('HandleFocusAsync', value);
         },
         blur: (value) => {
-            obj.invokeMethodAsync('HandleBlur', value);
+            obj.invokeMethodAsync('HandleBlurAsync', value);
         },
         esc: (value) => {
-            obj.invokeMethodAsync('HandleEscPress', value);
+            obj.invokeMethodAsync('HandleEscPressAsync', value);
         },
         ctrlEnter: (value) => {
-            obj.invokeMethodAsync('HandleCtrlEnterPress', value);
+            obj.invokeMethodAsync('HandleCtrlEnterPressAsync', value);
         },
         select: (value) => {
-            editor.invokeMethodAsync('HandleSelect', value);
+            obj.invokeMethodAsync('HandleSelectAsync', value);
         },
     })
 }
@@ -68,14 +68,4 @@ export function insertValue(domRef, value, render = true) {
 }
 export function destroy(domRef) {
     domRef.Vditor.destroy();
-}
-export function preview(domRef, editor, markdown, options = {}) {
-    Vditor.preview(domRef, markdown, {
-        ...options,
-        after() {
-            if (options.handleAfter) {
-                editor.invokeMethodAsync('HandleAfter');
-            }
-        }
-    });
 }

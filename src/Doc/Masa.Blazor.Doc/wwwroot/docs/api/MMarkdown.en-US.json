@@ -30,11 +30,6 @@
       "Description": "The style applied to the outermost element of the component"
     },
     {
-      "Name": "Upload",
-      "Type": "MMarkdownUpload",
-      "Description": ""
-    },
-    {
       "Name": "Value",
       "Type": "String",
       "Description": ""

@@ -30,11 +30,6 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
-      "Name": "Upload",
-      "Type": "MMarkdownUpload",
-      "Description": ""
-    },
-    {
       "Name": "Value",
       "Type": "String",
       "Description": ""
