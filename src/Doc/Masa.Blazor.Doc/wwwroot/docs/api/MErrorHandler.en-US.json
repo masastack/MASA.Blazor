@@ -5,18 +5,6 @@
   ],
   "Props": [
     {
-      "Name": "IsShow",
-      "Type": "Boolean",
-      "Default": "true",
-      "Description": "Whether the error message is displayed"
-    },
-    {
-      "Name": "IsShowDetail",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": "Whether to display an error detail message"
-    },
-    {
       "Name": "MaximumErrorCount",
       "Type": "Int32",
       "Description": ""
@@ -26,6 +14,18 @@
       "Type": "Func<Exception,Task>",
       "Default": "null",
       "Description": "Customize error message handling"
+    },
+    {
+      "Name": "Show",
+      "Type": "Boolean",
+      "Default": "true",
+      "Description": "Whether the error message is displayed"
+    },
+    {
+      "Name": "ShowDetail",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "Whether to display an error detail message"
     }
   ],
   "Contents": [

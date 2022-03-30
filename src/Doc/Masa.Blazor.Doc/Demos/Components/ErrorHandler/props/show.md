@@ -2,7 +2,7 @@
 order: 0
 title:
   zh-CN: 是否显示异常信息
-  en-US: IsShow
+  en-US: Show
 ---
 
 ## zh-CN

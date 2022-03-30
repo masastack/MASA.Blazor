@@ -1,6 +1,6 @@
-﻿<MSwitch @bind-Value="_isShow" Label="@($"IsShow: {_isShow}")"></MSwitch>
-<MErrorHandler IsShow="_isShow" >
-<MButton @onclick="BtnClick">点击测试</MButton>
+﻿<MSwitch @bind-Value="_isShow" Label="@($"Show: {_isShow}")"></MSwitch>
+<MErrorHandler Show="_isShow" >
+<MButton @onclick="BtnClick">throw test</MButton>
 </MErrorHandler>
 @code
 {

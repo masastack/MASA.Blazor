@@ -4171,10 +4171,10 @@
       },
       {
         "Order": 0,
-        "Title": "Error Handle",
-        "FullTitle": "Error Handle",
+        "Title": "ErrorHandler",
+        "FullTitle": "ErrorHandler",
         "Type": "menuItem",
-        "Url": "components/error-handle",
+        "Url": "components/errorhandler",
         "Children": []
       },
       {

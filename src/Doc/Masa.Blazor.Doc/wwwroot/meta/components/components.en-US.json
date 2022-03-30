@@ -1850,14 +1850,14 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MErrorHandler\">MErrorHandler</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T19:09:01.9745441+08:00",
+    "LastWriteTime": "2022-03-29T17:21:40.7967846+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "index",
         "Title": "ErrorHandler",
         "Description": "<p>Uniform exception handling.</p>\n",
-        "Code": "<MErrorHandler >\r\n<MButton @onclick=\"BtnClick\">点击测试</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
+        "Code": "<MErrorHandler >\r\n<MButton @onclick=\"BtnClick\">throw test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
         "Type": "Demos.Components.ErrorHandler.usage.Index",
         "Style": "",
         "Debug": false,
@@ -1865,33 +1865,33 @@
       },
       {
         "Order": 0,
-        "Name": "isShow",
-        "Title": "IsShow",
-        "Description": "<p>True is displayed, false is not displayed, and the default is displayed</p>\n",
-        "Code": "<MSwitch @bind-Value=\"_isShow\" Label=\"@($\"IsShow: {_isShow}\")\"></MSwitch>\r\n<MErrorHandler IsShow=\"_isShow\" >\r\n<MButton @onclick=\"BtnClick\">点击测试</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private MErrorHandler mErrorHandler;\r\n    private bool _isShow=true;\r\n\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
-        "Type": "Demos.Components.ErrorHandler.props.IsShow",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "isShowDetail",
-        "Title": "IsShowDetail",
-        "Description": "<p>True is displayed, false is not displayed, and the default is not displayed.</p>\n",
-        "Code": "<MSwitch @bind-Value=\"_isShow\" Label=\"@($\"IsShowDetail: {_isShow}\")\"></MSwitch>\r\n<MErrorHandler IsShowDetail=\"true\">\r\n<MButton @onclick=\"BtnClick\">点击测试</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private bool _isShow=false;\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
-        "Type": "Demos.Components.ErrorHandler.props.IsShowDetail",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
         "Name": "onErrorHandleAsync",
         "Title": "onErrorHandleAsync",
         "Description": "<p>Custom exception handling Func&lt;Exception, Task &gt;.</p>\n",
-        "Code": "<MErrorHandler OnErrorHandleAsync=\"CustomErrorHandleAsync\">\r\n<MButton @onclick=\"BtnClick\">自定义异常处理</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n\r\n    private async Task CustomErrorHandleAsync(Exception exception)\r\n    {\r\n        //todo\r\n        await Task.CompletedTask;\r\n    }\r\n}",
+        "Code": "<MErrorHandler OnErrorHandleAsync=\"CustomErrorHandleAsync\">\r\n<MButton @onclick=\"BtnClick\">custom handler exception test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n\r\n    private async Task CustomErrorHandleAsync(Exception exception)\r\n    {\r\n        //todo\r\n        await Task.CompletedTask;\r\n    }\r\n}",
         "Type": "Demos.Components.ErrorHandler.props.OnErrorHandleAsync",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "show",
+        "Title": "Show",
+        "Description": "<p>True is displayed, false is not displayed, and the default is displayed</p>\n",
+        "Code": "<MSwitch @bind-Value=\"_isShow\" Label=\"@($\"Show: {_isShow}\")\"></MSwitch>\r\n<MErrorHandler Show=\"_isShow\" >\r\n<MButton @onclick=\"BtnClick\">throw test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private MErrorHandler mErrorHandler;\r\n    private bool _isShow=true;\r\n\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
+        "Type": "Demos.Components.ErrorHandler.props.Show",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "showDetail",
+        "Title": "ShowDetail",
+        "Description": "<p>True is displayed, false is not displayed, and the default is not displayed.</p>\n",
+        "Code": "<MSwitch @bind-Value=\"_isShow\" Label=\"@($\"ShowDetail: {_isShow}\")\"></MSwitch>\r\n<MErrorHandler ShowDetail=\"_isShow\">\r\n<MButton @onclick=\"BtnClick\">throw test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private bool _isShow=false;\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
+        "Type": "Demos.Components.ErrorHandler.props.ShowDetail",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -1900,9 +1900,9 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
-    "Title": "Error Handle",
+    "Title": "ErrorHandler",
     "Type": "ErrorHandler",
-    "FullTitle": "Error Handle"
+    "FullTitle": "ErrorHandler"
   },
   {
     "Desc": "<p>The <code>MExpansionPanel</code> component is useful for reducing vertical space with large amounts of information. The default\nfunctionality of the component is to only display one expansion-panel body at a time; however, with the <strong>Multiple</strong>\nproperty, the expansion-panel can remain open until explicitly closed.</p>\n",

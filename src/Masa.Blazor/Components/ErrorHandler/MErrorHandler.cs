@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlazorComponent;
+using Microsoft.Extensions.Logging;
 
 namespace Masa.Blazor
 {
@@ -13,14 +14,17 @@ namespace Masa.Blazor
         [Inject]
         public IPopupService PopupService { get; set; }
 
+        [Inject]
+        protected ILogger<MErrorHandler> Logger { get; set; }
+
         [Parameter]
         public Func<Exception, Task>? OnErrorHandleAsync { get; set; }
 
         [Parameter]
-        public bool IsShow { get; set; } = true;
+        public bool Show { get; set; } = true;
 
         [Parameter]
-        public bool IsShowDetail { get; set; } = false;
+        public bool ShowDetail { get; set; } = false;
 
         protected Exception? Exception { get; set; }
 
@@ -33,17 +37,18 @@ namespace Masa.Blazor
         protected override async Task OnErrorAsync(Exception exception)
         {
             Exception = exception;
+            Logger.LogError(exception, "OnErrorAsync");
             if (OnErrorHandleAsync != null)
             {
                 await OnErrorHandleAsync(exception);
             }
             else
             {
-                if (IsShow)
+                if (Show)
                 {
                     await PopupService.AlertAsync(alert =>
                     {
-                        alert.Content = IsShowDetail ? $"{Exception.Message}:{Exception.StackTrace}" : Exception.Message;
+                        alert.Content = ShowDetail ? $"{Exception.Message}:{Exception.StackTrace}" : Exception.Message;
                         alert.Top = true;
                     });
                 }
@@ -58,11 +63,11 @@ namespace Masa.Blazor
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            if (IsShow || OnErrorHandleAsync != null || CurrentException == null)
+            if (Show || OnErrorHandleAsync != null || CurrentException == null)
             {
                 builder.AddContent(0, ChildContent);
             }
-            if (OnErrorHandleAsync == null && !IsShow && CurrentException != null)
+            if (OnErrorHandleAsync == null && !Show && CurrentException != null)
             {
                 if (ErrorContent != null)
                 {
