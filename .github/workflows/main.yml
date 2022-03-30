@@ -1,15 +1,12 @@
-name: build
+name: deploy
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-
+  
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - name: git pull
