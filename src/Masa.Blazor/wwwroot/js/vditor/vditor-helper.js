@@ -1,19 +1,14 @@
-﻿const isMobile = window.innerWidth <= 960;
-const defaultOptions = {
-    width: isMobile ? '100%' : '80%',
-    height: '0',
+﻿const defaultOptions = {
     tab: '\t',
-    counter: '999999',
-    typewriterMode: true,
     mode: 'sv',
     preview: {
-        delay: 100,
-        show: !isMobile
+        actions: []
     },
     outline: true,
     cache: {
         enable: false,
     },
+    icon:'material'
 }
 
 
