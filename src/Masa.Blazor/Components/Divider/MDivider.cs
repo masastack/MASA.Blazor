@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MDivider : BDivider, IThemeable
     {

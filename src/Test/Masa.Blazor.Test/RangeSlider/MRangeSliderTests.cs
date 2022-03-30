@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Bunit;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.RangeSlider
 {
     [TestClass]
-    public class MRangeSliderTests:TestBase
+    public class MRangeSliderTests : TestBase
     {
         //[TestMethod]
         //public void RenderRangeSliderWithDark()

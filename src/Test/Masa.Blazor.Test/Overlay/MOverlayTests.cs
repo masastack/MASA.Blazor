@@ -1,15 +1,10 @@
 ﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Test.Overlay
 {
     [TestClass]
-    public class MOverlayTests:TestBase
+    public class MOverlayTests : TestBase
     {
         [TestMethod]
         public void RenderOverlayWithDark()

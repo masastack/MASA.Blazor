@@ -54,7 +54,7 @@ public partial class Prompt : PopupComponentBase
 
         if (_defaultParameters is null && MApp?.PromptParameters is not null)
         {
-            _defaultParameters  = new PromptParameters();
+            _defaultParameters = new PromptParameters();
 
             MApp.PromptParameters.Invoke(_defaultParameters);
         }

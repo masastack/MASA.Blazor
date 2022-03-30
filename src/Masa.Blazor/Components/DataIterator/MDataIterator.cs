@@ -1,13 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MDataIterator<TItem> : BDataIterator<TItem>, IDataIterator<TItem>, ILoadable
     {
@@ -247,9 +238,9 @@ namespace Masa.Blazor
                 var key = ItemKey?.Invoke(item);
                 Selection[key] = value;
             }
-            
+
             UpdateSelectedItemsAsValue();
-            
+
             OnToggleSelectAll?.Invoke(SelectableItems, value);
         }
 

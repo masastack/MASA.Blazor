@@ -1,8 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MAppBarNavIcon : BAppBarNavIcon
     {

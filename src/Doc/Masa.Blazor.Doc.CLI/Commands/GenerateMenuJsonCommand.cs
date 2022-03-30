@@ -1,8 +1,8 @@
 ﻿using Masa.Blazor.Doc.CLI.Comparers;
 using Masa.Blazor.Doc.CLI.Interfaces;
 using Masa.Blazor.Doc.CLI.Wrappers;
-using Masa.Blazor.Doc.Models.Extensions;
 using Masa.Blazor.Doc.Models;
+using Masa.Blazor.Doc.Models.Extensions;
 using Microsoft.Extensions.CommandLineUtils;
 using Newtonsoft.Json.Linq;
 using System;
@@ -13,7 +13,6 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Diagnostics;
 
 namespace Masa.Blazor.Doc.CLI.Commands
 {

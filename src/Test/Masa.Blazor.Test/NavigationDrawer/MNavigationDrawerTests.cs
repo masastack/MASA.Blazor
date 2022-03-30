@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bunit;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.NavigationDrawer
 {
     [TestClass]
-    public class MNavigationDrawerTests:TestBase
+    public class MNavigationDrawerTests : TestBase
     {
         [TestMethod]
         public void RenderNavigationDrawerWithAbsolute()

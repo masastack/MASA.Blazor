@@ -1,12 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MTimelineItem : BTimelineItem, IThemeable, ITimelineItem
     {
@@ -36,7 +28,7 @@ namespace Masa.Blazor
 
         [Parameter]
         public bool Small { get; set; }
-        
+
 
         protected override void SetComponentClass()
         {

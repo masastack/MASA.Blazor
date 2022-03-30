@@ -1,15 +1,9 @@
-﻿using Bunit;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.Counter
 {
     [TestClass]
-    public class MCounterTests:TestBase
+    public class MCounterTests : TestBase
     {
         [TestMethod]
         public void RenderCounterWithWithDark()

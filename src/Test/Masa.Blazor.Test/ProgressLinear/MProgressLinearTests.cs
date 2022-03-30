@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
-using Bunit;
 
 namespace Masa.Blazor.Test.ProgressLinear
 {
     [TestClass]
-    public class MProgressLinearTests:TestBase
+    public class MProgressLinearTests : TestBase
     {
         [TestMethod]
         public void RenderProgressLinearWithAbsolute()
@@ -272,14 +267,14 @@ namespace Masa.Blazor.Test.ProgressLinear
             progresslinearDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
 
-        
 
-        
 
-        
 
-        
 
-        
+
+
+
+
+
     }
 }

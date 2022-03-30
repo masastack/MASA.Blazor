@@ -1,12 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MTreeview<TItem, TKey> : BTreeview<TItem, TKey>, IThemeable
     {
@@ -15,7 +7,7 @@ namespace Masa.Blazor
 
         [Parameter]
         public bool Dense { get; set; }
-        
+
 
         [Parameter]
         public bool Rounded { get; set; }

@@ -1,8 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using System;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MPicker : BPicker, IThemeable, IPicker
     {
@@ -33,7 +29,7 @@ namespace Masa.Blazor
         [Parameter]
         public string HeaderColor { get; set; }
 
-        
+
 
         public string ComputedTitleColor
         {
