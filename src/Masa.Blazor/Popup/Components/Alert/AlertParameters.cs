@@ -27,7 +27,7 @@ public class AlertParameters : Alert
             [nameof(Top)] = Top,
             [nameof(Vertical)] = Vertical,
             [nameof(Width)] = Width,
-            
+
             [nameof(ActionProps)] = ActionProps,
             [nameof(ActionText)] = ActionText,
             [nameof(Content)] = Content,
@@ -73,7 +73,7 @@ public class AlertParameters : Alert
         component.ActionProps ??= ActionProps;
         component.ActionText ??= ActionText;
         component.OnAction ??= OnAction;
-        
+
         component.Icon ??= Icon;
         component.IconColor ??= IconColor;
         component.Type ??= Type;

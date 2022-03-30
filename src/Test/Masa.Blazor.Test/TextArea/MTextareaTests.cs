@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Text;
-using System.Threading.Tasks;
-using Bunit;
 
 namespace Masa.Blazor.Test.Textarea
 {
     [TestClass]
-    public class MTextAreaTests:TestBase
+    public class MTextAreaTests : TestBase
     {
         [TestMethod]
         public void RenderTextareaWithAutoGrow()

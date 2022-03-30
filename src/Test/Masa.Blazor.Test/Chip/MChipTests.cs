@@ -1,15 +1,10 @@
 ﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Test.Chip
 {
     [TestClass]
-    public class MChipTests:TestBase
+    public class MChipTests : TestBase
     {
         [TestMethod]
         public void RenderChipWithActive()

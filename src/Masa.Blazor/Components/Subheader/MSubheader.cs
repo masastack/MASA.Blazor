@@ -1,13 +1,10 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
-    public partial class MSubheader : BSubheader,IThemeable
+    public partial class MSubheader : BSubheader, IThemeable
     {
         [Parameter]
         public bool Inset { get; set; }
-        
+
 
         protected override void SetComponentClass()
         {

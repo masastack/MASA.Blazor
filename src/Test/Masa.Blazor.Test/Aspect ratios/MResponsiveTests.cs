@@ -1,10 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Bunit;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Bunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.Responsive
 {

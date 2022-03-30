@@ -1,6 +1,4 @@
-﻿using BlazorComponent;
-
-namespace Masa.Blazor.Presets
+﻿namespace Masa.Blazor.Presets
 {
     public partial class Message
     {

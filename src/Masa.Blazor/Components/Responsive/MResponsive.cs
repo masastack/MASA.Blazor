@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using BlazorComponent;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MResponsive : BResponsive
     {
@@ -63,7 +60,7 @@ namespace Masa.Blazor
             }
 
             var paddingBottom = (1 / ratio).ToString("P2");
-            
+
             return $"padding-bottom: {paddingBottom.Replace(" ", "")}";
         }
     }

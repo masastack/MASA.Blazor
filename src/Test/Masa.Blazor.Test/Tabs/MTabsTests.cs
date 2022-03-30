@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
-using Bunit;
 
 namespace Masa.Blazor.Test.Tabs
 {
     [TestClass]
-    public class MTabsTests:TestBase
+    public class MTabsTests : TestBase
     {
         [TestMethod]
         public void RenderTabsWithAlignWithTitle()

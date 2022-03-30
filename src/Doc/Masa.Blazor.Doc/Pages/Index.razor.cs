@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Masa.Blazor.Doc.Services;
 using System.Globalization;
-using System.Threading.Tasks;
-using Masa.Blazor.Doc.Services;
-using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor.Doc.Pages
 {
-    public partial class Index 
+    public partial class Index
     {
         private Recommend[] _recommends = { };
 

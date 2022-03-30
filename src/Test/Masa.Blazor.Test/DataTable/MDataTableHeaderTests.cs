@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bunit;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.DataTable
 {
     [TestClass]
-    public  class MDataTableHeaderTests:TestBase
+    public class MDataTableHeaderTests : TestBase
     {
         [TestMethod]
         public void RenderDataTableHeaderWithDisableSort()

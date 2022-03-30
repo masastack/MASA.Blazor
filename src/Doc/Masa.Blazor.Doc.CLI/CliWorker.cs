@@ -2,12 +2,8 @@
 using Masa.Blazor.Doc.CLI.Interfaces;
 using Masa.Blazor.Doc.CLI.Wrappers;
 using Microsoft.Extensions.CommandLineUtils;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Doc.CLI
 {

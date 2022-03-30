@@ -1,15 +1,10 @@
 ﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Test.Footer
 {
     [TestClass]
-    public class MFooterTests:TestBase
+    public class MFooterTests : TestBase
     {
         [TestMethod]
         public void RenderFooterWithAbsolute()

@@ -1,10 +1,8 @@
-﻿using BlazorComponent;
-using BlazorComponent.I18n;
-using Masa.Blazor.Doc.Utils;
-using Microsoft.AspNetCore.Components;
-using System.Globalization;
+﻿using BlazorComponent.I18n;
 using Masa.Blazor.Doc.Models;
 using Masa.Blazor.Doc.Services;
+using Microsoft.AspNetCore.Components;
+using System.Globalization;
 
 namespace Masa.Blazor.Doc.Pages
 {
@@ -201,11 +199,11 @@ namespace Masa.Blazor.Doc.Pages
         {
             var id = section;
             var title = section;
-            
+
             if (IsChinese)
             {
                 id = null;
-                
+
                 title = section switch
                 {
                     "props" => "属性",
@@ -215,7 +213,7 @@ namespace Masa.Blazor.Doc.Pages
                 };
             }
 
-            var apiData = section switch 
+            var apiData = section switch
             {
                 "props" => _api.Props,
                 "events" => _api.Events,

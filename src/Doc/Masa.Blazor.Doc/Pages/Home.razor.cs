@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlazorComponent;
-using BlazorComponent.Components;
+﻿using BlazorComponent;
 using Masa.Blazor.Doc.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;

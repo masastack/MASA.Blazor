@@ -1,15 +1,10 @@
 ﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Test.Grid
 {
     [TestClass]
-    public class MContainerTests:TestBase
+    public class MContainerTests : TestBase
     {
         [TestMethod]
         public void RenderFooterWithAbsolute()
@@ -41,4 +36,3 @@ namespace Masa.Blazor.Test.Grid
         }
     }
 }
-    

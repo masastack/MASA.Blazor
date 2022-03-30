@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.4918154+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3291841+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -194,7 +194,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.4918154+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.330186+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -227,7 +227,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.4918154+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.333154+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -327,7 +327,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.4918154+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3351534+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -404,7 +404,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.4918154+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3381531+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -494,7 +494,7 @@
       "功能组件": "\n<ul>\n<li><code>MAppBarNavIcon</code>：专门为与 <a href=\"/components/toolbars\">MToolbar</a> 和 <code>MAppBar</code> 一起使用而创建的样式化图标按钮组件。 在工具栏的左侧显示为汉堡菜单，它通常用于控制导航抽屉的状态。 默认插槽可以用于自定义此组件的图标和功能。</li>\n<li><code>MAppBarTitle</code>：修改过的 <a href=\"/components/toolbars\">MToolbarTitle</a> 组件 ，用于配合 <strong>ShrinkOnScroll</strong> 属性使用。 在小屏幕上，<strong>MToolbarTitle</strong>\n将被截断，但这个组件在展开时使用了绝对定位使其内容可见。 我们不建议您在没有使用 <strong>ShrinkOnScroll</strong> 属性时使用 <code>MAppBarTitle</code> 组件。确实是因为向此组件添加了resize事件，并进行了很多额外的计算。</li>\n</ul>\n",
       "注意事项": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <strong>Icon</strong> 属性的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将按钮包装在任何容器例如<code>div</code>中，则需要对该容器应用负边距，以便正确对齐它们。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.4918154+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3431841+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -649,7 +649,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.4918154+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3451881+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -727,7 +727,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <code>Icon</code> prop的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将您的按钮包装在任何容器中，例如<code>div</code>， 您需要对容器应用负边距，以便正确对齐。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.4918154+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3491856+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -881,7 +881,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.4918154+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3501964+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -925,7 +925,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBottomSheet\">MBottomSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.4918154+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3531895+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1014,7 +1014,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>默认情况下，<code>MBreadcrumbs</code> 将禁用路由联动。可以通过 <strong>Linkage</strong> 属性开启路由联动。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.4918154+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3561957+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1104,7 +1104,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p>当使用 <strong>Dark</strong> 属性时，<code>MButton</code> 是唯一一种拥有不同行为的组件。 通常来说，组件使用 <strong>Dark</strong> 属性来表示他们将有深色背景，文本也需要是白色的。 虽然这对\n<code>MButton</code> 也是起作用的，但由于禁用状态与白色背景容易造成混淆，建议仅在按钮<strong>为</strong>彩色背景时使用此属性。 If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.4918154+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3601912+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1271,7 +1271,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "功能组件": "\n<ul>\n<li><code>MCardActions</code>：用于为卡片放置 动作 的容器，如 <a href=\"/components/buttons\">MButton</a> 或 <a href=\"/components/menus\">MMenu</a>。 同时在按钮上使用 个特殊边距\n，以便它们与其他卡片内容区域的匹配。</li>\n<li><code>MCardSubtitle</code>：为卡片字幕提供默认的 <strong>字体大小</strong> 和 <strong>填充</strong>。 字体大小可以以 <a href=\"/stylesandanimations/text-and-typography\">排版类</a> 覆盖。</li>\n<li><code>MCardText</code>：主要用于卡片中的 <strong>文本内容</strong>。 对文本应用填充，将其字体大小减少为 .875rem。</li>\n<li><code>MCardTitle</code>：为卡片字幕提供默认的 字体大小 和 填充。 字体大小可以以 <a href=\"/stylesandanimations/text-and-typography\">排版类</a> 覆盖。</li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5074408+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3651944+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1426,7 +1426,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5074408+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3701529+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1614,7 +1614,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5074408+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3741618+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1746,7 +1746,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5074408+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3761593+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1824,7 +1824,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5074408+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3781857+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1870,21 +1870,21 @@
     "FullTitle": "ECharts（图表）"
   },
   {
-    "Desc": "<p>基于<a href=\"https://quilljs.com/\">Quill</a>封装的富文本编辑器</p>\n",
+    "Desc": "<p><a href=\"https://quilljs.com/\">Editor</a> 基于quilljs封装的富文本编辑器</p>\n",
     "Order": 0,
     "OtherDocs": {
       "css文件": "\n<pre><code class=\"language-html\">&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.snow.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.bubble.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown-common-style.css&quot; rel=&quot;stylesheet&quot;&gt;\n</code></pre>\n",
       "js文件": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:06:17.5794862+08:00",
+    "LastWriteTime": "2022-03-30T13:42:39.7065+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "basic",
         "Title": "使用",
         "Description": "<p>富文本编辑器示例</p>\n",
-        "Code": "<MEditor @bind-Value=\"_editorContent\">\r\n</MEditor>\r\n<MAlert Border=\"Borders.Top\"\r\n            ColoredBorder\r\n            Type=\"AlertTypes.Info\"\r\n            Elevation=\"2\" \r\n            Class=\"mt-5\">\r\n        @_editorContent\r\n</MAlert>\r\n@code{\r\n    string _editorContent=\"Hello MEditor!\";\r\n}\r\n\r\n",
+        "Code": "<MEditor @bind-Value=\"EditorContent\">\r\n</MEditor>\r\n<div>@EditorContent</div>\r\n@code{\r\n    string EditorContent=\"Hello MEditor!\";\r\n}\r\n\r\n",
         "Type": "Demos.Components.Editor.usage.Basic",
         "Style": "",
         "Debug": false,
@@ -1916,7 +1916,7 @@
         "Order": 0,
         "Name": "placeholder",
         "Title": "自定义提示信息",
-        "Description": "<p>通过设置 <strong>Placeholder</strong> 属性来设置空值时的提示消息。</p>\n",
+        "Description": "<p>通过设置 Placeholder 属性来设置空值时的提示消息。</p>\n",
         "Code": "<MEditor Placeholder=\"please input\">\r\n</MEditor>",
         "Type": "Demos.Components.Editor.props.Placeholder",
         "Style": "",
@@ -1949,7 +1949,7 @@
         "Order": 0,
         "Name": "toolBar",
         "Title": "自定义工具栏",
-        "Description": "<p>通过<strong>ToolbarContent</strong>插槽自定义工具栏。</p>\n",
+        "Description": "<p>通过ToolbarContent插槽自定义工具栏。</p>\n",
         "Code": "<MEditor>\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>",
         "Type": "Demos.Components.Editor.props.ToolBar",
         "Style": "",
@@ -1961,7 +1961,7 @@
         "Name": "method",
         "Title": "方法",
         "Description": "<p>一些方法示例。</p>\n",
-        "Code": "<MEditor @ref=\"@_editor\" @bind-Value=\"_editorContent\" Placeholder=\"请输入内容\" ContentStyle=\"height:100px\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>\r\n<MRow Align=\"@AlignTypes.Center\"\r\n      Justify=\"@JustifyTypes.SpaceAround\" Class=\"mt-10\">\r\n      <MButton Depressed Color=\"primary\" @onclick=\"GetTextAsync\">\r\n        获取文本\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetContentAsync\">\r\n        获取内容\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetHtmlAsync\">\r\n        获取html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"SetHtmlAsync\">\r\n        设置html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"DisableAsync\">\r\n        禁用\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"EnableAsync\">\r\n        启用\r\n    </MButton>\r\n</MRow>\r\n<MAlert Border=\"Borders.Top\"\r\n            ColoredBorder\r\n            Type=\"AlertTypes.Info\"\r\n            Elevation=\"2\" \r\n            Class=\"mt-10\">\r\n        @_viewContent\r\n</MAlert>\r\n\r\n@code {\r\n    private MEditor _editor;\r\n    private string _editorContent = @\"Hello MEditor\";\r\n    private string _viewContent;\r\n\r\n    public async Task GetTextAsync()\r\n    {\r\n        _viewContent = await this._editor.GetTextAsync();\r\n    }\r\n    public async Task GetContentAsync()\r\n    {\r\n        _viewContent = await this._editor.GetContentAsync();\r\n    }\r\n    public async Task GetHtmlAsync()\r\n    {\r\n        _viewContent = await this._editor.GetHtmlAsync();\r\n    }\r\n\r\n    public async Task SetHtmlAsync()\r\n    {\r\n        string html =\r\n            @\"<a href='https://www.baidu.com/'>\" +\r\n            \"<img src='https://www.baidu.com/img/flexible/logo/pc/result.png' /></a>\";\r\n\r\n        await this._editor.SetHtmlAsync(html);\r\n    }\r\n    public async Task DisableAsync()\r\n    {\r\n        await this._editor.DisableAsync();\r\n    }\r\n    public async Task EnableAsync()\r\n    {\r\n        await this._editor.EnableAsync();\r\n    }\r\n}",
+        "Code": "<MEditor @ref=\"@Editor\" @bind-Value=\"EditorContent\" Placeholder=\"请输入内容\" ContentStyle=\"height:100px\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>\r\n<MRow Align=\"@AlignTypes.Center\"\r\n      Justify=\"@JustifyTypes.SpaceAround\" Class=\"mt-10\">\r\n      <MButton Depressed Color=\"primary\" @onclick=\"GetTextAsync\">\r\n        获取文本\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetContentAsync\">\r\n        获取内容\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetHtmlAsync\">\r\n        获取html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"SetHtmlAsync\">\r\n        设置html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"DisableAsync\">\r\n        禁用\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"EnableAsync\">\r\n        启用\r\n    </MButton>\r\n</MRow>\r\n<MAlert Border=\"Borders.Top\"\r\n            ColoredBorder\r\n            Type=\"AlertTypes.Info\"\r\n            Elevation=\"2\" \r\n            Class=\"mt-10\">\r\n        @ViewContent\r\n</MAlert>\r\n\r\n@code {\r\n    private MEditor Editor { get; set; }\r\n    private string EditorContent { get; set; } = @\"Hello MEditor\";\r\n    private string ViewContent { get; set; }\r\n\r\n    public async Task GetTextAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetTextAsync();\r\n    }\r\n    public async Task GetContentAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetContentAsync();\r\n    }\r\n    public async Task GetHtmlAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetHtmlAsync();\r\n    }\r\n\r\n    public async Task SetHtmlAsync()\r\n    {\r\n        string html =\r\n            @\"<a href='https://www.baidu.com/'>\" +\r\n            \"<img src='https://www.baidu.com/img/flexible/logo/pc/result.png' /></a>\";\r\n\r\n        await this.Editor.SetHtmlAsync(html);\r\n    }\r\n    public async Task DisableAsync()\r\n    {\r\n        await this.Editor.DisableAsync();\r\n    }\r\n    public async Task EnableAsync()\r\n    {\r\n        await this.Editor.EnableAsync();\r\n    }\r\n}",
         "Type": "Demos.Components.Editor.misc.Method",
         "Style": "",
         "Debug": false,
@@ -1982,7 +1982,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5074408+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3821841+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2115,7 +2115,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5074408+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3841856+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2193,7 +2193,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5074408+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3881846+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2304,7 +2304,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5074408+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3901963+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2370,7 +2370,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5074408+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3921869+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2458,7 +2458,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5230993+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3961869+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2602,14 +2602,14 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5230993+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.3991891+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "basic",
         "Title": "使用",
         "Description": "<p>内部 <code>MForm</code> 组件使得很容易添加验证到表单输入。 所有输入组件都有一个 <strong>规则</strong> prop，它接受不同类型的组 函数, 布尔值 和 字符串。 这些允许您指定输入无效的 __ 或 __ 的条件。 每当输入值被更改时，数组中的每个函数将收到新的值，每个数组元素将被评分。 如果函数或数组元素返回 fals 或 字符串, 验证失败， 字符串 值将作为错误信息显示。</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_form\" EnableDataAnnotationsValidation>\r\n    <MContainer>\r\n        <MRow>\r\n            <MCol Cols=\"12\"\r\n                  Md=\"4\">\r\n                <MTextField @bind-Value=\"_form.Firstname\"\r\n                            Counter=\"10\"\r\n                            Label=\"First name\"\r\n                            required></MTextField>\r\n            </MCol>\r\n\r\n            <MCol Cols=\"12\"\r\n                  Md=\"4\">\r\n                <MTextField @bind-Value=\"_form.Lastname\"\r\n                            Counter=\"10\"\r\n                            Label=\"Last name\"\r\n                            required></MTextField>\r\n            </MCol>\r\n\r\n            <MCol Cols=\"12\"\r\n                  Md=\"4\">\r\n                <MTextField @bind-Value=\"_form.Email\"\r\n                            Label=\"E-mail\"\r\n                            required></MTextField>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n@code {\r\n    public class Form\r\n    {\r\n        [Required(ErrorMessage = \"Name is required\")]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Firstname { get; set; }\r\n\r\n        [Required(ErrorMessage = \"Name is required\")]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Lastname { get; set; }\r\n\r\n        [Required(ErrorMessage = \"E-mail is required\")]\r\n        [EmailAddress(ErrorMessage = \"E-mail must be valid\")]\r\n        public string Email { get; set; }\r\n    }\r\n\r\n    private Form _form = new();\r\n}\r\n",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n@using FluentValidation;\r\n\r\n<MForm Model=\"_form\" EnableValidation>\r\n    <MContainer>\r\n        <MRow>\r\n            <MCol Cols=\"12\"\r\n                  Md=\"4\">\r\n                <MTextField @bind-Value=\"_form.Firstname\"\r\n                            Counter=\"10\"\r\n                            Label=\"First name\"\r\n                            required></MTextField>\r\n            </MCol>\r\n\r\n            <MCol Cols=\"12\"\r\n                  Md=\"4\">\r\n                <MTextField @bind-Value=\"_form.Lastname\"\r\n                            Counter=\"10\"\r\n                            Label=\"Last name\"\r\n                            required></MTextField>\r\n            </MCol>\r\n\r\n            <MCol Cols=\"12\"\r\n                  Md=\"4\">\r\n                <MTextField @bind-Value=\"_form.Email\"\r\n                            Label=\"E-mail\"\r\n                            required></MTextField>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n@code {\r\n    public class Form\r\n    {\r\n        [Required(ErrorMessage = \"Name is required\")]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Firstname { get; set; }\r\n\r\n        [Required(ErrorMessage = \"Name is required\")]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Lastname { get; set; }\r\n\r\n        [Required(ErrorMessage = \"E-mail is required\")]\r\n        [EmailAddress(ErrorMessage = \"E-mail must be valid\")]\r\n        public string Email { get; set; }\r\n    }\r\n\r\n    private Form _form = new();\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Form.usage.Basic",
         "Style": "",
         "Debug": false,
@@ -2631,7 +2631,7 @@
         "Name": "validation",
         "Title": "验证",
         "Description": "<p>验证也可以通过submit按钮来触发。</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_model\" EnableDataAnnotationsValidation OnValidSubmit=\"HandleOnValidSubmit\"\r\n       OnInvalidSubmit=\"HandleOnInvalidSubmit\">\r\n    <MTextField @bind-Value=\"_model.Name\"\r\n                Counter=\"10\"\r\n                Label=\"Name\"></MTextField>\r\n    <MTextField @bind-Value=\"_model.Email\"\r\n                Label=\"E-mail\"></MTextField>\r\n    <MSelect @bind-Value=\"_model.Item\"\r\n             Items=\"@_items\"\r\n             Label=\"Item\"\r\n             ItemText=\"u => u\"\r\n             ItemValue=\"u => u\"></MSelect>\r\n    <MCheckbox @bind-Value=\"_model.Agree\"\r\n               Label=\"Do you agree?\"></MCheckbox>\r\n    <MButton Type=\"submit\">Submit</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    class Model\r\n    {\r\n        [Required]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Name { get; set; }\r\n        [Required]\r\n        [EmailAddress]\r\n        public string Email { get; set; }\r\n        [Required]\r\n        public string Item { get; set; }\r\n        [RegularExpression(\"True\", ErrorMessage = \"You must agree to continue!\")]\r\n        public bool Agree { get; set; }\r\n    }\r\n    private bool _valid = true;\r\n    private MForm _form;\r\n    private Model _model = new();\r\n\r\n    List<string> _items = new()\r\n        {\r\n            \"Item 1\",\r\n            \"Item 2\",\r\n            \"Item 3\",\r\n            \"Item 4\"\r\n        };\r\n\r\n    private void HandleOnValidSubmit()\r\n    {\r\n        //valid\r\n    }\r\n\r\n    private void HandleOnInvalidSubmit()\r\n    {\r\n        //invalid\r\n    }\r\n}\r\n",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n@using FluentValidation;\r\n\r\n<MForm Model=\"_model\" EnableValidation OnValidSubmit=\"HandleOnValidSubmit\"\r\n       OnInvalidSubmit=\"HandleOnInvalidSubmit\">\r\n    <MTextField @bind-Value=\"_model.Name\"\r\n                Counter=\"10\"\r\n                Label=\"Name\"></MTextField>\r\n    <MTextField @bind-Value=\"_model.Email\"\r\n                Label=\"E-mail\"></MTextField>\r\n    <MSelect @bind-Value=\"_model.Item\"\r\n             Items=\"@_items\"\r\n             Label=\"Item\"\r\n             ItemText=\"u => u\"\r\n             ItemValue=\"u => u\"></MSelect>\r\n    <MCheckbox @bind-Value=\"_model.Agree\"\r\n               Label=\"Do you agree?\"></MCheckbox>\r\n    <MButton Type=\"submit\">Submit</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    class Model\r\n    {\r\n        [Required]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Name { get; set; }\r\n        [Required]\r\n        [EmailAddress]\r\n        public string Email { get; set; }\r\n        [Required]\r\n        public string Item { get; set; }\r\n        [RegularExpression(\"True\", ErrorMessage = \"You must agree to continue!\")]\r\n        public bool Agree { get; set; }\r\n    }\r\n\r\n    private bool _valid = true;\r\n    private MForm _form;\r\n    private Model _model = new();\r\n\r\n    List<string> _items = new()\r\n        {\r\n            \"Item 1\",\r\n            \"Item 2\",\r\n            \"Item 3\",\r\n            \"Item 4\"\r\n        };\r\n\r\n    private void HandleOnValidSubmit()\r\n    {\r\n        //valid\r\n    }\r\n\r\n    private void HandleOnInvalidSubmit()\r\n    {\r\n        //invalid\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Form.misc.Validation",
         "Style": "",
         "Debug": false,
@@ -2642,8 +2642,19 @@
         "Name": "validationEnumerable",
         "Title": "验证集合",
         "Description": "<p>验证集合属性,注意添加[EnumerableValidation]</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_order\" EnableDataAnnotationsValidation>\r\n    <MTextField @bind-Value=\"_order.Title\" Label=\"Title\"></MTextField>\r\n    <MTextField @bind-Value=\"_order.Price\" Label=\"Price\" Type=\"number\"></MTextField>\r\n    @foreach (var person in _order.Persons)\r\n    {\r\n        <MCard Flat>\r\n            <MCardTitle>Person:@person.Id</MCardTitle>\r\n            <MCardText>\r\n                <MTextField @bind-Value=\"person.Name\" Label=\"Name\"></MTextField>\r\n                <MTextField @bind-Value=\"person.Age\" Label=\"Age\"></MTextField>\r\n            </MCardText>\r\n        </MCard>\r\n    }\r\n    <MButton OnClick=\"()=>SubmitOrder(context)\" Color=\"success\">Validate</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    public class Order\r\n    {\r\n        public int Id { get; set; }\r\n        [Required]\r\n        public string Title { get; set; }\r\n        [Range(0, 20.00)]\r\n        public decimal Price { get; set; }\r\n\r\n        [EnumerableValidation]\r\n        public List<Person> Persons { get; set; }\r\n    }\r\n\r\n    public class Person\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        [Required]\r\n        public string Name { get; set; }\r\n\r\n        [Range(25, 100)]\r\n        public int Age { get; set; }\r\n    }\r\n\r\n    private Order _order = new()\r\n        {\r\n            Persons = new List<Person>\r\n        {\r\n            new Person\r\n            {\r\n                Id=1\r\n            },\r\n            new Person\r\n            {\r\n                Id=2\r\n            }\r\n        }\r\n        };\r\n\r\n    public void SubmitOrder(EditContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}\r\n",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_order\" EnableValidation>\r\n    <MTextField @bind-Value=\"_order.Title\" Label=\"Title\"></MTextField>\r\n    <MTextField @bind-Value=\"_order.Price\" Label=\"Price\" Type=\"number\"></MTextField>\r\n    @foreach (var person in _order.Persons)\r\n    {\r\n        <MCard Flat>\r\n            <MCardTitle>Person:@person.Id</MCardTitle>\r\n            <MCardText>\r\n                <MTextField @bind-Value=\"person.Name\" Label=\"Name\"></MTextField>\r\n                <MTextField @bind-Value=\"person.Age\" Label=\"Age\"></MTextField>\r\n            </MCardText>\r\n        </MCard>\r\n    }\r\n    <MButton OnClick=\"()=>SubmitOrder(context)\" Color=\"success\">Validate</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    public class Order\r\n    {\r\n        public int Id { get; set; }\r\n        [Required]\r\n        public string Title { get; set; }\r\n        [Range(0, 20.00)]\r\n        public decimal Price { get; set; }\r\n\r\n        [EnumerableValidation]\r\n        public List<Person> Persons { get; set; }\r\n    }\r\n\r\n    public class Person\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        [Required]\r\n        public string Name { get; set; }\r\n\r\n        [Range(25, 100)]\r\n        public int Age { get; set; }\r\n    }\r\n\r\n    private Order _order = new()\r\n        {\r\n            Persons = new List<Person>\r\n        {\r\n            new Person\r\n            {\r\n                Id=1\r\n            },\r\n            new Person\r\n            {\r\n                Id=2\r\n            }\r\n        }\r\n        };\r\n\r\n    public void SubmitOrder(EditContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}",
         "Type": "Demos.Components.FormInputs.children.Form.misc.ValidationEnumerable",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 2,
+        "Name": "validationEnumerableWithFluentValidation",
+        "Title": "验证集合(FluentValidation)",
+        "Description": "<p>MForm支持FluentValidation验证,以验证集合为示例</p>\n",
+        "Code": "@using FluentValidation;\r\n\r\n<MForm Model=\"_orderDetail\" EnableValidation>\r\n    <MTextField @bind-Value=\"_orderDetail.Title\" Label=\"Title\"></MTextField>\r\n    <MTextField @bind-Value=\"_orderDetail.Price\" Label=\"Price\" Type=\"number\"></MTextField>\r\n    @foreach (var customer in _orderDetail.Customers)\r\n    {\r\n        <MCard Flat>\r\n            <MCardTitle>Customer:@customer.Id</MCardTitle>\r\n            <MCardText>\r\n                <MTextField @bind-Value=\"customer.Name\" Label=\"Name\"></MTextField>\r\n                <MTextField @bind-Value=\"customer.Age\" Label=\"Age\"></MTextField>\r\n            </MCardText>\r\n        </MCard>\r\n    }\r\n    <MButton OnClick=\"()=>SubmitOrder(context)\" Color=\"success\">Validate</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    class OrderDetail\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        public string Title { get; set; }\r\n\r\n        public decimal Price { get; set; }\r\n\r\n        public List<Customer> Customers { get; set; }\r\n    }\r\n\r\n    class Customer\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        public string Name { get; set; }\r\n\r\n        public int Age { get; set; }\r\n    }\r\n\r\n    class OrderDetailValidator : AbstractValidator<OrderDetail>\r\n    {\r\n        public OrderDetailValidator()\r\n        {\r\n            RuleFor(o => o.Title).NotEmpty().WithMessage(\"{PropertyName} is required\");\r\n            RuleFor(o => o.Price).InclusiveBetween(0,20);\r\n            RuleForEach(o => o.Customers).SetValidator(new CustomerValidator());\r\n        }\r\n    }\r\n\r\n    class CustomerValidator : AbstractValidator<Customer>\r\n    {\r\n        public CustomerValidator()\r\n        {\r\n            RuleFor(o => o.Name).NotEmpty().WithMessage(\"{PropertyName} is required\");\r\n            RuleFor(o => o.Age).InclusiveBetween(25,100);\r\n        }\r\n    }\r\n\r\n    private OrderDetail _orderDetail = new()\r\n    {\r\n        Customers = new List<Customer>\r\n        {\r\n            new Customer\r\n            {\r\n                Id=1\r\n            },\r\n            new Customer\r\n            {\r\n                Id=2\r\n            }\r\n        }\r\n    };\r\n\r\n    public void SubmitOrder(EditContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}\r\n",
+        "Type": "Demos.Components.FormInputs.children.Form.misc.ValidationEnumerableWithFluentValidation",
         "Style": "",
         "Debug": false,
         "Group": 3
@@ -2653,7 +2664,7 @@
         "Name": "validationWithSubmitAndClear",
         "Title": "提交与验证 & 清除",
         "Description": "<p><code>MForm</code> 组件有三个功能，可以通过在组件上设置ref来访问。 ref允许我们访问组件的内部方法，例如 <code>&lt;MForm @ref=&quot;_form&quot;&gt;</code>。 _form.Validate() 将验证所有输入并返回它们是否都有效。 _form.Reset() 将清除所有输入并重置验证错误。 _form.ResetValidation() 将只重置输入验证，不改变他们的状态。</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm @bind-Value=\"_valid\" Model=\"_model\" EnableDataAnnotationsValidation @ref=\"_form\">\r\n    <MTextField @bind-Value=\"_model.Name\"\r\n                Counter=\"10\"\r\n                Label=\"Name\"\r\n                required></MTextField>\r\n    <MTextField @bind-Value=\"_model.Email\"\r\n                Label=\"E-mail\"\r\n                required></MTextField>\r\n    <MSelect @bind-Value=\"_model.Item\"\r\n             Items=\"@_items\"\r\n             Label=\"Item\"\r\n             ItemText=\"u => u\"\r\n             ItemValue=\"u => u\"></MSelect>\r\n    <MCheckbox @bind-Value=\"_model.Agree\"\r\n               Label=\"Do you agree?\"\r\n               required></MCheckbox>\r\n    <MButton Disabled=\"!_valid\" Color=\"success\" Class=\"mr-4\" OnClick=\"ValidateAsync\">Validate</MButton>\r\n    <MButton Color=\"error\" Class=\"mr-4\" OnClick=\"ResetAsync\">Reset Form</MButton>\r\n    <MButton Color=\"warning\" OnClick=\"ResetValidationAsync\">Reset Validation</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    class Model\r\n    {\r\n        [Required]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Name { get; set; }\r\n        [Required]\r\n        [EmailAddress]\r\n        public string Email { get; set; }\r\n        [Required]\r\n        public string Item { get; set; }\r\n        [RegularExpression(\"True\", ErrorMessage = \"You must agree to continue!\")]\r\n        public bool Agree { get; set; }\r\n    }\r\n    private bool _valid = true;\r\n    private MForm _form;\r\n    private Model _model = new();\r\n\r\n    List<string> _items = new()\r\n        {\r\n            \"Item 1\",\r\n            \"Item 2\",\r\n            \"Item 3\",\r\n            \"Item 4\"\r\n        };\r\n\r\n    async Task ValidateAsync()\r\n    {\r\n        await _form.ValidateAsync();\r\n    }\r\n\r\n    async Task ResetAsync()\r\n    {\r\n        await _form.ResetAsync();\r\n    }\r\n\r\n    async Task ResetValidationAsync()\r\n    {\r\n        await _form.ResetValidationAsync();\r\n    }\r\n}\r\n",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm @bind-Value=\"_valid\" Model=\"_model\" EnableValidation @ref=\"_form\">\r\n    <MTextField @bind-Value=\"_model.Name\"\r\n                Counter=\"10\"\r\n                Label=\"Name\"\r\n                required></MTextField>\r\n    <MTextField @bind-Value=\"_model.Email\"\r\n                Label=\"E-mail\"\r\n                required></MTextField>\r\n    <MSelect @bind-Value=\"_model.Item\"\r\n             Items=\"@_items\"\r\n             Label=\"Item\"\r\n             ItemText=\"u => u\"\r\n             ItemValue=\"u => u\"></MSelect>\r\n    <MCheckbox @bind-Value=\"_model.Agree\"\r\n               Label=\"Do you agree?\"\r\n               required></MCheckbox>\r\n    <MButton Disabled=\"!_valid\" Color=\"success\" Class=\"mr-4\" OnClick=\"ValidateAsync\">Validate</MButton>\r\n    <MButton Color=\"error\" Class=\"mr-4\" OnClick=\"ResetAsync\">Reset Form</MButton>\r\n    <MButton Color=\"warning\" OnClick=\"ResetValidationAsync\">Reset Validation</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    class Model\r\n    {\r\n        [Required]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Name { get; set; }\r\n        [Required]\r\n        [EmailAddress]\r\n        public string Email { get; set; }\r\n        [Required]\r\n        public string Item { get; set; }\r\n        [RegularExpression(\"True\", ErrorMessage = \"You must agree to continue!\")]\r\n        public bool Agree { get; set; }\r\n    }\r\n    private bool _valid = true;\r\n    private MForm _form;\r\n    private Model _model = new();\r\n\r\n    List<string> _items = new()\r\n        {\r\n            \"Item 1\",\r\n            \"Item 2\",\r\n            \"Item 3\",\r\n            \"Item 4\"\r\n        };\r\n\r\n    async Task ValidateAsync()\r\n    {\r\n        await _form.ValidateAsync();\r\n    }\r\n\r\n    async Task ResetAsync()\r\n    {\r\n        await _form.ResetAsync();\r\n    }\r\n\r\n    async Task ResetValidationAsync()\r\n    {\r\n        await _form.ResetValidationAsync();\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Form.misc.ValidationWithSubmitAndClear",
         "Style": "",
         "Debug": false,
@@ -2680,7 +2691,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOtpInput\">MOtpInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:12:57.3482947+08:00",
+    "LastWriteTime": "2022-03-30T13:42:39.7094944+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2746,7 +2757,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadioGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5230993+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4011881+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2824,7 +2835,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5230993+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4041861+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2914,7 +2925,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5230993+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4081861+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3057,7 +3068,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5230993+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4131919+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3245,7 +3256,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5230993+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4161833+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3345,7 +3356,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5230993+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4281896+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3451,7 +3462,7 @@
         "Name": "signupForm",
         "Title": "注册表单",
         "Description": "<p>利用替代的输入样式，您可以创建易于构建和使用的惊人界面。</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MCard\r\n    Class=\"mx-auto\"\r\n    Style=\"max-width: 500px;\">\r\n    <MSystemBar\r\n        Color=\"deep-purple darken-4\"\r\n        Dark>\r\n        <MSpacer></MSpacer>\r\n        <MIcon Small>\r\n            mdi-square\r\n        </MIcon>\r\n        <MIcon\r\n            Class=\"ml-1\"\r\n            Small>\r\n            mdi-circle\r\n        </MIcon>\r\n        <MIcon\r\n            Class=\"ml-1\"\r\n            Small>\r\n            mdi-triangle\r\n        </MIcon>\r\n    </MSystemBar>\r\n    <MToolbar\r\n        Color=\"deep-purple accent-4\"\r\n        Cards\r\n        Dark\r\n        Flat>\r\n        <MButton Icon>\r\n            <MIcon>mdi-arrow-left</MIcon>\r\n        </MButton>\r\n        <MCardTitle Class=\"text-h6 font-weight-regular\">\r\n            Sign up\r\n        </MCardTitle>\r\n        <MSpacer></MSpacer>\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n    <MForm\r\n        @ref=\"form\"\r\n        Model=\"model\"\r\n        Class=\"pa-4 pt-6\"\r\n        EnableDataAnnotationsValidation>\r\n        <MTextField\r\n            @bind-Value=\"model.Password\"\r\n            Filled\r\n            Color=\"deep-purple\"\r\n            Counter=\"6\"\r\n            Label=\"Password\"\r\n            Style=\"min-height: 96px\"\r\n            Type=\"password\">\r\n        </MTextField>\r\n        <MTextField\r\n            @bind-Value=\"model.Phone\"\r\n            Filled\r\n            Color=\"deep-purple\"\r\n            Label=\"Phone number\">\r\n        </MTextField>\r\n        <MTextField\r\n            @bind-Value=\"model.Email\"\r\n            Filled\r\n            Color=\"deep-purple\"\r\n            Label=\"Email address\"\r\n            Type=\"email\">\r\n        </MTextField>\r\n        <MTextarea\r\n            @bind-Value=\"model.Bio\"\r\n            AutoGrow\r\n            Filled\r\n            Color=\"deep-purple\"\r\n            Label=\"Bio\"\r\n            Rows=\"1\">\r\n        </MTextarea>\r\n        <MCheckbox\r\n            @bind-Value=\"model.Agreement\"\r\n            Color=\"deep-purple\">\r\n            <LabelContent>\r\n                I agree to the\r\n                <a\r\n                    href=\"#\" @onclick=\"() => dialog = true\" @onclick:stopPropagation>\r\n                    Terms of Service\r\n                </a>\r\n                and\r\n                <a\r\n                    href=\"#\" @onclick=\"() => dialog = true\" @onclick:stopPropagation>\r\n                    Privacy Policy\r\n                </a>*\r\n\r\n            </LabelContent>\r\n        </MCheckbox>\r\n    </MForm>\r\n    <MDivider></MDivider>\r\n    <MCardActions>\r\n        <MButton\r\n            Text\r\n            OnClick=\"@(() => model.Clear())\">\r\n            Clear\r\n        </MButton>\r\n        <MSpacer></MSpacer>\r\n        <MButton\r\n            Disabled=\"!IsValid\"\r\n            Class=\"white--text\"\r\n            Color=\"deep-purple accent-4\"\r\n            Depressed\r\n            OnClick=\"() => form.EditContext.Validate()\">\r\n            Submit\r\n        </MButton>\r\n    </MCardActions>\r\n    <MDialog\r\n        @bind-Value=\"dialog\"\r\n        Absolute\r\n        MaxWidth=\"400\"\r\n        Persistent>\r\n        <MCard>\r\n            <MCardTitle Class=\"text-h5 grey lighten-3\">\r\n                Legal\r\n            </MCardTitle>\r\n            <MCardText>\r\n                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n            </MCardText>\r\n            <MDivider></MDivider>\r\n            <MCardActions>\r\n                <MButton\r\n                    Text\r\n                    OnClick=\"() => {model.Agreement = false; dialog = false;}\">\r\n                    No\r\n                </MButton>\r\n                <MSpacer></MSpacer>\r\n                <MButton\r\n                    Class=\"white--text\"\r\n                    Color=\"deep-purple accent-4\"\r\n                    OnClick=\"() => {model.Agreement = true; dialog = false;}\">\r\n                    Yes\r\n                </MButton>\r\n            </MCardActions>\r\n        </MCard>\r\n    </MDialog>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    static string bio = \"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts\";\r\n\r\n    bool dialog;\r\n    MForm form;\r\n    Signup model = new() {Bio = bio};\r\n\r\n    bool IsValid => form != null && form.EditContext.IsModified() && form.EditContext.Validate(); // is right usage?\r\n\r\n    public class Signup\r\n    {\r\n        [Required]\r\n        [MaxLength(6)]\r\n        [MinLength(6)]\r\n        public string Password { get; set; }\r\n\r\n        [Required]\r\n        [Phone]\r\n        public string Phone { get; set; }\r\n\r\n        [Required]\r\n        [EmailAddress]\r\n        public string Email { get; set; }\r\n\r\n        public string Bio { get; set; }\r\n\r\n        [Required]\r\n        [Range(typeof(bool), \"true\", \"true\", ErrorMessage = \"The field is required\")] // just for demo\r\n        public bool Agreement { get; set; }\r\n\r\n        public void Clear()\r\n        {\r\n            Password = null;\r\n            Phone = null;\r\n            Email = null;\r\n            Bio = null;\r\n            Agreement = false;\r\n        }\r\n    }\r\n\r\n}",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MCard\r\n    Class=\"mx-auto\"\r\n    Style=\"max-width: 500px;\">\r\n    <MSystemBar\r\n        Color=\"deep-purple darken-4\"\r\n        Dark>\r\n        <MSpacer></MSpacer>\r\n        <MIcon Small>\r\n            mdi-square\r\n        </MIcon>\r\n        <MIcon\r\n            Class=\"ml-1\"\r\n            Small>\r\n            mdi-circle\r\n        </MIcon>\r\n        <MIcon\r\n            Class=\"ml-1\"\r\n            Small>\r\n            mdi-triangle\r\n        </MIcon>\r\n    </MSystemBar>\r\n    <MToolbar\r\n        Color=\"deep-purple accent-4\"\r\n        Cards\r\n        Dark\r\n        Flat>\r\n        <MButton Icon>\r\n            <MIcon>mdi-arrow-left</MIcon>\r\n        </MButton>\r\n        <MCardTitle Class=\"text-h6 font-weight-regular\">\r\n            Sign up\r\n        </MCardTitle>\r\n        <MSpacer></MSpacer>\r\n        <MButton Icon>\r\n            <MIcon>mdi-magnify</MIcon>\r\n        </MButton>\r\n        <MButton Icon>\r\n            <MIcon>mdi-dots-vertical</MIcon>\r\n        </MButton>\r\n    </MToolbar>\r\n    <MForm\r\n        @ref=\"form\"\r\n        Model=\"model\"\r\n        Class=\"pa-4 pt-6\"\r\n        EnableValidation>\r\n        <MTextField\r\n            @bind-Value=\"model.Password\"\r\n            Filled\r\n            Color=\"deep-purple\"\r\n            Counter=\"6\"\r\n            Label=\"Password\"\r\n            Style=\"min-height: 96px\"\r\n            Type=\"password\">\r\n        </MTextField>\r\n        <MTextField\r\n            @bind-Value=\"model.Phone\"\r\n            Filled\r\n            Color=\"deep-purple\"\r\n            Label=\"Phone number\">\r\n        </MTextField>\r\n        <MTextField\r\n            @bind-Value=\"model.Email\"\r\n            Filled\r\n            Color=\"deep-purple\"\r\n            Label=\"Email address\"\r\n            Type=\"email\">\r\n        </MTextField>\r\n        <MTextarea\r\n            @bind-Value=\"model.Bio\"\r\n            AutoGrow\r\n            Filled\r\n            Color=\"deep-purple\"\r\n            Label=\"Bio\"\r\n            Rows=\"1\">\r\n        </MTextarea>\r\n        <MCheckbox\r\n            @bind-Value=\"model.Agreement\"\r\n            Color=\"deep-purple\">\r\n            <LabelContent>\r\n                I agree to the\r\n                <a\r\n                    href=\"#\" @onclick=\"() => dialog = true\" @onclick:stopPropagation>\r\n                    Terms of Service\r\n                </a>\r\n                and\r\n                <a\r\n                    href=\"#\" @onclick=\"() => dialog = true\" @onclick:stopPropagation>\r\n                    Privacy Policy\r\n                </a>*\r\n\r\n            </LabelContent>\r\n        </MCheckbox>\r\n    </MForm>\r\n    <MDivider></MDivider>\r\n    <MCardActions>\r\n        <MButton\r\n            Text\r\n            OnClick=\"@(() => model.Clear())\">\r\n            Clear\r\n        </MButton>\r\n        <MSpacer></MSpacer>\r\n        <MButton\r\n            Disabled=\"!IsValid\"\r\n            Class=\"white--text\"\r\n            Color=\"deep-purple accent-4\"\r\n            Depressed\r\n            OnClick=\"() => form.EditContext.Validate()\">\r\n            Submit\r\n        </MButton>\r\n    </MCardActions>\r\n    <MDialog\r\n        @bind-Value=\"dialog\"\r\n        Absolute\r\n        MaxWidth=\"400\"\r\n        Persistent>\r\n        <MCard>\r\n            <MCardTitle Class=\"text-h5 grey lighten-3\">\r\n                Legal\r\n            </MCardTitle>\r\n            <MCardText>\r\n                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n            </MCardText>\r\n            <MDivider></MDivider>\r\n            <MCardActions>\r\n                <MButton\r\n                    Text\r\n                    OnClick=\"() => {model.Agreement = false; dialog = false;}\">\r\n                    No\r\n                </MButton>\r\n                <MSpacer></MSpacer>\r\n                <MButton\r\n                    Class=\"white--text\"\r\n                    Color=\"deep-purple accent-4\"\r\n                    OnClick=\"() => {model.Agreement = true; dialog = false;}\">\r\n                    Yes\r\n                </MButton>\r\n            </MCardActions>\r\n        </MCard>\r\n    </MDialog>\r\n</MCard>\r\n\r\n@code {\r\n\r\n    static string bio = \"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts\";\r\n\r\n    bool dialog;\r\n    MForm form;\r\n    Signup model = new() {Bio = bio};\r\n\r\n    bool IsValid => form != null && form.EditContext.IsModified() && form.EditContext.Validate(); // is right usage?\r\n\r\n    public class Signup\r\n    {\r\n        [Required]\r\n        [MaxLength(6)]\r\n        [MinLength(6)]\r\n        public string Password { get; set; }\r\n\r\n        [Required]\r\n        [Phone]\r\n        public string Phone { get; set; }\r\n\r\n        [Required]\r\n        [EmailAddress]\r\n        public string Email { get; set; }\r\n\r\n        public string Bio { get; set; }\r\n\r\n        [Required]\r\n        [Range(typeof(bool), \"true\", \"true\", ErrorMessage = \"The field is required\")] // just for demo\r\n        public bool Agreement { get; set; }\r\n\r\n        public void Clear()\r\n        {\r\n            Password = null;\r\n            Phone = null;\r\n            Email = null;\r\n            Bio = null;\r\n            Agreement = false;\r\n        }\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.FormInputs.children.Textarea.misc.SignupForm",
         "Style": "",
         "Debug": false,
@@ -3478,7 +3489,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5230993+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4241905+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3518,7 +3529,7 @@
         "Name": "customColors",
         "Title": "自定义颜色",
         "Description": "<p>您可以选择性地将文本字段更改为材料设计色板中的任何颜色。 下面是验证的自定义表单的执行示例。</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MCard Flat>\r\n    <MSnackbar\r\n        @bind-Value=\"snackbar\"\r\n        Absolute\r\n        Top\r\n        Right\r\n        Color=\"success\">\r\n        <span>Registration successful!</span>\r\n        <MIcon Dark>\r\n            mdi-checkbox-marked-circle\r\n        </MIcon>\r\n    </MSnackbar>\r\n    <MForm @ref=\"form\" EnableDataAnnotationsValidation Model=\"model\">\r\n        <MContainer Fluid>\r\n            <MRow>\r\n                <MCol\r\n                    Cols=\"12\"\r\n                    Sm=\"6\">\r\n                    <MTextField\r\n                        @bind-Value=\"model.First\"\r\n                        Color=\"purple darken-2\"\r\n                        Label=\"First name\">\r\n                    </MTextField>\r\n                </MCol>\r\n                <MCol\r\n                    Cols=\"12\"\r\n                    Sm=\"6\">\r\n                    <MTextField\r\n                        @bind-Value=\"model.Last\"\r\n                        Color=\"blue darken-2\"\r\n                        Label=\"Last name\">\r\n                    </MTextField>\r\n                </MCol>\r\n                <MCol Cols=\"12\">\r\n                    <MTextarea\r\n                        @bind-Value=\"model.Bio\"\r\n                        Color=\"teal\">\r\n                        <LabelContent>\r\n                            <div>\r\n                                Bio <small>(optional)</small>\r\n                            </div>\r\n                        </LabelContent>\r\n                    </MTextarea>\r\n                </MCol>\r\n                <MCol\r\n                    Cols=\"12\"\r\n                    Sm=\"6\">\r\n                    <MSelect\r\n                        @bind-Value=\"model.FavoriteAnimal\"\r\n                        Items=\"animals\"\r\n                        ItemText=\"item => item\"\r\n                        ItemValue=\"item => item\"\r\n                        Color=\"pink\"\r\n                        Label=\"Favorite animal\">\r\n                    </MSelect>\r\n                </MCol>\r\n                <MCol\r\n                    Cols=\"12\"\r\n                    Sm=\"6\">\r\n                    <MSlider\r\n                        @bind-Value=\"model.Age\"\r\n                        Color=\"orange\"\r\n                        Label=\"Age\"\r\n                        Hint=\"Be honest\"\r\n                        Min=\"1\"\r\n                        Max=\"100\"\r\n                        ThumbLabel=\"true\">\r\n                    </MSlider>\r\n                </MCol>\r\n                <MCol Cols=\"12\">\r\n                    <MCheckbox\r\n                        @bind-Value=\"model.Terms\"\r\n                        Color=\"green\">\r\n                        <LabelContent>\r\n                            <div @onclick:stopPropagation>\r\n                                Do you accept the\r\n                                <a\r\n                                    href=\"#\"\r\n                                    @onclick=\"() => terms = true\">\r\n                                    terms\r\n                                </a>\r\n                                and\r\n                                <a\r\n                                    href=\"#\"\r\n                                    @onclick=\"() => conditions = true\">\r\n                                    conditions?\r\n                                </a>\r\n                            </div>\r\n                        </LabelContent>\r\n                    </MCheckbox>\r\n                </MCol>\r\n            </MRow>\r\n        </MContainer>\r\n        <MCardActions>\r\n            <MButton\r\n                Text\r\n                OnClick=\"ResetForm\">\r\n                Cancel\r\n            </MButton>\r\n            <MSpacer></MSpacer>\r\n            <MButton\r\n                Disabled=\"!FormIsValid\"\r\n                Text\r\n                Color=\"primary\"\r\n                OnClick=\"Submit\">\r\n                Register\r\n            </MButton>\r\n        </MCardActions>\r\n    </MForm>\r\n    <MDialog\r\n        @bind-Value=\"terms\"\r\n        Width=\"@(\"70%\")\">\r\n        <MCard>\r\n            <MCardTitle Class=\"text-h6\">\r\n                Terms\r\n            </MCardTitle>\r\n            @foreach (var n in Enumerable.Range(0, 5))\r\n            {\r\n                <MCardText @key=\"n\">\r\n                    @content\r\n                </MCardText>\r\n            }\r\n            <MCardActions>\r\n                <MSpacer></MSpacer>\r\n                <MButton\r\n                    Text\r\n                    Color=\"purple\"\r\n                    OnClick=\"() => terms = false\">\r\n                    Ok\r\n                </MButton>\r\n            </MCardActions>\r\n        </MCard>\r\n    </MDialog>\r\n    <MDialog\r\n        @bind-Value=\"conditions\"\r\n        Width=\"@(\"70%\")\">\r\n        <MCard>\r\n            <MCardTitle Class=\"text-h6\">\r\n                Conditions\r\n            </MCardTitle>\r\n            @foreach (var n in Enumerable.Range(0, 5))\r\n            {\r\n                <MCardText @key=\"n\">\r\n                    @content\r\n                </MCardText>\r\n            }\r\n            <MCardActions>\r\n                <MSpacer></MSpacer>\r\n                <MButton\r\n                    Text\r\n                    Color=\"purple\"\r\n                    OnClick=\"() => conditions = false\">\r\n                    Ok\r\n                </MButton>\r\n            </MCardActions>\r\n        </MCard>\r\n    </MDialog>\r\n</MCard>\r\n\r\n@code{\r\n\r\n    static List<string> animals = new() {\"Dog\", \"Cat\", \"Rabbit\", \"Turtle\", \"Snake\"};\r\n\r\n    MForm form;\r\n    bool terms;\r\n    bool conditions;\r\n    bool snackbar;\r\n    string content = \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.\";\r\n\r\n    Model model = new();\r\n\r\n    bool FormIsValid => form != null && form.EditContext.IsModified() && form.EditContext.Validate();\r\n\r\n    void ResetForm()\r\n    {\r\n        model.Reset();\r\n    }\r\n\r\n    void Submit()\r\n    {\r\n        snackbar = true;\r\n        model.Reset();\r\n    }\r\n\r\n    public class Model\r\n    {\r\n        [Required]\r\n        public string First { get; set; }\r\n\r\n        [Required]\r\n        public string Last { get; set; }\r\n\r\n        [Required]\r\n        [Range(0, 10, ErrorMessage = \"I don't believe you!\")]\r\n        public double Age { get; set; }\r\n\r\n        public string Bio { get; set; }\r\n\r\n        [Required]\r\n        public string FavoriteAnimal { get; set; }\r\n\r\n        [Required]\r\n        [Range(typeof(bool), \"true\", \"true\", ErrorMessage = \"The field is required\")] // just for demo\r\n        public bool Terms { get; set; }\r\n\r\n        public void Reset()\r\n        {\r\n            First = default;\r\n            Last = default;\r\n            Age = default;\r\n            Bio = default;\r\n            FavoriteAnimal = default;\r\n            Terms = default;\r\n        }\r\n    }\r\n\r\n}",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MCard Flat>\r\n    <MSnackbar\r\n        @bind-Value=\"snackbar\"\r\n        Absolute\r\n        Top\r\n        Right\r\n        Color=\"success\">\r\n        <span>Registration successful!</span>\r\n        <MIcon Dark>\r\n            mdi-checkbox-marked-circle\r\n        </MIcon>\r\n    </MSnackbar>\r\n    <MForm @ref=\"form\" EnableValidation Model=\"model\">\r\n        <MContainer Fluid>\r\n            <MRow>\r\n                <MCol\r\n                    Cols=\"12\"\r\n                    Sm=\"6\">\r\n                    <MTextField\r\n                        @bind-Value=\"model.First\"\r\n                        Color=\"purple darken-2\"\r\n                        Label=\"First name\">\r\n                    </MTextField>\r\n                </MCol>\r\n                <MCol\r\n                    Cols=\"12\"\r\n                    Sm=\"6\">\r\n                    <MTextField\r\n                        @bind-Value=\"model.Last\"\r\n                        Color=\"blue darken-2\"\r\n                        Label=\"Last name\">\r\n                    </MTextField>\r\n                </MCol>\r\n                <MCol Cols=\"12\">\r\n                    <MTextarea\r\n                        @bind-Value=\"model.Bio\"\r\n                        Color=\"teal\">\r\n                        <LabelContent>\r\n                            <div>\r\n                                Bio <small>(optional)</small>\r\n                            </div>\r\n                        </LabelContent>\r\n                    </MTextarea>\r\n                </MCol>\r\n                <MCol\r\n                    Cols=\"12\"\r\n                    Sm=\"6\">\r\n                    <MSelect\r\n                        @bind-Value=\"model.FavoriteAnimal\"\r\n                        Items=\"animals\"\r\n                        ItemText=\"item => item\"\r\n                        ItemValue=\"item => item\"\r\n                        Color=\"pink\"\r\n                        Label=\"Favorite animal\">\r\n                    </MSelect>\r\n                </MCol>\r\n                <MCol\r\n                    Cols=\"12\"\r\n                    Sm=\"6\">\r\n                    <MSlider\r\n                        @bind-Value=\"model.Age\"\r\n                        Color=\"orange\"\r\n                        Label=\"Age\"\r\n                        Hint=\"Be honest\"\r\n                        Min=\"1\"\r\n                        Max=\"100\"\r\n                        ThumbLabel=\"true\">\r\n                    </MSlider>\r\n                </MCol>\r\n                <MCol Cols=\"12\">\r\n                    <MCheckbox\r\n                        @bind-Value=\"model.Terms\"\r\n                        Color=\"green\">\r\n                        <LabelContent>\r\n                            <div @onclick:stopPropagation>\r\n                                Do you accept the\r\n                                <a\r\n                                    href=\"#\"\r\n                                    @onclick=\"() => terms = true\">\r\n                                    terms\r\n                                </a>\r\n                                and\r\n                                <a\r\n                                    href=\"#\"\r\n                                    @onclick=\"() => conditions = true\">\r\n                                    conditions?\r\n                                </a>\r\n                            </div>\r\n                        </LabelContent>\r\n                    </MCheckbox>\r\n                </MCol>\r\n            </MRow>\r\n        </MContainer>\r\n        <MCardActions>\r\n            <MButton\r\n                Text\r\n                OnClick=\"ResetForm\">\r\n                Cancel\r\n            </MButton>\r\n            <MSpacer></MSpacer>\r\n            <MButton\r\n                Disabled=\"!FormIsValid\"\r\n                Text\r\n                Color=\"primary\"\r\n                OnClick=\"Submit\">\r\n                Register\r\n            </MButton>\r\n        </MCardActions>\r\n    </MForm>\r\n    <MDialog\r\n        @bind-Value=\"terms\"\r\n        Width=\"@(\"70%\")\">\r\n        <MCard>\r\n            <MCardTitle Class=\"text-h6\">\r\n                Terms\r\n            </MCardTitle>\r\n            @foreach (var n in Enumerable.Range(0, 5))\r\n            {\r\n                <MCardText @key=\"n\">\r\n                    @content\r\n                </MCardText>\r\n            }\r\n            <MCardActions>\r\n                <MSpacer></MSpacer>\r\n                <MButton\r\n                    Text\r\n                    Color=\"purple\"\r\n                    OnClick=\"() => terms = false\">\r\n                    Ok\r\n                </MButton>\r\n            </MCardActions>\r\n        </MCard>\r\n    </MDialog>\r\n    <MDialog\r\n        @bind-Value=\"conditions\"\r\n        Width=\"@(\"70%\")\">\r\n        <MCard>\r\n            <MCardTitle Class=\"text-h6\">\r\n                Conditions\r\n            </MCardTitle>\r\n            @foreach (var n in Enumerable.Range(0, 5))\r\n            {\r\n                <MCardText @key=\"n\">\r\n                    @content\r\n                </MCardText>\r\n            }\r\n            <MCardActions>\r\n                <MSpacer></MSpacer>\r\n                <MButton\r\n                    Text\r\n                    Color=\"purple\"\r\n                    OnClick=\"() => conditions = false\">\r\n                    Ok\r\n                </MButton>\r\n            </MCardActions>\r\n        </MCard>\r\n    </MDialog>\r\n</MCard>\r\n\r\n@code{\r\n\r\n    static List<string> animals = new() {\"Dog\", \"Cat\", \"Rabbit\", \"Turtle\", \"Snake\"};\r\n\r\n    MForm form;\r\n    bool terms;\r\n    bool conditions;\r\n    bool snackbar;\r\n    string content = \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.\";\r\n\r\n    Model model = new();\r\n\r\n    bool FormIsValid => form != null && form.EditContext.IsModified() && form.EditContext.Validate();\r\n\r\n    void ResetForm()\r\n    {\r\n        model.Reset();\r\n    }\r\n\r\n    void Submit()\r\n    {\r\n        snackbar = true;\r\n        model.Reset();\r\n    }\r\n\r\n    public class Model\r\n    {\r\n        [Required]\r\n        public string First { get; set; }\r\n\r\n        [Required]\r\n        public string Last { get; set; }\r\n\r\n        [Required]\r\n        [Range(0, 10, ErrorMessage = \"I don't believe you!\")]\r\n        public double Age { get; set; }\r\n\r\n        public string Bio { get; set; }\r\n\r\n        [Required]\r\n        public string FavoriteAnimal { get; set; }\r\n\r\n        [Required]\r\n        [Range(typeof(bool), \"true\", \"true\", ErrorMessage = \"The field is required\")] // just for demo\r\n        public bool Terms { get; set; }\r\n\r\n        public void Reset()\r\n        {\r\n            First = default;\r\n            Last = default;\r\n            Age = default;\r\n            Bio = default;\r\n            FavoriteAnimal = default;\r\n            Terms = default;\r\n        }\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.FormInputs.children.TextField.props.CustomColors",
         "Style": "",
         "Debug": false,
@@ -3727,7 +3738,7 @@
         "Name": "passwordInput",
         "Title": "密码输入",
         "Description": "<p>使用<a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password\">password</a>类型可以与附加图标和回调一起使用，以控制可见性。</p>\n",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n<MForm EnableDataAnnotationsValidation Model=\"_model\">\r\n    <MContainer Fluid>\r\n        <MRow>\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    @bind-Value=\"_model.Password1\"\r\n                    AppendIcon=\"@(_show1 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show1 ? \"text\" : \"password\")\"\r\n                    Label=\"Normal with Hint text\"\r\n                    Hint=\"At least 8 characters\"\r\n                    Counter=\"true\"\r\n                    OnAppendClick=\"() => _show1 = !_show1\">\r\n                </MTextField>\r\n            </MCol>\r\n\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    @bind-Value=\"_model.Password2\"\r\n                    AppendIcon=\"@(_show2 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show2 ? \"text\" : \"password\")\"\r\n                    Label=\"Visible\"\r\n                    Hint=\"At least 8 characters\"\r\n                    Class=\"input-group--focused\"\r\n                    OnAppendClick=\"() => _show2 = !_show2\">\r\n                </MTextField>\r\n            </MCol>\r\n\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    @bind-Value=\"_model.Password3\"\r\n                    AppendIcon=\"@(_show3 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show3 ? \"text\" : \"password\")\"\r\n                    Label=\"Not visible\"\r\n                    Hint=\"At least 8 characters\"\r\n                    OnAppendClick=\"() => _show3 = !_show3\">\r\n                </MTextField>\r\n            </MCol>\r\n\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    @bind-Value=\"_model.Password4\"\r\n                    AppendIcon=\"@(_show4 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show4 ? \"text\" : \"password\")\"\r\n                    Label=\"Error\"\r\n                    Hint=\"At least 8 characters\"\r\n                    OnAppendClick=\"() => _show4 = !_show4\">\r\n                </MTextField>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n\r\n@code{\r\n    private bool _show1 = false;\r\n    private bool _show2 = true;\r\n    private bool _show3 = false;\r\n    private bool _show4 = false;\r\n    private Model _model = new()\r\n    {\r\n        Password1 = \"Password\",\r\n        Password2 = \"wqfasds\",\r\n        Password3 = \"wqfasds\",\r\n        Password4 = \"Pa\"\r\n    };\r\n\r\n    public class Model\r\n    {\r\n        [Required(ErrorMessage =\"Required.\")]\r\n        [MinLength(8,ErrorMessage =\"Min 8 characters\")]\r\n        public string Password1 { get; set; }\r\n        [Required(ErrorMessage =\"Required.\")]\r\n        [MinLength(8,ErrorMessage =\"Min 8 characters\")]\r\n        public string Password2 { get; set; }\r\n        [Required(ErrorMessage =\"Required.\")]\r\n        [MinLength(8,ErrorMessage =\"Min 8 characters\")]\r\n        public string Password3 { get; set; }\r\n        [Required(ErrorMessage =\"Required.\")]\r\n        public string Password4 { get; set; }\r\n    }\r\n}",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n<MForm EnableValidation Model=\"_model\">\r\n    <MContainer Fluid>\r\n        <MRow>\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    @bind-Value=\"_model.Password1\"\r\n                    AppendIcon=\"@(_show1 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show1 ? \"text\" : \"password\")\"\r\n                    Label=\"Normal with Hint text\"\r\n                    Hint=\"At least 8 characters\"\r\n                    Counter=\"true\"\r\n                    OnAppendClick=\"() => _show1 = !_show1\">\r\n                </MTextField>\r\n            </MCol>\r\n\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    @bind-Value=\"_model.Password2\"\r\n                    AppendIcon=\"@(_show2 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show2 ? \"text\" : \"password\")\"\r\n                    Label=\"Visible\"\r\n                    Hint=\"At least 8 characters\"\r\n                    Class=\"input-group--focused\"\r\n                    OnAppendClick=\"() => _show2 = !_show2\">\r\n                </MTextField>\r\n            </MCol>\r\n\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    @bind-Value=\"_model.Password3\"\r\n                    AppendIcon=\"@(_show3 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show3 ? \"text\" : \"password\")\"\r\n                    Label=\"Not visible\"\r\n                    Hint=\"At least 8 characters\"\r\n                    OnAppendClick=\"() => _show3 = !_show3\">\r\n                </MTextField>\r\n            </MCol>\r\n\r\n            <MCol\r\n                Cols=\"12\"\r\n                Sm=\"6\">\r\n                <MTextField\r\n                    @bind-Value=\"_model.Password4\"\r\n                    AppendIcon=\"@(_show4 ? \"mdi-eye\" : \"mdi-eye-off\")\"\r\n                    Type=\"@(_show4 ? \"text\" : \"password\")\"\r\n                    Label=\"Error\"\r\n                    Hint=\"At least 8 characters\"\r\n                    OnAppendClick=\"() => _show4 = !_show4\">\r\n                </MTextField>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n\r\n@code{\r\n    private bool _show1 = false;\r\n    private bool _show2 = true;\r\n    private bool _show3 = false;\r\n    private bool _show4 = false;\r\n    private Model _model = new()\r\n    {\r\n        Password1 = \"Password\",\r\n        Password2 = \"wqfasds\",\r\n        Password3 = \"wqfasds\",\r\n        Password4 = \"Pa\"\r\n    };\r\n\r\n    public class Model\r\n    {\r\n        [Required(ErrorMessage =\"Required.\")]\r\n        [MinLength(8,ErrorMessage =\"Min 8 characters\")]\r\n        public string Password1 { get; set; }\r\n        [Required(ErrorMessage =\"Required.\")]\r\n        [MinLength(8,ErrorMessage =\"Min 8 characters\")]\r\n        public string Password2 { get; set; }\r\n        [Required(ErrorMessage =\"Required.\")]\r\n        [MinLength(8,ErrorMessage =\"Min 8 characters\")]\r\n        public string Password3 { get; set; }\r\n        [Required(ErrorMessage =\"Required.\")]\r\n        public string Password4 { get; set; }\r\n    }\r\n}",
         "Type": "Demos.Components.FormInputs.children.TextField.misc.PasswordInput",
         "Style": "",
         "Debug": false,
@@ -3757,7 +3768,7 @@
       "辅助类": "\n<p><strong>FillHeight</strong>将<code>height:100%</code>应用于元素。当应用于<code>MContainer</code>时，它还包括<code>align items:center</code>。</p>\n",
       "注意": "\n<!--alert:info--> \n<p>1.x 网格系统已被废弃，请改用 2.x 网格系统。 1.x 网格的文档可以在 v1.5 文档 中找到。</p>\n<!--alert:info--> \n<!--alert:info--> \n<p>网格组件上基于断点的属性以 <code>andUp</code> 的方式工作。 考虑 <strong>xs</strong> 断点已经被删除的情况， 这将会影响到 <strong>offset</strong>、<strong>justify</strong>、<strong>align</strong> 和 <code>MCol</code> 上的断点属性。</p>\n<ul>\n<li>像 <strong>justify-sm</strong> 和 <strong>justify-md</strong> 这样的属性仍然存在，但 <strong>justify-xs</strong> 会变成 <strong>justify</strong>。</li>\n<li><code>MCol</code> 上不存在 <strong>xs</strong> 属性。 与此对应的是 <strong>cols</strong> 属性。</li>\n</ul>\n<!--alert:info--> \n<!--alert:info--> \n<p>当在 IE11 使用网格系统时，你需要设置一个显式的 <code>height</code>，因为 <code>min-height</code> 不足进而导致非预期结果。</p>\n<!--alert:info--> \n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5387342+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4351523+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3989,7 +4000,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5387342+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4381526+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4078,7 +4089,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5387342+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4411858+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4178,7 +4189,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5387342+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.444153+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4267,7 +4278,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5387342+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4461626+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4355,7 +4366,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5387342+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4491917+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4454,7 +4465,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5387342+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4521845+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4542,7 +4553,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5387342+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4541522+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4608,7 +4619,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5387342+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4571837+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4698,7 +4709,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>MImage 组件使用 Intersect 指令，IE11 和 Safari需要 Polyfill。 如果检测到浏览器不支持此功能, 图像仍将以正常方式加载。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5387342+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4601536+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4798,7 +4809,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>如果您要查找有状态列表项，请查看 <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.554351+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4661588+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5008,7 +5019,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.554351+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4711873+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5185,7 +5196,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MNavigationDrawer\">MNavigationDrawer</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error-->\n<p>如果使用启用了 <strong>App</strong> 属性的 <code>MNavigationDrawer</code>，则不需要像示例中那样使用 <strong>Absolute</strong> 属性。</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p><strong>ExtensionOnHover</strong> 参数不会改变<strong>MMain</strong>的内容区域。 要使内容区域响应<strong>ExtensionOnHover</strong>，请绑定<strong>OnMiniVariantUpdate</strong> 到数据。</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.554351+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4751842+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5318,7 +5329,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.554351+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4781826+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5406,7 +5417,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.554351+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4801832+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5495,7 +5506,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.554351+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4871569+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5739,7 +5750,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.554351+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4911529+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5883,7 +5894,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.554351+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4961591+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6058,7 +6069,7 @@
     "Desc": "<p>将相同类型的两个数据并列显示。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T20:05:46.554351+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.4981585+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6111,7 +6122,7 @@
     "Desc": "<p>在文本后提供可以复制内容的图标按钮。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T20:05:46.554351+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5001584+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6185,7 +6196,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T20:05:46.5699743+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5031884+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6293,7 +6304,7 @@
     "Desc": "<p>需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 <code>Modal</code> 在当前页面正中打开一个浮层，承载相应的操作。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T20:05:46.5699743+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5071859+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6389,7 +6400,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T20:05:46.5699743+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5071859+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6442,7 +6453,7 @@
     "Desc": "<p>提供全局服务调用Alert、Confirm和Prompt等弹出层组件。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T20:05:46.5699743+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5091885+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6497,7 +6508,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5699743+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5121821+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6574,7 +6585,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5699743+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5171495+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6739,7 +6750,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5699743+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5191496+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6849,7 +6860,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5699743+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.522152+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -6905,7 +6916,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5699743+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5241522+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6950,7 +6961,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5699743+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5261518+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7027,7 +7038,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5699743+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5301514+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7193,7 +7204,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5699743+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5341517+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7270,7 +7281,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5699743+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5351512+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7326,7 +7337,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n<li><a href=\"/api/MDataTableHeader\">MDataTableHeader</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5856011+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5461512+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7591,7 +7602,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5856011+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5481515+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7670,7 +7681,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当使用 <strong>Dark</strong> 属性和 <strong>不</strong> 提供自定义 <strong>Color</strong> 时，<code>MTabs</code>组件会将其颜色默认为 white。</p>\n<!--alert:warning-->\n<!--alert:warning-->\n<p>当使用包含必填输入字段的 <code>MTabItem</code> 时，你必须使用 <strong>eager</strong> prop 来验证尚未显示的必填字段。</p>\n<!--alert:warning-->\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5856011+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5541506+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7869,7 +7880,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5856011+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5581866+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8002,7 +8013,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>为了正确定位 <code>MTooltip</code>，需要一个位置支撑(<code>Top</code> | <code>Bottom</code> | <code>Left</code> | <code>Right</code>)。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5856011+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5601843+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8058,7 +8069,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTreeview\">MTreeview</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5856011+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5651864+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8257,7 +8268,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T20:05:46.5856011+08:00",
+    "LastWriteTime": "2022-03-28T13:48:31.5661848+08:00",
     "DemoList": [
       {
         "Order": 0,

@@ -1,17 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bunit;
-using BlazorComponent;
-using Moq;
 
 namespace Masa.Blazor.Test.DatePicker
 {
     [TestClass]
-    public class MDatePickerTests:TestBase
+    public class MDatePickerTests : TestBase
     {
         [TestMethod]
         public void RenderDatePickerWithDark()
