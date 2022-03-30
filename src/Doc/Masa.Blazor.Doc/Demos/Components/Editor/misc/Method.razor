@@ -1,4 +1,4 @@
-﻿<MEditor @ref="@Editor" @bind-Value="EditorContent" Placeholder="请输入内容" ContentStyle="height:100px">
+﻿<MEditor @ref="@_editor" @bind-Value="_editorContent" Placeholder="请输入内容" ContentStyle="height:100px">
     <ToolbarContent>
         <select class="ql-header">
             <option selected=""></option>
@@ -53,25 +53,25 @@
             Type="AlertTypes.Info"
             Elevation="2" 
             Class="mt-10">
-        @ViewContent
+        @_viewContent
 </MAlert>
 
 @code {
-    private MEditor Editor { get; set; }
-    private string EditorContent { get; set; } = @"Hello MEditor";
-    private string ViewContent { get; set; }
+    private MEditor _editor;
+    private string _editorContent = @"Hello MEditor";
+    private string _viewContent;
 
     public async Task GetTextAsync()
     {
-        ViewContent = await this.Editor.GetTextAsync();
+        _viewContent = await this._editor.GetTextAsync();
     }
     public async Task GetContentAsync()
     {
-        ViewContent = await this.Editor.GetContentAsync();
+        _viewContent = await this._editor.GetContentAsync();
     }
     public async Task GetHtmlAsync()
     {
-        ViewContent = await this.Editor.GetHtmlAsync();
+        _viewContent = await this._editor.GetHtmlAsync();
     }
 
     public async Task SetHtmlAsync()
@@ -80,14 +80,14 @@
             @"<a href='https://www.baidu.com/'>" +
             "<img src='https://www.baidu.com/img/flexible/logo/pc/result.png' /></a>";
 
-        await this.Editor.SetHtmlAsync(html);
+        await this._editor.SetHtmlAsync(html);
     }
     public async Task DisableAsync()
     {
-        await this.Editor.DisableAsync();
+        await this._editor.DisableAsync();
     }
     public async Task EnableAsync()
     {
-        await this.Editor.EnableAsync();
+        await this._editor.EnableAsync();
     }
 }
