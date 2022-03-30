@@ -1,17 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bunit;
-using BlazorComponent;
-using Moq;
+﻿using Bunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.Menu
 {
     [TestClass]
-    public class MMenuTests:TestBase
+    public class MMenuTests : TestBase
     {
         [TestMethod]
         public void RenderMenuWithAbsolute()

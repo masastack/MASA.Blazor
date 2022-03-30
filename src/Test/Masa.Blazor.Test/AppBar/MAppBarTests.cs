@@ -1,15 +1,10 @@
 ﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Test.AppBar
 {
     [TestClass]
-    public class MAppBarTests:TestBase
+    public class MAppBarTests : TestBase
     {
         [TestMethod]
         public void RenderAppBarWithAbsolute()

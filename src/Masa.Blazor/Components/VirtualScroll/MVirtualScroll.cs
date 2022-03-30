@@ -1,8 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using System;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MVirtualScroll<TItem> : BVirtualScroll<TItem>, IMeasurable
     {

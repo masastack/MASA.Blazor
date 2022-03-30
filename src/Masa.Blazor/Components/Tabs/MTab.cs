@@ -1,11 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MTab : BTab
     {

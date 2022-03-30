@@ -1,13 +1,13 @@
-﻿using Masa.Blazor.Doc.Models.Extensions;
-using Markdig;
+﻿using Markdig;
 using Markdig.Extensions.Yaml;
 using Markdig.Renderers;
 using Markdig.Syntax;
+using Masa.Blazor.Doc.Models;
+using Masa.Blazor.Doc.Models.Extensions;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Masa.Blazor.Doc.Models;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -15,7 +15,7 @@ namespace Masa.Blazor.Doc.CLI.Wrappers
 {
     public class DocWrapper
     {
-        public static(DemoFrontMatter meta, string desc, Dictionary<string, string> others)
+        public static (DemoFrontMatter meta, string desc, Dictionary<string, string> others)
             ParseDemoDoc(string input)
         {
             var pipeline = new MarkdownPipelineBuilder()
@@ -72,7 +72,7 @@ namespace Masa.Blazor.Doc.CLI.Wrappers
             return (meta, desc, h2Sections);
         }
 
-        public static(DescriptionYaml Meta, string Style, Dictionary<string, string> Descriptions) ParseDescription(string input)
+        public static (DescriptionYaml Meta, string Style, Dictionary<string, string> Descriptions) ParseDescription(string input)
         {
             var pipeline = new MarkdownPipelineBuilder()
                 .UseYamlFrontMatter()
@@ -205,7 +205,7 @@ namespace Masa.Blazor.Doc.CLI.Wrappers
             return matches.Select(r => r.Groups["title"].ToString());
         }
 
-        public static(int order, string title, string html) ParseDocs(string input)
+        public static (int order, string title, string html) ParseDocs(string input)
         {
             input = input.Trim(' ', '\r', '\n');
             var pipeline = new MarkdownPipelineBuilder()

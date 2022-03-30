@@ -1,6 +1,4 @@
-﻿using BlazorComponent;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MBorder : BBorder
     {

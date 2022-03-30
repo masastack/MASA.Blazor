@@ -1,13 +1,5 @@
-﻿using BlazorComponent;
-using BlazorComponent.Web;
-using Microsoft.AspNetCore.Components;
+﻿using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor
 {
@@ -248,7 +240,7 @@ namespace Masa.Blazor
         public Dictionary<string, object> ThumbAttrs => new()
         {
             { "role", "slider" },
-            { "tabindex", IsDisabled ? -1 : 0}
+            { "tabindex", IsDisabled ? -1 : 0 }
         };
 
         public bool ShowThumbLabelContainer => IsFocused || IsActive || ThumbLabel == "always";

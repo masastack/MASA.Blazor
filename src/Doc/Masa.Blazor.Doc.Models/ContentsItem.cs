@@ -24,7 +24,7 @@
             var title = lang == "zh-CN" ? "示例" : "Examples";
             return new ContentsItem(title, "examples", 2);
         }
-        
+
         public static ContentsItem GenerateProps(string lang)
         {
             var title = lang == "zh-CN" ? "属性" : "Props";

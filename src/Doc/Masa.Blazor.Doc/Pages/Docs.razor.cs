@@ -2,8 +2,6 @@
 using Masa.Blazor.Doc.Highlight;
 using Masa.Blazor.Doc.Models;
 using Masa.Blazor.Doc.Services;
-using Masa.Blazor.Doc.Shared;
-using Masa.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor.Doc.Pages

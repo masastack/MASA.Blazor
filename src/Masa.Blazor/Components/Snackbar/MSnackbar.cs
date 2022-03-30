@@ -1,6 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+﻿using Microsoft.AspNetCore.Components.Web;
 using System.Timers;
 using Timer = System.Timers.Timer;
 
@@ -90,7 +88,7 @@ namespace Masa.Blazor
         [Parameter]
         public RenderFragment ActionContent { get; set; }
 
-        
+
 
         protected override void OnParametersSet()
         {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using BlazorComponent;
-
-namespace Masa.Blazor.Extensions
+﻿namespace Masa.Blazor.Extensions
 {
     public static class StringEnumExtensions
     {
