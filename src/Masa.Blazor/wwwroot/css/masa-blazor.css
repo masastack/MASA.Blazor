@@ -29576,3 +29576,46 @@ html.overflow-y-hidden {
     right: 0;
 }
 
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.m-input-number-handler-wrap {
+    display:flex;
+    flex-direction: column-reverse;
+    height: 100%;
+    border-radius: 0 2px 2px 0;
+    opacity: 0;
+    transition: opacity .24s linear .1s;
+}
+
+.m-input-number-handler-wrap .m-input__icon {
+    height: 12px;
+}
+
+.m-input-number-handler-wrap.m-input-number-handler-focused {
+    opacity: 1;
+    box-shadow: none;
+}
+
+.m-number-input-icon button {
+    height: 12px;
+}
+
+.m-number-input-icon button::after {
+    border-radius: 0% !important;
+}
+
+.m-number-input-down-disabled button {
+    cursor: not-allowed !important;
+}
+
+.m-number-input-up-disabled button {
+    cursor: not-allowed !important;
+}

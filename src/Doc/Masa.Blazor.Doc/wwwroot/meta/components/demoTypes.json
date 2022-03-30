@@ -257,6 +257,7 @@
   "Demos.Components.FormInputs.children.TextField.props.HideDetails",
   "Demos.Components.FormInputs.children.TextField.props.Hint",
   "Demos.Components.FormInputs.children.TextField.props.Icons",
+  "Demos.Components.FormInputs.children.TextField.props.Number",
   "Demos.Components.FormInputs.children.TextField.props.Outlined",
   "Demos.Components.FormInputs.children.TextField.props.PrefixesAndSuffixes",
   "Demos.Components.FormInputs.children.TextField.props.Shaped",

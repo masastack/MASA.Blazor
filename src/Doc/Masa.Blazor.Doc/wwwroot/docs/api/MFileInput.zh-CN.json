@@ -197,6 +197,11 @@
       "Description": "将 multiple 属性添加到输入中，允许选择多个文件。"
     },
     {
+      "Name": "NumberProps",
+      "Type": "Action<TextFieldNumberProperty>",
+      "Description": ""
+    },
+    {
       "Name": "Outlined",
       "Type": "Boolean",
       "Default": "false",

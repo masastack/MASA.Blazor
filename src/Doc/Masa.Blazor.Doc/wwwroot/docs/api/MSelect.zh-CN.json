@@ -243,6 +243,11 @@
       "Description": ""
     },
     {
+      "Name": "NumberProps",
+      "Type": "Action<TextFieldNumberProperty>",
+      "Description": ""
+    },
+    {
       "Name": "Outlined",
       "Type": "Boolean",
       "Default": "false",

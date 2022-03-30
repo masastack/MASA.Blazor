@@ -113,11 +113,16 @@ namespace Masa.Blazor
         [Parameter]
         public EventCallback<MouseEventArgs> OnClearClick { get; set; }
 
+        [Parameter]
+        public Action<TextFieldNumberProperty> NumberProps { get; set; }
+
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
 
         [Inject]
         public Document Document { get; set; }
+
+        public TextFieldNumberProperty Props { get; set; } = new();
 
         public bool IsSolo => Solo || SoloInverted;
 
@@ -156,11 +161,26 @@ namespace Masa.Blazor
 
         public virtual string Tag => "input";
 
-        protected virtual Dictionary<string, object> InputAttrs => new(Attributes)
+        protected virtual Dictionary<string, object> InputAttrs
         {
-            { "type", Type },
-            { "value", _badInput == null ? InternalValue : _badInput }
-        };
+            get
+            {
+                Dictionary<string, object> attibutes = new(Attributes)
+                {
+                    { "type", Type },
+                    { "value", _badInput == null ? InternalValue : _badInput }
+                };
+
+                if (Type == "number")
+                {
+                    attibutes.Add("min", Props.Min);
+                    attibutes.Add("max", Props.Max);
+                    attibutes.Add("step", Props.Step);
+                }
+
+                return attibutes;
+            }
+        }
 
         public virtual StringNumber ComputedCounterValue
         {
@@ -215,6 +235,32 @@ namespace Masa.Blazor
                 }
 
                 return MasaBlazor.RTL == Reverse ? (offset, "auto") : ("auto", offset);
+            }
+        }
+
+        public bool UpButtonEnabled
+        {
+            get
+            {
+                if (BindConverter.TryConvertToDecimal(InternalValue.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var value))
+                {
+                    return Props.Max == null || value < Props.Max;
+                }
+
+                return false;
+            }
+        }
+
+        public bool DownButtonEnabled
+        {
+            get
+            {
+                if (BindConverter.TryConvertToDecimal(InternalValue.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var value))
+                {
+                    return Props.Min == null || value > Props.Min;
+                }
+
+                return false;
             }
         }
 
@@ -322,6 +368,30 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add("m-text-field__suffix");
+                })
+                .Apply("number-wrap", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input-number-handler-wrap")
+                        .AddIf("m-input-number-handler-focused", () => IsFocused);
+                })
+                .Apply("append-icon-number-up", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input__icon")
+                        .Add("m-input__icon--append")
+                        .Add("m-number-input-icon")
+                        .AddIf("m-number-input-up-disabled", () => !UpButtonEnabled);
+
+                })
+                .Apply("append-icon-number-down", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input__icon")
+                        .Add("m-input__icon--append")
+                        .Add("m-number-input-icon")
+                        .AddIf("m-number-input-down-disabled", () => !DownButtonEnabled);
+
                 });
 
             AbstractProvider
@@ -375,6 +445,11 @@ namespace Masa.Blazor
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            if (NumberProps != null)
+            {
+                NumberProps.Invoke(Props);
+            }
+
             await base.OnAfterRenderAsync(firstRender);
 
             if (firstRender)
@@ -512,6 +587,13 @@ namespace Masa.Blazor
             _badInput = null;
             IsFocused = false;
 
+            var checkValue = await CheckNumberValidate(InternalValue);
+
+            if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
+            {
+                await SetInternalValueAsync(checkValue);
+            }
+
             if (OnBlur.HasDelegate)
             {
                 await OnBlur.InvokeAsync(args);
@@ -524,9 +606,9 @@ namespace Masa.Blazor
             //So that,view will not change untill 300ms no actions
             _shouldRender = false;
 
-            _cancellationTokenSource?.Cancel();
-            _cancellationTokenSource = new CancellationTokenSource();
-            await Task.Delay(300, _cancellationTokenSource.Token);
+            //_cancellationTokenSource?.Cancel();
+            //_cancellationTokenSource = new CancellationTokenSource();
+            //await Task.Delay(300, _cancellationTokenSource.Token);
 
             var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
             if (success)
@@ -546,6 +628,71 @@ namespace Masa.Blazor
 
             _shouldRender = true;
             StateHasChanged();
+        }
+
+        private Task<TValue> CheckNumberValidate(TValue argValue)
+        {
+            if (Type == "number" && BindConverter.TryConvertToDecimal(argValue.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var value))
+            {
+                TValue retValue;
+
+                if (Props.Min != null && value < Props.Min && BindConverter.TryConvertTo<TValue>(Props.Min.ToString(), System.Globalization.CultureInfo.InvariantCulture, out retValue))
+                    return Task.FromResult(retValue);
+                else if (Props.Max != null && value > Props.Max && BindConverter.TryConvertTo<TValue>(Props.Max.ToString(), System.Globalization.CultureInfo.InvariantCulture, out retValue))
+                    return Task.FromResult(retValue);
+            }
+
+            return Task.FromResult(argValue);
+        }
+
+
+        public async Task HandleOnNumberUpClickAsync(MouseEventArgs args)
+        {
+            if (UpButtonEnabled && BindConverter.TryConvertToDecimal(this.InternalValue.ToString(), System.Globalization.CultureInfo.InvariantCulture, out decimal value))
+            {
+                if(Props.Min !=null && value < Props.Min)
+                {
+                    value = Props.Min.Value;
+                }
+
+                value += Props.Step;
+
+                if (Props.Max !=null && value > Props.Max)
+                {
+                    value = Props.Max.Value;
+                }
+
+                if (BindConverter.TryConvertTo<TValue>(value.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var internalValue))
+                {
+                    await SetInternalValueAsync(internalValue);
+                }
+            }
+
+            await InputElement.FocusAsync();
+        }
+        public async Task HandleOnNumberDownClickAsync(MouseEventArgs args)
+        {
+            if (DownButtonEnabled && BindConverter.TryConvertToDecimal(this.InternalValue.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var value))
+            {
+                if(Props.Max != null && value > Props.Max)
+                {
+                    value = Props.Max.Value;
+                }
+
+                value -= Props.Step;
+
+                if (Props.Min !=null && value < Props.Min)
+                {
+                    value = Props.Min.Value;
+                }
+
+                if (BindConverter.TryConvertTo<TValue>(value.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var internalValue))
+                {
+                    await SetInternalValueAsync(internalValue);
+                }
+            }
+
+            await InputElement.FocusAsync();
         }
 
         protected override bool ShouldRender()
