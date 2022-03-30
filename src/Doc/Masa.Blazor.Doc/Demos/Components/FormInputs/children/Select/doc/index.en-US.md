@@ -15,7 +15,7 @@ The `Select` component is used for collecting user provided information from a l
 
 - [MSelect](/api/MSelect)
 
-## ◊¢“‚
+## Ê≥®ÊÑè
 
 <!--alert:info--> 
 The default setting of browser auto completion is off, which may be changed or ignored by different browsers. **[MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)**
