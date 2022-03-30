@@ -1,42 +1,32 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlazorComponent;
 using Microsoft.Extensions.Logging;
 
 namespace Masa.Blazor
 {
-    public class MErrorHandler : ErrorBoundaryBase, IErrorHandler
+    public class MErrorHandler : ErrorBoundaryBase
     {
-        [Inject]
-        public IPopupService PopupService { get; set; }
-
         [Inject]
         protected ILogger<MErrorHandler> Logger { get; set; }
 
         [Parameter]
-        public Func<Exception, Task>? OnErrorHandleAsync { get; set; }
+        public Func<Exception, Task> OnErrorHandleAsync { get; set; }
+
+        [Inject]
+        public IPopupService PopupService { get; set; }
 
         [Parameter]
-        public bool Show { get; set; } = true;
+        public bool ShowAlert { get; set; } = true;
 
         [Parameter]
         public bool ShowDetail { get; set; } = false;
 
-        protected Exception? Exception { get; set; }
-
         protected override void OnParametersSet()
         {
-            Exception = null;
             Recover();
         }
 
         protected override async Task OnErrorAsync(Exception exception)
         {
-            Exception = exception;
             Logger.LogError(exception, "OnErrorAsync");
             if (OnErrorHandleAsync != null)
             {
@@ -44,12 +34,13 @@ namespace Masa.Blazor
             }
             else
             {
-                if (Show)
+                if (ShowAlert)
                 {
                     await PopupService.AlertAsync(alert =>
                     {
-                        alert.Content = ShowDetail ? $"{Exception.Message}:{Exception.StackTrace}" : Exception.Message;
                         alert.Top = true;
+                        alert.Type = AlertTypes.Error;
+                        alert.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
                     });
                 }
             }
@@ -63,11 +54,11 @@ namespace Masa.Blazor
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            if (Show || OnErrorHandleAsync != null || CurrentException == null)
+            if (CurrentException is null || ShowAlert || OnErrorHandleAsync is not null)
             {
                 builder.AddContent(0, ChildContent);
             }
-            if (OnErrorHandleAsync == null && !Show && CurrentException != null)
+            else if (OnErrorHandleAsync == null && !ShowAlert && CurrentException != null)
             {
                 if (ErrorContent != null)
                 {

@@ -1,11 +1,10 @@
 ﻿<MSwitch @bind-Value="_isShow" Label="@($"Show: {_isShow}")"></MSwitch>
-<MErrorHandler Show="_isShow" >
-<MButton @onclick="BtnClick">throw test</MButton>
+<MErrorHandler ShowAlert="_isShow">
+    <MButton @onclick="BtnClick">throw test</MButton>
 </MErrorHandler>
 @code
 {
-    private MErrorHandler mErrorHandler;
-    private bool _isShow=true;
+    private bool _isShow = true;
 
     private void BtnClick()
     {

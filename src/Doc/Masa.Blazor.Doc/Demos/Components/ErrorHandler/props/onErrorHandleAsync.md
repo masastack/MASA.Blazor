@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-自定义异常处理Func<Exception,Task>。
+自定义异常处理``Func<Exception,Task>``。
 
 ## en-US
 
-Custom exception handling Func<Exception, Task >.
+Custom exception handling ``Func<Exception, Task >``.
