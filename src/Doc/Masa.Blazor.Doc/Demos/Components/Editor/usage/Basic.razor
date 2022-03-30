@@ -1,6 +1,12 @@
 ﻿<MEditor @bind-Value="EditorContent">
 </MEditor>
-<div>@EditorContent</div>
+<MAlert Border="Borders.Top"
+            ColoredBorder
+            Type="AlertTypes.Info"
+            Elevation="2" 
+            Class="mt-5">
+        @EditorContent
+</MAlert>
 @code{
     string EditorContent="Hello MEditor!";
 }

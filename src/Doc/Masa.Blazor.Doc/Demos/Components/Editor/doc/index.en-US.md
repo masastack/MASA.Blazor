@@ -5,7 +5,7 @@ title: Editor
 cols: 1
 ---
 
-[Editor](https://quilljs.com/) Rich text editor based on quilljs encapsulation
+Rich text editor based on [Quill](https://quilljs.com/) encapsulation
 
 ## CSS file
 
