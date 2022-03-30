@@ -1877,7 +1877,7 @@
       "js文件": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-30T13:42:39.7065+08:00",
+    "LastWriteTime": "2022-03-30T11:52:33.1437659+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2686,18 +2686,18 @@
     "FullTitle": "Forms（表单）"
   },
   {
-    "Desc": "<p>The OTP input is used for MFA procedure of authenticating users by a one-time password.</p>\n",
+    "Desc": "<p>该组件是用于MFA校验的一次性密码输入组件</p>\n",
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOtpInput\">MOtpInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-30T13:42:39.7094944+08:00",
+    "LastWriteTime": "2022-03-30T11:52:33.1437659+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "index",
         "Title": "使用",
-        "Description": "<p>Here we display a list of settings that could be applied within an application.</p>\n",
+        "Description": "<p>在这里，我们显示了可以在应用程序中使用的设置列表。</p>\n",
         "Code": "<MContainer Class=\"px-0\"\r\n            Fluid>\r\n    <MOtpInput Length=\"6\"></MOtpInput>\r\n</MContainer>\r\n\r\n@code {\r\n    private int _radioGroup = 1;\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.OtpInput.usage.Index",
         "Style": "",
@@ -2707,8 +2707,8 @@
       {
         "Order": 1,
         "Name": "darkTheme",
-        "Title": "Dark theme",
-        "Description": "<p>Applied dark theme, listen to value fill to affect button component.</p>\n",
+        "Title": "深色主题",
+        "Description": "<p>应用深色主题，改变组件的颜色。</p>\n",
         "Code": "<MCard Flat>\r\n    <MCardText>\r\n        <MContainer Fluid class=\"green lighten-2\">\r\n            <MRow>\r\n                <MCol Cols=\"9\">\r\n                    <div class=\"ma-auto\" style=\"max-width: 300px\">\r\n                        <MOtpInput @bind-value=\"@otp\" Length=\"@length\" Dark></MOtpInput>\r\n                    </div>\r\n                </MCol>\r\n                <MCol Cols=\"2\" class=\"my-3\">\r\n                    <MButton Block Disabled=\"!isActive\"> Ready</MButton>\r\n                </MCol>\r\n            </MRow>\r\n        </MContainer>\r\n    </MCardText>\r\n</MCard>\r\n\r\n@code {\r\n    string otp = \"\";\r\n    int length = 7;\r\n    bool isActive => otp.Length == this.length;\r\n}",
         "Type": "Demos.Components.FormInputs.children.OtpInput.props.DarkTheme",
         "Style": "",
@@ -2718,8 +2718,8 @@
       {
         "Order": 1,
         "Name": "finishEvent",
-        "Title": "Finish event",
-        "Description": "<p>You can easily compose a loader to process the OTP input when completed insertion.</p>\n",
+        "Title": "输入完成事件",
+        "Description": "<p>你可以很容易的编写一个处理程序来接收组件完成输入时的结果。</p>\n",
         "Code": "<div>\r\n    <div class=\"ma-auto position-relative\" style=\"max-width: 300px\">\r\n        <MOtpInput OtpValue=\"@otp\" Disabled=\"@isLoading\" OnFinish=\"OnFinish\"></MOtpInput>\r\n\r\n        <MOverlay Absolute Value=\"@isLoading\">\r\n            <MProgressCircular Indeterminate Color=\"primary\"></MProgressCircular>\r\n        </MOverlay>\r\n    </div>\r\n    <div>\r\n        Expected value: <span class=\"font-weight-bold\"> @expectedOtp </span>\r\n    </div>\r\n    <div class=\"text--caption\">Type or copy/paste.</div>\r\n\r\n    <MSnackbar Color=\"@snackbarColor\" Timeout=\"2000\" Value=\"@snackbar\">\r\n        <ChildContent>\r\n            @text\r\n        </ChildContent>\r\n    </MSnackbar>\r\n</div>\r\n<style type=\"text/css\">\r\n    .position-relative {\r\n        position: relative;\r\n    }\r\n</style>\r\n@code {\r\n    string otp = \"\";\r\n    bool isLoading;\r\n    string expectedOtp = \"133707\";\r\n    string snackbarColor = \"default\";\r\n    bool snackbar = false;\r\n    string text = \"\";\r\n\r\n    public async Task OnFinish(string value)\r\n    {\r\n        this.snackbar = false;\r\n        this.isLoading = true;\r\n        await Task.Delay(3500);\r\n        this.isLoading = false;\r\n        this.snackbarColor = (value == this.expectedOtp) ? \"success\" : \"warning\";\r\n        this.text = $\"Processed OTP with {value} ({snackbarColor})\";\r\n        this.snackbar = true;\r\n    }\r\n}",
         "Type": "Demos.Components.FormInputs.children.OtpInput.props.FinishEvent",
         "Style": "",
@@ -2729,8 +2729,8 @@
       {
         "Order": 1,
         "Name": "hiddenInput",
-        "Title": "Hidden input",
-        "Description": "<p>The entered value can be hidden with type=&quot;password&quot;</p>\n",
+        "Title": "隐藏输入内容",
+        "Description": "<p>type=&quot;password&quot;时，会将输入结果隐藏。</p>\n",
         "Code": "<div class=\"ma-auto\" style=\"max-width: 260px\">\r\n    <MOtpInput @OtpValue=\"@otp\" Type=\"OtpInputType.Password\" Length=\"5\" Dark></MOtpInput>\r\n</div>\r\n@code {\r\n    string otp = \"\";\r\n}",
         "Type": "Demos.Components.FormInputs.children.OtpInput.props.HiddenInput",
         "Style": "",
@@ -2746,10 +2746,10 @@
       "/components/text-fields",
       "/components/forms"
     ],
-    "Subtitle": "OTP Input",
+    "Subtitle": "一次性密码输入",
     "Title": "OTP Input",
-    "Type": "OTPInput",
-    "FullTitle": "OTP Input（OTP Input）"
+    "Type": "一次性密码输入",
+    "FullTitle": "OTP Input（一次性密码输入）"
   },
   {
     "Desc": "<p><code>MRadio</code> 组件是一个简单的单选按钮。 与 <code>MRadioGroup</code> 组件结合时，您可以提供分组的功能，允许用户从一组预定义的选项中进行选择。</p>\n",

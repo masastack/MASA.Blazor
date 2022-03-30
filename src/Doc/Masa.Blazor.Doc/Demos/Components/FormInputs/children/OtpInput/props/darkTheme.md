@@ -1,13 +1,13 @@
 ---
 order: 1
 title:
-  zh-CN: Dark theme
+  zh-CN: 深色主题
   en-US: Dark theme
 ---
 
 ## zh-CN
 
-Applied dark theme, listen to value fill to affect button component.
+应用深色主题，改变组件的颜色。
 
 ## en-US
 
