@@ -5,31 +5,31 @@
             Type="AlertTypes.Info"
             Elevation="2" 
             Class="mt-10">
-        @ViewContent
+        @ViewInfo
 </MAlert>
 
 @code
 {
-    private string ViewContent { get; set; }
+    private string ViewInfo { get; set; }
 
     private void HandleFocus()
     {
-        ViewContent = "聚焦";
+        ViewInfo = "聚焦";
     }
     private void HandleBlur()
     {
-        ViewContent = "失去焦点";
+        ViewInfo = "失去焦点";
     }
     private void HandleEscPress()
     {
-        ViewContent = "esc 按下";
+        ViewInfo = "esc 按下";
     }
     private void HandleCtrlEnterPress()
     {
-        ViewContent = "ctrl+enter 按下";
+        ViewInfo = "ctrl+enter 按下";
     }
     private void HandleSelect()
     {
-        ViewContent = "编辑器中选中文字";
+        ViewInfo = "编辑器中选中文字";
     }
 }

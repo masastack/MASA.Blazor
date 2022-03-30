@@ -1,7 +1,18 @@
 ﻿<MMarkdown @bind-Value="_value" @bind-Html="_html" >
 </MMarkdown>
-<div>@_value</div>
-<div>@_html</div>
+<MAlert Border="Borders.Top"
+            ColoredBorder
+            Type="AlertTypes.Info"
+            Elevation="2" 
+            Class="mt-5">
+        @_value
+</MAlert>
+<MAlert Border="Borders.Top"
+            ColoredBorder
+            Type="AlertTypes.Info"
+            Elevation="2">
+        @_html
+</MAlert>
 
 @code{
     private string _value = "Hello MASA Blazor!";
