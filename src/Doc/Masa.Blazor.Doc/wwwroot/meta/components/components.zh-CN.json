@@ -1877,7 +1877,7 @@
       "js文件": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-30T13:42:39.7065+08:00",
+    "LastWriteTime": "2022-03-30T11:52:33.1437659+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2691,7 +2691,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOtpInput\">MOtpInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-30T13:42:39.7094944+08:00",
+    "LastWriteTime": "2022-03-30T11:52:33.1437659+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2729,8 +2729,8 @@
       {
         "Order": 1,
         "Name": "hiddenInput",
-        "Title": "Hidden input",
-        "Description": "<p>The entered value can be hidden with type=&quot;password&quot;</p>\n",
+        "Title": "隐藏输入内容",
+        "Description": "<p>type=&quot;password&quot;时，会将输入结果隐藏。</p>\n",
         "Code": "<div class=\"ma-auto\" style=\"max-width: 260px\">\r\n    <MOtpInput @OtpValue=\"@otp\" Type=\"OtpInputType.Password\" Length=\"5\" Dark></MOtpInput>\r\n</div>\r\n@code {\r\n    string otp = \"\";\r\n}",
         "Type": "Demos.Components.FormInputs.children.OtpInput.props.HiddenInput",
         "Style": "",
