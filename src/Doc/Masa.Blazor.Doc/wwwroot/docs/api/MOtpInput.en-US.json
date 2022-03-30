@@ -56,7 +56,7 @@
     },
     {
       "Name": "Type",
-      "Type": "BOtpInputType",
+      "Type": "OtpInputType",
       "Description": ""
     },
     {
