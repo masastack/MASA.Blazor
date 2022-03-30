@@ -6,7 +6,7 @@ namespace Masa.Blazor.Doc.Highlight
 {
     public interface IPrismHighlighter
     {
-        Task HighlightAsync(string code, string language, DotNetObjectReference<HighlightedCode> objectReference,ElementReference codeElement);
+        Task HighlightAsync(string code, string language, DotNetObjectReference<HighlightedCode> objectReference, ElementReference codeElement);
 
         Task HighlightAllAsync();
     }

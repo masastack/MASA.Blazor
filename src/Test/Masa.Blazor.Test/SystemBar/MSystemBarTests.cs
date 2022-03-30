@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Text;
-using Bunit;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Test.SystemBar
 {
     [TestClass]
-    public class MSystemBarTests:TestBase
+    public class MSystemBarTests : TestBase
     {
         [TestMethod]
         public void RenderSystemBarWithAbsolute()

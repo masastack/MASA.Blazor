@@ -1,6 +1,6 @@
 ﻿@using System.ComponentModel.DataAnnotations
 
-<MForm Model="_order" EnableDataAnnotationsValidation>
+<MForm Model="_order" EnableValidation>
     <MTextField @bind-Value="_order.Title" Label="Title"></MTextField>
     <MTextField @bind-Value="_order.Price" Label="Price" Type="number"></MTextField>
     @foreach (var person in _order.Persons)

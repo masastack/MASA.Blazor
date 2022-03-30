@@ -1,10 +1,5 @@
 ﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Test.Button
 {
@@ -527,7 +522,7 @@ namespace Masa.Blazor.Test.Button
             // Assert
             contentDiv.Children.MarkupMatches("<span>Hello world</span>");
         }
-        
+
     }
 }
 

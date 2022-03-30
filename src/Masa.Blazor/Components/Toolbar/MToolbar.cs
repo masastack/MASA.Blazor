@@ -1,7 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MToolbar : MSheet, IThemeable, IToolbar
     {

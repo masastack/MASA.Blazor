@@ -1,15 +1,10 @@
 ﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Test.Form
 {
     [TestClass]
-    public class MFormTests:TestBase
+    public class MFormTests : TestBase
     {
         [TestMethod]
         public void RenderWithChildContent()
@@ -17,7 +12,7 @@ namespace Masa.Blazor.Test.Form
             // Arrange & Act
             var cut = RenderComponent<MForm>(props =>
             {
-                props.Add(form => form.ChildContent,Counter=> "<span>Hello world</span>");
+                props.Add(form => form.ChildContent, Counter => "<span>Hello world</span>");
             });
             var contentDiv = cut.Find(".m-form");
 

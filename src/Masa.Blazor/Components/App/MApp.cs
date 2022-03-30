@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BlazorComponent;
+﻿using BlazorComponent.Web;
 using Masa.Blazor.Popup.Components;
-using BlazorComponent.Web;
-using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor
 {

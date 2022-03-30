@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components.Web;
+﻿using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor.Presets
 {
@@ -45,7 +43,7 @@ namespace Masa.Blazor.Presets
         private bool _loading;
 
         private bool _showFilters;
-        
+
         private bool ShowFilters
         {
             get => Filters != null && _showFilters;

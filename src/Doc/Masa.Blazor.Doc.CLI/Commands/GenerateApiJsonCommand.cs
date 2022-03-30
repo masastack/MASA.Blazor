@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.Doc.CLI.Interfaces;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.CommandLineUtils;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor.Doc.CLI.Commands
 {

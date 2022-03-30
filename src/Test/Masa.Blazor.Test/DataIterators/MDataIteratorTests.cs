@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Bunit;
 
 namespace Masa.Blazor.Test.DataIterators
 {
     [TestClass]
-    public class MDataIteratorTests:TestBase
+    public class MDataIteratorTests : TestBase
     {
         [TestMethod]
         public void RenderDataIteratorWithDisableFiltering()

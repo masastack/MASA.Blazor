@@ -1,8 +1,4 @@
-﻿using BlazorComponent;
-using System;
-using System.Collections.Generic;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MProgressCircular : BProgressCircular, IProgressCircular
     {

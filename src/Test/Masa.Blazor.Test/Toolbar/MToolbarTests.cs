@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
-using Bunit;
 
 namespace Masa.Blazor.Test.Toolbar
 {
     [TestClass]
-    public class MToolbarTests:TestBase
+    public class MToolbarTests : TestBase
     {
         [TestMethod]
         public void RenderToolbarWithAbsolute()

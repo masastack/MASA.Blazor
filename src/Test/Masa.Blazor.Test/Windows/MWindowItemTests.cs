@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
-using Bunit;
 
 namespace Masa.Blazor.Test.Windows
 {
     [TestClass]
-    public class MWindowItemTests:TestBase
+    public class MWindowItemTests : TestBase
     {
         [TestMethod]
         public void RenderWindowItemWithDisabled()
@@ -32,7 +27,7 @@ namespace Masa.Blazor.Test.Windows
             // Arrange & Act
             var cut = RenderComponent<MWindowItem>(props =>
             {
-                props.Add(windowitem => windowitem.ChildContent,  "<span>Hello world</span>");
+                props.Add(windowitem => windowitem.ChildContent, "<span>Hello world</span>");
             });
             var contentDiv = cut.Find(".m-window-item");
             //row fill-height  

@@ -1,16 +1,14 @@
-﻿using System.Globalization;
-using System.Text.Json;
-using BlazorComponent;
+﻿using BlazorComponent;
 using BlazorComponent.I18n;
 using BlazorComponent.Web;
 using Masa.Blazor.Doc.Components;
 using Masa.Blazor.Doc.Models;
 using Masa.Blazor.Doc.Services;
-using Masa.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
-using Element = BlazorComponent.Web.Element;
+using System.Globalization;
+using System.Text.Json;
 
 namespace Masa.Blazor.Doc.Shared;
 
@@ -38,7 +36,7 @@ public partial class Toc : OwningComponentBase<DemoService>
     [Inject]
     public NavigationManager NavigationManager { get; set; }
 
-    [CascadingParameter(Name ="Lang")]
+    [CascadingParameter(Name = "Lang")]
     public bool IsChinese { get; set; }
 
     protected override void OnInitialized()

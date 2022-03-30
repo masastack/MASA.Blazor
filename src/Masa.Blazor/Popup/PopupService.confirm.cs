@@ -1,5 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Masa.Blazor.Popup.Components;
+﻿using Masa.Blazor.Popup.Components;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Masa.Blazor;
 

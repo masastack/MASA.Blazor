@@ -1,15 +1,10 @@
 ﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Test.ChipGroup
 {
     [TestClass]
-    public class MChipGroupTests:TestBase
+    public class MChipGroupTests : TestBase
     {
         [TestMethod]
         public void RenderChipGroupWithCenterActive()
