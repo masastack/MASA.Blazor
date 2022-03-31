@@ -1,19 +1,24 @@
 ﻿<MErrorHandler OnErrorHandleAsync="CustomErrorHandleAsync">
     <MButton @onclick="BtnClick" Color="@color">Custom handler exception test</MButton>
+    <MButton @onclick="BtnReset">Reset</MButton>
 </MErrorHandler>
 @code
 {
-    private string color = "white";
-
+    private string color= "white black--text";
     private void BtnClick()
     {
         throw new Exception("throw error!");
     }
 
+    private void BtnReset()
+    {
+        color= "white black--text";
+    }
+
     private async Task CustomErrorHandleAsync(Exception exception)
     {
         //todo
-        color = "red";
+        color = "red white--text";
         await Task.CompletedTask;
     }
 }

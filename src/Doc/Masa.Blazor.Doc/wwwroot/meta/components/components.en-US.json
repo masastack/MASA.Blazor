@@ -1956,12 +1956,12 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MErrorHandler\">MErrorHandler</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-31T16:49:33.4376303+08:00",
+    "LastWriteTime": "2022-03-31T18:00:27.2119237+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "index",
-        "Title": "ErrorHandler",
+        "Title": "Error handler",
         "Description": "<p>Uniform exception handling.</p>\n",
         "Code": "<MErrorHandler>\r\n    <MButton @onclick=\"BtnClick\">Throw test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
         "Type": "Demos.Components.ErrorHandler.usage.Index",
@@ -1972,9 +1972,9 @@
       {
         "Order": 0,
         "Name": "onErrorHandleAsync",
-        "Title": "onErrorHandleAsync",
-        "Description": "<p>Custom exception handling <code>Func&lt;Exception, Task &gt;</code>, after clicking the button triggers the exception, the button background color changes to red.</p>\n",
-        "Code": "<MErrorHandler OnErrorHandleAsync=\"CustomErrorHandleAsync\">\r\n    <MButton @onclick=\"BtnClick\" Color=\"@color\">Custom handler exception test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private string color = \"white\";\r\n\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n\r\n    private async Task CustomErrorHandleAsync(Exception exception)\r\n    {\r\n        //todo\r\n        color = \"red\";\r\n        await Task.CompletedTask;\r\n    }\r\n}",
+        "Title": "OnErrorHandleAsync",
+        "Description": "<p>Custom exception handling <code>Func&lt;Exception, Task &gt;</code>, after clicking the button triggers the exception, the button background color changes to red and the text color changes to white.</p>\n",
+        "Code": "<MErrorHandler OnErrorHandleAsync=\"CustomErrorHandleAsync\">\r\n    <MButton @onclick=\"BtnClick\" Color=\"@color\">Custom handler exception test</MButton>\r\n    <MButton @onclick=\"BtnReset\">Reset</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private string color= \"white black--text\";\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n\r\n    private void BtnReset()\r\n    {\r\n        color= \"white black--text\";\r\n    }\r\n\r\n    private async Task CustomErrorHandleAsync(Exception exception)\r\n    {\r\n        //todo\r\n        color = \"red white--text\";\r\n        await Task.CompletedTask;\r\n    }\r\n}",
         "Type": "Demos.Components.ErrorHandler.props.OnErrorHandleAsync",
         "Style": "",
         "Debug": false,
@@ -2006,9 +2006,9 @@
     "Children": [],
     "Category": "Components",
     "Cols": 1,
-    "Title": "ErrorHandler",
+    "Title": "Error handler",
     "Type": "ErrorHandler",
-    "FullTitle": "ErrorHandler"
+    "FullTitle": "Error handler"
   },
   {
     "Desc": "<p>The <code>MExpansionPanel</code> component is useful for reducing vertical space with large amounts of information. The default\nfunctionality of the component is to only display one expansion-panel body at a time; however, with the <strong>Multiple</strong>\nproperty, the expansion-panel can remain open until explicitly closed.</p>\n",
