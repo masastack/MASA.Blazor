@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
-using Bunit;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Masa.Blazor.Test.Radio
 {
     [TestClass]
-    public class MRadioTests:TestBase
+    public class MRadioTests : TestBase
     {
         [TestMethod]
         public void RenderRadioWithDark()

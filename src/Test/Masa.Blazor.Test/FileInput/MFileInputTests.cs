@@ -1,16 +1,12 @@
 ﻿using Bunit;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Test.FileInput
 {
     [TestClass]
-    public  class MFileInputTests:TestBase
+    public class MFileInputTests : TestBase
     {
         [TestMethod]
         public void RenderFileInputWithAutofocus()

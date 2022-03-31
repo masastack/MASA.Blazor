@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Bunit;
 
 namespace Masa.Blazor.Test.Rating
 {
     [TestClass]
-    public class MRatingTests:TestBase
+    public class MRatingTests : TestBase
     {
         [TestMethod]
         public void RenderRatingWithClearable()

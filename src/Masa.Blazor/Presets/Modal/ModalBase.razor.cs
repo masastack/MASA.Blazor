@@ -1,7 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
+﻿using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor.Presets
 {
@@ -225,7 +222,7 @@ namespace Masa.Blazor.Presets
             if (OnCancel.HasDelegate)
             {
                 var args = new ModalActionEventArgs();
-                
+
                 await OnCancel.InvokeAsync(args);
             }
             else

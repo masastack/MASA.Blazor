@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlazorComponent;
-using BlazorComponent.Web;
-using Microsoft.AspNetCore.Components;
+﻿using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
@@ -31,7 +24,7 @@ namespace Masa.Blazor
         [Parameter]
         public bool Striped { get; set; }
 
-        
+
 
         [Parameter]
         public bool Bottom { get; set; }

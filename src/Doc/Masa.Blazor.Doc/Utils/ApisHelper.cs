@@ -1,5 +1,5 @@
-﻿using System.Text.RegularExpressions;
-using BlazorComponent;
+﻿using BlazorComponent;
+using System.Text.RegularExpressions;
 
 namespace Masa.Blazor.Doc.Utils;
 
@@ -45,7 +45,7 @@ public static class ApisHelper
         return markup.Substring(from, to - from);
     }
 
-    private static(string target, string css) GetTargetAndIconCss(string href)
+    private static (string target, string css) GetTargetAndIconCss(string href)
     {
         var isExternal = href.StartsWith("http") || href.StartsWith("mailto");
         var isSamePage = !isExternal && href.StartsWith("#");

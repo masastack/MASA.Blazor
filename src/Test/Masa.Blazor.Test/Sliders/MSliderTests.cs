@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Bunit;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Test.Slider
 {
     [TestClass]
-    public class MSliderTests:TestBase
+    public class MSliderTests : TestBase
     {
         [TestMethod]
         public void RenderSliderWithDark()

@@ -1,15 +1,10 @@
 ﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Test.Badge
 {
     [TestClass]
-    public class MBadgeTests:TestBase
+    public class MBadgeTests : TestBase
     {
         [TestMethod]
         public void RenderBadgeWithAvatar()

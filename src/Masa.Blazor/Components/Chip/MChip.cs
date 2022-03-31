@@ -1,11 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MChip : BChip, IThemeable, IChip, ISizeable
     {

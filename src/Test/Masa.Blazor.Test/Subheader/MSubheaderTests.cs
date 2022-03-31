@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Text;
-using System.Threading.Tasks;
-using Bunit;
 
 namespace Masa.Blazor.Test.Subheader
 {
     [TestClass]
-    public class MSubheaderTests:TestBase
+    public class MSubheaderTests : TestBase
     {
         [TestMethod]
         public void RenderSubheaderWithInset()

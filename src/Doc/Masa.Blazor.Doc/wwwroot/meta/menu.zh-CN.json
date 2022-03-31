@@ -568,8 +568,8 @@
           {
             "Order": 0,
             "Title": "OTP Input",
-            "SubTitle": "OTP Input",
-            "FullTitle": "OTP Input (OTP Input)",
+            "SubTitle": "一次性密码输入",
+            "FullTitle": "OTP Input (一次性密码输入)",
             "Type": "menuItem",
             "Url": "components/otp-input"
           },

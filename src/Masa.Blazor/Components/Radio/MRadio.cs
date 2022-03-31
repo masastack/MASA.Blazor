@@ -1,13 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MRadio<TValue> : BRadio<TValue>
     {
@@ -18,7 +9,7 @@ namespace Masa.Blazor
 
         [Parameter]
         public string Color { get; set; } = "primary";
-        
+
 
         protected string ValidationState => RadioGroup?.ValidationState ?? "primary";
 
