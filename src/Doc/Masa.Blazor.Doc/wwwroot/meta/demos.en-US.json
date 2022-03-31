@@ -1024,5 +1024,21 @@
         "Children": []
       }
     ]
+  },
+  {
+    "Order": 52,
+    "Title": "UploadImage",
+    "FullTitle": "UploadImage",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "UploadImage",
+        "FullTitle": "UploadImage",
+        "Type": "menuItem",
+        "Url": "components/uploadimage",
+        "Children": []
+      }
+    ]
   }
 ]

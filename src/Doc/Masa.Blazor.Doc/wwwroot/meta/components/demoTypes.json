@@ -605,6 +605,7 @@
   "Demos.Components.Treeview.contents.AppendAndLabel",
   "Demos.Components.Treeview.misc.SearchAndFilter",
   "Demos.Components.Treeview.misc.SelectableIcons",
+  "Demos.Components.UploadImage.usage.Index",
   "Demos.Components.VirtualScroll.props.Bench",
   "Demos.Components.VirtualScroll.misc.UserDirectory"
 ]

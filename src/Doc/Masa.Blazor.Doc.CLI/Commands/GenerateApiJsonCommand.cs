@@ -165,6 +165,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
             { "MAppBarNavIcon", new string[] { "App bars" } },
             { "MAppBarTitle", new string[] { "App bars" } },
             { "MAutocomplete", new string[] { "Autocompletes" } },
+            { "MUploadImage", new string[] { "MUploadImage" } }
         };
 
         public string Name => "api2json";

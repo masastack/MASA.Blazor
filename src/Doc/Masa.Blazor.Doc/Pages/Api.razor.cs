@@ -165,7 +165,8 @@ namespace Masa.Blazor.Doc.Pages
             "MUpload",
             "MVirtualScroll",
             "MWindow",
-            "MWindowItem"
+            "MWindowItem",
+            "MUploadImage"
         };
 
         [Inject]

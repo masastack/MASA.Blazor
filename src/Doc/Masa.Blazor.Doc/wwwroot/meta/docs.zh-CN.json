@@ -3692,6 +3692,35 @@
       },
       {
         "Order": 0,
+        "Title": "MUploadImage",
+        "FullTitle": "MUploadImage",
+        "Type": "menuItem",
+        "Url": "api/muploadimage",
+        "Contents": [
+          {
+            "Id": "section-292649107",
+            "Title": "组件页面",
+            "Level": 0
+          },
+          {
+            "Id": "section-3122241",
+            "Title": "属性",
+            "Level": 0
+          },
+          {
+            "Id": "section-3374707",
+            "Title": "插槽",
+            "Level": 0
+          },
+          {
+            "Id": "section-2654231",
+            "Title": "事件",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
         "Title": "MVirtualScroll",
         "FullTitle": "MVirtualScroll",
         "Type": "menuItem",
@@ -4811,6 +4840,15 @@
         "Type": "menuItem",
         "Url": "components/treeview",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Treeview.svg",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "UploadImage",
+        "SubTitle": "图片上传",
+        "FullTitle": "UploadImage (图片上传)",
+        "Type": "menuItem",
+        "Url": "components/uploadimage",
         "Children": []
       },
       {

@@ -29576,3 +29576,13 @@ html.overflow-y-hidden {
     right: 0;
 }
 
+.m-uploadImage {
+    cursor: pointer;
+}
+.m-uploadImage input[type=file] {
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    max-width: 0;
+}
+

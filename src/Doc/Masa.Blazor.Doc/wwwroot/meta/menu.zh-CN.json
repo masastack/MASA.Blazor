@@ -1035,6 +1035,15 @@
       },
       {
         "Order": 0,
+        "Title": "UploadImage",
+        "SubTitle": "图片上传",
+        "FullTitle": "UploadImage (图片上传)",
+        "Type": "menuItem",
+        "Url": "components/uploadimage",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Virtual scroller",
         "SubTitle": "虚拟滚动条",
         "FullTitle": "Virtual scroller (虚拟滚动条)",
@@ -4626,6 +4635,35 @@
         "FullTitle": "MTreeviewNode",
         "Type": "menuItem",
         "Url": "api/mtreeviewnode",
+        "Contents": [
+          {
+            "Id": "section-292649107",
+            "Title": "组件页面",
+            "Level": 0
+          },
+          {
+            "Id": "section-3122241",
+            "Title": "属性",
+            "Level": 0
+          },
+          {
+            "Id": "section-3374707",
+            "Title": "插槽",
+            "Level": 0
+          },
+          {
+            "Id": "section-2654231",
+            "Title": "事件",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
+        "Title": "MUploadImage",
+        "FullTitle": "MUploadImage",
+        "Type": "menuItem",
+        "Url": "api/muploadimage",
         "Contents": [
           {
             "Id": "section-292649107",

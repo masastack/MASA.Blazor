@@ -1,0 +1,62 @@
+﻿{
+  "Title": "MUploadImage",
+  "Components": [
+    "MUploadImage"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "DefaultImageUrl",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "MaximumFileCount",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "Multiple",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "PreviewImageHeight",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "PreviewImageWith",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "The style applied to the outermost element of the component"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment<List`1>",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnChange",
+      "Type": "EventCallback<IReadOnlyList`1>",
+      "Description": ""
+    }
+  ]
+}

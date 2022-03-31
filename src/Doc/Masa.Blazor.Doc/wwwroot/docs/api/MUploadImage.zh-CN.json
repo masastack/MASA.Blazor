@@ -1,0 +1,62 @@
+﻿{
+  "Title": "MUploadImage",
+  "Components": [
+    "MUploadImage"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "DefaultImageUrl",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "MaximumFileCount",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "Multiple",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "PreviewImageHeight",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "PreviewImageWith",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的style"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment<List`1>",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnChange",
+      "Type": "EventCallback<IReadOnlyList`1>",
+      "Description": ""
+    }
+  ]
+}
