@@ -2,7 +2,7 @@
 order: 0
 title:
   zh-CN: 异常处理
-  en-US: ErrorHandler
+  en-US: Error handler
 ---
 
 ## zh-CN

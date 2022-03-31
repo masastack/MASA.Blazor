@@ -1,7 +1,7 @@
 ---
 category: Components
 type: ErrorHandler
-title: ErrorHandler
+title: Error handler
 cols: 1
 ---
 

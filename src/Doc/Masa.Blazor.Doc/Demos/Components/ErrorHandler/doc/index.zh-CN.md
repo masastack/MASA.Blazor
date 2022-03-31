@@ -2,7 +2,7 @@
 category: Components
 subtitle: 异常处理
 type: 异常处理
-title: ErrorHandler
+title: Error handler
 cols: 1
 ---
 

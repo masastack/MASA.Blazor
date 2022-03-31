@@ -643,3 +643,7 @@ code[class*=language-], pre[class*=language-] {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+.m-snack__content {
+    word-break: break-word;
+}
