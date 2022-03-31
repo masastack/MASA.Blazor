@@ -38,7 +38,6 @@ namespace Masa.Blazor
                 {
                     await PopupService.AlertAsync(alert =>
                     {
-                        alert.Timeout = 10000000;
                         alert.Top = true;
                         alert.Type = AlertTypes.Error;
                         alert.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
