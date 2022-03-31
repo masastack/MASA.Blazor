@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-自定义异常处理`Func<Exception,Task>`。
+自定义异常处理`Func<Exception,Task>`，点击按钮触发异常后，按钮背景色变为红色。
 
 ## en-US
 
-Custom exception handling `Func<Exception, Task >`.
+Custom exception handling `Func<Exception, Task >`, after clicking the button triggers the exception, the button background color changes to red.

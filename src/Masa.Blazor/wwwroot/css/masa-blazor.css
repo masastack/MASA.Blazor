@@ -27818,6 +27818,7 @@ html.overflow-y-hidden {
     margin-right: auto;
     padding: 14px 16px;
     text-align: initial;
+    word-break: break-word;
 }
 .m-snack__action {
     align-items: center;
