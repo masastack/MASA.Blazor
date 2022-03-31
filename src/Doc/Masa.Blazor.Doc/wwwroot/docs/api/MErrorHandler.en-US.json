@@ -1,7 +1,7 @@
 ﻿{
   "Title": "MErrorHandler",
   "Components": [
-    "ErrorHandler"
+    "Error handler"
   ],
   "Props": [
     {
