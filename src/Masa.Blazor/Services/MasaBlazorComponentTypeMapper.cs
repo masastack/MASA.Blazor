@@ -43,7 +43,7 @@
             { typeof(BSubheader), typeof(MSubheader) },
             { typeof(BTab), typeof(MTab) },
 
-    };
+        };
         private readonly Dictionary<Type, Type> _genericMapper = new()
         {
             { typeof(BSelectList<,,>), typeof(MSelectList<,,>) },
