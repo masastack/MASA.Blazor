@@ -352,6 +352,23 @@
   },
   {
     "Order": 16,
+    "Title": "异常处理",
+    "FullTitle": "异常处理",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "ErrorHandler",
+        "SubTitle": "异常处理",
+        "FullTitle": "ErrorHandler (异常处理)",
+        "Type": "menuItem",
+        "Url": "components/errorhandler",
+        "Children": []
+      }
+    ]
+  },
+  {
+    "Order": 17,
     "Title": "图表",
     "FullTitle": "图表",
     "Type": "itemGroup",
@@ -369,7 +386,7 @@
     ]
   },
   {
-    "Order": 17,
+    "Order": 18,
     "Title": "富文本编辑器",
     "FullTitle": "富文本编辑器",
     "Type": "itemGroup",
@@ -386,7 +403,7 @@
     ]
   },
   {
-    "Order": 18,
+    "Order": 19,
     "Title": "扩展面板",
     "FullTitle": "扩展面板",
     "Type": "itemGroup",
@@ -404,7 +421,7 @@
     ]
   },
   {
-    "Order": 19,
+    "Order": 20,
     "Title": "页脚",
     "FullTitle": "页脚",
     "Type": "itemGroup",
@@ -421,7 +438,7 @@
     ]
   },
   {
-    "Order": 20,
+    "Order": 21,
     "Title": "表单和控制",
     "FullTitle": "表单和控制",
     "Type": "itemGroup",
@@ -479,8 +496,8 @@
           {
             "Order": 0,
             "Title": "OTP Input",
-            "SubTitle": "OTP Input",
-            "FullTitle": "OTP Input (OTP Input)",
+            "SubTitle": "一次性密码输入",
+            "FullTitle": "OTP Input (一次性密码输入)",
             "Type": "menuItem",
             "Url": "components/otp-input"
           },
@@ -551,7 +568,7 @@
     ]
   },
   {
-    "Order": 21,
+    "Order": 22,
     "Title": "网格系统",
     "FullTitle": "网格系统",
     "Type": "itemGroup",
@@ -569,7 +586,7 @@
     ]
   },
   {
-    "Order": 22,
+    "Order": 23,
     "Title": "组",
     "FullTitle": "组",
     "Type": "itemGroup",
@@ -637,7 +654,7 @@
     ]
   },
   {
-    "Order": 23,
+    "Order": 24,
     "Title": "悬停",
     "FullTitle": "悬停",
     "Type": "itemGroup",
@@ -654,7 +671,7 @@
     ]
   },
   {
-    "Order": 24,
+    "Order": 25,
     "Title": "图标",
     "FullTitle": "图标",
     "Type": "itemGroup",
@@ -672,7 +689,7 @@
     ]
   },
   {
-    "Order": 25,
+    "Order": 26,
     "Title": "图像",
     "FullTitle": "图像",
     "Type": "itemGroup",
@@ -689,7 +706,7 @@
     ]
   },
   {
-    "Order": 26,
+    "Order": 27,
     "Title": "列表",
     "FullTitle": "列表",
     "Type": "itemGroup",
@@ -702,23 +719,6 @@
         "Type": "menuItem",
         "Url": "components/lists",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg",
-        "Children": []
-      }
-    ]
-  },
-  {
-    "Order": 27,
-    "Title": "Markdown编辑器",
-    "FullTitle": "Markdown编辑器",
-    "Type": "itemGroup",
-    "Children": [
-      {
-        "Order": 0,
-        "Title": "Markdown",
-        "SubTitle": "Markdown编辑器",
-        "FullTitle": "Markdown (Markdown编辑器)",
-        "Type": "menuItem",
-        "Url": "components/markdown",
         "Children": []
       }
     ]

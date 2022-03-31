@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace Masa.Blazor
 {
-    public partial class MNavigationDrawer : BNavigationDrawer, INavigationDrawer, IHandleEvent
+    public partial class MNavigationDrawer : BNavigationDrawer, INavigationDrawer
     {
         private readonly string[] _applicationProperties = new string[]
         {
@@ -446,11 +446,6 @@ namespace Masa.Blazor
             {
                 ZIndex = await GetActiveZIndexAsync();
             }
-        }
-
-        async Task IHandleEvent.HandleEventAsync(EventCallbackWorkItem item, object arg)
-        {
-            await item.InvokeAsync(arg);
         }
 
         public override Task HandleOnClickAsync(MouseEventArgs e)

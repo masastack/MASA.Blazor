@@ -1,7 +1,7 @@
 ---
 category: Components
-subtitle: OTP Input
-type: OTPInput
+subtitle: 一次性密码输入
+type: 一次性密码输入
 title: OTP Input
 cols: 1
 related:
@@ -10,7 +10,7 @@ related:
   - /components/forms
 ---
 
-The OTP input is used for MFA procedure of authenticating users by a one-time password.
+该组件是用于MFA校验的一次性密码输入组件
 
 ## API
 

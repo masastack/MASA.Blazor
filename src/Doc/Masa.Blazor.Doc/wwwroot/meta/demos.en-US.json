@@ -326,6 +326,22 @@
   },
   {
     "Order": 16,
+    "Title": "ErrorHandler",
+    "FullTitle": "ErrorHandler",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "ErrorHandler",
+        "FullTitle": "ErrorHandler",
+        "Type": "menuItem",
+        "Url": "components/errorhandler",
+        "Children": []
+      }
+    ]
+  },
+  {
+    "Order": 17,
     "Title": "ECharts",
     "FullTitle": "ECharts",
     "Type": "itemGroup",
@@ -342,7 +358,7 @@
     ]
   },
   {
-    "Order": 17,
+    "Order": 18,
     "Title": "Editor",
     "FullTitle": "Editor",
     "Type": "itemGroup",
@@ -358,7 +374,7 @@
     ]
   },
   {
-    "Order": 18,
+    "Order": 19,
     "Title": "ExpansionPanels",
     "FullTitle": "ExpansionPanels",
     "Type": "itemGroup",
@@ -375,7 +391,7 @@
     ]
   },
   {
-    "Order": 19,
+    "Order": 20,
     "Title": "Footers",
     "FullTitle": "Footers",
     "Type": "itemGroup",
@@ -391,7 +407,7 @@
     ]
   },
   {
-    "Order": 20,
+    "Order": 21,
     "Title": "FormInputs",
     "FullTitle": "FormInputs",
     "Type": "itemGroup",
@@ -507,7 +523,7 @@
     ]
   },
   {
-    "Order": 21,
+    "Order": 22,
     "Title": "Grid",
     "FullTitle": "Grid",
     "Type": "itemGroup",
@@ -524,7 +540,7 @@
     ]
   },
   {
-    "Order": 22,
+    "Order": 23,
     "Title": "Groups",
     "FullTitle": "Groups",
     "Type": "itemGroup",
@@ -585,7 +601,7 @@
     ]
   },
   {
-    "Order": 23,
+    "Order": 24,
     "Title": "Hover",
     "FullTitle": "Hover",
     "Type": "itemGroup",
@@ -601,7 +617,7 @@
     ]
   },
   {
-    "Order": 24,
+    "Order": 25,
     "Title": "Icon",
     "FullTitle": "Icon",
     "Type": "itemGroup",
@@ -618,7 +634,7 @@
     ]
   },
   {
-    "Order": 25,
+    "Order": 26,
     "Title": "Image",
     "FullTitle": "Image",
     "Type": "itemGroup",
@@ -634,7 +650,7 @@
     ]
   },
   {
-    "Order": 26,
+    "Order": 27,
     "Title": "List",
     "FullTitle": "List",
     "Type": "itemGroup",
@@ -646,22 +662,6 @@
         "Type": "menuItem",
         "Url": "components/lists",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg",
-        "Children": []
-      }
-    ]
-  },
-  {
-    "Order": 27,
-    "Title": "Markdown",
-    "FullTitle": "Markdown",
-    "Type": "itemGroup",
-    "Children": [
-      {
-        "Order": 0,
-        "Title": "Markdown",
-        "FullTitle": "Markdown",
-        "Type": "menuItem",
-        "Url": "components/markdown",
         "Children": []
       }
     ]
