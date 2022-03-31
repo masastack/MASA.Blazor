@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
- ``true``显示，``false``不显示，默认显示
+ `true`显示，`false`不显示，默认显示
 
 ## en-US
 
-``true`` is displayed, ``false`` is not displayed, and the default is displayed
+`true` is displayed, `false` is not displayed, and the default is displayed

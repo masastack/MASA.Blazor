@@ -8,17 +8,17 @@ namespace Masa.Blazor
         [Inject]
         protected ILogger<MErrorHandler> Logger { get; set; }
 
-        [Parameter]
-        public Func<Exception, Task> OnErrorHandleAsync { get; set; }
-
         [Inject]
         public IPopupService PopupService { get; set; }
+
+        [Parameter]
+        public Func<Exception, Task> OnErrorHandleAsync { get; set; }
 
         [Parameter]
         public bool ShowAlert { get; set; } = true;
 
         [Parameter]
-        public bool ShowDetail { get; set; } = false;
+        public bool ShowDetail { get; set; }
 
         protected override void OnParametersSet()
         {

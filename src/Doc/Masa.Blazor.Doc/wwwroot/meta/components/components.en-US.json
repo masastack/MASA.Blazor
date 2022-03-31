@@ -1868,7 +1868,7 @@
         "Name": "onErrorHandleAsync",
         "Title": "onErrorHandleAsync",
         "Description": "<p>Custom exception handling <code>Func&lt;Exception, Task &gt;</code>.</p>\n",
-        "Code": "<MErrorHandler OnErrorHandleAsync=\"CustomErrorHandleAsync\">\r\n    <MButton @onclick=\"BtnClick\" Color=\"@color\">custom handler exception test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private string color = \"black\";\r\n\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n\r\n    private async Task CustomErrorHandleAsync(Exception exception)\r\n    {\r\n        //todo\r\n        color = \"red\";\r\n        await Task.CompletedTask;\r\n    }\r\n}",
+        "Code": "<MErrorHandler OnErrorHandleAsync=\"CustomErrorHandleAsync\">\r\n    <MButton @onclick=\"BtnClick\" Color=\"@color\">custom handler exception test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private string color = \"white\";\r\n\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n\r\n    private async Task CustomErrorHandleAsync(Exception exception)\r\n    {\r\n        //todo\r\n        color = \"red\";\r\n        await Task.CompletedTask;\r\n    }\r\n}",
         "Type": "Demos.Components.ErrorHandler.props.OnErrorHandleAsync",
         "Style": "",
         "Debug": false,
