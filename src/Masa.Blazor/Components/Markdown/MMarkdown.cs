@@ -63,9 +63,9 @@ namespace Masa.Blazor
 
         private IJSObjectReference VditorHelper { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            await base.OnInitializedAsync();
+            base.OnInitialized();
             Watcher
                 .Watch<string>(nameof(Value), async val =>
                 {
@@ -75,7 +75,6 @@ namespace Masa.Blazor
                         await SetValueAsync(_value, true);
                     }
                 });
-
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
