@@ -489,6 +489,15 @@
       },
       {
         "Order": 0,
+        "Title": "ErrorHandler",
+        "SubTitle": "异常处理",
+        "FullTitle": "ErrorHandler (异常处理)",
+        "Type": "menuItem",
+        "Url": "components/errorhandler",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Expansion panels",
         "SubTitle": "扩展面板",
         "FullTitle": "Expansion panels (扩展面板)",
@@ -562,8 +571,7 @@
             "SubTitle": "OTP Input",
             "FullTitle": "OTP Input (OTP Input)",
             "Type": "menuItem",
-            "Url": "components/otp-input",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg"
+            "Url": "components/otp-input"
           },
           {
             "Order": 0,
@@ -2356,6 +2364,35 @@
         "FullTitle": "MEditor",
         "Type": "menuItem",
         "Url": "api/meditor",
+        "Contents": [
+          {
+            "Id": "section-292649107",
+            "Title": "组件页面",
+            "Level": 0
+          },
+          {
+            "Id": "section-3122241",
+            "Title": "属性",
+            "Level": 0
+          },
+          {
+            "Id": "section-3374707",
+            "Title": "插槽",
+            "Level": 0
+          },
+          {
+            "Id": "section-2654231",
+            "Title": "事件",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
+        "Title": "MErrorHandler",
+        "FullTitle": "MErrorHandler",
+        "Type": "menuItem",
+        "Url": "api/merrorhandler",
         "Contents": [
           {
             "Id": "section-292649107",

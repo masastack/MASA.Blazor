@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7230675+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7732685+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -194,7 +194,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7240663+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7742686+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -227,7 +227,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7280521+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7752684+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -327,7 +327,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.730045+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7762684+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -404,7 +404,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7320367+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7782685+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -494,7 +494,7 @@
       "功能组件": "\n<ul>\n<li><code>MAppBarNavIcon</code>：专门为与 <a href=\"/components/toolbars\">MToolbar</a> 和 <code>MAppBar</code> 一起使用而创建的样式化图标按钮组件。 在工具栏的左侧显示为汉堡菜单，它通常用于控制导航抽屉的状态。 默认插槽可以用于自定义此组件的图标和功能。</li>\n<li><code>MAppBarTitle</code>：修改过的 <a href=\"/components/toolbars\">MToolbarTitle</a> 组件 ，用于配合 <strong>ShrinkOnScroll</strong> 属性使用。 在小屏幕上，<strong>MToolbarTitle</strong>\n将被截断，但这个组件在展开时使用了绝对定位使其内容可见。 我们不建议您在没有使用 <strong>ShrinkOnScroll</strong> 属性时使用 <code>MAppBarTitle</code> 组件。确实是因为向此组件添加了resize事件，并进行了很多额外的计算。</li>\n</ul>\n",
       "注意事项": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <strong>Icon</strong> 属性的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将按钮包装在任何容器例如<code>div</code>中，则需要对该容器应用负边距，以便正确对齐它们。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7370217+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7802684+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -649,7 +649,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7390133+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7822685+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -727,7 +727,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <code>Icon</code> prop的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将您的按钮包装在任何容器中，例如<code>div</code>， 您需要对容器应用负边距，以便正确对齐。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.743962+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7842685+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -881,7 +881,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7459552+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7852684+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -925,7 +925,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBottomSheet\">MBottomSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-21T11:17:36.997464+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7862685+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1014,7 +1014,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>默认情况下，<code>MBreadcrumbs</code> 将禁用路由联动。可以通过 <strong>Linkage</strong> 属性开启路由联动。</p>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7484366+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7882685+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1104,7 +1104,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p>当使用 <strong>Dark</strong> 属性时，<code>MButton</code> 是唯一一种拥有不同行为的组件。 通常来说，组件使用 <strong>Dark</strong> 属性来表示他们将有深色背景，文本也需要是白色的。 虽然这对\n<code>MButton</code> 也是起作用的，但由于禁用状态与白色背景容易造成混淆，建议仅在按钮<strong>为</strong>彩色背景时使用此属性。 If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7534243+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7902685+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1271,7 +1271,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "功能组件": "\n<ul>\n<li><code>MCardActions</code>：用于为卡片放置 动作 的容器，如 <a href=\"/components/buttons\">MButton</a> 或 <a href=\"/components/menus\">MMenu</a>。 同时在按钮上使用 个特殊边距\n，以便它们与其他卡片内容区域的匹配。</li>\n<li><code>MCardSubtitle</code>：为卡片字幕提供默认的 <strong>字体大小</strong> 和 <strong>填充</strong>。 字体大小可以以 <a href=\"/stylesandanimations/text-and-typography\">排版类</a> 覆盖。</li>\n<li><code>MCardText</code>：主要用于卡片中的 <strong>文本内容</strong>。 对文本应用填充，将其字体大小减少为 .875rem。</li>\n<li><code>MCardTitle</code>：为卡片字幕提供默认的 字体大小 和 填充。 字体大小可以以 <a href=\"/stylesandanimations/text-and-typography\">排版类</a> 覆盖。</li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.75841+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7922685+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1426,7 +1426,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7630157+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7952684+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1614,7 +1614,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7673271+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7972684+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1746,7 +1746,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7692466+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7992684+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1824,7 +1824,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7712418+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.7992684+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1870,12 +1870,179 @@
     "FullTitle": "ECharts（图表）"
   },
   {
+    "Desc": "<p><a href=\"https://quilljs.com/\">Editor</a> 基于quilljs封装的富文本编辑器</p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "css文件": "\n<pre><code class=\"language-html\">&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.snow.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.bubble.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown-common-style.css&quot; rel=&quot;stylesheet&quot;&gt;\n</code></pre>\n",
+      "js文件": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
+      "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-03-31T10:53:32.9753679+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "basic",
+        "Title": "使用",
+        "Description": "<p>富文本编辑器示例</p>\n",
+        "Code": "<MEditor @bind-Value=\"EditorContent\">\r\n</MEditor>\r\n<div>@EditorContent</div>\r\n@code{\r\n    string EditorContent=\"Hello MEditor!\";\r\n}\r\n\r\n",
+        "Type": "Demos.Components.Editor.usage.Basic",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "height",
+        "Title": "自定义高度",
+        "Description": "<p>通过 <strong>ElementStyle</strong> 属性设置高度</p>\n",
+        "Code": "<MEditor ContentStyle=\"height:200px\">\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.Height",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "markdown",
+        "Title": "markdown",
+        "Description": "<p>支持markdown解析。</p>\n",
+        "Code": "<MEditor Markdown>\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.Markdown",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "placeholder",
+        "Title": "自定义提示信息",
+        "Description": "<p>通过设置 Placeholder 属性来设置空值时的提示消息。</p>\n",
+        "Code": "<MEditor Placeholder=\"please input\">\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.Placeholder",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "readOnly",
+        "Title": "只读",
+        "Description": "<p>是否将编辑器实例设置为只读模式。</p>\n",
+        "Code": "<MEditor ReadOnly>\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.ReadOnly",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "theme",
+        "Title": "主题",
+        "Description": "<p>使用主题的名称。这个内置的选项是&quot;bubble&quot;或&quot;snow&quot;。注意，主题的样式表任需要手动包含。</p>\n",
+        "Code": "<MEditor Theme=\"bubble\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.Theme",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "toolBar",
+        "Title": "自定义工具栏",
+        "Description": "<p>通过ToolbarContent插槽自定义工具栏。</p>\n",
+        "Code": "<MEditor>\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.ToolBar",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 5,
+        "Name": "method",
+        "Title": "方法",
+        "Description": "<p>一些方法示例。</p>\n",
+        "Code": "<MEditor @ref=\"@Editor\" @bind-Value=\"EditorContent\" Placeholder=\"请输入内容\" ContentStyle=\"height:100px\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>\r\n<MRow Align=\"@AlignTypes.Center\"\r\n      Justify=\"@JustifyTypes.SpaceAround\" Class=\"mt-10\">\r\n      <MButton Depressed Color=\"primary\" @onclick=\"GetTextAsync\">\r\n        获取文本\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetContentAsync\">\r\n        获取内容\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetHtmlAsync\">\r\n        获取html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"SetHtmlAsync\">\r\n        设置html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"DisableAsync\">\r\n        禁用\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"EnableAsync\">\r\n        启用\r\n    </MButton>\r\n</MRow>\r\n<MAlert Border=\"Borders.Top\"\r\n            ColoredBorder\r\n            Type=\"AlertTypes.Info\"\r\n            Elevation=\"2\" \r\n            Class=\"mt-10\">\r\n        @ViewContent\r\n</MAlert>\r\n\r\n@code {\r\n    private MEditor Editor { get; set; }\r\n    private string EditorContent { get; set; } = @\"Hello MEditor\";\r\n    private string ViewContent { get; set; }\r\n\r\n    public async Task GetTextAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetTextAsync();\r\n    }\r\n    public async Task GetContentAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetContentAsync();\r\n    }\r\n    public async Task GetHtmlAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetHtmlAsync();\r\n    }\r\n\r\n    public async Task SetHtmlAsync()\r\n    {\r\n        string html =\r\n            @\"<a href='https://www.baidu.com/'>\" +\r\n            \"<img src='https://www.baidu.com/img/flexible/logo/pc/result.png' /></a>\";\r\n\r\n        await this.Editor.SetHtmlAsync(html);\r\n    }\r\n    public async Task DisableAsync()\r\n    {\r\n        await this.Editor.DisableAsync();\r\n    }\r\n    public async Task EnableAsync()\r\n    {\r\n        await this.Editor.EnableAsync();\r\n    }\r\n}",
+        "Type": "Demos.Components.Editor.misc.Method",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Subtitle": "富文本编辑器",
+    "Title": "Editor",
+    "Type": "富文本编辑器",
+    "FullTitle": "Editor（富文本编辑器）"
+  },
+  {
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MErrorHandler\">MErrorHandler</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-03-29T17:21:40.7967846+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "异常处理",
+        "Description": "<p>异常统一处理。</p>\n",
+        "Code": "<MErrorHandler>\r\n    <MButton @onclick=\"BtnClick\">Throw test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
+        "Type": "Demos.Components.ErrorHandler.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "onErrorHandleAsync",
+        "Title": "自定义异常处理",
+        "Description": "<p>自定义异常处理<code>Func&lt;Exception,Task&gt;</code>。</p>\n",
+        "Code": "<MErrorHandler OnErrorHandleAsync=\"CustomErrorHandleAsync\">\r\n    <MButton @onclick=\"BtnClick\" Color=\"@color\">Custom handler exception test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private string color = \"white\";\r\n\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n\r\n    private async Task CustomErrorHandleAsync(Exception exception)\r\n    {\r\n        //todo\r\n        color = \"red\";\r\n        await Task.CompletedTask;\r\n    }\r\n}",
+        "Type": "Demos.Components.ErrorHandler.props.OnErrorHandleAsync",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "showAlert",
+        "Title": "是否显示告警",
+        "Description": "<p><code>true</code>显示，<code>false</code>不显示，默认显示</p>\n",
+        "Code": "<MSwitch @bind-Value=\"_isShow\" Label=\"@($\"Show: {_isShow}\")\"></MSwitch>\r\n<MErrorHandler ShowAlert=\"_isShow\">\r\n    <MButton @onclick=\"BtnClick\">Throw test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private bool _isShow = true;\r\n\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
+        "Type": "Demos.Components.ErrorHandler.props.ShowAlert",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "showDetail",
+        "Title": "是否显示异常详细信息",
+        "Description": "<p><code>true</code> 显示，<code>false</code> 不显示， 默认不显示</p>\n",
+        "Code": "<MSwitch @bind-Value=\"_isShow\" Label=\"@($\"ShowDetail: {_isShow}\")\"></MSwitch>\r\n<MErrorHandler ShowDetail=\"_isShow\">\r\n    <MButton @onclick=\"BtnClick\">Throw test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private bool _isShow = false;\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
+        "Type": "Demos.Components.ErrorHandler.props.ShowDetail",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Subtitle": "异常处理",
+    "Title": "ErrorHandler",
+    "Type": "异常处理",
+    "FullTitle": "ErrorHandler（异常处理）"
+  },
+  {
     "Desc": "<p><code>MExpansionPanel</code> 组件有助于减少大量信息的垂直空间占用。 组件的默认功能是仅显示一个扩展面板； 然而，使用 <strong>Multiple</strong> 属性后，扩展面板可以保持打开，直到显式地关闭。</p>\n",
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7754585+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8022685+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2008,7 +2175,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7774542+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8032685+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2086,7 +2253,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7814173+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8052684+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2197,7 +2364,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7834112+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8062686+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2263,7 +2430,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7864007+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8072685+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2351,7 +2518,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.790668+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8102685+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2495,7 +2662,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7936898+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8112685+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2573,7 +2740,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOtpInput\">MOtpInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T14:03:42.8589214+08:00",
+    "LastWriteTime": "2022-03-31T10:53:32.9763691+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2613,7 +2780,7 @@
         "Name": "hiddenInput",
         "Title": "Hidden input",
         "Description": "<p>The entered value can be hidden with type=&quot;password&quot;</p>\n",
-        "Code": "<div class=\"ma-auto\" style=\"max-width: 260px\">\r\n    <MOtpInput @OtpValue=\"@otp\" Type=\"BOtpInputType.Password\" Length=\"5\" Dark></MOtpInput>\r\n</div>\r\n@code {\r\n    string otp = \"\";\r\n}",
+        "Code": "<div class=\"ma-auto\" style=\"max-width: 260px\">\r\n    <MOtpInput @OtpValue=\"@otp\" Type=\"OtpInputType.Password\" Length=\"5\" Dark></MOtpInput>\r\n</div>\r\n@code {\r\n    string otp = \"\";\r\n}",
         "Type": "Demos.Components.FormInputs.children.OtpInput.props.HiddenInput",
         "Style": "",
         "Debug": false,
@@ -2622,7 +2789,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg",
     "Cols": 1,
     "Related": [
       "/components/textareas",
@@ -2640,7 +2806,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadioGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7966499+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8122686+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2718,7 +2884,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.7986432+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8138789+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2808,7 +2974,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8033625+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8165948+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2951,7 +3117,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8083453+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8191757+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3139,7 +3305,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8113352+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8211756+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3239,7 +3405,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8227623+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8271755+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3372,7 +3538,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8197342+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8251755+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3651,7 +3817,7 @@
       "辅助类": "\n<p><strong>FillHeight</strong>将<code>height:100%</code>应用于元素。当应用于<code>MContainer</code>时，它还包括<code>align items:center</code>。</p>\n",
       "注意": "\n<!--alert:info--> \n<p>1.x 网格系统已被废弃，请改用 2.x 网格系统。 1.x 网格的文档可以在 v1.5 文档 中找到。</p>\n<!--alert:info--> \n<!--alert:info--> \n<p>网格组件上基于断点的属性以 <code>andUp</code> 的方式工作。 考虑 <strong>xs</strong> 断点已经被删除的情况， 这将会影响到 <strong>offset</strong>、<strong>justify</strong>、<strong>align</strong> 和 <code>MCol</code> 上的断点属性。</p>\n<ul>\n<li>像 <strong>justify-sm</strong> 和 <strong>justify-md</strong> 这样的属性仍然存在，但 <strong>justify-xs</strong> 会变成 <strong>justify</strong>。</li>\n<li><code>MCol</code> 上不存在 <strong>xs</strong> 属性。 与此对应的是 <strong>cols</strong> 属性。</li>\n</ul>\n<!--alert:info--> \n<!--alert:info--> \n<p>当在 IE11 使用网格系统时，你需要设置一个显式的 <code>height</code>，因为 <code>min-height</code> 不足进而导致非预期结果。</p>\n<!--alert:info--> \n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8303832+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8311755+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3883,7 +4049,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8323449+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8321754+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3972,7 +4138,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8363318+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8341757+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4072,7 +4238,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8386973+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8361759+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4161,7 +4327,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8413766+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8377243+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4249,7 +4415,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8443684+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8388592+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4348,7 +4514,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.846362+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8408654+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4436,7 +4602,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8483552+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.841863+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4502,7 +4668,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8513453+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8428628+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4592,7 +4758,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>MImage 组件使用 Intersect 指令，IE11 和 Safari需要 Polyfill。 如果检测到浏览器不支持此功能, 图像仍将以正常方式加载。</p>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.854045+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8448628+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4692,7 +4858,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>如果您要查找有状态列表项，请查看 <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>。</p>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8603139+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8478629+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4902,7 +5068,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8656185+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8498628+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5079,7 +5245,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MNavigationDrawer\">MNavigationDrawer</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error-->\n<p>如果使用启用了 <strong>App</strong> 属性的 <code>MNavigationDrawer</code>，则不需要像示例中那样使用 <strong>Absolute</strong> 属性。</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p><strong>ExtensionOnHover</strong> 参数不会改变<strong>MMain</strong>的内容区域。 要使内容区域响应<strong>ExtensionOnHover</strong>，请绑定<strong>OnMiniVariantUpdate</strong> 到数据。</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8692826+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8528629+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5212,7 +5378,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8717741+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8538626+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5300,7 +5466,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8734003+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8548627+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5389,7 +5555,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8804476+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8588628+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5633,7 +5799,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8848841+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8608628+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5777,7 +5943,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.8888715+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8638627+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5952,7 +6118,7 @@
     "Desc": "<p>将相同类型的两个数据并列显示。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.8908641+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8648628+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6005,7 +6171,7 @@
     "Desc": "<p>在文本后提供可以复制内容的图标按钮。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.8928592+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8658627+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6079,7 +6245,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.8968135+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8678628+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6187,7 +6353,7 @@
     "Desc": "<p>需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 <code>Modal</code> 在当前页面正中打开一个浮层，承载相应的操作。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.8992017+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8688618+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6283,7 +6449,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.9005755+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.869863+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6336,7 +6502,7 @@
     "Desc": "<p>提供全局服务调用Alert、Confirm和Prompt等弹出层组件。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-21T11:17:37.0080674+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.869863+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6391,7 +6557,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9055907+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8718628+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6468,7 +6634,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9096004+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8748633+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6633,7 +6799,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9115936+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8758631+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6743,7 +6909,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9135872+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8768631+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -6799,7 +6965,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9156329+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8778629+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6844,7 +7010,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9178321+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8788636+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6921,7 +7087,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.922706+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8818631+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7087,7 +7253,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9245139+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8828626+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7164,7 +7330,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9265415+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8838633+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7220,7 +7386,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n<li><a href=\"/api/MDataTableHeader\">MDataTableHeader</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9351814+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8878632+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7485,7 +7651,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9371766+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8888646+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7564,7 +7730,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当使用 <strong>Dark</strong> 属性和 <strong>不</strong> 提供自定义 <strong>Color</strong> 时，<code>MTabs</code>组件会将其颜色默认为 white。</p>\n<!--alert:warning-->\n<!--alert:warning-->\n<p>当使用包含必填输入字段的 <code>MTabItem</code> 时，你必须使用 <strong>eager</strong> prop 来验证尚未显示的必填字段。</p>\n<!--alert:warning-->\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9431841+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8918634+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7763,7 +7929,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9471716+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8938635+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7896,7 +8062,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>为了正确定位 <code>MTooltip</code>，需要一个位置支撑(<code>Top</code> | <code>Bottom</code> | <code>Left</code> | <code>Right</code>)。</p>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9491644+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8948634+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7952,7 +8118,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTreeview\">MTreeview</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9548816+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8978632+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8151,7 +8317,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-17T11:19:27.9558781+08:00",
+    "LastWriteTime": "2022-03-28T10:34:00.8988634+08:00",
     "DemoList": [
       {
         "Order": 0,
