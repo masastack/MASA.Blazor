@@ -30,21 +30,29 @@ namespace Masa.Blazor
         [Parameter]
         public Dictionary<string, object> Options { get; set; }
 
-        [Parameter] public EventCallback<string> ValueChanged { get; set; }
+        [Parameter]
+        public EventCallback<string> ValueChanged { get; set; }
 
-        [Parameter] public EventCallback<string> HtmlChanged { get; set; }
+        [Parameter]
+        public EventCallback<string> HtmlChanged { get; set; }
 
-        [Parameter] public EventCallback<string> OnFocus { get; set; }
+        [Parameter]
+        public EventCallback<string> OnFocus { get; set; }
 
-        [Parameter] public EventCallback<string> OnBlur { get; set; }
+        [Parameter]
+        public EventCallback<string> OnBlur { get; set; }
 
-        [Parameter] public EventCallback<string> OnEscPress { get; set; }
+        [Parameter]
+        public EventCallback<string> OnEscPress { get; set; }
 
-        [Parameter] public EventCallback<string> OnCtrlEnterPress { get; set; }
+        [Parameter]
+        public EventCallback<string> OnCtrlEnterPress { get; set; }
 
-        [Parameter] public EventCallback<string> OnSelect { get; set; }
+        [Parameter]
+        public EventCallback<string> OnSelect { get; set; }
 
-        [Parameter] public EventCallback<string> OnToolbarButtonClick { get; set; }
+        [Parameter]
+        public EventCallback<string> OnToolbarButtonClick { get; set; }
 
         private bool _editorRendered = false;
         private bool _wattingUpdate = false;
