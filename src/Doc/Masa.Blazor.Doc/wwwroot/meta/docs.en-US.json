@@ -1430,6 +1430,35 @@
       },
       {
         "Order": 0,
+        "Title": "MErrorHandler",
+        "FullTitle": "MErrorHandler",
+        "Type": "menuItem",
+        "Url": "api/merrorhandler",
+        "Contents": [
+          {
+            "Id": "section-389932261",
+            "Title": "Component Pages",
+            "Level": 0
+          },
+          {
+            "Id": "section-1029938464",
+            "Title": "Props",
+            "Level": 0
+          },
+          {
+            "Id": "section-444565322",
+            "Title": "Contents",
+            "Level": 0
+          },
+          {
+            "Id": "section-1613329801",
+            "Title": "Events",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
         "Title": "MExpansionPanel",
         "FullTitle": "MExpansionPanel",
         "Type": "menuItem",
@@ -4204,6 +4233,14 @@
         "FullTitle": "Editor",
         "Type": "menuItem",
         "Url": "components/editor",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "ErrorHandler",
+        "FullTitle": "ErrorHandler",
+        "Type": "menuItem",
+        "Url": "components/errorhandler",
         "Children": []
       },
       {

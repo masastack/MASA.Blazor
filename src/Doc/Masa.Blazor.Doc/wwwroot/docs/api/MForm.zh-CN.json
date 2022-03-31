@@ -19,7 +19,6 @@
     {
       "Name": "EnableValidation",
       "Type": "Boolean",
-      "Default": "false",
       "Description": ""
     },
     {
