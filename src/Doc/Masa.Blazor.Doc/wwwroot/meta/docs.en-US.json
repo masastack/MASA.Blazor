@@ -4266,10 +4266,10 @@
       },
       {
         "Order": 0,
-        "Title": "ErrorHandler",
-        "FullTitle": "ErrorHandler",
+        "Title": "Error handler",
+        "FullTitle": "Error handler",
         "Type": "menuItem",
-        "Url": "components/errorhandler",
+        "Url": "components/error-handler",
         "Children": []
       },
       {

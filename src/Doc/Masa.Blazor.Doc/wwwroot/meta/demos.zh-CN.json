@@ -358,11 +358,11 @@
     "Children": [
       {
         "Order": 0,
-        "Title": "ErrorHandler",
+        "Title": "Error handler",
         "SubTitle": "异常处理",
-        "FullTitle": "ErrorHandler (异常处理)",
+        "FullTitle": "Error handler (异常处理)",
         "Type": "menuItem",
-        "Url": "components/errorhandler",
+        "Url": "components/error-handler",
         "Children": []
       }
     ]

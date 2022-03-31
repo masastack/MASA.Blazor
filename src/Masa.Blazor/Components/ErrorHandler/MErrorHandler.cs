@@ -46,12 +46,6 @@ namespace Masa.Blazor
             }
         }
 
-        public async Task HandlerExceptionAsync(Exception exception)
-        {
-            await OnErrorAsync(exception);
-            StateHasChanged();
-        }
-
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             if (CurrentException is null || ShowAlert || OnErrorHandleAsync is not null)
