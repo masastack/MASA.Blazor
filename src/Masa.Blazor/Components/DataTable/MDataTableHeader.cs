@@ -116,7 +116,7 @@ namespace Masa.Blazor
                     attrs[nameof(MSimpleCheckbox.Value)] = EveryItem;
                     attrs[nameof(MSimpleCheckbox.Indeterminate)] = !EveryItem && SomeItems;
                     attrs[nameof(MSimpleCheckbox.Color)] = CheckboxColor;
-                    attrs[nameof(MSimpleCheckbox.OnInput)] = OnToggleSelectAll;
+                    attrs[nameof(MSimpleCheckbox.ValueChanged)] = OnToggleSelectAll;
                 })
                 .Apply<BIcon, MIcon>(attrs =>
                 {

@@ -5,7 +5,6 @@
         [Parameter]
         public string Color { get; set; }
 
-
         protected override void SetComponentClass()
         {
             CssProvider
