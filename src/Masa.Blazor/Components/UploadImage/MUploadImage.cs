@@ -19,7 +19,6 @@
                {
 
                });
-               //.Apply("progress", cssBuilder => { cssBuilder.Add("m-card__progress"); });
         }
     }
 }
