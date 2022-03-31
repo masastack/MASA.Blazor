@@ -139,6 +139,7 @@
   "Demos.Components.Editor.props.ReadOnly",
   "Demos.Components.Editor.props.Theme",
   "Demos.Components.Editor.props.ToolBar",
+  "Demos.Components.Editor.props.UploadPicture",
   "Demos.Components.Editor.misc.Method",
   "Demos.Components.ErrorHandler.usage.Index",
   "Demos.Components.ErrorHandler.props.OnErrorHandleAsync",
