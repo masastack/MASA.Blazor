@@ -1,0 +1,97 @@
+﻿{
+  "Title": "MEditor",
+  "Components": [
+    "Editor"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "ContentClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ContentStyle",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Markdown",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Placeholder",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ReadOnly",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Theme",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ToolbarClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ToolbarStyle",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "String",
+      "Description": ""
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ToolbarContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnBlur",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnFocus",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnReady",
+      "Type": "EventCallback<MouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    }
+  ]
+}

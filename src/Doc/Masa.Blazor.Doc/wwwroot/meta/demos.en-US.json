@@ -326,22 +326,6 @@
   },
   {
     "Order": 16,
-    "Title": "ErrorHandler",
-    "FullTitle": "ErrorHandler",
-    "Type": "itemGroup",
-    "Children": [
-      {
-        "Order": 0,
-        "Title": "ErrorHandler",
-        "FullTitle": "ErrorHandler",
-        "Type": "menuItem",
-        "Url": "components/errorhandler",
-        "Children": []
-      }
-    ]
-  },
-  {
-    "Order": 17,
     "Title": "ECharts",
     "FullTitle": "ECharts",
     "Type": "itemGroup",
@@ -353,6 +337,22 @@
         "Type": "menuItem",
         "Url": "components/echarts",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg",
+        "Children": []
+      }
+    ]
+  },
+  {
+    "Order": 17,
+    "Title": "Editor",
+    "FullTitle": "Editor",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "Editor",
+        "FullTitle": "Editor",
+        "Type": "menuItem",
+        "Url": "components/editor",
         "Children": []
       }
     ]
@@ -439,6 +439,14 @@
             "Type": "menuItem",
             "Url": "components/forms",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/From.svg"
+          },
+          {
+            "Order": 0,
+            "Title": "OTP Input",
+            "FullTitle": "OTP Input",
+            "Type": "menuItem",
+            "Url": "components/otp-input",
+            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg"
           },
           {
             "Order": 0,

@@ -41,7 +41,7 @@ docker:
   before_script:
     - docker login -u $CI_ALI_REGISTRY_USER -p $CI_ALI_REGISTRY_PASSWD $CI_ALI_REGISTRY_DOMAIN
   only:
-    - branches
+    - main
   script:
     - docker build -t $IMAGE .
     - docker push $IMAGE

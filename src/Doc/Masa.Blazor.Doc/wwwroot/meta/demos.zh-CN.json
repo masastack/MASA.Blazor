@@ -352,23 +352,6 @@
   },
   {
     "Order": 16,
-    "Title": "异常处理",
-    "FullTitle": "异常处理",
-    "Type": "itemGroup",
-    "Children": [
-      {
-        "Order": 0,
-        "Title": "ErrorHandler",
-        "SubTitle": "异常处理",
-        "FullTitle": "ErrorHandler (异常处理)",
-        "Type": "menuItem",
-        "Url": "components/errorhandler",
-        "Children": []
-      }
-    ]
-  },
-  {
-    "Order": 17,
     "Title": "图表",
     "FullTitle": "图表",
     "Type": "itemGroup",
@@ -381,6 +364,23 @@
         "Type": "menuItem",
         "Url": "components/echarts",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg",
+        "Children": []
+      }
+    ]
+  },
+  {
+    "Order": 17,
+    "Title": "富文本编辑器",
+    "FullTitle": "富文本编辑器",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "Editor",
+        "SubTitle": "富文本编辑器",
+        "FullTitle": "Editor (富文本编辑器)",
+        "Type": "menuItem",
+        "Url": "components/editor",
         "Children": []
       }
     ]
@@ -475,6 +475,15 @@
             "Type": "menuItem",
             "Url": "components/forms",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Form.svg"
+          },
+          {
+            "Order": 0,
+            "Title": "OTP Input",
+            "SubTitle": "OTP Input",
+            "FullTitle": "OTP Input (OTP Input)",
+            "Type": "menuItem",
+            "Url": "components/otp-input",
+            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg"
           },
           {
             "Order": 0,
