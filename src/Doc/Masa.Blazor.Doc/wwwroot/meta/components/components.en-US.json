@@ -1846,7 +1846,7 @@
     "FullTitle": "ECharts"
   },
   {
-    "Desc": "<p><a href=\"https://quilljs.com/\">Editor</a> Rich text editor based on quilljs encapsulation</p>\n",
+    "Desc": "<p>Rich text editor based on <a href=\"https://quilljs.com/\">Quill</a> encapsulation</p>\n",
     "Order": 0,
     "OtherDocs": {
       "CSS file": "\n<pre><code class=\"language-html\">&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.snow.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.bubble.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown-common-style.css&quot; rel=&quot;stylesheet&quot;&gt;\n</code></pre>\n",
@@ -1860,7 +1860,7 @@
         "Name": "basic",
         "Title": "Usage",
         "Description": "<p>Examples</p>\n",
-        "Code": "<MEditor @bind-Value=\"EditorContent\">\r\n</MEditor>\r\n<div>@EditorContent</div>\r\n@code{\r\n    string EditorContent=\"Hello MEditor!\";\r\n}\r\n\r\n",
+        "Code": "<MEditor @bind-Value=\"_editorContent\">\r\n</MEditor>\r\n<MAlert Border=\"Borders.Top\"\r\n        ColoredBorder\r\n        Type=\"AlertTypes.Info\"\r\n        Elevation=\"2\"\r\n        Class=\"overflow-auto mt-10\">\r\n    @_editorContent\r\n</MAlert>\r\n@code {\r\n    string _editorContent = \"Hello MEditor!\";\r\n}",
         "Type": "Demos.Components.Editor.usage.Basic",
         "Style": "",
         "Debug": false,
@@ -1892,7 +1892,7 @@
         "Order": 0,
         "Name": "placeholder",
         "Title": "Custom prompt message",
-        "Description": "<p>The prompt message when a null value is set by setting the Placeholder attribute.</p>\n",
+        "Description": "<p>The prompt message when a null value is set by setting the <strong>Placeholder</strong> attribute.</p>\n",
         "Code": "<MEditor Placeholder=\"please input\">\r\n</MEditor>",
         "Type": "Demos.Components.Editor.props.Placeholder",
         "Style": "",
@@ -1915,7 +1915,7 @@
         "Name": "theme",
         "Title": "Theme",
         "Description": "<p>Use the name of the topic. This built-in option is &quot;bubble&quot; or &quot;Snow&quot;. Note that the theme's style sheet needs to be included manually.</p>\n",
-        "Code": "<MEditor Theme=\"bubble\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>",
+        "Code": "<MEditor Theme=\"bubble\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header mt-2\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>",
         "Type": "Demos.Components.Editor.props.Theme",
         "Style": "",
         "Debug": false,
@@ -1925,9 +1925,20 @@
         "Order": 0,
         "Name": "toolBar",
         "Title": "Toolbar",
-        "Description": "<p>Customize toolbars through toolbarcontent slots.</p>\n",
-        "Code": "<MEditor>\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>",
+        "Description": "<p>Customize <strong>ToolbarContent</strong> through toolbarcontent slots.</p>\n",
+        "Code": "<MEditor>\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-image\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>",
         "Type": "Demos.Components.Editor.props.ToolBar",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "uploadPicture",
+        "Title": "UploadPicture",
+        "Description": "<p>This is just a demonstration of how to configure the <strong>Upload</strong> parameters. Please modify your upload API address.</p>\n",
+        "Code": "@using Masa.Blazor.Components.Editor;\r\n<MEditor @bind-Value=\"_editorContent\" Upload=\"_upload\">\r\n</MEditor>\r\n@code {\r\n    private string _editorContent = \"Hello MEditor!\";\r\n    private MEditorUpload _upload = new MEditorUpload\r\n    {\r\n        Action = \"api/upload\",//Please change your upload address\r\n        TokenName = \"authorization\",\r\n        Name=\"file\",\r\n        Accept = \"image/png, image/gif, image/jpeg, image/bmp, image/x-icon\",\r\n        PathKey=\"path\"\r\n    };\r\n}\r\n\r\n",
+        "Type": "Demos.Components.Editor.props.UploadPicture",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -1937,7 +1948,7 @@
         "Name": "method",
         "Title": "method",
         "Description": "<p>Some method examples.</p>\n",
-        "Code": "<MEditor @ref=\"@Editor\" @bind-Value=\"EditorContent\" Placeholder=\"请输入内容\" ContentStyle=\"height:100px\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>\r\n<MRow Align=\"@AlignTypes.Center\"\r\n      Justify=\"@JustifyTypes.SpaceAround\" Class=\"mt-10\">\r\n      <MButton Depressed Color=\"primary\" @onclick=\"GetTextAsync\">\r\n        获取文本\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetContentAsync\">\r\n        获取内容\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetHtmlAsync\">\r\n        获取html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"SetHtmlAsync\">\r\n        设置html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"DisableAsync\">\r\n        禁用\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"EnableAsync\">\r\n        启用\r\n    </MButton>\r\n</MRow>\r\n<MAlert Border=\"Borders.Top\"\r\n            ColoredBorder\r\n            Type=\"AlertTypes.Info\"\r\n            Elevation=\"2\" \r\n            Class=\"mt-10\">\r\n        @ViewContent\r\n</MAlert>\r\n\r\n@code {\r\n    private MEditor Editor { get; set; }\r\n    private string EditorContent { get; set; } = @\"Hello MEditor\";\r\n    private string ViewContent { get; set; }\r\n\r\n    public async Task GetTextAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetTextAsync();\r\n    }\r\n    public async Task GetContentAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetContentAsync();\r\n    }\r\n    public async Task GetHtmlAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetHtmlAsync();\r\n    }\r\n\r\n    public async Task SetHtmlAsync()\r\n    {\r\n        string html =\r\n            @\"<a href='https://www.baidu.com/'>\" +\r\n            \"<img src='https://www.baidu.com/img/flexible/logo/pc/result.png' /></a>\";\r\n\r\n        await this.Editor.SetHtmlAsync(html);\r\n    }\r\n    public async Task DisableAsync()\r\n    {\r\n        await this.Editor.DisableAsync();\r\n    }\r\n    public async Task EnableAsync()\r\n    {\r\n        await this.Editor.EnableAsync();\r\n    }\r\n}",
+        "Code": "<MEditor @ref=\"@_editor\" @bind-Value=\"_editorContent\" Placeholder=\"请输入内容\" ContentStyle=\"height:100px\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>\r\n<MRow Align=\"@AlignTypes.Center\"\r\n      Justify=\"@JustifyTypes.SpaceAround\" Class=\"mt-10\">\r\n      <MButton Depressed Color=\"primary\" @onclick=\"GetTextAsync\">\r\n        获取文本\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetContentAsync\">\r\n        获取内容\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetHtmlAsync\">\r\n        获取html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"SetHtmlAsync\">\r\n        设置html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"DisableAsync\">\r\n        禁用\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"EnableAsync\">\r\n        启用\r\n    </MButton>\r\n</MRow>\r\n<MAlert Border=\"Borders.Top\"\r\n            ColoredBorder\r\n            Type=\"AlertTypes.Info\"\r\n            Elevation=\"2\" \r\n            Class=\"overflow-auto mt-10\">\r\n        @_viewContent\r\n</MAlert>\r\n\r\n@code {\r\n    private MEditor _editor;\r\n    private string _editorContent = @\"Hello MEditor\";\r\n    private string _viewContent;\r\n\r\n    public async Task GetTextAsync()\r\n    {\r\n        _viewContent = await this._editor.GetTextAsync();\r\n    }\r\n    public async Task GetContentAsync()\r\n    {\r\n        _viewContent = await this._editor.GetContentAsync();\r\n    }\r\n    public async Task GetHtmlAsync()\r\n    {\r\n        _viewContent = await this._editor.GetHtmlAsync();\r\n    }\r\n\r\n    public async Task SetHtmlAsync()\r\n    {\r\n        string html =\r\n            @\"<a href='https://www.baidu.com/'>\" +\r\n            \"<img src='https://www.baidu.com/img/flexible/logo/pc/result.png' /></a>\";\r\n\r\n        await this._editor.SetHtmlAsync(html);\r\n    }\r\n    public async Task DisableAsync()\r\n    {\r\n        await this._editor.DisableAsync();\r\n    }\r\n    public async Task EnableAsync()\r\n    {\r\n        await this._editor.EnableAsync();\r\n    }\r\n}",
         "Type": "Demos.Components.Editor.misc.Method",
         "Style": "",
         "Debug": false,
@@ -1950,6 +1961,65 @@
     "Title": "Editor",
     "Type": "Editor",
     "FullTitle": "Editor"
+  },
+  {
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MErrorHandler\">MErrorHandler</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-04-01T19:02:26.7306444+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "Error handler",
+        "Description": "<p>Uniform exception handling.</p>\n",
+        "Code": "<MErrorHandler>\r\n    <MButton @onclick=\"BtnClick\">Throw test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
+        "Type": "Demos.Components.ErrorHandler.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "onErrorHandleAsync",
+        "Title": "OnErrorHandleAsync",
+        "Description": "<p>Custom exception handling <code>Func&lt;Exception, Task &gt;</code>, after clicking the button triggers the exception, the button background color changes to red and the text color changes to white.</p>\n",
+        "Code": "<MErrorHandler OnErrorHandleAsync=\"CustomErrorHandleAsync\">\r\n    <MButton @onclick=\"BtnClick\" Class=\"@colorClass\">Custom handler exception test</MButton>\r\n    <MButton @onclick=\"BtnReset\">Reset</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private string colorClass= \"white black--text\";\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n\r\n    private void BtnReset()\r\n    {\r\n        colorClass= \"white black--text\";\r\n    }\r\n\r\n    private async Task CustomErrorHandleAsync(Exception exception)\r\n    {\r\n        //todo\r\n        colorClass = \"red white--text\";\r\n        await Task.CompletedTask;\r\n    }\r\n}",
+        "Type": "Demos.Components.ErrorHandler.props.OnErrorHandleAsync",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "showAlert",
+        "Title": "ShowAlert",
+        "Description": "<p><code>true</code> is displayed, <code>false</code> is not displayed, and the default is displayed</p>\n",
+        "Code": "<MSwitch @bind-Value=\"_isShow\" Label=\"@($\"Show: {_isShow}\")\"></MSwitch>\r\n<MErrorHandler ShowAlert=\"_isShow\">\r\n    <MButton @onclick=\"BtnClick\">Throw test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private bool _isShow = true;\r\n\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
+        "Type": "Demos.Components.ErrorHandler.props.ShowAlert",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "showDetail",
+        "Title": "ShowDetail",
+        "Description": "<p><code>true</code> is displayed, <code>false</code> is not displayed, and the default is not displayed.</p>\n",
+        "Code": "<MSwitch @bind-Value=\"_isShow\" Label=\"@($\"ShowDetail: {_isShow}\")\"></MSwitch>\r\n<MErrorHandler ShowDetail=\"_isShow\">\r\n    <MButton @onclick=\"BtnClick\">Throw test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private bool _isShow = false;\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
+        "Type": "Demos.Components.ErrorHandler.props.ShowDetail",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Title": "Error handler",
+    "Type": "ErrorHandler",
+    "FullTitle": "Error handler"
   },
   {
     "Desc": "<p>The <code>MExpansionPanel</code> component is useful for reducing vertical space with large amounts of information. The default\nfunctionality of the component is to only display one expansion-panel body at a time; however, with the <strong>Multiple</strong>\nproperty, the expansion-panel can remain open until explicitly closed.</p>\n",
@@ -4961,6 +5031,112 @@
     "Title": "Lists",
     "Type": "List",
     "FullTitle": "Lists"
+  },
+  {
+    "Desc": "<p>Packaging based on <a href=\"https://github.com/Vanessa219/vditor\">vditor</a></p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "CSS file": "\n<pre><code class=\"language-html\">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.masastack.com/npm/vditor/3.8.12/index.css&quot; /&gt;\n</code></pre>\n",
+      "JS file": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/vditor/3.8.12/index.min.js&quot; defer&gt;&lt;/script&gt;\n</code></pre>\n",
+      "API": "\n<ul>\n<li><a href=\"/api/MMarkdown\">MMarkdown</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-04-01T19:22:02.1179016+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "basic",
+        "Title": "Usage",
+        "Description": "<p>Markdown Examples</p>\n",
+        "Code": "<MMarkdown @bind-Value=\"_value\" @bind-Html=\"_html\" >\r\n</MMarkdown>\r\n<MAlert Border=\"Borders.Top\"\r\n            ColoredBorder\r\n            Type=\"AlertTypes.Info\"\r\n            Elevation=\"2\" \r\n            Class=\"mt-5\">\r\n        @_value\r\n</MAlert>\r\n<MAlert Border=\"Borders.Top\"\r\n            ColoredBorder\r\n            Type=\"AlertTypes.Info\"\r\n            Elevation=\"2\">\r\n        @_html\r\n</MAlert>\r\n\r\n@code{\r\n    private string _value = \"Hello MASA Blazor!\";\r\n    private string _html;\r\n}\r\n",
+        "Type": "Demos.Components.Markdown.usage.Basic",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "counter",
+        "Title": "Counter",
+        "Description": "<p>Configure <a href=\"https://ld246.com/article/1549638745630#options\">Options</a> attribute to set counter</p>\n",
+        "Code": "<MMarkdown Options=\"_options\">\r\n</MMarkdown>\r\n\r\n@code {\r\n    private Dictionary<string, object> _options = new Dictionary<string, object>();\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        _options.Add(\"counter\", new\r\n        {\r\n            enable = true,\r\n            type = \"markdown\"\r\n        });\r\n        base.OnInitialized();\r\n    }\r\n}",
+        "Type": "Demos.Components.Markdown.props.Counter",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "heightAndWidth",
+        "Title": "Width and height",
+        "Description": "<p>Configure <a href=\"https://ld246.com/article/1549638745630#options\">Options</a> attribute to set height</p>\n",
+        "Code": "<MMarkdown Options=\"_options\">\r\n</MMarkdown>\r\n\r\n@code{\r\n\r\n    private Dictionary<string, object> _options = new Dictionary<string, object>();\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        _options.Add(\"height\",300);\r\n        _options.Add(\"minHeight\",300);\r\n        _options.Add(\"width\",\"100%\");\r\n        base.OnInitialized();\r\n    }\r\n}",
+        "Type": "Demos.Components.Markdown.props.HeightAndWidth",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "mode",
+        "Title": "Mode",
+        "Description": "<p>Configure <a href=\"https://ld246.com/article/1549638745630#options\">Options</a> attribute to set mode,Support SV, IR, WYSIWYG</p>\n",
+        "Code": "<MMarkdown Options=\"_options\">\r\n</MMarkdown>\r\n\r\n@code{\r\n\r\n    private Dictionary<string, object> _options = new Dictionary<string, object>();\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        _options.Add(\"mode\",\"ir\");\r\n        base.OnInitialized();\r\n    }\r\n}",
+        "Type": "Demos.Components.Markdown.props.Mode",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "theme",
+        "Title": "Theme",
+        "Description": "<p>Configure <a href=\"https://ld246.com/article/1549638745630#options\">Options</a> attribute to set theme</p>\n",
+        "Code": "<MMarkdown Options=\"_options\">\r\n</MMarkdown>\r\n\r\n@code{\r\n\r\n    private Dictionary<string, object> _options = new Dictionary<string, object>();\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        _options.Add(\"theme\",\"dark\");\r\n        _options.Add(\"mode\",\"ir\");\r\n        base.OnInitialized();\r\n    }\r\n}",
+        "Type": "Demos.Components.Markdown.props.Theme",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "toolbar",
+        "Title": "Customize Toolbar",
+        "Description": "<p>Configure <a href=\"https://ld246.com/article/1549638745630#options\">Options</a> attribute to set toolbar</p>\n",
+        "Code": "<MMarkdown Options=\"_options\">\r\n</MMarkdown>\r\n\r\n@code{\r\n\r\n    private Dictionary<string, object> _options = new Dictionary<string, object>();\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        _options.Add(\"toolbar\",new List<string>(){\"emoji\", \"br\", \"bold\", \"|\", \"line\"});\r\n        base.OnInitialized();\r\n    }\r\n}",
+        "Type": "Demos.Components.Markdown.props.Toolbar",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "upload",
+        "Title": "Upload",
+        "Description": "<p>Configure <a href=\"https://ld246.com/article/1549638745630#options\">Options</a> attribute to set upload parameters</p>\n",
+        "Code": "<MMarkdown Options=\"_options\">\r\n</MMarkdown>\r\n\r\n@code {\r\n    private Dictionary<string, object> _options = new Dictionary<string, object>();\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        _options.Add(\"upload\", new\r\n        {\r\n            url = \"api/upload\",\r\n            max = 2 * 1024 * 1024,\r\n            accept = \"image/*\",\r\n            multiple = true,\r\n        });\r\n        base.OnInitialized();\r\n    }\r\n}",
+        "Type": "Demos.Components.Markdown.props.Upload",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 1,
+        "Name": "someEvents",
+        "Title": "Some events",
+        "Description": "<p>Focus, blur, select,esc,ctrl+enter and other events. For more events, please refer to API.</p>\n",
+        "Code": "<MMarkdown OnFocus=\"HandleFocus\" OnBlur=\"HandleBlur\" OnEscPress=\"HandleEscPress\" OnCtrlEnterPress=\"HandleCtrlEnterPress\" OnSelect=\"HandleSelect\">\r\n</MMarkdown>\r\n<MAlert Border=\"Borders.Top\"\r\n            ColoredBorder\r\n            Type=\"AlertTypes.Info\"\r\n            Elevation=\"2\" \r\n            Class=\"mt-10\">\r\n        @ViewInfo\r\n</MAlert>\r\n\r\n@code\r\n{\r\n    private string ViewInfo { get; set; }\r\n\r\n    private void HandleFocus()\r\n    {\r\n        ViewInfo = \"聚焦\";\r\n    }\r\n    private void HandleBlur()\r\n    {\r\n        ViewInfo = \"失去焦点\";\r\n    }\r\n    private void HandleEscPress()\r\n    {\r\n        ViewInfo = \"esc 按下\";\r\n    }\r\n    private void HandleCtrlEnterPress()\r\n    {\r\n        ViewInfo = \"ctrl+enter 按下\";\r\n    }\r\n    private void HandleSelect()\r\n    {\r\n        ViewInfo = \"编辑器中选中文字\";\r\n    }\r\n}",
+        "Type": "Demos.Components.Markdown.events.SomeEvents",
+        "Style": "",
+        "Debug": false,
+        "Group": 1
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Title": "Markdown",
+    "Type": "Markdown",
+    "FullTitle": "Markdown"
   },
   {
     "Desc": "<p>The <code>MMenu</code> component shows a menu at the position of the element used to activate it.</p>\n",
