@@ -17,7 +17,7 @@
       "Description": ""
     },
     {
-      "Name": "EnableValidation",
+      "Name": "EnableDataAnnotationsValidation",
       "Type": "Boolean",
       "Description": ""
     },
