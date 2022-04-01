@@ -125,12 +125,13 @@ function handlerImage(self, uploadConfig) {
                 return;
             }
             if (uploadConfig) {
-                uploadFilePic(_uploadConfig, self.quill, fileInput.files, 0);
+                uploadFilePic(_uploadConfig, self.quill, fileInput, 0);
             }
             else {
                 for (var i = 0; i < fileInput.files.length; i++) {
                     insertLogo(self.quill);
                 }
+                fileInput.value = '';
             }
         })
 
@@ -139,10 +140,10 @@ function handlerImage(self, uploadConfig) {
     fileInput.click()
 }
 
-function uploadFilePic(uploadConfig, quill, files, index) {
+function uploadFilePic(uploadConfig, quill, fileInput, index) {
     // 创建formData
     var formData = new FormData()
-
+    var files = fileInput.files;
     formData.append(uploadConfig.name, files[index])
     // 如果需要token且存在token
     if (uploadConfig.token) {
@@ -159,7 +160,10 @@ function uploadFilePic(uploadConfig, quill, files, index) {
             quill.setSelection(length + 1);
             index += 1;
             if (index < files.length) {
-                uploadFilePic(uploadConfig, quill, files, index);
+                uploadFilePic(uploadConfig, quill, fileInput, index);
+            }
+            else {
+                fileInput.value = '';
             }
         }
     }
