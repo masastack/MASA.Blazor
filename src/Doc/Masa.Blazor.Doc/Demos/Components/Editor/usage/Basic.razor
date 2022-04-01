@@ -1,13 +1,12 @@
 ﻿<MEditor @bind-Value="_editorContent">
 </MEditor>
 <MAlert Border="Borders.Top"
-        ColoredBorder
-        Type="AlertTypes.Info"
-        Elevation="2"
-        Class="mt-5">
-    @_editorContent
+            ColoredBorder
+            Type="AlertTypes.Info"
+            Elevation="2" 
+            Class="overflow-auto mt-10">
+        @_editorContent
 </MAlert>
-@code {
-    private string _editorContent = "Hello MEditor!";
+@code{
+    string _editorContent="Hello MEditor!";
 }
-
