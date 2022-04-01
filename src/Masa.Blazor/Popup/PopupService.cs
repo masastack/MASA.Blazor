@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Masa.Blazor.Popup.Components;
+
+namespace Masa.Blazor;
 
 public partial class PopupService : IPopupService
 {
@@ -7,6 +9,8 @@ public partial class PopupService : IPopupService
     public PopupService(IPopupProvider popupProvider)
     {
         _popupProvider = popupProvider;
+
+        OpenAsync(typeof(Toast), new Dictionary<string, object>());
     }
 
     public Task<object> OpenAsync(Type componentType, Dictionary<string, object> parameters)
