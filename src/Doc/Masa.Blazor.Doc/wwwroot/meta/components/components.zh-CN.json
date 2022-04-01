@@ -1870,6 +1870,113 @@
     "FullTitle": "ECharts（图表）"
   },
   {
+    "Desc": "<p><a href=\"https://quilljs.com/\">Editor</a> 基于quilljs封装的富文本编辑器</p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "css文件": "\n<pre><code class=\"language-html\">&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.snow.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.bubble.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown-common-style.css&quot; rel=&quot;stylesheet&quot;&gt;\n</code></pre>\n",
+      "js文件": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
+      "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-03-30T11:52:33.1437659+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "basic",
+        "Title": "使用",
+        "Description": "<p>富文本编辑器示例</p>\n",
+        "Code": "<MEditor @bind-Value=\"EditorContent\">\r\n</MEditor>\r\n<div>@EditorContent</div>\r\n@code{\r\n    string EditorContent=\"Hello MEditor!\";\r\n}\r\n\r\n",
+        "Type": "Demos.Components.Editor.usage.Basic",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "height",
+        "Title": "自定义高度",
+        "Description": "<p>通过 <strong>ElementStyle</strong> 属性设置高度</p>\n",
+        "Code": "<MEditor ContentStyle=\"height:200px\">\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.Height",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "markdown",
+        "Title": "markdown",
+        "Description": "<p>支持markdown解析。</p>\n",
+        "Code": "<MEditor Markdown>\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.Markdown",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "placeholder",
+        "Title": "自定义提示信息",
+        "Description": "<p>通过设置 Placeholder 属性来设置空值时的提示消息。</p>\n",
+        "Code": "<MEditor Placeholder=\"please input\">\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.Placeholder",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "readOnly",
+        "Title": "只读",
+        "Description": "<p>是否将编辑器实例设置为只读模式。</p>\n",
+        "Code": "<MEditor ReadOnly>\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.ReadOnly",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "theme",
+        "Title": "主题",
+        "Description": "<p>使用主题的名称。这个内置的选项是&quot;bubble&quot;或&quot;snow&quot;。注意，主题的样式表任需要手动包含。</p>\n",
+        "Code": "<MEditor Theme=\"bubble\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.Theme",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "toolBar",
+        "Title": "自定义工具栏",
+        "Description": "<p>通过ToolbarContent插槽自定义工具栏。</p>\n",
+        "Code": "<MEditor>\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.ToolBar",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 5,
+        "Name": "method",
+        "Title": "方法",
+        "Description": "<p>一些方法示例。</p>\n",
+        "Code": "<MEditor @ref=\"@Editor\" @bind-Value=\"EditorContent\" Placeholder=\"请输入内容\" ContentStyle=\"height:100px\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>\r\n<MRow Align=\"@AlignTypes.Center\"\r\n      Justify=\"@JustifyTypes.SpaceAround\" Class=\"mt-10\">\r\n      <MButton Depressed Color=\"primary\" @onclick=\"GetTextAsync\">\r\n        获取文本\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetContentAsync\">\r\n        获取内容\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetHtmlAsync\">\r\n        获取html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"SetHtmlAsync\">\r\n        设置html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"DisableAsync\">\r\n        禁用\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"EnableAsync\">\r\n        启用\r\n    </MButton>\r\n</MRow>\r\n<MAlert Border=\"Borders.Top\"\r\n            ColoredBorder\r\n            Type=\"AlertTypes.Info\"\r\n            Elevation=\"2\" \r\n            Class=\"mt-10\">\r\n        @ViewContent\r\n</MAlert>\r\n\r\n@code {\r\n    private MEditor Editor { get; set; }\r\n    private string EditorContent { get; set; } = @\"Hello MEditor\";\r\n    private string ViewContent { get; set; }\r\n\r\n    public async Task GetTextAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetTextAsync();\r\n    }\r\n    public async Task GetContentAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetContentAsync();\r\n    }\r\n    public async Task GetHtmlAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetHtmlAsync();\r\n    }\r\n\r\n    public async Task SetHtmlAsync()\r\n    {\r\n        string html =\r\n            @\"<a href='https://www.baidu.com/'>\" +\r\n            \"<img src='https://www.baidu.com/img/flexible/logo/pc/result.png' /></a>\";\r\n\r\n        await this.Editor.SetHtmlAsync(html);\r\n    }\r\n    public async Task DisableAsync()\r\n    {\r\n        await this.Editor.DisableAsync();\r\n    }\r\n    public async Task EnableAsync()\r\n    {\r\n        await this.Editor.EnableAsync();\r\n    }\r\n}",
+        "Type": "Demos.Components.Editor.misc.Method",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Subtitle": "富文本编辑器",
+    "Title": "Editor",
+    "Type": "富文本编辑器",
+    "FullTitle": "Editor（富文本编辑器）"
+  },
+  {
     "Desc": "<p><code>MExpansionPanel</code> 组件有助于减少大量信息的垂直空间占用。 组件的默认功能是仅显示一个扩展面板； 然而，使用 <strong>Multiple</strong> 属性后，扩展面板可以保持打开，直到显式地关闭。</p>\n",
     "Order": 0,
     "OtherDocs": {
@@ -2573,7 +2680,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOtpInput\">MOtpInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T14:03:42.8589214+08:00",
+    "LastWriteTime": "2022-03-30T11:52:33.1437659+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2613,7 +2720,7 @@
         "Name": "hiddenInput",
         "Title": "Hidden input",
         "Description": "<p>The entered value can be hidden with type=&quot;password&quot;</p>\n",
-        "Code": "<div class=\"ma-auto\" style=\"max-width: 260px\">\r\n    <MOtpInput @OtpValue=\"@otp\" Type=\"BOtpInputType.Password\" Length=\"5\" Dark></MOtpInput>\r\n</div>\r\n@code {\r\n    string otp = \"\";\r\n}",
+        "Code": "<div class=\"ma-auto\" style=\"max-width: 260px\">\r\n    <MOtpInput @OtpValue=\"@otp\" Type=\"OtpInputType.Password\" Length=\"5\" Dark></MOtpInput>\r\n</div>\r\n@code {\r\n    string otp = \"\";\r\n}",
         "Type": "Demos.Components.FormInputs.children.OtpInput.props.HiddenInput",
         "Style": "",
         "Debug": false,
@@ -2622,7 +2729,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg",
     "Cols": 1,
     "Related": [
       "/components/textareas",
@@ -6333,7 +6439,7 @@
     "FullTitle": "Not Grouped（未分组的）"
   },
   {
-    "Desc": "<p>提供全局服务调用Alert、Confirm和Prompt等弹出层组件。</p>\n",
+    "Desc": "<p>提供全局服务调用Alert、Confirm、Prompt和Toast等弹出层组件。</p>\n",
     "Order": 0,
     "OtherDocs": {},
     "LastWriteTime": "2022-03-21T11:17:37.0080674+08:00",
@@ -6367,6 +6473,17 @@
         "Description": "",
         "Code": "@inject IPopupService PopupService\r\n\r\n<MAlert Type=\"AlertTypes.Info\">\r\n    <div>\r\n        在 <code>MApp</code> 组件通过 <code>PromptParameters</code> 设置Prompt的默认样式和行为。\r\n    </div>\r\n    <div>\r\n        例如：<code>PromptParameters=\"@@(\"param => { param.OkText = \"Confirm\"; })\"</code>。\r\n    </div>\r\n</MAlert>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowBasic\">Basic Prompt</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MCheckbox @bind-Value=\"throwException\" Label=\"Throw exception\"></MCheckbox>\r\n<MButton OnClick=\"ShowAsync\">Async Prompt</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowCustom\">Custom Prompt</MButton>\r\n\r\n@code {\r\n\r\n    private bool throwException;\r\n    private readonly string checkInput = \"identity\";\r\n\r\n    private async Task ShowBasic()\r\n    {\r\n        var confirmed = await PopupService.PromptAsync(\r\n            \"Title\",\r\n            $\"Enter \\\"{checkInput}\\\" in the input box below to confirm the operation\"\r\n            );\r\n\r\n        await HandlePromptResult(confirmed);\r\n    }\r\n\r\n    private async Task ShowAsync()\r\n    {\r\n        await PopupService.PromptAsync(\r\n            \"Title\",\r\n            $\"Enter \\\"{checkInput}\\\" in the input box below to confirm the operation\",\r\n            async args =>\r\n            {\r\n                try\r\n                {\r\n                    if (args.Value == checkInput)\r\n                    {\r\n                        await PopupService.AlertAsync($\"Input('{args.Value}') is equal to '{checkInput}'\", AlertTypes.Info);\r\n                        \r\n                        await Task.Delay(1000);\r\n\r\n                        if (throwException)\r\n                        {\r\n                            throw new Exception(\"something wrong!\");\r\n                        }\r\n                    }\r\n                    else\r\n                    {\r\n                        await PopupService.AlertAsync($\"Input('{args.Value}') is no equal to '{checkInput}'\", AlertTypes.Error);\r\n                        args.Cancel();\r\n                    }\r\n                }\r\n                catch (Exception e)\r\n                {\r\n                    args.Cancel();\r\n\r\n                    await PopupService.AlertAsync(e);\r\n                }\r\n            });\r\n    }\r\n\r\n    private async Task ShowCustom()\r\n    {\r\n        var input = await PopupService.PromptAsync(param =>\r\n        {\r\n            param.Title = \"Title\";\r\n            param.Content = $\"Enter \\\"{checkInput}\\\" in the input box below to confirm the operation\";\r\n            param.OkText = \"Confirm\";\r\n            param.CancelText = \"Ignore\";\r\n        });\r\n\r\n        await HandlePromptResult(input);\r\n    }\r\n\r\n    private async Task HandlePromptResult(string input)\r\n    {\r\n        if (input is null)\r\n        {\r\n            await PopupService.AlertAsync(\"Cancel was clicked\", AlertTypes.Warning);\r\n        }\r\n        else if (input == checkInput)\r\n        {\r\n            await PopupService.AlertAsync($\"Input('{input}') is equal to '{checkInput}'\", AlertTypes.Info);\r\n        }\r\n        else\r\n        {\r\n            await PopupService.AlertAsync($\"Input('{input}') is no equal to '{checkInput}'\", AlertTypes.Error);\r\n        }\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Presets.children.PopupService.events.Prompt",
+        "Style": "",
+        "Debug": false,
+        "Group": 1
+      },
+      {
+        "Order": 0,
+        "Name": "toast",
+        "Title": "Toast",
+        "Description": "",
+        "Code": "@using Masa.Blazor.Popup.Components\r\n@inject IPopupService PopupService\r\n\r\n<MButton OnClick=\"ShowBasic\">Basic Toast</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup @bind-Value=\"toastType\" Row>\r\n    <MRadio Value=\"AlertTypes.None\" Label=\"None Icon\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Success\" Label=\"@nameof(AlertTypes.Success)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Warning\" Label=\"@nameof(AlertTypes.Warning)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Error\" Label=\"@nameof(AlertTypes.Error)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Info\" Label=\"@nameof(AlertTypes.Info)\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"ShowTyped\">Typed Toast</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup @bind-Value=\"isDark\" Row>\r\n    <MRadio Value=\"true\" Label=\"Drak\"></MRadio>\r\n    <MRadio Value=\"false\" Label=\"Light\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"ShowTheme\">Show Theme</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowContent\">Show with Title and Content</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"CustomAction\">Custom Action</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup @bind-Value=\"position\" Row>\r\n    <MRadio Value=\"ToastPosition.TopLeft\" Label=\"Top Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.TopRight\" Label=\"Top Right\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomLeft\" Label=\"Bottom Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomRight\" Label=\"Bottom Right\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"CustomPosition\">Custom global Position</MButton>\r\n\r\n@code {\r\n\r\n    AlertTypes toastType = AlertTypes.Success;\r\n\r\n    bool isDark = true;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    private Task ShowBasic()\r\n    {\r\n        return PopupService.ToastInfoAsync(\"Info Toast Title\");\r\n    }\r\n\r\n    private Task ShowTyped()\r\n    {\r\n        return PopupService.ToastAsync(toastType, $\"{toastType.ToString()} Toast Title\");\r\n    }\r\n\r\n    private Task ShowTheme()\r\n    {\r\n        return PopupService.ToastAsync(toastType, (config) =>\r\n        {\r\n            config.IsDark = isDark; config.Title = $\"Now is {(isDark ? \"Dark\" : \"Light\")} theme\";\r\n        });\r\n    }\r\n\r\n    private Task ShowContent()\r\n    {\r\n        var config = new ToastConfig()\r\n            {\r\n                Title = \"Message Title\",\r\n                Content = \"Message details\",\r\n                IsDark = isDark\r\n            };\r\n        return PopupService.ToastAsync(toastType, config);\r\n    }\r\n\r\n    private Task HandleOnView()\r\n    {\r\n        return PopupService.ToastInfoAsync(\"View button click\");\r\n    }\r\n\r\n    private async Task CustomAction()\r\n    {\r\n        RenderFragment customViewAction = (builder) =>\r\n        {\r\n            builder.AddContent(0,@<MButton Icon OnClick=\"HandleOnView\">View</MButton>);\r\n        };\r\n\r\n        await PopupService.ToastAsync(toastType, (config) =>\r\n        {\r\n            config.Title = \"Custom Action Message\";\r\n            config.Duration = 0;\r\n            config.Content = \"Not auto close\";\r\n            config.IsDark = isDark;\r\n            config.ActionContent = customViewAction;\r\n            config.OnClose = (key) =>\r\n            {\r\n                Console.WriteLine($\"Key: {key} Close\");\r\n            };\r\n        });\r\n    }\r\n\r\n    private Task CustomPosition()\r\n    {\r\n        return PopupService.Config((config) =>\r\n        {\r\n            config.Position = position;\r\n        });\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Presets.children.PopupService.events.Toast",
         "Style": "",
         "Debug": false,
         "Group": 1

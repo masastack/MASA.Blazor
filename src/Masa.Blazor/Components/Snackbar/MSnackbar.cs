@@ -136,6 +136,10 @@ namespace Masa.Blazor
                         .AddRounded(Rounded, Tile)
                         .AddElevation(Elevation)
                         .AddTheme(IsDark);
+                }, styleBuilder=>
+                {
+                    styleBuilder.AddBackgroundColor(Color);
+                    styleBuilder.AddTextColor(Color, () => Text || Outlined);
                 })
                 .Apply("content", cssBuilder =>
                 {
