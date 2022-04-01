@@ -148,18 +148,23 @@ function uploadFilePic(uploadConfig, quill, files, index) {
     if (uploadConfig.token) {
         formData.append(uploadConfig.tokenName, uploadConfig.token)
     }
-    axios.post(uploadConfig.action, formData).then(response => {
-        var data = response.data;
-        var pathKey = uploadConfig.pathKey || "path";
-        var url = data[pathKey];
-        var length = quill.getSelection().index
-        quill.insertEmbed(length, 'image', url)
-        quill.setSelection(length + 1)
-        index += 1;
-        if (index < files.length) {
-            uploadFilePic(uploadConfig,quill, files, index);
+    var oReq = new XMLHttpRequest();
+    oReq.onreadystatechange = function () {
+        if (oReq.readyState == 4 && oReq.status == 200) {
+            var json = JSON.parse(oReq.responseText);
+            var pathKey = uploadConfig.pathKey || "path";
+            var url = json[pathKey];
+            var length = quill.getSelection().index;
+            quill.insertEmbed(length, 'image', url);
+            quill.setSelection(length + 1);
+            index += 1;
+            if (index < files.length) {
+                uploadFilePic(uploadConfig, quill, files, index);
+            }
         }
-    })
+    }
+    oReq.open(uploadConfig.methods, uploadConfig.action);
+    oReq.send(formData);
 }
 function insertLogo(quill) {
     var length = quill.getSelection().index

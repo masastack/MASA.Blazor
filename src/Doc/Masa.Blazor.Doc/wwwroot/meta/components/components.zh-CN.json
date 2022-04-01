@@ -1961,7 +1961,7 @@
         "Name": "uploadPicture",
         "Title": "上传图片",
         "Description": "<p>这里只是演示如何配置<strong>Upload</strong>参数，请修改你的上传api地址。</p>\n",
-        "Code": "@using Masa.Blazor.Components.Editor;\r\n<MEditor @bind-Value=\"_editorContent\" Upload=\"_upload\">\r\n</MEditor>\r\n@code {\r\n    private string _editorContent = \"Hello MEditor!\";\r\n    private MEditorUpload _upload = new MEditorUpload\r\n    {\r\n        Action = \"api/upload\",\r\n        TokenName = \"authorization\",\r\n        Name=\"file\",\r\n        Accept = \"image/png, image/gif, image/jpeg, image/bmp, image/x-icon\",\r\n        PathKey=\"path\"\r\n    };\r\n}\r\n\r\n",
+        "Code": "@using Masa.Blazor.Components.Editor;\r\n<MEditor @bind-Value=\"_editorContent\" Upload=\"_upload\">\r\n</MEditor>\r\n@code {\r\n    private string _editorContent = \"Hello MEditor!\";\r\n    private MEditorUpload _upload = new MEditorUpload\r\n    {\r\n        Action = \"api/upload\",//Please change your upload address\r\n        TokenName = \"authorization\",\r\n        Name=\"file\",\r\n        Accept = \"image/png, image/gif, image/jpeg, image/bmp, image/x-icon\",\r\n        PathKey=\"path\"\r\n    };\r\n}\r\n\r\n",
         "Type": "Demos.Components.Editor.props.UploadPicture",
         "Style": "",
         "Debug": false,
