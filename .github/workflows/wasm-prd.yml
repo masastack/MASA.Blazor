@@ -3,9 +3,10 @@ name: deploy-wasm-prd
 on:
   release:
     types: [ created ]
+  workflow_dispatch: 
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - name: git pull

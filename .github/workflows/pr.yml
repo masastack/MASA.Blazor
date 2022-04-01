@@ -1,12 +1,13 @@
-name: test
+name: pr
 
 on:
   pull_request:
     branches:
       - main
+  workflow_dispatch: 
 
 jobs:
-  test:
+  pr:
     runs-on: ubuntu-latest
     steps:
     - name: git pull

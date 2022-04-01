@@ -1,6 +1,8 @@
 name: Mirror to Giltab
 
 on: [push, delete, create]
+workflow_dispatch: 
+   
 
 jobs:
   to_gitlab:
