@@ -1,10 +1,8 @@
 name: Mirror to Giltab
 on:
   push:
-    branches:
-      - main
-  release:
-    types: [ created ]
+  delete:
+  create:
   workflow_dispatch:
   
 jobs:
