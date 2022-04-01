@@ -1,5 +1,5 @@
 ﻿const defaultUploadConfig = {
-    url:  '',
+    action:  '',
     methods: 'POST', 
     token: '',
     tokenName:'',
@@ -147,9 +147,10 @@ function uploadFilePic(uploadConfig, quill, files, index) {
     if (uploadConfig.token) {
         formData.append(uploadConfig.tokenName, uploadConfig.token)
     }
-    axios.post(uploadConfig.url, formData).then(response => {
+    axios.post(uploadConfig.action, formData).then(response => {
         var data = response.data;
-        var url = data.Path
+        var pathKey = uploadConfig.pathKey || "path";
+        var url = data[pathKey];
         var length = quill.getSelection().index
         quill.insertEmbed(length, 'image', url)
         quill.setSelection(length + 1)

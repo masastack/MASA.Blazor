@@ -5,10 +5,11 @@
     private string _editorContent = "Hello MEditor!";
     private MEditorUpload _upload = new MEditorUpload
     {
-        Url = "",
+        Action = "api/upload",
         TokenName = "authorization",
         Name="file",
-        Accept = "image/png, image/gif, image/jpeg, image/bmp, image/x-icon"
+        Accept = "image/png, image/gif, image/jpeg, image/bmp, image/x-icon",
+        PathKey="path"
     };
 }
 
