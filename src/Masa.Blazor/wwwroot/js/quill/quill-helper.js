@@ -1,32 +1,43 @@
-﻿const defaultToolbar = {
-    container: [
-        ['bold', 'italic', 'underline', 'strike'],
-        ['blockquote', 'code-block'],
-        [{ 'header': 1 }, { 'header': 2 }],
-        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-        [{ 'script': 'sub' }, { 'script': 'super' }],
-        [{ 'indent': '-1' }, { 'indent': '+1' }],
-        [{ 'direction': 'rtl' }],
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        [{ 'color': [] }, { 'background': [] }],
-        [{ 'font': [] }],
-        [{ 'align': [] }],
-        ['clean'],
-        ['emoji'],
-        ['link', 'image', 'video']
-    ],
-    handlers: {
-        'emoji': function () { }
-    }
-};
+﻿const defaultUploadConfig = {
+    action:  '',
+    methods: 'POST', 
+    token: '',
+    tokenName:'',
+    name: 'file',
+    accept: 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon',
+    pathKey:'path'
+}
+const defaultToolbarContainer = [
+    ['bold', 'italic', 'underline', 'strike'],
+    ['blockquote', 'code-block'],
+    [{ 'header': 1 }, { 'header': 2 }],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+    [{ 'script': 'sub' }, { 'script': 'super' }],
+    [{ 'indent': '-1' }, { 'indent': '+1' }],
+    [{ 'direction': 'rtl' }],
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'color': [] }, { 'background': [] }],
+    [{ 'font': [] }],
+    [{ 'align': [] }],
+    ['clean'],
+    ['emoji'],
+    ['link', 'image', 'video']
+]
 
-
-export function init(quillElement,obj, toolBar, readOnly,
-    placeholder, theme, isMarkdown) {
+export function init(quillElement, obj, toolBarContainer, readOnly,
+    placeholder, theme, isMarkdown,uploadConfig) {
     if (!Quill || !quillElement) return;
+    let toolbar = {
+        container: toolBarContainer.childNodes.length == 0 ? defaultToolbarContainer : toolBarContainer,
+        handlers: {}
+    };
+    toolbar.handlers.image = function image() {
+        var self = this;
+        handlerImage(self, uploadConfig);
+    };
     var options = {
         modules: {
-            toolbar: toolBar.childNodes.length == 0 ? defaultToolbar : toolBar,
+            toolbar: toolbar,
             "emoji-toolbar": true,
             "emoji-shortname": true,
         },
@@ -92,4 +103,71 @@ export default {
     setHtml,
     enableEditor,
     insertImage
+}
+
+function handlerImage(self, uploadConfig) {
+    var _uploadConfig = uploadConfig || defaultUploadConfig;
+    var fileInput = self.container.querySelector('input.ql-image[type=file]')
+    if (fileInput === null) {
+        fileInput = document.createElement('input')
+        fileInput.setAttribute('type', 'file')
+        // 设置图片参数名
+        if (_uploadConfig.name) {
+            fileInput.setAttribute('name', _uploadConfig.name)
+        }
+        // 可设置上传图片的格式
+        fileInput.setAttribute('accept', _uploadConfig.accept)
+        fileInput.setAttribute('multiple', 'multiple')
+        fileInput.classList.add('ql-image')
+        // 监听选择文件
+        fileInput.addEventListener('change', function () {
+            if (fileInput.files.length === 0) {
+                return;
+            }
+            if (uploadConfig) {
+                uploadFilePic(_uploadConfig, self.quill, fileInput.files, 0);
+            }
+            else {
+                for (var i = 0; i < fileInput.files.length; i++) {
+                    insertLogo(self.quill);
+                }
+            }
+        })
+
+        self.container.appendChild(fileInput)
+    }
+    fileInput.click()
+}
+
+function uploadFilePic(uploadConfig, quill, files, index) {
+    // 创建formData
+    var formData = new FormData()
+
+    formData.append(uploadConfig.name, files[index])
+    // 如果需要token且存在token
+    if (uploadConfig.token) {
+        formData.append(uploadConfig.tokenName, uploadConfig.token)
+    }
+    var oReq = new XMLHttpRequest();
+    oReq.onreadystatechange = function () {
+        if (oReq.readyState == 4 && oReq.status == 200) {
+            var json = JSON.parse(oReq.responseText);
+            var pathKey = uploadConfig.pathKey || "path";
+            var url = json[pathKey];
+            var length = quill.getSelection().index;
+            quill.insertEmbed(length, 'image', url);
+            quill.setSelection(length + 1);
+            index += 1;
+            if (index < files.length) {
+                uploadFilePic(uploadConfig, quill, files, index);
+            }
+        }
+    }
+    oReq.open(uploadConfig.methods, uploadConfig.action);
+    oReq.send(formData);
+}
+function insertLogo(quill) {
+    var length = quill.getSelection().index
+    quill.insertEmbed(length, 'image', "https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png")
+    quill.setSelection(length + 1)
 }

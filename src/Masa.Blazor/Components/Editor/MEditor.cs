@@ -1,4 +1,5 @@
 ﻿using BlazorComponent;
+using Masa.Blazor.Components.Editor;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
@@ -47,6 +48,8 @@ namespace Masa.Blazor
                 SetValue(value);
             }
         }
+        [Parameter]
+        public MEditorUpload Upload { get; set; }
 
         /// <summary>
         /// 编辑器内容便变更回调
@@ -105,7 +108,8 @@ namespace Masa.Blazor
                 ReadOnly,
                 Placeholder,
                 Theme,
-                Markdown);
+                Markdown,
+                Upload);
             if(!string.IsNullOrEmpty(Value)) await SetHtmlAsync(Value);
         }
 
