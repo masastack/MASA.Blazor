@@ -5,6 +5,7 @@
     tokenName:'',
     name: 'file',
     accept: 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon',
+    pathKey:'path'
 }
 const defaultToolbarContainer = [
     ['bold', 'italic', 'underline', 'strike'],
