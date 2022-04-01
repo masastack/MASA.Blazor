@@ -1846,6 +1846,112 @@
     "FullTitle": "ECharts"
   },
   {
+    "Desc": "<p><a href=\"https://quilljs.com/\">Editor</a> Rich text editor based on quilljs encapsulation</p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "CSS file": "\n<pre><code class=\"language-html\">&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.snow.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.bubble.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.css&quot; rel=&quot;stylesheet&quot;&gt;\n&lt;link href=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown-common-style.css&quot; rel=&quot;stylesheet&quot;&gt;\n</code></pre>\n",
+      "JS file": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
+      "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-03-30T11:52:33.1437659+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "basic",
+        "Title": "Usage",
+        "Description": "<p>Examples</p>\n",
+        "Code": "<MEditor @bind-Value=\"EditorContent\">\r\n</MEditor>\r\n<div>@EditorContent</div>\r\n@code{\r\n    string EditorContent=\"Hello MEditor!\";\r\n}\r\n\r\n",
+        "Type": "Demos.Components.Editor.usage.Basic",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "height",
+        "Title": "Height",
+        "Description": "<p><strong>ElementStyle</strong> property set editor height</p>\n",
+        "Code": "<MEditor ContentStyle=\"height:200px\">\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.Height",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "markdown",
+        "Title": "markdown",
+        "Description": "<p>markdown.</p>\n",
+        "Code": "<MEditor Markdown>\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.Markdown",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "placeholder",
+        "Title": "Custom prompt message",
+        "Description": "<p>The prompt message when a null value is set by setting the Placeholder attribute.</p>\n",
+        "Code": "<MEditor Placeholder=\"please input\">\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.Placeholder",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "readOnly",
+        "Title": "Readonly",
+        "Description": "<p>Whether to set the editor instance to read-only mode.</p>\n",
+        "Code": "<MEditor ReadOnly>\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.ReadOnly",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "theme",
+        "Title": "Theme",
+        "Description": "<p>Use the name of the topic. This built-in option is &quot;bubble&quot; or &quot;Snow&quot;. Note that the theme's style sheet needs to be included manually.</p>\n",
+        "Code": "<MEditor Theme=\"bubble\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.Theme",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "toolBar",
+        "Title": "Toolbar",
+        "Description": "<p>Customize toolbars through toolbarcontent slots.</p>\n",
+        "Code": "<MEditor>\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>",
+        "Type": "Demos.Components.Editor.props.ToolBar",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 5,
+        "Name": "method",
+        "Title": "method",
+        "Description": "<p>Some method examples.</p>\n",
+        "Code": "<MEditor @ref=\"@Editor\" @bind-Value=\"EditorContent\" Placeholder=\"请输入内容\" ContentStyle=\"height:100px\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>\r\n<MRow Align=\"@AlignTypes.Center\"\r\n      Justify=\"@JustifyTypes.SpaceAround\" Class=\"mt-10\">\r\n      <MButton Depressed Color=\"primary\" @onclick=\"GetTextAsync\">\r\n        获取文本\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetContentAsync\">\r\n        获取内容\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetHtmlAsync\">\r\n        获取html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"SetHtmlAsync\">\r\n        设置html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"DisableAsync\">\r\n        禁用\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"EnableAsync\">\r\n        启用\r\n    </MButton>\r\n</MRow>\r\n<MAlert Border=\"Borders.Top\"\r\n            ColoredBorder\r\n            Type=\"AlertTypes.Info\"\r\n            Elevation=\"2\" \r\n            Class=\"mt-10\">\r\n        @ViewContent\r\n</MAlert>\r\n\r\n@code {\r\n    private MEditor Editor { get; set; }\r\n    private string EditorContent { get; set; } = @\"Hello MEditor\";\r\n    private string ViewContent { get; set; }\r\n\r\n    public async Task GetTextAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetTextAsync();\r\n    }\r\n    public async Task GetContentAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetContentAsync();\r\n    }\r\n    public async Task GetHtmlAsync()\r\n    {\r\n        ViewContent = await this.Editor.GetHtmlAsync();\r\n    }\r\n\r\n    public async Task SetHtmlAsync()\r\n    {\r\n        string html =\r\n            @\"<a href='https://www.baidu.com/'>\" +\r\n            \"<img src='https://www.baidu.com/img/flexible/logo/pc/result.png' /></a>\";\r\n\r\n        await this.Editor.SetHtmlAsync(html);\r\n    }\r\n    public async Task DisableAsync()\r\n    {\r\n        await this.Editor.DisableAsync();\r\n    }\r\n    public async Task EnableAsync()\r\n    {\r\n        await this.Editor.EnableAsync();\r\n    }\r\n}",
+        "Type": "Demos.Components.Editor.misc.Method",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Title": "Editor",
+    "Type": "Editor",
+    "FullTitle": "Editor"
+  },
+  {
     "Desc": "<p>The <code>MExpansionPanel</code> component is useful for reducing vertical space with large amounts of information. The default\nfunctionality of the component is to only display one expansion-panel body at a time; however, with the <strong>Multiple</strong>\nproperty, the expansion-panel can remain open until explicitly closed.</p>\n",
     "Order": 0,
     "OtherDocs": {
