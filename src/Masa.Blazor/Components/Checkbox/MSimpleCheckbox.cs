@@ -33,6 +33,7 @@
             AbstractProvider
                 .Apply(typeof(BIcon), typeof(MIcon), attrs =>
                 {
+                    attrs[nameof(MIcon.Color)] = Color;
                     attrs[nameof(MIcon.Disabled)] = Disabled;
                     attrs[nameof(MIcon.Dark)] = Dark;
                     attrs[nameof(MIcon.Light)] = Light;
