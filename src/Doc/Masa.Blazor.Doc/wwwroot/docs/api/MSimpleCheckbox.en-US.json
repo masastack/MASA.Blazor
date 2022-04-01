@@ -87,7 +87,7 @@
   "Contents": [],
   "Events": [
     {
-      "Name": "OnInput",
+      "Name": "ValueChanged",
       "Type": "EventCallback<Boolean>",
       "Description": ""
     }
