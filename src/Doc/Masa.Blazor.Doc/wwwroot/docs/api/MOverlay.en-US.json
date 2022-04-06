@@ -47,6 +47,11 @@
       "Description": ""
     },
     {
+      "Name": "ScrimClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",
