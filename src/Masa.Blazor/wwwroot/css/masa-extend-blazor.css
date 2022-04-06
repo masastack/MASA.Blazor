@@ -648,7 +648,6 @@ code[class*=language-], pre[class*=language-] {
     word-break: break-word;
 }
 
-
 input[type=number] {
     -moz-appearance: textfield;
 }
