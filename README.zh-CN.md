@@ -11,7 +11,7 @@
 一套基于Material设计规范和BlazorComponent的交互能力提供标准的基础组件库
 
 [![MASA.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/Masa.Blazor/blob/develop/LICENSE) 
-[![.NET](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/main.yml/badge.svg)](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/main.yml)
+[![.NET](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/mirror-gitlab.yml/badge.svg)](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/mirror-gitlab.yml)
 [![Nuget](https://img.shields.io/nuget/v/Masa.Blazor)](https://www.nuget.org/packages/Masa.Blazor)
 [![Nuget](https://img.shields.io/nuget/dt/Masa.Blazor)](https://www.nuget.org/packages/Masa.Blazor)
 
@@ -41,7 +41,8 @@ MASA Blazor 基于Material设计规范，每一个组件都经过精心设计，
 - 长期支持：全职团队维护，长期提供支持，并提供企业级支持
 - 知名企业选择：该技术框架被多家知名企业选择使用，未来MASA Stack产品线也将一直使用，持续增加新功能
 
-
+# 统计
+![Alt](https://repobeats.axiom.co/api/embed/2728adbcfa084a3f50de3587080404ee203c80e6.svg "Repobeats analytics image")
 
 ## 快速使用
 
