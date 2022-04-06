@@ -38,9 +38,9 @@
                 .Apply("scrim", cssBuilder =>
                 {
                     cssBuilder
-                        .Add(ScrimClass)
                         .Add("m-overlay__scrim")
-                        .AddBackgroundColor(Color);
+                        .AddBackgroundColor(Color)
+                        .Add(ScrimClass);
                 }, styleBuilder =>
                 {
                     styleBuilder
