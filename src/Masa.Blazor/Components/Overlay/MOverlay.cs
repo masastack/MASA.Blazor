@@ -15,6 +15,9 @@
         public StringNumber Opacity { get; set; } = 0.46;
 
         [Parameter]
+        public string ScrimClass { get; set; }
+
+        [Parameter]
         public int ZIndex { get; set; } = 5;
 
         protected override void SetComponentClass()
@@ -36,7 +39,8 @@
                 {
                     cssBuilder
                         .Add("m-overlay__scrim")
-                        .AddBackgroundColor(Color);
+                        .AddBackgroundColor(Color)
+                        .Add(ScrimClass);
                 }, styleBuilder =>
                 {
                     styleBuilder

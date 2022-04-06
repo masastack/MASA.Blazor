@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-配置 [Options](https://ld246.com/article/1549638745630#options) 属性设置上传参数
+配置 [Options](https://ld246.com/article/1549638745630#options) 属性设置上传参数，这里只是演示如何配置upload参数，请修改你的上传api地址。
 
 ## en-US
 
-Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set upload parameters
+Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set upload parameters,this is just a demonstration of how to configure the upload parameters. Please modify your upload API address.
