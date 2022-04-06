@@ -54,13 +54,14 @@ namespace Masa.Blazor
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-list-item")
+                        .Add(prefix)
                         .AddIf($"{prefix}--dense", () => Dense)
                         .AddIf($"{prefix}--disabled", () => Disabled)
                         .AddIf($"{prefix}--selectable", () => Selectable)
                         .AddIf($"{prefix}--two-line", () => TwoLine)
                         .AddIf($"{prefix}--three-line", () => ThreeLine)
                         .AddIf($"{prefix}--link", () => IsClickable && !Inactive)
+                        .Add(Class)
                         .AddIf($"{prefix}--active {ComputedActiveClass}", () =>
                         {
                             if (InternalIsActive) return true;
