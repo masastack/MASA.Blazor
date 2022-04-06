@@ -11,13 +11,13 @@ cols: 1
 ## css文件
 
 ```html
-<link rel="stylesheet" href="https://cdn.masastack.com/npm/vditor/3.8.12/index.css" />
+<link rel="stylesheet" href="https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.css" />
 ```
 
 ## js文件
 
 ```html
-<script src="https://cdn.masastack.com/npm/vditor/3.8.12/index.min.js" defer></script>
+<script src="https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.min.js"></script>
 ```
 
 ## API
