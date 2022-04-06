@@ -29593,6 +29593,8 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 0 2px 2px 0;
     opacity: 0;
     transition: opacity .24s linear .1s;
+    align-items: center;
+    align-self: center;
 }
 
 .m-input-number-handler-wrap .m-input__icon {
@@ -29602,6 +29604,10 @@ input[type=number]::-webkit-outer-spin-button {
 .m-input-number-handler-wrap.m-input-number-handler-focused {
     opacity: 1;
     box-shadow: none;
+}
+
+.m-input-number-handler-wrap .m-input__append-inner {
+    margin-top: 0 !important;
 }
 
 .m-number-input-icon button {

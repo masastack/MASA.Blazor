@@ -112,7 +112,7 @@ namespace Masa.Blazor
         public EventCallback<MouseEventArgs> OnClearClick { get; set; }
 
         [Parameter]
-        public Action<TextFieldNumberProperty> NumberProps { get; set; }
+        public virtual Action<TextFieldNumberProperty> NumberProps { get; set; }
 
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
@@ -443,10 +443,7 @@ namespace Masa.Blazor
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (NumberProps != null)
-            {
-                NumberProps.Invoke(Props);
-            }
+            NumberProps?.Invoke(Props);
 
             await base.OnAfterRenderAsync(firstRender);
 
@@ -600,13 +597,7 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            //Since event will call StateHasChanged,we should prevent it
-            //So that,view will not change untill 300ms no actions
             _shouldRender = false;
-
-            //_cancellationTokenSource?.Cancel();
-            //_cancellationTokenSource = new CancellationTokenSource();
-            //await Task.Delay(300, _cancellationTokenSource.Token);
 
             var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
             if (success)
@@ -632,12 +623,12 @@ namespace Masa.Blazor
         {
             if (Type == "number" && BindConverter.TryConvertToDecimal(argValue.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var value))
             {
-                TValue retValue;
+                TValue returnValue;
 
-                if (Props.Min != null && value < Props.Min && BindConverter.TryConvertTo<TValue>(Props.Min.ToString(), System.Globalization.CultureInfo.InvariantCulture, out retValue))
-                    return Task.FromResult(retValue);
-                else if (Props.Max != null && value > Props.Max && BindConverter.TryConvertTo<TValue>(Props.Max.ToString(), System.Globalization.CultureInfo.InvariantCulture, out retValue))
-                    return Task.FromResult(retValue);
+                if (Props.Min != null && value < Props.Min && BindConverter.TryConvertTo<TValue>(Props.Min.ToString(), System.Globalization.CultureInfo.InvariantCulture, out returnValue))
+                    return Task.FromResult(returnValue);
+                else if (Props.Max != null && value > Props.Max && BindConverter.TryConvertTo<TValue>(Props.Max.ToString(), System.Globalization.CultureInfo.InvariantCulture, out returnValue))
+                    return Task.FromResult(returnValue);
             }
 
             return Task.FromResult(argValue);
@@ -648,14 +639,14 @@ namespace Masa.Blazor
         {
             if (UpButtonEnabled && BindConverter.TryConvertToDecimal(this.InternalValue.ToString(), System.Globalization.CultureInfo.InvariantCulture, out decimal value))
             {
-                if(Props.Min !=null && value < Props.Min)
+                if (Props.Min != null && value < Props.Min)
                 {
                     value = Props.Min.Value;
                 }
 
                 value += Props.Step;
 
-                if (Props.Max !=null && value > Props.Max)
+                if (Props.Max != null && value > Props.Max)
                 {
                     value = Props.Max.Value;
                 }
@@ -672,14 +663,14 @@ namespace Masa.Blazor
         {
             if (DownButtonEnabled && BindConverter.TryConvertToDecimal(this.InternalValue.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var value))
             {
-                if(Props.Max != null && value > Props.Max)
+                if (Props.Max != null && value > Props.Max)
                 {
                     value = Props.Max.Value;
                 }
 
                 value -= Props.Step;
 
-                if (Props.Min !=null && value < Props.Min)
+                if (Props.Min != null && value < Props.Min)
                 {
                     value = Props.Min.Value;
                 }
