@@ -1,12 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MIcon : BIcon, IIcon, IThemeable, ISizeable
     {

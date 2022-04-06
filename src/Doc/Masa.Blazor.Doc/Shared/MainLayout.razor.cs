@@ -1,10 +1,5 @@
-﻿using BlazorComponent;
-using BlazorComponent.Web;
-using Masa.Blazor.Doc.Models;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Routing;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
 
 namespace Masa.Blazor.Doc.Shared
 {

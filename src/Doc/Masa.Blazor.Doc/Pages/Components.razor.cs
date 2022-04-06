@@ -1,12 +1,8 @@
-﻿using BlazorComponent;
-using BlazorComponent.I18n;
+﻿using BlazorComponent.I18n;
 using Masa.Blazor.Doc.Models;
 using Masa.Blazor.Doc.Services;
-using Masa.Blazor.Doc.Shared;
-using Masa.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System.Diagnostics;
 using System.Globalization;
 
 namespace Masa.Blazor.Doc.Pages

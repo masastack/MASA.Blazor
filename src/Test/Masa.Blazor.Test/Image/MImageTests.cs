@@ -1,15 +1,10 @@
 ﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Test.Image
 {
     [TestClass]
-    public class MImageTests:TestBase
+    public class MImageTests : TestBase
     {
         [TestMethod]
         public void RenderImageWithContain()

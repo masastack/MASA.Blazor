@@ -1,11 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
@@ -123,7 +116,7 @@ namespace Masa.Blazor
                     attrs[nameof(MSimpleCheckbox.Value)] = EveryItem;
                     attrs[nameof(MSimpleCheckbox.Indeterminate)] = !EveryItem && SomeItems;
                     attrs[nameof(MSimpleCheckbox.Color)] = CheckboxColor;
-                    attrs[nameof(MSimpleCheckbox.OnInput)] = OnToggleSelectAll;
+                    attrs[nameof(MSimpleCheckbox.ValueChanged)] = OnToggleSelectAll;
                 })
                 .Apply<BIcon, MIcon>(attrs =>
                 {

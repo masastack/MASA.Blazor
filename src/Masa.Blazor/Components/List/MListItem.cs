@@ -1,12 +1,4 @@
-using System;
-using System.Linq;
 using System.Reflection.Metadata;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
@@ -47,7 +39,7 @@ namespace Masa.Blazor
 
         [Parameter]
         public bool Ripple { get; set; }
-        
+
         protected override void OnParametersSet()
         {
             base.OnParametersSet();

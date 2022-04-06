@@ -1,0 +1,81 @@
+﻿{
+  "Title": "MMarkdown",
+  "Components": [
+    "Markdown"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Html",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Options",
+      "Type": "Dictionary<String,Object>",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "String",
+      "Description": ""
+    }
+  ],
+  "Contents": [],
+  "Events": [
+    {
+      "Name": "HtmlChanged",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    },
+    {
+      "Name": "OnBlur",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    },
+    {
+      "Name": "OnCtrlEnterPress",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    },
+    {
+      "Name": "OnEscPress",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    },
+    {
+      "Name": "OnFocus",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    },
+    {
+      "Name": "OnSelect",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    },
+    {
+      "Name": "OnToolbarButtonClick",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    }
+  ]
+}

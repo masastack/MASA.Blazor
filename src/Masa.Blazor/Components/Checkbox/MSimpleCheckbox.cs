@@ -1,18 +1,9 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MSimpleCheckbox : BSimpleCheckbox
     {
         [Parameter]
         public string Color { get; set; }
-
 
         protected override void SetComponentClass()
         {
@@ -42,6 +33,7 @@ namespace Masa.Blazor
             AbstractProvider
                 .Apply(typeof(BIcon), typeof(MIcon), attrs =>
                 {
+                    attrs[nameof(MIcon.Color)] = Color;
                     attrs[nameof(MIcon.Disabled)] = Disabled;
                     attrs[nameof(MIcon.Dark)] = Dark;
                     attrs[nameof(MIcon.Light)] = Light;

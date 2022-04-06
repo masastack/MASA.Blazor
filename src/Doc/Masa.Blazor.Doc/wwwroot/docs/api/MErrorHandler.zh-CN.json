@@ -1,0 +1,44 @@
+﻿{
+  "Title": "MErrorHandler",
+  "Components": [
+    "Error handler"
+  ],
+  "Props": [
+    {
+      "Name": "MaximumErrorCount",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "OnErrorHandleAsync",
+      "Type": "Func<Exception,Task>",
+      "Default": "null",
+      "Description": "自定义错误消息处理"
+    },
+    {
+      "Name": "ShowAlert",
+      "Type": "Boolean",
+      "Default": "true",
+      "Description": "是否显示告警"
+    },
+    {
+      "Name": "ShowDetail",
+      "Type": "Boolean",
+      "Default": "false",
+      "Description": "是否显示异常信息"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    },
+    {
+      "Name": "ErrorContent",
+      "Type": "RenderFragment<Exception>",
+      "Description": ""
+    }
+  ],
+  "Events": []
+}

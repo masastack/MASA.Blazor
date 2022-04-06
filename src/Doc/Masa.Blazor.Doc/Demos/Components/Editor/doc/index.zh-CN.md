@@ -6,7 +6,7 @@ title: Editor
 cols: 1
 ---
 
-[Editor](https://quilljs.com/) 基于quilljs封装的富文本编辑器
+基于[Quill](https://quilljs.com/)封装的富文本编辑器
 
 ## css文件
 

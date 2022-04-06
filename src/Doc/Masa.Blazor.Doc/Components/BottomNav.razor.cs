@@ -1,14 +1,8 @@
 ﻿using BlazorComponent.I18n;
 using Masa.Blazor.Doc.Models;
 using Masa.Blazor.Doc.Services;
-using Masa.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Doc.Components
 {

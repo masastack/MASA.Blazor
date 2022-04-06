@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bunit;
+﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
@@ -11,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Masa.Blazor.Test.Select
 {
     [TestClass]
-    public class MSelectTests:TestBase
+    public class MSelectTests : TestBase
     {
         [TestMethod]
         public void RenderSelectWithAutofocus()

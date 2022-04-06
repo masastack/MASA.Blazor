@@ -81,7 +81,7 @@ namespace Masa.Blazor
         public double Bottom
         {
             get => _bottom;
-            internal  set
+            internal set
             {
                 if (_bottom != value)
                 {
@@ -94,7 +94,7 @@ namespace Masa.Blazor
         public double Footer
         {
             get => _footer;
-            internal  set
+            internal set
             {
                 if (_footer != value)
                 {

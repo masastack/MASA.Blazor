@@ -47,7 +47,7 @@ public static class StringExtensions
         markup = markup.Trim();
         if (!(markup.StartsWith(match.Value) && markup.EndsWith(endTag))) return markup;
 
-        var from  = match.Value.Length;
+        var from = match.Value.Length;
         var to = markup.IndexOf(endTag);
 
         return markup.Substring(from, to - from);

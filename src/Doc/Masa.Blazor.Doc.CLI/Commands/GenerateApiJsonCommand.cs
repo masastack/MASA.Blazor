@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.Doc.CLI.Interfaces;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.CommandLineUtils;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor.Doc.CLI.Commands
 {
@@ -66,6 +66,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
             { "MDivider", new string[] { "Dividers" } },
             { "MECharts", new string[] { "ECharts" } },
             { "MEditor", new string[] { "Editor" } },
+            { "MErrorHandler", new string[] { "Error handler" } },
             { "MMessage", new string[] { "Presets" } },
             { "MExpansionPanel", new string[] { "Expansion panels" } },
             { "MExpansionPanelContent", new string[] { "Expansion panels" } },
@@ -94,6 +95,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
             { "MListItemSubtitle", new string[] { "Lists", "List item groups" } },
             { "MListItemTitle", new string[] { "Lists", "List item groups" } },
             { "MMain", new string[] { "Application" } },
+            { "MMarkdown", new string[] { "Markdown" } },
             { "MMenu", new string[] { "Menus" } },
             { "MMessages", new string[] { "Messages" } },
             { "MNavigationDrawer", new string[] { "Navigation drawers" } },

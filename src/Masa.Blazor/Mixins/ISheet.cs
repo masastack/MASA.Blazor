@@ -1,13 +1,6 @@
-﻿using BlazorComponent;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
-    public interface ISheet: IRoundable, IThemeable, IColorable, IElevatable, IMeasurable
+    public interface ISheet : IRoundable, IThemeable, IColorable, IElevatable, IMeasurable
     {
         bool Outlined { get; }
 

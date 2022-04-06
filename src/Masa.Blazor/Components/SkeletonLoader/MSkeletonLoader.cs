@@ -1,13 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MSkeletonLoader : BSkeletonLoader, ISkeletonLoader, IThemeable
     {
@@ -69,10 +60,10 @@ namespace Masa.Blazor
                         .AddElevatable(this);
                 }, styleBuilder =>
                 {
-                    if(IsLoading == true)
+                    if (IsLoading == true)
                     {
                         styleBuilder.AddMeasurable(this);
-                    }                
+                    }
                 });
 
             if (IsLoading && !Boilerplate)

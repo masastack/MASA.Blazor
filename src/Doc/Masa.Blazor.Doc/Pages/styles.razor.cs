@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorComponent.I18n;
 using Masa.Blazor.Doc.Models;
-using Masa.Blazor.Doc.Utils;
-using System.Globalization;
-using BlazorComponent.I18n;
 using Masa.Blazor.Doc.Services;
+using Microsoft.AspNetCore.Components;
+using System.Globalization;
 
 namespace Masa.Blazor.Doc.Pages
 {

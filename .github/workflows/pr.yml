@@ -1,0 +1,25 @@
+name: pr
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: 
+
+jobs:
+  pr:
+    runs-on: ubuntu-latest
+    steps:
+    - name: git pull
+      uses: actions/checkout@v2
+    - name: setting dotnet 
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+        include-prerelease: true
+    - name: setting tools
+      run: dotnet workload install wasm-tools
+    - name: dependencies
+      run: git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
+    - name: build
+      run: dotnet build src

@@ -7,8 +7,8 @@ title:
 
 ## zh-CN
 
-通过设置 Placeholder 属性来设置空值时的提示消息。
+通过设置 **Placeholder** 属性来设置空值时的提示消息。
 
 ## en-US
 
-The prompt message when a null value is set by setting the Placeholder attribute.
+The prompt message when a null value is set by setting the **Placeholder** attribute.

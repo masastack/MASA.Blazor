@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Masa.Blazor.Doc.Models
 {
-    public class DemoComponentModel: DemoFrontMatter
+    public class DemoComponentModel : DemoFrontMatter
     {
         public string Desc { get; set; }
 

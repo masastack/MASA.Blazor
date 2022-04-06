@@ -1,11 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
@@ -323,7 +316,7 @@ namespace Masa.Blazor
                     attrs[nameof(MSimpleCheckbox.Disabled)] = !IsSelectable(item);
                     attrs[nameof(MSimpleCheckbox.Value)] = IsSelected(item);
                     attrs[nameof(MSimpleCheckbox.Color)] = CheckboxColor ?? "";
-                    attrs[nameof(MSimpleCheckbox.OnInput)] = EventCallback.Factory.Create<bool>(this, val =>
+                    attrs[nameof(MSimpleCheckbox.ValueChanged)] = EventCallback.Factory.Create<bool>(this, val =>
                    {
                        Select(item, val);
                    });

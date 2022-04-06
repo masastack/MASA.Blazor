@@ -31,7 +31,7 @@
                          Href="introduction/why">
                     @T("WhyUseMASABlazor")
                 </MButton>
-                <MButton Dark
+                @*<MButton Dark
                          Color="black"
                          Height="64"
                          Href="https://github.com/BlazorComponent/Masa.Blazor"
@@ -39,7 +39,7 @@
                          Class="text-20 px-6 mb-6">
                     <MIcon Left>mdi-github</MIcon>
                     GitHub
-                </MButton>
+                </MButton>*@
             </MRow>
         </MCol>
         <MCol Align="@AlignTypes.Center" Class="pr-6 d-flex justify-end" Lg=6 Md=6 Sm=12>
@@ -90,9 +90,9 @@
                 @foreach (var item in Enumerable.Range(0, _length))
                 {
                     <MWindowItem Value="item">
-                        <MCard Class="d-flex align-end rounded-0" Color="#F2F3F5" Height="262" Width="262">
+                        <div class="d-flex align-end rounded-0" style="height: 262px;width: 262px;background-color:#F2F3F5;border-color:#F2F3F5">
                             <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/banner.png" />
-                        </MCard>
+                        </div>
                     </MWindowItem>
                 }
             </MWindow>
@@ -127,7 +127,7 @@
                          Href="getting-started/installation">
                     @T("GetStarted")
                 </MButton>
-                <MButton Dark
+                @*<MButton Dark
                          Color="black"
                          Width="130"
                          Height="44"
@@ -136,9 +136,17 @@
                          Class="rounded-lg text-14 ml-3">
                     <MIcon Left>mdi-github</MIcon>
                     GitHub
+                </MButton>*@
+                <MButton Dark
+                         Outlined
+                         Color="black"
+                         Height="44"
+                         Class="text-14 rounded-lg"
+                         Href="introduction/why">
+                    @T("WhyUseMASABlazor")
                 </MButton>
             </MRow>
-            <MRow NoGutters Class="mt-6" Justify="JustifyTypes.Center">
+            @*<MRow NoGutters Class="mt-6" Justify="JustifyTypes.Center">
                 <MButton Dark
                          Outlined
                          Color="black"
@@ -148,7 +156,7 @@
                          Href="introduction/why">
                     @T("WhyUseMASABlazor")
                 </MButton>
-            </MRow>
+            </MRow>*@
         </div>
     </div>
 
