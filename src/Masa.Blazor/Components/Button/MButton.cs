@@ -74,6 +74,9 @@ namespace Masa.Blazor
         [Parameter]
         public bool Ripple { get; set; } = true;
 
+        [CascadingParameter]
+        private BSpeedDial<MButton> SpeedDial { get; set; }
+
         protected virtual bool HasBackground => !(Icon || Plain || Outlined || Text);
 
         protected bool IsRound => Icon || Fab;
@@ -147,6 +150,8 @@ namespace Masa.Blazor
             base.OnInitialized();
 
             HasLoader = true;
+
+            SpeedDial?.AddButton(this);
 
             AbstractProvider
                 .Apply(typeof(BButtonLoader<>), typeof(BButtonLoader<MButton>))
