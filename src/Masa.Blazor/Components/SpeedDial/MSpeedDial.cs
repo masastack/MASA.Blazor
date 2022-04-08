@@ -29,14 +29,6 @@ namespace Masa.Blazor
               {
                   cssBuilder.Add($"{prefix}__list");
               });
-
-            for (int i = 0; i < Buttons.Count; i++)
-            {
-                CssProvider.Apply($"dial-{i}", styleAction: styleBuilder =>
-                {
-                    styleBuilder.Add($"transitionDelay: {(i * 0.05)}s");
-                });
-            }
         }
 
     }
