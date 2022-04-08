@@ -11,17 +11,16 @@
                     </ChildContent>
                     <ExtensionContent>
                         <Transition Name="fab-transition">
-                            <ShowTransitionElement Value="!hidden">
-                                <MButton Color="pink"
-                                         Fab
-                                         Dark
-                                         Small
-                                         Absolute
-                                         Bottom
-                                         Left>
-                                    <MIcon>mdi-plus</MIcon>
-                                </MButton>
-                            </ShowTransitionElement>
+                            <MButton Color="pink"
+                                        Show="!hidden"
+                                        Fab
+                                        Dark
+                                        Small
+                                        Absolute
+                                        Bottom
+                                        Left>
+                                <MIcon>mdi-plus</MIcon>
+                            </MButton>
                         </Transition>
                     </ExtensionContent>
                 </MToolbar>
@@ -33,19 +32,18 @@
                 </MCardText>
 
                 <MCardText Style="height: 100px; position: relative">
-                    <Transition Name="scale-transition">
-                        <ShowTransitionElement Value="!hidden">
-                            <MButton Color="pink"
-                                     Dark
-                                     Absolute
-                                     Top
-                                     Right
-                                     Fab>
-                                <MIcon>
-                                    mdi-plus
-                                </MIcon>
-                            </MButton>
-                        </ShowTransitionElement>
+                    <Transition Name="fab-transition">
+                        <MButton Color="pink"
+                                Show="!hidden"
+                                    Dark
+                                    Absolute
+                                    Top
+                                    Right
+                                    Fab>
+                            <MIcon>
+                                mdi-plus
+                            </MIcon>
+                        </MButton>
                     </Transition>
                 </MCardText>
             </MCard>

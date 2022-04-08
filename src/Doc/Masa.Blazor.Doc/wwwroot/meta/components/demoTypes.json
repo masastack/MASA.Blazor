@@ -158,6 +158,8 @@
   "Demos.Components.FloatingActionButton.usage.Index",
   "Demos.Components.FloatingActionButton.misc.Animation",
   "Demos.Components.FloatingActionButton.misc.LateralScreens",
+  "Demos.Components.FloatingActionButton.misc.SmallVariant",
+  "Demos.Components.FloatingActionButton.misc.SpeedDial",
   "Demos.Components.Footer.usage.Index",
   "Demos.Components.Footer.props.Padless",
   "Demos.Components.Footer.misc.Company",

@@ -198,6 +198,11 @@
       "Description": ""
     },
     {
+      "Name": "Show",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "Small",
       "Type": "Boolean",
       "Default": "false",

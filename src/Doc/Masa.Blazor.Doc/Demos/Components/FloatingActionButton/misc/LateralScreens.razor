@@ -31,7 +31,7 @@
         <MTabsItems @bind-Value="tab">
             @foreach (var item in Items)
             {
-                <MTabItem Value="item">
+                <MTabItem Value="item" @key="item">
                     <MCard Height="@("200px")" Flat>
                     </MCard>
                 </MTabItem>
@@ -39,11 +39,9 @@
         </MTabsItems>
     </MCardText>
     <FabTransition>
-        <ShowTransitionElement Value="true">
-            <MButton Color="@GetActiveFabColor()" Fab Large Dark Bottom Left Class="m-btn--example">
-                <MIcon> @GetActiveFabIcon() </MIcon>
-            </MButton>
-        </ShowTransitionElement>
+        <MButton Color="@GetActiveFabColor()" Fab Large Dark Bottom Left Class="m-btn--example" @key="GetActiveFabIcon()">
+            <MIcon> @GetActiveFabIcon() </MIcon>
+        </MButton>
     </FabTransition>
 </MCard>
 
@@ -52,6 +50,7 @@
     private StringNumber tab = "one";
 
     List<string> Items = new List<string>() { "one", "two", "three" };
+
 
     private dynamic ComputedActiveFab()
     {
