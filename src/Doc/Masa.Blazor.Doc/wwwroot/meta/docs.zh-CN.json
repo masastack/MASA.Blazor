@@ -4317,6 +4317,15 @@
       },
       {
         "Order": 0,
+        "Title": "Floating Action Buttons",
+        "SubTitle": "浮动动作按钮",
+        "FullTitle": "Floating Action Buttons (浮动动作按钮)",
+        "Type": "menuItem",
+        "Url": "components/floating-action-buttons",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Footers",
         "SubTitle": "页脚",
         "FullTitle": "Footers (页脚)",

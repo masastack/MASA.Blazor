@@ -1,0 +1,82 @@
+﻿<MCard Id="lateral">
+    <MToolbar Dark
+              Flat
+              Color="indigo">
+        <ChildContent>
+            <MAppBarNavIcon></MAppBarNavIcon>
+            <MToolbarTitle>Page title</MToolbarTitle>
+            <MSpacer></MSpacer>
+            <MButton Icon>
+                <MIcon>mdi-magnify</MIcon>
+            </MButton>
+            <MButton Icon>
+                <MIcon>mdi-dots-vertical</MIcon>
+            </MButton>
+        </ChildContent>
+        <ExtensionContent>
+            <MTabs @bind-Value="tab" AlignWithTitle  SliderColor="pink">
+                <MTab Value="@("one")">
+                    Item One
+                </MTab>
+                <MTab Value="@("two")">
+                    Item Two
+                </MTab>
+                <MTab Value="@("three")">
+                    Item Three
+                </MTab>
+            </MTabs>
+        </ExtensionContent>
+    </MToolbar>
+    <MCardText>
+        <MTabsItems @bind-Value="tab">
+            @foreach (var item in Items)
+            {
+                <MTabItem Value="item">
+                    <MCard Height="@("200px")" Flat>
+                    </MCard>
+                </MTabItem>
+            }
+        </MTabsItems>
+    </MCardText>
+    <FabTransition>
+        <ShowTransitionElement Value="true">
+            <MButton Color="@GetActiveFabColor()" Fab Large Dark Bottom Left Class="m-btn--example">
+                <MIcon> @GetActiveFabIcon() </MIcon>
+            </MButton>
+        </ShowTransitionElement>
+    </FabTransition>
+</MCard>
+
+
+@code {
+    private StringNumber tab = "one";
+
+    List<string> Items = new List<string>() { "one", "two", "three" };
+
+    private dynamic ComputedActiveFab()
+    {
+        switch (tab.AsT0)
+        {
+            case "one":
+                return new { Color = "success", Icon = "mdi-share-variant" };
+            case "two":
+                return new { Color = "red", Icon = "mdi-pencil" };
+            case "three":
+                return new { Color = "green", Icon = "mdi-chevron-up" };
+            default:
+                return new { Color = "", Icon = "" };
+        }
+    }
+
+    public string GetActiveFabColor()
+    {
+        var activeFab = ComputedActiveFab();
+        return activeFab.Color;
+    }
+
+    public string GetActiveFabIcon()
+    {
+        var activeFab = ComputedActiveFab();
+        return activeFab.Icon;
+    }
+}

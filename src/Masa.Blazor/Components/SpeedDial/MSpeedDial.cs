@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Masa.Blazor
 {
-    public class MSpeedDial<TButton> : BSpeedDial<TButton> where TButton : BButton
+    public class MSpeedDial : BSpeedDial
     {
         protected override void SetComponentClass()
         {

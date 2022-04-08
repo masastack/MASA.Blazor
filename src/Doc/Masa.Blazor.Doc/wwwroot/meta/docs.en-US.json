@@ -4283,6 +4283,14 @@
       },
       {
         "Order": 0,
+        "Title": "Floating Action Buttons",
+        "FullTitle": "Floating Action Buttons",
+        "Type": "menuItem",
+        "Url": "components/floating-action-buttons",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Footers",
         "FullTitle": "Footers",
         "Type": "menuItem",
