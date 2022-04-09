@@ -14,7 +14,7 @@
             </MButton>
         </ChildContent>
         <ExtensionContent>
-            <MTabs @bind-Value="tab" AlignWithTitle  SliderColor="pink">
+            <MTabs @bind-Value="tab" AlignWithTitle SliderColor="pink">
                 <MTab Value="@("one")">
                     Item One
                 </MTab>
@@ -45,12 +45,10 @@
     </FabTransition>
 </MCard>
 
-
 @code {
     private StringNumber tab = "one";
 
     List<string> Items = new List<string>() { "one", "two", "three" };
-
 
     private dynamic ComputedActiveFab()
     {
