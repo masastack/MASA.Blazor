@@ -47,6 +47,11 @@
       "Description": "设置遮罩层的透明度"
     },
     {
+      "Name": "ScrimClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",

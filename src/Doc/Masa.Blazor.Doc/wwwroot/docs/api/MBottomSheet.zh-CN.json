@@ -85,6 +85,11 @@
       "Description": ""
     },
     {
+      "Name": "OverlayScrimClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "Persistent",
       "Type": "Boolean",
       "Description": ""

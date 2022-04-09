@@ -11,7 +11,7 @@
 A set of standard basic component libraries based on Material design specifications and BlazorComponent interaction capabilities
 
 [![MASA.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/Masa.Blazor/blob/develop/LICENSE) 
-[![.NET](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/main.yml/badge.svg)](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/main.yml)
+[![.NET](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/mirror-gitlab.yml/badge.svg)](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/mirror-gitlab.yml)
 [![Nuget](https://img.shields.io/nuget/v/Masa.Blazor)](https://www.nuget.org/packages/Masa.Blazor)
 [![Nuget](https://img.shields.io/nuget/dt/Masa.Blazor)](https://www.nuget.org/packages/Masa.Blazor)
 
@@ -41,8 +41,8 @@ MASA Blazor is based on the Material design specification, and each component is
 - Long-term support: full-time team maintenance, long-term support, and enterprise-level support
 - Choice of well-known companies: This technology framework has been chosen by many well-known companies, and the MASA Stack product line will continue to be used in the future, and new functions will continue to be added
 
-
-
+# Stats
+![Alt](https://repobeats.axiom.co/api/embed/2728adbcfa084a3f50de3587080404ee203c80e6.svg "Repobeats analytics image")
 
 # Getting started
 
