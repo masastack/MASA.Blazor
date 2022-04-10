@@ -127,6 +127,7 @@
   "Demos.Components.Divider.usage.Index",
   "Demos.Components.Divider.props.Inset",
   "Demos.Components.Divider.props.Vertical",
+  "Demos.Components.Divider.contents.ChildContent",
   "Demos.Components.Divider.misc.SubHeaders",
   "Demos.Components.Divider.misc.View",
   "Demos.Components.ECharts.usage.Basic",
