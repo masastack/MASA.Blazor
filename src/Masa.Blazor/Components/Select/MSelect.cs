@@ -108,6 +108,7 @@ namespace Masa.Blazor
         protected bool HasChips => Chips || SmallChips;
 
         protected override bool IsDirty => SelectedItems.Count > 0;
+        public override Action<TextFieldNumberProperty> NumberProps { get; set; }
 
         protected override Dictionary<string, object> InputAttrs => new()
         {
