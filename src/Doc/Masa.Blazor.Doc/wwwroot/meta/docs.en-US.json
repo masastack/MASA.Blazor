@@ -2967,6 +2967,35 @@
       },
       {
         "Order": 0,
+        "Title": "MSpeedDial",
+        "FullTitle": "MSpeedDial",
+        "Type": "menuItem",
+        "Url": "api/mspeeddial",
+        "Contents": [
+          {
+            "Id": "section-389932261",
+            "Title": "Component Pages",
+            "Level": 0
+          },
+          {
+            "Id": "section-1029938464",
+            "Title": "Props",
+            "Level": 0
+          },
+          {
+            "Id": "section-444565322",
+            "Title": "Contents",
+            "Level": 0
+          },
+          {
+            "Id": "section-1613329801",
+            "Title": "Events",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
         "Title": "MStepper",
         "FullTitle": "MStepper",
         "Type": "menuItem",
