@@ -20,6 +20,8 @@ namespace Masa.Blazor
 
         protected double ElementHeight { get; set; }
 
+        public override Action<TextFieldNumberProperty> NumberProps { get; set; }
+
         protected override Dictionary<string, object> InputAttrs => new(Attributes)
         {
             { "rows", Rows },

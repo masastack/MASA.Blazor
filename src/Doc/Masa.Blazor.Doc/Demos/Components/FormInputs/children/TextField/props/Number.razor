@@ -1,0 +1,23 @@
+﻿<MForm>
+    <MContainer>
+        <MRow>
+            <MCol Cols="12" Sm="6" Md="4">
+                <MTextField Type="number" TValue="decimal" @bind-Value="basicValue" Outlined Label="Basic"></MTextField>
+            </MCol>
+            <MCol Cols="12" Sm="6" Md="4">
+                <MTextField Type="number" TValue="decimal" @bind-Value="limitInputValue" Solo Label="Limit Input" NumberProps="@(prop=> { prop.Min = 1; prop.Max = 10; prop.Step = 0.1m; })">
+                </MTextField>
+            </MCol>
+            <MCol Cols="12" Sm="6" Md="4">
+                <MTextField Type="number" TValue="decimal" Label="Hide Control Button" @bind-Value="closeControlValue" NumberProps="@(prop=> { prop.Min = 10; prop.Max = 1000; prop.Step = 10m; prop.HideControl = true; })">
+                </MTextField>
+            </MCol>
+        </MRow>
+    </MContainer>
+</MForm>
+
+@code {
+    decimal basicValue = 1;
+    decimal limitInputValue = 1;
+    decimal closeControlValue = 10;
+}

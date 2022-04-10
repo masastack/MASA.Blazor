@@ -3710,6 +3710,17 @@
       },
       {
         "Order": 0,
+        "Name": "number",
+        "Title": "Input Number",
+        "Description": "<p>Numeric-only input box.</p>\n",
+        "Code": "<MForm>\r\n    <MContainer>\r\n        <MRow>\r\n            <MCol Cols=\"12\" Sm=\"6\" Md=\"4\">\r\n                <MTextField Type=\"number\" TValue=\"decimal\" @bind-Value=\"basicValue\" Outlined Label=\"Basic\"></MTextField>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\" Md=\"4\">\r\n                <MTextField Type=\"number\" TValue=\"decimal\" @bind-Value=\"limitInputValue\" Solo Label=\"Limit Input\" NumberProps=\"@(prop=> { prop.Min = 1; prop.Max = 10; prop.Step = 0.1m; })\">\r\n                </MTextField>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\" Md=\"4\">\r\n                <MTextField Type=\"number\" TValue=\"decimal\" Label=\"Hide Control Button\" @bind-Value=\"closeControlValue\" NumberProps=\"@(prop=> { prop.Min = 10; prop.Max = 1000; prop.Step = 10m; prop.HideControl = true; })\">\r\n                </MTextField>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n\r\n@code {\r\n    decimal basicValue = 1;\r\n    decimal limitInputValue = 1;\r\n    decimal closeControlValue = 10;\r\n}",
+        "Type": "Demos.Components.FormInputs.children.TextField.props.Number",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
         "Name": "outlined",
         "Title": "Outlined",
         "Description": "<p>Text fields can be used with an alternative outlined design.</p>\n",

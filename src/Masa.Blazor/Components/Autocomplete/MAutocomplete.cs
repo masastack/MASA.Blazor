@@ -44,6 +44,8 @@ namespace Masa.Blazor
 
         protected override IList<TItem> ComputedItems => FilteredItems;
 
+        public override Action<TextFieldNumberProperty> NumberProps { get; set; }
+
         protected IList<TItemValue> SelectedValues
         {
             get
