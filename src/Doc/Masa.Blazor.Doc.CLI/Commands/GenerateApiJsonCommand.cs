@@ -121,6 +121,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
             { "MSlider", new string[] { "Sliders", "Range sliders" } },
             { "MSnackbar", new string[] { "Snackbars" } },
             { "MSpacer", new string[] { "Grid system" } },
+            { "MSpeedDial", new string[] { "Floating Action Buttons" } },
             { "MStepper", new string[] { "Steppers" } },
             { "MStepperContent", new string[] { "Steppers" } },
             { "MStepperHeader", new string[] { "Steppers" } },
