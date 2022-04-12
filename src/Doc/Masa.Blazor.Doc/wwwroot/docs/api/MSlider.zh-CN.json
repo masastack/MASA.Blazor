@@ -186,6 +186,11 @@
       "Description": ""
     },
     {
+      "Name": "TextColor",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "ThumbColor",
       "Type": "String",
       "Default": "null",
