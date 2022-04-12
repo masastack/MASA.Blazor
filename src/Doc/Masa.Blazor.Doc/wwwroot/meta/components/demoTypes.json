@@ -258,6 +258,7 @@
   "Demos.Components.FormInputs.children.TextField.props.Clearable",
   "Demos.Components.FormInputs.children.TextField.props.Counter",
   "Demos.Components.FormInputs.children.TextField.props.CustomColors",
+  "Demos.Components.FormInputs.children.TextField.props.CustomTextColors",
   "Demos.Components.FormInputs.children.TextField.props.Dense",
   "Demos.Components.FormInputs.children.TextField.props.DisabledAndReadonly",
   "Demos.Components.FormInputs.children.TextField.props.Filled",
