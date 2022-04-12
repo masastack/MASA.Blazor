@@ -94,14 +94,27 @@
                 return null;
             }
 
+            window.getCurrentDocSearchLanguage = function (){
+                const language = window.getCookie('Masa_I18nConfig_Language');
+                if(!language || language === '' || language === 'zh-CN') {
+                    return 'zh';
+                }
+                return 'en';
+            }
+
             docsearch({
-              container: '#docsearch',
-              appId: 'TSB4MACWRC',
-              indexName: 'blazor-masastack',
-              apiKey: 'a38a8d4b58c5648825ba3fafce8b6ffa',
-              debug: false
+                container: '#docsearch',
+                appId: 'TSB4MACWRC',
+                indexName: 'blazor-masastack',
+                apiKey: 'a38a8d4b58c5648825ba3fafce8b6ffa',
+                debug: false,
+                //searchParameters: {
+                //    facetFilters: ['language:'+ getCurrentDocSearchLanguage()]
+                //}
             });
         })
+
+
     </script>
 </body>
 </html>
