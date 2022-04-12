@@ -94,8 +94,7 @@
     {
         RenderFragment customViewAction = (builder) =>
         {
-            builder.AddContent(0,
-            @<MButton Icon OnClick="HandleOnView">View</MButton>);
+            builder.AddContent(0, @<MButton OnClick="HandleOnView" Text> View </MButton>);
         };
 
         await PopupService.ToastAsync((config) =>
@@ -103,6 +102,7 @@
             config.Title = "Custom Action Message";
             config.Duration = 0;
             config.Content = "Not auto close";
+            config.Type = toastType;
             config.ActionContent = customViewAction;
             config.Light = !isDark;
             config.Dark = isDark;

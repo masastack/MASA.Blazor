@@ -790,3 +790,7 @@ input[type=number] {
     padding-top: 9px;
     align-self: flex-start;
 }
+
+.m-toast-container .m-snack__wrapper.theme--dark {
+    background-color: #323d6f
+}
