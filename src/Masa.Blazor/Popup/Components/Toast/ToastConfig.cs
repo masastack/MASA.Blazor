@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
-using OneOf;
 
 namespace Masa.Blazor.Popup.Components
 {
@@ -8,13 +7,14 @@ namespace Masa.Blazor.Popup.Components
         public bool Visible { get; set; } = true;
         public AlertTypes Type { get; set; }
         public string Color { get; set; }
-        public bool IsDark { get; set; } = true;
+        public bool Dark { get; set; }
+        public bool Light { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public int? Duration { get; set; } = 4000;
         public RenderFragment ActionContent { get; set; }
         public string Key { get; set; }
         public string CloseIcon { get; set; } = "mdi-close";
-        public Action<string> OnClose { get; set; }
+        public Func<string, Task> OnClose { get; set; }
     }
 }

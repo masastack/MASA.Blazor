@@ -3,8 +3,8 @@
 
 <MSnackbar @bind-Value="@Config.Visible"
            Color="@ComputedColor"
-           Dark="@Config.IsDark"
-           Light="@(!Config.IsDark)"
+           Dark="@IsDark"
+           Light="@(!IsDark)"
            Timeout="@Config.Duration.Value"
            OnClosed="HandleOnClose">
     <ChildContent>
@@ -13,12 +13,12 @@
             {
                 <MIcon Color="@ComputedIconColor" Class="mr-2">@ComputedIcon</MIcon>
             }
-       
+
             <div>
                 <div class="m-toast-text m-toast-title">
                     @Config.Title
                 </div>
-                
+
                 @if (!string.IsNullOrWhiteSpace(Config.Content))
                 {
                     <div class="m-toast-text m-toast-detail">

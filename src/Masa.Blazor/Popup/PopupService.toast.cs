@@ -5,8 +5,8 @@ namespace Masa.Blazor
 {
     public partial class PopupService
     {
-        public event Action<ToastGlobalConfig> OnConfig;
-        public event Func<ToastConfig, Task> OnOpening;
+        public event Action<ToastGlobalConfig> OnToastConfig;
+        public event Func<ToastConfig, Task> OnToastOpening;
 
         private Task Open(ToastConfig config)
         {
@@ -15,113 +15,74 @@ namespace Masa.Blazor
                 throw new ArgumentNullException(nameof(config));
             }
 
-            if (OnOpening != null)
+            if (OnToastOpening != null)
             {
-                return OnOpening.Invoke(config);
+                return OnToastOpening.Invoke(config);
             }
 
             return Task.CompletedTask;
         }
 
-        public Task ToastAsync(AlertTypes type, string title)
+        public Task ToastAsync(string title, AlertTypes type)
         {
-            return PreOpen(type, title);
+            return PreOpen(title, type);
         }
 
-        public Task ToastAsync(AlertTypes type, ToastConfig config)
+        public Task ToastAsync(ToastConfig config)
         {
-            return PreOpen(type, config);
+            return PreOpen(config);
         }
 
-        public Task ToastAsync(AlertTypes type, Action<ToastConfig> configAction)
+        public Task ToastAsync(Action<ToastConfig> configAction)
         {
-            return PreOpen(type, configAction);
+            return PreOpen(configAction);
         }
 
-        #region Success Api
         public Task ToastSuccessAsync(string title)
         {
-            return PreOpen(AlertTypes.Success, title);
+            return PreOpen(title, AlertTypes.Success);
         }
-        public Task ToastSuccessAsync(ToastConfig config)
-        {
-            return PreOpen(AlertTypes.Success, config);
-        }
-        public Task ToastSuccessAsync(Action<ToastConfig> configAction)
-        {
-            return PreOpen(AlertTypes.Success, configAction);
-        }
-        #endregion
 
-        #region Error Api
         public Task ToastErrorAsync(string title)
         {
-            return PreOpen(AlertTypes.Error, title);
+            return PreOpen(title, AlertTypes.Error);
         }
-        public Task ToastErrorAsync(ToastConfig config)
-        {
-            return PreOpen(AlertTypes.Error, config);
-        }
-        public Task ToastErrorAsync(Action<ToastConfig> configAction)
-        {
-            return PreOpen(AlertTypes.Error, configAction);
-        }
-        #endregion
 
-        #region Info Api
         public Task ToastInfoAsync(string title)
         {
-            return PreOpen(AlertTypes.Info, title);
+            return PreOpen(title, AlertTypes.Info);
         }
-        public Task ToastInfoAsync(ToastConfig config)
-        {
-            return PreOpen(AlertTypes.Info, config);
-        }
-        public Task ToastInfoAsync(Action<ToastConfig> configAction)
-        {
-            return PreOpen(AlertTypes.Info, configAction);
-        }
-        #endregion
 
-        #region Warning Api
         public Task ToastWarningAsync(string title)
         {
-            return PreOpen(AlertTypes.Warning, title);
+            return PreOpen(title, AlertTypes.Warning);
         }
-        public Task ToastWarningAsync(ToastConfig config)
-        {
-            return PreOpen(AlertTypes.Warning, config);
-        }
-        public Task ToastWarningAsync(Action<ToastConfig> configAction)
-        {
-            return PreOpen(AlertTypes.Warning, configAction);
-        }
-        #endregion
 
-        private Task PreOpen(AlertTypes type, OneOf<string, ToastConfig, Action<ToastConfig>> content)
+        private Task PreOpen(string title, AlertTypes type)
+        {
+            ToastConfig config = new();
+            config.Title = title;
+            config.Type = type;
+            return Open(config);
+        }
+
+        private Task PreOpen(OneOf<ToastConfig, Action<ToastConfig>> content)
         {
             ToastConfig config;
 
-            if (content.IsT2)
+            if (content.IsT1)
             {
                 config = new();
 
-                var configAction = content.AsT2;
+                var configAction = content.AsT1;
 
                 configAction?.Invoke(config);
             }
-            else if (content.IsT1)
-            {
-                config = content.AsT1;
-            }
             else
             {
-                config = new();
-
-                config.Title = content.AsT0;
+                config = content.AsT0;
             }
 
-            config.Type = type;
             return Open(config);
         }
 
@@ -142,18 +103,18 @@ namespace Masa.Blazor
             {
                 config = configParam.AsT0;
             }
-            else if(configParam.AsT1 != null)
+            else if (configParam.AsT1 != null)
             {
                 config = new();
                 configParam.AsT1.Invoke(config);
             }
 
-            if(config == null)
+            if (config == null)
             {
                 throw new ArgumentNullException(nameof(config));
             }
 
-            OnConfig?.Invoke(config);
+            OnToastConfig?.Invoke(config);
 
             return Task.CompletedTask;
         }

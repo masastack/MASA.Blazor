@@ -4,28 +4,29 @@ using System.Collections.Concurrent;
 
 namespace Masa.Blazor.Popup.Components
 {
-    public partial class Toast
+    public partial class Toast : IDisposable
     {
         [Inject]
         private IPopupService PopupService { get; set; }
 
         private readonly List<ToastConfig> _configs = new();
 
-        private readonly ConcurrentDictionary<string, ToastConfig> _configDict = new();
+        private readonly Dictionary<string, ToastConfig> _configDict = new();
 
-        private int? _duration = 400000;
+        private int? _duration = 4000;
 
         private int _maxCount = 0;
 
         private ToastPosition _position = ToastPosition.BottomRight;
-        public ComponentCssProvider CssProvider { get; } = new();
+
+        private ComponentCssProvider CssProvider { get; } = new();
 
         protected override Task OnInitializedAsync()
         {
             if (PopupService != null)
             {
-                PopupService.OnOpening += NotifyAsync;
-                PopupService.OnConfig += Config;
+                PopupService.OnToastOpening += NotifyAsync;
+                PopupService.OnToastConfig += Config;
             }
 
             SetComponentClass();
@@ -33,18 +34,19 @@ namespace Masa.Blazor.Popup.Components
             return base.OnInitializedAsync();
         }
 
-        protected void SetComponentClass()
+        private void SetComponentClass()
         {
-            CssProvider.Apply((cssbuilder) =>
+            CssProvider.Apply((cssBuilder) =>
             {
-                cssbuilder.Add("m-toast-container");
+                cssBuilder.Add("m-toast-container");
 
             }, (styleBuilder) =>
             {
-                styleBuilder.AddIf("top: 1rem; left: 1rem;", () => _position == ToastPosition.TopLeft);
-                styleBuilder.AddIf("top: 1rem; right: 1rem;", () => _position == ToastPosition.TopRight);
-                styleBuilder.AddIf("bottom: 1rem; left: 1rem;", () => _position == ToastPosition.BottomLeft);
-                styleBuilder.AddIf("bottom: 1rem; right: 1rem;", () => _position == ToastPosition.BottomRight);
+                styleBuilder
+                    .AddIf("top: 1rem; left: 1rem;", () => _position == ToastPosition.TopLeft)
+                    .AddIf("top: 1rem; right: 1rem;", () => _position == ToastPosition.TopRight)
+                    .AddIf("bottom: 1rem; left: 1rem;", () => _position == ToastPosition.BottomLeft)
+                    .AddIf("bottom: 1rem; right: 1rem;", () => _position == ToastPosition.BottomRight);
             });
         }
 
@@ -92,16 +94,16 @@ namespace Masa.Blazor.Popup.Components
             }
             else
             {
-                _configDict.TryAdd(config.Key, config);
+                _configDict.Add(config.Key, config);
                 _configs.Add(config);
             }
 
             return InvokeAsync(StateHasChanged);
         }
 
-        public Task HandleOnCloseAsync(ToastConfig args)
+        public Task HandleOnCloseAsync(ToastConfig config)
         {
-            return RemoveItem(args);
+            return RemoveItem(config);
         }
 
         private Task RemoveItem(ToastConfig config)
@@ -112,12 +114,18 @@ namespace Masa.Blazor.Popup.Components
                 config.OnClose?.Invoke(config.Key);
                 InvokeAsync(StateHasChanged);
 
-                _configDict.TryRemove(config.Key, out _);
+                _configDict.Remove(config.Key, out _);
                 _configs.Remove(config);
                 InvokeAsync(StateHasChanged);
             }
 
             return Task.CompletedTask;
+        }
+
+        public void Dispose()
+        {
+            PopupService.OnToastOpening -= NotifyAsync;
+            PopupService.OnToastConfig -= Config;
         }
     }
 }

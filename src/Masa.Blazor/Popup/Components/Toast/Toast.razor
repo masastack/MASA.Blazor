@@ -1,8 +1,8 @@
 ﻿@namespace Masa.Blazor.Popup.Components
 
 <div class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()">
-    foreach (var config in _configs)
+    @foreach (var config in _configs)
     {
-        <ToastItem Config="config" @key="config" HandleOnCloseAsync="@HandleOnCloseAsync"></ToastItem>
+        <ToastItem Config="config" @key="config" OnClose="@HandleOnCloseAsync"></ToastItem>
     }
 </div>
