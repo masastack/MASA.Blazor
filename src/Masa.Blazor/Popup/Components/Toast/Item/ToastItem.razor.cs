@@ -42,13 +42,5 @@ namespace Masa.Blazor.Popup.Components
             this.Type = Config?.Type;
             return base.OnInitializedAsync();
         }
-
-        public string ComputedColor
-        {
-            get
-            {
-                return Config.Color;
-            }
-        }
     }
 }

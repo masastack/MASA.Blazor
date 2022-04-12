@@ -2,7 +2,7 @@
 @inherits AlertingPopupComponentBase
 
 <MSnackbar @bind-Value="@Config.Visible"
-           Color="@ComputedColor"
+           Color="@Config.Color"
            Dark="@IsDark"
            Light="@(!IsDark)"
            Timeout="@Config.Duration.Value"
