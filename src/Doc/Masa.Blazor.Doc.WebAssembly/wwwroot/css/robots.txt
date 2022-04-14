@@ -1,0 +1,10 @@
+﻿User-Agent: *
+Disallow: /getting-started/getting-started/*
+Disallow: /introduction/introduction/*
+Disallow: /about/about/*
+Disallow: /features/features/*
+Disallow: /stylesandanimations/stylesandanimations/*
+Disallow: /components/components/*
+Disallow: /api/api/*
+Disallow: /_host
+Disallow: /_host/*

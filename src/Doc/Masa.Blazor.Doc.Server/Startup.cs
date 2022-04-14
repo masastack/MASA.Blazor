@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using Masa.Blazor.Doc.Services;
+using Microsoft.AspNetCore.StaticFiles;
+using System.Globalization;
 
 namespace Masa.Blazor.Doc.Server
 {
@@ -10,6 +12,7 @@ namespace Masa.Blazor.Doc.Server
         }
 
         public IConfiguration Configuration { get; }
+        private CrawlService _crawlService;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -25,7 +28,7 @@ namespace Masa.Blazor.Doc.Server
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime, CrawlService crawlService)
         {
             if (env.IsDevelopment())
             {
@@ -52,9 +55,13 @@ namespace Masa.Blazor.Doc.Server
                 opts.SupportedUICultures = supportedCultures;
             });
 
+            _crawlService = crawlService;
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
+                endpoints.MapGet("/robots.txt", context => _crawlService.GetRobotsTxt(context));
+                endpoints.MapGet("/sitemap.xml", context => _crawlService.GetSitemap(context));
                 endpoints.MapFallbackToPage("/_Host");
             });
         }
