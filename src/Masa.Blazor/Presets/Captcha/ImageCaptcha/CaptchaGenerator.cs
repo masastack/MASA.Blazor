@@ -24,7 +24,7 @@ namespace Masa.Blazor.Presets
         protected Func<IEnumerable<(int x, int y)>> NoisePointMapGenFunc { get; set; }
 
         public CaptchaGenerator()
-            :this(120, 48)
+            : this(120, 48)
         {
 
         }
