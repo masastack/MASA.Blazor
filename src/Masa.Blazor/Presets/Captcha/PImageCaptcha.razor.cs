@@ -51,26 +51,7 @@ namespace Masa.Blazor.Presets
         public bool Shaped { get; set; }
 
         [Parameter]
-        public string Value
-        {
-            get
-            {
-                return _value;
-            }
-            set
-            {
-                if(_value != value)
-                {
-                    _value = value;
-                    if (ValueChanged.HasDelegate)
-                    {
-                        ValueChanged.InvokeAsync();
-                    }
-                }
-
-            }
-        }
-
+        public string Value { get; set; }
 
         [Parameter]
         public EventCallback<string> ValueChanged { get; set; }
@@ -105,8 +86,18 @@ namespace Masa.Blazor.Presets
         [Parameter]
         public EventCallback<MouseEventArgs> Refresh { get; set; }
 
-        private string _value;
-        
+        [Parameter]
+        public string TextFieldStyle { get; set; }
+
+        [Parameter]
+        public string ImageStyle { get; set; }
+
+        [Parameter]
+        public string TextFieldClass { get; set; }
+
+        [Parameter]
+        public string ImageClass { get; set; }
+
         private string _captchaCode;
 
         private IEnumerable<Func<string, StringBoolean>> rules;
@@ -155,8 +146,9 @@ namespace Masa.Blazor.Presets
                 {
                     var textFieldRect = await Js.InvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, TextFieldElement.InputSlotElement);
                     CaptchaHeight = (int)textFieldRect.Height;
-                    generator = new CaptchaGenerator(CaptchaWidth, CaptchaHeight);
                 }
+
+                generator = new CaptchaGenerator(CaptchaWidth, CaptchaHeight);
 
                 await GenerateImage();
             }
@@ -183,9 +175,9 @@ namespace Masa.Blazor.Presets
                 var byteArr = generator.GenerateImageAsByteArray(CaptchaCode);
                 string imageBase64Data2 = Convert.ToBase64String(byteArr);
                 ImageUrl = string.Format("data:image/jpeg;base64,{0}", imageBase64Data2);
-            }
 
-            InvokeAsync(StateHasChanged);
+                InvokeAsync(StateHasChanged);
+            }
 
             return Task.CompletedTask;
         }

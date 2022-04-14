@@ -703,9 +703,5 @@ input[type=number] {
 }
 
 .m-captcha-container .m-image {
-    border-radius: 8px;
-}
-
-.m-captcha-container .m-text-field--outlined {
-    border-radius: 8px;
+    cursor: pointer;
 }

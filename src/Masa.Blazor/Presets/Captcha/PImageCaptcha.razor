@@ -9,17 +9,20 @@
                 Dark="@Dark"
                 Light="@Light"
                 Shaped="@Shaped"
-                @bind-Value="@Value"
+                Value="@Value"
+                ValueChanged="@ValueChanged"
                 Placeholder="@Placeholder"
                 Clearable="@Clearable"
                 ClearIcon="@ClearIcon"
                 Rounded="@Rounded"
+                Style="@TextFieldStyle"
+                Class="@TextFieldClass"
                 Height="@Height"
                 Rules="@rules"
                 Label="@Label"
                 @ref="TextFieldElement">
         <AppendOuterContent>
-            <MImage MinWidth="@CaptchaWidth" MinHeight="@CaptchaHeight" Src="@ImageUrl" @onclick="OnClickAsync"></MImage>
+            <MImage MinWidth="@CaptchaWidth" MinHeight="@CaptchaHeight" Src="@ImageUrl" @onclick="OnClickAsync" Style="@ImageStyle" Class="@ImageClass"></MImage>
         </AppendOuterContent>
     </MTextField>
 </div>
