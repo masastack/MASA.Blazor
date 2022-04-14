@@ -71,7 +71,7 @@ namespace Masa.Blazor.Presets
                 if (_captchaCode != value)
                 {
                     _captchaCode = value;
-                    
+
                     GenerateImage();
                 }
             }
@@ -142,7 +142,7 @@ namespace Masa.Blazor.Presets
                     }
                 };
 
-                if(CaptchaHeight == 0)
+                if (CaptchaHeight == 0)
                 {
                     var textFieldRect = await Js.InvokeAsync<BoundingClientRect>(JsInteropConstants.GetBoundingClientRect, TextFieldElement.InputSlotElement);
                     CaptchaHeight = (int)textFieldRect.Height;

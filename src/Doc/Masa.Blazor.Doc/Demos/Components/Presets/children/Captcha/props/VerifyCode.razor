@@ -1,7 +1,7 @@
 ﻿@using System.Text
 <PImageCaptcha CaptchaCode="@captchaCode" CaptchaWidth="200" Label="VerifyCode" ErrorMessage="@ErrorMessage" VerifyCode="@verifyCode" Refresh="RefreshCode"></PImageCaptcha>
 
-@code{
+@code {
     string captchaCode = "";
 
     string randomCode = "123456789";
@@ -22,13 +22,13 @@
 
     private Task RefreshCode()
     {
-       var firstNumber = randomCode[random.Next(0, randomCode.Length)].ToString();
+        var firstNumber = randomCode[random.Next(0, randomCode.Length)].ToString();
 
         var secondNumber = randomCode[random.Next(0, randomCode.Length)].ToString();
 
         var calcFun = calcFunCode[random.Next(0, calcFunCode.Length)].ToString();
 
-        switch(calcFun)
+        switch (calcFun)
         {
             case "+":
                 verifyCode = (int.Parse(firstNumber) + int.Parse(secondNumber)).ToString();
