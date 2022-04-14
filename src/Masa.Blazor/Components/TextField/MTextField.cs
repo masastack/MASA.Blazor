@@ -357,6 +357,15 @@ namespace Masa.Blazor
                     cssBuilder
                         .Add("m-text-field__slot");
                 })
+                .Apply("text-field-input", cssBuilder =>
+                {
+                    cssBuilder
+                        .AddTextColor(TextColor);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddTextColor(TextColor);
+                })
                 .Apply("text-field-prefix", cssBuilder =>
                 {
                     cssBuilder

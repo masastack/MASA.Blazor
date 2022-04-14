@@ -191,6 +191,11 @@
       "Description": ""
     },
     {
+      "Name": "TextColor",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "ValidateOnBlur",
       "Type": "Boolean",
       "Default": "false",

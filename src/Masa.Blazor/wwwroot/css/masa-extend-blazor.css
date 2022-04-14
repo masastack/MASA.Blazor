@@ -465,13 +465,13 @@ code[class*=language-], pre[class*=language-] {
     height: 36px;
 }
 
-    .m-presets-page-header--h-actions > * {
-        margin: 0 4px;
-    }
+.m-presets-page-header--h-actions > * {
+    margin: 0 4px;
+}
 
-        .m-presets-page-header--h-actions > *:last-child {
-            margin-right: 0px;
-        }
+.m-presets-page-header--h-actions > *:last-child {
+    margin-right: 0px;
+}
 
 .m-sheet.m-stepper:not(.m-sheet--outlined) {
     box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
@@ -696,6 +696,52 @@ input[type=number] {
 
 .m-number-input-up-disabled button {
     cursor: not-allowed !important;
+}
+
+.m-divider__wrapper {
+    line-height: 1px;
+}
+
+.m-divider__wrapper.m-divider__wrapper--has-content {
+    padding: 8px;
+}
+
+.m-divider__wrapper.m-divider__wrapper--left {
+    text-align: left;
+}
+
+.m-divider__wrapper.m-divider__wrapper--right {
+    text-align: right;
+}
+
+.m-divider__wrapper.m-divider__wrapper--center {
+    text-align: center;
+}
+
+.m-divider__content {
+    padding: 0 1rem;
+}
+
+.m-divider__wrapper--left .m-divider__content {
+    margin-left: 3%;
+}
+
+.m-divider__wrapper--left .m-divider__content.m-divider--inset {
+    margin-left: calc(3% + 72px);
+}
+
+.m-divider__wrapper--right .m-divider__content {
+    margin-right: 3%;
+}
+
+.theme--light.m-divider__content {
+    background-color: #FFF;
+    color: rgba(0, 0, 0, .87);
+}
+
+.theme--dark.m-divider__content {
+    background-color: #1E1E1E;
+    color: #FFF;
 }
 
 .m-captcha-container .m-input__append-outer {

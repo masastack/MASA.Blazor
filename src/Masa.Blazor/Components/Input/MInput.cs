@@ -9,6 +9,9 @@
         public string BackgroundColor { get; set; }
 
         [Parameter]
+        public string TextColor { get; set; }
+
+        [Parameter]
         public bool Dense { get; set; }
 
         [Parameter]
