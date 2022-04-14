@@ -1,0 +1,58 @@
+﻿@using System.Text
+
+<MForm>
+    <MContainer>
+        <MRow>
+            <MCol Cols="12" Sm="6">
+                <PImageCaptcha CaptchaCode="@captchaCodes[0]" Label="Regular" Refresh="e=> RefreshCode(0)"></PImageCaptcha>
+            </MCol>
+            <MCol Cols="12" Sm="6">
+                <PImageCaptcha CaptchaCode="@captchaCodes[1]" Outlined Label="OutLine" Refresh="e=> RefreshCode(1)"></PImageCaptcha>
+            </MCol>
+            <MCol Cols="12" Sm="6">
+                <PImageCaptcha CaptchaCode="@captchaCodes[2]" Filled Label="Filled" Refresh="e=> RefreshCode(2)"></PImageCaptcha>
+            </MCol>
+            <MCol Cols="12" Sm="6">
+                <PImageCaptcha CaptchaCode="@captchaCodes[3]" Dense Label="Dense" Refresh="e=> RefreshCode(3)"></PImageCaptcha>
+            </MCol>
+            <MCol Cols="12" Sm="6">
+                <PImageCaptcha CaptchaCode="@captchaCodes[4]" Solo Label="Solo" Refresh="e=> RefreshCode(4)"></PImageCaptcha>
+            </MCol>
+        </MRow>
+    </MContainer>
+</MForm>
+
+
+@code {
+    int width = 220;
+
+    List<string> captchaCodes = new List<string>();
+
+    string randomCode = "1234567890abcdefghijklmn";
+
+    Random random = new Random();
+
+    protected override Task OnInitializedAsync()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            captchaCodes.Add("");
+            RefreshCode(i);
+        }
+
+        return base.OnInitializedAsync();
+    }
+
+    private Task RefreshCode(int index)
+    {
+        var sb = new StringBuilder();
+        for (int i = 0; i < 5; i++)
+        {
+            sb.Append(randomCode[random.Next(0, randomCode.Length)]);
+        }
+
+        captchaCodes[index] = sb.ToString();
+
+        return Task.CompletedTask;
+    }
+}

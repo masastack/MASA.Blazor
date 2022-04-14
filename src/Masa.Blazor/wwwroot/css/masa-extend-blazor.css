@@ -699,9 +699,10 @@ input[type=number] {
 }
 
 .m-captcha-container .m-input__append-outer {
-    margin-top: 0px;
+    margin-top: 0px !important;
 }
 
 .m-captcha-container .m-image {
     cursor: pointer;
+    border-radius: 4px;
 }
