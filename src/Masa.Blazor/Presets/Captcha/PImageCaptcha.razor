@@ -1,0 +1,27 @@
+﻿@namespace Masa.Blazor.Presets
+
+<div class="m-captcha-container">
+    <MTextField TValue="string"
+                Outlined="@Outlined"
+                Solo="@Solo"
+                Filled="@Filled"
+                Dense="@Dense"
+                Dark="@Dark"
+                Light="@Light"
+                Shaped="@Shaped"
+                @bind-Value="@Value"
+                Placeholder="@Placeholder"
+                Clearable="@Clearable"
+                ClearIcon="@ClearIcon"
+                Rounded="@Rounded"
+                Height="@Height"
+                Rules="@rules"
+                Label="@Label"
+                @ref="TextFieldElement">
+        <AppendOuterContent>
+            <MImage MinWidth="@CaptchaWidth" MinHeight="@CaptchaHeight" Src="@ImageUrl" @onclick="OnClickAsync"></MImage>
+        </AppendOuterContent>
+    </MTextField>
+</div>
+
+
