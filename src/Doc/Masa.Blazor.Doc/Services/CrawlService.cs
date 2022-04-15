@@ -1,31 +1,38 @@
 ﻿using Masa.Blazor.Doc.Models;
+using Masa.Blazor.Doc.Utils;
 using Microsoft.AspNetCore.Http;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Masa.Blazor.Doc.Services
 {
     public class CrawlService
     {
         private readonly DemoService _demoService;
-        public CrawlService(DemoService demoService)
+        private ConcurrentCache<string, ValueTask<string>> _robotsCache;
+        private readonly HttpClient _httpClient;
+        private const string RobotTxtCache = nameof(RobotTxtCache);
+
+        public CrawlService(HttpClient httpClient, DemoService demoService)
         {
             _demoService = demoService;
+            _httpClient = httpClient;
+            _httpClient.BaseAddress ??= new Uri("http://127.0.0.1:5000");
+            _robotsCache = new ConcurrentCache<string, ValueTask<string>>();
         }
 
         public async Task GetRobotsTxt(HttpContext context)
         {
-            var assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var txtPath = Path.Combine(assemblyPath, "wwwroot", "robots.txt");
-
-            if (File.Exists(txtPath))
+            var txt = await _robotsCache.GetOrAdd(RobotTxtCache, async(key) =>
             {
-                var robotsTxt = File.ReadAllText(txtPath);
-                await context.Response.WriteAsync(robotsTxt);
-            }
+                var robotsTxt= await _httpClient.GetStringAsync($"_content/Masa.Blazor.Doc/robots.txt");
+                return robotsTxt;
+            });
 
-            await context.Response.WriteAsync("");
+            await context.Response.WriteAsync(txt);
         }
 
         public async Task GetSitemap(HttpContext context)
@@ -34,23 +41,38 @@ namespace Masa.Blazor.Doc.Services
 
             var menuList = await _demoService.GetMenuAsync();
 
-            StringBuilder sb = new StringBuilder(5000);
+            var urlSet = new Urlset();
+
+            var urls = new List<Url>();
 
             var hash = new HashSet<string>();
 
             foreach (var menu in menuList)
             {
-                AppendMenuUrl(menu, sb, host, hash);
+                AppendMenuUrl(menu, host, urls, hash);
             }
 
-            await context.Response.WriteAsync(sb.ToString());
+            urlSet.Urls = urls;
+
+            var xmlSerializer = new XmlSerializer(typeof(Urlset));
+
+            context.Response.Headers.Add("Content-Type", "application/xml");
+            using (StringWriter textWriter = new ())
+            {
+                xmlSerializer.Serialize(textWriter, urlSet);
+                var xmlText = textWriter.ToString();
+                await context.Response.WriteAsync(xmlText);
+            }
         }
 
-        private static void AppendMenuUrl(DemoMenuItemModel menu, StringBuilder sb, string host, HashSet<string> hash)
+        private static void AppendMenuUrl(DemoMenuItemModel menu, string host, List<Url> urls, HashSet<string> hash)
         {
             if (!hash.Contains(menu.Url))
             {
-                sb.AppendLine(host + "/" + menu.Url);
+                urls.Add(new Url()
+                {
+                    loc = host + "/" + menu.Url
+                });
 
                 hash.Add(menu.Url);
             }
@@ -59,11 +81,9 @@ namespace Masa.Blazor.Doc.Services
             {
                 foreach (var child in menu.Children)
                 {
-                    AppendMenuUrl(child, sb, host, hash);
+                    AppendMenuUrl(child, host, urls, hash);
                 }
             }
-
-            return;
         }
     }
 }
