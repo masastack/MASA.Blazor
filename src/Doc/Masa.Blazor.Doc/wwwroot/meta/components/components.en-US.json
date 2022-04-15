@@ -1959,7 +1959,7 @@
         "Name": "beforeAllUpload",
         "Title": "Before all upload",
         "Description": "",
-        "Code": "@using Masa.Blazor.Components.Editor;\r\n<MEditor @ref=\"_ref\"  BeforeAllUploadAsync=\"BeforeAllUploadAsync\" >\r\n</MEditor>\r\n@code {\r\n    [Inject] \r\n    private IJSRuntime Js { get; set; }\r\n    private MEditor _ref { get; set; }\r\n\r\n    private async Task<bool> BeforeAllUploadAsync(List<EditorUploadFileItem> flist)\r\n    {\r\n        //await Js.InvokeVoidAsync(\"uploadFilePic\", _ref.ContentRef, _ref.Ref);\r\n        return true;\r\n    }\r\n}\r\n\r\n",
+        "Code": "@using Masa.Blazor.Components.Editor;\r\n<MEditor @ref=\"_ref\" BeforeAllUploadAsync=\"BeforeAllUploadAsync\">\r\n</MEditor>\r\n@code {\r\n    [Inject]\r\n    private IJSRuntime Js { get; set; }\r\n    private MEditor _ref { get; set; }\r\n\r\n    private async Task<bool> BeforeAllUploadAsync(List<EditorUploadFileItem> flist)\r\n    {\r\n        //Please cancel this comment\r\n        //await Js.InvokeVoidAsync(\"Demo.Quill.uploadFilePic\", _ref.ContentRef, _ref.Ref, 0);\r\n        return true;\r\n    }\r\n}\r\n\r\n",
         "Type": "Demos.Components.Editor.events.BeforeAllUpload",
         "Style": "",
         "Debug": false,

@@ -32,10 +32,10 @@ export function init(quillElement, obj, toolBarContainer, readOnly,
         handlers: {}
     };
     toolbar.handlers.image = function image() {
-        var self = this;
+        let self = this;
         handlerImage(obj,self, uploadConfig);
     };
-    var options = {
+    let options = {
         modules: {
             toolbar: toolbar,
             "emoji-toolbar": true,
@@ -84,33 +84,33 @@ export function enableEditor(quillElement, mode) {
     quillElement.__quill.enable(mode);
 }
 export function insertImage(quillElement, imageURL) {
-    var quill = quillElement.__quill;
-    var length = quill.getSelection().index;
+    let quill = quillElement.__quill;
+    let length = quill.getSelection().index;
     quill.insertEmbed(length, 'image', imageURL);
     quill.setSelection(length + 1);
 }
 export function clearFile(element) {
-    var fileInput = element.querySelector('input.ql-image[type=file]');
+    let fileInput = element.querySelector('input.ql-image[type=file]');
     fileInput.value = '';
 }
 export function uploadFilePic(quillElement, element,uploadConfig, index) {
-    var quill = quillElement.__quill
-    var fileInput = element.querySelector('input.ql-image[type=file]')
+    let quill = quillElement.__quill
+    let fileInput = element.querySelector('input.ql-image[type=file]')
     // 创建formData
-    var formData = new FormData()
-    var files = fileInput.files;
+    let formData = new FormData()
+    let files = fileInput.files;
     formData.append(uploadConfig.name, files[index])
     // 如果需要token且存在token
     if (uploadConfig.token) {
         formData.append(uploadConfig.tokenName, uploadConfig.token)
     }
-    var oReq = new XMLHttpRequest();
+    let oReq = new XMLHttpRequest();
     oReq.onreadystatechange = function () {
         if (oReq.readyState == 4 && oReq.status == 200) {
-            var json = JSON.parse(oReq.responseText);
-            var pathKey = uploadConfig.pathKey || "path";
-            var url = json[pathKey];
-            var length = quill.getSelection().index;
+            let json = JSON.parse(oReq.responseText);
+            let pathKey = uploadConfig.pathKey || "path";
+            let url = json[pathKey];
+            let length = quill.getSelection().index;
             quill.insertEmbed(length, 'image', url);
             quill.setSelection(length + 1);
             index += 1;
@@ -136,8 +136,8 @@ export default {
 }
 
 function handlerImage(obj,self, uploadConfig) {
-    var _uploadConfig = uploadConfig || defaultUploadConfig;
-    var fileInput = self.container.querySelector('input.ql-image[type=file]')
+    let _uploadConfig = uploadConfig || defaultUploadConfig;
+    let fileInput = self.container.querySelector('input.ql-image[type=file]')
     if (fileInput === null) {
         fileInput = document.createElement('input')
         fileInput.setAttribute('type', 'file')
@@ -162,7 +162,7 @@ function handlerImage(obj,self, uploadConfig) {
 function getFileInfo(files) {
     if (files && files.length > 0) {
         let fileInfo = [];
-        for (var i = 0; i < files.length; i++) {
+        for (let i = 0; i < files.length; i++) {
             let file = files[i];
             const objectUrl = getObjectURL(file);
             fileInfo.push({
@@ -178,7 +178,7 @@ function getFileInfo(files) {
 }
 
 function getObjectURL(file){
-    var url = null;
+    let url = null;
     if (window.URL != undefined) {
         url = window.URL.createObjectURL(file);
     } else if (window.webkitURL != undefined) {
