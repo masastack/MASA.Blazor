@@ -20,14 +20,43 @@ namespace Masa.Blazor
         [Parameter]
         public bool ShowDetail { get; set; }
 
+        private Exception _exception;
+        public Exception Exception
+        {
+            get { return _exception ?? CurrentException; }
+            set { _exception = value; }
+        }
+
+        private bool _isFirstRender = true;
+        private bool _isShouldRender = true;
+
+        protected override bool ShouldRender()
+        {
+            return _isShouldRender && base.ShouldRender();
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+            _isFirstRender = firstRender;
+        }        
+
         protected override void OnParametersSet()
         {
-            Recover();
+            base.OnParametersSet();
+            if (!_isFirstRender)
+            {
+                Exception = null;
+                _isFirstRender = true;
+                _isShouldRender = true;
+                Recover();
+            }
         }
 
         protected override async Task OnErrorAsync(Exception exception)
         {
             Logger.LogError(exception, "OnErrorAsync");
+            Exception = exception;
             if (OnErrorHandleAsync != null)
             {
                 await OnErrorHandleAsync(exception);
@@ -40,15 +69,16 @@ namespace Masa.Blazor
                     {
                         alert.Top = true;
                         alert.Type = AlertTypes.Error;
-                        alert.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
+                        alert.Content = ShowDetail ? $"{Exception.Message}:{Exception.StackTrace}" : Exception.Message;
                     });
                 }
             }
+            _isShouldRender = false;
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            if (CurrentException is null || ShowAlert || OnErrorHandleAsync is not null)
+            if (Exception is null)
             {
                 builder.AddContent(0, ChildContent);
             }

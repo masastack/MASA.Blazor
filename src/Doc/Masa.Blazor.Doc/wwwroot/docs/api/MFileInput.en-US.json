@@ -323,6 +323,11 @@
       "Description": ""
     },
     {
+      "Name": "TextColor",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "TruncateLength",
       "Type": "StringNumber",
       "Default": "null",

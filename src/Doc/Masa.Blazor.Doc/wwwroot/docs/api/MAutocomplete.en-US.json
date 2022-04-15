@@ -394,6 +394,11 @@
       "Description": ""
     },
     {
+      "Name": "TextColor",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "Type",
       "Type": "String",
       "Default": "null",
