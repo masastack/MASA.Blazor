@@ -30,9 +30,16 @@ namespace Masa.Blazor
 
         protected int? ActiveThumb { get; set; }
 
+        public override Func<Task> DebounceTimerRun => SliderRangeDebounceTimerRun;
+
         protected override double GetRoundedValue(int index)
         {
             return RoundValue(DoubleInteralValues[index]);
+        }
+
+        public async Task SliderRangeDebounceTimerRun()
+        {
+
         }
 
         public override async Task HandleOnSliderClickAsync(MouseEventArgs args)
