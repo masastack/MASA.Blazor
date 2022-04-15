@@ -85,7 +85,7 @@ namespace Masa.Blazor
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
-            if (IsDisposed|| !firstRender)
+            if (IsDisposed || !firstRender)
             {
                 return;
             }
@@ -105,7 +105,7 @@ namespace Masa.Blazor
                 Theme,
                 Markdown,
                 Upload);
-            if(!string.IsNullOrEmpty(Value)) await SetHtmlAsync(Value);
+            if (!string.IsNullOrEmpty(Value)) await SetHtmlAsync(Value);
         }
 
         public override async Task<string> GetTextAsync()
@@ -197,7 +197,7 @@ namespace Masa.Blazor
                 await BeforeAllUploadAsync.Invoke(flist);
                 return;
             }
-            if (Upload!=default)
+            if (Upload != default)
             {
                 await QuillHelper.InvokeVoidAsync("uploadFilePic", ContentRef, Ref, Upload, 0);
             }

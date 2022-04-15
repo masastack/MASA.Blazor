@@ -378,6 +378,7 @@
   "Demos.Components.Markdown.props.Theme",
   "Demos.Components.Markdown.props.Toolbar",
   "Demos.Components.Markdown.props.Upload",
+  "Demos.Components.Markdown.events.BeforeAllUpload",
   "Demos.Components.Markdown.events.SomeEvents",
   "Demos.Components.Menu.usage.Index",
   "Demos.Components.Menu.props.Absolute",

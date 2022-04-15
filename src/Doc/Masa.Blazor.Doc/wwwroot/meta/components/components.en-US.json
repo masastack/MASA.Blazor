@@ -5165,6 +5165,17 @@
       },
       {
         "Order": 1,
+        "Name": "beforeAllUpload",
+        "Title": "Before all upload",
+        "Description": "",
+        "Code": "<MMarkdown @ref=\"_ref\" BeforeAllUpload=\"HandleUploadAsync\">\r\n</MMarkdown>\r\n\r\n@code {\r\n    [Inject]\r\n    private IJSRuntime Js { get; set; }\r\n    private MMarkdown _ref { get; set; }\r\n\r\n    private async Task HandleUploadAsync()\r\n    {\r\n        //Please cancel this comment\r\n        //await Js.InvokeVoidAsync(\"Demo.Vditor.uploadFile\", _ref.Ref, 0);\r\n    }\r\n}",
+        "Type": "Demos.Components.Markdown.events.BeforeAllUpload",
+        "Style": "",
+        "Debug": false,
+        "Group": 1
+      },
+      {
+        "Order": 1,
         "Name": "someEvents",
         "Title": "Some events",
         "Description": "<p>Focus, blur, select,esc,ctrl+enter and other events. For more events, please refer to API.</p>\n",

@@ -1,0 +1,14 @@
+﻿<MMarkdown @ref="_ref" BeforeAllUpload="HandleUploadAsync">
+</MMarkdown>
+
+@code {
+    [Inject]
+    private IJSRuntime Js { get; set; }
+    private MMarkdown _ref { get; set; }
+
+    private async Task HandleUploadAsync()
+    {
+        //Please cancel this comment
+        //await Js.InvokeVoidAsync("Demo.Vditor.uploadFile", _ref.Ref, 0);
+    }
+}
