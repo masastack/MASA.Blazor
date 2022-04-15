@@ -16,10 +16,4 @@
 		<ProjectReference Include="..\Masa.Blazor.Doc\Masa.Blazor.Doc.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Content Update="wwwroot\css\robots.txt">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
-	</ItemGroup>
-
 </Project>
