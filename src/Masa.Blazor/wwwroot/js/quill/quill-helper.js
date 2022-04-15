@@ -33,7 +33,7 @@ export function init(quillElement, obj, toolBarContainer, readOnly,
     };
     toolbar.handlers.image = function image() {
         var self = this;
-        handlerImage(self, uploadConfig);
+        handlerImage(obj,self, uploadConfig);
     };
     var options = {
         modules: {
@@ -84,63 +84,18 @@ export function enableEditor(quillElement, mode) {
     quillElement.__quill.enable(mode);
 }
 export function insertImage(quillElement, imageURL) {
-    var Delta = Quill.import('delta');
-    editorIndex = 0;
-    if (quillElement.__quill.getSelection() !== null) {
-        editorIndex = quillElement.__quill.getSelection().index;
-    }
-    return quillElement.__quill.updateContents(
-        new Delta()
-            .retain(editorIndex)
-            .insert({ image: imageURL },
-                { alt: imageURL }));
+    var quill = quillElement.__quill;
+    var length = quill.getSelection().index;
+    quill.insertEmbed(length, 'image', imageURL);
+    quill.setSelection(length + 1);
 }
-export default {
-    init,
-    getContent,
-    getText,
-    getHtml,
-    setHtml,
-    enableEditor,
-    insertImage
+export function clearFile(element) {
+    var fileInput = element.querySelector('input.ql-image[type=file]');
+    fileInput.value = '';
 }
-
-function handlerImage(self, uploadConfig) {
-    var _uploadConfig = uploadConfig || defaultUploadConfig;
-    var fileInput = self.container.querySelector('input.ql-image[type=file]')
-    if (fileInput === null) {
-        fileInput = document.createElement('input')
-        fileInput.setAttribute('type', 'file')
-        // 设置图片参数名
-        if (_uploadConfig.name) {
-            fileInput.setAttribute('name', _uploadConfig.name)
-        }
-        // 可设置上传图片的格式
-        fileInput.setAttribute('accept', _uploadConfig.accept)
-        fileInput.setAttribute('multiple', 'multiple')
-        fileInput.classList.add('ql-image')
-        // 监听选择文件
-        fileInput.addEventListener('change', function () {
-            if (fileInput.files.length === 0) {
-                return;
-            }
-            if (uploadConfig) {
-                uploadFilePic(_uploadConfig, self.quill, fileInput, 0);
-            }
-            else {
-                for (var i = 0; i < fileInput.files.length; i++) {
-                    insertLogo(self.quill);
-                }
-                fileInput.value = '';
-            }
-        })
-
-        self.container.appendChild(fileInput)
-    }
-    fileInput.click()
-}
-
-function uploadFilePic(uploadConfig, quill, fileInput, index) {
+export function uploadFilePic(quillElement, element,uploadConfig, index) {
+    var quill = quillElement.__quill
+    var fileInput = element.querySelector('input.ql-image[type=file]')
     // 创建formData
     var formData = new FormData()
     var files = fileInput.files;
@@ -160,7 +115,7 @@ function uploadFilePic(uploadConfig, quill, fileInput, index) {
             quill.setSelection(length + 1);
             index += 1;
             if (index < files.length) {
-                uploadFilePic(uploadConfig, quill, fileInput, index);
+                uploadFilePic(quillElement, element,uploadConfig,index);
             }
             else {
                 fileInput.value = '';
@@ -170,8 +125,64 @@ function uploadFilePic(uploadConfig, quill, fileInput, index) {
     oReq.open(uploadConfig.methods, uploadConfig.action);
     oReq.send(formData);
 }
-function insertLogo(quill) {
-    var length = quill.getSelection().index
-    quill.insertEmbed(length, 'image', "https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png")
-    quill.setSelection(length + 1)
+export default {
+    init,
+    getContent,
+    getText,
+    getHtml,
+    setHtml,
+    enableEditor,
+    insertImage
+}
+
+function handlerImage(obj,self, uploadConfig) {
+    var _uploadConfig = uploadConfig || defaultUploadConfig;
+    var fileInput = self.container.querySelector('input.ql-image[type=file]')
+    if (fileInput === null) {
+        fileInput = document.createElement('input')
+        fileInput.setAttribute('type', 'file')
+        // 设置图片参数名
+        if (_uploadConfig.name) {
+            fileInput.setAttribute('name', _uploadConfig.name)
+        }
+        // 可设置上传图片的格式
+        fileInput.setAttribute('accept', _uploadConfig.accept)
+        fileInput.setAttribute('multiple', 'multiple')
+        fileInput.classList.add('ql-image')
+        // 监听选择文件
+        fileInput.addEventListener('change', function () {
+            obj.invokeMethodAsync('HandleFileChanged', getFileInfo(fileInput.files));
+        })
+
+        self.container.appendChild(fileInput)
+    }
+    fileInput.click()
+}
+
+function getFileInfo(files) {
+    if (files && files.length > 0) {
+        let fileInfo = [];
+        for (var i = 0; i < files.length; i++) {
+            let file = files[i];
+            const objectUrl = getObjectURL(file);
+            fileInfo.push({
+                fileName: file.name,
+                size: file.size,
+                objectURL: objectUrl,
+                type: file.type
+            });
+        }
+
+        return fileInfo;
+    }
+}
+
+function getObjectURL(file){
+    var url = null;
+    if (window.URL != undefined) {
+        url = window.URL.createObjectURL(file);
+    } else if (window.webkitURL != undefined) {
+        url = window.webkitURL.createObjectURL(file);
+    }
+    return url;
 }

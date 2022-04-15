@@ -1,13 +1,5 @@
-﻿using BlazorComponent;
-using Masa.Blazor.Components.Editor;
-using Microsoft.AspNetCore.Components;
+﻿using Masa.Blazor.Components.Editor;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor
 {
@@ -65,6 +57,9 @@ namespace Masa.Blazor
 
         [Parameter]
         public EventCallback<MouseEventArgs> OnFocus { get; set; }
+
+        [Parameter]
+        public Func<List<EditorUploadFileItem>, Task<bool>> BeforeAllUploadAsync { get; set; }
 
         private string _value { get; set; }
         private bool _waitingUpdate { get; set; } = false;
@@ -191,6 +186,27 @@ namespace Masa.Blazor
             if (OnFocus.HasDelegate)
             {
                 await OnFocus.InvokeAsync();
+            }
+        }
+
+        [JSInvokable]
+        public async Task HandleFileChanged(List<EditorUploadFileItem> flist)
+        {
+            if (BeforeAllUploadAsync != null)
+            {
+                await BeforeAllUploadAsync.Invoke(flist);
+                return;
+            }
+            if (Upload!=default)
+            {
+                await QuillHelper.InvokeVoidAsync("uploadFilePic", ContentRef, Ref, Upload, 0);
+            }
+            else
+            {
+                foreach (var item in flist)
+                {
+                    await InsertImageAsync("https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png");
+                }
             }
         }
 
