@@ -125,27 +125,27 @@ namespace Masa.Blazor
 
         public async Task SetContentAsync(string Content)
         {
-            await QuillHelper.InvokeAsync<string>("setContent", ContentRef, Content);
+            await QuillHelper.InvokeVoidAsync("setContent", ContentRef, Content);
         }
 
         public async Task SetHtmlAsync(string quillHtml)
         {
-            await QuillHelper.InvokeAsync<string>("setHtml", ContentRef, quillHtml);
+            await QuillHelper.InvokeVoidAsync("setHtml", ContentRef, quillHtml);
         }
 
-        public async Task InsertImageAsync(string imageURL)
+        public async Task InsertImageAsync(string imageURL, int? editorIndex = null)
         {
-            await QuillHelper.InvokeAsync<string>("insertImage", ContentRef, imageURL);
+            await QuillHelper.InvokeVoidAsync("insertImage", ContentRef, imageURL, editorIndex);
         }
 
         public async Task EnableAsync()
         {
-            await QuillHelper.InvokeAsync<string>("enableEditor", ContentRef, true);
+            await QuillHelper.InvokeVoidAsync("enableEditor", ContentRef, true);
         }
 
         public async Task DisableAsync()
         {
-            await QuillHelper.InvokeAsync<string>("enableEditor", ContentRef, false);
+            await QuillHelper.InvokeVoidAsync("enableEditor", ContentRef, false);
         }
 
         [JSInvokable]

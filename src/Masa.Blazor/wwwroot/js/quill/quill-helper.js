@@ -83,11 +83,23 @@ export function setHtml(quillElement, quillHTMLContent) {
 export function enableEditor(quillElement, mode) {
     quillElement.__quill.enable(mode);
 }
-export function insertImage(quillElement, imageURL) {
-    let quill = quillElement.__quill;
-    let length = quill.getSelection().index;
-    quill.insertEmbed(length, 'image', imageURL);
-    quill.setSelection(length + 1);
+export function insertImage(quillElement, imageURL, editorIndex) {
+    let Delta = Quill.import('delta');
+
+    if (!!!editorIndex && editorIndex != 0) {
+        if (quillElement.__quill.getSelection() !== null) {
+            editorIndex = quillElement.__quill.getSelection().index;
+        }
+        else {
+            editorIndex = 0;
+        }
+    }
+
+    return quillElement.__quill.updateContents(
+        new Delta()
+            .retain(editorIndex)
+            .insert({ image: imageURL },
+                { alt: imageURL }));
 }
 export function clearFile(element) {
     let fileInput = element.querySelector('input.ql-image[type=file]');
