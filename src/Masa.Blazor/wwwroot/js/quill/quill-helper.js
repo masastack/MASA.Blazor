@@ -83,12 +83,18 @@ export function setHtml(quillElement, quillHTMLContent) {
 export function enableEditor(quillElement, mode) {
     quillElement.__quill.enable(mode);
 }
-export function insertImage(quillElement, imageURL) {
+export function insertImage(quillElement, imageURL, editorIndex) {
     var Delta = Quill.import('delta');
-    editorIndex = 0;
-    if (quillElement.__quill.getSelection() !== null) {
-        editorIndex = quillElement.__quill.getSelection().index;
+
+    if (!!!editorIndex && editorIndex != 0) {
+        if (quillElement.__quill.getSelection() !== null) {
+            editorIndex = quillElement.__quill.getSelection().index;
+        }
+        else {
+            editorIndex = 0;
+        }
     }
+
     return quillElement.__quill.updateContents(
         new Delta()
             .retain(editorIndex)
