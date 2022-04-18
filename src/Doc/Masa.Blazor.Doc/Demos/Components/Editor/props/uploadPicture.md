@@ -2,7 +2,7 @@
 order: 0
 title:
   zh-CN: 上传图片
-  en-US: UploadPicture
+  en-US: Upload picture
 ---
 
 ## zh-CN

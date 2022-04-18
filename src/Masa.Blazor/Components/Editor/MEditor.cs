@@ -1,13 +1,5 @@
-﻿using BlazorComponent;
-using Masa.Blazor.Components.Editor;
-using Microsoft.AspNetCore.Components;
+﻿using Masa.Blazor.Components.Editor;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor
 {
@@ -66,6 +58,9 @@ namespace Masa.Blazor
         [Parameter]
         public EventCallback<MouseEventArgs> OnFocus { get; set; }
 
+        [Parameter]
+        public Func<List<EditorUploadFileItem>, Task<bool>> BeforeAllUploadAsync { get; set; }
+
         private string _value { get; set; }
         private bool _waitingUpdate { get; set; } = false;
         private bool _editorRendered { get; set; } = false;
@@ -90,7 +85,7 @@ namespace Masa.Blazor
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
-            if (IsDisposed|| !firstRender)
+            if (IsDisposed || !firstRender)
             {
                 return;
             }
@@ -110,7 +105,7 @@ namespace Masa.Blazor
                 Theme,
                 Markdown,
                 Upload);
-            if(!string.IsNullOrEmpty(Value)) await SetHtmlAsync(Value);
+            if (!string.IsNullOrEmpty(Value)) await SetHtmlAsync(Value);
         }
 
         public override async Task<string> GetTextAsync()
@@ -130,12 +125,12 @@ namespace Masa.Blazor
 
         public async Task SetContentAsync(string Content)
         {
-            await QuillHelper.InvokeAsync<string>("setContent", ContentRef, Content);
+            await QuillHelper.InvokeVoidAsync("setContent", ContentRef, Content);
         }
 
         public async Task SetHtmlAsync(string quillHtml)
         {
-            await QuillHelper.InvokeAsync<string>("setHtml", ContentRef, quillHtml);
+            await QuillHelper.InvokeVoidAsync("setHtml", ContentRef, quillHtml);
         }
 
         public async Task InsertImageAsync(string imageURL, int? editorIndex = null)
@@ -145,12 +140,12 @@ namespace Masa.Blazor
 
         public async Task EnableAsync()
         {
-            await QuillHelper.InvokeAsync<string>("enableEditor", ContentRef, true);
+            await QuillHelper.InvokeVoidAsync("enableEditor", ContentRef, true);
         }
 
         public async Task DisableAsync()
         {
-            await QuillHelper.InvokeAsync<string>("enableEditor", ContentRef, false);
+            await QuillHelper.InvokeVoidAsync("enableEditor", ContentRef, false);
         }
 
         [JSInvokable]
@@ -191,6 +186,27 @@ namespace Masa.Blazor
             if (OnFocus.HasDelegate)
             {
                 await OnFocus.InvokeAsync();
+            }
+        }
+
+        [JSInvokable]
+        public async Task HandleFileChanged(List<EditorUploadFileItem> flist)
+        {
+            if (BeforeAllUploadAsync != null)
+            {
+                await BeforeAllUploadAsync.Invoke(flist);
+                return;
+            }
+            if (Upload != default)
+            {
+                await QuillHelper.InvokeVoidAsync("uploadFilePic", ContentRef, Ref, Upload, 0);
+            }
+            else
+            {
+                foreach (var item in flist)
+                {
+                    await InsertImageAsync("https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png");
+                }
             }
         }
 

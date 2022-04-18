@@ -32,10 +32,10 @@ export function init(quillElement, obj, toolBarContainer, readOnly,
         handlers: {}
     };
     toolbar.handlers.image = function image() {
-        var self = this;
-        handlerImage(self, uploadConfig);
+        let self = this;
+        handlerImage(obj,self, uploadConfig);
     };
-    var options = {
+    let options = {
         modules: {
             toolbar: toolbar,
             "emoji-toolbar": true,
@@ -84,7 +84,7 @@ export function enableEditor(quillElement, mode) {
     quillElement.__quill.enable(mode);
 }
 export function insertImage(quillElement, imageURL, editorIndex) {
-    var Delta = Quill.import('delta');
+    let Delta = Quill.import('delta');
 
     if (!!!editorIndex && editorIndex != 0) {
         if (quillElement.__quill.getSelection() !== null) {
@@ -101,6 +101,42 @@ export function insertImage(quillElement, imageURL, editorIndex) {
             .insert({ image: imageURL },
                 { alt: imageURL }));
 }
+export function clearFile(element) {
+    let fileInput = element.querySelector('input.ql-image[type=file]');
+    fileInput.value = '';
+}
+export function uploadFilePic(quillElement, element,uploadConfig, index) {
+    let quill = quillElement.__quill
+    let fileInput = element.querySelector('input.ql-image[type=file]')
+    // Create formdata
+    let formData = new FormData()
+    let files = fileInput.files;
+    formData.append(uploadConfig.name, files[index])
+    // If a token is required and exists
+    if (uploadConfig.token) {
+        formData.append(uploadConfig.tokenName, uploadConfig.token)
+    }
+    let oReq = new XMLHttpRequest();
+    oReq.onreadystatechange = function () {
+        if (oReq.readyState == 4 && oReq.status == 200) {
+            let json = JSON.parse(oReq.responseText);
+            let pathKey = uploadConfig.pathKey || "path";
+            let url = json[pathKey];
+            let length = quill.getSelection().index;
+            quill.insertEmbed(length, 'image', url);
+            quill.setSelection(length + 1);
+            index += 1;
+            if (index < files.length) {
+                uploadFilePic(quillElement, element,uploadConfig,index);
+            }
+            else {
+                fileInput.value = '';
+            }
+        }
+    }
+    oReq.open(uploadConfig.methods, uploadConfig.action);
+    oReq.send(formData);
+}
 export default {
     init,
     getContent,
@@ -111,34 +147,23 @@ export default {
     insertImage
 }
 
-function handlerImage(self, uploadConfig) {
-    var _uploadConfig = uploadConfig || defaultUploadConfig;
-    var fileInput = self.container.querySelector('input.ql-image[type=file]')
+function handlerImage(obj,self, uploadConfig) {
+    let _uploadConfig = uploadConfig || defaultUploadConfig;
+    let fileInput = self.container.querySelector('input.ql-image[type=file]')
     if (fileInput === null) {
         fileInput = document.createElement('input')
         fileInput.setAttribute('type', 'file')
-        // 设置图片参数名
+        // Set picture parameter name
         if (_uploadConfig.name) {
             fileInput.setAttribute('name', _uploadConfig.name)
         }
-        // 可设置上传图片的格式
+        // You can set the format of uploaded pictures
         fileInput.setAttribute('accept', _uploadConfig.accept)
         fileInput.setAttribute('multiple', 'multiple')
         fileInput.classList.add('ql-image')
-        // 监听选择文件
+        // Listen to select file
         fileInput.addEventListener('change', function () {
-            if (fileInput.files.length === 0) {
-                return;
-            }
-            if (uploadConfig) {
-                uploadFilePic(_uploadConfig, self.quill, fileInput, 0);
-            }
-            else {
-                for (var i = 0; i < fileInput.files.length; i++) {
-                    insertLogo(self.quill);
-                }
-                fileInput.value = '';
-            }
+            obj.invokeMethodAsync('HandleFileChanged', getFileInfo(fileInput.files));
         })
 
         self.container.appendChild(fileInput)
@@ -146,38 +171,30 @@ function handlerImage(self, uploadConfig) {
     fileInput.click()
 }
 
-function uploadFilePic(uploadConfig, quill, fileInput, index) {
-    // 创建formData
-    var formData = new FormData()
-    var files = fileInput.files;
-    formData.append(uploadConfig.name, files[index])
-    // 如果需要token且存在token
-    if (uploadConfig.token) {
-        formData.append(uploadConfig.tokenName, uploadConfig.token)
-    }
-    var oReq = new XMLHttpRequest();
-    oReq.onreadystatechange = function () {
-        if (oReq.readyState == 4 && oReq.status == 200) {
-            var json = JSON.parse(oReq.responseText);
-            var pathKey = uploadConfig.pathKey || "path";
-            var url = json[pathKey];
-            var length = quill.getSelection().index;
-            quill.insertEmbed(length, 'image', url);
-            quill.setSelection(length + 1);
-            index += 1;
-            if (index < files.length) {
-                uploadFilePic(uploadConfig, quill, fileInput, index);
-            }
-            else {
-                fileInput.value = '';
-            }
+function getFileInfo(files) {
+    if (files && files.length > 0) {
+        let fileInfo = [];
+        for (let i = 0; i < files.length; i++) {
+            let file = files[i];
+            const objectUrl = getObjectUrl(file);
+            fileInfo.push({
+                fileName: file.name,
+                size: file.size,
+                objectUrl: objectUrl,
+                type: file.type
+            });
         }
+
+        return fileInfo;
     }
-    oReq.open(uploadConfig.methods, uploadConfig.action);
-    oReq.send(formData);
 }
-function insertLogo(quill) {
-    var length = quill.getSelection().index
-    quill.insertEmbed(length, 'image', "https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png")
-    quill.setSelection(length + 1)
+
+function getObjectUrl(file){
+    let url = null;
+    if (window.URL != undefined) {
+        url = window.URL.createObjectURL(file);
+    } else if (window.webkitURL != undefined) {
+        url = window.webkitURL.createObjectURL(file);
+    }
+    return url;
 }
