@@ -1,15 +1,15 @@
 ﻿@using Masa.Blazor.Components.Editor;
-<MEditor @ref="_ref" BeforeAllUploadAsync="BeforeAllUploadAsync">
+<MEditor @ref="Ref" BeforeAllUploadAsync="BeforeAllUploadAsync">
 </MEditor>
 @code {
     [Inject]
-    private IJSRuntime _js { get; set; }
-    private MEditor _ref { get; set; }
+    private IJSRuntime JS { get; set; }
+    private MEditor Ref { get; set; }
 
     private async Task<bool> BeforeAllUploadAsync(List<EditorUploadFileItem> flist)
     {
         //Please cancel this comment
-        //await _js.InvokeVoidAsync("Demo.Quill.uploadFilePic", _ref.ContentRef, _ref.Ref, 0);
+        //await JS.InvokeVoidAsync("Demo.Quill.uploadFilePic", Ref.ContentRef, Ref.Ref, 0);
         return true;
     }
 }
