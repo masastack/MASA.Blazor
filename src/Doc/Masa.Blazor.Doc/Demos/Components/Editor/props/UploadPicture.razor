@@ -1,11 +1,11 @@
-﻿@using Masa.Blazor.Components.Editor;
-<MEditor @bind-Value="_editorContent" Upload="_upload">
+﻿@using Masa.Blazor.Components.Editor
+<MEditor Upload="_upload">
 </MEditor>
 @code {
-    private string _editorContent = "Hello MEditor!";
+
     private MEditorUpload _upload = new MEditorUpload
     {
-        Action = "api/upload",//Please change your upload address
+        Action = "/api/upload",//Please change your upload address
         TokenName = "authorization",
         Name="file",
         Accept = "image/png, image/gif, image/jpeg, image/bmp, image/x-icon",

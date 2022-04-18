@@ -12,6 +12,8 @@
         [Parameter]
         public bool Row { get; set; }
 
+        public override int DebounceMilliseconds { get; set; }
+
         protected List<MRadio<TValue>> Items { get; set; } = new();
 
         protected override void SetComponentClass()

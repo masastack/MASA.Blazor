@@ -38,6 +38,11 @@
   "Contents": [],
   "Events": [
     {
+      "Name": "BeforeAllUpload",
+      "Type": "EventCallback",
+      "Description": ""
+    },
+    {
       "Name": "HtmlChanged",
       "Type": "EventCallback<String>",
       "Description": ""

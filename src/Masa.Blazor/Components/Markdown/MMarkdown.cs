@@ -1,14 +1,4 @@
-﻿using BlazorComponent;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public class MMarkdown : BMarkdown, IAsyncDisposable
     {
@@ -54,10 +44,12 @@ namespace Masa.Blazor
         [Parameter]
         public EventCallback<string> OnToolbarButtonClick { get; set; }
 
+        [Parameter]
+        public EventCallback BeforeAllUpload { get; set; }
+
         private bool _editorRendered = false;
         private bool _wattingUpdate = false;
         private string _value;
-        private bool _afterFirstRender = false;
 
         private DotNetObjectReference<MMarkdown> ObjRef { get; set; }
 
@@ -84,7 +76,6 @@ namespace Masa.Blazor
             {
                 return;
             }
-            _afterFirstRender = true;
             await CreateMarkdownAsync();
         }
 
@@ -92,7 +83,7 @@ namespace Masa.Blazor
         {
             ObjRef = DotNetObjectReference.Create(this);
             VditorHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/vditor/vditor-helper.js");
-            await VditorHelper.InvokeVoidAsync("init", Ref, ObjRef, Value, Options);
+            await VditorHelper.InvokeVoidAsync("init", Ref, ObjRef, Value, Options, BeforeAllUpload.HasDelegate);
         }
 
         public async ValueTask<string> GetValueAsync()
@@ -195,6 +186,15 @@ namespace Masa.Blazor
             if (OnToolbarButtonClick.HasDelegate)
             {
                 await OnToolbarButtonClick.InvokeAsync(btnName);
+            }
+        }
+
+        [JSInvokable]
+        public async Task HandleFileChanged()
+        {
+            if (BeforeAllUpload.HasDelegate)
+            {
+                await BeforeAllUpload.InvokeAsync();
             }
         }
 
