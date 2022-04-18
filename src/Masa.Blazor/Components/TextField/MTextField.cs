@@ -85,6 +85,9 @@ namespace Masa.Blazor
         public EventCallback<KeyboardEventArgs> OnKeyDown { get; set; }
 
         [Parameter]
+        public EventCallback<KeyboardEventArgs> OnKeyUp { get; set; }
+
+        [Parameter]
         public EventCallback<TValue> OnInput { get; set; }
 
         [Parameter]
@@ -450,6 +453,8 @@ namespace Masa.Blazor
                 });
         }
 
+        public override Func<Task> DebounceTimerRun => TextFieldDebounceTimerRun;
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             NumberProps?.Invoke(Props);
@@ -462,6 +467,10 @@ namespace Masa.Blazor
                 //So we should wait a little time
                 //We may remove this when dialog been refactored
                 await Task.Delay(16 * 3);
+
+                var inputElement = Document.GetElementByReference(InputElement);
+                await inputElement.AddEventListenerAsync("compositionstart", CreateEventCallback(OnCompositionStart));
+                await inputElement.AddEventListenerAsync("compositionend", CreateEventCallback(OnCompositionEnd));
 
                 var tasks = new Task[3];
 
@@ -606,26 +615,52 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            _shouldRender = false;
+            _inputValue = args.Value.ToString();
 
-            var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
+            var success = BindConverter.TryConvertTo<TValue>(_inputValue, System.Globalization.CultureInfo.InvariantCulture, out var val);
+
             if (success)
             {
-                _badInput = null;
-                await SetInternalValueAsync(val);
-
                 if (OnInput.HasDelegate)
                 {
-                    await OnInput.InvokeAsync(InternalValue);
+                    await OnInput.InvokeAsync(val);
                 }
             }
-            else
-            {
-                _badInput = args.Value.ToString();
-            }
+        }
 
-            _shouldRender = true;
-            StateHasChanged();
+        private bool _compositionInputting;
+        private string _inputValue;
+
+        public Task OnCompositionStart()
+        {
+            _compositionInputting = true; 
+            return Task.CompletedTask;
+        }
+
+        public Task OnCompositionEnd()
+        {
+            _compositionInputting = false;
+            return Task.CompletedTask;
+        }
+
+        public async Task TextFieldDebounceTimerRun()
+        {
+            if (!_compositionInputting)
+            {
+                var success = BindConverter.TryConvertTo<TValue>(_inputValue, System.Globalization.CultureInfo.InvariantCulture, out var val);
+
+                if (success)
+                {
+                    _badInput = null;
+                    await SetInternalValueAsync(val);
+                }
+                else
+                {
+                    _badInput = _inputValue;
+                }
+                
+                StateHasChanged();
+            }
         }
 
         private Task<TValue> CheckNumberValidate(TValue argValue)
@@ -643,6 +678,13 @@ namespace Masa.Blazor
             return Task.FromResult(argValue);
         }
 
+        public async Task HandleOnKeyUpAsync(KeyboardEventArgs args)
+        {
+            await ChangeValue();
+
+            if (OnKeyUp.HasDelegate)
+                await OnKeyUp.InvokeAsync();
+        }
 
         public async Task HandleOnNumberUpClickAsync(MouseEventArgs args)
         {
