@@ -101,6 +101,8 @@ namespace Masa.Blazor
 
         protected int SelectedIndex { get; set; } = -1;
 
+        public override int DebounceMilliseconds { get; set; }
+
         protected object Menu { get; set; }
 
         protected BMenuProps ComputedMenuProps { get; set; }
