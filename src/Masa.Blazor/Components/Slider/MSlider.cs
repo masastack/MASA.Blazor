@@ -42,6 +42,9 @@ namespace Masa.Blazor
         public StringBoolean ThumbLabel { get; set; }
 
         [Parameter]
+        public override int DebounceMilliseconds { get; set; } = 16;
+
+        [Parameter]
         public RenderFragment<double> ThumbLabelContent { get; set; }
 
         protected virtual double GetRoundedValue(int index)
@@ -88,7 +91,7 @@ namespace Masa.Blazor
         [Parameter]
         public RenderFragment ProgressContent { get; set; }
 
-        protected double DoubleInteralValue
+        protected virtual double DoubleInteralValue
         {
             get
             {
@@ -245,6 +248,8 @@ namespace Masa.Blazor
 
         public bool ShowThumbLabelContainer => IsFocused || IsActive || ThumbLabel == "always";
 
+        public override Func<Task> DebounceTimerRun => SliderDebounceTimerRun;
+
         protected virtual async Task SetInternalValueAsync(double internalValue)
         {
             var val = RoundValue(Math.Min(Math.Max(internalValue, Min), Max));
@@ -361,8 +366,12 @@ namespace Masa.Blazor
             ThumbPressed = false;
             await App.RemoveEventListenerAsync("mousemove");
 
+            await ChangeValue();
+
             IsActive = false;
         }
+
+        private double _value;
 
         public virtual async Task HandleOnMouseMoveAsync(MouseEventArgs args)
         {
@@ -370,9 +379,23 @@ namespace Masa.Blazor
             {
                 ThumbPressed = true;
             }
-
+           
             var val = await ParseMouseMoveAsync(args);
-            await SetInternalValueAsync(val);
+
+            _value = val;
+
+            await ChangeValue();
+            //await SetInternalValueAsync(val);
+        }
+
+        public async Task SliderDebounceTimerRun()
+        {
+            await SetInternalValueAsync(_value);
+
+            if (OnChange.HasDelegate)
+            {
+                await OnChange.InvokeAsync(InternalValue);
+            }
         }
 
         protected async Task<double> ParseMouseMoveAsync(MouseEventArgs args)
@@ -608,6 +631,9 @@ namespace Masa.Blazor
         public virtual async Task HandleOnFocusAsync(FocusEventArgs args)
         {
             IsFocused = true;
+
+            await ChangeValue(true);
+
             if (OnFocus.HasDelegate)
             {
                 await OnFocus.InvokeAsync(args);
@@ -617,31 +643,32 @@ namespace Masa.Blazor
         public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
         {
             IsFocused = false;
+
+            await ChangeValue(true);
+
             if (OnBlur.HasDelegate)
             {
                 await OnBlur.InvokeAsync(args);
             }
         }
 
-        public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+        public virtual Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
             if (!IsInteractive)
             {
-                return;
+                return Task.CompletedTask;
             }
 
             var value = ParseKeyDown(args, DoubleInteralValue);
 
             if (value == null || value.AsT2 < Min || value.AsT2 > Max)
             {
-                return;
+                return Task.CompletedTask;
             }
 
-            await SetInternalValueAsync(value.AsT2);
-            if (OnChange.HasDelegate)
-            {
-                await OnChange.InvokeAsync(InternalValue);
-            }
+            _value = value.AsT2;
+
+            return Task.CompletedTask;
         }
 
         protected StringNumber ParseKeyDown(KeyboardEventArgs args, double value)

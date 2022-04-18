@@ -12,9 +12,13 @@
 }
 
 
-export function init(domRef, obj, value, options) {
-    if (options && options.hasOwnProperty('toolbar')) {
-        options.toolbar.forEach(btn => {
+export function init(domRef, obj, value, options, isUploadHandler) {
+    let vditorOptions = {
+        ...defaultOptions,
+        ...options,
+    }
+    if (vditorOptions.hasOwnProperty('toolbar')) {
+        vditorOptions.toolbar.forEach(btn => {
             if (typeof btn == 'object') {
                 btn.click = () => {
                     obj.invokeMethodAsync('HandleToolbarButtonClickAsync', btn.name);
@@ -22,9 +26,15 @@ export function init(domRef, obj, value, options) {
             }
         })
     }
+    if (isUploadHandler) {
+        vditorOptions.upload = {
+            handler: (files) => {
+                obj.invokeMethodAsync('HandleFileChanged');
+            }
+        }
+    }
     domRef.Vditor = new Vditor(domRef, {
-        ...defaultOptions,
-        ...options,
+        ...vditorOptions,
         value,
         after: () => {
             obj.invokeMethodAsync('HandleRenderedAsync', value);
