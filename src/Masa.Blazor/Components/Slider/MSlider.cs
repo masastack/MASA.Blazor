@@ -91,7 +91,7 @@ namespace Masa.Blazor
         [Parameter]
         public RenderFragment ProgressContent { get; set; }
 
-        protected double DoubleInteralValue
+        protected virtual double DoubleInteralValue
         {
             get
             {

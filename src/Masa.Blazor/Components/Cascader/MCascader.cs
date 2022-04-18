@@ -15,6 +15,8 @@
         [Parameter]
         public override bool Outlined { get; set; } = true;
 
+        public override int DebounceMilliseconds { get; set; }
+
         public override Action<TextFieldNumberProperty> NumberProps { get; set; }
 
         protected override IList<TItem> SelectedItems
