@@ -138,9 +138,9 @@ namespace Masa.Blazor
             await QuillHelper.InvokeAsync<string>("setHtml", ContentRef, quillHtml);
         }
 
-        public async Task InsertImageAsync(string imageURL)
+        public async Task InsertImageAsync(string imageURL, int? editorIndex = null)
         {
-            await QuillHelper.InvokeAsync<string>("insertImage", ContentRef, imageURL);
+            await QuillHelper.InvokeVoidAsync("insertImage", ContentRef, imageURL, editorIndex);
         }
 
         public async Task EnableAsync()
