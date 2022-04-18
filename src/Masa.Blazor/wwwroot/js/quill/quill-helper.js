@@ -108,11 +108,11 @@ export function clearFile(element) {
 export function uploadFilePic(quillElement, element,uploadConfig, index) {
     let quill = quillElement.__quill
     let fileInput = element.querySelector('input.ql-image[type=file]')
-    // 创建formData
+    // Create formdata
     let formData = new FormData()
     let files = fileInput.files;
     formData.append(uploadConfig.name, files[index])
-    // 如果需要token且存在token
+    // If a token is required and exists
     if (uploadConfig.token) {
         formData.append(uploadConfig.tokenName, uploadConfig.token)
     }
@@ -153,15 +153,15 @@ function handlerImage(obj,self, uploadConfig) {
     if (fileInput === null) {
         fileInput = document.createElement('input')
         fileInput.setAttribute('type', 'file')
-        // 设置图片参数名
+        // Set picture parameter name
         if (_uploadConfig.name) {
             fileInput.setAttribute('name', _uploadConfig.name)
         }
-        // 可设置上传图片的格式
+        // You can set the format of uploaded pictures
         fileInput.setAttribute('accept', _uploadConfig.accept)
         fileInput.setAttribute('multiple', 'multiple')
         fileInput.classList.add('ql-image')
-        // 监听选择文件
+        // Listen to select file
         fileInput.addEventListener('change', function () {
             obj.invokeMethodAsync('HandleFileChanged', getFileInfo(fileInput.files));
         })
@@ -176,11 +176,11 @@ function getFileInfo(files) {
         let fileInfo = [];
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
-            const objectUrl = getObjectURL(file);
+            const objectUrl = getObjectUrl(file);
             fileInfo.push({
                 fileName: file.name,
                 size: file.size,
-                objectURL: objectUrl,
+                objectUrl: objectUrl,
                 type: file.type
             });
         }
@@ -189,7 +189,7 @@ function getFileInfo(files) {
     }
 }
 
-function getObjectURL(file){
+function getObjectUrl(file){
     let url = null;
     if (window.URL != undefined) {
         url = window.URL.createObjectURL(file);

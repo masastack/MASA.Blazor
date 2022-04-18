@@ -3,13 +3,13 @@
 </MEditor>
 @code {
     [Inject]
-    private IJSRuntime Js { get; set; }
+    private IJSRuntime _js { get; set; }
     private MEditor _ref { get; set; }
 
     private async Task<bool> BeforeAllUploadAsync(List<EditorUploadFileItem> flist)
     {
         //Please cancel this comment
-        //await Js.InvokeVoidAsync("Demo.Quill.uploadFilePic", _ref.ContentRef, _ref.Ref, 0);
+        //await _js.InvokeVoidAsync("Demo.Quill.uploadFilePic", _ref.ContentRef, _ref.Ref, 0);
         return true;
     }
 }

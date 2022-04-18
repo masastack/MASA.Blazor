@@ -3,12 +3,12 @@
 
 @code {
     [Inject]
-    private IJSRuntime Js { get; set; }
+    private IJSRuntime _js { get; set; }
     private MMarkdown _ref { get; set; }
 
     private async Task HandleUploadAsync()
     {
         //Please cancel this comment
-        //await Js.InvokeVoidAsync("Demo.Vditor.uploadFile", _ref.Ref, 0);
+        //await _js.InvokeVoidAsync("Demo.Vditor.uploadFile", _ref.Ref, 0);
     }
 }
