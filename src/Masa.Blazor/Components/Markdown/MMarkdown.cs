@@ -50,7 +50,6 @@
         private bool _editorRendered = false;
         private bool _wattingUpdate = false;
         private string _value;
-        private bool _afterFirstRender;
 
         private DotNetObjectReference<MMarkdown> ObjRef { get; set; }
 
@@ -77,7 +76,6 @@
             {
                 return;
             }
-            _afterFirstRender = true;
             await CreateMarkdownAsync();
         }
 
