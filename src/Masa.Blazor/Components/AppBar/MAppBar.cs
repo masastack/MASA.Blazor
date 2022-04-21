@@ -166,7 +166,7 @@ namespace Masa.Blazor
         {
             get
             {
-                if (!App || ClippedLeft) return 0;
+                if (!App || ClippedRight) return 0;
 
                 return MasaBlazor.Application.Right;
             }
