@@ -6,7 +6,7 @@ namespace Masa.Blazor
     public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
     {
         private string _badInput;
-        private CancellationTokenSource _cancellationTokenSource;
+
         private bool _shouldRender = true;
 
         [Parameter]
