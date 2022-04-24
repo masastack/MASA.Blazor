@@ -108,6 +108,11 @@
       "Description": ""
     },
     {
+      "Name": "Key",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "Large",
       "Type": "Boolean",
       "Default": "false",
@@ -199,7 +204,7 @@
     },
     {
       "Name": "Show",
-      "Type": "Boolean",
+      "Type": "Nullable<Boolean>",
       "Description": ""
     },
     {

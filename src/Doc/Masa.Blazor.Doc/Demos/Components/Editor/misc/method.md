@@ -2,7 +2,7 @@
 order: 5
 title:
   zh-CN: 方法
-  en-US: method
+  en-US: Method
 ---
 
 ## zh-CN

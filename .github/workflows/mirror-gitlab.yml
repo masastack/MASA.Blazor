@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:                                            
       - uses: actions/checkout@v1
-      - uses: yesolutions/mirror-action@master
+      - uses: yesolutions/mirror-action@v0.5.1
         with:
           REMOTE: '${{ secrets.GITLAB_ADDER }}/cicd/masa.blazor.git'
           GIT_USERNAME: ${{ secrets.GIT_USERNAME }}

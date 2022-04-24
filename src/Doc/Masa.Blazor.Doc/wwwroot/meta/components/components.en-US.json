@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:22.8900987+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2027047+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -187,7 +187,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:22.8950979+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.203703+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -219,7 +219,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:22.9080998+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2057063+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -318,7 +318,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:22.9171199+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2077031+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -394,7 +394,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:22.9461275+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2097134+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -483,7 +483,7 @@
       "�������": "\n<ul>\n<li><code>MAppBarNavIcon</code>��A stylized icon button component created specifically for use with [MToolbar] (/components/toolbars) and 'MAppBar'. The hamburger menu is displayed on the left side of the toolbar, which is usually used to control the status of the navigation drawer. The default slot can be used to customize the icons and functions of this component.</li>\n<li><code>MAppBarTitle</code>��The modified [MToolbarTitle] (/components/toolbars) component is used in conjunction with the * * shrinkonscroll * * attribute. On the small screen, * * MToolbarTitle**\nWill be truncated, but this component uses absolute positioning when expanding to make its contents visible. We do not recommend that you use the 'MAppbarTitle' component without using the * * shrinkonscroll * * attribute. It's really because the resize event was added to this component and a lot of additional calculations were done.</li>\n</ul>\n",
       "ע������": "\n<!--alert:warning-->\n<p>When 'MButton' with <strong>icon</strong> attribute is used inside 'MToolbar' and 'MAppbar', they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap the buttons in any container, such as' div ', you need to apply a negative margin to the container in order to align them correctly.</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:22.9660999+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2137039+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -636,7 +636,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:22.9921011+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2147036+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -713,7 +713,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
       "ע��": "\n<!--alert:warning-->\n<p>When 'MButton' with 'icon' prop is used inside 'MToolbar' and 'MAppbar', they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap your buttons in any container, such as' div ', you need to apply a negative margin to the container for proper alignment.</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.0101049+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2187075+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -866,7 +866,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.0160993+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2197064+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -909,7 +909,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBottomSheet\">MBottomSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.0271068+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2227037+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -997,7 +997,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>By default <code>MBreadcrumbs</code> will disable the linkage with router. You can enable the feature by using *<em>Linkage</em> prop.</p>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.036113+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2247155+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1086,7 +1086,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>MButton</code> is the only component that behaves differently when using the <strong>Dark</strong> prop. Normally components use the <strong>Dark</strong> prop to denote that they have a dark colored background and need their text to be white. While this will work\nfor <code>MButton</code>, it is advised to only use the prop when the button <strong>IS ON</strong> a colored background due to the disabled state\nblending in with white backgrounds. If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.0551009+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2277041+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1252,7 +1252,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "�������": "\n<ul>\n<li><code>MCardActions</code>:A container used to place actions for cards, such as [MButton] (/components/buttons) or [MMenu] (/components/menu). Use a special margin on the button at the same time\nSo that they match other card content areas.</li>\n<li><code>MCardSubtitle</code>:Provide default <strong>font size</strong> and <strong>fill</strong> for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n<li><code>MCardText</code>:It is mainly used for <strong>text content</strong> in cards. Apply padding to the text and reduce its font size to. 875rem.</li>\n<li><code>MCardTitle</code>:Provide default font size and padding for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.0730985+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2317045+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1406,7 +1406,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.0941001+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2367046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1593,7 +1593,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.1280999+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2397197+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1724,7 +1724,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.1371006+08:00",
+    "LastWriteTime": "2022-04-14T11:48:59.7323297+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1758,6 +1758,17 @@
         "Style": "",
         "Debug": false,
         "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "childContent",
+        "Title": "ChildContent",
+        "Description": "",
+        "Code": "<MDivider>Default</MDivider>\r\n\r\n<MDivider Left>Left</MDivider>\r\n\r\n<MDivider Center>Center</MDivider>\r\n\r\n<MDivider Right>Right</MDivider>\r\n\r\n<MDivider Height=\"40\">\r\n    <MIcon Color=\"red\" Left Style=\"line-height: inherit;\">mdi-heart</MIcon>\r\n    Favorites\r\n</MDivider>",
+        "Type": "Demos.Components.Divider.contents.ChildContent",
+        "Style": "",
+        "Debug": false,
+        "Group": 2
       },
       {
         "Order": 1,
@@ -1801,7 +1812,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.1431008+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2427066+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1853,7 +1864,7 @@
       "JS file": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.1560992+08:00",
+    "LastWriteTime": "2022-04-24T11:08:42.1024985+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1935,18 +1946,29 @@
       {
         "Order": 0,
         "Name": "uploadPicture",
-        "Title": "UploadPicture",
+        "Title": "Upload picture",
         "Description": "<p>This is just a demonstration of how to configure the <strong>Upload</strong> parameters. Please modify your upload API address.</p>\n",
-        "Code": "@using Masa.Blazor.Components.Editor;\r\n<MEditor @bind-Value=\"_editorContent\" Upload=\"_upload\">\r\n</MEditor>\r\n@code {\r\n    private string _editorContent = \"Hello MEditor!\";\r\n    private MEditorUpload _upload = new MEditorUpload\r\n    {\r\n        Action = \"api/upload\",//Please change your upload address\r\n        TokenName = \"authorization\",\r\n        Name=\"file\",\r\n        Accept = \"image/png, image/gif, image/jpeg, image/bmp, image/x-icon\",\r\n        PathKey=\"path\"\r\n    };\r\n}\r\n\r\n",
+        "Code": "@using Masa.Blazor.Components.Editor\r\n<MEditor Upload=\"_upload\">\r\n</MEditor>\r\n@code {\r\n\r\n    private MEditorUpload _upload = new MEditorUpload\r\n    {\r\n        Action = \"/api/upload\",//Please change your upload address\r\n        TokenName = \"authorization\",\r\n        Name=\"file\",\r\n        Accept = \"image/png, image/gif, image/jpeg, image/bmp, image/x-icon\",\r\n        PathKey=\"path\"\r\n    };\r\n}\r\n\r\n",
         "Type": "Demos.Components.Editor.props.UploadPicture",
         "Style": "",
         "Debug": false,
         "Group": 0
       },
       {
+        "Order": 1,
+        "Name": "beforeAllUpload",
+        "Title": "Before all upload",
+        "Description": "",
+        "Code": "@using Masa.Blazor.Components.Editor;\r\n<MEditor @ref=\"Ref\" BeforeAllUploadAsync=\"BeforeAllUploadAsync\">\r\n</MEditor>\r\n@code {\r\n    [Inject]\r\n    private IJSRuntime JS { get; set; }\r\n    private MEditor Ref { get; set; }\r\n\r\n    private async Task<bool> BeforeAllUploadAsync(List<EditorUploadFileItem> flist)\r\n    {\r\n        //Please cancel this comment\r\n        //await JS.InvokeVoidAsync(\"Demo.Quill.uploadFilePic\", Ref.ContentRef, Ref.Ref, 0);\r\n        return true;\r\n    }\r\n}\r\n\r\n",
+        "Type": "Demos.Components.Editor.events.BeforeAllUpload",
+        "Style": "",
+        "Debug": false,
+        "Group": 1
+      },
+      {
         "Order": 5,
         "Name": "method",
-        "Title": "method",
+        "Title": "Method",
         "Description": "<p>Some method examples.</p>\n",
         "Code": "<MEditor @ref=\"@_editor\" @bind-Value=\"_editorContent\" Placeholder=\"请输入内容\" ContentStyle=\"height:100px\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>\r\n<MRow Align=\"@AlignTypes.Center\"\r\n      Justify=\"@JustifyTypes.SpaceAround\" Class=\"mt-10\">\r\n      <MButton Depressed Color=\"primary\" @onclick=\"GetTextAsync\">\r\n        获取文本\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetContentAsync\">\r\n        获取内容\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"GetHtmlAsync\">\r\n        获取html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"SetHtmlAsync\">\r\n        设置html\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"DisableAsync\">\r\n        禁用\r\n    </MButton>\r\n    <MButton Depressed Color=\"primary\" @onclick=\"EnableAsync\">\r\n        启用\r\n    </MButton>\r\n</MRow>\r\n<MAlert Border=\"Borders.Top\"\r\n            ColoredBorder\r\n            Type=\"AlertTypes.Info\"\r\n            Elevation=\"2\" \r\n            Class=\"overflow-auto mt-10\">\r\n        @_viewContent\r\n</MAlert>\r\n\r\n@code {\r\n    private MEditor _editor;\r\n    private string _editorContent = @\"Hello MEditor\";\r\n    private string _viewContent;\r\n\r\n    public async Task GetTextAsync()\r\n    {\r\n        _viewContent = await this._editor.GetTextAsync();\r\n    }\r\n    public async Task GetContentAsync()\r\n    {\r\n        _viewContent = await this._editor.GetContentAsync();\r\n    }\r\n    public async Task GetHtmlAsync()\r\n    {\r\n        _viewContent = await this._editor.GetHtmlAsync();\r\n    }\r\n\r\n    public async Task SetHtmlAsync()\r\n    {\r\n        string html =\r\n            @\"<a href='https://www.baidu.com/'>\" +\r\n            \"<img src='https://www.baidu.com/img/flexible/logo/pc/result.png' /></a>\";\r\n\r\n        await this._editor.SetHtmlAsync(html);\r\n    }\r\n    public async Task DisableAsync()\r\n    {\r\n        await this._editor.DisableAsync();\r\n    }\r\n    public async Task EnableAsync()\r\n    {\r\n        await this._editor.EnableAsync();\r\n    }\r\n}",
         "Type": "Demos.Components.Editor.misc.Method",
@@ -1967,7 +1989,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MErrorHandler\">MErrorHandler</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.1621014+08:00",
+    "LastWriteTime": "2022-04-01T11:11:01.979192+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2027,7 +2049,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.1780979+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2457187+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2154,88 +2176,12 @@
     "FullTitle": "Expansion panels"
   },
   {
-    "Desc": "<p>The <code>MButton</code> component can be used as a floating action button. This provides an application with a main point of action. Combined with the <code>MSpeedDial</code> component, you can create a diverse set of functions available for your users.</p>\n",
-    "Order": 0,
-    "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MSpeedDial\">MSpeedDial</a></li>\n</ul>\n"
-    },
-    "LastWriteTime": "2022-04-10T11:55:17.2960053+08:00",
-    "DemoList": [
-      {
-        "Order": 0,
-        "Name": "index",
-        "Title": "Usage",
-        "Description": "<p>Floating action buttons can be attached to material to signify a promoted action in your application. The default size will be used in most cases, whereas the <code>Small</code> variant can be used to maintain continuity with similar sized elements.</p>\n",
-        "Code": "<MRow Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n    <MButton Elevation=\"2\" Fab>\r\n        <MIcon>\r\n            mdi-beta\r\n        </MIcon>\r\n    </MButton>\r\n</MRow>",
-        "Type": "Demos.Components.FloatingActionButton.usage.Index",
-        "Style": "",
-        "Debug": false,
-        "Group": 4
-      },
-      {
-        "Order": 11,
-        "Name": "animation",
-        "Title": "Display animation",
-        "Description": "<p>When displaying for the first time, a floating action button should animate onto the screen. Here we use the <code>FabTransition</code>. You can also use any custom transition provided by Masa Blazor or your own.</p>\n",
-        "Code": "<MContainer fluid>\r\n    <MRow>\r\n        <MCol Cols=\"12\"\r\n              Sm=\"12\"\r\n              Md=\"6\"\r\n              OffsetMd=\"3\">\r\n            <MCard>\r\n                <MToolbar Extended>\r\n                    <ChildContent>\r\n                        <MAppBarNavIcon></MAppBarNavIcon>\r\n                    </ChildContent>\r\n                    <ExtensionContent>\r\n                        <FabTransition>\r\n                            <MButton Color=\"pink\"\r\n                                     Show=\"!hidden\"\r\n                                     Fab\r\n                                     Dark\r\n                                     Small\r\n                                     Absolute\r\n                                     Bottom\r\n                                     Left>\r\n                                <MIcon>mdi-plus</MIcon>\r\n                            </MButton>\r\n                        </FabTransition>\r\n                    </ExtensionContent>\r\n                </MToolbar>\r\n                <MCardText Style=\"height: 300px;\" Class=\"grey lighten-5 text-center\">\r\n                    <MButton Color=\"primary\"\r\n                             OnClick=\"()=> hidden = !hidden\">\r\n                        @(hidden? \"Show\": \"Hide\")\r\n                    </MButton>\r\n                </MCardText>\r\n\r\n                <MCardText Style=\"height: 100px; position: relative\">\r\n                    <FabTransition>\r\n                        <MButton Color=\"pink\"\r\n                                 Show=\"!hidden\"\r\n                                 Dark\r\n                                 Absolute\r\n                                 Top\r\n                                 Right\r\n                                 Fab>\r\n                            <MIcon>\r\n                                mdi-plus\r\n                            </MIcon>\r\n                        </MButton>\r\n                    </FabTransition>\r\n                </MCardText>\r\n            </MCard>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n@code {\r\n    bool hidden = false;\r\n}",
-        "Type": "Demos.Components.FloatingActionButton.misc.Animation",
-        "Style": "",
-        "Debug": false,
-        "Group": 3
-      },
-      {
-        "Order": 11,
-        "Name": "lateralScreens",
-        "Title": "Lateral screens",
-        "Description": "<p>When changing the default action of your button, it is recommended that you display a transition to signify a change. We do this by binding the key prop to a piece of data that can properly signal a change in action to the Vue transition system. While you can use a custom transition for this, ensure that you set the mode prop to out-in.</p>\n",
-        "Code": "<MCard Id=\"lateral\">\r\n    <MToolbar Dark\r\n              Flat\r\n              Color=\"indigo\">\r\n        <ChildContent>\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MToolbarTitle>Page title</MToolbarTitle>\r\n            <MSpacer></MSpacer>\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n        </ChildContent>\r\n        <ExtensionContent>\r\n            <MTabs @bind-Value=\"tab\" AlignWithTitle SliderColor=\"pink\">\r\n                <MTab Value=\"@(\"one\")\">\r\n                    Item One\r\n                </MTab>\r\n                <MTab Value=\"@(\"two\")\">\r\n                    Item Two\r\n                </MTab>\r\n                <MTab Value=\"@(\"three\")\">\r\n                    Item Three\r\n                </MTab>\r\n            </MTabs>\r\n        </ExtensionContent>\r\n    </MToolbar>\r\n    <MCardText>\r\n        <MTabsItems @bind-Value=\"tab\">\r\n            @foreach (var item in Items)\r\n            {\r\n                <MTabItem Value=\"item\" @key=\"item\">\r\n                    <MCard Height=\"@(\"200px\")\" Flat>\r\n                    </MCard>\r\n                </MTabItem>\r\n            }\r\n        </MTabsItems>\r\n    </MCardText>\r\n    <FabTransition>\r\n        <MButton Color=\"@GetActiveFabColor()\" Fab Large Dark Bottom Left Class=\"m-btn--example\" @key=\"GetActiveFabIcon()\">\r\n            <MIcon> @GetActiveFabIcon() </MIcon>\r\n        </MButton>\r\n    </FabTransition>\r\n</MCard>\r\n\r\n@code {\r\n    private StringNumber tab = \"one\";\r\n\r\n    List<string> Items = new List<string>() { \"one\", \"two\", \"three\" };\r\n\r\n    private dynamic ComputedActiveFab()\r\n    {\r\n        switch (tab.AsT0)\r\n        {\r\n            case \"one\":\r\n                return new { Color = \"success\", Icon = \"mdi-share-variant\" };\r\n            case \"two\":\r\n                return new { Color = \"red\", Icon = \"mdi-pencil\" };\r\n            case \"three\":\r\n                return new { Color = \"green\", Icon = \"mdi-chevron-up\" };\r\n            default:\r\n                return new { Color = \"\", Icon = \"\" };\r\n        }\r\n    }\r\n\r\n    public string GetActiveFabColor()\r\n    {\r\n        var activeFab = ComputedActiveFab();\r\n        return activeFab.Color;\r\n    }\r\n\r\n    public string GetActiveFabIcon()\r\n    {\r\n        var activeFab = ComputedActiveFab();\r\n        return activeFab.Icon;\r\n    }\r\n}",
-        "Type": "Demos.Components.FloatingActionButton.misc.LateralScreens",
-        "Style": "",
-        "Debug": false,
-        "Group": 3
-      },
-      {
-        "Order": 11,
-        "Name": "smallVariant",
-        "Title": "Small variant",
-        "Description": "<p>For better visual appeal, we use a small button to match our list avatars.</p>\n",
-        "Code": "<MRow>\r\n    <MCol Cols=\"12\"\r\n          Sm=\"6\"\r\n          OffsetSm=\"3\">\r\n        <MCard>\r\n            <MToolbar Color=\"light-blue\"\r\n                      Light\r\n                      Extended>\r\n                <ChildContent>\r\n                    <MAppBarNavIcon></MAppBarNavIcon>\r\n                    <MToolbarTitle class=\"white--text\">\r\n                        My files\r\n                    </MToolbarTitle>\r\n                    <MSpacer></MSpacer>\r\n                    <MButton Icon>\r\n                        <MIcon>mdi-magnify</MIcon>\r\n                    </MButton>\r\n                    <MButton Icon>\r\n                        <MIcon>mdi-view-module</MIcon>\r\n                    </MButton>\r\n                </ChildContent>\r\n\r\n                <ExtensionContent>\r\n                    <MButton Fab\r\n                             Color=\"cyan accent-2\"\r\n                             Bottom\r\n                             Left\r\n                             Absolute\r\n                             OnClick=\"()=> dialog = !dialog\">\r\n                        <MIcon>mdi-plus</MIcon>\r\n                    </MButton>\r\n                </ExtensionContent>\r\n            </MToolbar>\r\n            <MList TwoLine\r\n                   Subheader>\r\n                <MSubheader Inset>\r\n                    Folders\r\n                </MSubheader>\r\n                @foreach (var item in items)\r\n                {\r\n                    <MListItem @key=\"item.Title\" Link>\r\n                        <MListItemAvatar>\r\n                            <MIcon Class=\"@item.IconClass\">\r\n                                @item.Icon\r\n                            </MIcon>\r\n                        </MListItemAvatar>\r\n                        <MListItemContent>\r\n                            <MListItemTitle>\r\n                                @item.Title\r\n                            </MListItemTitle>\r\n                            <MListItemSubtitle>\r\n                                @item.SubTitle\r\n                            </MListItemSubtitle>\r\n                        </MListItemContent>\r\n                        <MListItemAction>\r\n                            <MButton Icon>\r\n                                <MIcon color=\"grey lighten-1\">\r\n                                    mdi-information\r\n                                </MIcon>\r\n                            </MButton>\r\n                        </MListItemAction>\r\n                    </MListItem>\r\n                }\r\n\r\n                <MDivider Inset></MDivider>\r\n\r\n                <MSubheader Inset>\r\n                    Files\r\n                </MSubheader>\r\n\r\n                @foreach (var item in items2)\r\n                {\r\n                    <MListItem @key=\"item.Title\" Link>\r\n                        <MListItemAvatar>\r\n                            <MIcon Class=\"@item.IconClass\">\r\n                                @item.Icon\r\n                            </MIcon>\r\n                        </MListItemAvatar>\r\n                        <MListItemContent>\r\n                            <MListItemTitle>\r\n                                @item.Title\r\n                            </MListItemTitle>\r\n                            <MListItemSubtitle>\r\n                                @item.SubTitle\r\n                            </MListItemSubtitle>\r\n                        </MListItemContent>\r\n                        <MListItemAction>\r\n                            <MButton Icon Ripple>\r\n                                <MIcon color=\"grey lighten-1\">\r\n                                    mdi-information\r\n                                </MIcon>\r\n                            </MButton>\r\n                        </MListItemAction>\r\n                    </MListItem>\r\n                }\r\n            </MList>\r\n\r\n            <MDialog Value=\"dialog\"\r\n                     MaxWidth=\"500\">\r\n                <MCard>\r\n                    <MCardText>\r\n                        <MTextField TValue=\"string\" Label=\"File name\"></MTextField>\r\n\r\n                        <small class=\"grey--text\">* This doesn't actually save.</small>\r\n                    </MCardText>\r\n\r\n                    <MCardActions>\r\n                        <MSpacer></MSpacer>\r\n\r\n                        <MButton Text\r\n                                 Color=\"primary\"\r\n                                 OnClick=\"()=> dialog = false\">\r\n                            Submit\r\n                        </MButton>\r\n                    </MCardActions>\r\n                </MCard>\r\n            </MDialog>\r\n        </MCard>\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n    private bool dialog;\r\n\r\n    private List<dynamic> items = new List<dynamic>()\r\n    {\r\n        new\r\n        {\r\n            Icon =\"mdi-folder\",\r\n            IconClass =\"grey lighten-1 white--text\",\r\n            Title =\"Photos\",\r\n            SubTitle= \"Jan 9, 2014\"\r\n        },\r\n        new\r\n        {\r\n            Icon =\"mdi-folder\",\r\n            IconClass =\"grey lighten-1 white--text\",\r\n            Title =\"Recipes\",\r\n            SubTitle= \"Jan 17, 2014\"\r\n        },\r\n        new\r\n        {\r\n            Icon =\"mdi-folder\",\r\n            IconClass =\"grey lighten-1 white--text\",\r\n            Title =\"Work\",\r\n            SubTitle= \"Jan 28, 2014\"\r\n        }\r\n    };\r\n\r\n    private List<dynamic> items2 = new List<dynamic>()\r\n    {\r\n        new\r\n        {\r\n            Icon =\"mdi-clipboard-text\",\r\n            IconClass =\"blue white--text\",\r\n            Title =\"Vacation itinerary\",\r\n            SubTitle= \"Jan 20, 2014\"\r\n        },\r\n        new\r\n        {\r\n            Icon =\"mdi-gesture-tap-button\",\r\n            IconClass =\"amber white--text\",\r\n            Title =\"Kitchen remodel\",\r\n            SubTitle= \"Jan 10, 2014\"\r\n        }\r\n    };\r\n  }",
-        "Type": "Demos.Components.FloatingActionButton.misc.SmallVariant",
-        "Style": "",
-        "Debug": false,
-        "Group": 3
-      },
-      {
-        "Order": 11,
-        "Name": "speedDial",
-        "Title": "Speed dial",
-        "Description": "<p><code>MSpeedDial</code> component has a very robust api for customizing your FAB experience exactly how you want.</p>\n",
-        "Code": "<MCard Id=\"create\">\r\n    <MContainer fluid>\r\n        <MRow Class=\"child-flex\">\r\n            <MCol Cols=\"12\"\r\n                  Sm=\"6\"\r\n                  Md=\"4\">\r\n                <MSubheader>Options</MSubheader>\r\n                <MCheckbox @bind-Value=\"hover\"\r\n                           Label=\"Open on hover\"\r\n                           HideDetails=\"true\"></MCheckbox>\r\n            </MCol>\r\n            <MCol Cols=\"12\"\r\n                  Sm=\"6\"\r\n                  Md=\"4\">\r\n                <MSubheader>FAB location</MSubheader>\r\n                <MCheckbox @bind-Value=\"Top\"\r\n                           Label=\"Top\"\r\n                           HideDetails=\"true\"></MCheckbox>\r\n                <MCheckbox @bind-Value=\"Right\"\r\n                           Label=\"Right\"\r\n                           HideDetails=\"true\"></MCheckbox>\r\n                <MCheckbox @bind-Value=\"Bottom\"\r\n                           Label=\"Bottom\"\r\n                           HideDetails=\"true\"></MCheckbox>\r\n                <MCheckbox @bind-Value=\"Left\"\r\n                           Label=\"Left\"\r\n                           HideDetails=\"true\"></MCheckbox>\r\n            </MCol>\r\n            <MCol Cols=\"12\"\r\n                  Sm=\"6\"\r\n                  Md=\"4\">\r\n                <MSubheader>Speed dial direction</MSubheader>\r\n                <MRadioGroup @bind-Value=\"direction\"\r\n                             HideDetails=\"true\">\r\n                    <MRadio Value=\"@(\"top\")\"\r\n                            Label=\"Top\"></MRadio>\r\n                    <MRadio Value=\"@(\"right\")\"\r\n                            Label=\"Right\"></MRadio>\r\n                    <MRadio Value=\"@(\"bottom\")\"\r\n                            Label=\"Bottom\"></MRadio>\r\n                    <MRadio Value=\"@(\"left\")\"\r\n                            Label=\"Left\"></MRadio>\r\n                </MRadioGroup>\r\n            </MCol>\r\n            <MCol Cols=\"12\"\r\n                  Sm=\"6\"\r\n                  Md=\"4\">\r\n                <MSubheader>Transition</MSubheader>\r\n                <MRadioGroup @bind-Value=\"@transition\"\r\n                             HideDetails=\"true\">\r\n                    <MRadio Value=\"@(\"slide-y-transition\")\"\r\n                            Label=\"Slide y\"></MRadio>\r\n                    <MRadio Value=\"@(\"slide-y-reverse-transition\")\"\r\n                            Label=\"Slide y reverse\"></MRadio>\r\n                    <MRadio Value=\"@(\"slide-x-transition\")\"\r\n                            Label=\"Slide x\"></MRadio>\r\n                    <MRadio Value=\"@(\"slide-x-reverse-transition\")\"\r\n                            Label=\"Slide x reverse\"></MRadio>\r\n                    <MRadio Value=\"@(\"scale-transition\")\"\r\n                            Label=\"Scale\"></MRadio>\r\n                </MRadioGroup>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n    <MSpeedDial @bind-Value=\"fab\"\r\n                Top=\"top\"\r\n                Bottom=\"bottom\"\r\n                Right=\"right\"\r\n                Left=\"left\"\r\n                Direction=\"@direction\"\r\n                OpenOnHover=\"hover\"\r\n                Style=\"position: absolute;\"\r\n                Transition=\"@transition\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"blue darken-2\" Dark Fab @attributes=\"@context.Attrs\">\r\n                <MIcon>\r\n                    @ComputeIcon()\r\n                </MIcon>\r\n            </MButton>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MButton Color=\"green\" Dark Fab Small>\r\n                <MIcon>\r\n                    mdi-pencil\r\n                </MIcon>\r\n            </MButton>\r\n            <MButton Color=\"indigo\" Dark Fab Small>\r\n                <MIcon>\r\n                    mdi-plus\r\n                </MIcon>\r\n            </MButton>\r\n            <MButton Color=\"red\" Dark Fab Small>\r\n                <MIcon>\r\n                    mdi-delete\r\n                </MIcon>\r\n            </MButton>\r\n        </ChildContent>\r\n    </MSpeedDial>\r\n</MCard>\r\n\r\n@code {\r\n    private bool hover;\r\n\r\n    private bool top;\r\n\r\n    public bool Top\r\n    {\r\n        get\r\n        {\r\n            return top;\r\n        }\r\n        set\r\n        {\r\n            top = value;\r\n            bottom = !top;\r\n            StateHasChanged();\r\n        }\r\n    }\r\n\r\n    private bool right = true;\r\n\r\n    public bool Right\r\n    {\r\n        get\r\n        {\r\n            return right;\r\n        }\r\n        set\r\n        {\r\n            right = value;\r\n            left = !right;\r\n            StateHasChanged();\r\n        }\r\n    }\r\n\r\n    private bool bottom = true;\r\n\r\n    public bool Bottom\r\n    {\r\n        get\r\n        {\r\n            return bottom;\r\n        }\r\n\r\n        set\r\n        {\r\n            bottom = value;\r\n            top = !bottom;\r\n            StateHasChanged();\r\n        }\r\n    }\r\n\r\n    private bool left;\r\n\r\n    public bool Left\r\n    {\r\n        get\r\n        {\r\n            return left;\r\n        }\r\n        set\r\n        {\r\n            left = value;\r\n            right = !left;\r\n            StateHasChanged();\r\n        }\r\n    }\r\n\r\n    private string direction = \"top\";\r\n\r\n    private string transition = \"slide-y-reverse-transition\";\r\n\r\n    private bool fab;\r\n\r\n    public string ComputeIcon()\r\n    {\r\n        return fab ? \"mdi-close\" : \" mdi-account-circle\";\r\n    }\r\n}\r\n",
-        "Type": "Demos.Components.FloatingActionButton.misc.SpeedDial",
-        "Style": "",
-        "Debug": false,
-        "Group": 3
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cols": 1,
-    "Related": [
-      "/components/button",
-      "/components/icons",
-      "/stylesandanimations/transitions"
-    ],
-    "Title": "Floating Action Buttons",
-    "Type": "Floating Action Buttons",
-    "FullTitle": "Floating Action Buttons"
-  },
-  {
     "Desc": "<p>The MFooter component is used to display public information that users may want to access from any page in the website.</p>\n",
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.1870993+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2477073+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2312,7 +2258,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:error--> \n<p>When using objects for the <strong>Items</strong> prop, you must associate <strong>ItemText</strong> and <strong>ItemValue</strong> with existing properties on your objects. These values are defaulted to  <strong>Text</strong> and <strong>Value</strong> and can be changed.</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p>The <strong>Auto</strong> property of <strong>MenuProps</strong> is only supported for the default input style.</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>Browser autocomplete is set to off by default, may vary by browser and may be ignored.  <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.2021016+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2507043+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2422,7 +2368,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.2101011+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2527034+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2487,7 +2433,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.2201035+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2547037+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2574,7 +2520,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.2371008+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.257704+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2717,7 +2663,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.247098+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.259713+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2805,7 +2751,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOtpInput\">MOtpInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.2550976+08:00",
+    "LastWriteTime": "2022-04-01T11:11:01.9831927+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2870,7 +2816,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadioGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.2640974+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.261704+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2947,7 +2893,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.2751011+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.264707+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3036,7 +2982,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>The default setting of browser auto completion is off, which may be changed or ignored by different browsers. <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p>The <strong>Auto</strong> attribute of <strong>menupprops</strong> only supports the default input style.</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>When using an object as the attribute of <strong>items</strong>, you must use <strong>itemtext</strong> and <strong>itemvalue</strong> to associate with the incoming object. These values are <strong>text</strong> and <strong>value</strong> by default and can be changed.</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.2911001+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2678535+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3178,7 +3124,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.3111008+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2727037+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3365,7 +3311,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.3221014+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2747041+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3464,7 +3410,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.3681001+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2857046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3596,7 +3542,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.3531008+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2817067+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3638,6 +3584,17 @@
         "Description": "<p>You can optionally change a text field into any color in the Material design palette. Below is an example implementation of a custom form with validation.</p>\n",
         "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MCard Flat>\r\n    <MSnackbar\r\n        @bind-Value=\"snackbar\"\r\n        Absolute\r\n        Top\r\n        Right\r\n        Color=\"success\">\r\n        <span>Registration successful!</span>\r\n        <MIcon Dark>\r\n            mdi-checkbox-marked-circle\r\n        </MIcon>\r\n    </MSnackbar>\r\n    <MForm @ref=\"form\" EnableValidation Model=\"model\">\r\n        <MContainer Fluid>\r\n            <MRow>\r\n                <MCol\r\n                    Cols=\"12\"\r\n                    Sm=\"6\">\r\n                    <MTextField\r\n                        @bind-Value=\"model.First\"\r\n                        Color=\"purple darken-2\"\r\n                        Label=\"First name\">\r\n                    </MTextField>\r\n                </MCol>\r\n                <MCol\r\n                    Cols=\"12\"\r\n                    Sm=\"6\">\r\n                    <MTextField\r\n                        @bind-Value=\"model.Last\"\r\n                        Color=\"blue darken-2\"\r\n                        Label=\"Last name\">\r\n                    </MTextField>\r\n                </MCol>\r\n                <MCol Cols=\"12\">\r\n                    <MTextarea\r\n                        @bind-Value=\"model.Bio\"\r\n                        Color=\"teal\">\r\n                        <LabelContent>\r\n                            <div>\r\n                                Bio <small>(optional)</small>\r\n                            </div>\r\n                        </LabelContent>\r\n                    </MTextarea>\r\n                </MCol>\r\n                <MCol\r\n                    Cols=\"12\"\r\n                    Sm=\"6\">\r\n                    <MSelect\r\n                        @bind-Value=\"model.FavoriteAnimal\"\r\n                        Items=\"animals\"\r\n                        ItemText=\"item => item\"\r\n                        ItemValue=\"item => item\"\r\n                        Color=\"pink\"\r\n                        Label=\"Favorite animal\">\r\n                    </MSelect>\r\n                </MCol>\r\n                <MCol\r\n                    Cols=\"12\"\r\n                    Sm=\"6\">\r\n                    <MSlider\r\n                        @bind-Value=\"model.Age\"\r\n                        Color=\"orange\"\r\n                        Label=\"Age\"\r\n                        Hint=\"Be honest\"\r\n                        Min=\"1\"\r\n                        Max=\"100\"\r\n                        ThumbLabel=\"true\">\r\n                    </MSlider>\r\n                </MCol>\r\n                <MCol Cols=\"12\">\r\n                    <MCheckbox\r\n                        @bind-Value=\"model.Terms\"\r\n                        Color=\"green\">\r\n                        <LabelContent>\r\n                            <div @onclick:stopPropagation>\r\n                                Do you accept the\r\n                                <a\r\n                                    href=\"#\"\r\n                                    @onclick=\"() => terms = true\">\r\n                                    terms\r\n                                </a>\r\n                                and\r\n                                <a\r\n                                    href=\"#\"\r\n                                    @onclick=\"() => conditions = true\">\r\n                                    conditions?\r\n                                </a>\r\n                            </div>\r\n                        </LabelContent>\r\n                    </MCheckbox>\r\n                </MCol>\r\n            </MRow>\r\n        </MContainer>\r\n        <MCardActions>\r\n            <MButton\r\n                Text\r\n                OnClick=\"ResetForm\">\r\n                Cancel\r\n            </MButton>\r\n            <MSpacer></MSpacer>\r\n            <MButton\r\n                Disabled=\"!FormIsValid\"\r\n                Text\r\n                Color=\"primary\"\r\n                OnClick=\"Submit\">\r\n                Register\r\n            </MButton>\r\n        </MCardActions>\r\n    </MForm>\r\n    <MDialog\r\n        @bind-Value=\"terms\"\r\n        Width=\"@(\"70%\")\">\r\n        <MCard>\r\n            <MCardTitle Class=\"text-h6\">\r\n                Terms\r\n            </MCardTitle>\r\n            @foreach (var n in Enumerable.Range(0, 5))\r\n            {\r\n                <MCardText @key=\"n\">\r\n                    @content\r\n                </MCardText>\r\n            }\r\n            <MCardActions>\r\n                <MSpacer></MSpacer>\r\n                <MButton\r\n                    Text\r\n                    Color=\"purple\"\r\n                    OnClick=\"() => terms = false\">\r\n                    Ok\r\n                </MButton>\r\n            </MCardActions>\r\n        </MCard>\r\n    </MDialog>\r\n    <MDialog\r\n        @bind-Value=\"conditions\"\r\n        Width=\"@(\"70%\")\">\r\n        <MCard>\r\n            <MCardTitle Class=\"text-h6\">\r\n                Conditions\r\n            </MCardTitle>\r\n            @foreach (var n in Enumerable.Range(0, 5))\r\n            {\r\n                <MCardText @key=\"n\">\r\n                    @content\r\n                </MCardText>\r\n            }\r\n            <MCardActions>\r\n                <MSpacer></MSpacer>\r\n                <MButton\r\n                    Text\r\n                    Color=\"purple\"\r\n                    OnClick=\"() => conditions = false\">\r\n                    Ok\r\n                </MButton>\r\n            </MCardActions>\r\n        </MCard>\r\n    </MDialog>\r\n</MCard>\r\n\r\n@code{\r\n\r\n    static List<string> animals = new() {\"Dog\", \"Cat\", \"Rabbit\", \"Turtle\", \"Snake\"};\r\n\r\n    MForm form;\r\n    bool terms;\r\n    bool conditions;\r\n    bool snackbar;\r\n    string content = \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.\";\r\n\r\n    Model model = new();\r\n\r\n    bool FormIsValid => form != null && form.EditContext.IsModified() && form.EditContext.Validate();\r\n\r\n    void ResetForm()\r\n    {\r\n        model.Reset();\r\n    }\r\n\r\n    void Submit()\r\n    {\r\n        snackbar = true;\r\n        model.Reset();\r\n    }\r\n\r\n    public class Model\r\n    {\r\n        [Required]\r\n        public string First { get; set; }\r\n\r\n        [Required]\r\n        public string Last { get; set; }\r\n\r\n        [Required]\r\n        [Range(0, 10, ErrorMessage = \"I don't believe you!\")]\r\n        public double Age { get; set; }\r\n\r\n        public string Bio { get; set; }\r\n\r\n        [Required]\r\n        public string FavoriteAnimal { get; set; }\r\n\r\n        [Required]\r\n        [Range(typeof(bool), \"true\", \"true\", ErrorMessage = \"The field is required\")] // just for demo\r\n        public bool Terms { get; set; }\r\n\r\n        public void Reset()\r\n        {\r\n            First = default;\r\n            Last = default;\r\n            Age = default;\r\n            Bio = default;\r\n            FavoriteAnimal = default;\r\n            Terms = default;\r\n        }\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.FormInputs.children.TextField.props.CustomColors",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "customTextColors",
+        "Title": "Custom text colors",
+        "Description": "<p>You can optionally change a text in the input box into any color in the Material design palette.</p>\n",
+        "Code": "<MForm>\r\n    <MContainer>\r\n        <MRow>\r\n            <MCol>\r\n                <MTextField TextColor=\"green\" TValue=\"string\" Label=\"Regular\"></MTextField>\r\n            </MCol>\r\n            <MCol>\r\n                <MTextField TValue=\"string\" TextColor=\"#fc0000\" Label=\"Regular\"></MTextField>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>",
+        "Type": "Demos.Components.FormInputs.children.TextField.props.CustomTextColors",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -3885,7 +3842,7 @@
       "Helper Classes": "\n<p><strong>FillHeight</strong> applies <code>height: 100%</code> to an element. When applied to <code>MContainer</code> it will also <code>align-items: center</code>.</p>\n",
       "Caveats": "\n<!--alert:info--> \n<p>1.x grid system has been deprecated in favor of the 2.x grid system.</p>\n<!--alert:info--> \n<!--alert:info--> \n<p>Breakpoints based props on grid components work in an <code>andUp</code> fashion. With this in mind the <strong>xs</strong> breakpoint is assumed and has been removed from the props context. This applies to <strong>offset</strong>、<strong>justify</strong>、<strong>align</strong> and single breakpoint props on <code>MCol</code>.</p>\n<ul>\n<li>Props like <strong>justify-sm</strong> and <strong>justify-md</strong> exist,but <strong>justify-xs</strong> does not, it is simply <strong>justify</strong>。</li>\n<li>The <strong>xs</strong> prop does not exist on <code>MCol</code>. The equivalent to this is the <strong>cols</strong> prop.</li>\n</ul>\n<!--alert:info--> \n<!--alert:info--> \n<p>When using the grid system with IE11 you will need to set an explicit <code>height</code> as <code>min-height</code> will not suffice and cause undesired results.</p>\n<!--alert:info--> \n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.406104+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2917052+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4116,7 +4073,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.418101+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2947039+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4204,7 +4161,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.4291012+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2967069+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4303,7 +4260,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.439101+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2987137+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4391,7 +4348,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.4491008+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3017064+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4478,7 +4435,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.4610971+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3037055+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4576,7 +4533,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.4720954+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3057124+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4663,7 +4620,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.479095+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3077067+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4728,7 +4685,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.4920954+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3097062+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4817,7 +4774,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info--> \n<p>The MImage component uses the Intersect directive which requires a Polyfill for IE11 and Safari. If a browser that does not support this functionality is detected, the image will still load as normal.</p>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.5060959+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3127061+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4916,7 +4873,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "ע��": "\n<!--alert:info-->\n<p>If you want to find a list item with status, please check <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>��</p>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.5300979+08:00",
+    "LastWriteTime": "2022-04-24T11:08:42.1104887+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5127,7 +5084,7 @@
       "JS file": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.min.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MMarkdown\">MMarkdown</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.5430975+08:00",
+    "LastWriteTime": "2022-04-01T12:54:45.5050333+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5208,6 +5165,17 @@
       },
       {
         "Order": 1,
+        "Name": "beforeAllUpload",
+        "Title": "Before all upload",
+        "Description": "",
+        "Code": "<MMarkdown @ref=\"Ref\" BeforeAllUpload=\"HandleUploadAsync\">\r\n</MMarkdown>\r\n\r\n@code {\r\n    [Inject]\r\n    private IJSRuntime JS { get; set; }\r\n    private MMarkdown Ref { get; set; }\r\n\r\n    private async Task HandleUploadAsync()\r\n    {\r\n        //Please cancel this comment\r\n        //await JS.InvokeVoidAsync(\"Demo.Vditor.uploadFile\", Ref.Ref, 0);\r\n    }\r\n}",
+        "Type": "Demos.Components.Markdown.events.BeforeAllUpload",
+        "Style": "",
+        "Debug": false,
+        "Group": 1
+      },
+      {
+        "Order": 1,
         "Name": "someEvents",
         "Title": "Some events",
         "Description": "<p>Focus, blur, select,esc,ctrl+enter and other events. For more events, please refer to API.</p>\n",
@@ -5231,7 +5199,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.5660964+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3217128+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5406,7 +5374,7 @@
     "OtherDocs": {
       "Caveats": "\n<!--alert:error-->\n<p>If you are using <code>MNavigationDrawer</code> with <strong>App</strong> property enabled, you don't need to use <strong>Absolute</strong> prop as in examples.</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p>The <strong>ExpandOnHover</strong> prop does not alter the content area of <strong>MMain</strong>. To have content area respond to <strong>ExpandOnHover</strong>, bind <strong>OnMiniVariantUpdate</strong> to a data prop.</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.5810983+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3247122+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5538,7 +5506,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.5901+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3267048+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5625,7 +5593,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.6010964+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3287054+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5713,7 +5681,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "ע��": "\n<!--alert:warning--> \n<p><code>Mdatepicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.6280966+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3348635+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5956,7 +5924,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "ע��": "\n<!--alert:warning--> \n<p><code>MDatePicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.6440993+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3377048+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6099,7 +6067,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.6631011+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3417042+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6272,7 +6240,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-06T19:59:23.6730962+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3437036+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6323,7 +6291,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-06T19:59:23.6820963+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3447036+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6396,7 +6364,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-06T19:59:23.6970972+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3477039+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6503,7 +6471,7 @@
     "Desc": "<p>When requiring users to interact with the application, but without jumping to a new page and interrupting the user's\nworkflow, you can use <code>Modal</code> to create a new floating layer over the current page to get user feedback or display\ninformation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-06T19:59:23.7112894+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3497045+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6598,7 +6566,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-06T19:59:23.7152884+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3507039+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6649,7 +6617,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-06T19:59:23.7212862+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3517054+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6703,7 +6671,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.7332913+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3547148+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6779,7 +6747,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.7502893+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3587048+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6943,7 +6911,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.7592873+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3607127+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -7052,7 +7020,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.7662876+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.361714+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -7107,7 +7075,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.7732876+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3637136+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7151,7 +7119,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.7812853+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3657064+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7227,7 +7195,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.798286+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3697059+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7392,7 +7360,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.8062842+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3707042+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7468,7 +7436,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.8122874+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3727066+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7523,7 +7491,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n<li><a href=\"/api/MDataTableHeader\">MDataTableHeader</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.8402859+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3787041+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7787,7 +7755,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.8492874+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3807065+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7865,7 +7833,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p>When using the <strong>Dark</strong> prop and <strong>NOT</strong> providing a custom <strong>color</strong>, the <code>MTabs</code> component will default its color to white.</p>\n<!--alert:warning--> \n<!--alert:warning--> \n<p>When using <code>MTabItem</code>'s that contain required input fields you must use the <strong>eager</strong> prop in order to validate the required fields that are not yet visible.</p>\n<!--alert:warning--> \n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.8712873+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3859742+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8063,7 +8031,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.8852873+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.38872+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8195,7 +8163,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "ע��": "\n<!--alert:info-->\n<p>In order to correctly position 'MTooltip', a position support (<code>top</code> | 'bottom <code>|' left</code> | 'right') is required.</p>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.8912874+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3907064+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8248,7 +8216,7 @@
     "Desc": "<p>The MTreeview component is useful for displaying large amounts of nested data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-06T19:59:23.9142894+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3947047+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8446,7 +8414,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-06T19:59:23.9192882+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3961855+08:00",
     "DemoList": [
       {
         "Order": 0,

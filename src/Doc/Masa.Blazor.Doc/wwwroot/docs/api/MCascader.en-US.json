@@ -381,6 +381,11 @@
       "Description": ""
     },
     {
+      "Name": "TextColor",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "Type",
       "Type": "String",
       "Default": "null",
@@ -520,6 +525,11 @@
     },
     {
       "Name": "OnKeyDown",
+      "Type": "EventCallback<KeyboardEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnKeyUp",
       "Type": "EventCallback<KeyboardEventArgs>",
       "Description": ""
     },
