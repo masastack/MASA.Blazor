@@ -806,9 +806,3 @@ body {
     height: 24px !important;
     width: 24px !important;
 }
-
-#lateral .m-btn--example {
-    bottom: 0;
-    position: absolute;
-    margin: 0 0 16px 16px;
-}
