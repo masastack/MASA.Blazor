@@ -3,7 +3,7 @@
     "Desc": "<p>使用边框半径辅助样式对元素快速应用 <code>border-radius</code> 样式</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-12T10:25:12.6212237+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.397705+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -84,7 +84,7 @@
     "Desc": "<p>通过 <strong>sass</strong> 和 <strong>javascript</strong>，你可以使用 <a href=\"https://material.io/design/color/the-color-system.html#color-theme-creation\">Material Design</a> 规范中的所有颜色。 这些值可以在样式表、组件文件和实际组件中通过<strong>颜色类</strong>系统使用。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-12T10:25:12.6368078+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3987042+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -132,7 +132,7 @@
     "Desc": "<p>显示辅助器允许你控制内容的显示。 可以根据当前视图或实际元素显示类型有条件地显示内容。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-12T10:25:12.6562498+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3997142+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -180,7 +180,7 @@
     "Desc": "<p>该工具可以让你控制两平面之间沿 z 轴方向的相对深度，或者说距离。 总共有25个高度。 您可以通过使用 <code>elevation-{n}</code>类设置元素的海拔， 其中 <code>n</code> 是0-24之间与所需海拔对应的整数。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-12T10:25:12.6869151+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4017062+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -217,7 +217,7 @@
     "Desc": "<p>使用响应的 flexbox 实用程序通过对齐、排列等方式控制 flex 容器的布局, 采用 Flex 布局的元素，称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-12T10:25:12.7019468+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4017062+08:00",
     "DemoList": [
       {
         "Order": 3,
@@ -364,7 +364,7 @@
     "Desc": "<p>使用响应式 float 工具在任何断点上应用自定义浮动。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-12T10:25:12.7470625+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4057041+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -401,7 +401,7 @@
     "Desc": "<p>配置内容超出容器边界时如何溢出。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-12T10:25:12.7651493+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4067043+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -438,7 +438,7 @@
     "Desc": "<p>不通过创建新类的方式来更新您的布局. 间距辅助类在修改元素的 padding 和 margin 时非常有用</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-12T10:25:12.7982347+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4087204+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -497,7 +497,7 @@
     "Desc": "<p>控制文本大小、对齐、换行、溢出、变形等等。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-12T10:25:12.8411836+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4117062+08:00",
     "DemoList": [
       {
         "Order": 5,
@@ -634,7 +634,7 @@
     "Desc": "<p>平滑的动画让界面体验更好。 使用 Blazor 的过渡系统和可复用的功能组件, 你可以轻松的控制应用程序的运动. 大多数组件可以通过 <strong>stansition</strong> prop改变它们的过渡动画.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-12T10:25:12.8888595+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4147043+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -663,7 +663,7 @@
         "Name": "expandX",
         "Title": "Expand x",
         "Description": "<p>扩展过渡用于扩展面板和列表组。 同样还有一个水平版本 Transition 可用.</p>\n",
-        "Code": "<MRow Justify=JustifyTypes.Center>\r\n\r\n    <MCol Class=\"shrink\">\r\n\r\n        <MButton Class=\"ma-2\" Color=\"primary\" OnClick=\"_=>_expand=!_expand\">\r\n            Expand Transition\r\n        </MButton>\r\n\r\n        <ExpandTransition>\r\n            <MCard Show=@_expand Height=100 Width=100 class=\"mx-auto secondary\">\r\n            </MCard>\r\n        </ExpandTransition>\r\n\r\n    </MCol>\r\n\r\n    <div class=\"mx-4 hidden-sm-and-down\"></div>\r\n\r\n    <MCol Class=\"shrink\">\r\n\r\n        <MButton Class=\"ma-2\" Color=\"secondary\" OnClick=\"_=>_expand2=!_expand2\">\r\n            Expand X Transition\r\n        </MButton>\r\n\r\n        <ExpandTransition>\r\n            <MCard Show=@_expand2 Height=100 Width=100 class=\"mx-auto secondary\">\r\n            </MCard>\r\n        </ExpandTransition>\r\n\r\n    </MCol>\r\n\r\n</MRow>\r\n\r\n\r\n@code {\r\n    bool _expand = false;\r\n    bool _expand2 = false;\r\n}",
+        "Code": "<MRow Justify=JustifyTypes.Center Style=\"min-height: 160px\">\r\n\r\n    <MCol Class=\"shrink\">\r\n\r\n        <MButton Class=\"ma-2\" Color=\"primary\" OnClick=\"_ => _expand = !_expand\">\r\n            Expand Transition\r\n        </MButton>\r\n\r\n        <ExpandTransition>\r\n            <MCard Show=@_expand Height=100 Width=100 class=\"mx-auto secondary\">\r\n            </MCard>\r\n        </ExpandTransition>\r\n\r\n    </MCol>\r\n\r\n    <div class=\"mx-4 hidden-sm-and-down\"></div>\r\n\r\n    <MCol Class=\"shrink\">\r\n\r\n        <MButton Class=\"ma-2\" Color=\"secondary\" OnClick=\"_ => _expand2 = !_expand2\">\r\n            Expand X Transition\r\n        </MButton>\r\n\r\n        <ExpandXTransition>\r\n            <MCard Show=@_expand2 Height=100 Width=100 class=\"mx-auto secondary\">\r\n            </MCard>\r\n        </ExpandXTransition>\r\n\r\n    </MCol>\r\n\r\n</MRow>\r\n\r\n\r\n@code {\r\n    bool _expand = false;\r\n    bool _expand2 = false;\r\n}",
         "Type": "Demos.StylesAndAnimations.Transitions.misc.ExpandX",
         "Style": "",
         "Debug": false,
@@ -751,7 +751,7 @@
         "Name": "TodoList",
         "Title": "TodoList",
         "Description": "<p>使用多个自定义转场，可以轻松实现简单的待办事项清单！</p>\n",
-        "Code": "<MContainer Style=\"max-width: 500px\">\r\n\r\n    <MTextField Label=\"What are you working on?\" Solo Value=_newTask OnKeyDown=\"Create\">\r\n        <AppendContent>\r\n            <FadeTransition>\r\n                <MIcon If=\"@(string.IsNullOrEmpty(_newTask) == false)\">\r\n                    add_circle\r\n                </MIcon>\r\n            </FadeTransition>\r\n        </AppendContent>\r\n    </MTextField>\r\n\r\n    <h2 class=\"text-h4 success--text pl-4\">\r\n        Tasks:&nbsp;\r\n        <FadeTransition>\r\n            <Element Tag=\"span\" Show=true>\r\n                @_tasks.Count\r\n            </Element>\r\n        </FadeTransition>\r\n    </h2>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MRow Class=\"my-1\" Align=AlignTypes.Center>\r\n\r\n        <strong class=\"mx-4 info--text text--darken-2\">\r\n            Remaining: @RemainingTasks\r\n        </strong>\r\n\r\n        <MDivider Vertical></MDivider>\r\n\r\n        <strong class=\"mx-4 success--text text--darken-2\">\r\n            Completed: @CompletedTasks\r\n        </strong>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MProgressCircular Value=Progress Class=\"mr-2\"></MProgressCircular>\r\n\r\n    </MRow>\r\n\r\n    <MDivider Class=\"mb-4\"></MDivider>\r\n\r\n    @if (_tasks.Count > 0)\r\n    {\r\n        <MCard>\r\n         @*   <SlideYTransition class=\"py-0\">\r\n                @for (var i = 0; i < _tasks.Count; i++)\r\n                {\r\n                    var task = _tasks[i];\r\n                    if (i != 0)\r\n                    {\r\n                        <MDivider></MDivider>\r\n                    }\r\n\r\n                    <MListItem>\r\n\r\n                        <MListItemAction>\r\n                            <MCheckbox Value=task.done Color=\"@(task.done ?\"grey\":\"primary\")\">\r\n                                <LabelContent>\r\n                                    <div class=\"@(task.done?\"grey--text\":\"primary--text\") ml-4\">\r\n                                        @task.text\r\n                                    </div>\r\n                                </LabelContent>\r\n                            </MCheckbox>\r\n                        </MListItemAction>\r\n\r\n                        <MSpacer></MSpacer>\r\n\r\n                        <ScrollXTransition>\r\n                            <MIcon If=\"@task.done\" Color=\"success\">\r\n                                mdi-check\r\n                            </MIcon>\r\n                        </ScrollXTransition>\r\n\r\n                    </MListItem>\r\n                }\r\n            </SlideYTransition>*@\r\n        </MCard>\r\n    }\r\n\r\n\r\n</MContainer>\r\n\r\n\r\n@code {\r\n    string _newTask = \"\";\r\n\r\n    List<(bool done, string text)> _tasks = new List<(bool, string)>\r\n    {\r\n        (false,\"Foobar\"),\r\n        (false,\"Fizzbuzz\"),\r\n    };\r\n\r\n    int CompletedTasks => _tasks.Count(t => t.done);\r\n\r\n    int Progress => CompletedTasks / _tasks.Count * 100;\r\n\r\n    int RemainingTasks => _tasks.Count - CompletedTasks;\r\n\r\n    void Create(KeyboardEventArgs eventArgs)\r\n    {\r\n        if (eventArgs.Key == \"Enter\")\r\n        {\r\n            _tasks.Add((false, _newTask));\r\n            _newTask = \"\";\r\n        }\r\n    }\r\n}",
+        "Code": "<MContainer Style=\"max-width: 500px\">\r\n\r\n    <MTextField @bind-Value=_newTask\r\n                Label=\"What are you working on?\"\r\n                Solo\r\n                OnKeyDown=\"OnEnterKeyDown\">\r\n        <AppendContent>\r\n            <FadeTransition >\r\n                <MIcon IfElse=\"@(!string.IsNullOrEmpty(_newTask))\"\r\n                       OnClick=\"Create\">\r\n                    add_circle\r\n                </MIcon>\r\n            </FadeTransition>\r\n        </AppendContent>\r\n    </MTextField>\r\n\r\n    <h2 class=\"text-h4 success--text pl-4\">\r\n        Tasks:&nbsp;\r\n        <FadeTransition LeaveAbsolute>\r\n            <KeyTransitionElement Tag=\"span\" Value=\"@($\"task-{_tasks.Count}\")\">\r\n                @_tasks.Count\r\n            </KeyTransitionElement>\r\n        </FadeTransition>\r\n    </h2>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MRow Class=\"my-1\" Align=AlignTypes.Center>\r\n\r\n        <strong class=\"mx-4 info--text text--darken-2\">\r\n            Remaining: @RemainingTasks\r\n        </strong>\r\n\r\n        <MDivider Vertical></MDivider>\r\n\r\n        <strong class=\"mx-4 success--text text--darken-2\">\r\n            Completed: @CompletedTasks\r\n        </strong>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MProgressCircular Value=Progress Class=\"mr-2\"></MProgressCircular>\r\n\r\n    </MRow>\r\n\r\n    <MDivider Class=\"mb-4\"></MDivider>\r\n\r\n    @if (_tasks.Count > 0)\r\n    {\r\n        <MCard>\r\n            <SlideYTransition>\r\n                @*//TODO: group*@\r\n                @for (var i = 0; i < _tasks.Count; i++)\r\n                {\r\n                    var task = _tasks[i];\r\n                    if (i != 0)\r\n                    {\r\n                        <MDivider></MDivider>\r\n                    }\r\n\r\n                    <MListItem>\r\n\r\n                        <MListItemAction>\r\n                            <MCheckbox Value=\"@task.Done\"\r\n                                       ValueChanged=\"@(v => task.Done = v)\"\r\n                                       Color=\"@(task.Done ? \"grey\" : \"primary\")\">\r\n                                <LabelContent>\r\n                                    <div class=\"@(task.Done ? \"grey--text\" : \"primary--text\") ml-4\">\r\n                                        @task.Text\r\n                                    </div>\r\n                                </LabelContent>\r\n                            </MCheckbox>\r\n                        </MListItemAction>\r\n\r\n                        <MSpacer></MSpacer>\r\n\r\n                        <ScrollXTransition>\r\n                            <MIcon IfElse=\"@task.Done\" Color=\"success\">\r\n                                mdi-check\r\n                            </MIcon>\r\n                        </ScrollXTransition>\r\n\r\n                    </MListItem>\r\n                }\r\n            </SlideYTransition>\r\n        </MCard>\r\n    }\r\n\r\n</MContainer>\r\n\r\n\r\n@code {\r\n    string _newTask = \"\";\r\n\r\n    readonly List<ToDo> _tasks = new()\r\n    {\r\n        new ToDo(false, \"Foobar\"),\r\n        new ToDo(false, \"Fizzbuzz\")\r\n    };\r\n\r\n    int CompletedTasks => _tasks.Count(t => t.Done);\r\n\r\n    float Progress => (CompletedTasks * 100f) / _tasks.Count;\r\n\r\n    int RemainingTasks => _tasks.Count - CompletedTasks;\r\n\r\n    void OnEnterKeyDown(KeyboardEventArgs eventArgs)\r\n    {\r\n        if (eventArgs.Key == \"Enter\")\r\n        {\r\n            Create();\r\n        }\r\n    }\r\n\r\n    void Create()\r\n    {\r\n        _tasks.Add(new(false, _newTask));\r\n        _newTask = \"\";\r\n    }\r\n\r\n    class ToDo\r\n    {\r\n        public bool Done { get; set; }\r\n        public string Text { get; set; }\r\n\r\n        public ToDo(bool done, string text)\r\n        {\r\n            Done = done;\r\n            Text = text;\r\n        }\r\n    }\r\n\r\n}",
         "Type": "Demos.StylesAndAnimations.Transitions.misc.TodoList",
         "Style": "",
         "Debug": false,

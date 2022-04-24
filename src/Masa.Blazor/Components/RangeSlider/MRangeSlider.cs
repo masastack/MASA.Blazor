@@ -30,9 +30,43 @@ namespace Masa.Blazor
 
         protected int? ActiveThumb { get; set; }
 
+        public override Func<Task> DebounceTimerRun => SliderRangeDebounceTimerRun;
+
+        protected override double DoubleInteralValue
+        {
+            get 
+            {
+                if (ActiveThumb.HasValue && InternalValue[ActiveThumb.Value] is double val)
+                {
+                    return val;
+                }
+                return default;
+                
+            }
+            set 
+            {
+                 var val = RoundValue(Math.Min(Math.Max(value, Min), Max));
+
+                if (ActiveThumb.HasValue)
+                {
+                    InternalValue[ActiveThumb.Value] = val is TValue v ? v : default;
+                }
+            }
+        }
+
         protected override double GetRoundedValue(int index)
         {
             return RoundValue(DoubleInteralValues[index]);
+        }
+
+        public async Task SliderRangeDebounceTimerRun()
+        {
+            await SetInternalValueAsync(_value);
+
+            if (OnChange.HasDelegate)
+            {
+                await OnChange.InvokeAsync(InternalValue);
+            }
         }
 
         public override async Task HandleOnSliderClickAsync(MouseEventArgs args)
@@ -46,14 +80,17 @@ namespace Masa.Blazor
                 }
 
                 var value = await ParseMouseMoveAsync(args);
+
                 await ReevaluateSelectedAsync(value);
+
                 await SetInternalValueAsync(value);
             }
         }
 
+        private double _value = 0;
         public override async Task HandleOnMouseMoveAsync(MouseEventArgs args)
         {
-            var value = await ParseMouseMoveAsync(args);
+            _value = await ParseMouseMoveAsync(args);
 
             if (args.Type == "mousemove")
             {
@@ -62,10 +99,10 @@ namespace Masa.Blazor
 
             if (ActiveThumb == null)
             {
-                ActiveThumb = GetIndexOfClosestValue(DoubleInteralValues, value);
+                ActiveThumb = GetIndexOfClosestValue(DoubleInteralValues, _value);
             }
 
-            await SetInternalValueAsync(value);
+            await ChangeValue();
         }
 
         protected override async Task SetInternalValueAsync(double value)
@@ -114,7 +151,8 @@ namespace Masa.Blazor
                 return;
             }
 
-            await SetInternalValueAsync(value.AsT2);
+            _value = value.AsT2;
+            await ChangeValue();
         }
 
         public override async Task HandleOnSliderMouseDownAsync(ExMouseEventArgs args)
@@ -144,11 +182,13 @@ namespace Masa.Blazor
         public override Task HandleOnFocusAsync(FocusEventArgs args)
         {
             ActiveThumb = 0;
+            _value = DoubleInteralValue;
             return base.HandleOnFocusAsync(args);
         }
 
         public override Task HandleOnBlurAsync(FocusEventArgs args)
         {
+            _value = DoubleInteralValue;
             ActiveThumb = null;
             return base.HandleOnBlurAsync(args);
         }
@@ -156,11 +196,13 @@ namespace Masa.Blazor
         public async Task HandleOnSecondFocusAsync(FocusEventArgs args)
         {
             ActiveThumb = 1;
+            _value = DoubleInteralValue;
             await base.HandleOnFocusAsync(args);
         }
 
         public async Task HandleOnSecondBlurAsync(FocusEventArgs args)
         {
+            _value = DoubleInteralValue;
             ActiveThumb = null;
             await base.HandleOnBlurAsync(args);
         }
