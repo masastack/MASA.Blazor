@@ -34,14 +34,12 @@
 
 <MDivider Class="my-4" />
 
-<MRadioGroup @bind-Value="position" Row>
+<MRadioGroup Value="position" TValue="ToastPosition" Row ValueChanged="OnChangePosition">
     <MRadio Value="ToastPosition.TopLeft" Label="Top Left"></MRadio>
     <MRadio Value="ToastPosition.TopRight" Label="Top Right"></MRadio>
     <MRadio Value="ToastPosition.BottomLeft" Label="Bottom Left"></MRadio>
     <MRadio Value="ToastPosition.BottomRight" Label="Bottom Right"></MRadio>
 </MRadioGroup>
-
-<MButton OnClick="CustomPosition">Custom global Position</MButton>
 
 @code {
 
@@ -114,7 +112,7 @@
         });
     }
 
-    private Task CustomPosition()
+    private Task OnChangePosition(ToastPosition position)
     {
         return PopupService.Config((config) =>
         {
