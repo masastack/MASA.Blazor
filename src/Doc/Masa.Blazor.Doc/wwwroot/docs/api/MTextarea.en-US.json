@@ -77,6 +77,11 @@
       "Description": "Applies the dark theme variant to the component."
     },
     {
+      "Name": "DebounceMilliseconds",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
       "Name": "Dense",
       "Type": "Boolean",
       "Default": "false",
@@ -430,6 +435,11 @@
     },
     {
       "Name": "OnKeyDown",
+      "Type": "EventCallback<KeyboardEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnKeyUp",
       "Type": "EventCallback<KeyboardEventArgs>",
       "Description": ""
     },

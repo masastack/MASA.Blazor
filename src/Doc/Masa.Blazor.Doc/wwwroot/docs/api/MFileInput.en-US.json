@@ -457,6 +457,11 @@
       "Description": ""
     },
     {
+      "Name": "OnKeyUp",
+      "Type": "EventCallback<KeyboardEventArgs>",
+      "Description": ""
+    },
+    {
       "Name": "OnMouseDown",
       "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
