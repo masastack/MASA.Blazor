@@ -89,6 +89,11 @@
       "Description": ""
     },
     {
+      "Name": "Show",
+      "Type": "Nullable<Boolean>",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Default": "null",
