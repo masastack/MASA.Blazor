@@ -1,8 +1,8 @@
-﻿<MRow Justify=JustifyTypes.Center>
+﻿<MRow Justify=JustifyTypes.Center Style="min-height: 160px">
 
     <MCol Class="shrink">
 
-        <MButton Class="ma-2" Color="primary" OnClick="_=>_expand=!_expand">
+        <MButton Class="ma-2" Color="primary" OnClick="_ => _expand = !_expand">
             Expand Transition
         </MButton>
 
@@ -17,14 +17,14 @@
 
     <MCol Class="shrink">
 
-        <MButton Class="ma-2" Color="secondary" OnClick="_=>_expand2=!_expand2">
+        <MButton Class="ma-2" Color="secondary" OnClick="_ => _expand2 = !_expand2">
             Expand X Transition
         </MButton>
 
-        <ExpandTransition>
+        <ExpandXTransition>
             <MCard Show=@_expand2 Height=100 Width=100 class="mx-auto secondary">
             </MCard>
-        </ExpandTransition>
+        </ExpandXTransition>
 
     </MCol>
 

@@ -239,6 +239,11 @@
       "Description": ""
     },
     {
+      "Name": "Show",
+      "Type": "Nullable<Boolean>",
+      "Description": ""
+    },
+    {
       "Name": "ShrinkOnScroll",
       "Type": "Boolean",
       "Default": "false",
