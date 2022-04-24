@@ -14,7 +14,7 @@
             </MButton>
         </ChildContent>
         <ExtensionContent>
-            <MTabs @bind-Value="tab" AlignWithTitle SliderColor="pink">
+            <MTabs @bind-Value="tab" AlignWithTitle SliderColor="pink" @key="tab">
                 <MTab Value="@("one")">
                     Item One
                 </MTab>
@@ -38,8 +38,8 @@
             }
         </MTabsItems>
     </MCardText>
-    <FabTransition>
-        <MButton Color="@GetActiveFabColor()" Fab Large Dark Bottom Left Class="m-btn--example" @key="GetActiveFabIcon()">
+    <FabTransition Mode="@TransitionMode.OutIn">
+        <MButton Color="@GetActiveFabColor()" Fab Large Dark Bottom Left Class="m-btn--example" Key="@GetActiveFabIcon()">
             <MIcon> @GetActiveFabIcon() </MIcon>
         </MButton>
     </FabTransition>

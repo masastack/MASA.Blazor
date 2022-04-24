@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2027047+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7230675+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -194,7 +194,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.203703+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7240663+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -227,7 +227,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2057063+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7280521+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -327,7 +327,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2077031+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.730045+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -404,7 +404,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2097134+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7320367+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -494,7 +494,7 @@
       "功能组件": "\n<ul>\n<li><code>MAppBarNavIcon</code>：专门为与 <a href=\"/components/toolbars\">MToolbar</a> 和 <code>MAppBar</code> 一起使用而创建的样式化图标按钮组件。 在工具栏的左侧显示为汉堡菜单，它通常用于控制导航抽屉的状态。 默认插槽可以用于自定义此组件的图标和功能。</li>\n<li><code>MAppBarTitle</code>：修改过的 <a href=\"/components/toolbars\">MToolbarTitle</a> 组件 ，用于配合 <strong>ShrinkOnScroll</strong> 属性使用。 在小屏幕上，<strong>MToolbarTitle</strong>\n将被截断，但这个组件在展开时使用了绝对定位使其内容可见。 我们不建议您在没有使用 <strong>ShrinkOnScroll</strong> 属性时使用 <code>MAppBarTitle</code> 组件。确实是因为向此组件添加了resize事件，并进行了很多额外的计算。</li>\n</ul>\n",
       "注意事项": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <strong>Icon</strong> 属性的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将按钮包装在任何容器例如<code>div</code>中，则需要对该容器应用负边距，以便正确对齐它们。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2137039+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7370217+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -649,7 +649,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2147036+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7390133+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -727,7 +727,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <code>Icon</code> prop的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将您的按钮包装在任何容器中，例如<code>div</code>， 您需要对容器应用负边距，以便正确对齐。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2187075+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.743962+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -881,7 +881,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2197064+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7459552+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -925,7 +925,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBottomSheet\">MBottomSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2227037+08:00",
+    "LastWriteTime": "2022-03-21T11:17:36.997464+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1014,7 +1014,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>默认情况下，<code>MBreadcrumbs</code> 将禁用路由联动。可以通过 <strong>Linkage</strong> 属性开启路由联动。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2247155+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7484366+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1104,7 +1104,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p>当使用 <strong>Dark</strong> 属性时，<code>MButton</code> 是唯一一种拥有不同行为的组件。 通常来说，组件使用 <strong>Dark</strong> 属性来表示他们将有深色背景，文本也需要是白色的。 虽然这对\n<code>MButton</code> 也是起作用的，但由于禁用状态与白色背景容易造成混淆，建议仅在按钮<strong>为</strong>彩色背景时使用此属性。 If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2277041+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7534243+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1271,7 +1271,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "功能组件": "\n<ul>\n<li><code>MCardActions</code>：用于为卡片放置 动作 的容器，如 <a href=\"/components/buttons\">MButton</a> 或 <a href=\"/components/menus\">MMenu</a>。 同时在按钮上使用 个特殊边距\n，以便它们与其他卡片内容区域的匹配。</li>\n<li><code>MCardSubtitle</code>：为卡片字幕提供默认的 <strong>字体大小</strong> 和 <strong>填充</strong>。 字体大小可以以 <a href=\"/stylesandanimations/text-and-typography\">排版类</a> 覆盖。</li>\n<li><code>MCardText</code>：主要用于卡片中的 <strong>文本内容</strong>。 对文本应用填充，将其字体大小减少为 .875rem。</li>\n<li><code>MCardTitle</code>：为卡片字幕提供默认的 字体大小 和 填充。 字体大小可以以 <a href=\"/stylesandanimations/text-and-typography\">排版类</a> 覆盖。</li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2317045+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.75841+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1426,7 +1426,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2367046+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7630157+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1614,7 +1614,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2397197+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7673271+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1746,7 +1746,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-14T11:48:59.7323297+08:00",
+    "LastWriteTime": "2022-04-24T13:45:42.2396001+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1835,7 +1835,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2427066+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7712418+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1888,7 +1888,7 @@
       "js文件": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-24T11:08:42.1024985+08:00",
+    "LastWriteTime": "2022-04-24T13:45:42.2405993+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2014,7 +2014,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MErrorHandler\">MErrorHandler</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-01T11:11:01.979192+08:00",
+    "LastWriteTime": "2022-04-06T09:22:01.4597066+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2075,7 +2075,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2457187+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7754585+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2203,12 +2203,89 @@
     "FullTitle": "Expansion panels（扩展面板）"
   },
   {
+    "Desc": "<p><code>MButton</code> 组件可以用作浮动动作按钮。 这提供了一个具有主要行为点的应用程序。 结合 <code>MSpeedDial</code> 组件, 您可以创建一组可供用户使用的功能</p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MSpeedDial\">MSpeedDial</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-04-24T13:38:16.4948913+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "使用",
+        "Description": "<p>浮动动作按钮可以附加到material上来表示应用程序中的提升操作。 在大多数情况下，将使用默认大小，而 <code>Small</code> 变量可用于与大小相似的元素保持连续性。</p>\n",
+        "Code": "<MRow Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n    <MButton Elevation=\"2\" Fab>\r\n        <MIcon>\r\n            mdi-beta\r\n        </MIcon>\r\n    </MButton>\r\n</MRow>",
+        "Type": "Demos.Components.FloatingActionButton.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 11,
+        "Name": "animation",
+        "Title": "显示时的动画",
+        "Description": "<p>当第一次显示时，浮动动作按钮应该在屏幕上显示动画。 这里我们使用 <code>FabTransition</code> 。 您也可以使用由Masa Blazor或自己提供的自定义过度。</p>\n",
+        "Code": "<MContainer fluid>\r\n    <MRow>\r\n        <MCol Cols=\"12\"\r\n              Sm=\"12\"\r\n              Md=\"6\"\r\n              OffsetMd=\"3\">\r\n            <MCard>\r\n                <MToolbar Extended>\r\n                    <ChildContent>\r\n                        <MAppBarNavIcon></MAppBarNavIcon>\r\n                    </ChildContent>\r\n                    <ExtensionContent>\r\n                        <FabTransition>\r\n                            <MButton Color=\"pink\"\r\n                                     Show=\"!hidden\"\r\n                                     Fab\r\n                                     Dark\r\n                                     Small\r\n                                     Absolute\r\n                                     Bottom\r\n                                     Left>\r\n                                <MIcon>mdi-plus</MIcon>\r\n                            </MButton>\r\n                        </FabTransition>\r\n                    </ExtensionContent>\r\n                </MToolbar>\r\n                <MCardText Style=\"height: 300px;\" Class=\"grey lighten-5 text-center\">\r\n                    <MButton Color=\"primary\"\r\n                             OnClick=\"()=> hidden = !hidden\">\r\n                        @(hidden? \"Show\": \"Hide\")\r\n                    </MButton>\r\n                </MCardText>\r\n\r\n                <MCardText Style=\"height: 100px; position: relative\">\r\n                    <FabTransition>\r\n                        <MButton Color=\"pink\"\r\n                                 Show=\"!hidden\"\r\n                                 Dark\r\n                                 Absolute\r\n                                 Top\r\n                                 Right\r\n                                 Fab>\r\n                            <MIcon>\r\n                                mdi-plus\r\n                            </MIcon>\r\n                        </MButton>\r\n                    </FabTransition>\r\n                </MCardText>\r\n            </MCard>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n@code {\r\n    bool hidden = false;\r\n}",
+        "Type": "Demos.Components.FloatingActionButton.misc.Animation",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 11,
+        "Name": "lateralScreens",
+        "Title": "横向屏幕切换",
+        "Description": "<p>当更改按钮的默认操作时，建议您显示一个过度来表示更改。 我们通过将<code>Key</code>属性绑定到一段数据上，该数据可以正确地向Masa Blazor过度系统发出操作变化的信号。 虽然您可以为此使用自定义转换，但请确保将<code>Mode</code>设置为 <code>OutIn</code>。</p>\n",
+        "Code": "<MCard Id=\"lateral\">\r\n    <MToolbar Dark\r\n              Flat\r\n              Color=\"indigo\">\r\n        <ChildContent>\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MToolbarTitle>Page title</MToolbarTitle>\r\n            <MSpacer></MSpacer>\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n        </ChildContent>\r\n        <ExtensionContent>\r\n            <MTabs @bind-Value=\"tab\" AlignWithTitle SliderColor=\"pink\" @key=\"tab\">\r\n                <MTab Value=\"@(\"one\")\">\r\n                    Item One\r\n                </MTab>\r\n                <MTab Value=\"@(\"two\")\">\r\n                    Item Two\r\n                </MTab>\r\n                <MTab Value=\"@(\"three\")\">\r\n                    Item Three\r\n                </MTab>\r\n            </MTabs>\r\n        </ExtensionContent>\r\n    </MToolbar>\r\n    <MCardText>\r\n        <MTabsItems @bind-Value=\"tab\">\r\n            @foreach (var item in Items)\r\n            {\r\n                <MTabItem Value=\"item\" @key=\"item\">\r\n                    <MCard Height=\"@(\"200px\")\" Flat>\r\n                    </MCard>\r\n                </MTabItem>\r\n            }\r\n        </MTabsItems>\r\n    </MCardText>\r\n    <FabTransition Mode=\"@TransitionMode.OutIn\">\r\n        <MButton Color=\"@GetActiveFabColor()\" Fab Large Dark Bottom Left Class=\"m-btn--example\" Key=\"@GetActiveFabIcon()\">\r\n            <MIcon> @GetActiveFabIcon() </MIcon>\r\n        </MButton>\r\n    </FabTransition>\r\n</MCard>\r\n\r\n@code {\r\n    private StringNumber tab = \"one\";\r\n\r\n    List<string> Items = new List<string>() { \"one\", \"two\", \"three\" };\r\n\r\n    private dynamic ComputedActiveFab()\r\n    {\r\n        switch (tab.AsT0)\r\n        {\r\n            case \"one\":\r\n                return new { Color = \"success\", Icon = \"mdi-share-variant\" };\r\n            case \"two\":\r\n                return new { Color = \"red\", Icon = \"mdi-pencil\" };\r\n            case \"three\":\r\n                return new { Color = \"green\", Icon = \"mdi-chevron-up\" };\r\n            default:\r\n                return new { Color = \"\", Icon = \"\" };\r\n        }\r\n    }\r\n\r\n    public string GetActiveFabColor()\r\n    {\r\n        var activeFab = ComputedActiveFab();\r\n        return activeFab.Color;\r\n    }\r\n\r\n    public string GetActiveFabIcon()\r\n    {\r\n        var activeFab = ComputedActiveFab();\r\n        return activeFab.Icon;\r\n    }\r\n}",
+        "Type": "Demos.Components.FloatingActionButton.misc.LateralScreens",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 11,
+        "Name": "smallVariant",
+        "Title": "小型按钮",
+        "Description": "<p>为了达到更好的视觉效果，我们可以使用小型按钮以适配列表的头像。</p>\n",
+        "Code": "<MRow>\r\n    <MCol Cols=\"12\"\r\n          Sm=\"6\"\r\n          OffsetSm=\"3\">\r\n        <MCard>\r\n            <MToolbar Color=\"light-blue\"\r\n                      Light\r\n                      Extended>\r\n                <ChildContent>\r\n                    <MAppBarNavIcon></MAppBarNavIcon>\r\n                    <MToolbarTitle class=\"white--text\">\r\n                        My files\r\n                    </MToolbarTitle>\r\n                    <MSpacer></MSpacer>\r\n                    <MButton Icon>\r\n                        <MIcon>mdi-magnify</MIcon>\r\n                    </MButton>\r\n                    <MButton Icon>\r\n                        <MIcon>mdi-view-module</MIcon>\r\n                    </MButton>\r\n                </ChildContent>\r\n\r\n                <ExtensionContent>\r\n                    <MButton Fab\r\n                             Color=\"cyan accent-2\"\r\n                             Bottom\r\n                             Left\r\n                             Absolute\r\n                             OnClick=\"()=> dialog = !dialog\">\r\n                        <MIcon>mdi-plus</MIcon>\r\n                    </MButton>\r\n                </ExtensionContent>\r\n            </MToolbar>\r\n            <MList TwoLine\r\n                   Subheader>\r\n                <MSubheader Inset>\r\n                    Folders\r\n                </MSubheader>\r\n                @foreach (var item in items)\r\n                {\r\n                    <MListItem @key=\"item.Title\" Link>\r\n                        <MListItemAvatar>\r\n                            <MIcon Class=\"@item.IconClass\">\r\n                                @item.Icon\r\n                            </MIcon>\r\n                        </MListItemAvatar>\r\n                        <MListItemContent>\r\n                            <MListItemTitle>\r\n                                @item.Title\r\n                            </MListItemTitle>\r\n                            <MListItemSubtitle>\r\n                                @item.SubTitle\r\n                            </MListItemSubtitle>\r\n                        </MListItemContent>\r\n                        <MListItemAction>\r\n                            <MButton Icon>\r\n                                <MIcon color=\"grey lighten-1\">\r\n                                    mdi-information\r\n                                </MIcon>\r\n                            </MButton>\r\n                        </MListItemAction>\r\n                    </MListItem>\r\n                }\r\n\r\n                <MDivider Inset></MDivider>\r\n\r\n                <MSubheader Inset>\r\n                    Files\r\n                </MSubheader>\r\n\r\n                @foreach (var item in items2)\r\n                {\r\n                    <MListItem @key=\"item.Title\" Link>\r\n                        <MListItemAvatar>\r\n                            <MIcon Class=\"@item.IconClass\">\r\n                                @item.Icon\r\n                            </MIcon>\r\n                        </MListItemAvatar>\r\n                        <MListItemContent>\r\n                            <MListItemTitle>\r\n                                @item.Title\r\n                            </MListItemTitle>\r\n                            <MListItemSubtitle>\r\n                                @item.SubTitle\r\n                            </MListItemSubtitle>\r\n                        </MListItemContent>\r\n                        <MListItemAction>\r\n                            <MButton Icon Ripple>\r\n                                <MIcon color=\"grey lighten-1\">\r\n                                    mdi-information\r\n                                </MIcon>\r\n                            </MButton>\r\n                        </MListItemAction>\r\n                    </MListItem>\r\n                }\r\n            </MList>\r\n\r\n            <MDialog Value=\"dialog\"\r\n                     MaxWidth=\"500\">\r\n                <MCard>\r\n                    <MCardText>\r\n                        <MTextField TValue=\"string\" Label=\"File name\"></MTextField>\r\n\r\n                        <small class=\"grey--text\">* This doesn't actually save.</small>\r\n                    </MCardText>\r\n\r\n                    <MCardActions>\r\n                        <MSpacer></MSpacer>\r\n\r\n                        <MButton Text\r\n                                 Color=\"primary\"\r\n                                 OnClick=\"()=> dialog = false\">\r\n                            Submit\r\n                        </MButton>\r\n                    </MCardActions>\r\n                </MCard>\r\n            </MDialog>\r\n        </MCard>\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n    private bool dialog;\r\n\r\n    private List<dynamic> items = new List<dynamic>()\r\n    {\r\n        new\r\n        {\r\n            Icon =\"mdi-folder\",\r\n            IconClass =\"grey lighten-1 white--text\",\r\n            Title =\"Photos\",\r\n            SubTitle= \"Jan 9, 2014\"\r\n        },\r\n        new\r\n        {\r\n            Icon =\"mdi-folder\",\r\n            IconClass =\"grey lighten-1 white--text\",\r\n            Title =\"Recipes\",\r\n            SubTitle= \"Jan 17, 2014\"\r\n        },\r\n        new\r\n        {\r\n            Icon =\"mdi-folder\",\r\n            IconClass =\"grey lighten-1 white--text\",\r\n            Title =\"Work\",\r\n            SubTitle= \"Jan 28, 2014\"\r\n        }\r\n    };\r\n\r\n    private List<dynamic> items2 = new List<dynamic>()\r\n    {\r\n        new\r\n        {\r\n            Icon =\"mdi-clipboard-text\",\r\n            IconClass =\"blue white--text\",\r\n            Title =\"Vacation itinerary\",\r\n            SubTitle= \"Jan 20, 2014\"\r\n        },\r\n        new\r\n        {\r\n            Icon =\"mdi-gesture-tap-button\",\r\n            IconClass =\"amber white--text\",\r\n            Title =\"Kitchen remodel\",\r\n            SubTitle= \"Jan 10, 2014\"\r\n        }\r\n    };\r\n  }",
+        "Type": "Demos.Components.FloatingActionButton.misc.SmallVariant",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 11,
+        "Name": "speedDial",
+        "Title": "快速拨号",
+        "Description": "<p><code>MSpeedDial</code> 组件为浮动动作按钮提供了强大的 api，你可以尽情定制你想要的效果。</p>\n",
+        "Code": "<MCard Id=\"create\">\r\n    <MContainer fluid>\r\n        <MRow Class=\"child-flex\">\r\n            <MCol Cols=\"12\"\r\n                  Sm=\"6\"\r\n                  Md=\"4\">\r\n                <MSubheader>Options</MSubheader>\r\n                <MCheckbox @bind-Value=\"hover\"\r\n                           Label=\"Open on hover\"\r\n                           HideDetails=\"true\"></MCheckbox>\r\n            </MCol>\r\n            <MCol Cols=\"12\"\r\n                  Sm=\"6\"\r\n                  Md=\"4\">\r\n                <MSubheader>FAB location</MSubheader>\r\n                <MCheckbox @bind-Value=\"Top\"\r\n                           Label=\"Top\"\r\n                           HideDetails=\"true\"></MCheckbox>\r\n                <MCheckbox @bind-Value=\"Right\"\r\n                           Label=\"Right\"\r\n                           HideDetails=\"true\"></MCheckbox>\r\n                <MCheckbox @bind-Value=\"Bottom\"\r\n                           Label=\"Bottom\"\r\n                           HideDetails=\"true\"></MCheckbox>\r\n                <MCheckbox @bind-Value=\"Left\"\r\n                           Label=\"Left\"\r\n                           HideDetails=\"true\"></MCheckbox>\r\n            </MCol>\r\n            <MCol Cols=\"12\"\r\n                  Sm=\"6\"\r\n                  Md=\"4\">\r\n                <MSubheader>Speed dial direction</MSubheader>\r\n                <MRadioGroup @bind-Value=\"direction\"\r\n                             HideDetails=\"true\">\r\n                    <MRadio Value=\"@(\"top\")\"\r\n                            Label=\"Top\"></MRadio>\r\n                    <MRadio Value=\"@(\"right\")\"\r\n                            Label=\"Right\"></MRadio>\r\n                    <MRadio Value=\"@(\"bottom\")\"\r\n                            Label=\"Bottom\"></MRadio>\r\n                    <MRadio Value=\"@(\"left\")\"\r\n                            Label=\"Left\"></MRadio>\r\n                </MRadioGroup>\r\n            </MCol>\r\n            <MCol Cols=\"12\"\r\n                  Sm=\"6\"\r\n                  Md=\"4\">\r\n                <MSubheader>Transition</MSubheader>\r\n                <MRadioGroup @bind-Value=\"@transition\"\r\n                             HideDetails=\"true\">\r\n                    <MRadio Value=\"@(\"slide-y-transition\")\"\r\n                            Label=\"Slide y\"></MRadio>\r\n                    <MRadio Value=\"@(\"slide-y-reverse-transition\")\"\r\n                            Label=\"Slide y reverse\"></MRadio>\r\n                    <MRadio Value=\"@(\"slide-x-transition\")\"\r\n                            Label=\"Slide x\"></MRadio>\r\n                    <MRadio Value=\"@(\"slide-x-reverse-transition\")\"\r\n                            Label=\"Slide x reverse\"></MRadio>\r\n                    <MRadio Value=\"@(\"scale-transition\")\"\r\n                            Label=\"Scale\"></MRadio>\r\n                </MRadioGroup>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n    <MSpeedDial @bind-Value=\"fab\"\r\n                Top=\"top\"\r\n                Bottom=\"bottom\"\r\n                Right=\"right\"\r\n                Left=\"left\"\r\n                Direction=\"@direction\"\r\n                OpenOnHover=\"hover\"\r\n                Style=\"position: absolute;\"\r\n                Transition=\"@transition\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"blue darken-2\" Dark Fab @attributes=\"@context.Attrs\">\r\n                <MIcon>\r\n                    @ComputeIcon()\r\n                </MIcon>\r\n            </MButton>\r\n        </ActivatorContent>\r\n        <ChildContent>\r\n            <MButton Color=\"green\" Dark Fab Small>\r\n                <MIcon>\r\n                    mdi-pencil\r\n                </MIcon>\r\n            </MButton>\r\n            <MButton Color=\"indigo\" Dark Fab Small>\r\n                <MIcon>\r\n                    mdi-plus\r\n                </MIcon>\r\n            </MButton>\r\n            <MButton Color=\"red\" Dark Fab Small>\r\n                <MIcon>\r\n                    mdi-delete\r\n                </MIcon>\r\n            </MButton>\r\n        </ChildContent>\r\n    </MSpeedDial>\r\n</MCard>\r\n\r\n@code {\r\n    private bool hover;\r\n\r\n    private bool top;\r\n\r\n    public bool Top\r\n    {\r\n        get\r\n        {\r\n            return top;\r\n        }\r\n        set\r\n        {\r\n            top = value;\r\n            bottom = !top;\r\n            StateHasChanged();\r\n        }\r\n    }\r\n\r\n    private bool right = true;\r\n\r\n    public bool Right\r\n    {\r\n        get\r\n        {\r\n            return right;\r\n        }\r\n        set\r\n        {\r\n            right = value;\r\n            left = !right;\r\n            StateHasChanged();\r\n        }\r\n    }\r\n\r\n    private bool bottom = true;\r\n\r\n    public bool Bottom\r\n    {\r\n        get\r\n        {\r\n            return bottom;\r\n        }\r\n\r\n        set\r\n        {\r\n            bottom = value;\r\n            top = !bottom;\r\n            StateHasChanged();\r\n        }\r\n    }\r\n\r\n    private bool left;\r\n\r\n    public bool Left\r\n    {\r\n        get\r\n        {\r\n            return left;\r\n        }\r\n        set\r\n        {\r\n            left = value;\r\n            right = !left;\r\n            StateHasChanged();\r\n        }\r\n    }\r\n\r\n    private string direction = \"top\";\r\n\r\n    private string transition = \"slide-y-reverse-transition\";\r\n\r\n    private bool fab;\r\n\r\n    public string ComputeIcon()\r\n    {\r\n        return fab ? \"mdi-close\" : \" mdi-account-circle\";\r\n    }\r\n}\r\n",
+        "Type": "Demos.Components.FloatingActionButton.misc.SpeedDial",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/button",
+      "/components/icons",
+      "/stylesandanimations/transitions"
+    ],
+    "Subtitle": "浮动动作按钮",
+    "Title": "Floating Action Buttons",
+    "Type": "浮动动作按钮",
+    "FullTitle": "Floating Action Buttons（浮动动作按钮）"
+  },
+  {
     "Desc": "<p>MFooter组件用于显示用户可能想要从网站中的任何页面都能访问到的公共信息。</p>\n",
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2477073+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7774542+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2286,7 +2363,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2507043+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7814173+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2397,7 +2474,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2527034+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7834112+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2463,7 +2540,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2547037+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7864007+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2551,7 +2628,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.257704+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.790668+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2695,7 +2772,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.259713+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7936898+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2784,7 +2861,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOtpInput\">MOtpInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-01T11:11:01.9831927+08:00",
+    "LastWriteTime": "2022-03-30T11:52:33.1437659+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2850,7 +2927,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadioGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.261704+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7966499+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2928,7 +3005,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.264707+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.7986432+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3018,7 +3095,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2678535+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8033625+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3161,7 +3238,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2727037+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8083453+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3349,7 +3426,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2747041+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8113352+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3449,7 +3526,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2857046+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8227623+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3582,7 +3659,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2817067+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8197342+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3883,7 +3960,7 @@
       "辅助类": "\n<p><strong>FillHeight</strong>将<code>height:100%</code>应用于元素。当应用于<code>MContainer</code>时，它还包括<code>align items:center</code>。</p>\n",
       "注意": "\n<!--alert:info--> \n<p>1.x 网格系统已被废弃，请改用 2.x 网格系统。 1.x 网格的文档可以在 v1.5 文档 中找到。</p>\n<!--alert:info--> \n<!--alert:info--> \n<p>网格组件上基于断点的属性以 <code>andUp</code> 的方式工作。 考虑 <strong>xs</strong> 断点已经被删除的情况， 这将会影响到 <strong>offset</strong>、<strong>justify</strong>、<strong>align</strong> 和 <code>MCol</code> 上的断点属性。</p>\n<ul>\n<li>像 <strong>justify-sm</strong> 和 <strong>justify-md</strong> 这样的属性仍然存在，但 <strong>justify-xs</strong> 会变成 <strong>justify</strong>。</li>\n<li><code>MCol</code> 上不存在 <strong>xs</strong> 属性。 与此对应的是 <strong>cols</strong> 属性。</li>\n</ul>\n<!--alert:info--> \n<!--alert:info--> \n<p>当在 IE11 使用网格系统时，你需要设置一个显式的 <code>height</code>，因为 <code>min-height</code> 不足进而导致非预期结果。</p>\n<!--alert:info--> \n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2917052+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8303832+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4115,7 +4192,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2947039+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8323449+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4204,7 +4281,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2967069+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8363318+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4304,7 +4381,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2987137+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8386973+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4393,7 +4470,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3017064+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8413766+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4481,7 +4558,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3037055+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8443684+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4580,7 +4657,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3057124+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.846362+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4668,7 +4745,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3077067+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8483552+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4734,7 +4811,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3097062+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8513453+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4824,7 +4901,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>MImage 组件使用 Intersect 指令，IE11 和 Safari需要 Polyfill。 如果检测到浏览器不支持此功能, 图像仍将以正常方式加载。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3127061+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.854045+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4924,7 +5001,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>如果您要查找有状态列表项，请查看 <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>。</p>\n"
     },
-    "LastWriteTime": "2022-04-24T11:08:42.1104887+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8603139+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5136,7 +5213,7 @@
       "js文件": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.min.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MMarkdown\">MMarkdown</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-01T12:54:45.5050333+08:00",
+    "LastWriteTime": "2022-04-06T09:22:01.4597066+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5252,7 +5329,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3217128+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8656185+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5429,7 +5506,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MNavigationDrawer\">MNavigationDrawer</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error-->\n<p>如果使用启用了 <strong>App</strong> 属性的 <code>MNavigationDrawer</code>，则不需要像示例中那样使用 <strong>Absolute</strong> 属性。</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p><strong>ExtensionOnHover</strong> 参数不会改变<strong>MMain</strong>的内容区域。 要使内容区域响应<strong>ExtensionOnHover</strong>，请绑定<strong>OnMiniVariantUpdate</strong> 到数据。</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3247122+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8692826+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5562,7 +5639,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3267048+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8717741+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5650,7 +5727,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3287054+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8734003+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5739,7 +5816,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3348635+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8804476+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5983,7 +6060,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3377048+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8848841+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6127,7 +6204,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3417042+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8888715+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6302,7 +6379,7 @@
     "Desc": "<p>将相同类型的两个数据并列显示。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T10:24:25.3437036+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8908641+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6355,7 +6432,7 @@
     "Desc": "<p>在文本后提供可以复制内容的图标按钮。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T10:24:25.3447036+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8928592+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6429,7 +6506,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T10:24:25.3477039+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8968135+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6537,7 +6614,7 @@
     "Desc": "<p>需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 <code>Modal</code> 在当前页面正中打开一个浮层，承载相应的操作。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T10:24:25.3497045+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.8992017+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6633,7 +6710,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T10:24:25.3507039+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9005755+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6686,7 +6763,7 @@
     "Desc": "<p>提供全局服务调用Alert、Confirm和Prompt等弹出层组件。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T10:24:25.3517054+08:00",
+    "LastWriteTime": "2022-03-21T11:17:37.0080674+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6741,7 +6818,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3547148+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9055907+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6818,7 +6895,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3587048+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9096004+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6983,7 +7060,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3607127+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9115936+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -7093,7 +7170,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.361714+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9135872+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -7149,7 +7226,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3637136+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9156329+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7194,7 +7271,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3657064+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9178321+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7271,7 +7348,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3697059+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.922706+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7437,7 +7514,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3707042+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9245139+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7514,7 +7591,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3727066+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9265415+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7570,7 +7647,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n<li><a href=\"/api/MDataTableHeader\">MDataTableHeader</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3787041+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9351814+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7835,7 +7912,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3807065+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9371766+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7914,7 +7991,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当使用 <strong>Dark</strong> 属性和 <strong>不</strong> 提供自定义 <strong>Color</strong> 时，<code>MTabs</code>组件会将其颜色默认为 white。</p>\n<!--alert:warning-->\n<!--alert:warning-->\n<p>当使用包含必填输入字段的 <code>MTabItem</code> 时，你必须使用 <strong>eager</strong> prop 来验证尚未显示的必填字段。</p>\n<!--alert:warning-->\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3859742+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9431841+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8113,7 +8190,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.38872+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9471716+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8246,7 +8323,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>为了正确定位 <code>MTooltip</code>，需要一个位置支撑(<code>Top</code> | <code>Bottom</code> | <code>Left</code> | <code>Right</code>)。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3907064+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9491644+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8302,7 +8379,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTreeview\">MTreeview</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3947047+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9548816+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8501,7 +8578,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3961855+08:00",
+    "LastWriteTime": "2022-03-17T11:19:27.9558781+08:00",
     "DemoList": [
       {
         "Order": 0,
