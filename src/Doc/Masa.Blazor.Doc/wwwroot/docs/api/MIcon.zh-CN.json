@@ -41,6 +41,11 @@
       "Description": ""
     },
     {
+      "Name": "IfElse",
+      "Type": "Nullable<Boolean>",
+      "Description": ""
+    },
+    {
       "Name": "IsActive",
       "Type": "Boolean",
       "Default": "false",
