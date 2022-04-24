@@ -1,36 +1,19 @@
 ﻿@using System.Text
-<PImageCaptcha CaptchaCode="@captchaCode" CaptchaWidth="200" Outlined Label="VerifyCode" Refresh="RefreshCode"></PImageCaptcha>
+<PImageCaptcha CaptchaWidth="200" Outlined Label="VerifyCode" OnRefresh="RefreshCode"></PImageCaptcha>
 
 @code {
-    string captchaCode = "";
-
     string randomCode = "1234567890abcdefghijklmn";
 
     Random random = new Random();
 
-    protected override Task OnInitializedAsync()
-    {
-        RefreshCode();
-        return base.OnInitializedAsync();
-    }
-
-    private Task GetRandomCode(int number = 5)
+    private Task<string> RefreshCode()
     {
         var sb = new StringBuilder();
-        for (int i = 0; i < number; i++)
+        for (int i = 0; i < 5; i++)
         {
             sb.Append(randomCode[random.Next(0, randomCode.Length)]);
         }
 
-        captchaCode = sb.ToString();
-
-        return Task.CompletedTask;
-    }
-
-    private Task RefreshCode()
-    {
-        GetRandomCode();
-
-        return Task.CompletedTask;
+        return Task.FromResult(sb.ToString());
     }
 }

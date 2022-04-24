@@ -1,9 +1,7 @@
 ﻿@using System.Text
-<PImageCaptcha CaptchaCode="@captchaCode" CaptchaWidth="200" Label="VerifyCode" ErrorMessage="@ErrorMessage" VerifyCode="@verifyCode" Refresh="RefreshCode"></PImageCaptcha>
+<PImageCaptcha CaptchaWidth="200" Label="VerifyCode" ErrorMessage="@ErrorMessage" VerifyCode="@verifyCode" OnRefresh="RefreshCode"></PImageCaptcha>
 
 @code {
-    string captchaCode = "";
-
     string randomCode = "123456789";
 
     string calcFunCode = "+-*";
@@ -20,7 +18,7 @@
         return base.OnInitializedAsync();
     }
 
-    private Task RefreshCode()
+    private Task<string> RefreshCode()
     {
         var firstNumber = randomCode[random.Next(0, randomCode.Length)].ToString();
 
@@ -41,8 +39,6 @@
                 break;
         }
 
-        captchaCode = firstNumber + calcFun + secondNumber;
-
-        return Task.CompletedTask;
+        return Task.FromResult(firstNumber + calcFun + secondNumber);
     }
 }

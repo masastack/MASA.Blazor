@@ -5,6 +5,11 @@
   ],
   "Props": [
     {
+      "Name": "BeforeAllUploadAsync",
+      "Type": "Func<List`1,Task`1>",
+      "Description": ""
+    },
+    {
       "Name": "Class",
       "Type": "String",
       "Description": "应用到组件最外层元素的class"

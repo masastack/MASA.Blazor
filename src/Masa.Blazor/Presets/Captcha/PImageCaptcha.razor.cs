@@ -60,31 +60,14 @@ namespace Masa.Blazor.Presets
         public string Placeholder { get; set; }
 
         [Parameter]
-        public string CaptchaCode
-        {
-            get
-            {
-                return _captchaCode;
-            }
-            set
-            {
-                if (_captchaCode != value)
-                {
-                    _captchaCode = value;
-
-                    GenerateImage();
-                }
-            }
-        }
-
-        [Parameter]
         public string VerifyCode { get; set; }
 
         [Parameter]
         public string ErrorMessage { get; set; }
 
         [Parameter]
-        public EventCallback<MouseEventArgs> Refresh { get; set; }
+        [EditorRequired]
+        public Func<Task<string>> OnRefresh { get; set; }
 
         [Parameter]
         public string TextFieldStyle { get; set; }
@@ -100,6 +83,23 @@ namespace Masa.Blazor.Presets
 
         private string _captchaCode;
 
+        public string CaptchaCode
+        {
+            get
+            {
+                return _captchaCode;
+            }
+            set
+            {
+                if (_captchaCode != value)
+                {
+                    _captchaCode = value ?? "";
+
+                    GenerateImage();
+                }
+            }
+        }
+
         private IEnumerable<Func<string, StringBoolean>> rules;
 
         private string ImageUrl { get; set; }
@@ -110,16 +110,19 @@ namespace Masa.Blazor.Presets
 
         private MTextField<string> TextFieldElement;
 
-        public async Task OnClickAsync(MouseEventArgs args)
+        public Task OnClickAsync()
         {
-            if (Refresh.HasDelegate)
-            {
-                await Refresh.InvokeAsync(args);
-            }
+            return RefreshCode();
+        }
+
+        public async Task RefreshCode()
+        {
+            CaptchaCode = await OnRefresh?.Invoke();
         }
 
         protected override async Task OnInitializedAsync()
         {
+            await RefreshCode();
             await base.OnInitializedAsync();
         }
 
