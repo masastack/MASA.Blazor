@@ -172,8 +172,8 @@ namespace Masa.Blazor.Presets
                 generator.ImageWidth = CaptchaWidth;
 
                 var byteArr = generator.GenerateImageAsByteArray(CaptchaCode);
-                string imageBase64Data2 = Convert.ToBase64String(byteArr);
-                ImageUrl = string.Format("data:image/jpeg;base64,{0}", imageBase64Data2);
+                string imageBase64Data = Convert.ToBase64String(byteArr);
+                ImageUrl = string.Format("data:image/jpeg;base64,{0}", imageBase64Data);
 
                 StateHasChanged();
             }
