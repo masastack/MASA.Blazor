@@ -1746,7 +1746,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-24T13:45:42.2396001+08:00",
+    "LastWriteTime": "2022-04-25T13:36:38.8426116+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1888,7 +1888,7 @@
       "js文件": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-24T13:45:42.2405993+08:00",
+    "LastWriteTime": "2022-04-25T13:36:38.8436113+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2208,7 +2208,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MSpeedDial\">MSpeedDial</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-24T13:38:16.4948913+08:00",
+    "LastWriteTime": "2022-04-25T13:37:18.8590493+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2237,7 +2237,7 @@
         "Name": "lateralScreens",
         "Title": "横向屏幕切换",
         "Description": "<p>当更改按钮的默认操作时，建议您显示一个过度来表示更改。 我们通过将<code>Key</code>属性绑定到一段数据上，该数据可以正确地向Masa Blazor过度系统发出操作变化的信号。 虽然您可以为此使用自定义转换，但请确保将<code>Mode</code>设置为 <code>OutIn</code>。</p>\n",
-        "Code": "<MCard Id=\"lateral\">\r\n    <MToolbar Dark\r\n              Flat\r\n              Color=\"indigo\">\r\n        <ChildContent>\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MToolbarTitle>Page title</MToolbarTitle>\r\n            <MSpacer></MSpacer>\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n        </ChildContent>\r\n        <ExtensionContent>\r\n            <MTabs @bind-Value=\"tab\" AlignWithTitle SliderColor=\"pink\" @key=\"tab\">\r\n                <MTab Value=\"@(\"one\")\">\r\n                    Item One\r\n                </MTab>\r\n                <MTab Value=\"@(\"two\")\">\r\n                    Item Two\r\n                </MTab>\r\n                <MTab Value=\"@(\"three\")\">\r\n                    Item Three\r\n                </MTab>\r\n            </MTabs>\r\n        </ExtensionContent>\r\n    </MToolbar>\r\n    <MCardText>\r\n        <MTabsItems @bind-Value=\"tab\">\r\n            @foreach (var item in Items)\r\n            {\r\n                <MTabItem Value=\"item\" @key=\"item\">\r\n                    <MCard Height=\"@(\"200px\")\" Flat>\r\n                    </MCard>\r\n                </MTabItem>\r\n            }\r\n        </MTabsItems>\r\n    </MCardText>\r\n    <FabTransition Mode=\"@TransitionMode.OutIn\">\r\n        <MButton Color=\"@GetActiveFabColor()\" Fab Large Dark Bottom Left Class=\"m-btn--example\" Key=\"@GetActiveFabIcon()\">\r\n            <MIcon> @GetActiveFabIcon() </MIcon>\r\n        </MButton>\r\n    </FabTransition>\r\n</MCard>\r\n\r\n@code {\r\n    private StringNumber tab = \"one\";\r\n\r\n    List<string> Items = new List<string>() { \"one\", \"two\", \"three\" };\r\n\r\n    private dynamic ComputedActiveFab()\r\n    {\r\n        switch (tab.AsT0)\r\n        {\r\n            case \"one\":\r\n                return new { Color = \"success\", Icon = \"mdi-share-variant\" };\r\n            case \"two\":\r\n                return new { Color = \"red\", Icon = \"mdi-pencil\" };\r\n            case \"three\":\r\n                return new { Color = \"green\", Icon = \"mdi-chevron-up\" };\r\n            default:\r\n                return new { Color = \"\", Icon = \"\" };\r\n        }\r\n    }\r\n\r\n    public string GetActiveFabColor()\r\n    {\r\n        var activeFab = ComputedActiveFab();\r\n        return activeFab.Color;\r\n    }\r\n\r\n    public string GetActiveFabIcon()\r\n    {\r\n        var activeFab = ComputedActiveFab();\r\n        return activeFab.Icon;\r\n    }\r\n}",
+        "Code": "<MCard Id=\"lateral\">\r\n    <MToolbar Dark\r\n              Flat\r\n              Color=\"indigo\">\r\n        <ChildContent>\r\n            <MAppBarNavIcon></MAppBarNavIcon>\r\n            <MToolbarTitle>Page title</MToolbarTitle>\r\n            <MSpacer></MSpacer>\r\n            <MButton Icon>\r\n                <MIcon>mdi-magnify</MIcon>\r\n            </MButton>\r\n            <MButton Icon>\r\n                <MIcon>mdi-dots-vertical</MIcon>\r\n            </MButton>\r\n        </ChildContent>\r\n        <ExtensionContent>\r\n            <MTabs @bind-Value=\"tab\" AlignWithTitle SliderColor=\"pink\" @key=\"tab\">\r\n                <MTab Value=\"@(\"one\")\">\r\n                    Item One\r\n                </MTab>\r\n                <MTab Value=\"@(\"two\")\">\r\n                    Item Two\r\n                </MTab>\r\n                <MTab Value=\"@(\"three\")\">\r\n                    Item Three\r\n                </MTab>\r\n            </MTabs>\r\n        </ExtensionContent>\r\n    </MToolbar>\r\n    <MCardText>\r\n        <MTabsItems @bind-Value=\"tab\">\r\n            @foreach (var item in Items)\r\n            {\r\n                <MTabItem Value=\"item\" @key=\"item\">\r\n                    <MCard Height=\"@(\"200px\")\" Flat>\r\n                    </MCard>\r\n                </MTabItem>\r\n            }\r\n        </MTabsItems>\r\n    </MCardText>\r\n    <FabTransition Mode=\"@TransitionMode.OutIn\">\r\n        <MButton Color=\"@GetActiveFabColor()\" Fab Large Dark Bottom Left Class=\"m-btn--example\" Key=\"@GetActiveFabIcon()\">\r\n            <MIcon> @GetActiveFabIcon() </MIcon>\r\n        </MButton>\r\n    </FabTransition>\r\n</MCard>\r\n\r\n<style type=\"text/css\">\r\n    #lateral .m-btn--example {\r\n        bottom: 0;\r\n        position: absolute;\r\n        margin: 0 0 16px 16px;\r\n    }\r\n</style>\r\n\r\n@code {\r\n    private StringNumber tab = \"one\";\r\n\r\n    List<string> Items = new List<string>() { \"one\", \"two\", \"three\" };\r\n\r\n    private dynamic ComputedActiveFab()\r\n    {\r\n        switch (tab.AsT0)\r\n        {\r\n            case \"one\":\r\n                return new { Color = \"success\", Icon = \"mdi-share-variant\" };\r\n            case \"two\":\r\n                return new { Color = \"red\", Icon = \"mdi-pencil\" };\r\n            case \"three\":\r\n                return new { Color = \"green\", Icon = \"mdi-chevron-up\" };\r\n            default:\r\n                return new { Color = \"\", Icon = \"\" };\r\n        }\r\n    }\r\n\r\n    public string GetActiveFabColor()\r\n    {\r\n        var activeFab = ComputedActiveFab();\r\n        return activeFab.Color;\r\n    }\r\n\r\n    public string GetActiveFabIcon()\r\n    {\r\n        var activeFab = ComputedActiveFab();\r\n        return activeFab.Icon;\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FloatingActionButton.misc.LateralScreens",
         "Style": "",
         "Debug": false,
@@ -6429,58 +6429,6 @@
     "FullTitle": "Block text（文本块）"
   },
   {
-    "Desc": "<p>提供生成图片验证码的组件。</p>\n",
-    "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2022-04-25T11:24:45.8207533+08:00",
-    "DemoList": [
-      {
-        "Order": 1,
-        "Name": "index",
-        "Title": "使用",
-        "Description": "",
-        "Code": "@using System.Text\r\n<PImageCaptcha CaptchaWidth=\"200\" Outlined Label=\"VerifyCode\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n\r\n@code {\r\n    string randomCode = \"1234567890abcdefghijklmn\";\r\n\r\n    Random random = new Random();\r\n\r\n    private Task<string> RefreshCode()\r\n    {\r\n        var sb = new StringBuilder();\r\n        for (int i = 0; i < 5; i++)\r\n        {\r\n            sb.Append(randomCode[random.Next(0, randomCode.Length)]);\r\n        }\r\n\r\n        return Task.FromResult(sb.ToString());\r\n    }\r\n}",
-        "Type": "Demos.Components.Presets.children.Captcha.usage.Index",
-        "Style": "",
-        "Debug": false,
-        "Group": 4
-      },
-      {
-        "Order": 0,
-        "Name": "textFieldStyle",
-        "Title": "TextField 样式",
-        "Description": "",
-        "Code": "@using System.Text\r\n\r\n<MForm>\r\n    <MContainer>\r\n        <MRow>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Label=\"Regular\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Outlined Label=\"OutLine\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Filled Label=\"Filled\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Dense Label=\"Dense\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Solo Label=\"Solo\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n\r\n\r\n@code {\r\n    int width = 220;\r\n\r\n    string randomCode = \"1234567890abcdefghijklmn\";\r\n\r\n    Random random = new Random();\r\n\r\n    private Task<string> RefreshCode()\r\n    {\r\n        var sb = new StringBuilder();\r\n\r\n        for (int i = 0; i < 5; i++)\r\n        {\r\n            sb.Append(randomCode[random.Next(0, randomCode.Length)]);\r\n        }\r\n\r\n        return Task.FromResult(sb.ToString());\r\n    }\r\n}",
-        "Type": "Demos.Components.Presets.children.Captcha.props.TextFieldStyle",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "verifyCode",
-        "Title": "自定义验证码结果",
-        "Description": "",
-        "Code": "@using System.Text\r\n<PImageCaptcha CaptchaWidth=\"200\" Outlined Label=\"VerifyCode\" ErrorMessage=\"@ErrorMessage\" VerifyCode=\"@verifyCode\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n\r\n@code {\r\n    string randomCode = \"123456789\";\r\n\r\n    string calcFunCode = \"+-*\";\r\n\r\n    string verifyCode = \"\";\r\n\r\n    string ErrorMessage = \"Verify code error\";\r\n\r\n    Random random = new Random();\r\n\r\n    protected override Task OnInitializedAsync()\r\n    {\r\n        RefreshCode();\r\n        return base.OnInitializedAsync();\r\n    }\r\n\r\n    private Task<string> RefreshCode()\r\n    {\r\n        var firstNumber = randomCode[random.Next(0, randomCode.Length)].ToString();\r\n\r\n        var secondNumber = randomCode[random.Next(0, randomCode.Length)].ToString();\r\n\r\n        var calcFun = calcFunCode[random.Next(0, calcFunCode.Length)].ToString();\r\n\r\n        switch (calcFun)\r\n        {\r\n            case \"+\":\r\n                verifyCode = (int.Parse(firstNumber) + int.Parse(secondNumber)).ToString();\r\n                break;\r\n            case \"-\":\r\n                verifyCode = (int.Parse(firstNumber) - int.Parse(secondNumber)).ToString();\r\n                break;\r\n            case \"*\":\r\n                verifyCode = (int.Parse(firstNumber) * int.Parse(secondNumber)).ToString();\r\n                break;\r\n        }\r\n        \r\n        StateHasChanged();\r\n        return Task.FromResult(firstNumber + calcFun + secondNumber);\r\n    }\r\n}",
-        "Type": "Demos.Components.Presets.children.Captcha.props.VerifyCode",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cols": 1,
-    "Related": [
-      "/components/text-fields",
-      "/components/image"
-    ],
-    "Subtitle": "图片验证码",
-    "Title": "Image Captcha",
-    "Type": "图片验证码",
-    "FullTitle": "Image Captcha（图片验证码）"
-  },
-  {
     "Desc": "<p>在文本后提供可以复制内容的图标按钮。</p>\n",
     "Order": 0,
     "OtherDocs": {},
@@ -6661,6 +6609,58 @@
     "Title": "Drawers",
     "Type": "Drawers",
     "FullTitle": "Drawers（抽屉）"
+  },
+  {
+    "Desc": "<p>提供生成图片验证码的组件。</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-04-25T13:37:00.2822164+08:00",
+    "DemoList": [
+      {
+        "Order": 1,
+        "Name": "index",
+        "Title": "使用",
+        "Description": "",
+        "Code": "@using System.Text\r\n<PImageCaptcha CaptchaWidth=\"200\" Outlined Label=\"VerifyCode\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n\r\n@code {\r\n    string randomCode = \"1234567890abcdefghijklmn\";\r\n\r\n    Random random = new Random();\r\n\r\n    private Task<string> RefreshCode()\r\n    {\r\n        var sb = new StringBuilder();\r\n        for (int i = 0; i < 5; i++)\r\n        {\r\n            sb.Append(randomCode[random.Next(0, randomCode.Length)]);\r\n        }\r\n\r\n        return Task.FromResult(sb.ToString());\r\n    }\r\n}",
+        "Type": "Demos.Components.Presets.children.ImageCaptcha.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "textFieldStyle",
+        "Title": "TextField 样式",
+        "Description": "",
+        "Code": "@using System.Text\r\n\r\n<MForm>\r\n    <MContainer>\r\n        <MRow>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Label=\"Regular\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Outlined Label=\"OutLine\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Filled Label=\"Filled\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Dense Label=\"Dense\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Solo Label=\"Solo\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n\r\n\r\n@code {\r\n    int width = 220;\r\n\r\n    string randomCode = \"1234567890abcdefghijklmn\";\r\n\r\n    Random random = new Random();\r\n\r\n    private Task<string> RefreshCode()\r\n    {\r\n        var sb = new StringBuilder();\r\n\r\n        for (int i = 0; i < 5; i++)\r\n        {\r\n            sb.Append(randomCode[random.Next(0, randomCode.Length)]);\r\n        }\r\n\r\n        return Task.FromResult(sb.ToString());\r\n    }\r\n}",
+        "Type": "Demos.Components.Presets.children.ImageCaptcha.props.TextFieldStyle",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "verifyCode",
+        "Title": "自定义验证码结果",
+        "Description": "",
+        "Code": "@using System.Text\r\n<PImageCaptcha CaptchaWidth=\"200\" Outlined Label=\"VerifyCode\" ErrorMessage=\"@ErrorMessage\" VerifyCode=\"@verifyCode\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n\r\n@code {\r\n    string randomCode = \"123456789\";\r\n\r\n    string calcFunCode = \"+-*\";\r\n\r\n    string verifyCode = \"\";\r\n\r\n    string ErrorMessage = \"Verify code error\";\r\n\r\n    Random random = new Random();\r\n\r\n    protected override Task OnInitializedAsync()\r\n    {\r\n        RefreshCode();\r\n        return base.OnInitializedAsync();\r\n    }\r\n\r\n    private Task<string> RefreshCode()\r\n    {\r\n        var firstNumber = randomCode[random.Next(0, randomCode.Length)].ToString();\r\n\r\n        var secondNumber = randomCode[random.Next(0, randomCode.Length)].ToString();\r\n\r\n        var calcFun = calcFunCode[random.Next(0, calcFunCode.Length)].ToString();\r\n\r\n        switch (calcFun)\r\n        {\r\n            case \"+\":\r\n                verifyCode = (int.Parse(firstNumber) + int.Parse(secondNumber)).ToString();\r\n                break;\r\n            case \"-\":\r\n                verifyCode = (int.Parse(firstNumber) - int.Parse(secondNumber)).ToString();\r\n                break;\r\n            case \"*\":\r\n                verifyCode = (int.Parse(firstNumber) * int.Parse(secondNumber)).ToString();\r\n                break;\r\n        }\r\n        \r\n        StateHasChanged();\r\n        return Task.FromResult(firstNumber + calcFun + secondNumber);\r\n    }\r\n}",
+        "Type": "Demos.Components.Presets.children.ImageCaptcha.props.VerifyCode",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/text-fields",
+      "/components/image"
+    ],
+    "Subtitle": "图片验证码",
+    "Title": "Image Captcha",
+    "Type": "图片验证码",
+    "FullTitle": "Image Captcha（图片验证码）"
   },
   {
     "Desc": "<p>需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 <code>Modal</code> 在当前页面正中打开一个浮层，承载相应的操作。</p>\n",
@@ -6855,7 +6855,7 @@
         "Name": "toast",
         "Title": "Toast",
         "Description": "",
-        "Code": "@using Masa.Blazor.Popup.Components\r\n@inject IPopupService PopupService\r\n\r\n<MButton OnClick=\"ShowBasic\">Basic Toast</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup @bind-Value=\"toastType\" Row>\r\n    <MRadio Value=\"AlertTypes.None\" Label=\"None Icon\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Success\" Label=\"@nameof(AlertTypes.Success)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Warning\" Label=\"@nameof(AlertTypes.Warning)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Error\" Label=\"@nameof(AlertTypes.Error)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Info\" Label=\"@nameof(AlertTypes.Info)\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"ShowTyped\">Typed Toast</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup @bind-Value=\"isDark\" Row>\r\n    <MRadio Value=\"true\" Label=\"Drak\"></MRadio>\r\n    <MRadio Value=\"false\" Label=\"Light\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"ShowTheme\">Show Theme</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowContent\">Show with Title and Content</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"CustomAction\">Custom Action</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup @bind-Value=\"position\" Row>\r\n    <MRadio Value=\"ToastPosition.TopLeft\" Label=\"Top Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.TopRight\" Label=\"Top Right\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomLeft\" Label=\"Bottom Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomRight\" Label=\"Bottom Right\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"CustomPosition\">Custom global Position</MButton>\r\n\r\n@code {\r\n\r\n    AlertTypes toastType = AlertTypes.Success;\r\n\r\n    bool isDark = true;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    private Task ShowBasic()\r\n    {\r\n        return PopupService.ToastInfoAsync(\"Info Toast Title\");\r\n    }\r\n\r\n    private Task ShowTyped()\r\n    {\r\n        return PopupService.ToastAsync(toastType, $\"{toastType.ToString()} Toast Title\");\r\n    }\r\n\r\n    private Task ShowTheme()\r\n    {\r\n        return PopupService.ToastAsync(toastType, (config) =>\r\n        {\r\n            config.IsDark = isDark; config.Title = $\"Now is {(isDark ? \"Dark\" : \"Light\")} theme\";\r\n        });\r\n    }\r\n\r\n    private Task ShowContent()\r\n    {\r\n        var config = new ToastConfig()\r\n            {\r\n                Title = \"Message Title\",\r\n                Content = \"Message details\",\r\n                IsDark = isDark\r\n            };\r\n        return PopupService.ToastAsync(toastType, config);\r\n    }\r\n\r\n    private Task HandleOnView()\r\n    {\r\n        return PopupService.ToastInfoAsync(\"View button click\");\r\n    }\r\n\r\n    private async Task CustomAction()\r\n    {\r\n        RenderFragment customViewAction = (builder) =>\r\n        {\r\n            builder.AddContent(0,@<MButton Icon OnClick=\"HandleOnView\">View</MButton>);\r\n        };\r\n\r\n        await PopupService.ToastAsync(toastType, (config) =>\r\n        {\r\n            config.Title = \"Custom Action Message\";\r\n            config.Duration = 0;\r\n            config.Content = \"Not auto close\";\r\n            config.IsDark = isDark;\r\n            config.ActionContent = customViewAction;\r\n            config.OnClose = (key) =>\r\n            {\r\n                Console.WriteLine($\"Key: {key} Close\");\r\n            };\r\n        });\r\n    }\r\n\r\n    private Task CustomPosition()\r\n    {\r\n        return PopupService.Config((config) =>\r\n        {\r\n            config.Position = position;\r\n        });\r\n    }\r\n\r\n}",
+        "Code": "@using Masa.Blazor.Popup.Components\r\n@inject IPopupService PopupService\r\n\r\n<MButton OnClick=\"ShowBasic\">Basic Toast</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup @bind-Value=\"toastType\" Row>\r\n    <MRadio Value=\"AlertTypes.None\" Label=\"None Icon\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Success\" Label=\"@nameof(AlertTypes.Success)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Warning\" Label=\"@nameof(AlertTypes.Warning)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Error\" Label=\"@nameof(AlertTypes.Error)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Info\" Label=\"@nameof(AlertTypes.Info)\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"ShowTyped\">Typed Toast</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup @bind-Value=\"isDark\" Row>\r\n    <MRadio Value=\"true\" Label=\"Drak\"></MRadio>\r\n    <MRadio Value=\"false\" Label=\"Light\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"ShowTheme\">Show Theme</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowContent\">Show with Title and Content</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"CustomAction\">Custom Action</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup Value=\"position\" TValue=\"ToastPosition\" Row ValueChanged=\"OnChangePosition\">\r\n    <MRadio Value=\"ToastPosition.TopLeft\" Label=\"Top Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.TopRight\" Label=\"Top Right\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomLeft\" Label=\"Bottom Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomRight\" Label=\"Bottom Right\"></MRadio>\r\n</MRadioGroup>\r\n\r\n@code {\r\n\r\n    AlertTypes toastType = AlertTypes.Success;\r\n\r\n    bool isDark = true;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    private Task ShowBasic()\r\n    {\r\n        return PopupService.ToastInfoAsync(\"Info Toast Title\");\r\n    }\r\n\r\n    private Task ShowTyped()\r\n    {\r\n        return PopupService.ToastAsync($\"{toastType.ToString()} Toast Title\", toastType);\r\n    }\r\n\r\n    private Task ShowTheme()\r\n    {\r\n        return PopupService.ToastAsync((config) =>\r\n        {\r\n            config.Dark = isDark;\r\n            config.Light = !isDark;\r\n            config.Type = toastType;\r\n            config.Title = $\"Now is {(isDark ? \"Dark\" : \"Light\")} theme\";\r\n        });\r\n    }\r\n\r\n    private Task ShowContent()\r\n    {\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = \"Message Title\",\r\n            Content = \"Message details\",\r\n            Dark = isDark,\r\n            Light = !isDark,\r\n            Type = toastType\r\n        };\r\n        return PopupService.ToastAsync(config);\r\n    }\r\n\r\n    private Task HandleOnView()\r\n    {\r\n        return PopupService.ToastInfoAsync(\"View button click\");\r\n    }\r\n\r\n    private async Task CustomAction()\r\n    {\r\n        RenderFragment customViewAction = (builder) =>\r\n        {\r\n            builder.AddContent(0, @<MButton OnClick=\"HandleOnView\" Text> View </MButton>);\r\n        };\r\n\r\n        await PopupService.ToastAsync((config) =>\r\n        {\r\n            config.Title = \"Custom Action Message\";\r\n            config.Duration = 0;\r\n            config.Content = \"Not auto close\";\r\n            config.Type = toastType;\r\n            config.ActionContent = customViewAction;\r\n            config.Light = !isDark;\r\n            config.Dark = isDark;\r\n            config.OnClose = (key) =>\r\n            {\r\n                Console.WriteLine($\"Key: {key} Close\");\r\n                return Task.CompletedTask;\r\n            };\r\n        });\r\n    }\r\n\r\n    private Task OnChangePosition(ToastPosition position)\r\n    {\r\n        return PopupService.Config((config) =>\r\n        {\r\n            config.Position = position;\r\n        });\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.Presets.children.PopupService.events.Toast",
         "Style": "",
         "Debug": false,

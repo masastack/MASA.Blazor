@@ -22,14 +22,6 @@
           },
           {
             "Order": 0,
-            "Title": "Image Captcha",
-            "SubTitle": "图片验证码",
-            "FullTitle": "Image Captcha (图片验证码)",
-            "Type": "menuItem",
-            "Url": "components/image-captcha"
-          },
-          {
-            "Order": 0,
             "Title": "Copyable text",
             "SubTitle": "可复制的文本",
             "FullTitle": "Copyable text (可复制的文本)",
@@ -43,6 +35,14 @@
             "FullTitle": "Drawers (抽屉)",
             "Type": "menuItem",
             "Url": "components/drawers"
+          },
+          {
+            "Order": 0,
+            "Title": "Image Captcha",
+            "SubTitle": "图片验证码",
+            "FullTitle": "Image Captcha (图片验证码)",
+            "Type": "menuItem",
+            "Url": "components/image-captcha"
           },
           {
             "Order": 0,

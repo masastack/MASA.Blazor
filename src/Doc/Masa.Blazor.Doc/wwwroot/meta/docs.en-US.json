@@ -4619,13 +4619,6 @@
           },
           {
             "Order": 0,
-            "Title": "Image Captcha",
-            "FullTitle": "Image Captcha",
-            "Type": "menuItem",
-            "Url": "components/image-captcha"
-          },
-          {
-            "Order": 0,
             "Title": "Copyable text",
             "FullTitle": "Copyable text",
             "Type": "menuItem",
@@ -4637,6 +4630,13 @@
             "FullTitle": "Drawers",
             "Type": "menuItem",
             "Url": "components/drawers"
+          },
+          {
+            "Order": 0,
+            "Title": "Image Captcha",
+            "FullTitle": "Image Captcha",
+            "Type": "menuItem",
+            "Url": "components/image-captcha"
           },
           {
             "Order": 0,
