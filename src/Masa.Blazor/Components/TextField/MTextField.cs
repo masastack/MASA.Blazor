@@ -625,7 +625,8 @@ namespace Masa.Blazor
 
             if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
             {
-                await SetInternalValueAsync(checkValue);
+                _inputValue = checkValue.ToString();
+                await ChangeValue(true);
             }
 
             if (OnBlur.HasDelegate)
