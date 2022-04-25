@@ -495,6 +495,7 @@
   "Demos.Components.Presets.children.PopupService.events.Alert",
   "Demos.Components.Presets.children.PopupService.events.Confirm",
   "Demos.Components.Presets.children.PopupService.events.Prompt",
+  "Demos.Components.Presets.children.PopupService.events.Toast",
   "Demos.Components.Progress.children.ProgressCircular.usage.Index",
   "Demos.Components.Progress.children.ProgressCircular.props.Color",
   "Demos.Components.Progress.children.ProgressCircular.props.Indeterminate",
