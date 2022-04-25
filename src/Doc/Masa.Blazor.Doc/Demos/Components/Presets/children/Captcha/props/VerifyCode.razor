@@ -1,5 +1,5 @@
 ﻿@using System.Text
-<PImageCaptcha CaptchaWidth="200" Label="VerifyCode" ErrorMessage="@ErrorMessage" VerifyCode="@verifyCode" OnRefresh="RefreshCode"></PImageCaptcha>
+<PImageCaptcha CaptchaWidth="200" Outlined Label="VerifyCode" ErrorMessage="@ErrorMessage" VerifyCode="@verifyCode" OnRefresh="RefreshCode"></PImageCaptcha>
 
 @code {
     string randomCode = "123456789";
@@ -38,7 +38,8 @@
                 verifyCode = (int.Parse(firstNumber) * int.Parse(secondNumber)).ToString();
                 break;
         }
-
+        
+        StateHasChanged();
         return Task.FromResult(firstNumber + calcFun + secondNumber);
     }
 }

@@ -120,27 +120,23 @@ namespace Masa.Blazor.Presets
             CaptchaCode = await OnRefresh?.Invoke();
         }
 
-        protected override async Task OnInitializedAsync()
-        {
-            await RefreshCode();
-            await base.OnInitializedAsync();
-        }
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
+                await RefreshCode();
+
                 rules = new List<Func<string, StringBoolean>>()
                 {
                     v =>
                     {
                         if (string.IsNullOrEmpty(VerifyCode))
                         {
-                            return v == CaptchaCode? true: ErrorMessage;
+                            return v == CaptchaCode? true : ErrorMessage;
                         }
                         else
                         {
-                            return v == VerifyCode? true: ErrorMessage;
+                            return v == VerifyCode? true : ErrorMessage;
                         }
                     }
                 };
@@ -179,7 +175,7 @@ namespace Masa.Blazor.Presets
                 string imageBase64Data2 = Convert.ToBase64String(byteArr);
                 ImageUrl = string.Format("data:image/jpeg;base64,{0}", imageBase64Data2);
 
-                InvokeAsync(StateHasChanged);
+                StateHasChanged();
             }
 
             return Task.CompletedTask;
