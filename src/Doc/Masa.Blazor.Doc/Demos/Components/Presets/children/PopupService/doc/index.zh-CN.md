@@ -10,4 +10,4 @@ related:
   - /components/snackbars
 ---
 
-提供全局服务调用Alert、Confirm和Prompt等弹出层组件。
+提供全局服务调用Alert、Confirm、Prompt和Toast等弹出层组件。
