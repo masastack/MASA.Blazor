@@ -795,6 +795,13 @@
           },
           {
             "Order": 0,
+            "Title": "Image Captcha",
+            "FullTitle": "Image Captcha",
+            "Type": "menuItem",
+            "Url": "components/image-captcha"
+          },
+          {
+            "Order": 0,
             "Title": "Modals",
             "FullTitle": "Modals",
             "Type": "menuItem",

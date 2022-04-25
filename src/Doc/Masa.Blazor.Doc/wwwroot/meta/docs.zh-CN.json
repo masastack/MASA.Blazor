@@ -4708,6 +4708,14 @@
           },
           {
             "Order": 0,
+            "Title": "Image Captcha",
+            "SubTitle": "图片验证码",
+            "FullTitle": "Image Captcha (图片验证码)",
+            "Type": "menuItem",
+            "Url": "components/image-captcha"
+          },
+          {
+            "Order": 0,
             "Title": "Modals",
             "SubTitle": "对话框",
             "FullTitle": "Modals (对话框)",

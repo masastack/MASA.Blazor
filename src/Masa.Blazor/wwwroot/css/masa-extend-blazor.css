@@ -794,3 +794,12 @@ input[type=number] {
 .m-toast-container .m-snack__wrapper.theme--dark {
     background-color: #323d6f
 }
+
+.m-captcha-container .m-input__append-outer {
+    margin-top: 0px !important;
+}
+
+.m-captcha-container .m-image {
+    cursor: pointer;
+    border-radius: 4px;
+}
