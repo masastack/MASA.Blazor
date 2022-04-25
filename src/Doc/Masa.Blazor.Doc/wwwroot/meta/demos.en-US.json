@@ -266,6 +266,22 @@
   },
   {
     "Order": 12,
+    "Title": "Floating Action Buttons",
+    "FullTitle": "Floating Action Buttons",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "Floating Action Buttons",
+        "FullTitle": "Floating Action Buttons",
+        "Type": "menuItem",
+        "Url": "components/floating-action-buttons",
+        "Children": []
+      }
+    ]
+  },
+  {
+    "Order": 13,
     "Title": "Cards",
     "FullTitle": "Cards",
     "Type": "itemGroup",
@@ -282,7 +298,7 @@
     ]
   },
   {
-    "Order": 13,
+    "Order": 14,
     "Title": "Chips",
     "FullTitle": "Chips",
     "Type": "itemGroup",
@@ -299,7 +315,7 @@
     ]
   },
   {
-    "Order": 14,
+    "Order": 15,
     "Title": "Dialogs",
     "FullTitle": "Dialogs",
     "Type": "itemGroup",
@@ -315,7 +331,7 @@
     ]
   },
   {
-    "Order": 15,
+    "Order": 16,
     "Title": "Dividers",
     "FullTitle": "Dividers",
     "Type": "itemGroup",
@@ -332,7 +348,7 @@
     ]
   },
   {
-    "Order": 16,
+    "Order": 17,
     "Title": "ErrorHandler",
     "FullTitle": "ErrorHandler",
     "Type": "itemGroup",
@@ -348,7 +364,7 @@
     ]
   },
   {
-    "Order": 17,
+    "Order": 18,
     "Title": "ECharts",
     "FullTitle": "ECharts",
     "Type": "itemGroup",
@@ -365,7 +381,7 @@
     ]
   },
   {
-    "Order": 18,
+    "Order": 19,
     "Title": "Editor",
     "FullTitle": "Editor",
     "Type": "itemGroup",
@@ -381,7 +397,7 @@
     ]
   },
   {
-    "Order": 19,
+    "Order": 20,
     "Title": "ExpansionPanels",
     "FullTitle": "ExpansionPanels",
     "Type": "itemGroup",
@@ -398,7 +414,7 @@
     ]
   },
   {
-    "Order": 20,
+    "Order": 21,
     "Title": "Footers",
     "FullTitle": "Footers",
     "Type": "itemGroup",
@@ -414,7 +430,7 @@
     ]
   },
   {
-    "Order": 21,
+    "Order": 22,
     "Title": "FormInputs",
     "FullTitle": "FormInputs",
     "Type": "itemGroup",
@@ -530,7 +546,7 @@
     ]
   },
   {
-    "Order": 22,
+    "Order": 23,
     "Title": "Grid",
     "FullTitle": "Grid",
     "Type": "itemGroup",
@@ -547,7 +563,7 @@
     ]
   },
   {
-    "Order": 23,
+    "Order": 24,
     "Title": "Groups",
     "FullTitle": "Groups",
     "Type": "itemGroup",
@@ -608,7 +624,7 @@
     ]
   },
   {
-    "Order": 24,
+    "Order": 25,
     "Title": "Hover",
     "FullTitle": "Hover",
     "Type": "itemGroup",
@@ -624,7 +640,7 @@
     ]
   },
   {
-    "Order": 25,
+    "Order": 26,
     "Title": "Icon",
     "FullTitle": "Icon",
     "Type": "itemGroup",
@@ -641,7 +657,7 @@
     ]
   },
   {
-    "Order": 26,
+    "Order": 27,
     "Title": "Image",
     "FullTitle": "Image",
     "Type": "itemGroup",
@@ -657,7 +673,7 @@
     ]
   },
   {
-    "Order": 27,
+    "Order": 28,
     "Title": "List",
     "FullTitle": "List",
     "Type": "itemGroup",
@@ -674,7 +690,7 @@
     ]
   },
   {
-    "Order": 28,
+    "Order": 29,
     "Title": "Markdown",
     "FullTitle": "Markdown",
     "Type": "itemGroup",
@@ -690,7 +706,7 @@
     ]
   },
   {
-    "Order": 29,
+    "Order": 30,
     "Title": "Menu",
     "FullTitle": "Menu",
     "Type": "itemGroup",
@@ -706,7 +722,7 @@
     ]
   },
   {
-    "Order": 30,
+    "Order": 31,
     "Title": "NavigationDrawer",
     "FullTitle": "NavigationDrawer",
     "Type": "itemGroup",
@@ -723,7 +739,7 @@
     ]
   },
   {
-    "Order": 31,
+    "Order": 32,
     "Title": "Overlay",
     "FullTitle": "Overlay",
     "Type": "itemGroup",
@@ -739,7 +755,7 @@
     ]
   },
   {
-    "Order": 33,
+    "Order": 34,
     "Title": "Pickers",
     "FullTitle": "Pickers",
     "Type": "itemGroup",
@@ -780,7 +796,7 @@
     ]
   },
   {
-    "Order": 35,
+    "Order": 36,
     "Title": "Rating",
     "FullTitle": "Rating",
     "Type": "itemGroup",
@@ -796,7 +812,7 @@
     ]
   },
   {
-    "Order": 36,
+    "Order": 37,
     "Title": "Progress",
     "FullTitle": "Progress",
     "Type": "itemGroup",
@@ -826,7 +842,7 @@
     ]
   },
   {
-    "Order": 37,
+    "Order": 38,
     "Title": "Pagination",
     "FullTitle": "Pagination",
     "Type": "itemGroup",
@@ -842,7 +858,7 @@
     ]
   },
   {
-    "Order": 38,
+    "Order": 39,
     "Title": "Sheet",
     "FullTitle": "Sheet",
     "Type": "itemGroup",
@@ -859,7 +875,7 @@
     ]
   },
   {
-    "Order": 40,
+    "Order": 41,
     "Title": "Stepper",
     "FullTitle": "Stepper",
     "Type": "itemGroup",
@@ -876,7 +892,7 @@
     ]
   },
   {
-    "Order": 41,
+    "Order": 42,
     "Title": "SkeletonLoader",
     "FullTitle": "SkeletonLoader",
     "Type": "itemGroup",
@@ -893,7 +909,7 @@
     ]
   },
   {
-    "Order": 42,
+    "Order": 43,
     "Title": "Subheader",
     "FullTitle": "Subheader",
     "Type": "itemGroup",
@@ -909,7 +925,7 @@
     ]
   },
   {
-    "Order": 43,
+    "Order": 44,
     "Title": "Snackbar",
     "FullTitle": "Snackbar",
     "Type": "itemGroup",
@@ -925,7 +941,7 @@
     ]
   },
   {
-    "Order": 44,
+    "Order": 45,
     "Title": "Tabs",
     "FullTitle": "Tabs",
     "Type": "itemGroup",
@@ -942,7 +958,7 @@
     ]
   },
   {
-    "Order": 45,
+    "Order": 46,
     "Title": "Tables",
     "FullTitle": "Tables",
     "Type": "itemGroup",
@@ -982,7 +998,7 @@
     ]
   },
   {
-    "Order": 46,
+    "Order": 47,
     "Title": "Timeline",
     "FullTitle": "Timeline",
     "Type": "itemGroup",
@@ -998,7 +1014,7 @@
     ]
   },
   {
-    "Order": 49,
+    "Order": 50,
     "Title": "Treeview",
     "FullTitle": "Treeview",
     "Type": "itemGroup",
@@ -1015,7 +1031,7 @@
     ]
   },
   {
-    "Order": 50,
+    "Order": 51,
     "Title": "Tooltip",
     "FullTitle": "Tooltip",
     "Type": "itemGroup",
@@ -1032,7 +1048,7 @@
     ]
   },
   {
-    "Order": 52,
+    "Order": 53,
     "Title": "VirtualScroll",
     "FullTitle": "VirtualScroll",
     "Type": "itemGroup",

@@ -2967,6 +2967,35 @@
       },
       {
         "Order": 0,
+        "Title": "MSpeedDial",
+        "FullTitle": "MSpeedDial",
+        "Type": "menuItem",
+        "Url": "api/mspeeddial",
+        "Contents": [
+          {
+            "Id": "section-292649107",
+            "Title": "组件页面",
+            "Level": 0
+          },
+          {
+            "Id": "section-3122241",
+            "Title": "属性",
+            "Level": 0
+          },
+          {
+            "Id": "section-3374707",
+            "Title": "插槽",
+            "Level": 0
+          },
+          {
+            "Id": "section-2654231",
+            "Title": "事件",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
         "Title": "MStepper",
         "FullTitle": "MStepper",
         "Type": "menuItem",
@@ -4313,6 +4342,15 @@
         "Type": "menuItem",
         "Url": "components/expansion-panels",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Floating Action Buttons",
+        "SubTitle": "浮动动作按钮",
+        "FullTitle": "Floating Action Buttons (浮动动作按钮)",
+        "Type": "menuItem",
+        "Url": "components/floating-action-buttons",
         "Children": []
       },
       {

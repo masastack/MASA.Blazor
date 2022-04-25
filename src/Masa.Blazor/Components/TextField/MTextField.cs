@@ -483,6 +483,7 @@ namespace Masa.Blazor
 
             if (firstRender)
             {
+                await JsInvokeAsync(JsInteropConstants.RegisterTextFieldOnMouseDown, InputSlotElement, InputElement, DotNetObjectReference.Create(new Invoker<MouseEventArgs>(HandleOnMouseDownAsync)));
                 //OnAfterRender doesn't indicate DOM ready
                 //So we should wait a little time
                 //We may remove this when dialog been refactored

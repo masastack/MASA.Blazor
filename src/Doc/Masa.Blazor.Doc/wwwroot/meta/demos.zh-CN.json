@@ -289,6 +289,23 @@
   },
   {
     "Order": 12,
+    "Title": "浮动动作按钮",
+    "FullTitle": "浮动动作按钮",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "Floating Action Buttons",
+        "SubTitle": "浮动动作按钮",
+        "FullTitle": "Floating Action Buttons (浮动动作按钮)",
+        "Type": "menuItem",
+        "Url": "components/floating-action-buttons",
+        "Children": []
+      }
+    ]
+  },
+  {
+    "Order": 13,
     "Title": "卡片",
     "FullTitle": "卡片",
     "Type": "itemGroup",
@@ -306,7 +323,7 @@
     ]
   },
   {
-    "Order": 13,
+    "Order": 14,
     "Title": "纸片",
     "FullTitle": "纸片",
     "Type": "itemGroup",
@@ -324,7 +341,7 @@
     ]
   },
   {
-    "Order": 14,
+    "Order": 15,
     "Title": "对话框",
     "FullTitle": "对话框",
     "Type": "itemGroup",
@@ -341,7 +358,7 @@
     ]
   },
   {
-    "Order": 15,
+    "Order": 16,
     "Title": "分隔线",
     "FullTitle": "分隔线",
     "Type": "itemGroup",
@@ -359,7 +376,7 @@
     ]
   },
   {
-    "Order": 16,
+    "Order": 17,
     "Title": "异常处理",
     "FullTitle": "异常处理",
     "Type": "itemGroup",
@@ -376,7 +393,7 @@
     ]
   },
   {
-    "Order": 17,
+    "Order": 18,
     "Title": "图表",
     "FullTitle": "图表",
     "Type": "itemGroup",
@@ -394,7 +411,7 @@
     ]
   },
   {
-    "Order": 18,
+    "Order": 19,
     "Title": "富文本编辑器",
     "FullTitle": "富文本编辑器",
     "Type": "itemGroup",
@@ -411,7 +428,7 @@
     ]
   },
   {
-    "Order": 19,
+    "Order": 20,
     "Title": "扩展面板",
     "FullTitle": "扩展面板",
     "Type": "itemGroup",
@@ -429,7 +446,7 @@
     ]
   },
   {
-    "Order": 20,
+    "Order": 21,
     "Title": "页脚",
     "FullTitle": "页脚",
     "Type": "itemGroup",
@@ -446,7 +463,7 @@
     ]
   },
   {
-    "Order": 21,
+    "Order": 22,
     "Title": "表单和控制",
     "FullTitle": "表单和控制",
     "Type": "itemGroup",
@@ -576,7 +593,7 @@
     ]
   },
   {
-    "Order": 22,
+    "Order": 23,
     "Title": "网格系统",
     "FullTitle": "网格系统",
     "Type": "itemGroup",
@@ -594,7 +611,7 @@
     ]
   },
   {
-    "Order": 23,
+    "Order": 24,
     "Title": "组",
     "FullTitle": "组",
     "Type": "itemGroup",
@@ -662,7 +679,7 @@
     ]
   },
   {
-    "Order": 24,
+    "Order": 25,
     "Title": "悬停",
     "FullTitle": "悬停",
     "Type": "itemGroup",
@@ -679,7 +696,7 @@
     ]
   },
   {
-    "Order": 25,
+    "Order": 26,
     "Title": "图标",
     "FullTitle": "图标",
     "Type": "itemGroup",
@@ -697,7 +714,7 @@
     ]
   },
   {
-    "Order": 26,
+    "Order": 27,
     "Title": "图像",
     "FullTitle": "图像",
     "Type": "itemGroup",
@@ -714,7 +731,7 @@
     ]
   },
   {
-    "Order": 27,
+    "Order": 28,
     "Title": "列表",
     "FullTitle": "列表",
     "Type": "itemGroup",
@@ -732,7 +749,7 @@
     ]
   },
   {
-    "Order": 28,
+    "Order": 29,
     "Title": "Markdown编辑器",
     "FullTitle": "Markdown编辑器",
     "Type": "itemGroup",
@@ -749,7 +766,7 @@
     ]
   },
   {
-    "Order": 29,
+    "Order": 30,
     "Title": "菜单",
     "FullTitle": "菜单",
     "Type": "itemGroup",
@@ -766,7 +783,7 @@
     ]
   },
   {
-    "Order": 30,
+    "Order": 31,
     "Title": "导航抽屉",
     "FullTitle": "导航抽屉",
     "Type": "itemGroup",
@@ -784,7 +801,7 @@
     ]
   },
   {
-    "Order": 31,
+    "Order": 32,
     "Title": "遮罩层",
     "FullTitle": "遮罩层",
     "Type": "itemGroup",
@@ -801,7 +818,7 @@
     ]
   },
   {
-    "Order": 33,
+    "Order": 34,
     "Title": "选择器",
     "FullTitle": "选择器",
     "Type": "itemGroup",
@@ -846,7 +863,7 @@
     ]
   },
   {
-    "Order": 35,
+    "Order": 36,
     "Title": "评级",
     "FullTitle": "评级",
     "Type": "itemGroup",
@@ -863,7 +880,7 @@
     ]
   },
   {
-    "Order": 36,
+    "Order": 37,
     "Title": "进度条",
     "FullTitle": "进度条",
     "Type": "itemGroup",
@@ -896,7 +913,7 @@
     ]
   },
   {
-    "Order": 37,
+    "Order": 38,
     "Title": "分页",
     "FullTitle": "分页",
     "Type": "itemGroup",
@@ -913,7 +930,7 @@
     ]
   },
   {
-    "Order": 38,
+    "Order": 39,
     "Title": "工作表",
     "FullTitle": "工作表",
     "Type": "itemGroup",
@@ -931,7 +948,7 @@
     ]
   },
   {
-    "Order": 40,
+    "Order": 41,
     "Title": "步骤条",
     "FullTitle": "步骤条",
     "Type": "itemGroup",
@@ -949,7 +966,7 @@
     ]
   },
   {
-    "Order": 41,
+    "Order": 42,
     "Title": "骨架装载器",
     "FullTitle": "骨架装载器",
     "Type": "itemGroup",
@@ -967,7 +984,7 @@
     ]
   },
   {
-    "Order": 42,
+    "Order": 43,
     "Title": "副标题",
     "FullTitle": "副标题",
     "Type": "itemGroup",
@@ -984,7 +1001,7 @@
     ]
   },
   {
-    "Order": 43,
+    "Order": 44,
     "Title": "消息条",
     "FullTitle": "消息条",
     "Type": "itemGroup",
@@ -1001,7 +1018,7 @@
     ]
   },
   {
-    "Order": 44,
+    "Order": 45,
     "Title": "选项卡",
     "FullTitle": "选项卡",
     "Type": "itemGroup",
@@ -1019,7 +1036,7 @@
     ]
   },
   {
-    "Order": 45,
+    "Order": 46,
     "Title": "表格",
     "FullTitle": "表格",
     "Type": "itemGroup",
@@ -1063,7 +1080,7 @@
     ]
   },
   {
-    "Order": 46,
+    "Order": 47,
     "Title": "时间轴",
     "FullTitle": "时间轴",
     "Type": "itemGroup",
@@ -1080,7 +1097,7 @@
     ]
   },
   {
-    "Order": 49,
+    "Order": 50,
     "Title": "树形视图",
     "FullTitle": "树形视图",
     "Type": "itemGroup",
@@ -1098,7 +1115,7 @@
     ]
   },
   {
-    "Order": 50,
+    "Order": 51,
     "Title": "工具提示",
     "FullTitle": "工具提示",
     "Type": "itemGroup",
@@ -1116,7 +1133,7 @@
     ]
   },
   {
-    "Order": 52,
+    "Order": 53,
     "Title": "虚拟滚动条",
     "FullTitle": "虚拟滚动条",
     "Type": "itemGroup",
