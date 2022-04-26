@@ -64,7 +64,6 @@
         return PopupService.ToastAsync((config) =>
         {
             config.Dark = isDark;
-            config.Light = !isDark;
             config.Type = toastType;
             config.Title = $"Now is {(isDark ? "Dark" : "Light")} theme";
         });
@@ -77,7 +76,6 @@
             Title = "Message Title",
             Content = "Message details",
             Dark = isDark,
-            Light = !isDark,
             Type = toastType
         };
         return PopupService.ToastAsync(config);
@@ -102,7 +100,6 @@
             config.Content = "Not auto close";
             config.Type = toastType;
             config.ActionContent = customViewAction;
-            config.Light = !isDark;
             config.Dark = isDark;
             config.OnClose = (key) =>
             {
@@ -114,6 +111,7 @@
 
     private Task OnChangePosition(ToastPosition position)
     {
+        this.position = position;
         return PopupService.Config((config) =>
         {
             config.Position = position;
