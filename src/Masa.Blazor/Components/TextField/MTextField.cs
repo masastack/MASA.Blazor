@@ -702,8 +702,6 @@ namespace Masa.Blazor
 
         public async Task HandleOnKeyUpAsync(KeyboardEventArgs args)
         {
-            await ChangeValue();
-
             if (OnKeyUp.HasDelegate)
                 await OnKeyUp.InvokeAsync();
         }
@@ -776,6 +774,16 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
+            await Task.Yield();
+
+            if (args.Key == "Enter")
+            {
+                await ChangeValue(true);
+            }
+            else
+            {
+                await ChangeValue();
+            }
 
             if (OnKeyDown.HasDelegate)
             {

@@ -1,4 +1,5 @@
 ﻿using BlazorComponent.Web;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
@@ -51,6 +52,14 @@ namespace Masa.Blazor
             {
                 await CalculateInputHeight();
             }
+        }
+
+        public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+        {
+            await ChangeValue();
+
+            if (OnKeyDown.HasDelegate)
+                await OnKeyDown.InvokeAsync(args);
         }
 
         private async Task CalculateInputHeight()
