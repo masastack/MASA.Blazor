@@ -169,7 +169,7 @@ namespace Masa.Blazor
                 Dictionary<string, object> attibutes = new(Attributes)
                 {
                     { "type", Type },
-                    { "value", _badInput == null ? InternalValue : _badInput }
+                    { "value", _badInput == null ? InputValue : _badInput }
                 };
 
                 if (Type == "number")
@@ -625,7 +625,7 @@ namespace Masa.Blazor
 
             if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
             {
-                _inputValue = checkValue.ToString();
+                InputValue = checkValue;
                 await ChangeValue(true);
             }
 
@@ -637,21 +637,25 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            _inputValue = args.Value.ToString();
-
-            var success = BindConverter.TryConvertTo<TValue>(_inputValue, System.Globalization.CultureInfo.InvariantCulture, out var val);
+            var success = BindConverter.TryConvertTo<TValue>(args.Value.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var val);
 
             if (success)
             {
+                _badInput = null;
+                InputValue = val;
+
                 if (OnInput.HasDelegate)
                 {
                     await OnInput.InvokeAsync(val);
                 }
             }
+            else
+            {
+                _badInput = val.ToString();
+            }
         }
 
         private bool _compositionInputting;
-        private string _inputValue;
 
         public Task OnCompositionStart()
         {
@@ -669,17 +673,7 @@ namespace Masa.Blazor
         {
             if (!_compositionInputting)
             {
-                var success = BindConverter.TryConvertTo<TValue>(_inputValue, System.Globalization.CultureInfo.InvariantCulture, out var val);
-
-                if (success)
-                {
-                    _badInput = null;
-                    await SetInternalValueAsync(val);
-                }
-                else
-                {
-                    _badInput = _inputValue;
-                }
+                await SetInternalValueAsync(InputValue);
 
                 StateHasChanged();
             }
