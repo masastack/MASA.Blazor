@@ -272,16 +272,25 @@
                     return 'en';
                 }
 
-                docsearch({
-                    container: '#docsearch',
-                    appId: 'TSB4MACWRC',
-                    indexName: 'blazor-masastack',
-                    apiKey: 'a38a8d4b58c5648825ba3fafce8b6ffa',
-                    debug: false,
-                    //searchParameters: {
-                    //    facetFilters: ['language:'+ getCurrentDocSearchLanguage()]
-                    //}
-                });
+                function addDocSearch() {
+                    if (document.querySelector("#docsearch")) {
+                        docsearch({
+                            container: '#docsearch',
+                            appId: 'TSB4MACWRC',
+                            indexName: 'blazor-masastack',
+                            apiKey: 'a38a8d4b58c5648825ba3fafce8b6ffa',
+                            debug: false,
+                            //searchParameters: {
+                            //    facetFilters: ['language:'+ getCurrentDocSearchLanguage()]
+                            //}
+                        });
+                    }
+                    else {
+                        setTimeout(addDocSearch, 1000);
+                    }
+                }
+
+                addDocSearch();
             })
     </script>
 </body>
