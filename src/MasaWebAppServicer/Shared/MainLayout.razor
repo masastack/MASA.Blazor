@@ -1,55 +1,62 @@
 ﻿@inherits LayoutComponentBase
 
 <MApp>
-    <CascadingValue Value="mErrorHandler">
-        <MErrorHandler @ref="mErrorHandler">
-    <MAppBar Flat App Color="white" Class="m-bar--underline">
-        <span>Masa.Framework</span>
-        <MSpacer></MSpacer>
-        <MButton Text>
-            <a href="https://blazor.masastack.com/">About</a>
-        </MButton>
-    </MAppBar>
-    <MNavigationDrawer Permanent App>
-        <MList Dense Nav>
-            <MListItem Link Href="/">
-                <MListItemContent>
-                    <MListItemTitle>Home</MListItemTitle>
-                </MListItemContent>
-            </MListItem>
-            <MListItem Link Href="counter">
-                <MListItemContent>
-                    <MListItemTitle>Counter</MListItemTitle>
-                </MListItemContent>
-            </MListItem>
-            <MListItem Link Href="fetchdata">
-                <MListItemContent>
-                    <MListItemTitle>Fetch data</MListItemTitle>
-                </MListItemContent>
-            </MListItem>
-            <MListItem Link Href="show">
-                <MListItemContent>
-                    <MListItemTitle>show</MListItemTitle>
-                </MListItemContent>
-            </MListItem>
-            <MListItem Link Href="show2">
-                <MListItemContent>
-                    <MListItemTitle>show2</MListItemTitle>
-                </MListItemContent>
-            </MListItem>
-        </MList>
-    </MNavigationDrawer>
-    <MMain>
-        <MContainer Fluid>
-            <CascadingValue Value="this">
-                @Body
-            </CascadingValue>
-        </MContainer>
-    </MMain>
-    </MErrorHandler>
+    <CascadingValue Value="_errorHandler">
+        <MAppBar Flat App Color="white" Class="m-bar--underline">
+            <span>Masa.Framework</span>
+            <MSpacer></MSpacer>
+            <MButton Text>
+                <a href="https://blazor.masastack.com/">About</a>
+            </MButton>
+        </MAppBar>
+        <MNavigationDrawer Permanent App>
+            <MList Dense Nav>
+                <MListItem Link Href="/">
+                    <MListItemContent>
+                        <MListItemTitle>Home</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+                <MListItem Link Href="counter">
+                    <MListItemContent>
+                        <MListItemTitle>Counter</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+                <MListItem Link Href="fetchdata">
+                    <MListItemContent>
+                        <MListItemTitle>Fetch data</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+                <MListItem Link Href="show">
+                    <MListItemContent>
+                        <MListItemTitle>show</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+                <MListItem Link Href="show2">
+                    <MListItemContent>
+                        <MListItemTitle>show2</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+            </MList>
+        </MNavigationDrawer>
+        <MMain>
+            <MContainer Fluid>
+                <CascadingValue Value="this">
+                    <MErrorHandler @ref="_errorHandler">
+                        @Body
+                    </MErrorHandler>
+                </CascadingValue>
+            </MContainer>
+        </MMain>
     </CascadingValue>
 </MApp>
-@code{
-  
-    private MErrorHandler mErrorHandler;
+
+@code {
+
+    private MErrorHandler? _errorHandler;
+
+    protected override void OnParametersSet()
+    {
+        _errorHandler?.Recover();
+    }
+
 }

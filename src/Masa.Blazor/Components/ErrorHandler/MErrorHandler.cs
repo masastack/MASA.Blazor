@@ -20,30 +20,32 @@ namespace Masa.Blazor
         [Parameter]
         public bool ShowDetail { get; set; }
 
+        private bool _thrownInLifecycles;
+
         private Exception _exception;
+
         public Exception Exception
         {
-            get { return _exception ?? CurrentException; }
-            set { _exception = value; }
-        }
-
-        private bool _showRender = true;
-        private bool _isThrown;
-
-        protected override bool ShouldRender()
-        {
-            return _showRender && base.ShouldRender();
+            get => _exception ?? CurrentException;
+            set => _exception = value;
         }
 
         protected override void OnParametersSet()
         {
-            base.OnParametersSet();
-            if (Exception != null)
+            if (_thrownInLifecycles)
             {
-                Exception = null;
-                Recover();
+                return;
             }
-            _showRender = false;
+
+            Recover();
+        }
+
+        public new void Recover()
+        {
+            _thrownInLifecycles = false;
+            Exception = null;
+
+            base.Recover();
         }
 
         private bool CheckIfThrownInLifecycles(Exception exception)
@@ -61,19 +63,15 @@ namespace Masa.Blazor
 
         protected override async Task OnErrorAsync(Exception exception)
         {
-            if (exception.InnerException != null) exception = exception.InnerException;
-            _exception = exception;
-            var ttt = CheckIfThrownInLifecycles(exception);
-            //if (!ttt)
-            //{
-            //    //_showRender = false;
-            //}
-            //else
-            //{
-            //    _isThrown=true;
-            //    StateHasChanged();
-            //}
-            Logger?.LogError(exception, "OnErrorAsync");
+            Logger.LogError(exception, "OnErrorAsync");
+
+            if (CheckIfThrownInLifecycles(exception))
+            {
+                _thrownInLifecycles = true;
+            }
+
+            Exception = exception;
+
             if (OnErrorHandleAsync != null)
             {
                 await OnErrorHandleAsync(exception);
@@ -82,60 +80,49 @@ namespace Masa.Blazor
             {
                 if (ShowAlert)
                 {
-
-                    await PopupService.AlertAsync(alert =>
+                    await PopupService.ToastAsync(alert =>
                     {
-                        alert.Top = true;
+                        // alert.Top = true;
                         alert.Type = AlertTypes.Error;
-                        alert.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
+                        alert.Title = "Something wrong!";
+                        alert.Content = ShowDetail ? $"{Exception.Message}:{Exception.StackTrace}" : Exception.Message;
                     });
-
                 }
             }
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            if (!_isThrown && (CurrentException is null || CurrentException is not null && _showRender))
+            builder.OpenComponent<CascadingValue<IErrorHandler>>(0);
+            builder.AddAttribute(1, nameof(CascadingValue<IErrorHandler>.Value), this);
+            builder.AddAttribute(2, nameof(CascadingValue<IErrorHandler>.IsFixed), true);
+
+            var content = ChildContent;
+
+            if (_thrownInLifecycles || (OnErrorHandleAsync == null && !ShowAlert && CurrentException != null))
             {
-                builder.AddContent(0, ChildContent);
-            }
-            else if (_isThrown || CurrentException is not null)
-            {
-                if (!ShowAlert && OnErrorHandleAsync is null)
+                if (ErrorContent != null)
                 {
-                    if (ErrorContent != null)
-                    {
-                        builder.AddContent(1, ErrorContent!(CurrentException));
-                        return;
-                    }
-                    else
-                    {
-                        builder.OpenElement(0, "div");
-                        builder.AddAttribute(0, "class", "blazor-error-boundary");
-                        builder.CloseElement();
-                    }
+                    content = ErrorContent.Invoke(CurrentException);
                 }
                 else
                 {
-                    builder.OpenElement(0, "div");
-                    builder.AddContent(0, CurrentException.Message);
-                    //builder.AddAttribute(0, "class", "blazor-error-boundary");
-                    builder.CloseElement();
+                    content = cb =>
+                    {
+                        cb.OpenElement(0, "div");
+                        cb.AddAttribute(1, "class", "blazor-error-boundary");
+                        cb.CloseElement();
+                    };
                 }
             }
+
+            builder.AddAttribute(3, nameof(CascadingValue<IErrorHandler>.ChildContent), content);
+            builder.CloseComponent();
         }
 
         public async Task HandleExceptionAsync(Exception exception)
         {
             await OnErrorAsync(exception);
-            //_showRender = true;
-
-            if (!ShowAlert && OnErrorHandleAsync is null)
-            {
-                Exception = exception;
-                StateHasChanged();
-            }
         }
     }
 }
