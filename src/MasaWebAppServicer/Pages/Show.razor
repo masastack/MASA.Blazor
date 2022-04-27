@@ -1,13 +1,14 @@
-﻿<MSwitch @bind-Value="_isShow" Label="@($"Show: {_isShow}")"></MSwitch>
+﻿@page "/show"
+<MSwitch @bind-Value="_isShow" Label="@($"Show: {_isShow}")"></MSwitch>
 <MTextField Value="1" FullWidth=false />
 <MButton @onclick="BtnClickThrow">Throw test</MButton>
-<MButton @onclick="BtnClickDevide">Current num/num:@(num/num)</MButton>
+@*<MButton @onclick="BtnClickDevide">Current num/num:@(num/num)</MButton>*@
 <MButton @onclick="BtnClickReset">Rest</MButton>
 
 @code
 {
     private bool _isShow = true;
-    private int num = 0;
+    private int num = 1;
 
     private void BtnClickThrow()
     {
@@ -22,7 +23,7 @@
 
     private void BtnClickReset()
     {
-        num = 1;
+        //num = 1;
     }
 
     private async Task OnErrorHandleAsync(Exception ex)
@@ -39,6 +40,7 @@
 
     //protected override void OnParametersSet()
     //{
+    //    num = 0;
     //    throw new Exception("throw error!");
     //}
 }
