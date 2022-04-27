@@ -33,14 +33,6 @@
                 .Apply(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-divider")
-                        .AddIf($"{prefix}--inset", () => Inset)
-                        .AddIf($"{prefix}--vertical", () => Vertical)
-                        .AddTheme(IsDark);
-                })
-                .Apply("wrapper", cssBuilder =>
-                {
-                    cssBuilder
                         .Add($"{prefix}__wrapper")
                         .AddIf($"{prefix}__wrapper--has-content", () => HasContent)
                         .AddIf($"{prefix}__wrapper--center", () => IsCenter)
@@ -50,6 +42,14 @@
                 {
                     styleBuilder
                         .AddIf($"padding: {PaddingY}px 0", () => PaddingY > 0);
+                })
+                .Apply("hr", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-divider")
+                        .AddIf($"{prefix}--inset", () => Inset)
+                        .AddIf($"{prefix}--vertical", () => Vertical)
+                        .AddTheme(IsDark);
                 })
                 .Apply("content", cssBuilder =>
                 {
