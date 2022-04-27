@@ -4,19 +4,19 @@
     <MContainer>
         <MRow>
             <MCol Cols="12" Sm="6">
-                <PImageCaptcha Label="Regular" OnRefresh="RefreshCode"></PImageCaptcha>
+                <PImageCaptcha Label="Regular" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
             </MCol>
             <MCol Cols="12" Sm="6">
-                <PImageCaptcha Outlined Label="OutLine" OnRefresh="RefreshCode"></PImageCaptcha>
+                <PImageCaptcha Outlined Label="OutLine" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
             </MCol>
             <MCol Cols="12" Sm="6">
-                <PImageCaptcha Filled Label="Filled" OnRefresh="RefreshCode"></PImageCaptcha>
+                <PImageCaptcha Filled Label="Filled" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
             </MCol>
             <MCol Cols="12" Sm="6">
-                <PImageCaptcha Dense Label="Dense" OnRefresh="RefreshCode"></PImageCaptcha>
+                <PImageCaptcha Dense Label="Dense" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
             </MCol>
             <MCol Cols="12" Sm="6">
-                <PImageCaptcha Solo Label="Solo" OnRefresh="RefreshCode"></PImageCaptcha>
+                <PImageCaptcha Solo Label="Solo" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
             </MCol>
         </MRow>
     </MContainer>
@@ -24,7 +24,7 @@
 
 
 @code {
-    int width = 220;
+    string errorMessage = "Verify Code Error";
 
     string randomCode = "1234567890abcdefghijklmn";
 
