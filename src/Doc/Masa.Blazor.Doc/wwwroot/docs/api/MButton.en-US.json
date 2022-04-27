@@ -2,7 +2,8 @@
   "Title": "MButton",
   "Components": [
     "Buttons",
-    "Button Groups"
+    "Button Groups",
+    "Floating Action Buttons"
   ],
   "Props": [
     {
