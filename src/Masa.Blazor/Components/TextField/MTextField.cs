@@ -656,7 +656,6 @@ namespace Masa.Blazor
         }
 
         private bool _compositionInputting;
-        private string _inputValue;
 
         public Task OnCompositionStart()
         {
