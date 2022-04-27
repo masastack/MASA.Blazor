@@ -1,11 +1,11 @@
 ﻿const defaultUploadConfig = {
-    action:  '',
-    methods: 'POST', 
+    action: '',
+    methods: 'POST',
     token: '',
-    tokenName:'',
+    tokenName: '',
     name: 'file',
     accept: 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon',
-    pathKey:'path'
+    pathKey: 'path'
 }
 const defaultToolbarContainer = [
     ['bold', 'italic', 'underline', 'strike'],
@@ -25,7 +25,7 @@ const defaultToolbarContainer = [
 ]
 
 export function init(quillElement, obj, toolBarContainer, readOnly,
-    placeholder, theme, isMarkdown,uploadConfig) {
+    placeholder, theme, isMarkdown, uploadConfig) {
     if (!Quill || !quillElement) return;
     let toolbar = {
         container: toolBarContainer.childNodes.length == 0 ? defaultToolbarContainer : toolBarContainer,
@@ -33,7 +33,9 @@ export function init(quillElement, obj, toolBarContainer, readOnly,
     };
     toolbar.handlers.image = function image() {
         let self = this;
-        handlerImage(obj,self, uploadConfig);
+        var contenteditable = self.quill.root.getAttribute('contenteditable');
+        if (contenteditable == 'false') return;
+        handlerImage(obj, self, uploadConfig);
     };
     let options = {
         modules: {
@@ -105,7 +107,7 @@ export function clearFile(element) {
     let fileInput = element.querySelector('input.ql-image[type=file]');
     fileInput.value = '';
 }
-export function uploadFilePic(quillElement, element,uploadConfig, index) {
+export function uploadFilePic(quillElement, element, uploadConfig, index) {
     let quill = quillElement.__quill
     let fileInput = element.querySelector('input.ql-image[type=file]')
     // Create formdata
@@ -127,7 +129,7 @@ export function uploadFilePic(quillElement, element,uploadConfig, index) {
             quill.setSelection(length + 1);
             index += 1;
             if (index < files.length) {
-                uploadFilePic(quillElement, element,uploadConfig,index);
+                uploadFilePic(quillElement, element, uploadConfig, index);
             }
             else {
                 fileInput.value = '';
@@ -147,7 +149,7 @@ export default {
     insertImage
 }
 
-function handlerImage(obj,self, uploadConfig) {
+function handlerImage(obj, self, uploadConfig) {
     let _uploadConfig = uploadConfig || defaultUploadConfig;
     let fileInput = self.container.querySelector('input.ql-image[type=file]')
     if (fileInput === null) {
@@ -189,7 +191,7 @@ function getFileInfo(files) {
     }
 }
 
-function getObjectUrl(file){
+function getObjectUrl(file) {
     let url = null;
     if (window.URL != undefined) {
         url = window.URL.createObjectURL(file);
