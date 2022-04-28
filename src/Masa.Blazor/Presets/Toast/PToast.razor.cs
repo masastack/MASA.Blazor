@@ -81,6 +81,11 @@ namespace Masa.Blazor.Presets
 
         protected async Task HandleOnCloseAsync(ToastConfig config)
         {
+            await RemoveItem(config);
+        }
+
+        private async Task RemoveItem(ToastConfig config)
+        {
             if (_configDict.ContainsKey(config.Key))
             {
                 config.Visible = false;
@@ -94,18 +99,6 @@ namespace Masa.Blazor.Presets
 
             if (OnClose.HasDelegate)
                 await OnClose.InvokeAsync(config);
-        }
-
-        private Task RemoveItem(ToastConfig config)
-        {
-            if (_configs.Any(p=> p.Key == config.Key))
-            {
-                config.Visible = false;
-                config.OnClose?.Invoke(config.Key);
-                InvokeAsync(StateHasChanged);
-            }
-
-            return Task.CompletedTask;
         }
     }
 }

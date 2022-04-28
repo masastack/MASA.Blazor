@@ -4737,6 +4737,14 @@
             "FullTitle": "Popup service (弹出层服务)",
             "Type": "menuItem",
             "Url": "components/popup-service"
+          },
+          {
+            "Order": 0,
+            "Title": "Toast",
+            "SubTitle": "Toast",
+            "FullTitle": "Toast (Toast)",
+            "Type": "menuItem",
+            "Url": "components/toast"
           }
         ]
       },
