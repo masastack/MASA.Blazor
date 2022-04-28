@@ -45,8 +45,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - CLI", "3 - CLI", "{AAE4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.Doc.WebAssembly.Host", "Doc\Masa.Blazor.Doc.WebAssembly.Host\Masa.Blazor.Doc.WebAssembly.Host.csproj", "{64B28E6C-9AE0-48F1-B988-51FC7D314834}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasaWebAppServicer", "MasaWebAppServicer\MasaWebAppServicer.csproj", "{B71ED577-63D0-4B02-AAAA-B915BDC26326}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,10 +91,6 @@ Global
 		{64B28E6C-9AE0-48F1-B988-51FC7D314834}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64B28E6C-9AE0-48F1-B988-51FC7D314834}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64B28E6C-9AE0-48F1-B988-51FC7D314834}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B71ED577-63D0-4B02-AAAA-B915BDC26326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B71ED577-63D0-4B02-AAAA-B915BDC26326}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B71ED577-63D0-4B02-AAAA-B915BDC26326}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B71ED577-63D0-4B02-AAAA-B915BDC26326}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,7 +106,6 @@ Global
 		{9AFCB502-B489-4E31-8B13-E37AF992D4B3} = {AAE404B7-C6AE-416F-8465-0DF8F079FBE4}
 		{D4284D31-9E47-47D9-A57E-C1BAC509D5C3} = {AAE404B7-C6AE-416F-8465-0DF8F079FBE4}
 		{64B28E6C-9AE0-48F1-B988-51FC7D314834} = {4F6DC075-1D88-484F-A9C1-B2797CF3AE1F}
-		{B71ED577-63D0-4B02-AAAA-B915BDC26326} = {3557F7E2-02EC-473A-8E8C-2BB5DF75CD50}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84AEBCFA-2E9E-4942-9DD7-D6E1B05A1AF9}

@@ -1,44 +1,26 @@
-﻿<MSwitch @bind-Value="_isShow" Label="@($"Show: {_isShow}")"></MSwitch>
-<MTextField Value="1" FullWidth=false />
-<MButton @onclick="BtnClickThrow">Throw test</MButton>
-<MButton @onclick="BtnClickDevide">Current num/num:@(num/num)</MButton>
-<MButton @onclick="BtnClickReset">Rest</MButton>
-
+﻿<MErrorHandler ShowAlert=_isShow>
+    <MSwitch @bind-Value="_isShow" Label="@($"Show: {_isShow}")"></MSwitch>
+    <MTextField Label="Input a num" Value="num" />
+    <MButton OnClick="BtnClick">Normal error</MButton>
+    <MButton OnClick="BtnClickLifeCycle">Life cycle error</MButton>
+</MErrorHandler>
 @code
 {
     private bool _isShow = true;
-    private int num = 0;
+    private int num = 1;
 
-    private void BtnClickThrow()
+    private void BtnClick()
     {
-
-        throw new Exception("throw error!");
+        throw new Exception("BtnClickThrow Error!");
     }
 
-    private void BtnClickDevide()
+    private void BtnClickLifeCycle()
     {
         num = 0;
     }
 
-    private void BtnClickReset()
+    protected override void OnAfterRender(bool firstRender)
     {
-        num = 1;
+        num /= num;
     }
-
-    private async Task OnErrorHandleAsync(Exception ex)
-    {
-
-    }
-
-    //protected override Task OnAfterRenderAsync(bool firstRender)
-    //{
-
-    //    throw new Exception("throw error!");
-    //    //return Task.CompletedTask;
-    //}
-
-    //protected override void OnParametersSet()
-    //{
-    //    throw new Exception("throw error!");
-    //}
 }

@@ -22,30 +22,13 @@ namespace Masa.Blazor
 
         private bool _thrownInLifecycles;
 
-        private Exception _exception;
-
-        public Exception Exception
-        {
-            get => _exception ?? CurrentException;
-            set => _exception = value;
-        }
-
         protected override void OnParametersSet()
         {
-            if (_thrownInLifecycles)
+            if (CurrentException is not null)
             {
-                return;
+                _thrownInLifecycles = false;
+                Recover();
             }
-
-            Recover();
-        }
-
-        public new void Recover()
-        {
-            _thrownInLifecycles = false;
-            Exception = null;
-
-            base.Recover();
         }
 
         private bool CheckIfThrownInLifecycles(Exception exception)
@@ -58,19 +41,21 @@ namespace Masa.Blazor
                 return true;
             }
 
-            return exception.InnerException is not null && CheckIfThrownInLifecycles(exception.InnerException);
+            return false;
         }
 
         protected override async Task OnErrorAsync(Exception exception)
         {
-            Logger.LogError(exception, "OnErrorAsync");
+            Logger?.LogError(exception, "OnErrorAsync");
+            if (exception.InnerException is not null)
+            {
+                exception = exception.InnerException;
+            }
 
             if (CheckIfThrownInLifecycles(exception))
             {
                 _thrownInLifecycles = true;
             }
-
-            Exception = exception;
 
             if (OnErrorHandleAsync != null)
             {
@@ -82,13 +67,17 @@ namespace Masa.Blazor
                 {
                     await PopupService.ToastAsync(alert =>
                     {
-                        // alert.Top = true;
                         alert.Type = AlertTypes.Error;
                         alert.Title = "Something wrong!";
-                        alert.Content = ShowDetail ? $"{Exception.Message}:{Exception.StackTrace}" : Exception.Message;
+                        alert.Content = ShowDetail ? $"{exception.Message}:{exception.StackTrace}" : exception.Message;
                     });
                 }
+                else
+                {
+                    throw exception;
+                }
             }
+
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)

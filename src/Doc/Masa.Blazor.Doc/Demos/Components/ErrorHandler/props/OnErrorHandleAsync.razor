@@ -1,6 +1,6 @@
-﻿<MErrorHandler OnErrorHandleAsync="CustomErrorHandleAsync">
-    <MButton @onclick="BtnClick" Class="@colorClass">Custom handler exception test</MButton>
-    <MButton @onclick="BtnReset">Reset</MButton>
+﻿<MErrorHandler OnErrorHandleAsync="CustomErrorHandleAsync">   
+    <MButton OnClick="BtnClick" Class="@colorClass">Custom handler exception test</MButton>
+    <MButton OnClick="BtnReset">Reset</MButton>
 </MErrorHandler>
 @code
 {
@@ -19,6 +19,7 @@
     {
         //todo
         colorClass = "red white--text";
+        StateHasChanged();
         await Task.CompletedTask;
     }
 }
