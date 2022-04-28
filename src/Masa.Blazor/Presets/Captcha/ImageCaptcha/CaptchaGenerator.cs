@@ -129,6 +129,7 @@ namespace Masa.Blazor.Presets
             .Encode(imageFormat, imageQuality)
             .AsStream();
 
+        //TODO: change prerelease nuget package SkiaSharp.Views.Blazor
         protected SKImage BuildImage(string captchaCode)
         {
             var imageInfo = new SKImageInfo(ImageWidth, ImageHeight, SKImageInfo.PlatformColorType, SKAlphaType.Premul);
