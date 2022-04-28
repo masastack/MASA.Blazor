@@ -47,7 +47,7 @@ namespace Masa.Blazor.Presets
             });
         }
 
-        public Task AddToast(ToastConfig config)
+        public async Task AddToast(ToastConfig config)
         {
             config.Duration ??= Duration;
             if (MaxCount > 0)
@@ -56,7 +56,7 @@ namespace Masa.Blazor.Presets
                 if (count >= MaxCount)
                 {
                     var removeConfig = _configs[0];
-                    RemoveItem(removeConfig);
+                    await RemoveItem(removeConfig);
                 }
             }
 
@@ -75,8 +75,6 @@ namespace Masa.Blazor.Presets
             }
 
             StateHasChanged();
-
-            return Task.CompletedTask;
         }
 
         protected async Task HandleOnCloseAsync(ToastConfig config)
