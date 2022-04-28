@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using Masa.Blazor.Popup.Components;
+using Microsoft.AspNetCore.Components.Web;
 
-namespace Masa.Blazor.Popup.Components
+namespace Masa.Blazor.Presets
 {
-    public partial class ToastItem : AlertingPopupComponentBase
+    public partial class PToastItem: AlertingPopupComponentBase  
     {
         [Parameter]
         public EventCallback<ToastConfig> OnClose { get; set; }

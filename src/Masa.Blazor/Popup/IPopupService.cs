@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.Popup.Components;
+using Masa.Blazor.Presets;
 using OneOf;
 
 namespace Masa.Blazor;
@@ -46,8 +47,8 @@ public interface IPopupService
     #region Toast
     event Action<ToastGlobalConfig> OnToastConfig;
     event Func<ToastConfig, Task> OnToastOpening;
-    Task Config(ToastGlobalConfig config);
-    Task Config(Action<ToastGlobalConfig> configAcion);
+    Task ConfigToast(ToastGlobalConfig config);
+    Task ConfigToast(Action<ToastGlobalConfig> configAcion);
     Task ToastAsync(string title, AlertTypes type);
     Task ToastAsync(ToastConfig config);
     Task ToastAsync(Action<ToastConfig> configAction);

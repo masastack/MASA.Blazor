@@ -1,8 +1,6 @@
-﻿@namespace Masa.Blazor.Popup.Components
+﻿@using Masa.Blazor.Presets
+@namespace Masa.Blazor.Popup.Components
 
-<div class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()">
-    @foreach (var config in _configs)
-    {
-        <ToastItem Config="config" @key="config" OnClose="@HandleOnCloseAsync"></ToastItem>
-    }
-</div>
+<PToast Position="_position" Duration="_duration" @ref="_toastRef" MaxCount="_maxCount">
+
+</PToast>

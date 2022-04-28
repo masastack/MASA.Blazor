@@ -1,9 +1,17 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
 
-namespace Masa.Blazor.Popup.Components
+namespace Masa.Blazor.Presets
 {
     public class ToastConfig
     {
+        public ToastConfig() : this(Guid.NewGuid().ToString())
+        {
+        }
+
+        public ToastConfig(string key)
+        {
+            Key = key;
+        }
         public bool Visible { get; set; } = true;
         public AlertTypes Type { get; set; }
         public string Color { get; set; }
