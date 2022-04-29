@@ -112,7 +112,7 @@
     private Task OnChangePosition(ToastPosition position)
     {
         this.position = position;
-        return PopupService.Config((config) =>
+        return PopupService.ConfigToast((config) =>
         {
             config.Position = position;
         });

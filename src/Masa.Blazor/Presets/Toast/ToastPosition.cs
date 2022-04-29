@@ -1,5 +1,5 @@
 ﻿
-namespace Masa.Blazor.Popup.Components
+namespace Masa.Blazor.Presets
 {
     public enum ToastPosition
     {
