@@ -42,10 +42,9 @@ namespace Masa.Blazor
         public StringBoolean ThumbLabel { get; set; }
 
         [Parameter]
-        public override int DebounceMilliseconds { get; set; } = 16;
-
-        [Parameter]
         public RenderFragment<double> ThumbLabelContent { get; set; }
+
+        public override int DebounceMilliseconds { get; set; }
 
         protected virtual double GetRoundedValue(int index)
         {
@@ -248,8 +247,6 @@ namespace Masa.Blazor
 
         public bool ShowThumbLabelContainer => IsFocused || IsActive || ThumbLabel == "always";
 
-        public override Func<Task> DebounceTimerRun => SliderDebounceTimerRun;
-
         protected virtual async Task SetInternalValueAsync(double internalValue)
         {
             var val = RoundValue(Math.Min(Math.Max(internalValue, Min), Max));
@@ -323,17 +320,52 @@ namespace Masa.Blazor
             await HandleOnMouseMoveAsync(args);
         }
 
+        public virtual async Task HandleOnTouchStartAsync(ExTouchEventArgs args)
+        {
+            Console.WriteLine("touch start");
+            await HandleOnSliderStartSwiping(args.Target, args.Touches[0].ClientX, args.Touches[0].ClientY);
+            await App.AddEventListenerAsync("touchmove", CreateEventCallback<TouchEventArgs>(HandleTouchMove), false, new EventListenerActions() { PreventDefault = true, StopPropagation = true });
+            await App.AddEventListenerAsync("touchend", CreateEventCallback<TouchEventArgs>(HandleOnTouchEndAsync), new EventListenerOptions
+            {
+                Capture = true,
+                Once = true
+            });
+        }
+
         public virtual async Task HandleOnSliderMouseDownAsync(ExMouseEventArgs args)
+        {
+            await HandleOnSliderStartSwiping(args.Target, args.ClientX, args.ClientY);
+
+            await App.AddEventListenerAsync("mousemove", CreateEventCallback<MouseEventArgs>(HandleOnMouseMoveAsync), false, new EventListenerActions() { PreventDefault = true, StopPropagation = true });
+            await App.AddEventListenerAsync("mouseup", CreateEventCallback<MouseEventArgs>(HandleOnSliderMouseUpAsync), new EventListenerOptions
+            {
+                Capture = true,
+                Once = true
+            }, new EventListenerActions() { PreventDefault = true, StopPropagation = true });
+        }
+
+        public async Task HandleTouchMove(TouchEventArgs args)
+        {
+            var mouseEventArgs = new MouseEventArgs()
+            {
+                ClientX = args.Touches[0].ClientX,
+                ClientY = args.Touches[0].ClientY,
+            };
+
+            await HandleOnMouseMoveAsync(mouseEventArgs);
+        }
+
+        public virtual async Task HandleOnSliderStartSwiping(EventTarget target, double clientX, double clientY)
         {
             OldValue = DoubleInteralValue;
             IsActive = true;
 
-            if (args.Target.Class.Contains("m-slider__thumb-container"))
+            if (target.Class.Contains("m-slider__thumb-container"))
             {
                 ThumbPressed = true;
                 var container = Document.QuerySelector($"#{Id} .m-slider__thumb-container");
                 var domRect = await container.GetBoundingClientRectAsync();
-                StartOffset = Vertical ? (args.ClientY - (domRect.Top + domRect.Height / 2)) : (args.ClientX - (domRect.Left + domRect.Width / 2));
+                StartOffset = Vertical ? (clientX - (domRect.Top + domRect.Height / 2)) : (clientY - (domRect.Left + domRect.Width / 2));
             }
             else
             {
@@ -343,35 +375,42 @@ namespace Masa.Blazor
                 MouseCancellationTokenSource = new CancellationTokenSource();
 
                 _ = Task.Run(async () =>
-                  {
-                      await Task.Delay(300, MouseCancellationTokenSource.Token);
-                      ThumbPressed = true;
+                {
+                    await Task.Delay(300, MouseCancellationTokenSource.Token);
+                    ThumbPressed = true;
 
-                      InvokeStateHasChanged();
-                  });
+                    InvokeStateHasChanged();
+                });
             }
+            var args = new MouseEventArgs()
+            {
+                ClientX = clientX,
+                ClientY = clientY,
+            };
 
             await HandleOnMouseMoveAsync(args);
-            await App.AddEventListenerAsync("mousemove", CreateEventCallback<MouseEventArgs>(HandleOnMouseMoveAsync), false);
-            await App.AddEventListenerAsync("mouseup", CreateEventCallback<MouseEventArgs>(HandleOnSliderMouseUpAsync), new EventListenerOptions
-            {
-                Capture = true,
-                Once = true
-            });
+        }
+
+        public async Task HandleOnTouchEndAsync(TouchEventArgs args)
+        {
+            Console.WriteLine("touch end");
+            await HandleOnSliderEndSwiping();
         }
 
         public async Task HandleOnSliderMouseUpAsync(MouseEventArgs args)
         {
+            await HandleOnSliderEndSwiping();
+        }
+
+        public async Task HandleOnSliderEndSwiping()
+        {
             MouseCancellationTokenSource?.Cancel();
             ThumbPressed = false;
             await App.RemoveEventListenerAsync("mousemove");
-
-            await ChangeValue();
+            await App.RemoveEventListenerAsync("touchmove");
 
             IsActive = false;
         }
-
-        private double _value;
 
         public virtual async Task HandleOnMouseMoveAsync(MouseEventArgs args)
         {
@@ -382,20 +421,7 @@ namespace Masa.Blazor
            
             var val = await ParseMouseMoveAsync(args);
 
-            _value = val;
-
-            await ChangeValue();
-            //await SetInternalValueAsync(val);
-        }
-
-        public async Task SliderDebounceTimerRun()
-        {
-            await SetInternalValueAsync(_value);
-
-            if (OnChange.HasDelegate)
-            {
-                await OnChange.InvokeAsync(InternalValue);
-            }
+            await SetInternalValueAsync(val);
         }
 
         protected async Task<double> ParseMouseMoveAsync(MouseEventArgs args)
@@ -632,8 +658,6 @@ namespace Masa.Blazor
         {
             IsFocused = true;
 
-            await ChangeValue(true);
-
             if (OnFocus.HasDelegate)
             {
                 await OnFocus.InvokeAsync(args);
@@ -644,31 +668,31 @@ namespace Masa.Blazor
         {
             IsFocused = false;
 
-            await ChangeValue(true);
-
             if (OnBlur.HasDelegate)
             {
                 await OnBlur.InvokeAsync(args);
             }
         }
 
-        public virtual Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+        public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
             if (!IsInteractive)
             {
-                return Task.CompletedTask;
+                return;
             }
 
             var value = ParseKeyDown(args, DoubleInteralValue);
 
             if (value == null || value.AsT2 < Min || value.AsT2 > Max)
             {
-                return Task.CompletedTask;
+                return;
             }
 
-            _value = value.AsT2;
-
-            return Task.CompletedTask;
+            await SetInternalValueAsync(value.AsT2);
+            if (OnChange.HasDelegate)
+            {
+                await OnChange.InvokeAsync(InternalValue);
+            }
         }
 
         protected StringNumber ParseKeyDown(KeyboardEventArgs args, double value)
