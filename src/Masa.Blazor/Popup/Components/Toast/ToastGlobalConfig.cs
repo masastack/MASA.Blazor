@@ -1,4 +1,6 @@
 ﻿
+using Masa.Blazor.Presets;
+
 namespace Masa.Blazor.Popup.Components
 {
     public class ToastGlobalConfig

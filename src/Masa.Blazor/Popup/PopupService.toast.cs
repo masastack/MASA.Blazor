@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.Popup.Components;
+using Masa.Blazor.Presets;
 using OneOf;
 
 namespace Masa.Blazor
@@ -86,11 +87,11 @@ namespace Masa.Blazor
             return Open(config);
         }
 
-        public Task Config(ToastGlobalConfig config)
+        public Task ConfigToast(ToastGlobalConfig config)
         {
             return GlobalConfig(config);
         }
-        public Task Config(Action<ToastGlobalConfig> configAcion)
+        public Task ConfigToast(Action<ToastGlobalConfig> configAcion)
         {
             return GlobalConfig(configAcion);
         }

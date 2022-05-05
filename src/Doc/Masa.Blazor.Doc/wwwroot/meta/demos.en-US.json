@@ -59,6 +59,13 @@
             "FullTitle": "Popup service",
             "Type": "menuItem",
             "Url": "components/popup-service"
+          },
+          {
+            "Order": 0,
+            "Title": "Toast",
+            "FullTitle": "Toast",
+            "Type": "menuItem",
+            "Url": "components/toast"
           }
         ]
       }

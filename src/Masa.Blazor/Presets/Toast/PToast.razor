@@ -1,0 +1,8 @@
+﻿@namespace Masa.Blazor.Presets
+
+<div class="@CssProvider.GetClass()" style="@CssProvider.GetStyle()">
+    @foreach (var config in _configs)
+    {
+        <PToastItem Config="config" @key="config" OnClose="@HandleOnCloseAsync"></PToastItem>
+    }
+</div>
