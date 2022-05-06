@@ -7,6 +7,8 @@ namespace Masa.Blazor.Doc.Shared
     {
         private ErrorBoundary _errorBoundary;
 
+        private MErrorHandler _errorHandler;
+
         [CascadingParameter]
         public BaseLayout BaseLayout { get; set; }
 

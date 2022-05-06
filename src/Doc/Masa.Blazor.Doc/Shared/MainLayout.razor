@@ -8,22 +8,27 @@
     </ChildContent>
 </MNavigationDrawer>
 
-<MMain Class="mainlayout-m-main">
-    <ErrorBoundary @ref="_errorBoundary">
-        <ChildContent>
-            @Body
-        </ChildContent>
-        <ErrorContent>
-            @if (context is HttpRequestException requestException && requestException.StatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-                <NotFound></NotFound>
-            }
-            else
-            {
-                <Error></Error>
-            }
-        </ErrorContent>
-    </ErrorBoundary>
-</MMain>
-
+<CascadingValue Value="_errorHandler">
+    <MErrorHandler @ref="_errorHandler">
+        <MMain Class="mainlayout-m-main">
+            <ErrorBoundary @ref="_errorBoundary">
+                <ChildContent>
+                    <MErrorHandler>
+                        @Body
+                    </MErrorHandler>
+                </ChildContent>
+                <ErrorContent>
+                    @if (context is HttpRequestException requestException && requestException.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        <NotFound></NotFound>
+                    }
+                    else
+                    {
+                        <Error></Error>
+                    }
+                </ErrorContent>
+            </ErrorBoundary>
+        </MMain>
+    </MErrorHandler>
+</CascadingValue>
 <Toc />
