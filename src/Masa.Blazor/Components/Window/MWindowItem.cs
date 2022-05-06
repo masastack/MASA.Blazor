@@ -5,19 +5,19 @@ namespace Masa.Blazor
 {
     public class MWindowItem : BWindowItem
     {
+        [Inject]
+        public Document Document { get; set; }
+
+        [CascadingParameter]
+        public MWindow WindowGroup { get; set; }
+
         [Parameter]
         public string Transition { get; set; }
 
         [Parameter]
         public string ReverseTransition { get; set; }
 
-        [CascadingParameter]
-        public MWindow WindowGroup { get; set; }
-
-        [Inject]
-        public Document Document { get; set; }
-
-        protected bool InTransition { get; set; }
+        private bool InTransition { get; set; }
 
         protected override string ComputedTransition
         {
@@ -46,13 +46,16 @@ namespace Masa.Blazor
             {
                 // set initial height for height transition.
                 var elementInfo = await Js.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, el);
-                WindowGroup.TransitionHeight = elementInfo.ClientHeight;
+                var height = elementInfo.ClientHeight;
+                if (height != 0)
+                {
+                    WindowGroup.TransitionHeight = height;
+                }
             }
 
             WindowGroup.TransitionCount++;
 
-            StateHasChanged();
-            Console.WriteLine($"WindowGroup.TransitionCount: {WindowGroup.TransitionCount}");
+            WindowGroup.RenderState();
         }
 
         protected override Task HandleOnAfter(ElementReference el)
@@ -71,11 +74,11 @@ namespace Masa.Blazor
                 // Remove container height if we are out of transition.
                 if (WindowGroup.TransitionCount == 0)
                 {
-                    WindowGroup.TransitionHeight = 0;
+                    WindowGroup.TransitionHeight = null;
                 }
             }
 
-            Console.WriteLine($"WindowGroup.TransitionCount: {WindowGroup.TransitionCount}");
+            WindowGroup.RenderState();
 
             return Task.CompletedTask;
         }
@@ -96,9 +99,13 @@ namespace Masa.Blazor
 
                 // Set transition target height.
                 var elementInfo = await Js.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, el);
-                WindowGroup.TransitionHeight = elementInfo.ClientHeight;
+                var height = elementInfo.ClientHeight;
+                if (height != 0)
+                {
+                    WindowGroup.TransitionHeight = height;
+                }
 
-                StateHasChanged();
+                WindowGroup.RenderState();
             });
 
             return Task.CompletedTask;
