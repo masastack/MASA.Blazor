@@ -30,8 +30,6 @@ namespace Masa.Blazor
 
         protected int? ActiveThumb { get; set; }
 
-        public override Func<Task> DebounceTimerRun => SliderRangeDebounceTimerRun;
-
         protected override double DoubleInteralValue
         {
             get 
@@ -57,16 +55,6 @@ namespace Masa.Blazor
         protected override double GetRoundedValue(int index)
         {
             return RoundValue(DoubleInteralValues[index]);
-        }
-
-        public async Task SliderRangeDebounceTimerRun()
-        {
-            await SetInternalValueAsync(_value);
-
-            if (OnChange.HasDelegate)
-            {
-                await OnChange.InvokeAsync(InternalValue);
-            }
         }
 
         public override async Task HandleOnSliderClickAsync(MouseEventArgs args)
@@ -102,7 +90,7 @@ namespace Masa.Blazor
                 ActiveThumb = GetIndexOfClosestValue(DoubleInteralValues, _value);
             }
 
-            await ChangeValue();
+            await SetInternalValueAsync(_value);
         }
 
         protected override async Task SetInternalValueAsync(double value)
@@ -151,8 +139,14 @@ namespace Masa.Blazor
                 return;
             }
 
-            _value = value.AsT2;
-            await ChangeValue();
+            await SetInternalValueAsync(value.AsT2);
+        }
+
+        public override async Task HandleOnTouchStartAsync(ExTouchEventArgs args)
+        {
+            var value = await ParseMouseMoveAsync(new MouseEventArgs() { ClientX = args.Touches[0].ClientX, ClientY = args.Touches[0].ClientY });
+            await ReevaluateSelectedAsync(value);
+            await base.HandleOnTouchStartAsync(args);
         }
 
         public override async Task HandleOnSliderMouseDownAsync(ExMouseEventArgs args)
