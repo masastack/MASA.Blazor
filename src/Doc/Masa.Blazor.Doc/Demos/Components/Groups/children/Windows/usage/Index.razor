@@ -17,11 +17,10 @@
     <MCol>
         <MWindow Value="window"
                  Class="elevation-1"
-                 Vertical
-                 Id="testwindowtest">
+                 Vertical>
             @foreach (var item in Enumerable.Range(1, length))
             {
-                <MWindowItem Value="@item" Id="@($"testwindowtest{item}")">
+                <MWindowItem Value="@item">
                     <MCard Flat>
                         <MCardText>
                             <MRow Class="mb-4" Align="AlignTypes.Center">
@@ -56,5 +55,5 @@
 
     StringNumber window;
 
-    int length = 2;
+    int length = 3;
 }
