@@ -1,22 +1,23 @@
 ﻿using BlazorComponent.Web;
+using Element = BlazorComponent.Web.Element;
 
 namespace Masa.Blazor
 {
     public class MWindowItem : BWindowItem
     {
+        [Inject]
+        public Document Document { get; set; }
+
+        [CascadingParameter]
+        public MWindow WindowGroup { get; set; }
+
         [Parameter]
         public string Transition { get; set; }
 
         [Parameter]
         public string ReverseTransition { get; set; }
 
-        [CascadingParameter]
-        public MWindow WindowGroup { get; set; }
-
-        [Inject]
-        public Document Document { get; set; }
-
-        protected bool InTransition { get; set; }
+        private bool InTransition { get; set; }
 
         protected override string ComputedTransition
         {
@@ -31,14 +32,83 @@ namespace Masa.Blazor
             }
         }
 
-        protected override async Task OnLeave(BlazorComponent.Element element)
+        protected override async Task HandleOnBefore(ElementReference el)
         {
-            await WindowGroup.OnLeave.InvokeAsync(element);
+            if (InTransition)
+            {
+                return;
+            }
+
+            // Initialize transition state here.
+            InTransition = true;
+
+            if (WindowGroup.TransitionCount == 0)
+            {
+                // set initial height for height transition.
+                var elementInfo = await Js.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, el);
+                var height = elementInfo.ClientHeight;
+                if (height != 0)
+                {
+                    WindowGroup.TransitionHeight = height;
+                }
+            }
+
+            WindowGroup.TransitionCount++;
+
+            WindowGroup.RenderState();
         }
 
-        protected override async Task OnEnterTo(BlazorComponent.Element element)
+        protected override Task HandleOnAfter(ElementReference el)
         {
-            await WindowGroup.OnEnterTo.InvokeAsync(element);
+            if (!InTransition)
+            {
+                return Task.CompletedTask;
+            }
+
+            InTransition = false;
+
+            if (WindowGroup.TransitionCount > 0)
+            {
+                WindowGroup.TransitionCount--;
+
+                // Remove container height if we are out of transition.
+                if (WindowGroup.TransitionCount == 0)
+                {
+                    WindowGroup.TransitionHeight = null;
+                }
+            }
+
+            WindowGroup.RenderState();
+
+            return Task.CompletedTask;
+        }
+
+        protected override Task HandleOnEnter(ElementReference el)
+        {
+            if (!InTransition)
+            {
+                return Task.CompletedTask;
+            }
+
+            NextTick(async () =>
+            {
+                if (!string.IsNullOrEmpty(ComputedTransition) || !InTransition)
+                {
+                    return;
+                }
+
+                // Set transition target height.
+                var elementInfo = await Js.InvokeAsync<Element>(JsInteropConstants.GetDomInfo, el);
+                var height = elementInfo.ClientHeight;
+                if (height != 0)
+                {
+                    WindowGroup.TransitionHeight = height;
+                }
+
+                WindowGroup.RenderState();
+            });
+
+            return Task.CompletedTask;
         }
 
         protected override void SetComponentClass()

@@ -24,26 +24,6 @@ namespace Masa.Blazor
             }
         }
 
-        public EventCallback<Element> OnLeave => EventCallback.Factory.Create<Element>(this, HandleOnLeaveAsync);
-
-        private async Task HandleOnLeaveAsync(Element element)
-        {
-            TransitionCount++;
-
-            var el = Document.GetElementByReference(element.Reference);
-            TransitionHeight = await el.GetClientHeightAsync();
-        }
-
-        public EventCallback<Element> OnEnterTo => EventCallback.Factory.Create<Element>(this, HandleOnEnterToAsync);
-
-        private async Task HandleOnEnterToAsync(Element element)
-        {
-            TransitionCount--;
-
-            var el = Document.GetElementByReference(element.Reference);
-            TransitionHeight = await el.GetClientHeightAsync();
-        }
-
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
