@@ -251,8 +251,16 @@ namespace Masa.Blazor
         {
             var input = Document.GetElementByReference(InputFile.Element.Value);
             await input.SetPropertyAsync("value", "");
-
-            await base.HandleOnClearClickAsync(args);
+            
+            if (Multiple)
+            {
+                IList<IBrowserFile> values = new List<IBrowserFile>();
+                await SetInternalValueAsync((TValue)values);
+            }
+            else
+            {
+                await SetInternalValueAsync(default);
+            }
         }
     }
 }
