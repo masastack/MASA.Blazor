@@ -88,13 +88,13 @@ namespace Masa.Blazor
 
             var content = ChildContent;
 
-            if (_thrownInLifecycles || (OnErrorHandleAsync == null && !ShowAlert && CurrentException != null))
+            if (CurrentException is not null)
             {
-                if (ErrorContent != null)
+                if (ErrorContent is not null)
                 {
                     content = ErrorContent.Invoke(CurrentException);
                 }
-                else
+                else if (_thrownInLifecycles || (OnErrorHandleAsync == null && !ShowAlert))
                 {
                     content = cb =>
                     {
