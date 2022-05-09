@@ -36,6 +36,10 @@ namespace Masa.Blazor
         [Parameter]
         public string Accept { get; set; }
 
+        public override Action<TextFieldNumberProperty> NumberProps { get; set; }
+
+        public override int DebounceMilliseconds { get; set; }
+
         protected override Dictionary<string, object> InputAttrs => new()
         {
             { "type", "file" },
@@ -247,8 +251,16 @@ namespace Masa.Blazor
         {
             var input = Document.GetElementByReference(InputFile.Element.Value);
             await input.SetPropertyAsync("value", "");
-
-            await base.HandleOnClearClickAsync(args);
+            
+            if (Multiple)
+            {
+                IList<IBrowserFile> values = new List<IBrowserFile>();
+                await SetInternalValueAsync((TValue)values);
+            }
+            else
+            {
+                await SetInternalValueAsync(default);
+            }
         }
     }
 }

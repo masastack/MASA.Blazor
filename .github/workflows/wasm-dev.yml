@@ -1,9 +1,10 @@
-name: deploy
+name: deploy-wasm-dev
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch: 
   
 jobs:
   deploy:

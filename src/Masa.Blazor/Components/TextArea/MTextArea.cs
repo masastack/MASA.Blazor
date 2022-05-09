@@ -1,4 +1,5 @@
 ﻿using BlazorComponent.Web;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
@@ -19,6 +20,8 @@ namespace Masa.Blazor
         public override string Tag => "textarea";
 
         protected double ElementHeight { get; set; }
+
+        public override Action<TextFieldNumberProperty> NumberProps { get; set; }
 
         protected override Dictionary<string, object> InputAttrs => new(Attributes)
         {
@@ -49,6 +52,14 @@ namespace Masa.Blazor
             {
                 await CalculateInputHeight();
             }
+        }
+
+        public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+        {
+            await ChangeValue();
+
+            if (OnKeyDown.HasDelegate)
+                await OnKeyDown.InvokeAsync(args);
         }
 
         private async Task CalculateInputHeight()

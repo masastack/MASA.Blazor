@@ -149,6 +149,11 @@
       "Description": ""
     },
     {
+      "Name": "Show",
+      "Type": "Nullable<Boolean>",
+      "Description": ""
+    },
+    {
       "Name": "Src",
       "Type": "String",
       "Default": "null",

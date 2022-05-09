@@ -9,6 +9,9 @@
         public string Origin { get; set; } = "center center";
 
         [Parameter]
+        public string OverlayScrimClass { get; set; }
+
+        [Parameter]
         public bool Scrollable { get; set; }
 
         [Parameter]
@@ -79,6 +82,7 @@
             AbstractProvider
                 .Apply<BOverlay, MOverlay>(attrs =>
                 {
+                    attrs[nameof(MOverlay.ScrimClass)] = OverlayScrimClass;
                     attrs[nameof(MOverlay.Value)] = ShowOverlay && IsActive;
                     attrs[nameof(MOverlay.ZIndex)] = ZIndex - 1;
                 })

@@ -457,10 +457,10 @@
       },
       {
         "Order": 0,
-        "Title": "ErrorHandler",
-        "FullTitle": "ErrorHandler",
+        "Title": "Error handler",
+        "FullTitle": "Error handler",
         "Type": "menuItem",
-        "Url": "components/errorhandler",
+        "Url": "components/error-handler",
         "Children": []
       },
       {
@@ -470,6 +470,14 @@
         "Type": "menuItem",
         "Url": "components/expansion-panels",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Floating Action Buttons",
+        "FullTitle": "Floating Action Buttons",
+        "Type": "menuItem",
+        "Url": "components/floating-action-buttons",
         "Children": []
       },
       {
@@ -686,6 +694,14 @@
       },
       {
         "Order": 0,
+        "Title": "Markdown",
+        "FullTitle": "Markdown",
+        "Type": "menuItem",
+        "Url": "components/markdown",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Menus",
         "FullTitle": "Menus",
         "Type": "menuItem",
@@ -779,6 +795,13 @@
           },
           {
             "Order": 0,
+            "Title": "Image Captcha",
+            "FullTitle": "Image Captcha",
+            "Type": "menuItem",
+            "Url": "components/image-captcha"
+          },
+          {
+            "Order": 0,
             "Title": "Modals",
             "FullTitle": "Modals",
             "Type": "menuItem",
@@ -797,6 +820,13 @@
             "FullTitle": "Popup service",
             "Type": "menuItem",
             "Url": "components/popup-service"
+          },
+          {
+            "Order": 0,
+            "Title": "Toast",
+            "FullTitle": "Toast",
+            "Type": "menuItem",
+            "Url": "components/toast"
           }
         ]
       },
@@ -3086,6 +3116,35 @@
       },
       {
         "Order": 0,
+        "Title": "MMarkdown",
+        "FullTitle": "MMarkdown",
+        "Type": "menuItem",
+        "Url": "api/mmarkdown",
+        "Contents": [
+          {
+            "Id": "section-389932261",
+            "Title": "Component Pages",
+            "Level": 0
+          },
+          {
+            "Id": "section-1029938464",
+            "Title": "Props",
+            "Level": 0
+          },
+          {
+            "Id": "section-444565322",
+            "Title": "Contents",
+            "Level": 0
+          },
+          {
+            "Id": "section-1613329801",
+            "Title": "Events",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
         "Title": "MMenu",
         "FullTitle": "MMenu",
         "Type": "menuItem",
@@ -3786,6 +3845,35 @@
         "FullTitle": "MSpacer",
         "Type": "menuItem",
         "Url": "api/mspacer",
+        "Contents": [
+          {
+            "Id": "section-389932261",
+            "Title": "Component Pages",
+            "Level": 0
+          },
+          {
+            "Id": "section-1029938464",
+            "Title": "Props",
+            "Level": 0
+          },
+          {
+            "Id": "section-444565322",
+            "Title": "Contents",
+            "Level": 0
+          },
+          {
+            "Id": "section-1613329801",
+            "Title": "Events",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
+        "Title": "MSpeedDial",
+        "FullTitle": "MSpeedDial",
+        "Type": "menuItem",
+        "Url": "api/mspeeddial",
         "Contents": [
           {
             "Id": "section-389932261",

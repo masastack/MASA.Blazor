@@ -71,6 +71,11 @@
       "Description": "将暗色主题变量应用到组件。"
     },
     {
+      "Name": "DebounceMilliseconds",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
       "Name": "Dense",
       "Type": "Boolean",
       "Default": "false",
@@ -170,6 +175,11 @@
       "Name": "Messages",
       "Type": "List<String>",
       "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "NumberProps",
+      "Type": "Action<TextFieldNumberProperty>",
       "Description": ""
     },
     {
@@ -287,6 +297,11 @@
       "Description": ""
     },
     {
+      "Name": "TextColor",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "Type",
       "Type": "String",
       "Default": "null",
@@ -401,6 +416,11 @@
     },
     {
       "Name": "OnKeyDown",
+      "Type": "EventCallback<KeyboardEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnKeyUp",
       "Type": "EventCallback<KeyboardEventArgs>",
       "Description": ""
     },

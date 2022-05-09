@@ -71,7 +71,7 @@ namespace Masa.Blazor.Presets
         public string Title { get; set; }
 
         [Parameter]
-        public string Transition { get; set; }
+        public string Transition { get; set; } = "dialog-transition";
 
         [Parameter]
         public bool Value { get; set; }

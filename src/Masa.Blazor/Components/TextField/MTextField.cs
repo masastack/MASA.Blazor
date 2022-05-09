@@ -6,7 +6,7 @@ namespace Masa.Blazor
     public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
     {
         private string _badInput;
-        private CancellationTokenSource _cancellationTokenSource;
+
         private bool _shouldRender = true;
 
         [Parameter]
@@ -85,6 +85,9 @@ namespace Masa.Blazor
         public EventCallback<KeyboardEventArgs> OnKeyDown { get; set; }
 
         [Parameter]
+        public EventCallback<KeyboardEventArgs> OnKeyUp { get; set; }
+
+        [Parameter]
         public EventCallback<TValue> OnInput { get; set; }
 
         [Parameter]
@@ -111,11 +114,16 @@ namespace Masa.Blazor
         [Parameter]
         public EventCallback<MouseEventArgs> OnClearClick { get; set; }
 
+        [Parameter]
+        public virtual Action<TextFieldNumberProperty> NumberProps { get; set; }
+
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
 
         [Inject]
         public Document Document { get; set; }
+
+        public TextFieldNumberProperty Props { get; set; } = new();
 
         public bool IsSolo => Solo || SoloInverted;
 
@@ -154,11 +162,28 @@ namespace Masa.Blazor
 
         public virtual string Tag => "input";
 
-        protected virtual Dictionary<string, object> InputAttrs => new(Attributes)
+        protected virtual Dictionary<string, object> InputAttrs
         {
-            { "type", Type },
-            { "value", _badInput == null ? InternalValue : _badInput }
-        };
+            get
+            {
+                Dictionary<string, object> attibutes = new(Attributes)
+                {
+                    { "type", Type },
+                    { "value", _badInput == null ? InputValue : _badInput }
+                };
+
+                if (Type == "number")
+                {
+                    if (Props.Min.HasValue)
+                        attibutes.Add("min", Props.Min);
+                    if (Props.Max.HasValue)
+                        attibutes.Add("max", Props.Max);
+                    attibutes.Add("step", Props.Step);
+                }
+
+                return attibutes;
+            }
+        }
 
         public virtual StringNumber ComputedCounterValue
         {
@@ -201,6 +226,14 @@ namespace Masa.Blazor
 
         protected double PrependWidth { get; set; }
 
+        private string NumberValue
+        {
+            get
+            {
+                return InternalValue == null || string.IsNullOrWhiteSpace(InternalValue.ToString()) ? "0" : InternalValue.ToString();
+            }
+        }
+
         protected (StringNumber left, StringNumber right) LabelPosition
         {
             get
@@ -216,13 +249,49 @@ namespace Masa.Blazor
             }
         }
 
+        public bool UpButtonEnabled
+        {
+            get
+            {
+                if (Props.Max == null)
+                {
+                    return true;
+                }
+
+                if (BindConverter.TryConvertToDecimal(NumberValue, System.Globalization.CultureInfo.InvariantCulture, out var value))
+                {
+                    return value < Props.Max;
+                }
+
+                return false;
+            }
+        }
+
+        public bool DownButtonEnabled
+        {
+            get
+            {
+                if (Props.Min == null)
+                {
+                    return true;
+                }
+
+                if (BindConverter.TryConvertToDecimal(NumberValue, System.Globalization.CultureInfo.InvariantCulture, out var value))
+                {
+                    return value > Props.Min;
+                }
+
+                return false;
+            }
+        }
+
         public BLabel LabelReference { get; set; }
 
         public ElementReference PrefixElement { get; set; }
 
         public ElementReference PrependInnerElement { get; set; }
 
-        protected virtual Dictionary<string, object> InputSlotAttrs { get; } = new();
+        protected virtual Dictionary<string, object> InputSlotAttrs { get; set; } = new();
 
         bool ITextField<TValue>.IsDirty => IsDirty;
 
@@ -311,6 +380,15 @@ namespace Masa.Blazor
                     cssBuilder
                         .Add("m-text-field__slot");
                 })
+                .Apply("text-field-input", cssBuilder =>
+                {
+                    cssBuilder
+                        .AddTextColor(TextColor);
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddTextColor(TextColor);
+                })
                 .Apply("text-field-prefix", cssBuilder =>
                 {
                     cssBuilder
@@ -320,6 +398,30 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add("m-text-field__suffix");
+                })
+                .Apply("number-wrap", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input-number-handler-wrap")
+                        .AddIf("m-input-number-handler-focused", () => IsFocused);
+                })
+                .Apply("append-icon-number-up", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input__icon")
+                        .Add("m-input__icon--append")
+                        .Add("m-number-input-icon")
+                        .AddIf("m-number-input-up-disabled", () => !UpButtonEnabled);
+
+                })
+                .Apply("append-icon-number-down", cssBuilder =>
+                {
+                    cssBuilder
+                        .Add("m-input__icon")
+                        .Add("m-input__icon--append")
+                        .Add("m-number-input-icon")
+                        .AddIf("m-number-input-down-disabled", () => !DownButtonEnabled);
+
                 });
 
             AbstractProvider
@@ -371,16 +473,25 @@ namespace Masa.Blazor
                 });
         }
 
+        public override Func<Task> DebounceTimerRun => TextFieldDebounceTimerRun;
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            NumberProps?.Invoke(Props);
+
             await base.OnAfterRenderAsync(firstRender);
 
             if (firstRender)
             {
+                await JsInvokeAsync(JsInteropConstants.RegisterTextFieldOnMouseDown, InputSlotElement, InputElement, DotNetObjectReference.Create(new Invoker<MouseEventArgs>(HandleOnMouseDownAsync)));
                 //OnAfterRender doesn't indicate DOM ready
                 //So we should wait a little time
                 //We may remove this when dialog been refactored
                 await Task.Delay(16 * 3);
+
+                var inputElement = Document.GetElementByReference(InputElement);
+                await inputElement.AddEventListenerAsync("compositionstart", CreateEventCallback(OnCompositionStart));
+                await inputElement.AddEventListenerAsync("compositionend", CreateEventCallback(OnCompositionEnd));
 
                 var tasks = new Task[3];
 
@@ -510,6 +621,14 @@ namespace Masa.Blazor
             _badInput = null;
             IsFocused = false;
 
+            var checkValue = await CheckNumberValidate();
+
+            if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
+            {
+                InputValue = checkValue;
+                await ChangeValue(true);
+            }
+
             if (OnBlur.HasDelegate)
             {
                 await OnBlur.InvokeAsync(args);
@@ -518,32 +637,116 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            //Since event will call StateHasChanged,we should prevent it
-            //So that,view will not change untill 300ms no actions
-            _shouldRender = false;
+            var success = BindConverter.TryConvertTo<TValue>(args.Value.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var val);
 
-            _cancellationTokenSource?.Cancel();
-            _cancellationTokenSource = new CancellationTokenSource();
-            await Task.Delay(300, _cancellationTokenSource.Token);
-
-            var success = BindConverter.TryConvertTo<TValue>(args.Value, System.Globalization.CultureInfo.InvariantCulture, out var val);
             if (success)
             {
                 _badInput = null;
-                await SetInternalValueAsync(val);
+                InputValue = val;
 
                 if (OnInput.HasDelegate)
                 {
-                    await OnInput.InvokeAsync(InternalValue);
+                    await OnInput.InvokeAsync(val);
                 }
             }
             else
             {
-                _badInput = args.Value.ToString();
+                _badInput = val.ToString();
+            }
+        }
+
+        private bool _compositionInputting;
+
+        public Task OnCompositionStart()
+        {
+            _compositionInputting = true;
+            return Task.CompletedTask;
+        }
+
+        public Task OnCompositionEnd()
+        {
+            _compositionInputting = false;
+            return Task.CompletedTask;
+        }
+
+        public async Task TextFieldDebounceTimerRun()
+        {
+            if (!_compositionInputting)
+            {
+                await SetInternalValueAsync(InputValue);
+
+                StateHasChanged();
+            }
+        }
+
+        private Task<TValue> CheckNumberValidate()
+        {
+            if (Type == "number" && BindConverter.TryConvertToDecimal(NumberValue, System.Globalization.CultureInfo.InvariantCulture, out var value))
+            {
+                TValue returnValue;
+
+                if (Props.Min != null && value < Props.Min && BindConverter.TryConvertTo<TValue>(Props.Min.ToString(), System.Globalization.CultureInfo.InvariantCulture, out returnValue))
+                    return Task.FromResult(returnValue);
+                else if (Props.Max != null && value > Props.Max && BindConverter.TryConvertTo<TValue>(Props.Max.ToString(), System.Globalization.CultureInfo.InvariantCulture, out returnValue))
+                    return Task.FromResult(returnValue);
             }
 
-            _shouldRender = true;
-            StateHasChanged();
+            return Task.FromResult(InternalValue);
+        }
+
+        public async Task HandleOnKeyUpAsync(KeyboardEventArgs args)
+        {
+            if (OnKeyUp.HasDelegate)
+                await OnKeyUp.InvokeAsync();
+        }
+
+        public async Task HandleOnNumberUpClickAsync(MouseEventArgs args)
+        {
+            if (UpButtonEnabled && BindConverter.TryConvertToDecimal(NumberValue, System.Globalization.CultureInfo.InvariantCulture, out decimal value))
+            {
+                if (Props.Min != null && value < Props.Min)
+                {
+                    value = Props.Min.Value;
+                }
+
+                value += Props.Step;
+
+                if (Props.Max != null && value > Props.Max)
+                {
+                    value = Props.Max.Value;
+                }
+
+                if (BindConverter.TryConvertTo<TValue>(value.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var internalValue))
+                {
+                    await SetInternalValueAsync(internalValue);
+                }
+            }
+
+            await InputElement.FocusAsync();
+        }
+        public async Task HandleOnNumberDownClickAsync(MouseEventArgs args)
+        {
+            if (DownButtonEnabled && BindConverter.TryConvertToDecimal(NumberValue, System.Globalization.CultureInfo.InvariantCulture, out var value))
+            {
+                if (Props.Max != null && value > Props.Max)
+                {
+                    value = Props.Max.Value;
+                }
+
+                value -= Props.Step;
+
+                if (Props.Min != null && value < Props.Min)
+                {
+                    value = Props.Min.Value;
+                }
+
+                if (BindConverter.TryConvertTo<TValue>(value.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var internalValue))
+                {
+                    await SetInternalValueAsync(internalValue);
+                }
+            }
+
+            await InputElement.FocusAsync();
         }
 
         protected override bool ShouldRender()
@@ -565,6 +768,16 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
+            await Task.Yield();
+
+            if (args.Key == "Enter")
+            {
+                await ChangeValue(true);
+            }
+            else
+            {
+                await ChangeValue();
+            }
 
             if (OnKeyDown.HasDelegate)
             {
@@ -574,12 +787,15 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
-            await SetInternalValueAsync(default);
-
             if (OnClearClick.HasDelegate)
             {
                 await OnClearClick.InvokeAsync(args);
             }
+
+            // whether to need NextTick?
+            await SetInternalValueAsync(default);
+
+            await InputElement.FocusAsync();
         }
     }
 }

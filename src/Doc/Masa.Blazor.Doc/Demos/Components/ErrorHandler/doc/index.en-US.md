@@ -1,9 +1,11 @@
 ---
 category: Components
 type: ErrorHandler
-title: ErrorHandler
+title: Error handler
 cols: 1
 ---
+
+The `MErrorHandler` component is used to handle exception information when the `blazor` component data is loaded and rendered.
 
 ## API
 

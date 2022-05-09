@@ -72,7 +72,7 @@ namespace Masa.Blazor
                     attrs[nameof(MSimpleCheckbox.Ripple)] = false;
                     if (attrs.Data is TItem item)
                     {
-                        attrs[nameof(MSimpleCheckbox.OnInput)] = CreateEventCallback<bool>(async _ =>
+                        attrs[nameof(MSimpleCheckbox.ValueChanged)] = CreateEventCallback<bool>(async _ =>
                         {
                             if (OnSelect.HasDelegate)
                             {

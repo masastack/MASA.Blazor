@@ -35,6 +35,11 @@
       "Description": "Applies the dark theme variant to the component."
     },
     {
+      "Name": "DebounceMilliseconds",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
       "Name": "Dense",
       "Type": "Boolean",
       "Default": "false",
@@ -152,6 +157,11 @@
       "Name": "SuccessMessages",
       "Type": "List<String>",
       "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "TextColor",
+      "Type": "String",
       "Description": ""
     },
     {

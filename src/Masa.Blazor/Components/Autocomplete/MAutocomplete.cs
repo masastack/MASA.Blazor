@@ -44,6 +44,8 @@ namespace Masa.Blazor
 
         protected override IList<TItem> ComputedItems => FilteredItems;
 
+        public override Action<TextFieldNumberProperty> NumberProps { get; set; }
+
         protected IList<TItemValue> SelectedValues
         {
             get
@@ -173,10 +175,16 @@ namespace Masa.Blazor
             InternalSearch = null;
         }
 
-        public override async Task HandleOnBlurAsync(FocusEventArgs args)
+        protected override void WatchIsMenuActive(bool val)
         {
-            InternalSearch = null;
-            await base.HandleOnBlurAsync(args);
+            if (val)
+            {
+            }
+            else
+            {
+                InternalSearch = null;
+                StateHasChanged();
+            }
         }
 
         public override async Task HandleOnInputAsync(ChangeEventArgs args)

@@ -1,0 +1,41 @@
+﻿@using Masa.Blazor.Popup.Components;
+@namespace Masa.Blazor.Presets
+@inherits AlertingPopupComponentBase 
+
+<MSnackbar @bind-Value="@Config.Visible"
+           Color="@Config.Color"
+           Dark="@IsDark"
+           Light="@(!IsDark)"
+           Timeout="@Config.Duration.Value"
+           OnClosed="HandleOnClose">
+    <ChildContent>
+        <div class="d-flex m-toast-item">
+            @if (!string.IsNullOrEmpty(ComputedIcon))
+            {
+                <MIcon Color="@ComputedIconColor" Class="mr-2">@ComputedIcon</MIcon>
+            }
+
+            <div>
+                <div class="m-toast-text m-toast-title">
+                    @Config.Title
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(Config.Content))
+                {
+                    <div class="m-toast-text m-toast-detail">
+                        @Config.Content
+                    </div>
+                }
+            </div>
+        </div>
+    </ChildContent>
+    <ActionContent>
+        @if (@Config.ActionContent != null)
+        {
+            @Config.ActionContent
+        }
+        <MButton Icon OnClick="HandleOnClose">
+            <MIcon>@Config.CloseIcon</MIcon>
+        </MButton>
+    </ActionContent>
+</MSnackbar>

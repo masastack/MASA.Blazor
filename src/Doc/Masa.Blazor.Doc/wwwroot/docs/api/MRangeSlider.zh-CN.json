@@ -36,6 +36,11 @@
       "Description": "将暗色主题变量应用到组件。"
     },
     {
+      "Name": "DebounceMilliseconds",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
       "Name": "Dense",
       "Type": "Boolean",
       "Default": "false",
@@ -183,6 +188,11 @@
       "Name": "SuccessMessages",
       "Type": "List<String>",
       "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "TextColor",
+      "Type": "String",
       "Description": ""
     },
     {

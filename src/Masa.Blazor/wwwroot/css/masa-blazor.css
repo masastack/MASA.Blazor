@@ -3169,7 +3169,7 @@ button,
 html [type=button],
 [type=reset],
 [type=submit] {
-    -webkit-appearance: button;
+    -webkit-appearance: none;
     /* Correct the inability to style clickable types in iOS */
 }
 
@@ -29575,14 +29575,3 @@ html.overflow-y-hidden {
     position: absolute;
     right: 0;
 }
-
-.m-uploadImage {
-    cursor: pointer;
-}
-.m-uploadImage input[type=file] {
-    opacity: 0;
-    pointer-events: none;
-    width: 0;
-    max-width: 0;
-}
-

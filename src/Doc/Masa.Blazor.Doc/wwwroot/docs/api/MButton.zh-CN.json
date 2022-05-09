@@ -2,7 +2,8 @@
   "Title": "MButton",
   "Components": [
     "Buttons",
-    "Button Groups"
+    "Button Groups",
+    "Floating Action Buttons"
   ],
   "Props": [
     {
@@ -108,6 +109,11 @@
       "Description": ""
     },
     {
+      "Name": "Key",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "Large",
       "Type": "Boolean",
       "Default": "false",
@@ -195,6 +201,11 @@
       "Name": "Shaped",
       "Type": "Boolean",
       "Default": "false",
+      "Description": ""
+    },
+    {
+      "Name": "Show",
+      "Type": "Nullable<Boolean>",
       "Description": ""
     },
     {

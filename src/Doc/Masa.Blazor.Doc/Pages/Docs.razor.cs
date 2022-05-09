@@ -41,7 +41,8 @@ namespace Masa.Blazor.Doc.Pages
             {
                 var menus = await Service.GetMenuAsync();
                 var current = menus.FirstOrDefault(x => x.Url == Category);
-                if (current == null) throw new Exception("No page matched.");
+                if (current == null)
+                    throw new HttpRequestException("No page matched", new Exception("No page matched"), System.Net.HttpStatusCode.NotFound);
 
                 NavigationManager.NavigateTo(current.Children[0].Url);
             }
