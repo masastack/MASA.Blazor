@@ -188,16 +188,12 @@ namespace Masa.Blazor
         {
             base.OnAfterRender(firstRender);
 
-            if (Menu is not null && InputSlotAttrs.Keys.Count == 0)
+            if (MMenu is not null && InputSlotAttrs.Keys.Count == 0)
             {
-                var menu = (Menu as MMenu);
-                if (menu is not null)
-                {
-                    InputSlotAttrs = menu.ActivatorAttributes;
-                    menu.CloseConditional = CloseConditional;
-                    menu.Handler = Handler;
-                    StateHasChanged();
-                }
+                InputSlotAttrs = MMenu.ActivatorAttributes;
+                MMenu.CloseConditional = CloseConditional;
+                MMenu.Handler = Handler;
+                StateHasChanged();
             }
         }
 
@@ -221,15 +217,19 @@ namespace Masa.Blazor
             return !contains;
         }
 
-        private Task Handler()
+        private async Task Handler()
         {
             IsMenuActive = false;
             IsFocused = false;
             // TODO: selectedIndex = -1
             // TODO: setMenuIndex(-1)
 
+            if (OnBlur.HasDelegate)
+            {
+                await OnBlur.InvokeAsync();
+            }
+
             StateHasChanged();
-            return Task.CompletedTask;
         }
 
         protected override void SetComponentClass()
@@ -436,12 +436,11 @@ namespace Masa.Blazor
             SelectedIndex = index;
         }
 
-        public override async Task HandleOnBlurAsync(FocusEventArgs args)
+        public override Task HandleOnBlurAsync(FocusEventArgs args)
         {
-            if (OnBlur.HasDelegate)
-            {
-                await OnBlur.InvokeAsync(args);
-            }
+            // blur event(OnBlur) should be invoked when isFocused is false(see Handler func).
+            // so there is nothing to do.
+            return Task.CompletedTask;
         }
 
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)
