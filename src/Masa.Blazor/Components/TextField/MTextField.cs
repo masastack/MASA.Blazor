@@ -291,7 +291,7 @@ namespace Masa.Blazor
 
         public ElementReference PrependInnerElement { get; set; }
 
-        protected virtual Dictionary<string, object> InputSlotAttrs { get; } = new();
+        protected virtual Dictionary<string, object> InputSlotAttrs { get; set; } = new();
 
         bool ITextField<TValue>.IsDirty => IsDirty;
 
@@ -787,12 +787,15 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
-            await SetInternalValueAsync(default);
-
             if (OnClearClick.HasDelegate)
             {
                 await OnClearClick.InvokeAsync(args);
             }
+
+            // whether to need NextTick?
+            await SetInternalValueAsync(default);
+
+            await InputElement.FocusAsync();
         }
     }
 }
