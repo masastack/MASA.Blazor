@@ -35,6 +35,11 @@
       "Description": ""
     },
     {
+      "Name": "ImageClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "MaximumFileCount",
       "Type": "Int32",
       "Description": ""
@@ -72,6 +77,11 @@
     {
       "Name": "Value",
       "Type": "List<String>",
+      "Description": ""
+    },
+    {
+      "Name": "WhenFileChangeUpload",
+      "Type": "Boolean",
       "Description": ""
     }
   ],
