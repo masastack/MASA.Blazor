@@ -46,11 +46,15 @@ namespace Masa.Blazor.Doc.Pages
 
             Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
             _demoComponent = await Service.GetStyleAsync(Name);
+            if (_demoComponent is null)
+                this.ThrowNotFoundException($"Style name:{Name} not found");
 
             var demos = _demoComponent.DemoList?
                 .Where(x => !x.Debug && !x.Docs.HasValue)
                 .OrderBy(x => x.Order)
                 .ThenBy(r => r.Name) ?? Enumerable.Empty<DemoItemModel>();
+            if (demos is null)
+                this.ThrowNotFoundException($"Style name:{Name} demoList not found");
 
             Usage = demos.FirstOrDefault(demo => demo.Group == DemoGroup.Usage);
             PropsList = demos.Where(demo => demo.Group == DemoGroup.Props).ToList();

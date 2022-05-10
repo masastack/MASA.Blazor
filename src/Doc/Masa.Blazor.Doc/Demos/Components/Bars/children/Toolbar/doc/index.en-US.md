@@ -18,7 +18,7 @@ navigation. The toolbar component works great in conjunction with [**MNavigation
 - [MToolbarItems](/api/MToolbarItems)
 - [MToolbarTitle](/api/MToolbarTitle)
 
-## зЂвт
+## Caveats
 
 <!--alert:warning-->
 When 'MButton' with 'icon' prop is used inside 'MToolbar' and 'MAppbar', they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.

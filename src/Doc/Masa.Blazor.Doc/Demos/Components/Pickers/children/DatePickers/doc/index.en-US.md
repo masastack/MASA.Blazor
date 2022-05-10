@@ -16,7 +16,7 @@ MDatePicker is a fully featured date selection component that lets users select 
 
 - [MDatePicker](/api/MDatePicker)
 
-## ×¢Òâ
+## Caveats
 
 <!--alert:warning--> 
 `Mdatepicker ` accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]£¨ https://www.iso.org/standards.html £©Official website.
