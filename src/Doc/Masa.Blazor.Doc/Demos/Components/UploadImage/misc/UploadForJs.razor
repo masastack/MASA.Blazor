@@ -21,17 +21,4 @@
 
 @code {
     public List<string> ImageUrls { get; set; } = new();
-
-    public async Task<List<string>> Upload(IReadOnlyList<IBrowserFile> files)
-    {
-        var imageUrls = new List<string>();
-        foreach (var file in files)
-        {
-            var buffers = new byte[file.Size];
-            await file.OpenReadStream().ReadAsync(buffers);
-            imageUrls.Add($"data:{file.ContentType};base64,{Convert.ToBase64String(buffers)}");
-        }
-
-        return imageUrls;
-    }
 }
