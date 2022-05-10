@@ -21,7 +21,7 @@ The MCard component is a versatile component that can be used for anything from 
 - [MCardTitle](/api/MCardTitle)
 
 
-## 功能组件
+## SubComponents
 
 - `MCardActions`:A container used to place actions for cards, such as [MButton] (/components/buttons) or [MMenu] (/components/menu). Use a special margin on the button at the same time
 So that they match other card content areas.
