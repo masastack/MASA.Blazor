@@ -445,11 +445,6 @@ namespace Masa.Blazor
 
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
-            if (OnClearClick.HasDelegate)
-            {
-                await OnClearClick.InvokeAsync(args);
-            }
-
             if (Multiple)
             {
                 IList<TItemValue> values = new List<TItemValue>();
@@ -458,6 +453,11 @@ namespace Masa.Blazor
             else
             {
                 await SetInternalValueAsync(default);
+            }
+
+            if (OnClearClick.HasDelegate)
+            {
+                await OnClearClick.InvokeAsync(args);
             }
 
             // TODO: setMenuIndex(-1)

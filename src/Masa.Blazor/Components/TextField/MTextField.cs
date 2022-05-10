@@ -787,13 +787,12 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
+            await SetInternalValueAsync(default);
+
             if (OnClearClick.HasDelegate)
             {
                 await OnClearClick.InvokeAsync(args);
             }
-
-            // whether to need NextTick?
-            await SetInternalValueAsync(default);
 
             await InputElement.FocusAsync();
         }

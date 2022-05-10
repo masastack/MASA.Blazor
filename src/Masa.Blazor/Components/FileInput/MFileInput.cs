@@ -261,6 +261,11 @@ namespace Masa.Blazor
             {
                 await SetInternalValueAsync(default);
             }
+
+            if (OnClearClick.HasDelegate)
+            {
+                await OnClearClick.InvokeAsync(args);
+            }
         }
     }
 }
