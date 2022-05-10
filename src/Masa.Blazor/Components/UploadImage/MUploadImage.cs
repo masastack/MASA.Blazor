@@ -2,13 +2,6 @@
 {
     public class MUploadImage : BUploadImage
     {
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            DefaultImageUrl = "./_content/Masa.Blazor/images/upload/defaultImage.png";
-        }
-
         protected override void SetComponentClass()
         {
             CssProvider

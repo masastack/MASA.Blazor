@@ -634,6 +634,11 @@
   "Demos.Components.Treeview.misc.SearchAndFilter",
   "Demos.Components.Treeview.misc.SelectableIcons",
   "Demos.Components.UploadImage.usage.Index",
+  "Demos.Components.UploadImage.props.DefaultImage",
+  "Demos.Components.UploadImage.props.Multiple",
+  "Demos.Components.UploadImage.misc.UploadForJs",
+  "Demos.Components.UploadImage.misc.UploadForServer",
+  "Demos.Components.UploadImage.misc.WhenFileChangeUpload",
   "Demos.Components.VirtualScroll.props.Bench",
   "Demos.Components.VirtualScroll.misc.UserDirectory"
 ]

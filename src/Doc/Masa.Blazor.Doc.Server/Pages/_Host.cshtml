@@ -104,6 +104,17 @@
                 return 'en';
             }
 
+            window.uploadImages = async function(imageFiles){
+                const imageUrls = [];
+                for (var imageFile of imageFiles) {
+                    const arrayBuffer = await imageFile.arrayBuffer();
+                    const blob = new Blob([arrayBuffer]);
+                    const url = URL.createObjectURL(blob);
+                    imageUrls.push(url);
+                }
+                return imageUrls;
+            };
+
             docsearch({
                 container: '#docsearch',
                 appId: 'TSB4MACWRC',
@@ -113,10 +124,8 @@
                 //searchParameters: {
                 //    facetFilters: ['language:'+ getCurrentDocSearchLanguage()]
                 //}
-            });
+            });           
         })
-
-
     </script>
 </body>
 </html>

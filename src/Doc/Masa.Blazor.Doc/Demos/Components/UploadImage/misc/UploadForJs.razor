@@ -1,0 +1,37 @@
+﻿<MUploadImage @bind-Value="ImageUrls" WhenFileChangeUpload OnInputFileUpload="@("uploadImages")" />
+<div class="mt-12">
+    @foreach (var imageUrl in ImageUrls)
+    {
+        <img src="@imageUrl" height=100 width=100 />
+    }
+</div>
+
+@*<script>
+    async function uploadImages(imageFiles){
+        const imageUrls = [];
+        for (var imageFile of imageFiles) {
+            const arrayBuffer = await imageFile.arrayBuffer();
+            const blob = new Blob([arrayBuffer]);
+            const url = URL.createObjectURL(blob);
+            imageUrls.push(url);
+        }
+        return imageUrls;
+    }
+</script>*@
+
+@code {
+    public List<string> ImageUrls { get; set; } = new();
+
+    public async Task<List<string>> Upload(IReadOnlyList<IBrowserFile> files)
+    {
+        var imageUrls = new List<string>();
+        foreach (var file in files)
+        {
+            var buffers = new byte[file.Size];
+            await file.OpenReadStream().ReadAsync(buffers);
+            imageUrls.Add($"data:{file.ContentType};base64,{Convert.ToBase64String(buffers)}");
+        }
+
+        return imageUrls;
+    }
+}

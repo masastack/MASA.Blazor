@@ -10,7 +10,7 @@ related:
  - /components/dialogs
 ---
 
-UploadImage .
+支持js和服务端两种图片上传模式。
 
 ## API
 

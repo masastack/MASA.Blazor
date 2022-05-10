@@ -5,12 +5,27 @@
   ],
   "Props": [
     {
+      "Name": "Accept",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Capture",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "Class",
       "Type": "String",
       "Description": "应用到组件最外层元素的class"
     },
     {
-      "Name": "DefaultImageUrl",
+      "Name": "DefaultImage",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Icon",
       "Type": "String",
       "Description": ""
     },
@@ -30,6 +45,16 @@
       "Description": ""
     },
     {
+      "Name": "OnInputFileChanged",
+      "Type": "FileChangeCallBack",
+      "Description": ""
+    },
+    {
+      "Name": "OnInputFileUpload",
+      "Type": "FileUploadCallBack",
+      "Description": ""
+    },
+    {
       "Name": "PreviewImageHeight",
       "Type": "Int32",
       "Description": ""
@@ -43,6 +68,11 @@
       "Name": "Style",
       "Type": "String",
       "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "List<String>",
+      "Description": ""
     }
   ],
   "Contents": [
@@ -54,8 +84,8 @@
   ],
   "Events": [
     {
-      "Name": "OnChange",
-      "Type": "EventCallback<IReadOnlyList`1>",
+      "Name": "ValueChanged",
+      "Type": "EventCallback<List`1>",
       "Description": ""
     }
   ]

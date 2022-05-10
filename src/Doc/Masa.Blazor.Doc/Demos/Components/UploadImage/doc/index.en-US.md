@@ -9,7 +9,7 @@ related:
  - /components/dialogs
 ---
 
-UploadImage .
+Supports both js and server-side image upload modes.
 
 ## API
 
