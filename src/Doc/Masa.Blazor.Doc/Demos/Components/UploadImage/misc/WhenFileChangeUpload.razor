@@ -15,7 +15,9 @@
         foreach (var file in files)
         {
             var buffers = new byte[file.Size];
-            await file.OpenReadStream().ReadAsync(buffers);
+            var resizedImage = await file.RequestImageFileAsync(file.ContentType, 100, 100);
+            using var stream = resizedImage.OpenReadStream();
+            await stream.ReadAsync(buffers);
             imageUrls.Add($"data:{file.ContentType};base64,{Convert.ToBase64String(buffers)}");
         }
 
