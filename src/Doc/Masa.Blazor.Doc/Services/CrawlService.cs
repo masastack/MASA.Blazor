@@ -37,7 +37,9 @@ namespace Masa.Blazor.Doc.Services
 
         public async Task GetSitemap(HttpContext context)
         {
-            var host = $"{context.Request.Scheme}://{context.Request.Host.Value}";
+            var scheme = context.Request.IsHttps ? "https" : "http";
+
+            var host = $"{scheme}://{context.Request.Host.Value}";
 
             var menuList = await _demoService.GetMenuAsync();
 
