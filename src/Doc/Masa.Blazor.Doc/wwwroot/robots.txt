@@ -1,4 +1,6 @@
 ﻿User-Agent: *
+Allow: /
+Sitemap: "https://blazor.masastack.com/sitemap.xml"
 Disallow: /getting-started/getting-started/*
 Disallow: /introduction/introduction/*
 Disallow: /about/about/*
