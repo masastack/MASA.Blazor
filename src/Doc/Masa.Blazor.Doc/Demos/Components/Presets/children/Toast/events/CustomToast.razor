@@ -19,7 +19,7 @@
         return PopupService.ToastInfoAsync("View button click");
     }
 
-    private Task AddToast()
+    private async Task AddToast()
     {
         var now = DateTime.Now.ToString("HH:mm:ss.fff");
         var alertType = random.NextInt64(0, 5);
@@ -43,9 +43,7 @@
             OnClose = OnClose
         };
 
-        _toast.AddToast(config);
-
-        return Task.CompletedTask;
+        await _toast.AddToast(config);
     }
 
     private Task OnClose(string key)

@@ -12,7 +12,7 @@
 
     Random random = new Random();
 
-    private Task AddToast()
+    private async Task AddToast()
     {
         var now = DateTime.Now.ToString("HH:mm:ss.fff");
         var alertType = random.NextInt64(0, 5);
@@ -22,11 +22,10 @@
             Title = duration == 0? "Not auto close" : (duration == null? $"Auto close after 4000ms" : $"Auto close after {duration} ms"),
             Content = $"create time: {now}",
             Dark = dark == 0,
-            Type = (AlertTypes)alertType
+            Type = (AlertTypes)alertType,
+            Duration = duration
         };
 
-        _toast.AddToast(config);
-
-        return Task.CompletedTask;
+        await _toast.AddToast(config);
     }
 }
