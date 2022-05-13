@@ -227,7 +227,7 @@ namespace Masa.Blazor.Presets
             }
             else
             {
-                Value = false;
+                await InternalValueChanged(false);
             }
         }
 
