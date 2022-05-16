@@ -1,6 +1,6 @@
 [
   {
-    "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>、<strong>Info</strong>、<strong>Warning</strong> 和 <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays. Many parts of an alert such as <strong>Border</strong>, <strong>Icon</strong>, and <strong>Color</strong> can also be customized to fit almost any situation.</p>\n",
+    "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>,<strong>Info</strong>,<strong>Warning</strong>, and <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays. Many parts of an alert such as <strong>Border</strong>, <strong>Icon</strong>, and <strong>Color</strong> can also be customized to fit almost any situation.</p>\n",
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
@@ -480,8 +480,8 @@
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAppBar\">MAppBar</a></li>\n<li><a href=\"/api/MAppBarNavIcon\">MAppBarNavIcon</a></li>\n<li><a href=\"/api/MAppBarTitle\">MAppBarTitle</a></li>\n</ul>\n",
-      "�������": "\n<ul>\n<li><code>MAppBarNavIcon</code>��A stylized icon button component created specifically for use with [MToolbar] (/components/toolbars) and 'MAppBar'. The hamburger menu is displayed on the left side of the toolbar, which is usually used to control the status of the navigation drawer. The default slot can be used to customize the icons and functions of this component.</li>\n<li><code>MAppBarTitle</code>��The modified [MToolbarTitle] (/components/toolbars) component is used in conjunction with the * * shrinkonscroll * * attribute. On the small screen, * * MToolbarTitle**\nWill be truncated, but this component uses absolute positioning when expanding to make its contents visible. We do not recommend that you use the 'MAppbarTitle' component without using the * * shrinkonscroll * * attribute. It's really because the resize event was added to this component and a lot of additional calculations were done.</li>\n</ul>\n",
-      "ע������": "\n<!--alert:warning-->\n<p>When 'MButton' with <strong>icon</strong> attribute is used inside 'MToolbar' and 'MAppbar', they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap the buttons in any container, such as' div ', you need to apply a negative margin to the container in order to align them correctly.</p>\n<!--/alert:warning-->\n"
+      "SubComponents": "\n<ul>\n<li><code>MAppBarNavIcon</code>：A stylized icon button component created specifically for use with <a href=\"/components/toolbars\">MToolbar</a> and <code>MAppBar</code>. The hamburger menu is displayed on the left side of the toolbar, which is usually used to control the status of the navigation drawer. The default slot can be used to customize the icons and functions of this component.</li>\n<li><code>MAppBarTitle</code>：The modified <a href=\"/components/toolbars\">MToolbarTitle</a> component is used in conjunction with the <strong>shrinkonscroll</strong> attribute. On the small screen, <strong>MToolbarTitle</strong>\nWill be truncated, but this component uses absolute positioning when expanding to make its contents visible. We do not recommend that you use the <code>MAppbarTitle</code> component without using the <strong>shrinkonscroll</strong> attribute. It's really because the resize event was added to this component and a lot of additional calculations were done.</li>\n</ul>\n",
+      "Caveats": "\n<!--alert:warning-->\n<p>When <code>MButton</code> with <strong>icon</strong> attribute is used inside <code>MToolbar</code> and <code>MAppbar</code>, they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap the buttons in any container, such as <code>div</code>, you need to apply a negative margin to the container in order to align them correctly.</p>\n<!--/alert:warning-->\n"
     },
     "LastWriteTime": "2022-03-17T11:19:27.7370217+08:00",
     "DemoList": [
@@ -711,7 +711,7 @@
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
-      "ע��": "\n<!--alert:warning-->\n<p>When 'MButton' with 'icon' prop is used inside 'MToolbar' and 'MAppbar', they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap your buttons in any container, such as' div ', you need to apply a negative margin to the container for proper alignment.</p>\n<!--/alert:warning-->\n"
+      "Caveats": "\n<!--alert:warning-->\n<p>When 'MButton' with 'icon' prop is used inside 'MToolbar' and 'MAppbar', they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap your buttons in any container, such as' div ', you need to apply a negative margin to the container for proper alignment.</p>\n<!--/alert:warning-->\n"
     },
     "LastWriteTime": "2022-03-17T11:19:27.743962+08:00",
     "DemoList": [
@@ -1250,7 +1250,7 @@
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
-      "�������": "\n<ul>\n<li><code>MCardActions</code>:A container used to place actions for cards, such as [MButton] (/components/buttons) or [MMenu] (/components/menu). Use a special margin on the button at the same time\nSo that they match other card content areas.</li>\n<li><code>MCardSubtitle</code>:Provide default <strong>font size</strong> and <strong>fill</strong> for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n<li><code>MCardText</code>:It is mainly used for <strong>text content</strong> in cards. Apply padding to the text and reduce its font size to. 875rem.</li>\n<li><code>MCardTitle</code>:Provide default font size and padding for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n</ul>\n"
+      "SubComponents": "\n<ul>\n<li><code>MCardActions</code>:A container used to place actions for cards, such as [MButton] (/components/buttons) or [MMenu] (/components/menu). Use a special margin on the button at the same time\nSo that they match other card content areas.</li>\n<li><code>MCardSubtitle</code>:Provide default <strong>font size</strong> and <strong>fill</strong> for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n<li><code>MCardText</code>:It is mainly used for <strong>text content</strong> in cards. Apply padding to the text and reduce its font size to. 875rem.</li>\n<li><code>MCardTitle</code>:Provide default font size and padding for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n</ul>\n"
     },
     "LastWriteTime": "2022-03-17T11:19:27.75841+08:00",
     "DemoList": [
@@ -1985,6 +1985,7 @@
     "FullTitle": "Editor"
   },
   {
+    "Desc": "<p>The <code>MErrorHandler</code> component is used to handle exception information when the <code>blazor</code> component data is loaded and rendered.</p>\n",
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MErrorHandler\">MErrorHandler</a></li>\n</ul>\n"
@@ -1995,7 +1996,7 @@
         "Order": 0,
         "Name": "index",
         "Title": "Error handler",
-        "Description": "<p>Uniform exception handling.</p>\n",
+        "Description": "<p>Exception unified handling:</p>\n<ol>\n<li>Exceptions in the life cycle of <code>balzor</code> cannot be handled, and are directly passed to <code>ErrorBoundry</code> for processing;</li>\n<li>Exceptions generated by non-MASA Blazor components cannot be handled and are directly passed to <code>ErrorBoundry</code> for processing;</li>\n<li>Exceptions generated by non-lifecycle methods of MASA Blazor components can be handled. By default, <code>Exception.Message</code> is displayed. You can also configure other options to display exception stack or customize exception handling.</li>\n</ol>\n",
         "Code": "<MErrorHandler>\r\n    <MButton @onclick=\"BtnClick\">Throw test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
         "Type": "Demos.Components.ErrorHandler.usage.Index",
         "Style": "",
@@ -2007,7 +2008,7 @@
         "Name": "onErrorHandleAsync",
         "Title": "OnErrorHandleAsync",
         "Description": "<p>Custom exception handling <code>Func&lt;Exception, Task &gt;</code>, after clicking the button triggers the exception, the button background color changes to red and the text color changes to white.</p>\n",
-        "Code": "<MErrorHandler OnErrorHandleAsync=\"CustomErrorHandleAsync\">\r\n    <MButton @onclick=\"BtnClick\" Class=\"@colorClass\">Custom handler exception test</MButton>\r\n    <MButton @onclick=\"BtnReset\">Reset</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private string colorClass= \"white black--text\";\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n\r\n    private void BtnReset()\r\n    {\r\n        colorClass= \"white black--text\";\r\n    }\r\n\r\n    private async Task CustomErrorHandleAsync(Exception exception)\r\n    {\r\n        //todo\r\n        colorClass = \"red white--text\";\r\n        await Task.CompletedTask;\r\n    }\r\n}",
+        "Code": "<MErrorHandler OnErrorHandleAsync=\"CustomErrorHandleAsync\">   \r\n    <MButton OnClick=\"BtnClick\" Class=\"@colorClass\">Custom handler exception test</MButton>\r\n    <MButton OnClick=\"BtnReset\">Reset</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private string colorClass= \"white black--text\";\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n\r\n    private void BtnReset()\r\n    {\r\n        colorClass= \"white black--text\";\r\n    }\r\n\r\n    private async Task CustomErrorHandleAsync(Exception exception)\r\n    {\r\n        //todo\r\n        colorClass = \"red white--text\";\r\n        StateHasChanged();\r\n        await Task.CompletedTask;\r\n    }\r\n}",
         "Type": "Demos.Components.ErrorHandler.props.OnErrorHandleAsync",
         "Style": "",
         "Debug": false,
@@ -2017,8 +2018,8 @@
         "Order": 0,
         "Name": "showAlert",
         "Title": "ShowAlert",
-        "Description": "<p><code>true</code> is displayed, <code>false</code> is not displayed, and the default is displayed</p>\n",
-        "Code": "<MSwitch @bind-Value=\"_isShow\" Label=\"@($\"Show: {_isShow}\")\"></MSwitch>\r\n<MErrorHandler ShowAlert=\"_isShow\">\r\n    <MButton @onclick=\"BtnClick\">Throw test</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private bool _isShow = true;\r\n\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"throw error!\");\r\n    }\r\n}",
+        "Description": "<p><code>true</code> displays the error message and retains the content of the form currently filled in, <code>false</code> does not display the error, and passes the exception up to ErrorBoundry to handle the error;\nIf an error occurs during the life cycle loading process, whether the current razor is included in the upper-level Error handler:</p>\n<ol>\n<li>If included, the exception will be displayed first, and the current page content will be rendered as the default ErrorBoundry error handling content;</li>\n<li>Not included, the direct content of the current page is rendered as the default ErrorBoundry error handling content;</li>\n</ol>\n",
+        "Code": "<MErrorHandler ShowAlert=_isShow>\r\n    <MSwitch @bind-Value=\"_isShow\" Label=\"@($\"Show: {_isShow}\")\"></MSwitch>\r\n    <MTextField Label=\"Input a num\" Value=\"num\" />\r\n    <MButton OnClick=\"BtnClick\">Normal error</MButton>\r\n    <MButton OnClick=\"BtnClickLifeCycle\">Life cycle error</MButton>\r\n</MErrorHandler>\r\n@code\r\n{\r\n    private bool _isShow = true;\r\n    private int num = 1;\r\n\r\n    private void BtnClick()\r\n    {\r\n        throw new Exception(\"BtnClickThrow Error!\");\r\n    }\r\n\r\n    private void BtnClickLifeCycle()\r\n    {\r\n        num = 0;\r\n    }\r\n\r\n    protected override void OnAfterRender(bool firstRender)\r\n    {\r\n        num /= num;\r\n    }\r\n}",
         "Type": "Demos.Components.ErrorHandler.props.ShowAlert",
         "Style": "",
         "Debug": false,
@@ -5755,7 +5756,7 @@
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
-      "ע��": "\n<!--alert:warning--> \n<p><code>Mdatepicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
+      "Caveats": "\n<!--alert:warning--> \n<p><code>Mdatepicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
     },
     "LastWriteTime": "2022-03-17T11:19:27.8804476+08:00",
     "DemoList": [
@@ -5998,7 +5999,7 @@
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
-      "ע��": "\n<!--alert:warning--> \n<p><code>MDatePicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
+      "Caveats": "\n<!--alert:warning--> \n<p><code>MDatePicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
     },
     "LastWriteTime": "2022-03-17T11:19:27.8848841+08:00",
     "DemoList": [
@@ -6804,10 +6805,10 @@
     "FullTitle": "Popup service"
   },
   {
-    "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>��<strong>Info</strong>��<strong>Warning</strong> �� <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays and also can customized content to fit almost any situation.</p>\n",
+    "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>,<strong>Info</strong>,<strong>Warning</strong>, and <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays and also can customized content to fit almost any situation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-28T15:17:27.2034459+08:00",
+    "LastWriteTime": "2022-05-05T10:04:12.7701218+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6825,7 +6826,7 @@
         "Name": "duration",
         "Title": "Duration (default 4000ms)",
         "Description": "",
-        "Code": "<PToast @ref=\"_toast\" Duration=\"duration\">\r\n</PToast>\r\n\r\n<MTextField Type=\"number\" @bind-Value=\"duration\" NumberProps=\"props=> { props.Min=0; props.Step=1000; }\"></MTextField>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int? duration;\r\n\r\n    Random random = new Random();\r\n\r\n    private Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = duration == 0? \"Not auto close\" : (duration == null? $\"Auto close after 4000ms\" : $\"Auto close after {duration} ms\"),\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType\r\n        };\r\n\r\n        _toast.AddToast(config);\r\n\r\n        return Task.CompletedTask;\r\n    }\r\n}",
+        "Code": "<PToast @ref=\"_toast\" Duration=\"duration\">\r\n</PToast>\r\n\r\n<MTextField Type=\"number\" @bind-Value=\"duration\" NumberProps=\"props=> { props.Min=0; props.Step=1000; }\"></MTextField>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int? duration;\r\n\r\n    Random random = new Random();\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = duration == 0? \"Not auto close\" : (duration == null? $\"Auto close after 4000ms\" : $\"Auto close after {duration} ms\"),\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n            Duration = duration\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n}",
         "Type": "Demos.Components.Presets.children.Toast.props.Duration",
         "Style": "",
         "Debug": false,
@@ -6836,7 +6837,7 @@
         "Name": "maxCount",
         "Title": "MaxCount",
         "Description": "",
-        "Code": "<PToast @ref=\"_toast\" MaxCount=\"maxCount\">\r\n</PToast>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int maxCount = 5;\r\n\r\n    Random random = new Random();\r\n\r\n    private Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Only Show {maxCount} Toast\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n        };\r\n\r\n        _toast.AddToast(config);\r\n\r\n        return Task.CompletedTask;\r\n    }\r\n}",
+        "Code": "<PToast @ref=\"_toast\" MaxCount=\"maxCount\">\r\n</PToast>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int maxCount = 5;\r\n\r\n    Random random = new Random();\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Only Show {maxCount} Toast\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n}",
         "Type": "Demos.Components.Presets.children.Toast.props.MaxCount",
         "Style": "",
         "Debug": false,
@@ -6847,7 +6848,7 @@
         "Name": "position",
         "Title": "Toast Position",
         "Description": "",
-        "Code": "<PToast @ref=\"_toast\" Position=\"position\">\r\n</PToast>\r\n\r\n<MRadioGroup Value=\"position\" TValue=\"ToastPosition\" Row ValueChanged=\"OnChangePosition\">\r\n    <MRadio Value=\"ToastPosition.TopLeft\" Label=\"Top Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.TopRight\" Label=\"Top Right\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomLeft\" Label=\"Bottom Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomRight\" Label=\"Bottom Right\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int maxCount = 5;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    Random random = new Random();\r\n\r\n    private Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Show on {position.ToString()}\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n        };\r\n\r\n        _toast.AddToast(config);\r\n\r\n        return Task.CompletedTask;\r\n    }\r\n\r\n    private Task OnChangePosition(ToastPosition position)\r\n    {\r\n        this.position = position;\r\n        return Task.CompletedTask;\r\n    }\r\n}",
+        "Code": "<PToast @ref=\"_toast\" Position=\"position\">\r\n</PToast>\r\n\r\n<MRadioGroup Value=\"position\" TValue=\"ToastPosition\" Row ValueChanged=\"OnChangePosition\">\r\n    <MRadio Value=\"ToastPosition.TopLeft\" Label=\"Top Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.TopRight\" Label=\"Top Right\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomLeft\" Label=\"Bottom Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomRight\" Label=\"Bottom Right\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int maxCount = 5;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    Random random = new Random();\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Show on {position.ToString()}\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n\r\n    private Task OnChangePosition(ToastPosition position)\r\n    {\r\n        this.position = position;\r\n        return Task.CompletedTask;\r\n    }\r\n}",
         "Type": "Demos.Components.Presets.children.Toast.props.Position",
         "Style": "",
         "Debug": false,
@@ -6858,7 +6859,7 @@
         "Name": "customToast",
         "Title": "Custom Toast content",
         "Description": "",
-        "Code": "@inject IPopupService PopupService\r\n\r\n<PToast @ref=\"_toast\" Position=\"position\" Duration=\"defaultDuration\">\r\n</PToast>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    private int defaultDuration = 5000;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    Random random = new Random();\r\n\r\n    private Task HandleOnView()\r\n    {\r\n        return PopupService.ToastInfoAsync(\"View button click\");\r\n    }\r\n\r\n    private Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var duration = random.NextInt64(1000, 5000);\r\n        var useParentDuration = random.NextInt64(0, 2);\r\n\r\n        RenderFragment customViewAction = (builder) =>\r\n        {\r\n            builder.AddContent(0, @<MButton OnClick=\"HandleOnView\" Text> View </MButton>);\r\n        };\r\n\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Auto close after {duration}ms\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n            Duration = useParentDuration == 0? null : (int)duration,\r\n            ActionContent = customViewAction,\r\n            OnClose = OnClose\r\n        };\r\n\r\n        _toast.AddToast(config);\r\n\r\n        return Task.CompletedTask;\r\n    }\r\n\r\n    private Task OnClose(string key)\r\n    {\r\n        Console.WriteLine($\"Close toast key: {key}\");\r\n        return Task.CompletedTask;\r\n    }\r\n}",
+        "Code": "@inject IPopupService PopupService\r\n\r\n<PToast @ref=\"_toast\" Position=\"position\" Duration=\"defaultDuration\">\r\n</PToast>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    private int defaultDuration = 5000;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    Random random = new Random();\r\n\r\n    private Task HandleOnView()\r\n    {\r\n        return PopupService.ToastInfoAsync(\"View button click\");\r\n    }\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var duration = random.NextInt64(1000, 5000);\r\n        var useParentDuration = random.NextInt64(0, 2);\r\n\r\n        RenderFragment customViewAction = (builder) =>\r\n        {\r\n            builder.AddContent(0, @<MButton OnClick=\"HandleOnView\" Text> View </MButton>);\r\n        };\r\n\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Auto close after {duration}ms\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n            Duration = useParentDuration == 0? null : (int)duration,\r\n            ActionContent = customViewAction,\r\n            OnClose = OnClose\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n\r\n    private Task OnClose(string key)\r\n    {\r\n        Console.WriteLine($\"Close toast key: {key}\");\r\n        return Task.CompletedTask;\r\n    }\r\n}",
         "Type": "Demos.Components.Presets.children.Toast.events.CustomToast",
         "Style": "",
         "Debug": false,
@@ -8373,7 +8374,7 @@
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
-      "ע��": "\n<!--alert:info-->\n<p>In order to correctly position 'MTooltip', a position support (<code>top</code> | 'bottom <code>|' left</code> | 'right') is required.</p>\n"
+      "Caveats": "\n<!--alert:info-->\n<p>In order to correctly position 'MTooltip', a position support (<code>top</code> | 'bottom <code>|' left</code> | 'right') is required.</p>\n"
     },
     "LastWriteTime": "2022-03-17T11:19:27.9491644+08:00",
     "DemoList": [

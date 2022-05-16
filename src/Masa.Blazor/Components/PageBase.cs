@@ -338,6 +338,8 @@ namespace Masa.Blazor
                 Task.CompletedTask;
         }
 
+        
+
         async Task IHandleAfterRender.OnAfterRenderAsync()
         {
             var firstRender = !_hasCalledOnAfterRender;

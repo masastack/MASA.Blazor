@@ -9,7 +9,7 @@
 </MNavigationDrawer>
 
 <MMain Class="mainlayout-m-main">
-    <ErrorBoundary @ref="_errorBoundary">
+    <MErrorHandler>        
         <ChildContent>
             @Body
         </ChildContent>
@@ -23,7 +23,6 @@
                 <Error></Error>
             }
         </ErrorContent>
-    </ErrorBoundary>
+    </MErrorHandler>
 </MMain>
-
 <Toc />

@@ -7,7 +7,7 @@ public static class StringExtensions
 {
     public static string HashSection(this string title)
     {
-        title = title.ToLower();
+        title = title.ToLower().Replace(" ", "-");
 
         if (new[] { "api", "caveats" }.Contains(title))
             return title;

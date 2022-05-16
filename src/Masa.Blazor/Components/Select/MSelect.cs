@@ -83,10 +83,7 @@ namespace Masa.Blazor
 
         object ISelect<TItem, TItemValue, TValue>.Menu
         {
-            set
-            {
-                Menu = value;
-            }
+            set => Menu = value;
         }
 
         IList<TItem> ISelect<TItem, TItemValue, TValue>.SelectedItems => SelectedItems;
@@ -97,13 +94,19 @@ namespace Masa.Blazor
 
         bool ISelect<TItem, TItemValue, TValue>.GetDisabled(TItem item) => GetDisabled(item);
 
-        protected bool IsMenuActive { get; set; }
+        protected bool IsMenuActive
+        {
+            get => GetValue<bool>();
+            set => SetValue(value);
+        }
 
         protected int SelectedIndex { get; set; } = -1;
 
         public override int DebounceMilliseconds { get; set; }
 
         protected object Menu { get; set; }
+
+        protected MMenu MMenu => Menu as MMenu;
 
         protected BMenuProps ComputedMenuProps { get; set; }
 
@@ -144,15 +147,10 @@ namespace Masa.Blazor
 
         protected virtual IList<TItem> SelectedItems
         {
-            get
-            {
-                return Items.Where(item => InternalValues.Contains(ItemValue(item))).ToList();
-            }
+            get { return Items.Where(item => InternalValues.Contains(ItemValue(item))).ToList(); }
         }
 
         protected virtual bool MenuCanShow => true;
-
-        protected override Dictionary<string, object> InputSlotAttrs => (Menu as MMenu)?.ActivatorAttributes;
 
         protected virtual BMenuProps GetDefaultMenuProps() => new()
         {
@@ -184,6 +182,54 @@ namespace Masa.Blazor
 
             ComputedMenuProps = GetDefaultMenuProps();
             MenuProps?.Invoke(ComputedMenuProps);
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+            if (MMenu is not null && InputSlotAttrs.Keys.Count == 0)
+            {
+                InputSlotAttrs = MMenu.ActivatorAttributes;
+                MMenu.CloseConditional = CloseConditional;
+                MMenu.Handler = Handler;
+                StateHasChanged();
+            }
+        }
+
+        protected override void OnWatcherInitialized()
+        {
+            base.OnWatcherInitialized();
+
+            Watcher.Watch<bool>(nameof(IsMenuActive), WatchIsMenuActive);
+        }
+
+        protected virtual void WatchIsMenuActive(bool val)
+        {
+        }
+
+        private async Task<bool> CloseConditional(ClickOutsideArgs args)
+        {
+            if (!IsMenuActive) return true;
+
+            var contains = await JsInvokeAsync<bool>(JsInteropConstants.Contains, MMenu.ContentElement, args.PointerSelector);
+
+            return !contains;
+        }
+
+        private async Task Handler()
+        {
+            IsMenuActive = false;
+            IsFocused = false;
+            // TODO: selectedIndex = -1
+            // TODO: setMenuIndex(-1)
+
+            if (OnBlur.HasDelegate)
+            {
+                await OnBlur.InvokeAsync();
+            }
+
+            StateHasChanged();
         }
 
         protected override void SetComponentClass()
@@ -239,6 +285,7 @@ namespace Masa.Blazor
                         IsMenuActive = val;
                         if (val && !IsFocused && !IsDisabled)
                         {
+                            IsFocused = true;
                             await InputElement.FocusAsync();
                         }
                     });
@@ -298,6 +345,7 @@ namespace Masa.Blazor
                 {
                     await SetInternalValueAsync(val);
                 }
+
                 IsMenuActive = false;
             }
             else
@@ -364,6 +412,7 @@ namespace Masa.Blazor
                     {
                         IsMenuActive = true;
                     }
+
                     break;
                 default:
                     break;
@@ -387,6 +436,13 @@ namespace Masa.Blazor
             SelectedIndex = index;
         }
 
+        public override Task HandleOnBlurAsync(FocusEventArgs args)
+        {
+            // blur event(OnBlur) should be invoked when isFocused is false(see Handler func).
+            // so there is nothing to do.
+            return Task.CompletedTask;
+        }
+
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
             if (Multiple)
@@ -396,8 +452,20 @@ namespace Masa.Blazor
             }
             else
             {
-                await base.HandleOnClearClickAsync(args);
+                await SetInternalValueAsync(default);
             }
+
+            if (OnClearClick.HasDelegate)
+            {
+                await OnClearClick.InvokeAsync(args);
+            }
+
+            // TODO: setMenuIndex(-1)
+
+            // whether to need NextTick?
+            await InputElement.FocusAsync();
+
+            // TODO: OpenOnClear
         }
     }
 }

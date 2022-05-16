@@ -291,7 +291,7 @@ namespace Masa.Blazor
 
         public ElementReference PrependInnerElement { get; set; }
 
-        protected virtual Dictionary<string, object> InputSlotAttrs { get; } = new();
+        protected virtual Dictionary<string, object> InputSlotAttrs { get; set; } = new();
 
         bool ITextField<TValue>.IsDirty => IsDirty;
 
@@ -625,7 +625,7 @@ namespace Masa.Blazor
 
             if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
             {
-                InputValue = checkValue;
+                TempValue = checkValue;
                 await ChangeValue(true);
             }
 
@@ -642,7 +642,7 @@ namespace Masa.Blazor
             if (success)
             {
                 _badInput = null;
-                InputValue = val;
+                TempValue = val;
 
                 if (OnInput.HasDelegate)
                 {
@@ -673,7 +673,7 @@ namespace Masa.Blazor
         {
             if (!_compositionInputting)
             {
-                await SetInternalValueAsync(InputValue);
+                await SetInternalValueAsync(TempValue);
 
                 StateHasChanged();
             }
@@ -793,6 +793,8 @@ namespace Masa.Blazor
             {
                 await OnClearClick.InvokeAsync(args);
             }
+
+            await InputElement.FocusAsync();
         }
     }
 }

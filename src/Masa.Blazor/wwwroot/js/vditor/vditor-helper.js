@@ -8,7 +8,7 @@
     cache: {
         enable: false,
     },
-    icon:'material'
+    icon: 'material'
 }
 
 
@@ -33,6 +33,7 @@ export function init(domRef, obj, value, options, isUploadHandler) {
             }
         }
     }
+    SetDefaultFileNameHandle(vditorOptions);
     domRef.Vditor = new Vditor(domRef, {
         ...vditorOptions,
         value,
@@ -73,4 +74,8 @@ export function insertValue(domRef, value, render = true) {
 }
 export function destroy(domRef) {
     domRef.Vditor.destroy();
+}
+function SetDefaultFileNameHandle(vditorOptions) {
+    let { upload } = vditorOptions;
+    if (upload) upload.filename || (upload.filename = (name) => name);
 }

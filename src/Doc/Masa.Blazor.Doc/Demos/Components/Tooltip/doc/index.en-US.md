@@ -18,7 +18,7 @@ label identifying an element, such as a description of its function.
 
 - [MTooltip](/api/MTooltip)
 
-## зЂвт
+## Caveats
 
 <!--alert:info-->
 In order to correctly position 'MTooltip', a position support (` top ` | 'bottom ` |' left ` | 'right') is required.
