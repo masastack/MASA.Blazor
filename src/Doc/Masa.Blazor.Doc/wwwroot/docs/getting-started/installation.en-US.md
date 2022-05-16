@@ -43,7 +43,7 @@ Create a project based on the project template name and specify the output direc
 dotnet new masab -o MasaBlazorApp
 ```
 
-> The default is Server mode, through the parameter --Mode WebAssembly to create a WebAssembly mode project. 
+> The default is Server mode, through the parameter --mode WebAssembly to create a WebAssembly mode project. 
 
 <br/>
 

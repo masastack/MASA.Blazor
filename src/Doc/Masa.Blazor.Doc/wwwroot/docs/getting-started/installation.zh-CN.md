@@ -41,7 +41,7 @@ dotnet new --install Masa.Template
 dotnet new masab -o MasaBlazorApp
 ```
 
-> 默认为 Server 模式，通过参数--Mode WebAssembly 创建 WebAssembly 模式项目。
+> 默认为 Server 模式，通过参数--mode WebAssembly 创建 WebAssembly 模式项目。
 
 <br/>
 
