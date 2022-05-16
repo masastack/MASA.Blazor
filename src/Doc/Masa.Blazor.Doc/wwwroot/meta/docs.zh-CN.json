@@ -3880,7 +3880,7 @@
             "Level": 0
           },
           {
-            "Id": "section-813742858",
+            "Id": "section-148273855",
             "Title": "使用MASA Blazor已内置支持的I18n功能",
             "Level": 0
           }
@@ -3938,7 +3938,7 @@
             "Level": 0
           },
           {
-            "Id": "section-1739819480",
+            "Id": "section-1608734618",
             "Title": "安装 Masa.Template 模板",
             "Level": 0
           },
@@ -4008,17 +4008,17 @@
         "Url": "introduction/why",
         "Contents": [
           {
-            "Id": "section-1946702414",
+            "Id": "section-1480234091",
             "Title": "Blazor 是什么？",
             "Level": 0
           },
           {
-            "Id": "section-1967431728",
+            "Id": "section-1772517772",
             "Title": "MASA Blazor 是什么？",
             "Level": 0
           },
           {
-            "Id": "section-1421632437",
+            "Id": "section-759269761",
             "Title": "为什么选择 MASA Blazor？",
             "Level": 0
           },

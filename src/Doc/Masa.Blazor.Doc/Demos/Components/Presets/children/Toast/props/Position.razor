@@ -19,7 +19,7 @@
 
     Random random = new Random();
 
-    private Task AddToast()
+    private async Task AddToast()
     {
         var now = DateTime.Now.ToString("HH:mm:ss.fff");
         var alertType = random.NextInt64(0, 5);
@@ -32,9 +32,7 @@
             Type = (AlertTypes)alertType,
         };
 
-        _toast.AddToast(config);
-
-        return Task.CompletedTask;
+        await _toast.AddToast(config);
     }
 
     private Task OnChangePosition(ToastPosition position)
