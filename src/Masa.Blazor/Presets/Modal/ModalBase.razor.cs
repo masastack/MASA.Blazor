@@ -61,6 +61,12 @@ namespace Masa.Blazor.Presets
         [Parameter]
         public bool HideCancelAction { get; set; }
 
+        [Parameter] 
+        public bool HideTitleDivider { get; set; }
+
+        [Parameter] 
+        public bool HideActionsDivider { get; set; }
+
         [Parameter]
         public StringNumber MaxWidth { get; set; }
 
