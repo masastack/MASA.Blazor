@@ -212,15 +212,8 @@ namespace Masa.Blazor
 
         protected static IEnumerable<StringNumber> Range(int from, int to)
         {
-            var range = new List<StringNumber>();
             from = from > 0 ? from : 1;
-
-            for (var i = from; i <= to; i++)
-            {
-                range.Add(i);
-            }
-
-            return range;
+            return Enumerable.Range(from,  to - from + 1).Select(r => (StringNumber)r);
         }
 
         public virtual async Task HandlePreviousAsync(MouseEventArgs args)
