@@ -89,7 +89,7 @@ namespace Masa.Blazor.Doc.Shared
 
             ChangeLanguage(lang);
 
-            Navigation.LocationChanged += OnLocationChanged;
+            Navigation.LocationChanged += OnLocationChanged;           
         }
 
         private void OnLocationChanged(object sender, LocationChangedEventArgs e)

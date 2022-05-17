@@ -106,6 +106,7 @@ services.AddMasaI18nForServer("{i18n local directory path}");
 - I18n usage example
 
  ```c#
+ @using BlazorComponent.I18n
  @inject I18n I18n
 
 void Example()
@@ -115,11 +116,69 @@ void Example()
 }
 ```
 
+#### Nested
+
+- zh-CN.json
+
+```
+{
+    "User":{
+        "Name":"姓名",
+        "Age":"年龄",
+    },
+    "Goods":{
+        "Name":"名称",
+        "Price":"价格"
+    }
+}
+```
+
+- en-US.json
+
+```
+{
+
+}
+```
+
+- Usage example
+
+ ```c#
+ @using BlazorComponent.I18n
+ @inject I18n I18n
+
+void Example()
+{
+    I18n.SetLang("zh-CN");
+    var name1 = I18n.T("Goods.Name");//输出：名称
+    var name2 = I18n.T("User.Name");//输出：姓名
+    var name3 = I18n.T("Name",true);//输出：姓名
+    var name4 = I18n.T("Goods","Name");//输出：名称
+    var age1 = I18n.T("User.Age");//输出：年龄
+    var age2 = I18n.T("Age",true);//输出：年龄
+    var price1 = I18n.T("Goods.Price");//输出：价格
+    var price2 = I18n.T("Price",true);//输出：价格
+
+    I18n.SetLang("en-US");
+    name1 = I18n.T("Goods.Name");//输出：Goods.Name
+    name2 = I18n.T("User.Name");//输出：User.Name
+    name3 = I18n.T("Name",true);//输出：Name
+    name4 = I18n.T("Goods","Name");//输出：Name
+    age1 = I18n.T("User.Age");//输出：User.Age
+    age2 = I18n.T("Age",true);//输出：Age
+    price1 = I18n.T("Goods.Price");//输出：Goods.Price
+    price2 = I18n.T("Price",true);//输出：Price
+}
+```
+
+> Support recursive nesting in nesting, use the same way as the example
+
 #### If you want to save the user's i18n language configuration on the browser side to achieve the effect of using the previous language configuration every time the user accesses, then do the following instead
 
 <br/>
 
 ````c#
+@using BlazorComponent.I18n
 @inject I18nConfig I18nConfig
 @inject I18n I18n
 

@@ -107,6 +107,7 @@ services.AddMasaI18nForServer("{i18n local directory path}");
 - I18n使用示例
 
  ```c#
+ @using BlazorComponent.I18n
  @inject I18n I18n
 
 void Example()
@@ -115,11 +116,70 @@ void Example()
     var home = I18n.T("Home");//获取键值Home对应语言的值，此方法调用将返回"首页";
 }
 ```
+
+#### 嵌套
+
+- zh-CN.json
+
+```
+{
+    "User":{
+        "Name":"姓名",
+        "Age":"年龄",
+    },
+    "Goods":{
+        "Name":"名称",
+        "Price":"价格"
+    }
+}
+```
+
+- en-US.json
+
+```
+{
+
+}
+```
+
+- 使用示例
+
+ ```c#
+ @using BlazorComponent.I18n
+ @inject I18n I18n
+
+void Example()
+{
+    I18n.SetLang("zh-CN");
+    var name1 = I18n.T("Goods.Name");//输出：名称
+    var name2 = I18n.T("User.Name");//输出：姓名
+    var name3 = I18n.T("Name",true);//输出：姓名
+    var name4 = I18n.T("Goods","Name");//输出：名称
+    var age1 = I18n.T("User.Age");//输出：年龄
+    var age2 = I18n.T("Age",true);//输出：年龄
+    var price1 = I18n.T("Goods.Price");//输出：价格
+    var price2 = I18n.T("Price",true);//输出：价格
+
+    I18n.SetLang("en-US");
+    name1 = I18n.T("Goods.Name");//输出：Goods.Name
+    name2 = I18n.T("User.Name");//输出：User.Name
+    name3 = I18n.T("Name",true);//输出：Name
+    name4 = I18n.T("Goods","Name");//输出：Name
+    age1 = I18n.T("User.Age");//输出：User.Age
+    age2 = I18n.T("Age",true);//输出：Age
+    price1 = I18n.T("Goods.Price");//输出：Goods.Price
+    price2 = I18n.T("Price",true);//输出：Price
+}
+```
+
+> 支持在嵌套中递归嵌套，使用方式与示例一致
+
 #### 如果您想在浏览器端保存用户的i18n语言配置来达到每次用户访问都可以使用之前的语言配置效果，则改为如下操作
 
 <br/>
 
  ```c#
+ @using BlazorComponent.I18n
  @inject I18nConfig I18nConfig
  @inject I18n I18n
 
