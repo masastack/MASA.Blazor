@@ -150,27 +150,28 @@ void Example()
 void Example()
 {
     I18n.SetLang("zh-CN");
-    var name1 = I18n.T("Goods.Name");//输出：名称
-    var name2 = I18n.T("User.Name");//输出：姓名
-    var name3 = I18n.T("Name",true);//输出：姓名
-    var name4 = I18n.T("Goods","Name");//输出：名称
-    var age1 = I18n.T("User.Age");//输出：年龄
-    var age2 = I18n.T("Age",true);//输出：年龄
-    var price1 = I18n.T("Goods.Price");//输出：价格
-    var price2 = I18n.T("Price",true);//输出：价格
+    var name1 = I18n.T("Goods.Name");//output：名称
+    var name2 = I18n.T("User.Name");//output：姓名
+    var name3 = I18n.T("Name",true);//output：姓名. Note: Duplicate keys will take the first matching key by default
+    var name4 = I18n.T("Goods","Name");//output：名称
+    var age1 = I18n.T("User.Age");//output：年龄
+    var age2 = I18n.T("Age",true);//output：年龄
+    var price1 = I18n.T("Goods.Price");//output：价格
+    var price2 = I18n.T("Price",true);//output：价格
 
     I18n.SetLang("en-US");
-    name1 = I18n.T("Goods.Name");//输出：Goods.Name
-    name2 = I18n.T("User.Name");//输出：User.Name
-    name3 = I18n.T("Name",true);//输出：Name
-    name4 = I18n.T("Goods","Name");//输出：Name
-    age1 = I18n.T("User.Age");//输出：User.Age
-    age2 = I18n.T("Age",true);//输出：Age
-    price1 = I18n.T("Goods.Price");//输出：Goods.Price
-    price2 = I18n.T("Price",true);//输出：Price
+    name1 = I18n.T("Goods.Name");//output：Goods.Name
+    name2 = I18n.T("User.Name");//output：User.Name
+    name3 = I18n.T("Name",true);//output：Name
+    name4 = I18n.T("Goods","Name");//output：Name
+    age1 = I18n.T("User.Age");//output：User.Age
+    age2 = I18n.T("Age",true);//output：Age
+    price1 = I18n.T("Goods.Price");//output：Goods.Price
+    price2 = I18n.T("Price",true);//output：Price
 }
 ```
 
+> The default key of I18n returns the key when the corresponding data cannot be found, and the key is generally in English, so en-US.json can be written according to the situation. If you want to return null when the corresponding data cannot be found, use `I18n.T("key",whenNullReturnKey:false)`.
 > Support recursive nesting in nesting, use the same way as the example
 
 #### If you want to save the user's i18n language configuration on the browser side to achieve the effect of using the previous language configuration every time the user accesses, then do the following instead

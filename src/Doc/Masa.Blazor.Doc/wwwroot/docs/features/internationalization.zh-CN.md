@@ -153,7 +153,7 @@ void Example()
     I18n.SetLang("zh-CN");
     var name1 = I18n.T("Goods.Name");//输出：名称
     var name2 = I18n.T("User.Name");//输出：姓名
-    var name3 = I18n.T("Name",true);//输出：姓名
+    var name3 = I18n.T("Name",true);//输出：姓名。注意：重复的Key会默认取第一个匹配的
     var name4 = I18n.T("Goods","Name");//输出：名称
     var age1 = I18n.T("User.Age");//输出：年龄
     var age2 = I18n.T("Age",true);//输出：年龄
@@ -172,6 +172,7 @@ void Example()
 }
 ```
 
+> I18n默认key找不到对应的数据时返回key，而key一般是英文的，所以en-US.json可以根据情况不用写。如果想找不到对应的数据时返回null，则使用`I18n.T("key",whenNullReturnKey:false)`即可。
 > 支持在嵌套中递归嵌套，使用方式与示例一致
 
 #### 如果您想在浏览器端保存用户的i18n语言配置来达到每次用户访问都可以使用之前的语言配置效果，则改为如下操作
