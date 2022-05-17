@@ -24,7 +24,10 @@
                 </MButton>
             </MCardTitle>
 
-            <MDivider />
+            @if (!HideTitleDivider)
+            {
+                <MDivider />
+            }
 
             <MCardText Class="@BodyClass"
                        Style="@($"padding: 24px; {BodyStyle}")"
@@ -43,7 +46,10 @@
 
             @if (HasActions)
             {
-                <MDivider />
+                @if (!HideActionsDivider)
+                {
+                    <MDivider />
+                }
 
                 <MCardActions Class="@ActionsClass" Style="@ActionsStyle">
                     @if (OnDelete.HasDelegate)

@@ -697,7 +697,7 @@ namespace Masa.Blazor
         public async Task HandleOnKeyUpAsync(KeyboardEventArgs args)
         {
             if (OnKeyUp.HasDelegate)
-                await OnKeyUp.InvokeAsync();
+                await OnKeyUp.InvokeAsync(args);
         }
 
         public async Task HandleOnNumberUpClickAsync(MouseEventArgs args)
