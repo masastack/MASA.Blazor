@@ -166,13 +166,17 @@ namespace Masa.Blazor
 
             if (Value > left && Value < right)
             {
+                var firstItem = 1;
+                var lastItem = Length;
                 var start = Value - left + 2;
                 var end = Value + left - 2 - even;
+                StringNumber secondItem = start - 1 == firstItem + 1 ? 2 : "...";
+                StringNumber beforeLastItem = end + 1 == lastItem - 1 ? end + 1 : "...";
 
-                items.Add(1);
-                items.Add("...");
+                items.Add(firstItem);
+                items.Add(secondItem);
                 items.AddRange(Range(start, end));
-                items.Add("...");
+                items.Add(beforeLastItem);
                 items.Add(Length);
 
                 return items;
@@ -206,9 +210,10 @@ namespace Masa.Blazor
             }
         }
 
-        protected static IEnumerable<StringNumber> Range(int start, int end)
+        protected static IEnumerable<StringNumber> Range(int from, int to)
         {
-            return Enumerable.Range(start, end - start + 1).Select(r => (StringNumber)r);
+            from = from > 0 ? from : 1;
+            return Enumerable.Range(from,  to - from + 1).Select(r => (StringNumber)r);
         }
 
         public virtual async Task HandlePreviousAsync(MouseEventArgs args)
