@@ -9,3 +9,4 @@ related:
   - /components/ellipsis-text
 ---
 
+Display two data of the same type side by side.
