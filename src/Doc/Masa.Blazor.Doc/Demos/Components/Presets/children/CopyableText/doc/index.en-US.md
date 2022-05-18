@@ -9,3 +9,4 @@ related:
   - /components/block-text
 ---
 
+Append a button that provides copy feature to the content.

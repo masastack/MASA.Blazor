@@ -10,4 +10,4 @@ related:
   - /components/ellipsis-text
 ---
 
-将相同类型的两个数据并列显示。
+将相同类型的两个数据并排显示。
