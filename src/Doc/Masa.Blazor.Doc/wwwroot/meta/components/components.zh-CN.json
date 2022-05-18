@@ -1833,7 +1833,7 @@
     "Desc": "<p><a href=\"https://echarts.apache.org/examples/zh/index.html\">ECharts</a></p>\n",
     "Order": 0,
     "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n"
+      "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n<!--alert:info-->\n<p>使用前需要先引用ECharts的包：\n<br />\n<code>&lt;script src=&quot;https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js&quot;&gt;&lt;/script&gt;</code>。</p>\n<!--/alert:info-->\n"
     },
     "LastWriteTime": "2022-03-28T10:24:25.2427066+08:00",
     "DemoList": [
