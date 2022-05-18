@@ -16,8 +16,7 @@ All products of the MASA series are developed based on .Net 6.0, please make sur
 
 The video content is the MASA Blazor template to create the Blazor Server demo video, you can choose to view or directly view the CLI creation part. 
 
-<iframe src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" scrolling="no" width="800px" height="600px" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
+<video src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" controls width="100%"></video>
 
 <br/>
 

@@ -15,10 +15,7 @@ MASA 系列所有产品均基于.Net 6.0 开发,请确保已安装 <a href="http
 
 视频内容为 MASA Blazor 模板创建 Blazor Server 演示视频，可选择查看或者直接查看 CLI 创建部分。
 
-<iframe src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" scrolling="no" width="800px" height="600px" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
-
-<br/>
+<video src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" controls width="100%"></video>
 
 <br/>
 
