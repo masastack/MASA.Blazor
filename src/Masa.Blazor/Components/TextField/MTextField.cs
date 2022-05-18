@@ -626,8 +626,9 @@ namespace Masa.Blazor
             if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
             {
                 TempValue = checkValue;
-                await ChangeValue(true);
             }
+
+            await ChangeValue(true);
 
             if (OnBlur.HasDelegate)
             {
@@ -759,6 +760,9 @@ namespace Masa.Blazor
             if (!IsFocused)
             {
                 IsFocused = true;
+
+                await ChangeValue(true);
+
                 if (OnFocus.HasDelegate)
                 {
                     await OnFocus.InvokeAsync(args);
