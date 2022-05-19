@@ -169,7 +169,7 @@ namespace Masa.Blazor
                 Dictionary<string, object> attibutes = new(Attributes)
                 {
                     { "type", Type },
-                    { "value", _badInput == null ? InputValue : _badInput }
+                    { "value", _badInput == null ? InternalValue : _badInput }
                 };
 
                 if (Type == "number")
@@ -625,7 +625,7 @@ namespace Masa.Blazor
 
             if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
             {
-                TempValue = checkValue;
+                InputValue = checkValue;
             }
 
             await ChangeValue(true);
@@ -643,7 +643,7 @@ namespace Masa.Blazor
             if (success)
             {
                 _badInput = null;
-                TempValue = val;
+                InputValue = val;
 
                 if (OnInput.HasDelegate)
                 {
@@ -674,7 +674,7 @@ namespace Masa.Blazor
         {
             if (!_compositionInputting)
             {
-                await SetInternalValueAsync(TempValue);
+                await SetInternalValueAsync(InputValue);
 
                 StateHasChanged();
             }
@@ -760,8 +760,6 @@ namespace Masa.Blazor
             if (!IsFocused)
             {
                 IsFocused = true;
-
-                await ChangeValue(true);
 
                 if (OnFocus.HasDelegate)
                 {
