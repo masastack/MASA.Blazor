@@ -1,9 +1,10 @@
 ﻿export function init(containerId, option) {
+    //debugger
     let _options = {
         group: null,
         disabled: false,
-        handle: ".my-handle",
-        draggable: ".item",
+        //handle: ".my-handle",
+        //draggable: ".item",
         onStart: function (evt) {
             log("onStart", evt);
         },
@@ -37,8 +38,8 @@
     }
 
     function log(name, obj) {
-        //debugger
-        console.log(`${name} evt:${JSON.stringify(obj)}`);
+        obj["__callname"] = name;
+        console.log(obj);
     }
 
 }

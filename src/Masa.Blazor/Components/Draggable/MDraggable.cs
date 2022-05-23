@@ -2,6 +2,27 @@
 {
     public partial class MDraggable<Item> : BDragzone<Item>
     {
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            var JsHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/draggable/sorttable-helper.js");
+            await JsHelper.InvokeVoidAsync("init", Id,
+                new
+                {
+                    group = "group",
+                });
+            base.OnAfterRenderAsync(firstRender);
+        }
+
         //protected override void SetComponentClass()
         //{
         //    CssProvider
