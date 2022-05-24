@@ -17,19 +17,20 @@ namespace Masa.Blazor.Doc.Shared
         {
             get
             {
-                var url = Navigation.Uri;
-                if (url == Navigation.BaseUri)
+                var relativePath = Navigation.ToBaseRelativePath(Navigation.Uri);
+
+                if (relativePath.Equals("", StringComparison.OrdinalIgnoreCase) ||
+                    relativePath.Equals("index.html", StringComparison.OrdinalIgnoreCase))
                 {
                     return 0;
                 }
-                else if (url.Contains("about/meet-the-team"))
+
+                if (relativePath.Equals("about/meet-the-team", StringComparison.OrdinalIgnoreCase))
                 {
                     return 2;
                 }
-                else
-                {
-                    return 1;
-                }
+
+                return 1;
             }
             set
             {

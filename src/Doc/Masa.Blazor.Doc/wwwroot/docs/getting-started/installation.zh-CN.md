@@ -15,10 +15,7 @@ MASA 系列所有产品均基于.Net 6.0 开发,请确保已安装 <a href="http
 
 视频内容为 MASA Blazor 模板创建 Blazor Server 演示视频，可选择查看或者直接查看 CLI 创建部分。
 
-<iframe src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" scrolling="no" width="800px" height="600px" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
-
-<br/>
+<video src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" controls width="100%"></video>
 
 <br/>
 
@@ -41,7 +38,7 @@ dotnet new --install Masa.Template
 dotnet new masab -o MasaBlazorApp
 ```
 
-> 默认为 Server 模式，通过参数--Mode WebAssembly 创建 WebAssembly 模式项目。
+> 默认为 Server 模式，通过参数--mode WebAssembly 创建 WebAssembly 模式项目。
 
 <br/>
 
@@ -88,13 +85,15 @@ $ dotnet add package Masa.Blazor
 在 `Pages/_Host.cshtml` 中引入资源文件：
 
 ```html
-<!--masa blazor css style-->
+<!-- masa blazor css style -->
 <link href="_content/Masa.Blazor/css/masa-blazor.css" rel="stylesheet" />
 <link href="_content/Masa.Blazor/css/masa-extend-blazor.css" rel="stylesheet" />
+
 <!--icon file,import need to use-->
 <link href="https://cdn.masastack.com/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
 <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
+
 <!--js(should lay the end of file)-->
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
@@ -108,12 +107,11 @@ $ dotnet add package Masa.Blazor
 ```html
 <link href="_content/Masa.Blazor/css/masa-blazor.css" rel="stylesheet" />
 <link href="_content/Masa.Blazor/css/masa-extend-blazor.css" rel="stylesheet" />
-<link
-  href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css"
-  rel="stylesheet"
-/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
-<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" />
+
+<link href="https://cdn.masastack.com/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
+
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
 

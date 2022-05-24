@@ -62,6 +62,12 @@ namespace Masa.Blazor.Presets
         public bool HideCancelAction { get; set; }
 
         [Parameter]
+        public bool HideTitleDivider { get; set; }
+
+        [Parameter]
+        public bool HideActionsDivider { get; set; }
+
+        [Parameter]
         public StringNumber MaxWidth { get; set; }
 
         [Parameter]
@@ -123,7 +129,6 @@ namespace Masa.Blazor.Presets
         #endregion
 
         private bool _saveLoading;
-        private bool _scrolledToTop;
         private Func<MouseEventArgs, Task> _debounceHandleOnSave;
 
         private MCardText BodyRef { get; set; }
@@ -133,6 +138,8 @@ namespace Masa.Blazor.Presets
         protected bool HasActions => OnDelete.HasDelegate || OnSave.HasDelegate;
 
         protected MForm Form { get; set; }
+
+        protected MDialog Dialog { get; set; }
 
         protected ModalButtonProps ComputedSaveButtonProps { get; set; }
 
@@ -182,18 +189,15 @@ namespace Masa.Blazor.Presets
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (Value)
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
             {
-                if (_scrolledToTop)
-                {
-                    _scrolledToTop = false;
-                }
-                else
+                Dialog.AfterShowContent = async () =>
                 {
                     await ScrollToTop();
-                    _scrolledToTop = true;
                     StateHasChanged();
-                }
+                };
             }
         }
 
@@ -227,7 +231,7 @@ namespace Masa.Blazor.Presets
             }
             else
             {
-                Value = false;
+                await InternalValueChanged(false);
             }
         }
 

@@ -16,8 +16,7 @@ All products of the MASA series are developed based on .Net 6.0, please make sur
 
 The video content is the MASA Blazor template to create the Blazor Server demo video, you can choose to view or directly view the CLI creation part. 
 
-<iframe src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" scrolling="no" width="800px" height="600px" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
+<video src="https://cdn.masastack.com/stack/images/website/masa-blazor/video.mp4" controls width="100%"></video>
 
 <br/>
 
@@ -43,7 +42,7 @@ Create a project based on the project template name and specify the output direc
 dotnet new masab -o MasaBlazorApp
 ```
 
-> The default is Server mode, through the parameter --Mode WebAssembly to create a WebAssembly mode project. 
+> The default is Server mode, through the parameter --mode WebAssembly to create a WebAssembly mode project. 
 
 <br/>
 
@@ -110,12 +109,11 @@ in `wwwroot\index.html` import resource files：
 ```html
 <link href="_content/Masa.Blazor/css/masa-blazor.css" rel="stylesheet" />
 <link href="_content/Masa.Blazor/css/masa-extend-blazor.css" rel="stylesheet" />
-<link
-  href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css"
-  rel="stylesheet"
-/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
-<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" />
+
+<link href="https://cdn.masastack.com/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
+<link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
+
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
 

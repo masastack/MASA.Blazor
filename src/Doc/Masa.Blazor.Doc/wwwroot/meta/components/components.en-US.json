@@ -1810,7 +1810,7 @@
     "Desc": "<p><a href=\"https://echarts.apache.org/examples/en/index.html\">ECharts</a></p>\n",
     "Order": 0,
     "OtherDocs": {
-      "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n"
+      "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n<!--alert:info-->\n<p>You need to reference the package of ECharts before using it:\n<br />\n<code>&lt;script src=&quot;https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js&quot;&gt;&lt;/script&gt;</code>.</p>\n<!--/alert:info-->\n"
     },
     "LastWriteTime": "2022-04-11T12:40:01.1504394+08:00",
     "DemoList": [
@@ -6315,6 +6315,7 @@
     "FullTitle": "Time pickers"
   },
   {
+    "Desc": "<p>Display two data of the same type side by side.</p>\n",
     "Order": 0,
     "OtherDocs": {},
     "LastWriteTime": "2022-04-11T12:40:01.2160701+08:00",
@@ -6366,6 +6367,7 @@
     "FullTitle": "Block text"
   },
   {
+    "Desc": "<p>Append a button that provides copy feature to the content.</p>\n",
     "Order": 0,
     "OtherDocs": {},
     "LastWriteTime": "2022-04-11T12:40:01.2170701+08:00",
@@ -6826,7 +6828,7 @@
         "Name": "duration",
         "Title": "Duration (default 4000ms)",
         "Description": "",
-        "Code": "<PToast @ref=\"_toast\" Duration=\"duration\">\r\n</PToast>\r\n\r\n<MTextField Type=\"number\" @bind-Value=\"duration\" NumberProps=\"props=> { props.Min=0; props.Step=1000; }\"></MTextField>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int? duration;\r\n\r\n    Random random = new Random();\r\n\r\n    private Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = duration == 0? \"Not auto close\" : (duration == null? $\"Auto close after 4000ms\" : $\"Auto close after {duration} ms\"),\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType\r\n        };\r\n\r\n        _toast.AddToast(config);\r\n\r\n        return Task.CompletedTask;\r\n    }\r\n}",
+        "Code": "<PToast @ref=\"_toast\" Duration=\"duration\">\r\n</PToast>\r\n\r\n<MTextField Type=\"number\" @bind-Value=\"duration\" NumberProps=\"props=> { props.Min=0; props.Step=1000; }\"></MTextField>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int? duration;\r\n\r\n    Random random = new Random();\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = duration == 0? \"Not auto close\" : (duration == null? $\"Auto close after 4000ms\" : $\"Auto close after {duration} ms\"),\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n            Duration = duration\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n}",
         "Type": "Demos.Components.Presets.children.Toast.props.Duration",
         "Style": "",
         "Debug": false,
@@ -6837,7 +6839,7 @@
         "Name": "maxCount",
         "Title": "MaxCount",
         "Description": "",
-        "Code": "<PToast @ref=\"_toast\" MaxCount=\"maxCount\">\r\n</PToast>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int maxCount = 5;\r\n\r\n    Random random = new Random();\r\n\r\n    private Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Only Show {maxCount} Toast\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n        };\r\n\r\n        _toast.AddToast(config);\r\n\r\n        return Task.CompletedTask;\r\n    }\r\n}",
+        "Code": "<PToast @ref=\"_toast\" MaxCount=\"maxCount\">\r\n</PToast>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int maxCount = 5;\r\n\r\n    Random random = new Random();\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Only Show {maxCount} Toast\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n}",
         "Type": "Demos.Components.Presets.children.Toast.props.MaxCount",
         "Style": "",
         "Debug": false,
@@ -6848,7 +6850,7 @@
         "Name": "position",
         "Title": "Toast Position",
         "Description": "",
-        "Code": "<PToast @ref=\"_toast\" Position=\"position\">\r\n</PToast>\r\n\r\n<MRadioGroup Value=\"position\" TValue=\"ToastPosition\" Row ValueChanged=\"OnChangePosition\">\r\n    <MRadio Value=\"ToastPosition.TopLeft\" Label=\"Top Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.TopRight\" Label=\"Top Right\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomLeft\" Label=\"Bottom Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomRight\" Label=\"Bottom Right\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int maxCount = 5;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    Random random = new Random();\r\n\r\n    private Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Show on {position.ToString()}\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n        };\r\n\r\n        _toast.AddToast(config);\r\n\r\n        return Task.CompletedTask;\r\n    }\r\n\r\n    private Task OnChangePosition(ToastPosition position)\r\n    {\r\n        this.position = position;\r\n        return Task.CompletedTask;\r\n    }\r\n}",
+        "Code": "<PToast @ref=\"_toast\" Position=\"position\">\r\n</PToast>\r\n\r\n<MRadioGroup Value=\"position\" TValue=\"ToastPosition\" Row ValueChanged=\"OnChangePosition\">\r\n    <MRadio Value=\"ToastPosition.TopLeft\" Label=\"Top Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.TopRight\" Label=\"Top Right\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomLeft\" Label=\"Bottom Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomRight\" Label=\"Bottom Right\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int maxCount = 5;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    Random random = new Random();\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Show on {position.ToString()}\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n\r\n    private Task OnChangePosition(ToastPosition position)\r\n    {\r\n        this.position = position;\r\n        return Task.CompletedTask;\r\n    }\r\n}",
         "Type": "Demos.Components.Presets.children.Toast.props.Position",
         "Style": "",
         "Debug": false,
@@ -6859,7 +6861,7 @@
         "Name": "customToast",
         "Title": "Custom Toast content",
         "Description": "",
-        "Code": "@inject IPopupService PopupService\r\n\r\n<PToast @ref=\"_toast\" Position=\"position\" Duration=\"defaultDuration\">\r\n</PToast>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    private int defaultDuration = 5000;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    Random random = new Random();\r\n\r\n    private Task HandleOnView()\r\n    {\r\n        return PopupService.ToastInfoAsync(\"View button click\");\r\n    }\r\n\r\n    private Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var duration = random.NextInt64(1000, 5000);\r\n        var useParentDuration = random.NextInt64(0, 2);\r\n\r\n        RenderFragment customViewAction = (builder) =>\r\n        {\r\n            builder.AddContent(0, @<MButton OnClick=\"HandleOnView\" Text> View </MButton>);\r\n        };\r\n\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Auto close after {duration}ms\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n            Duration = useParentDuration == 0? null : (int)duration,\r\n            ActionContent = customViewAction,\r\n            OnClose = OnClose\r\n        };\r\n\r\n        _toast.AddToast(config);\r\n\r\n        return Task.CompletedTask;\r\n    }\r\n\r\n    private Task OnClose(string key)\r\n    {\r\n        Console.WriteLine($\"Close toast key: {key}\");\r\n        return Task.CompletedTask;\r\n    }\r\n}",
+        "Code": "@inject IPopupService PopupService\r\n\r\n<PToast @ref=\"_toast\" Position=\"position\" Duration=\"defaultDuration\">\r\n</PToast>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    private int defaultDuration = 5000;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    Random random = new Random();\r\n\r\n    private Task HandleOnView()\r\n    {\r\n        return PopupService.ToastInfoAsync(\"View button click\");\r\n    }\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var duration = random.NextInt64(1000, 5000);\r\n        var useParentDuration = random.NextInt64(0, 2);\r\n\r\n        RenderFragment customViewAction = (builder) =>\r\n        {\r\n            builder.AddContent(0, @<MButton OnClick=\"HandleOnView\" Text> View </MButton>);\r\n        };\r\n\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Auto close after {duration}ms\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n            Duration = useParentDuration == 0? null : (int)duration,\r\n            ActionContent = customViewAction,\r\n            OnClose = OnClose\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n\r\n    private Task OnClose(string key)\r\n    {\r\n        Console.WriteLine($\"Close toast key: {key}\");\r\n        return Task.CompletedTask;\r\n    }\r\n}",
         "Type": "Demos.Components.Presets.children.Toast.events.CustomToast",
         "Style": "",
         "Debug": false,

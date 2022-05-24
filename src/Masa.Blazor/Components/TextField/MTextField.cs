@@ -169,7 +169,7 @@ namespace Masa.Blazor
                 Dictionary<string, object> attibutes = new(Attributes)
                 {
                     { "type", Type },
-                    { "value", _badInput == null ? InputValue : _badInput }
+                    { "value", _badInput == null ? InternalValue : _badInput }
                 };
 
                 if (Type == "number")
@@ -626,8 +626,9 @@ namespace Masa.Blazor
             if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
             {
                 InputValue = checkValue;
-                await ChangeValue(true);
             }
+
+            await ChangeValue(true);
 
             if (OnBlur.HasDelegate)
             {
@@ -697,7 +698,7 @@ namespace Masa.Blazor
         public async Task HandleOnKeyUpAsync(KeyboardEventArgs args)
         {
             if (OnKeyUp.HasDelegate)
-                await OnKeyUp.InvokeAsync();
+                await OnKeyUp.InvokeAsync(args);
         }
 
         public async Task HandleOnNumberUpClickAsync(MouseEventArgs args)
@@ -759,6 +760,7 @@ namespace Masa.Blazor
             if (!IsFocused)
             {
                 IsFocused = true;
+
                 if (OnFocus.HasDelegate)
                 {
                     await OnFocus.InvokeAsync(args);

@@ -49,7 +49,7 @@ namespace Masa.Blazor.Presets
 
         public async Task AddToast(ToastConfig config)
         {
-            config.Duration ??= Duration;
+            config.Duration ??= Duration ??= 4000;
             if (MaxCount > 0)
             {
                 var count = _configDict.Count;

@@ -42,7 +42,20 @@
 
     private string Hash => "#" + SectionId;
 
-    private string SectionId => Id ?? Title?.HashSection() ?? "";
+    private string SectionId
+    {
+        get
+        {
+            if (string.IsNullOrWhiteSpace(Id))
+            {
+                return Title?.HashSection();
+            }
+            else
+            {
+                return Id.Replace(" ", "-");
+            }
+        }
+    }
 
     private async Task HandleOnClick(MouseEventArgs _)
     {
