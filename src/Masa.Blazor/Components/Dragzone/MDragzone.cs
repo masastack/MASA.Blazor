@@ -1,8 +1,8 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MDragzone<Item> : BDragzone<Item>, IDisposable
+    public partial class MDragZone<TItem> : BDragZone<TItem>, IDisposable
     {
-        private DotNetObjectReference<MDragzone<Item>> _dotNetHelper;
+        private DotNetObjectReference<MDragZone<TItem>> _dotNetHelper;
         private IJSObjectReference _jsHelper;
 
         [Parameter]

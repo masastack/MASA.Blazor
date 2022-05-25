@@ -470,6 +470,15 @@
       },
       {
         "Order": 0,
+        "Title": "DragZone",
+        "SubTitle": "拖放",
+        "FullTitle": "DragZone (拖放)",
+        "Type": "menuItem",
+        "Url": "components/dragzone",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "ECharts",
         "SubTitle": "图表",
         "FullTitle": "ECharts (图表)",
@@ -2340,6 +2349,35 @@
         "FullTitle": "MDivider",
         "Type": "menuItem",
         "Url": "api/mdivider",
+        "Contents": [
+          {
+            "Id": "section-292649107",
+            "Title": "组件页面",
+            "Level": 0
+          },
+          {
+            "Id": "section-3122241",
+            "Title": "属性",
+            "Level": 0
+          },
+          {
+            "Id": "section-3374707",
+            "Title": "插槽",
+            "Level": 0
+          },
+          {
+            "Id": "section-2654231",
+            "Title": "事件",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
+        "Title": "MDragZone",
+        "FullTitle": "MDragZone",
+        "Type": "menuItem",
+        "Url": "api/mdragzone",
         "Contents": [
           {
             "Id": "section-292649107",

@@ -67,6 +67,7 @@ namespace Masa.Blazor.Doc.Pages
             "MDatePickerYears",
             "MDialog",
             "MDivider",
+            "MDragZone",
             "MECharts",
             "MEditor",
             "MErrorHandler",

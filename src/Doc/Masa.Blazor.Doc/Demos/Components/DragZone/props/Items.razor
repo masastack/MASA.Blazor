@@ -1,0 +1,40 @@
+﻿
+        <MDragZone SetOptions=SetOptions TItem="string" Items=list1></MDragZone>
+ 
+        <MDragZone SetOptions=SetOptions TItem="string" Items=list2></MDragZone>
+
+@code {
+    private List<BDragItem<string>> list1 = new List<BDragItem<string>>();
+    private List<BDragItem<string>> list2 = new List<BDragItem<string>>();
+
+    private void SetOptions(SorttableOptions options)
+    {
+        options.Group = "group";
+    }
+
+    private void SetOptionsOther(SorttableOptions options)
+    {
+        options.Group = "group2";
+    }
+
+    protected override void OnInitialized()
+    {
+        InitList(list1, "_1_");
+        InitList(list2, "_2_");
+        base.OnInitialized();
+    }
+
+    private void InitList(List<BDragItem<string>> list, string split)
+    {
+        int i = 1, count = 5;
+        do
+        {
+            list.Add(new BDragItem<string>
+                {
+                    Item = $"item{split}{i}"
+                });
+            i++;
+        }
+        while (count - i > 0);
+    }
+}

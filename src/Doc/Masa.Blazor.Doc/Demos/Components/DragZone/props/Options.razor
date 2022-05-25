@@ -1,0 +1,71 @@
+﻿@using Masa.Blazor
+<style>
+    .container {
+        width: 100%;
+        display: block;
+        text-align: left
+    }
+
+        .container > div {
+            width: 48%;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+</style>
+<div class="container">group:group</div>
+<div>
+    <div>
+        <MDragZone SetOptions=SetOptions TItem="string" Items=list1></MDragZone>
+    </div>
+    <div>
+        <MDragZone SetOptions=SetOptions TItem="string" Items=list2></MDragZone>
+    </div>
+    <div>
+        <MDragZone SetOptions=SetOptions TItem="string" Items=list3></MDragZone>
+    </div>
+    <div>
+        <MDragZone SetOptions=SetOptions TItem="string" Items=list4></MDragZone>
+    </div>
+</div>
+
+
+
+@code {
+    private List<BDragItem<string>> list1 = new List<BDragItem<string>>();
+    private List<BDragItem<string>> list2 = new List<BDragItem<string>>();
+    private List<BDragItem<string>> list3 = new List<BDragItem<string>>();
+    private List<BDragItem<string>> list4 = new List<BDragItem<string>>();
+
+    private void SetOptions(SorttableOptions options)
+    {
+        options.Group = "group";
+    }
+
+    private void SetOptionsOther(SorttableOptions options)
+    {
+        options.Group = "group2";
+    }
+
+    protected override void OnInitialized()
+    {
+        InitList(list1, "_1_");
+        InitList(list2, "_2_");
+        InitList(list3, "_3_");
+        InitList(list4, "_4_");
+        base.OnInitialized();
+    }
+
+    private void InitList(List<BDragItem<string>> list, string split)
+    {
+        int i = 1, count = 5;
+        do
+        {
+            list.Add(new BDragItem<string>
+                {
+                    Item = $"item{split}{i}"
+                });
+            i++;
+        }
+        while (count - i > 0);
+    }
+}

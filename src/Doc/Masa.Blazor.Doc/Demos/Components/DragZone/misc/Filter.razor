@@ -1,0 +1,46 @@
+﻿<style>
+.ignore-elements{
+    background-color:red
+}
+</style>
+        <MDragZone SetOptions=SetOptions1 TItem="string" Items=list1></MDragZone>
+    
+        <MDragZone SetOptions=SetOptions2 TItem="string" Items=list2></MDragZone>
+
+@code {
+    private List<BDragItem<string>> list1 = new List<BDragItem<string>>();
+    private List<BDragItem<string>> list2 = new List<BDragItem<string>>();
+
+    private void SetOptions1(SorttableOptions options)
+    {
+        options.Group = "group";
+        options.Filter = "ignore-elements";        
+    }
+
+    private void SetOptions2(SorttableOptions options)
+    {
+        options.Group = "group";
+    }
+
+    protected override void OnInitialized()
+    {
+        InitList(list1, "_1_");
+        list1[1].CssClass = "ignore-elements";
+        InitList(list2, "_2_");
+        base.OnInitialized();
+    }
+
+    private void InitList(List<BDragItem<string>> list, string split)
+    {
+        int i = 1, count = 5;
+        do
+        {
+            list.Add(new BDragItem<string>
+                {
+                    Item = $"item{split}{i}"
+                });
+            i++;
+        }        
+        while (count - i > 0);
+    }
+}

@@ -1807,6 +1807,99 @@
     "FullTitle": "Dividers"
   },
   {
+    "Desc": "<p>The <code>MDragZone</code> component is based on <a href=\"https://github.com/SortableJS/Sortable\">Sorttable.js</a> to implement drag and drop functionality</p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MDragZone\">MDragZone</a></li>\n</ul>\n<!--alert:info-->\n<p>You need to reference the package of Sorttable.js before using it ��\n<br />\n<code>&lt;script src=&quot;https://cdn.masastack.com/npm/sortable/Sortable.min.js&quot;&gt;&lt;/script&gt;</code>��</p>\n<!--/alert:info-->\n"
+    },
+    "LastWriteTime": "2022-05-25T16:50:25.6369685+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "<p>Drag and drop components and dom objects.</p>\n",
+        "Code": " <MContainer Fluid>\r\n     <MRow>\r\n         <MCol Cols=\"12\" Md=\"6\">\r\n             <MCard>\r\n             <MDragZone SetOptions=SetOptions TItem=\"string\" Items=list1 ></MDragZone>\r\n             </MCard>\r\n         </MCol>\r\n         <MCol Cols=\"12\" Md=\"6\">\r\n             <MCard>\r\n             <MDragZone SetOptions=SetOptions TItem=\"string\" Items=list2 ></MDragZone>\r\n             </MCard>\r\n         </MCol>\r\n     </MRow>\r\n </MContainer>\r\n        \r\n\r\n\r\n\r\n@code {\r\n    private List<BDragItem<string>> list1 = new List<BDragItem<string>>();\r\n    private List<BDragItem<string>> list2 = new List<BDragItem<string>>();\r\n\r\n    private void SetOptions(SorttableOptions options)\r\n    {\r\n        options.Group = \"group\";\r\n    }\r\n\r\n    private void SetOptionsOther(SorttableOptions options)\r\n    {\r\n        options.Group = \"group2\";\r\n    }\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        InitList(list1, \"_1_\");\r\n        InitList(list2, \"_2_\");\r\n        base.OnInitialized();\r\n    }\r\n\r\n    private void InitList(List<BDragItem<string>> list, string split)\r\n    {\r\n        int i = 1, count = 5;\r\n        do\r\n        {\r\n            list.Add(new BDragItem<string>\r\n                {\r\n                    Item = $\"item{split}{i}\"\r\n                });\r\n            i++;\r\n        }\r\n        while (count - i > 0);\r\n    }\r\n}",
+        "Type": "Demos.Components.DragZone.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 1,
+        "Name": "items",
+        "Title": "Options",
+        "Description": "<p>A collection of Item elements, if the type of <code>Item</code> is <code>ComponentBase</code>, the child components are loaded by <code>DynicComponent</code>, otherwise, <code>Item.ToString()</code> is called to output directly.</p>\n",
+        "Code": "\r\n        <MDragZone SetOptions=SetOptions TItem=\"MCard\" Items=list1></MDragZone>\r\n \r\n        <MDragZone SetOptions=SetOptions TItem=\"MCard\" Items=list2></MDragZone>\r\n\r\n@code {\r\n    private List<BDragItem<MCard>> list1 = new List<BDragItem<MCard>>();\r\n    private List<BDragItem<MCard>> list2 = new List<BDragItem<MCard>>();\r\n\r\n    private void SetOptions(SorttableOptions options)\r\n    {\r\n        options.Group = \"group\";\r\n    }\r\n\r\n    private void SetOptionsOther(SorttableOptions options)\r\n    {\r\n        options.Group = \"group2\";\r\n    }\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        InitList(list1, \"_1_\");\r\n        InitList(list2, \"_2_\");\r\n        base.OnInitialized();\r\n    }\r\n\r\n    private void InitList(List<BDragItem<string>> list, string split)\r\n    {\r\n        int i = 1, count = 5;\r\n        do\r\n        {\r\n            list.Add(new BDragItem<string>\r\n                {\r\n                    Item = $\"item{split}{i}\"\r\n                });\r\n            i++;\r\n        }\r\n        while (count - i > 0);\r\n    }\r\n}",
+        "Type": "Demos.Components.DragZone.props.Items",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 1,
+        "Name": "options",
+        "Title": "Options",
+        "Description": "<p>Sorttable.js <code>option</code> configuration parameter information, please refer to <a href=\"https://github.com/SortableJS/Sortable\">Reference</a>.</p>\n",
+        "Code": "@using Masa.Blazor\r\n<style>\r\n    .container {\r\n        width: 100%;\r\n        display: block;\r\n        text-align: left\r\n    }\r\n\r\n        .container > div {\r\n            width: 48%;\r\n            margin-left: 10px;\r\n            margin-top: 10px;\r\n        }\r\n</style>\r\n<div class=\"container\">group:group</div>\r\n<div>\r\n    <div>\r\n        <MDragZone SetOptions=SetOptions TItem=\"string\" Items=list1></MDragZone>\r\n    </div>\r\n    <div>\r\n        <MDragZone SetOptions=SetOptions TItem=\"string\" Items=list2></MDragZone>\r\n    </div>\r\n    <div>\r\n        <MDragZone SetOptions=SetOptions TItem=\"string\" Items=list3></MDragZone>\r\n    </div>\r\n    <div>\r\n        <MDragZone SetOptions=SetOptions TItem=\"string\" Items=list4></MDragZone>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n@code {\r\n    private List<BDragItem<string>> list1 = new List<BDragItem<string>>();\r\n    private List<BDragItem<string>> list2 = new List<BDragItem<string>>();\r\n    private List<BDragItem<string>> list3 = new List<BDragItem<string>>();\r\n    private List<BDragItem<string>> list4 = new List<BDragItem<string>>();\r\n\r\n    private void SetOptions(SorttableOptions options)\r\n    {\r\n        options.Group = \"group\";\r\n    }\r\n\r\n    private void SetOptionsOther(SorttableOptions options)\r\n    {\r\n        options.Group = \"group2\";\r\n    }\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        InitList(list1, \"_1_\");\r\n        InitList(list2, \"_2_\");\r\n        InitList(list3, \"_3_\");\r\n        InitList(list4, \"_4_\");\r\n        base.OnInitialized();\r\n    }\r\n\r\n    private void InitList(List<BDragItem<string>> list, string split)\r\n    {\r\n        int i = 1, count = 5;\r\n        do\r\n        {\r\n            list.Add(new BDragItem<string>\r\n                {\r\n                    Item = $\"item{split}{i}\"\r\n                });\r\n            i++;\r\n        }\r\n        while (count - i > 0);\r\n    }\r\n}",
+        "Type": "Demos.Components.DragZone.props.Options",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 2,
+        "Name": "clone",
+        "Title": "Clone",
+        "Description": "<p>Selected element clone drag and drop.</p>\n",
+        "Code": "<div>\r\n    <div>\r\n        <MDragZone SetOptions=SetOptions1 TItem=\"string\" Items=list1></MDragZone>\r\n    </div>\r\n    <div>\r\n        <MDragZone SetOptions=SetOptions2 TItem=\"string\" Items=list2></MDragZone>\r\n    </div>   \r\n</div>\r\n\r\n\r\n\r\n@code {\r\n    private List<BDragItem<string>> list1 = new List<BDragItem<string>>();\r\n    private List<BDragItem<string>> list2 = new List<BDragItem<string>>();\r\n\r\n    private void SetOptions1(SorttableOptions options)\r\n    {\r\n        options.Group = \"group\";\r\n        options.Pull = \"clone\";\r\n    }\r\n\r\n    private void SetOptions2(SorttableOptions options)\r\n    {\r\n        options.Group = \"group\";\r\n    }\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        InitList(list1, \"_1_\");\r\n        InitList(list2, \"_2_\");\r\n        base.OnInitialized();\r\n    }\r\n\r\n    private void InitList(List<BDragItem<string>> list, string split)\r\n    {\r\n        int i = 1, count = 5;\r\n        do\r\n        {\r\n            list.Add(new BDragItem<string>\r\n                {\r\n                    Item = $\"item{split}{i}\"\r\n                });\r\n            i++;\r\n        }\r\n        while (count - i > 0);\r\n    }\r\n}",
+        "Type": "Demos.Components.DragZone.misc.Clone",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 3,
+        "Name": "filter",
+        "Title": "Filter",
+        "Description": "<p>Filter the elements, those that do not match cannot be dragged and dropped.</p>\n",
+        "Code": "<div class=\"container\">group:group</div>\r\n<div>\r\n    <div>\r\n        <MDragZone SetOptions=SetOptions TItem=\"string\" Items=list1></MDragZone>\r\n    </div>\r\n    <div>\r\n        <MDragZone SetOptions=SetOptions TItem=\"string\" Items=list2></MDragZone>\r\n    </div>    \r\n</div>\r\n\r\n@code {\r\n    private List<BDragItem<string>> list1 = new List<BDragItem<string>>();\r\n    private List<BDragItem<string>> list2 = new List<BDragItem<string>>();\r\n    private List<BDragItem<string>> list3 = new List<BDragItem<string>>();\r\n    private List<BDragItem<string>> list4 = new List<BDragItem<string>>();\r\n\r\n    private void SetOptions(SorttableOptions options)\r\n    {\r\n        options.Group = \"group\";\r\n    }\r\n\r\n    private void SetOptionsOther(SorttableOptions options)\r\n    {\r\n        options.Group = \"group2\";\r\n    }\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        InitList(list1, \"_1_\");\r\n        InitList(list2, \"_2_\");\r\n        InitList(list3, \"_3_\");\r\n        InitList(list4, \"_4_\");\r\n        base.OnInitialized();\r\n    }\r\n\r\n    private void InitList(List<BDragItem<string>> list, string split)\r\n    {\r\n        int i = 1, count = 5;\r\n        do\r\n        {\r\n            list.Add(new BDragItem<string>\r\n                {\r\n                    Item = $\"item{split}{i}\"\r\n                });\r\n            i++;\r\n        }\r\n        while (count - i > 0);\r\n    }\r\n}",
+        "Type": "Demos.Components.DragZone.misc.Filter",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 1,
+        "Name": "multiyZone",
+        "Title": "MultiyZone",
+        "Description": "<p>Drag and drop across multiple regions.</p>\n",
+        "Code": "\r\n        <MDragZone SetOptions=SetOptions TItem=\"string\" Items=list1></MDragZone>\r\n        <MDragZone SetOptions=SetOptions TItem=\"string\" Items=list2></MDragZone>\r\n\r\n\r\n@code {\r\n    private List<BDragItem<string>> list1 = new List<BDragItem<string>>();\r\n    private List<BDragItem<string>> list2 = new List<BDragItem<string>>();\r\n\r\n    private void SetOptions(SorttableOptions options)\r\n    {\r\n        options.Group = \"group\";\r\n    }\r\n\r\n    private void SetOptionsOther(SorttableOptions options)\r\n    {\r\n        options.Group = \"group2\";\r\n    }\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        InitList(list1, \"_1_\");\r\n        InitList(list2, \"_2_\");\r\n        InitList(list3, \"_3_\");\r\n        InitList(list4, \"_4_\");\r\n        base.OnInitialized();\r\n    }\r\n\r\n    private void InitList(List<BDragItem<string>> list, string split)\r\n    {\r\n        int i = 1, count = 5;\r\n        do\r\n        {\r\n            list.Add(new BDragItem<string>\r\n                {\r\n                    Item = $\"item{split}{i}\"\r\n                });\r\n            i++;\r\n        }\r\n        while (count - i > 0);\r\n    }\r\n}",
+        "Type": "Demos.Components.DragZone.misc.MultiyZone",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 4,
+        "Name": "nested",
+        "Title": "Nested",
+        "Description": "<p>Nested drag and drop.</p>\n",
+        "Code": "<MDragZone SetOptions=SetOptions TItem=\"string\" Items=list1></MDragZone>\r\n<MDragZone SetOptions=SetOptions TItem=\"string\" Items=list2></MDragZone>\r\n<MDragZone SetOptions=SetOptions TItem=\"string\" Items=list3></MDragZone>\r\n<MDragZone SetOptions=SetOptions TItem=\"string\" Items=list4></MDragZone>\r\n\r\n\r\n\r\n@code {\r\n    private List<BDragItem<string>> list1 = new List<BDragItem<string>>();\r\n    private List<BDragItem<string>> list2 = new List<BDragItem<string>>();\r\n    private List<BDragItem<string>> list3 = new List<BDragItem<string>>();\r\n    private List<BDragItem<string>> list4 = new List<BDragItem<string>>();\r\n\r\n    private void SetOptions(SorttableOptions options)\r\n    {\r\n        options.Group = \"group\";\r\n    }\r\n\r\n    private void SetOptionsOther(SorttableOptions options)\r\n    {\r\n        options.Group = \"group2\";\r\n    }\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        InitList(list1, \"_1_\");\r\n        InitList(list2, \"_2_\");\r\n        InitList(list3, \"_3_\");\r\n        InitList(list4, \"_4_\");\r\n        base.OnInitialized();\r\n    }\r\n\r\n    private void InitList(List<BDragItem<string>> list, string split)\r\n    {\r\n        int i = 1, count = 5;\r\n        do\r\n        {\r\n            list.Add(new BDragItem<string>\r\n                {\r\n                    Item = $\"item{split}{i}\"\r\n                });\r\n            i++;\r\n        }\r\n        while (count - i > 0);\r\n    }\r\n}",
+        "Type": "Demos.Components.DragZone.misc.Nested",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Title": "DragZone",
+    "Type": "DragZone",
+    "FullTitle": "DragZone"
+  },
+  {
     "Desc": "<p><a href=\"https://echarts.apache.org/examples/en/index.html\">ECharts</a></p>\n",
     "Order": 0,
     "OtherDocs": {
