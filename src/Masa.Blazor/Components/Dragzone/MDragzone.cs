@@ -107,7 +107,7 @@
                 Options.OnRemove(args);
 
             var index = Items.IndexOf(DragDropService.DragItem);
-            if (args.OldIndex == index)
+            if (!args.IsClone && args.OldIndex == index)
             {
                 Items.RemoveAt(index);
             }

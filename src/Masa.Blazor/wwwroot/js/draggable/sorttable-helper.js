@@ -65,7 +65,7 @@
 
     function log(name, obj) {
         obj["__callname"] = name;
-        //console.log(obj);
+        console.log(obj);
     }
 
     function convertDropEndEvent(event) {

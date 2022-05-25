@@ -809,6 +809,7 @@ input[type=number] {
     margin: 10px;
     background-color: #ffffff;
     transition: opacity 0.4s ease-in-out;
+    width:100%;
 }
 
     .dragItem-container > div {

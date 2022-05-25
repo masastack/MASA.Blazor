@@ -112,10 +112,9 @@
 
             if (Pull != null)
             {
-                if (Pull != null)
+                if (bool.TryParse(Pull, out bool result))
                 {
-                    if (bool.TryParse(Pull, out bool result))
-                        items.Add("pull", result);
+                    items.Add("pull", result);
                 }
                 else if (Pull == "clone")
                 {

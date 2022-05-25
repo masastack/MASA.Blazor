@@ -1,11 +1,11 @@
 ﻿<style>
-.ignore-elements{
-    background-color:red
-}
+    div.ignore-elements {
+        background-color: red
+    }
 </style>
-        <MDragZone SetOptions=SetOptions1 TItem="string" Items=list1></MDragZone>
-    
-        <MDragZone SetOptions=SetOptions2 TItem="string" Items=list2></MDragZone>
+<MDragZone SetOptions=SetOptions1 TItem="string" Items=list1></MDragZone>
+
+<MDragZone SetOptions=SetOptions2 TItem="string" Items=list2></MDragZone>
 
 @code {
     private List<BDragItem<string>> list1 = new List<BDragItem<string>>();
@@ -13,13 +13,16 @@
 
     private void SetOptions1(SorttableOptions options)
     {
-        options.Group = "group";
-        options.Filter = "ignore-elements";        
+        options.Group = "group_f1";
+        options.Filter = ".ignore-elements";
+        options.Put = "false";
+
     }
 
     private void SetOptions2(SorttableOptions options)
     {
-        options.Group = "group";
+        options.Group = "group_f2";
+        options.Put = "group_f1";
     }
 
     protected override void OnInitialized()
@@ -40,7 +43,7 @@
                     Item = $"item{split}{i}"
                 });
             i++;
-        }        
+        }
         while (count - i > 0);
     }
 }

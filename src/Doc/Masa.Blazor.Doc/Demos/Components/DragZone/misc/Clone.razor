@@ -15,13 +15,15 @@
 
     private void SetOptions1(SorttableOptions options)
     {
-        options.Group = "group";
+        options.Group = "clone_group";
         options.Pull = "clone";
+        //can't drop
+        options.Put = false.ToString().ToLower();
     }
 
     private void SetOptions2(SorttableOptions options)
     {
-        options.Group = "group";
+        options.Group = "clone_group";
     }
 
     protected override void OnInitialized()
