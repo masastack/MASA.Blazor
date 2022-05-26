@@ -1,11 +1,39 @@
-﻿
-        <MDragZone SetOptions=SetOptions TItem="string" Items=list1></MDragZone>
- 
-        <MDragZone SetOptions=SetOptions TItem="string" Items=list2></MDragZone>
+﻿@using Microsoft.AspNetCore.Components.Rendering
+<style>
+    .mycontainer {
+        width: 100%;
+        display: block;
+    }
+
+        .mycontainer > div {
+            width: 45%;
+            margin: 2% 0 0 2%;
+            display: inline-table
+        }
+
+       /* background-color: #03A9F4;
+    background-color: #BBDEFB;*/
+</style>
+
+<MCard>
+    <MCardText>
+        asdasdasdasd
+    </MCardText>
+
+</MCard>
+
+
+<div class="mycontainer">
+    <MDragZone SetOptions=SetOptions TItem="MCard" Items=list1 Class= "rounded-2" Style="border:solid 1px #E0E0E0">
+
+    </MDragZone>
+
+    <MDragZone SetOptions=SetOptions TItem="MCard" Items=list2 Class=" rounded-2" Style="border:solid 1px #E0E0E0"></MDragZone>
+</div>
 
 @code {
-    private List<BDragItem<string>> list1 = new List<BDragItem<string>>();
-    private List<BDragItem<string>> list2 = new List<BDragItem<string>>();
+    private List<BDragItem<MCard>> list1 = new List<BDragItem<MCard>>();
+    private List<BDragItem<MCard>> list2 = new List<BDragItem<MCard>>();
 
     private void SetOptions(SorttableOptions options)
     {
@@ -24,17 +52,38 @@
         base.OnInitialized();
     }
 
-    private void InitList(List<BDragItem<string>> list, string split)
+    private void InitList(List<BDragItem<MCard>> list, string split)
     {
         int i = 1, count = 5;
         do
         {
-            list.Add(new BDragItem<string>
+            list.Add(new BDragItem<MCard>
                 {
-                    Item = $"item{split}{i}"
+                    Item = new MCard
+                    {
+                        CascadingIsDark = true,                        
+                        ChildContent = CreateComponent(split, i)
+                    },
+                    CssStyle="background-color:none"
                 });
             i++;
         }
         while (count - i > 0);
     }
+
+    private RenderFragment CreateComponent(string split, int index) => builder =>
+        {
+            builder.OpenComponent<MCardTitle>(0);
+            builder.AddAttribute(1, "ChildContent", CreateComponentText($"item card title {split}{index}"));
+            builder.CloseComponent();
+
+            builder.OpenComponent<MCardText>(2);
+            builder.AddAttribute(3, "ChildContent", CreateComponentText($"item card text {split}{index}"));
+            builder.CloseComponent();
+        };
+
+    private RenderFragment CreateComponentText(string name) => builder =>
+        {
+            builder.AddContent(0, $"item {name}");
+        };
 }

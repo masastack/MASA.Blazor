@@ -1,49 +1,45 @@
-﻿@using Masa.Blazor
-<style>
-    .container {
+﻿<style>
+    .mycontainer {
         width: 100%;
         display: block;
-        text-align: left
     }
 
-        .container > div {
-            width: 48%;
-            margin-left: 10px;
-            margin-top: 10px;
+        .mycontainer > div {
+            width: 45%;
+            margin: 2% 0 0 2%;
+            display: inline-table
         }
 </style>
-<div class="container">group:group</div>
-<div>
-    <div>
-        <MDragZone SetOptions=SetOptions TItem="string" Items=list1></MDragZone>
-    </div>
-    <div>
-        <MDragZone SetOptions=SetOptions TItem="string" Items=list2></MDragZone>
-    </div>
-    <div>
-        <MDragZone SetOptions=SetOptions TItem="string" Items=list3></MDragZone>
-    </div>
-    <div>
-        <MDragZone SetOptions=SetOptions TItem="string" Items=list4></MDragZone>
-    </div>
+<div class="mycontainer">
+    <div>group_1</div><div>group_3</div>
+    <MDragZone SetOptions=SetOptions1 TItem="string" Items=list1></MDragZone>
+    <MDragZone SetOptions=SetOptions2 TItem="string" Items=list2></MDragZone>
+    <div>group_3</div><div></div>
+    <MDragZone SetOptions=SetOptions3 TItem="string" Items=list3></MDragZone>
 </div>
-
-
 
 @code {
     private List<BDragItem<string>> list1 = new List<BDragItem<string>>();
     private List<BDragItem<string>> list2 = new List<BDragItem<string>>();
     private List<BDragItem<string>> list3 = new List<BDragItem<string>>();
-    private List<BDragItem<string>> list4 = new List<BDragItem<string>>();
 
-    private void SetOptions(SorttableOptions options)
+    private void SetOptions1(SorttableOptions options)
     {
-        options.Group = "group";
+        options.Group = "group_1";
+        options.Pull = "true";
+        options.Put = "false";
     }
 
-    private void SetOptionsOther(SorttableOptions options)
+    private void SetOptions2(SorttableOptions options)
     {
-        options.Group = "group2";
+        options.Group = "group_2";
+        options.Pull = "clone";
+        options.Put = "group_3";
+    }
+
+    private void SetOptions3(SorttableOptions options)
+    {
+        options.Group = "group_3";
     }
 
     protected override void OnInitialized()
@@ -51,7 +47,6 @@
         InitList(list1, "_1_");
         InitList(list2, "_2_");
         InitList(list3, "_3_");
-        InitList(list4, "_4_");
         base.OnInitialized();
     }
 

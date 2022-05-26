@@ -815,14 +815,12 @@ input[type=number] {
     .dragItem-container > div {
         cursor: move;
         margin: 5px 0 0 5px;
-        overflow: auto;
-        background-color: #03A9F4;
+        overflow: auto;        
         transition: opacity 0.4s ease-in-out;
     }
 
 .dragItem-active {
     opacity: 0.2;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
-    filter: alpha(opacity=20);
-    background-color: #BBDEFB;
+    filter: alpha(opacity=20);    
 }

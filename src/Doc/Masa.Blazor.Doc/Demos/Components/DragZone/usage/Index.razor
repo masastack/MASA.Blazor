@@ -1,13 +1,25 @@
-﻿<MContainer>
-    <MRow NoGutters>
-        <MCol>
+﻿<style>
+.mycontainer{
+    width:100%;
+    display:block;
+}
+
+.mycontainer>div
+{
+    width:45%;
+    margin:2% 0 0 2%;
+    display:inline-table
+}
+</style>
+
+
+<div class="mycontainer">
+
             <MDragZone SetOptions=SetOptions TItem="string" Items=list1></MDragZone>
-        </MCol>
-        <MCol>
+     
             <MDragZone SetOptions=SetOptions TItem="string" Items=list2></MDragZone>
-        </MCol>
-    </MRow>
-</MContainer>
+            </div>
+       
 
 @code {
     private List<BDragItem<string>> list1 = new List<BDragItem<string>>();
