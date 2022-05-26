@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using BlazorComponent.Web;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
@@ -42,7 +43,11 @@ namespace Masa.Blazor
         public Action<BMenuProps> MenuProps { get; set; }
 
         [Parameter]
-        public bool Multiple { get; set; }
+        public bool Multiple
+        {
+            get => GetValue<bool>();
+            set => SetValue(value);
+        }
 
         //TODO:OpenOnClear
 
@@ -99,6 +104,8 @@ namespace Masa.Blazor
             get => GetValue<bool>();
             set => SetValue(value);
         }
+
+        protected int MenuListIndex { get; private set; } = -1;
 
         protected int SelectedIndex { get; set; } = -1;
 
@@ -204,8 +211,18 @@ namespace Masa.Blazor
             Watcher.Watch<bool>(nameof(IsMenuActive), WatchIsMenuActive);
         }
 
-        protected virtual void WatchIsMenuActive(bool val)
+        protected virtual async void WatchIsMenuActive(bool val)
         {
+            if ((Multiple && !val) || GetMenuIndex() > -1)
+            {
+                return;
+            }
+
+            var index = await JsInvokeAsync<int>(JsInteropConstants.GetListIndexWhereAttributeExists, $"{MMenu.ContentElement.GetSelector()} .m-list-item",
+                "aria-selected", "True");
+            
+            SetMenuIndex(index);
+            StateHasChanged();
         }
 
         private async Task<bool> CloseConditional(ClickOutsideArgs args)
@@ -221,8 +238,8 @@ namespace Masa.Blazor
         {
             IsMenuActive = false;
             IsFocused = false;
-            // TODO: selectedIndex = -1
-            // TODO: setMenuIndex(-1)
+            SelectedIndex = -1;
+            SetMenuIndex(-1);
 
             if (OnBlur.HasDelegate)
             {
@@ -324,7 +341,7 @@ namespace Masa.Blazor
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemContent)] = ItemContent;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.PrependItemContent)] = PrependItemContent;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.AppendItemContent)] = AppendItemContent;
-                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.SelectedIndex)] = SelectedIndex;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.SelectedIndex)] = MenuListIndex;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.NoDataContent)] = NoDataContent;
                 })
                 .Apply<BChip, MChip>(attrs =>
@@ -347,6 +364,8 @@ namespace Masa.Blazor
                 }
 
                 IsMenuActive = false;
+                
+                SetMenuIndex(ComputedItems.IndexOf(item));
             }
             else
             {
@@ -364,11 +383,16 @@ namespace Masa.Blazor
                 {
                     await SetInternalValueAsync(val);
                 }
-            }
 
-            if (OnSelectedItemUpdate.HasDelegate)
-            {
-                await OnSelectedItemUpdate.InvokeAsync(item);
+                if (HideSelected)
+                {
+                    SetMenuIndex(-1);
+                }
+                else
+                {
+                    var index = ComputedItems.IndexOf(item);
+                    SetMenuIndex(index);
+                }
             }
         }
 
@@ -402,9 +426,9 @@ namespace Masa.Blazor
                 case "Enter":
                     if (IsMenuActive)
                     {
-                        if (SelectedIndex > -1 && SelectedIndex < ComputedItems.Count)
+                        if (MenuListIndex > -1 && MenuListIndex < ComputedItems.Count)
                         {
-                            var item = ComputedItems[SelectedIndex];
+                            var item = ComputedItems[MenuListIndex];
                             await SelectItemsAsync(item);
                         }
                     }
@@ -421,7 +445,7 @@ namespace Masa.Blazor
 
         private void ChangeSelectedIndex(int change)
         {
-            var index = SelectedIndex + change;
+            var index = MenuListIndex + change;
             if (index > ComputedItems.Count - 1)
             {
                 //Back to first
@@ -433,7 +457,7 @@ namespace Masa.Blazor
                 index = ComputedItems.Count - 1;
             }
 
-            SelectedIndex = index;
+            SetMenuIndex(index);
         }
 
         public override Task HandleOnBlurAsync(FocusEventArgs args)
@@ -460,12 +484,30 @@ namespace Masa.Blazor
                 await OnClearClick.InvokeAsync(args);
             }
 
-            // TODO: setMenuIndex(-1)
+            SetMenuIndex(-1);
 
             // whether to need NextTick?
             await InputElement.FocusAsync();
 
             // TODO: OpenOnClear
+        }
+
+        protected void SetMenuIndex(int number)
+        {
+            MenuListIndex = number;
+
+            if (number > -1)
+            {
+                _ = JsInvokeAsync(JsInteropConstants.ScrollToTile, 
+                    MMenu.ContentElement.GetSelector(),
+                    $"{MMenu.ContentElement.GetSelector()} .m-list-item",
+                    number);
+            }
+        }
+
+        protected int GetMenuIndex()
+        {
+            return MenuListIndex;
         }
     }
 }
