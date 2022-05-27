@@ -1,7 +1,7 @@
 ﻿namespace Masa.Blazor
 {
     /// <summary>
-    /// detail to http://www.sortablejs.com/options.html
+    /// detail to https://github.com/SortableJS/Sortable
     /// </summary>
     public class SorttableOptions
     {
@@ -22,75 +22,101 @@
         public string Pull { get; set; }
         public string Put { get; set; }
         public string Group { get; set; }
-        public bool Sort { get; set; } = true;
-        public int Delay { get; set; }
-        public int TouchStartThreshold { get; set; }
-        public bool Disabled { get; set; }
-        public int Animation { get; set; } = 100;
+        public bool? Sort { get; set; }
+        public int? Delay { get; set; }
+        public int? TouchStartThreshold { get; set; }
+        public bool? Disabled { get; set; }
+        public string Easing { get; set; }
+        public int? Animation { get; set; } = 150;
         public string Handle { get; set; }
-        public string Filter { get; set; } = "ignore-elements";
-        public bool PreventOnFilter { get; set; } = true;
+        public string Filter { get; set; }
+        public bool? PreventOnFilter { get; set; }
         public string Draggable { get; set; }
-        public string GhostClass { get; set; } = "sortable-ghost";
-        public string ChosenClass { get; set; } = "sortable-chosen";
-        public string DragClass { get; set; } = "sortable-drag";
+        public string GhostClass { get; set; }
+        public string ChosenClass { get; set; }
+        public string DragClass { get; set; }
         public string DataIdAttr { get; set; } = "id";
-        public int SwapThreshold { get; set; } = 1;
-        public bool InvertSwap { get; set; }
-        public int InvertedSwapThreshold { get; set; } = 1;
+        public float? SwapThreshold { get; set; }
+        public bool? InvertSwap { get; set; }
+        public int? InvertedSwapThreshold { get; set; }
         public DirectionTypes? Direction { get; set; }
-        public bool ForceFallback { get; set; }
-        public string FallbackClass { get; set; } = "sortable-fallback";
-        public bool FallbackOnBody { get; set; }
-        public int FallbackTolerance { get; set; }
-        public bool Scroll { get; set; }
-        public int ScrollSensitivity { get; set; }
-        public int ScrollSpeed { get; set; }
-        public bool BubbleScroll { get; set; }
-        public bool DragoverBubble { get; set; }
-        public bool RemoveCloneOnHide { get; set; }
-        public int EmptyInsertThreshold { get; set; }
+        public bool? ForceFallback { get; set; }
+        public string FallbackClass { get; set; }
+        public bool? FallbackOnBody { get; set; }
+        public int? FallbackTolerance { get; set; }
+        public bool? Scroll { get; set; }
+        public int? ScrollSensitivity { get; set; }
+        public int? ScrollSpeed { get; set; }
+        public bool? BubbleScroll { get; set; }
+        public bool? DragoverBubble { get; set; }
+        public bool? RemoveCloneOnHide { get; set; }
+        public int? EmptyInsertThreshold { get; set; }
 
         public object ToParameters()
         {
             var dic = new Dictionary<string, object>();
             SetGroup(dic);
-            dic.Add("sort", Sort);
-            dic.Add("delay", Delay);
-            dic.Add("touchStartThreshold", TouchStartThreshold);
-            dic.Add("disabled", Disabled);
-            dic.Add("animation", Animation);
+            if (Sort.HasValue)
+                dic.Add("sort", Sort);
+            if (Delay.HasValue)
+                dic.Add("delay", Delay);
+            if (TouchStartThreshold.HasValue)
+                dic.Add("touchStartThreshold", TouchStartThreshold);
+            if (Disabled.HasValue)
+                dic.Add("disabled", Disabled);
+            if (Animation.HasValue)
+                dic.Add("animation", Animation);
+            if (!string.IsNullOrEmpty(Easing))
+                dic.Add("easing", Easing);
             if (!string.IsNullOrEmpty(Handle))
                 dic.Add("handle", Handle);
-            dic.Add("filter", Filter);
-            dic.Add("preventOnFilter", PreventOnFilter);
+            if (!string.IsNullOrEmpty(Filter))
+                dic.Add("filter", Filter);
+            if (PreventOnFilter.HasValue)
+                dic.Add("preventOnFilter", PreventOnFilter);
 
             if (!string.IsNullOrEmpty(Draggable))
                 dic.Add("draggable", Draggable);
-            dic.Add("ghostClass", GhostClass);
-            dic.Add("chosenClass", ChosenClass);
-            dic.Add("dragClass", DragClass);
-            dic.Add("dataIdAttr", DataIdAttr);
-
-            dic.Add("swapThreshold", SwapThreshold);
-            dic.Add("invertSwap", InvertSwap);
-            dic.Add("invertedSwapThreshold", InvertedSwapThreshold);
+            if (!string.IsNullOrEmpty(GhostClass))
+                dic.Add("ghostClass", GhostClass);
+            if (!string.IsNullOrEmpty(ChosenClass))
+                dic.Add("chosenClass", ChosenClass);
+            if (!string.IsNullOrEmpty(DragClass))
+                dic.Add("dragClass", DragClass);
+            if (!string.IsNullOrEmpty(DataIdAttr))
+                dic.Add("dataIdAttr", DataIdAttr);
+            if (SwapThreshold.HasValue)
+                dic.Add("swapThreshold", SwapThreshold);
+            if (InvertSwap.HasValue)
+                dic.Add("invertSwap", InvertSwap);
+            if (InvertedSwapThreshold.HasValue)
+                dic.Add("invertedSwapThreshold", InvertedSwapThreshold);
 
             if (Direction.HasValue && Direction - DirectionTypes.Default > 0)
                 dic.Add("direction", Direction.Value.ToString("G").ToLower());
+            if (ForceFallback.HasValue)
+                dic.Add("forceFallback", ForceFallback);
+            if (!string.IsNullOrEmpty(FallbackClass))
+                dic.Add("fallbackClass", FallbackClass);
+            if (FallbackOnBody.HasValue)
+                dic.Add("fallbackOnBody", FallbackOnBody);
+            if (FallbackTolerance.HasValue)
+                dic.Add("fallbackTolerance", FallbackTolerance);
+            if (Scroll.HasValue)
+                dic.Add("scroll", Scroll);
 
-            dic.Add("forceFallback", ForceFallback);
-            dic.Add("fallbackClass", FallbackClass);
-            dic.Add("fallbackOnBody", FallbackOnBody);
-            dic.Add("fallbackTolerance", FallbackTolerance);
-            dic.Add("scroll", Scroll);
-
-            dic.Add("scrollSensitivity", ScrollSensitivity);
-            dic.Add("scrollSpeed", ScrollSpeed);
-            dic.Add("bubbleScroll", BubbleScroll);
-            dic.Add("dragoverBubble", DragoverBubble);
-            dic.Add("removeCloneOnHide", RemoveCloneOnHide);
-            dic.Add("emptyInsertThreshold", EmptyInsertThreshold);
+            if (ScrollSensitivity.HasValue)
+                dic.Add("scrollSensitivity", ScrollSensitivity);
+            if (ScrollSpeed.HasValue)
+                dic.Add("scrollSpeed", ScrollSpeed);
+            if (BubbleScroll.HasValue)
+                dic.Add("bubbleScroll", BubbleScroll);
+            if (DragoverBubble.HasValue)
+                dic.Add("dragoverBubble", DragoverBubble);
+            if (RemoveCloneOnHide.HasValue)
+                dic.Add("removeCloneOnHide", RemoveCloneOnHide);
+            if (EmptyInsertThreshold.HasValue)
+                dic.Add("emptyInsertThreshold", EmptyInsertThreshold);
             return dic;
         }
 

@@ -1,59 +1,73 @@
 ﻿<style>
-.mycontainer{
-    width:100%;
-    display:block;
-}
+    .parent {
+        background-color: #eee;
+        min-height: 40px;
+        padding: 5px 0 10px 0
+    }
 
-.mycontainer>div
-{
-    width:45%;
-    margin:2% 0 0 2%;
-    display:inline-table
-}
+    .item {
+        margin: 5px;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: -1px;
+        border: 1px solid rgba(0,0,0,.125);
+    }
+
+    .white-color {
+        background-color: #ffffff;
+    }
+
+    .blue-color {
+        background-color: #5CBBF6;
+    }
+
 </style>
-
-
-<div class="mycontainer">
-        <MDragZone SetOptions=SetOptions1 TItem="string" Items=list1></MDragZone>    
-        <MDragZone SetOptions=SetOptions2 TItem="string" Items=list2></MDragZone>    
-</div>
-
+<MContainer>
+    <MRow>
+        <MCol Cols=6>
+            <MDragZone OnConfigure=SetOptions Class="parent">
+                <MDragItem>
+                    <div class="white-color item">item1.1</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="white-color item">item1.2</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="white-color item">item1.3</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="white-color item">item1.4</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="white-color item">item1.5</div>
+                </MDragItem>
+            </MDragZone>
+        </MCol>
+        <MCol Cols=6>
+            <MDragZone OnConfigure=SetOptions Class="parent">
+                <MDragItem>
+                    <div class="item blue-color">item2.1</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="item blue-color">item2.2</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="item blue-color">item2.3</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="item blue-color">item2.4</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="item blue-color">item2.5</div>
+                </MDragItem>
+            </MDragZone>
+        </MCol>
+    </MRow>
+</MContainer>
 @code {
-    private List<BDragItem<string>> list1 = new List<BDragItem<string>>();
-    private List<BDragItem<string>> list2 = new List<BDragItem<string>>();
-
-    private void SetOptions1(SorttableOptions options)
+    private void SetOptions(SorttableOptions options)
     {
         options.Group = "clone_group";
         //drag use clone mode
         options.Pull = "clone";
-        //can't drop
-        options.Put = false.ToString().ToLower();
-    }
-
-    private void SetOptions2(SorttableOptions options)
-    {
-        options.Group = "clone_group";
-    }
-
-    protected override void OnInitialized()
-    {
-        InitList(list1, "_1_");
-        InitList(list2, "_2_");
-        base.OnInitialized();
-    }
-
-    private void InitList(List<BDragItem<string>> list, string split)
-    {
-        int i = 1, count = 5;
-        do
-        {
-            list.Add(new BDragItem<string>
-                {
-                    Item = $"item{split}{i}"
-                });
-            i++;
-        }
-        while (count - i > 0);
     }
 }

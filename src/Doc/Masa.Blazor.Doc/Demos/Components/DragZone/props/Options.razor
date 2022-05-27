@@ -1,4 +1,5 @@
-﻿<style>
+﻿@using Microsoft.AspNetCore.Components.Rendering
+<style>
     .mycontainer {
         width: 100%;
         display: block;
@@ -9,58 +10,55 @@
             margin: 2% 0 0 2%;
             display: inline-table
         }
+
+    .item {
+        margin: 5px;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: -1px;
+        border: 1px solid rgba(0,0,0,.125);
+    }
 </style>
 <div class="mycontainer">
-    <div>group_1</div><div>group_3</div>
-    <MDragZone SetOptions=SetOptions1 TItem="string" Items=list1></MDragZone>
-    <MDragZone SetOptions=SetOptions2 TItem="string" Items=list2></MDragZone>
-    <div>group_3</div><div></div>
-    <MDragZone SetOptions=SetOptions3 TItem="string" Items=list3></MDragZone>
+    <MDragZone OnConfigure=SetOptions >
+        <BDragItem>
+            <MCard Class="item">
+                <MCardTitle>item1.1</MCardTitle>
+                <MCardText>item content1</MCardText>
+            </MCard>
+        </BDragItem>
+        <BDragItem>
+            <MCard Class="item">
+                <MCardTitle>item1.2</MCardTitle>
+                <MCardText>item content2</MCardText>
+            </MCard>
+        </BDragItem>
+    </MDragZone>
+
+    <MDragZone OnConfigure=SetOptions>
+        <BDragItem>
+            <MCard Class="item">
+                <MCardTitle>item2.1</MCardTitle>
+                <MCardText>item content1</MCardText>
+            </MCard>
+        </BDragItem>
+        <BDragItem>
+            <MCard Class="item">
+                <MCardTitle>item2.2</MCardTitle>
+                <MCardText>item content1</MCardText>
+            </MCard>
+        </BDragItem>
+    </MDragZone>
 </div>
 
 @code {
-    private List<BDragItem<string>> list1 = new List<BDragItem<string>>();
-    private List<BDragItem<string>> list2 = new List<BDragItem<string>>();
-    private List<BDragItem<string>> list3 = new List<BDragItem<string>>();
 
-    private void SetOptions1(SorttableOptions options)
+    private void SetOptions(SorttableOptions options)
     {
-        options.Group = "group_1";
-        options.Pull = "true";
-        options.Put = "false";
+        options.Group = "group";
     }
 
-    private void SetOptions2(SorttableOptions options)
+    private void SetOptionsOther(SorttableOptions options)
     {
-        options.Group = "group_2";
-        options.Pull = "clone";
-        options.Put = "group_3";
-    }
-
-    private void SetOptions3(SorttableOptions options)
-    {
-        options.Group = "group_3";
-    }
-
-    protected override void OnInitialized()
-    {
-        InitList(list1, "_1_");
-        InitList(list2, "_2_");
-        InitList(list3, "_3_");
-        base.OnInitialized();
-    }
-
-    private void InitList(List<BDragItem<string>> list, string split)
-    {
-        int i = 1, count = 5;
-        do
-        {
-            list.Add(new BDragItem<string>
-                {
-                    Item = $"item{split}{i}"
-                });
-            i++;
-        }
-        while (count - i > 0);
+        options.Group = "group2";
     }
 }

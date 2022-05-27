@@ -803,24 +803,3 @@ input[type=number] {
     cursor: pointer;
     border-radius: 4px;
 }
-
-.dragItem-container {
-    display: block;
-    margin: 10px;
-    background-color: #ffffff;
-    transition: opacity 0.4s ease-in-out;
-    width:100%;
-}
-
-    .dragItem-container > div {
-        cursor: move;
-        margin: 5px 0 0 5px;
-        overflow: auto;        
-        transition: opacity 0.4s ease-in-out;
-    }
-
-.dragItem-active {
-    opacity: 0.2;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
-    filter: alpha(opacity=20);    
-}

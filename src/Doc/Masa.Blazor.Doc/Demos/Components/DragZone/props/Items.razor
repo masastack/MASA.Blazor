@@ -1,89 +1,114 @@
-﻿@using Microsoft.AspNetCore.Components.Rendering
-<style>
-    .mycontainer {
-        width: 100%;
-        display: block;
+﻿<style>
+    .item {
+        margin: 5px;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: -1px;
+        border: 1px solid rgba(0,0,0,.125);
     }
-
-        .mycontainer > div {
-            width: 45%;
-            margin: 2% 0 0 2%;
-            display: inline-table
-        }
-
-       /* background-color: #03A9F4;
-    background-color: #BBDEFB;*/
 </style>
 
-<MCard>
-    <MCardText>
-        asdasdasdasd
-    </MCardText>
+<MButtonGroup>
+    <MButton OnClick=Add>添加</MButton>
+    <MButton OnClick=Del>删除</MButton>
+    <MButton OnClick=Refresh>刷新</MButton>
+</MButtonGroup>
 
-</MCard>
-
-
-<div class="mycontainer">
-    <MDragZone SetOptions=SetOptions TItem="MCard" Items=list1 Class= "rounded-2" Style="border:solid 1px #E0E0E0">
-
-    </MDragZone>
-
-    <MDragZone SetOptions=SetOptions TItem="MCard" Items=list2 Class=" rounded-2" Style="border:solid 1px #E0E0E0"></MDragZone>
-</div>
+<MDragZone OnConfigure=SetOptions @ref=mDragZone OnInit="AddList">
+    <MDragItem>
+        <MCard Class="item">
+            <MCardTitle>item1.1</MCardTitle>
+            <MCardText>item content1</MCardText>
+            <MButton OnClick=@(()=>{ this.StateHasChanged(); })> button</MButton>
+        </MCard>
+    </MDragItem>
+    <MDragItem>
+        <MCard Class="item">
+            <MCardTitle>item1.2</MCardTitle>
+            <MCardText>item content2</MCardText>
+        </MCard>
+    </MDragItem>
+</MDragZone>
 
 @code {
-    private List<BDragItem<MCard>> list1 = new List<BDragItem<MCard>>();
-    private List<BDragItem<MCard>> list2 = new List<BDragItem<MCard>>();
+    private MDragZone mDragZone;
+    private int i = 1;
 
     private void SetOptions(SorttableOptions options)
     {
-        options.Group = "group";
+        options.Group = "group_item";
     }
 
-    private void SetOptionsOther(SorttableOptions options)
+    private void Add()
     {
-        options.Group = "group2";
+        mDragZone.Add(Add(mDragZone, i++));
     }
 
-    protected override void OnInitialized()
+    private void Del()
     {
-        InitList(list1, "_1_");
-        InitList(list2, "_2_");
-        base.OnInitialized();
+        mDragZone.Add(Add(mDragZone, i++));
     }
 
-    private void InitList(List<BDragItem<MCard>> list, string split)
+    private void Refresh()
     {
-        int i = 1, count = 5;
+
+    }
+
+
+    private MDragItem Add(MDragZone container, int i)
+    {
+        return new MDragItem
+            {
+                DragZone = container,
+                ChildContent = CreateCard("-", i++)
+            };
+    }
+
+    private void AddList(MDragZone container)
+    {
+        int count = 5;
+        var list = new List<MDragItem>();
         do
         {
-            list.Add(new BDragItem<MCard>
+            list.Add(new MDragItem
                 {
-                    Item = new MCard
-                    {
-                        CascadingIsDark = true,                        
-                        ChildContent = CreateComponent(split, i)
-                    },
-                    CssStyle="background-color:none"
+                    DragZone = container,
+                    ChildContent = CreateCard("-", i++)
                 });
-            i++;
         }
         while (count - i > 0);
+        if (list.Any())
+            container.AddRange(list);
     }
 
-    private RenderFragment CreateComponent(string split, int index) => builder =>
+    private RenderFragment CreateCard(string split, int index) => builder =>
         {
-            builder.OpenComponent<MCardTitle>(0);
-            builder.AddAttribute(1, "ChildContent", CreateComponentText($"item card title {split}{index}"));
-            builder.CloseComponent();
-
-            builder.OpenComponent<MCardText>(2);
-            builder.AddAttribute(3, "ChildContent", CreateComponentText($"item card text {split}{index}"));
+            int i = 0;
+            builder.OpenComponent<MCard>(i++);
+            builder.AddAttribute(i++, "IsDark", mDragZone.IsDark);
+            builder.AddAttribute(i++, "Class", "item");
+            builder.AddAttribute(i++, "ChildContent", CreateComponent("-", index));
             builder.CloseComponent();
         };
 
-    private RenderFragment CreateComponentText(string name) => builder =>
+    private RenderFragment CreateComponent(string split, int index) => builder =>
         {
-            builder.AddContent(0, $"item {name}");
+            int i = 0;
+            builder.OpenComponent<MCardTitle>(i++);
+            builder.AddAttribute(i++, "ChildContent", CreateText($"item card title {split}{index}"));
+            builder.CloseComponent();
+
+            builder.OpenComponent<MCardText>(i++);
+            builder.AddAttribute(i++, "ChildContent", CreateText($"item card text {split}{index}"));
+            builder.CloseComponent();
+
+            //builder.OpenComponent<MButton>(i++);
+            //builder.AddAttribute(i++, "ChildContent", CreateText($"item card button {split}{index}"));
+            //builder.AddAttribute(i++, "OnClick",  async (MouseEventArgs e) =>{StateHasChanged(); await Task.CompletedTask;});
+            //builder.CloseComponent();
+        };
+
+    private RenderFragment CreateText(string name) => builder =>
+        {
+            builder.AddContent(0, $"{name}");
         };
 }

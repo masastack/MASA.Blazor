@@ -2,7 +2,6 @@
     log("init", option);
     let nameSpace = "";
     let _options = {
-        disabled: false,
         onChoose: function (evt) {
             dotNetHelper.invokeMethodAsync(`${nameSpace}OnChoose`, null);
         },
@@ -39,7 +38,7 @@
     }
 
     if (option.group.pull !== undefined) {
-        if (typeof option.group.pull === 'boolean' || option.group.pull == 'clone') {       
+        if (typeof option.group.pull === 'boolean' || option.group.pull == 'clone') {
         } else {
             option.group.pull = function () {
                 return dotNetHelper.invokeMethodAsync(`${nameSpace}OnPull`);
@@ -50,7 +49,7 @@
     if (option.group.put !== undefined) {
         if (typeof option.group.put === 'boolean' || option.group.put.join) {
 
-        } else{
+        } else {
             option.group.put = function () {
                 return dotNetHelper.invokeMethodAsync(`${nameSpace}OnPut`);
             }
@@ -59,7 +58,8 @@
 
     if (Sortable && containerId) {
         var ops = Object.assign(_options, option)
-        log("assign", ops);
+        //log("assign", ops);
+        //console.log(`containerId:${containerId},dom:${document.getElementById(containerId)}`)
         new Sortable(document.getElementById(containerId), ops)
     }
 

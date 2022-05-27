@@ -1,15 +1,20 @@
-﻿namespace Masa.Blazor
+﻿using Microsoft.AspNetCore.Components.Rendering;
+
+namespace Masa.Blazor
 {
-    public partial class MDragZone<TItem> : BDragZone<TItem>, IDisposable
+    public partial class MDragZone : BDragZone, IDisposable
     {
-        private DotNetObjectReference<MDragZone<TItem>> _dotNetHelper;
+        private DotNetObjectReference<MDragZone> _dotNetHelper;
         private IJSObjectReference _jsHelper;
 
         [Parameter]
         public SorttableOptions Options { get; set; }
 
         [Parameter]
-        public Action<SorttableOptions> SetOptions { get; set; }
+        public Action<SorttableOptions> OnConfigure { get; set; }
+
+        [Parameter]
+        public Action<MDragZone> OnInit { get; set; }
 
         /// <summary>
         /// 元素被选中
@@ -80,6 +85,8 @@
         {
             if (Options?.OnUpdate != null)
                 Options.OnUpdate(args);
+
+            Add(DragDropService.DragItem, args.NewIndex);
 
             Items[args.OldIndex] = Items[args.NewIndex];
             Items[args.NewIndex] = DragDropService.DragItem;
@@ -159,44 +166,61 @@
         {
             if (Options.PullFn != null)
                 return Options.PullFn();
-            return true; ;
+            return true;
         }
+
 
         protected override void OnInitialized()
         {
-            Options = new SorttableOptions()
-            {
-                ChosenClass = "dragItem-active"
-            };
+            Options = new();
+            OnInit?.Invoke(this);
             base.OnInitialized();
-        }
-
-        protected override void OnAfterRender(bool firstRender)
-        {
-            base.OnAfterRender(firstRender);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            _dotNetHelper = DotNetObjectReference.Create(this);
-            _jsHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/draggable/sorttable-helper.js");
-            await _jsHelper.InvokeVoidAsync("init", _dotNetHelper, Id, Options.ToParameters());
+            if (firstRender)
+            {
+                _dotNetHelper = DotNetObjectReference.Create(this);
+                _jsHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/draggable/sorttable-helper.js");
+                await _jsHelper.InvokeVoidAsync("init", _dotNetHelper, Id, Options.ToParameters());
+            }
             await base.OnAfterRenderAsync(firstRender);
         }
 
         protected override void OnParametersSet()
         {
-            if (SetOptions != null)
-                SetOptions(Options);
+            OnConfigure?.Invoke(Options);
             base.OnParametersSet();
         }
 
         protected override Task OnParametersSetAsync()
         {
-            if (SetOptions != null)
-                SetOptions(Options);
+            OnConfigure?.Invoke(Options);
             return base.OnParametersSetAsync();
         }
+
+        //protected override void BuildRenderTree(RenderTreeBuilder builder)
+        //{
+        //    //builder.AddContent(0, ChildContent);
+
+        //    BuildRenderItems(builder, DynicItems);
+        //    //base.BuildRenderTree(builder);
+        //}
+
+        //private void BuildRenderItems(RenderTreeBuilder builder, List<BDragItem> list)
+        //{
+        //    if (Items != null && Items.Any())
+        //    {
+        //        var index = 0;
+        //        foreach (var item in list)
+        //        {
+        //            builder.OpenComponent<DynamicComponent>(index++);
+        //            builder.AddAttribute(index++, nameof(DynamicComponent.Parameters), item.ToParameters());
+        //            builder.CloseComponent();
+        //        }
+        //    }
+        //}
 
         public override void Dispose()
         {
