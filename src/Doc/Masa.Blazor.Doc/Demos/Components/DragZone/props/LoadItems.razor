@@ -1,0 +1,103 @@
+﻿<style>
+    .item {
+        margin: 5px;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: -1px;
+        border: 1px solid rgba(0,0,0,.125);
+    }
+</style>
+
+<MContainer>
+    <MRow>
+        <MCol Cols=6>
+            LoadItems:false
+        </MCol>
+        <MCol Cols=6>
+            LoadItems:true
+        </MCol>
+    </MRow>
+    <MRow>
+        <MCol Cols=6>
+            <MDragZone LoadItems=false OnInit="InitData">
+                <MDragItem>
+                    <MCard Class="item">
+                        <MCardTitle>item1.1</MCardTitle>
+                        <MCardText>item content1.1</MCardText>
+                    </MCard>
+                </MDragItem>
+                <MDragItem>
+                    <MCard Class="item">
+                        <MCardTitle>item1.2</MCardTitle>
+                        <MCardText>item content1.2</MCardText>
+                    </MCard>
+                </MDragItem>
+            </MDragZone>
+        </MCol>
+        <MCol Cols=6>
+            <MDragZone LoadItems=true OnInit="InitData">
+                <MDragItem>
+                    <MCard Class="item">
+                        <MCardTitle>item2.1</MCardTitle>
+                        <MCardText>item content2.1</MCardText>
+                    </MCard>
+                </MDragItem>
+                <MDragItem>
+                    <MCard Class="item">
+                        <MCardTitle>item2.2</MCardTitle>
+                        <MCardText>item content2.2</MCardText>
+                    </MCard>
+                </MDragItem>
+            </MDragZone>
+        </MCol>
+    </MRow>
+</MContainer>
+@code {
+
+    private int containerIndex = 1;
+
+    private void InitData(MDragZone container)
+    {
+        int count = 5, i = 1;
+        var list = new List<MDragItem>();
+        do
+        {
+            list.Add(new MDragItem
+                {
+                    DragZone = container,
+                    ChildContent = CreateCard(container, $"{containerIndex}.{i++}")
+                });
+        }
+        while (count - i > 0);
+        if (list.Any())
+            container.AddRange(list);
+
+        containerIndex++;
+    }
+
+    private RenderFragment CreateCard(MDragZone container, string name) => builder =>
+         {
+             int i = 0;
+             builder.OpenComponent<MCard>(i++);
+             builder.AddAttribute(i++, "IsDark", container.IsDark);
+             builder.AddAttribute(i++, "Class", "item");
+             builder.AddAttribute(i++, "ChildContent", CreateComponent(name));
+             builder.CloseComponent();
+         };
+
+    private RenderFragment CreateComponent(string name) => builder =>
+        {
+            int i = 0;
+            builder.OpenComponent<MCardTitle>(i++);
+            builder.AddAttribute(i++, "ChildContent", CreateText($"item card title {name}"));
+            builder.CloseComponent();
+
+            builder.OpenComponent<MCardText>(i++);
+            builder.AddAttribute(i++, "ChildContent", CreateText($"item card text {name}"));
+            builder.CloseComponent();
+        };
+
+    private RenderFragment CreateText(string name) => builder =>
+        {
+            builder.AddContent(0, $"{name}");
+        };
+}

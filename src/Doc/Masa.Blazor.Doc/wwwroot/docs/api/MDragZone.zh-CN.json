@@ -20,13 +20,23 @@
       "Description": ""
     },
     {
-      "Name": "Items",
-      "Type": "List<BDragItem`1>",
+      "Name": "Light",
+      "Type": "Boolean",
       "Description": ""
     },
     {
-      "Name": "Light",
+      "Name": "LoadItems",
       "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "OnConfigure",
+      "Type": "Action<SorttableOptions>",
+      "Description": ""
+    },
+    {
+      "Name": "OnInit",
+      "Type": "Action<MDragZone>",
       "Description": ""
     },
     {
@@ -35,16 +45,17 @@
       "Description": ""
     },
     {
-      "Name": "SetOptions",
-      "Type": "Action<SorttableOptions>",
-      "Description": ""
-    },
-    {
       "Name": "Style",
       "Type": "String",
       "Description": "应用到组件最外层元素的style"
     }
   ],
-  "Contents": [],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
   "Events": []
 }

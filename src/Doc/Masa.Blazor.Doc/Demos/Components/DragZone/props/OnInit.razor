@@ -1,0 +1,76 @@
+﻿<style>
+    .item {
+        margin: 5px;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: -1px;
+        border: 1px solid rgba(0,0,0,.125);
+    }
+</style>
+
+<MDragZone OnConfigure=SetOptions OnInit="InitData">
+    <MDragItem>
+        <MCard Class="item">
+            <MCardTitle>item1</MCardTitle>
+            <MCardText>item content1</MCardText>
+            <MButton OnClick=@(()=>{ this.StateHasChanged(); })> button</MButton>
+        </MCard>
+    </MDragItem>
+    <MDragItem>
+        <MCard Class="item">
+            <MCardTitle>item2</MCardTitle>
+            <MCardText>item content2</MCardText>
+        </MCard>
+    </MDragItem>
+</MDragZone>
+
+@code {
+
+    private void SetOptions(SorttableOptions options)
+    {
+        options.Group = "group_oninit";
+    }
+
+    private void InitData(MDragZone container)
+    {
+        int count = 5, i = 1;
+        var list = new List<MDragItem>();
+        do
+        {
+            list.Add(new MDragItem
+                {
+                    DragZone = container,
+                    ChildContent = CreateCard(container, "-", i++)
+                });
+        }
+        while (count - i > 0);
+        if (list.Any())
+            container.AddRange(list);
+    }
+
+    private RenderFragment CreateCard(MDragZone container, string split, int index) => builder =>
+         {
+             int i = 0;
+             builder.OpenComponent<MCard>(i++);
+             builder.AddAttribute(i++, "IsDark", container.IsDark);
+             builder.AddAttribute(i++, "Class", "item");
+             builder.AddAttribute(i++, "ChildContent", CreateComponent("-", index));
+             builder.CloseComponent();
+         };
+
+    private RenderFragment CreateComponent(string split, int index) => builder =>
+        {
+            int i = 0;
+            builder.OpenComponent<MCardTitle>(i++);
+            builder.AddAttribute(i++, "ChildContent", CreateText($"item title {split}{index}"));
+            builder.CloseComponent();
+
+            builder.OpenComponent<MCardText>(i++);
+            builder.AddAttribute(i++, "ChildContent", CreateText($"item content {split}{index}"));
+            builder.CloseComponent();
+        };
+
+    private RenderFragment CreateText(string name) => builder =>
+        {
+            builder.AddContent(0, $"{name}");
+        };
+}

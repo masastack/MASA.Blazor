@@ -1,16 +1,5 @@
-﻿@using Microsoft.AspNetCore.Components.Rendering
+﻿
 <style>
-    .mycontainer {
-        width: 100%;
-        display: block;
-    }
-
-        .mycontainer > div {
-            width: 45%;
-            margin: 2% 0 0 2%;
-            display: inline-table
-        }
-
     .item {
         margin: 5px;
         padding: 0.75rem 1.25rem;
@@ -18,8 +7,11 @@
         border: 1px solid rgba(0,0,0,.125);
     }
 </style>
-<div class="mycontainer">
-    <MDragZone OnConfigure=SetOptions >
+
+<MContainer>
+    <MRow>
+       <MCol Cols=6>
+           <MDragZone Options=GetOptions()>
         <BDragItem>
             <MCard Class="item">
                 <MCardTitle>item1.1</MCardTitle>
@@ -33,8 +25,9 @@
             </MCard>
         </BDragItem>
     </MDragZone>
-
-    <MDragZone OnConfigure=SetOptions>
+       </MCol>
+       <MCol Cols=6>
+           <MDragZone Options=GetOptions()>
         <BDragItem>
             <MCard Class="item">
                 <MCardTitle>item2.1</MCardTitle>
@@ -48,17 +41,16 @@
             </MCard>
         </BDragItem>
     </MDragZone>
-</div>
+       </MCol>
+    </MRow>
+</MContainer>
 
 @code {
 
-    private void SetOptions(SorttableOptions options)
+    private SorttableOptions GetOptions()
     {
-        options.Group = "group";
-    }
-
-    private void SetOptionsOther(SorttableOptions options)
-    {
-        options.Group = "group2";
+        return new SorttableOptions { 
+            Group="group_options"        
+        };
     }
 }
