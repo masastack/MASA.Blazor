@@ -41,7 +41,7 @@
                         .Add(prefix)
                         .AddIf($"{prefix}--fill-dot", () => FillDot)
                         .AddIf($"{prefix}--before", () => BTimeline.Reverse ? Right : Left)
-                        .AddIf($"{prefix}--after", () => BTimeline.Reverse ? Right : Left)
+                        .AddIf($"{prefix}--after", () => BTimeline.Reverse ? Left : Right)
                         .AddTheme(IsDark);
                 })
                 .Apply("body", cssBuilder =>
