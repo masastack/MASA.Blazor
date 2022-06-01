@@ -81,6 +81,9 @@ export function disabled(domRef) {
 export function enable(domRef) {
     domRef.Vditor.enable();
 }
+export function preview(domRef) {
+    domRef.querySelector('[data-type=preview]').click();
+}
 function SetDefaultFileNameHandle(vditorOptions) {
     let { upload } = vditorOptions;
     if (upload) upload.filename || (upload.filename = (name) => name);

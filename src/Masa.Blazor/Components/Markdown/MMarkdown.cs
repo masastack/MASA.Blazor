@@ -121,6 +121,7 @@
             if (Reaonly)
             {
                 await VditorHelper.InvokeVoidAsync("disabled", Ref);
+                await VditorHelper.InvokeVoidAsync("preview", Ref);
             }
         }
 
