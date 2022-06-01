@@ -5209,11 +5209,11 @@
       },
       {
         "Order": 0,
-        "Name": "readOnly",
-        "Title": "Read only",
-        "Description": "<p>Whether to set to read-only mode.</p>\n",
-        "Code": "<MMarkdown ReadOnly>\r\n</MMarkdown>",
-        "Type": "Demos.Components.Markdown.props.ReadOnly",
+        "Name": "reaonly",
+        "Title": "Readonly",
+        "Description": "<p>Whether to set to readonly mode.</p>\n",
+        "Code": "<MMarkdown Reaonly>\r\n</MMarkdown>",
+        "Type": "Demos.Components.Markdown.props.Reaonly",
         "Style": "",
         "Debug": false,
         "Group": 0

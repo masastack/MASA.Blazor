@@ -5262,11 +5262,11 @@
       },
       {
         "Order": 0,
-        "Name": "readOnly",
+        "Name": "reaonly",
         "Title": "只读",
         "Description": "<p>是否设置为只读模式。</p>\n",
-        "Code": "<MMarkdown ReadOnly>\r\n</MMarkdown>",
-        "Type": "Demos.Components.Markdown.props.ReadOnly",
+        "Code": "<MMarkdown Reaonly>\r\n</MMarkdown>",
+        "Type": "Demos.Components.Markdown.props.Reaonly",
         "Style": "",
         "Debug": false,
         "Group": 0

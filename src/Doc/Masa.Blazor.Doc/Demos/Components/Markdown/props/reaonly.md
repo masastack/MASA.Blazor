@@ -2,7 +2,7 @@
 order: 0
 title:
   zh-CN: 只读
-  en-US: Read only
+  en-US: Readonly
 ---
 
 ## zh-CN
@@ -11,4 +11,4 @@ title:
 
 ## en-US
 
-Whether to set to read-only mode.
+Whether to set to readonly mode.
