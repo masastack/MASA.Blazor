@@ -75,6 +75,12 @@ export function insertValue(domRef, value, render = true) {
 export function destroy(domRef) {
     domRef.Vditor.destroy();
 }
+export function disabled(domRef) {
+    domRef.Vditor.disabled();
+}
+export function enable(domRef) {
+    domRef.Vditor.enable();
+}
 function SetDefaultFileNameHandle(vditorOptions) {
     let { upload } = vditorOptions;
     if (upload) upload.filename || (upload.filename = (name) => name);
