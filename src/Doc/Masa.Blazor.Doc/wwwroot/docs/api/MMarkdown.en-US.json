@@ -25,6 +25,11 @@
       "Description": ""
     },
     {
+      "Name": "Reaonly",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "Style",
       "Type": "String",
       "Description": "The style applied to the outermost element of the component"
