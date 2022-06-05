@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MDragZone : BDragZone, IDisposable
     {
@@ -46,6 +44,8 @@ namespace Masa.Blazor
         public void OnStart(SorttableEventArgs args)
         {
             DragDropService.DragItem = Items[args.OldIndex];
+            if (DragDropService.IsClone)
+                DragDropService.DragItem.Id = Guid.NewGuid().ToString();
             if (Options?.OnStart != null)
                 Options.OnStart(args);
         }
@@ -72,8 +72,8 @@ namespace Masa.Blazor
             if (Options?.OnAdd != null)
                 Options.OnAdd(args);
 
-            if (!Items.Contains(DragDropService.DragItem))
-                Items.Insert(args.NewIndex, DragDropService.DragItem);
+            if (!Contains(DragDropService.DragItem, Items))
+                Add(DragDropService.DragItem, args.NewIndex);
         }
 
         /// <summary>
@@ -86,10 +86,7 @@ namespace Masa.Blazor
             if (Options?.OnUpdate != null)
                 Options.OnUpdate(args);
 
-            Add(DragDropService.DragItem, args.NewIndex);
-
-            Items[args.OldIndex] = Items[args.NewIndex];
-            Items[args.NewIndex] = DragDropService.DragItem;
+            Update(DragDropService.DragItem, args.OldIndex, args.NewIndex);
         }
 
         /// <summary>
@@ -116,7 +113,7 @@ namespace Masa.Blazor
             var index = Items.IndexOf(DragDropService.DragItem);
             if (!args.IsClone && args.OldIndex == index)
             {
-                Items.RemoveAt(index);
+                Remove(DragDropService.DragItem);
             }
         }
 
@@ -138,6 +135,7 @@ namespace Masa.Blazor
         [JSInvokable]
         public void OnClone(SorttableEventArgs args)
         {
+            DragDropService.IsClone = true;
             if (Options?.OnClone != null)
                 Options.OnClone(args);
         }
@@ -169,7 +167,6 @@ namespace Masa.Blazor
             return true;
         }
 
-
         protected override void OnInitialized()
         {
             Options = new();
@@ -199,28 +196,6 @@ namespace Masa.Blazor
             OnConfigure?.Invoke(Options);
             return base.OnParametersSetAsync();
         }
-
-        //protected override void BuildRenderTree(RenderTreeBuilder builder)
-        //{
-        //    //builder.AddContent(0, ChildContent);
-
-        //    BuildRenderItems(builder, DynicItems);
-        //    //base.BuildRenderTree(builder);
-        //}
-
-        //private void BuildRenderItems(RenderTreeBuilder builder, List<BDragItem> list)
-        //{
-        //    if (Items != null && Items.Any())
-        //    {
-        //        var index = 0;
-        //        foreach (var item in list)
-        //        {
-        //            builder.OpenComponent<DynamicComponent>(index++);
-        //            builder.AddAttribute(index++, nameof(DynamicComponent.Parameters), item.ToParameters());
-        //            builder.CloseComponent();
-        //        }
-        //    }
-        //}
 
         public override void Dispose()
         {

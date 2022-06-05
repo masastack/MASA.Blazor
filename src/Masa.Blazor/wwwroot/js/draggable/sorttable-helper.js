@@ -11,10 +11,14 @@
         onStart: function (evt) {
             dotNetHelper.invokeMethodAsync(`${nameSpace}OnStart`, convertDropEndEvent(evt));
         },
-        onEnd: function (evt) {
+        onEnd: function (evt) {           
             dotNetHelper.invokeMethodAsync(`${nameSpace}OnDropEnd`, convertDropEndEvent(evt))
         },
         onAdd: function (evt) {
+            debugger
+            if (evt.clone) {
+                evt.item.remove();
+            }
             dotNetHelper.invokeMethodAsync(`${nameSpace}OnAdd`, convertDropEndEvent(evt));
         },
         onUpdate: function (evt) {
@@ -60,7 +64,7 @@
         var ops = Object.assign(_options, option)
         //log("assign", ops);
         //console.log(`containerId:${containerId},dom:${document.getElementById(containerId)}`)
-        new Sortable(document.getElementById(containerId), ops)
+        new Sortable(document.getElementById(containerId), ops);
     }
 
     function log(name, obj) {
