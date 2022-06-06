@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor
 {
-    public partial class MDragZone : BDragZone, IDisposable
+    public partial class MDragZone : BDragZone, IDisposable, IAsyncDisposable
     {
         private DotNetObjectReference<MDragZone> _dotNetHelper;
         private IJSObjectReference _jsHelper;
@@ -44,8 +44,6 @@
         public void OnStart(SorttableEventArgs args)
         {
             DragDropService.DragItem = Items[args.OldIndex];
-            if (DragDropService.IsClone)
-                DragDropService.DragItem.Id = Guid.NewGuid().ToString();
             if (Options?.OnStart != null)
                 Options.OnStart(args);
         }
@@ -72,8 +70,14 @@
             if (Options?.OnAdd != null)
                 Options.OnAdd(args);
 
+            if (DragDropService.IsClone)
+            {
+                //DragDropService.DragItem.Id = Guid.NewGuid().ToString();
+            }
             if (!Contains(DragDropService.DragItem, Items))
+            {
                 Add(DragDropService.DragItem, args.NewIndex);
+            }
         }
 
         /// <summary>
@@ -182,6 +186,10 @@
                 _jsHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/draggable/sorttable-helper.js");
                 await _jsHelper.InvokeVoidAsync("init", _dotNetHelper, Id, Options.ToParameters());
             }
+            if (_jsHelper != null)
+            {
+                await _jsHelper.InvokeVoidAsync("sort", Id, Items.Select(it => it.Id).ToArray());
+            }
             await base.OnAfterRenderAsync(firstRender);
         }
 
@@ -200,6 +208,12 @@
         public override void Dispose()
         {
             _dotNetHelper?.Dispose();
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            if (_jsHelper != null)
+                await _jsHelper.DisposeAsync();
         }
     }
 }

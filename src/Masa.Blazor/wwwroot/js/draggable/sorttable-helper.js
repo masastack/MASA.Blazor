@@ -11,14 +11,16 @@
         onStart: function (evt) {
             dotNetHelper.invokeMethodAsync(`${nameSpace}OnStart`, convertDropEndEvent(evt));
         },
-        onEnd: function (evt) {           
+        onEnd: function (evt) {
+            debugger
+            this.toArray();
             dotNetHelper.invokeMethodAsync(`${nameSpace}OnDropEnd`, convertDropEndEvent(evt))
         },
         onAdd: function (evt) {
-            debugger
-            if (evt.clone) {
-                evt.item.remove();
-            }
+            //debugger
+            //if (evt.clone) {
+            //    evt.item.remove();
+            //}
             dotNetHelper.invokeMethodAsync(`${nameSpace}OnAdd`, convertDropEndEvent(evt));
         },
         onUpdate: function (evt) {
@@ -111,5 +113,11 @@
             }
         };
         return result;
+    }
+}
+
+export function sort(containerId, data) {
+    if (Sortable && containerId) {
+        Sortable.get(document.getElementById(containerId)).sort(data);
     }
 }
