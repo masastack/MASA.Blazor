@@ -61,6 +61,16 @@ namespace Masa.Blazor
         [Inject]
         public Document Document { get; set; }
 
+        protected override void InternalValueSetter(bool val)
+        {
+            base.InternalValueSetter(val);
+
+            if (OnChange.HasDelegate)
+            {
+                OnChange.InvokeAsync(val);
+            }
+        }
+
         public Task HandleOnBlur(FocusEventArgs args)
         {
             return Task.CompletedTask;
