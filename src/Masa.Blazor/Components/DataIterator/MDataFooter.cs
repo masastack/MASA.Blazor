@@ -144,11 +144,16 @@ namespace Masa.Blazor
                 .ApplyDataFooterDefault()
                 .Apply(typeof(ISelect<,,>), typeof(MSelect<DataItemsPerPageOption, int, int>), attrs =>
                 {
-                    var value = Options.ItemsPerPage;
-                    var first = ComputedDataItemsPerPageOptions.FirstOrDefault(r => r.Value == value);
-                    if (first == null)
+                    if (ComputedDataItemsPerPageOptions.Count() <= 1)
                     {
-                        value = first.Value;
+                        return;
+                    }
+
+                    var value = Options.ItemsPerPage;
+                    var result = ComputedDataItemsPerPageOptions.FirstOrDefault(r => r.Value == value);
+                    if (result == null)
+                    {
+                        value = ComputedDataItemsPerPageOptions.First().Value;
                     }
 
                     Func<DataItemsPerPageOption, int> itemValue = r => r.Value;
