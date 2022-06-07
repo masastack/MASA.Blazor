@@ -12,25 +12,22 @@
             dotNetHelper.invokeMethodAsync(`${nameSpace}OnStart`, convertDropEndEvent(evt));
         },
         onEnd: function (evt) {
-            debugger
-            this.toArray();
             dotNetHelper.invokeMethodAsync(`${nameSpace}OnDropEnd`, convertDropEndEvent(evt))
         },
         onAdd: function (evt) {
-            //debugger
-            //if (evt.clone) {
-            //    evt.item.remove();
-            //}
             dotNetHelper.invokeMethodAsync(`${nameSpace}OnAdd`, convertDropEndEvent(evt));
+            console.log(`onadd id: ${containerId} sort:${this.toArray().join(',')}`)
         },
         onUpdate: function (evt) {
             dotNetHelper.invokeMethodAsync(`${nameSpace}OnUpdate`, convertDropEndEvent(evt));
+            console.log(`onupdate id: ${containerId} sort:${this.toArray().join(',')}`)
         },
         onSort: function (evt) {
             dotNetHelper.invokeMethodAsync(`${nameSpace}OnSort`, convertDropEndEvent(evt));
         },
         onRemove: function (evt) {
             dotNetHelper.invokeMethodAsync(`${nameSpace}OnRemove`, convertDropEndEvent(evt));
+            console.log(`onremove id: ${containerId} sort:${this.toArray().join(',')}`)
         },
         onMove: function (evt, originalEvent) {
             dotNetHelper.invokeMethodAsync(`${nameSpace}OnMove`, convertDropMoveEvent(evt, originalEvent));
@@ -87,8 +84,17 @@
         if (result.oldIndex === null) result.oldIndex = -1;
         if (result.newIndex === null) result.newIndex = -1;
 
-        if (event.pullMode == "clone")
-            result.isClone = true
+        if (event.pullMode == "clone") {
+            result.isClone = true;
+            if (!event.clone.id) {
+                let itemId = event.item.id;
+                event.item.id = "di_" + new Date().getTime().toString();
+                event.clone.id = event.item.id;
+            }
+            result.cloneId = event.item.id;
+            result.itemId = event.clone.id;
+        }
+
         return result;
     }
 
@@ -116,8 +122,30 @@
     }
 }
 
-export function sort(containerId, data) {
+export function getSort(containerId) {
     if (Sortable && containerId) {
-        Sortable.get(document.getElementById(containerId)).sort(data);
+        let table = Sortable.get(document.getElementById(containerId));
+        return table.toArray();
+    }
+    return [];
+}
+
+export function sort(containerId, data) {
+    return;
+
+
+    if (Sortable && containerId) {
+        let table = Sortable.get(document.getElementById(containerId));
+        //let options = table.options
+        //console.log(options);
+        //if (table) {
+        //    let options = table.options
+        //    table.destroy();
+        //    table = new Sortable(document.getElementById(containerId), options)
+        //}
+
+        //table = new Sortable(document.getElementById(containerId), options);
+        console.log(`id: ${containerId} old:${table.toArray().join(',')},new:${data.join(",")}`)
+        // table.sort(data);
     }
 }

@@ -43,6 +43,7 @@
         [JSInvokable]
         public void OnStart(SorttableEventArgs args)
         {
+            _isRender = false;
             DragDropService.DragItem = Items[args.OldIndex];
             if (Options?.OnStart != null)
                 Options.OnStart(args);
@@ -57,7 +58,8 @@
         {
             if (Options?.OnEnd != null)
                 Options.OnEnd(args);
-            DragDropService.Reset();
+
+            
         }
 
         /// <summary>
@@ -70,13 +72,13 @@
             if (Options?.OnAdd != null)
                 Options.OnAdd(args);
 
-            if (DragDropService.IsClone)
-            {
-                //DragDropService.DragItem.Id = Guid.NewGuid().ToString();
-            }
+            _isRender = false;
             if (!Contains(DragDropService.DragItem, Items))
             {
-                Add(DragDropService.DragItem, args.NewIndex);
+                var item = DragDropService.DragItem.Clone();
+                if (args.IsClone)
+                    item.Id = args.CloneId;
+                Add(item, args.NewIndex);
             }
         }
 
@@ -89,8 +91,7 @@
         {
             if (Options?.OnUpdate != null)
                 Options.OnUpdate(args);
-
-            Update(DragDropService.DragItem, args.OldIndex, args.NewIndex);
+            _isRender = false;
         }
 
         /// <summary>
@@ -114,11 +115,18 @@
             if (Options?.OnRemove != null)
                 Options.OnRemove(args);
 
-            var index = Items.IndexOf(DragDropService.DragItem);
-            if (!args.IsClone && args.OldIndex == index)
+            _isRender = false;
+            if (!args.IsClone && Contains(DragDropService.DragItem, Items))
             {
                 Remove(DragDropService.DragItem);
+                //if (args.IsClone)
+                //{
+                //    DragDropService.DragItem.Id = args.CloneId;
+                //    Add(DragDropService.DragItem, args.OldIndex);
+                //}
             }
+
+            DragDropService.Reset();
         }
 
         /// <summary>
@@ -139,7 +147,6 @@
         [JSInvokable]
         public void OnClone(SorttableEventArgs args)
         {
-            DragDropService.IsClone = true;
             if (Options?.OnClone != null)
                 Options.OnClone(args);
         }
@@ -153,6 +160,8 @@
         {
             if (Options?.OnChange != null)
                 Options.OnChange(args);
+
+            
         }
 
         [JSInvokable]
@@ -171,6 +180,11 @@
             return true;
         }
 
+        public ValueTask<string[]> Value
+        {
+            get { return _jsHelper.InvokeAsync<string[]>("getSort", Id); }
+        }
+
         protected override void OnInitialized()
         {
             Options = new();
@@ -180,15 +194,11 @@
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            _jsHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/draggable/sorttable-helper.js");
             if (firstRender)
             {
                 _dotNetHelper = DotNetObjectReference.Create(this);
-                _jsHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/draggable/sorttable-helper.js");
                 await _jsHelper.InvokeVoidAsync("init", _dotNetHelper, Id, Options.ToParameters());
-            }
-            if (_jsHelper != null)
-            {
-                await _jsHelper.InvokeVoidAsync("sort", Id, Items.Select(it => it.Id).ToArray());
             }
             await base.OnAfterRenderAsync(firstRender);
         }

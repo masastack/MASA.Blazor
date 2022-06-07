@@ -13,5 +13,7 @@
         public int NewIndex { get; set; }
 
         public bool IsClone { get; set; }
+
+        public string CloneId { get; set; }
     }
 }
