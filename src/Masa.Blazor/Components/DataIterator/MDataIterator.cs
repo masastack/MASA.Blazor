@@ -6,7 +6,7 @@
         public RenderFragment<(int PageStart, int PageStop, int ItemsLength)> PageTextContent { get; set; }
 
         [Parameter]
-        public Dictionary<string, object> FooterProps { get; set; }
+        public Action<IDataFooterParameters>? FooterProps { get; set; }
 
         [Parameter]
         public Func<TItem, string> ItemKey { get; set; }
@@ -142,14 +142,7 @@
                     attrs[nameof(MDataFooter.Pagination)] = Pagination;
                     attrs[nameof(MDataFooter.OnOptionsUpdate)] =
                         EventCallback.Factory.Create<Action<DataOptions>>(this, options => UpdateOptions(options));
-
-                    if (FooterProps != null)
-                    {
-                        foreach (var prop in FooterProps)
-                        {
-                            attrs[prop.Key] = prop.Value;
-                        }
-                    }
+                    attrs[nameof(MDataFooter.Parameters)] = FooterProps;
                 });
         }
 

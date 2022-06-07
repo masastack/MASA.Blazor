@@ -60,7 +60,7 @@
     },
     {
       "Name": "FooterProps",
-      "Type": "Dictionary<String,Object>",
+      "Type": "Action<IDataFooterParameters>",
       "Default": "null",
       "Description": ""
     },
