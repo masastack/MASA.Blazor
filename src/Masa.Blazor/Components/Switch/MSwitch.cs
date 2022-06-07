@@ -60,7 +60,17 @@ namespace Masa.Blazor
 
         public bool HasText => LeftText != null || RightText != null;
 
-        public string TextColor => HasText ? ComputedColor : (IsLoading ? null : ValidationState);
+        public new string TextColor => HasText ? ComputedColor : (IsLoading ? null : ValidationState);
+
+        protected override void InternalValueSetter(bool val)
+        {
+            base.InternalValueSetter(val);
+
+            if (OnChange.HasDelegate)
+            {
+                OnChange.InvokeAsync(val);
+            }
+        }
 
         public Task HandleOnBlur(FocusEventArgs args)
         {
