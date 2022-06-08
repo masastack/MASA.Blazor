@@ -84,6 +84,11 @@
       "Description": ""
     },
     {
+      "Name": "Parameters",
+      "Type": "Action<IDataFooterParameters>",
+      "Description": ""
+    },
+    {
       "Name": "PrevIcon",
       "Type": "String",
       "Default": "null",
