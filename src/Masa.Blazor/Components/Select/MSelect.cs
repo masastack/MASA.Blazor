@@ -1,4 +1,5 @@
-﻿using BlazorComponent.Web;
+﻿using System.Reflection.Metadata;
+using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
@@ -191,15 +192,32 @@ namespace Masa.Blazor
             MenuProps?.Invoke(ComputedMenuProps);
         }
 
-        protected override void OnAfterRender(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            base.OnAfterRender(firstRender);
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
+                //await (Menu as MMenu)?.UpdateActivatorAsync(InputSlotElement);
+            }
 
             if (MMenu is not null && InputSlotAttrs.Keys.Count == 0)
             {
                 InputSlotAttrs = MMenu.ActivatorAttributes;
                 MMenu.CloseConditional = CloseConditional;
-                MMenu.Handler = Handler;
+                MMenu.Handler = Blur;
+
+                if (!MMenu.Attached && InputSlotAttrs.Keys.Count > 0)
+                {
+                    await MMenu.RemoveOutsideClickEventListener();
+
+                    // Before the select menu element is generated,
+                    // some scenarios still need to trigger outside-click events,
+                    // such as when input is focused through the tab key.
+                    await MMenu.AddOutsideClickEventListener();
+                }
+
                 StateHasChanged();
             }
         }
@@ -218,7 +236,8 @@ namespace Masa.Blazor
                 return;
             }
 
-            var index = await JsInvokeAsync<int>(JsInteropConstants.GetListIndexWhereAttributeExists, $"{MMenu.ContentElement.GetSelector()} .m-list-item",
+            var index = await JsInvokeAsync<int>(JsInteropConstants.GetListIndexWhereAttributeExists,
+                $"{MMenu.ContentElement.GetSelector()} .m-list-item",
                 "aria-selected", "True");
 
             SetMenuIndex(index);
@@ -227,6 +246,8 @@ namespace Masa.Blazor
 
         private async Task<bool> CloseConditional(ClickOutsideArgs args)
         {
+            if (IsFocused) return true;
+
             if (!IsMenuActive) return true;
 
             var contains = await JsInvokeAsync<bool>(JsInteropConstants.Contains, MMenu.ContentElement, args.PointerSelector);
@@ -234,19 +255,24 @@ namespace Masa.Blazor
             return !contains;
         }
 
-        private async Task Handler()
+        private Task Blur()
         {
+            var prevIsMenuActive = IsMenuActive;
+            var prevIsFocused = IsFocused;
+            var prevSelectedIndex = SelectedIndex;
+            var prevMenuListIndex = MenuListIndex;
+
             IsMenuActive = false;
             IsFocused = false;
             SelectedIndex = -1;
             SetMenuIndex(-1);
 
-            if (OnBlur.HasDelegate)
+            if (prevIsMenuActive || prevIsFocused || prevSelectedIndex != -1 || prevMenuListIndex != -1)
             {
-                await OnBlur.InvokeAsync();
+                StateHasChanged();
             }
 
-            StateHasChanged();
+            return Task.CompletedTask;
         }
 
         protected override void SetComponentClass()
@@ -295,6 +321,7 @@ namespace Masa.Blazor
                 .ApplySelectDefault<TItem, TItemValue, TValue>()
                 .Merge<BIcon, MIcon>("append-icon", attrs =>
                 {
+                    // Don't allow the dropdown icon to be focused
                     var onClick = (EventCallback<MouseEventArgs>)attrs.Data;
                     if (onClick.HasDelegate)
                     {
@@ -348,7 +375,7 @@ namespace Masa.Blazor
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemValue)] = ItemValue;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.NoDataText)] = NoDataText;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.SelectedItems)] = SelectedItems;
-                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.OnSelect)] = CreateEventCallback<TItem>(SelectItemsAsync);
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.OnSelect)] = CreateEventCallback<TItem>(SelectItem);
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemContent)] = ItemContent;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.PrependItemContent)] = PrependItemContent;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.AppendItemContent)] = AppendItemContent;
@@ -364,7 +391,16 @@ namespace Masa.Blazor
                 });
         }
 
-        protected virtual async Task SelectItemsAsync(TItem item)
+        protected async Task SelectItemByIndex(int index)
+        {
+            if (index > -1 && index < ComputedItems.Count)
+            {
+                var item = ComputedItems[index];
+                await SelectItem(item);
+            }
+        }
+
+        protected virtual async Task SelectItem(TItem item)
         {
             var value = ItemValue(item);
             if (!Multiple)
@@ -407,17 +443,6 @@ namespace Masa.Blazor
             }
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
-
-            if (firstRender)
-            {
-                await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
-                //await (Menu as MMenu)?.UpdateActivatorAsync(InputSlotElement);
-            }
-        }
-
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
             switch (args.Code)
@@ -429,19 +454,10 @@ namespace Masa.Blazor
                     ChangeSelectedIndex(+1);
                     break;
                 case "Enter":
-                    if (IsMenuActive)
-                    {
-                        if (MenuListIndex > -1 && MenuListIndex < ComputedItems.Count)
-                        {
-                            var item = ComputedItems[MenuListIndex];
-                            await SelectItemsAsync(item);
-                        }
-                    }
-                    else
-                    {
-                        IsMenuActive = true;
-                    }
-
+                    await OnEnter(args);
+                    break;
+                case "Tab":
+                    await OnTabDown(args);
                     break;
                 default:
                     break;
@@ -465,11 +481,60 @@ namespace Masa.Blazor
             SetMenuIndex(index);
         }
 
-        public override Task HandleOnBlurAsync(FocusEventArgs args)
+        protected virtual async Task OnEnter(KeyboardEventArgs args)
         {
-            // blur event(OnBlur) should be invoked when isFocused is false(see Handler func).
-            // so there is nothing to do.
-            return Task.CompletedTask;
+            if (IsMenuActive)
+            {
+                await SelectItemByIndex(MenuListIndex);
+            }
+            else
+            {
+                IsMenuActive = true;
+            }
+        }
+
+        protected virtual async Task OnTabDown(KeyboardEventArgs args)
+        {
+            // An item that is selected by
+            // menu-index should toggled
+            if (!Multiple && MenuListIndex != -1 && IsMenuActive)
+            {
+                // TODO: need e.preventDefault() and e.stopPropagation()?
+
+                await SelectItemByIndex(MenuListIndex);
+            }
+            else
+            {
+                // If we make it here,
+                // the user has no selected indexes
+                // and is probably tabbing out
+                await Blur();
+            }
+        }
+
+        public override async Task HandleOnBlurAsync(FocusEventArgs args)
+        {
+            if (OnBlur.HasDelegate)
+            {
+                await OnBlur.InvokeAsync(args);
+            }
+        }
+
+        public override async Task HandleOnClickAsync(MouseEventArgs args)
+        {
+            await base.HandleOnClickAsync(args);
+
+            // TODO: isInteractive?
+            // TODO: isAppendInner?
+
+            if (!IsFocused)
+            {
+                IsFocused = true;
+                if (OnFocus.HasDelegate)
+                {
+                    await OnFocus.InvokeAsync();
+                }
+            }
         }
 
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)

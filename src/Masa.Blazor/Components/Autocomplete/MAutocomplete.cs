@@ -184,9 +184,9 @@ namespace Masa.Blazor
                 });
         }
 
-        protected override async Task SelectItemsAsync(TItem item)
+        protected override async Task SelectItem(TItem item)
         {
-            await base.SelectItemsAsync(item);
+            await base.SelectItem(item);
             InternalSearch = null;
         }
 
@@ -251,7 +251,7 @@ namespace Masa.Blazor
             }
             else
             {
-                await SelectItemsAsync(curItem);
+                await SelectItem(curItem);
             }
 
             SelectedIndex = nextIndex;
