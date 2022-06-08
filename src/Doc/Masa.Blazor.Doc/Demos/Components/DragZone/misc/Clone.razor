@@ -21,53 +21,111 @@
     }
 
 </style>
+
+<MButton OnClick=@(async ()=>{
+
+    var t = await mDragZone1.Value;
+         InitData(mDragZone1);
+         })> add1</MButton>
+<MButton OnClick=@(async ()=>{
+    var t = await mDragZone2.Value;
+         InitData(mDragZone2);
+         })> add2</MButton>
 <MContainer>
     <MRow>
         <MCol Cols=6>
-            <MDragZone OnConfigure=SetOptions Class="parent">
+            <MDragZone OnConfigure=SetOptions OnInit=InitData @ref=mDragZone1>
                 <MDragItem>
-                    <div class="white-color item">item1.1</div>
+                    <MCard Class="item">
+                        <MCardTitle>item@1</MCardTitle>
+                        <MCardText>item content@1</MCardText>
+                    </MCard>
                 </MDragItem>
                 <MDragItem>
-                    <div class="white-color item">item1.2</div>
-                </MDragItem>
-                <MDragItem>
-                    <div class="white-color item">item1.3</div>
-                </MDragItem>
-                <MDragItem>
-                    <div class="white-color item">item1.4</div>
-                </MDragItem>
-                <MDragItem>
-                    <div class="white-color item">item1.5</div>
+                    <MCard Class="item">
+                        <MCardTitle>item@2</MCardTitle>
+                        <MCardText>item content@2</MCardText>
+                    </MCard>
                 </MDragItem>
             </MDragZone>
         </MCol>
         <MCol Cols=6>
-            <MDragZone OnConfigure=SetOptions Class="parent">
+            <MDragZone OnConfigure=SetOptions OnInit=InitData @ref=mDragZone2>
                 <MDragItem>
-                    <div class="item blue-color">item2.1</div>
+                    <MCard Class="item">
+                        <MCardTitle>item@1</MCardTitle>
+                        <MCardText>item content@1</MCardText>                        
+                    </MCard>
                 </MDragItem>
                 <MDragItem>
-                    <div class="item blue-color">item2.2</div>
-                </MDragItem>
-                <MDragItem>
-                    <div class="item blue-color">item2.3</div>
-                </MDragItem>
-                <MDragItem>
-                    <div class="item blue-color">item2.4</div>
-                </MDragItem>
-                <MDragItem>
-                    <div class="item blue-color">item2.5</div>
+                    <MCard Class="item">
+                        <MCardTitle>item@2</MCardTitle>
+                        <MCardText>item content@2</MCardText>
+                    </MCard>
                 </MDragItem>
             </MDragZone>
         </MCol>
     </MRow>
 </MContainer>
+
+
 @code {
+    private MDragZone mDragZone1;
+    private MDragZone mDragZone2;
+    private int i = 1;
     private void SetOptions(SorttableOptions options)
     {
-        options.Group = "clone_group";
-        //drag use clone mode
+        options.Group = "group_oninit";
         options.Pull = "clone";
+    }  
+
+    private void InitData(MDragZone container)
+    {
+        int count = 2, j = 1;
+
+        
+
+        List<MDragItem> list = new ();
+        do
+        {
+            list.Add(new MDragItem
+                {
+                    Id = Guid.NewGuid().ToString("N"),
+                    ChildContent = CreateCard(container, "-", i++)
+                });
+            j++;
+        }
+        while (count - j > 0);
+        if (list.Any())
+            container.AddRange(list);
+
+       StateHasChanged();
     }
+
+    private RenderFragment CreateCard(MDragZone container, string split, int index) => builder =>
+         {
+             int i = 0;
+             builder.OpenComponent<MCard>(i++);
+             builder.AddAttribute(i++, "IsDark", container.IsDark);
+             builder.AddAttribute(i++, "Class", "item");
+             builder.AddAttribute(i++, "ChildContent", CreateComponent("-", index));
+             builder.CloseComponent();
+         };
+
+    private RenderFragment CreateComponent(string split, int index) => builder =>
+        {
+            int i = 0;
+            builder.OpenComponent<MCardTitle>(i++);
+            builder.AddAttribute(i++, "ChildContent", CreateText($"item title {split}{index}"));
+            builder.CloseComponent();
+
+            builder.OpenComponent<MCardText>(i++);
+            builder.AddAttribute(i++, "ChildContent", CreateText($"item content {split}{index}"));
+            builder.CloseComponent();
+        };
+
+    private RenderFragment CreateText(string name) => builder =>
+        {
+            builder.AddContent(0, $"{name}");
+        };
 }
