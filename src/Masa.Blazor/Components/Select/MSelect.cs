@@ -220,7 +220,7 @@ namespace Masa.Blazor
 
             var index = await JsInvokeAsync<int>(JsInteropConstants.GetListIndexWhereAttributeExists, $"{MMenu.ContentElement.GetSelector()} .m-list-item",
                 "aria-selected", "True");
-            
+
             SetMenuIndex(index);
             StateHasChanged();
         }
@@ -364,7 +364,7 @@ namespace Masa.Blazor
                 }
 
                 IsMenuActive = false;
-                
+
                 SetMenuIndex(ComputedItems.IndexOf(item));
             }
             else
@@ -405,12 +405,6 @@ namespace Masa.Blazor
                 await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
                 //await (Menu as MMenu)?.UpdateActivatorAsync(InputSlotElement);
             }
-        }
-
-        public override Task HandleOnAppendClickAsync(MouseEventArgs args)
-        {
-            IsMenuActive = true;
-            return base.HandleOnAppendClickAsync(args);
         }
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
