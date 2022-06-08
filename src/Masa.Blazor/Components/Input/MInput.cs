@@ -148,22 +148,22 @@
                     attrs[nameof(MIcon.Light)] = Light;
                 })
                 .ApplyInputLabel(typeof(MLabel), attrs =>
-                 {
-                     attrs[nameof(MLabel.Color)] = ValidationState;
-                     attrs[nameof(MLabel.Dark)] = Dark;
-                     attrs[nameof(MLabel.Disabled)] = IsDisabled;
-                     attrs[nameof(MLabel.Focused)] = HasState;
-                     attrs[nameof(MLabel.For)] = Id;
-                     attrs[nameof(MLabel.Light)] = Light;
-                 })
+                {
+                    attrs[nameof(MLabel.Color)] = ValidationState;
+                    attrs[nameof(MLabel.Dark)] = Dark;
+                    attrs[nameof(MLabel.Disabled)] = IsDisabled;
+                    attrs[nameof(MLabel.Focused)] = HasState;
+                    attrs[nameof(MLabel.For)] = Id;
+                    attrs[nameof(MLabel.Light)] = Light;
+                })
                 .ApplyInputMessages(typeof(MMessages), attrs =>
-                 {
-                     attrs[nameof(MMessages.Color)] = HasHint ? "" : ValidationState;
-                     attrs[nameof(MMessages.Dark)] = Dark;
-                     attrs[nameof(MMessages.Light)] = Light;
-                     attrs[nameof(MMessages.Value)] = MessagesToDisplay;
-                     attrs[nameof(MMessages.ChildContent)] = MessageContent;
-                 })
+                {
+                    attrs[nameof(MMessages.Color)] = HasHint ? "" : ValidationState;
+                    attrs[nameof(MMessages.Dark)] = Dark;
+                    attrs[nameof(MMessages.Light)] = Light;
+                    attrs[nameof(MMessages.Value)] = MessagesToDisplay;
+                    attrs[nameof(MMessages.ChildContent)] = MessageContent;
+                })
                 .ApplyInputAppendIcon(typeof(MIcon), attrs =>
                 {
                     attrs[nameof(MIcon.Color)] = ValidationState;

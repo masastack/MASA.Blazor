@@ -293,6 +293,17 @@ namespace Masa.Blazor
 
             AbstractProvider
                 .ApplySelectDefault<TItem, TItemValue, TValue>()
+                .Merge<BIcon, MIcon>("append-icon", attrs =>
+                {
+                    var onClick = (EventCallback<MouseEventArgs>)attrs.Data;
+                    if (onClick.HasDelegate)
+                    {
+                        attrs["tabindex"] = -1;
+                    }
+
+                    attrs["aria-hidden"] = "true";
+                    attrs["aria-label"] = null;
+                })
                 .Apply<BMenu, MMenu>(attrs =>
                 {
                     attrs[nameof(MMenu.ExternalActivator)] = true;
@@ -492,7 +503,7 @@ namespace Masa.Blazor
 
             if (number > -1)
             {
-                _ = JsInvokeAsync(JsInteropConstants.ScrollToTile, 
+                _ = JsInvokeAsync(JsInteropConstants.ScrollToTile,
                     MMenu.ContentElement.GetSelector(),
                     $"{MMenu.ContentElement.GetSelector()} .m-list-item",
                     number);
