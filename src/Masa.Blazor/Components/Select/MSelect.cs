@@ -162,11 +162,11 @@ namespace Masa.Blazor
 
         protected virtual BMenuProps GetDefaultMenuProps() => new()
         {
-            CloseOnClick = true,
+            CloseOnClick = false,
             CloseOnContentClick = false,
             DisableKeys = true,
-            OpenOnClick = true,
-            MaxHeight = 304,
+            OpenOnClick = false,
+            MaxHeight = 304
         };
 
         protected virtual string GetText(TItem item)
@@ -190,6 +190,10 @@ namespace Masa.Blazor
 
             ComputedMenuProps = GetDefaultMenuProps();
             MenuProps?.Invoke(ComputedMenuProps);
+            if (ComputedMenuProps.OffsetY && ComputedMenuProps.NudgeBottom is null)
+            {
+                ComputedMenuProps.NudgeBottom = 1;
+            }
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -199,7 +203,6 @@ namespace Masa.Blazor
             if (firstRender)
             {
                 await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
-                //await (Menu as MMenu)?.UpdateActivatorAsync(InputSlotElement);
             }
 
             if (MMenu is not null && InputSlotAttrs.Keys.Count == 0)
@@ -246,8 +249,6 @@ namespace Masa.Blazor
 
         private async Task<bool> CloseConditional(ClickOutsideArgs args)
         {
-            if (IsFocused) return true;
-
             if (!IsMenuActive) return true;
 
             var contains = await JsInvokeAsync<bool>(JsInteropConstants.Contains, MMenu.ContentElement, args.PointerSelector);
@@ -459,8 +460,6 @@ namespace Masa.Blazor
                 case "Tab":
                     await OnTabDown(args);
                     break;
-                default:
-                    break;
             }
         }
 
@@ -520,12 +519,14 @@ namespace Masa.Blazor
             }
         }
 
-        public override async Task HandleOnClickAsync(MouseEventArgs args)
+        public override async Task HandleOnClickAsync(ExMouseEventArgs args)
         {
-            await base.HandleOnClickAsync(args);
+            if (!IsInteractive) return;
 
-            // TODO: isInteractive?
-            // TODO: isAppendInner?
+            if (await IsAppendInner(args.Target) is false)
+            {
+                IsMenuActive = true;
+            }
 
             if (!IsFocused)
             {
@@ -535,6 +536,32 @@ namespace Masa.Blazor
                     await OnFocus.InvokeAsync();
                 }
             }
+        }
+
+        public override async Task HandleOnMouseUpAsync(ExMouseEventArgs args)
+        {
+            if (HasMouseDown && args.Button != 2 && IsInteractive)
+            {
+                // If append inner is present
+                // and the target is itself
+                // or inside, toggle menu
+                if (await IsAppendInner(args.Target))
+                {
+                    IsMenuActive = !IsMenuActive;
+                }
+            }
+
+            await base.HandleOnMouseUpAsync(args);
+        }
+
+        /// <summary>
+        /// target is itself or inside
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        private Task<bool> IsAppendInner(EventTarget target)
+        {
+            return JsInvokeAsync<bool>(JsInteropConstants.EqualsOrContains, AppendInnerElement, target.Selector);
         }
 
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)

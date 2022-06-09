@@ -66,6 +66,11 @@
       "Description": ""
     },
     {
+      "Name": "Readonly",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "Ripple",
       "Type": "Boolean",
       "Default": "false",

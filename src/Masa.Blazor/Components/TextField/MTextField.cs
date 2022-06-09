@@ -290,6 +290,8 @@ namespace Masa.Blazor
         public ElementReference PrefixElement { get; set; }
 
         public ElementReference PrependInnerElement { get; set; }
+        
+        public ElementReference AppendInnerElement { get; set; }
 
         protected virtual Dictionary<string, object> InputSlotAttrs { get; set; } = new();
 
@@ -598,7 +600,7 @@ namespace Masa.Blazor
             }
         }
 
-        public override async Task HandleOnClickAsync(MouseEventArgs args)
+        public override async Task HandleOnClickAsync(ExMouseEventArgs args)
         {
             if (IsFocused || IsDisabled)
             {
@@ -797,6 +799,16 @@ namespace Masa.Blazor
             }
 
             await InputElement.FocusAsync();
+        }
+
+        public override async Task HandleOnMouseUpAsync(ExMouseEventArgs args)
+        {
+            if (HasMouseDown)
+            {
+                await InputElement.FocusAsync();
+            }
+        
+            await base.HandleOnMouseUpAsync(args);
         }
     }
 }
