@@ -41,6 +41,7 @@
                 }, styleBuilder =>
                 {
                     styleBuilder
+                        .AddIf("display:contents", () => !HasContent)
                         .AddIf("height: 100%", () => Vertical)
                         .AddIf($"padding: {PaddingY}px 0", () => PaddingY > 0);
                 })
@@ -50,6 +51,7 @@
                         .Add("m-divider")
                         .AddIf($"{prefix}--inset", () => Inset)
                         .AddIf($"{prefix}--vertical", () => Vertical)
+                        .AddIf(Class, () => !HasContent)
                         .AddTheme(IsDark);
                 })
                 .Apply("content", cssBuilder =>
@@ -57,6 +59,7 @@
                     cssBuilder
                         .Add($"{prefix}__content")
                         .AddIf($"{prefix}--inset", () => Inset)
+                        .AddIf(Style, () => !HasContent)
                         .AddTheme(IsDark);
                 });
         }
