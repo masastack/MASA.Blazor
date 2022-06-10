@@ -25,11 +25,6 @@
       "Description": ""
     },
     {
-      "Name": "LoadItems",
-      "Type": "Boolean",
-      "Description": ""
-    },
-    {
       "Name": "OnConfigure",
       "Type": "Action<SorttableOptions>",
       "Description": ""

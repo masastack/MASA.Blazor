@@ -1,13 +1,7 @@
 ﻿namespace Masa.Blazor
 {
-    public class SorttableMoveEventArgs
-    {
-        public string ParentId { get; set; }
-
-        public string NewParentId { get; set; }
-
-        public string ItemId { get; set; }
-
+    public class SorttableMoveEventArgs: SorttableEventArgs
+    { 
         public RectModel Rect { get; set; }
 
         public MovedModel Moved { get; set; }
