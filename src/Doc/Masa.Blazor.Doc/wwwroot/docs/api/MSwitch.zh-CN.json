@@ -243,7 +243,7 @@
     },
     {
       "Name": "OnClick",
-      "Type": "EventCallback<MouseEventArgs>",
+      "Type": "EventCallback<ExMouseEventArgs>",
       "Description": ""
     },
     {
@@ -253,7 +253,7 @@
     },
     {
       "Name": "OnMouseUp",
-      "Type": "EventCallback<MouseEventArgs>",
+      "Type": "EventCallback<ExMouseEventArgs>",
       "Description": ""
     },
     {

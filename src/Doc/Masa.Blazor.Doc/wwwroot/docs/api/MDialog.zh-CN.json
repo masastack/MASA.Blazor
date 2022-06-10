@@ -77,6 +77,11 @@
       "Description": ""
     },
     {
+      "Name": "OpenOnClick",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "OpenOnFocus",
       "Type": "Boolean",
       "Default": "false",

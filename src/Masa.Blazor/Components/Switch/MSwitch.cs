@@ -180,7 +180,7 @@ namespace Masa.Blazor
                 .Apply(typeof(BSwitchProgress<>), typeof(BSwitchProgress<MSwitch>));
         }
 
-        public override async Task HandleOnClickAsync(MouseEventArgs args)
+        public override async Task HandleOnClickAsync(ExMouseEventArgs args)
         {
             await SetInternalValueAsync(!InternalValue);
         }

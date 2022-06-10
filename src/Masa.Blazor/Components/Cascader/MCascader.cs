@@ -53,7 +53,7 @@
                     attrs[nameof(ItemText)] = ItemText;
                     attrs[nameof(LoadChildren)] = LoadChildren;
                     attrs[nameof(ItemChildren)] = ItemChildren;
-                    attrs[nameof(MCascaderList<TItem, TValue>.OnSelect)] = CreateEventCallback<TItem>(SelectItemsAsync);
+                    attrs[nameof(MCascaderList<TItem, TValue>.OnSelect)] = CreateEventCallback<TItem>(SelectItem);
                 });
         }
 
