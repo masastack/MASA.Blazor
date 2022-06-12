@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.725483+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.1097739+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -194,7 +194,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.726483+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.1253979+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -227,7 +227,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7284829+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.1253979+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -327,7 +327,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.729483+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.1566474+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -404,7 +404,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.730483+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.2503949+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -494,7 +494,7 @@
       "功能组件": "\n<ul>\n<li><code>MAppBarNavIcon</code>：专门为与 <a href=\"/components/toolbars\">MToolbar</a> 和 <code>MAppBar</code> 一起使用而创建的样式化图标按钮组件。 在工具栏的左侧显示为汉堡菜单，它通常用于控制导航抽屉的状态。 默认插槽可以用于自定义此组件的图标和功能。</li>\n<li><code>MAppBarTitle</code>：修改过的 <a href=\"/components/toolbars\">MToolbarTitle</a> 组件 ，用于配合 <strong>ShrinkOnScroll</strong> 属性使用。 在小屏幕上，<strong>MToolbarTitle</strong>\n将被截断，但这个组件在展开时使用了绝对定位使其内容可见。 我们不建议您在没有使用 <strong>ShrinkOnScroll</strong> 属性时使用 <code>MAppBarTitle</code> 组件。确实是因为向此组件添加了resize事件，并进行了很多额外的计算。</li>\n</ul>\n",
       "注意事项": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <strong>Icon</strong> 属性的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将按钮包装在任何容器例如<code>div</code>中，则需要对该容器应用负边距，以便正确对齐它们。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7334831+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.2972672+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -649,7 +649,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.734483+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.3285168+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -727,7 +727,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <code>Icon</code> prop的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将您的按钮包装在任何容器中，例如<code>div</code>， 您需要对容器应用负边距，以便正确对齐。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7364829+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.391015+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -881,7 +881,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7374831+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.4222647+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -925,7 +925,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBottomSheet\">MBottomSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7394829+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.4378899+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1014,7 +1014,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>默认情况下，<code>MBreadcrumbs</code> 将禁用路由联动。可以通过 <strong>Linkage</strong> 属性开启路由联动。</p>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7404828+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.4847627+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1104,7 +1104,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p>当使用 <strong>Dark</strong> 属性时，<code>MButton</code> 是唯一一种拥有不同行为的组件。 通常来说，组件使用 <strong>Dark</strong> 属性来表示他们将有深色背景，文本也需要是白色的。 虽然这对\n<code>MButton</code> 也是起作用的，但由于禁用状态与白色背景容易造成混淆，建议仅在按钮<strong>为</strong>彩色背景时使用此属性。 If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7424829+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.5316362+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1271,7 +1271,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "功能组件": "\n<ul>\n<li><code>MCardActions</code>：用于为卡片放置 动作 的容器，如 <a href=\"/components/buttons\">MButton</a> 或 <a href=\"/components/menus\">MMenu</a>。 同时在按钮上使用 个特殊边距\n，以便它们与其他卡片内容区域的匹配。</li>\n<li><code>MCardSubtitle</code>：为卡片字幕提供默认的 <strong>字体大小</strong> 和 <strong>填充</strong>。 字体大小可以以 <a href=\"/stylesandanimations/text-and-typography\">排版类</a> 覆盖。</li>\n<li><code>MCardText</code>：主要用于卡片中的 <strong>文本内容</strong>。 对文本应用填充，将其字体大小减少为 .875rem。</li>\n<li><code>MCardTitle</code>：为卡片字幕提供默认的 字体大小 和 填充。 字体大小可以以 <a href=\"/stylesandanimations/text-and-typography\">排版类</a> 覆盖。</li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7454829+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.5941343+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1426,7 +1426,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7474829+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.6410072+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1614,7 +1614,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7504829+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.6722574+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1746,7 +1746,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7524827+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.6722574+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1835,7 +1835,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDragZone\">MDragZone</a></li>\n</ul>\n<!--alert:info-->\n<p>使用前需要引入 <code>Sorttable.js</code>：\n<br />\n<code>&lt;script src=&quot;https://cdn.bootcdn.net/ajax/libs/Sortable/1.15.0/Sortable.min.js&quot;&gt;&lt;/script&gt;</code>。</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7544829+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.6878818+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1850,33 +1850,11 @@
       },
       {
         "Order": 1,
-        "Name": "loadItems",
-        "Title": "数据展示",
-        "Description": "<p>当通过<code>OnInit</code>设置数据后，如果LoadItems为 <code>true</code> 直接加载设置的数据；<code>false</code> 先展示<code>ChildContent</code>内容，再展示设置的数据。</p>\n",
-        "Code": "<style>\r\n    .item {\r\n        margin: 5px;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n</style>\r\n\r\n<MContainer>\r\n    <MRow>\r\n        <MCol Cols=6>\r\n            LoadItems:false\r\n        </MCol>\r\n        <MCol Cols=6>\r\n            LoadItems:true\r\n        </MCol>\r\n    </MRow>\r\n    <MRow>\r\n        <MCol Cols=6>\r\n            <MDragZone LoadItems=false OnInit=\"InitData\">\r\n                <MDragItem>\r\n                    <MCard Class=\"item\">\r\n                        <MCardTitle>item1.1</MCardTitle>\r\n                        <MCardText>item content1.1</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <MCard Class=\"item\">\r\n                        <MCardTitle>item1.2</MCardTitle>\r\n                        <MCardText>item content1.2</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n        <MCol Cols=6>\r\n            <MDragZone LoadItems=true OnInit=\"InitData\">\r\n                <MDragItem>\r\n                    <MCard Class=\"item\">\r\n                        <MCardTitle>item2.1</MCardTitle>\r\n                        <MCardText>item content2.1</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <MCard Class=\"item\">\r\n                        <MCardTitle>item2.2</MCardTitle>\r\n                        <MCardText>item content2.2</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n@code {\r\n\r\n    private int containerIndex = 1;\r\n\r\n    private void InitData(MDragZone container)\r\n    {\r\n        int count = 5, i = 1;\r\n        var list = new List<MDragItem>();\r\n        do\r\n        {\r\n            list.Add(new MDragItem\r\n                {\r\n                    DragZone = container,\r\n                    ChildContent = CreateCard(container, $\"{containerIndex}.{i++}\")\r\n                });\r\n        }\r\n        while (count - i > 0);\r\n        if (list.Any())\r\n            container.AddRange(list);\r\n\r\n        containerIndex++;\r\n    }\r\n\r\n    private RenderFragment CreateCard(MDragZone container, string name) => builder =>\r\n         {\r\n             int i = 0;\r\n             builder.OpenComponent<MCard>(i++);\r\n             builder.AddAttribute(i++, \"IsDark\", container.IsDark);\r\n             builder.AddAttribute(i++, \"Class\", \"item\");\r\n             builder.AddAttribute(i++, \"ChildContent\", CreateComponent(name));\r\n             builder.CloseComponent();\r\n         };\r\n\r\n    private RenderFragment CreateComponent(string name) => builder =>\r\n        {\r\n            int i = 0;\r\n            builder.OpenComponent<MCardTitle>(i++);\r\n            builder.AddAttribute(i++, \"ChildContent\", CreateText($\"item card title {name}\"));\r\n            builder.CloseComponent();\r\n\r\n            builder.OpenComponent<MCardText>(i++);\r\n            builder.AddAttribute(i++, \"ChildContent\", CreateText($\"item card text {name}\"));\r\n            builder.CloseComponent();\r\n        };\r\n\r\n    private RenderFragment CreateText(string name) => builder =>\r\n        {\r\n            builder.AddContent(0, $\"{name}\");\r\n        };\r\n}",
-        "Type": "Demos.Components.DragZone.props.LoadItems",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 1,
         "Name": "onConfigure",
         "Title": "参数配置",
         "Description": "<p>参数<code>Options</code>配置方法。</p>\n",
         "Code": "<style>\r\n    .item {\r\n        margin: 5px;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n</style>\r\n\r\n<MDragZone OnConfigure=SetOptions>\r\n    <MDragItem>\r\n        <div class=\"item\">item1</div>\r\n    </MDragItem>\r\n    <MDragItem>\r\n        <div class=\"item\">item2</div>\r\n    </MDragItem>\r\n    <MDragItem>\r\n        <div class=\"item\">item3</div>\r\n    </MDragItem>\r\n    <MDragItem>\r\n        <div class=\"item\">item4</div>\r\n    </MDragItem>\r\n    <MDragItem>\r\n        <div class=\"item\">item4</div>\r\n    </MDragItem>\r\n</MDragZone>\r\n\r\n@code {\r\n\r\n    private void SetOptions(SorttableOptions options)\r\n    {\r\n        options.Group = \"group_onconfigure\";\r\n    }\r\n\r\n}",
         "Type": "Demos.Components.DragZone.props.OnConfigure",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 1,
-        "Name": "onInit",
-        "Title": "初始化数据",
-        "Description": "<p>如果参数不为空，则按照指定参数进行加载数据。</p>\n",
-        "Code": "<style>\r\n    .item {\r\n        margin: 5px;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n</style>\r\n\r\n<MDragZone OnConfigure=SetOptions OnInit=\"InitData\">\r\n    <MDragItem>\r\n        <MCard Class=\"item\">\r\n            <MCardTitle>item1</MCardTitle>\r\n            <MCardText>item content1</MCardText>\r\n            <MButton OnClick=@(()=>{ this.StateHasChanged(); })> button</MButton>\r\n        </MCard>\r\n    </MDragItem>\r\n    <MDragItem>\r\n        <MCard Class=\"item\">\r\n            <MCardTitle>item2</MCardTitle>\r\n            <MCardText>item content2</MCardText>\r\n        </MCard>\r\n    </MDragItem>\r\n</MDragZone>\r\n\r\n@code {\r\n\r\n    private void SetOptions(SorttableOptions options)\r\n    {\r\n        options.Group = \"group_oninit\";\r\n    }\r\n\r\n    private void InitData(MDragZone container)\r\n    {\r\n        int count = 5, i = 1;\r\n        var list = new List<MDragItem>();\r\n        do\r\n        {\r\n            list.Add(new MDragItem\r\n                {\r\n                    DragZone = container,\r\n                    ChildContent = CreateCard(container, \"-\", i++)\r\n                });\r\n        }\r\n        while (count - i > 0);\r\n        if (list.Any())\r\n            container.AddRange(list);\r\n    }\r\n\r\n    private RenderFragment CreateCard(MDragZone container, string split, int index) => builder =>\r\n         {\r\n             int i = 0;\r\n             builder.OpenComponent<MCard>(i++);\r\n             builder.AddAttribute(i++, \"IsDark\", container.IsDark);\r\n             builder.AddAttribute(i++, \"Class\", \"item\");\r\n             builder.AddAttribute(i++, \"ChildContent\", CreateComponent(\"-\", index));\r\n             builder.CloseComponent();\r\n         };\r\n\r\n    private RenderFragment CreateComponent(string split, int index) => builder =>\r\n        {\r\n            int i = 0;\r\n            builder.OpenComponent<MCardTitle>(i++);\r\n            builder.AddAttribute(i++, \"ChildContent\", CreateText($\"item title {split}{index}\"));\r\n            builder.CloseComponent();\r\n\r\n            builder.OpenComponent<MCardText>(i++);\r\n            builder.AddAttribute(i++, \"ChildContent\", CreateText($\"item content {split}{index}\"));\r\n            builder.CloseComponent();\r\n        };\r\n\r\n    private RenderFragment CreateText(string name) => builder =>\r\n        {\r\n            builder.AddContent(0, $\"{name}\");\r\n        };\r\n}",
-        "Type": "Demos.Components.DragZone.props.OnInit",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -1893,11 +1871,22 @@
         "Group": 0
       },
       {
+        "Order": 1,
+        "Name": "value",
+        "Title": "初始化数据",
+        "Description": "<p>如果参数不为空，则按照指定参数进行加载数据。</p>\n",
+        "Code": "<style>\r\n    .item {\r\n        margin: 5px;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n</style>\r\n\r\n<MDragZone OnConfigure=SetOptions OnInit=\"InitData\">\r\n    <MDragItem>\r\n        <MCard Class=\"item\">\r\n            <MCardTitle>item1</MCardTitle>\r\n            <MCardText>item content1</MCardText>\r\n            <MButton OnClick=@(()=>{ this.StateHasChanged(); })> button</MButton>\r\n        </MCard>\r\n    </MDragItem>\r\n    <MDragItem>\r\n        <MCard Class=\"item\">\r\n            <MCardTitle>item2</MCardTitle>\r\n            <MCardText>item content2</MCardText>\r\n        </MCard>\r\n    </MDragItem>\r\n</MDragZone>\r\n\r\n@code {\r\n\r\n    private void SetOptions(SorttableOptions options)\r\n    {\r\n        options.Group = \"group_oninit\";\r\n    }\r\n\r\n    private void InitData(MDragZone container)\r\n    {\r\n        int count = 5, i = 1;\r\n        var list = new List<MDragItem>();\r\n        do\r\n        {\r\n            list.Add(new MDragItem\r\n                {\r\n                    DragZone = container,\r\n                    ChildContent = CreateCard(container, \"-\", i++)\r\n                });\r\n        }\r\n        while (count - i > 0);\r\n        if (list.Any())\r\n            container.AddRange(list);\r\n    }\r\n\r\n    private RenderFragment CreateCard(MDragZone container, string split, int index) => builder =>\r\n         {\r\n             int i = 0;\r\n             builder.OpenComponent<MCard>(i++);\r\n             builder.AddAttribute(i++, \"IsDark\", container.IsDark);\r\n             builder.AddAttribute(i++, \"Class\", \"item\");\r\n             builder.AddAttribute(i++, \"ChildContent\", CreateComponent(\"-\", index));\r\n             builder.CloseComponent();\r\n         };\r\n\r\n    private RenderFragment CreateComponent(string split, int index) => builder =>\r\n        {\r\n            int i = 0;\r\n            builder.OpenComponent<MCardTitle>(i++);\r\n            builder.AddAttribute(i++, \"ChildContent\", CreateText($\"item title {split}{index}\"));\r\n            builder.CloseComponent();\r\n\r\n            builder.OpenComponent<MCardText>(i++);\r\n            builder.AddAttribute(i++, \"ChildContent\", CreateText($\"item content {split}{index}\"));\r\n            builder.CloseComponent();\r\n        };\r\n\r\n    private RenderFragment CreateText(string name) => builder =>\r\n        {\r\n            builder.AddContent(0, $\"{name}\");\r\n        };\r\n}",
+        "Type": "Demos.Components.DragZone.props.Value",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
         "Order": 2,
         "Name": "clone",
         "Title": "克隆",
         "Description": "<p>选中的元素克隆拖放。</p>\n",
-        "Code": "<style>\r\n    .parent {\r\n        background-color: #eee;\r\n        min-height: 40px;\r\n        padding: 5px 0 10px 0\r\n    }\r\n\r\n    .item {\r\n        margin: 5px;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n\r\n    .white-color {\r\n        background-color: #ffffff;\r\n    }\r\n\r\n    .blue-color {\r\n        background-color: #5CBBF6;\r\n    }\r\n\r\n</style>\r\n\r\n<MButton OnClick=@(async ()=>{\r\n\r\n    var t = await mDragZone1.Value;\r\n         InitData(mDragZone1);\r\n         })> add1</MButton>\r\n<MButton OnClick=@(async ()=>{\r\n    var t = await mDragZone2.Value;\r\n         InitData(mDragZone2);\r\n         })> add2</MButton>\r\n<MContainer>\r\n    <MRow>\r\n        <MCol Cols=6>\r\n            <MDragZone OnConfigure=SetOptions OnInit=InitData @ref=mDragZone1>\r\n                <MDragItem>\r\n                    <MCard Class=\"item\">\r\n                        <MCardTitle>item@1</MCardTitle>\r\n                        <MCardText>item content@1</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <MCard Class=\"item\">\r\n                        <MCardTitle>item@2</MCardTitle>\r\n                        <MCardText>item content@2</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n        <MCol Cols=6>\r\n            <MDragZone OnConfigure=SetOptions OnInit=InitData @ref=mDragZone2>\r\n                <MDragItem>\r\n                    <MCard Class=\"item\">\r\n                        <MCardTitle>item@1</MCardTitle>\r\n                        <MCardText>item content@1</MCardText>                        \r\n                    </MCard>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <MCard Class=\"item\">\r\n                        <MCardTitle>item@2</MCardTitle>\r\n                        <MCardText>item content@2</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n\r\n@code {\r\n    private MDragZone mDragZone1;\r\n    private MDragZone mDragZone2;\r\n    private int i = 1;\r\n    private void SetOptions(SorttableOptions options)\r\n    {\r\n        options.Group = \"group_oninit\";\r\n        options.Pull = \"clone\";\r\n    }  \r\n\r\n    private void InitData(MDragZone container)\r\n    {\r\n        int count = 2, j = 1;\r\n\r\n        \r\n\r\n        List<MDragItem> list = new ();\r\n        do\r\n        {\r\n            list.Add(new MDragItem\r\n                {\r\n                    Id = Guid.NewGuid().ToString(\"N\"),\r\n                    ChildContent = CreateCard(container, \"-\", i++)\r\n                });\r\n            j++;\r\n        }\r\n        while (count - j > 0);\r\n        if (list.Any())\r\n            container.AddRange(list);\r\n\r\n       StateHasChanged();\r\n    }\r\n\r\n    private RenderFragment CreateCard(MDragZone container, string split, int index) => builder =>\r\n         {\r\n             int i = 0;\r\n             builder.OpenComponent<MCard>(i++);\r\n             builder.AddAttribute(i++, \"IsDark\", container.IsDark);\r\n             builder.AddAttribute(i++, \"Class\", \"item\");\r\n             builder.AddAttribute(i++, \"ChildContent\", CreateComponent(\"-\", index));\r\n             builder.CloseComponent();\r\n         };\r\n\r\n    private RenderFragment CreateComponent(string split, int index) => builder =>\r\n        {\r\n            int i = 0;\r\n            builder.OpenComponent<MCardTitle>(i++);\r\n            builder.AddAttribute(i++, \"ChildContent\", CreateText($\"item title {split}{index}\"));\r\n            builder.CloseComponent();\r\n\r\n            builder.OpenComponent<MCardText>(i++);\r\n            builder.AddAttribute(i++, \"ChildContent\", CreateText($\"item content {split}{index}\"));\r\n            builder.CloseComponent();\r\n        };\r\n\r\n    private RenderFragment CreateText(string name) => builder =>\r\n        {\r\n            builder.AddContent(0, $\"{name}\");\r\n        };\r\n}",
+        "Code": "<style>\r\n    .parent {\r\n        background-color: #eee;\r\n        min-height: 40px;\r\n        padding: 5px 0 10px 0\r\n    }\r\n\r\n    .item {\r\n        margin: 5px;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n\r\n    .white-color {\r\n        background-color: #ffffff;\r\n    }\r\n\r\n    .blue-color {\r\n        background-color: #5CBBF6;\r\n    }\r\n\r\n</style>\r\n\r\n<MButton OnClick=@(async ()=>{ AddData(mDragZone1,1); })> container1 add</MButton>\r\n<MButton OnClick=@(async ()=>{ AddData(mDragZone2,2); })> container2 add</MButton>\r\n<MContainer>\r\n    <MRow>\r\n        <MCol Cols=6>\r\n            <MDragZone OnConfigure=SetOptions @ref=mDragZone1>\r\n                <MDragItem>\r\n                    <MCard Class=\"item\">\r\n                        <MCardTitle>item1 init title1</MCardTitle>\r\n                        <MCardText>item1 init text1</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <MCard Class=\"item\">\r\n                        <MCardTitle>item1 init title2</MCardTitle>\r\n                        <MCardText>tem1 init text2</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n        <MCol Cols=6>\r\n            <MDragZone OnConfigure=SetOptions @ref=mDragZone2>\r\n                <MDragItem>\r\n                    <MCard Class=\"item\">\r\n                        <MCardTitle>item2 init title1</MCardTitle>\r\n                        <MCardText>item1 init text1</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <MCard Class=\"item\">\r\n                        <MCardTitle>item2 init title2</MCardTitle>\r\n                        <MCardText>tem2 init text2</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n\r\n@code {\r\n    private MDragZone mDragZone1;\r\n    private MDragZone mDragZone2;\r\n    private int total = 3;\r\n    private void SetOptions(SorttableOptions options)\r\n    {\r\n        options.Group = \"group_oninit\";\r\n        options.Pull = \"clone\";\r\n    }\r\n\r\n    private void AddData(MDragZone container, int index)\r\n    {\r\n        int max = 2, j = 1;\r\n        List<MDragItem> list = new();\r\n        do\r\n        {\r\n            list.Add(new MDragItem\r\n                {\r\n                    Id = Guid.NewGuid().ToString(\"N\"),\r\n                    ChildContent = CreateCard(container, \"-\", index, total++)\r\n                });\r\n            j++;\r\n        }\r\n        while (max - j > 0);\r\n        if (list.Any())\r\n            container.AddRange(list);\r\n\r\n        StateHasChanged();\r\n    }\r\n\r\n    private RenderFragment CreateCard(MDragZone container, string split, int containerIndex, int index) => builder =>\r\n          {\r\n              int i = 0;\r\n              builder.OpenComponent<MCard>(i++);\r\n              builder.AddAttribute(i++, \"IsDark\", container.IsDark);\r\n              builder.AddAttribute(i++, \"Class\", \"item\");\r\n              builder.AddAttribute(i++, \"ChildContent\", CreateComponent(\"-\", containerIndex, index));\r\n              builder.CloseComponent();\r\n          };\r\n\r\n    private RenderFragment CreateComponent(string split, int containerIndex, int index) => builder =>\r\n         {\r\n             int i = 0;\r\n             builder.OpenComponent<MCardTitle>(i++);\r\n             builder.AddAttribute(i++, \"ChildContent\", CreateText($\"item {containerIndex} title {split}{index}\"));\r\n             builder.CloseComponent();\r\n\r\n             builder.OpenComponent<MCardText>(i++);\r\n             builder.AddAttribute(i++, \"ChildContent\", CreateText($\"item {containerIndex} text {split}{index}\"));\r\n             builder.CloseComponent();\r\n         };\r\n\r\n    private RenderFragment CreateText(string name) => builder =>\r\n        {\r\n            builder.AddContent(0, $\"{name}\");\r\n        };\r\n}",
         "Type": "Demos.Components.DragZone.misc.Clone",
         "Style": "",
         "Debug": false,
@@ -1951,7 +1940,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n<!--alert:info-->\n<p>使用前需要先引用ECharts的包：\n<br />\n<code>&lt;script src=&quot;https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js&quot;&gt;&lt;/script&gt;</code>。</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7554829+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.7035066+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2004,7 +1993,7 @@
       "js文件": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7574828+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.7191305+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2131,7 +2120,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MErrorHandler\">MErrorHandler</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7584828+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.7347562+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2192,7 +2181,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7604827+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.7503796+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2325,7 +2314,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MSpeedDial\">MSpeedDial</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.761483+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.7503796+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2402,7 +2391,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7624828+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.7660032+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2480,7 +2469,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7647122+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.7660032+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2591,7 +2580,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7667166+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.7816285+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2657,7 +2646,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7677168+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.7972548+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2745,7 +2734,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.770475+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.8166066+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2889,7 +2878,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7714753+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.8256012+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2978,7 +2967,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOtpInput\">MOtpInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.77288+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.8315969+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3044,7 +3033,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadioGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7738846+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.8385924+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3122,7 +3111,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7748842+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.8475865+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3212,7 +3201,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7778844+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.8665754+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3355,7 +3344,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7808841+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.8925593+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3543,7 +3532,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7818842+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.9025536+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3643,7 +3632,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7888841+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.949524+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3776,7 +3765,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7868836+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.9355332+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4077,7 +4066,7 @@
       "辅助类": "\n<p><strong>FillHeight</strong>将<code>height:100%</code>应用于元素。当应用于<code>MContainer</code>时，它还包括<code>align items:center</code>。</p>\n",
       "注意": "\n<!--alert:info--> \n<p>1.x 网格系统已被废弃，请改用 2.x 网格系统。 1.x 网格的文档可以在 v1.5 文档 中找到。</p>\n<!--alert:info--> \n<!--alert:info--> \n<p>网格组件上基于断点的属性以 <code>andUp</code> 的方式工作。 考虑 <strong>xs</strong> 断点已经被删除的情况， 这将会影响到 <strong>offset</strong>、<strong>justify</strong>、<strong>align</strong> 和 <code>MCol</code> 上的断点属性。</p>\n<ul>\n<li>像 <strong>justify-sm</strong> 和 <strong>justify-md</strong> 这样的属性仍然存在，但 <strong>justify-xs</strong> 会变成 <strong>justify</strong>。</li>\n<li><code>MCol</code> 上不存在 <strong>xs</strong> 属性。 与此对应的是 <strong>cols</strong> 属性。</li>\n</ul>\n<!--alert:info--> \n<!--alert:info--> \n<p>当在 IE11 使用网格系统时，你需要设置一个显式的 <code>height</code>，因为 <code>min-height</code> 不足进而导致非预期结果。</p>\n<!--alert:info--> \n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7928843+08:00",
+    "LastWriteTime": "2022-05-25T22:35:07.9775979+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4309,7 +4298,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7948838+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.0118808+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4398,7 +4387,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7968846+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.0848359+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4498,7 +4487,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7988844+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.0988271+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4587,7 +4576,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.7998834+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.116816+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4675,7 +4664,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8028841+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.1378025+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4774,7 +4763,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8038838+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.151794+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4862,7 +4851,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8048836+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.1667858+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4928,7 +4917,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.806884+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.192769+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5018,7 +5007,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>MImage 组件使用 Intersect 指令，IE11 和 Safari需要 Polyfill。 如果检测到浏览器不支持此功能, 图像仍将以正常方式加载。</p>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.808884+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.2107583+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5118,7 +5107,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>如果您要查找有状态列表项，请查看 <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>。</p>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8118842+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.244737+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5330,7 +5319,7 @@
       "js文件": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.min.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MMarkdown\">MMarkdown</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8138835+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.2607268+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5446,7 +5435,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8168838+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.2897097+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5623,7 +5612,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MNavigationDrawer\">MNavigationDrawer</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error-->\n<p>如果使用启用了 <strong>App</strong> 属性的 <code>MNavigationDrawer</code>，则不需要像示例中那样使用 <strong>Absolute</strong> 属性。</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p><strong>ExtensionOnHover</strong> 参数不会改变<strong>MMain</strong>的内容区域。 要使内容区域响应<strong>ExtensionOnHover</strong>，请绑定<strong>OnMiniVariantUpdate</strong> 到数据。</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8188841+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.3076992+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5756,7 +5745,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.819884+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.3176934+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5844,7 +5833,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.820884+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.3266863+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5933,7 +5922,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8248843+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.3546701+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6177,7 +6166,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8278841+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.3726589+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6321,7 +6310,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8298834+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.4036399+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6496,7 +6485,7 @@
     "Desc": "<p>将相同类型的两个数据并排显示。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-06-10T10:04:40.8318825+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.4136334+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6549,7 +6538,7 @@
     "Desc": "<p>在文本后提供可以复制内容的图标按钮。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-06-10T10:04:40.8328825+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.4226281+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6623,7 +6612,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-06-10T10:04:40.8348841+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.4366188+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6731,7 +6720,7 @@
     "Desc": "<p>提供生成图片验证码的组件。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-06-10T10:04:40.8358835+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.4416156+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6783,7 +6772,7 @@
     "Desc": "<p>需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 <code>Modal</code> 在当前页面正中打开一个浮层，承载相应的操作。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-06-10T10:04:40.8368835+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.4526093+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6879,7 +6868,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-06-10T10:04:40.8378838+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.4556072+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6932,7 +6921,7 @@
     "Desc": "<p>提供全局服务调用Alert、Confirm、Prompt和Toast等弹出层组件。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-06-10T10:04:40.8378838+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.4616042+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6996,7 +6985,7 @@
     "Desc": "<p>该组件用于通过使用上下文类型，图标和颜色向用户传达重要信息。这些默认类型有4种变体：<strong>Success</strong>、<strong>Info</strong>、<strong>Warning</strong> 和 <strong>Error</strong>。默认图标有助于表示每种类型所描述的不同动作，也可以自定义提示框的许多部分。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-06-10T10:04:40.8598835+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.4745953+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -7073,7 +7062,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8618836+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.4769621+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7150,7 +7139,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8648837+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.4925871+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7315,7 +7304,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8658841+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.5082117+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -7425,7 +7414,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8678828+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.5082117+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -7481,7 +7470,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8688838+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.5238375+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7526,7 +7515,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8698834+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.5238375+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7603,7 +7592,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8758832+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.5394608+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7769,7 +7758,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8778832+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.555086+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7846,7 +7835,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.878883+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.555086+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7902,7 +7891,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n<li><a href=\"/api/MDataTableHeader\">MDataTableHeader</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8848835+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.5863356+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8167,7 +8156,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8858835+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.601959+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8246,7 +8235,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当使用 <strong>Dark</strong> 属性和 <strong>不</strong> 提供自定义 <strong>Color</strong> 时，<code>MTabs</code>组件会将其颜色默认为 white。</p>\n<!--alert:warning-->\n<!--alert:warning-->\n<p>当使用包含必填输入字段的 <code>MTabItem</code> 时，你必须使用 <strong>eager</strong> prop 来验证尚未显示的必填字段。</p>\n<!--alert:warning-->\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8888836+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.6332082+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8445,7 +8434,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8918836+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.6488327+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8578,7 +8567,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>为了正确定位 <code>MTooltip</code>，需要一个位置支撑(<code>Top</code> | <code>Bottom</code> | <code>Left</code> | <code>Right</code>)。</p>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8918836+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.6644572+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8634,7 +8623,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTreeview\">MTreeview</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8958835+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.6957061+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8833,7 +8822,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-10T10:04:40.8958835+08:00",
+    "LastWriteTime": "2022-05-25T22:35:08.6957061+08:00",
     "DemoList": [
       {
         "Order": 0,

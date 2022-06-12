@@ -7,50 +7,28 @@
         border: 1px solid rgba(0,0,0,.125);
     }
 </style>
-
-<MContainer>
-    <MRow>
-       <MCol Cols=6>
-           <MDragZone Options=GetOptions()>
-        <BDragItem>
-            <MCard Class="item">
-                <MCardTitle>item1.1</MCardTitle>
-                <MCardText>item content1</MCardText>
-            </MCard>
-        </BDragItem>
-        <BDragItem>
-            <MCard Class="item">
-                <MCardTitle>item1.2</MCardTitle>
-                <MCardText>item content2</MCardText>
-            </MCard>
-        </BDragItem>
-    </MDragZone>
-       </MCol>
-       <MCol Cols=6>
-           <MDragZone Options=GetOptions()>
-        <BDragItem>
-            <MCard Class="item">
-                <MCardTitle>item2.1</MCardTitle>
-                <MCardText>item content1</MCardText>
-            </MCard>
-        </BDragItem>
-        <BDragItem>
-            <MCard Class="item">
-                <MCardTitle>item2.2</MCardTitle>
-                <MCardText>item content1</MCardText>
-            </MCard>
-        </BDragItem>
-    </MDragZone>
-       </MCol>
-    </MRow>
-</MContainer>
+<MDragZone Options=GetOptions()>
+    <BDragItem>
+        <div class="item">Item1</div>
+    </BDragItem>
+    <BDragItem>
+        <div class="item">Item2</div>
+    </BDragItem>
+    <BDragItem>
+        <div class="item">Item3</div>
+    </BDragItem>
+    <BDragItem>
+        <div class="item">Item4</div>
+    </BDragItem>
+</MDragZone>
 
 @code {
 
     private SorttableOptions GetOptions()
     {
-        return new SorttableOptions { 
-            Group="group_options"        
-        };
+        return new SorttableOptions
+            {
+                Group = "group_options"
+            };
     }
 }

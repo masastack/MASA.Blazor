@@ -30,11 +30,6 @@
       "Description": ""
     },
     {
-      "Name": "OnInit",
-      "Type": "Action<MDragZone>",
-      "Description": ""
-    },
-    {
       "Name": "Options",
       "Type": "SorttableOptions",
       "Description": ""
@@ -43,6 +38,11 @@
       "Name": "Style",
       "Type": "String",
       "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "List<BDragItem>",
+      "Description": ""
     }
   ],
   "Contents": [

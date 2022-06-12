@@ -15,5 +15,5 @@ cols: 1
 <!--alert:info-->
 使用前需要引入 `Sorttable.js`：
 <br />
-`<script src="https://cdn.bootcdn.net/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>`。
+`<script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>`。
 <!--/alert:info-->

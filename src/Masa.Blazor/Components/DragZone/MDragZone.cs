@@ -9,15 +9,7 @@
         public SorttableOptions Options { get; set; }
 
         [Parameter]
-        public Action<SorttableOptions> OnConfigure { get; set; }
-
-        [Parameter]
-        public Action<MDragZone> OnInit { get; set; }
-
-        protected override bool ShouldRender()
-        {
-            return base.ShouldRender();
-        }
+        public Action<SorttableOptions> OnConfigure { get; set; }        
 
         /// <summary>
         /// 元素被选中
@@ -51,8 +43,7 @@
         public void OnStart(SorttableEventArgs args)
         {
             _isRender = false;
-            DragDropService.DragItem = Items.FirstOrDefault(it => it.Id == args.ItemId);
-            DragDropService.Source = this;
+            DragDropService.DragItem = Value.FirstOrDefault(it => it.Id == args.ItemId);
             if (Options?.OnStart != null)
                 Options.OnStart(args);
         }
@@ -83,20 +74,11 @@
                 Options.OnAdd(args);
 
             string cloneId = string.Empty;
-            if (!Contains(DragDropService.DragItem, Items))
+            if (!Contains(DragDropService.DragItem))
             {
-               
-                //if (args.IsClone)
-                //{
-                  
-                //    Add(DragDropService.DragItem);
-                //}
-                //else
-                {
-                    var item = DragDropService.DragItem.Clone();
-                    item.Id = Guid.NewGuid().ToString();
-                    Add(item, args.NewIndex);
-                }
+                var item = DragDropService.DragItem.Clone();
+                item.Id = Guid.NewGuid().ToString();
+                Add(item, args.NewIndex);
             }
             return cloneId;
         }
@@ -141,9 +123,15 @@
             if (Options?.OnRemove != null)
                 Options.OnRemove(args);
 
-            if (!args.IsClone && Contains(DragDropService.DragItem, Items))
+            if (Contains(DragDropService.DragItem))
             {
                 Remove(DragDropService.DragItem);
+                if (args.IsClone)
+                {
+                    var item = DragDropService.DragItem.Clone();
+                    item.Id = Guid.NewGuid().ToString();
+                    Add(item, args.OldIndex);
+                }
             }
         }
 
@@ -195,44 +183,33 @@
             return true;
         }
 
-        public ValueTask<string[]> Value
-        {
-            get { return _jsHelper.InvokeAsync<string[]>("getSort", Id); }
-        }
-
         protected override void OnInitialized()
         {
             Options = new();
-            OnInit?.Invoke(this);
             base.OnInitialized();
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            _jsHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/draggable/sorttable-helper.js");
+            _jsHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/Dragzone/sorttable-helper.js");
             if (firstRender)
             {
                 _dotNetHelper = DotNetObjectReference.Create(this);
                 await _jsHelper.InvokeVoidAsync("init", _dotNetHelper, Id, Options.ToParameters());
             }
-            else
-            {
-                await _jsHelper.InvokeVoidAsync("sort", Id, Items.Select(id => id.Id).ToArray());
-            }
             await base.OnAfterRenderAsync(firstRender);
+        }
+
+        protected override bool ShouldRender()
+        {
+            return base.ShouldRender();
         }
 
         protected override void OnParametersSet()
         {
             OnConfigure?.Invoke(Options);
             base.OnParametersSet();
-        }
-
-        protected override Task OnParametersSetAsync()
-        {
-            OnConfigure?.Invoke(Options);
-            return base.OnParametersSetAsync();
-        }
+        }       
 
         public override void Dispose()
         {

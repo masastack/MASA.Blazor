@@ -7,12 +7,14 @@
     }
 </style>
 
-<MDragZone OnConfigure=SetOptions OnInit="InitData">
+<MButton OnClick=AddData>Add</MButton>
+<MButton OnClick=Reverse>Reverse</MButton>
+
+<MDragZone OnConfigure=SetOptions @ref=container>
     <MDragItem>
         <MCard Class="item">
             <MCardTitle>item1</MCardTitle>
             <MCardText>item content1</MCardText>
-            <MButton OnClick=@(()=>{ this.StateHasChanged(); })> button</MButton>
         </MCard>
     </MDragItem>
     <MDragItem>
@@ -24,28 +26,38 @@
 </MDragZone>
 
 @code {
+    private MDragZone container;
+    private int total = 1;
 
     private void SetOptions(SorttableOptions options)
     {
         options.Group = "group_oninit";
     }
 
-    private void InitData(MDragZone container)
+    private void AddData()
     {
-        int count = 5, i = 1;
+        int count = 1, i= 1;
         var list = new List<MDragItem>();
         do
         {
             list.Add(new MDragItem
                 {
+                    Id = Guid.NewGuid().ToString(),
                     DragZone = container,
-                    ChildContent = CreateCard(container, "-", i++)
+                    ChildContent = CreateCard(container, "-", total++)
                 });
+                i++;
         }
         while (count - i > 0);
         if (list.Any())
             container.AddRange(list);
     }
+
+    private void Reverse()
+    {
+        container.Value.Reverse();
+    }
+    
 
     private RenderFragment CreateCard(MDragZone container, string split, int index) => builder =>
          {
