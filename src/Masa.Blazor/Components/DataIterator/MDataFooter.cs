@@ -59,19 +59,24 @@ namespace Masa.Blazor
         [Parameter]
         public RenderFragment<(int PageStart, int PageStop, int ItemsLength)> PageTextContent { get; set; }
 
+        [Parameter]
+        public Action<IDataFooterParameters>? Parameters { get; set; }
+
         [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+        protected MasaBlazor MasaBlazor { get; set; }
 
         public IEnumerable<DataItemsPerPageOption> ComputedDataItemsPerPageOptions
         {
             get
             {
                 return ItemsPerPageOptions
-                     .Select(r => r.IsT1 ? r.AsT1 : new DataItemsPerPageOption
-                     {
-                         Text = r.AsT0 == -1 ? ItemsPerPageAllText : r.AsT0.ToString(),
-                         Value = r.AsT0
-                     });
+                    .Select(r => r.IsT1
+                        ? r.AsT1
+                        : new DataItemsPerPageOption
+                        {
+                            Text = r.AsT0 == -1 ? ItemsPerPageAllText : r.AsT0.ToString(),
+                            Value = r.AsT0
+                        });
             }
         }
 
@@ -100,6 +105,8 @@ namespace Masa.Blazor
 
         protected override void OnParametersSet()
         {
+            Parameters?.Invoke(this);
+
             if (Options == null)
             {
                 throw new ArgumentNullException(nameof(Options));
@@ -144,11 +151,16 @@ namespace Masa.Blazor
                 .ApplyDataFooterDefault()
                 .Apply(typeof(ISelect<,,>), typeof(MSelect<DataItemsPerPageOption, int, int>), attrs =>
                 {
-                    var value = Options.ItemsPerPage;
-                    var first = ComputedDataItemsPerPageOptions.FirstOrDefault(r => r.Value == value);
-                    if (first == null)
+                    if (ComputedDataItemsPerPageOptions.Count() <= 1)
                     {
-                        value = first.Value;
+                        return;
+                    }
+
+                    var value = Options.ItemsPerPage;
+                    var result = ComputedDataItemsPerPageOptions.FirstOrDefault(r => r.Value == value);
+                    if (result == null)
+                    {
+                        value = ComputedDataItemsPerPageOptions.First().Value;
                     }
 
                     Func<DataItemsPerPageOption, int> itemValue = r => r.Value;

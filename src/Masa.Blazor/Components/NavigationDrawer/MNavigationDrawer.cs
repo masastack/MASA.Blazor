@@ -448,10 +448,12 @@ namespace Masa.Blazor
             }
         }
 
-        public override Task HandleOnClickAsync(MouseEventArgs e)
+        public override async Task HandleOnClickAsync(MouseEventArgs e)
         {
-            UpdateMiniVariant(false);
-            return Task.CompletedTask;
+            if (MiniVariantChanged.HasDelegate)
+            {
+                await MiniVariantChanged.InvokeAsync(false);
+            }
         }
 
         protected override void Dispose(bool disposing)

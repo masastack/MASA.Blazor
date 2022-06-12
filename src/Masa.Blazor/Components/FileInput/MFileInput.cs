@@ -238,7 +238,7 @@ namespace Masa.Blazor
             }
         }
 
-        public override async Task HandleOnClickAsync(MouseEventArgs args)
+        public override async Task HandleOnClickAsync(ExMouseEventArgs args)
         {
             await base.HandleOnClickAsync(args);
 

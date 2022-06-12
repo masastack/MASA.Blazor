@@ -70,6 +70,16 @@
       "Description": ""
     },
     {
+      "Name": "OnClickPreventDefault",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "OnClickStopPropagation",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "Right",
       "Type": "Boolean",
       "Default": "false",

@@ -60,7 +60,17 @@ namespace Masa.Blazor
 
         public bool HasText => LeftText != null || RightText != null;
 
-        public string TextColor => HasText ? ComputedColor : (IsLoading ? null : ValidationState);
+        public new string TextColor => HasText ? ComputedColor : (IsLoading ? null : ValidationState);
+
+        protected override void InternalValueSetter(bool val)
+        {
+            base.InternalValueSetter(val);
+
+            if (OnChange.HasDelegate)
+            {
+                OnChange.InvokeAsync(val);
+            }
+        }
 
         public Task HandleOnBlur(FocusEventArgs args)
         {
@@ -170,7 +180,7 @@ namespace Masa.Blazor
                 .Apply(typeof(BSwitchProgress<>), typeof(BSwitchProgress<MSwitch>));
         }
 
-        public override async Task HandleOnClickAsync(MouseEventArgs args)
+        public override async Task HandleOnClickAsync(ExMouseEventArgs args)
         {
             await SetInternalValueAsync(!InternalValue);
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
+using OneOf.Types;
 
 namespace Masa.Blazor
 {
@@ -34,7 +35,11 @@ namespace Masa.Blazor
         public bool HideNoData { get; set; }
 
         [Parameter]
-        public bool NoFilter { get; set; }
+        public bool NoFilter
+        {
+            get => GetValue<bool>();
+            set => SetValue(value);
+        }
 
         [Parameter]
         public string SearchInput { get; set; }
@@ -71,12 +76,20 @@ namespace Masa.Blazor
         {
             get
             {
-                if (!IsSearching || NoFilter || InternalSearch == null)
+                return GetComputedValue(() =>
                 {
-                    return Items;
-                }
+                    if (!IsSearching || NoFilter || InternalSearch == null)
+                    {
+                        return Items;
+                    }
 
-                return Items.Where(item => Filter(item, InternalSearch, GetText(item) ?? "")).ToList();
+                    return Items.Where(item => Filter(item, InternalSearch, GetText(item) ?? "")).ToList();
+                }, new string[]
+                {
+                    nameof(IsSearching),
+                    nameof(NoFilter),
+                    nameof(InternalSearch)
+                });
             }
         }
 
@@ -104,7 +117,11 @@ namespace Masa.Blazor
             }
         }
 
-        protected string InternalSearch { get; set; }
+        protected string InternalSearch
+        {
+            get => GetValue<string>();
+            set => SetValue(value);
+        }
 
         protected override Dictionary<string, object> InputAttrs => new()
         {
@@ -143,10 +160,8 @@ namespace Masa.Blazor
             base.OnWatcherInitialized();
 
             Watcher
-                .Watch<string>(nameof(SearchInput), val =>
-                {
-                    InternalSearch = val;
-                });
+                .Watch<string>(nameof(SearchInput), val => InternalSearch = val)
+                .Watch<IList<TItem>>(nameof(FilteredItems), OnFilteredItemsChanged);
         }
 
         protected override void SetComponentClass()
@@ -169,31 +184,77 @@ namespace Masa.Blazor
                 });
         }
 
-        protected override async Task SelectItemsAsync(TItem item)
+        protected override async Task SelectItem(TItem item)
         {
-            await base.SelectItemsAsync(item);
+            await base.SelectItem(item);
             InternalSearch = null;
-        }
-
-        protected override void WatchIsMenuActive(bool val)
-        {
-            if (val)
-            {
-            }
-            else
-            {
-                InternalSearch = null;
-                StateHasChanged();
-            }
         }
 
         public override async Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            InternalSearch = args.Value.ToString();
+            if (SelectedIndex > -1)
+            {
+                return;
+            }
+
+            var value = args.Value?.ToString();
+
+            if (!Multiple && string.IsNullOrEmpty(value))
+            {
+                await DeleteCurrentItem();
+            }
+
+            InternalSearch = value;
+            
             if (OnSearchInputUpdate.HasDelegate)
             {
                 await OnSearchInputUpdate.InvokeAsync(InternalSearch);
             }
+        }
+
+        private async Task DeleteCurrentItem()
+        {
+            var curIndex = SelectedIndex;
+            var curItem = SelectedItems.ElementAtOrDefault(curIndex);
+            
+            // TODO: need i check the curItem is null?
+
+            if (Disabled || Readonly || ItemDisabled(curItem))
+            {
+                return;
+            }
+
+            var lastIndex = SelectedItems.Count - 1;
+
+            if (SelectedIndex == -1 && lastIndex != 0)
+            {
+                SelectedIndex = lastIndex;
+                
+                return;
+            }
+
+            var length = SelectedItems.Count;
+            var nextIndex = curIndex != length - 1 ? curIndex : curIndex - 1;
+            var nextItem = SelectedItems.ElementAtOrDefault(nextIndex);
+
+            if (nextItem is null)
+            {
+                if (Multiple)
+                {
+                    IList<TItemValue> values = new List<TItemValue>();
+                    await SetInternalValueAsync((TValue)values);
+                }
+                else
+                {
+                    await SetInternalValueAsync(default);
+                }
+            }
+            else
+            {
+                await SelectItem(curItem);
+            }
+
+            SelectedIndex = nextIndex;
         }
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
@@ -234,6 +295,47 @@ namespace Masa.Blazor
             }
 
             await base.HandleOnClearClickAsync(args);
+        }
+
+        private void OnFilteredItemsChanged(IList<TItem> val, IList<TItem> oldVal)
+        {
+            if (val == null || oldVal == null)
+            {
+                return;
+            }
+            
+            if (!AutoSelectFirst)
+            {
+                var preSelectedItem = oldVal.ElementAtOrDefault(MenuListIndex);
+                if (preSelectedItem is not null)
+                {
+                    SetMenuIndex(val.IndexOf(preSelectedItem));
+                }
+                else
+                {
+                    SetMenuIndex(-1);
+                }
+            }
+            
+            NextTick(() =>
+            {
+                if (string.IsNullOrEmpty(InternalSearch) || (val.Count != 1 && !AutoSelectFirst))
+                {
+                    SetMenuIndex(-1);
+                    return Task.CompletedTask;
+                }
+
+                if (AutoSelectFirst && val.Count > 0)
+                {
+                    SetMenuIndex(0);
+                    StateHasChanged();
+                }
+                
+                return Task.CompletedTask;
+            });
+            
+            StateHasChanged();
+
         }
     }
 }
