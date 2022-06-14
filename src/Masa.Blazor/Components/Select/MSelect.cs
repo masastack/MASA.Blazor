@@ -442,6 +442,11 @@ namespace Masa.Blazor
                     SetMenuIndex(index);
                 }
             }
+
+            if (OnSelectedItemUpdate.HasDelegate)
+            {
+                await OnSelectedItemUpdate.InvokeAsync(item);
+            }
         }
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
