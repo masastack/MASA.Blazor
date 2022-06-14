@@ -1,4 +1,5 @@
-﻿@using FluentValidation;
+﻿@using BlazorComponent.I18n
+@using FluentValidation;
 
 <MForm Model="_orderDetail" EnableValidation>
     <MTextField @bind-Value="_orderDetail.Title" Label="Title"></MTextField>
@@ -39,9 +40,9 @@
 
     class OrderDetailValidator : AbstractValidator<OrderDetail>
     {
-        public OrderDetailValidator()
+        public OrderDetailValidator(I18n i18n)
         {
-            RuleFor(o => o.Title).NotEmpty().WithMessage("{PropertyName} is required");
+            RuleFor(o => o.Title).NotEmpty().WithMessage("{PropertyName} is " + i18n.T("Required"));
             RuleFor(o => o.Price).InclusiveBetween(0,20);
             RuleForEach(o => o.Customers).SetValidator(new CustomerValidator());
         }
