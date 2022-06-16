@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor
 {
-    public partial class MSwitch : MInput<bool>, ISwitch
+    public partial class MSwitch : MSelectable, ISwitch
     {
         [Parameter]
         public bool Flat { get; set; }
@@ -46,18 +46,6 @@ namespace Masa.Blazor
             }
         }
 
-        public override string ComputedColor => Color ?? (IsDark ? "white" : "primary");
-
-        protected override bool IsDirty => InternalValue;
-
-        public Dictionary<string, object> InputAttrs { get; set; } = new();
-
-        public bool IsActive { get; set; }
-
-        public bool? Ripple { get; set; }
-
-        public override bool HasColor => InternalValue;
-
         public bool HasText => LeftText != null || RightText != null;
 
         public new string TextColor => HasText ? ComputedColor : (IsLoading ? null : ValidationState);
@@ -70,26 +58,6 @@ namespace Masa.Blazor
             {
                 OnChange.InvokeAsync(val);
             }
-        }
-
-        public Task HandleOnBlur(FocusEventArgs args)
-        {
-            return Task.CompletedTask;
-        }
-
-        public Task HandleOnChange(ChangeEventArgs args)
-        {
-            return Task.CompletedTask;
-        }
-
-        public Task HandleOnFocus(FocusEventArgs args)
-        {
-            return Task.CompletedTask;
-        }
-
-        public Task HandleOnKeyDown(KeyboardEventArgs args)
-        {
-            return Task.CompletedTask;
         }
 
         protected override void SetComponentClass()
@@ -178,11 +146,6 @@ namespace Masa.Blazor
                     attrs[nameof(MProgressCircular.Width)] = (StringNumber)2;
                 })
                 .Apply(typeof(BSwitchProgress<>), typeof(BSwitchProgress<MSwitch>));
-        }
-
-        public override async Task HandleOnClickAsync(ExMouseEventArgs args)
-        {
-            await SetInternalValueAsync(!InternalValue);
         }
     }
 }
