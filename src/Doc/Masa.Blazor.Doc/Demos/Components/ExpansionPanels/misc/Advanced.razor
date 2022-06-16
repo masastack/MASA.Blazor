@@ -7,20 +7,13 @@
                 </MCol>
                 <MCol Cols="8"
                       Class="text--secondary">
-                    <FadeTransition>
-                        @*TODO: Transition need to update, support LeaveAbsolute*@
-                        <ShowTransitionElement Value="context" Style="position: absolute">
-                            <span>
-                                Enter a name for the trip
-                            </span>
-                        </ShowTransitionElement>
-                    </FadeTransition>
-                    <FadeTransition>
-                        <ShowTransitionElement Value="!context">
-                            <span>
-                                @trip.name
-                            </span>
-                        </ShowTransitionElement>
+                    <FadeTransition LeaveAbsolute>
+                        <IfTransitionElement Tag="span" Value="context">
+                            Enter a name for the trip
+                        </IfTransitionElement>
+                        <IfTransitionElement Tag="span" Value="!context">
+                            @trip.name
+                        </IfTransitionElement>
                     </FadeTransition>
                 </MCol>
             </MRow>
@@ -40,19 +33,13 @@
                 </MCol>
                 <MCol Cols="8"
                       Class="text--secondary">
-                    <FadeTransition>
-                        <ShowTransitionElement Value="context" Style="position: absolute">
-                            <span>
-                                Select trip destination
-                            </span>
-                        </ShowTransitionElement>
-                    </FadeTransition>
-                    <FadeTransition>
-                        <ShowTransitionElement Value="!context">
-                            <span>
-                                @trip.location
-                            </span>
-                        </ShowTransitionElement>
+                    <FadeTransition LeaveAbsolute>
+                        <IfTransitionElement Tag="span" Value="context">
+                            Select trip destination
+                        </IfTransitionElement>
+                        <IfTransitionElement Tag="span" Value="!context">
+                            @trip.location
+                        </IfTransitionElement>
                     </FadeTransition>
                 </MCol>
             </MRow>
@@ -104,13 +91,12 @@
                 </MCol>
                 <MCol Cols="8"
                       Class="text--secondary">
-                    <FadeTransition>
-                        <ShowTransitionElement Value="context" Style="position: absolute">
-                            <span>When do you want to travel?</span>
-                        </ShowTransitionElement>
-                    </FadeTransition>
-                    <FadeTransition>
-                        <ShowTransitionElement Value="!context">
+                    <FadeTransition LeaveAbsolute>
+                        <IfTransitionElement Tag="span" Value="context">
+                            When do you want to travel?
+                        </IfTransitionElement>
+                        @*TODO: refactor BRow to support IfElse*@
+                        <IfTransitionElement Tag="div" Style="width:100%" Value="!context">
                             <MRow NoGutters
                                   Style="width: 100%">
                                 <MCol Cols="6">
@@ -120,7 +106,7 @@
                                     End date: @(trip.end ?? "Not set")
                                 </MCol>
                             </MRow>
-                        </ShowTransitionElement>
+                        </IfTransitionElement>
                     </FadeTransition>
                 </MCol>
             </MRow>
