@@ -53,13 +53,15 @@
                         .AddIf($"{prefix}--vertical", () => Vertical)
                         .AddIf(Class, () => !HasContent)
                         .AddTheme(IsDark);
+                }, styleBuilder =>
+                {
+                    styleBuilder.AddIf(Style, () => !HasContent);
                 })
                 .Apply("content", cssBuilder =>
                 {
                     cssBuilder
                         .Add($"{prefix}__content")
                         .AddIf($"{prefix}--inset", () => Inset)
-                        .AddIf(Style, () => !HasContent)
                         .AddTheme(IsDark);
                 });
         }
