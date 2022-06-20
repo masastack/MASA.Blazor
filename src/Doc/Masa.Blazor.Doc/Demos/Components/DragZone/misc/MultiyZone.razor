@@ -1,11 +1,11 @@
 ﻿<style>
-    .parent {
+    .multi-parent {
         background-color: #eee;
         min-height: 40px;
         padding: 5px 0 10px 0
     }
 
-    .item {
+    .multi-item {
         margin: 5px;
         position: relative;
         display: block;
@@ -14,11 +14,11 @@
         border: 1px solid rgba(0,0,0,.125);
     }
 
-    .white-color {
+    .multi-white-color {
         background-color: #ffffff;
     }
 
-    .blue-color {
+    .multi-blue-color {
         background-color: #5CBBF6;
     }
 
@@ -28,38 +28,38 @@
         <MCol Cols=6>
             <MDragZone OnConfigure=SetOptions Class="parent">
                 <MDragItem>
-                    <div class="white-color item">item1.1</div>
+                    <div class="multi-white-color multi-item">item1.1</div>
                 </MDragItem>
                 <MDragItem>
-                    <div class="white-color item">item1.2</div>
+                    <div class="multi-white-color multi-item">item1.2</div>
                 </MDragItem>
                 <MDragItem>
-                    <div class="white-color item">item1.3</div>
+                    <div class="multi-white-color multi-item">item1.3</div>
                 </MDragItem>
                 <MDragItem>
-                    <div class="white-color item">item1.4</div>
+                    <div class="multi-white-color multi-item">item1.4</div>
                 </MDragItem>
                 <MDragItem>
-                    <div class="white-color item">item1.5</div>
+                    <div class="multi-white-color multi-item">item1.5</div>
                 </MDragItem>
             </MDragZone>
         </MCol>
         <MCol Cols=6>
             <MDragZone OnConfigure=SetOptions Class="parent">
                 <MDragItem>
-                    <div class="item blue-color">item2.1</div>
+                    <div class="multi-item multi-blue-color">item2.1</div>
                 </MDragItem>
                 <MDragItem>
-                    <div class="item blue-color">item2.2</div>
+                    <div class="multi-item multi-blue-color">item2.2</div>
                 </MDragItem>
                 <MDragItem>
-                    <div class="item blue-color">item2.3</div>
+                    <div class="multi-item multi-blue-color">item2.3</div>
                 </MDragItem>
                 <MDragItem>
-                    <div class="item blue-color">item2.4</div>
+                    <div class="multi-item multi-blue-color">item2.4</div>
                 </MDragItem>
                 <MDragItem>
-                    <div class="item blue-color">item2.5</div>
+                    <div class="multi-item multi-blue-color">item2.5</div>
                 </MDragItem>
             </MDragZone>
         </MCol>

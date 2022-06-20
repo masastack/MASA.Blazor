@@ -1,77 +1,77 @@
 ﻿<style>
-    .parent {
+    .nest-parent {
         background-color: #eee;
         min-height: 40px;
         padding: 5px 0 10px 0
     }
 
-    .item {
+    .nest-item {
         margin: 5px;
         padding: 0.75rem 1.25rem;
         margin-bottom: -1px;
         border: 1px solid rgba(0,0,0,.125);
     }
 
-    .item-0 {
+    .nest-item-0 {
         background-color: #eee;
     }
 
-    .item-2 {
+    .nest-item-2 {
         background-color: #FB8C00;
     }
 
-    .item-3 {
+    .nest-item-3 {
         background-color: #F57C00;
     }
 
-    .item-1 {
+    .nest-item-1 {
         background-color: #FFA726;
     }
 </style>
 <MContainer>
     <MRow>
         <MCol Cols=12>
-            <MDragZone OnConfigure=SetOptions Class="parent item item-0">
+            <MDragZone OnConfigure=SetOptions Class="nest-parent nest-item nest-item-0">
                 <MDragItem>
                     <div class="item-1 item">item1.1</div>
                 </MDragItem>
                 <MDragItem>
-                    <MDragZone OnConfigure=SetOptions Class="parent item item-1">
+                    <MDragZone OnConfigure=SetOptions Class="nest-parent nest-item nest-item-1">
                         <MDragItem>
-                            <div class="item-2 item">item2.1</div>
+                            <div class="nest-item-2 nest-item">item2.1</div>
                         </MDragItem>
                         <MDragItem>
-                            <div class="item-2 item">item2.2</div>
+                            <div class="nest-item-2 nest-item">item2.2</div>
                         </MDragItem>
                         <MDragItem>
-                            <div class="item-2 item">item2.3</div>
+                            <div class="nest-item-2 nest-item">item2.3</div>
                         </MDragItem>
                         <MDragItem>
-                            <MDragZone OnConfigure=SetOptions Class="parent item item-2">
+                            <MDragZone OnConfigure=SetOptions Class="nest-parent nest-item nest-item-2">
                                 <MDragItem>
-                                    <div class="item-3 item">item3.1</div>
+                                    <div class="nest-item-3 nest-item">item3.1</div>
                                 </MDragItem>
                                 <MDragItem>
-                                    <div class="item-3 item">item3.2</div>
+                                    <div class="nest-item-3 nest-item">item3.2</div>
                                 </MDragItem>
                                 <MDragItem>
-                                    <div class="item-3 item">item3.3</div>
+                                    <div class="nest-item-3 nest-item">item3.3</div>
                                 </MDragItem>
                                 <MDragItem>
-                                    <div class="item-3 item">item3.4</div>
+                                    <div class="nest-item-3 nest-item">item3.4</div>
                                 </MDragItem>
                             </MDragZone>
                         </MDragItem>
                     </MDragZone>
                 </MDragItem>
                 <MDragItem>
-                    <div class="item-1 item">item1.3</div>
+                    <div class="nest-item-1 nest-item">item1.3</div>
                 </MDragItem>
                 <MDragItem>
-                    <div class="item-1 item">item1.4</div>
+                    <div class="nest-item-1 nest-item">item1.4</div>
                 </MDragItem>
                 <MDragItem>
-                    <div class="item-1 item">item1.5</div>
+                    <div class="nest-item-1 nest-item">item1.5</div>
                 </MDragItem>
             </MDragZone>
         </MCol>
