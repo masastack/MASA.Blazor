@@ -123,6 +123,9 @@ namespace Masa.Blazor
         [Inject]
         public Document Document { get; set; }
 
+        [Inject]
+        public DomEventJsInterop DomEventJsInterop { get; set; } = null!;
+
         public TextFieldNumberProperty Props { get; set; } = new();
 
         public bool IsSolo => Solo || SoloInverted;
@@ -495,6 +498,8 @@ namespace Masa.Blazor
                 await inputElement.AddEventListenerAsync("compositionstart", CreateEventCallback(OnCompositionStart));
                 await inputElement.AddEventListenerAsync("compositionend", CreateEventCallback(OnCompositionEnd));
 
+                await DomEventJsInterop.IntersectionObserver(InputElement.GetSelector(), TryAutoFocus);
+
                 var tasks = new Task[3];
 
                 tasks[0] = SetLabelWidthAsync();
@@ -582,6 +587,18 @@ namespace Masa.Blazor
             }
 
             PrependWidth = offsetWidth.Value;
+        }
+
+        private async Task<bool> TryAutoFocus()
+        {
+            if (!Autofocus || InputElement.Context is null)
+            {
+                return false;
+            }
+
+            await InputElement.FocusAsync();
+
+            return true;
         }
 
         public virtual async Task HandleOnAppendOuterClickAsync(MouseEventArgs args)
