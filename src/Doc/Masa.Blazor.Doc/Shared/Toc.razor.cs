@@ -101,7 +101,7 @@ public partial class Toc : OwningComponentBase<DemoService>
         {
             foreach (var dom in doms)
             {
-                if (dom.Rect.Top - 80 > 0)
+                if (dom.Rect.Top - 80 >= 0)
                 {
                     id = dom.Id;
                     break;

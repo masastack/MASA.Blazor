@@ -19,9 +19,6 @@
     margin: auto;
 }
 
-
-
-
 .m-alert--doc .m-alert__content p:last-child {
     margin-bottom: 0 !important;
 }
@@ -29,7 +26,6 @@
 .app-link p {
     margin-bottom: 0;
 }
-
 
 /*scrollbar*/
 ::-webkit-scrollbar-track {
@@ -68,10 +64,6 @@ body {
 
 .fs-18 {
     font-size: 18px;
-}
-
-.mt-100 {
-    margin-top: 100px;
 }
 
 .mx-149 {
@@ -311,10 +303,6 @@ body {
         display: none !important;
     }
 
-    .evaluation-cooperation-p {
-        font-size: 14px !important;
-    }
-
     .companies-box {
         margin: 0 !important;
     }
@@ -353,12 +341,12 @@ body {
             -webkit-line-clamp: 3 !important;
         }
 
-    .comperation-company {
+    .cooperation-company {
         padding: 12px 0 !important;
         margin-top: 33px !important;
     }
 
-        .comperation-company img {
+        .cooperation-company img {
             zoom: 0.5;
         }
 
@@ -494,26 +482,9 @@ body {
     color: #4E5969;
 }
 
-.banner-btn {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0px;
-    position: static;
-}
-
-.banner-img {
-    position: absolute;
-    width: 462px;
-    height: 462px;
-    left: 166px;
-    top: 0px;
-}
-
 .content {
     margin: 0 80px;
 }
-
 
 .information {
     display: flex;
@@ -596,25 +567,6 @@ body {
     align-items: center;
 }
 
-.why-img-box {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 66.6667px 296px 26.6667px;
-    position: static;
-    width: 548px;
-    height: 226.67px;
-    left: calc(50% - 548px/2);
-    top: 17.67px;
-    /* Inside Auto Layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    margin: 0px 0px;
-}
-
 .why-masa-blazor-p {
     text-align: center;
     font-style: normal;
@@ -643,12 +595,6 @@ body {
     text-overflow: ellipsis;
 }
 
-.evaluation-cooperation-p {
-    font-size: 16px;
-    font-weight: bold;
-    text-align: end;
-}
-
 .companies-box {
     height: auto;
 }
@@ -668,48 +614,7 @@ body {
     margin: 32px 36px;
 }
 
-.conpany-using-card {
-    /*transition:0.3s;*/
-}
-
-.user-name-active {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 40px;
-    line-height: 47px;
-    text-align: center;
-    color: #4E5969;
-    margin: 43px 48px;
-}
-
-.user-description {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 30px;
-    text-align: justify;
-    letter-spacing: 0.5px;
-    color: #86909C;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-top: 24px;
-}
-
-.user-description-active {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 26px;
-    line-height: 30px;
-    text-align: justify;
-    letter-spacing: 2px;
-    color: #4E5969;
-    margin: 43px 21px;
-}
-
-.comperation-company {
+.cooperation-company {
     width: 100%;
     margin-top: 160px;
     padding: 53px 0px;
@@ -759,50 +664,258 @@ body {
         color: #fff !important;
         display: block;
     }
-
-.activeNavClass {
-    background-color: #5c2d91;
-    border-color: #5c2d91;
+    
+.m-list-item.m-list-item.m-list-item--default {
+    min-height: 32px;
 }
 
-/*.m-list-item.m-list-item--link.m-list-item--active.m-list-item--default {
-    background-color: #5c2d91;
-    color: #fff;
-}*/
-
-
-/*doc nav*/
-.doc-nav-list .m-list-item__icon:first-child {
-    margin-right: 4px !important;
+.m-list-group.m-list-group--default .m-list-group__header {
+    min-height: 32px;
 }
 
-.doc-nav-list .m-list-item__title {
-    font-size: 14px !important;
+.m-list-group.m-list-group--default .m-list-group__header > .m-list-item__icon {
+    margin-bottom: 0.594rem;
+    margin-top: 0.594rem;
 }
 
-.doc-nav-list .theme--light.m-icon {
-    color: currentColor;
-}
-
-.doc-nav-list .m-list-group--sub-group .m-list-group__header {
-    padding-left: 8px !important;
-}
-
-.doc-nav-list .m-list-group--sub-group .m-list-group__items .m-list-item {
-    padding-left: 36px !important;
+.m-application--is-ltr .m-list--dense.m-list--nav .m-list-group--no-action.m-list-group--sub-group > .m-list-group__items > .m-list-item {
+    padding-left: 80px;
 }
 
 
-.doc-nav-list .m-list-group--no-action > .m-list-group__items > .m-list-item {
-    padding-left: 36px !important;
+.default-toc ul {
+    list-style-type: none;
 }
 
-.doc-nav-list .m-list-group--no-action.m-list-group--sub-group > .m-list-group__items > .m-list-item {
-    padding-left: 60px !important;
+.default-toc li.router-link-active {
+    border-left-color: currentColor;
 }
 
-.doc-nav-list .m-icon__svg .m-icon {
-    font-size: 24px !important;
-    height: 24px !important;
-    width: 24px !important;
+.default-toc li {
+    border-left: 2px solid #e5e5e5;
+}
+
+.m-heading {
+    display: inline-block;
+    position: relative;
+}
+
+.m-heading > a:not(:hover):not(:focus) {
+    opacity: 0;
+}
+
+.markdown-body a:not(:hover) {
+    text-decoration: none;
+}
+
+.m-heading > a {
+    bottom: 0;
+    display: inline-block;
+    left: 0;
+    margin: 0 -.7em;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+h1 + p {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+
+.markdown-body > section section {
+    margin-bottom: 3rem;
+}
+
+.markdown-body > div section section {
+    margin-bottom: 3rem;
+}
+
+ol, ul {
+    margin-bottom: 16px;
+}
+
+.default-toc .m-toc-link {
+    color: inherit;
+}
+
+.m-sheet.app-code {
+    margin: 16px 0;
+    position: relative;
+    padding: 12px 50px 12px 16px;
+}
+
+.m-sheet.app-code:not(:hover) .m-btn--copy .m-icon {
+    opacity: .4;
+}
+
+.m-sheet.app-code code[class*=language], .m-sheet.app-code pre[class*=language] {
+    background: none;
+    font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+    font-size: 1rem;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    -moz-tab-size: 4;
+    tab-size: 4;
+    text-align: left;
+    text-shadow: none;
+    white-space: pre;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: normal;
+}
+
+.m-example code[class*=language-], .m-example pre[class*=language-] {
+    text-shadow: none;
+}
+
+.m-sheet.app-code > pre {
+    border-radius: inherit;
+}
+
+.m-sheet.app-code code, .m-sheet.app-code pre {
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 300;
+    margin: 0 !important;
+}
+
+:not(pre) > code[class*=language-], pre[class*=language-] {
+    background: #f5f2f0;
+}
+
+pre[class*=language-] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+code[class*=language-], pre[class*=language-] {
+    color: #000;
+    background: none;
+    text-shadow: 0 1px #fff;
+    font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+    font-size: 1em;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+.token.constant, .token.deleted, .token.property, .token.symbol {
+    color: #905;
+}
+
+.token.boolean {
+    color: blue;
+}
+
+.token.tag {
+    color: rgb(128, 0, 128);
+}
+
+.token.tag > .token.punctuation {
+    color: black;
+    opacity: 0.75;
+}
+
+.token.number {
+    color: black;
+}
+
+.token {
+    background: none !important;
+}
+
+.token.punctuation {
+    color: rgb(0, 0, 0, 0.75);
+}
+
+.token.builtin, .token.char, .token.inserted, .token.selector {
+    color: #690;
+}
+
+.token.attr-name {
+    color: rgb(128, 0, 128);
+}
+
+.token.string {
+    color: rgb(163, 21, 21)
+}
+
+.token.atrule {
+    color: #07a;
+}
+
+.token.attr-value {
+    color: black;
+}
+
+.token.attr-value > .token.punctuation {
+    color: black;
+    opacity: 0.75;
+}
+
+.token.keyword {
+    color: blue;
+}
+
+.token.comment {
+    color: rgb(0, 100, 0);
+}
+
+.m-sheet.app-code pre[class*=language]::after {
+    bottom: .75rem;
+    color: rgba(48, 48, 48, .5);
+    font-family: inherit;
+    font-size: .7rem;
+    font-weight: 700;
+    position: absolute;
+    right: 1rem;
+    text-transform: uppercase;
+}
+
+.m-example pre.language-html::after {
+    content: "razor";
+}
+
+.m-example pre.language-csharp::after {
+    content: "c#";
+}
+
+.m-example pre.language-css::after {
+    content: "css";
+}
+
+.token.class-name {
+    color: rgb(43, 145, 175)
+}
+
+.token.function {
+    color: rgb(116, 83, 31)
+}
+
+.text-mono {
+    font-family: monospace;
+}
+
+.api-table .m-markdown p {
+    margin-bottom: 0;
+}
+
+.api-table td.regular-row {
+    padding: 8px 16px !important;
 }

@@ -7,7 +7,7 @@ MASA Blazor is not a solo show. We have a very active and dedicated team, consta
 
 ## Company
 
-MASA（company）Is a full-time company engaged in open source work. 。
+MASA（company）Is a full-time company engaged in open source work.
 
 <div class="container team-members">
     <div class="row">
