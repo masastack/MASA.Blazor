@@ -16,19 +16,8 @@ namespace Masa.Blazor
         [Parameter]
         public Func<TItem, string, string, bool> Filter
         {
-            get
-            {
-                if (_filter == null)
-                {
-                    _filter = (item, query, text) => text.ToLower().IndexOf(query.ToLower()) > -1;
-                }
-
-                return _filter;
-            }
-            set
-            {
-                _filter = value;
-            }
+            get { return _filter ??= (_, query, text) => text.ToLower().IndexOf(query.ToLower(), StringComparison.Ordinal) > -1; }
+            set => _filter = value;
         }
 
         [Parameter]
@@ -51,21 +40,9 @@ namespace Masa.Blazor
 
         public override Action<TextFieldNumberProperty> NumberProps { get; set; }
 
-        protected IList<TItemValue> SelectedValues
-        {
-            get
-            {
-                return SelectedItems.Select(GetValue).ToList();
-            }
-        }
+        protected IList<TItemValue> SelectedValues => SelectedItems.Select(GetValue).ToList();
 
-        protected bool HasDisplayedItems
-        {
-            get
-            {
-                return HideSelected ? FilteredItems.Any(item => !HasItem(item)) : FilteredItems.Count > 0;
-            }
-        }
+        protected bool HasDisplayedItems => HideSelected ? FilteredItems.Any(item => !HasItem(item)) : FilteredItems.Count > 0;
 
         protected bool HasItem(TItem item)
         {
@@ -76,46 +53,20 @@ namespace Masa.Blazor
         {
             get
             {
-                return GetComputedValue(() =>
+                if (!IsSearching || NoFilter || InternalSearch is null)
                 {
-                    if (!IsSearching || NoFilter || InternalSearch == null)
-                    {
-                        return Items;
-                    }
+                    return Items;
+                }
 
-                    return Items.Where(item => Filter(item, InternalSearch, GetText(item) ?? "")).ToList();
-                }, new string[]
-                {
-                    nameof(IsSearching),
-                    nameof(NoFilter),
-                    nameof(InternalSearch)
-                });
+                return Items.Where(item => Filter(item, InternalSearch, GetText(item) ?? "")).ToList();
             }
         }
 
-        protected bool IsSearching
-        {
-            get
-            {
-                return (Multiple && SearchIsDirty) || (SearchIsDirty && InternalSearch != GetText(SelectedItem));
-            }
-        }
+        protected bool IsSearching => (Multiple && SearchIsDirty) || (SearchIsDirty && InternalSearch != GetText(SelectedItem));
 
-        protected TItem SelectedItem
-        {
-            get
-            {
-                return SelectedItems.FirstOrDefault();
-            }
-        }
+        protected TItem SelectedItem => SelectedItems.FirstOrDefault();
 
-        protected bool SearchIsDirty
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(InternalSearch);
-            }
-        }
+        protected bool SearchIsDirty => !string.IsNullOrEmpty(InternalSearch);
 
         protected string InternalSearch
         {
@@ -151,6 +102,8 @@ namespace Masa.Blazor
         {
             get
             {
+                if (!IsFocused) return false;
+
                 return HasDisplayedItems || !HideNoData;
             }
         }
@@ -199,13 +152,18 @@ namespace Masa.Blazor
 
             var value = args.Value?.ToString();
 
+            if (value is not null)
+            {
+                ActivateMenu();
+            }
+
             if (!Multiple && string.IsNullOrEmpty(value))
             {
                 await DeleteCurrentItem();
             }
 
             InternalSearch = value;
-            
+
             if (OnSearchInputUpdate.HasDelegate)
             {
                 await OnSearchInputUpdate.InvokeAsync(InternalSearch);
@@ -216,7 +174,7 @@ namespace Masa.Blazor
         {
             var curIndex = SelectedIndex;
             var curItem = SelectedItems.ElementAtOrDefault(curIndex);
-            
+
             // TODO: need i check the curItem is null?
 
             if (Disabled || Readonly || ItemDisabled(curItem))
@@ -229,7 +187,7 @@ namespace Masa.Blazor
             if (SelectedIndex == -1 && lastIndex != 0)
             {
                 SelectedIndex = lastIndex;
-                
+
                 return;
             }
 
@@ -263,7 +221,7 @@ namespace Masa.Blazor
 
             switch (args.Code)
             {
-                case "Backspace":
+                case KeyCodes.Backspace:
                     IsMenuActive = true;
                     if (Multiple)
                     {
@@ -281,9 +239,27 @@ namespace Masa.Blazor
                             await SetInternalValueAsync(default);
                         }
                     }
+
                     break;
-                default:
-                    break;
+            }
+        }
+
+        public override async Task HandleOnClickAsync(ExMouseEventArgs args)
+        {
+            if (!IsInteractive) return;
+
+            if (SelectedIndex > -1)
+            {
+                SelectedIndex = -1;
+            }
+            else
+            {
+                await HandleOnFocusAsync(new FocusEventArgs());
+            }
+
+            if (!await IsAppendInner(args.Target))
+            {
+                ActivateMenu();
             }
         }
 
@@ -303,7 +279,7 @@ namespace Masa.Blazor
             {
                 return;
             }
-            
+
             if (!AutoSelectFirst)
             {
                 var preSelectedItem = oldVal.ElementAtOrDefault(MenuListIndex);
@@ -316,7 +292,7 @@ namespace Masa.Blazor
                     SetMenuIndex(-1);
                 }
             }
-            
+
             NextTick(() =>
             {
                 if (string.IsNullOrEmpty(InternalSearch) || (val.Count != 1 && !AutoSelectFirst))
@@ -330,12 +306,11 @@ namespace Masa.Blazor
                     SetMenuIndex(0);
                     StateHasChanged();
                 }
-                
+
                 return Task.CompletedTask;
             });
-            
-            StateHasChanged();
 
+            StateHasChanged();
         }
     }
 }
