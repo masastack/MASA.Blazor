@@ -1,4 +1,4 @@
-﻿/*extend-class*/
+﻿/* fixed-right in datatable */
 .m-data-table > .m-data-table__wrapper.not-scroll-right > table > tbody > tr > td:last-child::after {
     box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 15%);
 }
@@ -82,261 +82,8 @@
     background-color: #fafafa;
 }
 
-.theme--dark .m-bar--underline.theme--light, .theme--light .m-bar--underline.theme--light {
-    border-bottom-color: rgba(0, 0, 0, .12) !important;
-}
+/* border */
 
-.theme--dark .m-bar--underline, .theme--light .m-bar--underline {
-    border-width: 0 0 thin;
-    border-style: solid;
-}
-
-.flex-1-1-auto {
-    flex: 1 1 auto !important;
-}
-
-.default-toc ul {
-    list-style-type: none;
-}
-
-.default-toc li.router-link-active {
-    border-left-color: currentColor;
-}
-
-.default-toc li {
-    border-left: 2px solid #e5e5e5;
-}
-
-.m-heading {
-    display: inline-block;
-    position: relative;
-}
-
-    .m-heading > a:not(:hover):not(:focus) {
-        opacity: 0;
-    }
-
-.markdown-body a:not(:hover) {
-    text-decoration: none;
-}
-
-.m-heading > a {
-    bottom: 0;
-    display: inline-block;
-    left: 0;
-    margin: 0 -.7em;
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
-h1 + p {
-    font-size: 1.25rem;
-    font-weight: 300;
-}
-
-
-.markdown-body > section section {
-    margin-bottom: 3rem;
-}
-
-.markdown-body > div section section {
-    margin-bottom: 3rem;
-}
-
-ol, ul {
-    margin-bottom: 16px;
-}
-
-.default-toc .m-toc-link {
-    color: inherit;
-}
-
-.m-sheet.app-code {
-    margin: 16px 0;
-    position: relative;
-    padding: 12px 50px 12px 16px;
-}
-
-    .m-sheet.app-code:not(:hover) .m-btn--copy .m-icon {
-        opacity: .4;
-    }
-
-    .m-sheet.app-code code[class*=language], .m-sheet.app-code pre[class*=language] {
-        background: none;
-        font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
-        font-size: 1rem;
-        -webkit-hyphens: none;
-        -ms-hyphens: none;
-        hyphens: none;
-        line-height: 1.5;
-        margin: 0;
-        padding: 0;
-        -moz-tab-size: 4;
-        tab-size: 4;
-        text-align: left;
-        text-shadow: none;
-        white-space: pre;
-        word-break: normal;
-        word-spacing: normal;
-        word-wrap: normal;
-    }
-
-.m-example code[class*=language-], .m-example pre[class*=language-] {
-    text-shadow: none;
-}
-
-.m-sheet.app-code > pre {
-    border-radius: inherit;
-}
-
-.m-sheet.app-code code, .m-sheet.app-code pre {
-    background: transparent;
-    font-size: 1rem;
-    font-weight: 300;
-    margin: 0 !important;
-}
-
-:not(pre) > code[class*=language-], pre[class*=language-] {
-    background: #f5f2f0;
-}
-
-pre[class*=language-] {
-    padding: 1em;
-    margin: .5em 0;
-    overflow: auto;
-}
-
-code[class*=language-], pre[class*=language-] {
-    color: #000;
-    background: none;
-    text-shadow: 0 1px #fff;
-    font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
-    font-size: 1em;
-    text-align: left;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
-    line-height: 1.5;
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-    -webkit-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
-}
-
-.token.constant, .token.deleted, .token.property, .token.symbol {
-    color: #905;
-}
-
-.token.boolean {
-    color: blue;
-}
-
-.token.tag {
-    color: rgb(128, 0, 128);
-}
-
-    .token.tag > .token.punctuation {
-        color: black;
-        opacity: 0.75;
-    }
-
-.token.number {
-    color: black;
-}
-
-.token {
-    background: none !important;
-}
-
-    .token.punctuation {
-        color: rgb(0, 0, 0, 0.75);
-    }
-
-    .token.builtin, .token.char, .token.inserted, .token.selector {
-        color: #690;
-    }
-
-    .token.attr-name {
-        color: rgb(128, 0, 128);
-    }
-
-    .token.string {
-        color: rgb(163, 21, 21)
-    }
-
-    .token.atrule {
-        color: #07a;
-    }
-
-    .token.attr-value {
-        color: black;
-    }
-
-        .token.attr-value > .token.punctuation {
-            color: black;
-            opacity: 0.75;
-        }
-
-    .token.keyword {
-        color: blue;
-    }
-
-    .token.comment {
-        color: rgb(0, 100, 0);
-    }
-
-.m-sheet.app-code pre[class*=language]::after {
-    bottom: .75rem;
-    color: rgba(48, 48, 48, .5);
-    font-family: inherit;
-    font-size: .7rem;
-    font-weight: 700;
-    position: absolute;
-    right: 1rem;
-    text-transform: uppercase;
-}
-
-.m-example pre.language-html::after {
-    content: "razor";
-}
-
-.m-example pre.language-csharp::after {
-    content: "c#";
-}
-
-.m-example pre.language-css::after {
-    content: "css";
-}
-
-.token.class-name {
-    color: rgb(43, 145, 175)
-}
-
-.token.function {
-    color: rgb(116, 83, 31)
-}
-
-.text-mono {
-    font-family: monospace;
-}
-
-.api-table .m-markdown p {
-    margin-bottom: 0;
-}
-
-.api-table td.regular-row {
-    padding: 8px 16px !important;
-}
-
-.inline-flex {
-    display: inline-flex !important;
-}
-
-/* m-border */
 .m-border {
     border-style: solid;
     border-width: 4px;
@@ -420,27 +167,7 @@ code[class*=language-], pre[class*=language-] {
     border-bottom-right-radius: 0 !important;
 }
 
-.m-date-picker-header__value div.fade-transition-leave-active {
-    position: absolute;
-    top: 0;
-}
-
-.m-list-item.m-list-item.m-list-item--default {
-    min-height: 32px;
-}
-
-.m-list-group.m-list-group--default .m-list-group__header {
-    min-height: 32px;
-}
-
-    .m-list-group.m-list-group--default .m-list-group__header > .m-list-item__icon {
-        margin-bottom: 6px;
-        margin-top: 6px;
-    }
-
-.m-application--is-ltr .m-list--dense.m-list--nav .m-list-group--no-action.m-list-group--sub-group > .m-list-group__items > .m-list-item {
-    padding-left: 80px;
-}
+/* page-header */
 
 .m-presets-page-header {
 }
@@ -473,9 +200,13 @@ code[class*=language-], pre[class*=language-] {
     margin-right: 0px;
 }
 
+/* */
+
 .m-sheet.m-stepper:not(.m-sheet--outlined) {
     box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
 }
+
+/* custom-text example in Switch */
 
 .m-input--switch--text .m-input--switch__track {
     border-radius: 17px;
@@ -531,6 +262,8 @@ code[class*=language-], pre[class*=language-] {
     top: calc(50% - 30px);
 }
 
+/* cascader */
+
 .m-cascader-list {
     display: inline-flex
 }
@@ -549,6 +282,8 @@ code[class*=language-], pre[class*=language-] {
 .m-cascader-list__wrapper:not(.m-cascader-list__wrapper--dense) .m-list-item {
     min-height: 56px;
 }
+
+/* drawer */
 
 .m-dialog--drawer {
     border-radius: 0;
@@ -579,10 +314,14 @@ code[class*=language-], pre[class*=language-] {
     transform: translateX(-100%);
 }
 
+/* select */
+
 .m-select__selections__input-wrapper {
     flex: 1 1;
     width: 100%;
 }
+
+/* page-tabs */
 
 .m-page-tabs__content .m-list.m-list--dense {
     padding: 4px 0;
@@ -591,6 +330,8 @@ code[class*=language-], pre[class*=language-] {
 .m-page-tabs__content .m-list-item.m-list-item--dense {
     min-height: 30px
 }
+
+/* block-text */
 
 .m-presets-block-text {
     display: flex;
@@ -606,6 +347,8 @@ code[class*=language-], pre[class*=language-] {
         opacity: 0.6;
     }
 
+/* copyable-text */
+
 .m-presets-copyable-text {
 }
 
@@ -614,6 +357,8 @@ code[class*=language-], pre[class*=language-] {
 
     .m-presets-copyable-text .m-presets-copyable-text__icon {
     }
+
+/* default error */
 
 #blazor-error-ui {
     background: lightyellow;
@@ -647,6 +392,8 @@ code[class*=language-], pre[class*=language-] {
 .m-snack__content {
     word-break: break-word;
 }
+
+/* number type in text-field */
 
 input[type=number] {
     -moz-appearance: textfield;
@@ -698,6 +445,8 @@ input[type=number] {
     cursor: not-allowed !important;
 }
 
+/* support childContent in Divider */
+
 .m-divider__wrapper {
     line-height: 1px;
 }
@@ -743,6 +492,8 @@ input[type=number] {
     background-color: #1E1E1E;
     color: #FFF;
 }
+
+/* toast */
 
 .m-toast-container {
     position: fixed;
@@ -794,6 +545,8 @@ input[type=number] {
 .m-toast-container .m-snack__wrapper.theme--dark {
     background-color: #323d6f
 }
+
+/* captcha */
 
 .m-captcha-container .m-input__append-outer {
     margin-top: 0px !important;
