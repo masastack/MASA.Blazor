@@ -155,6 +155,11 @@
       "Description": ""
     },
     {
+      "Name": "Ripple",
+      "Type": "Nullable<Boolean>",
+      "Description": ""
+    },
+    {
       "Name": "Rules",
       "Type": "IEnumerable<Func`2>",
       "Default": "null",

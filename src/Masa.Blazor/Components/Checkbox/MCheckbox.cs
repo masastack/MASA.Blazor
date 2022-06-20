@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
-    public partial class MCheckbox : MInput<bool>, IThemeable, ICheckbox
+    public partial class MCheckbox : MSelectable, IThemeable, ICheckbox
     {
         [Parameter]
         public bool Indeterminate { get; set; }
@@ -18,8 +18,6 @@ namespace Masa.Blazor
         public string OffIcon { get; set; } = "mdi-checkbox-blank-outline";
 
         public override int DebounceMilliseconds { get; set; }
-
-        public override bool HasColor => InternalValue;
 
         public string ComputedIcon
         {
@@ -39,25 +37,6 @@ namespace Masa.Blazor
             }
         }
 
-        public Dictionary<string, object> InputAttrs => new();
-
-        private bool? _isActive;
-
-        [Parameter]
-        public bool IsActive
-        {
-            get => _isActive ?? InternalValue;
-            set
-            {
-                //REVIEW:What's this? 
-                _isActive = value;
-                InternalValue = value;
-            }
-        }
-
-        [Parameter]
-        public bool? Ripple { get; set; }
-
         [Inject]
         public Document Document { get; set; }
 
@@ -69,26 +48,6 @@ namespace Masa.Blazor
             {
                 OnChange.InvokeAsync(val);
             }
-        }
-
-        public Task HandleOnBlur(FocusEventArgs args)
-        {
-            return Task.CompletedTask;
-        }
-
-        public Task HandleOnChange(ChangeEventArgs args)
-        {
-            return Task.CompletedTask;
-        }
-
-        public Task HandleOnFocus(FocusEventArgs args)
-        {
-            return Task.CompletedTask;
-        }
-
-        public Task HandleOnKeyDown(KeyboardEventArgs args)
-        {
-            return Task.CompletedTask;
         }
 
         public override string ValidationState
@@ -150,11 +109,6 @@ namespace Masa.Blazor
                 await inputSlot.AddEventListenerAsync("mousedown", EventCallback.Empty, stopPropagation: true);
                 await inputSlot.AddEventListenerAsync("mouseup", EventCallback.Empty, stopPropagation: true);
             }
-        }
-
-        public override async Task HandleOnClickAsync(ExMouseEventArgs args)
-        {
-            await SetInternalValueAsync(!InternalValue);
         }
     }
 }

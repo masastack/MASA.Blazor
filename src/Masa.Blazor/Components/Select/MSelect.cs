@@ -30,7 +30,7 @@ namespace Masa.Blazor
         public string ItemColor { get; set; } = "primary";
 
         [Parameter]
-        public Func<TItem, bool> ItemDisabled { get; set; } = item => false;
+        public Func<TItem, bool> ItemDisabled { get; set; } = _ => false;
 
         [EditorRequired]
         [Parameter]
@@ -153,10 +153,7 @@ namespace Masa.Blazor
             }
         }
 
-        protected virtual IList<TItem> SelectedItems
-        {
-            get { return Items.Where(item => InternalValues.Contains(ItemValue(item))).ToList(); }
-        }
+        protected virtual IList<TItem> SelectedItems => Items.Where(item => InternalValues.Contains(ItemValue(item))).ToList();
 
         protected virtual bool MenuCanShow => true;
 
@@ -169,20 +166,11 @@ namespace Masa.Blazor
             MaxHeight = 304
         };
 
-        protected virtual string GetText(TItem item)
-        {
-            return item == null ? null : ItemText(item);
-        }
+        protected virtual string GetText(TItem item) => item == null ? null : ItemText(item);
 
-        protected TItemValue GetValue(TItem item)
-        {
-            return ItemValue(item);
-        }
+        protected TItemValue GetValue(TItem item) => ItemValue(item);
 
-        protected bool GetDisabled(TItem item)
-        {
-            return ItemDisabled(item);
-        }
+        protected bool GetDisabled(TItem item) => ItemDisabled(item);
 
         protected override void OnInitialized()
         {
@@ -202,9 +190,11 @@ namespace Masa.Blazor
 
             if (firstRender)
             {
-                await JsInvokeAsync(JsInteropConstants.PreventDefaultOnArrowUpDown, InputElement);
+                await JsInvokeAsync(JsInteropConstants.EnablePreventDefaultForEvent, InputElement, "keydown",
+                    new[] { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End, KeyCodes.Enter, KeyCodes.Escape, KeyCodes.Space });
             }
-
+            
+            // TODO: not work in Autocomplete searching 
             if (MMenu is not null && InputSlotAttrs.Keys.Count == 0)
             {
                 InputSlotAttrs = MMenu.ActivatorAttributes;
@@ -256,7 +246,7 @@ namespace Masa.Blazor
             return !contains;
         }
 
-        private Task Blur()
+        public Task Blur()
         {
             var prevIsMenuActive = IsMenuActive;
             var prevIsFocused = IsFocused;
@@ -274,6 +264,16 @@ namespace Masa.Blazor
             }
 
             return Task.CompletedTask;
+        }
+
+        public void ActivateMenu()
+        {
+            if (!IsInteractive || IsMenuActive)
+            {
+                return;
+            }
+
+            IsMenuActive = true;
         }
 
         protected override void SetComponentClass()
@@ -412,8 +412,6 @@ namespace Masa.Blazor
                 }
 
                 IsMenuActive = false;
-
-                SetMenuIndex(ComputedItems.IndexOf(item));
             }
             else
             {
@@ -451,50 +449,106 @@ namespace Masa.Blazor
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
-            switch (args.Code)
+            if (IsReadonly && args.Code != KeyCodes.Tab) return;
+
+            var keyCode = args.Code;
+
+            // If menu is active, allow default
+            // listIndex change from menu
+            if (IsMenuActive && new[] { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End, KeyCodes.Enter }.Contains(keyCode))
             {
-                case "ArrowUp":
-                    ChangeSelectedIndex(-1);
-                    break;
-                case "ArrowDown":
-                    ChangeSelectedIndex(+1);
-                    break;
-                case "Enter":
-                    await OnEnter(args);
-                    break;
-                case "Tab":
-                    await OnTabDown(args);
-                    break;
+                NextTick(async () => await ChangeListIndex(keyCode));
+            }
+
+            if (new[] { KeyCodes.Enter, KeyCodes.Space }.Contains(keyCode))
+            {
+                ActivateMenu();
+            }
+
+            if (!IsMenuActive && new[] { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End }.Contains(keyCode))
+            {
+                await OnUpDown(keyCode);
+                return;
+            }
+
+            if (keyCode == KeyCodes.Escape)
+            {
+                await OnEscDown();
+                return;
+            }
+
+            if (keyCode == KeyCodes.Tab)
+            {
+                await OnTabDown(args);
+                return;
+            }
+
+            if (keyCode == KeyCodes.Space)
+            {
+                // invoke preventDefault at js interop
             }
         }
 
-        private void ChangeSelectedIndex(int change)
+        private async Task ChangeListIndex(string code)
         {
-            var index = MenuListIndex + change;
-            if (index > ComputedItems.Count - 1)
+            if (code == KeyCodes.Enter)
             {
-                //Back to first
-                index = 0;
+                await SelectItemByIndex(MenuListIndex);
+                return;
             }
-            else if (index < 0)
+
+            var index = code switch
             {
-                //Go to last
-                index = ComputedItems.Count - 1;
-            }
+                KeyCodes.ArrowUp => ComputeNextIndex(-1),
+                KeyCodes.ArrowDown => ComputeNextIndex(1),
+                KeyCodes.Home => 0,
+                KeyCodes.End => ComputedItems.Count - 1,
+                _ => -1
+            };
 
             SetMenuIndex(index);
+
+            int ComputeNextIndex(int add)
+            {
+                var listIndex = MenuListIndex + add;
+                if (listIndex > ComputedItems.Count - 1)
+                {
+                    //Back to first
+                    listIndex = 0;
+                }
+                else if (listIndex < 0)
+                {
+                    //Go to last
+                    listIndex = ComputedItems.Count - 1;
+                }
+
+                return listIndex;
+            }
         }
 
-        protected virtual async Task OnEnter(KeyboardEventArgs args)
+        private async Task OnUpDown(string code)
+        {
+            if (Multiple)
+            {
+                ActivateMenu();
+                return;
+            }
+
+            // TODO: menu.hasClickableTiles
+
+            await ChangeListIndex(code);
+
+            await SelectItemByIndex(MenuListIndex);
+        }
+
+        private Task OnEscDown()
         {
             if (IsMenuActive)
             {
-                await SelectItemByIndex(MenuListIndex);
+                IsMenuActive = false;
             }
-            else
-            {
-                IsMenuActive = true;
-            }
+
+            return Task.CompletedTask;
         }
 
         protected virtual async Task OnTabDown(KeyboardEventArgs args)
@@ -564,7 +618,7 @@ namespace Masa.Blazor
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        private Task<bool> IsAppendInner(EventTarget target)
+        protected Task<bool> IsAppendInner(EventTarget target)
         {
             return JsInvokeAsync<bool>(JsInteropConstants.EqualsOrContains, AppendInnerElement, target.Selector);
         }
