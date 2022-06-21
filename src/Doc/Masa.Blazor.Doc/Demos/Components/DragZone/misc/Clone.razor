@@ -27,7 +27,7 @@
 <MContainer>
     <MRow>
         <MCol Cols=6>
-            <MDragZone OnConfigure=SetOptions @ref=mDragZone1>
+            <MDragZone Group="group_oninit" Pull="clone" @ref=mDragZone1>
                 <MDragItem>
                     <MCard Class="clone-item">
                         <MCardTitle>item1 init title1</MCardTitle>
@@ -43,7 +43,7 @@
             </MDragZone>
         </MCol>
         <MCol Cols=6>
-            <MDragZone OnConfigure=SetOptions @ref=mDragZone2>
+            <MDragZone Group="group_oninit" Pull="clone" @ref=mDragZone2>
                 <MDragItem>
                     <MCard Class="clone-item">
                         <MCardTitle>item2 init title1</MCardTitle>
@@ -66,29 +66,16 @@
     private MDragZone mDragZone1;
     private MDragZone mDragZone2;
     private int total = 3;
-    private void SetOptions(SorttableOptions options)
-    {
-        options.Group = "group_oninit";
-        options.Pull = "clone";
-    }
 
     private void AddData(MDragZone container, int index)
     {
-        int max = 2, j = 1;
-        List<MDragItem> list = new();
-        do
-        {
-            list.Add(new MDragItem
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    ChildContent = CreateCard(container, "-", index, total++)
-                });
-            j++;
-        }
-        while (max - j > 0);
-        if (list.Any())
-            container.AddRange(list);
+        var insert = new MDragItem
+            {
+                Id = Guid.NewGuid().ToString("N"),
+                ChildContent = CreateCard(container, "-", index, total++)
+            };
 
+        container.Add(insert);
         StateHasChanged();
     }
 

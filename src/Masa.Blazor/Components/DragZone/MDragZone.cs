@@ -4,12 +4,51 @@
     {
         private DotNetObjectReference<MDragZone> _dotNetHelper;
         private IJSObjectReference _jsHelper;
+        private SorttableOptions _options = new();
 
         [Parameter]
-        public SorttableOptions Options { get; set; }
+        public Action<SorttableOptions> ConfigureOptions { get; set; }
 
         [Parameter]
-        public Action<SorttableOptions> OnConfigure { get; set; }        
+        public bool Disabled
+        {
+            get { return _options.Disabled ?? false; }
+            set { _options.Disabled = value; }
+        }
+
+        [Parameter]
+        public string Group
+        {
+            get
+            {
+                return _options.Group;
+            }
+            set
+            {
+                _options.Group = value;
+            }
+        }
+
+        [Parameter]
+        public string Pull
+        {
+            get { return _options.Pull; }
+            set { _options.Pull = value; }
+        }
+
+        [Parameter]
+        public string Put
+        {
+            get { return _options.Put; }
+            set { _options.Put = value; }
+        }
+
+        [Parameter]
+        public bool Sort
+        {
+            get { return _options.Sort ?? true; }
+            set { _options.Sort = value; }
+        }
 
         /// <summary>
         /// 元素被选中
@@ -19,8 +58,8 @@
         public void OnChoose(dynamic args)
         {
             _isRender = false;
-            if (Options?.OnChoose != null)
-                Options.OnChoose(args);
+            if (_options?.OnChoose != null)
+                _options.OnChoose(args);
         }
 
         /// <summary>
@@ -31,8 +70,8 @@
         public void OnUnchoose(dynamic args)
         {
             _isRender = false;
-            if (Options?.OnUnchoose != null)
-                Options.OnUnchoose(args);
+            if (_options?.OnUnchoose != null)
+                _options.OnUnchoose(args);
         }
 
         /// <summary>
@@ -44,8 +83,8 @@
         {
             _isRender = false;
             DragDropService.DragItem = Value.FirstOrDefault(it => it.Id == args.ItemId);
-            if (Options?.OnStart != null)
-                Options.OnStart(args);
+            if (_options?.OnStart != null)
+                _options.OnStart(args);
         }
 
         /// <summary>        
@@ -56,8 +95,8 @@
         public void OnDropEnd(SorttableEventArgs args)
         {
             _isRender = false;
-            if (Options?.OnEnd != null)
-                Options.OnEnd(args);
+            if (_options?.OnEnd != null)
+                _options.OnEnd(args);
 
             DragDropService.Reset();
         }
@@ -70,8 +109,8 @@
         public string OnAdd(SorttableEventArgs args)
         {
             _isRender = true;
-            if (Options?.OnAdd != null)
-                Options.OnAdd(args);
+            if (_options?.OnAdd != null)
+                _options.OnAdd(args);
 
             string cloneId = string.Empty;
             if (!Contains(DragDropService.DragItem))
@@ -91,8 +130,8 @@
         public void OnUpdate(SorttableEventArgs args)
         {
             _isRender = true;
-            if (Options?.OnUpdate != null)
-                Options.OnUpdate(args);
+            if (_options?.OnUpdate != null)
+                _options.OnUpdate(args);
 
             Update(DragDropService.DragItem, args.OldIndex, args.NewIndex);
         }
@@ -105,8 +144,8 @@
         public void OnSort(SorttableEventArgs args)
         {
             _isRender = true;
-            if (Options?.OnSort != null)
-                Options.OnSort(args);
+            if (_options?.OnSort != null)
+                _options.OnSort(args);
 
             if (args.NewParentId == Id)
                 Update(DragDropService.DragItem, args.OldIndex, args.NewIndex);
@@ -120,8 +159,8 @@
         public void OnRemove(SorttableEventArgs args)
         {
             _isRender = true;
-            if (Options?.OnRemove != null)
-                Options.OnRemove(args);
+            if (_options?.OnRemove != null)
+                _options.OnRemove(args);
 
             if (Contains(DragDropService.DragItem))
             {
@@ -143,8 +182,8 @@
         public void OnMove(SorttableMoveEventArgs args)
         {
             _isRender = false;
-            if (Options?.OnMove != null)
-                Options.OnMove(args);
+            if (_options?.OnMove != null)
+                _options.OnMove(args);
         }
 
         /// <summary>
@@ -155,38 +194,32 @@
         public void OnClone(SorttableEventArgs args)
         {
             _isRender = false;
-            if (Options?.OnClone != null)
-                Options.OnClone(args);
+            if (_options?.OnClone != null)
+                _options.OnClone(args);
         }
 
         [JSInvokable]
         public void OnChange(SorttableEventArgs args)
         {
             _isRender = false;
-            if (Options?.OnChange != null)
-                Options.OnChange(args);
+            if (_options?.OnChange != null)
+                _options.OnChange(args);
         }
 
         [JSInvokable]
         public bool OnPut()
         {
-            if (Options.PutFn != null)
-                return Options.PutFn();
+            if (_options.PutFn != null)
+                return _options.PutFn();
             return true;
         }
 
         [JSInvokable]
         public bool OnPull()
         {
-            if (Options.PullFn != null)
-                return Options.PullFn();
+            if (_options.PullFn != null)
+                return _options.PullFn();
             return true;
-        }
-
-        protected override void OnInitialized()
-        {
-            Options = new();
-            base.OnInitialized();
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -195,7 +228,7 @@
             if (firstRender)
             {
                 _dotNetHelper = DotNetObjectReference.Create(this);
-                await _jsHelper.InvokeVoidAsync("init", _dotNetHelper, Id, Options.ToParameters());
+                await _jsHelper.InvokeVoidAsync("init", _dotNetHelper, Id, _options.ToParameters());
             }
             await base.OnAfterRenderAsync(firstRender);
         }
@@ -207,9 +240,9 @@
 
         protected override void OnParametersSet()
         {
-            OnConfigure?.Invoke(Options);
+            ConfigureOptions?.Invoke(_options);
             base.OnParametersSet();
-        }       
+        }
 
         public override void Dispose()
         {
@@ -218,8 +251,15 @@
 
         public async ValueTask DisposeAsync()
         {
-            if (_jsHelper != null)
-                await _jsHelper.DisposeAsync();
+            try
+            {
+                if (_jsHelper != null)
+                    await _jsHelper.DisposeAsync();
+            }
+            catch
+            {
+
+            }
         }
     }
 }
