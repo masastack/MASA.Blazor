@@ -28,7 +28,7 @@ consistent styling for organizing groups of text and images.
 - [MListItemSubtitle](/api/MListItemSubtitle)
 - [MListItemTitle](/api/MListItemTitle)
 
-## ×¢Òâ
+## Caveats
 
 <!--alert:info-->
-If you want to find a list item with status, please check [**MListItemGroup**](/components/list-item-groups)¡£
+If you want to find a list item with status, please check [**MListItemGroup**](/components/list-item-groups)ã€‚

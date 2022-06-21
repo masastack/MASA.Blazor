@@ -81,7 +81,10 @@ namespace Masa.Blazor
         {
             Stepper.UnRegisterContent(this);
 
-            await JsInvokeAsync(JsInteropConstants.RemoveStepperEventListener, Ref, IsActive);
+            if (Ref.Context is not null)
+            {
+                await JsInvokeAsync(JsInteropConstants.RemoveStepperEventListener, Ref, IsActive);
+            }
         }
     }
 }

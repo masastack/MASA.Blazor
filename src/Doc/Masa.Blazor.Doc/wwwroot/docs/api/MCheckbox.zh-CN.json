@@ -101,12 +101,6 @@
       "Description": ""
     },
     {
-      "Name": "IsActive",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
       "Name": "Label",
       "Type": "String",
       "Default": "null",
