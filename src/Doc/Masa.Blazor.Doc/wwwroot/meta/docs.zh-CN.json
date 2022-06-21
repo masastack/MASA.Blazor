@@ -386,6 +386,35 @@
       },
       {
         "Order": 0,
+        "Title": "MBottomNavigation",
+        "FullTitle": "MBottomNavigation",
+        "Type": "menuItem",
+        "Url": "api/mbottomnavigation",
+        "Contents": [
+          {
+            "Id": "section-292649107",
+            "Title": "组件页面",
+            "Level": 0
+          },
+          {
+            "Id": "section-3122241",
+            "Title": "属性",
+            "Level": 0
+          },
+          {
+            "Id": "section-3374707",
+            "Title": "插槽",
+            "Level": 0
+          },
+          {
+            "Id": "section-2654231",
+            "Title": "事件",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
         "Title": "MBottomSheet",
         "FullTitle": "MBottomSheet",
         "Type": "menuItem",
@@ -4236,6 +4265,15 @@
         "FullTitle": "Borders (边框)",
         "Type": "menuItem",
         "Url": "components/borders",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Bottom navigation",
+        "SubTitle": "底部导航栏",
+        "FullTitle": "Bottom navigation (底部导航栏)",
+        "Type": "menuItem",
+        "Url": "components/bottom-navigation",
         "Children": []
       },
       {

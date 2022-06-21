@@ -904,6 +904,115 @@
     "FullTitle": "Borders"
   },
   {
+    "Desc": "<p>The <code>MBottomNavigation</code> component is an alternative to the sidebar. It is primarily used for mobile applications and comes in three variants, <strong>icons</strong> and <strong>text</strong>, and <strong>shift</strong>.</p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MBottomNavigation\">MBottomNavigation</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-06-21T13:40:39.0267025+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "<p>While <code>MBottomNavigation</code> is meant to be used with router, you can also programmatically control the active state of the buttons by using the value property. A button is given a default value of its <em>index</em> with <code>MBottomNavigation</code>.</p>\n",
+        "Code": "<MBottomNavigation @bind-Value=\"value\">\r\n    <MButton Value=\"@(\"recent\")\">\r\n        <span>Recent</span>\r\n\r\n        <MIcon>mdi-history</MIcon>\r\n    </MButton>\r\n\r\n    <MButton Value=\"@(\"favorites\")\">\r\n        <span>Favorites</span>\r\n\r\n        <MIcon>mdi-heart</MIcon>\r\n    </MButton>\r\n\r\n    <MButton Value=\"@(\"nearby\")\">\r\n        <span>Nearby</span>\r\n\r\n        <MIcon>mdi-map-marker</MIcon>\r\n    </MButton>\r\n</MBottomNavigation>\r\n\r\n@code {\r\n\r\n    StringNumber value = \"recent\";\r\n\r\n}\r\n",
+        "Type": "Demos.Components.BottomNavigation.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "color",
+        "Title": "Color",
+        "Description": "<p>The <strong>Color</strong> parameter applies a color to the background of the bottom navigation. We recommend using the <strong>Light</strong> and <strong>Dark</strong> parameters to properly contrast text color.</p>\n",
+        "Code": "<MBottomNavigation\r\n    @bind-Value=\"value\"\r\n    Color=\"primary\">\r\n    <MButton>\r\n        <span>Recents</span>\r\n\r\n        <MIcon>mdi-history</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Favorites</span>\r\n\r\n        <MIcon>mdi-heart</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Nearby</span>\r\n\r\n        <MIcon>mdi-map-marker</MIcon>\r\n    </MButton>\r\n</MBottomNavigation>\r\n\r\n@code {\r\n\r\n    StringNumber value = 1;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.BottomNavigation.props.Color",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "grow",
+        "Title": "Grow",
+        "Description": "<p>Using the <strong>Grow</strong> property forces <a href=\"%22/components/buttons%22\">MButton</a> components to fill all available space. Buttons have a maximum width of 168px per the <a href=\"https://material.io/components/bottom-navigation#specs\">Bottom Navigation MD specification</a>.</p>\n",
+        "Code": "<MBottomNavigation\r\n    @bind-Value=\"value\"\r\n    Color=\"teal\"\r\n    Grow>\r\n    <MButton>\r\n        <span>Recents</span>\r\n\r\n        <MIcon>mdi-history</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Favorites</span>\r\n\r\n        <MIcon>mdi-heart</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Nearby</span>\r\n\r\n        <MIcon>mdi-map-marker</MIcon>\r\n    </MButton>\r\n</MBottomNavigation>\r\n\r\n@code {\r\n\r\n    StringNumber value = 1;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.BottomNavigation.props.Grow",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "hideOnScroll",
+        "Title": "Hide on scroll",
+        "Description": "<p>The <code>MBottomNavigation</code> component hides when scrolling up when using the <strong>HideOnScroll</strong> parameter. This is similar to the <a href=\"https://material.io/archive/guidelines/patterns/scrolling-techniques.html\">scrolling techniques</a> that are supported in <a href=\"%22/components/app-bars\">MAppBar</a>. In the following example, scroll up and down to see this behavior.</p>\n",
+        "Code": "<MCard\r\n    Class=\"overflow-hidden mx-auto\"\r\n    Height=\"200\"\r\n    MaxWidth=\"500\">\r\n    <MBottomNavigation\r\n        Absolute\r\n        HideOnScroll\r\n        Horizontal\r\n        ScrollTarget=\"#hide-on-scroll-example\">\r\n        <MButton\r\n            Color=\"deep-purple accent-4\"\r\n            Text>\r\n            <span>Recents</span>\r\n\r\n            <MIcon>mdi-history</MIcon>\r\n        </MButton>\r\n\r\n        <MButton\r\n            Color=\"deep-purple accent-4\"\r\n            Text>\r\n            <span>Favorites</span>\r\n\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n\r\n        <MButton\r\n            Color=\"deep-purple accent-4\"\r\n            Text>\r\n            <span>Nearby</span>\r\n\r\n            <MIcon>mdi-map-marker</MIcon>\r\n        </MButton>\r\n    </MBottomNavigation>\r\n\r\n    <MResponsive\r\n        Id=\"hide-on-scroll-example\"\r\n        Class=\"overflow-y-auto\"\r\n        MaxHeight=\"600\">\r\n        <MResponsive Height=\"1500\"></MResponsive>\r\n    </MResponsive>\r\n</MCard>\r\n",
+        "Type": "Demos.Components.BottomNavigation.props.HideOnScroll",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "horizontal",
+        "Title": "Horizontal",
+        "Description": "<p>Adjust the style of buttons and icons by using the <strong>Horizontal</strong> parameter. This positions button text inline with the provided <a href=\"%22/components/icons%22\">MIcon</a>.</p>\n",
+        "Code": "<MBottomNavigation\r\n    @bind-Value=\"value\"\r\n    Color=\"primary\"\r\n    Horizontal>\r\n    <MButton>\r\n        <span>Recents</span>\r\n\r\n        <MIcon>mdi-history</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Favorites</span>\r\n\r\n        <MIcon>mdi-heart</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Nearby</span>\r\n\r\n        <MIcon>mdi-map-marker</MIcon>\r\n    </MButton>\r\n</MBottomNavigation>\r\n\r\n@code {\r\n\r\n    StringNumber value = 1;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.BottomNavigation.props.Horizontal",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "scrollThreshold",
+        "Title": "Scroll threshold",
+        "Description": "<p>Modify the <strong>ScrollThreshold</strong> parameter to increase the distance a user must scroll before the <code>MBottomNavigation</code> is hidden.</p>\n",
+        "Code": "<MCard\r\n    Class=\"overflow-hidden mx-auto\"\r\n    Height=\"200\"\r\n    MaxWidth=\"500\">\r\n    <MBottomNavigation\r\n        Absolute\r\n        Color=\"white\"\r\n        HideOnScroll\r\n        Horizontal\r\n        ScrollTarget=\"#scroll-threshold-example\"\r\n        ScrollThreshold=\"500\">\r\n        <MButton\r\n            Color=\"deep-purple accent-4\"\r\n            Text>\r\n            <span>Recents</span>\r\n\r\n            <MIcon>mdi-history</MIcon>\r\n        </MButton>\r\n\r\n        <MButton\r\n            Color=\"deep-purple accent-4\"\r\n            Text>\r\n            <span>Favorites</span>\r\n\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n\r\n        <MButton\r\n            Color=\"deep-purple accent-4\"\r\n            Text>\r\n            <span>Nearby</span>\r\n\r\n            <MIcon>mdi-map-marker</MIcon>\r\n        </MButton>\r\n    </MBottomNavigation>\r\n\r\n    <MResponsive\r\n        Id=\"scroll-threshold-example\"\r\n        Class=\"overflow-y-auto pb-16\"\r\n        MaxHeight=\"600\">\r\n        <MResponsive Height=\"1500\"></MResponsive>\r\n    </MResponsive>\r\n</MCard>\r\n",
+        "Type": "Demos.Components.BottomNavigation.props.ScrollThreshold",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "shift",
+        "Title": "Shift",
+        "Description": "<p>The <strong>Shift</strong> parameter hides button text when not active. This provides an alternative visual style to the <code>MBottomNavigation</code> component.</p>\n",
+        "Code": "<MBottomNavigation\r\n    @bind-Value=\"value\"\r\n    BackgroundColor=\"@color\"\r\n    Dark\r\n    Shift>\r\n    <MButton>\r\n        <span>Video</span>\r\n\r\n        <MIcon>mdi-television-play</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Music</span>\r\n\r\n        <MIcon>mdi-music-note</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Book</span>\r\n\r\n        <MIcon>mdi-book</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Image</span>\r\n\r\n        <MIcon>mdi-image</MIcon>\r\n    </MButton>\r\n</MBottomNavigation>\r\n\r\n@code {\r\n\r\n    StringNumber value = 1;\r\n\r\n    string color\r\n    {\r\n        get\r\n        {\r\n            if (value == 0) return \"blue-grey\";\r\n            if (value == 1) return \"teal\";\r\n            if (value == 2) return \"brown\";\r\n            if (value == 3) return \"indigo\";\r\n            return \"blue-grey\";\r\n        }\r\n    }\r\n\r\n}\r\n",
+        "Type": "Demos.Components.BottomNavigation.props.Shift",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "toggle",
+        "Title": "Toggle",
+        "Description": "<p>The display state of <code>MBottomNavigation</code> can be toggled using the <strong>InputValue</strong> parameter. You can also control the currently active button using <strong>@bind-Value</strong>.</p>\n",
+        "Code": "<div class=\"overflow-hidden\">\r\n\r\n    <div class=\"text-center mb-8\">\r\n        <MButton\r\n            Color=\"deep-purple\"\r\n            Outlined\r\n            OnClick=\"() => active = !active\">\r\n            Toggle Navigation\r\n        </MButton>\r\n    </div>\r\n\r\n    <MBottomNavigation\r\n        @bind-Value=\"value\"\r\n        InputValue=\"active\"\r\n        Color=\"indigo\">\r\n        <MButton>\r\n            <span>Recents</span>\r\n\r\n            <MIcon>mdi-history</MIcon>\r\n        </MButton>\r\n\r\n        <MButton>\r\n            <span>Favorites</span>\r\n\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n\r\n        <MButton>\r\n            <span>Nearby</span>\r\n\r\n            <MIcon>mdi-map-marker</MIcon>\r\n        </MButton>\r\n    </MBottomNavigation>\r\n\r\n</div>\r\n\r\n@code {\r\n\r\n    StringNumber value = 1;\r\n    bool active = true;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.BottomNavigation.props.Toggle",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/components/icons",
+      "/components/tabs"
+    ],
+    "Title": "Bottom navigation",
+    "Type": "BottomNavigation",
+    "FullTitle": "Bottom navigation"
+  },
+  {
     "Desc": "<p>The bottom sheet is a modified <code>MDialog</code> that slides from the bottom of the screen, similar to a <code>MBottomNavigation</code>. Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet can contain anything.</p>\n",
     "Order": 0,
     "OtherDocs": {
