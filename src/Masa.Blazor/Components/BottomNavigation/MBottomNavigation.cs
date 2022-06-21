@@ -1,4 +1,5 @@
 ﻿using BlazorComponent.Web;
+using Element = BlazorComponent.Web.Element;
 
 namespace Masa.Blazor;
 
@@ -7,6 +8,9 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
     public MBottomNavigation() : base(GroupType.ButtonGroup)
     {
     }
+
+    [Inject]
+    private MasaBlazor MasaBlazor { get; set; }
 
     [Parameter]
     public bool Absolute { get; set; }
@@ -113,30 +117,38 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
             });
     }
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
-        base.OnParametersSet();
+        await base.OnParametersSetAsync();
 
         Mandatory = Mandatory || Value is not null;
 
         IsActive = InputValue;
 
         _scroller.ScrollThreshold = ScrollThreshold;
+
+        await UpdateApplication();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
 
-        if (firstRender && !string.IsNullOrWhiteSpace(ScrollTarget) && CanScroll)
+        if (firstRender)
         {
-            await JsInvokeAsync(
-                JsInteropConstants.AddHtmlElementEventListener,
-                ScrollTarget,
-                "scroll",
-                DotNetObjectReference.Create(new Invoker(async () =>
-                    await CreateEventCallback(async () => await _scroller.OnScroll(ThresholdMet)).InvokeAsync()))
-            );
+            if (!string.IsNullOrWhiteSpace(ScrollTarget) && CanScroll)
+            {
+                await JsInvokeAsync(
+                    JsInteropConstants.AddHtmlElementEventListener,
+                    ScrollTarget,
+                    "scroll",
+                    DotNetObjectReference.Create(new Invoker(async () =>
+                        await CreateEventCallback(async () => await _scroller.OnScroll(ThresholdMet)).InvokeAsync()))
+                );
+            }
+
+            await UpdateApplication();
+            StateHasChanged();
         }
     }
 
@@ -155,6 +167,20 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
         if (scrollable.CurrentThreshold < scrollable.ComputedScrollThreshold) return;
 
         scrollable.SavedScroll = scrollable.CurrentScroll;
+    }
+
+    private async Task UpdateApplication()
+    {
+        // TODO: implement applicationable
+
+        if (!App)
+        {
+            return;
+        }
+
+        var rect = await JsInvokeAsync<Element>(JsInteropConstants.GetDomInfo, Ref);
+
+        MasaBlazor.Application.Bottom = rect.ClientHeight;
     }
 
     public async ValueTask DisposeAsync()
