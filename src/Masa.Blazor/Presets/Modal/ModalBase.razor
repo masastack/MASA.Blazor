@@ -18,11 +18,25 @@
                Elevation="Elevation"
                Height="@Height">
             <MCardTitle Class="@HeaderClass" Style="@HeaderStyle">
-                @Title
+                @if (TitleContent != null)
+                {
+                    @TitleContent
+                }
+                else
+                {
+                    @Title
+                }
                 <MSpacer></MSpacer>
-                <MButton Icon OnClick="HandleOnCancel">
-                    <MIcon>mdi-close</MIcon>
-                </MButton>
+                @if (CloseContent != null)
+                {
+                    @CloseContent((HandleOnCancel, Loading))
+                }
+                else
+                {
+                    <MButton Icon OnClick="HandleOnCancel">
+                        <MIcon>mdi-close</MIcon>
+                    </MButton>
+                }
             </MCardTitle>
 
             @if (!HideTitleDivider)
@@ -62,7 +76,7 @@
                         else
                         {
                             <ModalButton Props="ComputedDeleteButtonProps"
-                                         OnClick="HandleOnDelete">
+                             OnClick="HandleOnDelete">
                                 @DeleteText
                             </ModalButton>
                         }
@@ -79,8 +93,8 @@
                         else
                         {
                             <ModalButton Props="ComputedCancelButtonProps"
-                                         Disabled="_saveLoading"
-                                         OnClick="HandleOnCancel">
+                             Disabled="_saveLoading"
+                             OnClick="HandleOnCancel">
                                 @CancelText
                             </ModalButton>
                         }
@@ -95,9 +109,9 @@
                         else
                         {
                             <ModalButton Props="ComputedSaveButtonProps"
-                                         Disabled="_saveLoading"
-                                         Loading="_saveLoading"
-                                         OnClick="HandleOnSave">
+                             Disabled="_saveLoading"
+                             Loading="_saveLoading"
+                             OnClick="HandleOnSave">
                                 @SaveText
                             </ModalButton>
                         }
