@@ -1,5 +1,5 @@
 ---
-order: 0
+order: 2
 title:
   zh-CN: 提交与验证 & 清除
   en-US: Validation with submit & clear

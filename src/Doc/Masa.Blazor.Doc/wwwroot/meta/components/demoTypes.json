@@ -198,6 +198,7 @@
   "Demos.Components.FormInputs.children.FileInput.misc.ComplexSelectionContent",
   "Demos.Components.FormInputs.children.Form.usage.Basic",
   "Demos.Components.FormInputs.children.Form.props.Rules",
+  "Demos.Components.FormInputs.children.Form.misc.EnableI18n",
   "Demos.Components.FormInputs.children.Form.misc.Validation",
   "Demos.Components.FormInputs.children.Form.misc.ValidationEnumerable",
   "Demos.Components.FormInputs.children.Form.misc.ValidationEnumerableWithFluentValidation",
