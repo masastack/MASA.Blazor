@@ -1,0 +1,177 @@
+﻿{
+  "Title": "MBottomNavigation",
+  "Components": [
+    "Bottom Navigation"
+  ],
+  "Props": [
+    {
+      "Name": "Absolute",
+      "Type": "Boolean",
+      "Description": "应用 position: absolute 样式到组件."
+    },
+    {
+      "Name": "ActiveClass",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "App",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "BackgroundColor",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Color",
+      "Type": "String",
+      "Description": "将指定的颜色应用于控件 - 它可以是 material color 的名称（例如 success 或者 purple）或 css 颜色 (#033 或 rgba(255, 0, 0, 0.5))。"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Fixed",
+      "Type": "Boolean",
+      "Description": "给组件应用 position: fixed"
+    },
+    {
+      "Name": "Grow",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "HideOnScroll",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Horizontal",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "InputValue",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Mandatory",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Max",
+      "Type": "StringNumber",
+      "Description": ""
+    },
+    {
+      "Name": "MaxHeight",
+      "Type": "StringNumber",
+      "Description": "设定组件的最大高度。"
+    },
+    {
+      "Name": "MaxWidth",
+      "Type": "StringNumber",
+      "Description": "设定组件的最大宽度。"
+    },
+    {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Description": "设定组件的最小高度。"
+    },
+    {
+      "Name": "MinWidth",
+      "Type": "StringNumber",
+      "Description": "设定组件的最小宽度。"
+    },
+    {
+      "Name": "Multiple",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "ScrollTarget",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ScrollThreshold",
+      "Type": "Double",
+      "Description": ""
+    },
+    {
+      "Name": "Shift",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Value",
+      "Type": "StringNumber",
+      "Description": ""
+    },
+    {
+      "Name": "Values",
+      "Type": "List<StringNumber>",
+      "Description": ""
+    },
+    {
+      "Name": "Width",
+      "Type": "StringNumber",
+      "Description": "设定组件的最小宽度。"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "InputValueChanged",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<StringNumber>",
+      "Description": ""
+    },
+    {
+      "Name": "ValuesChanged",
+      "Type": "EventCallback<List`1>",
+      "Description": ""
+    }
+  ]
+}

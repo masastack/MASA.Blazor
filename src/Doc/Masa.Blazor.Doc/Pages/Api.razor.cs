@@ -22,6 +22,7 @@ namespace Masa.Blazor.Doc.Pages
             "MBadge",
             "MBanner",
             "MBorder",
+            "MBottomNavigation",
             "MBottomSheet",
             "MBreadcrumbs",
             "MBreadcrumbsDivider",
