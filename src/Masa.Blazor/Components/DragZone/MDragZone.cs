@@ -2,10 +2,6 @@
 {
     public partial class MDragZone : BDragZone, IDisposable, IAsyncDisposable
     {
-        private DotNetObjectReference<MDragZone> _dotNetHelper;
-        private IJSObjectReference _jsHelper;
-        private SorttableOptions _options = new();
-
         [Parameter]
         public Action<SorttableOptions> Options { get; set; }
 
@@ -49,6 +45,10 @@
             get { return _options.Sort ?? true; }
             set { _options.Sort = value; }
         }
+
+        private DotNetObjectReference<MDragZone> _dotNetHelper;
+        private IJSObjectReference _jsHelper;
+        private SorttableOptions _options = new();
 
         /// <summary>
         /// 元素被选中
@@ -233,8 +233,8 @@
             {
                 _dotNetHelper = DotNetObjectReference.Create(this);
                 await _jsHelper.InvokeVoidAsync("init", _dotNetHelper, Id, _options.ToParameters());
-            }
-            await base.OnAfterRenderAsync(firstRender);
+            }           
+            await base.OnAfterRenderAsync(firstRender);           
         }
 
         protected override bool ShouldRender()
