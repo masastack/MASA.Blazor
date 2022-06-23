@@ -61,8 +61,6 @@ namespace Masa.Blazor
         [Parameter]
         public double ScrollThreshold { get; set; }
 
-        public HtmlElement Target { get; set; }
-
         [Parameter]
         public bool ScrollOffScreen { get; set; }
 
@@ -70,17 +68,14 @@ namespace Masa.Blazor
         public bool Value { get; set; } = true;
 
         [Inject]
-        public Document Document { get; set; }
-
-        [Inject]
         public MasaBlazor MasaBlazor { get; set; }
 
-        protected bool CanScroll => InvertedScroll ||
-                                    ElevateOnScroll ||
-                                    HideOnScroll ||
-                                    CollapseOnScroll ||
-                                    MasaBlazor.Application.IsBooted ||
-                                    !Value;
+        public bool CanScroll => InvertedScroll ||
+                                 ElevateOnScroll ||
+                                 HideOnScroll ||
+                                 CollapseOnScroll ||
+                                 MasaBlazor.Application.IsBooted ||
+                                 !Value;
 
         protected double ScrollRatio
         {
@@ -231,11 +226,13 @@ namespace Masa.Blazor
 
         protected override bool IsProminent => base.IsProminent || ShrinkOnScroll;
 
+        protected HtmlElement Target { get; set; }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
 
-            Target = Document.QuerySelector(ScrollTarget);
+            Target = new HtmlElement(Js, ScrollTarget);
 
             _scroller = new Scroller(this)
             {
@@ -339,7 +336,7 @@ namespace Masa.Blazor
             await base.OnAfterRenderAsync(firstRender);
         }
 
-        protected void ThresholdMet()
+        protected void ThresholdMet(Scroller _)
         {
             if (InvertedScroll)
             {
