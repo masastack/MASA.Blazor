@@ -29,7 +29,7 @@
                 <MSpacer></MSpacer>
                 @if (CloseContent != null)
                 {
-                    @CloseContent((HandleOnCancel, Loading))
+                    @CloseContent(HandleOnCancel)
                 }
                 else
                 {
@@ -76,7 +76,7 @@
                         else
                         {
                             <ModalButton Props="ComputedDeleteButtonProps"
-                             OnClick="HandleOnDelete">
+                                         OnClick="HandleOnDelete">
                                 @DeleteText
                             </ModalButton>
                         }
@@ -93,8 +93,8 @@
                         else
                         {
                             <ModalButton Props="ComputedCancelButtonProps"
-                             Disabled="_saveLoading"
-                             OnClick="HandleOnCancel">
+                                         Disabled="_saveLoading"
+                                         OnClick="HandleOnCancel">
                                 @CancelText
                             </ModalButton>
                         }
@@ -109,9 +109,9 @@
                         else
                         {
                             <ModalButton Props="ComputedSaveButtonProps"
-                             Disabled="_saveLoading"
-                             Loading="_saveLoading"
-                             OnClick="HandleOnSave">
+                                         Disabled="_saveLoading"
+                                         Loading="_saveLoading"
+                                         OnClick="HandleOnSave">
                                 @SaveText
                             </ModalButton>
                         }
