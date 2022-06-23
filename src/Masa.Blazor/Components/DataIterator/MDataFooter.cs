@@ -4,9 +4,12 @@ namespace Masa.Blazor
 {
     public class MDataFooter : BDataFooter, IDataFooter
     {
+        [Inject]
+        protected I18n I18n { get; set; } = null!;
+
         //TODO:Internationalization
         [Parameter]
-        public string ItemsPerPageText { get; set; } = "Rows per page:";
+        public string ItemsPerPageText { get; set; }
 
         [Parameter]
         public DataOptions Options { get; set; }
@@ -54,7 +57,7 @@ namespace Masa.Blazor
         public bool DisableItemsPerPage { get; set; }
 
         [Parameter]
-        public string PageText { get; set; } = "{0}-{1} of {2}";
+        public string PageText { get; set; }
 
         [Parameter]
         public RenderFragment<(int PageStart, int PageStop, int ItemsLength)> PageTextContent { get; set; }
@@ -90,17 +93,12 @@ namespace Masa.Blazor
             }
         }
 
-        protected override void OnAfterRender(bool firstRender)
+        public override Task SetParametersAsync(ParameterView parameters)
         {
-            if (firstRender)
-            {
-                MasaBlazor.OnRTLChange += OnRTLChange;
-            }
-        }
-
-        private void OnRTLChange(bool obj)
-        {
-            InvokeStateHasChanged();
+            ItemsPerPageText = I18n.T("$masaBlazor.dataFooter.itemsPerPageText");
+            ItemsPerPageAllText = I18n.T("$masaBlazor.dataFooter.itemsPerPageAll");
+            PageText = I18n.T("$masaBlazor.dataFooter.pageText");
+            return base.SetParametersAsync(parameters);
         }
 
         protected override void OnParametersSet()
@@ -116,6 +114,19 @@ namespace Masa.Blazor
             {
                 throw new ArgumentNullException(nameof(Pagination));
             }
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            if (firstRender)
+            {
+                MasaBlazor.OnRTLChange += OnRTLChange;
+            }
+        }
+
+        private void OnRTLChange(bool obj)
+        {
+            InvokeStateHasChanged();
         }
 
         protected override void SetComponentClass()

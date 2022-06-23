@@ -47,10 +47,10 @@ namespace Masa.Blazor
         protected override async Task OnErrorAsync(Exception exception)
         {
             Logger?.LogError(exception, "OnErrorAsync");
-            if (exception.InnerException is not null)
-            {
-                exception = exception.InnerException;
-            }
+            // if (exception.InnerException is not null)
+            // {
+            //     exception = exception.InnerException;
+            // }
 
             if (CheckIfThrownInLifecycles(exception))
             {

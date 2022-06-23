@@ -6,6 +6,9 @@ namespace Masa.Blazor
 {
     public class MFileInput<TValue> : MTextField<TValue>, IFileInput<TValue>
     {
+        [Inject]
+        protected I18n I18n { get; set; }
+        
         [Parameter]
         public bool HideInput { get; set; }
 
@@ -106,11 +109,12 @@ namespace Masa.Blazor
             {
                 if (!ShowSize)
                 {
-                    return $"{Files.Count} files";
+                    return string.Format(I18n.T("$masaBlazor.fileInput.counter"), Files.Count);
                 }
 
                 var bytes = Files.Sum(r => r.Size);
-                return $"{Files.Count} files({HumanReadableFileSize(bytes)} in total) ";
+
+                return string.Format(I18n.T("$masaBlazor.fileInput.counterSize"), Files.Count, HumanReadableFileSize((bytes)));
             }
         }
 
