@@ -10,11 +10,6 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
-      "Name": "ConfigureOptions",
-      "Type": "Action<SorttableOptions>",
-      "Description": ""
-    },
-    {
       "Name": "Dark",
       "Type": "Boolean",
       "Description": "将暗色主题变量应用到组件。"
@@ -37,6 +32,11 @@
     {
       "Name": "Light",
       "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Options",
+      "Type": "Action<SorttableOptions>",
       "Description": ""
     },
     {

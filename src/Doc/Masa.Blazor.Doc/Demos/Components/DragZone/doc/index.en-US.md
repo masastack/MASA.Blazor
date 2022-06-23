@@ -14,5 +14,5 @@ The `MDragZone` component is based on [Sorttable.js](https://github.com/Sortable
 <!--alert:info-->
 You need to reference the package of Sorttable.js before using it ：
 <br />
-`<script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>`。
+`<script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>`.
 <!--/alert:info-->

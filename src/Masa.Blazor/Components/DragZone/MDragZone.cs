@@ -7,7 +7,7 @@
         private SorttableOptions _options = new();
 
         [Parameter]
-        public Action<SorttableOptions> ConfigureOptions { get; set; }
+        public Action<SorttableOptions> Options { get; set; }
 
         [Parameter]
         public bool Disabled
@@ -83,8 +83,12 @@
         {
             _isRender = false;
             DragDropService.DragItem = Value.FirstOrDefault(it => it.Id == args.ItemId);
-            if (_options?.OnStart != null)
-                _options.OnStart(args);
+            if (DragDropService.DragItem.Value != args.OldIndex)
+            { 
+            
+            }
+                if (_options?.OnStart != null)
+                    _options.OnStart(args);
         }
 
         /// <summary>        
@@ -133,7 +137,7 @@
             if (_options?.OnUpdate != null)
                 _options.OnUpdate(args);
 
-            Update(DragDropService.DragItem, args.OldIndex, args.NewIndex);
+            //Update(DragDropService.DragItem, args.OldIndex, args.NewIndex);
         }
 
         /// <summary>
@@ -240,7 +244,7 @@
 
         protected override void OnParametersSet()
         {
-            ConfigureOptions?.Invoke(_options);
+            Options?.Invoke(_options);
             base.OnParametersSet();
         }
 
