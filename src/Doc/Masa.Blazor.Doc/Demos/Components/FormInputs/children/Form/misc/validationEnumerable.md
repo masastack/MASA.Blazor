@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 3
 title:
   zh-CN: 验证集合
   en-US: Validation enumerable

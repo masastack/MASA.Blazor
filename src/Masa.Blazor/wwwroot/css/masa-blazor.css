@@ -3962,12 +3962,20 @@ html.overflow-y-hidden {
     overflow-x: hidden !important;
 }
 
+.m-application .overflow-x-visible {
+    overflow-x: visible !important;
+}
+
 .m-application .overflow-y-auto {
     overflow-y: auto !important;
 }
 
 .m-application .overflow-y-hidden {
     overflow-y: hidden !important;
+}
+
+.m-application .overflow-y-visible {
+    overflow-y: visible !important;
 }
 
 .m-application .d-none {

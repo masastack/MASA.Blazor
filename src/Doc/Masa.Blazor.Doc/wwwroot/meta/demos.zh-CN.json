@@ -244,6 +244,23 @@
   },
   {
     "Order": 9,
+    "Title": "底部导航栏",
+    "FullTitle": "底部导航栏",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "Bottom navigation",
+        "SubTitle": "底部导航栏",
+        "FullTitle": "Bottom navigation (底部导航栏)",
+        "Type": "menuItem",
+        "Url": "components/bottom-navigation",
+        "Children": []
+      }
+    ]
+  },
+  {
+    "Order": 10,
     "Title": "底部工作表",
     "FullTitle": "底部工作表",
     "Type": "itemGroup",
@@ -260,7 +277,7 @@
     ]
   },
   {
-    "Order": 10,
+    "Order": 11,
     "Title": "面包屑导航",
     "FullTitle": "面包屑导航",
     "Type": "itemGroup",
@@ -278,7 +295,7 @@
     ]
   },
   {
-    "Order": 11,
+    "Order": 12,
     "Title": "按钮",
     "FullTitle": "按钮",
     "Type": "itemGroup",
@@ -296,7 +313,7 @@
     ]
   },
   {
-    "Order": 12,
+    "Order": 13,
     "Title": "浮动动作按钮",
     "FullTitle": "浮动动作按钮",
     "Type": "itemGroup",
@@ -313,7 +330,7 @@
     ]
   },
   {
-    "Order": 13,
+    "Order": 14,
     "Title": "卡片",
     "FullTitle": "卡片",
     "Type": "itemGroup",
@@ -331,7 +348,7 @@
     ]
   },
   {
-    "Order": 14,
+    "Order": 15,
     "Title": "纸片",
     "FullTitle": "纸片",
     "Type": "itemGroup",
@@ -349,7 +366,7 @@
     ]
   },
   {
-    "Order": 15,
+    "Order": 16,
     "Title": "对话框",
     "FullTitle": "对话框",
     "Type": "itemGroup",
@@ -366,7 +383,7 @@
     ]
   },
   {
-    "Order": 16,
+    "Order": 17,
     "Title": "分隔线",
     "FullTitle": "分隔线",
     "Type": "itemGroup",

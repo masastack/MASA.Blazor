@@ -920,6 +920,116 @@
     "FullTitle": "Borders（边框）"
   },
   {
+    "Desc": "<p><code>MBottomNavigation</code> 组件是侧边栏的替代品。 它主要用于移动应用程序，并且有三个变体：<strong>icons</strong>，<strong>text</strong> 和 <strong>shift</strong>。</p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MBottomNavigation\">MBottomNavigation</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-06-21T13:40:39.0267025+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "使用",
+        "Description": "<p>虽然<code>MBottomNavigation</code>导航旨在与路由一起使用，但您也可以通过使用<strong>Value</strong>属性以编程方式控制按钮的活动状态。使用<code>MBottomNavigation</code>为按钮指定其<em>索引</em>的缺省值。</p>\n",
+        "Code": "<MBottomNavigation @bind-Value=\"value\">\r\n    <MButton Value=\"@(\"recent\")\">\r\n        <span>Recent</span>\r\n\r\n        <MIcon>mdi-history</MIcon>\r\n    </MButton>\r\n\r\n    <MButton Value=\"@(\"favorites\")\">\r\n        <span>Favorites</span>\r\n\r\n        <MIcon>mdi-heart</MIcon>\r\n    </MButton>\r\n\r\n    <MButton Value=\"@(\"nearby\")\">\r\n        <span>Nearby</span>\r\n\r\n        <MIcon>mdi-map-marker</MIcon>\r\n    </MButton>\r\n</MBottomNavigation>\r\n\r\n@code {\r\n\r\n    StringNumber value = \"recent\";\r\n\r\n}\r\n",
+        "Type": "Demos.Components.BottomNavigation.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "color",
+        "Title": "颜色",
+        "Description": "<p><strong>Color</strong> 参数将颜色应用于底部导航的背景。我们建议使用 <strong>Light</strong> 和 <strong>Dark</strong> 参数来适当对比文本颜色。</p>\n",
+        "Code": "<MBottomNavigation\r\n    @bind-Value=\"value\"\r\n    Color=\"primary\">\r\n    <MButton>\r\n        <span>Recents</span>\r\n\r\n        <MIcon>mdi-history</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Favorites</span>\r\n\r\n        <MIcon>mdi-heart</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Nearby</span>\r\n\r\n        <MIcon>mdi-map-marker</MIcon>\r\n    </MButton>\r\n</MBottomNavigation>\r\n\r\n@code {\r\n\r\n    StringNumber value = 1;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.BottomNavigation.props.Color",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "grow",
+        "Title": "增长",
+        "Description": "<p>使用 <strong>Grow</strong> 参数强制 <a href=\"%22/components/buttons%22\">MButton</a> 组件填充所有可用空间。根据<a href=\"https://material.io/components/bottom-navigation#specs\">底部导航MD规范</a>，按钮的最大宽度为 <strong>168px</strong>。</p>\n",
+        "Code": "<MBottomNavigation\r\n    @bind-Value=\"value\"\r\n    Color=\"teal\"\r\n    Grow>\r\n    <MButton>\r\n        <span>Recents</span>\r\n\r\n        <MIcon>mdi-history</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Favorites</span>\r\n\r\n        <MIcon>mdi-heart</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Nearby</span>\r\n\r\n        <MIcon>mdi-map-marker</MIcon>\r\n    </MButton>\r\n</MBottomNavigation>\r\n\r\n@code {\r\n\r\n    StringNumber value = 1;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.BottomNavigation.props.Grow",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "hideOnScroll",
+        "Title": "滚动时隐藏",
+        "Description": "<p>使用 <strong>HideOnScroll</strong> 参数时，<code>MBottomNavigation</code>组件在向上滚动时隐藏。这类似于<a href=\"%22/components/app-bars\">MAppBar</a>中支持的<a href=\"https://material.io/archive/guidelines/patterns/scrolling-techniques.html\">滚动技术</a>。在下面的示例中，上下滚动以查看此行为。</p>\n",
+        "Code": "<MCard\r\n    Class=\"overflow-hidden mx-auto\"\r\n    Height=\"200\"\r\n    MaxWidth=\"500\">\r\n    <MBottomNavigation\r\n        Absolute\r\n        HideOnScroll\r\n        Horizontal\r\n        ScrollTarget=\"#hide-on-scroll-example\">\r\n        <MButton\r\n            Color=\"deep-purple accent-4\"\r\n            Text>\r\n            <span>Recents</span>\r\n\r\n            <MIcon>mdi-history</MIcon>\r\n        </MButton>\r\n\r\n        <MButton\r\n            Color=\"deep-purple accent-4\"\r\n            Text>\r\n            <span>Favorites</span>\r\n\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n\r\n        <MButton\r\n            Color=\"deep-purple accent-4\"\r\n            Text>\r\n            <span>Nearby</span>\r\n\r\n            <MIcon>mdi-map-marker</MIcon>\r\n        </MButton>\r\n    </MBottomNavigation>\r\n\r\n    <MResponsive\r\n        Id=\"hide-on-scroll-example\"\r\n        Class=\"overflow-y-auto\"\r\n        MaxHeight=\"600\">\r\n        <MResponsive Height=\"1500\"></MResponsive>\r\n    </MResponsive>\r\n</MCard>\r\n",
+        "Type": "Demos.Components.BottomNavigation.props.HideOnScroll",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "horizontal",
+        "Title": "水平布局",
+        "Description": "<p>使用 <strong>Horizontal</strong> 参数调整按钮和图标的样式。此选项将按钮文本定位为与提供的<a href=\"%22/components/icons%22\">MIcon</a>内联。</p>\n",
+        "Code": "<MBottomNavigation\r\n    @bind-Value=\"value\"\r\n    Color=\"primary\"\r\n    Horizontal>\r\n    <MButton>\r\n        <span>Recents</span>\r\n\r\n        <MIcon>mdi-history</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Favorites</span>\r\n\r\n        <MIcon>mdi-heart</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Nearby</span>\r\n\r\n        <MIcon>mdi-map-marker</MIcon>\r\n    </MButton>\r\n</MBottomNavigation>\r\n\r\n@code {\r\n\r\n    StringNumber value = 1;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.BottomNavigation.props.Horizontal",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "scrollThreshold",
+        "Title": "滚动阈值",
+        "Description": "<p>修改 <strong>ScrollThreshold</strong> 参数以增加用户在隐藏<code>MBottomNavigation</code>之前必须滚动的距离。</p>\n",
+        "Code": "<MCard\r\n    Class=\"overflow-hidden mx-auto\"\r\n    Height=\"200\"\r\n    MaxWidth=\"500\">\r\n    <MBottomNavigation\r\n        Absolute\r\n        Color=\"white\"\r\n        HideOnScroll\r\n        Horizontal\r\n        ScrollTarget=\"#scroll-threshold-example\"\r\n        ScrollThreshold=\"500\">\r\n        <MButton\r\n            Color=\"deep-purple accent-4\"\r\n            Text>\r\n            <span>Recents</span>\r\n\r\n            <MIcon>mdi-history</MIcon>\r\n        </MButton>\r\n\r\n        <MButton\r\n            Color=\"deep-purple accent-4\"\r\n            Text>\r\n            <span>Favorites</span>\r\n\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n\r\n        <MButton\r\n            Color=\"deep-purple accent-4\"\r\n            Text>\r\n            <span>Nearby</span>\r\n\r\n            <MIcon>mdi-map-marker</MIcon>\r\n        </MButton>\r\n    </MBottomNavigation>\r\n\r\n    <MResponsive\r\n        Id=\"scroll-threshold-example\"\r\n        Class=\"overflow-y-auto pb-16\"\r\n        MaxHeight=\"600\">\r\n        <MResponsive Height=\"1500\"></MResponsive>\r\n    </MResponsive>\r\n</MCard>\r\n",
+        "Type": "Demos.Components.BottomNavigation.props.ScrollThreshold",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "shift",
+        "Title": "位移",
+        "Description": "<p>未激活时，<strong>Shift</strong> 参数会隐藏按钮文本。这为<code>MBottomNavigation</code>提供了另一种视觉样式。</p>\n",
+        "Code": "<MBottomNavigation\r\n    @bind-Value=\"value\"\r\n    BackgroundColor=\"@color\"\r\n    Dark\r\n    Shift>\r\n    <MButton>\r\n        <span>Video</span>\r\n\r\n        <MIcon>mdi-television-play</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Music</span>\r\n\r\n        <MIcon>mdi-music-note</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Book</span>\r\n\r\n        <MIcon>mdi-book</MIcon>\r\n    </MButton>\r\n\r\n    <MButton>\r\n        <span>Image</span>\r\n\r\n        <MIcon>mdi-image</MIcon>\r\n    </MButton>\r\n</MBottomNavigation>\r\n\r\n@code {\r\n\r\n    StringNumber value = 1;\r\n\r\n    string color\r\n    {\r\n        get\r\n        {\r\n            if (value == 0) return \"blue-grey\";\r\n            if (value == 1) return \"teal\";\r\n            if (value == 2) return \"brown\";\r\n            if (value == 3) return \"indigo\";\r\n            return \"blue-grey\";\r\n        }\r\n    }\r\n\r\n}\r\n",
+        "Type": "Demos.Components.BottomNavigation.props.Shift",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "toggle",
+        "Title": "切换",
+        "Description": "<p>可以使用 <strong>InputValue</strong> 参数切换 <code>MBottomNavigation</code> 的显示状态。您还可以使用 <strong>@bind-Value</strong> 控制当前活动的按钮。</p>\n",
+        "Code": "<div class=\"overflow-hidden\">\r\n\r\n    <div class=\"text-center mb-8\">\r\n        <MButton\r\n            Color=\"deep-purple\"\r\n            Outlined\r\n            OnClick=\"() => active = !active\">\r\n            Toggle Navigation\r\n        </MButton>\r\n    </div>\r\n\r\n    <MBottomNavigation\r\n        @bind-Value=\"value\"\r\n        InputValue=\"active\"\r\n        Color=\"indigo\">\r\n        <MButton>\r\n            <span>Recents</span>\r\n\r\n            <MIcon>mdi-history</MIcon>\r\n        </MButton>\r\n\r\n        <MButton>\r\n            <span>Favorites</span>\r\n\r\n            <MIcon>mdi-heart</MIcon>\r\n        </MButton>\r\n\r\n        <MButton>\r\n            <span>Nearby</span>\r\n\r\n            <MIcon>mdi-map-marker</MIcon>\r\n        </MButton>\r\n    </MBottomNavigation>\r\n\r\n</div>\r\n\r\n@code {\r\n\r\n    StringNumber value = 1;\r\n    bool active = true;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.BottomNavigation.props.Toggle",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/components/icons",
+      "/components/tabs"
+    ],
+    "Subtitle": "底部导航栏",
+    "Title": "Bottom navigation",
+    "Type": "底部导航栏",
+    "FullTitle": "Bottom navigation（底部导航栏）"
+  },
+  {
     "Desc": "<p>底部表单是一个经过修改的 <code>MDialog</code> , 从屏幕的底部滑出，类似于 <code>MBottomNavigation</code>。 底部导航组件用于按钮和特定的应用程序级操作，而底部工作表可以包含任何内容。</p>\n",
     "Order": 0,
     "OtherDocs": {
@@ -2925,6 +3035,17 @@
         "Group": 0
       },
       {
+        "Order": 1,
+        "Name": "EnableI18n",
+        "Title": "启用I18n",
+        "Description": "<p>启用I18n以支持验证信息多语言。如何使用<code>II8n</code>请跳转<a href=\"/features/internationalization\">I18n</a>。</p>\n",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n@using FluentValidation;\r\n\r\n<MForm Model=\"_model\" EnableValidation EnableI18n OnValidSubmit=\"HandleOnValidSubmit\"\r\n       OnInvalidSubmit=\"HandleOnInvalidSubmit\">\r\n    <MTextField @bind-Value=\"_model.Name\"\r\n                Counter=\"10\"\r\n                Label=\"Name\"></MTextField>\r\n    <MTextField @bind-Value=\"_model.Email\"\r\n                Label=\"E-mail\"></MTextField>\r\n    <MSelect @bind-Value=\"_model.Item\"\r\n             Items=\"@_items\"\r\n             Label=\"Item\"\r\n             ItemText=\"u => u\"\r\n             ItemValue=\"u => u\"></MSelect>\r\n    <MCheckbox @bind-Value=\"_model.Agree\"\r\n               Label=\"Do you agree?\"></MCheckbox>\r\n    <MButton Type=\"submit\">Submit</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    class Model\r\n    {\r\n        [Required]\r\n        [MaxLength(10, ErrorMessage = \"Name must be less than 10 characters\")]\r\n        public string Name { get; set; }\r\n        [Required]\r\n        [EmailAddress]\r\n        public string Email { get; set; }\r\n        [Required]\r\n        public string Item { get; set; }\r\n        [RegularExpression(\"True\", ErrorMessage = \"You must agree to continue!\")]\r\n        public bool Agree { get; set; }\r\n    }\r\n\r\n    private bool _valid = true;\r\n    private MForm _form;\r\n    private Model _model = new();\r\n\r\n    List<string> _items = new()\r\n        {\r\n            \"Item 1\",\r\n            \"Item 2\",\r\n            \"Item 3\",\r\n            \"Item 4\"\r\n        };\r\n\r\n    private void HandleOnValidSubmit()\r\n    {\r\n        //valid\r\n    }\r\n\r\n    private void HandleOnInvalidSubmit()\r\n    {\r\n        //invalid\r\n    }\r\n}\r\n",
+        "Type": "Demos.Components.FormInputs.children.Form.misc.EnableI18n",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
         "Order": 0,
         "Name": "validation",
         "Title": "验证",
@@ -2936,7 +3057,7 @@
         "Group": 3
       },
       {
-        "Order": 1,
+        "Order": 3,
         "Name": "validationEnumerable",
         "Title": "验证集合",
         "Description": "<p>验证集合属性,注意添加[EnumerableValidation]</p>\n",
@@ -2947,18 +3068,18 @@
         "Group": 3
       },
       {
-        "Order": 2,
+        "Order": 4,
         "Name": "validationEnumerableWithFluentValidation",
         "Title": "验证集合(FluentValidation)",
         "Description": "<p>MForm支持FluentValidation验证,以验证集合为示例</p>\n",
-        "Code": "@using BlazorComponent.I18n\r\n@using FluentValidation;\r\n\r\n<MForm Model=\"_orderDetail\" EnableValidation>\r\n    <MTextField @bind-Value=\"_orderDetail.Title\" Label=\"Title\"></MTextField>\r\n    <MTextField @bind-Value=\"_orderDetail.Price\" Label=\"Price\" Type=\"number\"></MTextField>\r\n    @foreach (var customer in _orderDetail.Customers)\r\n    {\r\n        <MCard Flat>\r\n            <MCardTitle>Customer:@customer.Id</MCardTitle>\r\n            <MCardText>\r\n                <MTextField @bind-Value=\"customer.Name\" Label=\"Name\"></MTextField>\r\n                <MTextField @bind-Value=\"customer.Age\" Label=\"Age\"></MTextField>\r\n            </MCardText>\r\n        </MCard>\r\n    }\r\n    <MButton OnClick=\"()=>SubmitOrder(context)\" Color=\"success\">Validate</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    class OrderDetail\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        public string Title { get; set; }\r\n\r\n        public decimal Price { get; set; }\r\n\r\n        public List<Customer> Customers { get; set; }\r\n    }\r\n\r\n    class Customer\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        public string Name { get; set; }\r\n\r\n        public int Age { get; set; }\r\n    }\r\n\r\n    class OrderDetailValidator : AbstractValidator<OrderDetail>\r\n    {\r\n        public OrderDetailValidator(I18n i18n)\r\n        {\r\n            RuleFor(o => o.Title).NotEmpty().WithMessage(\"{PropertyName} is \" + i18n.T(\"Required\"));\r\n            RuleFor(o => o.Price).InclusiveBetween(0,20);\r\n            RuleForEach(o => o.Customers).SetValidator(new CustomerValidator());\r\n        }\r\n    }\r\n\r\n    class CustomerValidator : AbstractValidator<Customer>\r\n    {\r\n        public CustomerValidator()\r\n        {\r\n            RuleFor(o => o.Name).NotEmpty().WithMessage(\"{PropertyName} is required\");\r\n            RuleFor(o => o.Age).InclusiveBetween(25,100);\r\n        }\r\n    }\r\n\r\n    private OrderDetail _orderDetail = new()\r\n    {\r\n        Customers = new List<Customer>\r\n        {\r\n            new Customer\r\n            {\r\n                Id=1\r\n            },\r\n            new Customer\r\n            {\r\n                Id=2\r\n            }\r\n        }\r\n    };\r\n\r\n    public void SubmitOrder(EditContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}\r\n",
+        "Code": "@using BlazorComponent.I18n\r\n@using FluentValidation;\r\n\r\n<MForm Model=\"_orderDetail\" EnableValidation EnableI18n>\r\n    <MTextField @bind-Value=\"_orderDetail.Title\" Label=\"Title\"></MTextField>\r\n    <MTextField @bind-Value=\"_orderDetail.Price\" Label=\"Price\" Type=\"number\"></MTextField>\r\n    @foreach (var customer in _orderDetail.Customers)\r\n    {\r\n        <MCard Flat>\r\n            <MCardTitle>Customer:@customer.Id</MCardTitle>\r\n            <MCardText>\r\n                <MTextField @bind-Value=\"customer.Name\" Label=\"Name\"></MTextField>\r\n                <MTextField @bind-Value=\"customer.Age\" Label=\"Age\"></MTextField>\r\n            </MCardText>\r\n        </MCard>\r\n    }\r\n    <MButton OnClick=\"()=>SubmitOrder(context)\" Color=\"success\">Validate</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    class OrderDetail\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        public string Title { get; set; }\r\n\r\n        public decimal Price { get; set; }\r\n\r\n        public List<Customer> Customers { get; set; }\r\n    }\r\n\r\n    class Customer\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        public string Name { get; set; }\r\n\r\n        public int Age { get; set; }\r\n    }\r\n\r\n    class OrderDetailValidator : AbstractValidator<OrderDetail>\r\n    {\r\n        public OrderDetailValidator(I18n i18n)\r\n        {\r\n            RuleFor(o => o.Title).NotEmpty().WithMessage(\"{PropertyName} is \" + i18n.T(\"Required\"));\r\n            RuleFor(o => o.Price).InclusiveBetween(0,20);\r\n            RuleForEach(o => o.Customers).SetValidator(new CustomerValidator());\r\n        }\r\n    }\r\n\r\n    class CustomerValidator : AbstractValidator<Customer>\r\n    {\r\n        public CustomerValidator()\r\n        {\r\n            RuleFor(o => o.Name).NotEmpty().WithMessage(\"{PropertyName} is required\");\r\n            RuleFor(o => o.Age).InclusiveBetween(25,100);\r\n        }\r\n    }\r\n\r\n    private OrderDetail _orderDetail = new()\r\n    {\r\n        Customers = new List<Customer>\r\n        {\r\n            new Customer\r\n            {\r\n                Id=1\r\n            },\r\n            new Customer\r\n            {\r\n                Id=2\r\n            }\r\n        }\r\n    };\r\n\r\n    public void SubmitOrder(EditContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Form.misc.ValidationEnumerableWithFluentValidation",
         "Style": "",
         "Debug": false,
         "Group": 3
       },
       {
-        "Order": 0,
+        "Order": 2,
         "Name": "validationWithSubmitAndClear",
         "Title": "提交与验证 & 清除",
         "Description": "<p><code>MForm</code> 组件有三个功能，可以通过在组件上设置ref来访问。 ref允许我们访问组件的内部方法，例如 <code>&lt;MForm @ref=&quot;_form&quot;&gt;</code>。 _form.Validate() 将验证所有输入并返回它们是否都有效。 _form.Reset() 将清除所有输入并重置验证错误。 _form.ResetValidation() 将只重置输入验证，不改变他们的状态。</p>\n",

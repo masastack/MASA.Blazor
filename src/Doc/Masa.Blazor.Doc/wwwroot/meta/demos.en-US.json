@@ -223,6 +223,22 @@
   },
   {
     "Order": 9,
+    "Title": "BottomNavigation",
+    "FullTitle": "BottomNavigation",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "Bottom navigation",
+        "FullTitle": "Bottom navigation",
+        "Type": "menuItem",
+        "Url": "components/bottom-navigation",
+        "Children": []
+      }
+    ]
+  },
+  {
+    "Order": 10,
     "Title": "BottomSheets",
     "FullTitle": "BottomSheets",
     "Type": "itemGroup",
@@ -238,7 +254,7 @@
     ]
   },
   {
-    "Order": 10,
+    "Order": 11,
     "Title": "Breadcrumbs",
     "FullTitle": "Breadcrumbs",
     "Type": "itemGroup",
@@ -255,7 +271,7 @@
     ]
   },
   {
-    "Order": 11,
+    "Order": 12,
     "Title": "Buttons",
     "FullTitle": "Buttons",
     "Type": "itemGroup",
@@ -272,7 +288,7 @@
     ]
   },
   {
-    "Order": 12,
+    "Order": 13,
     "Title": "Floating Action Buttons",
     "FullTitle": "Floating Action Buttons",
     "Type": "itemGroup",
@@ -288,7 +304,7 @@
     ]
   },
   {
-    "Order": 13,
+    "Order": 14,
     "Title": "Cards",
     "FullTitle": "Cards",
     "Type": "itemGroup",
@@ -305,7 +321,7 @@
     ]
   },
   {
-    "Order": 14,
+    "Order": 15,
     "Title": "Chips",
     "FullTitle": "Chips",
     "Type": "itemGroup",
@@ -322,7 +338,7 @@
     ]
   },
   {
-    "Order": 15,
+    "Order": 16,
     "Title": "Dialogs",
     "FullTitle": "Dialogs",
     "Type": "itemGroup",
@@ -338,7 +354,7 @@
     ]
   },
   {
-    "Order": 16,
+    "Order": 17,
     "Title": "Dividers",
     "FullTitle": "Dividers",
     "Type": "itemGroup",

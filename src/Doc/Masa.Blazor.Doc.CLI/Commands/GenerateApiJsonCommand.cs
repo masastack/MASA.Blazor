@@ -21,6 +21,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
             { "MBadge", new string[] { "Badges" } },
             { "MBanner", new string[] { "Banners" } },
             { "MBorder", new string[] { "Borders" } },
+            { "MBottomNavigation", new string[] { "Bottom Navigation" } },
             { "MBottomSheet", new string[] { "Bottom sheets" } },
             { "MBreadcrumbs", new string[] { "Breadcrumbs" } },
             { "MBreadcrumbsDivider", new string[] { "Breadcrumbs" } },

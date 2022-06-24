@@ -18,11 +18,25 @@
                Elevation="Elevation"
                Height="@Height">
             <MCardTitle Class="@HeaderClass" Style="@HeaderStyle">
-                @Title
+                @if (TitleContent != null)
+                {
+                    @TitleContent
+                }
+                else
+                {
+                    @Title
+                }
                 <MSpacer></MSpacer>
-                <MButton Icon OnClick="HandleOnCancel">
-                    <MIcon>mdi-close</MIcon>
-                </MButton>
+                @if (CloseContent != null)
+                {
+                    @CloseContent(HandleOnCancel)
+                }
+                else
+                {
+                    <MButton Icon OnClick="HandleOnCancel">
+                        <MIcon>mdi-close</MIcon>
+                    </MButton>
+                }
             </MCardTitle>
 
             @if (!HideTitleDivider)
