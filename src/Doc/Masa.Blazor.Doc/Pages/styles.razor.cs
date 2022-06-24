@@ -23,11 +23,8 @@ namespace Masa.Blazor.Doc.Pages
         [Parameter]
         public string Name { get; set; }
 
-        [CascadingParameter]
-        public bool IsChinese { get; set; }
-
         [Inject]
-        public I18nConfig I18nConfig { get; set; }
+        public I18n I18n { get; set; }
 
         [Inject]
         public DemoService Service { get; set; }
@@ -44,15 +41,15 @@ namespace Masa.Blazor.Doc.Pages
                 Name = Name.Split("#")[0];
             }
 
-            Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
+            Service.ChangeLanguage(I18n.Language ?? CultureInfo.CurrentCulture.Name);
             _demoComponent = await Service.GetStyleAsync(Name);
             if (_demoComponent is null)
                 this.ThrowNotFoundException($"Style name:{Name} not found");
 
             var demos = _demoComponent.DemoList?
-                .Where(x => !x.Debug && !x.Docs.HasValue)
-                .OrderBy(x => x.Order)
-                .ThenBy(r => r.Name) ?? Enumerable.Empty<DemoItemModel>();
+                                      .Where(x => !x.Debug && !x.Docs.HasValue)
+                                      .OrderBy(x => x.Order)
+                                      .ThenBy(r => r.Name) ?? Enumerable.Empty<DemoItemModel>();
             if (demos is null)
                 this.ThrowNotFoundException($"Style name:{Name} demoList not found");
 

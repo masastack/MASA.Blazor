@@ -10,7 +10,7 @@ namespace Masa.Blazor.Doc.Pages
     {
         private string _previousPath;
 
-        private string Path => $"{Category}/{FileName}.{I18nConfig.Language ?? System.Globalization.CultureInfo.CurrentCulture.Name}";
+        private string Path => $"{Category}/{FileName}.{I18n.Language ?? System.Globalization.CultureInfo.CurrentCulture.Name}";
 
         private DocFileModel File { get; set; }
 
@@ -18,13 +18,13 @@ namespace Masa.Blazor.Doc.Pages
         public bool IsChinese { get; set; }
 
         [Inject]
-        public I18nConfig I18nConfig { get; set; }
-
-        [Inject]
         private NavigationManager NavigationManager { get; set; }
 
         [Inject]
         private IPrismHighlighter PrismHighlighter { get; set; }
+        
+        [Inject]
+        private I18n I18n { get; set; }
 
         [Parameter]
         public string Category { get; set; }

@@ -20,7 +20,7 @@ namespace Masa.Blazor.Doc.Components
         public NavigationManager NavigationManager { get; set; }
 
         [Inject]
-        public I18nConfig I18nConfig { get; set; }
+        public I18n I18n { get; set; }
 
         [CascadingParameter]
         public bool IsChinese { get; set; }
@@ -32,8 +32,9 @@ namespace Masa.Blazor.Doc.Components
 
         protected override async Task OnParametersSetAsync()
         {
-            base.OnParametersSet();
-            DemoService.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
+            await base.OnParametersSetAsync();
+
+            DemoService.ChangeLanguage(I18n.Language ?? CultureInfo.CurrentCulture.Name);
             var menus = await DemoService.GetMenuAsync();
             _menuItems.Clear();
 

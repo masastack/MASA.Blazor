@@ -35,9 +35,6 @@ namespace Masa.Blazor.Doc.Pages
         public bool IsChinese { get; set; }
 
         [Inject]
-        public I18nConfig I18nConfig { get; set; }
-
-        [Inject]
         public IJSRuntime Js { get; set; }
 
         [Inject]
@@ -63,7 +60,7 @@ namespace Masa.Blazor.Doc.Pages
                 Name = Name.Split("#")[0];
             }
 
-            Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
+            Service.ChangeLanguage(I18n.Language ?? CultureInfo.CurrentCulture.Name);
             _demoComponent = await Service.GetComponentAsync(Name);
             if (_demoComponent is null)
                 this.ThrowNotFoundException($"Component name: {Name} not found");

@@ -172,16 +172,16 @@ namespace Masa.Blazor.Doc.Pages
         };
 
         [Inject]
-        public I18nConfig I18nConfig { get; set; }
+        public I18n I18n { get; set; }
 
-        [Parameter]
-        public string ApiName { get; set; }
+        [Inject]
+        public DemoService Service { get; set; }
 
         [CascadingParameter(Name = "Lang")]
         public bool IsChinese { get; set; }
 
-        [Inject]
-        public DemoService Service { get; set; }
+        [Parameter]
+        public string ApiName { get; set; }
 
         private ApiModel _api;
 
@@ -194,7 +194,7 @@ namespace Masa.Blazor.Doc.Pages
 
             ApiName = StandardApiNames.FirstOrDefault(api => api.Equals(ApiName, StringComparison.OrdinalIgnoreCase));
 
-            var lang = I18nConfig.Language ?? CultureInfo.CurrentCulture.Name;
+            var lang = I18n.Language ?? CultureInfo.CurrentCulture.Name;
             var apiUrl = $"_content/Masa.Blazor.Doc/docs/api/{ApiName}.{lang}.json";
             _api = await Service.GetApiAsync(apiUrl);
         }

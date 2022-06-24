@@ -24,9 +24,6 @@ public partial class Toc : OwningComponentBase<DemoService>
     public I18n I18n { get; set; }
 
     [Inject]
-    public I18nConfig I18nConfig { get; set; }
-
-    [Inject]
     public IJSRuntime Js { get; set; }
 
     [Inject]
@@ -124,7 +121,7 @@ public partial class Toc : OwningComponentBase<DemoService>
         }
 
         ActiveItem = null;
-        Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
+        Service.ChangeLanguage(I18n.Language ?? CultureInfo.CurrentCulture.Name);
         Items = await Service.GetTitlesAsync(NavigationManager.Uri);
     }
 

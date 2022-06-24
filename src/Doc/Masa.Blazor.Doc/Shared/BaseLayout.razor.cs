@@ -48,9 +48,6 @@ namespace Masa.Blazor.Doc.Shared
         public NavigationManager Navigation { get; set; }
 
         [Inject]
-        public I18nConfig I18nConfig { get; set; }
-
-        [Inject]
         public MasaBlazor MasaBlazor { get; set; }
 
         public bool IsChinese { get; set; }
@@ -74,7 +71,7 @@ namespace Masa.Blazor.Doc.Shared
 
             ChangeLanguage(lang);
 
-            I18nConfig.Language = lang;
+            I18n.SetLang(lang);
         }
 
         private void ChangeLanguage(string lang)
@@ -84,7 +81,7 @@ namespace Masa.Blazor.Doc.Shared
 
         protected override void OnInitialized()
         {
-            string lang = I18nConfig.Language ?? CultureInfo.CurrentCulture.Name;
+            string lang = I18n.Language ?? CultureInfo.CurrentCulture.Name;
 
             IsChinese = lang == "zh-CN";
 

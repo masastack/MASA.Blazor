@@ -58,7 +58,7 @@
 
         @if (PropsList.Any() || EventsList.Any() || ContentsList.Any() || MiscList.Any())
         {
-            var lang = I18nConfig.Language ?? CultureInfo.CurrentCulture.Name;
+            var lang = I18n.Language ?? CultureInfo.CurrentCulture.Name;
             var example = DemoItemModel.GenerateExample(lang);
 
             <SectionContent Title="@example.Title" Id="examples" Level="2" IsAnchor>

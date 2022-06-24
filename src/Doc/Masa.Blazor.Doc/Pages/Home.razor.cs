@@ -7,33 +7,30 @@ namespace Masa.Blazor.Doc.Pages
 {
     public partial class Home
     {
-        private int _onboarding = 0;
-        private int _length = 1;
-
         [CascadingParameter]
         public BaseLayout BaseLayout { get; set; }
 
         [Inject]
-        public IJSRuntime JSRuntime { get; set; } = default!;
+        public IJSRuntime JsRuntime { get; set; } = default!;
 
-        [CascadingParameter(Name = "Lang")]
-        public bool IsChinese { get; set; }
+        private int _onBoarding = 0;
+        private int _length = 1;
 
-        public StringNumber OnBoarding
+        private StringNumber OnBoarding
         {
-            get => _onboarding;
-            set => _onboarding = value.AsT1;
+            get => _onBoarding;
+            set => _onBoarding = value.AsT1;
         }
 
         private async Task Toggle(string url)
         {
             if (!string.IsNullOrWhiteSpace(url))
             {
-                await JSRuntime.InvokeVoidAsync("window.open", url);
+                await JsRuntime.InvokeVoidAsync("window.open", url);
             }
         }
 
-        public string T(string key)
+        private string T(string key)
         {
             var content = BaseLayout.T(key);
             return content;
