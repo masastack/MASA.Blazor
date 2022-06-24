@@ -1401,6 +1401,35 @@
       },
       {
         "Order": 0,
+        "Title": "MDragZone",
+        "FullTitle": "MDragZone",
+        "Type": "menuItem",
+        "Url": "api/mdragzone",
+        "Contents": [
+          {
+            "Id": "section-292649107",
+            "Title": "组件页面",
+            "Level": 0
+          },
+          {
+            "Id": "section-3122241",
+            "Title": "属性",
+            "Level": 0
+          },
+          {
+            "Id": "section-3374707",
+            "Title": "插槽",
+            "Level": 0
+          },
+          {
+            "Id": "section-2654231",
+            "Title": "事件",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
         "Title": "MECharts",
         "FullTitle": "MECharts",
         "Type": "menuItem",
@@ -4342,6 +4371,15 @@
         "Type": "menuItem",
         "Url": "components/dividers",
         "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Dividers.svg",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "DragZone",
+        "SubTitle": "拖放",
+        "FullTitle": "DragZone (拖放)",
+        "Type": "menuItem",
+        "Url": "components/dragzone",
         "Children": []
       },
       {

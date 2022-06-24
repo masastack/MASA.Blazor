@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8234673+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.725483+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -187,7 +187,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8254637+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.726483+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -219,7 +219,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8284572+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7284829+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -318,7 +318,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8304533+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.729483+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -394,7 +394,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8334473+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.730483+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -483,7 +483,7 @@
       "SubComponents": "\n<ul>\n<li><code>MAppBarNavIcon</code>：A stylized icon button component created specifically for use with <a href=\"/components/toolbars\">MToolbar</a> and <code>MAppBar</code>. The hamburger menu is displayed on the left side of the toolbar, which is usually used to control the status of the navigation drawer. The default slot can be used to customize the icons and functions of this component.</li>\n<li><code>MAppBarTitle</code>：The modified <a href=\"/components/toolbars\">MToolbarTitle</a> component is used in conjunction with the <strong>shrinkonscroll</strong> attribute. On the small screen, <strong>MToolbarTitle</strong>\nWill be truncated, but this component uses absolute positioning when expanding to make its contents visible. We do not recommend that you use the <code>MAppbarTitle</code> component without using the <strong>shrinkonscroll</strong> attribute. It's really because the resize event was added to this component and a lot of additional calculations were done.</li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning-->\n<p>When <code>MButton</code> with <strong>icon</strong> attribute is used inside <code>MToolbar</code> and <code>MAppbar</code>, they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap the buttons in any container, such as <code>div</code>, you need to apply a negative margin to the container in order to align them correctly.</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8384372+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7334831+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -636,7 +636,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8404332+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.734483+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -713,7 +713,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning-->\n<p>When 'MButton' with 'icon' prop is used inside 'MToolbar' and 'MAppbar', they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap your buttons in any container, such as' div ', you need to apply a negative margin to the container for proper alignment.</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8454232+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7364829+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -866,7 +866,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8464212+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7374831+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1018,7 +1018,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBottomSheet\">MBottomSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8494152+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7394829+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1106,7 +1106,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>By default <code>MBreadcrumbs</code> will disable the linkage with router. You can enable the feature by using *<em>Linkage</em> prop.</p>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8524093+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7404828+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1195,7 +1195,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>MButton</code> is the only component that behaves differently when using the <strong>Dark</strong> prop. Normally components use the <strong>Dark</strong> prop to denote that they have a dark colored background and need their text to be white. While this will work\nfor <code>MButton</code>, it is advised to only use the prop when the button <strong>IS ON</strong> a colored background due to the disabled state\nblending in with white backgrounds. If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8583972+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7424829+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1361,7 +1361,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "SubComponents": "\n<ul>\n<li><code>MCardActions</code>:A container used to place actions for cards, such as [MButton] (/components/buttons) or [MMenu] (/components/menu). Use a special margin on the button at the same time\nSo that they match other card content areas.</li>\n<li><code>MCardSubtitle</code>:Provide default <strong>font size</strong> and <strong>fill</strong> for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n<li><code>MCardText</code>:It is mainly used for <strong>text content</strong> in cards. Apply padding to the text and reduce its font size to. 875rem.</li>\n<li><code>MCardTitle</code>:Provide default font size and padding for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.862389+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7454829+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1515,7 +1515,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8683771+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7474829+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1702,7 +1702,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8733673+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7504829+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1833,7 +1833,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8753959+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7524827+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1916,12 +1916,138 @@
     "FullTitle": "Dividers"
   },
   {
+    "Desc": "<p>The <code>MDragZone</code> component is based on <a href=\"https://github.com/SortableJS/Sortable\">Sorttable.js</a> to implement drag and drop functionality</p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MDragZone\">MDragZone</a></li>\n</ul>\n<!--alert:info-->\n<p>You need to reference the package of Sorttable.js before using it ：\n<br />\n<code>&lt;script src=&quot;https://cdn.masastack.com/npm/sortable/Sortable.min.js&quot;&gt;&lt;/script&gt;</code>.</p>\n<!--/alert:info-->\n"
+    },
+    "LastWriteTime": "2022-06-21T18:26:47.3245089+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "<p>Drag and drop components and dom objects.</p>\n",
+        "Code": "<style>\r\n    .parent {\r\n        background-color: #eee;\r\n        min-height: 40px;\r\n        padding: 5px 0 10px 0\r\n    }\r\n\r\n    .item {\r\n        margin: 5px;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n\r\n    .white-color {\r\n        background-color: #ffffff;\r\n    }\r\n</style>\r\n<MContainer>\r\n    <MRow>\r\n        <MCol Cols=12>\r\n            <MDragZone Class=\"parent\">\r\n                <MDragItem>\r\n                    <div class=\"white-color item\">item1.1</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"white-color item\">item1.2</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"white-color item\">item1.3</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"white-color item\">item1.4</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"white-color item\">item1.5</div>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>",
+        "Type": "Demos.Components.DragZone.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 1,
+        "Name": "group",
+        "Title": "Group",
+        "Description": "<p>Drag area name.</p>\n",
+        "Code": "<style>\r\n    .group-item {\r\n        margin: 5px;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n</style>\r\n\r\n<MDragZone Group=\"group_example\">\r\n    <MDragItem>\r\n        <div class=\"group-item\">item1</div>\r\n    </MDragItem>\r\n    <MDragItem>\r\n        <div class=\"group-item\">item2</div>\r\n    </MDragItem>\r\n    <MDragItem>\r\n        <div class=\"group-item\">item3</div>\r\n    </MDragItem>\r\n    <MDragItem>\r\n        <div class=\"group-item\">item4</div>\r\n    </MDragItem>\r\n    <MDragItem>\r\n        <div class=\"group-item\">item4</div>\r\n    </MDragItem>\r\n</MDragZone>",
+        "Type": "Demos.Components.DragZone.props.Group",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 1,
+        "Name": "options",
+        "Title": "Options",
+        "Description": "<p>Parameter configuration.</p>\n",
+        "Code": "<style>\r\n    .config-item {\r\n        margin: 5px;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n</style>\r\n\r\n<MDragZone Options=SetOptions>\r\n    <MDragItem>\r\n        <div class=\"config-item\">item1</div>\r\n    </MDragItem>\r\n    <MDragItem>\r\n        <div class=\"config-item\">item2</div>\r\n    </MDragItem>\r\n    <MDragItem>\r\n        <div class=\"config-item\">item3</div>\r\n    </MDragItem>\r\n    <MDragItem>\r\n        <div class=\"config-item\">item4</div>\r\n    </MDragItem>\r\n    <MDragItem>\r\n        <div class=\"config-item\">item5</div>\r\n    </MDragItem>\r\n</MDragZone>\r\n\r\n@code {\r\n\r\n    private void SetOptions(SorttableOptions options)\r\n    {\r\n        options.Group = \"group_onconfigure\";\r\n    }\r\n}",
+        "Type": "Demos.Components.DragZone.props.Options",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 1,
+        "Name": "pull",
+        "Title": "Pull",
+        "Description": "<p>Drag configration, <code>true</code> is enable drag, <code>false</code> is disable drag, <code>clone</code> is clone the dragged element .</p>\n",
+        "Code": "<style>\r\n    .pull-item {\r\n        margin: 5px;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n</style>\r\n\r\n<MContainer>\r\n    <MRow>\r\n        <MCol Cols=6>\r\n            <div>enable drag</div>\r\n            <MDragZone Group=\"pull_example\" Pull=\"true\">\r\n                <MDragItem>\r\n                    <div class=\"pull-item\">item1.1</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"pull-item\">item1.2</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"pull-item\">item1.3</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"pull-item\">item1.4</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"pull-item\">item1.5</div>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n        <MCol Cols=6>\r\n            <div>disable drag</div>\r\n            <MDragZone Group=\"pull_example\" Pull=\"false\">\r\n                <MDragItem>\r\n                    <div class=\"pull-item\">item2.1</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"pull-item\">item2.2</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"pull-item\">item2.3</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"pull-item\">item2.4</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"pull-item\">item2.5</div>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>",
+        "Type": "Demos.Components.DragZone.props.Pull",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 1,
+        "Name": "put",
+        "Title": "Put",
+        "Description": "<p>Drop configuration: <code>true</code> is enable drop, <code>false</code> is disabled drop, <code>group1,group2</code> allows drag area's elements to drop.</p>\n",
+        "Code": "<style>\r\n    .put-item {\r\n        margin: 5px;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n</style>\r\n\r\n<MContainer>\r\n    <MRow>\r\n        <MCol Cols=6>\r\n            <div>enable drop</div>\r\n            <MDragZone Group=\"put_example\" Put=\"true\">\r\n                <MDragItem>\r\n                    <div class=\"put-item\">item1-1</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"put-item\">item1-2</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"put-item\">item1-3</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"put-item\">item1-4</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"put-item\">item1-5</div>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n        <MCol Cols=6>\r\n            <div>disable drop</div>\r\n            <MDragZone Group=\"put_example\" Put=\"false\">\r\n                <MDragItem>\r\n                    <div class=\"put-item\">item2.1</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"put-item\">item2.2</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"put-item\">item2.3</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"put-item\">item2.4</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"put-item\">item2.5</div>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>",
+        "Type": "Demos.Components.DragZone.props.Put",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 1,
+        "Name": "sort",
+        "Title": "Sort",
+        "Description": "<p>Whether child elements can be sorted.</p>\n",
+        "Code": "<style>\r\n    .sort-item {\r\n        margin: 5px;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n</style>\r\n\r\n<MContainer>\r\n    <MRow>\r\n        <MCol>\r\n            <div>enable sort</div>\r\n            <MDragZone Group=\"sort_example\" Sort=true>\r\n                <MDragItem>\r\n                    <div class=\"sort-item\">item1</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"sort-item\">item2</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"sort-item\">item3</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"sort-item\">item4</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"sort-item\">item5</div>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n        <MCol>\r\n            <div>disable sort</div>\r\n            <MDragZone  Group=\"sort_example\" Sort=false>\r\n                <MDragItem>\r\n                    <div class=\"sort-item\">item2.1</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"sort-item\">item2.2</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"sort-item\">item2.3</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"sort-item\">item2.4</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"sort-item\">item2.5</div>\r\n                </MDragItem>\r\n            </MDragZone>\r\n\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n@code {\r\n    private void EnableSort(SorttableOptions options)\r\n    {\r\n        options.Group = \"group_enable\";\r\n        options.Sort = true;\r\n    }\r\n\r\n    private void DisableSort(SorttableOptions options)\r\n    {\r\n        options.Group = \"group_disable\";\r\n        options.Sort = false;\r\n    }\r\n}",
+        "Type": "Demos.Components.DragZone.props.Sort",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 2,
+        "Name": "clone",
+        "Title": "Clone",
+        "Description": "<p>Selected element clone drag and drop.</p>\n",
+        "Code": "<style>\r\n    .clone-parent {\r\n        background-color: #eee;\r\n        min-height: 40px;\r\n        padding: 5px 0 10px 0\r\n    }\r\n\r\n    .clone-item {\r\n        margin: 5px;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n\r\n    .clone-white-color {\r\n        background-color: #ffffff;\r\n    }\r\n\r\n    .clone-blue-color {\r\n        background-color: #5CBBF6;\r\n    }\r\n\r\n</style>\r\n\r\n<MButton OnClick=@(()=>{ AddData(mDragZone1,1); })> container1 add</MButton>\r\n<MButton OnClick=@(()=>{ AddData(mDragZone2,2); })> container2 add</MButton>\r\n<MContainer>\r\n    <MRow>\r\n        <MCol Cols=6>\r\n            <MDragZone Group=\"group_oninit\" Pull=\"clone\" @ref=mDragZone1>\r\n                <MDragItem>\r\n                    <MCard Class=\"clone-item\">\r\n                        <MCardTitle>item1 init title1</MCardTitle>\r\n                        <MCardText>item1 init text1</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <MCard Class=\"clone-item\">\r\n                        <MCardTitle>item1 init title2</MCardTitle>\r\n                        <MCardText>tem1 init text2</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n        <MCol Cols=6>\r\n            <MDragZone Group=\"group_oninit\" Pull=\"clone\" @ref=mDragZone2>\r\n                <MDragItem>\r\n                    <MCard Class=\"clone-item\">\r\n                        <MCardTitle>item2 init title1</MCardTitle>\r\n                        <MCardText>item1 init text1</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <MCard Class=\"clone-item\">\r\n                        <MCardTitle>item2 init title2</MCardTitle>\r\n                        <MCardText>tem2 init text2</MCardText>\r\n                    </MCard>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n\r\n@code {\r\n    private MDragZone mDragZone1;\r\n    private MDragZone mDragZone2;\r\n    private int total = 3;\r\n\r\n    private void AddData(MDragZone container, int index)\r\n    {\r\n        var insert = new MDragItem\r\n            {\r\n                Id = Guid.NewGuid().ToString(\"N\"),\r\n                ChildContent = CreateCard(container, \"-\", index, total++)\r\n            };\r\n\r\n        container.Add(insert);\r\n        StateHasChanged();\r\n    }\r\n\r\n    private RenderFragment CreateCard(MDragZone container, string split, int containerIndex, int index) => builder =>\r\n          {\r\n              int i = 0;\r\n              builder.OpenComponent<MCard>(i++);\r\n              builder.AddAttribute(i++, \"IsDark\", container.IsDark);\r\n              builder.AddAttribute(i++, \"Class\", \"clone-item\");\r\n              builder.AddAttribute(i++, \"ChildContent\", CreateComponent(\"-\", containerIndex, index));\r\n              builder.CloseComponent();\r\n          };\r\n\r\n    private RenderFragment CreateComponent(string split, int containerIndex, int index) => builder =>\r\n         {\r\n             int i = 0;\r\n             builder.OpenComponent<MCardTitle>(i++);\r\n             builder.AddAttribute(i++, \"ChildContent\", CreateText($\"item {containerIndex} title {split}{index}\"));\r\n             builder.CloseComponent();\r\n\r\n             builder.OpenComponent<MCardText>(i++);\r\n             builder.AddAttribute(i++, \"ChildContent\", CreateText($\"item {containerIndex} text {split}{index}\"));\r\n             builder.CloseComponent();\r\n         };\r\n\r\n    private RenderFragment CreateText(string name) => builder =>\r\n        {\r\n            builder.AddContent(0, $\"{name}\");\r\n        };\r\n}",
+        "Type": "Demos.Components.DragZone.misc.Clone",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 3,
+        "Name": "filter",
+        "Title": "Filter",
+        "Description": "<p>Filter the elements, those that do not match cannot be dragged and dropped.</p>\n",
+        "Code": "<style>\r\n    div.ignore-drag {\r\n        background-color: red\r\n    }\r\n\r\n    .filter-parent {\r\n        background-color: #eee;\r\n        min-height: 40px;\r\n        padding: 5px 0 10px 0\r\n    }\r\n\r\n    .filter-item {\r\n        margin: 5px;\r\n        position: relative;\r\n        display: block;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n\r\n    .filter-white-color {\r\n        background-color: #ffffff;\r\n    }\r\n</style>\r\n<MContainer>\r\n    <MRow>\r\n        <MCol Cols=12>\r\n            <MDragZone Options=SetOptions Class=\"filter-parent\">\r\n                <MDragItem>\r\n                    <div class=\"filter-white-color filter-item\">item1.1</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"filter-white-color filter-item ignore-drag\">item1.2</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"filter-white-color filter-item\">item1.3</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"filter-white-color filter-item ignore-drag\">item1.4</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"filter-white-color filter-item\">item1.5</div>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n@code {\r\n    private void SetOptions(SorttableOptions options)\r\n    {\r\n        options.Group = \"group_f1\";\r\n        options.Filter = \".ignore-drag\";\r\n    }\r\n}",
+        "Type": "Demos.Components.DragZone.misc.Filter",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 1,
+        "Name": "multiyZone",
+        "Title": "MultiyZone",
+        "Description": "<p>Drag and drop across multiple regions.</p>\n",
+        "Code": "<style>\r\n    .multi-parent {\r\n        background-color: #eee;\r\n        min-height: 40px;\r\n        padding: 5px 0 10px 0\r\n    }\r\n\r\n    .multi-item {\r\n        margin: 5px;\r\n        position: relative;\r\n        display: block;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n\r\n    .multi-white-color {\r\n        background-color: #ffffff;\r\n    }\r\n\r\n    .multi-blue-color {\r\n        background-color: #5CBBF6;\r\n    }\r\n\r\n</style>\r\n<MContainer>\r\n    <MRow>\r\n        <MCol Cols=6>\r\n            <MDragZone Group=\"multiy_example\" Class=\"parent\">\r\n                <MDragItem>\r\n                    <div class=\"multi-white-color multi-item\">item1.1</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"multi-white-color multi-item\">item1.2</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"multi-white-color multi-item\">item1.3</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"multi-white-color multi-item\">item1.4</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"multi-white-color multi-item\">item1.5</div>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n        <MCol Cols=6>\r\n            <MDragZone Group=\"multiy_example\" Class=\"parent\">\r\n                <MDragItem>\r\n                    <div class=\"multi-item multi-blue-color\">item2.1</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"multi-item multi-blue-color\">item2.2</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"multi-item multi-blue-color\">item2.3</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"multi-item multi-blue-color\">item2.4</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"multi-item multi-blue-color\">item2.5</div>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>",
+        "Type": "Demos.Components.DragZone.misc.MultiyZone",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 4,
+        "Name": "nested",
+        "Title": "Nested",
+        "Description": "<p>Nested drag and drop.</p>\n",
+        "Code": "<style>\r\n    .nest-parent {\r\n        background-color: #eee;\r\n        min-height: 40px;\r\n        padding: 5px 0 10px 0\r\n    }\r\n\r\n    .nest-item {\r\n        margin: 5px;\r\n        padding: 0.75rem 1.25rem;\r\n        margin-bottom: -1px;\r\n        border: 1px solid rgba(0,0,0,.125);\r\n    }\r\n\r\n    .nest-item-0 {\r\n        background-color: #eee;\r\n    }\r\n\r\n    .nest-item-2 {\r\n        background-color: #FB8C00;\r\n    }\r\n\r\n    .nest-item-3 {\r\n        background-color: #F57C00;\r\n    }\r\n\r\n    .nest-item-1 {\r\n        background-color: #FFA726;\r\n    }\r\n</style>\r\n<MContainer>\r\n    <MRow>\r\n        <MCol Cols=12>\r\n            <MDragZone Options=SetOptions Class=\"nest-parent nest-item nest-item-0\">\r\n                <MDragItem>\r\n                    <div class=\"item-1 item\">item1.1</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <MDragZone Options=SetOptions Class=\"nest-parent nest-item nest-item-1\">\r\n                        <MDragItem>\r\n                            <div class=\"nest-item-2 nest-item\">item2.1</div>\r\n                        </MDragItem>\r\n                        <MDragItem>\r\n                            <div class=\"nest-item-2 nest-item\">item2.2</div>\r\n                        </MDragItem>\r\n                        <MDragItem>\r\n                            <div class=\"nest-item-2 nest-item\">item2.3</div>\r\n                        </MDragItem>\r\n                        <MDragItem>\r\n                            <MDragZone Options=SetOptions Class=\"nest-parent nest-item nest-item-2\">\r\n                                <MDragItem>\r\n                                    <div class=\"nest-item-3 nest-item\">item3.1</div>\r\n                                </MDragItem>\r\n                                <MDragItem>\r\n                                    <div class=\"nest-item-3 nest-item\">item3.2</div>\r\n                                </MDragItem>\r\n                                <MDragItem>\r\n                                    <div class=\"nest-item-3 nest-item\">item3.3</div>\r\n                                </MDragItem>\r\n                                <MDragItem>\r\n                                    <div class=\"nest-item-3 nest-item\">item3.4</div>\r\n                                </MDragItem>\r\n                            </MDragZone>\r\n                        </MDragItem>\r\n                    </MDragZone>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"nest-item-1 nest-item\">item1.3</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"nest-item-1 nest-item\">item1.4</div>\r\n                </MDragItem>\r\n                <MDragItem>\r\n                    <div class=\"nest-item-1 nest-item\">item1.5</div>\r\n                </MDragItem>\r\n            </MDragZone>\r\n        </MCol>\r\n    </MRow>\r\n</MContainer>\r\n\r\n@code {\r\n    private void SetOptions(SorttableOptions options)\r\n    {\r\n        options.Group = \"group_nested\";\r\n        options.FallbackOnBody = true;\r\n        options.SwapThreshold = 0.65f;\r\n    }\r\n}",
+        "Type": "Demos.Components.DragZone.misc.Nested",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Title": "DragZone",
+    "Type": "DragZone",
+    "FullTitle": "DragZone"
+  },
+  {
     "Desc": "<p><a href=\"https://echarts.apache.org/examples/en/index.html\">ECharts</a></p>\n",
     "Order": 0,
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n<!--alert:info-->\n<p>You need to reference the package of ECharts before using it:\n<br />\n<code>&lt;script src=&quot;https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js&quot;&gt;&lt;/script&gt;</code>.</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8773995+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7554829+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1973,7 +2099,7 @@
       "JS file": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8803866+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7574828+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2099,7 +2225,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MErrorHandler\">MErrorHandler</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8823887+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7584828+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2159,7 +2285,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8863674+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7604827+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2291,7 +2417,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MSpeedDial\">MSpeedDial</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8883624+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.761483+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2367,7 +2493,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8903598+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7624828+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2444,7 +2570,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:error--> \n<p>When using objects for the <strong>Items</strong> prop, you must associate <strong>ItemText</strong> and <strong>ItemValue</strong> with existing properties on your objects. These values are defaulted to  <strong>Text</strong> and <strong>Value</strong> and can be changed.</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p>The <strong>Auto</strong> property of <strong>MenuProps</strong> is only supported for the default input style.</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>Browser autocomplete is set to off by default, may vary by browser and may be ignored.  <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8933527+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7647122+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2554,7 +2680,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8953507+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7667166+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2619,7 +2745,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.8983445+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7677168+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2706,7 +2832,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9023392+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.770475+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2849,7 +2975,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9053296+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7714753+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2948,7 +3074,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOtpInput\">MOtpInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9073247+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.77288+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3013,7 +3139,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadioGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9093255+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7738846+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3090,7 +3216,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9113191+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7748842+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3179,7 +3305,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>The default setting of browser auto completion is off, which may be changed or ignored by different browsers. <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p>The <strong>Auto</strong> attribute of <strong>menupprops</strong> only supports the default input style.</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>When using an object as the attribute of <strong>items</strong>, you must use <strong>itemtext</strong> and <strong>itemvalue</strong> to associate with the incoming object. These values are <strong>text</strong> and <strong>value</strong> by default and can be changed.</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9153257+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7778844+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3321,7 +3447,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9213043+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7808841+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3508,7 +3634,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.923294+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7818842+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3607,7 +3733,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9362694+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7888841+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3739,7 +3865,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9322682+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7868836+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4039,7 +4165,7 @@
       "Helper Classes": "\n<p><strong>FillHeight</strong> applies <code>height: 100%</code> to an element. When applied to <code>MContainer</code> it will also <code>align-items: center</code>.</p>\n",
       "Caveats": "\n<!--alert:info--> \n<p>1.x grid system has been deprecated in favor of the 2.x grid system.</p>\n<!--alert:info--> \n<!--alert:info--> \n<p>Breakpoints based props on grid components work in an <code>andUp</code> fashion. With this in mind the <strong>xs</strong> breakpoint is assumed and has been removed from the props context. This applies to <strong>offset</strong>、<strong>justify</strong>、<strong>align</strong> and single breakpoint props on <code>MCol</code>.</p>\n<ul>\n<li>Props like <strong>justify-sm</strong> and <strong>justify-md</strong> exist,but <strong>justify-xs</strong> does not, it is simply <strong>justify</strong>。</li>\n<li>The <strong>xs</strong> prop does not exist on <code>MCol</code>. The equivalent to this is the <strong>cols</strong> prop.</li>\n</ul>\n<!--alert:info--> \n<!--alert:info--> \n<p>When using the grid system with IE11 you will need to set an explicit <code>height</code> as <code>min-height</code> will not suffice and cause undesired results.</p>\n<!--alert:info--> \n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9422552+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7928843+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4270,7 +4396,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9452495+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7948838+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4358,7 +4484,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9472469+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7968846+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4457,7 +4583,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9502116+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7988844+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4545,7 +4671,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9522367+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.7998834+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4632,7 +4758,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9552011+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8028841+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4730,7 +4856,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9582302+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8038838+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4817,7 +4943,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9601941+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8048836+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4882,7 +5008,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9621882+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.806884+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4971,7 +5097,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info--> \n<p>The MImage component uses the Intersect directive which requires a Polyfill for IE11 and Safari. If a browser that does not support this functionality is detected, the image will still load as normal.</p>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.965189+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.808884+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5070,7 +5196,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>If you want to find a list item with status, please check <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>。</p>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9711772+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8118842+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5281,7 +5407,7 @@
       "JS file": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.min.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MMarkdown\">MMarkdown</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9741634+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8138835+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5407,7 +5533,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9791615+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8168838+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5582,7 +5708,7 @@
     "OtherDocs": {
       "Caveats": "\n<!--alert:error-->\n<p>If you are using <code>MNavigationDrawer</code> with <strong>App</strong> property enabled, you don't need to use <strong>Absolute</strong> prop as in examples.</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p>The <strong>ExpandOnHover</strong> prop does not alter the content area of <strong>MMain</strong>. To have content area respond to <strong>ExpandOnHover</strong>, bind <strong>OnMiniVariantUpdate</strong> to a data prop.</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9831453+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8188841+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5714,7 +5840,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9851413+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.819884+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5801,7 +5927,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9871449+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.820884+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5889,7 +6015,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>Mdatepicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9941516+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8248843+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6132,7 +6258,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>MDatePicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:05.9971436+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8278841+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6275,7 +6401,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0021077+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8298834+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6449,7 +6575,7 @@
     "Desc": "<p>Display two data of the same type side by side.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-05-20T09:21:06.0041151+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8318825+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6501,7 +6627,7 @@
     "Desc": "<p>Append a button that provides copy feature to the content.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-05-20T09:21:06.0060999+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8328825+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6574,7 +6700,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-05-20T09:21:06.0090948+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8348841+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6681,7 +6807,7 @@
     "Desc": "<p>Image Captcha component</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-05-20T09:21:06.0110971+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8358835+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6732,7 +6858,7 @@
     "Desc": "<p>When requiring users to interact with the application, but without jumping to a new page and interrupting the user's\nworkflow, you can use <code>Modal</code> to create a new floating layer over the current page to get user feedback or display\ninformation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-05-20T09:21:06.0131222+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8368835+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6827,7 +6953,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-05-20T09:21:06.014118+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8378838+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6878,7 +7004,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-05-20T09:21:06.0161151+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8378838+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6941,7 +7067,7 @@
     "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>,<strong>Info</strong>,<strong>Warning</strong>, and <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays and also can customized content to fit almost any situation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-05-20T09:21:06.0200804+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8598835+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -7017,7 +7143,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0220748+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8618836+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7093,7 +7219,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0270932+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8648837+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7257,7 +7383,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0290818+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8658841+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -7366,7 +7492,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0310764+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8678828+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -7421,7 +7547,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0330451+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8688838+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7465,7 +7591,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0350407+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8698834+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7541,7 +7667,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0390409+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8758832+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7706,7 +7832,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0410361+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8778832+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7782,7 +7908,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0430353+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.878883+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7837,7 +7963,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n<li><a href=\"/api/MDataTableHeader\">MDataTableHeader</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0510092+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8848835+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8101,7 +8227,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0530041+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8858835+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8179,7 +8305,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p>When using the <strong>Dark</strong> prop and <strong>NOT</strong> providing a custom <strong>color</strong>, the <code>MTabs</code> component will default its color to white.</p>\n<!--alert:warning--> \n<!--alert:warning--> \n<p>When using <code>MTabItem</code>'s that contain required input fields you must use the <strong>eager</strong> prop in order to validate the required fields that are not yet visible.</p>\n<!--alert:warning--> \n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.05803+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8888836+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8377,7 +8503,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0619953+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8918836+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8509,7 +8635,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>In order to correctly position 'MTooltip', a position support (<code>top</code> | 'bottom <code>|' left</code> | 'right') is required.</p>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0629924+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8918836+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8562,7 +8688,7 @@
     "Desc": "<p>The MTreeview component is useful for displaying large amounts of nested data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-05-20T09:21:06.0699727+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8958835+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8760,7 +8886,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-05-20T09:21:06.0709784+08:00",
+    "LastWriteTime": "2022-06-10T10:04:40.8958835+08:00",
     "DemoList": [
       {
         "Order": 0,

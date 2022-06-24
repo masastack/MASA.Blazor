@@ -65,6 +65,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
             { "MDatePickerYears", new string[] { "Date pickers" } },
             { "MDialog", new string[] { "Dialogs" } },
             { "MDivider", new string[] { "Dividers" } },
+            { "MDragZone", new string[] { "DragZone" } },
             { "MECharts", new string[] { "ECharts" } },
             { "MEditor", new string[] { "Editor" } },
             { "MErrorHandler", new string[] { "Error handler" } },

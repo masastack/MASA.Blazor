@@ -1,0 +1,67 @@
+﻿<style>
+    .multi-parent {
+        background-color: #eee;
+        min-height: 40px;
+        padding: 5px 0 10px 0
+    }
+
+    .multi-item {
+        margin: 5px;
+        position: relative;
+        display: block;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: -1px;
+        border: 1px solid rgba(0,0,0,.125);
+    }
+
+    .multi-white-color {
+        background-color: #ffffff;
+    }
+
+    .multi-blue-color {
+        background-color: #5CBBF6;
+    }
+
+</style>
+<MContainer>
+    <MRow>
+        <MCol Cols=6>
+            <MDragZone Group="multiy_example" Class="parent">
+                <MDragItem>
+                    <div class="multi-white-color multi-item">item1.1</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-white-color multi-item">item1.2</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-white-color multi-item">item1.3</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-white-color multi-item">item1.4</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-white-color multi-item">item1.5</div>
+                </MDragItem>
+            </MDragZone>
+        </MCol>
+        <MCol Cols=6>
+            <MDragZone Group="multiy_example" Class="parent">
+                <MDragItem>
+                    <div class="multi-item multi-blue-color">item2.1</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-item multi-blue-color">item2.2</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-item multi-blue-color">item2.3</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-item multi-blue-color">item2.4</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="multi-item multi-blue-color">item2.5</div>
+                </MDragItem>
+            </MDragZone>
+        </MCol>
+    </MRow>
+</MContainer>
