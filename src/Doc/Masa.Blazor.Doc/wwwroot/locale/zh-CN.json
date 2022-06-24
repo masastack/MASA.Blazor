@@ -55,5 +55,9 @@
   "ViewSource": "查看源代码",
   "Contents": "目录",
   "SeniorSponsor": "高级赞助商",
-  "Required": "必填"
+  "Required": "必填",
+  "The Name field is required.": "字段名称必填。",
+  "The Email field is required.": "字段邮箱必填。",
+  "The Item field is required.": "字段Item必填。",
+  "You must agree to continue!": "你必须同意才可以继续操作后续步骤！"
 }
