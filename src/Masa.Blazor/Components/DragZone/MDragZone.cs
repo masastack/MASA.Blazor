@@ -51,7 +51,7 @@
         private SorttableOptions _options = new();
 
         /// <summary>
-        /// 元素被选中
+        /// element is choosing
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
@@ -63,7 +63,7 @@
         }
 
         /// <summary>
-        /// 元素未被选中的时候（从选中到未选中）
+        /// element state is from choosing change to unchoose
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
@@ -75,7 +75,7 @@
         }
 
         /// <summary>
-        /// 开始拖拽的时候
+        /// drag start
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
@@ -83,16 +83,12 @@
         {
             _isRender = false;
             DragDropService.DragItem = Value.FirstOrDefault(it => it.Id == args.ItemId);
-            if (DragDropService.DragItem.Value != args.OldIndex)
-            { 
-            
-            }
-                if (_options?.OnStart != null)
-                    _options.OnStart(args);
+            if (_options?.OnStart != null)
+                _options.OnStart(args);
         }
 
         /// <summary>        
-        ///  结束拖拽
+        /// drop end
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
@@ -106,7 +102,7 @@
         }
 
         /// <summary>
-        /// 元素从一个列表拖拽到另一个列表
+        /// element from other container add to a new different container
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
@@ -127,7 +123,7 @@
         }
 
         /// <summary>
-        /// 列表内元素顺序更新的时候触发
+        /// element sort is updating
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
@@ -136,12 +132,10 @@
             _isRender = true;
             if (_options?.OnUpdate != null)
                 _options.OnUpdate(args);
-
-            //Update(DragDropService.DragItem, args.OldIndex, args.NewIndex);
         }
 
         /// <summary>
-        /// 列表的任何更改都会触发
+        /// element sort is updated
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
@@ -156,7 +150,7 @@
         }
 
         /// <summary>
-        /// 元素从列表中移除进入另一个列表
+        /// element is removed from parent container
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
@@ -233,8 +227,8 @@
             {
                 _dotNetHelper = DotNetObjectReference.Create(this);
                 await _jsHelper.InvokeVoidAsync("init", _dotNetHelper, Id, _options.ToParameters());
-            }           
-            await base.OnAfterRenderAsync(firstRender);           
+            }
+            await base.OnAfterRenderAsync(firstRender);
         }
 
         protected override bool ShouldRender()
