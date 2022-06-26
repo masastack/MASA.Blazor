@@ -126,6 +126,12 @@ namespace Masa.Blazor.Presets
         [Parameter]
         public RenderFragment<(Func<MouseEventArgs, Task> Click, bool Loading)> CancelContent { get; set; }
 
+        [Parameter]
+        public RenderFragment TitleContent { get; set; }
+
+        [Parameter]
+        public RenderFragment<Func<MouseEventArgs, Task>> CloseContent { get; set; }
+
         #endregion
 
         private bool _saveLoading;

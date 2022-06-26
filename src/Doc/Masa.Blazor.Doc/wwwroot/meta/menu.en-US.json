@@ -448,6 +448,14 @@
       },
       {
         "Order": 0,
+        "Title": "DragZone",
+        "FullTitle": "DragZone",
+        "Type": "menuItem",
+        "Url": "components/dragzone",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "ECharts",
         "FullTitle": "ECharts",
         "Type": "menuItem",
@@ -2279,6 +2287,35 @@
         "FullTitle": "MDivider",
         "Type": "menuItem",
         "Url": "api/mdivider",
+        "Contents": [
+          {
+            "Id": "section-1559607740",
+            "Title": "Component Pages",
+            "Level": 0
+          },
+          {
+            "Id": "section-1029938464",
+            "Title": "Props",
+            "Level": 0
+          },
+          {
+            "Id": "section-444565322",
+            "Title": "Contents",
+            "Level": 0
+          },
+          {
+            "Id": "section-1613329801",
+            "Title": "Events",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
+        "Title": "MDragZone",
+        "FullTitle": "MDragZone",
+        "Type": "menuItem",
+        "Url": "api/mdragzone",
         "Contents": [
           {
             "Id": "section-1559607740",

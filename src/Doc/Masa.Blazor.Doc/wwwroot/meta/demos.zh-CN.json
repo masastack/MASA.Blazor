@@ -401,6 +401,23 @@
     ]
   },
   {
+    "Order": 17,
+    "Title": "拖放",
+    "FullTitle": "拖放",
+    "Type": "itemGroup",
+    "Children": [
+      {
+        "Order": 0,
+        "Title": "DragZone",
+        "SubTitle": "拖放",
+        "FullTitle": "DragZone (拖放)",
+        "Type": "menuItem",
+        "Url": "components/dragzone",
+        "Children": []
+      }
+    ]
+  },
+  {
     "Order": 18,
     "Title": "异常处理",
     "FullTitle": "异常处理",

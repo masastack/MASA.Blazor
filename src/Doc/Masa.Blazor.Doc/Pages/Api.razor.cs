@@ -67,6 +67,7 @@ public partial class Api
         "MDatePickerYears",
         "MDialog",
         "MDivider",
+        "MDragZone",
         "MECharts",
         "MEditor",
         "MErrorHandler",

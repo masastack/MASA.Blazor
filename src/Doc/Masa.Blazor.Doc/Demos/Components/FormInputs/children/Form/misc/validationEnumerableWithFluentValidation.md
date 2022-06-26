@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 4
 title:
   zh-CN: 验证集合(FluentValidation)
   en-US: Validation enumerable(FluentValidation)
