@@ -4,126 +4,108 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using System.Globalization;
 
-namespace Masa.Blazor.Doc.Shared
+namespace Masa.Blazor.Doc.Shared;
+
+public partial class BaseLayout : IDisposable
 {
-    public partial class BaseLayout : IDisposable
+    [Inject]
+    public I18n I18n { get; set; }
+
+    [Inject]
+    public NavigationManager Navigation { get; set; }
+
+    [Inject]
+    public MasaBlazor MasaBlazor { get; set; }
+        
+    private string _searchBorderColor = "#00000000";
+    private bool _isShowMiniLogo = true;
+    private StringNumber _selectTab = 0;
+
+    private string CultureIcon => $"{Culture}.png";
+
+    public StringNumber SelectTab
     {
-        private string _searchBorderColor = "#00000000";
-        private string _languageIcon;
-        private bool _isShowMiniLogo = true;
-        private StringNumber _selectTab = 0;
-
-        public StringNumber SelectTab
+        get
         {
-            get
+            var relativePath = Navigation.ToBaseRelativePath(Navigation.Uri);
+
+            if (relativePath.Equals("", StringComparison.OrdinalIgnoreCase) ||
+                relativePath.Equals("index.html", StringComparison.OrdinalIgnoreCase))
             {
-                var relativePath = Navigation.ToBaseRelativePath(Navigation.Uri);
-
-                if (relativePath.Equals("", StringComparison.OrdinalIgnoreCase) ||
-                    relativePath.Equals("index.html", StringComparison.OrdinalIgnoreCase))
-                {
-                    return 0;
-                }
-
-                if (relativePath.Equals("about/meet-the-team", StringComparison.OrdinalIgnoreCase))
-                {
-                    return 2;
-                }
-
-                return 1;
+                return 0;
             }
-            set
+
+            if (relativePath.Equals("about/meet-the-team", StringComparison.OrdinalIgnoreCase))
             {
-                if (value != null && value.AsT1 != 3 && value.AsT1 != 4)
-                {
-                    _selectTab = value;
-                }
+                return 2;
+            }
+
+            return 1;
+        }
+        set
+        {
+            if (value != null && value.AsT1 != 3 && value.AsT1 != 4)
+            {
+                _selectTab = value;
             }
         }
+    }
 
-        [Inject]
-        public I18n I18n { get; set; }
+    public bool Drawer { get; set; } = true;
 
-        [Inject]
-        public NavigationManager Navigation { get; set; }
+    public bool ShowSetting { get; set; }
 
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+    public bool Temporary { get; set; } = true;
+    
+    public string Culture { get; set; }
 
-        public bool IsChinese { get; set; }
+    public void UpdateNav(bool drawer, bool temporary = true)
+    {
+        Drawer = drawer;
+        Temporary = temporary;
+    }
 
-        public bool Drawer { get; set; } = true;
+    private void TurnLanguage()
+    {
+        Culture = Culture == "en-US" ? "zh-CN" : "en-US";
+        I18n.SetCulture(Culture);
+    }
 
-        public bool ShowSetting { get; set; }
+    protected override void OnInitialized()
+    {
+        Console.WriteLine($"{DateTime.Now.ToLongTimeString()} I18n.Language:{I18n.Culture} CurrentCulture:{CultureInfo.CurrentCulture.Name}");
+        
+        Culture = I18n.Culture ?? CultureInfo.CurrentCulture.Name;
+        Navigation.LocationChanged += OnLocationChanged;
+    }
 
-        public bool Temporary { get; set; } = true;
+    private void OnLocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        var isShowMiniLogo = _isShowMiniLogo;
 
-        public void UpdateNav(bool drawer, bool temporary = true)
+        if (e.Location == Navigation.BaseUri)
+            _isShowMiniLogo = true;
+        else
+            _isShowMiniLogo = false;
+
+        var selectTab = SelectTab;
+        if (e.Location.Contains("meet-the-team"))
+            SelectTab = 2;
+        else if (e.Location != Navigation.BaseUri)
+            SelectTab = 1;
+
+        if ((isShowMiniLogo != _isShowMiniLogo || selectTab != _selectTab) && MasaBlazor.Breakpoint.Mobile)
         {
-            Drawer = drawer;
-            Temporary = temporary;
+            _ = InvokeAsync(StateHasChanged);
         }
+    }
 
-        private void TurnLanguage()
-        {
-            IsChinese = !IsChinese;
-            var lang = IsChinese ? "zh-CN" : "en-US";
+    private void ShowDraw() => UpdateNav(true);
 
-            ChangeLanguage(lang);
+    private string T(string key) => I18n.T(key);
 
-            I18n.SetLang(lang);
-        }
-
-        private void ChangeLanguage(string lang)
-        {
-            _languageIcon = $"{lang}.png";
-        }
-
-        protected override void OnInitialized()
-        {
-            string lang = I18n.Language ?? CultureInfo.CurrentCulture.Name;
-
-            IsChinese = lang == "zh-CN";
-
-            ChangeLanguage(lang);
-
-            Navigation.LocationChanged += OnLocationChanged;
-        }
-
-        private void OnLocationChanged(object sender, LocationChangedEventArgs e)
-        {
-            var isShowMiniLogo = _isShowMiniLogo;
-
-            if (e.Location == Navigation.BaseUri)
-                _isShowMiniLogo = true;
-            else
-                _isShowMiniLogo = false;
-
-            var selectTab = SelectTab;
-            if (e.Location.Contains("meet-the-team"))
-                SelectTab = 2;
-            else if (e.Location != Navigation.BaseUri)
-                SelectTab = 1;
-
-            if ((isShowMiniLogo != _isShowMiniLogo || selectTab != _selectTab) && MasaBlazor.Breakpoint.Mobile)
-            {
-                _ = InvokeAsync(StateHasChanged);
-            }
-        }
-
-        private void ShowDraw()
-        {
-            UpdateNav(true);
-        }
-
-        public string T(string key)
-        {
-            return I18n.T(key);
-        }
-
-        public void Dispose()
-        {
-            Navigation.LocationChanged -= OnLocationChanged;
-        }
+    public void Dispose()
+    {
+        Navigation.LocationChanged -= OnLocationChanged;
     }
 }
