@@ -3,60 +3,59 @@ order: 5
 title: 国际化多语言 (i18n)
 ---
 
-MASA Blazor 未来将支持组件的语言国际化（i18n）。 让您在引导应用程序时，您可以使用 current 选项指定可用的区域和当前活动的区域。
+**MASA Blazor** 支持组件的语言国际化（i18n）。
 
 ## 语言支持
 
-目前MASA Blazor只支持简体中文、English，后续即将提供支持下列语言：
+支持下列语言：
 
-* **af** - Afrikaans (Afrikaans)
-* **ar** - Arabic (اللغة العربية)
+* **af-AZ** - Afrikaans (Afrikaans)
+* **ar-EG** - Arabic (اللغة العربية)
 * **az** - Azerbaijani (Azərbaycan)
-* **bg** - Bulgarian (български)
-* **ca** - Catalan (català)
+* **bg-BG** - Bulgarian (български)
+* **ca-ES** - Catalan (català)
 * **ckb** - Central Kurdish (کوردی)
-* **cs** - Czech (čeština)
-* **de** - German (Deutsch)
-* **el** - Greek (Ελληνικά)
-* **en** - English
-* **es** - Spanish (Español)
-* **et** - Estonian (eesti)
-* **fa** - Persian (فارسی)
-* **fi** - Finnish (suomi)
-* **fr** - French (Français)
-* **he** - Hebrew (עברית)
-* **hr** - Croatian (hrvatski jezik)
-* **hu** - Hungarian (magyar)
-* **id** - Indonesian (Indonesian)
-* **it** - Italian (Italiano)
-* **ja** - Japanese (日本語)
-* **ko** - Korean (한국어)
-* **lt** - Lithuanian (lietuvių kalba)
-* **lv** - Latvian (latviešu valoda)
-* **nl** - Dutch (Nederlands)
-* **no** - Norwegian (Norsk)
-* **pl** - Polish (język polski)
-* **pt - Portuguese (Português)
-* **ro** - Romanian (Română) 
-* **ru** - Russian (Русский)
-* **sk** - Slovak (slovenčina)
-* **sl** - Slovene (slovenski jezik)
-* **srCyrl** - Serbian (српски језик)
-* **srLatn** - Serbian (srpski jezik)
-* **sv** - Swedish (svenska)
-* **th** - Thai (ไทย)
-* **tr** - Turkish (Türkçe)
-* **uk** - Ukrainian (Українська)
-* **vi** - Vietnamese (Tiếng Việt)
-* **zhHant** - Chinese (正體中文)
+* **cs-CZ** - Czech (čeština)
+* **de-DE** - German (Deutsch)
+* **el-GR** - Greek (Ελληνικά)
+* **en-GB** - English (Global)
+* **en-US** - English
+* **es-ES** - Spanish (Español)
+* **et-EE** - Estonian (eesti)
+* **fa-IR** - Persian (فارسی)
+* **fi-FI** - Finnish (suomi)
+* **fr-FR** - French (Français)
+* **he-IL** - Hebrew (עברית)
+* **hr-HR** - Croatian (hrvatski jezik)
+* **hu-HU** - Hungarian (magyar)
+* **id-ID** - Indonesian (Indonesian)
+* **it-IT** - Italian (Italiano)
+* **ja-JP** - Japanese (日本語)
+* **ko-KR** - Korean (한국어)
+* **lv-LV** - Latvian (latviešu valoda)
+* **nb-NO** - Norwegian (Norsk)
+* **nl-BE** - Dutch (Belgium)
+* **nl-NL** - Dutch (Nederlands)
+* **pl-PL** - Polish (język polski)
+* **pt-BR** - Portuguese (Brazil)
+* **pt-PT** - Portuguese (Português)
+* **ro-RO** - Romanian (Română) 
+* **ru-RU** - Russian (Русский)
+* **sk-SK** - Slovak (slovenčina)
+* **sl_SI** - Slovene (slovenski jezik)
+* **sr-Cyrl-CS** - Serbian (српски језик)
+* **sr-Latn-CS** - Serbian (srpski jezik)
+* **sv-SE** - Swedish (svenska)
+* **th-TH** - Thai (ไทย)
+* **tr-TR** - Turkish (Türkçe)
+* **uk-UA** - Ukrainian (Українська)
+* **vi-CN** - Vietnamese (Tiếng Việt)
+* **zh-CN** - Chinese (简体中文)
+* **zh-TW** - Chinese (正體中文)
 
 ## 使用MASA Blazor已内置支持的I18n功能
 
-<br/>
-
 ### 在Blazor Server项目中支持MasaI18n
-
-<br/>
 
 - 添加服务依赖I18n:
 
@@ -81,7 +80,7 @@ services.AddMasaI18nForServer("{i18n local directory path}");
 
     ```
     {
-      "$DefaultLanguage": "true",
+      "$DefaultCulture": "true",
       "Home": "首页",
       "Docs": "文档",
       "Blog": "博客",
@@ -102,7 +101,7 @@ services.AddMasaI18nForServer("{i18n local directory path}");
     }
     ```
 
-> `$DefaultLanguage`是预置key，可以设置当前语言为默认语言
+> `$DefaultCulture`是预置key，可以设置当前语言为默认语言
 
 - I18n使用示例
 
@@ -112,7 +111,7 @@ services.AddMasaI18nForServer("{i18n local directory path}");
 
 void Example()
 {
-    I18n.SetLang("zh-CN");//将语言切换成zh-CN
+    I18n.SetCulture("zh-CN");//将语言切换成zh-CN
     var home = I18n.T("Home");//获取键值Home对应语言的值，此方法调用将返回"首页";
 }
 ```
@@ -138,7 +137,14 @@ void Example()
 
 ```
 {
-
+    "User":{
+        "Name":"Name",
+        "Age":"Age",
+    },
+    "Goods":{
+        "Name":"Name",
+        "Price":"Price"
+    }
 }
 ```
 
@@ -150,7 +156,7 @@ void Example()
 
 void Example()
 {
-    I18n.SetLang("zh-CN");
+    I18n.SetCulture("zh-CN");
     var name1 = I18n.T("Goods.Name");//输出：名称
     var name2 = I18n.T("User.Name");//输出：姓名
     var name3 = I18n.T("Name",true);//输出：姓名。注意：重复的Key会默认取第一个匹配的
@@ -175,25 +181,7 @@ void Example()
 > I18n默认key找不到对应的数据时返回key，而key一般是英文的，所以en-US.json可以根据情况不用写。如果想找不到对应的数据时返回null，则使用`I18n.T("key",whenNullReturnKey:false)`即可。
 > 支持在嵌套中递归嵌套，使用方式与示例一致
 
-#### 如果您想在浏览器端保存用户的i18n语言配置来达到每次用户访问都可以使用之前的语言配置效果，则改为如下操作
-
-<br/>
-
- ```c#
- @using BlazorComponent.I18n
- @inject I18nConfig I18nConfig
- @inject I18n I18n
-
-void Example()
-{
-    I18nConfig.Language = "en-US";//将语言切换成en-US
-    var home = I18n.T("Home");//获取键值Home对应语言的值，此方法调用将返回"Home";
-}
-```
-
 ### 在Blazor WebAssembly项目中支持MasaI18n
-
-<br/>
 
 - 由于Blazor WebAssembly代码在浏览器端执行，所以需要使用http请求来读取i18n资源文件，program.cs增加代码如下：
 
@@ -209,12 +197,12 @@ await builder.Services.AddMasaI18nForWasmAsync($"builder.HostEnvironment.BaseAdd
 - Shared 
 - wwwroot
   - i18n
-    - languageConfig.json
+    - supportedCultures.json
     - en-US.json
     - zh-CN.json
 ```
 
-- `languageConfig.json`配置文件格式如下
+- `supportedCultures.json`配置文件格式如下
 
 ```
 [
@@ -223,7 +211,7 @@ await builder.Services.AddMasaI18nForWasmAsync($"builder.HostEnvironment.BaseAdd
 ]
 ```
 
-> 注意：`languageConfig.json`必须与i18n资源文件在同一目录下
+> 注意：`supportedCultures.json`必须与i18n资源文件在同一目录下
 
 - I18n使用示例请参考Blazor Server模式，使用方式与Blazor Server模式一致
 

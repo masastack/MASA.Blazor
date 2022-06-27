@@ -24,7 +24,7 @@
 	  <Content Update="wwwroot\locale\en-US.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
-	  <Content Update="wwwroot\locale\languageConfig.json">
+	  <Content Update="wwwroot\locale\supportedCultures.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Update="wwwroot\locale\zh-CN.json">
