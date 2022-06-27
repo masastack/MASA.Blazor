@@ -11,7 +11,6 @@ namespace Microsoft.Extensions.DependencyInjection
             InitBlazorComponentVariables(options);
 
             services.AddBlazorComponent();
-            services.TryAddSingleton<IExceptionFilterProvider, ExceptionFilterProvider>();
             services.TryAddScoped<MasaBlazor>();
             services.TryAddScoped<Application>();
             services.TryAddScoped(serviceProvider => new Breakpoint(serviceProvider.GetService<Window>())
@@ -33,12 +32,12 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-        public static IServiceCollection AddMasaBlazor(this IServiceCollection services, Action<MasaBlazorOptionsBuilder> builderAction)
+        public static IServiceCollection AddMasaBlazor(this IServiceCollection services, Action<MasaBlazorOptions> optionsAction)
         {
-            var builder = new MasaBlazorOptionsBuilder(services);
-            builderAction?.Invoke(builder);
+            var options = new MasaBlazorOptions();
+            optionsAction?.Invoke(options);
 
-            return services.AddMasaBlazor(builder.Options);
+            return services.AddMasaBlazor(options);
         }
 
         private static void InitBlazorComponentVariables(MasaBlazorOptions options)
