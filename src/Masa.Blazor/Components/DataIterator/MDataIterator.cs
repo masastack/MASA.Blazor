@@ -153,7 +153,7 @@
                     attrs[nameof(MDataFooter.Pagination)] = Pagination;
                     attrs[nameof(MDataFooter.OnOptionsUpdate)] =
                         EventCallback.Factory.Create<Action<DataOptions>>(this, options => UpdateOptions(options));
-                    attrs[nameof(MDataFooter.ItemsPerPageAllText)] = I18n.T("$masaBlazor.dataTable.itemsPerPageText");
+                    attrs[nameof(MDataFooter.ItemsPerPageAllText)] = I18n.T("$masaBlazor.dataFooter.itemsPerPageAll");
                     attrs[nameof(MDataFooter.Parameters)] = FooterProps;
                 });
         }
