@@ -15,7 +15,7 @@
 
         @if (Usage != null)
         {
-            <SectionContent Title="@Usage.Title" Level="2" IsAnchor>
+            <SectionContent Title="@Usage.Title" Level="2" IsAnchor @key="@Usage">
                 <CodeBox Demo="Usage" ComponentName="@_demoComponent.Title"></CodeBox>
             </SectionContent>
         }

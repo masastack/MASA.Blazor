@@ -4,63 +4,62 @@ using Masa.Blazor.Doc.Models;
 using Masa.Blazor.Doc.Services;
 using Microsoft.AspNetCore.Components;
 
-namespace Masa.Blazor.Doc.Pages
+namespace Masa.Blazor.Doc.Pages;
+
+public partial class Docs
 {
-    public partial class Docs
-    {
-        private string _previousPath;
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
 
-        private string Path => $"{Category}/{FileName}.{I18n.Language ?? System.Globalization.CultureInfo.CurrentCulture.Name}";
+    [Inject]
+    private IPrismHighlighter PrismHighlighter { get; set; }
 
-        private DocFileModel File { get; set; }
+    [Inject]
+    private I18n I18n { get; set; }
 
-        [CascadingParameter(Name = "Lang")]
-        public bool IsChinese { get; set; }
+    [Inject]
+    public DemoService Service { get; set; }
 
-        [Inject]
-        private NavigationManager NavigationManager { get; set; }
+    [CascadingParameter(Name = "Culture")] 
+    public string Culture { get; set; }
 
-        [Inject]
-        private IPrismHighlighter PrismHighlighter { get; set; }
+    [Parameter]
+    public string Category { get; set; }
+
+    [Parameter]
+    public string FileName { get; set; }
         
-        [Inject]
-        private I18n I18n { get; set; }
+    private string _previousPath;
 
-        [Parameter]
-        public string Category { get; set; }
+    private string Path => $"{Category}/{FileName}.{Culture}";
 
-        [Parameter]
-        public string FileName { get; set; }
+    private DocFileModel File { get; set; }
 
-        [Inject]
-        public DemoService Service { get; set; }
-
-        protected override async Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
+    {
+        if (string.IsNullOrWhiteSpace(FileName))
         {
-            if (string.IsNullOrWhiteSpace(FileName))
-            {
-                var menus = await Service.GetMenuAsync();
-                var current = menus.FirstOrDefault(x => x.Url == Category);
-                if (current == null)
-                    throw new HttpRequestException("No page matched", new Exception("No page matched"), System.Net.HttpStatusCode.NotFound);
+            var menus = await Service.GetMenuAsync();
+            var current = menus.FirstOrDefault(x => x.Url == Category);
+            if (current == null)
+                throw new HttpRequestException("No page matched", new Exception("No page matched"), System.Net.HttpStatusCode.NotFound);
 
-                NavigationManager.NavigateTo(current.Children[0].Url);
-            }
+            NavigationManager.NavigateTo(current.Children[0].Url);
         }
+    }
 
-        protected override async Task OnParametersSetAsync()
-        {
-            if (string.IsNullOrWhiteSpace(FileName)) return;
+    protected override async Task OnParametersSetAsync()
+    {
+        if (string.IsNullOrWhiteSpace(FileName)) return;
 
-            if (_previousPath == Path) return;
-            _previousPath = Path;
+        if (_previousPath == Path) return;
+        _previousPath = Path;
 
-            File = await Service.GetDocFileAsync($"_content/Masa.Blazor.Doc/docs/{Path}.json");
-        }
+        File = await Service.GetDocFileAsync($"_content/Masa.Blazor.Doc/docs/{Path}.json");
+    }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await PrismHighlighter.HighlightAllAsync();
-        }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await PrismHighlighter.HighlightAllAsync();
     }
 }

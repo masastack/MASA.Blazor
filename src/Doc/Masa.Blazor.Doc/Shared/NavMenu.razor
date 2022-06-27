@@ -87,12 +87,18 @@
     [Inject]
     private I18n I18n { get; set; }
 
+    /// <summary>
+    /// Not being used, just notifying the component that it needs to be re-rendered
+    /// </summary>
+    [CascadingParameter(Name = "Culture")]
+    public string Culture { get; set; }
+
     [Parameter]
     public DemoMenuItemModel[] MenuItems { get; set; } = { };
 
     protected override async Task OnParametersSetAsync()
     {
-        Service.ChangeLanguage(I18n.Language ?? CultureInfo.CurrentCulture.Name);
+        Service.ChangeLanguage(Culture);
         MenuItems = await Service.GetMenuAsync();
     }
 
