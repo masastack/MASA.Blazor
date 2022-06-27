@@ -11,9 +11,6 @@ public partial class ApiSection
     [Parameter]
     public string Section { get; set; }
 
-    [CascadingParameter]
-    public bool IsChinese { get; set; }
-
     [Parameter]
     public List<ApiColumn> ApiData { get; set; }
 

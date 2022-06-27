@@ -31,11 +31,8 @@ namespace Masa.Blazor.Doc.Pages
         [Parameter]
         public string Name { get; set; }
 
-        [CascadingParameter(Name = "Lang")]
-        public bool IsChinese { get; set; }
-
-        [Inject]
-        public I18nConfig I18nConfig { get; set; }
+        [CascadingParameter(Name = "Culture")]
+        public string Culture { get; set; }
 
         [Inject]
         public IJSRuntime Js { get; set; }
@@ -48,6 +45,7 @@ namespace Masa.Blazor.Doc.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            Service.ChangeLanguage(Culture);
             await Service.InitializeDemos();
         }
 
@@ -63,7 +61,7 @@ namespace Masa.Blazor.Doc.Pages
                 Name = Name.Split("#")[0];
             }
 
-            Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
+            Service.ChangeLanguage(Culture);
             _demoComponent = await Service.GetComponentAsync(Name);
             if (_demoComponent is null)
                 this.ThrowNotFoundException($"Component name: {Name} not found");

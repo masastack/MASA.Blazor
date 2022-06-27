@@ -58,6 +58,11 @@
       "Name": "Style",
       "Type": "String",
       "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Value",
+      "Type": "List<BDragItem>",
+      "Description": ""
     }
   ],
   "Contents": [

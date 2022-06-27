@@ -6,6 +6,9 @@ namespace Masa.Blazor
 {
     public class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, ISelect<TItem, TItemValue, TValue>
     {
+        [Inject]
+        protected I18n I18n { get; set; }
+        
         [Parameter]
         public override string AppendIcon { get; set; } = "mdi-menu-down";
 
@@ -61,7 +64,7 @@ namespace Masa.Blazor
 
         //Filterable
         [Parameter]
-        public string NoDataText { get; set; } = "No data available";
+        public string NoDataText { get; set; }
 
         [Parameter]
         public EventCallback<TItem> OnSelectedItemUpdate { get; set; }
@@ -171,6 +174,13 @@ namespace Masa.Blazor
         protected TItemValue GetValue(TItem item) => ItemValue(item);
 
         protected bool GetDisabled(TItem item) => ItemDisabled(item);
+
+        public override Task SetParametersAsync(ParameterView parameters)
+        {
+            NoDataText = I18n.T("$masaBlazor.noDataText");
+            
+            return base.SetParametersAsync(parameters);
+        }
 
         protected override void OnInitialized()
         {

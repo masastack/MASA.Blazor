@@ -3,7 +3,6 @@
 @using Masa.Blazor.Doc.Models
 @using Masa.Blazor.Doc.Utils
 @using System.Web
-@using System.Globalization
 @layout DocLayout
 
 @if (_demoComponent != null)
@@ -15,7 +14,7 @@
         @if (Usage != null)
         {
             var index = _demoIndex++;
-            <SectionContent Title="@Usage.Title" Level="2" IsAnchor>
+            <SectionContent Title="@Usage.Title" Level="2" IsAnchor @key="@Usage">
                 <CodeBox Index="index" Demo="Usage" @key="_demoComponent.Title" ComponentName="@_demoComponent.Title"></CodeBox>
             </SectionContent>
         }
@@ -58,13 +57,12 @@
 
         @if (PropsList.Any() || EventsList.Any() || ContentsList.Any() || MiscList.Any())
         {
-            var lang = I18nConfig.Language ?? CultureInfo.CurrentCulture.Name;
-            var example = DemoItemModel.GenerateExample(lang);
+            var example = DemoItemModel.GenerateExample(Culture);
 
             <SectionContent Title="@example.Title" Id="examples" Level="2" IsAnchor>
                 @if (PropsList.Any())
                 {
-                    var props = DemoItemModel.GenerateProps(lang);
+                    var props = DemoItemModel.GenerateProps(Culture);
 
                     <SectionContent Title="@props.Title" Id="props" Level="3" IsAnchor>
                         @foreach (var item in PropsList)
@@ -78,7 +76,7 @@
                 }
                 @if (EventsList.Any())
                 {
-                    var events = DemoItemModel.GenerateEvents(lang);
+                    var events = DemoItemModel.GenerateEvents(Culture);
 
                     <SectionContent Title="@events.Title" Id="events" Level="3" IsAnchor>
                         @foreach (var item in EventsList)
@@ -92,7 +90,7 @@
                 }
                 @if (ContentsList.Any())
                 {
-                    var contents = DemoItemModel.GenerateContents(lang);
+                    var contents = DemoItemModel.GenerateContents(Culture);
 
                     <SectionContent Title="@contents.Title" Id="contents" Level="3" IsAnchor>
                         @foreach (var item in ContentsList)
@@ -106,7 +104,7 @@
                 }
                 @if (MiscList.Any())
                 {
-                    var misc = DemoItemModel.GenerateMisc(lang);
+                    var misc = DemoItemModel.GenerateMisc(Culture);
 
                     <SectionContent Title="@misc.Title" Id="misc" Level="3" IsAnchor>
                         @foreach (var item in MiscList)
@@ -121,11 +119,11 @@
             </SectionContent>
         }
     </SectionContent>
-    <SectionContent Class="mt-12" Title="@T("Compontents.Footer.ReadyForMore")" Level="1">
+    <SectionContent Class="mt-12" Title="@T("Components.ReadyForMore")" Level="1">
         <div class="mb-3">
-            @T("Compontents.Footer.ReadyForMore.Desc.Front")
-            <AppLink Href="/about/meet-the-team">@T("Compontents.Footer.ReadyForMore.Desc.Middle")</AppLink>
-            @T("Compontents.Footer.ReadyForMore.Desc.End")
+            @T("Components.ReadyForMore.Desc.Front")
+            <AppLink Href="/about/meet-the-team">@T("Components.ReadyForMore.Desc.Middle")</AppLink>
+            @T("Components.ReadyForMore.Desc.End")
         </div>
         <RelatedPages Related="@_demoComponent?.Related" />
         <MDivider Class="my-6 mt-7 mb-5"></MDivider>
@@ -134,13 +132,13 @@
             <div class="blue-grey--text text--darken-1 d-flexalign-center justify-space-between">
                 <div class="font-weight-medium d-flex align-baseline grow flex-wrap">
                     <span class="mb-2 mb-md-0">
-                        @T("Compontents.Footer.Edit.Front")
+                        @T("Components.Edit.Front")
                         <AppLink Href="@GithubUrlHref">Github</AppLink>
-                        @T("Compontents.Footer.Edit.End")
+                        @T("Components.Edit.End")
                     </span>
                     <div class="spacer hidden-sm-and-down"></div>
                     <div class="text-body-2">
-                        <span class="font-weight-medium mr-1">@T("Compontents.Footer.UpdateTime")</span>
+                        <span class="font-weight-medium mr-1">@T("Components.UpdateTime")</span>
                         <span class="text--secondary">@_demoComponent.LastWriteTime</span>
                     </div>
                 </div>

@@ -8,6 +8,15 @@ namespace Masa.Blazor.Doc.Pages
 {
     public partial class Styles
     {
+        [Inject]
+        public DemoService Service { get; set; }
+
+        [CascadingParameter(Name = "Culture")]
+        public string Culture { get; set; }
+
+        [Parameter]
+        public string Name { get; set; }
+
         private DemoComponentModel _demoComponent;
 
         private DemoItemModel Usage { get; set; }
@@ -19,18 +28,6 @@ namespace Masa.Blazor.Doc.Pages
         private List<DemoItemModel> EventsList { get; set; }
 
         private List<DemoItemModel> MiscList { get; set; }
-
-        [Parameter]
-        public string Name { get; set; }
-
-        [CascadingParameter]
-        public bool IsChinese { get; set; }
-
-        [Inject]
-        public I18nConfig I18nConfig { get; set; }
-
-        [Inject]
-        public DemoService Service { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
@@ -44,15 +41,15 @@ namespace Masa.Blazor.Doc.Pages
                 Name = Name.Split("#")[0];
             }
 
-            Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
+            Service.ChangeLanguage(Culture);
             _demoComponent = await Service.GetStyleAsync(Name);
             if (_demoComponent is null)
                 this.ThrowNotFoundException($"Style name:{Name} not found");
 
             var demos = _demoComponent.DemoList?
-                .Where(x => !x.Debug && !x.Docs.HasValue)
-                .OrderBy(x => x.Order)
-                .ThenBy(r => r.Name) ?? Enumerable.Empty<DemoItemModel>();
+                                      .Where(x => !x.Debug && !x.Docs.HasValue)
+                                      .OrderBy(x => x.Order)
+                                      .ThenBy(r => r.Name) ?? Enumerable.Empty<DemoItemModel>();
             if (demos is null)
                 this.ThrowNotFoundException($"Style name:{Name} demoList not found");
 
