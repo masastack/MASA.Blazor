@@ -7,7 +7,6 @@ namespace Masa.Blazor
         [Inject]
         protected I18n I18n { get; set; } = null!;
 
-        //TODO:Internationalization
         [Parameter]
         public string ItemsPerPageText { get; set; }
 

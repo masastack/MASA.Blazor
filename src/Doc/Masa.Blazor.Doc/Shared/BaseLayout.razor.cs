@@ -73,8 +73,6 @@ public partial class BaseLayout : IDisposable
 
     protected override void OnInitialized()
     {
-        Console.WriteLine($"{DateTime.Now.ToLongTimeString()} I18n.Language:{I18n.Culture} CurrentCulture:{CultureInfo.CurrentCulture.Name}");
-        
         Culture = I18n.Culture ?? CultureInfo.CurrentCulture.Name;
         Navigation.LocationChanged += OnLocationChanged;
     }
