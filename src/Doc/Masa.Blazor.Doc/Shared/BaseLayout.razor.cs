@@ -16,12 +16,16 @@ public partial class BaseLayout : IDisposable
 
     [Inject]
     public MasaBlazor MasaBlazor { get; set; }
-        
+
     private string _searchBorderColor = "#00000000";
     private bool _isShowMiniLogo = true;
     private StringNumber _selectTab = 0;
 
     private string CultureIcon => $"{Culture}.png";
+
+    public static CultureInfo EnUsCulture => new("en-US");
+
+    private static CultureInfo ZhCnCulture => new("zh-CN");
 
     public StringNumber SelectTab
     {
@@ -56,8 +60,8 @@ public partial class BaseLayout : IDisposable
     public bool ShowSetting { get; set; }
 
     public bool Temporary { get; set; } = true;
-    
-    public string Culture { get; set; }
+
+    public CultureInfo Culture { get; set; }
 
     public void UpdateNav(bool drawer, bool temporary = true)
     {
@@ -67,13 +71,14 @@ public partial class BaseLayout : IDisposable
 
     private void TurnLanguage()
     {
-        Culture = Culture == "en-US" ? "zh-CN" : "en-US";
+        Culture = Equals(Culture, EnUsCulture) ? ZhCnCulture : EnUsCulture;
+
         I18n.SetCulture(Culture);
     }
 
     protected override void OnInitialized()
     {
-        Culture = I18n.Culture ?? CultureInfo.CurrentCulture.Name;
+        Culture = I18n.Culture ?? CultureInfo.CurrentCulture;
         Navigation.LocationChanged += OnLocationChanged;
     }
 

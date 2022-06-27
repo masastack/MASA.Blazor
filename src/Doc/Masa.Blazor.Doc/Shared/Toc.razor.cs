@@ -24,7 +24,7 @@ public partial class Toc : OwningComponentBase<DemoService>
     public NavigationManager NavigationManager { get; set; }
 
     [CascadingParameter(Name = "Culture")]
-    public string Culture { get; set; }
+    public CultureInfo Culture { get; set; }
 
     private bool _disposed;
 

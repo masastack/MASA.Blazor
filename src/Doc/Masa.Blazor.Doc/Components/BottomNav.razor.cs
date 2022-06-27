@@ -20,7 +20,7 @@ namespace Masa.Blazor.Doc.Components
         public NavigationManager NavigationManager { get; set; }
 
         [CascadingParameter(Name = "Culture")]
-        public string Culture { get; set; }
+        public CultureInfo Culture { get; set; }
 
         protected override void OnInitialized()
         {

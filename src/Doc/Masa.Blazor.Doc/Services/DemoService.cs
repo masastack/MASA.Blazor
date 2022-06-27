@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Doc.Models;
+﻿using System.Globalization;
+using Masa.Blazor.Doc.Models;
 using Masa.Blazor.Doc.Models.Extensions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
@@ -19,8 +20,8 @@ namespace Masa.Blazor.Doc.Services
         private readonly HttpClient _httpClient;
         private readonly NavigationManager _navigationManager;
 
-        private string CurrentLanguage { get; set; }
-        
+        private string CurrentCulture { get; set; }
+
         public DemoService(HttpClient httpClient, NavigationManager navigationManager)
         {
             _httpClient = httpClient;
@@ -28,9 +29,9 @@ namespace Masa.Blazor.Doc.Services
             _navigationManager = navigationManager;
         }
 
-        public void ChangeLanguage(string language)
+        public void ChangeLanguage(CultureInfo culture)
         {
-            CurrentLanguage = language;
+            CurrentCulture = culture.Name;
         }
 
         public Task<ApiModel> GetApiAsync(string apiUrl)
@@ -42,10 +43,10 @@ namespace Masa.Blazor.Doc.Services
         {
             _docFileCache ??= new ConcurrentCache<string, ValueTask<DocFileModel>>();
             var docFileTask = await _docFileCache.GetOrAdd(docUrl, async (currentDocUrl) =>
-               {
-                   var docFile = await _httpClient.GetFromJsonAsync<DocFileModel>(currentDocUrl);
-                   return docFile;
-               });
+            {
+                var docFile = await _httpClient.GetFromJsonAsync<DocFileModel>(currentDocUrl);
+                return docFile;
+            });
 
             return docFileTask;
         }
@@ -55,10 +56,10 @@ namespace Masa.Blazor.Doc.Services
             _showCaseCache ??= new ConcurrentCache<string, RenderFragment>();
 
             _demoTypesCache ??= new ConcurrentCache<string, ValueTask<string[]>>();
-            await _demoTypesCache.GetOrAdd(CurrentLanguage, async _ =>
+            await _demoTypesCache.GetOrAdd(CurrentCulture, async _ =>
             {
                 var demoTypes =
-                await _httpClient.GetFromJsonAsync<string[]>($"_content/Masa.Blazor.Doc/meta/components/demoTypes.json");
+                    await _httpClient.GetFromJsonAsync<string[]>($"_content/Masa.Blazor.Doc/meta/components/demoTypes.json");
 
                 return demoTypes;
             });
@@ -73,14 +74,15 @@ namespace Masa.Blazor.Doc.Services
         public async Task<DemoComponentModel> GetComponentAsync(string componentName)
         {
             _componentCache ??= new ConcurrentCache<string, ValueTask<IDictionary<string, DemoComponentModel>>>();
-            await _componentCache.GetOrAdd(CurrentLanguage, async (_) =>
+            await _componentCache.GetOrAdd(CurrentCulture, async (_) =>
             {
                 var components =
-                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>($"_content/Masa.Blazor.Doc/meta/components/components.{CurrentLanguage}.json");
+                    await _httpClient.GetFromJsonAsync<DemoComponentModel[]>(
+                        $"_content/Masa.Blazor.Doc/meta/components/components.{CurrentCulture}.json");
                 return components.ToDictionary(x => x.Title.StructureUrl(), x => x);
             });
 
-            return _componentCache.TryGetValue(CurrentLanguage, out var component)
+            return _componentCache.TryGetValue(CurrentCulture, out var component)
                 ? ((await component).TryGetValue(componentName.ToLower(), out var componetModel) ? componetModel : null)
                 : null;
         }
@@ -88,15 +90,15 @@ namespace Masa.Blazor.Doc.Services
         public async Task<DemoComponentModel> GetStyleAsync(string componentName)
         {
             _styleCache ??= new ConcurrentCache<string, ValueTask<IDictionary<string, DemoComponentModel>>>();
-            await _styleCache.GetOrAdd(CurrentLanguage, async (_) =>
+            await _styleCache.GetOrAdd(CurrentCulture, async (_) =>
             {
                 var styles =
                     await _httpClient.GetFromJsonAsync<DemoComponentModel[]>(
-                        $"_content/Masa.Blazor.Doc/meta/stylesandanimations/components.{CurrentLanguage}.json");
+                        $"_content/Masa.Blazor.Doc/meta/stylesandanimations/components.{CurrentCulture}.json");
                 return styles.ToDictionary(x => x.Title.StructureUrl(), x => x);
             });
 
-            return _styleCache.TryGetValue(CurrentLanguage, out var component)
+            return _styleCache.TryGetValue(CurrentCulture, out var component)
                 ? (await component).TryGetValue(componentName.ToLower(), out var style) ? style : null
                 : null;
         }
@@ -105,8 +107,8 @@ namespace Masa.Blazor.Doc.Services
         {
             var menuItems = await GetMenuAsync();
             var current = menuItems
-                .SelectMany(r => r.Children)
-                .FirstOrDefault(r => r.Url != null && currentUrl.Contains(r.Url, StringComparison.OrdinalIgnoreCase));
+                          .SelectMany(r => r.Children)
+                          .FirstOrDefault(r => r.Url != null && currentUrl.Contains(r.Url, StringComparison.OrdinalIgnoreCase));
 
             var contents = current?.Contents;
             var componentName = currentUrl.Split('/')[^1];
@@ -176,30 +178,30 @@ namespace Masa.Blazor.Doc.Services
 
                 if (propsList.Any() || miscList.Any())
                 {
-                    contents.Add(ContentsItem.GenerateExample(CurrentLanguage));
+                    contents.Add(ContentsItem.GenerateExample(CurrentCulture));
                 }
 
                 if (propsList.Any())
                 {
-                    contents.Add(ContentsItem.GenerateProps(CurrentLanguage));
+                    contents.Add(ContentsItem.GenerateProps(CurrentCulture));
                     contents.AddRange(propsList);
                 }
 
                 if (eventsList.Any())
                 {
-                    contents.Add(ContentsItem.GenerateEvents(CurrentLanguage));
+                    contents.Add(ContentsItem.GenerateEvents(CurrentCulture));
                     contents.AddRange(eventsList);
                 }
 
                 if (contentsList.Any())
                 {
-                    contents.Add(ContentsItem.GenerateContents(CurrentLanguage));
+                    contents.Add(ContentsItem.GenerateContents(CurrentCulture));
                     contents.AddRange(contentsList);
                 }
 
                 if (miscList.Any())
                 {
-                    contents.Add(ContentsItem.GenerateMisc(CurrentLanguage));
+                    contents.Add(ContentsItem.GenerateMisc(CurrentCulture));
                     contents.AddRange(miscList);
                 }
             }
@@ -210,14 +212,14 @@ namespace Masa.Blazor.Doc.Services
         public async Task<DemoMenuItemModel[]> GetMenuAsync()
         {
             _menuCache ??= new ConcurrentCache<string, ValueTask<DemoMenuItemModel[]>>();
-            await _menuCache.GetOrAdd(CurrentLanguage, async (_) =>
+            await _menuCache.GetOrAdd(CurrentCulture, async (_) =>
             {
                 var menuItems =
-                    await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>($"_content/Masa.Blazor.Doc/meta/menu.{CurrentLanguage}.json");
+                    await _httpClient.GetFromJsonAsync<DemoMenuItemModel[]>($"_content/Masa.Blazor.Doc/meta/menu.{CurrentCulture}.json");
                 return menuItems;
             });
 
-            return _menuCache.TryGetValue(CurrentLanguage, out var menuItems) ? await menuItems : Array.Empty<DemoMenuItemModel>();
+            return _menuCache.TryGetValue(CurrentCulture, out var menuItems) ? await menuItems : Array.Empty<DemoMenuItemModel>();
         }
 
         public async ValueTask<DemoMenuItemModel[]> GetCurrentMenuItems()

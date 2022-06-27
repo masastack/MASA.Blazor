@@ -1,4 +1,5 @@
-﻿using BlazorComponent;
+﻿using System.Globalization;
+using BlazorComponent;
 using BlazorComponent.I18n;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -17,7 +18,7 @@ public partial class Home
     /// Not being used, just notifying the component that it needs to be re-rendered
     /// </summary>
     [CascadingParameter(Name = "Culture")]
-    public string Culture { get; set; }
+    public CultureInfo Culture { get; set; }
 
     private int _onBoarding = 0;
     private int _length = 1;

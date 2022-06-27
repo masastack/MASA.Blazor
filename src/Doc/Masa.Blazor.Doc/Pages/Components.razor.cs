@@ -32,7 +32,7 @@ namespace Masa.Blazor.Doc.Pages
         public string Name { get; set; }
 
         [CascadingParameter(Name = "Culture")]
-        public string Culture { get; set; }
+        public CultureInfo Culture { get; set; }
 
         [Inject]
         public IJSRuntime Js { get; set; }

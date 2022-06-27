@@ -57,12 +57,12 @@
 
         @if (PropsList.Any() || EventsList.Any() || ContentsList.Any() || MiscList.Any())
         {
-            var example = DemoItemModel.GenerateExample(Culture);
+            var example = DemoItemModel.GenerateExample(Culture.Name);
 
             <SectionContent Title="@example.Title" Id="examples" Level="2" IsAnchor>
                 @if (PropsList.Any())
                 {
-                    var props = DemoItemModel.GenerateProps(Culture);
+                    var props = DemoItemModel.GenerateProps(Culture.Name);
 
                     <SectionContent Title="@props.Title" Id="props" Level="3" IsAnchor>
                         @foreach (var item in PropsList)
@@ -76,7 +76,7 @@
                 }
                 @if (EventsList.Any())
                 {
-                    var events = DemoItemModel.GenerateEvents(Culture);
+                    var events = DemoItemModel.GenerateEvents(Culture.Name);
 
                     <SectionContent Title="@events.Title" Id="events" Level="3" IsAnchor>
                         @foreach (var item in EventsList)
@@ -90,7 +90,7 @@
                 }
                 @if (ContentsList.Any())
                 {
-                    var contents = DemoItemModel.GenerateContents(Culture);
+                    var contents = DemoItemModel.GenerateContents(Culture.Name);
 
                     <SectionContent Title="@contents.Title" Id="contents" Level="3" IsAnchor>
                         @foreach (var item in ContentsList)
@@ -104,7 +104,7 @@
                 }
                 @if (MiscList.Any())
                 {
-                    var misc = DemoItemModel.GenerateMisc(Culture);
+                    var misc = DemoItemModel.GenerateMisc(Culture.Name);
 
                     <SectionContent Title="@misc.Title" Id="misc" Level="3" IsAnchor>
                         @foreach (var item in MiscList)
