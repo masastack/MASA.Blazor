@@ -17,6 +17,11 @@
       "Description": ""
     },
     {
+      "Name": "EnableI18n",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "EnableValidation",
       "Type": "Boolean",
       "Description": ""

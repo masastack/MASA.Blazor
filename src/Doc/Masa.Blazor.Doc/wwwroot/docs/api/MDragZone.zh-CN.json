@@ -1,0 +1,71 @@
+﻿{
+  "Title": "MDragZone",
+  "Components": [
+    "DragZone"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Disabled",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Group",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Options",
+      "Type": "Action<SorttableOptions>",
+      "Description": ""
+    },
+    {
+      "Name": "Pull",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Put",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Sort",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的style"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment",
+      "Description": "默认插槽"
+    }
+  ],
+  "Events": []
+}
