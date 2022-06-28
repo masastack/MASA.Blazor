@@ -21,7 +21,7 @@
         public Dictionary<string, object> Options { get; set; }
 
         [Parameter]
-        public bool Reaonly { get; set; }
+        public bool Readonly { get; set; }
 
         [Parameter]
         public EventCallback<string> ValueChanged { get; set; }
@@ -118,7 +118,7 @@
                 Html = await GetHtmlAsync();
                 await HtmlChanged.InvokeAsync(Html);
             }
-            if (Reaonly)
+            if (Readonly)
             {
                 await VditorHelper.InvokeVoidAsync("disabled", Ref);
                 await VditorHelper.InvokeVoidAsync("preview", Ref);
