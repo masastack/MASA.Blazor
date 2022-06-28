@@ -24,7 +24,7 @@ jobs:
     - name: build
       run: dotnet build src
     - name: publish
-      run: dotnet publish src/Doc/Masa.Blazor.Doc.WebAssembly/Masa.Blazor.Doc.WebAssembly.csproj
+      run: dotnet publish src/Doc/Masa.Blazor.Doc.WebAssembly/Masa.Blazor.Doc.WebAssembly.csproj -c Release
     - name: setup oss
       uses: manyuanrong/setup-ossutil@v2.0
       with:
