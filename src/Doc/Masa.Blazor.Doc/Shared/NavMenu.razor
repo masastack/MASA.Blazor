@@ -91,7 +91,7 @@
     /// Not being used, just notifying the component that it needs to be re-rendered
     /// </summary>
     [CascadingParameter(Name = "Culture")]
-    public string Culture { get; set; }
+    public CultureInfo Culture { get; set; }
 
     [Parameter]
     public DemoMenuItemModel[] MenuItems { get; set; } = { };

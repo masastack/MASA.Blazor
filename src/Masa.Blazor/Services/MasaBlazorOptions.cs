@@ -24,5 +24,10 @@
         };
 
         public bool RTL { get; set; }
+
+        public void UseTheme(Action<ThemeOptions> themeAction)
+        {
+            themeAction.Invoke(Theme);
+        }
     }
 }

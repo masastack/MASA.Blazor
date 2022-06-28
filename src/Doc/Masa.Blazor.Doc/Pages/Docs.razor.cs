@@ -1,4 +1,5 @@
-﻿using BlazorComponent.I18n;
+﻿using System.Globalization;
+using BlazorComponent.I18n;
 using Masa.Blazor.Doc.Highlight;
 using Masa.Blazor.Doc.Models;
 using Masa.Blazor.Doc.Services;
@@ -20,8 +21,8 @@ public partial class Docs
     [Inject]
     public DemoService Service { get; set; }
 
-    [CascadingParameter(Name = "Culture")] 
-    public string Culture { get; set; }
+    [CascadingParameter(Name = "Culture")]
+    public CultureInfo Culture { get; set; }
 
     [Parameter]
     public string Category { get; set; }

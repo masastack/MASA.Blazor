@@ -1,4 +1,5 @@
-﻿using BlazorComponent.I18n;
+﻿using System.Globalization;
+using BlazorComponent.I18n;
 using Masa.Blazor.Doc.Models;
 using Masa.Blazor.Doc.Services;
 using Microsoft.AspNetCore.Components;
@@ -178,7 +179,7 @@ public partial class Api
     public DemoService Service { get; set; }
 
     [CascadingParameter(Name = "Culture")]
-    public string Culture { get; set; }
+    public CultureInfo Culture { get; set; }
 
     [Parameter]
     public string ApiName { get; set; }

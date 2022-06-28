@@ -12,7 +12,7 @@ namespace Masa.Blazor.Doc.Pages
         public DemoService Service { get; set; }
 
         [CascadingParameter(Name = "Culture")]
-        public string Culture { get; set; }
+        public CultureInfo Culture { get; set; }
 
         [Parameter]
         public string Name { get; set; }

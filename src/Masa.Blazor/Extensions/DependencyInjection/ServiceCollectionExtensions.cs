@@ -6,7 +6,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddMasaBlazor(this IServiceCollection services, MasaBlazorOptions options = null)
+        public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services, MasaBlazorOptions options = null)
         {
             InitBlazorComponentVariables(options);
 
@@ -24,15 +24,15 @@ namespace Microsoft.Extensions.DependencyInjection
                     Md = 1280,
                     Lg = 1920
                 }
-            });            
+            });
             services.TryAddScoped<IPopupService, PopupService>();
-            services.TryAddScoped<IErrorHandler, MErrorHandler>( );
+            services.TryAddScoped<IErrorHandler, MErrorHandler>();
             services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
 
-            return services;
+            return new MasaBlazorBuilder(services);
         }
 
-        public static IServiceCollection AddMasaBlazor(this IServiceCollection services, Action<MasaBlazorOptions> optionsAction)
+        public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services, Action<MasaBlazorOptions> optionsAction)
         {
             var options = new MasaBlazorOptions();
             optionsAction?.Invoke(options);
