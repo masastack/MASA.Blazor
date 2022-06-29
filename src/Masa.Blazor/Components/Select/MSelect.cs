@@ -536,7 +536,7 @@ namespace Masa.Blazor
             }
         }
 
-        private async Task OnUpDown(string code)
+        protected virtual async Task OnUpDown(string code)
         {
             if (Multiple)
             {
@@ -551,7 +551,7 @@ namespace Masa.Blazor
             await SelectItemByIndex(MenuListIndex);
         }
 
-        private Task OnEscDown()
+        protected Task OnEscDown()
         {
             if (IsMenuActive)
             {
