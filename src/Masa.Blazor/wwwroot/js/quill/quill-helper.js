@@ -114,10 +114,6 @@ export function uploadFilePic(quillElement, element, uploadConfig, index) {
     let formData = new FormData()
     let files = fileInput.files;
     formData.append(uploadConfig.name, files[index])
-    // If a token is required and exists
-    if (uploadConfig.token) {
-        formData.append(uploadConfig.tokenName, uploadConfig.token)
-    }
     let oReq = new XMLHttpRequest();
     oReq.onreadystatechange = function () {
         if (oReq.readyState == 4 && oReq.status == 200) {
@@ -136,7 +132,12 @@ export function uploadFilePic(quillElement, element, uploadConfig, index) {
             }
         }
     }
+
     oReq.open(uploadConfig.methods, uploadConfig.action);
+    // If a token is required and exists
+    if (uploadConfig.token) {
+        oReq.setRequestHeader(uploadConfig.tokenName, uploadConfig.token);
+    }
     oReq.send(formData);
 }
 export default {
