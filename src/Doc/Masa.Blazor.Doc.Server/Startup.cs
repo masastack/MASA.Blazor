@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.Doc.Services;
+using Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 namespace Masa.Blazor.Doc.Server
 {
@@ -17,6 +18,7 @@ namespace Masa.Blazor.Doc.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddScoped<LazyAssemblyLoader>();
             services.AddServerSideBlazor();
 
             services.AddMasaBlazor().AddI18nForServer("wwwroot/locale");
