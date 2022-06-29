@@ -60,10 +60,10 @@ title: 国际化多语言 (i18n)
 - 添加服务依赖I18n:
 
 ```c#
-services.AddMasaI18nForServer("{i18n local directory path}");
+services.AddMasaBlazor().AddI18nForServer("{i18n local directory path}");
 ```
 
-- `i18n local directory path`为放置i18n资源文件的文件夹物理路径。例如,您在`wwwroot/i18n`路径下放置了i18n资源文件，则代码写为`services.AddMasaI18nForServer("wwwroot/i18n");`。
+- `i18n local directory path`为放置i18n资源文件的文件夹物理路径。例如,您在`wwwroot/i18n`路径下放置了i18n资源文件，则代码写为`services.AddMasaBlazor().AddI18nForServer("wwwroot/i18n");`。
 
 ```
 - Pages 
@@ -187,10 +187,10 @@ void Example()
 
 ```c#
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
-await builder.Services.AddMasaI18nForWasmAsync($"builder.HostEnvironment.BaseAddress/{i18n directory api}");
+await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"builder.HostEnvironment.BaseAddress/{i18n directory api}");
 ```
 
-- `i18n directory api` 为放置i18n资源文件的文件夹路由地址。例如,您在`wwwroot/i18n`路径下放置了i18n资源文件，则代码写为`await builder.Services.AddMasaI18nForWasmAsync($"{builder.HostEnvironment.BaseAddress}/i18n")`。
+- `i18n directory api` 为放置i18n资源文件的文件夹路由地址。例如,您在`wwwroot/i18n`路径下放置了i18n资源文件，则代码写为`await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"{builder.HostEnvironment.BaseAddress}/i18n")`。
 
 ```
 - Pages 
