@@ -57,8 +57,8 @@ public partial class Prompt : PopupComponentBase
 
         base.OnParametersSet();
 
-        OkText ??= "Ok";
-        CancelText ??= "Cancel";
+        OkText ??= I18n.T("$masaBlazor.ok");
+        CancelText ??= I18n.T("$masaBlazor.cancel");
 
         ComputedOkButtonProps = GetDefaultSaveButtonProps();
         ComputedCancelButtonProps = GetDefaultCancelButtonProps();

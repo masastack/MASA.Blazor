@@ -117,7 +117,7 @@ public partial class Alert : AlertingPopupComponentBase
 
         base.OnParametersSet();
 
-        ActionText ??= "Close";
+        ActionText ??= I18n.T("$masaBlazor.close");
 
         ComputedActionButtonProps = new ModalButtonProps()
         {
