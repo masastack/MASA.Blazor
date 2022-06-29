@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<p align="center">
+﻿<p align="center">
   <a href="https://masa-blazor-docs-dev.lonsid.cn" target="_blank">
     <img alt="MASA Blazor Logo" width="150" src="./imgs/logo.png">
   </a>
@@ -115,8 +115,7 @@ services.AddMasaBlazor();
 <html lang="en">
 	<head>
 		<!--Style-->
-		<link href="_content/Masa.Blazor/css/masa-blazor.css" rel="stylesheet">
-		<link href="_content/Masa.Blazor/css/masa-extend-blazor.css" rel="stylesheet">
+		<link href="_content/Masa.Blazor/css/masa-blazor.mini.css" rel="stylesheet">
 		<!--Font-->
 		<link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
