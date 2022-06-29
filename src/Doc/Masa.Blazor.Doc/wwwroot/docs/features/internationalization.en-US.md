@@ -60,10 +60,10 @@ the following languages support:
 - Add service dependency I18n:
 
 ```c#
-services.AddMasaI18nForServer("{i18n local directory path}");
+services.AddMasaBlazor().AddI18nForServer("{i18n local directory path}");
 ```
 
-- `i18n local directory path` is the physical path of the folder where i18n resource files are placed. For example, if you place the i18n resource file under the path of `wwwroot/i18n`, the code is written as `services.AddMasaI18nForServer("wwwroot/i18n");`.
+- `i18n local directory path` is the physical path of the folder where i18n resource files are placed. For example, if you place the i18n resource file under the path of `wwwroot/i18n`, the code is written as `services.AddMasaBlazor().AddI18nForServer("wwwroot/i18n");`.
 
 ```
 - Pages 
@@ -188,10 +188,10 @@ void Example()
 
 ```c#
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
-await builder.Services.AddMasaI18nForWasmAsync($"{builder.HostEnvironment.BaseAddress}/{i18n directory api}");
+await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"{builder.HostEnvironment.BaseAddress}/{i18n directory api}");
 ```
 
-- `i18n directory api` is the routing address of the folder where i18n resource files are placed. For example, if you place the i18n resource file under the path of `wwwroot/i18n`, the code is written as `await builder.Services.AddMasaI18nForWasmAsync($"{builder.HostEnvironment.BaseAddress}/i18n")`.
+- `i18n directory api` is the routing address of the folder where i18n resource files are placed. For example, if you place the i18n resource file under the path of `wwwroot/i18n`, the code is written as `await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"{builder.HostEnvironment.BaseAddress}/i18n")`.
 
 ```
 - Pages 
