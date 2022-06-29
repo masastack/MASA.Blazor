@@ -4,6 +4,8 @@ namespace Masa.Blazor.Presets;
 
 public partial class PCopyableText
 {
+    [Inject] public I18n I18n { get; set; } = null!;
+
     [Inject] public IJSRuntime Js { get; set; } = null!;
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
@@ -38,13 +40,19 @@ public partial class PCopyableText
 
     protected ElementReference Ref { get; set; }
 
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        Tooltip = I18n.T("$masaBlazor.copy");
+
+        return base.SetParametersAsync(parameters);
+    }
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
         CopiedIcon ??= "mdi-check";
         CopyIcon ??= "mdi-content-copy";
-        Tooltip ??= "Copy";
     }
 
     private string Icon => _copying ? CopiedIcon! : CopyIcon!;
