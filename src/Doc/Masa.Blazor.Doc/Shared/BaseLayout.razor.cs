@@ -17,15 +17,13 @@ public partial class BaseLayout : IDisposable
     [Inject]
     public MasaBlazor MasaBlazor { get; set; }
 
+    private static readonly CultureInfo[] SupportedCultures = { new("en-US"), new("zh-CN") };
+
     private string _searchBorderColor = "#00000000";
     private bool _isShowMiniLogo = true;
     private StringNumber _selectTab = 0;
 
     private string CultureIcon => $"{Culture}.png";
-
-    public static CultureInfo EnUsCulture => new("en-US");
-
-    private static CultureInfo ZhCnCulture => new("zh-CN");
 
     public StringNumber SelectTab
     {
@@ -71,14 +69,24 @@ public partial class BaseLayout : IDisposable
 
     private void TurnLanguage()
     {
-        Culture = Equals(Culture, EnUsCulture) ? ZhCnCulture : EnUsCulture;
+        Culture = Equals(Culture, SupportedCultures[0]) ? SupportedCultures[1] : SupportedCultures[0];
 
         I18n.SetCulture(Culture);
     }
 
     protected override void OnInitialized()
     {
-        Culture = I18n.Culture ?? CultureInfo.CurrentCulture;
+        var culture = I18n.Culture ?? CultureInfo.CurrentCulture;
+        if (SupportedCultures.Contains(culture))
+        {
+            Culture = culture;
+        }
+        else
+        {
+            Culture = SupportedCultures[0];
+            I18n.SetCulture(Culture);
+        }
+
         Navigation.LocationChanged += OnLocationChanged;
     }
 
