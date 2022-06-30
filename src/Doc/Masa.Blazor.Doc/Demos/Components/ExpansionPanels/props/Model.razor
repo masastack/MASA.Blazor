@@ -14,7 +14,7 @@
         Multiple>
         @foreach (var i in Enumerable.Range(0, items))
         {
-            <MExpansionPanel @key="i">
+            <MExpansionPanel Value="@i">
                 <MExpansionPanelHeader>Header @(i + 1)</MExpansionPanelHeader>
                 <MExpansionPanelContent>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
