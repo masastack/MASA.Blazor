@@ -90,7 +90,7 @@ in `Pages/_Host.cshtml` import resource files：
 
 ```html
 <!--masa blazor css style-->
-<link href="_content/Masa.Blazor/css/masa-blazor.mini.css" rel="stylesheet" />
+<link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
 <!--icon file,import need to use-->
 <link href="https://cdn.masastack.com/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
@@ -106,7 +106,7 @@ in `Pages/_Host.cshtml` import resource files：
 in `wwwroot\index.html` import resource files：
 
 ```html
-<link href="_content/Masa.Blazor/css/masa-blazor.mini.css" rel="stylesheet" />
+<link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
 
 <link href="https://cdn.masastack.com/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
