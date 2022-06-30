@@ -18,6 +18,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+      - name: Copy Static Resources
+        id: copyStaticResources
+        run: cp -f src/Doc/Masa.Blazor.Doc.WebAssembly/staticwebapp.config.json wwwroot
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
