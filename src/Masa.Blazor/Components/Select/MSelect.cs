@@ -8,7 +8,7 @@ namespace Masa.Blazor
     {
         [Inject]
         protected I18n I18n { get; set; }
-        
+
         [Parameter]
         public override string AppendIcon { get; set; } = "mdi-menu-down";
 
@@ -111,7 +111,7 @@ namespace Masa.Blazor
 
         protected int MenuListIndex { get; private set; } = -1;
 
-        protected int SelectedIndex { get; set; } = -1;
+        public int SelectedIndex { get; set; } = -1;
 
         public override int DebounceMilliseconds { get; set; }
 
@@ -158,6 +158,9 @@ namespace Masa.Blazor
 
         protected virtual IList<TItem> SelectedItems => Items.Where(item => InternalValues.Contains(ItemValue(item))).ToList();
 
+        protected string TilesSelector =>
+            $"{MMenu.ContentElement.GetSelector()} .m-list-item, {MMenu.ContentElement.GetSelector()} .m-divider, {MMenu.ContentElement.GetSelector()} .m-subheader";
+
         protected virtual bool MenuCanShow => true;
 
         protected virtual BMenuProps GetDefaultMenuProps() => new()
@@ -178,7 +181,7 @@ namespace Masa.Blazor
         public override Task SetParametersAsync(ParameterView parameters)
         {
             NoDataText = I18n.T("$masaBlazor.noDataText");
-            
+
             return base.SetParametersAsync(parameters);
         }
 
@@ -203,7 +206,7 @@ namespace Masa.Blazor
                 await JsInvokeAsync(JsInteropConstants.EnablePreventDefaultForEvent, InputElement, "keydown",
                     new[] { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End, KeyCodes.Enter, KeyCodes.Escape, KeyCodes.Space });
             }
-            
+
             // TODO: not work in Autocomplete searching 
             if (MMenu is not null && InputSlotAttrs.Keys.Count == 0)
             {
@@ -221,6 +224,8 @@ namespace Masa.Blazor
                     await MMenu.AddOutsideClickEventListener();
                 }
 
+                MMenu.AfterShowContent = () => WatchIsMenuActive(true);
+
                 StateHasChanged();
             }
         }
@@ -229,10 +234,10 @@ namespace Masa.Blazor
         {
             base.OnWatcherInitialized();
 
-            Watcher.Watch<bool>(nameof(IsMenuActive), WatchIsMenuActive);
+            Watcher.Watch<bool>(nameof(IsMenuActive), val => WatchIsMenuActive(val));
         }
 
-        protected virtual async void WatchIsMenuActive(bool val)
+        protected virtual async Task WatchIsMenuActive(bool val)
         {
             if ((Multiple && !val) || GetMenuIndex() > -1)
             {
@@ -240,10 +245,10 @@ namespace Masa.Blazor
             }
 
             var index = await JsInvokeAsync<int>(JsInteropConstants.GetListIndexWhereAttributeExists,
-                $"{MMenu.ContentElement.GetSelector()} .m-list-item",
+                TilesSelector,
                 "aria-selected", "True");
 
-            SetMenuIndex(index);
+            await SetMenuIndex(index);
             StateHasChanged();
         }
 
@@ -256,7 +261,7 @@ namespace Masa.Blazor
             return !contains;
         }
 
-        public Task Blur()
+        public async Task Blur()
         {
             var prevIsMenuActive = IsMenuActive;
             var prevIsFocused = IsFocused;
@@ -266,14 +271,12 @@ namespace Masa.Blazor
             IsMenuActive = false;
             IsFocused = false;
             SelectedIndex = -1;
-            SetMenuIndex(-1);
+            await SetMenuIndex(-1);
 
             if (prevIsMenuActive || prevIsFocused || prevSelectedIndex != -1 || prevMenuListIndex != -1)
             {
                 StateHasChanged();
             }
-
-            return Task.CompletedTask;
         }
 
         public void ActivateMenu()
@@ -395,10 +398,32 @@ namespace Masa.Blazor
                 })
                 .Apply<BChip, MChip>(attrs =>
                 {
-                    attrs[nameof(MChip.Close)] = DeletableChips && (!IsDisabled && !IsReadonly);
-                    attrs[nameof(MChip.Disabled)] = IsDisabled;
+                    var index = -1;
+                    TItem item = default;
+                    if (attrs.Data is (TItem t, int i))
+                    {
+                        item = t;
+                        index = i;
+                    }
+
+                    var isDisabled = GetDisabled(item);
+                    var isInteractive = !isDisabled && IsInteractive;
+
+                    attrs[nameof(MChip.Close)] = DeletableChips && isInteractive;
+                    attrs[nameof(MChip.Disabled)] = isDisabled;
                     attrs[nameof(MChip.Class)] = "m-chip--select";
+                    attrs[nameof(MChip.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } };
                     attrs[nameof(MChip.Small)] = SmallChips;
+                    attrs[nameof(MChip.IsActive)] = index == SelectedIndex;
+                    attrs[nameof(MChip.OnClick)] = CreateEventCallback<MouseEventArgs>(e =>
+                    {
+                        if (!isInteractive) return;
+
+                        // e.stopPropagation()
+
+                        SelectedIndex = index;
+                    });
+                    attrs[nameof(MChip.OnCloseClick)] = CreateEventCallback<MouseEventArgs>(_ => OnChipInput(item));
                 });
         }
 
@@ -442,12 +467,15 @@ namespace Masa.Blazor
 
                 if (HideSelected)
                 {
-                    SetMenuIndex(-1);
+                    await SetMenuIndex(-1);
                 }
                 else
                 {
                     var index = ComputedItems.IndexOf(item);
-                    SetMenuIndex(index);
+                    if (index > -1)
+                    {
+                        await SetMenuIndex(index);
+                    }
                 }
             }
 
@@ -516,7 +544,7 @@ namespace Masa.Blazor
                 _ => -1
             };
 
-            SetMenuIndex(index);
+            await SetMenuIndex(index, code);
 
             int ComputeNextIndex(int add)
             {
@@ -551,7 +579,7 @@ namespace Masa.Blazor
             await SelectItemByIndex(MenuListIndex);
         }
 
-        protected Task OnEscDown()
+        protected virtual Task OnEscDown()
         {
             if (IsMenuActive)
             {
@@ -650,7 +678,7 @@ namespace Masa.Blazor
                 await OnClearClick.InvokeAsync(args);
             }
 
-            SetMenuIndex(-1);
+            await SetMenuIndex(-1);
 
             // whether to need NextTick?
             await InputElement.FocusAsync();
@@ -658,22 +686,42 @@ namespace Masa.Blazor
             // TODO: OpenOnClear
         }
 
-        protected void SetMenuIndex(int number)
+        protected async Task SetMenuIndex(int index, string keyCode = null)
         {
-            MenuListIndex = number;
-
-            if (number > -1)
+            var computedIndex = index;
+            if (index > -1)
             {
-                _ = JsInvokeAsync(JsInteropConstants.ScrollToTile,
+                computedIndex = await JsInvokeAsync<int>(JsInteropConstants.ScrollToTile,
                     MMenu.ContentElement.GetSelector(),
-                    $"{MMenu.ContentElement.GetSelector()} .m-list-item",
-                    number);
+                    TilesSelector,
+                    index,
+                    keyCode);
             }
+
+            MenuListIndex = computedIndex;
         }
 
         protected int GetMenuIndex()
         {
             return MenuListIndex;
+        }
+
+        private async Task OnChipInput(TItem item)
+        {
+            if (Multiple)
+            {
+                await SelectItem(item);
+            }
+            else
+            {
+                SetValue(default(TValue));
+            }
+
+            // if all items have been delete,
+            // open menu
+            IsMenuActive = SelectedItems.Count == 0;
+
+            SelectedIndex = -1;
         }
     }
 }
