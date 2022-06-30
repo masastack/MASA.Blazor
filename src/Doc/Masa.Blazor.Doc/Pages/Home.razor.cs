@@ -1,42 +1,41 @@
-﻿using BlazorComponent;
-using Masa.Blazor.Doc.Shared;
+﻿using System.Globalization;
+using BlazorComponent;
+using BlazorComponent.I18n;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace Masa.Blazor.Doc.Pages
+namespace Masa.Blazor.Doc.Pages;
+
+public partial class Home
 {
-    public partial class Home
+    [Inject]
+    public I18n I18n { get; set; } = null!;
+
+    [Inject]
+    public IJSRuntime JsRuntime { get; set; } = default!;
+
+    /// <summary>
+    /// Not being used, just notifying the component that it needs to be re-rendered
+    /// </summary>
+    [CascadingParameter(Name = "Culture")]
+    public CultureInfo Culture { get; set; }
+
+    private int _onBoarding = 0;
+    private int _length = 1;
+
+    private StringNumber OnBoarding
     {
-        private int _onboarding = 0;
-        private int _length = 1;
+        get => _onBoarding;
+        set => _onBoarding = value.AsT1;
+    }
 
-        [CascadingParameter]
-        public BaseLayout BaseLayout { get; set; }
-
-        [Inject]
-        public IJSRuntime JSRuntime { get; set; } = default!;
-
-        [CascadingParameter(Name = "Lang")]
-        public bool IsChinese { get; set; }
-
-        public StringNumber OnBoarding
+    private async Task Toggle(string url)
+    {
+        if (!string.IsNullOrWhiteSpace(url))
         {
-            get => _onboarding;
-            set => _onboarding = value.AsT1;
-        }
-
-        private async Task Toggle(string url)
-        {
-            if (!string.IsNullOrWhiteSpace(url))
-            {
-                await JSRuntime.InvokeVoidAsync("window.open", url);
-            }
-        }
-
-        public string T(string key)
-        {
-            var content = BaseLayout.T(key);
-            return content;
+            await JsRuntime.InvokeVoidAsync("window.open", url);
         }
     }
+
+    private string T(string key) => I18n.T(key);
 }

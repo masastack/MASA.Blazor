@@ -6,12 +6,11 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddMasaBlazor(this IServiceCollection services, MasaBlazorOptions options = null)
+        public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services, MasaBlazorOptions options = null)
         {
             InitBlazorComponentVariables(options);
 
             services.AddBlazorComponent();
-            services.TryAddSingleton<IExceptionFilterProvider, ExceptionFilterProvider>();
             services.TryAddScoped<MasaBlazor>();
             services.TryAddScoped<Application>();
             services.TryAddScoped(serviceProvider => new Breakpoint(serviceProvider.GetService<Window>())
@@ -25,20 +24,20 @@ namespace Microsoft.Extensions.DependencyInjection
                     Md = 1280,
                     Lg = 1920
                 }
-            });            
+            });
             services.TryAddScoped<IPopupService, PopupService>();
-            services.TryAddScoped<IErrorHandler, MErrorHandler>( );
+            services.TryAddScoped<IErrorHandler, MErrorHandler>();
             services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
 
-            return services;
+            return new MasaBlazorBuilder(services);
         }
 
-        public static IServiceCollection AddMasaBlazor(this IServiceCollection services, Action<MasaBlazorOptionsBuilder> builderAction)
+        public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services, Action<MasaBlazorOptions> optionsAction)
         {
-            var builder = new MasaBlazorOptionsBuilder(services);
-            builderAction?.Invoke(builder);
+            var options = new MasaBlazorOptions();
+            optionsAction?.Invoke(options);
 
-            return services.AddMasaBlazor(builder.Options);
+            return services.AddMasaBlazor(options);
         }
 
         private static void InitBlazorComponentVariables(MasaBlazorOptions options)

@@ -9,7 +9,7 @@
 </MNavigationDrawer>
 
 <MMain Class="mainlayout-m-main">
-    <MErrorHandler>        
+    <MErrorHandler>
         <ChildContent>
             @Body
         </ChildContent>
@@ -25,4 +25,12 @@
         </ErrorContent>
     </MErrorHandler>
 </MMain>
+
 <Toc />
+
+@code {
+
+    [CascadingParameter]
+    public BaseLayout BaseLayout { get; set; }
+
+}

@@ -10,8 +10,6 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             BlazorMode.Current = mode;
 
-            services.AddMasaBlazor();
-
             services.AddHttpClient<DemoService>(c =>
             {
                 c.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68");

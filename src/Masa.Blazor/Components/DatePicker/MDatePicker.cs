@@ -4,6 +4,9 @@ namespace Masa.Blazor
 {
     public partial class MDatePicker<TValue> : BDatePicker, IThemeable, IDatePicker
     {
+        [Inject]
+        protected I18n I18n { get; set; }
+        
         [Parameter]
         public DatePickerType? ActivePicker
         {
@@ -165,8 +168,22 @@ namespace Masa.Blazor
         {
             get
             {
-                return values => IsMultiple && values.Count > 1 ? $"{values.Count} selected" : values.Count > 0 ? (Type == DatePickerType.Date ? $"{values[0].DayOfWeek.ToString()[..3]}, {(Landscape ? "<br>" : "")}{DateFormatters.Month(values[0].Month)[..3]} {values[0].Day}" : $"{DateFormatters.Month(values[0].Month)}"
-                ) : "&nbsp;";
+                return values =>
+                {
+                    if (IsMultiple && values.Count > 1)
+                    {
+                        return string.Format(I18n.T("$masaBlazor.datePicker.itemsSelected"), values.Count);
+                    }
+
+                    if (values.Count > 0)
+                    {
+                        return Type == DatePickerType.Date 
+                            ? $"{values[0].DayOfWeek.ToString()[..3]}, {(Landscape ? "<br>" : "")}{DateFormatters.Month(values[0].Month)[..3]} {values[0].Day}" 
+                            : $"{DateFormatters.Month(values[0].Month)}";
+                    }
+                    
+                    return "&nbsp;";
+                };
             }
         }
 
@@ -205,6 +222,13 @@ namespace Masa.Blazor
             {
                 return IsMultiple ? MultipleValue.LastOrDefault() : (Value is DateOnly date ? date : default);
             }
+        }
+
+        public override Task SetParametersAsync(ParameterView parameters)
+        {
+            
+            
+            return base.SetParametersAsync(parameters);
         }
 
         protected override void OnInitialized()

@@ -2,6 +2,9 @@
 {
     public class MDataIterator<TItem> : BDataIterator<TItem>, IDataIterator<TItem>, ILoadable
     {
+        [Inject]
+        protected I18n I18n { get; set; } = null!;
+        
         [Parameter]
         public RenderFragment<(int PageStart, int PageStop, int ItemsLength)> PageTextContent { get; set; }
 
@@ -23,15 +26,14 @@
         [Parameter]
         public StringBoolean Loading { get; set; }
 
-        //TODO:Internationalization
         [Parameter]
-        public string NoResultsText { get; set; } = "No matching records found";
+        public string NoResultsText { get; set; }
 
         [Parameter]
-        public string NoDataText { get; set; } = "No data available";
+        public string NoDataText { get; set; }
 
         [Parameter]
-        public string LoadingText { get; set; } = "Loading... Please wait";
+        public string LoadingText { get; set; }
 
         [Parameter]
         public bool HideDefaultFooter { get; set; }
@@ -99,6 +101,15 @@
         [Parameter]
         public string Color { get; set; }
 
+        public override Task SetParametersAsync(ParameterView parameters)
+        {
+            NoResultsText = I18n.T("$masaBlazor.dataIterator.noResultsText");
+            NoDataText = I18n.T("$masaBlazor.noDataText");
+            LoadingText = I18n.T("$masaBlazor.dataIterator.loadingText");
+            
+            return base.SetParametersAsync(parameters);
+        }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -142,6 +153,7 @@
                     attrs[nameof(MDataFooter.Pagination)] = Pagination;
                     attrs[nameof(MDataFooter.OnOptionsUpdate)] =
                         EventCallback.Factory.Create<Action<DataOptions>>(this, options => UpdateOptions(options));
+                    attrs[nameof(MDataFooter.ItemsPerPageAllText)] = I18n.T("$masaBlazor.dataFooter.itemsPerPageAll");
                     attrs[nameof(MDataFooter.Parameters)] = FooterProps;
                 });
         }

@@ -4,6 +4,9 @@ namespace Masa.Blazor
 {
     public class MTimePickerTitle : BTimePickerTitle, ITimePickerTitle
     {
+        [Inject]
+        private I18n I18n { get; set; }
+        
         [Parameter]
         public bool AmPmReadonly { get; set; }
 
@@ -65,6 +68,18 @@ namespace Masa.Blazor
             {
                 return Second == null ? "--" : Pad(Second.Value);
             }
+        }
+        
+        public string AmText { get; protected set; }
+
+        public string PmText { get; protected set; }
+
+        public override Task SetParametersAsync(ParameterView parameters)
+        {
+            AmText = I18n.T("$masaBlazor.timePicker.am");    
+            PmText = I18n.T("$masaBlazor.timePicker.pm");    
+            
+            return base.SetParametersAsync(parameters);
         }
 
         private static string Pad(int value)

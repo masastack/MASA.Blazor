@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="keywords" content="Masa.Blazor,Masa Blazor,Blazor,BlazorComponent,Blazor组件库,dotnet,Material Design,数闪,组件库,webassembly,wasm" />
     <meta name="description" content="基于Material Design和BlazorComponent的交互能力提供标准的Blazor组件库。Provide standard blazor component library based on the interaction ability of material design and BlazorComponent" />
-    <title>Masa.Blazor.Doc.WebAssembly</title>
+    <title>MASA Blazor</title>
     <base href="/" />
     <link rel="icon" href="https://cdn.masastack.com/stack/images/website/masa-blazor/miniLogo.png" type="image/x-icon">
     <link href="_content/Masa.Blazor/css/masa-blazor.css" rel="stylesheet">
@@ -217,82 +217,101 @@
     <script src="https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.min.js"></script>
     <script src="https://cdn.masastack.com/npm/docsearch/docsearch.js"></script>
     <script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>
-    <script>
-        Blazor.start()
-            .then(function () {
-                window.BlazorComponent.Prism = {};
-                window.BlazorComponent.Prism.highlight = function (code, language, component, codeElement) {
-                    setTimeout(function () {
-                        var highlightCode = Prism.highlight(code, Prism.languages[language], language);
-                        codeElement.innerHTML = highlightCode;
-                        component.invokeMethodAsync('OnAfterHighlighted');
-                    }, 0);
-                }
+    <script type="module">
+        import { BrotliDecode } from './js/decode.min.js';
 
-                window.BlazorComponent.Prism.highlightAll = function () {
-                    var pres = document.querySelectorAll("pre");
-
-                    for (var i = 0; i < pres.length; i++) {
-                        let pre = pres[i];
-
-                        let parent = pre.parentElement;
-                        if (parent.classList[0] == "app-code") {
-                            break;
+        Blazor.start({
+            loadBootResource: function (type, name, defaultUri, integrity) {
+                if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
+                    return (async function () {
+                        const response = await fetch(defaultUri + '.br', { cache: 'no-cache' });
+                        if (!response.ok) {
+                            throw new Error(response.statusText);
                         }
+                        const originalResponseBuffer = await response.arrayBuffer();
+                        const originalResponseArray = new Int8Array(originalResponseBuffer);
+                        const decompressedResponseArray = BrotliDecode(originalResponseArray);
+                        const contentType = type ===
+                            'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
+                        return new Response(decompressedResponseArray,
+                            { headers: { 'content-type': contentType } });
+                    })();
+                }
+            }
+        }).then(function () {
+            window.BlazorComponent.Prism = {};
+            window.BlazorComponent.Prism.highlight = function (code, language, component, codeElement) {
+                setTimeout(function () {
+                    var highlightCode = Prism.highlight(code, Prism.languages[language], language);
+                    codeElement.innerHTML = highlightCode;
+                    component.invokeMethodAsync('OnAfterHighlighted');
+                }, 0);
+            }
 
-                        let div = document.createElement("div");
-                        div.className = "app-code overflow-hidden m-sheet m-sheet--outlined theme--light rounded grey lighten-5";
-                        div.style = "opacity:0.85"
+            window.BlazorComponent.Prism.highlightAll = function () {
+                var pres = document.querySelectorAll("pre");
 
-                        parent.replaceChild(div, pre);
-                        div.appendChild(pre);
+                for (var i = 0; i < pres.length; i++) {
+                    let pre = pres[i];
+
+                    let parent = pre.parentElement;
+                    if (parent.classList[0] == "app-code") {
+                        break;
                     }
 
-                    Prism.highlightAll();
+                    let div = document.createElement("div");
+                    div.className = "app-code overflow-hidden m-sheet m-sheet--outlined theme--light rounded grey lighten-5";
+                    div.style = "opacity:0.85"
+
+                    parent.replaceChild(div, pre);
+                    div.appendChild(pre);
                 }
 
-                window.setCookie = function (name, value) {
-                    document.cookie = `${name}=${escape(value.toString())};path=/;}`;
+                Prism.highlightAll();
+            }
+
+            window.setCookie = function (name, value) {
+                document.cookie = `${name}=${escape(value.toString())};path=/;}`;
+            }
+
+            window.getCookie = function (name) {
+                const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
+                const arr = document.cookie.match(reg);
+                if (arr) {
+                    return unescape(arr[2]);
                 }
 
-                window.getCookie = function (name) {
-                    const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
-                    const arr = document.cookie.match(reg);
-                    if (arr) {
-                        return unescape(arr[2]);
-                    }
+                return null;
+            }
 
-                    return null;
+            window.getCurrentDocSearchLanguage = function () {
+                const language = window.getCookie('Masa_I18nConfig_Language');
+                if (!language || language === 'zh-CN') {
+                    return 'zh';
                 }
+                return 'en';
+            }
 
-                window.getCurrentDocSearchLanguage = function () {
-                    const language = window.getCookie('Masa_I18nConfig_Language');
-                    if (!language || language === 'zh-CN') {
-                        return 'zh';
-                    }
-                    return 'en';
+            function addDocSearch() {
+                if (document.querySelector("#docsearch")) {
+                    docsearch({
+                        container: '#docsearch',
+                        appId: 'TSB4MACWRC',
+                        indexName: 'blazor-masastack',
+                        apiKey: 'a38a8d4b58c5648825ba3fafce8b6ffa',
+                        debug: false,
+                        //searchParameters: {
+                        //    facetFilters: ['language:'+ getCurrentDocSearchLanguage()]
+                        //}
+                    });
+                } else {
+                    setTimeout(addDocSearch, 1000);
                 }
+            }
 
-                function addDocSearch() {
-                    if (document.querySelector("#docsearch")) {
-                        docsearch({
-                            container: '#docsearch',
-                            appId: 'TSB4MACWRC',
-                            indexName: 'blazor-masastack',
-                            apiKey: 'a38a8d4b58c5648825ba3fafce8b6ffa',
-                            debug: false,
-                            //searchParameters: {
-                            //    facetFilters: ['language:'+ getCurrentDocSearchLanguage()]
-                            //}
-                        });
-                    }
-                    else {
-                        setTimeout(addDocSearch, 1000);
-                    }
-                }
-
-                addDocSearch();
-            })
+            addDocSearch();
+        })
     </script>
 </body>
+
 </html>

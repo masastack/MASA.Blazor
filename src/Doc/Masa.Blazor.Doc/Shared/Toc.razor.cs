@@ -14,17 +14,8 @@ namespace Masa.Blazor.Doc.Shared;
 
 public partial class Toc : OwningComponentBase<DemoService>
 {
-    private bool _disposed;
-
-    private ContentsItem ActiveItem { get; set; }
-
-    private List<ContentsItem> Items { get; set; } = new();
-
     [Inject]
     public I18n I18n { get; set; }
-
-    [Inject]
-    public I18nConfig I18nConfig { get; set; }
 
     [Inject]
     public IJSRuntime Js { get; set; }
@@ -32,8 +23,13 @@ public partial class Toc : OwningComponentBase<DemoService>
     [Inject]
     public NavigationManager NavigationManager { get; set; }
 
-    [CascadingParameter(Name = "Lang")]
-    public bool IsChinese { get; set; }
+    [CascadingParameter(Name = "Culture")]
+    public CultureInfo Culture { get; set; }
+
+    private bool _disposed;
+
+    private ContentsItem ActiveItem { get; set; }
+    private List<ContentsItem> Items { get; set; } = new();
 
     protected override void OnInitialized()
     {
@@ -124,13 +120,13 @@ public partial class Toc : OwningComponentBase<DemoService>
         }
 
         ActiveItem = null;
-        Service.ChangeLanguage(I18nConfig.Language ?? CultureInfo.CurrentCulture.Name);
+        Service.ChangeLanguage(Culture);
         Items = await Service.GetTitlesAsync(NavigationManager.Uri);
     }
 
-    public string T(string key)
+    private string T(string key)
     {
-        return I18n.LanguageMap.GetValueOrDefault(key);
+        return I18n.Locale.GetValueOrDefault(key);
     }
 
     protected override void Dispose(bool disposing)

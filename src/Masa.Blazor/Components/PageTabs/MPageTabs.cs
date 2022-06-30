@@ -6,6 +6,9 @@ namespace Masa.Blazor
 {
     public class MPageTabs : MTabs, IPageTabs
     {
+        [Inject]
+        private I18n I18n { get; set; }
+        
         [EditorRequired]
         [Parameter]
         public IList<PageTabItem> Items { get; set; }
@@ -34,6 +37,11 @@ namespace Masa.Blazor
         Task IPageTabs.HandleOnCloseRightAsync(MouseEventArgs args) => HandleOnCloseRightAsync(args);
 
         Task IPageTabs.HandleOnCloseOtherAsync(MouseEventArgs args) => HandleOnCloseOtherAsync(args);
+        
+        public string ReloadTabText { get; protected set; }
+        public string CloseTabsToTheLeftText { get; protected set; }
+        public string CloseTabsToTheRightText { get; protected set; }
+        public string CloseOtherTabsText { get; protected set; }
 
         protected IList<PageTabItem> ComputedItems
         {
@@ -57,6 +65,16 @@ namespace Masa.Blazor
         protected PageTabItem MenuActiveItem { get; set; }
 
         protected IList<PageTabItem> InternalItems { get; set; } = new List<PageTabItem>();
+
+        public override Task SetParametersAsync(ParameterView parameters)
+        {
+            ReloadTabText = I18n.T("$masaBlazor.pageTabs.reloadTab");
+            CloseTabsToTheLeftText = I18n.T("$masaBlazor.pageTabs.closeTabsToTheLeft");
+            CloseTabsToTheRightText = I18n.T("$masaBlazor.pageTabs.closeTabsToTheRight");
+            CloseOtherTabsText = I18n.T("$masaBlazor.pageTabs.closeOtherTabs");    
+
+            return base.SetParametersAsync(parameters);
+        }
 
         protected override void OnInitialized()
         {

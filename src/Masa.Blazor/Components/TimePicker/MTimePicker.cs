@@ -5,6 +5,9 @@ namespace Masa.Blazor
 {
     public class MTimePicker : BTimePicker, ITimePicker
     {
+        [Inject]
+        private I18n I18n { get; set; }
+        
         [Parameter]
         public string HeaderColor { get; set; }
 
@@ -86,6 +89,10 @@ namespace Masa.Blazor
 
         [Parameter]
         public EventCallback<TimeOnly?> OnChange { get; set; }
+
+        public string AmText { get; set; }
+
+        public string PmText { get; set; }
 
         public SelectingTimes Selecting { get; set; } = SelectingTimes.Hour;
 
@@ -337,6 +344,14 @@ namespace Masa.Blazor
         {
             //TODO:
             return value;
+        }
+
+        public override Task SetParametersAsync(ParameterView parameters)
+        {
+            AmText = I18n.T("$masaBlazor.timePicker.am");    
+            PmText = I18n.T("$masaBlazor.timePicker.pm");    
+            
+            return base.SetParametersAsync(parameters);
         }
 
         protected override void OnInitialized()

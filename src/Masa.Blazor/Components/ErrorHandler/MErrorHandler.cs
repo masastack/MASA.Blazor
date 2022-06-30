@@ -34,11 +34,20 @@ namespace Masa.Blazor
         private bool CheckIfThrownInLifecycles(Exception exception)
         {
             if (exception.TargetSite?.Name is nameof(SetParametersAsync)
-                or nameof(OnInitialized) or nameof(OnInitializedAsync)
-                or nameof(OnParametersSet) or nameof(SetParametersAsync)
-                or nameof(OnAfterRender) or nameof(OnAfterRenderAsync))
+                    or nameof(OnInitialized) or nameof(OnInitializedAsync)
+                    or nameof(OnParametersSet) or nameof(OnParametersSetAsync)
+                    or nameof(OnAfterRender) or nameof(OnAfterRenderAsync)
+                || (exception.StackTrace is not null
+                    && (exception.StackTrace.EndsWith("Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()")
+                        || exception.StackTrace.EndsWith(
+                            "Microsoft.AspNetCore.Components.ComponentBase.SupplyCombinedParameters(ParameterView directAndCascadingParameters)"))))
             {
                 return true;
+            }
+
+            if (exception.InnerException is not null)
+            {
+                return CheckIfThrownInLifecycles(exception.InnerException);
             }
 
             return false;
@@ -47,10 +56,6 @@ namespace Masa.Blazor
         protected override async Task OnErrorAsync(Exception exception)
         {
             Logger?.LogError(exception, "OnErrorAsync");
-            if (exception.InnerException is not null)
-            {
-                exception = exception.InnerException;
-            }
 
             if (CheckIfThrownInLifecycles(exception))
             {
@@ -77,7 +82,6 @@ namespace Masa.Blazor
                     throw exception;
                 }
             }
-
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)

@@ -1,6 +1,5 @@
 ﻿using Masa.Blazor.Doc.Services;
-using Microsoft.AspNetCore.StaticFiles;
-using System.Globalization;
+using Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 namespace Masa.Blazor.Doc.Server
 {
@@ -19,10 +18,10 @@ namespace Masa.Blazor.Doc.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddScoped<LazyAssemblyLoader>();
             services.AddServerSideBlazor();
 
-            services.AddMasaBlazor();
-            services.AddMasaI18nForServer("wwwroot/locale");
+            services.AddMasaBlazor().AddI18nForServer("wwwroot/locale");
 
             services.AddMasaBlazorDocs(Configuration["ASPNETCORE_URLS"]?.Replace("0.0.0.0", "127.0.0.1") ?? "http://localhost:5000");
         }
@@ -42,18 +41,6 @@ namespace Masa.Blazor.Doc.Server
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseRequestLocalization(opts =>
-            {
-                var supportedCultures = new List<CultureInfo>
-                {
-                    new CultureInfo("zh-CN"),
-                    new CultureInfo("en-US")
-                };
-
-                opts.SupportedCultures = supportedCultures;
-                opts.SupportedUICultures = supportedCultures;
-            });
 
             _crawlService = crawlService;
 
