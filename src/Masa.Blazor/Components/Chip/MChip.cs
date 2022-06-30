@@ -86,7 +86,7 @@
                         .AddIf("display:none", () => !Active)
                         .AddBackgroundColor(Color)
                         .AddTextColor(Color, () => Outlined)
-                        .AddTextColor(Color);
+                        .AddTextColor(TextColor);
                 })
                 .Apply("content", cssBuilder =>
                 {
