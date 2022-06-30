@@ -92,9 +92,9 @@ in `Pages/_Host.cshtml` import resource files：
 <!--masa blazor css style-->
 <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
 <!--icon file,import need to use-->
-<link href="https://cdn.masastack.com/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
-<link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
-<link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 <!--js(should lay the end of file)-->
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
@@ -108,9 +108,9 @@ in `wwwroot\index.html` import resource files：
 ```html
 <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
 
-<link href="https://cdn.masastack.com/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
-<link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
-<link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 
 <script src="_content/BlazorComponent/js/blazor-component.js"></script>
 ```
