@@ -42,6 +42,7 @@ jobs:
           app_location: "publish/wwwroot" # App source code path (because skip, so same to output_location)
           skip_app_build: true
           skip_api_build: true
+          deployment_environment: production
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
