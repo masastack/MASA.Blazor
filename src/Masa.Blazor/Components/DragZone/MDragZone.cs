@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor
+﻿using Microsoft.Extensions.Logging;
+
+namespace Masa.Blazor
 {
     public partial class MDragZone : BDragZone, IDisposable, IAsyncDisposable
     {
@@ -55,11 +57,13 @@
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
-        public void OnChoose(dynamic args)
+        public async Task OnChoose(dynamic args)
         {
             _isRender = false;
             if (_options?.OnChoose != null)
                 _options.OnChoose(args);
+
+            await Task.CompletedTask;
         }
 
         /// <summary>
@@ -67,11 +71,13 @@
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
-        public void OnUnchoose(dynamic args)
+        public async Task OnUnchoose(dynamic args)
         {
             _isRender = false;
             if (_options?.OnUnchoose != null)
                 _options.OnUnchoose(args);
+
+            await Task.CompletedTask;
         }
 
         /// <summary>
@@ -79,12 +85,19 @@
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
-        public void OnStart(SorttableEventArgs args)
+        public async Task OnStart(SorttableEventArgs args)
         {
             _isRender = false;
-            DragDropService.DragItem = Value.FirstOrDefault(it => it.Id == args.ItemId);
+            var find = Value.FirstOrDefault(it => it.Id == args.ItemId);
+            if (find == null)
+            {
+                return;
+            }
+            DragDropService.DragItem = find;
             if (_options?.OnStart != null)
                 _options.OnStart(args);
+
+            await Task.CompletedTask;
         }
 
         /// <summary>        
@@ -92,13 +105,14 @@
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
-        public void OnDropEnd(SorttableEventArgs args)
+        public async Task OnDropEnd(SorttableEventArgs args)
         {
             _isRender = false;
             if (_options?.OnEnd != null)
                 _options.OnEnd(args);
 
             DragDropService.Reset();
+            await Task.CompletedTask;
         }
 
         /// <summary>
@@ -106,19 +120,26 @@
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
-        public string OnAdd(SorttableEventArgs args)
+        public async Task<string> OnAdd(SorttableEventArgs args)
         {
             _isRender = true;
             if (_options?.OnAdd != null)
                 _options.OnAdd(args);
 
             string cloneId = string.Empty;
+            //DragDropService.DropZone = this;
+            //if (args.IsClone)
+            //{
+            //    cloneId= Guid.NewGuid().ToString();
+            //    DragDropService.CloneId = cloneId;
+            //}
             if (!Contains(DragDropService.DragItem))
             {
                 var item = DragDropService.DragItem.Clone();
                 item.Id = Guid.NewGuid().ToString();
                 Add(item, args.NewIndex);
             }
+            await Task.CompletedTask;
             return cloneId;
         }
 
@@ -127,11 +148,16 @@
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
-        public void OnUpdate(SorttableEventArgs args)
+        public async Task OnUpdate(SorttableEventArgs args)
         {
             _isRender = true;
             if (_options?.OnUpdate != null)
                 _options.OnUpdate(args);
+
+            if (args.NewParentId == Id)
+                Update(DragDropService.DragItem, args.OldIndex, args.NewIndex);
+
+            await Task.CompletedTask;
         }
 
         /// <summary>
@@ -139,14 +165,13 @@
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
-        public void OnSort(SorttableEventArgs args)
+        public async Task OnSort(SorttableEventArgs args)
         {
             _isRender = true;
             if (_options?.OnSort != null)
                 _options.OnSort(args);
 
-            if (args.NewParentId == Id)
-                Update(DragDropService.DragItem, args.OldIndex, args.NewIndex);
+            await Task.CompletedTask;
         }
 
         /// <summary>
@@ -154,22 +179,26 @@
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
-        public void OnRemove(SorttableEventArgs args)
+        public async Task<string> OnRemove(SorttableEventArgs args)
         {
             _isRender = true;
             if (_options?.OnRemove != null)
                 _options.OnRemove(args);
 
-            if (Contains(DragDropService.DragItem))
+            string cloneId = string.Empty;
+            if (DragDropService.DragItem != null && Contains(DragDropService.DragItem))
             {
                 Remove(DragDropService.DragItem);
                 if (args.IsClone)
                 {
                     var item = DragDropService.DragItem.Clone();
                     item.Id = Guid.NewGuid().ToString();
-                    Add(item, args.OldIndex);
+                    Add(item, args.NewIndex);
                 }
             }
+
+            await Task.CompletedTask;
+            return cloneId;
         }
 
         /// <summary>
@@ -177,11 +206,13 @@
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
-        public void OnMove(SorttableMoveEventArgs args)
+        public async Task OnMove(SorttableMoveEventArgs args)
         {
             _isRender = false;
             if (_options?.OnMove != null)
                 _options.OnMove(args);
+
+            await Task.CompletedTask;
         }
 
         /// <summary>
@@ -189,19 +220,23 @@
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
-        public void OnClone(SorttableEventArgs args)
+        public async Task OnClone(SorttableEventArgs args)
         {
             _isRender = false;
             if (_options?.OnClone != null)
                 _options.OnClone(args);
+
+            await Task.CompletedTask;
         }
 
         [JSInvokable]
-        public void OnChange(SorttableEventArgs args)
+        public async Task OnChange(SorttableEventArgs args)
         {
             _isRender = false;
             if (_options?.OnChange != null)
                 _options.OnChange(args);
+
+            await Task.CompletedTask;
         }
 
         [JSInvokable]

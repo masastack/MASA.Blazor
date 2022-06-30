@@ -3,12 +3,6 @@
         background-color: red
     }
 
-    .filter-parent {
-        background-color: #eee;
-        min-height: 40px;
-        padding: 5px 0 10px 0
-    }
-
     .filter-item {
         margin: 5px;
         position: relative;
@@ -18,28 +12,25 @@
         border: 1px solid rgba(0,0,0,.125);
     }
 
-    .filter-white-color {
-        background-color: #ffffff;
-    }
 </style>
 <MContainer>
     <MRow>
         <MCol Cols=12>
-            <MDragZone Options=SetOptions Class="filter-parent">
+            <MDragZone Options=SetOptions>
                 <MDragItem>
-                    <div class="filter-white-color filter-item">item1.1</div>
+                    <div class="filter-item">item1.1</div>
                 </MDragItem>
                 <MDragItem>
-                    <div class="filter-white-color filter-item ignore-drag">item1.2</div>
+                    <div class="filter-item ignore-drag">item1.2</div>
                 </MDragItem>
                 <MDragItem>
-                    <div class="filter-white-color filter-item">item1.3</div>
+                    <div class="filter-item">item1.3</div>
                 </MDragItem>
                 <MDragItem>
-                    <div class="filter-white-color filter-item ignore-drag">item1.4</div>
+                    <div class="filter-item ignore-drag">item1.4</div>
                 </MDragItem>
                 <MDragItem>
-                    <div class="filter-white-color filter-item">item1.5</div>
+                    <div class="filter-item">item1.5</div>
                 </MDragItem>
             </MDragZone>
         </MCol>
