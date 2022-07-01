@@ -29,7 +29,7 @@
     </MCardText>
     <MDivider></MDivider>
     <ExpandTransition>
-        <MList show="@_show"
+        <MList If="@_show"
                class="red lighten-3">
             @for (var i = 0; i < Fields.Count; i++)
             {
@@ -90,7 +90,7 @@
     private bool _isLoading;
     private Item _model;
     private string _value;
-    private bool _show;
+    private bool _show => !string.IsNullOrEmpty(_value);
 
     [Inject]
     public HttpClient HttpClient { get; set; }
@@ -161,14 +161,11 @@
     public async Task UpdateItemAsync(Item item)
     {
         _model = item;
-        await Task.Delay(100);//We will fix this when transition update to javascript
-        _show = true;
     }
 
     public void Clear()
     {
         _model = null;
         _value = null;
-        _show = false;
     }
  }
