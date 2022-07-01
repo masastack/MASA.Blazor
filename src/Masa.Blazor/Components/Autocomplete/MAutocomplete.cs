@@ -55,7 +55,7 @@ namespace Masa.Blazor
             {
                 if (!IsSearching || NoFilter || InternalSearch is null)
                 {
-                    return Items;
+                    return base.ComputedItems;
                 }
 
                 return Items.Where(item => Filter(item, InternalSearch, GetText(item) ?? "")).ToList();
@@ -135,6 +135,14 @@ namespace Masa.Blazor
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.SearchInput)] = InternalSearch;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.NoFilter)] = NoFilter || !IsSearching || FilteredItems.Count == 0;
                 });
+        }
+
+        protected override async Task OnIsFocusedChanged(bool val)
+        {
+            if (!val)
+            {
+                await this.Blur();
+            }
         }
 
         protected override async Task SelectItem(TItem item)

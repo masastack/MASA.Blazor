@@ -133,7 +133,22 @@ namespace Masa.Blazor
             { "readonly", true }
         };
 
-        protected virtual IList<TItem> ComputedItems => Items;
+        // protected virtual IList<TItem> ComputedItems => Items;
+
+        protected virtual IList<TItem> ComputedItems
+        {
+            get
+            {
+                if (HideSelected)
+                {
+                    var items = Items.Where(item => !SelectedItems.Contains(item)).ToList();
+                    Console.WriteLine(items.Count);
+                    return items;
+                }
+
+                return Items;
+            }
+        }
 
         protected IList<TItemValue> InternalValues
         {
@@ -224,7 +239,13 @@ namespace Masa.Blazor
                     await MMenu.AddOutsideClickEventListener();
                 }
 
-                MMenu.AfterShowContent = () => WatchIsMenuActive(true);
+                MMenu.AfterShowContent = async (isLazyContent) =>
+                {
+                    if (isLazyContent)
+                    {
+                        await WatchIsMenuActive(true);
+                    }
+                };
 
                 StateHasChanged();
             }
@@ -239,6 +260,8 @@ namespace Masa.Blazor
 
         protected virtual async Task WatchIsMenuActive(bool val)
         {
+            Console.WriteLine($"{DateTime.Now.ToLongTimeString()} watchIsActive:{val}");
+
             if ((Multiple && !val) || GetMenuIndex() > -1)
             {
                 return;
@@ -249,6 +272,7 @@ namespace Masa.Blazor
                 "aria-selected", "True");
 
             await SetMenuIndex(index);
+
             StateHasChanged();
         }
 
@@ -349,15 +373,18 @@ namespace Masa.Blazor
                 {
                     attrs[nameof(MMenu.ExternalActivator)] = true;
                     attrs[nameof(MMenu.Value)] = MenuCanShow && IsMenuActive;
-                    attrs[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, async val =>
-                    {
-                        IsMenuActive = val;
-                        if (val && !IsFocused && !IsDisabled)
-                        {
-                            IsFocused = true;
-                            await InputElement.FocusAsync();
-                        }
-                    });
+                    // attrs[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, async val =>
+                    // {
+                    //     Console.WriteLine($"{DateTime.Now.ToLongTimeString()} Menu.ValueChanged({val})");
+                    //
+                    //     IsMenuActive = val;
+                    //     IsFocused = val;
+                    //     // if (val && !IsFocused && !IsDisabled)
+                    //     // {
+                    //     //     IsFocused = true;
+                    //     //     await InputElement.FocusAsync();
+                    //     // }
+                    // });
                     attrs[nameof(MMenu.Disabled)] = Disabled || Readonly;
                     attrs[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
                     attrs[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;
