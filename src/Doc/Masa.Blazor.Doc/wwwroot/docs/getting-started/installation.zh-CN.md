@@ -86,8 +86,7 @@ $ dotnet add package Masa.Blazor
 
 ```html
 <!-- masa blazor css style -->
-<link href="_content/Masa.Blazor/css/masa-blazor.css" rel="stylesheet" />
-<link href="_content/Masa.Blazor/css/masa-extend-blazor.css" rel="stylesheet" />
+<link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
 
 <!--icon file,import need to use-->
 <link href="https://cdn.masastack.com/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
@@ -105,8 +104,7 @@ $ dotnet add package Masa.Blazor
 在`wwwroot\index.html`中引入资源文件：
 
 ```html
-<link href="_content/Masa.Blazor/css/masa-blazor.css" rel="stylesheet" />
-<link href="_content/Masa.Blazor/css/masa-extend-blazor.css" rel="stylesheet" />
+<link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
 
 <link href="https://cdn.masastack.com/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">

@@ -9,8 +9,7 @@
     <title>MASA Blazor</title>
     <base href="/" />
     <link rel="icon" href="https://cdn.masastack.com/stack/images/website/masa-blazor/miniLogo.png" type="image/x-icon">
-    <link href="_content/Masa.Blazor/css/masa-blazor.css" rel="stylesheet">
-    <link href="_content/Masa.Blazor/css/masa-extend-blazor.css" rel="stylesheet">
+    <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
@@ -43,119 +42,60 @@
         }(window.location))
     </script>
     <style>
+        #app {
+            background: #5C2D91;
+            height: 100vh;
+        }
+
+        .spinner-wrapper {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -250px;
+            margin-top: -62px;
+        }
+
+        .spinner-wrapper img {
+            width: 500px;
+        }
+
         .spinner {
-            margin: 400px auto;
-            width: 40px;
-            height: 40px;
-            position: relative;
+            margin: 24px auto 0;
+            width: 104px;
+            text-align: center;
         }
 
-        .container1 > div, .container2 > div, .container3 > div {
-            width: 6px;
-            height: 6px;
-            background-color: #333;
+        .spinner>div {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            background-color: #FFF;
+
             border-radius: 100%;
-            position: absolute;
-            -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
-            animation: bouncedelay 1.2s infinite ease-in-out;
-            -webkit-animation-fill-mode: both;
-            animation-fill-mode: both;
+            display: inline-block;
+            -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+            animation: sk-bouncedelay 1.4s infinite ease-in-out both;
         }
 
-        .spinner .spinner-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+        .spinner>div:last-child {
+            margin-right: 0;
         }
 
-        .container2 {
-            -webkit-transform: rotateZ(45deg);
-            transform: rotateZ(45deg);
+        .spinner .bounce1 {
+            -webkit-animation-delay: -0.24s;
+            animation-delay: -0.24s;
         }
 
-        .container3 {
-            -webkit-transform: rotateZ(90deg);
-            transform: rotateZ(90deg);
+        .spinner .bounce2 {
+            -webkit-animation-delay: -0.12s;
+            animation-delay: -0.12s;
         }
 
-        .circle1 {
-            top: 0;
-            left: 0;
-        }
-
-        .circle2 {
-            top: 0;
-            right: 0;
-        }
-
-        .circle3 {
-            right: 0;
-            bottom: 0;
-        }
-
-        .circle4 {
-            left: 0;
-            bottom: 0;
-        }
-
-        .container2 .circle1 {
-            -webkit-animation-delay: -1.1s;
-            animation-delay: -1.1s;
-        }
-
-        .container3 .circle1 {
-            -webkit-animation-delay: -1.0s;
-            animation-delay: -1.0s;
-        }
-
-        .container1 .circle2 {
-            -webkit-animation-delay: -0.9s;
-            animation-delay: -0.9s;
-        }
-
-        .container2 .circle2 {
-            -webkit-animation-delay: -0.8s;
-            animation-delay: -0.8s;
-        }
-
-        .container3 .circle2 {
-            -webkit-animation-delay: -0.7s;
-            animation-delay: -0.7s;
-        }
-
-        .container1 .circle3 {
-            -webkit-animation-delay: -0.6s;
-            animation-delay: -0.6s;
-        }
-
-        .container2 .circle3 {
-            -webkit-animation-delay: -0.5s;
-            animation-delay: -0.5s;
-        }
-
-        .container3 .circle3 {
-            -webkit-animation-delay: -0.4s;
-            animation-delay: -0.4s;
-        }
-
-        .container1 .circle4 {
-            -webkit-animation-delay: -0.3s;
-            animation-delay: -0.3s;
-        }
-
-        .container2 .circle4 {
-            -webkit-animation-delay: -0.2s;
-            animation-delay: -0.2s;
-        }
-
-        .container3 .circle4 {
-            -webkit-animation-delay: -0.1s;
-            animation-delay: -0.1s;
-        }
-
-        @-webkit-keyframes bouncedelay {
-            0%, 80%, 100% {
-                -webkit-transform: scale(0.0)
+        @-webkit-keyframes sk-bouncedelay {
+            0%,
+            80%,
+            100% {
+                -webkit-transform: scale(0)
             }
 
             40% {
@@ -163,15 +103,17 @@
             }
         }
 
-        @keyframes bouncedelay {
-            0%, 80%, 100% {
-                transform: scale(0.0);
-                -webkit-transform: scale(0.0);
+        @keyframes sk-bouncedelay {
+            0%,
+            80%,
+            100% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
             }
 
             40% {
-                transform: scale(1.0);
                 -webkit-transform: scale(1.0);
+                transform: scale(1.0);
             }
         }
     </style>
@@ -179,24 +121,13 @@
 
 <body>
     <div id="app">
-        <div class="spinner">
-            <div class="spinner-container container1">
-                <div class="circle1"></div>
-                <div class="circle2"></div>
-                <div class="circle3"></div>
-                <div class="circle4"></div>
-            </div>
-            <div class="spinner-container container2">
-                <div class="circle1"></div>
-                <div class="circle2"></div>
-                <div class="circle3"></div>
-                <div class="circle4"></div>
-            </div>
-            <div class="spinner-container container3">
-                <div class="circle1"></div>
-                <div class="circle2"></div>
-                <div class="circle3"></div>
-                <div class="circle4"></div>
+        <div class="spinner-wrapper">
+            <img src="https://cdn.masastack.com/stack/images/logo/MASABlazor/logo-h-en-1.png?x-oss-process=image/resize,w_500"
+                alt="logo" />
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
             </div>
         </div>
     </div>
@@ -220,25 +151,7 @@
     <script type="module">
         import { BrotliDecode } from './js/decode.min.js';
 
-        Blazor.start({
-            loadBootResource: function (type, name, defaultUri, integrity) {
-                if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
-                    return (async function () {
-                        const response = await fetch(defaultUri + '.br', { cache: 'no-cache' });
-                        if (!response.ok) {
-                            throw new Error(response.statusText);
-                        }
-                        const originalResponseBuffer = await response.arrayBuffer();
-                        const originalResponseArray = new Int8Array(originalResponseBuffer);
-                        const decompressedResponseArray = BrotliDecode(originalResponseArray);
-                        const contentType = type ===
-                            'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
-                        return new Response(decompressedResponseArray,
-                            { headers: { 'content-type': contentType } });
-                    })();
-                }
-            }
-        }).then(function () {
+        Blazor.start().then(function () {
             window.BlazorComponent.Prism = {};
             window.BlazorComponent.Prism.highlight = function (code, language, component, codeElement) {
                 setTimeout(function () {
