@@ -371,22 +371,6 @@
     ]
   },
   {
-    "Order": 17,
-    "Title": "DragZone",
-    "FullTitle": "DragZone",
-    "Type": "itemGroup",
-    "Children": [
-      {
-        "Order": 0,
-        "Title": "DragZone",
-        "FullTitle": "DragZone",
-        "Type": "menuItem",
-        "Url": "components/dragzone",
-        "Children": []
-      }
-    ]
-  },
-  {
     "Order": 18,
     "Title": "DragZone",
     "FullTitle": "DragZone",
