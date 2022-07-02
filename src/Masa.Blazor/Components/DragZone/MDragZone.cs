@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace Masa.Blazor
+﻿namespace Masa.Blazor
 {
     public partial class MDragZone : BDragZone, IDisposable, IAsyncDisposable
     {
@@ -88,7 +86,7 @@ namespace Masa.Blazor
         public async Task OnStart(SorttableEventArgs args)
         {
             _isRender = false;
-            var find = Value.FirstOrDefault(it => it.Id == args.ItemId);
+            var find = Items.FirstOrDefault(it => it.Id == args.ItemId);
             if (find == null)
             {
                 return;
@@ -120,27 +118,18 @@ namespace Masa.Blazor
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
-        public async Task<string> OnAdd(SorttableEventArgs args)
+        public async Task OnAdd(SorttableEventArgs args)
         {
             _isRender = true;
             if (_options?.OnAdd != null)
                 _options.OnAdd(args);
 
-            string cloneId = string.Empty;
-            //DragDropService.DropZone = this;
-            //if (args.IsClone)
-            //{
-            //    cloneId= Guid.NewGuid().ToString();
-            //    DragDropService.CloneId = cloneId;
-            //}
             if (!Contains(DragDropService.DragItem))
             {
                 var item = DragDropService.DragItem.Clone();
-                item.Id = Guid.NewGuid().ToString();
                 Add(item, args.NewIndex);
             }
             await Task.CompletedTask;
-            return cloneId;
         }
 
         /// <summary>
