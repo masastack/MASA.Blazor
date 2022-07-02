@@ -168,26 +168,22 @@
         /// </summary>
         /// <param name="args"></param>
         [JSInvokable]
-        public async Task<string> OnRemove(SorttableEventArgs args)
+        public async Task OnRemove(SorttableEventArgs args)
         {
             _isRender = true;
             if (_options?.OnRemove != null)
                 _options.OnRemove(args);
-
-            string cloneId = string.Empty;
-            if (DragDropService.DragItem != null && Contains(DragDropService.DragItem))
+          
+            if (Contains(DragDropService.DragItem))
             {
                 Remove(DragDropService.DragItem);
                 if (args.IsClone)
-                {
-                    var item = DragDropService.DragItem.Clone();
-                    item.Id = Guid.NewGuid().ToString();
-                    Add(item, args.NewIndex);
+                {                   
+                    Add(DragDropService.DragItem, args.OldIndex);
                 }
             }
 
             await Task.CompletedTask;
-            return cloneId;
         }
 
         /// <summary>
