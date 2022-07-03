@@ -314,8 +314,6 @@ namespace Masa.Blazor
         {
             if (SearchIsDirty) return;
 
-            // TODO: what is left and right?
-
             if (Multiple && keyCode == KeyCodes.ArrowLeft)
             {
                 if (SelectedIndex == -1)

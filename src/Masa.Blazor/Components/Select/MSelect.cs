@@ -142,7 +142,6 @@ namespace Masa.Blazor
                 if (HideSelected)
                 {
                     var items = Items.Where(item => !SelectedItems.Contains(item)).ToList();
-                    Console.WriteLine(items.Count);
                     return items;
                 }
 
@@ -243,7 +242,7 @@ namespace Masa.Blazor
                 {
                     if (isLazyContent)
                     {
-                        await WatchIsMenuActive(true);
+                        await OnMenuActiveChange(true);
                     }
                 };
 
@@ -255,13 +254,11 @@ namespace Masa.Blazor
         {
             base.OnWatcherInitialized();
 
-            Watcher.Watch<bool>(nameof(IsMenuActive), val => WatchIsMenuActive(val));
+            Watcher.Watch<bool>(nameof(IsMenuActive), val => OnMenuActiveChange(val));
         }
 
-        protected virtual async Task WatchIsMenuActive(bool val)
+        protected virtual async Task OnMenuActiveChange(bool val)
         {
-            Console.WriteLine($"{DateTime.Now.ToLongTimeString()} watchIsActive:{val}");
-
             if ((Multiple && !val) || GetMenuIndex() > -1)
             {
                 return;
@@ -373,18 +370,6 @@ namespace Masa.Blazor
                 {
                     attrs[nameof(MMenu.ExternalActivator)] = true;
                     attrs[nameof(MMenu.Value)] = MenuCanShow && IsMenuActive;
-                    // attrs[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, async val =>
-                    // {
-                    //     Console.WriteLine($"{DateTime.Now.ToLongTimeString()} Menu.ValueChanged({val})");
-                    //
-                    //     IsMenuActive = val;
-                    //     IsFocused = val;
-                    //     // if (val && !IsFocused && !IsDisabled)
-                    //     // {
-                    //     //     IsFocused = true;
-                    //     //     await InputElement.FocusAsync();
-                    //     // }
-                    // });
                     attrs[nameof(MMenu.Disabled)] = Disabled || Readonly;
                     attrs[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
                     attrs[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;
@@ -473,6 +458,11 @@ namespace Masa.Blazor
                     await SetInternalValueAsync(val);
                 }
 
+                if (HideSelected)
+                {
+                    await SetMenuIndex(-1);
+                }
+
                 IsMenuActive = false;
             }
             else
@@ -516,47 +506,64 @@ namespace Masa.Blazor
         {
             if (IsReadonly && args.Code != KeyCodes.Tab) return;
 
+            if (OnKeyDown.HasDelegate)
+            {
+                await OnKeyDown.InvokeAsync(args);
+            }
+
             var keyCode = args.Code;
 
             // If menu is active, allow default
             // listIndex change from menu
             if (IsMenuActive && new[] { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End, KeyCodes.Enter }.Contains(keyCode))
             {
-                NextTick(async () => await ChangeListIndex(keyCode));
+                NextTick(async () =>
+                {
+                    await ChangeMenuListIndex(keyCode);
+                    StateHasChanged();
+                });
             }
 
+            // If enter, space, open menu
             if (new[] { KeyCodes.Enter, KeyCodes.Space }.Contains(keyCode))
             {
                 ActivateMenu();
             }
 
+            // If menu is not active, up/down/home/end can do
+            // one of 2 things. If multiple, opens the
+            // menu, if not, will cycle through all
+            // available options
             if (!IsMenuActive && new[] { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End }.Contains(keyCode))
             {
                 await OnUpDown(keyCode);
                 return;
             }
 
+            // If escape deactivate the menu
             if (keyCode == KeyCodes.Escape)
             {
                 await OnEscDown();
                 return;
             }
 
+            // If tab - select item or close menu
             if (keyCode == KeyCodes.Tab)
             {
                 await OnTabDown(args);
                 return;
             }
 
+            // If space preventDefault
             if (keyCode == KeyCodes.Space)
             {
                 // invoke preventDefault at js interop
             }
         }
 
-        private async Task ChangeListIndex(string code)
+        private async Task ChangeMenuListIndex(string code)
         {
-            if (code == KeyCodes.Enter)
+            if (code == KeyCodes.Enter && MenuListIndex != -1)
             {
                 await SelectItemByIndex(MenuListIndex);
                 return;
@@ -593,6 +600,9 @@ namespace Masa.Blazor
 
         protected virtual async Task OnUpDown(string code)
         {
+            // Multiple selects do not cycle their value
+            // when pressing up or down, instead activate
+            // the menu
             if (Multiple)
             {
                 ActivateMenu();
@@ -601,7 +611,7 @@ namespace Masa.Blazor
 
             // TODO: menu.hasClickableTiles
 
-            await ChangeListIndex(code);
+            await ChangeMenuListIndex(code);
 
             await SelectItemByIndex(MenuListIndex);
         }
