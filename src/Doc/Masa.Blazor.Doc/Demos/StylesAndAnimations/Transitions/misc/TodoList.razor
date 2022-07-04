@@ -6,7 +6,7 @@
                 OnKeyDown="OnEnterKeyDown">
         <AppendContent>
             <FadeTransition >
-                <MIcon IfElse="@(!string.IsNullOrEmpty(_newTask))"
+                <MIcon If="@(!string.IsNullOrEmpty(_newTask))"
                        OnClick="Create">
                     add_circle
                 </MIcon>
@@ -75,7 +75,7 @@
                         <MSpacer></MSpacer>
 
                         <ScrollXTransition>
-                            <MIcon IfElse="@task.Done" Color="success">
+                            <MIcon If="@task.Done" Color="success">
                                 mdi-check
                             </MIcon>
                         </ScrollXTransition>
