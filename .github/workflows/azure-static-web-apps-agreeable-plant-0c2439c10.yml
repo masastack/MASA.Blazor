@@ -17,11 +17,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          submodules: true
+          submodules: false
       - name: setting dotnet 
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.x'
+      - name: dependencies
+        run: git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
       - name: setting tools
         run: dotnet workload install wasm-tools
       - name: Copy Static Resources

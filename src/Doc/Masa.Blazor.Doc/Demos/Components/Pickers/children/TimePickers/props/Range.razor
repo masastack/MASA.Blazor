@@ -3,14 +3,16 @@
     <MRow Justify="JustifyTypes.SpaceAround"
           Align="AlignTypes.Center">
         <MCol Style="width: 350px; flex: 0 1 auto;">
-            <h2>Start:@_start</h2>
+            <h2>Start:</h2>
             <MTimePicker @bind-Value="_start"
-                         Max="_end"></MTimePicker>
+                         Max="_end">
+            </MTimePicker>
         </MCol>
         <MCol Style="width: 350px; flex: 0 1 auto;">
-            <h2>End:@_end</h2>
+            <h2>End:</h2>
             <MTimePicker @bind-Value="_end"
-                         Min="_start"></MTimePicker>
+                         Min="_start">
+            </MTimePicker>
         </MCol>
     </MRow>
 </div>
@@ -19,4 +21,3 @@
     private TimeOnly? _start;
     private TimeOnly? _end;
 }
-

@@ -74,17 +74,19 @@
                         @bind-Value="model.Terms"
                         Color="green">
                         <LabelContent>
-                            <div @onclick:stopPropagation>
+                            <div>
                                 Do you accept the
                                 <a
                                     href="#"
-                                    @onclick="() => terms = true">
+                                    @onclick:preventDefault
+                                    @onclick="@(() => terms = true)">
                                     terms
                                 </a>
                                 and
                                 <a
                                     href="#"
-                                    @onclick="() => conditions = true">
+                                    @onclick:preventDefault
+                                    @onclick="@(() => conditions = true)">
                                     conditions?
                                 </a>
                             </div>
@@ -161,7 +163,7 @@
 
 @code{
 
-    static List<string> animals = new() {"Dog", "Cat", "Rabbit", "Turtle", "Snake"};
+    static List<string> animals = new() { "Dog", "Cat", "Rabbit", "Turtle", "Snake" };
 
     MForm form;
     bool terms;
@@ -173,15 +175,15 @@
 
     bool FormIsValid => form != null && form.EditContext.IsModified() && form.EditContext.Validate();
 
-    void ResetForm()
+    async Task ResetForm()
     {
-        model.Reset();
+        await form.ResetAsync();
     }
 
-    void Submit()
+    async Task Submit()
     {
         snackbar = true;
-        model.Reset();
+        await form.ResetAsync();
     }
 
     public class Model
@@ -204,16 +206,6 @@
         [Required]
         [Range(typeof(bool), "true", "true", ErrorMessage = "The field is required")] // just for demo
         public bool Terms { get; set; }
-
-        public void Reset()
-        {
-            First = default;
-            Last = default;
-            Age = default;
-            Bio = default;
-            FavoriteAnimal = default;
-            Terms = default;
-        }
     }
 
 }
