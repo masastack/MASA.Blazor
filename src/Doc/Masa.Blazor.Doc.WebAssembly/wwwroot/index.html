@@ -9,8 +9,7 @@
     <title>MASA Blazor</title>
     <base href="/" />
     <link rel="icon" href="https://cdn.masastack.com/stack/images/website/masa-blazor/miniLogo.png" type="image/x-icon">
-    <link href="_content/Masa.Blazor/css/masa-blazor.css" rel="stylesheet">
-    <link href="_content/Masa.Blazor/css/masa-extend-blazor.css" rel="stylesheet">
+    <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/materialicons/materialicons.css" rel="stylesheet">
     <link href="https://cdn.masastack.com/npm/fontawesome/v5.0.13/css/all.css" rel="stylesheet">
@@ -152,25 +151,7 @@
     <script type="module">
         import { BrotliDecode } from './js/decode.min.js';
 
-        Blazor.start({
-            loadBootResource: function (type, name, defaultUri, integrity) {
-                if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
-                    return (async function () {
-                        const response = await fetch(defaultUri + '.br', { cache: 'no-cache' });
-                        if (!response.ok) {
-                            throw new Error(response.statusText);
-                        }
-                        const originalResponseBuffer = await response.arrayBuffer();
-                        const originalResponseArray = new Int8Array(originalResponseBuffer);
-                        const decompressedResponseArray = BrotliDecode(originalResponseArray);
-                        const contentType = type ===
-                            'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
-                        return new Response(decompressedResponseArray,
-                            { headers: { 'content-type': contentType } });
-                    })();
-                }
-            }
-        }).then(function () {
+        Blazor.start().then(function () {
             window.BlazorComponent.Prism = {};
             window.BlazorComponent.Prism.highlight = function (code, language, component, codeElement) {
                 setTimeout(function () {
