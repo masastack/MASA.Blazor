@@ -58,7 +58,7 @@ namespace Masa.Blazor
                     return base.ComputedItems;
                 }
 
-                return Items.Where(item => Filter(item, InternalSearch, GetText(item) ?? "")).ToList();
+                return AllItems.Where(item => Filter(item, InternalSearch, GetText(item) ?? "")).ToList();
             }
         }
 
@@ -137,10 +137,33 @@ namespace Masa.Blazor
                 });
         }
 
+        protected override async Task OnIsFocusedChange(bool val)
+        {
+            if (val)
+            {
+                // TODO: input.select()
+            }
+            else
+            {
+                await Blur();
+                await UpdateSelf();
+            }
+        }
+
         protected override async Task SelectItem(TItem item)
         {
             await base.SelectItem(item);
-            InternalSearch = null;
+            await SetSearch();
+        }
+
+        protected override async Task SetSelectedItems()
+        {
+            await base.SetSelectedItems();
+
+            if (!IsFocused)
+            {
+                await SetSearch();
+            }
         }
 
         public override async Task HandleOnInputAsync(ChangeEventArgs args)
@@ -341,7 +364,25 @@ namespace Masa.Blazor
                 return;
             }
 
-            // TODO: ...
+            if (!Multiple && !string.Equals(InternalSearch, GetText(SelectedItem)))
+            {
+                await SetSearch();
+            }
+        }
+
+        private async Task SetSearch()
+        {
+            NextTick(() =>
+            {
+                if (!Multiple || string.IsNullOrEmpty(InternalSearch) || !IsMenuActive)
+                {
+                    InternalSearch = (SelectedItems.Count == 0 || Multiple || HasSlot) ? null : GetText(SelectedItem);
+                }
+
+                StateHasChanged();
+
+                return Task.CompletedTask;
+            });
         }
     }
 }

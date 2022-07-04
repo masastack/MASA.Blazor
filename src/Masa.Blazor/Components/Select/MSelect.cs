@@ -12,7 +12,10 @@ namespace Masa.Blazor
         [Parameter]
         public override string AppendIcon { get; set; } = "mdi-menu-down";
 
-        //TODO:Attach,CacheItems
+        //TODO:Attach
+
+        [Parameter]
+        public bool CacheItems { get; set; }
 
         [Parameter]
         public bool Chips { get; set; }
@@ -103,6 +106,8 @@ namespace Masa.Blazor
 
         bool ISelect<TItem, TItemValue, TValue>.GetDisabled(TItem item) => GetDisabled(item);
 
+        private IList<TItem> CachedItems { get; set; }
+
         protected bool IsMenuActive
         {
             get => GetValue<bool>();
@@ -124,6 +129,7 @@ namespace Masa.Blazor
         protected bool HasChips => Chips || SmallChips;
 
         protected override bool IsDirty => SelectedItems.Count > 0;
+
         public override Action<TextFieldNumberProperty> NumberProps { get; set; }
 
         protected override Dictionary<string, object> InputAttrs => new()
@@ -133,7 +139,7 @@ namespace Masa.Blazor
             { "readonly", true }
         };
 
-        // protected virtual IList<TItem> ComputedItems => Items;
+        protected List<TItem> AllItems => FilterDuplicates(CachedItems.Concat(Items)).ToList();
 
         protected virtual IList<TItem> ComputedItems
         {
@@ -144,10 +150,12 @@ namespace Masa.Blazor
                     var items = Items.Where(item => !SelectedItems.Contains(item)).ToList();
                     return items;
                 }
-
+        
                 return Items;
             }
         }
+
+        // protected virtual IList<TItem> ComputedItems => AllItems;
 
         protected IList<TItemValue> InternalValues
         {
@@ -170,7 +178,7 @@ namespace Masa.Blazor
             }
         }
 
-        protected virtual IList<TItem> SelectedItems => Items.Where(item => InternalValues.Contains(ItemValue(item))).ToList();
+        protected virtual IList<TItem> SelectedItems { get; set; } = new List<TItem>();
 
         protected string TilesSelector =>
             $"{MMenu.ContentElement.GetSelector()} .m-list-item, {MMenu.ContentElement.GetSelector()} .m-divider, {MMenu.ContentElement.GetSelector()} .m-subheader";
@@ -203,6 +211,8 @@ namespace Masa.Blazor
         {
             base.OnInitialized();
 
+            CachedItems = CacheItems ? Items : new List<TItem>();
+
             ComputedMenuProps = GetDefaultMenuProps();
             MenuProps?.Invoke(ComputedMenuProps);
             if (ComputedMenuProps.OffsetY && ComputedMenuProps.NudgeBottom is null)
@@ -229,6 +239,22 @@ namespace Masa.Blazor
             base.OnWatcherInitialized();
 
             Watcher.Watch<bool>(nameof(IsMenuActive), val => OnMenuActiveChange(val));
+        }
+
+        private IList<TItem> FilterDuplicates(IEnumerable<TItem> list)
+        {
+            var uniqueValues = new Dictionary<TItemValue, TItem>();
+
+            foreach (var item in list)
+            {
+                var val = GetValue(item);
+                if (!uniqueValues.ContainsKey(val))
+                {
+                    uniqueValues.Add(val, item);
+                }
+            }
+
+            return uniqueValues.Values.ToList();
         }
 
         private async Task GenMenu()
@@ -441,6 +467,22 @@ namespace Masa.Blazor
                     });
                     attrs[nameof(MChip.OnCloseClick)] = CreateEventCallback<MouseEventArgs>(_ => OnChipInput(item));
                 });
+        }
+
+        protected override async void InternalValueSetter(TValue val)
+        {
+            await SetSelectedItems();
+
+            if (Multiple)
+            {
+                NextTick(() =>
+                {
+                    // TODO: need this?
+                    // await MMenu.UpdateDimensionsAsync();
+
+                    return Task.CompletedTask;
+                });
+            }
         }
 
         protected async Task SelectItemByIndex(int index)
@@ -740,6 +782,25 @@ namespace Masa.Blazor
             }
 
             MenuListIndex = computedIndex;
+        }
+
+        protected virtual async Task SetSelectedItems()
+        {
+            var selectedItems = new List<TItem>();
+            
+            var values = InternalValues;
+
+            foreach (var value in values)
+            {
+                var index = AllItems.FindIndex(v => EqualityComparer<TItemValue>.Default.Equals(value, GetValue(v)));
+
+                if (index > -1)
+                {
+                    selectedItems.Add(AllItems[index]);
+                }
+            }
+
+            SelectedItems = selectedItems;
         }
 
         protected int GetMenuIndex()
