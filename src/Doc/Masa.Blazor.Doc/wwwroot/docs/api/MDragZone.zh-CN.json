@@ -30,6 +30,11 @@
       "Description": ""
     },
     {
+      "Name": "Items",
+      "Type": "List<BDragItem>",
+      "Description": ""
+    },
+    {
       "Name": "Light",
       "Type": "Boolean",
       "Description": ""
@@ -58,11 +63,6 @@
       "Name": "Style",
       "Type": "String",
       "Description": "应用到组件最外层元素的style"
-    },
-    {
-      "Name": "Value",
-      "Type": "List<BDragItem>",
-      "Description": ""
     }
   ],
   "Contents": [
