@@ -55,7 +55,7 @@ namespace Masa.Blazor
             {
                 if (!IsSearching || NoFilter || InternalSearch is null)
                 {
-                    return Items;
+                    return base.ComputedItems;
                 }
 
                 return Items.Where(item => Filter(item, InternalSearch, GetText(item) ?? "")).ToList();
@@ -175,9 +175,7 @@ namespace Masa.Blazor
             var curIndex = SelectedIndex;
             var curItem = SelectedItems.ElementAtOrDefault(curIndex);
 
-            // TODO: need i check the curItem is null?
-
-            if (Disabled || Readonly || ItemDisabled(curItem))
+            if (!IsInteractive || GetDisabled(curItem))
             {
                 return;
             }
@@ -187,7 +185,6 @@ namespace Masa.Blazor
             if (SelectedIndex == -1 && lastIndex != 0)
             {
                 SelectedIndex = lastIndex;
-
                 return;
             }
 
@@ -217,31 +214,26 @@ namespace Masa.Blazor
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
-            await base.HandleOnKeyDownAsync(args);
+            var keyCode = args.Code;
 
-            switch (args.Code)
+            if (args.CtrlKey || !new[] { KeyCodes.Home, KeyCodes.End }.Contains(keyCode))
             {
-                case KeyCodes.Backspace:
-                    IsMenuActive = true;
-                    if (Multiple)
-                    {
-                        var internalValues = InternalValues;
-                        if (internalValues.Count > 0 && string.IsNullOrEmpty(InternalSearch))
-                        {
-                            internalValues.RemoveAt(internalValues.Count - 1);
-                            await SetInternalValueAsync((TValue)internalValues);
-                        }
-                    }
-                    else
-                    {
-                        if (Chips && !EqualityComparer<TValue>.Default.Equals(InternalValue, default) && string.IsNullOrEmpty(InternalSearch))
-                        {
-                            await SetInternalValueAsync(default);
-                        }
-                    }
-
-                    break;
+                await base.HandleOnKeyDownAsync(args);
             }
+
+            await ChangeSelectedIndex(keyCode);
+        }
+
+        protected override async Task OnTabDown(KeyboardEventArgs args)
+        {
+            await base.OnTabDown(args);
+            await UpdateSelf();
+        }
+
+        protected override Task OnUpDown(string code)
+        {
+            ActivateMenu();
+            return Task.CompletedTask;
         }
 
         public override async Task HandleOnClickAsync(ExMouseEventArgs args)
@@ -273,7 +265,7 @@ namespace Masa.Blazor
             await base.HandleOnClearClickAsync(args);
         }
 
-        private void OnFilteredItemsChanged(IList<TItem> val, IList<TItem> oldVal)
+        private async void OnFilteredItemsChanged(IList<TItem> val, IList<TItem> oldVal)
         {
             if (val == null || oldVal == null)
             {
@@ -285,32 +277,71 @@ namespace Masa.Blazor
                 var preSelectedItem = oldVal.ElementAtOrDefault(MenuListIndex);
                 if (preSelectedItem is not null)
                 {
-                    SetMenuIndex(val.IndexOf(preSelectedItem));
+                    await SetMenuIndex(val.IndexOf(preSelectedItem));
                 }
                 else
                 {
-                    SetMenuIndex(-1);
+                    await SetMenuIndex(-1);
                 }
             }
 
-            NextTick(() =>
+            NextTick(async () =>
             {
                 if (string.IsNullOrEmpty(InternalSearch) || (val.Count != 1 && !AutoSelectFirst))
                 {
-                    SetMenuIndex(-1);
-                    return Task.CompletedTask;
+                    await SetMenuIndex(-1);
                 }
 
                 if (AutoSelectFirst && val.Count > 0)
                 {
-                    SetMenuIndex(0);
+                    await SetMenuIndex(0);
                     StateHasChanged();
                 }
-
-                return Task.CompletedTask;
             });
 
             StateHasChanged();
+        }
+
+        private async Task ChangeSelectedIndex(string keyCode)
+        {
+            if (SearchIsDirty) return;
+
+            if (Multiple && keyCode == KeyCodes.ArrowLeft)
+            {
+                if (SelectedIndex == -1)
+                {
+                    SelectedIndex = SelectedItems.Count - 1;
+                }
+                else
+                {
+                    SelectedIndex--;
+                }
+            }
+            else if (Multiple && keyCode == KeyCodes.ArrowRight)
+            {
+                if (SelectedIndex >= SelectedItems.Count - 1)
+                {
+                    SelectedIndex = -1;
+                }
+                else
+                {
+                    SelectedIndex++;
+                }
+            }
+            else if (keyCode is KeyCodes.Backspace or KeyCodes.Delete)
+            {
+                await DeleteCurrentItem();
+            }
+        }
+
+        private async Task UpdateSelf()
+        {
+            if (!SearchIsDirty && !EqualityComparer<TValue>.Default.Equals(InternalValue, default))
+            {
+                return;
+            }
+
+            // TODO: ...
         }
     }
 }

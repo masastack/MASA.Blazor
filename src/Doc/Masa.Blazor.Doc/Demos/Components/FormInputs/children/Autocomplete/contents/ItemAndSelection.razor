@@ -5,7 +5,8 @@
         <MProgressLinear Absolute
                          Color="green lighten-3"
                          Height="4"
-                         Indeterminate></MProgressLinear>
+                         Indeterminate>
+        </MProgressLinear>
     </ProgressContent>
     <ChildContent>
         <MImage Height="200"
@@ -24,7 +25,7 @@
                         </ActivatorContent>
                         <ChildContent>
                             <MList>
-                                <MListItem OnClick="()=>IsUpdating = true">
+                                <MListItem OnClick="() => IsUpdating = true">
                                     <MListItemAction>
                                         <MIcon>mdi-cog</MIcon>
                                     </MListItemAction>
@@ -57,7 +58,8 @@
                                     Disabled="IsUpdating"
                                     Filled
                                     Color="blue-grey lighten-2"
-                                    Label="Name"></MTextField>
+                                    Label="Name">
+                        </MTextField>
                     </MCol>
                     <MCol Cols="12"
                           Md="6">
@@ -65,7 +67,8 @@
                                     Disabled="IsUpdating"
                                     Filled
                                     Color="blue-grey lighten-2"
-                                    Label="Title"></MTextField>
+                                    Label="Title">
+                        </MTextField>
                     </MCol>
                     <MCol Cols="12">
                         <MAutocomplete @bind-Value="_friends"
@@ -75,12 +78,13 @@
                                        Chips
                                        Color="blue-grey lighten-2"
                                        Label="Select"
-                                       ItemText="r=>r.Name"
-                                       ItemValue="r=>r.Name"
+                                       ItemText="r => r.Name"
+                                       ItemValue="r => r.Name"
                                        Multiple>
                             <SelectionContent Context="data">
                                 <MChip Close
-                                       OnCloseClick="()=>Remove(data.Item)">
+                                       IsActive="@data.Selected"
+                                       OnCloseClick="() => Remove(data.Item)">
                                     <MAvatar Left>
                                         <MImage Src="@data.Item.Avatar"></MImage>
                                     </MAvatar>
@@ -119,13 +123,14 @@
                      Class="mt-0"
                      Color="green lighten-2"
                      HideDetails="true"
-                     Label="Auto Update"></MSwitch>
+                     Label="Auto Update">
+            </MSwitch>
             <MSpacer></MSpacer>
             <MButton Disabled="_autoUpdate"
                      Loading="IsUpdating"
                      Color="blue-grey darken-3"
                      Depressed
-                     OnClick="()=>IsUpdating = true">
+                     OnClick="() => IsUpdating = true">
                 <MIcon Left>
                     mdi-update
                 </MIcon>
@@ -137,11 +142,13 @@
 
 @code {
     private bool _autoUpdate = true;
+
     private List<string> _friends = new()
-        {
-            "Sandra Adams",
-            "Britta Holt"
-        };
+    {
+        "Sandra Adams",
+        "Britta Holt"
+    };
+
     private bool _isUpdating;
     private string _name = "Midnight Crew";
 
@@ -159,79 +166,77 @@
     }
 
     private List<Person> _people = new List<Person>
+    {
+        new Person
         {
-            new Person
-            {
-                Header="Group 1",
-                Name="Group 1"
-            },
-            new Person
-            {
-                Name="Sandra Adams",
-                Group="Group 1",
-                Avatar="https://cdn.masastack.com/stack/images/website/masa-blazor/lists/1.png"
-            },
-            new Person
-            {
-                Name="Ali Connors",
-                Group="Group 1",
-                Avatar="https://cdn.masastack.com/stack/images/website/masa-blazor/lists/2.png"
-            },
-            new Person
-            {
-                Name="Trevor Hansen",
-                Group="Group 1",
-                Avatar="https://cdn.masastack.com/stack/images/website/masa-blazor/lists/3.png"
-            },
-            new Person
-            {
-                Name="Tucker Smith",
-                Group="Group 1",
-                Avatar="https://cdn.masastack.com/stack/images/website/masa-blazor/lists/2.png"
-            },
-            new Person
-            {
-                Divider=true,
-                Name="Group 1"
-            },
-            new Person
-            {
-                Header="Group 2",
-                Name="Group 1"
-            },
-            new Person
-            {
-                Name="Britta Holt",
-                Group="Group 2",
-                Avatar="https://cdn.masastack.com/stack/images/website/masa-blazor/lists/4.png"
-            },
-            new Person
-            {
-                Name="Jane Smith ",
-                Group="Group 2",
-                Avatar="https://cdn.masastack.com/stack/images/website/masa-blazor/lists/5.png"
-            },
-            new Person
-            {
-                Name="John Smith",
-                Group="Group 2",
-                Avatar="https://cdn.masastack.com/stack/images/website/masa-blazor/lists/1.png"
-            },
-            new Person
-            {
-                Name="Sandra Williams",
-                Group="Group 2",
-                Avatar="https://cdn.masastack.com/stack/images/website/masa-blazor/lists/3.png"
-            }
-        };
+            Header = "Group 1",
+            Name = "Group 1"
+        },
+        new Person
+        {
+            Name = "Sandra Adams",
+            Group = "Group 1",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/1.png"
+        },
+        new Person
+        {
+            Name = "Ali Connors",
+            Group = "Group 1",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/2.png"
+        },
+        new Person
+        {
+            Name = "Trevor Hansen",
+            Group = "Group 1",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/3.png"
+        },
+        new Person
+        {
+            Name = "Tucker Smith",
+            Group = "Group 1",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/2.png"
+        },
+        new Person
+        {
+            Divider = true,
+            Name = "Group 1"
+        },
+        new Person
+        {
+            Header = "Group 2",
+            Name = "Group 1"
+        },
+        new Person
+        {
+            Name = "Britta Holt",
+            Group = "Group 2",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/4.png"
+        },
+        new Person
+        {
+            Name = "Jane Smith ",
+            Group = "Group 2",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/5.png"
+        },
+        new Person
+        {
+            Name = "John Smith",
+            Group = "Group 2",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/1.png"
+        },
+        new Person
+        {
+            Name = "Sandra Williams",
+            Group = "Group 2",
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/3.png"
+        }
+    };
+
     private string _title = "The summer breeze";
 
     protected bool IsUpdating
     {
-        get
-        {
-            return _isUpdating;
-        }
+        get { return _isUpdating; }
         set
         {
             _isUpdating = value;
@@ -252,4 +257,5 @@
             _friends.RemoveAt(index);
         }
     }
-    }
+
+}

@@ -59,6 +59,11 @@
       "Description": ""
     },
     {
+      "Name": "If",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "Light",
       "Type": "Boolean",
       "Default": "false",

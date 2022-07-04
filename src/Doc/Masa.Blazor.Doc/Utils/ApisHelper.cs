@@ -9,12 +9,13 @@ public static class ApisHelper
     {
         const string child = "<i class=\"m-icon theme--light primary--text {0}\" style=\"font-size: .875rem\"></i>";
 
-        var attrs = "class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" ";
         var regex = new Regex("<a[^>]+href=\"(.*?)\"[^>]*>(.*?)</a>");
 
         List<(string old, string @new)> list = new();
         regex.Matches(markup).ForEach(m =>
         {
+            var attrs = "class=\"app-link text-decoration-none primary--text font-weight-medium d-inline-block\" ";
+            
             var v = m.Value;
 
             var href = GetApiHref(m.Value);

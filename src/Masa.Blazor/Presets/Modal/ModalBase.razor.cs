@@ -202,7 +202,7 @@ public partial class ModalBase
 
         if (firstRender)
         {
-            Dialog.AfterShowContent = async () =>
+            Dialog.AfterShowContent = async _ =>
             {
                 await ScrollToTop();
                 StateHasChanged();
