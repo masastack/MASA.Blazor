@@ -461,6 +461,8 @@ namespace Masa.Blazor
                     attrs[nameof(MIcon.Dark)] = Dark;
                     attrs[nameof(MIcon.Disabled)] = Disabled;
                     attrs[nameof(MIcon.Light)] = Light;
+                    attrs[nameof(MIcon.OnClickStopPropagation)] = true;
+                    attrs[nameof(MIcon.OnClickPreventDefault)] = true;
                 })
                 .ApplyTextFieldAppendOuterIcon(typeof(MIcon), attrs =>
                 {
