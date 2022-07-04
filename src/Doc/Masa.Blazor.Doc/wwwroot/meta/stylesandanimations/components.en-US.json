@@ -3,7 +3,7 @@
     "Desc": "<p>Use the border radius auxiliary style to quickly apply the <code>border-radius</code> style to the element</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-02T16:37:03.755801+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.397705+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -83,7 +83,7 @@
     "Desc": "<p>Through <strong>sass</strong> and <strong>javascript</strong>, you can use <a href=\"https://material.io/design/color/the-color-system.html#color-theme-creation\">Material Design</a> in the specification All colors. These values can be used in style sheets, component files and actual components through the <strong>color class</strong> system.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-02T16:37:03.756801+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3987042+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -130,7 +130,7 @@
     "Desc": "<p>The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-02T16:37:03.756801+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3997142+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -177,7 +177,7 @@
     "Desc": "<p>This tool allows you to control the relative depth, or distance, between the two planes along the z-axis. There are 25 heights in total. You can set the elevation of an element by using the <code>elevation-{n}</code> class, where <code>n</code> is an integer between 0-24 corresponding to the desired altitude.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-02T16:37:03.758801+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4017062+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -213,7 +213,7 @@
     "Desc": "<p>Control the layout of flex containers with alignment, justification and more with responsive flexbox utilities.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-02T16:37:03.758801+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4017062+08:00",
     "DemoList": [
       {
         "Order": 3,
@@ -359,7 +359,7 @@
     "Desc": "<p>Applies a custom float across any breakpoint with responsive float utilities.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-02T16:37:03.7618006+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4057041+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -395,7 +395,7 @@
     "Desc": "<p>Configure how content overflows when it becomes out of container bounds.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-02T16:37:03.7628002+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4067043+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -431,7 +431,7 @@
     "Desc": "<p>Do not update your layout by creating new classes. Auxiliary auxiliary classes modify the filling and edges of elements</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-02T16:37:03.7638005+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4087204+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -489,7 +489,7 @@
     "Desc": "<p>Control text size, alignment, wrapping, overflow, transforms and more.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-02T16:37:03.7668002+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4117062+08:00",
     "DemoList": [
       {
         "Order": 5,
@@ -625,7 +625,7 @@
     "Desc": "<p>Smooth animations help make a UI feel great. Using MASA Blazor transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the <strong>transition</strong> prop.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-04-02T16:37:03.7698014+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4147043+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -742,7 +742,7 @@
         "Name": "TodoList",
         "Title": "TodoList",
         "Description": "<p>Using multiple custom transitions, it is easy to bring a simple todo list to life!</p>\n",
-        "Code": "<MContainer Style=\"max-width: 500px\">\r\n\r\n    <MTextField @bind-Value=_newTask\r\n                Label=\"What are you working on?\"\r\n                Solo\r\n                OnKeyDown=\"OnEnterKeyDown\">\r\n        <AppendContent>\r\n            <FadeTransition >\r\n                <MIcon IfElse=\"@(!string.IsNullOrEmpty(_newTask))\"\r\n                       OnClick=\"Create\">\r\n                    add_circle\r\n                </MIcon>\r\n            </FadeTransition>\r\n        </AppendContent>\r\n    </MTextField>\r\n\r\n    <h2 class=\"text-h4 success--text pl-4\">\r\n        Tasks:&nbsp;\r\n        <FadeTransition LeaveAbsolute>\r\n            <KeyTransitionElement Tag=\"span\" Value=\"@($\"task-{_tasks.Count}\")\">\r\n                @_tasks.Count\r\n            </KeyTransitionElement>\r\n        </FadeTransition>\r\n    </h2>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MRow Class=\"my-1\" Align=AlignTypes.Center>\r\n\r\n        <strong class=\"mx-4 info--text text--darken-2\">\r\n            Remaining: @RemainingTasks\r\n        </strong>\r\n\r\n        <MDivider Vertical></MDivider>\r\n\r\n        <strong class=\"mx-4 success--text text--darken-2\">\r\n            Completed: @CompletedTasks\r\n        </strong>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MProgressCircular Value=Progress Class=\"mr-2\"></MProgressCircular>\r\n\r\n    </MRow>\r\n\r\n    <MDivider Class=\"mb-4\"></MDivider>\r\n\r\n    @if (_tasks.Count > 0)\r\n    {\r\n        <MCard>\r\n            <SlideYTransition>\r\n                @*//TODO: group*@\r\n                @for (var i = 0; i < _tasks.Count; i++)\r\n                {\r\n                    var task = _tasks[i];\r\n                    if (i != 0)\r\n                    {\r\n                        <MDivider></MDivider>\r\n                    }\r\n\r\n                    <MListItem>\r\n\r\n                        <MListItemAction>\r\n                            <MCheckbox Value=\"@task.Done\"\r\n                                       ValueChanged=\"@(v => task.Done = v)\"\r\n                                       Color=\"@(task.Done ? \"grey\" : \"primary\")\">\r\n                                <LabelContent>\r\n                                    <div class=\"@(task.Done ? \"grey--text\" : \"primary--text\") ml-4\">\r\n                                        @task.Text\r\n                                    </div>\r\n                                </LabelContent>\r\n                            </MCheckbox>\r\n                        </MListItemAction>\r\n\r\n                        <MSpacer></MSpacer>\r\n\r\n                        <ScrollXTransition>\r\n                            <MIcon IfElse=\"@task.Done\" Color=\"success\">\r\n                                mdi-check\r\n                            </MIcon>\r\n                        </ScrollXTransition>\r\n\r\n                    </MListItem>\r\n                }\r\n            </SlideYTransition>\r\n        </MCard>\r\n    }\r\n\r\n</MContainer>\r\n\r\n\r\n@code {\r\n    string _newTask = \"\";\r\n\r\n    readonly List<ToDo> _tasks = new()\r\n    {\r\n        new ToDo(false, \"Foobar\"),\r\n        new ToDo(false, \"Fizzbuzz\")\r\n    };\r\n\r\n    int CompletedTasks => _tasks.Count(t => t.Done);\r\n\r\n    float Progress => (CompletedTasks * 100f) / _tasks.Count;\r\n\r\n    int RemainingTasks => _tasks.Count - CompletedTasks;\r\n\r\n    void OnEnterKeyDown(KeyboardEventArgs eventArgs)\r\n    {\r\n        if (eventArgs.Key == \"Enter\")\r\n        {\r\n            Create();\r\n        }\r\n    }\r\n\r\n    void Create()\r\n    {\r\n        _tasks.Add(new(false, _newTask));\r\n        _newTask = \"\";\r\n    }\r\n\r\n    class ToDo\r\n    {\r\n        public bool Done { get; set; }\r\n        public string Text { get; set; }\r\n\r\n        public ToDo(bool done, string text)\r\n        {\r\n            Done = done;\r\n            Text = text;\r\n        }\r\n    }\r\n\r\n}",
+        "Code": "<MContainer Style=\"max-width: 500px\">\r\n\r\n    <MTextField @bind-Value=_newTask\r\n                Label=\"What are you working on?\"\r\n                Solo\r\n                OnKeyDown=\"OnEnterKeyDown\">\r\n        <AppendContent>\r\n            <FadeTransition >\r\n                <MIcon If=\"@(!string.IsNullOrEmpty(_newTask))\"\r\n                       OnClick=\"Create\">\r\n                    add_circle\r\n                </MIcon>\r\n            </FadeTransition>\r\n        </AppendContent>\r\n    </MTextField>\r\n\r\n    <h2 class=\"text-h4 success--text pl-4\">\r\n        Tasks:&nbsp;\r\n        <FadeTransition LeaveAbsolute>\r\n            <KeyTransitionElement Tag=\"span\" Value=\"@($\"task-{_tasks.Count}\")\">\r\n                @_tasks.Count\r\n            </KeyTransitionElement>\r\n        </FadeTransition>\r\n    </h2>\r\n\r\n    <MDivider></MDivider>\r\n\r\n    <MRow Class=\"my-1\" Align=AlignTypes.Center>\r\n\r\n        <strong class=\"mx-4 info--text text--darken-2\">\r\n            Remaining: @RemainingTasks\r\n        </strong>\r\n\r\n        <MDivider Vertical></MDivider>\r\n\r\n        <strong class=\"mx-4 success--text text--darken-2\">\r\n            Completed: @CompletedTasks\r\n        </strong>\r\n\r\n        <MSpacer></MSpacer>\r\n\r\n        <MProgressCircular Value=Progress Class=\"mr-2\"></MProgressCircular>\r\n\r\n    </MRow>\r\n\r\n    <MDivider Class=\"mb-4\"></MDivider>\r\n\r\n    @if (_tasks.Count > 0)\r\n    {\r\n        <MCard>\r\n            <SlideYTransition>\r\n                @*//TODO: group*@\r\n                @for (var i = 0; i < _tasks.Count; i++)\r\n                {\r\n                    var task = _tasks[i];\r\n                    if (i != 0)\r\n                    {\r\n                        <MDivider></MDivider>\r\n                    }\r\n\r\n                    <MListItem>\r\n\r\n                        <MListItemAction>\r\n                            <MCheckbox Value=\"@task.Done\"\r\n                                       ValueChanged=\"@(v => task.Done = v)\"\r\n                                       Color=\"@(task.Done ? \"grey\" : \"primary\")\">\r\n                                <LabelContent>\r\n                                    <div class=\"@(task.Done ? \"grey--text\" : \"primary--text\") ml-4\">\r\n                                        @task.Text\r\n                                    </div>\r\n                                </LabelContent>\r\n                            </MCheckbox>\r\n                        </MListItemAction>\r\n\r\n                        <MSpacer></MSpacer>\r\n\r\n                        <ScrollXTransition>\r\n                            <MIcon If=\"@task.Done\" Color=\"success\">\r\n                                mdi-check\r\n                            </MIcon>\r\n                        </ScrollXTransition>\r\n\r\n                    </MListItem>\r\n                }\r\n            </SlideYTransition>\r\n        </MCard>\r\n    }\r\n\r\n</MContainer>\r\n\r\n\r\n@code {\r\n    string _newTask = \"\";\r\n\r\n    readonly List<ToDo> _tasks = new()\r\n    {\r\n        new ToDo(false, \"Foobar\"),\r\n        new ToDo(false, \"Fizzbuzz\")\r\n    };\r\n\r\n    int CompletedTasks => _tasks.Count(t => t.Done);\r\n\r\n    float Progress => (CompletedTasks * 100f) / _tasks.Count;\r\n\r\n    int RemainingTasks => _tasks.Count - CompletedTasks;\r\n\r\n    void OnEnterKeyDown(KeyboardEventArgs eventArgs)\r\n    {\r\n        if (eventArgs.Key == \"Enter\")\r\n        {\r\n            Create();\r\n        }\r\n    }\r\n\r\n    void Create()\r\n    {\r\n        _tasks.Add(new(false, _newTask));\r\n        _newTask = \"\";\r\n    }\r\n\r\n    class ToDo\r\n    {\r\n        public bool Done { get; set; }\r\n        public string Text { get; set; }\r\n\r\n        public ToDo(bool done, string text)\r\n        {\r\n            Done = done;\r\n            Text = text;\r\n        }\r\n    }\r\n\r\n}",
         "Type": "Demos.StylesAndAnimations.Transitions.misc.TodoList",
         "Style": "",
         "Debug": false,

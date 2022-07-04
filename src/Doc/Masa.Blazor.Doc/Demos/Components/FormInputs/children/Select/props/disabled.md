@@ -2,7 +2,7 @@
 order: 1
 title:
   zh-CN: 禁用
-  en-US: Basic
+  en-US: Disabled
 ---
 
 ## zh-CN

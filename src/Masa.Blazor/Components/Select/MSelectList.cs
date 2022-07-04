@@ -25,8 +25,8 @@ namespace Masa.Blazor
         [Parameter]
         public RenderFragment<SelectListItemProps<TItem>> ItemContent { get; set; }
 
-        [Parameter]
-        public int SelectedIndex { get; set; }
+        // [Parameter]
+        // public int SelectedIndex { get; set; }
 
         protected string TileActiveClass => new CssBuilder().AddTextColor(Color).Class;
 
@@ -63,7 +63,9 @@ namespace Masa.Blazor
                         attrs[nameof(MListItem.Disabled)] = GetDisabled(item);
                         attrs[nameof(MListItem.Ripple)] = true;
                         attrs[nameof(MListItem.IsActive)] = value;//TODO: remove this when MListItem been refactored
-                        attrs[nameof(MListItem.Highlighted)] = Items.IndexOf(item) == SelectedIndex;//TODO: remove this when MListItem been refactored
+
+                        var items = HideSelected ? Items.Where(i => !SelectedItems.Contains(i)).ToList() : Items;
+                        attrs[nameof(MListItem.Highlighted)] = items.IndexOf(item) == SelectedIndex;//TODO: remove this when MListItem been refactored
                     }
                 })
                 .Apply<BSimpleCheckbox, MSimpleCheckbox>(attrs =>

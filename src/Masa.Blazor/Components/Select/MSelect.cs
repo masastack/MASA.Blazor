@@ -8,7 +8,7 @@ namespace Masa.Blazor
     {
         [Inject]
         protected I18n I18n { get; set; }
-        
+
         [Parameter]
         public override string AppendIcon { get; set; } = "mdi-menu-down";
 
@@ -111,7 +111,7 @@ namespace Masa.Blazor
 
         protected int MenuListIndex { get; private set; } = -1;
 
-        protected int SelectedIndex { get; set; } = -1;
+        public int SelectedIndex { get; set; } = -1;
 
         public override int DebounceMilliseconds { get; set; }
 
@@ -133,7 +133,21 @@ namespace Masa.Blazor
             { "readonly", true }
         };
 
-        protected virtual IList<TItem> ComputedItems => Items;
+        // protected virtual IList<TItem> ComputedItems => Items;
+
+        protected virtual IList<TItem> ComputedItems
+        {
+            get
+            {
+                if (HideSelected)
+                {
+                    var items = Items.Where(item => !SelectedItems.Contains(item)).ToList();
+                    return items;
+                }
+
+                return Items;
+            }
+        }
 
         protected IList<TItemValue> InternalValues
         {
@@ -158,6 +172,9 @@ namespace Masa.Blazor
 
         protected virtual IList<TItem> SelectedItems => Items.Where(item => InternalValues.Contains(ItemValue(item))).ToList();
 
+        protected string TilesSelector =>
+            $"{MMenu.ContentElement.GetSelector()} .m-list-item, {MMenu.ContentElement.GetSelector()} .m-divider, {MMenu.ContentElement.GetSelector()} .m-subheader";
+
         protected virtual bool MenuCanShow => true;
 
         protected virtual BMenuProps GetDefaultMenuProps() => new()
@@ -178,7 +195,7 @@ namespace Masa.Blazor
         public override Task SetParametersAsync(ParameterView parameters)
         {
             NoDataText = I18n.T("$masaBlazor.noDataText");
-            
+
             return base.SetParametersAsync(parameters);
         }
 
@@ -203,8 +220,19 @@ namespace Masa.Blazor
                 await JsInvokeAsync(JsInteropConstants.EnablePreventDefaultForEvent, InputElement, "keydown",
                     new[] { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End, KeyCodes.Enter, KeyCodes.Escape, KeyCodes.Space });
             }
-            
-            // TODO: not work in Autocomplete searching 
+
+            await GenMenu();
+        }
+
+        protected override void OnWatcherInitialized()
+        {
+            base.OnWatcherInitialized();
+
+            Watcher.Watch<bool>(nameof(IsMenuActive), val => OnMenuActiveChange(val));
+        }
+
+        private async Task GenMenu()
+        {
             if (MMenu is not null && InputSlotAttrs.Keys.Count == 0)
             {
                 InputSlotAttrs = MMenu.ActivatorAttributes;
@@ -221,18 +249,19 @@ namespace Masa.Blazor
                     await MMenu.AddOutsideClickEventListener();
                 }
 
+                MMenu.AfterShowContent = async (isLazyContent) =>
+                {
+                    if (isLazyContent)
+                    {
+                        await OnMenuActiveChange(true);
+                    }
+                };
+
                 StateHasChanged();
             }
         }
 
-        protected override void OnWatcherInitialized()
-        {
-            base.OnWatcherInitialized();
-
-            Watcher.Watch<bool>(nameof(IsMenuActive), WatchIsMenuActive);
-        }
-
-        protected virtual async void WatchIsMenuActive(bool val)
+        protected virtual async Task OnMenuActiveChange(bool val)
         {
             if ((Multiple && !val) || GetMenuIndex() > -1)
             {
@@ -240,10 +269,11 @@ namespace Masa.Blazor
             }
 
             var index = await JsInvokeAsync<int>(JsInteropConstants.GetListIndexWhereAttributeExists,
-                $"{MMenu.ContentElement.GetSelector()} .m-list-item",
+                TilesSelector,
                 "aria-selected", "True");
 
-            SetMenuIndex(index);
+            await SetMenuIndex(index);
+
             StateHasChanged();
         }
 
@@ -256,7 +286,7 @@ namespace Masa.Blazor
             return !contains;
         }
 
-        public Task Blur()
+        public async Task Blur()
         {
             var prevIsMenuActive = IsMenuActive;
             var prevIsFocused = IsFocused;
@@ -266,14 +296,12 @@ namespace Masa.Blazor
             IsMenuActive = false;
             IsFocused = false;
             SelectedIndex = -1;
-            SetMenuIndex(-1);
+            await SetMenuIndex(-1);
 
             if (prevIsMenuActive || prevIsFocused || prevSelectedIndex != -1 || prevMenuListIndex != -1)
             {
                 StateHasChanged();
             }
-
-            return Task.CompletedTask;
         }
 
         public void ActivateMenu()
@@ -346,15 +374,6 @@ namespace Masa.Blazor
                 {
                     attrs[nameof(MMenu.ExternalActivator)] = true;
                     attrs[nameof(MMenu.Value)] = MenuCanShow && IsMenuActive;
-                    attrs[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, async val =>
-                    {
-                        IsMenuActive = val;
-                        if (val && !IsFocused && !IsDisabled)
-                        {
-                            IsFocused = true;
-                            await InputElement.FocusAsync();
-                        }
-                    });
                     attrs[nameof(MMenu.Disabled)] = Disabled || Readonly;
                     attrs[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
                     attrs[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;
@@ -395,10 +414,32 @@ namespace Masa.Blazor
                 })
                 .Apply<BChip, MChip>(attrs =>
                 {
-                    attrs[nameof(MChip.Close)] = DeletableChips && (!IsDisabled && !IsReadonly);
-                    attrs[nameof(MChip.Disabled)] = IsDisabled;
+                    var index = -1;
+                    TItem item = default;
+                    if (attrs.Data is (TItem t, int i))
+                    {
+                        item = t;
+                        index = i;
+                    }
+
+                    var isDisabled = GetDisabled(item);
+                    var isInteractive = !isDisabled && IsInteractive;
+
+                    attrs[nameof(MChip.Close)] = DeletableChips && isInteractive;
+                    attrs[nameof(MChip.Disabled)] = isDisabled;
                     attrs[nameof(MChip.Class)] = "m-chip--select";
+                    attrs[nameof(MChip.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } };
                     attrs[nameof(MChip.Small)] = SmallChips;
+                    attrs[nameof(MChip.IsActive)] = index == SelectedIndex;
+                    attrs[nameof(MChip.OnClick)] = CreateEventCallback<MouseEventArgs>(e =>
+                    {
+                        if (!isInteractive) return;
+
+                        // e.stopPropagation()
+
+                        SelectedIndex = index;
+                    });
+                    attrs[nameof(MChip.OnCloseClick)] = CreateEventCallback<MouseEventArgs>(_ => OnChipInput(item));
                 });
         }
 
@@ -419,6 +460,11 @@ namespace Masa.Blazor
                 if (value is TValue val)
                 {
                     await SetInternalValueAsync(val);
+                }
+
+                if (HideSelected)
+                {
+                    await SetMenuIndex(-1);
                 }
 
                 IsMenuActive = false;
@@ -442,12 +488,15 @@ namespace Masa.Blazor
 
                 if (HideSelected)
                 {
-                    SetMenuIndex(-1);
+                    await SetMenuIndex(-1);
                 }
                 else
                 {
                     var index = ComputedItems.IndexOf(item);
-                    SetMenuIndex(index);
+                    if (index > -1)
+                    {
+                        await SetMenuIndex(index);
+                    }
                 }
             }
 
@@ -461,47 +510,64 @@ namespace Masa.Blazor
         {
             if (IsReadonly && args.Code != KeyCodes.Tab) return;
 
+            if (OnKeyDown.HasDelegate)
+            {
+                await OnKeyDown.InvokeAsync(args);
+            }
+
             var keyCode = args.Code;
 
             // If menu is active, allow default
             // listIndex change from menu
             if (IsMenuActive && new[] { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End, KeyCodes.Enter }.Contains(keyCode))
             {
-                NextTick(async () => await ChangeListIndex(keyCode));
+                NextTick(async () =>
+                {
+                    await ChangeMenuListIndex(keyCode);
+                    StateHasChanged();
+                });
             }
 
+            // If enter, space, open menu
             if (new[] { KeyCodes.Enter, KeyCodes.Space }.Contains(keyCode))
             {
                 ActivateMenu();
             }
 
+            // If menu is not active, up/down/home/end can do
+            // one of 2 things. If multiple, opens the
+            // menu, if not, will cycle through all
+            // available options
             if (!IsMenuActive && new[] { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End }.Contains(keyCode))
             {
                 await OnUpDown(keyCode);
                 return;
             }
 
+            // If escape deactivate the menu
             if (keyCode == KeyCodes.Escape)
             {
                 await OnEscDown();
                 return;
             }
 
+            // If tab - select item or close menu
             if (keyCode == KeyCodes.Tab)
             {
                 await OnTabDown(args);
                 return;
             }
 
+            // If space preventDefault
             if (keyCode == KeyCodes.Space)
             {
                 // invoke preventDefault at js interop
             }
         }
 
-        private async Task ChangeListIndex(string code)
+        private async Task ChangeMenuListIndex(string code)
         {
-            if (code == KeyCodes.Enter)
+            if (code == KeyCodes.Enter && MenuListIndex != -1)
             {
                 await SelectItemByIndex(MenuListIndex);
                 return;
@@ -516,7 +582,7 @@ namespace Masa.Blazor
                 _ => -1
             };
 
-            SetMenuIndex(index);
+            await SetMenuIndex(index, code);
 
             int ComputeNextIndex(int add)
             {
@@ -536,8 +602,11 @@ namespace Masa.Blazor
             }
         }
 
-        private async Task OnUpDown(string code)
+        protected virtual async Task OnUpDown(string code)
         {
+            // Multiple selects do not cycle their value
+            // when pressing up or down, instead activate
+            // the menu
             if (Multiple)
             {
                 ActivateMenu();
@@ -546,12 +615,12 @@ namespace Masa.Blazor
 
             // TODO: menu.hasClickableTiles
 
-            await ChangeListIndex(code);
+            await ChangeMenuListIndex(code);
 
             await SelectItemByIndex(MenuListIndex);
         }
 
-        private Task OnEscDown()
+        protected virtual Task OnEscDown()
         {
             if (IsMenuActive)
             {
@@ -650,7 +719,7 @@ namespace Masa.Blazor
                 await OnClearClick.InvokeAsync(args);
             }
 
-            SetMenuIndex(-1);
+            await SetMenuIndex(-1);
 
             // whether to need NextTick?
             await InputElement.FocusAsync();
@@ -658,22 +727,42 @@ namespace Masa.Blazor
             // TODO: OpenOnClear
         }
 
-        protected void SetMenuIndex(int number)
+        protected async Task SetMenuIndex(int index, string keyCode = null)
         {
-            MenuListIndex = number;
-
-            if (number > -1)
+            var computedIndex = index;
+            if (index > -1)
             {
-                _ = JsInvokeAsync(JsInteropConstants.ScrollToTile,
+                computedIndex = await JsInvokeAsync<int>(JsInteropConstants.ScrollToTile,
                     MMenu.ContentElement.GetSelector(),
-                    $"{MMenu.ContentElement.GetSelector()} .m-list-item",
-                    number);
+                    TilesSelector,
+                    index,
+                    keyCode);
             }
+
+            MenuListIndex = computedIndex;
         }
 
         protected int GetMenuIndex()
         {
             return MenuListIndex;
+        }
+
+        private async Task OnChipInput(TItem item)
+        {
+            if (Multiple)
+            {
+                await SelectItem(item);
+            }
+            else
+            {
+                SetValue(default(TValue));
+            }
+
+            // if all items have been delete,
+            // open menu
+            IsMenuActive = SelectedItems.Count == 0;
+
+            SelectedIndex = -1;
         }
     }
 }
