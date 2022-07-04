@@ -461,6 +461,8 @@ namespace Masa.Blazor
                     attrs[nameof(MIcon.Dark)] = Dark;
                     attrs[nameof(MIcon.Disabled)] = Disabled;
                     attrs[nameof(MIcon.Light)] = Light;
+                    attrs[nameof(MIcon.OnClickStopPropagation)] = true;
+                    attrs[nameof(MIcon.OnClickPreventDefault)] = true;
                 })
                 .ApplyTextFieldAppendOuterIcon(typeof(MIcon), attrs =>
                 {
@@ -637,7 +639,17 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
         {
+            _badInput = null;
             IsFocused = false;
+
+            var checkValue = await CheckNumberValidate();
+
+            if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
+            {
+                InputValue = checkValue;
+            }
+
+            await ChangeValue(true);
 
             if (OnBlur.HasDelegate)
             {

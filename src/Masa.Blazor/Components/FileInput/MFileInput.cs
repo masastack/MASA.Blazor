@@ -8,7 +8,7 @@ namespace Masa.Blazor
     {
         [Inject]
         protected I18n I18n { get; set; }
-        
+
         [Parameter]
         public bool HideInput { get; set; }
 
@@ -216,6 +216,23 @@ namespace Masa.Blazor
             await input.DispatchEventAsync(@event, stopPropagation: true);
         }
 
+        public override async Task HandleOnBlurAsync(FocusEventArgs args)
+        {
+            IsFocused = false;
+            if (OnBlur.HasDelegate)
+            {
+                await OnBlur.InvokeAsync(args);
+            }
+        }
+
+        public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
+        {
+            if (OnKeyDown.HasDelegate)
+            {
+                await OnKeyDown.InvokeAsync(args);
+            }
+        }
+
         public async Task HandleOnFileChangeAsync(InputFileChangeEventArgs args)
         {
             if (Multiple)
@@ -255,7 +272,7 @@ namespace Masa.Blazor
         {
             var input = Document.GetElementByReference(InputFile.Element.Value);
             await input.SetPropertyAsync("value", "");
-            
+
             if (Multiple)
             {
                 IList<IBrowserFile> values = new List<IBrowserFile>();
