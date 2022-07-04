@@ -637,7 +637,17 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
         {
+            _badInput = null;
             IsFocused = false;
+
+            var checkValue = await CheckNumberValidate();
+
+            if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
+            {
+                InputValue = checkValue;
+            }
+
+            await ChangeValue(true);
 
             if (OnBlur.HasDelegate)
             {
