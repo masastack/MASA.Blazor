@@ -221,7 +221,18 @@ namespace Masa.Blazor
                     new[] { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End, KeyCodes.Enter, KeyCodes.Escape, KeyCodes.Space });
             }
 
-            // TODO: not work in Autocomplete searching 
+            await GenMenu();
+        }
+
+        protected override void OnWatcherInitialized()
+        {
+            base.OnWatcherInitialized();
+
+            Watcher.Watch<bool>(nameof(IsMenuActive), val => OnMenuActiveChange(val));
+        }
+
+        private async Task GenMenu()
+        {
             if (MMenu is not null && InputSlotAttrs.Keys.Count == 0)
             {
                 InputSlotAttrs = MMenu.ActivatorAttributes;
@@ -248,13 +259,6 @@ namespace Masa.Blazor
 
                 StateHasChanged();
             }
-        }
-
-        protected override void OnWatcherInitialized()
-        {
-            base.OnWatcherInitialized();
-
-            Watcher.Watch<bool>(nameof(IsMenuActive), val => OnMenuActiveChange(val));
         }
 
         protected virtual async Task OnMenuActiveChange(bool val)

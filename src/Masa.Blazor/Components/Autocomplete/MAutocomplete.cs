@@ -137,14 +137,6 @@ namespace Masa.Blazor
                 });
         }
 
-        protected override async Task OnIsFocusedChanged(bool val)
-        {
-            if (!val)
-            {
-                await this.Blur();
-            }
-        }
-
         protected override async Task SelectItem(TItem item)
         {
             await base.SelectItem(item);
