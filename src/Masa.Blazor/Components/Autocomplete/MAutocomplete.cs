@@ -53,12 +53,20 @@ namespace Masa.Blazor
         {
             get
             {
-                if (!IsSearching || NoFilter || InternalSearch is null)
+                return GetComputedValue(() =>
                 {
-                    return base.ComputedItems;
-                }
+                    if (!IsSearching || NoFilter || InternalSearch is null)
+                    {
+                        return base.ComputedItems;
+                    }
 
-                return Items.Where(item => Filter(item, InternalSearch, GetText(item) ?? "")).ToList();
+                    return AllItems.Where(item => Filter(item, InternalSearch, GetText(item) ?? "")).ToList();
+                }, new[]
+                {
+                    nameof(NoFilter),
+                    nameof(InternalSearch),
+                    nameof(Items)
+                });
             }
         }
 
@@ -137,10 +145,33 @@ namespace Masa.Blazor
                 });
         }
 
+        protected override async Task OnIsFocusedChange(bool val)
+        {
+            if (val)
+            {
+                // TODO: input.select()
+            }
+            else
+            {
+                await Blur();
+                UpdateSelf();
+            }
+        }
+
         protected override async Task SelectItem(TItem item)
         {
             await base.SelectItem(item);
-            InternalSearch = null;
+            SetSearch();
+        }
+
+        protected override void SetSelectedItems()
+        {
+            base.SetSelectedItems();
+
+            if (!IsFocused)
+            {
+                SetSearch();
+            }
         }
 
         public override async Task HandleOnInputAsync(ChangeEventArgs args)
@@ -227,7 +258,7 @@ namespace Masa.Blazor
         protected override async Task OnTabDown(KeyboardEventArgs args)
         {
             await base.OnTabDown(args);
-            await UpdateSelf();
+            UpdateSelf();
         }
 
         protected override Task OnUpDown(string code)
@@ -267,10 +298,13 @@ namespace Masa.Blazor
 
         private async void OnFilteredItemsChanged(IList<TItem> val, IList<TItem> oldVal)
         {
-            if (val == null || oldVal == null)
+            if (Equals(val, oldVal))
             {
                 return;
             }
+
+            val ??= new List<TItem>();
+            oldVal ??= new List<TItem>();
 
             if (!AutoSelectFirst)
             {
@@ -285,6 +319,8 @@ namespace Masa.Blazor
                 }
             }
 
+            StateHasChanged();
+
             NextTick(async () =>
             {
                 if (string.IsNullOrEmpty(InternalSearch) || (val.Count != 1 && !AutoSelectFirst))
@@ -295,11 +331,10 @@ namespace Masa.Blazor
                 if (AutoSelectFirst && val.Count > 0)
                 {
                     await SetMenuIndex(0);
-                    StateHasChanged();
                 }
-            });
 
-            StateHasChanged();
+                StateHasChanged();
+            });
         }
 
         private async Task ChangeSelectedIndex(string keyCode)
@@ -334,14 +369,32 @@ namespace Masa.Blazor
             }
         }
 
-        private async Task UpdateSelf()
+        private void UpdateSelf()
         {
             if (!SearchIsDirty && !EqualityComparer<TValue>.Default.Equals(InternalValue, default))
             {
                 return;
             }
 
-            // TODO: ...
+            if (!Multiple && !string.Equals(InternalSearch, GetText(SelectedItem)))
+            {
+                SetSearch();
+            }
+        }
+
+        private void SetSearch()
+        {
+            NextTick(() =>
+            {
+                if (!Multiple || string.IsNullOrEmpty(InternalSearch) || !IsMenuActive)
+                {
+                    InternalSearch = (SelectedItems.Count == 0 || Multiple || HasSlot) ? null : GetText(SelectedItem);
+                }
+
+                StateHasChanged();
+
+                return Task.CompletedTask;
+            });
         }
     }
 }
