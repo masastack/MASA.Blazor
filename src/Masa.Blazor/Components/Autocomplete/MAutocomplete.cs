@@ -154,7 +154,7 @@ namespace Masa.Blazor
             else
             {
                 await Blur();
-                await UpdateSelf();
+                UpdateSelf();
             }
         }
 
@@ -258,7 +258,7 @@ namespace Masa.Blazor
         protected override async Task OnTabDown(KeyboardEventArgs args)
         {
             await base.OnTabDown(args);
-            await UpdateSelf();
+            UpdateSelf();
         }
 
         protected override Task OnUpDown(string code)
@@ -298,7 +298,7 @@ namespace Masa.Blazor
 
         private async void OnFilteredItemsChanged(IList<TItem> val, IList<TItem> oldVal)
         {
-            if (val == oldVal)
+            if (Equals(val, oldVal))
             {
                 return;
             }
@@ -369,7 +369,7 @@ namespace Masa.Blazor
             }
         }
 
-        private async Task UpdateSelf()
+        private void UpdateSelf()
         {
             if (!SearchIsDirty && !EqualityComparer<TValue>.Default.Equals(InternalValue, default))
             {

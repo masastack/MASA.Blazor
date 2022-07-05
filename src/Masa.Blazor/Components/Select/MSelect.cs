@@ -48,7 +48,7 @@ namespace Masa.Blazor
 
         [EditorRequired]
         [Parameter]
-        public Func<TItem, TItemValue>? ItemValue { get; set; }
+        public Func<TItem, TItemValue> ItemValue { get; set; }
 
         [Parameter]
         public Action<BMenuProps> MenuProps { get; set; }
