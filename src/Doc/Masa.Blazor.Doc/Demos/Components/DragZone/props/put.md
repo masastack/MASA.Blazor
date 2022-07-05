@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-拖放配置：`true` 允许拖放 ，`false`禁止拖放，`group1,group2` 允许定区域的元素拖放。
+拖放配置：`true` 允许拖放 ，`false`禁止拖放，`group1,group2` 允许指定区域的元素拖放。
 
 ## en-US
 
