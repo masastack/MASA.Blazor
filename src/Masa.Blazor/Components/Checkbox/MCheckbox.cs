@@ -40,9 +40,9 @@ namespace Masa.Blazor
         [Inject]
         public Document Document { get; set; }
 
-        protected override void InternalValueSetter(bool val)
+        protected override void OnValueChange(bool val)
         {
-            base.InternalValueSetter(val);
+            base.OnValueChange(val);
 
             if (OnChange.HasDelegate)
             {

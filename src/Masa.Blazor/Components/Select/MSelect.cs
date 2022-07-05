@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata;
+﻿using System.Linq.Expressions;
+using System.Reflection.Metadata;
 using BlazorComponent.Web;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -110,6 +111,10 @@ namespace Masa.Blazor
 
         bool ISelect<TItem, TItemValue, TValue>.GetDisabled(TItem item) => GetDisabled(item);
 
+        private static Func<TItem, string> ItemHeader => GetFuncOrDefault<string>("Header");
+
+        private static Func<TItem, bool> ItemDivider => GetFuncOrDefault<bool>("Divider");
+
         private IList<TItem> CachedItems { get; set; } = new List<TItem>();
 
         protected bool IsMenuActive
@@ -214,6 +219,7 @@ namespace Masa.Blazor
             base.OnInitialized();
 
             CachedItems = CacheItems ? Items : new List<TItem>();
+            InternalValue = Value;
 
             ComputedMenuProps = GetDefaultMenuProps();
             MenuProps?.Invoke(ComputedMenuProps);
@@ -254,19 +260,25 @@ namespace Masa.Blazor
                        }
 
                        SetSelectedItems();
-                       
+
                        StateHasChanged();
                    });
         }
 
         private IList<TItem> FilterDuplicates(IEnumerable<TItem> list)
         {
-            var uniqueValues = new Dictionary<TItemValue, TItem>();
+            var uniqueValues = new Dictionary<object, TItem>();
 
             foreach (var item in list)
             {
                 if (item is null)
                 {
+                    continue;
+                }
+
+                if (ItemDivider(item) || ItemHeader(item) is not null)
+                {
+                    uniqueValues.Add(item, item);
                     continue;
                 }
 
@@ -460,6 +472,8 @@ namespace Masa.Blazor
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.AppendItemContent)] = AppendItemContent;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.SelectedIndex)] = MenuListIndex;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.NoDataContent)] = NoDataContent;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemDivider)] = ItemDivider;
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemHeader)] = ItemHeader;
                 })
                 .Apply<BChip, MChip>(attrs =>
                 {
@@ -492,7 +506,7 @@ namespace Masa.Blazor
                 });
         }
 
-        protected override async void InternalValueSetter(TValue val)
+        protected override async void OnValueChange(TValue val)
         {
             SetSelectedItems();
 
@@ -527,11 +541,6 @@ namespace Masa.Blazor
                     await SetInternalValueAsync(val);
                 }
 
-                if (HideSelected)
-                {
-                    await SetMenuIndex(-1);
-                }
-
                 IsMenuActive = false;
             }
             else
@@ -550,18 +559,18 @@ namespace Masa.Blazor
                 {
                     await SetInternalValueAsync(val);
                 }
+            }
 
-                if (HideSelected)
+            if (HideSelected)
+            {
+                await SetMenuIndex(-1);
+            }
+            else
+            {
+                var index = ComputedItems.IndexOf(item);
+                if (index > -1)
                 {
-                    await SetMenuIndex(-1);
-                }
-                else
-                {
-                    var index = ComputedItems.IndexOf(item);
-                    if (index > -1)
-                    {
-                        await SetMenuIndex(index);
-                    }
+                    await SetMenuIndex(index);
                 }
             }
 
@@ -829,6 +838,8 @@ namespace Masa.Blazor
             }
 
             SelectedItems = selectedItems;
+            
+            StateHasChanged();
         }
 
         protected int GetMenuIndex()
@@ -852,6 +863,25 @@ namespace Masa.Blazor
             IsMenuActive = SelectedItems.Count == 0;
 
             SelectedIndex = -1;
+        }
+
+        private static Func<TItem, T> GetFuncOrDefault<T>(string name)
+        {
+            Func<TItem, T> func;
+            try
+            {
+                var parameterExpression = Expression.Parameter(typeof(TItem), "item");
+                var propertyExpression = Expression.Property(parameterExpression, name);
+
+                var lambdaExpression = Expression.Lambda<Func<TItem, T>>(propertyExpression, parameterExpression);
+                func = lambdaExpression.Compile();
+            }
+            catch
+            {
+                func = item => default;
+            }
+
+            return func;
         }
     }
 }
