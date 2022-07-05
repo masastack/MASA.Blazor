@@ -30,7 +30,11 @@ namespace Masa.Blazor
 
         [EditorRequired]
         [Parameter]
-        public IList<TItem> Items { get; set; } = new List<TItem>();
+        public IList<TItem> Items
+        {
+            get => GetValue((IList<TItem>)new List<TItem>());
+            set => SetValue(value);
+        }
 
         [Parameter]
         public string ItemColor { get; set; } = "primary";
@@ -44,7 +48,7 @@ namespace Masa.Blazor
 
         [EditorRequired]
         [Parameter]
-        public Func<TItem, TItemValue> ItemValue { get; set; }
+        public Func<TItem, TItemValue>? ItemValue { get; set; }
 
         [Parameter]
         public Action<BMenuProps> MenuProps { get; set; }
@@ -106,7 +110,7 @@ namespace Masa.Blazor
 
         bool ISelect<TItem, TItemValue, TValue>.GetDisabled(TItem item) => GetDisabled(item);
 
-        private IList<TItem> CachedItems { get; set; }
+        private IList<TItem> CachedItems { get; set; } = new List<TItem>();
 
         protected bool IsMenuActive
         {
@@ -147,15 +151,13 @@ namespace Masa.Blazor
             {
                 if (HideSelected)
                 {
-                    var items = Items.Where(item => !SelectedItems.Contains(item)).ToList();
+                    var items = AllItems.Where(item => !SelectedItems.Contains(item)).ToList();
                     return items;
                 }
-        
-                return Items;
+
+                return AllItems;
             }
         }
-
-        // protected virtual IList<TItem> ComputedItems => AllItems;
 
         protected IList<TItemValue> InternalValues
         {
@@ -194,9 +196,9 @@ namespace Masa.Blazor
             MaxHeight = 304
         };
 
-        protected virtual string GetText(TItem item) => item == null ? null : ItemText(item);
+        protected virtual string GetText(TItem item) => item is null || ItemText is null ? null : ItemText(item);
 
-        protected TItemValue GetValue(TItem item) => ItemValue(item);
+        protected TItemValue GetValue(TItem item) => ItemValue is null ? default : ItemValue(item);
 
         protected bool GetDisabled(TItem item) => ItemDisabled(item);
 
@@ -238,7 +240,23 @@ namespace Masa.Blazor
         {
             base.OnWatcherInitialized();
 
-            Watcher.Watch<bool>(nameof(IsMenuActive), val => OnMenuActiveChange(val));
+            Watcher.Watch<bool>(nameof(IsMenuActive), val => OnMenuActiveChange(val))
+                   .Watch<IList<TItem>>(nameof(Items), async val =>
+                   {
+                       if (CacheItems)
+                       {
+                           NextTick(() =>
+                           {
+                               CachedItems = FilterDuplicates(CachedItems.Concat(val));
+                               StateHasChanged();
+                               return Task.CompletedTask;
+                           });
+                       }
+
+                       SetSelectedItems();
+                       
+                       StateHasChanged();
+                   });
         }
 
         private IList<TItem> FilterDuplicates(IEnumerable<TItem> list)
@@ -247,6 +265,11 @@ namespace Masa.Blazor
 
             foreach (var item in list)
             {
+                if (item is null)
+                {
+                    continue;
+                }
+
                 var val = GetValue(item);
                 if (!uniqueValues.ContainsKey(val))
                 {
@@ -471,7 +494,7 @@ namespace Masa.Blazor
 
         protected override async void InternalValueSetter(TValue val)
         {
-            await SetSelectedItems();
+            SetSelectedItems();
 
             if (Multiple)
             {
@@ -716,6 +739,11 @@ namespace Masa.Blazor
                     await OnFocus.InvokeAsync();
                 }
             }
+
+            if (OnClick.HasDelegate)
+            {
+                await OnClick.InvokeAsync(args);
+            }
         }
 
         public override async Task HandleOnMouseUpAsync(ExMouseEventArgs args)
@@ -784,10 +812,10 @@ namespace Masa.Blazor
             MenuListIndex = computedIndex;
         }
 
-        protected virtual async Task SetSelectedItems()
+        protected virtual void SetSelectedItems()
         {
             var selectedItems = new List<TItem>();
-            
+
             var values = InternalValues;
 
             foreach (var value in values)

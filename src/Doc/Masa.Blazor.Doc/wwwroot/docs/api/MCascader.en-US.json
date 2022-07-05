@@ -29,6 +29,11 @@
       "Description": ""
     },
     {
+      "Name": "CacheItems",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "Chips",
       "Type": "Boolean",
       "Default": "false",
