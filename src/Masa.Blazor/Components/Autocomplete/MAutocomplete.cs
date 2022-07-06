@@ -116,6 +116,8 @@ namespace Masa.Blazor
             }
         }
 
+        protected override bool EnableSpaceKeDownPreventDefault => false;
+
         protected override void OnWatcherInitialized()
         {
             base.OnWatcherInitialized();
