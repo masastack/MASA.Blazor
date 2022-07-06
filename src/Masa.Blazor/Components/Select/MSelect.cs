@@ -207,6 +207,8 @@ namespace Masa.Blazor
 
         protected bool GetDisabled(TItem item) => ItemDisabled(item);
 
+        protected virtual bool EnableSpaceKeDownPreventDefault => true;
+
         public override Task SetParametersAsync(ParameterView parameters)
         {
             NoDataText = I18n.T("$masaBlazor.noDataText");
@@ -235,8 +237,14 @@ namespace Masa.Blazor
 
             if (firstRender)
             {
-                await JsInvokeAsync(JsInteropConstants.EnablePreventDefaultForEvent, InputElement, "keydown",
-                    new[] { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End, KeyCodes.Enter, KeyCodes.Escape, KeyCodes.Space });
+                var keys = new List<string> { KeyCodes.ArrowUp, KeyCodes.ArrowDown, KeyCodes.Home, KeyCodes.End, KeyCodes.Enter, KeyCodes.Escape };
+
+                if (EnableSpaceKeDownPreventDefault)
+                {
+                    keys.Add(KeyCodes.Space);
+                }
+
+                await JsInvokeAsync(JsInteropConstants.EnablePreventDefaultForEvent, InputElement, "keydown", keys);
             }
 
             await GenMenu();
@@ -508,6 +516,8 @@ namespace Masa.Blazor
 
         protected override async void OnValueChange(TValue val)
         {
+            Console.WriteLine($"OnValueChange val: {val}");
+
             SetSelectedItems();
 
             if (Multiple)
@@ -838,7 +848,7 @@ namespace Masa.Blazor
             }
 
             SelectedItems = selectedItems;
-            
+
             StateHasChanged();
         }
 
