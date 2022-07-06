@@ -516,8 +516,6 @@ namespace Masa.Blazor
 
         protected override async void OnValueChange(TValue val)
         {
-            Console.WriteLine($"OnValueChange val: {val}");
-
             SetSelectedItems();
 
             if (Multiple)
