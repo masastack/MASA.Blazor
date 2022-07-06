@@ -26,6 +26,8 @@ public partial class Toc : OwningComponentBase<DemoService>
     [CascadingParameter(Name = "Culture")]
     public CultureInfo Culture { get; set; }
 
+    private readonly string _windowScrollEventListenerKey = "toc-window-scroll";
+
     private bool _disposed;
 
     private ContentsItem ActiveItem { get; set; }
@@ -45,7 +47,7 @@ public partial class Toc : OwningComponentBase<DemoService>
                 "scroll",
                 DotNetObjectReference.Create(new Invoker<object>(_ => OnScroll())),
                 false,
-                new EventListenerActions(17)
+                new EventListenerExtras(_windowScrollEventListenerKey, 17)
             );
         }
     }

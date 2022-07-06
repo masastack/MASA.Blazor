@@ -352,7 +352,7 @@ namespace Masa.Blazor
                 if (Scrollable)
                 {
                     var el = Document.GetElementByReference(Ref);
-                    await el.AddEventListenerAsync("wheel", CreateEventCallback<WheelEventArgs>(HandleOnWheelAsync), false, new EventListenerActions() { PreventDefault = true });
+                    await el.AddEventListenerAsync("wheel", CreateEventCallback<WheelEventArgs>(HandleOnWheelAsync), false, new EventListenerExtras() { PreventDefault = true });
                 }
             }
         }
