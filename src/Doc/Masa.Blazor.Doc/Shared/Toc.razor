@@ -21,7 +21,10 @@
                         };
 
                     <li class="@pl text-body-2 py-1 font-weight-regular @exClass">
-                        <a @onclick="() => HandleOnClick(item.Id)" @onclick:preventDefault @onclick:stopPropagation class="m-toc-link d-block transition-swing text-decoration-none">
+                        <a @onclick="() => HandleOnClick(item.Id)"
+                           @onclick:preventDefault
+                           @onclick:stopPropagation
+                           class="m-toc-link d-block transition-swing text-decoration-none">
                             @item.Title
                         </a>
                     </li>
@@ -32,7 +35,7 @@
         <div class="ml-5">
             <div class="ml-2 mb-3 text-caption font-weight-regular text--secondary" path="premiere-sponsors">@T("SeniorSponsor")</div>
             <MCard Tag="a" Ripple="false" Tile Class="d-inline-block px-2 py-1 transparent" Flat Link Style="box-shadow:none!important">
-                <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/lsd-logo.png" alt=""/>
+                <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/lsd-logo.png" alt="" />
             </MCard>
         </div>
     </ChildContent>

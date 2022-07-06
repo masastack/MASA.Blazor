@@ -324,7 +324,7 @@ namespace Masa.Blazor
         {
             Console.WriteLine("touch start");
             await HandleOnSliderStartSwiping(args.Target, args.Touches[0].ClientX, args.Touches[0].ClientY);
-            await App.AddEventListenerAsync("touchmove", CreateEventCallback<TouchEventArgs>(HandleTouchMove), false, new EventListenerActions() { PreventDefault = true, StopPropagation = true });
+            await App.AddEventListenerAsync("touchmove", CreateEventCallback<TouchEventArgs>(HandleTouchMove), false, new EventListenerExtras() { PreventDefault = true, StopPropagation = true });
             await App.AddEventListenerAsync("touchend", CreateEventCallback<TouchEventArgs>(HandleOnTouchEndAsync), new EventListenerOptions
             {
                 Capture = true,
@@ -336,12 +336,12 @@ namespace Masa.Blazor
         {
             await HandleOnSliderStartSwiping(args.Target, args.ClientX, args.ClientY);
 
-            await App.AddEventListenerAsync("mousemove", CreateEventCallback<MouseEventArgs>(HandleOnMouseMoveAsync), false, new EventListenerActions() { PreventDefault = true, StopPropagation = true });
+            await App.AddEventListenerAsync("mousemove", CreateEventCallback<MouseEventArgs>(HandleOnMouseMoveAsync), false, new EventListenerExtras() { PreventDefault = true, StopPropagation = true });
             await App.AddEventListenerAsync("mouseup", CreateEventCallback<MouseEventArgs>(HandleOnSliderMouseUpAsync), new EventListenerOptions
             {
                 Capture = true,
                 Once = true
-            }, new EventListenerActions() { PreventDefault = true, StopPropagation = true });
+            }, new EventListenerExtras() { PreventDefault = true, StopPropagation = true });
         }
 
         public async Task HandleTouchMove(TouchEventArgs args)
