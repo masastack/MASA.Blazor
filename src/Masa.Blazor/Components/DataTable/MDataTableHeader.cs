@@ -84,7 +84,7 @@ namespace Masa.Blazor
                     {
                         var sortIndex = Options.SortBy.IndexOf(header.Value);
                         var beingSorted = sortIndex >= 0;
-                        var isDesc = beingSorted ? Options.SortDesc[sortIndex] : false;
+                        var isDesc = beingSorted ? Options.SortDesc.ElementAtOrDefault(sortIndex) : false;
 
                         cssBuilder
                             .Add("sortable")

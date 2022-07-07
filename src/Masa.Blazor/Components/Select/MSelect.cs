@@ -111,9 +111,9 @@ namespace Masa.Blazor
 
         bool ISelect<TItem, TItemValue, TValue>.GetDisabled(TItem item) => GetDisabled(item);
 
-        private static Func<TItem, string> ItemHeader => GetFuncOrDefault<string>("Header");
+        private static Func<TItem, string> ItemHeader { get; } = GetFuncOrDefault<string>("Header");
 
-        private static Func<TItem, bool> ItemDivider => GetFuncOrDefault<bool>("Divider");
+        private static Func<TItem, bool> ItemDivider { get; } = GetFuncOrDefault<bool>("Divider");
 
         private IList<TItem> CachedItems { get; set; } = new List<TItem>();
 
@@ -148,40 +148,26 @@ namespace Masa.Blazor
             { "readonly", true }
         };
 
-        protected List<TItem> AllItems => FilterDuplicates(CachedItems.Concat(Items)).ToList();
+        protected IList<TItem> AllItems => FilterDuplicates(CachedItems.Concat(Items)).ToList();
 
-        protected virtual IList<TItem> ComputedItems
-        {
-            get
-            {
-                if (HideSelected)
-                {
-                    var items = AllItems.Where(item => !SelectedItems.Contains(item)).ToList();
-                    return items;
-                }
+        protected virtual IList<TItem> ComputedItems => AllItems;
 
-                return AllItems;
-            }
-        }
+        protected IList<TItem> ComputedItemsIfHideSelected =>
+            HideSelected ? ComputedItems.Where(item => !SelectedItems.Contains(item)).ToList() : ComputedItems;
 
         protected IList<TItemValue> InternalValues
         {
             get
             {
-                if (InternalValue is IList<TItemValue> values)
+                return GetComputedValue(() =>
                 {
-                    return values;
-                }
-
-                if (InternalValue is TItemValue value)
-                {
-                    return new List<TItemValue>
+                    return InternalValue switch
                     {
-                        value
+                        IList<TItemValue> values => values,
+                        TItemValue value => new List<TItemValue> { value },
+                        _ => new List<TItemValue>()
                     };
-                }
-
-                return new List<TItemValue>();
+                }, new[] { nameof(InternalValue), nameof(Value) });
             }
         }
 
@@ -255,27 +241,31 @@ namespace Masa.Blazor
             base.OnWatcherInitialized();
 
             Watcher.Watch<bool>(nameof(IsMenuActive), val => OnMenuActiveChange(val))
-                   .Watch<IList<TItem>>(nameof(Items), async val =>
-                   {
-                       if (CacheItems)
-                       {
-                           NextTick(() =>
-                           {
-                               CachedItems = FilterDuplicates(CachedItems.Concat(val));
-                               StateHasChanged();
-                               return Task.CompletedTask;
-                           });
-                       }
+                   .Watch<IList<TItem>>(nameof(Items), async _ => OnItemsChange())
+                   .Watch<IList<TItemValue>>(nameof(InternalValues), _ => OnInternalValueChange());
+        }
 
-                       SetSelectedItems();
+        private void OnItemsChange()
+        {
+            if (CacheItems)
+            {
+                NextTick(() =>
+                {
+                    CachedItems = FilterDuplicates(CachedItems.Concat(Items));
+                    StateHasChanged();
+                    return Task.CompletedTask;
+                });
+            }
 
-                       StateHasChanged();
-                   });
+            SetSelectedItems();
+
+            StateHasChanged();
         }
 
         private IList<TItem> FilterDuplicates(IEnumerable<TItem> list)
         {
-            var uniqueValues = new Dictionary<object, TItem>();
+            var uniqueKeys = new List<TItemValue>();
+            var uniqueItems = new List<TItem>();
 
             foreach (var item in list)
             {
@@ -286,18 +276,19 @@ namespace Masa.Blazor
 
                 if (ItemDivider(item) || ItemHeader(item) is not null)
                 {
-                    uniqueValues.Add(item, item);
+                    uniqueItems.Add(item);
                     continue;
                 }
 
                 var val = GetValue(item);
-                if (!uniqueValues.ContainsKey(val))
+                if (!uniqueKeys.Contains(val))
                 {
-                    uniqueValues.Add(val, item);
+                    uniqueKeys.Add(val);
+                    uniqueItems.Add(item);
                 }
             }
 
-            return uniqueValues.Values.ToList();
+            return uniqueItems;
         }
 
         private async Task GenMenu()
@@ -514,7 +505,7 @@ namespace Masa.Blazor
                 });
         }
 
-        protected override async void OnValueChange(TValue val)
+        protected void OnInternalValueChange()
         {
             SetSelectedItems();
 
@@ -528,6 +519,8 @@ namespace Masa.Blazor
                     return Task.CompletedTask;
                 });
             }
+
+            StateHasChanged();
         }
 
         protected async Task SelectItemByIndex(int index)
@@ -649,38 +642,102 @@ namespace Masa.Blazor
 
         private async Task ChangeMenuListIndex(string code)
         {
-            if (code == KeyCodes.Enter && MenuListIndex != -1)
+            if (code == KeyCodes.ArrowUp)
             {
-                await SelectItemByIndex(MenuListIndex);
+                PrevTile();
+            }
+            else if (code == KeyCodes.ArrowDown)
+            {
+                NextTile();
+            }
+            else if (code == KeyCodes.Home)
+            {
+                FirstTile();
+            }
+            else if (code == KeyCodes.End)
+            {
+                LastTile();
+            }
+            else if (code == KeyCodes.Enter && MenuListIndex != -1)
+            {
+                var item = ComputedItemsIfHideSelected.ElementAtOrDefault(MenuListIndex);
+                await SelectItem(item);
+            }
+
+            await SetMenuIndex(MenuListIndex);
+        }
+
+        private void NextTile()
+        {
+            var nextIndex = MenuListIndex + 1;
+            var nextItem = ComputedItemsIfHideSelected.ElementAtOrDefault(nextIndex);
+
+            if (nextIndex >= ComputedItemsIfHideSelected.Count || nextItem is null)
+            {
+                if (ComputedItemsIfHideSelected.Count == 0) return;
+
+                MenuListIndex = -1;
+                NextTile();
+
                 return;
             }
 
-            var index = code switch
+            MenuListIndex++;
+            if (ItemDivider(nextItem) || ItemHeader(nextItem) is not null || ItemDisabled(nextItem))
             {
-                KeyCodes.ArrowUp => ComputeNextIndex(-1),
-                KeyCodes.ArrowDown => ComputeNextIndex(1),
-                KeyCodes.Home => 0,
-                KeyCodes.End => ComputedItems.Count - 1,
-                _ => -1
-            };
+                NextTile();
+            }
+        }
 
-            await SetMenuIndex(index, code);
+        private void PrevTile()
+        {
+            var prevIndex = MenuListIndex - 1;
+            var prevItem = ComputedItemsIfHideSelected.ElementAtOrDefault(prevIndex);
 
-            int ComputeNextIndex(int add)
+            if (prevIndex == -1 || prevItem is null)
             {
-                var listIndex = MenuListIndex + add;
-                if (listIndex > ComputedItems.Count - 1)
-                {
-                    //Back to first
-                    listIndex = 0;
-                }
-                else if (listIndex < 0)
-                {
-                    //Go to last
-                    listIndex = ComputedItems.Count - 1;
-                }
+                if (ComputedItemsIfHideSelected.Count == 0) return;
 
-                return listIndex;
+                MenuListIndex = ComputedItemsIfHideSelected.Count;
+                PrevTile();
+
+                return;
+            }
+
+            MenuListIndex--;
+            if (ItemDivider(prevItem) || ItemHeader(prevItem) is not null || ItemDisabled(prevItem))
+            {
+                PrevTile();
+            }
+        }
+
+        private void LastTile()
+        {
+            var lastIndex = ComputedItemsIfHideSelected.Count - 1;
+            var lastItem = ComputedItemsIfHideSelected.ElementAtOrDefault(lastIndex);
+
+            if (lastItem is null)
+                return;
+
+            MenuListIndex = ComputedItemsIfHideSelected.Count - 1;
+
+            if (ItemDivider(lastItem) || ItemHeader(lastItem) is not null || ItemDisabled(lastItem))
+            {
+                PrevTile();
+            }
+        }
+
+        private void FirstTile()
+        {
+            var firstItem = ComputedItemsIfHideSelected.FirstOrDefault();
+
+            if (firstItem is null) return;
+
+            MenuListIndex = 0;
+
+            if (ItemDivider(firstItem) || ItemHeader(firstItem) is not null || ItemDisabled(firstItem))
+            {
+                NextTile();
             }
         }
 
@@ -814,19 +871,25 @@ namespace Masa.Blazor
             // TODO: OpenOnClear
         }
 
-        protected async Task SetMenuIndex(int index, string keyCode = null)
+        protected async Task SetMenuIndex(int index)
         {
-            var computedIndex = index;
-            if (index > -1)
+            // TODO: scroll 
+            var i = index;
+            var menuItem = ComputedItems.ElementAtOrDefault(index);
+            if (menuItem is not null)
             {
-                computedIndex = await JsInvokeAsync<int>(JsInteropConstants.ScrollToTile,
-                    MMenu.ContentElement.GetSelector(),
-                    TilesSelector,
-                    index,
-                    keyCode);
+                i = ComputedItemsIfHideSelected.IndexOf(menuItem);
             }
 
-            MenuListIndex = computedIndex;
+            if (i > -1)
+            {
+                await JsInvokeAsync(JsInteropConstants.ScrollToTile,
+                    MMenu.ContentElement.GetSelector(),
+                    TilesSelector,
+                    i);
+            }
+
+            MenuListIndex = index;
         }
 
         protected virtual void SetSelectedItems()
@@ -837,11 +900,11 @@ namespace Masa.Blazor
 
             foreach (var value in values)
             {
-                var index = AllItems.FindIndex(v => EqualityComparer<TItemValue>.Default.Equals(value, GetValue(v)));
+                var item = AllItems.FirstOrDefault(v => EqualityComparer<TItemValue>.Default.Equals(value, GetValue(v)));
 
-                if (index > -1)
+                if (item is not null)
                 {
-                    selectedItems.Add(AllItems[index]);
+                    selectedItems.Add(item);
                 }
             }
 
@@ -863,7 +926,7 @@ namespace Masa.Blazor
             }
             else
             {
-                SetValue(default(TValue));
+                await SetInternalValueAsync(default(TValue));
             }
 
             // if all items have been delete,

@@ -57,7 +57,7 @@ namespace Masa.Blazor
                 {
                     if (!IsSearching || NoFilter || InternalSearch is null)
                     {
-                        return base.ComputedItems;
+                        return AllItems;
                     }
 
                     return AllItems.Where(item => Filter(item, InternalSearch, GetText(item) ?? "")).ToList();
