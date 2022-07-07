@@ -276,7 +276,7 @@
             }
             catch
             {
-
+                // ignored
             }
         }
     }

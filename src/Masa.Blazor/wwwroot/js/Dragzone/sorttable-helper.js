@@ -1,4 +1,7 @@
 ﻿export function init(dotNetHelper, containerId, option) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    
     let _options = {
         onChoose: function (evt) {
             dotNetHelper.invokeMethodAsync(`OnChoose`, convertDropEndEvent(evt));
@@ -57,9 +60,9 @@
         }
     }
 
-    if (Sortable && containerId) {
+    if (Sortable) {
         var ops = Object.assign(_options, option)
-        new Sortable(document.getElementById(containerId), ops);
+        new Sortable(container, ops);
     }
 
     function convertDropEndEvent(event) {
