@@ -67,25 +67,32 @@ export function init(quillElement, obj, toolBarContainer, readOnly,
     })
 }
 export function getContent(quillElement) {
+    if (!quillElement) return
     return JSON.stringify(quillElement.__quill.getContents());
 }
 export function getText(quillElement) {
+    if (!quillElement) return
     return quillElement.__quill.getText();
 }
 export function getHtml(quillElement) {
+    if (!quillElement) return
     return quillElement.__quill.root.innerHTML;
 }
 export function setContent(quillElement, quillContent) {
-    content = JSON.parse(quillContent);
+    if (!quillElement) return
+    const content = JSON.parse(quillContent);
     return quillElement.__quill.setContents(content, 'api');
 }
 export function setHtml(quillElement, quillHTMLContent) {
+    if (!quillElement) return
     return quillElement.__quill.root.innerHTML = quillHTMLContent;
 }
 export function enableEditor(quillElement, mode) {
+    if (!quillElement) return
     quillElement.__quill.enable(mode);
 }
 export function insertImage(quillElement, imageURL, editorIndex) {
+    if (!quillElement) return
     let Delta = Quill.import('delta');
 
     if (!!!editorIndex && editorIndex != 0) {
@@ -108,6 +115,7 @@ export function clearFile(element) {
     fileInput.value = '';
 }
 export function uploadFilePic(quillElement, element, uploadConfig, index) {
+    if (!quillElement) return
     let quill = quillElement.__quill
     let fileInput = element.querySelector('input.ql-image[type=file]')
     // Create formdata

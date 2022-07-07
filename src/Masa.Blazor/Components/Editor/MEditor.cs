@@ -37,9 +37,11 @@ namespace Masa.Blazor
                     _value = value;
                     _waitingUpdate = true;
                 }
+
                 SetValue(value);
             }
         }
+
         [Parameter]
         public MEditorUpload Upload { get; set; }
 
@@ -89,6 +91,7 @@ namespace Masa.Blazor
             {
                 return;
             }
+
             await CreateEditorAsync();
         }
 
@@ -168,7 +171,6 @@ namespace Masa.Blazor
             {
                 await ValueChanged.InvokeAsync(value);
             }
-
         }
 
         [JSInvokable]
@@ -197,6 +199,7 @@ namespace Masa.Blazor
                 await BeforeAllUploadAsync.Invoke(flist);
                 return;
             }
+
             if (Upload != default)
             {
                 await QuillHelper.InvokeVoidAsync("uploadFilePic", ContentRef, Ref, Upload, 0);
@@ -210,21 +213,22 @@ namespace Masa.Blazor
             }
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            ObjRef?.Dispose();
+        }
+
         public async ValueTask DisposeAsync()
         {
             try
             {
-                if (ObjRef != null)
-                {
-                    ObjRef.Dispose();
-                }
                 if (QuillHelper != null)
-                {
                     await QuillHelper.DisposeAsync();
-                }
             }
             catch (Exception)
             {
+                // ignored
             }
         }
     }
