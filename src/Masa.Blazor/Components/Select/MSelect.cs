@@ -45,11 +45,19 @@ namespace Masa.Blazor
 
         [EditorRequired]
         [Parameter]
-        public Func<TItem, string> ItemText { get; set; }
+        public Func<TItem, string> ItemText
+        {
+            get => GetValue<Func<TItem, string>>();
+            set => SetValue(value);
+        }
 
         [EditorRequired]
         [Parameter]
-        public Func<TItem, TItemValue> ItemValue { get; set; }
+        public Func<TItem, TItemValue> ItemValue
+        {
+            get => GetValue<Func<TItem, TItemValue>>();
+            set => SetValue(value);
+        }
 
         [Parameter]
         public Action<BMenuProps> MenuProps { get; set; }
@@ -148,7 +156,7 @@ namespace Masa.Blazor
             { "readonly", true }
         };
 
-        protected IList<TItem> AllItems => FilterDuplicates(CachedItems.Concat(Items)).ToList();
+        protected IList<TItem> AllItems { get; set; } = new List<TItem>();
 
         protected virtual IList<TItem> ComputedItems => AllItems;
 
@@ -159,20 +167,15 @@ namespace Masa.Blazor
         {
             get
             {
-                if (InternalValue is IList<TItemValue> values)
+                return GetComputedValue(() =>
                 {
-                    return values;
-                }
-
-                if (InternalValue is TItemValue value)
-                {
-                    return new List<TItemValue>
+                    return InternalValue switch
                     {
-                        value
+                        IList<TItemValue> values => values,
+                        TItemValue value => new List<TItemValue> { value },
+                        _ => new List<TItemValue>()
                     };
-                }
-
-                return new List<TItemValue>();
+                }, new[] { nameof(InternalValue), nameof(Value) });
             }
         }
 
@@ -225,6 +228,8 @@ namespace Masa.Blazor
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
+            
+            Console.WriteLine($"{DateTime.Now.ToLongTimeString()} InternalValue:{System.Text.Json.JsonSerializer.Serialize(InternalValue)}");
 
             if (firstRender)
             {
@@ -246,26 +251,39 @@ namespace Masa.Blazor
             base.OnWatcherInitialized();
 
             Watcher.Watch<bool>(nameof(IsMenuActive), val => OnMenuActiveChange(val))
-                   .Watch<IList<TItem>>(nameof(Items), async val =>
-                   {
-                       if (CacheItems)
-                       {
-                           NextTick(() =>
-                           {
-                               CachedItems = FilterDuplicates(CachedItems.Concat(val));
-                               StateHasChanged();
-                               return Task.CompletedTask;
-                           });
-                       }
+                   .Watch<IList<TItem>>(nameof(Items), async _ => OnItemsChange())
+                   .Watch<Func<TItem, TItemValue>>(nameof(ItemValue), _ => OnItemsChange())
+                   .Watch<IList<TItemValue>>(nameof(InternalValues), _ => OnInternalValueChange());
+            // .Watch<Func<TItem, String>>(nameof(ItemText), _ => OnItemsChange());
+        }
 
-                       SetSelectedItems();
+        private void OnItemsChange()
+        {
+            Console.WriteLine($"{DateTime.Now.ToLongTimeString()} OnItemsChanged:{Items.Count}");
+            
+            if (CacheItems)
+            {
+                NextTick(() =>
+                {
+                    CachedItems = FilterDuplicates(CachedItems.Concat(Items));
+                    StateHasChanged();
+                    return Task.CompletedTask;
+                });
+            }
 
-                       StateHasChanged();
-                   });
+            var items = FilterDuplicates(CachedItems.Concat(Items)).ToList();
+            Console.WriteLine($"Items:{Items.Count} items: {items.Count}");
+            AllItems = items;
+
+            SetSelectedItems();
+
+            StateHasChanged();
         }
 
         private IList<TItem> FilterDuplicates(IEnumerable<TItem> list)
         {
+            Console.WriteLine($"{DateTime.Now.ToLongTimeString()} FilterDuplicates ");
+            
             var uniqueKeys = new List<TItemValue>();
             var uniqueItems = new List<TItem>();
 
@@ -325,6 +343,8 @@ namespace Masa.Blazor
 
         protected virtual async Task OnMenuActiveChange(bool val)
         {
+            Console.WriteLine($"{DateTime.Now.Millisecond} OnMenuActiveChange");
+
             if ((Multiple && !val) || GetMenuIndex() > -1)
             {
                 return;
@@ -473,8 +493,8 @@ namespace Masa.Blazor
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.AppendItemContent)] = AppendItemContent;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.SelectedIndex)] = MenuListIndex;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.NoDataContent)] = NoDataContent;
-                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemDivider)] = ItemDivider;
-                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemHeader)] = ItemHeader;
+                    // attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemDivider)] = ItemDivider;
+                    // attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemHeader)] = ItemHeader;
                 })
                 .Apply<BChip, MChip>(attrs =>
                 {
@@ -507,8 +527,10 @@ namespace Masa.Blazor
                 });
         }
 
-        protected override async void OnValueChange(TValue val)
+        protected void OnInternalValueChange()
         {
+            Console.WriteLine($"InternalValue watch:{System.Text.Json.JsonSerializer.Serialize(InternalValue)}");
+
             SetSelectedItems();
 
             if (Multiple)
@@ -661,7 +683,6 @@ namespace Masa.Blazor
             else if (code == KeyCodes.Enter && MenuListIndex != -1)
             {
                 var item = ComputedItemsIfHideSelected.ElementAtOrDefault(MenuListIndex);
-                Console.WriteLine($"enter item: {ItemText(item)}, menuListIndex:{MenuListIndex}");
                 await SelectItem(item);
             }
 
@@ -687,7 +708,6 @@ namespace Masa.Blazor
             if (ItemDivider(nextItem) || ItemHeader(nextItem) is not null || ItemDisabled(nextItem))
             {
                 NextTile();
-                Console.WriteLine($"NextTile next... :{MenuListIndex}");
             }
         }
 
@@ -896,6 +916,8 @@ namespace Masa.Blazor
 
         protected virtual void SetSelectedItems()
         {
+            Console.WriteLine($"{DateTime.Now.ToLongTimeString()}  SetSelectedItems");
+            
             var selectedItems = new List<TItem>();
 
             var values = InternalValues;
@@ -928,7 +950,7 @@ namespace Masa.Blazor
             }
             else
             {
-                SetValue(default(TValue));
+                await SetInternalValueAsync(default(TValue));
             }
 
             // if all items have been delete,

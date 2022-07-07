@@ -50,9 +50,9 @@ namespace Masa.Blazor
 
         public new string TextColor => HasText ? ComputedColor : (IsLoading ? null : ValidationState);
 
-        protected override void OnValueChange(bool val)
+        protected override void OnInternalValueChange(bool val)
         {
-            base.OnValueChange(val);
+            base.OnInternalValueChange(val);
 
             if (OnChange.HasDelegate)
             {
