@@ -8,7 +8,7 @@ namespace Masa.Blazor
     {
         [Inject]
         private I18n I18n { get; set; }
-        
+
         [EditorRequired]
         [Parameter]
         public IList<PageTabItem> Items { get; set; }
@@ -37,7 +37,7 @@ namespace Masa.Blazor
         Task IPageTabs.HandleOnCloseRightAsync(MouseEventArgs args) => HandleOnCloseRightAsync(args);
 
         Task IPageTabs.HandleOnCloseOtherAsync(MouseEventArgs args) => HandleOnCloseOtherAsync(args);
-        
+
         public string ReloadTabText { get; protected set; }
         public string CloseTabsToTheLeftText { get; protected set; }
         public string CloseTabsToTheRightText { get; protected set; }
@@ -60,7 +60,7 @@ namespace Masa.Blazor
 
         protected bool IsMenuActive { get; set; }
 
-        protected (double X, double Y) MenuPosition { get; set; }
+        protected(double X, double Y) MenuPosition { get; set; }
 
         protected PageTabItem MenuActiveItem { get; set; }
 
@@ -71,7 +71,9 @@ namespace Masa.Blazor
             ReloadTabText = I18n.T("$masaBlazor.pageTabs.reloadTab");
             CloseTabsToTheLeftText = I18n.T("$masaBlazor.pageTabs.closeTabsToTheLeft");
             CloseTabsToTheRightText = I18n.T("$masaBlazor.pageTabs.closeTabsToTheRight");
-            CloseOtherTabsText = I18n.T("$masaBlazor.pageTabs.closeOtherTabs");    
+            CloseOtherTabsText = I18n.T("$masaBlazor.pageTabs.closeOtherTabs");
+
+            HideSlider = true;
 
             return base.SetParametersAsync(parameters);
         }
@@ -80,7 +82,6 @@ namespace Masa.Blazor
         {
             base.OnInitialized();
 
-            HideSlider = true;
             NavigationManager.LocationChanged += OnLocationChanged;
         }
 
