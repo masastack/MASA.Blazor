@@ -6,7 +6,11 @@ namespace Masa.Blazor
     public partial class MTextarea : MTextField<string>
     {
         [Parameter]
-        public bool AutoGrow { get; set; }
+        public bool AutoGrow
+        {
+            get => GetValue(false);
+            set => SetValue(value);
+        }
 
         [Parameter]
         public bool NoResize { get; set; }
@@ -29,6 +33,17 @@ namespace Masa.Blazor
             { "style", AutoGrow && ElementHeight > 0 ? $"height:{ElementHeight}px" : null }
         };
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender && AutoGrow)
+            {
+                await CalculateInputHeight();
+                StateHasChanged();
+            }
+
+            await base.OnAfterRenderAsync(firstRender);
+        }
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -44,13 +59,29 @@ namespace Masa.Blazor
                 });
         }
 
-        public override async Task HandleOnInputAsync(ChangeEventArgs args)
+        protected override void OnWatcherInitialized()
         {
-            await base.HandleOnInputAsync(args);
+            base.OnWatcherInitialized();
 
+            Watcher
+                .Watch<bool>(nameof(AutoGrow), ReCalculateInputHeight)
+                .Watch<bool>(nameof(RowHeight), ReCalculateInputHeight);
+        }
+
+        protected override void OnLazyValueChange(string val)
+        {
+            ReCalculateInputHeight();
+        }
+
+        private void ReCalculateInputHeight()
+        {
             if (AutoGrow)
             {
-                await CalculateInputHeight();
+                NextTick(async () =>
+                {
+                    await CalculateInputHeight();
+                    StateHasChanged();
+                });
             }
         }
 
@@ -69,17 +100,6 @@ namespace Masa.Blazor
             var minheight = Rows * RowHeight.ToInt32() * 1.0;
 
             ElementHeight = Math.Max(minheight, height ?? 0);
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender && AutoGrow)
-            {
-                await CalculateInputHeight();
-                StateHasChanged();
-            }
-
-            await base.OnAfterRenderAsync(firstRender);
         }
     }
 }
