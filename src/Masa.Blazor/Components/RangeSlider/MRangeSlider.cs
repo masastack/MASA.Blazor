@@ -30,7 +30,7 @@ namespace Masa.Blazor
 
         protected int? ActiveThumb { get; set; }
 
-        protected override double DoubleInteralValue
+        protected override double DoubleInternalValue
         {
             get 
             {
@@ -176,13 +176,13 @@ namespace Masa.Blazor
         public override Task HandleOnFocusAsync(FocusEventArgs args)
         {
             ActiveThumb = 0;
-            _value = DoubleInteralValue;
+            _value = DoubleInternalValue;
             return base.HandleOnFocusAsync(args);
         }
 
         public override Task HandleOnBlurAsync(FocusEventArgs args)
         {
-            _value = DoubleInteralValue;
+            _value = DoubleInternalValue;
             ActiveThumb = null;
             return base.HandleOnBlurAsync(args);
         }
@@ -190,13 +190,13 @@ namespace Masa.Blazor
         public async Task HandleOnSecondFocusAsync(FocusEventArgs args)
         {
             ActiveThumb = 1;
-            _value = DoubleInteralValue;
+            _value = DoubleInternalValue;
             await base.HandleOnFocusAsync(args);
         }
 
         public async Task HandleOnSecondBlurAsync(FocusEventArgs args)
         {
-            _value = DoubleInteralValue;
+            _value = DoubleInternalValue;
             ActiveThumb = null;
             await base.HandleOnBlurAsync(args);
         }

@@ -48,7 +48,7 @@ namespace Masa.Blazor
 
         protected virtual double GetRoundedValue(int index)
         {
-            return RoundValue(DoubleInteralValue);
+            return RoundValue(DoubleInternalValue);
         }
 
         RenderFragment<int> ISlider<TValue>.ThumbLabelContent
@@ -90,7 +90,7 @@ namespace Masa.Blazor
         [Parameter]
         public RenderFragment ProgressContent { get; set; }
 
-        protected virtual double DoubleInteralValue
+        protected virtual double DoubleInternalValue
         {
             get
             {
@@ -157,7 +157,7 @@ namespace Masa.Blazor
         {
             get
             {
-                return (RoundValue(DoubleInteralValue) - Min) / (Max - Min) * 100;
+                return (RoundValue(DoubleInternalValue) - Min) / (Max - Min) * 100;
             }
         }
 
@@ -357,7 +357,7 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnSliderStartSwiping(EventTarget target, double clientX, double clientY)
         {
-            OldValue = DoubleInteralValue;
+            OldValue = DoubleInternalValue;
             IsActive = true;
 
             if (target.Class.Contains("m-slider__thumb-container"))
@@ -681,7 +681,7 @@ namespace Masa.Blazor
                 return;
             }
 
-            var value = ParseKeyDown(args, DoubleInteralValue);
+            var value = ParseKeyDown(args, DoubleInternalValue);
 
             if (value == null || value.AsT2 < Min || value.AsT2 > Max)
             {
