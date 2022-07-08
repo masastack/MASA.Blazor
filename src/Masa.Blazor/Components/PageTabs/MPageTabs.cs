@@ -182,7 +182,8 @@ namespace Masa.Blazor
                 {
                     var item = (PageTabItem)attrs.Data;
                     attrs[nameof(MIcon.OnClick)] = CreateEventCallback<MouseEventArgs>(args => CloseTab(item));
-                    attrs["__internal_stopPropagation_onclick"] = true;
+                    attrs[nameof(MIcon.OnClickStopPropagation)] = true;
+                    attrs[nameof(MIcon.OnClickPreventDefault)] = true;
                 })
                 .Apply(typeof(BList), typeof(MList), attrs =>
                 {
