@@ -31,7 +31,7 @@
                 .Apply("next", css =>
                 {
                     css.Add("m-slide-group__next")
-                        .AddIf("m-slide-group__prev--disabled", () => !HasPrev);
+                        .AddIf("m-slide-group__next--disabled", () => !HasNext);
                 })
                 .Apply("prev", css =>
                 {

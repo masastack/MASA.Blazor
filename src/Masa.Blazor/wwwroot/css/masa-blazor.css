@@ -23062,7 +23062,7 @@ html.overflow-y-hidden {
 }
 
 .m-slide-group__next--disabled,
-.m-slide-group__prem--disabled {
+.m-slide-group__prev--disabled {
     pointer-events: none;
 }
 .theme--light.m-color-picker .m-color-picker__input input {
