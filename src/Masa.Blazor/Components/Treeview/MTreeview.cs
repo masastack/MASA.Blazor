@@ -8,7 +8,6 @@
         [Parameter]
         public bool Dense { get; set; }
 
-
         [Parameter]
         public bool Rounded { get; set; }
 
