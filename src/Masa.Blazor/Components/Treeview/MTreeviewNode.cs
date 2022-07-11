@@ -84,6 +84,7 @@ namespace Masa.Blazor
                      attrs[nameof(MIcon.Color)] = (IsSelected || IsIndeterminate) ? SelectedColor : null;
                      attrs[nameof(MIcon.Disabled)] = Disabled;
                      attrs[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnCheckAsync);
+                     attrs[nameof(MIcon.OnClickStopPropagation)] = true;
                  })
                 .Apply<BIcon, MIcon>("toggle", attrs =>
                 {
@@ -94,6 +95,7 @@ namespace Masa.Blazor
                         .Class;
                     attrs[nameof(Class)] = css;
                     attrs[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnToggleAsync);
+                    attrs[nameof(MIcon.OnClickStopPropagation)] = true;
                 })
                 .Apply(typeof(BTreeviewNodeNode<,,>), typeof(BTreeviewNodeNode<TItem, TKey, MTreeviewNode<TItem, TKey>>))
                 .Apply(typeof(BTreeviewNodeChildrenWrapper<,,>), typeof(BTreeviewNodeChildrenWrapper<TItem, TKey, MTreeviewNode<TItem, TKey>>))
