@@ -9,7 +9,8 @@ public partial class CronItem
     public PeriodTypes Period { get; set; }
 
     [Parameter]
-    public string Value {
+    public string Value
+    {
         get
         {
             return _value;
@@ -164,7 +165,7 @@ public partial class CronItem
 
     private Task OnNearestOfDayChanged(int? nearestOfDay)
     {
-        if(_nearestOfDay != nearestOfDay)
+        if (_nearestOfDay != nearestOfDay)
         {
             _nearestOfDay = nearestOfDay;
             CalculateCronValue();
@@ -214,7 +215,7 @@ public partial class CronItem
 
     private Task OnWeekNumberChanged(WeekNumbers weekNumber)
     {
-        if(_selectWeekNumber != weekNumber)
+        if (_selectWeekNumber != weekNumber)
         {
             _selectWeekNumber = weekNumber;
             CalculateCronValue();
@@ -225,7 +226,7 @@ public partial class CronItem
 
     private Task OnDayOfWeekChanged(DayOfWeek dayOfWeek)
     {
-        if(_selectDayOfWeek != dayOfWeek)
+        if (_selectDayOfWeek != dayOfWeek)
         {
             _selectDayOfWeek = dayOfWeek;
             CalculateCronValue();
@@ -260,7 +261,7 @@ public partial class CronItem
                 _value = _selectDayOfWeek.ToString("d") + "#" + _selectWeekNumber.ToString("d");
                 break;
             case CronTypes.LastOfPeriod:
-                if(Period == PeriodTypes.Day)
+                if (Period == PeriodTypes.Day)
                 {
                     _value = "L";
                 }

@@ -25,7 +25,7 @@ public partial class PCron
         {
             var cronDefaultValue = "*";
 
-            if(item == PeriodTypes.Week)
+            if (item == PeriodTypes.Week)
             {
                 cronDefaultValue = "?";
             }
@@ -44,9 +44,9 @@ public partial class PCron
 
     private Task CronValueHasChanged(CronItemModel cronItem)
     {
-        if(cronItem != null)
+        if (cronItem != null)
         {
-            if(cronItem.Period == PeriodTypes.Week)
+            if (cronItem.Period == PeriodTypes.Week)
             {
                 var dayItem = CronItems.FirstOrDefault(p => p.Period == PeriodTypes.Day);
 
@@ -69,13 +69,13 @@ public partial class PCron
 
     private Task ChangeTimeItemDefaultValue(CronItemModel cronItem)
     {
-        if(cronItem.Period != PeriodTypes.Second && cronItem.Period != PeriodTypes.Minute && cronItem.Period != PeriodTypes.Hour)
+        if (cronItem.Period != PeriodTypes.Second && cronItem.Period != PeriodTypes.Minute && cronItem.Period != PeriodTypes.Hour)
         {
             SetCronValueToZeroWhenDefault(PeriodTypes.Second);
             SetCronValueToZeroWhenDefault(PeriodTypes.Minute);
             SetCronValueToZeroWhenDefault(PeriodTypes.Hour);
 
-            if(cronItem.Period == PeriodTypes.Month)
+            if (cronItem.Period == PeriodTypes.Month)
             {
                 SetCronValueToZeroWhenDefault(PeriodTypes.Day, "1");
                 SetCronValueToZeroWhenDefault(PeriodTypes.Week, "?");
@@ -87,7 +87,7 @@ public partial class PCron
                 SetCronValueToZeroWhenDefault(PeriodTypes.Month, "1");
             }
         }
-        
+
         return Task.CompletedTask;
     }
 
@@ -111,7 +111,7 @@ public partial class PCron
             CronExpression.ValidateExpression(Value);
             _hasError = false;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             _hasError = true;
             _errorMessage = I18n.T(ex.Message);

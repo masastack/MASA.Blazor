@@ -36,7 +36,7 @@
                 </LabelContent>
             </MRadio>
 
-           if(Period == PeriodTypes.Day)
+            if (Period == PeriodTypes.Day)
             {
                 <MRadio @key="CronTypes.NearestDay" Value="CronTypes.NearestDay">
                     <LabelContent>
@@ -65,7 +65,7 @@
                 </LabelContent>
             </MRadio>
 
-             <MRadio @key="CronTypes.LastOfPeriod" Value="CronTypes.LastOfPeriod">
+            <MRadio @key="CronTypes.LastOfPeriod" Value="CronTypes.LastOfPeriod">
                 <LabelContent>
                     <div @onclick:preventDefault @onclick:stopPropagation class="m-cron-item">
                         @I18n.T($"$masaBlazor.cron.lastOfPeriod.week") <MTextField Value="_startFromPeriod" HideDetails="true" Outlined Dense TValue="int?" Type="number" NumberProps="prop=> { prop.HideControl = true; prop.Min = _minUnit; prop.Max = _maxUnit; }" ValueChanged="OnLastPeriodOfWeekChanged"></MTextField>
