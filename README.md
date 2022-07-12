@@ -53,7 +53,7 @@ MASA Blazor is based on the Material design specification, and each component is
 
 **Install Template**
 
-```c#
+```csharp
 dotnet new --install Masa.Template
 ```
 
@@ -103,7 +103,7 @@ dotnet add package Masa.Blazor
 
 - Add Masa.Blazor related services to `Startup.ConfigureServices`:
 
-```c#
+```csharp
 services.AddMasaBlazor();
 ```
 
@@ -128,7 +128,7 @@ services.AddMasaBlazor();
 
 - Add the namespace to the `_Imports.razor` file:
 
-```c#
+```csharp
 @using Masa.Blazor
 @using BlazorComponent
 ```

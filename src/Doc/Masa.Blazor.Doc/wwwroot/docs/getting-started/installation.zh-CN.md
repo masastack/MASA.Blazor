@@ -23,7 +23,7 @@ MASA 系列所有产品均基于.Net 6.0 开发,请确保已安装 <a href="http
 
 Masa.Template,包含 MASA 系列所有项目模板。MASA Blazor 对应模板名为`masab`
 
-```
+```shell
 dotnet new --install Masa.Template
 ```
 
@@ -34,7 +34,7 @@ dotnet new --install Masa.Template
 
 根据项目模板名创建项目，并指定输出目录，即项目的根文件夹。
 
-```
+```shell
 dotnet new masab -o MasaBlazorApp
 ```
 
@@ -56,14 +56,14 @@ dotnet new masab -o MasaBlazorApp
 
 在命令行界面中创建名为 `BlazorApp` 的新 Blazor 应用:
 
-```sh
-$ dotnet new blazorserver -o BlazorApp
+```shell
+dotnet new blazorserver -o BlazorApp
 ```
 
 或
 
-```sh
-$ dotnet new blazorwasm -o BlazorApp
+```shell
+dotnet new blazorwasm -o BlazorApp
 ```
 
 > `blazorserver`为 Blazor Server App 短名称。`blazorwasm`为 Blazor WebAssembly App 短名称
@@ -72,8 +72,8 @@ $ dotnet new blazorwasm -o BlazorApp
 
 ### 安装 NuGet 包
 
-```sh
-$ dotnet add package Masa.Blazor
+```shell
+dotnet add package Masa.Blazor
 ```
 
 <br/>
@@ -119,7 +119,7 @@ $ dotnet add package Masa.Blazor
 
 在 Program.cs 中添加 Masa.Blazor 相关服务：
 
-```c#
+```csharp
 // Add services to the container.
 builder.Services.AddMasaBlazor();
 ```
@@ -130,7 +130,7 @@ builder.Services.AddMasaBlazor();
 
 修改 `_Imports.razor` 文件,添加以下内容:
 
-```c#
+```csharp
 @using Masa.Blazor
 ```
 

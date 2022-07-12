@@ -29,7 +29,7 @@ public partial class Docs
 
     [Parameter]
     public string FileName { get; set; }
-        
+
     private string _previousPath;
 
     private string Path => $"{Category}/{FileName}.{Culture}";

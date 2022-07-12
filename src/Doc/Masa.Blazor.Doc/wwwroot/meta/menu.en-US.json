@@ -104,6 +104,20 @@
       },
       {
         "Order": 6,
+        "Title": "Upgrade Guide",
+        "FullTitle": "Upgrade Guide",
+        "Type": "menuItem",
+        "Url": "getting-started/upgrade-guid",
+        "Contents": [
+          {
+            "Id": "section-1891871393",
+            "Title": "Upgrading from v0.4.x to v0.5.x",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 7,
         "Title": "Contributing",
         "FullTitle": "Contributing",
         "Type": "menuItem",
