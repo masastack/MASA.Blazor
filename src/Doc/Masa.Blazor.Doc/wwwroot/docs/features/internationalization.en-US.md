@@ -59,7 +59,7 @@ the following languages support:
 
 - Add service dependency I18n:
 
-```c#
+```csharp
 services.AddMasaBlazor().AddI18nForServer("{i18n local directory path}");
 ```
 
@@ -104,7 +104,7 @@ services.AddMasaBlazor().AddI18nForServer("{i18n local directory path}");
 
 - I18n usage example
 
- ```c#
+ ```csharp
  @using BlazorComponent.I18n
  @inject I18n I18n
 
@@ -149,7 +149,7 @@ void Example()
 
 - Usage example
 
- ```c#
+ ```csharp
  @using BlazorComponent.I18n
  @inject I18n I18n
 
@@ -186,7 +186,7 @@ void Example()
 
 - Since the Blazor WebAssembly code is executed on the browser side, it is necessary to use an http request to read the i18n resource file. The program.cs code is as follows:
 
-```c#
+```csharp
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"{builder.HostEnvironment.BaseAddress}/{i18n directory api}");
 ```

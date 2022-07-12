@@ -59,7 +59,7 @@ title: 国际化多语言 (i18n)
 
 - 添加服务依赖I18n:
 
-```c#
+```csharp
 services.AddMasaBlazor().AddI18nForServer("{i18n local directory path}");
 ```
 
@@ -105,7 +105,7 @@ services.AddMasaBlazor().AddI18nForServer("{i18n local directory path}");
 
 - I18n使用示例
 
- ```c#
+ ```csharp
  @using BlazorComponent.I18n
  @inject I18n I18n
 
@@ -150,7 +150,7 @@ void Example()
 
 - 使用示例
 
- ```c#
+ ```csharp
  @using BlazorComponent.I18n
  @inject I18n I18n
 
@@ -185,7 +185,7 @@ void Example()
 
 - 由于Blazor WebAssembly代码在浏览器端执行，所以需要使用http请求来读取i18n资源文件，program.cs增加代码如下：
 
-```c#
+```csharp
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"builder.HostEnvironment.BaseAddress/{i18n directory api}");
 ```

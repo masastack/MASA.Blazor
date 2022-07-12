@@ -81,7 +81,7 @@ Masa.Blazor 实例。 `MApp` 可以存在于你的应用主体的任何地方，
 
 应用服务用于配置你的布局。 它与 `MMain` 组件通信，以便它能够正确地调整应用内容。 它有一些可以访问的属性：
 
-```c#
+```csharp
 double Bar { get; }
 double Bottom { get; }
 double Footer { get; }
@@ -93,7 +93,7 @@ double Top { get; }
 
 当你使用 **App** 属性添加和删除组件时，这些值会自动更新。 它们是不可编辑的，并且以只读状态存在。 你可以通过引用 **Application** 对象的应用属性来访问这些值。
 
-```c#
+```csharp
  [Inject] public MasaBlazor MasaBlazor { get; set; }
  
  Console.WriteLine(MasaBlazor.Application.Footer); // 60

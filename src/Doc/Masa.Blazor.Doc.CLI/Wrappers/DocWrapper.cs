@@ -235,7 +235,7 @@ namespace Masa.Blazor.Doc.CLI.Wrappers
 
             html = $"<h1>{title}</h1>\n" + html;
 
-            var h1Class = "\"m-heading text-h3 text-sm-h3 mb-2\"";
+            var h1Class = "\"m-heading text-h3 text-sm-h3 mb-4\"";
             ;
             var h2Class = "\"m-heading text-h4 text-sm-h4 mb-3\"";
             var aClass = "\"text-decoration-none text-right text-md-left\"";
@@ -243,9 +243,9 @@ namespace Masa.Blazor.Doc.CLI.Wrappers
 
             html = Regex.Replace(html, "<h2>(?<title>.*)<\\/h2>", m =>
                 $@"
-            </section><section id={m.Groups["title"].ToString().HashSection()}><h2>{m.Groups["title"]}</h2>");
+            </section><section id={m.Groups["title"].ToString().HashSection()}><h2>{m.Groups["title"]}</h2></section>");
 
-            html = new Regex("<\\/section>").Replace(html, $"<div class={divClass}>&nbsp;</div>", 1);
+            // html = new Regex("<\\/section>").Replace(html, $"<div class={divClass}>&nbsp;</div>", 1);
 
             html = Regex.Replace(html, "<h(?<n>1|2)>(?<title>.*)<\\/h(1|2)>", m => m.Groups["n"].ToString() == "1"
                 ? $@"

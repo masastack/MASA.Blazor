@@ -104,6 +104,20 @@
       },
       {
         "Order": 6,
+        "Title": "升级指南",
+        "FullTitle": "升级指南",
+        "Type": "menuItem",
+        "Url": "getting-started/upgrade-guid",
+        "Contents": [
+          {
+            "Id": "section-541395564",
+            "Title": "从 v0.4.x 升级到 v0.5.x",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 7,
         "Title": "贡献",
         "FullTitle": "贡献",
         "Type": "menuItem",
