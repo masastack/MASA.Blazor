@@ -38,8 +38,8 @@ namespace Masa.Blazor
                     or nameof(OnParametersSet) or nameof(OnParametersSetAsync)
                     or nameof(OnAfterRender) or nameof(OnAfterRenderAsync)
                 || (exception.StackTrace is not null
-                    && (exception.StackTrace.Contains("Microsoft.AspNetCore.Components.ComponentBase.RunInitAndSetParametersAsync()")
-                        || exception.StackTrace.Contains("Microsoft.AspNetCore.Components.ComponentBase.SupplyCombinedParameters(ParameterView directAndCascadingParameters)")
+                    && (exception.StackTrace.Contains("RunInitAndSetParametersAsync()")
+                        || exception.StackTrace.Contains("SupplyCombinedParameters(ParameterView directAndCascadingParameters)")
                         || exception.StackTrace.Contains("OnAfterRenderAsync(Boolean firstRender)")
                         || exception.StackTrace.Contains("OnAfterRender(Boolean firstRender)"))))
             {
