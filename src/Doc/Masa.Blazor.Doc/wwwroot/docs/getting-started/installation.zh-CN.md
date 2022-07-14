@@ -132,6 +132,7 @@ builder.Services.AddMasaBlazor();
 
 ```csharp
 @using Masa.Blazor
+@using BlazorComponent
 ```
 
 修改 `Shared/MainLayout.razor` 文件，设置 MApp 为根元素：
