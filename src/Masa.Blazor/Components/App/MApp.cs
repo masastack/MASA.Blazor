@@ -77,6 +77,8 @@ namespace Masa.Blazor
             {
                 await MasaBlazor.Breakpoint.InitAsync();
                 await Window.InitializeAsync();
+
+                StateHasChanged();
             }
         }
     }
