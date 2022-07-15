@@ -11,13 +11,13 @@ namespace Masa.Blazor
         #region for PopupService
 
         [Parameter]
-        public Action<AlertParameters>? AlertParameters { get; set; }
+        public Action<AlertParameters> AlertParameters { get; set; }
 
         [Parameter]
-        public Action<ConfirmParameters>? ConfirmParameters { get; set; }
+        public Action<ConfirmParameters> ConfirmParameters { get; set; }
 
         [Parameter]
-        public Action<PromptParameters>? PromptParameters { get; set; }
+        public Action<PromptParameters> PromptParameters { get; set; }
 
         #endregion
 
