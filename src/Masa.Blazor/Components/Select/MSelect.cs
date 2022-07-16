@@ -731,7 +731,7 @@ namespace Masa.Blazor
         {
             var firstItem = ComputedItemsIfHideSelected.FirstOrDefault();
 
-            if (firstItem is null) return;
+            if (firstItem.Equals(default(TItem))) return;
 
             MenuListIndex = 0;
 
@@ -902,7 +902,7 @@ namespace Masa.Blazor
             {
                 var item = AllItems.FirstOrDefault(v => EqualityComparer<TItemValue>.Default.Equals(value, GetValue(v)));
 
-                if (item is not null)
+                if (!item.Equals(default(TItemValue)))
                 {
                     selectedItems.Add(item);
                 }
