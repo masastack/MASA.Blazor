@@ -894,6 +894,11 @@ namespace Masa.Blazor
 
         protected virtual void SetSelectedItems()
         {
+            if(ItemValue == null)
+            {
+                return;
+            }
+
             var selectedItems = new List<TItem>();
 
             var values = InternalValues;
@@ -902,7 +907,7 @@ namespace Masa.Blazor
             {
                 var item = AllItems.FirstOrDefault(v => EqualityComparer<TItemValue>.Default.Equals(value, GetValue(v)));
 
-                if (!item.Equals(default(TItemValue)))
+                if (item is not null && !item.Equals(default(TItem)))
                 {
                     selectedItems.Add(item);
                 }
