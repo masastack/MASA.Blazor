@@ -731,7 +731,7 @@ namespace Masa.Blazor
         {
             var firstItem = ComputedItemsIfHideSelected.FirstOrDefault();
 
-            if (firstItem.Equals(default(TItem))) return;
+            if (firstItem is null || firstItem.Equals(default(TItem))) return;
 
             MenuListIndex = 0;
 
