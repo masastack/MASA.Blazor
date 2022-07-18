@@ -4360,6 +4360,15 @@
       },
       {
         "Order": 0,
+        "Title": "Carousels",
+        "SubTitle": "轮播",
+        "FullTitle": "Carousels (轮播)",
+        "Type": "menuItem",
+        "Url": "components/carousels",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Chips",
         "SubTitle": "纸片",
         "FullTitle": "Chips (纸片)",

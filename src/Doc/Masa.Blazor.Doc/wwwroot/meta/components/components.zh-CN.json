@@ -1531,6 +1531,39 @@
     "FullTitle": "Cards（卡片）"
   },
   {
+    "Desc": "<p><code>MCarousel</code> 组件用于在循环计时器上显示大量可视内容。</p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MCarousel\">MCarousel</a></li>\n<li><a href=\"/api/MCarouselItem\">MCarouselItem</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-07-18T16:58:01.9166713+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "使用",
+        "Description": "<p><code>MCarousel</code> 组件通过提供用于显示图像的附加功能扩展了 <code>MWindow</code>。</p>\n",
+        "Code": "<MCarousel @bind-Value=\"value\">\r\n    @for (var i = 0; i < colors.Length; i++)\r\n    {\r\n        var index = i;\r\n\r\n        <MCarouselItem>\r\n            <MSheet Color=\"@colors[index]\" Height=\"@(\"100%\")\" Tile>\r\n                <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                    <div class=\"text-h2\">Slide @(index + 1)</div>\r\n                </MRow>\r\n            </MSheet>\r\n        </MCarouselItem>\r\n    }\r\n</MCarousel>\r\n\r\n@code {\r\n\r\n    private StringNumber value;\r\n\r\n    private string[] colors = new[]\r\n    {\r\n        \"primary\",\r\n        \"secondary\",\r\n        \"yellow darken-2\",\r\n        \"red\",\r\n        \"orange\",\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Carousel.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/parallax",
+      "/components/images",
+      "/components/windows"
+    ],
+    "Subtitle": "轮播",
+    "Title": "Carousels",
+    "Type": "轮播",
+    "FullTitle": "Carousels（轮播）"
+  },
+  {
     "Desc": "<p><code>MChip</code> 组件用于传送小信息。 使用 <strong>Close</strong> 属性，纸片将变为交互式，允许用户进行交互。 此组件由 <a href=\"/components/chip-groups\">MChipGroup</a> 用于高级选择选项。</p>\n",
     "Order": 0,
     "OtherDocs": {

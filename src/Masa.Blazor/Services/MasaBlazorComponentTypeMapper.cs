@@ -42,6 +42,7 @@
             { typeof(BDivider), typeof(MDivider) },
             { typeof(BSubheader), typeof(MSubheader) },
             { typeof(BTab), typeof(MTab) },
+            { typeof(BResponsive), typeof(MImage) },//We will remove this when Decorator come up
 
         };
         private readonly Dictionary<Type, Type> _genericMapper = new()

@@ -1,13 +1,10 @@
 ﻿using System.Timers;
 using Timer = System.Timers.Timer;
 
-namespace Masa.Blazor.Components.Carousel;
+namespace Masa.Blazor;
 
 public partial class MCarousel : MWindow
 {
-    [Parameter]
-    public bool Continuous { get; set; } = true;
-
     [Parameter]
     public bool Cycle
     {
@@ -21,7 +18,7 @@ public partial class MCarousel : MWindow
     [Parameter]
     public StringNumber Height
     {
-        get => GetValue(500);
+        get => GetValue((StringNumber)500);
         set => SetValue(value);
     }
 
@@ -54,13 +51,15 @@ public partial class MCarousel : MWindow
 
     public override bool ArrowsVisible => !IsVertical && base.ArrowsVisible;
 
-    private StringNumber InternalHeight { get; set; }
     private int SlideTimeout { get; set; }
 
     private Timer Timer { get; set; }
 
+    public StringNumber InternalHeight { get; private set; }
+
     public override Task SetParametersAsync(ParameterView parameters)
     {
+        Continuous = true;
         Mandatory = true;
         ShowArrows = true;
 
@@ -88,6 +87,8 @@ public partial class MCarousel : MWindow
 
     private void TimerOnElapsed(object sender, ElapsedEventArgs e)
     {
+        Console.WriteLine($"{DateTime.Now.ToLongTimeString()} TimerOnElapsed");
+
         Next();
     }
 
@@ -145,6 +146,8 @@ public partial class MCarousel : MWindow
 
     private void RestartTimeout()
     {
+        if (Timer is null) return;
+
         Timer.Stop();
         StateHasChanged();
         Timer.Start();

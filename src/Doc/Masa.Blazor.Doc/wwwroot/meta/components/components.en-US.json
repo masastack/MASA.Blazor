@@ -1510,6 +1510,39 @@
     "FullTitle": "Cards"
   },
   {
+    "Desc": "<p>The <code>MCarousel</code> component is used to display large numbers of visual content on a rotating timer.</p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MCarousel\">MCarousel</a></li>\n<li><a href=\"/api/MCarouselItem\">MCarouselItem</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-07-18T16:58:01.9166713+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "<p>The <code>MCarousel</code> component expands upon <code>MWindow</code> by providing additional features targeted at displaying images.</p>\n",
+        "Code": "<MCarousel @bind-Value=\"value\">\r\n    @for (var i = 0; i < colors.Length; i++)\r\n    {\r\n        var index = i;\r\n\r\n        <MCarouselItem>\r\n            <MSheet Color=\"@colors[index]\" Height=\"@(\"100%\")\" Tile>\r\n                <MRow Class=\"fill-height\" Align=\"AlignTypes.Center\" Justify=\"JustifyTypes.Center\">\r\n                    <div class=\"text-h2\">Slide @(index + 1)</div>\r\n                </MRow>\r\n            </MSheet>\r\n        </MCarouselItem>\r\n    }\r\n</MCarousel>\r\n\r\n@code {\r\n\r\n    private StringNumber value;\r\n\r\n    private string[] colors = new[]\r\n    {\r\n        \"primary\",\r\n        \"secondary\",\r\n        \"yellow darken-2\",\r\n        \"red\",\r\n        \"orange\",\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Carousel.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Cards.svg",
+    "Cols": 1,
+    "Related": [
+      "/components/parallax",
+      "/components/images",
+      "/components/windows"
+    ],
+    "Title": "Carousels",
+    "Type": "Carousels",
+    "FullTitle": "Carousels"
+  },
+  {
     "Desc": "<p>The <code>MChip</code> component is used to convey small pieces of information. Using the close property, the chip becomes\ninteractive, allowing user interaction. This component is used by the <a href=\"/components/chip-groups\">MChipGroup</a> for advanced selection options.</p>\n",
     "Order": 0,
     "OtherDocs": {

@@ -436,6 +436,15 @@
       },
       {
         "Order": 0,
+        "Title": "Carousels",
+        "FullTitle": "Carousels",
+        "Type": "menuItem",
+        "Url": "components/carousels",
+        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Cards.svg",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Chips",
         "FullTitle": "Chips",
         "Type": "menuItem",
