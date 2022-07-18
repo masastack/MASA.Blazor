@@ -253,11 +253,10 @@ namespace Masa.Blazor
                 {
                     CachedItems = FilterDuplicates(CachedItems.Concat(Items));
                     StateHasChanged();
-                    return Task.CompletedTask;
                 });
             }
 
-            SetSelectedItems();
+            NextTickIf(SetSelectedItems, () => ItemValue is null);
 
             StateHasChanged();
         }
