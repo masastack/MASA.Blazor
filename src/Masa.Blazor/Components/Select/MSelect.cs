@@ -148,11 +148,11 @@ namespace Masa.Blazor
             { "readonly", true }
         };
 
-        protected IList<TItem> AllItems => FilterDuplicates(CachedItems.Concat(Items)).ToList();
+        protected List<TItem> AllItems => FilterDuplicates(CachedItems.Concat(Items)).ToList();
 
-        protected virtual IList<TItem> ComputedItems => AllItems;
+        protected virtual List<TItem> ComputedItems => AllItems;
 
-        protected IList<TItem> ComputedItemsIfHideSelected =>
+        protected List<TItem> ComputedItemsIfHideSelected =>
             HideSelected ? ComputedItems.Where(item => !SelectedItems.Contains(item)).ToList() : ComputedItems;
 
         protected IList<TItemValue> InternalValues
@@ -253,11 +253,10 @@ namespace Masa.Blazor
                 {
                     CachedItems = FilterDuplicates(CachedItems.Concat(Items));
                     StateHasChanged();
-                    return Task.CompletedTask;
                 });
             }
 
-            SetSelectedItems();
+            NextTickIf(SetSelectedItems, () => ItemValue is null);
 
             StateHasChanged();
         }
@@ -670,9 +669,8 @@ namespace Masa.Blazor
         private void NextTile()
         {
             var nextIndex = MenuListIndex + 1;
-            var nextItem = ComputedItemsIfHideSelected.ElementAtOrDefault(nextIndex);
 
-            if (nextIndex >= ComputedItemsIfHideSelected.Count || nextItem is null)
+            if (nextIndex >= ComputedItemsIfHideSelected.Count)
             {
                 if (ComputedItemsIfHideSelected.Count == 0) return;
 
@@ -681,6 +679,8 @@ namespace Masa.Blazor
 
                 return;
             }
+
+            var nextItem = ComputedItemsIfHideSelected.ElementAtOrDefault(nextIndex);
 
             MenuListIndex++;
             if (ItemDivider(nextItem) || ItemHeader(nextItem) is not null || ItemDisabled(nextItem))
@@ -692,9 +692,8 @@ namespace Masa.Blazor
         private void PrevTile()
         {
             var prevIndex = MenuListIndex - 1;
-            var prevItem = ComputedItemsIfHideSelected.ElementAtOrDefault(prevIndex);
 
-            if (prevIndex == -1 || prevItem is null)
+            if (prevIndex < 0)
             {
                 if (ComputedItemsIfHideSelected.Count == 0) return;
 
@@ -703,6 +702,8 @@ namespace Masa.Blazor
 
                 return;
             }
+
+            var prevItem = ComputedItemsIfHideSelected.ElementAt(prevIndex);
 
             MenuListIndex--;
             if (ItemDivider(prevItem) || ItemHeader(prevItem) is not null || ItemDisabled(prevItem))
@@ -714,12 +715,12 @@ namespace Masa.Blazor
         private void LastTile()
         {
             var lastIndex = ComputedItemsIfHideSelected.Count - 1;
-            var lastItem = ComputedItemsIfHideSelected.ElementAtOrDefault(lastIndex);
 
-            if (lastItem is null)
-                return;
+            if (lastIndex == -1) return;
 
-            MenuListIndex = ComputedItemsIfHideSelected.Count - 1;
+            var lastItem = ComputedItemsIfHideSelected.ElementAt(lastIndex);
+
+            MenuListIndex = lastIndex;
 
             if (ItemDivider(lastItem) || ItemHeader(lastItem) is not null || ItemDisabled(lastItem))
             {
@@ -729,9 +730,9 @@ namespace Masa.Blazor
 
         private void FirstTile()
         {
-            var firstItem = ComputedItemsIfHideSelected.FirstOrDefault();
+            if (ComputedItemsIfHideSelected.Count == 0) return;
 
-            if (firstItem is null) return;
+            var firstItem = ComputedItemsIfHideSelected.First();
 
             MenuListIndex = 0;
 
@@ -900,11 +901,11 @@ namespace Masa.Blazor
 
             foreach (var value in values)
             {
-                var item = AllItems.FirstOrDefault(v => EqualityComparer<TItemValue>.Default.Equals(value, GetValue(v)));
+                var index = AllItems.FindIndex(v => EqualityComparer<TItemValue>.Default.Equals(value, GetValue(v)));
 
-                if (item is not null)
+                if (index > -1)
                 {
-                    selectedItems.Add(item);
+                    selectedItems.Add(AllItems[index]);
                 }
             }
 
