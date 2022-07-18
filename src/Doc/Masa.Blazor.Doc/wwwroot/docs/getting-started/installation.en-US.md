@@ -134,6 +134,7 @@ update `_Imports.razor` file,Add:
 
 ```csharp
 @using Masa.Blazor
+@using BlazorComponent
 ```
 
 update `Shared/MainLayout.razor` file，set MApp as root element：
