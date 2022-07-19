@@ -1,0 +1,21 @@
+﻿<MCarousel>
+    @foreach (var item in items)
+    {
+        <MCarouselItem
+            Src="@item"
+            ReverseTransition="fade-transition"
+            Transition="fade-transition">
+        </MCarouselItem>
+    }
+</MCarousel>
+
+@code
+{
+    private string[] items = new[]
+    {
+        "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
+        "https://cdn.vuetifyjs.com/images/carousel/sky.jpg",
+        "https://cdn.vuetifyjs.com/images/carousel/bird.jpg",
+        "https://cdn.vuetifyjs.com/images/carousel/planet.jpg",
+    };
+}

@@ -19,11 +19,14 @@ public class MCarouselItem : MWindowItem, IRoutable
     [Parameter]
     public string Target { get; set; }
 
+    [Parameter]
+    public string Src { get; set; }
+
     private IRoutable _router;
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
-        base.OnParametersSet();
+        await base.OnParametersSetAsync();
 
         _router = new Router(this);
         (Tag, Attributes) = _router.GenerateRouteLink();
@@ -38,10 +41,10 @@ public class MCarouselItem : MWindowItem, IRoutable
             .Apply(typeof(BResponsive), typeof(MImage), attrs =>
             {
                 attrs[nameof(MImage.Class)] = "m-carousel__item";
+                attrs[nameof(MImage.Src)] = Src;
 
                 if (WindowGroup is MCarousel carousel)
                 {
-                    Console.WriteLine($"carousel height:{carousel.InternalHeight}");
                     attrs[nameof(MImage.Height)] = carousel.InternalHeight;
                 }
             });

@@ -3,7 +3,7 @@ using Timer = System.Timers.Timer;
 
 namespace Masa.Blazor;
 
-public partial class MCarousel : MWindow
+public partial class MCarousel : MWindow, ICarousel, IDisposable
 {
     [Parameter]
     public bool Cycle
@@ -47,9 +47,26 @@ public partial class MCarousel : MWindow
     [Parameter]
     public string VerticalDelimiters { get; set; }
 
-    private bool IsVertical => VerticalDelimiters is not null;
+    public override bool IsDark
+    {
+        get
+        {
+            if (Dark)
+            {
+                return true;
+            }
+
+            return !Light;
+        }
+    }
 
     public override bool ArrowsVisible => !IsVertical && base.ArrowsVisible;
+
+    private bool IsVertical => VerticalDelimiters is not null;
+
+    public StringNumber InternalValue => Value;
+
+    public double ProgressValue => Items.Count > 0 ? (InternalIndex + 1d) / Items.Count * 100 : 0;
 
     private int SlideTimeout { get; set; }
 
@@ -87,8 +104,7 @@ public partial class MCarousel : MWindow
 
     private void TimerOnElapsed(object sender, ElapsedEventArgs e)
     {
-        Console.WriteLine($"{DateTime.Now.ToLongTimeString()} TimerOnElapsed");
-
+        Console.WriteLine("TimerOnElapsed");
         Next();
     }
 
@@ -96,19 +112,40 @@ public partial class MCarousel : MWindow
     {
         base.SetComponentClass();
 
-        CssProvider.Merge(cssBuilder =>
-        {
-            cssBuilder.Add("m-carousel")
-                      .AddIf("m-carousel--hide-delimiter-background", () => HideDelimiterBackground)
-                      .AddIf("m-carousel--vertical-delimiters", () => IsVertical);
-        });
+        CssProvider
+            .Merge(cssBuilder =>
+            {
+                cssBuilder.Add("m-carousel")
+                          .AddIf("m-carousel--hide-delimiter-background", () => HideDelimiterBackground)
+                          .AddIf("m-carousel--vertical-delimiters", () => IsVertical);
+            })
+            .Apply("controls", cssBuilder => { cssBuilder.Add("m-carousel__controls"); }, styleBuilder =>
+            {
+                styleBuilder
+                    .Add(() => $"left: {(VerticalDelimiters == "left" && IsVertical ? "0" : "auto")}")
+                    .Add(() => $"right: {(VerticalDelimiters == "right" ? "0" : "auto")}");
+            });
+
+        AbstractProvider
+            .Apply(typeof(BCarouselDelimiters<>), typeof(BCarouselDelimiters<MCarousel>))
+            .Apply(typeof(BCarouselProgress<>), typeof(BCarouselProgress<MCarousel>))
+            .Apply(typeof(BItemGroup), typeof(MItemGroup))
+            .Apply<BButton, MButton>("controls-item", attrs =>
+            {
+                attrs[nameof(MButton.Class)] = "m-carousel__controls__item";
+                attrs[nameof(MButton.Icon)] = true;
+                attrs[nameof(MButton.Small)] = true;
+            })
+            .Apply<BIcon, MIcon>("controls-item", attrs => { attrs[nameof(MIcon.Size)] = (StringNumber)18; })
+            .Apply<BProgressLinear, MProgressLinear>();
     }
 
     protected override void OnWatcherInitialized()
     {
         base.OnWatcherInitialized();
 
-        Watcher.Watch<int>(nameof(Interval), RestartTimeout)
+        Watcher.Watch<StringNumber>(nameof(Value), RestartTimeout)
+               .Watch<int>(nameof(Interval), RestartTimeout)
                .Watch<StringNumber>(nameof(Height), (val, oldVal) =>
                {
                    Console.WriteLine($"val:{val} oldVal:{oldVal}");
@@ -144,13 +181,25 @@ public partial class MCarousel : MWindow
         }
     }
 
+    public async Task InternalValueChanged(StringNumber val)
+    {
+        if (ValueChanged.HasDelegate)
+        {
+            await ValueChanged.InvokeAsync(val);
+        }
+        else
+        {
+            Value = val;
+        }
+    }
+
     private void RestartTimeout()
     {
         if (Timer is null) return;
 
         Timer.Stop();
         StateHasChanged();
-        Timer.Start();
+        StartTimeout();
     }
 
     private void StartTimeout()
@@ -158,5 +207,15 @@ public partial class MCarousel : MWindow
         if (!Cycle) return;
 
         Timer.Start();
+    }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+
+        if (Timer is not null)
+        {
+            Timer.Elapsed -= TimerOnElapsed;
+        }
     }
 }

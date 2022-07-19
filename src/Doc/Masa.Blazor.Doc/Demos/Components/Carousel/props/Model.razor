@@ -1,0 +1,40 @@
+﻿<div>
+    <MRow Justify="JustifyTypes.SpaceAround" NoGutters>
+        <MIcon OnClick="() => value--">
+            mdi-minus
+        </MIcon>
+        @value
+        <MIcon OnClick="() => value++">
+            mdi-plus
+        </MIcon>
+    </MRow>
+    <MCarousel Value="value" ValueChanged="v => value = v.AsT1">
+        @for (var i = 0; i < colors.Length; i++)
+        {
+            var index = i;
+
+            <MCarouselItem>
+                <MSheet Color="@colors[index]" Height="@("100%")" Tile>
+                    <MRow Class="fill-height" Align="AlignTypes.Center" Justify="JustifyTypes.Center">
+                        <div class="text-h2">Slide @(index + 1)</div>
+                    </MRow>
+                </MSheet>
+            </MCarouselItem>
+        }
+    </MCarousel>
+</div>
+
+@code {
+
+    private int value;
+
+    private string[] colors = new[]
+    {
+        "primary",
+        "secondary",
+        "yellow darken-2",
+        "red",
+        "orange",
+    };
+
+}
