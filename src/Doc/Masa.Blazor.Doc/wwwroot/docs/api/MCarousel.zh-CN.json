@@ -1,98 +1,123 @@
 ﻿{
-  "Title": "MTabsBar",
+  "Title": "MCarousel",
   "Components": [
-    "Tabs"
+    "Carousels"
   ],
   "Props": [
     {
       "Name": "ActiveClass",
       "Type": "String",
-      "Default": "null",
-      "Description": ""
-    },
-    {
-      "Name": "BackgroundColor",
-      "Type": "String",
-      "Default": "null",
-      "Description": ""
-    },
-    {
-      "Name": "CenterActive",
-      "Type": "Boolean",
-      "Default": "false",
       "Description": ""
     },
     {
       "Name": "Class",
       "Type": "String",
-      "Default": "null",
-      "Description": "The class applied to the outermost element of the component"
+      "Description": "应用到组件最外层元素的class"
     },
     {
-      "Name": "Color",
-      "Type": "String",
-      "Default": "null",
-      "Description": "Applies specified color to the control - it can be the name of material color (for example success or purple) or css color (#033 or rgba(255, 0, 0, 0.5))."
+      "Name": "Continuous",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Cycle",
+      "Type": "Boolean",
+      "Description": ""
     },
     {
       "Name": "Dark",
       "Type": "Boolean",
-      "Default": "false",
-      "Description": "Applies the dark theme variant to the component."
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "DelimiterIcon",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Height",
+      "Type": "StringNumber",
+      "Description": "设定组件的高度。"
+    },
+    {
+      "Name": "HideDelimiterBackground",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "HideDelimiters",
+      "Type": "Boolean",
+      "Description": ""
     },
     {
       "Name": "Id",
       "Type": "String",
-      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Interval",
+      "Type": "Int32",
       "Description": ""
     },
     {
       "Name": "Light",
       "Type": "Boolean",
-      "Default": "false",
       "Description": ""
     },
     {
       "Name": "Mandatory",
       "Type": "Boolean",
-      "Default": "false",
       "Description": ""
     },
     {
       "Name": "Max",
       "Type": "StringNumber",
-      "Default": "null",
       "Description": ""
     },
     {
       "Name": "Multiple",
       "Type": "Boolean",
-      "Default": "false",
       "Description": ""
     },
     {
       "Name": "NextIcon",
       "Type": "String",
-      "Default": "null",
       "Description": ""
     },
     {
       "Name": "PrevIcon",
       "Type": "String",
-      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Progress",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "ProgressColor",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Reverse",
+      "Type": "Boolean",
       "Description": ""
     },
     {
       "Name": "ShowArrows",
-      "Type": "StringBoolean",
-      "Default": "null",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "ShowArrowsOnHover",
+      "Type": "Boolean",
       "Description": ""
     },
     {
       "Name": "Style",
       "Type": "String",
-      "Default": "null",
-      "Description": "The style applied to the outermost element of the component"
+      "Description": "应用到组件最外层元素的style"
     },
     {
       "Name": "TargetGroup",
@@ -102,13 +127,21 @@
     {
       "Name": "Value",
       "Type": "StringNumber",
-      "Default": "null",
       "Description": ""
     },
     {
       "Name": "Values",
       "Type": "List<StringNumber>",
-      "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "Vertical",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "VerticalDelimiters",
+      "Type": "String",
       "Description": ""
     }
   ],
@@ -116,16 +149,16 @@
     {
       "Name": "ChildContent",
       "Type": "RenderFragment",
-      "Description": "Default Content"
+      "Description": "默认插槽"
     },
     {
       "Name": "NextContent",
-      "Type": "RenderFragment",
+      "Type": "RenderFragment<Action>",
       "Description": ""
     },
     {
       "Name": "PrevContent",
-      "Type": "RenderFragment",
+      "Type": "RenderFragment<Action>",
       "Description": ""
     }
   ],

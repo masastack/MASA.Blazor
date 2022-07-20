@@ -104,7 +104,6 @@ public partial class MCarousel : MWindow, ICarousel, IDisposable
 
     private void TimerOnElapsed(object sender, ElapsedEventArgs e)
     {
-        Console.WriteLine("TimerOnElapsed");
         Next();
     }
 
@@ -118,8 +117,14 @@ public partial class MCarousel : MWindow, ICarousel, IDisposable
                 cssBuilder.Add("m-carousel")
                           .AddIf("m-carousel--hide-delimiter-background", () => HideDelimiterBackground)
                           .AddIf("m-carousel--vertical-delimiters", () => IsVertical);
+            }, styleBuilder =>
+            {
+                styleBuilder.AddHeight(InternalHeight);
             })
-            .Apply("controls", cssBuilder => { cssBuilder.Add("m-carousel__controls"); }, styleBuilder =>
+            .Apply("controls", cssBuilder =>
+            {
+                cssBuilder.Add("m-carousel__controls");
+            }, styleBuilder =>
             {
                 styleBuilder
                     .Add(() => $"left: {(VerticalDelimiters == "left" && IsVertical ? "0" : "auto")}")

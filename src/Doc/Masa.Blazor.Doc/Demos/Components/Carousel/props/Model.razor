@@ -1,14 +1,14 @@
 ﻿<div>
     <MRow Justify="JustifyTypes.SpaceAround" NoGutters>
-        <MIcon OnClick="() => value--">
+        <MIcon OnClick="() => Value--">
             mdi-minus
         </MIcon>
-        @value
-        <MIcon OnClick="() => value++">
+        @Value
+        <MIcon OnClick="() => Value++">
             mdi-plus
         </MIcon>
     </MRow>
-    <MCarousel Value="value" ValueChanged="v => value = v.AsT1">
+    <MCarousel Value="Value" ValueChanged="v => Value = v.AsT1">
         @for (var i = 0; i < colors.Length; i++)
         {
             var index = i;
@@ -26,7 +26,7 @@
 
 @code {
 
-    private int value;
+    private int _value;
 
     private string[] colors = new[]
     {
@@ -36,5 +36,25 @@
         "red",
         "orange",
     };
+
+    private int Value
+    {
+        get => _value;
+        set
+        {
+            if (value >= colors.Length)
+            {
+                _value = 0;
+            }
+            else if (value < 0)
+            {
+                _value = colors.Length - 1;
+            }
+            else
+            {
+                _value = value;
+            }
+        }
+    }
 
 }

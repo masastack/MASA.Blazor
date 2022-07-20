@@ -1,78 +1,77 @@
 ﻿{
-  "Title": "MItemGroup",
+  "Title": "MCarouselItem",
   "Components": [
-    "Item groups"
+    "Carousels"
   ],
   "Props": [
     {
       "Name": "ActiveClass",
       "Type": "String",
-      "Default": "null",
       "Description": ""
     },
     {
       "Name": "Class",
       "Type": "String",
-      "Default": "null",
       "Description": "The class applied to the outermost element of the component"
     },
     {
-      "Name": "Dark",
+      "Name": "Disabled",
       "Type": "Boolean",
-      "Default": "false",
-      "Description": "Applies the dark theme variant to the component."
+      "Description": ""
+    },
+    {
+      "Name": "Href",
+      "Type": "String",
+      "Description": ""
     },
     {
       "Name": "Id",
       "Type": "String",
-      "Default": "null",
       "Description": ""
     },
     {
-      "Name": "Light",
+      "Name": "IsActive",
       "Type": "Boolean",
-      "Default": "false",
       "Description": ""
     },
     {
-      "Name": "Mandatory",
+      "Name": "Link",
       "Type": "Boolean",
-      "Default": "false",
       "Description": ""
     },
     {
-      "Name": "Max",
-      "Type": "StringNumber",
-      "Default": "null",
+      "Name": "ReverseTransition",
+      "Type": "String",
       "Description": ""
     },
     {
-      "Name": "Multiple",
-      "Type": "Boolean",
-      "Default": "false",
+      "Name": "Src",
+      "Type": "String",
       "Description": ""
     },
     {
       "Name": "Style",
       "Type": "String",
-      "Default": "null",
       "Description": "The style applied to the outermost element of the component"
     },
     {
-      "Name": "TargetGroup",
-      "Type": "Nullable<GroupType>",
+      "Name": "Tag",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Target",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Transition",
+      "Type": "String",
       "Description": ""
     },
     {
       "Name": "Value",
       "Type": "StringNumber",
-      "Default": "null",
-      "Description": ""
-    },
-    {
-      "Name": "Values",
-      "Type": "List<StringNumber>",
-      "Default": "",
       "Description": ""
     }
   ],
@@ -85,13 +84,8 @@
   ],
   "Events": [
     {
-      "Name": "ValueChanged",
-      "Type": "EventCallback<StringNumber>",
-      "Description": ""
-    },
-    {
-      "Name": "ValuesChanged",
-      "Type": "EventCallback<List`1>",
+      "Name": "OnClick",
+      "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
     }
   ]
