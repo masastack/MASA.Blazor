@@ -1,0 +1,49 @@
+﻿@namespace Masa.Blazor.Presets
+@typeparam TItem
+@typeparam TKey
+@inherits MTreeview<TItem, TKey>
+
+Text: @_inputValue Value: @System.Text.Json.JsonSerializer.Serialize(Value)
+<MMenu Value="_menuValue"
+       ValueChanged="MenuValueChanged"
+       OffsetY
+       NudgeTop="1"
+       MaxHeight="304">
+    <ActivatorContent>
+        <MTextField Value="_inputSearch"
+                    ValueChanged="InputValueChanged"
+                    TValue="string"
+                    Placeholder="@_inputValue"
+                    PersistentPlaceholder
+                    OnBlur="HandleOnInputBlur"
+                    @attributes="@context.Attrs">
+        </MTextField>
+    </ActivatorContent>
+    <ChildContent>
+        <MTreeview
+            TItem="TItem"
+            TKey="TKey"
+            Value="Value"
+            ValueChanged="ValueChanged"
+            Active="@ActiveKeys"
+            Color="@Color"
+            OpenAll="OpenAll"
+            Rounded="Rounded"
+            Search="@_treeViewSearch"
+            Shaped="Shaped"
+            Filter="@HandleOnFilter"
+            SelectedColor="@SelectedColor"
+            SelectionType="SelectionType"
+            Dense="Dense"
+            Hoverable="Hoverable"
+            Activatable="Activatable"
+            Selectable="@IsMultiple"
+            Items="Items"
+            ItemText="ItemText"
+            ItemChildren="ItemChildren"
+            ItemKey="ItemKey"
+            ItemDisabled="ItemDisabled"
+            OnActiveUpdate="HandleOnActiveUpdate">
+        </MTreeview>
+    </ChildContent>
+</MMenu>
