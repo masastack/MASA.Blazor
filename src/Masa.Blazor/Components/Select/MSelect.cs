@@ -51,6 +51,9 @@ namespace Masa.Blazor
         [Parameter]
         public Func<TItem, TItemValue> ItemValue { get; set; }
 
+        [Parameter] 
+        public RenderFragment MenuContent { get; set; }
+
         [Parameter]
         public Action<BMenuProps> MenuProps { get; set; }
 

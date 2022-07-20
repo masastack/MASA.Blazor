@@ -15,6 +15,42 @@ public partial class PTreeSelect<TItem, TKey> : MTreeview<TItem, TKey>
         return base.SetParametersAsync(parameters);
     }
 
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (IsMultiple)
+        {
+            ActiveKeys.Clear();
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (firstRender)
+        {
+            if (IsMultiple)
+            {
+            }
+            else
+            {
+                ActiveKeys = Value;
+
+                if (Value.Count > 0)
+                {
+                    if (Nodes.TryGetValue(Value.Last(), out var val))
+                    {
+                        _inputValue = ItemText(val.Item);
+                    }
+                }
+
+                StateHasChanged();
+            }
+        }
+    }
+
     private bool _menuValue;
 
     private string _inputValue;
@@ -25,9 +61,13 @@ public partial class PTreeSelect<TItem, TKey> : MTreeview<TItem, TKey>
 
     private TItem _lastActiveItem;
 
-    private List<TKey> ActiveKeys => _activeItems.Select(ItemKey).ToList();
+    private List<TKey> ActiveKeys { get; set; }
+
+    private MAutocomplete<TItem, TKey, List<TKey>> Autocomplete { get; set; }
 
     private bool IsMultiple => Multiple || Selectable;
+
+    private List<TItem> FlattenedItems => FlattenItems(Items);
 
     private async Task HandleOnActiveUpdate(List<TItem> items)
     {
@@ -58,13 +98,22 @@ public partial class PTreeSelect<TItem, TKey> : MTreeview<TItem, TKey>
 
             _activeItems = items;
 
+            ActiveKeys = _activeItems.Select(ItemKey).ToList();
+
             ResetInput();
         }
+
+        await Autocomplete.Blur();
     }
 
     private Func<TItem, string, Func<TItem, string>, bool> HandleOnFilter
     {
         get { return (item, search, textKey) => textKey(item).IndexOf(search) > -1; }
+    }
+
+    private void OnSearchInputUpdate(string s)
+    {
+        _treeViewSearch = s;
     }
 
     private void HandleOnInputBlur()
@@ -83,28 +132,43 @@ public partial class PTreeSelect<TItem, TKey> : MTreeview<TItem, TKey>
         ResetInput();
     }
 
-    private void InputValueChanged(string val)
+    private async Task HandleValueChanged(List<TKey> val)
     {
-        _inputSearch = val;
-
-        if (_menuValue)
+        if (ValueChanged.HasDelegate)
         {
-            _treeViewSearch = val;
+            await ValueChanged.InvokeAsync(val);
         }
-    }
-
-    private void MenuValueChanged(bool val)
-    {
-        _menuValue = val;
-
-        if (val)
+        else
         {
-            _treeViewSearch = null;
+            Value = val;
         }
+
+        ActiveKeys = val;
+
+        StateHasChanged();
     }
 
     private void ResetInput()
     {
         _inputSearch = null;
+    }
+
+    private List<TItem> FlattenItems(List<TItem> tree)
+    {
+        var res = new List<TItem>();
+
+        foreach (var nav in tree)
+        {
+            res.Add(nav);
+
+            var children = ItemChildren(nav);
+
+            if (children is not null)
+            {
+                res.AddRange(FlattenItems(children));
+            }
+        }
+
+        return res;
     }
 }

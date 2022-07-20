@@ -3,23 +3,16 @@
 @typeparam TKey
 @inherits MTreeview<TItem, TKey>
 
-Text: @_inputValue Value: @System.Text.Json.JsonSerializer.Serialize(Value)
-<MMenu Value="_menuValue"
-       ValueChanged="MenuValueChanged"
-       OffsetY
-       NudgeTop="1"
-       MaxHeight="304">
-    <ActivatorContent>
-        <MTextField Value="_inputSearch"
-                    ValueChanged="InputValueChanged"
-                    TValue="string"
-                    Placeholder="@_inputValue"
-                    PersistentPlaceholder
-                    OnBlur="HandleOnInputBlur"
-                    @attributes="@context.Attrs">
-        </MTextField>
-    </ActivatorContent>
-    <ChildContent>
+Text: @_inputValue ActiveKeys: @System.Text.Json.JsonSerializer.Serialize(ActiveKeys)
+
+<MAutocomplete TItem="TItem" TItemValue="TKey" TValue="List<TKey>"
+               Items="FlattenedItems" ItemText="ItemText" ItemValue="ItemKey"
+               Value="Value" ValueChanged="HandleValueChanged" Multiple
+               Placeholder="@_inputValue"
+               OnSearchInputUpdate="OnSearchInputUpdate"
+               @ref="Autocomplete"
+               OnBlur="HandleOnInputBlur">
+    <MenuContent>
         <MTreeview
             TItem="TItem"
             TKey="TKey"
@@ -45,5 +38,5 @@ Text: @_inputValue Value: @System.Text.Json.JsonSerializer.Serialize(Value)
             ItemDisabled="ItemDisabled"
             OnActiveUpdate="HandleOnActiveUpdate">
         </MTreeview>
-    </ChildContent>
-</MMenu>
+    </MenuContent>
+</MAutocomplete>
