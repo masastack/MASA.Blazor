@@ -2,6 +2,11 @@
 {
     public class MTreeview<TItem, TKey> : BTreeview<TItem, TKey>, IThemeable
     {
+        public MTreeview()
+        {
+            Console.WriteLine($"{DateTime.Now.ToLongTimeString()} constructor of MTreeview. Nodes.HashCode:{Nodes.GetHashCode()}");
+        }
+        
         [Parameter]
         public bool Hoverable { get; set; }
 

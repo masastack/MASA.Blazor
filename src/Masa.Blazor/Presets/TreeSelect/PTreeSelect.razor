@@ -5,9 +5,17 @@
 
 Text: @_inputValue ActiveKeys: @System.Text.Json.JsonSerializer.Serialize(ActiveKeys)
 
-<MAutocomplete TItem="TItem" TItemValue="TKey" TValue="List<TKey>"
-               Items="FlattenedItems" ItemText="ItemText" ItemValue="ItemKey"
-               Value="Value" ValueChanged="HandleValueChanged" Multiple
+<MAutocomplete TItem="TItem"
+               TItemValue="TKey"
+               TValue="List<TKey>"
+               Items="FlattenedItems" 
+               ItemText="ItemText" 
+               ItemValue="ItemKey"
+               Value="Value" 
+               ValueChanged="HandleValueChanged"
+               Multiple
+               Chips
+               DeletableChips
                Placeholder="@_inputValue"
                OnSearchInputUpdate="OnSearchInputUpdate"
                @ref="Autocomplete"

@@ -61,7 +61,7 @@ public partial class PTreeSelect<TItem, TKey> : MTreeview<TItem, TKey>
 
     private TItem _lastActiveItem;
 
-    private List<TKey> ActiveKeys { get; set; }
+    private List<TKey> ActiveKeys { get; set; } = new();
 
     private MAutocomplete<TItem, TKey, List<TKey>> Autocomplete { get; set; }
 
@@ -132,8 +132,7 @@ public partial class PTreeSelect<TItem, TKey> : MTreeview<TItem, TKey>
         ResetInput();
     }
 
-    private async Task HandleValueChanged(List<TKey> val)
-    {
+    private async Task HandleValueChanged(List<TKey> val) {
         if (ValueChanged.HasDelegate)
         {
             await ValueChanged.InvokeAsync(val);
@@ -144,8 +143,6 @@ public partial class PTreeSelect<TItem, TKey> : MTreeview<TItem, TKey>
         }
 
         ActiveKeys = val;
-
-        StateHasChanged();
     }
 
     private void ResetInput()

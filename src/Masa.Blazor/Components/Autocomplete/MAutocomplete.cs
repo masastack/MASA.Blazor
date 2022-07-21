@@ -5,8 +5,6 @@ namespace Masa.Blazor
 {
     public class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, TItemValue, TValue>, IAutocomplete<TItem, TItemValue, TValue>
     {
-        private Func<TItem, string, string, bool> _filter;
-
         [Parameter]
         public bool AllowOverflow { get; set; } = true;
 
@@ -31,10 +29,15 @@ namespace Masa.Blazor
         }
 
         [Parameter]
-        public string SearchInput { get; set; }
-
-        [Parameter]
         public EventCallback<string> OnSearchInputUpdate { get; set; }
+
+        private Func<TItem, string, string, bool> _filter;
+
+        /// <summary>
+        /// TODO: No search results all Items will not appear after losing the cursor.
+        /// but not finished.
+        /// </summary>
+        private string _lazySearch;
 
         protected override List<TItem> ComputedItems => FilteredItems;
 
@@ -78,8 +81,15 @@ namespace Masa.Blazor
 
         protected string InternalSearch
         {
-            get => GetValue<string>();
-            set => SetValue(value);
+            get => _lazySearch;
+            set
+            {
+                if (_lazySearch != value)
+                {
+                    _lazySearch = value;
+                    SetValue(value);
+                }
+            }
         }
 
         protected override Dictionary<string, object> InputAttrs => new()
@@ -122,9 +132,7 @@ namespace Masa.Blazor
         {
             base.OnWatcherInitialized();
 
-            Watcher
-                .Watch<string>(nameof(SearchInput), val => InternalSearch = val)
-                .Watch<List<TItem>>(nameof(FilteredItems), OnFilteredItemsChanged);
+            Watcher.Watch<List<TItem>>(nameof(FilteredItems), OnFilteredItemsChanged);
         }
 
         protected override void SetComponentClass()
@@ -145,6 +153,16 @@ namespace Masa.Blazor
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.SearchInput)] = InternalSearch;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.NoFilter)] = NoFilter || !IsSearching || FilteredItems.Count == 0;
                 });
+        }
+
+        protected override async Task OnMenuActiveChange(bool val)
+        {
+            if (val || !HasSlot) return;
+
+            // _lazySearch = null;
+            InternalSearch = null;
+            
+            StateHasChanged();
         }
 
         protected override async Task OnIsFocusedChange(bool val)
@@ -394,8 +412,6 @@ namespace Masa.Blazor
                 }
 
                 StateHasChanged();
-
-                return Task.CompletedTask;
             });
         }
     }
