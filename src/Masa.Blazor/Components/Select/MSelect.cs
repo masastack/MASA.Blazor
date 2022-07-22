@@ -464,7 +464,7 @@ namespace Masa.Blazor
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemValue)] = ItemValue;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.NoDataText)] = NoDataText;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.SelectedItems)] = SelectedItems;
-                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.OnSelect)] = CreateEventCallback<TItem>(SelectItem);
+                    attrs[nameof(MSelectList<TItem, TItemValue, TValue>.OnSelect)] = CreateEventCallback<TItem>(item => SelectItem(item));
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.ItemContent)] = ItemContent;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.PrependItemContent)] = PrependItemContent;
                     attrs[nameof(MSelectList<TItem, TItemValue, TValue>.AppendItemContent)] = AppendItemContent;
@@ -531,7 +531,7 @@ namespace Masa.Blazor
             }
         }
 
-        protected virtual async Task SelectItem(TItem item)
+        protected virtual async Task SelectItem(TItem item, bool closeOnSelect = true)
         {
             var value = ItemValue(item);
             if (!Multiple)
@@ -541,7 +541,10 @@ namespace Masa.Blazor
                     await SetInternalValueAsync(val);
                 }
 
-                IsMenuActive = false;
+                if (closeOnSelect)
+                {
+                    IsMenuActive = false;
+                }
             }
             else
             {

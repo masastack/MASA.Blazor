@@ -160,9 +160,9 @@ namespace Masa.Blazor
             }
         }
 
-        protected override async Task SelectItem(TItem item)
+        protected override async Task SelectItem(TItem item, bool closeOnSelect = true)
         {
-            await base.SelectItem(item);
+            await base.SelectItem(item, closeOnSelect);
             SetSearch();
         }
 
