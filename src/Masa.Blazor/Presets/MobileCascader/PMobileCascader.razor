@@ -1,0 +1,33 @@
+﻿@namespace Masa.Blazor.Presets
+@typeparam TItem
+@typeparam TValue
+
+<MBottomSheet Value="Visible" ValueChanged="VisibleChanged">
+    <ActivatorContent>
+        @ActivatorContent?.Invoke(context)
+    </ActivatorContent>
+    <ChildContent>
+        <div class="d-flex justify-space-around">
+            <MButton Small Text>取消</MButton>
+            <div class="p-mobile-cascader__title">@Tabs.Count @_tabValue</div>
+            <MButton Small Text>确定</MButton>
+        </div>
+        <MTabs Value="_tabValue" ValueChanged="TabValueChanged">
+            @foreach (var tab in ComputedTabs)
+            {
+                <MTab>@tab</MTab>
+            }
+        </MTabs>
+
+        <MList Dense>
+            @foreach (var item in CurrentItems)
+            {
+                <MListItem OnClick="() => HandleOnItemClick(item)">
+                    <MListItemContent>
+                        <MListItemTitle>@ItemText(item)</MListItemTitle>
+                    </MListItemContent>
+                </MListItem>
+            }
+        </MList>
+    </ChildContent>
+</MBottomSheet>
