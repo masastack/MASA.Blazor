@@ -1,123 +1,277 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public partial class PMobileCascader<TItem, TValue>
-{
-    [Parameter] public bool Visible { get; set; }
+// TODO: add class constraints for TItem after c# 7.0 release
 
-    [Parameter] public EventCallback<bool> VisibleChanged { get; set; }
+public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
+{
+    [Inject] private I18n I18n { get; set; } = null!;
 
     [Parameter] public RenderFragment<ActivatorProps> ActivatorContent { get; set; }
 
-    [Parameter] public List<TItem> Items { get; set; }
+    [Parameter] public StringNumber Height { get; set; }
 
-    [Parameter] public Func<TItem, string> ItemText { get; set; }
+    [Parameter, EditorRequired] public List<TItem> Items { get; set; }
 
-    [Parameter] public Func<TItem, TValue> ItemValue { get; set; }
+    [Parameter, EditorRequired] public Func<TItem, List<TItem>> ItemChildren { get; set; }
 
-    [Parameter] public Func<TItem, List<TItem>> ItemChildren { get; set; }
+    [Parameter] public Func<TItem, bool> ItemDisabled { get; set; }
 
-    private int _tabValue;
+    [Parameter, EditorRequired] public Func<TItem, string> ItemText { get; set; }
 
-    private List<TItem> Tabs { get; set; } = new();
+    [Parameter, EditorRequired] public Func<TItem, TItemValue> ItemValue { get; set; }
+
+    [Parameter] public EventCallback<TItem> OnLoadChildren { get; set; }
+
+    [Parameter] public EventCallback<TItem> OnSelect { get; set; }
+
+    [Parameter] public EventCallback<TItem> OnDeselect { get; set; }
+
+    [Parameter] public string Title { get; set; }
+
+    [Parameter] public List<TItemValue> Value { get; set; }
+
+    [Parameter] public EventCallback<List<TItemValue>> ValueChanged { get; set; }
+
+    [Parameter] public bool Visible
+    {
+        get => _visible;
+        set
+        {
+            if (_visible == value) return;
+
+            OnVisibleChanged(value);
+            _visible = value;
+        }
+    }
+
+    [Parameter] public EventCallback<bool> VisibleChanged { get; set; }
+
+    private int _tabIndex;
+    private bool _preVisible;
+    private TItem _loadingItem;
+    private List<TItem> _loadedItems = new();
+    private bool _visible;
+
+    private List<TItem> SelectedItems { get; set; } = new();
+
+    private string PleaseSelectText => I18n.T("$masaBlazor.mobileCascader.pleaseSelect");
 
     private List<string> ComputedTabs
     {
         get
         {
-            if (Tabs.Count == 0)
+            if (SelectedItems.Count == 0)
             {
-                return new List<string>() { "请选择" };
+                return new List<string>() { PleaseSelectText };
             }
 
-            var tabs = Tabs.Select(t => ItemText(t)).ToList();
+            var tabs = SelectedItems.Select(t => ItemText(t)).ToList();
 
-            if (Children is not null && Children.Count > 0)
+            if (HasChildren)
             {
-                tabs.Add("请选择");
+                tabs.Add(PleaseSelectText);
             }
 
             return tabs;
         }
     }
 
-    private List<TItem> CurrentItems { get; set; }
-    private List<TItem> Children { get; set; }
+    private TItem Current => SelectedItems.Count > 0 ? SelectedItems.Last() : default;
 
-    protected override void OnParametersSet()
+    private List<TItem> Children => Current == null ? null : ItemChildren(Current);
+
+    private bool HasChildren => Children is not null && Children.Count > 0;
+
+    private List<TItem> CurrentItems
     {
-        base.OnParametersSet();
-
-        if (Tabs.Count == 0)
+        get
         {
-            CurrentItems = Items;
-        }
-    }
-
-    private void TabValueChanged(StringNumber val)
-    {
-        _tabValue = val.AsT1;
-        var tab = Tabs[_tabValue];
-
-        if (_tabValue == 0)
-        {
-            CurrentItems = Items;
-        }
-        else if (_tabValue == 1)
-        {
-            var index = Items.FindIndex(item => EqualityComparer<TItem>.Default.Equals(item, tab));
-            if (index > -1)
+            if (_tabIndex == 0)
             {
-                var item = Items[index];
-                CurrentItems = ItemChildren(item);
+                return Items;
             }
+
+            if (SelectedItems.Count == _tabIndex)
+            {
+                return ItemChildren(Current);
+            }
+
+            return ItemChildren(SelectedItems[_tabIndex - 1]);
         }
     }
 
-    private void HandleOnItemClick(TItem item)
+    protected override async Task OnParametersSetAsync()
     {
-        // var children = ItemChildren(item);
-        // CurrentItems = children;
+        await base.OnParametersSetAsync();
 
-        if (Tabs.Count > _tabValue)
+        Height ??= "80vh";
+        Value ??= new List<TItemValue>();
+    }
+
+    private async Task OnItemClick(TItem item)
+    {
+        if (SelectedItems.Count > _tabIndex)
         {
-            var activeTab = Tabs[_tabValue];
+            var activeTab = SelectedItems[_tabIndex];
+
+            // cancel the selection
+            SelectedItems = SelectedItems.Take(_tabIndex).ToList();
+
             if (EqualityComparer<TItem>.Default.Equals(activeTab, item))
             {
-                // 取消选择
+                // cancel the selection and nothing to do
+                if (!OnDeselect.HasDelegate) return;
 
-                Tabs = Tabs.Take(_tabValue).ToList();
+                await OnDeselect.InvokeAsync(item);
 
-                if (Tabs.Count > 0)
-                {
-                    CurrentItems = ItemChildren(Tabs.Last());
-                }
-                else
-                {
-                    CurrentItems = Items;
-                }
+                return;
             }
-            else
+        }
+
+        SelectedItems.Add(item);
+
+        var children = ItemChildren(item);
+
+        if (!_loadedItems.Contains(item) && OnLoadChildren.HasDelegate && (children is null || children.Count == 0))
+        {
+            _loadingItem = item;
+            _loadedItems.Add(item);
+
+            try
             {
-                // 选择其他
-
-                Tabs = Tabs.Take(_tabValue).ToList();
-                Tabs.Add(item);
-
-                CurrentItems = ItemChildren(item);
+                await OnLoadChildren.InvokeAsync(item);
+            }
+            catch
+            {
+                _loadingItem = default;
+                _loadedItems.Remove(item);
+                StateHasChanged();
+                throw;
+            }
+            finally
+            {
+                _loadingItem = default;
             }
 
-            _tabValue = Tabs.Count - 1;
+            children = ItemChildren(item);
+        }
+
+        if (children is not null && children.Count > 0)
+        {
+            _tabIndex++;
+        }
+
+        if (OnSelect.HasDelegate)
+        {
+            await OnSelect.InvokeAsync(item);
+        }
+    }
+
+    private bool IsDisabled(TItem item)
+    {
+        return (ItemDisabled is not null && ItemDisabled(item)) || item.Equals(_loadingItem);
+    }
+
+    private async Task OnCancel()
+    {
+        if (VisibleChanged.HasDelegate)
+        {
+            await VisibleChanged.InvokeAsync(false);
         }
         else
         {
-            Tabs.Add(item);
-            var children = ItemChildren(item);
-            Children = children;
-            if (children is not null && children.Count > 0)
+            Visible  = false;
+        }
+    }
+
+    private async Task OnConfirm()
+    {
+        var value = SelectedItems.Select(ItemValue).ToList();
+
+        if (ValueChanged.HasDelegate)
+        {
+            await ValueChanged.InvokeAsync(value);
+        }
+        else
+        {
+            Value = value;
+        }
+
+        await OnCancel();
+    }
+
+    private void Reset()
+    {
+        SelectedItems.Clear();
+        _tabIndex = 0;
+    }
+
+    private async Task HandleVisibleChanged(bool val)
+    {
+        if (VisibleChanged.HasDelegate)
+        {
+            await VisibleChanged.InvokeAsync(val);
+        }
+        else
+        {
+            Visible = val;
+        }
+    }
+
+    private void OnVisibleChanged(bool visible)
+    {
+        if (visible)
+        {
+            if (Value is null || Value.Count <= 0) return;
+
+            var items = Items;
+
+            for (var index = 0; index < Value.Count; index++)
             {
-                _tabValue++;
-                CurrentItems = children;
+                var v = Value[index];
+                if (!TryGetItem(items, v, out var item))
+                {
+                    break;
+                }
+
+                SelectedItems.Add(item);
+
+                _tabIndex = index;
+
+                var children = ItemChildren(item);
+                if (children is null || children.Count == 0)
+                {
+                    break;
+                }
+
+                items = children;
+
+                // If it is the last loop and there are child elements,
+                // need to activate the next tab
+                if (index == Value.Count - 1)
+                {
+                    _tabIndex++;
+                }
             }
         }
+        else
+        {
+            Reset();
+        }
+    }
+
+    private bool TryGetItem(List<TItem> items, TItemValue value, out TItem item)
+    {
+        item = default;
+
+        var index = items.FindIndex(item => EqualityComparer<TItemValue>.Default.Equals(ItemValue(item), value));
+        if (index == -1)
+        {
+            return false;
+        }
+
+        item = items[index];
+
+        return true;
     }
 }

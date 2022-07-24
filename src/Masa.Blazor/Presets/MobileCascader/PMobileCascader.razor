@@ -1,31 +1,45 @@
 ﻿@namespace Masa.Blazor.Presets
 @typeparam TItem
-@typeparam TValue
+@typeparam TItemValue
 
-<MBottomSheet Value="Visible" ValueChanged="VisibleChanged">
+<MBottomSheet ContentClass="p-mobile-cascader__content"
+              Value="Visible"
+              ValueChanged="HandleVisibleChanged">
     <ActivatorContent>
         @ActivatorContent?.Invoke(context)
     </ActivatorContent>
     <ChildContent>
-        <div class="d-flex justify-space-around">
-            <MButton Small Text>取消</MButton>
-            <div class="p-mobile-cascader__title">@Tabs.Count @_tabValue</div>
-            <MButton Small Text>确定</MButton>
-        </div>
-        <MTabs Value="_tabValue" ValueChanged="TabValueChanged">
+        <MSheet Class="d-flex justify-space-between">
+            <MButton Plain Color="primary" OnClick="OnCancel">@I18n.T("$masaBlazor.cancel")</MButton>
+            <div class="p-mobile-cascader__title">@Title</div>
+            <MButton Plain Color="primary" OnClick="OnConfirm">@I18n.T("$masaBlazor.ok")</MButton>
+        </MSheet>
+
+        <MTabs Value="@_tabIndex" ValueChanged="val => _tabIndex = val.AsT1">
             @foreach (var tab in ComputedTabs)
             {
                 <MTab>@tab</MTab>
             }
         </MTabs>
 
-        <MList Dense>
+        <MList Dense Height="@Height">
             @foreach (var item in CurrentItems)
             {
-                <MListItem OnClick="() => HandleOnItemClick(item)">
+                <MListItem OnClick="() => OnItemClick(item)"
+                           Disabled="@IsDisabled(item)">
                     <MListItemContent>
                         <MListItemTitle>@ItemText(item)</MListItemTitle>
                     </MListItemContent>
+                    <MListItemIcon Class="align-center">
+                        @if (item.Equals(_loadingItem))
+                        {
+                            <MProgressCircular Size="20" Width="2" Indeterminate></MProgressCircular>
+                        }
+                        else if (SelectedItems.Contains(item))
+                        {
+                            <MIcon Color="primary" Dense>mdi-check</MIcon>
+                        }
+                    </MListItemIcon>
                 </MListItem>
             }
         </MList>
