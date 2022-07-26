@@ -659,6 +659,8 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
         {
+            Inputting = true;
+
             var success = BindConverter.TryConvertTo<TValue>(args.Value.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var val);
 
             if (success)
@@ -695,6 +697,11 @@ namespace Masa.Blazor
         {
             if (!_compositionInputting)
             {
+                if (Inputting)
+                {
+                    return;
+                }
+
                 await SetInternalValueAsync(InputValue);
 
                 StateHasChanged();
