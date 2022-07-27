@@ -293,7 +293,7 @@ namespace Masa.Blazor
         public ElementReference PrefixElement { get; set; }
 
         public ElementReference PrependInnerElement { get; set; }
-        
+
         public ElementReference AppendInnerElement { get; set; }
 
         protected virtual Dictionary<string, object> InputSlotAttrs { get; set; } = new();
@@ -417,7 +417,6 @@ namespace Masa.Blazor
                         .Add("m-input__icon--append")
                         .Add("m-number-input-icon")
                         .AddIf("m-number-input-up-disabled", () => !UpButtonEnabled);
-
                 })
                 .Apply("append-icon-number-down", cssBuilder =>
                 {
@@ -426,7 +425,6 @@ namespace Masa.Blazor
                         .Add("m-input__icon--append")
                         .Add("m-number-input-icon")
                         .AddIf("m-number-input-down-disabled", () => !DownButtonEnabled);
-
                 });
 
             AbstractProvider
@@ -659,6 +657,8 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
         {
+            Inputting = true;
+
             var success = BindConverter.TryConvertTo<TValue>(args.Value.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var val);
 
             if (success)
@@ -695,6 +695,11 @@ namespace Masa.Blazor
         {
             if (!_compositionInputting)
             {
+                if (Inputting)
+                {
+                    return;
+                }
+
                 await SetInternalValueAsync(InputValue);
 
                 StateHasChanged();
@@ -746,6 +751,7 @@ namespace Masa.Blazor
 
             await InputElement.FocusAsync();
         }
+
         public async Task HandleOnNumberDownClickAsync(MouseEventArgs args)
         {
             if (DownButtonEnabled && BindConverter.TryConvertToDecimal(NumberValue, System.Globalization.CultureInfo.InvariantCulture, out var value))
@@ -799,6 +805,8 @@ namespace Masa.Blazor
             }
             else
             {
+                Inputting = true;
+
                 await ChangeValue();
             }
 
@@ -826,7 +834,7 @@ namespace Masa.Blazor
             {
                 await InputElement.FocusAsync();
             }
-        
+
             await base.HandleOnMouseUpAsync(args);
         }
     }
