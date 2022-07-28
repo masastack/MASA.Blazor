@@ -4,6 +4,9 @@ namespace Masa.Blazor
 {
     public class MDataTableHeader : BDataTableHeader, IDataTableHeader
     {
+        [Inject]
+        protected I18n I18n { get; set; }
+        
         [Parameter]
         public DataOptions Options { get; set; }
 

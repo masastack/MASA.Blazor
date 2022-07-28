@@ -41,6 +41,18 @@ namespace Masa.Blazor
 
         Document Document => Window.Document;
 
+        public void Deconstruct(
+            out double width,
+            out bool mobile,
+            out Breakpoints name,
+            out OneOf<Breakpoints, double> mobileBreakpoint)
+        {
+            width = Width;
+            mobile = Mobile;
+            name = Name;
+            mobileBreakpoint = MobileBreakpoint;
+        }
+
         public async Task InitAsync()
         {
             await UpdateAsync();

@@ -2,8 +2,11 @@
 
 namespace Masa.Blazor
 {
-    public class MDataTable<TItem> : MDataIterator<TItem>, IDataTable<TItem>, ILoadable, IDataIterator<TItem>
+    public class MDataTable<TItem> : MDataIterator<TItem>, IDataTable<TItem>, ILoadable, IDataIterator<TItem>, IMobile
     {
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; }
+        
         [Parameter]
         public string Caption { get; set; }
 
@@ -30,6 +33,9 @@ namespace Masa.Blazor
 
         [Parameter]
         public RenderFragment FootContent { get; set; }
+
+        [Parameter]
+        public OneOf<Breakpoints, double> MobileBreakpoint { get; set; } = 600;
 
         [Parameter]
         public bool ShowGroupBy { get; set; }
@@ -93,6 +99,8 @@ namespace Masa.Blazor
 
         [Parameter]
         public StringNumber Width { get; set; }
+        
+        protected MobileProvider MobileProvider { get; set; }
 
         public IEnumerable<DataTableHeader<TItem>> ComputedHeaders
         {
@@ -155,6 +163,8 @@ namespace Masa.Blazor
 
         public bool HasBottom => FooterContent != null || !HideDefaultFooter;
 
+        public bool IsMobile => MobileProvider.IsMobile;
+
         public Dictionary<string, object> ColspanAttrs => new()
         {
             { "colspan", HeadersLength > 0 ? HeadersLength : ComputedHeaders.Count() }
@@ -187,7 +197,14 @@ namespace Masa.Blazor
         //TODO:we will change this
         public DataOptions Options => InternalOptions;
 
-        protected bool IsFixedRight => FixedRight && ComputedItems.Any();
+        protected bool IsFixedRight => FixedRight;
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            MobileProvider = new MobileProvider(this);
+        }
 
         public Task HandleOnRowClickAsync(MouseEventArgs args)
         {
@@ -292,6 +309,26 @@ namespace Masa.Blazor
                     attrs[nameof(MDataTableHeader.OnSort)] = EventCallback.Factory.Create<string>(this, Sort);
                     attrs[nameof(MDataTableHeader.OnGroup)] = EventCallback.Factory.Create<string>(this, Group);
                 })
+                .Apply(typeof(BDataTableHeaderMobile), typeof(MDataTableHeaderMobile), attrs =>
+                {
+                    foreach (var prop in HeaderProps)
+                    {
+                        attrs[prop.Key] = prop.Value;
+                    }
+
+                    attrs[nameof(MDataTableHeaderMobile.Headers)] = ComputedHeaders.ToList<DataTableHeader>();
+                    attrs[nameof(MDataTableHeaderMobile.Options)] = InternalOptions;
+                    attrs[nameof(MDataTableHeaderMobile.ShowGroupBy)] = ShowGroupBy;
+                    attrs[nameof(MDataTableHeaderMobile.CheckboxColor)] = CheckboxColor;
+                    attrs[nameof(MDataTableHeaderMobile.SomeItems)] = SomeItems;
+                    attrs[nameof(MDataTableHeaderMobile.EveryItem)] = EveryItem;
+                    attrs[nameof(MDataTableHeaderMobile.SingleSelect)] = SingleSelect;
+                    attrs[nameof(MDataTableHeaderMobile.DisableSort)] = DisableSort;
+                    attrs[nameof(MDataTableHeaderMobile.HeaderColContent)] = HeaderColContent;
+                    attrs[nameof(MDataTableHeaderMobile.OnToggleSelectAll)] = EventCallback.Factory.Create<bool>(this, ToggleSelectAll);
+                    attrs[nameof(MDataTableHeaderMobile.OnSort)] = EventCallback.Factory.Create<string>(this, Sort);
+                    attrs[nameof(MDataTableHeaderMobile.OnGroup)] = EventCallback.Factory.Create<string>(this, Group);
+                })
                 .Apply(typeof(BProgressLinear), typeof(MProgressLinear), attrs =>
                 {
                     attrs[nameof(MProgressLinear.Absolute)] = true;
@@ -325,9 +362,16 @@ namespace Masa.Blazor
                 {
                     attrs[nameof(MDataTableRow<TItem>.Headers)] = ComputedHeaders;
                     attrs[nameof(MDataTableRow<TItem>.IsSelected)] = (Func<TItem, bool>)IsSelected;
-                    attrs[nameof(MDataTableRow<TItem>.ItemColContent)] = ItemColContent;
                     attrs[nameof(MDataTableRow<TItem>.IsExpanded)] = (Func<TItem, bool>)IsExpanded;
                     attrs[nameof(MDataTableRow<TItem>.Stripe)] = Stripe;
+                })
+                .Apply(typeof(BDataTableMobileRow<>), typeof(MDataTableMobileRow<TItem>), attrs =>
+                {
+                    attrs[nameof(MDataTableMobileRow<TItem>.Headers)] = ComputedHeaders;
+                    attrs[nameof(MDataTableMobileRow<TItem>.HideDefaultHeader)] = HideDefaultHeader;
+                    attrs[nameof(MDataTableMobileRow<TItem>.IsSelected)] = (Func<TItem, bool>)IsSelected;
+                    attrs[nameof(MDataTableMobileRow<TItem>.IsExpanded)] = (Func<TItem, bool>)IsExpanded;
+                    attrs[nameof(MDataTableMobileRow<TItem>.Stripe)] = Stripe;
                 })
                 .Apply(typeof(BDataTableRowGroup), typeof(MDataTableRowGroup))
                 .Apply<BIcon, MIcon>("expand-icon", attrs =>
