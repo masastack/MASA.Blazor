@@ -3,6 +3,9 @@
     public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>, ICascader<TItem, TValue>
     {
         [Parameter]
+        public bool ChangeOnSelect { get; set; }
+
+        [Parameter]
         public bool ShowAllLevels { get; set; } = true;
 
         [EditorRequired]
@@ -19,13 +22,7 @@
 
         public override Action<TextFieldNumberProperty> NumberProps { get; set; }
 
-        protected override IList<TItem> SelectedItems
-        {
-            get
-            {
-                return FindSelectedItems(Items).ToList();
-            }
-        }
+        protected override IList<TItem> SelectedItems => FindSelectedItems(Items).ToList();
 
         protected override void SetComponentClass()
         {
@@ -49,11 +46,13 @@
                 })
                 .Apply(typeof(BCascaderList<,>), typeof(MCascaderList<TItem, TValue>), attrs =>
                 {
+                    attrs[nameof(ChangeOnSelect)] = ChangeOnSelect;
                     attrs[nameof(Dense)] = Dense;
                     attrs[nameof(ItemText)] = ItemText;
                     attrs[nameof(LoadChildren)] = LoadChildren;
                     attrs[nameof(ItemChildren)] = ItemChildren;
-                    attrs[nameof(MCascaderList<TItem, TValue>.OnSelect)] = CreateEventCallback<TItem>(SelectItem);
+                    attrs[nameof(MCascaderList<TItem, TValue>.OnSelect)] =
+                        CreateEventCallback<(TItem item, bool close)>((arg) => SelectItem(arg.item, arg.close));
                 });
         }
 

@@ -201,6 +201,7 @@
   "Demos.Components.FormInputs.children.Autocomplete.misc.CryptocurrencySelector",
   "Demos.Components.FormInputs.children.Autocomplete.misc.StateSelector",
   "Demos.Components.FormInputs.children.Cascader.usage.Index",
+  "Demos.Components.FormInputs.children.Cascader.props.ChangeOnSelect",
   "Demos.Components.FormInputs.children.Cascader.props.Dense",
   "Demos.Components.FormInputs.children.Cascader.props.LoadChildren",
   "Demos.Components.FormInputs.children.Cascader.props.ShowAllLevels",
