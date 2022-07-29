@@ -215,6 +215,11 @@
       "Description": ""
     },
     {
+      "Name": "MobileBreakpoint",
+      "Type": "OneOf<Breakpoints,Double>",
+      "Description": ""
+    },
+    {
       "Name": "MultiSort",
       "Type": "Boolean",
       "Default": "false",

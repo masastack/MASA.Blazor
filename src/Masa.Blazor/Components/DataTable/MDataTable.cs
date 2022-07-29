@@ -296,7 +296,9 @@ namespace Masa.Blazor
                         attrs[prop.Key] = prop.Value;
                     }
 
+                    attrs[nameof(MDataTableHeader.IsMobile)] = IsMobile;
                     attrs[nameof(MDataTableHeader.Headers)] = ComputedHeaders.ToList<DataTableHeader>();
+                    attrs[nameof(MDataTableHeader.MultiSort)] = MultiSort;
                     attrs[nameof(MDataTableHeader.Options)] = InternalOptions;
                     attrs[nameof(MDataTableHeader.ShowGroupBy)] = ShowGroupBy;
                     attrs[nameof(MDataTableHeader.CheckboxColor)] = CheckboxColor;
@@ -306,28 +308,8 @@ namespace Masa.Blazor
                     attrs[nameof(MDataTableHeader.DisableSort)] = DisableSort;
                     attrs[nameof(MDataTableHeader.HeaderColContent)] = HeaderColContent;
                     attrs[nameof(MDataTableHeader.OnToggleSelectAll)] = EventCallback.Factory.Create<bool>(this, ToggleSelectAll);
-                    attrs[nameof(MDataTableHeader.OnSort)] = EventCallback.Factory.Create<string>(this, Sort);
+                    attrs[nameof(MDataTableHeader.OnSort)] = EventCallback.Factory.Create<OneOf<string, List<string>>>(this, Sort);
                     attrs[nameof(MDataTableHeader.OnGroup)] = EventCallback.Factory.Create<string>(this, Group);
-                })
-                .Apply(typeof(BDataTableHeaderMobile), typeof(MDataTableHeaderMobile), attrs =>
-                {
-                    foreach (var prop in HeaderProps)
-                    {
-                        attrs[prop.Key] = prop.Value;
-                    }
-
-                    attrs[nameof(MDataTableHeaderMobile.Headers)] = ComputedHeaders.ToList<DataTableHeader>();
-                    attrs[nameof(MDataTableHeaderMobile.Options)] = InternalOptions;
-                    attrs[nameof(MDataTableHeaderMobile.ShowGroupBy)] = ShowGroupBy;
-                    attrs[nameof(MDataTableHeaderMobile.CheckboxColor)] = CheckboxColor;
-                    attrs[nameof(MDataTableHeaderMobile.SomeItems)] = SomeItems;
-                    attrs[nameof(MDataTableHeaderMobile.EveryItem)] = EveryItem;
-                    attrs[nameof(MDataTableHeaderMobile.SingleSelect)] = SingleSelect;
-                    attrs[nameof(MDataTableHeaderMobile.DisableSort)] = DisableSort;
-                    attrs[nameof(MDataTableHeaderMobile.HeaderColContent)] = HeaderColContent;
-                    attrs[nameof(MDataTableHeaderMobile.OnToggleSelectAll)] = EventCallback.Factory.Create<bool>(this, ToggleSelectAll);
-                    attrs[nameof(MDataTableHeaderMobile.OnSort)] = EventCallback.Factory.Create<string>(this, Sort);
-                    attrs[nameof(MDataTableHeaderMobile.OnGroup)] = EventCallback.Factory.Create<string>(this, Group);
                 })
                 .Apply(typeof(BProgressLinear), typeof(MProgressLinear), attrs =>
                 {
@@ -341,7 +323,14 @@ namespace Masa.Blazor
                     attrs[nameof(Height)] = Height;
                     attrs[nameof(FixedHeader)] = FixedHeader;
                     attrs[nameof(Dense)] = Dense;
-                    attrs[nameof(Class)] = Class;
+
+                    var css = Class;
+                    if (IsMobile)
+                    {
+                        css += " m-data-table--mobile";
+                    }
+                    attrs[nameof(Class)] = css;
+
                     attrs[nameof(Style)] = Style;
                     attrs[nameof(FixedRight)] = IsFixedRight;
                     attrs[nameof(Width)] = Width;
@@ -380,7 +369,7 @@ namespace Masa.Blazor
                     var expanded = IsExpanded(item);
                     var @class = IsExpanded(item) ? "m-data-table__expand-icon m-data-table__expand-icon--active" : "m-data-table__expand-icon";
                     attrs[nameof(Class)] = @class;
-                    //TODO:StopPropagation
+                    attrs[nameof(MIcon.OnClickStopPropagation)] = true;
                     attrs[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
                     {
                         Expand(item, !expanded);

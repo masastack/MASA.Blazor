@@ -18,7 +18,6 @@
             { typeof(BSimpleCheckbox), typeof(MSimpleCheckbox) },
             { typeof(BDataTableRowGroup), typeof(MDataTableRowGroup) },
             { typeof(BDataTableHeader), typeof(MDataTableHeader) },
-            { typeof(BDataTableHeaderMobile), typeof(MDataTableHeaderMobile) },
             { typeof(BSimpleTable), typeof(MSimpleTable) },
             { typeof(BDatePickerHeader), typeof(MDatePickerHeader) },
             { typeof(BDatePickerYears), typeof(MDatePickerYears) },
