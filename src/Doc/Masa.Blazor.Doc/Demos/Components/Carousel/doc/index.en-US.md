@@ -3,7 +3,6 @@ category: Components
 type: Carousels
 title: Carousels
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Cards.svg
 related:
   - /components/parallax
   - /components/images
