@@ -27,12 +27,13 @@
 
             AbstractProvider
                 .Apply(typeof(BCascaderList<,>), typeof(MCascaderList<TItem, TValue>), attrs =>
-                 {
-                     attrs[nameof(Dense)] = Dense;
-                     attrs[nameof(ItemText)] = ItemText;
-                     attrs[nameof(LoadChildren)] = LoadChildren;
-                     attrs[nameof(ItemChildren)] = ItemChildren;
-                     attrs[nameof(OnSelect)] = OnSelect;
+                {
+                    attrs[nameof(ChangeOnSelect)] = ChangeOnSelect;
+                    attrs[nameof(Dense)] = Dense;
+                    attrs[nameof(ItemText)] = ItemText;
+                    attrs[nameof(LoadChildren)] = LoadChildren;
+                    attrs[nameof(ItemChildren)] = ItemChildren;
+                    attrs[nameof(OnSelect)] = OnSelect;
                  })
                 .Apply(typeof(BList), typeof(MList), attrs =>
                 {
