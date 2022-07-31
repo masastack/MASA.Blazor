@@ -47,7 +47,6 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
     [Parameter] public EventCallback<bool> VisibleChanged { get; set; }
 
     private int _tabIndex;
-    private bool _preVisible;
     private TItem _loadingItem;
     private List<TItem> _loadedItems = new();
     private bool _visible;
