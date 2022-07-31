@@ -86,7 +86,7 @@ Each of these application components have a designated location and priority tha
 The application service is used to configure your MASA Blazor layout. It communicates with the `MMain` component so that it's able to properly size the application content. 
 It has a number of properties that can be accessed:
 
-```c#
+```csharp
 double Bar { get; }
 double Bottom { get; }
 double Footer { get; }
@@ -99,7 +99,7 @@ double Top { get; }
 These values are automatically updated when you add and remove components with the **App** prop. They are NOT editable and exist in a READONLY state. 
 You can access these values by referencing the **Application** property.
 
-```c#
+```csharp
  [Inject] public MasaBlazor MasaBlazor { get; set; }
  
  Console.WriteLine(MasaBlazor.Application.Footer); // 60

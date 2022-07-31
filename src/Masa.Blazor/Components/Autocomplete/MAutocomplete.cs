@@ -36,7 +36,7 @@ namespace Masa.Blazor
         [Parameter]
         public EventCallback<string> OnSearchInputUpdate { get; set; }
 
-        protected override IList<TItem> ComputedItems => FilteredItems;
+        protected override List<TItem> ComputedItems => FilteredItems;
 
         public override Action<TextFieldNumberProperty> NumberProps { get; set; }
 
@@ -49,7 +49,7 @@ namespace Masa.Blazor
             return SelectedValues.IndexOf(GetValue(item)) > -1;
         }
 
-        protected IList<TItem> FilteredItems
+        protected List<TItem> FilteredItems
         {
             get
             {
@@ -124,7 +124,7 @@ namespace Masa.Blazor
 
             Watcher
                 .Watch<string>(nameof(SearchInput), val => InternalSearch = val)
-                .Watch<IList<TItem>>(nameof(FilteredItems), OnFilteredItemsChanged);
+                .Watch<List<TItem>>(nameof(FilteredItems), OnFilteredItemsChanged);
         }
 
         protected override void SetComponentClass()
@@ -160,9 +160,9 @@ namespace Masa.Blazor
             }
         }
 
-        protected override async Task SelectItem(TItem item)
+        protected override async Task SelectItem(TItem item, bool closeOnSelect = true)
         {
-            await base.SelectItem(item);
+            await base.SelectItem(item, closeOnSelect);
             SetSearch();
         }
 

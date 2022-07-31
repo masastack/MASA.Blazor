@@ -27,7 +27,7 @@ The video content is the MASA Blazor template to create the Blazor Server demo v
 
 Masa.Template, contains all project templates of the MASA series. The corresponding template of MASA Blazor is named `masab` 
 
-```
+```shell
 dotnet new --install Masa.Template
 ```
 
@@ -38,7 +38,7 @@ dotnet new --install Masa.Template
 
 Create a project based on the project template name and specify the output directory, which is the root folder of the project. 
 
-```
+```shell
 dotnet new masab -o MasaBlazorApp
 ```
 
@@ -60,14 +60,14 @@ Start the project with `dotnet run`, open the corresponding URL according to the
 
 Create a new Blazor application named BlazorApp in the command line interface: 
 
-```sh
-$ dotnet new blazorserver -o BlazorApp
+```shell
+dotnet new blazorserver -o BlazorApp
 ```
 
 or
 
-```sh
-$ dotnet new blazorwasm -o BlazorApp
+```shell
+dotnet new blazorwasm -o BlazorApp
 ```
 
 > `blazorserver` is Blazor Server App template shortname。`blazorwasm` is Blazor WebAssembly App template shortname
@@ -76,8 +76,8 @@ $ dotnet new blazorwasm -o BlazorApp
 
 ### Install NuGet package
 
-```sh
-$ dotnet add package Masa.Blazor
+```shell
+dotnet add package Masa.Blazor
 ```
 
 <br/>
@@ -121,7 +121,7 @@ in `wwwroot\index.html` import resource files：
 
 Program.cs file add Masa.Blazor related services：
 
-```c#
+```csharp
 // Add services to the container.
 builder.Services.AddMasaBlazor();
 ```
@@ -132,8 +132,9 @@ builder.Services.AddMasaBlazor();
 
 update `_Imports.razor` file,Add:
 
-```c#
+```csharp
 @using Masa.Blazor
+@using BlazorComponent
 ```
 
 update `Shared/MainLayout.razor` file，set MApp as root element：

@@ -815,68 +815,6 @@ code[class*=language-], pre[class*=language-] {
     hyphens: none;
 }
 
-.token.constant, .token.deleted, .token.property, .token.symbol {
-    color: #905;
-}
-
-.token.boolean {
-    color: blue;
-}
-
-.token.tag {
-    color: rgb(128, 0, 128);
-}
-
-.token.tag > .token.punctuation {
-    color: black;
-    opacity: 0.75;
-}
-
-.token.number {
-    color: black;
-}
-
-.token {
-    background: none !important;
-}
-
-.token.punctuation {
-    color: rgb(0, 0, 0, 0.75);
-}
-
-.token.builtin, .token.char, .token.inserted, .token.selector {
-    color: #690;
-}
-
-.token.attr-name {
-    color: rgb(128, 0, 128);
-}
-
-.token.string {
-    color: rgb(163, 21, 21)
-}
-
-.token.atrule {
-    color: #07a;
-}
-
-.token.attr-value {
-    color: black;
-}
-
-.token.attr-value > .token.punctuation {
-    color: black;
-    opacity: 0.75;
-}
-
-.token.keyword {
-    color: blue;
-}
-
-.token.comment {
-    color: rgb(0, 100, 0);
-}
-
 .m-sheet.app-code pre[class*=language]::after {
     bottom: .75rem;
     color: rgba(48, 48, 48, .5);
@@ -898,14 +836,6 @@ code[class*=language-], pre[class*=language-] {
 
 .m-example pre.language-css::after {
     content: "css";
-}
-
-.token.class-name {
-    color: rgb(43, 145, 175)
-}
-
-.token.function {
-    color: rgb(116, 83, 31)
 }
 
 .text-mono {

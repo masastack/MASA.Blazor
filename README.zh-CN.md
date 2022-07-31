@@ -55,7 +55,7 @@ MASA Blazor 基于Material设计规范，每一个组件都经过精心设计，
 
 **Install Template**
 
-```c#
+```csharp
 dotnet new --install Masa.Template
 ```
 
@@ -105,7 +105,7 @@ dotnet add package Masa.Blazor
 
 - 将 Masa.Blazor 的相关服务添加到`Startup.ConfigureServices`:
 
-```c#
+```csharp
 services.AddMasaBlazor();
 ```
 
@@ -130,7 +130,7 @@ services.AddMasaBlazor();
 
 - 在`_Imports.razor`文件中加入命名空间:
 
-```c#
+```csharp
 @using Masa.Blazor
 @using BlazorComponent
 ```
