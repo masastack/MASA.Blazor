@@ -158,19 +158,19 @@
                 })
                 .Apply(typeof(ISelect<,,>), typeof(MSelect<(string, string), string, List<string>>), "sort-select-multiple", attrs =>
                 {
-                    attrs[nameof(MSelect<(string, string), string, string>.ItemText)] =
+                    attrs[nameof(MSelect<(string, string), string, List<string>>.ItemText)] =
                         (Func<(string Text, string Value), string>)(item => item.Text);
-                    attrs[nameof(MSelect<(string, string), string, string>.ItemValue)] =
+                    attrs[nameof(MSelect<(string, string), string, List<string>>.ItemValue)] =
                         (Func<(string Text, string Value), string>)(item => item.Value);
-                    attrs[nameof(MSelect<(string, string), string, string>.Label)] = I18n.T("$masaBlazor.dataTable.sortBy");
-                    attrs[nameof(MSelect<(string, string), string, string>.HideDetails)] = (StringBoolean)true;
-                    attrs[nameof(MSelect<(string, string), string, string>.Multiple)] = Options.MultiSort;
+                    attrs[nameof(MSelect<(string, string), string, List<string>>.Label)] = I18n.T("$masaBlazor.dataTable.sortBy");
+                    attrs[nameof(MSelect<(string, string), string, List<string>>.HideDetails)] = (StringBoolean)true;
+                    attrs[nameof(MSelect<(string, string), string, List<string>>.Multiple)] = Options.MultiSort;
 
                     attrs[nameof(MSelect<List<(string, string)>, string, List<string>>.Value)] = Options.SortBy;
                     attrs[nameof(MSelect<List<(string, string)>, string, List<string>>.ValueChanged)] =
                         EventCallback.Factory.Create<List<string>>(this, s => OnSort.InvokeAsync(s));
 
-                    attrs[nameof(MSelect<(string, string), string, string>.MenuProps)] =
+                    attrs[nameof(MSelect<(string, string), string, List<string>>.MenuProps)] =
                         (Action<BMenuProps>)(props => props.CloseOnContentClick = true);
                 })
                 .Apply<BChip, MChip>(attrs =>
