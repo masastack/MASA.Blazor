@@ -168,7 +168,7 @@ namespace Masa.Blazor
 
         public Dictionary<string, object> ColspanAttrs => new()
         {
-            { "colspan", HeadersLength > 0 ? HeadersLength : ComputedHeaders.Count() }
+            { "colspan", IsMobile ? null : (HeadersLength > 0 ? HeadersLength : ComputedHeaders.Count()) }
         };
 
         public List<DataTableHeader<TItem>> HeadersWithCustomFilters
