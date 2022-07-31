@@ -1,6 +1,4 @@
-﻿using OneOf;
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public class MobileProvider : IMobile
 {

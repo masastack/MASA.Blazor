@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
@@ -199,11 +200,30 @@ namespace Masa.Blazor
 
         protected bool IsFixedRight => FixedRight;
 
-        protected override void OnParametersSet()
+        protected override void OnInitialized()
         {
-            base.OnParametersSet();
+            base.OnInitialized();
+
+            CustomFilter = CustomFilterWithColumns;
+            ItemValues = Headers.Select(header => new ItemValue<TItem>(header.Value));
 
             MobileProvider = new MobileProvider(this);
+            MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+        }
+
+        private Task BreakpointOnOnUpdate()
+        {
+            MobileProvider = new MobileProvider(this);
+            StateHasChanged();
+            return Task.CompletedTask;
+        }
+
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        {
+            if (MasaBlazor.Breakpoint.Width > 0)
+            {
+                base.BuildRenderTree(builder);
+            }
         }
 
         public Task HandleOnRowClickAsync(MouseEventArgs args)
@@ -219,14 +239,6 @@ namespace Masa.Blazor
         public Task HandleOnRowDbClickAsync(MouseEventArgs arg)
         {
             return Task.CompletedTask;
-        }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            CustomFilter = CustomFilterWithColumns;
-            ItemValues = Headers.Select(header => new ItemValue<TItem>(header.Value));
         }
 
         private IEnumerable<TItem> CustomFilterWithColumns(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>> filter, string search)
@@ -325,6 +337,7 @@ namespace Masa.Blazor
                     attrs[nameof(Dense)] = Dense;
 
                     var css = Class;
+                    Console.WriteLine($"IsMobile:{IsMobile}");
                     if (IsMobile)
                     {
                         css += " m-data-table--mobile";
@@ -407,6 +420,12 @@ namespace Masa.Blazor
                 options.GroupBy = new List<string>();
                 options.GroupDesc = new List<bool>();
             });
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
+            base.Dispose(disposing);
         }
     }
 }
