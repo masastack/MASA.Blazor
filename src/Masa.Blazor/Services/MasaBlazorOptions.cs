@@ -25,6 +25,19 @@
 
         public bool RTL { get; set; }
 
+        public Breakpoint Breakpoint { get; } = new()
+        {
+            MobileBreakpoint = Constants.Breakpoint.MobileBreakpoint,
+            ScrollBarWidth = Constants.Breakpoint.ScrollBarWidth,
+            Thresholds = new BreakpointThresholds()
+            {
+                Sm = Constants.Breakpoint.Thresholds.Sm,
+                Xs = Constants.Breakpoint.Thresholds.Xs,
+                Md = Constants.Breakpoint.Thresholds.Md,
+                Lg = Constants.Breakpoint.Thresholds.Lg,
+            }
+        };
+
         public void UseTheme(Action<ThemeOptions> themeAction)
         {
             themeAction.Invoke(Theme);

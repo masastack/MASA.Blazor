@@ -11,6 +11,11 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
+      "Name": "HasSlot",
+      "Type": "Func<ItemColProps`1,Boolean>",
+      "Description": ""
+    },
+    {
       "Name": "Headers",
       "Type": "List<DataTableHeader`1>",
       "Default": "null",
@@ -67,12 +72,7 @@
   ],
   "Contents": [
     {
-      "Name": "ChildContent",
-      "Type": "RenderFragment",
-      "Description": "默认插槽"
-    },
-    {
-      "Name": "ItemColContent",
+      "Name": "SlotContent",
       "Type": "RenderFragment<ItemColProps`1>",
       "Description": ""
     }

@@ -41,6 +41,11 @@
       "Description": ""
     },
     {
+      "Name": "IsMobile",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "Options",
       "Type": "DataOptions",
       "Default": "null",

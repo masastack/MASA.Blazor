@@ -11,6 +11,11 @@
       "Description": "The class applied to the outermost element of the component"
     },
     {
+      "Name": "HasSlot",
+      "Type": "Func<ItemColProps`1,Boolean>",
+      "Description": ""
+    },
+    {
       "Name": "Headers",
       "Type": "List<DataTableHeader`1>",
       "Default": "null",
@@ -67,12 +72,7 @@
   ],
   "Contents": [
     {
-      "Name": "ChildContent",
-      "Type": "RenderFragment",
-      "Description": "Default Content"
-    },
-    {
-      "Name": "ItemColContent",
+      "Name": "SlotContent",
       "Type": "RenderFragment<ItemColProps`1>",
       "Description": ""
     }
