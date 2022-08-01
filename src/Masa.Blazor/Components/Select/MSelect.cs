@@ -433,6 +433,11 @@ namespace Masa.Blazor
                 {
                     attrs[nameof(MMenu.ExternalActivator)] = true;
                     attrs[nameof(MMenu.Value)] = MenuCanShow && IsMenuActive;
+                    attrs[nameof(MMenu.ValueChanged)] = EventCallback.Factory.Create<bool>(this, v =>
+                    {
+                        IsMenuActive = v;
+                        IsFocused = v;
+                    });
                     attrs[nameof(MMenu.Disabled)] = Disabled || Readonly;
                     attrs[nameof(MMenu.Bottom)] = ComputedMenuProps.Bottom;
                     attrs[nameof(MMenu.CloseOnClick)] = ComputedMenuProps.CloseOnClick;

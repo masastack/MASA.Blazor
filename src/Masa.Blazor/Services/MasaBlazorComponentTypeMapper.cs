@@ -51,6 +51,7 @@
             { typeof(BSelectList<,,>), typeof(MSelectList<,,>) },
             { typeof(BCascaderList<,>), typeof(MCascaderList<,>) },
             { typeof(BDataTableRow<>), typeof(MDataTableRow<>) },
+            { typeof(BDataTableMobileRow<>), typeof(MDataTableMobileRow<>) },
             { typeof(BTreeviewNode<,>), typeof(MTreeviewNode<,>) },
         };
 

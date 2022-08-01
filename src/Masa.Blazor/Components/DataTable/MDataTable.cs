@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor
 {
-    public class MDataTable<TItem> : MDataIterator<TItem>, IDataTable<TItem>, ILoadable, IDataIterator<TItem>
+    public class MDataTable<TItem> : MDataIterator<TItem>, IDataTable<TItem>, ILoadable, IDataIterator<TItem>, IMobile
     {
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; }
+        
         [Parameter]
         public string Caption { get; set; }
 
@@ -30,6 +34,9 @@ namespace Masa.Blazor
 
         [Parameter]
         public RenderFragment FootContent { get; set; }
+
+        [Parameter]
+        public OneOf<Breakpoints, double> MobileBreakpoint { get; set; } = 600;
 
         [Parameter]
         public bool ShowGroupBy { get; set; }
@@ -93,6 +100,8 @@ namespace Masa.Blazor
 
         [Parameter]
         public StringNumber Width { get; set; }
+        
+        protected MobileProvider MobileProvider { get; set; }
 
         public IEnumerable<DataTableHeader<TItem>> ComputedHeaders
         {
@@ -155,9 +164,11 @@ namespace Masa.Blazor
 
         public bool HasBottom => FooterContent != null || !HideDefaultFooter;
 
+        public bool IsMobile => MobileProvider.IsMobile;
+
         public Dictionary<string, object> ColspanAttrs => new()
         {
-            { "colspan", HeadersLength > 0 ? HeadersLength : ComputedHeaders.Count() }
+            { "colspan", IsMobile ? null : (HeadersLength > 0 ? HeadersLength : ComputedHeaders.Count()) }
         };
 
         public List<DataTableHeader<TItem>> HeadersWithCustomFilters
@@ -187,7 +198,33 @@ namespace Masa.Blazor
         //TODO:we will change this
         public DataOptions Options => InternalOptions;
 
-        protected bool IsFixedRight => FixedRight && ComputedItems.Any();
+        protected bool IsFixedRight => FixedRight;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            CustomFilter = CustomFilterWithColumns;
+            ItemValues = Headers.Select(header => new ItemValue<TItem>(header.Value));
+
+            MobileProvider = new MobileProvider(this);
+            MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+        }
+
+        private Task BreakpointOnOnUpdate()
+        {
+            MobileProvider = new MobileProvider(this);
+            StateHasChanged();
+            return Task.CompletedTask;
+        }
+
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        {
+            if (MasaBlazor.Breakpoint.Width > 0)
+            {
+                base.BuildRenderTree(builder);
+            }
+        }
 
         public Task HandleOnRowClickAsync(MouseEventArgs args)
         {
@@ -202,14 +239,6 @@ namespace Masa.Blazor
         public Task HandleOnRowDbClickAsync(MouseEventArgs arg)
         {
             return Task.CompletedTask;
-        }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            CustomFilter = CustomFilterWithColumns;
-            ItemValues = Headers.Select(header => new ItemValue<TItem>(header.Value));
         }
 
         private IEnumerable<TItem> CustomFilterWithColumns(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>> filter, string search)
@@ -279,7 +308,9 @@ namespace Masa.Blazor
                         attrs[prop.Key] = prop.Value;
                     }
 
+                    attrs[nameof(MDataTableHeader.IsMobile)] = IsMobile;
                     attrs[nameof(MDataTableHeader.Headers)] = ComputedHeaders.ToList<DataTableHeader>();
+                    attrs[nameof(MDataTableHeader.MultiSort)] = MultiSort;
                     attrs[nameof(MDataTableHeader.Options)] = InternalOptions;
                     attrs[nameof(MDataTableHeader.ShowGroupBy)] = ShowGroupBy;
                     attrs[nameof(MDataTableHeader.CheckboxColor)] = CheckboxColor;
@@ -289,7 +320,7 @@ namespace Masa.Blazor
                     attrs[nameof(MDataTableHeader.DisableSort)] = DisableSort;
                     attrs[nameof(MDataTableHeader.HeaderColContent)] = HeaderColContent;
                     attrs[nameof(MDataTableHeader.OnToggleSelectAll)] = EventCallback.Factory.Create<bool>(this, ToggleSelectAll);
-                    attrs[nameof(MDataTableHeader.OnSort)] = EventCallback.Factory.Create<string>(this, Sort);
+                    attrs[nameof(MDataTableHeader.OnSort)] = EventCallback.Factory.Create<OneOf<string, List<string>>>(this, Sort);
                     attrs[nameof(MDataTableHeader.OnGroup)] = EventCallback.Factory.Create<string>(this, Group);
                 })
                 .Apply(typeof(BProgressLinear), typeof(MProgressLinear), attrs =>
@@ -304,7 +335,15 @@ namespace Masa.Blazor
                     attrs[nameof(Height)] = Height;
                     attrs[nameof(FixedHeader)] = FixedHeader;
                     attrs[nameof(Dense)] = Dense;
-                    attrs[nameof(Class)] = Class;
+
+                    var css = Class;
+                    Console.WriteLine($"IsMobile:{IsMobile}");
+                    if (IsMobile)
+                    {
+                        css += " m-data-table--mobile";
+                    }
+                    attrs[nameof(Class)] = css;
+
                     attrs[nameof(Style)] = Style;
                     attrs[nameof(FixedRight)] = IsFixedRight;
                     attrs[nameof(Width)] = Width;
@@ -325,9 +364,16 @@ namespace Masa.Blazor
                 {
                     attrs[nameof(MDataTableRow<TItem>.Headers)] = ComputedHeaders;
                     attrs[nameof(MDataTableRow<TItem>.IsSelected)] = (Func<TItem, bool>)IsSelected;
-                    attrs[nameof(MDataTableRow<TItem>.ItemColContent)] = ItemColContent;
                     attrs[nameof(MDataTableRow<TItem>.IsExpanded)] = (Func<TItem, bool>)IsExpanded;
                     attrs[nameof(MDataTableRow<TItem>.Stripe)] = Stripe;
+                })
+                .Apply(typeof(BDataTableMobileRow<>), typeof(MDataTableMobileRow<TItem>), attrs =>
+                {
+                    attrs[nameof(MDataTableMobileRow<TItem>.Headers)] = ComputedHeaders;
+                    attrs[nameof(MDataTableMobileRow<TItem>.HideDefaultHeader)] = HideDefaultHeader;
+                    attrs[nameof(MDataTableMobileRow<TItem>.IsSelected)] = (Func<TItem, bool>)IsSelected;
+                    attrs[nameof(MDataTableMobileRow<TItem>.IsExpanded)] = (Func<TItem, bool>)IsExpanded;
+                    attrs[nameof(MDataTableMobileRow<TItem>.Stripe)] = Stripe;
                 })
                 .Apply(typeof(BDataTableRowGroup), typeof(MDataTableRowGroup))
                 .Apply<BIcon, MIcon>("expand-icon", attrs =>
@@ -336,7 +382,7 @@ namespace Masa.Blazor
                     var expanded = IsExpanded(item);
                     var @class = IsExpanded(item) ? "m-data-table__expand-icon m-data-table__expand-icon--active" : "m-data-table__expand-icon";
                     attrs[nameof(Class)] = @class;
-                    //TODO:StopPropagation
+                    attrs[nameof(MIcon.OnClickStopPropagation)] = true;
                     attrs[nameof(MIcon.OnClick)] = EventCallback.Factory.Create<MouseEventArgs>(this, () =>
                     {
                         Expand(item, !expanded);
@@ -374,6 +420,12 @@ namespace Masa.Blazor
                 options.GroupBy = new List<string>();
                 options.GroupDesc = new List<bool>();
             });
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
+            base.Dispose(disposing);
         }
     }
 }
