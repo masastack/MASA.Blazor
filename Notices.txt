@@ -5,7 +5,7 @@ This product includes derived works from quartznet under Apache Software License
   The derived work is adapted from the class SortedSetExtensions:
 	https://github.com/quartznet/quartznet/blob/main/src/Quartz/Util/SortedSetExtensions.cs
   The derived work is adapted from the class TimeZoneUtil:
-    https://github.com/quartznet/quartznet/blob/main/src/Quartz/Util/TimeZoneUtil.cs
+	https://github.com/quartznet/quartznet/blob/main/src/Quartz/Util/TimeZoneUtil.cs
 	
 =======================================================================
 quartznet License
