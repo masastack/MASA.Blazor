@@ -46,6 +46,11 @@
       "Description": ""
     },
     {
+      "Name": "MultiSort",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "Options",
       "Type": "DataOptions",
       "Default": "null",
@@ -102,7 +107,7 @@
     },
     {
       "Name": "OnSort",
-      "Type": "EventCallback<String>",
+      "Type": "EventCallback<OneOf`2>",
       "Description": ""
     },
     {
