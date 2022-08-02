@@ -6,9 +6,3 @@ These following source codes:
   https://github.com/quartznet/quartznet/blob/main/src/Quartz/CronExpression.cs
   https://github.com/quartznet/quartznet/blob/main/src/Quartz/Util/SortedSetExtensions.cs
   https://github.com/quartznet/quartznet/blob/main/src/Quartz/Util/TimeZoneUtil.cs
-
-This product includes software components originally
-developed for ECharts (https://github.com/apache/echarts),
-licensed under the Apache 2.0 license. The licensing terms
-for ECharts code can be found at:
-https://github.com/apache/echarts/blob/master/LICENSE
