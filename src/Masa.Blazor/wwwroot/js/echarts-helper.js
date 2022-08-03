@@ -1,29 +1,38 @@
-﻿
-export function init(container, option) {
-    window.devicePixelRatio = 2
+﻿let instance
+let timeout
 
-    if (echarts && container) {
-        container._chart = echarts.init(container, null, { renderer: 'svg' });
-        container._chart.setOption(option, true);
+export function init(container, theme, initOptions, option) {
+  if (instance && instance.isDisposed === false) return
 
-        if (!container._init) {
-            container._init = true;
-            window.addEventListener('resize', onResize);
-        }
+  if (echarts && container) {
+    if (initOptions && initOptions.renderer) {
+      initOptions.renderer = initOptions.renderer.toLowerCase()
     }
 
-    function onResize() {
-        if (!container) {
-            window.removeEventListener('resize', onResize);
-            return;
-        }
+    console.log('theme', theme, 'initOptions', initOptions, 'option', option)
 
-        window.clearTimeout(container._chart_timer);
-        container._chart_timer = window.setTimeout(function () {
-            if (container && container._chart) {
-                container._chart.resize();
-            }
-        }, 300);
-    };
+    instance = echarts.init(container, theme, initOptions);
+    instance.setOption(option, true);
+
+    window.addEventListener('resize', onResize);
+  }
 }
 
+export function dispose() {
+  console.log('start dispose')
+  if (instance?.dispose) {
+    instance.dispose();
+    window.removeEventListener('resize', onResize)
+    
+    console.log('dispose success')
+  }
+}
+
+function onResize() {
+  window.clearTimeout(timeout);
+  timeout = window.setTimeout(function () {
+    if (instance && instance.resize) {
+      instance.resize();
+    }
+  }, 300);
+}
