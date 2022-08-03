@@ -1,0 +1,8 @@
+This product includes the source code from quartznet(https://github.com/quartznet/quartznet),
+licensed under the Apache 2.0 license.The licensing terms
+for quartznet can be found at:
+https://github.com/quartznet/quartznet/blob/main/license.txt
+These following source codes:
+  https://github.com/quartznet/quartznet/blob/main/src/Quartz/CronExpression.cs
+  https://github.com/quartznet/quartznet/blob/main/src/Quartz/Util/SortedSetExtensions.cs
+  https://github.com/quartznet/quartznet/blob/main/src/Quartz/Util/TimeZoneUtil.cs
