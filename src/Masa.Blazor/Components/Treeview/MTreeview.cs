@@ -41,9 +41,6 @@
         [Parameter]
         public bool OpenOnClick { get; set; }
 
-        [Parameter]
-        public bool ParentIsDisabled { get; set; }
-
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -82,7 +79,6 @@
                     attrs[nameof(Rounded)] = Rounded;
                     attrs[nameof(Shaped)] = Shaped;
                     attrs[nameof(SelectionType)] = SelectionType;
-                    attrs[nameof(ParentIsDisabled)] = ParentIsDisabled;
                     attrs[nameof(AppendContent)] = AppendContent;
                     attrs[nameof(LabelContent)] = LabelContent;
                     attrs[nameof(PrependContent)] = PrependContent;

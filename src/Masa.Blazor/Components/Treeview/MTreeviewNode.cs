@@ -130,7 +130,6 @@ namespace Masa.Blazor
                     attrs[nameof(Shaped)] = Shaped;
                     attrs[nameof(Level)] = Level + 1;
                     attrs[nameof(SelectionType)] = SelectionType;
-                    attrs[nameof(ParentIsDisabled)] = ParentIsDisabled;
                     attrs[nameof(AppendContent)] = AppendContent;
                     attrs[nameof(LabelContent)] = LabelContent;
                     attrs[nameof(PrependContent)] = PrependContent;
@@ -145,7 +144,7 @@ namespace Masa.Blazor
             }
 
             await CheckChildrenAsync();
-            Treeview.UpdateSelected(Key);
+            Treeview.UpdateSelected(Key, !IsSelected);
             await Treeview.EmitSelectedAsync();
         }
 
