@@ -53,6 +53,11 @@
       "Description": ""
     },
     {
+      "Name": "Filter",
+      "Type": "Func<TItem,String,Func`2,Boolean>",
+      "Description": ""
+    },
+    {
       "Name": "Hoverable",
       "Type": "Boolean",
       "Default": "false",
@@ -119,6 +124,11 @@
       "Description": ""
     },
     {
+      "Name": "MandatoryActive",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "MultipleActive",
       "Type": "Boolean",
       "Default": "false",
@@ -150,12 +160,6 @@
     },
     {
       "Name": "OpenOnClick",
-      "Type": "Boolean",
-      "Default": "false",
-      "Description": ""
-    },
-    {
-      "Name": "ParentIsDisabled",
       "Type": "Boolean",
       "Default": "false",
       "Description": ""
