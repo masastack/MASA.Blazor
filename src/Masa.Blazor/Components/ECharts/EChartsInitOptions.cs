@@ -33,7 +33,16 @@ public class EChartsInitOptions
         }
     }
 
+    [JsonPropertyName("width")]
+    public string InternalWidth => Width?.ToString();
+
+    [JsonPropertyName("height")]
+    public string InternalHeight => Height?.ToString();
+
+    [JsonIgnore]
     public StringNumber Width { get; set; }
+
+    [JsonIgnore]
 
     public StringNumber Height { get; set; }
 

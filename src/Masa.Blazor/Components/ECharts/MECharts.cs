@@ -104,6 +104,7 @@
             {
                 _isEChartsDisposed = false;
                 await _echarts.InvokeVoidAsync("init", Ref, ComputedTheme, DefaultInitOptions, Option);
+                StateHasChanged();
             }
         }
 

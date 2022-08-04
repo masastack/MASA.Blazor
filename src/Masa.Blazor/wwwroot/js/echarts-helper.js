@@ -31,6 +31,7 @@ export function dispose() {
 function onResize() {
   window.clearTimeout(timeout);
   timeout = window.setTimeout(function () {
+    console.log('resize.......', instance?.resize)
     if (instance && instance.resize) {
       instance.resize();
     }
