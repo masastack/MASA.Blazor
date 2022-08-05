@@ -1,16 +1,20 @@
-﻿<MECharts Height="400" Width="@("100%")" MinWidth="200" Option="_option">
-</MECharts>
+﻿<div class="d-flex flex-column align-center justify-center">
+    <MECharts Option="option" Dark></MECharts>
+</div>
 
-@code {
-    private object _option = new
+@code{
+
+    private object option = new
     {
         Title = new
         {
+            Left = "center",
             Text = "ECharts 入门示例"
         },
         Tooltip = new { },
         Legend = new
         {
+            Right = "20px",
             Data = new[] { "销量" }
         },
         XAxis = new
@@ -22,11 +26,11 @@
         {
             new
             {
-                Name= "销量",
-                Type= "bar",
-                Data= new []{ 5, 20, 36, 10, 10, 20 }
+                Name = "销量",
+                Type = "bar",
+                Data = new[] { 5, 20, 36, 10, 10, 20 }
             }
         }
     };
-}
 
+}

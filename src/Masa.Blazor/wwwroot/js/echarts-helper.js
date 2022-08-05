@@ -1,29 +1,42 @@
-﻿
-export function init(container, option) {
-    window.devicePixelRatio = 2
+﻿let timeout
+let echarts_instance_cache = {}
 
-    if (echarts && container) {
-        container._chart = echarts.init(container, null, { renderer: 'svg' });
-        container._chart.setOption(option, true);
+export function init(selector, theme, initOptions, option) {
+  let instance = echarts_instance_cache[selector]
 
-        if (!container._init) {
-            container._init = true;
-            window.addEventListener('resize', onResize);
-        }
+  if (instance && instance.isDisposed === false) return;
+
+  const container = document.querySelector(selector)
+
+  if (echarts && container) {
+    if (initOptions && initOptions.renderer) {
+      initOptions.renderer = initOptions.renderer.toLowerCase()
     }
 
-    function onResize() {
-        if (!container) {
-            window.removeEventListener('resize', onResize);
-            return;
-        }
+    instance = echarts.init(container, theme, initOptions);
 
-        window.clearTimeout(container._chart_timer);
-        container._chart_timer = window.setTimeout(function () {
-            if (container && container._chart) {
-                container._chart.resize();
-            }
-        }, 300);
-    };
+    echarts_instance_cache[selector] = instance
+
+    instance.setOption(option, true);
+
+    window.addEventListener('resize', () => onResize(instance));
+  }
 }
 
+export function dispose(selector) {
+  const instance = echarts_instance_cache[selector]
+
+  if (instance?.dispose) {
+    instance.dispose();
+    window.removeEventListener('resize', () => onResize(instance))
+  }
+}
+
+function onResize(instance) {
+  window.clearTimeout(timeout);
+  timeout = window.setTimeout(function () {
+    if (instance && instance.resize) {
+      instance.resize();
+    }
+  }, 300);
+}
