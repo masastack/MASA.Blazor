@@ -2,7 +2,7 @@
 order: 0
 title:
   zh-CN: 高度和宽度
-  en-US: HeightAndWidth
+  en-US: Height and width
 ---
 
 ## zh-CN

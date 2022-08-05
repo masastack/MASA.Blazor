@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor
+﻿using BlazorComponent.Web;
+
+namespace Masa.Blazor
 {
     public class MECharts : BECharts, IDisposable
     {
@@ -82,7 +84,7 @@
         protected override void OnParametersSet()
         {
             Console.WriteLine($"CascadingIsDark: {CascadingIsDark}");
-            
+
             InitOptions?.Invoke(DefaultInitOptions);
 
             DefaultInitOptions.Locale ??= I18n.Culture.TwoLetterISOLanguageName.ToUpperInvariant();
@@ -103,15 +105,14 @@
             if (firstRender || _isEChartsDisposed)
             {
                 _isEChartsDisposed = false;
-                await _echarts.InvokeVoidAsync("init", Ref, ComputedTheme, DefaultInitOptions, Option);
-                StateHasChanged();
+                await _echarts.InvokeVoidAsync("init", Ref.GetSelector(), ComputedTheme, DefaultInitOptions, Option);
             }
         }
 
         public async Task DisposeEcharts()
         {
             _isEChartsDisposed = true;
-            await _echarts.InvokeVoidAsync("dispose");
+            await _echarts.InvokeVoidAsync("dispose", Ref.GetSelector());
         }
     }
 }

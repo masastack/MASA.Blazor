@@ -11,6 +11,11 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
       "Name": "Height",
       "Type": "StringNumber",
       "Default": "",
@@ -20,6 +25,16 @@
       "Name": "Id",
       "Type": "String",
       "Default": "null",
+      "Description": ""
+    },
+    {
+      "Name": "InitOptions",
+      "Type": "Action<EChartsInitOptions>",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
       "Description": ""
     },
     {
@@ -57,6 +72,11 @@
       "Type": "String",
       "Default": "null",
       "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "Theme",
+      "Type": "String",
+      "Description": ""
     },
     {
       "Name": "Width",
