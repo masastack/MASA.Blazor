@@ -218,7 +218,7 @@ namespace Masa.Blazor
                         IsActive = val;
                     }
                 })
-                .Watch<bool>(nameof(IsActive), async (bool val) =>
+                .Watch<bool>(nameof(IsActive), (bool val) =>
                 {
                     // OverlayRef is not null in the next tick.
                     NextTick(async () =>
