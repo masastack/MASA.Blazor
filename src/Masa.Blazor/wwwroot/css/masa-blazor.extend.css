@@ -585,4 +585,77 @@ input[type=number] {
 }
 .m-cron .m-radio {
     padding-top: 8px;
-} 
+}
+
+/* mobile picker */
+
+.theme--light.m-mobile-picker {
+    background-color: #FFFFFF;
+}
+
+.theme--dark.m-mobile-picker {
+    background-color: #1E1E1E;
+}
+
+.m-mobile-picker {
+    width: 100%;
+}
+
+.m-mobile-picker__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 4px;
+}
+
+.m-mobile-picker__columns {
+    position: relative;
+    display: flex;
+    width: 100%;
+    cursor: grab;
+}
+
+.m-mobile-picker__column {
+    flex: 1;
+    overflow: hidden;
+}
+
+.m-mobile-picker__column-wrapper {
+    width: 100%;
+    transition-timing-function: cubic-bezier(.23,1,.68,1);
+}
+
+.m-mobile-picker__column-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 4px;
+}
+
+.m-mobile-picker__column-text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.m-mobile-picker__picked {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+    width: 100%;
+    left: 0;
+    border-top: 1px solid #0000001f;
+    border-bottom: 1px solid #0000001f;
+    transition: .25s border;
+}
+
+.m-mobile-picker__mask {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

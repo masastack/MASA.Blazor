@@ -42,6 +42,11 @@ namespace BlazorComponent
 
             return styleBuilder;
         }
+        
+        public static StyleBuilder AddTop(this StyleBuilder styleBuilder, StringNumber top)
+        {
+            return styleBuilder.Add($"top:{top.ToUnit()}");
+        }
 
         public static StyleBuilder AddTop(this StyleBuilder styleBuilder, StringNumber top, Func<bool> func)
         {
