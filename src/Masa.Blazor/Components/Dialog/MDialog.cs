@@ -2,6 +2,9 @@
 {
     public partial class MDialog : BDialog, IDialog, IThemeable
     {
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; }
+
         [Parameter]
         public string ContentClass { get; set; }
 
@@ -38,6 +41,8 @@
         bool IDialog.IsBooted => IsBooted;
 
         protected override string AttachSelector => Attach ?? ".m-application";
+
+        protected override bool IsFullscreen => Fullscreen && MasaBlazor.Breakpoint.SmAndDown;
 
         protected override void SetComponentClass()
         {

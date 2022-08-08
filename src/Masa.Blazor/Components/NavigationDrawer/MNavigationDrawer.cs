@@ -199,6 +199,8 @@ namespace Masa.Blazor
             }
         }
 
+        protected override bool IsFullscreen => MasaBlazor.Breakpoint.SmAndDown;
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -216,10 +218,26 @@ namespace Masa.Blazor
                         IsActive = val;
                     }
                 })
-                .Watch<bool>(nameof(IsActive), () =>
+                .Watch<bool>(nameof(IsActive), (bool val) =>
                 {
+                    // OverlayRef is not null in the next tick.
+                    NextTick(async () =>
+                    {
+                        if (val)
+                        {
+                            await HideScroll();
+                        }
+                        else
+                        {
+                            await ShowScroll();
+                        }
+
+                        StateHasChanged();
+                    });
+
                     //We will remove this when mixins applicationable finished
                     _ = UpdateApplicationAsync();
+
                 })
                 .Watch<bool>(nameof(ExpandOnHover), val => UpdateMiniVariant(val, false))
                 .Watch<bool>(nameof(IsMouseover), val =>
