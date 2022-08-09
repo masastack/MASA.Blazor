@@ -20,12 +20,7 @@ public partial class MMobilePicker<TColumnItem, TColumnItemValue> : BMobilePicke
         CssProvider
             .Apply(cssBuilder => { cssBuilder.Add("m-mobile-picker"); })
             .Apply("toolbar", cssBuilder => { cssBuilder.Add("m-mobile-picker__toolbar"); })
-            .Apply("title", cssBuilder => { cssBuilder.Add("m-mobile-picker__title"); })
-            .Apply("columns", cssBuilder => { cssBuilder.Add("m-mobile-picker__columns"); },
-                styleBuilder => { styleBuilder.AddHeight(WrapHeight); })
-            .Apply("picked", cssBuilder => { cssBuilder.Add("m-mobile-picker__picked"); }, styleBuilder => { styleBuilder.AddHeight(ItemHeight); })
-            .Apply("mask", cssBuilder => { cssBuilder.Add("m-mobile-picker__mask"); },
-                styleBuilder => { styleBuilder.Add(() => $"background-size: 100% {(WrapHeight - ItemPxHeight) / 2}px"); });
+            .Apply("title", cssBuilder => { cssBuilder.Add("m-mobile-picker__title"); });
 
         AbstractProvider
             .Apply(typeof(BMobilePickerColumn<,>), typeof(MMobilePickerColumn<TColumnItem, TColumnItemValue>))
