@@ -53,7 +53,7 @@
             { typeof(BDataTableRow<>), typeof(MDataTableRow<>) },
             { typeof(BDataTableMobileRow<>), typeof(MDataTableMobileRow<>) },
             { typeof(BTreeviewNode<,>), typeof(MTreeviewNode<,>) },
-            { typeof(BMobilePickerColumn<>), typeof(MMobilePickerColumn<>) },
+            { typeof(BMobilePickerColumn<,>), typeof(MMobilePickerColumn<,>) },
         };
 
         public Type Map(Type keyType)

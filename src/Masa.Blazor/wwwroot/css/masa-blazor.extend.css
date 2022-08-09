@@ -622,7 +622,6 @@ input[type=number] {
 }
 
 .m-mobile-picker__column-wrapper {
-    width: 100%;
     transition-timing-function: cubic-bezier(.23,1,.68,1);
 }
 
@@ -642,13 +641,14 @@ input[type=number] {
 
 .m-mobile-picker__picked {
     position: absolute;
+    top: 50%;
+    right: 16px;
+    left: 16px;
     z-index: 2;
+    transform: translateY(-50%);
     pointer-events: none;
-    width: 100%;
-    left: 0;
-    border-top: 1px solid #0000001f;
-    border-bottom: 1px solid #0000001f;
-    transition: .25s border;
+    border-top: 1px solid #ebedf0;
+    border-bottom: 1px solid #ebedf0;
 }
 
 .m-mobile-picker__mask {
@@ -658,4 +658,8 @@ input[type=number] {
     left: 0;
     width: 100%;
     height: 100%;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .4)), linear-gradient(0deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .4));
+    background-repeat: no-repeat;
+    background-position: top,bottom;
+    transform: translateZ(0);
 }

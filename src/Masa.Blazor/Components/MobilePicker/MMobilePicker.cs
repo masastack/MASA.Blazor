@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MMobilePicker<TItem, TItemValue> : BMobilePicker<TItem, TItemValue>
+public partial class MMobilePicker<TColumnItem, TColumnItemValue> : BMobilePicker<TColumnItem, TColumnItemValue>
 {
     [Inject]
     protected I18n I18n { get; set; }
@@ -23,16 +23,12 @@ public partial class MMobilePicker<TItem, TItemValue> : BMobilePicker<TItem, TIt
             .Apply("title", cssBuilder => { cssBuilder.Add("m-mobile-picker__title"); })
             .Apply("columns", cssBuilder => { cssBuilder.Add("m-mobile-picker__columns"); },
                 styleBuilder => { styleBuilder.AddHeight(WrapHeight); })
-            .Apply("picked", cssBuilder => { cssBuilder.Add("m-mobile-picker__picked"); }, styleBuilder =>
-            {
-                styleBuilder.AddHeight(ItemHeight)
-                            .AddTop(ComputedTop);
-            })
+            .Apply("picked", cssBuilder => { cssBuilder.Add("m-mobile-picker__picked"); }, styleBuilder => { styleBuilder.AddHeight(ItemHeight); })
             .Apply("mask", cssBuilder => { cssBuilder.Add("m-mobile-picker__mask"); },
-                styleBuilder => { styleBuilder.Add(() => $"backgroundSize: 100% {(WrapHeight - ItemPxHeight) / 2}px"); });
+                styleBuilder => { styleBuilder.Add(() => $"background-size: 100% {(WrapHeight - ItemPxHeight) / 2}px"); });
 
         AbstractProvider
-            .Apply(typeof(BMobilePickerColumn<>), typeof(MMobilePickerColumn<TItem>))
+            .Apply(typeof(BMobilePickerColumn<,>), typeof(MMobilePickerColumn<TColumnItem, TColumnItemValue>))
             .Apply<BButton, MButton>("cancel", attrs =>
             {
                 attrs[nameof(MButton.Text)] = true;
