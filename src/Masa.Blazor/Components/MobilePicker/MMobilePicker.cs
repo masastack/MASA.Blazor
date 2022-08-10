@@ -23,7 +23,7 @@ public partial class MMobilePicker<TColumnItem, TColumnItemValue> : BMobilePicke
             .Apply("title", cssBuilder => { cssBuilder.Add("m-mobile-picker__title"); });
 
         AbstractProvider
-            .Apply(typeof(BMobilePickerColumn<,>), typeof(MMobilePickerColumn<TColumnItem, TColumnItemValue>))
+            // .Apply(typeof(BMobilePickerColumn<,>), typeof(MMobilePickerColumn<TColumn, TColumnItem, TColumnItemValue>))
             .Apply<BButton, MButton>("cancel", attrs =>
             {
                 attrs[nameof(MButton.Text)] = true;

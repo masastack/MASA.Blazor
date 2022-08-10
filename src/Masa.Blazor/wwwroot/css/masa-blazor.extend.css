@@ -609,7 +609,7 @@ input[type=number] {
     padding: 0 4px;
 }
 
-.m-mobile-picker__columns {
+.m-mobile-picker__view {
     position: relative;
     display: flex;
     width: 100%;

@@ -14,6 +14,6 @@ public class MMobilePickerView<TColumn, TColumnItem, TColumnItemValue> : BMobile
                 styleBuilder => { styleBuilder.Add(() => $"background-size: 100% {(WrapHeight - ItemPxHeight) / 2}px"); });
 
         AbstractProvider
-            .Apply(typeof(BMobilePickerColumn<,>), typeof(MMobilePickerColumn<TColumnItem, TColumnItemValue>));
+            .Apply(typeof(BMobilePickerColumn<,,>), typeof(MMobilePickerColumn<TColumn, TColumnItem, TColumnItemValue>));
     }
 }
