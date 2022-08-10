@@ -72,11 +72,6 @@ public partial class PCron
                 }
                 CronItems[i].CronValue = valueArr[i];
             }
-
-            if (ValueChanged.HasDelegate)
-            {
-                ValueChanged.InvokeAsync(_value);
-            }
         }
 
         return Task.CompletedTask;
@@ -156,6 +151,12 @@ public partial class PCron
             _hasError = true;
             _errorMessage = I18n.T(ex.Message);
         }
+
+        if (ValueChanged.HasDelegate)
+        {
+            ValueChanged.InvokeAsync(_value);
+        }
+
         return Task.CompletedTask;
     }
 }
