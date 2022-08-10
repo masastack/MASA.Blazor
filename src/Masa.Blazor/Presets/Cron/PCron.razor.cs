@@ -58,7 +58,7 @@ public partial class PCron
         await base.OnInitializedAsync();
     }
 
-    private Task OnValueChanged()
+    private void OnValueChanged()
     {
         if (CronExpression.IsValidExpression(_value))
         {
@@ -68,13 +68,11 @@ public partial class PCron
             {
                 if (cronItemsCount < i + 1)
                 {
-                    return Task.CompletedTask;
+                    return;
                 }
                 CronItems[i].CronValue = valueArr[i];
             }
         }
-
-        return Task.CompletedTask;
     }
 
     private Task CronValueHasChanged(CronItemModel cronItem)
