@@ -82,7 +82,7 @@ dotnet add package Masa.Blazor
 
 ####  Blazor Server
 
-在 `Pages/_Host.cshtml` 中引入资源文件：
+在 `Pages/_Layout.cshtml` 中引入资源文件：
 
 ```html
 <!-- masa blazor css style -->
