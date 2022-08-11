@@ -11,9 +11,9 @@ public partial class MMobilePickerColumn<TColumn, TColumnItem, TColumnItemValue>
             .Apply("column-wrapper", cssBuilder => { cssBuilder.Add("m-mobile-picker__column-wrapper"); },
                 styleBuilder =>
                 {
-                    styleBuilder.Add(() => $"transform: translate3d(0, {_offset + BaseOffset}px, 0)")
-                                .Add(() => $"transition-duration: {_duration}ms")
-                                .Add(() => $"transition-property: {(_duration > 0 ? "all" : "none")}");
+                    styleBuilder.Add(() => $"transform: translate3d(0, {Offset + BaseOffset}px, 0)")
+                                .Add(() => $"transition-duration: {Duration}ms")
+                                .Add(() => $"transition-property: {(Duration > 0 ? "all" : "none")}");
                 })
             .Apply("column-item",
                 cssBuilder =>
