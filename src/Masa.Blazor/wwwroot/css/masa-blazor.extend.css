@@ -585,4 +585,25 @@ input[type=number] {
 }
 .m-cron .m-radio {
     padding-top: 8px;
-} 
+}
+
+/* infinite scroll */
+
+.m-infinite-scroll {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+
+.theme--light.m-application .m-infinite-scroll {
+    color: rgba(0, 0, 0, .38);
+}
+
+.theme--dark.m-application .m-infinite-scroll {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.m-infinite-scroll *:last-child {
+    margin-left: 4px;
+}
