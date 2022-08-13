@@ -1,0 +1,274 @@
+﻿@page "/app/user/edit"
+@page "/app/user/edit/{Id}"
+@inherits ProCompontentBase
+
+<MCard>
+    <MCardText Class="px-6 pb-6">
+        <MTabs @bind-Value="tab" HideSlider Height=10 Color="sample-green">
+            <MTab Value="@("Account")">
+                <MIcon Size=16 Color="@(tab=="Account"?"sample-green":"fill")">mdi-circle</MIcon>
+                <span class="ml-2 text-btn @(tab=="Account"?"neutral--text":"")">Account</span>
+            </MTab>
+            <MTab Class="ml-2" Value="@("Information")">
+                <MIcon Size=16 Color="@(tab=="Information"?"sample-green":"fill")">mdi-circle</MIcon>
+                <span class="ml-2 text-btn @(tab=="Information"?"neutral--text":"")">Information</span>
+            </MTab>
+            <MTab Class="ml-2" Value="@("Social")">
+                <MIcon Size=16 Color="@(tab=="Social"?"sample-green":"fill")">mdi-circle</MIcon>
+                <span class="ml-2 text-btn @(tab=="Social"?"neutral--text":"")">Social</span>
+            </MTab>
+        </MTabs>
+        <MTabsItems @bind-Value="tab" Class="mt-4">
+            <MTabItem Value="@("Account")">
+                <div class="d-flex block-center mt-3">
+                    @if (string.IsNullOrEmpty(UserData.HeadImg))
+                    {
+                        string color = UserData.Color;
+                        <MAvatar Size="120" Color="@($"{color}-lighten-5")">
+                            <span class="@($"{color}--text text-h3")">@UserData.SampleName</span>
+                        </MAvatar>
+                    }
+                    else
+                    {
+                        <MAvatar Size="120">
+                            <img src="@UserData.HeadImg" />
+                        </MAvatar>
+                    }
+                    <div Class="ml-6">
+                        <h5 class="mb-6">@UserData.FullName</h5>
+                        <MButton Color="primary" MinWidth=80 Height=32 Class="rounded-pill"> Update </MButton>
+                        <MButton Outlined MinWidth=80 Height=32 Class="ml-6 text-btn rounded-pill"> Remove </MButton>
+                    </div>
+                </div>
+                <MRow Class="my-3">
+                    <MCol Md=4 Sm=12>
+                        <MTextField @bind-Value="UserData.UserName" Color="primary" Label="UserName"
+                            HideDetails="@("auto")" Outlined />
+                    </MCol>
+                    <MCol Md=4 Sm=12>
+                        <MTextField @bind-Value="UserData.FullName" Color="primary" Label="FullName"
+                            HideDetails="@("auto")" Outlined />
+                    </MCol>
+                    <MCol Md=4 Sm=12>
+                        <MTextField @bind-Value="UserData.Email" Color="primary" Label="Email" HideDetails="@("auto")"
+                            Outlined />
+                    </MCol>
+                </MRow>
+                <MRow>
+                    <MCol Md=4 Sm=12>
+                        <MSelect @bind-Value="UserData.Status" Color="primary" HideDetails="@("auto")" Outlined
+                            Items="@UserService.GetStatusList()" ItemText="u => u" ItemValue="u => u" Label="Status">
+                        </MSelect>
+                    </MCol>
+                    <MCol Md=4 Sm=12>
+                        <MSelect @bind-Value="UserData.Role" Color="primary" HideDetails="@("auto")" Outlined
+                            Items="@UserService.GetRoleList()" ItemText="u => u" ItemValue="u => u" Label="Role">
+                        </MSelect>
+                    </MCol>
+                    <MCol Md=4 Sm=12>
+                        <MTextField @bind-Value="UserData.Company" Color="primary" Label="Company"
+                            HideDetails="@("auto")" Outlined />
+                    </MCol>
+                </MRow>
+
+                <div class="mt-12 mb-3">
+                    <MIcon Size=20 Color="sample-green" Class="mt-n1">mdi-lock-open-outline</MIcon>
+                    <span class="ml-1 text-h6">Permission</span>
+                </div>
+                <MDataTable HideDefaultFooter Headers="_headers" TItem="PermissionDto" Items="UserData.Permissions"
+                    ItemKey="r=>r.Module" Class="table-header-fill table-border-solid">
+                    <HeaderColContent Context="header">
+                        <span class="text-body neutral-lighten-1--text">@header.Text</span>
+                    </HeaderColContent>
+
+                    <ItemColContent>
+                        @switch (context.Header.Value)
+                        {
+                            case nameof(PermissionDto.Module):
+                                <span class="text-body neutral-lighten-2--text">@context.Value</span>
+                                break;
+                            case nameof(PermissionDto.Read):
+                                <MCheckbox Class="mt-0" Color="primary" @bind-Value="context.Item.Read"></MCheckbox>
+                                break;
+                            case nameof(PermissionDto.Write):
+                                <MCheckbox Class="mt-0" Color="primary" @bind-Value="context.Item.Write"></MCheckbox>
+                                break;
+                            case nameof(PermissionDto.Create):
+                                <MCheckbox Class="mt-0" Color="primary" @bind-Value="context.Item.Create"></MCheckbox>
+                                break;
+                            case nameof(PermissionDto.Delete):
+                                <MCheckbox Class="mt-0" Color="primary" @bind-Value="context.Item.Delete"></MCheckbox>
+                                break;
+                            default:
+                                @context.Value
+                                break;
+                        }
+                    </ItemColContent>
+                </MDataTable>
+            </MTabItem>
+
+            <MTabItem Value="@("Information")">
+                <div class="mt-3">
+                    <MIcon Size=20 Color="sample-green" Class="mt-n1">far fa-user</MIcon>
+                    <span class="ml-1 text-h6">Personal Information</span>
+                </div>
+
+                <MRow Class="mt-3">
+                    <MCol Md=4 Sm=12>
+                        <MMenu CloseOnContentClick="false" NudgeRight="40" Transition="scale-transition" OffsetY
+                            MinWidth="@("auto")" @bind-Value="_birthDateMenu">
+                            <ActivatorContent Context="menuContext">
+                                <MTextField @bind-Value=UserData.BirthDate Label="BirthDate" Color="primary" Readonly
+                                    HideDetails="@("auto")" Outlined @attributes="menuContext.Attrs"></MTextField>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <MDatePicker Class="task-datepicker" @bind-Value=UserData.BirthDate
+                                    OnInput="()=>_birthDateMenu=false"></MDatePicker>
+                            </ChildContent>
+                        </MMenu>
+                    </MCol>
+                    <MCol Md=4 Sm=12>
+                        <MTextField @bind-Value="UserData.Mobile" Label="Mobile" Color="primary" HideDetails="@("auto")"
+                            Outlined />
+                    </MCol>
+                    <MCol Md=4 Sm=12>
+                        <MTextField @bind-Value="UserData.Website" Label="Website" Color="primary"
+                            HideDetails="@("auto")" Outlined />
+                    </MCol>
+                </MRow>
+
+                <MRow Class="mt-3">
+                    <MCol Md=4 Sm=12>
+                        <MSelect @bind-Value="UserData.Language" Color="primary" Outlined HideDetails="@("auto")"
+                            Items="@UserService.GetLanguageList()" ItemText="u => u" ItemValue="u => u"
+                            Label="Language">
+                        </MSelect>
+                    </MCol>
+                    <MCol Md=4 Sm=12>
+                        <span class="text-btn">Gender</span>
+                        <MRadioGroup @bind-Value="UserData.Gender" HideDetails="@("auto")" Color="primary" Row
+                            Class="mt-1">
+                            <MRadio Color="primary" Label="Male" Value="@("Male")"></MRadio>
+                            <MRadio Color="primary" Label="Female" Value="@("Female")"></MRadio>
+                        </MRadioGroup>
+                    </MCol>
+                    <MCol Md=4 Sm=12>
+                        <span class="text-btn">Contact Options</span>
+                        <div class="d-flex mt-n2">
+                            <MCheckbox Label="Email" HideDetails="@("auto")" Color="primary"></MCheckbox>
+                            <MCheckbox Label="Message" HideDetails="@("auto")" Color="primary" Class="ml-2"></MCheckbox>
+                            <MCheckbox Label="Phone" HideDetails="@("auto")" Color="primary" Class="ml-2"></MCheckbox>
+                        </div>
+
+                    </MCol>
+                </MRow>
+
+                <div class="mt-12">
+                    <MIcon Size=20 Color="sample-green" Class="mt-n1">mdi-map-marker-outline</MIcon>
+                    <span class="text-h6">Address</span>
+                    <MRow Class="mt-3">
+                        <MCol Md=4 Sm=12>
+                            <MTextField @bind-Value="UserData.Address1" Label="Address Line 1" Color="primary"
+                                HideDetails="@("auto")" Outlined />
+                        </MCol>
+                        <MCol Md=4 Sm=12>
+                            <MTextField @bind-Value="UserData.Address2" Label="Address Line 2" Color="primary"
+                                HideDetails="@("auto")" Outlined />
+                        </MCol>
+                        <MCol Md=4 Sm=12>
+                            <MTextField @bind-Value="UserData.Address3" Label="Address Line 3" Color="primary"
+                                HideDetails="@("auto")" Outlined />
+                        </MCol>
+                    </MRow>
+                    <MRow Class="mt-3">
+                        <MCol Md=4 Sm=12>
+                            <MTextField @bind-Value="UserData.City" Label="City" Color="primary" HideDetails="@("auto")"
+                                Outlined />
+                        </MCol>
+                        <MCol Md=4 Sm=12>
+                            <MTextField @bind-Value="UserData.State" Label="State" Color="primary"
+                                HideDetails="@("auto")" Outlined />
+                        </MCol>
+                        <MCol Md=4 Sm=12>
+                            <MTextField @bind-Value="UserData.Country" Label="Country" Color="primary"
+                                HideDetails="@("auto")" Outlined />
+                        </MCol>
+                    </MRow>
+                </div>
+            </MTabItem>
+
+            <MTabItem Value="@("Social")">
+                <MRow class="mt-1">
+                    <MCol Md=4 Sm=12>
+                        <MTextField @bind-Value="UserData.Twitter" Label="Twitter" Color="primary"
+                            HideDetails="@("auto")" Outlined PrependInnerIcon="fab fa-twitter" />
+                    </MCol>
+                    <MCol Md=4 Sm=12>
+                        <MTextField @bind-Value="UserData.Facebook" Label="Facebook" Color="primary"
+                            HideDetails="@("auto")" Outlined PrependInnerIcon="mdi-facebook" />
+                    </MCol>
+                    <MCol Md=4 Sm=12>
+                        <MTextField @bind-Value="UserData.Instagram" Label="Instagram" Color="primary"
+                            HideDetails="@("auto")" Outlined PrependInnerIcon="fab fa-instagram" />
+                    </MCol>
+                </MRow>
+                <MRow Class="mt-3">
+                    <MCol Md=4 Sm=12>
+                        <MTextField @bind-Value="UserData.Github" Label="Github" Color="primary" HideDetails="@("auto")"
+                            Outlined PrependInnerIcon="fab fa-github" />
+                    </MCol>
+                    <MCol Md=4 Sm=12>
+                        <MTextField @bind-Value="UserData.Codepen" Label="Codepen" Color="primary"
+                            HideDetails="@("auto")" Outlined PrependInnerIcon="fab fa-codepen" />
+                    </MCol>
+                    <MCol Md=4 Sm=12>
+                        <MTextField @bind-Value="UserData.Slack" Label="Slack" Color="primary" HideDetails="@("auto")"
+                            Outlined PrependInnerIcon="fab fa-slack" />
+                    </MCol>
+                </MRow>
+            </MTabItem>
+        </MTabsItems>
+
+        <div class="mt-10 d-flex">
+            <MSpacer></MSpacer>
+            <MButton MinWidth=80 Height=40 Outlined Class="text-btn rounded-pill"> Reset </MButton>
+            <MButton MinWidth=80 Height=40 Color="primary" Class="ml-6 rounded-pill"> Save Changes </MButton>
+        </div>
+    </MCardText>
+</MCard>
+
+@code {
+    private UserDto? _userData;
+    private StringNumber? tab;
+    private bool _birthDateMenu;
+
+    [Parameter]
+    public string? Id { get; set; }
+
+    [AllowNull]
+    public UserDto UserData
+    {
+        get
+        {
+            return _userData ?? (_userData = UserService.GetList().First());
+        }
+        set
+        {
+            _userData = value;
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        UserData = UserService.GetList().FirstOrDefault(u => u.Id == Id);
+    }
+
+    private List<DataTableHeader<PermissionDto>> _headers = new List<DataTableHeader<PermissionDto>>
+{
+new (){ Text= "MODULE", Sortable= false, Value= nameof(PermissionDto.Module)},
+new (){ Text= "READ", Sortable= false, Value= nameof(PermissionDto.Read),Align="center"},
+new (){ Text= "WRITE", Sortable= false, Value= nameof(PermissionDto.Write),Align="center"},
+new (){ Text= "CREATE", Sortable= false, Value= nameof(PermissionDto.Create),Align="center"},
+new (){ Text= "DELETE", Sortable= false, Value= nameof(PermissionDto.Delete),Align="center"}
+};
+}

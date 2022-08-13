@@ -1,0 +1,45 @@
+﻿<MNavigationDrawer Absolute Temporary Right Value="Show" ValueChanged=ShowChanged Width="420" class="pa-3">
+    <MRow>
+        <MCol Md="@("auto")" Class="mr-auto">Send Invoice</MCol>
+        <MCol Md="@("auto")"><MIcon OnClick="()=>{ ShowChanged.InvokeAsync(false);}">mdi-close</MIcon></MCol>
+    </MRow>
+    <MRow NoGutters class="mt-4">
+        <MCol Md="12">
+            <MTextField TValue="string" Label="From"
+                        Outlined Dense></MTextField>
+        </MCol>
+        <MCol Md="12">
+            <MTextField TValue="string" Label="To"
+                        Outlined Dense></MTextField>
+        </MCol>
+        <MCol Md="12">
+            <MTextField TValue="string" Label="Subject"
+                        Outlined Dense></MTextField>
+        </MCol>
+        <MCol Md="12">
+            <MTextarea Outlined Label="Message">
+            </MTextarea>
+        </MCol>
+        <MCol Md="12">
+            <MChip Color="deep-purple accent-4" XSmall
+                   Outlined>
+                <MIcon Left Dense>
+                    mdi-link
+                </MIcon>
+                Invoice Attached
+            </MChip>
+        </MCol>
+        <MCol Md="12" class="mt-3">
+            <MButton class="primary">Send</MButton>
+            <MButton Outlined>Cancel</MButton>
+        </MCol>
+    </MRow>
+</MNavigationDrawer>
+
+@code {
+    [Parameter]
+    public bool Show { get; set; } = false;
+
+    [Parameter]
+    public EventCallback<bool> ShowChanged { get; set; }
+}

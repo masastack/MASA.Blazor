@@ -1,0 +1,63 @@
+﻿@inherits ProCompontentBase
+@inject NavigationManager NavigationManager
+@inject NavHelper NavHelper
+@inject GlobalConfig GlobalConfig
+@implements IDisposable
+
+@{
+    var items = GetBreadcrumbItems();
+}
+@if (items.Count > 0)
+{
+    <div class="d-flex block-center pb-6 pt-1">
+        <MBreadcrumbs @key="@(Guid.NewGuid())" Linkage Class="pa-0">
+            <DividerContent>
+                <div class="mx-2" style="height:16px;width:0.5px;border: 0.5px solid #A3AED0;" />
+            </DividerContent>
+            <ChildContent>
+                <MBreadcrumbsItem Href="javascript:history.back(-1)">
+                    <MIcon Size=20 Color="neutral-lighten-2">mdi-arrow-left</MIcon>
+                </MBreadcrumbsItem>
+                @for (var i = 0; i < items.Count; i++)
+                {
+                    var item = items[i];
+                    var isLast = i == items.Count - 1;
+                    <MBreadcrumbsItem Href="@item.Href">
+                        <span class="@(isLast ? "text-subtitle2 neutral-lighten-2--text" : "text-body2")">@item.Text</span>
+                    </MBreadcrumbsItem>
+                }
+            </ChildContent>
+        </MBreadcrumbs>
+    </div>
+}
+
+@code {
+    protected override void OnInitialized()
+    {
+       GlobalConfig.OnLanguageChanged += base.StateHasChanged;
+       GlobalConfig.OnCurrentNavChanged += base.StateHasChanged;
+    }
+
+    private List<BreadcrumbItem> GetBreadcrumbItems()
+    {
+        var items = new List<BreadcrumbItem>();
+        var currentNav = NavHelper.SameLevelNavs.FirstOrDefault(n => n.Href is not null && NavigationManager.Uri.Contains(n.Href));
+        if (currentNav is not null)
+        {
+            if (currentNav.ParentId != 0)
+            {
+                var parentNav = NavHelper.SameLevelNavs.First(n => n.Id == currentNav.ParentId);
+                items.Add(new BreadcrumbItem { Text = T(parentNav.Title), Href = parentNav.Href ?? parentNav.Children?.FirstOrDefault()?.Href ?? "" });
+            }
+            items.Add(new BreadcrumbItem { Text = T(currentNav.Title), Href = currentNav.Href });
+            items.Last().Href = currentNav.Href;
+        }
+        return items;
+    }
+
+    public void Dispose()
+    {
+        GlobalConfig.OnLanguageChanged -= base.StateHasChanged;
+        GlobalConfig.OnCurrentNavChanged -= base.StateHasChanged;
+    }
+}

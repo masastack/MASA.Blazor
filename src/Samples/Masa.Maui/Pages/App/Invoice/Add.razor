@@ -1,0 +1,310 @@
+﻿@page "/app/invoice/add"
+@inherits ProCompontentBase
+
+<MRow>
+    <MCol Md=9 Sm=12>
+        <MCard>
+            <MCardText class="px-8 py-6">
+                <div class="d-flex">
+                    <div class="mr-auto">
+                        <MIcon Color=purple>fas fa-seedling</MIcon>
+                        <span class="ml-4 black--text">Masa Blazor Pro</span>
+                        <h4 class="mt-6">Office 149, 450 South Brand Brooklyn</h4>
+                        <h4 class="mt-2">San Diego County, CA 91905, USA</h4>
+                        <h4 class="mt-2">+1 (123) 456 7891, +44 (876) 543 2198</h4>
+                    </div>
+                    <div>
+                        <MTextField Value="@($"#{InvoiceRecord.Id}")" Disabled Dense Label="Invoice"
+                            Placeholder="Invoice" Outlined TValue="string" />
+                        <MMenu CloseOnContentClick="true" NudgeRight="40" Transition="scale-transition" OffsetY
+                            MinWidth="@("auto")">
+                            <ActivatorContent>
+                                <MTextField Label="Date" Dense @bind-Value="InvoiceRecord.Date" Outlined
+                                    Placeholder="Birth date" TValue="DateOnly" Readonly @attributes="context.Attrs">
+                                </MTextField>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <MDatePicker @bind-Value="InvoiceRecord.Date" TValue="DateOnly"></MDatePicker>
+                            </ChildContent>
+                        </MMenu>
+                        <MMenu CloseOnContentClick="true" NudgeRight="40" Transition="scale-transition" OffsetY
+                            MinWidth="@("auto")">
+                            <ActivatorContent>
+                                <MTextField Label="Due Date" Dense @bind-Value="InvoiceRecord.DueDate" Outlined
+                                    Placeholder="Birth date" TValue="DateOnly" Readonly @attributes="context.Attrs">
+                                </MTextField>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <MDatePicker @bind-Value="InvoiceRecord.DueDate" TValue="DateOnly"></MDatePicker>
+                            </ChildContent>
+                        </MMenu>
+                    </div>
+                </div>
+            </MCardText>
+            <MDivider Class="mb-4"></MDivider>
+            <MCardText class="px-8 py-6">
+                <MRow>
+                    <MCol Md=6 Sm=12>
+                        @if (IsEdit is false)
+                        {
+                            <MSelect Items=_invoices ItemValue="u => u" Dense Label="Invoice To" ItemText="u => u" Outlined
+                            @bind-Value=_invoiceTo></MSelect>
+                        }
+                        else
+                        {
+                            <h3 class="mb-5 mt-n2 black--text">Invoice To:</h3>
+                        }
+                        @if (IsEdit || _invoiceTo != "")
+                        {
+                            <h3 class="mb-0 black--text">@(InvoiceRecord.Client?.FullName??"Lori Wells")</h3>
+                            <h3 class="mb-0 body-1">Jenkins-Rosales Inc</h3>
+                            <h3 class="mb-0 body-1">075 Smith Views, Colombia</h3>
+                            <h3 class="mb-0 body-1">@(InvoiceRecord.Client?.Mobile??"(895) 401-4255")</h3>
+                            <h3 class="mb-0 body-1">@(InvoiceRecord.Client?.Email??"calvin07@joseph-edwards.org")</h3>
+                        }
+                    </MCol>
+                    <MCol Md=6 Sm=12 Class="d-flex mt-n8">
+                        <MList Class="ml-auto" Width=280>
+                            <MListItem>
+                                <h3 class="black--text">Payment Details:</h3>
+                            </MListItem>
+                            <MListItem Class="mt-n2">
+                                <MListItemContent Style="max-width:110px">
+                                    <h3>Total Due:</h3>
+                                </MListItemContent>
+                                <MListItemAction Class="ml-0">
+                                    $12,110.55
+                                </MListItemAction>
+                            </MListItem>
+                            <MListItem Class="mt-n6">
+                                <MListItemContent Style="max-width:110px">
+                                    <h3>Bank name:</h3>
+                                </MListItemContent>
+                                <MListItemAction Class="ml-0">
+                                    American Bank
+                                </MListItemAction>
+                            </MListItem>
+                            <MListItem Class="mt-n6">
+                                <MListItemContent Style="max-width:110px">
+                                    <h3>Country:</h3>
+                                </MListItemContent>
+                                <MListItemAction Class="ml-0">
+                                    United States
+                                </MListItemAction>
+                            </MListItem>
+                            <MListItem Class="mt-n6">
+                                <MListItemContent Style="max-width:110px">
+                                    <h3>IBAN:</h3>
+                                </MListItemContent>
+                                <MListItemAction Class="ml-0">
+                                    ETD95476213874685
+                                </MListItemAction>
+                            </MListItem>
+                            <MListItem Class="mt-n6">
+                                <MListItemContent Style="max-width:110px">
+                                    <h3>SWIFT code:</h3>
+                                </MListItemContent>
+                                <MListItemAction Class="ml-0">
+                                    BR91905
+                                </MListItemAction>
+                            </MListItem>
+                        </MList>
+                    </MCol>
+                </MRow>
+
+                <div class="grey-light pa-4">
+                    @foreach (var bill in _bills)
+                    {
+                        <div class="d-flex mt-8">
+                            <div class="border-solid pa-5 max-width">
+                                <MRow Class="max-width">
+                                    <MCol Md=5 Sm=12>
+                                        <MSelect Items=InvoiceService.GetBillList() ItemValue="u => u"
+                                        ItemText="u => u.Type" TItemValue="BillDto" TItem="BillDto" TValue="BillDto"
+                                        Dense Label="Item" Outlined OnChange="newValue=>OnBillChange(bill,newValue)">
+                                        </MSelect>
+                                    </MCol>
+
+                                    <MCol Md=3 Sm=12>
+                                        <MTextField Label="Cost" Dense @bind-Value="bill.Cost" Outlined></MTextField>
+                                    </MCol>
+
+                                    <MCol Md=2 Sm=12>
+                                        <MTextField Label="Qty" Dense @bind-Value="bill.Qty" Outlined></MTextField>
+                                    </MCol>
+
+                                    <MCol Md=2 Sm=12>
+                                        $@bill.Price
+                                    </MCol>
+                                </MRow>
+                                <MRow Class="mb-n10 mt-n7 max-width">
+                                    <MCol Md=5 Sm=12>
+                                        <MTextarea Height=70 Label="Remark" Dense @bind-Value="bill.Remark" Outlined>
+                                        </MTextarea>
+                                    </MCol>
+                                    <MCol Md=7 Sm=12>
+                                        Discount: 0% 0% 0%
+                                    </MCol>
+                                </MRow>
+                            </div>
+                            <div class="border-solid text-center" style="width:20px">
+                                <MIcon Small OnClick="()=>_bills.Remove(bill)">fas fa-times</MIcon>
+                                <div style="height:75%"></div>
+                                <MMenu NudgeRight="40" CloseOnClick="false" CloseOnContentClick="false"
+                                @bind-Value="@bill.ShowMenu" Transition="scale-transition" Left Top OffsetY
+                                MinWidth="@("auto")">
+                                    <ActivatorContent>
+                                        <MIcon @attributes="context.Attrs" Small Class="mt-auto">fas fa-cog</MIcon>
+                                    </ActivatorContent>
+                                    <ChildContent>
+                                        <MCard>
+                                            <MCardText>
+                                                <MTextField Style="width:230px" Dense Label="Discount(%)" Outlined
+                                                @bind-Value="bill.Discount" />
+                                                <div class="d-flex">
+                                                    <div style="width:100px">
+                                                        <MSelect @bind-Value="bill.Tax1" Dense Label="Tax 1" Outlined
+                                                        Items="_taxs" ItemText="u => ConvertText(u)" ItemValue="u=>u" />
+                                                    </div>
+                                                    <div class="ml-auto" style="width:100px">
+                                                        <MSelect @bind-Value="bill.Tax2" Dense Label="Tax 2" Outlined
+                                                        Items="_taxs" ItemText="u => ConvertText(u)" ItemValue="u=>u" />
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <MButton Class="pro-primary--text mr-auto" Outlined
+                                                    OnClick="()=>bill.ShowMenu=false">Apply</MButton>
+                                                    <MButton OnClick="()=>bill.ShowMenu=false" Outlined
+                                                    Class="blue-grey--text ml-auto">Cancel</MButton>
+                                                </div>
+                                            </MCardText>
+                                        </MCard>
+                                    </ChildContent>
+                                </MMenu>
+                            </div>
+                        </div>
+
+                    }
+                    <MButton Small Class="white--text mt-4" Color="#7367f0" OnClick="()=>_bills.Add(new BillDto())">Add
+                        Item</MButton>
+                </div>
+
+                <MRow Class="mt-6">
+                    <MCol Md="6" Align=AlignTypes.Center>
+                        <MTextField Label="Salesperson" TValue="string" Dense Outlined></MTextField>
+                    </MCol>
+                    <MCol Md="6" Class="d-flex justify-end">
+                        <div style="width:100%;max-width:12rem;">
+                            <div class="d-flex justify-space-between mb-2">
+                                <h3>Subtotal:</h3>
+                                <span class="font-weight-bold">$1800</span>
+                            </div>
+                            <div class="d-flex justify-space-between mb-2">
+                                <h3>Discount:</h3>
+                                <span class="font-weight-bold">$28</span>
+                            </div>
+                            <div class="d-flex justify-space-between mb-2">
+                                <h3>Tax:</h3>
+                                <span class="font-weight-bold">21%</span>
+                            </div>
+                            <MDivider Class="mt-2 mb-2" />
+                            <div class="d-flex justify-space-between">
+                                <h3>Total:</h3>
+                                <span class="font-weight-bold">$1690</span>
+                            </div>
+                        </div>
+                    </MCol>
+                </MRow>
+
+
+            </MCardText>
+            <MDivider Class="mb-4"></MDivider>
+            <MCardText class="px-8 pt-1">
+                <MTextarea Class="mb-n6" Height=70 Label="Note" @bind-Value="_note" Dense Outlined></MTextarea>
+            </MCardText>
+        </MCard>
+    </MCol>
+    <MCol Md=3 Sm=12>
+        <MCard>
+            <MCardText>
+                <div>
+                    <MButton Class="white--text max-width" Color="#7367f0">Send Invoice</MButton>
+                </div>
+                <div class="my-2">
+                    <MButton Outlined Class="pro-primary--text max-width">Preview</MButton>
+                </div>
+                <div>
+                    <MButton Outlined Class="pro-primary--text max-width">Save</MButton>
+                </div>
+                @if (IsEdit)
+                {
+                    <div class="mt-2">
+                        <MButton Block class="success" OnClick="()=>{ _showAddPayment = true; }">Add Payment</MButton>
+                    </div>
+                }
+
+            </MCardText>
+        </MCard>
+
+        <div class="mt-4">
+            <MSelect BackgroundColor="white" Items=_payments ItemValue="u => u" Dense Label="Accept Payment Via"
+                ItemText="u => u" Outlined @bind-Value=_payment></MSelect>
+            <MSwitch Value=true Class="mt-n3" Color="#7367f0" Label="Payment Terms"></MSwitch>
+            <MSwitch Value=true Class="mt-n3" Color="#7367f0" Label="Client Notes"></MSwitch>
+            <MSwitch Class="mt-n3" Color="#7367f0" Label="Payment Stub"></MSwitch>
+        </div>
+    </MCol>
+</MRow>
+
+<Masa.Maui.Pages.App.Invoice.Components.AddPayment @bind="_showAddPayment" />
+
+ @code{
+        protected bool _showAddPayment;
+        private string _invoiceTo = "";
+        private readonly List<string> _invoices = new()
+        {
+            "Hall-Robbins PLC",
+            " Mccann LLC and Sons",
+            "Leonard-Garcia and Sons",
+            "Smith, Miller and Henry LLC",
+            "Garcia-Cameron and Sons"
+        };
+        private string _payment = "";
+        private List<string> _payments = new()
+        {
+            "Bank Account",
+            "PayPal",
+            "UPI Transfer"
+        };
+        private readonly List<int> _taxs = new()
+        {
+            0,
+            1,
+            10,
+            14,
+            18
+        };
+        private List<BillDto> _bills = new()
+        {
+            new BillDto()
+        };
+        private string _note = "It was a pleasure working with you and your team. We hope you will Favorite us in mind for future freelance projects. Thank You!";
+
+        [Parameter]
+        public int? Id { get; set; }
+
+        public bool IsEdit => Id is not null;
+
+        public InvoiceRecordDto InvoiceRecord = InvoiceService.GetInvoiceRecordList().First();
+
+        public void OnBillChange(BillDto oldValue, BillDto newValue)
+        {
+            oldValue.Set(newValue);
+        }
+
+        private static string ConvertText(int value)
+        {
+            return $"{value}%";
+        }
+
+            }

@@ -1,0 +1,203 @@
+[
+  {
+    "Id": 1,
+    "Title": "Dashboard",
+    "Icon": "mdi-trending-up",
+    "Children": [
+      {
+        "Id": 2,
+        "Title": "eCommerce",
+        "Icon": "mdi-circle",
+        "Href": "dashboard/ecommerce"
+      },
+      {
+        "Id": 3,
+        "Hide": true,
+        "Title": "Analytics",
+        "Icon": "mdi-circle",
+        "Href": "dashboard/analytics"
+      }
+    ]
+  },
+  {
+    "Id": 4,
+    "Title": "eCommerce",
+    "Icon": "mdi-cart-outline",
+    "Children": [
+      {
+        "Id": 5,
+        "Title": "Shop",
+        "Icon": "mdi-circle",
+        "Href": "app/ecommerce/shop"
+      },
+      {
+        "Id": 6,
+        "Title": "Details",
+        "Icon": "mdi-circle",
+        "Href": "app/ecommerce/details"
+      },
+      {
+        "Id": 7,
+        "Title": "Order",
+        "Icon": "mdi-circle",
+        "Href": "app/ecommerce/order"
+      }
+    ]
+  },
+  {
+    "Id": 8,
+    "Title": "Todo",
+    "Icon": "mdi-calendar-check-outline",
+    "Href": "app/todo"
+  },
+  {
+    "Id": 9,
+    "Title": "Invoice",
+    "Icon": "mdi-content-paste",
+    "Hide": true,
+    "Children": [
+      {
+        "Id": 10,
+        "Title": "List",
+        "Icon": "mdi-circle",
+        "Href": "app/invoice/list"
+      },
+      {
+        "Id": 11,
+        "Title": "Preview",
+        "Icon": "mdi-circle",
+        "Href": "app/invoice/preview"
+      },
+      {
+        "Id": 12,
+        "Title": "Edit",
+        "Icon": "mdi-circle",
+        "Href": "app/invoice/edit"
+      },
+      {
+        "Id": 13,
+        "Title": "Add",
+        "Icon": "mdi-circle",
+        "Href": "app/invoice/add"
+      }
+    ]
+  },
+  {
+    "Id": 14,
+    "Title": "User",
+    "Icon": "mdi-account-outline",
+    "Children": [
+      {
+        "Id": 15,
+        "Title": "List",
+        "Icon": "mdi-circle",
+        "Href": "app/user/list"
+      },
+      {
+        "Id": 16,
+        "Title": "View",
+        "Icon": "mdi-circle",
+        "Href": "app/user/view"
+      },
+      {
+        "Id": 17,
+        "Title": "Edit",
+        "Icon": "mdi-circle",
+        "Href": "app/user/edit"
+      }
+    ]
+  },
+  {
+    "Id": 18,
+    "Title": "Auth",
+    "Icon": "mdi-file-outline",
+    "Children": [
+      {
+        "Id": 19,
+        "Title": "Login v1",
+        "Icon": "mdi-circle",
+        "Href": "pages/authentication/login-v1"
+      },
+      {
+        "Id": 20,
+        "Title": "Login v2",
+        "Icon": "mdi-circle",
+        "Href": "pages/authentication/login-v2"
+      },
+      {
+        "Id": 21,
+        "Hide": true,
+        "Title": "Register v1",
+        "Icon": "mdi-circle",
+        "Href": "pages/authentication/register-v1"
+      },
+      {
+        "Id": 22,
+        "Hide": true,
+        "Title": "Register v2",
+        "Icon": "mdi-circle",
+        "Href": "pages/authentication/register-v2"
+      },
+      {
+        "Id": 23,
+        "Hide": true,
+        "Title": "Forgot Password v1",
+        "Icon": "mdi-circle",
+        "Href": "pages/authentication/forgot-password-v1"
+      },
+      {
+        "Id": 24,
+        "Hide": true,
+        "Title": "Forgot Password v2",
+        "Icon": "mdi-circle",
+        "Href": "pages/authentication/forgot-password-v2"
+      },
+      {
+        "Id": 25,
+        "Hide": true,
+        "Title": "Reset Password v1",
+        "Icon": "mdi-circle",
+        "Href": "pages/authentication/reset-password-v1"
+      },
+      {
+        "Id": 26,
+        "Hide": true,
+        "Title": "Reset Password v2",
+        "Icon": "mdi-circle",
+        "Href": "pages/authentication/reset-password-v2"
+      }
+    ]
+  },
+  {
+    "Id": 27,
+    "Title": "Others",
+    "Icon": "mdi-dots-horizontal",
+    "Children": [
+      {
+        "Id": 28,
+        "Hide": true,
+        "Title": "Account Settings",
+        "Icon": "mdi-circle",
+        "Href": "pages/others/account-settings"
+      },
+      {
+        "Id": 29,
+        "Title": "500",
+        "Icon": "mdi-circle",
+        "Href": "pages/others/500"
+      },
+      {
+        "Id": 30,
+        "Title": "401",
+        "Icon": "mdi-circle",
+        "Href": "pages/others/401"
+      },
+      {
+        "Id": 31,
+        "Title": "404",
+        "Icon": "mdi-circle",
+        "Href": "pages/others/404"
+      }
+    ]
+  }
+]

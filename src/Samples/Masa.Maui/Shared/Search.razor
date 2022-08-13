@@ -1,0 +1,69 @@
+﻿@inherits ProCompontentBase
+@inject NavHelper NavHelper
+
+@{
+    var navs = GetNavs(_search);
+}
+<MMenu OffsetY Bottom Right CloseOnContentClick="false" MinWidth=340 ContentClass="@(string.IsNullOrEmpty(_search) is true?"hide-shadow":"")">
+    <ActivatorContent>
+        <div @attributes="@context.Attrs">
+            <MTextField @bind-Value="_search" Class="rounded-2" Style="width:340px;height:40px;" Flat Dense Solo BackgroundColor="fill-lighten-1" HideDetails="@("auto")" Placeholder="Search">
+                <PrependInnerContent>
+                    <MIcon Size=16 Class="mr-2 neutral-lighten-1--text">mdi-magnify</MIcon>
+                </PrependInnerContent>
+            </MTextField>
+        </div>
+    </ActivatorContent>
+    <ChildContent>
+        @if(navs.Count>0)
+        {
+           <MList>
+                @foreach (var nav in navs)
+                {
+                    <MListItem OnClick="()=>NavHelper.NavigateToByEvent(nav)">
+                        <MListItemAction>
+                            <MIcon Size=20 Color="neutral-lighten-4">@nav.ParentIcon</MIcon>
+                        </MListItemAction>
+                        <MListItemContent>
+                            <span Class="text-btn">@GetI18nFullTitle(nav.FullTitle)</span>
+                        </MListItemContent>
+                    </MListItem>
+                }
+            </MList>
+        }
+        else if(string.IsNullOrEmpty(_search) is false)
+        {
+            <MList>
+                <MListItem>
+                    <span class="text-btn ma-auto">No data available</span>
+                </MListItem>
+            </MList>
+        }
+    </ChildContent>
+</MMenu>
+
+@code {
+    string? _search;
+
+    List<NavModel> GetNavs(string? search)
+    {
+        var output = new List<NavModel>();
+        if (search is not null && search!="")
+        {
+            output.AddRange(NavHelper.SameLevelNavs.Where(n=>n.Href is not null && GetI18nFullTitle(n.FullTitle).Contains(search,StringComparison.OrdinalIgnoreCase)));
+        }
+        return output;
+    }
+
+    string GetI18nFullTitle(string fullTitle)
+    {
+        var arr = fullTitle.Split(' ').ToList();
+        if (arr.Count == 1) return T(fullTitle);
+        else
+        {
+            var parent = arr[0];
+            arr.RemoveAt(0);
+            return $"{T(parent)} {T(string.Join(' ',arr))}";
+        }
+    }
+}

@@ -1,0 +1,37 @@
+﻿@inject GlobalConfig GlobalConfig;
+@inject I18n I18n
+
+<MMenu OffsetY Bottom>
+    <ActivatorContent>
+        <div Color="white" @attributes="@context.Attrs"
+            Class="hover-pointer ml-6 mr-5 neutral-lighten-4--text text-center">
+            <MIcon>mdi-google-translate</MIcon>
+        </div>
+    </ActivatorContent>
+    <ChildContent>
+        <MList Class="py-0">
+            <MListItemGroup ActiveClass="primary" Value="GlobalConfig.Culture?.Name">
+                @foreach (var culture in I18n.SupportedCultures)
+                {
+                    <MListItem OnClick="()=> OnLanguageChange(culture)" Value="(StringNumber)culture.Name">
+                        <ItemContent>
+                            <MListItemContent>
+                                <span Class="@(context.Active?"white--text":"neutral-lighten-4--text") text-btn">
+                                    @culture.NativeName
+                                </span>
+                            </MListItemContent>
+                        </ItemContent>
+                    </MListItem>
+                }
+            </MListItemGroup>
+        </MList>
+    </ChildContent>
+</MMenu>
+
+@code {
+    void OnLanguageChange(CultureInfo culture)
+    {
+        I18n.SetCulture(culture);
+        GlobalConfig.Culture = culture;
+    }
+}
