@@ -37,7 +37,7 @@
                                         SubGroup>
                                 <ActivatorContent>
                                     <MListItemContent>
-                                        <MListItemTitle>@FormatComponentTitle(componentItem)</MListItemTitle>
+                                        <MListItemTitle>@componentItem.FullTitle</MListItemTitle>
                                     </MListItemContent>
                                 </ActivatorContent>
                                 <ChildContent>
@@ -46,7 +46,9 @@
                                         <MListItem Class="m-list-item--default" Href="@subComponentItem.Url" Exact>
                                             <MListItemContent>
                                                 <MListItemTitle>
-                                                    @FormatComponentTitle(subComponentItem)
+                                                    <NavBadge Color="pink accent-1" Content="@("presets")">
+                                                        @subComponentItem.FullTitle
+                                                    </NavBadge>
                                                 </MListItemTitle>
                                             </MListItemContent>
                                         </MListItem>
@@ -59,7 +61,7 @@
                             <MListItem Class="m-list-item--default" Href="@componentItem.Url" Exact>
                                 <MListItemContent>
                                     <MListItemTitle>
-                                        @FormatComponentTitle(componentItem)
+                                        @componentItem.FullTitle
                                     </MListItemTitle>
                                 </MListItemContent>
                             </MListItem>
@@ -100,11 +102,6 @@
     {
         Service.ChangeLanguage(Culture);
         MenuItems = await Service.GetMenuAsync();
-    }
-
-    string FormatComponentTitle(DemoMenuItemModel model)
-    {
-        return model.FullTitle;
     }
 
     List<string> GenGroup(DemoMenuItemModel[] items)

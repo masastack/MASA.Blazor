@@ -4,6 +4,7 @@ subtitle: 文本块
 type: BlockText
 title: Block text
 cols: 1
+group: presets
 related:
   - /components/chips
   - /components/copyable-text
