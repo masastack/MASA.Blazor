@@ -2,8 +2,6 @@
 
 public partial class MInfiniteScroll : BInfiniteScroll
 {
-    [Parameter] public bool Dense { get; set; }
-
     protected override void SetComponentClass()
     {
         base.SetComponentClass();
