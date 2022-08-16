@@ -71,16 +71,7 @@
             <MAppBar App Height="106" Elevation=0 Class="phone-bar" Color="white" ClippedLeft ClippedRight>
                 <div class="d-flex flex-column" style="width:100%;">
                     <MRow Align="AlignTypes.Center" Justify="JustifyTypes.SpaceBetween" NoGutters>
-                        @if (!_isShowMiniLogo)
-                        {
-                            <MAppBarNavIcon Style="color:#000" @onclick="ShowDraw"></MAppBarNavIcon>
-                        }
-                        else
-                        {
-                            <MButton Icon>
-                                <img src="https://cdn.masastack.com/stack/images/website/masa-blazor/miniLogo.png" />
-                            </MButton>
-                        }
+                        <MAppBarNavIcon Style="color:#000" @onclick="ShowDraw"></MAppBarNavIcon>
 
                         <div>
                             <MTextField TValue="string"
