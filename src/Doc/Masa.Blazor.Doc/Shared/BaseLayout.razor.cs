@@ -116,6 +116,22 @@ public partial class BaseLayout : IDisposable
         }
     }
 
+    private void NavigateToServer()
+    {
+        const string baseUri = "https://blazor.masastack.com/";
+        var absoluteUri = baseUri + Navigation.ToBaseRelativePath(Navigation.Uri);
+
+        Navigation.NavigateTo(absoluteUri);
+    }
+
+    private void NavigateToWasm()
+    {
+        const string baseUri = "https://blazor-wasm.masastack.com/";
+        var absoluteUri = baseUri + Navigation.ToBaseRelativePath(Navigation.Uri);
+
+        Navigation.NavigateTo(absoluteUri);
+    }
+
     private void ShowDraw() => UpdateNav(true);
 
     private string T(string key) => I18n.T(key);
