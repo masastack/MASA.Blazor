@@ -5,7 +5,7 @@
 </PCron>
 
 <div>
-    <MTextField @bind-Value="_cronValue" Label="@i18n.T("$masaBlazor.cron.demo.cronExpressionLabel")" Outlined Dense></MTextField>
+    <MTextField Value="_cronValue" TValue="string" ValueChanged="OnCronValueChanged" Label="@i18n.T("$masaBlazor.cron.demo.cronExpressionLabel")" Outlined Dense></MTextField>
     <MTextarea @bind-Value="_nextTenRunTime" Readonly Outlined Rows="11" Label="@i18n.T("$masaBlazor.cron.demo.nextTenRunTime")">
     </MTextarea>
 </div>
