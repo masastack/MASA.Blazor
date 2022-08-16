@@ -10,6 +10,11 @@
       "Description": "应用到组件最外层元素的class"
     },
     {
+      "Name": "FailedToLoadText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "HasMore",
       "Type": "Boolean",
       "Description": "是否还有更多内容"
@@ -20,9 +25,24 @@
       "Description": ""
     },
     {
+      "Name": "LoadingText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "NoMoreText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "Parent",
       "Type": "Nullable<ElementReference>",
       "Description": "拥有溢出样式的元素的引用，一般是父元素"
+    },
+    {
+      "Name": "ReloadText",
+      "Type": "String",
+      "Description": ""
     },
     {
       "Name": "Style",
@@ -46,7 +66,7 @@
     {
       "Name": "OnLoadMore",
       "Type": "EventCallback",
-      "Description": "加载更多的回调函数"
+      "Description": ""
     }
   ]
 }

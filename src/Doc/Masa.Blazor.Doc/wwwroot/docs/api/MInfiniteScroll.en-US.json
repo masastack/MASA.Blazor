@@ -10,6 +10,11 @@
       "Description": "The class applied to the outermost element of the component"
     },
     {
+      "Name": "FailedToLoadText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "HasMore",
       "Type": "Boolean",
       "Description": "Whether there is more content or not"
@@ -20,9 +25,24 @@
       "Description": ""
     },
     {
+      "Name": "LoadingText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "NoMoreText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "Parent",
       "Type": "Nullable<ElementReference>",
       "Description": "A reference to the element that has overflow style, usually the parent element"
+    },
+    {
+      "Name": "ReloadText",
+      "Type": "String",
+      "Description": ""
     },
     {
       "Name": "Style",
@@ -46,7 +66,7 @@
     {
       "Name": "OnLoadMore",
       "Type": "EventCallback",
-      "Description": "Callback to load more"
+      "Description": ""
     }
   ]
 }

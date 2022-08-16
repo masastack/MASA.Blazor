@@ -1,6 +1,7 @@
 ﻿<div class="text-center">
     <MSwitch Value="_throw" ValueChanged="ValueChanged"
              Label="@("throw exception when loading more")"
+             Disabled="_items.Count == 0"
              Class="d-inline-block">
     </MSwitch>
 </div>
