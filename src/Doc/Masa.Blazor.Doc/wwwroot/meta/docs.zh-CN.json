@@ -1865,6 +1865,35 @@
       },
       {
         "Order": 0,
+        "Title": "MInfiniteScroll",
+        "FullTitle": "MInfiniteScroll",
+        "Type": "menuItem",
+        "Url": "api/minfinitescroll",
+        "Contents": [
+          {
+            "Id": "section-292649107",
+            "Title": "组件页面",
+            "Level": 0
+          },
+          {
+            "Id": "section-3122241",
+            "Title": "属性",
+            "Level": 0
+          },
+          {
+            "Id": "section-3374707",
+            "Title": "插槽",
+            "Level": 0
+          },
+          {
+            "Id": "section-2654231",
+            "Title": "事件",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
         "Title": "MInput",
         "FullTitle": "MInput",
         "Type": "menuItem",
@@ -4737,6 +4766,15 @@
         "FullTitle": "Images (图像)",
         "Type": "menuItem",
         "Url": "components/images",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Infinite scroll",
+        "SubTitle": "无限滚动",
+        "FullTitle": "Infinite scroll (无限滚动)",
+        "Type": "menuItem",
+        "Url": "components/infinite-scroll",
         "Children": []
       },
       {

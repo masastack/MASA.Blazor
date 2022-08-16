@@ -85,6 +85,7 @@ public partial class Api
         "MHover",
         "MIcon",
         "MImage",
+        "MInfiniteScroll",
         "MInput",
         "MOtpInput",
         "MItem",

@@ -1,0 +1,72 @@
+﻿{
+  "Title": "MInfiniteScroll",
+  "Components": [
+    "Infinite scroll"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "The class applied to the outermost element of the component"
+    },
+    {
+      "Name": "FailedToLoadText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "HasMore",
+      "Type": "Boolean",
+      "Description": "Whether there is more content or not"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "LoadingText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "NoMoreText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Parent",
+      "Type": "Nullable<ElementReference>",
+      "Description": "A reference to the element that has overflow style, usually the parent element"
+    },
+    {
+      "Name": "ReloadText",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "The style applied to the outermost element of the component"
+    },
+    {
+      "Name": "Threshold",
+      "Type": "StringNumber",
+      "Description": "The threshold of the scroll bottoming distance that triggers the loading event, in pixels"
+    }
+  ],
+  "Contents": [
+    {
+      "Name": "ChildContent",
+      "Type": "RenderFragment<ValueTuple`3>",
+      "Description": "Default Content"
+    }
+  ],
+  "Events": [
+    {
+      "Name": "OnLoadMore",
+      "Type": "EventCallback",
+      "Description": ""
+    }
+  ]
+}
