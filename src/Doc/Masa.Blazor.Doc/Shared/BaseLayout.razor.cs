@@ -75,7 +75,9 @@ public partial class BaseLayout : IDisposable
 
     protected override void OnInitialized()
     {
+#if (DEBUG == false)
         RedirectToOfficialWebsite(Navigation.Uri);
+#endif
 
         var culture = I18n.Culture ?? CultureInfo.CurrentCulture;
         if (SupportedCultures.Contains(culture))
@@ -102,7 +104,9 @@ public partial class BaseLayout : IDisposable
 
     private void OnLocationChanged(object sender, LocationChangedEventArgs e)
     {
+#if (DEBUG == false)
         RedirectToOfficialWebsite(e.Location);
+#endif
 
         var selectTab = SelectTab;
         if (e.Location.Contains("meet-the-team"))
