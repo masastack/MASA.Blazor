@@ -54,13 +54,15 @@
     {
         Console.WriteLine($"SetTheme: val: {val}");
 
-        if (theme != val && echarts != null)
+        if (theme != null && echarts != null)
         {
             Console.WriteLine($"GOTO DisposeECharts");
 
+            // await Task.Yield();
+            // await Task.Delay(1);
             await echarts.DisposeECharts();
         }
-        
+
         theme = val;
         Console.WriteLine($"end of SetTheme");
     }
