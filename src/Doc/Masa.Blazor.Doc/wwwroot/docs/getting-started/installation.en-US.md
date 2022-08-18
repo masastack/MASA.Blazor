@@ -86,7 +86,7 @@ dotnet add package Masa.Blazor
 
 ####  Blazor Server
 
-in `Pages/_Host.cshtml` import resource files：
+in `Pages/_Layout.cshtml` import resource files：
 
 ```html
 <!--masa blazor css style-->

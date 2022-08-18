@@ -6,10 +6,26 @@ public partial class PCron
     I18n I18n { get; set; }
 
     [Parameter]
-    public string Value { get; set; } = string.Empty;
+    public string Value
+    {
+        get
+        {
+            return _value;
+        }
+        set
+        {
+            if(_value != value)
+            {
+                _value = value;
+                OnValueChanged();
+            }
+        }
+    }
 
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
+
+    private string _value;
 
     private bool _hasError;
 
@@ -40,6 +56,23 @@ public partial class PCron
         await CalculateCronValue();
 
         await base.OnInitializedAsync();
+    }
+
+    private void OnValueChanged()
+    {
+        if (CronExpression.IsValidExpression(_value))
+        {
+            var valueArr = _value.Split(" ");
+            var cronItemsCount = CronItems.Count;
+            for (int i = 0; i < valueArr.Length; i++)
+            {
+                if (cronItemsCount < i + 1)
+                {
+                    return;
+                }
+                CronItems[i].CronValue = valueArr[i];
+            }
+        }
     }
 
     private Task CronValueHasChanged(CronItemModel cronItem)
@@ -119,7 +152,7 @@ public partial class PCron
 
         if (ValueChanged.HasDelegate)
         {
-            ValueChanged.InvokeAsync(Value);
+            ValueChanged.InvokeAsync(_value);
         }
 
         return Task.CompletedTask;

@@ -51,16 +51,8 @@ namespace Masa.Blazor
                         attrs["aria-selected"] = value.ToString();
                         //TODO: id
                         attrs["role"] = "option";
-                        attrs[nameof(MListItem.OnClick)] = CreateEventCallback<MouseEventArgs>(async _ =>
-                        {
-                            if (!GetDisabled(item) && OnSelect.HasDelegate)
-                            {
-                                await OnSelect.InvokeAsync(item);
-                            }
-                        });
                         attrs[nameof(MListItem.Value)] = (StringNumber)value.ToString();
                         attrs[nameof(MListItem.ActiveClass)] = TileActiveClass;
-                        attrs[nameof(MListItem.Disabled)] = GetDisabled(item);
                         attrs[nameof(MListItem.Ripple)] = true;
                         attrs[nameof(MListItem.IsActive)] = value;//TODO: remove this when MListItem been refactored
 
@@ -91,7 +83,7 @@ namespace Masa.Blazor
 
         bool ISelectList<TItem, TItemValue, TValue>.HasItem(TItem item) => HasItem(item);
 
-        protected bool GetDisabled(TItem item)
+        public bool GetDisabled(TItem item)
         {
             return ItemDisabled != null && ItemDisabled(item);
         }

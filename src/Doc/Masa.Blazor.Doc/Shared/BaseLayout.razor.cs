@@ -20,7 +20,6 @@ public partial class BaseLayout : IDisposable
     private static readonly CultureInfo[] SupportedCultures = { new("en-US"), new("zh-CN") };
 
     private string _searchBorderColor = "#00000000";
-    private bool _isShowMiniLogo = true;
     private StringNumber _selectTab = 0;
 
     private string CultureIcon => $"{Culture}.png";
@@ -76,6 +75,10 @@ public partial class BaseLayout : IDisposable
 
     protected override void OnInitialized()
     {
+#if (DEBUG == false)
+        RedirectToOfficialWebsite(Navigation.Uri);
+#endif
+
         var culture = I18n.Culture ?? CultureInfo.CurrentCulture;
         if (SupportedCultures.Contains(culture))
         {
@@ -90,14 +93,20 @@ public partial class BaseLayout : IDisposable
         Navigation.LocationChanged += OnLocationChanged;
     }
 
+    private void RedirectToOfficialWebsite(string uri)
+    {
+        var relativePath = Navigation.ToBaseRelativePath(uri);
+        if (relativePath == "")
+        {
+            Navigation.NavigateTo("https://www.masastack.com/blazor");
+        }
+    }
+
     private void OnLocationChanged(object sender, LocationChangedEventArgs e)
     {
-        var isShowMiniLogo = _isShowMiniLogo;
-
-        if (e.Location == Navigation.BaseUri)
-            _isShowMiniLogo = true;
-        else
-            _isShowMiniLogo = false;
+#if (DEBUG == false)
+        RedirectToOfficialWebsite(e.Location);
+#endif
 
         var selectTab = SelectTab;
         if (e.Location.Contains("meet-the-team"))
@@ -105,10 +114,26 @@ public partial class BaseLayout : IDisposable
         else if (e.Location != Navigation.BaseUri)
             SelectTab = 1;
 
-        if ((isShowMiniLogo != _isShowMiniLogo || selectTab != _selectTab) && MasaBlazor.Breakpoint.Mobile)
+        if (selectTab != _selectTab && MasaBlazor.Breakpoint.Mobile)
         {
             _ = InvokeAsync(StateHasChanged);
         }
+    }
+
+    private void NavigateToServer()
+    {
+        const string baseUri = "https://blazor.masastack.com/";
+        var absoluteUri = baseUri + Navigation.ToBaseRelativePath(Navigation.Uri);
+
+        Navigation.NavigateTo(absoluteUri);
+    }
+
+    private void NavigateToWasm()
+    {
+        const string baseUri = "https://blazor-wasm.masastack.com/";
+        var absoluteUri = baseUri + Navigation.ToBaseRelativePath(Navigation.Uri);
+
+        Navigation.NavigateTo(absoluteUri);
     }
 
     private void ShowDraw() => UpdateNav(true);

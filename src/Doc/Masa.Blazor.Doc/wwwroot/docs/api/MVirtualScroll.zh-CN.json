@@ -79,6 +79,11 @@
   ],
   "Contents": [
     {
+      "Name": "FooterContent",
+      "Type": "RenderFragment",
+      "Description": ""
+    },
+    {
       "Name": "ItemContent",
       "Type": "RenderFragment<TItem>",
       "Description": ""
