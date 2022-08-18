@@ -550,7 +550,7 @@ namespace Masa.Blazor
 
         private async Task SetPrefixWidthAsync()
         {
-            if (PrefixElement.Id == null)
+            if (PrefixElement.Context is null)
             {
                 return;
             }

@@ -252,6 +252,11 @@
       "Description": ""
     },
     {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Description": "Sets the minimum height for the component."
+    },
+    {
       "Name": "MinWidth",
       "Type": "StringNumber",
       "Default": "",
