@@ -2,6 +2,9 @@
     <MECharts Option="option" Theme="@theme" @ref="echarts"></MECharts>
 
     <MRadioGroup TValue="string" Value="theme" ValueChanged="SetTheme" Row>
+        <MRadio Label="default"
+                Value="@("")">
+        </MRadio>
         <MRadio Label="light"
                 Value="@("light")">
         </MRadio>
@@ -49,11 +52,12 @@
 
     private async Task SetTheme(string val)
     {
-        if (theme != val && echarts != null)
+        if (theme != null && echarts != null)
         {
-            await echarts.DisposeEcharts();
+            await echarts.DisposeECharts();
         }
 
         theme = val;
     }
+
 }

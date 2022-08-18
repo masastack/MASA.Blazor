@@ -4,7 +4,7 @@ let echarts_instance_cache = {}
 export function init(selector, theme, initOptions, option) {
   let instance = echarts_instance_cache[selector]
 
-  if (instance && instance.isDisposed === false) return;
+  if (instance && instance.isDisposed() === false) return;
 
   const container = document.querySelector(selector)
 
