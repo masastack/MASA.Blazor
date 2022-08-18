@@ -83,8 +83,6 @@ public class MECharts : BECharts, IDisposable
 
     protected override void OnParametersSet()
     {
-        Console.WriteLine("OnParameterSet............");
-        
         InitOptions?.Invoke(DefaultInitOptions);
 
         DefaultInitOptions.Locale ??= I18n.Culture.TwoLetterISOLanguageName.ToUpperInvariant();
@@ -92,8 +90,6 @@ public class MECharts : BECharts, IDisposable
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        Console.WriteLine($"OnAfterRenderAsync _isEChartsDisposed:{_isEChartsDisposed} Theme:{Theme} ComputedTheme:{ComputedTheme}");
-
         if (IsDisposed)
         {
             return;
@@ -113,7 +109,7 @@ public class MECharts : BECharts, IDisposable
 
     public async Task DisposeECharts()
     {
-        _isEChartsDisposed = true;
         await _echarts.InvokeVoidAsync("dispose", Ref.GetSelector());
+        _isEChartsDisposed = true;
     }
 }

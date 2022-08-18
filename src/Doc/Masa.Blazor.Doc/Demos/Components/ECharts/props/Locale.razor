@@ -98,7 +98,7 @@
     {
         _now = _now.AddDays(1);
         _lastRandomValue += _ran.Next(1, 100) - 50;
-        return new Data(_now.ToString(), new object[] { _now.ToString(), _lastRandomValue });
+        return new Data(_now.ToString("yyyy/MM/dd"), new object[] { _now.ToString("yyyy/MM/dd"), _lastRandomValue });
     }
 
     private record Data(string Name, object[] Value);

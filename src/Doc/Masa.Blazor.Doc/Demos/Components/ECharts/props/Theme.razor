@@ -52,19 +52,12 @@
 
     private async Task SetTheme(string val)
     {
-        Console.WriteLine($"SetTheme: val: {val}");
-
         if (theme != null && echarts != null)
         {
-            Console.WriteLine($"GOTO DisposeECharts");
-
-            // await Task.Yield();
-            // await Task.Delay(1);
             await echarts.DisposeECharts();
         }
 
         theme = val;
-        Console.WriteLine($"end of SetTheme");
     }
 
 }
