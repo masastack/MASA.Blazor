@@ -173,6 +173,11 @@
       "Description": ""
     },
     {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Description": "设定组件的最小高度。"
+    },
+    {
       "Name": "NumberProps",
       "Type": "Action<TextFieldNumberProperty>",
       "Description": ""

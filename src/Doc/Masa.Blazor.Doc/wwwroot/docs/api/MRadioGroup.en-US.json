@@ -125,6 +125,11 @@
       "Description": ""
     },
     {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Description": "Sets the minimum height for the component."
+    },
+    {
       "Name": "PersistentHint",
       "Type": "Boolean",
       "Default": "false",
