@@ -179,6 +179,11 @@
       "Description": ""
     },
     {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Description": "设定组件的最小高度。"
+    },
+    {
       "Name": "NoResize",
       "Type": "Boolean",
       "Default": "false",
