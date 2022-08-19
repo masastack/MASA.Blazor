@@ -9,7 +9,7 @@
         @ActivatorContent?.Invoke(context)
     </ActivatorContent>
     <ChildContent>
-        <MSheet Class="d-flex justify-space-between">
+        <MSheet Class="d-flex justify-space-between align-center">
             <MButton Plain Color="primary" OnClick="OnCancel">@I18n.T("$masaBlazor.cancel")</MButton>
             <div class="p-mobile-cascader__title">@Title</div>
             <MButton Plain Color="primary" OnClick="OnConfirm">@I18n.T("$masaBlazor.ok")</MButton>
