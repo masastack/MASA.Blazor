@@ -5,7 +5,6 @@ public partial class MMobilePickerColumn<TColumn, TColumnItem, TColumnItemValue>
     protected override void SetComponentClass()
     {
         base.SetComponentClass();
-
         CssProvider
             .Apply("column", cssBuilder => { cssBuilder.Add("m-mobile-picker__column"); })
             .Apply("column-wrapper", cssBuilder => { cssBuilder.Add("m-mobile-picker__column-wrapper"); },

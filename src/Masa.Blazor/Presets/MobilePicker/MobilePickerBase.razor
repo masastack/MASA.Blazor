@@ -1,8 +1,7 @@
-﻿@namespace Masa.Blazor.Presets
-@inherits MMobilePickerView<TColumn, TColumnItem, TColumnItemValue>
-@typeparam TColumn
+﻿@typeparam TColumn
 @typeparam TColumnItem
 @typeparam TColumnItemValue
+@typeparam TValue
 
 @*TODO: change the class name in this file *@
 <MBottomSheet ContentClass="p-mobile-cascader__content"
@@ -15,7 +14,7 @@
         <MSheet Class="d-flex justify-space-between align-center">
             <MButton Plain Color="primary" OnClick="OnCancel">@I18n.T("$masaBlazor.cancel")</MButton>
             <div class="p-mobile-cascader__title">@Title</div>
-            <MButton Plain Color="primary" OnClick="OnConfirm">@I18n.T("$masaBlazor.ok")</MButton>
+            <MButton Plain Color="primary" OnClick="HandleOnConfirm">@I18n.T("$masaBlazor.ok")</MButton>
         </MSheet>
 
         <MSheet>
