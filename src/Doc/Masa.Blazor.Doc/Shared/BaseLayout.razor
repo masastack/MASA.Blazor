@@ -73,23 +73,7 @@
                     <MRow Align="AlignTypes.Center" Justify="JustifyTypes.SpaceBetween" NoGutters>
                         <MAppBarNavIcon Style="color:#000" @onclick="ShowDraw"></MAppBarNavIcon>
 
-                        <div>
-                            <MTextField TValue="string"
-                                        HideDetails="true"
-                                        Style="@($"width:220px; opacity: 0.8; border: 1px solid {_searchBorderColor};")"
-                                        @onfocus="@(() => _searchBorderColor = "#C9CDD4")"
-                                        @onblur="@(() => _searchBorderColor = "#00000000")"
-                                        Flat
-                                        Solo
-                                        Dense
-                                        BackgroundColor="#F2F3F5"
-                                        Color="grey lighten-1"
-                                        Placeholder="@T("Search")">
-                                <PrependInnerContent>
-                                    <MIcon Color="grey lighten-1">mdi-magnify</MIcon>
-                                </PrependInnerContent>
-                            </MTextField>
-                        </div>
+                        <div id="docsearch-mobile" />
 
                         <MButton Icon OnClick="TurnLanguage">
                             <img style="width:24px;height:24px;" src=@("https://cdn.masastack.com/stack/images/website/masa-blazor/" + CultureIcon) />
