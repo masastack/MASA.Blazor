@@ -68,6 +68,11 @@
   "Contents": [],
   "Events": [
     {
+      "Name": "OnSelect",
+      "Type": "EventCallback<List`1>",
+      "Description": ""
+    },
+    {
       "Name": "ValueChanged",
       "Type": "EventCallback<List`1>",
       "Description": ""

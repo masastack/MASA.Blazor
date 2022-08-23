@@ -76,7 +76,6 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         }
 
         var datetime = new int[6];
-
         for (var i = 0; i < internalValue.Count; i++)
         {
             datetime[i] = internalValue[i];
@@ -95,6 +94,12 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         hour   =   hour < 0 ? 0 : hour;
         minute = minute < 0 ? 0 : minute;
         second = second < 0 ? 0 : second;
+
+        var normalMaxDay = DateTime.DaysInMonth(year, month);
+        if (day > normalMaxDay)
+        {
+            day = normalMaxDay;
+        }
 
         value = new DateTime(year, month, day, hour, minute, second);
         return true;
@@ -135,16 +140,18 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
             first = val[index];
         }
 
+        TryConvertInternalValueToValue(val, out var dateTime);
+        TryConvertValueToInternalValue(dateTime, out val);
+
         var column = Columns.FirstOrDefault(c => c.Value == first);
 
         index++;
         while (val.Count > index && column?.Children != null && column.Children.Any())
         {
-            first = val[index++];
+            first = val[index];
             column = column.Children.FirstOrDefault(c => c.Value == first);
+            index++;
         }
-
-        TryConvertInternalValueToValue(val, out var dateTime);
 
         dateTime = GetValidDateTime(dateTime);
 
@@ -155,8 +162,6 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
                 column.Children = GetColumns((DateTimePrecision)index, dateTime);
             }
         }
-
-        TryConvertValueToInternalValue(dateTime, out val);
 
         base.HandleValueChanged(val);
     }

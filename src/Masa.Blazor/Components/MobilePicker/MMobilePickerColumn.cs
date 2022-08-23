@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor;
 
-public partial class MMobilePickerColumn<TColumn, TColumnItem, TColumnItemValue> : BMobilePickerColumn<TColumn, TColumnItem, TColumnItemValue>
+public partial class MMobilePickerColumn<TColumnItem> : BMobilePickerColumn<TColumnItem>
 {
     protected override void SetComponentClass()
     {

@@ -47,6 +47,9 @@ public partial class MobilePickerBase<TColumn, TColumnItem, TColumnItemValue, TV
     // TODO: change to StringNumber, support px, vh, vw, rem
     [Parameter]
     public int ItemHeight { get; set; } = 44;
+    
+    [Parameter]
+    public EventCallback<List<TColumnItem>> OnSelect { get; set; }
 
     [Parameter]
     public int SwipeDuration { get; set; } = 1000;
