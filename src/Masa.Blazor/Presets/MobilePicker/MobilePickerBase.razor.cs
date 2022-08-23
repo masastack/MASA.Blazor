@@ -117,16 +117,15 @@ public partial class MobilePickerBase<TColumn, TColumnItem, TColumnItemValue, TV
 
     private void OnVisibleChanged(bool visible)
     {
-        if (visible)
+        if (!visible) return;
+
+        if (TryConvertValueToInternalValue(Value, out var internalValue))
         {
-            if (TryConvertValueToInternalValue(Value, out var internalValue))
-            {
-                InternalValue = internalValue;
-            }
+            InternalValue = internalValue;
         }
     }
 
-    private void HandleValueChanged(List<TColumnItemValue> val)
+    protected virtual void HandleValueChanged(List<TColumnItemValue> val)
     {
         InternalValue = val;
     }

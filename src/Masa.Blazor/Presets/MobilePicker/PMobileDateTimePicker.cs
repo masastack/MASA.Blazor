@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Presets.MobilePicker;
+﻿using System.Text.Json;
+using Masa.Blazor.Presets.MobilePicker;
 
 namespace Masa.Blazor.Presets;
 
@@ -14,7 +15,7 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
     public Func<DateTimeColumnType, int, string> Formatter { get; set; }
 
     [Parameter]
-    public DateTimePickerPrecision Type { get; set; } = DateTimePickerPrecision.Day;
+    public DateTimePickerPrecision Precision { get; set; } = DateTimePickerPrecision.Day;
 
     public override List<DateTimeColumn> Columns { get; set; } = new();
     public override Func<DateTimeColumn, string> ItemText { get; set; }
@@ -26,7 +27,7 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
 
     // TODO: UtcNow?
     private DateTime Now { get; init; }
-    private DateTime ValidDateTime { get; set; }
+    // private DateTime Value { get; set; }
 
     public PMobileDateTimePicker()
     {
@@ -66,9 +67,9 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
 
         if (needChange)
         {
-            ValidDateTime = ValidateValue();
+            Value = ValidateValue();
 
-            Columns = GetYears();
+            Columns = GetYears(Value);
         }
     }
 
@@ -132,6 +133,52 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         return true;
     }
 
+    protected override void HandleValueChanged(List<int> val)
+    {
+        Console.WriteLine(JsonSerializer.Serialize(val));
+
+        int first = -1;
+        var index = 0;
+        if (val.Count > index)
+        {
+            first = val[index];
+        }
+
+        var column = Columns.FirstOrDefault(c => c.Value == first);
+
+        index++;
+        while (val.Count > index && column?.Children != null && column.Children.Any())
+        {
+            first = val[index++];
+            column = column.Children.FirstOrDefault(c => c.Value == first);
+        }
+
+        if (column is { Children.Count: 0 })
+        {
+            if ((int)Precision >= index)
+            {
+                TryConvertInternalValueToValue(val, out var dateTime);
+                column.Children = GetColumns((DateTimePickerPrecision)index, dateTime);
+            }
+        }
+
+        base.HandleValueChanged(val);
+    }
+
+    private List<DateTimeColumn> GetColumns(DateTimePickerPrecision precision, DateTime dateTime)
+    {
+        return precision switch
+        {
+            DateTimePickerPrecision.Year => GetYears(dateTime),
+            DateTimePickerPrecision.Month => GetMonths(dateTime),
+            DateTimePickerPrecision.Day => GetDays(dateTime),
+            DateTimePickerPrecision.Hour => GetHours(dateTime),
+            DateTimePickerPrecision.Minute => GetMinutes(dateTime),
+            DateTimePickerPrecision.Second => GetSeconds(dateTime),
+            _ => throw new ArgumentOutOfRangeException(nameof(precision), precision, null)
+        };
+    }
+
     private DateTime ValidateValue()
     {
         var dateTime = Value;
@@ -154,40 +201,24 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         return dateTime;
     }
 
-    private List<DateTimeColumn> GetYears()
+    private List<DateTimeColumn> GetYears(DateTime dateTime)
     {
         List<DateTimeColumn> yearList = new();
 
         var years = Enumerable.Range(Min.Year, Max.Year - Min.Year + 1).ToArray();
 
-        for (int i = 0; i < years.Length; i++)
+        foreach (var year in years)
         {
-            var year = years[i];
             var yearColumn = new DateTimeColumn(DateTimeColumnType.Year, year, Formatter(DateTimeColumnType.Year, year));
-            if (Type == DateTimePickerPrecision.Year)
+            if (Precision == DateTimePickerPrecision.Year)
             {
                 yearList.Add(yearColumn);
                 continue;
             }
 
-            if (year == ValidDateTime.Year)
+            if (year == dateTime.Year)
             {
-                List<DateTimeColumn> monthColumns;
-
-                if (i == 0)
-                {
-                    monthColumns = GetMonths(year, Min.Month, 12);
-                }
-                else if (i == years.Length - 1)
-                {
-                    monthColumns = GetMonths(year, 1, Max.Month);
-                }
-                else
-                {
-                    monthColumns = GetMonths(year);
-                }
-
-                yearColumn.Children = monthColumns;
+                yearColumn.Children = GetMonths(dateTime);
             }
 
             yearList.Add(yearColumn);
@@ -196,41 +227,38 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         return yearList;
     }
 
-    private List<DateTimeColumn> GetMonths(int year, int from = 1, int to = 12)
+    private List<DateTimeColumn> GetMonths(DateTime dateTime)
     {
         List<DateTimeColumn> monthList = new();
+
+        var from = 1;
+        var to = 12;
+
+        if (dateTime.Year == Min.Year)
+        {
+            from = Min.Month;
+        }
+
+        if (dateTime.Year == Max.Year)
+        {
+            to = Max.Month;
+        }
 
         var count = to - from + 1;
         var months = Enumerable.Range(from, count).ToArray();
 
-        for (int i = 0; i < months.Length; i++)
+        foreach (var month in months)
         {
-            var month = months[i];
             var monthColumn = new DateTimeColumn(DateTimeColumnType.Month, month, Formatter(DateTimeColumnType.Month, month));
-            if (Type == DateTimePickerPrecision.Month)
+            if (Precision == DateTimePickerPrecision.Month)
             {
                 monthList.Add(monthColumn);
                 continue;
             }
 
-            if (month == ValidDateTime.Month)
+            if (month == dateTime.Month)
             {
-                List<DateTimeColumn> dayColumns;
-
-                if (i == 0)
-                {
-                    dayColumns = GetDays(year, month, Min.Day);
-                }
-                else if (i == months.Length - 1)
-                {
-                    dayColumns = GetDays(year, month, 1, Max.Day);
-                }
-                else
-                {
-                    dayColumns = GetDays(year, month);
-                }
-
-                monthColumn.Children = dayColumns;
+                monthColumn.Children = GetDays(dateTime);
             }
 
             monthList.Add(monthColumn);
@@ -239,44 +267,42 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         return monthList;
     }
 
-    private List<DateTimeColumn> GetDays(int year, int month, int from = 1, int to = 0)
+    private List<DateTimeColumn> GetDays(DateTime dateTime)
     {
+        var from = 1;
+        var to = 0;
+
+        if (dateTime.Year == Min.Year && dateTime.Month == Min.Month)
+        {
+            from = Min.Day;
+        }
+
+        if (dateTime.Year == Max.Year && dateTime.Month == Max.Month)
+        {
+            to = Max.Day;
+        }
+
         if (to == 0)
         {
-            to = DateTime.DaysInMonth(year, month);
+            to = DateTime.DaysInMonth(dateTime.Year, dateTime.Month);
         }
 
         var count = to - from + 1;
         var dayList = new List<DateTimeColumn>();
 
         var days = Enumerable.Range(from, count).ToArray();
-        for (int i = 0; i < days.Length; i++)
+        foreach (var day in days)
         {
-            var day = days[i];
             var dayColumn = new DateTimeColumn(DateTimeColumnType.Day, day, Formatter(DateTimeColumnType.Day, day));
-            if (Type == DateTimePickerPrecision.Day)
+            if (Precision == DateTimePickerPrecision.Day)
             {
                 dayList.Add(dayColumn);
                 continue;
             }
 
-            if (day == ValidDateTime.Day)
+            if (day == dateTime.Day)
             {
-                List<DateTimeColumn> hourColumns;
-                if (i == 0)
-                {
-                    hourColumns = GetHours(Min.Hour, 24);
-                }
-                else if (i == days.Length - 1)
-                {
-                    hourColumns = GetHours(0, Max.Hour);
-                }
-                else
-                {
-                    hourColumns = GetHours();
-                }
-
-                dayColumn.Children = hourColumns;
+                dayColumn.Children = GetHours(dateTime);
             }
 
             dayList.Add(dayColumn);
@@ -285,39 +311,37 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         return dayList;
     }
 
-    private List<DateTimeColumn> GetHours(int from = 0, int to = 23)
+    private List<DateTimeColumn> GetHours(DateTime dateTime)
     {
+        var from = 0;
+        var to = 23;
+
+        if (dateTime.Year == Min.Year && dateTime.Month == Min.Month && dateTime.Day == Min.Day)
+        {
+            from = Min.Hour;
+        }
+
+        if (dateTime.Year == Max.Year && dateTime.Month == Max.Month && dateTime.Day == Max.Day)
+        {
+            to = Max.Hour;
+        }
+
         var count = to - from + 1;
         var hourList = new List<DateTimeColumn>();
 
         var hours = Enumerable.Range(from, count).ToArray();
-        for (int i = 0; i < hours.Length; i++)
+        foreach (var hour in hours)
         {
-            var hour = hours[i];
             var hourColumn = new DateTimeColumn(DateTimeColumnType.Hour, hour, Formatter(DateTimeColumnType.Hour, hour));
-            if (Type == DateTimePickerPrecision.Hour)
+            if (Precision == DateTimePickerPrecision.Hour)
             {
                 hourList.Add(hourColumn);
                 continue;
             }
 
-            if (hour == ValidDateTime.Hour)
+            if (hour == dateTime.Hour)
             {
-                List<DateTimeColumn> minuteColumns;
-                if (i == 0)
-                {
-                    minuteColumns = GetMinutes(Min.Minute);
-                }
-                else if (i == hours.Length - 1)
-                {
-                    minuteColumns = GetMinutes(0, Max.Minute);
-                }
-                else
-                {
-                    minuteColumns = GetMinutes();
-                }
-
-                hourColumn.Children = minuteColumns;
+                hourColumn.Children = GetMinutes(dateTime);
             }
 
             hourList.Add(hourColumn);
@@ -326,39 +350,37 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         return hourList;
     }
 
-    private List<DateTimeColumn> GetMinutes(int from = 0, int to = 59)
+    private List<DateTimeColumn> GetMinutes(DateTime dateTime)
     {
+        var from = 0;
+        var to = 59;
+
+        if (dateTime.Year == Min.Year && dateTime.Month == Min.Month && dateTime.Day == Min.Day && dateTime.Hour == Min.Hour)
+        {
+            from = Min.Minute;
+        }
+
+        if (dateTime.Year == Max.Year && dateTime.Month == Max.Month && dateTime.Day == Max.Day && dateTime.Hour == Max.Hour)
+        {
+            to = Max.Minute;
+        }
+
         var count = to - from + 1;
         var minuteList = new List<DateTimeColumn>();
 
         var minutes = Enumerable.Range(from, count).ToArray();
-        for (int i = 0; i < minutes.Length; i++)
+        foreach (var minute in minutes)
         {
-            var minute = minutes[i];
             var minuteColumn = new DateTimeColumn(DateTimeColumnType.Minute, minute, Formatter(DateTimeColumnType.Minute, minute));
-            if (Type == DateTimePickerPrecision.Minute)
+            if (Precision == DateTimePickerPrecision.Minute)
             {
                 minuteList.Add(minuteColumn);
                 continue;
             }
 
-            if (minute == ValidDateTime.Minute)
+            if (minute == dateTime.Minute)
             {
-                List<DateTimeColumn> secondColumns;
-                if (i == 0)
-                {
-                    secondColumns = GetSeconds(Min.Second);
-                }
-                else if (i == minutes.Length - 1)
-                {
-                    secondColumns = GetSeconds(0, Max.Second);
-                }
-                else
-                {
-                    secondColumns = GetSeconds();
-                }
-
-                minuteColumn.Children = secondColumns;
+                minuteColumn.Children = GetSeconds(dateTime);
             }
 
             minuteList.Add(minuteColumn);
@@ -367,8 +389,24 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         return minuteList;
     }
 
-    private List<DateTimeColumn> GetSeconds(int from = 0, int to = 59)
+    private List<DateTimeColumn> GetSeconds(DateTime dateTime)
     {
+        var from = 0;
+        var to = 59;
+
+        // TODO: refactor this
+        if (dateTime.Year == Min.Year && dateTime.Month == Min.Month && dateTime.Day == Min.Day && dateTime.Hour == Min.Hour &&
+            dateTime.Minute == Min.Minute)
+        {
+            from = Min.Second;
+        }
+
+        if (dateTime.Year == Max.Year && dateTime.Month == Max.Month && dateTime.Day == Max.Day && dateTime.Hour == Max.Hour &&
+            dateTime.Minute == Max.Minute)
+        {
+            to = Max.Second;
+        }
+
         var count = to - from + 1;
         var seconds = Enumerable.Range(from, count).ToArray();
         return seconds.Select(second => new DateTimeColumn(DateTimeColumnType.Second, second, Formatter(DateTimeColumnType.Second, second))).ToList();
