@@ -5370,7 +5370,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MInfiniteScroll\">MInfiniteScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-08-16T18:22:03.2809844+08:00",
+    "LastWriteTime": "2022-08-18T15:06:58.3472869+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6633,6 +6633,49 @@
     "Title": "Date pickers month",
     "Type": "月份选择器",
     "FullTitle": "Date pickers month（月份选择器）"
+  },
+  {
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MMobilePickerView\">MMobilePickerView</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-08-23T15:16:05.8549639+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "使用",
+        "Description": "",
+        "Code": "<MRow Justify=\"JustifyTypes.Center\" Align=\"AlignTypes.Center\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <MMobilePickerView @bind-Value=\"value\"\r\n                           Columns=\"@columns\"\r\n                           TColumn=\"List<string>\"\r\n                           TColumnItem=\"string\"\r\n                           TColumnItemValue=\"string\"\r\n                           ItemValue=\"item => item\"\r\n                           ItemText=\"item => item\">\r\n        </MMobilePickerView>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\" Class=\"text-center\">\r\n        Value: @string.Join(\" \", value)\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    private static string v1 = DateTime.Now.DayOfWeek.ToString();\r\n    private static string v2 = DateTime.Now.Hour > 12 ? \"PM\" : \"AM\";\r\n\r\n    private List<string> value = new() { v1, v2 };\r\n\r\n    private List<List<string>> columns = new()\r\n    {\r\n        new List<string>\r\n        {\r\n            DayOfWeek.Monday.ToString(),\r\n            DayOfWeek.Tuesday.ToString(),\r\n            DayOfWeek.Wednesday.ToString(),\r\n            DayOfWeek.Thursday.ToString(),\r\n            DayOfWeek.Friday.ToString(),\r\n            DayOfWeek.Saturday.ToString(),\r\n            DayOfWeek.Sunday.ToString()\r\n        },\r\n        new List<string>\r\n        {\r\n            \"AM\",\r\n            \"PM\"\r\n        }\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobilePickerView.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "cascade",
+        "Title": "级联",
+        "Description": "",
+        "Code": "<MRow Justify=\"JustifyTypes.Center\" Align=\"AlignTypes.Center\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <MMobilePickerView @bind-Value=\"value\"\r\n                           Columns=\"@Columns\"\r\n                           TColumn=\"Data\"\r\n                           TColumnItem=\"Data\"\r\n                           TColumnItemValue=\"string\"\r\n                           ItemValue=\"item => item.Code\"\r\n                           ItemText=\"item => item.Name\"\r\n                           ItemChildren=\"item => item.Children\"\r\n                           ItemDisabled=\"item => item.Disabled\">\r\n        </MMobilePickerView>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\" Class=\"text-center\">\r\n        Value: @string.Join(\" \", value)\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    List<string> value = new();\r\n\r\n    record Data(string Code, string Name, List<Data> Children = null, bool Disabled = false);\r\n\r\n    static readonly List<Data> Columns = new()\r\n    {\r\n        new Data(\"sh\", \"上海\", new List<Data>\r\n        {\r\n            new(\"sh-hp\", \"黄浦区\"),\r\n            new(\"sh-xh\", \"徐汇区\"),\r\n            new(\"sh-cn\", \"长宁区\"),\r\n            new(\"sh-ja\", \"静安区\", Disabled: true)\r\n        }),\r\n        new Data(\"zj\", \"浙江\", new List<Data>\r\n        {\r\n            new(\"zj-hz\", \"杭州\", new List<Data>\r\n            {\r\n                new(\"zj-hz-sc\", \"上城区\"),\r\n                new(\"zj-hz-xc\", \"下城区\"),\r\n                new(\"zj-hz-qt\", \"钱塘区\")\r\n            }),\r\n            new(\"zj-nb\", \"宁波\", new List<Data>\r\n            {\r\n                new(\"zj-nb-jb\", \"江北区\"),\r\n                new(\"zj-nb-hs\", \"海曙区\"),\r\n                new(\"zj-nb-bl\", \"北仑区\")\r\n            })\r\n        }),\r\n        new Data(\"gd\", \"广东\", new List<Data>\r\n        {\r\n            new(\"gd-sz\", \"深圳\", new List<Data>\r\n            {\r\n                new(\"gd-sz-ns\", \"南山区\"),\r\n                new(\"gd-sz-lh\", \"罗湖区\")\r\n            }),\r\n            new(\"gd-gz\", \"广州\", new List<Data>\r\n            {\r\n                new(\"gd-gz-by\", \"白云区\"),\r\n                new(\"gd-gz-th\", \"天河区\"),\r\n                new(\"gd-gz-hz\", \"海珠区\")\r\n            })\r\n        })\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobilePickerView.props.Cascade",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/date-pickers",
+      "/components/mobile-pickers",
+      "/components/mobile-datetime-pickers"
+    ],
+    "Subtitle": "移动端选择器",
+    "Title": "Mobile picker view",
+    "Type": "移动端选择器",
+    "FullTitle": "Mobile picker view（移动端选择器）"
   },
   {
     "Desc": "<p><code>MTimePicker</code> 是独立的组件，可以用于许多现有的 MASA Blazor 组件。 它为用户提供了选择时间的视觉表现。</p>\n",

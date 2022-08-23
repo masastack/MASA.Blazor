@@ -1,0 +1,43 @@
+﻿<MRow Justify="JustifyTypes.Center" Align="AlignTypes.Center">
+    <MCol Cols="12" Md="6">
+        <MMobilePickerView @bind-Value="value"
+                           Columns="@columns"
+                           TColumn="List<string>"
+                           TColumnItem="string"
+                           TColumnItemValue="string"
+                           ItemValue="item => item"
+                           ItemText="item => item">
+        </MMobilePickerView>
+    </MCol>
+    <MCol Cols="12" Md="6" Class="text-center">
+        Value: @string.Join(" ", value)
+    </MCol>
+</MRow>
+
+@code {
+
+    private static string v1 = DateTime.Now.DayOfWeek.ToString();
+    private static string v2 = DateTime.Now.Hour > 12 ? "PM" : "AM";
+
+    private List<string> value = new() { v1, v2 };
+
+    private List<List<string>> columns = new()
+    {
+        new List<string>
+        {
+            DayOfWeek.Monday.ToString(),
+            DayOfWeek.Tuesday.ToString(),
+            DayOfWeek.Wednesday.ToString(),
+            DayOfWeek.Thursday.ToString(),
+            DayOfWeek.Friday.ToString(),
+            DayOfWeek.Saturday.ToString(),
+            DayOfWeek.Sunday.ToString()
+        },
+        new List<string>
+        {
+            "AM",
+            "PM"
+        }
+    };
+
+}

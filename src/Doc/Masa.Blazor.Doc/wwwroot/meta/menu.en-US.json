@@ -804,6 +804,13 @@
           },
           {
             "Order": 0,
+            "Title": "Mobile picker view",
+            "FullTitle": "Mobile picker view",
+            "Type": "menuItem",
+            "Url": "components/mobile-picker-view"
+          },
+          {
+            "Order": 0,
             "Title": "Time pickers",
             "FullTitle": "Time pickers",
             "Type": "menuItem",
@@ -3376,6 +3383,35 @@
         "FullTitle": "MMessages",
         "Type": "menuItem",
         "Url": "api/mmessages",
+        "Contents": [
+          {
+            "Id": "section-1559607740",
+            "Title": "Component Pages",
+            "Level": 0
+          },
+          {
+            "Id": "section-1029938464",
+            "Title": "Props",
+            "Level": 0
+          },
+          {
+            "Id": "section-444565322",
+            "Title": "Contents",
+            "Level": 0
+          },
+          {
+            "Id": "section-1613329801",
+            "Title": "Events",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
+        "Title": "MMobilePickerView",
+        "FullTitle": "MMobilePickerView",
+        "Type": "menuItem",
+        "Url": "api/mmobilepickerview",
         "Contents": [
           {
             "Id": "section-1559607740",

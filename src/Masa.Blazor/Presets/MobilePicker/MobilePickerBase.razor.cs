@@ -34,20 +34,15 @@ public partial class MobilePickerBase<TColumn, TColumnItem, TColumnItemValue, TV
 
     #region paramters of PickerView
 
-    [Parameter, EditorRequired]
     public virtual List<TColumn> Columns { get; set; } = new();
 
-    [Parameter]
     public virtual Func<TColumnItem, string> ItemText { get; set; }
 
-    [Parameter]
     public virtual Func<TColumnItem, TColumnItemValue> ItemValue { get; set; }
 
-    [Parameter]
     public virtual Func<TColumnItem, List<TColumnItem>> ItemChildren { get; set; }
 
-    [Parameter]
-    public Func<TColumnItem, bool> ItemDisabled { get; set; }
+    public virtual Func<TColumnItem, bool> ItemDisabled { get; set; }
 
     // TODO: change to StringNumber, support px, vh, vw, rem
     [Parameter]

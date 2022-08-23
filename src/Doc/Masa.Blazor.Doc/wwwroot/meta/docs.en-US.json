@@ -2445,6 +2445,35 @@
       },
       {
         "Order": 0,
+        "Title": "MMobilePickerView",
+        "FullTitle": "MMobilePickerView",
+        "Type": "menuItem",
+        "Url": "api/mmobilepickerview",
+        "Contents": [
+          {
+            "Id": "section-1559607740",
+            "Title": "Component Pages",
+            "Level": 0
+          },
+          {
+            "Id": "section-1029938464",
+            "Title": "Props",
+            "Level": 0
+          },
+          {
+            "Id": "section-444565322",
+            "Title": "Contents",
+            "Level": 0
+          },
+          {
+            "Id": "section-1613329801",
+            "Title": "Events",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
         "Title": "MNavigationDrawer",
         "FullTitle": "MNavigationDrawer",
         "Type": "menuItem",
@@ -4784,6 +4813,13 @@
             "Type": "menuItem",
             "Url": "components/date-pickers-month",
             "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg"
+          },
+          {
+            "Order": 0,
+            "Title": "Mobile picker view",
+            "FullTitle": "Mobile picker view",
+            "Type": "menuItem",
+            "Url": "components/mobile-picker-view"
           },
           {
             "Order": 0,

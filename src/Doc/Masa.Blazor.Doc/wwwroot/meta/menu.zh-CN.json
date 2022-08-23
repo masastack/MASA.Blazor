@@ -878,6 +878,14 @@
           },
           {
             "Order": 0,
+            "Title": "Mobile picker view",
+            "SubTitle": "移动端选择器",
+            "FullTitle": "Mobile picker view (移动端选择器)",
+            "Type": "menuItem",
+            "Url": "components/mobile-picker-view"
+          },
+          {
+            "Order": 0,
             "Title": "Time pickers",
             "SubTitle": "时间选择器",
             "FullTitle": "Time pickers (时间选择器)",
@@ -3479,6 +3487,35 @@
         "FullTitle": "MMessages",
         "Type": "menuItem",
         "Url": "api/mmessages",
+        "Contents": [
+          {
+            "Id": "section-292649107",
+            "Title": "组件页面",
+            "Level": 0
+          },
+          {
+            "Id": "section-3122241",
+            "Title": "属性",
+            "Level": 0
+          },
+          {
+            "Id": "section-3374707",
+            "Title": "插槽",
+            "Level": 0
+          },
+          {
+            "Id": "section-2654231",
+            "Title": "事件",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
+        "Title": "MMobilePickerView",
+        "FullTitle": "MMobilePickerView",
+        "Type": "menuItem",
+        "Url": "api/mmobilepickerview",
         "Contents": [
           {
             "Id": "section-292649107",

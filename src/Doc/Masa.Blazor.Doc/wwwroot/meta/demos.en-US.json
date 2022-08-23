@@ -871,6 +871,13 @@
           },
           {
             "Order": 0,
+            "Title": "Mobile picker view",
+            "FullTitle": "Mobile picker view",
+            "Type": "menuItem",
+            "Url": "components/mobile-picker-view"
+          },
+          {
+            "Order": 0,
             "Title": "Time pickers",
             "FullTitle": "Time pickers",
             "Type": "menuItem",

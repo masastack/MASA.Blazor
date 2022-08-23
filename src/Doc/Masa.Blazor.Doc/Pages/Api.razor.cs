@@ -109,6 +109,7 @@ public partial class Api
         "MMenu",
         "MMessages",
         "MNavigationDrawer",
+        "MMobilePickerView",
         "MOverlay",
         "MPagination",
         "MPicker",

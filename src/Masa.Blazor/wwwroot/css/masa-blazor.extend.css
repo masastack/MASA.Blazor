@@ -619,6 +619,10 @@ input[type=number] {
 .m-mobile-picker__column {
     flex: 1;
     overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .m-mobile-picker__column-wrapper {
@@ -663,7 +667,7 @@ input[type=number] {
     background-position: top,bottom;
     transform: translateZ(0);
 }
-}
+
 
 /* infinite scroll */
 
