@@ -18,6 +18,11 @@ public partial class MMobilePickerColumn<TColumnItem> : BMobilePickerColumn<TCol
                 cssBuilder =>
                 {
                     cssBuilder.Add("m-mobile-picker__column-item");
+
+                    if (cssBuilder.Data is true)
+                    {
+                        cssBuilder.Add("m-mobile-picker__column-item--disabled");
+                    }
                     // .Add("m-mobile-picker__column-item--selected");
                 },
                 styleBuilder => { styleBuilder.AddHeight(ItemHeight); })

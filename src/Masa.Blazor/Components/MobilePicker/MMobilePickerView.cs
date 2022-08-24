@@ -7,7 +7,7 @@ public class MMobilePickerView<TColumn, TColumnItem, TColumnItemValue> : BMobile
         base.SetComponentClass();
 
         CssProvider
-            .Apply("view", cssBuilder => { cssBuilder.Add("m-mobile-picker__view"); },
+            .Apply("view", cssBuilder => { cssBuilder.Add("m-mobile-picker__view").AddTheme(IsDark); },
                 styleBuilder => { styleBuilder.AddHeight(WrapHeight); })
             .Apply("picked", cssBuilder => { cssBuilder.Add("m-mobile-picker__picked"); }, styleBuilder => { styleBuilder.AddHeight(ItemHeight); })
             .Apply("mask", cssBuilder => { cssBuilder.Add("m-mobile-picker__mask"); },

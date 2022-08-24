@@ -4816,10 +4816,24 @@
           },
           {
             "Order": 0,
-            "Title": "Mobile picker view",
-            "FullTitle": "Mobile picker view",
+            "Title": "Mobile date time pickers",
+            "FullTitle": "Mobile date time pickers",
             "Type": "menuItem",
-            "Url": "components/mobile-picker-view"
+            "Url": "components/mobile-date-time-pickers"
+          },
+          {
+            "Order": 0,
+            "Title": "Mobile pickers",
+            "FullTitle": "Mobile pickers",
+            "Type": "menuItem",
+            "Url": "components/mobile-pickers"
+          },
+          {
+            "Order": 0,
+            "Title": "Mobile picker views",
+            "FullTitle": "Mobile picker views",
+            "Type": "menuItem",
+            "Url": "components/mobile-picker-views"
           },
           {
             "Order": 0,

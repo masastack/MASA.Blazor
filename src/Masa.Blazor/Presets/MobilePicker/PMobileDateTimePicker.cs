@@ -12,7 +12,7 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
     public DateTime Min { get; set; }
 
     [Parameter]
-    public Func<DateTimeColumnType, int, string> Formatter { get; set; }
+    public Func<DateTimePrecision, int, string> Formatter { get; set; }
 
     [Parameter]
     public DateTimePrecision Precision { get; set; } = DateTimePrecision.Day;
@@ -61,7 +61,7 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
 
         if (needChange)
         {
-            Value = GetValidDateTime(Value);
+            Value = GetDateTimeWithinBoundary(Value);
             Columns = GetYears(Value);
         }
     }
@@ -95,13 +95,21 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         minute = minute < 0 ? 0 : minute;
         second = second < 0 ? 0 : second;
 
-        var normalMaxDay = DateTime.DaysInMonth(year, month);
-        if (day > normalMaxDay)
+        var daysInMonth = DateTime.DaysInMonth(year, month);
+        if (day > daysInMonth)
         {
-            day = normalMaxDay;
+            day = daysInMonth;
         }
 
-        value = new DateTime(year, month, day, hour, minute, second);
+        value = new DateTime(
+            year,
+            Precision >= DateTimePrecision.Month ? month : 1,
+            Precision >= DateTimePrecision.Day ? day : 1,
+            Precision >= DateTimePrecision.Hour ? hour : 0,
+            Precision >= DateTimePrecision.Minute ? minute : 0,
+            Precision >= DateTimePrecision.Second ? second : 0
+        );
+
         return true;
     }
 
@@ -141,6 +149,7 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         }
 
         TryConvertInternalValueToValue(val, out var dateTime);
+        dateTime = GetDateTimeWithinBoundary(dateTime);
         TryConvertValueToInternalValue(dateTime, out val);
 
         var column = Columns.FirstOrDefault(c => c.Value == first);
@@ -153,7 +162,7 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
             index++;
         }
 
-        dateTime = GetValidDateTime(dateTime);
+        dateTime = GetDateTimeWithinBoundary(dateTime);
 
         if (column is { Children.Count: 0 })
         {
@@ -180,12 +189,25 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         };
     }
 
-    private DateTime GetValidDateTime(DateTime input)
+    private DateTime GetDateTimeWithinBoundary(DateTime input)
     {
-        if (input == default) return DateTime.Now;
-        if (input > Max) return Max;
-        if (input < Min) return Min;
-        return input;
+        var dateTime = input;
+
+        if (input == default)
+        {
+            dateTime = DateTime.Now;
+        }
+
+        if (dateTime < Min)
+        {
+            dateTime = Min;
+        }
+        else if (dateTime > Max)
+        {
+            dateTime = Max;
+        }
+
+        return dateTime;
     }
 
     private List<DateTimeColumn> GetYears(DateTime dateTime)
@@ -196,7 +218,7 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
 
         foreach (var year in years)
         {
-            var yearColumn = new DateTimeColumn(DateTimeColumnType.Year, year, Formatter);
+            var yearColumn = new DateTimeColumn(DateTimePrecision.Year, year, Formatter);
             if (Precision == DateTimePrecision.Year)
             {
                 yearList.Add(yearColumn);
@@ -236,7 +258,7 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
 
         foreach (var month in months)
         {
-            var monthColumn = new DateTimeColumn(DateTimeColumnType.Month, month, Formatter);
+            var monthColumn = new DateTimeColumn(DateTimePrecision.Month, month, Formatter);
             if (Precision == DateTimePrecision.Month)
             {
                 monthList.Add(monthColumn);
@@ -280,7 +302,7 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         var days = Enumerable.Range(from, count).ToArray();
         foreach (var day in days)
         {
-            var dayColumn = new DateTimeColumn(DateTimeColumnType.Day, day, Formatter);
+            var dayColumn = new DateTimeColumn(DateTimePrecision.Day, day, Formatter);
             if (Precision == DateTimePrecision.Day)
             {
                 dayList.Add(dayColumn);
@@ -319,7 +341,7 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         var hours = Enumerable.Range(from, count).ToArray();
         foreach (var hour in hours)
         {
-            var hourColumn = new DateTimeColumn(DateTimeColumnType.Hour, hour, Formatter);
+            var hourColumn = new DateTimeColumn(DateTimePrecision.Hour, hour, Formatter);
             if (Precision == DateTimePrecision.Hour)
             {
                 hourList.Add(hourColumn);
@@ -358,7 +380,7 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         var minutes = Enumerable.Range(from, count).ToArray();
         foreach (var minute in minutes)
         {
-            var minuteColumn = new DateTimeColumn(DateTimeColumnType.Minute, minute, Formatter);
+            var minuteColumn = new DateTimeColumn(DateTimePrecision.Minute, minute, Formatter);
             if (Precision == DateTimePrecision.Minute)
             {
                 minuteList.Add(minuteColumn);
@@ -393,7 +415,7 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
 
         var count = to - from + 1;
         var seconds = Enumerable.Range(from, count).ToArray();
-        return seconds.Select(second => new DateTimeColumn(DateTimeColumnType.Second, second, Formatter)).ToList();
+        return seconds.Select(second => new DateTimeColumn(DateTimePrecision.Second, second, Formatter)).ToList();
     }
 
     private static bool Equals(DateTime d1, DateTime d2, DateTimePrecision precision)
@@ -444,28 +466,18 @@ public class DateTimeColumn
 
     public string Text => Formatter?.Invoke(Type, Value) ?? Value.ToString("00");
 
-    public DateTimeColumnType Type { get; }
+    public DateTimePrecision Type { get; }
 
-    public Func<DateTimeColumnType, int, string> Formatter { get; }
+    public Func<DateTimePrecision, int, string> Formatter { get; }
 
     public List<DateTimeColumn> Children { get; set; } = new();
 
-    public DateTimeColumn(DateTimeColumnType type, int value, Func<DateTimeColumnType, int, string> formatter)
+    public DateTimeColumn(DateTimePrecision type, int value, Func<DateTimePrecision, int, string> formatter)
     {
         Value = value;
         Type = type;
         Formatter = formatter;
     }
-}
-
-public enum DateTimeColumnType
-{
-    Year,
-    Month,
-    Day,
-    Hour,
-    Minute,
-    Second
 }
 
 public enum DateTimePrecision
@@ -475,5 +487,5 @@ public enum DateTimePrecision
     Day,
     Hour,
     Minute,
-    Second,
+    Second
 }

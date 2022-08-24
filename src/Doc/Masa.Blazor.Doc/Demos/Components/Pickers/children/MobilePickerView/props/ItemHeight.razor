@@ -5,8 +5,10 @@
                            TColumn="List<string>"
                            TColumnItem="string"
                            TColumnItemValue="string"
+                           ItemDisabled="item => item == DateTime.Now.DayOfWeek.ToString()"
                            ItemValue="item => item"
-                           ItemText="item => item">
+                           ItemText="item => item"
+                           ItemHeight="64">
         </MMobilePickerView>
     </MCol>
     <MCol Cols="12" Md="6" Class="text-center">
@@ -18,7 +20,7 @@
 
     private static readonly string DayOfWeek = DateTime.Now.DayOfWeek.ToString();
     private static readonly string AmPm = DateTime.Now.Hour > 12 ? "PM" : "AM";
-
+    
     private readonly List<List<string>> _columns = new()
     {
         new List<string>

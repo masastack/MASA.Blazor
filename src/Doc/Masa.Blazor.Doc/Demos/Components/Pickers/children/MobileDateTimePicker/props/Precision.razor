@@ -1,0 +1,35 @@
+﻿<div class="text-center">
+    <MSelect @bind-Value="_precision"
+             Label="Precision"
+             Items="@Items"
+             ItemText="i => i.ToString()"
+             ItemValue="i => i"
+             Class="d-inline-block"
+             Style="max-width: 180px">
+    </MSelect>
+
+    <PMobileDateTimePicker @bind-Value="_dateTime" Precision="_precision" @key="_precision">
+        <ActivatorContent>
+            <MButton Color="primary" Class="text-capitalize" Text @attributes="@context.Attrs">
+                @(_dateTime)
+            </MButton>
+        </ActivatorContent>
+    </PMobileDateTimePicker>
+</div>
+
+@code {
+
+    private DateTime _dateTime;
+    private DateTimePrecision _precision = DateTimePrecision.Day;
+
+    private readonly static List<DateTimePrecision> Items = new()
+    {
+        DateTimePrecision.Year,
+        DateTimePrecision.Month,
+        DateTimePrecision.Day,
+        DateTimePrecision.Hour,
+        DateTimePrecision.Minute,
+        DateTimePrecision.Second
+    };
+
+}
