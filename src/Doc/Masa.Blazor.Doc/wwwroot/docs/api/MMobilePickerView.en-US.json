@@ -15,6 +15,11 @@
       "Description": ""
     },
     {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Description": "Applies the dark theme variant to the component."
+    },
+    {
       "Name": "Id",
       "Type": "String",
       "Description": ""
@@ -42,6 +47,11 @@
     {
       "Name": "ItemValue",
       "Type": "Func<TColumnItem,TColumnItemValue>",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
       "Description": ""
     },
     {

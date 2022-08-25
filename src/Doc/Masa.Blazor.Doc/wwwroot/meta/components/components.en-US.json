@@ -6716,6 +6716,17 @@
       },
       {
         "Order": 0,
+        "Name": "itemDisabled",
+        "Title": "Disable item",
+        "Description": "",
+        "Code": "<MRow Justify=\"JustifyTypes.Center\" Align=\"AlignTypes.Center\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <MMobilePickerView @bind-Value=\"_value\"\r\n                           Columns=\"@_columns\"\r\n                           TColumn=\"List<string>\"\r\n                           TColumnItem=\"string\"\r\n                           TColumnItemValue=\"string\"\r\n                           ItemValue=\"item => item\"\r\n                           ItemText=\"item => item\"\r\n                           ItemDisabled=\"item => item == NowDayOfWeek\">\r\n        </MMobilePickerView>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\" Class=\"text-center\">\r\n        Value: @string.Join(\" \", _value)\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    private static readonly string NowDayOfWeek = DateTime.Now.DayOfWeek.ToString();\r\n    private static readonly string NowAmPm = DateTime.Now.Hour > 12 ? \"PM\" : \"AM\";\r\n\r\n    private readonly List<List<string>> _columns = new()\r\n    {\r\n        new List<string>\r\n        {\r\n            DayOfWeek.Monday.ToString(),\r\n            DayOfWeek.Tuesday.ToString(),\r\n            DayOfWeek.Wednesday.ToString(),\r\n            DayOfWeek.Thursday.ToString(),\r\n            DayOfWeek.Friday.ToString(),\r\n            DayOfWeek.Saturday.ToString(),\r\n            DayOfWeek.Sunday.ToString()\r\n        },\r\n        new List<string>\r\n        {\r\n            \"AM\",\r\n            \"PM\"\r\n        }\r\n    };\r\n\r\n    private List<string> _value = new() { NowDayOfWeek, NowAmPm };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobilePickerView.props.ItemDisabled",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
         "Name": "itemHeight",
         "Title": "Custom item height",
         "Description": "<p>You can customize the height of the option through <code>Itemheight</code>. Currently, only <code>px</code> is supported.</p>\n",

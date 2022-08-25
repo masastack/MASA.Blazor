@@ -493,6 +493,7 @@
   "Demos.Components.Pickers.children.MobilePicker.props.ItemHeight",
   "Demos.Components.Pickers.children.MobilePickerView.usage.Index",
   "Demos.Components.Pickers.children.MobilePickerView.props.Cascade",
+  "Demos.Components.Pickers.children.MobilePickerView.props.ItemDisabled",
   "Demos.Components.Pickers.children.MobilePickerView.props.ItemHeight",
   "Demos.Components.Pickers.children.TimePickers.usage.Index",
   "Demos.Components.Pickers.children.TimePickers.props.AllowedTimes",

@@ -7,7 +7,7 @@
                            TColumnItemValue="string"
                            ItemValue="item => item"
                            ItemText="item => item"
-                           ItemHeight="64">
+                           ItemDisabled="item => item == NowDayOfWeek">
         </MMobilePickerView>
     </MCol>
     <MCol Cols="12" Md="6" Class="text-center">
@@ -17,20 +17,20 @@
 
 @code {
 
-    private static readonly string DayOfWeek = DateTime.Now.DayOfWeek.ToString();
-    private static readonly string AmPm = DateTime.Now.Hour > 12 ? "PM" : "AM";
-    
+    private static readonly string NowDayOfWeek = DateTime.Now.DayOfWeek.ToString();
+    private static readonly string NowAmPm = DateTime.Now.Hour > 12 ? "PM" : "AM";
+
     private readonly List<List<string>> _columns = new()
     {
         new List<string>
         {
-            System.DayOfWeek.Monday.ToString(),
-            System.DayOfWeek.Tuesday.ToString(),
-            System.DayOfWeek.Wednesday.ToString(),
-            System.DayOfWeek.Thursday.ToString(),
-            System.DayOfWeek.Friday.ToString(),
-            System.DayOfWeek.Saturday.ToString(),
-            System.DayOfWeek.Sunday.ToString()
+            DayOfWeek.Monday.ToString(),
+            DayOfWeek.Tuesday.ToString(),
+            DayOfWeek.Wednesday.ToString(),
+            DayOfWeek.Thursday.ToString(),
+            DayOfWeek.Friday.ToString(),
+            DayOfWeek.Saturday.ToString(),
+            DayOfWeek.Sunday.ToString()
         },
         new List<string>
         {
@@ -39,6 +39,6 @@
         }
     };
 
-    private List<string> _value = new() { DayOfWeek, AmPm };
+    private List<string> _value = new() { NowDayOfWeek, NowAmPm };
 
 }

@@ -667,6 +667,14 @@ input[type=number] {
     border-bottom: 1px solid #ebedf0;
 }
 
+.theme--light.m-mobile-picker__view .m-mobile-picker__picked {
+    border-color: #ebedf0;
+}
+
+.theme--dark.m-mobile-picker__view .m-mobile-picker__picked {
+    border-color: #3a3a3c;
+}
+
 .m-mobile-picker__mask {
     position: absolute;
     pointer-events: none;
@@ -684,7 +692,7 @@ input[type=number] {
 }
 
 .theme--dark.m-mobile-picker__view .m-mobile-picker__mask {
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, .6), rgba(0, 0, 0, .1)), linear-gradient(0deg, rgba(0, 0, 0, .6), rgba(0, 0, 0, .1));
+    background-image: linear-gradient(180deg, rgba(30, 30, 30, .6), rgba(30, 30, 30, .1)), linear-gradient(0deg, rgba(30, 30, 30, .6), rgba(30, 30, 30, .1));
 }
 
 /* infinite scroll */
