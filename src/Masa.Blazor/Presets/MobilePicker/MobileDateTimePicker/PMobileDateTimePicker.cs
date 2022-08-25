@@ -28,6 +28,8 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
         Now = DateTime.Now;
     }
 
+    protected override string ClassPrefix => "p-mobile-datetime-picker";
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -458,34 +460,4 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
 
         return false;
     }
-}
-
-public class DateTimeColumn
-{
-    public int Value { get; }
-
-    public string Text => Formatter?.Invoke(Type, Value) ?? Value.ToString("00");
-
-    public DateTimePrecision Type { get; }
-
-    public Func<DateTimePrecision, int, string> Formatter { get; }
-
-    public List<DateTimeColumn> Children { get; set; } = new();
-
-    public DateTimeColumn(DateTimePrecision type, int value, Func<DateTimePrecision, int, string> formatter)
-    {
-        Value = value;
-        Type = type;
-        Formatter = formatter;
-    }
-}
-
-public enum DateTimePrecision
-{
-    Year,
-    Month,
-    Day,
-    Hour,
-    Minute,
-    Second
 }

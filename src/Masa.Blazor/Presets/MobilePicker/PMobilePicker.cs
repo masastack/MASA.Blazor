@@ -18,4 +18,6 @@ public class PMobilePicker<TColumn, TColumnItem, TColumnItemValue> : MobilePicke
 
     [Parameter]
     public override Func<TColumnItem, bool> ItemDisabled { get; set; }
+
+    protected override string ClassPrefix => "p-mobile-picker";
 }

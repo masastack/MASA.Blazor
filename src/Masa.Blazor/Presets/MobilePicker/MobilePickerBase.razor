@@ -3,8 +3,7 @@
 @typeparam TColumnItemValue
 @typeparam TValue
 
-@*TODO: change the class name in this file *@
-<MBottomSheet ContentClass="p-mobile-cascader__content"
+<MBottomSheet ContentClass="@($"{ClassPrefix}__content")"
               Value="Visible"
               ValueChanged="HandleVisibleChanged">
     <ActivatorContent>
@@ -13,7 +12,7 @@
     <ChildContent>
         <MSheet Class="d-flex justify-space-between align-center">
             <MButton Plain Color="primary" OnClick="OnCancel">@I18n.T("$masaBlazor.cancel")</MButton>
-            <div class="p-mobile-cascader__title">@Title</div>
+            <div class=@($"{ClassPrefix}__title")>@Title</div>
             <MButton Plain Color="primary" OnClick="HandleOnConfirm">@I18n.T("$masaBlazor.ok")</MButton>
         </MSheet>
 
