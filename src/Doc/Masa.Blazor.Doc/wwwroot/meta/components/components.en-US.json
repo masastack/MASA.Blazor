@@ -6570,6 +6570,69 @@
     "FullTitle": "Date pickers month"
   },
   {
+    "Desc": "<p>A date picker designed for the mobile.</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-25T15:36:14.6754571+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "",
+        "Code": "<div class=\"text-center\">\r\n    <PMobileDatePicker @bind-Value=\"_dateTime\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_dateTime)\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileDatePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private DateOnly _dateTime;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileDatePicker.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "formatter",
+        "Title": "Formatter",
+        "Description": "<p>Format the content displayed in each column.</p>\n",
+        "Code": "<div class=\"text-center\">\r\n    <PMobileDatePicker @bind-Value=\"_date\" Formatter=\"@CustomFormatter\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_date)\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileDatePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private DateOnly _date;\r\n\r\n    private static string CustomFormatter(DatePrecision type, int val)\r\n    {\r\n        return type switch \r\n        {\r\n            DatePrecision.Year => $\"{val}年\",\r\n            DatePrecision.Month => $\"{val}月\",\r\n            DatePrecision.Day => $\"{val}日\",\r\n            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)\r\n            };\r\n    }\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileDatePicker.props.Formatter",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "minMax",
+        "Title": "Min and max",
+        "Description": "",
+        "Code": "<div class=\"text-center\">\r\n    <PMobileDatePicker @bind-Value=\"_date\"\r\n                       Max=\"DateOnly.FromDateTime(DateTime.Now)\"\r\n                       Min=\"new DateOnly(2000, 1, 1)\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_date)\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileDatePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private DateOnly _date;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileDatePicker.props.MinMax",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "precision",
+        "Title": "Precision",
+        "Description": "",
+        "Code": "<div class=\"text-center\">\r\n    <MSelect @bind-Value=\"_precision\"\r\n             Label=\"Precision\"\r\n             Items=\"@Items\"\r\n             ItemText=\"i => i.ToString()\"\r\n             ItemValue=\"i => i\"\r\n             Class=\"d-inline-block\"\r\n             Style=\"max-width: 180px\">\r\n    </MSelect>\r\n\r\n    <PMobileDatePicker @bind-Value=\"_date\" Precision=\"_precision\" @key=\"_precision\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_date)\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileDatePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private DateOnly _date;\r\n    private DatePrecision _precision = DatePrecision.Day;\r\n\r\n    private readonly static List<DatePrecision> Items = new()\r\n    {\r\n        DatePrecision.Year,\r\n        DatePrecision.Month,\r\n        DatePrecision.Day\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileDatePicker.props.Precision",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/mobile-date-time-pickers",
+      "/components/mobile-picker-views",
+      "/components/mobile-pickers"
+    ],
+    "Title": "Mobile date pickers",
+    "Type": "MobileDatePickers",
+    "FullTitle": "Mobile date pickers"
+  },
+  {
     "Desc": "<p>A date time picker designed for the mobile.</p>\n",
     "Order": 0,
     "OtherDocs": {},

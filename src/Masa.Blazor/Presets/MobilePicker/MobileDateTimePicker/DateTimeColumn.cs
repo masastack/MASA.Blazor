@@ -1,21 +1,28 @@
 ﻿namespace Masa.Blazor.Presets;
 
-public class DateTimeColumn
+public class DateTimeColumn : DateTimeColumn<DateTimePrecision>
+{
+    public DateTimeColumn(DateTimePrecision precision, int value, Func<DateTimePrecision, int, string> formatter) : base(precision, value, formatter)
+    {
+    }
+
+    public List<DateTimeColumn> Children { get; set; } = new();
+}
+
+public class DateTimeColumn<TPrecision>
 {
     public int Value { get; }
 
-    public string Text => Formatter?.Invoke(Type, Value) ?? Value.ToString("00");
+    public string Text => Formatter?.Invoke(Precision, Value) ?? Value.ToString("00");
 
-    public DateTimePrecision Type { get; }
+    public TPrecision Precision { get; }
 
-    public Func<DateTimePrecision, int, string> Formatter { get; }
+    public Func<TPrecision, int, string> Formatter { get; }
 
-    public List<DateTimeColumn> Children { get; set; } = new();
-
-    public DateTimeColumn(DateTimePrecision type, int value, Func<DateTimePrecision, int, string> formatter)
+    public DateTimeColumn(TPrecision precision, int value, Func<TPrecision, int, string> formatter)
     {
         Value = value;
-        Type = type;
+        Precision = precision;
         Formatter = formatter;
     }
 }

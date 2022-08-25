@@ -871,6 +871,13 @@
           },
           {
             "Order": 0,
+            "Title": "Mobile date pickers",
+            "FullTitle": "Mobile date pickers",
+            "Type": "menuItem",
+            "Url": "components/mobile-date-pickers"
+          },
+          {
+            "Order": 0,
             "Title": "Mobile date time pickers",
             "FullTitle": "Mobile date time pickers",
             "Type": "menuItem",

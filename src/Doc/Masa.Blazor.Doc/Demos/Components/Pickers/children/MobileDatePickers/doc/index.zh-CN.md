@@ -2,10 +2,10 @@
 category: Components
 subtitle: 移动端日期选择器
 type: 移动端日期选择器
-title: Mobile date time pickers
+title: Mobile date pickers
 cols: 1
 related:
-  - /components/date-pickers
+  - /components/mobile-date-time-pickers
   - /components/mobile-picker-views
   - /components/mobile-pickers
 ---

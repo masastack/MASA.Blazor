@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using Masa.Blazor.Presets.MobilePicker;
+﻿using Masa.Blazor.Presets.MobilePicker;
 
 namespace Masa.Blazor.Presets;
 
@@ -20,7 +19,6 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
     private DateTime _prevMax;
     private DateTime _prevMin;
 
-    // TODO: UtcNow?
     private DateTime Now { get; init; }
 
     public PMobileDateTimePicker()
@@ -197,7 +195,7 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
 
         if (input == default)
         {
-            dateTime = DateTime.Now;
+            dateTime = Now;
         }
 
         if (dateTime < Min)

@@ -64,7 +64,7 @@ public abstract partial class MobilePickerBase<TColumn, TColumnItem, TColumnItem
     private List<TColumnItemValue> InternalValue { get; set; } = new();
 
     private Task OnCancel() => HandleVisibleChanged(false);
-    
+
     protected abstract string ClassPrefix { get; }
 
     protected virtual bool TryConvertInternalValueToValue(List<TColumnItemValue> internalValue, out TValue value)
