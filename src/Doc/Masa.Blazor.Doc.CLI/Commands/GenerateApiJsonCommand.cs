@@ -82,6 +82,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
             { "MHover", new string[] { "Hover" } },
             { "MIcon", new string[] { "Icons" } },
             { "MImage", new string[] { "Images" } },
+            { "MInfiniteScroll", new string[] { "Infinite scroll" } },
             { "MInput", new string[] { "Text fields" } },
             { "MOtpInput", new string[] { "OTP input" } },
             { "MItem", new string[] { "Item groups" } },

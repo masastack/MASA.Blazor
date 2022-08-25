@@ -121,6 +121,10 @@ body {
 }
 
 @media screen and (max-width: 641px) {
+    .m-heading > a {
+        display: none !important;
+    }
+
     .baselayout-m-app {
         background-color: #fff !important;
     }

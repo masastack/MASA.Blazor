@@ -261,7 +261,7 @@ namespace Masa.Blazor
                     return true;
                 }
 
-                if (BindConverter.TryConvertToDecimal(NumberValue, System.Globalization.CultureInfo.InvariantCulture, out var value))
+                if (BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out var value))
                 {
                     return value < Props.Max;
                 }
@@ -279,7 +279,7 @@ namespace Masa.Blazor
                     return true;
                 }
 
-                if (BindConverter.TryConvertToDecimal(NumberValue, System.Globalization.CultureInfo.InvariantCulture, out var value))
+                if (BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out var value))
                 {
                     return value > Props.Min;
                 }
@@ -498,7 +498,7 @@ namespace Masa.Blazor
                 await inputElement.AddEventListenerAsync("compositionstart", CreateEventCallback(OnCompositionStart));
                 await inputElement.AddEventListenerAsync("compositionend", CreateEventCallback(OnCompositionEnd));
 
-                await DomEventJsInterop.IntersectionObserver(InputElement.GetSelector(), TryAutoFocus);
+                await DomEventJsInterop.IntersectionObserver(InputElement.GetSelector(), TryAutoFocus, OnResize);
 
                 var tasks = new Task[3];
 
@@ -524,7 +524,7 @@ namespace Masa.Blazor
             }
 
             //No label
-            if (LabelReference == null || LabelReference.Ref.Id == null)
+            if (LabelReference is not { Ref.Context: { } })
             {
                 return;
             }
@@ -550,7 +550,7 @@ namespace Masa.Blazor
 
         private async Task SetPrefixWidthAsync()
         {
-            if (PrefixElement.Id == null)
+            if (PrefixElement.Context == null)
             {
                 return;
             }
@@ -573,7 +573,7 @@ namespace Masa.Blazor
                 return;
             }
 
-            if (PrependInnerElement.Id == null)
+            if (PrependInnerElement.Context == null)
             {
                 return;
             }
@@ -599,6 +599,13 @@ namespace Masa.Blazor
             await InputElement.FocusAsync();
 
             return true;
+        }
+
+        private async Task OnResize()
+        {
+            await SetLabelWidthAsync();
+            await SetPrefixWidthAsync();
+            await SetPrependWidthAsync();
         }
 
         public virtual async Task HandleOnAppendOuterClickAsync(MouseEventArgs args)
@@ -659,7 +666,7 @@ namespace Masa.Blazor
         {
             Inputting = true;
 
-            var success = BindConverter.TryConvertTo<TValue>(args.Value.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var val);
+            var success = BindConverter.TryConvertTo<TValue>(args.Value.ToString(), CultureInfo.InvariantCulture, out var val);
 
             if (success)
             {
@@ -708,13 +715,13 @@ namespace Masa.Blazor
 
         private Task<TValue> CheckNumberValidate()
         {
-            if (Type == "number" && BindConverter.TryConvertToDecimal(NumberValue, System.Globalization.CultureInfo.InvariantCulture, out var value))
+            if (Type == "number" && BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out var value))
             {
                 TValue returnValue;
 
-                if (Props.Min != null && value < Props.Min && BindConverter.TryConvertTo<TValue>(Props.Min.ToString(), System.Globalization.CultureInfo.InvariantCulture, out returnValue))
+                if (Props.Min != null && value < Props.Min && BindConverter.TryConvertTo<TValue>(Props.Min.ToString(), CultureInfo.InvariantCulture, out returnValue))
                     return Task.FromResult(returnValue);
-                else if (Props.Max != null && value > Props.Max && BindConverter.TryConvertTo<TValue>(Props.Max.ToString(), System.Globalization.CultureInfo.InvariantCulture, out returnValue))
+                else if (Props.Max != null && value > Props.Max && BindConverter.TryConvertTo<TValue>(Props.Max.ToString(), CultureInfo.InvariantCulture, out returnValue))
                     return Task.FromResult(returnValue);
             }
 
@@ -729,7 +736,7 @@ namespace Masa.Blazor
 
         public async Task HandleOnNumberUpClickAsync(MouseEventArgs args)
         {
-            if (UpButtonEnabled && BindConverter.TryConvertToDecimal(NumberValue, System.Globalization.CultureInfo.InvariantCulture, out decimal value))
+            if (UpButtonEnabled && BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out decimal value))
             {
                 if (Props.Min != null && value < Props.Min)
                 {
@@ -743,7 +750,7 @@ namespace Masa.Blazor
                     value = Props.Max.Value;
                 }
 
-                if (BindConverter.TryConvertTo<TValue>(value.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var internalValue))
+                if (BindConverter.TryConvertTo<TValue>(value.ToString(), CultureInfo.InvariantCulture, out var internalValue))
                 {
                     await SetInternalValueAsync(internalValue);
                 }
@@ -754,7 +761,7 @@ namespace Masa.Blazor
 
         public async Task HandleOnNumberDownClickAsync(MouseEventArgs args)
         {
-            if (DownButtonEnabled && BindConverter.TryConvertToDecimal(NumberValue, System.Globalization.CultureInfo.InvariantCulture, out var value))
+            if (DownButtonEnabled && BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out var value))
             {
                 if (Props.Max != null && value > Props.Max)
                 {
@@ -768,7 +775,7 @@ namespace Masa.Blazor
                     value = Props.Min.Value;
                 }
 
-                if (BindConverter.TryConvertTo<TValue>(value.ToString(), System.Globalization.CultureInfo.InvariantCulture, out var internalValue))
+                if (BindConverter.TryConvertTo<TValue>(value.ToString(), CultureInfo.InvariantCulture, out var internalValue))
                 {
                     await SetInternalValueAsync(internalValue);
                 }

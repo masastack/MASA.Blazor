@@ -107,9 +107,9 @@ public class MECharts : BECharts, IDisposable
         }
     }
 
-    public async Task DisposeEcharts()
+    public async Task DisposeECharts()
     {
-        _isEChartsDisposed = true;
         await _echarts.InvokeVoidAsync("dispose", Ref.GetSelector());
+        _isEChartsDisposed = true;
     }
 }

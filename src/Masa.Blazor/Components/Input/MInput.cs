@@ -18,6 +18,9 @@
         public StringNumber Height { get; set; }
 
         [Parameter]
+        public StringNumber MinHeight { get; set; }
+
+        [Parameter]
         public EventCallback<TValue> OnChange { get; set; }
 
         public virtual string ComputedColor => IsDisabled ? "" : Color ?? (IsDark ? "white" : "primary");
@@ -135,6 +138,7 @@
                 {
                     styleBuilder
                         .AddHeight(Height)
+                        .AddMinHeight(MinHeight)
                         .AddBackgroundColor(BackgroundColor);
                 });
 

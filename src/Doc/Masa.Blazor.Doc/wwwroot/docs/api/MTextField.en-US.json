@@ -173,6 +173,11 @@
       "Description": ""
     },
     {
+      "Name": "MinHeight",
+      "Type": "StringNumber",
+      "Description": "Sets the minimum height for the component."
+    },
+    {
       "Name": "NumberProps",
       "Type": "Action<TextFieldNumberProperty>",
       "Description": ""

@@ -1865,6 +1865,35 @@
       },
       {
         "Order": 0,
+        "Title": "MInfiniteScroll",
+        "FullTitle": "MInfiniteScroll",
+        "Type": "menuItem",
+        "Url": "api/minfinitescroll",
+        "Contents": [
+          {
+            "Id": "section-1559607740",
+            "Title": "Component Pages",
+            "Level": 0
+          },
+          {
+            "Id": "section-1029938464",
+            "Title": "Props",
+            "Level": 0
+          },
+          {
+            "Id": "section-444565322",
+            "Title": "Contents",
+            "Level": 0
+          },
+          {
+            "Id": "section-1613329801",
+            "Title": "Events",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
         "Title": "MInput",
         "FullTitle": "MInput",
         "Type": "menuItem",
@@ -4673,6 +4702,14 @@
         "FullTitle": "Images",
         "Type": "menuItem",
         "Url": "components/images",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Infinite scroll",
+        "FullTitle": "Infinite scroll",
+        "Type": "menuItem",
+        "Url": "components/infinite-scroll",
         "Children": []
       },
       {
