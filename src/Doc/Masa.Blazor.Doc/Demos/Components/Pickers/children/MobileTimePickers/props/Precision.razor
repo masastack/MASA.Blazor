@@ -1,0 +1,32 @@
+﻿<div class="text-center">
+    <MSelect @bind-Value="_precision"
+             Label="Precision"
+             Items="@Items"
+             ItemText="i => i.ToString()"
+             ItemValue="i => i"
+             Class="d-inline-block"
+             Style="max-width: 180px">
+    </MSelect>
+
+    <PMobileTimePicker @bind-Value="_time" Precision="_precision" @key="_precision">
+        <ActivatorContent>
+            <MButton Color="primary" Class="text-capitalize" Text @attributes="@context.Attrs">
+                @(_time.ToLongTimeString())
+            </MButton>
+        </ActivatorContent>
+    </PMobileTimePicker>
+</div>
+
+@code {
+
+    private TimeOnly _time;
+    private TimePrecision _precision = TimePrecision.Second;
+
+    private readonly static List<TimePrecision> Items = new()
+    {
+        TimePrecision.Hour,
+        TimePrecision.Minute,
+        TimePrecision.Second
+    };
+
+}

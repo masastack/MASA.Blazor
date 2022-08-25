@@ -975,6 +975,14 @@
           },
           {
             "Order": 0,
+            "Title": "Mobile time pickers",
+            "SubTitle": "移动端时间选择器",
+            "FullTitle": "Mobile time pickers (移动端时间选择器)",
+            "Type": "menuItem",
+            "Url": "components/mobile-time-pickers"
+          },
+          {
+            "Order": 0,
             "Title": "Time pickers",
             "SubTitle": "时间选择器",
             "FullTitle": "Time pickers (时间选择器)",

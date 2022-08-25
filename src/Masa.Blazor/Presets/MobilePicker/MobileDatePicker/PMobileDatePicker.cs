@@ -75,7 +75,7 @@ public class PMobileDatePicker : MobilePickerBase<DateColumn, DateColumn, int, D
             return false;
         }
 
-        var datetime = new int[6];
+        var datetime = new int[3];
         for (var i = 0; i < internalValue.Count; i++)
         {
             datetime[i] = internalValue[i];

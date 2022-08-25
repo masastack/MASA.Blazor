@@ -1,15 +1,15 @@
 ﻿<div class="text-center">
-    <PMobileDatePicker @bind-Value="_date">
+    <PMobileTimePicker @bind-Value="_time">
         <ActivatorContent>
             <MButton Color="primary" Class="text-capitalize" Text @attributes="@context.Attrs">
-                @(_date)
+                @(_time.ToLongTimeString())
             </MButton>
         </ActivatorContent>
-    </PMobileDatePicker>
+    </PMobileTimePicker>
 </div>
 
 @code {
 
-    private DateOnly _date;
+    private TimeOnly _time;
 
 }

@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Presets.MobilePicker;
 
-public abstract partial class MobilePickerBase<TColumn, TColumnItem, TColumnItemValue, TValue>
+public partial class MobilePickerBase<TColumn, TColumnItem, TColumnItemValue, TValue>
 {
     [Inject]
     private I18n I18n { get; set; } = null!;
@@ -65,7 +65,7 @@ public abstract partial class MobilePickerBase<TColumn, TColumnItem, TColumnItem
 
     private Task OnCancel() => HandleVisibleChanged(false);
 
-    protected abstract string ClassPrefix { get; }
+    protected virtual string ClassPrefix { get; }
 
     protected virtual bool TryConvertInternalValueToValue(List<TColumnItemValue> internalValue, out TValue value)
     {
