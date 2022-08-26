@@ -1,0 +1,17 @@
+﻿@using Masa.Blazor.Doc.Models
+
+<MListItem Class="m-list-item--default"
+           Href="@Item.Url"
+           TwoLine="@TwoLine"
+           Exact>
+    <NavItemContent Item="@Item" />
+</MListItem>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public DemoMenuItemModel Item { get; set; }
+
+    private bool TwoLine => !string.IsNullOrWhiteSpace(Item?.SubTitle);
+
+}

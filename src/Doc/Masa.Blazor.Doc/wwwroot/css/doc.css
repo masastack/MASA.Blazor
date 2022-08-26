@@ -853,18 +853,3 @@ code[class*=language-], pre[class*=language-] {
 .api-table td.regular-row {
     padding: 8px 16px !important;
 }
-
-.nav-badge {
-    max-width: calc(100% - 52px);
-}
-
-.nav-badge > div {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 100%;
-    overflow: hidden;
-}
-
-.m-list-item__title > .nav-badge {
-    margin-top: 8px;
-}

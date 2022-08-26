@@ -27,4 +27,7 @@ public class DemoFrontMatter
         
     [YamlMember(Alias = "group")]
     public string Group { get; set; }
+    
+    [YamlMember(Alias = "tag")]
+    public string Tag { get; set; }
 }

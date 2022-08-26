@@ -10,21 +10,10 @@ namespace Masa.Blazor.Doc.Models
 
         public string SubTitle { get; set; }
 
-        public string FullTitle
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(SubTitle))
-                {
-                    return $"{Title} ({SubTitle})";
-                }
-
-                return Title;
-            }
-        }
+        public string FullTitle => !string.IsNullOrEmpty(SubTitle) ? $"{Title} ({SubTitle})" : Title;
 
         public string Type { get; set; }
-        
+
         public string Group { get; set; }
 
         public string Url { get; set; }
@@ -32,6 +21,8 @@ namespace Masa.Blazor.Doc.Models
         public string Cover { get; set; }
 
         public string Icon { get; set; }
+
+        public string Tag { get; set; }
 
         public DemoMenuItemModel[] Children { get; set; }
 

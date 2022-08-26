@@ -4,7 +4,6 @@ subtitle: 滑块
 type: 滑块
 title: Sliders
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sliders.svg
 related:
   - /components/forms
   - /components/selects

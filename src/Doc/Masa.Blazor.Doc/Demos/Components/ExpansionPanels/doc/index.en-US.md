@@ -3,7 +3,6 @@ category: Components
 type: ExpansionPanels
 title: Expansion panels
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
 related:
   - /components/cards
   - /components/data-tables

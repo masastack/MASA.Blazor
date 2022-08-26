@@ -220,6 +220,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
                                 Type = "menuItem",
                                 Order = x.Value.Order,
                                 Cover = x.Value.Cover,
+                                Tag = x.Value.Tag,
                                 Children = x.Value.Children.Select(y => new DemoMenuItemModel()
                                 {
                                     Title = y.Title,
@@ -228,6 +229,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
                                     Type = "menuItem",
                                     Order = y.Order,
                                     Cover = y.Cover,
+                                    Tag = y.Tag
                                 }).ToArray()
                             })
                                 .OrderBy(x => x.Title, new MenuComparer())
@@ -421,7 +423,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
 
             FileSystemInfo docDir = componentDirectory.GetFileSystemInfos("doc")?.FirstOrDefault();
 
-            if (docDir != null && docDir.Exists)
+            if (docDir is { Exists: true })
             {
                 foreach (FileSystemInfo docItem in (docDir as DirectoryInfo).GetFileSystemInfos().OrderBy(r => r.Name))
                 {

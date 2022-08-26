@@ -36,35 +36,19 @@
                                         Color="#5C2D91"
                                         SubGroup>
                                 <ActivatorContent>
-                                    <MListItemContent>
-                                        <MListItemTitle>@componentItem.FullTitle</MListItemTitle>
-                                    </MListItemContent>
+                                    <NavItemContent Item="@componentItem"></NavItemContent>
                                 </ActivatorContent>
                                 <ChildContent>
                                     @foreach (var subComponentItem in componentItem.Children)
                                     {
-                                        <MListItem Class="m-list-item--default" Href="@subComponentItem.Url" Exact>
-                                            <MListItemContent>
-                                                <MListItemTitle>
-                                                    <NavBadge Color="pink accent-1" Content="@("presets")">
-                                                        @subComponentItem.FullTitle
-                                                    </NavBadge>
-                                                </MListItemTitle>
-                                            </MListItemContent>
-                                        </MListItem>
+                                        <NavItem Item="@subComponentItem" />
                                     }
                                 </ChildContent>
                             </MListGroup>
                         }
                         else
                         {
-                            <MListItem Class="m-list-item--default" Href="@componentItem.Url" Exact>
-                                <MListItemContent>
-                                    <MListItemTitle>
-                                        @componentItem.FullTitle
-                                    </MListItemTitle>
-                                </MListItemContent>
-                            </MListItem>
+                            <NavItem Item="@componentItem" />
                         }
                     }
                 </ChildContent>

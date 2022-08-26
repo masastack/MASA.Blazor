@@ -1,0 +1,34 @@
+﻿@if (HasTag)
+{
+    <div class="d-flex align-center justify-space-between">
+        <span class="text-truncate" style="max-width: 151px">@ChildContent</span>
+        <MChip Color="@GetColor(Tag)" XSmall Outlined>@Tag</MChip>
+    </div>
+}
+else
+{
+    @ChildContent
+}
+
+@code {
+
+    [Parameter]
+    public string Tag { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private static Dictionary<string, string> _tagColors = new()
+    {
+        { "preset", "blue" },
+        { "service", "purple" },
+    };
+
+    private bool HasTag => !string.IsNullOrEmpty(Tag);
+
+    private string GetColor(string tag)
+    {
+        return _tagColors.ContainsKey(tag) ? _tagColors[tag] : "primary";
+    }
+
+}

@@ -4,7 +4,6 @@ subtitle: 数据迭代器
 type: 数据迭代器
 title: Data iterators
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataIterators.svg
 related:
   - /components/data-tables
   - /components/simple-tables

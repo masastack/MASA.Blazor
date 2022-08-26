@@ -4,7 +4,6 @@ subtitle: 表单
 type: 表单
 title: Forms
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Form.svg
 related:
   - /components/selects
   - /components/selection-controls

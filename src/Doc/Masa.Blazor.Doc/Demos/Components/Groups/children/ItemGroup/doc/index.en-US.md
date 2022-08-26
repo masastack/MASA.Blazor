@@ -3,7 +3,6 @@ category: Components
 type: ItemGroup
 title: Item groups
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ItemGroup.svg
 related:
   - /components/button-groups
   - /components/carousels

@@ -3,7 +3,6 @@ category: Components
 type: Tooltip
 title: Tooltips
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tooltip.svg
 related:
   - /components/badges
   - /components/icons

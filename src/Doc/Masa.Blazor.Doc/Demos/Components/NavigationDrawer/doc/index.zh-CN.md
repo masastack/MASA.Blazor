@@ -4,7 +4,6 @@ subtitle: 导航抽屉
 type: 导航抽屉
 title: Navigation drawers
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg
 related:
   - /components/lists
   - /components/icons

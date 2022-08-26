@@ -1,0 +1,21 @@
+﻿@using Masa.Blazor.Doc.Models
+
+<MListItemContent Class="@(TwoLine ? "py-1" : "")">
+    <MListItemTitle>
+        <NavTitle Tag="@Item.Tag">
+            @Item.Title
+        </NavTitle>
+    </MListItemTitle>
+    <MListItemSubtitle>
+        @Item.SubTitle
+    </MListItemSubtitle>
+</MListItemContent>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public DemoMenuItemModel Item { get; set; }
+
+    private bool TwoLine => !string.IsNullOrWhiteSpace(Item?.SubTitle);
+
+}

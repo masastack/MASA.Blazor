@@ -31,6 +31,7 @@ namespace Masa.Blazor.Doc.Models
             Subtitle = matter.Subtitle;
             Title = matter.Title;
             Type = matter.Type;
+            Tag = matter.Tag;
         }
 
         public DemoComponentModel(DemoFrontMatter matter, string desc, Dictionary<string, string> otherDocs)
@@ -44,6 +45,7 @@ namespace Masa.Blazor.Doc.Models
             Subtitle = matter.Subtitle;
             Title = matter.Title;
             Type = matter.Type;
+            Tag = matter.Tag;
         }
     }
 

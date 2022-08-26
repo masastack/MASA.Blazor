@@ -4,7 +4,6 @@ subtitle: 虚拟滚动条
 type: 虚拟滚动条
 title: Virtual scroller
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
 related:
   - /components/lists
   - /components/data-tables
