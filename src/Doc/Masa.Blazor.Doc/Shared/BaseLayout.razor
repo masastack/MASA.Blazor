@@ -4,9 +4,13 @@
     <CascadingValue Value="@Culture" Name="Culture">
         <MApp Class="baselayout-m-app">
             <MAppBar App Height="80" Elevation=0 Color="white" Class="pc app-bar" ClippedLeft ClippedRight>
-                <img style="cursor:pointer;" class="ml-6" src="https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png" @onclick=@(() =>{ Navigation.NavigateTo("/"); SelectTab = 0;}) />
+                <div class="d-flex align-center ml-6">
+                    <img style="cursor:pointer;" class="mr-4" src="https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png"
+                         @onclick=@(() =>{ Navigation.NavigateTo("/"); SelectTab = 0;}) />
+                    <ColorChip Label Small Color="#5C2D91">0.6.0</ColorChip>
+                </div>
                 <MTabs BackgroundColor="white" Class="mtab-font" Style="margin-left:120px;" Color="black" SliderColor="purple darken-2" @bind-Value="SelectTab">
-                    <MTab Style="text-transform: none"
+                    <MTab Style="text-transform: none"X
                           Href="https://www.masastack.com/blazor">
                         @T("Home")
                     </MTab>

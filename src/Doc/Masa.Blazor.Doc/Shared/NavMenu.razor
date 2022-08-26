@@ -36,7 +36,7 @@
                                         Color="#5C2D91"
                                         SubGroup>
                                 <ActivatorContent>
-                                    <NavItemContent Item="@componentItem"></NavItemContent>
+                                    <NavItemContent Title="@componentItem.Title" SubTitle="@componentItem.SubTitle" />
                                 </ActivatorContent>
                                 <ChildContent>
                                     @foreach (var subComponentItem in componentItem.Children)

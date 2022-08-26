@@ -2,20 +2,21 @@
 
 <MListItemContent Class="@(TwoLine ? "py-1" : "")">
     <MListItemTitle>
-        <NavTitle Tag="@Item.Tag">
-            @Item.Title
-        </NavTitle>
+        @Title
     </MListItemTitle>
     <MListItemSubtitle>
-        @Item.SubTitle
+        @SubTitle
     </MListItemSubtitle>
 </MListItemContent>
 
 @code {
 
     [Parameter, EditorRequired]
-    public DemoMenuItemModel Item { get; set; }
+    public string Title { get; set; }
 
-    private bool TwoLine => !string.IsNullOrWhiteSpace(Item?.SubTitle);
+    [Parameter]
+    public string SubTitle { get; set; }
+
+    private bool TwoLine => !string.IsNullOrWhiteSpace(SubTitle);
 
 }

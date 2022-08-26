@@ -12,6 +12,11 @@ public class ColorChip : MChip
         {
             Style ??= string.Empty;
 
+            if (!Style.Contains("color"))
+            {
+                Style += $"color:{Color};";
+            }
+
             var rgba = GenRgba(Color, 0.2f);
 
             if (!Style.Contains("background-color"))
