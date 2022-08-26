@@ -20,37 +20,6 @@ namespace Masa.Blazor.Doc.CLI.Commands
     {
         public string Name => "menu2json";
 
-        //private static readonly Dictionary<string, int> _sortMap = new Dictionary<string, int>()
-        //{
-        //    ["Docs"] = -2,
-        //    ["文档"] = -2,
-        //    ["Overview"] = -1,
-        //    ["组件总览"] = -1,
-        //    ["General"] = 0,
-        //    ["通用"] = 0,
-        //    ["Layout"] = 1,
-        //    ["布局"] = 1,
-        //    ["Navigation"] = 2,
-        //    ["导航"] = 2,
-        //    ["Data Entry"] = 3,
-        //    ["数据录入"] = 3,
-        //    ["Data Display"] = 4,
-        //    ["数据展示"] = 4,
-        //    ["Feedback"] = 5,
-        //    ["反馈"] = 5,
-        //    ["Localization"] = 6,
-        //    ["Other"] = 7,
-        //    ["其他"] = 7,
-        //    ["Charts"] = 8,
-        //    ["图表"] = 8
-        //};
-
-        //private static readonly Dictionary<string, string> _demoCategoryMap = new Dictionary<string, string>()
-        //{
-        //    ["Components"] = "组件",
-        //    ["Charts"] = "图表"
-        //};
-
         public void Execute(CommandLineApplication command)
         {
             command.Description = "Generate json file for menu";
@@ -201,18 +170,18 @@ namespace Masa.Blazor.Doc.CLI.Commands
                 // 同时影响menu.json和demos.json
 
                 var componentI18N = GetComponentI18N(directory);
-                foreach (var group in componentI18N.GroupBy(x => x.Value.Type))
+                foreach (var type in componentI18N.GroupBy(x => x.Value.Type))
                 {
                     var menu = new Dictionary<string, DemoMenuItemModel>();
 
-                    foreach (var component in group.GroupBy(x => x.Key))
+                    foreach (var component in type.GroupBy(x => x.Key))
                     {
                         menu.Add(component.Key, new DemoMenuItemModel()
                         {
-                            Order = ConfigWrapper.DocsNavOrder[group.Key],
-                            Title = group.Key, // TODO: 似乎无用处
+                            Order = ConfigWrapper.DocsNavOrder[type.Key],
+                            Title = type.Key,
                             Type = "itemGroup",
-                            Children = group.Select(x => new DemoMenuItemModel()
+                            Children = type.Select(x => new DemoMenuItemModel()
                             {
                                 Title = x.Value.Title,
                                 SubTitle = x.Value.Subtitle,
@@ -342,7 +311,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
         /// <param name="menuDir"></param>
         /// <param name="lang"></param>
         /// <returns></returns>
-        private IEnumerable<DemoMenuItemModel> GetSubMenuChildren(DirectoryInfo menuDir, string lang)
+        private static IEnumerable<DemoMenuItemModel> GetSubMenuChildren(DirectoryInfo menuDir, string lang)
         {
             foreach (var menuItem in menuDir.GetFileSystemInfos().OrderBy(r => r.Name))
             {
@@ -372,20 +341,28 @@ namespace Masa.Blazor.Doc.CLI.Commands
             }
         }
 
-        private IEnumerable<KeyValuePair<string, DemoComponentModel>> GetComponentI18N(DirectoryInfo directory)
+        /// <summary>
+        /// Get all components with i18n.
+        /// </summary>
+        /// <param name="directory"></param>
+        /// <returns></returns>
+        /// <example>
+        /// [{”en-US“, model}, {"zh-CN", model2}, {"en-US", model3}, {"zh-CN", model4},...]
+        /// </example>
+        private static IEnumerable<KeyValuePair<string, DemoComponentModel>> GetComponentI18N(DirectoryInfo directory)
         {
             IList<Dictionary<string, DemoComponentModel>> componentList = null;
 
             foreach (var component in directory.GetFileSystemInfos().OrderBy(r => r.Name))
             {
-                if (!(component is DirectoryInfo componentDirectory))
+                if (component is not DirectoryInfo componentDirectory)
                     continue;
 
                 var componentDic = FormatDocDir(componentDirectory);
 
-                var childrenDir = componentDirectory.GetFileSystemInfos("children")?.FirstOrDefault();
+                var childrenDir = componentDirectory.GetFileSystemInfos("children").FirstOrDefault();
 
-                if (childrenDir != null && childrenDir.Exists)
+                if (childrenDir is { Exists: true })
                 {
                     var subDemoDirectoryInfo = (childrenDir as DirectoryInfo);
 
@@ -393,7 +370,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
 
                     foreach (var subComponent in subDirectories)
                     {
-                        if (!(subComponent is DirectoryInfo subComponentDirectory)) continue;
+                        if (subComponent is not DirectoryInfo subComponentDirectory) continue;
 
                         var subComponentDic = FormatDocDir(subComponentDirectory);
 
@@ -410,6 +387,8 @@ namespace Masa.Blazor.Doc.CLI.Commands
 
             if (componentList == null)
                 return Enumerable.Empty<KeyValuePair<string, DemoComponentModel>>();
+            
+            // componentList: [{{"en-US", model1},{"zh-CN", model2}},{{"en-US", model3},{"zh-CN", model4}},...]
 
             var componentI18N = componentList
                 .SelectMany(x => x).OrderBy(x => ConfigWrapper.DocsNavOrder[x.Value.Type]);
@@ -417,7 +396,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
             return componentI18N;
         }
 
-        private Dictionary<string, DemoComponentModel> FormatDocDir(DirectoryInfo componentDirectory)
+        private static Dictionary<string, DemoComponentModel> FormatDocDir(DirectoryInfo componentDirectory)
         {
             Dictionary<string, DemoComponentModel> dict = new();
 
@@ -425,13 +404,13 @@ namespace Masa.Blazor.Doc.CLI.Commands
 
             if (docDir is { Exists: true })
             {
-                foreach (FileSystemInfo docItem in (docDir as DirectoryInfo).GetFileSystemInfos().OrderBy(r => r.Name))
+                foreach (FileSystemInfo docItem in ((DirectoryInfo)docDir).GetFileSystemInfos().OrderBy(r => r.Name))
                 {
                     var language = docItem.Name.Replace("index.", "").Replace(docItem.Extension, "");
 
-                    var content = File.ReadAllText(docItem.FullName);
+                    var fileContent = File.ReadAllText(docItem.FullName);
 
-                    var (matter, desc, _) = DocWrapper.ParseDemoDoc(content);
+                    var (matter, desc, _) = DocWrapper.ParseDemoDoc(fileContent);
 
                     var model = new DemoComponentModel(matter, desc);
 
