@@ -6624,9 +6624,9 @@
     "Category": "Components",
     "Cols": 1,
     "Related": [
-      "/components/mobile-date-time-pickers",
-      "/components/mobile-picker-views",
-      "/components/mobile-pickers"
+      "/components/mobile-pickers",
+      "/components/mobile-time-views",
+      "/components/mobile-date-time-pickers"
     ],
     "Title": "Mobile date pickers",
     "Type": "MobileDatePickers",
@@ -6687,9 +6687,9 @@
     "Category": "Components",
     "Cols": 1,
     "Related": [
-      "/components/date-pickers",
-      "/components/mobile-picker-views",
-      "/components/mobile-pickers"
+      "/components/mobile-pickers",
+      "/components/mobile-time-views",
+      "/components/mobile-date-pickers"
     ],
     "Title": "Mobile date time pickers",
     "Type": "MobileDateTimePickers",
@@ -6739,9 +6739,9 @@
     "Category": "Components",
     "Cols": 1,
     "Related": [
-      "/components/date-pickers",
       "/components/mobile-picker-views",
-      "/components/mobile-datetime-pickers"
+      "/components/mobile-date-time-views",
+      "/components/mobile-time-pickers"
     ],
     "Title": "Mobile pickers",
     "Type": "MobilePickers",
@@ -6804,9 +6804,9 @@
     "Category": "Components",
     "Cols": 1,
     "Related": [
-      "/components/date-pickers",
       "/components/mobile-pickers",
-      "/components/mobile-datetime-pickers"
+      "/components/mobile-date-time-pickers",
+      "/components/mobile-time-pickers"
     ],
     "Title": "Mobile picker views",
     "Type": "MobilePickerViews",
@@ -6867,8 +6867,8 @@
     "Category": "Components",
     "Cols": 1,
     "Related": [
+      "/components/mobile-pickers",
       "/components/mobile-date-time-pickers",
-      "/components/mobile-picker-views",
       "/components/mobile-date-pickers"
     ],
     "Title": "Mobile time pickers",

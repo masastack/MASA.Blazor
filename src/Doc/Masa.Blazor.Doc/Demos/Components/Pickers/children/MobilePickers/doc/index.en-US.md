@@ -4,9 +4,9 @@ type: MobilePickers
 title: Mobile pickers
 cols: 1
 related:
-  - /components/date-pickers
   - /components/mobile-picker-views
-  - /components/mobile-datetime-pickers
+  - /components/mobile-date-time-views
+  - /components/mobile-time-pickers
 ---
 
 

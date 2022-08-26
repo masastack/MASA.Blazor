@@ -5,8 +5,8 @@ type: 移动端时间选择器
 title: Mobile time pickers
 cols: 1
 related:
+  - /components/mobile-pickers
   - /components/mobile-date-time-pickers
-  - /components/mobile-picker-views
   - /components/mobile-date-pickers
 ---
 

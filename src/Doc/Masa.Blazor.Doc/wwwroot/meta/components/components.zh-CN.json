@@ -6689,9 +6689,9 @@
     "Category": "Components",
     "Cols": 1,
     "Related": [
-      "/components/mobile-date-time-pickers",
-      "/components/mobile-picker-views",
-      "/components/mobile-pickers"
+      "/components/mobile-pickers",
+      "/components/mobile-time-views",
+      "/components/mobile-date-time-pickers"
     ],
     "Subtitle": "移动端日期选择器",
     "Title": "Mobile date pickers",
@@ -6753,9 +6753,9 @@
     "Category": "Components",
     "Cols": 1,
     "Related": [
-      "/components/date-pickers",
-      "/components/mobile-picker-views",
-      "/components/mobile-pickers"
+      "/components/mobile-pickers",
+      "/components/mobile-time-views",
+      "/components/mobile-date-pickers"
     ],
     "Subtitle": "移动端日期时间选择器",
     "Title": "Mobile date time pickers",
@@ -6806,9 +6806,9 @@
     "Category": "Components",
     "Cols": 1,
     "Related": [
-      "/components/date-pickers",
-      "/components/mobile-pickers",
-      "/components/mobile-datetime-pickers"
+      "/components/mobile-picker-views",
+      "/components/mobile-date-time-views",
+      "/components/mobile-time-pickers"
     ],
     "Subtitle": "移动端选择器",
     "Title": "Mobile pickers",
@@ -6872,9 +6872,9 @@
     "Category": "Components",
     "Cols": 1,
     "Related": [
-      "/components/date-pickers",
       "/components/mobile-pickers",
-      "/components/mobile-datetime-pickers"
+      "/components/mobile-date-time-pickers",
+      "/components/mobile-time-pickers"
     ],
     "Subtitle": "移动端选择视图",
     "Title": "Mobile picker views",
@@ -6936,8 +6936,8 @@
     "Category": "Components",
     "Cols": 1,
     "Related": [
+      "/components/mobile-pickers",
       "/components/mobile-date-time-pickers",
-      "/components/mobile-picker-views",
       "/components/mobile-date-pickers"
     ],
     "Subtitle": "移动端时间选择器",
