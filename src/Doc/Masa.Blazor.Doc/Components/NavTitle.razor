@@ -1,8 +1,10 @@
-﻿@if (HasTag)
+﻿@using BlazorComponent.I18n
+
+@if (HasTag)
 {
     <div class="d-flex align-center justify-space-between">
         <span class="text-truncate" style="max-width: 151px">@ChildContent</span>
-        <MChip Color="@GetColor(Tag)" XSmall Outlined>@Tag</MChip>
+        <ColorChip Color="@GetColor(Tag)" XSmall>@I18n.T($"tag.{Tag}")</ColorChip>
     </div>
 }
 else
@@ -11,6 +13,9 @@ else
 }
 
 @code {
+
+    [Inject]
+    private I18n I18n { get; set; }
 
     [Parameter]
     public string Tag { get; set; }
@@ -22,6 +27,8 @@ else
     {
         { "preset", "blue" },
         { "service", "purple" },
+        { "new", "green" },
+        { "updated", "red" }
     };
 
     private bool HasTag => !string.IsNullOrEmpty(Tag);
