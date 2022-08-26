@@ -109,6 +109,11 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
 
     private async Task OnItemClick(TItem item)
     {
+        if (!EqualityComparer<TItem>.Default.Equals(_loadingItem, default))
+        {
+            return;
+        }
+
         if (SelectedItems.Count > _tabIndex)
         {
             var activeTab = SelectedItems[_tabIndex];
