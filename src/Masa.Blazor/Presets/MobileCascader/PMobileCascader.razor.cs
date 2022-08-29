@@ -22,9 +22,7 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
 
     [Parameter] public EventCallback<TItem> OnLoadChildren { get; set; }
 
-    [Parameter] public EventCallback<TItem> OnSelect { get; set; }
-
-    [Parameter] public EventCallback<TItem> OnDeselect { get; set; }
+    [Parameter] public EventCallback<List<TItem>> OnSelect { get; set; }
 
     [Parameter] public string Title { get; set; }
 
@@ -124,9 +122,9 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
             if (EqualityComparer<TItem>.Default.Equals(activeTab, item))
             {
                 // cancel the selection and nothing to do
-                if (!OnDeselect.HasDelegate) return;
 
-                await OnDeselect.InvokeAsync(item);
+                if (!OnSelect.HasDelegate) return;
+                await OnSelect.InvokeAsync(SelectedItems);
 
                 return;
             }
@@ -167,7 +165,7 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
 
         if (OnSelect.HasDelegate)
         {
-            await OnSelect.InvokeAsync(item);
+            await OnSelect.InvokeAsync(SelectedItems);
         }
     }
 
