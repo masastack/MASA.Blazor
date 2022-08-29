@@ -3,7 +3,7 @@
     "Desc": "<p>Use the border radius auxiliary style to quickly apply the <code>border-radius</code> style to the element</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.957905+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.397705+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -76,14 +76,13 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Border radius",
-    "Type": "BorderRadius",
-    "FullTitle": "Border radius"
+    "Type": "BorderRadius"
   },
   {
     "Desc": "<p>Through <strong>sass</strong> and <strong>javascript</strong>, you can use <a href=\"https://material.io/design/color/the-color-system.html#color-theme-creation\">Material Design</a> in the specification All colors. These values can be used in style sheets, component files and actual components through the <strong>color class</strong> system.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.958905+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3987042+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -123,14 +122,13 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Colors",
-    "Type": "Color",
-    "FullTitle": "Colors"
+    "Type": "Color"
   },
   {
     "Desc": "<p>The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.9608983+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3997142+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -170,14 +168,13 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Display helpers",
-    "Type": "DisplayHelpers",
-    "FullTitle": "Display helpers"
+    "Type": "DisplayHelpers"
   },
   {
     "Desc": "<p>This tool allows you to control the relative depth, or distance, between the two planes along the z-axis. There are 25 heights in total. You can set the elevation of an element by using the <code>elevation-{n}</code> class, where <code>n</code> is an integer between 0-24 corresponding to the desired altitude.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.9624904+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4017062+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -206,14 +203,13 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Elevation",
-    "Type": "Elevation",
-    "FullTitle": "Elevation"
+    "Type": "Elevation"
   },
   {
     "Desc": "<p>Control the layout of flex containers with alignment, justification and more with responsive flexbox utilities.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.963518+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4017062+08:00",
     "DemoList": [
       {
         "Order": 3,
@@ -352,14 +348,13 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Flex",
-    "Type": "Flex",
-    "FullTitle": "Flex"
+    "Type": "Flex"
   },
   {
     "Desc": "<p>Applies a custom float across any breakpoint with responsive float utilities.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.968472+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4057041+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -388,14 +383,13 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Float",
-    "Type": "Float",
-    "FullTitle": "Float"
+    "Type": "Float"
   },
   {
     "Desc": "<p>Configure how content overflows when it becomes out of container bounds.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.9694689+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4067043+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -424,14 +418,13 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Overflow",
-    "Type": "Overflow",
-    "FullTitle": "Overflow"
+    "Type": "Overflow"
   },
   {
     "Desc": "<p>Do not update your layout by creating new classes. Auxiliary auxiliary classes modify the filling and edges of elements</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.97153+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4087204+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -482,14 +475,13 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Spacing",
-    "Type": "Spacing",
-    "FullTitle": "Spacing"
+    "Type": "Spacing"
   },
   {
     "Desc": "<p>Control text size, alignment, wrapping, overflow, transforms and more.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.9755193+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4117062+08:00",
     "DemoList": [
       {
         "Order": 5,
@@ -615,17 +607,15 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Cols": 1,
     "Title": "Text and typography",
-    "Type": "TextAndTypography",
-    "FullTitle": "Text and typography"
+    "Type": "TextAndTypography"
   },
   {
     "Desc": "<p>Smooth animations help make a UI feel great. Using MASA Blazor transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the <strong>transition</strong> prop.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-03-17T11:19:27.9795059+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.4147043+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -751,10 +741,8 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Cols": 1,
     "Title": "Transitions",
-    "Type": "Transitions",
-    "FullTitle": "Transitions"
+    "Type": "Transitions"
   }
 ]

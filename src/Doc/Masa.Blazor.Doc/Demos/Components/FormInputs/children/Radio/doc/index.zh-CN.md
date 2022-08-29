@@ -4,7 +4,6 @@ subtitle: 单选按钮
 type: 单选按钮
 title: Radio
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg
 related:
   - /components/button-groups
   - /components/forms

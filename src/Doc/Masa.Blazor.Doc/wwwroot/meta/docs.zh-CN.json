@@ -4306,7 +4306,6 @@
         "FullTitle": "Text and typography (文本和排版)",
         "Type": "menuItem",
         "Url": "stylesandanimations/text-and-typography",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       },
       {
@@ -4316,7 +4315,6 @@
         "FullTitle": "Transitions (过渡动画)",
         "Type": "menuItem",
         "Url": "stylesandanimations/transitions",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       }
     ]
@@ -4362,7 +4360,6 @@
         "FullTitle": "Avatars (头像)",
         "Type": "menuItem",
         "Url": "components/avatars",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Avatars.svg",
         "Children": []
       },
       {
@@ -4396,8 +4393,7 @@
             "SubTitle": "应用栏",
             "FullTitle": "App bars (应用栏)",
             "Type": "menuItem",
-            "Url": "components/app-bars",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/AppBars.svg"
+            "Url": "components/app-bars"
           },
           {
             "Order": 0,
@@ -4416,6 +4412,16 @@
             "Url": "components/toolbars"
           }
         ]
+      },
+      {
+        "Order": 0,
+        "Title": "Block text",
+        "SubTitle": "文本块",
+        "FullTitle": "Block text (文本块)",
+        "Type": "menuItem",
+        "Url": "components/block-text",
+        "Tag": "preset",
+        "Children": []
       },
       {
         "Order": 0,
@@ -4451,7 +4457,6 @@
         "FullTitle": "Breadcrumbs (面包屑导航)",
         "Type": "menuItem",
         "Url": "components/breadcrumbs",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       },
       {
@@ -4461,7 +4466,6 @@
         "FullTitle": "Buttons (按钮)",
         "Type": "menuItem",
         "Url": "components/buttons",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg",
         "Children": []
       },
       {
@@ -4471,7 +4475,6 @@
         "FullTitle": "Cards (卡片)",
         "Type": "menuItem",
         "Url": "components/cards",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Cards.svg",
         "Children": []
       },
       {
@@ -4490,7 +4493,26 @@
         "FullTitle": "Chips (纸片)",
         "Type": "menuItem",
         "Url": "components/chips",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chips.svg",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Copyable text",
+        "SubTitle": "可复制的文本",
+        "FullTitle": "Copyable text (可复制的文本)",
+        "Type": "menuItem",
+        "Url": "components/copyable-text",
+        "Tag": "preset",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Cron Expression Generator",
+        "SubTitle": "Cron表达式生成器",
+        "FullTitle": "Cron Expression Generator (Cron表达式生成器)",
+        "Type": "menuItem",
+        "Url": "components/cron-expression-generator",
+        "Tag": "preset",
         "Children": []
       },
       {
@@ -4509,7 +4531,6 @@
         "FullTitle": "Dividers (分隔线)",
         "Type": "menuItem",
         "Url": "components/dividers",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Dividers.svg",
         "Children": []
       },
       {
@@ -4523,12 +4544,21 @@
       },
       {
         "Order": 0,
+        "Title": "Drawers",
+        "SubTitle": "抽屉",
+        "FullTitle": "Drawers (抽屉)",
+        "Type": "menuItem",
+        "Url": "components/drawers",
+        "Tag": "preset",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "ECharts",
         "SubTitle": "图表",
         "FullTitle": "ECharts (图表)",
         "Type": "menuItem",
         "Url": "components/echarts",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg",
         "Children": []
       },
       {
@@ -4556,7 +4586,6 @@
         "FullTitle": "Expansion panels (扩展面板)",
         "Type": "menuItem",
         "Url": "components/expansion-panels",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       },
       {
@@ -4590,8 +4619,7 @@
             "SubTitle": "自动补全",
             "FullTitle": "Autocompletes (自动补全)",
             "Type": "menuItem",
-            "Url": "components/autocompletes",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Autocomplete.svg"
+            "Url": "components/autocompletes"
           },
           {
             "Order": 0,
@@ -4615,8 +4643,7 @@
             "SubTitle": "文件上传",
             "FullTitle": "File inputs (文件上传)",
             "Type": "menuItem",
-            "Url": "components/file-inputs",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/FileInput.svg"
+            "Url": "components/file-inputs"
           },
           {
             "Order": 0,
@@ -4624,8 +4651,7 @@
             "SubTitle": "表单",
             "FullTitle": "Forms (表单)",
             "Type": "menuItem",
-            "Url": "components/forms",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Form.svg"
+            "Url": "components/forms"
           },
           {
             "Order": 0,
@@ -4641,8 +4667,7 @@
             "SubTitle": "单选按钮",
             "FullTitle": "Radio (单选按钮)",
             "Type": "menuItem",
-            "Url": "components/radio",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg"
+            "Url": "components/radio"
           },
           {
             "Order": 0,
@@ -4650,8 +4675,7 @@
             "SubTitle": "范围滑块",
             "FullTitle": "Range sliders (范围滑块)",
             "Type": "menuItem",
-            "Url": "components/range-sliders",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/RangeSliders.svg"
+            "Url": "components/range-sliders"
           },
           {
             "Order": 0,
@@ -4667,8 +4691,7 @@
             "SubTitle": "滑块",
             "FullTitle": "Sliders (滑块)",
             "Type": "menuItem",
-            "Url": "components/sliders",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sliders.svg"
+            "Url": "components/sliders"
           },
           {
             "Order": 0,
@@ -4676,8 +4699,7 @@
             "SubTitle": "开关",
             "FullTitle": "Switches (开关)",
             "Type": "menuItem",
-            "Url": "components/switches",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Switch.svg"
+            "Url": "components/switches"
           },
           {
             "Order": 0,
@@ -4685,8 +4707,7 @@
             "SubTitle": "多行文本框",
             "FullTitle": "Textareas (多行文本框)",
             "Type": "menuItem",
-            "Url": "components/textareas",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Textareas.svg"
+            "Url": "components/textareas"
           },
           {
             "Order": 0,
@@ -4694,8 +4715,7 @@
             "SubTitle": "文本框",
             "FullTitle": "Text fields (文本框)",
             "Type": "menuItem",
-            "Url": "components/text-fields",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TextField.svg"
+            "Url": "components/text-fields"
           }
         ]
       },
@@ -4706,7 +4726,6 @@
         "FullTitle": "Grid system (网格系统)",
         "Type": "menuItem",
         "Url": "components/grid-system",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg",
         "Children": []
       },
       {
@@ -4722,8 +4741,7 @@
             "SubTitle": "按钮组",
             "FullTitle": "Button groups (按钮组)",
             "Type": "menuItem",
-            "Url": "components/button-groups",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ButtonGroup.svg"
+            "Url": "components/button-groups"
           },
           {
             "Order": 0,
@@ -4731,8 +4749,7 @@
             "SubTitle": "纸片组",
             "FullTitle": "Chip groups (纸片组)",
             "Type": "menuItem",
-            "Url": "components/chip-groups",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chip.svg"
+            "Url": "components/chip-groups"
           },
           {
             "Order": 0,
@@ -4740,8 +4757,7 @@
             "SubTitle": "项目组",
             "FullTitle": "Item groups (项目组)",
             "Type": "menuItem",
-            "Url": "components/item-groups",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ItemGroup.svg"
+            "Url": "components/item-groups"
           },
           {
             "Order": 0,
@@ -4785,7 +4801,16 @@
         "FullTitle": "Icons (图标)",
         "Type": "menuItem",
         "Url": "components/icons",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Image Captcha",
+        "SubTitle": "图片验证码",
+        "FullTitle": "Image Captcha (图片验证码)",
+        "Type": "menuItem",
+        "Url": "components/image-captcha",
+        "Tag": "preset",
         "Children": []
       },
       {
@@ -4813,7 +4838,6 @@
         "FullTitle": "Lists (列表)",
         "Type": "menuItem",
         "Url": "components/lists",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg",
         "Children": []
       },
       {
@@ -4836,12 +4860,41 @@
       },
       {
         "Order": 0,
+        "Title": "Mobile cascader",
+        "SubTitle": "移动端级联",
+        "FullTitle": "Mobile cascader (移动端级联)",
+        "Type": "menuItem",
+        "Url": "components/mobile-cascader",
+        "Tag": "preset",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Modals",
+        "SubTitle": "模态窗",
+        "FullTitle": "Modals (模态窗)",
+        "Type": "menuItem",
+        "Url": "components/modals",
+        "Tag": "preset",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Navigation drawers",
         "SubTitle": "导航抽屉",
         "FullTitle": "Navigation drawers (导航抽屉)",
         "Type": "menuItem",
         "Url": "components/navigation-drawers",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Not Grouped",
+        "SubTitle": "未分组的",
+        "FullTitle": "Not Grouped (未分组的)",
+        "Type": "menuItem",
+        "Url": "components/not-grouped",
+        "Tag": "preset",
         "Children": []
       },
       {
@@ -4868,7 +4921,6 @@
         "SubTitle": "选择器",
         "FullTitle": "Pickers (选择器)",
         "Type": "menuItem",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Pickers.svg",
         "Children": [
           {
             "Order": 0,
@@ -4876,8 +4928,7 @@
             "SubTitle": "日期选择器",
             "FullTitle": "Date pickers (日期选择器)",
             "Type": "menuItem",
-            "Url": "components/date-pickers",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickers.svg"
+            "Url": "components/date-pickers"
           },
           {
             "Order": 0,
@@ -4885,8 +4936,7 @@
             "SubTitle": "月份选择器",
             "FullTitle": "Date pickers month (月份选择器)",
             "Type": "menuItem",
-            "Url": "components/date-pickers-month",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg"
+            "Url": "components/date-pickers-month"
           },
           {
             "Order": 0,
@@ -4934,99 +4984,19 @@
             "SubTitle": "时间选择器",
             "FullTitle": "Time pickers (时间选择器)",
             "Type": "menuItem",
-            "Url": "components/time-pickers",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TimePickers.svg"
+            "Url": "components/time-pickers"
           }
         ]
       },
       {
         "Order": 0,
-        "Title": "Presets",
-        "SubTitle": "预置组件",
-        "FullTitle": "Presets (预置组件)",
+        "Title": "Popup service",
+        "SubTitle": "弹出层服务",
+        "FullTitle": "Popup service (弹出层服务)",
         "Type": "menuItem",
-        "Children": [
-          {
-            "Order": 0,
-            "Title": "Block text",
-            "SubTitle": "文本块",
-            "FullTitle": "Block text (文本块)",
-            "Type": "menuItem",
-            "Url": "components/block-text"
-          },
-          {
-            "Order": 0,
-            "Title": "Copyable text",
-            "SubTitle": "可复制的文本",
-            "FullTitle": "Copyable text (可复制的文本)",
-            "Type": "menuItem",
-            "Url": "components/copyable-text"
-          },
-          {
-            "Order": 0,
-            "Title": "Cron Expression Generator",
-            "SubTitle": "Cron表达式生成器",
-            "FullTitle": "Cron Expression Generator (Cron表达式生成器)",
-            "Type": "menuItem",
-            "Url": "components/cron-expression-generator"
-          },
-          {
-            "Order": 0,
-            "Title": "Drawers",
-            "SubTitle": "抽屉",
-            "FullTitle": "Drawers (抽屉)",
-            "Type": "menuItem",
-            "Url": "components/drawers"
-          },
-          {
-            "Order": 0,
-            "Title": "Image Captcha",
-            "SubTitle": "图片验证码",
-            "FullTitle": "Image Captcha (图片验证码)",
-            "Type": "menuItem",
-            "Url": "components/image-captcha"
-          },
-          {
-            "Order": 0,
-            "Title": "Mobile cascader",
-            "SubTitle": "移动端级联",
-            "FullTitle": "Mobile cascader (移动端级联)",
-            "Type": "menuItem",
-            "Url": "components/mobile-cascader"
-          },
-          {
-            "Order": 0,
-            "Title": "Modals",
-            "SubTitle": "对话框",
-            "FullTitle": "Modals (对话框)",
-            "Type": "menuItem",
-            "Url": "components/modals"
-          },
-          {
-            "Order": 0,
-            "Title": "Not Grouped",
-            "SubTitle": "未分组的",
-            "FullTitle": "Not Grouped (未分组的)",
-            "Type": "menuItem",
-            "Url": "components/not-grouped"
-          },
-          {
-            "Order": 0,
-            "Title": "Popup service",
-            "SubTitle": "弹出层服务",
-            "FullTitle": "Popup service (弹出层服务)",
-            "Type": "menuItem",
-            "Url": "components/popup-service"
-          },
-          {
-            "Order": 0,
-            "Title": "Toast",
-            "SubTitle": "Toast",
-            "FullTitle": "Toast (Toast)",
-            "Type": "menuItem",
-            "Url": "components/toast"
-          }
-        ]
+        "Url": "components/popup-service",
+        "Tag": "service",
+        "Children": []
       },
       {
         "Order": 0,
@@ -5069,7 +5039,6 @@
         "FullTitle": "Sheets (工作表)",
         "Type": "menuItem",
         "Url": "components/sheets",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sheet.svg",
         "Children": []
       },
       {
@@ -5079,7 +5048,6 @@
         "FullTitle": "Skeleton loaders (骨架装载器)",
         "Type": "menuItem",
         "Url": "components/skeleton-loaders",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SkeletonLoader.svg",
         "Children": []
       },
       {
@@ -5098,7 +5066,6 @@
         "FullTitle": "Steppers (步骤条)",
         "Type": "menuItem",
         "Url": "components/steppers",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Stepper.svg",
         "Children": []
       },
       {
@@ -5123,8 +5090,7 @@
             "SubTitle": "数据迭代器",
             "FullTitle": "Data iterators (数据迭代器)",
             "Type": "menuItem",
-            "Url": "components/data-iterators",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataIterators.svg"
+            "Url": "components/data-iterators"
           },
           {
             "Order": 0,
@@ -5132,8 +5098,7 @@
             "SubTitle": "数据表格",
             "FullTitle": "Data tables (数据表格)",
             "Type": "menuItem",
-            "Url": "components/data-tables",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataTable.svg"
+            "Url": "components/data-tables"
           },
           {
             "Order": 0,
@@ -5141,8 +5106,7 @@
             "SubTitle": "简单表格",
             "FullTitle": "Simple tables (简单表格)",
             "Type": "menuItem",
-            "Url": "components/simple-tables",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SimpleTables.svg"
+            "Url": "components/simple-tables"
           }
         ]
       },
@@ -5153,7 +5117,6 @@
         "FullTitle": "Tabs (选项卡)",
         "Type": "menuItem",
         "Url": "components/tabs",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tabs.svg",
         "Children": []
       },
       {
@@ -5167,12 +5130,21 @@
       },
       {
         "Order": 0,
+        "Title": "Toast",
+        "SubTitle": "吐司",
+        "FullTitle": "Toast (吐司)",
+        "Type": "menuItem",
+        "Url": "components/toast",
+        "Tag": "preset",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Tooltips",
         "SubTitle": "工具提示",
         "FullTitle": "Tooltips (工具提示)",
         "Type": "menuItem",
         "Url": "components/tooltips",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tooltip.svg",
         "Children": []
       },
       {
@@ -5182,7 +5154,6 @@
         "FullTitle": "Treeview (树形视图)",
         "Type": "menuItem",
         "Url": "components/treeview",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Treeview.svg",
         "Children": []
       },
       {
@@ -5192,7 +5163,6 @@
         "FullTitle": "Virtual scroller (虚拟滚动条)",
         "Type": "menuItem",
         "Url": "components/virtual-scroller",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       }
     ]

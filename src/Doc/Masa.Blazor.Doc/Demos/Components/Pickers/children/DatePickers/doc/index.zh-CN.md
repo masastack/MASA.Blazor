@@ -4,7 +4,6 @@ subtitle: 日期选择器
 type: 日期选择器
 title: Date pickers
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickers.svg
 related:
   - /components/buttons
   - /components/text-fields

@@ -4,7 +4,6 @@ subtitle: 按钮
 type: 按钮
 title: Buttons
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg
 related:
   - /components/button-groups
   - /components/icons

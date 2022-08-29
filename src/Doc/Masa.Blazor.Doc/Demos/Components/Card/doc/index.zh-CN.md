@@ -4,7 +4,6 @@ subtitle: 卡片
 type: 卡片
 title: Cards
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Cards.svg
 related:
   - /components/buttons
   - /components/images

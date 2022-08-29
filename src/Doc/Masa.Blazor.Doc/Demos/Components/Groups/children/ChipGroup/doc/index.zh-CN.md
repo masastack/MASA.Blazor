@@ -4,7 +4,6 @@ subtitle: 纸片组
 type: 纸片组
 title: Chip groups
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chip.svg
 related:
   - /components/chips
   - /components/slide-groups

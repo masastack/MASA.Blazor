@@ -4,7 +4,6 @@ subtitle: 数据表格
 type: 数据表格
 title: Data tables
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataTable.svg
 related:
   - /components/data-iterators
   - /components/simple-tables

@@ -4,7 +4,6 @@ subtitle: 范围滑块
 type: 范围滑块
 title: Range sliders
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/RangeSliders.svg
 related:
   - /components/forms
   - /components/selects

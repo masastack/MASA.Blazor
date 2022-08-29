@@ -3,7 +3,6 @@ category: Components
 type: Avatars
 title: Avatars
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Avatars.svg
 related:
   - /components/badges
   - /components/icons

@@ -3,7 +3,6 @@ category: Components
 type: DatePickers
 title: Date pickers
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickers.svg
 related:
   - /components/buttons
   - /components/text-fields
@@ -19,4 +18,4 @@ MDatePicker is a fully featured date selection component that lets users select 
 ## Caveats
 
 <!--alert:warning--> 
-`Mdatepicker ` accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]£¨ https://www.iso.org/standards.html £©Official website.
+`Mdatepicker ` accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]ï¿½ï¿½ https://www.iso.org/standards.html ï¿½ï¿½Official website.

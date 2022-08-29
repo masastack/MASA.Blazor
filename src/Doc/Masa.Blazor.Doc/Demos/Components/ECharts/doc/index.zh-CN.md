@@ -4,7 +4,6 @@ subtitle: 图表
 type: 图表
 title: ECharts
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg
 
 ---
 

@@ -3,7 +3,6 @@ category: Components
 type: Form
 title: Forms
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/From.svg
 related:
   - /components/selects
   - /components/selection-controls

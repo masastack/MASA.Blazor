@@ -65,5 +65,11 @@
   "PreviousPage": "上一页",
   "props": "属性",
   "contents": "插槽",
-  "events": "事件"
+  "events": "事件",
+  "tag":{
+    "preset": "预置",
+    "service": "服务",
+    "new": "新增",
+    "updated": "更新"
+  }
 }

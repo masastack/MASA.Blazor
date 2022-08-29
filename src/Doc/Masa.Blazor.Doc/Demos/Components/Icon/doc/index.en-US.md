@@ -3,7 +3,6 @@ category: Components
 type: Icon
 title: Icons
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
 related:
   - /features/icon-fonts
   - /components/buttons

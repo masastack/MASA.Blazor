@@ -4,7 +4,6 @@ subtitle: 项目组
 type: 项目组
 title: Item groups
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ItemGroup.svg
 related:
   - /components/button-groups
   - /components/carousels

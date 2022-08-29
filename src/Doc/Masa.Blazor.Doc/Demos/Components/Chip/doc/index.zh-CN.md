@@ -4,7 +4,6 @@ subtitle: 纸片
 type: 纸片
 title: Chips
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chips.svg
 related:
   - /components/avatars
   - /components/icons

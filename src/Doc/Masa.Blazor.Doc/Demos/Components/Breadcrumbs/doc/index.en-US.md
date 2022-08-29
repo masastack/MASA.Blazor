@@ -3,7 +3,6 @@ category: Components
 type: Breadcrumbs
 title: Breadcrumbs
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
 related:
   - /components/buttons
   - /components/navigation-drawers

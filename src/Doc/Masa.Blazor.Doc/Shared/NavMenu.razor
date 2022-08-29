@@ -36,33 +36,19 @@
                                         Color="#5C2D91"
                                         SubGroup>
                                 <ActivatorContent>
-                                    <MListItemContent>
-                                        <MListItemTitle>@FormatComponentTitle(componentItem)</MListItemTitle>
-                                    </MListItemContent>
+                                    <NavItemContent Title="@componentItem.Title" SubTitle="@componentItem.SubTitle" />
                                 </ActivatorContent>
                                 <ChildContent>
                                     @foreach (var subComponentItem in componentItem.Children)
                                     {
-                                        <MListItem Class="m-list-item--default" Href="@subComponentItem.Url" Exact>
-                                            <MListItemContent>
-                                                <MListItemTitle>
-                                                    @FormatComponentTitle(subComponentItem)
-                                                </MListItemTitle>
-                                            </MListItemContent>
-                                        </MListItem>
+                                        <NavItem Item="@subComponentItem" />
                                     }
                                 </ChildContent>
                             </MListGroup>
                         }
                         else
                         {
-                            <MListItem Class="m-list-item--default" Href="@componentItem.Url" Exact>
-                                <MListItemContent>
-                                    <MListItemTitle>
-                                        @FormatComponentTitle(componentItem)
-                                    </MListItemTitle>
-                                </MListItemContent>
-                            </MListItem>
+                            <NavItem Item="@componentItem" />
                         }
                     }
                 </ChildContent>
@@ -100,11 +86,6 @@
     {
         Service.ChangeLanguage(Culture);
         MenuItems = await Service.GetMenuAsync();
-    }
-
-    string FormatComponentTitle(DemoMenuItemModel model)
-    {
-        return model.FullTitle;
     }
 
     List<string> GenGroup(DemoMenuItemModel[] items)

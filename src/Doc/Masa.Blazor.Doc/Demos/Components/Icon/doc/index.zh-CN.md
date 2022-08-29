@@ -4,7 +4,6 @@ subtitle: 图标
 type: 图标
 title: Icons
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
 related:
   - /features/icon-fonts
   - /components/buttons

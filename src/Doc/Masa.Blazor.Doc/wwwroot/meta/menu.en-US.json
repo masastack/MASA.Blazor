@@ -284,7 +284,6 @@
         "FullTitle": "Text and typography",
         "Type": "menuItem",
         "Url": "stylesandanimations/text-and-typography",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       },
       {
@@ -293,7 +292,6 @@
         "FullTitle": "Transitions",
         "Type": "menuItem",
         "Url": "stylesandanimations/transitions",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       }
     ]
@@ -335,7 +333,6 @@
         "FullTitle": "Avatars",
         "Type": "menuItem",
         "Url": "components/avatars",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Avatars.svg",
         "Children": []
       },
       {
@@ -385,6 +382,15 @@
       },
       {
         "Order": 0,
+        "Title": "Block text",
+        "FullTitle": "Block text",
+        "Type": "menuItem",
+        "Url": "components/block-text",
+        "Tag": "preset",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Borders",
         "FullTitle": "Borders",
         "Type": "menuItem",
@@ -413,7 +419,6 @@
         "FullTitle": "Breadcrumbs",
         "Type": "menuItem",
         "Url": "components/breadcrumbs",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       },
       {
@@ -422,7 +427,6 @@
         "FullTitle": "Buttons",
         "Type": "menuItem",
         "Url": "components/buttons",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg",
         "Children": []
       },
       {
@@ -431,7 +435,6 @@
         "FullTitle": "Cards",
         "Type": "menuItem",
         "Url": "components/cards",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Cards.svg",
         "Children": []
       },
       {
@@ -448,7 +451,24 @@
         "FullTitle": "Chips",
         "Type": "menuItem",
         "Url": "components/chips",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chips.svg",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Copyable text",
+        "FullTitle": "Copyable text",
+        "Type": "menuItem",
+        "Url": "components/copyable-text",
+        "Tag": "preset",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Cron Expression Generator",
+        "FullTitle": "Cron Expression Generator",
+        "Type": "menuItem",
+        "Url": "components/cron-expression-generator",
+        "Tag": "preset",
         "Children": []
       },
       {
@@ -465,7 +485,6 @@
         "FullTitle": "Dividers",
         "Type": "menuItem",
         "Url": "components/dividers",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Dividers.svg",
         "Children": []
       },
       {
@@ -478,11 +497,19 @@
       },
       {
         "Order": 0,
+        "Title": "Drawers",
+        "FullTitle": "Drawers",
+        "Type": "menuItem",
+        "Url": "components/drawers",
+        "Tag": "preset",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "ECharts",
         "FullTitle": "ECharts",
         "Type": "menuItem",
         "Url": "components/echarts",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg",
         "Children": []
       },
       {
@@ -507,7 +534,6 @@
         "FullTitle": "Expansion panels",
         "Type": "menuItem",
         "Url": "components/expansion-panels",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       },
       {
@@ -537,8 +563,7 @@
             "Title": "Autocompletes",
             "FullTitle": "Autocompletes",
             "Type": "menuItem",
-            "Url": "components/autocompletes",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Autocomplete.svg"
+            "Url": "components/autocompletes"
           },
           {
             "Order": 0,
@@ -559,16 +584,14 @@
             "Title": "File inputs",
             "FullTitle": "File inputs",
             "Type": "menuItem",
-            "Url": "components/file-inputs",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/FileInput.svg"
+            "Url": "components/file-inputs"
           },
           {
             "Order": 0,
             "Title": "Forms",
             "FullTitle": "Forms",
             "Type": "menuItem",
-            "Url": "components/forms",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/From.svg"
+            "Url": "components/forms"
           },
           {
             "Order": 0,
@@ -582,16 +605,14 @@
             "Title": "Radio",
             "FullTitle": "Radio",
             "Type": "menuItem",
-            "Url": "components/radio",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg"
+            "Url": "components/radio"
           },
           {
             "Order": 0,
             "Title": "Range sliders",
             "FullTitle": "Range sliders",
             "Type": "menuItem",
-            "Url": "components/range-sliders",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/RangeSliders.svg"
+            "Url": "components/range-sliders"
           },
           {
             "Order": 0,
@@ -605,32 +626,28 @@
             "Title": "Sliders",
             "FullTitle": "Sliders",
             "Type": "menuItem",
-            "Url": "components/sliders",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sliders.svg"
+            "Url": "components/sliders"
           },
           {
             "Order": 0,
             "Title": "Switches",
             "FullTitle": "Switches",
             "Type": "menuItem",
-            "Url": "components/switches",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Switch.svg"
+            "Url": "components/switches"
           },
           {
             "Order": 0,
             "Title": "Textareas",
             "FullTitle": "Textareas",
             "Type": "menuItem",
-            "Url": "components/textareas",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Textareas.svg"
+            "Url": "components/textareas"
           },
           {
             "Order": 0,
             "Title": "Text fields",
             "FullTitle": "Text fields",
             "Type": "menuItem",
-            "Url": "components/text-fields",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TextField.svg"
+            "Url": "components/text-fields"
           }
         ]
       },
@@ -640,7 +657,6 @@
         "FullTitle": "Grid system",
         "Type": "menuItem",
         "Url": "components/grid-system",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg",
         "Children": []
       },
       {
@@ -654,24 +670,21 @@
             "Title": "Button groups",
             "FullTitle": "Button groups",
             "Type": "menuItem",
-            "Url": "components/button-groups",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ButtonGroup.svg"
+            "Url": "components/button-groups"
           },
           {
             "Order": 0,
             "Title": "Chip groups",
             "FullTitle": "Chip groups",
             "Type": "menuItem",
-            "Url": "components/chip-groups",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chip.svg"
+            "Url": "components/chip-groups"
           },
           {
             "Order": 0,
             "Title": "Item groups",
             "FullTitle": "Item groups",
             "Type": "menuItem",
-            "Url": "components/item-groups",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ItemGroup.svg"
+            "Url": "components/item-groups"
           },
           {
             "Order": 0,
@@ -710,7 +723,15 @@
         "FullTitle": "Icons",
         "Type": "menuItem",
         "Url": "components/icons",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Image Captcha",
+        "FullTitle": "Image Captcha",
+        "Type": "menuItem",
+        "Url": "components/image-captcha",
+        "Tag": "preset",
         "Children": []
       },
       {
@@ -735,7 +756,6 @@
         "FullTitle": "Lists",
         "Type": "menuItem",
         "Url": "components/lists",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg",
         "Children": []
       },
       {
@@ -756,11 +776,37 @@
       },
       {
         "Order": 0,
+        "Title": "Mobile cascader",
+        "FullTitle": "Mobile cascader",
+        "Type": "menuItem",
+        "Url": "components/mobile-cascader",
+        "Tag": "preset",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Modals",
+        "FullTitle": "Modals",
+        "Type": "menuItem",
+        "Url": "components/modals",
+        "Tag": "preset",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Navigation drawers",
         "FullTitle": "Navigation drawers",
         "Type": "menuItem",
         "Url": "components/navigation-drawers",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Not Grouped",
+        "FullTitle": "Not Grouped",
+        "Type": "menuItem",
+        "Url": "components/not-grouped",
+        "Tag": "preset",
         "Children": []
       },
       {
@@ -784,23 +830,20 @@
         "Title": "Pickers",
         "FullTitle": "Pickers",
         "Type": "menuItem",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Pickers.svg",
         "Children": [
           {
             "Order": 0,
             "Title": "Date pickers",
             "FullTitle": "Date pickers",
             "Type": "menuItem",
-            "Url": "components/date-pickers",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickers.svg"
+            "Url": "components/date-pickers"
           },
           {
             "Order": 0,
             "Title": "Date pickers month",
             "FullTitle": "Date pickers month",
             "Type": "menuItem",
-            "Url": "components/date-pickers-month",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg"
+            "Url": "components/date-pickers-month"
           },
           {
             "Order": 0,
@@ -842,89 +885,18 @@
             "Title": "Time pickers",
             "FullTitle": "Time pickers",
             "Type": "menuItem",
-            "Url": "components/time-pickers",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TimePickers.svg"
+            "Url": "components/time-pickers"
           }
         ]
       },
       {
         "Order": 0,
-        "Title": "Presets",
-        "FullTitle": "Presets",
+        "Title": "Popup service",
+        "FullTitle": "Popup service",
         "Type": "menuItem",
-        "Children": [
-          {
-            "Order": 0,
-            "Title": "Block text",
-            "FullTitle": "Block text",
-            "Type": "menuItem",
-            "Url": "components/block-text"
-          },
-          {
-            "Order": 0,
-            "Title": "Copyable text",
-            "FullTitle": "Copyable text",
-            "Type": "menuItem",
-            "Url": "components/copyable-text"
-          },
-          {
-            "Order": 0,
-            "Title": "Cron Expression Generator",
-            "SubTitle": "Cron Expression Generator",
-            "FullTitle": "Cron Expression Generator (Cron Expression Generator)",
-            "Type": "menuItem",
-            "Url": "components/cron-expression-generator"
-          },
-          {
-            "Order": 0,
-            "Title": "Drawers",
-            "FullTitle": "Drawers",
-            "Type": "menuItem",
-            "Url": "components/drawers"
-          },
-          {
-            "Order": 0,
-            "Title": "Image Captcha",
-            "FullTitle": "Image Captcha",
-            "Type": "menuItem",
-            "Url": "components/image-captcha"
-          },
-          {
-            "Order": 0,
-            "Title": "Mobile cascader",
-            "FullTitle": "Mobile cascader",
-            "Type": "menuItem",
-            "Url": "components/mobile-cascader"
-          },
-          {
-            "Order": 0,
-            "Title": "Modals",
-            "FullTitle": "Modals",
-            "Type": "menuItem",
-            "Url": "components/modals"
-          },
-          {
-            "Order": 0,
-            "Title": "Not Grouped",
-            "FullTitle": "Not Grouped",
-            "Type": "menuItem",
-            "Url": "components/not-grouped"
-          },
-          {
-            "Order": 0,
-            "Title": "Popup service",
-            "FullTitle": "Popup service",
-            "Type": "menuItem",
-            "Url": "components/popup-service"
-          },
-          {
-            "Order": 0,
-            "Title": "Toast",
-            "FullTitle": "Toast",
-            "Type": "menuItem",
-            "Url": "components/toast"
-          }
-        ]
+        "Url": "components/popup-service",
+        "Tag": "service",
+        "Children": []
       },
       {
         "Order": 0,
@@ -962,7 +934,6 @@
         "FullTitle": "Sheets",
         "Type": "menuItem",
         "Url": "components/sheets",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sheet.svg",
         "Children": []
       },
       {
@@ -971,7 +942,6 @@
         "FullTitle": "Skeleton loaders",
         "Type": "menuItem",
         "Url": "components/skeleton-loaders",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SkeletonLoader.svg",
         "Children": []
       },
       {
@@ -988,7 +958,6 @@
         "FullTitle": "Steppers",
         "Type": "menuItem",
         "Url": "components/steppers",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Stepper.svg",
         "Children": []
       },
       {
@@ -1010,24 +979,21 @@
             "Title": "Data iterators",
             "FullTitle": "Data iterators",
             "Type": "menuItem",
-            "Url": "components/data-iterators",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataIterators.svg"
+            "Url": "components/data-iterators"
           },
           {
             "Order": 0,
             "Title": "Data tables",
             "FullTitle": "Data tables",
             "Type": "menuItem",
-            "Url": "components/data-tables",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataTable.svg"
+            "Url": "components/data-tables"
           },
           {
             "Order": 0,
             "Title": "Simple tables",
             "FullTitle": "Simple tables",
             "Type": "menuItem",
-            "Url": "components/simple-tables",
-            "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SimpleTables.svg"
+            "Url": "components/simple-tables"
           }
         ]
       },
@@ -1037,7 +1003,6 @@
         "FullTitle": "Tabs",
         "Type": "menuItem",
         "Url": "components/tabs",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tabs.svg",
         "Children": []
       },
       {
@@ -1050,11 +1015,19 @@
       },
       {
         "Order": 0,
+        "Title": "Toast",
+        "FullTitle": "Toast",
+        "Type": "menuItem",
+        "Url": "components/toast",
+        "Tag": "preset",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Tooltips",
         "FullTitle": "Tooltips",
         "Type": "menuItem",
         "Url": "components/tooltips",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tooltip.svg",
         "Children": []
       },
       {
@@ -1063,7 +1036,6 @@
         "FullTitle": "Treeview",
         "Type": "menuItem",
         "Url": "components/treeview",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Treeview.svg",
         "Children": []
       },
       {
@@ -1072,7 +1044,6 @@
         "FullTitle": "Virtual scroller",
         "Type": "menuItem",
         "Url": "components/virtual-scroller",
-        "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
         "Children": []
       }
     ]

@@ -4,7 +4,6 @@ subtitle: 月份选择器
 type: 月份选择器
 title: Date pickers month
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg
 related:
   - /components/date-pickers
   - /components/menus

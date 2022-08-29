@@ -4,7 +4,6 @@ subtitle: 文件上传
 type: 文件上传
 title: File inputs
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/FileInput.svg
 related:
   - /components/text-fields
   - /components/forms

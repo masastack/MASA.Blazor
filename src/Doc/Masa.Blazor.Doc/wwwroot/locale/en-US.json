@@ -58,5 +58,11 @@
   "PreviousPage": "Previous Page",
   "props": "Props",
   "contents": "Contents",
-  "events": "Events"
+  "events": "Events",
+  "tag":{
+    "preset": "preset",
+    "service": "service",
+    "new": "new",
+    "updated": "updated"
+  }
 }
