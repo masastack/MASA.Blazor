@@ -171,7 +171,17 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
         return (ItemDisabled is not null && ItemDisabled(item)) || item.Equals(_loadingItem);
     }
 
-    private async Task OnCancel() => await HandleVisibleChanged(false);
+    private async Task OnCancel()
+    {
+        if (VisibleChanged.HasDelegate)
+        {
+            await VisibleChanged.InvokeAsync(false);
+        }
+        else
+        {
+            Visible  = false;
+        }
+    }
 
     private async Task OnConfirm()
     {
