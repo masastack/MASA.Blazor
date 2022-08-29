@@ -854,7 +854,7 @@
     "Desc": "<p>Display two data of the same type side by side.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T11:38:52.1278702+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0190815+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -1839,7 +1839,7 @@
     "Desc": "<p>Append a button that provides copy feature to the content.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T11:38:52.1348817+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.024083+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -1912,7 +1912,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T11:38:52.1358699+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0252186+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -2271,7 +2271,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T11:38:52.1408699+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.029081+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5503,7 +5503,7 @@
     "Desc": "<p>Image Captcha component</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T11:38:52.1538696+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0400807+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6116,7 +6116,7 @@
     "Desc": "<p>A cascade selector designed for the mobile.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T11:38:52.1568699+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0419398+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6168,7 +6168,7 @@
     "Desc": "<p>When requiring users to interact with the application, but without jumping to a new page and interrupting the user's\nworkflow, you can use <code>Modal</code> to create a new floating layer over the current page to get user feedback or display\ninformation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T11:38:52.1608695+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0449765+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6393,7 +6393,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T11:38:52.1618692+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0469402+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6997,6 +6997,307 @@
     "Type": "DatePickersMonth"
   },
   {
+    "Desc": "<p>A date picker designed for the mobile.</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-29T13:18:21.0461062+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "",
+        "Code": "<div class=\"text-center\">\r\n    <PMobileDatePicker @bind-Value=\"_date\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_date)\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileDatePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private DateOnly _date;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileDatePickers.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "formatter",
+        "Title": "Formatter",
+        "Description": "<p>Format the content displayed in each column.</p>\n",
+        "Code": "<div class=\"text-center\">\r\n    <PMobileDatePicker @bind-Value=\"_date\" Formatter=\"@CustomFormatter\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_date)\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileDatePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private DateOnly _date;\r\n\r\n    private static string CustomFormatter(DatePrecision type, int val)\r\n    {\r\n        return type switch \r\n        {\r\n            DatePrecision.Year => $\"{val}年\",\r\n            DatePrecision.Month => $\"{val}月\",\r\n            DatePrecision.Day => $\"{val}日\",\r\n            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)\r\n            };\r\n    }\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileDatePickers.props.Formatter",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "minMax",
+        "Title": "Min and max",
+        "Description": "",
+        "Code": "<div class=\"text-center\">\r\n    <PMobileDatePicker @bind-Value=\"_date\"\r\n                       Max=\"DateOnly.FromDateTime(DateTime.Now)\"\r\n                       Min=\"new DateOnly(2000, 1, 1)\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_date)\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileDatePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private DateOnly _date;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileDatePickers.props.MinMax",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "precision",
+        "Title": "Precision",
+        "Description": "",
+        "Code": "<div class=\"text-center\">\r\n    <MSelect @bind-Value=\"_precision\"\r\n             Label=\"Precision\"\r\n             Items=\"@Items\"\r\n             ItemText=\"i => i.ToString()\"\r\n             ItemValue=\"i => i\"\r\n             Class=\"d-inline-block\"\r\n             Style=\"max-width: 180px\">\r\n    </MSelect>\r\n\r\n    <PMobileDatePicker @bind-Value=\"_date\" Precision=\"_precision\" @key=\"_precision\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_date)\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileDatePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private DateOnly _date;\r\n    private DatePrecision _precision = DatePrecision.Day;\r\n\r\n    private readonly static List<DatePrecision> Items = new()\r\n    {\r\n        DatePrecision.Year,\r\n        DatePrecision.Month,\r\n        DatePrecision.Day\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileDatePickers.props.Precision",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/mobile-pickers",
+      "/components/mobile-time-views",
+      "/components/mobile-date-time-pickers"
+    ],
+    "Title": "Mobile date pickers",
+    "Type": "MobileDatePickers"
+  },
+  {
+    "Desc": "<p>A date time picker designed for the mobile.</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-29T13:18:21.0481054+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "",
+        "Code": "<div class=\"text-center\">\r\n    <PMobileDateTimePicker @bind-Value=\"_dateTime\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_dateTime)\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileDateTimePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private DateTime _dateTime;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileDateTimePickers.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "formatter",
+        "Title": "Formatter",
+        "Description": "<p>Format the content displayed in each column.</p>\n",
+        "Code": "<div class=\"text-center\">\r\n    <PMobileDateTimePicker @bind-Value=\"_dateTime\" Formatter=\"@CustomFormatter\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_dateTime)\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileDateTimePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private DateTime _dateTime;\r\n\r\n    private static string CustomFormatter(DateTimePrecision type, int val)\r\n    {\r\n        return type switch \r\n        {\r\n            DateTimePrecision.Year => $\"{val}年\",\r\n            DateTimePrecision.Month => $\"{val}月\",\r\n            DateTimePrecision.Day => $\"{val}日\",\r\n            DateTimePrecision.Hour => $\"{val}时\",\r\n            DateTimePrecision.Minute => $\"{val}分\",\r\n            DateTimePrecision.Second => $\"{val}秒\",\r\n            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)\r\n        };\r\n    }\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileDateTimePickers.props.Formatter",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "minMax",
+        "Title": "Min and max",
+        "Description": "",
+        "Code": "<div class=\"text-center\">\r\n    <PMobileDateTimePicker @bind-Value=\"_dateTime\" Max=\"DateTime.Now\" Min=\"new DateTime(2000, 1, 1)\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_dateTime)\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileDateTimePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private DateTime _dateTime;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileDateTimePickers.props.MinMax",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "precision",
+        "Title": "Precision",
+        "Description": "",
+        "Code": "<div class=\"text-center\">\r\n    <MSelect @bind-Value=\"_precision\"\r\n             Label=\"Precision\"\r\n             Items=\"@Items\"\r\n             ItemText=\"i => i.ToString()\"\r\n             ItemValue=\"i => i\"\r\n             Class=\"d-inline-block\"\r\n             Style=\"max-width: 180px\">\r\n    </MSelect>\r\n\r\n    <PMobileDateTimePicker @bind-Value=\"_dateTime\" Precision=\"_precision\" @key=\"_precision\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_dateTime)\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileDateTimePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private DateTime _dateTime;\r\n    private DateTimePrecision _precision = DateTimePrecision.Day;\r\n\r\n    private readonly static List<DateTimePrecision> Items = new()\r\n    {\r\n        DateTimePrecision.Year,\r\n        DateTimePrecision.Month,\r\n        DateTimePrecision.Day,\r\n        DateTimePrecision.Hour,\r\n        DateTimePrecision.Minute,\r\n        DateTimePrecision.Second\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileDateTimePickers.props.Precision",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/mobile-pickers",
+      "/components/mobile-time-views",
+      "/components/mobile-date-pickers"
+    ],
+    "Title": "Mobile date time pickers",
+    "Type": "MobileDateTimePickers"
+  },
+  {
+    "Desc": "<p>A picker designed for the mobile. Provides multiple sets of options for users to choose, and supports single-column selection, multi-column selection and cascading selection.</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-29T13:18:21.0531071+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "<p>The <code>Columns</code> attribute can be configured for single-column or multi-column selection in the form of a two-dimensional list.</p>\n",
+        "Code": "<div class=\"text-center\">\r\n    <PMobilePicker @bind-Value=\"_value\"\r\n                   Columns=\"@_columns\"\r\n                   TColumn=\"List<string>\"\r\n                   TColumnItem=\"string\"\r\n                   TColumnItemValue=\"string\"\r\n                   ItemValue=\"item => item\"\r\n                   ItemText=\"item => item\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_value.Count == 0 ? \"Active me\" : string.Join(\" \", _value))\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobilePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private static readonly string DayOfWeek = DateTime.Now.DayOfWeek.ToString();\r\n    private static readonly string AmPm = DateTime.Now.Hour > 12 ? \"PM\" : \"AM\";\r\n\r\n    private readonly List<List<string>> _columns = new()\r\n    {\r\n        new List<string>\r\n        {\r\n            System.DayOfWeek.Monday.ToString(),\r\n            System.DayOfWeek.Tuesday.ToString(),\r\n            System.DayOfWeek.Wednesday.ToString(),\r\n            System.DayOfWeek.Thursday.ToString(),\r\n            System.DayOfWeek.Friday.ToString(),\r\n            System.DayOfWeek.Saturday.ToString(),\r\n            System.DayOfWeek.Sunday.ToString()\r\n        },\r\n        new List<string>\r\n        {\r\n            \"AM\",\r\n            \"PM\"\r\n        }\r\n    };\r\n\r\n    private List<string> _value = new() { DayOfWeek, AmPm };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobilePickers.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "cascade",
+        "Title": "Cascade",
+        "Description": "<p>Use the cascading <code>Columns</code> and <code>ItemChildren</code> fields to achieve the effect of cascading options.</p>\n<!--alert:warning-->\n<p>The data nesting depth of the cascade selection needs to be consistent, and if some of the options do not have sub\noptions, you can use an empty string for placeholder.</p>\n<!--/alert:warning-->\n",
+        "Code": "@using Masa.Blazor.Doc.Demos.Components.Groups.children.ChipGroup.props\r\n<div class=\"text-center\">\r\n    <PMobilePicker @bind-Value=\"_value\"\r\n                   Columns=\"@Columns\"\r\n                   TColumn=\"Data\"\r\n                   TColumnItem=\"Data\"\r\n                   TColumnItemValue=\"string\"\r\n                   ItemValue=\"item => item.Code\"\r\n                   ItemText=\"item => item.Name\"\r\n                   ItemChildren=\"item => item.Children\"\r\n                   ItemDisabled=\"item => item.Disabled\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_value.Count == 0 ? \"Active me\" : string.Join(\" \", GetNames()))\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobilePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    List<string> _value = new();\r\n\r\n    IEnumerable<string> GetNames()\r\n    {\r\n        List<string> names = new();\r\n        var columns = Columns.ToList();\r\n\r\n        foreach (var value in _value)\r\n        {\r\n            if (columns is null || columns.Count == 0)\r\n            {\r\n                break;\r\n            }\r\n\r\n            var column = columns.FirstOrDefault(c => c.Code == value);\r\n            if (column == null)\r\n            {\r\n                break;\r\n            }\r\n\r\n            names.Add(column.Name);\r\n            columns = column.Children;\r\n        }\r\n\r\n        return names;\r\n    }\r\n\r\n    record Data(string Code, string Name, List<Data> Children = null, bool Disabled = false);\r\n\r\n    static readonly List<Data> Columns = new()\r\n    {\r\n        new Data(\"bj\", \"北京\", new List<Data>\r\n        {\r\n            new(\"bj-hd\", \"海淀区\", new List<Data>\r\n            {\r\n                new(\"\", \"\")\r\n            }),\r\n            new(\"bj-sy\", \"顺义区\", new List<Data>\r\n            {\r\n                new(\"\", \"\")\r\n            }),\r\n            new(\"bj-sjs\", \"石景山区\", new List<Data>\r\n            {\r\n                new(\"\", \"\")\r\n            })\r\n        }),\r\n        new Data(\"sh\", \"上海\", new List<Data>\r\n        {\r\n            new(\"sh-sh\", \"上海\", new List<Data>\r\n            {\r\n                new(\"sh-sh-hp\", \"黄浦区\"),\r\n                new(\"sh-sh-xh\", \"徐汇区\"),\r\n                new(\"sh-sh-cn\", \"长宁区\"),\r\n                new(\"sh-sh-ja\", \"静安区\", Disabled: true)\r\n            })\r\n        }),\r\n        new Data(\"zj\", \"浙江\", new List<Data>\r\n        {\r\n            new(\"zj-hz\", \"杭州\", new List<Data>\r\n            {\r\n                new(\"zj-hz-sc\", \"上城区\"),\r\n                new(\"zj-hz-xc\", \"下城区\"),\r\n                new(\"zj-hz-qt\", \"钱塘区\")\r\n            }),\r\n            new(\"zj-nb\", \"宁波\", new List<Data>\r\n            {\r\n                new(\"zj-nb-jb\", \"江北区\"),\r\n                new(\"zj-nb-hs\", \"海曙区\"),\r\n                new(\"zj-nb-bl\", \"北仑区\")\r\n            })\r\n        }),\r\n        new Data(\"gd\", \"广东\", new List<Data>\r\n        {\r\n            new(\"gd-sz\", \"深圳\", new List<Data>\r\n            {\r\n                new(\"gd-sz-ns\", \"南山区\"),\r\n                new(\"gd-sz-lh\", \"罗湖区\")\r\n            }),\r\n            new(\"gd-gz\", \"广州\", new List<Data>\r\n            {\r\n                new(\"gd-gz-by\", \"白云区\"),\r\n                new(\"gd-gz-th\", \"天河区\"),\r\n                new(\"gd-gz-hz\", \"海珠区\")\r\n            })\r\n        })\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobilePickers.props.Cascade",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "itemHeight",
+        "Title": "Custom item height",
+        "Description": "<p>You can customize the height of the option through <code>Itemheight</code>. Currently, only <code>px</code> is supported.</p>\n",
+        "Code": "<div class=\"text-center\">\r\n    <PMobilePicker @bind-Value=\"_value\"\r\n                   Columns=\"@_columns\"\r\n                   TColumn=\"List<string>\"\r\n                   TColumnItem=\"string\"\r\n                   TColumnItemValue=\"string\"\r\n                   ItemValue=\"item => item\"\r\n                   ItemText=\"item => item\"\r\n                   ItemHeight=\"64\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_value.Count == 0 ? \"Active me\" : string.Join(\" \", _value))\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobilePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private static readonly string DayOfWeek = DateTime.Now.DayOfWeek.ToString();\r\n    private static readonly string AmPm = DateTime.Now.Hour > 12 ? \"PM\" : \"AM\";\r\n\r\n    private readonly List<List<string>> _columns = new()\r\n    {\r\n        new List<string>\r\n        {\r\n            System.DayOfWeek.Monday.ToString(),\r\n            System.DayOfWeek.Tuesday.ToString(),\r\n            System.DayOfWeek.Wednesday.ToString(),\r\n            System.DayOfWeek.Thursday.ToString(),\r\n            System.DayOfWeek.Friday.ToString(),\r\n            System.DayOfWeek.Saturday.ToString(),\r\n            System.DayOfWeek.Sunday.ToString()\r\n        },\r\n        new List<string>\r\n        {\r\n            \"AM\",\r\n            \"PM\"\r\n        }\r\n    };\r\n\r\n    private List<string> _value = new() { DayOfWeek, AmPm };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobilePickers.props.ItemHeight",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/mobile-picker-views",
+      "/components/mobile-date-time-views",
+      "/components/mobile-time-pickers"
+    ],
+    "Title": "Mobile pickers",
+    "Type": "MobilePickers"
+  },
+  {
+    "Desc": "<p>A picker view designed for the mobile. Provides multiple sets of options for users to choose, and supports single-column selection, multi-column selection and cascading selection.</p>\n<p><strong>MMobilePickerView</strong> is the content area of <a href=\"/components/mobile-pickers\">PMobilePicker</a>.</p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MMobilePickerView\">MMobilePickerView</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-08-29T13:18:21.0511051+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "<p>The <code>Columns</code> attribute can be configured for single-column or multi-column selection in the form of a two-dimensional list.</p>\n",
+        "Code": "<MRow Justify=\"JustifyTypes.Center\" Align=\"AlignTypes.Center\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <MMobilePickerView @bind-Value=\"_value\"\r\n                           Columns=\"@_columns\"\r\n                           TColumn=\"List<string>\"\r\n                           TColumnItem=\"string\"\r\n                           TColumnItemValue=\"string\"\r\n                           ItemValue=\"item => item\"\r\n                           ItemText=\"item => item\">\r\n        </MMobilePickerView>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\" Class=\"text-center\">\r\n        Value: @string.Join(\" \", _value)\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    private static readonly string DayOfWeek = DateTime.Now.DayOfWeek.ToString();\r\n    private static readonly string AmPm = DateTime.Now.Hour > 12 ? \"PM\" : \"AM\";\r\n\r\n    private readonly List<List<string>> _columns = new()\r\n    {\r\n        new List<string>\r\n        {\r\n            System.DayOfWeek.Monday.ToString(),\r\n            System.DayOfWeek.Tuesday.ToString(),\r\n            System.DayOfWeek.Wednesday.ToString(),\r\n            System.DayOfWeek.Thursday.ToString(),\r\n            System.DayOfWeek.Friday.ToString(),\r\n            System.DayOfWeek.Saturday.ToString(),\r\n            System.DayOfWeek.Sunday.ToString()\r\n        },\r\n        new List<string>\r\n        {\r\n            \"AM\",\r\n            \"PM\"\r\n        }\r\n    };\r\n\r\n    private List<string> _value = new() { DayOfWeek, AmPm };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobilePickerViews.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "cascade",
+        "Title": "Cascade",
+        "Description": "<p>Use the cascading <code>Columns</code> and <code>ItemChildren</code> fields to achieve the effect of cascading options.</p>\n<!--alert:warning-->\n<p>The data nesting depth of the cascade selection needs to be consistent, and if some of the options do not have sub\noptions, you can use an empty string for placeholder.</p>\n<!--/alert:warning-->\n",
+        "Code": "<MRow Justify=\"JustifyTypes.Center\" Align=\"AlignTypes.Center\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <MMobilePickerView @bind-Value=\"_value\"\r\n                           Columns=\"@Columns\"\r\n                           TColumn=\"Data\"\r\n                           TColumnItem=\"Data\"\r\n                           TColumnItemValue=\"string\"\r\n                           ItemValue=\"item => item.Code\"\r\n                           ItemText=\"item => item.Name\"\r\n                           ItemChildren=\"item => item.Children\"\r\n                           ItemDisabled=\"item => item.Disabled\"\r\n                           OnSelect=\"@HandleOnSelect\">\r\n        </MMobilePickerView>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\" Class=\"text-center\">\r\n        Selected: @string.Join(\" \", _selected.Select(s => s.Name))\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    List<string> _value = new();\r\n    List<Data> _selected = new();\r\n\r\n    void HandleOnSelect(List<Data> selected)\r\n    {\r\n        _selected = selected;\r\n    }\r\n\r\n    record Data(string Code, string Name, List<Data> Children = null, bool Disabled = false);\r\n\r\n    static readonly List<Data> Columns = new()\r\n    {\r\n        new Data(\"bj\", \"北京\", new List<Data>\r\n        {\r\n            new(\"bj-hd\", \"海淀区\", new List<Data>\r\n            {\r\n                new(\"\", \"\")\r\n            }),\r\n            new(\"bj-sy\", \"顺义区\", new List<Data>\r\n            {\r\n                new(\"\", \"\")\r\n            }),\r\n            new(\"bj-sjs\", \"石景山区\", new List<Data>\r\n            {\r\n                new(\"\", \"\")\r\n            })\r\n        }),\r\n        new Data(\"sh\", \"上海\", new List<Data>\r\n        {\r\n            new(\"sh-sh\", \"上海\", new List<Data>\r\n            {\r\n                new(\"sh-sh-hp\", \"黄浦区\"),\r\n                new(\"sh-sh-xh\", \"徐汇区\"),\r\n                new(\"sh-sh-cn\", \"长宁区\"),\r\n                new(\"sh-sh-ja\", \"静安区\", Disabled: true)\r\n            })\r\n        }),\r\n        new Data(\"zj\", \"浙江\", new List<Data>\r\n        {\r\n            new(\"zj-hz\", \"杭州\", new List<Data>\r\n            {\r\n                new(\"zj-hz-sc\", \"上城区\"),\r\n                new(\"zj-hz-xc\", \"下城区\"),\r\n                new(\"zj-hz-qt\", \"钱塘区\")\r\n            }),\r\n            new(\"zj-nb\", \"宁波\", new List<Data>\r\n            {\r\n                new(\"zj-nb-jb\", \"江北区\"),\r\n                new(\"zj-nb-hs\", \"海曙区\"),\r\n                new(\"zj-nb-bl\", \"北仑区\")\r\n            })\r\n        }),\r\n        new Data(\"gd\", \"广东\", new List<Data>\r\n        {\r\n            new(\"gd-sz\", \"深圳\", new List<Data>\r\n            {\r\n                new(\"gd-sz-ns\", \"南山区\"),\r\n                new(\"gd-sz-lh\", \"罗湖区\")\r\n            }),\r\n            new(\"gd-gz\", \"广州\", new List<Data>\r\n            {\r\n                new(\"gd-gz-by\", \"白云区\"),\r\n                new(\"gd-gz-th\", \"天河区\"),\r\n                new(\"gd-gz-hz\", \"海珠区\")\r\n            })\r\n        })\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobilePickerViews.props.Cascade",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "itemDisabled",
+        "Title": "Disable item",
+        "Description": "",
+        "Code": "<MRow Justify=\"JustifyTypes.Center\" Align=\"AlignTypes.Center\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <MMobilePickerView @bind-Value=\"_value\"\r\n                           Columns=\"@_columns\"\r\n                           TColumn=\"List<string>\"\r\n                           TColumnItem=\"string\"\r\n                           TColumnItemValue=\"string\"\r\n                           ItemValue=\"item => item\"\r\n                           ItemText=\"item => item\"\r\n                           ItemDisabled=\"item => item == NowDayOfWeek\">\r\n        </MMobilePickerView>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\" Class=\"text-center\">\r\n        Value: @string.Join(\" \", _value)\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    private static readonly string NowDayOfWeek = DateTime.Now.DayOfWeek.ToString();\r\n    private static readonly string NowAmPm = DateTime.Now.Hour > 12 ? \"PM\" : \"AM\";\r\n\r\n    private readonly List<List<string>> _columns = new()\r\n    {\r\n        new List<string>\r\n        {\r\n            DayOfWeek.Monday.ToString(),\r\n            DayOfWeek.Tuesday.ToString(),\r\n            DayOfWeek.Wednesday.ToString(),\r\n            DayOfWeek.Thursday.ToString(),\r\n            DayOfWeek.Friday.ToString(),\r\n            DayOfWeek.Saturday.ToString(),\r\n            DayOfWeek.Sunday.ToString()\r\n        },\r\n        new List<string>\r\n        {\r\n            \"AM\",\r\n            \"PM\"\r\n        }\r\n    };\r\n\r\n    private List<string> _value = new() { NowDayOfWeek, NowAmPm };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobilePickerViews.props.ItemDisabled",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "itemHeight",
+        "Title": "Custom item height",
+        "Description": "<p>You can customize the height of the option through <code>Itemheight</code>. Currently, only <code>px</code> is supported.</p>\n",
+        "Code": "<MRow Justify=\"JustifyTypes.Center\" Align=\"AlignTypes.Center\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <MMobilePickerView @bind-Value=\"_value\"\r\n                           Columns=\"@_columns\"\r\n                           TColumn=\"List<string>\"\r\n                           TColumnItem=\"string\"\r\n                           TColumnItemValue=\"string\"\r\n                           ItemValue=\"item => item\"\r\n                           ItemText=\"item => item\"\r\n                           ItemHeight=\"64\">\r\n        </MMobilePickerView>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\" Class=\"text-center\">\r\n        Value: @string.Join(\" \", _value)\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    private static readonly string DayOfWeek = DateTime.Now.DayOfWeek.ToString();\r\n    private static readonly string AmPm = DateTime.Now.Hour > 12 ? \"PM\" : \"AM\";\r\n    \r\n    private readonly List<List<string>> _columns = new()\r\n    {\r\n        new List<string>\r\n        {\r\n            System.DayOfWeek.Monday.ToString(),\r\n            System.DayOfWeek.Tuesday.ToString(),\r\n            System.DayOfWeek.Wednesday.ToString(),\r\n            System.DayOfWeek.Thursday.ToString(),\r\n            System.DayOfWeek.Friday.ToString(),\r\n            System.DayOfWeek.Saturday.ToString(),\r\n            System.DayOfWeek.Sunday.ToString()\r\n        },\r\n        new List<string>\r\n        {\r\n            \"AM\",\r\n            \"PM\"\r\n        }\r\n    };\r\n\r\n    private List<string> _value = new() { DayOfWeek, AmPm };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobilePickerViews.props.ItemHeight",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/mobile-pickers",
+      "/components/mobile-date-time-pickers",
+      "/components/mobile-time-pickers"
+    ],
+    "Title": "Mobile picker views",
+    "Type": "MobilePickerViews"
+  },
+  {
+    "Desc": "<p>A time picker designed for the mobile.</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-29T13:18:21.056114+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "",
+        "Code": "<div class=\"text-center\">\r\n    <PMobileTimePicker @bind-Value=\"_time\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_time.ToLongTimeString())\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileTimePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private TimeOnly _time;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileTimePickers.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "formatter",
+        "Title": "Formatter",
+        "Description": "<p>Format the content displayed in each column.</p>\n",
+        "Code": "<div class=\"text-center\">\r\n    <PMobileTimePicker @bind-Value=\"_time\" Formatter=\"@CustomFormatter\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_time.ToLongTimeString())\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileTimePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private TimeOnly _time;\r\n\r\n    private static string CustomFormatter(TimePrecision type, int val)\r\n    {\r\n        return type switch \r\n        {\r\n            TimePrecision.Hour => $\"{val}时\",\r\n            TimePrecision.Minute => $\"{val}分\",\r\n            TimePrecision.Second => $\"{val}秒\",\r\n            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)\r\n        };\r\n    }\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileTimePickers.props.Formatter",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "minMax",
+        "Title": "Min and max",
+        "Description": "",
+        "Code": "<div class=\"text-center\">\r\n    <PMobileTimePicker @bind-Value=\"_time\"\r\n                       Min=\"new TimeOnly(9, 30, 0)\"\r\n                       Max=\"new TimeOnly(14, 59, 59)\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_time.ToLongTimeString())\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileTimePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private TimeOnly _time;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileTimePickers.props.MinMax",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "precision",
+        "Title": "Precision",
+        "Description": "",
+        "Code": "<div class=\"text-center\">\r\n    <MSelect @bind-Value=\"_precision\"\r\n             Label=\"Precision\"\r\n             Items=\"@Items\"\r\n             ItemText=\"i => i.ToString()\"\r\n             ItemValue=\"i => i\"\r\n             Class=\"d-inline-block\"\r\n             Style=\"max-width: 180px\">\r\n    </MSelect>\r\n\r\n    <PMobileTimePicker @bind-Value=\"_time\" Precision=\"_precision\" @key=\"_precision\">\r\n        <ActivatorContent>\r\n            <MButton Color=\"primary\" Class=\"text-capitalize\" Text @attributes=\"@context.Attrs\">\r\n                @(_time.ToLongTimeString())\r\n            </MButton>\r\n        </ActivatorContent>\r\n    </PMobileTimePicker>\r\n</div>\r\n\r\n@code {\r\n\r\n    private TimeOnly _time;\r\n    private TimePrecision _precision = TimePrecision.Second;\r\n\r\n    private readonly static List<TimePrecision> Items = new()\r\n    {\r\n        TimePrecision.Hour,\r\n        TimePrecision.Minute,\r\n        TimePrecision.Second\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.Pickers.children.MobileTimePickers.props.Precision",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/mobile-pickers",
+      "/components/mobile-date-time-pickers",
+      "/components/mobile-date-pickers"
+    ],
+    "Title": "Mobile time pickers",
+    "Type": "MobileTimePickers"
+  },
+  {
     "Desc": "<p>The MTimePicker is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting the time.</p>\n",
     "Order": 0,
     "OtherDocs": {
@@ -7173,7 +7474,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T11:38:52.1668735+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0509517+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8707,7 +9008,7 @@
     "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>,<strong>Info</strong>,<strong>Warning</strong>, and <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays and also can customized content to fit almost any situation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T11:38:52.1738735+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0592024+08:00",
     "DemoList": [
       {
         "Order": 1,
