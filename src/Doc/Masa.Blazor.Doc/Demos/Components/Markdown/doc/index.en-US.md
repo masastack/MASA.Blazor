@@ -3,6 +3,7 @@ category: Components
 type: Markdown
 title: Markdown
 cols: 1
+tag: js-proxy
 ---
 
 Packaging based on [vditor](https://github.com/Vanessa219/vditor)

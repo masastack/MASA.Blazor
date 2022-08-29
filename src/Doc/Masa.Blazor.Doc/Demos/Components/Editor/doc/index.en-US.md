@@ -3,6 +3,7 @@ category: Components
 type: Editor
 title: Editor
 cols: 1
+tag: js-proxy
 ---
 
 Rich text editor based on [Quill](https://quilljs.com/) encapsulation

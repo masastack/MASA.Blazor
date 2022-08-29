@@ -4,7 +4,7 @@ subtitle: 图表
 type: 图表
 title: ECharts
 cols: 1
-
+tag: js-proxy
 ---
 
 [ECharts](https://echarts.apache.org/examples/zh/index.html)

@@ -528,6 +528,7 @@
         "FullTitle": "DragZone (拖放)",
         "Type": "menuItem",
         "Url": "components/dragzone",
+        "Tag": "js-proxy",
         "Children": []
       },
       {
@@ -547,6 +548,7 @@
         "FullTitle": "ECharts (图表)",
         "Type": "menuItem",
         "Url": "components/echarts",
+        "Tag": "js-proxy",
         "Children": []
       },
       {
@@ -556,6 +558,7 @@
         "FullTitle": "Editor (富文本编辑器)",
         "Type": "menuItem",
         "Url": "components/editor",
+        "Tag": "js-proxy",
         "Children": []
       },
       {
@@ -640,6 +643,15 @@
             "FullTitle": "Forms (表单)",
             "Type": "menuItem",
             "Url": "components/forms"
+          },
+          {
+            "Order": 0,
+            "Title": "Mobile cascader",
+            "SubTitle": "移动端级联",
+            "FullTitle": "Mobile cascader (移动端级联)",
+            "Type": "menuItem",
+            "Url": "components/mobile-cascader",
+            "Tag": "preset"
           },
           {
             "Order": 0,
@@ -835,6 +847,7 @@
         "FullTitle": "Markdown (Markdown编辑器)",
         "Type": "menuItem",
         "Url": "components/markdown",
+        "Tag": "js-proxy",
         "Children": []
       },
       {
@@ -844,16 +857,6 @@
         "FullTitle": "Menus (菜单)",
         "Type": "menuItem",
         "Url": "components/menus",
-        "Children": []
-      },
-      {
-        "Order": 0,
-        "Title": "Mobile cascader",
-        "SubTitle": "移动端级联",
-        "FullTitle": "Mobile cascader (移动端级联)",
-        "Type": "menuItem",
-        "Url": "components/mobile-cascader",
-        "Tag": "preset",
         "Children": []
       },
       {

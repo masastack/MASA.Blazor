@@ -4,6 +4,7 @@ subtitle: 拖放
 type: 拖放
 title: DragZone
 cols: 1
+tag: js-proxy
 ---
 
 `MDragZone`组件基于[Sorttable.js](https://github.com/SortableJS/Sortable)实现的可拖放功能

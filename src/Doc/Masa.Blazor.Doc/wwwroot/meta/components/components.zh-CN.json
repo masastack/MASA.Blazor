@@ -2294,7 +2294,8 @@
     "Cols": 1,
     "Subtitle": "拖放",
     "Title": "DragZone",
-    "Type": "拖放"
+    "Type": "拖放",
+    "Tag": "js-proxy"
   },
   {
     "Order": 0,
@@ -2472,7 +2473,8 @@
     "Cols": 1,
     "Subtitle": "图表",
     "Title": "ECharts",
-    "Type": "图表"
+    "Type": "图表",
+    "Tag": "js-proxy"
   },
   {
     "Desc": "<p>基于<a href=\"https://quilljs.com/\">Quill</a>封装的富文本编辑器</p>\n",
@@ -2600,7 +2602,8 @@
     "Cols": 1,
     "Subtitle": "富文本编辑器",
     "Title": "Editor",
-    "Type": "富文本编辑器"
+    "Type": "富文本编辑器",
+    "Tag": "js-proxy"
   },
   {
     "Desc": "<p><code>MErrorHandler</code>组件用来处理<code>blazor</code>组件数据加载和render时的异常信息。</p>\n",
@@ -3457,6 +3460,59 @@
     "Subtitle": "表单",
     "Title": "Forms",
     "Type": "表单"
+  },
+  {
+    "Desc": "<p>为移动端设计的级联选择器。</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-29T13:13:54.0419398+08:00",
+    "DemoList": [
+      {
+        "Order": 1,
+        "Name": "index",
+        "Title": "使用",
+        "Description": "",
+        "Code": "<MRow Align=\"AlignTypes.Baseline\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <MButton OnClick=\"() => visible = true\">Select</MButton>\r\n        <PMobileCascader @bind-Value=\"value\"\r\n                         @bind-Visible=\"visible\"\r\n                         Title=\"省市区\"\r\n                         Items=\"Datas\"\r\n                         ItemText=\"d => d.Name\"\r\n                         ItemValue=\"d => d.Code\"\r\n                         ItemChildren=\"d => d.Children\"\r\n                         ItemDisabled=\"d => d.Disabled\">\r\n        </PMobileCascader>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        Selected values: @string.Join(\",\", value)\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    List<string> value = new();\r\n\r\n    bool visible;\r\n\r\n    record Data(string Code, string Name, List<Data> Children = null, bool Disabled = false);\r\n\r\n    static readonly List<Data> Datas = new List<Data>()\r\n    {\r\n        new Data(\"sh\", \"上海\", new List<Data>()\r\n        {\r\n            new Data(\"sh-hp\", \"黄浦区\"),\r\n            new Data(\"sh-xh\", \"徐汇区\"),\r\n            new Data(\"sh-cn\", \"长宁区\"),\r\n            new Data(\"sh-ja\", \"静安区\", Disabled: true),\r\n        }),\r\n        new Data(\"zj\", \"浙江\", new List<Data>()\r\n        {\r\n            new Data(\"zj-hz\", \"杭州\", new List<Data>()\r\n            {\r\n                new Data(\"zj-hz-sc\", \"上城区\"),\r\n                new Data(\"zj-hz-xc\", \"下城区\"),\r\n                new Data(\"zj-hz-qt\", \"钱塘区\"),\r\n            }),\r\n            new Data(\"zj-nb\", \"宁波\", new List<Data>()\r\n            {\r\n                new Data(\"zj-nb-jb\", \"江北区\"),\r\n                new Data(\"zj-nb-hs\", \"海曙区\"),\r\n                new Data(\"zj-nb-bl\", \"北仑区\"),\r\n            }),\r\n        }),\r\n        new Data(\"gd\", \"广东\", new List<Data>()\r\n        {\r\n            new Data(\"gd-sz\", \"深圳\", new List<Data>()\r\n            {\r\n                new Data(\"gd-sz-ns\", \"南山区\"),\r\n                new Data(\"gd-sz-lh\", \"罗湖区\"),\r\n            }),\r\n            new Data(\"gd-gz\", \"广州\", new List<Data>()\r\n            {\r\n                new Data(\"gd-gz-by\", \"白云区\"),\r\n                new Data(\"gd-gz-th\", \"天河区\"),\r\n                new Data(\"gd-gz-hz\", \"海珠区\"),\r\n            }),\r\n        }),\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.FormInputs.children.MobileCascader.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "loadChildren",
+        "Title": "加载子项",
+        "Description": "",
+        "Code": "<MRow Align=\"AlignTypes.Baseline\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <PMobileCascader @bind-Value=\"value\"\r\n                         TItem=\"Data\"\r\n                         TItemValue=\"string\"\r\n                         Title=\"省市区\"\r\n                         Items=\"Datas\"\r\n                         ItemText=\"d => d.Name\"\r\n                         ItemValue=\"d => d.Code\"\r\n                         ItemChildren=\"d => d.Children\"\r\n                         ItemDisabled=\"d => d.Disabled\"\r\n                         OnLoadChildren=\"HandleOnLoadChildren\">\r\n            <ActivatorContent>\r\n                <MButton @attributes=\"@context.Attrs\">Select</MButton>\r\n            </ActivatorContent>\r\n        </PMobileCascader>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        Selected values: @string.Join(\",\", value)\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    List<string> value = new();\r\n\r\n    private async Task HandleOnLoadChildren(Data item)\r\n    {\r\n        // mock the http request\r\n        await Task.Delay(1000);\r\n\r\n        item.Children = item.Code switch\r\n        {\r\n            \"china\" => new List<Data>()\r\n            {\r\n                new(\"sh\", \"上海\"), new(\"zj\", \"浙江\"), new(\"gd\", \"广东\"),\r\n            },\r\n            \"sh\" => new List<Data>()\r\n            {\r\n                new(\"sh-hp\", \"黄浦区\"), new(\"sh-xh\", \"徐汇区\"), new(\"sh-cn\", \"长宁区\"), new(\"sh-ja\", \"静安区\", disabled: true),\r\n            },\r\n            \"zj\" => new List<Data>()\r\n            {\r\n                new(\"zj-hz\", \"杭州\"), new(\"zj-nb\", \"宁波\"),\r\n            },\r\n            \"gd\" => new List<Data>()\r\n            {\r\n                new(\"gd-sz\", \"深圳\"), new(\"gd-gz\", \"广州\"),\r\n            },\r\n            \"zj-hz\" => new List<Data>()\r\n            {\r\n                new(\"zj-hz-sc\", \"上城区\"), new(\"zj-hz-xc\", \"下城区\"), new(\"zj-hz-qt\", \"钱塘区\"),\r\n            },\r\n            \"zj-nb\" => new List<Data>()\r\n            {\r\n                new(\"zj-nb-jb\", \"江北区\"), new(\"zj-nb-hs\", \"海曙区\"), new(\"zj-nb-bl\", \"北仑区\"),\r\n            },      \r\n            \"gd-sz\" => new List<Data>()\r\n            {\r\n                new(\"gd-sz-ns\", \"南山区\"), new(\"gd-sz-lh\", \"罗湖区\"),\r\n            },            \r\n            \"gd-gz\" => new List<Data>()\r\n            {\r\n                new(\"gd-gz-by\", \"白云区\"), new(\"gd-gz-th\", \"天河区\"), new(\"gd-gz-hz\", \"海珠区\"),\r\n            },\r\n            _ => new List<Data>()\r\n        };\r\n    }\r\n\r\n    class Data\r\n    {\r\n        public string Name { get; set; }\r\n        public string Code { get; set; }\r\n        public List<Data> Children { get; set; }\r\n        public bool Disabled { get; set; }\r\n\r\n        public Data(string code, string name, List<Data> children = null, bool disabled = false)\r\n        {\r\n            Code = code;\r\n            Name = name;\r\n            Children = children;\r\n            Disabled = disabled;\r\n        }\r\n    }\r\n\r\n    static readonly List<Data> Datas = new()\r\n    {\r\n        new Data(\"china\", \"中国\")\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.FormInputs.children.MobileCascader.events.LoadChildren",
+        "Style": "",
+        "Debug": false,
+        "Group": 1
+      },
+      {
+        "Order": 0,
+        "Name": "onSelect",
+        "Title": "选择事件",
+        "Description": "",
+        "Code": "<MRow Align=\"AlignTypes.Baseline\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <PMobileCascader TItem=\"Data\"\r\n                         TItemValue=\"string\"\r\n                         Title=\"省市区\"\r\n                         Items=\"@Datas\"\r\n                         ItemText=\"d => d.Name\"\r\n                         ItemValue=\"d => d.Code\"\r\n                         ItemChildren=\"d => d.Children\"\r\n                         ItemDisabled=\"d => d.Disabled\"\r\n                         OnSelect=\"HandleOnSelect\">\r\n            <ActivatorContent>\r\n                <MButton @attributes=\"@context.Attrs\">Select</MButton>\r\n            </ActivatorContent>\r\n        </PMobileCascader>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        Selected values: @string.Join(\"-\", selectedItems.Select(item => item.Name))\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    List<Data> selectedItems = new();\r\n\r\n    void HandleOnSelect(List<Data> selected)\r\n    {\r\n        selectedItems = selected;\r\n    }\r\n\r\n    record Data(string Code, string Name, List<Data> Children = null, bool Disabled = false);\r\n\r\n    static readonly List<Data> Datas = new List<Data>()\r\n    {\r\n        new Data(\"sh\", \"上海\", new List<Data>()\r\n        {\r\n            new Data(\"sh-hp\", \"黄浦区\"),\r\n            new Data(\"sh-xh\", \"徐汇区\"),\r\n            new Data(\"sh-cn\", \"长宁区\"),\r\n            new Data(\"sh-ja\", \"静安区\", Disabled: true),\r\n        }),\r\n        new Data(\"zj\", \"浙江\", new List<Data>()\r\n        {\r\n            new Data(\"zj-hz\", \"杭州\", new List<Data>()\r\n            {\r\n                new Data(\"zj-hz-sc\", \"上城区\"),\r\n                new Data(\"zj-hz-xc\", \"下城区\"),\r\n                new Data(\"zj-hz-qt\", \"钱塘区\"),\r\n            }),\r\n            new Data(\"zj-nb\", \"宁波\", new List<Data>()\r\n            {\r\n                new Data(\"zj-nb-jb\", \"江北区\"),\r\n                new Data(\"zj-nb-hs\", \"海曙区\"),\r\n                new Data(\"zj-nb-bl\", \"北仑区\"),\r\n            }),\r\n        }),\r\n        new Data(\"gd\", \"广东\", new List<Data>()\r\n        {\r\n            new Data(\"gd-sz\", \"深圳\", new List<Data>()\r\n            {\r\n                new Data(\"gd-sz-ns\", \"南山区\"),\r\n                new Data(\"gd-sz-lh\", \"罗湖区\"),\r\n            }),\r\n            new Data(\"gd-gz\", \"广州\", new List<Data>()\r\n            {\r\n                new Data(\"gd-gz-by\", \"白云区\"),\r\n                new Data(\"gd-gz-th\", \"天河区\"),\r\n                new Data(\"gd-gz-hz\", \"海珠区\"),\r\n            }),\r\n        }),\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.FormInputs.children.MobileCascader.events.OnSelect",
+        "Style": "",
+        "Debug": false,
+        "Group": 1
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/lists",
+      "/components/tabs",
+      "/components/buttons"
+    ],
+    "Subtitle": "移动端级联",
+    "Title": "Mobile cascader",
+    "Type": "移动端级联",
+    "Tag": "preset"
   },
   {
     "Desc": "<p>该组件是用于MFA校验的一次性密码输入组件</p>\n",
@@ -5998,7 +6054,8 @@
     "Cols": 1,
     "Subtitle": "Markdown编辑器",
     "Title": "Markdown",
-    "Type": "Markdown编辑器"
+    "Type": "Markdown编辑器",
+    "Tag": "js-proxy"
   },
   {
     "Desc": "<p><code>MMenu</code> 组件在激活它的元素的位置上展示一个菜单。</p>\n",
@@ -6174,59 +6231,6 @@
     "Subtitle": "菜单",
     "Title": "Menus",
     "Type": "菜单"
-  },
-  {
-    "Desc": "<p>为移动端设计的级联选择器。</p>\n",
-    "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:13:54.0419398+08:00",
-    "DemoList": [
-      {
-        "Order": 1,
-        "Name": "index",
-        "Title": "使用",
-        "Description": "",
-        "Code": "<MRow Align=\"AlignTypes.Baseline\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <MButton OnClick=\"() => visible = true\">Select</MButton>\r\n        <PMobileCascader @bind-Value=\"value\"\r\n                         @bind-Visible=\"visible\"\r\n                         Title=\"省市区\"\r\n                         Items=\"Datas\"\r\n                         ItemText=\"d => d.Name\"\r\n                         ItemValue=\"d => d.Code\"\r\n                         ItemChildren=\"d => d.Children\"\r\n                         ItemDisabled=\"d => d.Disabled\">\r\n        </PMobileCascader>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        Selected values: @string.Join(\",\", value)\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    List<string> value = new();\r\n\r\n    bool visible;\r\n\r\n    record Data(string Code, string Name, List<Data> Children = null, bool Disabled = false);\r\n\r\n    static readonly List<Data> Datas = new List<Data>()\r\n    {\r\n        new Data(\"sh\", \"上海\", new List<Data>()\r\n        {\r\n            new Data(\"sh-hp\", \"黄浦区\"),\r\n            new Data(\"sh-xh\", \"徐汇区\"),\r\n            new Data(\"sh-cn\", \"长宁区\"),\r\n            new Data(\"sh-ja\", \"静安区\", Disabled: true),\r\n        }),\r\n        new Data(\"zj\", \"浙江\", new List<Data>()\r\n        {\r\n            new Data(\"zj-hz\", \"杭州\", new List<Data>()\r\n            {\r\n                new Data(\"zj-hz-sc\", \"上城区\"),\r\n                new Data(\"zj-hz-xc\", \"下城区\"),\r\n                new Data(\"zj-hz-qt\", \"钱塘区\"),\r\n            }),\r\n            new Data(\"zj-nb\", \"宁波\", new List<Data>()\r\n            {\r\n                new Data(\"zj-nb-jb\", \"江北区\"),\r\n                new Data(\"zj-nb-hs\", \"海曙区\"),\r\n                new Data(\"zj-nb-bl\", \"北仑区\"),\r\n            }),\r\n        }),\r\n        new Data(\"gd\", \"广东\", new List<Data>()\r\n        {\r\n            new Data(\"gd-sz\", \"深圳\", new List<Data>()\r\n            {\r\n                new Data(\"gd-sz-ns\", \"南山区\"),\r\n                new Data(\"gd-sz-lh\", \"罗湖区\"),\r\n            }),\r\n            new Data(\"gd-gz\", \"广州\", new List<Data>()\r\n            {\r\n                new Data(\"gd-gz-by\", \"白云区\"),\r\n                new Data(\"gd-gz-th\", \"天河区\"),\r\n                new Data(\"gd-gz-hz\", \"海珠区\"),\r\n            }),\r\n        }),\r\n    };\r\n\r\n}\r\n",
-        "Type": "Demos.Components.MobileCascader.usage.Index",
-        "Style": "",
-        "Debug": false,
-        "Group": 4
-      },
-      {
-        "Order": 0,
-        "Name": "loadChildren",
-        "Title": "加载子项",
-        "Description": "",
-        "Code": "<MRow Align=\"AlignTypes.Baseline\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <PMobileCascader @bind-Value=\"value\"\r\n                         TItem=\"Data\"\r\n                         TItemValue=\"string\"\r\n                         Title=\"省市区\"\r\n                         Items=\"Datas\"\r\n                         ItemText=\"d => d.Name\"\r\n                         ItemValue=\"d => d.Code\"\r\n                         ItemChildren=\"d => d.Children\"\r\n                         ItemDisabled=\"d => d.Disabled\"\r\n                         OnLoadChildren=\"HandleOnLoadChildren\">\r\n            <ActivatorContent>\r\n                <MButton @attributes=\"@context.Attrs\">Select</MButton>\r\n            </ActivatorContent>\r\n        </PMobileCascader>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        Selected values: @string.Join(\",\", value)\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    List<string> value = new();\r\n\r\n    private async Task HandleOnLoadChildren(Data item)\r\n    {\r\n        // mock the http request\r\n        await Task.Delay(1000);\r\n\r\n        item.Children = item.Code switch\r\n        {\r\n            \"china\" => new List<Data>()\r\n            {\r\n                new(\"sh\", \"上海\"), new(\"zj\", \"浙江\"), new(\"gd\", \"广东\"),\r\n            },\r\n            \"sh\" => new List<Data>()\r\n            {\r\n                new(\"sh-hp\", \"黄浦区\"), new(\"sh-xh\", \"徐汇区\"), new(\"sh-cn\", \"长宁区\"), new(\"sh-ja\", \"静安区\", disabled: true),\r\n            },\r\n            \"zj\" => new List<Data>()\r\n            {\r\n                new(\"zj-hz\", \"杭州\"), new(\"zj-nb\", \"宁波\"),\r\n            },\r\n            \"gd\" => new List<Data>()\r\n            {\r\n                new(\"gd-sz\", \"深圳\"), new(\"gd-gz\", \"广州\"),\r\n            },\r\n            \"zj-hz\" => new List<Data>()\r\n            {\r\n                new(\"zj-hz-sc\", \"上城区\"), new(\"zj-hz-xc\", \"下城区\"), new(\"zj-hz-qt\", \"钱塘区\"),\r\n            },\r\n            \"zj-nb\" => new List<Data>()\r\n            {\r\n                new(\"zj-nb-jb\", \"江北区\"), new(\"zj-nb-hs\", \"海曙区\"), new(\"zj-nb-bl\", \"北仑区\"),\r\n            },      \r\n            \"gd-sz\" => new List<Data>()\r\n            {\r\n                new(\"gd-sz-ns\", \"南山区\"), new(\"gd-sz-lh\", \"罗湖区\"),\r\n            },            \r\n            \"gd-gz\" => new List<Data>()\r\n            {\r\n                new(\"gd-gz-by\", \"白云区\"), new(\"gd-gz-th\", \"天河区\"), new(\"gd-gz-hz\", \"海珠区\"),\r\n            },\r\n            _ => new List<Data>()\r\n        };\r\n    }\r\n\r\n    class Data\r\n    {\r\n        public string Name { get; set; }\r\n        public string Code { get; set; }\r\n        public List<Data> Children { get; set; }\r\n        public bool Disabled { get; set; }\r\n\r\n        public Data(string code, string name, List<Data> children = null, bool disabled = false)\r\n        {\r\n            Code = code;\r\n            Name = name;\r\n            Children = children;\r\n            Disabled = disabled;\r\n        }\r\n    }\r\n\r\n    static readonly List<Data> Datas = new()\r\n    {\r\n        new Data(\"china\", \"中国\")\r\n    };\r\n\r\n}\r\n",
-        "Type": "Demos.Components.MobileCascader.events.LoadChildren",
-        "Style": "",
-        "Debug": false,
-        "Group": 1
-      },
-      {
-        "Order": 0,
-        "Name": "onSelect",
-        "Title": "选择事件",
-        "Description": "",
-        "Code": "<MRow Align=\"AlignTypes.Baseline\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <PMobileCascader TItem=\"Data\"\r\n                         TItemValue=\"string\"\r\n                         Title=\"省市区\"\r\n                         Items=\"@Datas\"\r\n                         ItemText=\"d => d.Name\"\r\n                         ItemValue=\"d => d.Code\"\r\n                         ItemChildren=\"d => d.Children\"\r\n                         ItemDisabled=\"d => d.Disabled\"\r\n                         OnSelect=\"HandleOnSelect\">\r\n            <ActivatorContent>\r\n                <MButton @attributes=\"@context.Attrs\">Select</MButton>\r\n            </ActivatorContent>\r\n        </PMobileCascader>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        Selected values: @string.Join(\"-\", selectedItems.Select(item => item.Name))\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    List<Data> selectedItems = new();\r\n\r\n    void HandleOnSelect(List<Data> selected)\r\n    {\r\n        selectedItems = selected;\r\n    }\r\n\r\n    record Data(string Code, string Name, List<Data> Children = null, bool Disabled = false);\r\n\r\n    static readonly List<Data> Datas = new List<Data>()\r\n    {\r\n        new Data(\"sh\", \"上海\", new List<Data>()\r\n        {\r\n            new Data(\"sh-hp\", \"黄浦区\"),\r\n            new Data(\"sh-xh\", \"徐汇区\"),\r\n            new Data(\"sh-cn\", \"长宁区\"),\r\n            new Data(\"sh-ja\", \"静安区\", Disabled: true),\r\n        }),\r\n        new Data(\"zj\", \"浙江\", new List<Data>()\r\n        {\r\n            new Data(\"zj-hz\", \"杭州\", new List<Data>()\r\n            {\r\n                new Data(\"zj-hz-sc\", \"上城区\"),\r\n                new Data(\"zj-hz-xc\", \"下城区\"),\r\n                new Data(\"zj-hz-qt\", \"钱塘区\"),\r\n            }),\r\n            new Data(\"zj-nb\", \"宁波\", new List<Data>()\r\n            {\r\n                new Data(\"zj-nb-jb\", \"江北区\"),\r\n                new Data(\"zj-nb-hs\", \"海曙区\"),\r\n                new Data(\"zj-nb-bl\", \"北仑区\"),\r\n            }),\r\n        }),\r\n        new Data(\"gd\", \"广东\", new List<Data>()\r\n        {\r\n            new Data(\"gd-sz\", \"深圳\", new List<Data>()\r\n            {\r\n                new Data(\"gd-sz-ns\", \"南山区\"),\r\n                new Data(\"gd-sz-lh\", \"罗湖区\"),\r\n            }),\r\n            new Data(\"gd-gz\", \"广州\", new List<Data>()\r\n            {\r\n                new Data(\"gd-gz-by\", \"白云区\"),\r\n                new Data(\"gd-gz-th\", \"天河区\"),\r\n                new Data(\"gd-gz-hz\", \"海珠区\"),\r\n            }),\r\n        }),\r\n    };\r\n\r\n}\r\n",
-        "Type": "Demos.Components.MobileCascader.events.OnSelect",
-        "Style": "",
-        "Debug": false,
-        "Group": 1
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cols": 1,
-    "Related": [
-      "/components/lists",
-      "/components/tabs",
-      "/components/buttons"
-    ],
-    "Subtitle": "移动端级联",
-    "Title": "Mobile cascader",
-    "Type": "移动端级联",
-    "Tag": "preset"
   },
   {
     "Desc": "<p>需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 <code>Modal</code> 在当前页面正中打开一个浮层，承载相应的操作。</p>\n",
@@ -7072,7 +7076,7 @@
     "Desc": "<p>专为移动设备设计的日期选择器。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:18:21.0461062+08:00",
+    "LastWriteTime": "2022-08-29T13:28:21.1553746+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7135,7 +7139,7 @@
     "Desc": "<p>专为移动设备设计的日期选择器。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:18:21.0481054+08:00",
+    "LastWriteTime": "2022-08-29T13:28:21.1583817+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7198,7 +7202,7 @@
     "Desc": "<p>专为移动设备设计的选择器。提供多个选项集合供用户选择，支持单列选择、多列选择和级联选择。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:18:21.0531071+08:00",
+    "LastWriteTime": "2022-08-29T13:28:21.1624636+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7252,7 +7256,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMobilePickerView\">MMobilePickerView</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-08-29T13:18:21.0511051+08:00",
+    "LastWriteTime": "2022-08-29T13:28:21.1603744+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7315,7 +7319,7 @@
     "Desc": "<p>专为移动设备设计的时间选择器。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:18:21.056114+08:00",
+    "LastWriteTime": "2022-08-29T13:28:21.1653898+08:00",
     "DemoList": [
       {
         "Order": 0,
