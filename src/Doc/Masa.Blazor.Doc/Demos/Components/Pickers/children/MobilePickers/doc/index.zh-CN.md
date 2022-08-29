@@ -4,6 +4,7 @@ subtitle: 移动端选择器
 type: 移动端选择器
 title: Mobile pickers
 cols: 1
+tag: preset
 related:
   - /components/mobile-picker-views
   - /components/mobile-date-time-views

@@ -72,29 +72,34 @@
 
             </MAppBar>
 
-            <MAppBar App Height="106" Elevation=0 Class="phone-bar" Color="white" ClippedLeft ClippedRight>
-                <div class="d-flex flex-column" style="width:100%;">
-                    <MRow Align="AlignTypes.Center" Justify="JustifyTypes.SpaceBetween" NoGutters>
-                        <MAppBarNavIcon Style="color:#000" @onclick="ShowDraw"></MAppBarNavIcon>
+            @if (MasaBlazor.Breakpoint.Mobile)
+            {
+                <MAppBar App Height="106" Elevation=0 Class="phone-bar" Color="white" ClippedLeft ClippedRight>
+                    <div class="d-flex flex-column" style="width:100%;">
+                        <MRow Align="AlignTypes.Center" Justify="JustifyTypes.SpaceBetween" NoGutters>
+                            <MAppBarNavIcon Style="color:#000" @onclick="ShowDraw"></MAppBarNavIcon>
 
-                        <div id="docsearch-mobile" />
+                            <div id="docsearch-mobile" />
 
-                        <MButton Icon OnClick="TurnLanguage">
-                            <img style="width:24px;height:24px;" src=@("https://cdn.masastack.com/stack/images/website/masa-blazor/" + CultureIcon) />
-                        </MButton>
-                    </MRow>
-                    <MRow NoGutters>
-                        <MTabs ShowArrows="true" Height="40" BackgroundColor="white" Class="mtab-font" Color="black" SliderColor="purple darken-2" Optional @bind-Value="SelectTab">
-                            <MTab Style="text-transform: none;" Href="https://www.masastack.com/blazor">@T("Home")</MTab>
-                            <MTab Style="text-transform: none;" Href="introduction/why">@T("Docs")</MTab>
-                            <MTab Style="text-transform: none;" Href="about/meet-the-team">@T("Team")</MTab>
-                            <MTab Style="text-transform: none;" Href="https://blogs.masastack.com/categories/Blazor/" Target="_blank">@T("Blog")</MTab>
-                            <MTab Style="text-transform: none;" Href="http://blazor-pro.masastack.com/" Target="_blank">Pro</MTab>
-                        </MTabs>
-                    </MRow>
-                </div>
-            </MAppBar>
+                            <MButton Icon OnClick="TurnLanguage">
+                                <img style="width:24px;height:24px;" src=@("https://cdn.masastack.com/stack/images/website/masa-blazor/" + CultureIcon) />
+                            </MButton>
+                        </MRow>
+                        <MRow NoGutters>
+                            <MTabs ShowArrows="true" Height="40" BackgroundColor="white" Class="mtab-font" Color="black" SliderColor="purple darken-2" Optional @bind-Value="SelectTab">
+                                <MTab Style="text-transform: none;" Href="https://www.masastack.com/blazor">@T("Home")</MTab>
+                                <MTab Style="text-transform: none;" Href="introduction/why">@T("Docs")</MTab>
+                                <MTab Style="text-transform: none;" Href="about/meet-the-team">@T("Team")</MTab>
+                                <MTab Style="text-transform: none;" Href="https://blogs.masastack.com/categories/Blazor/" Target="_blank">@T("Blog")</MTab>
+                                <MTab Style="text-transform: none;" Href="http://blazor-pro.masastack.com/" Target="_blank">Pro</MTab>
+                            </MTabs>
+                        </MRow>
+                    </div>
+                </MAppBar>
+            }
+
             @Body
+
             <MNavigationDrawer @bind-Value="ShowSetting" Fixed Right Temporary Width="300">
                 <PrependContent>
                     <MToolbar Flat Height="80">

@@ -337,7 +337,6 @@ namespace Masa.Blazor
                     attrs[nameof(Dense)] = Dense;
 
                     var css = Class;
-                    Console.WriteLine($"IsMobile:{IsMobile}");
                     if (IsMobile)
                     {
                         css += " m-data-table--mobile";

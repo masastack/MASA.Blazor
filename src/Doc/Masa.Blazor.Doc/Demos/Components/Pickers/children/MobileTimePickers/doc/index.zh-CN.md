@@ -4,6 +4,7 @@ subtitle: 移动端时间选择器
 type: 移动端时间选择器
 title: Mobile time pickers
 cols: 1
+tag: preset
 related:
   - /components/mobile-pickers
   - /components/mobile-date-time-pickers
