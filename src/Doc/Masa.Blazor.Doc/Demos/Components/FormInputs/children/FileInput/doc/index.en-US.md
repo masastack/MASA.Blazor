@@ -3,7 +3,6 @@ category: Components
 type: FileInput
 title: File inputs
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/FileInput.svg
 related:
   - /components/text-fields
   - /components/forms

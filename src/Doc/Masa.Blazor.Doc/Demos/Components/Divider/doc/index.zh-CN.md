@@ -4,7 +4,6 @@ subtitle: 分隔线
 type: 分隔线
 title: Dividers
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Dividers.svg
 related:
   - /components/lists
   - /components/navigation-drawers

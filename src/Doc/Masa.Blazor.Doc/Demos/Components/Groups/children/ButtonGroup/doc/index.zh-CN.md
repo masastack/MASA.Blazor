@@ -4,7 +4,6 @@ subtitle: 按钮组
 type: 按钮组
 title: Button groups
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ButtonGroup.svg
 related:
   - /components/buttons
   - /components/icons

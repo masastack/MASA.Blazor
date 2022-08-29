@@ -3,7 +3,6 @@ category: Components
 type: Grid
 title: Grid system
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg
 related:
   - /stylesandanimations/flex                      
   - /features/breakpoints

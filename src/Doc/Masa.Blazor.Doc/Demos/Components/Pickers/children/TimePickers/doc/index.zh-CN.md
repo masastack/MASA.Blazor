@@ -4,7 +4,6 @@ subtitle: 时间选择器
 type: 时间选择器
 title: Time pickers
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TimePickers.svg
 related:
   - /components/buttons
   - /components/date-pickers

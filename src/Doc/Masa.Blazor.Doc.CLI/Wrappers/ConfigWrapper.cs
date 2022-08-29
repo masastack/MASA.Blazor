@@ -6,11 +6,11 @@ using System.Reflection;
 
 namespace Masa.Blazor.Doc.CLI.Wrappers
 {
-    public class ConfigWrapper
+    public static class ConfigWrapper
     {
-        public static ConfigModel Config { get; private set; }
+        public static ConfigModel Config { get; }
 
-        public static Dictionary<string, int> DocsNavOrder { get; private set; } = null;
+        public static Dictionary<string, int> DocsNavOrder { get; }
 
         static ConfigWrapper()
         {

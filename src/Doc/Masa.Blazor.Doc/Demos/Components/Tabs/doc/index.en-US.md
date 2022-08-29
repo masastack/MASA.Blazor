@@ -3,7 +3,6 @@ category: Components
 type: Tabs
 title: Tabs
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tabs.svg
 related:
   - /components/icons
   - /components/toolbars

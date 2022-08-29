@@ -160,8 +160,7 @@
       "/components/dialogs"
     ],
     "Title": "Alerts",
-    "Type": "Alerts",
-    "FullTitle": "Alerts"
+    "Type": "Alerts"
   },
   {
     "Desc": "<p>In MASA Blazor, the MApp component and the app prop on components like <code>MNavigationDrawer</code>, <code>MAppBar</code>, <code>MFooter</code> and more, \nhelp bootstrap your application with the proper sizing around <MMain> component. This allows you to create truly unique \ninterfaces without the hassle of managing your layout sizing. The <code>MApp</code> component is REQUIRED for all applications. \nThis is the mount point for many of MASA Blazor's components and functionality and ensures that it propagates the default \napplication variant (dark/light) to children components and also ensures proper cross-browser support for certain click \nevents in browsers like Safari. <code>MApp</code> should only be rendered within your application ONCE.</p>\n",
@@ -178,8 +177,7 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Application",
-    "Type": "Application",
-    "FullTitle": "Application"
+    "Type": "Application"
   },
   {
     "Desc": "<p>The <code>MResponsive</code> component can be used to fix any section to a specific aspect ratio</p>\n",
@@ -210,8 +208,7 @@
       "/components/images"
     ],
     "Title": "Aspect ratios",
-    "Type": "AspectRatios",
-    "FullTitle": "Aspect ratios"
+    "Type": "AspectRatios"
   },
   {
     "Desc": "<p>The MAvatar component is usually used to display user profile pictures. This component allows you to dynamically add and set the border radius of response images, icons and text. ** The tile ** variable can be used to display an avatar with no border radius.</p>\n",
@@ -301,7 +298,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Avatars.svg",
     "Cols": 1,
     "Related": [
       "/components/badges",
@@ -309,8 +305,7 @@
       "/components/lists"
     ],
     "Title": "Avatars",
-    "Type": "Avatars",
-    "FullTitle": "Avatars"
+    "Type": "Avatars"
   },
   {
     "Desc": "<p>The MBadge component overwrites or subscribes to an icon like an avatar or text on the content to highlight the user's information or just draw attention to a specific element. The content in the badge usually contains numbers or icons.</p>\n",
@@ -385,8 +380,7 @@
       "/components/toolbars"
     ],
     "Title": "Badges",
-    "Type": "Badges",
-    "FullTitle": "Badges"
+    "Type": "Badges"
   },
   {
     "Desc": "<p>The component is used to send intermittent messages of 1-2 actions to the user. It has two variables, single-line and multi-line (implied). These icons can be used with your messages and actions.</p>\n",
@@ -472,8 +466,7 @@
       "/components/snackbars"
     ],
     "Title": "Banners",
-    "Type": "Banners",
-    "FullTitle": "Banners"
+    "Type": "Banners"
   },
   {
     "Desc": "<p>appbar component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.</p>\n",
@@ -627,8 +620,7 @@
       "/components/toolbars"
     ],
     "Title": "App bars",
-    "Type": "AppBars",
-    "FullTitle": "App bars"
+    "Type": "AppBars"
   },
   {
     "Desc": "<p>The MSystemBar component can be used to display status to the user. It looks like an Android system bar and can contain icons, spaces, and some text.</p>\n",
@@ -703,8 +695,7 @@
       "/components/tabs"
     ],
     "Title": "System bars",
-    "Type": "SystemBars",
-    "FullTitle": "System bars"
+    "Type": "SystemBars"
   },
   {
     "Desc": "<p>The <code>MToolbar</code> component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site\nnavigation. The toolbar component works great in conjunction with <a href=\"/components/navigation-drawers\"><strong>MNavigationDrawer</strong></a> and <a href=\"/components/cards\"><strong>MCard</strong></a>.</p>\n",
@@ -857,8 +848,59 @@
       "/components/tabs"
     ],
     "Title": "Toolbars",
-    "Type": "Toolbars",
-    "FullTitle": "Toolbars"
+    "Type": "Toolbars"
+  },
+  {
+    "Desc": "<p>Display two data of the same type side by side.</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-29T11:38:52.1278702+08:00",
+    "DemoList": [
+      {
+        "Order": 1,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "",
+        "Code": "<PBlockText Primary=\"@DateOnly.FromDateTime(DateTime.Now).ToString()\"\r\n            Secondary=\"@TimeOnly.FromDateTime(DateTime.Now).ToString()\">\r\n</PBlockText>",
+        "Type": "Demos.Components.BlockText.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "tags",
+        "Title": "Tags",
+        "Description": "",
+        "Code": "<PBlockText Primary=\"MASA Blazor\"\r\n            Secondary=\"A UI component library\"\r\n            Tags=\"@tags\">\r\n</PBlockText>\r\n\r\n@code {\r\n\r\n    static IEnumerable<BlockTextTag> tags = new List<BlockTextTag>()\r\n    {\r\n        new(\"Blazor\", \"green\", \"white\"),\r\n        new(\"Material Design\", \"purple\", true)\r\n    };\r\n\r\n}",
+        "Type": "Demos.Components.BlockText.props.Tags",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "contents",
+        "Title": "Custom content",
+        "Description": "",
+        "Code": "<PBlockText>\r\n    <PrimaryContent>\r\n        <PCopyableText>MASA.Blazor</PCopyableText>\r\n    </PrimaryContent>\r\n    <SecondaryContent>\r\n        <PCopyableText>A UI component library</PCopyableText>\r\n    </SecondaryContent>\r\n</PBlockText>",
+        "Type": "Demos.Components.BlockText.contents.Contents",
+        "Style": "",
+        "Debug": false,
+        "Group": 2
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/chips",
+      "/components/copyable-text",
+      "/components/ellipsis-text"
+    ],
+    "Title": "Block text",
+    "Type": "BlockText",
+    "Tag": "preset"
   },
   {
     "Desc": "<p>The Border component can add an extra border to anything.</p>\n",
@@ -900,8 +942,7 @@
       "/components/radio"
     ],
     "Title": "Borders",
-    "Type": "Border",
-    "FullTitle": "Borders"
+    "Type": "Border"
   },
   {
     "Desc": "<p>The <code>MBottomNavigation</code> component is an alternative to the sidebar. It is primarily used for mobile applications and comes in three variants, <strong>icons</strong> and <strong>text</strong>, and <strong>shift</strong>.</p>\n",
@@ -1009,8 +1050,7 @@
       "/components/tabs"
     ],
     "Title": "Bottom navigation",
-    "Type": "BottomNavigation",
-    "FullTitle": "Bottom navigation"
+    "Type": "BottomNavigation"
   },
   {
     "Desc": "<p>The bottom sheet is a modified <code>MDialog</code> that slides from the bottom of the screen, similar to a <code>MBottomNavigation</code>. Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet can contain anything.</p>\n",
@@ -1096,8 +1136,7 @@
       "/components/menus"
     ],
     "Title": "Bottom sheets",
-    "Type": "BottomSheets",
-    "FullTitle": "Bottom sheets"
+    "Type": "BottomSheets"
   },
   {
     "Desc": "<p>Breadcrumbs component is suitable for page-level navigation.</p>\n",
@@ -1177,7 +1216,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Cols": 1,
     "Related": [
       "/components/buttons",
@@ -1185,8 +1223,7 @@
       "/components/icons"
     ],
     "Title": "Breadcrumbs",
-    "Type": "Breadcrumbs",
-    "FullTitle": "Breadcrumbs"
+    "Type": "Breadcrumbs"
   },
   {
     "Desc": "<p>The <code>MButton</code> component replaces the standard html button with a material design theme and a multitude of options. Any color\nhelper class can be used to alter the background or text color.</p>\n",
@@ -1343,7 +1380,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Buttons.svg",
     "Cols": 1,
     "Related": [
       "/components/button-groups",
@@ -1351,8 +1387,7 @@
       "/components/floating-action-buttons"
     ],
     "Title": "Buttons",
-    "Type": "Buttons",
-    "FullTitle": "Buttons"
+    "Type": "Buttons"
   },
   {
     "Desc": "<p>The MCard component is a versatile component that can be used for anything from a panel to a static image. The card component has numerous helper components to make markup as easy as possible. Components that have no listed options use MASA Blazor functional component option for faster rendering and serve as markup sugar to make building easier.</p>\n",
@@ -1498,7 +1533,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Cards.svg",
     "Cols": 1,
     "Related": [
       "/components/buttons",
@@ -1506,8 +1540,7 @@
       "/stylesandanimations/text-and-typography"
     ],
     "Title": "Cards",
-    "Type": "Cards",
-    "FullTitle": "Cards"
+    "Type": "Cards"
   },
   {
     "Desc": "<p>The <code>MCarousel</code> component is used to display large numbers of visual content on a rotating timer.</p>\n",
@@ -1615,8 +1648,7 @@
       "/components/windows"
     ],
     "Title": "Carousels",
-    "Type": "Carousels",
-    "FullTitle": "Carousels"
+    "Type": "Carousels"
   },
   {
     "Desc": "<p>The <code>MChip</code> component is used to convey small pieces of information. Using the close property, the chip becomes\ninteractive, allowing user interaction. This component is used by the <a href=\"/components/chip-groups\">MChipGroup</a> for advanced selection options.</p>\n",
@@ -1794,7 +1826,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chips.svg",
     "Cols": 1,
     "Related": [
       "/components/avatars",
@@ -1802,8 +1833,110 @@
       "/components/selects"
     ],
     "Title": "Chips",
-    "Type": "Chips",
-    "FullTitle": "Chips"
+    "Type": "Chips"
+  },
+  {
+    "Desc": "<p>Append a button that provides copy feature to the content.</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-29T11:38:52.1348817+08:00",
+    "DemoList": [
+      {
+        "Order": 1,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "",
+        "Code": "<PCopyableText>\r\n    There is a text that can be copied.\r\n</PCopyableText>",
+        "Type": "Demos.Components.CopyableText.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "icon",
+        "Title": "Icon",
+        "Description": "",
+        "Code": "<PCopyableText CopyIcon=\"mdi-clipboard-text\"\r\n               CopyIconColor=\"orange\"\r\n               CopiedIcon=\"mdi-check-circle\">\r\n    Custom icons.\r\n</PCopyableText>",
+        "Type": "Demos.Components.CopyableText.props.Icon",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "text",
+        "Title": "Text",
+        "Description": "",
+        "Code": "<PCopyableText Text=\"Text that you specific\">\r\n    Copy the text that you specific by parameter Text.\r\n</PCopyableText>",
+        "Type": "Demos.Components.CopyableText.props.Text",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "textTruncate",
+        "Title": "Text truncate",
+        "Description": "",
+        "Code": "<div style=\"width: 150px;\">\r\n    <PCopyableText ContentClass=\"text-truncate\"\r\n                   ContentStyle=\"display:inline-block;vertical-align:top;width:100%;\">\r\n        There is a text that can be copied.\r\n    </PCopyableText>\r\n</div>",
+        "Type": "Demos.Components.CopyableText.props.TextTruncate",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "tooltip",
+        "Title": "Tooltip",
+        "Description": "",
+        "Code": "<PCopyableText Tooltip=\"Do you wanna copy?\"\r\n               TooltipClass=\"orange\">\r\n    Custom tooltip.\r\n</PCopyableText>",
+        "Type": "Demos.Components.CopyableText.props.Tooltip",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/icons",
+      "/components/tooltips",
+      "/components/block-text"
+    ],
+    "Title": "Copyable text",
+    "Type": "CopyableText",
+    "Tag": "preset"
+  },
+  {
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-29T11:38:52.1358699+08:00",
+    "DemoList": [
+      {
+        "Order": 1,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "",
+        "Code": "@using System.Text\r\n@using BlazorComponent.I18n\r\n\r\n<PCron Value=\"@_cronValue\" ValueChanged=\"OnCronValueChanged\">\r\n</PCron>\r\n\r\n<div>\r\n    <MTextField Value=\"_cronValue\" TValue=\"string\" ValueChanged=\"OnCronValueChanged\" Label=\"@i18n.T(\"$masaBlazor.cron.demo.cronExpressionLabel\")\" Outlined Dense></MTextField>\r\n    <MTextarea @bind-Value=\"_nextTenRunTime\" Readonly Outlined Rows=\"11\" Label=\"@i18n.T(\"$masaBlazor.cron.demo.nextTenRunTime\")\">\r\n    </MTextarea>\r\n</div>\r\n\r\n@code {\r\n    [Inject]\r\n    I18n i18n { get; set; }\r\n\r\n    string _cronValue = string.Empty;\r\n    string _nextTenRunTime = string.Empty;\r\n    StringBuilder sb = new ();\r\n\r\n    private Task OnCronValueChanged(string cronValue)\r\n    {\r\n        if(_cronValue != cronValue)\r\n        {\r\n            _cronValue = cronValue;\r\n\r\n            GetNextTenRunTime();\r\n        }\r\n        return Task.CompletedTask;\r\n    }\r\n\r\n    private void GetNextTenRunTime()\r\n    {\r\n        sb.Clear();\r\n        _nextTenRunTime = string.Empty;\r\n\r\n        var startTime = DateTimeOffset.Now;\r\n\r\n        var cronExpression = new CronExpression(_cronValue);\r\n\r\n        for (int i = 0; i < 10; i++)\r\n        {\r\n            var nextExcuteTime = cronExpression.GetNextValidTimeAfter(startTime);\r\n\r\n            if (nextExcuteTime.HasValue)\r\n            {\r\n                startTime = nextExcuteTime.Value;\r\n                sb.AppendLine(startTime.ToLocalTime().ToString(\"yyyy-MM-dd HH:mm:ss\"));\r\n            }\r\n        }\r\n\r\n        if(sb.Length == 0)\r\n        {\r\n            _nextTenRunTime = \"No more next run time\";\r\n        }\r\n        else\r\n        {\r\n            _nextTenRunTime = sb.ToString();\r\n        }\r\n    }\r\n}",
+        "Type": "Demos.Components.Cron.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/text-fields",
+      "/components/select",
+      "/components/radio-button"
+    ],
+    "Title": "Cron Expression Generator",
+    "Type": "CronExpressionGenerator",
+    "Tag": "preset"
   },
   {
     "Desc": "<p>The <code>Dialog</code> component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.</p>\n",
@@ -1933,8 +2066,7 @@
       "/components/menus"
     ],
     "Title": "Dialogs",
-    "Type": "Dialogs",
-    "FullTitle": "Dialogs"
+    "Type": "Dialogs"
   },
   {
     "Desc": "<p>The MDivider component is used to separate sections of lists or layouts.</p>\n",
@@ -2013,7 +2145,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Dividers.svg",
     "Cols": 1,
     "Related": [
       "/components/lists",
@@ -2021,8 +2152,7 @@
       "/components/toolbars"
     ],
     "Title": "Dividers",
-    "Type": "Dividers",
-    "FullTitle": "Dividers"
+    "Type": "Dividers"
   },
   {
     "Desc": "<p>The <code>MDragZone</code> component is based on <a href=\"https://github.com/SortableJS/Sortable\">Sorttable.js</a> to implement drag and drop functionality</p>\n",
@@ -2136,8 +2266,113 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "DragZone",
-    "Type": "DragZone",
-    "FullTitle": "DragZone"
+    "Type": "DragZone"
+  },
+  {
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-29T11:38:52.1408699+08:00",
+    "DemoList": [
+      {
+        "Order": 1,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "",
+        "Code": "<PDrawer Title=\"Title\" Width=\"500\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PDrawer>",
+        "Type": "Demos.Components.Drawer.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "actionProps",
+        "Title": "Action Props",
+        "Description": "",
+        "Code": "<PDrawer @bind-Value=\"value\"\r\n         Persistent\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         SaveProps=\"props => props.Outlined = true\"\r\n         CancelProps=\"@(props => props.Color = \"orange\")\"\r\n         DeleteProps=\"@(props => props.Style = \"font-weight:bold;\")\"\r\n         OnSave=\"OnSave\"\r\n         OnCancel=\"OnCancel\"\r\n         OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        await Task.Delay(1000);\r\n\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Drawer.props.ActionProps",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "actions",
+        "Title": "Actions",
+        "Description": "",
+        "Code": "<MSwitch @bind-Value=\"hideCancelAction\" Label=\"HideCancelAction\"></MSwitch>\r\n\r\n<PDrawer @bind-Value=\"value\"\r\n         HideCancelAction=\"hideCancelAction\"\r\n         Persistent\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         OnSave=\"OnSave\"\r\n         OnCancel=\"OnCancel\"\r\n         OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n    private bool hideCancelAction;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        await Task.Delay(1000);\r\n\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Drawer.props.Actions",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "formModel",
+        "Title": "FormModel",
+        "Description": "",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MSwitch @bind-Value=\"throwException\" Label=\"throw exception when calling OnSave\"></MSwitch>\r\n\r\n<MButton OnClick=\"ShowModal\">Show Modal</MButton>\r\n@if (user != null)\r\n{\r\n    <div>\r\n        @System.Text.Json.JsonSerializer.Serialize(user)\r\n        <MButton Color=\"primary\" Text OnClick=\"EditModal\">edit</MButton>\r\n    </div>\r\n}\r\n\r\n<PDrawer @bind-Value=\"value\"\r\n         FormModel=\"userModel\"\r\n         Persistent\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         OnSave=\"HandleOnSave\"\r\n         OnCancel=\"HandleOnCancel\">\r\n    <MRow>\r\n        <MCol Cols=\"12\">\r\n            <MTextField @bind-Value=\"userModel.UserName\"\r\n                        Label=\"UserName\"\r\n                        Dense\r\n                        Outlined\r\n                        HideDetails=\"@(\"auto\")\" />\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MTextField @bind-Value=\"userModel.City\"\r\n                        Label=\"City\"\r\n                        Dense\r\n                        Outlined\r\n                        HideDetails=\"@(\"auto\")\" />\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MRadioGroup @bind-Value=\"userModel.Gender\"\r\n                         Label=\"Gender:\"\r\n                         Row\r\n                         Dense\r\n                         Style=\"margin-top: 0\"\r\n                         HideDetails=\"@(\"auto\")\">\r\n                <MRadio Label=\"Male\" Value=\"0\"></MRadio>\r\n                <MRadio Label=\"Female\" Value=\"1\"></MRadio>\r\n            </MRadioGroup>\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MAutocomplete @bind-Value=\"userModel.Favorites\"\r\n                           Items=\"favorites\"\r\n                           Label=\"Favorites\"\r\n                           Multiple\r\n                           ItemValue=\"r => r\"\r\n                           ItemText=\"r => r\"\r\n                           Dense\r\n                           Outlined\r\n                           HideDetails=\"@(\"auto\")\">\r\n            </MAutocomplete>\r\n        </MCol>\r\n        @if (exception != null)\r\n        {\r\n            <MCol Cols=\"12\">\r\n                @exception.Message\r\n            </MCol>\r\n        }\r\n    </MRow>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    readonly List<string> favorites = new() { \"Basketball\", \"Football\", \"Ping-pong\", \"Badminton\" };\r\n\r\n    User user;\r\n    User userModel;\r\n\r\n    private bool value;\r\n    private bool throwException;\r\n    private Exception exception;\r\n\r\n    private void ShowModal()\r\n    {\r\n        userModel = new User();\r\n        value = true;\r\n    }\r\n\r\n    private void EditModal()\r\n    {\r\n        userModel = user.ShallowCopy();\r\n        value = true;\r\n    }\r\n\r\n    private async Task HandleOnSave(ModalActionEventArgs args)\r\n    {\r\n        try\r\n        {\r\n            // logic in real world here\r\n            await Task.Delay(1000);\r\n\r\n            if (throwException)\r\n            {\r\n                throw new Exception(\"Something wrong here!\");\r\n            }\r\n\r\n            user = userModel.ShallowCopy();\r\n\r\n            value = false;\r\n        }\r\n        catch (Exception e)\r\n        {\r\n            args.Cancel();\r\n            exception = e;\r\n        }\r\n    }\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        value = false;\r\n        exception = null;\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        [Required]\r\n        public string UserName { get; set; }\r\n\r\n        [Range(0, 1)]\r\n        public int Gender { get; set; }\r\n\r\n        [Required]\r\n        public string City { get; set; }\r\n\r\n        [Required]\r\n        public List<string> Favorites { get; set; }\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public interface IShallowCopy<T> where T : new() \r\n    {\r\n        T ShallowCopy();\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Drawer.props.FormModel",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "left",
+        "Title": "Drawer",
+        "Description": "",
+        "Code": "<MSwitch @bind-Value=\"left\" Label=\"Left\"></MSwitch>\r\n\r\n<PDrawer Left=\"left\"\r\n         Title=\"Drawer here!\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        <MSimpleTable Dense>\r\n            <thead>\r\n            <tr>\r\n                <th class=\"text-left\">\r\n                    Name\r\n                </th>\r\n                <th class=\"text-left\">\r\n                    Calories\r\n                </th>\r\n            </tr>\r\n            </thead>\r\n            <tbody>\r\n            @foreach (var item in _desserts)\r\n            {\r\n                <tr @key=\"item\">\r\n                    <td>@item.name</td>\r\n                    <td>@item.calories</td>\r\n                </tr>\r\n            }\r\n            </tbody>\r\n        </MSimpleTable>\r\n    </ChildContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    bool left;\r\n\r\n    private List<(string name, int calories)> _desserts = new()\r\n    {\r\n        (\"Frozen Yogurt\", 159),\r\n        (\"Ice cream sandwich\", 237),\r\n        (\"Eclair\", 262),\r\n        (\"Cupcake\", 305),\r\n        (\"Gingerbread\", 356),\r\n        (\"Jelly bean\", 375),\r\n        (\"Lollipop\", 392),\r\n        (\"Honeycomb\", 408),\r\n        (\"Donut\", 452),\r\n        (\"KitKat\", 518),\r\n    };\r\n\r\n}",
+        "Type": "Demos.Components.Drawer.props.Left",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "scrollToTopOnHide",
+        "Title": "AutoScrollToTop",
+        "Description": "",
+        "Code": "<MSwitch @bind-Value=\"autoScrollToTop\" Label=\"AutoScrollToTop\"></MSwitch>\r\n\r\n<PDrawer @bind-Value=\"value\"\r\n         AutoScrollToTop=\"autoScrollToTop\"\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         BodyStyle=\"height: 250px\"\r\n         OnCancel=\"() => value = false\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n    </ChildContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n    private bool autoScrollToTop;\r\n\r\n}",
+        "Type": "Demos.Components.Drawer.props.ScrollToTopOnHide",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "withoutActivator",
+        "Title": "Without activator",
+        "Description": "",
+        "Code": "<MButton OnClick=\"() => value = true\">Show Modal</MButton>\r\n\r\n<PDrawer @bind-Value=\"value\"\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         OnCancel=\"() => value = false\">\r\n    Content\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n}",
+        "Type": "Demos.Components.Drawer.props.WithoutActivator",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "customActions",
+        "Title": "Custom actions",
+        "Description": "",
+        "Code": "<PDrawer @bind-Value=\"value\"\r\n         Persistent\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         OnSave=\"OnSave\"\r\n         OnCancel=\"OnCancel\"\r\n         OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n    <DeleteContent Context=\"delete\">\r\n        <MButton Icon Color=\"error\" OnClick=\"delete.Click\" Disabled=\"delete.Loading\">\r\n            <MIcon>mdi-delete</MIcon>\r\n        </MButton>\r\n    </DeleteContent>\r\n    <CancelContent Context=\"cancel\">\r\n        <MButton Icon OnClick=\"cancel.Click\" Disabled=\"cancel.Loading\">\r\n            <MIcon>mdi-cancel</MIcon>\r\n        </MButton>\r\n    </CancelContent>\r\n    <SaveContent Context=\"save\">\r\n        <MButton Icon Color=\"primary\" OnClick=\"save.Click\" Disabled=\"save.Loading\" Loading=\"save.Loading\">\r\n            <MIcon>mdi-check</MIcon>\r\n        </MButton>\r\n    </SaveContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        await Task.Delay(1000);\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Drawer.contents.CustomActions",
+        "Style": "",
+        "Debug": false,
+        "Group": 2
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/dialogs",
+      "/components/buttons",
+      "/components/icons"
+    ],
+    "Title": "Drawers",
+    "Type": "Drawers",
+    "Tag": "preset"
   },
   {
     "Desc": "<p><a href=\"https://echarts.apache.org/examples/en/index.html\">ECharts</a></p>\n",
@@ -2205,11 +2440,9 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ECharts.svg",
     "Cols": 1,
     "Title": "ECharts",
-    "Type": "ECharts",
-    "FullTitle": "ECharts"
+    "Type": "ECharts"
   },
   {
     "Desc": "<p>Rich text editor based on <a href=\"https://quilljs.com/\">Quill</a> encapsulation</p>\n",
@@ -2336,8 +2569,7 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Editor",
-    "Type": "Editor",
-    "FullTitle": "Editor"
+    "Type": "Editor"
   },
   {
     "Desc": "<p>The <code>MErrorHandler</code> component is used to handle exception information when the <code>blazor</code> component data is loaded and rendered.</p>\n",
@@ -2396,8 +2628,7 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Error handler",
-    "Type": "ErrorHandler",
-    "FullTitle": "Error handler"
+    "Type": "ErrorHandler"
   },
   {
     "Desc": "<p>The <code>MExpansionPanel</code> component is useful for reducing vertical space with large amounts of information. The default\nfunctionality of the component is to only display one expansion-panel body at a time; however, with the <strong>Multiple</strong>\nproperty, the expansion-panel can remain open until explicitly closed.</p>\n",
@@ -2520,7 +2751,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Cols": 1,
     "Related": [
       "/components/cards",
@@ -2528,8 +2758,7 @@
       "/components/lists"
     ],
     "Title": "Expansion panels",
-    "Type": "ExpansionPanels",
-    "FullTitle": "Expansion panels"
+    "Type": "ExpansionPanels"
   },
   {
     "Desc": "<p>The <code>MButton</code> component can be used as a floating action button. This provides an application with a main point of action. Combined with the <code>MSpeedDial</code> component, you can create a diverse set of functions available for your users.</p>\n",
@@ -2604,8 +2833,7 @@
       "/stylesandanimations/transitions"
     ],
     "Title": "Floating Action Buttons",
-    "Type": "Floating Action Buttons",
-    "FullTitle": "Floating Action Buttons"
+    "Type": "Floating Action Buttons"
   },
   {
     "Desc": "<p>The MFooter component is used to display public information that users may want to access from any page in the website.</p>\n",
@@ -2680,8 +2908,7 @@
       "/components/toolbars"
     ],
     "Title": "Footers",
-    "Type": "Footers",
-    "FullTitle": "Footers"
+    "Type": "Footers"
   },
   {
     "Desc": "<p>The MAutocomplete component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.</p>\n",
@@ -2783,7 +3010,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Autocomplete.svg",
     "Cols": 1,
     "Related": [
       "/components/combobox",
@@ -2791,8 +3017,7 @@
       "/components/selects"
     ],
     "Title": "Autocompletes",
-    "Type": "Autocompletes",
-    "FullTitle": "Autocompletes"
+    "Type": "Autocompletes"
   },
   {
     "Desc": "<p>The <code>MCascader</code> component is used for multiple select link.</p>\n",
@@ -2867,8 +3092,7 @@
       "/components/selects"
     ],
     "Title": "Cascaders",
-    "Type": "Cascaders",
-    "FullTitle": "Cascaders"
+    "Type": "Cascaders"
   },
   {
     "Desc": "<p>The <code>MCheckbox</code> component provides users the ability to choose between two distinct values. These are very similar to a switch and can be used in complex forms and checklists.</p>\n",
@@ -2954,8 +3178,7 @@
       "/components/text-fields"
     ],
     "Title": "Checkboxes",
-    "Type": "Checkboxes",
-    "FullTitle": "Checkboxes"
+    "Type": "Checkboxes"
   },
   {
     "Desc": "<p>The <code>MFileInput</code>  component is a specialized input that provides a clean interface for selecting files, \nshowing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.</p>\n",
@@ -3089,7 +3312,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/FileInput.svg",
     "Cols": 1,
     "Related": [
       "/components/text-fields",
@@ -3097,8 +3319,7 @@
       "/components/icons"
     ],
     "Title": "File inputs",
-    "Type": "FileInput",
-    "FullTitle": "File inputs"
+    "Type": "FileInput"
   },
   {
     "Desc": "<p>When it comes to form validation, MASA Blazor has a multitude of integrations and baked in functionality.</p>\n",
@@ -3188,7 +3409,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/From.svg",
     "Cols": 1,
     "Related": [
       "/components/selects",
@@ -3196,8 +3416,7 @@
       "/components/text-fields"
     ],
     "Title": "Forms",
-    "Type": "Form",
-    "FullTitle": "Forms"
+    "Type": "Form"
   },
   {
     "Desc": "<p>The OTP input is used for MFA procedure of authenticating users by a one-time password.</p>\n",
@@ -3261,8 +3480,7 @@
       "/components/forms"
     ],
     "Title": "OTP Input",
-    "Type": "OTPInput",
-    "FullTitle": "OTP Input"
+    "Type": "OTPInput"
   },
   {
     "Desc": "<p>The <code>MRadio</code> component is a simple radio button. When combined with the <code>MRadioGroup</code> component you can provide\ngroupable functionality to allow users to select from a predefined set of options.</p>\n",
@@ -3330,7 +3548,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg",
     "Cols": 1,
     "Related": [
       "/components/button-groups",
@@ -3338,8 +3555,7 @@
       "/components/checkboxes"
     ],
     "Title": "Radio",
-    "Type": "Radio",
-    "FullTitle": "Radio"
+    "Type": "Radio"
   },
   {
     "Desc": "<p>The MSlider component is a better visualization of the number input. It is used for gathering numerical user data.</p>\n",
@@ -3418,7 +3634,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/RangeSliders.svg",
     "Cols": 1,
     "Related": [
       "/components/forms",
@@ -3426,8 +3641,7 @@
       "/components/sliders"
     ],
     "Title": "Range sliders",
-    "Type": "RangeSliders",
-    "FullTitle": "Range sliders"
+    "Type": "RangeSliders"
   },
   {
     "Desc": "<p>The <code>Select</code> component is used for collecting user provided information from a list of options.</p>\n",
@@ -3569,8 +3783,7 @@
       "/components/forms"
     ],
     "Title": "Selects",
-    "Type": "Select",
-    "FullTitle": "Selects"
+    "Type": "Select"
   },
   {
     "Desc": "<p>The MSlider component is a better visualization of the number input. It is used for gathering numerical user data.</p>\n",
@@ -3748,7 +3961,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sliders.svg",
     "Cols": 1,
     "Related": [
       "/components/forms",
@@ -3756,8 +3968,7 @@
       "/components/range-sliders"
     ],
     "Title": "Sliders",
-    "Type": "Sliders",
-    "FullTitle": "Sliders"
+    "Type": "Sliders"
   },
   {
     "Desc": "<p>The <code>MSwitch</code> component provides users the ability to choose between two distinct values. These are very similar to a\ntoggle, or on/off switch, though aesthetically different than a checkbox.</p>\n",
@@ -3847,7 +4058,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Switch.svg",
     "Cols": 1,
     "Related": [
       "/components/checkboxes",
@@ -3855,8 +4065,7 @@
       "/components/radio"
     ],
     "Title": "Switches",
-    "Type": "Switch",
-    "FullTitle": "Switches"
+    "Type": "Switch"
   },
   {
     "Desc": "<p>Textarea components are used for collecting large amounts of textual data.</p>\n",
@@ -3979,7 +4188,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Textareas.svg",
     "Cols": 1,
     "Related": [
       "/components/forms",
@@ -3987,8 +4195,7 @@
       "/components/text-fields"
     ],
     "Title": "Textareas",
-    "Type": "Textareas",
-    "FullTitle": "Textareas"
+    "Type": "Textareas"
   },
   {
     "Desc": "<p>Text fields components are used for collecting user provided information.</p>\n",
@@ -4265,7 +4472,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TextField.svg",
     "Cols": 1,
     "Related": [
       "/components/forms",
@@ -4273,8 +4479,7 @@
       "/components/textareas"
     ],
     "Title": "Text fields",
-    "Type": "TextField",
-    "FullTitle": "Text fields"
+    "Type": "TextField"
   },
   {
     "Desc": "<p>Masa.Blazor comes with a 12 point grid system built using flexbox. The grid is used to create specific layouts within an application’s content. It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations, xs, sm, md, lg and xl. \nThese resolutions are defined below in the Viewport Breakpoints table and can be modified by customizing the <a href=\"features/breakpoints\">Breakpoint service</a></p>\n<div\n  class=\"overflow-hidden mb-12 overflow-hidden m-sheet m-sheet--outlined theme--light rounded\"\n>\n  <div class=\"m-data-table theme--light\">\n    <div class=\"m-data-table__wrapper\">\n      <table>\n        <caption class=\"pa-4\">\n          Material Design Breakpoints\n        </caption>\n        <thead>\n          <tr class=\"text-left\">\n            <th>Device</th>\n            <th>Code</th>\n            <th>Type</th>\n            <th>Range</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z\"\n                  ></path></svg></span\n              ><span>Extra small</span>\n            </td>\n            <td><strong>xs</strong></td>\n            <td>Small to large phone</td>\n            <td>&lt; 600px</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M19,18H5V6H19M21,4H3C1.89,4 1,4.89 1,6V18A2,2 0 0,0 3,20H21A2,2 0 0,0 23,18V6C23,4.89 22.1,4 21,4Z\"\n                  ></path></svg></span\n              ><span>Small</span>\n            </td>\n            <td><strong>sm</strong></td>\n            <td>Small to medium tablet</td>\n            <td>600px &gt; &lt; 960px</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z\"\n                  ></path></svg></span\n              ><span>Medium</span>\n            </td>\n            <td><strong>md</strong></td>\n            <td>Large tablet to laptop</td>\n            <td>960px &gt; &lt; 1264px*</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z\"\n                  ></path></svg></span\n              ><span>Large</span>\n            </td>\n            <td><strong>lg</strong></td>\n            <td>Desktop</td>\n            <td>1264px &gt; &lt; 1904px*</td>\n          </tr>\n          <tr>\n            <td>\n              <span\n                aria-hidden=\"true\"\n                class=\"m-icon notranslate m-icon--left theme--light\"\n                ><svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  viewBox=\"0 0 24 24\"\n                  role=\"img\"\n                  aria-hidden=\"true\"\n                  class=\"m-icon__svg\"\n                >\n                  <path\n                    d=\"M21,17H3V5H21M21,3H3A2,2 0 0,0 1,5V17A2,2 0 0,0 3,19H8V21H16V19H21A2,2 0 0,0 23,17V5A2,2 0 0,0 21,3Z\"\n                  ></path></svg></span\n              ><span>Extra large</span>\n            </td>\n            <td><strong>xl</strong></td>\n            <td>4k and ultra-wide</td>\n            <td>&gt; 1904px*</td>\n          </tr>\n        </tbody>\n        <tfoot>\n          <tr>\n            <td colspan=\"4\" class=\"text-caption text-center grey--text\">\n              <em>* -16px on desktop for browser scrollbar</em>\n            </td>\n          </tr>\n          <tr>\n            <td colspan=\"4\" class=\"text-right text--secondary\">\n              <small class=\"d-block mr-n1 mb-n6\"\n                ><a\n                  href=\"https://material.io/design/layout/responsive-layout-grid.html\"\n                  rel=\"noopener noreferrer\"\n                  target=\"_blank\"\n                  class=\"text-decoration-none d-inline-flex align-center\"\n                  ><span\n                    aria-hidden=\"true\"\n                    class=\"m-icon notranslate mr-1 theme--light\"\n                    style=\"\n                      font-size: 16px;\n                      height: 16px;\n                      width: 16px;\n                      color: inherit;\n                    \"\n                    ><svg\n                      xmlns=\"http://www.w3.org/2000/svg\"\n                      viewBox=\"0 0 24 24\"\n                      role=\"img\"\n                      aria-hidden=\"true\"\n                      class=\"m-icon__svg\"\n                      style=\"font-size: 16px; height: 16px; width: 16px\"\n                    >\n                      <path\n                        d=\"M21,12C21,9.97 20.33,8.09 19,6.38V17.63C20.33,15.97 21,14.09 21,12M17.63,19H6.38C7.06,19.55 7.95,20 9.05,20.41C10.14,20.8 11.13,21 12,21C12.88,21 13.86,20.8 14.95,20.41C16.05,20 16.94,19.55 17.63,19M11,17L7,9V17H11M17,9L13,17H17V9M12,14.53L15.75,7H8.25L12,14.53M17.63,5C15.97,3.67 14.09,3 12,3C9.91,3 8.03,3.67 6.38,5H17.63M5,17.63V6.38C3.67,8.09 3,9.97 3,12C3,14.09 3.67,15.97 5,17.63M23,12C23,15.03 21.94,17.63 19.78,19.78C17.63,21.94 15.03,23 12,23C8.97,23 6.38,21.94 4.22,19.78C2.06,17.63 1,15.03 1,12C1,8.97 2.06,6.38 4.22,4.22C6.38,2.06 8.97,1 12,1C15.03,1 17.63,2.06 19.78,4.22C21.94,6.38 23,8.97 23,12Z\"\n                      ></path></svg></span\n                  ><span>规格</span></a\n                ></small\n              >\n            </td>\n          </tr>\n        </tfoot>\n      </table>\n    </div>\n  </div>\n</div>\n",
@@ -4499,7 +4704,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg",
     "Cols": 1,
     "Related": [
       "/stylesandanimations/flex",
@@ -4507,8 +4711,7 @@
       "/stylesandanimations/display-helpers"
     ],
     "Title": "Grid system",
-    "Type": "Grid",
-    "FullTitle": "Grid system"
+    "Type": "Grid"
   },
   {
     "Desc": "<p>The <code>MButtonGroup</code> component is a simple wrapper for <code>MItemGroup</code> built specifically to work with <code>MButton</code>.</p>\n",
@@ -4587,7 +4790,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ButtonGroup.svg",
     "Cols": 1,
     "Related": [
       "/components/buttons",
@@ -4595,8 +4797,7 @@
       "/components/selection-controls"
     ],
     "Title": "Button groups",
-    "Type": "ButtonGroup",
-    "FullTitle": "Button groups"
+    "Type": "ButtonGroup"
   },
   {
     "Desc": "<p>The <code>MChipGroup</code> supercharges the <code>MChip</code> component by providing groupable functionality. It is used for creating groups\nof selections using chips.</p>\n",
@@ -4686,7 +4887,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Chip.svg",
     "Cols": 1,
     "Related": [
       "/components/chips",
@@ -4694,8 +4894,7 @@
       "/components/item-groups"
     ],
     "Title": "Chip groups",
-    "Type": "ChipGroup",
-    "FullTitle": "Chip groups"
+    "Type": "ChipGroup"
   },
   {
     "Desc": "<p>The <code>MItemGroup</code> provides the ability to create a group of selectable items out of any component. This is the baseline\nfunctionality for components such as <code>MTabs</code> and <code>MCarousel</code>.</p>\n",
@@ -4774,7 +4973,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/ItemGroup.svg",
     "Cols": 1,
     "Related": [
       "/components/button-groups",
@@ -4782,8 +4980,7 @@
       "/components/tabs"
     ],
     "Title": "Item groups",
-    "Type": "ItemGroup",
-    "FullTitle": "Item groups"
+    "Type": "ItemGroup"
   },
   {
     "Desc": "<p>The <code>MListItemGroup</code> provides the ability to create a group of selectable <code>MListItem</code>. The <code>MListItemGroup</code> component\nutilizes <code>MItemGroup</code> at its core to provide a clean interface for interactive lists.</p>\n",
@@ -4869,8 +5066,7 @@
       "/components/cards"
     ],
     "Title": "List item groups",
-    "Type": "ListItemGroup",
-    "FullTitle": "List item groups"
+    "Type": "ListItemGroup"
   },
   {
     "Desc": "<p>The <code>MSlideGroup</code> component is used to display pseudo paginated information. It uses <a href=\"/components/item-groups\"><strong>MItemGroup</strong></a> at its core and provides\na baseline for components such as <a href=\"/components/tabs\"><strong>MTabs</strong></a> and <a href=\"/components/chip-groups\"><strong>MChipGroup</strong></a>.</p>\n",
@@ -4967,8 +5163,7 @@
       "/components/tabs"
     ],
     "Title": "Slide groups",
-    "Type": "SlideGroup",
-    "FullTitle": "Slide groups"
+    "Type": "SlideGroup"
   },
   {
     "Desc": "<p>The <code>MWindow</code> component provides the baseline functionality for transitioning content from 1 pane to another. Other\ncomponents such as <code>MTabs</code>, <code>MCarousel</code> and <code>MStepper</code> utilize this component at their core.</p>\n",
@@ -5054,8 +5249,7 @@
       "/components/tabs"
     ],
     "Title": "Windows",
-    "Type": "Windows",
-    "FullTitle": "Windows"
+    "Type": "Windows"
   },
   {
     "Desc": "<p>The <code>MHover</code> component provides a clean interface for handling the hover state of any component.</p>\n",
@@ -5119,8 +5313,7 @@
       "/components/tooltips"
     ],
     "Title": "Hover",
-    "Type": "Hover",
-    "FullTitle": "Hover"
+    "Type": "Hover"
   },
   {
     "Desc": "<p>The <code>MIcon</code> component provides a large set of glyphs to provide context to various aspects of your application. For a\nlist of all available icons, visit the official <a href=\"https://materialdesignicons.com/\">Material Design Icons</a> page. To use\nany of these icons simply use the\n<code>mdi-</code> prefix followed by the icon name.</p>\n",
@@ -5199,7 +5392,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Cols": 1,
     "Related": [
       "/features/icon-fonts",
@@ -5207,8 +5399,7 @@
       "/components/cards"
     ],
     "Title": "Icons",
-    "Type": "Icon",
-    "FullTitle": "Icons"
+    "Type": "Icon"
   },
   {
     "Desc": "<p>The <code>MImage</code> component is packed with features to support rich media.</p>\n",
@@ -5306,8 +5497,58 @@
       "/components/parallax"
     ],
     "Title": "Images",
-    "Type": "Image",
-    "FullTitle": "Images"
+    "Type": "Image"
+  },
+  {
+    "Desc": "<p>Image Captcha component</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-29T11:38:52.1538696+08:00",
+    "DemoList": [
+      {
+        "Order": 1,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "<p><code>PImageCaptcha</code> is an image generated by <code>SkiaSharp</code>. In Linux environment, you need to install <code>libfontconfig1</code>, such as adding <code>RUN apt-get update &amp;&amp; apt-get install -y libfontconfig1</code> to the Dockerfile.</p>\n",
+        "Code": "@using System.Text\r\n<PImageCaptcha CaptchaWidth=\"200\" Outlined Label=\"VerifyCode\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n\r\n@code {\r\n    string randomCode = \"1234567890abcdefghijklmn\";\r\n\r\n    Random random = new Random();\r\n\r\n    private Task<string> RefreshCode()\r\n    {\r\n        var sb = new StringBuilder();\r\n        for (int i = 0; i < 5; i++)\r\n        {\r\n            sb.Append(randomCode[random.Next(0, randomCode.Length)]);\r\n        }\r\n\r\n        return Task.FromResult(sb.ToString());\r\n    }\r\n}",
+        "Type": "Demos.Components.ImageCaptcha.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "textFieldStyle",
+        "Title": "TextField Style",
+        "Description": "",
+        "Code": "@using System.Text\r\n\r\n<MForm>\r\n    <MContainer>\r\n        <MRow>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Label=\"Regular\" OnRefresh=\"RefreshCode\" ErrorMessage=\"@errorMessage\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Outlined Label=\"OutLine\" OnRefresh=\"RefreshCode\" ErrorMessage=\"@errorMessage\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Filled Label=\"Filled\" OnRefresh=\"RefreshCode\" ErrorMessage=\"@errorMessage\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Dense Label=\"Dense\" OnRefresh=\"RefreshCode\" ErrorMessage=\"@errorMessage\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Solo Label=\"Solo\" OnRefresh=\"RefreshCode\" ErrorMessage=\"@errorMessage\"></PImageCaptcha>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n\r\n\r\n@code {\r\n    string errorMessage = \"Verify Code Error\";\r\n\r\n    string randomCode = \"1234567890abcdefghijklmn\";\r\n\r\n    Random random = new Random();\r\n\r\n    private Task<string> RefreshCode()\r\n    {\r\n        var sb = new StringBuilder();\r\n\r\n        for (int i = 0; i < 5; i++)\r\n        {\r\n            sb.Append(randomCode[random.Next(0, randomCode.Length)]);\r\n        }\r\n\r\n        return Task.FromResult(sb.ToString());\r\n    }\r\n}",
+        "Type": "Demos.Components.ImageCaptcha.props.TextFieldStyle",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "verifyCode",
+        "Title": "Custom verification code results",
+        "Description": "",
+        "Code": "<PImageCaptcha CaptchaWidth=\"200\" Outlined Label=\"VerifyCode\" ErrorMessage=\"@ErrorMessage\" VerifyCode=\"@verifyCode\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n\r\n@code {\r\n    string randomCode = \"123456789\";\r\n\r\n    string calcFunCode = \"+-*\";\r\n\r\n    string verifyCode = \"\";\r\n\r\n    string ErrorMessage = \"Verify code error\";\r\n\r\n    Random random = new Random();\r\n\r\n    protected override Task OnInitializedAsync()\r\n    {\r\n        RefreshCode();\r\n        return base.OnInitializedAsync();\r\n    }\r\n\r\n    private Task<string> RefreshCode()\r\n    {\r\n        var firstNumber = randomCode[random.Next(0, randomCode.Length)].ToString();\r\n\r\n        var secondNumber = randomCode[random.Next(0, randomCode.Length)].ToString();\r\n\r\n        var calcFun = calcFunCode[random.Next(0, calcFunCode.Length)].ToString();\r\n\r\n        switch (calcFun)\r\n        {\r\n            case \"+\":\r\n                verifyCode = (int.Parse(firstNumber) + int.Parse(secondNumber)).ToString();\r\n                break;\r\n            case \"-\":\r\n                verifyCode = (int.Parse(firstNumber) - int.Parse(secondNumber)).ToString();\r\n                break;\r\n            case \"*\":\r\n                verifyCode = (int.Parse(firstNumber) * int.Parse(secondNumber)).ToString();\r\n                break;\r\n        }\r\n        \r\n        StateHasChanged();\r\n        return Task.FromResult(firstNumber + calcFun + secondNumber);\r\n    }\r\n}",
+        "Type": "Demos.Components.ImageCaptcha.props.VerifyCode",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/text-fields",
+      "/components/image"
+    ],
+    "Title": "Image Captcha",
+    "Type": "ImageCaptcha",
+    "Tag": "preset"
   },
   {
     "Desc": "<p>Scrolling to the bottom of the list automatically loads more data.</p>\n",
@@ -5315,7 +5556,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MInfiniteScroll\">MInfiniteScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-08-16T18:22:03.2809844+08:00",
+    "LastWriteTime": "2022-08-29T10:31:06.6439431+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5360,8 +5601,7 @@
       "/components/virtual-scroller"
     ],
     "Title": "Infinite scroll",
-    "Type": "InfiniteScroll",
-    "FullTitle": "Infinite scroll"
+    "Type": "InfiniteScroll"
   },
   {
     "Desc": "<p>The <code>MList</code> component is used to display information. It can contain an avatar, content, actions, subheaders and much\nmore. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a\nconsistent styling for organizing groups of text and images.</p>\n",
@@ -5562,7 +5802,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/List.svg",
     "Cols": 1,
     "Related": [
       "/components/item-groups",
@@ -5570,8 +5809,7 @@
       "/components/subheaders"
     ],
     "Title": "Lists",
-    "Type": "List",
-    "FullTitle": "Lists"
+    "Type": "List"
   },
   {
     "Desc": "<p>Packaging based on <a href=\"https://github.com/Vanessa219/vditor\">vditor</a></p>\n",
@@ -5698,8 +5936,7 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Markdown",
-    "Type": "Markdown",
-    "FullTitle": "Markdown"
+    "Type": "Markdown"
   },
   {
     "Desc": "<p>The <code>MMenu</code> component shows a menu at the position of the element used to activate it.</p>\n",
@@ -5873,8 +6110,155 @@
       "/stylesandanimations/transitions"
     ],
     "Title": "Menus",
-    "Type": "Menu",
-    "FullTitle": "Menus"
+    "Type": "Menu"
+  },
+  {
+    "Desc": "<p>A cascade selector designed for the mobile.</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-29T11:38:52.1568699+08:00",
+    "DemoList": [
+      {
+        "Order": 1,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "",
+        "Code": "<MRow Align=\"AlignTypes.Baseline\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <MButton OnClick=\"() => visible = true\">Select</MButton>\r\n        <PMobileCascader @bind-Value=\"value\"\r\n                         @bind-Visible=\"visible\"\r\n                         Title=\"省市区\"\r\n                         Items=\"Datas\"\r\n                         ItemText=\"d => d.Name\"\r\n                         ItemValue=\"d => d.Code\"\r\n                         ItemChildren=\"d => d.Children\"\r\n                         ItemDisabled=\"d => d.Disabled\">\r\n        </PMobileCascader>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        Selected values: @string.Join(\",\", value)\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    List<string> value = new();\r\n\r\n    bool visible;\r\n\r\n    record Data(string Code, string Name, List<Data> Children = null, bool Disabled = false);\r\n\r\n    static readonly List<Data> Datas = new List<Data>()\r\n    {\r\n        new Data(\"sh\", \"上海\", new List<Data>()\r\n        {\r\n            new Data(\"sh-hp\", \"黄浦区\"),\r\n            new Data(\"sh-xh\", \"徐汇区\"),\r\n            new Data(\"sh-cn\", \"长宁区\"),\r\n            new Data(\"sh-ja\", \"静安区\", Disabled: true),\r\n        }),\r\n        new Data(\"zj\", \"浙江\", new List<Data>()\r\n        {\r\n            new Data(\"zj-hz\", \"杭州\", new List<Data>()\r\n            {\r\n                new Data(\"zj-hz-sc\", \"上城区\"),\r\n                new Data(\"zj-hz-xc\", \"下城区\"),\r\n                new Data(\"zj-hz-qt\", \"钱塘区\"),\r\n            }),\r\n            new Data(\"zj-nb\", \"宁波\", new List<Data>()\r\n            {\r\n                new Data(\"zj-nb-jb\", \"江北区\"),\r\n                new Data(\"zj-nb-hs\", \"海曙区\"),\r\n                new Data(\"zj-nb-bl\", \"北仑区\"),\r\n            }),\r\n        }),\r\n        new Data(\"gd\", \"广东\", new List<Data>()\r\n        {\r\n            new Data(\"gd-sz\", \"深圳\", new List<Data>()\r\n            {\r\n                new Data(\"gd-sz-ns\", \"南山区\"),\r\n                new Data(\"gd-sz-lh\", \"罗湖区\"),\r\n            }),\r\n            new Data(\"gd-gz\", \"广州\", new List<Data>()\r\n            {\r\n                new Data(\"gd-gz-by\", \"白云区\"),\r\n                new Data(\"gd-gz-th\", \"天河区\"),\r\n                new Data(\"gd-gz-hz\", \"海珠区\"),\r\n            }),\r\n        }),\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.MobileCascader.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "loadChildren",
+        "Title": "Load children",
+        "Description": "",
+        "Code": "<MRow Align=\"AlignTypes.Baseline\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <PMobileCascader @bind-Value=\"value\"\r\n                         TItem=\"Data\"\r\n                         TItemValue=\"string\"\r\n                         Title=\"省市区\"\r\n                         Items=\"Datas\"\r\n                         ItemText=\"d => d.Name\"\r\n                         ItemValue=\"d => d.Code\"\r\n                         ItemChildren=\"d => d.Children\"\r\n                         ItemDisabled=\"d => d.Disabled\"\r\n                         OnLoadChildren=\"HandleOnLoadChildren\">\r\n            <ActivatorContent>\r\n                <MButton @attributes=\"@context.Attrs\">Select</MButton>\r\n            </ActivatorContent>\r\n        </PMobileCascader>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        Selected values: @string.Join(\",\", value)\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    List<string> value = new();\r\n\r\n    private async Task HandleOnLoadChildren(Data item)\r\n    {\r\n        // mock the http request\r\n        await Task.Delay(1000);\r\n\r\n        item.Children = item.Code switch\r\n        {\r\n            \"china\" => new List<Data>()\r\n            {\r\n                new(\"sh\", \"上海\"), new(\"zj\", \"浙江\"), new(\"gd\", \"广东\"),\r\n            },\r\n            \"sh\" => new List<Data>()\r\n            {\r\n                new(\"sh-hp\", \"黄浦区\"), new(\"sh-xh\", \"徐汇区\"), new(\"sh-cn\", \"长宁区\"), new(\"sh-ja\", \"静安区\", disabled: true),\r\n            },\r\n            \"zj\" => new List<Data>()\r\n            {\r\n                new(\"zj-hz\", \"杭州\"), new(\"zj-nb\", \"宁波\"),\r\n            },\r\n            \"gd\" => new List<Data>()\r\n            {\r\n                new(\"gd-sz\", \"深圳\"), new(\"gd-gz\", \"广州\"),\r\n            },\r\n            \"zj-hz\" => new List<Data>()\r\n            {\r\n                new(\"zj-hz-sc\", \"上城区\"), new(\"zj-hz-xc\", \"下城区\"), new(\"zj-hz-qt\", \"钱塘区\"),\r\n            },\r\n            \"zj-nb\" => new List<Data>()\r\n            {\r\n                new(\"zj-nb-jb\", \"江北区\"), new(\"zj-nb-hs\", \"海曙区\"), new(\"zj-nb-bl\", \"北仑区\"),\r\n            },      \r\n            \"gd-sz\" => new List<Data>()\r\n            {\r\n                new(\"gd-sz-ns\", \"南山区\"), new(\"gd-sz-lh\", \"罗湖区\"),\r\n            },            \r\n            \"gd-gz\" => new List<Data>()\r\n            {\r\n                new(\"gd-gz-by\", \"白云区\"), new(\"gd-gz-th\", \"天河区\"), new(\"gd-gz-hz\", \"海珠区\"),\r\n            },\r\n            _ => new List<Data>()\r\n        };\r\n    }\r\n\r\n    class Data\r\n    {\r\n        public string Name { get; set; }\r\n        public string Code { get; set; }\r\n        public List<Data> Children { get; set; }\r\n        public bool Disabled { get; set; }\r\n\r\n        public Data(string code, string name, List<Data> children = null, bool disabled = false)\r\n        {\r\n            Code = code;\r\n            Name = name;\r\n            Children = children;\r\n            Disabled = disabled;\r\n        }\r\n    }\r\n\r\n    static readonly List<Data> Datas = new()\r\n    {\r\n        new Data(\"china\", \"中国\")\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.MobileCascader.events.LoadChildren",
+        "Style": "",
+        "Debug": false,
+        "Group": 1
+      },
+      {
+        "Order": 0,
+        "Name": "onSelect",
+        "Title": "On select",
+        "Description": "",
+        "Code": "<MRow Align=\"AlignTypes.Baseline\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <PMobileCascader TItem=\"Data\"\r\n                         TItemValue=\"string\"\r\n                         Title=\"省市区\"\r\n                         Items=\"@Datas\"\r\n                         ItemText=\"d => d.Name\"\r\n                         ItemValue=\"d => d.Code\"\r\n                         ItemChildren=\"d => d.Children\"\r\n                         ItemDisabled=\"d => d.Disabled\"\r\n                         OnSelect=\"HandleOnSelect\">\r\n            <ActivatorContent>\r\n                <MButton @attributes=\"@context.Attrs\">Select</MButton>\r\n            </ActivatorContent>\r\n        </PMobileCascader>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        Selected values: @string.Join(\"-\", selectedItems.Select(item => item.Name))\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    List<Data> selectedItems = new();\r\n\r\n    void HandleOnSelect(List<Data> selected)\r\n    {\r\n        selectedItems = selected;\r\n    }\r\n\r\n    record Data(string Code, string Name, List<Data> Children = null, bool Disabled = false);\r\n\r\n    static readonly List<Data> Datas = new List<Data>()\r\n    {\r\n        new Data(\"sh\", \"上海\", new List<Data>()\r\n        {\r\n            new Data(\"sh-hp\", \"黄浦区\"),\r\n            new Data(\"sh-xh\", \"徐汇区\"),\r\n            new Data(\"sh-cn\", \"长宁区\"),\r\n            new Data(\"sh-ja\", \"静安区\", Disabled: true),\r\n        }),\r\n        new Data(\"zj\", \"浙江\", new List<Data>()\r\n        {\r\n            new Data(\"zj-hz\", \"杭州\", new List<Data>()\r\n            {\r\n                new Data(\"zj-hz-sc\", \"上城区\"),\r\n                new Data(\"zj-hz-xc\", \"下城区\"),\r\n                new Data(\"zj-hz-qt\", \"钱塘区\"),\r\n            }),\r\n            new Data(\"zj-nb\", \"宁波\", new List<Data>()\r\n            {\r\n                new Data(\"zj-nb-jb\", \"江北区\"),\r\n                new Data(\"zj-nb-hs\", \"海曙区\"),\r\n                new Data(\"zj-nb-bl\", \"北仑区\"),\r\n            }),\r\n        }),\r\n        new Data(\"gd\", \"广东\", new List<Data>()\r\n        {\r\n            new Data(\"gd-sz\", \"深圳\", new List<Data>()\r\n            {\r\n                new Data(\"gd-sz-ns\", \"南山区\"),\r\n                new Data(\"gd-sz-lh\", \"罗湖区\"),\r\n            }),\r\n            new Data(\"gd-gz\", \"广州\", new List<Data>()\r\n            {\r\n                new Data(\"gd-gz-by\", \"白云区\"),\r\n                new Data(\"gd-gz-th\", \"天河区\"),\r\n                new Data(\"gd-gz-hz\", \"海珠区\"),\r\n            }),\r\n        }),\r\n    };\r\n\r\n}\r\n",
+        "Type": "Demos.Components.MobileCascader.events.OnSelect",
+        "Style": "",
+        "Debug": false,
+        "Group": 1
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/lists",
+      "/components/tabs",
+      "/components/buttons"
+    ],
+    "Title": "Mobile cascader",
+    "Type": "MobileCascader",
+    "Tag": "preset"
+  },
+  {
+    "Desc": "<p>When requiring users to interact with the application, but without jumping to a new page and interrupting the user's\nworkflow, you can use <code>Modal</code> to create a new floating layer over the current page to get user feedback or display\ninformation.</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-29T11:38:52.1608695+08:00",
+    "DemoList": [
+      {
+        "Order": 1,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "",
+        "Code": "<PModal Title=\"Title\" Width=\"500\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PModal>",
+        "Type": "Demos.Components.Modal.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "actionProps",
+        "Title": "Action Props",
+        "Description": "",
+        "Code": "<PModal @bind-Value=\"value\" \r\n        Persistent\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        SaveProps=\"props => props.Outlined = true\"\r\n        CancelProps=\"@(props => props.Color = \"orange\")\"\r\n        DeleteProps=\"@(props => props.Style = \"font-weight:bold;\")\"\r\n        OnSave=\"OnSave\" \r\n        OnCancel=\"OnCancel\" \r\n        OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        await Task.Delay(1000);\r\n\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Modal.props.ActionProps",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "actions",
+        "Title": "Actions",
+        "Description": "",
+        "Code": "<MSwitch @bind-Value=\"hideCancelAction\" Label=\"HideCancelAction\"></MSwitch>\r\n\r\n<PModal @bind-Value=\"value\" \r\n        HideCancelAction=\"hideCancelAction\" \r\n        Persistent\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        OnSave=\"OnSave\" \r\n        OnCancel=\"OnCancel\" \r\n        OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n    private bool hideCancelAction;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        await Task.Delay(1000);\r\n\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Modal.props.Actions",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "formModel",
+        "Title": "FormModel",
+        "Description": "",
+        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MSwitch @bind-Value=\"throwException\" Label=\"throw exception when calling OnSave\"></MSwitch>\r\n\r\n<MButton OnClick=\"ShowModal\">Show Modal</MButton>\r\n@if (user != null)\r\n{\r\n    <div>\r\n        @System.Text.Json.JsonSerializer.Serialize(user)\r\n        <MButton Color=\"primary\" Text OnClick=\"EditModal\">edit</MButton>\r\n    </div>\r\n}\r\n\r\n<PModal @bind-Value=\"value\"\r\n        FormModel=\"userModel\"\r\n        Persistent\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        OnSave=\"HandleOnSave\"\r\n        OnCancel=\"HandleOnCancel\">\r\n    <MRow>\r\n        <MCol Cols=\"12\">\r\n            <MTextField @bind-Value=\"userModel.UserName\"\r\n                        Label=\"UserName\"\r\n                        Dense\r\n                        Outlined\r\n                        HideDetails=\"@(\"auto\")\" />\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MTextField @bind-Value=\"userModel.City\"\r\n                        Label=\"City\"\r\n                        Dense\r\n                        Outlined\r\n                        HideDetails=\"@(\"auto\")\" />\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MRadioGroup @bind-Value=\"userModel.Gender\"\r\n                         Label=\"Gender:\"\r\n                         Row\r\n                         Dense\r\n                         Style=\"margin-top: 0\"\r\n                         HideDetails=\"@(\"auto\")\">\r\n                <MRadio Label=\"Male\" Value=\"0\"></MRadio>\r\n                <MRadio Label=\"Female\" Value=\"1\"></MRadio>\r\n            </MRadioGroup>\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MAutocomplete @bind-Value=\"userModel.Favorites\"\r\n                           Items=\"favorites\"\r\n                           Label=\"Favorites\"\r\n                           Multiple\r\n                           ItemValue=\"r => r\"\r\n                           ItemText=\"r => r\"\r\n                           Dense\r\n                           Outlined\r\n                           HideDetails=\"@(\"auto\")\">\r\n            </MAutocomplete>\r\n        </MCol>\r\n        @if (exception != null)\r\n        {\r\n            <MCol Cols=\"12\">\r\n                @exception.Message\r\n            </MCol>\r\n        }\r\n    </MRow>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    readonly List<string> favorites = new() { \"Basketball\", \"Football\", \"Ping-pong\", \"Badminton\" };\r\n\r\n    User user;\r\n    User userModel;\r\n\r\n    private bool value;\r\n    private bool throwException;\r\n    private Exception exception;\r\n\r\n    private void ShowModal()\r\n    {\r\n        userModel = new User();\r\n        value = true;\r\n    }\r\n\r\n    private void EditModal()\r\n    {\r\n        userModel = user.ShallowCopy();\r\n        value = true;\r\n    }\r\n\r\n    private async Task HandleOnSave(ModalActionEventArgs args)\r\n    {\r\n        try\r\n        {\r\n            // logic in real world here\r\n            await Task.Delay(1000);\r\n\r\n            if (throwException)\r\n            {\r\n                throw new Exception(\"Something wrong here!\");\r\n            }\r\n\r\n            user = userModel.ShallowCopy();\r\n\r\n            value = false;\r\n        }\r\n        catch (Exception e)\r\n        {\r\n            args.Cancel();\r\n            exception = e;\r\n        }\r\n    }\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        value = false;\r\n        exception = null;\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        [Required]\r\n        public string UserName { get; set; }\r\n\r\n        [Range(0, 1)]\r\n        public int Gender { get; set; }\r\n\r\n        [Required]\r\n        public string City { get; set; }\r\n\r\n        [Required]\r\n        public List<string> Favorites { get; set; }\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public interface IShallowCopy<T> where T : new() \r\n    {\r\n        T ShallowCopy();\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Modal.props.FormModel",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "scrollToTopOnHide",
+        "Title": "AutoScrollToTop",
+        "Description": "",
+        "Code": "<MSwitch @bind-Value=\"autoScrollToTop\" Label=\"AutoScrollToTop\"></MSwitch>\r\n\r\n<PModal @bind-Value=\"value\"\r\n        AutoScrollToTop=\"autoScrollToTop\"\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        BodyStyle=\"height: 250px\"\r\n        OnCancel=\"() => value = false\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n    </ChildContent>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n    private bool autoScrollToTop;\r\n\r\n}",
+        "Type": "Demos.Components.Modal.props.ScrollToTopOnHide",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "withoutActivator",
+        "Title": "Without activator",
+        "Description": "",
+        "Code": "<MButton OnClick=\"() => value = true\">Show Modal</MButton>\r\n\r\n<PModal @bind-Value=\"value\"\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        OnCancel=\"() => value = false\">\r\n    Content\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n}",
+        "Type": "Demos.Components.Modal.props.WithoutActivator",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "customActions",
+        "Title": "Custom actions",
+        "Description": "",
+        "Code": "<PModal @bind-Value=\"value\"\r\n        Persistent\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        OnSave=\"OnSave\"\r\n        OnCancel=\"OnCancel\"\r\n        OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n    <DeleteContent Context=\"delete\">\r\n        <MButton Icon Color=\"error\" OnClick=\"delete.Click\" Disabled=\"delete.Loading\">\r\n            <MIcon>mdi-delete</MIcon>\r\n        </MButton>\r\n    </DeleteContent>\r\n    <CancelContent Context=\"cancel\">\r\n        <MButton Icon OnClick=\"cancel.Click\" Disabled=\"cancel.Loading\">\r\n            <MIcon>mdi-cancel</MIcon>\r\n        </MButton>\r\n    </CancelContent>\r\n    <SaveContent Context=\"save\">\r\n        <MButton Icon Color=\"primary\" OnClick=\"save.Click\" Disabled=\"save.Loading\" Loading=\"save.Loading\">\r\n            <MIcon>mdi-check</MIcon>\r\n        </MButton>\r\n    </SaveContent>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        await Task.Delay(1000);\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.Modal.contents.CustomActions",
+        "Style": "",
+        "Debug": false,
+        "Group": 2
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/dialogs",
+      "/components/popup-service",
+      "/components/drawers"
+    ],
+    "Title": "Modals",
+    "Type": "Modals",
+    "Tag": "preset"
   },
   {
     "Desc": "<p><code>MNavigationDrawer</code> is a component used to navigate applications. It is usually wrapped and used in the <code>MCard</code> element.</p>\n",
@@ -5997,7 +6381,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/NavigationDrawer.svg",
     "Cols": 1,
     "Related": [
       "/components/lists",
@@ -6005,8 +6388,58 @@
       "/getting-started/wireframes"
     ],
     "Title": "Navigation drawers",
-    "Type": "NavigationDrawer",
-    "FullTitle": "Navigation drawers"
+    "Type": "NavigationDrawer"
+  },
+  {
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-29T11:38:52.1618692+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "confirm",
+        "Title": "Confirm",
+        "Description": "",
+        "Code": "@using AlertTypes = BlazorComponent.AlertTypes\r\n\r\n<div class=\"d-flex justify-space-between\">\r\n    <MButton Color=\"primary\" OnClick=\"() => Show()\">Default</MButton>\r\n    <MButton Color=\"success\" OnClick=\"() => Show(AlertTypes.Success)\">Success</MButton>\r\n    <MButton Color=\"info\" OnClick=\"() => Show(AlertTypes.Info)\">Info</MButton>\r\n    <MButton Color=\"warning\" OnClick=\"() => Show(AlertTypes.Warning)\">Warning</MButton>\r\n    <MButton Color=\"error\" OnClick=\"() => Show(AlertTypes.Error)\">Error</MButton>\r\n</div>\r\n\r\n<PConfirm Visible=\"visible\"\r\n          Title=\"确认操作\"\r\n          Type=\"type\"\r\n          OnCancel=\"Hide\"\r\n          OnOk=\"Ok\">\r\n    您确认该操作吗？\r\n</PConfirm>\r\n\r\n@code {\r\n\r\n    AlertTypes type = 0;\r\n    bool visible;\r\n\r\n    void Show(AlertTypes t = 0)\r\n    {\r\n        type = t;\r\n        visible = true;\r\n    }\r\n\r\n    void Hide()\r\n    {\r\n        visible = false;\r\n    }\r\n\r\n    void Ok()\r\n    {\r\n        visible = false;\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.NotGrouped.props.Confirm",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "pageHeader",
+        "Title": "PageHeader",
+        "Description": "",
+        "Code": "<PPageHeader Title=\"Order\"\r\n             Subtitle=\"This is an order page!\"\r\n             OnBack=\"OnBack\"\r\n             OnSearch=\"OnSearch\"\r\n             ShowFiltersByDefault>\r\n    <LeftActions>\r\n        <MButton Color=\"primary\"><MIcon Left>mdi-plus</MIcon>Add Order</MButton>\r\n    </LeftActions>\r\n\r\n    <RightActions>\r\n        <MButton Icon OnClick=\"OnClear\">\r\n            <MIcon>mdi-refresh</MIcon>\r\n        </MButton>\r\n    </RightActions>\r\n\r\n    <Filters Context=\"filter\">\r\n        <MRow Dense>\r\n            <MCol Cols=\"6\">\r\n                <MTextField @bind-Value=\"orderId\"\r\n                            Label=\"Order ID\"\r\n                            Outlined\r\n                            Dense\r\n                            TValue=\"string\"\r\n                            HideDetails=\"true\"\r\n                            OnKeyDown=\"@filter.onEnter\">\r\n                </MTextField>\r\n            </MCol>\r\n            <MCol Cols=\"6\">\r\n                <MSelect @bind-Value=\"user\"\r\n                         Outlined\r\n                         Dense\r\n                         Label=\"User\"\r\n                         Items=\"users\"\r\n                         ItemValue=\"i => i\"\r\n                         ItemText=\"i => i\"\r\n                         HideDetails=\"true\"\r\n                         TItem=\"string\"\r\n                         TValue=\"string\"\r\n                         TItemValue=\"string\"\r\n                         OnSelectedItemUpdate=\"_ => filter.onSearch()\">\r\n                </MSelect>\r\n            </MCol>\r\n            <MCol Cols=\"6\">\r\n                <MMenu @bind-Value=\"visible1\"\r\n                       CloseOnContentClick=\"false\"\r\n                       OffsetY\r\n                       MinWidth=\"290\">\r\n                    <ActivatorContent>\r\n                        <MTextField @bind-Value=\"start\"\r\n                                    Label=\"Start date\"\r\n                                    Outlined\r\n                                    Dense\r\n                                    Readonly\r\n                                    HideDetails=\"true\"\r\n                                    @attributes=\"@context.Attrs\">\r\n                        </MTextField>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        <MDatePicker @bind-Value=\"date1\"\r\n                                     NoTitle\r\n                                     Scrollable>\r\n                            <MSpacer></MSpacer>\r\n                            <MButton Text\r\n                                     Color=\"primary\"\r\n                                     OnClick=\"() => visible1 = false\">\r\n                                Cancel\r\n                            </MButton>\r\n                            <MButton Text\r\n                                     Color=\"primary\"\r\n                                     OnClick=\"() => StartDateClick(filter.onSearch)\">\r\n                                OK\r\n                            </MButton>\r\n                        </MDatePicker>\r\n                    </ChildContent>\r\n                </MMenu>\r\n            </MCol>\r\n            <MCol Cols=\"6\">\r\n                <MMenu @bind-Value=\"visible2\"\r\n                       CloseOnContentClick=\"false\"\r\n                       OffsetY\r\n                       MinWidth=\"290\">\r\n                    <ActivatorContent>\r\n                        <MTextField @bind-Value=\"end\"\r\n                                    Label=\"End date\"\r\n                                    Readonly\r\n                                    Outlined\r\n                                    Dense\r\n                                    HideDetails=\"true\"\r\n                                    @attributes=\"@context.Attrs\">\r\n                        </MTextField>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        <MDatePicker @bind-Value=\"date2\"\r\n                                     NoTitle\r\n                                     Scrollable>\r\n                            <MSpacer></MSpacer>\r\n                            <MButton Text\r\n                                     Color=\"primary\"\r\n                                     OnClick=\"() => visible2 = false\">\r\n                                Cancel\r\n                            </MButton>\r\n                            <MButton Text\r\n                                     Color=\"primary\"\r\n                                     OnClick=\"() => EndDateClick(filter.onSearch)\">\r\n                                OK\r\n                            </MButton>\r\n                        </MDatePicker>\r\n                    </ChildContent>\r\n                </MMenu>\r\n            </MCol>\r\n        </MRow>\r\n    </Filters>\r\n</PPageHeader>\r\n\r\n@code {\r\n    readonly List<string> users = new() { \"Rachel Greene\", \"Monica Geller\", \"Joey Tribbiani\", \"Ross Geller\", \"Chandler Bing\", \"Phoebe Buffay\" };\r\n\r\n    DateOnly date1 = DateOnly.FromDateTime(DateTime.Now);\r\n    DateOnly date2 = DateOnly.FromDateTime(DateTime.Now);\r\n\r\n    bool visible1;\r\n    bool visible2;\r\n\r\n    string orderId;\r\n    string user;\r\n    string start;\r\n    string end;\r\n    \r\n    async Task StartDateClick(Func<Task> onSearch)\r\n    {\r\n        start = date1.ToShortDateString(); \r\n        visible1 = false;\r\n        await onSearch();\r\n    }\r\n\r\n    async Task EndDateClick(Func<Task> onSearch)\r\n    {\r\n        end = date2.ToShortDateString(); \r\n        visible2 = false;\r\n        await onSearch();\r\n    }\r\n\r\n    void OnBack()\r\n    {\r\n        // navigate\r\n    }\r\n\r\n    Task OnSearch()\r\n    {\r\n        return Task.Delay(1000);\r\n    }\r\n\r\n    void OnClear()\r\n    {\r\n        orderId = null;\r\n        user = null;\r\n        start = null;\r\n        end = null;\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.NotGrouped.props.PageHeader",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 30,
+        "Name": "sidebar",
+        "Title": "Sidebar",
+        "Description": "",
+        "Code": "<Masa.Blazor.Presets.PSidebar @bind-Value=\"selectedKey\"\r\n                              Dense\r\n                              Color=\"indigo\"\r\n                              Items=\"menus\"\r\n                              Title=\"m => m.Label\"\r\n                              Icon=\"m => m.Icon\"\r\n                              Key=\"m => m.Value\"\r\n                              Children=\"m => m.SubMenus\"\r\n                              TItem=\"Menu\"\r\n                              OnClick=\"Click\">\r\n</Masa.Blazor.Presets.PSidebar>\r\n\r\n@code {\r\n\r\n    static List<Menu> menus = new()\r\n    {\r\n        new Menu() { Label = \"Home\", Icon = \"mdi-home\", Value = \"Home\" },\r\n        new Menu()\r\n        {\r\n            Label = \"Users\",\r\n            Icon = \"mdi-account-circle\",\r\n            Value = \"Users\",\r\n            SubMenus = new List<Menu>()\r\n            {\r\n                new()\r\n                {\r\n                    Label = \"Admin\",\r\n                    SubMenus = new List<Menu>()\r\n                    {\r\n                        new() { Label = \"Management\", Icon = \"mdi-account-multiple-outline\", Value = \"Management\" },\r\n                        new() { Label = \"Settings\", Icon = \"mdi-cog-outline\", Value = \"Settings\" },\r\n                    }\r\n                },\r\n                new()\r\n                {\r\n                    Label = \"Actions\",\r\n                    SubMenus = new List<Menu>()\r\n                    {\r\n                        new() { Label = \"Create\", Icon = \"mdi-plus-outline\", Value = \"Create\" },\r\n                        new() { Label = \"Read\", Icon = \"mdi-file-outline\", Value = \"Read\" },\r\n                        new() { Label = \"Update\", Icon = \"mdi-update\", Value = \"Update\" },\r\n                        new() { Label = \"Delete\", Icon = \"mdi-delete\", Value = \"Delete\" },\r\n                    }\r\n                },\r\n            }\r\n        },\r\n    };\r\n\r\n    StringNumber selectedKey = \"Management\";\r\n\r\n    void Click(Menu item)\r\n    {\r\n    // code with clicked item\r\n    }\r\n\r\n    class Menu\r\n    {\r\n        public string Label { get; set; }\r\n\r\n        public string Value { get; set; }\r\n\r\n        public string Icon { get; set; }\r\n\r\n        public List<Menu> SubMenus { get; set; }\r\n    }\r\n\r\n}",
+        "Type": "Demos.Components.NotGrouped.props.Sidebar",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/components/text-fields",
+      "/components/lists"
+    ],
+    "Title": "Not Grouped",
+    "Type": "NotGrouped",
+    "Tag": "preset"
   },
   {
     "Desc": "<p>The <code>Overlay</code> component is used to provide emphasis on a particular element or parts of it. It signals to the user of a state change within the application and can be used for creating loaders, dialogs and more.</p>\n",
@@ -6092,8 +6525,7 @@
       "/components/dialogs"
     ],
     "Title": "Overlays",
-    "Type": "Overlay",
-    "FullTitle": "Overlays"
+    "Type": "Overlay"
   },
   {
     "Desc": "<p>The <code>MPagination</code> component is used to separate long data sets so that user data information can be known. Provided the amount, the paging component will automatically scale. The current maintenance page provides value easily.</p>\n",
@@ -6179,8 +6611,7 @@
       "/components/lists"
     ],
     "Title": "Pagination",
-    "Type": "Pagination",
-    "FullTitle": "Pagination"
+    "Type": "Pagination"
   },
   {
     "Desc": "<p>MDatePicker is a fully featured date selection component that lets users select a date, or range of dates.</p>\n",
@@ -6414,7 +6845,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickers.svg",
     "Cols": 1,
     "Related": [
       "/components/buttons",
@@ -6422,8 +6852,7 @@
       "/components/time-pickers"
     ],
     "Title": "Date pickers",
-    "Type": "DatePickers",
-    "FullTitle": "Date pickers"
+    "Type": "DatePickers"
   },
   {
     "Desc": "<p><code>MDatePicker</code> can be used as a standalone month picker component.</p>\n",
@@ -6558,7 +6987,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/DatePickersMonth.svg",
     "Cols": 1,
     "Related": [
       "/components/date-pickers",
@@ -6566,8 +6994,7 @@
       "/components/time-pickers"
     ],
     "Title": "Date pickers month",
-    "Type": "DatePickersMonth",
-    "FullTitle": "Date pickers month"
+    "Type": "DatePickersMonth"
   },
   {
     "Desc": "<p>The MTimePicker is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting the time.</p>\n",
@@ -6734,7 +7161,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/TimePickers.svg",
     "Cols": 1,
     "Related": [
       "/components/buttons",
@@ -6742,525 +7168,12 @@
       "/components/text-fields"
     ],
     "Title": "Time pickers",
-    "Type": "TimePickers",
-    "FullTitle": "Time pickers"
-  },
-  {
-    "Desc": "<p>Display two data of the same type side by side.</p>\n",
-    "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T10:24:25.3437036+08:00",
-    "DemoList": [
-      {
-        "Order": 1,
-        "Name": "index",
-        "Title": "Usage",
-        "Description": "",
-        "Code": "<PBlockText Primary=\"@DateOnly.FromDateTime(DateTime.Now).ToString()\"\r\n            Secondary=\"@TimeOnly.FromDateTime(DateTime.Now).ToString()\">\r\n</PBlockText>",
-        "Type": "Demos.Components.Presets.children.BlockText.usage.Index",
-        "Style": "",
-        "Debug": false,
-        "Group": 4
-      },
-      {
-        "Order": 0,
-        "Name": "tags",
-        "Title": "Tags",
-        "Description": "",
-        "Code": "<PBlockText Primary=\"MASA Blazor\"\r\n            Secondary=\"A UI component library\"\r\n            Tags=\"@tags\">\r\n</PBlockText>\r\n\r\n@code {\r\n\r\n    static IEnumerable<BlockTextTag> tags = new List<BlockTextTag>()\r\n    {\r\n        new(\"Blazor\", \"green\", \"white\"),\r\n        new(\"Material Design\", \"purple\", true)\r\n    };\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.BlockText.props.Tags",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "contents",
-        "Title": "Custom content",
-        "Description": "",
-        "Code": "<PBlockText>\r\n    <PrimaryContent>\r\n        <PCopyableText>MASA.Blazor</PCopyableText>\r\n    </PrimaryContent>\r\n    <SecondaryContent>\r\n        <PCopyableText>A UI component library</PCopyableText>\r\n    </SecondaryContent>\r\n</PBlockText>",
-        "Type": "Demos.Components.Presets.children.BlockText.contents.Contents",
-        "Style": "",
-        "Debug": false,
-        "Group": 2
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cols": 1,
-    "Related": [
-      "/components/chips",
-      "/components/copyable-text",
-      "/components/ellipsis-text"
-    ],
-    "Title": "Block text",
-    "Type": "BlockText",
-    "FullTitle": "Block text"
-  },
-  {
-    "Desc": "<p>Append a button that provides copy feature to the content.</p>\n",
-    "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T10:24:25.3447036+08:00",
-    "DemoList": [
-      {
-        "Order": 1,
-        "Name": "index",
-        "Title": "Usage",
-        "Description": "",
-        "Code": "<PCopyableText>\r\n    There is a text that can be copied.\r\n</PCopyableText>",
-        "Type": "Demos.Components.Presets.children.CopyableText.usage.Index",
-        "Style": "",
-        "Debug": false,
-        "Group": 4
-      },
-      {
-        "Order": 0,
-        "Name": "icon",
-        "Title": "Icon",
-        "Description": "",
-        "Code": "<PCopyableText CopyIcon=\"mdi-clipboard-text\"\r\n               CopyIconColor=\"orange\"\r\n               CopiedIcon=\"mdi-check-circle\">\r\n    Custom icons.\r\n</PCopyableText>",
-        "Type": "Demos.Components.Presets.children.CopyableText.props.Icon",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "text",
-        "Title": "Text",
-        "Description": "",
-        "Code": "<PCopyableText Text=\"Text that you specific\">\r\n    Copy the text that you specific by parameter Text.\r\n</PCopyableText>",
-        "Type": "Demos.Components.Presets.children.CopyableText.props.Text",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "textTruncate",
-        "Title": "Text truncate",
-        "Description": "",
-        "Code": "<div style=\"width: 150px;\">\r\n    <PCopyableText ContentClass=\"text-truncate\"\r\n                   ContentStyle=\"display:inline-block;vertical-align:top;width:100%;\">\r\n        There is a text that can be copied.\r\n    </PCopyableText>\r\n</div>",
-        "Type": "Demos.Components.Presets.children.CopyableText.props.TextTruncate",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "tooltip",
-        "Title": "Tooltip",
-        "Description": "",
-        "Code": "<PCopyableText Tooltip=\"Do you wanna copy?\"\r\n               TooltipClass=\"orange\">\r\n    Custom tooltip.\r\n</PCopyableText>",
-        "Type": "Demos.Components.Presets.children.CopyableText.props.Tooltip",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cols": 1,
-    "Related": [
-      "/components/icons",
-      "/components/tooltips",
-      "/components/block-text"
-    ],
-    "Title": "Copyable text",
-    "Type": "CopyableText",
-    "FullTitle": "Copyable text"
+    "Type": "TimePickers"
   },
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-02T09:47:29.6090335+08:00",
-    "DemoList": [
-      {
-        "Order": 1,
-        "Name": "index",
-        "Title": "Usage",
-        "Description": "",
-        "Code": "@using System.Text\r\n@using BlazorComponent.I18n\r\n\r\n<PCron Value=\"@_cronValue\" ValueChanged=\"OnCronValueChanged\">\r\n</PCron>\r\n\r\n<div>\r\n    <MTextField Value=\"_cronValue\" TValue=\"string\" ValueChanged=\"OnCronValueChanged\" Label=\"@i18n.T(\"$masaBlazor.cron.demo.cronExpressionLabel\")\" Outlined Dense></MTextField>\r\n    <MTextarea @bind-Value=\"_nextTenRunTime\" Readonly Outlined Rows=\"11\" Label=\"@i18n.T(\"$masaBlazor.cron.demo.nextTenRunTime\")\">\r\n    </MTextarea>\r\n</div>\r\n\r\n@code {\r\n    [Inject]\r\n    I18n i18n { get; set; }\r\n\r\n    string _cronValue = string.Empty;\r\n    string _nextTenRunTime = string.Empty;\r\n    StringBuilder sb = new ();\r\n\r\n    private Task OnCronValueChanged(string cronValue)\r\n    {\r\n        if(_cronValue != cronValue)\r\n        {\r\n            _cronValue = cronValue;\r\n\r\n            GetNextTenRunTime();\r\n        }\r\n        return Task.CompletedTask;\r\n    }\r\n\r\n    private void GetNextTenRunTime()\r\n    {\r\n        sb.Clear();\r\n        _nextTenRunTime = string.Empty;\r\n\r\n        var startTime = DateTimeOffset.Now;\r\n\r\n        var cronExpression = new CronExpression(_cronValue);\r\n\r\n        for (int i = 0; i < 10; i++)\r\n        {\r\n            var nextExcuteTime = cronExpression.GetNextValidTimeAfter(startTime);\r\n\r\n            if (nextExcuteTime.HasValue)\r\n            {\r\n                startTime = nextExcuteTime.Value;\r\n                sb.AppendLine(startTime.ToLocalTime().ToString(\"yyyy-MM-dd HH:mm:ss\"));\r\n            }\r\n        }\r\n\r\n        if(sb.Length == 0)\r\n        {\r\n            _nextTenRunTime = \"No more next run time\";\r\n        }\r\n        else\r\n        {\r\n            _nextTenRunTime = sb.ToString();\r\n        }\r\n    }\r\n}",
-        "Type": "Demos.Components.Presets.children.Cron.usage.Index",
-        "Style": "",
-        "Debug": false,
-        "Group": 4
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cols": 1,
-    "Related": [
-      "/components/text-fields",
-      "/components/select",
-      "/components/radio-button"
-    ],
-    "Subtitle": "Cron Expression Generator",
-    "Title": "Cron Expression Generator",
-    "Type": "CronExpressionGenerator",
-    "FullTitle": "Cron Expression Generator（Cron Expression Generator）"
-  },
-  {
-    "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T10:24:25.3477039+08:00",
-    "DemoList": [
-      {
-        "Order": 1,
-        "Name": "index",
-        "Title": "Usage",
-        "Description": "",
-        "Code": "<PDrawer Title=\"Title\" Width=\"500\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PDrawer>",
-        "Type": "Demos.Components.Presets.children.Drawer.usage.Index",
-        "Style": "",
-        "Debug": false,
-        "Group": 4
-      },
-      {
-        "Order": 0,
-        "Name": "actionProps",
-        "Title": "Action Props",
-        "Description": "",
-        "Code": "<PDrawer @bind-Value=\"value\"\r\n         Persistent\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         SaveProps=\"props => props.Outlined = true\"\r\n         CancelProps=\"@(props => props.Color = \"orange\")\"\r\n         DeleteProps=\"@(props => props.Style = \"font-weight:bold;\")\"\r\n         OnSave=\"OnSave\"\r\n         OnCancel=\"OnCancel\"\r\n         OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        await Task.Delay(1000);\r\n\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.Drawer.props.ActionProps",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "actions",
-        "Title": "Actions",
-        "Description": "",
-        "Code": "<MSwitch @bind-Value=\"hideCancelAction\" Label=\"HideCancelAction\"></MSwitch>\r\n\r\n<PDrawer @bind-Value=\"value\"\r\n         HideCancelAction=\"hideCancelAction\"\r\n         Persistent\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         OnSave=\"OnSave\"\r\n         OnCancel=\"OnCancel\"\r\n         OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n    private bool hideCancelAction;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        await Task.Delay(1000);\r\n\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.Drawer.props.Actions",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "formModel",
-        "Title": "FormModel",
-        "Description": "",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MSwitch @bind-Value=\"throwException\" Label=\"throw exception when calling OnSave\"></MSwitch>\r\n\r\n<MButton OnClick=\"ShowModal\">Show Modal</MButton>\r\n@if (user != null)\r\n{\r\n    <div>\r\n        @System.Text.Json.JsonSerializer.Serialize(user)\r\n        <MButton Color=\"primary\" Text OnClick=\"EditModal\">edit</MButton>\r\n    </div>\r\n}\r\n\r\n<PDrawer @bind-Value=\"value\"\r\n         FormModel=\"userModel\"\r\n         Persistent\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         OnSave=\"HandleOnSave\"\r\n         OnCancel=\"HandleOnCancel\">\r\n    <MRow>\r\n        <MCol Cols=\"12\">\r\n            <MTextField @bind-Value=\"userModel.UserName\"\r\n                        Label=\"UserName\"\r\n                        Dense\r\n                        Outlined\r\n                        HideDetails=\"@(\"auto\")\" />\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MTextField @bind-Value=\"userModel.City\"\r\n                        Label=\"City\"\r\n                        Dense\r\n                        Outlined\r\n                        HideDetails=\"@(\"auto\")\" />\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MRadioGroup @bind-Value=\"userModel.Gender\"\r\n                         Label=\"Gender:\"\r\n                         Row\r\n                         Dense\r\n                         Style=\"margin-top: 0\"\r\n                         HideDetails=\"@(\"auto\")\">\r\n                <MRadio Label=\"Male\" Value=\"0\"></MRadio>\r\n                <MRadio Label=\"Female\" Value=\"1\"></MRadio>\r\n            </MRadioGroup>\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MAutocomplete @bind-Value=\"userModel.Favorites\"\r\n                           Items=\"favorites\"\r\n                           Label=\"Favorites\"\r\n                           Multiple\r\n                           ItemValue=\"r => r\"\r\n                           ItemText=\"r => r\"\r\n                           Dense\r\n                           Outlined\r\n                           HideDetails=\"@(\"auto\")\">\r\n            </MAutocomplete>\r\n        </MCol>\r\n        @if (exception != null)\r\n        {\r\n            <MCol Cols=\"12\">\r\n                @exception.Message\r\n            </MCol>\r\n        }\r\n    </MRow>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    readonly List<string> favorites = new() { \"Basketball\", \"Football\", \"Ping-pong\", \"Badminton\" };\r\n\r\n    User user;\r\n    User userModel;\r\n\r\n    private bool value;\r\n    private bool throwException;\r\n    private Exception exception;\r\n\r\n    private void ShowModal()\r\n    {\r\n        userModel = new User();\r\n        value = true;\r\n    }\r\n\r\n    private void EditModal()\r\n    {\r\n        userModel = user.ShallowCopy();\r\n        value = true;\r\n    }\r\n\r\n    private async Task HandleOnSave(ModalActionEventArgs args)\r\n    {\r\n        try\r\n        {\r\n            // logic in real world here\r\n            await Task.Delay(1000);\r\n\r\n            if (throwException)\r\n            {\r\n                throw new Exception(\"Something wrong here!\");\r\n            }\r\n\r\n            user = userModel.ShallowCopy();\r\n\r\n            value = false;\r\n        }\r\n        catch (Exception e)\r\n        {\r\n            args.Cancel();\r\n            exception = e;\r\n        }\r\n    }\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        value = false;\r\n        exception = null;\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        [Required]\r\n        public string UserName { get; set; }\r\n\r\n        [Range(0, 1)]\r\n        public int Gender { get; set; }\r\n\r\n        [Required]\r\n        public string City { get; set; }\r\n\r\n        [Required]\r\n        public List<string> Favorites { get; set; }\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public interface IShallowCopy<T> where T : new() \r\n    {\r\n        T ShallowCopy();\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.Drawer.props.FormModel",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "left",
-        "Title": "Drawer",
-        "Description": "",
-        "Code": "<MSwitch @bind-Value=\"left\" Label=\"Left\"></MSwitch>\r\n\r\n<PDrawer Left=\"left\"\r\n         Title=\"Drawer here!\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        <MSimpleTable Dense>\r\n            <thead>\r\n            <tr>\r\n                <th class=\"text-left\">\r\n                    Name\r\n                </th>\r\n                <th class=\"text-left\">\r\n                    Calories\r\n                </th>\r\n            </tr>\r\n            </thead>\r\n            <tbody>\r\n            @foreach (var item in _desserts)\r\n            {\r\n                <tr @key=\"item\">\r\n                    <td>@item.name</td>\r\n                    <td>@item.calories</td>\r\n                </tr>\r\n            }\r\n            </tbody>\r\n        </MSimpleTable>\r\n    </ChildContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    bool left;\r\n\r\n    private List<(string name, int calories)> _desserts = new()\r\n    {\r\n        (\"Frozen Yogurt\", 159),\r\n        (\"Ice cream sandwich\", 237),\r\n        (\"Eclair\", 262),\r\n        (\"Cupcake\", 305),\r\n        (\"Gingerbread\", 356),\r\n        (\"Jelly bean\", 375),\r\n        (\"Lollipop\", 392),\r\n        (\"Honeycomb\", 408),\r\n        (\"Donut\", 452),\r\n        (\"KitKat\", 518),\r\n    };\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.Drawer.props.Left",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "scrollToTopOnHide",
-        "Title": "AutoScrollToTop",
-        "Description": "",
-        "Code": "<MSwitch @bind-Value=\"autoScrollToTop\" Label=\"AutoScrollToTop\"></MSwitch>\r\n\r\n<PDrawer @bind-Value=\"value\"\r\n         AutoScrollToTop=\"autoScrollToTop\"\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         BodyStyle=\"height: 250px\"\r\n         OnCancel=\"() => value = false\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n    </ChildContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n    private bool autoScrollToTop;\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.Drawer.props.ScrollToTopOnHide",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "withoutActivator",
-        "Title": "Without activator",
-        "Description": "",
-        "Code": "<MButton OnClick=\"() => value = true\">Show Modal</MButton>\r\n\r\n<PDrawer @bind-Value=\"value\"\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         OnCancel=\"() => value = false\">\r\n    Content\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.Drawer.props.WithoutActivator",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "customActions",
-        "Title": "Custom actions",
-        "Description": "",
-        "Code": "<PDrawer @bind-Value=\"value\"\r\n         Persistent\r\n         Title=\"Title\"\r\n         Width=\"500\"\r\n         OnSave=\"OnSave\"\r\n         OnCancel=\"OnCancel\"\r\n         OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n    <DeleteContent Context=\"delete\">\r\n        <MButton Icon Color=\"error\" OnClick=\"delete.Click\" Disabled=\"delete.Loading\">\r\n            <MIcon>mdi-delete</MIcon>\r\n        </MButton>\r\n    </DeleteContent>\r\n    <CancelContent Context=\"cancel\">\r\n        <MButton Icon OnClick=\"cancel.Click\" Disabled=\"cancel.Loading\">\r\n            <MIcon>mdi-cancel</MIcon>\r\n        </MButton>\r\n    </CancelContent>\r\n    <SaveContent Context=\"save\">\r\n        <MButton Icon Color=\"primary\" OnClick=\"save.Click\" Disabled=\"save.Loading\" Loading=\"save.Loading\">\r\n            <MIcon>mdi-check</MIcon>\r\n        </MButton>\r\n    </SaveContent>\r\n</PDrawer>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        await Task.Delay(1000);\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.Drawer.contents.CustomActions",
-        "Style": "",
-        "Debug": false,
-        "Group": 2
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cols": 1,
-    "Related": [
-      "/components/dialogs",
-      "/components/buttons",
-      "/components/icons"
-    ],
-    "Title": "Drawers",
-    "Type": "Drawers",
-    "FullTitle": "Drawers"
-  },
-  {
-    "Desc": "<p>Image Captcha component</p>\n",
-    "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2022-04-26T10:29:42.6082449+08:00",
-    "DemoList": [
-      {
-        "Order": 1,
-        "Name": "index",
-        "Title": "Usage",
-        "Description": "<p><code>PImageCaptcha</code> is an image generated by <code>SkiaSharp</code>. In Linux environment, you need to install <code>libfontconfig1</code>, such as adding <code>RUN apt-get update &amp;&amp; apt-get install -y libfontconfig1</code> to the Dockerfile.</p>\n",
-        "Code": "@using System.Text\r\n<PImageCaptcha CaptchaWidth=\"200\" Outlined Label=\"VerifyCode\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n\r\n@code {\r\n    string randomCode = \"1234567890abcdefghijklmn\";\r\n\r\n    Random random = new Random();\r\n\r\n    private Task<string> RefreshCode()\r\n    {\r\n        var sb = new StringBuilder();\r\n        for (int i = 0; i < 5; i++)\r\n        {\r\n            sb.Append(randomCode[random.Next(0, randomCode.Length)]);\r\n        }\r\n\r\n        return Task.FromResult(sb.ToString());\r\n    }\r\n}",
-        "Type": "Demos.Components.Presets.children.ImageCaptcha.usage.Index",
-        "Style": "",
-        "Debug": false,
-        "Group": 4
-      },
-      {
-        "Order": 0,
-        "Name": "textFieldStyle",
-        "Title": "TextField Style",
-        "Description": "",
-        "Code": "@using System.Text\r\n\r\n<MForm>\r\n    <MContainer>\r\n        <MRow>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Label=\"Regular\" OnRefresh=\"RefreshCode\" ErrorMessage=\"@errorMessage\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Outlined Label=\"OutLine\" OnRefresh=\"RefreshCode\" ErrorMessage=\"@errorMessage\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Filled Label=\"Filled\" OnRefresh=\"RefreshCode\" ErrorMessage=\"@errorMessage\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Dense Label=\"Dense\" OnRefresh=\"RefreshCode\" ErrorMessage=\"@errorMessage\"></PImageCaptcha>\r\n            </MCol>\r\n            <MCol Cols=\"12\" Sm=\"6\">\r\n                <PImageCaptcha Solo Label=\"Solo\" OnRefresh=\"RefreshCode\" ErrorMessage=\"@errorMessage\"></PImageCaptcha>\r\n            </MCol>\r\n        </MRow>\r\n    </MContainer>\r\n</MForm>\r\n\r\n\r\n@code {\r\n    string errorMessage = \"Verify Code Error\";\r\n\r\n    string randomCode = \"1234567890abcdefghijklmn\";\r\n\r\n    Random random = new Random();\r\n\r\n    private Task<string> RefreshCode()\r\n    {\r\n        var sb = new StringBuilder();\r\n\r\n        for (int i = 0; i < 5; i++)\r\n        {\r\n            sb.Append(randomCode[random.Next(0, randomCode.Length)]);\r\n        }\r\n\r\n        return Task.FromResult(sb.ToString());\r\n    }\r\n}",
-        "Type": "Demos.Components.Presets.children.ImageCaptcha.props.TextFieldStyle",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "verifyCode",
-        "Title": "Custom verification code results",
-        "Description": "",
-        "Code": "<PImageCaptcha CaptchaWidth=\"200\" Outlined Label=\"VerifyCode\" ErrorMessage=\"@ErrorMessage\" VerifyCode=\"@verifyCode\" OnRefresh=\"RefreshCode\"></PImageCaptcha>\r\n\r\n@code {\r\n    string randomCode = \"123456789\";\r\n\r\n    string calcFunCode = \"+-*\";\r\n\r\n    string verifyCode = \"\";\r\n\r\n    string ErrorMessage = \"Verify code error\";\r\n\r\n    Random random = new Random();\r\n\r\n    protected override Task OnInitializedAsync()\r\n    {\r\n        RefreshCode();\r\n        return base.OnInitializedAsync();\r\n    }\r\n\r\n    private Task<string> RefreshCode()\r\n    {\r\n        var firstNumber = randomCode[random.Next(0, randomCode.Length)].ToString();\r\n\r\n        var secondNumber = randomCode[random.Next(0, randomCode.Length)].ToString();\r\n\r\n        var calcFun = calcFunCode[random.Next(0, calcFunCode.Length)].ToString();\r\n\r\n        switch (calcFun)\r\n        {\r\n            case \"+\":\r\n                verifyCode = (int.Parse(firstNumber) + int.Parse(secondNumber)).ToString();\r\n                break;\r\n            case \"-\":\r\n                verifyCode = (int.Parse(firstNumber) - int.Parse(secondNumber)).ToString();\r\n                break;\r\n            case \"*\":\r\n                verifyCode = (int.Parse(firstNumber) * int.Parse(secondNumber)).ToString();\r\n                break;\r\n        }\r\n        \r\n        StateHasChanged();\r\n        return Task.FromResult(firstNumber + calcFun + secondNumber);\r\n    }\r\n}",
-        "Type": "Demos.Components.Presets.children.ImageCaptcha.props.VerifyCode",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cols": 1,
-    "Related": [
-      "/components/text-fields",
-      "/components/image"
-    ],
-    "Title": "Image Captcha",
-    "Type": "Image Captcha",
-    "FullTitle": "Image Captcha"
-  },
-  {
-    "Desc": "<p>A cascade selector designed for the mobile.</p>\n",
-    "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2022-08-01T09:58:16.7431897+08:00",
-    "DemoList": [
-      {
-        "Order": 1,
-        "Name": "index",
-        "Title": "Usage",
-        "Description": "",
-        "Code": "<MRow Align=\"AlignTypes.Baseline\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <MButton OnClick=\"() => visible = true\">Select</MButton>\r\n        <PMobileCascader @bind-Value=\"value\"\r\n                         @bind-Visible=\"visible\"\r\n                         Title=\"省市区\"\r\n                         Items=\"Datas\"\r\n                         ItemText=\"d => d.Name\"\r\n                         ItemValue=\"d => d.Code\"\r\n                         ItemChildren=\"d => d.Children\"\r\n                         ItemDisabled=\"d => d.Disabled\">\r\n        </PMobileCascader>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        Selected values: @string.Join(\",\", value)\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    List<string> value = new();\r\n\r\n    bool visible;\r\n\r\n    record Data(string Code, string Name, List<Data> Children = null, bool Disabled = false);\r\n\r\n    static readonly List<Data> Datas = new List<Data>()\r\n    {\r\n        new Data(\"sh\", \"上海\", new List<Data>()\r\n        {\r\n            new Data(\"sh-hp\", \"黄浦区\"),\r\n            new Data(\"sh-xh\", \"徐汇区\"),\r\n            new Data(\"sh-cn\", \"长宁区\"),\r\n            new Data(\"sh-ja\", \"静安区\", Disabled: true),\r\n        }),\r\n        new Data(\"zj\", \"浙江\", new List<Data>()\r\n        {\r\n            new Data(\"zj-hz\", \"杭州\", new List<Data>()\r\n            {\r\n                new Data(\"zj-hz-sc\", \"上城区\"),\r\n                new Data(\"zj-hz-xc\", \"下城区\"),\r\n                new Data(\"zj-hz-qt\", \"钱塘区\"),\r\n            }),\r\n            new Data(\"zj-nb\", \"宁波\", new List<Data>()\r\n            {\r\n                new Data(\"zj-nb-jb\", \"江北区\"),\r\n                new Data(\"zj-nb-hs\", \"海曙区\"),\r\n                new Data(\"zj-nb-bl\", \"北仑区\"),\r\n            }),\r\n        }),\r\n        new Data(\"gd\", \"广东\", new List<Data>()\r\n        {\r\n            new Data(\"gd-sz\", \"深圳\", new List<Data>()\r\n            {\r\n                new Data(\"gd-sz-ns\", \"南山区\"),\r\n                new Data(\"gd-sz-lh\", \"罗湖区\"),\r\n            }),\r\n            new Data(\"gd-gz\", \"广州\", new List<Data>()\r\n            {\r\n                new Data(\"gd-gz-by\", \"白云区\"),\r\n                new Data(\"gd-gz-th\", \"天河区\"),\r\n                new Data(\"gd-gz-hz\", \"海珠区\"),\r\n            }),\r\n        }),\r\n    };\r\n\r\n}\r\n",
-        "Type": "Demos.Components.Presets.children.MobileCascader.usage.Index",
-        "Style": "",
-        "Debug": false,
-        "Group": 4
-      },
-      {
-        "Order": 0,
-        "Name": "loadChildren",
-        "Title": "Load children",
-        "Description": "",
-        "Code": "<MRow Align=\"AlignTypes.Baseline\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <PMobileCascader @bind-Value=\"value\"\r\n                         TItem=\"Data\"\r\n                         TItemValue=\"string\"\r\n                         Title=\"省市区\"\r\n                         Items=\"Datas\"\r\n                         ItemText=\"d => d.Name\"\r\n                         ItemValue=\"d => d.Code\"\r\n                         ItemChildren=\"d => d.Children\"\r\n                         ItemDisabled=\"d => d.Disabled\"\r\n                         OnLoadChildren=\"HandleOnLoadChildren\">\r\n            <ActivatorContent>\r\n                <MButton @attributes=\"@context.Attrs\">Select</MButton>\r\n            </ActivatorContent>\r\n        </PMobileCascader>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        Selected values: @string.Join(\",\", value)\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    List<string> value = new();\r\n\r\n    private async Task HandleOnLoadChildren(Data item)\r\n    {\r\n        // mock the http request\r\n        await Task.Delay(1000);\r\n\r\n        item.Children = item.Code switch\r\n        {\r\n            \"china\" => new List<Data>()\r\n            {\r\n                new(\"sh\", \"上海\"), new(\"zj\", \"浙江\"), new(\"gd\", \"广东\"),\r\n            },\r\n            \"sh\" => new List<Data>()\r\n            {\r\n                new(\"sh-hp\", \"黄浦区\"), new(\"sh-xh\", \"徐汇区\"), new(\"sh-cn\", \"长宁区\"), new(\"sh-ja\", \"静安区\", disabled: true),\r\n            },\r\n            \"zj\" => new List<Data>()\r\n            {\r\n                new(\"zj-hz\", \"杭州\"), new(\"zj-nb\", \"宁波\"),\r\n            },\r\n            \"gd\" => new List<Data>()\r\n            {\r\n                new(\"gd-sz\", \"深圳\"), new(\"gd-gz\", \"广州\"),\r\n            },\r\n            \"zj-hz\" => new List<Data>()\r\n            {\r\n                new(\"zj-hz-sc\", \"上城区\"), new(\"zj-hz-xc\", \"下城区\"), new(\"zj-hz-qt\", \"钱塘区\"),\r\n            },\r\n            \"zj-nb\" => new List<Data>()\r\n            {\r\n                new(\"zj-nb-jb\", \"江北区\"), new(\"zj-nb-hs\", \"海曙区\"), new(\"zj-nb-bl\", \"北仑区\"),\r\n            },      \r\n            \"gd-sz\" => new List<Data>()\r\n            {\r\n                new(\"gd-sz-ns\", \"南山区\"), new(\"gd-sz-lh\", \"罗湖区\"),\r\n            },            \r\n            \"gd-gz\" => new List<Data>()\r\n            {\r\n                new(\"gd-gz-by\", \"白云区\"), new(\"gd-gz-th\", \"天河区\"), new(\"gd-gz-hz\", \"海珠区\"),\r\n            },\r\n            _ => new List<Data>()\r\n        };\r\n    }\r\n\r\n    class Data\r\n    {\r\n        public string Name { get; set; }\r\n        public string Code { get; set; }\r\n        public List<Data> Children { get; set; }\r\n        public bool Disabled { get; set; }\r\n\r\n        public Data(string code, string name, List<Data> children = null, bool disabled = false)\r\n        {\r\n            Code = code;\r\n            Name = name;\r\n            Children = children;\r\n            Disabled = disabled;\r\n        }\r\n    }\r\n\r\n    static readonly List<Data> Datas = new()\r\n    {\r\n        new Data(\"china\", \"中国\")\r\n    };\r\n\r\n}\r\n",
-        "Type": "Demos.Components.Presets.children.MobileCascader.events.LoadChildren",
-        "Style": "",
-        "Debug": false,
-        "Group": 1
-      },
-      {
-        "Order": 0,
-        "Name": "onSelect",
-        "Title": "On select",
-        "Description": "",
-        "Code": "<MRow Align=\"AlignTypes.Baseline\">\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        <PMobileCascader TItem=\"Data\"\r\n                         TItemValue=\"string\"\r\n                         Title=\"省市区\"\r\n                         Items=\"@Datas\"\r\n                         ItemText=\"d => d.Name\"\r\n                         ItemValue=\"d => d.Code\"\r\n                         ItemChildren=\"d => d.Children\"\r\n                         ItemDisabled=\"d => d.Disabled\"\r\n                         OnSelect=\"HandleOnSelect\"\r\n                         OnDeselect=\"HandleOnDeselect\">\r\n            <ActivatorContent>\r\n                <MButton @attributes=\"@context.Attrs\">Select</MButton>\r\n            </ActivatorContent>\r\n        </PMobileCascader>\r\n    </MCol>\r\n    <MCol Cols=\"12\" Md=\"6\">\r\n        Selected values: @string.Join(\"-\", selectedItems.Select(item => item.Name))\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    List<Data> selectedItems = new();\r\n\r\n    void HandleOnSelect(Data selected)\r\n    {\r\n        selectedItems.Add(selected);\r\n    }\r\n\r\n    void HandleOnDeselect(Data deselected)\r\n    {\r\n        selectedItems.Remove(deselected);\r\n    }\r\n\r\n    record Data(string Code, string Name, List<Data> Children = null, bool Disabled = false);\r\n\r\n    static readonly List<Data> Datas = new List<Data>()\r\n    {\r\n        new Data(\"sh\", \"上海\", new List<Data>()\r\n        {\r\n            new Data(\"sh-hp\", \"黄浦区\"),\r\n            new Data(\"sh-xh\", \"徐汇区\"),\r\n            new Data(\"sh-cn\", \"长宁区\"),\r\n            new Data(\"sh-ja\", \"静安区\", Disabled: true),\r\n        }),\r\n        new Data(\"zj\", \"浙江\", new List<Data>()\r\n        {\r\n            new Data(\"zj-hz\", \"杭州\", new List<Data>()\r\n            {\r\n                new Data(\"zj-hz-sc\", \"上城区\"),\r\n                new Data(\"zj-hz-xc\", \"下城区\"),\r\n                new Data(\"zj-hz-qt\", \"钱塘区\"),\r\n            }),\r\n            new Data(\"zj-nb\", \"宁波\", new List<Data>()\r\n            {\r\n                new Data(\"zj-nb-jb\", \"江北区\"),\r\n                new Data(\"zj-nb-hs\", \"海曙区\"),\r\n                new Data(\"zj-nb-bl\", \"北仑区\"),\r\n            }),\r\n        }),\r\n        new Data(\"gd\", \"广东\", new List<Data>()\r\n        {\r\n            new Data(\"gd-sz\", \"深圳\", new List<Data>()\r\n            {\r\n                new Data(\"gd-sz-ns\", \"南山区\"),\r\n                new Data(\"gd-sz-lh\", \"罗湖区\"),\r\n            }),\r\n            new Data(\"gd-gz\", \"广州\", new List<Data>()\r\n            {\r\n                new Data(\"gd-gz-by\", \"白云区\"),\r\n                new Data(\"gd-gz-th\", \"天河区\"),\r\n                new Data(\"gd-gz-hz\", \"海珠区\"),\r\n            }),\r\n        }),\r\n    };\r\n\r\n}\r\n",
-        "Type": "Demos.Components.Presets.children.MobileCascader.events.OnSelect",
-        "Style": "",
-        "Debug": false,
-        "Group": 1
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cols": 1,
-    "Related": [
-      "/components/lists",
-      "/components/tabs",
-      "/components/buttons"
-    ],
-    "Title": "Mobile cascader",
-    "Type": "MobileCascader",
-    "FullTitle": "Mobile cascader"
-  },
-  {
-    "Desc": "<p>When requiring users to interact with the application, but without jumping to a new page and interrupting the user's\nworkflow, you can use <code>Modal</code> to create a new floating layer over the current page to get user feedback or display\ninformation.</p>\n",
-    "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T10:24:25.3497045+08:00",
-    "DemoList": [
-      {
-        "Order": 1,
-        "Name": "index",
-        "Title": "Usage",
-        "Description": "",
-        "Code": "<PModal Title=\"Title\" Width=\"500\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PModal>",
-        "Type": "Demos.Components.Presets.children.Modal.usage.Index",
-        "Style": "",
-        "Debug": false,
-        "Group": 4
-      },
-      {
-        "Order": 0,
-        "Name": "actionProps",
-        "Title": "Action Props",
-        "Description": "",
-        "Code": "<PModal @bind-Value=\"value\" \r\n        Persistent\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        SaveProps=\"props => props.Outlined = true\"\r\n        CancelProps=\"@(props => props.Color = \"orange\")\"\r\n        DeleteProps=\"@(props => props.Style = \"font-weight:bold;\")\"\r\n        OnSave=\"OnSave\" \r\n        OnCancel=\"OnCancel\" \r\n        OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        await Task.Delay(1000);\r\n\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.Modal.props.ActionProps",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "actions",
-        "Title": "Actions",
-        "Description": "",
-        "Code": "<MSwitch @bind-Value=\"hideCancelAction\" Label=\"HideCancelAction\"></MSwitch>\r\n\r\n<PModal @bind-Value=\"value\" \r\n        HideCancelAction=\"hideCancelAction\" \r\n        Persistent\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        OnSave=\"OnSave\" \r\n        OnCancel=\"OnCancel\" \r\n        OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n    private bool hideCancelAction;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        await Task.Delay(1000);\r\n\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.Modal.props.Actions",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "formModel",
-        "Title": "FormModel",
-        "Description": "",
-        "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MSwitch @bind-Value=\"throwException\" Label=\"throw exception when calling OnSave\"></MSwitch>\r\n\r\n<MButton OnClick=\"ShowModal\">Show Modal</MButton>\r\n@if (user != null)\r\n{\r\n    <div>\r\n        @System.Text.Json.JsonSerializer.Serialize(user)\r\n        <MButton Color=\"primary\" Text OnClick=\"EditModal\">edit</MButton>\r\n    </div>\r\n}\r\n\r\n<PModal @bind-Value=\"value\"\r\n        FormModel=\"userModel\"\r\n        Persistent\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        OnSave=\"HandleOnSave\"\r\n        OnCancel=\"HandleOnCancel\">\r\n    <MRow>\r\n        <MCol Cols=\"12\">\r\n            <MTextField @bind-Value=\"userModel.UserName\"\r\n                        Label=\"UserName\"\r\n                        Dense\r\n                        Outlined\r\n                        HideDetails=\"@(\"auto\")\" />\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MTextField @bind-Value=\"userModel.City\"\r\n                        Label=\"City\"\r\n                        Dense\r\n                        Outlined\r\n                        HideDetails=\"@(\"auto\")\" />\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MRadioGroup @bind-Value=\"userModel.Gender\"\r\n                         Label=\"Gender:\"\r\n                         Row\r\n                         Dense\r\n                         Style=\"margin-top: 0\"\r\n                         HideDetails=\"@(\"auto\")\">\r\n                <MRadio Label=\"Male\" Value=\"0\"></MRadio>\r\n                <MRadio Label=\"Female\" Value=\"1\"></MRadio>\r\n            </MRadioGroup>\r\n        </MCol>\r\n        <MCol Cols=\"12\">\r\n            <MAutocomplete @bind-Value=\"userModel.Favorites\"\r\n                           Items=\"favorites\"\r\n                           Label=\"Favorites\"\r\n                           Multiple\r\n                           ItemValue=\"r => r\"\r\n                           ItemText=\"r => r\"\r\n                           Dense\r\n                           Outlined\r\n                           HideDetails=\"@(\"auto\")\">\r\n            </MAutocomplete>\r\n        </MCol>\r\n        @if (exception != null)\r\n        {\r\n            <MCol Cols=\"12\">\r\n                @exception.Message\r\n            </MCol>\r\n        }\r\n    </MRow>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    readonly List<string> favorites = new() { \"Basketball\", \"Football\", \"Ping-pong\", \"Badminton\" };\r\n\r\n    User user;\r\n    User userModel;\r\n\r\n    private bool value;\r\n    private bool throwException;\r\n    private Exception exception;\r\n\r\n    private void ShowModal()\r\n    {\r\n        userModel = new User();\r\n        value = true;\r\n    }\r\n\r\n    private void EditModal()\r\n    {\r\n        userModel = user.ShallowCopy();\r\n        value = true;\r\n    }\r\n\r\n    private async Task HandleOnSave(ModalActionEventArgs args)\r\n    {\r\n        try\r\n        {\r\n            // logic in real world here\r\n            await Task.Delay(1000);\r\n\r\n            if (throwException)\r\n            {\r\n                throw new Exception(\"Something wrong here!\");\r\n            }\r\n\r\n            user = userModel.ShallowCopy();\r\n\r\n            value = false;\r\n        }\r\n        catch (Exception e)\r\n        {\r\n            args.Cancel();\r\n            exception = e;\r\n        }\r\n    }\r\n\r\n    private void HandleOnCancel()\r\n    {\r\n        value = false;\r\n        exception = null;\r\n    }\r\n\r\n    public class User : IShallowCopy<User>\r\n    {\r\n        [Required]\r\n        public string UserName { get; set; }\r\n\r\n        [Range(0, 1)]\r\n        public int Gender { get; set; }\r\n\r\n        [Required]\r\n        public string City { get; set; }\r\n\r\n        [Required]\r\n        public List<string> Favorites { get; set; }\r\n\r\n        public User ShallowCopy()\r\n        {\r\n            var user = (User)this.MemberwiseClone();\r\n            user.Favorites = Favorites;\r\n            return user;\r\n        }\r\n    }\r\n\r\n    public interface IShallowCopy<T> where T : new() \r\n    {\r\n        T ShallowCopy();\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.Modal.props.FormModel",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "scrollToTopOnHide",
-        "Title": "AutoScrollToTop",
-        "Description": "",
-        "Code": "<MSwitch @bind-Value=\"autoScrollToTop\" Label=\"AutoScrollToTop\"></MSwitch>\r\n\r\n<PModal @bind-Value=\"value\"\r\n        AutoScrollToTop=\"autoScrollToTop\"\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        BodyStyle=\"height: 250px\"\r\n        OnCancel=\"() => value = false\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n        <div>Content</div>\r\n    </ChildContent>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n    private bool autoScrollToTop;\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.Modal.props.ScrollToTopOnHide",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "withoutActivator",
-        "Title": "Without activator",
-        "Description": "",
-        "Code": "<MButton OnClick=\"() => value = true\">Show Modal</MButton>\r\n\r\n<PModal @bind-Value=\"value\"\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        OnCancel=\"() => value = false\">\r\n    Content\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.Modal.props.WithoutActivator",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "customActions",
-        "Title": "Custom actions",
-        "Description": "",
-        "Code": "<PModal @bind-Value=\"value\"\r\n        Persistent\r\n        Title=\"Title\"\r\n        Width=\"500\"\r\n        OnSave=\"OnSave\"\r\n        OnCancel=\"OnCancel\"\r\n        OnDelete=\"OnDelete\">\r\n    <ActivatorContent>\r\n        <MButton @attributes=\"@context.Attrs\">Activator</MButton>\r\n    </ActivatorContent>\r\n    <ChildContent>\r\n        Content\r\n    </ChildContent>\r\n    <DeleteContent Context=\"delete\">\r\n        <MButton Icon Color=\"error\" OnClick=\"delete.Click\" Disabled=\"delete.Loading\">\r\n            <MIcon>mdi-delete</MIcon>\r\n        </MButton>\r\n    </DeleteContent>\r\n    <CancelContent Context=\"cancel\">\r\n        <MButton Icon OnClick=\"cancel.Click\" Disabled=\"cancel.Loading\">\r\n            <MIcon>mdi-cancel</MIcon>\r\n        </MButton>\r\n    </CancelContent>\r\n    <SaveContent Context=\"save\">\r\n        <MButton Icon Color=\"primary\" OnClick=\"save.Click\" Disabled=\"save.Loading\" Loading=\"save.Loading\">\r\n            <MIcon>mdi-check</MIcon>\r\n        </MButton>\r\n    </SaveContent>\r\n</PModal>\r\n\r\n@code {\r\n\r\n    private bool value;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        await Task.Delay(1000);\r\n        value = false;\r\n    }\r\n\r\n    private void OnCancel()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n    private void OnDelete()\r\n    {\r\n        value = false;\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.Modal.contents.CustomActions",
-        "Style": "",
-        "Debug": false,
-        "Group": 2
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cols": 1,
-    "Related": [
-      "/components/dialogs",
-      "/components/popup-service",
-      "/components/drawers"
-    ],
-    "Title": "Modals",
-    "Type": "Modals",
-    "FullTitle": "Modals"
-  },
-  {
-    "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T10:24:25.3507039+08:00",
-    "DemoList": [
-      {
-        "Order": 0,
-        "Name": "confirm",
-        "Title": "Confirm",
-        "Description": "",
-        "Code": "@using AlertTypes = BlazorComponent.AlertTypes\r\n\r\n<div class=\"d-flex justify-space-between\">\r\n    <MButton Color=\"primary\" OnClick=\"() => Show()\">Default</MButton>\r\n    <MButton Color=\"success\" OnClick=\"() => Show(AlertTypes.Success)\">Success</MButton>\r\n    <MButton Color=\"info\" OnClick=\"() => Show(AlertTypes.Info)\">Info</MButton>\r\n    <MButton Color=\"warning\" OnClick=\"() => Show(AlertTypes.Warning)\">Warning</MButton>\r\n    <MButton Color=\"error\" OnClick=\"() => Show(AlertTypes.Error)\">Error</MButton>\r\n</div>\r\n\r\n<PConfirm Visible=\"visible\"\r\n          Title=\"确认操作\"\r\n          Type=\"type\"\r\n          OnCancel=\"Hide\"\r\n          OnOk=\"Ok\">\r\n    您确认该操作吗？\r\n</PConfirm>\r\n\r\n@code {\r\n\r\n    AlertTypes type = 0;\r\n    bool visible;\r\n\r\n    void Show(AlertTypes t = 0)\r\n    {\r\n        type = t;\r\n        visible = true;\r\n    }\r\n\r\n    void Hide()\r\n    {\r\n        visible = false;\r\n    }\r\n\r\n    void Ok()\r\n    {\r\n        visible = false;\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.NotGrouped.props.Confirm",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "pageHeader",
-        "Title": "PageHeader",
-        "Description": "",
-        "Code": "<PPageHeader Title=\"Order\"\r\n             Subtitle=\"This is an order page!\"\r\n             OnBack=\"OnBack\"\r\n             OnSearch=\"OnSearch\"\r\n             ShowFiltersByDefault>\r\n    <LeftActions>\r\n        <MButton Color=\"primary\"><MIcon Left>mdi-plus</MIcon>Add Order</MButton>\r\n    </LeftActions>\r\n\r\n    <RightActions>\r\n        <MButton Icon OnClick=\"OnClear\">\r\n            <MIcon>mdi-refresh</MIcon>\r\n        </MButton>\r\n    </RightActions>\r\n\r\n    <Filters Context=\"filter\">\r\n        <MRow Dense>\r\n            <MCol Cols=\"6\">\r\n                <MTextField @bind-Value=\"orderId\"\r\n                            Label=\"Order ID\"\r\n                            Outlined\r\n                            Dense\r\n                            TValue=\"string\"\r\n                            HideDetails=\"true\"\r\n                            OnKeyDown=\"@filter.onEnter\">\r\n                </MTextField>\r\n            </MCol>\r\n            <MCol Cols=\"6\">\r\n                <MSelect @bind-Value=\"user\"\r\n                         Outlined\r\n                         Dense\r\n                         Label=\"User\"\r\n                         Items=\"users\"\r\n                         ItemValue=\"i => i\"\r\n                         ItemText=\"i => i\"\r\n                         HideDetails=\"true\"\r\n                         TItem=\"string\"\r\n                         TValue=\"string\"\r\n                         TItemValue=\"string\"\r\n                         OnSelectedItemUpdate=\"_ => filter.onSearch()\">\r\n                </MSelect>\r\n            </MCol>\r\n            <MCol Cols=\"6\">\r\n                <MMenu @bind-Value=\"visible1\"\r\n                       CloseOnContentClick=\"false\"\r\n                       OffsetY\r\n                       MinWidth=\"290\">\r\n                    <ActivatorContent>\r\n                        <MTextField @bind-Value=\"start\"\r\n                                    Label=\"Start date\"\r\n                                    Outlined\r\n                                    Dense\r\n                                    Readonly\r\n                                    HideDetails=\"true\"\r\n                                    @attributes=\"@context.Attrs\">\r\n                        </MTextField>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        <MDatePicker @bind-Value=\"date1\"\r\n                                     NoTitle\r\n                                     Scrollable>\r\n                            <MSpacer></MSpacer>\r\n                            <MButton Text\r\n                                     Color=\"primary\"\r\n                                     OnClick=\"() => visible1 = false\">\r\n                                Cancel\r\n                            </MButton>\r\n                            <MButton Text\r\n                                     Color=\"primary\"\r\n                                     OnClick=\"() => StartDateClick(filter.onSearch)\">\r\n                                OK\r\n                            </MButton>\r\n                        </MDatePicker>\r\n                    </ChildContent>\r\n                </MMenu>\r\n            </MCol>\r\n            <MCol Cols=\"6\">\r\n                <MMenu @bind-Value=\"visible2\"\r\n                       CloseOnContentClick=\"false\"\r\n                       OffsetY\r\n                       MinWidth=\"290\">\r\n                    <ActivatorContent>\r\n                        <MTextField @bind-Value=\"end\"\r\n                                    Label=\"End date\"\r\n                                    Readonly\r\n                                    Outlined\r\n                                    Dense\r\n                                    HideDetails=\"true\"\r\n                                    @attributes=\"@context.Attrs\">\r\n                        </MTextField>\r\n                    </ActivatorContent>\r\n                    <ChildContent>\r\n                        <MDatePicker @bind-Value=\"date2\"\r\n                                     NoTitle\r\n                                     Scrollable>\r\n                            <MSpacer></MSpacer>\r\n                            <MButton Text\r\n                                     Color=\"primary\"\r\n                                     OnClick=\"() => visible2 = false\">\r\n                                Cancel\r\n                            </MButton>\r\n                            <MButton Text\r\n                                     Color=\"primary\"\r\n                                     OnClick=\"() => EndDateClick(filter.onSearch)\">\r\n                                OK\r\n                            </MButton>\r\n                        </MDatePicker>\r\n                    </ChildContent>\r\n                </MMenu>\r\n            </MCol>\r\n        </MRow>\r\n    </Filters>\r\n</PPageHeader>\r\n\r\n@code {\r\n    readonly List<string> users = new() { \"Rachel Greene\", \"Monica Geller\", \"Joey Tribbiani\", \"Ross Geller\", \"Chandler Bing\", \"Phoebe Buffay\" };\r\n\r\n    DateOnly date1 = DateOnly.FromDateTime(DateTime.Now);\r\n    DateOnly date2 = DateOnly.FromDateTime(DateTime.Now);\r\n\r\n    bool visible1;\r\n    bool visible2;\r\n\r\n    string orderId;\r\n    string user;\r\n    string start;\r\n    string end;\r\n    \r\n    async Task StartDateClick(Func<Task> onSearch)\r\n    {\r\n        start = date1.ToShortDateString(); \r\n        visible1 = false;\r\n        await onSearch();\r\n    }\r\n\r\n    async Task EndDateClick(Func<Task> onSearch)\r\n    {\r\n        end = date2.ToShortDateString(); \r\n        visible2 = false;\r\n        await onSearch();\r\n    }\r\n\r\n    void OnBack()\r\n    {\r\n        // navigate\r\n    }\r\n\r\n    Task OnSearch()\r\n    {\r\n        return Task.Delay(1000);\r\n    }\r\n\r\n    void OnClear()\r\n    {\r\n        orderId = null;\r\n        user = null;\r\n        start = null;\r\n        end = null;\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.NotGrouped.props.PageHeader",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 30,
-        "Name": "sidebar",
-        "Title": "Sidebar",
-        "Description": "",
-        "Code": "<Masa.Blazor.Presets.PSidebar @bind-Value=\"selectedKey\"\r\n                              Dense\r\n                              Color=\"indigo\"\r\n                              Items=\"menus\"\r\n                              Title=\"m => m.Label\"\r\n                              Icon=\"m => m.Icon\"\r\n                              Key=\"m => m.Value\"\r\n                              Children=\"m => m.SubMenus\"\r\n                              TItem=\"Menu\"\r\n                              OnClick=\"Click\">\r\n</Masa.Blazor.Presets.PSidebar>\r\n\r\n@code {\r\n\r\n    static List<Menu> menus = new()\r\n    {\r\n        new Menu() { Label = \"Home\", Icon = \"mdi-home\", Value = \"Home\" },\r\n        new Menu()\r\n        {\r\n            Label = \"Users\",\r\n            Icon = \"mdi-account-circle\",\r\n            Value = \"Users\",\r\n            SubMenus = new List<Menu>()\r\n            {\r\n                new()\r\n                {\r\n                    Label = \"Admin\",\r\n                    SubMenus = new List<Menu>()\r\n                    {\r\n                        new() { Label = \"Management\", Icon = \"mdi-account-multiple-outline\", Value = \"Management\" },\r\n                        new() { Label = \"Settings\", Icon = \"mdi-cog-outline\", Value = \"Settings\" },\r\n                    }\r\n                },\r\n                new()\r\n                {\r\n                    Label = \"Actions\",\r\n                    SubMenus = new List<Menu>()\r\n                    {\r\n                        new() { Label = \"Create\", Icon = \"mdi-plus-outline\", Value = \"Create\" },\r\n                        new() { Label = \"Read\", Icon = \"mdi-file-outline\", Value = \"Read\" },\r\n                        new() { Label = \"Update\", Icon = \"mdi-update\", Value = \"Update\" },\r\n                        new() { Label = \"Delete\", Icon = \"mdi-delete\", Value = \"Delete\" },\r\n                    }\r\n                },\r\n            }\r\n        },\r\n    };\r\n\r\n    StringNumber selectedKey = \"Management\";\r\n\r\n    void Click(Menu item)\r\n    {\r\n    // code with clicked item\r\n    }\r\n\r\n    class Menu\r\n    {\r\n        public string Label { get; set; }\r\n\r\n        public string Value { get; set; }\r\n\r\n        public string Icon { get; set; }\r\n\r\n        public List<Menu> SubMenus { get; set; }\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.NotGrouped.props.Sidebar",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cols": 1,
-    "Related": [
-      "/components/buttons",
-      "/components/text-fields",
-      "/components/lists"
-    ],
-    "Title": "Not Grouped",
-    "Type": "NotGrouped",
-    "FullTitle": "Not Grouped"
-  },
-  {
-    "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2022-03-28T10:24:25.3517054+08:00",
+    "LastWriteTime": "2022-08-29T11:38:52.1668735+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7268,7 +7181,7 @@
         "Title": "Alert",
         "Description": "",
         "Code": "@inject IPopupService PopupService\r\n\r\n<MAlert Type=\"AlertTypes.Info\">\r\n    <div>\r\n        在 <code>MApp</code> 组件通过 <code>AlertParameters</code> 设置Alert的默认样式和行为。\r\n    </div>\r\n    <div>\r\n        例如：<code>AlertParameters=\"param => { param.Right = true; }\"</code>。\r\n    </div>\r\n</MAlert>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowBasic\">Basic Alert</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup @bind-Value=\"alertType\">\r\n    <MRadio Value=\"AlertTypes.Success\" Label=\"@nameof(AlertTypes.Success)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Warning\" Label=\"@nameof(AlertTypes.Warning)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Error\" Label=\"@nameof(AlertTypes.Error)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Info\" Label=\"@nameof(AlertTypes.Info)\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"ShowTyped\">Typed Alert</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowException\">Exception Alert</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowCustom\">Custom Alert</MButton>\r\n\r\n@code {\r\n\r\n    AlertTypes alertType = AlertTypes.None;\r\n\r\n    private Task ShowBasic()\r\n    {\r\n        return PopupService.AlertAsync(\"This is the alert content!\");\r\n    }\r\n\r\n    private Task ShowTyped()\r\n    {\r\n        return PopupService.AlertAsync(\"This is the alert content!\", alertType);\r\n    }\r\n\r\n    private Task ShowException()\r\n    {\r\n        try\r\n        {\r\n            throw new Exception(\"something wrong!\");\r\n        }\r\n        catch (Exception e)\r\n        {\r\n            return PopupService.AlertAsync(e);\r\n        }\r\n    }\r\n\r\n    private Task ShowCustom()\r\n    {\r\n        return PopupService.AlertAsync(param =>\r\n        {\r\n            param.Centered = true;\r\n            param.Content = \"This is the alert content!\";\r\n            param.Color = \"error\";\r\n            param.Light = true;\r\n            param.Outlined = true;\r\n            param.Right = true;\r\n            param.Top = true;\r\n            param.ActionProps = a =>\r\n            {\r\n                a.Small = true;\r\n                a.Color = \"error\";\r\n            };\r\n        });\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.PopupService.events.Alert",
+        "Type": "Demos.Components.PopupService.events.Alert",
         "Style": "",
         "Debug": false,
         "Group": 1
@@ -7279,7 +7192,7 @@
         "Title": "Confirm",
         "Description": "",
         "Code": "@inject IPopupService PopupService\r\n\r\n<MAlert Type=\"AlertTypes.Info\">\r\n    <div>\r\n        在 <code>MApp</code> 组件通过 <code>ConfirmParameters</code> 设置Confirm的默认样式和行为。\r\n    </div>\r\n    <div>\r\n        例如：<code>ConfirmParameters=\"@@(\"param => { param.OkText = \"Confirm\"; })\"</code>。\r\n    </div>\r\n</MAlert>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowBasic\">Basic Confirm</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup @bind-Value=\"alertType\">\r\n    <MRadio Value=\"AlertTypes.Success\" Label=\"@nameof(AlertTypes.Success)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Warning\" Label=\"@nameof(AlertTypes.Warning)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Error\" Label=\"@nameof(AlertTypes.Error)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Info\" Label=\"@nameof(AlertTypes.Info)\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"ShowTyped\">Typed Confirm</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MCheckbox @bind-Value=\"throwException\" Label=\"Throw exception\"></MCheckbox>\r\n<MButton OnClick=\"ShowAsync\">Async Confirm</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowCustom\">Custom Confirm</MButton>\r\n\r\n@code {\r\n\r\n    private AlertTypes alertType = AlertTypes.None;\r\n    private bool throwException;\r\n\r\n    private async Task ShowBasic()\r\n    {\r\n        var confirmed = await PopupService.ConfirmAsync(\"Title\", \"This is the confirm content!\");\r\n\r\n        await HandleConfirmResult(confirmed);\r\n    }\r\n\r\n    private async Task ShowTyped()\r\n    {\r\n        var confirmed = await PopupService.ConfirmAsync(\r\n            \"Title\",\r\n            \"This is the confirm content!\",\r\n            alertType);\r\n\r\n        await HandleConfirmResult(confirmed);\r\n    }\r\n\r\n    private async Task ShowAsync()\r\n    {\r\n        await PopupService.ConfirmAsync(\r\n            \"Title\",\r\n            \"This is the confirm content!\",\r\n            async args =>\r\n            {\r\n                try\r\n                {\r\n                    await Task.Delay(1000);\r\n\r\n                    if (throwException)\r\n                    {\r\n                        throw new Exception(\"something wrong!\");\r\n                    }\r\n\r\n                    await PopupService.AlertAsync(\"Handle onOk successfully!\", AlertTypes.Success);\r\n                }\r\n                catch (Exception e)\r\n                {\r\n                    args.Cancel();\r\n\r\n                    await PopupService.AlertAsync(e);\r\n                }\r\n            });\r\n    }\r\n\r\n    private async Task ShowCustom()\r\n    {\r\n        var confirmed = await PopupService.ConfirmAsync(param =>\r\n        {\r\n            param.Title = \"Title\";\r\n            param.Content = \"This is the confirm content!\";\r\n            param.OkText = \"Confirm\";\r\n            param.CancelText = \"Ignore\";\r\n        });\r\n\r\n        await HandleConfirmResult(confirmed);\r\n    }\r\n\r\n    private async Task HandleConfirmResult(bool confirmed)\r\n    {\r\n        if (confirmed)\r\n        {\r\n            await PopupService.AlertAsync(\"Ok was clicked!\", AlertTypes.Info);\r\n        }\r\n        else\r\n        {\r\n            await PopupService.AlertAsync(\"Cancel was clicked!\", AlertTypes.Warning);\r\n        }\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.PopupService.events.Confirm",
+        "Type": "Demos.Components.PopupService.events.Confirm",
         "Style": "",
         "Debug": false,
         "Group": 1
@@ -7290,7 +7203,7 @@
         "Title": "Prompt",
         "Description": "",
         "Code": "@inject IPopupService PopupService\r\n\r\n<MAlert Type=\"AlertTypes.Info\">\r\n    <div>\r\n        在 <code>MApp</code> 组件通过 <code>PromptParameters</code> 设置Prompt的默认样式和行为。\r\n    </div>\r\n    <div>\r\n        例如：<code>PromptParameters=\"@@(\"param => { param.OkText = \"Confirm\"; })\"</code>。\r\n    </div>\r\n</MAlert>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowBasic\">Basic Prompt</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MCheckbox @bind-Value=\"throwException\" Label=\"Throw exception\"></MCheckbox>\r\n<MButton OnClick=\"ShowAsync\">Async Prompt</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowCustom\">Custom Prompt</MButton>\r\n\r\n@code {\r\n\r\n    private bool throwException;\r\n    private readonly string checkInput = \"identity\";\r\n\r\n    private async Task ShowBasic()\r\n    {\r\n        var confirmed = await PopupService.PromptAsync(\r\n            \"Title\",\r\n            $\"Enter \\\"{checkInput}\\\" in the input box below to confirm the operation\"\r\n            );\r\n\r\n        await HandlePromptResult(confirmed);\r\n    }\r\n\r\n    private async Task ShowAsync()\r\n    {\r\n        await PopupService.PromptAsync(\r\n            \"Title\",\r\n            $\"Enter \\\"{checkInput}\\\" in the input box below to confirm the operation\",\r\n            async args =>\r\n            {\r\n                try\r\n                {\r\n                    if (args.Value == checkInput)\r\n                    {\r\n                        await PopupService.AlertAsync($\"Input('{args.Value}') is equal to '{checkInput}'\", AlertTypes.Info);\r\n                        \r\n                        await Task.Delay(1000);\r\n\r\n                        if (throwException)\r\n                        {\r\n                            throw new Exception(\"something wrong!\");\r\n                        }\r\n                    }\r\n                    else\r\n                    {\r\n                        await PopupService.AlertAsync($\"Input('{args.Value}') is no equal to '{checkInput}'\", AlertTypes.Error);\r\n                        args.Cancel();\r\n                    }\r\n                }\r\n                catch (Exception e)\r\n                {\r\n                    args.Cancel();\r\n\r\n                    await PopupService.AlertAsync(e);\r\n                }\r\n            });\r\n    }\r\n\r\n    private async Task ShowCustom()\r\n    {\r\n        var input = await PopupService.PromptAsync(param =>\r\n        {\r\n            param.Title = \"Title\";\r\n            param.Content = $\"Enter \\\"{checkInput}\\\" in the input box below to confirm the operation\";\r\n            param.OkText = \"Confirm\";\r\n            param.CancelText = \"Ignore\";\r\n        });\r\n\r\n        await HandlePromptResult(input);\r\n    }\r\n\r\n    private async Task HandlePromptResult(string input)\r\n    {\r\n        if (input is null)\r\n        {\r\n            await PopupService.AlertAsync(\"Cancel was clicked\", AlertTypes.Warning);\r\n        }\r\n        else if (input == checkInput)\r\n        {\r\n            await PopupService.AlertAsync($\"Input('{input}') is equal to '{checkInput}'\", AlertTypes.Info);\r\n        }\r\n        else\r\n        {\r\n            await PopupService.AlertAsync($\"Input('{input}') is no equal to '{checkInput}'\", AlertTypes.Error);\r\n        }\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.PopupService.events.Prompt",
+        "Type": "Demos.Components.PopupService.events.Prompt",
         "Style": "",
         "Debug": false,
         "Group": 1
@@ -7301,7 +7214,7 @@
         "Title": "Toast",
         "Description": "",
         "Code": "@using Masa.Blazor.Popup.Components\r\n@inject IPopupService PopupService\r\n\r\n<MButton OnClick=\"ShowBasic\">Basic Toast</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup @bind-Value=\"toastType\" Row>\r\n    <MRadio Value=\"AlertTypes.None\" Label=\"None Icon\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Success\" Label=\"@nameof(AlertTypes.Success)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Warning\" Label=\"@nameof(AlertTypes.Warning)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Error\" Label=\"@nameof(AlertTypes.Error)\"></MRadio>\r\n    <MRadio Value=\"AlertTypes.Info\" Label=\"@nameof(AlertTypes.Info)\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"ShowTyped\">Typed Toast</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup @bind-Value=\"isDark\" Row>\r\n    <MRadio Value=\"true\" Label=\"Drak\"></MRadio>\r\n    <MRadio Value=\"false\" Label=\"Light\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"ShowTheme\">Show Theme</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"ShowContent\">Show with Title and Content</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MButton OnClick=\"CustomAction\">Custom Action</MButton>\r\n\r\n<MDivider Class=\"my-4\" />\r\n\r\n<MRadioGroup Value=\"position\" TValue=\"ToastPosition\" Row ValueChanged=\"OnChangePosition\">\r\n    <MRadio Value=\"ToastPosition.TopLeft\" Label=\"Top Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.TopRight\" Label=\"Top Right\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomLeft\" Label=\"Bottom Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomRight\" Label=\"Bottom Right\"></MRadio>\r\n</MRadioGroup>\r\n\r\n@code {\r\n\r\n    AlertTypes toastType = AlertTypes.Success;\r\n\r\n    bool isDark = true;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    private Task ShowBasic()\r\n    {\r\n        return PopupService.ToastInfoAsync(\"Info Toast Title\");\r\n    }\r\n\r\n    private Task ShowTyped()\r\n    {\r\n        return PopupService.ToastAsync($\"{toastType.ToString()} Toast Title\", toastType);\r\n    }\r\n\r\n    private Task ShowTheme()\r\n    {\r\n        return PopupService.ToastAsync((config) =>\r\n        {\r\n            config.Dark = isDark;\r\n            config.Type = toastType;\r\n            config.Title = $\"Now is {(isDark ? \"Dark\" : \"Light\")} theme\";\r\n        });\r\n    }\r\n\r\n    private Task ShowContent()\r\n    {\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = \"Message Title\",\r\n            Content = \"Message details\",\r\n            Dark = isDark,\r\n            Type = toastType\r\n        };\r\n        return PopupService.ToastAsync(config);\r\n    }\r\n\r\n    private Task HandleOnView()\r\n    {\r\n        return PopupService.ToastInfoAsync(\"View button click\");\r\n    }\r\n\r\n    private async Task CustomAction()\r\n    {\r\n        RenderFragment customViewAction = (builder) =>\r\n        {\r\n            builder.AddContent(0, @<MButton OnClick=\"HandleOnView\" Text> View </MButton>);\r\n        };\r\n\r\n        await PopupService.ToastAsync((config) =>\r\n        {\r\n            config.Title = \"Custom Action Message\";\r\n            config.Duration = 0;\r\n            config.Content = \"Not auto close\";\r\n            config.Type = toastType;\r\n            config.ActionContent = customViewAction;\r\n            config.Dark = isDark;\r\n            config.OnClose = (key) =>\r\n            {\r\n                Console.WriteLine($\"Key: {key} Close\");\r\n                return Task.CompletedTask;\r\n            };\r\n        });\r\n    }\r\n\r\n    private Task OnChangePosition(ToastPosition position)\r\n    {\r\n        this.position = position;\r\n        return PopupService.ConfigToast((config) =>\r\n        {\r\n            config.Position = position;\r\n        });\r\n    }\r\n\r\n}",
-        "Type": "Demos.Components.Presets.children.PopupService.events.Toast",
+        "Type": "Demos.Components.PopupService.events.Toast",
         "Style": "",
         "Debug": false,
         "Group": 1
@@ -7317,81 +7230,7 @@
     ],
     "Title": "Popup service",
     "Type": "PopupService",
-    "FullTitle": "Popup service"
-  },
-  {
-    "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>,<strong>Info</strong>,<strong>Warning</strong>, and <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays and also can customized content to fit almost any situation.</p>\n",
-    "Order": 0,
-    "OtherDocs": {},
-    "LastWriteTime": "2022-05-07T15:09:15.5790225+08:00",
-    "DemoList": [
-      {
-        "Order": 1,
-        "Name": "index",
-        "Title": "Usage",
-        "Description": "<p>The <code>PToast</code> component can be used by PopupService, see the documentation of <a href=\"/components/popup-service\">PopupService</a> for details.</p>\n",
-        "Code": "<PToast @ref=\"_toast\">\r\n</PToast>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    Random random = new Random();\r\n\r\n    private Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Add Toast by Click\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType\r\n        };\r\n\r\n        _toast.AddToast(config);\r\n\r\n        return Task.CompletedTask;\r\n    }\r\n}",
-        "Type": "Demos.Components.Presets.children.Toast.usage.Index",
-        "Style": "",
-        "Debug": false,
-        "Group": 4
-      },
-      {
-        "Order": 0,
-        "Name": "duration",
-        "Title": "Duration (default 4000ms)",
-        "Description": "",
-        "Code": "<PToast @ref=\"_toast\" Duration=\"duration\">\r\n</PToast>\r\n\r\n<MTextField Type=\"number\" @bind-Value=\"duration\" NumberProps=\"props=> { props.Min=0; props.Step=1000; }\"></MTextField>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int? duration;\r\n\r\n    Random random = new Random();\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = duration == 0? \"Not auto close\" : (duration == null? $\"Auto close after 4000ms\" : $\"Auto close after {duration} ms\"),\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n            Duration = duration\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n}",
-        "Type": "Demos.Components.Presets.children.Toast.props.Duration",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "maxCount",
-        "Title": "MaxCount",
-        "Description": "",
-        "Code": "<PToast @ref=\"_toast\" MaxCount=\"maxCount\">\r\n</PToast>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int maxCount = 5;\r\n\r\n    Random random = new Random();\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Only Show {maxCount} Toast\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n}",
-        "Type": "Demos.Components.Presets.children.Toast.props.MaxCount",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "position",
-        "Title": "Toast Position",
-        "Description": "",
-        "Code": "<PToast @ref=\"_toast\" Position=\"position\">\r\n</PToast>\r\n\r\n<MRadioGroup Value=\"position\" TValue=\"ToastPosition\" Row ValueChanged=\"OnChangePosition\">\r\n    <MRadio Value=\"ToastPosition.TopLeft\" Label=\"Top Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.TopRight\" Label=\"Top Right\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomLeft\" Label=\"Bottom Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomRight\" Label=\"Bottom Right\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int maxCount = 5;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    Random random = new Random();\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Show on {position.ToString()}\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n\r\n    private Task OnChangePosition(ToastPosition position)\r\n    {\r\n        this.position = position;\r\n        return Task.CompletedTask;\r\n    }\r\n}",
-        "Type": "Demos.Components.Presets.children.Toast.props.Position",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "customToast",
-        "Title": "Custom Toast content",
-        "Description": "",
-        "Code": "@inject IPopupService PopupService\r\n\r\n<PToast @ref=\"_toast\" Position=\"position\" Duration=\"defaultDuration\">\r\n</PToast>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    private int defaultDuration = 5000;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    Random random = new Random();\r\n\r\n    private Task HandleOnView()\r\n    {\r\n        return PopupService.ToastInfoAsync(\"View button click\");\r\n    }\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var duration = random.NextInt64(1000, 5000);\r\n        var useParentDuration = random.NextInt64(0, 2);\r\n\r\n        RenderFragment customViewAction = (builder) =>\r\n        {\r\n            builder.AddContent(0, @<MButton OnClick=\"HandleOnView\" Text> View </MButton>);\r\n        };\r\n\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Auto close after {duration}ms\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n            Duration = useParentDuration == 0? null : (int)duration,\r\n            ActionContent = customViewAction,\r\n            OnClose = OnClose\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n\r\n    private Task OnClose(string key)\r\n    {\r\n        Console.WriteLine($\"Close toast key: {key}\");\r\n        return Task.CompletedTask;\r\n    }\r\n}",
-        "Type": "Demos.Components.Presets.children.Toast.events.CustomToast",
-        "Style": "",
-        "Debug": false,
-        "Group": 1
-      }
-    ],
-    "Children": [],
-    "Category": "Components",
-    "Cols": 1,
-    "Related": [
-      "/components/buttons",
-      "/components/icons",
-      "/components/snackbars"
-    ],
-    "Title": "Toast",
-    "Type": "Toast",
-    "FullTitle": "Toast"
+    "Tag": "service"
   },
   {
     "Desc": "<p>The component is used to display circular data to users. It also can be put into an indeterminate state to portray loading.</p>\n",
@@ -7466,8 +7305,7 @@
       "/components/lists"
     ],
     "Title": "Progress circular",
-    "Type": "ProgressCircular",
-    "FullTitle": "Progress circular"
+    "Type": "ProgressCircular"
   },
   {
     "Desc": "<p>The component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.</p>\n",
@@ -7630,8 +7468,7 @@
       "/components/lists"
     ],
     "Title": "Progress linear",
-    "Type": "ProgressLinear",
-    "FullTitle": "Progress linear"
+    "Type": "ProgressLinear"
   },
   {
     "Desc": "<p>Semantic vector graphics.</p>\n",
@@ -7739,8 +7576,7 @@
       "/components/lists"
     ],
     "Title": "Ratings",
-    "Type": "Rating",
-    "FullTitle": "Ratings"
+    "Type": "Rating"
   },
   {
     "Desc": "<p>The MSheet component is the baseline for numerous components such as MCard, MToolbar, and more. The available properties form the foundation of Material Design—the concept of paper and elevation (shadows).</p>\n",
@@ -7786,7 +7622,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sheet.svg",
     "Cols": 1,
     "Related": [
       "/components/cards",
@@ -7794,8 +7629,7 @@
       "/stylesandanimations/elevation"
     ],
     "Title": "Sheets",
-    "Type": "Sheet",
-    "FullTitle": "Sheets"
+    "Type": "Sheet"
   },
   {
     "Desc": "<p>The <code>MSkeletonLoader</code> component is a versatile tool that can fill many roles within a project. At its heart, the\ncomponent provides an indication to the user that something is coming but not yet available. There are over 30\npre-defined options available that can be combined to make custom examples.</p>\n",
@@ -7830,7 +7664,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SkeletonLoader.svg",
     "Cols": 1,
     "Related": [
       "/components/cards",
@@ -7838,8 +7671,7 @@
       "/components/buttons"
     ],
     "Title": "Skeleton loaders",
-    "Type": "SkeletonLoader",
-    "FullTitle": "Skeleton loaders"
+    "Type": "SkeletonLoader"
   },
   {
     "Desc": "<p>The MSnackbar component is used to display quick messages to users. Snackbars supports positioning, removing delays, and callbacks.</p>\n",
@@ -7914,8 +7746,7 @@
       "/components/forms"
     ],
     "Title": "Snackbars",
-    "Type": "Snackbar",
-    "FullTitle": "Snackbars"
+    "Type": "Snackbar"
   },
   {
     "Desc": "<p>The <code>MStepper</code> component displays progress through numbered steps.</p>\n",
@@ -8071,7 +7902,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Stepper.svg",
     "Cols": 1,
     "Related": [
       "/components/tabs",
@@ -8079,8 +7909,7 @@
       "/components/windows"
     ],
     "Title": "Steppers",
-    "Type": "Stepper",
-    "FullTitle": "Steppers"
+    "Type": "Stepper"
   },
   {
     "Desc": "<p>The <code>Subheader</code> component is used to separate sections of lists.</p>\n",
@@ -8155,8 +7984,7 @@
       "/components/lists"
     ],
     "Title": "Subheaders",
-    "Type": "Subheader",
-    "FullTitle": "Subheaders"
+    "Type": "Subheader"
   },
   {
     "Desc": "<p>The MDataIterator component is used for displaying data, and shares a majority of its functionality with the MDataTable component. Features include sorting, searching, pagination, and selection.</p>\n",
@@ -8202,7 +8030,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataIterators.svg",
     "Cols": 1,
     "Related": [
       "/components/data-tables",
@@ -8210,8 +8037,7 @@
       "/components/toolbars"
     ],
     "Title": "Data iterators",
-    "Type": "DataIterators",
-    "FullTitle": "Data iterators"
+    "Type": "DataIterators"
   },
   {
     "Desc": "<p>The MDataTable component is used for displaying tabular data. Features include sorting, searching, pagination, content-editing, and row selection.</p>\n",
@@ -8466,7 +8292,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/DataTable.svg",
     "Cols": 1,
     "Related": [
       "/components/data-iterators",
@@ -8474,8 +8299,7 @@
       "/components/lists"
     ],
     "Title": "Data tables",
-    "Type": "DataTable",
-    "FullTitle": "Data tables"
+    "Type": "DataTable"
   },
   {
     "Desc": "<p>The MSimpleTable component is a simple wrapper component around the <table> element. Inside the component you can use all the regular table elements such as <thead>, <tbody>, <tr>, etc.</p>\n",
@@ -8543,7 +8367,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/SimpleTables.svg",
     "Cols": 1,
     "Related": [
       "/components/data-iterators",
@@ -8551,8 +8374,7 @@
       "/components/lists"
     ],
     "Title": "Simple tables",
-    "Type": "SimpleTables",
-    "FullTitle": "Simple tables"
+    "Type": "SimpleTables"
   },
   {
     "Desc": "<p>The <code>MTabs</code> component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation\nfor a page, where the tabs are links and the tab-items are the content.</p>\n",
@@ -8742,7 +8564,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tabs.svg",
     "Cols": 1,
     "Related": [
       "/components/icons",
@@ -8750,8 +8571,7 @@
       "/components/windows"
     ],
     "Title": "Tabs",
-    "Type": "Tabs",
-    "FullTitle": "Tabs"
+    "Type": "Tabs"
   },
   {
     "Desc": "<p>MTimeline is very useful for displaying chronological information.</p>\n",
@@ -8881,8 +8701,81 @@
       "/components/grid-system"
     ],
     "Title": "Timelines",
-    "Type": "Timeline",
-    "FullTitle": "Timelines"
+    "Type": "Timeline"
+  },
+  {
+    "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>,<strong>Info</strong>,<strong>Warning</strong>, and <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays and also can customized content to fit almost any situation.</p>\n",
+    "Order": 0,
+    "OtherDocs": {},
+    "LastWriteTime": "2022-08-29T11:38:52.1738735+08:00",
+    "DemoList": [
+      {
+        "Order": 1,
+        "Name": "index",
+        "Title": "Usage",
+        "Description": "<p>The <code>PToast</code> component can be used by PopupService, see the documentation of <a href=\"/components/popup-service\">PopupService</a> for details.</p>\n",
+        "Code": "<PToast @ref=\"_toast\">\r\n</PToast>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    Random random = new Random();\r\n\r\n    private Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Add Toast by Click\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType\r\n        };\r\n\r\n        _toast.AddToast(config);\r\n\r\n        return Task.CompletedTask;\r\n    }\r\n}",
+        "Type": "Demos.Components.Toast.usage.Index",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "duration",
+        "Title": "Duration (default 4000ms)",
+        "Description": "",
+        "Code": "<PToast @ref=\"_toast\" Duration=\"duration\">\r\n</PToast>\r\n\r\n<MTextField Type=\"number\" @bind-Value=\"duration\" NumberProps=\"props=> { props.Min=0; props.Step=1000; }\"></MTextField>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int? duration;\r\n\r\n    Random random = new Random();\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = duration == 0? \"Not auto close\" : (duration == null? $\"Auto close after 4000ms\" : $\"Auto close after {duration} ms\"),\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n            Duration = duration\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n}",
+        "Type": "Demos.Components.Toast.props.Duration",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "maxCount",
+        "Title": "MaxCount",
+        "Description": "",
+        "Code": "<PToast @ref=\"_toast\" MaxCount=\"maxCount\">\r\n</PToast>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int maxCount = 5;\r\n\r\n    Random random = new Random();\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Only Show {maxCount} Toast\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n}",
+        "Type": "Demos.Components.Toast.props.MaxCount",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "position",
+        "Title": "Toast Position",
+        "Description": "",
+        "Code": "<PToast @ref=\"_toast\" Position=\"position\">\r\n</PToast>\r\n\r\n<MRadioGroup Value=\"position\" TValue=\"ToastPosition\" Row ValueChanged=\"OnChangePosition\">\r\n    <MRadio Value=\"ToastPosition.TopLeft\" Label=\"Top Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.TopRight\" Label=\"Top Right\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomLeft\" Label=\"Bottom Left\"></MRadio>\r\n    <MRadio Value=\"ToastPosition.BottomRight\" Label=\"Bottom Right\"></MRadio>\r\n</MRadioGroup>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    int maxCount = 5;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    Random random = new Random();\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Show on {position.ToString()}\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n\r\n    private Task OnChangePosition(ToastPosition position)\r\n    {\r\n        this.position = position;\r\n        return Task.CompletedTask;\r\n    }\r\n}",
+        "Type": "Demos.Components.Toast.props.Position",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "customToast",
+        "Title": "Custom Toast content",
+        "Description": "",
+        "Code": "@inject IPopupService PopupService\r\n\r\n<PToast @ref=\"_toast\" Position=\"position\" Duration=\"defaultDuration\">\r\n</PToast>\r\n\r\n<MButton OnClick=\"AddToast\"> Add Toast </MButton>\r\n\r\n@code {\r\n    PToast _toast;\r\n\r\n    private int defaultDuration = 5000;\r\n\r\n    ToastPosition position = ToastPosition.BottomRight;\r\n\r\n    Random random = new Random();\r\n\r\n    private Task HandleOnView()\r\n    {\r\n        return PopupService.ToastInfoAsync(\"View button click\");\r\n    }\r\n\r\n    private async Task AddToast()\r\n    {\r\n        var now = DateTime.Now.ToString(\"HH:mm:ss.fff\");\r\n        var alertType = random.NextInt64(0, 5);\r\n        var dark = random.NextInt64(0, 2);\r\n        var duration = random.NextInt64(1000, 5000);\r\n        var useParentDuration = random.NextInt64(0, 2);\r\n\r\n        RenderFragment customViewAction = (builder) =>\r\n        {\r\n            builder.AddContent(0, @<MButton OnClick=\"HandleOnView\" Text> View </MButton>);\r\n        };\r\n\r\n        var config = new ToastConfig()\r\n        {\r\n            Title = $\"Auto close after {duration}ms\",\r\n            Content = $\"create time: {now}\",\r\n            Dark = dark == 0,\r\n            Type = (AlertTypes)alertType,\r\n            Duration = useParentDuration == 0? null : (int)duration,\r\n            ActionContent = customViewAction,\r\n            OnClose = OnClose\r\n        };\r\n\r\n        await _toast.AddToast(config);\r\n    }\r\n\r\n    private Task OnClose(string key)\r\n    {\r\n        Console.WriteLine($\"Close toast key: {key}\");\r\n        return Task.CompletedTask;\r\n    }\r\n}",
+        "Type": "Demos.Components.Toast.events.CustomToast",
+        "Style": "",
+        "Debug": false,
+        "Group": 1
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Related": [
+      "/components/buttons",
+      "/components/icons",
+      "/components/snackbars"
+    ],
+    "Title": "Toast",
+    "Type": "Toast",
+    "Tag": "preset"
   },
   {
     "Desc": "<p>The <code>MTooltip</code> component is useful for conveying information when a user hovers over an element. You can also\nprogrammatically control the display of tooltips through a <strong>@bind-Value</strong>. When activated, tooltips display a text\nlabel identifying an element, such as a description of its function.</p>\n",
@@ -8929,7 +8822,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Tooltip.svg",
     "Cols": 1,
     "Related": [
       "/components/badges",
@@ -8937,8 +8829,7 @@
       "/components/menus"
     ],
     "Title": "Tooltips",
-    "Type": "Tooltip",
-    "FullTitle": "Tooltips"
+    "Type": "Tooltip"
   },
   {
     "Desc": "<p>The MTreeview component is useful for displaying large amounts of nested data.</p>\n",
@@ -9125,7 +9016,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Treeview.svg",
     "Cols": 1,
     "Related": [
       "/components/lists",
@@ -9133,8 +9023,7 @@
       "/components/timelines"
     ],
     "Title": "Treeview",
-    "Type": "Treeview",
-    "FullTitle": "Treeview"
+    "Type": "Treeview"
   },
   {
     "Desc": "<p>The MVirtualScroll component displays a virtual, infinite list. It supports dynamic height and scrolling vertically.</p>\n",
@@ -9169,7 +9058,6 @@
     ],
     "Children": [],
     "Category": "Components",
-    "Cover": "https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg",
     "Cols": 1,
     "Related": [
       "/components/lists",
@@ -9177,7 +9065,6 @@
       "/components/data-iterators"
     ],
     "Title": "Virtual scroller",
-    "Type": "VirtualScroll",
-    "FullTitle": "Virtual scroller"
+    "Type": "VirtualScroll"
   }
 ]

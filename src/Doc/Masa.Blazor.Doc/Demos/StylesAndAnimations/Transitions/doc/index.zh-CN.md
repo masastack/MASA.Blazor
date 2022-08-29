@@ -4,7 +4,6 @@ subtitle: 过渡动画
 type: 过渡动画
 title: Transitions
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
 
 ---
 

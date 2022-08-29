@@ -4,7 +4,6 @@ subtitle: 网格系统
 type: 网格系统
 title: Grid system
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg
 related:
   - /stylesandanimations/flex                      
   - /features/breakpoints

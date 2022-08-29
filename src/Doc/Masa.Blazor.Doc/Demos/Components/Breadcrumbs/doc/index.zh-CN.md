@@ -4,7 +4,6 @@ subtitle: 面包屑导航
 type: 面包屑导航
 title: Breadcrumbs
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
 related:
   - /components/buttons
   - /components/navigation-drawers

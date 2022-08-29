@@ -3,7 +3,6 @@ category: Components
 type: Autocompletes
 title: Autocompletes
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Autocomplete.svg
 related:
   - /components/combobox
   - /components/forms

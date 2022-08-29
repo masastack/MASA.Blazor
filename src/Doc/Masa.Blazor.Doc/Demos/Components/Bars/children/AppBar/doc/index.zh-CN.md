@@ -4,7 +4,6 @@ subtitle: 应用栏
 type: 应用栏
 title: App bars
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/AppBars.svg
 related:
   - /components/buttons
   - /components/icons

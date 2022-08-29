@@ -3,7 +3,6 @@ category: Components
 type: Radio
 title: Radio
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Radio.svg
 related:
   - /components/button-groups
   - /components/forms

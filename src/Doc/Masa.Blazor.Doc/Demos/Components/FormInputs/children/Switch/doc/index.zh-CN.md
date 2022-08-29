@@ -4,7 +4,6 @@ subtitle: 开关
 type: 开关
 title: Switches
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Switch.svg
 related:
   - /components/checkboxes
   - /components/forms

@@ -4,7 +4,6 @@ subtitle: 工作表
 type: 工作表
 title: Sheets
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Sheet.svg
 related:
   - /components/cards
   - /components/grid-system

@@ -13,10 +13,14 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace Masa.Blazor.Doc.CLI.Wrappers
 {
-    public class DocWrapper
+    public static class DocWrapper
     {
-        public static (DemoFrontMatter meta, string desc, Dictionary<string, string> others)
-            ParseDemoDoc(string input)
+        /// <summary>
+        /// Parse the file content at [Component]/doc/*.md
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static (DemoFrontMatter meta, string desc, Dictionary<string, string> others) ParseDemoDoc(string input)
         {
             var pipeline = new MarkdownPipelineBuilder()
                 .UseYamlFrontMatter()
@@ -72,6 +76,11 @@ namespace Masa.Blazor.Doc.CLI.Wrappers
             return (meta, desc, h2Sections);
         }
 
+        /// <summary>
+        /// Parse the file content at [Component]/[usage|props|contents|misc]/*.md
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static (DescriptionYaml Meta, string Style, Dictionary<string, string> Descriptions) ParseDescription(string input)
         {
             var pipeline = new MarkdownPipelineBuilder()

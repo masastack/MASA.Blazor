@@ -1,0 +1,40 @@
+﻿@using Masa.Blazor.Doc.Models
+@using BlazorComponent.I18n
+
+<MListItem Class="m-list-item--default"
+           Href="@Item.Url"
+           TwoLine="@TwoLine"
+           Exact>
+    <NavItemContent Title="@Item?.Title" SubTitle="@Item?.SubTitle" />
+    @if (HasTag)
+    {
+        <ColorChip Color="@GetColor(Item.Tag)" Small>@I18n.T($"tag.{Item.Tag}")</ColorChip>
+    }
+</MListItem>
+
+@code {
+
+    [Inject]
+    private I18n I18n { get; set; }
+
+    [Parameter, EditorRequired]
+    public DemoMenuItemModel Item { get; set; }
+
+    private static Dictionary<string, string> _tagColors = new()
+    {
+        { "preset", "blue" },
+        { "service", "purple" },
+        { "new", "green" },
+        { "updated", "red" }
+    };
+
+    private bool TwoLine => !string.IsNullOrWhiteSpace(Item?.SubTitle);
+
+    private bool HasTag => !string.IsNullOrEmpty(Item?.Tag);
+
+    private string GetColor(string tag)
+    {
+        return _tagColors.ContainsKey(tag) ? _tagColors[tag] : "primary";
+    }
+
+}
