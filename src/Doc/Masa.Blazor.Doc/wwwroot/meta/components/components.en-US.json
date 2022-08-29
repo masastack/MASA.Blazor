@@ -2266,7 +2266,8 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "DragZone",
-    "Type": "DragZone"
+    "Type": "DragZone",
+    "Tag": "js-proxy"
   },
   {
     "Order": 0,
@@ -2442,7 +2443,8 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "ECharts",
-    "Type": "ECharts"
+    "Type": "ECharts",
+    "Tag": "js-proxy"
   },
   {
     "Desc": "<p>Rich text editor based on <a href=\"https://quilljs.com/\">Quill</a> encapsulation</p>\n",
@@ -2569,7 +2571,8 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Editor",
-    "Type": "Editor"
+    "Type": "Editor",
+    "Tag": "js-proxy"
   },
   {
     "Desc": "<p>The <code>MErrorHandler</code> component is used to handle exception information when the <code>blazor</code> component data is loaded and rendered.</p>\n",
@@ -5988,7 +5991,8 @@
     "Category": "Components",
     "Cols": 1,
     "Title": "Markdown",
-    "Type": "Markdown"
+    "Type": "Markdown",
+    "Tag": "js-proxy"
   },
   {
     "Desc": "<p>The <code>MMenu</code> component shows a menu at the position of the element used to activate it.</p>\n",

@@ -70,6 +70,7 @@
     "preset": "预置",
     "service": "服务",
     "new": "新增",
-    "updated": "更新"
+    "updated": "更新",
+    "js-proxy": "JS代理"
   }
 }

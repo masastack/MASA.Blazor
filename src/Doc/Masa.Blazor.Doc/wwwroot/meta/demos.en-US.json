@@ -371,6 +371,7 @@
         "FullTitle": "DragZone",
         "Type": "menuItem",
         "Url": "components/dragzone",
+        "Tag": "js-proxy",
         "Children": []
       }
     ]
@@ -420,6 +421,7 @@
         "FullTitle": "ECharts",
         "Type": "menuItem",
         "Url": "components/echarts",
+        "Tag": "js-proxy",
         "Children": []
       }
     ]
@@ -436,6 +438,7 @@
         "FullTitle": "Editor",
         "Type": "menuItem",
         "Url": "components/editor",
+        "Tag": "js-proxy",
         "Children": []
       }
     ]
@@ -770,6 +773,7 @@
         "FullTitle": "Markdown",
         "Type": "menuItem",
         "Url": "components/markdown",
+        "Tag": "js-proxy",
         "Children": []
       }
     ]

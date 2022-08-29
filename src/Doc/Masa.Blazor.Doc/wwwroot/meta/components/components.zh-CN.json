@@ -2294,7 +2294,8 @@
     "Cols": 1,
     "Subtitle": "拖放",
     "Title": "DragZone",
-    "Type": "拖放"
+    "Type": "拖放",
+    "Tag": "js-proxy"
   },
   {
     "Order": 0,
@@ -2472,7 +2473,8 @@
     "Cols": 1,
     "Subtitle": "图表",
     "Title": "ECharts",
-    "Type": "图表"
+    "Type": "图表",
+    "Tag": "js-proxy"
   },
   {
     "Desc": "<p>基于<a href=\"https://quilljs.com/\">Quill</a>封装的富文本编辑器</p>\n",
@@ -2600,7 +2602,8 @@
     "Cols": 1,
     "Subtitle": "富文本编辑器",
     "Title": "Editor",
-    "Type": "富文本编辑器"
+    "Type": "富文本编辑器",
+    "Tag": "js-proxy"
   },
   {
     "Desc": "<p><code>MErrorHandler</code>组件用来处理<code>blazor</code>组件数据加载和render时的异常信息。</p>\n",
@@ -6051,7 +6054,8 @@
     "Cols": 1,
     "Subtitle": "Markdown编辑器",
     "Title": "Markdown",
-    "Type": "Markdown编辑器"
+    "Type": "Markdown编辑器",
+    "Tag": "js-proxy"
   },
   {
     "Desc": "<p><code>MMenu</code> 组件在激活它的元素的位置上展示一个菜单。</p>\n",

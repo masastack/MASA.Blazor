@@ -4540,6 +4540,7 @@
         "FullTitle": "DragZone (拖放)",
         "Type": "menuItem",
         "Url": "components/dragzone",
+        "Tag": "js-proxy",
         "Children": []
       },
       {
@@ -4559,6 +4560,7 @@
         "FullTitle": "ECharts (图表)",
         "Type": "menuItem",
         "Url": "components/echarts",
+        "Tag": "js-proxy",
         "Children": []
       },
       {
@@ -4568,6 +4570,7 @@
         "FullTitle": "Editor (富文本编辑器)",
         "Type": "menuItem",
         "Url": "components/editor",
+        "Tag": "js-proxy",
         "Children": []
       },
       {
@@ -4856,6 +4859,7 @@
         "FullTitle": "Markdown (Markdown编辑器)",
         "Type": "menuItem",
         "Url": "components/markdown",
+        "Tag": "js-proxy",
         "Children": []
       },
       {

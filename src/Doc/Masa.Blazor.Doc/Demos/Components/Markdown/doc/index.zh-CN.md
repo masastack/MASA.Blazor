@@ -4,6 +4,7 @@ subtitle: Markdown编辑器
 type: Markdown编辑器
 title: Markdown
 cols: 1
+tag: js-proxy
 ---
 
 基于[vditor](https://github.com/Vanessa219/vditor)封装

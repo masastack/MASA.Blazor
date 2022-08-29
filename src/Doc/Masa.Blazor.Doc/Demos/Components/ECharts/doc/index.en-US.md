@@ -3,6 +3,7 @@ category: Components
 type: ECharts
 title: ECharts
 cols: 1
+tag: js-proxy
 ---
 
 [ECharts](https://echarts.apache.org/examples/en/index.html)

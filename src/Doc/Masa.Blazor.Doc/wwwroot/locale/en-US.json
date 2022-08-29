@@ -63,6 +63,7 @@
     "preset": "preset",
     "service": "service",
     "new": "new",
-    "updated": "updated"
+    "updated": "updated",
+    "js-proxy": "JS proxy"
   }
 }

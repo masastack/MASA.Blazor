@@ -4,6 +4,7 @@ subtitle: 富文本编辑器
 type: 富文本编辑器
 title: Editor
 cols: 1
+tag: js-proxy
 ---
 
 基于[Quill](https://quilljs.com/)封装的富文本编辑器

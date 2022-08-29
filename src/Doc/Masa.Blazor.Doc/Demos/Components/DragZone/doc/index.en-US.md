@@ -3,6 +3,7 @@ category: Components
 type: DragZone
 title: DragZone
 cols: 1
+tag: js-proxy
 ---
 
 The `MDragZone` component is based on [Sorttable.js](https://github.com/SortableJS/Sortable) to implement drag and drop functionality
