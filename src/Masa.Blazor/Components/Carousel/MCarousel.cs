@@ -153,7 +153,6 @@ public partial class MCarousel : MWindow, ICarousel, IDisposable
                .Watch<int>(nameof(Interval), RestartTimeout)
                .Watch<StringNumber>(nameof(Height), (val, oldVal) =>
                {
-                   Console.WriteLine($"val:{val} oldVal:{oldVal}");
                    if (string.IsNullOrWhiteSpace(val.ToString()))
                    {
                        return;

@@ -322,7 +322,6 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnTouchStartAsync(ExTouchEventArgs args)
         {
-            Console.WriteLine("touch start");
             await HandleOnSliderStartSwiping(args.Target, args.Touches[0].ClientX, args.Touches[0].ClientY);
             await App.AddEventListenerAsync("touchmove", CreateEventCallback<TouchEventArgs>(HandleTouchMove), false, new EventListenerExtras() { PreventDefault = true, StopPropagation = true });
             await App.AddEventListenerAsync("touchend", CreateEventCallback<TouchEventArgs>(HandleOnTouchEndAsync), new EventListenerOptions
@@ -393,7 +392,6 @@ namespace Masa.Blazor
 
         public async Task HandleOnTouchEndAsync(TouchEventArgs args)
         {
-            Console.WriteLine("touch end");
             await HandleOnSliderEndSwiping();
         }
 
