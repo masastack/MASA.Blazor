@@ -2,8 +2,23 @@
 @using System.Reflection.Metadata.Ecma335
 @inherits OwningComponentBase<Masa.Blazor.Doc.Services.DemoService>
 
+@{
+    var alerts = Demo.Description.SplitByAlertType();
 
-@((MarkupString)Demo.Description.FormatLink())
+    @foreach (var (type, alert) in alerts)
+    {
+        if (type == AlertTypes.None)
+        {
+            @((MarkupString)alert.FormatLink())
+        }
+        else
+        {
+            <MAlert Type="@type" Border="Borders.Left" Text Class="m-alert--doc">
+                @((MarkupString)alert.FormatLink())
+            </MAlert>
+        }
+    }
+}
 
 @if (Component != null)
 {

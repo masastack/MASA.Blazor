@@ -1,0 +1,37 @@
+﻿@typeparam TColumn
+@typeparam TColumnItem
+@typeparam TColumnItemValue
+@typeparam TValue
+
+<MBottomSheet ContentClass="@($"{ClassPrefix}__content")"
+              Value="Visible"
+              ValueChanged="HandleVisibleChanged">
+    <ActivatorContent>
+        @ActivatorContent?.Invoke(context)
+    </ActivatorContent>
+    <ChildContent>
+        <MSheet Class="d-flex justify-space-between align-center">
+            <MButton Plain Color="primary" OnClick="OnCancel">@I18n.T("$masaBlazor.cancel")</MButton>
+            <div class=@($"{ClassPrefix}__title")>@Title</div>
+            <MButton Plain Color="primary" OnClick="HandleOnConfirm">@I18n.T("$masaBlazor.ok")</MButton>
+        </MSheet>
+
+        <MSheet>
+            <MMobilePickerView TColumn="TColumn"
+                               TColumnItem="TColumnItem"
+                               TColumnItemValue="TColumnItemValue"
+                               Columns="Columns"
+                               ItemText="ItemText"
+                               ItemValue="ItemValue"
+                               ItemChildren="ItemChildren"
+                               ItemDisabled="ItemDisabled"
+                               ItemHeight="ItemHeight"
+                               SwipeDuration="SwipeDuration"
+                               VisibleItemCount="VisibleItemCount"
+                               Value="InternalValue"
+                               ValueChanged="@HandleValueChanged"
+                               @attributes="@Attributes">
+            </MMobilePickerView>
+        </MSheet>
+    </ChildContent>
+</MBottomSheet>

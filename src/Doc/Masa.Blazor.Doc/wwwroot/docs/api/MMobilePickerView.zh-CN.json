@@ -1,0 +1,91 @@
+﻿{
+  "Title": "MMobilePickerView",
+  "Components": [
+    "Mobile picker view"
+  ],
+  "Props": [
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "Columns",
+      "Type": "List<TColumn>",
+      "Description": ""
+    },
+    {
+      "Name": "Dark",
+      "Type": "Boolean",
+      "Description": "将暗色主题变量应用到组件。"
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "ItemChildren",
+      "Type": "Func<TColumnItem,List`1>",
+      "Description": ""
+    },
+    {
+      "Name": "ItemDisabled",
+      "Type": "Func<TColumnItem,Boolean>",
+      "Description": ""
+    },
+    {
+      "Name": "ItemHeight",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "ItemText",
+      "Type": "Func<TColumnItem,String>",
+      "Description": ""
+    },
+    {
+      "Name": "ItemValue",
+      "Type": "Func<TColumnItem,TColumnItemValue>",
+      "Description": ""
+    },
+    {
+      "Name": "Light",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "SwipeDuration",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
+      "Name": "Value",
+      "Type": "List<TColumnItemValue>",
+      "Description": ""
+    },
+    {
+      "Name": "VisibleItemCount",
+      "Type": "Int32",
+      "Description": ""
+    }
+  ],
+  "Contents": [],
+  "Events": [
+    {
+      "Name": "OnSelect",
+      "Type": "EventCallback<List`1>",
+      "Description": ""
+    },
+    {
+      "Name": "ValueChanged",
+      "Type": "EventCallback<List`1>",
+      "Description": ""
+    }
+  ]
+}

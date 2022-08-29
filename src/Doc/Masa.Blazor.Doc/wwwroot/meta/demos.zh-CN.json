@@ -962,6 +962,46 @@
           },
           {
             "Order": 0,
+            "Title": "Mobile date pickers",
+            "SubTitle": "移动端日期选择器",
+            "FullTitle": "Mobile date pickers (移动端日期选择器)",
+            "Type": "menuItem",
+            "Url": "components/mobile-date-pickers"
+          },
+          {
+            "Order": 0,
+            "Title": "Mobile date time pickers",
+            "SubTitle": "移动端日期时间选择器",
+            "FullTitle": "Mobile date time pickers (移动端日期时间选择器)",
+            "Type": "menuItem",
+            "Url": "components/mobile-date-time-pickers"
+          },
+          {
+            "Order": 0,
+            "Title": "Mobile pickers",
+            "SubTitle": "移动端选择器",
+            "FullTitle": "Mobile pickers (移动端选择器)",
+            "Type": "menuItem",
+            "Url": "components/mobile-pickers"
+          },
+          {
+            "Order": 0,
+            "Title": "Mobile picker views",
+            "SubTitle": "移动端选择视图",
+            "FullTitle": "Mobile picker views (移动端选择视图)",
+            "Type": "menuItem",
+            "Url": "components/mobile-picker-views"
+          },
+          {
+            "Order": 0,
+            "Title": "Mobile time pickers",
+            "SubTitle": "移动端时间选择器",
+            "FullTitle": "Mobile time pickers (移动端时间选择器)",
+            "Type": "menuItem",
+            "Url": "components/mobile-time-pickers"
+          },
+          {
+            "Order": 0,
             "Title": "Time pickers",
             "SubTitle": "时间选择器",
             "FullTitle": "Time pickers (时间选择器)",

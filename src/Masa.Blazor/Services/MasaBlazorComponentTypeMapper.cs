@@ -43,7 +43,7 @@
             { typeof(BDivider), typeof(MDivider) },
             { typeof(BSubheader), typeof(MSubheader) },
             { typeof(BTab), typeof(MTab) },
-            { typeof(BResponsive), typeof(MImage) }
+            { typeof(BResponsive), typeof(MImage) },
         };
 
         private readonly Dictionary<Type, Type> _genericMapper = new()
@@ -53,6 +53,7 @@
             { typeof(BDataTableRow<>), typeof(MDataTableRow<>) },
             { typeof(BDataTableMobileRow<>), typeof(MDataTableMobileRow<>) },
             { typeof(BTreeviewNode<,>), typeof(MTreeviewNode<,>) },
+            { typeof(BMobilePickerColumn<>), typeof(MMobilePickerColumn<>) }
         };
 
         public Type Map(Type keyType)
