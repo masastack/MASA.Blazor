@@ -3,6 +3,7 @@ category: Components
 type: MobilePickers
 title: Mobile pickers
 cols: 1
+tag: preset
 related:
   - /components/mobile-picker-views
   - /components/mobile-date-time-views

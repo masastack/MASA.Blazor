@@ -3425,7 +3425,7 @@
     "Desc": "<p>A cascade selector designed for the mobile.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:13:54.0419398+08:00",
+    "LastWriteTime": "2022-08-29T16:53:23.0205192+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -7060,7 +7060,8 @@
       "/components/mobile-date-time-pickers"
     ],
     "Title": "Mobile date pickers",
-    "Type": "MobileDatePickers"
+    "Type": "MobileDatePickers",
+    "Tag": "preset"
   },
   {
     "Desc": "<p>A date time picker designed for the mobile.</p>\n",
@@ -7122,7 +7123,8 @@
       "/components/mobile-date-pickers"
     ],
     "Title": "Mobile date time pickers",
-    "Type": "MobileDateTimePickers"
+    "Type": "MobileDateTimePickers",
+    "Tag": "preset"
   },
   {
     "Desc": "<p>A picker designed for the mobile. Provides multiple sets of options for users to choose, and supports single-column selection, multi-column selection and cascading selection.</p>\n",
@@ -7173,7 +7175,8 @@
       "/components/mobile-time-pickers"
     ],
     "Title": "Mobile pickers",
-    "Type": "MobilePickers"
+    "Type": "MobilePickers",
+    "Tag": "preset"
   },
   {
     "Desc": "<p>A picker view designed for the mobile. Provides multiple sets of options for users to choose, and supports single-column selection, multi-column selection and cascading selection.</p>\n<p><strong>MMobilePickerView</strong> is the content area of <a href=\"/components/mobile-pickers\">PMobilePicker</a>.</p>\n",
@@ -7299,7 +7302,8 @@
       "/components/mobile-date-pickers"
     ],
     "Title": "Mobile time pickers",
-    "Type": "MobileTimePickers"
+    "Type": "MobileTimePickers",
+    "Tag": "preset"
   },
   {
     "Desc": "<p>The MTimePicker is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting the time.</p>\n",
