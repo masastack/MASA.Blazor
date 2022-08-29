@@ -3,6 +3,7 @@ using BlazorComponent.I18n;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using System.Globalization;
+using Microsoft.JSInterop;
 
 namespace Masa.Blazor.Doc.Shared;
 
@@ -17,14 +18,16 @@ public partial class BaseLayout : IDisposable
     [Inject]
     public MasaBlazor MasaBlazor { get; set; }
 
+    [Inject]
+    public IJSRuntime Js { get; set; }
+
     private static readonly CultureInfo[] SupportedCultures = { new("en-US"), new("zh-CN") };
 
-    private string _searchBorderColor = "#00000000";
     private StringNumber _selectTab = 0;
 
     private string CultureIcon => $"{Culture}.png";
 
-    public StringNumber SelectTab
+    private StringNumber SelectTab
     {
         get
         {
@@ -91,6 +94,18 @@ public partial class BaseLayout : IDisposable
         }
 
         Navigation.LocationChanged += OnLocationChanged;
+        MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+    }
+
+    private async Task BreakpointOnOnUpdate()
+    {
+        await InvokeAsync(async () =>
+        {
+            // invoke StateHasChanged() to ensure that #docsearch-mobile has been rendered. 
+            StateHasChanged();
+
+            await Js.InvokeVoidAsync("addDoSearch", MasaBlazor.Breakpoint.Mobile);
+        });
     }
 
     private void RedirectToOfficialWebsite(string uri)
@@ -143,5 +158,6 @@ public partial class BaseLayout : IDisposable
     public void Dispose()
     {
         Navigation.LocationChanged -= OnLocationChanged;
+        MasaBlazor.Breakpoint.OnUpdate -= BreakpointOnOnUpdate;
     }
 }

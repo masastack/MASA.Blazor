@@ -205,37 +205,21 @@
                 }
                 return 'en';
             }
-
-            function addDocSearch() {
-                if (document.querySelector("#docsearch") && document.querySelector('#docsearch-mobile')) {
-                  docsearch({
-                    container: '#docsearch',
-                    appId: 'TSB4MACWRC',
-                    indexName: 'blazor-masastack',
-                    apiKey: 'a38a8d4b58c5648825ba3fafce8b6ffa',
-                    debug: false,
-                    //searchParameters: {
-                    //    facetFilters: ['language:'+ getCurrentDocSearchLanguage()]
-                    //}
-                  });
-                
-                  docsearch({
-                    container: '#docsearch-mobile',
-                    appId: 'TSB4MACWRC',
-                    indexName: 'blazor-masastack',
-                    apiKey: 'a38a8d4b58c5648825ba3fafce8b6ffa',
-                    debug: false,
-                    //searchParameters: {
-                    //    facetFilters: ['language:'+ getCurrentDocSearchLanguage()]
-                    //}
-                  });
-                } else {
-                  setTimeout(addDocSearch, 1000);
-                }
-            }
-            
-            addDocSearch();
         })
+
+        window.addDoSearch = function (isMobile) {
+          const container = `#docsearch${isMobile ? "-mobile" : ""}`
+          docsearch({
+            container,
+            appId: 'TSB4MACWRC',
+            indexName: 'blazor-masastack',
+            apiKey: 'a38a8d4b58c5648825ba3fafce8b6ffa',
+            debug: false,
+            //searchParameters: {
+            //    facetFilters: ['language:'+ getCurrentDocSearchLanguage()]
+            //}
+          });
+        }
     </script>
 </body>
 
