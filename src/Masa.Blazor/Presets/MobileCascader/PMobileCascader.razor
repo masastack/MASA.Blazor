@@ -9,7 +9,7 @@
         @ActivatorContent?.Invoke(context)
     </ActivatorContent>
     <ChildContent>
-        <MSheet Class="d-flex justify-space-between">
+        <MSheet Class="p-mobile-cascader__header">
             <MButton Plain Color="primary" OnClick="OnCancel">@I18n.T("$masaBlazor.cancel")</MButton>
             <div class="p-mobile-cascader__title">@Title</div>
             <MButton Plain Color="primary" OnClick="OnConfirm">@I18n.T("$masaBlazor.ok")</MButton>
@@ -22,25 +22,28 @@
             }
         </MTabs>
 
-        <MList Dense Height="@Height">
-            @foreach (var item in CurrentItems)
+        <MList Dense Height="@Height" Class="p-mobile-cascader__list">
+            @if (IsLoading)
             {
-                <MListItem OnClick="() => OnItemClick(item)"
-                           Disabled="@IsDisabled(item)">
-                    <MListItemContent>
-                        <MListItemTitle>@ItemText(item)</MListItemTitle>
-                    </MListItemContent>
-                    <MListItemIcon Class="align-center">
-                        @if (item.Equals(_loadingItem))
-                        {
-                            <MProgressCircular Size="20" Width="2" Indeterminate></MProgressCircular>
-                        }
-                        else if (SelectedItems.Contains(item))
-                        {
-                            <MIcon Color="primary" Dense>mdi-check</MIcon>
-                        }
-                    </MListItemIcon>
-                </MListItem>
+                <MSkeletonLoader Type="list-item-three-line"></MSkeletonLoader>
+            }
+            else
+            {
+                foreach (var item in CurrentItems)
+                {
+                    <MListItem OnClick="() => OnItemClick(item)"
+                               Disabled="@IsDisabled(item)">
+                        <MListItemContent>
+                            <MListItemTitle>@ItemText(item)</MListItemTitle>
+                        </MListItemContent>
+                        <MListItemIcon Class="align-center">
+                            @if (SelectedItems.Contains(item))
+                            {
+                                <MIcon Color="primary" Dense>mdi-check</MIcon>
+                            }
+                        </MListItemIcon>
+                    </MListItem>
+                }
             }
         </MList>
     </ChildContent>

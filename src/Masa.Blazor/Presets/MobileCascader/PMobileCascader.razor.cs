@@ -22,9 +22,7 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
 
     [Parameter] public EventCallback<TItem> OnLoadChildren { get; set; }
 
-    [Parameter] public EventCallback<TItem> OnSelect { get; set; }
-
-    [Parameter] public EventCallback<TItem> OnDeselect { get; set; }
+    [Parameter] public EventCallback<List<TItem>> OnSelect { get; set; }
 
     [Parameter] public string Title { get; set; }
 
@@ -66,7 +64,7 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
 
             var tabs = SelectedItems.Select(t => ItemText(t)).ToList();
 
-            if (HasChildren)
+            if (HasChildren || IsLoading)
             {
                 tabs.Add(PleaseSelectText);
             }
@@ -119,15 +117,16 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
             if (EqualityComparer<TItem>.Default.Equals(activeTab, item))
             {
                 // cancel the selection and nothing to do
-                if (!OnDeselect.HasDelegate) return;
-
-                await OnDeselect.InvokeAsync(item);
+                if (!OnSelect.HasDelegate) return;
+                await OnSelect.InvokeAsync(SelectedItems);
 
                 return;
             }
         }
 
         SelectedItems.Add(item);
+
+        _tabIndex++;
 
         var children = ItemChildren(item);
 
@@ -144,8 +143,6 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
             {
                 _loadingItem = default;
                 _loadedItems.Remove(item);
-                StateHasChanged();
-                throw;
             }
             finally
             {
@@ -155,16 +152,18 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
             children = ItemChildren(item);
         }
 
-        if (children is not null && children.Count > 0)
+        if (children == null || children.Count == 0)
         {
-            _tabIndex++;
+            _tabIndex--;
         }
 
         if (OnSelect.HasDelegate)
         {
-            await OnSelect.InvokeAsync(item);
+            await OnSelect.InvokeAsync(SelectedItems);
         }
     }
+
+    private bool IsLoading => !EqualityComparer<TItem>.Default.Equals(_loadingItem, default);
 
     private bool IsDisabled(TItem item)
     {

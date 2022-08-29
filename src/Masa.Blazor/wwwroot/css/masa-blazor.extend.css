@@ -570,6 +570,12 @@ input[type=number] {
     min-width: 64px;
 }
 
+.p-mobile-cascader__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 /* cron */
 
 .m-cron .m-text-field {

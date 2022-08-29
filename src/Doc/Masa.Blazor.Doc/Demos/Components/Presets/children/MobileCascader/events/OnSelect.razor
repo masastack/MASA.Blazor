@@ -8,8 +8,7 @@
                          ItemValue="d => d.Code"
                          ItemChildren="d => d.Children"
                          ItemDisabled="d => d.Disabled"
-                         OnSelect="HandleOnSelect"
-                         OnDeselect="HandleOnDeselect">
+                         OnSelect="HandleOnSelect">
             <ActivatorContent>
                 <MButton @attributes="@context.Attrs">Select</MButton>
             </ActivatorContent>
@@ -24,14 +23,9 @@
 
     List<Data> selectedItems = new();
 
-    void HandleOnSelect(Data selected)
+    void HandleOnSelect(List<Data> selected)
     {
-        selectedItems.Add(selected);
-    }
-
-    void HandleOnDeselect(Data deselected)
-    {
-        selectedItems.Remove(deselected);
+        selectedItems = selected;
     }
 
     record Data(string Code, string Name, List<Data> Children = null, bool Disabled = false);
