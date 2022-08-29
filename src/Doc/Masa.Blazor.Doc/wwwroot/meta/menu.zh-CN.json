@@ -643,6 +643,15 @@
           },
           {
             "Order": 0,
+            "Title": "Mobile cascader",
+            "SubTitle": "移动端级联",
+            "FullTitle": "Mobile cascader (移动端级联)",
+            "Type": "menuItem",
+            "Url": "components/mobile-cascader",
+            "Tag": "preset"
+          },
+          {
+            "Order": 0,
             "Title": "OTP Input",
             "SubTitle": "一次性密码输入",
             "FullTitle": "OTP Input (一次性密码输入)",
@@ -844,16 +853,6 @@
         "FullTitle": "Menus (菜单)",
         "Type": "menuItem",
         "Url": "components/menus",
-        "Children": []
-      },
-      {
-        "Order": 0,
-        "Title": "Mobile cascader",
-        "SubTitle": "移动端级联",
-        "FullTitle": "Mobile cascader (移动端级联)",
-        "Type": "menuItem",
-        "Url": "components/mobile-cascader",
-        "Tag": "preset",
         "Children": []
       },
       {

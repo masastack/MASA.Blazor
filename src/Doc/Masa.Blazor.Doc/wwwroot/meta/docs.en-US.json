@@ -4607,6 +4607,14 @@
           },
           {
             "Order": 0,
+            "Title": "Mobile cascader",
+            "FullTitle": "Mobile cascader",
+            "Type": "menuItem",
+            "Url": "components/mobile-cascader",
+            "Tag": "preset"
+          },
+          {
+            "Order": 0,
             "Title": "OTP Input",
             "FullTitle": "OTP Input",
             "Type": "menuItem",
@@ -4784,15 +4792,6 @@
         "FullTitle": "Menus",
         "Type": "menuItem",
         "Url": "components/menus",
-        "Children": []
-      },
-      {
-        "Order": 0,
-        "Title": "Mobile cascader",
-        "FullTitle": "Mobile cascader",
-        "Type": "menuItem",
-        "Url": "components/mobile-cascader",
-        "Tag": "preset",
         "Children": []
       },
       {
