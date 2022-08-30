@@ -229,13 +229,7 @@ namespace Masa.Blazor
 
         protected double PrependWidth { get; set; }
 
-        private string NumberValue
-        {
-            get
-            {
-                return InternalValue == null || string.IsNullOrWhiteSpace(InternalValue.ToString()) ? "0" : InternalValue.ToString();
-            }
-        }
+        private string NumberValue => InternalValue == null || string.IsNullOrWhiteSpace(InternalValue.ToString()) ? "0" : InternalValue.ToString();
 
         protected (StringNumber left, StringNumber right) LabelPosition
         {
@@ -494,9 +488,11 @@ namespace Masa.Blazor
                 //We may remove this when dialog been refactored
                 await Task.Delay(16 * 3);
 
-                var inputElement = Document.GetElementByReference(InputElement);
-                await inputElement.AddEventListenerAsync("compositionstart", CreateEventCallback(OnCompositionStart));
-                await inputElement.AddEventListenerAsync("compositionend", CreateEventCallback(OnCompositionEnd));
+                var module = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/BlazorComponent/js/input.js");
+                await module.InvokeVoidAsync("sayHello", InputElement, DotNetObjectReference.Create(new Invoker<ChangeEventArgs>(HandleOnInputAsync)));
+                
+                // await inputElement.AddEventListenerAsync("compositionstart", CreateEventCallback(OnCompositionStart));
+                // await inputElement.AddEventListenerAsync("compositionend", CreateEventCallback(OnCompositionEnd));
 
                 await DomEventJsInterop.IntersectionObserver(InputElement.GetSelector(), TryAutoFocus, OnResize);
 
@@ -664,8 +660,6 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            Inputting = true;
-
             var success = BindConverter.TryConvertTo<TValue>(args.Value.ToString(), CultureInfo.InvariantCulture, out var val);
 
             if (success)
@@ -702,11 +696,6 @@ namespace Masa.Blazor
         {
             if (!_compositionInputting)
             {
-                if (Inputting)
-                {
-                    return;
-                }
-
                 await SetInternalValueAsync(InputValue);
 
                 StateHasChanged();
@@ -812,8 +801,6 @@ namespace Masa.Blazor
             }
             else
             {
-                Inputting = true;
-
                 await ChangeValue();
             }
 
