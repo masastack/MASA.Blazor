@@ -20,7 +20,7 @@ namespace Masa.Blazor.Doc.Services
         private readonly HttpClient _httpClient;
         private readonly NavigationManager _navigationManager;
 
-        private string CurrentCulture { get; set; }
+        private string CurrentCulture { get; set; } = "en-us";
 
         public DemoService(HttpClient httpClient, NavigationManager navigationManager)
         {
