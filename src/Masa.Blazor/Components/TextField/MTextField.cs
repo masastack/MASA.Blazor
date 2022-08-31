@@ -5,7 +5,7 @@ namespace Masa.Blazor
 {
     public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
     {
-        private string _badInput;
+        private bool _badInput;
 
         private bool _shouldRender = true;
 
@@ -88,9 +88,6 @@ namespace Masa.Blazor
         public EventCallback<KeyboardEventArgs> OnKeyUp { get; set; }
 
         [Parameter]
-        public EventCallback<TValue> OnInput { get; set; }
-
-        [Parameter]
         public RenderFragment ProgressContent { get; set; }
 
         [Parameter]
@@ -139,9 +136,7 @@ namespace Masa.Blazor
         public bool IsSingle => IsSolo || SingleLine || FullWidth || (Filled && !HasLabel);
 
         public virtual bool LabelValue => IsFocused || IsLabelActive || PersistentPlaceholder;
-
-        public virtual ElementReference InputElement { get; set; }
-
+        
         protected double LabelWidth { get; set; }
 
         public string LegendInnerHTML => "&#8203;";
@@ -172,7 +167,7 @@ namespace Masa.Blazor
                 Dictionary<string, object> attibutes = new(Attributes)
                 {
                     { "type", Type },
-                    { "value", _badInput == null ? InternalValue : _badInput }
+                    // { "value", LazyValue }
                 };
 
                 if (Type == "number")
@@ -297,8 +292,6 @@ namespace Masa.Blazor
         Dictionary<string, object> ITextField<TValue>.InputAttrs => InputAttrs;
 
         Dictionary<string, object> ITextField<TValue>.InputSlotAttrs => InputSlotAttrs;
-
-        TValue ITextField<TValue>.InputValue => InputValue;
 
         protected override void SetComponentClass()
         {
@@ -472,8 +465,6 @@ namespace Masa.Blazor
                 });
         }
 
-        public override Func<Task> DebounceTimerRun => TextFieldDebounceTimerRun;
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             NumberProps?.Invoke(Props);
@@ -482,15 +473,13 @@ namespace Masa.Blazor
 
             if (firstRender)
             {
-                await JsInvokeAsync(JsInteropConstants.RegisterTextFieldOnMouseDown, InputSlotElement, InputElement, DotNetObjectReference.Create(new Invoker<MouseEventArgs>(HandleOnMouseDownAsync)));
                 //OnAfterRender doesn't indicate DOM ready
                 //So we should wait a little time
                 //We may remove this when dialog been refactored
                 await Task.Delay(16 * 3);
 
-                var module = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/BlazorComponent/js/input.js");
-                await module.InvokeVoidAsync("sayHello", InputElement, DotNetObjectReference.Create(new Invoker<ChangeEventArgs>(HandleOnInputAsync)));
-                
+                await JsInvokeAsync(JsInteropConstants.RegisterTextFieldOnMouseDown, InputSlotElement, InputElement, DotNetObjectReference.Create(new Invoker<MouseEventArgs>(HandleOnMouseDownAsync)));
+
                 // await inputElement.AddEventListenerAsync("compositionstart", CreateEventCallback(OnCompositionStart));
                 // await inputElement.AddEventListenerAsync("compositionend", CreateEventCallback(OnCompositionEnd));
 
@@ -640,17 +629,18 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
         {
-            _badInput = null;
+            // _badInput = null;
+
             IsFocused = false;
 
             var checkValue = await CheckNumberValidate();
 
             if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
             {
-                InputValue = checkValue;
+                // InputValue = checkValue;
             }
 
-            await ChangeValue(true);
+            // await ChangeValue(true);
 
             if (OnBlur.HasDelegate)
             {
@@ -658,14 +648,16 @@ namespace Masa.Blazor
             }
         }
 
-        public virtual async Task HandleOnInputAsync(ChangeEventArgs args)
+        public override async Task HandleOnInputAsync(ChangeEventArgs args)
         {
             var success = BindConverter.TryConvertTo<TValue>(args.Value.ToString(), CultureInfo.InvariantCulture, out var val);
 
             if (success)
             {
-                _badInput = null;
-                InputValue = val;
+                // _badInput = null;
+                // InputValue = val;
+
+                InternalValue = val;
 
                 if (OnInput.HasDelegate)
                 {
@@ -674,32 +666,10 @@ namespace Masa.Blazor
             }
             else
             {
-                _badInput = val.ToString();
+                _badInput = true;
             }
-        }
-
-        private bool _compositionInputting;
-
-        public Task OnCompositionStart()
-        {
-            _compositionInputting = true;
-            return Task.CompletedTask;
-        }
-
-        public Task OnCompositionEnd()
-        {
-            _compositionInputting = false;
-            return Task.CompletedTask;
-        }
-
-        public async Task TextFieldDebounceTimerRun()
-        {
-            if (!_compositionInputting)
-            {
-                await SetInternalValueAsync(InputValue);
-
-                StateHasChanged();
-            }
+            
+            // todo: args.validity.badInput
         }
 
         private Task<TValue> CheckNumberValidate()
@@ -797,11 +767,11 @@ namespace Masa.Blazor
 
             if (args.Key == "Enter")
             {
-                await ChangeValue(true);
+                // await ChangeValue(true);
             }
             else
             {
-                await ChangeValue();
+                // await ChangeValue();
             }
 
             if (OnKeyDown.HasDelegate)

@@ -17,8 +17,6 @@ namespace Masa.Blazor
         [Parameter]
         public string OffIcon { get; set; } = "mdi-checkbox-blank-outline";
 
-        public override int DebounceMilliseconds { get; set; }
-
         public string ComputedIcon
         {
             get

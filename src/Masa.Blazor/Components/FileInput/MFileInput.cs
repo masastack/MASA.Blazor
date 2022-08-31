@@ -41,8 +41,6 @@ namespace Masa.Blazor
 
         public override Action<TextFieldNumberProperty> NumberProps { get; set; }
 
-        public override int DebounceMilliseconds { get; set; }
-
         protected override Dictionary<string, object> InputAttrs => new()
         {
             { "type", "file" },

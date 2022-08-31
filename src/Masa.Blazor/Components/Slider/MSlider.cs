@@ -44,8 +44,6 @@ namespace Masa.Blazor
         [Parameter]
         public RenderFragment<double> ThumbLabelContent { get; set; }
 
-        public override int DebounceMilliseconds { get; set; }
-
         protected virtual double GetRoundedValue(int index)
         {
             return RoundValue(DoubleInternalValue);
