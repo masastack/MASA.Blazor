@@ -135,8 +135,13 @@ namespace Masa.Blazor
 
         public bool IsSingle => IsSolo || SingleLine || FullWidth || (Filled && !HasLabel);
 
+        protected override bool IsDirty => Convert.ToString(LazyValue).Length > 0 || _badInput;
+
+        private static readonly string[] DirtyTypes = new[] { "color", "file", "time", "date", "datetime-local", "week", "month" };
+        public override bool IsLabelActive => IsDirty || DirtyTypes.Contains(Type);
+
         public virtual bool LabelValue => IsFocused || IsLabelActive || PersistentPlaceholder;
-        
+
         protected double LabelWidth { get; set; }
 
         public string LegendInnerHTML => "&#8203;";
@@ -183,18 +188,8 @@ namespace Masa.Blazor
             }
         }
 
-        public virtual StringNumber ComputedCounterValue
-        {
-            get
-            {
-                if (CounterValue != null)
-                {
-                    return CounterValue(InternalValue);
-                }
-
-                return InternalValue?.ToString()?.Length ?? 0;
-            }
-        }
+        private int InternalCounterValue { get; set; }
+        public virtual StringNumber ComputedCounterValue => InternalCounterValue;
 
         public override bool HasDetails => base.HasDetails || HasCounter;
 
@@ -226,7 +221,7 @@ namespace Masa.Blazor
 
         private string NumberValue => InternalValue == null || string.IsNullOrWhiteSpace(InternalValue.ToString()) ? "0" : InternalValue.ToString();
 
-        protected (StringNumber left, StringNumber right) LabelPosition
+        protected(StringNumber left, StringNumber right) LabelPosition
         {
             get
             {
@@ -465,6 +460,12 @@ namespace Masa.Blazor
                 });
         }
 
+        protected override async Task HandleOnInputImmediately(ChangeEventArgs args)
+        {
+            await HandleOnCounterAsync(args.Value?.ToString());
+            await base.HandleOnInputImmediately(args);
+        }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             NumberProps?.Invoke(Props);
@@ -478,7 +479,8 @@ namespace Masa.Blazor
                 //We may remove this when dialog been refactored
                 await Task.Delay(16 * 3);
 
-                await JsInvokeAsync(JsInteropConstants.RegisterTextFieldOnMouseDown, InputSlotElement, InputElement, DotNetObjectReference.Create(new Invoker<MouseEventArgs>(HandleOnMouseDownAsync)));
+                await JsInvokeAsync(JsInteropConstants.RegisterTextFieldOnMouseDown, InputSlotElement, InputElement,
+                    DotNetObjectReference.Create(new Invoker<MouseEventArgs>(HandleOnMouseDownAsync)));
 
                 // await inputElement.AddEventListenerAsync("compositionstart", CreateEventCallback(OnCompositionStart));
                 // await inputElement.AddEventListenerAsync("compositionend", CreateEventCallback(OnCompositionEnd));
@@ -499,6 +501,27 @@ namespace Masa.Blazor
                 await Task.WhenAll(tasks);
                 StateHasChanged();
             }
+        }
+
+        private async Task HandleOnCounterAsync(string value)
+        {
+            var success = BindConverter.TryConvertTo<TValue>(value, CultureInfo.InvariantCulture, out var val);
+            if (success)
+            {
+                ComputeInternalCounterValue(val);
+            }
+        }
+
+        private void ComputeInternalCounterValue(TValue val)
+        {
+            InternalCounterValue = CounterValue?.Invoke(val) ?? (val?.ToString()?.Length ?? 0);
+        }
+
+        protected override void OnValueChanged(TValue val)
+        {
+            base.OnValueChanged(val);
+
+            ComputeInternalCounterValue(val);
         }
 
         private async Task SetLabelWidthAsync()
@@ -659,16 +682,23 @@ namespace Masa.Blazor
 
                 InternalValue = val;
 
-                if (OnInput.HasDelegate)
+                // if (OnInput.HasDelegate)
+                // {
+                //     await OnInput.InvokeAsync(val);
+                // }
+
+                if (ValueChanged.HasDelegate)
                 {
-                    await OnInput.InvokeAsync(val);
+                    await ValueChanged.InvokeAsync(val);
                 }
             }
             else
             {
                 _badInput = true;
             }
-            
+
+            StateHasChanged();
+
             // todo: args.validity.badInput
         }
 
@@ -678,9 +708,11 @@ namespace Masa.Blazor
             {
                 TValue returnValue;
 
-                if (Props.Min != null && value < Props.Min && BindConverter.TryConvertTo<TValue>(Props.Min.ToString(), CultureInfo.InvariantCulture, out returnValue))
+                if (Props.Min != null && value < Props.Min &&
+                    BindConverter.TryConvertTo<TValue>(Props.Min.ToString(), CultureInfo.InvariantCulture, out returnValue))
                     return Task.FromResult(returnValue);
-                else if (Props.Max != null && value > Props.Max && BindConverter.TryConvertTo<TValue>(Props.Max.ToString(), CultureInfo.InvariantCulture, out returnValue))
+                else if (Props.Max != null && value > Props.Max &&
+                         BindConverter.TryConvertTo<TValue>(Props.Max.ToString(), CultureInfo.InvariantCulture, out returnValue))
                     return Task.FromResult(returnValue);
             }
 

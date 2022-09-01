@@ -176,6 +176,8 @@ namespace Masa.Blazor
 
         protected virtual bool MenuCanShow => true;
 
+        protected override bool DisableSetValueByJsInterop => true;
+
         protected virtual BMenuProps GetDefaultMenuProps() => new()
         {
             CloseOnClick = false,
