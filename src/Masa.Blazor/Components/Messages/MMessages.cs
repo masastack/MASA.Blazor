@@ -2,7 +2,6 @@
 {
     public partial class MMessages : BMessages, IThemeable
     {
-
         [Parameter]
         public string Color { get; set; }
 

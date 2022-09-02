@@ -419,15 +419,19 @@ namespace Masa.Blazor
                 .ApplySelectDefault<TItem, TItemValue, TValue>()
                 .Merge<BIcon, MIcon>("append-icon", attrs =>
                 {
+                    var dic = new Dictionary<string, object>();
+                    
                     // Don't allow the dropdown icon to be focused
                     var onClick = (EventCallback<MouseEventArgs>)attrs.Data;
                     if (onClick.HasDelegate)
                     {
-                        attrs["tabindex"] = -1;
+                        dic["tabindex"] = -1;
                     }
 
-                    attrs["aria-hidden"] = "true";
-                    attrs["aria-label"] = null;
+                    dic["aria-hidden"] = "true";
+                    dic["aria-label"] = null;
+
+                    attrs[nameof(MIcon.Attributes)] = dic;
                 })
                 .Apply<BMenu, MMenu>(attrs =>
                 {

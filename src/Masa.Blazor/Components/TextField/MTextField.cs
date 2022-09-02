@@ -114,6 +114,9 @@ namespace Masa.Blazor
         [Parameter]
         public virtual Action<TextFieldNumberProperty> NumberProps { get; set; }
 
+        [Parameter] 
+        public int DebounceInterval { get; set; }
+
         [Inject]
         public MasaBlazor MasaBlazor { get; set; }
 
@@ -136,6 +139,8 @@ namespace Masa.Blazor
         public bool IsSingle => IsSolo || SingleLine || FullWidth || (Filled && !HasLabel);
 
         protected override bool IsDirty => Convert.ToString(LazyValue).Length > 0 || _badInput;
+
+        protected override int InternalDebounceInterval => DebounceInterval;
 
         private static readonly string[] DirtyTypes = new[] { "color", "file", "time", "date", "datetime-local", "week", "month" };
         public override bool IsLabelActive => IsDirty || DirtyTypes.Contains(Type);
@@ -450,6 +455,7 @@ namespace Masa.Blazor
                     attrs[nameof(MIcon.Dark)] = Dark;
                     attrs[nameof(MIcon.Disabled)] = Disabled;
                     attrs[nameof(MIcon.Light)] = Light;
+                    attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } };
                 })
                 .ApplyTextFieldPrependInnerIcon(typeof(MIcon), attrs =>
                 {
@@ -457,13 +463,16 @@ namespace Masa.Blazor
                     attrs[nameof(MIcon.Dark)] = Dark;
                     attrs[nameof(MIcon.Disabled)] = Disabled;
                     attrs[nameof(MIcon.Light)] = Light;
-                });
-        }
-
-        protected override async Task HandleOnInputImmediately(ChangeEventArgs args)
-        {
-            await HandleOnCounterAsync(args.Value?.ToString());
-            await base.HandleOnInputImmediately(args);
+                    attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } };
+                })
+                .Merge<BIcon, MIcon>("prepend-icon",
+                    attrs => { attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } }; })
+                .Merge<BIcon, MIcon>("append-icon",
+                    attrs => { attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } }; })
+                .Merge<BIcon, MIcon>("append-icon-number-up",
+                    attrs => { attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } }; })
+                .Merge<BIcon, MIcon>("append-icon-number-down",
+                    attrs => { attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } }; });
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -652,22 +661,18 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnBlurAsync(FocusEventArgs args)
         {
-            // _badInput = null;
-
             IsFocused = false;
-
-            var checkValue = await CheckNumberValidate();
-
-            if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
-            {
-                // InputValue = checkValue;
-            }
-
-            // await ChangeValue(true);
-
             if (OnBlur.HasDelegate)
             {
                 await OnBlur.InvokeAsync(args);
+            }
+
+            var checkValue = CheckNumberValidate();
+
+            if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
+            {
+                InternalValue = checkValue;
+                await SetValueByJsInterop(checkValue);
             }
         }
 
@@ -677,8 +682,7 @@ namespace Masa.Blazor
 
             if (success)
             {
-                // _badInput = null;
-                // InputValue = val;
+                _badInput = false;
 
                 InternalValue = val;
 
@@ -695,28 +699,40 @@ namespace Masa.Blazor
             else
             {
                 _badInput = true;
+
+                InternalValue = default;
             }
+            
+            if (!ValidateOnBlur)
+            {
+                //We removed NextTick since it doesn't trigger render
+                //and validate may not be called
+                Validate();
+            }
+            
+            await HandleOnCounterAsync(args.Value?.ToString());
+            
+            Console.WriteLine($"---------- internalValue: {InternalValue}");
 
             StateHasChanged();
 
             // todo: args.validity.badInput
         }
 
-        private Task<TValue> CheckNumberValidate()
+        private TValue CheckNumberValidate()
         {
-            if (Type == "number" && BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out var value))
-            {
-                TValue returnValue;
+            if (Type != "number" || !BindConverter.TryConvertToDecimal(NumberValue, CultureInfo.InvariantCulture, out var value))
+                return InternalValue;
 
-                if (Props.Min != null && value < Props.Min &&
-                    BindConverter.TryConvertTo<TValue>(Props.Min.ToString(), CultureInfo.InvariantCulture, out returnValue))
-                    return Task.FromResult(returnValue);
-                else if (Props.Max != null && value > Props.Max &&
-                         BindConverter.TryConvertTo<TValue>(Props.Max.ToString(), CultureInfo.InvariantCulture, out returnValue))
-                    return Task.FromResult(returnValue);
-            }
+            if (Props.Min != null && value < Props.Min &&
+                BindConverter.TryConvertTo<TValue>(Props.Min.ToString(), CultureInfo.InvariantCulture, out var returnValue))
+                return returnValue;
 
-            return Task.FromResult(InternalValue);
+            if (Props.Max != null && value > Props.Max &&
+                BindConverter.TryConvertTo<TValue>(Props.Max.ToString(), CultureInfo.InvariantCulture, out returnValue))
+                return returnValue;
+
+            return InternalValue;
         }
 
         public async Task HandleOnKeyUpAsync(KeyboardEventArgs args)
