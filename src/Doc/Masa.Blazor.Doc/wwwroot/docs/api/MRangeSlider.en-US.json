@@ -332,6 +332,11 @@
       "Description": ""
     },
     {
+      "Name": "OnInput",
+      "Type": "EventCallback<IList`1>",
+      "Description": ""
+    },
+    {
       "Name": "OnMouseDown",
       "Type": "EventCallback<MouseEventArgs>",
       "Description": ""

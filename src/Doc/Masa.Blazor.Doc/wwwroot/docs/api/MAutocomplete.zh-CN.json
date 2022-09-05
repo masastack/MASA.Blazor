@@ -92,6 +92,11 @@
       "Description": "将暗色主题变量应用到组件。"
     },
     {
+      "Name": "DebounceInterval",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
       "Name": "DeletableChips",
       "Type": "Boolean",
       "Default": "false",

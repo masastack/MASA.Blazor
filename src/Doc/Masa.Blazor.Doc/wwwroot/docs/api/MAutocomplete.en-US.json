@@ -92,6 +92,11 @@
       "Description": "Applies the dark theme variant to the component."
     },
     {
+      "Name": "DebounceInterval",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
       "Name": "DeletableChips",
       "Type": "Boolean",
       "Default": "false",
