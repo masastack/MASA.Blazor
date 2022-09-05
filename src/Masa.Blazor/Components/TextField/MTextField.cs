@@ -5,9 +5,14 @@ namespace Masa.Blazor
 {
     public partial class MTextField<TValue> : MInput<TValue>, ITextField<TValue>
     {
-        private bool _badInput;
+        [Inject]
+        public MasaBlazor MasaBlazor { get; set; }
 
-        private bool _shouldRender = true;
+        [Inject]
+        public Document Document { get; set; }
+
+        [Inject]
+        public DomEventJsInterop DomEventJsInterop { get; set; } = null!;
 
         [Parameter]
         public virtual bool Clearable { get; set; }
@@ -88,6 +93,9 @@ namespace Masa.Blazor
         public EventCallback<KeyboardEventArgs> OnKeyUp { get; set; }
 
         [Parameter]
+        public EventCallback OnEnter { get; set; }
+
+        [Parameter]
         public RenderFragment ProgressContent { get; set; }
 
         [Parameter]
@@ -114,17 +122,12 @@ namespace Masa.Blazor
         [Parameter]
         public virtual Action<TextFieldNumberProperty> NumberProps { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public int DebounceInterval { get; set; }
 
-        [Inject]
-        public MasaBlazor MasaBlazor { get; set; }
+        private static readonly string[] DirtyTypes = { "color", "file", "time", "date", "datetime-local", "week", "month" };
 
-        [Inject]
-        public Document Document { get; set; }
-
-        [Inject]
-        public DomEventJsInterop DomEventJsInterop { get; set; } = null!;
+        private bool _badInput;
 
         public TextFieldNumberProperty Props { get; set; } = new();
 
@@ -142,7 +145,6 @@ namespace Masa.Blazor
 
         protected override int InternalDebounceInterval => DebounceInterval;
 
-        private static readonly string[] DirtyTypes = new[] { "color", "file", "time", "date", "datetime-local", "week", "month" };
         public override bool IsLabelActive => IsDirty || DirtyTypes.Contains(Type);
 
         public virtual bool LabelValue => IsFocused || IsLabelActive || PersistentPlaceholder;
@@ -174,27 +176,22 @@ namespace Masa.Blazor
         {
             get
             {
-                Dictionary<string, object> attibutes = new(Attributes)
-                {
-                    { "type", Type },
-                    // { "value", LazyValue }
-                };
+                Dictionary<string, object> attributes = new(Attributes) { { "type", Type } };
 
                 if (Type == "number")
                 {
                     if (Props.Min.HasValue)
-                        attibutes.Add("min", Props.Min);
+                        attributes.Add("min", Props.Min);
                     if (Props.Max.HasValue)
-                        attibutes.Add("max", Props.Max);
-                    attibutes.Add("step", Props.Step);
+                        attributes.Add("max", Props.Max);
+                    attributes.Add("step", Props.Step);
                 }
 
-                return attibutes;
+                return attributes;
             }
         }
 
-        private int InternalCounterValue { get; set; }
-        public virtual StringNumber ComputedCounterValue => InternalCounterValue;
+        public virtual StringNumber ComputedCounterValue => CounterValue?.Invoke(InternalValue) ?? (InternalValue?.ToString()?.Length ?? 0);
 
         public override bool HasDetails => base.HasDetails || HasCounter;
 
@@ -342,7 +339,7 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add("m-input__icon")
-                        .Add("m-input__icon--append-outter");
+                        .Add("m-input__icon--append-outer");
                 })
                 .Apply("prepend-inner-icon", cssBuilder =>
                 {
@@ -483,16 +480,8 @@ namespace Masa.Blazor
 
             if (firstRender)
             {
-                //OnAfterRender doesn't indicate DOM ready
-                //So we should wait a little time
-                //We may remove this when dialog been refactored
-                await Task.Delay(16 * 3);
-
                 await JsInvokeAsync(JsInteropConstants.RegisterTextFieldOnMouseDown, InputSlotElement, InputElement,
                     DotNetObjectReference.Create(new Invoker<MouseEventArgs>(HandleOnMouseDownAsync)));
-
-                // await inputElement.AddEventListenerAsync("compositionstart", CreateEventCallback(OnCompositionStart));
-                // await inputElement.AddEventListenerAsync("compositionend", CreateEventCallback(OnCompositionEnd));
 
                 await DomEventJsInterop.IntersectionObserver(InputElement.GetSelector(), TryAutoFocus, OnResize);
 
@@ -510,27 +499,6 @@ namespace Masa.Blazor
                 await Task.WhenAll(tasks);
                 StateHasChanged();
             }
-        }
-
-        private async Task HandleOnCounterAsync(string value)
-        {
-            var success = BindConverter.TryConvertTo<TValue>(value, CultureInfo.InvariantCulture, out var val);
-            if (success)
-            {
-                ComputeInternalCounterValue(val);
-            }
-        }
-
-        private void ComputeInternalCounterValue(TValue val)
-        {
-            InternalCounterValue = CounterValue?.Invoke(val) ?? (val?.ToString()?.Length ?? 0);
-        }
-
-        protected override void OnValueChanged(TValue val)
-        {
-            base.OnValueChanged(val);
-
-            ComputeInternalCounterValue(val);
         }
 
         private async Task SetLabelWidthAsync()
@@ -686,14 +654,9 @@ namespace Masa.Blazor
 
                 InternalValue = val;
 
-                // if (OnInput.HasDelegate)
-                // {
-                //     await OnInput.InvokeAsync(val);
-                // }
-
-                if (ValueChanged.HasDelegate)
+                if (OnInput.HasDelegate)
                 {
-                    await ValueChanged.InvokeAsync(val);
+                    await OnInput.InvokeAsync(val);
                 }
             }
             else
@@ -702,17 +665,13 @@ namespace Masa.Blazor
 
                 InternalValue = default;
             }
-            
+
             if (!ValidateOnBlur)
             {
                 //We removed NextTick since it doesn't trigger render
                 //and validate may not be called
                 Validate();
             }
-            
-            await HandleOnCounterAsync(args.Value?.ToString());
-            
-            Console.WriteLine($"---------- internalValue: {InternalValue}");
 
             StateHasChanged();
 
@@ -791,11 +750,6 @@ namespace Masa.Blazor
             await InputElement.FocusAsync();
         }
 
-        protected override bool ShouldRender()
-        {
-            return _shouldRender;
-        }
-
         public virtual async Task HandleOnFocusAsync(FocusEventArgs args)
         {
             if (!IsFocused)
@@ -811,15 +765,9 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
-            await Task.Yield();
-
-            if (args.Key == "Enter")
+            if (args.Key == "Enter" && OnEnter.HasDelegate)
             {
-                // await ChangeValue(true);
-            }
-            else
-            {
-                // await ChangeValue();
+                await OnEnter.InvokeAsync();
             }
 
             if (OnKeyDown.HasDelegate)
