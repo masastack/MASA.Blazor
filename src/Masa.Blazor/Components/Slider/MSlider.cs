@@ -248,27 +248,23 @@ namespace Masa.Blazor
         protected virtual async Task SetInternalValueAsync(double internalValue)
         {
             var val = RoundValue(Math.Min(Math.Max(internalValue, Min), Max));
-            await SetInternalValueAsync(val is TValue v ? v : default);
+            InternalValue = (val is TValue v ? v : default);
         }
 
-        protected override void OnWatcherInitialized()
+        protected override void OnValueChanged(TValue val)
         {
-            Watcher
-                .Watch<TValue>(nameof(Value), val =>
+            //Value may not between min and max
+            //If that so,we should invoke ValueChanged 
+            var roundedVal = ConvertDoubleToTValue(RoundValue(Math.Min(Math.Max(Convert.ToDouble(val), Min), Max)));
+            if (!EqualityComparer<TValue>.Default.Equals(val, roundedVal) && ValueChanged.HasDelegate)
+            {
+                NextTick(async () =>
                 {
-                    //Value may not between min and max
-                    //If that so,we should invoke ValueChanged 
-                    var roundedVal = ConvertDoubleToTValue(RoundValue(Math.Min(Math.Max(Convert.ToDouble(val), Min), Max)));
-                    if (!EqualityComparer<TValue>.Default.Equals(val, roundedVal) && ValueChanged.HasDelegate)
-                    {
-                        NextTick(async () =>
-                        {
-                            await ValueChanged.InvokeAsync(roundedVal);
-                        });
-                    }
-
-                    LazyValue = roundedVal;
+                    await ValueChanged.InvokeAsync(roundedVal);
                 });
+            }
+
+            LazyValue = roundedVal;
         }
 
         private static TValue ConvertDoubleToTValue(double val)
@@ -357,7 +353,7 @@ namespace Masa.Blazor
             OldValue = DoubleInternalValue;
             IsActive = true;
 
-            if (target.Class.Contains("m-slider__thumb-container"))
+            if ((target.Class ?? "").Contains("m-slider__thumb-container"))
             {
                 ThumbPressed = true;
                 var container = Document.QuerySelector($"#{Id} .m-slider__thumb-container");
@@ -376,9 +372,10 @@ namespace Masa.Blazor
                     await Task.Delay(300, MouseCancellationTokenSource.Token);
                     ThumbPressed = true;
 
-                    InvokeStateHasChanged();
+                    await InvokeStateHasChangedAsync();
                 });
             }
+
             var args = new MouseEventArgs()
             {
                 ClientX = clientX,
@@ -414,7 +411,7 @@ namespace Masa.Blazor
             {
                 ThumbPressed = true;
             }
-           
+
             var val = await ParseMouseMoveAsync(args);
 
             await SetInternalValueAsync(val);

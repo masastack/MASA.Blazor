@@ -50,7 +50,7 @@ public partial class MSelectable : MInput<bool>, ISelectable
 
         await ValidateAsync(true, input);
 
-        await SetInternalValueAsync(input);
+        InternalValue = input;
     }
 
     public async Task HandleOnBlur(FocusEventArgs args)
@@ -62,7 +62,7 @@ public partial class MSelectable : MInput<bool>, ISelectable
     {
         IsFocused = true;
     }
-
+ 
     public Task HandleOnKeyDown(KeyboardEventArgs args)
     {
         return Task.CompletedTask;

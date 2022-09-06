@@ -10,11 +10,11 @@ namespace Masa.Blazor
         {
             get
             {
-                return DoubleInteralValues.Select(v => (RoundValue(v) - Min) / (Max - Min) * 100).ToList();
+                return DoubleInternalValues.Select(v => (RoundValue(v) - Min) / (Max - Min) * 100).ToList();
             }
         }
 
-        protected IList<double> DoubleInteralValues
+        protected IList<double> DoubleInternalValues
         {
             get
             {
@@ -54,7 +54,7 @@ namespace Masa.Blazor
 
         protected override double GetRoundedValue(int index)
         {
-            return RoundValue(DoubleInteralValues[index]);
+            return RoundValue(DoubleInternalValues[index]);
         }
 
         public override async Task HandleOnSliderClickAsync(MouseEventArgs args)
@@ -87,7 +87,7 @@ namespace Masa.Blazor
 
             if (ActiveThumb == null)
             {
-                ActiveThumb = GetIndexOfClosestValue(DoubleInteralValues, _value);
+                ActiveThumb = GetIndexOfClosestValue(DoubleInternalValues, _value);
             }
 
             await SetInternalValueAsync(_value);
@@ -97,7 +97,7 @@ namespace Masa.Blazor
         {
             var values = new List<double>();
 
-            for (int i = 0; i < DoubleInteralValues.Count; i++)
+            for (int i = 0; i < DoubleInternalValues.Count; i++)
             {
                 if (i == ActiveThumb)
                 {
@@ -105,7 +105,7 @@ namespace Masa.Blazor
                 }
                 else
                 {
-                    values.Add(DoubleInteralValues[i]);
+                    values.Add(DoubleInternalValues[i]);
                 }
             }
 
@@ -122,8 +122,7 @@ namespace Masa.Blazor
                 val = new List<double> { val[1], val[0] };
             }
 
-            var internalValue = val is IList<TValue> internalVal ? internalVal : default;
-            await SetInternalValueAsync(internalValue);
+            InternalValue = val is IList<TValue> internalVal ? internalVal : default;
         }
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
@@ -133,7 +132,7 @@ namespace Masa.Blazor
                 return;
             }
 
-            var value = ParseKeyDown(args, DoubleInteralValues[ActiveThumb.Value]);
+            var value = ParseKeyDown(args, DoubleInternalValues[ActiveThumb.Value]);
             if (value == null)
             {
                 return;
@@ -158,7 +157,7 @@ namespace Masa.Blazor
 
         private async Task ReevaluateSelectedAsync(double value)
         {
-            ActiveThumb = GetIndexOfClosestValue(DoubleInteralValues, value);
+            ActiveThumb = GetIndexOfClosestValue(DoubleInternalValues, value);
             var thumbElement = ActiveThumb == 0 ? ThumbElement : SecondThumbElement;
             await thumbElement.FocusAsync();
         }
@@ -201,24 +200,27 @@ namespace Masa.Blazor
             await base.HandleOnBlurAsync(args);
         }
 
-        protected override void OnWatcherInitialized()
+        protected override void OnInitialized()
         {
-            Watcher
-                .Watch<IList<TValue>>(nameof(Value), val =>
-                {
-                    //Value may not between min and max
-                    //If that so,we should invoke ValueChanged 
-                    var roundedVal = val.Select(v => ConvertDoubleToTValue(RoundValue(Math.Min(Math.Max(Convert.ToDouble(v), Min), Max)))).ToList();
-                    if (!ListComparer.Equals(val, roundedVal) && ValueChanged.HasDelegate)
-                    {
-                        NextTick(async () =>
-                        {
-                            await ValueChanged.InvokeAsync(roundedVal);
-                        });
-                    }
+            Value = new List<TValue>() { default, default };
+            
+            base.OnInitialized();
+        }
 
-                    LazyValue = roundedVal;
+        protected override void OnValueChanged(IList<TValue> val)
+        {
+            //Value may not between min and max
+            //If that so,we should invoke ValueChanged 
+            var roundedVal = val.Select(v => ConvertDoubleToTValue(RoundValue(Math.Min(Math.Max(Convert.ToDouble(v), Min), Max)))).ToList();
+            if (!ListComparer.Equals(val, roundedVal) && ValueChanged.HasDelegate)
+            {
+                NextTick(async () =>
+                {
+                    await ValueChanged.InvokeAsync(roundedVal);
                 });
+            }
+
+            LazyValue = roundedVal;
         }
 
         private static TValue ConvertDoubleToTValue(double val)

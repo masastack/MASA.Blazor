@@ -718,7 +718,7 @@ namespace Masa.Blazor
 
                 if (BindConverter.TryConvertTo<TValue>(value.ToString(), CultureInfo.InvariantCulture, out var internalValue))
                 {
-                    await SetInternalValueAsync(internalValue);
+                    InternalValue = internalValue;
                 }
             }
 
@@ -743,7 +743,7 @@ namespace Masa.Blazor
 
                 if (BindConverter.TryConvertTo<TValue>(value.ToString(), CultureInfo.InvariantCulture, out var internalValue))
                 {
-                    await SetInternalValueAsync(internalValue);
+                    InternalValue = internalValue;
                 }
             }
 
@@ -778,7 +778,7 @@ namespace Masa.Blazor
 
         public virtual async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
-            await SetInternalValueAsync(default);
+            InternalValue = default;
 
             if (OnClearClick.HasDelegate)
             {

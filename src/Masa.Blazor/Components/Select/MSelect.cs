@@ -420,7 +420,7 @@ namespace Masa.Blazor
                 .Merge<BIcon, MIcon>("append-icon", attrs =>
                 {
                     var dic = new Dictionary<string, object>();
-                    
+
                     // Don't allow the dropdown icon to be focused
                     var onClick = (EventCallback<MouseEventArgs>)attrs.Data;
                     if (onClick.HasDelegate)
@@ -547,7 +547,7 @@ namespace Masa.Blazor
             {
                 if (value is TValue val)
                 {
-                    await SetInternalValueAsync(val);
+                    InternalValue = val;
                 }
 
                 if (closeOnSelect)
@@ -569,7 +569,7 @@ namespace Masa.Blazor
 
                 if (internalValues is TValue val)
                 {
-                    await SetInternalValueAsync(val);
+                    InternalValue = val;
                 }
             }
 
@@ -864,11 +864,11 @@ namespace Masa.Blazor
             if (Multiple)
             {
                 IList<TItemValue> values = new List<TItemValue>();
-                await SetInternalValueAsync((TValue)values);
+                InternalValue = (TValue)values;
             }
             else
             {
-                await SetInternalValueAsync(default);
+                InternalValue = default;
             }
 
             if (OnClearClick.HasDelegate)
@@ -939,7 +939,7 @@ namespace Masa.Blazor
             }
             else
             {
-                await SetInternalValueAsync(default(TValue));
+                InternalValue = default(TValue);
             }
 
             // if all items have been delete,

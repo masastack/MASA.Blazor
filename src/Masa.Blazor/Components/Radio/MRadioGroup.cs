@@ -98,7 +98,7 @@
                 }
             }
 
-            await SetInternalValueAsync(radio.Value);
+            InternalValue = radio.Value;
         }
     }
 }
