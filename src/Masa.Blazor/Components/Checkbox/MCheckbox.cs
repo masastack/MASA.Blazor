@@ -100,6 +100,8 @@ namespace Masa.Blazor
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
+            
             if (firstRender)
             {
                 //It's used to prevent ripple directive,and we may remove this 
