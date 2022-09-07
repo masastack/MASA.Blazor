@@ -51,6 +51,7 @@ namespace Masa.Blazor
 
         protected override void OnInitialized()
         {
+            base.OnInitialized();
             Stepper.RegisterContent(this);
         }
 

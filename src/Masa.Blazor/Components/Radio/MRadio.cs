@@ -15,6 +15,7 @@
 
         protected override void OnInitialized()
         {
+            base.OnInitialized();
             RadioGroup?.AddRadio(this);
         }
 

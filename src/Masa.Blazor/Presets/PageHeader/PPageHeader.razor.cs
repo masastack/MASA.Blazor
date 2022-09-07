@@ -55,6 +55,8 @@ public partial class PPageHeader
 
     protected override void OnInitialized()
     {
+        base.OnInitialized();
+
         _showFilters = ShowFiltersByDefault;
     }
 

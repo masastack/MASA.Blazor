@@ -177,6 +177,8 @@ public partial class ModalBase
 
     protected override void OnInitialized()
     {
+        base.OnInitialized();
+
         _debounceHandleOnSave = DebounceEvent<MouseEventArgs>(
             async (_) =>
             {

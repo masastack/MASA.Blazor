@@ -104,6 +104,8 @@
 
         protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             _listItemGroupValue = Value;
 
             _sidebarItems = ConvertToSidebarItems(Items, Value);
