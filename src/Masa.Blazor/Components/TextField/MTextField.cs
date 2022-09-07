@@ -640,7 +640,7 @@ namespace Masa.Blazor
             if (!EqualityComparer<TValue>.Default.Equals(checkValue, InternalValue))
             {
                 InternalValue = checkValue;
-                await SetValueByJsInterop(checkValue);
+                await SetValueByJsInterop(checkValue.ToString());
             }
         }
 

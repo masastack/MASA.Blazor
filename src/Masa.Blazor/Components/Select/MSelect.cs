@@ -241,8 +241,7 @@ namespace Masa.Blazor
             base.OnWatcherInitialized();
 
             Watcher.Watch<bool>(nameof(IsMenuActive), val => OnMenuActiveChange(val))
-                   .Watch<IList<TItem>>(nameof(Items), async _ => OnItemsChange())
-                   .Watch<IList<TItemValue>>(nameof(InternalValues), _ => OnInternalValueChange());
+                   .Watch<IList<TItem>>(nameof(Items), async _ => OnItemsChange());
         }
 
         private void OnItemsChange()
@@ -513,10 +512,11 @@ namespace Masa.Blazor
                 });
         }
 
-        protected void OnInternalValueChange()
+        protected override void OnInternalValueChange(TValue val)
         {
-            SetSelectedItems();
+            base.OnInternalValueChange(val);
 
+            SetSelectedItems();
             if (Multiple)
             {
                 NextTick(() =>

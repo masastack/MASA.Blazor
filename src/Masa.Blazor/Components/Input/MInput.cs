@@ -59,15 +59,10 @@
 
         public virtual bool IsLabelActive => IsDirty;
 
-        protected override void OnInitialized()
+        protected override void OnWatcherInitialized()
         {
-            base.OnInitialized();
-
-            Watcher
-                .Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), () =>
-                {
-                    Validate();
-                });
+            base.OnWatcherInitialized();
+            Watcher.Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), Validate);
         }
 
         protected override void SetComponentClass()
