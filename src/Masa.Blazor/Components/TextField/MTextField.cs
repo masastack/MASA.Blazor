@@ -462,14 +462,14 @@ namespace Masa.Blazor
                     attrs[nameof(MIcon.Light)] = Light;
                     attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } };
                 })
-                .Merge<BIcon, MIcon>("prepend-icon",
-                    attrs => { attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } }; })
-                .Merge<BIcon, MIcon>("append-icon",
-                    attrs => { attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } }; })
+                .ApplyTextFieldAppendIcon(typeof(MIcon),
+                    attrs => attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } })
+                .ApplyTextFieldPrependIcon(typeof(MIcon),
+                    attrs => attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } })
                 .Merge<BIcon, MIcon>("append-icon-number-up",
-                    attrs => { attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } }; })
+                    attrs => attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } })
                 .Merge<BIcon, MIcon>("append-icon-number-down",
-                    attrs => { attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } }; });
+                    attrs => attrs[nameof(MIcon.Attributes)] = new Dictionary<string, object>() { { "tabindex", -1 } });
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
