@@ -542,6 +542,11 @@
       "Description": ""
     },
     {
+      "Name": "OnEnter",
+      "Type": "EventCallback",
+      "Description": ""
+    },
+    {
       "Name": "OnFocus",
       "Type": "EventCallback<FocusEventArgs>",
       "Description": ""

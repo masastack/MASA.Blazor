@@ -190,10 +190,7 @@ public partial class ModalBase
 
                 if (args.IsCanceled) return;
 
-                if (Form != null)
-                {
-                    await Form.ResetAsync();
-                }
+                Form?.Reset();
             },
             TimeSpan.FromMilliseconds(DebounceInterval));
     }
@@ -229,10 +226,7 @@ public partial class ModalBase
 
     protected virtual async Task HandleOnCancel(MouseEventArgs _)
     {
-        if (Form != null)
-        {
-            await Form.ResetAsync();
-        }
+        Form?.Reset();
 
         if (OnCancel.HasDelegate)
         {

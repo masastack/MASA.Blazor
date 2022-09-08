@@ -670,7 +670,7 @@ namespace Masa.Blazor
             {
                 //We removed NextTick since it doesn't trigger render
                 //and validate may not be called
-                Validate();
+                InternalValidate();
             }
 
             StateHasChanged();

@@ -16,9 +16,9 @@
     <MCheckbox @bind-Value="_model.Agree"
                Label="Do you agree?"
                required></MCheckbox>
-    <MButton Disabled="!_valid" Color="success" Class="mr-4" OnClick="ValidateAsync">Validate</MButton>
-    <MButton Color="error" Class="mr-4" OnClick="ResetAsync">Reset Form</MButton>
-    <MButton Color="warning" OnClick="ResetValidationAsync">Reset Validation</MButton>
+    <MButton Disabled="!_valid" Color="success" Class="mr-4" OnClick="Validate">Validate</MButton>
+    <MButton Color="error" Class="mr-4" OnClick="Reset">Reset Form</MButton>
+    <MButton Color="warning" OnClick="ResetValidation">Reset Validation</MButton>
 </MForm>
 
 @code {
@@ -47,18 +47,18 @@
             "Item 4"
         };
 
-    async Task ValidateAsync()
+    void Validate()
     {
-        await _form.ValidateAsync();
+        _form.Validate();
     }
 
-    async Task ResetAsync()
+    void Reset()
     {
-        await _form.ResetAsync();
+        _form.Reset();
     }
 
-    async Task ResetValidationAsync()
+    void ResetValidation()
     {
-        await _form.ResetValidationAsync();
+        _form.ResetValidation();
     }
 }

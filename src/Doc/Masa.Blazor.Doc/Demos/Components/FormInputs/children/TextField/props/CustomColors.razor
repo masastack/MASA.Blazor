@@ -175,15 +175,15 @@
 
     bool FormIsValid => form != null && form.EditContext.IsModified() && form.EditContext.Validate();
 
-    async Task ResetForm()
+    void ResetForm()
     {
-        await form.ResetAsync();
+        form.Reset();
     }
 
-    async Task Submit()
+    void Submit()
     {
         snackbar = true;
-        await form.ResetAsync();
+        form.Reset();
     }
 
     public class Model

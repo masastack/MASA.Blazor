@@ -57,7 +57,7 @@
 
     public async Task SubmitOrder(FormContext context)
     {
-        var success = await context.ValidateAsync();
+        var success = context.Validate();
         if (success)
         {
             //验证成功，操作业务

@@ -62,7 +62,7 @@
         protected override void OnWatcherInitialized()
         {
             base.OnWatcherInitialized();
-            Watcher.Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), Validate);
+            Watcher.Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), InternalValidate);
         }
 
         protected override void SetComponentClass()
