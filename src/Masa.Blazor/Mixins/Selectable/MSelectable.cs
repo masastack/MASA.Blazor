@@ -58,11 +58,15 @@ public partial class MSelectable : MInput<bool>, ISelectable
     public async Task HandleOnBlur(FocusEventArgs args)
     {
         IsFocused = false;
+
+        await Task.CompletedTask;
     }
 
     public async Task HandleOnFocus(FocusEventArgs args)
     {
         IsFocused = true;
+
+        await Task.CompletedTask;
     }
 
     public Task HandleOnKeyDown(KeyboardEventArgs args)
