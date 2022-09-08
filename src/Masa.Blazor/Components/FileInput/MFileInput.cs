@@ -231,7 +231,7 @@ namespace Masa.Blazor
             }
         }
 
-        public async Task HandleOnFileChangeAsync(InputFileChangeEventArgs args)
+        public void HandleOnFileChange(InputFileChangeEventArgs args)
         {
             if (Multiple)
             {

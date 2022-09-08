@@ -15,7 +15,7 @@ namespace Masa.Blazor
         public double Max { get; set; } = 100;
 
         [Parameter]
-        public double Min { get; set; } = 0;
+        public double Min { get; set; }
 
         [Parameter]
         public double Step { get; set; } = 1;
@@ -353,7 +353,7 @@ namespace Masa.Blazor
             OldValue = DoubleInternalValue;
             IsActive = true;
 
-            if ((target.Class ?? "").Contains("m-slider__thumb-container"))
+            if (target.Class?.Contains("m-slider__thumb-container") ?? false)
             {
                 ThumbPressed = true;
                 var container = Document.QuerySelector($"#{Id} .m-slider__thumb-container");

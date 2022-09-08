@@ -28,7 +28,7 @@ public partial class MSelectable : MInput<bool>, ISelectable
 
     public override async Task HandleOnClickAsync(ExMouseEventArgs args)
     {
-        await HandleOnChange();
+        HandleOnChange();
 
         if (OnClick.HasDelegate)
         {
@@ -36,7 +36,7 @@ public partial class MSelectable : MInput<bool>, ISelectable
         }
     }
 
-    public async Task HandleOnChange()
+    public void HandleOnChange()
     {
         if (!IsInteractive)
         {
