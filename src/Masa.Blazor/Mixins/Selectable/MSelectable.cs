@@ -28,7 +28,7 @@ public partial class MSelectable : MInput<bool>, ISelectable
 
     public override async Task HandleOnClickAsync(ExMouseEventArgs args)
     {
-        HandleOnChange();
+        await HandleOnChange();
 
         if (OnClick.HasDelegate)
         {
@@ -36,7 +36,7 @@ public partial class MSelectable : MInput<bool>, ISelectable
         }
     }
 
-    public void HandleOnChange()
+    public async Task HandleOnChange()
     {
         if (!IsInteractive)
         {
@@ -51,6 +51,8 @@ public partial class MSelectable : MInput<bool>, ISelectable
         ForceValidate(input);
 
         InternalValue = input;
+
+        await Task.CompletedTask;
     }
 
     public async Task HandleOnBlur(FocusEventArgs args)
@@ -62,7 +64,7 @@ public partial class MSelectable : MInput<bool>, ISelectable
     {
         IsFocused = true;
     }
- 
+
     public Task HandleOnKeyDown(KeyboardEventArgs args)
     {
         return Task.CompletedTask;
