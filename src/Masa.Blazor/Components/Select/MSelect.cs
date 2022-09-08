@@ -127,8 +127,6 @@ namespace Masa.Blazor
 
         public int SelectedIndex { get; set; } = -1;
 
-        public override int DebounceMilliseconds { get; set; }
-
         protected object Menu { get; set; }
 
         protected MMenu MMenu => Menu as MMenu;
@@ -177,6 +175,8 @@ namespace Masa.Blazor
             $"{MMenu.ContentElement.GetSelector()} .m-list-item, {MMenu.ContentElement.GetSelector()} .m-divider, {MMenu.ContentElement.GetSelector()} .m-subheader";
 
         protected virtual bool MenuCanShow => true;
+
+        protected override bool DisableSetValueByJsInterop => true;
 
         protected virtual BMenuProps GetDefaultMenuProps() => new()
         {
@@ -241,8 +241,7 @@ namespace Masa.Blazor
             base.OnWatcherInitialized();
 
             Watcher.Watch<bool>(nameof(IsMenuActive), val => OnMenuActiveChange(val))
-                   .Watch<IList<TItem>>(nameof(Items), async _ => OnItemsChange())
-                   .Watch<IList<TItemValue>>(nameof(InternalValues), _ => OnInternalValueChange());
+                   .Watch<IList<TItem>>(nameof(Items), async _ => OnItemsChange());
         }
 
         private void OnItemsChange()
@@ -419,15 +418,19 @@ namespace Masa.Blazor
                 .ApplySelectDefault<TItem, TItemValue, TValue>()
                 .Merge<BIcon, MIcon>("append-icon", attrs =>
                 {
+                    var dic = new Dictionary<string, object>();
+
                     // Don't allow the dropdown icon to be focused
                     var onClick = (EventCallback<MouseEventArgs>)attrs.Data;
                     if (onClick.HasDelegate)
                     {
-                        attrs["tabindex"] = -1;
+                        dic["tabindex"] = -1;
                     }
 
-                    attrs["aria-hidden"] = "true";
-                    attrs["aria-label"] = null;
+                    dic["aria-hidden"] = "true";
+                    dic["aria-label"] = null;
+
+                    attrs[nameof(MIcon.Attributes)] = dic;
                 })
                 .Apply<BMenu, MMenu>(attrs =>
                 {
@@ -509,10 +512,11 @@ namespace Masa.Blazor
                 });
         }
 
-        protected void OnInternalValueChange()
+        protected override void OnInternalValueChange(TValue val)
         {
-            SetSelectedItems();
+            base.OnInternalValueChange(val);
 
+            SetSelectedItems();
             if (Multiple)
             {
                 NextTick(() =>
@@ -543,7 +547,7 @@ namespace Masa.Blazor
             {
                 if (value is TValue val)
                 {
-                    await SetInternalValueAsync(val);
+                    InternalValue = val;
                 }
 
                 if (closeOnSelect)
@@ -565,7 +569,7 @@ namespace Masa.Blazor
 
                 if (internalValues is TValue val)
                 {
-                    await SetInternalValueAsync(val);
+                    InternalValue = val;
                 }
             }
 
@@ -860,11 +864,11 @@ namespace Masa.Blazor
             if (Multiple)
             {
                 IList<TItemValue> values = new List<TItemValue>();
-                await SetInternalValueAsync((TValue)values);
+                InternalValue = (TValue)values;
             }
             else
             {
-                await SetInternalValueAsync(default);
+                InternalValue = default;
             }
 
             if (OnClearClick.HasDelegate)
@@ -935,7 +939,7 @@ namespace Masa.Blazor
             }
             else
             {
-                await SetInternalValueAsync(default(TValue));
+                InternalValue = default(TValue);
             }
 
             // if all items have been delete,

@@ -60,7 +60,7 @@
   "Contents": [
     {
       "Name": "ChildContent",
-      "Type": "RenderFragment<EditContext>",
+      "Type": "RenderFragment<FormContext>",
       "Description": "Default Content"
     }
   ],

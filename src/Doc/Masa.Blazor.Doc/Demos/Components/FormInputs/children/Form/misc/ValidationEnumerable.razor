@@ -55,7 +55,7 @@
         }
         };
 
-    public void SubmitOrder(EditContext context)
+    public async Task SubmitOrder(FormContext context)
     {
         var success = context.Validate();
         if (success)

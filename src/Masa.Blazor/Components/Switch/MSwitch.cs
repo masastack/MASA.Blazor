@@ -19,8 +19,6 @@ namespace Masa.Blazor
         [Parameter]
         public string TrackColor { get; set; }
 
-        public override int DebounceMilliseconds { get; set; }
-
         // according to spec, should still show
         // a color when disabled and active
         public override string ValidationState

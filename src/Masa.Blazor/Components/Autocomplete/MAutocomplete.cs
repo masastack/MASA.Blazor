@@ -85,7 +85,6 @@ namespace Masa.Blazor
         protected override Dictionary<string, object> InputAttrs => new()
         {
             { "type", Type },
-            { "value", InternalSearch ?? (HasSlot || Multiple ? null : GetText(SelectedItem)) },
             { "autocomplete", "off" }
         };
 
@@ -123,7 +122,7 @@ namespace Masa.Blazor
             base.OnWatcherInitialized();
 
             Watcher
-                .Watch<string>(nameof(SearchInput), val => InternalSearch = val)
+                .Watch<string>(nameof(InternalSearch), (val) => _ = SetValueByJsInterop(val))
                 .Watch<List<TItem>>(nameof(FilteredItems), OnFilteredItemsChanged);
         }
 
@@ -230,11 +229,11 @@ namespace Masa.Blazor
                 if (Multiple)
                 {
                     IList<TItemValue> values = new List<TItemValue>();
-                    await SetInternalValueAsync((TValue)values);
+                    InternalValue = (TValue)values;
                 }
                 else
                 {
-                    await SetInternalValueAsync(default);
+                    InternalValue = default;
                 }
             }
             else
@@ -378,7 +377,7 @@ namespace Masa.Blazor
                 return;
             }
 
-            if (!Multiple && !string.Equals(InternalSearch, GetText(SelectedItem)))
+            if (!string.Equals(InternalSearch, GetText(SelectedItem)))
             {
                 SetSearch();
             }
@@ -394,8 +393,6 @@ namespace Masa.Blazor
                 }
 
                 StateHasChanged();
-
-                return Task.CompletedTask;
             });
         }
     }

@@ -55,25 +55,14 @@
             }
         }
 
-        protected virtual bool IsDirty
-        {
-            get
-            {
-                return Convert.ToString(InternalValue).Length > 0;
-            }
-        }
+        protected virtual bool IsDirty => Convert.ToString(LazyValue).Length > 0;
 
         public virtual bool IsLabelActive => IsDirty;
 
-        protected override void OnInitialized()
+        protected override void OnWatcherInitialized()
         {
-            base.OnInitialized();
-
-            Watcher
-                .Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), () =>
-                {
-                    Validate();
-                });
+            base.OnWatcherInitialized();
+            Watcher.Watch<IEnumerable<Func<TValue, StringBoolean>>>(nameof(Rules), InternalValidate);
         }
 
         protected override void SetComponentClass()

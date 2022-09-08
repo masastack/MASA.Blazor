@@ -87,8 +87,6 @@ namespace Masa.Blazor
 
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
-            await ChangeValue();
-
             if (OnKeyDown.HasDelegate)
                 await OnKeyDown.InvokeAsync(args);
         }

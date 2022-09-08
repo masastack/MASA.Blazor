@@ -17,8 +17,6 @@ namespace Masa.Blazor
         [Parameter]
         public string OffIcon { get; set; } = "mdi-checkbox-blank-outline";
 
-        public override int DebounceMilliseconds { get; set; }
-
         public string ComputedIcon
         {
             get
@@ -102,6 +100,8 @@ namespace Masa.Blazor
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await base.OnAfterRenderAsync(firstRender);
+            
             if (firstRender)
             {
                 //It's used to prevent ripple directive,and we may remove this 

@@ -41,8 +41,6 @@ namespace Masa.Blazor
 
         public override Action<TextFieldNumberProperty> NumberProps { get; set; }
 
-        public override int DebounceMilliseconds { get; set; }
-
         protected override Dictionary<string, object> InputAttrs => new()
         {
             { "type", "file" },
@@ -233,7 +231,7 @@ namespace Masa.Blazor
             }
         }
 
-        public async Task HandleOnFileChangeAsync(InputFileChangeEventArgs args)
+        public void HandleOnFileChange(InputFileChangeEventArgs args)
         {
             if (Multiple)
             {
@@ -244,17 +242,17 @@ namespace Masa.Blazor
                     files.Add(file);
                 }
 
-                await SetInternalValueAsync((TValue)files);
+                InternalValue = (TValue)files;
             }
             else
             {
                 if (args.FileCount > 0)
                 {
-                    await SetInternalValueAsync((TValue)args.File);
+                    InternalValue = (TValue)args.File;
                 }
                 else
                 {
-                    await SetInternalValueAsync(default);
+                    InternalValue = default;
                 }
             }
         }
@@ -276,11 +274,11 @@ namespace Masa.Blazor
             if (Multiple)
             {
                 IList<IBrowserFile> values = new List<IBrowserFile>();
-                await SetInternalValueAsync((TValue)values);
+                InternalValue = (TValue)values;
             }
             else
             {
-                await SetInternalValueAsync(default);
+                InternalValue = default;
             }
 
             if (OnClearClick.HasDelegate)

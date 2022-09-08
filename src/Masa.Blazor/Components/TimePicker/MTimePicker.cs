@@ -356,6 +356,8 @@ namespace Masa.Blazor
 
         protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             SetInputData(Value);
 
             Watcher

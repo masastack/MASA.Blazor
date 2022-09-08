@@ -83,6 +83,11 @@
       "Description": "Applies the dark theme variant to the component."
     },
     {
+      "Name": "DebounceInterval",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
       "Name": "Dense",
       "Type": "Boolean",
       "Default": "false",
@@ -444,6 +449,11 @@
     {
       "Name": "OnClick",
       "Type": "EventCallback<ExMouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnEnter",
+      "Type": "EventCallback",
       "Description": ""
     },
     {

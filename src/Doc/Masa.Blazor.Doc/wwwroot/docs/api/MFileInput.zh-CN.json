@@ -83,6 +83,11 @@
       "Description": "将暗色主题变量应用到组件。"
     },
     {
+      "Name": "DebounceInterval",
+      "Type": "Int32",
+      "Description": ""
+    },
+    {
       "Name": "Dense",
       "Type": "Boolean",
       "Default": "false",
@@ -444,6 +449,11 @@
     {
       "Name": "OnClick",
       "Type": "EventCallback<ExMouseEventArgs>",
+      "Description": ""
+    },
+    {
+      "Name": "OnEnter",
+      "Type": "EventCallback",
       "Description": ""
     },
     {

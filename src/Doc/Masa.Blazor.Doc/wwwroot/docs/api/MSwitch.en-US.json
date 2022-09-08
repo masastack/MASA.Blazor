@@ -257,6 +257,11 @@
       "Description": ""
     },
     {
+      "Name": "OnInput",
+      "Type": "EventCallback<Boolean>",
+      "Description": ""
+    },
+    {
       "Name": "OnMouseDown",
       "Type": "EventCallback<MouseEventArgs>",
       "Description": ""
