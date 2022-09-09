@@ -3,7 +3,7 @@
 public class BasketItemDto
 {
     public BasketItemDto(int id, string name, string company, float score, int qty, string delivery,
-        string offers, decimal price, string pictureFileName, bool freeShipping)
+    string offers, decimal price, string pictureFileName, bool freeShipping)
     {
         Id = id;
         Name = name;
