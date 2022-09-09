@@ -37,7 +37,7 @@ public class UserPage
 
         if(Role is not null)
         {
-            datas = datas.Where(d => d.Role==Role);
+            datas = datas.Where(d => d.Role == Role);
         }
 
         if (Plan is not null)
