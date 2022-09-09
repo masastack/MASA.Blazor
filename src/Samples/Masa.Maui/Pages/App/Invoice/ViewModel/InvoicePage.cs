@@ -16,7 +16,7 @@ public class InvoicePage
         {
             datas = datas.Where(d => d.Client.FullName.ToUpper().Contains(Search.ToUpper()));
         }
-
+        datas = datas.OrderByDescending(d => d.Date);
         if (datas.Count() < (PageIndex - 1) * PageSize) PageIndex = 1;
 
         return datas;
