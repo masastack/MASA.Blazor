@@ -50,7 +50,7 @@ public class UserPage
             datas = datas.Where(d => d.Status == Status);
         }
 
-        if(datas.Count()<(PageIndex-1)* PageSize) PageIndex = 1;
+        if(datas.Count() < (PageIndex-1) * PageSize) PageIndex = 1;
 
         return datas;
     }
