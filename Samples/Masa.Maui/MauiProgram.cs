@@ -18,7 +18,7 @@ namespace Masa.Maui
                 });
 
             #region Masa options
-
+            var a = Path.GetDirectoryName(Environment.CurrentDirectory);
             builder.Services.AddMasaBlazor(builder =>
             {
                 builder.UseTheme(option =>

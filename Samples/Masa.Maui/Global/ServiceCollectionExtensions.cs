@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static async Task<IServiceCollection> AddGlobalForWasmAsync(this IServiceCollection services, string baseUri)
         {
             using var httpclient = new HttpClient();
-            var navList = await httpclient.GetFromJsonAsync<List<NavModel>>(Path.Combine(baseUri, $"nav/nav.json")) ?? throw new Exception("please configure the Navigation!");
+            var navList = await httpclient.GetFromJsonAsync<List<NavModel>>(Path.Combine(baseUri, $"nav/nav.json")) ?? throw new Exception("Please configure the Navigation!");
             services.AddNav(navList);
             services.AddScoped<GlobalConfig>();
 
