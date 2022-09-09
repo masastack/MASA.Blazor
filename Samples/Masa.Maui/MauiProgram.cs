@@ -18,7 +18,6 @@ namespace Masa.Maui
                 });
 
             #region Masa options
-            var a = Path.GetDirectoryName(Environment.CurrentDirectory);
             builder.Services.AddMasaBlazor(builder =>
             {
                 builder.UseTheme(option =>
@@ -27,7 +26,7 @@ namespace Masa.Maui
                     option.Accent = "#4318FF";
                 }
                 );
-            });//.AddI18nForServer("wwwroot/i18n");
+            }).AddI18nForServer("wwwroot/i18n");
 
             #endregion
 
