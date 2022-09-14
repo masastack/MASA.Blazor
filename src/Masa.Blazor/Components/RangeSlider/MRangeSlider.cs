@@ -6,6 +6,8 @@ namespace Masa.Blazor
     {
         public ElementReference SecondThumbElement { get; set; }
 
+        protected override IList<TValue> DefaultValue => new List<TValue>() { default, default };
+
         protected IList<double> InputWidths
         {
             get
@@ -76,6 +78,7 @@ namespace Masa.Blazor
         }
 
         private double _value = 0;
+
         public override async Task HandleOnMouseMoveAsync(MouseEventArgs args)
         {
             _value = await ParseMouseMoveAsync(args);
@@ -200,24 +203,16 @@ namespace Masa.Blazor
             await base.HandleOnBlurAsync(args);
         }
 
-        protected override void OnInitialized()
-        {
-            Value = new List<TValue>() { default, default };
-            
-            base.OnInitialized();
-        }
-
         protected override void OnValueChanged(IList<TValue> val)
         {
+            val ??= new List<TValue>() { default, default };
+
             //Value may not between min and max
             //If that so,we should invoke ValueChanged 
             var roundedVal = val.Select(v => ConvertDoubleToTValue(RoundValue(Math.Min(Math.Max(Convert.ToDouble(v), Min), Max)))).ToList();
             if (!ListComparer.Equals(val, roundedVal) && ValueChanged.HasDelegate)
             {
-                NextTick(async () =>
-                {
-                    await ValueChanged.InvokeAsync(roundedVal);
-                });
+                NextTick(async () => await ValueChanged.InvokeAsync(roundedVal));
             }
 
             LazyValue = roundedVal;
