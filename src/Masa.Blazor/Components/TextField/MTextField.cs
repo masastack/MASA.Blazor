@@ -652,6 +652,8 @@ namespace Masa.Blazor
             {
                 _badInput = false;
 
+                ValueChangedInternally = true;
+
                 InternalValue = val;
 
                 if (OnInput.HasDelegate)

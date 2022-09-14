@@ -194,6 +194,8 @@ namespace Masa.Blazor
                 await DeleteCurrentItem();
             }
 
+            ValueChangedInternally = true;
+
             InternalSearch = value;
 
             if (OnSearchInputUpdate.HasDelegate)
