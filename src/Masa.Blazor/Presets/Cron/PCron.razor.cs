@@ -35,27 +35,30 @@ public partial class PCron
 
     private List<CronItemModel> CronItems { get; set; } = new();
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        foreach (var item in Enum.GetValues<PeriodTypes>())
+        if (firstRender)
         {
-            var cronDefaultValue = "*";
-
-            if (item == PeriodTypes.Week)
+            foreach (var item in Enum.GetValues<PeriodTypes>())
             {
-                cronDefaultValue = "?";
-            }
-            else if (item == PeriodTypes.Year)
-            {
-                cronDefaultValue = string.Empty;
+                var cronDefaultValue = "*";
+
+                if (item == PeriodTypes.Week)
+                {
+                    cronDefaultValue = "?";
+                }
+                else if (item == PeriodTypes.Year)
+                {
+                    cronDefaultValue = string.Empty;
+                }
+
+                CronItems.Add(new CronItemModel() { Period = item, CronValue = cronDefaultValue });
             }
 
-            CronItems.Add(new CronItemModel() { Period = item, CronValue = cronDefaultValue });
+            await CalculateCronValue();
         }
 
-        await CalculateCronValue();
-
-        await base.OnInitializedAsync();
+        await base.OnAfterRenderAsync(firstRender);
     }
 
     private void OnValueChanged()

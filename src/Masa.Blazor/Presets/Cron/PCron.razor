@@ -1,6 +1,6 @@
 ﻿@namespace Masa.Blazor.Presets
 
-<MTabs @bind-Value="_selectedPeriod">
+<MTabs @bind-Value="_selectedPeriod" ShowArrows="@(true)">
     @foreach (var item in CronItems)
     {
         <MTab Value="item.Period.ToString()">

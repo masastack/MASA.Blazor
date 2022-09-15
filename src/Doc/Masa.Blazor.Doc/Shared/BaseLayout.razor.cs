@@ -63,6 +63,8 @@ public partial class BaseLayout : IDisposable
 
     public CultureInfo Culture { get; set; }
 
+    public TimeSpan TimezoneOffset { get; set; }
+
     public void UpdateNav(bool drawer, bool temporary = true)
     {
         Drawer = drawer;
@@ -95,6 +97,24 @@ public partial class BaseLayout : IDisposable
 
         Navigation.LocationChanged += OnLocationChanged;
         MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var offset = await Js.InvokeAsync<long>("getTimeOffset");
+            TimezoneOffset = TimeSpan.FromMinutes(-offset);
+            StateHasChanged();
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
     }
 
     private async Task BreakpointOnOnUpdate()
