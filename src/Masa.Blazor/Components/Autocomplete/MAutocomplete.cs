@@ -134,7 +134,8 @@ namespace Masa.Blazor
                 .Merge(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-autocomplete");
+                        .Add("m-autocomplete")
+                        .AddIf("m-autocomplete--is-selecting-index", () => SelectedIndex > -1);
                 });
 
             AbstractProvider
@@ -179,6 +180,7 @@ namespace Masa.Blazor
         {
             if (SelectedIndex > -1)
             {
+                await SetValueByJsInterop(string.Empty);
                 return;
             }
 
