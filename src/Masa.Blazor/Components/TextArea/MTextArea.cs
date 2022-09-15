@@ -85,6 +85,13 @@ namespace Masa.Blazor
             }
         }
 
+        protected override async Task SetValueByJsInterop(string val)
+        {
+            await base.SetValueByJsInterop(val);
+            await CalculateInputHeight();
+            StateHasChanged();
+        }
+
         public override async Task HandleOnKeyDownAsync(KeyboardEventArgs args)
         {
             if (OnKeyDown.HasDelegate)
