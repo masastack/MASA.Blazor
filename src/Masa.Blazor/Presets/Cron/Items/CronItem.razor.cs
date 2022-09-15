@@ -81,13 +81,13 @@ public partial class CronItem
             case PeriodTypes.Minute:
                 _minUnit = 0;
                 _maxUnit = 59;
-                _allPeriodList = Enumerable.Range(_minUnit.Value, _maxUnit.Value).ToList();
+                _allPeriodList = Enumerable.Range(_minUnit.Value, _maxUnit.Value + 1).ToList();
                 _showNotSpecify = false;
                 break;
             case PeriodTypes.Hour:
                 _minUnit = 0;
                 _maxUnit = 23;
-                _allPeriodList = Enumerable.Range(_minUnit.Value, _maxUnit.Value).ToList();
+                _allPeriodList = Enumerable.Range(_minUnit.Value, _maxUnit.Value + 1).ToList();
                 _showNotSpecify = false;
                 break;
             case PeriodTypes.Day:
