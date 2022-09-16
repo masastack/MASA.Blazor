@@ -72,7 +72,7 @@ namespace Masa.Blazor
 
         protected bool IsSearching => (Multiple && SearchIsDirty) || (SearchIsDirty && InternalSearch != GetText(SelectedItem));
 
-        protected TItem SelectedItem => SelectedItems.FirstOrDefault();
+        protected TItem SelectedItem => SelectedItems.LastOrDefault();
 
         protected bool SearchIsDirty => !string.IsNullOrEmpty(InternalSearch);
 
@@ -134,7 +134,8 @@ namespace Masa.Blazor
                 .Merge(cssBuilder =>
                 {
                     cssBuilder
-                        .Add("m-autocomplete");
+                        .Add("m-autocomplete")
+                        .AddIf("m-autocomplete--is-selecting-index", () => SelectedIndex > -1);
                 });
 
             AbstractProvider
@@ -179,6 +180,7 @@ namespace Masa.Blazor
         {
             if (SelectedIndex > -1)
             {
+                await SetValueByJsInterop(string.Empty);
                 return;
             }
 
@@ -379,10 +381,7 @@ namespace Masa.Blazor
                 return;
             }
 
-            if (!string.Equals(InternalSearch, GetText(SelectedItem)))
-            {
-                SetSearch();
-            }
+            SetSearch();
         }
 
         private void SetSearch()
@@ -392,9 +391,8 @@ namespace Masa.Blazor
                 if (!Multiple || string.IsNullOrEmpty(InternalSearch) || !IsMenuActive)
                 {
                     InternalSearch = (SelectedItems.Count == 0 || Multiple || HasSlot) ? null : GetText(SelectedItem);
+                    StateHasChanged();
                 }
-
-                StateHasChanged();
             });
         }
     }
