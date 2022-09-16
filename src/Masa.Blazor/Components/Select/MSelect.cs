@@ -516,7 +516,8 @@ namespace Masa.Blazor
         {
             base.OnInternalValueChange(val);
 
-            SetSelectedItems();
+            NextTick(SetSelectedItems);
+
             if (Multiple)
             {
                 NextTick(() =>
@@ -922,8 +923,6 @@ namespace Masa.Blazor
             }
 
             SelectedItems = selectedItems;
-
-            StateHasChanged();
         }
 
         protected int GetMenuIndex()
