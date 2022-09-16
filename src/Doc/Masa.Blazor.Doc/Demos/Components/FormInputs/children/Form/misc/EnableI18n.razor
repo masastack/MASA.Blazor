@@ -22,7 +22,6 @@
     class Model
     {
         [Required]
-        [MaxLength(10, ErrorMessage = "Name must be less than 10 characters")]
         public string Name { get; set; }
         [Required]
         [EmailAddress]

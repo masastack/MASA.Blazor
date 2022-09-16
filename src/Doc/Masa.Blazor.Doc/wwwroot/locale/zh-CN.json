@@ -60,6 +60,7 @@
   "The Email field is required.": "字段邮箱必填。",
   "The Item field is required.": "字段Item必填。",
   "You must agree to continue!": "你必须同意才可以继续操作后续步骤！",
+  "The Email field is not a valid e-mail address.": "电子邮件字段不是有效的电子邮件地址。",
   "ComponentPages": "组件页面",
   "NextPage": "下一页",
   "PreviousPage": "上一页",
