@@ -99,12 +99,6 @@ public partial class BaseLayout : IDisposable
         MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
     }
 
-    protected override async Task OnInitializedAsync()
-    {
-
-        await base.OnInitializedAsync();
-    }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
