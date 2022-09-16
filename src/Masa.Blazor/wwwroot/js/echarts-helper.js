@@ -32,6 +32,13 @@ export function dispose(selector) {
   }
 }
 
+export function setOption(selector, option) {
+  const instance = echarts_instance_cache[selector]
+  if (instance) {
+    instance.setOption(option, true);
+  }
+}
+
 function onResize(instance) {
   window.clearTimeout(timeout);
   timeout = window.setTimeout(function () {
