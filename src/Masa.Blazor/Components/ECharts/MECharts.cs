@@ -2,7 +2,7 @@
 
 namespace Masa.Blazor;
 
-public class MECharts : BECharts, IDisposable
+public class MECharts : BECharts, IAsyncDisposable
 {
     [Inject]
     protected I18n I18n { get; set; }
@@ -47,6 +47,7 @@ public class MECharts : BECharts, IDisposable
 
     private IJSObjectReference _echarts;
     private bool _isEChartsDisposed = false;
+    private object _prevOption;
 
     public string ComputedTheme
     {
@@ -105,11 +106,38 @@ public class MECharts : BECharts, IDisposable
             _isEChartsDisposed = false;
             await _echarts.InvokeVoidAsync("init", Ref.GetSelector(), ComputedTheme, DefaultInitOptions, Option);
         }
+
+        if (_prevOption != Option)
+        {
+            _prevOption = Option;
+
+            if (firstRender) return;
+
+            await ResetOption();
+        }
     }
 
     public async Task DisposeECharts()
     {
         await _echarts.InvokeVoidAsync("dispose", Ref.GetSelector());
         _isEChartsDisposed = true;
+    }
+
+    public async Task ResetOption()
+    {
+        await _echarts.InvokeVoidAsync("setOption", Ref.GetSelector(), Option);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            await DisposeECharts();
+            await _echarts.DisposeAsync();
+        }
+        catch
+        {
+            // ignored
+        }
     }
 }
