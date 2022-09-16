@@ -42,7 +42,7 @@
     {
         public OrderDetailValidator(I18n i18n)
         {
-            RuleFor(o => o.Title).NotEmpty().WithMessage("{PropertyName} is " + i18n.T("Required"));
+            RuleFor(o => o.Title).NotEmpty();
             RuleFor(o => o.Price).InclusiveBetween(0,20);
             RuleForEach(o => o.Customers).SetValidator(new CustomerValidator());
         }
@@ -52,7 +52,7 @@
     {
         public CustomerValidator()
         {
-            RuleFor(o => o.Name).NotEmpty().WithMessage("{PropertyName} is required");
+            RuleFor(o => o.Name).NotEmpty();
             RuleFor(o => o.Age).InclusiveBetween(25,100);
         }
     }
