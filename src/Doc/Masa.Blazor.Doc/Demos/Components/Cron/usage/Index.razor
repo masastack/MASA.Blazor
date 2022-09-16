@@ -14,6 +14,9 @@
     [Inject]
     I18n i18n { get; set; }
 
+    [CascadingParameter(Name = "TimezoneOffset")]
+    public TimeSpan TimezoneOffset { get; set; }
+
     string _cronValue = string.Empty;
     string _nextTenRunTime = string.Empty;
     StringBuilder sb = new ();
@@ -38,14 +41,20 @@
 
         var cronExpression = new CronExpression(_cronValue);
 
+        var allTimeZone = TimeZoneInfo.GetSystemTimeZones();
+
+        var timezoneInfo = allTimeZone.FirstOrDefault(p => p.BaseUtcOffset == TimezoneOffset);
+
+        cronExpression.TimeZone = timezoneInfo;
+
         for (int i = 0; i < 10; i++)
         {
-            var nextExcuteTime = cronExpression.GetNextValidTimeAfter(startTime);
+            var nextExecuteTime = cronExpression.GetNextValidTimeAfter(startTime);
 
-            if (nextExcuteTime.HasValue)
+            if (nextExecuteTime.HasValue)
             {
-                startTime = nextExcuteTime.Value;
-                sb.AppendLine(startTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"));
+                startTime = nextExecuteTime.Value;
+                sb.AppendLine(startTime.ToOffset(TimezoneOffset).ToString("yyyy-MM-dd HH:mm:ss"));
             }
         }
 

@@ -68,67 +68,70 @@ public partial class CronItem
 
     private int? _nearestOfDay;
 
-    protected override async Task OnInitializedAsync()
+    protected override Task OnAfterRenderAsync(bool firstRender)
     {
-        if (Period != PeriodTypes.Week && Period != PeriodTypes.Year)
+        if (firstRender)
         {
-            _i18nUnitText = I18n.T($"$masaBlazor.{nameof(Period)}.{Period}");
-        }
+            if (Period != PeriodTypes.Week && Period != PeriodTypes.Year)
+            {
+                _i18nUnitText = I18n.T($"$masaBlazor.{nameof(Period)}.{Period}");
+            }
 
-        switch (Period)
-        {
-            case PeriodTypes.Second:
-            case PeriodTypes.Minute:
-                _minUnit = 0;
-                _maxUnit = 59;
-                _allPeriodList = Enumerable.Range(_minUnit.Value, _maxUnit.Value + 1).ToList();
-                _showNotSpecify = false;
-                break;
-            case PeriodTypes.Hour:
-                _minUnit = 0;
-                _maxUnit = 23;
-                _allPeriodList = Enumerable.Range(_minUnit.Value, _maxUnit.Value + 1).ToList();
-                _showNotSpecify = false;
-                break;
-            case PeriodTypes.Day:
-                _minUnit = 1;
-                _maxUnit = 31;
-                _allPeriodList = Enumerable.Range(_minUnit.Value, _maxUnit.Value).ToList();
-                _showNotSpecify = true;
-                break;
-            case PeriodTypes.Month:
-                _minUnit = 1;
-                _maxUnit = 12;
-                _allPeriodList = Enumerable.Range(_minUnit.Value, _maxUnit.Value).ToList();
-                _showNotSpecify = false;
-                break;
-            case PeriodTypes.Week:
-                _minUnit = 1;
-                _maxUnit = 7;
-                _allPeriodList = Enumerable.Range(_minUnit.Value, _maxUnit.Value).ToList();
-                _showNotSpecify = true;
-                break;
-            case PeriodTypes.Year:
-                _minUnit = 1;
-                break;
-            default:
-                break;
-        }
+            switch (Period)
+            {
+                case PeriodTypes.Second:
+                case PeriodTypes.Minute:
+                    _minUnit = 0;
+                    _maxUnit = 59;
+                    _allPeriodList = Enumerable.Range(_minUnit.Value, _maxUnit.Value + 1).ToList();
+                    _showNotSpecify = false;
+                    break;
+                case PeriodTypes.Hour:
+                    _minUnit = 0;
+                    _maxUnit = 23;
+                    _allPeriodList = Enumerable.Range(_minUnit.Value, _maxUnit.Value + 1).ToList();
+                    _showNotSpecify = false;
+                    break;
+                case PeriodTypes.Day:
+                    _minUnit = 1;
+                    _maxUnit = 31;
+                    _allPeriodList = Enumerable.Range(_minUnit.Value, _maxUnit.Value).ToList();
+                    _showNotSpecify = true;
+                    break;
+                case PeriodTypes.Month:
+                    _minUnit = 1;
+                    _maxUnit = 12;
+                    _allPeriodList = Enumerable.Range(_minUnit.Value, _maxUnit.Value).ToList();
+                    _showNotSpecify = false;
+                    break;
+                case PeriodTypes.Week:
+                    _minUnit = 1;
+                    _maxUnit = 7;
+                    _allPeriodList = Enumerable.Range(_minUnit.Value, _maxUnit.Value).ToList();
+                    _showNotSpecify = true;
+                    break;
+                case PeriodTypes.Year:
+                    _minUnit = 1;
+                    break;
+                default:
+                    break;
+            }
 
-        if (Period == PeriodTypes.Week)
-        {
-            _weekNumbers = Enum.GetValues<WeekNumbers>().ToList();
-            _dayOfWeeks = Enum.GetValues<DayOfWeek>().ToList();
-        }
+            if (Period == PeriodTypes.Week)
+            {
+                _weekNumbers = Enum.GetValues<WeekNumbers>().ToList();
+                _dayOfWeeks = Enum.GetValues<DayOfWeek>().ToList();
+            }
 
-        _periodStart = Period == PeriodTypes.Year ? DateTime.Now.Year : _minUnit;
-        _periodEnd = Period == PeriodTypes.Year ? DateTime.Now.AddYears(10).Year : 2;
-        _startFromPeriod = Period == PeriodTypes.Year ? DateTime.Now.Year : _minUnit;
-        _startEveryPeriod = 1;
-        _nearestOfDay = _minUnit;
-        _lastPeriodOfWeek = _minUnit;
-        _selectWeekNumber = WeekNumbers.First;
-        await base.OnInitializedAsync();
+            _periodStart = Period == PeriodTypes.Year ? DateTime.Now.Year : _minUnit;
+            _periodEnd = Period == PeriodTypes.Year ? DateTime.Now.AddYears(10).Year : 2;
+            _startFromPeriod = Period == PeriodTypes.Year ? DateTime.Now.Year : _minUnit;
+            _startEveryPeriod = 1;
+            _nearestOfDay = _minUnit;
+            _lastPeriodOfWeek = _minUnit;
+            _selectWeekNumber = WeekNumbers.First;
+        }
+        return base.OnAfterRenderAsync(firstRender);
     }
 
     private Task OnSelectedCronTypeChanged(CronTypes type)
