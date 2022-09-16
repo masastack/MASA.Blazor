@@ -240,8 +240,8 @@ namespace Masa.Blazor
         {
             base.OnWatcherInitialized();
 
-            Watcher.Watch<bool>(nameof(IsMenuActive), val => OnMenuActiveChange(val))
-                   .Watch<IList<TItem>>(nameof(Items), async _ => OnItemsChange());
+            Watcher.Watch<bool>(nameof(IsMenuActive), OnMenuActiveChange)
+                   .Watch<IList<TItem>>(nameof(Items), _ => OnItemsChange());
         }
 
         private void OnItemsChange()
@@ -307,19 +307,21 @@ namespace Masa.Blazor
                     await MMenu.AddOutsideClickEventListener();
                 }
 
-                MMenu.AfterShowContent = async (isLazyContent) =>
+                MMenu.AfterShowContent = isLazyContent =>
                 {
                     if (isLazyContent)
                     {
-                        await OnMenuActiveChange(true);
+                        OnMenuActiveChange(true);
                     }
+
+                    return Task.CompletedTask;
                 };
 
                 StateHasChanged();
             }
         }
 
-        protected virtual async Task OnMenuActiveChange(bool val)
+        protected virtual async void OnMenuActiveChange(bool val)
         {
             if ((Multiple && !val) || GetMenuIndex() > -1)
             {
