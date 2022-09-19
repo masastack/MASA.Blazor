@@ -646,7 +646,7 @@ namespace Masa.Blazor
 
         public override async Task HandleOnInputAsync(ChangeEventArgs args)
         {
-            var success = BindConverter.TryConvertTo<TValue>(args.Value.ToString(), CultureInfo.InvariantCulture, out var val);
+            var success = BindConverter.TryConvertTo<TValue>(args.Value?.ToString(), CultureInfo.InvariantCulture, out var val);
 
             if (success)
             {
