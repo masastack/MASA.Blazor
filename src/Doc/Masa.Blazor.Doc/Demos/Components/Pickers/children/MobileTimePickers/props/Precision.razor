@@ -11,7 +11,7 @@
     <PMobileTimePicker @bind-Value="_time" Precision="_precision" @key="_precision">
         <ActivatorContent>
             <MButton Color="primary" Class="text-capitalize" Text @attributes="@context.Attrs">
-                @(_time.ToLongTimeString())
+                @(ComputedTime.ToString("HH:mm:ss"))
             </MButton>
         </ActivatorContent>
     </PMobileTimePicker>
@@ -27,6 +27,12 @@
         TimePrecision.Hour,
         TimePrecision.Minute,
         TimePrecision.Second
+    };
+
+    private TimeOnly ComputedTime => _precision switch{
+        TimePrecision.Hour => new TimeOnly(_time.Hour, 0, 0),
+        TimePrecision.Minute => new TimeOnly(_time.Hour, _time.Minute, 0),
+        _ => _time
     };
 
 }

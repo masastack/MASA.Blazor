@@ -103,7 +103,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
             { "MMarkdown", new string[] { "Markdown" } },
             { "MMenu", new string[] { "Menus" } },
             { "MMessages", new string[] { "Messages" } },
-            { "MMobilePickerView", new string[] { "Mobile picker view" } },
+            { "MMobilePickerView", new string[] { "Mobile picker views" } },
             { "MNavigationDrawer", new string[] { "Navigation drawers" } },
             { "MOverlay", new string[] { "Overlays" } },
             { "MPagination", new string[] { "Pagination" } },

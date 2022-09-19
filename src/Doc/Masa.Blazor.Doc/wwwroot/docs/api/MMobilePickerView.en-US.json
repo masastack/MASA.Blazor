@@ -1,7 +1,7 @@
 ﻿{
   "Title": "MMobilePickerView",
   "Components": [
-    "Mobile picker view"
+    "Mobile picker views"
   ],
   "Props": [
     {

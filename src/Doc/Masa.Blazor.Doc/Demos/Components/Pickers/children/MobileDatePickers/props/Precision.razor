@@ -11,13 +11,16 @@
     <PMobileDatePicker @bind-Value="_date" Precision="_precision" @key="_precision">
         <ActivatorContent>
             <MButton Color="primary" Class="text-capitalize" Text @attributes="@context.Attrs">
-                @(_date)
+                @(ComputedDate)
             </MButton>
         </ActivatorContent>
     </PMobileDatePicker>
 </div>
 
 @code {
+
+    [CascadingParameter(Name = "TimezoneOffset")]
+    private TimeSpan TimezoneOffset { get; set; }
 
     private DateOnly _date;
     private DatePrecision _precision = DatePrecision.Day;
@@ -28,5 +31,17 @@
         DatePrecision.Month,
         DatePrecision.Day
     };
+
+    private DateOnly ComputedDate => _precision switch
+    {
+        DatePrecision.Year => new DateOnly(_date.Year, 1, 1),
+        DatePrecision.Month => new DateOnly(_date.Year, _date.Month, 1),
+        _ => _date
+    };
+
+    protected override void OnInitialized()
+    {
+        _date = DateOnly.FromDateTime(DateTime.UtcNow.Add(TimezoneOffset));
+    }
 
 }
