@@ -14,7 +14,7 @@ public class PMobileDateTimePicker : MobilePickerBase<DateTimeColumn, DateTimeCo
     public Func<DateTimePrecision, int, string> Formatter { get; set; }
 
     [Parameter]
-    public DateTimePrecision Precision { get; set; } = DateTimePrecision.Day;
+    public DateTimePrecision Precision { get; set; } = DateTimePrecision.Second;
 
     private DateTime _prevMax;
     private DateTime _prevMin;

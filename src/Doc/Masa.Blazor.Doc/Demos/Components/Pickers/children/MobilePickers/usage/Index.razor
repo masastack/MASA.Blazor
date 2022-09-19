@@ -8,7 +8,7 @@
                    ItemText="item => item">
         <ActivatorContent>
             <MButton Color="primary" Class="text-capitalize" Text @attributes="@context.Attrs">
-                @(_value.Count == 0 ? "Active me" : string.Join(" ", _value))
+                @(_value.Count == 0 ? "Please select" : string.Join(" ", _value))
             </MButton>
         </ActivatorContent>
     </PMobilePicker>

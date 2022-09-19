@@ -11,7 +11,7 @@
                    ItemDisabled="item => item.Disabled">
         <ActivatorContent>
             <MButton Color="primary" Class="text-capitalize" Text @attributes="@context.Attrs">
-                @(_value.Count == 0 ? "Active me" : string.Join(" ", GetNames()))
+                @(_value.Count == 0 ? "Please select" : string.Join(" ", GetNames()))
             </MButton>
         </ActivatorContent>
     </PMobilePicker>

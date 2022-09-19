@@ -2,7 +2,7 @@
     <PMobileDateTimePicker @bind-Value="_dateTime" Formatter="@CustomFormatter">
         <ActivatorContent>
             <MButton Color="primary" Class="text-capitalize" Text @attributes="@context.Attrs">
-                @(_dateTime)
+                @(_dateTime == default ? "Please select" : _dateTime)
             </MButton>
         </ActivatorContent>
     </PMobileDateTimePicker>
