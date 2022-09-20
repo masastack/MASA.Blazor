@@ -40,7 +40,7 @@
                     attrs[nameof(MMenu.OffsetY)] = true;
                     attrs[nameof(MMenu.MinWidth)] = (StringNumber)(Dense ? 120 : 180);
                     attrs[nameof(MMenu.CloseOnContentClick)] = false;
-                    attrs[nameof(MMenu.ContentStyle)] = "display:flex";
+                    attrs[nameof(MMenu.ContentStyle)] = "display:flex;overflow-x:auto;";
                 })
                 .Apply(typeof(BCascaderList<,>), typeof(MCascaderList<TItem, TValue>), attrs =>
                 {
