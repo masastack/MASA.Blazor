@@ -5,6 +5,9 @@ public partial class MobilePickerBase<TColumn, TColumnItem, TColumnItemValue, TV
     [Inject]
     private I18n I18n { get; set; } = null!;
 
+    [Inject]
+    private IJSRuntime Js { get; set; } = null!;
+
     [Parameter]
     public RenderFragment<ActivatorProps> ActivatorContent { get; set; }
 
@@ -102,6 +105,15 @@ public partial class MobilePickerBase<TColumn, TColumnItem, TColumnItemValue, TV
 
     private async Task HandleVisibleChanged(bool val)
     {
+        if (val)
+        {
+            await Js.InvokeVoidAsync(JsInteropConstants.AddCls, "html", "overflow-y-hidden");
+        }
+        else
+        {
+            await Js.InvokeVoidAsync(JsInteropConstants.RemoveCls, "html", "overflow-y-hidden");
+        }
+
         if (VisibleChanged.HasDelegate)
         {
             await VisibleChanged.InvokeAsync(val);
