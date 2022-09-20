@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.32804.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.MAUI.Audio", "Masa.Blazor.MAUI.Audio\Masa.Blazor.MAUI.Audio.csproj", "{33D913A9-3A4D-43A5-9BDC-450BF82EBB6F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Audio", "Audio", "{64BC253C-AA93-4D31-9F5C-967DD6ED6CA0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.MAUI.AudioPlayerSample", "Masa.Blazor.MAUI.AudioPlayerSample\Masa.Blazor.MAUI.AudioPlayerSample.csproj", "{793C1501-17D9-4995-A2C1-0AB49CA4B640}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlueTooth", "BlueTooth", "{778735C1-2790-4972-A097-AEA5DAF88EE3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.MAUI.BlueToothSample", "Masa.Blazor.MAUI.BlueToothSample\Masa.Blazor.MAUI.BlueToothSample.csproj", "{AEE98202-EAFB-4A4C-8165-39C1ED0D004C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.MAUI.Bluetooth", "Masa.Blazor.MAUI.Bluetooth\Masa.Blazor.MAUI.Bluetooth.csproj", "{2C2AA6F2-761F-4044-B801-9EC557F73FDD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33D913A9-3A4D-43A5-9BDC-450BF82EBB6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D913A9-3A4D-43A5-9BDC-450BF82EBB6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D913A9-3A4D-43A5-9BDC-450BF82EBB6F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{33D913A9-3A4D-43A5-9BDC-450BF82EBB6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33D913A9-3A4D-43A5-9BDC-450BF82EBB6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33D913A9-3A4D-43A5-9BDC-450BF82EBB6F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{793C1501-17D9-4995-A2C1-0AB49CA4B640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{793C1501-17D9-4995-A2C1-0AB49CA4B640}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{793C1501-17D9-4995-A2C1-0AB49CA4B640}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{793C1501-17D9-4995-A2C1-0AB49CA4B640}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{793C1501-17D9-4995-A2C1-0AB49CA4B640}.Release|Any CPU.Build.0 = Release|Any CPU
+		{793C1501-17D9-4995-A2C1-0AB49CA4B640}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{AEE98202-EAFB-4A4C-8165-39C1ED0D004C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEE98202-EAFB-4A4C-8165-39C1ED0D004C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEE98202-EAFB-4A4C-8165-39C1ED0D004C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AEE98202-EAFB-4A4C-8165-39C1ED0D004C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEE98202-EAFB-4A4C-8165-39C1ED0D004C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEE98202-EAFB-4A4C-8165-39C1ED0D004C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2C2AA6F2-761F-4044-B801-9EC557F73FDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C2AA6F2-761F-4044-B801-9EC557F73FDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C2AA6F2-761F-4044-B801-9EC557F73FDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C2AA6F2-761F-4044-B801-9EC557F73FDD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{33D913A9-3A4D-43A5-9BDC-450BF82EBB6F} = {64BC253C-AA93-4D31-9F5C-967DD6ED6CA0}
+		{793C1501-17D9-4995-A2C1-0AB49CA4B640} = {64BC253C-AA93-4D31-9F5C-967DD6ED6CA0}
+		{AEE98202-EAFB-4A4C-8165-39C1ED0D004C} = {778735C1-2790-4972-A097-AEA5DAF88EE3}
+		{2C2AA6F2-761F-4044-B801-9EC557F73FDD} = {778735C1-2790-4972-A097-AEA5DAF88EE3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F999AB5B-4C79-44A5-A1BA-90C268DFB039}
+	EndGlobalSection
+EndGlobal

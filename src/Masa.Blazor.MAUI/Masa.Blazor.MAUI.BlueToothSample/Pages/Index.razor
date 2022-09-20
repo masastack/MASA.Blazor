@@ -1,0 +1,27 @@
+﻿@page "/"
+<MButton OnClick="ScanBLEDeviceAsync">扫描蓝牙设备</MButton>
+<div class="text-center">
+    <MDialog @bind-Value="ShowProgress" Width="500">
+        <ChildContent>
+            <MCard>
+                <MCardTitle>
+                    正在扫描蓝牙设备
+                </MCardTitle>
+                <MCardText>
+                    <MProgressCircular Size="40" Indeterminate Color="primary"></MProgressCircular>
+                </MCardText>
+            </MCard>
+        </ChildContent>
+    </MDialog>
+</div>
+
+<MCard Class="mx-auto" MaxWidth="400" Tile>
+    @foreach (var item in BluetoothDeviceList)
+    {
+        <MListItem>
+            <MListItemContent>
+                <MListItemTitle>@item</MListItemTitle>
+            </MListItemContent>
+        </MListItem>
+    }
+</MCard>
