@@ -1,42 +1,44 @@
-﻿<MCard>
-    <MCardSubtitle>柱状图</MCardSubtitle>
-    <MCardText>
-        <MRow>
-            <MCol>
-                <MECharts Width="400" Height="300" Option="_option">
-                </MECharts>
-            </MCol>
-            <MCol>宽高比:400/300</MCol>
-        </MRow>
-    </MCardText>
-</MCard>
+﻿<MRow Justify="JustifyTypes.Center">
+    <MCol Cols="12" Class="text-center">
+        Aspect ratio: 400/300
+    </MCol>
+    <MCol Cols="12">
+        <MECharts Width="@("100%")"
+                  MaxWidth="400"
+                  Height="300"
+                  Style="margin: 0 auto"
+                  Option="_option">
+        </MECharts>
+    </MCol>
+</MRow>
 
 @code {
+
     private object _option = new
     {
         Title = new
         {
-            Text = "ECharts 入门示例"
+            Text = "Getting started"
         },
         Tooltip = new { },
         Legend = new
         {
-            Data = new[] { "销量" }
+            Data = new[] { "Sales" }
         },
         XAxis = new
         {
-            Data = new[] { "衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子" }
+            Data = new[] { "Shirt", "Cardigan", "Chiffon shirt", "Pants", "High heel", "Sock" }
         },
         YAxis = new { },
         Series = new[]
-                                    {
+        {
             new
             {
-                Name= "销量",
-                Type= "bar",
-                Data= new []{ 5, 20, 36, 10, 10, 20 }
+                Name = "sales",
+                Type = "bar",
+                Data = new[] { 5, 20, 36, 10, 10, 20 }
             }
         }
     };
-}
 
+}
