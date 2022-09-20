@@ -1,17 +1,19 @@
-﻿<MCard>
-    <MCardSubtitle>柱状图</MCardSubtitle>
-    <MCardText>
-        <MRow>
-            <MCol>
-                <MECharts Width="400" Height="300" Option="_option">
-                </MECharts>
-            </MCol>
-            <MCol>宽高比:400/300</MCol>
-        </MRow>
-    </MCardText>
-</MCard>
+﻿<MRow Justify="JustifyTypes.Center">
+    <MCol Cols="12" Class="text-center">
+        宽高比:400/300
+    </MCol>
+    <MCol Cols="12">
+        <MECharts Width="@("100%")"
+                  MaxWidth="400"
+                  Height="300"
+                  Style="margin: 0 auto"
+                  Option="_option">
+        </MECharts>
+    </MCol>
+</MRow>
 
 @code {
+
     private object _option = new
     {
         Title = new
@@ -29,14 +31,14 @@
         },
         YAxis = new { },
         Series = new[]
-                                    {
+        {
             new
             {
-                Name= "销量",
-                Type= "bar",
-                Data= new []{ 5, 20, 36, 10, 10, 20 }
+                Name = "销量",
+                Type = "bar",
+                Data = new[] { 5, 20, 36, 10, 10, 20 }
             }
         }
     };
-}
 
+}

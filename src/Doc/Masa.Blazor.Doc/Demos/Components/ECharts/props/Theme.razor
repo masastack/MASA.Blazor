@@ -1,5 +1,5 @@
 ﻿<div class="d-flex flex-column align-center justify-center">
-    <MECharts Option="option" Theme="@theme" @ref="echarts"></MECharts>
+    <MECharts Option="option" Theme="@theme" Width="@("100%")" @ref="echarts"></MECharts>
 
     <MRadioGroup TValue="string" Value="theme" ValueChanged="SetTheme" Row>
         <MRadio Label="default"
@@ -19,7 +19,7 @@
 
 @code{
     private MECharts echarts;
-    private string theme;
+    private string theme = string.Empty;
 
     private object option = new
     {
