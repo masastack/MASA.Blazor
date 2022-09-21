@@ -1,5 +1,6 @@
 ﻿using Android.Bluetooth;
 using Android.Bluetooth.LE;
+using System.Threading.Tasks;
 
 namespace Masa.Blazor.Maui.Plugin.Bluetooth
 {
@@ -9,6 +10,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         private readonly BluetoothAdapter _bluetoothAdapter;
         private readonly ScanSettings _settings;
         private readonly DevicesCallback _callback;
+        private IReadOnlyCollection<BluetoothDevice> _discoveredDevices;
         public MasaMauiBluetoothService()
         {
             _bluetoothManager = (BluetoothManager)Android.App.Application.Context.GetSystemService(Android.App.Application.BluetoothService);
@@ -25,7 +27,6 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         }
         public async Task<IReadOnlyCollection<BluetoothDevice>> ScanLeDeviceAsync()
         {
-            //第一个参数可以设置过滤条件-蓝牙名称，名称前缀，服务号等,这里暂时不设置过滤条件
             _bluetoothAdapter.BluetoothLeScanner.StartScan(null, _settings, _callback);
 
             await Task.Run(() =>
@@ -34,11 +35,28 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             });
 
             _bluetoothAdapter.BluetoothLeScanner.StopScan(_callback);
+            _discoveredDevices = _callback.Devices.AsReadOnly();
 
-
-            return _callback.Devices.AsReadOnly();
+            return _discoveredDevices;
         }
-        
+
+        public async Task SendDataAsync(string deviceName, byte[] dataBytes, EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
+        {
+            BluetoothDevice blueDevice = _discoveredDevices.FirstOrDefault(o => o.Name == deviceName);
+
+            var primaryServices = await blueDevice.Gatt.GetPrimaryServicesAsync();
+            var primaryService = primaryServices[2];
+
+            var characteristics = await primaryService.GetCharacteristicsAsync();
+            var characteristic = characteristics.FirstOrDefault(o => (o.Properties & GattCharacteristicProperties.Write) != 0);
+
+            await characteristic.StartNotificationsAsync();
+            characteristic.CharacteristicValueChanged += gattCharacteristicValueChangedEventArgs;
+            await characteristic.WriteValueWithResponseAsync(dataBytes);
+
+
+        }
+
         public async Task<bool> CheckAndRequestBluetoothPermission()
         {
             var status = await Permissions.CheckStatusAsync<BluetoothPermissions>();
@@ -56,7 +74,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             private readonly EventWaitHandle _eventWaitHandle = new(false, EventResetMode.AutoReset);
 
             public List<BluetoothDevice> Devices { get; } = new();
-
+            
             public void WaitOne()
             {
                 Task.Run(async () =>
@@ -64,8 +82,6 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                     await Task.Delay(5000);
                     _eventWaitHandle.Set();
                 });
-
-                _eventWaitHandle.WaitOne();
             }
 
             public override void OnBatchScanResults(IList<ScanResult> results)
