@@ -453,7 +453,7 @@
   "Demos.Components.Menu.misc.UseInComponents",
   "Demos.Components.MobileCascader.usage.Index",
   "Demos.Components.MobileCascader.events.LoadChildren",
-  "Demos.Components.MobileCascader.events.OnSelect",
+  "Demos.Components.MobileCascader.events.OnConfirm",
   "Demos.Components.Modal.usage.Index",
   "Demos.Components.Modal.props.ActionProps",
   "Demos.Components.Modal.props.Actions",
