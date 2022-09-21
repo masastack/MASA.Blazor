@@ -8,7 +8,7 @@
                          ItemValue="d => d.Code"
                          ItemChildren="d => d.Children"
                          ItemDisabled="d => d.Disabled"
-                         OnSelect="HandleOnSelect">
+                         OnConfirm="HandleOnConfirm">
             <ActivatorContent>
                 <MButton @attributes="@context.Attrs">Select</MButton>
             </ActivatorContent>
@@ -23,7 +23,7 @@
 
     List<Data> selectedItems = new();
 
-    void HandleOnSelect(List<Data> selected)
+    void HandleOnConfirm(List<Data> selected)
     {
         selectedItems = selected;
     }

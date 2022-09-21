@@ -24,7 +24,7 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
 
     [Parameter] public EventCallback<TItem> OnLoadChildren { get; set; }
 
-    [Parameter] public EventCallback<List<TItem>> OnSelect { get; set; }
+    [Parameter] public EventCallback<List<TItem>> OnConfirm { get; set; }
 
     [Parameter] public string Title { get; set; }
 
@@ -53,27 +53,9 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
 
     private List<TItem> SelectedItems { get; set; } = new();
 
+    private List<string> Tabs { get; set; } = new();
+
     private string PleaseSelectText => I18n.T("$masaBlazor.mobileCascader.pleaseSelect");
-
-    private List<string> ComputedTabs
-    {
-        get
-        {
-            if (SelectedItems.Count == 0)
-            {
-                return new List<string>() { PleaseSelectText };
-            }
-
-            var tabs = SelectedItems.Select(t => ItemText(t)).ToList();
-
-            if (HasChildren || IsLoading)
-            {
-                tabs.Add(PleaseSelectText);
-            }
-
-            return tabs;
-        }
-    }
 
     private TItem Current => SelectedItems.Count > 0 ? SelectedItems.Last() : default;
 
@@ -85,6 +67,11 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
     {
         get
         {
+            if (_tabIndex == -1)
+            {
+                return new List<TItem>();
+            }
+
             if (_tabIndex == 0)
             {
                 return Items;
@@ -111,19 +98,8 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
     {
         if (SelectedItems.Count > _tabIndex)
         {
-            var activeTab = SelectedItems[_tabIndex];
-
             // cancel the selection
             SelectedItems = SelectedItems.Take(_tabIndex).ToList();
-
-            if (EqualityComparer<TItem>.Default.Equals(activeTab, item))
-            {
-                // cancel the selection and nothing to do
-                if (!OnSelect.HasDelegate) return;
-                await OnSelect.InvokeAsync(SelectedItems);
-
-                return;
-            }
         }
 
         SelectedItems.Add(item);
@@ -136,6 +112,8 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
         {
             _loadingItem = item;
             _loadedItems.Add(item);
+
+            FormatTabs();
 
             try
             {
@@ -159,10 +137,7 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
             _tabIndex--;
         }
 
-        if (OnSelect.HasDelegate)
-        {
-            await OnSelect.InvokeAsync(SelectedItems);
-        }
+        FormatTabs();
     }
 
     private bool IsLoading => !EqualityComparer<TItem>.Default.Equals(_loadingItem, default);
@@ -184,7 +159,7 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
         }
     }
 
-    private async Task OnConfirm()
+    private async Task HandleOnConfirm()
     {
         var value = SelectedItems.Select(ItemValue).ToList();
 
@@ -197,13 +172,30 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
             Value = value;
         }
 
+        if (OnConfirm.HasDelegate)
+        {
+            _ = OnConfirm.InvokeAsync(SelectedItems);
+        }
+
         await OnCancel();
     }
 
-    private void Reset()
+    private void FormatTabs()
     {
-        SelectedItems.Clear();
-        _tabIndex = 0;
+        if (SelectedItems.Count == 0)
+        {
+            Tabs = new List<string>() { PleaseSelectText };
+        }
+        else
+        {
+            var tabs = SelectedItems.Select(t => ItemText(t)).ToList();
+            if (HasChildren || IsLoading)
+            {
+                tabs.Add(PleaseSelectText);
+            }
+
+            Tabs = tabs;
+        }
     }
 
     private async Task HandleVisibleChanged(bool val)
@@ -229,44 +221,48 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
 
     private void OnVisibleChanged(bool visible)
     {
-        if (visible)
+        if (!visible) return;
+
+        if (Value is null || Value.Count <= 0)
         {
-            if (Value is null || Value.Count <= 0) return;
+            FormatTabs();
+            return;
+        }
 
-            var items = Items;
+        SelectedItems.Clear();
 
-            for (var index = 0; index < Value.Count; index++)
+        var items = Items;
+
+        for (var index = 0; index < Value.Count; index++)
+        {
+            var v = Value[index];
+            if (!TryGetItem(items, v, out var item))
             {
-                var v = Value[index];
-                if (!TryGetItem(items, v, out var item))
-                {
-                    break;
-                }
+                break;
+            }
 
-                SelectedItems.Add(item);
+            SelectedItems.Add(item);
+            FormatTabs();
 
-                _tabIndex = index;
+            _tabIndex = index;
 
-                var children = ItemChildren(item);
-                if (children is null || children.Count == 0)
-                {
-                    break;
-                }
+            var children = ItemChildren(item);
+            if (children is null || children.Count == 0)
+            {
+                break;
+            }
 
-                items = children;
+            items = children;
 
-                // If it is the last loop and there are child elements,
-                // need to activate the next tab
-                if (index == Value.Count - 1)
-                {
-                    _tabIndex++;
-                }
+            // If it is the last loop and there are child elements,
+            // need to activate the next tab
+            if (index == Value.Count - 1)
+            {
+                _tabIndex++;
             }
         }
-        else
-        {
-            Reset();
-        }
+
+        FormatTabs();
     }
 
     private bool TryGetItem(List<TItem> items, TItemValue value, out TItem item)

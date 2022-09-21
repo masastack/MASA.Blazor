@@ -12,11 +12,11 @@
         <MSheet Class="p-mobile-cascader__header">
             <MButton Plain Color="primary" OnClick="OnCancel">@I18n.T("$masaBlazor.cancel")</MButton>
             <div class="p-mobile-cascader__title">@Title</div>
-            <MButton Plain Color="primary" OnClick="OnConfirm">@I18n.T("$masaBlazor.ok")</MButton>
+            <MButton Plain Color="primary" OnClick="HandleOnConfirm">@I18n.T("$masaBlazor.ok")</MButton>
         </MSheet>
 
         <MTabs Value="@_tabIndex" ValueChanged="val => _tabIndex = val.AsT1">
-            @foreach (var tab in ComputedTabs)
+            @foreach (var tab in Tabs)
             {
                 <MTab>@tab</MTab>
             }
