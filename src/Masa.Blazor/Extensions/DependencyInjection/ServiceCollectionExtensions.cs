@@ -6,40 +6,31 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
-    public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services, MasaBlazorOptions options = null)
+    public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services, Action<MasaBlazorOptions> optionsAction = null)
     {
-        InitGlobalVariables(options);
-
         services.AddBlazorComponent();
-        services.TryAddScoped<MasaBlazor>();
+
+        var options = new MasaBlazorOptions();
+
+        optionsAction?.Invoke(options);
+
+        return services.AddMasaBlazor(options);
+    }
+
+    private static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services, MasaBlazorOptions options)
+    {
         services.TryAddScoped<Application>();
-        services.TryAddScoped(serviceProvider => new Breakpoint(serviceProvider.GetService<Window>())
+        services.TryAddScoped(serviceProvider =>
         {
-            MobileBreakpoint = MasaBlazorVariables.Breakpoint.MobileBreakpoint,
-            ScrollBarWidth = MasaBlazorVariables.Breakpoint.ScrollBarWidth,
-            Thresholds = MasaBlazorVariables.Breakpoint.Thresholds
+            var application = serviceProvider.GetService<Application>();
+            var window = serviceProvider.GetService<Window>();
+            options.Breakpoint.SetWindow(window);
+            return new MasaBlazor(options.Breakpoint, application, options.Theme);
         });
         services.TryAddScoped<IPopupService, PopupService>();
         services.TryAddScoped<IErrorHandler, MErrorHandler>();
         services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
 
         return new MasaBlazorBuilder(services);
-    }
-
-    public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services, Action<MasaBlazorOptions> optionsAction)
-    {
-        var options = new MasaBlazorOptions();
-        optionsAction?.Invoke(options);
-
-        return services.AddMasaBlazor(options);
-    }
-
-    private static void InitGlobalVariables(MasaBlazorOptions options)
-    {
-        options ??= new MasaBlazorOptions();
-
-        Variables.DarkTheme = options.DarkTheme;
-        Variables.Theme = options.Theme;
-        MasaBlazorVariables.Breakpoint = options.Breakpoint;
     }
 }
