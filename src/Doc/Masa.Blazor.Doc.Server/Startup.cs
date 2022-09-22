@@ -21,7 +21,15 @@ namespace Masa.Blazor.Doc.Server
             services.AddScoped<LazyAssemblyLoader>();
             services.AddServerSideBlazor();
 
-            services.AddMasaBlazor().AddI18nForServer("wwwroot/locale");
+            services.AddMasaBlazor(options =>
+            {
+                options.ConfigureTheme(theme =>
+                {
+                    theme.Themes.Light.Secondary = "#5CBBF6";
+                    theme.Themes.Light.Accent = "#005CAF";
+                    theme.Themes.Light.UserDefined["Tertiary"] = "#e57373";
+                });
+            }).AddI18nForServer("wwwroot/locale");
 
             services.AddMasaBlazorDocs(Configuration["ASPNETCORE_URLS"]?.Replace("0.0.0.0", "127.0.0.1") ?? "http://localhost:5000");
         }
