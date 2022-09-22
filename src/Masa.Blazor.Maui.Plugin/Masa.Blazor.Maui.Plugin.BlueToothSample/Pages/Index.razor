@@ -1,5 +1,6 @@
 ﻿@page "/"
 <MButton OnClick="ScanBLEDeviceAsync">扫描蓝牙设备</MButton>
+
 <div class="text-center">
     <MDialog @bind-Value="ShowProgress" Width="500">
         <ChildContent>
@@ -15,13 +16,32 @@
     </MDialog>
 </div>
 
-<MCard Class="mx-auto" MaxWidth="400" Tile>
-    @foreach (var item in BluetoothDeviceList)
-    {
-        <MListItem>
-            <MListItemContent>
-                <MListItemTitle>@item</MListItemTitle>
-            </MListItemContent>
-        </MListItem>
-    }
-</MCard>
+
+@if (BluetoothDeviceList.Any())
+{
+    <MSelect style="margin-top:10px"
+                 Outlined
+                 Items="BluetoothDeviceList"
+                 ItemText="u=>u"
+                 ItemValue="u=>u"
+                 TItem="string"
+                 TValue="string"
+                 TItemValue="string"
+                 @bind-Value="SelectedDevice"
+                 OnSelectedItemUpdate="item => SelectedDevice = item">
+        </MSelect>
+}
+@if (!string.IsNullOrEmpty(SelectedDevice))
+{
+    <MButton OnClick="() => SendDataAsync()">发送查询版本指令</MButton>
+}
+
+@if (_allDeviceResponse.Any())
+{
+    <MCard>
+        <MTextarea Value="@string.Join(' ',_allDeviceResponse)"></MTextarea>
+    </MCard>
+}
+
+
+

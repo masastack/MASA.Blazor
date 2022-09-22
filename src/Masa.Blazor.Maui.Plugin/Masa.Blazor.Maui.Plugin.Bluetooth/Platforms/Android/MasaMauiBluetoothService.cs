@@ -40,21 +40,23 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             return _discoveredDevices;
         }
 
-        public async Task SendDataAsync(string deviceName, byte[] dataBytes, EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
+        public async Task SendDataAsync(string deviceName,Guid servicesUuid,Guid? characteristicsUuid, byte[] dataBytes, EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
         {
             BluetoothDevice blueDevice = _discoveredDevices.FirstOrDefault(o => o.Name == deviceName);
 
             var primaryServices = await blueDevice.Gatt.GetPrimaryServicesAsync();
-            var primaryService = primaryServices[2];
+            var primaryService = primaryServices.First(o => o.Uuid.Value == servicesUuid);
 
             var characteristics = await primaryService.GetCharacteristicsAsync();
             var characteristic = characteristics.FirstOrDefault(o => (o.Properties & GattCharacteristicProperties.Write) != 0);
-
+            if (characteristicsUuid != null)
+            {
+                characteristic = characteristics.FirstOrDefault(o => o.Uuid.Value == characteristicsUuid);
+            }
+            
             await characteristic.StartNotificationsAsync();
             characteristic.CharacteristicValueChanged += gattCharacteristicValueChangedEventArgs;
             await characteristic.WriteValueWithResponseAsync(dataBytes);
-
-
         }
 
         public async Task<bool> CheckAndRequestBluetoothPermission()
@@ -74,7 +76,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             private readonly EventWaitHandle _eventWaitHandle = new(false, EventResetMode.AutoReset);
 
             public List<BluetoothDevice> Devices { get; } = new();
-            
+
             public void WaitOne()
             {
                 Task.Run(async () =>
@@ -82,6 +84,8 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                     await Task.Delay(5000);
                     _eventWaitHandle.Set();
                 });
+
+                _eventWaitHandle.WaitOne();
             }
 
             public override void OnBatchScanResults(IList<ScanResult> results)

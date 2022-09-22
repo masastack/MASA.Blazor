@@ -6,8 +6,12 @@ namespace MauiBlueToothDemo.Pages
 {
     public partial class Index
     {
+        private string SelectedDevice;
+
         private bool ShowProgress { get; set; }
         private List<string> BluetoothDeviceList { get; set; } = new();
+
+        private List<string> _allDeviceResponse = new List<string>();
         [Inject]
         private MasaMauiBluetoothService BluetoothService { get; set; }
 
@@ -23,6 +27,30 @@ namespace MauiBlueToothDemo.Pages
                     ShowProgress = false;
                 }
             }
+        }
+
+        private async Task SendDataAsync(string cmd= "AT+QVERSION")
+        {
+            var byteData = System.Text.Encoding.Default.GetBytes(cmd);
+            await SendDataAsync(SelectedDevice, byteData);
+        }
+
+        private async Task SendDataAsync(string deviceSerialNo, byte[] byteData)
+        {
+            if (byteData.Any())
+            {
+                _allDeviceResponse = new List<string>();
+#if ANDROID
+                await BluetoothService.SendDataAsync(deviceSerialNo,Guid.Parse("0000ffff-0000-1000-8000-00805f9b34fb"),null, byteData, onCharacteristicChanged);
+#endif
+            }
+        }
+
+        void onCharacteristicChanged(object sender, GattCharacteristicValueChangedEventArgs e)
+        {
+            var deviceResponse = System.Text.Encoding.Default.GetString(e.Value);
+            _allDeviceResponse.Add(deviceResponse);
+            InvokeAsync(() => { StateHasChanged(); });
         }
     }
 }
