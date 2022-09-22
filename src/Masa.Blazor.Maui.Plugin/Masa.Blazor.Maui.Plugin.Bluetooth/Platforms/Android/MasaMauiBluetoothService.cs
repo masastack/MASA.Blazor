@@ -27,6 +27,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         }
         public async Task<IReadOnlyCollection<BluetoothDevice>> ScanLeDeviceAsync()
         {
+            //第一个参数可以设置过滤条件-蓝牙名称，名称前缀，服务号等,这里暂时不设置过滤条件
             _bluetoothAdapter.BluetoothLeScanner.StartScan(null, _settings, _callback);
 
             await Task.Run(() =>
@@ -53,12 +54,12 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             {
                 characteristic = characteristics.FirstOrDefault(o => o.Uuid.Value == characteristicsUuid);
             }
-            
+
             await characteristic.StartNotificationsAsync();
             characteristic.CharacteristicValueChanged += gattCharacteristicValueChangedEventArgs;
             await characteristic.WriteValueWithResponseAsync(dataBytes);
         }
-
+        
         public async Task<bool> CheckAndRequestBluetoothPermission()
         {
             var status = await Permissions.CheckStatusAsync<BluetoothPermissions>();

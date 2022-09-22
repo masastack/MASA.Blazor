@@ -32,15 +32,15 @@
         </MSelect>
 }
 @if (!string.IsNullOrEmpty(SelectedDevice))
-{
+    {
     <MButton OnClick="() => SendDataAsync()">发送查询版本指令</MButton>
-}
+    }
 
 @if (_allDeviceResponse.Any())
 {
     <MCard>
         <MTextarea Value="@string.Join(' ',_allDeviceResponse)"></MTextarea>
-    </MCard>
+</MCard>
 }
 
 
