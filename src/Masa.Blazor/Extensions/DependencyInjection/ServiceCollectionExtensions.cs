@@ -10,7 +10,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddBlazorComponent();
 
-        var options = new MasaBlazorOptions();
+        var options = new MasaBlazorOptions(MasaBlazorPreset.Breakpoint, MasaBlazorPreset.Theme);
 
         optionsAction?.Invoke(options);
 
