@@ -5,8 +5,6 @@ namespace Masa.Blazor;
 public class Breakpoint
 {
     private CancellationTokenSource _cancellationTokenSource;
-    private double _width;
-    private double _height;
 
     public Breakpoint()
     {
@@ -16,6 +14,8 @@ public class Breakpoint
     {
         Window = window;
     }
+
+    internal void SetWindow(Window window) => Window = window;
 
     public bool Xs { get; private set; }
 
@@ -51,25 +51,9 @@ public class Breakpoint
 
     public Breakpoints Name { get; private set; }
 
-    public double Height
-    {
-        get => _height > 0 ? _height : MasaBlazorVariables.Height;
-        private set
-        {
-            _height = value;
-            MasaBlazorVariables.Height = value;
-        }
-    }
+    public double Height { get; private set; }
 
-    public double Width
-    {
-        get => _width > 0 ? _width : MasaBlazorVariables.Width;
-        private set
-        {
-            _width = value;
-            MasaBlazorVariables.Width = value;
-        }
-    }
+    public double Width { get; private set; }
 
     public bool Mobile { get; private set; }
 
@@ -81,7 +65,7 @@ public class Breakpoint
 
     public event Func<Task> OnUpdate;
 
-    Window Window { get; }
+    Window Window { get; set; }
 
     Document Document => Window.Document;
 

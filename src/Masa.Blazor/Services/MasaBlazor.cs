@@ -7,18 +7,16 @@
     {
         private bool _rtl;
 
-        public MasaBlazor(Breakpoint breakpoint, Application application)
+        public MasaBlazor(Breakpoint breakpoint, Application application, Theme theme)
         {
             Breakpoint = breakpoint;
             Application = application;
+            Theme = theme;
         }
 
         public bool RTL
         {
-            get
-            {
-                return _rtl;
-            }
+            get { return _rtl; }
             set
             {
                 if (_rtl != value)
@@ -32,6 +30,8 @@
         public Application Application { get; }
 
         public Breakpoint Breakpoint { get; }
+
+        public Theme Theme { get; }
 
         public event Action<bool> OnRTLChange;
     }
