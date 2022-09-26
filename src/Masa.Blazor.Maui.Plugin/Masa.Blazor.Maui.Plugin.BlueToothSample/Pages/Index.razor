@@ -1,5 +1,5 @@
 ﻿@page "/"
-<MButton OnClick="ScanBLEDeviceAsync">扫描蓝牙设备</MButton>
+<MButton OnClick="ScanBleDeviceAsync">ScanBleDevice</MButton>
 
 <div class="text-center">
     <MDialog @bind-Value="ShowProgress" Width="500">
@@ -27,18 +27,18 @@
          TItem="string"
          TValue="string"
          TItemValue="string"
-         @bind-Value="SelectedDevice"
-         OnSelectedItemUpdate="item => SelectedDevice = item">
+         @bind-Value="_selectedDevice"
+         OnSelectedItemUpdate="item => _selectedDevice = item">
     </MSelect>
 }
-@if (!string.IsNullOrEmpty(SelectedDevice))
+@if (!string.IsNullOrEmpty(_selectedDevice))
 {
     <MButton OnClick="() => SendDataAsync()">SendVersionCheckCmd</MButton>
 }
 
-@if (_allDeviceResponse.Any())
+@if (AllDeviceResponse.Any())
 {
     <MCard>
-        <MTextarea Value="@string.Join(' ',_allDeviceResponse)"></MTextarea>
+        <MTextarea Value="@string.Join(' ',AllDeviceResponse)"></MTextarea>
     </MCard>
 }
