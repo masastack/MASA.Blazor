@@ -6,16 +6,20 @@ namespace MauiBlueToothDemo.Pages
 {
     public partial class Index
     {
-        private string SelectedDevice;
+        private string _selectedDevice;
 
         private bool ShowProgress { get; set; }
         private List<string> BluetoothDeviceList { get; set; } = new();
 
-        private List<string> _allDeviceResponse = new List<string>();
+        private List<string> AllDeviceResponse { get; set; } = new();
         [Inject]
         private MasaMauiBluetoothService BluetoothService { get; set; }
 
-        private async Task ScanBLEDeviceAsync()
+        /// <summary>
+        /// Start scanning nearby Ble devices
+        /// </summary>
+        /// <returns></returns>
+        private async Task ScanBleDeviceAsync()
         {
             if (BluetoothService.IsEnabled())
             {
@@ -29,28 +33,42 @@ namespace MauiBlueToothDemo.Pages
             }
         }
 
-        private async Task SendDataAsync(string cmd= "AT+QVERSION")
+        /// <summary>
+        /// Send a Ble command 
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
+        private async Task SendDataAsync(string cmd = "AT+QVERSION")
         {
             var byteData = System.Text.Encoding.Default.GetBytes(cmd);
-            await SendDataAsync(SelectedDevice, byteData);
+            await SendDataAsync(_selectedDevice, byteData);
         }
 
-        private async Task SendDataAsync(string deviceSerialNo, byte[] byteData)
+        /// <summary>
+        /// Send a Ble command to a specific device
+        /// </summary>
+        /// <param name="deviceName"></param>
+        /// <param name="byteData"></param>
+        /// <returns></returns>
+        private async Task SendDataAsync(string deviceName, byte[] byteData)
         {
             if (byteData.Any())
             {
-                _allDeviceResponse = new List<string>();
-#if ANDROID
-                await BluetoothService.SendDataAsync(deviceSerialNo,Guid.Parse("0000ffff-0000-1000-8000-00805f9b34fb"),null, byteData, onCharacteristicChanged);
-#endif
+                AllDeviceResponse = new List<string>();
+                await BluetoothService.SendDataAsync(deviceName, Guid.Parse("0000ffff-0000-1000-8000-00805f9b34fb"), null, byteData, OnCharacteristicChanged);
             }
         }
 
-        void onCharacteristicChanged(object sender, GattCharacteristicValueChangedEventArgs e)
+        /// <summary>
+        /// Characteristic change callback
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void OnCharacteristicChanged(object sender, GattCharacteristicValueChangedEventArgs e)
         {
             var deviceResponse = System.Text.Encoding.Default.GetString(e.Value);
-            _allDeviceResponse.Add(deviceResponse);
-            InvokeAsync(() => { StateHasChanged(); });
+            AllDeviceResponse.Add(deviceResponse);
+            InvokeAsync(StateHasChanged);
         }
     }
 }
