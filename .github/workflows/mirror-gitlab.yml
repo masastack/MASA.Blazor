@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v1
       - uses: yesolutions/mirror-action@v0.5.1
         with:
-          REMOTE: '${{ secrets.GITLAB_ADDER }}/cicd/masa.blazor.git'
+          REMOTE: '${{ secrets.GITLAB_ADDER }}/cicd/masa.blazor1.git'
           GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
           GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
           
