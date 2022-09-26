@@ -1,4 +1,4 @@
-﻿<MContainer>
+<MContainer>
     <MRow>
         <MCol Cols="12"
               Sm="6">
@@ -14,6 +14,7 @@
               Sm="6">
             <MTextField @bind-Value="_description"
                         Counter="25"
+                        maxlength="25"
                         Rules="_rules"
                         Hint="This field uses maxlength attribute"
                         Label="Limit exceeded">
