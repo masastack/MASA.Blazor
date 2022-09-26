@@ -824,6 +824,8 @@ namespace Masa.Blazor
             if (!IsFocused)
             {
                 IsFocused = true;
+                HasFocused = true;
+
                 if (OnFocus.HasDelegate)
                 {
                     await OnFocus.InvokeAsync();

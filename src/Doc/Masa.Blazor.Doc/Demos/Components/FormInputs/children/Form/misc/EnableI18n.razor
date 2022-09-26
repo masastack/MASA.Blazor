@@ -22,6 +22,7 @@
     class Model
     {
         [Required]
+        [MaxLength(10, ErrorMessage = "Name must be at most 10 characters long.")]
         public string Name { get; set; }
         [Required]
         [EmailAddress]
@@ -37,12 +38,12 @@
     private Model _model = new();
 
     List<string> _items = new()
-        {
-            "Item 1",
-            "Item 2",
-            "Item 3",
-            "Item 4"
-        };
+    {
+        "Item 1",
+        "Item 2",
+        "Item 3",
+        "Item 4"
+    };
 
     private void HandleOnValidSubmit()
     {
