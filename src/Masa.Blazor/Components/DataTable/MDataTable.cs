@@ -211,11 +211,10 @@ namespace Masa.Blazor
             MasaBlazor.Breakpoint.OnUpdate += BreakpointOnOnUpdate;
         }
 
-        private Task BreakpointOnOnUpdate()
+        private async Task BreakpointOnOnUpdate()
         {
             MobileProvider = new MobileProvider(this);
-            StateHasChanged();
-            return Task.CompletedTask;
+            await InvokeStateHasChangedAsync();
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
