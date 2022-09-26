@@ -157,15 +157,12 @@ namespace Masa.Blazor
         {
             get
             {
-                return GetComputedValue(() =>
+                return InternalValue switch
                 {
-                    return InternalValue switch
-                    {
-                        IList<TItemValue> values => values,
-                        TItemValue value => new List<TItemValue> { value },
-                        _ => new List<TItemValue>()
-                    };
-                }, new[] { nameof(InternalValue), nameof(Value) });
+                    IList<TItemValue> values => values,
+                    TItemValue value => new List<TItemValue> { value },
+                    _ => new List<TItemValue>()
+                };
             }
         }
 
