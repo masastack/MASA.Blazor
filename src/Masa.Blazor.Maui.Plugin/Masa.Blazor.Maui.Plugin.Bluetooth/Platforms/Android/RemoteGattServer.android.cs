@@ -10,7 +10,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
     {
         private Android.Bluetooth.BluetoothGatt _gatt;
         private Android.Bluetooth.BluetoothGattCallback _gattCallback;
-
+        private bool _servicesDiscovered = false;
         private void PlatformInit()
         {
             // android default - replaced by callback after request or change
@@ -34,7 +34,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         internal event EventHandler<GattEventArgs> ServicesDiscovered;
         internal event EventHandler<RssiEventArgs> ReadRemoteRssi;
 
-        private bool _servicesDiscovered = false;
+        
 
         internal class GattCallback : Android.Bluetooth.BluetoothGattCallback
         {
@@ -246,30 +246,6 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                 return Task.FromResult((short)0);
             }
         }
-
-        //void PlatformSetPreferredPhy(BluetoothPhy phy)
-        //{
-        //    if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O)
-        //        _gatt.SetPreferredPhy(ToAndroidPhy(phy), ToAndroidPhy(phy), Android.Bluetooth.BluetoothPhyOption.NoPreferred);
-        //}
-
-        //private static Android.Bluetooth.BluetoothPhy ToAndroidPhy(BluetoothPhy phy)
-        //{
-        //    switch (phy)
-        //    {
-        //        case BluetoothPhy.Le1m:
-        //            return Android.Bluetooth.BluetoothPhy.Le1m;
-
-        //        case BluetoothPhy.Le2m:
-        //            return Android.Bluetooth.BluetoothPhy.Le2m;
-
-        //        case BluetoothPhy.LeCoded:
-        //            return Android.Bluetooth.BluetoothPhy.LeCoded;
-
-        //        default:
-        //            throw new PlatformNotSupportedException($"Unrecognised PHY {phy}");
-        //    }
-        //}
     }
 
     internal class GattEventArgs : EventArgs

@@ -11,6 +11,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         private readonly ScanSettings _settings;
         private readonly DevicesCallback _callback;
         private IReadOnlyCollection<BluetoothDevice> _discoveredDevices;
+
         public MasaMauiBluetoothService()
         {
             _bluetoothManager = (BluetoothManager)Android.App.Application.Context.GetSystemService(Android.App.Application.BluetoothService);
@@ -27,7 +28,6 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         }
         public async Task<IReadOnlyCollection<BluetoothDevice>> ScanLeDeviceAsync()
         {
-            //第一个参数可以设置过滤条件-蓝牙名称，名称前缀，服务号等,这里暂时不设置过滤条件
             _bluetoothAdapter.BluetoothLeScanner.StartScan(null, _settings, _callback);
 
             await Task.Run(() =>
