@@ -9,7 +9,7 @@ title:
 
 文件上传之前的钩子，你可以自己处理上传逻辑。
 
-```html
+```javascript
 //Call JS to handle the upload example
 window.Demo.Quill = {
     uploadFilePic: (quillElement, element, index) => {
@@ -47,7 +47,7 @@ window.Demo.Quill = {
 
 The hook before file upload, you can handle the upload logic yourself.
 
-```html
+```javascript
 //Call JS to handle the upload example
 window.Demo.Quill = {
     uploadFilePic: (quillElement, element, index) => {

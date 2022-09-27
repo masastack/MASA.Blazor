@@ -147,12 +147,15 @@
     <script src="https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js"></script>
     <script src="https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js"></script>
     <script src="https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.min.js"></script>
+    <script src="_content/Masa.Blazor.Doc/quill/quill-blot-formatter.min.js"></script>
     <script src="https://cdn.masastack.com/npm/docsearch/docsearch.js"></script>
     <script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>
     <script type="module">
         import { BrotliDecode } from './js/decode.min.js';
 
         Blazor.start().then(function () {
+            Quill.register('modules/blotFormatter', QuillBlotFormatter.default);
+
             window.BlazorComponent.Prism = {};
             window.BlazorComponent.Prism.highlight = function (code, language, component, codeElement) {
                 setTimeout(function () {

@@ -5,6 +5,11 @@
   ],
   "Props": [
     {
+      "Name": "AdditionalModules",
+      "Type": "String",
+      "Description": ""
+    },
+    {
       "Name": "BeforeAllUploadAsync",
       "Type": "Func<List`1,Task`1>",
       "Description": ""

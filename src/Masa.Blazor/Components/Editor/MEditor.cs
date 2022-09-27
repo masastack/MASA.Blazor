@@ -63,6 +63,12 @@ namespace Masa.Blazor
         [Parameter]
         public Func<List<EditorUploadFileItem>, Task<bool>> BeforeAllUploadAsync { get; set; }
 
+        /// <summary>
+        /// Multiple modules are separated by commas
+        /// </summary>
+        [Parameter]
+        public string AdditionalModules { get; set; }
+
         private string _value { get; set; }
         private bool _waitingUpdate { get; set; } = false;
         private bool _editorRendered { get; set; } = false;
@@ -99,10 +105,12 @@ namespace Masa.Blazor
         {
             ObjRef = DotNetObjectReference.Create(this);
             QuillHelper = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/quill/quill-helper.js");
+
             await QuillHelper.InvokeVoidAsync("init",
                 ContentRef,
                 ObjRef,
                 ToolbarRef,
+                AdditionalModules,
                 ReadOnly,
                 Placeholder,
                 Theme,
