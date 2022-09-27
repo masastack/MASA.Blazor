@@ -1,0 +1,214 @@
+﻿<MNavigationDrawer Fixed Temporary Right Value=Value ValueChanged=ValueChanged Width="465">
+    <MToolbar Style="width: 100%;" Absolute Elevation=0 Class="px-6">
+        @if (_isEdit)
+        {
+            <MButton Class="rounded-pill" OnClick="Complete" Color=@CompletedColor>
+                @CompletedText
+            </MButton>
+        }
+        else
+        {
+            <span>Add Task</span>
+        }
+        <MSpacer></MSpacer>
+        @if (_isEdit)
+        {
+            <MButton Icon OnClick="DeleteAsync">
+                <MIcon>mdi-delete-outline</MIcon>
+            </MButton>
+        }
+        <MButton Icon OnClick="() => _selectData.IsImportant = !_selectData.IsImportant">
+            @if (_selectData.IsImportant)
+            {
+                <MIcon Color="orange">mdi-star</MIcon>
+            }
+            else
+            {
+                <MIcon Color="orange">mdi-star-outline</MIcon>
+            }
+        </MButton>
+        <MButton Icon OnClick="HideNavigationDrawer">
+            <MIcon>mdi-close</MIcon>
+        </MButton>
+    </MToolbar>
+    <MForm @ref="_mForm" Model="_selectData" Class="pt-16" EnableDataAnnotationsValidation>
+        <MTextField Class="mx-6 mt-6" @bind-Value=_selectData.Title Label="Title" Outlined Clearable></MTextField>
+
+        <MSelect Class="mx-6" Outlined Label="Assignee" @bind-Value=_selectData.Assignee
+                 TItem="SelectData" TValue="string" TItemValue="string"
+                 Items=@_assigneeList ItemText="i => i.Label" ItemValue="i => i.Value">
+        </MSelect>
+
+        <div class="mx-6">
+            <MMenu CloseOnContentClick="false" @bind-Value="_dueDateMenu" NudgeRight="40" Transition="scale-transition" OffsetY MinWidth="@("auto")">
+                <ActivatorContent Context="menuContext">
+                    <MTextField Readonly @bind-Value=_selectData.DueDate Label="Due Date" Outlined Placeholder="Due Date" @attributes="menuContext.Attrs"></MTextField>
+                </ActivatorContent>
+                <ChildContent>
+                    <MDatePicker Class="task-datepicker" @bind-Value=_selectData.DueDate OnInput="()=>_dueDateMenu=false"></MDatePicker>
+                </ChildContent>
+            </MMenu>
+        </div>
+
+        <MSelect Class="mx-6" Outlined Label="Tag" Multiple @bind-Value=_selectData.Tag
+                 TItem="SelectData" TValue="List<string>" TItemValue="string"
+                 Items=@_tagList ItemText="i => i.Label" ItemValue="i => i.Value">
+            <SelectionContent Context="_context">
+                <MChip Style="height:32px;border-radius:32px;" Outlined Close CloseIcon="mdi-close" OnCloseClick="()=>HandleCloseClick(_context.Item.Label)">@_context.Item.Label</MChip>
+            </SelectionContent>
+        </MSelect>
+
+        <MTextarea Class="mx-6" Outlined Label="Description" @bind-Value=_selectData.Description></MTextarea>
+
+        <div style="position:fixed;bottom:48px;right:24px;">
+            <MButton Outlined Class="mr-6 text-capitalize neutral-lighten-2--text rounded-pill" OnClick="ResetAsync">Reset</MButton>
+            @if (_isEdit)
+            {
+                <MButton Color="primary rounded-pill" Dark OnClick="()=>UpdateAsync(context)">Update</MButton>
+            }
+            else
+            {
+                <MButton Color="primary rounded-pill" Dark OnClick="()=>AddAsync(context)">Add</MButton>
+            }
+        </div>
+    </MForm>
+</MNavigationDrawer>
+
+@code {
+    bool _dueDateMenu;
+}
+@code {
+    private readonly List<SelectData> _tagList = TodoService.GetTagList();
+    private readonly List<SelectData> _assigneeList = TodoService.GetAssigneeList();
+    private MForm? _mForm;
+    private bool _isEdit;
+    private TodoDto _selectData = new();
+
+    private string CompletedColor { get { return _selectData.IsCompleted ? "text-capitalize neutral-lighten-5 neutral-lighten-2--text" : "theme--dark primary"; } }
+
+    private string CompletedText { get { return _selectData.IsCompleted ? "Completed" : "Mark Complete"; } }
+
+    [CascadingParameter]
+    public Todo Todo { get; set; } = default!;
+
+    [Parameter]
+    public bool Value { get; set; }
+
+    [Parameter]
+    public TodoDto? SelectItem { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ValueChanged { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = default!;
+
+    private async Task HideNavigationDrawer()
+    {
+        if (ValueChanged.HasDelegate)
+        {
+            await ValueChanged.InvokeAsync(false);
+        }
+    }
+
+    private void Complete()
+    {
+        _selectData.IsCompleted = !_selectData.IsCompleted;
+        _selectData.IsChecked = _selectData.IsCompleted;
+    }
+
+    private void HandleCloseClick(string lable)
+    {
+        _selectData.Tag.Remove(lable);
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (SelectItem == null)
+        {
+            SelectItem = new TodoDto();
+            _isEdit = false;
+        }
+        else
+        {
+            _isEdit = true;
+        }
+
+        _selectData = new TodoDto
+            {
+                Id = SelectItem.Id,
+                IsChecked = SelectItem.IsChecked,
+                Assignee = SelectItem.Assignee,
+                Avatar = SelectItem.Avatar,
+                Description = SelectItem.Description,
+                IsCompleted = SelectItem.IsCompleted,
+                IsDeleted = SelectItem.IsDeleted,
+                IsImportant = SelectItem.IsImportant,
+                DueDate = SelectItem.DueDate,
+                Title = SelectItem.Title
+            };
+        _selectData.Tag.AddRange(SelectItem.Tag);
+
+        if (ValueChanged.HasDelegate && !Value && _mForm != null)
+        {
+            await _mForm.ResetValidationAsync();
+        }
+    }
+
+    private async Task AddAsync(EditContext context)
+    {
+        var success = context.Validate();
+        if (success)
+        {
+            _selectData.Id = Todo.GenerateId();
+            Todo.AddData(_selectData);
+            await HideNavigationDrawer();
+
+            NavigationManager.NavigateTo("app/todo");
+        }
+    }
+
+    private async Task UpdateAsync(EditContext context)
+    {
+        var success = context.Validate();
+        if (success)
+        {
+            var data = (TodoDto)context.Model;
+            Todo.UpdateData(data);
+            await HideNavigationDrawer();
+        }
+    }
+
+    private async Task ResetAsync()
+    {
+        if (_mForm != null)
+        {
+            await _mForm.ResetValidationAsync();
+        }
+
+        if (SelectItem != null)
+        {
+            _selectData = new TodoDto
+                {
+                    Id = SelectItem.Id,
+                    IsChecked = SelectItem.IsChecked,
+                    Assignee = SelectItem.Assignee,
+                    Avatar = SelectItem.Avatar,
+                    Description = SelectItem.Description,
+                    IsCompleted = SelectItem.IsCompleted,
+                    IsDeleted = SelectItem.IsDeleted,
+                    IsImportant = SelectItem.IsImportant,
+                    DueDate = SelectItem.DueDate,
+                    Tag = SelectItem.Tag,
+                    Title = SelectItem.Title
+                };
+        }
+    }
+
+    private async Task DeleteAsync()
+    {
+        _selectData.IsDeleted = true;
+        Todo.UpdateData(_selectData);
+        await HideNavigationDrawer();
+    }
+}

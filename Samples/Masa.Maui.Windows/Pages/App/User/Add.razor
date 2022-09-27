@@ -1,0 +1,65 @@
+﻿<MNavigationDrawer Temporary Fixed Right Value=Visible ValueChanged=VisibleChanged Width="465" Class="pa-6">
+    <div class="block-between mb-12">
+        <span class="text-h6">Add New User</span>
+        <MIcon Color="neutral-lighten-3" Size=24 OnClick="()=>Visible=false">mdi-close</MIcon>
+    </div>
+    <MForm Model=_userData EnableDataAnnotationsValidation>
+        <MTextField @bind-Value="_userData.FullName" Class="mb-6" Label="FullName" HideDetails="@("auto")" Outlined />
+        <MTextField @bind-Value="_userData.UserName" Class="mb-6" Label="UserName" HideDetails="@("auto")" Outlined />
+        <MTextField @bind-Value="_userData.Email" Class="mb-6" Label="Email" HideDetails="@("auto")" Outlined />
+        <MTextField @bind-Value="_userData.Contact" Class="mb-6" Label="Contact" HideDetails="@("auto")" Outlined />
+        <MTextField @bind-Value="_userData.Company" Class="mb-6" Label="Company" HideDetails="@("auto")" Outlined />
+        <MTextField @bind-Value="_userData.Country" Class="mb-6" Label="Country" HideDetails="@("auto")" Outlined />
+        <MSelect HideDetails="@("auto")" Class="mb-6" Outlined Label="Assignee" @bind-Value=_userData.Role
+                 Items=@UserService.GetRoleList() ItemText="r => r" ItemValue="r => r">
+        </MSelect>
+        <MSelect HideDetails="@("auto")" Class="mb-6" Outlined Label="Assignee" @bind-Value=_userData.Plan
+                 Items=@UserService.GetPlanList() ItemText="p => p" ItemValue="p => p">
+        </MSelect>
+
+        <div style="bottom:48px;right:24px;position:absolute">
+            <MButton MinWidth=80 Height=40 Outlined Class="text-btn rounded-pill" OnClick="async() => await UpdateVisible(false)"> Cancel </MButton>
+            <MButton MinWidth=80 Height=40 Color="primary" Class="ml-6 rounded-pill" OnClick="async ()=> await AddData(context)"> Add </MButton>
+        </div>
+    </MForm>
+</MNavigationDrawer>
+
+@code {
+    private UserDto _userData = new UserDto("","",DateOnly.FromDateTime(DateTime.Now),"","",UserService.GetPermissionsList());
+
+    [Parameter]
+    public bool Visible { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> VisibleChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<UserDto> Submit { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        _userData = new UserDto("","",DateOnly.FromDateTime(DateTime.Now),"","",UserService.GetPermissionsList());
+    }
+
+    private async Task UpdateVisible(bool visible)
+    {
+        if (VisibleChanged.HasDelegate)
+        {
+            await VisibleChanged.InvokeAsync(visible);
+        }
+        else
+        {
+            Visible = visible;
+        }
+    }
+
+    private async Task AddData(EditContext context)
+    {
+        if (context.Validate())
+        {
+            if (Submit.HasDelegate) await Submit.InvokeAsync(_userData);
+
+            await UpdateVisible(false);
+        }
+    }
+}

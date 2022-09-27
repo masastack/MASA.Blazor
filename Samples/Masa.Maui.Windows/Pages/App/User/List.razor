@@ -1,0 +1,202 @@
+﻿@page "/app/user/list"
+@inherits ProCompontentBase
+@inject NavigationManager Nav
+
+<MCard>
+    <MCardText Class="pa-6">
+        <h6>Filters</h6>
+        <MRow Class="mt-3">
+            <MCol Sm=12 Md=4>
+                <MSelect @bind-Value="_userPage.Role"
+                         Color="primary"
+                         HideDetails="@("auto")"
+                         Clearable
+                         Outlined
+                         Items="@UserService.GetRoleList()"
+                         ItemText="u => u"
+                         ItemValue="u => u"
+                         Label="Role">
+                </MSelect>
+            </MCol>
+            <MCol Sm=12 Md=4>
+                <MSelect @bind-Value="_userPage.Plan"
+                         Color="primary"
+                         HideDetails="@("auto")"
+                         Clearable
+                         Outlined
+                         Items="@UserService.GetPlanList()"
+                         ItemText="u => u"
+                         ItemValue="u => u"
+                         Label="Plan">
+                </MSelect>
+            </MCol>
+            <MCol Sm=12 Md=4>
+                <MSelect @bind-Value="_userPage.Status"
+                         Color="primary"
+                         HideDetails="@("auto")"
+                         Clearable
+                         Outlined
+                         Items="@UserService.GetStatusList()"
+                         ItemText="u => u"
+                         ItemValue="u => u"
+                         Label="Status">
+                </MSelect>
+            </MCol>
+        </MRow>
+    </MCardText>
+</MCard>
+
+<MCard Class="mt-6">
+    <MCardText Class="pa-6">
+        <MRow>
+            <MCol Md=6 Sm=12 Class="d-flex block-center">
+                <span class="text-btn neutral-lighten-1--text">Show:</span>
+                <MSelect @bind-Value="_userPage.PageSize"
+                         Color="primary"
+                         Style="max-width:120px;"
+                         Dense
+                         Class="mx-6"
+                         HideDetails="@("auto")"
+                         Outlined
+                         Items="@_pageSizes"
+                         ItemText="u => u.ToString()"
+                         ItemValue="u => u">
+                </MSelect>
+                <span class="text-btn">entries</span>
+            </MCol>
+            <MCol Md=6 Sm=12 Class="d-flex block-center">
+                <MTextField @bind-Value="_userPage.Search" Color="primary" Class="rounded-2" HideDetails="@("auto")" Flat Dense Solo BackgroundColor="fill-lighten-1" Placeholder="Search">
+                    <PrependInnerContent>
+                        <MIcon Size=16 Class="mr-2 neutral-lighten-1--text">mdi-magnify</MIcon>
+                    </PrependInnerContent>
+                </MTextField>
+                <MButton Color="primary" MinWidth=80 Height=32 Class="ml-6 rounded-pill" OnClick="()=>_visible=true">
+                    Add User
+                </MButton>
+            </MCol>
+        </MRow>
+    </MCardText>
+
+    <MDataTable Headers="_headers" Items="_userPage.GetPageDatas()" TItem="UserDto" ItemsPerPage="_userPage.PageSize" HideDefaultFooter Class="user ml-2 table-border-none">
+        <HeaderColContent Context="header">
+            <span class="text-subtitle">@header.Text</span>
+        </HeaderColContent>
+        <ItemColContent>
+            @switch (context.Header.Value)
+            {
+                case nameof(UserDto.UserName):
+                    <div class="hover-pointer d-flex my-2" @onclick="()=>NavigateToDetails(context.Item.Id)">
+                        @if (string.IsNullOrEmpty(context.Item.HeadImg))
+                        {
+                            string color = context.Item.Color;
+
+                            <MAvatar Size=48 Color="@($"{color}-lighten-5")" Class="mt-1">
+                                <span class="@($"{color}--text")">@context.Item.SampleName</span>
+                            </MAvatar>
+                        }
+                        else
+                        {
+                            <MAvatar Size=48 Class="mt-1">
+                                <MImage Contain Src="@context.Item.HeadImg"></MImage>
+                            </MAvatar>
+                        }
+                        <div class="ml-4">
+                            <div class="text-subtitle">@context.Item.FullName</div>
+                            <div class="text-caption mt-1">@@@context.Item.UserName</div>
+                        </div>
+                    </div>
+                    break;
+                case (nameof(UserDto.Email)):
+                    <span>@context.Item.Email</span>
+                    break;
+                case nameof(UserDto.Role):
+                    var arr = _roleIconMap[context.Item.Role!].Split(",");
+                    <MIcon Left Small Class="@($"{arr[1]}--text")">@arr[0]</MIcon>
+                    @context.Item.Role
+                    break;
+                case (nameof(UserDto.Plan)):
+                    @context.Item.Plan
+                    break;
+                case nameof(UserDto.Status):
+                    string statusColor = context.Item.Color;
+                    <MChip Color="@($"{statusColor}-lighten-5")" TextColor="@(statusColor)" Ripple="false">
+                        <span>@context.Item.Status</span>
+                    </MChip>
+                    break;
+                case "Action":
+                    <MMenu Right Bottom>
+                        <ActivatorContent Context="activatorContext">
+                            <MButton Icon @attributes="@activatorContext.Attrs">
+                                <MIcon XSmall>fas fa-ellipsis-v</MIcon>
+                            </MButton>
+                        </ActivatorContent>
+                        <ChildContent>
+                            <MList>
+                                <MListItem OnClick="()=>NavigateToDetails(context.Item.Id)">
+                                    <MIcon Small>fas fa-user-tie</MIcon>
+                                    <MListItemTitle Class="ml-2"> Details </MListItemTitle>
+                                </MListItem>
+                                <MListItem OnClick="()=>NavigateToEdit(context.Item.Id)">
+                                    <MIcon Small>far fa-edit</MIcon>
+                                    <MListItemTitle Class="ml-2"> Edit </MListItemTitle>
+                                </MListItem>
+                                <MListItem OnClick="()=>_userPage.UserDatas.RemoveAt(_userPage.UserDatas.FindIndex(u=>u.Id==context.Item.Id))">
+                                    <MIcon Small>far fa-trash-alt</MIcon>
+                                    <MListItemTitle Class="ml-2"> Delete </MListItemTitle>
+                                </MListItem>
+                            </MList>
+                        </ChildContent>
+                    </MMenu>
+                    break;
+                default:
+                    @context.Value
+                    break;
+            }
+        </ItemColContent>
+    </MDataTable>
+
+    <MCardText>
+        <div class="d-flex">
+            <div class="mr-auto pt-3 text-btn neutral-lighten-1--text">Showing @((_userPage.PageIndex - 1) * _userPage.PageSize + 1) to @(_userPage.PageIndex * _userPage.PageSize) of @_userPage.CurrentCount entries</div>
+            @if (_userPage.PageCount > 0)
+            {
+                <MPagination @bind-Value="_userPage.PageIndex" Color="primary" Circle Length=@_userPage.PageCount></MPagination>
+            }
+        </div>
+    </MCardText>
+</MCard>
+
+<Add @bind-Visible=_visible Submit="AddUserData"></Add>
+
+
+
+@code {
+    public bool _visible;
+    public UserPage _userPage = new(UserService.GetList());
+    private List<int> _pageSizes = new() { 10, 25, 50, 100 };
+    private readonly List<DataTableHeader<UserDto>> _headers = new()
+        {
+            new() { Text = "USER", Value = nameof(UserDto.UserName), CellClass = "" },
+            new() { Text = "EMAIL", Value = nameof(UserDto.Email) },
+            new() { Text = "ROLE", Value = nameof(UserDto.Role) },
+            new() { Text = "PLAN", Value = nameof(UserDto.Plan) },
+            new() { Text = "STATUS", Value = nameof(UserDto.Status) },
+            new() { Text = "ACTIONS", Value = "Action", Sortable = false }
+        };
+    private readonly Dictionary<string, string> _roleIconMap = UserService.GetRoleIconMap();
+
+    private void NavigateToDetails(string id)
+    {
+        Nav.NavigateTo($"/app/user/view/{id}");
+    }
+
+    private void NavigateToEdit(string id)
+    {
+        Nav.NavigateTo($"/app/user/edit/{id}");
+    }
+
+    private void AddUserData(UserDto userData)
+    {
+        _userPage.UserDatas.Insert(0, userData);
+    }
+            }

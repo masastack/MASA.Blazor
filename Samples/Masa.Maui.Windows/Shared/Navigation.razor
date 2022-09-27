@@ -1,0 +1,91 @@
+﻿@inherits ProCompontentBase
+@inject NavHelper NavHelper
+@inject GlobalConfig GlobalConfig;
+@implements IDisposable
+
+<MNavigationDrawer Class="navigation" Width=300 MiniVariantWidth=80 Fixed ExpandOnHover="GlobalConfig.ExpandOnHover" @bind-MiniVariant="GlobalConfig.NavigationMini" App>
+
+    <div style="height:132px" class="@($"block-center {(GlobalConfig.NavigationMini?"px-4":"px-12")}")" @onclick="()=>NavHelper.NavigateTo(GlobalVariables.DefaultRoute)">
+        @if (GlobalConfig.NavigationMini)
+        {
+            <img height="48" width="48" class="hover-pointer" src="/img/mainLayout/logo.svg" />
+        }
+        else
+        {
+            <img class="hover-pointer" src="/img/mainLayout/logo-en.svg" />
+        }
+    </div>
+
+    <MList Nav Linkage Dense Class="@($"pa-0 {(GlobalConfig.NavigationMini?"mini-navigation":"")}")">
+
+        @foreach (var nav in NavHelper.Navs)
+        {
+            if (nav.Children is null)
+            {
+                <MBorder Value=false Offset Width=4 Class="rounded-r-1" Border="Borders.Right">
+                    <MListItem Ripple=false Class="mb-4" ActiveClass="fill-lighten-1" Href="@nav.Href">
+                        <ItemContent>
+                            @if (context.Active)
+                            {
+                                NavHelper.RefreshRender(nav);
+                            }
+                            <MListItemIcon>
+                                <MIcon Color="@(context.Active?"primary":"neutral-lighten-2")" Size=20>@nav.Icon</MIcon>
+                            </MListItemIcon>
+                            <MListItemContent>
+                                <div style="margin-left:6.5px;" class="text-truncate white-space:nowrap @(context.Active?"text-subtitle":"text-body neutral-lighten-2--text")">@T(nav.Title)</div>
+                            </MListItemContent>
+                        </ItemContent>
+                    </MListItem>
+                </MBorder>
+            }
+            else
+            {
+                <MListGroup Group="@nav.Children.Select(n => n.Href).ToList()" Class="mb-4" PrependIcon="@nav.Icon" NoAction ActiveClass="primaryText" AppendIcon="M8.33398 10.3335L12.5007 14.5002L16.6673 10.3335H8.33398Z">
+                    <ActivatorContent>
+                        <MListItemContent>
+                            <div style="margin-left:6.5px;" class="text-truncate white-space:nowrap">@T(nav.Title)</div>
+                        </MListItemContent>
+                    </ActivatorContent>
+                    <ChildContent>
+                        @foreach (var navChild in nav.Children)
+                        {
+                            <MBorder Value=false Offset Width=4 Class="rounded-r-1" Border="Borders.Right">
+                                <MListItem Ripple=false ActiveClass="fill-lighten-1" Link Href="@navChild.Href">
+                                    <ItemContent>
+                                        @if (context.Active)
+                                        {
+                                            NavHelper.RefreshRender(navChild);
+                                        }
+                                        <MListItemContent>
+                                            <div class="text-truncate white-space:nowrap @(context.Active?"text-subtitle2":"text-btn neutral-lighten-2--text")">@T(navChild.Title)</div>
+                                        </MListItemContent>
+                                    </ItemContent>
+                                </MListItem>
+                            </MBorder>
+                        }
+                    </ChildContent>
+                </MListGroup>
+            }
+        }
+    </MList>
+
+</MNavigationDrawer>
+
+<MButton Small Fab Color="primary" Style="@($"bottom:58px;z-index:7;position: fixed;{(GlobalConfig.NavigationMini ? "left:60px;" : "left:280px;")}")" OnClick="()=>{GlobalConfig.ExpandOnHover=!GlobalConfig.ExpandOnHover;}">
+    <MIcon Class="white--text">
+        @(GlobalConfig.NavigationMini ? "mdi-chevron-right" : "mdi-chevron-left")
+    </MIcon>
+</MButton>
+
+@code {
+    protected override void OnInitialized()
+    {
+        GlobalConfig.OnLanguageChanged += base.StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        GlobalConfig.OnLanguageChanged -= base.StateHasChanged;
+    }
+}

@@ -1,0 +1,262 @@
+﻿@page "/app/user/view"
+@page "/app/user/view/{Id}"
+@inherits ProCompontentBase
+
+<MRow>
+    <MCol Md="8">
+        <MCard Height="298" class="pt-2 pb-2">
+            <MCardText>
+                <MRow>
+                    <MCol Cols="@("auto")">
+                        <div style="width:300px;" class="text-center">
+                            @if (string.IsNullOrEmpty(UserData.HeadImg))
+                            {
+                                string color = UserData.Color;
+                                <MAvatar Size="120" Color="@($"{color}-lighten-5")">
+                                    <span class="@($"{color}--text text-h3")">@UserData.SampleName</span>
+                                </MAvatar>
+                            }
+                            else
+                            {
+                                <MAvatar Size="120">
+                                    <MImage Contain Src="@UserData.HeadImg" />
+                                </MAvatar>
+                            }
+                            <h5 class="mt-1">@UserData.FullName</h5>
+                            <span class="mt-1 text-caption">@UserData.Email</span>
+                            <MRow NoGutters class="mt-4">
+                                <MCol Md="6" class="text-center">
+                                    <h5>@UserData.Sales</h5>
+                                    <span class="text-body2">Monthly Sales</span>
+                                </MCol>
+                                <MCol Md="6" class="text-center">
+                                    <h5>@UserData.Profit</h5>
+                                    <span class="text-body2">Annual Profit</span>
+                                </MCol>
+                            </MRow>
+                        </div>
+                    </MCol>
+                    <MDivider Vertical />
+                    <MCol class="ml-3 d-flex flex-column">
+                        <div class="mb-3 d-flex justify-space-between">
+                            <span class="text-body2 neutral-lighten-1--text">
+                                <MIcon Small class="mr-2" Color="neutral-lighten-1">mdi-account-outline</MIcon>Username
+                            </span>
+                            <span class="text-caption">@UserData.UserName</span>
+                        </div>
+                        <div class="mb-3 d-flex justify-space-between">
+                            <span class="text-body2 neutral-lighten-1--text">
+                                <MIcon Small class="mr-2" Color="neutral-lighten-1">mdi-check</MIcon>Status
+                            </span>
+                            <span class="text-caption">@UserData.Status</span>
+                        </div>
+                        <div class="mb-3 d-flex justify-space-between">
+                            <span class="text-body2 neutral-lighten-1--text">
+                                <MIcon Small class="mr-2" Color="neutral-lighten-1">mdi-star-outline</MIcon>Role
+                            </span>
+                            <span class="text-caption">@UserData.Role</span>
+                        </div>
+                        <div class="mb-3 d-flex justify-space-between">
+                            <span class="text-body2 neutral-lighten-1--text">
+                                <MIcon Small class="mr-2" Color="neutral-lighten-1">mdi-flag-outline</MIcon>Country
+                            </span>
+                            <span class="text-caption">@UserData.Country</span>
+                        </div>
+                        <div class="mb-3 d-flex justify-space-between">
+                            <span class="text-body2 neutral-lighten-1--text">
+                                <MIcon Small class="mr-2" Color="neutral-lighten-1">mdi-phone-outline</MIcon>Contact
+                            </span>
+                            <span class="text-caption">@UserData.Contact</span>
+                        </div>
+                        <div class="flex-grow-1 d-flex align-end">
+                            <MButton MinWidth="100" class="primary rounded-pill">Edit</MButton>
+                            <MButton Outlined MinWidth="100" Color="red" class="ml-6 rounded-pill">Delete</MButton>
+                        </div>
+                    </MCol>
+                </MRow>
+            </MCardText>
+        </MCard>
+    </MCol>
+    <MCol Md="4">
+        <MCard class="pa-2 fill-height d-flex flex-column justify-space-between">
+            <MCardText>
+                <div class="d-flex justify-space-between">
+                    <h6>Current Plan</h6>
+                    <MChip Small class="sample-green--text lighten-green"> @UserData.Plan </MChip>
+                </div>
+                <span class="mt-1 neutral-lighten-4--text">July 22, 2021</span>
+                <div class="mt-6 d-flex flex-column text-body2 neutral-lighten-1--text">
+                    <span>5 Users</span>
+                    <span class="mt-3">10 GB storage</span>
+                    <span class="mt-3">Basic Support</span>
+                </div>
+            </MCardText>
+            <MCardActions class="d-flex justify-center">
+                <MButton Width="340" class="primary text-capitalize rounded-pill">Upgrade Plan</MButton>
+            </MCardActions>
+        </MCard>
+    </MCol>
+</MRow>
+
+<MRow class="mt-6">
+    <MCol Md="8">
+        <MCard>
+            <MCardTitle>
+                <MIcon Size=20 Color="sample-green" Class="mr-1">mdi-lock-open-outline</MIcon>
+                <span class="text-h6">Permission</span>
+            </MCardTitle>
+            <MCardSubtitle class="ml-6 text-btn neutral-lighten-4--text">
+                Permission according to roles
+            </MCardSubtitle>
+            <MCardText>
+                <MDataTable HideDefaultFooter Headers="_headers" TItem="PermissionDto" Items="_permissions"
+                    ItemKey="r=>r.Module" Class="table-header-fill table-border-solid">
+                    <HeaderColContent Context="header">
+                        <span class="text-body neutral-lighten-1--text">@header.Text</span>
+                    </HeaderColContent>
+                    <ItemColContent>
+                        @switch (context.Header.Value)
+                        {
+                            case nameof(PermissionDto.Module):
+                                <span class="text-body neutral-lighten-2--text">@context.Value</span>
+                                break;
+                            case nameof(PermissionDto.Read):
+                                <MCheckbox Class="mt-0" Color="primary" @bind-Value="context.Item.Read"></MCheckbox>
+                                break;
+                            case nameof(PermissionDto.Write):
+                                <MCheckbox Class="mt-0" Color="primary" @bind-Value="context.Item.Write"></MCheckbox>
+                                break;
+                            case nameof(PermissionDto.Create):
+                                <MCheckbox Class="mt-0" Color="primary" @bind-Value="context.Item.Create"></MCheckbox>
+                                break;
+                            case nameof(PermissionDto.Delete):
+                                <MCheckbox Class="mt-0" Color="primary" @bind-Value="context.Item.Delete"></MCheckbox>
+                                break;
+                            default:
+                                @context.Value
+                                break;
+                        }
+                    </ItemColContent>
+                </MDataTable>
+            </MCardText>
+        </MCard>
+    </MCol>
+    <MCol Md="4">
+        <MCard class="pa-2">
+            <MCardTitle class="text-h8">
+                User Timeline
+            </MCardTitle>
+            <MCardText>
+                <MTimeline Dense class="mr-n2 ml-n10 pro-timeline-before divider-align-start m-timeline-flat">
+                    <MTimelineItem Class="mt-0" Small Color="transparent">
+                        <IconContent>
+                            <MIcon class="sample-green--text">mdi-adjust</MIcon>
+                        </IconContent>
+                        <ChildContent>
+                            <div class="d-flex justify-space-between align-center">
+                                <span class="text-body">
+                                    12 Invoices have been paid
+                                </span>
+                                <span class="neutral-lighten-4--text">
+                                    12 min ago
+                                </span>
+                            </div>
+                            <span class="text-body2 mt-1">
+                                Invoices have been paid to the company.
+                            </span>
+                            <p class="mt-4 mb-0 d-flex align-center">
+                                <img class="mr-1" width="20"
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEUAAABdCAYAAADzCKvfAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDowMTgwMTE3NDA3MjA2ODExODA4M0IxNEM4MzdEODk1OCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoyQTY5RDZFNjk2NDUxMUU5QjgzM0NGNjBGOUVEM0JBMSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoyQTY5RDZFNTk2NDUxMUU5QjgzM0NGNjBGOUVEM0JBMSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDE4MDExNzQwNzIwNjgxMTgwODNCMTRDODM3RDg5NTgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDE4MDExNzQwNzIwNjgxMTgwODNCMTRDODM3RDg5NTgiLz4gPC9yZGY6RGVzY3Jp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" />
+                                <span class="ml-2 neutral-lighten-2--text">invoice.pdf</span>
+                            </p>
+                        </ChildContent>
+                    </MTimelineItem>
+                    <MTimelineItem Class="mb-4" Small Color="transparent">
+                        <IconContent>
+                            <MIcon class="error--text">mdi-adjust</MIcon>
+                        </IconContent>
+                        <ChildContent>
+                            <div class="d-flex justify-space-between align-center">
+                                <span class="text-body">
+                                    Client Meeting
+                                </span>
+                                <span class="neutral-lighten-4--text">
+                                    45 min ago
+                                </span>
+                            </div>
+                            <span class="text-body2 mt-1">
+                                Project meeting with john @@10:15am.
+                            </span>
+                            <MListItem class="grow mt-4 pa-0">
+                                <MListItemAvatar class="pa-0">
+                                    <MImage Src="/img/avatar/10.svg">
+                                    </MImage>
+                                </MListItemAvatar>
+                                <MListItemContent>
+                                    <MListItemTitle class="neutral-lighten-1--text">John Doe (Client)</MListItemTitle>
+                                    <MListItemSubtitle class="neutral-lighten-2--text">CEO of Infibeam
+                                    </MListItemSubtitle>
+                                </MListItemContent>
+                            </MListItem>
+                        </ChildContent>
+                    </MTimelineItem>
+
+                    <MTimelineItem Class="mb-4" Color="transparent" Small>
+                        <IconContent>
+                            <MIcon class="dark-yellow--text">mdi-adjust</MIcon>
+                        </IconContent>
+                        <ChildContent>
+                            <div class="d-flex justify-space-between align-center">
+                                <span class="text-body">
+                                    Create a new project for client
+                                </span>
+                                <span class="neutral-lighten-4--text">
+                                    2 days ago
+                                </span>
+                            </div>
+                            <span class="text-body2 mt-1">
+                                Add files to new design folder
+                            </span>
+                        </ChildContent>
+                    </MTimelineItem>
+                </MTimeline>
+            </MCardText>
+        </MCard>
+    </MCol>
+</MRow>
+
+<Masa.Maui.Pages.App.Invoice.Components.InvoiceList />
+
+@code {
+    private List<DataTableHeader<PermissionDto>> _headers = new List<DataTableHeader<PermissionDto>>
+{
+new (){ Text= "MODULE", Sortable= false, Value= nameof(PermissionDto.Module)},
+new (){ Text= "READ", Sortable= false, Value= nameof(PermissionDto.Read),Align="center"},
+new (){ Text= "WRITE", Sortable= false, Value= nameof(PermissionDto.Write),Align="center"},
+new (){ Text= "CREATE", Sortable= false, Value= nameof(PermissionDto.Create),Align="center"},
+new (){ Text= "DELETE", Sortable= false, Value= nameof(PermissionDto.Delete),Align="center"}
+};
+    private List<PermissionDto> _permissions = UserService.GetPermissionsList();
+    private UserDto? _userData;
+
+    [Parameter]
+    public string? Id { get; set; }
+
+    [AllowNull]
+    public UserDto UserData
+    {
+        get
+        {
+            return _userData ?? UserService.GetList().First();
+        }
+        set
+        {
+            _userData = value;
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        UserData = UserService.GetList().FirstOrDefault(u => u.Id == Id);
+    }
+}

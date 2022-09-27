@@ -1,0 +1,38 @@
+﻿@page "/pages/authentication/Login-v2"
+@layout EmptyLayout
+<MRow Class="max-height ma-0">
+    <MCol Md=4 Sm=12 Class="neutral-lighten-5">
+        <image class="ml-12 mt-12" style="height:40px;"
+            src="https://cdn.masastack.com/stack/images/logo/MASAStack/logo-h-en.png?x-oss-process=image/resize,w_200">
+        </image>
+        <div class="d-flex pb-12" style="height: calc(100% - 88px);">
+            <div style="width:450px;" class="ma-auto">
+                <h3 class="neutral-lighten-1--text">让变化更简单</h3>
+                <div class="mt-12 neutral-lighten-1--text">
+                    让变化更简单，让视觉更美好，让体验更丰富，欢迎来到Masa产品系列。
+                </div>
+                <image class="mt-12" src="/img/login/left.svg"></image>
+            </div>
+        </div>
+    </MCol>
+    <MCol Md=8 Sm=12 Class="fill-lighten-1 block-center">
+        <Masa.Maui.Pages.Authentication.Components.Login HideLogo Elevation="0" Width="500"
+            CreateAccountRoute="pages/authentication/register-v2"
+            ForgotPasswordRoute="pages/authentication/forgot-password-v2">
+        </Masa.Maui.Pages.Authentication.Components.Login>
+    </MCol>
+</MRow>
+
+<a href="https://beian.miit.gov.cn/" target="_blank" class="neutral-lighten-3--text"
+    style="position:absolute;bottom:48px;margin-left:63%;text-decoration:none;font-size:14px;">浙ICP备2021013592号-1</a>
+
+
+@code {
+    [Inject]
+    public NavigationManager Navigation { get; set; } = default!;
+
+    public void Login(MouseEventArgs args)
+    {
+        Navigation.NavigateTo(Navigation.BaseUri);
+    }
+}

@@ -1,0 +1,23 @@
+﻿@page "/pages/authentication/Login-v1"
+@layout EmptyLayout
+
+<div class="d-flex align-center" style="height:calc(100% - 96px)">
+    <Masa.Maui.Pages.Authentication.Components.Login></Masa.Maui.Pages.Authentication.Components.Login>
+</div>
+
+<MFooter Padless Height=96 Style="background:transparent;">
+    <MRow Justify="JustifyTypes.Center">
+        <a href="https://beian.miit.gov.cn/" target="_blank" class="neutral-lighten-3--text"
+            style="text-decoration:none;font-size:14px;">浙ICP备2021013592号-1</a>
+    </MRow>
+</MFooter>
+
+@code {
+    [Inject]
+    public NavigationManager Navigation { get; set; } = default!;
+
+    public void Login(MouseEventArgs args)
+    {
+        //Navigation.NavigateTo(Navigation.BaseUri);
+    }
+}

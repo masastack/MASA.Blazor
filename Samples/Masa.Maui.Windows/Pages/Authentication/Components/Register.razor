@@ -1,0 +1,84 @@
+﻿<MCard Class="mx-auto" MaxWidth="@Width" Elevation="@Elevation">
+    @if (!HideLogo)
+    {
+        <MCardTitle Class="justify-center pt-9">
+            <MIcon Large Left Color="purple">fas fa-seedling</MIcon>
+            Masa.Test
+        </MCardTitle>
+    }
+
+    <MCardTitle Class="pt-3 text-h5"> Adventure starts here 🚀</MCardTitle>
+    <MCardSubtitle Class="pt-2 mb-2 text-subtitle-1">
+        Please sign-in to your account and start the adventure
+    </MCardSubtitle>
+
+    <MCardText>
+        <MTextField TValue="string" Class="mt-2" Label="Username" Placeholder="johnde" Outlined Dense></MTextField>
+
+        <MTextField TValue="string" Class="mt-2" Label="Email" Placeholder="john@example.com" Outlined Dense>
+        </MTextField>
+
+        <MTextField TValue="string" Class="mt-2" Label="Password" Type="@(_show ? "text" : "password")"
+                    Placeholder="john@example.com" AppendIcon="@(_show ? "mdi-eye" : "mdi-eye-off")"
+                    OnAppendClick="()=>_show = !_show" Outlined Dense></MTextField>
+
+        <MCheckbox Class="mt-0 pt-0" Color="#7367f0" Label="I agree to privacy policy & terms"></MCheckbox>
+        <MButton Color="#7367f0" Dark Block OnClick="SlinUpClick">Sign up</MButton>
+        <MRow NoGutters Justify="JustifyTypes.Center" Class="mt-5">
+            Already have an account? &nbsp;
+            <a style="color:#7367f0;text-decoration:none;"
+               onclick="@(()=>Navigation.NavigateTo(Navigation.BaseUri+SignInRoute))">Sign in instead</a>
+        </MRow>
+
+        <MRow NoGutters Class="mt-4">
+            <MCol Align="AlignTypes.Center" Class="mr-3">
+                <MDivider></MDivider>
+            </MCol>
+            or
+            <MCol Align="AlignTypes.Center" Class="ml-3">
+                <MDivider></MDivider>
+            </MCol>
+        </MRow>
+    </MCardText>
+    <MCardActions>
+        <MRow Class="pb-5" Justify="JustifyTypes.Center" NoGutters>
+            <MButton Class="mx-3" Fab Small Dark Color="primary">
+                <MIcon>
+                    mdi-qqchat
+                </MIcon>
+            </MButton>
+            <MButton Class="mx-3" Fab Small Dark Color="green">
+                <MIcon>
+                    mdi-wechat
+                </MIcon>
+            </MButton>
+            <MButton Class="mx-3" Fab Small Dark>
+                <MIcon>
+                    mdi-github
+                </MIcon>
+            </MButton>
+        </MRow>
+    </MCardActions>
+</MCard>
+
+@code {
+    private bool _show;
+
+    [Inject]
+    public NavigationManager Navigation { get; set; } = default!;
+
+    [Parameter]
+    public bool HideLogo { get; set; }
+
+    [Parameter]
+    public double Width { get; set; } = 410;
+
+    [Parameter]
+    public StringNumber? Elevation { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> SlinUpClick { get; set; }
+
+    [Parameter]
+    public string SignInRoute { get; set; } = $"pages/authentication/login-v1";
+            }
