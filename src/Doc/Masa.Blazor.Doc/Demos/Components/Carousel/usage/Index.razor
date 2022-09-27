@@ -1,11 +1,11 @@
-﻿<MCarousel @bind-Value="value">
+﻿<MCarousel @bind-Value="value" Height="480">
     @for (var i = 0; i < colors.Length; i++)
     {
         var index = i;
 
         <MCarouselItem>
             <MSheet Color="@colors[index]" Height="@("100%")" Tile>
-                <MRow Class="fill-height" Align="AlignTypes.Center" Justify="JustifyTypes.Center">
+                <MRow NoGutters Class="fill-height" Align="AlignTypes.Center" Justify="JustifyTypes.Center">
                     <div class="text-h2">Slide @(index + 1)</div>
                 </MRow>
             </MSheet>
