@@ -2491,6 +2491,17 @@
       },
       {
         "Order": 0,
+        "Name": "module",
+        "Title": "Module",
+        "Description": "<p>Modules allow <strong>Quill</strong>’s behavior and functionality to be customized. For example, use a third-party module <a href=\"https://github.com/Fandom-OSS/quill-blot-formatter\">quill-blot-formatter</a> can achieve the function of resizing images.</p>\n<!--alert:warning-->\n<p>This document already references the <strong>quill-blot-formatter.min.js</strong> package and registers the <strong>blotFormatter</strong> module with <strong>Quill</strong> after <strong>Blazor</strong> startup, so it can be used directly. Please refer to the <a href=\"https://github.com/BlazorComponent/MASA.Blazor/blob/main/src/Doc/Masa.Blazor.Doc.Server/Pages/_Host.cshtml\">source code</a> for details.</p>\n<!--alert:warning-->\n",
+        "Code": "<MEditor @bind-Value=\"_editorContent\"\r\n         AdditionalModules=\"blotFormatter\">\r\n</MEditor>\r\n\r\n@code {\r\n    string _editorContent = @\"<p><img src=\"\"https://cdn.masastack.com/stack/images/website/masa-blazor/parallax/material.jpg\"\"></p>\";\r\n}\r\n",
+        "Type": "Demos.Components.Editor.props.Module",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
         "Name": "placeholder",
         "Title": "Custom prompt message",
         "Description": "<p>The prompt message when a null value is set by setting the <strong>Placeholder</strong> attribute.</p>\n",
@@ -2516,7 +2527,7 @@
         "Name": "theme",
         "Title": "Theme",
         "Description": "<p>Use the name of the topic. This built-in option is &quot;bubble&quot; or &quot;Snow&quot;. Note that the theme's style sheet needs to be included manually.</p>\n",
-        "Code": "<MEditor Theme=\"bubble\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header mt-2\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>",
+        "Code": "<MEditor Theme=\"bubble\" @bind-Value=\"editorContent\">\r\n    <ToolbarContent>\r\n        <select class=\"ql-header mt-2\">\r\n            <option selected=\"\"></option>\r\n            <option value=\"1\"></option>\r\n            <option value=\"2\"></option>\r\n            <option value=\"3\"></option>\r\n            <option value=\"4\"></option>\r\n            <option value=\"5\"></option>\r\n        </select>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-bold\"></button>\r\n            <button class=\"ql-italic\"></button>\r\n            <button class=\"ql-underline\"></button>\r\n            <button class=\"ql-strike\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <select class=\"ql-color\"></select>\r\n            <select class=\"ql-background\"></select>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-list\" value=\"ordered\"></button>\r\n            <button class=\"ql-list\" value=\"bullet\"></button>\r\n        </span>\r\n        <span class=\"ql-formats\">\r\n            <button class=\"ql-link\"></button>\r\n        </span>\r\n    </ToolbarContent>\r\n</MEditor>\r\n\r\n@code {\r\n\r\n    string editorContent = \"<p><b>This is a bubble theme.</b></p>\";\r\n\r\n}",
         "Type": "Demos.Components.Editor.props.Theme",
         "Style": "",
         "Debug": false,

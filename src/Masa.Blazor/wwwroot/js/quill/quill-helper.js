@@ -24,19 +24,22 @@ const defaultToolbarContainer = [
     ['link', 'image', 'video']
 ]
 
-export function init(quillElement, obj, toolBarContainer, readOnly,
+export function init(quillElement, obj, toolBarContainer, additionalModules, readOnly,
     placeholder, theme, isMarkdown, uploadConfig) {
     if (!Quill || !quillElement) return;
+
     let toolbar = {
         container: toolBarContainer.childNodes.length == 0 ? defaultToolbarContainer : toolBarContainer,
         handlers: {}
     };
+
     toolbar.handlers.image = function image() {
         let self = this;
         var contenteditable = self.quill.root.getAttribute('contenteditable');
         if (contenteditable == 'false') return;
         handlerImage(obj, self, uploadConfig);
     };
+
     let options = {
         modules: {
             toolbar: toolbar,
@@ -47,6 +50,13 @@ export function init(quillElement, obj, toolBarContainer, readOnly,
         readOnly: readOnly,
         theme: theme
     };
+    
+    if(additionalModules) {
+        additionalModules.split(',').filter(item => !!item).forEach(item => {
+            options.modules[item] = {}
+        })
+    }
+
     const editor = new Quill(quillElement, options);
     if (isMarkdown) {
         const markdownOptions = {};
