@@ -110,6 +110,11 @@
         "Url": "getting-started/upgrade-guid",
         "Contents": [
           {
+            "Id": "section-828926875",
+            "Title": "Upgrading from v0.5.x to v0.6.x",
+            "Level": 0
+          },
+          {
             "Id": "section-1891871393",
             "Title": "Upgrading from v0.4.x to v0.5.x",
             "Level": 0

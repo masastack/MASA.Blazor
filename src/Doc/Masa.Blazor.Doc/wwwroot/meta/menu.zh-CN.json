@@ -110,6 +110,11 @@
         "Url": "getting-started/upgrade-guid",
         "Contents": [
           {
+            "Id": "section-879869896",
+            "Title": "从 v0.5.x 升级到 v0.6.x",
+            "Level": 0
+          },
+          {
             "Id": "section-541395564",
             "Title": "从 v0.4.x 升级到 v0.5.x",
             "Level": 0
