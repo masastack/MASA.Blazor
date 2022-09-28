@@ -1,0 +1,44 @@
+﻿@page "/app/ecommerce/order"
+@inherits ProCompontentBase
+
+<MTabs @bind-Value="_curTab" SliderColor="transparent" class="pro-nav remover-ripple">
+    <MTab class="text-capitalize pa-0">
+        <ChildContent>
+            <span class="mtab-tab-line mtab-tab-linear-primary"></span>
+            <span class="rounded-circle mtab-tab-indicator mtab-tab-indicator-primary"></span>
+            <span class="mtab-tab-title">Card</span>
+        </ChildContent>
+    </MTab>
+    <MTab class="text-capitalize pa-0" Disabled="_addressDisabled">
+        <ChildContent>
+            <span class="mtab-tab-line @(_curTab.ToInt32()>0?"mtab-tab-linear-primary":"mtab-tab-linear-neutral")"></span>
+            <span class="rounded-circle mtab-tab-indicator @(_curTab.ToInt32()>0?"mtab-tab-indicator-primary":"mtab-tab-indicator-neutral")"></span>
+            <span class="mtab-tab-title">Address</span>
+        </ChildContent>
+    </MTab>
+    <MTab class="text-capitalize pa-0" Disabled="_paymentDisabled">
+        <ChildContent>
+            <span class="mtab-tab-line @(_curTab.ToInt32()>1?"mtab-tab-linear-primary":"mtab-tab-linear-neutral")"></span>
+            <span class="rounded-circle mtab-tab-indicator @(_curTab.ToInt32()>1?"mtab-tab-indicator-primary":"mtab-tab-indicator-neutral")"></span>
+            <span class="mtab-tab-title">Payment</span>
+        </ChildContent>
+    </MTab>
+</MTabs>
+
+<MTabsItems Value="_curTab" class="pt-6 ml-n6">
+    <MTabItem>
+        <Cart @bind-Step="_curTab" @bind-Disabled="_addressDisabled" />
+    </MTabItem>
+    <MTabItem class="pl-6">
+        <Address @bind-Step="_curTab" @bind-Disabled="_paymentDisabled" />
+    </MTabItem>
+    <MTabItem class="pl-6">
+        <Payment />
+    </MTabItem>
+</MTabsItems>
+
+@code {
+    private StringNumber _curTab = 0;
+    private bool _addressDisabled = true;
+    private bool _paymentDisabled = true;
+}

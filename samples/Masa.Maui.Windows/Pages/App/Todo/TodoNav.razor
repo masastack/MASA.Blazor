@@ -1,0 +1,111 @@
+﻿<MNavigationDrawer Permanent Class="rounded-4" Width="300" Style="overflow: visible;">
+    <MButton Class="ma-6 rounded-pill" Style="width:-webkit-fill-available;" Dark Color="primary" OnClick="()=>_visible = true">Add Task</MButton>
+    <MList Linkage Dense>
+        <MListItemGroup Class="remover-ripple remover-ripple-with-icon">
+            <MListItem Exact Style="height:38px;" Class="px-6" Link Href="/app/todo">
+                <ItemContent>
+                    <MListItemIcon Class="mr-2">
+                        <MIcon Color="@(!context.Active ? "neutral-lighten-4" : "primary")" Size=18>mdi-email-outline</MIcon>
+                    </MListItemIcon>
+                    <MListItemContent>
+                        <MListItemTitle Class="@(!context.Active ? "text-body neutral-lighten-4--text" : "text-subtitle primary--text")">My Task</MListItemTitle>
+                    </MListItemContent>
+                </ItemContent>
+            </MListItem>
+            <MListItem Exact Color="primary" Style="height:38px;" Class="px-6" Link Href="/app/todo/important">
+                <ItemContent>
+                    <MListItemIcon Class="mr-2">
+                        <MIcon Color="@(!context.Active ? "neutral-lighten-4" : "primary")" Size=18>mdi-star-outline</MIcon>
+                    </MListItemIcon>
+                    <MListItemContent>
+                        <MListItemTitle Class="@(!context.Active ? "text-body neutral-lighten-4--text" : "text-subtitle primary--text")">Important</MListItemTitle>
+                    </MListItemContent>
+                </ItemContent>
+            </MListItem>
+            <MListItem Exact Color="primary" Style="height:38px;" Class="px-6" Link Href="/app/todo/completed">
+                <ItemContent>
+                    <MListItemIcon Class="mr-2">
+                        <MIcon Color="@(!context.Active ? "neutral-lighten-4" : "primary")" Size=18>mdi-check</MIcon>
+                    </MListItemIcon>
+                    <MListItemContent>
+                        <MListItemTitle Class="@(!context.Active ? "text-body neutral-lighten-4--text" : "text-subtitle primary--text")">Completed</MListItemTitle>
+                    </MListItemContent>
+                </ItemContent>
+            </MListItem>
+            <MListItem Exact Color="primary" Style="height:38px;" Class="px-6" Link Href="/app/todo/deleted">
+                <ItemContent>
+                    <MListItemIcon Class="mr-2">
+                        <MIcon Color="@(!context.Active ? "neutral-lighten-4" : "primary")" Size=18>mdi-delete-outline</MIcon>
+                    </MListItemIcon>
+                    <MListItemContent>
+                        <MListItemTitle Class="@(!context.Active ? "text-body neutral-lighten-4--text" : "text-subtitle primary--text")">Deleted</MListItemTitle>
+                    </MListItemContent>
+                </ItemContent>
+            </MListItem>
+        </MListItemGroup>
+
+        <MRow NoGutters Justify="JustifyTypes.SpaceBetween">
+            <MSubheader Class="px-6 my-6 text-subtitle neutral-lighten-4--text">Tags</MSubheader>
+            <MIcon Class="px-6 my-6" Small Color="#A3AED0">fas fa-plus</MIcon>
+        </MRow>
+
+        <MListItemGroup Class="remover-ripple">
+            <MListItem Exact Color="primary" Style="height:38px;" Class="px-6" Link Href="/app/todo/team">
+                <ItemContent>
+                    <MListItemIcon Class="mr-2">
+                        <MIcon Small Color="purple">fas fa-circle</MIcon>
+                    </MListItemIcon>
+                    <MListItemContent>
+                        <MListItemTitle Class="@(!context.Active ? "text-body neutral-lighten-4--text" : "text-subtitle primary--text")">Team</MListItemTitle>
+                    </MListItemContent>
+                </ItemContent>
+            </MListItem>
+            <MListItem Exact Color="primary" Style="height:38px;" Class="px-6" Link Href="/app/todo/low">
+                <ItemContent>
+                    <MListItemIcon Class="mr-2">
+                        <MIcon Small Color="#05CD99">fas fa-circle</MIcon>
+                    </MListItemIcon>
+                    <MListItemContent>
+                        <MListItemTitle Class="@(!context.Active ? "text-body neutral-lighten-4--text" : "text-subtitle primary--text")">Low</MListItemTitle>
+                    </MListItemContent>
+                </ItemContent>
+            </MListItem>
+            <MListItem Exact Color="primary" Style="height:38px;" Class="px-6" Link Href="/app/todo/medium">
+                <ItemContent>
+                    <MListItemIcon Class="mr-2">
+                        <MIcon Small Color="#FFB547">fas fa-circle</MIcon>
+                    </MListItemIcon>
+                    <MListItemContent>
+                        <MListItemTitle Class="@(!context.Active ? "text-body neutral-lighten-4--text" : "text-subtitle primary--text")">Medium</MListItemTitle>
+                    </MListItemContent>
+                </ItemContent>
+            </MListItem>
+            <MListItem Exact Color="primary" Style="height:38px;" Class="px-6" Link Href="/app/todo/high">
+                <ItemContent>
+                    <MListItemIcon Class="mr-2">
+                        <MIcon Small Color="#FF5252">fas fa-circle</MIcon>
+                    </MListItemIcon>
+                    <MListItemContent>
+                        <MListItemTitle Class="@(!context.Active ? "text-body neutral-lighten-4--text" : "text-subtitle primary--text")">High</MListItemTitle>
+                    </MListItemContent>
+                </ItemContent>
+            </MListItem>
+            <MListItem Exact Color="primary" Style="height:38px;" Class="px-6" Link Href="/app/todo/update">
+                <ItemContent>
+                    <MListItemIcon Class="mr-2">
+                        <MIcon Small Color="#4318FF">fas fa-circle</MIcon>
+                    </MListItemIcon>
+                    <MListItemContent>
+                        <MListItemTitle Class="@(!context.Active ? "text-body neutral-lighten-4--text" : "text-subtitle primary--text")">Update</MListItemTitle>
+                    </MListItemContent>
+                </ItemContent>
+            </MListItem>
+        </MListItemGroup>
+    </MList>
+</MNavigationDrawer>
+
+<TodoDetail @bind-Value="_visible" SelectItem=null></TodoDetail>
+
+@code {
+    public bool _visible { get; set; }
+}

@@ -1,0 +1,126 @@
+﻿<MRow style="height: calc(100vh - 218px);" NoGutters>
+    <MCol Md="8">
+        <MVirtualScroll style="height: calc(100vh - 228px);" class="hidden-webkit-scrollbar pr-6 pl-6" Items="_basketItems">
+            <ItemContent>
+                <MHover Context="hoverContext" class="full-width mb-6" >
+                    <MCard Height="270" Class="@($"{hoverContext.Class} {(hoverContext.Hover ? "pro-elevation" : "")}")" @attributes="hoverContext.Attrs" Elevation="@(hoverContext.Hover ? 6 : 0)">
+                        <MRow class="ma-0">
+                            <MCol Md="@("auto")" Align="AlignTypes.Center" class="d-flex flex-column align-center">
+                                <MImage src="@context.GetPictureUrl()" Width='222' Height="222" />
+                            </MCol>
+                            <MCol style="height:270px;" class="pa-6 flex-grow-1 d-flex flex-column justify-content-space-between">
+                                <div>
+                                    <div class="d-flex mb-1">
+                                        <h1 class="text-subtitle neutral-lighten-1--text">@context.Name</h1>
+                                        <span class="text-caption ml-6">InStock</span>
+                                    </div>
+                                    <p class="text-caption mb-1">By<span class="sample-green--text ml-2">@context.Company</span></p>
+                                    <MRating class="mb-1" Readonly Value="context.Score" Size=20 Color="remind" BackgroundColor="remind" Dense></MRating>
+                                    <div class="mt-3 d-flex align-center justify-start">
+                                        <span class="text-caption mr-2">Qty: </span>
+                                        <div style="width:100px;">
+                                            <MTextField HideDetails="true" Type="number" Outlined Dense @bind-Value="@context.Qty" OnInput="(e)=>{ context.Qty=e<0?0:e; }" TValue="int"></MTextField>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 d-flex flex-column justify-end">
+                                    @if (context.FreeShipping)
+                                    {
+                                        <div class="mb-3 d-flex justify-space-between">
+                                            <span class="text-caption neutral-lighten-4--text">Shipping</span><span class="text-caption neutral-lighten-1--text">FreeShip</span>
+                                        </div>
+                                    }
+                                    <div class="mb-3 d-flex justify-space-between">
+                                        <span class="text-caption neutral-lighten-4--text">receiving time</span><span class="text-caption neutral-lighten-1--text">@context.Delivery</span>
+                                    </div>
+                                    <div class="d-flex justify-space-between">
+                                        <span class="text-caption neutral-lighten-4--text">discounts</span><span class="text-caption neutral-lighten-1--text">@context.Offers</span>
+                                    </div>
+                                </div>
+                            </MCol>
+                            <MDivider Vertical class="mt-6 mb-6 ml-2 mr-2" />
+                            <MCol Md="@("auto")" Class="d-flex flex-column align-center justify-end align-self-end pa-6">
+                                <h5 style="height:90px;" class="d-flex align-center">@context.GetFormatPrice()</h5>
+                                <MButton Large Block Depressed Width="240" class="mt-3 text-capitalize neutral-lighten-5 neutral-lighten-2--text rounded-pill" OnClick="()=>RemoveItem(context.Id)">
+                                    Remove
+                                </MButton>
+                                <MButton Large Block Depressed class="primary mt-3 text-capitalize rounded-pill">
+                                    Wishlist
+                                </MButton>
+                            </MCol>
+                        </MRow>
+                    </MCard>
+                </MHover>
+            </ItemContent>
+        </MVirtualScroll>
+    </MCol>
+    <MCol Md="4">
+        <MCard class="pa-2 fill-height d-flex flex-column justify-space-between">
+            <MCardTitle class="text-caption">
+                OPTIONS
+            </MCardTitle>
+            <MCardText class="pl-4 pr-4">
+                <MTextField TValue="string" class="coupons mb-2 neutral-lighten-1--text" Dense Placeholder="Coupons">
+                    <AppendContent>
+                        <span class="cursor-pointer primary--text text-subtitle">Apply</span>
+                    </AppendContent>
+                </MTextField>
+                <MDivider></MDivider>
+                <div class="text-subtitle mt-6">Price Details</div>
+                <MList Dense class="pointer-events-none ml-n4 mr-n4">
+                    <MListItem>
+                        <MListItemTitle class="text-caption">TotalMRP</MListItemTitle>
+                        <MListItemTitle class="text-right text-btn neutral-lighten-1--text"> $598 </MListItemTitle>
+                    </MListItem>
+                    <MListItem>
+                        <MListItemTitle class="text-caption">Discount</MListItemTitle>
+                        <MListItemTitle class="text-right text-btn neutral-lighten-1--text"> -25$ </MListItemTitle>
+                    </MListItem>
+                    <MListItem>
+                        <MListItemTitle class="text-caption">EstimatedTax</MListItemTitle>
+                        <MListItemTitle class="text-right text-btn neutral-lighten-1--text"> $1.3 </MListItemTitle>
+                    </MListItem>
+                    <MListItem>
+                        <MListItemTitle class="text-caption">EMI Eligibility</MListItemTitle>
+                        <MListItemTitle class="text-right text-btn neutral-lighten-1--text"> Details</MListItemTitle>
+                    </MListItem>
+                    <MListItem>
+                        <MListItemTitle class="text-caption">DeliveryCharges</MListItemTitle>
+                        <MListItemTitle class="text-right text-btn neutral-lighten-1--text"> Free </MListItemTitle>
+                    </MListItem>
+                </MList>
+                <MDivider></MDivider>
+                <MListItem class="pointer-events-none pa-0 mt-4">
+                    <MListItemTitle class="text-subtitle"> Total</MListItemTitle>
+                    <MListItemTitle class="text-right text-subtitle primary--text">$574</MListItemTitle>
+                </MListItem>
+            </MCardText>
+            <MCardActions class="d-flex justify-center mb-10">
+                <MButton Large Depressed Width="340" class="primary text-capitalize rounded-pill" OnClick="()=>{ StepChanged.InvokeAsync(1);DisabledChanged.InvokeAsync(false); }">
+                    Place Order
+                </MButton>
+            </MCardActions>
+        </MCard>
+    </MCol>
+</MRow>
+
+@code {
+    private List<BasketItemDto> _basketItems = BasketService.GetBasketItems();
+
+    [Parameter]
+    public StringNumber Step { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback<StringNumber> StepChanged { get; set; }
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> DisabledChanged { get; set; }
+
+    private void RemoveItem(int id)
+    {
+        _basketItems.Remove(_basketItems.Single(a => a.Id == id));
+    }
+}

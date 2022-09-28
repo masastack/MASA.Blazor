@@ -1,0 +1,818 @@
+﻿@page "/dashboard/analytics"
+@inherits ProCompontentBase
+
+<MRow>
+    <MCol Md=6 Sm=12>
+        <MCard Style="position:relative;" Class="linear-gradient-purple max-height">
+            <img src="/img/analytics/left.png" style="position:absolute;top:auto;left:0;" />
+            <img src="/img/analytics/right.png" style="position:absolute;top:0;right:0" />
+            <MCardText Class="text-center white--text">
+                <MAvatar Size=60 Class="mx-auto" Style="background-color:#7367f0;">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-award">
+                            <circle cx="12" cy="8" r="7"></circle>
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                        </svg>
+                    </span>
+                </MAvatar>
+                <p class="text-h4 mt-6">Congratulations John,</p>
+                <p>You have done 57.6% more sales today. Check your new badge in your profile.</p>
+            </MCardText>
+        </MCard>
+    </MCol>
+    <MCol Md=3 Sm=6>
+        <MCard Class="max-height">
+            <MCardText>
+                <MAvatar Size=48 Color="deep-purple lighten-5">
+                    <span Class="deep-purple--text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-user">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </span>
+                </MAvatar>
+                <h1 class="black--text mt-3">92.6k</h1>
+                <h3 class="grey--text">Subscribers Gained</h3>
+            </MCardText>
+            <MECharts Class="max-width mt-n4" Height=100 Option=_subscribersChart></MECharts>
+        </MCard>
+    </MCol>
+    <MCol Md=3 Sm=6>
+        <MCard Class="max-height">
+            <MCardText>
+                <MAvatar Size=48 Color="orange lighten-5">
+                    <span Class="orange--text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-box">
+                            <path
+                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                            </path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </span>
+                </MAvatar>
+                <h1 class="black--text mt-3">38.4k</h1>
+                <h3 class="grey--text">Orders Received</h3>
+            </MCardText>
+            <MECharts Class="max-width mt-n2" Height=100 Option=_ordersChart></MECharts>
+        </MCard>
+    </MCol>
+</MRow>
+
+<MRow>
+    <MCol Md=6 Sm=12>
+        <MCard>
+            <MCardText>
+                <MRow>
+                    <MCol Md=6 Sm=12 Class="d-flex flex-column">
+                        <h1 class="black--text">2.7k</h1>
+                        <h3 class="mt-1">Avg Sessions</h3>
+                        <h3 class="mt-5 black--text">
+                            <span class="green--text">+5.2%</span><span class="ml-2">vs last 7 days</span>
+                        </h3>
+                        <MButton Color="#7367f0" Class="max-width white--text mt-auto">View Details</MButton>
+                    </MCol>
+                    <MCol Md=6 Sm=12>
+                        <div class="text-right">
+                            <MMenu Right Bottom>
+                                <ActivatorContent>
+                                    <span @attributes="@context.Attrs">
+                                        @_lastDate
+                                    </span>
+                                </ActivatorContent>
+                                <ChildContent>
+                                    <MList>
+                                        <MListItemGroup @bind-Value="_lastDate">
+                                            <MListItem Selectable Value="@("Last 28 Day")">
+                                                <MListItemTitle> Last 28 Days </MListItemTitle>
+                                            </MListItem>
+                                            <MListItem Value="@("Last Month")">
+                                                <MListItemTitle> Last Month </MListItemTitle>
+                                            </MListItem>
+                                            <MListItem Value="@("Last Year")">
+                                                <MListItemTitle> Last Year </MListItemTitle>
+                                            </MListItem>
+                                        </MListItemGroup>
+
+                                    </MList>
+                                </ChildContent>
+                            </MMenu>
+                        </div>
+                        <MECharts Class="max-width mt-n2" Height=200 Option=_sessionsChart></MECharts>
+                    </MCol>
+                </MRow>
+                <MDivider Class="my-5"></MDivider>
+                <MRow>
+                    <MCol Md=6>
+                        <div class="mb-1">Goal: $100000</div>
+                        <MProgressLinear Color="#7367f0" Height=7 Rounded Value=45></MProgressLinear>
+                    </MCol>
+                    <MCol Md=6>
+                        <div class="mb-1">Goal: $100000</div>
+                        <MProgressLinear Color="orange" Height=7 Rounded Value=55></MProgressLinear>
+                    </MCol>
+                    <MCol Md=6>
+                        <div class="mb-1">Goal: $100000</div>
+                        <MProgressLinear Color="red" Height=7 Rounded Value=70></MProgressLinear>
+                    </MCol>
+                    <MCol Md=6>
+                        <div class="mb-1">Goal: $100000</div>
+                        <MProgressLinear Color="green" Height=7 Rounded Value=90></MProgressLinear>
+                    </MCol>
+                </MRow>
+            </MCardText>
+        </MCard>
+    </MCol>
+    <MCol Md=6 Sm=12>
+        <MCard Class="max-height">
+            <MCardText>
+                <div class="d-flex">
+                    <h2 class="mr-auto">Support Tracker</h2>
+                    <div>
+                        <MMenu Right Bottom>
+                            <ActivatorContent>
+                                <span @attributes="@context.Attrs">
+                                    @_lastDate
+                                </span>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <MList>
+                                    <MListItemGroup @bind-Value="_lastDate">
+                                        <MListItem Value="@("Last 28 Day")">
+                                            <MListItemTitle> Last 28 Days </MListItemTitle>
+                                        </MListItem>
+                                        <MListItem Value="@("Last Month")">
+                                            <MListItemTitle> Last Month </MListItemTitle>
+                                        </MListItem>
+                                        <MListItem Value="@(" Last Year")">
+                                            <MListItemTitle> Last Year </MListItemTitle>
+                                        </MListItem>
+                                    </MListItemGroup>
+
+                                </MList>
+                            </ChildContent>
+                        </MMenu>
+                    </div>
+                </div>
+                <MRow Class="mt-8">
+                    <MCol Sm=2>
+                        <div class="text-h4 black--text text-center">
+                            163
+                        </div>
+                        <div class="text-center">
+                            <small>Tickets</small>
+                        </div>
+                    </MCol>
+                    <MCol Sm=10 Align=AlignTypes.Center Class="text-center">
+                        <MProgressCircular Class="mx-auto" Rotate=50 Value="83" Width=10 Size="200"
+                            Color="deep-purple lighten-1">
+                            <div>
+                                <h6 class="black--text">Completed Tickets</h6>
+                                <span class="text-h6 black--text">83%</span>
+                            </div>
+
+                        </MProgressCircular>
+                    </MCol>
+                </MRow>
+                <div class="d-flex mt-2">
+                    <div class="mr-auto text-center">
+                        <div>New Tickets</div>
+                        <div class="text-h4 mt-2">29</div>
+                    </div>
+                    <div class="mr-auto text-center">
+                        <div>Open Tickets</div>
+                        <div class="text-h4 mt-2">63</div>
+                    </div>
+                    <div>
+                        <div>Response Time</div>
+                        <div class="text-h4 mt-2">1d</div>
+                    </div>
+                </div>
+            </MCardText>
+        </MCard>
+    </MCol>
+</MRow>
+
+<MRow>
+    <MCol Md=4 Sm=12>
+        <MCard>
+            <MCardTitle>
+                User Timeline
+            </MCardTitle>
+            <MCardText>
+                <MTimeline Dense AlignTop Class="ml-n10 pt-0">
+                    <MTimelineItem Color="#7367f0" Small>
+                        <div class="d-flex">
+                            <div class="mr-auto">
+                                <h3>
+                                    12 Invoices have been paid
+                                </h3>
+                                <div class="mt-1 mb-3">
+                                    Invoices have been paid to the company.
+                                </div>
+                                <img width="20" height=20 src="/img/analytics/json.png" />
+                                <span class="ml-3">data.json</span>
+                            </div>
+                            <div>
+                                <small class="grey--text"> 12 min ago</small>
+                            </div>
+                        </div>
+                    </MTimelineItem>
+
+                    <MTimelineItem Small Color="orange">
+                        <div class="d-flex">
+                            <div class="mr-auto">
+                                <h3>
+                                    Client Meeting
+                                </h3>
+                                <div class="mt-1 mb-3">
+                                    Project meeting with john @@10:15am.
+                                </div>
+                                <div class="d-flex">
+                                    <MListItemAvatar Color="deep-purple">
+                                        <MImage Src="img/avatar/9.svg"></MImage>
+                                    </MListItemAvatar>
+                                    <div class="mt-3">
+                                        <div class="black--text">John Doe (Client)</div>
+                                        <div>CEO of Infibeam</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <small class="grey--text"> 45 min ago </small>
+                            </div>
+                        </div>
+                    </MTimelineItem>
+
+                    <MTimelineItem Color="cyan lighten-1" Small>
+                        <div class="d-flex">
+                            <div class="mr-auto">
+                                <h3>
+                                    Create a new project for client
+                                </h3>
+                                <div class="mt-1 mb-3">
+                                    Add files to new design folder
+                                </div>
+                                <div>
+                                    <MHover>
+                                        <MTooltip Color="grey darken-4" Bottom>
+                                            <ActivatorContent Context="tooltip">
+                                                <MAvatar @attributes="@MerginAttributes(context.Attrs,tooltip.Attrs)"
+                                                    Size=36 Class="@("mr-n3 "+(context.Hover ?"elevation-24 mt-n2":""))"
+                                                    Style="@(context.Hover ?"z-index:2":"")">
+                                                    <MImage Src="/img/avatar/12.svg"></MImage>
+                                                </MAvatar>
+                                            </ActivatorContent>
+                                            <ChildContent>
+                                                <span>Billy Hopkins</span>
+                                            </ChildContent>
+                                        </MTooltip>
+                                    </MHover>
+
+                                    <MHover>
+                                        <MTooltip Color="grey darken-4" Bottom>
+                                            <ActivatorContent Context="tooltip">
+                                                <MAvatar @attributes="@MerginAttributes(context.Attrs,tooltip.Attrs)"
+                                                    Size=36 Class="@("mr-n3 "+(context.Hover ?"elevation-24 mt-n2":""))"
+                                                    Style="@(context.Hover ?"z-index:2":"")">
+                                                    <MImage Src="/img/avatar/10.svg"></MImage>
+                                                </MAvatar>
+                                            </ActivatorContent>
+                                            <ChildContent>
+                                                <span>Amy Carson</span>
+                                            </ChildContent>
+                                        </MTooltip>
+                                    </MHover>
+
+                                    <MHover>
+                                        <MTooltip Color="grey darken-4" Bottom>
+                                            <ActivatorContent Context="tooltip">
+                                                <MAvatar @attributes="@MerginAttributes(context.Attrs,tooltip.Attrs)"
+                                                    Size=36 Class="@("mr-n3 "+(context.Hover ?"elevation-24 mt-n2":""))"
+                                                    Style="@(context.Hover ?"z-index:2":"")">
+                                                    <MImage Src="/img/avatar/avatar-s-8.jpg"></MImage>
+                                                </MAvatar>
+                                            </ActivatorContent>
+                                            <ChildContent>
+                                                <span>Brandon Miles</span>
+                                            </ChildContent>
+                                        </MTooltip>
+                                    </MHover>
+
+                                    <MHover>
+                                        <MTooltip Color="grey darken-4" Bottom>
+                                            <ActivatorContent Context="tooltip">
+                                                <MAvatar @attributes="@MerginAttributes(context.Attrs,tooltip.Attrs)"
+                                                    Size=36 Class="@("mr-n3 "+(context.Hover ?"elevation-24 mt-n2":""))"
+                                                    Style="@(context.Hover ?"z-index:2":"")">
+                                                    <MImage Src="/img/avatar/9.svg"></MImage>
+                                                </MAvatar>
+                                            </ActivatorContent>
+                                            <ChildContent>
+                                                <span>Daisy Weber</span>
+                                            </ChildContent>
+                                        </MTooltip>
+                                    </MHover>
+
+                                    <MHover>
+                                        <MTooltip Color="grey darken-4" Bottom>
+                                            <ActivatorContent Context="tooltip">
+                                                <MAvatar @attributes="@MerginAttributes(context.Attrs,tooltip.Attrs)"
+                                                    Size=36 Class="@("mr-n3 "+(context.Hover ?"elevation-24 mt-n2":""))"
+                                                    Style="@(context.Hover ?"z-index:2":"")">
+                                                    <MImage Src="/img/avatar/2.svg"></MImage>
+                                                </MAvatar>
+                                            </ActivatorContent>
+                                            <ChildContent>
+                                                <span>Jenny Loope</span>
+                                            </ChildContent>
+                                        </MTooltip>
+                                    </MHover>
+                                </div>
+                            </div>
+                            <div>
+                                <small class="grey--text"> 2 day ago</small>
+                            </div>
+                        </div>
+                    </MTimelineItem>
+
+                    <MTimelineItem Color="red" Small Class="pb-0">
+                        <div class="d-flex">
+                            <div class="mr-auto">
+                                <h3>
+                                    Create a new project for client
+                                </h3>
+                                <div class="mt-1 mb-3">
+                                    Add files to new design folder
+                                </div>
+                            </div>
+                            <div>
+                                <small class="grey--text"> 5 day ago</small>
+                            </div>
+                        </div>
+                    </MTimelineItem>
+                </MTimeline>
+            </MCardText>
+        </MCard>
+    </MCol>
+    <MCol Md=4 Sm=12>
+        <MCard Class="max-height">
+            <MCardText>
+                <div class="d-flex">
+                    <div class="mr-auto">
+                        <div class="text-h6 black--text">Sales</div>
+                        <div>Last 6 months</div>
+                    </div>
+                    <div>
+                        <MMenu Right Bottom>
+                            <ActivatorContent>
+                                <MButton Icon @attributes="@context.Attrs">
+                                    <MIcon>mdi-dots-vertical</MIcon>
+                                </MButton>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <MList>
+                                    <MListItem Link>
+                                        <MListItemTitle> Last 28 Days </MListItemTitle>
+                                    </MListItem>
+                                    <MListItem Link>
+                                        <MListItemTitle> Last Month </MListItemTitle>
+                                    </MListItem>
+                                    <MListItem Link>
+                                        <MListItemTitle> Last Year </MListItemTitle>
+                                    </MListItem>
+                                </MList>
+                            </ChildContent>
+                        </MMenu>
+                    </div>
+                </div>
+                <div>
+                    <MECharts Class="max-width mt-4" Height=300 Option=_salesChart></MECharts>
+                </div>
+            </MCardText>
+        </MCard>
+    </MCol>
+    <MCol Md=4 Sm=12>
+        <MCard Class="max-height">
+            <MCardText>
+                <MChip Small Color="deep-purple lighten-5">
+                    <strong class="deep-purple--text">03 Sep, 20</strong>
+                </MChip>
+                <div class="text-h6 black--text mt-2">App design</div>
+                <p class="mt-2">You can Find Only Post and Quotes Related to IOS like ipad app design, iphone app design
+                </p>
+
+                <span class="grey--text">TEAM</span>
+                <p class="mt-1 mb-7">
+                    <MChip Small Color="orange lighten-5">
+                        <strong class="orange--text">Figma</strong>
+                    </MChip>
+                    <MChip Small Color="deep-purple lighten-5">
+                        <strong class="deep-purple--text">Wireframe</strong>
+                    </MChip>
+                </p>
+                <span class="grey--text">MEMBERS</span>
+                <p class="mt-1">
+                    <MAvatar Size=36 Class="mr-3">
+                        <MImage Src="/img/avatar/9.svg"></MImage>
+                    </MAvatar>
+                    <MAvatar Color="pink lighten-5" Size=36 Class="mr-3">
+                        <strong class="pink--text">PI</strong>
+                    </MAvatar>
+                    <MAvatar Size=36 Class="mr-3">
+                        <MImage Src="/img/avatar/14.svg"></MImage>
+                    </MAvatar>
+                    <MAvatar Size=36 Class="mr-3">
+                        <MImage Src="/img/avatar/10.svg"></MImage>
+                    </MAvatar>
+                    <MAvatar Color="grey lighten-3" Size=36>
+                        <strong class="grey--text">AL</strong>
+                    </MAvatar>
+                </p>
+                <div class="d-flex my-8">
+                    <div class="grey-bg mr-2 pa-2 text-center" style="width:90px">
+                        <h3 class="mb-1">Due Date</h3>
+                        <strong>12 Apr, 21</strong>
+                    </div>
+                    <div class="grey-bg  mr-2 pa-2 text-center" style="width:90px">
+                        <h3 class="mb-1">Budget</h3>
+                        <strong>$49251.91</strong>
+                    </div>
+                    <div class="grey-bg pa-2 text-center" style="width:90px">
+                        <h3 class="mb-1">Cost</h3>
+                        <strong>$840.99</strong>
+                    </div>
+                </div>
+
+                <MButton Color="#7367f0" Class="white--text max-width">
+                    Join Team
+                </MButton>
+
+
+            </MCardText>
+        </MCard>
+    </MCol>
+</MRow>
+
+<div class="mt-7">
+    <Masa.Maui.Pages.App.Invoice.Components.InvoiceList />
+</div>
+
+                    @code{
+                                private object? _subscribersChart;
+        private object? _ordersChart;
+        private object? _sessionsChart;
+        private object? _salesChart;
+
+        protected override void OnInitialized()
+        {
+            _subscribersChart = new
+            {
+                Tooltip = new
+                {
+                    trigger = "axis",
+                },
+                XAxis = new
+                {
+                    axisLine = new
+                    {
+                        Show = false
+                    },
+                    axisLabel = new
+                    {
+                        Show = false
+                    },
+                    axisTick = new
+                    {
+                        Show = false
+                    },
+                    splitLine = new
+                    {
+                        Show = false
+                    },
+                    Data = new[]
+                    {
+                        "","", "","","","",""
+                    }
+                },
+                YAxis = new
+                {
+                    axisLine = new
+                    {
+                        Show = false
+                    },
+                    axisLabel = new
+                    {
+                        Show = false
+                    },
+                    axisTick = new
+                    {
+                        Show = false
+                    },
+                    splitLine = new
+                    {
+                        Show = false
+                    },
+                },
+                Series = new[]
+                 {
+                    new
+                    {
+                        Type = "line",
+                        Data = AnalyticsService.GetSubscribersChartData(),
+                        Color = "#7367f0",
+                        Smooth = true,
+                        SymbolSize = 10,
+                        Symbol = "circle",
+                        ShowSymbol = false,
+                        LineStyle = new
+                        {
+                            Width=3
+                        },
+                        AreaStyle = new
+                        {
+                            Color = new
+                            {
+                                Type="linear",
+                                x=0,y=0,x2=0,y2=1,
+                                ColorStops=new[]
+                                {
+                                    new {offset = 0.1, Color = "rgb(224,222,253)"},
+                                    new {offset = 0.4, Color = "rgb(255,255,255)"},
+                                },
+                                Global=false
+                            }
+
+                        }
+                    }
+                },
+                Grid = new
+                {
+                    X = -30,
+                    y = 6,
+                    x2 = -30,
+                    y2 = -50
+                }
+            };
+
+            _ordersChart = new
+            {
+                Tooltip = new
+                {
+                    trigger = "axis",
+                },
+                XAxis = new
+                {
+                    axisLine = new
+                    {
+                        Show = false
+                    },
+                    axisLabel = new
+                    {
+                        Show = false
+                    },
+                    axisTick = new
+                    {
+                        Show = false
+                    },
+                    splitLine = new
+                    {
+                        Show = false
+                    },
+                    Data = new[]
+                    {
+                        "","", "","","","",""
+                    }
+                },
+                YAxis = new
+                {
+                    axisLine = new
+                    {
+                        Show = false
+                    },
+                    axisLabel = new
+                    {
+                        Show = false
+                    },
+                    axisTick = new
+                    {
+                        Show = false
+                    },
+                    splitLine = new
+                    {
+                        Show = false
+                    },
+                },
+                Series = new[]
+                {
+                    new
+                    {
+                        Name="Orders",
+                        Type= "line",
+                        Data= AnalyticsService.GetOrdersChartData(),
+                        Color="#ff9f43",
+                        Smooth=true,
+                        SymbolSize=10,
+                        Symbol="circle",
+                        ShowSymbol=false,
+                        LineStyle=new
+                        {
+                            Width = 3
+                        },
+                        AreaStyle = new
+                        {
+                            Color = new
+                            {
+                                Type = "linear",
+                                x = 0,y = 0,x2 = 0,y2 = 1,
+                                ColorStops = new[]
+                                {
+                                    new {offset = 0.1, Color = "rgb(255,238,222)"},
+                                    new {offset = 0.4, Color = "rgb(255,255,255)"},
+                                },
+                                Global = false
+                            }
+
+                        }
+                    }
+                },
+                Grid = new
+                {
+                    X = -30,
+                    y = 6,
+                    x2 = -30,
+                    y2 = -60
+                }
+            };
+
+            _sessionsChart = new
+            {
+                Tooltip = new
+                {
+                    Trigger = "axis"
+                },
+                XAxis = new
+                {
+                    Data = new[] { "", "", "", "", "", "", "" },
+                    axisLine = new
+                    {
+                        Show = false
+                    },
+                    axisLabel = new
+                    {
+                        Show = false
+                    },
+                    axisTick = new
+                    {
+                        Show = false
+                    },
+                    splitLine = new
+                    {
+                        Show = false
+                    },
+                },
+                YAxis = new
+                {
+                    axisLine = new
+                    {
+                        Show = false
+                    },
+                    axisLabel = new
+                    {
+                        Show = false
+                    },
+                    axisTick = new
+                    {
+                        Show = false
+                    },
+                    splitLine = new
+                    {
+                        Show = false
+                    },
+                },
+                Series = new[]
+                {
+                    new
+                    {
+                        Name ="Sessions",
+                        Type = "bar",
+                        Data = AnalyticsService.GetSessionsChartData(),
+                        Colo = "#7367f0",
+                        Stack = "x",
+                        BarWidth = "25",
+                        ItemStyle = new
+                        {
+                            Normal = new
+                            {
+                                 BarBorderRadius = new []{ 15, 15, 0, 0}
+                            }
+                        }
+                    },
+                },
+                Grid = new
+                {
+                    X = 0,
+                    y = 0,
+                    x2 = 0,
+                    y2 = 0
+                }
+            };
+
+            var _salesChartData = AnalyticsService.GetSalesChartData();
+
+            _salesChart = new
+            {
+                Tooltip = new
+                {
+                    trigger = "axis",
+                },
+                Legend = new
+                {
+                    Left = "Left",
+                    Data = new[]
+                    {
+                        "Sales","Visits"
+                    }
+                },
+                Radar = new[]
+                {
+                    new
+                    {
+                        Indicator=new []
+                        {
+                            new {Text="Jan",Max=100 },
+                            new {Text="Jun",Max=100 },
+                            new {Text="May",Max=100 },
+                            new {Text="Apr",Max=100 },
+                            new {Text="Mar",Max=100 },
+                            new {Text="Feb",Max=100 },
+                        },
+                        Center = new []{"50%","60%"},
+                        Radius = 80,
+                    }
+                },
+                Series = new[]
+                {
+                  new
+                  {
+                       Type= "radar",
+                       Data= new[]
+                       {
+                           new
+                           {
+                               Value = _salesChartData[0],
+                               Name= "Sales"
+                           }
+                       },
+                       Color = "#7367f0",
+                       areaStyle = new  {},
+                       SymbolSize = 1,
+                       Symbol = "circle",
+                       ShowSymbol = false,
+                  },
+                  new
+                  {
+                       Type= "radar",
+                       Data= new[]
+                       {
+                           new
+                           {
+                               Value = _salesChartData[1],
+                               Name = "Visits"
+                           }
+                       },
+                       Color = "#00BCD4",
+                       areaStyle = new  {},
+                       SymbolSize = 1,
+                       Symbol = "circle",
+                       ShowSymbol = false,
+                  }
+                },
+                Grid = new
+                {
+                    X = 0,
+                    y = 0,
+                    x2 = 0,
+                    y2 = 0
+                }
+            };
+
+        }
+
+        private StringNumber? _lastDate;
+
+        private static Dictionary<string, object> MerginAttributes(Dictionary<string, object> attributes, Dictionary<string, object> otherAttributes)
+        {
+            foreach (var (key, value) in otherAttributes)
+            {
+                if (attributes.ContainsKey(key) is false) attributes.Add(key, value);
+            }
+            return attributes;
+        }
+                    }

@@ -1,0 +1,147 @@
+﻿@page "/app/ecommerce/shop"
+@inherits ProCompontentBase
+
+<MCard Elevation=0 Class="rounded-4 pa-6 mr-3" Style="min-width:300px;width=300px;float:left;">
+    <h6>Filters</h6>
+
+    <span class="text-btn neutral-lighten-4--text mt-1">Multi Range</span>
+    <div class="border-b-solid mt-6 mb-12 pl-2">
+        <MRadioGroup Dense @bind-Value="_shopData.MultiRange">
+            @foreach (var multiRange in _multiRanges)
+            {
+                <div class="block-center" style="height:40px;">
+                    <MRadio Color="primary" Value="@multiRange">
+                        <LabelContent>
+                            <span class="@($"{(_shopData.MultiRange==multiRange?"text-subtitle primary--text":"text-body3")}")">@multiRange.Text</span>
+                        </LabelContent>
+                    </MRadio>
+                </div>
+            }
+        </MRadioGroup>
+    </div>
+
+    <span class="text-btn neutral-lighten-4--text">Categories</span>
+    <div class="border-b-solid mt-6 mb-12 pl-2">
+        <MRadioGroup @bind-Value="_shopData.Category">
+            @foreach (var categorie in _categories)
+            {
+                <div class="block-center" style="height:40px;">
+                    <MRadio Color="primary" Value="@categorie">
+                        <LabelContent>
+                            <span class="@($"{(_shopData.Category==categorie?"text-subtitle primary--text":"text-body3")}")">@categorie</span>
+                        </LabelContent>
+                    </MRadio>
+                </div>
+            }
+        </MRadioGroup>
+    </div>
+
+    <span class="text-btn neutral-lighten-4--text">Brands</span>
+    <div class="border-b-solid mt-6 mb-12 pl-2">
+        <MRadioGroup @bind-Value="_shopData.Brand">
+            @foreach (var brand in _brands)
+            {
+                <div class="block-center" style="height:40px;">
+                    <MRadio Color="primary" Value="@brand">
+                        <LabelContent>
+                            <span class="@($"{(_shopData.Brand==brand?"text-subtitle primary--text":"text-body3")}")">@brand</span>
+                        </LabelContent>
+                    </MRadio>
+                </div>
+            }
+        </MRadioGroup>
+    </div>
+</MCard>
+
+<div class="mr-n3">
+    <MRow>
+        <MCol Md=4 Sm=12>
+            <MCard Elevation=0 Class="line px-6 py-3 block-between">
+                <h6>@_shopData.CurrentCount results found</h6>
+                <MMenu OffsetY OpenOnHover>
+                    <ActivatorContent>
+                        <div @attributes="@context.Attrs">
+                            <span class="text-btn neutral-lighten-4--text">@_shopData.SortTypeLable</span>
+                            <MIcon Color="neutral-lighten-4">mdi-menu-down</MIcon>
+                        </div>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MList Class="py-0">
+                            <MListItemGroup @bind-Value="_shopData.SortTypeLable" ActiveClass="primary white--text">
+                                <MListItem Value="@(SortType.Featured.ToString())">Featured </MListItem>
+                                <MListItem Value="@(SortType.Lowest.ToString())"> Lowest </MListItem>
+                                <MListItem Value="@(SortType.Highest.ToString())"> Highest </MListItem>
+                            </MListItemGroup>
+                        </MList>
+                    </ChildContent>
+                </MMenu>
+            </MCard>
+        </MCol>
+        <MCol Md=8 Sm=12>
+            <MTextField @bind-Value="_shopData.Search" Class="rounded-2 max-height" HideDetails="@("auto")" Height=54 Flat Solo Placeholder="Search Product">
+                <PrependInnerContent>
+                    <MIcon Size=16 Class="mr-2 neutral-lighten-1--text">mdi-magnify</MIcon>
+                </PrependInnerContent>
+            </MTextField>
+        </MCol>
+    </MRow>
+    <MRow>
+        @foreach (var item in _shopData.GetPageDatas())
+        {
+            <MCol Md=4 Sm=12>
+                <div class="commodity">
+                    <MCard Class="rounded-4 content">
+                        <MImage Height=260 Contain Src="@item.PictureFile" Class="hover-pointer" @onclick="()=>NavigateToDetails(item.Id)"></MImage>
+                        <MCardText Class="pa-3">
+                            <div class="block-between">
+                                <MRating Value="item.Rating" Size=20 Dense Readonly Length=5 Color="remind" BackgroundColor="remind"></MRating>
+                                <h6>$@item.Price</h6>
+                            </div>
+                            <div class="text-subtitle text-truncate my-1">@item.Name</div>
+                            <div class="text-truncate text-body3 neutral-lighten-3--text">@item.Description</div>
+                        </MCardText>
+                        <div class="block-between text-center">
+                            <div @onclick="()=>item.Favorite=!item.Favorite" class="rounded-bl-xl hover-pointer favorite" style="width:50%;height:56px;line-height: 56px;box-shadow: inset -1px 0px 0px #F0F3FA, inset 0px 0.5px 0px #F0F3FA;border-bottom-left-radius: 20px !important;">
+                                <MIcon Size=24 Color="@(item.Favorite?"error":"neutral")">@(item.Favorite ? "mdi-heart" : "mdi-heart-outline")</MIcon>
+                                </div>
+                                <div @onclick="NavigateToOrder" class="hover-pointer neutral--text order" style="width:50%;height:56px;line-height: 56px;box-shadow: inset -1px 0px 0px #F0F3FA, inset 0px 0.5px 0px #F0F3FA;border-bottom-right-radius: 20px !important;">
+                                    <MIcon Size=24 Class="white-order">mdi-cart-outline</MIcon>
+                                </div>
+                            </div>
+                        </MCard>
+                    </div>
+                </MCol>
+        }
+    </MRow>
+</div>
+
+@if (_shopData.PageCount > 0)
+{
+    <MPagination @bind-Value="_shopData.PageIndex" Color="primary" Circle Length=@_shopData.PageCount Class="mt-4 elevation-0 ml300"></MPagination>
+}
+
+@code {
+
+    readonly List<MultiRangeDto> _multiRanges = ShopService.GetMultiRangeList();
+    readonly List<string> _categories = ShopService.GetCategortyList();
+    readonly List<string> _brands = ShopService.GetBrandList();
+    readonly ShopPage _shopData = new(ShopService.GetGoodsList());
+
+    [Inject]
+    public NavigationManager Nav { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        _shopData.MultiRange = _multiRanges[0];
+    }
+
+    private void NavigateToDetails(Guid id)
+    {
+        Nav.NavigateTo($"app/ecommerce/details/{id}");
+    }
+
+    private void NavigateToOrder()
+    {
+        Nav.NavigateTo($"app/ecommerce/order");
+    }
+                            }

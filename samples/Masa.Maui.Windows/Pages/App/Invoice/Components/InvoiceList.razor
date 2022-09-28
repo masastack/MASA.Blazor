@@ -1,0 +1,239 @@
+﻿@using Masa.Maui.Pages.App.Invoice
+@inject NavigationManager NavigationManager
+
+<MRow class="mt-6">
+    <MCol Md="12">
+        <MCard>
+            <MCardText>
+                <MDataTable Headers="_headers" Items="_invoicePage.GetPageDatas()" ItemsPerPage="_invoicePage.PageSize" HideDefaultFooter class="table-header-fill table-border-solid">
+                    <TopContent>
+                        <MRow class="mb-1">
+                            <MCol Md="@("auto")" class="d-flex align-center">
+                                <span class="mr-6 text-btn neutral-lighten-1--text">Entries:</span>
+                                <MSelect Items="_pageSizes"
+                                         @bind-Value="@_invoicePage.PageSize"
+                                         ItemText="u => u.ToString()"
+                                         ItemValue="u => u"
+                                         HideDetails="true"
+                                         Dense style="width:120px"
+                                         Outlined>
+                                </MSelect>
+                                <MButton Class="primary rounded-pill ml-6">Add Record</MButton> @*OnClick="NavigateToAdd"*@
+                            </MCol>
+                            <MSpacer />
+                            <MCol Md="@("auto")" class="d-flex">
+                                <MTextField @bind-Value="_invoicePage.Search" Dense class="mr-6" style="width:570px;" HideDetails="true"
+                                            Label="Search..." Outlined></MTextField>
+                                <MSelect Items="_stateItems" style="width:220px;"
+                                         @bind-Value="@_invoicePage.State" TValue="int?" TItem="InvoiceStateDto" TItemValue="int"
+                                         ItemText="u => u.Label" HideDetails="true"
+                                         ItemValue="u => u.Value"
+                                         Dense
+                                         Outlined
+                                         Clearable>
+                                </MSelect>
+                            </MCol>
+                        </MRow>
+                    </TopContent>
+                    <ItemColContent>
+                        @if (context.Header.Value == nameof(InvoiceRecordDto.State))
+                        {
+                            switch (context.Item.State)
+                            {
+                                case 1:
+                                    <span class="cyan-light cyan--text text-center vertical-center rounded-circle invoice-list-avatar">
+                                        <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down-circle"><circle cx="12" cy="12" r="10"></circle><polyline data-v-9a6e255c="" points="8 12 12 16 16 12"></polyline><line data-v-9a6e255c="" x1="12" y1="8" x2="12" y2="16"></line></svg>
+                                    </span>
+                                    break;
+                                case 2:
+                                    <span class="pry-lighten-5 pry--text text-center vertical-center rounded-circle invoice-list-avatar">
+                                        <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline data-v-9a6e255c="" points="17 21 17 13 7 13 7 21"></polyline><polyline data-v-9a6e255c="" points="7 3 7 8 15 8"></polyline></svg>
+                                    </span>
+                                    break;
+                                case 3:
+                                    <span class="sample-green--text lighten-green text-center vertical-center rounded-circle invoice-list-avatar">
+                                        <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline data-v-9a6e255c="" points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                    </span>
+                                    break;
+                                case 4:
+                                    <span class="remind--text remind-light text-center vertical-center rounded-circle invoice-list-avatar">
+                                        <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path data-v-9a6e255c="" d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path data-v-9a6e255c="" d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                                    </span>
+                                    break;
+                                case 5:
+                                    <span class="error--text error-light text-center vertical-center rounded-circle invoice-list-avatar">
+                                        <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info"><circle data-v-9a6e255c="" cx="12" cy="12" r="10"></circle><line data-v-9a6e255c="" x1="12" y1="16" x2="12" y2="12"></line><line data-v-9a6e255c="" x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                                    </span>
+                                    break;
+                            }
+                        }
+                        else if (context.Header.Value == nameof(InvoiceRecordDto.Balance))
+                        {
+                            <MChip class="text-body sample-green--text lighten-green" Light Small>
+                                Paid
+                            </MChip>
+                        }
+                        else if (context.Header.Value == nameof(InvoiceRecordDto.Client))
+                        {
+                            string color = context.Item.Client.Color;
+                            <MListItem class="grow pa-0">
+                                <MListItemAvatar Color="@($"{color}-lighten-5")">
+                                    @if (string.IsNullOrEmpty(context.Item.Client.HeadImg))
+                                    {
+                                        <span class="@($"{color}--text")">@context.Item.Client.SampleName</span>
+                                    }
+                                    else
+                                    {
+                                        <MImage Src="@context.Item.Client.HeadImg">
+                                        </MImage>
+                                    }
+                                </MListItemAvatar>
+                                <MListItemContent>
+                                    <MListItemTitle class="text-subtitle">@context.Item.Client.FullName</MListItemTitle>
+                                    <MListItemSubtitle class="text-caption">@context.Item.Client.Email</MListItemSubtitle>
+                                </MListItemContent>
+                            </MListItem>
+                        }
+                        else if (context.Header.Value == nameof(InvoiceRecordDto.Id))
+                        {
+                            <a @onclick="()=>NavigateToPreview(context.Item.Id)">#@context.Item.Id</a>
+                        }
+                        else if (context.Header.Value == nameof(InvoiceRecordDto.Date))
+                        {
+                            <span class="text-body neutral-lighten-1--text">
+                                @context.Item.Date.ToShortDateString()
+                            </span>
+                        }
+                        else if (context.Header.Value == nameof(InvoiceRecordDto.Total))
+                        {
+                            var formatTotal = $"${context.Item.Total}";
+                            <span class="text-body neutral-lighten-1--text">
+                                @formatTotal
+                            </span>
+                        }
+                        else if (context.Header.Value == "Action")
+                        {
+                            <MTooltip Top>
+                                <ActivatorContent Context="_">
+                                    <MIcon Small Class="mr-2" @attributes="@_.Attrs">mdi-send</MIcon>
+                                </ActivatorContent>
+                                <ChildContent>
+                                    <span>Send Invoice</span>
+                                </ChildContent>
+                            </MTooltip>
+                            <MTooltip Top>
+                                <ActivatorContent Context="_">
+                                    <MIcon class="mr-7 ml-7" Small @attributes="@_.Attrs">far fa-eye</MIcon>
+                                    @*@onclick="()=>NavigateToPreview(context.Item.Id)"*@
+                                </ActivatorContent>
+                                <ChildContent>
+                                    <span>Preview Invoice</span>
+                                </ChildContent>
+                            </MTooltip>
+                            <MMenu OffsetY>
+                                <ActivatorContent Context="_">
+                                    <MIcon Small Class="ml-2" @attributes="@_.Attrs">mdi-dots-vertical</MIcon>
+                                </ActivatorContent>
+                                <ChildContent>
+                                    <MList Dense>
+                                        <MListItem Link>
+                                            <MListItemIcon class="mr-3">
+                                                <MIcon>mdi-arrow-down</MIcon>
+                                            </MListItemIcon>
+                                            <MListItemContent>
+                                                <MListItemTitle>
+                                                    Download
+                                                </MListItemTitle>
+                                            </MListItemContent>
+                                        </MListItem>
+                                        <MListItem Link>
+                                            @*OnClick="()=>NavigateToEdit(context.Item.Id)"*@
+                                            <MListItemIcon class="mr-3">
+                                                <MIcon>mdi-square-edit-outline</MIcon>
+                                            </MListItemIcon>
+                                            <MListItemContent>
+                                                <MListItemTitle>
+                                                    Edit
+                                                </MListItemTitle>
+                                            </MListItemContent>
+                                        </MListItem>
+                                        <MListItem Link>
+                                            <MListItemIcon class="mr-3">
+                                                <MIcon>mdi-delete-outline</MIcon>
+                                            </MListItemIcon>
+                                            <MListItemContent>
+                                                <MListItemTitle>
+                                                    Delete
+                                                </MListItemTitle>
+                                            </MListItemContent>
+                                        </MListItem>
+                                        <MListItem Link>
+                                            <MListItemIcon class="mr-3">
+                                                <MIcon>mdi-content-copy</MIcon>
+                                            </MListItemIcon>
+                                            <MListItemContent>
+                                                <MListItemTitle>
+                                                    Duplocate
+                                                </MListItemTitle>
+                                            </MListItemContent>
+                                        </MListItem>
+                                    </MList>
+                                </ChildContent>
+                            </MMenu>
+                        }
+                        else
+                        {
+                            @context.Value
+                        }
+                    </ItemColContent>
+                </MDataTable>
+                <MRow NoGutters>
+                    <MCol Md="@("auto")" Align="AlignTypes.Center">
+                        <span class="text-btn neutral-lighten-1--text"> Showing @((_invoicePage.PageIndex - 1) * _invoicePage.PageSize + 1) to @(_invoicePage.PageIndex * _invoicePage.PageSize) of @_invoicePage.CurrentCount entries</span>
+                    </MCol>
+                    <MSpacer />
+                    <MCol Md="@("auto")">
+                        @if (_invoicePage.PageCount > 0)
+                        {
+                            <MPagination Class="ma-3" @bind-Value="_invoicePage.PageIndex" Length="_invoicePage.PageCount" Circle></MPagination>
+                        }
+                    </MCol>
+                </MRow>
+            </MCardText>
+        </MCard>
+    </MCol>
+</MRow>
+
+@code {
+    List<int> _pageSizes = new() { 10, 25, 50, 100 };
+
+    private List<DataTableHeader<InvoiceRecordDto>> _headers = new List<DataTableHeader<InvoiceRecordDto>>
+    {
+        new (){ Text="#" , Value= nameof(InvoiceRecordDto.Id)},
+        new (){ Text="Client" , Value= nameof(InvoiceRecordDto.Client)},
+        new (){ Text="State" , Value= nameof(InvoiceRecordDto.State)},
+        new (){ Text="Total" , Value= nameof(InvoiceRecordDto.Total)},
+        new (){ Text="Issued Date" , Value= nameof(InvoiceRecordDto.Date)},
+        new (){ Text="Balance" , Value= nameof(InvoiceRecordDto.Balance)},
+        new (){ Text="Actions" , Value = "Action", Sortable = false},
+    };
+
+    private List<InvoiceStateDto> _stateItems = InvoiceService.GetStateList();
+
+    InvoicePage _invoicePage = new(InvoiceService.GetInvoiceRecordList());
+
+    private void NavigateToPreview(int id)
+    {
+        NavigationManager.NavigateTo($"apps/invoice/preview/{id}");
+    }
+
+    private void NavigateToEdit(int id)
+    {
+        NavigationManager.NavigateTo($"apps/invoice/edit/{id}");
+    }
+
+    private void NavigateToAdd()
+    {
+        NavigationManager.NavigateTo($"apps/invoice/add");
+    }
+                        }

@@ -1,0 +1,80 @@
+﻿<AuthorizeView>
+    <Authorized>
+        <MMenu OffsetX Left OffsetY>
+            <ActivatorContent Context="menuContext">
+                <span>Hello, @context.User.Identity?.Name!</span>
+                <MButton Icon Large @attributes="menuContext.Attrs"><MIcon>mdi-account-circle-outline</MIcon></MButton>
+            </ActivatorContent>
+            <ChildContent>
+                <MList Dense>
+                    <MListItem Link>
+                        <MListItemIcon>
+                            <MIcon>far fa-envelope</MIcon>
+                        </MListItemIcon>
+                        <MListItemContent>
+                            <MListItemTitle>
+                                Message
+                            </MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                    <MListItem Link Href="/Identity/Account/Manage">
+                        <MListItemIcon>
+                            <MIcon>far fa-user</MIcon>
+                        </MListItemIcon>
+                        <MListItemContent>
+                            <MListItemTitle>
+                                Account
+                            </MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                    <MListItem Link Href="/Identity/Account/LogOut">
+                        <MListItemIcon>
+                            <MIcon>fas fa-sign-out-alt</MIcon>
+                        </MListItemIcon>
+                        <MListItemContent>
+                            <MListItemTitle>
+                                Sign out
+                            </MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                </MList>
+            </ChildContent>
+        </MMenu>
+    </Authorized>
+    <NotAuthorized>
+        <MMenu OffsetX Left OffsetY>
+            <ActivatorContent Context="menuContext">
+                 <div class="text-center border-left-solid" style="width:88px;">
+                    <MAvatar  @attributes="menuContext.Attrs" Size=40>
+                        <MImage Src="/img/avatar/2.svg"></MImage>
+                    </MAvatar>
+                </div>
+            </ActivatorContent>
+            <ChildContent>
+                <MList Dense>
+                    <MListItem Link Href="/pages/authentication/login-v1">
+                        <MListItemIcon Class="mr-4">
+                            <MIcon Size=20 Color="neutral-lighten-4">fas fa-user-circle</MIcon>
+                        </MListItemIcon>
+                        <MListItemContent>
+                            <MListItemTitle>
+                                <span class="neutral-lighten-4--text">Login v1</span>
+                            </MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                    <MListItem Link Href="/pages/authentication/login-v2">
+                        <MListItemIcon Class="mr-4">
+                            <MIcon Size=20 Color="neutral-lighten-4">fas fa-sign-in-alt</MIcon>
+                        </MListItemIcon>
+                        <MListItemContent>
+                            <MListItemTitle>
+                                <span class="neutral-lighten-4--text">Login v2</span>
+                            </MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                </MList>
+            </ChildContent>
+        </MMenu>
+    </NotAuthorized>
+</AuthorizeView>
+

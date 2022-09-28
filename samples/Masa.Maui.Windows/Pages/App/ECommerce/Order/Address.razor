@@ -1,0 +1,111 @@
+﻿<MRow style="height: calc(100vh - 204px);">
+    <MCol Md="8">
+        <MCard class="pa-2 fill-height d-flex flex-column justify-space-between">
+            <MCardTitle class="text-h6 neutral-lighten-1--text">
+                Add New Address
+            </MCardTitle>
+            <MCardSubtitle class="text-body neutral-lighten-2--text">
+                Be sure to check "Deliver to this address" when you have finished
+            </MCardSubtitle>
+            <MCardText class="pl-4 pr-4 mt-2">
+                <MForm Model="_address" @bind-Value="_valid" @ref="_form" EnableDataAnnotationsValidation>
+                    <MRow>
+                        <MCol Md="6" class="pb-0">
+                            <MTextField @bind-Value="_address.FullName" Label="Full Name" Outlined></MTextField>
+                        </MCol>
+                        <MCol Md="6" class="pl-3">
+                            <MTextField @bind-Value="_address.MobileNumber" Label="Mobile Number" Outlined></MTextField>
+                        </MCol>
+                        <MCol Md="6">
+                            <MTextField @bind-Value="_address.HouseNo" Label="Flat, House No" Outlined></MTextField>
+                        </MCol>
+                        <MCol Md="6" class="pl-3">
+                            <MTextField @bind-Value="_address.Landmark" Label="Landmark" Outlined></MTextField>
+                        </MCol>
+                        <MCol Md="6">
+                            <MTextField @bind-Value="_address.City" Label="Town/City" Outlined></MTextField>
+                        </MCol>
+                        <MCol Md="6" class="pl-3">
+                            <MTextField @bind-Value="_address.Pincode" Label="Pincode" Outlined></MTextField>
+                        </MCol>
+                        <MCol Md="6">
+                            <MTextField @bind-Value="_address.State" Label="State" Outlined></MTextField>
+                        </MCol>
+                        <MCol Md="6" class="pl-3">
+                            <MSelect @bind-Value="@_address.AddressType"
+                                     Label="Address Type"
+                                     Outlined
+                                     Items="@_addressTypes"
+                                     ItemText="u => u.Label"
+                                     ItemValue="u => u.Value">
+                            </MSelect>
+                        </MCol>
+                    </MRow>
+                </MForm>
+            </MCardText>
+            <MCardActions class="d-flex justify-center mb-10">
+                <MButton Depressed Large Width="340" class="primary text-capitalize rounded-pill" OnClick="AddressSubmit">
+                    Save and Deliver Here
+                </MButton>
+            </MCardActions>
+        </MCard>
+    </MCol>
+    <MCol Md="4">
+        <MCard class="pa-2 fill-height d-flex flex-column justify-space-between">
+            <MCardTitle class="text-h6">
+                John Doe
+            </MCardTitle>
+            <MCardText class="pl-4 pr-4 mt-2">
+                <p class="text-btn neutral-lighten-1--text mb-6">9447 Glen Eagles Drive</p>
+                <p class="text-btn neutral-lighten-1--text mb-6">Lewis Center, OH 43035</p>
+                <p class="text-btn neutral-lighten-1--text mb-6">UTC-5: Eastern Standard Time (EST)</p>
+                <p class="text-btn neutral-lighten-1--text">202-555-0140</p>
+            </MCardText>
+            <MCardActions class="d-flex justify-center mb-10">
+                <MButton Depressed Large class="primary text-capitalize rounded-pill" Width="340" OnClick="()=>{ StepChanged.InvokeAsync(2);DisabledChanged.InvokeAsync(false); }">
+                    Deliver To This Address
+                </MButton>
+            </MCardActions>
+        </MCard>
+    </MCol>
+</MRow>
+
+<MSnackbar @bind-Value="_show" Dark>
+    <ChildContent>
+        Saved successfully
+    </ChildContent>
+    <ActionContent>
+        <MButton Color="pink" Text OnClick="()=>{ _show = false; }">
+            Close
+        </MButton>
+    </ActionContent>
+</MSnackbar>
+
+@code {
+    private bool _valid = true, _show = false;
+    private MForm _form = default!;
+    private AddressDto _address = new();
+    private List<AddressTypeDto> _addressTypes = BasketService.GetAddressTypes();
+
+    [Parameter]
+    public StringNumber Step { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback<StringNumber> StepChanged { get; set; }
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> DisabledChanged { get; set; }
+
+    private async void AddressSubmit()
+    {
+        await _form.ValidateAsync();
+        if (_valid)
+        {
+            _show = true;
+            await _form.ResetAsync();
+        }
+    }
+}

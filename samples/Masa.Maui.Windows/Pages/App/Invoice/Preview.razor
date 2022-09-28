@@ -1,0 +1,186 @@
+﻿@page "/app/invoice/preview"
+@page "/app/invoice/preview/{id:int}"
+@inherits ProCompontentBase
+@inject NavigationManager NavigationManager
+
+<MRow>
+    <MCol Md="9">
+        <MCard>
+            <MCardText class="pa-0 mt-3">
+                <MRow class="pa-6">
+                    <MCol Class="mr-auto" Cols="@("auto")">
+                        <div class="d-flex mb-8">
+                            <img height="48" width="48" class="hover-pointer" src="/img/mainLayout/logo.svg" />
+                            <h3 class="primary--text ml-3">Masa Blazor</h3>
+                        </div>
+                        <p class="mb-0 body-2">
+                            Office 149, 450 South Brand Brooklyn
+                        </p>
+                        <p class="mb-0 body-2">
+                            San Diego County, CA 91905, USA
+                        </p>
+                        <p class="mb-0 body-2">
+                            +1 (123) 456 7891, +44 (876) 543 2198
+                        </p>
+                    </MCol>
+                    <MCol Cols="@("auto")">
+                        <h4 class="text-right mb-10" style="font-size: 1.25rem;">Invoice <span>#@InvoiceRecord.Id</span>
+                        </h4>
+                        <div class="d-flex justify-space-between">
+                            <p class="mb-1">Date Issued:</p>
+                            <p class="font-weight-bold mb-1">@InvoiceRecord.Date.ToString("yyyy-MM-dd")</p>
+                        </div>
+                        <div class="d-flex flex-row justify-space-between">
+                            <p>Due Date:</p>
+                            <p class="font-weight-bold">@InvoiceRecord.DueDate.ToString("yyyy-MM-dd")</p>
+                        </div>
+                    </MCol>
+                </MRow>
+                <MDivider />
+                <MRow class="pa-6">
+                    <MCol Md="6" Align="AlignTypes.Center">
+                        <h6 class="mb-5 subtitle-1">Invoice To:</h6>
+                        <h6 class="mb-0 subtitle-1">@InvoiceRecord.Client.FullName</h6>
+                        <p class="mb-0 body-1">Jenkins-Rosales Inc</p>
+                        <p class="mb-0 body-1">075 Smith Views, Colombia</p>
+                        <p class="mb-0 body-1">@InvoiceRecord.Client.Mobile</p>
+                        <p class="mb-0 body-1">@InvoiceRecord.Client.Email</p>
+                    </MCol>
+                    <MCol Md="6" Align="AlignTypes.Center" class="d-flex justify-end">
+                        <div>
+                            <h6 class="subtitle-1 mb-5">Payment Details:</h6>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="pr-1"> Total Due: </td>
+                                        <td><span class="font-weight-bold">$12,110.55</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pr-1"> Bank name: </td>
+                                        <td>American Bank</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pr-1"> Country: </td>
+                                        <td>@InvoiceRecord.Client.Country</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pr-1"> IBAN: </td>
+                                        <td>ETD95476213874685</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pr-1"> SWIFT code: </td>
+                                        <td>BR91905</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </MCol>
+                </MRow>
+                <MSimpleTable>
+                    <thead class="blue-grey lighten-4">
+                        <tr>
+                            <th class="text-left">
+                                TASK DESCRIPTION
+                            </th>
+                            <th class="text-left">
+                                RATE
+                            </th>
+                            <th class="text-left">
+                                HOURS
+                            </th>
+                            <th class="text-left">
+                                TOTAL
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p class="mb-1 mt-1 font-weight-bold">Native App Development</p>
+                                <p class="mb-1">Developed a full stack native app using React Native, Bootstrap & Python
+                                </p>
+                            </td>
+                            <td>$60.00</td>
+                            <td>30</td>
+                            <td>$1,800.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="mb-1 mt-1 font-weight-bold">UI Kit Design</p>
+                                <p class="mb-1">Designed a UI kit for native app using Sketch, Figma & Adobe XD</p>
+                            </td>
+                            <td>$60.00</td>
+                            <td>20</td>
+                            <td>$1200.00</td>
+                        </tr>
+                    </tbody>
+                </MSimpleTable>
+                <MRow class="pa-6">
+                    <MCol Md="6">
+                        <p>
+                            <span class="font-weight-bold">Salesperson:</span>
+                            <span>Alfie Solomons</span>
+                        </p>
+                    </MCol>
+                    <MCol Md="6" Class="d-flex justify-end">
+                        <div style="width:100%;max-width:12rem;">
+                            <div class="d-flex justify-space-between mb-2">
+                                <span>Subtotal:</span>
+                                <span class="font-weight-bold">$1800</span>
+                            </div>
+                            <div class="d-flex justify-space-between mb-2">
+                                <span>Discount:</span>
+                                <span class="font-weight-bold">$28</span>
+                            </div>
+                            <div class="d-flex justify-space-between mb-2">
+                                <span>Tax:</span>
+                                <span class="font-weight-bold">21%</span>
+                            </div>
+                            <MDivider Class="mt-2 mb-2" />
+                            <div class="d-flex justify-space-between">
+                                <span>Total:</span>
+                                <span class="font-weight-bold">$1690</span>
+                            </div>
+                        </div>
+                    </MCol>
+                </MRow>
+                <MDivider />
+                <div class="pa-6">
+                    <span class="font-weight-bold">Note:</span>
+                    <span>It was a pleasure working with you and your team. We hope you will Favorite us in mind for
+                        future freelance projects. Thank You!</span>
+                </div>
+            </MCardText>
+        </MCard>
+    </MCol>
+    <MCol Md="3">
+        <MCard>
+            <MCardText>
+                <MButton Block class="primary" OnClick="()=>{ _showSendInvoice = true; }">Send Invoice</MButton>
+                <MButton Block Outlined class="mt-2 mb-2">Download</MButton>
+                <MButton Block Outlined>Print</MButton>
+                <MButton @onclick="NavigateToEdit" Block Outlined class="mt-2 mb-2">Edit</MButton>
+                <MButton Block class="success" OnClick="()=>{ _showAddPayment = true; }">Add Payment</MButton>
+            </MCardText>
+        </MCard>
+    </MCol>
+</MRow>
+
+<Masa.Maui.Pages.App.Invoice.Components.SendInvoice @bind="_showSendInvoice" />
+<Masa.Maui.Pages.App.Invoice.Components.AddPayment @bind="_showAddPayment" />
+
+@code{
+    private bool _showSendInvoice;
+    private bool _showAddPayment;
+    private InvoiceRecordDto? _invoiceRecord;
+
+    [Parameter]
+    public int? Id { get; set; }
+
+    public InvoiceRecordDto InvoiceRecord => _invoiceRecord ??= InvoiceService.GetInvoiceRecordList().FirstOrDefault(i => i.Id == Id) ?? InvoiceService.GetInvoiceRecordList().First();
+
+    private void NavigateToEdit()
+    {
+        NavigationManager.NavigateTo($"apps/invoice/edit/{Id ?? 0}");
+    }
+                }

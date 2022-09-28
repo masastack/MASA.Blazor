@@ -1,0 +1,45 @@
+﻿@inherits ProCompontentBase
+@inject NavHelper NavHelper
+@inject GlobalConfig GlobalConfig
+@implements IDisposable
+
+<MPageTabs Value="NavHelper.PageTabItems.FindIndex(tab => tab.Url == GlobalConfig.CurrentNav?.Href)"
+    Class="px-6 pagetabs" Items="NavHelper.PageTabItems">
+    <TabContent>
+        <MTab Value="NavHelper.PageTabItems.FindIndex(tab=> tab.Url==context.Item.Url)" Href="@context.Item.Url"
+            @attributes="@context.Attrs" class="px-6 rounded-t-xl m-page_tab" ActiveClass="m-page_tab_active"
+            IsActive=context.IsActive Ripple="false">
+            <MIcon Size=20>@context.Item.Icon</MIcon>
+            <span class="mx-2 text-capitalize @(context.IsActive ?"neutral--text":"")"
+                style="min-width:46px;">@T(context.Item.Name)</span>
+            @if (context.Item.Closable)
+            {
+                <MIcon Size=16 OnClick="context.Close">mdi-close</MIcon>
+            }
+        </MTab>
+    </TabContent>
+    <ChildContent>
+        <div class="mt-6">
+            @ChildContent
+        </div>
+    </ChildContent>
+</MPageTabs>
+
+@code {
+    StringNumber _tabIndex = 0;
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    protected override void OnInitialized()
+    {
+        GlobalConfig.OnLanguageChanged += base.StateHasChanged;
+        GlobalConfig.OnCurrentNavChanged += base.StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        GlobalConfig.OnLanguageChanged -= base.StateHasChanged;
+        GlobalConfig.OnCurrentNavChanged -= base.StateHasChanged;
+    }
+}
