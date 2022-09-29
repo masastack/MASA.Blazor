@@ -70,7 +70,10 @@
 
     <ItemGroup>
       <PackageReference Include="Masa.Blazor" Version="0.6.0-rc.2" />
-      <PackageReference Include="Masa.Blazor.Maui.Plugin.Bluetooth" Version="1.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Masa.Blazor.Maui.Plugin.Bluetooth\Masa.Blazor.Maui.Plugin.Bluetooth.csproj" />
     </ItemGroup>
 
 </Project>

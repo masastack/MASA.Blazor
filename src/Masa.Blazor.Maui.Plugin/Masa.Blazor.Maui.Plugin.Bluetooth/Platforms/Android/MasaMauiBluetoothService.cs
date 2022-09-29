@@ -1,6 +1,5 @@
 ﻿using Android.Bluetooth;
 using Android.Bluetooth.LE;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Maui.Plugin.Bluetooth
 {

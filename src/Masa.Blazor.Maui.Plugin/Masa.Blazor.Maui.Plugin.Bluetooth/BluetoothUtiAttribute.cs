@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Masa.Blazor.Maui.Plugin.Bluetooth
+﻿namespace Masa.Blazor.Maui.Plugin.Bluetooth
 {
     /// <summary>
     /// Attribute to attach a Uniform Type Identifier to a Bluetooth UUID.

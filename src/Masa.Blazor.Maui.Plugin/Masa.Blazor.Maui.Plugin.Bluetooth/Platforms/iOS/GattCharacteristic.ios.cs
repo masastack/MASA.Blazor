@@ -1,10 +1,5 @@
 ﻿using CoreBluetooth;
 using Foundation;
-using Intents;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Blazor.Maui.Plugin.Bluetooth
 {

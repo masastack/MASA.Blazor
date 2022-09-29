@@ -6,7 +6,6 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
     // All the code in this file is only included on iOS.
     public static partial class MasaMauiBluetoothService
     {
-
         private static BluetoothDelegate _delegate = new();
         public static CBCentralManager _manager = new CBCentralManager(_delegate, DispatchQueue.DefaultGlobalQueue, new CBCentralInitOptions
         {
@@ -17,7 +16,6 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         {
             return _manager.State == CBManagerState.PoweredOn;
         }
-
 
         public static async Task<PermissionStatus> PlatformCheckAndRequestBluetoothPermission()
         {
@@ -52,12 +50,11 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                 _manager.StopScan();
                 _discoveredDevices = _delegate.Devices.AsReadOnly();
             }
-
-
+            
             return _discoveredDevices;
         }
 
-        private  class BluetoothDelegate : CBCentralManagerDelegate
+        private class BluetoothDelegate : CBCentralManagerDelegate
         {
             private  EventWaitHandle _eventWaitHandle = new(false, EventResetMode.AutoReset);
 
@@ -87,14 +84,12 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             [Preserve]
             public override void UpdatedState(CBCentralManager central)
             {
-                
+                System.Diagnostics.Debug.WriteLine($"UpdatedState,{central.State}");
             }
         }
 
-
         private  class BluetoothPermissions : Permissions.BasePlatformPermission
         {
-            
             protected override Func<IEnumerable<string>> RequiredInfoPlistKeys
                 =>
                     () => new string[] { "NSBluetoothAlwaysUsageDescription", "NSBluetoothPeripheralUsageDescription" };
@@ -102,7 +97,6 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             public override Task<PermissionStatus> CheckStatusAsync()
             {
                 EnsureDeclared();
-
                 return Task.FromResult(GetBleStatus());
             }
 
@@ -118,6 +112,5 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                 };
             }
         }
-
     }
 }

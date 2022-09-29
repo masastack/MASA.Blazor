@@ -1,16 +1,11 @@
 ﻿using CoreBluetooth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Masa.Blazor.Maui.Plugin.Bluetooth
 {
     partial class BluetoothDevice
     {
         private CBPeripheral _peripheral;
         private RemoteGattServer _gatt;
+
         private BluetoothDevice(CBPeripheral peripheral)
         {
             _peripheral = peripheral;
@@ -25,7 +20,6 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         {
             return device._peripheral;
         }
-
 
         string GetId()
         {
