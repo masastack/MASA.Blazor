@@ -118,7 +118,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
         bool GetConnected()
         {
-            return Bluetooth._manager.GetConnectionState(Device, Android.Bluetooth.ProfileType.Gatt) == Android.Bluetooth.ProfileState.Connected;
+            return MasaMauiBluetoothService._manager.GetConnectionState(Device,Android.Bluetooth.ProfileType.Gatt) == Android.Bluetooth.ProfileState.Connected;
         }
 
         private async Task<bool> WaitForServiceDiscovery()

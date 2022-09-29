@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Masa.Blazor.Maui.Plugin.Bluetooth
+﻿namespace Masa.Blazor.Maui.Plugin.Bluetooth
 {
     public sealed partial class RemoteGattServer
     {
@@ -14,6 +7,11 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         /// </summary>
         /// <remarks>available only on monoandroid</remarks>
         public bool AutoConnect { get; set; } = false;
+
+        /// <summary>
+        /// Gets the parent remote device.
+        /// </summary>
+        public BluetoothDevice Device { get; private set; }
 
         internal RemoteGattServer(BluetoothDevice device)
         {
@@ -25,11 +23,6 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         {
             Device.OnGattServerDisconnected();
         }
-
-        /// <summary>
-        /// Gets the parent remote device.
-        /// </summary>
-        public BluetoothDevice Device { get; private set; }
 
         [Obsolete("Use IsConnected instead", true)]
         public bool Connected { get { return IsConnected; } }
@@ -44,26 +37,6 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         /// Gets the maximum transmission unit (MTU) size.
         /// </summary>
         public int Mtu { get; internal set; }
-
-        /// <summary>
-        /// Open a connection to the remote GATT server.
-        /// </summary>
-        /// <returns></returns>
-        public Task ConnectAsync()
-        {
-            return PlatformConnect();
-        }
-
-        /// <summary>
-        /// Disconnects the remote GATT server.
-        /// </summary>
-        /// <remarks>Some platforms do not have an explicit Disconnect and will keep the connection open until there are no references to associated services and characteristics.</remarks>
-        public void Disconnect()
-        {
-            PlatformDisconnect();
-            Device.OnGattServerDisconnected();
-            PlatformCleanup();
-        }
 
         /// <summary>
         /// Returns the primary service matching the specified UUID.
@@ -93,26 +66,5 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         {
             return PlatformReadRssi();
         }
-
-        //[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        //private BluetoothPhy _preferredPhy = BluetoothPhy.Le1m;
-        ///// <summary>
-        ///// Sets the preferred Physical Layer (PHY) if supported.
-        ///// </summary>
-        ///// <remarks>Currently only supported on Android.</remarks>
-        ///// <param name="phy"></param>
-        ///// <returns></returns>
-        //public BluetoothPhy PreferredPhy
-        //{
-        //    get
-        //    {
-        //        return _preferredPhy;
-        //    }
-        //    set
-        //    {
-        //        _preferredPhy = value;
-        //        PlatformSetPreferredPhy(value);
-        //    }
-        //}
     }
 }

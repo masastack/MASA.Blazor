@@ -38,5 +38,11 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         {
             return PlatformGetIncludedServicesAsync();
         }
+
+#if DEBUG
+        public event EventHandler ServiceAdded;
+        public event EventHandler ServiceChanged;
+        public event EventHandler ServiceRemoved;
+#endif
     }
 }

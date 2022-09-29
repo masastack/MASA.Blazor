@@ -12,8 +12,6 @@ namespace MauiBlueToothDemo.Pages
         private List<string> BluetoothDeviceList { get; set; } = new();
 
         private List<string> AllDeviceResponse { get; set; } = new();
-        [Inject]
-        private MasaMauiBluetoothService BluetoothService { get; set; }
 
         /// <summary>
         /// Start scanning nearby Ble devices
@@ -21,12 +19,12 @@ namespace MauiBlueToothDemo.Pages
         /// <returns></returns>
         private async Task ScanBleDeviceAsync()
         {
-            if (BluetoothService.IsEnabled())
+            if (MasaMauiBluetoothService.IsEnabled())
             {
-                if (await BluetoothService.CheckAndRequestBluetoothPermission())
+                if ((await MasaMauiBluetoothService.CheckAndRequestBluetoothPermission())== PermissionStatus.Granted)
                 {
                     ShowProgress = true;
-                    var deviceList = await BluetoothService.ScanLeDeviceAsync();
+                    var deviceList = await MasaMauiBluetoothService.ScanForDevicesAsync();
                     BluetoothDeviceList = deviceList.Where(o => !string.IsNullOrEmpty(o.Name)).Select(o => o.Name).Distinct().ToList();
                     ShowProgress = false;
                 }
@@ -55,7 +53,9 @@ namespace MauiBlueToothDemo.Pages
             if (byteData.Any())
             {
                 AllDeviceResponse = new List<string>();
-                await BluetoothService.SendDataAsync(deviceName, Guid.Parse("0000ffff-0000-1000-8000-00805f9b34fb"), null, byteData, OnCharacteristicChanged);
+#if ANDROID
+                await MasaMauiBluetoothService.SendDataAsync(deviceName, Guid.Parse("0000ffff-0000-1000-8000-00805f9b34fb"), null, byteData, OnCharacteristicChanged);
+#endif
             }
         }
 
@@ -68,6 +68,7 @@ namespace MauiBlueToothDemo.Pages
         {
             var deviceResponse = System.Text.Encoding.Default.GetString(e.Value);
             AllDeviceResponse.Add(deviceResponse);
+
             InvokeAsync(StateHasChanged);
         }
     }

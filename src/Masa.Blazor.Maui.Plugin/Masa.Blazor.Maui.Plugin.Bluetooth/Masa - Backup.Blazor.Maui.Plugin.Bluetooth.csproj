@@ -17,24 +17,23 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-android|AnyCPU'">
-	  <ApplicationVersion></ApplicationVersion>
-	  <ApplicationDisplayVersion></ApplicationDisplayVersion>
+	  <ApplicationVersion>2</ApplicationVersion>
+	  <ApplicationDisplayVersion>0</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-android|AnyCPU'">
-	  <ApplicationVersion></ApplicationVersion>
-	  <ApplicationDisplayVersion></ApplicationDisplayVersion>
+	  <ApplicationVersion>2</ApplicationVersion>
+	  <ApplicationDisplayVersion>0</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-ios|AnyCPU'">
-	  <ApplicationVersion></ApplicationVersion>
-	  <ApplicationDisplayVersion></ApplicationDisplayVersion>
+	  <ApplicationVersion>2</ApplicationVersion>
+	  <ApplicationDisplayVersion>0</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-ios|AnyCPU'">
-	  <ApplicationVersion></ApplicationVersion>
-	  <ApplicationDisplayVersion></ApplicationDisplayVersion>
-	  <MtouchUseLlvm>False</MtouchUseLlvm>
+	  <ApplicationVersion>2</ApplicationVersion>
+	  <ApplicationDisplayVersion>0</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

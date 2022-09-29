@@ -30,24 +30,19 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         /// <seealso cref="GattCharacteristicProperties"/>
         public GattCharacteristicProperties Properties { get { return GetProperties(); } }
 
-        /// <summary>
-        /// Get the user friendly description for this GattCharacteristic, if the User Description <see cref="GattDescriptor">Descriptor</see> is present, otherwise this will be an empty string.
-        /// </summary>
-        //public string UserDescription { get { return GetUserDescription(); } }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Used on multiple platforms")]
+        private string GetManualUserDescription()
+        {
+            var descriptor = GetDescriptorAsync(GattDescriptorUuids.CharacteristicUserDescription).Result;
 
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Used on multiple platforms")]
-        //private string GetManualUserDescription()
-        //{
-        //    var descriptor = GetDescriptorAsync(GattDescriptorUuids.CharacteristicUserDescription).Result;
+            if (descriptor != null)
+            {
+                var bytes = descriptor.ReadValueAsync().Result;
+                return System.Text.Encoding.UTF8.GetString(bytes);
+            }
 
-        //    if (descriptor != null)
-        //    {
-        //        var bytes = descriptor.ReadValueAsync().Result;
-        //        return System.Text.Encoding.UTF8.GetString(bytes);
-        //    }
-
-        //    return string.Empty;
-        //}
+            return string.Empty;
+        }
 
         /// <summary>
         /// The currently cached characteristic value. 

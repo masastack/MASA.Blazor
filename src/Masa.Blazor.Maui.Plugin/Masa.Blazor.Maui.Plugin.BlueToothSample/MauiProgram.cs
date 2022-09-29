@@ -19,9 +19,6 @@ public static class MauiProgram
 		#if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
-#if ANDROID
-        builder.Services.AddSingleton<MasaMauiBluetoothService>();
-#endif
         builder.Services.AddSingleton<WeatherForecastService>();
         builder.Services.AddMasaBlazor();
         return builder.Build();
