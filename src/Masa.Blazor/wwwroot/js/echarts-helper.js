@@ -26,7 +26,7 @@ export function init(selector, theme, initOptions, option) {
 export function dispose(selector) {
   const instance = echarts_instance_cache[selector]
 
-  if (instance?.dispose) {
+  if (instance && instance.dispose) {
     instance.dispose();
     window.removeEventListener('resize', () => onResize(instance))
   }
