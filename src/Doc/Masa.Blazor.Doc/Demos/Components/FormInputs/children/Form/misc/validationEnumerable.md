@@ -1,8 +1,8 @@
 ---
 order: 3
 title:
-  zh-CN: 验证集合
-  en-US: Validation enumerable
+  zh-CN: 验证集合(DataAnnotations)
+  en-US: Validation enumerable(DataAnnotations)
 ---
 
 ## zh-CN

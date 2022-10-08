@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2027047+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8234673+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -192,7 +192,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.203703+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8254637+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -224,7 +224,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2057063+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8284572+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -322,7 +322,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2077031+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8304533+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -398,7 +398,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2097134+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8334473+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -487,7 +487,7 @@
       "功能组件": "\n<ul>\n<li><code>MAppBarNavIcon</code>：专门为与 <a href=\"/components/toolbars\">MToolbar</a> 和 <code>MAppBar</code> 一起使用而创建的样式化图标按钮组件。 在工具栏的左侧显示为汉堡菜单，它通常用于控制导航抽屉的状态。 默认插槽可以用于自定义此组件的图标和功能。</li>\n<li><code>MAppBarTitle</code>：修改过的 <a href=\"/components/toolbars\">MToolbarTitle</a> 组件 ，用于配合 <strong>ShrinkOnScroll</strong> 属性使用。 在小屏幕上，<strong>MToolbarTitle</strong>\n将被截断，但这个组件在展开时使用了绝对定位使其内容可见。 我们不建议您在没有使用 <strong>ShrinkOnScroll</strong> 属性时使用 <code>MAppBarTitle</code> 组件。确实是因为向此组件添加了resize事件，并进行了很多额外的计算。</li>\n</ul>\n",
       "注意事项": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <strong>Icon</strong> 属性的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将按钮包装在任何容器例如<code>div</code>中，则需要对该容器应用负边距，以便正确对齐它们。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2137039+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8384372+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -640,7 +640,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2147036+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8404332+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -717,7 +717,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当在 <code>MToolbar</code> 和 <code>MAppBar</code> 内部使用带有 <code>Icon</code> prop的 <code>MButton</code> 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。\n如果您选择将您的按钮包装在任何容器中，例如<code>div</code>， 您需要对容器应用负边距，以便正确对齐。</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2187075+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8454232+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -868,7 +868,7 @@
     "Desc": "<p>将相同类型的两个数据并排显示。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:13:54.0190815+08:00",
+    "LastWriteTime": "2022-09-23T15:05:17.3954078+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -923,7 +923,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2197064+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8464212+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -966,7 +966,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBottomNavigation\">MBottomNavigation</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-06-23T13:44:24.199422+08:00",
+    "LastWriteTime": "2022-06-23T12:00:02.9568249+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1075,7 +1075,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBottomSheet\">MBottomSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2227037+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8494152+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1163,7 +1163,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>默认情况下，<code>MBreadcrumbs</code> 将禁用路由联动。可以通过 <strong>Linkage</strong> 属性开启路由联动。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2247155+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8524093+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1251,7 +1251,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p>当使用 <strong>Dark</strong> 属性时，<code>MButton</code> 是唯一一种拥有不同行为的组件。 通常来说，组件使用 <strong>Dark</strong> 属性来表示他们将有深色背景，文本也需要是白色的。 虽然这对\n<code>MButton</code> 也是起作用的，但由于禁用状态与白色背景容易造成混淆，建议仅在按钮<strong>为</strong>彩色背景时使用此属性。 If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2277041+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8583972+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1416,7 +1416,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "功能组件": "\n<ul>\n<li><code>MCardActions</code>：用于为卡片放置 动作 的容器，如 <a href=\"/components/buttons\">MButton</a> 或 <a href=\"/components/menus\">MMenu</a>。 同时在按钮上使用 个特殊边距\n，以便它们与其他卡片内容区域的匹配。</li>\n<li><code>MCardSubtitle</code>：为卡片字幕提供默认的 <strong>字体大小</strong> 和 <strong>填充</strong>。 字体大小可以以 <a href=\"/stylesandanimations/text-and-typography\">排版类</a> 覆盖。</li>\n<li><code>MCardText</code>：主要用于卡片中的 <strong>文本内容</strong>。 对文本应用填充，将其字体大小减少为 .875rem。</li>\n<li><code>MCardTitle</code>：为卡片字幕提供默认的 字体大小 和 填充。 字体大小可以以 <a href=\"/stylesandanimations/text-and-typography\">排版类</a> 覆盖。</li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2317045+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.862389+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1569,7 +1569,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCarousel\">MCarousel</a></li>\n<li><a href=\"/api/MCarouselItem\">MCarouselItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-08-01T09:58:16.7411914+08:00",
+    "LastWriteTime": "2022-08-01T14:37:20.2520235+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1678,7 +1678,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2367046+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8683771+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1862,7 +1862,7 @@
     "Desc": "<p>在文本后提供可以复制内容的图标按钮。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:13:54.024083+08:00",
+    "LastWriteTime": "2022-09-23T15:05:17.4044071+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -1936,7 +1936,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:13:54.0252186+08:00",
+    "LastWriteTime": "2022-09-23T15:05:17.4064061+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -1969,7 +1969,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2397197+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8733673+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2100,7 +2100,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-14T11:48:59.7323297+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8753959+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2187,7 +2187,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDragZone\">MDragZone</a></li>\n</ul>\n<!--alert:info-->\n<p>使用前需要引入 <code>Sorttable.js</code>：\n<br />\n<code>&lt;script src=&quot;https://cdn.masastack.com/npm/sortable/Sortable.min.js&quot;&gt;&lt;/script&gt;</code>。</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-06-27T15:26:21.1978135+08:00",
+    "LastWriteTime": "2022-06-27T15:37:58.9893328+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2300,7 +2300,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:13:54.029081+08:00",
+    "LastWriteTime": "2022-09-23T15:05:17.4174069+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -2410,7 +2410,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n<!--alert:info-->\n<p>使用前需要先引用ECharts的包：\n<br />\n<code>&lt;script src=&quot;https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js&quot;&gt;&lt;/script&gt;</code>。</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2427066+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8773995+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2484,7 +2484,7 @@
       "js文件": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-24T11:08:42.1024985+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8803866+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2579,7 +2579,7 @@
         "Name": "uploadPicture",
         "Title": "上传图片",
         "Description": "<p>这里只是演示如何配置<strong>Upload</strong>参数，请修改你的上传api地址。</p>\n",
-        "Code": "@using Masa.Blazor.Components.Editor\r\n<MEditor Upload=\"_upload\">\r\n</MEditor>\r\n@code {\r\n    private MEditorUpload _upload = new MEditorUpload\r\n    {\r\n        Action = \"/api/upload\",//Please change your upload address\r\n        TokenName = \"authorization\",\r\n        Token = \"Your token\",\r\n        Name=\"file\",\r\n        Accept = \"image/png, image/gif, image/jpeg, image/bmp, image/x-icon\",\r\n        PathKey=\"path\"\r\n    };\r\n}",
+        "Code": "@using Masa.Blazor.Components.Editor\r\n<MEditor Upload=\"_upload\">\r\n</MEditor>\r\n@code {\r\n    private MEditorUpload _upload = new MEditorUpload\r\n    {\r\n        Action = \"/api/upload\",//Please change your upload address\r\n        TokenName = \"authorization\",\r\n        Token = \"Your token\",\r\n        Name=\"file\",\r\n        Accept = \"image/png, image/gif, image/jpeg, image/bmp, image/x-icon\",\r\n        PathKey = \"path\"//Action result image path property\r\n    };\r\n}",
         "Type": "Demos.Components.Editor.props.UploadPicture",
         "Style": "",
         "Debug": false,
@@ -2622,7 +2622,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MErrorHandler\">MErrorHandler</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-01T11:11:01.979192+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8823887+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2682,7 +2682,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2457187+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8863674+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2813,7 +2813,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MSpeedDial\">MSpeedDial</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-25T14:07:47.7128811+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8883624+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2889,7 +2889,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2477073+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8903598+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2966,7 +2966,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2507043+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8933527+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3075,7 +3075,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2527034+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8953507+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3151,7 +3151,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2547037+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.8983445+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3238,7 +3238,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.257704+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9023392+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3380,7 +3380,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.259713+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9053296+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3429,7 +3429,7 @@
       {
         "Order": 3,
         "Name": "validationEnumerable",
-        "Title": "验证集合",
+        "Title": "验证集合(DataAnnotations)",
         "Description": "<p>验证集合属性,注意添加[EnumerableValidation]</p>\n",
         "Code": "@using System.ComponentModel.DataAnnotations\r\n\r\n<MForm Model=\"_order\" EnableValidation>\r\n    <MTextField @bind-Value=\"_order.Title\" Label=\"Title\"></MTextField>\r\n    <MTextField @bind-Value=\"_order.Price\" Label=\"Price\" Type=\"number\"></MTextField>\r\n    @foreach (var person in _order.Persons)\r\n    {\r\n        <MCard Flat>\r\n            <MCardTitle>Person:@person.Id</MCardTitle>\r\n            <MCardText>\r\n                <MTextField @bind-Value=\"person.Name\" Label=\"Name\"></MTextField>\r\n                <MTextField @bind-Value=\"person.Age\" Label=\"Age\" Type=\"number\"></MTextField>\r\n            </MCardText>\r\n        </MCard>\r\n    }\r\n    <MButton OnClick=\"()=>SubmitOrder(context)\" Color=\"success\">Validate</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    public class Order\r\n    {\r\n        public int Id { get; set; }\r\n        [Required]\r\n        public string Title { get; set; }\r\n        [Range(0, 20.00)]\r\n        public decimal Price { get; set; }\r\n\r\n        [EnumerableValidation]\r\n        public List<Person> Persons { get; set; }\r\n    }\r\n\r\n    public class Person\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        [Required]\r\n        public string Name { get; set; }\r\n\r\n        [Range(25, 100)]\r\n        public int Age { get; set; }\r\n    }\r\n\r\n    private Order _order = new()\r\n        {\r\n            Persons = new List<Person>\r\n        {\r\n            new Person\r\n            {\r\n                Id=1\r\n            },\r\n            new Person\r\n            {\r\n                Id=2\r\n            }\r\n        }\r\n        };\r\n\r\n    public async Task SubmitOrder(FormContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}",
         "Type": "Demos.Components.FormInputs.children.Form.misc.ValidationEnumerable",
@@ -3444,6 +3444,17 @@
         "Description": "<p>MForm支持FluentValidation验证,以验证集合为示例</p>\n",
         "Code": "@using BlazorComponent.I18n\r\n@using FluentValidation;\r\n\r\n<MForm Model=\"_orderDetail\" EnableValidation EnableI18n>\r\n    <MTextField @bind-Value=\"_orderDetail.Title\" Label=\"Title\"></MTextField>\r\n    <MTextField @bind-Value=\"_orderDetail.Price\" Label=\"Price\" Type=\"number\"></MTextField>\r\n    @foreach (var customer in _orderDetail.Customers)\r\n    {\r\n        <MCard Flat>\r\n            <MCardTitle>Customer:@customer.Id</MCardTitle>\r\n            <MCardText>\r\n                <MTextField @bind-Value=\"customer.Name\" Label=\"Name\"></MTextField>\r\n                <MTextField @bind-Value=\"customer.Age\" Label=\"Age\" Type=\"number\"></MTextField>\r\n            </MCardText>\r\n        </MCard>\r\n    }\r\n    <MButton OnClick=\"()=>SubmitOrder(context)\" Color=\"success\">Validate</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    class OrderDetail\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        public string Title { get; set; }\r\n\r\n        public decimal Price { get; set; }\r\n\r\n        public List<Customer> Customers { get; set; }\r\n    }\r\n\r\n    class Customer\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        public string Name { get; set; }\r\n\r\n        public int Age { get; set; }\r\n    }\r\n\r\n    class OrderDetailValidator : AbstractValidator<OrderDetail>\r\n    {\r\n        public OrderDetailValidator(I18n i18n)\r\n        {\r\n            RuleFor(o => o.Title).NotEmpty();\r\n            RuleFor(o => o.Price).InclusiveBetween(0,20);\r\n            RuleForEach(o => o.Customers).SetValidator(new CustomerValidator());\r\n        }\r\n    }\r\n\r\n    class CustomerValidator : AbstractValidator<Customer>\r\n    {\r\n        public CustomerValidator()\r\n        {\r\n            RuleFor(o => o.Name).NotEmpty();\r\n            RuleFor(o => o.Age).InclusiveBetween(25,100);\r\n        }\r\n    }\r\n\r\n    private OrderDetail _orderDetail = new()\r\n    {\r\n        Customers = new List<Customer>\r\n        {\r\n            new Customer\r\n            {\r\n                Id=1\r\n            },\r\n            new Customer\r\n            {\r\n                Id=2\r\n            }\r\n        }\r\n    };\r\n\r\n    public async Task SubmitOrder(FormContext context)\r\n    {\r\n        var success = context.Validate();\r\n        if (success)\r\n        {\r\n            //验证成功，操作业务\r\n        }\r\n    }\r\n}\r\n",
         "Type": "Demos.Components.FormInputs.children.Form.misc.ValidationEnumerableWithFluentValidation",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      },
+      {
+        "Order": 5,
+        "Name": "validationEnumerableWithValidationResult",
+        "Title": "验证集合(ValidationResult)",
+        "Description": "<p>MForm支持ValidationResult，用户可以将服务端表单验证返回的ValidationResult作为FormContext.ParseFormValidation的参数，将验证结果在前端表单展示,以验证集合为示例</p>\n",
+        "Code": "@using BlazorComponent.I18n\r\n@using FluentValidation;\r\n\r\n<MForm Model=\"_orderDetail\" EnableValidation EnableI18n>\r\n    <MTextField @bind-Value=\"_orderDetail.Title\" Label=\"Title\"></MTextField>\r\n    <MTextField @bind-Value=\"_orderDetail.Price\" Label=\"Price\" Type=\"number\"></MTextField>\r\n    <MTextField @bind-Value=\"_orderDetail.Customer.Name\" Label=\"Name\"></MTextField>\r\n    @foreach (var customer in _orderDetail.Customers)\r\n    {\r\n        <MCard Flat>\r\n            <MCardTitle>Customer:@customer.Id</MCardTitle>\r\n            <MCardText>\r\n                <MTextField @bind-Value=\"customer.Name\" Label=\"Name\"></MTextField>\r\n                <MTextField @bind-Value=\"customer.Age\" Label=\"Age\" Type=\"number\"></MTextField>\r\n            </MCardText>\r\n        </MCard>\r\n    }\r\n    <MButton OnClick=\"()=>SubmitOrder(context)\" Color=\"success\">Validate</MButton>\r\n</MForm>\r\n\r\n@code {\r\n    class OrderDetail\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        public string Title { get; set; }\r\n\r\n        public decimal Price { get; set; }\r\n\r\n        public Customer Customer { get; set; }\r\n\r\n        public List<Customer> Customers { get; set; }\r\n    }\r\n\r\n    class Customer\r\n    {\r\n        public int Id { get; set; }\r\n\r\n        public string Name { get; set; }\r\n\r\n        public int Age { get; set; }\r\n    }\r\n\r\n    class OrderDetailValidator : AbstractValidator<OrderDetail>\r\n    {\r\n        public OrderDetailValidator(I18n i18n)\r\n        {\r\n            RuleFor(o => o.Title).NotEmpty();\r\n            RuleFor(o => o.Price).InclusiveBetween(0,20);\r\n            RuleForEach(o => o.Customers).SetValidator(new CustomerValidator());\r\n        }\r\n    }\r\n\r\n    class CustomerValidator : AbstractValidator<Customer>\r\n    {\r\n        public CustomerValidator()\r\n        {\r\n            RuleFor(o => o.Name).NotEmpty();\r\n            RuleFor(o => o.Age).InclusiveBetween(25,100);\r\n        }\r\n    }\r\n\r\n    private OrderDetail _orderDetail = new()\r\n    {\r\n        Customer = new Customer \r\n        {\r\n            \r\n        },\r\n        Customers = new List<Customer>\r\n        {\r\n            new Customer\r\n            {\r\n                Id=1\r\n            },\r\n            new Customer\r\n            {\r\n                Id=2\r\n            }\r\n        }\r\n    };\r\n\r\n    public async Task SubmitOrder(FormContext context)\r\n    {\r\n        var validationResult = @\"Validation failed: \r\n                    -- Title: 'Title'不能为空。 Severity: Error\r\n                    -- Price: 'Price'必须在 0 (包含)和 20 (包含)之间。 Severity: Error\r\n                    -- Customers.Name: 'Name'不能为空。 Severity: Error\r\n                    -- Customers[0].Name: 'Name'不能为空。 Severity: Error\";\r\n        context.TryParseFormValidation(validationResult);\r\n    }\r\n}\r\n",
+        "Type": "Demos.Components.FormInputs.children.Form.misc.ValidationEnumerableWithValidationResult",
         "Style": "",
         "Debug": false,
         "Group": 3
@@ -3478,7 +3489,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOtpInput\">MOtpInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-01T11:11:01.9831927+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9073247+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3543,7 +3554,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadioGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.261704+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9093255+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3619,7 +3630,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.264707+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9113191+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3707,7 +3718,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p><strong>MenuProps</strong> 的 <strong>Auto</strong> 属性只支持默认输入样式。</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>当使用一个Object(对象) 作为<strong>Items</strong>的属性时，你必须使用<strong>ItemText</strong>和<strong>ItemValue</strong>与传入的对象关联起来。 这些值默认为 <strong>Text</strong> 和 <strong>Value</strong> 且可以更改。</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2678535+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9153257+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3849,7 +3860,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2727037+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9213043+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4035,7 +4046,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2747041+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.923294+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4133,7 +4144,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2857046+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9362694+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4264,7 +4275,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2817067+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9322682+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4552,7 +4563,7 @@
       "辅助类": "\n<p><strong>FillHeight</strong>将<code>height:100%</code>应用于元素。当应用于<code>MContainer</code>时，它还包括<code>align items:center</code>。</p>\n",
       "注意": "\n<!--alert:info--> \n<p>1.x 网格系统已被废弃，请改用 2.x 网格系统。 1.x 网格的文档可以在 v1.5 文档 中找到。</p>\n<!--alert:info--> \n<!--alert:info--> \n<p>网格组件上基于断点的属性以 <code>andUp</code> 的方式工作。 考虑 <strong>xs</strong> 断点已经被删除的情况， 这将会影响到 <strong>offset</strong>、<strong>justify</strong>、<strong>align</strong> 和 <code>MCol</code> 上的断点属性。</p>\n<ul>\n<li>像 <strong>justify-sm</strong> 和 <strong>justify-md</strong> 这样的属性仍然存在，但 <strong>justify-xs</strong> 会变成 <strong>justify</strong>。</li>\n<li><code>MCol</code> 上不存在 <strong>xs</strong> 属性。 与此对应的是 <strong>cols</strong> 属性。</li>\n</ul>\n<!--alert:info--> \n<!--alert:info--> \n<p>当在 IE11 使用网格系统时，你需要设置一个显式的 <code>height</code>，因为 <code>min-height</code> 不足进而导致非预期结果。</p>\n<!--alert:info--> \n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2917052+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9422552+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4782,7 +4793,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2947039+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9452495+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4869,7 +4880,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2967069+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9472469+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4967,7 +4978,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2987137+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9502116+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5054,7 +5065,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3017064+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9522367+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5141,7 +5152,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3037055+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9552011+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5239,7 +5250,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3057124+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9582302+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5326,7 +5337,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3077067+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9601941+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5391,7 +5402,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3097062+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9621882+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5479,7 +5490,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>MImage 组件使用 Intersect 指令，IE11 和 Safari需要 Polyfill。 如果检测到浏览器不支持此功能, 图像仍将以正常方式加载。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3127061+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.965189+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5575,7 +5586,7 @@
     "Desc": "<p>提供生成图片验证码的组件。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:13:54.0400807+08:00",
+    "LastWriteTime": "2022-09-23T15:05:17.4444066+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5629,7 +5640,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MInfiniteScroll\">MInfiniteScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-08-29T10:31:06.6439431+08:00",
+    "LastWriteTime": "2022-09-23T15:05:17.448407+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5684,7 +5695,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>如果您要查找有状态列表项，请查看 <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>。</p>\n"
     },
-    "LastWriteTime": "2022-04-24T11:08:42.1104887+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9711772+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5894,7 +5905,7 @@
       "js文件": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.min.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MMarkdown\">MMarkdown</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-04-01T12:54:45.5050333+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9741634+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6021,7 +6032,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3217128+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9791615+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6194,7 +6205,7 @@
     "Desc": "<p>为移动端设计的级联选择器。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-09-14T09:58:13.7058953+08:00",
+    "LastWriteTime": "2022-09-29T16:18:01.5351721+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6247,7 +6258,7 @@
     "Desc": "<p>专为移动设备设计的日期选择器。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:28:21.1553746+08:00",
+    "LastWriteTime": "2022-09-29T16:18:01.538174+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6311,7 +6322,7 @@
     "Desc": "<p>专为移动设备设计的日期选择器。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:28:21.1583817+08:00",
+    "LastWriteTime": "2022-09-29T16:18:01.541342+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6375,7 +6386,7 @@
     "Desc": "<p>专为移动设备设计的选择器。提供多个选项集合供用户选择，支持单列选择、多列选择和级联选择。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:28:21.1624636+08:00",
+    "LastWriteTime": "2022-09-29T16:18:01.5473438+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6430,7 +6441,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMobilePickerView\">MMobilePickerView</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-08-29T13:28:21.1603744+08:00",
+    "LastWriteTime": "2022-09-29T16:18:01.5443429+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6493,7 +6504,7 @@
     "Desc": "<p>专为移动设备设计的时间选择器。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:28:21.1653898+08:00",
+    "LastWriteTime": "2022-09-29T16:18:01.550343+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6557,7 +6568,7 @@
     "Desc": "<p>需要用户处理事务，又不希望跳转页面以致打断工作流程时，可以使用 <code>Modal</code> 在当前页面正中打开一个浮层，承载相应的操作。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:13:54.0449765+08:00",
+    "LastWriteTime": "2022-09-23T15:05:17.4594061+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6657,7 +6668,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MNavigationDrawer\">MNavigationDrawer</a></li>\n</ul>\n",
       "注意": "\n<!--alert:error-->\n<p>如果使用启用了 <strong>App</strong> 属性的 <code>MNavigationDrawer</code>，则不需要像示例中那样使用 <strong>Absolute</strong> 属性。</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p><strong>ExtensionOnHover</strong> 参数不会改变<strong>MMain</strong>的内容区域。 要使内容区域响应<strong>ExtensionOnHover</strong>，请绑定<strong>OnMiniVariantUpdate</strong> 到数据。</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3247122+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9831453+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6785,7 +6796,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:13:54.0469402+08:00",
+    "LastWriteTime": "2022-09-23T15:05:17.4624067+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6840,7 +6851,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3267048+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9851413+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6927,7 +6938,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3287054+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9871449+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7015,7 +7026,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3348635+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9941516+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7257,7 +7268,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning--> \n<p><code>MDatePicker</code> 接受ISO 8601 <strong>日期</strong> 字符串(YYYY-MM-DD)。 有关 ISO 8601 和其他标准的更多信息，请访问 ISO（国际标准化组织） <a href=\"https://www.iso.org/standards.html\">国际标准</a> 官方网页。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3377048+08:00",
+    "LastWriteTime": "2022-05-20T09:21:05.9971436+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7399,7 +7410,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3417042+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0021077+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7572,7 +7583,7 @@
     "Desc": "<p>提供全局服务调用Alert、Confirm、Prompt和Toast等弹出层组件。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:13:54.0509517+08:00",
+    "LastWriteTime": "2022-09-23T15:05:17.4894067+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7638,7 +7649,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3547148+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0220748+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7714,7 +7725,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3587048+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0270932+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7878,7 +7889,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3607127+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0290818+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -7987,7 +7998,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.361714+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0310764+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -8041,7 +8052,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3637136+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0330451+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8084,7 +8095,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3657064+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0350407+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8160,7 +8171,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3697059+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0390409+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8324,7 +8335,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3707042+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0410361+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8400,7 +8411,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3727066+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0430353+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8454,7 +8465,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n<li><a href=\"/api/MDataTableHeader\">MDataTableHeader</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3787041+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0510092+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8717,7 +8728,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3807065+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0530041+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8794,7 +8805,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n</ul>\n",
       "注意": "\n<!--alert:warning-->\n<p>当使用 <strong>Dark</strong> 属性和 <strong>不</strong> 提供自定义 <strong>Color</strong> 时，<code>MTabs</code>组件会将其颜色默认为 white。</p>\n<!--alert:warning-->\n<!--alert:warning-->\n<p>当使用包含必填输入字段的 <code>MTabItem</code> 时，你必须使用 <strong>eager</strong> prop 来验证尚未显示的必填字段。</p>\n<!--alert:warning-->\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3859742+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.05803+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8991,7 +9002,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.38872+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0619953+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -9120,7 +9131,7 @@
     "Desc": "<p>该组件用于通过使用上下文类型，图标和颜色向用户传达重要信息。这些默认类型有4种变体：<strong>Success</strong>、<strong>Info</strong>、<strong>Warning</strong> 和 <strong>Error</strong>。默认图标有助于表示每种类型所描述的不同动作，也可以自定义提示框的许多部分。</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-08-29T13:13:54.0592024+08:00",
+    "LastWriteTime": "2022-09-23T15:05:17.5034066+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -9198,7 +9209,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info-->\n<p>为了正确定位 <code>MTooltip</code>，需要一个位置支撑(<code>Top</code> | <code>Bottom</code> | <code>Left</code> | <code>Right</code>)。</p>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3907064+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0629924+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -9252,7 +9263,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTreeview\">MTreeview</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3947047+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0699727+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -9449,7 +9460,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.3961855+08:00",
+    "LastWriteTime": "2022-05-20T09:21:06.0709784+08:00",
     "DemoList": [
       {
         "Order": 0,
