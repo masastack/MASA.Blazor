@@ -1,10 +1,10 @@
-include:
-  - project: 'louzhijian/devops'
-    ref: master
-    file: 'devops/sonar-scanner.yml'
+# include:
+#   - project: 'louzhijian/devops'
+#     ref: master
+#     file: 'devops/sonar-scanner.yml'
 
 stages:
-  - sonarqube
+#   - sonarqube
   - packer
   - docker
   - deploy-dev
