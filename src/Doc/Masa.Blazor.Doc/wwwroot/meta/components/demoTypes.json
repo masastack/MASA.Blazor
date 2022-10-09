@@ -248,6 +248,7 @@
   "Demos.Components.FormInputs.children.Form.misc.Validation",
   "Demos.Components.FormInputs.children.Form.misc.ValidationEnumerable",
   "Demos.Components.FormInputs.children.Form.misc.ValidationEnumerableWithFluentValidation",
+  "Demos.Components.FormInputs.children.Form.misc.ValidationEnumerableWithValidationResult",
   "Demos.Components.FormInputs.children.Form.misc.ValidationWithSubmitAndClear",
   "Demos.Components.FormInputs.children.OtpInput.usage.Index",
   "Demos.Components.FormInputs.children.OtpInput.props.DarkTheme",
