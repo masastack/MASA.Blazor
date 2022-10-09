@@ -68,11 +68,11 @@
     public void SubmitOrder(FormContext context)
     {
         var validationResult = @"Validation failed: 
-                    -- Title: 'Title'不能为空。 Severity: Error
-                    -- Price: 'Price'必须在 0 (包含)和 20 (包含)之间。 Severity: Error
-                    -- Category.Name: 'Name'不能为空。 Severity: Error
-                    -- Customers[0].Name: 'Name'不能为空。 Severity: Error
-                    -- Customers[1].Age: 'Age'必须在 25 (包含)和 100 (包含)之间。 Severity: Error";
+                    -- Title: 'Title' is required. Severity: Error
+                    -- Price: 'Price' must be between 0 and 20. Severity: Error
+                    -- Category.Name: 'Name' is required. Severity: Error
+                    -- Customers[0].Name: 'Name' is required. Severity: Error
+                    -- Customers[1].Age: 'Age' must be between 25 and 100. Severity: Error";
         context.TryParseFormValidation(validationResult);
     }
 }
