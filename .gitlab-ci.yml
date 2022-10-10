@@ -30,7 +30,7 @@ packer:
     - git config --global https.proxy $PROXY_GATEWAY
     - git config --global http.proxy $PROXY_GATEWAY
     - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
-    - dotnet workload install wasm-tools
+    - dotnet workload install wasm-tools --temp-dir "/home/gitlab-runner/work/_temp"
     - dotnet workload list 
     - dotnet build src
     - dotnet pack src --include-symbols -p:PackageVersion=0.2.$CI_PIPELINE_ID
