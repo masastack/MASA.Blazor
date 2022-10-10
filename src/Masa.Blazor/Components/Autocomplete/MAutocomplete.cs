@@ -230,15 +230,7 @@ namespace Masa.Blazor
 
             if (nextItem is null)
             {
-                if (Multiple)
-                {
-                    IList<TItemValue> values = new List<TItemValue>();
-                    InternalValue = (TValue)values;
-                }
-                else
-                {
-                    InternalValue = default;
-                }
+                await SetValue(Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default);
             }
             else
             {
