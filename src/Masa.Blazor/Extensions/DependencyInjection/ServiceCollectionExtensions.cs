@@ -1,31 +1,36 @@
 ﻿using BlazorComponent.Web;
 using Masa.Blazor;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
-    public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services, Action<MasaBlazorOptions> optionsAction = null)
+    public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services)
     {
         services.AddBlazorComponent();
-
-        var options = new MasaBlazorOptions(MasaBlazorPreset.Breakpoint, MasaBlazorPreset.Theme);
-
-        optionsAction?.Invoke(options);
-
-        return services.AddMasaBlazor(options);
+        services.AddOptions<MasaBlazorOptions>();
+        return services.AddMasaBlazorInternal();
     }
 
-    private static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services, MasaBlazorOptions options)
+    public static IMasaBlazorBuilder AddMasaBlazor(this IServiceCollection services, Action<MasaBlazorOptions> optionsAction)
+    {
+        services.AddBlazorComponent();
+        services.AddOptions<MasaBlazorOptions>().Configure(optionsAction);
+        return services.AddMasaBlazorInternal();
+    }
+
+    private static IMasaBlazorBuilder AddMasaBlazorInternal(this IServiceCollection services)
     {
         services.TryAddScoped<Application>();
         services.TryAddScoped(serviceProvider =>
         {
             var application = serviceProvider.GetService<Application>();
             var window = serviceProvider.GetService<Window>();
-            options.Breakpoint.SetWindow(window);
-            return new MasaBlazor(options.Breakpoint, application, options.Theme);
+            var options = serviceProvider.GetService<IOptionsSnapshot<MasaBlazorOptions>>();
+            options.Value.Breakpoint.SetWindow(window);
+            return new MasaBlazor(options.Value.Breakpoint, application, options.Value.Theme);
         });
         services.TryAddScoped<IPopupService, PopupService>();
         services.TryAddScoped<IErrorHandler, MErrorHandler>();
