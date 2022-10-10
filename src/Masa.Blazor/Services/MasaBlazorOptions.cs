@@ -2,10 +2,10 @@
 
 public class MasaBlazorOptions
 {
-    public MasaBlazorOptions(Breakpoint breakpoint, Theme theme)
+    public MasaBlazorOptions()
     {
-        Breakpoint = breakpoint;
-        Theme = theme;
+        Breakpoint = MasaBlazorPreset.Breakpoint;
+        Theme = MasaBlazorPreset.Theme;
     }
 
     public bool RTL { get; set; }
