@@ -547,7 +547,7 @@ namespace Masa.Blazor
             {
                 if (value is TValue val)
                 {
-                    InternalValue = val;
+                    await SetValue(val);
                 }
 
                 if (closeOnSelect)
@@ -569,7 +569,7 @@ namespace Masa.Blazor
 
                 if (internalValues is TValue val)
                 {
-                    InternalValue = val;
+                    await SetValue(val);
                 }
             }
 
@@ -863,15 +863,7 @@ namespace Masa.Blazor
 
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
-            if (Multiple)
-            {
-                IList<TItemValue> values = new List<TItemValue>();
-                InternalValue = (TValue)values;
-            }
-            else
-            {
-                InternalValue = default;
-            }
+            await SetValue(Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default);
 
             if (OnClearClick.HasDelegate)
             {
@@ -939,7 +931,7 @@ namespace Masa.Blazor
             }
             else
             {
-                InternalValue = default(TValue);
+                await SetValue(default);
             }
 
             // if all items have been delete,
@@ -966,6 +958,18 @@ namespace Masa.Blazor
             }
 
             return func;
+        }
+
+        protected async Task SetValue(TValue value)
+        {
+            if (!EqualityComparer<TValue>.Default.Equals(InternalValue, value))
+            {
+                InternalValue = value;
+                if (OnChange.HasDelegate)
+                {
+                    await OnChange.InvokeAsync(value);
+                }
+            }
         }
     }
 }
