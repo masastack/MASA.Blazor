@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0-android</TargetFrameworks>
+        <TargetFrameworks>net6.0-ios;net6.0-android</TargetFrameworks>
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
         <!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
         <OutputType>Exe</OutputType>
@@ -15,7 +15,7 @@
         <ApplicationTitle>MauiBlueToothDemo</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.mauibluetoothdemo</ApplicationId>
+        <ApplicationId>com.cmasa.mauibluetoothdemo</ApplicationId>
         <ApplicationIdGuid>5EF99797-3EE1-4456-918B-08954EFEAE30</ApplicationIdGuid>
 
         <!-- Versions -->
@@ -28,6 +28,26 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(TargetFramework)'=='net6.0-ios'">
+      <CodesignKey>Apple Development: Created via API (C8X77K3TNL)</CodesignKey>
+      <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-ios|AnyCPU'">
+      <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
+      <MtouchProfiling>True</MtouchProfiling>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-ios|AnyCPU'">
+      <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
+      <MtouchProfiling>True</MtouchProfiling>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
+      <CodesignKey>Apple Development: Created via API (C8X77K3TNL)</CodesignKey>
+      <CodesignProvision>VS: WildCard Development</CodesignProvision>
     </PropertyGroup>
 
     <ItemGroup>
@@ -53,9 +73,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="Masa.Blazor.Maui.Plugin.Bluetooth">
-        <HintPath>..\Masa.Blazor.Maui.Plugin.Bluetooth\bin\Debug\net6.0-android\Masa.Blazor.Maui.Plugin.Bluetooth.dll</HintPath>
-      </Reference>
+      <ProjectReference Include="..\Masa.Blazor.Maui.Plugin.Bluetooth\Masa.Blazor.Maui.Plugin.Bluetooth.csproj" />
     </ItemGroup>
 
 </Project>

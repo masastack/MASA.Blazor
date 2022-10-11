@@ -3,29 +3,22 @@ using Android.Bluetooth.LE;
 
 namespace Masa.Blazor.Maui.Plugin.Bluetooth
 {
-    public class MasaMauiBluetoothService
+    public static partial class MasaMauiBluetoothService
     {
-        private readonly BluetoothManager _bluetoothManager;
-        private readonly BluetoothAdapter _bluetoothAdapter;
-        private readonly ScanSettings _settings;
-        private readonly DevicesCallback _callback;
-        public MasaMauiBluetoothService()
-        {
-            _bluetoothManager = (BluetoothManager)Android.App.Application.Context.GetSystemService(Android.App.Application.BluetoothService);
-            _bluetoothAdapter = _bluetoothManager?.Adapter;
-               _settings = new ScanSettings.Builder()
-                .SetScanMode(Android.Bluetooth.LE.ScanMode.Balanced)
-                ?.Build();
-            _callback = new DevicesCallback();
-        }
-
-        public bool IsEnabled()
+        public static BluetoothManager _manager = (BluetoothManager)Android.App.Application.Context.GetSystemService(Android.App.Application.BluetoothService);
+        private static BluetoothAdapter _bluetoothAdapter = _manager?.Adapter;
+        private static ScanSettings _settings = new ScanSettings.Builder()
+            .SetScanMode(Android.Bluetooth.LE.ScanMode.Balanced)
+            ?.Build();
+        private static DevicesCallback _callback = new DevicesCallback();
+        
+        public static bool PlatformIsEnabledIsEnabled()
         {
             return _bluetoothAdapter is {IsEnabled: true};
         }
-        public async Task<IReadOnlyCollection<BluetoothDevice>> ScanLeDeviceAsync()
+
+        private static async Task<IReadOnlyCollection<BluetoothDevice>> PlatformScanForDevices()
         {
-            //第一个参数可以设置过滤条件-蓝牙名称，名称前缀，服务号等,这里暂时不设置过滤条件
             _bluetoothAdapter.BluetoothLeScanner.StartScan(null, _settings, _callback);
 
             await Task.Run(() =>
@@ -34,22 +27,37 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             });
 
             _bluetoothAdapter.BluetoothLeScanner.StopScan(_callback);
+            _discoveredDevices = _callback.Devices.AsReadOnly();
 
-
-            return _callback.Devices.AsReadOnly();
+            return _discoveredDevices;
         }
-        
-        public async Task<bool> CheckAndRequestBluetoothPermission()
+
+        public static async Task SendDataAsync(string deviceName,Guid servicesUuid,Guid? characteristicsUuid, byte[] dataBytes, EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
+        {
+            BluetoothDevice blueDevice = _discoveredDevices.FirstOrDefault(o => o.Name == deviceName);
+
+            var primaryServices = await blueDevice.Gatt.GetPrimaryServicesAsync();
+            var primaryService = primaryServices.First(o => o.Uuid.Value == servicesUuid);
+
+            var characteristics = await primaryService.GetCharacteristicsAsync();
+            var characteristic = characteristics.FirstOrDefault(o => (o.Properties & GattCharacteristicProperties.Write) != 0);
+            if (characteristicsUuid != null)
+            {
+                characteristic = characteristics.FirstOrDefault(o => o.Uuid.Value == characteristicsUuid);
+            }
+
+            await characteristic.StartNotificationsAsync();
+            characteristic.CharacteristicValueChanged += gattCharacteristicValueChangedEventArgs;
+            await characteristic.WriteValueWithResponseAsync(dataBytes);
+        }
+
+        public static async Task<PermissionStatus> PlatformCheckAndRequestBluetoothPermission()
         {
             var status = await Permissions.CheckStatusAsync<BluetoothPermissions>();
 
-            if (status == PermissionStatus.Granted)
-                return true;
             status = await Permissions.RequestAsync<BluetoothPermissions>();
 
-            if (status == PermissionStatus.Granted)
-                return true;
-            return false;
+            return status;
         }
         private class DevicesCallback : ScanCallback
         {
@@ -102,7 +110,6 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             public override (string androidPermission, bool isRuntime)[] RequiredPermissions =>
                 new List<(string androidPermission, bool isRuntime)>
                 {
-                    //(global::Android.Manifest.Permission.AccessCoarseLocation, true),
                     (global::Android.Manifest.Permission.AccessFineLocation, true),
                     (global::Android.Manifest.Permission.Bluetooth, true),
                     (global::Android.Manifest.Permission.BluetoothAdmin, true),
