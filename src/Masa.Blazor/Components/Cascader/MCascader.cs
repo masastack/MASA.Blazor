@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor
+﻿using BlazorComponent.JSInterop;
+
+namespace Masa.Blazor
 {
     public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>, ICascader<TItem, TValue>
     {
@@ -21,7 +23,7 @@
         public override Action<TextFieldNumberProperty> NumberProps { get; set; }
 
         protected override IList<TItem> SelectedItems => FindSelectedItems(Items).ToList();
-
+        
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -49,9 +51,15 @@
                     attrs[nameof(ItemText)] = ItemText;
                     attrs[nameof(LoadChildren)] = LoadChildren;
                     attrs[nameof(ItemChildren)] = ItemChildren;
-                    attrs[nameof(MCascaderList<TItem, TValue>.OnSelect)] =
-                        CreateEventCallback<(TItem item, bool close)>((arg) => SelectItem(arg.item, arg.close));
+                    attrs[nameof(MCascaderList<TItem, TValue>.OnSelect)] = CreateEventCallback<(TItem item, bool close)>(HandleOnSelect);
                 });
+        }
+
+        private async Task HandleOnSelect((TItem item, bool close) arg)
+        {
+            await SelectItem(arg.item, arg.close);
+            Console.WriteLine($"MMMenu:{MMenu.ContentElement.Id}");
+            await Js.ScrollTo(MMenu.ContentElement, top: null, left: 1000d, behavior: ScrollBehavior.Smooth);
         }
 
         protected IEnumerable<TItem> FindSelectedItems(IEnumerable<TItem> items)
