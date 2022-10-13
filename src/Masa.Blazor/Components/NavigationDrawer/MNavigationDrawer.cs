@@ -225,11 +225,17 @@ namespace Masa.Blazor
                     {
                         if (val)
                         {
-                            await HideScroll();
+                            if (ShowOverlay)
+                            {
+                                await HideScroll();
+                            }
                         }
                         else
                         {
-                            await ShowScroll();
+                            if (!ShowOverlay)
+                            {
+                                await ShowScroll();
+                            }
                         }
 
                         StateHasChanged();
