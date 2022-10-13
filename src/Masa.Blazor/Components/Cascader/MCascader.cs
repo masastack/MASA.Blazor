@@ -23,7 +23,7 @@ namespace Masa.Blazor
         public override Action<TextFieldNumberProperty> NumberProps { get; set; }
 
         protected override IList<TItem> SelectedItems => FindSelectedItems(Items).ToList();
-        
+
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
@@ -55,11 +55,46 @@ namespace Masa.Blazor
                 });
         }
 
-        private async Task HandleOnSelect((TItem item, bool close) arg)
+        protected override async void OnMenuActiveChange(bool val)
         {
-            await SelectItem(arg.item, arg.close);
-            Console.WriteLine($"MMMenu:{MMenu.ContentElement.Id}");
+            base.OnMenuActiveChange(val);
+
+            Console.WriteLine($"menu active change: {val}");
+
+            if (val)
+            {
+                NextTick(async () =>
+                {
+                    await ScrollToEndAsync();
+                    StateHasChanged();
+                });
+
+                StateHasChanged();
+
+                // await ScrollToEndAsync();
+            }
+        }
+
+        private async Task HandleOnSelect((TItem item, bool isLast) arg)
+        {
+            if (ChangeOnSelect)
+            {
+                await SelectItem(arg.item, closeOnSelect: arg.isLast);
+            }
+            else if (arg.isLast)
+            {
+                await SelectItem(arg.item);
+            }
+            else
+            {
+                NextTick(ScrollToEndAsync);
+            }
+        }
+
+        private async Task ScrollToEndAsync()
+        {
             await Js.ScrollTo(MMenu.ContentElement, top: null, left: 1000d, behavior: ScrollBehavior.Smooth);
+            Console.WriteLine("scroll to end");
         }
 
         protected IEnumerable<TItem> FindSelectedItems(IEnumerable<TItem> items)
