@@ -4,7 +4,7 @@
                        Max="new TimeOnly(14, 59, 59)">
         <ActivatorContent>
             <MButton Color="primary" Class="text-capitalize" Text @attributes="@context.Attrs">
-                @(_time.ToLongTimeString())
+                @_time.ToString("HH:mm:ss")
             </MButton>
         </ActivatorContent>
     </PMobileTimePicker>
