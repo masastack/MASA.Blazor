@@ -1,4 +1,5 @@
 ﻿using BlazorComponent.JSInterop;
+using BlazorComponent.Web;
 
 namespace Masa.Blazor
 {
@@ -33,7 +34,8 @@ namespace Masa.Blazor
                 {
                     cssBuilder
                         .Add("m-cascader");
-                });
+                })
+                .Apply("lists", cssBuilder => { cssBuilder.Add("m-cascader-lists"); });
 
             AbstractProvider
                 .ApplyCascaderDefault<TItem, TValue>()
@@ -42,7 +44,6 @@ namespace Masa.Blazor
                     attrs[nameof(MMenu.OffsetY)] = true;
                     attrs[nameof(MMenu.MinWidth)] = (StringNumber)(Dense ? 120 : 180);
                     attrs[nameof(MMenu.CloseOnContentClick)] = false;
-                    attrs[nameof(MMenu.ContentStyle)] = "display:flex;overflow-x:auto;";
                 })
                 .Apply(typeof(BCascaderList<,>), typeof(MCascaderList<TItem, TValue>), attrs =>
                 {
@@ -55,26 +56,6 @@ namespace Masa.Blazor
                 });
         }
 
-        protected override async void OnMenuActiveChange(bool val)
-        {
-            base.OnMenuActiveChange(val);
-
-            Console.WriteLine($"menu active change: {val}");
-
-            if (val)
-            {
-                NextTick(async () =>
-                {
-                    await ScrollToEndAsync();
-                    StateHasChanged();
-                });
-
-                StateHasChanged();
-
-                // await ScrollToEndAsync();
-            }
-        }
-
         private async Task HandleOnSelect((TItem item, bool isLast) arg)
         {
             if (ChangeOnSelect)
@@ -84,17 +65,22 @@ namespace Masa.Blazor
             else if (arg.isLast)
             {
                 await SelectItem(arg.item);
-            }
-            else
-            {
-                NextTick(ScrollToEndAsync);
+                await ScrollToInlineStartAsync(); // todo: not work in sometimes.
             }
         }
 
-        private async Task ScrollToEndAsync()
+        protected override async void OnMenuActiveChange(bool val)
         {
-            await Js.ScrollTo(MMenu.ContentElement, top: null, left: 1000d, behavior: ScrollBehavior.Smooth);
-            Console.WriteLine("scroll to end");
+            base.OnMenuActiveChange(val);
+            if (!val)
+            {
+                await ScrollToInlineStartAsync();
+            }
+        }
+
+        private async Task ScrollToInlineStartAsync()
+        {
+            await Js.ScrollTo($"{MMenu.ContentElement.GetSelector()} > .m-cascader-lists", top: null, left: 0);
         }
 
         protected IEnumerable<TItem> FindSelectedItems(IEnumerable<TItem> items)
