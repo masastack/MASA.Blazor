@@ -104,7 +104,11 @@ public partial class MCarousel : MWindow, ICarousel, IDisposable
 
     private void TimerOnElapsed(object sender, ElapsedEventArgs e)
     {
-        Next();
+        InvokeAsync(() =>
+        {
+            Next();
+            StateHasChanged();
+        });
     }
 
     protected override void SetComponentClass()
