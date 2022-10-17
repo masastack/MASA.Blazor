@@ -304,18 +304,20 @@ namespace Masa.Blazor
                     await MMenu.AddOutsideClickEventListener();
                 }
 
-                MMenu.AfterShowContent = isLazyContent =>
-                {
-                    if (isLazyContent)
-                    {
-                        OnMenuActiveChange(true);
-                    }
-
-                    return Task.CompletedTask;
-                };
+                MMenu.AfterShowContent = OnMenuAfterShowContent;
 
                 StateHasChanged();
             }
+        }
+
+        protected virtual Task OnMenuAfterShowContent(bool isLazyContent)
+        {
+            if (isLazyContent)
+            {
+                OnMenuActiveChange(true);
+            }
+
+            return Task.CompletedTask;
         }
 
         protected virtual async void OnMenuActiveChange(bool val)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using BlazorComponent.JSInterop;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace Masa.Blazor.Presets;
 
@@ -281,7 +282,7 @@ public partial class ModalBase
     {
         if (AutoScrollToTop && BodyRef?.Ref != null)
         {
-            await JsRuntime.InvokeVoidAsync(JsInteropConstants.ScrollToPosition, BodyRef.Ref, 0);
+            await JsRuntime.ScrollTo(BodyRef.Ref, 0);
         }
     }
 
