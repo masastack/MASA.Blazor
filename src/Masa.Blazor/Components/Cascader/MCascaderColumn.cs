@@ -1,48 +1,43 @@
-﻿namespace Masa.Blazor
+﻿using BlazorComponent.Web;
+
+namespace Masa.Blazor
 {
-    public class MCascaderList<TItem, TValue> : BCascaderList<TItem, TValue>
+    public class MCascaderColumn<TItem, TValue> : BCascaderColumn<TItem, TValue>
     {
         [Parameter]
         public bool Dense { get; set; }
-
         [Parameter]
+
         public string Color { get; set; } = "primary";
 
         protected override string Icon => "mdi-chevron-right";
 
+        protected override string GetSelectedItemSelector(int index)
+        {
+            return $"{ItemGroup.Ref.GetSelector()} > .m-cascader__column-item:nth-child({index + 1})";
+        }
+
         protected override void SetComponentClass()
         {
-            CssProvider
-                .Apply(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-cascader-list");
-                })
-                .Apply("wrapper", cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-cascader-list__wrapper")
-                        .AddIf("m-cascader-list__wrapper--dense", () => Dense);
-                });
-
             AbstractProvider
-                .Apply(typeof(BCascaderList<,>), typeof(MCascaderList<TItem, TValue>), attrs =>
+                .Apply(typeof(BCascaderColumn<,>), typeof(MCascaderColumn<TItem, TValue>), attrs =>
                 {
-                    attrs[nameof(ChangeOnSelect)] = ChangeOnSelect;
                     attrs[nameof(Dense)] = Dense;
                     attrs[nameof(ItemText)] = ItemText;
                     attrs[nameof(LoadChildren)] = LoadChildren;
                     attrs[nameof(ItemChildren)] = ItemChildren;
                     attrs[nameof(OnSelect)] = OnSelect;
-                 })
+                })
                 .Apply(typeof(BList), typeof(MList), attrs =>
                 {
+                    attrs[nameof(MList.Class)] = "m-cascader__column";
                     attrs[nameof(MList.Dense)] = Dense;
                 })
                 .Apply(typeof(BListItem), typeof(MListItem), attrs =>
                 {
+                    attrs[nameof(MListItem.Class)] = "m-cascader__column-item";
                     attrs[nameof(MListItem.Dense)] = Dense;
-                    attrs[nameof(MListItem.ActiveClass)] = new CssBuilder().AddTextColor(Color).Class; ;
+                    attrs[nameof(MListItem.ActiveClass)] = new CssBuilder().AddTextColor(Color).Class;
                     if (attrs.Data is TItem item)
                     {
                         attrs[nameof(MListItem.IsActive)] = EqualityComparer<TItem>.Default.Equals(SelectedItem, item);

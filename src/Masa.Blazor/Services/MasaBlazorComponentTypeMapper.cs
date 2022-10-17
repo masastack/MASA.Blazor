@@ -49,7 +49,7 @@
         private readonly Dictionary<Type, Type> _genericMapper = new()
         {
             { typeof(BSelectList<,,>), typeof(MSelectList<,,>) },
-            { typeof(BCascaderList<,>), typeof(MCascaderList<,>) },
+            { typeof(BCascaderColumn<,>), typeof(MCascaderColumn<,>) },
             { typeof(BDataTableRow<>), typeof(MDataTableRow<>) },
             { typeof(BDataTableMobileRow<>), typeof(MDataTableMobileRow<>) },
             { typeof(BTreeviewNode<,>), typeof(MTreeviewNode<,>) },
