@@ -1,7 +1,6 @@
 [submodule "src/BlazorComponent"]
 	path = src/BlazorComponent
 	url = https://github.com/BlazorComponent/BlazorComponent.git
-	
 [submodule "src/Masa.Docs"]
 	path = src/Masa.Docs
 	url = https://github.com/masastack/MASA.Docs.git
