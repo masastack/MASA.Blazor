@@ -33,8 +33,8 @@ namespace Masa.Blazor
         [Parameter]
         public IList<TItem> Items
         {
-            get => GetValue((IList<TItem>)new List<TItem>());
-            set => SetValue(value);
+            get => GetValue((IList<TItem>)new List<TItem>(), disableIListAlwaysNotifying: true);
+            set => SetValue(value, disableIListAlwaysNotifying: true);
         }
 
         [Parameter]
@@ -544,6 +544,8 @@ namespace Masa.Blazor
 
         protected virtual async Task SelectItem(TItem item, bool closeOnSelect = true)
         {
+            Console.WriteLine($"selectItem, closeOnSelect:{closeOnSelect}");
+
             var value = ItemValue(item);
             if (!Multiple)
             {
@@ -918,6 +920,8 @@ namespace Masa.Blazor
             }
 
             SelectedItems = selectedItems;
+
+            StateHasChanged();
         }
 
         protected int GetMenuIndex()
