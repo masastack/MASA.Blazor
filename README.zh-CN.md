@@ -23,13 +23,9 @@
 
 基于Material设计规范和BlazorComponent的交互能力提供标准的基础组件库。提供如布局、弹框标准、Loading、全局异常处理等标准场景的预置组件。从更多实际场景出发，满足更多用户和场景的需求，最大的减少开发者的时间成本。缩短开发周期提高开发效率。并提供一套Web解决方案示例 - [MASA Blazor Pro](https://github.com/BlazorComponent/Masa.Blazor.Pro) 有多种常见场景和预设布局等精彩内容。
 
-
-
 ## 为什么选择MASA Blazor？
 
 MASA Blazor 基于Material设计规范，每一个组件都经过精心设计，具有模块化、响应式和优秀的性能。MASA Blazor 是由一支专业的全职技术团队进行定期维护升级，高效的响应速度，多元化的解决方案，长期提供支持，并提供企业级支持。目前已在几家知名企业使用，后续MASA Stack产品系列也将持续使用，除了可以保证项目质量，还可以持续的增加新的组件和功能。MASA Stack除了为开发者提供众多中台类开源项目，其最基础的组成部分之一MASA Blazor也希望可以打造成最实用的组件库。
-
-
 
 ## 特性
 
@@ -42,6 +38,7 @@ MASA Blazor 基于Material设计规范，每一个组件都经过精心设计，
 - 知名企业选择：该技术框架被多家知名企业选择使用，未来MASA Stack产品线也将一直使用，持续增加新功能
 
 # 统计
+
 ![Alt](https://repobeats.axiom.co/api/embed/2728adbcfa084a3f50de3587080404ee203c80e6.svg "Repobeats analytics image")
 
 ## 快速使用
@@ -89,11 +86,7 @@ cd Masa.Test\Masa.Test.Server
 dotnet run
 ```
 
-
-
 ![masabp](imgs/masabp.gif)
-
-
 
 ### 现有项目
 
@@ -139,13 +132,11 @@ services.AddMasaBlazor();
 
 ```html
 <MApp>
-	//其它布局内容
+    //其它布局内容
 </MApp>
 ```
 
 > 更多详情 ：[https://blazor.masastack.com/](https://blazor.masastack.com/ "https://blazor.masastack.com/")
-
-
 
 ## 本地开发
 
@@ -157,9 +148,7 @@ services.AddMasaBlazor();
 ### 克隆代码
 
 ```shell
-git clone git@github.com:BlazorComponent/Masa.Blazor.git
-cd Masa.Blazor/src
-git clone git@github.com:BlazorComponent/BlazorComponent.git
+git clone --recursive git@github.com:BlazorComponent/MASA.Blazor.git
 ```
 
 ### 运行文档站点
@@ -173,8 +162,6 @@ dotnet run
 
 推荐使用 chrome 或 edge 访问 `http://localhost:5000/`
 
-
-
 ## 相关资源
 
 - [Blazor 官方文档](https://docs.microsoft.com/zh-cn/aspnet/core/blazor/?WT.mc_id=DT-MVP-5004174)
@@ -187,14 +174,10 @@ dotnet run
 - [练习 - 数据绑定和事件](https://docs.microsoft.com/zh-cn/learn/modules/build-blazor-webassembly-visual-studio-code/7-exercise-razor-binding?WT.mc_id=DT-MVP-5004174)
 - [总结](https://docs.microsoft.com/zh-cn/learn/modules/build-blazor-webassembly-visual-studio-code/8-summary?WT.mc_id=DT-MVP-5004174)
 
-
-
 ## 相关项目
 
 - [BlazorComponent（无样式的底层组件框架）](https://github.com/BlazorComponent/BlazorComponent)
 - [MASA Blazor Pro（包含各种业务场景的示例）](https://github.com/BlazorComponent/Masa.Blazor.Pro)
-
-
 
 ## 浏览器支持
 
@@ -204,10 +187,10 @@ dotnet run
 
 ![ios](https://img.shields.io/badge/ios-supported-success.svg?logo=apple&logoColor=white)![Andriod](https://img.shields.io/badge/andriod-suported-success.svg?logo=android)
 
-|         |  Chrome     |  Firefox     |  Safari     | Microsoft Edge |
-| ------- | ---------   | ---------    | ------      | -------------- |
-| iOS     | Supported   | Supported    | Supported   | Supported      |
-| Android | Supported   | Supported    | N/A         | Supported      |
+|         | Chrome    | Firefox   | Safari    | Microsoft Edge |
+| ------- | --------- | --------- | --------- | -------------- |
+| iOS     | Supported | Supported | Supported | Supported      |
+| Android | Supported | Supported | N/A       | Supported      |
 
 ### 桌面设备
 
@@ -221,8 +204,6 @@ dotnet run
 
 > 由于 [WebAssembly](https://webassembly.org) 的限制，Blazor WebAssembly 不支持 IE 浏览器，但 Blazor Server 支持 IE 11†。 详见[官网说明](https://docs.microsoft.com/zh-cn/aspnet/core/blazor/supported-platforms?view=aspnetcore-3.1&WT.mc_id=DT-MVP-5003987)。
 
-
-
 ## 如何贡献
 
 1. Fork & Clone
@@ -232,8 +213,6 @@ dotnet run
 
 如果你希望参与贡献，欢迎 [Pull Request](https://github.com/BlazorComponent/Masa.Blazor/pulls)，或给我们 [报告 Bug](https://github.com/BlazorComponent/Masa.Blazor/issues/new) 。
 
-
-
 ## 贡献者
 
 感谢所有为本项目做出过贡献的朋友。
@@ -242,27 +221,19 @@ dotnet run
     <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" /> 
 </a>
 
-
-
 ## 交流
 
-QQ群 | 微信公众号 | 微信客服
-:---:|:---:|:---:
-![masa.blazor-qq](./imgs/masa.blazor-qq-group.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-public-account.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-customer-service.png)
-
-
+| QQ群                                                | 微信公众号                                                               | 微信客服                                                                  |
+|:--------------------------------------------------:|:-------------------------------------------------------------------:|:---------------------------------------------------------------------:|
+| ![masa.blazor-qq](./imgs/masa.blazor-qq-group.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-public-account.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-customer-service.png) |
 
 ## 开发团队
 
 数闪技术团队，是一支高效，稳定，创新的团队。团队秉承着丰富Blazor生态的初心，去不断努力，为开发人员带来更好的体验是数闪技术团队的追求。感谢各位的支持和使用。
 
-
-
 ## 行为准则
 
 本项目采用了《贡献者公约》所定义的行为准则，以明确我们社区的预期行为。更多信息请见 [MASA Stack Community Code of Conduct](https://github.com/masastack/community/blob/main/CODE-OF-CONDUCT.md).
-
-
 
 ## 许可声明
 

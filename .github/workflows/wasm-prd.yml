@@ -10,7 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: git pull
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
+      with:
+        submodules: 'recursive'
     - name: setting dotnet 
       uses: actions/setup-dotnet@v1
       with:
@@ -18,8 +20,6 @@ jobs:
         include-prerelease: true
     - name: setting tools
       run: dotnet workload install wasm-tools
-    - name: dependencies
-      run: git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
     - name: build
       run: dotnet build src
     - name: publish
