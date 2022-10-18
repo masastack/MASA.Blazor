@@ -13,7 +13,7 @@
         </MMobilePickerView>
     </MCol>
     <MCol Cols="12" Md="6" Class="text-center">
-        Selected: @string.Join(" ", _selected.Select(s => s.Name))
+        @(_selected.Any() ? "Selected:" + string.Join(" ", _selected.Select(s => s.Name)) : "Please select")
     </MCol>
 </MRow>
 
