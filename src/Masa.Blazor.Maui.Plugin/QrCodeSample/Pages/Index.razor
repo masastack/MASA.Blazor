@@ -1,0 +1,22 @@
+﻿@page "/"
+@using Masa.Blazor.Maui.Plugin.QrCode
+
+<div class="text-center">
+    <button class="btn btn-warning" @onclick="ReadBarcode">Scan barcodes</button>
+</div>
+
+<div class="mt-3">Barcode: @_barcodeJustRead</div>
+
+@code {
+    private string _barcodeJustRead;
+
+    private void ReadBarcode()
+    {
+        MasaMauiBarcodeService.ReadBarcode(BarcodeReaderMauiComponent_OnBarcodeDetected);
+    }
+    private void BarcodeReaderMauiComponent_OnBarcodeDetected(string barcodeResult)
+    {
+        _barcodeJustRead = barcodeResult;
+        StateHasChanged();
+    }
+}

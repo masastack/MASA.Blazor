@@ -11,9 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.Maui.Plugin.Aud
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlueTooth", "BlueTooth", "{778735C1-2790-4972-A097-AEA5DAF88EE3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.Maui.Plugin.BlueToothSample", "Masa.Blazor.Maui.Plugin.BlueToothSample\Masa.Blazor.Maui.Plugin.BlueToothSample.csproj", "{AEE98202-EAFB-4A4C-8165-39C1ED0D004C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasaSample", "MasaSample\MasaSample.csproj", "{AEE98202-EAFB-4A4C-8165-39C1ED0D004C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.Maui.Plugin.Bluetooth", "Masa.Blazor.Maui.Plugin.Bluetooth\Masa.Blazor.Maui.Plugin.Bluetooth.csproj", "{2C2AA6F2-761F-4044-B801-9EC557F73FDD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QrCode", "QrCode", "{D75877F7-4AD8-4DDD-BBD4-907389D2BF3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Maui.Plugin.QrCode", "Masa.Blazor.Maui.Plugin.QrCode\Masa.Blazor.Maui.Plugin.QrCode.csproj", "{D676783A-B4BF-4FB9-82CC-C60263E06094}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QrCodeSample", "QrCodeSample\QrCodeSample.csproj", "{DB2EB0CC-063E-490F-A12B-6FF38D3470E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +49,16 @@ Global
 		{2C2AA6F2-761F-4044-B801-9EC557F73FDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C2AA6F2-761F-4044-B801-9EC557F73FDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C2AA6F2-761F-4044-B801-9EC557F73FDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D676783A-B4BF-4FB9-82CC-C60263E06094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D676783A-B4BF-4FB9-82CC-C60263E06094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D676783A-B4BF-4FB9-82CC-C60263E06094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D676783A-B4BF-4FB9-82CC-C60263E06094}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB2EB0CC-063E-490F-A12B-6FF38D3470E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB2EB0CC-063E-490F-A12B-6FF38D3470E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB2EB0CC-063E-490F-A12B-6FF38D3470E3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DB2EB0CC-063E-490F-A12B-6FF38D3470E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB2EB0CC-063E-490F-A12B-6FF38D3470E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB2EB0CC-063E-490F-A12B-6FF38D3470E3}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +68,8 @@ Global
 		{793C1501-17D9-4995-A2C1-0AB49CA4B640} = {64BC253C-AA93-4D31-9F5C-967DD6ED6CA0}
 		{AEE98202-EAFB-4A4C-8165-39C1ED0D004C} = {778735C1-2790-4972-A097-AEA5DAF88EE3}
 		{2C2AA6F2-761F-4044-B801-9EC557F73FDD} = {778735C1-2790-4972-A097-AEA5DAF88EE3}
+		{D676783A-B4BF-4FB9-82CC-C60263E06094} = {D75877F7-4AD8-4DDD-BBD4-907389D2BF3E}
+		{DB2EB0CC-063E-490F-A12B-6FF38D3470E3} = {D75877F7-4AD8-4DDD-BBD4-907389D2BF3E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F999AB5B-4C79-44A5-A1BA-90C268DFB039}

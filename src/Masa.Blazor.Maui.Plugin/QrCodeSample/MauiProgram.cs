@@ -1,6 +1,8 @@
-﻿using Masa.Blazor.Maui.Plugin.AudioPlayerSample.Data;
+﻿using Microsoft.AspNetCore.Components.WebView.Maui;
+using QrCodeSample.Data;
+using ZXing.Net.Maui;
 
-namespace Masa.Blazor.Maui.Plugin.AudioPlayerSample
+namespace QrCodeSample
 {
     public static class MauiProgram
     {
@@ -9,6 +11,7 @@ namespace Masa.Blazor.Maui.Plugin.AudioPlayerSample
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseBarcodeReader()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -20,7 +23,7 @@ namespace Masa.Blazor.Maui.Plugin.AudioPlayerSample
 #endif
 
             builder.Services.AddSingleton<WeatherForecastService>();
-            //builder.Services.AddMasaBlazor();
+
             return builder.Build();
         }
     }
