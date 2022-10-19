@@ -123,16 +123,8 @@ namespace Masa.Blazor
             base.OnWatcherInitialized();
 
             Watcher
-                .Watch<string>(nameof(InternalSearch), (val) =>
-                {
-                    _ = SetValueByJsInterop(val);
-                    Console.WriteLine($"set value by js interop: {val}");
-                })
-                .Watch<List<TItem>>(nameof(FilteredItems), OnFilteredItemsChanged)
-                .Watch<IList<TItem>>(nameof(Items), (n, old) =>
-                {
-                    Console.WriteLine($"ItemsChanged??new:{n?.GetHashCode()} old:{old?.GetHashCode()}");
-                });
+                .Watch<string>(nameof(InternalSearch), (val) => _ = SetValueByJsInterop(val))
+                .Watch<List<TItem>>(nameof(FilteredItems), OnFilteredItemsChanged);
         }
 
         protected override void SetComponentClass()
@@ -171,11 +163,6 @@ namespace Masa.Blazor
 
         protected override async Task SelectItem(TItem item, bool closeOnSelect = true)
         {
-            // if (GetText(item) != InternalSearch)
-            // {
-            //     InternalSearch = null;
-            // }
-
             await base.SelectItem(item, closeOnSelect);
             SetSearch();
         }
@@ -392,7 +379,6 @@ namespace Masa.Blazor
                 if (!Multiple || string.IsNullOrEmpty(InternalSearch) || !IsMenuActive)
                 {
                     InternalSearch = (SelectedItems.Count == 0 || Multiple || HasSlot) ? null : GetText(SelectedItem);
-                    Console.WriteLine($"InternalSearch:{InternalSearch}");
                     StateHasChanged();
                 }
             });

@@ -544,8 +544,6 @@ namespace Masa.Blazor
 
         protected virtual async Task SelectItem(TItem item, bool closeOnSelect = true)
         {
-            Console.WriteLine($"selectItem, closeOnSelect:{closeOnSelect}");
-
             var value = ItemValue(item);
             if (!Multiple)
             {
