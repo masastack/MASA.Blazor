@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: 'recursive'
-        run: git submodule foreach git checkout main
+      - run: git submodule foreach git checkout main
       - name: setting dotnet 
         uses: actions/setup-dotnet@v1
         with:
