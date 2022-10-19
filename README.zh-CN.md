@@ -86,7 +86,6 @@ cd Masa.Test\Masa.Test.Server
 dotnet run
 ```
 
-
 ### 现有项目
 
 - 安装Nuget包
@@ -148,6 +147,7 @@ services.AddMasaBlazor();
 
 ```shell
 git clone --recursive git@github.com:BlazorComponent/MASA.Blazor.git
+git submodule foreach git checkout main
 ```
 
 ### 运行文档站点

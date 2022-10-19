@@ -86,7 +86,6 @@ cd Masa.Test
 dotnet run
 ```
 
-
 ### Existing project
 
 * Install Nuget package 
@@ -148,6 +147,7 @@ services.AddMasaBlazor();
 
 ```shell
 git clone --recursive git@github.com:BlazorComponent/MASA.Blazor.git
+git submodule foreach git checkout main
 ```
 
 ### Run doc server
