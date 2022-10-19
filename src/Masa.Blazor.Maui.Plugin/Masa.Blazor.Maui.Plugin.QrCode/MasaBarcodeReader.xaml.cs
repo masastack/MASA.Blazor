@@ -6,7 +6,7 @@ public partial class MasaBarcodeReader : ContentPage
 {
     public delegate void BarcodeDetected(string barcodeResult);
     public event BarcodeDetected OnBarcodeDetected;
-    private bool HasResult;
+    private bool _hasResult;
     public MasaBarcodeReader()
     {
         InitializeComponent();
@@ -19,7 +19,7 @@ public partial class MasaBarcodeReader : ContentPage
     }
     private void CameraBarcodeReaderView_BarcodesDetected(object sender, BarcodeDetectionEventArgs e)
     {
-        if (!HasResult)
+        if (!_hasResult)
         {
             Dispatcher.Dispatch(() =>
             {
@@ -27,7 +27,7 @@ public partial class MasaBarcodeReader : ContentPage
                 {
                     // Notify callers that a barcode was read
                     OnBarcodeDetected(e.Results[0].Value);
-                    HasResult = true;
+                    _hasResult = true;
                     CloseReader();
                 }
             });
