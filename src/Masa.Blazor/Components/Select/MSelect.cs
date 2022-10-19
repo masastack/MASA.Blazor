@@ -33,8 +33,8 @@ namespace Masa.Blazor
         [Parameter]
         public IList<TItem> Items
         {
-            get => GetValue((IList<TItem>)new List<TItem>());
-            set => SetValue(value);
+            get => GetValue((IList<TItem>)new List<TItem>(), disableIListAlwaysNotifying: true);
+            set => SetValue(value, disableIListAlwaysNotifying: true);
         }
 
         [Parameter]
@@ -918,6 +918,8 @@ namespace Masa.Blazor
             }
 
             SelectedItems = selectedItems;
+
+            StateHasChanged();
         }
 
         protected int GetMenuIndex()
