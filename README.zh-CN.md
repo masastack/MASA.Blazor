@@ -86,7 +86,6 @@ cd Masa.Test\Masa.Test.Server
 dotnet run
 ```
 
-![masabp](https://cdn.masastack.com/doc/github/masabp.gif)
 
 ### 现有项目
 
