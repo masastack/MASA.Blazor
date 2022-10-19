@@ -23,13 +23,9 @@ English| [简体中文](./README.zh-CN.md)
 
 Provide a standard basic component library based on Material design specifications and BlazorComponent's interactive capabilities. Provides preset components for standard scenarios such as layout, frame standard, Loading, and global exception handling. Starting from more practical scenarios, to meet the needs of more users and scenarios, and to minimize the time cost of developers. Shorten the development cycle and improve development efficiency. And provide a set of examples of Web solutions - [MASA Blazor Pro](https://github.com/BlazorComponent/Masa.Blazor.Pro) has a variety of common scenes and preset layouts and other exciting content.
 
-
-
 ## Why choose MASA Blazor?
 
 MASA Blazor is based on the Material design specification, and each component is carefully designed, with modularity, responsiveness and excellent performance. MASA Blazor is regularly maintained and upgraded by a professional full-time technical team, efficient response speed, diversified solutions, long-term support, and enterprise-level support. At present, it has been used in several well-known companies, and the follow-up MASA Stack product series will continue to be used. In addition to ensuring the quality of the project, it can also continue to add new components and functions. In addition to providing developers with many mid- and Taiwan-based open source projects, MASA Stack, one of its most basic components, MASA Blazor, also hopes to be the most practical component library.
-
-
 
 ## Feature
 
@@ -42,6 +38,7 @@ MASA Blazor is based on the Material design specification, and each component is
 - Choice of well-known companies: This technology framework has been chosen by many well-known companies, and the MASA Stack product line will continue to be used in the future, and new functions will continue to be added
 
 # Stats
+
 ![Alt](https://repobeats.axiom.co/api/embed/2728adbcfa084a3f50de3587080404ee203c80e6.svg "Repobeats analytics image")
 
 # Getting started
@@ -89,9 +86,6 @@ cd Masa.Test
 dotnet run
 ```
 
-![masabp](imgs/masabp.gif)
-
-
 
 ### Existing project
 
@@ -111,18 +105,18 @@ services.AddMasaBlazor();
 
 ```html
 <html lang="en">
-	<head>
-		<!--Style-->
-		<link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet">
-		<!--Font-->
-		<link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
-		<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">	
-	</head>
-	<body>
-		<!--Script (try to put it at the end of the body)-->
-		<script src="_content/BlazorComponent/js/blazor-component.js"></script>
-	</body>
+    <head>
+        <!--Style-->
+        <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet">
+        <!--Font-->
+        <link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+        <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">    
+    </head>
+    <body>
+        <!--Script (try to put it at the end of the body)-->
+        <script src="_content/BlazorComponent/js/blazor-component.js"></script>
+    </body>
 </html>
 ```
 
@@ -137,13 +131,11 @@ services.AddMasaBlazor();
 
 ```html
 <MApp>
-	//Other layout content
+    //Other layout content
 </MApp>
 ```
 
 > See more ：[https://blazor.masastack.com/](https://blazor.masastack.com/ "https://blazor.masastack.com/")
-
-
 
 ## Local development
 
@@ -155,9 +147,7 @@ services.AddMasaBlazor();
 ### Clone code
 
 ```shell
-git clone git@github.com:BlazorComponent/Masa.Blazor.git
-cd Masa.Blazor/src
-git clone git@github.com:BlazorComponent/BlazorComponent.git
+git clone --recursive git@github.com:BlazorComponent/MASA.Blazor.git
 ```
 
 ### Run doc server
@@ -171,8 +161,6 @@ dotnet run
 
 Recommended use chrome or edge to visit `http://localhost:5000/`
 
-
-
 # Related resources
 
 - [Blazor official document](https://docs.microsoft.com/en-us/aspnet/core/blazor/?WT.mc_id=DT-MVP-5004174)
@@ -185,14 +173,10 @@ Recommended use chrome or edge to visit `http://localhost:5000/`
 - [Exercise-data binding and events ](https://docs.microsoft.com/en-us/learn/modules/build-blazor-webassembly-visual-studio-code/7-exercise-razor-binding?WT.mc_id=DT-MVP-5004174)
 - [Summarize](https://docs.microsoft.com/en-us/learn/modules/build-blazor-webassembly-visual-studio-code/8-summary?WT.mc_id=DT-MVP-5004174)
 
-
-
-# Related projects 
+# Related projects
 
 - [BlazorComponent（Unstyled underlying component framework）](https://github.com/BlazorComponent/BlazorComponent)
 - [MASA Blazor Pro（Contains examples of various business scenarios）](https://github.com/BlazorComponent/Masa.Blazor.Pro)
-
-
 
 ## Supported browsers
 
@@ -202,10 +186,10 @@ Recommended use chrome or edge to visit `http://localhost:5000/`
 
 ![ios](https://img.shields.io/badge/ios-supported-success.svg?logo=apple&logoColor=white)![Andriod](https://img.shields.io/badge/andriod-suported-success.svg?logo=android)
 
-|         |  Chrome     |  Firefox     |  Safari     | Microsoft Edge |
-| ------- | ---------   | ---------    | ------      | -------------- |
-| iOS     | Supported   | Supported    | Supported   | Supported      |
-| Android | Supported   | Supported    | N/A         | Supported      |
+|         | Chrome    | Firefox   | Safari    | Microsoft Edge |
+| ------- | --------- | --------- | --------- | -------------- |
+| iOS     | Supported | Supported | Supported | Supported      |
+| Android | Supported | Supported | N/A       | Supported      |
 
 ### Desktop devices
 
@@ -219,16 +203,12 @@ Recommended use chrome or edge to visit `http://localhost:5000/`
 
 > Due to WebAssembly restriction, Blazor WebAssembly doesn't support IE browser, but Blazor Server supports IE 11† with additional polyfills. See official documentation
 
-
-
-## How to contribute 
+## How to contribute
 
 1. Fork & Clone
 2. Create Feature_xxx branch
 3. Commit with commit message, like `feat:add MButton`
 4. Create Pull Request
-
-
 
 ## Contributors
 
@@ -238,25 +218,19 @@ Thanks to all the friends who have contributed to this project.
     <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" /> 
 </a>
 
+## Interactive
 
-
-## Interactive 
-
-QQ group | WX public account| WX Customer Service
-:---:|:---:|:---:
-![masa.blazor-qq](./imgs/masa.blazor-qq-group.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-public-account.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-customer-service.png)
+| QQ group                                           | WX public account                                                   | WX Customer Service                                                   |
+|:--------------------------------------------------:|:-------------------------------------------------------------------:|:---------------------------------------------------------------------:|
+| ![masa.blazor-qq](./imgs/masa.blazor-qq-group.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-public-account.png) | ![masa.blazor-weixin](./imgs/masa.blazor-wechat-customer-service.png) |
 
 ## Development team
 
 The Digital Flash technical team is an efficient, stable and innovative team. The team adheres to the original intention of enriching the Blazor ecosystem, and it is the pursuit of the Digital Flash technical team to continue to work hard to bring a better experience to the developers. Thank you for your support and use.
 
-
-
-## Code of conduct 
+## Code of conduct
 
 This project adopts the code of conduct defined in the "Contributors Convention" to clarify the expected behavior of our community. For more information, see  [MASA Stack Community Code of Conduct](https://github.com/masastack/community/blob/main/CODE-OF-CONDUCT.md).
-
-
 
 ## License
 
