@@ -245,10 +245,11 @@ namespace Masa.Blazor
 
         public bool ShowThumbLabelContainer => IsFocused || IsActive || ThumbLabel == "always";
 
-        protected virtual async Task SetInternalValueAsync(double internalValue)
+        protected virtual Task SetInternalValueAsync(double internalValue)
         {
             var val = RoundValue(Math.Min(Math.Max(internalValue, Min), Max));
             InternalValue = (val is TValue v ? v : default);
+            return Task.CompletedTask;
         }
 
         protected override void OnValueChanged(TValue val)
@@ -256,12 +257,9 @@ namespace Masa.Blazor
             //Value may not between min and max
             //If that so,we should invoke ValueChanged 
             var roundedVal = ConvertDoubleToTValue(RoundValue(Math.Min(Math.Max(Convert.ToDouble(val), Min), Max)));
-            if (!EqualityComparer<TValue>.Default.Equals(val, roundedVal) && ValueChanged.HasDelegate)
+            if (!EqualityComparer<TValue>.Default.Equals(roundedVal, InternalValue))
             {
-                NextTick(async () =>
-                {
-                    await ValueChanged.InvokeAsync(roundedVal);
-                });
+                InternalValue = roundedVal;
             }
 
             LazyValue = roundedVal;
