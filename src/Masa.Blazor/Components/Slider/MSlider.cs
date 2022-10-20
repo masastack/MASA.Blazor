@@ -245,10 +245,11 @@ namespace Masa.Blazor
 
         public bool ShowThumbLabelContainer => IsFocused || IsActive || ThumbLabel == "always";
 
-        protected virtual async Task SetInternalValueAsync(double internalValue)
+        protected virtual Task SetInternalValueAsync(double internalValue)
         {
             var val = RoundValue(Math.Min(Math.Max(internalValue, Min), Max));
             InternalValue = (val is TValue v ? v : default);
+            return Task.CompletedTask;
         }
 
         protected override void OnValueChanged(TValue val)
