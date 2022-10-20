@@ -10,7 +10,7 @@
 
 一套基于Material设计规范和BlazorComponent的交互能力提供标准的基础组件库
 
-[![MASA.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/Masa.Blazor/blob/develop/LICENSE) 
+[![MASA.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/Masa.Blazor/blob/develop/LICENSE)
 [![.NET](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/mirror-gitlab.yml/badge.svg)](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/mirror-gitlab.yml)
 [![Nuget](https://img.shields.io/nuget/v/Masa.Blazor)](https://www.nuget.org/packages/Masa.Blazor)
 [![Nuget](https://img.shields.io/nuget/dt/Masa.Blazor)](https://www.nuget.org/packages/Masa.Blazor)
@@ -147,6 +147,7 @@ services.AddMasaBlazor();
 
 ```shell
 git clone --recursive git@github.com:BlazorComponent/MASA.Blazor.git
+cd Masa.Blazor
 git submodule foreach git checkout main
 ```
 
@@ -216,8 +217,8 @@ dotnet run
 
 感谢所有为本项目做出过贡献的朋友。
 
-<a href="https://github.com/BlazorComponent/Masa.Blazor/graphs/contributors"> 
-    <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" /> 
+<a href="https://github.com/BlazorComponent/Masa.Blazor/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" />
 </a>
 
 ## 交流
@@ -236,6 +237,6 @@ dotnet run
 
 ## 许可声明
 
-[![Masa.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/Masa.Blazor/blob/develop/LICENSE) 
+[![Masa.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/Masa.Blazor/blob/develop/LICENSE)
 
-Copyright (c) 2021-present Masa.Blazor 
+Copyright (c) 2021-present Masa.Blazor
