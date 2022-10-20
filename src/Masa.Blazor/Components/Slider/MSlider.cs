@@ -256,12 +256,9 @@ namespace Masa.Blazor
             //Value may not between min and max
             //If that so,we should invoke ValueChanged 
             var roundedVal = ConvertDoubleToTValue(RoundValue(Math.Min(Math.Max(Convert.ToDouble(val), Min), Max)));
-            if (!EqualityComparer<TValue>.Default.Equals(val, roundedVal) && ValueChanged.HasDelegate)
+            if (!EqualityComparer<TValue>.Default.Equals(roundedVal, InternalValue))
             {
-                NextTick(async () =>
-                {
-                    await ValueChanged.InvokeAsync(roundedVal);
-                });
+                InternalValue = roundedVal;
             }
 
             LazyValue = roundedVal;
