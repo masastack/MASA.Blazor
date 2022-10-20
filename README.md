@@ -10,7 +10,7 @@
 
 A set of standard basic component libraries based on Material design specifications and BlazorComponent interaction capabilities
 
-[![MASA.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/Masa.Blazor/blob/develop/LICENSE) 
+[![MASA.Blazor](https://img.shields.io/badge/license-MIT-informational)](https://github.com/BlazorComponent/Masa.Blazor/blob/develop/LICENSE)
 [![.NET](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/mirror-gitlab.yml/badge.svg)](https://github.com/BlazorComponent/Masa.Blazor/actions/workflows/mirror-gitlab.yml)
 [![Nuget](https://img.shields.io/nuget/v/Masa.Blazor)](https://www.nuget.org/packages/Masa.Blazor)
 [![Nuget](https://img.shields.io/nuget/dt/Masa.Blazor)](https://www.nuget.org/packages/Masa.Blazor)
@@ -88,7 +88,7 @@ dotnet run
 
 ### Existing project
 
-* Install Nuget package 
+* Install Nuget package
 
 ```shell
 dotnet add package Masa.Blazor
@@ -110,7 +110,7 @@ services.AddMasaBlazor();
         <!--Font-->
         <link href="https://cdn.jsdelivr.net/npm/@("@mdi")/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
-        <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">    
+        <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
     </head>
     <body>
         <!--Script (try to put it at the end of the body)-->
@@ -147,7 +147,7 @@ services.AddMasaBlazor();
 
 ```shell
 git clone --recursive git@github.com:BlazorComponent/MASA.Blazor.git
-cd Masa.Blazor
+cd MASA.Blazor
 git submodule foreach git checkout main
 ```
 
@@ -215,8 +215,8 @@ Recommended use chrome or edge to visit `http://localhost:5000/`
 
 Thanks to all the friends who have contributed to this project.
 
-<a href="https://github.com/BlazorComponent/Masa.Blazor/graphs/contributors"> 
-    <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" /> 
+<a href="https://github.com/BlazorComponent/Masa.Blazor/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=BlazorComponent/Masa.Blazor" />
 </a>
 
 ## Interactive
