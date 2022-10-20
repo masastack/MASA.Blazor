@@ -35,8 +35,6 @@ namespace Masa.Blazor
             var valueItem = SelectedItems.FirstOrDefault();
             if (valueItem is not null)
             {
-                Console.WriteLine("find all...");
-                
                 _selectedCascadeItems.Clear();
                 FindAllLevelItems(valueItem, ComputedItems, ref _selectedCascadeItems);
                 _selectedCascadeItems.Reverse();

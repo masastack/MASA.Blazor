@@ -274,6 +274,7 @@
     max-height: inherit;
     min-width: inherit;
     padding: 8px 0;
+    background-color: white; /* TODO: use .theme-light */
 }
 
 .m-cascader__column {
