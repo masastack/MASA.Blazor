@@ -72,7 +72,6 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
                 ((CBPeripheral)Device).DiscoveredService += (sender, args) =>
                 {
-                    var sss = args;
                     handle.Set();
                 };
 
