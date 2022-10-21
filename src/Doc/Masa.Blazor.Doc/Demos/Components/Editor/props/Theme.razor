@@ -1,4 +1,4 @@
-﻿<MEditor Theme="bubble">
+﻿<MEditor Theme="bubble" @bind-Value="editorContent">
     <ToolbarContent>
         <select class="ql-header mt-2">
             <option selected=""></option>
@@ -27,3 +27,9 @@
         </span>
     </ToolbarContent>
 </MEditor>
+
+@code {
+
+    string editorContent = "<p><b>This is a bubble theme.</b></p>";
+
+}

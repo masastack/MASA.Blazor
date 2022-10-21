@@ -1,0 +1,65 @@
+﻿<MRow style="height: calc(100vh - 204px);">
+    <MCol Md="8">
+        <MSheet Class="overflow-y-auto rounded-4 fill-height">
+            <MCard class="pa-2">
+                <MCardTitle class="text-h6 neutral-lighten-1--text">
+                    Payment Options
+                </MCardTitle>
+                <MCardSubtitle class="text-body neutral-lighten-2--text mt-n2">
+                    Be sure to click on correct payment option
+                </MCardSubtitle>
+                <MRadioGroup @bind-Value="_payOptions" class="mt-2" Dense>
+                    <MCardText>
+                        <span class="text-subtitle">John Doe</span>
+                        <MRadio class="mt-4 text-btn neutral-lighten-1--text" Label="US Unlocked Debit Card 12XX XXXX XXXX 0000" Value="1"></MRadio>
+                        <MTextField Dense Outlined TValue="string" HideDetails="true" Style="width:500px;" class="mt-6">
+                            <PrependContent>
+                                <MLabel class="auto-width mt-n2 text--body2">Enter CVV:</MLabel>
+                            </PrependContent>
+                        </MTextField>
+                        <MButton Depressed Small class="primary mt-6 text-capitalize rounded-pill">Continue</MButton>
+                        <MRadio class="mt-12 text-btn neutral-lighten-1--text" Label="Credit/Debit/ATM Card" Value="2"></MRadio>
+                        <MRadio class="mt-4 text-btn neutral-lighten-1--text" Label="Net Banking" Value="3"></MRadio>
+                        <MRadio class="mt-4 text-btn neutral-lighten-1--text" Label="EMI (Easy Installment)" Value="4"></MRadio>
+                        <MRadio class="mt-4 text-btn neutral-lighten-1--text" Label="Cash On Delivery" Value="5"></MRadio>
+                    </MCardText>
+                </MRadioGroup>
+                <MCardActions class="mt-6 pl-4">
+                    <MButton Text class="text-btn neutral-lighten-1--text">
+                        <MIcon Left style="font-size:24px;">mdi-plus-circle-outline</MIcon>
+                        Add Gift Card
+                    </MButton>
+                </MCardActions>
+            </MCard>
+        </MSheet>
+    </MCol>
+    <MCol Md="4">
+        <MCard class="pa-2 fill-height">
+            <MCardTitle class="text-h6 neutral-lighten-1--text">
+                John Doe
+            </MCardTitle>
+            <MCardText class="pa-0">
+                <MList Dense class="pointer-events-none">
+                    <MListItem>
+                        <MListItemTitle class="text-caption">Price of 3 items</MListItemTitle>
+                        <MListItemTitle class="text-right text-btn"> $699.30 </MListItemTitle>
+                    </MListItem>
+                    <MListItem>
+                        <MListItemTitle class="text-caption">Delivery Charges</MListItemTitle>
+                        <MListItemTitle class="text-right text-btn sample-green--text">Free</MListItemTitle>
+                    </MListItem>
+                    <MDivider Class="mx-4 mt-4 mb-4"></MDivider>
+                    <MListItem>
+                        <MListItemTitle class="text-caption">Amount Payable</MListItemTitle>
+                        <MListItemTitle class="text-right text-h5"> $699.30</MListItemTitle>
+                    </MListItem>
+                </MList>
+            </MCardText>
+        </MCard>
+    </MCol>
+</MRow>
+
+
+@code {
+    private int _payOptions = 1;
+}

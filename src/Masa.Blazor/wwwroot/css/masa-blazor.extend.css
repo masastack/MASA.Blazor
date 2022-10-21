@@ -268,22 +268,27 @@
 
 /* cascader */
 
-.m-cascader-list {
-    display: inline-flex
+.m-cascader__columns {
+    display: flex;
+    overflow: auto;
+    max-height: inherit;
+    min-width: inherit;
+    padding: 8px 0;
+    background-color: white; /* TODO: use .theme-light */
 }
 
-.m-cascader-list__wrapper {
-    vertical-align: top;
+.m-cascader__column {
     min-width: 180px;
-    background-color: white;
+    padding: 0;
     border-right: 1px solid #f0f0f0;
+    overflow-y: auto;
 }
 
-.m-cascader-list__wrapper--dense {
+.m-cascader__column.m-list--dense {
     min-width: 120px;
 }
 
-.m-cascader-list__wrapper:not(.m-cascader-list__wrapper--dense) .m-list-item {
+.m-cascader__column-item:not(.m-list-item--dense) {
     min-height: 56px;
 }
 

@@ -1,4 +1,7 @@
-﻿namespace Masa.Blazor
+﻿using BlazorComponent.JSInterop;
+using BlazorComponent.Web;
+
+namespace Masa.Blazor
 {
     public partial class MCascader<TItem, TValue> : MSelect<TItem, TValue, TValue>, ICascader<TItem, TValue>
     {
@@ -18,45 +21,99 @@
         [Parameter]
         public override bool Outlined { get; set; } = true;
 
+        private List<TItem> _selectedCascadeItems = new();
+        private List<BCascaderColumn<TItem, TValue>> _cascaderLists = new();
+
         public override Action<TextFieldNumberProperty> NumberProps { get; set; }
 
         protected override IList<TItem> SelectedItems => FindSelectedItems(Items).ToList();
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+            
+            var valueItem = SelectedItems.FirstOrDefault();
+            if (valueItem is not null)
+            {
+                _selectedCascadeItems.Clear();
+                FindAllLevelItems(valueItem, ComputedItems, ref _selectedCascadeItems);
+                _selectedCascadeItems.Reverse();
+            }
+        }
 
         protected override void SetComponentClass()
         {
             base.SetComponentClass();
 
             CssProvider
-                .Merge(cssBuilder =>
-                {
-                    cssBuilder
-                        .Add("m-cascader");
-                });
+                .Merge(cssBuilder => { cssBuilder.Add("m-cascader"); })
+                .Apply("columns", cssBuilder => { cssBuilder.Add("m-cascader__columns"); });
 
             AbstractProvider
                 .ApplyCascaderDefault<TItem, TValue>()
+                .Apply<BItemGroup, MListItemGroup>()
                 .Merge<BMenu, MMenu>(attrs =>
                 {
                     attrs[nameof(MMenu.OffsetY)] = true;
                     attrs[nameof(MMenu.MinWidth)] = (StringNumber)(Dense ? 120 : 180);
                     attrs[nameof(MMenu.CloseOnContentClick)] = false;
-                    attrs[nameof(MMenu.ContentStyle)] = "display:flex;overflow-x:auto;";
                 })
-                .Apply(typeof(BCascaderList<,>), typeof(MCascaderList<TItem, TValue>), attrs =>
+                .Apply(typeof(BCascaderColumn<,>), typeof(MCascaderColumn<TItem, TValue>), attrs =>
                 {
                     attrs[nameof(ChangeOnSelect)] = ChangeOnSelect;
                     attrs[nameof(Dense)] = Dense;
+                    attrs[nameof(ItemValue)] = ItemValue;
+                    attrs[nameof(SelectedItems)] = _selectedCascadeItems;
                     attrs[nameof(ItemText)] = ItemText;
                     attrs[nameof(LoadChildren)] = LoadChildren;
                     attrs[nameof(ItemChildren)] = ItemChildren;
-                    attrs[nameof(MCascaderList<TItem, TValue>.OnSelect)] =
-                        CreateEventCallback<(TItem item, bool close)>((arg) => SelectItem(arg.item, arg.close));
+                    attrs[nameof(MCascaderColumn<TItem, TValue>.OnSelect)] = CreateEventCallback<(TItem, bool, int)>(HandleOnSelect);
                 });
         }
 
-        protected IEnumerable<TItem> FindSelectedItems(IEnumerable<TItem> items)
+        public void Register(BCascaderColumn<TItem, TValue> cascaderColumn)
         {
-            var selectedItems = items.Where(item => InternalValues.Contains(ItemValue(item)));
+            _cascaderLists.Add(cascaderColumn);
+        }
+
+        private async Task HandleOnSelect((TItem item, bool isLast, int columnIndex) args)
+        {
+            if (ChangeOnSelect)
+            {
+                await SelectItem(args.item, closeOnSelect: args.isLast);
+            }
+            else if (args.isLast)
+            {
+                await SelectItem(args.item);
+            }
+
+            NextTick(async () =>
+            {
+                var selector = $"{MMenu.ContentElement.GetSelector()} .m-cascader__column:nth-child({args.columnIndex + 1})";
+                await Js.ScrollIntoParentView(selector, true, true);
+            });
+        }
+
+        protected override async Task OnMenuAfterShowContent(bool isLazyContent)
+        {
+            await base.OnMenuAfterShowContent(isLazyContent);
+
+            await ScrollToInlineStartAsync();
+
+            await _cascaderLists.ForEachAsync(async cascaderList => await cascaderList.ScrollToSelected());
+        }
+
+        private async Task ScrollToInlineStartAsync()
+        {
+            if (MMenu.ContentElement.Context is not null)
+            {
+                await Js.ScrollTo($"{MMenu.ContentElement.GetSelector()} > .m-cascader__columns", top: null, left: 0);
+            }
+        }
+
+        private IEnumerable<TItem> FindSelectedItems(IList<TItem> items)
+        {
+            var selectedItems = items.Where(item => InternalValues.Contains(ItemValue(item))).ToList();
             if (selectedItems.Any())
             {
                 return selectedItems;
@@ -67,7 +124,7 @@
                 var children = ItemChildren(item);
                 if (children != null && children.Any())
                 {
-                    var childrenSelectedItems = FindSelectedItems(children);
+                    var childrenSelectedItems = FindSelectedItems(children).ToList();
                     if (childrenSelectedItems.Any())
                     {
                         return childrenSelectedItems;
@@ -80,38 +137,31 @@
 
         protected override string GetText(TItem item)
         {
-            if (!ShowAllLevels)
-            {
-                return base.GetText(item);
-            }
-
-            var allLevelItems = new List<TItem>();
-            FindAllLevelItems(item, ComputedItems, ref allLevelItems);
-
-            allLevelItems.Reverse();
-            return string.Join(" / ", allLevelItems.Select(base.GetText));
+            return !ShowAllLevels
+                ? base.GetText(item)
+                : string.Join(" / ", _selectedCascadeItems.Select(base.GetText));
         }
 
         private bool FindAllLevelItems(TItem item, IList<TItem> searchItems, ref List<TItem> allLevelItems)
         {
+            allLevelItems ??= new List<TItem>();
+
             if (searchItems.Contains(item))
             {
                 allLevelItems.Add(item);
                 return true;
             }
-            else
+
+            foreach (var searchItem in searchItems)
             {
-                foreach (var searchItem in searchItems)
+                var children = ItemChildren(searchItem);
+                if (children is { Count: > 0 })
                 {
-                    var children = ItemChildren(searchItem);
-                    if (children != null && children.Count > 0)
+                    var find = FindAllLevelItems(item, children, ref allLevelItems);
+                    if (find)
                     {
-                        var find = FindAllLevelItems(item, children, ref allLevelItems);
-                        if (find)
-                        {
-                            allLevelItems.Add(searchItem);
-                            return true;
-                        }
+                        allLevelItems.Add(searchItem);
+                        return true;
                     }
                 }
             }

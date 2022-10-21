@@ -1,0 +1,44 @@
+﻿@page "/"
+<MButton OnClick="ScanBleDeviceAsync">ScanBleDevice</MButton>
+
+<div class="text-center">
+    <MDialog @bind-Value="ShowProgress" Width="500">
+        <ChildContent>
+            <MCard>
+                <MCardTitle>
+                    正在扫描蓝牙设备
+                </MCardTitle>
+                <MCardText>
+                    <MProgressCircular Size="40" Indeterminate Color="primary"></MProgressCircular>
+                </MCardText>
+            </MCard>
+        </ChildContent>
+    </MDialog>
+</div>
+
+
+@if (BluetoothDeviceList.Any())
+{
+    <MSelect style="margin-top:10px"
+         Outlined
+         Items="BluetoothDeviceList"
+         ItemText="u=>u"
+         ItemValue="u=>u"
+         TItem="string"
+         TValue="string"
+         TItemValue="string"
+         @bind-Value="_selectedDevice"
+         OnSelectedItemUpdate="item => _selectedDevice = item">
+    </MSelect>
+}
+@if (!string.IsNullOrEmpty(_selectedDevice))
+{
+    <MButton OnClick="() => SendDataAsync()">SendVersionCheckCmd</MButton>
+}
+
+@if (AllDeviceResponse.Any())
+{
+    <MCard>
+        <MTextarea Value="@string.Join(' ',AllDeviceResponse)"></MTextarea>
+    </MCard>
+}

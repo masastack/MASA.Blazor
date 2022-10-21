@@ -40,11 +40,13 @@ namespace Masa.Blazor
         [Parameter]
         public bool Ripple { get; set; }
 
+        private bool ComputedRipple => IsDirtyParameter<bool>(nameof(Ripple)) ? Ripple : (!Disabled && IsClickable);
+
         protected override void OnParametersSet()
         {
             base.OnParametersSet();
 
-            Attributes["ripple"] = IsClickable || Ripple;
+            Attributes["ripple"] = ComputedRipple;
         }
 
         protected override void SetComponentClass()

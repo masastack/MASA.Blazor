@@ -1,0 +1,22 @@
+﻿@page "/pages/others/404"
+@layout MainLayout
+
+<MRow Class="d-flex flex-column justify-center" Style="height:calc(100vh - 132px);">
+    <MContainer Class="d-flex flex-column justify-space-between align-center">
+        <MImage Src="/img/status/404.png" Width="350" Height="200">
+        </MImage>
+        <MRow NoGutters Class="mt-12 text-btn neutral-lighten-2--text">The requested URL was not found.😖</MRow>
+        <MButton Class="rounded-pill mt-6"
+                 Dark                 
+                 Tile
+                 Color="primary"
+                 OnClick="()=>Navigation.NavigateTo(Navigation.BaseUri)">
+            Back to home
+        </MButton>
+    </MContainer>
+</MRow>
+
+@code {
+    [Inject]
+    public NavigationManager Navigation { get; set; } = default!;
+}

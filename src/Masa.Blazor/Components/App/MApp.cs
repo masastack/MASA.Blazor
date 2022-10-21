@@ -40,8 +40,9 @@ namespace Masa.Blazor
 
         protected override Task OnInitializedAsync()
         {
-            if (Variables.Theme != null)
-                HeadJsInterop.InsertAdjacentHTML("beforeend", ThemeCssBuilder.Build());
+            var themeOptions = IsDark ? MasaBlazor.Theme.Themes.Dark : MasaBlazor.Theme.Themes.Light;
+
+            HeadJsInterop.InsertAdjacentHTML("beforeend", ThemeCssBuilder.Build(themeOptions));
 
             return base.OnInitializedAsync();
         }

@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RunAOTCompilation>false</RunAOTCompilation>
-        <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
+        <BlazorEnableTimeZoneSupport>true</BlazorEnableTimeZoneSupport>
     </PropertyGroup>
 
     <ItemGroup>

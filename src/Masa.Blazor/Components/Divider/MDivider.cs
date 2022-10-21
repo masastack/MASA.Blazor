@@ -42,7 +42,6 @@
                 {
                     styleBuilder
                         .AddIf("display:contents", () => !HasContent)
-                        .AddIf("height: 100%", () => Vertical)
                         .AddIf($"padding: {PaddingY}px 0", () => PaddingY > 0);
                 })
                 .Apply("hr", cssBuilder =>

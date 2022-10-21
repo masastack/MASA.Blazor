@@ -1,0 +1,649 @@
+﻿@page "/dashboard/ecommerce"
+@inherits ProCompontentBase
+@inject MasaBlazor MasaBlazor
+@inject GlobalConfig GlobalConfig;
+@implements IDisposable
+
+<MRow>
+    <MCol Md=3 Sm=12>
+        <MCard Height=146>
+            <MCardText>
+                <MRow Class="max-height" NoGutters>
+                    <MCol>
+                        <span class="text-btn neutral-lighten-4--text">Congratulations🎉</span>
+                        <h5 class="mt-1">$48.9k</h5>
+                        <MButton Color="primary" Height=30 Class="white--text text-btn rounded-pill" Style="bottom:16px;position:absolute">View</MButton>
+                    </MCol>
+                    <MCol>
+                        <MImage Src="/img/eCommerce/trophy.png"></MImage>
+                    </MCol>
+                </MRow>
+            </MCardText>
+        </MCard>
+    </MCol>
+    <MCol Md=3 Sm=12>
+        <MCard Height=146>
+            <MCardText>
+                <MRow Class="max-height" NoGutters>
+                    <MCol>
+                        <span class="text-btn neutral-lighten-4--text">Orders</span>
+                        <h5 class="mt-1">$230k</h5>
+                    </MCol>
+                    <MCol Class="block-center">
+                        <MECharts Height=100 Width="@("100%")" Class="mt-1" @key="GetEchartKey()" Option=_orderChart></MECharts>
+                    </MCol>
+                </MRow>
+            </MCardText>
+        </MCard>
+    </MCol>
+    <MCol Md=3 Sm=12>
+        <MCard Height=146>
+            <MCardText>
+                <MRow Class="max-height" NoGutters>
+                    <MCol>
+                        <span class="text-btn neutral-lighten-4--text">Profit</span>
+                        <h5 class="mt-1">$682.5k</h5>
+                    </MCol>
+                    <MCol Class="block-center">
+                        <MECharts Height=100 Width="@("100%")" Class="mt-1" @key="GetEchartKey()" Option=_profitChart></MECharts>
+                    </MCol>
+                </MRow>
+            </MCardText>
+        </MCard>
+    </MCol>
+    <MCol Md=3 Sm=12>
+        <MCard Height=146>
+            <MCardText>
+                <MRow Class="max-height" NoGutters>
+                    <MCol>
+                        <span class="text-btn neutral-lighten-4--text">Earnings</span>
+                        <h5 class="my-1">$9745</h5>
+                        <span class="text-caption neutral-lighten-2--text">68% more earning than last month.</span>
+                    </MCol>
+                    <MCol Class="block-center">
+                        <MECharts Height=100 Width="@("100%")" Class="mt-1" @key="GetEchartKey()" Option=_earningsChart></MECharts>
+                    </MCol>
+                </MRow>
+            </MCardText>
+        </MCard>
+    </MCol>
+</MRow>
+
+<MRow>
+    <MCol Md=8 Sm=12>
+        <MRow NoGutters Class="max-height">
+            <MCol Md=8 Sm=12>
+                <MCard Class="max-height" Style="border-radius:20px 0px 0px 20px !important;">
+                    <MCardText>
+                        <MECharts Height=326 Width="@("100%")" @key="GetEchartKey()" Option=_revenueReportChart></MECharts>
+                    </MCardText>
+                </MCard>
+            </MCol>
+            <MCol Md=4 Sm=12>
+                <MCard Class="max-height" Style="box-shadow: -1px 0px 0px rgba(67, 24, 255, 0.1) !important;border-radius: 0px 20px 20px 0px !important;">
+                    <MCardText>
+                        <div class="block-between">
+                            <h4 class="neutral--text">$25,852</h4>
+                            <span class="text-caption sample-green--text">
+                                <MIcon Size=15 Color="sample-green">mdi-menu-up</MIcon>
+                                +2.45%
+                            </span>
+                        </div>
+                        <div class="sample-green--text text-btn mt-1">
+                            <MAvatar Color="sample-green" Size=16>
+                                <MIcon Size=7 Class="white--text">mdi-check</MIcon>
+                            </MAvatar>
+                            <span>Budget:56,800</span>
+                        </div>
+                        <div class="mt-5" style="height:200px;">
+                            <MECharts Height=200 Width="@("100%")" @key="GetEchartKey()" Option=_budgetChart></MECharts>
+                        </div>
+                        <MButton Color="primary" Height=30 Class="white--text text-btn rounded-pill" Style="bottom:24px;right:24px;position:absolute">View all</MButton>
+                    </MCardText>
+                </MCard>
+            </MCol>
+        </MRow>
+    </MCol>
+    <MCol Md=4 Sm=12>
+        <MCard>
+            <MCardText Class="pb-0">
+                <div class="block-between mb-4">
+                    <h6>Statistics</h6>
+                    <span class="text-btn neutral-lighten-2--text">Updated 1 month ago</span>
+                </div>
+                <MRow NoGutters>
+                    <MCol Md=6 Sm=12 Class="py-12">
+                        <div class="d-flex block-center">
+                            <MAvatar Size=56 Color="fill-lighten-1">
+                                <MIcon Color="sample-green" Size=27>mdi-trending-up</MIcon>
+                            </MAvatar>
+                            <div class="ml-3">
+                                <div class="text-btn neutral-lighten-4--text">Sales</div>
+                                <h6>8.504K</h6>
+                            </div>
+                        </div>
+                    </MCol>
+                    <MCol Md=6 Sm=12 Class="py-12">
+                        <div class="d-flex block-center">
+                            <MAvatar Size=56 Color="fill-lighten-1">
+                                <MIcon Color="dark-yellow" Size=25>far fa-user</MIcon>
+                            </MAvatar>
+                            <div class="ml-3">
+                                <div class="text-btn neutral-lighten-4--text">User</div>
+                                <h6>$35040</h6>
+                            </div>
+                        </div>
+                    </MCol>
+                    <MCol Md=6 Sm=12 Class="py-12">
+                        <div class="d-flex block-center">
+                            <MAvatar Size=56 Color="fill-lighten-1">
+                                <MIcon Color="error" Size=27>mdi-cube-outline</MIcon>
+                            </MAvatar>
+                            <div class="ml-3">
+                                <div class="text-btn neutral-lighten-4--text">Products</div>
+                                <h6>323.5K</h6>
+                            </div>
+                        </div>
+                    </MCol>
+                    <MCol Md=6 Sm=12 Class="py-12">
+                        <div class="d-flex block-center">
+                            <MAvatar Size=56 Color="fill-lighten-1">
+                                <MIcon Color="primary" Size=27>mdi-currency-usd</MIcon>
+                            </MAvatar>
+                            <div class="ml-3">
+                                <div class="text-btn neutral-lighten-4--text">Revenue</div>
+                                <h6>$35040</h6>
+                            </div>
+                        </div>
+                    </MCol>
+                </MRow>
+            </MCardText>
+        </MCard>
+    </MCol>
+</MRow>
+
+<MRow>
+    <MCol Md=8 Sm=12>
+        <MCard Class="max-height">
+            <MDataTable Headers="_headers"
+                        TItem="CompanyDto"
+                        Items="_companyList"
+                        HideDefaultFooter
+                        Class="table-border-none pt-2">
+                <HeaderColContent Context="header">
+                    <span class="text-caption neutral-lighten-2--text ml-2">@header.Text</span>
+                </HeaderColContent>
+                <ItemColContent>
+                    @switch (context.Header.Value)
+                    {
+                        case nameof(CompanyDto.CompanyName):
+                            <div Class="py-2 ml-2">
+                                <div class="d-flex">
+                                    <MAvatar>
+                                        <MImage Height=48 MaxWidth=48 Contain src="@context.Item.CompanyIcon"></MImage>
+                                    </MAvatar>
+                                    <div class="ml-4">
+                                        <span class="text-subtitle">@context.Item.CompanyName</span>
+                                        <br />
+                                        <span class="text-caption">@context.Item.CompanyEmail</span>
+                                    </div>
+                                </div>
+                            </div>
+                            break;
+                        case nameof(CompanyDto.Category):
+                            <span class="text-subtitle">@context.Item.Category</span>
+                            break;
+                        case nameof(CompanyDto.Views):
+                            <span class="text-subtitle">@context.Item.Views</span>
+                            <br />
+                            <span class="text-caption">@context.Item.ViewTime</span>
+                            break;
+                        case nameof(CompanyDto.Revenue):
+                            <span class="text-subtitle">@context.Item.Revenue</span>
+                            break;
+                        case nameof(CompanyDto.Sales):
+                            <span class="text-subtitle">@context.Item.Sales</span>
+                            if (context.Item.Rise)
+                            {
+                                <MIcon Class="ml-3" Color="green">mdi-trending-up</MIcon>
+                            }
+                            else
+                            {
+                                <MIcon Class="ml-3" Color="red">mdi-trending-down</MIcon>
+                            }
+
+                            break;
+                        default:
+                            @context.Value
+                            break;
+                    }
+                </ItemColContent>
+            </MDataTable>
+        </MCard>
+    </MCol>
+    <MCol Md=4 Sm=12>
+        <MCard Class="max-height">
+            <MCardText Class="pt-6">
+                <img class="rounded-2 max-width" height=186 src="/img/eCommerce/rectangle.png" />
+                <div class="d-flex my-4">
+                    <MAvatar Size=48 Color="fill-lighten-1">
+                        <MIcon Color="primary" Size=20>far fa-calendar-check</MIcon>
+                    </MAvatar>
+                    <div class="ml-4">
+                        <div class="text-subtitle">Sat，May 25，2021</div>
+                        <span class="text-caption">10:AM to 6:PM</span>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <MAvatar Size=48 Color="fill-lighten-1">
+                        <MIcon Color="sample-green" Size=25>mdi-map-marker-outline</MIcon>
+                    </MAvatar>
+                    <div class="ml-4">
+                        <div class="text-subtitle">Central Park </div>
+                        <span class="text-caption">Manhattan,New york City</span>
+                    </div>
+                </div>
+            </MCardText>
+        </MCard>
+    </MCol>
+</MRow>
+
+                @code{
+                    
+        private object? _orderChart;
+        private object? _profitChart;
+        private object? _earningsChart;
+        private object? _revenueReportChart;
+        private object? _budgetChart;
+        
+        private List<DataTableHeader<CompanyDto>> _headers = new List<DataTableHeader<CompanyDto>>
+        {
+            new () {Text= "COMPANY", Value= nameof(CompanyDto.CompanyName)},
+            new (){ Text= "CATEGORY", Value= nameof(CompanyDto.Category)},
+            new (){ Text= "VIEWS", Value= nameof(CompanyDto.Views)},
+            new (){ Text= "REVENUE", Value= nameof(CompanyDto.Revenue)},
+            new (){ Text= "SALES", Value= nameof(CompanyDto.Sales)},
+        };
+        private List<CompanyDto> _companyList = ECommerceService.GetCompanyList();
+
+        [Inject]
+        public MasaBlazor Masa { get; set; } = default!;
+
+        private string GetEchartKey()
+        {
+            return GlobalConfig.NavigationMini.ToString() + MasaBlazor.Breakpoint.Width.ToString();
+        }
+
+        protected override void OnInitialized()
+        {
+            Masa.Application.PropertyChanged += OnPropertyChanged;
+
+            _orderChart = new
+            {
+                Tooltip = new
+                {
+                    Trigger = "axis"
+                },
+                XAxis = new
+                {
+                    axisLine = new
+                    {
+                        Show = false
+                    },
+                    splitLine = new
+                    {
+                        Show = true,
+                        LineStyle = new
+                        {
+                            Color = new[] { "#F0F3FA" }
+                        }
+                    },
+                    axisLabel = new
+                    {
+                        Show = false
+                    },
+                    axisTick = new
+                    {
+                        Show = false
+                    },
+                },
+                YAxis = new
+                {
+                    axisLine = new
+                    {
+                        Show = false
+                    },
+                    axisLabel = new
+                    {
+                        Show = false
+                    },
+                    axisTick = new
+                    {
+                        Show = false
+                    },
+                    splitLine = new
+                    {
+                        Show = false
+                    },
+                },
+                Series = new[]
+                {
+                    new
+                    {
+                        name= "series-1",
+                        Type= "line",
+                        Data= ECommerceService.GetOrderChartData(),
+                        Color= "#4318FF",
+                        SymbolSize= 6,
+                        Symbol= "circle",
+                    }
+                },
+                Grid = new
+                {
+                    x = 3,
+                    x2 = 3,
+                    y = 3,
+                    y2 = 3
+                }
+            };
+
+            _profitChart = new
+            {
+                Tooltip = new
+                {
+                    Trigger = "axis",
+                    axisPointer = new
+                    {
+                        Type = "shadow"
+                    }
+                },
+                XAxis = new
+                {
+                    Data = new[] { "", "", "", "", "" },
+                    axisLine = new
+                    {
+                        Show = false
+                    },
+                    axisLabel = new
+                    {
+                        Show = false
+                    },
+                    axisTick = new
+                    {
+                        Show = false
+                    },
+                    splitLine = new
+                    {
+                        Show = false
+                    },
+                },
+                YAxis = new
+                {
+                    axisLine = new
+                    {
+                        Show = false
+                    },
+                    axisLabel = new
+                    {
+                        Show = false
+                    },
+                    axisTick = new
+                    {
+                        Show = false
+                    },
+                    splitLine = new
+                    {
+                        Show = false
+                    },
+                },
+                Series = new[]
+                {
+                    new
+                    {
+                        Type= "bar",
+                        Data= ECommerceService.GetProfitChartData(),
+                        Color= "#4318FF"
+                    }
+                },
+                Grid = new
+                {
+                    x = 3,
+                    x2 = 3,
+                    y = 3,
+                    y2 = 3
+                }
+            };
+
+            int[] _earningsChartData = ECommerceService.GetEarningsChartData();
+
+            _earningsChart = new
+            {
+                Tooltip = new
+                {
+                    Trigger = "item",
+                },
+                Series = new[]
+                {
+                   new
+                   {
+                       Type= "pie",
+                       Radius= "90%",
+                       Label=new
+                       {
+                           Show=false
+                       },
+                       Data=new[]
+                       {
+                           new
+                           {
+                               value= _earningsChartData[0],
+                               Name= "Product",
+                               ItemStyle=new
+                               {
+                                    Color= "#4318FF"
+                               }
+                           },
+                           new
+                           {
+                               value= _earningsChartData[1],
+                               Name= "App",
+                               ItemStyle=new
+                               {
+                                    Color= "#05CD99"
+                               }
+                           },
+                           new
+                           {
+                               value= _earningsChartData[2],
+                               Name= "Service",
+                               ItemStyle = new
+                               {
+                                    Color= "#FFB547"
+                               }
+                           },
+                       }
+                   }
+                }
+            };
+
+            var _revenueReportChartData = ECommerceService.GetRevenueReportChartData();
+
+            _revenueReportChart = new
+            {
+                Title = new
+                {
+                    Text = "Revenue Report",
+                    TextStyle = new
+                    {
+                        Color = "#1B2559"
+                    }
+                },
+                Tooltip = new
+                {
+                    Trigger = "axis",
+                    axisPointer = new
+                    {
+                        Type = "shadow"
+                    }
+                },
+                Legend = new
+                {
+                    Data = new[] { "Earning", "Expense" },
+                    Right = "5px",
+                    TextStyle = new
+                    {
+                        Color = "#485585",
+                    }
+                },
+                XAxis = new
+                {
+                    Data = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Aug", "Sep" },
+                    axisLine = new
+                    {
+                        Show = false,
+                        LineStyle = new
+                        {
+                            Color = "#485585"
+                        }
+                    },
+                    axisTick = new
+                    {
+                        Show = false
+                    },
+                    splitLine = new
+                    {
+                        Show = false
+                    },
+                    TextStyle = new
+                    {
+                        Color = "#485585"
+                    }
+                },
+                YAxis = new
+                {
+                    axisLine = new
+                    {
+                        Show = false,
+                        LineStyle = new
+                        {
+                            Color = "#485585"
+                        }
+                    },
+                    axisTick = new
+                    {
+                        Show = false
+                    },
+                    splitLine = new
+                    {
+                        Show = false
+                    }
+                },
+                Series = new[]
+                {
+                    new
+                    {
+                        Name="Earning",
+                        Type= "bar",
+                        Data= _revenueReportChartData[0],
+                        Color="#4318FF",
+                        Stack="x",
+                        BarWidth="15"
+                    },
+                    new
+                    {
+                        Name="Expense",
+                        Type= "bar",
+                        Data= _revenueReportChartData[1],
+                        Color="#A18BFF",
+                        Stack="x",
+                        BarWidth="15"
+                    }
+                },
+                Grid = new
+                {
+                    y2 = 25
+                }
+            };
+
+            _budgetChart = new
+            {
+                Radar = new[]
+                {
+                    new
+                    {
+                        Indicator=new []
+                        {
+                            new
+                            {
+                                Text="Jan",Max=300
+                            },
+                            new
+                            {
+                                Text="Feb",Max=300
+                            },
+                            new
+                            {
+                                Text="Mar",Max=300
+                            },
+                            new
+                            {
+                                Text="Apr",Max=300
+                            },
+                            new
+                            {
+                                Text="May",Max=300
+                            },
+                            new
+                            {
+                                Text="Jun",Max=300
+                            },
+                            new
+                            {
+                                Text="Aug",Max=300
+                            },
+                            new
+                            {
+                                Text="Sep",Max=300
+                            },
+                        },
+                        Radius=70
+                    }
+                },
+                Series = new[]
+                {
+                    new
+                    {
+                        Type= "radar",
+                        Data= new []
+                        {
+                            new
+                            {
+                              Value=ECommerceService.GetBudgetChartData(),
+                            }
+                        },
+                        Color="#4318FF",
+                        SymbolSize=6,
+                        Symbol="circle",
+                    }
+                }
+            };
+        }
+
+        private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Application.Left))
+            {
+                if(GlobalConfig.CurrentNav?.Href == "dashboard/ecommerce")
+                {
+                    InvokeAsync(StateHasChanged);
+                }           
+            }
+        }
+
+        public void Dispose()
+        {
+            Masa.Application.PropertyChanged -= OnPropertyChanged;
+        }
+    }
+
+                }

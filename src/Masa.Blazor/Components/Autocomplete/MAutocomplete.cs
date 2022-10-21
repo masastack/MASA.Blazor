@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using Microsoft.AspNetCore.Components.Infrastructure;
+using Microsoft.AspNetCore.Components.Web;
 using OneOf.Types;
 
 namespace Masa.Blazor
@@ -230,15 +231,7 @@ namespace Masa.Blazor
 
             if (nextItem is null)
             {
-                if (Multiple)
-                {
-                    IList<TItemValue> values = new List<TItemValue>();
-                    InternalValue = (TValue)values;
-                }
-                else
-                {
-                    InternalValue = default;
-                }
+                await SetValue(Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default);
             }
             else
             {
@@ -303,11 +296,6 @@ namespace Masa.Blazor
 
         private async void OnFilteredItemsChanged(IList<TItem> val, IList<TItem> oldVal)
         {
-            if (Equals(val, oldVal))
-            {
-                return;
-            }
-
             val ??= new List<TItem>();
             oldVal ??= new List<TItem>();
 

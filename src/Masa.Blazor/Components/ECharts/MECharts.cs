@@ -104,7 +104,7 @@ public class MECharts : BECharts, IAsyncDisposable
         if (firstRender || _isEChartsDisposed)
         {
             _isEChartsDisposed = false;
-            await _echarts.InvokeVoidAsync("init", Ref.GetSelector(), ComputedTheme, DefaultInitOptions, Option);
+            await InitECharts();
         }
 
         if (_prevOption != Option)
@@ -117,14 +117,24 @@ public class MECharts : BECharts, IAsyncDisposable
         }
     }
 
+    private async Task InitECharts()
+    {
+        if (_echarts is null) return;
+        await _echarts.InvokeVoidAsync("init", Ref.GetSelector(), ComputedTheme, DefaultInitOptions, Option);
+    }
+
+    // ReSharper disable once MemberCanBePrivate.Global
     public async Task DisposeECharts()
     {
+        if (_echarts is null) return;
         await _echarts.InvokeVoidAsync("dispose", Ref.GetSelector());
         _isEChartsDisposed = true;
     }
 
+    // ReSharper disable once MemberCanBePrivate.Global
     public async Task ResetOption()
     {
+        if (_echarts is null) return;
         await _echarts.InvokeVoidAsync("setOption", Ref.GetSelector(), Option);
     }
 
@@ -133,7 +143,10 @@ public class MECharts : BECharts, IAsyncDisposable
         try
         {
             await DisposeECharts();
-            await _echarts.DisposeAsync();
+            if (_echarts is not null)
+            {
+                await _echarts.DisposeAsync();
+            }
         }
         catch
         {

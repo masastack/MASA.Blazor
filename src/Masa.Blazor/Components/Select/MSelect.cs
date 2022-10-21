@@ -33,8 +33,8 @@ namespace Masa.Blazor
         [Parameter]
         public IList<TItem> Items
         {
-            get => GetValue((IList<TItem>)new List<TItem>());
-            set => SetValue(value);
+            get => GetValue((IList<TItem>)new List<TItem>(), disableIListAlwaysNotifying: true);
+            set => SetValue(value, disableIListAlwaysNotifying: true);
         }
 
         [Parameter]
@@ -157,15 +157,12 @@ namespace Masa.Blazor
         {
             get
             {
-                return GetComputedValue(() =>
+                return InternalValue switch
                 {
-                    return InternalValue switch
-                    {
-                        IList<TItemValue> values => values,
-                        TItemValue value => new List<TItemValue> { value },
-                        _ => new List<TItemValue>()
-                    };
-                }, new[] { nameof(InternalValue), nameof(Value) });
+                    IList<TItemValue> values => values,
+                    TItemValue value => new List<TItemValue> { value },
+                    _ => new List<TItemValue>()
+                };
             }
         }
 
@@ -307,18 +304,20 @@ namespace Masa.Blazor
                     await MMenu.AddOutsideClickEventListener();
                 }
 
-                MMenu.AfterShowContent = isLazyContent =>
-                {
-                    if (isLazyContent)
-                    {
-                        OnMenuActiveChange(true);
-                    }
-
-                    return Task.CompletedTask;
-                };
+                MMenu.AfterShowContent = OnMenuAfterShowContent;
 
                 StateHasChanged();
             }
+        }
+
+        protected virtual Task OnMenuAfterShowContent(bool isLazyContent)
+        {
+            if (isLazyContent)
+            {
+                OnMenuActiveChange(true);
+            }
+
+            return Task.CompletedTask;
         }
 
         protected virtual async void OnMenuActiveChange(bool val)
@@ -550,7 +549,7 @@ namespace Masa.Blazor
             {
                 if (value is TValue val)
                 {
-                    InternalValue = val;
+                    await SetValue(val);
                 }
 
                 if (closeOnSelect)
@@ -572,7 +571,7 @@ namespace Masa.Blazor
 
                 if (internalValues is TValue val)
                 {
-                    InternalValue = val;
+                    await SetValue(val);
                 }
             }
 
@@ -824,6 +823,8 @@ namespace Masa.Blazor
             if (!IsFocused)
             {
                 IsFocused = true;
+                HasFocused = true;
+
                 if (OnFocus.HasDelegate)
                 {
                     await OnFocus.InvokeAsync();
@@ -864,15 +865,7 @@ namespace Masa.Blazor
 
         public override async Task HandleOnClearClickAsync(MouseEventArgs args)
         {
-            if (Multiple)
-            {
-                IList<TItemValue> values = new List<TItemValue>();
-                InternalValue = (TValue)values;
-            }
-            else
-            {
-                InternalValue = default;
-            }
+            await SetValue(Multiple ? (TValue)(IList<TItemValue>)new List<TItemValue>() : default);
 
             if (OnClearClick.HasDelegate)
             {
@@ -925,6 +918,8 @@ namespace Masa.Blazor
             }
 
             SelectedItems = selectedItems;
+
+            StateHasChanged();
         }
 
         protected int GetMenuIndex()
@@ -940,7 +935,7 @@ namespace Masa.Blazor
             }
             else
             {
-                InternalValue = default(TValue);
+                await SetValue(default);
             }
 
             // if all items have been delete,
@@ -967,6 +962,18 @@ namespace Masa.Blazor
             }
 
             return func;
+        }
+
+        protected async Task SetValue(TValue value)
+        {
+            if (!EqualityComparer<TValue>.Default.Equals(InternalValue, value))
+            {
+                InternalValue = value;
+                if (OnChange.HasDelegate)
+                {
+                    await OnChange.InvokeAsync(value);
+                }
+            }
         }
     }
 }
