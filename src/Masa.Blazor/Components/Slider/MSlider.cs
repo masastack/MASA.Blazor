@@ -245,7 +245,7 @@ namespace Masa.Blazor
 
         public bool ShowThumbLabelContainer => IsFocused || IsActive || ThumbLabel == "always";
 
-        protected override bool ValidateOnlyUnderHasFocused => false;
+        protected override bool ValidateOnlyInFocusedState => false;
 
         protected virtual Task SetInternalValueAsync(double internalValue)
         {
