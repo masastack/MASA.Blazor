@@ -1,10 +1,13 @@
-﻿using CoreBluetooth;
+﻿using System.Diagnostics;
+using CoreBluetooth;
 namespace Masa.Blazor.Maui.Plugin.Bluetooth
 {
     partial class RemoteGattServer
     {
         private void PlatformInit()
         {
+            if (Device != null)
+            { MasaMauiBluetoothService._manager.ConnectPeripheral(Device); }
         }
 
         bool GetConnected()
@@ -18,7 +21,8 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                     return false;
             }
         }
-        
+
+
         void PlatformDisconnect()
         {
             if (Device != null)
@@ -68,6 +72,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
                 ((CBPeripheral)Device).DiscoveredService += (sender, args) =>
                 {
+                    var sss = args;
                     handle.Set();
                 };
 

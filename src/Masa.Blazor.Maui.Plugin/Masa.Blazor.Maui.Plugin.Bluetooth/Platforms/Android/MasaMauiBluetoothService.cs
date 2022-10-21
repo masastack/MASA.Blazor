@@ -115,5 +115,20 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                     (global::Android.Manifest.Permission.BluetoothAdmin, true),
                 }.ToArray();
         }
+        static Task<bool> PlatformGetAvailability()
+        {
+            return Task.FromResult(BluetoothAdapter.DefaultAdapter.IsEnabled);
+        }
+
+        private static bool _oldAvailability;
+
+        private static async void AddAvailabilityChanged()
+        {
+            _oldAvailability = await PlatformGetAvailability();
+        }
+
+        private static void RemoveAvailabilityChanged()
+        {
+        }
     }
 }
