@@ -245,6 +245,8 @@ namespace Masa.Blazor
 
         public bool ShowThumbLabelContainer => IsFocused || IsActive || ThumbLabel == "always";
 
+        protected override bool ValidateOnlyUnderHasFocused => false;
+
         protected virtual Task SetInternalValueAsync(double internalValue)
         {
             var val = RoundValue(Math.Min(Math.Max(internalValue, Min), Max));
@@ -274,10 +276,7 @@ namespace Masa.Blazor
         {
             base.OnInitialized();
 
-            if (App == null)
-            {
-                App = Document.QuerySelector("[data-app]");
-            }
+            App ??= Document.QuerySelector("[data-app]");
 
             CheckTValue();
         }
