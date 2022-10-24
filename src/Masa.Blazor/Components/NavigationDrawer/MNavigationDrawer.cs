@@ -448,10 +448,10 @@ namespace Masa.Blazor
                     ? 0
                     : (ComputedWidth.ToDouble() <= 0 ? await GetClientWidthAsync() : ComputedWidth.ToDouble());
 
-                if (Right)
-                    MasaBlazor.Application.Right = val;
-                else
-                    MasaBlazor.Application.Left = val;
+            if (Right)
+                MasaBlazor.Application.Right = val;
+            else
+                MasaBlazor.Application.Left = val;
         }
 
         private async Task<double> GetClientWidthAsync()
