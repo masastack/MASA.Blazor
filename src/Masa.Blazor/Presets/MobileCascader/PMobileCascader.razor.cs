@@ -90,7 +90,6 @@ public partial class PMobileCascader<TItem, TItemValue> // where TItem : class
     {
         await base.OnParametersSetAsync();
 
-        Height ??= "80vh";
         Value ??= new List<TItemValue>();
     }
 
