@@ -3,12 +3,15 @@
                 Items="_desserts"
                 OnOptionsUpdate="HandleOnOptionsUpdate"
                 ServerItemsLength="_totalDesserts"
+                ItemsPerPage="5"
                 Loading="_loading"
-                Class="elevation-1">
+                Class="elevation-1"
+                @ref="_dataTable">
     </MDataTable>
 </div>
 
 @code {
+
     public class Dessert
     {
         public string Name { get; set; }
@@ -31,50 +34,50 @@
     private int _totalDesserts = 0;
     private IEnumerable<Dessert> _desserts = new List<Dessert>();
     private bool _loading = true;
-    private DataOptions _options=new DataOptions();
+    private DataOptions _options = new DataOptions();
+
+    private MDataTable<Dessert> _dataTable;
 
     private List<DataTableHeader<Dessert>> _headers = new List<DataTableHeader<Dessert>>
+    {
+        new()
         {
-           new ()
-           {
-            Text= "Dessert (100g serving)",
-            Align= "start",
-            Sortable= false,
-            Value= nameof(Dessert.Name)
-          },
-          new (){ Text= "Calories", Value= nameof(Dessert.Calories)},
-          new (){ Text= "Fat (g)", Value= nameof(Dessert.Fat)},
-          new (){ Text= "Carbs (g)", Value= nameof(Dessert.Carbs)},
-          new (){ Text= "Protein (g)", Value= nameof(Dessert.Protein)},
-          new (){ Text= "Iron (%)", Value= nameof(Dessert.Iron)}
-        };
+            Text = "Dessert (100g serving)",
+            Align = "start",
+            Sortable = false,
+            Value = nameof(Dessert.Name)
+        },
+        new() { Text = "Calories", Value = nameof(Dessert.Calories) },
+        new() { Text = "Fat (g)", Value = nameof(Dessert.Fat) },
+        new() { Text = "Carbs (g)", Value = nameof(Dessert.Carbs) },
+        new() { Text = "Protein (g)", Value = nameof(Dessert.Protein) },
+        new() { Text = "Iron (%)", Value = nameof(Dessert.Iron) }
+    };
 
-    public void HandleOnOptionsUpdate(DataOptions options)
+    private async Task HandleOnOptionsUpdate(DataOptions options)
     {
         _options = options;
-        GetDataFromApi();
+        await GetDataFromApi();
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        GetDataFromApi();
+        if (firstRender)
+        {
+            _options = _dataTable.Options;
+            await GetDataFromApi();
+            StateHasChanged();
+        }
     }
 
-    public void GetDataFromApi()
+    private async Task GetDataFromApi()
     {
         _loading = true;
-        FakeApiCallAsync().ContinueWith(task =>
-        {
-            var data = task.Result;
-            _desserts = data.items;
-            _totalDesserts = data.total;
-            _loading = false;
-
-            InvokeAsync(StateHasChanged);
-        });
+        (_desserts, _totalDesserts) = await FakeApiCallAsync();
+        _loading = false;
     }
 
-    public async Task<(IEnumerable<Dessert> items, int total)> FakeApiCallAsync()
+    private async Task<(IEnumerable<Dessert> items, int total)> FakeApiCallAsync()
     {
         var sortBy = _options.SortBy;
         var sortDesc = _options.SortDesc;
@@ -112,96 +115,97 @@
     {
         return new List<Dessert>
         {
-           new Dessert
-           {
-              Name= "Frozen Yogurt",
-              Calories= 159,
-              Fat= 6.0,
-              Carbs= 24,
-              Protein= 4.0,
-              Iron= "1%",
+            new Dessert
+            {
+                Name = "Frozen Yogurt",
+                Calories = 159,
+                Fat = 6.0,
+                Carbs = 24,
+                Protein = 4.0,
+                Iron = "1%",
             },
             new Dessert
             {
-              Name= "Ice cream sandwich",
-              Calories= 237,
-              Fat= 9.0,
-              Carbs= 37,
-              Protein= 4.3,
-              Iron= "1%",
+                Name = "Ice cream sandwich",
+                Calories = 237,
+                Fat = 9.0,
+                Carbs = 37,
+                Protein = 4.3,
+                Iron = "1%",
             },
             new Dessert
             {
-              Name= "Eclair",
-              Calories= 262,
-              Fat= 16.0,
-              Carbs= 23,
-              Protein= 6.0,
-              Iron= "7%",
+                Name = "Eclair",
+                Calories = 262,
+                Fat = 16.0,
+                Carbs = 23,
+                Protein = 6.0,
+                Iron = "7%",
             },
             new Dessert
             {
-              Name= "Cupcake",
-              Calories= 305,
-              Fat= 3.7,
-              Carbs= 67,
-              Protein= 4.3,
-              Iron= "8%",
+                Name = "Cupcake",
+                Calories = 305,
+                Fat = 3.7,
+                Carbs = 67,
+                Protein = 4.3,
+                Iron = "8%",
             },
             new Dessert
             {
-                Name= "Gingerbread",
-                Calories= 356,
-                Fat= 16.0,
-                Carbs= 49,
-                Protein= 3.9,
-                Iron= "16%"
+                Name = "Gingerbread",
+                Calories = 356,
+                Fat = 16.0,
+                Carbs = 49,
+                Protein = 3.9,
+                Iron = "16%"
             },
             new Dessert
             {
-                Name= "Jelly bean",
-                Calories= 375,
-                Fat= 0.0,
-                Carbs= 94,
-                Protein= 0.0,
-                Iron= "0%",
+                Name = "Jelly bean",
+                Calories = 375,
+                Fat = 0.0,
+                Carbs = 94,
+                Protein = 0.0,
+                Iron = "0%",
             },
             new Dessert
             {
-                Name= "Lollipop",
-                Calories= 392,
-                Fat= 0.2,
-                Carbs= 98,
-                Protein= 0,
-                Iron= "2%",
+                Name = "Lollipop",
+                Calories = 392,
+                Fat = 0.2,
+                Carbs = 98,
+                Protein = 0,
+                Iron = "2%",
             },
             new Dessert
             {
-                Name= "Honeycomb",
-                Calories= 408,
-                Fat= 3.2,
-                Carbs= 87,
-                Protein= 6.5,
-                Iron= "45%",
+                Name = "Honeycomb",
+                Calories = 408,
+                Fat = 3.2,
+                Carbs = 87,
+                Protein = 6.5,
+                Iron = "45%",
             },
             new Dessert
             {
-                Name= "Donut",
-                Calories= 452,
-                Fat= 25.0,
-                Carbs= 51,
-                Protein= 4.9,
-                Iron= "22%",
+                Name = "Donut",
+                Calories = 452,
+                Fat = 25.0,
+                Carbs = 51,
+                Protein = 4.9,
+                Iron = "22%",
             },
             new Dessert
             {
-                Name= "KitKat",
-                Calories= 518,
-                Fat= 26.0,
-                Carbs= 65,
-                Protein= 7,
-                Iron= "6%",
+                Name = "KitKat",
+                Calories = 518,
+                Fat = 26.0,
+                Carbs = 65,
+                Protein = 7,
+                Iron = "6%",
             }
         };
     }
+
 }
