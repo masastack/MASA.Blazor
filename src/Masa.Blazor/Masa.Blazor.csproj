@@ -3,11 +3,13 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<Version>0.1.0</Version>
-		<RepositoryUrl>http://gitlab-hz.lonsid.cn/MASA-Stack/Masa.Blazor</RepositoryUrl>
-		<RepositoryType>gitlab</RepositoryType>
+		<RepositoryUrl>https://github.com/BlazorComponent/MASA.Blazor</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageProjectUrl>https://blazor.masastack.com</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackageIcon>Masa.Blazor96_96.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -27,6 +29,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Include="..\..\README.md" Pack="true" PackagePath="" />
 		<None Include="Masa.Blazor96_96.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 </Project>
