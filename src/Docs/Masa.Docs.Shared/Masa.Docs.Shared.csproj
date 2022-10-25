@@ -16,7 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Masa.Blazor\Masa.Blazor.csproj" />
+    <ProjectReference Include="..\Masa.Blazor\Masa.Blazor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
