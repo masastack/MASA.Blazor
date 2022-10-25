@@ -4,7 +4,7 @@
     {
         [Inject]
         protected I18n I18n { get; set; } = null!;
-        
+
         [Parameter]
         public RenderFragment<(int PageStart, int PageStop, int ItemsLength)> PageTextContent { get; set; }
 
@@ -106,7 +106,7 @@
             NoResultsText = I18n.T("$masaBlazor.dataIterator.noResultsText");
             NoDataText = I18n.T("$masaBlazor.noDataText");
             LoadingText = I18n.T("$masaBlazor.dataIterator.loadingText");
-            
+
             return base.SetParametersAsync(parameters);
         }
 
@@ -251,10 +251,14 @@
 
         private void UpdateSelectedItemsAsValue()
         {
+            var selectedItems = Items.Where(IsSelected);
             if (ValueChanged.HasDelegate)
             {
-                var selectedItems = Items.Where(IsSelected);
                 ValueChanged.InvokeAsync(selectedItems);
+            }
+            else
+            {
+                Value = selectedItems;
             }
         }
     }

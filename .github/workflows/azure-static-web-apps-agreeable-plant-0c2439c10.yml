@@ -15,15 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
-          submodules: false
+          submodules: 'recursive'
+      - run: git submodule foreach git checkout main
       - name: setting dotnet 
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.x'
-      - name: dependencies
-        run: git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
       - name: setting tools
         run: dotnet workload install wasm-tools
       - name: Copy Static Resources
