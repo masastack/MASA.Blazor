@@ -85,8 +85,6 @@
 
     public void SubmitOrder(FormContext context)
     {
-        var a = context.Validate();
-        var cc = context.EditContext.GetValidationMessages();
         if(context.Validate() && _orderDetail.Customers[0].Name == _orderDetail.Customers[1].Name)
         {
             var validationResult = @"Validation failed: 
