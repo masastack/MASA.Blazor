@@ -439,6 +439,7 @@
   "Demos.Components.Markdown.props.Upload",
   "Demos.Components.Markdown.events.BeforeAllUpload",
   "Demos.Components.Markdown.events.SomeEvents",
+  "Demos.Components.MarkdownIt.usage.Basic",
   "Demos.Components.Menu.usage.Index",
   "Demos.Components.Menu.props.Absolute",
   "Demos.Components.Menu.props.AbsoluteWithoutActivator",

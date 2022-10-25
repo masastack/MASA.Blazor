@@ -1,0 +1,30 @@
+﻿{
+  "Title": "MMarkdownIt",
+  "Components": [
+    "Markdown parsers"
+  ],
+  "Props": [
+    {
+      "Name": "Key",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Options",
+      "Type": "Action<MarkdownItOptions>",
+      "Description": ""
+    },
+    {
+      "Name": "Source",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "TagClassMap",
+      "Type": "Dictionary<String,String>",
+      "Description": ""
+    }
+  ],
+  "Contents": [],
+  "Events": []
+}

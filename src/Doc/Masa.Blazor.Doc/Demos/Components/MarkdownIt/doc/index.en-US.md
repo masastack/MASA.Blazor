@@ -1,7 +1,7 @@
 ---
 category: Components
-type: MarkdownIt
-title: MarkdownIt
+type: MarkdownParsers
+title: Markdown parsers
 cols: 1
 tag: js-proxy
 ---

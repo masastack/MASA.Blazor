@@ -2387,6 +2387,35 @@
       },
       {
         "Order": 0,
+        "Title": "MMarkdownIt",
+        "FullTitle": "MMarkdownIt",
+        "Type": "menuItem",
+        "Url": "api/mmarkdownit",
+        "Contents": [
+          {
+            "Id": "section-292649107",
+            "Title": "组件页面",
+            "Level": 0
+          },
+          {
+            "Id": "section-3122241",
+            "Title": "属性",
+            "Level": 0
+          },
+          {
+            "Id": "section-3374707",
+            "Title": "插槽",
+            "Level": 0
+          },
+          {
+            "Id": "section-2654231",
+            "Title": "事件",
+            "Level": 0
+          }
+        ]
+      },
+      {
+        "Order": 0,
         "Title": "MMenu",
         "FullTitle": "MMenu",
         "Type": "menuItem",
@@ -4855,6 +4884,16 @@
         "FullTitle": "Markdown (Markdown编辑器)",
         "Type": "menuItem",
         "Url": "components/markdown",
+        "Tag": "js-proxy",
+        "Children": []
+      },
+      {
+        "Order": 0,
+        "Title": "Markdown parsers",
+        "SubTitle": "Markdown解析器",
+        "FullTitle": "Markdown parsers (Markdown解析器)",
+        "Type": "menuItem",
+        "Url": "components/markdown-parsers",
         "Tag": "js-proxy",
         "Children": []
       },

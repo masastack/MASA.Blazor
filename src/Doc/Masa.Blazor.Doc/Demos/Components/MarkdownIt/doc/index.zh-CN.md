@@ -1,8 +1,8 @@
 ---
 category: Components
-subtitle: Markdown解析
-type: Markdown解析
-title: MarkdownIt
+subtitle: Markdown解析器
+type: Markdown解析器
+title: Markdown parsers
 cols: 1
 tag: js-proxy
 ---
