@@ -262,8 +262,9 @@
             base.OnParametersSet();
         }
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
+            base.Dispose(disposing);
             _dotNetHelper?.Dispose();
         }
 
