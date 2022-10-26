@@ -1,4 +1,4 @@
-﻿<MMarkdownIt Source="@source" />
+﻿<MMarkdownIt Source="@source" Class="markdown-parser__basic" />
 
 @code {
 
@@ -20,3 +20,14 @@ Depending on the application you use, you may not be able to preview the formatt
 > The overriding design goal for Markdown’s formatting syntax is to make it as readable as possible. The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.";
 
 }
+
+<style>
+    .markdown-parser__basic img {
+        max-width: 100%;
+    }
+    
+    .markdown-parser__basic blockquote {
+        border-left: 4px lightgray solid;
+        padding-left: 16px;
+    }
+</style>
