@@ -1,8 +1,10 @@
 ﻿@using System.Text
-<PImageCaptcha CaptchaWidth="200" Outlined Label="VerifyCode" OnRefresh="RefreshCode"></PImageCaptcha>
+<PImageCaptcha @bind-Value="value" CaptchaWidth="200" Outlined Label="VerifyCode" OnRefresh="RefreshCode"></PImageCaptcha>
 
 @code {
     string randomCode = "1234567890abcdefghijklmn";
+
+    string value;
 
     Random random = new Random();
 
