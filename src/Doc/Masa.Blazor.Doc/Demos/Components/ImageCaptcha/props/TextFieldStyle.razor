@@ -4,19 +4,19 @@
     <MContainer>
         <MRow>
             <MCol Cols="12" Sm="6">
-                <PImageCaptcha Label="Regular" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
+                <PImageCaptcha @bind-Value="value1" Label="Regular" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
             </MCol>
             <MCol Cols="12" Sm="6">
-                <PImageCaptcha Outlined Label="OutLine" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
+                <PImageCaptcha @bind-Value="value2" Outlined Label="OutLine" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
             </MCol>
             <MCol Cols="12" Sm="6">
-                <PImageCaptcha Filled Label="Filled" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
+                <PImageCaptcha @bind-Value="value3" Filled Label="Filled" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
             </MCol>
             <MCol Cols="12" Sm="6">
-                <PImageCaptcha Dense Label="Dense" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
+                <PImageCaptcha @bind-Value="value4" Dense Label="Dense" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
             </MCol>
             <MCol Cols="12" Sm="6">
-                <PImageCaptcha Solo Label="Solo" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
+                <PImageCaptcha @bind-Value="value5" Solo Label="Solo" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
             </MCol>
         </MRow>
     </MContainer>
@@ -27,6 +27,12 @@
     string errorMessage = "Verify Code Error";
 
     string randomCode = "1234567890abcdefghijklmn";
+
+    string value1;
+    string value2;
+    string value3;
+    string value4;
+    string value5;
 
     Random random = new Random();
 

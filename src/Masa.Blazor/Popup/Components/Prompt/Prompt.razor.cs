@@ -93,7 +93,7 @@ public partial class Prompt : PopupComponentBase
 
     private async Task HandleOnOk()
     {
-        if (_form.EditContext.Validate())
+        if (_form.Validate())
         {
             await HandleOnSubmit();
         }

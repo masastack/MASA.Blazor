@@ -1,4 +1,4 @@
-﻿<PImageCaptcha CaptchaWidth="200" Outlined Label="VerifyCode" ErrorMessage="@ErrorMessage" VerifyCode="@verifyCode" OnRefresh="RefreshCode"></PImageCaptcha>
+﻿<PImageCaptcha @bind-Value="value" CaptchaWidth="200" Outlined Label="VerifyCode" ErrorMessage="@ErrorMessage" VerifyCode="@verifyCode" OnRefresh="RefreshCode"></PImageCaptcha>
 
 @code {
     string randomCode = "123456789";
@@ -8,6 +8,8 @@
     string verifyCode = "";
 
     string ErrorMessage = "Verify code error";
+
+    string value;
 
     Random random = new Random();
 
