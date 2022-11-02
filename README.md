@@ -146,7 +146,7 @@ services.AddMasaBlazor();
 ### Clone code
 
 ```shell
-git clone --recursive git@github.com:BlazorComponent/MASA.Blazor.git
+git clone --recursive https://github.com/BlazorComponent/MASA.Blazor.git
 cd MASA.Blazor
 git submodule foreach git checkout main
 ```
