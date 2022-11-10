@@ -6027,6 +6027,67 @@
     "Tag": "js-proxy"
   },
   {
+    "Desc": "<p>基于<a href=\"https://github.com/markdown-it/markdown-it\">markdown-it</a>封装</p>\n",
+    "Order": 0,
+    "OtherDocs": {
+      "API": "\n<ul>\n<li><a href=\"/api/MMarkdownIt\">MMarkdownIt</a></li>\n</ul>\n"
+    },
+    "LastWriteTime": "2022-10-26T13:58:25.9056642+08:00",
+    "DemoList": [
+      {
+        "Order": 0,
+        "Name": "basic",
+        "Title": "使用",
+        "Description": "",
+        "Code": "<MMarkdownIt Source=\"@source\" Class=\"markdown-parser__basic\" />\r\n\r\n@code {\r\n\r\n    private string source = @\"\r\n## What is Markdown?\r\n\r\nMarkdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents. Created by [John Gruber](https://daringfireball.net/projects/markdown/) in 2004, Markdown is now one of the world’s most popular markup languages.\r\n\r\nUsing Markdown is different than using a [WYSIWYG](https://en.wikipedia.org/wiki/WYSIWYG) editor. In an application like Microsoft Word, you click buttons to format words and phrases, and the changes are visible immediately. Markdown isn’t like that. When you create a Markdown-formatted file, you add Markdown syntax to the text to indicate which words and phrases should look different.\r\n\r\nFor example, to denote a heading, you add a number sign before it (e.g., # Heading One). Or to make a phrase bold, you add two asterisks before and after it (e.g., **this text is bold**). It may take a while to get used to seeing Markdown syntax in your text, especially if you’re accustomed to WYSIWYG applications. The screenshot below shows a Markdown file displayed in the [Visual Studio Code text editor](https://www.markdownguide.org/tools/vscode/).\r\n\r\n![markdown in vscode](https://mdg.imgix.net/assets/images/vscode.png?auto=format&fit=clip&q=40&w=1080)\r\n\r\nYou can add Markdown formatting elements to a plaintext file using a text editor application. Or you can use one of the many Markdown applications for macOS, Windows, Linux, iOS, and Android operating systems. There are also several web-based applications specifically designed for writing in Markdown.\r\n\r\nDepending on the application you use, you may not be able to preview the formatted document in real time. But that’s okay. According to Gruber, Markdown syntax is designed to be readable and unobtrusive, so the text in Markdown files can be read even if it isn’t rendered.\r\n\r\n> The overriding design goal for Markdown’s formatting syntax is to make it as readable as possible. The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.\";\r\n\r\n}\r\n\r\n<style>\r\n    .markdown-parser__basic img {\r\n        max-width: 100%;\r\n    }\r\n    \r\n    .markdown-parser__basic blockquote {\r\n        border-left: 4px lightgray solid;\r\n        padding-left: 16px;\r\n    }\r\n</style>",
+        "Type": "Demos.Components.MarkdownIt.usage.Basic",
+        "Style": "",
+        "Debug": false,
+        "Group": 4
+      },
+      {
+        "Order": 0,
+        "Name": "options",
+        "Title": "选项",
+        "Description": "<p>完整选项列表请移步 <a href=\"https://github.com/markdown-it/markdown-it#init-with-presets-and-options\">markdown-it</a>。</p>\n",
+        "Code": "<MSwitch @bind-Value=\"html\" HideDetails=\"true\" Label=\"html: Enable HTML tags in source\"></MSwitch>\r\n<MSwitch @bind-Value=\"breaks\" HideDetails=\"true\" Label=\"breaks: Convert '\\n' in paragraphs into <br>\"></MSwitch>\r\n<MSwitch @bind-Value=\"linkify\" HideDetails=\"true\" Label=\"linkify: Autoconvert URL-like text to links\"></MSwitch>\r\n<MSwitch @bind-Value=\"typographer\" HideDetails=\"true\" Label=\"typographer: Enable some language-neutral replacement + quotes beautification\"></MSwitch>\r\n\r\n<MMarkdownIt Source=\"@source\"\r\n             Html=\"@html\"\r\n             Breaks=\"breaks\"\r\n             Linkify=\"linkify\"\r\n             Typographer=\"typographer\"\r\n             Class=\"mt-4 pa-1\"\r\n             Style=\"border: 1px lightgrey solid \" />\r\n\r\n@code {\r\n\r\n    private string source = @\"\r\n- html: \r\n  <b>Bold</b>\r\n- breaks:\r\n  Convert '\\n' in paragraphs into <br>\r\n- linkify:\r\n  https://blazor.masastack.com\r\n- typographer:\r\n  \"\"Smartypants, double quotes\"\" and 'single quotes'\r\n\";\r\n\r\n    private bool html;\r\n    private bool breaks;\r\n    private bool linkify;\r\n    private bool typographer;\r\n\r\n}\r\n",
+        "Type": "Demos.Components.MarkdownIt.props.Options",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "tagClassMap",
+        "Title": "标签样式映射",
+        "Description": "<p>为相同的HTML标签设置相同的样式。功能来自 <a href=\"https://github.com/HiroshiOkada/markdown-it-class\">markdown-it-class</a>。</p>\n",
+        "Code": "<MMarkdownIt Key=\"TagClassMapDemo\" Source=\"@source\" TagClassMap=\"@tagClassMap\" />\r\n\r\n@code {\r\n\r\n    private string source = @\"\r\n# h1 Heading\r\n## h2 Heading\r\n### h3 Heading\r\n#### h4 Heading\r\n\";\r\n\r\n    private Dictionary<string, string> tagClassMap = new()\r\n    {\r\n        { \"h1\", \"text-h1\" },\r\n        { \"h2\", \"text-h2\" },\r\n        { \"h3\", \"text-h3\" },\r\n        { \"h4\", \"text-h4\" },\r\n    };\r\n\r\n}\r\n\r\n<style>\r\n    .markdown-parser__tagClassMap.h1 {\r\n       color: #212121;\r\n    }    \r\n    .markdown-parser__tagClassMap.h2 {\r\n       color: #424242;\r\n    }    \r\n    .markdown-parser__tagClassMap.h3 {\r\n       color: #616161;\r\n    }    \r\n    .markdown-parser__tagClassMap.h4 {\r\n       color: #757575;\r\n    }\r\n    \r\n</style>\r\n",
+        "Type": "Demos.Components.MarkdownIt.props.TagClassMap",
+        "Style": "",
+        "Debug": false,
+        "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "highlight",
+        "Title": "代码高亮",
+        "Description": "<p>支持 <a href=\"https://prismjs.com/\">prism</a> 和 <a href=\"https://highlightjs.org/\">highlightjs</a> 两种高亮方案。需要在<code>_Host.cshtml</code>或<code>index.html</code>引入其中一种方案的js和css文件。</p>\n",
+        "Code": "<MMarkdownIt Source=\"@source\" Class=\"markdown-parser__highlight\"></MMarkdownIt>\r\n\r\n@code {\r\n\r\n    private string source = @\"\r\nbasic demo of **MarkdownIt**:\r\n\r\n```razor\r\n<MMarkdownIt Source=\"\"@source\"\"></MMarkdownIt>\r\n\r\n@code {\r\n    private string source = @\"\"# h1 Heading\"\";\r\n}\r\n```\r\n\r\nsource code of **MMarkdownIt**:\r\n\r\n```csharp\r\nnamespace Masa.Blazor;\r\n\r\npublic class MMarkdownIt : BMarkdownIt\r\n{\r\n    protected override void SetComponentClass()\r\n    {\r\n        base.SetComponentClass();\r\n\r\n        CssProvider.Apply(css => { css.Add(\"\"m-markdown-it\"\"); });\r\n    }\r\n}\r\n```\r\n\";\r\n\r\n}\r\n\r\n<style>\r\n    .markdown-parser__highlight pre {\r\n      overflow: auto;\r\n      background: #fafafa;\r\n      border-radius: 4px;\r\n      padding: 8px;\r\n    }\r\n    \r\n    .markdown-parser__highlight code {\r\n      background-color: unset !important;\r\n    }\r\n\r\n    .markdown-parser__highlight p {\r\n      margin-bottom: 0;\r\n    }\r\n</style>\r\n",
+        "Type": "Demos.Components.MarkdownIt.misc.Highlight",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
+      }
+    ],
+    "Children": [],
+    "Category": "Components",
+    "Cols": 1,
+    "Subtitle": "Markdown解析器",
+    "Title": "Markdown parsers",
+    "Type": "Markdown解析器",
+    "Tag": "js-proxy"
+  },
+  {
     "Desc": "<p><code>MMenu</code> 组件在激活它的元素的位置上展示一个菜单。</p>\n",
     "Order": 0,
     "OtherDocs": {

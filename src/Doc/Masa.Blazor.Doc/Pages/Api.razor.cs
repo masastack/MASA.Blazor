@@ -106,6 +106,7 @@ public partial class Api
         "MListItemTitle",
         "MMain",
         "MMarkdown",
+        "MMarkdownIt",
         "MMenu",
         "MMessages",
         "MNavigationDrawer",

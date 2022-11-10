@@ -1,0 +1,80 @@
+﻿{
+  "Title": "MMarkdownIt",
+  "Components": [
+    "Markdown parsers"
+  ],
+  "Props": [
+    {
+      "Name": "Breaks",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Class",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的class"
+    },
+    {
+      "Name": "HeaderSections",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Html",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Id",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Key",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "LangPrefix",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Linkify",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "Quotes",
+      "Type": "String[]",
+      "Description": ""
+    },
+    {
+      "Name": "Source",
+      "Type": "String",
+      "Description": ""
+    },
+    {
+      "Name": "Style",
+      "Type": "String",
+      "Description": "应用到组件最外层元素的style"
+    },
+    {
+      "Name": "TagClassMap",
+      "Type": "Dictionary<String,String>",
+      "Description": ""
+    },
+    {
+      "Name": "Typographer",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
+      "Name": "XHtmlOut",
+      "Type": "Boolean",
+      "Description": ""
+    }
+  ],
+  "Contents": [],
+  "Events": []
+}
