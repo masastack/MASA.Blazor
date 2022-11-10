@@ -217,9 +217,9 @@ public partial class MCarousel : MWindow, ICarousel, IDisposable
         Timer.Start();
     }
 
-    public override void Dispose()
+    protected override void Dispose(bool disposing)
     {
-        base.Dispose();
+        base.Dispose(disposing);
 
         if (Timer is not null)
         {

@@ -101,6 +101,7 @@ namespace Masa.Blazor.Doc.CLI.Commands
             { "MListItemTitle", new string[] { "Lists", "List item groups" } },
             { "MMain", new string[] { "Application" } },
             { "MMarkdown", new string[] { "Markdown" } },
+            { "MMarkdownIt", new string[] { "Markdown parsers" } },
             { "MMenu", new string[] { "Menus" } },
             { "MMessages", new string[] { "Messages" } },
             { "MMobilePickerView", new string[] { "Mobile picker views" } },

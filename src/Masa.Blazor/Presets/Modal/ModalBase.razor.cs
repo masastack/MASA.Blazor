@@ -214,7 +214,7 @@ public partial class ModalBase
     {
         if (Form != null)
         {
-            if (Form.EditContext.Validate())
+            if (Form.Validate())
             {
                 await _debounceHandleOnSave(args);
             }
