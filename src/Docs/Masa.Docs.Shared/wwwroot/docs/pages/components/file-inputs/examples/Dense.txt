@@ -1,8 +1,0 @@
-﻿
-<div>
-    <MFileInput TValue="IBrowserFile"
-                Dense
-                Outlined
-                Label="File input"></MFileInput>
-</div>
-

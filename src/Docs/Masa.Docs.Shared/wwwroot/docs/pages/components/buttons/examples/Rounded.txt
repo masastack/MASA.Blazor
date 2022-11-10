@@ -1,3 +1,0 @@
-﻿<div class="text-center">
-    <MButton Rounded Color="primary" Dark>Rounded Button</MButton>
-</div>
