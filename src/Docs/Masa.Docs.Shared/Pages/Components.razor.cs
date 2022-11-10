@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Globalization;
+using System.Net;
 using System.Text.RegularExpressions;
 using Masa.Docs.Shared.ApiGenerator;
 using Microsoft.AspNetCore.Components.Routing;
@@ -17,15 +18,19 @@ public partial class Components : IDisposable
     [Inject]
     private AppService AppService { get; set; } = null!;
 
+    [CascadingParameter]
+    private CultureInfo Culture { get; set; } = null!;
+
     [Parameter]
     public string Page { get; set; } = null!;
 
     [Parameter]
     public string? Tab { get; set; }
 
-    private string? _prevPage;
 
     private string? _md;
+    private string? _prevPage;
+    private CultureInfo? _prevCulture;
     private FrontMatterMeta? _frontMatterMeta;
 
     private readonly Dictionary<string, Dictionary<string, List<ParameterInfo>>> _apiData = new();
@@ -40,6 +45,17 @@ public partial class Components : IDisposable
 
         _prevPage = Page;
         NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+
+        if (_prevCulture is not null && !Equals(_prevCulture, Culture))
+        {
+            _prevCulture = Culture;
+            await ReadDocumentAndApiAsync();
+        }
     }
 
     private async void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -81,14 +97,21 @@ public partial class Components : IDisposable
 
         if (firstRender)
         {
-            await ReadDocumentAsync();
+            _prevCulture = Culture;
 
-            if (IsApiTab)
-            {
-                await ReadApisAsync();
-            }
+            await ReadDocumentAndApiAsync();
 
             StateHasChanged();
+        }
+    }
+
+    private async Task ReadDocumentAndApiAsync()
+    {
+        await ReadDocumentAsync();
+
+        if (IsApiTab)
+        {
+            await ReadApisAsync();
         }
     }
 
