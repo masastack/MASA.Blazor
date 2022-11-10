@@ -1,0 +1,131 @@
+﻿<MRow Justify="JustifyTypes.Center">
+    <MCol Cols="12" Sm="8" Md="6">
+        <MCard>
+            <MToolbar Color="orange lighten-1" Dark>
+                <MAppBarNavIcon></MAppBarNavIcon>
+
+                <MToolbarTitle>Message Board</MToolbarTitle>
+
+                <MSpacer></MSpacer>
+
+                <MButton Icon>
+                    <MIcon>mdi-magnify</MIcon>
+                </MButton>
+            </MToolbar>
+
+            <MList TwoLine>
+                @foreach (var item in _items)
+                {
+                    if (!string.IsNullOrWhiteSpace(item.Header))
+                    {
+                        <MSubheader Inset>@item.Header</MSubheader>
+                    }
+                    else if (item.Divider)
+                    {
+                        <MDivider Inset></MDivider>
+                    }
+                    else
+                    {
+                        <MListItem Ripple>
+                            <MListItemAvatar>
+                                <MImage Src="@item.Avatar"></MImage>
+                            </MListItemAvatar>
+                            <MListItemContent>
+                                <MListItemTitle>@((MarkupString)item.Title)</MListItemTitle>
+                                <MListItemSubtitle>@((MarkupString)item.SubTtile)</MListItemSubtitle>
+                            </MListItemContent>
+                        </MListItem>
+                    }
+                }
+            </MList>
+        </MCard>
+    </MCol>
+</MRow>
+
+@code
+{
+    private class DataDemo
+    {
+        public string Header { get; set; }
+        public string Avatar { get; set; }
+        public string Title { get; set; }
+        public string SubTtile { get; set; }
+        public bool Divider { get; set; }
+    }
+
+    private List<DataDemo> _items = new List<DataDemo>()
+    {
+        new DataDemo
+        {
+            Header = "Today"
+        },
+        new DataDemo
+        {
+            Divider = true
+        },
+        new DataDemo
+        {
+            Avatar = "https://picsum.photos/250/300?image=660",
+            Title = "Meeting @ Noon",
+            SubTtile = "<span class=\"font-weight-bold\">Spike Lee</span> &mdash; I'll be in your neighborhood"
+        },
+        new DataDemo
+        {
+            Avatar = "https://picsum.photos/250/300?image=821",
+            Title = "Summer BBQ <span class=\"grey--text text--lighten-1\"></span>",
+            SubTtile = "<span class=\"font-weight-bold\">to Operations support</span> &mdash; Wish I could come."
+        },
+        new DataDemo
+        {
+            Avatar = "https://picsum.photos/250/300?image=783",
+            Title = "Yes yes",
+            SubTtile = "<span class=\"font-weight-bold\">Bella</span> &mdash; Do you have Paris recommendations"
+        },
+        new DataDemo
+        {
+            Header = "Yesterday"
+        },
+        new DataDemo
+        {
+            Divider = true
+        },
+        new DataDemo
+        {
+            Avatar = "https://picsum.photos/250/300?image=1006",
+            Title = "Dinner tonight?",
+            SubTtile = "<span class=\"font-weight-bold\">LaToya</span> &mdash; Do you want to hang out?"
+        },
+        new DataDemo
+        {
+            Avatar = "https://picsum.photos/250/300?image=146",
+            Title = "So long",
+            SubTtile = "<span class=\"font-weight-bold\">Nancy</span> &mdash; Do you see what time it is?"
+        },
+        new DataDemo
+        {
+            Header = "Last Week"
+        },
+        new DataDemo
+        {
+            Divider = true
+        },
+        new DataDemo
+        {
+            Avatar = "https://picsum.photos/250/300?image=1008",
+            Title = "Breakfast?",
+            SubTtile = "<span class=\"font-weight-bold\">LaToya</span> &mdash; Do you want to hang out?"
+        },
+        new DataDemo
+        {
+            Avatar = "https://picsum.photos/250/300?image=839",
+            Title = "Winter Porridge <span class=\"grey--text text--lighten-1\"></span>",
+            SubTtile = "<span class=\"font-weight-bold\">cc: Daniel</span> &mdash; Tell me more..."
+        },
+        new DataDemo
+        {
+            Avatar = "https://picsum.photos/250/300?image=145",
+            Title = "Oui oui",
+            SubTtile = "<span class=\"font-weight-bold\">Nancy</span> &mdash; Do you see what time it is?"
+        }
+    };
+}

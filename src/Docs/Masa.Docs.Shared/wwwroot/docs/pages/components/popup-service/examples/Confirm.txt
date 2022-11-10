@@ -1,0 +1,110 @@
+﻿@inject IPopupService PopupService
+
+<MAlert Type="AlertTypes.Info">
+    <div>
+        在 <code>MApp</code> 组件通过 <code>ConfirmParameters</code> 设置Confirm的默认样式和行为。
+    </div>
+    <div>
+        例如：<code>ConfirmParameters="@@("param => { param.OkText = "Confirm"; })"</code>。
+    </div>
+</MAlert>
+
+<MDivider Class="my-4" />
+
+<MButton OnClick="ShowBasic">Basic Confirm</MButton>
+
+<MDivider Class="my-4" />
+
+<MRadioGroup @bind-Value="alertType">
+    <MRadio Value="AlertTypes.Success" Label="@nameof(AlertTypes.Success)"></MRadio>
+    <MRadio Value="AlertTypes.Warning" Label="@nameof(AlertTypes.Warning)"></MRadio>
+    <MRadio Value="AlertTypes.Error" Label="@nameof(AlertTypes.Error)"></MRadio>
+    <MRadio Value="AlertTypes.Info" Label="@nameof(AlertTypes.Info)"></MRadio>
+</MRadioGroup>
+
+<MButton OnClick="ShowTyped">Typed Confirm</MButton>
+
+<MDivider Class="my-4" />
+
+<MCheckbox @bind-Value="throwException" Label="Throw exception"></MCheckbox>
+<MButton OnClick="ShowAsync">Async Confirm</MButton>
+
+<MDivider Class="my-4" />
+
+<MButton OnClick="ShowCustom">Custom Confirm</MButton>
+
+@code {
+
+    private AlertTypes alertType = AlertTypes.None;
+    private bool throwException;
+
+    private async Task ShowBasic()
+    {
+        var confirmed = await PopupService.ConfirmAsync("Title", "This is the confirm content!");
+
+        await HandleConfirmResult(confirmed);
+    }
+
+    private async Task ShowTyped()
+    {
+        var confirmed = await PopupService.ConfirmAsync(
+            "Title",
+            "This is the confirm content!",
+            alertType);
+
+        await HandleConfirmResult(confirmed);
+    }
+
+    private async Task ShowAsync()
+    {
+        await PopupService.ConfirmAsync(
+            "Title",
+            "This is the confirm content!",
+            async args =>
+            {
+                try
+                {
+                    await Task.Delay(1000);
+
+                    if (throwException)
+                    {
+                        throw new Exception("something wrong!");
+                    }
+
+                    await PopupService.AlertAsync("Handle onOk successfully!", AlertTypes.Success);
+                }
+                catch (Exception e)
+                {
+                    args.Cancel();
+
+                    await PopupService.AlertAsync(e);
+                }
+            });
+    }
+
+    private async Task ShowCustom()
+    {
+        var confirmed = await PopupService.ConfirmAsync(param =>
+        {
+            param.Title = "Title";
+            param.Content = "This is the confirm content!";
+            param.OkText = "Confirm";
+            param.CancelText = "Ignore";
+        });
+
+        await HandleConfirmResult(confirmed);
+    }
+
+    private async Task HandleConfirmResult(bool confirmed)
+    {
+        if (confirmed)
+        {
+            await PopupService.AlertAsync("Ok was clicked!", AlertTypes.Info);
+        }
+        else
+        {
+            await PopupService.AlertAsync("Cancel was clicked!", AlertTypes.Warning);
+        }
+    }
+
+}

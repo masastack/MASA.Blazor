@@ -1,0 +1,78 @@
+﻿@namespace Masa.Docs.Shared.Components
+@inject AppService AppService
+
+<AppSheet MinHeight="@((StringNumber)61)">
+    <MListItem Href="@Href" Disabled="@Disabled">
+        <MListItemIcon>
+            <MIcon Color="@Color">@Icon</MIcon>
+        </MListItemIcon>
+
+        <MListItemContent>
+            <MListItemTitle>@Title</MListItemTitle>
+            <MListItemSubtitle>@Subtitle</MListItemSubtitle>
+        </MListItemContent>
+    </MListItem>
+</AppSheet>
+
+@code {
+
+    #region Unsupport hrefs
+
+    // TODO: Delete the code if unsupported hrefs is empty.
+
+    readonly List<string> _unsupportedHrefs = new()
+    {
+        "/getting-started/wireframes",
+        "/features/theme",
+        "/components/parallax",
+        "/components/selection-controls",
+        "/components/ellipsis-text",
+        "/components/combobox"
+    };
+
+    bool Disabled => _unsupportedHrefs.Contains(Href);
+
+    #endregion
+
+    readonly Dictionary<string, (string icon, string color)> _categories = new()
+    {
+        { "api", ("mdi-flask-outline", "orange") },
+        { "components", ("mdi-view-dashboard-outline", "indigo darken-1") },
+        { "features", ("mdi-image-edit-outline", "red") },
+        { "directives", ("mdi-function", "blue-grey") },
+        { "getting-started", ("mdi-speedometer", "teal") },
+        { "introduction", ("mdi-script-text-outline","green") },
+        { "about", ("mi-masa","primary") },
+        { "resources", ("mdi-human-male-board","pink") },
+        { "styles", ("mdi-palette-outline","deep-purple accent-4") },
+        { "themes", ("mdi-script-text-outline", "pink") },
+    };
+
+    /// <summary>
+    /// The href.
+    /// </summary>
+    /// <example>/{category}/{title}</example>
+    [EditorRequired]
+    [Parameter]
+    public string Href { get; set; }
+
+    private string Title => UpperFirst(Href.Split("/")[2]).Replace("-", " ");
+
+    public string Section => Href.Split("/")[1];
+
+    private string Subtitle => UpperFirst(Section);
+
+    private string? Color => _categories.TryGetValue(Section, out var value) ? value.color : null;
+
+    private string? Icon => _categories.TryGetValue(Section, out var value) ? value.icon : null;
+
+    string UpperFirst(string str)
+    {
+        if (str == null) return str;
+
+        var chr = str[0];
+
+        return chr.ToString().ToUpper() + str[1..];
+    }
+
+}

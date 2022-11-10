@@ -1,0 +1,35 @@
+﻿@namespace Masa.Docs.Shared.Components
+
+<DynamicComponent Type="Type" Parameters="Parameters"></DynamicComponent>
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public Type Type { get; set; } = null!;
+
+    [Parameter]
+    [EditorRequired]
+    public RenderFragment ChildContent { get; set; } = null!;
+
+    private Dictionary<string, object> Parameters => new()
+    {
+        { nameof(ChildContent), ChildContent }
+    };
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+
+        if (Type is null)
+        {
+            throw new InvalidOperationException($"{nameof(DynamicComponent)} requires a non-null value for the parameter {nameof(Type)}.");
+        }
+
+        if (ChildContent is null)
+        {
+            throw new InvalidOperationException($"{nameof(DynamicComponent)} requires a non-null value for the parameter {nameof(ChildContent)}.");
+        }
+    }
+
+}

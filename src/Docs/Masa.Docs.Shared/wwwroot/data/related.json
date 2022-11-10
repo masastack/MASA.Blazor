@@ -1,0 +1,9 @@
+﻿{
+  "components": {
+    "alerts": [
+      "components/buttons",
+      "components/icons",
+      "components/dialogs"
+    ]
+  }
+}

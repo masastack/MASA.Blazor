@@ -1,0 +1,44 @@
+﻿@using System.Text
+
+<MForm>
+    <MContainer>
+        <MRow>
+            <MCol Cols="12" Sm="6">
+                <PImageCaptcha Label="Regular" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
+            </MCol>
+            <MCol Cols="12" Sm="6">
+                <PImageCaptcha Outlined Label="OutLine" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
+            </MCol>
+            <MCol Cols="12" Sm="6">
+                <PImageCaptcha Filled Label="Filled" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
+            </MCol>
+            <MCol Cols="12" Sm="6">
+                <PImageCaptcha Dense Label="Dense" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
+            </MCol>
+            <MCol Cols="12" Sm="6">
+                <PImageCaptcha Solo Label="Solo" OnRefresh="RefreshCode" ErrorMessage="@errorMessage"></PImageCaptcha>
+            </MCol>
+        </MRow>
+    </MContainer>
+</MForm>
+
+
+@code {
+    string errorMessage = "Verify Code Error";
+
+    string randomCode = "1234567890abcdefghijklmn";
+
+    Random random = new Random();
+
+    private Task<string> RefreshCode()
+    {
+        var sb = new StringBuilder();
+
+        for (int i = 0; i < 5; i++)
+        {
+            sb.Append(randomCode[random.Next(0, randomCode.Length)]);
+        }
+
+        return Task.FromResult(sb.ToString());
+    }
+}

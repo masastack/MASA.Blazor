@@ -1,0 +1,28 @@
+﻿@using AlertTypes = BlazorComponent.AlertTypes
+
+<div>
+    <MAlert Prominent
+            Type="AlertTypes.Error">
+        <MRow Align="@AlignTypes.Center">
+            <MCol Class="grow">
+                Nunc nonummy metus. Nunc interdum lacus sit amet orci. Nullam dictum felis eu pede mollis pretium. Cras id dui.
+            </MCol>
+            <MCol Class="shrink">
+                <MButton>Take action</MButton>
+            </MCol>
+        </MRow>
+    </MAlert>
+    <MAlert Color="blue-grey"
+            Dark
+            Dense
+            Icon="@("mdi-school")"
+            Prominent>
+        Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui. Aenean ut eros et nisl sagittis vestibulum. Sed aliquam ultrices mauris. Donec vitae orci sed dolor rutrum auctor.
+    </MAlert>
+    <MAlert Icon="@("mdi-shield-lock-outline")"
+            Prominent
+            Text
+            Type="AlertTypes.Info">
+        Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Sed in libero ut nibh placerat accumsan.. Curabitur blandit mollis lacus. Curabitur blandit mollis lacus.
+    </MAlert>
+</div>

@@ -1,0 +1,83 @@
+﻿@using BlazorComponent.I18n
+@using FluentValidation;
+
+<MForm Model="_orderDetail" EnableValidation EnableI18n>
+    <MTextField @bind-Value="_orderDetail.Title" Label="Title"></MTextField>
+    <MTextField @bind-Value="_orderDetail.Price" Label="Price" Type="number"></MTextField>
+    @foreach (var customer in _orderDetail.Customers)
+    {
+        <MCard Flat>
+            <MCardTitle>Customer:@customer.Id</MCardTitle>
+            <MCardText>
+                <MTextField @bind-Value="customer.Name" Label="Name"></MTextField>
+                <MTextField @bind-Value="customer.Age" Label="Age" Type="number"></MTextField>
+            </MCardText>
+        </MCard>
+    }
+    <MButton OnClick="()=>SubmitOrder(context)" Color="success">Validate</MButton>
+</MForm>
+
+@code {
+    class OrderDetail
+    {
+        public int Id { get; set; }
+
+        public string Title { get; set; }
+
+        public decimal Price { get; set; }
+
+        public List<Customer> Customers { get; set; }
+    }
+
+    class Customer
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public int Age { get; set; }
+    }
+
+    class OrderDetailValidator : AbstractValidator<OrderDetail>
+    {
+        public OrderDetailValidator(I18n i18n)
+        {
+            RuleFor(o => o.Title).NotEmpty();
+            RuleFor(o => o.Price).InclusiveBetween(0,20);
+            RuleForEach(o => o.Customers).SetValidator(new CustomerValidator());
+        }
+    }
+
+    class CustomerValidator : AbstractValidator<Customer>
+    {
+        public CustomerValidator()
+        {
+            RuleFor(o => o.Name).NotEmpty();
+            RuleFor(o => o.Age).InclusiveBetween(25,100);
+        }
+    }
+
+    private OrderDetail _orderDetail = new()
+    {
+        Customers = new List<Customer>
+        {
+            new Customer
+            {
+                Id=1
+            },
+            new Customer
+            {
+                Id=2
+            }
+        }
+    };
+
+    public async Task SubmitOrder(FormContext context)
+    {
+        var success = context.Validate();
+        if (success)
+        {
+            //验证成功，操作业务
+        }
+    }
+}

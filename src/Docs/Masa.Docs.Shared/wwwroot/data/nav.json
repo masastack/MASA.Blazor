@@ -1,0 +1,139 @@
+[
+  {
+    "title": "introduction",
+    "icon": "mdi-book",
+    "items": [
+      "why-masa-blazor",
+      "roadmap"
+    ]
+  },
+  {
+    "title": "getting-started",
+    "icon": "mdi-lightning-bolt",
+    "items": [
+      "installation"
+    ]
+  },
+  {
+    "title": "ui-components",
+    "icon": "mdi-cards-variant",
+    "group": "components",
+    "items": [
+      "alerts",
+      "application",
+      "aspect-ratios",
+      "avatars",
+      "badges",
+      "banners",
+      {
+        "title": "bars",
+        "group": "components",
+        "items": [
+          "app-bars",
+          "toolbars",
+          "system-bars"
+        ]
+      },
+      "block-text",
+      "borders",
+      "bottom-navigation",
+      "bottom-sheets",
+      "breadcrumbs",
+      "buttons",
+      "cards",
+      "chips",
+      "dialogs",
+      "dividers",
+      "drag-zone",
+      "echarts",
+      "editor",
+      "error-handler",
+      "expansion-panels",
+      "floating-action-buttons",
+      "footers",
+      {
+        "title": "Form inputs & controls",
+        "group": "components",
+        "items": [
+          "autocomplete",
+          "cascaders",
+          "checkboxes",
+          "file-inputs",
+          "forms",
+          "otp-input",
+          "radio",
+          "range-sliders",
+          "selects",
+          "sliders",
+          "switches",
+          "textareas",
+          "text-fields"
+        ]
+      },
+      "grids",
+      {
+        "title": "Groups",
+        "group": "components",
+        "items": [
+          "button-groups",
+          "chip-groups",
+          "item-groups",
+          "list-item-groups",
+          "slide-groups"
+        ]
+      },
+      "hover",
+      "icons",
+      "image-captcha",
+      "images",
+      "infinite-scroll",
+      "lists",
+      "markdown",
+      "menus",
+      "modals",
+      "navigation-drawers",
+      "not-grouped",
+      "overlays",
+      "pagination",
+      {
+        "title": "Pickers",
+        "group": "components",
+        "items": [
+          "date-pickers",
+          "date-pickers-month",
+          "time-pickers"
+        ]
+      },
+      "popup-service",
+      {
+        "title": "Progress",
+        "group": "components",
+        "items": [
+          "progress-circular",
+          "progress-linear"
+        ]
+      },
+      "ratings",
+      "sheets",
+      "skeleton-loaders",
+      "snackbars",
+      "steppers",
+      "subheaders",
+      {
+        "title": "Tables",
+        "group": "components",
+        "items": [
+          "data-iterators",
+          "data-tables",
+          "simple-tables"
+        ]
+      },
+      "tabs",
+      "timelines",
+      "toast",
+      "tooltips",
+      "treeview",
+      "virtual-scroll"
+    ]
+  }
+]

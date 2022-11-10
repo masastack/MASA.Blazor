@@ -1,0 +1,52 @@
+﻿<MCard Class="mx-auto my-12" MaxWidth="374" Loading=@_loading>
+    <ProgressContent>
+        <MProgressLinear Color="deep-purple" Height="10" Indeterminate />
+    </ProgressContent>
+
+    <ChildContent>
+
+        <MImage Alt="example" Height="250" Src="https://cdn.masastack.com/stack/images/website/masa-blazor/cards/cooking.png" />
+
+        <MCardTitle>Cafe Badilico</MCardTitle>
+
+        <MCardText>
+            <MRow Align=@AlignTypes.Center Class="mx-0">
+                <MRating Value=4.5 Color="amber" Dense HalfIncrements Readonly Size=14></MRating>
+                <div class="grey--text ms-4">4.5 (413)</div>
+            </MRow>
+            <div class="my-4 text-subtitle-1">$ • Italian, Cafe </div>
+            <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
+        </MCardText>
+
+        <MDivider Class="mx-4"></MDivider>
+
+        <MCardTitle>Tonight's availability</MCardTitle>
+
+        <MCardText>
+            <MChipGroup Value=@_selection ActiveClass="deep-purple accent-4 white--text" Column>
+                <MChip OnClick="()=>_selection=0">5:30PM</MChip>
+                <MChip OnClick="()=>_selection=1">7:30PM</MChip>
+                <MChip OnClick="()=>_selection=2">8:00PM</MChip>
+                <MChip OnClick="()=>_selection=3">9:00PM</MChip>
+            </MChipGroup>
+        </MCardText>
+
+        <MCardActions>
+            <MButton Color="deep-purple lighten-2" Text @onclick="Reserve">Reserve</MButton>
+        </MCardActions>
+
+    </ChildContent>
+</MCard>
+
+@code {
+    StringBoolean _loading;
+
+    int _selection = 1;
+
+    async Task Reserve()
+    {
+        _loading = true;
+        await Task.Delay(2000);
+        _loading = false;
+    }
+}

@@ -1,0 +1,31 @@
+﻿<div>
+    <MContainer Class="grey lighten-5">
+        <MRow Class="mb-6"
+              NoGutters>
+            @for (var index = 0; index < 3; index++)
+            {
+                var localVariable = index + 1;
+                <MCol Cols="@(localVariable == 2 ? 6 : null)">
+                    <MCard Class="pa-2"
+                           Outlined
+                           tile>
+                        @localVariable of 3 @(localVariable == 2 ? "(wider)" : "")
+                    </MCard>
+                </MCol>
+            }
+        </MRow>
+        <MRow NoGutters>
+            @for (int index = 0; index < 3; index++)
+            {
+                var localVariable = index + 1;
+                <MCol Cols="@(localVariable == 2 ? 5 : null)">
+                    <MCard Class="pa-2"
+                           Outlined
+                           tile>
+                        @localVariable of 3 @(localVariable == 2 ? "(wider)" : "")
+                    </MCard>
+                </MCol>
+            }
+        </MRow>
+    </MContainer>
+</div>

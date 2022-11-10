@@ -1,0 +1,7 @@
+﻿<MTimeline>
+    <MTimelineItem>timeline item</MTimelineItem>
+    <MTimelineItem Class="text-right">timeline item</MTimelineItem>
+    <MTimelineItem>timeline item</MTimelineItem>
+</MTimeline>
+
+

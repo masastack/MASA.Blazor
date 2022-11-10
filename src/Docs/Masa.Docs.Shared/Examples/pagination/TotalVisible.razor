@@ -1,0 +1,10 @@
+﻿<div class="text-center">
+    <MPagination @bind-Value="_page"
+                 Length="15"
+                 TotalVisible="7"></MPagination>
+</div>
+
+@code{
+    private int _page = 1;
+}
+

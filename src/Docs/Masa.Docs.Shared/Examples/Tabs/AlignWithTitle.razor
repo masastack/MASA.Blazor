@@ -1,0 +1,56 @@
+﻿<MCard>
+    <MToolbar Color="cyan" Dark Flat>
+        <ChildContent>
+            <MAppBarNavIcon></MAppBarNavIcon>
+
+            <MToolbarTitle>Your Dashboard</MToolbarTitle>
+
+            <MSpacer></MSpacer>
+
+            <MButton Icon>
+                <MIcon>mdi-magnify</MIcon>
+            </MButton>
+
+            <MButton Icon>
+                <MIcon>mdi-dots-vertical</MIcon>
+            </MButton>
+        </ChildContent>
+
+        <ExtensionContent>
+            <MTabs @bind-Value="tab" 
+                   AlignWithTitle
+                   SliderColor="yellow">
+                @foreach (var item in items)
+                {
+                    <MTab Value="item">
+                        @item
+                    </MTab>
+                }
+            </MTabs>
+        </ExtensionContent>
+    </MToolbar>
+
+    <MTabsItems @bind-Value="tab">
+        @foreach (var item in items)
+        {
+            <MTabItem Value="item">
+                <MCard Flat>
+                    <MCardText>@text</MCardText>
+                </MCard>
+            </MTabItem>
+        }
+    </MTabsItems>
+</MCard>
+
+@code {
+
+    StringNumber tab;
+
+    List<string> items = new()
+    {
+        "web", "shopping", "videos", "images", "news",
+    };
+
+    string text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+
+}

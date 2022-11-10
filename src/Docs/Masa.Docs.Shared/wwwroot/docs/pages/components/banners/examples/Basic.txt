@@ -1,0 +1,5 @@
+﻿<div style="width:100%">
+    <MBanner>
+         A banner for use on desktop / mobile 
+    </MBanner>
+</div>

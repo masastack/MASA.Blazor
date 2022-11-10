@@ -1,0 +1,12 @@
+﻿<MRow Justify="@JustifyTypes.SpaceAround">
+    <MDatePicker @bind-Value="_picker"
+                 Color="green lighten-1"></MDatePicker>
+    <MDatePicker @bind-Value="_picker2"
+                 Color="green lighten-1"
+                 HeaderColor="primary"></MDatePicker>
+</MRow>
+
+@code{
+    private DateOnly _picker = DateOnly.FromDateTime(DateTime.Now);
+    private DateOnly _picker2 = DateOnly.FromDateTime(DateTime.Now);
+}

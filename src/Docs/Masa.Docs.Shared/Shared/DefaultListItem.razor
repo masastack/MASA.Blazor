@@ -1,0 +1,26 @@
+﻿@inject I18n I18n
+@typeparam TItem where TItem : IDefaultItem<TItem>
+
+<MListItem Href="@Item.Href"
+           Class="m-list-item--default"
+           Color="primary">
+    @if (Item.Icon is not null)
+    {
+        <MListItemIcon>
+            <MIcon>@Item.Icon</MIcon>
+        </MListItemIcon>
+    }
+
+    <MListItemContent>
+        <MListItemTitle>@I18n.T(Item.Title)</MListItemTitle>
+    </MListItemContent>
+</MListItem>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public TItem Item { get; set; }
+
+    private string Href => "/todo";
+
+}

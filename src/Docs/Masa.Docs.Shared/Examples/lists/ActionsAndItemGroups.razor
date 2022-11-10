@@ -1,0 +1,92 @@
+﻿<MCard Class="mx-auto" MaxWidth="400">
+    <MToolbar Color="purple" Dark>
+        <MAppBarNavIcon></MAppBarNavIcon>
+
+        <MToolbarTitle>Settings</MToolbarTitle>
+
+        <MSpacer></MSpacer>
+
+        <MButton Icon>
+            <MIcon>mdi-magnify</MIcon>
+        </MButton>
+    </MToolbar>
+
+    <MList
+        Subheader
+        ThreeLine>
+        <MSubheader>User Controls</MSubheader>
+
+        <MListItem>
+            <MListItemContent>
+                <MListItemTitle>Content filtering</MListItemTitle>
+                <MListItemSubtitle>Set the content filtering level to restrict appts that can be downloaded</MListItemSubtitle>
+            </MListItemContent>
+        </MListItem>
+
+        <MListItem>
+            <MListItemContent>
+                <MListItemTitle>Password</MListItemTitle>
+                <MListItemSubtitle>Require password for purchase or use password to restrict purchase</MListItemSubtitle>
+            </MListItemContent>
+        </MListItem>
+    </MList>
+
+    <MDivider></MDivider>
+
+    <MList
+        Flat
+        Subheader
+        ThreeLine>
+        <MSubheader>General</MSubheader>
+
+        <MListItemGroup
+            @bind-Values="settings"
+            Multiple
+            ActiveClass="">
+            <MListItem>
+                <ItemContent>
+                    <MListItemAction>
+                        <MCheckbox Value="@context.Active"></MCheckbox>
+                    </MListItemAction>
+
+                    <MListItemContent>
+                        <MListItemTitle>Notifications</MListItemTitle>
+                        <MListItemSubtitle>Notify me about updates to apps or games that I downloaded</MListItemSubtitle>
+                    </MListItemContent>
+                </ItemContent>
+            </MListItem>
+
+            <MListItem>
+                <ItemContent>
+                    <MListItemAction>
+                        <MCheckbox Value="@context.Active"></MCheckbox>
+                    </MListItemAction>
+
+                    <MListItemContent>
+                        <MListItemTitle>Sound</MListItemTitle>
+                        <MListItemSubtitle>Auto-update apps at any time. Data charges may apply</MListItemSubtitle>
+                    </MListItemContent>
+                </ItemContent>
+            </MListItem>
+
+            <MListItem>
+                <ItemContent>
+                    <MListItemAction>
+                        <MCheckbox Value="@context.Active"></MCheckbox>
+                    </MListItemAction>
+
+                    <MListItemContent>
+                        <MListItemTitle>Auto-add widgets</MListItemTitle>
+                        <MListItemSubtitle>Automatically add home screen widgets when downloads complete</MListItemSubtitle>
+                    </MListItemContent>
+                </ItemContent>
+            </MListItem>
+        </MListItemGroup>
+    </MList>
+</MCard>
+
+@code {
+
+    List<StringNumber> settings = new();
+
+}

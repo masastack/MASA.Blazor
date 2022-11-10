@@ -1,3 +1,38 @@
 ﻿@page "/"
 
 <h1>Hello, world!</h1>
+
+<MContainer Class="px-0"
+            Fluid>
+
+    <MRadioGroup Value="_radioGroup" ValueChanged="ValueChanged" TValue="int">
+            @for (var i = 0; i < 3; i++)
+            {
+                var n = i + 1;
+                <MRadio @key="n"
+                        Label="@($"Radio {n}")"
+                        Value="n"></MRadio>
+            }
+        </MRadioGroup>
+    
+    <MButton OnClick="() => _radioGroup = 3">@_radioGroup</MButton>
+</MContainer>
+
+@code {
+
+    private void ValueChanged(int val)
+    {
+        _radioGroup = val;
+        
+        StateHasChanged();
+
+        _radioGroup = 1;
+        
+        StateHasChanged();
+    }
+
+
+
+    private int _radioGroup = 1;
+
+}

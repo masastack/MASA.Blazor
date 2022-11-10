@@ -1,0 +1,13 @@
+﻿<div class="text-center" >
+	<MProgressCircular Size="60" Width="6" Indeterminate Color="primary"></MProgressCircular>
+	<MProgressCircular Size="40" Indeterminate Color="red"></MProgressCircular>
+	<MProgressCircular Size="80" Width="8" Indeterminate Color="purple"></MProgressCircular>
+	<MProgressCircular Size="40" Indeterminate Color="amber"></MProgressCircular>
+	<MProgressCircular Size="60" Width="6" Indeterminate Color="green"></MProgressCircular>
+</div>
+
+<style>
+	.m-progress-circular {
+      margin: 1rem;
+    }
+</style>

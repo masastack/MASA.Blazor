@@ -1,0 +1,25 @@
+﻿<div class="text-center">
+    <MButton Dark
+           Color="orange darken-2"
+           OnClick="()=>_snackbar = true">
+        Open Snackbar
+    </MButton>
+
+    <MSnackbar @bind-Value="_snackbar"
+                Timeout="2000" Dark>
+        <ChildContent>
+            My timeout is set to 2000.
+        </ChildContent>
+        <ActionContent>
+            <MButton Color="blue"
+                     Text
+                     OnClick="()=>_snackbar = false">
+                Close
+            </MButton>
+        </ActionContent>
+    </MSnackbar>
+</div>
+
+@code{
+    private bool _snackbar;
+}

@@ -1,0 +1,14 @@
+﻿<PBlockText Primary="MASA Blazor"
+            Secondary="A UI component library"
+            Tags="@tags">
+</PBlockText>
+
+@code {
+
+    static IEnumerable<BlockTextTag> tags = new List<BlockTextTag>()
+    {
+        new("Blazor", "green", "white"),
+        new("Material Design", "purple", true)
+    };
+
+}

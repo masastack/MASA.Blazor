@@ -1,0 +1,117 @@
+﻿  <MCard
+    MaxWidth="375"
+    Class="mx-auto"
+  >
+    <MImage
+      Src="https://cdn.masastack.com/stack/images/website/masa-blazor/lists/ali.png"
+      Height="300"
+      Dark
+    >
+      <MRow class="fill-height">
+        <MCardTitle>
+          <MButton
+            Dark
+            Icon
+          >
+            <MIcon>mdi-chevron-left</MIcon>
+          </MButton>
+
+          <MSpacer></MSpacer>
+
+          <MButton
+            Dark
+            Icon
+            Class="mr-4"
+          >
+            <MIcon>mdi-pencil</MIcon>
+          </MButton>
+
+          <MButton
+            Dark
+            Icon
+          >
+            <MIcon>mdi-dots-vertical</MIcon>
+          </MButton>
+        </MCardTitle>
+
+        <MSpacer></MSpacer>
+
+        <MCardTitle Class="white--text pl-12 pt-12">
+          <div class="text-h4 pl-12 pt-12">
+            Ali Conners
+          </div>
+        </MCardTitle>
+      </MRow>
+    </MImage>
+
+    <MList TwoLine>
+      <MListItem>
+        <MListItemIcon>
+          <MIcon Color="indigo">
+            mdi-phone
+          </MIcon>
+        </MListItemIcon>
+
+        <MListItemContent>
+          <MListItemTitle>(650) 555-1234</MListItemTitle>
+          <MListItemSubtitle>Mobile</MListItemSubtitle>
+        </MListItemContent>
+
+        <MListItemIcon>
+          <MIcon>mdi-message-text</MIcon>
+        </MListItemIcon>
+      </MListItem>
+
+      <MListItem>
+        <MListItemAction></MListItemAction>
+
+        <MListItemContent>
+          <MListItemTitle>(323) 555-6789</MListItemTitle>
+          <MListItemSubtitle>Work</MListItemSubtitle>
+        </MListItemContent>
+
+        <MListItemIcon>
+          <MIcon>mdi-message-text</MIcon>
+        </MListItemIcon>
+      </MListItem>
+
+      <MDivider Inset></MDivider>
+
+      <MListItem>
+        <MListItemIcon>
+          <MIcon Color="indigo">
+            mdi-email
+          </MIcon>
+        </MListItemIcon>
+
+        <MListItemContent>
+          <MListItemTitle>aliconnors@example.com</MListItemTitle>
+          <MListItemSubtitle>Personal</MListItemSubtitle>
+        </MListItemContent>
+      </MListItem>
+
+      <MListItem>
+        <MListItemAction></MListItemAction>
+
+        <MListItemContent>
+          <MListItemTitle>ali_connors@example.com</MListItemTitle>
+          <MListItemSubtitle>Work</MListItemSubtitle>
+        </MListItemContent>
+      </MListItem>
+
+      <MDivider Inset></MDivider>
+
+      <MListItem>
+        <MListItemIcon>
+          <MIcon Color="indigo">
+            mdi-map-marker
+          </MIcon>
+        </MListItemIcon>
+
+        <MListItemContent>
+          <MListItemTitle>1400 Main Street</MListItemTitle>
+          <MListItemSubtitle>Orlando, FL 79938</MListItemSubtitle>
+        </MListItemContent>
+      </MListItem>
+    </MList>
+  </MCard>

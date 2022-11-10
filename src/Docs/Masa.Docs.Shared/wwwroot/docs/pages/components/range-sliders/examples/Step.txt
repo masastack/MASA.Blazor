@@ -1,0 +1,14 @@
+﻿<MCard>
+    <MCardText>
+        <MRangeSlider @bind-Value="_value"
+                      Step="10"></MRangeSlider>
+    </MCardText>
+</MCard>
+
+  @code {
+    private IList<double> _value = new List<double>
+      {
+          20,
+          40
+      };
+  }

@@ -1,0 +1,36 @@
+﻿@namespace Masa.Docs.Shared.Examples.virtual_scroll
+@implements Masa.Docs.Shared.Components.IUsageWrapper
+
+<div>
+    <MResponsive MaxWidth="400" Class="mx-auto mb-4">
+        <MTextField @bind-Value="_overscanCount" Type="number" TValue="int" Label="Total OverscanCount">
+        </MTextField>
+    </MResponsive>
+      <MCard Elevation=6 MaxWidth=400 Class="mx-auto">
+        @ChildContent
+    </MCard>
+</div>
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public RenderFragment ChildContent { get; set; } = null!;
+
+    int _overscanCount = 0;
+
+    int _length = 7000;
+
+    int[] Items
+    {
+        get
+        {
+            int[] array = new int[_length];
+            for (var i = 0; i < _length; i++)
+            {
+                array[i] = i + 1;
+            }
+            return array;
+        }
+    }
+}

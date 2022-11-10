@@ -1,0 +1,54 @@
+﻿@using System.Globalization
+@inject I18n I18n
+@inject MasaBlazor MasaBlazor
+@namespace Masa.Docs.Shared.Components
+
+<AppMenu Items="items">
+    <ActivatorContent>
+        <MButton Icon="@MasaBlazor.Breakpoint.SmAndDown"
+                 Class="text--secondary px-0 px-md-2"
+                 Text
+                 @attributes="@context.Attrs">
+            <MIcon>mdi-translate</MIcon>
+
+            <AppChevronDown></AppChevronDown>
+        </MButton>
+    </ActivatorContent>
+    <ItemContent>
+        <MListItemGroup Value="@I18n.Culture.Name">
+            <MListItem Value="context.Value" Class="m-list-item--default" OnClick="() => OnListItemClick(context.Value)">
+                <MListItemTitle>@context.Title</MListItemTitle>
+            </MListItem>
+        </MListItemGroup>
+    </ItemContent>
+</AppMenu>
+
+@code {
+
+    private List<DefaultItem> items = new();
+
+    [Parameter]
+    public EventCallback<string> OnCultureChanged { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        items = new()
+        {
+            new DefaultItem() { Heading = I18n.T("translations") },
+        };
+
+        items.AddRange(I18n.SupportedCultures.Select(c => new DefaultItem()
+        {
+            Title = c.NativeName,
+            Value = c.Name
+        }));
+    }
+
+    private void OnListItemClick(StringNumber val)
+    {
+        OnCultureChanged.InvokeAsync(val.ToString());
+    }
+
+}

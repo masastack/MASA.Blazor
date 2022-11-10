@@ -1,0 +1,23 @@
+﻿<div class="text-center">
+    <MBadge
+      Value="_hover"
+      Color="deep-purple accent-4"
+      Content="@("9999+")"
+      Left
+      Transition="slide-x-transition"
+    >
+      <MHover @bind-Value="_hover">
+        <MIcon
+          Color="grey lighten-1"
+          Large
+          @attributes="context.Attrs"
+        >
+          mdi-account
+        </MIcon>
+      </MHover>
+    </MBadge>
+  </div>
+
+  @code{
+      private bool _hover;
+  }

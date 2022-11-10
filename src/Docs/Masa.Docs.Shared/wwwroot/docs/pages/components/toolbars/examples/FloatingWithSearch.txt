@@ -1,0 +1,26 @@
+﻿<MCard
+    Class="pa-4"
+    Flat
+    Height="300"
+    Img="https://cdn.masastack.com/stack/images/website/masa-blazor/toolbar/map.jpg"
+  >
+    <MToolbar
+      Dense
+      Floating
+    >
+      <MTextField
+        TValue="string"
+        HideDetails="true"
+        PrependIcon="mdi-magnify"
+        SingleLine
+      ></MTextField>
+
+      <MButton Icon>
+        <MIcon>mdi-crosshairs-gps</MIcon>
+      </MButton>
+
+      <MButton Icon>
+        <MIcon>mdi-dots-vertical</MIcon>
+      </MButton>
+    </MToolbar>
+  </MCard>

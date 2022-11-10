@@ -1,0 +1,19 @@
+﻿@namespace Masa.Docs.Shared.Examples.system_bars
+@implements Masa.Docs.Shared.Components.IUsageWrapper
+
+<MRow Align="AlignTypes.Center"
+      Justify="JustifyTypes.Center">
+    <MContainer Fluid>
+        <MCard Height="200" Img="https://cdn.masastack.com/stack/images/website/masa-blazor/home/masa_layout1.svg">
+            @ChildContent
+        </MCard>
+    </MContainer>
+</MRow>
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public RenderFragment ChildContent { get; set; } = null!;
+
+}

@@ -1,0 +1,32 @@
+﻿@namespace Masa.Docs.Shared.Components
+
+<MMarkdownIt Source="@Source"
+             AnchorOptions="@AnchorOptions"
+             OnTocParsed="@OnTocParsed"
+             OnFrontMatterParsed="@OnFrontMatterParsed"
+             Html
+             Linkify
+             Typographer
+             HeaderSections
+             Key="document">
+</MMarkdownIt>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public string? Source { get; set; }
+
+    [Parameter]
+    public EventCallback<List<MarkdownItTocContent>?> OnTocParsed { get; set; }
+
+    [Parameter]
+    public EventCallback<string?> OnFrontMatterParsed { get; set; }
+
+    private static readonly MarkdownItAnchorOptions AnchorOptions = new()
+    {
+        Level = 1,
+        PermalinkClass = "",
+        PermalinkSymbol = ""
+    };
+
+}

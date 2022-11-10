@@ -1,0 +1,22 @@
+﻿<div>
+	<MCheckbox Label="Visible" @bind-Value="_sticky">
+	</MCheckbox>
+	<MBanner SingleLine @bind-Value="_sticky">
+		<ChildContent>
+			No Internet connection
+		</ChildContent>
+		<ActionsContent Context="dismiss">
+			<MButton Text Color="primary" OnClick="dismiss">
+				Dismiss
+			</MButton>
+			<MButton Text Color="primary">
+				Retry
+			</MButton>
+		</ActionsContent>
+	</MBanner>
+</div>
+
+@code
+{
+	private bool _sticky = true;
+}

@@ -1,0 +1,71 @@
+﻿<MForm>
+    <MContainer>
+        <MRow>
+            <MCol Cols="12"
+                   Sm="6">
+                <MTextField Value="_value"
+                              Label="Regular"
+                              Disabled></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                   Sm="6">
+                <MTextField Value="_value"
+                              Label="Regular"
+                              Readonly></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                   Sm="6">
+                <MTextField Value="_value"
+                              Label="Solo"
+                              Solo
+                              Disabled></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                   Sm="6">
+                <MTextField Value="_value"
+                              Label="Solo"
+                              Solo
+                              Readonly></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                   Sm="6">
+                <MTextField Value="_value"
+                              Label="Filled"
+                              Filled
+                              Disabled></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                   Sm="6">
+                <MTextField Value="_value"
+                              Label="Filled"
+                              Filled
+                              Readonly></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                   Sm="6">
+                <MTextField Value="_value"
+                              Label="Outlined"
+                              Outlined
+                              Disabled></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                   Sm="6">
+                <MTextField Value="_value"
+                              Label="Outlined"
+                              Outlined
+                              Readonly></MTextField>
+            </MCol>
+        </MRow>
+    </MContainer>
+</MForm>
+
+@code{
+    private string _value = "John Doe";
+}

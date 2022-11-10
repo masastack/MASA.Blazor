@@ -1,0 +1,11 @@
+﻿<MContainer Fluid>
+    <MRow>
+      <MCol Cols="12">
+        <MSlider
+          Readonly
+          Label="Readonly"
+          Value="30D"
+        ></MSlider>
+      </MCol>
+    </MRow>
+  </MContainer>

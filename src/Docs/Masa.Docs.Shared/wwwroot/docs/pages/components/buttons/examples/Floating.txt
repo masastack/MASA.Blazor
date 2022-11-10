@@ -1,0 +1,51 @@
+﻿<div class="text-center">
+    <MButton class="mx-2"
+             Fab
+             Small
+             Dark
+             Color="primary">
+        <MIcon>
+            mdi-minus
+        </MIcon>
+    </MButton>
+
+    <MButton class="mx-2"
+             Fab
+             Small
+             Dark
+             Color="pink">
+        <MIcon>mdi-heart</MIcon>
+    </MButton>
+
+    <MButton class="mx-2"
+             Fab
+             Dark
+             Color="indigo">
+        <MIcon>mdi-plus</MIcon>
+    </MButton>
+
+    <MButton class="mx-2"
+             Fab
+             Dark
+             Color="teal">
+        <MIcon>mdi-format-list-bulleted-square</MIcon>
+    </MButton>
+
+    <MButton class="mx-2"
+             Fab
+             Dark
+             Large
+             Color="cyan">
+        <MIcon>mdi-pencil</MIcon>
+    </MButton>
+
+    <MButton class="mx-2"
+             Fab
+             Dark
+             Large
+             Color="purple">
+        <MIcon>
+            mdi-android
+        </MIcon>
+    </MButton>
+</div>

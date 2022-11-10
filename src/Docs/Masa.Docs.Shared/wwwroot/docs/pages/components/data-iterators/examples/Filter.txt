@@ -1,0 +1,318 @@
+﻿<MContainer Fluid>
+    <MDataIterator Items="_desserts"
+                   ItemsPerPage="_itemsPerPage"
+                   Page="_page"
+                   Search="@_search"
+                   SortBy="_sortBy"
+                   SortDesc="_sortDesc"
+                   ItemValues="_keys"
+                   HideDefaultFooter>
+        <HeaderContent>
+            <MToolbar Class="mb-1"
+                      Color="blue darken-3"
+                      Dark>
+                <MTextField @bind-Value="_search"
+                            Clearable
+                            Flat
+                            SoloInverted
+                            HideDetails="true"
+                            PrependInnerIcon="mdi-magnify"
+                            Label="Search"></MTextField>
+                <MSpacer></MSpacer>
+                <MSelect @bind-Value="_sortBy"
+                         Flat
+                         SoloInverted
+                         HideDetails="true"
+                         Items="_keys"
+                         ItemValue="r=>r.Name"
+                         ItemText="r=>r.Name"
+                         PrependInnerIcon="mdi-magnify"
+                         Label="Sort by"></MSelect>
+                <MSpacer></MSpacer>
+                <MButtonGroup @bind-Value="_sortDescStr" Mandatory>
+                    <MButton Large
+                             Depressed
+                             Color="blue"
+                             Value="@("false")">
+                        <MIcon>mdi-arrow-up</MIcon>
+                    </MButton>
+                    <MButton Large
+                             Depressed
+                             Color="blue"
+                             Value="@("true")">
+                        <MIcon>mdi-arrow-down</MIcon>
+                    </MButton>
+                </MButtonGroup>
+            </MToolbar>
+        </HeaderContent>
+        <ChildContent Context="props">
+            <MRow>
+                @foreach (var item in props.Items)
+                {
+                    <MCol @key="item.Name"
+                      Cols="12"
+                      Sm="6"
+                      Md="4"
+                      Lg="3">
+                        <MCard>
+                            <MCardTitle Class="subheading font-weight-bold">
+                                @item.Name
+                            </MCardTitle>
+
+                            <MDivider></MDivider>
+
+                            <MList Dense>
+                                @for (var i = 0; i < FilteredKeys.Count; i++)
+                                {
+                                    var key = FilteredKeys[i];
+                                    var blue = key == _sortBy;
+                                    var value = key.Invoke(item);
+                                    <MListItem @key="i">
+                                        <MListItemContent Class="@(blue?"blue--text":null)">
+                                            @key:
+                                        </MListItemContent>
+                                        <MListItemContent Class="@(blue?"blue--text align-end":"align-end")">
+                                            @value
+                                        </MListItemContent>
+                                    </MListItem>
+                                }
+                            </MList>
+                        </MCard>
+                    </MCol>
+                }
+            </MRow>
+        </ChildContent>
+        <FooterContent>
+            <MRow Class="mt-2"
+                  Align="@("center")"
+                  Justify="@("center")">
+                <span class="grey--text">Items per page</span>
+                <MMenu OffsetY>
+                    <ActivatorContent>
+                        <MButton Dark
+                                 Text
+                                 Color="primary"
+                                 Class="ml-2"
+                                 @attributes="@context.Attrs">
+                            @_itemsPerPage
+                            <MIcon>mdi-chevron-down</MIcon>
+                        </MButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MList>
+                            @for (var i = 0; i < _itemsPerPageArray.Count; i++)
+                            {
+                                var index = i;
+                                var number = _itemsPerPageArray[i];
+                                <MListItem @key="index"
+                                       OnClick="()=>UpdateItemsPerPage(number)">
+                                    <MListItemTitle>@number</MListItemTitle>
+                                </MListItem>
+                            }
+                        </MList>
+                    </ChildContent>
+                </MMenu>
+
+                <MSpacer></MSpacer>
+
+                <span class="mr-4 grey--text">
+                    Page @_page of @_numberOfPages
+                </span>
+                <MButton Fab
+                         Dark
+                         Color="blue darken-3"
+                         Class="mr-1"
+                         OnClick="FormerPage">
+                    <MIcon>mdi-chevron-left</MIcon>
+                </MButton>
+                <MButton Fab
+                         Dark
+                         Color="blue darken-3"
+                         Class="ml-1"
+                         OnClick="NextPage">
+                    <MIcon>mdi-chevron-right</MIcon>
+                </MButton>
+            </MRow>
+        </FooterContent>
+    </MDataIterator>
+</MContainer>
+
+@code {
+    public class Dessert
+    {
+        public string Name { get; set; }
+
+        public int Calories { get; set; }
+
+        public double Fat { get; set; }
+
+        public int Carbs { get; set; }
+
+        public double Protein { get; set; }
+
+        public int Sodium { get; set; }
+
+        public string Calcium { get; set; }
+
+        public string Iron { get; set; }
+    }
+
+    private List<int> _itemsPerPageArray = new List<int>
+    {
+        4,8,12
+    };
+    private StringNumber _sortDescStr = "false";
+    private string _sortBy;
+    private List<bool> _sortDesc => new List<bool>
+        {
+            Convert.ToBoolean(_sortDescStr.Value)
+        };
+    private string _search;
+    private int _itemsPerPage = 4;
+    private int _page = 1;
+    private List<ItemValue<Dessert>> _keys => new List<ItemValue<Dessert>>()
+        {
+            nameof(Dessert.Name),
+            nameof(Dessert.Calories),
+            nameof(Dessert.Fat),
+            nameof(Dessert.Carbs),
+            nameof(Dessert.Protein),
+            nameof(Dessert.Sodium),
+            nameof(Dessert.Calcium),
+            nameof(Dessert.Iron)
+        };
+    private int _numberOfPages => Convert.ToInt32(Math.Ceiling(_desserts.Count / (_itemsPerPage * 1.0)));
+    private List<Dessert> _desserts = new List<Dessert>
+        {
+           new Dessert
+           {
+              Name= "Frozen Yogurt",
+              Calories= 159,
+              Fat= 6.0,
+              Carbs= 24,
+              Protein= 4.0,
+              Sodium= 87,
+              Calcium= "14%",
+              Iron= "1%",
+            },
+            new Dessert
+            {
+              Name= "Ice cream sandwich",
+              Calories= 237,
+              Fat= 9.0,
+              Carbs= 37,
+              Protein= 4.3,
+              Sodium= 129,
+              Calcium= "8%",
+              Iron= "1%",
+            },
+            new Dessert
+            {
+              Name= "Eclair",
+              Calories= 262,
+              Fat= 16.0,
+              Carbs= 23,
+              Protein= 6.0,
+              Sodium= 337,
+              Calcium= "6%",
+              Iron= "7%",
+            },
+            new Dessert
+            {
+              Name= "Cupcake",
+              Calories= 305,
+              Fat= 3.7,
+              Carbs= 67,
+              Protein= 4.3,
+              Sodium= 413,
+              Calcium= "3%",
+              Iron= "8%",
+            },
+            new Dessert
+            {
+              Name= "Gingerbread",
+              Calories= 356,
+              Fat= 16.0,
+              Carbs= 49,
+              Protein= 3.9,
+              Sodium= 327,
+              Calcium= "7%",
+              Iron= "16%",
+            },
+            new Dessert
+            {
+              Name= "Jelly bean",
+              Calories= 375,
+              Fat= 0.0,
+              Carbs= 94,
+              Protein= 0.0,
+              Sodium= 50,
+              Calcium= "0%",
+              Iron= "0%",
+            },
+            new Dessert
+            {
+              Name= "Lollipop",
+              Calories= 392,
+              Fat= 0.2,
+              Carbs= 98,
+              Protein= 0,
+              Sodium= 38,
+              Calcium= "0%",
+              Iron= "2%",
+            },
+            new Dessert
+            {
+              Name= "Honeycomb",
+              Calories= 408,
+              Fat= 3.2,
+              Carbs= 87,
+              Protein= 6.5,
+              Sodium= 562,
+              Calcium= "0%",
+              Iron= "45%",
+            },
+            new Dessert
+            {
+              Name= "Donut",
+              Calories= 452,
+              Fat= 25.0,
+              Carbs= 51,
+              Protein= 4.9,
+              Sodium= 326,
+              Calcium= "2%",
+              Iron= "22%",
+            },
+            new Dessert
+            {
+              Name= "KitKat",
+              Calories= 518,
+              Fat= 26.0,
+              Carbs= 65,
+              Protein= 7,
+              Sodium= 54,
+              Calcium= "12%",
+              Iron= "6%",
+            }
+
+        };
+
+    public List<ItemValue<Dessert>> FilteredKeys => _keys
+        .Where(r => r != nameof(Dessert.Name))
+        .ToList();
+
+    public void UpdateItemsPerPage(int number)
+    {
+        _itemsPerPage = number;
+    }
+
+    public void NextPage()
+    {
+        if (_page + 1 <= _numberOfPages) _page += 1;
+    }
+
+    public void FormerPage()
+    {
+        if (_page - 1 >= 1) _page -= 1;
+    }
+  }

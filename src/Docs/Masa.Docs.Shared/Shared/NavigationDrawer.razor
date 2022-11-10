@@ -1,0 +1,55 @@
+﻿@inject AppService AppService
+
+<MNavigationDrawer Id="nav-drawer"
+                   Right="RTL"
+                   App
+                   Floating
+                   Width="300">
+    <PrependContent>
+        <DefaultDrawerPrepend />
+    </PrependContent>
+    <ChildContent>
+        <DefaultList Linkage Items="Navs" />
+        <div class=pt-12></div>
+    </ChildContent>
+</MNavigationDrawer>
+
+
+@code {
+
+    [Parameter]
+    public bool RTL { get; set; }
+
+    [CascadingParameter]
+    public CultureInfo Culture { get; set; } = null!;
+
+    private List<NavItem> Navs { get; set; } = new();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            Navs = await AppService.GetNavs();
+            SetHref(Navs);
+            StateHasChanged();
+        }
+    }
+
+    private void SetHref(List<NavItem> navItems, string? segment = null)
+    {
+        foreach (var navItem in navItems)
+        {
+            if (((IDefaultItem<NavItem>)navItem).HasChildren())
+            {
+                SetHref(navItem.Children, navItem.Segment);
+            }
+            else
+            {
+                navItem.Href = segment + "/" + navItem.Segment;
+            }
+        }
+    }
+
+}

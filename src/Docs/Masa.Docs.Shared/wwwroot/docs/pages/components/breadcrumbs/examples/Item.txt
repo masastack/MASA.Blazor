@@ -1,0 +1,18 @@
+﻿<MBreadcrumbs Items="items">
+    <ItemContent>
+        <MBreadcrumbsItem Href="@context.Href" Disabled="context.Disabled" Context="itemContext">
+            @context.Text.ToUpper()
+        </MBreadcrumbsItem>
+    </ItemContent>
+</MBreadcrumbs>
+
+@code {
+
+    List<BreadcrumbItem> items = new()
+    {
+        new BreadcrumbItem() {Text = "Dashboard", Disabled = false, Href = "/components/breadcrumbs"},
+        new BreadcrumbItem() {Text = "Link 1", Disabled = false, Href = "/components/breadcrumbs"},
+        new BreadcrumbItem() {Text = "Link 2", Disabled = true, Href = "/components/breadcrumbs"}
+    };
+
+}

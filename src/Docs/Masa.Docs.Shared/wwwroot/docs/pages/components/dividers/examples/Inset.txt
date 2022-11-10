@@ -1,0 +1,80 @@
+﻿<MRow>
+    <MCol Cols="12" Sm="6" OffsetSm="3">
+        <MCard>
+            <MList TwoLine>
+                @foreach (var item in _items)
+                {
+                    if (!string.IsNullOrWhiteSpace(item.Header))
+                    {
+                        <MSubheader>@item.Header</MSubheader>
+                    }
+                    else if (item.Divider)
+                    {
+                        <MDivider Inset="@item.Inset"></MDivider>
+                    }
+                    else
+                    {
+                        <MListItem>
+                            <MListItemAvatar>
+                                <MImage Src="@item.Avatar"></MImage>
+                            </MListItemAvatar>
+                            <MListItemContent>
+                                <MListItemTitle>@((MarkupString)item.Title)</MListItemTitle>
+                                <MListItemSubtitle>@((MarkupString)item.SubTtile)</MListItemSubtitle>
+                            </MListItemContent>
+                        </MListItem>
+                    }
+                }
+            </MList>
+        </MCard>
+    </MCol>
+</MRow>
+
+@code
+{
+    private class DataDemo
+    {
+        public string Header { get; set; }
+        public string Avatar { get; set; }
+        public string Title { get; set; }
+        public string SubTtile { get; set; }
+        public bool Divider { get; set; }
+        public bool Inset { get; set; }
+    }
+
+    private List<DataDemo> _items = new List<DataDemo>()
+    {
+        new DataDemo
+        {
+            Header = "Today"
+        },
+        new DataDemo
+        {
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/1.png",
+            Title = "Brunch this weekend?",
+            SubTtile = "<span class=\"font-weight-bold\">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+        },
+        new DataDemo
+        {
+            Divider = true,
+            Inset = true
+        },
+        new DataDemo
+        {
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/2.png",
+            Title = "Summer BBQ <span class=\"grey--text text--lighten-1\">4</span>",
+            SubTtile = "<span class=\"font-weight-bold\">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend."
+        },
+        new DataDemo
+        {
+            Divider = true,
+            Inset = true
+        },
+        new DataDemo
+        {
+            Avatar = "https://cdn.masastack.com/stack/images/website/masa-blazor/lists/3.png",
+            Title = "Oui oui",
+            SubTtile = "<span class=\"font-weight-bold\">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?"
+        }
+    };
+}

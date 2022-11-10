@@ -1,0 +1,67 @@
+﻿<MCol Cols="12"
+      Sm="6"
+      OffsetSm="3">
+    <MCard>
+        <MSubheader Inset>
+            Subheader
+        </MSubheader>
+
+        <MList>
+            @foreach (var item in _items)
+            {
+                if (item.Action != null)
+                {
+                    <MListItem>
+                        <MListItemAction>
+                            <MIcon>@item.Action</MIcon>
+                        </MListItemAction>
+
+                        <MListItemContent>
+                            <MListItemTitle>@item.Title</MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                }
+                else if (item.Divider)
+                {
+                    <MDivider Inset></MDivider>
+                }
+            }
+        </MList>
+    </MCard>
+</MCol>
+
+@code{
+    class Item
+    {
+        public string Action { get; set; }
+        public string Title { get; set; }
+        public bool Divider { get; set; }
+    }
+
+    private List<Item> _items = new List<Item>
+    {
+       new Item 
+       {
+          Action= "mdi-label",
+          Title= "List item 1",
+       },
+       new Item 
+       {
+          Divider= true,
+       },
+       new Item 
+       {
+          Action= "mdi-label",
+          Title= "List item 2",
+       },
+       new Item 
+       {
+          Divider= true,
+       },
+        new Item
+        {
+          Action= "mdi-label",
+          Title= "List item 3",
+        }
+    };
+}
