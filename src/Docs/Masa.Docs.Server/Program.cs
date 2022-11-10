@@ -18,8 +18,6 @@ builder.Services.AddMasaBlazor(options =>
     });
 }).AddI18nForServer("wwwroot/locale");
 
-// TODO: add i18n for server
-
 builder.Services.AddMasaDocs(builder.Configuration["ASPNETCORE_URLS"]?.Replace("0.0.0.0", "127.0.0.1") ?? "http://localhost:5000");
 
 var app = builder.Build();
@@ -31,8 +29,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.MapHealthChecks("/healthz");
-
-app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
