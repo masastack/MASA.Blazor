@@ -5,6 +5,11 @@
   ],
   "Props": [
     {
+      "Name": "AnchorOptions",
+      "Type": "MarkdownItAnchorOptions",
+      "Description": ""
+    },
+    {
       "Name": "Breaks",
       "Type": "Boolean",
       "Description": ""
@@ -45,6 +50,11 @@
       "Description": ""
     },
     {
+      "Name": "NoWrapper",
+      "Type": "Boolean",
+      "Description": ""
+    },
+    {
       "Name": "Quotes",
       "Type": "String[]",
       "Description": ""
@@ -60,11 +70,6 @@
       "Description": "应用到组件最外层元素的style"
     },
     {
-      "Name": "TagClassMap",
-      "Type": "Dictionary<String,String>",
-      "Description": ""
-    },
-    {
       "Name": "Typographer",
       "Type": "Boolean",
       "Description": ""
@@ -76,5 +81,16 @@
     }
   ],
   "Contents": [],
-  "Events": []
+  "Events": [
+    {
+      "Name": "OnFrontMatterParsed",
+      "Type": "EventCallback<String>",
+      "Description": ""
+    },
+    {
+      "Name": "OnTocParsed",
+      "Type": "EventCallback<List`1>",
+      "Description": ""
+    }
+  ]
 }
