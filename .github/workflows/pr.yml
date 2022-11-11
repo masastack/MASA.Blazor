@@ -23,6 +23,6 @@ jobs:
           7.0.x
         include-prerelease: true
     - name: setting tools
-      run: dotnet workload install wasm-tools
+      run: dotnet workload install wasm-tools-net6
     - name: build
       run: dotnet build src
