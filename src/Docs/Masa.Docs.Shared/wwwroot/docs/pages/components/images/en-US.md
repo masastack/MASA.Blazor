@@ -26,7 +26,7 @@ The MImage component uses the Intersect directive which requires a Polyfill for 
 
 If you want to change the aspect ratio of the image, you can set the `Contain` property to a fixed aspect ratio.
 
-<example file="" />
+<masa-example file="Examples.images.AspectRatio"></masa-example>
 
 #### Contain
 
@@ -34,21 +34,21 @@ If the provided aspect ratio doesn’t match that of the actual image, the defau
 possible, clipping the sides of the image. Enabling the **Contain** prop will prevent this, but will result in empty space
 at the sides.
 
-<example file="" />
+<masa-example file="Examples.images.Contain"></masa-example>
 
 #### Gradients
 
 The `Gradient` prop can be used to apply a simple gradient overlay to the image. More complex gradients should be written
 as a class on the content slot instead.
 
-<example file="" />
+<masa-example file="Examples.images.Gradients"></masa-example>
 
 #### Height
 
 **MImage** will automatically grow to the size of its `Src`, preserving the correct aspect ratio. You can limit this
 with the `Height` and `MaxHeight` props.
 
-<example file="" />
+<masa-example file="Examples.images.Height"></masa-example>
 
 ### Contents
 
@@ -57,7 +57,7 @@ with the `Height` and `MaxHeight` props.
 **MImage** has a special `PlaceholderContent` slot for placeholder to display while image’s loading. Note: the example
 below has bad `Src` which won’t load for you to see placeholder.
 
-<example file="" />
+<masa-example file="Examples.images.Placeholder"></masa-example>
 
 ### Misc
 
@@ -65,4 +65,4 @@ below has bad `Src` which won’t load for you to see placeholder.
 
 You can use **MImage** to make, for example, a picture gallery.
 
-<example file="" />
+<masa-example file="Examples.images.Grid"></masa-example>

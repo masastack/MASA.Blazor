@@ -41,10 +41,14 @@
       "breadcrumbs",
       "buttons",
       "cards",
+      "carousels",
       "chips",
+      "copyable-text",
+      "cron",
       "dialogs",
       "dividers",
       "drag-zone",
+      "drawers",
       "echarts",
       "editor",
       "error-handler",
@@ -52,7 +56,7 @@
       "floating-action-buttons",
       "footers",
       {
-        "title": "Form inputs & controls",
+        "title": "form-inputs-and-ontrols",
         "group": "components",
         "items": [
           "autocomplete",
@@ -72,14 +76,15 @@
       },
       "grids",
       {
-        "title": "Groups",
+        "title": "groups",
         "group": "components",
         "items": [
           "button-groups",
           "chip-groups",
           "item-groups",
           "list-item-groups",
-          "slide-groups"
+          "slide-groups",
+          "windows"
         ]
       },
       "hover",
@@ -90,6 +95,18 @@
       "lists",
       "markdown",
       "menus",
+      {
+        "title": "mobiles",
+        "group": "components",
+        "items": [
+          "mobile-cascader",
+          "mobile-date-pickers",
+          "mobile-date-time-pickers",
+          "mobile-pickers",
+          "mobil-picker-views",
+          "mobile-time-pickers"
+        ]
+      },
       "modals",
       "navigation-drawers",
       "not-grouped",
@@ -106,7 +123,7 @@
       },
       "popup-service",
       {
-        "title": "Progress",
+        "title": "progress",
         "group": "components",
         "items": [
           "progress-circular",
@@ -120,7 +137,7 @@
       "steppers",
       "subheaders",
       {
-        "title": "Tables",
+        "title": "tables",
         "group": "components",
         "items": [
           "data-iterators",
