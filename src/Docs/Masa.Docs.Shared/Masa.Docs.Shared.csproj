@@ -20,6 +20,45 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Examples\cron\usage\Index.razor">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Examples\mobil-picker-views\props\Cascade.razor">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Examples\mobil-picker-views\props\ItemDisabled.razor">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Examples\mobil-picker-views\props\ItemHeight.razor">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Examples\mobil-picker-views\usage\Index.razor">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Examples\mobile-date-time-pickers\props\Formatter.razor">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Examples\mobile-date-time-pickers\props\MinMax.razor">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Examples\mobile-date-time-pickers\props\Precision.razor">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Examples\mobile-date-time-pickers\usage\Index.razor">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Examples\mobile-time-pickers\props\Formatter.razor">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Examples\mobile-time-pickers\props\MinMax.razor">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Examples\mobile-time-pickers\props\Precision.razor">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Examples\mobile-time-pickers\usage\Index.razor">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="wwwroot\locale\en-US.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -33,6 +72,162 @@
 
   <ItemGroup>
     <ExamplesSourceFile Include="Examples\**\*.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Examples\copyable-text\examples\**" />
+    <Compile Remove="wwwroot\docs\pages\components\cron\doc\**" />
+    <Compile Remove="wwwroot\docs\pages\components\cron\usage\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobil-picker-views\doc\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobil-picker-views\props\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobil-picker-views\usage\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-cascader\doc\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-cascader\events\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-cascader\usage\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-date-pickers\doc\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-date-pickers\props\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-date-pickers\usage\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-date-time-pickers\doc\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-date-time-pickers\props\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-date-time-pickers\usage\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-pickers\doc\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-pickers\props\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-pickers\usage\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-time-pickers\doc\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-time-pickers\props\**" />
+    <Compile Remove="wwwroot\docs\pages\components\mobile-time-pickers\usage\**" />
+    <Compile Remove="wwwroot\docs\pages\components\windows\doc\**" />
+    <Compile Remove="wwwroot\docs\pages\components\windows\misc\**" />
+    <Compile Remove="wwwroot\docs\pages\components\windows\props\**" />
+    <Compile Remove="wwwroot\docs\pages\components\windows\usage\**" />
+    <Content Remove="Examples\copyable-text\examples\**" />
+    <Content Remove="wwwroot\docs\pages\components\cron\doc\**" />
+    <Content Remove="wwwroot\docs\pages\components\cron\usage\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobil-picker-views\doc\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobil-picker-views\props\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobil-picker-views\usage\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-cascader\doc\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-cascader\events\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-cascader\usage\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-date-pickers\doc\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-date-pickers\props\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-date-pickers\usage\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-date-time-pickers\doc\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-date-time-pickers\props\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-date-time-pickers\usage\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-pickers\doc\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-pickers\props\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-pickers\usage\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-time-pickers\doc\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-time-pickers\props\**" />
+    <Content Remove="wwwroot\docs\pages\components\mobile-time-pickers\usage\**" />
+    <Content Remove="wwwroot\docs\pages\components\windows\doc\**" />
+    <Content Remove="wwwroot\docs\pages\components\windows\misc\**" />
+    <Content Remove="wwwroot\docs\pages\components\windows\props\**" />
+    <Content Remove="wwwroot\docs\pages\components\windows\usage\**" />
+    <EmbeddedResource Remove="Examples\copyable-text\examples\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\cron\doc\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\cron\usage\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobil-picker-views\doc\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobil-picker-views\props\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobil-picker-views\usage\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-cascader\doc\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-cascader\events\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-cascader\usage\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-date-pickers\doc\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-date-pickers\props\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-date-pickers\usage\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-date-time-pickers\doc\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-date-time-pickers\props\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-date-time-pickers\usage\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-pickers\doc\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-pickers\props\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-pickers\usage\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-time-pickers\doc\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-time-pickers\props\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\mobile-time-pickers\usage\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\windows\doc\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\windows\misc\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\windows\props\**" />
+    <EmbeddedResource Remove="wwwroot\docs\pages\components\windows\usage\**" />
+    <ExamplesSourceFile Remove="Examples\copyable-text\examples\**" />
+    <None Remove="Examples\copyable-text\examples\**" />
+    <None Remove="wwwroot\docs\pages\components\cron\doc\**" />
+    <None Remove="wwwroot\docs\pages\components\cron\usage\**" />
+    <None Remove="wwwroot\docs\pages\components\mobil-picker-views\doc\**" />
+    <None Remove="wwwroot\docs\pages\components\mobil-picker-views\props\**" />
+    <None Remove="wwwroot\docs\pages\components\mobil-picker-views\usage\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-cascader\doc\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-cascader\events\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-cascader\usage\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-date-pickers\doc\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-date-pickers\props\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-date-pickers\usage\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-date-time-pickers\doc\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-date-time-pickers\props\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-date-time-pickers\usage\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-pickers\doc\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-pickers\props\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-pickers\usage\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-time-pickers\doc\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-time-pickers\props\**" />
+    <None Remove="wwwroot\docs\pages\components\mobile-time-pickers\usage\**" />
+    <None Remove="wwwroot\docs\pages\components\windows\doc\**" />
+    <None Remove="wwwroot\docs\pages\components\windows\misc\**" />
+    <None Remove="wwwroot\docs\pages\components\windows\props\**" />
+    <None Remove="wwwroot\docs\pages\components\windows\usage\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ExamplesSourceFile Remove="Examples\cron\usage\Index.razor" />
+    <ExamplesSourceFile Remove="Examples\mobil-picker-views\props\Cascade.razor" />
+    <ExamplesSourceFile Remove="Examples\mobil-picker-views\props\ItemDisabled.razor" />
+    <ExamplesSourceFile Remove="Examples\mobil-picker-views\props\ItemHeight.razor" />
+    <ExamplesSourceFile Remove="Examples\mobil-picker-views\usage\Index.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-cascader\events\LoadChildren.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-cascader\events\OnConfirm.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-cascader\usage\Index.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-date-pickers\props\Formatter.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-date-pickers\props\MinMax.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-date-pickers\props\Precision.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-date-pickers\usage\Index.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-date-time-pickers\props\Formatter.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-date-time-pickers\props\MinMax.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-date-time-pickers\props\Precision.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-date-time-pickers\usage\Index.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-pickers\props\Cascade.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-pickers\props\ItemHeight.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-pickers\usage\Index.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-time-pickers\props\Formatter.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-time-pickers\props\MinMax.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-time-pickers\props\Precision.razor" />
+    <ExamplesSourceFile Remove="Examples\mobile-time-pickers\usage\Index.razor" />
+    <ExamplesSourceFile Remove="Examples\windows\misc\AccountCreation.razor" />
+    <ExamplesSourceFile Remove="Examples\windows\misc\Onboarding.razor" />
+    <ExamplesSourceFile Remove="Examples\windows\props\CustomizedArrows.razor" />
+    <ExamplesSourceFile Remove="Examples\windows\props\Reverse.razor" />
+    <ExamplesSourceFile Remove="Examples\windows\props\Vertical.razor" />
+    <ExamplesSourceFile Remove="Examples\windows\Usages\UsageWrapper.razor" />
+    <ExamplesSourceFile Remove="Examples\windows\usage\Index.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Examples\carousels\CustomDelimiters.razor" />
+    <None Include="Examples\carousels\CustomizedArrows.razor" />
+    <None Include="Examples\carousels\CustomTransition.razor" />
+    <None Include="Examples\carousels\Cycle.razor" />
+    <None Include="Examples\carousels\HideControls.razor" />
+    <None Include="Examples\carousels\HideDelimiters.razor" />
+    <None Include="Examples\carousels\Index.razor" />
+    <None Include="Examples\carousels\Model.razor" />
+    <None Include="Examples\drawers\ActionProps.razor" />
+    <None Include="Examples\drawers\Actions.razor" />
+    <None Include="Examples\drawers\CustomActions.razor" />
+    <None Include="Examples\drawers\FormModel.razor" />
+    <None Include="Examples\drawers\Index.razor" />
+    <None Include="Examples\drawers\Left.razor" />
+    <None Include="Examples\drawers\ScrollToTopOnHide.razor" />
+    <None Include="Examples\drawers\WithoutActivator.razor" />
   </ItemGroup>
 
   <ItemGroup>

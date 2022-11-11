@@ -41,10 +41,14 @@
       "breadcrumbs",
       "buttons",
       "cards",
+      "carousels",
       "chips",
+      "copyable-text",
+      "cron",
       "dialogs",
       "dividers",
       "drag-zone",
+      "drawers",
       "echarts",
       "editor",
       "error-handler",
@@ -79,7 +83,8 @@
           "chip-groups",
           "item-groups",
           "list-item-groups",
-          "slide-groups"
+          "slide-groups",
+          "windows"
         ]
       },
       "hover",
@@ -90,6 +95,18 @@
       "lists",
       "markdown",
       "menus",
+      {
+        "title": "Mobiles",
+        "group": "components",
+        "items": [
+          "mobile-cascader",
+          "mobile-date-pickers",
+          "mobile-date-time-pickers",
+          "mobile-pickers",
+          "mobil-picker-views",
+          "mobile-time-pickers"
+        ]
+      },
       "modals",
       "navigation-drawers",
       "not-grouped",
