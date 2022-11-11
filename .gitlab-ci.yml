@@ -25,8 +25,8 @@ packer:
   only:
     - main 
   script: 
-    - sudo apt-get update && \
-    - sudo apt-get install -y dotnet-sdk-7.0
+    - apt-get update && \
+    - apt-get install -y dotnet-sdk-7.0
     - ls src/
     - rm -rf ./src/BlazorComponent
     - rm -rf ./src/MASA.Docs
