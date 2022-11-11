@@ -1,0 +1,30 @@
+﻿@namespace Masa.Docs.Shared.Examples.overlays
+@implements Masa.Docs.Shared.Components.IUsageWrapper
+
+<div style="text-align: center">
+    <MButton Color="error"
+             OnClick="OnClick"
+             StopPropagation>
+        Show Overlay
+    </MButton>
+
+    @ChildContent
+</div>
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public RenderFragment ChildContent { get; set; } = null!;
+
+    bool overlay = false;
+
+    async Task OnClick(MouseEventArgs args)
+    {
+        overlay = true;
+        await InvokeAsync(StateHasChanged);
+
+        await Task.Delay(2000);
+        overlay = false;
+    }
+}

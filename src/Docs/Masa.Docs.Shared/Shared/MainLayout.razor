@@ -1,0 +1,26 @@
+﻿@using System.Globalization
+@inherits LayoutComponentBase
+@inject I18n I18n
+
+<MApp>
+    <CascadingValue Value="@I18n.Culture">
+        <AppBar OnCultureChanged="@OnCultureChanged" />
+        <NavigationDrawer />
+        <MErrorHandler>
+            <MMain>@Body</MMain>
+        </MErrorHandler>
+        <Toc />
+    </CascadingValue>
+</MApp>
+
+@code {
+
+    private CultureInfo _culture;
+
+    private void OnCultureChanged(string cultureName)
+    {
+        _culture = new CultureInfo(cultureName);
+        I18n.SetCulture(_culture);
+    }
+
+}

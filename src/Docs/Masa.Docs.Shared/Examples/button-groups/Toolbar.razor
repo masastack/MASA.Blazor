@@ -1,0 +1,96 @@
+﻿<MToolbar Dense>
+    @* TODO: v-overflow-btn *@
+    @* <v-overflow-btn *@
+    @*     :items="dropdown_font" *@
+    @*     label="Select font" *@
+    @*     hide-details *@
+    @*     class="pa-0" *@
+    @* ></v-overflow-btn> *@
+
+
+    <MDivider Vertical></MDivider>
+
+    @* <v-overflow-btn *@
+    @*     :items="dropdown_edit" *@
+    @*     editable *@
+    @*     label="Select size" *@
+    @*     hide-details *@
+    @*     class="pa-0" *@
+    @*     overflow></v-overflow-btn> *@
+
+    <MDivider Vertical></MDivider>
+
+    <MSpacer></MSpacer>
+
+    <MButtonGroup
+        @bind-Values="toggleMultiple"
+        Color="primary"
+        Dense
+        Group
+        Multiple>
+        <MButton
+            Value="1"
+            Text>
+            <MIcon>mdi-format-bold</MIcon>
+        </MButton>
+
+        <MButton
+            Value="2"
+            Text>
+            <MIcon>mdi-format-italic</MIcon>
+        </MButton>
+
+        <MButton
+            Value="3"
+            Text>
+            <MIcon>mdi-format-underline</MIcon>
+        </MButton>
+
+        <MButton
+            Value="4"
+            Text>
+            <MIcon>mdi-format-color-fill</MIcon>
+        </MButton>
+    </MButtonGroup>
+
+    <div class="mx-4"></div>
+
+    <MButtonGroup
+        @bind-Value="toggleExclusive"
+        Color="primary"
+        Dense
+        Group>
+        <MButton
+            Value="1"
+            Text>
+            <MIcon>mdi-format-align-left</MIcon>
+        </MButton>
+
+        <MButton
+            Value="2"
+            Text>
+            <MIcon>mdi-format-align-center</MIcon>
+        </MButton>
+
+        <MButton
+            Value="3"
+            Text>
+            <MIcon>mdi-format-align-right</MIcon>
+        </MButton>
+
+        <MButton
+            Value="4"
+            Text>
+            <MIcon>mdi-format-align-justify</MIcon>
+        </MButton>
+    </MButtonGroup>
+</MToolbar>
+
+@code {
+
+    List<string> dropdownFont = new() {"Arial", "Calibri", "Courier", "Verdana"};
+    List<string> dropdownEdit = new() {"100%", "75%", "50%", "0%"};
+    StringNumber toggleExclusive = 2;
+    List<StringNumber> toggleMultiple = new() {1, 2, 3};
+
+}

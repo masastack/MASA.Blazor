@@ -1,0 +1,45 @@
+﻿<style>
+    div.ignore-drag {
+        background-color: red
+    }
+
+    .filter-item {
+        margin: 5px;
+        position: relative;
+        display: block;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: -1px;
+        border: 1px solid rgba(0,0,0,.125);
+    }
+
+</style>
+<MContainer>
+    <MRow>
+        <MCol Cols=12>
+            <MDragZone Options=SetOptions>
+                <MDragItem>
+                    <div class="filter-item">item1.1</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="filter-item ignore-drag">item1.2</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="filter-item">item1.3</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="filter-item ignore-drag">item1.4</div>
+                </MDragItem>
+                <MDragItem>
+                    <div class="filter-item">item1.5</div>
+                </MDragItem>
+            </MDragZone>
+        </MCol>
+    </MRow>
+</MContainer>
+@code {
+    private void SetOptions(SorttableOptions options)
+    {
+        options.Group = "group_f1";
+        options.Filter = ".ignore-drag";
+    }
+}

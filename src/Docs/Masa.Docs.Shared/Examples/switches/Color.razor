@@ -1,0 +1,98 @@
+﻿<MCard Flat>
+    <MCardText>
+        <MContainer Fluid>
+            <MRow>
+                <MCol Cols="12"
+                      Sm="4"
+                      Md="4">
+                    <MSwitch @bind-Value="_ex1"
+                             Label="red"
+                             Color="red"
+                             HideDetails="true"></MSwitch>
+                    <MSwitch @bind-Value="_ex2"
+                             Label="red darken-3"
+                             Color="red darken-3"
+                             HideDetails="true"></MSwitch>
+                </MCol>
+                <MCol Cols="12"
+                      Sm="4"
+                      Md="4">
+                    <MSwitch @bind-Value="_ex3"
+                             Label="indigo"
+                             Color="indigo"
+                             HideDetails="true"></MSwitch>
+                    <MSwitch @bind-Value="_ex4"
+                             Label="indigo darken-3"
+                             Color="indigo darken-3"
+                             HideDetails="true"></MSwitch>
+                </MCol>
+                <MCol Cols="12"
+                      Sm="4"
+                      Md="4">
+                    <MSwitch @bind-Value="_ex5"
+                             Label="orange"
+                             Color="orange"
+                             HideDetails="true"></MSwitch>
+                    <MSwitch @bind-Value="_ex6"
+                             Label="orange darken-3"
+                             Color="orange darken-3"
+                             HideDetails="true"></MSwitch>
+                </MCol>
+            </MRow>
+
+            <MRow Class="mt-12">
+                <MCol Cols="12"
+                      Sm="4"
+                      Md="4">
+                    <MSwitch @bind-Value="_ex7"
+                             Label="primary"
+                             Color="primary"
+                             HideDetails="true"></MSwitch>
+                    <MSwitch @bind-Value="_ex8"
+                             Label="secondary"
+                             Color="secondary"
+                             HideDetails="true"></MSwitch>
+                </MCol>
+                <MCol Cols="12"
+                      Sm="4"
+                      Md="4">
+                    <MSwitch @bind-Value="_ex9"
+                             Label="success"
+                             Color="success"
+                             HideDetails="true"></MSwitch>
+                    <MSwitch @bind-Value="_ex10"
+                             Label="info"
+                             Color="info"
+                             HideDetails="true"></MSwitch>
+                </MCol>
+                <MCol Cols="12"
+                      Sm="4"
+                      Md="4">
+                    <MSwitch @bind-Value="_ex11"
+                             Label="warning"
+                             Color="warning"
+                             HideDetails="true"></MSwitch>
+                    <MSwitch @bind-Value="_ex12"
+                             Label="error"
+                             Color="error"
+                             HideDetails="true"></MSwitch>
+                </MCol>
+            </MRow>
+        </MContainer>
+    </MCardText>
+</MCard>
+
+@code {
+    private bool _ex1 = true;
+    private bool _ex2 = true;
+    private bool _ex3 = true;
+    private bool _ex4 = true;
+    private bool _ex5 = true;
+    private bool _ex6 = true;
+    private bool _ex7 = true;
+    private bool _ex8 = true;
+    private bool _ex9 = true;
+    private bool _ex10 = true;
+    private bool _ex11 = true;
+    private bool _ex12 = true;
+}

@@ -1,0 +1,41 @@
+﻿<MRow Justify="@JustifyTypes.SpaceAround">
+    @foreach (var item in _btns)
+    {
+        var index = Array.IndexOf(_btns, item);
+        <MMenu Rounded="@item.rounded" OffsetY @key="@item.text">
+            <ActivatorContent>
+                <MButton Color="@_colors[index]"
+                         Class="white--text ma-5"
+                         @attributes="@context.Attrs">
+                    @item.text Radius
+                </MButton>
+            </ActivatorContent>
+            <ChildContent>
+                <MList>
+                    @for (int i = 0; i < 4; i++)
+                    {
+                        <MListItem Link>
+                            <MListItemTitle>@($"Item {i}")</MListItemTitle>
+                        </MListItem>
+                    }
+                </MList>
+            </ChildContent>
+        </MMenu>
+    }
+</MRow>
+
+@code {
+
+    (string text, string rounded)[] _btns =
+    {
+        ("Removed", "0"),
+        ("Large", "lg"),
+        ("Custom", "b-xl"),
+    };
+
+    string[] _colors =
+    {
+        "deep-purple accent-4", "error", "teal darken-1"
+    };
+
+}

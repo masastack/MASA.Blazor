@@ -1,0 +1,29 @@
+﻿@namespace Masa.Docs.Shared.Components
+
+<MButton Absolute
+         Class="@($"m-btn--copy {Class}")"
+         Icon
+         Right
+         Style="background-color:inherit;"
+         Top
+         OnClick="Copy">
+    <FadeTransition LeaveAbsolute>
+        <MIcon Color="grey">
+            mdi-content-copy
+        </MIcon>
+    </FadeTransition> 
+</MButton>
+
+@code {
+
+    [Parameter]
+    public string Class { get; set; }
+
+    private async Task Copy()
+    {
+        // TODO: HideOnLeave not implemented, can i use LeaveAbsolute?
+        
+        // copy logic here, see CopyBtn
+    }
+
+}

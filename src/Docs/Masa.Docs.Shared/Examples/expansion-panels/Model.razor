@@ -1,0 +1,43 @@
+﻿<div>
+    <div class="text-center d-flex pb-4">
+        <MButton OnClick="All">
+            all
+        </MButton>
+        <div>[@string.Join(",", panel)]</div>
+        <MButton OnClick="None">
+            none
+        </MButton>
+    </div>
+
+    <MExpansionPanels
+        @bind-Values="panel"
+        Multiple>
+        @foreach (var i in Enumerable.Range(0, items))
+        {
+            <MExpansionPanel Value="@i">
+                <MExpansionPanelHeader>Header @(i + 1)</MExpansionPanelHeader>
+                <MExpansionPanelContent>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </MExpansionPanelContent>
+            </MExpansionPanel>
+        }
+    </MExpansionPanels>
+</div>
+
+@code {
+
+    List<StringNumber> panel = new();
+
+    int items = 5;
+
+    void All()
+    {
+        panel = Enumerable.Range(0, 5).Select(i => (StringNumber)i).ToList();
+    }
+
+    void None()
+    {
+        panel.Clear();
+    }
+
+}

@@ -1,0 +1,72 @@
+<MContainer Fluid>
+    <MRow Align="AlignTypes.Center">
+        <MCol Cols="6">
+            <MSubheader>
+                Custom items
+            </MSubheader>
+        </MCol>
+
+        <MCol Cols="6">
+            <MSelect TItem="Model"
+                     TItemValue="string"
+                     TValue="string"
+                     @bind-Value="_select"
+                     Hint="@($"{_selected.State}, {_selected.Abbr}")"
+                     Items="_states"
+                     ItemText="r=>r.State"
+                     ItemValue="r=>r.Abbr"
+                     Label="Select"
+                     PersistentHint
+                     OnSelectedItemUpdate="item=>_selected=item"
+                     SingleLine></MSelect>
+        </MCol>
+    </MRow>
+</MContainer>
+
+  @code {
+    public class Model
+    {
+        public int Id { get; set; }
+        public string State { get; set; }
+        public string Abbr { get; set; }
+    }
+    private string _select = "FL";
+    private Model _selected = new Model()
+        {
+            State = "Florida",
+            Abbr = "FL"
+        };
+    private List<Model> _states = new List<Model>
+        {
+            new Model
+            {
+                State="Florida",
+                Abbr="FL",
+                Id=1
+            },
+            new Model
+            {
+                State="Georgia",
+                Abbr="GA",
+                Id=2
+            },
+            new Model
+            {
+                State="Nebraska",
+                Abbr="NE",
+                Id=3
+            },
+            new Model
+            {
+                State="California",
+                Abbr="CA",
+                Id=4
+            },
+            new Model
+            {
+                State="New York",
+                Abbr="NY",
+                Id=5
+            }
+        };
+  }

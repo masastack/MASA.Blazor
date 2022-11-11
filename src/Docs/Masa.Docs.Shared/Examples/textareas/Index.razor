@@ -1,0 +1,49 @@
+﻿<MContainer Fluid>
+    <MRow>
+        <MCol
+            Cols="12"
+            Md="6">
+            <MTextarea
+                Name="input-7-1"
+                Label="Default style"
+                @bind-Value="value1"
+                Hint="Hint text">
+            </MTextarea>
+        </MCol>
+        <MCol
+            Cols="12"
+            Md="6">
+            <MTextarea
+                Solo
+                Name="input-7-4"
+                Label="Solo textarea">
+            </MTextarea>
+        </MCol>
+        <MCol
+            Cols="12"
+            Md="6">
+            <MTextarea
+                Filled
+                Name="input-7-4"
+                Label="Filled textarea"
+                @bind-Value="value3">
+            </MTextarea>
+        </MCol>
+        <MCol
+            Cols="12"
+            Md="6">
+            <MTextarea
+                Outlined
+                Name="input-7-4"
+                Label="Outlined textarea"
+                @bind-Value="value4">
+            </MTextarea>
+        </MCol>
+    </MRow>
+</MContainer>
+
+@code {
+    string value1 = "The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.";
+    string value3 = "The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.";
+    string value4 = "The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.";
+}

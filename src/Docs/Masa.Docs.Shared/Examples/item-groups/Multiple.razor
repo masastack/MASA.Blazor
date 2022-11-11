@@ -1,0 +1,24 @@
+﻿<MItemGroup Multiple>
+    <MContainer>
+        <MRow>
+            @foreach (var i in Enumerable.Range(0, 3))
+            {
+                <MCol Cols="4" @key="i">
+                    <MItem>
+                        <MCard Color="@(context.Active ? "primary" : "")"
+                               Class="d-flex align-center"
+                               Dark
+                               Height="200"
+                               OnClick="context.Toggle">
+                            <ScrollYTransition>
+                                <ShowTransitionElement Value="context.Active" Class="text-h2 flex-grow-1 text-center">
+                                    Active
+                                </ShowTransitionElement>
+                            </ScrollYTransition>
+                        </MCard>
+                    </MItem>
+                </MCol>
+            }
+        </MRow>
+    </MContainer>
+</MItemGroup>

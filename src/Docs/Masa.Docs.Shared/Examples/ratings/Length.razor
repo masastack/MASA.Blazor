@@ -1,0 +1,13 @@
+﻿<div class="text-center">
+    <MSlider @bind-Value="_length" Color="red darken-4" Min="1" Max="15" Label="Custom length"></MSlider>
+    <MRating @bind-Value="_rating" @bind-Length="_length" Color="red lighten-3" BackgroundColor="grey lighten-1" Large></MRating>
+    <div>
+        <span class="text-caption text-uppercase">model:</span>
+        <span class="font-weight-bold"> @_rating</span>
+    </div>
+</div>
+
+@code {
+    private double _rating = 2;
+    private double _length = 5;
+}

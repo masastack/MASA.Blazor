@@ -1,0 +1,34 @@
+﻿<MCard Class="pa-12" Color="indigo darken-2" Flat>
+    <MCard Elevation="12" Width="256">
+        <MNavigationDrawer Floating Permanent>
+            <MList Dense Rounded>
+                @foreach (var item in _items)
+                {
+                    <MListItem Link>
+                        <MListItemIcon>
+                            <MIcon>@item.Icon</MIcon>
+                        </MListItemIcon>
+
+                        <MListItemContent>
+                            <MListItemTitle>@item.Title</MListItemTitle>
+                        </MListItemContent>
+                    </MListItem>
+                }
+            </MList>
+        </MNavigationDrawer>
+    </MCard>
+</MCard>
+
+@code
+{
+    private class ItemDemo
+    {
+        public string Title { get; set; }
+        public string Icon { get; set; }
+    }
+    private List<ItemDemo> _items = new()
+    {
+        new ItemDemo { Title = "Home", Icon = "mdi-view-dashboard" },
+        new ItemDemo { Title = "About", Icon = "mdi-forum" }
+    };
+}

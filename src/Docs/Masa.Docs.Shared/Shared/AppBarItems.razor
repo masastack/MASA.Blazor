@@ -1,0 +1,34 @@
+﻿@inject I18n I18n
+@inject MasaBlazor MasaBlazor
+
+<h3>@I18n.Culture</h3>
+
+<div class="flex-1-1-auto d-flex align-center justify-end">
+    @if (MasaBlazor.Breakpoint.SmAndUp)
+    {
+        if (MasaBlazor.Breakpoint.MdAndUp)
+        {
+            <SettingsToggle />
+        }
+    }
+
+    @if (MasaBlazor.Breakpoint.SmOnly)
+    {
+        <VerticalDivider />
+    }
+
+    @if (MasaBlazor.Breakpoint.XsOnly)
+    {
+        <MSpacer />
+    }
+
+    <LanguageMenu OnCultureChanged="@OnCultureChanged" />
+</div>
+
+
+@code {
+
+    [Parameter]
+    public EventCallback<string> OnCultureChanged { get; set; }
+
+}

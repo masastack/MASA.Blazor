@@ -1,0 +1,49 @@
+﻿<MRow Justify="@JustifyTypes.Center">
+    <MCol Cols="12"
+          Sm="7"
+          Md="6"
+          Lg="5">
+        <MSheet Elevation="10"
+                Rounded="@("xl")">
+            <MSheet Class="pa-3 primary text-right"
+                    Dark
+                    Rounded="@("t-xl")">
+                <MButton Icon Dark>
+                    <MIcon>mdi-content-save-cog-outline</MIcon>
+                </MButton>
+
+                <MButton Class="ml-2"
+                         Icon Dark>
+                    <MIcon>mdi-check-bold</MIcon>
+                </MButton>
+            </MSheet>
+
+            <div class="pa-4">
+                <MChipGroup ActiveClass="primary--text"
+                            Column>
+                    @foreach (var tag in _tags)
+                    {
+                        <MChip>
+                            @tag
+                        </MChip>
+                    }
+                </MChipGroup>
+            </div>
+        </MSheet>
+    </MCol>
+</MRow>
+
+@code{
+    private string[] _tags = new string[]
+    {
+        "Work",
+        "Home Improvement",
+        "Vacation",
+        "Food",
+        "Drawers",
+        "Shopping",
+        "Art",
+        "Tech",
+        "Creative Writing"
+    };
+}

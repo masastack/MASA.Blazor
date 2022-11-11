@@ -1,0 +1,21 @@
+﻿<div>
+    <MRow>
+        @for (var index = 0; index < 9; index++)
+        {
+            var localVariable = index;
+            <MCol Cols="4">
+                <MImage Src="@("https://picsum.photos/500/300?image=" + (localVariable * 5 + 10))"
+                        LazySrc="@("https://picsum.photos/500/6?image=" + (localVariable * 5 + 10))" AspectRatio="1"
+                        Class="grey lighten-2">
+                    <PlaceholderContent>
+                        <MRow Class="fill-height ma-0"
+                              Align="@AlignTypes.Center"
+                              Justify="@JustifyTypes.Center">
+                            <MProgressCircular Indeterminate></MProgressCircular>
+                        </MRow>
+                    </PlaceholderContent>
+                </MImage>
+            </MCol>
+        }
+    </MRow>
+</div>

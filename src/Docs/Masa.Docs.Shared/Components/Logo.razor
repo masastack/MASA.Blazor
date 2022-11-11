@@ -1,0 +1,17 @@
+﻿@namespace Masa.Docs.Shared.Components
+@inject I18n I18n
+
+<a class="d-inline-block" @attributes="@Attributes">
+    <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png"
+            alt="@I18n.T("logo")"
+            Class="shrink"
+            MaxWidth="148"
+            Width="148" />
+</a>
+
+@code {
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> Attributes { get; set; } = new();
+
+}

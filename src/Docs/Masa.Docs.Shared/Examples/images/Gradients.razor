@@ -1,0 +1,38 @@
+﻿<MRow>
+    <MCol Cols="4">
+        <MImage MaxHeight="150"
+                MaxWidth="250"
+                Src="https://cdn.masastack.com/stack/images/website/masa-blazor/parallax/material2.jpg"
+                Gradient="to right top, rgba(100, 115, 201, 0.33), rgba(25, 32, 72, 0.7)">
+        </MImage>
+    </MCol>
+    <MCol Cols="4">
+        <MImage MaxHeight="150"
+                MaxWidth="250"
+                Src="https://cdn.masastack.com/stack/images/website/masa-blazor/parallax/material2.jpg">
+            <div class="fill-height bottom-gradient"></div>
+        </MImage>
+    </MCol>
+    <MCol Cols="4">
+        <MImage MaxHeight="150"
+                MaxWidth="250"
+                Src="https://cdn.masastack.com/stack/images/website/masa-blazor/parallax/material2.jpg">
+            <div class="fill-height repeating-gradient"></div>
+        </MImage>
+    </MCol>
+</MRow>
+
+<style scoped>
+     .bottom-gradient {
+        background-image: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 72px);
+      }
+    
+      .repeating-gradient {
+        background-image: repeating-linear-gradient(-45deg,
+                            rgba(255,0,0,.25),
+                            rgba(255,0,0,.25) 5px,
+                            rgba(0,0,255,.25) 5px,
+                            rgba(0,0,255,.25) 10px
+                          );
+      }
+</style>
