@@ -1,0 +1,20 @@
+﻿<MWindow ShowArrows>
+    <PrevContent>
+        <MButton Color="success" OnClick="context">Previous slide</MButton>
+    </PrevContent>
+    <NextContent>
+        <MButton Color="info" OnClick="context">Next slide</MButton>
+    </NextContent>
+    <ChildContent>
+        @foreach (var item in Enumerable.Range(1, 5))
+        {
+            <MWindowItem>
+                <MCard Color="grey" Height="200">
+                    <MRow Class="fill-height" Align="AlignTypes.Center" Justify="JustifyTypes.Center">
+                        <h1 style="font-size: 5rem" class="white--text">Slide @item</h1>
+                    </MRow>
+                </MCard>
+            </MWindowItem>
+        }
+    </ChildContent>
+</MWindow>
