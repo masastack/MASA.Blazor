@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.7483132+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.7785985+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -185,7 +185,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.7503127+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.7795986+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -216,7 +216,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.753313+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.7815997+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -313,7 +313,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.7553135+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.7835992+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -388,7 +388,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.7583158+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.7855902+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -476,7 +476,7 @@
       "SubComponents": "\n<ul>\n<li><code>MAppBarNavIcon</code>：A stylized icon button component created specifically for use with <a href=\"/components/toolbars\">MToolbar</a> and <code>MAppBar</code>. The hamburger menu is displayed on the left side of the toolbar, which is usually used to control the status of the navigation drawer. The default slot can be used to customize the icons and functions of this component.</li>\n<li><code>MAppBarTitle</code>：The modified <a href=\"/components/toolbars\">MToolbarTitle</a> component is used in conjunction with the <strong>shrinkonscroll</strong> attribute. On the small screen, <strong>MToolbarTitle</strong>\nWill be truncated, but this component uses absolute positioning when expanding to make its contents visible. We do not recommend that you use the <code>MAppbarTitle</code> component without using the <strong>shrinkonscroll</strong> attribute. It's really because the resize event was added to this component and a lot of additional calculations were done.</li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning-->\n<p>When <code>MButton</code> with <strong>icon</strong> attribute is used inside <code>MToolbar</code> and <code>MAppbar</code>, they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap the buttons in any container, such as <code>div</code>, you need to apply a negative margin to the container in order to align them correctly.</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.7643132+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.7895891+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -628,7 +628,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.767313+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.7905995+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -704,7 +704,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning-->\n<p>When 'MButton' with 'icon' prop is used inside 'MToolbar' and 'MAppbar', they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap your buttons in any container, such as' div ', you need to apply a negative margin to the container for proper alignment.</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.7733125+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.7947594+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -854,7 +854,7 @@
     "Desc": "<p>Display two data of the same type side by side.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:50.7763134+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.6571582+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -908,7 +908,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.7783237+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.7958261+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -950,7 +950,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBottomNavigation\">MBottomNavigation</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.7833124+08:00",
+    "LastWriteTime": "2022-11-11T16:01:59.7605666+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1058,7 +1058,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBottomSheet\">MBottomSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.7864007+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.7975988+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1145,7 +1145,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>By default <code>MBreadcrumbs</code> will disable the linkage with router. You can enable the feature by using *<em>Linkage</em> prop.</p>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.7913147+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.7995998+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1232,7 +1232,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>MButton</code> is the only component that behaves differently when using the <strong>Dark</strong> prop. Normally components use the <strong>Dark</strong> prop to denote that they have a dark colored background and need their text to be white. While this will work\nfor <code>MButton</code>, it is advised to only use the prop when the button <strong>IS ON</strong> a colored background due to the disabled state\nblending in with white backgrounds. If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.7990004+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8035896+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1396,7 +1396,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "SubComponents": "\n<ul>\n<li><code>MCardActions</code>:A container used to place actions for cards, such as [MButton] (/components/buttons) or [MMenu] (/components/menu). Use a special margin on the button at the same time\nSo that they match other card content areas.</li>\n<li><code>MCardSubtitle</code>:Provide default <strong>font size</strong> and <strong>fill</strong> for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n<li><code>MCardText</code>:It is mainly used for <strong>text content</strong> in cards. Apply padding to the text and reduce its font size to. 875rem.</li>\n<li><code>MCardTitle</code>:Provide default font size and padding for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8023201+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8075982+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1548,7 +1548,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCarousel\">MCarousel</a></li>\n<li><a href=\"/api/MCarouselItem\">MCarouselItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8053245+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.6623086+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1656,7 +1656,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8113124+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.81159+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1839,7 +1839,7 @@
     "Desc": "<p>Append a button that provides copy feature to the content.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:50.8133212+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.6651594+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -1912,7 +1912,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:50.8133212+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.666159+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -1944,7 +1944,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8173201+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8155895+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2074,7 +2074,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8213135+08:00",
+    "LastWriteTime": "2022-04-24T15:42:47.4767209+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2160,7 +2160,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDragZone\">MDragZone</a></li>\n</ul>\n<!--alert:info-->\n<p>You need to reference the package of Sorttable.js before using it ：\n<br />\n<code>&lt;script src=&quot;https://cdn.masastack.com/npm/sortable/Sortable.min.js&quot;&gt;&lt;/script&gt;</code>.</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8248087+08:00",
+    "LastWriteTime": "2022-11-11T16:01:59.7655641+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2272,7 +2272,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:50.8273161+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.6701586+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -2381,7 +2381,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n<!--alert:info-->\n<p>You need to reference the package of ECharts before using it:\n<br />\n<code>&lt;script src=&quot;https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js&quot;&gt;&lt;/script&gt;</code>.</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8303198+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8186883+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2454,7 +2454,7 @@
       "JS file": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8333199+08:00",
+    "LastWriteTime": "2022-04-27T19:15:05.2917242+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2591,7 +2591,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MErrorHandler\">MErrorHandler</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8343199+08:00",
+    "LastWriteTime": "2022-04-18T11:46:33.7223759+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2650,7 +2650,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8383308+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8215887+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2780,7 +2780,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MSpeedDial\">MSpeedDial</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8413198+08:00",
+    "LastWriteTime": "2022-04-27T19:15:05.2967236+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2855,7 +2855,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8433126+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8235985+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2931,7 +2931,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:error--> \n<p>When using objects for the <strong>Items</strong> prop, you must associate <strong>ItemText</strong> and <strong>ItemValue</strong> with existing properties on your objects. These values are defaulted to  <strong>Text</strong> and <strong>Value</strong> and can be changed.</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p>The <strong>Auto</strong> property of <strong>MenuProps</strong> is only supported for the default input style.</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>Browser autocomplete is set to off by default, may vary by browser and may be ignored.  <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8473137+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8265904+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3039,7 +3039,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.849371+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8286133+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3114,7 +3114,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8513718+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8305898+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3200,7 +3200,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8553483+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8335986+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3341,7 +3341,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8583202+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8355882+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3449,7 +3449,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOtpInput\">MOtpInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8603412+08:00",
+    "LastWriteTime": "2022-04-18T11:46:33.7353773+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3513,7 +3513,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadioGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8633398+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8375898+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3588,7 +3588,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.866391+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8395924+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3675,7 +3675,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>The default setting of browser auto completion is off, which may be changed or ignored by different browsers. <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p>The <strong>Auto</strong> attribute of <strong>menupprops</strong> only supports the default input style.</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>When using an object as the attribute of <strong>items</strong>, you must use <strong>itemtext</strong> and <strong>itemvalue</strong> to associate with the incoming object. These values are <strong>text</strong> and <strong>value</strong> by default and can be changed.</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8703231+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8435901+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3816,7 +3816,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8764696+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8485979+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4001,7 +4001,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8793198+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8506039+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4098,7 +4098,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8913132+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8616063+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4228,7 +4228,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8876281+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8586077+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4515,7 +4515,7 @@
       "Helper Classes": "\n<p><strong>FillHeight</strong> applies <code>height: 100%</code> to an element. When applied to <code>MContainer</code> it will also <code>align-items: center</code>.</p>\n",
       "Caveats": "\n<!--alert:info--> \n<p>1.x grid system has been deprecated in favor of the 2.x grid system.</p>\n<!--alert:info--> \n<!--alert:info--> \n<p>Breakpoints based props on grid components work in an <code>andUp</code> fashion. With this in mind the <strong>xs</strong> breakpoint is assumed and has been removed from the props context. This applies to <strong>offset</strong>、<strong>justify</strong>、<strong>align</strong> and single breakpoint props on <code>MCol</code>.</p>\n<ul>\n<li>Props like <strong>justify-sm</strong> and <strong>justify-md</strong> exist,but <strong>justify-xs</strong> does not, it is simply <strong>justify</strong>。</li>\n<li>The <strong>xs</strong> prop does not exist on <code>MCol</code>. The equivalent to this is the <strong>cols</strong> prop.</li>\n</ul>\n<!--alert:info--> \n<!--alert:info--> \n<p>When using the grid system with IE11 you will need to set an explicit <code>height</code> as <code>min-height</code> will not suffice and cause undesired results.</p>\n<!--alert:info--> \n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8973123+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8678292+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4744,7 +4744,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.8993124+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8710222+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4830,7 +4830,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9023119+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8736782+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4927,7 +4927,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9063122+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8757917+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5013,7 +5013,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9093194+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8783928+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5099,7 +5099,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9125939+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8810189+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5196,7 +5196,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9153193+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8835549+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5282,7 +5282,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9183147+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8845549+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5346,7 +5346,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9213208+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8875658+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5433,7 +5433,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info--> \n<p>The MImage component uses the Intersect directive which requires a Polyfill for IE11 and Safari. If a browser that does not support this functionality is detected, the image will still load as normal.</p>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9253206+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8895562+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5528,7 +5528,7 @@
     "Desc": "<p>Image Captcha component</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:50.9263193+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.686159+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5581,7 +5581,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MInfiniteScroll\">MInfiniteScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9283113+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.6881599+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5635,7 +5635,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>If you want to find a list item with status, please check <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>。</p>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9353136+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8945558+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5844,7 +5844,7 @@
       "JS file": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.min.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MMarkdown\">MMarkdown</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.939311+08:00",
+    "LastWriteTime": "2022-04-18T11:46:47.065698+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5970,7 +5970,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMarkdownIt\">MMarkdownIt</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-11-10T17:28:29.3798522+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.6911591+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5990,17 +5990,6 @@
         "Description": "<p>Full options list please see <a href=\"https://github.com/markdown-it/markdown-it#init-with-presets-and-options\">markdown-it</a>。</p>\n",
         "Code": "<MSwitch @bind-Value=\"html\" HideDetails=\"true\" Label=\"html: Enable HTML tags in source\"></MSwitch>\r\n<MSwitch @bind-Value=\"breaks\" HideDetails=\"true\" Label=\"breaks: Convert '\\n' in paragraphs into <br>\"></MSwitch>\r\n<MSwitch @bind-Value=\"linkify\" HideDetails=\"true\" Label=\"linkify: Autoconvert URL-like text to links\"></MSwitch>\r\n<MSwitch @bind-Value=\"typographer\" HideDetails=\"true\" Label=\"typographer: Enable some language-neutral replacement + quotes beautification\"></MSwitch>\r\n\r\n<MMarkdownIt Source=\"@source\"\r\n             Html=\"@html\"\r\n             Breaks=\"breaks\"\r\n             Linkify=\"linkify\"\r\n             Typographer=\"typographer\"\r\n             Class=\"mt-4 pa-1\"\r\n             Style=\"border: 1px lightgrey solid \" />\r\n\r\n@code {\r\n\r\n    private string source = @\"\r\n- html: \r\n  <b>Bold</b>\r\n- breaks:\r\n  Convert '\\n' in paragraphs into <br>\r\n- linkify:\r\n  https://blazor.masastack.com\r\n- typographer:\r\n  \"\"Smartypants, double quotes\"\" and 'single quotes'\r\n\";\r\n\r\n    private bool html;\r\n    private bool breaks;\r\n    private bool linkify;\r\n    private bool typographer;\r\n\r\n}\r\n",
         "Type": "Demos.Components.MarkdownIt.props.Options",
-        "Style": "",
-        "Debug": false,
-        "Group": 0
-      },
-      {
-        "Order": 0,
-        "Name": "tagClassMap",
-        "Title": "TagClassMap",
-        "Description": "<p>Set the same style for the same html tag. The features comes from <a href=\"https://github.com/HiroshiOkada/markdown-it-class\">markdown-it-class</a>.</p>\n",
-        "Code": "<MMarkdownIt Key=\"TagClassMapDemo\" Source=\"@source\" TagClassMap=\"@tagClassMap\" />\r\n\r\n@code {\r\n\r\n    private string source = @\"\r\n# h1 Heading\r\n## h2 Heading\r\n### h3 Heading\r\n#### h4 Heading\r\n\";\r\n\r\n    private Dictionary<string, string> tagClassMap = new()\r\n    {\r\n        { \"h1\", \"text-h1\" },\r\n        { \"h2\", \"text-h2\" },\r\n        { \"h3\", \"text-h3\" },\r\n        { \"h4\", \"text-h4\" },\r\n    };\r\n\r\n}\r\n\r\n<style>\r\n    .markdown-parser__tagClassMap.h1 {\r\n       color: #212121;\r\n    }    \r\n    .markdown-parser__tagClassMap.h2 {\r\n       color: #424242;\r\n    }    \r\n    .markdown-parser__tagClassMap.h3 {\r\n       color: #616161;\r\n    }    \r\n    .markdown-parser__tagClassMap.h4 {\r\n       color: #757575;\r\n    }\r\n    \r\n</style>\r\n",
-        "Type": "Demos.Components.MarkdownIt.props.TagClassMap",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -6030,7 +6019,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9443228+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.8985634+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6202,7 +6191,7 @@
     "Desc": "<p>A cascade selector designed for the mobile.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:50.9463195+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.6931579+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6254,7 +6243,7 @@
     "Desc": "<p>A date picker designed for the mobile.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:50.9483208+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.6951601+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6317,7 +6306,7 @@
     "Desc": "<p>A date time picker designed for the mobile.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:50.9493123+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.6981725+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6380,7 +6369,7 @@
     "Desc": "<p>A picker designed for the mobile. Provides multiple sets of options for users to choose, and supports single-column selection, multi-column selection and cascading selection.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:50.9533121+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.701161+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6434,7 +6423,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMobilePickerView\">MMobilePickerView</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9513118+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.7001615+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6496,7 +6485,7 @@
     "Desc": "<p>A time picker designed for the mobile.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:50.955312+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.7041586+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6559,7 +6548,7 @@
     "Desc": "<p>When requiring users to interact with the application, but without jumping to a new page and interrupting the user's\nworkflow, you can use <code>Modal</code> to create a new floating layer over the current page to get user feedback or display\ninformation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:50.9583119+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.7071601+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6657,7 +6646,7 @@
     "OtherDocs": {
       "Caveats": "\n<!--alert:error-->\n<p>If you are using <code>MNavigationDrawer</code> with <strong>App</strong> property enabled, you don't need to use <strong>Absolute</strong> prop as in examples.</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p>The <strong>ExpandOnHover</strong> prop does not alter the content area of <strong>MMain</strong>. To have content area respond to <strong>ExpandOnHover</strong>, bind <strong>OnMiniVariantUpdate</strong> to a data prop.</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.961312+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9025564+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6784,7 +6773,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:50.9623115+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.7081606+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6838,7 +6827,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9653111+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9045667+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6924,7 +6913,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9683138+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9055648+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7011,7 +7000,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>Mdatepicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9773125+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9115555+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7252,7 +7241,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>MDatePicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.981322+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9155558+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7393,7 +7382,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9863188+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9195558+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7564,7 +7553,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:50.9873191+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.7121609+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7629,7 +7618,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9903245+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9325549+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7704,7 +7693,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9953215+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9365645+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7867,7 +7856,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:50.9983134+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9385635+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -7975,7 +7964,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:51.000319+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9395636+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -8028,7 +8017,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:51.0023184+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9415555+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8070,7 +8059,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:51.0043117+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9435557+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8145,7 +8134,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:51.009319+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9475579+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8308,7 +8297,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:51.0113187+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9495556+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8383,7 +8372,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:51.0123186+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9505558+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8436,7 +8425,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n<li><a href=\"/api/MDataTableHeader\">MDataTableHeader</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:51.0213129+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9575548+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8698,7 +8687,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:51.0243225+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.959564+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8774,7 +8763,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p>When using the <strong>Dark</strong> prop and <strong>NOT</strong> providing a custom <strong>color</strong>, the <code>MTabs</code> component will default its color to white.</p>\n<!--alert:warning--> \n<!--alert:warning--> \n<p>When using <code>MTabItem</code>'s that contain required input fields you must use the <strong>eager</strong> prop in order to validate the required fields that are not yet visible.</p>\n<!--alert:warning--> \n"
     },
-    "LastWriteTime": "2022-10-31T13:52:51.0303122+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9645558+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8970,7 +8959,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:51.0333185+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.979858+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -9098,7 +9087,7 @@
     "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>,<strong>Info</strong>,<strong>Warning</strong>, and <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays and also can customized content to fit almost any situation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:51.0353183+08:00",
+    "LastWriteTime": "2022-11-11T16:02:55.7211592+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -9175,7 +9164,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>In order to correctly position 'MTooltip', a position support (<code>top</code> | 'bottom <code>|' left</code> | 'right') is required.</p>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:51.0363184+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.981429+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -9226,7 +9215,7 @@
     "Desc": "<p>The MTreeview component is useful for displaying large amounts of nested data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-31T13:52:51.0413184+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9867445+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -9422,7 +9411,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-31T13:52:51.0423184+08:00",
+    "LastWriteTime": "2022-03-28T10:47:13.9877918+08:00",
     "DemoList": [
       {
         "Order": 0,
