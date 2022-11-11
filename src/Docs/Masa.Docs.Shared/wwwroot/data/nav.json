@@ -56,7 +56,7 @@
       "floating-action-buttons",
       "footers",
       {
-        "title": "Form inputs & controls",
+        "title": "form-inputs-and-ontrols",
         "group": "components",
         "items": [
           "autocomplete",
@@ -76,7 +76,7 @@
       },
       "grids",
       {
-        "title": "Groups",
+        "title": "groups",
         "group": "components",
         "items": [
           "button-groups",
@@ -96,7 +96,7 @@
       "markdown",
       "menus",
       {
-        "title": "Mobiles",
+        "title": "mobiles",
         "group": "components",
         "items": [
           "mobile-cascader",
@@ -123,7 +123,7 @@
       },
       "popup-service",
       {
-        "title": "Progress",
+        "title": "progress",
         "group": "components",
         "items": [
           "progress-circular",
@@ -137,7 +137,7 @@
       "steppers",
       "subheaders",
       {
-        "title": "Tables",
+        "title": "tables",
         "group": "components",
         "items": [
           "data-iterators",

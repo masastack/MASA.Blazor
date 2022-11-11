@@ -1,13 +1,11 @@
 ---
-title: 抽屉
+title: Drawers（抽屉）
 desc: ""
 related:
   - /components/dialogs
   - /components/buttons
   - /components/icons
 ---
-
-# Drawers（抽屉）
 
 ## 使用
 

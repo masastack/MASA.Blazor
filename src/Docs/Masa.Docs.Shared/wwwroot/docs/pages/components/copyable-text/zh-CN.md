@@ -1,5 +1,5 @@
 ---
-title: Copyable Text（可复制的文本）
+title: Copyable text（可复制的文本）
 desc: "在文本后提供可以复制内容的图标按钮。"
 related:
   - /components/icons

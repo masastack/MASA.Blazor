@@ -33,9 +33,3 @@ options, you can use an empty string for placeholder.
 You can customize the height of the option through `Itemheight`. Currently, only `px` is supported.
 
 <masa-example file="Examples.mobil_picker_views.ItemHeight"></masa-example>
-
-
-
-
-
-

@@ -32,5 +32,3 @@ related:
 通过 `Itemheight` 可以自定义选项的高度。目前只支持 `px` 。
 
 <masa-example file="Examples.mobile_pickers.ItemHeight"></masa-example>
-
-

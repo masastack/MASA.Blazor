@@ -1,5 +1,5 @@
 ---
-title: 轮播
+title: Carousels（轮播）
 desc: "`MCarousel` 组件用于在循环计时器上显示大量可视内容。"
 related:
   - /components/parallax
