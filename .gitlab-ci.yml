@@ -19,10 +19,8 @@ variables:
   IMAGE_PRD: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:$CI_COMMIT_TAG
 
 packer:
-  stage: packer
   image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:7.0_wasm_tools_6
-#   tags:
-#     - 51-131
+  stage: packer
   only:
     - main 
   script: 
