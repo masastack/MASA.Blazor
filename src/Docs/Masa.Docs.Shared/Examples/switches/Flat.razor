@@ -1,0 +1,15 @@
+﻿<MSheet Width="@("100%")"
+         Height="@("100%")"
+         Class="pa-12">
+    <MSwitch @bind-Value="_switch1"
+              Flat
+              Label="@string.Format("Switch 1: {0}",_switch1)"></MSwitch>
+    <MSwitch @bind-Value="_switch2"
+              Flat
+              Label="@string.Format("Switch 2: {0}",_switch2)"></MSwitch>
+</MSheet>
+
+@code{
+    private bool _switch1=true;
+    private bool _switch2;
+}

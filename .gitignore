@@ -218,3 +218,6 @@ package-lock.json
 Thunbs.db
 packages/
 .vscode/
+
+# Masa.Docs
+src/Docs/Masa.Docs.Shared/wwwroot/docs/pages/components/**/examples

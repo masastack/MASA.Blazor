@@ -1,0 +1,103 @@
+﻿<MCard Class="mx-auto" MaxWidth="400">
+
+    <MListItem TwoLine>
+        <MListItemContent>
+            <MListItemTitle class="text-h5">
+                San Francisco
+            </MListItemTitle>
+            <MListItemSubtitle>Mon, 12:30 PM, Mostly sunny</MListItemSubtitle>
+        </MListItemContent>
+    </MListItem>
+
+    <MCardText>
+        <MRow Align=AlignTypes.Center>
+            <MCol Class="text-h2" Cols="6">
+                23&deg;C
+            </MCol>
+            <MCol Cols="6">
+                <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/cards/sun.png" alt="Sunny image" Width=92 />
+            </MCol>
+        </MRow>
+    </MCardText>
+
+    <MListItem>
+        <MListItemIcon>
+            <MIcon>mdi-send</MIcon>
+        </MListItemIcon>
+        <MListItemSubtitle>23 km/h</MListItemSubtitle>
+    </MListItem>
+
+    <MListItem>
+        <MListItemIcon>
+            <MIcon>mdi-cloud-download</MIcon>
+        </MListItemIcon>
+        <MListItemSubtitle>48%</MListItemSubtitle>
+    </MListItem>
+
+    <MSlider Value=_time Max=6 TickLabels=_labels Class="mx-4" Ticks=true>
+    </MSlider>
+    <MList Class="transparent">
+        @foreach (var forecast in _forecasts)
+        {
+            <MListItem key="@forecast.Day">
+
+                <MListItemTitle>@forecast.Day</MListItemTitle>
+
+                <MListItemIcon>
+                    <MIcon>
+                        @forecast.Icon
+                    </MIcon>
+                </MListItemIcon>
+
+                <MListItemSubtitle Class="text-right">
+                    @forecast.Temp
+                </MListItemSubtitle>
+
+            </MListItem>
+        }
+    </MList>
+
+    <MDivider></MDivider>
+
+    <MCardActions>
+        <MButton Text>
+            Full Report
+        </MButton>
+    </MCardActions>
+
+</MCard>
+
+@code {
+    List<string> _labels = new List<string> { "SU", "MO", "TU", "WED", "TH", "FR", "SR" };
+
+    double _time = 0;
+
+    Forecast[] _forecasts = new[]
+        {
+        new Forecast
+        {
+            Day="Tuesday",
+            Icon="mdi-white-balance-sunny",
+            Temp="24\xB0/12\xB0"
+        },
+         new Forecast
+        {
+            Day="Wednesday",
+            Icon="mdi-white-balance-sunny",
+            Temp="22\xB0/14\xB0"
+        },
+         new Forecast
+        {
+            Day="Thursday",
+            Icon="mdi-cloud",
+            Temp="25\xB0/15\xB0"
+        },
+    };
+
+    class Forecast
+    {
+        public string Day { get; set; }
+        public string Icon { get; set; }
+        public string Temp { get; set; }
+    }
+}

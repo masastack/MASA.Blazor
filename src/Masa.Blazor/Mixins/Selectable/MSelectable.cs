@@ -48,7 +48,7 @@ public partial class MSelectable : MInput<bool>, ISelectable
         var input = InternalValue;
         input = !input;
 
-        ForceValidate(input);
+        Validate(input);
 
         InternalValue = input;
 

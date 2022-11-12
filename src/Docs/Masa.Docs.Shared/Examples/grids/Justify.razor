@@ -1,0 +1,28 @@
+﻿<MContainer Class="grey lighten-5">
+    @foreach (var j in _justify)
+    {
+        <MRow Justify="@j">
+            @for (int i = 0; i < 2; i++)
+            {
+                <MCol Md="4">
+                    <MCard Class="pa-2"
+                           Outlined
+                           tile>
+                        One of two columns
+                    </MCard>
+                </MCol>
+            }
+        </MRow>
+    }
+</MContainer>
+
+@code{
+    private string[] _justify = new string[]
+    {
+        "start",
+        "center",
+        "end",
+        "space-around",
+        "space-between"
+    };
+}

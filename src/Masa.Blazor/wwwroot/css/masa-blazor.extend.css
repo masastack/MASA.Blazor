@@ -581,6 +581,11 @@ input[type=number] {
     justify-content: space-between;
 }
 
+.p-mobile-cascader__list {
+    height: 336px;
+    overflow: auto;
+}
+
 /* cron */
 
 .m-cron .m-text-field {

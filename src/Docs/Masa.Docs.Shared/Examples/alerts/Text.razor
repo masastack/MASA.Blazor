@@ -1,0 +1,47 @@
+﻿@using AlertTypes = BlazorComponent.AlertTypes
+
+<div>
+    <MAlert Text
+            Color="info">
+        <h3 class="Text-h5">
+            Lorem Ipsum
+        </h3>
+        <div>Maecenas nec odio et ante tincidunt tempus. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Curabitur turpis.</div>
+
+        <MDivider Class="my-4 info"
+                  Style="opacity: 0.22"></MDivider>
+
+        <MRow Align="@AlignTypes.Center"
+              NoGutters>
+            <MCol Class="grow">
+                Proin magna. Vivamus in erat ut urna cursus vestibulum. Etiam imperdiet imperdiet orci.
+            </MCol>
+            <MSpacer></MSpacer>
+            <MCol Class="shrink">
+                <MButton Color="info"
+                         Outlined>
+                    Okay
+                </MButton>
+            </MCol>
+        </MRow>
+    </MAlert>
+    <MAlert Text
+            Outlined
+            Color="deep-orange"
+            Icon="@("mdi-fire")">
+        Nullam tincidunt adipiscing enim. In consectetuer turpis ut velit. Maecenas egestas arcu quis ligula mattis placerat. Praesent metus tellus, elementum eu, semper a, adipiscing nec, purus.
+    </MAlert>
+    <MAlert Text
+            Dense
+            Color="teal"
+            Icon="@("mdi-clock-fast")"
+            Border="Borders.Left">
+        Vestibulum ullamcorper mauris at ligula. Nulla porta dolor. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor. Curabitur at lacus ac velit ornare lobortis.
+    </MAlert>
+    <MAlert Text
+            Prominent
+            Type="AlertTypes.Error"
+            Icon="@("mdi-cloud-alert")">
+        Praesent blandit laoreet nibh. Praesent nonummy mi in odio. Phasellus tempus. Mauris turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Duis leo.
+    </MAlert>
+</div>

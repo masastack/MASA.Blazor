@@ -1,0 +1,216 @@
+﻿@using System.Net.Http.Json;
+<MCard>
+    <MCardTitle class="indigo white--text text-h5">
+        User Directory
+    </MCardTitle>
+    <MRow Class="pa-4"
+          Justify="JustifyTypes.SpaceBetween">
+        <MCol Cols="5">
+            <MTreeview @bind-Active="_active"
+                       Items="_items"
+                       LoadChildren="FetchUsers"
+                       Color="warning"
+                       Activatable
+                       OpenOnClick
+                       ItemText="r=>r.Name"
+                       ItemKey="r=>r.Id"
+                       ItemChildren="r=>r.Children">
+                <PrependContent>
+                    @if (context.Item.Children == null)
+                    {
+                        <MIcon>
+                            mdi-account
+                        </MIcon>
+                    }
+                </PrependContent>
+            </MTreeview>
+        </MCol>
+
+        <MDivider Vertical></MDivider>
+
+        <MCol class="d-flex text-center">
+            <ScrollYTransition>
+                @if (Selected == null)
+                {
+                    <div class="text-h6 grey--text text--lighten-1 font-weight-light"
+                     style="align-self: center;">
+                        Select a User
+                    </div>
+                }
+                else
+                {
+                    <MCard @key="Selected.Id"
+                       Class="pt-6 mx-auto"
+                       Flat
+                       MaxWidth="400">
+                        <MCardText>
+                            @if (_avatar != null)
+                            {
+                                <MAvatar Size="88">
+                                    <MImage Src="@($"https://avataaars.io/{_avatar}")"
+                                    class="mb-6"></MImage>
+                                </MAvatar>
+                            }
+                            <h3 class="text-h5 mb-2">
+                                @Selected.Name
+                            </h3>
+                            <div class="blue--text mb-2">
+                                @Selected.Email
+                            </div>
+                            <div class="blue--text subheading font-weight-bold">
+                                @Selected.UserName
+                            </div>
+                        </MCardText>
+                        <MDivider></MDivider>
+                        <MCardText Class="row text-left">
+                            <MCol Class="text-right mr-4 mb-2"
+                              Tag="strong"
+                              Cols="5">
+                                Company:
+                            </MCol>
+                            <MCol>@Selected.Company.Name</MCol>
+                            <MCol class="text-right mr-4 mb-2"
+                              Tag="strong"
+                              Cols="5">
+                                Website:
+                            </MCol>
+                            <MCol>
+                                <a href="@($"//{Selected.Website}")"
+                               target="_blank">@Selected.Website</a>
+                            </MCol>
+                            <MCol class="text-right mr-4 mb-2"
+                              Tag="strong"
+                              Cols="5">
+                                Phone:
+                            </MCol>
+                            <MCol>@Selected.Phone</MCol>
+                        </MCardText>
+                    </MCard>
+                }
+            </ScrollYTransition>
+        </MCol>
+    </MRow>
+</MCard>
+
+@code {
+    public class User
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string UserName { get; set; }
+
+        public string Email { get; set; }
+
+        public Address Address { get; set; }
+
+        public string Phone { get; set; }
+
+        public string Website { get; set; }
+
+        public Company Company { get; set; }
+
+        public List<User> Children { get; set; }
+    }
+
+    public class Address
+    {
+        public string Street { get; set; }
+
+        public string Suite { get; set; }
+
+        public string City { get; set; }
+
+        public string Zipcode { get; set; }
+
+        public Geo Geo { get; set; }
+    }
+
+    public class Geo
+    {
+        public string Lat { get; set; }
+
+        public string Lng { get; set; }
+    }
+
+    public class Company
+    {
+        public string Name { get; set; }
+
+        public string CatchPhrase { get; set; }
+
+        public string Bs { get; set; }
+    }
+
+    private List<string> _avatars = new List<string>()
+        {
+            "?accessoriesType=Blank&avatarStyle=Circle&clotheColor=PastelGreen&clotheType=ShirtScoopNeck&eyeType=Wink&eyebrowType=UnibrowNatural&facialHairColor=Black&facialHairType=MoustacheMagnum&hairColor=Platinum&mouthType=Concerned&skinColor=Tanned&topType=Turban",
+            "?accessoriesType=Sunglasses&avatarStyle=Circle&clotheColor=Gray02&clotheType=ShirtScoopNeck&eyeType=EyeRoll&eyebrowType=RaisedExcited&facialHairColor=Red&facialHairType=BeardMagestic&hairColor=Red&hatColor=White&mouthType=Twinkle&skinColor=DarkBrown&topType=LongHairBun",
+            "?accessoriesType=Prescription02&avatarStyle=Circle&clotheColor=Black&clotheType=ShirtVNeck&eyeType=Surprised&eyebrowType=Angry&facialHairColor=Blonde&facialHairType=Blank&hairColor=Blonde&hatColor=PastelOrange&mouthType=Smile&skinColor=Black&topType=LongHairNotTooLong",
+            "?accessoriesType=Round&avatarStyle=Circle&clotheColor=PastelOrange&clotheType=Overall&eyeType=Close&eyebrowType=AngryNatural&facialHairColor=Blonde&facialHairType=Blank&graphicType=Pizza&hairColor=Black&hatColor=PastelBlue&mouthType=Serious&skinColor=Light&topType=LongHairBigHair",
+            "?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Gray01&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=Default&facialHairColor=Red&facialHairType=Blank&graphicType=Selena&hairColor=Red&hatColor=Blue02&mouthType=Twinkle&skinColor=Pale&topType=LongHairCurly"
+        };
+    private List<User> _users = new();
+    private string _avatar;
+    private List<int> _active;
+    private User _selected;
+
+    [Inject]
+    public HttpClient HttpClient { get; set; }
+
+    protected User Selected
+    {
+        get
+        {
+            if (_active == null || _active.Count == 0)
+            {
+                return null;
+            }
+
+            var id = _active[0];
+
+            var user = _users.Find(user => user.Id == id);
+            if (user != _selected)
+            {
+                _selected = user;
+                RandomAvatar();
+            }
+
+            return user;
+        }
+    }
+
+    private List<User> _items = new List<User>
+    {
+        new User
+        {
+            Name="Users",
+            Children=new()
+        }
+    };
+
+    public async Task FetchUsers(User item)
+    {
+        await Task.Delay(1500);
+        _users = await HttpClient.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users");
+        //We can't detect whether items has changed with same object reference,so give us a new object
+        //We may enhance this in the feature
+        _items = new List<User>
+        {
+            new User
+            {
+                Name="Users",
+                Children=_users
+            }
+        };
+
+        //Refresh UI,so we will re-build nodes of the treeview
+        StateHasChanged();
+    }
+
+    public void RandomAvatar()
+    {
+        _avatar = _avatars[new Random().Next(_avatars.Count)];
+    }
+}

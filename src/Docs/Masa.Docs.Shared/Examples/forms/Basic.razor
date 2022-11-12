@@ -1,0 +1,48 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using FluentValidation;
+
+    <MContainer>
+        <MRow>
+            <MCol Cols="12"
+                  Md="4">
+                <MTextField @bind-Value="_form.Firstname"
+                            Counter="10"
+                            Label="First name"
+                            required></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                  Md="4">
+                <MTextField @bind-Value="_form.Lastname"
+                            Counter="10"
+                            Label="Last name"
+                            required></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                  Md="4">
+                <MTextField @bind-Value="_form.Email"
+                            Label="E-mail"
+                            required></MTextField>
+            </MCol>
+        </MRow>
+    </MContainer>
+
+@code {
+    public class Form
+    {
+        [Required(ErrorMessage = "Name is required")]
+        [MaxLength(10, ErrorMessage = "Name must be less than 10 characters")]
+        public string Firstname { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [MaxLength(10, ErrorMessage = "Name must be less than 10 characters")]
+        public string Lastname { get; set; }
+
+        [Required(ErrorMessage = "E-mail is required")]
+        [EmailAddress(ErrorMessage = "E-mail must be valid")]
+        public string Email { get; set; }
+    }
+
+    private Form _form = new();
+}

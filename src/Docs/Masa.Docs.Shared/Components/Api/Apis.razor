@@ -1,0 +1,42 @@
+﻿@using Masa.Docs.Shared.ApiGenerator
+@using System.Text.RegularExpressions
+@namespace Masa.Docs.Shared.Components
+
+@if (Data.Keys.Count > 1)
+{
+    <MSelect Items="Data.Keys.ToList()"
+             ItemText="key => key"
+             ItemValue="key => key"
+             @bind-Value="apiKey"
+             TValue="string"
+             TItemValue="string"
+             TItem="string"
+             Filled
+             Label="API">
+    </MSelect>
+}
+
+@if (apiKey is not null && Data.ContainsKey(apiKey))
+{
+    foreach (var (name, data) in Data[apiKey])
+    {
+        <ApiSection Name="@name" Data="@data" />
+    }
+}
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public Dictionary<string, Dictionary<string, List<ParameterInfo>>> Data { get; set; } = null!;
+
+    private string? apiKey;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        apiKey ??= Data.Keys.FirstOrDefault();
+    }
+
+}

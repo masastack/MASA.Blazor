@@ -1,0 +1,18 @@
+﻿<MMarkdown Options="_options">
+</MMarkdown>
+
+@code {
+    private Dictionary<string, object> _options = new Dictionary<string, object>();
+
+    protected override void OnInitialized()
+    {
+        _options.Add("upload", new
+        {
+            url = "api/upload",
+            max = 2 * 1024 * 1024,
+            accept = "image/*",
+            multiple = true,
+        });
+        base.OnInitialized();
+    }
+}

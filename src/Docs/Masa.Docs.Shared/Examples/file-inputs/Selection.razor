@@ -1,0 +1,19 @@
+﻿<MFileInput
+    @bind-Value="_files"
+    Placeholder="Upload your documents"
+    Label="File input"
+    Multiple
+    PrependIcon="mdi-paperclip">
+    <SelectionContent Context="context">
+        <MChip
+            Small
+            Label
+            Color="primary">
+            @_files[context.index].Name
+        </MChip>
+    </SelectionContent>
+</MFileInput>
+
+@code {
+    private List<IBrowserFile> _files = new();
+}

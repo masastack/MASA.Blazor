@@ -1,0 +1,24 @@
+﻿<MForm>
+    <MContainer>
+        <MRow>
+            <MCol Cols="12"
+                   Sm="6">
+                <MTextField @bind-Value="_first"
+                              Label="First Name"
+                              Solo></MTextField>
+            </MCol>
+
+            <MCol Cols="12"
+                   Sm="6">
+                <MTextField @bind-Value="_last"
+                              Label="Last Name"
+                              SoloInverted></MTextField>
+            </MCol>
+        </MRow>
+    </MContainer>
+</MForm>
+
+@code{
+    private string _first = "John";
+    private string _last = "Doe";
+}

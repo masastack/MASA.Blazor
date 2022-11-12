@@ -195,8 +195,7 @@ namespace Masa.Blazor
 
         public string GroupPlusIcon { get; } = "mdi-plus";
 
-        //TODO:we will change this
-        public DataOptions Options => InternalOptions;
+        public DataOptions Options => InternalOptions.TryDeepClone();
 
         protected bool IsFixedRight => FixedRight;
 

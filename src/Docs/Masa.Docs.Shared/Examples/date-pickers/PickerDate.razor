@@ -1,0 +1,52 @@
+﻿<MRow>
+    <MCol Cols="12"
+          Sm="6"
+          Class="my-2 px-1">
+        <MDatePicker @bind-Value="_date"
+                     OnPickerDateUpdate="HandleOnPickerDateUpdate"
+                     FullWidth></MDatePicker>
+    </MCol>
+    <MCol Cols="12"
+          Sm="6"
+          Class="my-2 px-1">
+        <div class="text-h6">
+            Month news (@_pickerDate.ToString("yyyy-MM"))
+        </div>
+        <div class="subheading">
+            Change month to see other news
+        </div>
+        <ul class="ma-4">
+            @foreach (var note in _notes)
+            {
+                <li @key="note">
+                    @note
+                </li>
+            }
+        </ul>
+    </MCol>
+</MRow>
+
+@code {
+    private DateOnly _date = DateOnly.FromDateTime(DateTime.Now);
+    private DateOnly _pickerDate;
+    private IEnumerable<string> _notes = new List<string>();
+    private List<string> _allNotes = new List<string>
+        {
+            "President met with prime minister",
+            "New power plant opened",
+            "Rocket launch announced",
+            "Global warming discussion cancelled",
+            "Company changed its location",
+        };
+
+    public void HandleOnPickerDateUpdate(DateOnly date)
+    {
+        _pickerDate = date;
+        _notes = new List<string>
+            {
+                _allNotes[Random.Shared.Next(0,5)],
+                _allNotes[Random.Shared.Next(0,5)],
+                _allNotes[Random.Shared.Next(0,5)]
+            }.Distinct();
+    }
+}

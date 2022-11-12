@@ -1,0 +1,25 @@
+﻿<div class="text-center">
+    <MButton Dark
+           Color="indigo"
+           OnClick="()=>_snackbar = true">
+        Open Snackbar
+    </MButton>
+
+    <MSnackbar @bind-Value="_snackbar"
+                Vertical Dark>
+        <ChildContent>
+            Lorem ipsum dolor sit amet
+        </ChildContent>
+        <ActionContent>
+            <MButton Color="indigo"
+                     Text
+                     OnClick="()=>_snackbar = false">
+                Close
+            </MButton>
+        </ActionContent>
+    </MSnackbar>
+</div>
+
+@code{
+    private bool _snackbar;
+}

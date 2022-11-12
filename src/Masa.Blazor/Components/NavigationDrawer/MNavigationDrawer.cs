@@ -428,9 +428,13 @@ namespace Masa.Blazor
                 });
         }
 
-        protected override async Task OnParametersSetAsync()
+        protected override async void CallUpdate()
         {
+            base.CallUpdate();
+
             await UpdateApplicationAsync();
+
+            StateHasChanged();
         }
 
         protected async Task UpdateApplicationAsync()
@@ -441,8 +445,8 @@ namespace Masa.Blazor
             }
 
             var val = (!IsActive || IsMobile || Temporary)
-                ? 0
-                : (ComputedWidth.ToDouble() <= 0 ? await GetClientWidthAsync() : ComputedWidth.ToDouble());
+                    ? 0
+                    : (ComputedWidth.ToDouble() <= 0 ? await GetClientWidthAsync() : ComputedWidth.ToDouble());
 
             if (Right)
                 MasaBlazor.Application.Right = val;
@@ -452,7 +456,7 @@ namespace Masa.Blazor
 
         private async Task<double> GetClientWidthAsync()
         {
-            if (Ref.Id == null)
+            if (Ref.Context == null)
             {
                 return 0;
             }

@@ -1,0 +1,78 @@
+﻿<MCard Class="mx-auto" MaxWidth=500>
+
+    <MSystemBar Color="indigo darken-2" Dark>
+        <MSpacer></MSpacer>
+        <MIcon>mdi-window-minimize</MIcon>
+        <MIcon>mdi-window-maximize</MIcon>
+        <MIcon>mdi-close</MIcon>
+    </MSystemBar>
+
+    <MToolbar Color="indigo" Dark>
+        <MAppBarNavIcon></MAppBarNavIcon>
+        <MToolbarTitle>Discover</MToolbarTitle>
+        <MSpacer></MSpacer>
+        <MButton Icon>
+            <MIcon>mdi-magnify</MIcon>
+        </MButton>
+    </MToolbar>
+
+    <MContainer Fluid>
+        <MRow Dense>
+            @foreach (var card in _cards)
+            {
+                <MCol key="@card.Title" Cols=@card.Flex>
+                    <MCard>
+                        <MImage Src="@card.Src" Class="white--text align-end" Gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" Height=200>
+                            <MCardTitle>@card.Title</MCardTitle>
+                        </MImage>
+
+                        <MCardActions>
+                            <MSpacer></MSpacer>
+                            <MButton Icon>
+                                <MIcon>mdi-heart</MIcon>
+                            </MButton>
+                            <MButton Icon>
+                                <MIcon>mdi-bookmark</MIcon>
+                            </MButton>
+                            <MButton Icon>
+                                <MIcon>mdi-share-variant</MIcon>
+                            </MButton>
+                        </MCardActions>
+                    </MCard>
+                </MCol>
+            }
+        </MRow>
+    </MContainer>
+
+</MCard>
+
+@code {
+    Card[] _cards = new Card[]
+                {
+        new Card
+        {
+            Title="Pre-fab homes",
+            Src="https://cdn.masastack.com/stack/images/website/masa-blazor/cards/house.jpg",
+            Flex=12,
+        },
+         new Card
+        {
+            Title="Favorite road trips",
+            Src="https://cdn.masastack.com/stack/images/website/masa-blazor/cards/road.jpg",
+            Flex=6,
+        },
+         new Card
+        {
+            Title="Best airlines",
+            Src="https://cdn.masastack.com/stack/images/website/masa-blazor/cards/plane.jpg",
+            Flex=6,
+        }
+                };
+
+    class Card
+    {
+        public string Title { get; set; }
+        public string Src { get; set; }
+        public int Flex { get; set; }
+    }
+}

@@ -1,0 +1,36 @@
+﻿<div class="text-center">
+    <MBottomSheet
+        @bind-Value="sheet"
+        Inset>
+        <ActivatorContent>
+            <MButton
+                Color="orange"
+                Dark
+                @attributes="@context.Attrs">
+                Open Inset
+            </MButton>
+        </ActivatorContent>
+        <ChildContent>
+            <MSheet
+                Class="text-center"
+                Height="200">
+                <MButton
+                    Class="mt-6"
+                    Text
+                    Color="error"
+                    OnClick="() => sheet = !sheet">
+                    close
+                </MButton>
+                <div class="my-3">
+                    This is a bottom sheet using the inset prop
+                </div>
+            </MSheet>
+        </ChildContent>
+    </MBottomSheet>
+</div>
+
+@code {
+
+    bool sheet;
+
+}

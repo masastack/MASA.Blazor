@@ -19,9 +19,10 @@ variables:
   IMAGE_PRD: registry.cn-hangzhou.aliyuncs.com/masa/masa-blazor-docs:$CI_COMMIT_TAG
 
 packer:
+  image: registry.cn-hangzhou.aliyuncs.com/masa/dotnet_sdk:7.0_wasm_tools_6
+#   tags:
+#     - test
   stage: packer
-  tags:
-    - linux-shell
   only:
     - main 
   script: 
@@ -32,8 +33,8 @@ packer:
     - git config --global http.proxy $PROXY_GATEWAY
     - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
     - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
-    - dotnet workload install wasm-tools --temp-dir "/home/gitlab-runner/work/_temp" && dotnet workload list  &&  dotnet build src
-    - dotnet pack src --include-symbols -p:PackageVersion=0.2.$CI_PIPELINE_ID
+#     - docker --version 
+    - dotnet workload install wasm-tools-net6 --temp-dir "/home/gitlab-runner/work/_temp" && dotnet workload list  &&  dotnet build src && dotnet7 pack src --include-symbols -p:PackageVersion=0.3.0-alpha.$CI_PIPELINE_ID
     - dotnet nuget push "**/*.symbols.nupkg" -k $nugetkey -s https://api.nuget.org/v3/index.json
   after_script:
     - git config --global --unset https.proxy

@@ -1,0 +1,166 @@
+﻿<div class="text-center">
+    <MButton class="ma-2"
+             Loading="loading"
+             Disabled="loading"
+             Color="secondary"
+             OnClick="OnClick">
+        Accept Terms
+    </MButton>
+
+    <MButton class="ma-2 white--text"
+             Loading="loading2"
+             Disabled="loading2"
+             Color="blue-grey"
+             OnClick="OnClick2">
+        Upload
+        <MIcon Right Dark>
+            mdi-cloud-upload
+        </MIcon>
+    </MButton>
+
+    <MButton class="ma-2"
+             Loading="loading3"
+             Disabled="loading3"
+             Color="success"
+             OnClick="OnClick3">
+        <LoaderContent>
+            <span>Loading...</span>
+        </LoaderContent>
+        <ChildContent>
+            Custom Loader
+        </ChildContent>
+    </MButton>
+
+    <MButton class="ma-2"
+             Loading="loading4"
+             Disabled="loading4"
+             Color="info"
+             OnClick="OnClick4">
+        <LoaderContent>
+            <span class="custom-loader"><MIcon>mdi-cached</MIcon></span>
+        </LoaderContent>
+        <ChildContent>
+            Icon Loader
+        </ChildContent>
+    </MButton>
+
+    <MButton class="ma-2 white--text"
+             Loading="loading5"
+             Disabled="loading5"
+             Color="blue-grey"
+             Fab
+             OnClick="OnClick5">
+        <MIcon Dark>
+            mdi-cloud-upload
+        </MIcon>
+    </MButton>
+</div>
+
+@code {
+    private bool loading = false;
+    private void OnClick()
+    {
+        loading = true;
+        Task.Run(async () =>
+        {
+            await Task.Delay(1000);
+            loading = false;
+            await InvokeAsync(StateHasChanged);
+        });
+    }
+
+    private bool loading2 = false;
+    private void OnClick2()
+    {
+        loading2 = true;
+        Task.Run(async () =>
+        {
+            await Task.Delay(1000);
+            loading2 = false;
+            await InvokeAsync(StateHasChanged);
+        });
+    }
+
+    private bool loading3 = false;
+    private void OnClick3()
+    {
+        loading3 = true;
+        Task.Run(async () =>
+        {
+            await Task.Delay(1000);
+            loading3 = false;
+            await InvokeAsync(StateHasChanged);
+        });
+    }
+
+    private bool loading4 = false;
+    private void OnClick4()
+    {
+        loading4 = true;
+        Task.Run(async () =>
+        {
+            await Task.Delay(1000);
+            loading4 = false;
+            await InvokeAsync(StateHasChanged);
+        });
+    }
+
+    private bool loading5 = false;
+    private void OnClick5()
+    {
+        loading5 = true;
+        Task.Run(async () =>
+        {
+            await Task.Delay(1000);
+            loading5 = false;
+            await InvokeAsync(StateHasChanged);
+        });
+    }
+}
+
+<style>
+	.custom-loader {
+		animation: loader 1s infinite;
+		display: flex;
+	}
+
+	@("@-moz-keyframes") loader {
+		from {
+		transform: rotate(0);
+		}
+
+		to {
+		transform: rotate(360deg);
+		}
+	}
+
+	@("@-webkit-keyframes") loader {
+		from {
+		transform: rotate(0);
+		}
+
+		to {
+		transform: rotate(360deg);
+		}
+	}
+
+	@("@-o-keyframes") loader {
+		from {
+		transform: rotate(0);
+		}
+
+		to {
+		transform: rotate(360deg);
+		}
+	}
+
+	@("@keyframes") loader {
+		from {
+		transform: rotate(0);
+		}
+
+		to {
+		transform: rotate(360deg);
+		}
+	}
+</style>

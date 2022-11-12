@@ -1,0 +1,23 @@
+﻿@namespace Masa.Docs.Shared.Examples.snackbars
+@implements Masa.Docs.Shared.Components.IUsageWrapper
+
+<div class="text-center ma-2">
+    <MButton OnClick="Show" Dark>
+        Open Snackbar
+    </MButton>
+       @ChildContent
+</div>
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public RenderFragment ChildContent { get; set; } = null!;
+
+    private bool _show;
+
+    public void Show()
+    {
+        _show = true;
+    }
+}

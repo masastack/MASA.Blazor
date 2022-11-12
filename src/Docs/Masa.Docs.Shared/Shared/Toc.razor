@@ -1,0 +1,34 @@
+﻿@namespace Masa.Docs.Shared.Shared
+@inherits NextTickComponentBase
+
+<MNavigationDrawer Id="default-toc"
+                   Right
+                   Color=""
+                   App
+                   Class="py-4 pr-3"
+                   Clipped
+                   Floating
+                   Width="256">
+    <PrependContent>
+        @if (_toc.Any())
+        {
+            <div class="mb-2"></div>
+        }
+    </PrependContent>
+
+    <ChildContent>
+        <ul class="mb-6">
+            @foreach (var item in _toc)
+            {
+                <li class="pl-3 text-body-2 py-1 font-weight-regular @GenClass(item)">
+                    <a href="@($"#{item.Anchor}")"
+                       class="m-toc-link d-block transition-swing text-decoration-none"
+                       @onclick:preventDefault
+                       @onclick="@(() => ScrollIntoView(item.Anchor))">
+                        @I18n.T(item.Content)
+                    </a>
+                </li>
+            }
+        </ul>
+    </ChildContent>
+</MNavigationDrawer>

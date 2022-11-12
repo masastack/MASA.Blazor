@@ -1,0 +1,211 @@
+﻿@using System.ComponentModel.DataAnnotations
+
+<MCard Flat>
+    <MSnackbar
+        @bind-Value="snackbar"
+        Absolute
+        Top
+        Right
+        Color="success">
+        <span>Registration successful!</span>
+        <MIcon Dark>
+            mdi-checkbox-marked-circle
+        </MIcon>
+    </MSnackbar>
+    <MForm @ref="form" EnableValidation Model="model">
+        <MContainer Fluid>
+            <MRow>
+                <MCol
+                    Cols="12"
+                    Sm="6">
+                    <MTextField
+                        @bind-Value="model.First"
+                        Color="purple darken-2"
+                        Label="First name">
+                    </MTextField>
+                </MCol>
+                <MCol
+                    Cols="12"
+                    Sm="6">
+                    <MTextField
+                        @bind-Value="model.Last"
+                        Color="blue darken-2"
+                        Label="Last name">
+                    </MTextField>
+                </MCol>
+                <MCol Cols="12">
+                    <MTextarea
+                        @bind-Value="model.Bio"
+                        Color="teal">
+                        <LabelContent>
+                            <div>
+                                Bio <small>(optional)</small>
+                            </div>
+                        </LabelContent>
+                    </MTextarea>
+                </MCol>
+                <MCol
+                    Cols="12"
+                    Sm="6">
+                    <MSelect
+                        @bind-Value="model.FavoriteAnimal"
+                        Items="animals"
+                        ItemText="item => item"
+                        ItemValue="item => item"
+                        Color="pink"
+                        Label="Favorite animal">
+                    </MSelect>
+                </MCol>
+                <MCol
+                    Cols="12"
+                    Sm="6">
+                    <MSlider
+                        @bind-Value="model.Age"
+                        Color="orange"
+                        Label="Age"
+                        Hint="Be honest"
+                        Min="1"
+                        Max="100"
+                        ThumbLabel="true">
+                    </MSlider>
+                </MCol>
+                <MCol Cols="12">
+                    <MCheckbox
+                        @bind-Value="model.Terms"
+                        Color="green">
+                        <LabelContent>
+                            <div>
+                                Do you accept the
+                                <a
+                                    href="#"
+                                    @onclick:preventDefault
+                                    @onclick="@(() => terms = true)">
+                                    terms
+                                </a>
+                                and
+                                <a
+                                    href="#"
+                                    @onclick:preventDefault
+                                    @onclick="@(() => conditions = true)">
+                                    conditions?
+                                </a>
+                            </div>
+                        </LabelContent>
+                    </MCheckbox>
+                </MCol>
+            </MRow>
+        </MContainer>
+        <MCardActions>
+            <MButton
+                Text
+                OnClick="ResetForm">
+                Cancel
+            </MButton>
+            <MSpacer></MSpacer>
+            <MButton
+                Disabled="!FormIsValid"
+                Text
+                Color="primary"
+                OnClick="Submit">
+                Register
+            </MButton>
+        </MCardActions>
+    </MForm>
+    <MDialog
+        @bind-Value="terms"
+        Width="@("70%")">
+        <MCard>
+            <MCardTitle Class="text-h6">
+                Terms
+            </MCardTitle>
+            @foreach (var n in Enumerable.Range(0, 5))
+            {
+                <MCardText @key="n">
+                    @content
+                </MCardText>
+            }
+            <MCardActions>
+                <MSpacer></MSpacer>
+                <MButton
+                    Text
+                    Color="purple"
+                    OnClick="() => terms = false">
+                    Ok
+                </MButton>
+            </MCardActions>
+        </MCard>
+    </MDialog>
+    <MDialog
+        @bind-Value="conditions"
+        Width="@("70%")">
+        <MCard>
+            <MCardTitle Class="text-h6">
+                Conditions
+            </MCardTitle>
+            @foreach (var n in Enumerable.Range(0, 5))
+            {
+                <MCardText @key="n">
+                    @content
+                </MCardText>
+            }
+            <MCardActions>
+                <MSpacer></MSpacer>
+                <MButton
+                    Text
+                    Color="purple"
+                    OnClick="() => conditions = false">
+                    Ok
+                </MButton>
+            </MCardActions>
+        </MCard>
+    </MDialog>
+</MCard>
+
+@code{
+
+    static List<string> animals = new() { "Dog", "Cat", "Rabbit", "Turtle", "Snake" };
+
+    MForm form;
+    bool terms;
+    bool conditions;
+    bool snackbar;
+    string content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.";
+
+    Model model = new();
+
+    bool FormIsValid => form != null && form.EditContext.IsModified() && form.EditContext.Validate();
+
+    void ResetForm()
+    {
+        form.Reset();
+    }
+
+    void Submit()
+    {
+        snackbar = true;
+        form.Reset();
+    }
+
+    public class Model
+    {
+        [Required]
+        public string First { get; set; }
+
+        [Required]
+        public string Last { get; set; }
+
+        [Required]
+        [Range(0, 10, ErrorMessage = "I don't believe you!")]
+        public double Age { get; set; }
+
+        public string Bio { get; set; }
+
+        [Required]
+        public string FavoriteAnimal { get; set; }
+
+        [Required]
+        [Range(typeof(bool), "true", "true", ErrorMessage = "The field is required")] // just for demo
+        public bool Terms { get; set; }
+    }
+
+}

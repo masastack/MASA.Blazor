@@ -1,0 +1,27 @@
+﻿@namespace Masa.Docs.Shared.Components
+
+<MSheet Color="@(IsDark ? "#1F1F1F" : "grey lighten-5")"
+        Dark="IsDark"
+        Rounded="Rounded"
+        Class="@($"app-code overflow-hidden {Class}")"
+        Outlined>
+    @ChildContent
+
+    <AppCopyButton Class="mr-n2 mt-n2"></AppCopyButton>
+</MSheet>
+
+@code {
+
+    [CascadingParameter(Name = "IsDark")]
+    public bool IsDark { get; set; }
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter]
+    public StringBoolean Rounded { get; set; } = true;
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+}
