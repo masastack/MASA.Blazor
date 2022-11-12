@@ -50,7 +50,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             {
                 _manager.ScanForPeripherals(new CBUUID[] { }, new PeripheralScanningOptions
                 {
-                    AllowDuplicatesKey = true
+                    AllowDuplicatesKey = true,
                 });
 
                 await Task.Run(() => { _delegate.WaitOne(); });
@@ -62,7 +62,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             return _discoveredDevices;
         }
 
-        public static async Task SendDataAsync(string deviceName, Guid servicesUuid, Guid? characteristicsUuid, byte[] dataBytes, EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
+        public static async Task PlatformSendDataAsync(string deviceName, Guid servicesUuid, Guid? characteristicsUuid, byte[] dataBytes, EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
         {
             BluetoothDevice blueDevice = _discoveredDevices.FirstOrDefault(o => o.Name == deviceName);
 
@@ -103,10 +103,23 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                 NSNumber RSSI)
             {
                 System.Diagnostics.Debug.WriteLine("OnScanResult");
-                if (!Devices.Contains(peripheral))
+                System.Diagnostics.Debug.WriteLine($"{peripheral.Name}");
+            
+                //var sss = $"{string.Join(",", advertisementData.Keys.ToList())}";
+                var device = (BluetoothDevice) peripheral;
+                if (!Devices.Contains(device))
                 {
-                    Devices.Add(peripheral);
+                    Devices.Add(device);
+                    //if (sss.Contains("LocalName"))
+                    //{
+                    //    System.Diagnostics.Debug.WriteLine(123);
+                    //    device.LocalName = advertisementData["kCBAdvDataLocalName"].ToString();
+                    //    System.Diagnostics.Debug.WriteLine("device.LocalName:"+ device.LocalName);
+                    //}
+
                 }
+ 
+                System.Diagnostics.Debug.WriteLine($"{String.Join(",", Devices.Select(o => o.Name).Distinct().ToList())}");
             }
             public override void UpdatedState(CBCentralManager central)
             {

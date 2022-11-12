@@ -33,6 +33,7 @@
         public static bool IsEnabled()
         {
             return PlatformIsEnabledIsEnabled();
+
         }
 
         public static async Task<PermissionStatus> CheckAndRequestBluetoothPermission()
@@ -44,5 +45,13 @@
         {
             availabilityChanged?.Invoke(null, EventArgs.Empty); ;
         }
+
+        public static async Task SendDataAsync(string deviceName, Guid servicesUuid, Guid? characteristicsUuid,
+            byte[] dataBytes,
+            EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
+        {
+            await PlatformSendDataAsync(deviceName, servicesUuid, characteristicsUuid, dataBytes, gattCharacteristicValueChangedEventArgs);
+        }
     }
+    
 }

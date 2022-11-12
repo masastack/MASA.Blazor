@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using CoreBluetooth;
+﻿using CoreBluetooth;
 namespace Masa.Blazor.Maui.Plugin.Bluetooth
 {
     partial class RemoteGattServer

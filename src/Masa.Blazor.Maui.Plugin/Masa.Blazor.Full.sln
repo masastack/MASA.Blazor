@@ -23,9 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QrCodeSample", "QrCodeSampl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Biometrics", "Biometrics", "{CE09B2C7-FA8E-4480-8A14-95D36C7BD8A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Maui.Plugin.Biometrics", "Masa.Blazor.Maui.Plugin.Biometrics\Masa.Blazor.Maui.Plugin.Biometrics.csproj", "{A3E2FB34-EAB7-4143-A90F-1AA154F3976B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.Maui.Plugin.Biometrics", "Masa.Blazor.Maui.Plugin.Biometrics\Masa.Blazor.Maui.Plugin.Biometrics.csproj", "{A3E2FB34-EAB7-4143-A90F-1AA154F3976B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Maui.Plugin.BiometricsSample", "Masa.Blazor.Maui.Plugin.BiometricsSample\Masa.Blazor.Maui.Plugin.BiometricsSample.csproj", "{80425A2E-1003-442B-ADA8-0D03B9159636}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor.Maui.Plugin.BiometricsSample", "Masa.Blazor.Maui.Plugin.BiometricsSample\Masa.Blazor.Maui.Plugin.BiometricsSample.csproj", "{80425A2E-1003-442B-ADA8-0D03B9159636}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

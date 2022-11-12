@@ -4,6 +4,7 @@
     {
         public string Id { get { return GetId(); } }
         public string Name { get { return GetName(); } }
+        public string LocalName { get; set; }
         public RemoteGattServer Gatt { get { return GetGatt(); } }
 
         internal void OnGattServerDisconnected()
