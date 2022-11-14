@@ -24,7 +24,7 @@ jobs:
     - name: setting tools
       run: dotnet workload install wasm-tools-net6
     - name: build
-      run: dotnet build src
+      run: dotnet build src/Masa.Blazor.sln
     - name: publish
       run: dotnet publish src/Doc/Masa.Blazor.Doc.WebAssembly/Masa.Blazor.Doc.WebAssembly.csproj
     - name: setup oss
