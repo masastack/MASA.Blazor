@@ -25,4 +25,4 @@ jobs:
     - name: setting tools
       run: dotnet workload install wasm-tools-net6
     - name: build
-      run: dotnet build src
+      run: dotnet build src/Masa.Blazor.sln
