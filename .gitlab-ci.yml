@@ -35,7 +35,9 @@ packer:
     - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
 #     - docker --version 
 #     - dotnet workload install wasm-tools-net6 --temp-dir "/home/gitlab-runner/work/_temp" &&
-    - dotnet workload list  &&  dotnet build src/Masa.Blazor.sln && dotnet pack src --include-symbols -p:PackageVersion=0.3.0-alpha.$CI_PIPELINE_ID
+    - dotnet workload list  &&  dotnet build src/Masa.Blazor.sln 
+    - dotnet pack src/Masa.Blazor\Masa.Blazor.csproj --no-build  --include-symbols -p:PackageVersion=0.3.0-alpha.$CI_PIPELINE_ID
+    - dotnet pack src/BlazorComponent/src/Component/BlazorComponent/BlazorComponent.csproj --no-build --include-symbols -p:PackageVersion=0.3.0-alpha.$CI_PIPELINE_ID
     - dotnet nuget push "**/*.symbols.nupkg" -k $nugetkey -s https://api.nuget.org/v3/index.json
   after_script:
     - git config --global --unset https.proxy
