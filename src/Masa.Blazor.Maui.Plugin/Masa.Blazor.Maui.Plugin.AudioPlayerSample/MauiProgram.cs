@@ -20,7 +20,7 @@ namespace Masa.Blazor.Maui.Plugin.AudioPlayerSample
 #endif
 
             builder.Services.AddSingleton<WeatherForecastService>();
-            builder.Services.AddMasaBlazor();
+            //builder.Services.AddMasaBlazor();
             return builder.Build();
         }
     }

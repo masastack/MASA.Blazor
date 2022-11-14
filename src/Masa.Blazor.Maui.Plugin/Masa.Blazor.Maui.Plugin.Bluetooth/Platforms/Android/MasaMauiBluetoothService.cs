@@ -32,7 +32,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             return _discoveredDevices;
         }
 
-        public static async Task SendDataAsync(string deviceName,Guid servicesUuid,Guid? characteristicsUuid, byte[] dataBytes, EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
+        public static async Task PlatformSendDataAsync(string deviceName,Guid servicesUuid,Guid? characteristicsUuid, byte[] dataBytes, EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
         {
             BluetoothDevice blueDevice = _discoveredDevices.FirstOrDefault(o => o.Name == deviceName);
 
@@ -69,7 +69,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             {
                 Task.Run(async () =>
                 {
-                    await Task.Delay(5000);
+                    await Task.Delay(10000);
                     _eventWaitHandle.Set();
                 });
 
@@ -114,6 +114,21 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                     (global::Android.Manifest.Permission.Bluetooth, true),
                     (global::Android.Manifest.Permission.BluetoothAdmin, true),
                 }.ToArray();
+        }
+        static Task<bool> PlatformGetAvailability()
+        {
+            return Task.FromResult(BluetoothAdapter.DefaultAdapter.IsEnabled);
+        }
+
+        private static bool _oldAvailability;
+
+        private static async void AddAvailabilityChanged()
+        {
+            _oldAvailability = await PlatformGetAvailability();
+        }
+
+        private static void RemoveAvailabilityChanged()
+        {
         }
     }
 }
