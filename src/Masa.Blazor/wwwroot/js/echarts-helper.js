@@ -39,6 +39,16 @@ export function setOption(selector, option) {
   }
 }
 
+export function resize(selector, width, height) {
+  const instance = echarts_instance_cache[selector]
+  if (instance) {
+    instance.resize({
+      width,
+      height
+    })
+  }
+}
+
 function onResize(instance) {
   window.clearTimeout(timeout);
   timeout = window.setTimeout(function () {

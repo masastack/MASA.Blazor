@@ -8,10 +8,10 @@ public class MECharts : BECharts, IAsyncDisposable
     protected I18n I18n { get; set; }
 
     [Parameter]
-    public StringNumber Width { get; set; } = 600;
+    public StringNumber Width { get; set; } = "100%";
 
     [Parameter]
-    public StringNumber Height { get; set; } = 400;
+    public StringNumber Height { get; set; } = "100%";
 
     [Parameter]
     public StringNumber MinWidth { get; set; }
@@ -117,7 +117,7 @@ public class MECharts : BECharts, IAsyncDisposable
         }
     }
 
-    private async Task InitECharts()
+    public async Task InitECharts()
     {
         if (_echarts is null) return;
         await _echarts.InvokeVoidAsync("init", Ref.GetSelector(), ComputedTheme, DefaultInitOptions, Option);
@@ -136,6 +136,12 @@ public class MECharts : BECharts, IAsyncDisposable
     {
         if (_echarts is null) return;
         await _echarts.InvokeVoidAsync("setOption", Ref.GetSelector(), Option);
+    }
+
+    public async Task Resize(int width, int height)
+    {
+        if (_echarts is null) return;
+        await _echarts.InvokeVoidAsync("resize", Ref.GetSelector(), width, height);
     }
 
     public async ValueTask DisposeAsync()
