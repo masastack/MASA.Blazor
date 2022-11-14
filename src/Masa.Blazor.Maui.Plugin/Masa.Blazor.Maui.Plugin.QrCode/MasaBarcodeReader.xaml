@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI"
+             x:Class="Masa.Blazor.Maui.Plugin.QrCode.MasaBarcodeReader"
+             Title="MasaBarcodeReader">
+    <VerticalStackLayout>
+		<zxing:CameraBarcodeReaderView 
+		    x:Name="barcodeReader"
+		    WidthRequest="300"
+		    HeightRequest="300"
+		    IsDetecting="true" 
+		    IsTorchOn="false" 
+		    BarcodesDetected="CameraBarcodeReaderView_BarcodesDetected"/>
+		<Button Clicked="ReturnToBlazor_Clicked"
+		        Text="Return to Blazor"></Button>
+	</VerticalStackLayout>
+</ContentPage>

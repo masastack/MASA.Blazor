@@ -5,6 +5,8 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
     {
         private void PlatformInit()
         {
+            if (Device != null)
+            { MasaMauiBluetoothService._manager.ConnectPeripheral(Device); }
         }
 
         bool GetConnected()
@@ -18,7 +20,8 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                     return false;
             }
         }
-        
+
+
         void PlatformDisconnect()
         {
             if (Device != null)
