@@ -6,6 +6,9 @@ public class MECharts : BECharts, IAsyncDisposable
 {
     [Inject]
     protected I18n I18n { get; set; }
+    
+    [Inject]
+    protected EChartsJSModule Module { get; set; }
 
     [Parameter]
     public StringNumber Width { get; set; } = "100%";
@@ -96,11 +99,6 @@ public class MECharts : BECharts, IAsyncDisposable
             return;
         }
 
-        if (firstRender)
-        {
-            _echarts = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/echarts-helper.js");
-        }
-
         if (firstRender || _isEChartsDisposed)
         {
             _isEChartsDisposed = false;
@@ -119,15 +117,15 @@ public class MECharts : BECharts, IAsyncDisposable
 
     public async Task InitECharts()
     {
-        if (_echarts is null) return;
-        await _echarts.InvokeVoidAsync("init", Ref.GetSelector(), ComputedTheme, DefaultInitOptions, Option);
+        _echarts = await Module.Init(Ref, ComputedTheme, DefaultInitOptions);
+        await Module.SetOption(_echarts, Option);
     }
 
     // ReSharper disable once MemberCanBePrivate.Global
     public async Task DisposeECharts()
     {
         if (_echarts is null) return;
-        await _echarts.InvokeVoidAsync("dispose", Ref.GetSelector());
+        await Module.Dispose(_echarts);
         _isEChartsDisposed = true;
     }
 
@@ -135,13 +133,14 @@ public class MECharts : BECharts, IAsyncDisposable
     public async Task ResetOption()
     {
         if (_echarts is null) return;
-        await _echarts.InvokeVoidAsync("setOption", Ref.GetSelector(), Option);
+        await Module.SetOption(_echarts, Option);
+        // TODO: invoke init instead of setOption?
     }
 
     public async Task Resize(int width, int height)
     {
         if (_echarts is null) return;
-        await _echarts.InvokeVoidAsync("resize", Ref.GetSelector(), width, height);
+        await Module.Resize(_echarts, width, height);
     }
 
     public async ValueTask DisposeAsync()

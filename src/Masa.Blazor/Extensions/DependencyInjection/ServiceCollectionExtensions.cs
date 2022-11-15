@@ -36,6 +36,8 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<IErrorHandler, MErrorHandler>();
         services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
 
+        services.TryAddScoped<EChartsJSModule>();
+
         return new MasaBlazorBuilder(services);
     }
 }
