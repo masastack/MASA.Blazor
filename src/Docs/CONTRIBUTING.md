@@ -28,8 +28,8 @@ Required software:
   - Default rule: the directory name under **docs/pages/components** will be converted to the Camel-Case, removing the `s` at the end (if `s` exists), and adding the `M` character at the beginning. For example, **alerts** would be convert to **MAlert**.
   - Others: for those names that do not apply by default rule, you need to explicitly write them in **data/page-to-api.json**. For example, `grids` will be converted to `MGrid` by default, but the API of `MGrid` does not exist, so you need to explicitly write the mapping rules. 
 - **data/apis/[culture].json**: the metadata for generating the description for specific API. Refer to [vuetify's](https://github.com/vuetifyjs/vuetify/tree/v2.6.12/packages/api-generator/src/locale/en).
-- **docs/pages**: the markdown file for generating page.
-- **docs/pages/components/[component]/[culture].md**:
+- **pages**: the markdown file for generating page.
+- **pages/components/[component]/[culture].md**:
   - The front matter for generating the title of page and the related pages at the end of page.
   - So the h1(#) is unnecessary.
   - Custom elements are registered in `CircuitRootComponentOptionsExtensions.cs`, such as `<[component]-usage></[component]-usage>`.
