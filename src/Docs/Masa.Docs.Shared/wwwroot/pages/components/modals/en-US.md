@@ -18,26 +18,26 @@ related:
 
 #### Action Props
 
-<example file="" />
+<masa-example file="Examples.modals.ActionProps"></masa-example>
 
 #### Actions
 
-<example file="" />
+<masa-example file="Examples.modals.Actions"></masa-example>
 
 #### FormModel
 
-<example file="" />
+<masa-example file="Examples.modals.FormModel"></masa-example>
 
 #### AutoScrollToTop
 
-<example file="" />
+<masa-example file="Examples.modals.ScrollToTopOnHide"></masa-example>
 
 #### Without activator
 
-<example file="" />
+<masa-example file="Examples.modals.WithoutActivator"></masa-example>
 
 ### Contents
 
 #### Custom actions
 
-<example file="" />
+<masa-example file="Examples.modals.CustomActions"></masa-example>

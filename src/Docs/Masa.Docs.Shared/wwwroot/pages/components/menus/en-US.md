@@ -21,57 +21,57 @@ Remember to put the element that activates the menu in the **ActivatorContent**.
 
 Menus can also be placed absolutely on top of the activator element using the `Absolute` prop. Try clicking anywhere on the image.
 
-<example file="" />
+<masa-example file="Examples.menus.Absolute"></masa-example>
 
 #### AbsoluteWithoutActivator
 
 Menus can also be used without an activator by using `Absolute` together with the props `PositionX` and `PositionY`. Try
 right-clicking anywhere on the image.
 
-<example file="" />
+<masa-example file="Examples.menus.AbsoluteWithoutActivator"></masa-example>
 
 #### CloseOnClick
 
 Menu can be closed when lost focus.
 
-<example file="" />
+<masa-example file="Examples.menus.CloseOnClick"></masa-example>
 
 #### CloseOnContentClick
 
 You can configure whether **MMenu** should be closed when its content is clicked.
 
-<example file="" />
+<masa-example file="Examples.menus.CloseOnContentClick"></masa-example>
 
 #### Disabled
 
 You can disable the menu. `Disabled` menus can’t be opened.
 
-<example file="" />
+<masa-example file="Examples.menus.Disabled"></masa-example>
 
 #### Offset X
 
 **MMenu** can be offset by the X axis to make the activator visible.
 
-<example file="" />
+<masa-example file="Examples.menus.OffsetX"></masa-example>
 
 #### Offset Y
 
 **MMenu** can be offset by the Y axis to make the activator visible.
 
-<example file="" />
+<masa-example file="Examples.menus.OffsetY"></masa-example>
 
 #### OpenOnHover
 
 Menus can be accessed using hover instead of clicking with the `OpenOnHover` prop.
 
-<example file="" />
+<masa-example file="Examples.menus.OpenOnHover"></masa-example>
 
 #### Rounded
 
 Menus can have their border-radius set by the `Rounded` prop. Additional information about rounded classes is on the
 [Border Radius](/stylesandanimations/border-radius) page.
 
-<example file="" />
+<masa-example file="Examples.menus.Rounded"></masa-example>
 
 ### Contents
 
@@ -81,7 +81,7 @@ With the `RenderFragment` syntax, nested activators such as those seen with a **
 same activator button, need a particular setup in order to function correctly. Note: this same syntax is used for other
 nested activators such as **MDialog** / **MTooltip**.
 
-<example file="" />
+<masa-example file="Examples.menus.ActivatorAndTooltip"></masa-example>
 
 ### Misc
 
@@ -90,17 +90,17 @@ nested activators such as **MDialog** / **MTooltip**.
 Masa.Blazor comes with 3 standard transitions, **scale**, **slide-x** and **slide-y**. You can also create your own and
 pass it as the transition argument.
 
-<example file="" />
+<masa-example file="Examples.menus.CustomTransitions"></masa-example>
 
 #### Popover menu
 
 A menu can be configured to be static when opened, allowing it to function as a popover. This can be useful when there
 are multiple interactive items within the menu contents.
 
-<example file="" />
+<masa-example file="Examples.menus.PopoverMenu"></masa-example>
 
 #### Use In components
 
 Menus can be placed within almost any component.
 
-<example file="" />
+<masa-example file="Examples.menus.UseInComponents"></masa-example>

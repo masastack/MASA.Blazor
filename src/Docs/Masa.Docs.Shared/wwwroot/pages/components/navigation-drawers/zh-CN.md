@@ -31,43 +31,43 @@ related:
 
 使用 `Bottom` 属性我们能够在移动设备上重新定位抽屉，让其从屏幕底部出来。 这是另一种样式，只能遇到 MobileBreakpoint 时激活。
 
-<example file="" />
+<masa-example file="Examples.navigation_drawers.Bottom"></masa-example>
 
 #### 悬停时扩展
 
 将组件放置在 **MiniVariant** 模式中，并在悬停时扩展开。不更改 **MMain** 的内容区域。 宽度可以使用 `MiniVariantWidth` 属性来控制。
 
-<example file="" />
+<masa-example file="Examples.navigation_drawers.ExpandOnHover"></masa-example>
 
 #### 永久浮动抽屉
 
 默认情况下，导航抽屉有一个 1px 右边框，将其与内容分开。 在这个例子中，我们要把抽屉从左边分离出来，让它自己浮动。 `Floating` 属性可移除右边的边框(如果使用 `Right` 则移除左边框)。
 
-<example file="" />
+<masa-example file="Examples.navigation_drawers.Floating"></masa-example>
 
 #### 图像
 
 通过 `Src` 属性将自定义背景应用于抽屉。 如果你需要自定义 **MImage** 的属性，你可以使用 `ImgContent`。
 
-<example file="" />
+<masa-example file="Examples.navigation_drawers.Image"></masa-example>
 
 #### 迷你模式
 
 当使用 `MiniVariant` 属性时，抽屉将会缩小(默认56px)，并隐藏除第一个元素外的 **Mlist** 内的所有内容。
 
-<example file="" />
+<masa-example file="Examples.navigation_drawers.Mini"></masa-example>
 
 #### 右侧
 
 使用 `Right` 属性导航抽屉也可以放置在应用程序（或元素）的右侧。这对于创建带有可能没有任何导航链接的辅助信息的边表也很有用。 当使用 **RTL** 时，您必须为抽屉明确定义 **Right**。
 
-<example file="" />
+<masa-example file="Examples.navigation_drawers.Right"></masa-example>
 
 #### 临时的
 
 使用 `Temporary` 属性将临时抽屉位于它的应用程序上方，在移动设备上默认模拟此抽屉行为。
 
-<example file="" />
+<masa-example file="Examples.navigation_drawers.Temporary"></masa-example>
 
 ### 其他
 
@@ -75,10 +75,10 @@ related:
 
 导航抽屉可以自定义，以适合任何应用程序的设计。 我们在这里使用 **AppendContent** 自定义背景颜色和附加的内容区域。
 
-<example file="" />
+<masa-example file="Examples.navigation_drawers.Color"></masa-example>
 
 #### 组合抽屉
 
 在此示例中，我们定义了一个自定义宽度的抽屉来容纳嵌套。 我们使用 `MRow` 确保抽屉和列表在水平方向彼此相邻。
 
-<example file="" />
+<masa-example file="Examples.navigation_drawers.Constitute"></masa-example>

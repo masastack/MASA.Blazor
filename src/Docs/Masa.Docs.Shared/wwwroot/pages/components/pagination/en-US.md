@@ -21,28 +21,28 @@ By default, paging displays the number of pages according to the set `Length` pr
 
 The `Circle` property provides you with another style of paging button.
 
-<example file="" />
+<masa-example file="Examples.pagination.Circle"></masa-example>
 
 #### Disabled
 
 Using the `Disabled` property, you can manually disable paging.
 
-<example file="" />
+<masa-example file="Examples.pagination.Disabled"></masa-example>
 
 #### Icon
 
 The icons of the previous page and the next page can be customized through the `PrevIcon` and `NextIcon` properties.
 
-<example file="" />
+<masa-example file="Examples.pagination.Icon"></masa-example>
 
 #### Length
 
 Use the `Length` property to set the length of **MPagination**. If the number of page buttons exceeds the parent container, the page will be truncated from it.
 
-<example file="" />
+<masa-example file="Examples.pagination.Length"></masa-example>
 
 #### TotalVisible
 
 You can also manually set the maximum number of visible pages through the `TotalVisible` property.
 
-<example file="" />
+<masa-example file="Examples.pagination.TotalVisible"></masa-example>

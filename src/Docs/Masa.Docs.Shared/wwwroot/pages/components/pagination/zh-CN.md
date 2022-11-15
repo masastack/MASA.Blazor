@@ -21,28 +21,28 @@ related:
 
 `Circle` 属性为你提供了分页按钮的另一种样式。
 
-<example file="" />
+<masa-example file="Examples.pagination.Circle"></masa-example>
 
 #### 禁用
 
 使用 `Disabled` 属性，可以手动禁用分页。
 
-<example file="" />
+<masa-example file="Examples.pagination.Disabled"></masa-example>
 
 #### 图标
 
 上一页和下一页的图标可以通过 `PrevIcon` 和 `NextIcon` 属性自定义。
 
-<example file="" />
+<masa-example file="Examples.pagination.Icon"></masa-example>
 
 #### 长度
 
 使用 `Length` 属性可以设置 **MPagination** 的长度，如果页面按钮的数量超过了父容器，分页将被从中截断。
 
-<example file="" />
+<masa-example file="Examples.pagination.Length"></masa-example>
 
 #### 最大可见分页数
 
 你也可以通过 `TotalVisible` 属性手动设置最大可见分页数。
 
-<example file="" />
+<masa-example file="Examples.pagination.TotalVisible"></masa-example>

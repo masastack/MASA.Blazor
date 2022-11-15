@@ -30,43 +30,43 @@ Markdown Examples
 
 Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set counter
 
-<example file="" />
+<masa-example file="Examples.markdown.Counter"></masa-example>
 
 #### Width and height
 
 Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set height
 
-<example file="" />
+<masa-example file="Examples.markdown.HeightAndWidth"></masa-example>
 
 #### Mode
 
 Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set mode,Support SV, IR, WYSIWYG
 
-<example file="" />
+<masa-example file="Examples.markdown.Mode"></masa-example>
 
 #### Readonly
 
 Whether to set to readonly mode.
 
-<example file="" />
+<masa-example file="Examples.markdown.Readonly"></masa-example>
 
 #### Theme
 
 Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set theme
 
-<example file="" />
+<masa-example file="Examples.markdown.Theme"></masa-example>
 
 #### Customize Toolbar
 
 Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set toolbar
 
-<example file="" />
+<masa-example file="Examples.markdown.Toolbar"></masa-example>
 
 #### Upload
 
 Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set upload parameters,this is just a demonstration of how to configure the upload parameters. Please modify your upload API address.
 
-<example file="" />
+<masa-example file="Examples.markdown.Upload"></masa-example>
 
 ### Events
 
@@ -111,10 +111,10 @@ window.Demo.Vditor = {
 };
 ```
 
-<example file="" />
+<masa-example file="Examples.markdown.BeforeAllUpload"></masa-example>
 
 #### Some events
 
 Focus, blur, select,esc,ctrl+enter and other events. For more events, please refer to API.
 
-<example file="" />
+<masa-example file="Examples.markdown.SomeEvents"></masa-example>
