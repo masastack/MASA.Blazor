@@ -96,8 +96,8 @@
 
     private string[] Headers => HeaderMaps[Field];
 
-    private List<ParameterInfo> Items => string.IsNullOrWhiteSpace(Filter)
-        ? Data
-        : Data.Where(item => item.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase) || item.Type.Contains(Filter, StringComparison.OrdinalIgnoreCase) || (item.DefaultValue != null && item.DefaultValue.Contains(Filter, StringComparison.OrdinalIgnoreCase))).ToList();
+    private IEnumerable<ParameterInfo> Items => string.IsNullOrWhiteSpace(Filter)
+        ? Data.OrderBy(item => item.Name)
+        : Data.Where(item => item.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase) || item.Type.Contains(Filter, StringComparison.OrdinalIgnoreCase) || (item.DefaultValue != null && item.DefaultValue.Contains(Filter, StringComparison.OrdinalIgnoreCase))).OrderBy(item => item.Name);
 
 }

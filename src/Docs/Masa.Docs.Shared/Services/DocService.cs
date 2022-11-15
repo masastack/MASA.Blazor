@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-using System.Net.Http.Json;
-using BlazorComponent.I18n;
+﻿using System.Net.Http.Json;
 
 namespace Masa.Docs.Shared.Services;
 
@@ -25,14 +23,14 @@ public class DocService
     {
         var key = $"{category}/{title}:{_i18n.Culture.Name}";
         return await _documentCache.GetOrAdd(key,
-            async _ => await _httpClient.GetStringAsync($"_content/Masa.Docs.Shared/docs/pages/{category}/{title}/{_i18n.Culture.Name}.md"));
+            async _ => await _httpClient.GetStringAsync($"_content/Masa.Docs.Shared/pages/{category}/{title}/{_i18n.Culture.Name}.md"));
     }
 
     public async Task<string> ReadExampleAsync(string category, string title, string example)
     {
         var key = $"{category}/{title}/{example}";
         return await _exampleCache.GetOrAdd(key,
-            async _ => await _httpClient.GetStringAsync($"_content/Masa.Docs.Shared/docs/pages/{category}/{title}/examples/{example}.txt"));
+            async _ => await _httpClient.GetStringAsync($"_content/Masa.Docs.Shared/pages/{category}/{title}/examples/{example}.txt"));
     }
 
     public async Task<Dictionary<string, List<string>>> ReadPageToApiAsync()
@@ -61,7 +59,7 @@ public class DocService
         try
         {
             return await _apiCache.GetOrAdd(key, async _ => await _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, string>>>(
-                $"_content/Masa.Docs.Shared/docs/pages/apis/{kebabCaseComponent}/{_i18n.Culture.Name}.json"));
+                $"_content/Masa.Docs.Shared/data/apis/{kebabCaseComponent}/{_i18n.Culture.Name}.json"));
         }
         catch (Exception e)
         {
