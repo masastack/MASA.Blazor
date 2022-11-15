@@ -1,7 +1,6 @@
 ---
 title: File inputs
-desc: "The **MFileInput**  component is a specialized input that provides a clean interface for selecting files,
-showing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input."
+desc: "The **MFileInput**  component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input."
 related:
   - /components/text-fields
   - /components/forms

@@ -1,7 +1,6 @@
 ---
 title: List Item Groups
-desc: "The **MListItemGroup** provides the ability to create a group of selectable **MListItem**. The **MListItemGroup** component
-utilizes **MItemGroup** at its core to provide a clean interface for interactive lists."
+desc: "The **MListItemGroup** provides the ability to create a group of selectable **MListItem**. The **MListItemGroup** component utilizes **MItemGroup** at its core to provide a clean interface for interactive lists."
 related:
   - /components/lists
   - /components/item-groups
