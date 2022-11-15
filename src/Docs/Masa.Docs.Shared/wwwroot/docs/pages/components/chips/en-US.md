@@ -21,49 +21,49 @@ Chips come in the following variations: closeable, filter, outlined, pill. The d
 
 The chip that can be closed can be controlled by Close by default. If you want to know when the chip is closed, you can also listen to the OnCloseClick event.
 
-<example file="" />
+<masa-example file="Examples.chips.Closable"></masa-example>
 
 #### Colored
 
 Any color in the Material Design palette can be used to change the chip color.
 
-<example file="" />
+<masa-example file="Examples.chips.Colored"></masa-example>
 
 #### Draggable
 
 Use the `Draggable` property to make **MChip** components draggable with the mouse.
 
-<example file="" />
+<masa-example file="Examples.chips.Draggable"></masa-example>
 
 #### Filter
 
 The **MChip** component has a `Filter` option, which will show you additional icons when the chip is active. You can use `FilterIcon` to customize.
 
-<example file="" />
+<masa-example file="Examples.chips.Filter"></masa-example>
 
 #### Label
 
 Label chips use the Card border-radius.
 
-<example file="" />
+<masa-example file="Examples.chips.Label"></masa-example>
 
 #### NoRipple
 
 MChip can not render ripple effects when ripple prop is set to false.
 
-<example file="" />
+<masa-example file="Examples.chips.NoRipple"></masa-example>
 
 #### Outlined
 
 The Outline chip inherits its border color from the current text color.
 
-<example file="" />
+<masa-example file="Examples.chips.Outlined"></masa-example>
 
 #### Sizes
 
 **MChip**  components can have different sizes from `XSmall` to `XLarge`.
 
-<example file="" />
+<masa-example file="Examples.chips.Sizes"></masa-example>
 
 ### Events
 
@@ -71,7 +71,7 @@ The Outline chip inherits its border color from the current text color.
 
 The chip sheet can be used as an actionable item. As long as there is an click event, the chip will become interactive and methods can be called.
 
-<example file="" />
+<masa-example file="Examples.chips.ActionChips"></masa-example>
 
 ### Contents
 
@@ -79,7 +79,7 @@ The chip sheet can be used as an actionable item. As long as there is an click e
 
 Chips can use text or any icon available in the Material Icons font library.
 
-<example file="" />
+<masa-example file="Examples.chips.Icon"></masa-example>
 
 ### Misc
 
@@ -87,25 +87,25 @@ Chips can use text or any icon available in the Material Icons font library.
 
 Using a custom list allows us to always display the available options while providing the same search and selection capabilities.
 
-<example file="" />
+<masa-example file="Examples.chips.CustomList"></masa-example>
 
 #### Expandable
 
 Chip can be combined with **MMenu** to enable a set of specific operations for chip.
 
-<example file="" />
+<masa-example file="Examples.chips.Expandable"></masa-example>
 
 #### Filtering
 
 chip sheets are very suitable for providing auxiliary operations for specific tasks. In this example, we search a list of items and collect a subset of information to display available keywords.
 
-<example file="" />
+<masa-example file="Examples.chips.Filtering"></masa-example>
 
 #### In selects
 
 Select to display the selected data using a piece of chip. Try adding your own label below.
 
-<example file="" />
+<masa-example file="Examples.chips.InSelects"></masa-example>
 
 
 

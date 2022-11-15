@@ -1,18 +1,11 @@
 ---
-category: Components
-subtitle: 分隔线
-type: 分隔线
-title: Dividers
-cols: 1
+title: Dividers（分隔线）
+desc: "**MDivider** 组件用于分隔列表或布局的各个部分。"
 related:
   - /components/lists
   - /components/navigation-drawers
   - /components/toolbars
 ---
- 
- # Dividers（分隔线）
-
-`MDivider` 组件用于分隔列表或布局的各个部分。
 
 ## 使用
 
@@ -30,20 +23,33 @@ related:
 
 #### 缩进
 
-`inset` 属性令分隔线向右缩进72px。 这将使他们与列表项保持一致。
+`Inset` 属性令分隔线向右缩进72px。 这将使他们与列表项保持一致。
 
-<example file="" />
+<masa-example file="Examples.dividers.Inset"></masa-example>
 
 #### 垂直
 
 垂直分隔线为您提供了更多用于独特布局的工具。
 
-<example file="" />
+<masa-example file="Examples.dividers.Vertical"></masa-example>
 
 ### 插槽
 
 #### ChildContent
 
-<example file="" />
+<masa-example file="Examples.dividers.ChildContent"></masa-example>
 
+### 其他
+
+#### 纵向视图
+
+创建自定义卡片以适应任何用例。
+
+<masa-example file="Examples.dividers.View"></masa-example>
+
+#### 副标题
+
+分割线和副标题可以帮助分解内容，并可以使用相同的 `Inset` 属性来相互对齐。
+
+<masa-example file="Examples.dividers.SubHeaders"></masa-example>
 

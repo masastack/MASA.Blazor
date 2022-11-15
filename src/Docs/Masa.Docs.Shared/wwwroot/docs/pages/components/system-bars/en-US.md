@@ -22,22 +22,22 @@ related:
 
 You can choose to use colors to change the color of the **MSystemBar**.
 
-<example file="" />
+<masa-example file="Examples.system_bars.Color"></masa-example>
 
 #### Lights Out
 
-You can use the `lights-out` property to reduce the opacity of the **MSystemBar**.
+You can use the `LightsOut` property to reduce the opacity of the **MSystemBar**.
 
-<example file="" />
+<masa-example file="Examples.system_bars.LightOut"></masa-example>
 
 #### Themes
 
-You can apply `dark` or `light` theme variables to **MSystemBar**.
+You can apply `Dark` or `Light` theme variables to **MSystemBar**.
 
-<example file="" />
+<masa-example file="Examples.system_bars.Theme"></masa-example>
 
 #### Window
 
 System bar with window controls and status information.
 
-<example file="" />
+<masa-example file="Examples.system_bars.Window"></masa-example>

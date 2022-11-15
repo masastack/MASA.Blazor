@@ -30,70 +30,70 @@ blending in with white backgrounds. If you need white text, simply add the `whit
 
 `Block` buttons extend the full available width.
 
-<example file="" />
+<masa-example file="Examples.buttons.Block"></masa-example>
 
 #### Depressed
 
 `Depressed` buttons still maintain their background color, but have no box shadow.
 
-<example file="" />
+<masa-example file="Examples.buttons.Depressed"></masa-example>
 
 #### Floating
 
 Floating buttons are rounded and usually contain an icon.
 
-<example file="" />
+<masa-example file="Examples.buttons.Floating"></masa-example>
 
 #### Icon
 
 Icons can be used for the primary content of a button. This property makes the button rounded and applies the `Text`
 prop styles.
 
-<example file="" />
+<masa-example file="Examples.buttons.Icon"></masa-example>
 
 #### Loaders
 
 Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use
 a **MProgressCircular** component but this can be customized.
 
-<example file="" />
+<masa-example file="Examples.buttons.Loaders"></masa-example>
 
 #### Outlined
 
 `Outlined` buttons inherit their borders from the current color applied.
 
-<example file="" />
+<masa-example file="Examples.buttons.Outlined"></masa-example>
 
 #### Plain
 
 `Plain` buttons have a lower baseline opacity that reacts to `hover` and `focus`.
 
-<example file="" />
+<masa-example file="Examples.buttons.Plain"></masa-example>
 
 #### Rounded
 
 `Rounded` buttons behave the same as regular buttons but have rounded edges.
 
-<example file="" />
+<masa-example file="Examples.buttons.Rounded"></masa-example>
 
-#### #Sizing
+#### Sizing
 
 Buttons can be given different sizing options to fit a multitude of scenarios.
 
-<example file="" />
+<masa-example file="Examples.buttons.Size"></masa-example>
 
 #### Text
 
 Text buttons have no box shadow and no background. Only on hover is the container for the button shown. When used with
 the `Color` prop, the supplied color is applied to the button text instead of the background.
 
-<example file="" />
+<masa-example file="Examples.buttons.Text"></masa-example>
 
 #### Tile
 
 `Tile` buttons behave the same as regular buttons but have no border radius.
 
-<example file="" />
+<masa-example file="Examples.buttons.Tile"></masa-example>
 
 ### Misc
 
@@ -101,6 +101,6 @@ the `Color` prop, the supplied color is applied to the button text instead of th
 
 `Raised` buttons have a box shadow that increases when clicked. This is the default style.
 
-<example file="" />
+<masa-example file="Examples.buttons.Raised"></masa-example>
 
 

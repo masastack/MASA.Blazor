@@ -33,49 +33,49 @@ related:
 
 您可以在您的项目中指定特定属性的值和文本字段相对应。 默认情况下，将是属性 text 和 value相对应。 而在这个示例中，我们将应用 `OnSelectedItemUpdate` 属性的方式来返回所选项目的整个对象值。
 
-<example file="" />
+<masa-example file="Examples.selects.CustomTextAndValue"></masa-example>
 
 #### 密集
 
 你可以使用 `Dense` 属性来降低自动完成的高度和缩小列表项的最大高度。
 
-<example file="" />
+<masa-example file="Examples.selects.Dense"></masa-example>
 
 #### 禁用
 
 将 `Disabled` 的属性应用于 **MSelect** 将阻止用户与组件交互。
 
-<example file="" />
+<masa-example file="Examples.selects.Disabled"></masa-example>
 
 #### 图标
 
 使用自定义前置或者后置图标。
 
-<example file="" />
+<masa-example file="Examples.selects.Icon"></masa-example>
 
 #### 浅色主题
 
 标准的单选有多种配置选项。
 
-<example file="" />
+<masa-example file="Examples.selects.Light"></masa-example>
 
 #### 菜单属性
 
 在这个示例中，菜单被指定向上打开并移动至顶部。
 
-<example file="" />
+<masa-example file="Examples.selects.MenuProps"></masa-example>
 
 #### 多选
 
 多选择器可以使用 **MChip** 组件来显示已选项。
 
-<example file="" />
+<masa-example file="Examples.selects.Multiple"></masa-example>
 
 #### 只读
 
 您可以在 **MSelect** 上应用 `Readonly`属性来防止用户更改其值。
 
-<example file="" />
+<masa-example file="Examples.selects.Readonly"></masa-example>
 
 ### 插槽
 
@@ -83,10 +83,10 @@ related:
 
 **MSelect** 组件可以通过预定和附加项目进行扩展。 这完全适合自定义的 **选择所有** 功能。
 
-<example file="" />
+<masa-example file="Examples.selects.AppendAndPrependItem"></masa-example>
 
 #### 选择
 
 **SelectionContent** 可用于自定义选中值在输入中显示的方式。 当您想要像 `foo (+2 others)` 或不想让选区占用多行时，这是很棒的。
 
-<example file="" />
+<masa-example file="Examples.selects.Selection"></masa-example>

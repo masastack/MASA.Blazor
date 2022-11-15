@@ -21,19 +21,19 @@ related:
 
 **MRadio** 可以使用 `Color` 属性设置颜色 颜色可以是[内置颜色](/stylesandanimations/colors)或自定义来着色。
 
-<example file="" />
+<masa-example file="Examples.radio.Color"></masa-example>
 
 #### 布局
 
 单选框组可以使用 `column` 或者 `row` 属性设置为一列或者一行的形式。 默认设置为列。
 
-<example file="" />
+<masa-example file="Examples.radio.Direction"></masa-example>
 
 #### 必填项
 
 默认情况下，按钮组不是必填的。 可以使用 `Mandatory` 属性改变这种状态。
 
-<example file="" />
+<masa-example file="Examples.radio.Mandatory"></masa-example>
 
 #### 插槽
 
@@ -41,4 +41,4 @@ related:
 
 单选组标签可以在 `LabelContent` 中定义，允许使用 HTML 内容。
 
-<example file="" />
+<masa-example file="Examples.radio.LabelContent"></masa-example>

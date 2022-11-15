@@ -23,7 +23,7 @@ Banners can have 1-2 lines of text, actions and icon.
 
 Single-line MBanner is used for small amount of information and is recommended for desktop only implementations. You can optionally enable the sticky prop to ensure the content is pinned to the screen (note: does not work in IE11). 
 
-<example file="" />
+<masa-example file="Examples.banners.SingleLine"></masa-example>
 
 ### Events
 
@@ -31,7 +31,7 @@ Single-line MBanner is used for small amount of information and is recommended f
 
 The icon on the banner emits a click:icon event when clicked, which has a custom icon slot.
 
-<example file="" />
+<masa-example file="Examples.banners.IconClick"></masa-example>
 
 ### Slots
 
@@ -39,13 +39,13 @@ The icon on the banner emits a click:icon event when clicked, which has a custom
 
 The Actions slot has a dismiss function in its range, and you can use it to hide the banner easily.
 
-<example file="" />
+<masa-example file="Examples.banners.Actions"></masa-example>
 
 #### Icon
 
 The icon slot allows you to clearly control the content and functions it contains.
 
-<example file="" />
+<masa-example file="Examples.banners.Icon"></masa-example>
 
 ### Misc
 
@@ -53,4 +53,4 @@ The icon slot allows you to clearly control the content and functions it contain
 
 Two-line MBanner can store larger amount of data, use it for big messages. This is recommend mobile implementations.
 
-<example file="" />
+<masa-example file="Examples.banners.TwoLine"></masa-example>

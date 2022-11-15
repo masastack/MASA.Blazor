@@ -19,38 +19,38 @@ Chip groups make it easy for users to select filtering options for more complex 
 
 #### Column
 
-Chip groups with **Column** prop can wrap their chips.
+Chip groups with `Column` prop can wrap their chips.
 
-<example file="" />
+<masa-example file="Examples.chip_groups.Column"></masa-example>
 
 #### FilterResults
 
 Easily create chip groups that provide additional feedback with the `Filter` prop. This creates an alternative visual style that communicates to the user that the chip is selected.
 
-<example file="" />
+<masa-example file="Examples.chip_groups.FilterResults"></masa-example>
 
 #### Mandatory
 
 Chip groups with `Mandatory` prop must always have a value selected.
 
-<example file="" />
+<masa-example file="Examples.chip_groups.Mandatory"></masa-example>
 
 #### Multiple
 
 Chip groups with `Multiple` prop can have many values selected.
 
-<example file="" />
+<masa-example file="Examples.chip_groups.Multiple"></masa-example>
 
 ### Misc
 
 #### Product card
 
-Chip groups with `Multiple` prop can have many values selected.
+**MChip** components can have an explicit value for their `@bind-Value`. This is passed to the **MChipGroup** component and is useful when you don't want to use the chip index as its value.
 
-<example file="" />
+<masa-example file="Examples.chip_groups.ProductCard"></masa-example>
 
 #### Toothbrush card
 
 Chip groups allow the creation of custom interfaces that perform the same actions as an item group or radio controls, but are stylistically different.
 
-<example file="" />
+<masa-example file="Examples.chip_groups.ToothbrushCard"></masa-example>

@@ -24,31 +24,31 @@ You need to reference the package of Sorttable.js before using it ：
 
 Drag area name.
 
-<example file="" />
+<masa-example file="Examples.drag_zone.Group"></masa-example>
 
 #### Options
 
 Parameter configuration.
 
-<example file="" />
+<masa-example file="Examples.drag_zone.Options"></masa-example>
 
 #### Pull
 
-Drag and drop configuration by specifying the value of the `Pull` property. `true` allows dragging, `false` disables dragging, `clone` clones.
+Drag and drop configuration by specifying the value of the `Pull` property. `true` allows dragging, `false` disables dragging。
 
-<example file="" />
+<masa-example file="Examples.drag_zone.Pull"></masa-example>
 
 #### Put
 
 Determines whether child elements can be sorted by specifying the value of the `Sort` property. `true` allows sorting, `false` does not allow sorting.
 
-<example file="" />
+<masa-example file="Examples.drag_zone.Put"></masa-example>
 
 #### Sort
 
 Whether child elements can be sorted.
 
-<example file="" />
+<masa-example file="Examples.drag_zone.Sort"></masa-example>
 
 ### Misc
 
@@ -56,17 +56,17 @@ Whether child elements can be sorted.
 
 Drag and drop across multiple regions.
 
-<example file="" />
+<masa-example file="Examples.drag_zone.MultiyZone"></masa-example>
 
 #### Clone
 
 Selected element clone drag and drop.
 
-<example file="" />
+<masa-example file="Examples.drag_zone.Clone"></masa-example>
 
 #### Filter
 
 Filter the elements, those that do not match cannot be dragged and dropped.
 
-<example file="" />
+<masa-example file="Examples.drag_zone.Filter"></masa-example>
 

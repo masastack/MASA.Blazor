@@ -1,18 +1,11 @@
 ---
-category: Components
-type: BlockText
-title: Block text
-cols: 1
-tag: preset
+title: Block Text
+desc: "Display two data of the same type side by side."
 related:
   - /components/chips
   - /components/copyable-text
   - /components/ellipsis-text
 ---
-
-# Block Text
-
-Display two data of the same type side by side.
 
 ## Usage
 
@@ -24,10 +17,10 @@ Display two data of the same type side by side.
 
 #### Tags
 
-<example file="" />
+<masa-example file="Examples.block_text.Tags"></masa-example>
 
 ### Contents
 
 #### Custom content
 
-<example file="" />
+<masa-example file="Examples.block_text.Contents"></masa-example>

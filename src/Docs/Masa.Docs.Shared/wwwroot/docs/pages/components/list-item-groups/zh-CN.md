@@ -21,19 +21,19 @@ related:
 
 您可以设置一个在选择项目时将添加的类。
 
-<example file="" />
+<masa-example file="Examples.list_item_groups.ActiveClass"></masa-example>
 
 #### 必填项
 
 使用`Multiple`属性必须至少选定一项。
 
-<example file="" />
+<masa-example file="Examples.list_item_groups.Mandatory"></masa-example>
 
 #### 多选
 
 使用`Multiple`属性您可以一次选择多个项目。
 
-<example file="" />
+<masa-example file="Examples.list_item_groups.Multiple"></masa-example>
 
 ### 其他
 
@@ -41,10 +41,10 @@ related:
 
 您可以一次选择多个项目。
 
-<example file="" />
+<masa-example file="Examples.list_item_groups.FlatList"></masa-example>
 
 #### 选择控件
 
 使用默认插槽，您可以访问项目内部状态并进行切换。 因为 `Active` 属性是一个布尔值, 我们使用复选框上的 `IsActive` 属性 将其状态链接到 **MListItem**。
 
-<example file="" />
+<masa-example file="Examples.list_item_groups.SelectionControls"></masa-example>
