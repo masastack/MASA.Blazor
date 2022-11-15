@@ -21,50 +21,50 @@ related:
 
 When using the `AutoGrow` prop, textarea’s will automatically increase in size when the contained text exceeds its size.
 
-<example file="" />
+<masa-example file="Examples.textareas.AutoGrow"></masa-example>
 
 #### Background color
 
 The `BackgroundColor` and `Color` give you more control over styling **MTextarea**.
 
-<example file="" />
+<masa-example file="Examples.textareas.BackgroundColor"></masa-example>
 
 #### Browser autocomplete
 
 The `Autocomplete` prop gives you the option to enable the browser to predict user input.
 
-<example file="" />
+<masa-example file="Examples.textareas.BrowserAutocomplete"></masa-example>
 
 #### Clearable
 
 You can clear the text from a **MTextarea** by using the `Clearable` prop, and customize the icon used with the `ClearableIcon` prop.
 
-<example file="" />
+<masa-example file="Examples.textareas.Clearable"></masa-example>
 
 #### Counter
 
 The `Counter` prop informs the user of a character limit for the **MTextarea**.
 
-<example file="" />
+<masa-example file="Examples.textareas.Counter"></masa-example>
 
 #### Icon
 
 The `AppendIcon` and `PrependIcon` props help add context to **MTextarea**.
 
-<example file="" />
+<masa-example file="Examples.textareas.Icon"></masa-example>
 
 #### NoResize
 
 **MTextarea** have the option to remain the same size regardless of their content’s size, using the `NoResize` prop.
 
-<example file="" />
+<masa-example file="Examples.textareas.NoResize"></masa-example>
 
 #### Rows
 
 The `Rows` prop allows you to define how many rows the textarea has, when combined with the `RowHeight` prop you can
 further customize your rows by defining their height.
 
-<example file="" />
+<masa-example file="Examples.textareas.Row"></masa-example>
 
 ### Misc
 
@@ -72,4 +72,4 @@ further customize your rows by defining their height.
 
 Utilizing alternative input styles, you can create amazing interfaces that are easy to build and easy to use.
 
-<example file="" />
+<masa-example file="Examples.textareas.SignupForm"></masa-example>

@@ -1,6 +1,6 @@
 ---
 title: Breadcrumbs（面包屑导航）
-desc: "Breadcrumbs 组件适用于页面层级导航"
+desc: "**MBreadcrumbs** 组件适用于页面层级导航"
 related:
   - /components/buttons
   - /components/navigation-drawers
@@ -16,7 +16,7 @@ related:
 ## 注意
 
 <!--alert:info-->
-默认情况下，`MBreadcrumbs` 将禁用路由联动。可以通过 **Linkage** 属性开启路由联动。
+默认情况下，**MBreadcrumbs** 将禁用路由联动。可以通过 `Linkage` 属性开启路由联动。
 
 ## Examples
 
@@ -24,19 +24,19 @@ related:
 
 #### 分割线
 
-可以使用 divider 属性来设置面包屑分隔符。
+可以使用 `Divider` 属性来设置面包屑分隔符。
 
-<example file="" />
+<masa-example file="Examples.breadcrumbs.Divider"></masa-example>
 
 #### 路由联动
 
-<example file="" />
+<masa-example file="Examples.breadcrumbs.Linkage"></masa-example>
 
 #### 大号
 
 大的面包屑具有较大的字体。
 
-<example file="" />
+<masa-example file="Examples.breadcrumbs.Large"></masa-example>
 
 ### 插槽
 
@@ -44,10 +44,10 @@ related:
 
 对于图标变量，面包屑可以使用Material设计中的任何图标。
 
-<example file="" />
+<masa-example file="Examples.breadcrumbs.IconDividers"></masa-example>
 
 #### 项目
 
-您可以使用 **item** 插槽自定义每个面包屑。
+您可以使用 **ItemContent** 插槽自定义每个面包屑。
 
-<example file="" />
+<masa-example file="Examples.breadcrumbs.Item"></masa-example>

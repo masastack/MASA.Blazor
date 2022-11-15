@@ -21,7 +21,7 @@ The **MFooter** component in its simplest form is a container.
 
 The `Padless` property removes all the default padding of the footer component.
 
-<example file="" />
+<masa-example file="Examples.footers.Padless"></masa-example>
 
 ### Misc
 
@@ -29,17 +29,17 @@ The `Padless` property removes all the default padding of the footer component.
 
 The footer component can be used as the basic company footer of the link.
 
-<example file="" />
+<masa-example file="Examples.footers.Company"></masa-example>
 
 #### Indigo
 
 Indigo background color, footer component with social media icons and buttons.
 
-<example file="" />
+<masa-example file="Examples.footers.Indigo"></masa-example>
 
 #### Teal
 
 Header with blue-green background color, footer component with multi-column links.
 
-<example file="" />
+<masa-example file="Examples.footers.Teal"></masa-example>
 

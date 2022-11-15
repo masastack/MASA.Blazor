@@ -220,49 +220,49 @@ flexbox，[阅读 CSS Tricks flexbox 指南](https://css-tricks.com/snippets/css
 
 使用 `Align` 和 `AlignSelf` 属性来改变 flex 项目及其父项的垂直对齐方式。
 
-<example file="" />
+<masa-example file="Examples.grids.Align"></masa-example>
 
 #### 断点尺寸
 
 列将自动占用其父容器内相等的空间。 这可以使用 `Cols` 属性来修改。 你还可以使用 `Sm`、`Md`、`Lg` 和 `Xl` 属性来进一步定义不同视口尺寸下的列占用空间。
 
-<example file="" />
+<masa-example file="Examples.grids.BreakpointSizing"></masa-example>
 
 #### 水平对齐
 
 使用 `Justify` 属性改变 flex 项目的水平对齐方式。
 
-<example file="" />
+<masa-example file="Examples.grids.Justify"></masa-example>
 
 #### 无间隔
 
 你可以使用 `NoGutters` 属性从 **MRow** 中移除负值外边距，从其直接子 **MCol** 中移除内边距。
 
-<example file="" />
+<masa-example file="Examples.grids.NoGutters"></masa-example>
 
 #### 偏移
 
 偏移对于控制元素不可见或控制内容位置很有用。 就像断点一样，你可以为任何可用的尺寸设置一个偏移。 这使你可以根据自己的需求精确地调整应用布局。
 
-<example file="" />
+<masa-example file="Examples.grids.Offset"></masa-example>
 
 #### 偏移断点
 
 偏移也可以在每个断点的基础上设置。
 
-<example file="" />
+<masa-example file="Examples.grids.OffsetBreakpoint"></masa-example>
 
 #### 排序
 
 你可以控制网格项目的排序。 与偏移一样，你可以为不同的尺寸设置不同的顺序。 设计专门的屏幕布局，以适应任何应用。
 
-<example file="" />
+<masa-example file="Examples.grids.Order"></masa-example>
 
 #### 先后排序
 
 你也可以明确指定 `First` 或 `Last`，这将分别为 order CSS 属性分配 `-1` 或 `13` 值。
 
-<example file="" />
+<masa-example file="Examples.grids.OrderFirstAndLast"></masa-example>
 
 ### 其他
 
@@ -270,7 +270,7 @@ flexbox，[阅读 CSS Tricks flexbox 指南](https://css-tricks.com/snippets/css
 
 当在给定的行中放置了超过 12 个列时（没有使用 `.flex-nowrap`），每一组额外的列都将被包入新的行。
 
-<example file="" />
+<masa-example file="Examples.grids.ColumnWrapping"></masa-example>
 
 #### 等宽列
 
@@ -278,52 +278,52 @@ flexbox，[阅读 CSS Tricks flexbox 指南](https://css-tricks.com/snippets/css
 虽然旧版本的浏览器有解决办法，但仍有一个 [Safari flexbox 问题](https://github.com/philipwalton/flexbugs#11-min-and-max-size-declarations-are-ignored-when-wrapping-flex-items)。
 如果你是最新的 Safari，无需担心这个问题。
 
-<example file="" />
+<masa-example file="Examples.grids.EqualWidthColumns"></masa-example>
 
 #### 增长与收缩
 
 默认情况下，flex 组件将自动填充行或列中的可用空间。 没有指定具体尺寸时，它们也会相对于 flex 容器中的其他 flex 项目收缩。 你可以使用 cols 属性定义 `MCol` 的列宽，并提供 **1 到 12 的值**。
 
-<example file="" />
+<masa-example file="Examples.grids.GrowAndShrink"></masa-example>
 
 #### 外边距辅助
 
 使用[外边距工具类](/stylesandanimations/flex)可以强行把同级列分开。
 
-<example file="" />
+<masa-example file="Examples.grids.MarginHelpers"></masa-example>
 
 #### 嵌套网格
 
 与其他框架类似，网格可以被嵌套，以实现非常自定义的布局。
 
-<example file="" />
+<masa-example file="Examples.grids.Nested"></masa-example>
 
 #### 一列宽度
 
 使用自动布局时，你可以只定义一列的宽度，并且仍然可以让它的同级元素围绕它自动调整大小。
 
-<example file="" />
+<masa-example file="Examples.grids.OneColumnWidth"></masa-example>
 
 #### 行和列断点
 
 根据分辨率动态地改变你的布局。 **（调整你的屏幕大小，并观看顶部 `row` 布局在 sm、md 和 lg 断点上的变化）**。
 
-<example file="" />
+<masa-example file="Examples.grids.RowAndColumnBreakpoints"></masa-example>
 
 #### 空白
 
 **MSpacer** 组件在你想要填充可用空间或在两个组件之间留出空间时非常有用。
 
-<example file="" />
+<masa-example file="Examples.grids.Spacers"></masa-example>
 
 #### 独特的布局
 
 Masa.Blazor 网格系统的强大和灵活性使你能够创建出色的用户界面。
 
-<example file="" />
+<masa-example file="Examples.grids.UniqueLayouts"></masa-example>
 
 #### 可变内容宽度
 
 为列分配断点宽度可以根据其内容的性质宽度来配置调整大小。
 
-<example file="" />
+<masa-example file="Examples.grids.VariableContentWidth"></masa-example>

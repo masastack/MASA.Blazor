@@ -20,16 +20,28 @@ You need to reference the package of ECharts before using it:
 
 ### Props
 
+#### Dark
+
+Use `Dark` prop to switch to the dark theme.
+
+<masa-example file="Examples.echarts.Dark"></masa-example>
+
 #### HeightAndWidth
 
 `Height` and `Width` property set chart height,width
 
-<example file="" />
+<masa-example file="Examples.echarts.HeightAndWidth"></masa-example>
 
-#### Responsive
+#### Locale
 
-When component refresh or window resize, `ECharts` will re-render.
+Specify the locale. For more information, please refer to ECharts official documentation.
 
-<example file="" />
+<masa-example file="Examples.echarts.Locale"></masa-example>
+
+#### Theme
+
+Specify the theme. Light and dark themes are supported by default. You can use [custom themes](https://echarts.apache.org/handbook/en/concepts/style/#theme). In this example, the **vintage** theme can be set after importing the vintage.js file in HTML.
+
+<masa-example file="Examples.echarts.Theme"></masa-example>
 
 

@@ -36,6 +36,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ExamplesSourceFile Remove="Examples\checkboxes\States.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Masa.Blazor\Masa.Blazor.csproj" />
   </ItemGroup>
 

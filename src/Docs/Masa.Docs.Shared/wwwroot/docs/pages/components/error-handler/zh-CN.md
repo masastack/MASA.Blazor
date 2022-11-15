@@ -22,7 +22,7 @@ cols: 1
 
 自定义异常处理 `Func<Exception,Task>`，点击按钮触发异常后，按钮背景为红色，文字颜色为白色。
 
-<example file="" />
+<masa-example file="Examples.error_handler.OnErrorHandleAsync"></masa-example>
 
 #### 是否显示告警
 
@@ -31,13 +31,13 @@ cols: 1
  1. 包含，将先显示异常，并将当前页面内容呈现为默认的ErrorBoundry错误处理处理内容；
  2. 不包含，当前页面直接内容呈现为默认的ErrorBoundry错误处理内容；
 
-<example file="" />
+<masa-example file="Examples.error_handler.ShowAlert"></masa-example>
 
 #### 是否显示异常详细信息
 
 `true` 显示，`false` 不显示， 默认不显示
 
-<example file="" />
+<masa-example file="Examples.error_handler.ShowDetail"></masa-example>
 
 
 

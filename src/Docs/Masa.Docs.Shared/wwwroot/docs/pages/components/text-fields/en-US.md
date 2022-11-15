@@ -23,104 +23,104 @@ Use a `Counter` prop to inform a user of the character limit. The counter does n
 you will need to pair it with either the internal validation system, or a 3rd party library. The counter can be
 customised with the `CounterValue` prop and **CounterContent**.
 
-<example file="" />
+<masa-example file="Examples.text_fields.Counter"></masa-example>
 
 #### Clearable
 
 When `Clearable`, you can customize the clear icon with `ClearIcon`.
 
-<example file="" />
+<masa-example file="Examples.text_fields.Clearable"></masa-example>
 
 #### Custom colors
 
 You can optionally change a text field into any color in the Material design palette. Below is an example implementation of a custom form with validation.
 
-<example file="" />
+<masa-example file="Examples.text_fields.CustomColors"></masa-example>
 
 #### Custom text colors
 
 You can optionally change a text in the input box into any color in the Material design palette.
 
-<example file="" />
+<masa-example file="Examples.text_fields.CustomTextColors"></masa-example>
 
 #### Dense
 
 You can reduce the text field height with `Dense` prop.
 
-<example file="" />
+<masa-example file="Examples.text_fields.Dense"></masa-example>
 
 #### Disabled and readonly
 
 Text fields can be `Disabled` or `Readonly`.
 
-<example file="" />
+<masa-example file="Examples.text_fields.DisabledAndReadonly"></masa-example>
 
 #### Filled
 
 Text fields can be used with an alternative box design.
 
-<example file="" />
+<masa-example file="Examples.text_fields.Filled"></masa-example>
 
-#### HideDatails
+#### HideDetails
 
 When `HideDetails` is set to `auto` messages will be rendered only if there’s a message (hint, error message, counter value etc) to display.
 
-<example file="" />
+<masa-example file="Examples.text_fields.HideDetails"></masa-example>
 
 #### Hint
 
 The `Hint` property on text fields adds the provided string beneath the text field. Using `PersistentHint` keeps the
 hint visible when the text field is not focused. Hint prop is not supported in `Solo` mode.
 
-<example file="" />
+<masa-example file="Examples.text_fields.Hint"></masa-example>
 
 #### Icons
 
 You can add icons to the text field with `PrependIcon`, `AppendIcon` and `AppendOuterIcon` props.
 
-<example file="" />
+<masa-example file="Examples.text_fields.Icons"></masa-example>
 
 #### Input Number
 
 Numeric-only input box.
 
-<example file="" />
+<masa-example file="Examples.text_fields.Number"></masa-example>
 
 #### Outlined
 
 Text fields can be used with an alternative outlined design.
 
-<example file="" />
+<masa-example file="Examples.text_fields.Outlined"></masa-example>
 
 #### Prefixes and suffixes
 
 The `Prefix` and `Suffix` properties allows you to prepend and append inline non-modifiable text next to the text field.
 
-<example file="" />
+<masa-example file="Examples.text_fields.PrefixesAndSuffixes"></masa-example>
 
 #### Shaped
 
 `Shaped` text fields are rounded if they’re `Outlined` and have higher border-radius if `Filled`.
 
-<example file="" />
+<masa-example file="Examples.text_fields.Shaped"></masa-example>
 
 #### SingleLine
 
 `SingleLine` text fields do not float their label on focus or with data.
 
-<example file="" />
+<masa-example file="Examples.text_fields.SingleLine"></masa-example>
 
 #### Solo
 
 Text fields can be used with an alternative `Solo` design.
 
-<example file="" />
+<masa-example file="Examples.text_fields.Solo"></masa-example>
 
 #### Validation
 
 MASA Blazor includes simple validation through the rules prop. The prop accepts a mixed array of types function, boolean and string. When the input value changes, each element in the array will be validated. Functions pass the current value as an argument and must return either true / false or a string containing an error message.
 
-<example file="" />
+<masa-example file="Examples.text_fields.Validation"></masa-example>
 
 ### Events
 
@@ -129,7 +129,7 @@ MASA Blazor includes simple validation through the rules prop. The prop accepts 
 `OnPrependClick`, `OnAppendClick`, `OnAppendOuterClick`, and `OnClearClick` will be emitted when you click on the respective icon.
 Note that these events will not be fired if the icon content is used instead.
 
-<example file="" />
+<masa-example file="Examples.text_fields.IconEvents"></masa-example>
 
 ### Contents
 
@@ -137,20 +137,20 @@ Note that these events will not be fired if the icon content is used instead.
 
 Instead of using `Prepend`/`Append`/`AppendOuter` icons you can use contents to extend input’s functionality.
 
-<example file="" />
+<masa-example file="Examples.text_fields.IconSlots"></masa-example>
 
 #### Label
 
 Text field label can be defined in **LabelContent**。
 
-<example file="" />
+<masa-example file="Examples.text_fields.Label"></masa-example>
 
 #### Progress
 
 You can display a progress bar instead of the bottom line. You can use the default indeterminate progress having same
 color as the text field or designate a custom one using the **ProgressContent**
 
-<example file="" />
+<masa-example file="Examples.text_fields.Progress"></masa-example>
 
 ### Misc
 
@@ -158,12 +158,12 @@ color as the text field or designate a custom one using the **ProgressContent**
 
 Full width text fields allow you to create boundless inputs. In this example, we use a **MDivider** to separate the fields.
 
-<example file="" />
+<masa-example file="Examples.text_fields.FullWidthWithCounter"></masa-example>
 
 #### Password input
 
 Using the HTML input type [password](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password) can be
 used with an appended icon and callback to control the visibility.
 
-<example file="" />
+<masa-example file="Examples.text_fields.PasswordInput"></masa-example>
 

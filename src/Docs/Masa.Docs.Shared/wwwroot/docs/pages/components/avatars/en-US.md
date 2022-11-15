@@ -15,10 +15,6 @@ related:
 
 ## Anatomy
 
-## API
-
-- [MAvatar](/api/MAvatar)
-
 ## Examples
 
 ### Props
@@ -27,13 +23,13 @@ related:
 
 The `Size` prop allows you to define the `Height` and `Width` of **MAvatar**. This prop scales both evenly with an aspect ratio of 1. `Height` and `Width` props will override this prop.
 
-<example file="" />
+<masa-example file="Examples.avatars.Size"></masa-example>
 
 #### Tile
 
 The `Tile` prop removes the border radius from **MAvatar** leaving you with a simple square avatar.
 
-<example file="" />
+<masa-example file="Examples.avatars.Tile"></masa-example>
 
 ### Slots
 
@@ -41,7 +37,7 @@ The `Tile` prop removes the border radius from **MAvatar** leaving you with a si
 
 The **MAvatar** default slot will accept the **MIcon** component, an image, or text. Mix and match these props with other props to create something unique.
 
-<example file="" />
+<masa-example file="Examples.avatars.Default"></masa-example>
 
 ### Misc
 
@@ -49,17 +45,19 @@ The **MAvatar** default slot will accept the **MIcon** component, an image, or t
 
 Combine you with other components and you can build beautiful user interfaces.
 
-<example file="" />
+<masa-example file="Examples.avatars.Other"></masa-example>
+
+#### Menu
 
 Example: Combining avatars and menus.
 
-<example file="" />
+<masa-example file="Examples.avatars.Menu"></masa-example>
 
 #### Profile Card
 
 Using the `Tile` prop, we can create a business card.
 
-<example file="" />
+<masa-example file="Examples.avatars.BusinessCard"></masa-example>
 
 
 

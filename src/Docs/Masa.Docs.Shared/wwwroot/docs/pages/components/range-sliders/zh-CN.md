@@ -21,25 +21,25 @@ related:
 
 您不能与 `Disabled` 滑块交互。
 
-<example file="" />
+<masa-example file="Examples.range_sliders.Disabled"></masa-example>
 
 #### 最大值和最小值
 
 您可以通过  `Min` 和 `Max` 设置滑块的最小值和最大值。
 
-<example file="" />
+<masa-example file="Examples.range_sliders.MinAndMax"></masa-example>
 
 #### 步骤
 
 **MRangeSlider** 组件可以有 1 以外的步骤。这对于一些需要以或多或少的精度调整值的应用程序很有帮助。
 
-<example file="" />
+<masa-example file="Examples.range_sliders.Step"></masa-example>
 
 #### 垂直滑块
 
 您可以使用 `Vertical` 属性将滑块切换为垂直方向。 如果您需要更改滑块的高度，请使用 CSS。
 
-<example file="" />
+<masa-example file="Examples.range_sliders.VerticalSliders"></masa-example>
 
 ### 插槽
 
@@ -47,10 +47,4 @@ related:
 
 使用 `TickLabels` 属性和 **ThumbLabelContent**，您可以创建一个非常个性化的解决方案。
 
-<example file="" />
-
-#### 缩略图标签
-
-您可以在滑动时或始终使用 `ThumbLabel` 道具显示拇指标签。它可以通过设置 `ThumbColor` 属性来自定义颜色，并使用 `ThumbSize` 属性设置自定义大小。使用 `AlwaysDirty` 道具，它的颜色永远不会改变，即使在 `Min` 值上也是如此。
-
-<example file="" />
+<masa-example file="Examples.range_sliders.ThumbLabel"></masa-example>

@@ -1,7 +1,6 @@
 ---
 title: List Item Groups
-desc: "The **MListItemGroup** provides the ability to create a group of selectable **MListItem**. The **MListItemGroup** component
-utilizes **MItemGroup** at its core to provide a clean interface for interactive lists."
+desc: "The **MListItemGroup** provides the ability to create a group of selectable **MListItem**. The **MListItemGroup** component utilizes **MItemGroup** at its core to provide a clean interface for interactive lists."
 related:
   - /components/lists
   - /components/item-groups
@@ -22,19 +21,19 @@ By default, the `ListItemGroup` operates similarly to **ItemGroup**. If a `Value
 
 You can select multiple items at one time.
 
-<example file="" />
+<masa-example file="Examples.list_item_groups.ActiveClass"></masa-example>
 
 #### Mandatory
 
 At least one item must be selected to use the `Multiple` property.
 
-<example file="" />
+<masa-example file="Examples.list_item_groups.Mandatory"></masa-example>
 
 #### Multiple
 
 Using the `Multiple` property you can select multiple items at once.
 
-<example file="" />
+<masa-example file="Examples.list_item_groups.Multiple"></masa-example>
 
 ### Misc
 
@@ -42,10 +41,10 @@ Using the `Multiple` property you can select multiple items at once.
 
 You can easily disable the default highlighting of selected **MListItem**s. This creates a lower profile for a user’s choices.
 
-<example file="" />
+<masa-example file="Examples.list_item_groups.FlatList"></masa-example>
 
 #### Selection controls
 
 Using the default slot, you can access an items internal state and toggle it. Since the `Active` property is a boolean, we use the `IsActive` prop on the checkbox to link its state to the **MListItem**.
 
-<example file="" />
+<masa-example file="Examples.list_item_groups.SelectionControls"></masa-example>

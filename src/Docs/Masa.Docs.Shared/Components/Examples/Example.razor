@@ -11,10 +11,10 @@
             @foreach (var tooltip in tooltips)
             {
                 <AppTooltipButton Icon="@tooltip.Icon"
-                                  Path="@tooltip.Path"
-                                  Href="@tooltip.href"
-                                  Target="@(tooltip.href != null ? "_blank" : null)"
-                                  OnClick="() => tooltip.OnClick?.Invoke()" />
+                              Path="@tooltip.Path"
+                              Href="@tooltip.href"
+                              Target="@(tooltip.href != null ? "_blank" : null)"
+                              OnClick="() => tooltip.OnClick?.Invoke()" />
             }
         </div>
 
@@ -36,9 +36,9 @@
                     {
                         <MItem>
                             <MButton Class="mr-2"
-                                     IsActive="@context.Active"
-                                     Text
-                                     OnClick="@context.Toggle">
+                                 IsActive="@context.Active"
+                                 Text
+                                 OnClick="@context.Toggle">
                                 @item.Language
                             </MButton>
                         </MItem>
@@ -113,6 +113,12 @@
 
             var executingAssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
             type = Type.GetType($"{executingAssemblyName}.{File}");
+
+            if (type == null)
+            {
+                ArgumentNullException.ThrowIfNull($"{File} does not exists");
+            }
+
             var sourceCode = await DocService.ReadExampleAsync(category, title, type.Name);
 
             var (razor, cs, css) = ResolveSourceCode(sourceCode);

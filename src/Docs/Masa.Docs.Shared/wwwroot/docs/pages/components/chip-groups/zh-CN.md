@@ -19,38 +19,38 @@ related:
 
 #### 列
 
-使用 **Column** 属性的纸片组可以包装它们的纸片。
+使用 `Column` 属性的纸片组可以包装它们的纸片。
 
-<example file="" />
+<masa-example file="Examples.chip_groups.Column"></masa-example>
 
 #### 过滤结果
 
-使用 **Filter** 属性轻松创建提供额外反馈的纸片组。 这就与用户选中的纸片产生了一种可供选择的视觉样式。
+使用 `Filter` 属性轻松创建提供额外反馈的纸片组。 这就与用户选中的纸片产生了一种可供选择的视觉样式。
 
-<example file="" />
+<masa-example file="Examples.chip_groups.FilterResults"></masa-example>
 
 #### 必填项
 
-具有 **Mandatory** 属性的纸片组必须始终选择一个值。
+具有 `Mandatory` 属性的纸片组必须始终选择一个值。
 
-<example file="" />
+<masa-example file="Examples.chip_groups.Mandatory"></masa-example>
 
 #### 多选
 
-具有 **Multiple** prop的纸片组可以选择多个值。
+具有 `Multiple` 属性的纸片组可以选择多个值。
 
-<example file="" />
+<masa-example file="Examples.chip_groups.Multiple"></masa-example>
 
 ### 其他
 
 #### 产品卡
 
-**MChip** 组件可以有一个用于其model的明确值。 这会传递到 **MChipGroup** 组件并且在您不想使用纸片索引作为其值时非常有用。
+**MChip** 组件可以有一个用于其 `@bind-Value` 的明确值。 这会传递到 **MChipGroup** 组件并且在您不想使用纸片索引作为其值时非常有用。
 
-<example file="" />
+<masa-example file="Examples.chip_groups.ProductCard"></masa-example>
 
 #### 牙刷卡
 
 纸片组允许创建自定义接口，这些接口执行与项组或单选控件相同的操作，但在风格上有所不同。
 
-<example file="" />
+<masa-example file="Examples.chip_groups.ToothbrushCard"></masa-example>

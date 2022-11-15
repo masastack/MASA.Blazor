@@ -21,25 +21,25 @@ A **MSwitch** in its simplest form provides a toggle between 2 values.
 
 Switches can be colored by using any of the builtin colors and contextual names using the `Color` prop.
 
-<example file="" />
+<masa-example file="Examples.switches.Color"></masa-example>
 
 #### Flat
 
 You can make switch render without elevation of thumb using `Flat` property.
 
-<example file="" />
+<masa-example file="Examples.switches.Flat"></masa-example>
 
 #### Inset
 
 You can make switch render in `Inset` mode.
 
-<example file="" />
+<masa-example file="Examples.switches.Inset"></masa-example>
 
 #### State
 
 **MSwitch** can have different states such as `default`, `Disabled` , and `Loading`.
 
-<example file="" />
+<masa-example file="Examples.switches.State"></masa-example>
 
 ### Contents
 
@@ -47,7 +47,7 @@ You can make switch render in `Inset` mode.
 
 Switch labels can be defined in **LabelContent**.
 
-<example file="" />
+<masa-example file="Examples.switches.Label"></masa-example>
 
 ### Misc
 
@@ -55,5 +55,5 @@ Switch labels can be defined in **LabelContent**.
 
 switch customize show text
 
-<example file="" />
+<masa-example file="Examples.switches.CustomText"></masa-example>
 

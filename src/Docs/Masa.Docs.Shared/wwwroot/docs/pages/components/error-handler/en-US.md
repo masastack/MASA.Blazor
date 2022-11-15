@@ -23,7 +23,7 @@ You can also configure other options to display exception stack or customize exc
 Custom exception handling `Func<Exception, Task >`, after clicking the button triggers the exception, 
 the button background color changes to red and the text color changes to white.
 
-<example file="" />
+<masa-example file="Examples.error_handler.OnErrorHandleAsync"></masa-example>
 
 #### ShowAlert
 
@@ -35,10 +35,10 @@ If an error occurs during the life cycle loading process, whether the current ra
 
 2.Not included, the direct content of the current page is rendered as the default ErrorBoundry error handling content;
 
-<example file="" />
+<masa-example file="Examples.error_handler.ShowAlert"></masa-example>
 
 #### ShowDetail
 
 `true` is displayed, `false` is not displayed, and the default is not displayed.
 
-<example file="" />
+<masa-example file="Examples.error_handler.ShowDetail"></masa-example>

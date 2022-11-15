@@ -26,17 +26,17 @@ By default **MBreadcrumbs** will disable the linkage with router. You can enable
 
 For the icon variant, breadcrumbs can use any icon in Material Design Icons.
 
-<example file="" />
+<masa-example file="Examples.breadcrumbs.Divider"></masa-example>
 
 #### Linkage
 
-<example file="" />
+<masa-example file="Examples.breadcrumbs.Linkage"></masa-example>
 
 #### Large
 
 Breadcrumbs Basic Usage
 
-<example file="" />
+<masa-example file="Examples.breadcrumbs.Large"></masa-example>
 
 ### Contents
 
@@ -44,10 +44,10 @@ Breadcrumbs Basic Usage
 
 For the icon variant, breadcrumbs can use any icon in Material Design Icons.
 
-<example file="" />
+<masa-example file="Examples.breadcrumbs.IconDividers"></masa-example>
 
 #### Item
 
-You can use the **item** slot to customize each breadcrumb.
+You can use the **ItemContent** slot to customize each breadcrumb.
 
-<example file="" />
+<masa-example file="Examples.breadcrumbs.Item"></masa-example>

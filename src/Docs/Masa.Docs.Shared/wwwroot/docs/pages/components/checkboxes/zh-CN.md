@@ -9,7 +9,7 @@ related:
 
 ## 使用
 
-最简单形式的 `Checkbox` 提供了两个值之间的切换。
+最简单形式的 **Checkbox** 提供了两个值之间的切换。
 
 <checkboxes-usage></checkboxes-usage>
 
@@ -21,19 +21,19 @@ related:
 
 **MCheckbox** 可以通过使用颜色属性的任何内置颜色和上下文名称来着色。
 
-<example file="" />
+<masa-example file="Examples.checkboxes.Color"></masa-example>
 
 #### 布尔值
 
 单个 **MChecbox** 将有一个布尔值作为其 `value`。
 
-<example file="" />
+<masa-example file="Examples.checkboxes.Boolean"></masa-example>
 
 #### 状态
 
 **MCheckbox** 可以有不同的状态，例如 `default`, `disabled`, 和 `indeterminate`.
 
-<example file="" />
+<masa-example file="Examples.checkboxes.States"></masa-example>
 
 ### 插槽
 
@@ -41,7 +41,7 @@ related:
 
 **MCheckbox** 文本可以在 **LabelContent** 中定义 - 这将允许使用HTML内容。
 
-<example file="" />
+<masa-example file="Examples.checkboxes.LabelContent"></masa-example>
 
 ### 其他
 
@@ -49,4 +49,4 @@ related:
 
 您可以将 **MCheckbox** 与其他组件（如 **MTextField** ）对齐。
 
-<example file="" />
+<masa-example file="Examples.checkboxes.InlineTextField"></masa-example>

@@ -21,19 +21,19 @@ The cascade selector is used to select provinces and municipalities
 
 You can use `Dense` prop to reduce the field height and lower max height of list items.
 
-<example file="" />
+<masa-example file="Examples.cascaders.Dense"></masa-example>
 
 #### LoadChildren
 
 `Loadchildren` is used to dynamically load children
 
-<example file="" />
+<masa-example file="Examples.cascaders.LoadChildren"></masa-example>
 
 #### ShowAllLevels
 
 `ShowAllLevels` control show all level ,default value `true`。
 
-<example file="" />
+<masa-example file="Examples.cascaders.ShowAllLevels"></masa-example>
 
 
 

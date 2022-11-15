@@ -21,19 +21,19 @@ related:
 
 **MButtonGroup** 带有 `Mandatory` 属性将总是有一个（被选中的）值。
 
-<example file="" />
+<masa-example file="Examples.button_groups.Mandatory"></masa-example>
 
 #### 多选
 
 **MButtonGroup** 带有 `Multiple` 属性将允许用户选中多个值并以数组的形式返回。
 
-<example file="" />
+<masa-example file="Examples.button_groups.Multiple"></masa-example>
 
 #### 圆角
 
 你可以使用 `Rounded` 属性让 **MButtonGroup** 变成圆角样式。
 
-<example file="" />
+<masa-example file="Examples.button_groups.Rounded"></masa-example>
 
 ### 其他
 
@@ -41,10 +41,10 @@ related:
 
 可与 **MToolbar** 轻松集成自定义按钮方案。
 
-<example file="" />
+<masa-example file="Examples.button_groups.Toolbar"></masa-example>
 
 #### WYSIWYG/所见即所得
 
 对类似的操作进行分组，并设计自己的 WYSIWYG 组件。
 
-<example file="" />
+<masa-example file="Examples.button_groups.WYSIWYG"></masa-example>
