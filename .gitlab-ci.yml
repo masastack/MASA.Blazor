@@ -24,8 +24,8 @@ packer:
     - ydy
   stage: packer
   only:
-    - main 
-  script: 
+    - main
+  script:
     - ls src/
     - rm -rf ./src/BlazorComponent
     - rm -rf ./src/MASA.Docs
@@ -33,18 +33,18 @@ packer:
     - git config --global http.proxy $PROXY_GATEWAY
     - git clone -b main https://github.com/BlazorComponent/BlazorComponent.git ./src/BlazorComponent
     - git clone -b main https://github.com/masastack/MASA.Docs.git ./src/MASA.Docs
-#     - docker --version 
+#     - docker --version
 #     - dotnet workload install wasm-tools-net6 --temp-dir "/home/gitlab-runner/work/_temp" &&
 #     - dotnet workload install wasm-tools
-    - dotnet workload list  &&  dotnet build src/Masa.Blazor.sln 
+    - dotnet workload list  &&  dotnet build src/Masa.Blazor.sln
 #     - dotnet pack pack src --include-symbols -p:PackageVersion=0.3.0-alpha.$CI_PIPELINE_ID
-    - dotnet pack src/Masa.Blazor/Masa.Blazor.csproj --no-build  --include-symbols -p:PackageVersion=0.3.0-alpha.$CI_PIPELINE_ID
-    - dotnet pack src/BlazorComponent/src/Component/BlazorComponent/BlazorComponent.csproj --no-build --include-symbols -p:PackageVersion=0.3.0-alpha.$CI_PIPELINE_ID
-    - dotnet nuget push "**/*.symbols.nupkg" -k $nugetkey -s https://api.nuget.org/v3/index.json
+    - dotnet pack src/Masa.Blazor/Masa.Blazor.csproj --no-build  --include-symbols -p:PackageVersion=0.7.0-alpha.$CI_PIPELINE_ID
+    - dotnet pack src/BlazorComponent/src/Component/BlazorComponent/BlazorComponent.csproj --no-build --include-symbols -p:PackageVersion=0.7.0-alpha.$CI_PIPELINE_ID
+    - dotnet nuget push "**/*.symbols.nupkg" -k $nugetkey -s https://api.nuget.org/v3/index.json --skip-duplicate
   after_script:
     - git config --global --unset https.proxy
     - git config --global --unset http.proxy
-    - echo "" >/home/gitlab-runner/.gitconfig 
+    - echo "" >/home/gitlab-runner/.gitconfig
   artifacts:
     expire_in: 1 day
     paths:
@@ -75,7 +75,7 @@ deploy-dev:
     - echo $KUBE_CONFIG_DEV | base64 -d > ./config
     - kubectl --kubeconfig ./config set image deployment/masa-blazor-docs masa-blazor-docs=$IMAGE -n masa-blazor
   retry: 2
-  
+
 deploy-test:
   image: portainer/kubectl-shell
   stage: deploy-test
@@ -92,7 +92,7 @@ packer-prd:
   tags:
     - linux-shell
   only:
-    - tags 
+    - tags
   script:
     - rm -rf ./src/BlazorComponent
     - rm -rf ./src/MASA.Docs
@@ -106,7 +106,7 @@ packer-prd:
   after_script:
     - git config --global --unset https.proxy
     - git config --global --unset http.proxy
-    - echo "" >/home/gitlab-runner/.gitconfig 
+    - echo "" >/home/gitlab-runner/.gitconfig
   artifacts:
     expire_in: 1 day
     paths:
@@ -135,7 +135,7 @@ deploy-prd:
     - echo $KUBE_CONFIG_BLAZOR_PRD | base64 -d > ./config
     - kubectl --kubeconfig ./config set image deployment/masa-blazor masa-blazor=$IMAGE_PRD -n masa-blazor
   retry: 2
-  when: manual  
+  when: manual
 
 tag-push:
   stage: tag
