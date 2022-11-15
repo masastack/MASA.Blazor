@@ -1,7 +1,6 @@
 ---
 title: Chip Groups
-desc: "The **MChipGroup** supercharges the **MChip** component by providing groupable functionality. It is used for creating groups
-of selections using chips."
+desc: "The **MChipGroup** supercharges the **MChip** component by providing groupable functionality. It is used for creating groups of selections using chips."
 related:
   - /components/chips
   - /components/slide-groups

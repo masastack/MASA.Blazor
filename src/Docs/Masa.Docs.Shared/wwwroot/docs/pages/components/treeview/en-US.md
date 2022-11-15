@@ -1,27 +1,15 @@
 ---
-category: Components
-type: Treeview
 title: Treeview
-cols: 1
+desc: "The **MTreeview** component is useful for displaying large amounts of nested data."
 related:
   - /components/lists
   - /components/list-item-groups
   - /components/timelines
 ---
 
-# Treeview
-
-The **MTreeview** component is useful for displaying large amounts of nested data.
-
 ## Usage
 
-A basic example
-
 <treeview-usage></treeview-usage>
-
-## API
-
-- [MVirtualScroll](/api/MTreeview)
 
 ## Examples
 
