@@ -56,7 +56,7 @@
       "floating-action-buttons",
       "footers",
       {
-        "title": "form-inputs-and-ontrols",
+        "title": "form-inputs-and-controls",
         "group": "components",
         "items": [
           "autocomplete",

@@ -1,0 +1,106 @@
+---
+title: Buttons
+desc: "The **MButton** component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color."
+related:
+  - /components/button-groups
+  - /components/icons
+  - /components/floating-action-buttons
+---
+
+## Usage
+
+Buttons in their simplest form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click.
+
+<buttons-usage></buttons-usage>
+
+## Anatomy
+
+## Caveats
+
+<!--alert:warning--> 
+**MButton** is the only component that behaves differently when using the **Dark** prop. Normally components use the `Dark` prop to denote that they have a dark colored background and need their text to be white. While this will work
+for **MButton** , it is advised to only use the prop when the button **IS ON** a colored background due to the disabled state
+blending in with white backgrounds. If you need white text, simply add the `white--text` class.
+
+## Examples
+
+### Props
+
+#### Block
+
+`Block` buttons extend the full available width.
+
+<masa-example file="Examples.buttons.Block"></masa-example>
+
+#### Depressed
+
+`Depressed` buttons still maintain their background color, but have no box shadow.
+
+<masa-example file="Examples.buttons.Depressed"></masa-example>
+
+#### Floating
+
+Floating buttons are rounded and usually contain an icon.
+
+<masa-example file="Examples.buttons.Floating"></masa-example>
+
+#### Icon
+
+Icons can be used for the primary content of a button. This property makes the button rounded and applies the `Text`
+prop styles.
+
+<masa-example file="Examples.buttons.Icon"></masa-example>
+
+#### Loaders
+
+Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use
+a **MProgressCircular** component but this can be customized.
+
+<masa-example file="Examples.buttons.Loaders"></masa-example>
+
+#### Outlined
+
+`Outlined` buttons inherit their borders from the current color applied.
+
+<masa-example file="Examples.buttons.Outlined"></masa-example>
+
+#### Plain
+
+`Plain` buttons have a lower baseline opacity that reacts to `hover` and `focus`.
+
+<masa-example file="Examples.buttons.Plain"></masa-example>
+
+#### Rounded
+
+`Rounded` buttons behave the same as regular buttons but have rounded edges.
+
+<masa-example file="Examples.buttons.Rounded"></masa-example>
+
+#### Sizing
+
+Buttons can be given different sizing options to fit a multitude of scenarios.
+
+<masa-example file="Examples.buttons.Size"></masa-example>
+
+#### Text
+
+Text buttons have no box shadow and no background. Only on hover is the container for the button shown. When used with
+the `Color` prop, the supplied color is applied to the button text instead of the background.
+
+<masa-example file="Examples.buttons.Text"></masa-example>
+
+#### Tile
+
+`Tile` buttons behave the same as regular buttons but have no border radius.
+
+<masa-example file="Examples.buttons.Tile"></masa-example>
+
+### Misc
+
+#### Raised
+
+`Raised` buttons have a box shadow that increases when clicked. This is the default style.
+
+<masa-example file="Examples.buttons.Raised"></masa-example>
+
+
