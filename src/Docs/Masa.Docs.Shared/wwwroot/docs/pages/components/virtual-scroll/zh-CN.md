@@ -1,28 +1,17 @@
 ---
-category: Components
-subtitle: 虚拟滚动条
-type: 虚拟滚动条
-title: Virtual scroller
-cols: 1
+title: Virtual scroller（虚拟滚动条）
+desc: "MVirtualScroll 组件显示一个虚拟，无限 的列表。 它支持动态高度和垂直滚动。"
 related:
   - /components/lists
   - /components/data-tables
   - /components/data-iterators
 ---
 
-# Virtual scroller（虚拟滚动条）
-
-MVirtualScroll 组件显示一个虚拟，无限 的列表。 它支持动态高度和垂直滚动。
-
 ## 使用
 
 <virtual-scroll-usage></virtual-scroll-usage>
 
 ## 解剖学
-
-## API
-
-- [MVirtualScroll](/api/MVirtualScroll)
 
 ## 示例
 

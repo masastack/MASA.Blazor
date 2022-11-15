@@ -1,28 +1,15 @@
 ---
-category: Components
-subtitle: 树形视图
-type: 树形视图
-title: Treeview
-cols: 1
+title: Treeview（树形视图）
+desc: "MTreeview 组件适用于显示大量嵌套数据。"
 related:
   - /components/lists
   - /components/list-item-groups
   - /components/timelines
 ---
 
-# Treeview（树形视图）
-
-MTreeview 组件适用于显示大量嵌套数据。
-
 ## 使用
 
-一个基本示例
-
 <treeview-usage></treeview-usage>
-
-## API
-
-- [MTreeview](/api/MTreeview)
 
 ## 示例
 
