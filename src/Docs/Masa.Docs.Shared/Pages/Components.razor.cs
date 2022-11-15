@@ -54,6 +54,7 @@ public partial class Components : IDisposable
         if (_prevCulture is not null && !Equals(_prevCulture, Culture))
         {
             _prevCulture = Culture;
+            _apiData.Clear();
             await ReadDocumentAndApiAsync();
         }
     }
@@ -98,7 +99,6 @@ public partial class Components : IDisposable
         if (firstRender)
         {
             _prevCulture = Culture;
-
             await ReadDocumentAndApiAsync();
 
             StateHasChanged();

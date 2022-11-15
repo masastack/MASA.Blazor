@@ -1,0 +1,15 @@
+﻿{
+  "props": {
+    "border": "为提示框添加边界。",
+    "closeIcon": "更改用于**dismissible**警报的默认图标。",
+    "closeLabel": "在 **dismissible** 提示框上的 aria-label 使用文本。"
+  },
+  "contents": {
+    "childContent": ""
+  },
+  "events": {
+    "valueChanged": ""
+  },
+  "functions": {
+  }
+}
