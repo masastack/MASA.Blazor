@@ -1,6 +1,6 @@
 ---
 title: Cascaders（级联菜单）
-desc: "**MCascader** 组件用于多选链接。"
+desc: "级联选择器"
 related:
 - /components/treeview
 - /components/forms
