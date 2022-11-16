@@ -26,17 +26,17 @@ related:
 
 可以使用 `Divider` 属性来设置面包屑分隔符。
 
-<masa-example file="Examples.breadcrumbs.Divider"></masa-example>
+<masa-example file="Examples.components.breadcrumbs.Divider"></masa-example>
 
 #### 路由联动
 
-<masa-example file="Examples.breadcrumbs.Linkage"></masa-example>
+<masa-example file="Examples.components.breadcrumbs.Linkage"></masa-example>
 
 #### 大号
 
 大的面包屑具有较大的字体。
 
-<masa-example file="Examples.breadcrumbs.Large"></masa-example>
+<masa-example file="Examples.components.breadcrumbs.Large"></masa-example>
 
 ### 插槽
 
@@ -44,10 +44,10 @@ related:
 
 对于图标变量，面包屑可以使用Material设计中的任何图标。
 
-<masa-example file="Examples.breadcrumbs.IconDividers"></masa-example>
+<masa-example file="Examples.components.breadcrumbs.IconDividers"></masa-example>
 
 #### 项目
 
 您可以使用 **ItemContent** 插槽自定义每个面包屑。
 
-<masa-example file="Examples.breadcrumbs.Item"></masa-example>
+<masa-example file="Examples.components.breadcrumbs.Item"></masa-example>

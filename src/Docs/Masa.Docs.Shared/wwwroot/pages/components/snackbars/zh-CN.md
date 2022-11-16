@@ -21,22 +21,22 @@ related:
 
 `MultiLine`属性扩展了 **MSnackbar** 的高度，让您有更多的内容空间。
 
-<masa-example file="Examples.snackbars.MultiLine"></masa-example>
+<masa-example file="Examples.components.snackbars.MultiLine"></masa-example>
 
 #### 超时
 
 `Timeout`属性允许您自定义 **MSnackbar** 隐藏之前的延迟。
 
-<masa-example file="Examples.snackbars.Timeout"></masa-example>
+<masa-example file="Examples.components.snackbars.Timeout"></masa-example>
 
 #### 变体
 
 使用 `Text`, `Shaped`, `Outlined` 等属性将不同样式应用于 **MSnackbar**。
 
-<masa-example file="Examples.snackbars.Variants"></masa-example>
+<masa-example file="Examples.components.snackbars.Variants"></masa-example>
 
 #### 垂直
 
 `Vertical` 属性允许您堆叠 **MSnackbar** 的内容。
 
-<masa-example file="Examples.snackbars.Vertical"></masa-example>
+<masa-example file="Examples.components.snackbars.Vertical"></masa-example>

@@ -23,22 +23,22 @@ related:
 
 您可以选择使用 `Color` 属性 更改 **MSystemBar** 的颜色。
 
-<masa-example file="Examples.system_bars.Color"></masa-example>
+<masa-example file="Examples.components.system_bars.Color"></masa-example>
 
 #### 熄灯
 
 您可以使用 `LightsOut` 属性来降低 **MSystemBar** 的不透明度。
 
-<masa-example file="Examples.system_bars.LightOut"></masa-example>
+<masa-example file="Examples.components.system_bars.LightOut"></masa-example>
 
 #### 主题
 
 可以将 `Dark` 或 `Light` 主题变量应用于 **MSystemBar**。
 
-<masa-example file="Examples.system_bars.Theme"></masa-example>
+<masa-example file="Examples.components.system_bars.Theme"></masa-example>
 
 #### 窗口
 
 带有窗口控件和状态信息的窗口栏。
 
-<masa-example file="Examples.system_bars.Window"></masa-example>
+<masa-example file="Examples.components.system_bars.Window"></masa-example>

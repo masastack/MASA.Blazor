@@ -13,11 +13,11 @@ related:
 
 #### Load children
 
-<masa-example file="Examples.mobile_cascader.LoadChildren"></masa-example>
+<masa-example file="Examples.components.mobile_cascader.LoadChildren"></masa-example>
 
 #### On confirm
 
-<masa-example file="Examples.mobile_cascader.OnConfirm"></masa-example>
+<masa-example file="Examples.components.mobile_cascader.OnConfirm"></masa-example>
 
 
 

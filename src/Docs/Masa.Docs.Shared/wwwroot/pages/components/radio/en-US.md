@@ -21,19 +21,19 @@ Although **MRadio** can be used on its own, it is best used in conjunction with 
 
 Radios can be colored by using any of the builtin colors and contextual names using the `Color` prop.
 
-<masa-example file="Examples.radio.Color"></masa-example>
+<masa-example file="Examples.components.radio.Color"></masa-example>
 
 #### Direction
 
 Radio-groups can be presented either as a row or a column, using their respective props. The default is as a column.
 
-<masa-example file="Examples.radio.Direction"></masa-example>
+<masa-example file="Examples.components.radio.Direction"></masa-example>
 
 #### Mandatory
 
 Radio-groups are by default not mandatory. This can be changed with the `Mandatory` prop.
 
-<masa-example file="Examples.radio.Mandatory"></masa-example>
+<masa-example file="Examples.components.radio.Mandatory"></masa-example>
 
 ### Contents
 
@@ -41,4 +41,4 @@ Radio-groups are by default not mandatory. This can be changed with the `Mandato
 
 Radio Group labels can be defined in **LabelContent** - that will allow to use HTML content.
 
-<masa-example file="Examples.radio.LabelContent"></masa-example>
+<masa-example file="Examples.components.radio.LabelContent"></masa-example>

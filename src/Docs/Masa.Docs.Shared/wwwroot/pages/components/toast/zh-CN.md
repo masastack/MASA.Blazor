@@ -19,22 +19,22 @@ related:
 
 #### 自动关闭时间（默认4000ms）
 
-<masa-example file="Examples.toast.Duration"></masa-example>
+<masa-example file="Examples.components.toast.Duration"></masa-example>
 
 #### 显示最大条数
 
 `MaxCount` 属性设置最大展示数量。
 
-<masa-example file="Examples.toast.MaxCount"></masa-example>
+<masa-example file="Examples.components.toast.MaxCount"></masa-example>
 
 #### 显示位置
 
 `Value` 属性设置消息弹出的位置。
 
-<masa-example file="Examples.toast.Position"></masa-example>
+<masa-example file="Examples.components.toast.Position"></masa-example>
 
 ### 事件
 
 #### 自定义 Toast 内容
 
-<masa-example file="Examples.toast.CustomToast"></masa-example>
+<masa-example file="Examples.components.toast.CustomToast"></masa-example>

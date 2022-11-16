@@ -21,19 +21,19 @@ related:
 
 使用 `ActiveClass`属性允许您在活动项上设置自定义CSS类。
 
-<masa-example file="Examples.item_groups.ActiveClass"></masa-example>
+<masa-example file="Examples.components.item_groups.ActiveClass"></masa-example>
 
 #### 必填项
 
 使用 `Mandatory`属性的项目组必须至少选择一个项目。
 
-<masa-example file="Examples.item_groups.Mandatory"></masa-example>
+<masa-example file="Examples.components.item_groups.Mandatory"></masa-example>
 
 #### 多选
 
 使用`Multiple`属性项目组可以选择多个项目。
 
-<masa-example file="Examples.item_groups.Multiple"></masa-example>
+<masa-example file="Examples.components.item_groups.Multiple"></masa-example>
 
 ### 其他
 
@@ -41,10 +41,10 @@ related:
 
 轻松绑定自定义纸片组。
 
-<masa-example file="Examples.item_groups.Chips"></masa-example>
+<masa-example file="Examples.components.item_groups.Chips"></masa-example>
 
 #### 选择
 
 当图标允许选择或取消选择单个选项（例如将项目标记为收藏）时，它们可以用作切换按钮。
 
-<masa-example file="Examples.item_groups.Selection"></masa-example>
+<masa-example file="Examples.components.item_groups.Selection"></masa-example>

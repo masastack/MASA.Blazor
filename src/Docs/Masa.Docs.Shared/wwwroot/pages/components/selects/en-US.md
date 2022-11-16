@@ -34,49 +34,49 @@ When using an object as the attribute of **items**, you must use **itemtext** an
 You can specify the specific properties within your items array correspond to the text and value fields. 
 By default, this is text and value. In this example we also use the return-object prop which will return the entire object of the selected item on selection.
 
-<masa-example file="Examples.selects.CustomTextAndValue"></masa-example>
+<masa-example file="Examples.components.selects.CustomTextAndValue"></masa-example>
 
 #### Dense
 
 You can use `Dense` prop to reduce the field height and lower max height of list items.
 
-<masa-example file="Examples.selects.Dense"></masa-example>
+<masa-example file="Examples.components.selects.Dense"></masa-example>
 
 #### Disabled
 
 Applying the `Disabled` prop to a **MSelect** will prevent a user from interacting with the component.
 
-<masa-example file="Examples.selects.Disabled"></masa-example>
+<masa-example file="Examples.components.selects.Disabled"></masa-example>
 
 #### Icon
 
 Use a custom prepended or appended icon.
 
-<masa-example file="Examples.selects.Icon"></masa-example>
+<masa-example file="Examples.components.selects.Icon"></masa-example>
 
 #### Light
 
 A standard single select has a multitude of configuration options.
 
-<masa-example file="Examples.selects.Light"></masa-example>
+<masa-example file="Examples.components.selects.Light"></masa-example>
 
 #### MenuProps
 
 Custom props can be passed directly to **MMenu** using `MenuProps` prop. In this example menu is force directed to top and shifted to top.
 
-<masa-example file="Examples.selects.MenuProps"></masa-example>
+<masa-example file="Examples.components.selects.MenuProps"></masa-example>
 
 #### Multiple
 
 A multi-select can utilize **MChip** as the display for selected items.
 
-<masa-example file="Examples.selects.Multiple"></masa-example>
+<masa-example file="Examples.components.selects.Multiple"></masa-example>
 
 #### Readonly
 
 You can use the `Readonly` prop on **MSelect** which will prevent a user from changing its value.
 
-<masa-example file="Examples.selects.Readonly"></masa-example>
+<masa-example file="Examples.components.selects.Readonly"></masa-example>
 
 #### Contents
 
@@ -84,10 +84,10 @@ You can use the `Readonly` prop on **MSelect** which will prevent a user from ch
 
 The **MSelect** components can be optionally expanded with prepended and appended items. This is perfect for customized select-all functionality.
 
-<masa-example file="Examples.selects.AppendAndPrependItem"></masa-example>
+<masa-example file="Examples.components.selects.AppendAndPrependItem"></masa-example>
 
 ### Selection
 
 The **SelectionContent** can be used to customize the way selected values are shown in the input. This is great when you want something like `foo (+2 others)` or don’t want the selection to occupy multiple lines.
 
-<masa-example file="Examples.selects.Selection"></masa-example>
+<masa-example file="Examples.components.selects.Selection"></masa-example>

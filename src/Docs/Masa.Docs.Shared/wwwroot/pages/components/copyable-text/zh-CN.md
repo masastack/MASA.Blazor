@@ -17,16 +17,16 @@ related:
 
 #### 图标
 
-<masa-example file="Examples.copyable_text.Icon"></masa-example>
+<masa-example file="Examples.components.copyable_text.Icon"></masa-example>
 
 #### 复制的内容
 
-<masa-example file="Examples.copyable_text.Text"></masa-example>
+<masa-example file="Examples.components.copyable_text.Text"></masa-example>
 
 #### 文本截断
 
-<masa-example file="Examples.copyable_text.TextTruncate"></masa-example>
+<masa-example file="Examples.components.copyable_text.TextTruncate"></masa-example>
 
 #### 提示
 
-<masa-example file="Examples.copyable_text.Tooltip"></masa-example>
+<masa-example file="Examples.components.copyable_text.Tooltip"></masa-example>

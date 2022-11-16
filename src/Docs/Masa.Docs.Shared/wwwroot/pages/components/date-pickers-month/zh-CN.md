@@ -26,43 +26,43 @@ related:
 
 您可以使用数组、对象或函数指定允许的月份。
 
-<masa-example file="Examples.date_pickers_month.AllowedDates"></masa-example>
+<masa-example file="Examples.components.date_pickers_month.AllowedDates"></masa-example>
 
 #### 颜色
 
 可以使用 `Color` 和 `HeaderColor` 设置日期选择器颜色。 如果没有提供 `HeaderColor`, 头部将使用 `Color` 值。
 
-<masa-example file="Examples.date_pickers_month.Colors"></masa-example>
+<masa-example file="Examples.components.date_pickers_month.Colors"></masa-example>
 
 #### 图标
 
 使用 `Icons`属性，您可以覆盖选择器中使用的默认图标。
 
-<masa-example file="Examples.date_pickers_month.Icons"></masa-example>
+<masa-example file="Examples.components.date_pickers_month.Icons"></masa-example>
 
 #### 多选
 
 日期选择器可以使用 `Multiple` 选择多个日期。 如果使用 `Multiple` 属性，日期选择器就会要求 `@bind-Value` 是一个数组。
 
-<masa-example file="Examples.date_pickers_month.Multiple"></masa-example>
+<masa-example file="Examples.components.date_pickers_month.Multiple"></masa-example>
 
 #### 只读
 
 使用 `Readonly`属性，来禁用选择新日期。
 
-<masa-example file="Examples.date_pickers_month.Readonly"></masa-example>
+<masa-example file="Examples.components.date_pickers_month.Readonly"></masa-example>
 
 #### 显示当前月份
 
 默认情况下，当前日期使用轮廓按钮显示 `ShowCurrent` 属性允许您删除边框或选择不同的日期显示为当前日期。
 
-<masa-example file="Examples.date_pickers_month.ShowCurrent"></masa-example>
+<masa-example file="Examples.components.date_pickers_month.ShowCurrent"></masa-example>
 
 #### 宽度
 
 使用 `Width`属性，您可以指定选择器的宽度或使其全宽度。
 
-<masa-example file="Examples.date_pickers_month.Width"></masa-example>
+<masa-example file="Examples.components.date_pickers_month.Width"></masa-example>
 
 ### 其他
 
@@ -72,16 +72,16 @@ related:
 
 选择器公开了一个插槽，允许您连接到保存和取消功能。这将保留一个旧值，如果用户取消，该值可以被替换。
 
-<masa-example file="Examples.date_pickers_month.DialogAndMenu"></masa-example>
+<masa-example file="Examples.components.date_pickers_month.DialogAndMenu"></masa-example>
 
 #### 国际化(TODO)
 
 日期选择器通过JavaScript日期对象支持国际化。使用区域设置道具指定BCP 47语言标记，然后使用每周第一天属性设置每周第一天。
 
-<masa-example file="Examples.date_pickers_month.Internationalization"></masa-example>
+<masa-example file="Examples.components.date_pickers_month.Internationalization"></masa-example>
 
 #### 方向
 
 使用 `Orientation`属性，控制日期选择器两种方向变化，纵向（默认）和横向。
 
-<masa-example file="Examples.date_pickers_month.Orientation"></masa-example>
+<masa-example file="Examples.components.date_pickers_month.Orientation"></masa-example>

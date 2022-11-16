@@ -21,7 +21,7 @@ related:
 
 `Inset` 属性可以使副标题向右移动72像素。 这使您可以选择将它们与列表项和插入分隔符对齐。
 
-<masa-example file="Examples.subheaders.Inset"></masa-example>
+<masa-example file="Examples.components.subheaders.Inset"></masa-example>
 
 ### 其他
 
@@ -29,16 +29,16 @@ related:
 
 副标题可以为用户正在查看的内容添加上下文。
 
-<masa-example file="Examples.subheaders.Grid"></masa-example>
+<masa-example file="Examples.components.subheaders.Grid"></masa-example>
 
 #### 菜单
 
 使用副标题有助于区分不同类型的操作。
 
-<masa-example file="Examples.subheaders.Menu"></masa-example>
+<masa-example file="Examples.components.subheaders.Menu"></masa-example>
 
 #### 社交媒体
 
 在社交媒体互动中使用副标题。
 
-<masa-example file="Examples.subheaders.SocialMedia"></masa-example>
+<masa-example file="Examples.components.subheaders.SocialMedia"></masa-example>

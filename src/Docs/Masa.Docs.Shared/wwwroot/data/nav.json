@@ -15,6 +15,13 @@
     ]
   },
   {
+    "title": "styles-and-animations",
+    "icon": "mdi-lightning-bolt",
+    "items": [
+      "border-radius"
+    ]
+  },
+  {
     "title": "ui-components",
     "icon": "mdi-cards-variant",
     "group": "components",

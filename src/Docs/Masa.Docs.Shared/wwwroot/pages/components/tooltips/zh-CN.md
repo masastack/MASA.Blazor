@@ -26,10 +26,10 @@ related:
 
 提示可以对齐到激活器元素的四个侧面。
 
-<masa-example file="Examples.tooltips.Alignment"></masa-example>
+<masa-example file="Examples.components.tooltips.Alignment"></masa-example>
 
 #### 可见性
 
 可使用 `@bind-Value` 编程性修改提示可见性。
 
-<masa-example file="Examples.tooltips.Visibility"></masa-example>
+<masa-example file="Examples.components.tooltips.Visibility"></masa-example>

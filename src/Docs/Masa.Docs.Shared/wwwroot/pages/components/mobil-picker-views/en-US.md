@@ -22,14 +22,14 @@ The data nesting depth of the cascade selection needs to be consistent, and if s
 options, you can use an empty string for placeholder.
 <!--/alert:warning-->
 
-<masa-example file="Examples.mobil_picker_views.Cascade"></masa-example>
+<masa-example file="Examples.components.mobil_picker_views.Cascade"></masa-example>
 
 #### Disable item
 
-<masa-example file="Examples.mobil_picker_views.ItemDisabled"></masa-example>
+<masa-example file="Examples.components.mobil_picker_views.ItemDisabled"></masa-example>
 
 #### Custom item height
 
 You can customize the height of the option through `Itemheight`. Currently, only `px` is supported.
 
-<masa-example file="Examples.mobil_picker_views.ItemHeight"></masa-example>
+<masa-example file="Examples.components.mobil_picker_views.ItemHeight"></masa-example>

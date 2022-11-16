@@ -5,13 +5,14 @@
   "roadmap": "路线图",
   "getting-started": "快速入门",
   "installation": "安装",
+  "styles-and-animations": "样式和动画",
   "ui-components": "UI组件",
   "alerts": "Alerts（提示框）",
 
   "props": "属性",
   "contents": "插槽",
   "events": "事件",
-  "tag":{
+  "tag": {
     "preset": "预置",
     "service": "服务",
     "new": "新增",

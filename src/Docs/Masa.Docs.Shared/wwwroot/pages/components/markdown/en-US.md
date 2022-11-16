@@ -30,43 +30,43 @@ Markdown Examples
 
 Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set counter
 
-<masa-example file="Examples.markdown.Counter"></masa-example>
+<masa-example file="Examples.components.markdown.Counter"></masa-example>
 
 #### Width and height
 
 Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set height
 
-<masa-example file="Examples.markdown.HeightAndWidth"></masa-example>
+<masa-example file="Examples.components.markdown.HeightAndWidth"></masa-example>
 
 #### Mode
 
 Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set mode,Support SV, IR, WYSIWYG
 
-<masa-example file="Examples.markdown.Mode"></masa-example>
+<masa-example file="Examples.components.markdown.Mode"></masa-example>
 
 #### Readonly
 
 Whether to set to readonly mode.
 
-<masa-example file="Examples.markdown.Readonly"></masa-example>
+<masa-example file="Examples.components.markdown.Readonly"></masa-example>
 
 #### Theme
 
 Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set theme
 
-<masa-example file="Examples.markdown.Theme"></masa-example>
+<masa-example file="Examples.components.markdown.Theme"></masa-example>
 
 #### Customize Toolbar
 
 Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set toolbar
 
-<masa-example file="Examples.markdown.Toolbar"></masa-example>
+<masa-example file="Examples.components.markdown.Toolbar"></masa-example>
 
 #### Upload
 
 Configure [Options](https://ld246.com/article/1549638745630#options) attribute to set upload parameters,this is just a demonstration of how to configure the upload parameters. Please modify your upload API address.
 
-<masa-example file="Examples.markdown.Upload"></masa-example>
+<masa-example file="Examples.components.markdown.Upload"></masa-example>
 
 ### Events
 
@@ -111,10 +111,10 @@ window.Demo.Vditor = {
 };
 ```
 
-<masa-example file="Examples.markdown.BeforeAllUpload"></masa-example>
+<masa-example file="Examples.components.markdown.BeforeAllUpload"></masa-example>
 
 #### Some events
 
 Focus, blur, select,esc,ctrl+enter and other events. For more events, please refer to API.
 
-<masa-example file="Examples.markdown.SomeEvents"></masa-example>
+<masa-example file="Examples.components.markdown.SomeEvents"></masa-example>

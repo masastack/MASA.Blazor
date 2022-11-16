@@ -16,8 +16,8 @@ related:
 
 #### TextField Style
 
-<masa-example file="Examples.image_captcha.TextFieldStyle"></masa-example>
+<masa-example file="Examples.components.image_captcha.TextFieldStyle"></masa-example>
 
 #### Custom verification code results
 
-<masa-example file="Examples.image_captcha.VerifyCode"></masa-example>
+<masa-example file="Examples.components.image_captcha.VerifyCode"></masa-example>

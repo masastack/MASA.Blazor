@@ -31,50 +31,50 @@ related:
 工具栏可以使用 `Src` 属性显示背景而不是纯色。 这可以通过使用 `Img` 插槽并提供您自己的 [**MImage**](/components/images) 组件来修改。
 可以使用 [MAppBar](/components/app-bars) 使背景淡入淡出
 
-<masa-example file="Examples.toolbars.Background"></masa-example>
+<masa-example file="Examples.components.toolbars.Background"></masa-example>
 
 #### 折叠
 
 可以折叠工具栏以节省屏幕空间。
 
-<masa-example file="Examples.toolbars.Collapse"></masa-example>
+<masa-example file="Examples.components.toolbars.Collapse"></masa-example>
 
 #### 紧凑工具栏
 
 紧凑工具栏将其高度降低到 48px。 当与 `Prominent` 属性同时使用时，高度将会降低到 96px。
 
-<masa-example file="Examples.toolbars.DenseToolbars"></masa-example>
+<masa-example file="Examples.components.toolbars.DenseToolbars"></masa-example>
 
 #### 扩展
 
 工具栏可以在不使用扩展插槽的情况下扩展。
 
-<masa-example file="Examples.toolbars.Extended"></masa-example>
+<masa-example file="Examples.components.toolbars.Extended"></masa-example>
 
 #### 扩展高度
 
 扩展的高度可以定制。
 
-<masa-example file="Examples.toolbars.ExtensitionHeight"></masa-example>
+<masa-example file="Examples.components.toolbars.ExtensitionHeight"></masa-example>
 
 #### 搜索时浮动
 
 浮动工具栏变成内联元素，只占用所需空间的。 将工具栏放置在内容上时这将特别有用。
 
-<masa-example file="Examples.toolbars.FloatingWithSearch"></masa-example>
+<masa-example file="Examples.components.toolbars.FloatingWithSearch"></masa-example>
 
 #### 浅色和深色
 
 工具栏有 2 种变体，浅色和深色。 浅色工具栏具有深色按钮和深色文本，而深色工具栏具有白色按钮和白色文本。
 
-<masa-example file="Examples.toolbars.LightAndDark"></masa-example>
+<masa-example file="Examples.components.toolbars.LightAndDark"></masa-example>
 
 #### 突出的工具栏
 
 突出的工具栏将 **MToolbar** 的高度增加到 128px ，并将 **MToolbarTitle** 放置到容器底部。 
 在 **MApp** 中扩展了这个功能，能够将突出的工具栏缩小为密集或短工具栏。
 
-<masa-example file="Examples.toolbars.ProminentToolbars"></masa-example>
+<masa-example file="Examples.components.toolbars.ProminentToolbars"></masa-example>
 
 ### 其他
 
@@ -82,16 +82,16 @@ related:
 
 可以更新工具栏的外观以响应应用程序状态的改变。 在本例中，工具栏的颜色和内容会随着用户在 **MSelect** 中的选择而改变。
 
-<masa-example file="Examples.toolbars.ContextualActionBar"></masa-example>
+<masa-example file="Examples.components.toolbars.ContextualActionBar"></masa-example>
 
 #### 灵活的卡片工具栏
 
 在本例中，我们使用 `Extended` 属性将卡片偏移到工具栏的扩展内容区域。
 
-<masa-example file="Examples.toolbars.FlexibleAndCardToolbar"></masa-example>
+<masa-example file="Examples.components.toolbars.FlexibleAndCardToolbar"></masa-example>
 
 #### 变量
 
 **MToolbar** 有多个变量，可以应用主题和辅助类。 这些主题包括浅色和深色的主题、彩色和透明。
 
-<masa-example file="Examples.toolbars.Variations"></masa-example>
+<masa-example file="Examples.components.toolbars.Variations"></masa-example>

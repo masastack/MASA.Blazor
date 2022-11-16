@@ -30,10 +30,10 @@ In order to correctly position **MTooltip**, a position support (` top ` | 'bott
 
 A tooltip can be aligned to any of the four sides of the activator element.
 
-<masa-example file="Examples.tooltips.Alignment"></masa-example>
+<masa-example file="Examples.components.tooltips.Alignment"></masa-example>
 
 #### Visibility
 
 Tooltip visibility can be programmatically changed using `@bind-Value`.
 
-<masa-example file="Examples.tooltips.Visibility"></masa-example>
+<masa-example file="Examples.components.tooltips.Visibility"></masa-example>

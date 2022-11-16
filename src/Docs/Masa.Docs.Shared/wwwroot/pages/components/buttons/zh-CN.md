@@ -29,67 +29,67 @@ related:
 
 添加 `Block` 属性的按钮将延占满可用的宽度。
 
-<masa-example file="Examples.buttons.Block"></masa-example>
+<masa-example file="Examples.components.buttons.Block"></masa-example>
 
 #### 凹陷
 
 应用 `Depressed` 属性的按钮依然保持其背景色，但没有框阴影。
 
-<masa-example file="Examples.buttons.Depressed"></masa-example>
+<masa-example file="Examples.components.buttons.Depressed"></masa-example>
 
 #### 浮动
 
 浮动按钮是圆形的，通常包含一个图标。
 
-<masa-example file="Examples.buttons.Floating"></masa-example>
+<masa-example file="Examples.components.buttons.Floating"></masa-example>
 
 #### 图标
 
 图标可作为按钮的主要内容。此属性使按钮变圆并应用 `Text` 属性样式。
 
-<masa-example file="Examples.buttons.Icon"></masa-example>
+<masa-example file="Examples.components.buttons.Icon"></masa-example>
 
 #### 加载器
 
 使用 `Loaders` 属性，可以通知用户正在进行处理。默认行为是使用 **MProgressCircular** 组件，但这可以自定义。
 
-<masa-example file="Examples.buttons.Loaders"></masa-example>
+<masa-example file="Examples.components.buttons.Loaders"></masa-example>
 
 #### 轮廓
 
 添加 `Outlined` 属性，按钮的边框颜色将继承自当前应用的按钮颜色。
 
-<masa-example file="Examples.buttons.Outlined"></masa-example>
+<masa-example file="Examples.components.buttons.Outlined"></masa-example>
 
 #### Plain(朴实)
 
 应用 `Plain` 属性， 按钮将会有较低的基准不透明度, 以响应 `hover` (悬停) 和 `focus`(聚焦) 事件。
 
-<masa-example file="Examples.buttons.Plain"></masa-example>
+<masa-example file="Examples.components.buttons.Plain"></masa-example>
 
 #### 圆角
 
 应用 `Rounded` 属性的按钮行为与常规按钮相同，但具有圆形边缘。
 
-<masa-example file="Examples.buttons.Rounded"></masa-example>
+<masa-example file="Examples.components.buttons.Rounded"></masa-example>
 
 #### 大小
 
 可以使用 `Size` 属性为按钮提供不同的大小调整选项，以适应多种场景。
 
-<masa-example file="Examples.buttons.Size"></masa-example>
+<masa-example file="Examples.components.buttons.Size"></masa-example>
 
 #### 文本
 
 应用 `Text` 属性的按钮没有框阴影和背景。只在悬停时显示按钮的容器。与 `Color` 属性一起使用时，提供的颜色将应用于按钮文本而不是背景。
 
-<masa-example file="Examples.buttons.Text"></masa-example>
+<masa-example file="Examples.components.buttons.Text"></masa-example>
 
 #### 方块
 
 应用 `Tile` 属性的按钮行为与常规按钮相同，但没有边框半径。
 
-<masa-example file="Examples.buttons.Tile"></masa-example>
+<masa-example file="Examples.components.buttons.Tile"></masa-example>
 
 ### 其他
 
@@ -97,4 +97,4 @@ related:
 
 应用 `Raised` 属性的按钮有一个框阴影，单击时会增加。这是默认样式。
 
-<masa-example file="Examples.buttons.Raised"></masa-example>
+<masa-example file="Examples.components.buttons.Raised"></masa-example>
