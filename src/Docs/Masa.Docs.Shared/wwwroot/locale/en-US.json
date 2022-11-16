@@ -4,6 +4,7 @@
   "roadmap": "Roadmap",
   "getting-started": "Getting started",
   "installation": "Installation",
+  "styles-and-animations": "Styles and animations",
   "ui-components": "UI components",
   "alerts": "Alerts",
 
@@ -73,5 +74,5 @@
   "SeniorSponsor": "Senior sponsor",
   "ComponentPages": "Component Pages",
   "NextPage": "Next Page",
-  "PreviousPage": "Previous Page",
+  "PreviousPage": "Previous Page"
 }

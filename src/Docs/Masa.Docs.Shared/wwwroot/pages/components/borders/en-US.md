@@ -15,13 +15,13 @@ related:
 
 Set the **Border** attribute to customize the position of the border. The default value is `borders Left`。
 
-<masa-example file="Examples.borders.Border"></masa-example>
+<masa-example file="Examples.components.borders.Border"></masa-example>
 
 #### Offset
 
 Add `Offset` attribute to control the border offset outside the child element.
 
-<masa-example file="Examples.borders.Offset"></masa-example>
+<masa-example file="Examples.components.borders.Offset"></masa-example>
 
 
 

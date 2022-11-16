@@ -21,23 +21,23 @@ related:
 
 **MBadge** 组件是灵活的，可以用于众多元素的各种使用案例。 也可以通过 `offset-x` 和 `offset-y` 属性调整位置的选项。
 
-<masa-example file="Examples.badges.Customize"></masa-example>
+<masa-example file="Examples.components.badges.Customize"></masa-example>
 
 #### 动态通知
 
 你可以将徽章与动态内容合并，以创建系统通知之类的东西。
 
-<masa-example file="Examples.badges.DynamicNotification"></masa-example>
+<masa-example file="Examples.components.badges.DynamicNotification"></masa-example>
 
 #### 鼠标悬停显示
 
 你可以用可见性控制做很多事情。例如，在鼠标悬停时显示徽章。
 
-<masa-example file="Examples.badges.Hover"></masa-example>
+<masa-example file="Examples.components.badges.Hover"></masa-example>
 
 #### 标签页
 
 徽章可以用各种方式向用户传递信息。
 
-<masa-example file="Examples.badges.Tabs"></masa-example>
+<masa-example file="Examples.components.badges.Tabs"></masa-example>
 

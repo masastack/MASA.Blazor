@@ -21,31 +21,31 @@ related:
 
 使用 `ActiveClass` 属性将允许您在激活的项上设置自定义的 CSS 类。
 
-<masa-example file="Examples.slide_groups.ActiveClass"></masa-example>
+<masa-example file="Examples.components.slide_groups.ActiveClass"></masa-example>
 
 #### 激活项居中
 
 您可以使用 `CenterActive` 属性使活动的项目永远居中。
 
-<masa-example file="Examples.slide_groups.CenterActive"></masa-example>
+<masa-example file="Examples.components.slide_groups.CenterActive"></masa-example>
 
 #### 自定义图标
 
 您可以使用 `NextIcon` 和 `PrevIcon` 添加自定义分页图标代替箭头。
 
-<masa-example file="Examples.slide_groups.CustomIcons"></masa-example>
+<masa-example file="Examples.components.slide_groups.CustomIcons"></masa-example>
 
 #### 必填项
 
 您可以使用 `Mandatory` 属性使幻灯片组需要至少选择一个项目。
 
-<masa-example file="Examples.slide_groups.Mandatory"></masa-example>
+<masa-example file="Examples.components.slide_groups.Mandatory"></masa-example>
 
 #### 多选
 
 您可以通过设置 `Multiple` 来选择多个项目。
 
-<masa-example file="Examples.slide_groups.Multiple"></masa-example>
+<masa-example file="Examples.components.slide_groups.Multiple"></masa-example>
 
 ### 其他
 
@@ -53,4 +53,4 @@ related:
 
 自定义幻灯片组以在图表上创造性地显示信息。 使用此选项，可以方便地为用户显示辅助信息。
 
-<masa-example file="Examples.slide_groups.PseudoCarousel"></masa-example>
+<masa-example file="Examples.components.slide_groups.PseudoCarousel"></masa-example>

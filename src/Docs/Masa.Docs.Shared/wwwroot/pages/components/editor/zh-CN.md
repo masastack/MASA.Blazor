@@ -35,43 +35,43 @@ tag: js-proxy
 
 通过 `ElementStyle` 属性设置高度
 
-<masa-example file="Examples.editor.Height"></masa-example>
+<masa-example file="Examples.components.editor.Height"></masa-example>
 
 #### Markdown
 
 支持markdown解析。
 
-<masa-example file="Examples.editor.Markdown"></masa-example>
+<masa-example file="Examples.components.editor.Markdown"></masa-example>
 
 #### 自定义提示信息
 
 通过设置 `Placeholder` 属性来设置空值时的提示消息。
 
-<masa-example file="Examples.editor.Placeholder"></masa-example>
+<masa-example file="Examples.components.editor.Placeholder"></masa-example>
 
 #### 只读
 
 是否将编辑器实例设置为只读模式。
 
-<masa-example file="Examples.editor.ReadOnly"></masa-example>
+<masa-example file="Examples.components.editor.ReadOnly"></masa-example>
 
 #### 主题
 
 使用主题的名称。这个内置的选项是 `bubble` 或 `snow` 。注意，主题的样式表需要手动包含。
 
-<masa-example file="Examples.editor.Theme"></masa-example>
+<masa-example file="Examples.components.editor.Theme"></masa-example>
 
 #### 自定义工具栏
 
 通过 **ToolbarContent** 插槽自定义工具栏。
 
-<masa-example file="Examples.editor.Toolbar"></masa-example>
+<masa-example file="Examples.components.editor.Toolbar"></masa-example>
 
 #### 上传图片
 
 这里只是演示如何配置 `Upload` 参数，请修改你的上传api地址。
 
-<masa-example file="Examples.editor.UploadPicture"></masa-example>
+<masa-example file="Examples.components.editor.UploadPicture"></masa-example>
 
 ### 事件
 
@@ -113,7 +113,7 @@ window.Demo.Quill = {
 };
 ```
 
-<masa-example file="Examples.editor.BeforeAllUpload"></masa-example>
+<masa-example file="Examples.components.editor.BeforeAllUpload"></masa-example>
 
 ### 其他
 
@@ -121,4 +121,4 @@ window.Demo.Quill = {
 
 一些方法示例。
 
-<masa-example file="Examples.editor.Method"></masa-example>
+<masa-example file="Examples.components.editor.Method"></masa-example>

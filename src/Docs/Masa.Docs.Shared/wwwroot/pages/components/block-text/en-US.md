@@ -17,10 +17,10 @@ related:
 
 #### Tags
 
-<masa-example file="Examples.block_text.Tags"></masa-example>
+<masa-example file="Examples.components.block_text.Tags"></masa-example>
 
 ### Contents
 
 #### Custom content
 
-<masa-example file="Examples.block_text.Contents"></masa-example>
+<masa-example file="Examples.components.block_text.Contents"></masa-example>

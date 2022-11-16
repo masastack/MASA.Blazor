@@ -39,56 +39,56 @@ related:
 
 借助 `Collapse` 和 `CollapseOnScroll` 属性，您可以轻松控制用户与之交互的工具栏的状态。
 
-<masa-example file="Examples.app_bars.CollapsibleBars"></masa-example>
+<masa-example file="Examples.components.app_bars.CollapsibleBars"></masa-example>
 
 #### 紧凑
 
 您可以使 **MAppBar** 更加紧凑。 紧凑应用栏的高度低于普通应用栏。
 
-<masa-example file="Examples.app_bars.Dense"></masa-example>
+<masa-example file="Examples.components.app_bars.Dense"></masa-example>
 
 #### 滚动时的高度(z轴)
 
 使用 `ElevateOnScroll` 属性时，**MAppBar** 默认的高度为 0dp，当用户开始向下滚动时，高度会升至 4dp。
 
-<masa-example file="Examples.app_bars.ElevateOnScroll"></masa-example>
+<masa-example file="Examples.components.app_bars.ElevateOnScroll"></masa-example>
 
 #### 滚动时淡入淡出图像
 
 **MAppBar** 的背景图像可以在滚动时淡出。使用 `FadeImgOnScroll` 属性进行此操作。
 
-<masa-example file="Examples.app_bars.FadeImageOnScroll"></masa-example>
+<masa-example file="Examples.components.app_bars.FadeImageOnScroll"></masa-example>
 
 
 #### 滚动隐藏
 
 当设置了 `HideOnScroll` 属性，**MAppBar** 向下滚动时会被隐藏。
 
-<masa-example file="Examples.app_bars.HiddenOnScroll"></masa-example>
+<masa-example file="Examples.components.app_bars.HiddenOnScroll"></masa-example>
 
 #### 图像
 
 **MAppBar** 可以包含背景图像。您可以通过 `Src` 属性设置。 如果您需要自定义 **MImage** ，应用栏将为您提供一个 **ImgContent** 插槽。
 
-<masa-example file="Examples.app_bars.Images"></masa-example>
+<masa-example file="Examples.components.app_bars.Images"></masa-example>
 
 #### 滚动反转
 
 当使用 `InvertedScroll` 属性时，该条将隐藏，直到用户滚动超过指定的阈值。一旦超过阈值，**MAppBar** 将继续显示，直到用户向上滚动超过阈值。如果未提供 `ScrollThreshold` 值，将使用默认值0。
 
-<masa-example file="Examples.app_bars.CollapsibleBars"></masa-example>
+<masa-example file="Examples.components.app_bars.CollapsibleBars"></masa-example>
 
 #### 突出
 
 一个带有 `Prominent` 属性的 **MAppBar** 可以被设置为随着用户滚动而收缩。 当用户滚动浏览内容时，这提供了一个平滑的过渡，以减少视觉空间占用。 收缩高度有 `Dense`（紧密，48px）和 `Short` （短，56px）两种选择。
 
-<masa-example file="Examples.app_bars.Prominent"></masa-example>
+<masa-example file="Examples.components.app_bars.Prominent"></masa-example>
 
 #### 滚动阈值
 
 **MAppBar** 可以有滚动阈值。只有在通过 `ScrollThreshold` 属性定义像素量后，它才会开始对滚动做出反应。
 
-<masa-example file="Examples.app_bars.ScrollThreshold"></masa-example>
+<masa-example file="Examples.components.app_bars.ScrollThreshold"></masa-example>
 
 ### 其他
 
@@ -96,10 +96,10 @@ related:
 
 您可以通过添加 **MMenu** 来轻松地扩展应用栏的功能。 单击最后一个图标以查看其运行情况。
 
-<masa-example file="Examples.app_bars.Menu"></masa-example>
+<masa-example file="Examples.components.app_bars.Menu"></masa-example>
 
 #### 切换导航抽屉
 
 使用函数式组件 **MAppBarNavIcon** 可以切换其他组件的状态，例如 **MNavigationDrawer**。
 
-<masa-example file="Examples.app_bars.ToggleNavigationDrawers"></masa-example>
+<masa-example file="Examples.components.app_bars.ToggleNavigationDrawers"></masa-example>

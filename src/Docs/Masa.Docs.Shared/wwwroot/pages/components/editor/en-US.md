@@ -35,43 +35,43 @@ Examples
 
 `ElementStyle` property set editor height
 
-<masa-example file="Examples.editor.Height"></masa-example>
+<masa-example file="Examples.components.editor.Height"></masa-example>
 
 #### Markdown
 
 markdown
 
-<masa-example file="Examples.editor.Markdown"></masa-example>
+<masa-example file="Examples.components.editor.Markdown"></masa-example>
 
 #### Custom prompt message
 
 The prompt message when a null value is set by setting the `Placeholder` attribute.
 
-<masa-example file="Examples.editor.Placeholder"></masa-example>
+<masa-example file="Examples.components.editor.Placeholder"></masa-example>
 
 #### Readonly
 
 Whether to set the editor instance to read-only mode.
 
-<masa-example file="Examples.editor.ReadOnly"></masa-example>
+<masa-example file="Examples.components.editor.ReadOnly"></masa-example>
 
 #### Theme
 
 Use the name of the topic. This built-in option is `bubble` or `Snow`. Note that the theme's style sheet needs to be included manually.
 
-<masa-example file="Examples.editor.Theme"></masa-example>
+<masa-example file="Examples.components.editor.Theme"></masa-example>
 
 #### Toolbar
 
 Customize **ToolbarContent** through toolbarcontent slots.
 
-<masa-example file="Examples.editor.Toolbar"></masa-example>
+<masa-example file="Examples.components.editor.Toolbar"></masa-example>
 
 #### Upload picture
 
 This is just a demonstration of how to configure the  `Upload`  parameters. Please modify your upload API address.
 
-<masa-example file="Examples.editor.UploadPicture"></masa-example>
+<masa-example file="Examples.components.editor.UploadPicture"></masa-example>
 
 ### Events
 
@@ -113,7 +113,7 @@ window.Demo.Quill = {
 };
 ```
 
-<masa-example file="Examples.editor.BeforeAllUpload"></masa-example>
+<masa-example file="Examples.components.editor.BeforeAllUpload"></masa-example>
 
 ### Misc
 
@@ -121,5 +121,5 @@ window.Demo.Quill = {
 
 Some method examples.
 
-<masa-example file="Examples.editor.Method"></masa-example>
+<masa-example file="Examples.components.editor.Method"></masa-example>
 

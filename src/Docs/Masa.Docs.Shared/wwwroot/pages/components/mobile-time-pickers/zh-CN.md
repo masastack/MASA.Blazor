@@ -15,12 +15,12 @@ related:
 
 格式化每列展示的内容。
 
-<masa-example file="Examples.mobile_time_pickers.Formatter"></masa-example>
+<masa-example file="Examples.components.mobile_time_pickers.Formatter"></masa-example>
 
 #### 最小和最大值
 
-<masa-example file="Examples.mobile_time_pickers.MinMax"></masa-example>
+<masa-example file="Examples.components.mobile_time_pickers.MinMax"></masa-example>
 
 #### 精度
 
-<masa-example file="Examples.mobile_time_pickers.Precision"></masa-example>
+<masa-example file="Examples.components.mobile_time_pickers.Precision"></masa-example>

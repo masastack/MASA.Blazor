@@ -19,12 +19,12 @@ When the `HasMore` prop is `true`, the component will call the defined `OnLoadMo
 
 #### Custom content
 
-<masa-example file="Examples.infinite_scroll.CustomContent"></masa-example>
+<masa-example file="Examples.components.infinite_scroll.CustomContent"></masa-example>
 
 ### Misc
 
 #### Use VirtualScroller
 
-<masa-example file="Examples.infinite_scroll.VirtualScroller"></masa-example>
+<masa-example file="Examples.components.infinite_scroll.VirtualScroller"></masa-example>
 
 

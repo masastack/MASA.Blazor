@@ -21,19 +21,19 @@ The core usage of the **MItemGroup** is to create groups of anything that should
 
 The `ActiveClass` property allows you to set custom CSS class on active items.
 
-<masa-example file="Examples.item_groups.ActiveClass"></masa-example>
+<masa-example file="Examples.components.item_groups.ActiveClass"></masa-example>
 
 #### Mandatory
 
 `Mandatory` item groups must have at least 1 item selected.
 
-<masa-example file="Examples.item_groups.Mandatory"></masa-example>
+<masa-example file="Examples.components.item_groups.Mandatory"></masa-example>
 
 #### Multiple
 
 Multiple items can be selected using the `Multiple` property item group.
 
-<masa-example file="Examples.item_groups.Multiple"></masa-example>
+<masa-example file="Examples.components.item_groups.Multiple"></masa-example>
 
 ### Misc
 
@@ -41,10 +41,10 @@ Multiple items can be selected using the `Multiple` property item group.
 
 Easily hook up a custom chip group.
 
-<masa-example file="Examples.item_groups.Chips"></masa-example>
+<masa-example file="Examples.components.item_groups.Chips"></masa-example>
 
 #### Selection
 
 Icons can be used as toggle buttons when they allow selection, or deselection, of a single choice, such as marking an item as a favorite.
 
-<masa-example file="Examples.item_groups.Selection"></masa-example>
+<masa-example file="Examples.components.item_groups.Selection"></masa-example>

@@ -21,33 +21,33 @@ related:
 
 `Color` prop Colored points can create visual breakpoints, making your timeline easier to read.
 
-<masa-example file="Examples.timelines.Color"></masa-example>
+<masa-example file="Examples.components.timelines.Color"></masa-example>
 
 #### Dense
 
 The `Dense` timeline puts everything on the right. In this example, **MAlert** replaces the card to provide a different
 design.
 
-<masa-example file="Examples.timelines.Dense"></masa-example>
+<masa-example file="Examples.components.timelines.Dense"></masa-example>
 
 #### Icon dots
 
 Conditionally use icons within the **MTimelineItem**'s dot to provide additional context.
 
-<masa-example file="Examples.timelines.IconDots"></masa-example>
+<masa-example file="Examples.components.timelines.IconDots"></masa-example>
 
 #### Reverse
 
 You use the `Reverse` attribute to determine the direction of the timeline item. This can work in both the default
 mode and the `Dense` mode.
 
-<masa-example file="Examples.timelines.Reverse"></masa-example>
+<masa-example file="Examples.components.timelines.Reverse"></masa-example>
 
 #### Small
 
 The `Small` attribute allows different styles to provide unique designs.
 
-<masa-example file="Examples.timelines.Small"></masa-example>
+<masa-example file="Examples.components.timelines.Small"></masa-example>
 
 ### Contents
 
@@ -55,19 +55,19 @@ The `Small` attribute allows different styles to provide unique designs.
 
 Insert avatars into dots with use of the **IconContent** slot and **MAvatar**.
 
-<masa-example file="Examples.timelines.IconContent"></masa-example>
+<masa-example file="Examples.components.timelines.IconContent"></masa-example>
 
 #### OppositeContent
 
 The **OppositeContent** slot provides an extra layer of customization in your timeline.
 
-<masa-example file="Examples.timelines.OppositeContent"></masa-example>
+<masa-example file="Examples.components.timelines.OppositeContent"></masa-example>
 
 #### Default
 
 If you place a **MCard** inside of a **MTimelineItem**, a caret will appear on the side of the card.
 
-<masa-example file="Examples.timelines.TimelineItemDefault"></masa-example>
+<masa-example file="Examples.components.timelines.TimelineItemDefault"></masa-example>
 
 ### Misc
 
@@ -75,4 +75,4 @@ If you place a **MCard** inside of a **MTimelineItem**, a caret will appear on t
 
 Modular components allow you to create highly customized solutions that just work.
 
-<masa-example file="Examples.timelines.Advanced"></masa-example>
+<masa-example file="Examples.components.timelines.Advanced"></masa-example>

@@ -21,7 +21,7 @@ related:
 
 规则允许您对所有表单组件应用自定义验证。这些是按顺序验证的，一次最多显示 1 个错误，因此请确保相应地对规则进行排序。
 
-<masa-example file="Examples.forms.Rules"></masa-example>
+<masa-example file="Examples.components.forms.Rules"></masa-example>
 
 ### 其他
 
@@ -29,29 +29,29 @@ related:
 
 验证也可以通过提交按钮触发。
 
-<masa-example file="Examples.forms.Validation"></masa-example>
+<masa-example file="Examples.components.forms.Validation"></masa-example>
 
 #### 启用I18n
 
 通过 `EnableI18n` 属性启用I18n以支持验证信息多语言。如何使用II8n请跳转I18n。
 
-<masa-example file="Examples.forms.EnableI18n"></masa-example>
+<masa-example file="Examples.components.forms.EnableI18n"></masa-example>
 
 #### 通过提交和清除进行验证
 
 **MForm** 组件有三个功能，可以通过在组件上设置 `ref` 属性来访问。 `ref` 允许我们访问组件的内部方法，例如 `<MForm @ref="_form">`。 `_form.Validate()` 将验证所有输入并返回验证状态。 `_form.Reset()` 将清除所有输入并重置验证状态。 `_form.ResetValidation()` 将只重置输入验证状态，并不改变验证状态。
 
-<masa-example file="Examples.forms.ValidationWithSubmitAndClear"></masa-example>
+<masa-example file="Examples.components.forms.ValidationWithSubmitAndClear"></masa-example>
 
 #### 验证集合
 
 验证集合属性,请注意在集合属性上添加 [EnumerableValidation] Attribute
 
-<masa-example file="Examples.forms.ValidationEnumerable"></masa-example>
+<masa-example file="Examples.components.forms.ValidationEnumerable"></masa-example>
 
 #### 通过 **FluentValidation** 验证集合
 
 **MForm** 支持 **FluentValidation** 验证集合
 
-<masa-example file="Examples.forms.ValidationEnumerableWithFluentValidation"></masa-example>
+<masa-example file="Examples.components.forms.ValidationEnumerableWithFluentValidation"></masa-example>
 

@@ -24,31 +24,31 @@ tag: js-proxy
 
 拖拉区域名称。
 
-<masa-example file="Examples.drag_zone.Group"></masa-example>
+<masa-example file="Examples.components.drag_zone.Group"></masa-example>
 
 #### 参数配置
 
 参数配置。
 
-<masa-example file="Examples.drag_zone.Options"></masa-example>
+<masa-example file="Examples.components.drag_zone.Options"></masa-example>
 
 #### 拖拉
 
 通过指定 `Pull` 属性的值进行拖拉配置。 `true` 允许拖拉，`false` 禁止拖拉。
 
-<masa-example file="Examples.drag_zone.Pull"></masa-example>
+<masa-example file="Examples.components.drag_zone.Pull"></masa-example>
 
 #### 拖放
 
 通过指定 `Put` 属性的值进行拖放配置：true 允许拖放 ，false禁止拖放。
 
-<masa-example file="Examples.drag_zone.Put"></masa-example>
+<masa-example file="Examples.components.drag_zone.Put"></masa-example>
 
 #### 子元素是否可以排序
 
 通过指定 `Sort` 属性的值指定子元素是否可以排序。 `true` 允许排序，`false` 不允许排序。
 
-<masa-example file="Examples.drag_zone.Sort"></masa-example>
+<masa-example file="Examples.components.drag_zone.Sort"></masa-example>
 
 ### 其他
 
@@ -56,17 +56,17 @@ tag: js-proxy
 
 多区域跨区域拖放。
 
-<masa-example file="Examples.drag_zone.MultiyZone"></masa-example>
+<masa-example file="Examples.components.drag_zone.MultiyZone"></masa-example>
 
 #### 克隆
 
 选中的元素克隆拖放。
 
-<masa-example file="Examples.drag_zone.Clone"></masa-example>
+<masa-example file="Examples.components.drag_zone.Clone"></masa-example>
 
 #### 过滤
 
 对元素进行过滤，不符合的不能拖放。
 
-<masa-example file="Examples.drag_zone.Filter"></masa-example>
+<masa-example file="Examples.components.drag_zone.Filter"></masa-example>
 

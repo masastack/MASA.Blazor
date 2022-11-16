@@ -19,13 +19,13 @@ related:
 
 **MDataIterator** 的内部具有选择和扩展状态，就像 **MDataTable** 一样。 在这个示例中，我们在默认插槽上使用使用 `isExpanded` 和 `expand` 。
 
-<masa-example file="Examples.data_iterators.Default"></masa-example>
+<masa-example file="Examples.components.data_iterators.Default"></masa-example>
 
 #### 页眉和页脚
 
 **MDataIterator** 有用于添加额外内容的 `HeaderContent` 和 `FooterContent` 插槽。
 
-<masa-example file="Examples.data_iterators.HeaderAndFooter"></masa-example>
+<masa-example file="Examples.components.data_iterators.HeaderAndFooter"></masa-example>
 
 ### 其它
 
@@ -33,4 +33,4 @@ related:
 
 排序，过滤和分页可以从外部使用单独的属性进行控制。
 
-<masa-example file="Examples.data_iterators.Filter"></masa-example>
+<masa-example file="Examples.components.data_iterators.Filter"></masa-example>

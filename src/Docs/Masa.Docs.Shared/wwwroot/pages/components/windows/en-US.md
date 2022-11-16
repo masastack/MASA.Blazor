@@ -19,19 +19,19 @@ Designed to easily cycle through content, **MWindow** provides a simple interfac
 
 Reverse **MWindow** always displays reverse transition.
 
-<masa-example file="Examples.windows.Reverse"></masa-example>
+<masa-example file="Examples.components.windows.Reverse"></masa-example>
 
 #### Vertical
 
 **MWindow** can be vertical. Vertical windows have Y axis transition instead of X axis transition.
 
-<masa-example file="Examples.windows.Vertical"></masa-example>
+<masa-example file="Examples.components.windows.Vertical"></masa-example>
 
 #### Customized Arrows
 
 Arrows can be customized by using **PrevContent** and **NextContent** slots.
 
-<masa-example file="Examples.windows.CustomizedArrows"></masa-example>
+<masa-example file="Examples.components.windows.CustomizedArrows"></masa-example>
 
 ### Misc
 
@@ -40,10 +40,10 @@ Arrows can be customized by using **PrevContent** and **NextContent** slots.
 Create rich forms with smooth animations. **MWindow** automatically tracks the current selection index to automatically change the transition direction. 
 This can be manually controlled with the `Reverse` prop.
 
-<masa-example file="Examples.windows.AccountCreation"></masa-example>
+<masa-example file="Examples.components.windows.AccountCreation"></masa-example>
 
 #### Onboarding
 
 **MWindow** makes it easy to create custom components such as a different styled stepper.
 
-<masa-example file="Examples.windows.Onboarding"></masa-example>
+<masa-example file="Examples.components.windows.Onboarding"></masa-example>

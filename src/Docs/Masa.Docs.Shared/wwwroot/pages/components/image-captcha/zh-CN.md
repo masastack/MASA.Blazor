@@ -16,8 +16,8 @@ related:
 
 #### TextField 样式
 
-<masa-example file="Examples.image_captcha.TextFieldStyle"></masa-example>
+<masa-example file="Examples.components.image_captcha.TextFieldStyle"></masa-example>
 
 #### 自定义验证码结果
 
-<masa-example file="Examples.image_captcha.VerifyCode"></masa-example>
+<masa-example file="Examples.components.image_captcha.VerifyCode"></masa-example>

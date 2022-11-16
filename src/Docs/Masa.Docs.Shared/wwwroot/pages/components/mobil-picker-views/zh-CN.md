@@ -21,14 +21,14 @@ related:
 级联选择的数据嵌套深度需要一致，如果某些选项没有子选项，则可以使用空字符串作为占位符。
 <!--/alert:warning-->
 
-<masa-example file="Examples.mobil_picker_views.Cascade"></masa-example>
+<masa-example file="Examples.components.mobil_picker_views.Cascade"></masa-example>
 
 #### 禁止选择某项
 
-<masa-example file="Examples.mobil_picker_views.ItemDisabled"></masa-example>
+<masa-example file="Examples.components.mobil_picker_views.ItemDisabled"></masa-example>
 
 #### 自定义项高度
 
 通过 `Itemheight` 可以自定义选项的高度。目前只支持 `px` 。
 
-<masa-example file="Examples.mobile_pickers.ItemHeight"></masa-example>
+<masa-example file="Examples.components.mobile_pickers.ItemHeight"></masa-example>
