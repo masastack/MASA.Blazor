@@ -21,19 +21,19 @@ A stepper can be used for a multitude of scenarios, including shopping carts, re
 
 Steppers also have an alternative label style which places the title under the step itself.
 
-<example file="" />
+<masa-example file="Examples.steppers.AlternateLabel"></masa-example>
 
 #### Non linear
 
 `NonLinear` steppers allow the user to move through your process in whatever way they choose.
 
-<example file="" />
+<masa-example file="Examples.steppers.NonLinear"></masa-example>
 
 #### Vertical
 
 Vertical steppers move users along the y-axis and otherwise work exactly the same as their horizontal counterpart.
 
-<example file="" />
+<masa-example file="Examples.steppers.Vertical"></masa-example>
 
 ### Misc
 
@@ -41,47 +41,53 @@ Vertical steppers move users along the y-axis and otherwise work exactly the sam
 
 The error state can also be applied to the alternative label style.
 
-<example file="" />
+<masa-example file="Examples.steppers.AlternativeLabelWithErrors"></masa-example>
 
 #### Dynamic steps
 
 Steppers can have their steps dynamically added or removed. If a currently active step is removed, be sure to account
 for this by changing the applied model.
 
-<example file="" />
+<masa-example file="Examples.steppers.DynamicSteps"></masa-example>
 
 #### Editable steps
 
 An editable step can be selected by a user at any point and will navigate them to that step.
 
-<example file="" />
+<masa-example file="Examples.steppers.EditableSteps"></masa-example>
 
 #### Errors
 
 An error state can be displayed to notify the user of some action that must be taken.
 
-<example file="" />
+<masa-example file="Examples.steppers.Errors"></masa-example>
 
 #### Horizontal steps
 
 Horizontal steppers move users along the x-axis through the defined steps.
 
-<example file="" />
+<masa-example file="Examples.steppers.HorizontalSteps"></masa-example>
+
+#### Linear steppers
+
+Linear steppers will always move a user through your defined path.
+
+<masa-example file="Examples.steppers.LinearSteppers"></masa-example>
 
 #### Non editable steps
 
 Non-editable steps force a user to process linearly through your process.
 
-<example file="" />
+<masa-example file="Examples.steppers.NonEditableSteps"></masa-example>
 
 #### Optional steps
 
 An optional step can be called out with sub-text.
 
-<example file="" />
+<masa-example file="Examples.steppers.OptionalSteps"></masa-example>
 
 #### Vertical errors
 
 The same state also applies to Vertical steppers.
 
-<example file="" />
+<masa-example file="Examples.steppers.VerticalErrors"></masa-example>

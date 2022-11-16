@@ -21,7 +21,7 @@ related:
 
 `Inset` subheaders are moved 72px to the right. This gives you the option to line them up with list items and inset dividers.
 
-<example file="" />
+<masa-example file="Examples.subheaders.Inset"></masa-example>
 
 ### Misc
 
@@ -29,16 +29,16 @@ related:
 
 A subheader can add context to what a user is looking at.
 
-<example file="" />
+<masa-example file="Examples.subheaders.Grid"></masa-example>
 
 #### Menu
 
 Using subheader can help separate different types of operations.
 
-<example file="" />
+<masa-example file="Examples.subheaders.Menu"></masa-example>
 
 #### Social media
 
 Use subheadings in social media interactions.
 
-<example file="" />
+<masa-example file="Examples.subheaders.SocialMedia"></masa-example>

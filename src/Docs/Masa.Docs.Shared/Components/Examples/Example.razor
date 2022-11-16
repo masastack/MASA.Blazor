@@ -114,10 +114,7 @@
             var executingAssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
             type = Type.GetType($"{executingAssemblyName}.{File}");
 
-            if (type == null)
-            {
-                ArgumentNullException.ThrowIfNull($"{File} does not exists");
-            }
+            ArgumentNullException.ThrowIfNull(type, $"{File} does not exists");
 
             var sourceCode = await DocService.ReadExampleAsync(category, title, type.Name);
 
