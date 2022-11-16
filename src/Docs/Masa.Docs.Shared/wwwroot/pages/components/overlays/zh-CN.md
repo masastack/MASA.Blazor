@@ -21,19 +21,19 @@ related:
 
 使用`Absolute`属性会使遮罩层被放置在绝对位置，并包含在父元素中。
 
-<example file="" />
+<masa-example file="Examples.overlays.Absolute"></masa-example>
 
 #### 透明度
 
 使用`Opacity`属性允许您自定义组件的透明度。
 
-<example file="" />
+<masa-example file="Examples.overlays.Opacity"></masa-example>
 
 #### Z-index
 
 使用`ZIndex`属性使您能够轻松地更改 **MOverlay** 组件的覆盖顺序。
 
-<example file="" />
+<masa-example file="Examples.overlays.ZIndex"></masa-example>
 
 ### 其他
 
@@ -41,10 +41,10 @@ related:
 
 使用 [MHover](/components/hover) 作为背景，添加进度组件来轻松创建自定义加载器。
 
-<example file="" />
+<masa-example file="Examples.overlays.Advanced"></masa-example>
 
 #### 加载器
 
 使用 **MOverlay** 作为背景，添加进度组件来轻松创建自定义加载器。
 
-<example file="" />
+<masa-example file="Examples.overlays.Loader"></masa-example>

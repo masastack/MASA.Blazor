@@ -28,82 +28,82 @@ but with `Reactive` prop they can update the model even after clicking year/mont
 
 You can specify allowed dates using arrays, objects, and functions.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.AllowedDates"></masa-example>
 
 #### Colors
 
 Date picker colors can be set using the Color and `HeaderColor` props. If `HeaderColor` prop is not provided header will
 use the `Color` prop value.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.Colors"></masa-example>
 
 #### Elevation
 
 The **MDatePicker** component supports elevation up to a maximum value of 24. For more information on elevations, visit
 the official [Material Design elevations](https://material.io/design/environment/elevation.html) page.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.Elevation"></masa-example>
 
 #### Icons
 
 Use the `Color`prop You can override the default icons used in the picker.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.Icons"></masa-example>
 
 #### Multiple
 
 Date picker can now select multiple dates with the `Multiple` prop. If using `Multiple` then date picker expects its
 model to be an array.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.Multiple"></masa-example>
 
 #### Picker date
 
 You can watch the `OnPickerDateUpdate` which is the displayed month/year (depending on the picker type and active
 view) to perform some action when it changes. This uses the .sync modifier.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.PickerDate"></masa-example>
 
 #### Range
 
 Date picker can select date range with the  prop. When using `Range` prop date picker expects its model to be
 an array of length 2 or empty.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.Range"></masa-example>
 
 #### Readonly
 
 Selecting new date could be disabled by adding `Readonly` prop.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.Readonly"></masa-example>
 
 #### ShowCurrent
 
 By default the current date is displayed using outlined button - `ShowCurrent` prop allows you to remove the border or select different date to be displayed as the current one.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.ShowCurrent"></masa-example>
 
 #### ShowAdjacentMonths
 
 By default days from previous and next months are not visible. They can be displayed using the `ShowAdjacentMonths` prop.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.ShowSiblingMonths"></masa-example>
 
 #### Width
 
 Use the `Width` prop You can specify the picker’s width or make it full width.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.Width"></masa-example>
 
 ### Event
 
 #### Date buttons(TODO)
 
-<example file="" />
+<masa-example file="Examples.date_pickers.DateButtons"></masa-example>
 
 #### DateEvents(TODO)
 
-<example file="" />
+<masa-example file="Examples.date_pickers.DateEvents"></masa-example>
 
 ### Misc
 
@@ -112,7 +112,7 @@ Use the `Width` prop You can specify the picker’s width or make it full width.
 You can create a birthday picker - starting with year picker by default, restricting dates range and closing the picker
 menu after selecting the day make the perfect birthday picker.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.ActivePicker"></masa-example>
 
 #### DialogAndMenu
 
@@ -122,28 +122,28 @@ keyboards from triggering. To save vertical space, you can also hide the picker 
 Pickers expose a slot that allow you to hook into save and cancel functionality. This will maintain an old value which
 can be replaced if the user cancels.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.DialogAndMenu"></masa-example>
 
 #### Formatting
 
 If you need to display the date in a custom format (different from YYYY-MM-DD), you need to use the `Formatting` prop to format the function.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.Formatting"></masa-example>
 
 #### FormattingWithExternalLibraries(TODO)
 
 Formatting dates is possible also with external libs such as Moment.js or date-fns
 
-<example file="" />
+<masa-example file="Examples.date_pickers.FormattingWithExternalLibraries"></masa-example>
 
 #### Internationalization(TODO)
 
 The date picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the locale prop, and then set the first day of the week with the first-day-of-week prop.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.Internationalization"></masa-example>
 
 #### Orientation
 
 Date pickers come in two orientation variations, portrait (default) and landscape.
 
-<example file="" />
+<masa-example file="Examples.date_pickers.Orientation"></masa-example>

@@ -1,6 +1,6 @@
 ---
 title: Hover（悬停）
-desc: "**MHover** 组件为处理任何组件的悬停状态提供了一个干净的接口。"
+desc: "**MHover** 组件提供了一个干净的界面用来处理任何组件的悬停状态。"
 related:
   - /components/cards
   - /components/images
@@ -19,26 +19,26 @@ related:
 
 #### 禁用
 
-设置 **Disabled** 属性可以禁用悬停功能。
+设置 `Disabled` 属性可以禁用悬停功能。
 
-<example file="" />
+<masa-example file="Examples.hover.Disabled"></masa-example>
 
 #### 打开和关闭延迟
 
 通过组合或单独使用 `OpenDelay` 和 `CloseDelay` 属性延迟 **MHover** 事件。
 
-<example file="" />
+<masa-example file="Examples.hover.Open"></masa-example>
 
 ### 其他
 
 #### 悬停列表
 
-**MHover** 可以与 for 结合使用，以便在用户与列表交互时突出单个项目。
+**MHover** 可以与 `foreach`  结合使用，以便在用户与列表交互时突出单个项目。
 
-<example file="" />
+<masa-example file="Examples.hover.List"></masa-example>
 
 #### 过渡
 
-创建高度定制的组件以响应用户交互。
+创建响应用户交互的高度自定义的组件。
 
-<example file="" />
+<masa-example file="Examples.hover.Transition"></masa-example>

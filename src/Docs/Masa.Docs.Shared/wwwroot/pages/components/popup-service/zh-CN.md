@@ -14,16 +14,16 @@ related:
 
 #### 警告
 
-<example file="" />
+<masa-example file="Examples.popup_service.Alert"></masa-example>
 
 #### 确认
 
-<example file="" />
+<masa-example file="Examples.popup_service.Confirm"></masa-example>
 
 #### 输入确认
 
-<example file="" />
+<masa-example file="Examples.popup_service.Prompt"></masa-example>
 
 #### Toast
 
-<example file="" />
+<masa-example file="Examples.popup_service.Toast"></masa-example>

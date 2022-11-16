@@ -21,4 +21,4 @@ related:
 
 **MSkeletonLoader**可以在创建实体模型时用作样板设计。 混合和匹配各种预定义的选项或创建您自己独特的实现。 在此示例中，我们使用自定义 data 属性来将相同的属性一次应用到多个 **MSkeletonLoader**。
 
-<example file="" />
+<masa-example file="Examples.skeleton_loaders.BoilerplateComponent"></masa-example>

@@ -22,76 +22,76 @@ related:
 You can specify allowed times using arrays, objects, and functions. You can also specify time step/precision/interval -
 e.g. 10 minutes.
 
-<example file="" />
+<masa-example file="Examples.time_pickers.AllowedTimes"></masa-example>
 
 #### AMPMInTitle
 
 You can move AM/PM switch to picker’s title.
 
-<example file="" />
+<masa-example file="Examples.time_pickers.AMPMInTitle"></masa-example>
 
 #### Colors
 
 Time picker colors can be set using the `Color` and `HeaderColor` props. If `HeaderColor` prop is not provided
 header will use the `Color` prop value.
 
-<example file="" />
+<masa-example file="Examples.time_pickers.Colors"></masa-example>
 
 #### Disabled
 
 You can’t interact with disabled picker.
 
-<example file="" />
+<masa-example file="Examples.time_pickers.Disabled"></masa-example>
 
 #### Elevation
 
 Emphasize the **MTimePicker** component by providing an `Elevation` from 0 to 24. Elevation modifies the `box-shadow`
 css property.
 
-<example file="" />
+<masa-example file="Examples.time_pickers.Elevation"></masa-example>
 
 #### Format
 
 A time picker can be switched to 24hr format. Note that the `Format` prop defines only the way the picker is displayed,
 picker’s value (model) is always in 24hr format.
 
-<example file="" />
+<masa-example file="Examples.time_pickers.Format"></masa-example>
 
 #### NoTitle
 
 You can remove picker’s title.
 
-<example file="" />
+<masa-example file="Examples.time_pickers.NoTitle"></masa-example>
 
 #### Range
 
 This is an example of joining pickers together using `Min` and `Max` prop.
 
-<example file="" />
+<masa-example file="Examples.time_pickers.Range"></masa-example>
 
 #### Readonly
 
 use the `Readonly`prop Read-only picker behaves same as disabled one, but looks like default one.
 
-<example file="" />
+<masa-example file="Examples.time_pickers.Readonly"></masa-example>
 
 #### Scrollable
 
 use the `Scrollable`prop You can edit time picker’s value using mouse wheel.
 
-<example file="" />
+<masa-example file="Examples.time_pickers.Scrollable"></masa-example>
 
 #### UseSeconds
 
 use the `UseSeconds`prop Time picker can have seconds input.
 
-<example file="" />
+<masa-example file="Examples.time_pickers.UseSeconds"></masa-example>
 
 #### Width
 
 use the `Width`prop You can specify the picker’s width or make it full width.
 
-<example file="" />
+<masa-example file="Examples.time_pickers.Width"></masa-example>
 
 ### Misc
 
@@ -99,4 +99,4 @@ use the `Width`prop You can specify the picker’s width or make it full width.
 
 Due to the flexibility of pickers, you can really dial in the experience exactly how you want it.
 
-<example file="" />
+<masa-example file="Examples.time_pickers.DialogAndMenu"></masa-example>

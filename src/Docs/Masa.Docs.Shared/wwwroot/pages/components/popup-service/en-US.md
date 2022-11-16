@@ -13,16 +13,16 @@ related:
 
 #### Alert
 
-<example file="" />
+<masa-example file="Examples.popup_service.Alert"></masa-example>
 
 #### Confirm
 
-<example file="" />
+<masa-example file="Examples.popup_service.Confirm"></masa-example>
 
 #### Prompt
 
-<example file="" />
+<masa-example file="Examples.popup_service.Prompt"></masa-example>
 
 #### Toast
 
-<example file="" />
+<masa-example file="Examples.popup_service.Toast"></masa-example>
