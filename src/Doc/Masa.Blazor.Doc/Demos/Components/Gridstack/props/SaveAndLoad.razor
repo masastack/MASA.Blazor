@@ -1,20 +1,48 @@
-﻿<MGridstack Items="@_items"
+﻿@using System.Text.Json
+<div class="d-flex justify-lg-space-around mb-2">
+    <MButton OnClick="OnSave">Save</MButton>
+</div>
+
+<MGridstack Items="@_items"
             ItemKey="item => item.ToString()"
             ItemClass="blue"
             Margin="6"
             TItem="int"
             ItemPosition="ItemPosition"
-            DisableOneColumnMode>
+            DisableOneColumnMode
+            @ref="@_gridstack">
     <ItemContent>
         <div class="text-center">@context</div>
     </ItemContent>
 </MGridstack>
 
+<MDivider />
+
+<MTextarea Readonly
+           Filled
+           HideDetails="true"
+           Value="@_widgetsJson"
+           Style="font-family: monospace;line-height: normal;">
+    <!-- todo: style should assign to <textarea>? -->
+</MTextarea>
+
 @code {
 
     private readonly List<int> _items = Enumerable.Range(1, 11).ToList();
 
-    static GridstackItemPosition ItemPosition(int item)
+    private MGridstack<int>? _gridstack;
+    private string _widgetsJson;
+
+    private async Task OnSave()
+    {
+        var widgets = await _gridstack!.OnSave();
+        _widgetsJson = System.Text.Json.JsonSerializer.Serialize(widgets, new JsonSerializerOptions()
+        {
+            WriteIndented = true
+        });
+    }
+
+    static GridstackWidgetPosition ItemPosition(int item)
     {
         return item switch
         {
@@ -24,7 +52,7 @@
             7 => new(4, 2),
             9 => new(4, 2),
             _ => new(2, 2)
-        };
+            };
     }
 
 }

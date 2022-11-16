@@ -20,8 +20,8 @@ public class GridstackJSModule : JSModule
     public async ValueTask<IJSObjectReference> Reload(IJSObjectReference instance)
         => await InvokeAsync<IJSObjectReference>("reload", instance);
 
-    public async ValueTask<string> Save(IJSObjectReference instance)
-        => await InvokeAsync<string>("save", instance);
+    public async ValueTask<List<GridstackWidget>> Save(IJSObjectReference instance)
+        => await InvokeAsync<List<GridstackWidget>>("save", instance);
 
     [JSInvokable]
     public void OnResize(string id, int width, int height)

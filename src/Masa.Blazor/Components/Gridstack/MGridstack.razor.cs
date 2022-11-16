@@ -18,7 +18,7 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
     public Func<TItem, string> ItemKey { get; set; } = null!;
 
     [Parameter]
-    public Func<TItem, GridstackItemPosition> ItemPosition { get; set; }
+    public Func<TItem, GridstackWidgetPosition> ItemPosition { get; set; }
 
     [Parameter]
     public string? ItemClass { get; set; }
@@ -80,8 +80,6 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
     [Parameter]
     public EventCallback<GridstackResizeEventArgs> OnResize { get; set; }
 
-    
-    
     private string? _prevItemKeys;
     private IJSObjectReference? _gridstackInstance;
 
@@ -153,6 +151,11 @@ public partial class MGridstack<TItem> : BDomComponentBase, IAsyncDisposable
                 await SetStatic(true);
             }
         }
+    }
+
+    public async ValueTask<List<GridstackWidget>> OnSave()
+    {
+        return await Module.Save(_gridstackInstance);
     }
 
     private void GridstackOnResize(object sender, GridstackResizeEventArgs e)
