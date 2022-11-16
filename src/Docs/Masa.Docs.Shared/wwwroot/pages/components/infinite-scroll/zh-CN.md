@@ -19,10 +19,10 @@ related:
 
 #### 自定义内容
 
-<example file="" />
+<masa-example file="Examples.components.infinite_scroll.CustomContent"></masa-example>
 
 ### 其他
 
 #### 使用虚拟滚动条
 
-<example file="" />
+<masa-example file="Examples.components.infinite_scroll.VirtualScroller"></masa-example>

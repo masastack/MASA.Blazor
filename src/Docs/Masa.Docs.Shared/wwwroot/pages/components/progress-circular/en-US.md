@@ -21,23 +21,23 @@ In its simplest form, **MProgressCircular** displays a circular progress bar. Us
 
 You can use the `Color` attribute to set other colors for **MProgressCircular**.
 
-<example file="" />
+<masa-example file="Examples.components.progress_circular.Color"></masa-example>
 
 #### Indeterminate
 
 Using the `Indeterminate` prop, a **MProgressCircular** continues to animate indefinitely.
 
-<example file="" />
+<masa-example file="Examples.components.progress_circular.Indeterminate"></masa-example>
 
 #### Rotate
 
 The `Rotate` prop gives you the ability to customize the **MProgressCircular**'s origin.
 
-<example file="" />
+<masa-example file="Examples.components.progress_circular.Rotate"></masa-example>
 
 #### SizeOrWidth
 
 The `Size` and `Width` properties allow you to easily modify the size and width of the **MProgressCircular**
 component.
 
-<example file="" />
+<masa-example file="Examples.components.progress_circular.SizeOrWidth"></masa-example>

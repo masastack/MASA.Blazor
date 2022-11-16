@@ -18,26 +18,26 @@ related:
 
 #### 操作属性
 
-<example file="" />
+<masa-example file="Examples.components.modals.ActionProps"></masa-example>
 
 #### 操作
 
-<example file="" />
+<masa-example file="Examples.components.modals.Actions"></masa-example>
 
 #### 表单对象
 
-<example file="" />
+<masa-example file="Examples.components.modals.FormModel"></masa-example>
 
 #### 自动滚动到顶部
 
-<example file="" />
+<masa-example file="Examples.components.modals.ScrollToTopOnHide"></masa-example>
 
 #### 没有触发器
 
-<example file="" />
+<masa-example file="Examples.components.modals.WithoutActivator"></masa-example>
 
 ### 插槽
 
 #### 自定义操作
 
-<example file="" />
+<masa-example file="Examples.components.modals.CustomActions"></masa-example>

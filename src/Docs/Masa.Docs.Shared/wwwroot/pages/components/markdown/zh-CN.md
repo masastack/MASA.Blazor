@@ -30,43 +30,43 @@ Markdown编辑器示例
 
 配置 [Options](https://ld246.com/article/1549638745630#options) 属性设置计数器
 
-<example file="" />
+<masa-example file="Examples.components.markdown.Counter"></masa-example>
 
 #### 自定义宽高
 
 配置 [Options](https://ld246.com/article/1549638745630#options) 属性设置高度
 
-<example file="" />
+<masa-example file="Examples.components.markdown.HeightAndWidth"></masa-example>
 
 #### 模式
 
 配置 [Options](https://ld246.com/article/1549638745630#options) 属性设置模式,支持sv、 ir、wysiwyg
 
-<example file="" />
+<masa-example file="Examples.components.markdown.Mode"></masa-example>
 
 #### 只读
 
 是否设置为只读模式。
 
-<example file="" />
+<masa-example file="Examples.components.markdown.Readonly"></masa-example>
 
 #### 主题
 
 配置 [Options](https://ld246.com/article/1549638745630#options) 属性设置主题
 
-<example file="" />
+<masa-example file="Examples.components.markdown.Theme"></masa-example>
 
 #### 自定义工具栏
 
 配置 [Options](https://ld246.com/article/1549638745630#options) 属性设置工具栏
 
-<example file="" />
+<masa-example file="Examples.components.markdown.Toolbar"></masa-example>
 
 #### 上传
 
 配置 [Options](https://ld246.com/article/1549638745630#options) 属性设置上传参数，这里只是演示如何配置upload参数，请修改你的上传api地址。
 
-<example file="" />
+<masa-example file="Examples.components.markdown.Upload"></masa-example>
 
 ### 事件
 
@@ -111,10 +111,10 @@ window.Demo.Vditor = {
 };
 ```
 
-<example file="" />
+<masa-example file="Examples.components.markdown.BeforeAllUpload"></masa-example>
 
 #### 一些事件
 
 focus、blur、select、esc、ctrl+enter等事件，更多事件请参考api。
 
-<example file="" />
+<masa-example file="Examples.components.markdown.SomeEvents"></masa-example>

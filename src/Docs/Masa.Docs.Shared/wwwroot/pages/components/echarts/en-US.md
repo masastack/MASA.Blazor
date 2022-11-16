@@ -24,24 +24,24 @@ You need to reference the package of ECharts before using it:
 
 Use `Dark` prop to switch to the dark theme.
 
-<masa-example file="Examples.echarts.Dark"></masa-example>
+<masa-example file="Examples.components.echarts.Dark"></masa-example>
 
 #### HeightAndWidth
 
 `Height` and `Width` property set chart height,width
 
-<masa-example file="Examples.echarts.HeightAndWidth"></masa-example>
+<masa-example file="Examples.components.echarts.HeightAndWidth"></masa-example>
 
 #### Locale
 
 Specify the locale. For more information, please refer to ECharts official documentation.
 
-<masa-example file="Examples.echarts.Locale"></masa-example>
+<masa-example file="Examples.components.echarts.Locale"></masa-example>
 
 #### Theme
 
 Specify the theme. Light and dark themes are supported by default. You can use [custom themes](https://echarts.apache.org/handbook/en/concepts/style/#theme). In this example, the **vintage** theme can be set after importing the vintage.js file in HTML.
 
-<masa-example file="Examples.echarts.Theme"></masa-example>
+<masa-example file="Examples.components.echarts.Theme"></masa-example>
 
 

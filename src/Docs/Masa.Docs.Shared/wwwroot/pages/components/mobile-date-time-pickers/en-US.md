@@ -15,12 +15,12 @@ related:
 
 Format the content displayed in each column.
 
-<masa-example file="Examples.mobile_date_time_pickers.Formatter"></masa-example>
+<masa-example file="Examples.components.mobile_date_time_pickers.Formatter"></masa-example>
 
 #### Min and max
 
-<masa-example file="Examples.mobile_date_time_pickers.MinMax"></masa-example>
+<masa-example file="Examples.components.mobile_date_time_pickers.MinMax"></masa-example>
 
 #### Precision
 
-<masa-example file="Examples.mobile_date_time_pickers.Precision"></masa-example>
+<masa-example file="Examples.components.mobile_date_time_pickers.Precision"></masa-example>

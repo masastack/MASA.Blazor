@@ -1,0 +1,8 @@
+﻿<MRow>
+    @foreach (var value in new string[4] { "-sm", "", "-lg", "-xl"})
+    {
+        <MCol Cols="12" Md="3">
+            <div class="@($"pa-4 text-center secondary text-no-wrap rounded{value}")">@($".rounded{value}")</div>
+        </MCol>
+    }
+</MRow>

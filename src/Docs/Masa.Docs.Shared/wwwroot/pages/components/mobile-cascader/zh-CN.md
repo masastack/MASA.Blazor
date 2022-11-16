@@ -13,8 +13,8 @@ related:
 
 #### 加载子项
 
-<masa-example file="Examples.mobile_cascader.LoadChildren"></masa-example>
+<masa-example file="Examples.components.mobile_cascader.LoadChildren"></masa-example>
 
 #### 确认事件
 
-<masa-example file="Examples.mobile_cascader.OnConfirm"></masa-example>
+<masa-example file="Examples.components.mobile_cascader.OnConfirm"></masa-example>

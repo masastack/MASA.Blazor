@@ -17,10 +17,10 @@ related:
 
 #### 标签
 
-<masa-example file="Examples.block_text.Tags"></masa-example>
+<masa-example file="Examples.components.block_text.Tags"></masa-example>
 
 ### 插槽
 
 #### 自定义内容
 
-<masa-example file="Examples.block_text.Contents"></masa-example>
+<masa-example file="Examples.components.block_text.Contents"></masa-example>

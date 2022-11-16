@@ -21,31 +21,31 @@ related:
 
 **MRating**  组件可以根据您的需要进行着色，您可以设置选定和未选定的颜色。
 
-<example file="" />
+<masa-example file="Examples.components.ratings.Color"></masa-example>
 
 #### 图标标签
 
 为图标的提供标签。
 
-<example file="" />
+<masa-example file="Examples.components.ratings.IconLabel"></masa-example>
 
 #### 增量
 
 **MRating** 有3个定义的图标，全图标、半图标和空图标。
 
-<example file="" />
+<masa-example file="Examples.components.ratings.Incremented"></masa-example>
 
 #### 长度
 
 可以使用 **MSilder** 组件轻松更改 **MRating** 组件的长度。
 
-<example file="" />
+<masa-example file="Examples.components.ratings.Length"></masa-example>
 
 #### 尺寸
 
 使用 **MButton** 中提供的相同尺寸等级，或提供您自己的`Size`属性。
 
-<example file="" />
+<masa-example file="Examples.components.ratings.Size"></masa-example>
 
 ### 插槽
 
@@ -53,7 +53,7 @@ related:
 
 提供插槽是为了让您在显示评级的方式上有更多的自由。
 
-<example file="" />
+<masa-example file="Examples.components.ratings.ItemContent"></masa-example>
 
 ### 其他
 
@@ -61,10 +61,10 @@ related:
 
 **MRating** 组件可与现有组件相匹配。 用丰富的功能和漂亮的设计构建复杂的例子。
 
-<example file="" />
+<masa-example file="Examples.components.ratings.Advanced"></masa-example>
 
 #### 卡片评级
 
 **MRating** 组件与产品搭配良好，使你能够收集和显示客户反馈。
 
-<example file="" />
+<masa-example file="Examples.components.ratings.Card"></masa-example>

@@ -21,7 +21,7 @@ The internal **MForm** component makes it easy to add validation to form input. 
 
 Rules allow you to apply custom validation on all form components. These are verified in order, and  maximum  errors will be displayed each time, so please make sure you sort the rules accordingly.
 
-<masa-example file="Examples.forms.Rules"></masa-example>
+<masa-example file="Examples.components.forms.Rules"></masa-example>
 
 ### Misc
 
@@ -29,28 +29,28 @@ Rules allow you to apply custom validation on all form components. These are ver
 
 Verification can also be triggered through the submit button.
 
-<masa-example file="Examples.forms.Validation"></masa-example>
+<masa-example file="Examples.components.forms.Validation"></masa-example>
 
 #### Enable I18n
 
 Enable I18n to support multilingual validation messages.How to use `II8n` please jump [I18n](I18n/features/internationalization).
 
-<masa-example file="Examples.forms.EnableI18n"></masa-example>
+<masa-example file="Examples.components.forms.EnableI18n"></masa-example>
 
 #### Validation with submit & clear
 
 **MForm** component has three functions, which can be accessed by setting ref on the component. Ref allows us to access the internal methods of components, such as `<MForm @ref = "_form" > `_ form.Validate() validates all inputs and returns whether they are valid._form.Reset() clears all inputs and resets validation errors._ form.Resetvalidation() will only reset input validation without changing their state.
 
-<masa-example file="Examples.forms.ValidationWithSubmitAndClear"></masa-example>
+<masa-example file="Examples.components.forms.ValidationWithSubmitAndClear"></masa-example>
 
 #### Validation enumerable
 
 Verify the collection properties and add [enumerable validation]
 
-<masa-example file="Examples.forms.ValidationEnumerable"></masa-example>
+<masa-example file="Examples.components.forms.ValidationEnumerable"></masa-example>
 
 #### Validation enumerable(FluentValidation)
 
 **MForm** supports FluentValidation validation, take validation collection as an example
 
-<masa-example file="Examples.forms.ValidationEnumerableWithFluentValidation"></masa-example>
+<masa-example file="Examples.components.forms.ValidationEnumerableWithFluentValidation"></masa-example>

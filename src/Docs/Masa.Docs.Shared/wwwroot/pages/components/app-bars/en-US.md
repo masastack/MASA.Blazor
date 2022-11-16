@@ -37,38 +37,38 @@ If you choose to wrap the buttons in any container, such as `div`, you need to a
 
 With the `collapse` and `collapse-on-scroll` props you can easily control the state of toolbar that the user interacts with.
 
-<masa-example file="Examples.app_bars.CollapsibleBars"></masa-example>
+<masa-example file="Examples.components.app_bars.CollapsibleBars"></masa-example>
 
 #### Dense
 
 You can make MAppBar dense. A dense app bar has lower height than regular one.
 
-<masa-example file="Examples.app_bars.Dense"></masa-example>
+<masa-example file="Examples.components.app_bars.Dense"></masa-example>
 
 #### Elevate on scroll 
 
 When using the **ElevateOnScroll** prop, the **MAppBar** will rest at an elevation of 0dp until the user begins to scroll
 down. Once scrolling, the bar raises to 4dp.
 
-<masa-example file="Examples.app_bars.ElevateOnScroll"></masa-example>
+<masa-example file="Examples.components.app_bars.ElevateOnScroll"></masa-example>
 
 #### Fade image on scroll
 
 The background image of a **MAppBar** can fade on scroll. Use the **FadeImgOnScroll** property for this.
 
-<masa-example file="Examples.app_bars.FadeImageOnScroll"></masa-example>
+<masa-example file="Examples.components.app_bars.FadeImageOnScroll"></masa-example>
 
 #### Hidden on scroll
 
 **MAppBar** can be hidden on scroll. Use the `HideOnScroll` property for this.
 
-<masa-example file="Examples.app_bars.HiddenOnScroll"></masa-example>
+<masa-example file="Examples.components.app_bars.HiddenOnScroll"></masa-example>
 
 #### Images
 
 **MAppBar** can contain background images. You can set source via the `Src` prop. If you need to customize the **MImage**, the app-bar provides you with an **ImgContent** slot.
 
-<masa-example file="Examples.app_bars.Images"></masa-example>
+<masa-example file="Examples.components.app_bars.Images"></masa-example>
 
 #### Inverted scrolling
 
@@ -76,7 +76,7 @@ When using the `InvertedScroll` property, the bar will hide until the user scrol
 past the threshold, the `MAppBar` will continue to display until the users scrolls up past the threshold. If no **
 ScrollThreshold** value is supplied a default value of 0 will be used.
 
-<masa-example file="Examples.app_bars.CollapsibleBars"></masa-example>
+<masa-example file="Examples.components.app_bars.CollapsibleBars"></masa-example>
 
 #### Prominent
 
@@ -84,14 +84,14 @@ An **MAppBar** with the `Prominent` prop can opt to have its height shrunk as th
 smooth transition to taking up less visual space when the user is scrolling through content. Shrink height has 2
 possible options, `Dense` (48px) and `Short` (56px) sizes.
 
-<masa-example file="Examples.app_bars.Prominent"></masa-example>
+<masa-example file="Examples.components.app_bars.Prominent"></masa-example>
 
 #### Scroll threshold
 
 **MAppBar** can have scroll threshold. It will start reacting to scroll only after defined via `ScrollThreshold`
 property amount of pixels.
 
-<masa-example file="Examples.app_bars.ScrollThreshold"></masa-example>
+<masa-example file="Examples.components.app_bars.ScrollThreshold"></masa-example>
 
 ### Misc
 
@@ -99,11 +99,11 @@ property amount of pixels.
 
 You can easily extend the functionality of app bar by adding **MMenu** there. Click on last icon to see it in action.
 
-<masa-example file="Examples.app_bars.Menu"></masa-example>
+<masa-example file="Examples.components.app_bars.Menu"></masa-example>
 
 #### Toggle navigation drawers
 
 Using the functional component **MAppBarNavIcon** you can toggle the state of other components such as
 a [**MNavigationDrawer**](/components/navigation-drawers).
 
-<masa-example file="Examples.app_bars.ToggleNavigationDrawers"></masa-example>
+<masa-example file="Examples.components.app_bars.ToggleNavigationDrawers"></masa-example>

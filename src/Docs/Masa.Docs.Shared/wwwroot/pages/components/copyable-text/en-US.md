@@ -17,16 +17,16 @@ related:
 
 #### Icon
 
-<masa-example file="Examples.copyable_text.Icon"></masa-example>
+<masa-example file="Examples.components.copyable_text.Icon"></masa-example>
 
 #### Text
 
-<masa-example file="Examples.copyable_text.Text"></masa-example>
+<masa-example file="Examples.components.copyable_text.Text"></masa-example>
 
 #### Text truncate
 
-<masa-example file="Examples.copyable_text.TextTruncate"></masa-example>
+<masa-example file="Examples.components.copyable_text.TextTruncate"></masa-example>
 
 #### Tooltip
 
-<masa-example file="Examples.copyable_text.Tooltip"></masa-example>
+<masa-example file="Examples.components.copyable_text.Tooltip"></masa-example>

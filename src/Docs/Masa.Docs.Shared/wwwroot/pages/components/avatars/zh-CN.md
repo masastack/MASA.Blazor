@@ -23,13 +23,13 @@ related:
 
 `Size` 属性允许你定义 **MAvatar** 的高度和宽度。此属性以1比1的纵横比均匀进行缩放。如果 `Size` 属性与 `Height` 和 `Width` 属性一起使用，那么 `Size` 属性将会被覆盖。
 
-<masa-example file="Examples.avatars.Size"></masa-example>
+<masa-example file="Examples.components.avatars.Size"></masa-example>
 
 #### 方块
 
 `Tile` 属性移除了 **MAvatar** 的边界半径，只留下一个简单的方形头像。
 
-<masa-example file="Examples.avatars.Tile"></masa-example>
+<masa-example file="Examples.components.avatars.Tile"></masa-example>
 
 ### 插槽
 
@@ -37,7 +37,7 @@ related:
 
 **MAvatar** 默认插槽可以配合 **MIcon** 组件、图片或文本一起使用。 将这些属性与其他组件混合搭配以创造出独一无二的东西。
 
-<masa-example file="Examples.avatars.Default"></masa-example>
+<masa-example file="Examples.components.avatars.Default"></masa-example>
 
 ### 其他
 
@@ -45,18 +45,18 @@ related:
 
 将头像与其他组件组合在一起，您就可以构建出漂亮的用户界面。
 
-<masa-example file="Examples.avatars.Other"></masa-example>
+<masa-example file="Examples.components.avatars.Other"></masa-example>
 
 #### 菜单
 
 例：将头像和菜单结合起来。
 
-<masa-example file="Examples.avatars.Menu"></masa-example>
+<masa-example file="Examples.components.avatars.Menu"></masa-example>
 
 #### 个人名片
 
 使用 `Tile` 属性，我们可以创建一个名片。
 
-<masa-example file="Examples.avatars.BusinessCard"></masa-example>
+<masa-example file="Examples.components.avatars.BusinessCard"></masa-example>
 
 

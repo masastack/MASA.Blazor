@@ -19,19 +19,19 @@ related:
 
 反转 **MWindow** 总是显示反向过渡。
 
-<masa-example file="Examples.windows.Reverse"></masa-example>
+<masa-example file="Examples.components.windows.Reverse"></masa-example>
 
 #### 垂直
 
 **MWindow** 可以是垂直的。 垂直窗口有 Y 轴过渡而不是 X 轴过渡。
 
-<masa-example file="Examples.windows.Vertical"></masa-example>
+<masa-example file="Examples.components.windows.Vertical"></masa-example>
 
 #### 自定义箭头按钮
 
 可以用 **PrevContent** 和 **NextContent** 槽来自定义窗口中的箭头部分。
 
-<masa-example file="Examples.windows.CustomizedArrows"></masa-example>
+<masa-example file="Examples.components.windows.CustomizedArrows"></masa-example>
 
 ### 其他
 
@@ -39,10 +39,10 @@ related:
 
 创建具有平滑动画的丰富表单。 **MWindow** 能够自动跟踪当前的选择索引，来改变过渡动画的方向。 这可以通过 `Reverse` 参数来手动控制。
 
-<masa-example file="Examples.windows.AccountCreation"></masa-example>
+<masa-example file="Examples.components.windows.AccountCreation"></masa-example>
 
 #### 新手教学
 
 **MWindow** 使创建自定义组件（如不同样式的幻灯片）变得很轻松。
 
-<masa-example file="Examples.windows.Onboarding"></masa-example>
+<masa-example file="Examples.components.windows.Onboarding"></masa-example>

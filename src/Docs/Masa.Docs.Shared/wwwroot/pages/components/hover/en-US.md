@@ -19,15 +19,15 @@ The **MHover** component is a wrapper that should contain only one child element
 
 #### Disabled
 
-Set the **Disabled** property to disable the hover function.
+Set the `Disabled` property to disable the hover function.
 
-<example file="" />
+<masa-example file="Examples.components.hover.Disabled"></masa-example>
 
 #### Open
 
 Delay the **MHover** event by combining or using the `OpenDelay` and `CloseDelay` properties alone.
 
-<example file="" />
+<masa-example file="Examples.components.hover.Open"></masa-example>
 
 ### Misc
 
@@ -35,10 +35,10 @@ Delay the **MHover** event by combining or using the `OpenDelay` and `CloseDelay
 
 **MHover** can be used in conjunction with for to highlight individual items when the user interacts with the list.
 
-<example file="" />
+<masa-example file="Examples.components.hover.List"></masa-example>
 
 #### Transition
 
 Create highly customized components in response to user interaction.
 
-<example file="" />
+<masa-example file="Examples.components.hover.Transition"></masa-example>

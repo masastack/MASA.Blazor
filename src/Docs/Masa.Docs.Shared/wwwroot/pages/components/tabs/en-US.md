@@ -33,56 +33,56 @@ When using **MTabItem**'s that contain required input fields you must use the `e
 Make **MTabs** lined up with the **MToolbarTitle** component using the `AlignWithTitle` prop (**MAppBarNavIcon**
 or **MButton** must be used in **MToolbar**).
 
-<example file="" />
+<masa-example file="Examples.components.tabs.AlignWithTitle"></masa-example>
 
 #### Center active
 
 The `CenterActive` prop will make the active tab always centered.
 
-<example file="" />
+<masa-example file="Examples.components.tabs.CenterActive"></masa-example>
 
 #### Custom icons
 
 `PrevIcon` and `NextIcon` can be used for applying custom pagination icons.
 
-<example file="" />
+<masa-example file="Examples.components.tabs.CustomIcons"></masa-example>
 
 #### Fixed tabs
 
 The `FixedTabs` prop forces **MTab** to take up all available space up to the maximum width (300px).
 
-<example file="" />
+<masa-example file="Examples.components.tabs.FixedTabs"></masa-example>
 
 #### Grow
 
 The `Grow` prop will make the tab items take up all available space up to a maximum width of 300px.
 
-<example file="" />
+<masa-example file="Examples.components.tabs.Grow"></masa-example>
 
 #### Icon ant text
 
 Using `IconsWithText` prop increases the **MTabs**s height to 72x to allow for both icons as well as text to be used.
 
-<example file="" />
+<masa-example file="Examples.components.tabs.IconAndText"></masa-example>
 
 #### Pagination
 
 If the tab items overflow their container, pagination controls will appear on desktop. For mobile devices, arrows will
 only display with the `ShowArrows` prop.
 
-<example file="" />
+<masa-example file="Examples.components.tabs.Pagination"></masa-example>
 
 #### Right
 
 The `Right` prop aligns the tabs to the right.
 
-<example file="" />
+<masa-example file="Examples.components.tabs.Right"></masa-example>
 
 #### VerticalTabs
 
 The `Vertical` prop allows for **MTab** components to stack vertically.
 
-<example file="" />
+<masa-example file="Examples.components.tabs.VerticalTabs"></masa-example>
 
 ### Misc
 
@@ -90,34 +90,34 @@ The `Vertical` prop allows for **MTab** components to stack vertically.
 
 It is common to put **MTabs** inside the extension slot of **MToolbar**. Using **MToolbar**'s tabs prop auto adjusts its height to 48px to match `MTabs`.
 
-<example file="" />
+<masa-example file="Examples.components.tabs.Content"></masa-example>
 
 #### Desktop Tabs
 
 You can represent **MTabs** actions by using single icons. This is useful when it is easy to correlate content to each tab.
 
-<example file="" />
+<masa-example file="Examples.components.tabs.DesktopTabs"></masa-example>
 
 #### Dynamic Height
 
 When changing your **MTabItem**, the content area will smoothly scale to the new size.
 
-<example file="" />
+<masa-example file="Examples.components.tabs.DynamicHeight"></masa-example>
 
 #### Dynamic Tabs
 
 Tabs can be dynamically added and removed. This allows you to update to any number and the **MTabs** component will react. In this example when we add a new tab, we automatically change our model to match. As we add more tabs and overflow the container, the selected item will be automatically scrolled into view. Remove all **MTabs** and the slider will disappear.
 
-<example file="" />
+<masa-example file="Examples.components.tabs.DynamicTabs"></masa-example>
 
 #### Overflow to Menu
 
 You can use a menu to hold additional tabs, swapping them out on the fly.
 
-<example file="" />
+<masa-example file="Examples.components.tabs.OverflowToMenu"></masa-example>
 
 #### TabItems
 
 The **MTabsItems** component allows for you to customize the content per tab. Using a shared variable, the **MTabsItems** will sync with the currently selected **MTab**.
 
-<example file="" />
+<masa-example file="Examples.components.tabs.TabItems"></masa-example>

@@ -22,4 +22,4 @@ The `Vertical` property allows you to stack the contents of **MSnackbar**.
 
 The MSkeletonLoader can be used as boilerplate designs when creating mockups. Mix and match various pre-defined options or create your own unique implementations. In this example, we use a custom data property to apply the same props to multiple MSkeletonLoader's at once.
 
-<example file="" />
+<masa-example file="Examples.components.skeleton_loaders.BoilerplateComponent"></masa-example>

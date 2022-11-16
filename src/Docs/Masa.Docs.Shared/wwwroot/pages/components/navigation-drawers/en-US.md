@@ -32,14 +32,14 @@ The `ExpandOnHover` prop does not alter the content area of **MMain**. To have c
 
 Using the `Bottom` prop, we can reposition the drawer on the mobile device so that it emerges from the bottom of the screen. This is another style, which can only be activated when MobileBreakpoint is encountered.
 
-<example file="" />
+<masa-example file="Examples.components.navigation_drawers.Bottom"></masa-example>
 
 #### Expand on hover
 
 Place the component in `MiniVariant` mode and expand when hovering. The content area of **MMain** that does not change.
 The width can be controlled using the `MiniVariantWidth` property.
 
-<example file="" />
+<masa-example file="Examples.components.navigation_drawers.ExpandOnHover"></masa-example>
 
 #### Permanent and floating
 
@@ -47,21 +47,21 @@ By default, the navigation drawer has a 1px `Right` border to separate it from t
 separate the drawer from the left and let it float by itself. The `Floating` property can remove the right border (if
 `Right` is used, the left border is removed).
 
-<example file="" />
+<masa-example file="Examples.components.navigation_drawers.Floating"></masa-example>
 
 #### Image
 
 Apply a custom background to the drawer through the `Src` attribute. If you need to customize the properties
 of **MImage**, you can use the `ImgContent`.
 
-<example file="" />
+<masa-example file="Examples.components.navigation_drawers.Image"></masa-example>
 
 #### Mini variant
 
 When using the `MiniVariant` property, the drawer will shrink (56px by default) and hide all the contents in the **Mlist**
 except the first element.
 
-<example file="" />
+<masa-example file="Examples.components.navigation_drawers.Mini"></masa-example>
 
 #### Right
 
@@ -69,13 +69,13 @@ The navigation drawer can also be placed on the right side of the application (o
 creating side tables with auxiliary information that may not have any navigation links. When using **RTL**, you must clearly
 define `Right` for the drawer.
 
-<example file="" />
+<masa-example file="Examples.components.navigation_drawers.Right"></masa-example>
 
 #### Temporary
 
 use the `Temporary` prop The application that temporarily locates it starts, and this behavior is the default on the mobile device.
 
-<example file="" />
+<masa-example file="Examples.components.navigation_drawers.Temporary"></masa-example>
 
 ### Misc
 
@@ -84,11 +84,11 @@ use the `Temporary` prop The application that temporarily locates it starts, and
 The navigation drawer can be customized to fit the design of any application. Here we use the **AppendContent** to customize
 the background color and additional content area.
 
-<example file="" />
+<masa-example file="Examples.components.navigation_drawers.Color"></masa-example>
 
 #### Constitute drawer
 
 In this example, we defined a custom width to accommodate nested drawers. We use **MRow** to ensure that the drawer and
 the list are horizontally adjacent to each other.
 
-<example file="" />
+<masa-example file="Examples.components.navigation_drawers.Constitute"></masa-example>

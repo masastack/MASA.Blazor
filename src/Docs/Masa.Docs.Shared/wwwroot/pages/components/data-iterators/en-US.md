@@ -1,6 +1,6 @@
 ---
 title: Data iterators
-desc: "The MDataIterator component is used for displaying data, and shares a majority of its functionality with the MDataTable component. Features include sorting, searching, pagination, and selection."
+desc: "The **MDataIterator** component is used for displaying data, and shares a majority of its functionality with the **MDataTable** component. Features include sorting, searching, pagination, and selection."
 related:
   - /components/data-tables
   - /components/simple-tables
@@ -20,13 +20,13 @@ related:
 The **MDataIterator** has internal state for both selection and expansion, just like **MDataTable**. In this example we use
 the methods isExpanded and expand available on the default slot.
 
-<example file="" />
+<masa-example file="Examples.components.data_iterators.Default"></masa-example>
 
 #### Header and footer
 
 The **MDataIterator**  has both a `HeaderContent` and `FooterContent` slot for adding extra content.
 
-<example file="" />
+<masa-example file="Examples.components.data_iterators.HeaderAndFooter"></masa-example>
 
 ### Misc
 
@@ -34,4 +34,4 @@ The **MDataIterator**  has both a `HeaderContent` and `FooterContent` slot for a
 
 Order, filters and pagination can be controlled externally by using the individual props.
 
-<example file="" />
+<masa-example file="Examples.components.data_iterators.Filter"></masa-example>

@@ -1,19 +1,11 @@
 ---
-category: Components
-type: Tooltip
-title: Tooltips
-cols: 1
+title: Tooltip
+desc: "The **MTooltip** component is useful for conveying information when a user hovers over an element. You can also programmatically control the display of tooltips through a `@bind-Value`. When activated, tooltips display a text label identifying an element, such as a description of its function."
 related:
   - /components/badges
   - /components/icons
   - /components/menus
 ---
-
-# Tooltips
-
-The **MTooltip** component is useful for conveying information when a user hovers over an element. You can also
-programmatically control the display of tooltips through a `@bind-Value`. When activated, tooltips display a text
-label identifying an element, such as a description of its function.
 
 ## Usage
 
@@ -38,10 +30,10 @@ In order to correctly position **MTooltip**, a position support (` top ` | 'bott
 
 A tooltip can be aligned to any of the four sides of the activator element.
 
-<example file="" />
+<masa-example file="Examples.components.tooltips.Alignment"></masa-example>
 
 #### Visibility
 
 Tooltip visibility can be programmatically changed using `@bind-Value`.
 
-<example file="" />
+<masa-example file="Examples.components.tooltips.Visibility"></masa-example>

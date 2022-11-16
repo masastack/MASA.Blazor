@@ -21,19 +21,19 @@ related:
 
 底部工作表可以被嵌入，将桌面上的最大宽度减少到70%。 可以使用 `Width` 属性来进一步手动减少这种情况。
 
-<masa-example file="Examples.bottom_sheets.Inset"></masa-example>
+<masa-example file="Examples.components.bottom_sheets.Inset"></masa-example>
 
 #### 模型
 
 底部工作表可以使用 **@bind-Value** 来控制。 你可以使用它来关闭他们，或者如果你不能使用 **ActivatorContent** 插槽。
 
-<masa-example file="Examples.bottom_sheets.Model"></masa-example>
+<masa-example file="Examples.components.bottom_sheets.Model"></masa-example>
 
 #### 保留
 
 保留的底部工作表无法通过在外部单击来关闭。
 
-<masa-example file="Examples.bottom_sheets.Persistent"></masa-example>
+<masa-example file="Examples.components.bottom_sheets.Persistent"></masa-example>
 
 ### 其他
 
@@ -41,10 +41,10 @@ related:
 
 使用嵌入式底部工作表，你可以制作一些实用的组件，比如这个简单的音乐播放器。
 
-<masa-example file="Examples.bottom_sheets.MusicPlayer"></masa-example>
+<masa-example file="Examples.components.bottom_sheets.MusicPlayer"></masa-example>
 
 #### 在列表中打开
 
 通过将功能列表合并到底部表单中，您可以创建一个简单的 ‘OpEN IN’ 组件。
 
-<masa-example file="Examples.bottom_sheets.OpenInList"></masa-example>
+<masa-example file="Examples.components.bottom_sheets.OpenInList"></masa-example>

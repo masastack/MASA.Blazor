@@ -21,22 +21,22 @@ related:
 
 可以使用 `Color` 属性为 **MProgressCircular** 设置其他颜色。
 
-<example file="" />
+<masa-example file="Examples.components.progress_circular.Color"></masa-example>
 
 #### 不定线条
 
 使用 `Indeterminate` 属性，**MProgressCircular** 将会一直处于动画中。
 
-<example file="" />
+<masa-example file="Examples.components.progress_circular.Indeterminate"></masa-example>
 
 #### 旋转
 
 `Rotate` 参数使您能够自定义 **MProgressCircular** 的原点。
 
-<example file="" />
+<masa-example file="Examples.components.progress_circular.Rotate"></masa-example>
 
 #### 大小和宽度
 
 `Size` 和 `Width` 属性允许您轻松修改 **MProgressCircular** 组件的大小和宽度。
 
-<example file="" />
+<masa-example file="Examples.components.progress_circular.SizeOrWidth"></masa-example>

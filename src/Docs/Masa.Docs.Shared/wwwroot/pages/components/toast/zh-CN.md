@@ -1,17 +1,11 @@
 ---
-category: Components
-subtitle: 吐司
-type: 吐司
 title: Toast
-cols: 1
-tag: preset
+desc: "该组件用于通过使用上下文类型，图标和颜色向用户传达重要信息。这些默认类型有4种变体：`Success`、`Info`、`Warning` 和 `Error`。默认图标有助于表示每种类型所描述的不同动作，也可以自定义提示框的许多部分。"
 related:
-  - /components/buttons
+  - /components/cards
   - /components/icons
-  - /components/snackbars
+  - /components/grid-system
 ---
-
-该组件用于通过使用上下文类型，图标和颜色向用户传达重要信息。这些默认类型有4种变体：`Success`、`Info`、`Warning` 和 `Error`。默认图标有助于表示每种类型所描述的不同动作，也可以自定义提示框的许多部分。
 
 ## 使用
 
@@ -25,22 +19,22 @@ related:
 
 #### 自动关闭时间（默认4000ms）
 
-<example file="" />
+<masa-example file="Examples.components.toast.Duration"></masa-example>
 
 #### 显示最大条数
 
 `MaxCount` 属性设置最大展示数量。
 
-<example file="" />
+<masa-example file="Examples.components.toast.MaxCount"></masa-example>
 
 #### 显示位置
 
 `Value` 属性设置消息弹出的位置。
 
-<example file="" />
+<masa-example file="Examples.components.toast.Position"></masa-example>
 
 ### 事件
 
 #### 自定义 Toast 内容
 
-<example file="" />
+<masa-example file="Examples.components.toast.CustomToast"></masa-example>

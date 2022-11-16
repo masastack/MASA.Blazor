@@ -20,12 +20,12 @@ The data nesting depth of the cascade selection needs to be consistent, and if s
 options, you can use an empty string for placeholder.
 <!--/alert:warning-->
 
-<masa-example file="Examples.mobile_pickers.Cascade"></masa-example>
+<masa-example file="Examples.components.mobile_pickers.Cascade"></masa-example>
 
 #### Custom item height.
 
 You can customize the height of the option through `Itemheight`. Currently, only `px` is supported.
 
-<masa-example file="Examples.mobile_pickers.ItemHeight"></masa-example>
+<masa-example file="Examples.components.mobile_pickers.ItemHeight"></masa-example>
 
 

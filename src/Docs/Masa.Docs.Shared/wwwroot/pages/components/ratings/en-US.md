@@ -21,31 +21,31 @@ The **Ratings** component provides a simple interface for gathering user feedbac
 
 The **MRating** components can be colored according to your needs, and you can set selected and unselected colors.
 
-<example file="" />
+<masa-example file="Examples.components.ratings.Color"></masa-example>
 
 #### Icon
 
 Provide a label to assistive technologies for icons.
 
-<example file="" />
+<masa-example file="Examples.components.ratings.IconLabel"></masa-example>
 
 #### Incremented
 
 The **MRating** component has 3 defined icons, full icon, half icon and empty icon.
 
-<example file="" />
+<masa-example file="Examples.components.ratings.Incremented"></masa-example>
 
 #### Length
 
 You can use the **MSilder** component to easily change the length of the **MRating** component.
 
-<example file="" />
+<masa-example file="Examples.components.ratings.Length"></masa-example>
 
 #### Size
 
 Use the same size class provided in **MButton**, or provide your own `Size` attribute.
 
-<example file="" />
+<masa-example file="Examples.components.ratings.Size"></masa-example>
 
 ### Contents
 
@@ -53,7 +53,7 @@ Use the same size class provided in **MButton**, or provide your own `Size` attr
 
 Slots are provided to give you even more freedom in how you display the rating.
 
-<example file="" />
+<masa-example file="Examples.components.ratings.ItemContent"></masa-example>
 
 ### Misc
 
@@ -61,10 +61,10 @@ Slots are provided to give you even more freedom in how you display the rating.
 
 **MRating** components can be matched with existing components. Build complex examples with rich functions and beautiful designs.
 
-<example file="" />
+<masa-example file="Examples.components.ratings.Advanced"></masa-example>
 
 #### Card
 
 The **MRating** component works well with the product, allowing you to collect and display customer feedback.
 
-<example file="" />
+<masa-example file="Examples.components.ratings.Card"></masa-example>

@@ -21,19 +21,19 @@ related:
 
 **MCheckbox** 可以通过使用颜色属性的任何内置颜色和上下文名称来着色。
 
-<masa-example file="Examples.checkboxes.Color"></masa-example>
+<masa-example file="Examples.components.checkboxes.Color"></masa-example>
 
 #### 布尔值
 
 单个 **MChecbox** 将有一个布尔值作为其 `value`。
 
-<masa-example file="Examples.checkboxes.Boolean"></masa-example>
+<masa-example file="Examples.components.checkboxes.Boolean"></masa-example>
 
 #### 状态
 
 **MCheckbox** 可以有不同的状态，例如 `default`, `disabled`, 和 `indeterminate`.
 
-<masa-example file="Examples.checkboxes.States"></masa-example>
+<masa-example file="Examples.components.checkboxes.States"></masa-example>
 
 ### 插槽
 
@@ -41,7 +41,7 @@ related:
 
 **MCheckbox** 文本可以在 **LabelContent** 中定义 - 这将允许使用HTML内容。
 
-<masa-example file="Examples.checkboxes.LabelContent"></masa-example>
+<masa-example file="Examples.components.checkboxes.LabelContent"></masa-example>
 
 ### 其他
 
@@ -49,4 +49,4 @@ related:
 
 您可以将 **MCheckbox** 与其他组件（如 **MTextField** ）对齐。
 
-<masa-example file="Examples.checkboxes.InlineTextField"></masa-example>
+<masa-example file="Examples.components.checkboxes.InlineTextField"></masa-example>

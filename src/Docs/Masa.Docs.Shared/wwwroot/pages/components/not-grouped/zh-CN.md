@@ -1,5 +1,5 @@
 ---
-title: 未分组的
+title: Not Grouped（未分组的）
 tag: preset
 related:
 
@@ -17,16 +17,16 @@ related:
 
 提供标准类型的确认对话框
 
-<example file="" />
+<masa-example file="Examples.components.not_grouped.Confirm"></masa-example>
 
 #### 页头
 
 一个比较通用的页头，包括了标题，副标题，操作按钮和搜索栏。
 
-<example file="" />
+<masa-example file="Examples.components.not_grouped.PageHeader"></masa-example>
 
 #### 侧边栏
 
 因为**MList**，**MListGroup**，**MListItem**和**MListItemGroup**这些组件的联系比较松散，无法通过一个给定的值来达到 **MListGroup** 自动展开的效果。因此做了一个这样的组件。
 
-<example file="" />
+<masa-example file="Examples.components.not_grouped.Sidebar"></masa-example>
