@@ -1,12 +1,10 @@
-﻿using BlazorComponent.Web;
+﻿namespace Masa.Blazor;
 
-namespace Masa.Blazor;
-
-public class MECharts : BECharts, IAsyncDisposable
+public partial class MECharts : BDomComponentBase, IAsyncDisposable
 {
     [Inject]
     protected I18n I18n { get; set; }
-    
+
     [Inject]
     protected EChartsJSModule Module { get; set; }
 
@@ -111,35 +109,29 @@ public class MECharts : BECharts, IAsyncDisposable
 
             if (firstRender) return;
 
-            await ResetOption();
+            await SetOption();
         }
     }
 
     public async Task InitECharts()
     {
         _echarts = await Module.Init(Ref, ComputedTheme, DefaultInitOptions);
-        await Module.SetOption(_echarts, Option);
+        await SetOption();
     }
 
-    // ReSharper disable once MemberCanBePrivate.Global
     public async Task DisposeECharts()
     {
-        if (_echarts is null) return;
         await Module.Dispose(_echarts);
         _isEChartsDisposed = true;
     }
 
-    // ReSharper disable once MemberCanBePrivate.Global
-    public async Task ResetOption()
+    public async Task SetOption(object option = null, bool notMerge = true, bool lazyUpdate = false)
     {
-        if (_echarts is null) return;
-        await Module.SetOption(_echarts, Option);
-        // TODO: invoke init instead of setOption?
+        await Module.SetOption(_echarts, option ?? Option, notMerge, lazyUpdate);
     }
 
     public async Task Resize(int width, int height)
     {
-        if (_echarts is null) return;
         await Module.Resize(_echarts, width, height);
     }
 

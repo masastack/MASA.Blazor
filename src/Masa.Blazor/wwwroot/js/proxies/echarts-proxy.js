@@ -1,2 +1,2 @@
-import*as i from"echarts";function n(n,t,o){const e=i.init(n,t,o);window.onresize=function(){e.resize()}}function t(i,n,t=!1,o=!1){i.setOption(n,t,o)}function o(i){i.dispose()}function e(i,n,t){i.resize({width:n,height:t})}export{o as dispose,n as init,e as resize,t as setOption};
+function e(e,t,i){const n=echarts.init(e,t,i);return window.addEventListener("resize",(()=>{const e=n.getDom(),t=e.clientWidth,i=e.clientHeight;n.resize({width:t,height:i})})),n}function t(e,t,i=!1,n=!1){e&&e.setOption(t,i,n)}function i(e){e&&e.dispose()}function n(e,t,i){e&&(console.log("resize",t,i),e.resize({width:t,height:i}))}export{i as dispose,e as init,n as resize,t as setOption};
 //# sourceMappingURL=echarts-proxy.js.map
