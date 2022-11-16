@@ -21,22 +21,22 @@ The simple table is a wrapper component around the `<table>` element.
 
 Use `Dark` prop to switch table to the dark theme.
 
-<example file="" />
+<masa-example file="Examples.simple_tables.Dark"></masa-example>
 
 #### Dense
 
 You can show a `Dense` version of the table by using the dense prop.
 
-<example file="" />
+<masa-example file="Examples.simple_tables.Dense"></masa-example>
 
 #### FixedHeader
 
 Use the `FixedHeader` prop together with the `Height` prop to fix the header to the top of the table.
 
-<example file="" />
+<masa-example file="Examples.simple_tables.FixedHeader"></masa-example>
 
 #### Height
 
 Use the `Height` prop to set the height of the table.
 
-<example file="" />
+<masa-example file="Examples.simple_tables.Height"></masa-example>
