@@ -1,26 +1,38 @@
 ﻿{
   "en-US": {
     "class": "Html document class.",
+    "color": "Applies specified color to the control - it can be the name of material color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). You can find a list of built-in classes on the [colors page](/stylesandanimations/colors).",
     "dark": "Applies the dark theme variant to the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
+    "elevation": "Designates an elevation applied to the component between 0 and 24. You can find more information on the [elevation page](/stylesandanimations/elevation).",
     "height": "Sets the height for the component.",
     "light": "Applies the light theme variant to the component.",
     "maxHeight": "Sets the maximum height for the component.",
     "maxWidth": "Sets the maximum width for the component.",
     "minHeight": "Sets the minimum height for the component.",
     "minWidth": "Sets the minimum width for the component.",
+    "rounded": "Designates the `border-radius` applied to the component. You can find more information on the [Border Radius](/stylesandanimations/border-radius) page.",
     "style": "Html document style",
-    "width": "Sets the width for the component."
+    "width": "Sets the width for the component.",
+    "childContent": "Default content",
+    "onClick": "Click event",
+    "valueChanged": "Value change event"
   },
   "zh-CN": {
-    "class": "Html document class.", 
-    "dark": "将暗色主题变量应用到组件。你可以在 dark themes 的 Material Design 文档中找到更多有关信息。",   
-    "height": "设定组件的高度",  
+    "class": "Html document class.",
+    "color": "将指定的颜色应用于控件 - 它可以是材料颜色的名称（例如 `success` 或 `purple`）或 css 颜色（`#033` 或 `rgba(255, 0, 0, 0.5)`）。您可以在 [颜色页面](/stylesandanimations/colors) 上找到内置类的列表。",
+    "dark": "将暗色主题变量应用到组件。你可以在 [暗色主题](https://material.io/design/color/dark-theme.html) 的 Material Design 文档中找到更多有关信息。",
+    "elevation": "组件的海拔可接受 0 到 24 之间的值。你可以在 [海拔页面](/stylesandanimations/elevation) 浏览更多信息。",
+    "height": "设定组件的高度",
     "light": "为组件设置浅色主题。",
     "maxHeight": "设定组件的最大高度。",
     "maxWidth": "设定组件的最大宽度。",
     "minHeight": "设定组件的最小高度。",
-    "minWidth": "设定组件的最小宽度。",  
-    "style": "Html document style",    
-    "width": "设定组件的宽度。"
+    "minWidth": "设定组件的最小宽度。",
+    "rounded": "对指定的组件应用 `border-radius` 样式。您可以在 [边框半径页面](/stylesandanimations/elevation) 获取更多有关信息。",
+    "style": "Html document style",
+    "width": "设定组件的宽度。",
+    "childContent": "默认插槽",
+    "onClick": "点击事件",
+    "valueChanged": "值改变事件"
   }
 }
