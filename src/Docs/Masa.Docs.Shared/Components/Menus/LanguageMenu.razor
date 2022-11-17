@@ -5,17 +5,19 @@
 
 <AppMenu Items="items">
     <ActivatorContent>
-        <MButton Icon="@MasaBlazor.Breakpoint.SmAndDown"
-                 Class="text--secondary px-0 px-md-2"
+        <MButton Color="#1B2559"
+                 Icon="@MasaBlazor.Breakpoint.SmAndDown"
+                 Class="px-0 px-md-2"
                  Text
-                 @attributes="@context.Attrs">
+        @attributes="@context.Attrs">
             <MIcon>mdi-translate</MIcon>
 
             <AppChevronDown></AppChevronDown>
         </MButton>
     </ActivatorContent>
     <ItemContent>
-        <MListItemGroup Value="@I18n.Culture.Name">
+        <MListItemGroup Value="@I18n.Culture.Name"
+                        Color="#1B2559">
             <MListItem Value="context.Value" Class="m-list-item--default" OnClick="() => OnListItemClick(context.Value)">
                 <MListItemTitle>@context.Title</MListItemTitle>
             </MListItem>
@@ -40,10 +42,10 @@
         };
 
         items.AddRange(I18n.SupportedCultures.Select(c => new DefaultItem()
-        {
-            Title = c.NativeName,
-            Value = c.Name
-        }));
+            {
+                Title = c.NativeName,
+                Value = c.Name
+            }));
     }
 
     private void OnListItemClick(StringNumber val)
