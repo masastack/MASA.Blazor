@@ -669,6 +669,15 @@
       },
       {
         "Order": 0,
+        "Title": "Gridstack",
+        "FullTitle": "Gridstack",
+        "Type": "menuItem",
+        "Url": "components/gridstack",
+        "Tag": "js-proxy",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Groups",
         "FullTitle": "Groups",
         "Type": "menuItem",
