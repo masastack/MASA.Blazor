@@ -68,11 +68,11 @@ public class DocService
                 {
                     foreach (var (category, api) in apiInfo)
                     {
-                        if(commonApiInfo.TryGetValue(category, out var commonApi))
+                        if (commonApiInfo.TryGetValue(category, out var commonApi))
                         {
                             foreach (var (prop, desc) in commonApi)
                                 if (api.ContainsKey(prop) is false) api.Add(prop, desc);
-                        }                     
+                        }
                     }
                 }
                 return apiInfo;
