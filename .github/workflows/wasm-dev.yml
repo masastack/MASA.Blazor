@@ -4,8 +4,10 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: 
-  
+    paths-ignore:
+      - src/Docs/**
+  workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -15,7 +17,7 @@ jobs:
       with:
         submodules: 'recursive'
     - run: git submodule foreach git checkout main
-    - name: setting dotnet 
+    - name: setting dotnet
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: |
@@ -37,4 +39,4 @@ jobs:
     - name: deploy oss
       run: ossutil cp -rf /home/runner/work/MASA.Blazor/MASA.Blazor/src/Doc/Masa.Blazor.Doc.WebAssembly/bin/Release/net6.0/publish/wwwroot/ oss://masa-blazor-wasm-dev/
 
-      
+
