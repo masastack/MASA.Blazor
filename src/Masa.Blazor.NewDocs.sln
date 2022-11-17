@@ -3,18 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Blazor", "Masa.Blazor\Masa.Blazor.csproj", "{7B4B0CE0-69F1-40E8-B201-EED80B76D490}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor", "Masa.Blazor\Masa.Blazor.csproj", "{7B4B0CE0-69F1-40E8-B201-EED80B76D490}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorComponent", "BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj", "{6C7B7A0E-6F6A-44F3-9C88-025700AD5C6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponent", "BlazorComponent\src\Component\BlazorComponent\BlazorComponent.csproj", "{6C7B7A0E-6F6A-44F3-9C88-025700AD5C6D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Docs.Server", "Docs\Masa.Docs.Server\Masa.Docs.Server.csproj", "{080CB203-DC2E-4DC5-A836-8683BC6C68B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Docs.Server", "Docs\Masa.Docs.Server\Masa.Docs.Server.csproj", "{080CB203-DC2E-4DC5-A836-8683BC6C68B7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masa.Docs.Shared", "Docs\Masa.Docs.Shared\Masa.Docs.Shared.csproj", "{4BB2660A-0722-43C0-9227-1D4F9D6F5846}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Docs.Shared", "Docs\Masa.Docs.Shared\Masa.Docs.Shared.csproj", "{4BB2660A-0722-43C0-9227-1D4F9D6F5846}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7B4B0CE0-69F1-40E8-B201-EED80B76D490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -34,10 +37,6 @@ Global
 		{4BB2660A-0722-43C0-9227-1D4F9D6F5846}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BB2660A-0722-43C0-9227-1D4F9D6F5846}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {57A7E426-C442-4B42-81BA-B29F09AD9883}
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal
