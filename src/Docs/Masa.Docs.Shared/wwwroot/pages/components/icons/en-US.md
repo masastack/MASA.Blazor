@@ -21,7 +21,7 @@ related:
 
 Using the color helper, setting the `Color` property you can change the color of the icons for the standard dark and light themes.
 
-<masa-example file="Examples.icons.Color"></masa-example>
+<masa-example file="Examples.components.icons.Color"></masa-example>
 
 ### Events
 
@@ -29,7 +29,7 @@ Using the color helper, setting the `Color` property you can change the color of
 
 Setting the `Click` property to bind any click event to **MIcon** will automatically change the cursor to a pointer.
 
-<masa-example file="Examples.icons.Click"></masa-example>
+<masa-example file="Examples.components.icons.Click"></masa-example>
 
 ### Misc
 
@@ -37,23 +37,23 @@ Setting the `Click` property to bind any click event to **MIcon** will automatic
 
 Icons can be used inside of buttons to add emphasis to the action.
 
-<masa-example file="Examples.icons.Button"></masa-example>
+<masa-example file="Examples.components.icons.Button"></masa-example>
 
 #### Font Awesome
 
 [Font Awesome](https://fontawesome.com/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note
 that you still need to include the Font Awesome icons in your project.
 
-<masa-example file="Examples.icons.FontAwesome"></masa-example>
+<masa-example file="Examples.components.icons.FontAwesome"></masa-example>
 
 #### Material Design
 
 [Material Design](https://material.io/tools/icons/?style=baseline) is also supported.
 
-<masa-example file="Examples.icons.MaterialDesign"></masa-example>
+<masa-example file="Examples.components.icons.MaterialDesign"></masa-example>
 
 #### SVG
 
 If you want to use SVG icons with `MIcon` component, only support input the `path` of SVG.
 
-<masa-example file="Examples.icons.Svg"></masa-example>
+<masa-example file="Examples.components.icons.Svg"></masa-example>

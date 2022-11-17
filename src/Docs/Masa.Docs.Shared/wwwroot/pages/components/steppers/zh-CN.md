@@ -21,19 +21,19 @@ related:
 
 **MStepper** 组件还有一个替代标签样式，将标题放在步骤下方。
 
-<masa-example file="Examples.steppers.AlternateLabel"></masa-example>
+<masa-example file="Examples.components.steppers.AlternateLabel"></masa-example>
 
 #### 非线性的步骤条
 
  `NonLinear` 属性可以让用户按照自己选择路线在流程中移动。
 
-<masa-example file="Examples.steppers.NonLinear"></masa-example>
+<masa-example file="Examples.components.steppers.NonLinear"></masa-example>
 
 #### 垂直
 
 垂直步骤线通过定义的步骤沿Y轴移动用户。其他地方与水平方向的一致。
 
-<masa-example file="Examples.steppers.Vertical"></masa-example>
+<masa-example file="Examples.components.steppers.Vertical"></masa-example>
 
 ### 其他
 
@@ -41,52 +41,52 @@ related:
 
 错误状态同样可以应用于备用标签样式的显示。
 
-<masa-example file="Examples.steppers.AlternativeLabelWithErrors"></masa-example>
+<masa-example file="Examples.components.steppers.AlternativeLabelWithErrors"></masa-example>
 
 #### 动态步骤
 
 步骤条可以动态添加或删除它们的步骤。如果删除了当前活动的步骤，请务必通过更改应用的模型来解决这个问题。
 
-<masa-example file="Examples.steppers.DynamicSteps"></masa-example>
+<masa-example file="Examples.components.steppers.DynamicSteps"></masa-example>
 
 #### 可编辑步骤
 
 用户可以随时选择一个可编辑的步骤，并将他们导航到该步骤。
 
-<masa-example file="Examples.steppers.EditableSteps"></masa-example>
+<masa-example file="Examples.components.steppers.EditableSteps"></masa-example>
 
 #### 错误状态
 
 可以显示错误状态来通知用户必须采取的一些行动。
 
-<masa-example file="Examples.steppers.Errors"></masa-example>
+<masa-example file="Examples.components.steppers.Errors"></masa-example>
 
 #### 水平步骤线
 
 水平步骤线通过定义的步骤沿 x 轴移动用户。
 
-<masa-example file="Examples.steppers.HorizontalSteps"></masa-example>
+<masa-example file="Examples.components.steppers.HorizontalSteps"></masa-example>
 
 #### 线性步骤
 
 线性步骤始将始终通过您定义的路径移动用户。
 
-<masa-example file="Examples.steppers.LinearSteppers"></masa-example>
+<masa-example file="Examples.components.steppers.LinearSteppers"></masa-example>
 
 #### 不可编辑步骤
 
 不可编辑步骤（Non-editable steps）强制用户在整个流程中进行线性处理。
 
-<masa-example file="Examples.steppers.NonEditableSteps"></masa-example>
+<masa-example file="Examples.components.steppers.NonEditableSteps"></masa-example>
 
 #### 可选步骤
 
 可以使用子文本调出可选步骤。
 
-<masa-example file="Examples.steppers.OptionalSteps"></masa-example>
+<masa-example file="Examples.components.steppers.OptionalSteps"></masa-example>
 
 #### 垂直错误
 
 相同的状态也适用于垂直的步骤。
 
-<masa-example file="Examples.steppers.VerticalErrors"></masa-example>
+<masa-example file="Examples.components.steppers.VerticalErrors"></masa-example>

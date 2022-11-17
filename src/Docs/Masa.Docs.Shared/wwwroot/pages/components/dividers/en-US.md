@@ -21,19 +21,19 @@ Dividers in their simplest form display a horizontal line.
 
 Dividers in their simplest form display a horizontal line.
 
-<masa-example file="Examples.dividers.Inset"></masa-example>
+<masa-example file="Examples.components.dividers.Inset"></masa-example>
 
 #### Vertical
 
 Dividers in their simplest form display a horizontal line.
 
-<masa-example file="Examples.dividers.Vertical"></masa-example>
+<masa-example file="Examples.components.dividers.Vertical"></masa-example>
 
 ### Contents
 
 #### ChildContent
 
-<masa-example file="Examples.dividers.ChildContent"></masa-example>
+<masa-example file="Examples.components.dividers.ChildContent"></masa-example>
 
 ### Misc
 
@@ -41,13 +41,13 @@ Dividers in their simplest form display a horizontal line.
 
 Create custom cards to suit any use case.
 
-<masa-example file="Examples.dividers.View"></masa-example>
+<masa-example file="Examples.components.dividers.View"></masa-example>
 
 #### SubHeaders
 
 Dividers and subtitles can help break up content, and can use the same inset attribute to align each other.
 
-<masa-example file="Examples.dividers.SubHeaders"></masa-example>
+<masa-example file="Examples.components.dividers.SubHeaders"></masa-example>
 
 
 

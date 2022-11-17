@@ -21,16 +21,16 @@ related:
 
 应用深色主题，改变组件的颜色。
 
-<masa-example file="Examples.otp_input.DarkTheme"></masa-example>
+<masa-example file="Examples.components.otp_input.DarkTheme"></masa-example>
 
 #### 完成事件
 
 您可以很容易的编写一个处理程序来接收组件完成输入时的结果
 
-<masa-example file="Examples.otp_input.FinishEvent"></masa-example>
+<masa-example file="Examples.components.otp_input.FinishEvent"></masa-example>
 
 #### Hidden input
 
 输入的值可以用 `type="password"` 隐藏
 
-<masa-example file="Examples.otp_input.HiddenInput"></masa-example>
+<masa-example file="Examples.components.otp_input.HiddenInput"></masa-example>

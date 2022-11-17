@@ -25,7 +25,7 @@ Sheets and components based on them can have different sizes and colors.
 The **MSheet** component accepts custom [Material Design Color](/stylesandanimations/colors) values such
 as `warning`, `amber darken-3`, and `deep-purple accent` —as well as _rgb_, _rgba_, and _hexadecimal_ values.
 
-<masa-example file="Examples.sheets.Color"></masa-example>
+<masa-example file="Examples.components.sheets.Color"></masa-example>
 
 #### Elevation
 
@@ -34,7 +34,7 @@ the
 `box-shadow` property. More information is located in the
 MD [Elevation Design Specification](https://material.io/design/environment/elevation.html).
 
-<masa-example file="Examples.sheets.Elevation"></masa-example>
+<masa-example file="Examples.components.sheets.Elevation"></masa-example>
 
 #### Rounded
 
@@ -42,4 +42,4 @@ The `Rounded` prop adds a default `border-radius` of _4px_. By default, the **MS
 Customize the radius’s size and location by providing a custom rounded value; e.g. a rounded value of _tr-xl_ _l-pill_
 equates to _rounded-tr-xl_ _rounded-l-pill_. Additional information is on the [Border Radius](/stylesandanimations/border-radius) page.
 
-<masa-example file="Examples.sheets.Rounded"></masa-example>
+<masa-example file="Examples.components.sheets.Rounded"></masa-example>

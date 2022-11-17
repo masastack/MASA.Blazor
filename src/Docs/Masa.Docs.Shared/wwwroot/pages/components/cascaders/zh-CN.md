@@ -21,16 +21,16 @@ related:
 
 `Dense` 属性用于减少高度
 
-<masa-example file="Examples.cascaders.Dense"></masa-example>
+<masa-example file="Examples.components.cascaders.Dense"></masa-example>
 
 #### 加载子项
 
 `LoadChildren` 用于动态加载子项
 
-<masa-example file="Examples.cascaders.LoadChildren"></masa-example>
+<masa-example file="Examples.components.cascaders.LoadChildren"></masa-example>
 
 #### 展示完整路径
 
 `ShowAllLevels` 用于控制展示所有层级,默认为 `true`。
 
-<masa-example file="Examples.cascaders.ShowAllLevels"></masa-example>
+<masa-example file="Examples.components.cascaders.ShowAllLevels"></masa-example>

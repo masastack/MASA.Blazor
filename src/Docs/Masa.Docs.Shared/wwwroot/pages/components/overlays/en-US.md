@@ -26,19 +26,19 @@ In its simplest form, the **MOverlay** component will add a dimmed layer over yo
 
 `Absolute` overlays are positioned absolutely and contained inside of their parent element.
 
-<masa-example file="Examples.overlays.Absolute"></masa-example>
+<masa-example file="Examples.components.overlays.Absolute"></masa-example>
 
 #### Opacity
 
 `Opacity` allows you to customize the transparency of components.
 
-<masa-example file="Examples.overlays.Opacity"></masa-example>
+<masa-example file="Examples.components.overlays.Opacity"></masa-example>
 
 #### Z-index
 
 `ZIndex` gives you the ability to easily change the stack order of the **MOverlay** component.
 
-<masa-example file="Examples.overlays.ZIndex"></masa-example>
+<masa-example file="Examples.components.overlays.ZIndex"></masa-example>
 
 ### Misc
 
@@ -46,10 +46,10 @@ In its simplest form, the **MOverlay** component will add a dimmed layer over yo
 
 Using the [MHover](/components/hover), we are able to add a nice scrim over the information card with additional actions the user can take.
 
-<masa-example file="Examples.overlays.Advanced"></masa-example>
+<masa-example file="Examples.components.overlays.Advanced"></masa-example>
 
 #### Loader
 
 Using the **MOverlay** as a background, add a progress component to easily create a custom loader.
 
-<masa-example file="Examples.overlays.Loader"></masa-example>
+<masa-example file="Examples.components.overlays.Loader"></masa-example>

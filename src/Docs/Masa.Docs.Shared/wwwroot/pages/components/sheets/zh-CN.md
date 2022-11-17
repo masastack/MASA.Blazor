@@ -25,7 +25,7 @@ related:
 **MSheet** 组件接受自定义[Material Design Color](/stylesandanimations/colors)值，例如 `warning`、`amber darken-3`
 和 `deep-purple accent`，以及 *rgb*、*rgba*和*十六进制*值。
 
-<masa-example file="Examples.sheets.Color"></masa-example>
+<masa-example file="Examples.components.sheets.Color"></masa-example>
 
 #### 高度(z轴)
 
@@ -34,7 +34,7 @@ related:
 **MSheet** 组件接受一个介于 **0(默认值) 至 24** 之间的自定义高度(z轴)。 _elevation_ 属性修改 `box-shadow` 属性。 更多信息位于
 MD [Elevation Design Specification](https://material.io/design/environment/elevation.html)。
 
-<masa-example file="Examples.sheets.Elevation"></masa-example>
+<masa-example file="Examples.components.sheets.Elevation"></masa-example>
 
 #### 圆角
 
@@ -43,4 +43,4 @@ MD [Elevation Design Specification](https://material.io/design/environment/eleva
 `Rounded` 增加了默认 _4px_ 的 `border-radius`。 默认情况下， **MSheet** 组件没有边框半径。 通过提供自定义的圆角值来定义半径的大小和位置；例如，圆角值 _tr-xl_ _l-pill_ 等于
 _rounded-tr-xl_ _rounded-l-pill_。 关于圆角样式的其他信息在 [Border Radius](/stylesandanimations/border-radius) 页。
 
-<masa-example file="Examples.sheets.Rounded"></masa-example>
+<masa-example file="Examples.components.sheets.Rounded"></masa-example>

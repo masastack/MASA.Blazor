@@ -21,31 +21,31 @@ Similar to the **MWindow** component, **MSideGroup** lets items to take up as mu
 
 The `ActiveClass` property allows you to set custom CSS class on active items.
 
-<masa-example file="Examples.slide_groups.ActiveClass"></masa-example>
+<masa-example file="Examples.components.slide_groups.ActiveClass"></masa-example>
 
 #### Center active
 
 Using the `CenterActive` prop will make the active item always centered.
 
-<masa-example file="Examples.slide_groups.CenterActive"></masa-example>
+<masa-example file="Examples.components.slide_groups.CenterActive"></masa-example>
 
 #### Custom icons
 
 You can add your custom pagination icons instead of arrows using the `NextIcon` and `PrevIcon` props.
 
-<masa-example file="Examples.slide_groups.CustomIcons"></masa-example>
+<masa-example file="Examples.components.slide_groups.CustomIcons"></masa-example>
 
 #### Mandatory
 
 The `Mandatory` prop will make the slide group require at least 1 item must be selected.
 
-<masa-example file="Examples.slide_groups.Mandatory"></masa-example>
+<masa-example file="Examples.components.slide_groups.Mandatory"></masa-example>
 
 #### Multiple
 
 You can select multiple items by setting the `Multiple` prop.
 
-<masa-example file="Examples.slide_groups.Multiple"></masa-example>
+<masa-example file="Examples.components.slide_groups.Multiple"></masa-example>
 
 ### Misc
 
@@ -53,4 +53,4 @@ You can select multiple items by setting the `Multiple` prop.
 
 Customize the slide group to creatively display information on sheets. Using the selection, we can display auxillary information easily for the user.
 
-<masa-example file="Examples.slide_groups.PseudoCarousel"></masa-example>
+<masa-example file="Examples.components.slide_groups.PseudoCarousel"></masa-example>

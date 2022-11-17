@@ -9,4 +9,4 @@ related:
 
 ## Usage
 
-<masa-example file="Examples.cron.Index"></masa-example>
+<masa-example file="Examples.components.cron.Index"></masa-example>
