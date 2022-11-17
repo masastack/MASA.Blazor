@@ -17,7 +17,7 @@ minimum height of the item and can also be controlled from `MList` with the same
 ## Caveats
 
 <!--alert:info-->
-If you want to find a list item with status, please check [**MListItemGroup**](/components/list-item-groups)。
+If you want to find a list item with status, please check [MListItemGroup](/components/list-item-groups)。
 
 ## Examples
 
@@ -91,7 +91,7 @@ lists are also used within the [MNavigationDrawer](/components/navigation-drawer
 
 #### Action and item groups
 
-A **ThreeLine** list with actions. Utilizing [**MListItemGroup**](/components/list-item-groups), easily connect actions to your tiles.
+A **ThreeLine** list with actions. Utilizing [MListItemGroup](/components/list-item-groups), easily connect actions to your tiles.
 
 <masa-example file="Examples.components.lists.ActionsAndItemGroups"></masa-example>
 

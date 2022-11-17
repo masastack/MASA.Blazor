@@ -7,7 +7,7 @@
    @attributes="@Attributes">
     @Content
 
-    @if (Icon is null)
+    @if (Icon is not null)
     {
         <MIcon Class="@($"m{(IsSamePage ? "r" : "l")}-1")" Color="primary" Size="@(".875rem")">@Icon</MIcon>
     }
