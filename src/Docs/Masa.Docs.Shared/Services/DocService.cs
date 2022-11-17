@@ -8,7 +8,7 @@ public class DocService
     private readonly ConcurrentCache<string, ValueTask<string>> _documentCache = new();
     private readonly ConcurrentCache<string, ValueTask<string>> _exampleCache = new();
     private readonly ConcurrentCache<string, ValueTask<Dictionary<string, Dictionary<string, string>>?>> _apiCache = new();
-    private readonly Dictionary<string, Dictionary<string, string>> _commonApis;
+    private readonly Dictionary<string, Dictionary<string, Dictionary<string, string>>> _commonApis;
 
     private readonly HttpClient _httpClient;
 
@@ -18,7 +18,7 @@ public class DocService
     {
         _i18n = i18n;
         _httpClient = factory.CreateClient("masa-docs");
-        _commonApis = _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, string>>>("_content/Masa.Docs.Shared/data/apis/common.json").Result ?? new();
+        _commonApis = _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>("_content/Masa.Docs.Shared/data/apis/common.json").Result ?? new();
     }
 
     public async Task<string> ReadDocumentAsync(string category, string title)
@@ -64,12 +64,15 @@ public class DocService
             {
                 var apiInfo = await _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, string>>>(
                 $"_content/Masa.Docs.Shared/data/apis/{kebabCaseComponent}/{_i18n.Culture.Name}.json").ConfigureAwait(false);
-                if (_commonApis.TryGetValue(_i18n.Culture.Name, out var commonApi))
+                if (_commonApis.TryGetValue(_i18n.Culture.Name, out var commonApiInfo))
                 {
-                    foreach (var category in apiInfo)
+                    foreach (var (category, api) in apiInfo)
                     {
-                        foreach (var (prop, desc) in commonApi)
-                            if (category.Value.ContainsKey(prop) is false) category.Value.Add(prop, desc);
+                        if(commonApiInfo.TryGetValue(category, out var commonApi))
+                        {
+                            foreach (var (prop, desc) in commonApi)
+                                if (api.ContainsKey(prop) is false) api.Add(prop, desc);
+                        }                     
                     }
                 }
                 return apiInfo;
