@@ -64,11 +64,11 @@ public class DocService
             {
                 var apiInfo = await _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, string>>>(
                 $"_content/Masa.Docs.Shared/data/apis/{kebabCaseComponent}/{_i18n.Culture.Name}.json").ConfigureAwait(false);
-                if (_commonApis.TryGetValue(_i18n.Culture.Name, out var _commonApi))
+                if (_commonApis.TryGetValue(_i18n.Culture.Name, out var commonApi))
                 {
                     foreach (var category in apiInfo)
                     {
-                        foreach (var (prop, desc) in _commonApi)
+                        foreach (var (prop, desc) in commonApi)
                             if (category.Value.ContainsKey(prop) is false) category.Value.Add(prop, desc);
                     }
                 }

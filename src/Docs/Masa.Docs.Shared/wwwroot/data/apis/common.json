@@ -1,6 +1,6 @@
 ﻿{
   "en-US": {
-    "Class": "Html document class.",
+    "class": "Html document class.",
     "dark": "Applies the dark theme variant to the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
     "height": "Sets the height for the component.",
     "light": "Applies the light theme variant to the component.",
@@ -12,7 +12,7 @@
     "width": "Sets the width for the component."
   },
   "zh-CN": {
-    "Class": "Html document class.", 
+    "class": "Html document class.", 
     "dark": "将暗色主题变量应用到组件。你可以在 dark themes 的 Material Design 文档中找到更多有关信息。",   
     "height": "设定组件的高度",  
     "light": "为组件设置浅色主题。",

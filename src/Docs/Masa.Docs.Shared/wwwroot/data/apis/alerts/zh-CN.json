@@ -9,7 +9,6 @@
     "dismissible": "添加一个可以关闭警报的图标。",
     "elevation": "组件的海拔可接受 0 到 24 之间的值。你可以在 elevation page 浏览更多信息。",
     "icon": "指定特定的图标。",   
-    "mode": "设置转换模式（不应用于转换组）。你可以在 Vue 文档浏览更多 for transition modes。",
     "origin": "设置元素上的动画原点。您可以在 MDN 文档上浏览更多 for transition origin",
     "outlined": "使背景透明并使用薄边框。",
     "prominent": "使背景透明并使用薄边框。",
