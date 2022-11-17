@@ -1,17 +1,18 @@
-﻿using BlazorComponent.Web;
+﻿namespace Masa.Blazor;
 
-namespace Masa.Blazor;
-
-public class MECharts : BECharts, IAsyncDisposable
+public partial class MECharts : BDomComponentBase, IAsyncDisposable
 {
     [Inject]
     protected I18n I18n { get; set; }
 
-    [Parameter]
-    public StringNumber Width { get; set; } = 600;
+    [Inject]
+    protected EChartsJSModule Module { get; set; }
 
     [Parameter]
-    public StringNumber Height { get; set; } = 400;
+    public StringNumber Width { get; set; } = "100%";
+
+    [Parameter]
+    public StringNumber Height { get; set; } = "100%";
 
     [Parameter]
     public StringNumber MinWidth { get; set; }
@@ -96,11 +97,6 @@ public class MECharts : BECharts, IAsyncDisposable
             return;
         }
 
-        if (firstRender)
-        {
-            _echarts = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/echarts-helper.js");
-        }
-
         if (firstRender || _isEChartsDisposed)
         {
             _isEChartsDisposed = false;
@@ -113,29 +109,30 @@ public class MECharts : BECharts, IAsyncDisposable
 
             if (firstRender) return;
 
-            await ResetOption();
+            await SetOption();
         }
     }
 
-    private async Task InitECharts()
+    public async Task InitECharts()
     {
-        if (_echarts is null) return;
-        await _echarts.InvokeVoidAsync("init", Ref.GetSelector(), ComputedTheme, DefaultInitOptions, Option);
+        _echarts = await Module.Init(Ref, ComputedTheme, DefaultInitOptions);
+        await SetOption();
     }
 
-    // ReSharper disable once MemberCanBePrivate.Global
     public async Task DisposeECharts()
     {
-        if (_echarts is null) return;
-        await _echarts.InvokeVoidAsync("dispose", Ref.GetSelector());
+        await Module.Dispose(_echarts);
         _isEChartsDisposed = true;
     }
 
-    // ReSharper disable once MemberCanBePrivate.Global
-    public async Task ResetOption()
+    public async Task SetOption(object option = null, bool notMerge = true, bool lazyUpdate = false)
     {
-        if (_echarts is null) return;
-        await _echarts.InvokeVoidAsync("setOption", Ref.GetSelector(), Option);
+        await Module.SetOption(_echarts, option ?? Option, notMerge, lazyUpdate);
+    }
+
+    public async Task Resize(int width, int height)
+    {
+        await Module.Resize(_echarts, width, height);
     }
 
     public async ValueTask DisposeAsync()

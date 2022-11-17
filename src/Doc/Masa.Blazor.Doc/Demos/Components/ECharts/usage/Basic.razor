@@ -1,9 +1,8 @@
-﻿<div class="d-flex align-center justify-center">
-    <MECharts Option="_option" Width="@("100%")">
-    </MECharts>
-</div>
+﻿<MECharts Option="_option" Height="400">
+</MECharts>
 
 @code{
+
     private object _option = new
     {
         Title = new
@@ -23,13 +22,13 @@
         YAxis = new { },
         Series = new[]
         {
-            new 
+            new
             {
                 Name = "sales",
-                Type= "bar",
-                Data= new []{ 5, 20, 36, 10, 10, 20 }
+                Type = "bar",
+                Data = new[] { 5, 20, 36, 10, 10, 20 }
             }
         }
     };
-}
 
+}
