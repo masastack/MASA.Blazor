@@ -8,6 +8,7 @@ public class DocService
     private readonly ConcurrentCache<string, ValueTask<string>> _documentCache = new();
     private readonly ConcurrentCache<string, ValueTask<string>> _exampleCache = new();
     private readonly ConcurrentCache<string, ValueTask<Dictionary<string, Dictionary<string, string>>?>> _apiCache = new();
+    private readonly Dictionary<string, Dictionary<string, string>> _commonApis;
 
     private readonly HttpClient _httpClient;
 
@@ -17,6 +18,7 @@ public class DocService
     {
         _i18n = i18n;
         _httpClient = factory.CreateClient("masa-docs");
+        _commonApis = _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, string>>>("_content/Masa.Docs.Shared/data/apis/common.json").Result ?? new();
     }
 
     public async Task<string> ReadDocumentAsync(string category, string title)
@@ -35,7 +37,7 @@ public class DocService
 
     public async Task<Dictionary<string, List<string>>> ReadPageToApiAsync()
     {
-        if (_apiInPageCache is not null && _apiInPageCache.Any())
+        if (_apiInPageCache?.Any() is true)
         {
             return _apiInPageCache;
         }
@@ -58,8 +60,21 @@ public class DocService
 
         try
         {
-            return await _apiCache.GetOrAdd(key, async _ => await _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, string>>>(
-                $"_content/Masa.Docs.Shared/data/apis/{kebabCaseComponent}/{_i18n.Culture.Name}.json"));
+            return await _apiCache.GetOrAdd(key, async _ =>
+            {
+                var apiInfo = await _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, string>>>(
+                $"_content/Masa.Docs.Shared/data/apis/{kebabCaseComponent}/{_i18n.Culture.Name}.json").ConfigureAwait(false);
+                if (_commonApis.TryGetValue(_i18n.Culture.Name, out var _commonApi))
+                {
+                    foreach (var category in apiInfo)
+                    {
+                        foreach (var (prop, desc) in _commonApi)
+                            if (category.Value.ContainsKey(prop) is false) category.Value.Add(prop, desc);
+                    }
+                }
+                return apiInfo;
+            });
+
         }
         catch (Exception e)
         {
