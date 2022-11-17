@@ -2,9 +2,20 @@
 
 public class GridstackWidgetPosition
 {
-    public int W { get; set; }
+    private int _w;
+    private int _h;
 
-    public int H { get; set; }
+    public int W
+    {
+        get => GetValidValue(_w);
+        set => _w = value;
+    }
+
+    public int H
+    {
+        get => GetValidValue(_h);
+        set => _h = value;
+    }
 
     public int? X { get; set; }
 
@@ -25,4 +36,6 @@ public class GridstackWidgetPosition
         X = x;
         Y = y;
     }
+
+    private int GetValidValue(int val) => val == 0 ? 1 : val;
 }

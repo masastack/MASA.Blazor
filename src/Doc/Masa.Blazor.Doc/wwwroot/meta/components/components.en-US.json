@@ -5,7 +5,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAlert\">MAlert</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.4426281+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2027047+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -185,7 +185,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MResponsive\">MResponsive</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.4436281+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.203703+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -216,7 +216,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MAvatar\">MAvatar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.4471423+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2057063+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -313,7 +313,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBadge\">MBadge</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.4501417+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2077031+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -388,7 +388,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBanner\">MBanner</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.4531421+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2097134+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -476,7 +476,7 @@
       "SubComponents": "\n<ul>\n<li><code>MAppBarNavIcon</code>：A stylized icon button component created specifically for use with <a href=\"/components/toolbars\">MToolbar</a> and <code>MAppBar</code>. The hamburger menu is displayed on the left side of the toolbar, which is usually used to control the status of the navigation drawer. The default slot can be used to customize the icons and functions of this component.</li>\n<li><code>MAppBarTitle</code>：The modified <a href=\"/components/toolbars\">MToolbarTitle</a> component is used in conjunction with the <strong>shrinkonscroll</strong> attribute. On the small screen, <strong>MToolbarTitle</strong>\nWill be truncated, but this component uses absolute positioning when expanding to make its contents visible. We do not recommend that you use the <code>MAppbarTitle</code> component without using the <strong>shrinkonscroll</strong> attribute. It's really because the resize event was added to this component and a lot of additional calculations were done.</li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning-->\n<p>When <code>MButton</code> with <strong>icon</strong> attribute is used inside <code>MToolbar</code> and <code>MAppbar</code>, they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap the buttons in any container, such as <code>div</code>, you need to apply a negative margin to the container in order to align them correctly.</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.4581418+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2137039+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -628,7 +628,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSystemBar\">MSystemBar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.461142+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2147036+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -704,7 +704,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MToolbar\">MToolbar</a></li>\n<li><a href=\"/api/MToolbarItems\">MToolbarItems</a></li>\n<li><a href=\"/api/MToolbarTitle\">MToolbarTitle</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning-->\n<p>When 'MButton' with 'icon' prop is used inside 'MToolbar' and 'MAppbar', they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.\nIf you choose to wrap your buttons in any container, such as' div ', you need to apply a negative margin to the container for proper alignment.</p>\n<!--/alert:warning-->\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.4661416+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2187075+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -854,7 +854,7 @@
     "Desc": "<p>Display two data of the same type side by side.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.4691417+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0190815+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -908,7 +908,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBorder\">MBorder</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.4691417+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2197064+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -950,7 +950,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBottomNavigation\">MBottomNavigation</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.473142+08:00",
+    "LastWriteTime": "2022-06-23T13:44:24.199422+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1058,7 +1058,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MBottomSheet\">MBottomSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.4771417+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2227037+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1145,7 +1145,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MBreadcrumbs\">MBreadcrumbs</a></li>\n<li><a href=\"/api/MBreadcrumbsItem\">MBreadcrumbsItem</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>By default <code>MBreadcrumbs</code> will disable the linkage with router. You can enable the feature by using *<em>Linkage</em> prop.</p>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.4801416+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2247155+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1232,7 +1232,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>MButton</code> is the only component that behaves differently when using the <strong>Dark</strong> prop. Normally components use the <strong>Dark</strong> prop to denote that they have a dark colored background and need their text to be white. While this will work\nfor <code>MButton</code>, it is advised to only use the prop when the button <strong>IS ON</strong> a colored background due to the disabled state\nblending in with white backgrounds. If you need white text, simply add the <code>white--text</code> class.</p>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.4851418+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2277041+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1396,7 +1396,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MCard\">MCard</a></li>\n<li><a href=\"/api/MCardActions\">MCardActions</a></li>\n<li><a href=\"/api/MCardSubtitle\">MCardSubtitle</a></li>\n<li><a href=\"/api/MCardText\">MCardText</a></li>\n<li><a href=\"/api/MCardTitle\">MCardTitle</a></li>\n</ul>\n",
       "SubComponents": "\n<ul>\n<li><code>MCardActions</code>:A container used to place actions for cards, such as [MButton] (/components/buttons) or [MMenu] (/components/menu). Use a special margin on the button at the same time\nSo that they match other card content areas.</li>\n<li><code>MCardSubtitle</code>:Provide default <strong>font size</strong> and <strong>fill</strong> for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n<li><code>MCardText</code>:It is mainly used for <strong>text content</strong> in cards. Apply padding to the text and reduce its font size to. 875rem.</li>\n<li><code>MCardTitle</code>:Provide default font size and padding for card subtitles. Font size can be overwritten with [typesetting] (/stylesandimages/text-and-typography).</li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.4901417+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2317045+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1548,7 +1548,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCarousel\">MCarousel</a></li>\n<li><a href=\"/api/MCarouselItem\">MCarouselItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.494142+08:00",
+    "LastWriteTime": "2022-08-01T09:58:16.7411914+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1656,7 +1656,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5001419+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2367046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -1839,7 +1839,7 @@
     "Desc": "<p>Append a button that provides copy feature to the content.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.5033283+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.024083+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -1912,7 +1912,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.5043281+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0252186+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -1944,7 +1944,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDialog\">MDialog</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.509328+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2397197+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2074,7 +2074,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDivider\">MDivider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5123285+08:00",
+    "LastWriteTime": "2022-04-14T11:48:59.7323297+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2160,7 +2160,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDragZone\">MDragZone</a></li>\n</ul>\n<!--alert:info-->\n<p>You need to reference the package of Sorttable.js before using it ：\n<br />\n<code>&lt;script src=&quot;https://cdn.masastack.com/npm/sortable/Sortable.min.js&quot;&gt;&lt;/script&gt;</code>.</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.516328+08:00",
+    "LastWriteTime": "2022-06-27T15:26:21.1978135+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2272,7 +2272,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.5203283+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.029081+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -2381,14 +2381,14 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n<!--alert:info-->\n<p>You need to reference the package of ECharts before using it:\n<br />\n<code>&lt;script src=&quot;https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js&quot;&gt;&lt;/script&gt;</code>.</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5233281+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2427066+08:00",
     "DemoList": [
       {
         "Order": 0,
         "Name": "basic",
         "Title": "Usage",
         "Description": "<p>Examples</p>\n",
-        "Code": "<div class=\"d-flex align-center justify-center\">\r\n    <MECharts Option=\"_option\" Width=\"@(\"100%\")\">\r\n    </MECharts>\r\n</div>\r\n\r\n@code{\r\n    private object _option = new\r\n    {\r\n        Title = new\r\n        {\r\n            Left = \"center\",\r\n            Text = \"Getting started\"\r\n        },\r\n        Tooltip = new { },\r\n        Legend = new\r\n        {\r\n            Data = new[] { \"Sales\" }\r\n        },\r\n        XAxis = new\r\n        {\r\n            Data = new[] { \"Shirt\", \"Cardigan\", \"Chiffon shirt\", \"Pants\", \"High heel\", \"Sock\" }\r\n        },\r\n        YAxis = new { },\r\n        Series = new[]\r\n        {\r\n            new \r\n            {\r\n                Name = \"sales\",\r\n                Type= \"bar\",\r\n                Data= new []{ 5, 20, 36, 10, 10, 20 }\r\n            }\r\n        }\r\n    };\r\n}\r\n\r\n",
+        "Code": "<MECharts Option=\"_option\" Height=\"400\">\r\n</MECharts>\r\n\r\n@code{\r\n\r\n    private object _option = new\r\n    {\r\n        Title = new\r\n        {\r\n            Left = \"center\",\r\n            Text = \"Getting started\"\r\n        },\r\n        Tooltip = new { },\r\n        Legend = new\r\n        {\r\n            Data = new[] { \"Sales\" }\r\n        },\r\n        XAxis = new\r\n        {\r\n            Data = new[] { \"Shirt\", \"Cardigan\", \"Chiffon shirt\", \"Pants\", \"High heel\", \"Sock\" }\r\n        },\r\n        YAxis = new { },\r\n        Series = new[]\r\n        {\r\n            new\r\n            {\r\n                Name = \"sales\",\r\n                Type = \"bar\",\r\n                Data = new[] { 5, 20, 36, 10, 10, 20 }\r\n            }\r\n        }\r\n    };\r\n\r\n}\r\n",
         "Type": "Demos.Components.ECharts.usage.Basic",
         "Style": "",
         "Debug": false,
@@ -2399,7 +2399,7 @@
         "Name": "dark",
         "Title": "Dark",
         "Description": "<p>Use <code>Dark</code> prop to switch to the dark theme.</p>\n",
-        "Code": "<div class=\"d-flex flex-column align-center justify-center\">\r\n    <MECharts Option=\"option\" Width=\"@(\"100%\")\" Dark></MECharts>\r\n</div>\r\n\r\n@code{\r\n\r\n    private object option = new\r\n    {\r\n        Title = new\r\n        {\r\n            Left = \"center\",\r\n            Text = \"Getting started\"\r\n        },\r\n        Tooltip = new { },\r\n        Legend = new\r\n        {\r\n            Right = \"20px\",\r\n            Data = new[] { \"Sales\" }\r\n        },\r\n        XAxis = new\r\n        {\r\n            Data = new[] { \"Shirt\", \"Cardigan\", \"Chiffon shirt\", \"Pants\", \"High heel\", \"Sock\" }\r\n        },\r\n        YAxis = new { },\r\n        Series = new[]\r\n        {\r\n            new\r\n            {\r\n                Name = \"sales\",\r\n                Type = \"bar\",\r\n                Data = new[] { 5, 20, 36, 10, 10, 20 }\r\n            }\r\n        }\r\n    };\r\n\r\n}\r\n",
+        "Code": "<MECharts Option=\"option\" Height=\"400\" Dark></MECharts>\r\n\r\n@code{\r\n\r\n    private object option = new\r\n    {\r\n        Title = new\r\n        {\r\n            Left = \"center\",\r\n            Text = \"Getting started\"\r\n        },\r\n        Tooltip = new { },\r\n        Legend = new\r\n        {\r\n            Right = \"20px\",\r\n            Data = new[] { \"Sales\" }\r\n        },\r\n        XAxis = new\r\n        {\r\n            Data = new[] { \"Shirt\", \"Cardigan\", \"Chiffon shirt\", \"Pants\", \"High heel\", \"Sock\" }\r\n        },\r\n        YAxis = new { },\r\n        Series = new[]\r\n        {\r\n            new\r\n            {\r\n                Name = \"sales\",\r\n                Type = \"bar\",\r\n                Data = new[] { 5, 20, 36, 10, 10, 20 }\r\n            }\r\n        }\r\n    };\r\n\r\n}\r\n",
         "Type": "Demos.Components.ECharts.props.Dark",
         "Style": "",
         "Debug": false,
@@ -2410,7 +2410,7 @@
         "Name": "heightAndWidth",
         "Title": "Height and width",
         "Description": "<p><strong>Height</strong> and <strong>Width</strong> property set chart height,width</p>\n",
-        "Code": "<MRow Justify=\"JustifyTypes.Center\">\r\n    <MCol Cols=\"12\" Class=\"text-center\">\r\n        Aspect ratio: 400/300\r\n    </MCol>\r\n    <MCol Cols=\"12\">\r\n        <MECharts Width=\"@(\"100%\")\"\r\n                  MaxWidth=\"400\"\r\n                  Height=\"300\"\r\n                  Style=\"margin: 0 auto\"\r\n                  Option=\"_option\">\r\n        </MECharts>\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    private object _option = new\r\n    {\r\n        Title = new\r\n        {\r\n            Text = \"Getting started\"\r\n        },\r\n        Tooltip = new { },\r\n        Legend = new\r\n        {\r\n            Data = new[] { \"Sales\" }\r\n        },\r\n        XAxis = new\r\n        {\r\n            Data = new[] { \"Shirt\", \"Cardigan\", \"Chiffon shirt\", \"Pants\", \"High heel\", \"Sock\" }\r\n        },\r\n        YAxis = new { },\r\n        Series = new[]\r\n        {\r\n            new\r\n            {\r\n                Name = \"sales\",\r\n                Type = \"bar\",\r\n                Data = new[] { 5, 20, 36, 10, 10, 20 }\r\n            }\r\n        }\r\n    };\r\n\r\n}\r\n",
+        "Code": "<MRow Justify=\"JustifyTypes.Center\">\r\n    <MCol Cols=\"12\" Class=\"text-center\">\r\n        Aspect ratio: 400/300\r\n    </MCol>\r\n    <MCol Cols=\"12\">\r\n        <MECharts Width=\"400\"\r\n                  Height=\"300\"\r\n                  Style=\"margin: 0 auto\"\r\n                  Option=\"_option\">\r\n        </MECharts>\r\n    </MCol>\r\n</MRow>\r\n\r\n@code {\r\n\r\n    private object _option = new\r\n    {\r\n        Title = new\r\n        {\r\n            Text = \"Getting started\"\r\n        },\r\n        Tooltip = new { },\r\n        Legend = new\r\n        {\r\n            Data = new[] { \"Sales\" }\r\n        },\r\n        XAxis = new\r\n        {\r\n            Data = new[] { \"Shirt\", \"Cardigan\", \"Chiffon shirt\", \"Pants\", \"High heel\", \"Sock\" }\r\n        },\r\n        YAxis = new { },\r\n        Series = new[]\r\n        {\r\n            new\r\n            {\r\n                Name = \"sales\",\r\n                Type = \"bar\",\r\n                Data = new[] { 5, 20, 36, 10, 10, 20 }\r\n            }\r\n        }\r\n    };\r\n\r\n}\r\n",
         "Type": "Demos.Components.ECharts.props.HeightAndWidth",
         "Style": "",
         "Debug": false,
@@ -2421,7 +2421,7 @@
         "Name": "locale",
         "Title": "Locale",
         "Description": "<p>Specify the locale. For more information, please refer to <a href=\"https://echarts.apache.org/en/api.html#echarts.init\">ECharts official documentation</a>.</p>\n",
-        "Code": "@using BlazorComponent.I18n\r\n@inject I18n I18n\r\n\r\n<div class=\"d-flex flex-column align-center justify-center\">\r\n    <MECharts Option=\"option\"\r\n              InitOptions=\"opt => opt.Locale = locale\"\r\n              Width=\"@(\"100%\")\"\r\n              @ref=\"echarts\">\r\n    </MECharts>\r\n\r\n    <MRadioGroup TValue=\"string\" Value=\"locale\" ValueChanged=\"SetLocale\" Row>\r\n        <MRadio Label=\"ZH\"\r\n                Value=\"@(\"zh\")\">\r\n        </MRadio>\r\n        <MRadio Label=\"EN\"\r\n                Value=\"@(\"en\")\">\r\n        </MRadio>\r\n    </MRadioGroup>\r\n</div>\r\n\r\n@code{\r\n    private MECharts echarts;\r\n    private string locale;\r\n\r\n    private object option = new();\r\n\r\n    private async Task SetLocale(string val)\r\n    {\r\n        if (locale != val && echarts is not null)\r\n        {\r\n            await echarts.DisposeECharts();\r\n        }\r\n\r\n        locale = val;\r\n    }\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        locale = I18n.Culture.TwoLetterISOLanguageName;\r\n\r\n        var data = new List<Data>();\r\n        for (int i = 0; i < 1000; i++)\r\n        {\r\n            data.Add(RandomData());\r\n        }\r\n\r\n        option = new\r\n        {\r\n            Title = new\r\n            {\r\n                text = \"Time Axis\"\r\n            },\r\n            Tooltip = new\r\n            {\r\n                Trigger = \"axis\",\r\n                axisPointer = new\r\n                {\r\n                    animation = false\r\n                }\r\n            },\r\n            xAxis = new\r\n            {\r\n                type = \"time\",\r\n                splitLine = new\r\n                {\r\n                    show = false\r\n                }\r\n            },\r\n            yAxis = new\r\n            {\r\n                type = \"value\",\r\n                boundaryGap = new object[] { 0, \"100%\" },\r\n                splitLine = new\r\n                {\r\n                    show = false\r\n                }\r\n            },\r\n            series = new object[]\r\n            {\r\n                new\r\n                {\r\n                    name = \"Fake Data\",\r\n                    type = \"line\",\r\n                    showSymbol = false,\r\n                    data = data\r\n                }\r\n            }\r\n        };\r\n    }\r\n\r\n\r\n    private DateTime _now = new DateTime(1997, 9, 3);\r\n\r\n    private Random _ran = new();\r\n\r\n    private int _lastRandomValue = 10;\r\n\r\n    private Data RandomData()\r\n    {\r\n        _now = _now.AddDays(1);\r\n        _lastRandomValue += _ran.Next(1, 100) - 50;\r\n        return new Data(_now.ToString(\"yyyy/MM/dd\"), new object[] { _now.ToString(\"yyyy/MM/dd\"), _lastRandomValue });\r\n    }\r\n\r\n    private record Data(string Name, object[] Value);\r\n\r\n}\r\n",
+        "Code": "@using BlazorComponent.I18n\r\n@inject I18n I18n\r\n\r\n<div class=\"d-flex flex-column align-center justify-center\">\r\n    <MECharts Option=\"option\"\r\n              InitOptions=\"opt => opt.Locale = locale\"\r\n              Height=\"400\"\r\n              @ref=\"echarts\">\r\n    </MECharts>\r\n\r\n    <MRadioGroup TValue=\"string\" Value=\"locale\" ValueChanged=\"SetLocale\" Row>\r\n        <MRadio Label=\"ZH\"\r\n                Value=\"@(\"zh\")\">\r\n        </MRadio>\r\n        <MRadio Label=\"EN\"\r\n                Value=\"@(\"en\")\">\r\n        </MRadio>\r\n    </MRadioGroup>\r\n</div>\r\n\r\n@code{\r\n    private MECharts echarts;\r\n    private string locale;\r\n\r\n    private object option = new();\r\n\r\n    private async Task SetLocale(string val)\r\n    {\r\n        if (locale != val && echarts is not null)\r\n        {\r\n            await echarts.DisposeECharts();\r\n        }\r\n\r\n        locale = val;\r\n    }\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        locale = I18n.Culture.TwoLetterISOLanguageName;\r\n\r\n        var data = new List<Data>();\r\n        for (int i = 0; i < 1000; i++)\r\n        {\r\n            data.Add(RandomData());\r\n        }\r\n\r\n        option = new\r\n        {\r\n            Title = new\r\n            {\r\n                text = \"Time Axis\"\r\n            },\r\n            Tooltip = new\r\n            {\r\n                Trigger = \"axis\",\r\n                axisPointer = new\r\n                {\r\n                    animation = false\r\n                }\r\n            },\r\n            xAxis = new\r\n            {\r\n                type = \"time\",\r\n                splitLine = new\r\n                {\r\n                    show = false\r\n                }\r\n            },\r\n            yAxis = new\r\n            {\r\n                type = \"value\",\r\n                boundaryGap = new object[] { 0, \"100%\" },\r\n                splitLine = new\r\n                {\r\n                    show = false\r\n                }\r\n            },\r\n            series = new object[]\r\n            {\r\n                new\r\n                {\r\n                    name = \"Fake Data\",\r\n                    type = \"line\",\r\n                    showSymbol = false,\r\n                    data = data\r\n                }\r\n            }\r\n        };\r\n    }\r\n\r\n\r\n    private DateTime _now = new DateTime(1997, 9, 3);\r\n\r\n    private Random _ran = new();\r\n\r\n    private int _lastRandomValue = 10;\r\n\r\n    private Data RandomData()\r\n    {\r\n        _now = _now.AddDays(1);\r\n        _lastRandomValue += _ran.Next(1, 100) - 50;\r\n        return new Data(_now.ToString(\"yyyy/MM/dd\"), new object[] { _now.ToString(\"yyyy/MM/dd\"), _lastRandomValue });\r\n    }\r\n\r\n    private record Data(string Name, object[] Value);\r\n\r\n}\r\n",
         "Type": "Demos.Components.ECharts.props.Locale",
         "Style": "",
         "Debug": false,
@@ -2432,7 +2432,7 @@
         "Name": "theme",
         "Title": "Theme",
         "Description": "<p>Specify the theme. Light and dark themes are supported by default. You can use <a href=\"https://echarts.apache.org/handbook/en/concepts/style/#theme\">custom themes</a>. In this example, the <strong>vintage</strong> theme can be set after importing the vintage.js file in HTML.</p>\n",
-        "Code": "<div class=\"d-flex flex-column align-center justify-center\">\r\n    <MECharts Option=\"option\" Theme=\"@theme\" Width=\"@(\"100%\")\" @ref=\"echarts\"></MECharts>\r\n\r\n    <MRadioGroup TValue=\"string\" Value=\"theme\" ValueChanged=\"SetTheme\" Row>\r\n        <MRadio Label=\"default\"\r\n                Value=\"@(\"\")\">\r\n        </MRadio>\r\n        <MRadio Label=\"light\"\r\n                Value=\"@(\"light\")\">\r\n        </MRadio>\r\n        <MRadio Label=\"dark\"\r\n                Value=\"@(\"dark\")\">\r\n        </MRadio>\r\n        <MRadio Label=\"vintage\"\r\n                Value=\"@(\"vintage\")\">\r\n        </MRadio>\r\n    </MRadioGroup>\r\n</div>\r\n\r\n@code{\r\n    private MECharts echarts;\r\n    private string theme = string.Empty;\r\n\r\n    private object option = new\r\n    {\r\n        Title = new\r\n        {\r\n            Left = \"center\",\r\n            Text = \"Getting started\"\r\n        },\r\n        Tooltip = new { },\r\n        Legend = new\r\n        {\r\n            Right = \"20px\",\r\n            Data = new[] { \"Sales\" }\r\n        },\r\n        XAxis = new\r\n        {\r\n            Data = new[] { \"Shirt\", \"Cardigan\", \"Chiffon shirt\", \"Pants\", \"High heel\", \"Sock\" }\r\n        },\r\n        YAxis = new { },\r\n        Series = new[]\r\n        {\r\n            new\r\n            {\r\n                Name = \"sales\",\r\n                Type = \"bar\",\r\n                Data = new[] { 5, 20, 36, 10, 10, 20 }\r\n            }\r\n        }\r\n    };\r\n\r\n    private async Task SetTheme(string val)\r\n    {\r\n        if (theme != null && echarts != null)\r\n        {\r\n            await echarts.DisposeECharts();\r\n        }\r\n\r\n        theme = val;\r\n    }\r\n\r\n}\r\n",
+        "Code": "<div class=\"d-flex flex-column align-center justify-center\">\r\n    <MECharts Option=\"option\" Theme=\"@theme\" Height=\"400\" @ref=\"echarts\"></MECharts>\r\n\r\n    <MRadioGroup TValue=\"string\" Value=\"theme\" ValueChanged=\"SetTheme\" Row>\r\n        <MRadio Label=\"default\"\r\n                Value=\"@(\"\")\">\r\n        </MRadio>\r\n        <MRadio Label=\"light\"\r\n                Value=\"@(\"light\")\">\r\n        </MRadio>\r\n        <MRadio Label=\"dark\"\r\n                Value=\"@(\"dark\")\">\r\n        </MRadio>\r\n        <MRadio Label=\"vintage\"\r\n                Value=\"@(\"vintage\")\">\r\n        </MRadio>\r\n    </MRadioGroup>\r\n</div>\r\n\r\n@code{\r\n    private MECharts echarts;\r\n    private string theme = string.Empty;\r\n\r\n    private object option = new\r\n    {\r\n        Title = new\r\n        {\r\n            Left = \"center\",\r\n            Text = \"Getting started\"\r\n        },\r\n        Tooltip = new { },\r\n        Legend = new\r\n        {\r\n            Right = \"20px\",\r\n            Data = new[] { \"Sales\" }\r\n        },\r\n        XAxis = new\r\n        {\r\n            Data = new[] { \"Shirt\", \"Cardigan\", \"Chiffon shirt\", \"Pants\", \"High heel\", \"Sock\" }\r\n        },\r\n        YAxis = new { },\r\n        Series = new[]\r\n        {\r\n            new\r\n            {\r\n                Name = \"sales\",\r\n                Type = \"bar\",\r\n                Data = new[] { 5, 20, 36, 10, 10, 20 }\r\n            }\r\n        }\r\n    };\r\n\r\n    private async Task SetTheme(string val)\r\n    {\r\n        if (theme != null && echarts != null)\r\n        {\r\n            await echarts.DisposeECharts();\r\n        }\r\n\r\n        theme = val;\r\n    }\r\n\r\n}\r\n",
         "Type": "Demos.Components.ECharts.props.Theme",
         "Style": "",
         "Debug": false,
@@ -2454,7 +2454,7 @@
       "JS file": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quilljs-markdown.js&quot;&gt;&lt;/script&gt;\n&lt;script src=&quot;https://cdn.masastack.com/npm/quill/1.3.6/quill-emoji.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MEditor\">MEditor</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5283265+08:00",
+    "LastWriteTime": "2022-04-24T11:08:42.1024985+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2591,7 +2591,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MErrorHandler\">MErrorHandler</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5303263+08:00",
+    "LastWriteTime": "2022-04-01T11:11:01.979192+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2650,7 +2650,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MExpansionPanels\">MExpansionPanels</a></li>\n<li><a href=\"/api/MExpansionPanel\">MExpansionPanel</a></li>\n<li><a href=\"/api/MExpansionPanelHeader\">MExpansionPanelHeader</a></li>\n<li><a href=\"/api/MExpansionPanelContent\">MExpansionPanelContent</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5353344+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2457187+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2780,7 +2780,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButton\">MButton</a></li>\n<li><a href=\"/api/MSpeedDial\">MSpeedDial</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5383346+08:00",
+    "LastWriteTime": "2022-04-25T14:07:47.7128811+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2855,7 +2855,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFooter\">MFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5413346+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2477073+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2931,7 +2931,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MAutocomplete\">MAutocomplete</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:error--> \n<p>When using objects for the <strong>Items</strong> prop, you must associate <strong>ItemText</strong> and <strong>ItemValue</strong> with existing properties on your objects. These values are defaulted to  <strong>Text</strong> and <strong>Value</strong> and can be changed.</p>\n<!--/alert:error--> \n<!--alert:warning--> \n<p>The <strong>Auto</strong> property of <strong>MenuProps</strong> is only supported for the default input style.</p>\n<!--/alert:warning--> \n<!--alert:info--> \n<p>Browser autocomplete is set to off by default, may vary by browser and may be ignored.  <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5453341+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2507043+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3039,7 +3039,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCascader\">MCascader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5488484+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2527034+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3114,7 +3114,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MCheckbox\">MCheckbox</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5518476+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2547037+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3200,7 +3200,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MFileInput\">MFileInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5568478+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.257704+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3341,7 +3341,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MForm\">MForm</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5608477+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.259713+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3449,7 +3449,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOtpInput\">MOtpInput</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5638478+08:00",
+    "LastWriteTime": "2022-04-01T11:11:01.9831927+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3513,7 +3513,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRadio\">MRadio</a></li>\n<li><a href=\"/api/MRadioGroup\">MRadioGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5658484+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.261704+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3588,7 +3588,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.569847+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.264707+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3675,7 +3675,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MSelect\">MSelect</a></li>\n</ul>\n",
       "注意": "\n<!--alert:info--> \n<p>The default setting of browser auto completion is off, which may be changed or ignored by different browsers. <strong><a href=\"https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion\">MDN</a></strong></p>\n<!--/alert:info--> \n<!--alert:warning--> \n<p>The <strong>Auto</strong> attribute of <strong>menupprops</strong> only supports the default input style.</p>\n<!--/alert:warning--> \n<!--alert:error--> \n<p>When using an object as the attribute of <strong>items</strong>, you must use <strong>itemtext</strong> and <strong>itemvalue</strong> to associate with the incoming object. These values are <strong>text</strong> and <strong>value</strong> by default and can be changed.</p>\n<!--/alert:error--> \n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5748478+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2678535+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -3816,7 +3816,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlider\">MSlider</a></li>\n<li><a href=\"/api/MRangeSlider\">MRangeSlider</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5818476+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2727037+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4001,7 +4001,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSwitch\">MSwitch</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5848474+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2747041+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4098,7 +4098,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextarea\">MTextarea</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6008474+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2857046+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4228,7 +4228,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTextField\">MTextField</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.5958477+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2817067+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4515,7 +4515,7 @@
       "Helper Classes": "\n<p><strong>FillHeight</strong> applies <code>height: 100%</code> to an element. When applied to <code>MContainer</code> it will also <code>align-items: center</code>.</p>\n",
       "Caveats": "\n<!--alert:info--> \n<p>1.x grid system has been deprecated in favor of the 2.x grid system.</p>\n<!--alert:info--> \n<!--alert:info--> \n<p>Breakpoints based props on grid components work in an <code>andUp</code> fashion. With this in mind the <strong>xs</strong> breakpoint is assumed and has been removed from the props context. This applies to <strong>offset</strong>、<strong>justify</strong>、<strong>align</strong> and single breakpoint props on <code>MCol</code>.</p>\n<ul>\n<li>Props like <strong>justify-sm</strong> and <strong>justify-md</strong> exist,but <strong>justify-xs</strong> does not, it is simply <strong>justify</strong>。</li>\n<li>The <strong>xs</strong> prop does not exist on <code>MCol</code>. The equivalent to this is the <strong>cols</strong> prop.</li>\n</ul>\n<!--alert:info--> \n<!--alert:info--> \n<p>When using the grid system with IE11 you will need to set an explicit <code>height</code> as <code>min-height</code> will not suffice and cause undesired results.</p>\n<!--alert:info--> \n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6098474+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2917052+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4742,7 +4742,7 @@
     "Desc": "<p>Packaging based on <a href=\"https://github.com/gridstack/gridstack.js\">gridstack</a></p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-11-16T23:22:21.4354393+08:00",
+    "LastWriteTime": "2022-11-16T18:14:51.2121132+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4757,11 +4757,11 @@
       },
       {
         "Order": 0,
-        "Name": "saveAndLoad",
+        "Name": "save",
         "Title": "Save",
         "Description": "",
-        "Code": "<div class=\"d-flex justify-lg-space-around mb-2\">\r\n    <MButton OnClick=\"OnSave\">Save</MButton>\r\n</div>\r\n\r\n<MGridstack Items=\"@_items\"\r\n            ItemKey=\"item => item.ToString()\"\r\n            ItemClass=\"blue\"\r\n            Margin=\"6\"\r\n            TItem=\"int\"\r\n            ItemPosition=\"ItemPosition\"\r\n            DisableOneColumnMode\r\n            @ref=\"@_gridstack\">\r\n    <ItemContent>\r\n        <div class=\"text-center\">@context</div>\r\n    </ItemContent>\r\n</MGridstack>\r\n\r\n<MDivider />\r\n\r\n<MTextarea Readonly Value=\"@_widgetsJson\"></MTextarea>\r\n\r\n@code {\r\n\r\n    private readonly List<int> _items = Enumerable.Range(1, 11).ToList();\r\n\r\n    private MGridstack<int>? _gridstack;\r\n    private string _widgetsJson;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        var widgets = await _gridstack!.OnSave();\r\n        _widgetsJson = System.Text.Json.JsonSerializer.Serialize(widgets);\r\n    }\r\n\r\n    static GridstackWidgetPosition ItemPosition(int item)\r\n    {\r\n        return item switch\r\n        {\r\n            1 => new(4, 2),\r\n            2 => new(4, 4),\r\n            6 => new(2, 4),\r\n            7 => new(4, 2),\r\n            9 => new(4, 2),\r\n            _ => new(2, 2)\r\n        };\r\n    }\r\n\r\n}\r\n",
-        "Type": "Demos.Components.Gridstack.props.SaveAndLoad",
+        "Code": "@using System.Text.Json\r\n\r\n<MRow Dense Class=\"mb-2\">\r\n    <MCol Cols=\"6\">\r\n        <MButton OnClick=\"OnLoadDefault\">Load default data</MButton>\r\n    </MCol>\r\n    <MCol Cols=\"6\">\r\n        <MButton OnClick=\"OnSave\">Save current data</MButton>\r\n    </MCol>\r\n    <MCol Cols=\"6\">\r\n        <MButton OnClick=\"OnClear\">Clear grids</MButton>\r\n    </MCol>\r\n    <MCol Cols=\"6\">\r\n        <MButton OnClick=\"OnLoad\">Load saved data</MButton>\r\n    </MCol>\r\n</MRow>\r\n\r\n<MGridstack Items=\"@_items\"\r\n            ItemKey=\"item => item.ToString()\"\r\n            ItemClass=\"blue\"\r\n            Margin=\"6\"\r\n            TItem=\"int\"\r\n            ItemPosition=\"@_itemPosition\"\r\n            DisableOneColumnMode\r\n            @ref=\"@_gridstack\">\r\n    <ItemContent>\r\n        <div class=\"text-center\">@context</div>\r\n    </ItemContent>\r\n</MGridstack>\r\n\r\n<MDivider />\r\n\r\n<MTextarea Readonly\r\n           Filled\r\n           HideDetails=\"true\"\r\n           Label=\"Saved data\"\r\n           Rows=\"20\"\r\n           Value=\"@(JsonSerializer.Serialize(_widgets, new JsonSerializerOptions() { WriteIndented = true }))\"\r\n           Class=\"gridstack-save-and-load__textarea ma-1\">\r\n</MTextarea>\r\n\r\n@code {\r\n\r\n    private List<int> _items = new();\r\n\r\n    private MGridstack<int>? _gridstack;\r\n    private List<GridstackWidget> _widgets = new();\r\n    private Func<int, GridstackWidgetPosition> _itemPosition = DefaultItemPosition;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        _widgets = await _gridstack!.OnSave();\r\n    }\r\n\r\n    private void OnClear()\r\n    {\r\n        _items.Clear();\r\n    }\r\n\r\n    private void OnLoad()\r\n    {\r\n        _items = _widgets.Select(w => Convert.ToInt32(w.Id)).ToList();\r\n        _itemPosition = id =>\r\n        {\r\n            var widget = _widgets.FirstOrDefault(w => w.Id == id.ToString());\r\n            return widget ?? new GridstackWidgetPosition(2, 2);\r\n        };\r\n    }\r\n\r\n    private void OnLoadDefault()\r\n    {\r\n        _items = Enumerable.Range(1, 11).ToList();\r\n        _itemPosition = DefaultItemPosition;\r\n    }\r\n\r\n    static GridstackWidgetPosition DefaultItemPosition(int item)\r\n    {\r\n        return item switch\r\n        {\r\n            1 => new(4, 2),\r\n            2 => new(4, 4),\r\n            6 => new(2, 4),\r\n            7 => new(4, 2),\r\n            9 => new(4, 2),\r\n            _ => new(2, 2)\r\n        };\r\n    }\r\n\r\n}\r\n\r\n<style>\r\n    .gridstack-save-and-load__textarea textarea {\r\n      line-height: 1;\r\n      font-family: monospace;\r\n      font-size: small;\r\n    }\r\n</style>\r\n",
+        "Type": "Demos.Components.Gridstack.props.Save",
         "Style": "",
         "Debug": false,
         "Group": 0
@@ -4791,7 +4791,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MButtonGroup\">MButtonGroup</a></li>\n<li><a href=\"/api/MButton\">MButton</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6128476+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2947039+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4877,7 +4877,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MChipGroup\">MChipGroup</a></li>\n<li><a href=\"/api/MChip\">MChip</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6168482+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2967069+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -4974,7 +4974,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MItem\">MItem</a></li>\n<li><a href=\"/api/MItemGroup\">MItemGroup</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6210037+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.2987137+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5060,7 +5060,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6240029+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3017064+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5146,7 +5146,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSlideGroup\">MSlideGroup</a></li>\n<li><a href=\"/api/MSlideItem\">MSlideItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6280032+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3037055+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5243,7 +5243,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MWindow\">MWindow</a></li>\n<li><a href=\"/api/MWindowItem\">MWindowItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6310032+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3057124+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5329,7 +5329,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MHover\">MHover</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6340097+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3077067+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5393,7 +5393,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MIcon\">MIcon</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6370105+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3097062+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5480,7 +5480,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MImage\">MImage</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info--> \n<p>The MImage component uses the Intersect directive which requires a Polyfill for IE11 and Safari. If a browser that does not support this functionality is detected, the image will still load as normal.</p>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6410104+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3127061+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5575,7 +5575,7 @@
     "Desc": "<p>Image Captcha component</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.64301+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0400807+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -5628,7 +5628,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MInfiniteScroll\">MInfiniteScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6440099+08:00",
+    "LastWriteTime": "2022-08-29T10:31:06.6439431+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5682,7 +5682,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MList\">MList</a></li>\n<li><a href=\"/api/MListGroup\">MListGroup</a></li>\n<li><a href=\"/api/MListItem\">MListItem</a></li>\n<li><a href=\"/api/MListItemAction\">MListItemAction</a></li>\n<li><a href=\"/api/MListItemActionText\">MListItemActionText</a></li>\n<li><a href=\"/api/MListItemAvatar\">MListItemAvatar</a></li>\n<li><a href=\"/api/MListItemContent\">MListItemContent</a></li>\n<li><a href=\"/api/MListItemGroup\">MListItemGroup</a></li>\n<li><a href=\"/api/MListItemIcon\">MListItemIcon</a></li>\n<li><a href=\"/api/MListItemSubtitle\">MListItemSubtitle</a></li>\n<li><a href=\"/api/MListItemTitle\">MListItemTitle</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>If you want to find a list item with status, please check <a href=\"/components/list-item-groups\"><strong>MListItemGroup</strong></a>。</p>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.652523+08:00",
+    "LastWriteTime": "2022-04-24T11:08:42.1104887+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -5891,7 +5891,7 @@
       "JS file": "\n<pre><code class=\"language-html\">&lt;script src=&quot;https://cdn.masastack.com/npm/vditor/3.8.12/dist/index.min.js&quot;&gt;&lt;/script&gt;\n</code></pre>\n",
       "API": "\n<ul>\n<li><a href=\"/api/MMarkdown\">MMarkdown</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6565232+08:00",
+    "LastWriteTime": "2022-04-01T12:54:45.5050333+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6017,7 +6017,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMarkdownIt\">MMarkdownIt</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-11-12T16:35:23.3221179+08:00",
+    "LastWriteTime": "2022-11-10T18:27:36.364864+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6066,7 +6066,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMenu\">MMenu</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6625233+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3217128+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6238,7 +6238,7 @@
     "Desc": "<p>A cascade selector designed for the mobile.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.6655227+08:00",
+    "LastWriteTime": "2022-10-31T10:52:16.0071557+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6290,7 +6290,7 @@
     "Desc": "<p>A date picker designed for the mobile.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.6675222+08:00",
+    "LastWriteTime": "2022-10-31T10:52:16.0101893+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6353,7 +6353,7 @@
     "Desc": "<p>A date time picker designed for the mobile.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.6695233+08:00",
+    "LastWriteTime": "2022-10-31T10:52:16.0121766+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6416,7 +6416,7 @@
     "Desc": "<p>A picker designed for the mobile. Provides multiple sets of options for users to choose, and supports single-column selection, multi-column selection and cascading selection.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.6745228+08:00",
+    "LastWriteTime": "2022-10-31T10:52:16.0221252+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6470,7 +6470,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MMobilePickerView\">MMobilePickerView</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6725237+08:00",
+    "LastWriteTime": "2022-10-31T10:52:16.0201268+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6532,7 +6532,7 @@
     "Desc": "<p>A time picker designed for the mobile.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.6765253+08:00",
+    "LastWriteTime": "2022-10-31T10:52:16.0311275+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6595,7 +6595,7 @@
     "Desc": "<p>When requiring users to interact with the application, but without jumping to a new page and interrupting the user's\nworkflow, you can use <code>Modal</code> to create a new floating layer over the current page to get user feedback or display\ninformation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.6815223+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0449765+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -6693,7 +6693,7 @@
     "OtherDocs": {
       "Caveats": "\n<!--alert:error-->\n<p>If you are using <code>MNavigationDrawer</code> with <strong>App</strong> property enabled, you don't need to use <strong>Absolute</strong> prop as in examples.</p>\n<!--/alert:error-->\n<!--alert:info-->\n<p>The <strong>ExpandOnHover</strong> prop does not alter the content area of <strong>MMain</strong>. To have content area respond to <strong>ExpandOnHover</strong>, bind <strong>OnMiniVariantUpdate</strong> to a data prop.</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6865225+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3247122+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6820,7 +6820,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.6875231+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0469402+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6874,7 +6874,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MOverlay\">MOverlay</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6925224+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3267048+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -6960,7 +6960,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MPagination\">MPagination</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.6955246+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3287054+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7047,7 +7047,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>Mdatepicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7045238+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3348635+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7288,7 +7288,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MDatePicker\">MDatePicker</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p><code>MDatePicker </code> accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards]�� https://www.iso.org/standards.html ��Official website.</p>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7096649+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3377048+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7429,7 +7429,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimePicker\">MTimePicker</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7156641+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3417042+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7600,7 +7600,7 @@
   {
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.717664+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0509517+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7665,7 +7665,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressCircular\">MProgressCircular</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7216647+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3547148+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7740,7 +7740,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MProgressLinear\">MProgressLinear</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7276646+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3587048+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -7903,7 +7903,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MRating\">MRating</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7296643+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3607127+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -8011,7 +8011,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSheet\">MSheet</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7326715+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.361714+08:00",
     "DemoList": [
       {
         "Order": 2,
@@ -8064,7 +8064,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSkeletonLoader\">MSkeletonLoader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7346719+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3637136+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8106,7 +8106,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSnackbar\">MSnackbar</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7376715+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3657064+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8181,7 +8181,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MStepper\">MStepper</a></li>\n<li><a href=\"/api/MStepperContent\">MStepperContent</a></li>\n<li><a href=\"/api/MStepperHeader\">MStepperHeader</a></li>\n<li><a href=\"/api/MStepperItems\">MStepperItems</a></li>\n<li><a href=\"/api/MStepperStep\">MStepperStep</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7436723+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3697059+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8344,7 +8344,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSubheader\">MSubheader</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7471771+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3707042+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8419,7 +8419,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataIterator\">MDataIterator</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7481854+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3727066+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8472,7 +8472,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MDataTable\">MDataTable</a></li>\n<li><a href=\"/api/MDataTableHeader\">MDataTableHeader</a></li>\n<li><a href=\"/api/MDataFooter\">MDataFooter</a></li>\n<li><a href=\"/api/MSimpleCheckbox\">MSimpleCheckbox</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7591843+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3787041+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8734,7 +8734,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MSimpleTable\">MSimpleTable</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7621849+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3807065+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -8810,7 +8810,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTabs\">MTabs</a></li>\n<li><a href=\"/api/MTab\">MTab</a></li>\n<li><a href=\"/api/MTabItem\">MTabItem</a></li>\n<li><a href=\"/api/MTabsItems\">MTabsItems</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:warning--> \n<p>When using the <strong>Dark</strong> prop and <strong>NOT</strong> providing a custom <strong>color</strong>, the <code>MTabs</code> component will default its color to white.</p>\n<!--alert:warning--> \n<!--alert:warning--> \n<p>When using <code>MTabItem</code>'s that contain required input fields you must use the <strong>eager</strong> prop in order to validate the required fields that are not yet visible.</p>\n<!--alert:warning--> \n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7691844+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3859742+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -9006,7 +9006,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MTimeline\">MTimeline</a></li>\n<li><a href=\"/api/MTimelineItem\">MTimelineItem</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7741843+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.38872+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -9134,7 +9134,7 @@
     "Desc": "<p>The component is used to convey important information to the user through the use contextual types icons and color.\nThese default types come in in 4 variations: <strong>Success</strong>,<strong>Info</strong>,<strong>Warning</strong>, and <strong>Error</strong>. Default icons are assigned\nwhich help represent different actions each type portrays and also can customized content to fit almost any situation.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.7771843+08:00",
+    "LastWriteTime": "2022-08-29T13:13:54.0592024+08:00",
     "DemoList": [
       {
         "Order": 1,
@@ -9211,7 +9211,7 @@
       "API": "\n<ul>\n<li><a href=\"/api/MTooltip\">MTooltip</a></li>\n</ul>\n",
       "Caveats": "\n<!--alert:info-->\n<p>In order to correctly position 'MTooltip', a position support (<code>top</code> | 'bottom <code>|' left</code> | 'right') is required.</p>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7791838+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3907064+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -9262,7 +9262,7 @@
     "Desc": "<p>The MTreeview component is useful for displaying large amounts of nested data.</p>\n",
     "Order": 0,
     "OtherDocs": {},
-    "LastWriteTime": "2022-10-20T23:42:05.7861844+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3947047+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -9458,7 +9458,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MVirtualScroll\">MVirtualScroll</a></li>\n</ul>\n"
     },
-    "LastWriteTime": "2022-10-20T23:42:05.7871844+08:00",
+    "LastWriteTime": "2022-03-28T10:24:25.3961855+08:00",
     "DemoList": [
       {
         "Order": 0,
