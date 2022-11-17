@@ -8,7 +8,8 @@
     "cycle": "Will reset to first or last tab when swiping left or right if at the end of indexes",
     "dark": "Applies the dark theme variant to the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
     "fixedTabs": "`MTabsItem` min-width 160px, max-width 360px",
-    "grow": "Force `MTab`'s to take up all available space",
+    "grow": "Force `MTabs`'s to take up all available space",
+    "hideSlider": "hide the generated slider",
     "height": "Sets the height of the tabs bar",
     "iconsAndText": "Will stack icon and text vertically",
     "light": "Applies the light theme variant to the component.",
@@ -19,7 +20,6 @@
     "showArrows": "Show pagination arrows if the tab items overflow their container. For mobile devices, arrows will only display when using this prop.",
     "sliderColor": "Changes the background color of an auto-generated `MTabsSlider`",
     "sliderSize": "Changes the size of the slider, **height** for horizontal, **width** for vertical.",
-    "touchless": "Disable mobile touch functionality",
     "vertical": "Stacks tabs on top of each other vertically."
   },
   "contents": {
