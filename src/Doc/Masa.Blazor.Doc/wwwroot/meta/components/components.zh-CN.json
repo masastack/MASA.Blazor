@@ -2410,7 +2410,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n<!--alert:info-->\n<p>使用前需要先引用ECharts的包：\n<br />\n<code>&lt;script src=&quot;https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js&quot;&gt;&lt;/script&gt;</code>。</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2427066+08:00",
+    "LastWriteTime": "2022-11-17T11:11:27.1681425+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2466,6 +2466,17 @@
         "Style": "",
         "Debug": false,
         "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "liveUpdate",
+        "Title": "实时更新",
+        "Description": "",
+        "Code": "@using System.Timers\r\n@implements IDisposable\r\n\r\n<MECharts Option=\"_option\" Height=\"400\"></MECharts>\r\n\r\n@code{\r\n\r\n    private Timer _timer;\r\n    private object _option = GenOption(MakeRandomData());\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        base.OnInitialized();\r\n\r\n        if (_timer == null)\r\n        {\r\n            _timer = new Timer\r\n            {\r\n                Interval = 2000\r\n            };\r\n\r\n            _timer.Elapsed += TimerOnElapsed;\r\n\r\n            _timer.Start();\r\n        }\r\n    }\r\n\r\n    private void TimerOnElapsed(object sender, ElapsedEventArgs e)\r\n    {\r\n        InvokeAsync(() =>\r\n        {\r\n            // new instance will trigger the echarts.setOption()\r\n            _option = GenOption(MakeRandomData());\r\n            StateHasChanged();\r\n        });\r\n    }\r\n\r\n    private static object GenOption(IEnumerable<PieDataItem> data)\r\n    {\r\n        return new\r\n        {\r\n            Series = new[]\r\n            {\r\n                new\r\n                {\r\n                    Radius = new[] { \"0\", \"50%\" },\r\n                    Type = \"pie\",\r\n                    Data = data\r\n                }\r\n            }\r\n        };\r\n    }\r\n\r\n    private static IEnumerable<PieDataItem> MakeRandomData()\r\n    {\r\n        return new[] { \"A\", \"B\", \"C\" }.Select(item => new PieDataItem(item, Random.Shared.Next(10, 99)));\r\n    }\r\n\r\n    record PieDataItem(string Name, int Value);\r\n\r\n    public void Dispose()\r\n    {\r\n        _timer?.Dispose();\r\n    }\r\n\r\n}\r\n",
+        "Type": "Demos.Components.ECharts.misc.LiveUpdate",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
       }
     ],
     "Children": [],
@@ -4807,7 +4818,7 @@
       {
         "Order": 0,
         "Name": "save",
-        "Title": "Save",
+        "Title": "保存",
         "Description": "",
         "Code": "@using System.Text.Json\r\n\r\n<MRow Dense Class=\"mb-2\">\r\n    <MCol Cols=\"6\">\r\n        <MButton OnClick=\"OnLoadDefault\">Load default data</MButton>\r\n    </MCol>\r\n    <MCol Cols=\"6\">\r\n        <MButton OnClick=\"OnSave\">Save current data</MButton>\r\n    </MCol>\r\n    <MCol Cols=\"6\">\r\n        <MButton OnClick=\"OnClear\">Clear grids</MButton>\r\n    </MCol>\r\n    <MCol Cols=\"6\">\r\n        <MButton OnClick=\"OnLoad\">Load saved data</MButton>\r\n    </MCol>\r\n</MRow>\r\n\r\n<MGridstack Items=\"@_items\"\r\n            ItemKey=\"item => item.ToString()\"\r\n            ItemClass=\"blue\"\r\n            Margin=\"6\"\r\n            TItem=\"int\"\r\n            ItemPosition=\"@_itemPosition\"\r\n            DisableOneColumnMode\r\n            @ref=\"@_gridstack\">\r\n    <ItemContent>\r\n        <div class=\"text-center\">@context</div>\r\n    </ItemContent>\r\n</MGridstack>\r\n\r\n<MDivider />\r\n\r\n<MTextarea Readonly\r\n           Filled\r\n           HideDetails=\"true\"\r\n           Label=\"Saved data\"\r\n           Rows=\"20\"\r\n           Value=\"@(JsonSerializer.Serialize(_widgets, new JsonSerializerOptions() { WriteIndented = true }))\"\r\n           Class=\"gridstack-save-and-load__textarea ma-1\">\r\n</MTextarea>\r\n\r\n@code {\r\n\r\n    private List<int> _items = new();\r\n\r\n    private MGridstack<int>? _gridstack;\r\n    private List<GridstackWidget> _widgets = new();\r\n    private Func<int, GridstackWidgetPosition> _itemPosition = DefaultItemPosition;\r\n\r\n    private async Task OnSave()\r\n    {\r\n        _widgets = await _gridstack!.OnSave();\r\n    }\r\n\r\n    private void OnClear()\r\n    {\r\n        _items.Clear();\r\n    }\r\n\r\n    private void OnLoad()\r\n    {\r\n        _items = _widgets.Select(w => Convert.ToInt32(w.Id)).ToList();\r\n        _itemPosition = id =>\r\n        {\r\n            var widget = _widgets.FirstOrDefault(w => w.Id == id.ToString());\r\n            return widget ?? new GridstackWidgetPosition(2, 2);\r\n        };\r\n    }\r\n\r\n    private void OnLoadDefault()\r\n    {\r\n        _items = Enumerable.Range(1, 11).ToList();\r\n        _itemPosition = DefaultItemPosition;\r\n    }\r\n\r\n    static GridstackWidgetPosition DefaultItemPosition(int item)\r\n    {\r\n        return item switch\r\n        {\r\n            1 => new(4, 2),\r\n            2 => new(4, 4),\r\n            6 => new(2, 4),\r\n            7 => new(4, 2),\r\n            9 => new(4, 2),\r\n            _ => new(2, 2)\r\n        };\r\n    }\r\n\r\n}\r\n\r\n<style>\r\n    .gridstack-save-and-load__textarea textarea {\r\n      line-height: 1;\r\n      font-family: monospace;\r\n      font-size: small;\r\n    }\r\n</style>\r\n",
         "Type": "Demos.Components.Gridstack.props.Save",

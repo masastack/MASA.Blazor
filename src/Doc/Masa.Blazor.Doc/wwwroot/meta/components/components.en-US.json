@@ -2381,7 +2381,7 @@
     "OtherDocs": {
       "API": "\n<ul>\n<li><a href=\"/api/MECharts\">MECharts</a></li>\n</ul>\n<!--alert:info-->\n<p>You need to reference the package of ECharts before using it:\n<br />\n<code>&lt;script src=&quot;https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js&quot;&gt;&lt;/script&gt;</code>.</p>\n<!--/alert:info-->\n"
     },
-    "LastWriteTime": "2022-03-28T10:24:25.2427066+08:00",
+    "LastWriteTime": "2022-11-17T11:11:27.1681425+08:00",
     "DemoList": [
       {
         "Order": 0,
@@ -2437,6 +2437,17 @@
         "Style": "",
         "Debug": false,
         "Group": 0
+      },
+      {
+        "Order": 0,
+        "Name": "liveUpdate",
+        "Title": "Live update",
+        "Description": "",
+        "Code": "@using System.Timers\r\n@implements IDisposable\r\n\r\n<MECharts Option=\"_option\" Height=\"400\"></MECharts>\r\n\r\n@code{\r\n\r\n    private Timer _timer;\r\n    private object _option = GenOption(MakeRandomData());\r\n\r\n    protected override void OnInitialized()\r\n    {\r\n        base.OnInitialized();\r\n\r\n        if (_timer == null)\r\n        {\r\n            _timer = new Timer\r\n            {\r\n                Interval = 2000\r\n            };\r\n\r\n            _timer.Elapsed += TimerOnElapsed;\r\n\r\n            _timer.Start();\r\n        }\r\n    }\r\n\r\n    private void TimerOnElapsed(object sender, ElapsedEventArgs e)\r\n    {\r\n        InvokeAsync(() =>\r\n        {\r\n            // new instance will trigger the echarts.setOption()\r\n            _option = GenOption(MakeRandomData());\r\n            StateHasChanged();\r\n        });\r\n    }\r\n\r\n    private static object GenOption(IEnumerable<PieDataItem> data)\r\n    {\r\n        return new\r\n        {\r\n            Series = new[]\r\n            {\r\n                new\r\n                {\r\n                    Radius = new[] { \"0\", \"50%\" },\r\n                    Type = \"pie\",\r\n                    Data = data\r\n                }\r\n            }\r\n        };\r\n    }\r\n\r\n    private static IEnumerable<PieDataItem> MakeRandomData()\r\n    {\r\n        return new[] { \"A\", \"B\", \"C\" }.Select(item => new PieDataItem(item, Random.Shared.Next(10, 99)));\r\n    }\r\n\r\n    record PieDataItem(string Name, int Value);\r\n\r\n    public void Dispose()\r\n    {\r\n        _timer?.Dispose();\r\n    }\r\n\r\n}\r\n",
+        "Type": "Demos.Components.ECharts.misc.LiveUpdate",
+        "Style": "",
+        "Debug": false,
+        "Group": 3
       }
     ],
     "Children": [],

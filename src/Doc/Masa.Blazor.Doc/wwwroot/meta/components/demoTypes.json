@@ -177,6 +177,7 @@
   "Demos.Components.ECharts.props.HeightAndWidth",
   "Demos.Components.ECharts.props.Locale",
   "Demos.Components.ECharts.props.Theme",
+  "Demos.Components.ECharts.misc.LiveUpdate",
   "Demos.Components.Editor.usage.Basic",
   "Demos.Components.Editor.props.Height",
   "Demos.Components.Editor.props.Markdown",
