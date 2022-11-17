@@ -7,7 +7,7 @@
             AbstractProvider
                 .Apply<BButton, MButton>(prop =>
                 {
-                    prop[nameof(MButton.Class)] = "m-app-bar__nav-icon";
+                    prop[nameof(MButton.Class)] = $"{Class} m-app-bar__nav-icon";
                     prop[nameof(MButton.Icon)] = true;
 
                     foreach (var attr in Attributes)
