@@ -4767,6 +4767,16 @@
       },
       {
         "Order": 0,
+        "Title": "Gridstack",
+        "SubTitle": "网格堆栈",
+        "FullTitle": "Gridstack (网格堆栈)",
+        "Type": "menuItem",
+        "Url": "components/gridstack",
+        "Tag": "js-proxy",
+        "Children": []
+      },
+      {
+        "Order": 0,
         "Title": "Groups",
         "SubTitle": "组",
         "FullTitle": "Groups (组)",
