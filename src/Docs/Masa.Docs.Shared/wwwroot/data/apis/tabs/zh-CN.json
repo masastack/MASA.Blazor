@@ -1,5 +1,6 @@
 ﻿{
   "props": {
+    "activeClass": "`ActiveClass`应用于被激活的。",
     "backgroundColor": "更改组件的背景颜色。",
     "centered": "将标签居中",
     "centerActive": "强制选定的选项卡居中",

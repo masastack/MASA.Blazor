@@ -1,6 +1,6 @@
 ﻿{
   "props": {
-    "activeClass": "The **ActiveClass** applied to children when they are activated.",
+    "activeClass": "The `ActiveClass` applied to children when they are activated.",
     "alignWithTitle": "Make `MTabs` lined up with the toolbar title",
     "backgroundColor": "Changes the background color of the component.",
     "centered": "Centers the tabs",
