@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - src/Docs/**
   workflow_dispatch: 
 
 jobs:
