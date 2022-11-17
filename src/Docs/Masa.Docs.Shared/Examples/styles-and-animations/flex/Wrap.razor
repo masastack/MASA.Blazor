@@ -1,0 +1,38 @@
+﻿<div>
+    <MCard Class="d-flex flex-nowrap py-3" Color="grey lighten-2" Flat Tile Height="125">
+        @for (var i = 1; i <= 5; i++)
+        {
+            <MCard Class="pa-2" Outlined Tile>
+                Flex item
+            </MCard>
+        }
+    </MCard>
+</div>
+
+<br/>
+
+<div>
+    <MCard Class="d-flex flex-wrap" Color="grey lighten-2" Flat Tile>
+        @for (var i = 1; i <= 20; i++)
+        {
+            var n = i;
+            <MCard Class="pa-2" Outlined Tile>
+                @($"Flex item {n}")
+            </MCard>
+        }
+    </MCard>
+</div>
+
+<br/>
+
+<div>
+    <MCard Class="d-flex flex-wrap-reverse" Color="grey lighten-2" Flat Tile>
+        @for (var i = 1; i <= 20; i++)
+        {
+            var n = i;
+            <MCard Class="pa-2" Outlined Tile>
+                @($"Flex item {n}")
+            </MCard>
+        }
+    </MCard>
+</div>

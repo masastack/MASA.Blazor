@@ -1,0 +1,21 @@
+﻿<div>
+    <MCard Class="d-flex flex-row mb-6" Color="grey lighten-4" Flat Tile>
+        @for (var i = 1; i <= 3; i++)
+        {
+            var num = i;
+            <MCard Class="pa-2" Outlined Tile>
+                @($"Flex item {num}")
+            </MCard>
+        }
+    </MCard>
+
+    <MCard Class="d-flex flex-row-reverse" Color="grey lighten-4" Flat Tile>
+        @for (var i = 1; i <= 3; i++)
+        {
+            var num = i;
+            <MCard Class="pa-2" Outlined Tile>
+                @($"Flex item {num}")
+            </MCard>
+        }
+    </MCard>
+</div>

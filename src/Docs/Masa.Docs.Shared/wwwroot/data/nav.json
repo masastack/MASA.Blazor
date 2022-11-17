@@ -18,7 +18,16 @@
     "title": "styles-and-animations",
     "icon": "mdi-lightning-bolt",
     "items": [
-      "border-radius"
+      "border-radius",
+      "color",
+      "display-helpers",
+      "elevation",
+      "flex",
+      "floats",
+      "overflow",
+      "spacing",
+      "text-and-typography",
+      "transitions"
     ]
   },
   {
