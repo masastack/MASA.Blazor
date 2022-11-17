@@ -8,10 +8,7 @@
          ClippedRight
          Color="white"
          Height="@AppService.AppBarHeight">
-    @if (MasaBlazor.Breakpoint.XsOnly)
-    {
-        <MAppBarNavIcon />
-    }
+    <MAppBarNavIcon Class="hidden-sm-and-up" />
     <AppBarItems OnCultureChanged="OnCultureChanged"></AppBarItems>
 </MAppBar>
 

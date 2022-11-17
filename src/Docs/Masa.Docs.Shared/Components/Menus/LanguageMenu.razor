@@ -5,11 +5,11 @@
 
 <AppMenu Items="items">
     <ActivatorContent>
-        <MButton Color="#1B2559"
+        <MButton @attributes="@context.Attrs"
+                 Color="#1B2559"
                  Icon="@MasaBlazor.Breakpoint.SmAndDown"
                  Class="px-0 px-md-2"
-                 Text
-        @attributes="@context.Attrs">
+                 Text>
             <MIcon>mdi-translate</MIcon>
 
             <AppChevronDown></AppChevronDown>
@@ -42,10 +42,10 @@
         };
 
         items.AddRange(I18n.SupportedCultures.Select(c => new DefaultItem()
-            {
-                Title = c.NativeName,
-                Value = c.Name
-            }));
+        {
+            Title = c.NativeName,
+            Value = c.Name
+        }));
     }
 
     private void OnListItemClick(StringNumber val)
