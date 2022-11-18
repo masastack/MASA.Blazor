@@ -70,10 +70,6 @@ public static class ApiGenerator
 
     static string GetTypeName(Type type, bool ignoreGenericTypeArguments = false)
     {
-        if(type == typeof(MResponsive))
-        {
-
-        }
         if (type.IsGenericType)
         {
             var name = type.Name.Remove(type.Name.IndexOf('`'));
