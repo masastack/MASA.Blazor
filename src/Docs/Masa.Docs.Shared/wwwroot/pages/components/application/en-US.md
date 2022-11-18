@@ -7,13 +7,13 @@ related:
   - /components/navigation-drawers
 ---
 
-<masa-alerts type="error" content="In order for your application to work properly, you must wrap it in a **MApp** component. This component is required for ensuring 
+<app-alerts type="error" content="In order for your application to work properly, you must wrap it in a **MApp** component. This component is required for ensuring 
 proper cross-browser compatibility. MASA Blazor doesn't support multiple isolated MASA Blazor instances on a page. **MApp** can exist 
 anywhere inside the body of your app, however, there should only be one and it must be the parent of ALL MASA Blazor components.">
-</masa-alerts>
+</app-alerts>
 
-<masa-alerts type="info" content="If you are using multiple layouts in your application you will need to ensure each root layout file that will contain MASA Blazor 
-components has a MApp at the root of its template."></masa-alerts>
+<app-alerts type="info" content="If you are using multiple layouts in your application you will need to ensure each root layout file that will contain MASA Blazor 
+components has a MApp at the root of its template."></app-alerts>
 
 ## Default application markup
 
@@ -47,8 +47,8 @@ You can use combinations of any or all of the above components including **MBott
   </MFooter>
 </MApp>
 
-<masa-alerts type="info" content="Applying the `App` prop automatically applies `position:fixed` to the layout element. If your application calls for an absolute element, 
-you can overwrite this functionality by using the `Absolute` prop."></masa-alerts>
+<app-alerts type="info" content="Applying the `App` prop automatically applies `position:fixed` to the layout element. If your application calls for an absolute element, 
+you can overwrite this functionality by using the `Absolute` prop."></app-alerts>
 
 ## Application components
 
@@ -87,6 +87,6 @@ You can access these values by referencing the `Application` property.
  
  Console.WriteLine(MasaBlazor.Application.Footer); // 60
 ```
-<masa-alerts type="error" content="In order for your application to work properly, you must wrap it in a **MApp** component. "></masa-alerts>
+<app-alerts type="error" content="In order for your application to work properly, you must wrap it in a **MApp** component. "></app-alerts>
 
 

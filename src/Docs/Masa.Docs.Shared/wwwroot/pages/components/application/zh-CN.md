@@ -1,30 +1,16 @@
 ---
 title: Application（应用程序）
 desc: "在 MASA Blazor 中，**MApp** 组件和 **MNavigationDrawer**、**MAppBar**、**MFooter** 等组件上的 App 属性，可以帮助你的应用围绕 **MMain** 组件进行适当的大小调整。这可以使你创建真正独特的界面，无需因管理布局尺寸而烦恼。 所有应用都需要 **MApp** 组件。 这是许多 MASA Blazor 组件和功能的挂载点，在确保它将默认的应用主题（Dark/Light）传递给子组件的同时还需要保证它在浏览器中对某些点击事件正确的跨浏览器支持。"
-type: 应用程序
-title: Application
-cols: 1
 related:
   - /features/theme
   - /components/app-bars
-<masa-alerts type="error" content="为了让你的应用正常工作，你必须将其包裹在 **MApp** 组件中。 该组件是确保正确的跨浏览器兼容性的必要条件。 MASA Blazor 不支持在一个页面上有多个孤立的 
-Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。"></masa-alerts>
+  - /components/navigation-drawers
+---
 
-<masa-alerts type="info" content="如果你在应用中使用多个布局，你需要确保每个包含组件的根布局文件在其模板的根部有一个 **MApp**。"></masa-alerts>
+<app-alerts type="error" content="为了让你的应用正常工作，你必须将其包裹在 **MApp** 组件中。 该组件是确保正确的跨浏览器兼容性的必要条件。 MASA Blazor 不支持在一个页面上有多个孤立的 
+Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。"></app-alerts>
 
-## API
-
-- [MApp](/api/MApp)
-- [MMain](/api/MMain)
-
-<!--alert:error-->
-为了让你的应用正常工作，你必须将其包裹在 **MApp** 组件中。 该组件是确保正确的跨浏览器兼容性的必要条件。 MASA Blazor 不支持在一个页面上有多个孤立的 
-Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。
-<!--/alert:error-->
-
-<!--alert:info-->
-如果你在应用中使用多个布局，你需要确保每个包含组件的根布局文件在其模板的根部有一个 **MApp**。
-<!--/alert:info-->
+<app-alerts type="info" content="如果你在应用中使用多个布局，你需要确保每个包含组件的根布局文件在其模板的根部有一个 **MApp**。"></app-alerts>
 
 ## 默认应用标记
 
@@ -58,7 +44,7 @@ Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方�
 </MApp>
 ```
 
-<masa-alerts type="info" content="设置 `App` 属性会自动给布局元素设置 `position:fixed`。 如果你的应用程序需要一个绝对定位元素，你可以使用 `Absolute` 属性来覆盖这个功能。"></masa-alerts>
+<app-alerts type="info" content="设置 `App` 属性会自动给布局元素设置 `position:fixed`。 如果你的应用程序需要一个绝对定位元素，你可以使用 `Absolute` 属性来覆盖这个功能。"></app-alerts>
 
 ## 应用组件
 
@@ -94,5 +80,5 @@ double Top { get; }
  
  Console.WriteLine(MasaBlazor.Application.Footer); // 60
 ```
-<masa-alerts type="error" content="为了让你的应用正常工作，你必须将其包裹在 **MApp** 组件中。 该组件是确保正确的跨浏览器兼容性的必要条件。 MASA Blazor 不支持在一个页面上有多个孤立的 
-Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。"></masa-alerts>
+<app-alerts type="error" content="为了让你的应用正常工作，你必须将其包裹在 **MApp** 组件中。 该组件是确保正确的跨浏览器兼容性的必要条件。 MASA Blazor 不支持在一个页面上有多个孤立的 
+Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。"></app-alerts>

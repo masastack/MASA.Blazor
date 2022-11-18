@@ -15,11 +15,11 @@ The autocomplete component extends **MSelect** and adds the ability to filter it
 
 ## Caveats
 
-<masa-alerts type="error" content="When using objects for the **Items** prop, you must associate **ItemText** and **ItemValue** with existing properties on your objects. These values are defaulted to  **Text** and **Value** and can be changed."></masa-alerts>
+<app-alerts type="error" content="When using objects for the **Items** prop, you must associate **ItemText** and **ItemValue** with existing properties on your objects. These values are defaulted to  **Text** and **Value** and can be changed."></app-alerts>
 
-<masa-alerts type="warning" content="The **Auto** property of **MenuProps** is only supported for the default input style."></masa-alerts>
+<app-alerts type="warning" content="The **Auto** property of **MenuProps** is only supported for the default input style."></app-alerts>
 
-<masa-alerts type="info" content="Browser autocomplete is set to off by default, may vary by browser and may be ignored.  **[MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)**"></masa-alerts>
+<app-alerts type="info" content="Browser autocomplete is set to off by default, may vary by browser and may be ignored.  **[MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)**"></app-alerts>
 
 ## Examples
 

@@ -15,7 +15,7 @@ related:
 
 ## Caveats
 
-<masa-alerts type="info" content="The MImage component uses the Intersect directive which requires a Polyfill for IE11 and Safari. If a browser that does not support this functionality is detected, the image will still load as normal."></masa-alerts>
+<app-alerts type="info" content="The MImage component uses the Intersect directive which requires a Polyfill for IE11 and Safari. If a browser that does not support this functionality is detected, the image will still load as normal."></app-alerts>
 
 ## Examples
 

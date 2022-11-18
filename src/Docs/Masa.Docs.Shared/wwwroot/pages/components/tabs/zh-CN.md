@@ -15,8 +15,9 @@ related:
 
 ## 注意
 
-<masa-alerts type="warning" content="当使用 `Dark` 属性且不提供自定义 `Color` 时，**MTabs**组件会将其颜色默认为 white。
-当使用包含必填输入字段的 **MTabItem** 时，你必须使用 `eager` 属性来验证尚未显示的必填字段。"></masa-alerts>
+<app-alerts type="warning" content="当使用 `Dark` 属性且不提供自定义 `Color` 时，**MTabs**组件会将其颜色默认为 white。"></app-alerts>
+
+<app-alerts type="warning" content="当使用包含必填输入字段的 **MTabItem** 时，你必须使用 `eager` 属性来验证尚未显示的必填字段。"></app-alerts>
 
 ## 示例
 

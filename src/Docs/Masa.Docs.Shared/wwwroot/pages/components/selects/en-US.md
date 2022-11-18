@@ -13,11 +13,11 @@ related:
 
 ## 注意
 
-<masa-alerts type="info" content="The default setting of browser auto completion is off, which may be changed or ignored by different browsers. **[MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)**"></masa-alerts>
+<app-alerts type="info" content="The default setting of browser auto completion is off, which may be changed or ignored by different browsers. **[MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)**"></app-alerts>
 
-<masa-alerts type="warning" content="The **Auto** attribute of **menupprops** only supports the default input style."></masa-alerts>
+<app-alerts type="warning" content="The **Auto** attribute of **menupprops** only supports the default input style."></app-alerts>
 
-<masa-alerts type="error" content="When using an object as the attribute of **items**, you must use **itemtext** and **itemvalue** to associate with the incoming object. These values are **text** and **value** by default and can be changed."></masa-alerts>
+<app-alerts type="error" content="When using an object as the attribute of **items**, you must use **itemtext** and **itemvalue** to associate with the incoming object. These values are **text** and **value** by default and can be changed."></app-alerts>
 
 ## Examples
 

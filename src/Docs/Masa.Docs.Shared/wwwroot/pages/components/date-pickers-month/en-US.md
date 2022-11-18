@@ -15,7 +15,7 @@ Month pickers come in two orientation variations, portrait (default) and landsca
 
 ## Caveats
 
-<masa-alerts type="warning" content="**MDatePicker** accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards] https://www.iso.org/standards.html Official website."></masa-alerts>
+<app-alerts type="warning" content="**MDatePicker** accepts ISO 8601 * * date * * string (yyyy-mm-dd). For more information on ISO 8601 and other standards, please visit ISO (International Organization for Standardization) [international standards] https://www.iso.org/standards.html Official website."></app-alerts>
 
 ## Examples
 

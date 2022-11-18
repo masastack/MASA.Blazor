@@ -26,8 +26,8 @@ related:
 
 ## 注意事项
 
-<masa-alerts type="warning" content="当在 **MToolbar** 和 **MAppBar** 内部使用带有 `Icon` 属性的 **MButton** 时，它们将自动增大其尺寸并应用负边距，以确保根据 **Material** 设计规范的适当间距。
-如果您选择将按钮包装在任何容器例如 `div`中，则需要对该容器应用负边距，以便正确对齐它们。"></masa-alerts>
+<app-alerts type="warning" content="当在 **MToolbar** 和 **MAppBar** 内部使用带有 `Icon` 属性的 **MButton** 时，它们将自动增大其尺寸并应用负边距，以确保根据 **Material** 设计规范的适当间距。
+如果您选择将按钮包装在任何容器例如 `div`中，则需要对该容器应用负边距，以便正确对齐它们。"></app-alerts>
 
 ## 示例
 

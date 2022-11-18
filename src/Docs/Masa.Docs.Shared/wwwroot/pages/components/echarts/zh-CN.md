@@ -10,7 +10,7 @@ tag: js-proxy
 
 <echarts-usage></echarts-usage>
 
-<masa-alerts type="info" content='使用前需要先引用ECharts的包：`<script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>`。'></masa-alerts>
+<app-alerts type="info" content='使用前需要先引用ECharts的包：`<script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>`。'></app-alerts>
 
 ## 示例
 

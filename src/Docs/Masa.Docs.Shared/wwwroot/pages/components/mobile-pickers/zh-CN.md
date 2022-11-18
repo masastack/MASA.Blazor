@@ -16,7 +16,7 @@ related:
 
 使用级联的 `Columns` 和 `ItemChildren` 字段可以实现选项级联的效果。
 
-<masa-alerts type="warning" content="级联选择的数据嵌套深度需要一致，如果某些选项没有子选项，则可以使用空字符串作为占位符。"></masa-alerts>
+<app-alerts type="warning" content="级联选择的数据嵌套深度需要一致，如果某些选项没有子选项，则可以使用空字符串作为占位符。"></app-alerts>
 
 <masa-example file="Examples.components.mobile_pickers.Cascade"></masa-example>
 

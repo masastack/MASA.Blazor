@@ -15,7 +15,7 @@ related:
 
 ## 注意
 
-<masa-alerts type="info" content="为了正确定位 **MTooltip**，需要一个位置支撑(`Top` | `Bottom` | `Left` | `Right`)。"></masa-alerts>
+<app-alerts type="info" content="为了正确定位 **MTooltip**，需要一个位置支撑(`Top` | `Bottom` | `Left` | `Right`)。"></app-alerts>
 
 ## 示例
 

@@ -15,9 +15,9 @@ related:
 
 ## 注意
 
-<masa-alerts type="error" content="如果使用启用了 **App** 属性的 **MNavigationDrawer**，则不需要像示例中那样使用 `Absolute` 属性。"></masa-alerts>
+<app-alerts type="error" content="如果使用启用了 **App** 属性的 **MNavigationDrawer**，则不需要像示例中那样使用 `Absolute` 属性。"></app-alerts>
 
-<masa-alerts type="info" content="`ExtensionOnHover` 参数不会改变**MMain**的内容区域。 要使内容区域响应`ExtensionOnHover`，请绑定`OnMiniVariantUpdate` 到数据。"></masa-alerts>
+<app-alerts type="info" content="`ExtensionOnHover` 参数不会改变**MMain**的内容区域。 要使内容区域响应`ExtensionOnHover`，请绑定`OnMiniVariantUpdate` 到数据。"></app-alerts>
 
 ## 示例
 
