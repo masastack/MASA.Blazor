@@ -11,7 +11,7 @@ public static class CircuitRootComponentOptionsExtensions
         options.RegisterCustomElement<Masa.Docs.Shared.Components.Example>("masa-example");
         options.RegisterCustomElement<Masa.Docs.Shared.Components.AppHeading>("app-heading");
         options.RegisterCustomElement<Masa.Docs.Shared.Components.AppLink>("app-link");
-        options.RegisterCustomElement<Masa.Docs.Shared.Components.App.Alert>("app-alerts");
+        options.RegisterCustomElement<Masa.Docs.Shared.Components.AppAlert>("app-alerts");
 
         options.RegisterCustomElement<ExampleComponents.alerts.Usage>("alerts-usage");
         options.RegisterCustomElement<ExampleComponents.avatars.Usage>("avatars-usage");
