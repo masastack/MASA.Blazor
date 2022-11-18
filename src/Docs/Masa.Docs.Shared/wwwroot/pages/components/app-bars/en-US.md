@@ -104,6 +104,6 @@ You can easily extend the functionality of app bar by adding **MMenu** there. Cl
 #### Toggle navigation drawers
 
 Using the functional component **MAppBarNavIcon** you can toggle the state of other components such as
-a [**MNavigationDrawer**](/components/navigation-drawers).
+a [MNavigationDrawer](/components/navigation-drawers).
 
 <masa-example file="Examples.components.app_bars.ToggleNavigationDrawers"></masa-example>

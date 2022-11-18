@@ -1,23 +1,11 @@
 ---
-category: Components
-type: Application
 title: Application
-cols: 1
+desc: "In MASA Blazor, the MApp component and the app prop on components like **MNavigationDrawer**, **MAppBar**, **MFooter** and more, help bootstrap your application with the proper sizing around <MMain> component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The **MApp** component is REQUIRED for all applications. This is the mount point for many of MASA Blazor's components and functionality and ensures that it propagates the default application variant (dark/light) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. **MApp** should only be rendered within your application ONCE."
+related:
+  - /features/theme
+  - /components/app-bars
+  - /components/navigation-drawers
 ---
-
-# Application
-
-In MASA Blazor, the MApp component and the app prop on components like **MNavigationDrawer**, **MAppBar**, **MFooter** and more, 
-help bootstrap your application with the proper sizing around <MMain> component. This allows you to create truly unique 
-interfaces without the hassle of managing your layout sizing. The **MApp** component is REQUIRED for all applications. 
-This is the mount point for many of MASA Blazor's components and functionality and ensures that it propagates the default 
-application variant (dark/light) to children components and also ensures proper cross-browser support for certain click 
-events in browsers like Safari. **MApp** should only be rendered within your application ONCE.
-
-## API
-
-- [MApp](/api/MApp)
-- [MMain](/api/MMain)
 
 <!--alert:error-->
 In order for your application to work properly, you must wrap it in a **MApp** component. This component is required for ensuring 
@@ -37,7 +25,7 @@ as long as you apply the app property. The key component to making your page con
 is **MMain**. The **MMain** component will be dynamically sized depending upon the structure of your designated app components. 
 You can use combinations of any or all of the above components including **MBottomNavigation**.
 
-```html
+```cshtml
 <!-- MainLayout.razor -->
 @inherits LayoutComponentBase
 
