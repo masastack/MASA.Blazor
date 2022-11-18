@@ -1,6 +1,6 @@
 ---
 title: Toolbars（工具栏）
-desc: "**MToolbar** 组件对于任何 GUI 都是至关重要的，因为它通常是站点导航的主要来源。 工具栏组件与 [MNavigationDrawer](/components/navigation-drawers) 和 [**MCard**](/components/cards) 配合使用非常有效。"
+desc: "**MToolbar** 组件对于任何 GUI 都是至关重要的，因为它通常是站点导航的主要来源。 工具栏组件与 [MNavigationDrawer](/components/navigation-drawers) 和 [MCard](/components/cards) 配合使用非常有效。"
 related:
   - /components/buttons
   - /components/footers

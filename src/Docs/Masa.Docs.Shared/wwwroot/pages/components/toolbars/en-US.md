@@ -1,6 +1,6 @@
 ---
 title: Toolbars
-desc: "The **MToolbar** component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.The toolbar component works great in conjunction with [MNavigationDrawer](/components/navigation-drawers) and [**MCard**](/components/cards)."
+desc: "The **MToolbar** component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.The toolbar component works great in conjunction with [MNavigationDrawer](/components/navigation-drawers) and [MCard](/components/cards)."
 related:
   - /components/buttons
   - /components/footers

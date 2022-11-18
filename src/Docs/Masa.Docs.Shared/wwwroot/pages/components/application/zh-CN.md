@@ -21,7 +21,7 @@ Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方�
 这是一个默认应用标记的例子。 只要设置 **App** 属性，你可以将布局元素放在任何地方。此处的关键组件是 **MMain** 。它将会根据您分配的应用程序
 组件结构动态、灵活地调整大小。你可以使用上述所有组件的组合，包括 **MBottomNavigation** 。
 
-```html
+```cshtml
 <!-- MainLayout.razor -->
 @inherits LayoutComponentBase
 

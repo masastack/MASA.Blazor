@@ -3,7 +3,11 @@ using Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor(options => { options.RootComponents.RegisterCustomElementsOfMasaDocs(); });
+builder.Services.AddServerSideBlazor(options =>
+{
+    options.RootComponents.MaxJSRootComponents = 500;
+    options.RootComponents.RegisterCustomElementsOfMasaDocs();
+});
 builder.Services.AddHealthChecks();
 
 builder.Services.AddScoped<LazyAssemblyLoader>();
