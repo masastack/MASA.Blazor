@@ -1,7 +1,4 @@
 ﻿using Masa.Docs.Shared.ApiGenerator;
-using Masa.Docs.Shared.Examples.components.block_text;
-using Microsoft.AspNetCore.Components.Routing;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -103,7 +100,7 @@ public partial class Components
             await ReadDocumentAndApiAsync();
             AppService.Toc = CurrentToc;
         }
-        else if((IsApiTab && _apiData.Any() is false) || (!IsApiTab && _md is null))
+        else if ((IsApiTab && _apiData.Any() is false) || (!IsApiTab && _md is null))
         {
             await ReadDocumentAndApiAsync();
             AppService.Toc = CurrentToc;
@@ -111,7 +108,7 @@ public partial class Components
         else if (!Equals(_prevApi, Api))
         {
             _prevApi = Api;
-            if(Api is not null)
+            if (Api is not null)
             {
                 AppService.Toc = CurrentToc;
             }
@@ -124,7 +121,7 @@ public partial class Components
         if (IsApiTab)
         {
             await ReadApisAsync();
-        }  
+        }
     }
 
     private void NavigateToTab(string tab)
@@ -163,7 +160,7 @@ public partial class Components
         }
     }
 
-    private async Task ReadApisAsync() 
+    private async Task ReadApisAsync()
     {
         _apiData.Clear();
         var name = Page;
