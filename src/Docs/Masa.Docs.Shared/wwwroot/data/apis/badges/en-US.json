@@ -1,13 +1,13 @@
 ﻿{
   "props": {
-    "avatar": "Designates that the avatar is on the left side of a component. This is hooked into by components such as v-chip and v-btn.",
-    "bordered": "Applies a 2px by default and 1.5px border around the badge when using the dot propert",
+    "avatar": "Removes badge padding for the use of the `BadgeContent` in the badge slot.",
+    "bordered": "Applies a 2px by default and 1.5px border around the badge when using the `Dot` propert",
     "content": "Any content you want injected as text into the badge.",
     "dot": "Reduce the size of the badge and hide its contents",
     "icon": "Designates a specific icon used in the badge.",
-    "Inline": "Moves the badge to be inline with the wrapping element. Supports the usage of the `left` prop.",
+    "Inline": "Moves the badge to be inline with the wrapping element. Supports the usage of the `Left` prop.",
     "offsetX": "Offset the badge on the x-axis.",
-    "offset-y": "Offset the badge on the y-axis.",
+    "offsetY": "Offset the badge on the y-axis.",
     "overLap": "Overlaps the slotted content on top of the component.",
     "value": "Controls whether the component is visible or hidden."
   },

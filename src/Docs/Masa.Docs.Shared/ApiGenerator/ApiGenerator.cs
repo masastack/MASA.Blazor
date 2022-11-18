@@ -130,7 +130,7 @@ public static class ApiGenerator
 
     static bool IsIgnoreProp(string name)
     {
-        return new[] { "Attributes", "RefBack", "Id" }.Contains(name);
+        return new[] { "Attributes", "RefBack" }.Contains(name);
     }
 
     static string Keyword(string typeName)
