@@ -16,13 +16,7 @@ interface for organizing groups of content.
 
 ## Caveats
 
-<!--alert:warning--> 
-When using the `Dark` prop and `NOT` providing a custom `color`, the **MTabs** component will default its color to white.
-<!--alert:warning--> 
-
-<!--alert:warning--> 
-When using **MTabItem**'s that contain required input fields you must use the `eager` prop in order to validate the required fields that are not yet visible.
-<!--alert:warning--> 
+<masa-alerts type="warning" content="When using the `Dark` prop and `NOT` providing a custom `color`, the **MTabs** component will default its color to white. When using **MTabItem**'s that contain required input fields you must use the `eager` prop in order to validate the required fields that are not yet visible."></masa-alerts>
 
 ## Examples
 

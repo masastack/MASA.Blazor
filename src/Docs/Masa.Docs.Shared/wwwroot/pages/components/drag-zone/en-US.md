@@ -1,5 +1,5 @@
 ---
-title: DragZone（拖放）
+title: DragZone
 desc: "The `MDragZone` component is based on [Sorttable.js](https://github.com/SortableJS/Sortable) to implement drag and drop functionality"
 tag: js-proxy
 ---
@@ -10,11 +10,7 @@ Drag and drop components and dom objects.
 
 <drag-zone-usage></drag-zone-usage>
 
-<!--alert:info-->
-You need to reference the package of Sorttable.js before using it ：
-<br />
-`<script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>`.
-<!--/alert:info-->
+<masa-alerts type="info" content='You need to reference the package of `Sorttable.js` before using it :`<script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>`.'></masa-alerts>
 
 ## Examples
 

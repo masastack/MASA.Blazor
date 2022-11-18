@@ -23,10 +23,8 @@ Will be truncated, but this component uses absolute positioning when expanding t
 
 ## Caveats
 
-<!--alert:warning-->
-When **MButton** with **icon** attribute is used inside **MToolbar** and **MAppbar**, they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.
-If you choose to wrap the buttons in any container, such as `div`, you need to apply a negative margin to the container in order to align them correctly.
-<!--/alert:warning-->
+<masa-alerts type="warning" content="When **MButton** with **icon** attribute is used inside **MToolbar** and **MAppbar**, they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.
+If you choose to wrap the buttons in any container, such as `div`, you need to apply a negative margin to the container in order to align them correctly."></masa-alerts>
 
 
 ## Examples

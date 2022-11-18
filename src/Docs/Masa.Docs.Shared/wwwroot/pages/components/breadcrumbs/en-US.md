@@ -15,8 +15,7 @@ By default, breadcrumbs use a text divider. This can be any string.
 
 ## Caveats
 
-<!--alert:info-->
-By default **MBreadcrumbs** will disable the linkage with router. You can enable the feature by using `Linkage` prop.
+<masa-alerts type="info" content="By default **MBreadcrumbs** will disable the linkage with router. You can enable the feature by using `Linkage` prop."></masa-alerts>
 
 ## Examples
 

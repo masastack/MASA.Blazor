@@ -15,8 +15,7 @@ related:
 
 ## 注意
 
-<!--alert:info-->
-如果您要查找有状态列表项，请查看 [**MListItemGroup**](/components/list-item-groups)。
+<masa-alerts type="info" content="如果您要查找有状态列表项，请查看 [**MListItemGroup**](/components/list-item-groups)。"></masa-alerts>
 
 ## 示例
 

@@ -7,14 +7,10 @@ related:
   - /components/navigation-drawers
 ---
 
-<!--alert:error-->
-为了让你的应用正常工作，你必须将其包裹在 **MApp** 组件中。 该组件是确保正确的跨浏览器兼容性的必要条件。 MASA Blazor 不支持在一个页面上有多个孤立的 
-Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。
-<!--/alert:error-->
+<masa-alerts type="error" content="为了让你的应用正常工作，你必须将其包裹在 **MApp** 组件中。 该组件是确保正确的跨浏览器兼容性的必要条件。 MASA Blazor 不支持在一个页面上有多个孤立的 
+Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。"></masa-alerts>
 
-<!--alert:info-->
-如果你在应用中使用多个布局，你需要确保每个包含组件的根布局文件在其模板的根部有一个 **MApp**。
-<!--/alert:info-->
+<masa-alerts type="info" content="如果你在应用中使用多个布局，你需要确保每个包含组件的根布局文件在其模板的根部有一个 **MApp**。"></masa-alerts>
 
 ## 默认应用标记
 
@@ -48,9 +44,7 @@ Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方�
 </MApp>
 ```
 
-<!--alert:info-->
-设置 `App` 属性会自动给布局元素设置 `position:fixed`。 如果你的应用程序需要一个绝对定位元素，你可以使用 `Absolute` 属性来覆盖这个功能。
-<!--/alert:info-->
+<masa-alerts type="info" content="设置 `App` 属性会自动给布局元素设置 `position:fixed`。 如果你的应用程序需要一个绝对定位元素，你可以使用 `Absolute` 属性来覆盖这个功能。"></masa-alerts>
 
 ## 应用组件
 
@@ -86,8 +80,5 @@ double Top { get; }
  
  Console.WriteLine(MasaBlazor.Application.Footer); // 60
 ```
-
-<!--alert:error-->
-为了让你的应用正常工作，你必须将其包裹在 **MApp** 组件中。 该组件是确保正确的跨浏览器兼容性的必要条件。 MASA Blazor 不支持在一个页面上有多个孤立的 
-Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。
-<!--/alert:error-->
+<masa-alerts type="error" content="为了让你的应用正常工作，你必须将其包裹在 **MApp** 组件中。 该组件是确保正确的跨浏览器兼容性的必要条件。 MASA Blazor 不支持在一个页面上有多个孤立的 
+Masa.Blazor 实例。 **MApp** 可以存在于你的应用主体的任何地方，但是只能有一个，而且它必须是所有 MASA Blazor 组件的祖先节点。"></masa-alerts>

@@ -16,8 +16,7 @@ minimum height of the item and can also be controlled from `MList` with the same
 
 ## Caveats
 
-<!--alert:info-->
-If you want to find a list item with status, please check [**MListItemGroup**](/components/list-item-groups)。
+<masa-alerts type="info" content="If you want to find a list item with status, please check [**MListItemGroup**](/components/list-item-groups)。"></masa-alerts>
 
 ## Examples
 
