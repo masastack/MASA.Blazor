@@ -1,14 +1,20 @@
 name: Mirror to Giltab
 on:
   push:
+    paths-ignore:
+      - src/Docs/**
   delete:
+    paths-ignore:
+      - src/Docs/**
   create:
+    paths-ignore:
+      - src/Docs/**
   workflow_dispatch:
-  
+
 jobs:
   to_gitlab:
     runs-on: ubuntu-latest
-    steps:                                            
+    steps:
       - uses: actions/checkout@v1
       - name: config git
         run: git config --global http.postBuffer 524288000
@@ -17,4 +23,4 @@ jobs:
           REMOTE: '${{ secrets.GITLAB_ADDER }}/cicd/masa.blazor1.git'
           GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
           GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
-          
+

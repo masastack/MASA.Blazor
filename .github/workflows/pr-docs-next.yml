@@ -1,12 +1,12 @@
-name: pr
+name: pr-docs-next
 
 on:
   pull_request:
     branches:
       - main
-    paths-ignore:
+    paths:
       - src/Docs/**
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   pr:
@@ -17,7 +17,7 @@ jobs:
       with:
         submodules: 'recursive'
     - run: git submodule foreach git checkout main
-    - name: setting dotnet 
+    - name: setting dotnet
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: |
@@ -27,4 +27,4 @@ jobs:
     - name: setting tools
       run: dotnet workload install wasm-tools-net6
     - name: build
-      run: dotnet build src/Masa.Blazor.sln
+      run: dotnet build src/Masa.Blazor.NewDocs.sln
