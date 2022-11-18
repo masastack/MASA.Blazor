@@ -1,25 +1,11 @@
 ---
-category: Components
-subtitle: 应用程序
-type: 应用程序
-title: Application
-cols: 1
+title: Application（应用程序）
+desc: "在 MASA Blazor 中，**MApp** 组件和 **MNavigationDrawer**、**MAppBar**、**MFooter** 等组件上的 App 属性，可以帮助你的应用围绕 **MMain** 组件进行适当的大小调整。这可以使你创建真正独特的界面，无需因管理布局尺寸而烦恼。 所有应用都需要 **MApp** 组件。 这是许多 MASA Blazor 组件和功能的挂载点，在确保它将默认的应用主题（Dark/Light）传递给子组件的同时还需要保证它在浏览器中对某些点击事件正确的跨浏览器支持。"
 related:
   - /features/theme
   - /components/app-bars
   - /components/navigation-drawers
 ---
-
-# Application（应用程序）
-
-在 MASA Blazor 中，**MApp** 组件和 **MNavigationDrawer**、**MAppBar**、**MFooter** 等组件上的 App 属性，可以帮助你的应用围绕 **MMain** 组件进行适当的大小调整。
-这可以使你创建真正独特的界面，无需因管理布局尺寸而烦恼。 所有应用都需要 **MApp** 组件。 这是许多 MASA Blazor 组件和功能的挂载点，在确保它将默认的应用主题
-（Dark/Light）传递给子组件的同时还需要保证它在浏览器中对某些点击事件正确的跨浏览器支持。
-
-## API
-
-- [MApp](/api/MApp)
-- [MMain](/api/MMain)
 
 <!--alert:error-->
 为了让你的应用正常工作，你必须将其包裹在 **MApp** 组件中。 该组件是确保正确的跨浏览器兼容性的必要条件。 MASA Blazor 不支持在一个页面上有多个孤立的 
