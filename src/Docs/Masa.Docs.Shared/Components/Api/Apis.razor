@@ -7,7 +7,8 @@
     <MSelect Items="Data.Keys.ToList()"
              ItemText="key => key"
              ItemValue="key => key"
-             @bind-Value="apiKey"
+             Value="Value"
+             ValueChanged="ValueChanged"
              TValue="string"
              TItemValue="string"
              TItem="string"
@@ -16,9 +17,9 @@
     </MSelect>
 }
 
-@if (apiKey is not null && Data.ContainsKey(apiKey))
+@if (Value is not null && Data.ContainsKey(Value))
 {
-    foreach (var (name, data) in Data[apiKey])
+    foreach (var (name, data) in Data[Value])
     {
         <ApiSection Name="@name" Data="@data" />
     }
@@ -30,13 +31,9 @@
     [EditorRequired]
     public Dictionary<string, Dictionary<string, List<ParameterInfo>>> Data { get; set; } = null!;
 
-    private string? apiKey;
+    [Parameter]
+    public string? Value { get; set; }
 
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        apiKey ??= Data.Keys.FirstOrDefault();
-    }
-
+    [Parameter]
+    public EventCallback<string?> ValueChanged { get; set; }
 }

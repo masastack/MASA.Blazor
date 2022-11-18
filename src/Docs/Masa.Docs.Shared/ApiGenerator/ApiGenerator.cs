@@ -1,7 +1,7 @@
-﻿using System.Reflection;
-using System.Text.RegularExpressions;
-using BlazorComponent.Attributes;
+﻿using BlazorComponent.Attributes;
 using OneOf;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Masa.Docs.Shared.ApiGenerator;
 

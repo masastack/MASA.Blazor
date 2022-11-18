@@ -90,7 +90,7 @@ lists are also used within the [MNavigationDrawer](/components/navigation-drawer
 
 #### Action and item groups
 
-A **ThreeLine** list with actions. Utilizing [**MListItemGroup**](/components/list-item-groups), easily connect actions to your tiles.
+A **ThreeLine** list with actions. Utilizing [MListItemGroup](/components/list-item-groups), easily connect actions to your tiles.
 
 <masa-example file="Examples.components.lists.ActionsAndItemGroups"></masa-example>
 

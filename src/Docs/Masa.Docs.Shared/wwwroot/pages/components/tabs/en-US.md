@@ -9,7 +9,7 @@ related:
 
 ## Usage
 
-The **MTabs** component is a styled extension of [**MItemGroup**](/components/item-groups). It provides an easy to use
+The **MTabs** component is a styled extension of [MItemGroup](/components/item-groups). It provides an easy to use
 interface for organizing groups of content.
 
 <tabs-usage></tabs-usage>
