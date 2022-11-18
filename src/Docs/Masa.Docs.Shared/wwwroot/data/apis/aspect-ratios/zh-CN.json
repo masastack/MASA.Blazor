@@ -1,0 +1,12 @@
+﻿{
+  "props": {
+    "aspectRatio": "纵横比。",
+    "contentClass": "当使用 dot 属性时，默认情况下会在徽章上应用一个 2px 和它的周围应用一个 1.5px 的边框。"
+  },
+  "contents": {
+  },
+  "events": {
+  },
+  "functions": {
+  }
+}

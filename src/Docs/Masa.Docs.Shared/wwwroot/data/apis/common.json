@@ -13,7 +13,12 @@
       "minWidth": "Sets the minimum width for the component.",
       "rounded": "Designates the `border-radius` applied to the component. You can find more information on the [Border Radius](/styles-and-animations/border-radius) page.",
       "style": "Html document style",
-      "width": "Sets the width for the component."
+      "width": "Sets the width for the component.",
+      "size": "Sets the height and width of the component.",
+      "bottom": "Aligns the component towards the bottom.",
+      "tile": "Removes the component’s `border-radius`.",
+      "left": "Aligns components to the left.",
+      "right": "Aligns components to the right."
     },
     "contents": {
       "childContent": "Default content"
@@ -39,7 +44,12 @@
       "minWidth": "设定组件的最小宽度。",
       "rounded": "对指定的组件应用 `border-radius` 样式。您可以在 [边框半径页面](/styles-and-animations/elevation) 获取更多有关信息。",
       "style": "Html document style",
-      "width": "设定组件的宽度。"
+      "width": "设定组件的宽度。",
+      "size": "设置组件的高度和宽度。",
+      "bottom": "将组件向底部对齐。",
+      "tile": "删除组件的 `border-radius` 样式。",
+      "left": "将组件向左边对齐。",
+      "right": "将组件向右边对齐。"
     },
     "contents": {
       "childContent": "默认插槽"
