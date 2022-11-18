@@ -40,15 +40,18 @@ public partial class Components
         }
     }
 
+    [Parameter]
+    public string? Api { get; set; }
+
+    [Parameter]
     public string? CurrentApi
     {
-        get => _currentApi ?? _apiData.Keys.FirstOrDefault();
+        get => Api ?? _apiData.Keys.FirstOrDefault();
         set
         {
-            if (value != _currentApi)
+            if (value != Api)
             {
-                _currentApi = value;
-                AppService.Toc = CurrentToc;
+                NavigationManager.NavigateTo($"/components/{Page}/{Tab}/{value}");
             }
         }
     }
@@ -80,8 +83,8 @@ public partial class Components
     private string? _tab;
     private string? _md;
     private string? _prevPage;
-    private string? _currentApi;
     private CultureInfo? _prevCulture;
+    private string? _prevApi;
     private FrontMatterMeta? _frontMatterMeta;
     private readonly Dictionary<string, Dictionary<string, List<ParameterInfo>>> _apiData = new();
     private List<MarkdownItTocContent> _documentToc = new();
@@ -96,7 +99,6 @@ public partial class Components
         {
             _prevPage = Page;
             _prevCulture = Culture;
-            _currentApi = null;
             _apiData.Clear();
             await ReadDocumentAndApiAsync();
             AppService.Toc = CurrentToc;
@@ -105,6 +107,14 @@ public partial class Components
         {
             await ReadDocumentAndApiAsync();
             AppService.Toc = CurrentToc;
+        }
+        else if (!Equals(_prevApi, Api))
+        {
+            _prevApi = Api;
+            if(Api is not null)
+            {
+                AppService.Toc = CurrentToc;
+            }
         }
     }
 
