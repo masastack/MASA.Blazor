@@ -1,13 +1,15 @@
-﻿using System.Globalization;
+﻿using Masa.Docs.Shared.ApiGenerator;
+using Masa.Docs.Shared.Examples.components.block_text;
+using Microsoft.AspNetCore.Components.Routing;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Net;
 using System.Text.RegularExpressions;
-using Masa.Docs.Shared.ApiGenerator;
-using Microsoft.AspNetCore.Components.Routing;
 using YamlDotNet.Serialization;
 
 namespace Masa.Docs.Shared.Pages;
 
-public partial class Components : IDisposable
+public partial class Components
 {
     [Inject]
     private DocService DocService { get; set; } = null!;
@@ -25,104 +27,96 @@ public partial class Components : IDisposable
     public string Page { get; set; } = null!;
 
     [Parameter]
-    public string? Tab { get; set; }
+    public string? Tab
+    {
+        get => _tab;
+        set
+        {
+            if (value != _tab)
+            {
+                _tab = value;
+                AppService.Toc = CurrentToc;
+            }
+        }
+    }
 
+    public string? CurrentApi
+    {
+        get => _currentApi ?? _apiData.Keys.FirstOrDefault();
+        set
+        {
+            if (value != _currentApi)
+            {
+                _currentApi = value;
+                AppService.Toc = CurrentToc;
+            }
+        }
+    }
 
+    public List<MarkdownItTocContent> CurrentToc
+    {
+        get
+        {
+            if (IsApiTab)
+            {
+                if (CurrentApi is not null)
+                {
+                    return _apiData[CurrentApi].Keys.Select(k => new MarkdownItTocContent()
+                    {
+                        Content = k,
+                        Anchor = k,
+                        Level = 2
+                    }).ToList();
+                }
+                else return new();
+            }
+            else
+            {
+                return _documentToc;
+            }
+        }
+    }
+
+    private string? _tab;
     private string? _md;
     private string? _prevPage;
+    private string? _currentApi;
     private CultureInfo? _prevCulture;
     private FrontMatterMeta? _frontMatterMeta;
-
     private readonly Dictionary<string, Dictionary<string, List<ParameterInfo>>> _apiData = new();
-    private readonly Dictionary<string, List<MarkdownItTocContent>> _tocCache = new();
+    private List<MarkdownItTocContent> _documentToc = new();
 
     private bool IsApiTab => Tab is not null && Tab.Equals("api", StringComparison.OrdinalIgnoreCase);
-    private string StandardName => FormatName(Page);
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-
-        _prevPage = Page;
-        NavigationManager.LocationChanged += NavigationManagerOnLocationChanged;
-    }
 
     protected override async Task OnParametersSetAsync()
     {
         await base.OnParametersSetAsync();
 
-        if (_prevCulture is not null && !Equals(_prevCulture, Culture))
-        {
-            _prevCulture = Culture;
-            _apiData.Clear();
-            await ReadDocumentAndApiAsync();
-        }
-    }
-
-    private async void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
-    {
-        if (_prevPage != Page)
+        if (!Equals(_prevPage, Page) || !Equals(_prevCulture, Culture))
         {
             _prevPage = Page;
-            _tocCache.Clear();
-            _apiData.Clear();
-
-            await ReadDocumentAsync();
-            await InvokeAsync(StateHasChanged);
-            return;
-        }
-
-        if (IsApiTab && _apiData.Count == 0)
-        {
-            await ReadApisAsync();
-
-            foreach (var (key, dict) in _apiData)
-            {
-                _tocCache.Add(key, dict.Keys.Select(k => new MarkdownItTocContent()
-                {
-                    Content = k,
-                    Anchor = k,
-                    Level = 2
-                }).ToList());
-            }
-
-            AppService.Toc = _tocCache[FormatName(Page)];
-
-            await InvokeAsync(StateHasChanged);
-        }
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-
-        if (firstRender)
-        {
             _prevCulture = Culture;
+            _currentApi = null;
+            _apiData.Clear();
             await ReadDocumentAndApiAsync();
-
-            StateHasChanged();
+            AppService.Toc = CurrentToc;
+        }
+        else if((IsApiTab && _apiData.Any() is false) || (!IsApiTab && _md is null))
+        {
+            await ReadDocumentAndApiAsync();
+            AppService.Toc = CurrentToc;
         }
     }
 
     private async Task ReadDocumentAndApiAsync()
     {
         await ReadDocumentAsync();
-
-        if (IsApiTab)
-        {
-            await ReadApisAsync();
-        }
+        if (IsApiTab) await ReadApisAsync();      
     }
 
     private void NavigateToTab(string tab)
     {
         NavigationManager.NavigateTo($"/components/{Page}/{tab}");
-
-        if (_tocCache.TryGetValue(tab == "" ? "doc" : StandardName, out var toc))
-        {
-            AppService.Toc = toc;
-        }
     }
 
     private void OnFrontMatterParsed(string? yaml)
@@ -137,13 +131,8 @@ public partial class Components : IDisposable
 
     private void OnTocParsed(List<MarkdownItTocContent>? contents)
     {
-        if (IsApiTab)
-        {
-            return;
-        }
-
-        AppService.Toc = contents;
-        _tocCache["doc"] = contents;
+        _documentToc = contents;
+        AppService.Toc = CurrentToc;
     }
 
     private async Task ReadDocumentAsync()
@@ -161,13 +150,9 @@ public partial class Components : IDisposable
         }
     }
 
-    private async Task ReadApisAsync()
+    private async Task ReadApisAsync() 
     {
-        if (_apiData.Count > 0)
-        {
-            return;
-        }
-
+        _apiData.Clear();
         var name = Page;
 
         var pageToApi = await DocService.ReadPageToApiAsync();
@@ -234,10 +219,5 @@ public partial class Components : IDisposable
     {
         name = name.TrimEnd('s');
         return KebabToPascal(name);
-    }
-
-    public void Dispose()
-    {
-        NavigationManager.LocationChanged -= NavigationManagerOnLocationChanged;
     }
 }

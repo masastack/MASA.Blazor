@@ -8,5 +8,8 @@
     "MRow",
     "MCol",
     "MSpacer"
+  ],
+  "aspect-ratios": [
+    "MResponsive"
   ]
 }

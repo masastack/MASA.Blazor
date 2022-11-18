@@ -1,7 +1,7 @@
-﻿using System.Reflection;
-using System.Text.RegularExpressions;
-using BlazorComponent.Attributes;
+﻿using BlazorComponent.Attributes;
 using OneOf;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Masa.Docs.Shared.ApiGenerator;
 
@@ -70,6 +70,10 @@ public static class ApiGenerator
 
     static string GetTypeName(Type type, bool ignoreGenericTypeArguments = false)
     {
+        if(type == typeof(MResponsive))
+        {
+
+        }
         if (type.IsGenericType)
         {
             var name = type.Name.Remove(type.Name.IndexOf('`'));
@@ -130,7 +134,7 @@ public static class ApiGenerator
 
     static bool IsIgnoreProp(string name)
     {
-        return new[] { "Attributes", "RefBack" }.Contains(name);
+        return new[] { "Attributes", "RefBack", "Id" }.Contains(name);
     }
 
     static string Keyword(string typeName)

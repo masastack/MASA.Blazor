@@ -31,7 +31,7 @@
         {
             <FadeTransition LeaveAbsolute>
                 <ShowTransitionElement Tag="div" Value="@IsApiTab">
-                    <Apis Data="@_apiData"></Apis>
+                    <Apis @bind-Value="@CurrentApi" Data="@_apiData"></Apis>
                 </ShowTransitionElement>
                 <ShowTransitionElement Tag="div" Value="@(!IsApiTab)">
                     <DocumentMarkdownIt Source="@_md"
