@@ -121,7 +121,10 @@ public partial class Components
     private async Task ReadDocumentAndApiAsync()
     {
         await ReadDocumentAsync();
-        if (IsApiTab) await ReadApisAsync();      
+        if (IsApiTab)
+        {
+            await ReadApisAsync();
+        }  
     }
 
     private void NavigateToTab(string tab)
