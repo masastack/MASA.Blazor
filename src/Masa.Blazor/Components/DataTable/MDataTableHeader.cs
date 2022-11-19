@@ -89,7 +89,7 @@
                     }
 
                     cssBuilder
-                        .Add($"text-{header.Align ?? "start"}");
+                        .Add($"text-{header.Align}");
                 }, styleBuilder =>
                 {
                     var header = (DataTableHeader)styleBuilder.Data;
