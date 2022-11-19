@@ -59,6 +59,10 @@
                 {
                     cssBuilder
                         .Add("m-progress-circular__underlay");
+                }, styleBuilder =>
+                {
+                    styleBuilder
+                        .AddIf($"stroke: {BackgroundColor}", () => !string.IsNullOrWhiteSpace(BackgroundColor));
                 })
                 .Apply("overlay-circle", cssBuilder =>
                 {
