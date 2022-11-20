@@ -15,6 +15,9 @@
         public Func<TItem, string> ItemKey { get; set; }
 
         [Parameter]
+        public Func<TItem, List<TItem>> ItemChildren { get; set; }
+        
+        [Parameter]
         public bool SingleSelect { get; set; }
 
         [Parameter]
