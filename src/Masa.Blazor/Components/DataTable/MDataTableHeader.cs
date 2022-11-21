@@ -89,7 +89,7 @@
                     }
 
                     cssBuilder
-                        .Add($"text-{header.Align}");
+                        .Add($"text-{header.Align.ToString().ToLower()}");
                 }, styleBuilder =>
                 {
                     var header = (DataTableHeader)styleBuilder.Data;
