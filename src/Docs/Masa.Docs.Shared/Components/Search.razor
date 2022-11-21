@@ -7,18 +7,23 @@
             Style="min-width: 340px"
             Placeholder="@I18n.T("Search")"
             Clearable
-            PrependInnerIcon="mdi-magnify"
             ClearIcon="mdi-close-circle"
             HideDetails="true"
             TValue="string"
             Filled
             Rounded
             Dense>
+    <PrependInnerContent>
+        <MIcon Class="emphasize2-color">mdi-magnify</MIcon>
+    </PrependInnerContent>
 </MTextField>
 
 @code {
-    private string _value = string.Empty;
+    [CascadingParameter]
+    public CultureInfo Culture { get; set; } = null!;
 
     [Parameter]
     public string Class { get; set; } = "mr-6";
+
+    private string _value = string.Empty;
 }
