@@ -25,6 +25,6 @@ jobs:
           7.0.x
         include-prerelease: true
     - name: setting tools
-      run: dotnet workload restore --project .\src\Docs\Masa.Docs.WebAssembly\Masa.Docs.WebAssembly.csproj
+      run: dotnet workload restore --project src/Docs/Masa.Docs.WebAssembly/Masa.Docs.WebAssembly.csproj
     - name: build
       run: dotnet build src/Masa.Blazor.NewDocs.sln
