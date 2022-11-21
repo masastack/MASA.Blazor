@@ -22,12 +22,12 @@
            new ()
            {
             Text= "Dessert (100g serving)",
-            Align= "start",
+            Align= DataTableHeaderAlign.Start,
             Value= nameof(Dessert.Name),
             Groupable=false
           },
-          new (){ Text= "Category", Value= nameof(Dessert.Category),Align="right"},
-          new (){ Text= "Dairy", Value= nameof(Dessert.Dairy),Align="right"}
+          new (){ Text= "Category", Value= nameof(Dessert.Category),Align= DataTableHeaderAlign.End},
+          new (){ Text= "Dairy", Value= nameof(Dessert.Dairy),Align= DataTableHeaderAlign.End}
         };
 
     private List<Dessert> _desserts = new List<Dessert>
