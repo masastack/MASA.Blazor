@@ -15,9 +15,9 @@ related:
 
 ## 注意
 
-<app-alerts type="error" content="当使用一个Object(对象) 作为**Items**的属性时，你必须使用**ItemText**和**ItemValue**与传入的对象关联起来。 这些值默认为 **Text** 和 **Value** 且可以更改。"></app-alerts>
+<app-alerts type="error" content="当使用一个Object(对象) 作为`Items`的属性时，你必须使用`ItemText`和`ItemValue`与传入的对象关联起来。 这些值默认为 `Text` 和 `Value` 且可以更改。"></app-alerts>
 
-<app-alerts type="warning" content="**MenuProps** 的 **Auto** 属性只支持默认输入样式。"></app-alerts>
+<app-alerts type="warning" content="`MenuProps` 的 `Auto` 属性只支持默认输入样式。"></app-alerts>
 
 <app-alerts type="info" content="浏览器自动补全默认设置为关闭，可能因不同的浏览器而变化或忽略。 **[MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)**"></app-alerts>
 

@@ -22,6 +22,7 @@ as long as you apply the app property. The key component to making your page con
 is **MMain**. The **MMain** component will be dynamically sized depending upon the structure of your designated app components. 
 You can use combinations of any or all of the above components including **MBottomNavigation**.
 
+```cshtml
 <!-- MainLayout.razor -->
 @inherits LayoutComponentBase
 
@@ -46,6 +47,8 @@ You can use combinations of any or all of the above components including **MBott
     <!-- -->
   </MFooter>
 </MApp>
+
+```
 
 <app-alerts type="info" content="Applying the `App` prop automatically applies `position:fixed` to the layout element. If your application calls for an absolute element, 
 you can overwrite this functionality by using the `Absolute` prop."></app-alerts>

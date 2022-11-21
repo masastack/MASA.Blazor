@@ -19,7 +19,7 @@ Tooltips can wrap any element.
 
 ## Caveats
 
-<app-alerts type="info" content="In order to correctly position **MTooltip**, a position support (` top ` | `bottom ` |`left ` | `right`) is required."></app-alerts>
+<app-alerts type="info" content="In order to correctly position **MTooltip**, a position support (`Top` | `Bottom ` |`Left ` | `Right`) is required."></app-alerts>
 
 ## Examples
 
