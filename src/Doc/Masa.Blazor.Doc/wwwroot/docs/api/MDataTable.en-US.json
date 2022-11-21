@@ -161,6 +161,11 @@
       "Description": ""
     },
     {
+      "Name": "ItemChildren",
+      "Type": "Func<TItem,List`1>",
+      "Description": ""
+    },
+    {
       "Name": "ItemClass",
       "Type": "String",
       "Default": "null",

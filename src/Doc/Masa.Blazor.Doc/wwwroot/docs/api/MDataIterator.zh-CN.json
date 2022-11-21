@@ -89,6 +89,11 @@
       "Description": ""
     },
     {
+      "Name": "ItemChildren",
+      "Type": "Func<TItem,List`1>",
+      "Description": ""
+    },
+    {
       "Name": "ItemKey",
       "Type": "Func<TItem,String>",
       "Default": "null",

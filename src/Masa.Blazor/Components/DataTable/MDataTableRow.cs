@@ -53,8 +53,10 @@
                 })
                 .Apply("row-indent", cssBuilder =>
                 {
-                    cssBuilder.Add("m-row__indent")
-                              .AddIf($"mr-{Level * 6}", () => Level > 0);
+                    cssBuilder.Add("m-row__indent");
+                }, styleBuilder =>
+                {
+                    styleBuilder.AddIf($"width: {Level * 24}px", () => Level > 0);
                 });
         }
     }

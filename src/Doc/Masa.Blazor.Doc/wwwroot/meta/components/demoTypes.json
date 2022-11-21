@@ -633,6 +633,7 @@
   "Demos.Components.Tables.children.DataTable.props.RowSelection",
   "Demos.Components.Tables.children.DataTable.props.Search",
   "Demos.Components.Tables.children.DataTable.props.Stripe",
+  "Demos.Components.Tables.children.DataTable.props.Tree",
   "Demos.Components.Tables.children.DataTable.contents.Header",
   "Demos.Components.Tables.children.DataTable.contents.Item",
   "Demos.Components.Tables.children.DataTable.contents.SimpleCheckbox",

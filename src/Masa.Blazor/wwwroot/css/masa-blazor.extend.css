@@ -54,6 +54,10 @@
     right: 0px;
 }
 
+.m-data-table .m-row__indent {
+    display: inline-block;
+}
+
 .theme--light.m-data-table > .m-data-table__wrapper.fixed-right > table > thead > tr > th:last-child {
     background-color: #FFFFFF;
 }
@@ -731,3 +735,5 @@ input[type=number] {
 .m-infinite-scroll *:last-child {
     margin-left: 4px;
 }
+
+/* gridstack */
