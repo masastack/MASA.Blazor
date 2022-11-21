@@ -43,6 +43,13 @@ markdown
 
 <masa-example file="Examples.components.editor.Markdown"></masa-example>
 
+#### Module
+
+Modules allow **Quill¡¯s** behavior and functionality to be customized. For example, use a third-party module **quill-blot-formatter** can achieve the function of resizing images.
+
+
+<app-alerts type="warning" content="This document already references the **quill-blot-formatter.min.js** package and registers the **blotFormatter** module with **Quill** after **Blazor** startup, so it can be used directly. Please refer to the source code for details."></app-alerts>
+
 #### Custom prompt message
 
 The prompt message when a null value is set by setting the `Placeholder` attribute.

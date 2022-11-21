@@ -15,17 +15,11 @@ The autocomplete component extends **MSelect** and adds the ability to filter it
 
 ## Caveats
 
-<!--alert:error--> 
-When using objects for the **Items** prop, you must associate **ItemText** and **ItemValue** with existing properties on your objects. These values are defaulted to  **Text** and **Value** and can be changed.
-<!--/alert:error--> 
+<app-alerts type="error" content="When using objects for the `Items` prop, you must associate `ItemText` and `ItemValue` with existing properties on your objects. These values are defaulted to  `Text` and `Value` and can be changed."></app-alerts>
 
-<!--alert:warning--> 
-The **Auto** property of **MenuProps** is only supported for the default input style.
-<!--/alert:warning--> 
+<app-alerts type="warning" content="The `Auto` property of `MenuProps` is only supported for the default input style."></app-alerts>
 
-<!--alert:info--> 
-Browser autocomplete is set to off by default, may vary by browser and may be ignored.  **[MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)**
-<!--/alert:info--> 
+<app-alerts type="info" content="Browser autocomplete is set to off by default, may vary by browser and may be ignored.  **[MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)**"></app-alerts>
 
 ## Examples
 

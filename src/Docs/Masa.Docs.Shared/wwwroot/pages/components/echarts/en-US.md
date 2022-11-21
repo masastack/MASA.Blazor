@@ -10,11 +10,7 @@ Examples
 
 <echarts-usage></echarts-usage>
 
-<!--alert:info-->
-You need to reference the package of ECharts before using it:
-<br />
-`<script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>`.
-<!--/alert:info-->
+<app-alerts type="info" content='You need to reference the package of ECharts before using it: `<script src="https://cdn.masastack.com/npm/echarts/5.1.1/echarts.min.js"></script>`.'></app-alerts>
 
 ## Examples
 
