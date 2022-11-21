@@ -14,8 +14,7 @@
 
         protected override RenderFragment GenChildContent() => builder => builder.AddComponent<UsageTemplate>();
 
-        public Usage() : base(typeof(MBreadcrumbs))
-        {
-        }
+        public Usage() : base(typeof(MBreadcrumbs)) { }
+
     }
 }
