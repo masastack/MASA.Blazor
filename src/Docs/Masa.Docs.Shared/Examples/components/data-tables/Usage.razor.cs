@@ -41,7 +41,7 @@ public class Usage : Masa.Docs.Shared.Components.Usage
            new ()
            {
             Text= "Dessert (100g serving)",
-            Align= "start",
+            Align= DataTableHeaderAlign.Start,
             Sortable= false,
             Value= nameof(Dessert.Name)
           },
