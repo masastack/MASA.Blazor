@@ -20,6 +20,8 @@ public partial class Usage
     {
         base.OnInitialized();
 
+        Console.Out.WriteLine("Initialized...");
+
         _toggleParameters = GenToggleParameters();
         _checkboxParameters = GenCheckboxParameters();
         _sliderParameters = GenSliderParameters();
@@ -58,7 +60,8 @@ public partial class Usage
             {
                 dict.Add("ChildContent", _childContent);
             }
-
+            
+            _additionalParameters = GenAdditionalParameters();
             if (_additionalParameters is not null)
             {
                 foreach (var (key, value) in _additionalParameters)

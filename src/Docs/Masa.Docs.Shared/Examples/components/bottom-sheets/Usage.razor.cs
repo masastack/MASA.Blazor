@@ -12,6 +12,8 @@ public class Usage : Masa.Docs.Shared.Components.Usage
 
     protected override RenderFragment GenChildContent() => builder =>
     {
+        Console.WriteLine("GenChildContent");
+
         builder.OpenComponent<MSheet>(0);
         builder.AddAttribute(1, nameof(MSheet.Class), "text-center");
         builder.AddAttribute(2, nameof(MSheet.Height), (StringNumber)200);
@@ -25,6 +27,7 @@ public class Usage : Masa.Docs.Shared.Components.Usage
                 Console.WriteLine($"_sheet1:{_sheet}");
                 _sheet = !_sheet;
                 Console.WriteLine($"_sheet2:{_sheet}");
+                StateHasChanged();
             }));
             childBuilder.AddChildContent(4, "Close");
             childBuilder.CloseComponent();
@@ -34,6 +37,8 @@ public class Usage : Masa.Docs.Shared.Components.Usage
 
     protected override Dictionary<string, object>? GenAdditionalParameters()
     {
+        Console.WriteLine("GenAdditionalParameters");
+        
         return new Dictionary<string, object>()
         {
             { nameof(MBottomSheet.Value), _sheet },
@@ -45,11 +50,13 @@ public class Usage : Masa.Docs.Shared.Components.Usage
             {
                 nameof(MBottomSheet.ActivatorContent), new RenderFragment<ActivatorProps>(context => builder =>
                 {
+                    Console.WriteLine("GenActivatorContent");
+                    
                     builder.OpenComponent<MButton>(0);
                     builder.AddAttribute(1, nameof(MButton.Color), "purple");
                     builder.AddAttribute(2, nameof(MButton.Dark), true);
                     builder.AddMultipleAttributes(3, context.Attrs);
-                    builder.AddChildContent(4, "Open Playground");
+                    builder.AddChildContent(4, $"Open Playground {_sheet}");
                     builder.CloseComponent();
                 })
             }
