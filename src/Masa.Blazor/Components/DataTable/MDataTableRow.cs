@@ -46,7 +46,7 @@
                     if (cssBuilder.Data is DataTableHeader header)
                     {
                         cssBuilder
-                            .Add($"text-{header.Align ?? "start"}")
+                            .Add($"text-{header.Align.ToString().ToLower()}")
                             .Add(header.CellClass)
                             .AddIf("m-data-table__divider", () => header.Divider);
                     }
