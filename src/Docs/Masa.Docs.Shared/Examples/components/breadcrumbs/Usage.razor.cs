@@ -9,16 +9,13 @@
 
         protected override ParameterList<SelectParameter> GenSelectParameters() => new()
         {
-            { nameof(MBreadcrumbs.Divider), new SelectParameter(new List<string>() { "/", "'\'",".",";",">","-"}, "/") },
+            { nameof(MBreadcrumbs.Divider), new SelectParameter(new List<string>() { "/", "'\'", ".", ";", ">", "-" }, "/") },
         };
 
-        protected override RenderFragment GenChildContent() => builder =>
+        protected override RenderFragment GenChildContent() => builder => builder.AddComponent<UsageTemplate>();
+
+        public Usage() : base(typeof(MBreadcrumbs))
         {
-            builder.OpenComponent<UsageTemplate>(0);
-            builder.CloseComponent();
-        };
-
-        public Usage() : base(typeof(MBreadcrumbs)) { }
-
+        }
     }
 }
