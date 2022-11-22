@@ -1,0 +1,13 @@
+﻿{
+  "props": {
+    "divider": "指定项之间的分隔字符。"
+  },
+  "contents": {
+  },
+  "events": {
+    "iputValueChanged": "",
+    "valuesChanged": ""
+  },
+  "functions": {
+  }
+}

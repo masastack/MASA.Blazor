@@ -11,5 +11,19 @@
   ],
   "aspect-ratios": [
     "MResponsive"
+  ],
+  "app-bars": [
+    "MAppBar",
+    "MAppBarNavIcon",
+    "MAppBarTitle"
+  ],
+  "breadcrumbs": [
+    "MBreadcrumbs",
+    "MBreadcrumbsItem",
+    "MBreadcrumbsDivider"
+  ],
+  "buttons": [
+    "MButton",
+    "MButtonGroup"
   ]
 }
