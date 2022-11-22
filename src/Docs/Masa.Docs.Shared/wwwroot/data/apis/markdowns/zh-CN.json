@@ -1,0 +1,19 @@
+{
+  "props": {
+    "Value": "",
+    "Options": "",
+    "Readonly": "",
+    "Html": ""
+  },
+  "events": {
+    "HtmlChanged": "",
+    "OnFocus": "",
+    "OnBlur": "",
+    "OnEscPress": "",
+    "OnCtrlEnterPress": "",
+    "OnSelect": "",
+    "OnToolbarButtonClick": "",
+    "BeforeAllUpload": ""
+  },
+  "contents": {}
+}

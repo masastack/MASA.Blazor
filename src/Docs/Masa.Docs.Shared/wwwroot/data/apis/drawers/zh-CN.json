@@ -1,0 +1,41 @@
+{
+  "props": {
+    "ActionsClass": "",
+    "ActionsStyle": "",
+    "AutoScrollToTop": "",
+    "BodyClass": "",
+    "BodyStyle": "",
+    "ContentClass": "",
+    "ContentStyle": "",
+    "DebounceInterval": "",
+    "FormModel": "",
+    "HeaderClass": "",
+    "HeaderStyle": "",
+    "HideCancelAction": "",
+    "HideTitleDivider": "",
+    "HideActionsDivider": "",
+    "Persistent": "",
+    "Title": "",
+    "Transition": "",
+    "Value": "",
+    "SaveProps": "",
+    "CancelProps": "",
+    "DeleteProps": "",
+    "SaveText": "",
+    "CancelText": "",
+    "DeleteText": ""
+  },
+  "events": {
+    "OnSave": "",
+    "OnCancel": "",
+    "OnDelete": ""
+  },
+  "contents": {
+    "ActivatorContent": "",
+    "SaveContent": "",
+    "DeleteContent": "",
+    "CancelContent": "",
+    "TitleContent": "",
+    "CloseContent": ""
+  }
+}

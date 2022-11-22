@@ -1,0 +1,13 @@
+{
+  "props": {
+    "FullWidth": "",
+    "Landscape": "",
+    "NoTitle": "",
+    "Transition": "",
+    "HeaderColor": ""
+  },
+  "events": {},
+  "contents": {
+    "TitleContent": ""
+  }
+}

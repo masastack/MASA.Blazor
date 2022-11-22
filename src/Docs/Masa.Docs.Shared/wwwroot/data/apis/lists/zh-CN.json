@@ -1,0 +1,14 @@
+{
+  "props": {
+    "Shaped": "",
+    "Nav": "",
+    "Subheader": "",
+    "TwoLine": "",
+    "ThreeLine": "",
+    "Expand": "",
+    "Linkage": "",
+    "If": ""
+  },
+  "events": {},
+  "contents": {}
+}

@@ -1,0 +1,14 @@
+{
+  "props": {
+    "Length": "",
+    "Type": "",
+    "Readonly": "",
+    "Value": "",
+    "Plain": ""
+  },
+  "events": {
+    "OnFinish": "",
+    "OnInput": ""
+  },
+  "contents": {}
+}

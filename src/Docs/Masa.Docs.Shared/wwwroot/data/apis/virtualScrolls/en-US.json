@@ -1,0 +1,12 @@
+{
+  "props": {
+    "Items": "",
+    "ItemSize": "",
+    "OverscanCount": ""
+  },
+  "events": {},
+  "contents": {
+    "ItemContent": "",
+    "FooterContent": ""
+  }
+}

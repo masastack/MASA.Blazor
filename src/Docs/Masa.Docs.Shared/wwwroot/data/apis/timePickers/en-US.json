@@ -1,0 +1,24 @@
+{
+  "props": {
+    "HeaderColor": "",
+    "FullWidth": "",
+    "Landscape": "",
+    "Format": "",
+    "AmPmInTitle": "",
+    "Readonly": "",
+    "UseSeconds": "",
+    "AllowedHours": "",
+    "AllowedMinutes": "",
+    "AllowedSeconds": "",
+    "Min": "",
+    "Max": "",
+    "Scrollable": "",
+    "Value": "",
+    "NoTitle": ""
+  },
+  "events": {
+    "OnPeriodUpdate": "",
+    "OnChange": ""
+  },
+  "contents": {}
+}

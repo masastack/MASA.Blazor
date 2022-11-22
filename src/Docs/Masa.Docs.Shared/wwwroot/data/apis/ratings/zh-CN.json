@@ -1,0 +1,18 @@
+{
+  "props": {
+    "Clearable": "",
+    "EmptyIcon": "",
+    "FullIcon": "",
+    "HalfIcon": "",
+    "HalfIncrements": "",
+    "Hover": "",
+    "IconLabel": "",
+    "Readonly": "",
+    "Value": "",
+    "Length": ""
+  },
+  "events": {},
+  "contents": {
+    "ItemContent": ""
+  }
+}

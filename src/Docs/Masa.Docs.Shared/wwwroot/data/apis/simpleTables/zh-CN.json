@@ -1,0 +1,12 @@
+{
+  "props": {
+    "FixedHeader": "",
+    "FixedRight": ""
+  },
+  "events": {},
+  "contents": {
+    "WrapperContent": "",
+    "TopContent": "",
+    "BottomContent": ""
+  }
+}

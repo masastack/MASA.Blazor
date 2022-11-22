@@ -1,0 +1,51 @@
+{
+  "props": {
+    "FooterProps": "",
+    "ItemKey": "",
+    "SingleSelect": "",
+    "Expanded": "",
+    "SingleExpand": "",
+    "NoResultsText": "",
+    "NoDataText": "",
+    "LoadingText": "",
+    "HideDefaultFooter": "",
+    "SelectableKey": "",
+    "LoaderHeight": "",
+    "Value": "",
+    "OnItemSelect": "",
+    "OnToggleSelectAll": "",
+    "Items": "",
+    "SortBy": "",
+    "SortDesc": "",
+    "CustomSort": "",
+    "MustSort": "",
+    "MultiSort": "",
+    "Page": "",
+    "ItemsPerPage": "",
+    "GroupBy": "",
+    "GroupDesc": "",
+    "CustomGroup": "",
+    "Locale": "",
+    "DisableSort": "",
+    "DisablePagination": "",
+    "DisableFiltering": "",
+    "Search": "",
+    "CustomFilter": "",
+    "ServerItemsLength": "",
+    "ItemValues": ""
+  },
+  "events": {
+    "OnPageCount": "",
+    "OnOptionsUpdate": ""
+  },
+  "contents": {
+    "PageTextContent": "",
+    "ItemContent": "",
+    "LoadingContent": "",
+    "NoDataContent": "",
+    "NoResultsContent": "",
+    "HeaderContent": "",
+    "FooterContent": "",
+    "ProgressContent": ""
+  }
+}

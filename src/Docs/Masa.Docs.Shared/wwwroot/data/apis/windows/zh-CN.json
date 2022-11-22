@@ -1,0 +1,23 @@
+{
+  "props": {
+    "Continuous": "",
+    "NextIcon": "",
+    "PrevIcon": "",
+    "Reverse": "",
+    "ShowArrows": "",
+    "ShowArrowsOnHover": "",
+    "Vertical": "",
+    "Max": "",
+    "TargetGroup": "",
+    "Multiple": "",
+    "Value": "",
+    "Values": ""
+  },
+  "events": {
+    "ValuesChanged": ""
+  },
+  "contents": {
+    "NextContent": "",
+    "PrevContent": ""
+  }
+}

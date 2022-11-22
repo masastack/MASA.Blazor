@@ -1,0 +1,41 @@
+{
+  "props": {
+    "Hoverable": "",
+    "Shaped": "",
+    "SelectedColor": "",
+    "LoadChildren": "",
+    "Activatable": "",
+    "IndeterminateIcon": "",
+    "OnIcon": "",
+    "OffIcon": "",
+    "OpenOnClick": "",
+    "Items": "",
+    "Search": "",
+    "ItemText": "",
+    "Selectable": "",
+    "OpenAll": "",
+    "ItemDisabled": "",
+    "ItemKey": "",
+    "ItemChildren": "",
+    "Filter": "",
+    "SelectionType": "",
+    "Value": "",
+    "MultipleActive": "",
+    "MandatoryActive": "",
+    "Active": "",
+    "Open": "",
+    "LoadingIcon": "",
+    "ExpandIcon": ""
+  },
+  "events": {
+    "ActiveChanged": "",
+    "OpenChanged": "",
+    "OnInput": "",
+    "OnActiveUpdate": "",
+    "OnOpenUpdate": ""
+  },
+  "contents": {
+    "PrependContent": "",
+    "LabelContent": ""
+  }
+}

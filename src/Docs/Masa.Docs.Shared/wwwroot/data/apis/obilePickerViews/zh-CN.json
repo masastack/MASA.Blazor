@@ -1,0 +1,17 @@
+{
+  "props": {
+    "Columns": "",
+    "ItemText": "",
+    "ItemValue": "",
+    "ItemChildren": "",
+    "ItemDisabled": "",
+    "ItemHeight": "",
+    "SwipeDuration": "",
+    "VisibleItemCount": "",
+    "Value": ""
+  },
+  "events": {
+    "OnSelect": ""
+  },
+  "contents": {}
+}

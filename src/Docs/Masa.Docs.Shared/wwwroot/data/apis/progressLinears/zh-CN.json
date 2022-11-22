@@ -1,0 +1,17 @@
+{
+  "props": {
+    "Query": "",
+    "Striped": "",
+    "Active": "",
+    "BackgroundOpacity": "",
+    "Stream": "",
+    "BufferValue": "",
+    "Reverse": "",
+    "Indeterminate": "",
+    "Value": ""
+  },
+  "events": {
+    "OnChange": ""
+  },
+  "contents": {}
+}

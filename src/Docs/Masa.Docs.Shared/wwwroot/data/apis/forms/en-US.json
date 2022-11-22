@@ -1,0 +1,15 @@
+{
+  "props": {
+    "Model": "",
+    "EnableValidation": "",
+    "EnableI18n": "",
+    "Readonly": "",
+    "Value": ""
+  },
+  "events": {
+    "OnSubmit": "",
+    "OnValidSubmit": "",
+    "OnInvalidSubmit": ""
+  },
+  "contents": {}
+}

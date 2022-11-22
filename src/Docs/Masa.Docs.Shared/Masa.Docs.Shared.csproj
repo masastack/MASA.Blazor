@@ -36,11 +36,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Masa.Blazor\Masa.Blazor.csproj" />
+    <Compile Remove="wwwroot\data\apis\drawers\**" />
+    <Content Remove="wwwroot\data\apis\drawers\**" />
+    <EmbeddedResource Remove="wwwroot\data\apis\drawers\**" />
+    <None Remove="wwwroot\data\apis\drawers\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\data\apis\drawers\" />
+    <ProjectReference Include="..\..\Masa.Blazor\Masa.Blazor.csproj" />
   </ItemGroup>
 	
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">

@@ -1,0 +1,19 @@
+{
+  "props": {
+    "Visible": "",
+    "Title": "",
+    "Type": "",
+    "OkText": "",
+    "OkColor": "",
+    "CancelText": "",
+    "CancelColor": ""
+  },
+  "events": {
+    "VisibleChanged": "",
+    "OnCancel": "",
+    "OnOk": ""
+  },
+  "contents": {
+    "Actions": ""
+  }
+}

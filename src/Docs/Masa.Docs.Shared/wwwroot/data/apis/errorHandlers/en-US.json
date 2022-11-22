@@ -1,0 +1,12 @@
+{
+  "props": {
+    "OnErrorHandleAsync": "",
+    "ShowAlert": "",
+    "ShowDetail": "",
+    "MaximumErrorCount": ""
+  },
+  "events": {},
+  "contents": {
+    "ErrorContent": ""
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "props": {
+    "Value": "",
+    "Centered": "",
+    "MultiLine": "",
+    "Vertical": "",
+    "Shaped": "",
+    "Timeout": "",
+    "Action": "",
+    "Transition": "",
+    "Text": ""
+  },
+  "events": {
+    "OnClosed": ""
+  },
+  "contents": {
+    "ActionContent": ""
+  }
+}

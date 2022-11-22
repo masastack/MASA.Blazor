@@ -1,0 +1,18 @@
+{
+  "props": {
+    "OnIcon": "",
+    "OffIcon": "",
+    "Readonly": "",
+    "Value": "",
+    "Label": ""
+  },
+  "events": {
+    "OnBlur": "",
+    "OnChange": "",
+    "OnFocus": "",
+    "OnKeyDown": ""
+  },
+  "contents": {
+    "LabelContent": ""
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "props": {
+    "Clipped": "",
+    "DisableResizeWatcher": "",
+    "DisableRouteWatcher": "",
+    "MiniVariantWidth": "",
+    "Touchless": "",
+    "MobileBreakpoint": "",
+    "OverlayColor": "",
+    "OverlayOpacity": "",
+    "ExpandOnHover": "",
+    "MiniVariant": "",
+    "Permanent": "",
+    "Stateless": "",
+    "Temporary": "",
+    "Value": ""
+  },
+  "events": {
+    "MiniVariantChanged": ""
+  },
+  "contents": {
+    "AppendContent": "",
+    "PrependContent": "",
+    "ImgContent": ""
+  }
+}

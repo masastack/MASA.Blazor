@@ -1,0 +1,16 @@
+{
+  "props": {
+    "Circle": "",
+    "Value": "",
+    "Length": "",
+    "NextIcon": "",
+    "PrevIcon": "",
+    "TotalVisible": ""
+  },
+  "events": {
+    "OnInput": "",
+    "OnPrevious": "",
+    "OnNext": ""
+  },
+  "contents": {}
+}

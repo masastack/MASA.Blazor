@@ -1,0 +1,17 @@
+{
+  "props": {
+    "IsSelected": "",
+    "IsExpanded": "",
+    "ItemClass": "",
+    "Stripe": "",
+    "Headers": "",
+    "HideDefaultHeader": "",
+    "Item": "",
+    "Index": "",
+    "HasSlot": ""
+  },
+  "events": {},
+  "contents": {
+    "SlotContent": ""
+  }
+}

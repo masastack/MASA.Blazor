@@ -1,0 +1,11 @@
+{
+  "props": {
+    "Position": "",
+    "Duration": "",
+    "MaxCount": ""
+  },
+  "events": {
+    "OnClose": ""
+  },
+  "contents": {}
+}

@@ -1,0 +1,12 @@
+{
+  "props": {
+    "Visible": "",
+    "OffsetX": "",
+    "OffsetY": "",
+    "ClientX": "",
+    "ClientY": "",
+    "PreventDefault": ""
+  },
+  "events": {},
+  "contents": {}
+}

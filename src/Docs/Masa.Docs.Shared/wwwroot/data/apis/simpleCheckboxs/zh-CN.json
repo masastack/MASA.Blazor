@@ -1,0 +1,12 @@
+{
+  "props": {
+    "Value": "",
+    "Indeterminate": "",
+    "IndeterminateIcon": "",
+    "OnIcon": "",
+    "OffIcon": "",
+    "Readonly": ""
+  },
+  "events": {},
+  "contents": {}
+}

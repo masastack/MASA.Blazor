@@ -1,0 +1,15 @@
+{
+  "props": {
+    "Items": "",
+    "ItemHeight": "",
+    "ItemText": "",
+    "ItemDisabled": "",
+    "SelectedIndex": "",
+    "SwipeDuration": "",
+    "VisibleItemCount": ""
+  },
+  "events": {
+    "OnChange": ""
+  },
+  "contents": {}
+}

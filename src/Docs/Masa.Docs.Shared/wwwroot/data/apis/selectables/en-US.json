@@ -1,0 +1,36 @@
+{
+  "props": {
+    "TextColor": "",
+    "AppendIcon": "",
+    "Label": "",
+    "PrependIcon": "",
+    "HideDetails": "",
+    "Hint": "",
+    "PersistentHint": "",
+    "Readonly": "",
+    "ValidateOnBlur": "",
+    "Value": "",
+    "ValueExpression": "",
+    "Error": "",
+    "ErrorCount": "",
+    "ErrorMessages": "",
+    "Messages": "",
+    "Success": "",
+    "SuccessMessages": "",
+    "Rules": ""
+  },
+  "events": {
+    "OnChange": "",
+    "OnMouseDown": "",
+    "OnMouseUp": "",
+    "OnPrependClick": "",
+    "OnAppendClick": "",
+    "OnInput": ""
+  },
+  "contents": {
+    "AppendContent": "",
+    "LabelContent": "",
+    "PrependContent": "",
+    "MessageContent": ""
+  }
+}

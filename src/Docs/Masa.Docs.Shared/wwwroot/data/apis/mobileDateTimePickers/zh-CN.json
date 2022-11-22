@@ -1,0 +1,20 @@
+{
+  "props": {
+    "Max": "",
+    "Min": "",
+    "Formatter": "",
+    "Precision": "",
+    "Title": "",
+    "Visible": "",
+    "Value": "",
+    "ItemHeight": "",
+    "SwipeDuration": "",
+    "VisibleItemCount": ""
+  },
+  "events": {
+    "VisibleChanged": ""
+  },
+  "contents": {
+    "ActivatorContent": ""
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "props": {
+    "Direction": "",
+    "Transition": "",
+    "Origin": "",
+    "OpenOnHover": "",
+    "OpenOnClick": "",
+    "OpenOnFocus": "",
+    "Value": "",
+    "OpenDelay": "",
+    "CloseDelay": ""
+  },
+  "events": {},
+  "contents": {
+    "ActivatorContent": ""
+  }
+}
