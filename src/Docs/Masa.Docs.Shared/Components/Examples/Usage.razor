@@ -6,16 +6,16 @@
             <MResponsive Class="d-flex" Height="44">
                 @if (_toggleParameters.Any())
                 {
-                    <MSlideGroup ActiveClass="primary--text" Multiple ShowArrows="@("always")">
+                    <MSlideGroup ActiveClass="primary--text" Mandatory Value="_toggleValue" ValueChanged="ToggleValueChanged">
                         @foreach (var item in _toggleParameters)
                         {
-                            <MSlideItem @key="item">
+                            <MSlideItem @key="item" Value="@item.Key">
                                 <MButton IsActive="@context.Active"
                                          Depressed
                                          Height="44"
                                          Text
                                          Tile
-                                         OnClick="() => { context.Toggle(); item.Value = !context.Active; }">
+                                         OnClick="() => context.Toggle()">
                                     @item.Key
                                 </MButton>
                             </MSlideItem>
