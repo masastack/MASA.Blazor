@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: Azure Static Web Apps CI/CD v1
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     paths:
       - src/BlazorComponent/src/Component/**
       - src/Masa.Blazor/**
-      - src/Doc/**
+      - src/Docs/**
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -15,7 +15,7 @@ on:
     paths:
       - src/BlazorComponent/src/Component/**
       - src/Masa.Blazor/**
-      - src/Doc/**
+      - src/Docs/**
 
 jobs:
   build_and_deploy_job:
@@ -34,13 +34,13 @@ jobs:
             6.0.x
             7.0.x
       - name: setting tools
-        run: dotnet workload install wasm-tools-net6
+        run: dotnet workload install wasm-tools
       - name: Copy Static Resources
         id: copyStaticResources
         run: |
-          dotnet build src/Masa.Blazor.sln
-          dotnet publish src/Doc/Masa.Blazor.Doc.WebAssembly/Masa.Blazor.Doc.WebAssembly.csproj -c Release -o publish
-          cp -rf src/Doc/Masa.Blazor.Doc.WebAssembly/staticwebapp.config.json publish/wwwroot
+          dotnet build src/Masa.Blazor.NewDocs.sln
+          dotnet publish src/Docs/Masa.Docs.WebAssembly/Masa.Docs.WebAssembly.csproj -c Release -o publish
+          cp -rf src/Docs/Masa.Docs.WebAssembly/staticwebapp.config.json publish/wwwroot
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
