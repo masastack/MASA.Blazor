@@ -1,0 +1,31 @@
+::deep.irregular .m-input__prepend-inner {
+    height: 100% !important;
+    margin: 0 !important;
+}
+
+::deep.irregular .m-input__append-inner {
+    height: 100% !important;
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+}
+
+::deep.irregular .m-input__slot{
+    padding: 0 12px !important;
+}
+
+::deep.irregular .m-icon.emphasize2-color {
+    color: #1B2559 !important;
+}
+
+::deep.irregular .m-icon {
+    font-size: 20px !important;
+}
+
+::deep.irregular .m-icon {
+    color: #A3AED0 !important;
+}
+
+    ::deep.irregular .m-icon.primary--text {
+        color: #4318FF !important;
+    }
