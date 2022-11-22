@@ -1,14 +1,17 @@
 name: Mirror to Giltab
 on:
   push:
-    paths-ignore:
-      - src/Docs/**
+    paths:
+      - src/BlazorComponent/src/Component/**
+      - src/Masa.Blazor/**
   delete:
-    paths-ignore:
-      - src/Docs/**
+    paths:
+      - src/BlazorComponent/src/Component/**
+      - src/Masa.Blazor/**
   create:
-    paths-ignore:
-      - src/Docs/**
+    paths:
+      - src/BlazorComponent/src/Component/**
+      - src/Masa.Blazor/**
   workflow_dispatch:
 
 jobs:
