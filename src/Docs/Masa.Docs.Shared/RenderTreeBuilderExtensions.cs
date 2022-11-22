@@ -9,4 +9,10 @@ public static class RenderTreeBuilderExtensions
     {
         builder.AddAttribute(sequence, "ChildContent", new RenderFragment(childBuilder => childBuilder.AddContent(0, content)));
     }
+
+    public static void AddComponent<TComponent>(this RenderTreeBuilder builder, int sequence = 0) where TComponent : notnull, IComponent
+    {
+        builder.OpenComponent<TComponent>(sequence);
+        builder.CloseComponent();
+    }
 }

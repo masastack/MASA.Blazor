@@ -9,7 +9,6 @@ public partial class Usage
     private ParameterList<SliderParameter> _sliderParameters;
     private ParameterList<SelectParameter> _selectParameters;
     private RenderFragment? _childContent;
-    private Dictionary<string, object>? _additionalParameters;
 
     public Usage(Type type)
     {
@@ -20,14 +19,11 @@ public partial class Usage
     {
         base.OnInitialized();
 
-        Console.Out.WriteLine("Initialized...");
-
         _toggleParameters = GenToggleParameters();
         _checkboxParameters = GenCheckboxParameters();
         _sliderParameters = GenSliderParameters();
         _selectParameters = GenSelectParameters();
         _childContent = GenChildContent();
-        _additionalParameters = GenAdditionalParameters();
     }
 
     private bool _rendered;
@@ -60,11 +56,11 @@ public partial class Usage
             {
                 dict.Add("ChildContent", _childContent);
             }
-            
-            _additionalParameters = GenAdditionalParameters();
-            if (_additionalParameters is not null)
+
+            var additionalParameters = GenAdditionalParameters();
+            if (additionalParameters is not null)
             {
-                foreach (var (key, value) in _additionalParameters)
+                foreach (var (key, value) in additionalParameters)
                 {
                     dict.Add(key, value);
                 }
