@@ -4,8 +4,10 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - src/Docs/**
+    paths:
+      - src/BlazorComponent/src/Component/**
+      - src/Masa.Blazor/**
+      - src/Doc/**
   workflow_dispatch:
 
 jobs:
