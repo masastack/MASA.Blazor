@@ -38,6 +38,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Masa.Blazor\Masa.Blazor.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\data\apis\drawers\" />
+  </ItemGroup>
 	
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">
     <Copy SourceFiles="@(ExamplesSourceFile)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\examples\%(Filename).txt" />

@@ -1,0 +1,22 @@
+﻿{
+  "props": {
+    "active": "Determines whether the chip is visible or not.",
+    "closeIcon": "Change the default icon used for **close** chips",
+    "closeLabel": "Change the default label used for **close** chips",
+    "disabled": "Disables the chip, making it un-selectable",
+    "draggable": "Makes the chip draggable.",
+    "filter": "Displays a selection icon when selected.",
+    "filterIcon": "Change the default icon used for filter chips.",
+    "Label": "Removes circle edges.",
+    "link": "Explicitly define the chip as a link.",
+    "Pill": "Remove [MAvatar](/components/avatars).",
+    "textColor": "Applies a specified color to the control text.",
+    "value": "The value used when a child of a [MChipGroup](/components/chipGroups)."
+  },
+  "contents": {
+  },
+  "events": {   
+  },
+  "functions": {
+  }
+}

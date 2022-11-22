@@ -60,7 +60,8 @@
       "stopPropagation": "Prevent bubbling events for the target element.",
       "top": "Aligns the content towards the top.",
       "xLarge": "Makes the component extra large.",
-      "xSmall": "Makes the component extra small."
+      "xSmall": "Makes the component extra small.",
+      "mandatory": "Forces to always choose a value (if available)."
     },
     "contents": {
       "childContent": "Default content",
@@ -136,7 +137,8 @@
       "stopPropagation": "阻止目标元素的冒泡事件。",
       "top": "将组件向顶部对齐。",
       "xLarge": "使组件尺寸变的无比巨大。",
-      "xSmall": "使组件尺寸变的更小。"
+      "xSmall": "使组件尺寸变的更小。",
+      "mandatory": "强制始终选择一个值（如果可用）。"
     },
     "contents": {
       "childContent": "默认插槽",

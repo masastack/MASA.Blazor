@@ -25,5 +25,16 @@
   "buttons": [
     "MButton",
     "MButtonGroup"
+  ],
+  "cards": [
+    "MCard",
+    "MCardActions",
+    "MCardSubtitle",
+    "MCardText",
+    "MCardTitle"
+  ],
+  "carousels": [
+    "MCarousel",
+    "MCarouselItem"
   ]
 }

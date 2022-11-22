@@ -1,0 +1,21 @@
+﻿{
+  "props": {
+    "contentClass": "contentClass。",
+    "contentStyle": "contentStyle",
+    "copiedIcon": "copiedIcon",
+    "copyIcon": "copyIcon。",
+    "copyIconColor": "copyIconColor。",
+    "disableTooltip": "disableTooltip。",
+    "text": "text。",
+    "tooltip": "tooltip。",
+    "tooltipClass": "tooltipClass。",
+    "tooltipStyle": "tooltipStyle。"
+  },
+  "contents": {
+    "OnCopy": "OnCopy"
+  },
+  "events": {   
+  },
+  "functions": {
+  }
+}

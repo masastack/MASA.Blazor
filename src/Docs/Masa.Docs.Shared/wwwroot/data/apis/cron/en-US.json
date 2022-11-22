@@ -1,7 +1,9 @@
 ﻿{
-  "props": {  
+  "props": {
+    "value": "value。"
   },
   "contents": {
+    "OnCopy": "OnCopy"
   },
   "events": {   
   },
