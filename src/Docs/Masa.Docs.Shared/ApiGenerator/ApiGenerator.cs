@@ -51,44 +51,44 @@ public static class ApiGenerator
             parametersCache.Add(typeName, value);
         }
 
-        var json = File.ReadAllText("D:\\wuweilai\\project\\MASA.Blazor\\src\\Docs\\Masa.Docs.Shared\\wwwroot\\data\\apis\\common.json"); //_httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>("_content/Masa.Docs.Shared/data/apis/common.json").Result ?? new();
-        var _commonApis = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(json);
-        var inrskeys = new List<string>();
-        foreach(var (key,value) in _commonApis["zh-CN"])
-        {
-            foreach(var (key2,value2) in value)
-            {
-                inrskeys.Add(key2.ToUpper());
-            }
-        }
-        var jsonOption = new JsonSerializerOptions()
-        {
-            WriteIndented = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-        };
-        var jsonMap = new Dictionary<string, Dictionary<string, string>>();
-        foreach (var parameter in parametersCache)
-        {
-            var directory = "";
-            if (parameter.Key.StartsWith("M")) directory = parameter.Key.TrimStart('M');
-            else if (parameter.Key.StartsWith("P")) directory = parameter.Key.TrimStart('P');
-            else continue;
-            directory = char.ToLower(directory[0]) + directory.Substring(1) + "s";
-            var path = $"D:\\wuweilai\\project\\MASA.Blazor\\src\\Docs\\Masa.Docs.Shared\\wwwroot\\data\\apis\\{directory}";
-            if (Directory.Exists(path)) continue;
-            else
-            {
-                foreach (var (key, value) in parameter.Value)
-                {
-                    jsonMap.Add(key, value.Where(v => inrskeys.Contains(v.Name.ToUpper()) is false).ToDictionary(p => p.Name, p => p.Description ?? ""));
-                }
-                Directory.CreateDirectory(path);
-                File.WriteAllText($"{path}/zh-CN.json", JsonSerializer.Serialize(jsonMap, jsonOption));
-                File.WriteAllText($"{path}/en-US.json", JsonSerializer.Serialize(jsonMap, jsonOption));
-            }
-            jsonMap.Clear();
-        }
+        //var json = File.ReadAllText("D:\\wuweilai\\project\\MASA.Blazor\\src\\Docs\\Masa.Docs.Shared\\wwwroot\\data\\apis\\common.json"); //_httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>("_content/Masa.Docs.Shared/data/apis/common.json").Result ?? new();
+        //var _commonApis = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(json);
+        //var inrskeys = new List<string>();
+        //foreach(var (key,value) in _commonApis["zh-CN"])
+        //{
+        //    foreach(var (key2,value2) in value)
+        //    {
+        //        inrskeys.Add(key2.ToUpper());
+        //    }
+        //}
+        //var jsonOption = new JsonSerializerOptions()
+        //{
+        //    WriteIndented = true,
+        //    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        //    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+        //};
+        //var jsonMap = new Dictionary<string, Dictionary<string, string>>();
+        //foreach (var parameter in parametersCache)
+        //{
+        //    var directory = "";
+        //    if (parameter.Key.StartsWith("M")) directory = parameter.Key.TrimStart('M');
+        //    else if (parameter.Key.StartsWith("P")) directory = parameter.Key.TrimStart('P');
+        //    else continue;
+        //    directory = char.ToLower(directory[0]) + directory.Substring(1) + "s";
+        //    var path = $"D:\\wuweilai\\project\\MASA.Blazor\\src\\Docs\\Masa.Docs.Shared\\wwwroot\\data\\apis\\{directory}";
+        //    if (Directory.Exists(path)) continue;
+        //    else
+        //    {
+        //        foreach (var (key, value) in parameter.Value)
+        //        {
+        //            jsonMap.Add(key, value.Where(v => inrskeys.Contains(v.Name.ToUpper()) is false).ToDictionary(p => p.Name, p => p.Description ?? ""));
+        //        }
+        //        Directory.CreateDirectory(path);
+        //        File.WriteAllText($"{path}/zh-CN.json", JsonSerializer.Serialize(jsonMap, jsonOption));
+        //        File.WriteAllText($"{path}/en-US.json", JsonSerializer.Serialize(jsonMap, jsonOption));
+        //    }
+        //    jsonMap.Clear();
+        //}
     }
 
     static ParameterInfo MapToParameterInfo(PropertyInfo propertyInfo)

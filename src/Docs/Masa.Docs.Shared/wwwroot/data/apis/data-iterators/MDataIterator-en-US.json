@@ -1,0 +1,51 @@
+{
+  "props": {
+    "FooterProps": "See the [MDataIterator](components/data-iterators/api/MDataFooter) API for more information",
+    "ItemKey": "The property on each item that is used as a unique key",
+    "SingleSelect": "Changes selection mode to single select",
+    "Expanded": "Array of expanded items.",
+    "SingleExpand": "Changes expansion mode to single expand",
+    "NoResultsText": "Text shown when `Search` prop is used and there are no results",
+    "NoDataText": "Text shown when no items are provided to the component",
+    "LoadingText": "Text shown when `Loading` is true and no items are provided",
+    "HideDefaultFooter": "Hides default footer",
+    "SelectableKey": "The property on each item that is used to determine if it is selectable or not",
+    "LoaderHeight": "",
+    "Value": "Used for controlling selected rows",
+    "OnItemSelect": "",
+    "OnToggleSelectAll": "",
+    "Items": "The array of items to display",
+    "SortBy": "",
+    "SortDesc": "",
+    "CustomSort": "",
+    "MustSort": "",
+    "MultiSort": "",
+    "Page": "",
+    "ItemsPerPage": "",
+    "GroupBy": "",
+    "GroupDesc": "",
+    "CustomGroup": "Function used to group items",
+    "Locale": "Sets the locale of component. Used for translating internal text strings.",
+    "DisableSort": "Disables sorting completely",
+    "DisablePagination": "Disables pagination completely",
+    "DisableFiltering": "Disables filtering completely",
+    "Search": "Text input used to filter items",
+    "CustomFilter": "Function to filter items",
+    "ServerItemsLength": "Used only when data is provided by a server. Should be set to the total amount of items available on server so that pagination works correctly",
+    "ItemValues": ""
+  },
+  "events": {
+    "OnPageCount": "The total number of pages",
+    "OnOptionsUpdate": "Information about the current options"
+  },
+  "contents": {
+    "PageTextContent": "This slot is forwarded to the default footer. See the [MDataIterator](components/data-iterators/api/MDataFooter) API for more information.",
+    "ItemContent": "Slot for each item",
+    "LoadingContent": "Defines content for when `Loading` is true and no items are provided",
+    "NoDataContent": "Defines content for when no items are provided",
+    "NoResultsContent": "Defines content for when `Search` is provided but no results are found",
+    "HeaderContent": "Title bar slot",
+    "FooterContent": "Defines a footer below the items",
+    "ProgressContent": ""
+  }
+}

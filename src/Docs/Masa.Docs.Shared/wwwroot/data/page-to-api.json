@@ -36,5 +36,15 @@
   "carousels": [
     "MCarousel",
     "MCarouselItem"
+  ],
+  "expansion-panels": [
+    "MExpansionPanel",
+    "MExpansionPanels",
+    "MExpansionPanelHeader",
+    "MExpansionPanelContent"
+  ],
+  "data-iterators": [
+    "MDataIterator",
+    "MDataFooter"
   ]
 }

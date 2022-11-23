@@ -1,0 +1,22 @@
+﻿{
+  "props": {
+    "block": "Expands the button to 100% of available space.",
+    "depressed": "Removes the button box shadow.",
+    "disabled": "Removes the ability to click or target the component.",
+    "fab": "Designates the button as a floating action button. The button will become round.",
+    "icon": "assign button as icon.",
+    "outlined": "Makes the background transparent and applies a thin border.",
+    "plain": "Removes the default background change applied when hovering over a button.",
+    "shaped": "Applies a large border radius on the top left and bottom right of the card.",
+    "text": "Makes the background transparent. When using the color prop, the color will be applied to the button text instead of the background.",
+    "tile": "Removes the component’s **border-radius**.",
+    "type": "Set the button’s **type** attribute.",
+    "value": "The value to use when selecting components in a group. If not provided, index is used."
+  },
+  "contents": {
+  },
+  "events": {   
+  },
+  "functions": {
+  }
+}

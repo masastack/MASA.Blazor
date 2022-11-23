@@ -1,0 +1,51 @@
+{
+  "props": {
+    "FooterProps": "更多信息请访问 [MDataIterator](components/data-iterators/api/MDataFooter)",
+    "ItemKey": "每个项上用作唯一键的属性",
+    "SingleSelect": "将选择模式更改为单选",
+    "Expanded": "扩展项目数组。",
+    "SingleExpand": "将扩展模式更改为单个扩展",
+    "NoResultsText": "使用 `Search` 属性时显示的文本，但没有结果",
+    "NoDataText": "未向组件提供任何项目时显示的文本",
+    "LoadingText": "如果为 **true** 且未提供任何项目，则将显示加载文本",
+    "HideDefaultFooter": "默认隐藏页脚",
+    "SelectableKey": "每个项目上的属性，用于确定其是否可选择。",
+    "LoaderHeight": "",
+    "Value": "用于控制选定的行",
+    "OnItemSelect": "",
+    "OnToggleSelectAll": "",
+    "Items": "要显示的项目数组",
+    "SortBy": "",
+    "SortDesc": "",
+    "CustomSort": "",
+    "MustSort": "",
+    "MultiSort": "",
+    "Page": "",
+    "ItemsPerPage": "",
+    "GroupBy": "",
+    "GroupDesc": "",
+    "CustomGroup": "用于分组项目的函数",
+    "Locale": "设置组件的语言环境。 用于翻译内部文本字符串。",
+    "DisableSort": "完全禁用排序",
+    "DisablePagination": "完全禁用分页",
+    "DisableFiltering": "完全禁用过滤",
+    "Search": "用于过滤项目的文本输入",
+    "CustomFilter": "过滤项目的函数",
+    "ServerItemsLength": "仅在服务器提供数据时使用。 应该设置为服务器上可用项目的总数，以便分页可以正常工作",
+    "ItemValues": ""
+  },
+  "events": {
+    "OnPageCount": "",
+    "OnOptionsUpdate": ""
+  },
+  "contents": {
+    "PageTextContent": "该插槽将转发到默认页脚。 有关更多信息，请参见 [MDataIterator](components/data-iterators/api/MDataFooter)。",
+    "ItemContent": "每个项目的插槽",
+    "LoadingContent": "定义 `Loading` 为 true 且未提供任何项目时的内容",
+    "NoDataContent": "定义何时不提供任何项目的内容",
+    "NoResultsContent": "定义何时提供 `Search` 但未找到结果的内容",
+    "HeaderContent": "标题栏插槽",
+    "FooterContent": "在项目下方定义页脚",
+    "ProgressContent": ""
+  }
+}

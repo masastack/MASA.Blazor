@@ -1,10 +1,10 @@
 {
   "props": {
-    "Model": "",
-    "EnableValidation": "",
-    "EnableI18n": "",
+    "Model": "Objects that require form validation.",
+    "EnableValidation": "Enable form validation.",
+    "EnableI18n": "Turn on I18n, and the content of the form verification output will be read from I18n after it is turned on.",
     "Readonly": "",
-    "Value": ""
+    "Value": "Whether the verification is successful."
   },
   "events": {
     "OnSubmit": "",
