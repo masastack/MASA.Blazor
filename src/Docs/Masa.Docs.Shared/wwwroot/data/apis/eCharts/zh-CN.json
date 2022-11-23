@@ -1,8 +1,8 @@
 {
   "props": {
-    "InitOptions": "",
-    "Option": "",
-    "Theme": ""
+    "initOptions": "",
+    "option": "",
+    "theme": ""
   },
   "events": {},
   "contents": {}

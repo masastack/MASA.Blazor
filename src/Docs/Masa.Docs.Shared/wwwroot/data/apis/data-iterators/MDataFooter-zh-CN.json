@@ -1,26 +1,26 @@
 {
   "props": {
     "disableItemsPerPage": "禁用每页下拉菜单项",
-    "DisablePagination": "禁用分页按钮",
-    "FirstIcon": "第一个图标",
-    "ItemsPerPageAllText": "每页下拉菜单中 'All' 选项的文本",
-    "ItemsPerPageOptions": "每页项目下拉列表中显示的选项数组",
-    "ItemsPerPageText": "每页项目的文本下拉菜单",
-    "LastIcon": "最后一个图标",
-    "NextIcon": "下一图标",
-    "Options": "数据选项",
-    "PageText": "",
-    "Pagination": "数据分页",
-    "Parameters": "",
-    "PrevIcon": "上一个图标",
-    "ShowCurrentPage": "在 上一个/下一个 图标之间显示当前页码",
-    "ShowFirstLastPage": "显示 第一个/最后一个 图标"
+    "disablePagination": "禁用分页按钮",
+    "firstIcon": "第一个图标",
+    "itemsPerPageAllText": "每页下拉菜单中 'All' 选项的文本",
+    "itemsPerPageOptions": "每页项目下拉列表中显示的选项数组",
+    "itemsPerPageText": "每页项目的文本下拉菜单",
+    "lastIcon": "最后一个图标",
+    "nextIcon": "下一图标",
+    "options": "数据选项",
+    "pageText": "",
+    "pagination": "数据分页",
+    "parameters": "",
+    "prevIcon": "上一个图标",
+    "showCurrentPage": "在 上一个/下一个 图标之间显示当前页码",
+    "showFirstLastPage": "显示 第一个/最后一个 图标"
   },
   "events": {
-    "OnOptionsUpdate": ""
+    "onOptionsUpdate": ""
   },
   "contents": {
-    "PageTextContent": "定义每页项目文本的内容",
-    "PrependContent": ""
+    "pageTextContent": "定义每页项目文本的内容",
+    "prependContent": ""
   }
 }

@@ -1,11 +1,11 @@
 {
   "props": {
-    "Value": ""
+    "value": ""
   },
   "events": {},
   "contents": {
-    "RowHeaderContent": "",
-    "RowContentContent": "",
-    "ColumnHeaderContent": ""
+    "columnHeaderContent": "",
+    "rowContentContent": "",
+    "rowHeaderContent": ""
   }
 }

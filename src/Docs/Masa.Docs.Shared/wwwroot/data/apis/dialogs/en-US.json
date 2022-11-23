@@ -1,4 +1,4 @@
-﻿{
+{
   "props": {
     "attach": "Specifies which DOM element that this component should detach to.String can be any valid querySelector and Object can be any valid Node. This will attach to the root [MApp](/components/apps) component by default.",
     "closeDelay": "Closing master delay time.",
@@ -16,11 +16,10 @@
     "value": "Controls whether the component is visible or hidden."
   },
   "contents": {
-    "ActivatorContent": "When used, will activate the component when clicked (or hover for specific components). This manually stops the event propagation. Without this slot, if you open the component through its model, you will need to manually stop the event propagation."
+    "activatorContent": "When used, will activate the component when clicked (or hover for specific components). This manually stops the event propagation. Without this slot, if you open the component through its model, you will need to manually stop the event propagation."
   },
   "events": {
-    "OnOutsideClick": "Event that fires when clicking outside an active dialog."
+    "onOutsideClick": "Event that fires when clicking outside an active dialog."
   },
-  "functions": {
-  }
+  "functions": {}
 }

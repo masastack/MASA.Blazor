@@ -1,4 +1,4 @@
-﻿{
+{
   "props": {
     "activeClass": "配置在链接激活时应用的 CSS 类。你能够在 vue-router 文档浏览更多 [active-class prop](https://router.vuejs.org/api/)。",
     "disabled": "移除组件的单击或 target 功能。",
@@ -8,10 +8,7 @@
     "ripple": "Ripple",
     "text": "text"
   },
-  "contents": {
-  },
-  "events": {
-  },
-  "functions": {
-  }
+  "contents": {},
+  "events": {},
+  "functions": {}
 }

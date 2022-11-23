@@ -1,23 +1,23 @@
 {
   "props": {
-    "Items": "",
-    "ItemKey": "",
-    "ItemPosition": "",
-    "ItemClass": "",
-    "ItemStyle": "",
-    "Readonly": "",
-    "Column": "",
-    "DisableOneColumnMode": "",
-    "DisableResize": "",
-    "Float": "",
-    "Margin": "",
-    "MinRow": "",
-    "Rtl": ""
+    "column": "",
+    "disableOneColumnMode": "",
+    "disableResize": "",
+    "float": "",
+    "itemClass": "",
+    "itemKey": "",
+    "itemPosition": "",
+    "items": "",
+    "itemStyle": "",
+    "margin": "",
+    "minRow": "",
+    "readonly": "",
+    "rtl": ""
   },
   "events": {
-    "OnResize": ""
+    "onResize": ""
   },
   "contents": {
-    "ItemContent": ""
+    "itemContent": ""
   }
 }

@@ -1,16 +1,16 @@
 {
   "props": {
-    "Circle": "",
-    "Value": "",
-    "Length": "",
-    "NextIcon": "",
-    "PrevIcon": "",
-    "TotalVisible": ""
+    "circle": "",
+    "length": "",
+    "nextIcon": "",
+    "prevIcon": "",
+    "totalVisible": "",
+    "value": ""
   },
   "events": {
-    "OnInput": "",
-    "OnPrevious": "",
-    "OnNext": ""
+    "onInput": "",
+    "onNext": "",
+    "onPrevious": ""
   },
   "contents": {}
 }

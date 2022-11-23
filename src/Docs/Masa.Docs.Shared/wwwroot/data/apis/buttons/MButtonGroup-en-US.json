@@ -1,4 +1,4 @@
-﻿{
+{
   "props": {
     "activeClass": "`ActiveClass` is applied when the child component is activated.",
     "borderless": "Removes the group’s border.",
@@ -7,13 +7,11 @@
     "multiple": "Allow multiple selections.",
     "targetGroup": "targetGroup",
     "value": "The designated model value for the component.",
-    "Values": "The designated model value for the component, used with the `Multiple` attribute."
+    "values": "The designated model value for the component, used with the `Multiple` attribute."
   },
-  "contents": {
-  },
+  "contents": {},
   "events": {
-    "ValuesChanged": "Value change event, available after using the attribute `Multiple`"
+    "valuesChanged": "Value change event, available after using the attribute `Multiple`"
   },
-  "functions": {
-  }
+  "functions": {}
 }

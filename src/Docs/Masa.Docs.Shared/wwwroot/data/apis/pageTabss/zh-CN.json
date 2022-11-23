@@ -1,26 +1,26 @@
 {
   "props": {
-    "Items": "",
-    "CloseIcon": "",
-    "AlignWithTitle": "",
-    "CenterActive": "",
-    "Centered": "",
-    "FixedTabs": "",
-    "Grow": "",
-    "IconsAndText": "",
-    "MobileBreakpoint": "",
-    "HideSlider": "",
-    "Optional": "",
-    "SliderColor": "",
-    "SliderSize": "",
-    "Value": "",
-    "Vertical": "",
-    "NextIcon": "",
-    "PrevIcon": "",
-    "ShowArrows": ""
+    "alignWithTitle": "",
+    "centerActive": "",
+    "centered": "",
+    "closeIcon": "",
+    "fixedTabs": "",
+    "grow": "",
+    "hideSlider": "",
+    "iconsAndText": "",
+    "items": "",
+    "mobileBreakpoint": "",
+    "nextIcon": "",
+    "optional": "",
+    "prevIcon": "",
+    "showArrows": "",
+    "sliderColor": "",
+    "sliderSize": "",
+    "value": "",
+    "vertical": ""
   },
   "events": {},
   "contents": {
-    "TabContent": ""
+    "tabContent": ""
   }
 }

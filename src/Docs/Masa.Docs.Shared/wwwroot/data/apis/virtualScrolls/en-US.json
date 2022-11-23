@@ -1,12 +1,12 @@
 {
   "props": {
-    "Items": "",
-    "ItemSize": "",
-    "OverscanCount": ""
+    "items": "",
+    "itemSize": "",
+    "overscanCount": ""
   },
   "events": {},
   "contents": {
-    "ItemContent": "",
-    "FooterContent": ""
+    "footerContent": "",
+    "itemContent": ""
   }
 }

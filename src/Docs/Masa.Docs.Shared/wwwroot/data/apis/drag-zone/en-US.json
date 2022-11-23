@@ -1,16 +1,13 @@
-﻿{
+{
   "props": {
-    "Group": "Group",
-    "Items": "Items",
-    "Options": "Options",
-    "Pull": "Pull",
-    "Put": "Put",
-    "Sort": "Sort"
+    "group": "Group",
+    "items": "Items",
+    "options": "Options",
+    "pull": "Pull",
+    "put": "Put",
+    "sort": "Sort"
   },
-  "contents": {
-  },
-  "events": {   
-  },
-  "functions": {
-  }
+  "contents": {},
+  "events": {},
+  "functions": {}
 }

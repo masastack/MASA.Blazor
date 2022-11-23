@@ -1,11 +1,11 @@
 {
   "props": {
-    "Vertical": "",
-    "AltLabels": "",
-    "NonLinear": "",
-    "Value": "",
-    "Shaped": "",
-    "Show": ""
+    "altLabels": "",
+    "nonLinear": "",
+    "shaped": "",
+    "show": "",
+    "value": "",
+    "vertical": ""
   },
   "events": {},
   "contents": {}

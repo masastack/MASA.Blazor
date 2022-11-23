@@ -1,13 +1,13 @@
 {
   "props": {
-    "Shaped": "",
-    "Nav": "",
-    "Subheader": "",
-    "TwoLine": "",
-    "ThreeLine": "",
-    "Expand": "",
-    "Linkage": "",
-    "If": ""
+    "expand": "",
+    "if": "",
+    "linkage": "",
+    "nav": "",
+    "shaped": "",
+    "subheader": "",
+    "threeLine": "",
+    "twoLine": ""
   },
   "events": {},
   "contents": {}

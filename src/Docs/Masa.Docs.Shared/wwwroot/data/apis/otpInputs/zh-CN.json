@@ -1,14 +1,14 @@
 {
   "props": {
-    "Length": "",
-    "Type": "",
-    "Readonly": "",
-    "Value": "",
-    "Plain": ""
+    "length": "",
+    "plain": "",
+    "readonly": "",
+    "type": "",
+    "value": ""
   },
   "events": {
-    "OnFinish": "",
-    "OnInput": ""
+    "onFinish": "",
+    "onInput": ""
   },
   "contents": {}
 }

@@ -1,8 +1,8 @@
 {
   "props": {
-    "Value": "",
-    "OpenDelay": "",
-    "CloseDelay": ""
+    "closeDelay": "",
+    "openDelay": "",
+    "value": ""
   },
   "events": {},
   "contents": {}

@@ -1,21 +1,21 @@
 {
   "props": {
-    "Columns": "",
-    "ItemText": "",
-    "ItemValue": "",
-    "ItemChildren": "",
-    "ItemDisabled": "",
-    "Title": "",
-    "Visible": "",
-    "Value": "",
-    "ItemHeight": "",
-    "SwipeDuration": "",
-    "VisibleItemCount": ""
+    "columns": "",
+    "itemChildren": "",
+    "itemDisabled": "",
+    "itemHeight": "",
+    "itemText": "",
+    "itemValue": "",
+    "swipeDuration": "",
+    "title": "",
+    "value": "",
+    "visible": "",
+    "visibleItemCount": ""
   },
   "events": {
-    "VisibleChanged": ""
+    "visibleChanged": ""
   },
   "contents": {
-    "ActivatorContent": ""
+    "activatorContent": ""
   }
 }

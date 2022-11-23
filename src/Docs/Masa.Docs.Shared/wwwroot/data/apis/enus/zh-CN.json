@@ -1,38 +1,38 @@
 {
   "props": {
-    "Auto": "",
-    "CloseOnClick": "",
-    "CloseOnContentClick": "",
-    "ContentStyle": "",
-    "DisableKeys": "",
-    "Origin": "",
-    "Transition": "",
-    "AllowOverflow": "",
-    "ContentClass": "",
-    "NudgeBottom": "",
-    "NudgeLeft": "",
-    "NudgeRight": "",
-    "NudgeTop": "",
-    "NudgeWidth": "",
-    "OffsetOverflow": "",
-    "PositionX": "",
-    "PositionY": "",
-    "ZIndex": "",
-    "Attach": "",
-    "OffsetX": "",
-    "OffsetY": "",
-    "ExternalActivator": "",
-    "OpenOnHover": "",
-    "OpenOnClick": "",
-    "OpenOnFocus": "",
-    "Value": "",
-    "OpenDelay": "",
-    "CloseDelay": ""
+    "allowOverflow": "",
+    "attach": "",
+    "auto": "",
+    "closeDelay": "",
+    "closeOnClick": "",
+    "closeOnContentClick": "",
+    "contentClass": "",
+    "contentStyle": "",
+    "disableKeys": "",
+    "externalActivator": "",
+    "nudgeBottom": "",
+    "nudgeLeft": "",
+    "nudgeRight": "",
+    "nudgeTop": "",
+    "nudgeWidth": "",
+    "offsetOverflow": "",
+    "offsetX": "",
+    "offsetY": "",
+    "openDelay": "",
+    "openOnClick": "",
+    "openOnFocus": "",
+    "openOnHover": "",
+    "origin": "",
+    "positionX": "",
+    "positionY": "",
+    "transition": "",
+    "value": "",
+    "zIndex": ""
   },
   "events": {
-    "OnOutsideClick": ""
+    "onOutsideClick": ""
   },
   "contents": {
-    "ActivatorContent": ""
+    "activatorContent": ""
   }
 }

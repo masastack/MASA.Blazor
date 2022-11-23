@@ -1,8 +1,8 @@
 {
   "props": {
-    "Transition": "",
-    "ReverseTransition": "",
-    "Value": ""
+    "reverseTransition": "",
+    "transition": "",
+    "value": ""
   },
   "events": {},
   "contents": {}

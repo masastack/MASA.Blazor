@@ -1,17 +1,17 @@
 {
   "props": {
-    "Query": "",
-    "Striped": "",
-    "Active": "",
-    "BackgroundOpacity": "",
-    "Stream": "",
-    "BufferValue": "",
-    "Reverse": "",
-    "Indeterminate": "",
-    "Value": ""
+    "active": "",
+    "backgroundOpacity": "",
+    "bufferValue": "",
+    "indeterminate": "",
+    "query": "",
+    "reverse": "",
+    "stream": "",
+    "striped": "",
+    "value": ""
   },
   "events": {
-    "OnChange": ""
+    "onChange": ""
   },
   "contents": {}
 }

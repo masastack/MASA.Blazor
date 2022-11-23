@@ -1,21 +1,21 @@
 {
   "props": {
-    "HeaderSections": "",
-    "Source": "",
-    "Scope": "",
-    "Html": "",
-    "XHtmlOut": "",
-    "Breaks": "",
-    "LangPrefix": "",
-    "Linkify": "",
-    "Typographer": "",
-    "Quotes": "",
-    "NoWrapper": "",
-    "AnchorOptions": ""
+    "anchorOptions": "",
+    "breaks": "",
+    "headerSections": "",
+    "html": "",
+    "langPrefix": "",
+    "linkify": "",
+    "noWrapper": "",
+    "quotes": "",
+    "scope": "",
+    "source": "",
+    "typographer": "",
+    "xHtmlOut": ""
   },
   "events": {
-    "OnFrontMatterParsed": "",
-    "OnTocParsed": ""
+    "onFrontMatterParsed": "",
+    "onTocParsed": ""
   },
   "contents": {}
 }

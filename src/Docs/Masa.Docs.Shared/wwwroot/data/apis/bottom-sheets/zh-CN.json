@@ -1,4 +1,4 @@
-﻿{
+{
   "props": {
     "attach": "使组件脱离当前节点并且指向一个新的DOM元素。可以是任何document. querySelector 有效的字符串或者任何有效的节点。将默认指定并附加到根节点[MApp](/components/apps)下。",
     "closeDelay": "关闭组件前等待的毫秒数。 仅适用于悬停和焦点事件。",
@@ -14,14 +14,12 @@
     "persistent": "点击元素外面或按下 **esc** 键将不会关闭它。",
     "scrollable": "当设置为 true 时，期望有一个 [MCard](components/cards) 和一个 [MCardText](components/cardTexts) 组件，并有指定的高度。更多信息，请查看 [可滚动示例](components/dialogs/#scrollable)。",
     "transition": "设置组件转换。可以是一个 [built in transitions](stylesandanimations/transitions) 或者是自己自定义的。",
-    "Value": "控制组件可见还是隐藏。"
+    "value": "控制组件可见还是隐藏。"
   },
-  "contents": {
-  },
+  "contents": {},
   "events": {
     "iputValueChanged": "",
     "valuesChanged": ""
   },
-  "functions": {
-  }
+  "functions": {}
 }

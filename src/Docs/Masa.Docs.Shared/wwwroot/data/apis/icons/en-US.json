@@ -1,8 +1,8 @@
 {
   "props": {
-    "If": "",
-    "OnClickPreventDefault": "",
-    "OnClickStopPropagation": ""
+    "if": "",
+    "onClickPreventDefault": "",
+    "onClickStopPropagation": ""
   },
   "events": {},
   "contents": {}

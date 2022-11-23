@@ -1,13 +1,10 @@
-﻿{
+{
   "props": {
     "center": "Center。",
     "inset": "添加缩进 (72px)",
     "vertical": "垂直显示分隔线"
   },
-  "contents": {
-  },
-  "events": {
-  },
-  "functions": {
-  }
+  "contents": {},
+  "events": {},
+  "functions": {}
 }

@@ -1,19 +1,19 @@
 {
   "props": {
-    "Value": "",
-    "Centered": "",
-    "MultiLine": "",
-    "Vertical": "",
-    "Shaped": "",
-    "Timeout": "",
-    "Action": "",
-    "Transition": "",
-    "Text": ""
+    "action": "",
+    "centered": "",
+    "multiLine": "",
+    "shaped": "",
+    "text": "",
+    "timeout": "",
+    "transition": "",
+    "value": "",
+    "vertical": ""
   },
   "events": {
-    "OnClosed": ""
+    "onClosed": ""
   },
   "contents": {
-    "ActionContent": ""
+    "actionContent": ""
   }
 }

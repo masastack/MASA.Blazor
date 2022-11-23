@@ -1,8 +1,8 @@
 {
   "props": {
-    "Indeterminate": "",
-    "Rotate": "",
-    "Value": ""
+    "indeterminate": "",
+    "rotate": "",
+    "value": ""
   },
   "events": {},
   "contents": {}

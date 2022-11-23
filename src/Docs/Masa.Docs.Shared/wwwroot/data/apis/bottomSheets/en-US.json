@@ -1,24 +1,24 @@
 {
   "props": {
-    "Inset": "",
-    "ContentClass": "",
-    "Origin": "",
-    "OverlayScrimClass": "",
-    "Scrollable": "",
-    "Transition": "",
-    "Attach": "",
-    "Persistent": "",
-    "OpenOnHover": "",
-    "OpenOnClick": "",
-    "OpenOnFocus": "",
-    "Value": "",
-    "OpenDelay": "",
-    "CloseDelay": ""
+    "attach": "",
+    "closeDelay": "",
+    "contentClass": "",
+    "inset": "",
+    "openDelay": "",
+    "openOnClick": "",
+    "openOnFocus": "",
+    "openOnHover": "",
+    "origin": "",
+    "overlayScrimClass": "",
+    "persistent": "",
+    "scrollable": "",
+    "transition": "",
+    "value": ""
   },
   "events": {
-    "OnOutsideClick": ""
+    "onOutsideClick": ""
   },
   "contents": {
-    "ActivatorContent": ""
+    "activatorContent": ""
   }
 }

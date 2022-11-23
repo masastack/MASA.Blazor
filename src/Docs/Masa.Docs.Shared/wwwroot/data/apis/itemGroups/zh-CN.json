@@ -1,13 +1,13 @@
 {
   "props": {
-    "Max": "",
-    "TargetGroup": "",
-    "Multiple": "",
-    "Value": "",
-    "Values": ""
+    "max": "",
+    "multiple": "",
+    "targetGroup": "",
+    "value": "",
+    "values": ""
   },
   "events": {
-    "ValuesChanged": ""
+    "valuesChanged": ""
   },
   "contents": {}
 }

@@ -1,20 +1,20 @@
 {
   "props": {
-    "Items": "",
-    "ItemChildren": "",
-    "ItemDisabled": "",
-    "ItemText": "",
-    "ItemValue": "",
-    "Title": "",
-    "Value": "",
-    "Visible": ""
+    "itemChildren": "",
+    "itemDisabled": "",
+    "items": "",
+    "itemText": "",
+    "itemValue": "",
+    "title": "",
+    "value": "",
+    "visible": ""
   },
   "events": {
-    "OnLoadChildren": "",
-    "OnConfirm": "",
-    "VisibleChanged": ""
+    "onConfirm": "",
+    "onLoadChildren": "",
+    "visibleChanged": ""
   },
   "contents": {
-    "ActivatorContent": ""
+    "activatorContent": ""
   }
 }

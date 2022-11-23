@@ -1,4 +1,4 @@
-﻿{
+{
   "props": {
     "block": "将按钮扩展到可用空间的 100％。",
     "depressed": "移除按钮的阴影效果。",
@@ -14,10 +14,8 @@
     "value": "在组中选择组件时使用的值。如果没有提供，则使用 index。"
   },
   "contents": {
-    "LoaderContent": "自定义加载器"
+    "loaderContent": "自定义加载器"
   },
-  "events": {
-  },
-  "functions": {
-  }
+  "events": {},
+  "functions": {}
 }

@@ -1,23 +1,23 @@
 {
   "props": {
-    "FirstDayOfWeek": "",
-    "WeekdayFormat": "",
-    "ShowWeek": "",
-    "ShowAdjacentMonths": "",
-    "AllowedDates": "",
-    "Min": "",
-    "Max": "",
-    "Range": "",
-    "Readonly": "",
-    "Scrollable": "",
-    "Value": "",
-    "Current": "",
-    "Format": "",
-    "Locale": ""
+    "allowedDates": "",
+    "current": "",
+    "firstDayOfWeek": "",
+    "format": "",
+    "locale": "",
+    "max": "",
+    "min": "",
+    "range": "",
+    "readonly": "",
+    "scrollable": "",
+    "showAdjacentMonths": "",
+    "showWeek": "",
+    "value": "",
+    "weekdayFormat": ""
   },
   "events": {
-    "OnDaySelected": "",
-    "OnInput": ""
+    "onDaySelected": "",
+    "onInput": ""
   },
   "contents": {}
 }

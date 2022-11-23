@@ -1,19 +1,19 @@
 {
   "props": {
-    "Value": "",
-    "Options": "",
-    "Readonly": "",
-    "Html": ""
+    "html": "",
+    "options": "",
+    "readonly": "",
+    "value": ""
   },
   "events": {
-    "HtmlChanged": "",
-    "OnFocus": "",
-    "OnBlur": "",
-    "OnEscPress": "",
-    "OnCtrlEnterPress": "",
-    "OnSelect": "",
-    "OnToolbarButtonClick": "",
-    "BeforeAllUpload": ""
+    "beforeAllUpload": "",
+    "htmlChanged": "",
+    "onBlur": "",
+    "onCtrlEnterPress": "",
+    "onEscPress": "",
+    "onFocus": "",
+    "onSelect": "",
+    "onToolbarButtonClick": ""
   },
   "contents": {}
 }

@@ -1,4 +1,4 @@
-﻿{
+{
   "props": {
     "disabled": "移除组件的单击或 target 功能。",
     "flat": "移除卡片的海拔。",
@@ -11,10 +11,8 @@
     "show": "Show"
   },
   "contents": {
-    "ProgressContent": "自定义进度线的插槽（`Loading`属性不等于布尔值False时显示)"
+    "progressContent": "自定义进度线的插槽（`Loading`属性不等于布尔值False时显示)"
   },
-  "events": {
-  },
-  "functions": {
-  }
+  "events": {},
+  "functions": {}
 }

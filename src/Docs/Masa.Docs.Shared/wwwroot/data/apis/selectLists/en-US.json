@@ -1,26 +1,26 @@
 {
   "props": {
-    "Action": "",
-    "NoFilter": "",
-    "SearchInput": "",
-    "HideSelected": "",
-    "Items": "",
-    "ItemDisabled": "",
-    "ItemText": "",
-    "ItemValue": "",
-    "ItemDivider": "",
-    "ItemHeader": "",
-    "NoDataText": "",
-    "SelectedItems": "",
-    "SelectedIndex": ""
+    "action": "",
+    "hideSelected": "",
+    "itemDisabled": "",
+    "itemDivider": "",
+    "itemHeader": "",
+    "items": "",
+    "itemText": "",
+    "itemValue": "",
+    "noDataText": "",
+    "noFilter": "",
+    "searchInput": "",
+    "selectedIndex": "",
+    "selectedItems": ""
   },
   "events": {
-    "OnSelect": ""
+    "onSelect": ""
   },
   "contents": {
-    "ItemContent": "",
-    "NoDataContent": "",
-    "PrependItemContent": "",
-    "AppendItemContent": ""
+    "appendItemContent": "",
+    "itemContent": "",
+    "noDataContent": "",
+    "prependItemContent": ""
   }
 }

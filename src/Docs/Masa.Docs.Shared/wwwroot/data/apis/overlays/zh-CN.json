@@ -2,8 +2,8 @@
   "props": {
     "opacity": "设置遮罩层的透明度",
     "scrimClass": "",
-    "zIndex": "用于组件的 z-index",
-    "value": "控制组件可见还是隐藏。"
+    "value": "控制组件可见还是隐藏。",
+    "zIndex": "用于组件的 z-index"
   },
   "events": {},
   "contents": {}

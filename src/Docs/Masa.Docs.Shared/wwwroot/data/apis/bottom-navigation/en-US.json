@@ -1,4 +1,4 @@
-﻿{
+{
   "props": {
     "activeClass": "The class applied to a [MButton](/components/buttons) when activated.",
     "backgroundColor": "Changes the background-color for the component.",
@@ -11,10 +11,7 @@
     "value": "Holds the value of the currently active [MButton](/components/buttons). If the button has no value supplied, its index will be used instead…",
     "values": "values"
   },
-  "contents": {
-  },
-  "events": {   
-  },
-  "functions": {
-  }
+  "contents": {},
+  "events": {},
+  "functions": {}
 }

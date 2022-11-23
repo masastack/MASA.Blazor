@@ -1,15 +1,15 @@
 {
   "props": {
-    "HasMore": "",
-    "Parent": "",
-    "Threshold": "",
-    "NoMoreText": "",
-    "FailedToLoadText": "",
-    "LoadingText": "",
-    "ReloadText": ""
+    "failedToLoadText": "",
+    "hasMore": "",
+    "loadingText": "",
+    "noMoreText": "",
+    "parent": "",
+    "reloadText": "",
+    "threshold": ""
   },
   "events": {
-    "OnLoadMore": ""
+    "onLoadMore": ""
   },
   "contents": {}
 }

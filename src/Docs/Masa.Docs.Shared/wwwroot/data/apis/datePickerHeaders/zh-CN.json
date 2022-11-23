@@ -1,18 +1,18 @@
 {
   "props": {
-    "Min": "",
-    "Max": "",
-    "Value": "",
-    "PrevIcon": "",
-    "Readonly": "",
-    "NextIcon": "",
-    "Format": "",
-    "ActivePicker": "",
-    "Locale": ""
+    "activePicker": "",
+    "format": "",
+    "locale": "",
+    "max": "",
+    "min": "",
+    "nextIcon": "",
+    "prevIcon": "",
+    "readonly": "",
+    "value": ""
   },
   "events": {
-    "OnInput": "",
-    "OnToggle": ""
+    "onInput": "",
+    "onToggle": ""
   },
   "contents": {}
 }

@@ -1,26 +1,26 @@
 {
   "props": {
-    "Clipped": "",
-    "DisableResizeWatcher": "",
-    "DisableRouteWatcher": "",
-    "MiniVariantWidth": "",
-    "Touchless": "",
-    "MobileBreakpoint": "",
-    "OverlayColor": "",
-    "OverlayOpacity": "",
-    "ExpandOnHover": "",
-    "MiniVariant": "",
-    "Permanent": "",
-    "Stateless": "",
-    "Temporary": "",
-    "Value": ""
+    "clipped": "",
+    "disableResizeWatcher": "",
+    "disableRouteWatcher": "",
+    "expandOnHover": "",
+    "miniVariant": "",
+    "miniVariantWidth": "",
+    "mobileBreakpoint": "",
+    "overlayColor": "",
+    "overlayOpacity": "",
+    "permanent": "",
+    "stateless": "",
+    "temporary": "",
+    "touchless": "",
+    "value": ""
   },
   "events": {
-    "MiniVariantChanged": ""
+    "miniVariantChanged": ""
   },
   "contents": {
-    "AppendContent": "",
-    "PrependContent": "",
-    "ImgContent": ""
+    "appendContent": "",
+    "imgContent": "",
+    "prependContent": ""
   }
 }

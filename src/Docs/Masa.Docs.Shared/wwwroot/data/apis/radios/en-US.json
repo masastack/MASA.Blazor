@@ -1,18 +1,18 @@
 {
   "props": {
-    "OnIcon": "",
-    "OffIcon": "",
-    "Readonly": "",
-    "Value": "",
-    "Label": ""
+    "label": "",
+    "offIcon": "",
+    "onIcon": "",
+    "readonly": "",
+    "value": ""
   },
   "events": {
-    "OnBlur": "",
-    "OnChange": "",
-    "OnFocus": "",
-    "OnKeyDown": ""
+    "onBlur": "",
+    "onChange": "",
+    "onFocus": "",
+    "onKeyDown": ""
   },
   "contents": {
-    "LabelContent": ""
+    "labelContent": ""
   }
 }

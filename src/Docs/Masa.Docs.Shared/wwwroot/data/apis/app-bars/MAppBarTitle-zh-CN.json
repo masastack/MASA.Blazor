@@ -1,11 +1,8 @@
-﻿{
+{
   "props": {
     "for": "for."
   },
-  "contents": {   
-  },
-  "events": {
-  },
-  "functions": {
-  }
+  "contents": {},
+  "events": {},
+  "functions": {}
 }

@@ -1,4 +1,4 @@
-﻿{
+{
   "props": {
     "contentClass": "contentClass。",
     "contentStyle": "contentStyle",
@@ -12,10 +12,8 @@
     "tooltipStyle": "tooltipStyle。"
   },
   "contents": {
-    "OnCopy": "OnCopy"
+    "onCopy": "OnCopy"
   },
-  "events": {   
-  },
-  "functions": {
-  }
+  "events": {},
+  "functions": {}
 }

@@ -1,17 +1,17 @@
 {
   "props": {
-    "IsSelected": "",
-    "IsExpanded": "",
-    "ItemClass": "",
-    "Stripe": "",
-    "Headers": "",
-    "HideDefaultHeader": "",
-    "Item": "",
-    "Index": "",
-    "HasSlot": ""
+    "hasSlot": "",
+    "headers": "",
+    "hideDefaultHeader": "",
+    "index": "",
+    "isExpanded": "",
+    "isSelected": "",
+    "item": "",
+    "itemClass": "",
+    "stripe": ""
   },
   "events": {},
   "contents": {
-    "SlotContent": ""
+    "slotContent": ""
   }
 }

@@ -1,8 +1,8 @@
 {
   "props": {
-    "Focused": "",
-    "Value": "",
-    "For": ""
+    "focused": "",
+    "for": "",
+    "value": ""
   },
   "events": {},
   "contents": {}

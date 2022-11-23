@@ -1,4 +1,4 @@
-﻿{
+{
   "props": {
     "primary": "primary.",
     "primaryClass": "PrimaryClass.",
@@ -9,11 +9,9 @@
     "tags": "tags."
   },
   "contents": {
-    "PrimaryContent": "PrimaryContent.",
-    "SecondaryContent": "SecondaryContent."
+    "primaryContent": "PrimaryContent.",
+    "secondaryContent": "SecondaryContent."
   },
-  "events": {   
-  },
-  "functions": {
-  }
+  "events": {},
+  "functions": {}
 }

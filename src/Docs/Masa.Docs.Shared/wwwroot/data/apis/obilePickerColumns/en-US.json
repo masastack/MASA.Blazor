@@ -1,15 +1,15 @@
 {
   "props": {
-    "Items": "",
-    "ItemHeight": "",
-    "ItemText": "",
-    "ItemDisabled": "",
-    "SelectedIndex": "",
-    "SwipeDuration": "",
-    "VisibleItemCount": ""
+    "itemDisabled": "",
+    "itemHeight": "",
+    "items": "",
+    "itemText": "",
+    "selectedIndex": "",
+    "swipeDuration": "",
+    "visibleItemCount": ""
   },
   "events": {
-    "OnChange": ""
+    "onChange": ""
   },
   "contents": {}
 }

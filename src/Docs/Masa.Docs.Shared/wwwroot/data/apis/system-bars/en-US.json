@@ -1,12 +1,9 @@
-﻿{
+{
   "props": {
     "lightsOut": "Reduces the system bar opacity.",
     "window": "Increases the system bar height to 32px (24px default)."
   },
-  "contents": {
-  },
-  "events": {   
-  },
-  "functions": {
-  }
+  "contents": {},
+  "events": {},
+  "functions": {}
 }

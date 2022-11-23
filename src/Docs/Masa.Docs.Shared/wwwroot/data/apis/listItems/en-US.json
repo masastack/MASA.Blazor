@@ -1,15 +1,15 @@
 {
   "props": {
-    "Inactive": "",
-    "Selectable": "",
-    "TwoLine": "",
-    "ThreeLine": "",
-    "Highlighted": "",
-    "Linkage": "",
-    "Value": ""
+    "highlighted": "",
+    "inactive": "",
+    "linkage": "",
+    "selectable": "",
+    "threeLine": "",
+    "twoLine": "",
+    "value": ""
   },
   "events": {},
   "contents": {
-    "ItemContent": ""
+    "itemContent": ""
   }
 }

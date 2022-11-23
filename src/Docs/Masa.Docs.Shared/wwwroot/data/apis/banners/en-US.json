@@ -1,13 +1,10 @@
-﻿{
+{
   "props": {
     "singleLine": "Forces the banner onto a single line.",
     "sticky": "Applies position: sticky to the component (Evergreen browsers only). You can find more information on the [MDN documentation for sticky position](https://developer.mozilla.org/en-US/docs/Web/CSS/position).",
     "value": "Controls whether the component is visible or hidden."
   },
-  "contents": {
-  },
-  "events": {   
-  },
-  "functions": {
-  }
+  "contents": {},
+  "events": {},
+  "functions": {}
 }

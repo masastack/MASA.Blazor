@@ -1,24 +1,24 @@
 {
   "props": {
-    "Markdown": "",
-    "ReadOnly": "",
-    "Theme": "",
-    "Value": "",
-    "Upload": "",
-    "BeforeAllUploadAsync": "",
-    "AdditionalModules": "",
-    "ContentClass": "",
-    "ContentStyle": "",
-    "Placeholder": "",
-    "ToolbarClass": "",
-    "ToolbarStyle": ""
+    "additionalModules": "",
+    "beforeAllUploadAsync": "",
+    "contentClass": "",
+    "contentStyle": "",
+    "markdown": "",
+    "placeholder": "",
+    "readOnly": "",
+    "theme": "",
+    "toolbarClass": "",
+    "toolbarStyle": "",
+    "upload": "",
+    "value": ""
   },
   "events": {
-    "OnBlur": "",
-    "OnReady": "",
-    "OnFocus": ""
+    "onBlur": "",
+    "onFocus": "",
+    "onReady": ""
   },
   "contents": {
-    "ToolbarContent": ""
+    "toolbarContent": ""
   }
 }

@@ -1,21 +1,21 @@
 {
   "props": {
-    "Column": "",
-    "CenterActive": "",
-    "ShowArrows": "",
-    "NextIcon": "",
-    "PrevIcon": "",
-    "Max": "",
-    "TargetGroup": "",
-    "Multiple": "",
-    "Value": "",
-    "Values": ""
+    "centerActive": "",
+    "column": "",
+    "max": "",
+    "multiple": "",
+    "nextIcon": "",
+    "prevIcon": "",
+    "showArrows": "",
+    "targetGroup": "",
+    "value": "",
+    "values": ""
   },
   "events": {
-    "ValuesChanged": ""
+    "valuesChanged": ""
   },
   "contents": {
-    "NextContent": "",
-    "PrevContent": ""
+    "nextContent": "",
+    "prevContent": ""
   }
 }

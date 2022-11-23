@@ -1,7 +1,7 @@
-﻿{
+{
   "props": {
     "activeClass": "active-class 在子组件被激活时应用。",
-    "Continuous": "如果为 true，则窗口将从最后一项到第一项，以及从第一项到最后 \"wrap around\"",
+    "continuous": "如果为 true，则窗口将从最后一项到第一项，以及从第一项到最后 \"wrap around\"",
     "cycle": "确定轮播是否应该循环显示图像。",
     "delimiterIcon": "设置轮播分隔符的图标。",
     "hideDelimiterBackground": "隐藏底部分隔符的背景。",
@@ -29,6 +29,5 @@
   "events": {
     "valuesChanged": "值改变事件"
   },
-  "functions": {
-  }
+  "functions": {}
 }

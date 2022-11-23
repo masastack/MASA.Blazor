@@ -1,4 +1,4 @@
-﻿{
+{
   "props": {
     "attach": "指定此组件应该与哪个 DOM 元素分离。to.String 可以是任何有效的 querySelector，对象可以是任何有效的 Node。这将默认挂载到根节点 [MApp](/components/apps)。",
     "closeDelay": "关闭主件延迟时间",
@@ -16,11 +16,10 @@
     "value": "控制组件可见还是隐藏。"
   },
   "contents": {
-    "ActivatorContent": "使用时，将在点击后激活组件（或悬停特定组件），它手动阻止事件传播。如果通过模型打开组件而没有此插槽，则需要手动阻止事件传播。"
+    "activatorContent": "使用时，将在点击后激活组件（或悬停特定组件），它手动阻止事件传播。如果通过模型打开组件而没有此插槽，则需要手动阻止事件传播。"
   },
   "events": {
-    "OnOutsideClick": "在活动对话框外部单击时激发的事件。"
+    "onOutsideClick": "在活动对话框外部单击时激发的事件。"
   },
-  "functions": {
-  }
+  "functions": {}
 }

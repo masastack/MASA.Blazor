@@ -1,12 +1,12 @@
 {
   "props": {
-    "FixedHeader": "",
-    "FixedRight": ""
+    "fixedHeader": "",
+    "fixedRight": ""
   },
   "events": {},
   "contents": {
-    "WrapperContent": "",
-    "TopContent": "",
-    "BottomContent": ""
+    "bottomContent": "",
+    "topContent": "",
+    "wrapperContent": ""
   }
 }

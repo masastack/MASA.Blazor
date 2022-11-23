@@ -1,38 +1,38 @@
 {
   "props": {
-    "Column": "",
-    "Row": "",
-    "TextColor": "",
-    "AppendIcon": "",
-    "Label": "",
-    "PrependIcon": "",
-    "HideDetails": "",
-    "Hint": "",
-    "PersistentHint": "",
-    "Readonly": "",
-    "ValidateOnBlur": "",
-    "Value": "",
-    "ValueExpression": "",
-    "Error": "",
-    "ErrorCount": "",
-    "ErrorMessages": "",
-    "Messages": "",
-    "Success": "",
-    "SuccessMessages": "",
-    "Rules": ""
+    "appendIcon": "",
+    "column": "",
+    "error": "",
+    "errorCount": "",
+    "errorMessages": "",
+    "hideDetails": "",
+    "hint": "",
+    "label": "",
+    "messages": "",
+    "persistentHint": "",
+    "prependIcon": "",
+    "readonly": "",
+    "row": "",
+    "rules": "",
+    "success": "",
+    "successMessages": "",
+    "textColor": "",
+    "validateOnBlur": "",
+    "value": "",
+    "valueExpression": ""
   },
   "events": {
-    "OnChange": "",
-    "OnMouseDown": "",
-    "OnMouseUp": "",
-    "OnPrependClick": "",
-    "OnAppendClick": "",
-    "OnInput": ""
+    "onAppendClick": "",
+    "onChange": "",
+    "onInput": "",
+    "onMouseDown": "",
+    "onMouseUp": "",
+    "onPrependClick": ""
   },
   "contents": {
-    "AppendContent": "",
-    "LabelContent": "",
-    "PrependContent": "",
-    "MessageContent": ""
+    "appendContent": "",
+    "labelContent": "",
+    "messageContent": "",
+    "prependContent": ""
   }
 }

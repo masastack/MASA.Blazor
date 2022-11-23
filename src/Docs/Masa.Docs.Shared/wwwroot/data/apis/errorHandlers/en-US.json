@@ -1,12 +1,12 @@
 {
   "props": {
-    "OnErrorHandleAsync": "Custom error message handling",
-    "ShowAlert": "Whether to display the warning",
-    "ShowDetail": "Whether to display exception information",
-    "MaximumErrorCount": "Maximum number of errors"
+    "maximumErrorCount": "Maximum number of errors",
+    "onErrorHandleAsync": "Custom error message handling",
+    "showAlert": "Whether to display the warning",
+    "showDetail": "Whether to display exception information"
   },
   "events": {},
   "contents": {
-    "ErrorContent": "Custom Error Exception Slots"
+    "errorContent": "Custom Error Exception Slots"
   }
 }

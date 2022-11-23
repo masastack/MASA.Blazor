@@ -1,20 +1,20 @@
 {
   "props": {
-    "Max": "",
-    "Min": "",
-    "Formatter": "",
-    "Precision": "",
-    "Title": "",
-    "Visible": "",
-    "Value": "",
-    "ItemHeight": "",
-    "SwipeDuration": "",
-    "VisibleItemCount": ""
+    "formatter": "",
+    "itemHeight": "",
+    "max": "",
+    "min": "",
+    "precision": "",
+    "swipeDuration": "",
+    "title": "",
+    "value": "",
+    "visible": "",
+    "visibleItemCount": ""
   },
   "events": {
-    "VisibleChanged": ""
+    "visibleChanged": ""
   },
   "contents": {
-    "ActivatorContent": ""
+    "activatorContent": ""
   }
 }

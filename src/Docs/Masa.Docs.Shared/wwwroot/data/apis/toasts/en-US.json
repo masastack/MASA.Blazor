@@ -1,11 +1,11 @@
 {
   "props": {
-    "Position": "",
-    "Duration": "",
-    "MaxCount": ""
+    "duration": "",
+    "maxCount": "",
+    "position": ""
   },
   "events": {
-    "OnClose": ""
+    "onClose": ""
   },
   "contents": {}
 }

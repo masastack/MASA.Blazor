@@ -1,12 +1,12 @@
 {
   "props": {
-    "Step": "",
-    "ErrorIcon": "",
-    "CompleteIcon": "",
-    "EditIcon": "",
-    "Rules": "",
-    "Editable": "",
-    "Complete": ""
+    "complete": "",
+    "completeIcon": "",
+    "editable": "",
+    "editIcon": "",
+    "errorIcon": "",
+    "rules": "",
+    "step": ""
   },
   "events": {},
   "contents": {}

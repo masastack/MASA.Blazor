@@ -1,24 +1,24 @@
 {
   "props": {
-    "HeaderColor": "",
-    "FullWidth": "",
-    "Landscape": "",
-    "Format": "",
-    "AmPmInTitle": "",
-    "Readonly": "",
-    "UseSeconds": "",
-    "AllowedHours": "",
-    "AllowedMinutes": "",
-    "AllowedSeconds": "",
-    "Min": "",
-    "Max": "",
-    "Scrollable": "",
-    "Value": "",
-    "NoTitle": ""
+    "allowedHours": "",
+    "allowedMinutes": "",
+    "allowedSeconds": "",
+    "amPmInTitle": "",
+    "format": "",
+    "fullWidth": "",
+    "headerColor": "",
+    "landscape": "",
+    "max": "",
+    "min": "",
+    "noTitle": "",
+    "readonly": "",
+    "scrollable": "",
+    "useSeconds": "",
+    "value": ""
   },
   "events": {
-    "OnPeriodUpdate": "",
-    "OnChange": ""
+    "onChange": "",
+    "onPeriodUpdate": ""
   },
   "contents": {}
 }

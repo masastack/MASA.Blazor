@@ -1,19 +1,19 @@
 {
   "props": {
-    "Visible": "",
-    "Title": "",
-    "Type": "",
-    "OkText": "",
-    "OkColor": "",
-    "CancelText": "",
-    "CancelColor": ""
+    "cancelColor": "",
+    "cancelText": "",
+    "okColor": "",
+    "okText": "",
+    "title": "",
+    "type": "",
+    "visible": ""
   },
   "events": {
-    "VisibleChanged": "",
-    "OnCancel": "",
-    "OnOk": ""
+    "onCancel": "",
+    "onOk": "",
+    "visibleChanged": ""
   },
   "contents": {
-    "Actions": ""
+    "actions": ""
   }
 }

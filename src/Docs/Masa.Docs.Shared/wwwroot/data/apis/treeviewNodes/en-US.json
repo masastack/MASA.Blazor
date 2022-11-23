@@ -1,29 +1,29 @@
 {
   "props": {
-    "Shaped": "",
-    "SelectedColor": "",
-    "Item": "",
-    "OpenOnClick": "",
-    "ItemChildren": "",
-    "Activatable": "",
-    "ItemDisabled": "",
-    "LoadChildren": "",
-    "ItemText": "",
-    "ParentIsDisabled": "",
-    "Selectable": "",
-    "IndeterminateIcon": "",
-    "OnIcon": "",
-    "OffIcon": "",
-    "SelectionType": "",
-    "LoadingIcon": "",
-    "ExpandIcon": "",
-    "Level": "",
-    "ItemKey": ""
+    "activatable": "",
+    "expandIcon": "",
+    "indeterminateIcon": "",
+    "item": "",
+    "itemChildren": "",
+    "itemDisabled": "",
+    "itemKey": "",
+    "itemText": "",
+    "level": "",
+    "loadChildren": "",
+    "loadingIcon": "",
+    "offIcon": "",
+    "onIcon": "",
+    "openOnClick": "",
+    "parentIsDisabled": "",
+    "selectable": "",
+    "selectedColor": "",
+    "selectionType": "",
+    "shaped": ""
   },
   "events": {},
   "contents": {
-    "PrependContent": "",
-    "LabelContent": "",
-    "AppendContent": ""
+    "appendContent": "",
+    "labelContent": "",
+    "prependContent": ""
   }
 }

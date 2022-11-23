@@ -1,19 +1,19 @@
 {
   "props": {
-    "Value": "",
-    "Readonly": "",
-    "Rotate": "",
-    "Double": "",
-    "Max": "",
-    "Min": "",
-    "AllowedValues": "",
-    "Scrollable": "",
-    "Step": "",
-    "Format": ""
+    "allowedValues": "",
+    "double": "",
+    "format": "",
+    "max": "",
+    "min": "",
+    "readonly": "",
+    "rotate": "",
+    "scrollable": "",
+    "step": "",
+    "value": ""
   },
   "events": {
-    "OnInput": "",
-    "OnChange": ""
+    "onChange": "",
+    "onInput": ""
   },
   "contents": {}
 }

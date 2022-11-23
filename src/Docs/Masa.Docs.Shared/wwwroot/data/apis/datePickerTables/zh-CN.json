@@ -1,18 +1,18 @@
 {
   "props": {
-    "AllowedDates": "",
-    "Min": "",
-    "Max": "",
-    "Range": "",
-    "Readonly": "",
-    "Scrollable": "",
-    "Value": "",
-    "Current": "",
-    "Format": "",
-    "Locale": ""
+    "allowedDates": "",
+    "current": "",
+    "format": "",
+    "locale": "",
+    "max": "",
+    "min": "",
+    "range": "",
+    "readonly": "",
+    "scrollable": "",
+    "value": ""
   },
   "events": {
-    "OnInput": ""
+    "onInput": ""
   },
   "contents": {}
 }

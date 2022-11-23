@@ -1,4 +1,4 @@
-﻿{
+{
   "props": {
     "disabled": "Removes the ability to click or target the component.",
     "flat": "Removes the card’s elevation.",
@@ -11,10 +11,8 @@
     "show": "Show"
   },
   "contents": {
-    "ProgressContent": "Slot for custom progress linear (displayed when `Loading` prop is not equal to Boolean False)"
+    "progressContent": "Slot for custom progress linear (displayed when `Loading` prop is not equal to Boolean False)"
   },
-  "events": {   
-  },
-  "functions": {
-  }
+  "events": {},
+  "functions": {}
 }

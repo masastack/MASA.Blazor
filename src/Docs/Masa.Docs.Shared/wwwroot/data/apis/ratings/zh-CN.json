@@ -1,18 +1,18 @@
 {
   "props": {
-    "Clearable": "",
-    "EmptyIcon": "",
-    "FullIcon": "",
-    "HalfIcon": "",
-    "HalfIncrements": "",
-    "Hover": "",
-    "IconLabel": "",
-    "Readonly": "",
-    "Value": "",
-    "Length": ""
+    "clearable": "",
+    "emptyIcon": "",
+    "fullIcon": "",
+    "halfIcon": "",
+    "halfIncrements": "",
+    "hover": "",
+    "iconLabel": "",
+    "length": "",
+    "readonly": "",
+    "value": ""
   },
   "events": {},
   "contents": {
-    "ItemContent": ""
+    "itemContent": ""
   }
 }

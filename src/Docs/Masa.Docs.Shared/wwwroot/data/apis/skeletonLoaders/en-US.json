@@ -1,9 +1,9 @@
 {
   "props": {
-    "Boilerplate": "",
-    "Transition": "",
-    "Type": "",
-    "Types": ""
+    "boilerplate": "",
+    "transition": "",
+    "type": "",
+    "types": ""
   },
   "events": {},
   "contents": {}

@@ -1,14 +1,14 @@
 {
   "props": {
-    "Contain": "",
-    "LazySrc": "",
-    "Gradient": "",
-    "Position": "",
-    "AspectRatio": "",
-    "ContentClass": ""
+    "aspectRatio": "",
+    "contain": "",
+    "contentClass": "",
+    "gradient": "",
+    "lazySrc": "",
+    "position": ""
   },
   "events": {},
   "contents": {
-    "PlaceholderContent": ""
+    "placeholderContent": ""
   }
 }

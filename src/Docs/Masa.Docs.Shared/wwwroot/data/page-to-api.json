@@ -52,5 +52,9 @@
     "MDataTableHeader",
     "MDataFooter",
     "MSimpleCheckbox"
+  ],
+  "application": [
+    "MApp",
+    "MMain"
   ]
 }
