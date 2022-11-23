@@ -10,3 +10,9 @@
     <MTab Class="text-none">@I18n.T("Community")</MTab>
     <MTab Class="text-none">@I18n.T("Official website")</MTab>
 </MTabs>
+
+@code {
+
+    [CascadingParameter]
+    public CultureInfo Culture { get; set; } = null!;
+}

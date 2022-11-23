@@ -15,10 +15,8 @@ related:
 
 Use the cascading `Columns` and `ItemChildren` fields to achieve the effect of cascading options.
 
-<!--alert:warning-->
-The data nesting depth of the cascade selection needs to be consistent, and if some of the options do not have sub
-options, you can use an empty string for placeholder.
-<!--/alert:warning-->
+<app-alerts type="warning" content="The data nesting depth of the cascade selection needs to be consistent, and if some of the options do not have sub
+options, you can use an empty string for placeholder."></app-alerts>
 
 <masa-example file="Examples.components.mobile_pickers.Cascade"></masa-example>
 

@@ -8,7 +8,7 @@ public class DocService
     private readonly static ConcurrentCache<string, ValueTask<string>> _documentCache = new();
     private readonly static ConcurrentCache<string, ValueTask<string>> _exampleCache = new();
     private readonly static ConcurrentCache<string, ValueTask<Dictionary<string, Dictionary<string, string>>?>> _apiCache = new();
-    private static Dictionary<string, Dictionary<string, Dictionary<string, string>>> _commonApis;
+    private readonly Task<Dictionary<string, Dictionary<string, Dictionary<string, string>>>> _commonApisAsync;
 
     private readonly HttpClient _httpClient;
 
@@ -18,7 +18,7 @@ public class DocService
     {
         _i18n = i18n;
         _httpClient = factory.CreateClient("masa-docs");
-        _commonApis ??= _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>("_content/Masa.Docs.Shared/data/apis/common.json").Result ?? new();
+        _commonApisAsync = _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>("_content/Masa.Docs.Shared/data/apis/common.json");
     }
 
     public async Task<string> ReadDocumentAsync(string category, string title)
@@ -64,6 +64,7 @@ public class DocService
             {
                 var apiInfo = await _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, string>>>(
                 $"_content/Masa.Docs.Shared/data/apis/{kebabCaseComponent}/{(apiName is null ? "": apiName + "-")}{_i18n.Culture.Name}.json").ConfigureAwait(false);
+                var _commonApis = await _commonApisAsync;
                 if (_commonApis.TryGetValue(_i18n.Culture.Name, out var commonApiInfo))
                 {
                     foreach (var (category, api) in apiInfo)

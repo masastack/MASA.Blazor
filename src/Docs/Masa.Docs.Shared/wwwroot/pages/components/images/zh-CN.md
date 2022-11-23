@@ -15,8 +15,7 @@ related:
 
 ## 注意
 
-<!--alert:info--> 
-MImage 组件使用 Intersect 指令，IE11 和 Safari需要 Polyfill。 如果检测到浏览器不支持此功能, 图像仍将以正常方式加载。
+<app-alerts type="info" content="MImage 组件使用 Intersect 指令，IE11 和 Safari需要 Polyfill。 如果检测到浏览器不支持此功能, 图像仍将以正常方式加载。"></app-alerts>
 
 ## 示例
 

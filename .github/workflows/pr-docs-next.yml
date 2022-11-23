@@ -25,6 +25,8 @@ jobs:
           7.0.x
         include-prerelease: true
     - name: setting tools
-      run: dotnet workload install wasm-tools-net6
+      run: dotnet workload install wasm-tools
+    - name: check tools
+      run: dotnet workload list
     - name: build
       run: dotnet build src/Masa.Blazor.NewDocs.sln

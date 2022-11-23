@@ -13,17 +13,11 @@ related:
 
 ## 注意
 
-<!--alert:info--> 
-The default setting of browser auto completion is off, which may be changed or ignored by different browsers. **[MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)**
-<!--/alert:info--> 
+<app-alerts type="info" content="The default setting of browser auto completion is off, which may be changed or ignored by different browsers. **[MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion)**"></app-alerts>
 
-<!--alert:warning--> 
-The **Auto** attribute of **menupprops** only supports the default input style.
-<!--/alert:warning--> 
+<app-alerts type="warning" content="The `Auto` attribute of `MenuProps` only supports the default input style."></app-alerts>
 
-<!--alert:error--> 
-When using an object as the attribute of **items**, you must use **itemtext** and **itemvalue** to associate with the incoming object. These values are **text** and **value** by default and can be changed.
-<!--/alert:error--> 
+<app-alerts type="error" content="When using an object as the attribute of `Items`, you must use `ItemText` and `ItemValue` to associate with the incoming object. These values are `Text` and `Value` by default and can be changed."></app-alerts>
 
 ## Examples
 

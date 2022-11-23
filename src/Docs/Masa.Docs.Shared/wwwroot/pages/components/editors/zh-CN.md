@@ -43,6 +43,13 @@ tag: js-proxy
 
 <masa-example file="Examples.components.editor.Markdown"></masa-example>
 
+#### 模块
+
+模块允许定制 **Quill** 的行为和功能。例如使用第三方模块 **quill-blot-formatter** 可以实现调整图片大小的功能。
+
+
+<app-alerts type="warning" content="此文档已经引用了 **quill-blot-formatter.min.js**包，并且在**Blazor**启动后给**Quill**注册了**blotFormatter**模块，因此可以直接使用。具体可参考源码。"></app-alerts>
+
 #### 自定义提示信息
 
 通过设置 `Placeholder` 属性来设置空值时的提示消息。

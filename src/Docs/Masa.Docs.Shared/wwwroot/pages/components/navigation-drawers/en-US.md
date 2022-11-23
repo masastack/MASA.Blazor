@@ -16,13 +16,9 @@ the [MList](/components/lists) component using the **Nav** property.
 
 ## Caveats
 
-<!--alert:error-->
-If you are using **MNavigationDrawer** with **App** property enabled, you don't need to use `Absolute` prop as in examples.
-<!--/alert:error-->
+<app-alerts type="error" content="If you are using **MNavigationDrawer** with **App** property enabled, you don't need to use `Absolute` prop as in examples."></app-alerts>
 
-<!--alert:info-->
-The `ExpandOnHover` prop does not alter the content area of **MMain**. To have content area respond to `ExpandOnHover`, bind `OnMiniVariantUpdate` to a data prop.
-<!--/alert:info-->
+<app-alerts type="info" content="The `ExpandOnHover` prop does not alter the content area of **MMain**. To have content area respond to `ExpandOnHover`, bind `OnMiniVariantUpdate` to a data prop."></app-alerts>
 
 ## Examples
 
