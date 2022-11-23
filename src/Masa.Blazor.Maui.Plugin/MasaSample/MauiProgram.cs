@@ -21,7 +21,7 @@ public static class MauiProgram
 #endif
         builder.Services.AddSingleton<WeatherForecastService>();
         builder.Services.AddMasaBlazor();
-		AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;
+		//AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;
 		return builder.Build();
 	}
 
