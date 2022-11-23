@@ -56,5 +56,13 @@
   "application": [
     "MApp",
     "MMain"
+  ],
+  "checkboxs": [
+    "MCheckbox",
+    "MSimpleCheckbox"
+  ],
+  "radios": [
+    "MRadio",
+    "MRadioGroup"
   ]
 }

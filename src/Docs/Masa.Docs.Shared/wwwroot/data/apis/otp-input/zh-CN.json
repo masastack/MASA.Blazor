@@ -2,13 +2,11 @@
   "props": {
     "length": "",
     "plain": "",
-    "readonly": "",
     "type": "",
     "value": ""
   },
   "events": {
-    "onFinish": "",
-    "onInput": ""
+    "onFinish": ""
   },
   "contents": {}
 }
