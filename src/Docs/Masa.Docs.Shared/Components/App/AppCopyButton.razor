@@ -13,8 +13,6 @@
                 mdi-check
             </MIcon>
         </ShowTransitionElement>
-    </FadeTransition>
-    <FadeTransition LeaveAbsolute>
         <ShowTransitionElement Value="!_copying">
             <MIcon Class="emphasize1-color">
                 mdi-content-copy
@@ -25,14 +23,15 @@
 
 @code {
 
+    [Inject]
+    public IJSRuntime Js { get; set; } = null!;
+
     [Parameter]
     public string? Class { get; set; }
 
     [Parameter]
     [EditorRequired]
     public string? Content { get; set; }
-
-    [Inject] public IJSRuntime Js { get; set; } = null!;
 
     private bool _copying;
 
