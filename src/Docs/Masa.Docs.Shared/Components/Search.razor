@@ -1,22 +1,25 @@
 ﻿@namespace Masa.Docs.Shared.Components
 @inject I18n I18n
 
-<MTextField @bind-Value="_value"
-            BackgroundColor="#F6F8FD"
-            Class="@($"rounded-lg {Class}")"
-            Style="min-width: 340px"
-            Placeholder="@I18n.T("Search")"
-            Clearable
-            ClearIcon="mdi-close-circle"
-            HideDetails="true"
-            TValue="string"
-            Filled
-            Rounded
-            Dense>
-    <PrependInnerContent>
-        <MIcon Class="emphasize2-color">mdi-magnify</MIcon>
-    </PrependInnerContent>
-</MTextField>
+<div class="search-inupt">
+    <MTextField @bind-Value="_value"
+                BackgroundColor="#F6F8FD"
+                Class="@($"rounded-lg {Class}")"
+                Style="min-width: 340px"
+                Placeholder="@I18n.T("Search")"
+                Clearable
+                ClearIcon="mdi-close-circle"
+                HideDetails="true"
+                TValue="string"
+                Filled
+                Rounded
+                Dense
+                Height="48">
+        <PrependInnerContent>
+            <MIcon Class="emphasize2-color">mdi-magnify</MIcon>
+        </PrependInnerContent>
+    </MTextField>
+</div>
 
 @code {
     [CascadingParameter]
