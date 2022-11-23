@@ -1,0 +1,23 @@
+{
+  "props": {
+    "Items": "",
+    "ItemKey": "",
+    "ItemPosition": "",
+    "ItemClass": "",
+    "ItemStyle": "",
+    "Readonly": "",
+    "Column": "",
+    "DisableOneColumnMode": "",
+    "DisableResize": "",
+    "Float": "",
+    "Margin": "",
+    "MinRow": "",
+    "Rtl": ""
+  },
+  "events": {
+    "OnResize": ""
+  },
+  "contents": {
+    "ItemContent": ""
+  }
+}

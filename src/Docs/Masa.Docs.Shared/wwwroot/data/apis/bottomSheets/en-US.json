@@ -1,0 +1,24 @@
+{
+  "props": {
+    "Inset": "",
+    "ContentClass": "",
+    "Origin": "",
+    "OverlayScrimClass": "",
+    "Scrollable": "",
+    "Transition": "",
+    "Attach": "",
+    "Persistent": "",
+    "OpenOnHover": "",
+    "OpenOnClick": "",
+    "OpenOnFocus": "",
+    "Value": "",
+    "OpenDelay": "",
+    "CloseDelay": ""
+  },
+  "events": {
+    "OnOutsideClick": ""
+  },
+  "contents": {
+    "ActivatorContent": ""
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "props": {
+    "disableItemsPerPage": "Disables items-per-page dropdown",
+    "DisablePagination": "Disables pagination buttons",
+    "FirstIcon": "First icon",
+    "ItemsPerPageAllText": "ext for 'All' option in items-per-page dropdown",
+    "ItemsPerPageOptions": "Array of options to show in the items-per-page dropdown",
+    "ItemsPerPageText": "Text for items-per-page dropdown",
+    "LastIcon": "Last icon",
+    "NextIcon": "Next icon",
+    "Options": "DataOptions",
+    "PageText": "",
+    "Pagination": "DataPagination",
+    "Parameters": "",
+    "PrevIcon": "Previous icon",
+    "ShowCurrentPage": "Show current page number between prev/next icons",
+    "ShowFirstLastPage": "Show first/last icons"
+  },
+  "events": {
+    "OnOptionsUpdate": ""
+  },
+  "contents": {
+    "PageTextContent": "Defines content for the items-per-page text",
+    "PrependContent": ""
+  }
+}

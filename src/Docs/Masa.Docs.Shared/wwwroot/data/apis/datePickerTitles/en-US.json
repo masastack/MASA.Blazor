@@ -1,0 +1,14 @@
+{
+  "props": {
+    "Value": "",
+    "Readonly": "",
+    "SelectingYear": "",
+    "Year": "",
+    "YearIcon": "",
+    "Date": ""
+  },
+  "events": {
+    "OnSelectingYearUpdate": ""
+  },
+  "contents": {}
+}

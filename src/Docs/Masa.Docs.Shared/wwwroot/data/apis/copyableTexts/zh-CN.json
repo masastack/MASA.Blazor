@@ -1,0 +1,18 @@
+{
+  "props": {
+    "ContentClass": "",
+    "ContentStyle": "",
+    "CopiedIcon": "",
+    "CopyIcon": "",
+    "CopyIconColor": "",
+    "DisableTooltip": "",
+    "Text": "",
+    "Tooltip": "",
+    "TooltipClass": "",
+    "TooltipStyle": ""
+  },
+  "events": {
+    "OnCopy": ""
+  },
+  "contents": {}
+}

@@ -1,0 +1,18 @@
+{
+  "props": {
+    "AllowedDates": "",
+    "Min": "",
+    "Max": "",
+    "Range": "",
+    "Readonly": "",
+    "Scrollable": "",
+    "Value": "",
+    "Current": "",
+    "Format": "",
+    "Locale": ""
+  },
+  "events": {
+    "OnInput": ""
+  },
+  "contents": {}
+}

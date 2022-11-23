@@ -1,0 +1,18 @@
+{
+  "props": {
+    "Min": "",
+    "Max": "",
+    "Value": "",
+    "PrevIcon": "",
+    "Readonly": "",
+    "NextIcon": "",
+    "Format": "",
+    "ActivePicker": "",
+    "Locale": ""
+  },
+  "events": {
+    "OnInput": "",
+    "OnToggle": ""
+  },
+  "contents": {}
+}

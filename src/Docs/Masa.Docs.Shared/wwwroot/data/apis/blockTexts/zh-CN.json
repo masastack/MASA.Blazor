@@ -1,0 +1,16 @@
+{
+  "props": {
+    "Primary": "",
+    "PrimaryClass": "",
+    "PrimaryStyle": "",
+    "Secondary": "",
+    "SecondaryClass": "",
+    "SecondaryStyle": "",
+    "Tags": ""
+  },
+  "events": {},
+  "contents": {
+    "PrimaryContent": "",
+    "SecondaryContent": ""
+  }
+}

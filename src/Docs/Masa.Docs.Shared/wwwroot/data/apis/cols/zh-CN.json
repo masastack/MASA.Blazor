@@ -1,0 +1,23 @@
+{
+  "props": {
+    "Sm": "",
+    "Md": "",
+    "Lg": "",
+    "Xl": "",
+    "Align": "",
+    "OrderLg": "",
+    "OrderMd": "",
+    "OrderSm": "",
+    "OrderXl": "",
+    "OffsetLg": "",
+    "OffsetMd": "",
+    "OffsetSm": "",
+    "OffsetXl": "",
+    "Flex": "",
+    "Cols": "",
+    "Order": "",
+    "Offset": ""
+  },
+  "events": {},
+  "contents": {}
+}

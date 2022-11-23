@@ -1,0 +1,15 @@
+{
+  "props": {
+    "Items": "",
+    "ItemText": "",
+    "ItemValue": "",
+    "SelectedItems": "",
+    "ItemChildren": "",
+    "LoadChildren": "",
+    "ColumnIndex": ""
+  },
+  "events": {
+    "OnSelect": ""
+  },
+  "contents": {}
+}

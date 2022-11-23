@@ -1,0 +1,22 @@
+{
+  "props": {
+    "AlignLg": "",
+    "AlignMd": "",
+    "AlignSm": "",
+    "AlignXl": "",
+    "AlignContentLg": "",
+    "AlignContentMd": "",
+    "AlignContentSm": "",
+    "AlignContentXl": "",
+    "JustifyLg": "",
+    "JustifyMd": "",
+    "JustifySm": "",
+    "JustifyXl": "",
+    "NoGutters": "",
+    "Align": "",
+    "AlignContent": "",
+    "Justify": ""
+  },
+  "events": {},
+  "contents": {}
+}

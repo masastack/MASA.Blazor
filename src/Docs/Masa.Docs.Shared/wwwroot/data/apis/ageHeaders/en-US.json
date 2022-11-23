@@ -1,0 +1,18 @@
+{
+  "props": {
+    "ShowFiltersByDefault": "",
+    "Subtitle": "",
+    "Title": ""
+  },
+  "events": {
+    "OnBack": "",
+    "OnSearch": ""
+  },
+  "contents": {
+    "Filters": "",
+    "LeftActions": "",
+    "RightActions": "",
+    "SubtitleFragment": "",
+    "TitleFragment": ""
+  }
+}

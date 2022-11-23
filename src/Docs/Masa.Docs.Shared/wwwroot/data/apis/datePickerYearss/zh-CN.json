@@ -1,0 +1,13 @@
+{
+  "props": {
+    "Min": "",
+    "Max": "",
+    "Value": "",
+    "Format": "",
+    "Locale": ""
+  },
+  "events": {
+    "OnInput": ""
+  },
+  "contents": {}
+}

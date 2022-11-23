@@ -1,0 +1,38 @@
+{
+  "props": {
+    "Auto": "",
+    "CloseOnClick": "",
+    "CloseOnContentClick": "",
+    "ContentStyle": "",
+    "DisableKeys": "",
+    "Origin": "",
+    "Transition": "",
+    "AllowOverflow": "",
+    "ContentClass": "",
+    "NudgeBottom": "",
+    "NudgeLeft": "",
+    "NudgeRight": "",
+    "NudgeTop": "",
+    "NudgeWidth": "",
+    "OffsetOverflow": "",
+    "PositionX": "",
+    "PositionY": "",
+    "ZIndex": "",
+    "Attach": "",
+    "OffsetX": "",
+    "OffsetY": "",
+    "ExternalActivator": "",
+    "OpenOnHover": "",
+    "OpenOnClick": "",
+    "OpenOnFocus": "",
+    "Value": "",
+    "OpenDelay": "",
+    "CloseDelay": ""
+  },
+  "events": {
+    "OnOutsideClick": ""
+  },
+  "contents": {
+    "ActivatorContent": ""
+  }
+}

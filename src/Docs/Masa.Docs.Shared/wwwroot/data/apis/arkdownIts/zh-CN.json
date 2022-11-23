@@ -1,0 +1,21 @@
+{
+  "props": {
+    "HeaderSections": "",
+    "Source": "",
+    "Scope": "",
+    "Html": "",
+    "XHtmlOut": "",
+    "Breaks": "",
+    "LangPrefix": "",
+    "Linkify": "",
+    "Typographer": "",
+    "Quotes": "",
+    "NoWrapper": "",
+    "AnchorOptions": ""
+  },
+  "events": {
+    "OnFrontMatterParsed": "",
+    "OnTocParsed": ""
+  },
+  "contents": {}
+}

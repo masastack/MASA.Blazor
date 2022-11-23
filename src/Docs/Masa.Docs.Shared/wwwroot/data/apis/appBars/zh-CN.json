@@ -1,0 +1,20 @@
+{
+  "props": {
+    "ClippedLeft": "",
+    "ClippedRight": "",
+    "CollapseOnScroll": "",
+    "ShrinkOnScroll": "",
+    "ScrollThreshold": "",
+    "ScrollOffScreen": "",
+    "Value": "",
+    "Prominent": "",
+    "Short": "",
+    "Shaped": "",
+    "Show": ""
+  },
+  "events": {},
+  "contents": {
+    "ImgContent": "",
+    "ExtensionContent": ""
+  }
+}

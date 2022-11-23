@@ -1,0 +1,11 @@
+{
+  "props": {
+    "Code": "",
+    "Language": "",
+    "Inline": "",
+    "IgnorePreCssOfTheme": "",
+    "IgnoreCodeCssOfTheme": ""
+  },
+  "events": {},
+  "contents": {}
+}

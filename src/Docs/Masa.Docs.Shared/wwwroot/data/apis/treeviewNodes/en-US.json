@@ -1,0 +1,29 @@
+{
+  "props": {
+    "Shaped": "",
+    "SelectedColor": "",
+    "Item": "",
+    "OpenOnClick": "",
+    "ItemChildren": "",
+    "Activatable": "",
+    "ItemDisabled": "",
+    "LoadChildren": "",
+    "ItemText": "",
+    "ParentIsDisabled": "",
+    "Selectable": "",
+    "IndeterminateIcon": "",
+    "OnIcon": "",
+    "OffIcon": "",
+    "SelectionType": "",
+    "LoadingIcon": "",
+    "ExpandIcon": "",
+    "Level": "",
+    "ItemKey": ""
+  },
+  "events": {},
+  "contents": {
+    "PrependContent": "",
+    "LabelContent": "",
+    "AppendContent": ""
+  }
+}

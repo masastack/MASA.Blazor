@@ -1,0 +1,16 @@
+{
+  "props": {
+    "Borderless": "",
+    "Group": "",
+    "Shaped": "",
+    "Max": "",
+    "TargetGroup": "",
+    "Multiple": "",
+    "Value": "",
+    "Values": ""
+  },
+  "events": {
+    "ValuesChanged": ""
+  },
+  "contents": {}
+}

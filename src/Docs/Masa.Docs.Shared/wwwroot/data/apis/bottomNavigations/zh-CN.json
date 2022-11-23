@@ -1,0 +1,19 @@
+{
+  "props": {
+    "Grow": "",
+    "ScrollThreshold": "",
+    "Horizontal": "",
+    "Shift": "",
+    "InputValue": "",
+    "Max": "",
+    "TargetGroup": "",
+    "Multiple": "",
+    "Value": "",
+    "Values": ""
+  },
+  "events": {
+    "InputValueChanged": "",
+    "ValuesChanged": ""
+  },
+  "contents": {}
+}

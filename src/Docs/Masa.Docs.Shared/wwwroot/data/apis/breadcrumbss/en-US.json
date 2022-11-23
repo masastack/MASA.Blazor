@@ -1,0 +1,12 @@
+{
+  "props": {
+    "Divider": "",
+    "Linkage": "",
+    "Items": ""
+  },
+  "events": {},
+  "contents": {
+    "DividerContent": "",
+    "ItemContent": ""
+  }
+}

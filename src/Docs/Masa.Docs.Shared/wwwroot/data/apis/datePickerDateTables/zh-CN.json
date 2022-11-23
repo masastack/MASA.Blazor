@@ -1,0 +1,23 @@
+{
+  "props": {
+    "FirstDayOfWeek": "",
+    "WeekdayFormat": "",
+    "ShowWeek": "",
+    "ShowAdjacentMonths": "",
+    "AllowedDates": "",
+    "Min": "",
+    "Max": "",
+    "Range": "",
+    "Readonly": "",
+    "Scrollable": "",
+    "Value": "",
+    "Current": "",
+    "Format": "",
+    "Locale": ""
+  },
+  "events": {
+    "OnDaySelected": "",
+    "OnInput": ""
+  },
+  "contents": {}
+}

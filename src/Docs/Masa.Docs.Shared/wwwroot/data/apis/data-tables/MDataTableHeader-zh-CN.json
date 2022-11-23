@@ -1,0 +1,24 @@
+{
+  "props": {
+    "Options": "",
+    "CheckboxColor": "",
+    "EveryItem": "",
+    "SomeItems": "",
+    "ShowGroupBy": "",
+    "SingleSelect": "",
+    "DisableSort": "",
+    "MultiSort": "",
+    "SortIcon": "",
+    "Headers": "",
+    "IsMobile": ""
+  },
+  "events": {
+    "OnToggleSelectAll": "",
+    "OnSort": "",
+    "OnGroup": ""
+  },
+  "contents": {
+    "DataTableSelectContent": "",
+    "HeaderColContent": ""
+  }
+}

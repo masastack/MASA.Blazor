@@ -1,0 +1,13 @@
+{
+  "props": {
+    "Step": "",
+    "ErrorIcon": "",
+    "CompleteIcon": "",
+    "EditIcon": "",
+    "Rules": "",
+    "Editable": "",
+    "Complete": ""
+  },
+  "events": {},
+  "contents": {}
+}

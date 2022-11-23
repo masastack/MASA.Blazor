@@ -1,0 +1,18 @@
+{
+  "props": {
+    "AmPmReadonly": "",
+    "Period": "",
+    "Readonly": "",
+    "Hour": "",
+    "Minute": "",
+    "Second": "",
+    "UseSeconds": "",
+    "Selecting": "",
+    "AmPm": ""
+  },
+  "events": {
+    "OnPeriodUpdate": "",
+    "OnSelectingUpdate": ""
+  },
+  "contents": {}
+}
