@@ -15,8 +15,8 @@
         }
 
         <MTabs Value="IsApiTab.ToString()" Class="m-bar--underline mb-12">
-            <MTab Value="@("False")" OnClick="@(() => NavigateToTab(""))">DEMO</MTab>
-            <MTab Value="@("True")" OnClick="@(() => NavigateToTab("api"))">API</MTab>
+            <MTab Class="ordinary-text" Value="@("False")" OnClick="@(() => NavigateToTab(""))">DEMO</MTab>
+            <MTab Class="ordinary-text" Value="@("True")" OnClick="@(() => NavigateToTab("api"))">API</MTab>
         </MTabs>
 
         @if (IsApiTab && _apiData.Count == 0)

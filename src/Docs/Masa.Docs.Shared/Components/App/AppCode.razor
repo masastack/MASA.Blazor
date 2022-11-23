@@ -5,9 +5,9 @@
         Rounded="Rounded"
         Class="@($"app-code overflow-hidden {Class}")"
         Outlined>
-    @ChildContent
+    <MHighlight Code="@Code" Language="@Language" IgnorePreCssOfTheme></MHighlight>
 
-    <AppCopyButton Class="mr-n2 mt-n2"></AppCopyButton>
+    <AppCopyButton Content="@Code" Class="mr-n2 mt-n2"></AppCopyButton>
 </MSheet>
 
 @code {
@@ -22,6 +22,11 @@
     public StringBoolean Rounded { get; set; } = true;
 
     [Parameter]
-    public RenderFragment? ChildContent { get; set; }
+    [EditorRequired]
+    public string? Code { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public string? Language { get; set; }
 
 }
