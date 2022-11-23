@@ -20,7 +20,68 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                     return false;
             }
         }
+        Task PlatformConnect()
+        {
+            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
 
+            void connectedHandler(object sender, CBPeripheralEventArgs e)
+            {
+                if (e.Peripheral.Identifier.IsEqual(((CBPeripheral)Device).Identifier))
+                {
+                    MasaMauiBluetoothService.ConnectedPeripheral -= connectedHandler;
+                    MasaMauiBluetoothService.FailedToConnectPeripheral -= failedConnectHandler;
+                    tcs.SetResult(true);
+                }
+            };
+
+            void failedConnectHandler(object sender, CBPeripheralErrorEventArgs e)
+            {
+                if (e.Peripheral.Identifier.IsEqual(((CBPeripheral)Device).Identifier))
+                {
+                    MasaMauiBluetoothService.ConnectedPeripheral -= connectedHandler;
+                    MasaMauiBluetoothService.FailedToConnectPeripheral -= failedConnectHandler;
+                    tcs.SetResult(false);
+                }
+            };
+
+            MasaMauiBluetoothService.ConnectedPeripheral += connectedHandler;
+            MasaMauiBluetoothService.FailedToConnectPeripheral += failedConnectHandler;
+#if __IOS__
+            if (Device.RequiresAncs)
+            {
+                MasaMauiBluetoothService._manager.ConnectPeripheral(Device, new CBConnectPeripheralOptions { RequiresAncs = Device.RequiresAncs });
+            }
+            else
+            {
+#endif
+                MasaMauiBluetoothService._manager.ConnectPeripheral(Device);
+#if __IOS__
+            }
+#endif
+
+            switch (((CBPeripheral)Device).State)
+            {
+                case CBPeripheralState.Connected:
+                    MasaMauiBluetoothService.ConnectedPeripheral -= connectedHandler;
+                    MasaMauiBluetoothService.FailedToConnectPeripheral -= failedConnectHandler;
+                    return Task.CompletedTask;
+
+                case CBPeripheralState.Connecting:
+                    Task.Run(async () =>
+                    {
+                        await Task.Delay(5000);
+                        if (!tcs.Task.IsCompletedSuccessfully)
+                        {
+                            tcs.SetResult(false);
+                        }
+                    });
+                    return tcs.Task;
+
+                default:
+                    MasaMauiBluetoothService._manager.CancelPeripheralConnection(Device);
+                    return Task.CompletedTask;
+            }
+        }
 
         void PlatformDisconnect()
         {

@@ -20,7 +20,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
         internal static event EventHandler<CBDiscoveredPeripheralEventArgs> DiscoveredPeripheral;
         internal static event EventHandler<CBPeripheralErrorEventArgs> FailedToConnectPeripheral;
 
-        public static bool PlatformIsEnabledIsEnabled()
+        public static bool PlatformIsEnabled()
         {
             return _manager.State == CBManagerState.PoweredOn;
         }

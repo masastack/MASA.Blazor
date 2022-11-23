@@ -11,10 +11,10 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             .SetScanMode(Android.Bluetooth.LE.ScanMode.Balanced)
             ?.Build();
         private static DevicesCallback _callback = new DevicesCallback();
-        
-        public static bool PlatformIsEnabledIsEnabled()
+
+        public static bool PlatformIsEnabled()
         {
-            return _bluetoothAdapter is {IsEnabled: true};
+            return _bluetoothAdapter is { IsEnabled: true };
         }
 
         private static async Task<IReadOnlyCollection<BluetoothDevice>> PlatformScanForDevices()
@@ -32,7 +32,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
             return _discoveredDevices;
         }
 
-        public static async Task PlatformSendDataAsync(string deviceName,Guid servicesUuid,Guid? characteristicsUuid, byte[] dataBytes, EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
+        public static async Task PlatformSendDataAsync(string deviceName, Guid servicesUuid, Guid? characteristicsUuid, byte[] dataBytes, EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
         {
             BluetoothDevice blueDevice = _discoveredDevices.FirstOrDefault(o => o.Name == deviceName);
 
@@ -113,6 +113,12 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
                     (global::Android.Manifest.Permission.AccessFineLocation, true),
                     (global::Android.Manifest.Permission.Bluetooth, true),
                     (global::Android.Manifest.Permission.BluetoothAdmin, true),
+                   
+#if ANDROID31_0_OR_GREATER
+                    //(global::Android.Manifest.Permission.BluetoothConnect, true),
+                    //(global::Android.Manifest.Permission.BluetoothScan, true),
+#endif
+                    
                 }.ToArray();
         }
         static Task<bool> PlatformGetAvailability()

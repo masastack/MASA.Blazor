@@ -32,8 +32,13 @@
 
         public static bool IsEnabled()
         {
-            return PlatformIsEnabledIsEnabled();
+            return PlatformIsEnabled();
 
+        }
+
+        public static BluetoothDevice GetBluetoothDevice(string name)
+        {
+            return _discoveredDevices.FirstOrDefault(o => o.Name == name);
         }
 
         public static async Task<PermissionStatus> CheckAndRequestBluetoothPermission()
