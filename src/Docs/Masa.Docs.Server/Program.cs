@@ -22,8 +22,7 @@ builder.Services.AddMasaBlazor(options =>
     });
 }).AddI18nForServer("wwwroot/locale");
 
-//builder.Services.AddMasaDocs(builder.Configuration["ASPNETCORE_URLS"]?.Replace("0.0.0.0", "127.0.0.1") ?? "http://localhost:5000");
-builder.Services.AddMasaDocs("http://localhost:5000");
+builder.Services.AddMasaDocs(builder.Configuration["ASPNETCORE_URLS"]?.Replace("0.0.0.0", "127.0.0.1") ?? "http://localhost:5000");
 
 var app = builder.Build();
 
