@@ -64,5 +64,32 @@
   "radios": [
     "MRadio",
     "MRadioGroup"
+  ],
+  "range-sliders": [
+    "MRangeSlider",
+    "MSlider"
+  ],
+  "button-groups": [
+    "MButtonGroup",
+    "MButton"
+  ],
+  "chip-groups": [
+    "MChipGroup",
+    "MChip"
+  ],
+  "item-groups": [
+    "MItem",
+    "MItemGroup"
+  ],
+  "list-item-groups": [
+    "MListGroup",
+    "MListItem",
+    "MListItemAction",
+    "MListItemActionText",
+    "MListItemAvatar",
+    "MListItemContent",
+    "MListItemGroup",
+    "MListItemSubtitle",
+    "MListItemTitle"
   ]
 }

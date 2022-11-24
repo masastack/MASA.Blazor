@@ -1,39 +1,12 @@
 {
   "props": {
-    "appendIcon": "",
-    "error": "",
-    "errorCount": "",
-    "errorMessages": "",
-    "hideDetails": "",
-    "hint": "",
-    "inset": "",
-    "label": "",
+    "inset": "扩展MSwitch轨迹以包含缩略图",
     "leftText": "",
-    "messages": "",
-    "persistentHint": "",
-    "prependIcon": "",
-    "readonly": "",
     "rightText": "",
-    "rules": "",
-    "success": "",
-    "successMessages": "",
-    "trackColor": "",
-    "validateOnBlur": "",
-    "value": "",
-    "valueExpression": ""
+    "trackColor": ""
   },
   "events": {
-    "onAppendClick": "",
-    "onChange": "",
-    "onInput": "",
-    "onMouseDown": "",
-    "onMouseUp": "",
-    "onPrependClick": ""
   },
   "contents": {
-    "appendContent": "",
-    "labelContent": "",
-    "messageContent": "",
-    "prependContent": ""
   }
 }
