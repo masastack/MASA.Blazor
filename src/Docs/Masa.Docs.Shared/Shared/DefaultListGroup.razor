@@ -2,7 +2,6 @@
 @typeparam TItem where TItem : IDefaultItem<TItem>
 
 <MListGroup Group="@GenGroup(Item.Children)"
-            AppendIcon="mdi-menu-down"
             Class="m-list-group--default"
             NoAction
             SubGroup="SubGroup">
@@ -15,7 +14,7 @@
         </MListItemContent>
     </ActivatorContent>
     <PrependIconContent>
-        <MIcon Color="primary">@Item.Icon</MIcon>
+        <MIcon Color="primary">@(string.IsNullOrWhiteSpace(Item.Icon) ? "mdi-menu-down" : Item.Icon)</MIcon>
     </PrependIconContent>
     <ChildContent>
         @foreach (var child in Item.Children)
