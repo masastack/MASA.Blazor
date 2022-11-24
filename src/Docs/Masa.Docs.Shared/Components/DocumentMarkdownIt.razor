@@ -1,15 +1,17 @@
 ﻿@namespace Masa.Docs.Shared.Components
 
-<MMarkdownIt Source="@Source"
-             AnchorOptions="@AnchorOptions"
-             OnTocParsed="@OnTocParsed"
-             OnFrontMatterParsed="@OnFrontMatterParsed"
-             Html
-             Linkify
-             Typographer
-             HeaderSections
-             Scope="document">
-</MMarkdownIt>
+<div class="ordinary-text">
+    <MMarkdownIt Source="@Source"
+                 AnchorOptions="@AnchorOptions"
+                 OnTocParsed="@OnTocParsed"
+                 OnFrontMatterParsed="@OnFrontMatterParsed"
+                 Html
+                 Linkify
+                 Typographer
+                 HeaderSections
+                 Scope="document">
+    </MMarkdownIt>
+</div>
 
 @code {
 
@@ -28,5 +30,4 @@
         PermalinkClass = "",
         PermalinkSymbol = ""
     };
-
 }
