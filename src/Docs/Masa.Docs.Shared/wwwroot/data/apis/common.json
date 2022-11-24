@@ -46,6 +46,7 @@
       "fullscreen": "Changes layout for fullscreen display.",
       "hideOverlay": "Hides the display of the overlay.",
       "link": "Designates that the component is a link. This is automatic when using the href or to prop.",
+      "linkage": "linkage",
       "target": "Designates the target attribute. This should only be applied when using the **href** prop.",
       "backgroundColor": "Change the background color of the component.",
       "exact": "Exactly match the link. Without this, ‘/’ will match every route. You can find more information about the [exact prop](https://router.vuejs.org/api/) on the vue-router documentation.",
@@ -117,7 +118,13 @@
       "type": "Sets input type",
       "validateOnBlur": "validateOnBlur",
       "value": "The input's value",
-      "valueExpression": "Lambada expression, used to specify the fields for Form form validation"
+      "valueExpression": "Lambada expression, used to specify the fields for Form form validation",
+      "nextContent": "The next slot",
+      "prevContent": "The prev slot",
+      "closeDelay": "Milliseconds to wait before closing component.",
+      "openDelay": "Milliseconds to wait before opening component.",
+      "zIndex": "The z-index used for the component",
+      "transition": "设置组件转换。可以是一个 (built in transitions)[/styles-and-animations/transitions] 或者是自己自定义的。"
     },
     "contents": {
       "childContent": "Default content",
@@ -208,6 +215,7 @@
       "fullscreen": "改变全屏显示的布局。",
       "hideOverlay": "隐藏遮罩层的显示.",
       "link": "指定组件为链接。当使用 **href** 或 **to** 属性时，这是自动的设置的。",
+      "linkage": "linkage",
       "target": "指定 target 属性。只在使用 **href** 属性时应用。",
       "backgroundColor": "更改组件的背景颜色。",
       "exact": "完全匹配链接。如果没有这个链接，'/' 将匹配每个路由。你能够在 vue-router 文档浏览更多 [exact prop](https://router.vuejs.org/api/)。",
@@ -279,7 +287,13 @@
       "type": "设置输入类型",
       "validateOnBlur": "validateOnBlur",
       "value": "输入的值",
-      "valueExpression": "Lambada表达式,用于指定Form表单验证的字段"
+      "valueExpression": "Lambada表达式,用于指定Form表单验证的字段",
+      "nextContent": "下一个插槽",
+      "prevContent": "前一个插槽",
+      "closeDelay": "关闭组件前等待的毫秒数.",
+      "openDelay": "打开组件前等待的毫秒数.",
+      "zIndex": "用于组件的 z-index",
+      "transition": "设置组件转换。可以是一个 (built in transitions)[/styles-and-animations/transitions] 或者是自己自定义的。"
     },
     "contents": {
       "childContent": "默认插槽",

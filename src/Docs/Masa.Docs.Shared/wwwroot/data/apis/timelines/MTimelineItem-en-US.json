@@ -1,0 +1,10 @@
+{
+  "props": {
+    "fillDot": "Remove padding from dot container",
+    "hideDot": "Hide display of timeline dot"
+  },
+  "events": {},
+  "contents": {
+    "oppositeContent": "Used to customize the opposite side of timeline items"
+  }
+}

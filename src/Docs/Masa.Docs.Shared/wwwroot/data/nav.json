@@ -109,7 +109,7 @@
       "images",
       "infinite-scroll",
       "lists",
-      "markdown",
+      "markdowns",
       "menus",
       {
         "title": "mobiles",
@@ -119,7 +119,7 @@
           "mobile-date-pickers",
           "mobile-date-time-pickers",
           "mobile-pickers",
-          "mobil-picker-views",
+          "mobile-picker-views",
           "mobile-time-pickers"
         ]
       },
@@ -127,7 +127,7 @@
       "navigation-drawers",
       "not-grouped",
       "overlays",
-      "pagination",
+      "paginations",
       {
         "title": "Pickers",
         "group": "components",
@@ -163,9 +163,9 @@
       },
       "tabs",
       "timelines",
-      "toast",
+      "toasts",
       "tooltips",
-      "treeview",
+      "treeviews",
       "virtual-scroll"
     ]
   }

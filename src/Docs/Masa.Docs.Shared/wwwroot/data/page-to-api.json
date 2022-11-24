@@ -91,5 +91,51 @@
     "MListItemGroup",
     "MListItemSubtitle",
     "MListItemTitle"
+  ],
+  "slide-groups": [
+    "MSlideGroup",
+    "MSlideItem"
+  ],
+  "windows": [
+    "MWindow",
+    "MWindowItem"
+  ],
+  "lists": [
+    "MList",
+    "MListGroup",
+    "MListItem",
+    "MListItemAction",
+    "MListItemActionText",
+    "MListItemAvatar",
+    "MListItemContent",
+    "MListItemGroup",
+    "MListItemIcon",
+    "MListItemSubtitle",
+    "MListItemTitle"
+  ],
+  "not-grouped": [
+    "PConfirm",
+    "PPageHeader",
+    "PSidebar"
+  ],
+  "date-pickers-month": [
+    "MDatePicker"
+  ],
+  "steppers": [
+    "MStepper",
+    "MStepperContent",
+    "MStepperHeader",
+    "MStepperItems",
+    "MStepperStep"
+  ],
+  "tabs": [
+    "MTabs",
+    "MTab",
+    "MTabItem",
+    "MTabsItems"
+  ],
+  "timelines": [
+    "MTimeline",
+    "MTimelineItem"
   ]
 }

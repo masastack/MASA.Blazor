@@ -1,18 +1,19 @@
 {
   "props": {
-    "clearable": "",
-    "emptyIcon": "",
-    "fullIcon": "",
-    "halfIcon": "",
-    "halfIncrements": "",
-    "hover": "",
+    "background-color": "The color used empty icons",
+    "clearable": "Allows for the component to be cleared. Triggers when the icon containing the current value is clicked.",
+    "emptyIcon": "The icon displayed when empty",
+    "fullIcon": "The icon displayed when full",
+    "halfIcon": "The icon displayed when half (requires `HalfIncrements` prop)",
+    "halfIncrements": "Allows the selection of half increments",
+    "hover": "Provides visual feedback when hovering over icons",
     "iconLabel": "",
-    "length": "",
-    "readonly": "",
-    "value": ""
+    "length": "The amount of ratings to show",
+    "readonly": "Removes all hover effects and pointer events",
+    "value": "The rating value"
   },
   "events": {},
   "contents": {
-    "itemContent": ""
+    "itemContent": "The slot for rendered items"
   }
 }

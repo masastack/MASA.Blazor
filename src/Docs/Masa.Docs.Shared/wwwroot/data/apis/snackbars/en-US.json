@@ -1,14 +1,14 @@
 {
   "props": {
     "action": "",
-    "centered": "",
-    "multiLine": "",
-    "shaped": "",
-    "text": "",
-    "timeout": "",
-    "transition": "",
-    "value": "",
-    "vertical": ""
+    "centered": "Positions the snackbar in the center of the screen, (x and y axis).",
+    "multiLine": "Gives the snackbar a larger minimum height.",
+    "shaped": "Applies a large border radius on the top left and bottom right of the card.",
+    "text": "Applies the defined `Color` to text and a low opacity background of the same.",
+    "timeout": "Time (in milliseconds) to wait until snackbar is automatically hidden. Use -1 to keep open indefinitely (0 in version < 2.3 ). It is recommended for this number to be between 4000 and 10000. Changes to this property will reset the timeout.",
+    "transition": "Sets the component transition. Can be one of the (built in transitions)[/styles-and-animations/transitions] or one your own.",
+    "value": "Controls whether the component is visible or hidden.",
+    "vertical": "Stacks snackbar content on top of the actions (button)."
   },
   "events": {
     "onClosed": ""

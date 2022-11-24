@@ -1,8 +1,8 @@
 {
   "props": {
-    "duration": "",
-    "maxCount": "",
-    "position": ""
+    "duration": "duration",
+    "maxCount": "maxCount",
+    "position": "position"
   },
   "events": {
     "onClose": ""

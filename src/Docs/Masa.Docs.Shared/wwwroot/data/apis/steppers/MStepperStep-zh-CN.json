@@ -1,0 +1,13 @@
+{
+  "props": {
+    "complete": "标志一步完成",
+    "completeIcon": "标志一步完成时的图标显示",
+    "editable": "表示步骤可编辑",
+    "editIcon": "步骤可编辑时的图标显示",
+    "errorIcon": "步骤错误时的图标显示",
+    "rules": "接受一个函数数组（array of functions），该数组接受一个输入值作为参数，并返回 **true / false** 或 a **string** 和一个错误消息",
+    "step": "要在步骤圈内显示的内容"
+  },
+  "events": {},
+  "contents": {}
+}
