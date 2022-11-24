@@ -1,11 +1,7 @@
 ﻿using BlazorComponent.Attributes;
 using OneOf;
 using System.Reflection;
-using System.Text.Encodings.Web;
-using System.Text.Json.Serialization;
-using System.Text.Json;
 using System.Text.RegularExpressions;
-using System.IO;
 
 namespace Masa.Docs.Shared.ApiGenerator;
 
@@ -50,7 +46,7 @@ public static class ApiGenerator
             };
 
             parametersCache.Add(typeName, value);
-        }        
+        }
     }
 
     static ParameterInfo MapToParameterInfo(PropertyInfo propertyInfo)

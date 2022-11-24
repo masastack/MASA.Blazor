@@ -1,6 +1,4 @@
-﻿using Masa.Blazor;
-
-namespace Masa.Docs.Shared.Examples.components.sliders;
+﻿namespace Masa.Docs.Shared.Examples.components.sliders;
 
 public class Usage : Masa.Docs.Shared.Components.Usage
 {

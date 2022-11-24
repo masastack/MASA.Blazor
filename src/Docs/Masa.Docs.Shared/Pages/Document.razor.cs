@@ -1,6 +1,6 @@
-﻿using System.Globalization;
+﻿using Microsoft.AspNetCore.Components.Routing;
+using System.Globalization;
 using System.Net;
-using Microsoft.AspNetCore.Components.Routing;
 
 namespace Masa.Docs.Shared.Pages;
 

@@ -44,6 +44,4 @@
     <Copy SourceFiles="@(ExamplesSourceFile)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\examples\%(Filename).txt" />
   </Target>
 	
-  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
-
 </Project>

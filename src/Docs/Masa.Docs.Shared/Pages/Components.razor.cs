@@ -187,53 +187,53 @@ public partial class Components
                 : ApiGenerator.ApiGenerator.parametersCache.Keys.FirstOrDefault(key => Regex.IsMatch(key.ToUpper(), $"[M|P]{{1}}{name}$".ToUpper()))
                 ?? ApiGenerator.ApiGenerator.parametersCache.Keys.FirstOrDefault(key => Regex.IsMatch(key.ToUpper(), $"[M|P]{{1}}{name + "s"}$".ToUpper()));
 
-        if (component is not null)
-        {
-            var parametersCacheValue = ApiGenerator.ApiGenerator.parametersCache[component];
-
-            parametersCacheValue = parametersCacheValue.Where(item => item.Value.Count > 0).ToDictionary(item => item.Key, item => item.Value);
-
-            var descriptionGroup = await DocService.ReadApisAsync(Page, isMultipleApi ? name : default);
-
-            if (descriptionGroup is not null)
+            if (component is not null)
             {
-                foreach (var group in descriptionGroup)
-                {
-                    if (!parametersCacheValue.ContainsKey(group.Key))
-                    {
-                        continue;
-                    }
+                var parametersCacheValue = ApiGenerator.ApiGenerator.parametersCache[component];
 
-                    var parameters = parametersCacheValue[group.Key];
-                    foreach (var (prop, desc) in group.Value)
+                parametersCacheValue = parametersCacheValue.Where(item => item.Value.Count > 0).ToDictionary(item => item.Key, item => item.Value);
+
+                var descriptionGroup = await DocService.ReadApisAsync(Page, isMultipleApi ? name : default);
+
+                if (descriptionGroup is not null)
+                {
+                    foreach (var group in descriptionGroup)
                     {
-                        var parameter = parameters.FirstOrDefault(param => param.Name.Equals(prop, StringComparison.OrdinalIgnoreCase));
-                        if (parameter is not null)
+                        if (!parametersCacheValue.ContainsKey(group.Key))
                         {
-                            parameter.Description = desc;
+                            continue;
+                        }
+
+                        var parameters = parametersCacheValue[group.Key];
+                        foreach (var (prop, desc) in group.Value)
+                        {
+                            var parameter = parameters.FirstOrDefault(param => param.Name.Equals(prop, StringComparison.OrdinalIgnoreCase));
+                            if (parameter is not null)
+                            {
+                                parameter.Description = desc;
+                            }
                         }
                     }
                 }
+
+                return parametersCacheValue;
             }
 
-            return parametersCacheValue;
+            return new Dictionary<string, List<ParameterInfo>>();
         }
-
-        return new Dictionary<string, List<ParameterInfo>>();
     }
-}
 
-private static string KebabToPascal(string name)
-{
-    name = name.Trim('-');
-    return string.Join("", name.Split('-').Select(item => char.ToUpper(item[0]) + item.Substring(1)));
-}
+    private static string KebabToPascal(string name)
+    {
+        name = name.Trim('-');
+        return string.Join("", name.Split('-').Select(item => char.ToUpper(item[0]) + item.Substring(1)));
+    }
 
-[return: NotNullIfNotNull("name")]
-private static string? FormatName(string? name)
-{
-    if (name is null) return null;
-    name = name.TrimEnd('s');
-    return KebabToPascal(name);
-}
+    [return: NotNullIfNotNull("name")]
+    private static string? FormatName(string? name)
+    {
+        if (name is null) return null;
+        name = name.TrimEnd('s');
+        return KebabToPascal(name);
+    }
 }

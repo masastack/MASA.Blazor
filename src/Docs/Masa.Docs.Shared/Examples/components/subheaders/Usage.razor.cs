@@ -1,7 +1,4 @@
-﻿using Masa.Blazor.Presets;
-using Microsoft.AspNetCore.Components.Web;
-
-namespace Masa.Docs.Shared.Examples.components.subheaders;
+﻿namespace Masa.Docs.Shared.Examples.components.subheaders;
 
 public class Usage : Components.Usage
 {

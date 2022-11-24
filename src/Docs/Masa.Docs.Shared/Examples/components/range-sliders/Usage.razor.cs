@@ -1,6 +1,4 @@
-﻿using Masa.Blazor;
-
-namespace Masa.Docs.Shared.Examples.components.range_sliders;
+﻿namespace Masa.Docs.Shared.Examples.components.range_sliders;
 
 public class Usage : Masa.Docs.Shared.Components.Usage
 {

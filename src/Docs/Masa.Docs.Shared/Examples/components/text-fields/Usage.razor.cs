@@ -1,6 +1,4 @@
-﻿using Masa.Blazor;
-
-namespace Masa.Docs.Shared.Examples.components.text_fields;
+﻿namespace Masa.Docs.Shared.Examples.components.text_fields;
 
 public class Usage : Masa.Docs.Shared.Components.Usage
 {

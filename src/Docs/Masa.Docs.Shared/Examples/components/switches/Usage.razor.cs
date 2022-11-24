@@ -1,6 +1,4 @@
-﻿using Masa.Blazor;
-
-namespace Masa.Docs.Shared.Examples.components.switches;
+﻿namespace Masa.Docs.Shared.Examples.components.switches;
 
 public class Usage : Masa.Docs.Shared.Components.Usage
 {

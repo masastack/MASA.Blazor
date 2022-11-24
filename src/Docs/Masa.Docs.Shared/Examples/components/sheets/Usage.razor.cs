@@ -1,6 +1,4 @@
-﻿using Masa.Blazor;
-
-namespace Masa.Docs.Shared.Examples.components.sheets;
+﻿namespace Masa.Docs.Shared.Examples.components.sheets;
 
 public class Usage : Masa.Docs.Shared.Components.Usage
 {
