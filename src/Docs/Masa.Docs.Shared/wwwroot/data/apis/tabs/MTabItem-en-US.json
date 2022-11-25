@@ -1,0 +1,9 @@
+{
+  "props": {
+    "reverseTransition": "The transition used when the component is reversing items. Can be one of the (built in transitions)[styles-and-animations/transitions] or one your own.",
+    "transition": "Sets the component transition. Can be one of the (built in transitions)[styles-and-animations/transitions] or one your own.",
+    "value": "Sets the value of the tab. If not provided, the index will be used."
+  },
+  "events": {},
+  "contents": {}
+}

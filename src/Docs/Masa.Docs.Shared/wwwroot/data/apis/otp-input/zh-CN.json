@@ -1,0 +1,12 @@
+{
+  "props": {
+    "length": "",
+    "plain": "",
+    "type": "",
+    "value": ""
+  },
+  "events": {
+    "onFinish": ""
+  },
+  "contents": {}
+}

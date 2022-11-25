@@ -1,0 +1,10 @@
+{
+  "props": {
+    "singleLine": "强制横幅变为一行。",
+    "sticky": "组件应用 position: sticky（常绿浏览器）。你能够在 [MDN documentation for sticky position](https://developer.mozilla.org/en-US/docs/Web/CSS/position) 浏览更多信息。",
+    "value": "控制组件可见还是隐藏。"
+  },
+  "contents": {},
+  "events": {},
+  "functions": {}
+}

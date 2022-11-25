@@ -1,0 +1,12 @@
+{
+  "props": {
+    "altLabels": "Places the labels beneath the step",
+    "nonLinear": "Allow user to jump to any step",
+    "shaped": "",
+    "show": "",
+    "value": "The designated model value for the component.",
+    "vertical": "Display steps vertically"
+  },
+  "events": {},
+  "contents": {}
+}

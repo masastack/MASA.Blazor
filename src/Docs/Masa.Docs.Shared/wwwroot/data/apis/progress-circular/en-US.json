@@ -1,0 +1,9 @@
+{
+  "props": {
+    "indeterminate": "Constantly animates, use when loading progress is unknown.",
+    "rotate": "Rotates the circle start point in deg",
+    "value": "The percentage value for current progress"
+  },
+  "events": {},
+  "contents": {}
+}

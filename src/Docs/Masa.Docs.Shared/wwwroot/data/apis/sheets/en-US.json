@@ -1,0 +1,8 @@
+{
+  "props": {
+    "shaped": "Applies a large border radius on the top left and bottom right of the card.",
+    "show": ""
+  },
+  "events": {},
+  "contents": {}
+}

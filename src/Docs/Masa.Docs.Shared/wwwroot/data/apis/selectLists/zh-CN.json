@@ -1,0 +1,26 @@
+{
+  "props": {
+    "action": "",
+    "hideSelected": "",
+    "itemDisabled": "",
+    "itemDivider": "",
+    "itemHeader": "",
+    "items": "",
+    "itemText": "",
+    "itemValue": "",
+    "noDataText": "",
+    "noFilter": "",
+    "searchInput": "",
+    "selectedIndex": "",
+    "selectedItems": ""
+  },
+  "events": {
+    "onSelect": ""
+  },
+  "contents": {
+    "appendItemContent": "",
+    "itemContent": "",
+    "noDataContent": "",
+    "prependItemContent": ""
+  }
+}

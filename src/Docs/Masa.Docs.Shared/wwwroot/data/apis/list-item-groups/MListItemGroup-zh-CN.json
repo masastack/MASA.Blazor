@@ -1,0 +1,13 @@
+{
+  "props": {
+    "max": "设置可以选择的最大数量。",
+    "multiple": "允许多个选择。",
+    "targetGroup": "",
+    "value": "组件的指定 model 值。",
+    "values": "组件的指定 model 值。"
+  },
+  "events": {
+    "valuesChanged": ""
+  },
+  "contents": {}
+}

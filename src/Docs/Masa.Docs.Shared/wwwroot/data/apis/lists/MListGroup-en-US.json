@@ -1,0 +1,16 @@
+{
+  "props": {
+    "appendIcon": "",
+    "group": "",
+    "noAction": "",
+    "prependIcon": "",
+    "subGroup": "",
+    "value": ""
+  },
+  "events": {},
+  "contents": {
+    "activatorContent": "",
+    "appendIconContent": "",
+    "prependIconContent": ""
+  }
+}

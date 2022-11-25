@@ -1,0 +1,25 @@
+{
+  "props": {
+    "attach": "指定此组件应该与哪个 DOM 元素分离。to.String 可以是任何有效的 querySelector，对象可以是任何有效的 Node。这将默认挂载到根节点 [MApp](/components/apps)。",
+    "closeDelay": "关闭主件延迟时间",
+    "contentClass": "将自定义类应用于分离的元素。这很有用，因为内容被移动到 [MApp](/components/apps) 组件的开头（除非提供了 `Attach` 属性），并且不被直接作为目标传递到组件上的类。",
+    "disabled": "禁用打开组件的能力。",
+    "openDelay": "打开主件延迟时间",
+    "openOnClick": "指定组件在其激活器点击时是否应激活。",
+    "openOnFocus": "指定组件在其激活器光标选中时是否应激活。",
+    "openOnHover": "指定组件在其激活器悬停时是否应激活。",
+    "origin": "设置元素上的动画原点。您可以在 MDN 文档上浏览更多 [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin)",
+    "overlayScrimClass": "overlayScrimClass",
+    "persistent": "在元素外部单击不会将其停用。",
+    "scrollable": "当设置为 true 时，期望有一个 [MCard](/components/cards) 和一个 [MCardText](components/cards/api/MCardText) 组件。",
+    "transition": "设置组件转换。可以是一个 [built in transitions](styles-and-animations/transitions) 或者是自己自定义的。",
+    "value": "控制组件可见还是隐藏。"
+  },
+  "contents": {
+    "activatorContent": "使用时，将在点击后激活组件（或悬停特定组件），它手动阻止事件传播。如果通过模型打开组件而没有此插槽，则需要手动阻止事件传播。"
+  },
+  "events": {
+    "onOutsideClick": "在活动对话框外部单击时激发的事件。"
+  },
+  "functions": {}
+}

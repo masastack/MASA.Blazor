@@ -1,6 +1,4 @@
-﻿using YamlDotNet.Core.Tokens;
-
-namespace Masa.Docs.Shared.Examples.components.progress_linear;
+﻿namespace Masa.Docs.Shared.Examples.components.progress_linear;
 
 public class Usage : Masa.Docs.Shared.Components.Usage
 {

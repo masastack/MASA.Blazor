@@ -1,4 +1,5 @@
 ﻿using Masa.Docs.Shared.ApiGenerator;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -166,10 +167,12 @@ public partial class Components
         var name = Page;
 
         var pageToApi = await DocService.ReadPageToApiAsync();
-
+        bool isMultipleApi = false;
         if (pageToApi.ContainsKey(Page))
         {
-            await pageToApi[Page].ForEachAsync(async componentName => { _apiData[componentName] = await getApiGroupAsync(componentName, true); });
+            var apis = pageToApi[Page];
+            isMultipleApi = apis.Count > 1;
+            await apis.ForEachAsync(async componentName => { _apiData[componentName] = await getApiGroupAsync(componentName, true); });
         }
         else
         {
@@ -181,7 +184,7 @@ public partial class Components
         {
             var component = isFullname
                 ? ApiGenerator.ApiGenerator.parametersCache.Keys.FirstOrDefault(key => key == name)
-                : ApiGenerator.ApiGenerator.parametersCache.Keys.FirstOrDefault(key => Regex.IsMatch(key, $"[M|P]{{1}}{name}$"));
+                : ApiGenerator.ApiGenerator.parametersCache.Keys.FirstOrDefault(key => Regex.IsMatch(key.ToUpper(), $"[M|P]{{1}}{name}s?$".ToUpper()));
 
             if (component is not null)
             {
@@ -189,7 +192,7 @@ public partial class Components
 
                 parametersCacheValue = parametersCacheValue.Where(item => item.Value.Count > 0).ToDictionary(item => item.Key, item => item.Value);
 
-                var descriptionGroup = await DocService.ReadApisAsync(Page);
+                var descriptionGroup = await DocService.ReadApisAsync(Page, isMultipleApi ? name : default);
 
                 if (descriptionGroup is not null)
                 {
@@ -225,8 +228,10 @@ public partial class Components
         return string.Join("", name.Split('-').Select(item => char.ToUpper(item[0]) + item.Substring(1)));
     }
 
-    private static string FormatName(string name)
+    [return: NotNullIfNotNull("name")]
+    private static string? FormatName(string? name)
     {
+        if (name is null) return null;
         name = name.TrimEnd('s');
         return KebabToPascal(name);
     }

@@ -1,0 +1,15 @@
+{
+  "props": {
+    "highlighted": "",
+    "inactive": "If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler",
+    "linkage": "",
+    "selectable": "Allow text selection inside MListItem. This prop uses (user-select)[https://developer.mozilla.org/en-US/docs/Web/CSS/user-select]",
+    "threeLine": "Increases list-item height for three lines. This prop uses (line-clamp)[https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp] and is not supported in all browsers.",
+    "twoLine": "Increases list-item height for two lines. This prop uses (line-clamp)[https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp] and is not supported in all browsers.",
+    "value": "The value used when a child of a (MItemGroup)[components/item-groups/api/MItemGroup]."
+  },
+  "events": {},
+  "contents": {
+    "itemContent": ""
+  }
+}

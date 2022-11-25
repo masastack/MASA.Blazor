@@ -1,0 +1,12 @@
+{
+  "props": {
+    "altLabels": "将标签置于步骤的下方",
+    "nonLinear": "允许用户跳过任意一步",
+    "shaped": "",
+    "show": "",
+    "value": "组件的指定 model 值。",
+    "vertical": "垂直显示步骤线"
+  },
+  "events": {},
+  "contents": {}
+}

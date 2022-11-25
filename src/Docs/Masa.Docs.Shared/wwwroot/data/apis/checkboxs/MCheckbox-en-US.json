@@ -1,0 +1,12 @@
+{
+  "props": {
+    "indeterminate": "",
+    "indeterminateIcon": "",
+    "offIcon": "",
+    "onIcon": ""
+  },
+  "events": {
+  },
+  "contents": {
+  }
+}

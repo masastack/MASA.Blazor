@@ -1,0 +1,12 @@
+{
+  "props": {
+    "autoGrow": "根据文本数量自动增长文本",
+    "noResize": "移除调整大小的句柄",
+    "rowHeight": "每行的高度值。 需要使用 `AutoGrow` 属性。",
+    "rows": "默认行数"
+  },
+  "events": {
+  },
+  "contents": {
+  }
+}

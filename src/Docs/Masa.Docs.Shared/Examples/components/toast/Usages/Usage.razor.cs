@@ -9,5 +9,5 @@ public class Usage : Components.Usage
     public Usage() : base(typeof(PToast))
     {
     }
-  
+
 }

@@ -1,0 +1,21 @@
+{
+  "props": {
+    "centerActive": "Forces the selected chip to be centered",
+    "column": "Remove horizontal pagination and wrap items as needed",
+    "max": "Sets a maximum number of selections that can be made.",
+    "multiple": "Allow multiple selections.",
+    "nextIcon": "Specify the icon to use for the next icon",
+    "prevIcon": "Specify the icon to use for the prev icon",
+    "showArrows": "Force the display of the pagination arrows",
+    "targetGroup": "",
+    "value": "The designated model value for the component.",
+    "values": "The designated model value for the component."
+  },
+  "events": {
+    "valuesChanged": ""
+  },
+  "contents": {
+    "nextContent": "",
+    "prevContent": ""
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "props": {
+    "itemChildren": "",
+    "itemDisabled": "",
+    "items": "",
+    "itemText": "",
+    "itemValue": "",
+    "title": "",
+    "value": "",
+    "visible": ""
+  },
+  "events": {
+    "onConfirm": "",
+    "onLoadChildren": "",
+    "visibleChanged": ""
+  },
+  "contents": {
+    "activatorContent": ""
+  }
+}

@@ -1,9 +1,4 @@
 ﻿using Masa.Blazor.Presets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Masa.Docs.Shared.Examples.components.image_captcha
 {

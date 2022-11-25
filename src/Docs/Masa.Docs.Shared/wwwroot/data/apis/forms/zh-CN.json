@@ -1,0 +1,15 @@
+{
+  "props": {
+    "enableI18n": "开启I18n,开启后表单校验输出的内容会从I18n读取",
+    "enableValidation": "开启表单校验",
+    "model": "需要表单校验的对象",
+    "readonly": "",
+    "value": "是否校验成功"
+  },
+  "events": {
+    "onInvalidSubmit": "",
+    "onSubmit": "",
+    "onValidSubmit": ""
+  },
+  "contents": {}
+}

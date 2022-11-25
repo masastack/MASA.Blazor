@@ -1,0 +1,10 @@
+{
+  "props": {
+    "offIcon": "不活动时使用的图标",
+    "onIcon": "激活时使用的图标"
+  },
+  "events": {
+  },
+  "contents": {
+  }
+}

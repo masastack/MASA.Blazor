@@ -1,0 +1,10 @@
+{
+  "props": {
+    "config": "",
+    "type": ""
+  },
+  "events": {
+    "onClose": ""
+  },
+  "contents": {}
+}

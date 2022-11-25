@@ -1,0 +1,21 @@
+{
+  "props": {
+    "anchorOptions": "",
+    "breaks": "",
+    "headerSections": "",
+    "html": "",
+    "langPrefix": "",
+    "linkify": "",
+    "noWrapper": "",
+    "quotes": "",
+    "scope": "",
+    "source": "",
+    "typographer": "",
+    "xHtmlOut": ""
+  },
+  "events": {
+    "onFrontMatterParsed": "",
+    "onTocParsed": ""
+  },
+  "contents": {}
+}

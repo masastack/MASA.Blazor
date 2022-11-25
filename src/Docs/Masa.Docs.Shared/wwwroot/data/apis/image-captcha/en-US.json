@@ -1,0 +1,23 @@
+{
+  "props": {
+    "captchaHeight": "",
+    "captchaWidth": "",
+    "clearable": "",
+    "clearIcon": "",
+    "errorMessage": "",
+    "filled": "",
+    "imageClass": "",
+    "imageStyle": "",
+    "label": "",
+    "onRefresh": "",
+    "placeholder": "",
+    "shaped": "",
+    "solo": "",
+    "textFieldClass": "",
+    "textFieldStyle": "",
+    "value": "",
+    "verifyCode": ""
+  },
+  "events": {},
+  "contents": {}
+}

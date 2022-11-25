@@ -1,0 +1,13 @@
+{
+  "props": {
+    "offset": "Offset.",
+    "value": "value.",
+    "wrapperStyle": "wrapperStyle."
+  },
+  "contents": {
+    "primaryContent": "PrimaryContent.",
+    "secondaryContent": "SecondaryContent."
+  },
+  "events": {},
+  "functions": {}
+}

@@ -1,0 +1,20 @@
+{
+  "props": {
+    "centerActive": "",
+    "max": "",
+    "multiple": "",
+    "nextIcon": "",
+    "prevIcon": "",
+    "showArrows": "",
+    "targetGroup": "",
+    "value": "",
+    "values": ""
+  },
+  "events": {
+    "valuesChanged": ""
+  },
+  "contents": {
+    "nextContent": "",
+    "prevContent": ""
+  }
+}
