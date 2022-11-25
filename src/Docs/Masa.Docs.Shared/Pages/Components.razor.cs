@@ -184,8 +184,7 @@ public partial class Components
         {
             var component = isFullname
                 ? ApiGenerator.ApiGenerator.parametersCache.Keys.FirstOrDefault(key => key == name)
-                : ApiGenerator.ApiGenerator.parametersCache.Keys.FirstOrDefault(key => Regex.IsMatch(key.ToUpper(), $"[M|P]{{1}}{name}$".ToUpper()))
-                ?? ApiGenerator.ApiGenerator.parametersCache.Keys.FirstOrDefault(key => Regex.IsMatch(key.ToUpper(), $"[M|P]{{1}}{name + "s"}$".ToUpper()));
+                : ApiGenerator.ApiGenerator.parametersCache.Keys.FirstOrDefault(key => Regex.IsMatch(key.ToUpper(), $"[M|P]{{1}}{name}s?$".ToUpper()));
 
             if (component is not null)
             {

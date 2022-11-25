@@ -56,14 +56,15 @@ public class DocService
 
     public async Task<Dictionary<string, Dictionary<string, string>>?> ReadApisAsync(string kebabCaseComponent, string? apiName = null)
     {
-        var key = $"{kebabCaseComponent}:{(apiName is null ? "" : apiName + ":")}{_i18n.Culture.Name}";
+
+        var key = $"{kebabCaseComponent}/{(apiName is null ? "" : apiName + "-")}{_i18n.Culture.Name}";
 
         try
         {
             return await _apiCache.GetOrAdd(key, async _ =>
             {
                 var apiInfo = await _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, string>>>(
-                $"_content/Masa.Docs.Shared/data/apis/{kebabCaseComponent}/{(apiName is null ? "" : apiName + "-")}{_i18n.Culture.Name}.json").ConfigureAwait(false);
+                $"_content/Masa.Docs.Shared/data/apis/{key}.json").ConfigureAwait(false);
                 var _commonApis = await _commonApisAsync;
                 if (_commonApis.TryGetValue(_i18n.Culture.Name, out var commonApiInfo))
                 {
