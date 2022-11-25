@@ -58,7 +58,7 @@ public partial class AppService
         return await _navs.Value;
     }
 
-    public string GetColor(string tag)
+    public static string GetColor(string tag)
     {
         return _tagColors.ContainsKey(tag) ? _tagColors[tag] : "primary";
     }
