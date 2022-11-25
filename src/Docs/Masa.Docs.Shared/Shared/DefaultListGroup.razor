@@ -15,7 +15,7 @@
         </MListItemContent>
         @if (HasTag)
         {
-            <Chip Color="@AppService.GetColor(Item!.Tag!)">@I18n.T($"tag.{Item.Tag}")</Chip>
+            <ColorChip Color="@AppService.GetColor(Item!.Tag!)" Small>@I18n.T($"tag.{Item.Tag}")</ColorChip>
         }
     </ActivatorContent>
     <PrependIconContent>

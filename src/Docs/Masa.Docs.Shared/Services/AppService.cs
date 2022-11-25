@@ -19,11 +19,11 @@ public partial class AppService
 
     private static Dictionary<string, string> _tagColors = new()
     {
-        { "preset", "#448AFF" },
-        { "service", "#AB47BC" },
-        { "new", "#05CD99" },
-        { "updated", "#F48FB1" },
-        { "js-proxy", "#FF5252" }
+        { "preset", "blue" },
+        { "service", "purple" },
+        { "new", "green" },
+        { "updated", "red" },
+        { "js-proxy", "pink" }
     };
 
     public event EventHandler<List<MarkdownItTocContent>?>? TocChanged;
