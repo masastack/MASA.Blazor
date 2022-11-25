@@ -1,4 +1,5 @@
 ﻿@inject I18n I18n
+@inject AppService AppService
 @typeparam TItem where TItem : IDefaultItem<TItem>
 
 <MListGroup Group="@GenGroup(Item.Children)"
@@ -10,14 +11,18 @@
             @if (Item.Title is not null)
             {
                 <MListItemTitle>@I18n.T(Item.Title)</MListItemTitle>
-            }
+            }             
         </MListItemContent>
+        @if (HasTag)
+        {
+            <Chip Color="@AppService.GetColor(Item!.Tag!)">@I18n.T($"tag.{Item.Tag}")</Chip>
+        }
     </ActivatorContent>
     <PrependIconContent>
         <MIcon Color="primary">@(string.IsNullOrWhiteSpace(Item.Icon) ? "mdi-menu-down" : Item.Icon)</MIcon>
     </PrependIconContent>
     <ChildContent>
-        @foreach (var child in Item.Children)
+        @foreach (var child in Item.Children!)
         {
             if (child.Heading is not null)
             {
@@ -49,6 +54,8 @@
 
     [Parameter]
     public bool SubGroup { get; set; }
+
+    bool HasTag => !string.IsNullOrEmpty(Item?.Tag);
 
     List<string> GenGroup(List<TItem>? items)
     {

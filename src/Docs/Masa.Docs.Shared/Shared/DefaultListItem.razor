@@ -1,9 +1,10 @@
 ﻿@inject I18n I18n
+@inject AppService AppService
 @typeparam TItem where TItem : IDefaultItem<TItem>
 
-<MListItem Href="@Item.Href"
+<MListItem Href="@Item?.Href"
            Class="m-list-item--default">
-    @if (Item.Icon is not null)
+    @if (Item?.Icon is not null)
     {
         <MListItemIcon>
             <MIcon>@Item.Icon</MIcon>
@@ -11,15 +12,21 @@
     }
 
     <MListItemContent>
-        <MListItemTitle>@I18n.T(Item.Title)</MListItemTitle>
+        <MListItemTitle>@I18n.T(Item?.Title)</MListItemTitle>
     </MListItemContent>
+
+    @if (HasTag)
+    {
+        <Chip Color="@AppService.GetColor(Item!.Tag!)">@I18n.T($"tag.{Item.Tag}")</Chip>
+    }
 </MListItem>
 
 @code {
 
     [Parameter, EditorRequired]
-    public TItem Item { get; set; }
+    public TItem? Item { get; set; }
 
     private string Href => "/todo";
 
+    bool HasTag => !string.IsNullOrEmpty(Item?.Tag);
 }

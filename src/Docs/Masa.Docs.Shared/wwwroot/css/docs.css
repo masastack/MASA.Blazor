@@ -153,3 +153,12 @@ h7.m-heading {
     height: 100% !important;
     align-items: center;
 }
+
+.default-chip {
+    padding: 4px;
+    color: white;
+    border-radius: 12px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+}

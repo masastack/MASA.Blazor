@@ -12,8 +12,12 @@ public class DefaultItem : IDefaultItem<DefaultItem>
 
     public string? Title { get; set; }
 
+    public string? Tag { get; set; }
+
     public StringNumber Value { get; set; }
+
     public List<DefaultItem>? Children { get; set; }
+
     public bool HasChildren => Children.Any();
 }
 
@@ -28,6 +32,8 @@ public interface IDefaultItem<TItem>
     string? Icon { get; set; }
 
     string? Title { get; set; }
+
+    string? Tag { get; set; }
 
     StringNumber Value { get; set; }
 

@@ -17,6 +17,15 @@ public partial class AppService
     private readonly Lazy<Task<List<NavItem>>> _navs;
     private List<MarkdownItTocContent>? _toc;
 
+    private static Dictionary<string, string> _tagColors = new()
+    {
+        { "preset", "#448AFF" },
+        { "service", "#AB47BC" },
+        { "new", "#05CD99" },
+        { "updated", "#F48FB1" },
+        { "js-proxy", "#FF5252" }
+    };
+
     public event EventHandler<List<MarkdownItTocContent>?>? TocChanged;
 
     public AppService(IHttpClientFactory factory)
@@ -47,5 +56,10 @@ public partial class AppService
     public async Task<List<NavItem>> GetNavs()
     {
         return await _navs.Value;
+    }
+
+    public string GetColor(string tag)
+    {
+        return _tagColors.ContainsKey(tag) ? _tagColors[tag] : "primary";
     }
 }
