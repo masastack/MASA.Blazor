@@ -1,0 +1,22 @@
+﻿@using Masa.Blazor.Components.MonacoEditor;
+@using Masa.Blazor.Components.MonacoEditor.Options
+
+<MCard>
+    <MMonacoEditor @ref="_editor" @Id="@Id" @DefaultInitOptions="@_EditorOptions" @Value="@Value"/>
+</MCard>
+
+@code {
+    private MMonacoEditor _editor;
+
+    public EditorOptions _EditorOptions { get; set; } = new ();
+
+    public string Value { get; set; } = "code";
+
+    public string Id { get; set; } = Guid.NewGuid().ToString("N");
+
+    public async void GetValue()
+    {
+        var data = await _editor.GetValue();
+    }
+
+}

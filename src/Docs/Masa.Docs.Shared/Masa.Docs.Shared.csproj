@@ -37,7 +37,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Examples\components\monaco-editor\Index.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ExamplesSourceFile Remove="Examples\components\monaco-editor\Index.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Masa.Blazor\Masa.Blazor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Examples\components\monaco-editor\Index.razor" />
   </ItemGroup>
 	
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">

@@ -155,6 +155,10 @@
         "title": "modals",
         "tag": "preset"
       },
+      {
+        "title": "monaco-editor",
+        "tag": "preset"
+      },
       "navigation-drawers",
       {
         "title": "not-grouped",
