@@ -3,6 +3,12 @@
 public class EditorOptions
 {
     /// <summary>
+    /// The initial Language of the auto created model in the editor.
+    /// To not automatically create a model, use `model: null`.
+    /// </summary>
+    public string Language { get; set; }
+
+    /// <summary>
     /// This editor is used inside a diff editor.
     /// </summary>
     public bool InDiffEditor { get; set; }
@@ -79,7 +85,7 @@ public class EditorOptions
     /// Defaults to "https://go.microsoft.com/fwlink/?linkid=852450"
     /// </summary>
     public string AccessibilityHelpUrl { get; set; } = "https://go.microsoft.com/fwlink/?linkid=852450";
-    
+
     /// <summary>
     /// Configure the editor's accessibility support.
     /// Defaults to 'auto'. It is best to leave this to 'auto'.
@@ -121,14 +127,14 @@ public class EditorOptions
 
     /// <summary>
     /// Options for auto closing brackets.
-    /// Defaults to language defined behavior.
+    /// Defaults to Language defined behavior.
     /// 'always' | 'languageDefined' | 'beforeWhitespace' | 'never'
     /// </summary>
     public string AutoClosingBrackets { get; set; } = "languageDefined";
 
     /// <summary>
     ///  Options for auto closing quotes.
-    ///  Defaults to language defined behavior.
+    ///  Defaults to Language defined behavior.
     ///  'always' | 'languageDefined' | 'beforeWhitespace' | 'never'
     /// </summary>
     public string AutoClosingQuotes { get; set; } = "languageDefined";
@@ -230,7 +236,7 @@ public class EditorOptions
     /// <summary>
     /// Control the behavior of the find widget.
     /// </summary>
-    public EditorFindOptions Find { get; set; } = new ();
+    public EditorFindOptions Find { get; set; } = new();
 
     /// <summary>
     /// Display overflow widgets as `fixed`.
@@ -255,7 +261,7 @@ public class EditorOptions
     /// The font family
     /// </summary>
     public string FontFamily { get; set; }
-    
+
     /// <summary>
     /// Enable font ligatures.
     /// Defaults to false.
@@ -293,13 +299,26 @@ public class EditorOptions
     /// <summary>
     /// Configure the editor's hover.
     /// </summary>
-    public EditorHoverOptions Hover { get; set; } = new ();
+    public EditorHoverOptions Hover { get; set; } = new();
+
+
+
 
     /// <summary>
-    /// The initial language of the auto created model in the editor.
+    /// Initial theme to be used for rendering.
+    /// The current out-of-the-box available themes are: 'vs' (default), 'vs-dark', 'hc-black', 'hc-light.
+    /// You can create custom themes via `monaco.editor.defineTheme`.
+    /// To switch a theme, use `monaco.editor.setTheme`.
+    /// **NOTE**: The theme might be overwritten if the OS is in high contrast mode, unless `autoDetectHighContrast` is set to false.
+    /// </summary>
+    public string Theme { get; set; } = "vs";
+
+    /// <summary>
+    /// The initial value of the auto created model in the editor.
     /// To not automatically create a model, use `model: null`.
     /// </summary>
-    public string Language { get; set; }
+    public string Value { get; set; }
+
 
     /// <summary>
     /// The letter spacing
@@ -309,7 +328,7 @@ public class EditorOptions
     /// <summary>
     /// Control the behavior and rendering of the minimap.
     /// </summary>
-    public EditorMinimapOptions Minimap { get; set; } = new ();
+    public EditorMinimapOptions Minimap { get; set; } = new();
 
     /// <summary>
     /// The line height for the suggest widget.
@@ -329,11 +348,6 @@ public class EditorOptions
     ///  'never' | 'near' | 'always'
     /// </summary>
     public string MatchBrackets { get; set; } = "always";
-
-    /// <summary>
-    /// The initial model associated with this code editor.
-    /// </summary>
-    public TextModelOptions model { get; set; } = new ();
 
     /// <summary>
     ///  A multiplier to be used on the `deltaX` and `deltaY` of mouse wheel scroll events.
@@ -380,7 +394,7 @@ public class EditorOptions
     /// <summary>
     /// Parameter hint options.
     /// </summary>
-    public EditorParameterHintOptions EditorParameterHints { get; set; } = new ();
+    public EditorParameterHintOptions EditorParameterHints { get; set; } = new();
 
     /// <summary>
     /// Enable quick suggestions (shadow suggestions)
@@ -429,7 +443,7 @@ public class EditorOptions
     /// Defaults to true.
     /// </summary>
     public bool RoundedSelection { get; set; } = true;
-    
+
     /// <summary>
     /// Enable that scrolling can go beyond the last column by a number of columns.
     /// Defaults to 5.
@@ -445,7 +459,7 @@ public class EditorOptions
     /// <summary>
     /// Control the behavior and rendering of the scrollbars.
     /// </summary>
-    public EditorScrollbarOptions EditorScrollbar { get; set; } = new ();
+    public EditorScrollbarOptions EditorScrollbar { get; set; } = new();
 
     /// <summary>
     /// Enable selection highlight.
@@ -463,7 +477,7 @@ public class EditorOptions
     /// Controls fading out of unused variables.
     /// </summary>
     public bool ShowUnused { get; set; }
-    
+
     /// <summary>
     /// Enable that the editor animates scrolling to a position.
     /// Defaults to false.
@@ -515,14 +529,6 @@ public class EditorOptions
     /// </summary>
     public string TabCompletion { get; set; }
 
-    /// <summary>
-    /// Initial theme to be used for rendering.
-    /// The current out-of-the-box available themes are: 'vs' (default), 'vs-dark', 'hc-black', 'hc-light.
-    /// You can create custom themes via `monaco.editor.defineTheme`.
-    /// To switch a theme, use `monaco.editor.setTheme`.
-    /// **NOTE**: The theme might be overwritten if the OS is in high contrast mode, unless `autoDetectHighContrast` is set to false.
-    /// </summary>
-    public string Theme { get; set; } = "vs";
 
     /// <summary>
     ///  Inserting and deleting whitespace follows tab stops.
@@ -530,17 +536,11 @@ public class EditorOptions
     public bool UseTabStops { get; set; }
 
     /// <summary>
-    /// The initial value of the auto created model in the editor.
-    /// To not automatically create a model, use `model: null`.
-    /// </summary>
-    public string Value { get; set; }
-
-    /// <summary>
     /// Controls whether completions should be computed based on words in the document.
     /// Defaults to true.
     /// </summary>
     public bool WordBasedSuggestions { get; set; } = true;
-    
+
     /// <summary>
     /// Control the wrapping of the editor.
     /// When `wordWrap` = "off", the lines will never wrap.

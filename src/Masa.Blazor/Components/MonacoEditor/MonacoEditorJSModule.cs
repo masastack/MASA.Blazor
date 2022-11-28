@@ -26,8 +26,8 @@ public class MonacoEditorJSModule : JSModule
     public async ValueTask<TextModelOptions> GetModel(string id, Uri uri)
         => await InvokeAsync<TextModelOptions>("getModel", id, uri);
 
-    public async ValueTask SetModelLanguage(string id, TextModelOptions model, string languageId) 
-        => await InvokeVoidAsync("setModelLanguage", id, model, languageId);
+    public async ValueTask SetModelLanguage(string id, string languageId) 
+        => await InvokeVoidAsync("setModelLanguage", id,languageId);
 
     public async ValueTask RemeasureFonts(string id)
         => await InvokeVoidAsync("remeasureFonts", id);

@@ -51,12 +51,12 @@ export function getModel(id, uri) {
     }
     return myEditor.editor.getModel(uri);
 }
-export function setModelLanguage(id, model, languageId) {
+export function setModelLanguage(id,languageId) {
     let myEditor = window.MasaBlazor.Editors.find(e => e.id === id);
     if (!myEditor) {
         throw `Could not find a editor with id: '${window.MasaBlazor.Editors.length}' '${id}'`;
     }
-    myEditor.editor.setModelLanguage(model, languageId);
+    monaco.editor.setModelLanguage(myEditor.editor.getModel(), languageId);
 }
 export function remeasureFonts(id) {
     let myEditor = window.MasaBlazor.Editors.find(e => e.id === id);

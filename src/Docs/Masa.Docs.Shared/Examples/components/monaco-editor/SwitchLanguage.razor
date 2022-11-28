@@ -1,0 +1,57 @@
+﻿@using Masa.Blazor.Components.MonacoEditor;
+@using Masa.Blazor.Components.MonacoEditor.Options
+
+<MCard>
+    <MButton OnClick="()=>SetLanguage()">切换语法</MButton>
+    <MButton OnClick="()=>GetValue()">获取到编辑器的值</MButton>
+    <MDivider></MDivider>
+    <MTextField @bind-Value="_EditorOptions.Language"
+                Label="语法支持"
+                Outlined></MTextField>
+
+    <MMonacoEditor @ref="_editor" Id="@Id" EditorOptions="@_EditorOptions" Width="@("500px")" Height="@("500px")" />
+
+
+</MCard>
+
+<MDivider>获取值显示</MDivider>
+<MCard>
+    @_EditorOptions.Value
+</MCard>
+
+@code {
+    private MMonacoEditor _editor;
+
+    public EditorOptions _EditorOptions { get; set; } = new()
+        {
+            Value = "using System;\r\n"+
+                    "namespace HelloWorldApplication\r\n"+
+                    "{\r\n"+
+                    "    /* 类名为 HelloWorld */\r\n"+
+                    "    class HelloWorld\r\n"+
+                    "    {\r\n"+
+                    "        /* main函数 */\r\n"+
+                    "        static void Main(string[] args)\r\n"+
+                    "        {\r\n"+
+                    "            /* 我的第一个 C# 程序 */\r\n"+
+                    "            Console.WriteLine(\"Hello World!\");\r\n"+
+                        "            Console.ReadKey();\r\n"+
+                        "        }\r\n"+
+                        "    }\r\n"+
+                        "}",
+            Language = "csharp"
+        };
+
+    public string Id { get; set; } = Guid.NewGuid().ToString("N");
+
+    private async Task SetLanguage()
+    {
+        await _editor.SetModelLanguage(_EditorOptions.Language);
+    }
+
+    private async Task GetValue()
+    {
+        _EditorOptions.Value = await _editor.GetValue();
+        StateHasChanged();
+    }
+}

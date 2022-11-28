@@ -2,21 +2,20 @@
 @using Masa.Blazor.Components.MonacoEditor.Options
 
 <MCard>
-    <MMonacoEditor @ref="_editor" @Id="@Id" @DefaultInitOptions="@_EditorOptions" @Value="@Value"/>
+    <MMonacoEditor @ref="_editor" Id="@Id" EditorOptions="@_EditorOptions" Width="@("500px")" Height="@("500px")" />
 </MCard>
 
 @code {
     private MMonacoEditor _editor;
 
-    public EditorOptions _EditorOptions { get; set; } = new ();
+    public EditorOptions _EditorOptions { get; set; } = new()
+        {
+            Value = "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n<meta charset=\"utf-8\">\r\n<title>MASA组件编辑器(runoob.com)</title>\r\n<script>\r\nfunction displayDate(){\r\n\tdocument.getElementById(\"demo\").innerHTML=Date();\r\n}\r\n</script>\r\n</head>\r\n<body>\r\n\r\n<h1>我的第一个 JavaScript 程序</h1>\r\n<p id=\"demo\">这是一个段落</p>\r\n\r\n<button type=\"button\" onclick=\"displayDate()\">显示日期</button>\r\n\r\n</body>\r\n</html>",
+            Language = "html"
+        };
 
-    public string Value { get; set; } = "code";
 
     public string Id { get; set; } = Guid.NewGuid().ToString("N");
 
-    public async void GetValue()
-    {
-        var data = await _editor.GetValue();
-    }
 
 }

@@ -44,6 +44,10 @@
     <_ContentIncludedByDefault Remove="wwwroot\pages\components\monaco-editor\examples\Index.txt" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Examples\components\monaco-editor\SwitchLanguage.razor" />
+  </ItemGroup>
+
 	
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">
     <Copy SourceFiles="@(ExamplesSourceFile)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\examples\%(Filename).txt" />

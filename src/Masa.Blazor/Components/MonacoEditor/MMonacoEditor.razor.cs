@@ -27,10 +27,7 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
 
     [Parameter]
     public StringNumber MaxHeight { get; set; }
-
-    [Parameter]
-    public Action<EditorOptions> InitOptions { get; set; }
-
+    
     [Parameter]
     public object Option { get; set; } = new { };
 
@@ -46,8 +43,8 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
     [CascadingParameter(Name = "IsDark")]
     public bool CascadingIsDark { get; set; }
 
-    [Parameter]
-    public EditorOptions DefaultInitOptions { get; set; }
+    [Parameter] public EditorOptions EditorOptions { get; set; } = new ();
+
 
     private bool _isMonacoEditorDisposed = false;
 
@@ -86,41 +83,27 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
             });
     }
 
-    protected override void OnParametersSet()
+    protected override async Task OnInitializedAsync()
     {
-        InitOptions?.Invoke(DefaultInitOptions);
+
+        await InitMonaco();
+        await base.OnInitializedAsync();
     }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (IsDisposed)
-        {
-            return;
-        }
-
-        if (firstRender || _isMonacoEditorDisposed)
-        {
-            _isMonacoEditorDisposed = false;
-            await InitMonaco();
-        }
-
-        if (_prevOption != Option)
-        {
-            _prevOption = Option;
-
-            if (firstRender) return;
-
-        }
-    }
+    
 
     public async Task InitMonaco()
     {
-        await Module.Init(Id,DefaultInitOptions??new EditorOptions());
+        await Module.Init(Id, EditorOptions);
     }
 
     public async Task<string> GetValue()
     {
         return await Module.GetValue(Id);
+    }
+
+    public async Task SetModelLanguage(string language)
+    {
+        await Module.SetModelLanguage(Id, language);
     }
 
     public async Task<bool> SetValue(string newValue)
