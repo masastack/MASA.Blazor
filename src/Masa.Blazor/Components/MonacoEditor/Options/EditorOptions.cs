@@ -562,11 +562,6 @@ public class EditorOptions
     public string WordWrapBreakBeforeCharacters { get; set; } = "{([+";
 
     /// <summary>
-    /// Configure word wrapping characters. A break will be introduced before these characters.
-    /// </summary>
-    public string wordWrapBreakBeforeCharacters { get; set; } = ".";
-
-    /// <summary>
     /// Control the wrapping of the editor.
     /// When `wordWrap` = "off", the lines will never wrap.
     /// When `wordWrap` = "on", the lines will wrap at the viewport width.

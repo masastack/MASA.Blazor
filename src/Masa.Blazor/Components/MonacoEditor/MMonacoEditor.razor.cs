@@ -43,9 +43,6 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
     [Parameter]
     public string Theme { get; set; }
 
-    [Parameter]
-    public string Id { get; set; }
-
     [CascadingParameter(Name = "IsDark")]
     public bool CascadingIsDark { get; set; }
 
@@ -118,9 +115,8 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
 
     public async Task InitMonaco()
     {
-        await Module.Init(Id,DefaultInitOptions);
+        await Module.Init(Id,DefaultInitOptions??new EditorOptions());
     }
-
 
     public async Task<string> GetValue()
     {

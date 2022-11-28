@@ -1,5 +1,6 @@
 ﻿using BlazorComponent.Web;
 using Masa.Blazor;
+using Masa.Blazor.Components.MonacoEditor;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
@@ -37,6 +38,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IAbstractComponentTypeMapper, MasaBlazorComponentTypeMapper>();
 
         services.TryAddScoped<EChartsJSModule>();
+        services.TryAddScoped<MonacoEditorJSModule>();
         services.TryAddScoped<MarkdownItJSModule>();
         services.TryAddScoped<GridstackJSModule>();
 

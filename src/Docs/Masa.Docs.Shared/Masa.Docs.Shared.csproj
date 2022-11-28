@@ -40,6 +40,10 @@
     <ProjectReference Include="..\..\Masa.Blazor\Masa.Blazor.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\pages\components\monaco-editor\examples\Index.txt" />
+  </ItemGroup>
+
 	
   <Target Name="CopyExmaplesToTxt" AfterTargets="Build">
     <Copy SourceFiles="@(ExamplesSourceFile)" DestinationFiles="wwwroot\pages\%(RecursiveDir)\examples\%(Filename).txt" />
