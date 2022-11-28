@@ -10,14 +10,8 @@
         </MListItemIcon>
     }
 
-    <MListItemContent>
-        <MListItemTitle>@I18n.T(Item?.Title)</MListItemTitle>
-    </MListItemContent>
+    <NavItemContent Item="Item" />
 
-    @if (HasTag)
-    {
-        <ColorChip Color="@AppService.GetColor(Item!.Tag!)" Small>@I18n.T($"tag.{Item.Tag}")</ColorChip>
-    }
 </MListItem>
 
 @code {
