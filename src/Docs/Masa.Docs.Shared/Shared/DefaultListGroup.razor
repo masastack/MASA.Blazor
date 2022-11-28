@@ -1,27 +1,18 @@
 ﻿@inject I18n I18n
 @typeparam TItem where TItem : IDefaultItem<TItem>
 
-<MListGroup Group="@GenGroup(Item.Children)"
+<MListGroup Group="@GenGroup(Item?.Children)"
             Class="m-list-group--default"
             NoAction
             SubGroup="SubGroup">
     <ActivatorContent>
-        <MListItemContent>
-            @if (Item.Title is not null)
-            {
-                <MListItemTitle>@I18n.T(Item.Title)</MListItemTitle>
-            }             
-        </MListItemContent>
-        @if (HasTag)
-        {
-            <ColorChip Color="@AppService.GetColor(Item!.Tag!)" Small>@I18n.T($"tag.{Item.Tag}")</ColorChip>
-        }
+        <NavItemContent Item="Item" />
     </ActivatorContent>
     <PrependIconContent>
-        <MIcon Color="primary">@(string.IsNullOrWhiteSpace(Item.Icon) ? "mdi-menu-down" : Item.Icon)</MIcon>
+        <MIcon Color="primary">@(string.IsNullOrWhiteSpace(Item?.Icon) ? "mdi-menu-down" : Item.Icon)</MIcon>
     </PrependIconContent>
     <ChildContent>
-        @foreach (var child in Item.Children!)
+        @foreach (var child in Item?.Children ?? new())
         {
             if (child.Heading is not null)
             {
@@ -49,24 +40,24 @@
     public string? Icon { get; set; }
 
     [Parameter, EditorRequired]
-    public TItem Item { get; set; }
+    public TItem? Item { get; set; }
 
     [Parameter]
     public bool SubGroup { get; set; }
 
     bool HasTag => !string.IsNullOrEmpty(Item?.Tag);
 
-    List<string> GenGroup(List<TItem>? items)
+    List<string?> GenGroup(List<TItem>? items)
     {
-        if (items == null || !items.Any()) return new List<string>();
+        if (items == null || !items.Any()) return new List<string?>();
 
-        var groups = new List<string>();
+        var groups = new List<string?>();
 
         foreach (var item in items)
         {
             groups.AddRange(GenGroup(item.Children));
             if (item.HasChildren()) continue;
-            groups.Add(item.Href);
+            groups.Add(item?.Href);
         }
 
         return groups;
