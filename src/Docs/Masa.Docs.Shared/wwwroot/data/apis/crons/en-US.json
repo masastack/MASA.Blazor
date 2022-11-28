@@ -1,0 +1,10 @@
+{
+  "props": {
+    "value": "value。"
+  },
+  "contents": {
+    "onCopy": "OnCopy"
+  },
+  "events": {},
+  "functions": {}
+}

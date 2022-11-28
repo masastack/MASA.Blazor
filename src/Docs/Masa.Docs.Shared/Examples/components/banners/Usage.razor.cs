@@ -22,7 +22,7 @@
 
         protected override RenderFragment GenChildContent() => builder =>
         {
-            builder.OpenElement(0,"span");
+            builder.OpenElement(0, "span");
             builder.AddContent(1, "A banner for use on desktop / mobile");
             builder.CloseComponent();
         };

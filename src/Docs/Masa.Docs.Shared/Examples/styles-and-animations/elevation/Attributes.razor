@@ -1,0 +1,17 @@
+﻿<div class="text--primary">
+    <!-- Using the elevation prop -->
+    <MHover>
+        <MCard @attributes="context.Attrs" Elevation="@(context.Hover ? 24 : 6)" Class="@($"{context.Class} mx-auto pa-6")">
+            Prop based elevation
+        </MCard>
+    </MHover>
+
+    <div class="my-6"></div>
+
+    <!-- Using a dynamic class -->
+    <MHover>
+        <div @attributes="context.Attrs" class="@($"{context.Class} mx-auto pa-6 transition-swing elevation-{(context.Hover ? 24 : 6)}")">
+            Class based elevation
+        </div>
+    </MHover>
+</div>

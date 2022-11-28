@@ -70,6 +70,7 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
     public string Color { get; set; }
 
     private Scroller _scroller;
+    private bool _haveRendered;
 
     public bool CanScroll => HideOnScroll || !InputValue;
 
@@ -127,12 +128,17 @@ public partial class MBottomNavigation : MItemGroup, IMeasurable, IScrollable, I
 
         _scroller.ScrollThreshold = ScrollThreshold;
 
-        await UpdateApplication();
+        if (_haveRendered)
+        {
+            await UpdateApplication();
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
+
+        _haveRendered = true;
 
         if (firstRender)
         {

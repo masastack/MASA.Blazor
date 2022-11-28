@@ -1,4 +1,4 @@
-﻿@page "/components/{page}/{tab?}"
+﻿@page "/components/{page}/{tab?}/{api?}"
 
 <MContainer Class="pa-4 pa-sm-6 pa-md-8"
             Fluid
@@ -15,8 +15,8 @@
         }
 
         <MTabs Value="IsApiTab.ToString()" Class="m-bar--underline mb-12">
-            <MTab Value="@("False")" OnClick="@(() => NavigateToTab(""))">DEMO</MTab>
-            <MTab Value="@("True")" OnClick="@(() => NavigateToTab("api"))">API</MTab>
+            <MTab Class="ordinary-text" Value="@("False")" OnClick="@(() => NavigateToTab(""))">DEMO</MTab>
+            <MTab Class="ordinary-text" Value="@("True")" OnClick="@(() => NavigateToTab("api"))">API</MTab>
         </MTabs>
 
         @if (IsApiTab && _apiData.Count == 0)
@@ -31,7 +31,7 @@
         {
             <FadeTransition LeaveAbsolute>
                 <ShowTransitionElement Tag="div" Value="@IsApiTab">
-                    <Apis Data="@_apiData"></Apis>
+                    <Apis @bind-Value="@CurrentApi" Data="@_apiData"></Apis>
                 </ShowTransitionElement>
                 <ShowTransitionElement Tag="div" Value="@(!IsApiTab)">
                     <DocumentMarkdownIt Source="@_md"

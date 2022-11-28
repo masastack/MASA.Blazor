@@ -1,0 +1,15 @@
+{
+  "props": {
+    "dense": "减小列表块的最大宽度",
+    "disabled": "禁用所有子级的 (MListItem)[components/lists/api/MListItem] 组件",
+    "expand": "将只有在明确关闭后才会折叠起来",
+    "if": "",
+    "nav": "另一种样式可以减小 (MListItem)[components/lists/api/MListItem] 的宽度并圆角化。 通常与 (MNavigationDrawer)[components/navigation-drawers] 一起使用",
+    "shaped": "为 v-list-item 提供一个可选的活动样式。",
+    "subheader": "会移除上边距（top padding），当前面只有一个列表组标题的时候使用",
+    "threeLine": "增加三行的列表项高度。 该属性使用 (line-clamp)[https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp] ，并非所有浏览器都支持。",
+    "twoLine": "增加三行的列表项高度。 该属性使用  (line-clamp)[https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp] ，并非所有浏览器都支持。"
+  },
+  "events": {},
+  "contents": {}
+}

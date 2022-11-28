@@ -1,0 +1,12 @@
+{
+  "props": {
+    "items": "要显示的项目数组",
+    "itemSize": "一次显示多少条数据",
+    "overscanCount": "提前准备多少条数据"
+  },
+  "events": {},
+  "contents": {
+    "footerContent": "",
+    "itemContent": ""
+  }
+}

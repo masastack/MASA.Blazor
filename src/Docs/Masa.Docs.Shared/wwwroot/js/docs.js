@@ -56,8 +56,14 @@ window.getTimeOffset = function () {
 /*
  * markdown-it-proxy would invoke this function to set rules.
  */
-window.BlazorComponent.markdownItRules = function (key, markdownIt) {
-  if (key !== "document") return;
+window.MasaBlazor.markdownItRules = function (scope, markdownIt) {
+  if (scope === "document") {
+    addHeadingRules(markdownIt);
+    addLinkRules(markdownIt);
+  }
+  else if (scope === "desc") {
+    addLinkRules(markdownIt)
+  }
 
   addHeadingRules(markdownIt);
   addLinkRules(markdownIt);

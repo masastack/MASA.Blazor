@@ -1,0 +1,20 @@
+﻿<div>
+    <div class="d-flex flex-column mb-6">
+        @for (var i = 1; i <= 3; i++)
+        {
+            var num = i;
+            <MCard Class="pa-2" Outlined Tile>
+                @($"Flex item {num}")
+            </MCard>
+        }
+    </div>
+    <div class="d-flex flex-column-reverse">
+        @for (var i = 1; i <= 3; i++)
+        {
+            var num = i;
+            <MCard Class="pa-2" Outlined Tile>
+                @($"Flex item {num}")
+            </MCard>
+        }
+    </div>
+</div>

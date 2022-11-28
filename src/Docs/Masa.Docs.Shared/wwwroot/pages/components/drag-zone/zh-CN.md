@@ -10,11 +10,8 @@ tag: js-proxy
 
 <drag-zone-usage></drag-zone-usage>
 
-<!--alert:info-->
-使用前需要引入 `Sorttable.js`：
-<br />
-`<script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>`。
-<!--/alert:info-->
+<app-alerts type="info" content='使用前需要引入 `Sorttable.js`：`<script src="https://cdn.masastack.com/npm/sortable/Sortable.min.js"></script>`。'></app-alerts>
+
 
 ## 示例
 

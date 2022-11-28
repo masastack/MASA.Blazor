@@ -9,20 +9,16 @@ related:
 
 ## Usage
 
-The **MTabs** component is a styled extension of [**MItemGroup**](/components/item-groups). It provides an easy to use
+The **MTabs** component is a styled extension of [MItemGroup](/components/item-groups). It provides an easy to use
 interface for organizing groups of content.
 
 <tabs-usage></tabs-usage>
 
 ## Caveats
 
-<!--alert:warning--> 
-When using the `Dark` prop and `NOT` providing a custom `color`, the **MTabs** component will default its color to white.
-<!--alert:warning--> 
+<app-alerts type="warning" content="When using the `Dark` prop and `NOT` providing a custom `color`, the **MTabs** component will default its color to white. "></app-alerts>
 
-<!--alert:warning--> 
-When using **MTabItem**'s that contain required input fields you must use the `eager` prop in order to validate the required fields that are not yet visible.
-<!--alert:warning--> 
+<app-alerts type="warning" content="When using **MTabItem**'s that contain required input fields you must use the `eager` prop in order to validate the required fields that are not yet visible."></app-alerts>
 
 ## Examples
 

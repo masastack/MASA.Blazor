@@ -1,0 +1,9 @@
+{
+  "props": {
+    "if": "",
+    "onClickPreventDefault": "",
+    "onClickStopPropagation": ""
+  },
+  "events": {},
+  "contents": {}
+}

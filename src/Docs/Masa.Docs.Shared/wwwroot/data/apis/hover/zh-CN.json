@@ -1,0 +1,8 @@
+{
+  "props": {
+    "disabled": "关闭悬停功能",
+    "value": "控制组件可见还是隐藏。"
+  },
+  "events": {},
+  "contents": {}
+}

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-
-namespace Masa.Docs.Shared.Examples.components.date_pickers_month;
+﻿namespace Masa.Docs.Shared.Examples.components.date_pickers_month;
 
 public class Usage : Masa.Docs.Shared.Components.Usage
 {

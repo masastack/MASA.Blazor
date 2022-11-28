@@ -1,0 +1,16 @@
+{
+  "props": {
+    "circle": "Shape pagination elements as circles",
+    "length": "The length of the pagination component",
+    "nextIcon": "Specify the icon to use for the next icon",
+    "prevIcon": "Specify the icon to use for the prev icon",
+    "totalVisible": "Specify the max total visible pagination numbers",
+    "value": "Current selected page"
+  },
+  "events": {
+    "onInput": "The updated bound model",
+    "onNext": "Emitted when going to next item",
+    "onPrevious": "Emitted when going to previous item"
+  },
+  "contents": {}
+}

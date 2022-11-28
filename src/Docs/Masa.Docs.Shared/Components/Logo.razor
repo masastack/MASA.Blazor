@@ -1,12 +1,13 @@
 ﻿@namespace Masa.Docs.Shared.Components
 @inject I18n I18n
 
-<a class="d-inline-block" @attributes="@Attributes">
-    <MImage Src="https://cdn.masastack.com/stack/images/website/masa-blazor/logo.png"
+<a class="d-flex justify-center" style="width: 100%; height:100%" @attributes="@Attributes">
+    <MImage Src="https://cdn.masastack.com/images/logo-h-en.svg"
             alt="@I18n.T("logo")"
             Class="shrink"
-            MaxWidth="148"
-            Width="148" />
+            MaxWidth="180"
+            Width="180"
+            Height="40"/>
 </a>
 
 @code {

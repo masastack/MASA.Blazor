@@ -8,10 +8,10 @@
         @if (context.Header.Value == "actions")
         {
             <MIcon Small
-               Class="mr-2"
-               OnClick="()=>EditItem(context.Item)">mdi-pencil</MIcon>
+                   Class="mr-2"
+                   OnClick="()=>EditItem(context.Item)">mdi-pencil</MIcon>
             <MIcon Small
-               OnClick="()=>DeleteItem(context.Item)">mdi-delete</MIcon>
+                   OnClick="()=>DeleteItem(context.Item)">mdi-delete</MIcon>
         }
         else
         {
@@ -115,7 +115,7 @@
            new ()
            {
             Text= "Dessert (100g serving)",
-            Align= "start",
+            Align= DataTableHeaderAlign.Start,
             Sortable= false,
             Value= nameof(Dessert.Name)
           },
@@ -123,7 +123,7 @@
           new (){ Text= "Fat (g)", Value= nameof(Dessert.Fat)},
           new (){ Text= "Carbs (g)", Value= nameof(Dessert.Carbs)},
           new (){ Text= "Protein (g)", Value= nameof(Dessert.Protein)},
-          new (){ Text= "Actions", Value= "actions",Sortable=false,Width="100px",Align="center" }
+          new (){ Text= "Actions", Value= "actions",Sortable=false,Width="100px",Align=DataTableHeaderAlign.Center, }
         };
 
     private List<Dessert> _desserts = new List<Dessert>
@@ -303,4 +303,4 @@
         _editedItem = new();
         _editedIndex = -1;
     }
-  }
+}

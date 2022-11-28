@@ -1,0 +1,21 @@
+{
+  "props": {
+    "continuous": "If true, window will \"wrap around\" from the last item to the first, and from the first item to the last",
+    "max": "",
+    "multiple": "",
+    "nextIcon": "Icon used for the \"next\" button if `ShowArrows` is true",
+    "prevIcon": "Icon used for the \"prev\" button if `ShowArrows` is true",
+    "reverse": "Reverse the normal transition direction.",
+    "showArrows": "Display the \"next\" and \"prev\" buttons",
+    "showArrowsOnHover": "Display the \"next\" and \"prev\" buttons on hover. `ShowArrows` MUST ALSO be set.",
+    "targetGroup": "",
+    "value": "The designated model value for the component.",
+    "values": "The designated model value for the component.",
+    "vertical": "Uses a vertical transition when changing windows."
+  },
+  "events": {
+    "valuesChanged": ""
+  },
+  "contents": {
+  }
+}

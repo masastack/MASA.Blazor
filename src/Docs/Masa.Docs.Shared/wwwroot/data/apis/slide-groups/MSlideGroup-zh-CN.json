@@ -1,0 +1,20 @@
+{
+  "props": {
+    "centerActive": "强制将选中的组件居中",
+    "max": "设置可以选择的最大数量。",
+    "multiple": "允许多个选择。",
+    "nextIcon": "当箭头显示时附加的插槽",
+    "prevIcon": "当箭头显示时，预定的插槽",
+    "showArrows": "总是显示分页箭头",
+    "targetGroup": "",
+    "value": "组件的指定 model 值。",
+    "values": "组件的指定 model 值。"
+  },
+  "events": {
+    "valuesChanged": ""
+  },
+  "contents": {
+    "nextContent": "下一个插槽",
+    "prevContent": "前一个插槽"
+  }
+}

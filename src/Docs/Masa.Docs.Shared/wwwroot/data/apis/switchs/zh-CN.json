@@ -1,0 +1,12 @@
+{
+  "props": {
+    "inset": "扩展MSwitch轨迹以包含缩略图",
+    "leftText": "",
+    "rightText": "",
+    "trackColor": ""
+  },
+  "events": {
+  },
+  "contents": {
+  }
+}

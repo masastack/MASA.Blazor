@@ -9,19 +9,15 @@ related:
 
 ## 使用
 
-**MTabs** 组件是 [**MItemGroup**](/components/item-groups) 的样式扩展。 它提供了一个易于使用的接口来组织内容组。
+**MTabs** 组件是 [MItemGroup](/components/item-groups) 的样式扩展。 它提供了一个易于使用的接口来组织内容组。
 
 <tabs-usage></tabs-usage>
 
 ## 注意
 
-<!--alert:warning-->
-当使用 `Dark` 属性且不提供自定义 `Color` 时，**MTabs**组件会将其颜色默认为 white。
-<!--alert:warning-->
+<app-alerts type="warning" content="当使用 `Dark` 属性且不提供自定义 `Color` 时，**MTabs**组件会将其颜色默认为 white。"></app-alerts>
 
-<!--alert:warning-->
-当使用包含必填输入字段的 **MTabItem** 时，你必须使用 `eager` 属性来验证尚未显示的必填字段。
-<!--alert:warning-->
+<app-alerts type="warning" content="当使用包含必填输入字段的 **MTabItem** 时，你必须使用 `eager` 属性来验证尚未显示的必填字段。"></app-alerts>
 
 ## 示例
 

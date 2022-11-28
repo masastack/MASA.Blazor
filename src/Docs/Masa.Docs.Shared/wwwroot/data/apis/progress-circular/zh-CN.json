@@ -1,0 +1,9 @@
+{
+  "props": {
+    "indeterminate": "恒定动画，加载进度未知时使用。",
+    "rotate": "以度为单位旋转圆的起点",
+    "value": "当前进度的百分比值"
+  },
+  "events": {},
+  "contents": {}
+}

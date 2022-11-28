@@ -7,7 +7,7 @@ desc: "使用边框半径辅助样式对元素快速应用 `border-radius` 样�
 
 使用示例如下所示。注意：中缀字符 sm、lg 和 xl 与帧半径大小有关，不受断点影响。
 
-<border-radius-usage></border-radius-usage>
+<masa-example file="Examples.styles_and_animations.border_radius.Basic"></masa-example>
 
 ## 示例
 

@@ -7,7 +7,7 @@ desc: "Use the border radius auxiliary style to quickly apply the `border-radius
 
 Examples of usage are shown below. Note: The infix characters sm, lg and xl are related to the frame radius size and are not affected by the breakpoint.
 
-<border-radius-usage></border-radius-usage>
+<masa-example file="Examples.styles_and_animations.border_radius.Basic"></masa-example>
 
 ## Examples
 

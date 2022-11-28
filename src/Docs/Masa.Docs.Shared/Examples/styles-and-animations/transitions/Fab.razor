@@ -1,0 +1,24 @@
+﻿<div class="text-center">
+    <MMenu Transition="fab-transition">
+
+        <ActivatorContent>
+            <MButton Dark Color="primary" @attributes="context.Attrs">
+               Fab Transition
+            </MButton>
+        </ActivatorContent>
+
+        <ChildContent>
+            <MList>
+                @for (var i = 0; i < 5; i++)
+                {
+                    <MListItem>
+                        <MListItemTitle>
+                            @("Item"+i)
+                        </MListItemTitle>
+                    </MListItem>
+                }
+            </MList>
+        </ChildContent>
+
+    </MMenu>
+</div>

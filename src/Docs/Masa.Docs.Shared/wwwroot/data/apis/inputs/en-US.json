@@ -1,0 +1,36 @@
+{
+  "props": {
+    "appendIcon": "",
+    "error": "",
+    "errorCount": "",
+    "errorMessages": "",
+    "hideDetails": "",
+    "hint": "",
+    "label": "",
+    "messages": "",
+    "persistentHint": "",
+    "prependIcon": "",
+    "readonly": "",
+    "rules": "",
+    "success": "",
+    "successMessages": "",
+    "textColor": "",
+    "validateOnBlur": "",
+    "value": "",
+    "valueExpression": ""
+  },
+  "events": {
+    "onAppendClick": "",
+    "onChange": "",
+    "onInput": "",
+    "onMouseDown": "",
+    "onMouseUp": "",
+    "onPrependClick": ""
+  },
+  "contents": {
+    "appendContent": "",
+    "labelContent": "",
+    "messageContent": "",
+    "prependContent": ""
+  }
+}

@@ -1,16 +1,8 @@
 ﻿@inject I18n I18n
 @inject MasaBlazor MasaBlazor
 
-<h3>@I18n.Culture</h3>
-
 <div class="flex-1-1-auto d-flex align-center justify-end">
-    @if (MasaBlazor.Breakpoint.SmAndUp)
-    {
-        if (MasaBlazor.Breakpoint.MdAndUp)
-        {
-            <SettingsToggle />
-        }
-    }
+    <Tabs />
 
     @if (MasaBlazor.Breakpoint.SmOnly)
     {
@@ -22,7 +14,28 @@
         <MSpacer />
     }
 
+    <Search />
+
     <LanguageMenu OnCultureChanged="@OnCultureChanged" />
+
+    <MButton Icon
+             Href="https://github.com/BlazorComponent/Masa.Blazor"
+             Target="_blank"
+             Class="mr-3 ml-2">
+        <MIcon Size=24 Class="emphasize1-color">fab fa-github</MIcon>
+    </MButton>
+    <MButton Icon
+             Href="https://gitee.com/blazorcomponent/MASA.Blazor"
+             Target="_blank"
+             Class="mr-3">
+        <img style="width:24px;height:24px;" src="https://cdn.masastack.com/stack/images/website/masa-blazor/gitee.png" />
+    </MButton>
+    <MButton Icon
+             Class="mr-8">
+        <MIcon Class="emphasize1-color">
+            mdi-cog
+        </MIcon>
+    </MButton>
 </div>
 
 

@@ -4,10 +4,18 @@ on:
   push:
     branches:
       - main
+    paths:
+      - src/BlazorComponent/src/Component/**
+      - src/Masa.Blazor/**
+      - src/Doc/**
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+    paths:
+      - src/BlazorComponent/src/Component/**
+      - src/Masa.Blazor/**
+      - src/Doc/**
 
 jobs:
   build_and_deploy_job:
@@ -19,7 +27,7 @@ jobs:
         with:
           submodules: 'recursive'
       - run: git submodule foreach git checkout main
-      - name: setting dotnet 
+      - name: setting dotnet
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: |

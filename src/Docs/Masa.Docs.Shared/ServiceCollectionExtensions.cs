@@ -1,12 +1,13 @@
-﻿using Masa.Docs.Shared.Services;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Masa.Docs.Shared;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddMasaDocs(this IServiceCollection services, string baseUri)
+    public static IServiceCollection AddMasaDocs(this IServiceCollection services, string baseUri, string mode = BlazorMode.Server)
     {
+        BlazorMode.Current = mode;
+
         services.AddHttpClient("masa-docs", c =>
         {
             c.DefaultRequestHeaders.Add("User-Agent",

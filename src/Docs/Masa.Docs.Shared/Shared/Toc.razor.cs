@@ -1,9 +1,6 @@
-﻿using System.Text;
-using BlazorComponent.JSInterop;
-using BlazorComponent.Web;
-using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.Extensions.Primitives;
+﻿using BlazorComponent.JSInterop;
 using Microsoft.JSInterop;
+using System.Text;
 
 namespace Masa.Docs.Shared.Shared;
 

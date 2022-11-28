@@ -1,0 +1,13 @@
+{
+  "props": {
+    "divider": "Specifies the dividing character between items.",
+    "items": "An array of objects for each breadcrumb.",
+    "large": "Increase the font-size of the breadcrumb item text to 16px (14px default)."
+  },
+  "contents": {
+    "dividerContent": "The slot used for dividers.",
+    "itemContent": "The slot used to override default `MBreadcrumbsItem` behavior when using the items prop."
+  },
+  "events": {},
+  "functions": {}
+}

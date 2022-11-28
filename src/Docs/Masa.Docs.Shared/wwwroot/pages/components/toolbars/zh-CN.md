@@ -1,6 +1,6 @@
 ---
 title: Toolbars（工具栏）
-desc: "**MToolbar** 组件对于任何 GUI 都是至关重要的，因为它通常是站点导航的主要来源。 工具栏组件与 [**MNavigationDrawer**](/components/navigation-drawers) 和 [**MCard**](/components/cards) 配合使用非常有效。"
+desc: "**MToolbar** 组件对于任何 GUI 都是至关重要的，因为它通常是站点导航的主要来源。 工具栏组件与 [MNavigationDrawer](/components/navigation-drawers) 和 [MCard](/components/cards) 配合使用非常有效。"
 related:
   - /components/buttons
   - /components/footers
@@ -17,10 +17,8 @@ related:
 
 ## 注意
 
-<!--alert:warning-->
-当在 **MToolbar** 和 **MAppBar** 内部使用带有 **Icon** prop的 **MButton** 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。
-如果您选择将您的按钮包装在任何容器中，例如 `div`， 您需要对容器应用负边距，以便正确对齐。
-<!--/alert:warning-->
+<app-alerts type="warning" content="当在 **MToolbar** 和 **MAppBar** 内部使用带有 `Icon` 属性的 **MButton** 时，它们将自动增大其尺寸并应用负边距，以确保根据Material设计规范的适当间距。
+如果您选择将您的按钮包装在任何容器中，例如 `div`， 您需要对容器应用负边距，以便正确对齐。"></app-alerts>
 
 ## 示例
 
@@ -28,7 +26,7 @@ related:
 
 #### 背景
 
-工具栏可以使用 `Src` 属性显示背景而不是纯色。 这可以通过使用 `Img` 插槽并提供您自己的 [**MImage**](/components/images) 组件来修改。
+工具栏可以使用 `Src` 属性显示背景而不是纯色。 这可以通过使用 `Img` 插槽并提供您自己的 [MImage](/components/images) 组件来修改。
 可以使用 [MAppBar](/components/app-bars) 使背景淡入淡出
 
 <masa-example file="Examples.components.toolbars.Background"></masa-example>

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
 using ExampleComponents = Masa.Docs.Shared.Examples.components;
-using ExampleStyles = Masa.Docs.Shared.Examples.styles_and_animations;
 
 namespace Masa.Docs.Shared;
 
@@ -11,6 +10,7 @@ public static class CircuitRootComponentOptionsExtensions
         options.RegisterCustomElement<Masa.Docs.Shared.Components.Example>("masa-example");
         options.RegisterCustomElement<Masa.Docs.Shared.Components.AppHeading>("app-heading");
         options.RegisterCustomElement<Masa.Docs.Shared.Components.AppLink>("app-link");
+        options.RegisterCustomElement<Masa.Docs.Shared.Components.AppAlert>("app-alerts");
 
         options.RegisterCustomElement<ExampleComponents.alerts.Usage>("alerts-usage");
         options.RegisterCustomElement<ExampleComponents.avatars.Usage>("avatars-usage");
@@ -90,6 +90,5 @@ public static class CircuitRootComponentOptionsExtensions
         options.RegisterCustomElement<ExampleComponents.drawers.Usage>("drawers-usage");
         options.RegisterCustomElement<ExampleComponents.carousels.Usage>("carousels-usage");
         options.RegisterCustomElement<ExampleComponents.copyable_text.Usage>("copyable-text-usage");
-        options.RegisterCustomElement<ExampleStyles.border_radius.Usage>("border-radius-usage");
     }
 }

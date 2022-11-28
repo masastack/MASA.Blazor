@@ -15,8 +15,7 @@ related:
 
 ## 注意
 
-<!--alert:info-->
-如果您要查找有状态列表项，请查看 [**MListItemGroup**](/components/list-item-groups)。
+<app-alerts type="info" content="如果您要查找有状态列表项，请查看 [**MListItemGroup**](/components/list-item-groups)。"></app-alerts>
 
 ## 示例
 
@@ -88,7 +87,7 @@ related:
 
 #### 操作和项目组
 
-可操作的 **ThreeLine** 列表。 利用 [**MListItemGroup**](/components/list-item-groups)，轻松将动作连接到图块。
+可操作的 **ThreeLine** 列表。 利用 [MListItemGroup](/components/list-item-groups)，轻松将动作连接到图块。
 
 <masa-example file="Examples.components.lists.ActionsAndItemGroups"></masa-example>
 

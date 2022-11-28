@@ -12,10 +12,19 @@ public partial class AppService
     //     { "styles", ("mdi-palette-outline", "deep-purple accent-4") },
     // };
 
-    public const int AppBarHeight = 64;
+    public const int AppBarHeight = 96;
 
     private readonly Lazy<Task<List<NavItem>>> _navs;
     private List<MarkdownItTocContent>? _toc;
+
+    private static Dictionary<string, string> _tagColors = new()
+    {
+        { "preset", "blue" },
+        { "service", "purple" },
+        { "new", "green" },
+        { "updated", "red" },
+        { "js-proxy", "pink" }
+    };
 
     public event EventHandler<List<MarkdownItTocContent>?>? TocChanged;
 
@@ -33,7 +42,7 @@ public partial class AppService
             return navs ?? new List<NavItem>();
         });
     }
-    
+
     public List<MarkdownItTocContent>? Toc
     {
         get => _toc;
@@ -47,5 +56,10 @@ public partial class AppService
     public async Task<List<NavItem>> GetNavs()
     {
         return await _navs.Value;
+    }
+
+    public static string GetColor(string tag)
+    {
+        return _tagColors.ContainsKey(tag) ? _tagColors[tag] : "primary";
     }
 }

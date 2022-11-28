@@ -1,12 +1,14 @@
 ﻿@using System.Globalization
+@inject MasaBlazor MasaBlazor
+
 <MAppBar Id="app-bar"
          App
          Class="m-bar--underline"
          Flat
          ClippedRight
          Color="white"
-         Height="@AppService.AppBarHeight">
-    <MAppBarNavIcon Class="hidden-lg-and-up"></MAppBarNavIcon>
+         Height="AppService.AppBarHeight">
+    <MAppBarNavIcon Class="hidden-sm-and-up" />
     <AppBarItems OnCultureChanged="OnCultureChanged"></AppBarItems>
 </MAppBar>
 

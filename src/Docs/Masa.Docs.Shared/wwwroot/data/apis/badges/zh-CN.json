@@ -1,0 +1,17 @@
+{
+  "props": {
+    "avatar": "去掉了 `BadgeContent ` 插槽中使用 [MAvatar](/components/avatars) 的徽章边距。",
+    "bordered": "当使用 `Dot` 属性时，默认情况下会在徽章上应用一个 2px 和它的周围应用一个 1.5px 的边框。",
+    "content": "任何你想要的内容都可以作为文字注入到徽章中。",
+    "dot": "缩小徽章的尺寸并隐藏其内容。",
+    "icon": "指定徽章中使用的具体图标。",
+    "inline": "移动徽章，使其与包装元素保持一致。支持使用 `Left` prop。",
+    "offsetX": "将徽章在 x 轴上偏移。",
+    "offsetY": "将徽章在 y 轴上偏移。",
+    "overLap": "与组件顶部的开槽内容重叠。",
+    "value": "控制组件可见还是隐藏。"
+  },
+  "contents": {},
+  "events": {},
+  "functions": {}
+}

@@ -1,0 +1,9 @@
+{
+  "props": {
+    "disabled": "禁用扩展面板内容",
+    "readonly": "使扩展面板内容为只读。",
+    "value": ""
+  },
+  "events": {},
+  "contents": {}
+}

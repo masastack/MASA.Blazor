@@ -1,0 +1,9 @@
+{
+  "props": {
+    "disableIconRotate": "展开面板时删除图标旋转动画",
+    "expandIcon": "设置图标展开动作",
+    "hideActions": "隐藏内容标题中的展开图标"
+  },
+  "events": {},
+  "contents": {}
+}

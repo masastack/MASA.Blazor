@@ -1,0 +1,33 @@
+{
+  "props": {
+    "activeClass": "active-class 在子组件被激活时应用。",
+    "continuous": "如果为 true，则窗口将从最后一项到第一项，以及从第一项到最后 \"wrap around\"",
+    "cycle": "确定轮播是否应该循环显示图像。",
+    "delimiterIcon": "设置轮播分隔符的图标。",
+    "hideDelimiterBackground": "隐藏底部分隔符的背景。",
+    "hideDelimiters": "隐藏轮播的底部分隔符。",
+    "interval": "轮播图像周期之间的持续时间。需要 `Cycle` 属性。",
+    "max": "设置可以选择的最大数量。",
+    "multiple": "允许多个选择。",
+    "nextIcon": "如果 `ShowArrows` 为 true，则显示 \"next\" 按钮的图标。",
+    "prevIcon": "如果 `ShowArrows` 为 true，则显示 \"prev\" 按钮的图标。",
+    "progress": "显示轮播进度条。需要 cycle 和 interval 属性。",
+    "progressColor": "将指定的颜色应用于进度条。",
+    "reverse": "反转正常的过渡方向。",
+    "showArrows": "显示 \"next\" 和 \"prev\" 按钮",
+    "showArrowsOnHover": "悬停时显示 \"next\" 和 \"prev\" 按钮。必须设置 `ShowArrows` 。",
+    "targetGroup": "TargetGroup",
+    "value": "组件的指定 model 值。",
+    "values": "",
+    "vertical": "改变窗口时使用垂直转换.",
+    "verticalDelimiters": "垂直显示轮播的分隔符。"
+  },
+  "contents": {
+    "nextContent": "下一页插槽",
+    "prevContent": "上一页插槽"
+  },
+  "events": {
+    "valuesChanged": "值改变事件"
+  },
+  "functions": {}
+}

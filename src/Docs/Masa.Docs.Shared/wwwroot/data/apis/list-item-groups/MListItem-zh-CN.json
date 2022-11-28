@@ -1,0 +1,15 @@
+{
+  "props": {
+    "highlighted": "高亮",
+    "inactive": "如果设置了该属性，即使有to/href或者@click，列表块也不会响应链接。",
+    "linkage": "",
+    "selectable": "允许在 MListItem 中选择文本。 该属性使用 (user-select)[https://developer.mozilla.org/en-US/docs/Web/CSS/user-select]",
+    "threeLine": "增加三行的列表项高度。 该属性使用 (line-clamp)[https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp] ，并非所有浏览器都支持。",
+    "twoLine": "增加两行的列表项高度。 该属性使用 (line-clamp)[https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp] ，并非所有浏览器都支持。",
+    "value": "当 (MItemGroup)[components/item-groups/api/MItemGroup] 的子元素时使用的值。"
+  },
+  "events": {},
+  "contents": {
+    "itemContent": ""
+  }
+}

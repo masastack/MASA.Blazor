@@ -1,0 +1,19 @@
+{
+  "props": {
+    "background-color": "使用空图标的颜色",
+    "clearable": "允许清空该组件。当包含当前值的图标被点击时触发。",
+    "emptyIcon": "空时显示的图标",
+    "fullIcon": "满时显示的图标",
+    "halfIcon": "半时显示的图标（需要 `HalfIncrements` 属性）",
+    "halfIncrements": "允许选择半增量",
+    "hover": "将鼠标悬停在图标上时提供视觉反馈",
+    "iconLabel": "",
+    "length": "要显示的评分数量",
+    "readonly": "移除所有悬停效果和指针事件",
+    "value": "评分值"
+  },
+  "events": {},
+  "contents": {
+    "itemContent": "已渲染项目的插槽"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "props": {
+    "indeterminate": "为复选框设置不确定状态",
+    "indeterminateIcon": "处于不确定状态时使用的图标",
+    "offIcon": "不活动时使用的图标",
+    "onIcon": "激活时使用的图标"
+  },
+  "events": {
+  },
+  "contents": {
+  }
+}

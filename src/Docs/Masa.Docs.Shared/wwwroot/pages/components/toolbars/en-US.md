@@ -1,6 +1,6 @@
 ---
 title: Toolbars
-desc: "The **MToolbar** component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.The toolbar component works great in conjunction with [**MNavigationDrawer**](/components/navigation-drawers) and [**MCard**](/components/cards)."
+desc: "The **MToolbar** component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.The toolbar component works great in conjunction with [MNavigationDrawer](/components/navigation-drawers) and [MCard](/components/cards)."
 related:
   - /components/buttons
   - /components/footers
@@ -19,10 +19,8 @@ The **MToolbarTitle** is used for displaying a title and **MToolbarItems** allow
 
 ## Caveats
 
-<!--alert:warning-->
-When **MButton** with `icon` prop is used inside **MToolbar** and **MAppbar**, they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.
-If you choose to wrap your buttons in any container, such as `div` , you need to apply a negative margin to the container for proper alignment.
-<!--/alert:warning-->
+<app-alerts type="warning" content="When **MButton** with `Icon` prop is used inside **MToolbar** and **MAppbar**, they will automatically increase their size and apply negative margins to ensure appropriate spacing according to material design specifications.
+If you choose to wrap your buttons in any container, such as `div` , you need to apply a negative margin to the container for proper alignment."></app-alerts>
 
 ## Examples
 
@@ -31,7 +29,7 @@ If you choose to wrap your buttons in any container, such as `div` , you need to
 #### Background
 
 Toolbars can display a background as opposed to a solid color using the src prop. This can be modified further by using
-the img slot and providing your own [**MImage**](/components/images) component. Backgrounds can be faded using
+the img slot and providing your own [MImage](/components/images) component. Backgrounds can be faded using
 a [MAppBar](/components/app-bars).
 
 <masa-example file="Examples.components.toolbars.Background"></masa-example>
@@ -75,7 +73,7 @@ Toolbars come in 2 variants, light and dark. Light toolbars have dark tinted but
 #### Prominent toolbars
 
 Prominent toolbars increase the **MToolbar** height to 128px and positions the **MToolbarTitle** towards the bottom of the
-container. This is expanded upon in [**MApp**](/components/application) with the ability to shrink a prominent toolbar
+container. This is expanded upon in [MApp](/components/application) with the ability to shrink a prominent toolbar
 to a `dense` or `short` one.
 
 <masa-example file="Examples.components.toolbars.ProminentToolbars"></masa-example>
