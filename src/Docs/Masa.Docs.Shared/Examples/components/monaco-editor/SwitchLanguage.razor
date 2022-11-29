@@ -9,7 +9,7 @@
                 Label="语法支持"
                 Outlined></MTextField>
 
-    <MMonacoEditor @ref="_editor" Id="@Id" EditorOptions="@_EditorOptions" Width="@("500px")" Height="@("500px")" />
+    <MMonacoEditor @ref="_editor"EditorOptions="@_EditorOptions" Width="@("500px")" Height="@("500px")" />
 
 
 </MCard>
@@ -42,7 +42,6 @@
             Language = "csharp"
         };
 
-    public string Id { get; set; } = Guid.NewGuid().ToString("N");
 
     private async Task SetLanguage()
     {

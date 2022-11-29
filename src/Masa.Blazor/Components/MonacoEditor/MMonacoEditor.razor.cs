@@ -27,7 +27,7 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
 
     [Parameter]
     public StringNumber MaxHeight { get; set; }
-    
+
     [Parameter]
     public object Option { get; set; } = new { };
 
@@ -43,8 +43,9 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
     [CascadingParameter(Name = "IsDark")]
     public bool CascadingIsDark { get; set; }
 
-    [Parameter] public EditorOptions EditorOptions { get; set; } = new ();
+    [Parameter] public EditorOptions EditorOptions { get; set; } = new();
 
+    private IJSObjectReference _monaco;
 
     private bool _isMonacoEditorDisposed = false;
 
@@ -89,56 +90,56 @@ public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
         await InitMonaco();
         await base.OnInitializedAsync();
     }
-    
+
 
     public async Task InitMonaco()
     {
-        await Module.Init(Id, EditorOptions);
+        _monaco = await Module.Init(Id, EditorOptions);
     }
 
     public async Task<string> GetValue()
     {
-        return await Module.GetValue(Id);
+        return await Module.GetValue(_monaco);
     }
 
     public async Task SetModelLanguage(string language)
     {
-        await Module.SetModelLanguage(Id, language);
+        await Module.SetModelLanguage(_monaco, language);
     }
 
     public async Task<bool> SetValue(string newValue)
     {
-        return await Module.SetValue(Id, newValue);
+        return await Module.SetValue(_monaco, newValue);
     }
 
     public async Task<bool> SetTheme(string newTheme)
     {
-        return await Module.SetTheme(Id, newTheme);
+        return await Module.SetTheme(_monaco, newTheme);
     }
 
     public async Task<TextModelOptions[]> GetModels()
     {
-        return await Module.GetModels(Id);
+        return await Module.GetModels(_monaco);
     }
 
     public async Task<TextModelOptions> GetModel(Uri uri)
     {
-        return await Module.GetModel(Id, uri);
+        return await Module.GetModel(_monaco, uri);
     }
 
     public async Task RemeasureFonts()
     {
-        await Module.RemeasureFonts(Id);
+        await Module.RemeasureFonts(_monaco);
     }
 
     public async Task AddKeybindingRules(KeybindingRule[] rules)
     {
-        await Module.AddKeybindingRules(Id, rules);
+        await Module.AddKeybindingRules(_monaco, rules);
     }
 
     public async Task AddKeybindingRules(KeybindingRule rule)
     {
-        await Module.AddKeybindingRule(Id, rule);
+        await Module.AddKeybindingRule(_monaco, rule);
     }
 
 
