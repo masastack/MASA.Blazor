@@ -25,12 +25,15 @@
     [Inject]
     public IMemoryCache MemoryCache { get; set; } = null!;
 
+    [Inject]
+    public IHttpClientFactory HttpClientFactory { get; set; } = null!;
+
     const string OPEN_ISSUES_KEY = "open-issues-count";
     const string CLOSED_ISSUES_KEY = "closed-issues-count";
     const string OPEN_ISSUES_URL = "?q=repo:BlazorComponent/MASA.Blazor+type:issue+state:open";
     const string CLOSED_ISSUES_URL = "?q=repo:BlazorComponent/MASA.Blazor+type:issue+state:closed";
 
-    static readonly HttpClient _httpClient = new() { BaseAddress = new Uri("https://api.github.com/search/issues") };
+    private HttpClient _httpClient => HttpClientFactory.CreateClient(nameof(GitHubIssues));
 
     string? _openCount;
     string? _closeCount;
@@ -61,8 +64,6 @@
     {
         string? issuesCount = string.Empty;
 
-        _httpClient.DefaultRequestHeaders.Clear();
-        _httpClient.DefaultRequestHeaders.Add("User-Agent", "Other");
         HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, url);
         var response = await _httpClient.SendAsync(requestMessage);
         if (response.IsSuccessStatusCode)
