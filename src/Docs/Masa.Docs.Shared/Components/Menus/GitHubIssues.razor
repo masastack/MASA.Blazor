@@ -27,9 +27,11 @@
 
     const string OPEN_ISSUES_KEY = "open-issues-count";
     const string CLOSED_ISSUES_KEY = "closed-issues-count";
+    const string OPEN_ISSUES_URL = "?q=repo:BlazorComponent/MASA.Blazor+type:issue+state:open";
+    const string CLOSED_ISSUES_URL = "?q=repo:BlazorComponent/MASA.Blazor+type:issue+state:closed";
+
     static readonly HttpClient _httpClient = new() { BaseAddress = new Uri("https://api.github.com/search/issues") };
-    string _openIssuesUrl = "?q=repo:BlazorComponent/MASA.Blazor+type:issue+state:open";
-    string _closedIssuesUrl = "?q=repo:BlazorComponent/MASA.Blazor+type:issue+state:closed";
+
     string? _openCount;
     string? _closeCount;
 
@@ -38,19 +40,17 @@
     {
         if (firstRender)
         {
-            _openCount = MemoryCache.Get<string?>(OPEN_ISSUES_KEY);
-            if (string.IsNullOrWhiteSpace(_openCount))
+            _openCount = await MemoryCache.GetOrCreateAsync<string?>(OPEN_ISSUES_KEY, entry =>
             {
-                _openCount = await GetIssuesCountAsync(_openIssuesUrl);
-                MemoryCache.Set(OPEN_ISSUES_KEY, _openCount, TimeSpan.FromSeconds(55));
-            }
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
+                return GetIssuesCountAsync(OPEN_ISSUES_URL);
+            });
 
-            _closeCount = MemoryCache.Get<string?>(CLOSED_ISSUES_KEY);
-            if (string.IsNullOrWhiteSpace(_closeCount))
+            _closeCount = await MemoryCache.GetOrCreateAsync<string?>(CLOSED_ISSUES_KEY, entry =>
             {
-                _closeCount = await GetIssuesCountAsync(_closedIssuesUrl);
-                MemoryCache.Set(CLOSED_ISSUES_KEY, _closeCount, TimeSpan.FromSeconds(55));
-            }
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
+                return GetIssuesCountAsync(CLOSED_ISSUES_URL);
+            });
 
             StateHasChanged();
         }
