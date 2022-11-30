@@ -30,8 +30,8 @@
 
     const string OPEN_ISSUES_KEY = "open-issues-count";
     const string CLOSED_ISSUES_KEY = "closed-issues-count";
-    const string OPEN_ISSUES_URL = "?q=repo:BlazorComponent/MASA.Blazor+type:issue+state:open";
-    const string CLOSED_ISSUES_URL = "?q=repo:BlazorComponent/MASA.Blazor+type:issue+state:closed";
+    const string OPEN_ISSUES_URL = "search/issues?q=repo:BlazorComponent/MASA.Blazor+type:issue+state:open";
+    const string CLOSED_ISSUES_URL = "search/issues?q=repo:BlazorComponent/MASA.Blazor+type:issue+state:closed";
 
     HttpClient? _httpClient;
     string? _openCount;
@@ -42,7 +42,7 @@
     {
         if (firstRender)
         {
-            _httpClient = HttpClientFactory.CreateClient(nameof(GitHubIssues));
+            _httpClient = HttpClientFactory.CreateClient("github");
 
             _openCount = await MemoryCache.GetOrCreateAsync<string?>(OPEN_ISSUES_KEY, entry =>
             {
