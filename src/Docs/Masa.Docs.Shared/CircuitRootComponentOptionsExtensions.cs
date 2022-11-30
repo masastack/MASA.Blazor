@@ -73,7 +73,6 @@ public static class CircuitRootComponentOptionsExtensions
         options.RegisterCustomElement<ExampleComponents.ratings.Usage>("ratings-usage");
         options.RegisterCustomElement<ExampleComponents.sheets.Usage>("sheets-usage");
         options.RegisterCustomElement<ExampleComponents.skeleton_loaders.Usages.Usage>("skeleton-loaders-usage");
-        options.RegisterCustomElement<ExampleComponents.snackbars.Usages.Usage>("snackbars-usage");
         options.RegisterCustomElement<ExampleComponents.steppers.Usage>("steppers-usage");
         options.RegisterCustomElement<ExampleComponents.subheaders.Usage>("subheaders-usage");
         options.RegisterCustomElement<ExampleComponents.data_iterators.Usage>("data-iterators-usage");

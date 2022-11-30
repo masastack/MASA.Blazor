@@ -1,6 +1,6 @@
 ﻿namespace Masa.Docs.Shared.Components;
 
-public partial class Usage
+public partial class Usage : NextTickComponentBase
 {
     private const string DefaultKey = "default";
 
@@ -33,13 +33,22 @@ public partial class Usage
         _childContent = GenChildContent();
     }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        base.OnAfterRender(firstRender);
+        await base.OnAfterRenderAsync(firstRender);
 
-        if (!_rendered)
+        if (firstRender)
         {
-            _rendered = true;
+            NextTick(async () =>
+            {
+                if (!_rendered)
+                {
+                    await Task.Delay(1);
+                    _rendered = true;
+                    StateHasChanged();
+                }
+            });
+
             StateHasChanged();
         }
     }
