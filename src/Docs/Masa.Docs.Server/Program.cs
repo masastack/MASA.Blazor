@@ -9,7 +9,6 @@ builder.Services.AddServerSideBlazor(options =>
     options.RootComponents.RegisterCustomElementsOfMasaDocs();
 });
 builder.Services.AddHealthChecks();
-//builder.Services.AddMemoryCache();
 
 builder.Services.AddScoped<LazyAssemblyLoader>();
 builder.Services.AddMasaBlazor(options =>
