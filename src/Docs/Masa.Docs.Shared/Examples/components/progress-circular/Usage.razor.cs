@@ -1,6 +1,4 @@
-﻿using YamlDotNet.Core.Tokens;
-
-namespace Masa.Docs.Shared.Examples.components.progress_circular;
+﻿namespace Masa.Docs.Shared.Examples.components.progress_circular;
 
 public class Usage : Masa.Docs.Shared.Components.Usage
 {

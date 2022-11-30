@@ -1,0 +1,18 @@
+{
+  "props": {
+    "active": "将高度降低到 0，隐藏组件",
+    "backgroundOpacity": "背景不透明度，如果为 null，默认为 0.3，如果没有指定背景颜色，则为 1",
+    "bottom": "将组件向底部对齐。",
+    "bufferValue": "缓冲区的百分比值",
+    "indeterminate": "恒定动画，加载进度未知时使用。",
+    "query": "像 `Indeterminate` 属性但反转的动画效果",
+    "reverse": "显示相反的进度（在 LTR 模式下从右到左，在 RTL 模式下从左到右）",
+    "stream": "描绘加载的另一种样式与 buffer-value 协同工作",
+    "striped": "将条纹背景添加到进度组件的填充部分",
+    "value": "当前进度的百分比值"
+  },
+  "events": {
+    "onChange": "当用户交互更改组件值时触发"
+  },
+  "contents": {}
+}

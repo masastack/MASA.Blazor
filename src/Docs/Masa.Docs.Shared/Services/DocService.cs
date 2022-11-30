@@ -5,9 +5,9 @@ namespace Masa.Docs.Shared.Services;
 public class DocService
 {
     private readonly I18n _i18n;
-    private readonly ConcurrentCache<string, ValueTask<string>> _documentCache = new();
-    private readonly ConcurrentCache<string, ValueTask<string>> _exampleCache = new();
-    private readonly ConcurrentCache<string, ValueTask<Dictionary<string, Dictionary<string, string>>?>> _apiCache = new();
+    private readonly static ConcurrentCache<string, ValueTask<string>> _documentCache = new();
+    private readonly static ConcurrentCache<string, ValueTask<string>> _exampleCache = new();
+    private readonly static ConcurrentCache<string, ValueTask<Dictionary<string, Dictionary<string, string>>?>> _apiCache = new();
     private readonly Task<Dictionary<string, Dictionary<string, Dictionary<string, string>>>> _commonApisAsync;
 
     private readonly HttpClient _httpClient;
@@ -54,16 +54,17 @@ public class DocService
         return _apiInPageCache ?? new Dictionary<string, List<string>>();
     }
 
-    public async Task<Dictionary<string, Dictionary<string, string>>?> ReadApisAsync(string kebabCaseComponent)
+    public async Task<Dictionary<string, Dictionary<string, string>>?> ReadApisAsync(string kebabCaseComponent, string? apiName = null)
     {
-        var key = $"{kebabCaseComponent}:{_i18n.Culture.Name}";
+
+        var key = $"{kebabCaseComponent}/{(apiName is null ? "" : apiName + "-")}{_i18n.Culture.Name}";
 
         try
         {
             return await _apiCache.GetOrAdd(key, async _ =>
             {
                 var apiInfo = await _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, string>>>(
-                $"_content/Masa.Docs.Shared/data/apis/{kebabCaseComponent}/{_i18n.Culture.Name}.json").ConfigureAwait(false);
+                $"_content/Masa.Docs.Shared/data/apis/{key}.json").ConfigureAwait(false);
                 var _commonApis = await _commonApisAsync;
                 if (_commonApis.TryGetValue(_i18n.Culture.Name, out var commonApiInfo))
                 {

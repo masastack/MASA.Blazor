@@ -1,0 +1,10 @@
+{
+  "props": {
+    "fillDot": "从点容器中删除填充",
+    "hideDot": "隐藏时间线内点的显示"
+  },
+  "events": {},
+  "contents": {
+    "oppositeContent": "用于自定义时间轴项目的另一面"
+  }
+}

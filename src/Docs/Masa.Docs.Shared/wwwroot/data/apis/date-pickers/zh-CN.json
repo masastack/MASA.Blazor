@@ -1,0 +1,40 @@
+{
+  "props": {
+    "activePicker": "",
+    "allowedDates": "限制可以选择的日期",
+    "dayFormat": "允许您自定义日期表中出现的日期字符串的格式。使用日期（ISO 8601字符串）参数调用。",
+    "firstDayOfWeek": "设置一周的第一天，从周日的 0 开始。",
+    "fullWidth": "强制 100% 宽度",
+    "headerColor": "定义标题颜色。如果未指定，将使用由 `Color` 属性或默认选择器颜色定义的颜色。",
+    "headerDateFormat": "允许您自定义出现在日历标题中的月份字符串的格式。 用日期（ISO 8601字符串）参数调用。",
+    "landscape": "水平方向选择器",
+    "locale": "设置语言环境。 接受带有 BCP 47 语言标记的字符串。",
+    "max": "允许的最大 日期/月份（ISO 8601格式）",
+    "min": "允许的最小 日期/月份（ISO 8601格式）",
+    "monthFormat": "用于在月份表中显示月份的格式化功能。 用日期（ISO 8601字符串）参数调用。",
+    "multiple": "允许选择多个日期",
+    "nextIcon": "设置下个 月/年 按钮的图标",
+    "noTitle": "隐藏选择器标题",
+    "pickerDate": "显示 年/月",
+    "prevIcon": "设置上一个 月/年 按钮的图标",
+    "range": "允许选择日期范围",
+    "reactive": "自动更改 月份/年份 时更新选择器模型",
+    "readonly": "使选择器变为只读状态（不允许选择新日期）",
+    "scrollable": "允许通过鼠标滚动更改显示的月份",
+    "showAdjacentMonths": "",
+    "showCurrent": "切换当前 日期/月份 大纲的可见性或将提供的 日期/月份 显示为当前日期",
+    "showWeek": "切换日历正文中星期几的可见性",
+    "titleDateFormat": "允许您自定义出现在日期选择器标题中的日期字符串的格式。 用日期（ISO 8601字符串）参数调用。",
+    "type": "确定选择器的类型 - 日期选择器的 date ，月选择器的 month",
+    "value": "日期选择器模型（ISO 8601 格式，YYYYY-mm-dd 或 YYYYY-mm）",
+    "weekdayFormat": "允许您自定义显示在日历正文中的工作日字符串的格式。使用日期（ISO 8601 字符串）参数调用",
+    "yearFormat": "允许您自定义日历标题中出现的年份字符串的格式。需要日期（ISO 8601字符串）参数。",
+    "yearIcon": "设置年份选择按钮中的图标"
+  },
+  "events": {
+    "onActivePickerUpdate": "",
+    "onInput": "被绑定模型的更新",
+    "onPickerDateUpdate": ""
+  },
+  "contents": {}
+}

@@ -1,0 +1,8 @@
+{
+  "props": {
+    "disabled": "Removes the ability to click or target the component.",
+    "value": "The value used when the component is selected in a group. If not provided, the index will be used."
+  },
+  "events": {},
+  "contents": {}
+}

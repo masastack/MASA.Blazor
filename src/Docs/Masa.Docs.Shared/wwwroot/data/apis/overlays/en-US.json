@@ -1,0 +1,10 @@
+{
+  "props": {
+    "opacity": "Sets the overlay opacity.",
+    "scrimClass": "",
+    "value": "The z-index used for the component.",
+    "zIndex": "Controls whether the component is visible or hidden."
+  },
+  "events": {},
+  "contents": {}
+}

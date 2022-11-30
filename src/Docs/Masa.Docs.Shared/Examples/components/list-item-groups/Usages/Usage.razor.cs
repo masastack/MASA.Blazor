@@ -46,7 +46,7 @@
             return new Dictionary<string, object>()
             {
                 { nameof(MListItemGroup.Value), selected },
-              
+
             };
         }
 

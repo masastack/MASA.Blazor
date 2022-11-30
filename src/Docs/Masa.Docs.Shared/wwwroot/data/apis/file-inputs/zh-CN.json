@@ -1,0 +1,12 @@
+{
+  "props": {
+    "accept": "Html input accept prop",
+    "hideInput": "仅显示图标而不显示输入（文件名）",
+    "showSize": "设置所选文件的显示大小。当使用 **true** 默认值为 1000 显示（**kB**，**MB**，**GB**） 时，1024 将显示（**KiB**，**MiB**，**GiB**）。",
+    "truncateLength": "在用省略号截断之前的文件名的长度"
+  },
+  "events": {
+  },
+  "contents": {
+  }
+}

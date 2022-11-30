@@ -1,0 +1,17 @@
+{
+  "props": {
+    "primary": "primary.",
+    "primaryClass": "PrimaryClass.",
+    "primaryStyle": "PrimaryStyle.",
+    "secondary": "Secondary.",
+    "secondaryClass": "secondaryClass.",
+    "secondaryStyle": "SecondaryStyle.",
+    "tags": "tags."
+  },
+  "contents": {
+    "primaryContent": "PrimaryContent.",
+    "secondaryContent": "SecondaryContent."
+  },
+  "events": {},
+  "functions": {}
+}

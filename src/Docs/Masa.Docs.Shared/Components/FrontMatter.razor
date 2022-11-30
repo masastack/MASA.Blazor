@@ -3,7 +3,9 @@
 @namespace Masa.Docs.Shared.Components
 
 <h1 class="m-heading text-h3 text-sm-h3 mb-4">@Meta.Title</h1>
-<MMarkdownIt Source="@Meta.Description" NoWrapper Scope="desc"></MMarkdownIt>
+<div class="ordinary-text">
+    <MMarkdownIt Source="@Meta.Description" NoWrapper Scope="desc"></MMarkdownIt>
+</div>
 
 @ChildContent
 

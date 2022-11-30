@@ -1,6 +1,4 @@
-﻿using Masa.Blazor;
-
-namespace Masa.Docs.Shared.Examples.components.ratings;
+﻿namespace Masa.Docs.Shared.Examples.components.ratings;
 
 public class Usage : Masa.Docs.Shared.Components.Usage
 {

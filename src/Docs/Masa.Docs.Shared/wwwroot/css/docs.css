@@ -57,6 +57,7 @@ h1 + p {
 .m-heading {
     display: inline-block;
     position: relative;
+    color: black;
 }
 
     .m-heading > a {
@@ -73,10 +74,82 @@ h1 + p {
             opacity: 0;
         }
 
+h1.m-heading {
+    font-weight: 900 !important;
+}
+
+h2.m-heading {
+    font-weight: 700 !important;
+}
+
+h3.m-heading {
+    font-weight: 700 !important;
+}
+
+h4.m-heading {
+    font-weight: 700 !important;
+}
+
+h5.m-heading {
+    font-weight: 700 !important;
+}
+
+h6.m-heading {
+    font-weight: 700 !important;
+}
+
+h7.m-heading {
+    font-weight: 700 !important;
+}
+
 .emphasize1-color {
     color: #1B2559 !important;
+    caret-color: #1B2559 !important;
 }
 
 .emphasize2-color {
     color: #323D6F !important;
+}
+
+.secondary-emphasis-text {
+    font-weight: 400 !important;
+    font-size: 1rem !important;
+    color: #424649 !important;
+}
+
+.ordinary-text {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #485585;
+}
+
+.black-text {
+    color: black !important;
+}
+
+.m-application--is-ltr .m-list-group--default .m-list-item__icon:last-of-type:not(:only-child) {
+    margin-left: 0 !important;
+}
+
+.m-list-group.m-list-group--default .m-list-item__title {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.m-list-item.m-list-item--default {
+    margin-bottom: 0px !important;
+}
+
+.m-list-group.m-list-group--default .m-list-item {
+    margin-bottom: 0px !important;
+    height: 48px !important;
+}
+
+.m-list-group.m-list-group--default .m-list-item__icon {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    display: flex;
+    height: 100% !important;
+    align-items: center;
 }

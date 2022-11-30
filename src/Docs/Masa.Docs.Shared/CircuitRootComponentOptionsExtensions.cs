@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
 using ExampleComponents = Masa.Docs.Shared.Examples.components;
-using ExampleStyles = Masa.Docs.Shared.Examples.styles_and_animations;
 
 namespace Masa.Docs.Shared;
 

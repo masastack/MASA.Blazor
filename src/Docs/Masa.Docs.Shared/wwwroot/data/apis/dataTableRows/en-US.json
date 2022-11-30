@@ -1,0 +1,16 @@
+{
+  "props": {
+    "hasSlot": "",
+    "headers": "",
+    "index": "",
+    "isExpanded": "",
+    "isSelected": "",
+    "item": "",
+    "itemClass": "",
+    "stripe": ""
+  },
+  "events": {},
+  "contents": {
+    "slotContent": ""
+  }
+}

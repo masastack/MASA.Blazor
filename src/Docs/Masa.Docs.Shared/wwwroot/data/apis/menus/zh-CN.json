@@ -1,0 +1,38 @@
+{
+  "props": {
+    "allowOverflow": "移除内容的溢出重新定位",
+    "attach": "指定此组件应该与哪个 DOM 元素分离。to.String 可以是任何有效的 querySelector，对象可以是任何有效的 Node。这将默认挂载到根节点 (MApp)[/components/apps]。",
+    "auto": "在所选择的元素上居中列表",
+    "closeOnClick": "指定菜应该在外部激活器被点击时关闭。",
+    "closeOnContentClick": "指定点击内容时菜单是否应该关闭。",
+    "contentClass": "将自定义类应用于分离的元素。这很有用，因为内容被移动到 (MApp)[/components/apps] 组件的开头（除非提供了 `Attach` 属性），并且不被直接作为目标传递到组件上的类。",
+    "contentStyle": "",
+    "disableKeys": "移除所有键盘交互功能",
+    "disabled": "禁用菜单",
+    "externalActivator": "与文档相反，分离组件内部的菜单内容。",
+    "nudgeBottom": "向底部微调内容",
+    "nudgeLeft": "向左侧微调内容",
+    "nudgeRight": "向右侧微调内容",
+    "nudgeTop": "向顶部微调内容",
+    "nudgeWidth": "微调内容宽度",
+    "offsetOverflow": "当由于溢出而重新定位时，导致组件翻转到另一侧",
+    "offsetX": "在x轴上偏移菜单，与左/右方向一起工作",
+    "offsetY": "在y轴上偏移菜单，与上/下方向一起工作",
+    "openDelay": "打开组件前等待的毫秒数。 仅适用于 `OpenOnHover` 属性",
+    "openOnClick": "指定是否在激活器点击时打开菜单",
+    "openOnFocus": "指定是否在光标选中时打开菜单",
+    "openOnHover": "指定是否在激活器悬停时打开菜单",
+    "origin": "设置元素上的动画原点。您可以在 MDN 文档上浏览更多 (for transition origin)[https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin]",
+    "positionX": "用于在不使用激活器插槽时定位内容",
+    "positionY": "用于在不使用激活器插槽时定位内容",
+    "transition": "设置组件转换。可以是一个 (built in transitions)[styles-and-animations/transitions] 或者是自己自定义的。",
+    "value": "控制组件可见还是隐藏。",
+    "zIndex": "用于组件的 z-index"
+  },
+  "events": {
+    "onOutsideClick": ""
+  },
+  "contents": {
+    "activatorContent": ""
+  }
+}

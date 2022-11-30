@@ -1,0 +1,22 @@
+{
+  "props": {
+    "alignWithTitle": "让`MTabs`与工具栏标题对齐",
+    "centerActive": "强制所选标签以居中",
+    "centered": "将选项卡居中",
+    "fixedTabs": "`MTabsItems` min-width 160px, max-width 360px",
+    "grow": "强制 `MTab` 占用所有可用空间",
+    "hideSlider": "隐藏生成的`MTabsSlider`",
+    "iconsAndText": "将堆叠图标和文字垂直",
+    "mobileBreakpoint": "为组件设置和指定移动设备的屏幕尺寸断点",
+    "nextIcon": "左分页图标",
+    "optional": "不需要活动项目。 在将 `MTab` 用作 router-link 时有用",
+    "prevIcon": "右分页图标",
+    "showArrows": "如果选项卡项目超出其容器，则显示分页箭头。 对于移动设备，仅在使用此属性时才会显示箭头。",
+    "sliderColor": "更改自动生成的 `MTabsSlider` 的背景颜色。",
+    "sliderSize": "更改滑块的大小，水平 **height**，垂直 **width**。",
+    "value": "组件的指定 model 值。",
+    "vertical": "垂直堆叠选项卡。"
+  },
+  "events": {},
+  "contents": {}
+}

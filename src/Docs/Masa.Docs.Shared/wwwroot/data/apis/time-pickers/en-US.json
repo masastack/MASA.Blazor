@@ -1,0 +1,26 @@
+{
+  "props": {
+    "allowedHours": "Restricts which hours can be selected",
+    "allowedMinutes": "Restricts which minutes can be selected",
+    "allowedSeconds": "Restricts which seconds can be selected",
+    "amPmInTitle": "Place AM/PM switch in title, not near the clock.",
+    "format": "Defines the format of a time displayed in picker. Available options are **ampm** and **24hr**.",
+    "fullWidth": "Forces 100% width",
+    "headerColor": "Defines the header color. If not specified it will use the color defined by `Color` prop or the default picker color",
+    "landscape": "Orients picker horizontal",
+    "max": "Maximum allowed time",
+    "min": "Minimum allowed time",
+    "noTitle": "Hide the picker title",
+    "readonly": "Puts picker in readonly state",
+    "scrollable": "Allows changing hour/minute with mouse scroll",
+    "useSeconds": "Toggles the use of seconds in picker",
+    "value": "Time picker model (ISO 8601 format, 24hr hh:mm)"
+  },
+  "events": {
+    "onChange": "Emitted when user selects the hour",
+    "onPeriodUpdate": "Emitted when user clicks the AM/PM button"
+  },
+  "contents": {
+    "childContent": "Displayed below the clock, can be used for example for adding action button (**OK** and **Cancel**)."
+  }
+}

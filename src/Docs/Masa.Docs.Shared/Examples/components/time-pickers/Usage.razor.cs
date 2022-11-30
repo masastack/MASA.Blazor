@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-
-namespace Masa.Docs.Shared.Examples.components.time_pickers;
+﻿namespace Masa.Docs.Shared.Examples.components.time_pickers;
 
 public class Usage : Masa.Docs.Shared.Components.Usage
 {

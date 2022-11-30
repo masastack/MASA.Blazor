@@ -1,0 +1,10 @@
+{
+  "props": {
+    "alertParameters": "",
+    "confirmParameters": "",
+    "leftToRight": "",
+    "promptParameters": ""
+  },
+  "events": {},
+  "contents": {}
+}

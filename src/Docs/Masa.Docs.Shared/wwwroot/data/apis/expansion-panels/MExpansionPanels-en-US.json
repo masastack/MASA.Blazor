@@ -1,0 +1,20 @@
+{
+  "props": {
+    "accordion": "Removes the margin around open panels",
+    "disabled": "Disables the entire expansion-panel",
+    "focusable": "Makes the expansion-panel headers focusable",
+    "hover": "Applies a background-color shift on hover to expansion panel headers",
+    "inset": "Makes the expansion-panel open with a inset style",
+    "max": "Sets a maximum number of selections that can be made.",
+    "multiple": "Allow multiple selections. The `Value` prop must be an array.",
+    "popout": "Makes the expansion-panel open with an popout style",
+    "readonly": "Makes the entire expansion-panel read only.",
+    "targetGroup": "",
+    "value": "Controls the opened/closed state of content in the expansion-panel. Corresponds to a zero-based index of the currently opened content. ",
+    "values": "plural of `Value`, used with `Multiple` attribute"
+  },
+  "events": {
+    "valuesChanged": ""
+  },
+  "contents": {}
+}
