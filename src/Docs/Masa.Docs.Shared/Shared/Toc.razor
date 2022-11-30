@@ -5,18 +5,19 @@
                    Right
                    Color=""
                    App
-                   Class="py-4 pr-3"
+                   Class="py-6 pr-4"
                    Clipped
                    Floating
                    Width="300">
     <PrependContent>
-        @if (_toc.Any())
-        {
-            <div class="mb-2"></div>
-        }
+        <GitHubIssues />
     </PrependContent>
 
     <ChildContent>
+        @if (_toc.Any())
+        {
+            <div class="toc-content mb-2 ml-6">@I18n.T("Contents")</div>
+        }
         <ul class="mb-6">
             @foreach (var item in _toc)
             {
@@ -30,5 +31,6 @@
                 </li>
             }
         </ul>
+        <Sponsors />
     </ChildContent>
 </MNavigationDrawer>

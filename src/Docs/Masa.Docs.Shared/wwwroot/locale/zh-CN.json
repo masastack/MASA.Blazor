@@ -87,6 +87,7 @@
   "ViewSource": "查看源代码",
   "Contents": "目录",
   "SeniorSponsor": "高级赞助商",
+  "Sponsor": "赞助商",
   "Required": "必填",
   "The Name field is required.": "字段名称必填。",
   "Name must be at most 10 characters long.": "名称长度不得超过10个字符。",
