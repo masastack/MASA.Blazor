@@ -33,8 +33,7 @@
     const string OPEN_ISSUES_URL = "?q=repo:BlazorComponent/MASA.Blazor+type:issue+state:open";
     const string CLOSED_ISSUES_URL = "?q=repo:BlazorComponent/MASA.Blazor+type:issue+state:closed";
 
-    private HttpClient _httpClient => HttpClientFactory.CreateClient(nameof(GitHubIssues));
-
+    HttpClient? _httpClient;
     string? _openCount;
     string? _closeCount;
 
@@ -43,6 +42,8 @@
     {
         if (firstRender)
         {
+            _httpClient = HttpClientFactory.CreateClient(nameof(GitHubIssues));
+
             _openCount = await MemoryCache.GetOrCreateAsync<string?>(OPEN_ISSUES_KEY, entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
@@ -65,7 +66,7 @@
         string? issuesCount = string.Empty;
 
         HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, url);
-        var response = await _httpClient.SendAsync(requestMessage);
+        var response = await _httpClient!.SendAsync(requestMessage);
         if (response.IsSuccessStatusCode)
         {
             var result = await response.Content.ReadFromJsonAsync<JsonObject>();
