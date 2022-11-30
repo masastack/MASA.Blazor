@@ -32,7 +32,18 @@
 
         public static bool IsEnabled()
         {
-            return PlatformIsEnabled();
+            var isEnable = false;
+            for (var i = 0; i < 20; i++)
+            {
+                if (PlatformIsEnabled())
+                {
+                    isEnable = true;
+                    break;
+                }
+
+                Thread.Sleep(100);
+            }
+            return isEnable;
 
         }
 
@@ -58,5 +69,5 @@
             await PlatformSendDataAsync(deviceName, servicesUuid, characteristicsUuid, dataBytes, gattCharacteristicValueChangedEventArgs);
         }
     }
-    
+
 }

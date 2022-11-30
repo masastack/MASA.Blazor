@@ -1,4 +1,5 @@
 ﻿
+using CoreBluetooth;
 using Masa.Blazor.Maui.Plugin.Bluetooth;
 using Microsoft.AspNetCore.Components;
 
@@ -29,6 +30,11 @@ namespace MauiBlueToothDemo.Pages
                     ShowProgress = false;
                 }
             }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine($"Bluetooth not enabled");
+            }
+
         }
 
         /// <summary>
@@ -53,9 +59,12 @@ namespace MauiBlueToothDemo.Pages
             if (byteData.Any())
             {
                 AllDeviceResponse = new List<string>();
-#if ANDROID
-                await MasaMauiBluetoothService.SendDataAsync(deviceName, Guid.Parse("0000ffff-0000-1000-8000-00805f9b34fb"), null, byteData, OnCharacteristicChanged);
-#endif
+                if (MasaMauiBluetoothService.IsEnabled())
+                {
+                    await MasaMauiBluetoothService.SendDataAsync(deviceName,
+                        Guid.Parse("0000ffff-0000-1000-8000-00805f9b34fb"), null, byteData, OnCharacteristicChanged);
+                }
+
             }
         }
 

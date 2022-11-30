@@ -30,25 +30,23 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)'=='net6.0-ios'">
-      <CodesignKey>Apple Development: Created via API (C8X77K3TNL)</CodesignKey>
-      <CodesignProvision>VS: WildCard Development</CodesignProvision>
-    </PropertyGroup>
+  
 
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-ios|AnyCPU'">
-      <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
-      <MtouchProfiling>True</MtouchProfiling>
+	    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
+
+			<MtouchLink>SdkOnly</MtouchLink>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-ios|AnyCPU'">
-      <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
-      <MtouchProfiling>True</MtouchProfiling>
+      <MtouchLink>SdkOnly</MtouchLink>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
-      <CodesignKey>Apple Development: Created via API (C8X77K3TNL)</CodesignKey>
+    <PropertyGroup Condition="'$(TargetFramework)'=='net6.0-ios'">
+      <CodesignKey>Apple Development: Vic Parker (LXZ3399LT9)</CodesignKey>
       <CodesignProvision>VS: WildCard Development</CodesignProvision>
     </PropertyGroup>
+
 
     <ItemGroup>
         <!-- App Icon -->
