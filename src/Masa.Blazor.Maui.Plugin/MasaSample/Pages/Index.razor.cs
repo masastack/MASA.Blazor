@@ -1,5 +1,4 @@
 ﻿
-using CoreBluetooth;
 using Masa.Blazor.Maui.Plugin.Bluetooth;
 using Microsoft.AspNetCore.Components;
 

@@ -10,7 +10,7 @@ public partial class MasaBarcodeReader : ContentPage
     public MasaBarcodeReader()
     {
         InitializeComponent();
-        barcodeReader.Options = new BarcodeReaderOptions
+        BarcodeReader.Options = new BarcodeReaderOptions
         {
             Formats = BarcodeFormats.All,
             AutoRotate = true,
