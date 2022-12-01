@@ -157,7 +157,7 @@
       },
       {
         "title": "monaco-editor",
-        "tag": "preset"
+        "tag": "js-proxy"
       },
       "navigation-drawers",
       {

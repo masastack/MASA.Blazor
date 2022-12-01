@@ -1,7 +1,7 @@
 ---
 title: monaco-editor编辑器
 desc: "For the operation of some code or edit some text when providing syntax highlighting and syntax prompt, support for custom syntax prompt, support for dynamic grammar switching, let your edit box more advanced!"
-tag: preset
+tag: js-proxy
 related:
   - /components/monaco-editor
 ---
