@@ -78,7 +78,7 @@ namespace Masa.Blazor.Maui.Plugin.Bluetooth
 
             await characteristic.StartNotificationsAsync();
             characteristic.CharacteristicValueChanged += gattCharacteristicValueChangedEventArgs;
-            await characteristic.WriteValueWithResponseAsync(dataBytes);
+            await characteristic.WriteValueWithoutResponseAsync(dataBytes);
         }
 
         private class BluetoothDelegate : CBCentralManagerDelegate
