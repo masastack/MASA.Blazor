@@ -1,6 +1,4 @@
-﻿using Masa.Blazor.Components.MonacoEditor.Options;
-
-namespace Masa.Blazor.Components.MonacoEditor;
+﻿namespace Masa.Blazor;
 
 public partial class MMonacoEditor : BDomComponentBase, IAsyncDisposable
 {

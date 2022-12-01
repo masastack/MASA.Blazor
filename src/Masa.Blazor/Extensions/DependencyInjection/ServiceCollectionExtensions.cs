@@ -1,6 +1,5 @@
 ﻿using BlazorComponent.Web;
 using Masa.Blazor;
-using Masa.Blazor.Components.MonacoEditor;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 

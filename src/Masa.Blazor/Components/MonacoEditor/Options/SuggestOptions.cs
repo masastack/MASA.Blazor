@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Components.MonacoEditor.Options;
+﻿namespace Masa.Blazor;
 
 public class SuggestOptions
 {
