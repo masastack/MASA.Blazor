@@ -1,7 +1,7 @@
 ﻿@inject I18n I18n
 @typeparam TItem where TItem : IDefaultItem<TItem>
 
-<MListGroup Group="@GenGroup(Item?.Children)"
+<MListGroup Group="@group"
             Class="m-list-group--default"
             NoAction
             SubGroup="SubGroup">
@@ -40,14 +40,23 @@
     public string? Icon { get; set; }
 
     [Parameter, EditorRequired]
-    public TItem? Item { get; set; }
+    public TItem Item { get; set; }
 
     [Parameter]
     public bool SubGroup { get; set; }
 
+    private List<string> group = new();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        group = GenGroup(Item.Children);
+    }
+
     bool HasTag => !string.IsNullOrEmpty(Item?.Tag);
 
-    List<string?> GenGroup(List<TItem>? items)
+    List<string> GenGroup(List<TItem>? items)
     {
         if (items == null || !items.Any()) return new List<string?>();
 

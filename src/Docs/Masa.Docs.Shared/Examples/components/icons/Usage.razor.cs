@@ -34,7 +34,7 @@
 
             return parameter.Key switch
             {
-                nameof(MIcon.Size) => (StringNumber)(double)parameter.Value,
+                nameof(MIcon.Size) => (StringNumber)(string)parameter.Value,
                 //nameof(MIcon.ChildContent) => new RenderFragment(builder => builder.AddContent(0, parameter.Value)),
                 _ => parameter.Value
             };

@@ -18,7 +18,9 @@ public class DocService
     {
         _i18n = i18n;
         _httpClient = factory.CreateClient("masa-docs");
-        _commonApisAsync = _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>("_content/Masa.Docs.Shared/data/apis/common.json");
+        _commonApisAsync =
+            _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(
+                "_content/Masa.Docs.Shared/data/apis/common.json");
     }
 
     public async Task<string> ReadDocumentAsync(string category, string title)
@@ -31,8 +33,19 @@ public class DocService
     public async Task<string> ReadExampleAsync(string category, string title, string example)
     {
         var key = $"{category}/{title}/{example}";
-        return await _exampleCache.GetOrAdd(key,
-            async _ => await _httpClient.GetStringAsync($"_content/Masa.Docs.Shared/pages/{category}/{title}/examples/{example}.txt"));
+
+        try
+        {
+            return await _exampleCache.GetOrAdd(key,
+                async _ => await _httpClient.GetStringAsync($"_content/Masa.Docs.Shared/pages/{category}/{title}/examples/{example}.txt"));
+        }
+        catch (Exception e)
+        {
+            // TODO: log only in dev environment
+            Console.WriteLine(e);
+        }
+
+        return string.Empty;
     }
 
     public async Task<Dictionary<string, List<string>>> ReadPageToApiAsync()
@@ -56,7 +69,6 @@ public class DocService
 
     public async Task<Dictionary<string, Dictionary<string, string>>?> ReadApisAsync(string kebabCaseComponent, string? apiName = null)
     {
-
         var key = $"{kebabCaseComponent}/{(apiName is null ? "" : apiName + "-")}{_i18n.Culture.Name}";
 
         try
@@ -64,7 +76,7 @@ public class DocService
             return await _apiCache.GetOrAdd(key, async _ =>
             {
                 var apiInfo = await _httpClient.GetFromJsonAsync<Dictionary<string, Dictionary<string, string>>>(
-                $"_content/Masa.Docs.Shared/data/apis/{key}.json").ConfigureAwait(false);
+                    $"_content/Masa.Docs.Shared/data/apis/{key}.json").ConfigureAwait(false);
                 var _commonApis = await _commonApisAsync;
                 if (_commonApis.TryGetValue(_i18n.Culture.Name, out var commonApiInfo))
                 {
@@ -73,16 +85,18 @@ public class DocService
                         if (commonApiInfo.TryGetValue(category, out var commonApi))
                         {
                             foreach (var (prop, desc) in commonApi)
-                                if (api.ContainsKey(prop) is false) api.Add(prop, desc);
+                                if (api.ContainsKey(prop) is false)
+                                    api.Add(prop, desc);
                         }
                     }
                 }
+
                 return apiInfo;
             });
-
         }
         catch (Exception e)
         {
+            // TODO: log only in dev environment
             Console.WriteLine(e);
             return null;
         }

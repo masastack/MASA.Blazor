@@ -35,9 +35,9 @@ You can use combinations of any or all of the above components including **MBott
     <!-- -->
   </MAppBar>
 
-  <!-- 根据应用组件来调整你的内容 -->
+  <!-- Sizes your content based upon application components -->
   <MMain>
-    <!-- 给应用提供合适的间距 -->
+    <!-- Provides the application the proper gutter -->
     <MContainer Fluid>
         @Body
     </MContainer>
