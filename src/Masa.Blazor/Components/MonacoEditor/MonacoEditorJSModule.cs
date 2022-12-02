@@ -2,7 +2,7 @@
 
 public class MonacoEditorJSModule : JSModule
 {
-    public MonacoEditorJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/proxies/monaco-proxy.js")
+    public MonacoEditorJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/proxies/monaco-editor-proxy.js")
     {
     }
 
