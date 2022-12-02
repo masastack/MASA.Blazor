@@ -25,10 +25,12 @@
                 }
             }
         }
-        public static Task<IReadOnlyCollection<BluetoothDevice>> ScanForDevicesAsync()
+        public static Task<IReadOnlyCollection<BluetoothDevice>> ScanForDevicesAsync(string deviceName="")
         {
-            return PlatformScanForDevices();
+            return PlatformScanForDevices(deviceName);
         }
+
+
 
         public static bool IsEnabled()
         {
@@ -66,8 +68,9 @@
             byte[] dataBytes,
             EventHandler<GattCharacteristicValueChangedEventArgs> gattCharacteristicValueChangedEventArgs)
         {
+
             await PlatformSendDataAsync(deviceName, servicesUuid, characteristicsUuid, dataBytes, gattCharacteristicValueChangedEventArgs);
-        }
+            }
     }
 
 }
