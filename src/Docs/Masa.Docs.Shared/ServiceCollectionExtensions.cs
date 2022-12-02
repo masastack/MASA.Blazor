@@ -21,6 +21,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<DocService>();
         services.AddScoped<AppService>();
 
+        services.AddMemoryCache();
+
         ApiGenerator.ApiGenerator.Run();
 
         return services;
