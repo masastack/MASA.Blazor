@@ -1,7 +1,3 @@
----
-title: 安装
----
-
 # 安装
 
 让我们从 MASA Blazor 开始吧，MASA Blazor 是 .NET Blazor 框架的 UI 组件库，用于构建功能丰富、快速的应用程序。

@@ -1,7 +1,3 @@
----
-title: Install
----
-
 # Install
 
 Let's start with MASA Blazor. MASA Blazor is the UI component library of the .NET Blazor framework for building feature-rich and fast applications.

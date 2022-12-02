@@ -1,7 +1,6 @@
----
-title: Colors（颜色）
-desc: "通过 **sass** 和 **javascript**，你可以使用 [Material Design](https://material.io/design/color/the-color-system.html#color-theme-creation) 规范中的所有颜色。 这些值可以在样式表、组件文件和实际组件中通过**颜色类**系统使用。"
----
+# Colors（颜色）
+
+通过 **sass** 和 **javascript**，你可以使用 [Material Design](https://material.io/design/color/the-color-system.html#color-theme-creation) 规范中的所有颜色。 这些值可以在样式表、组件文件和实际组件中通过**颜色类**系统使用。
 
 ## 示例
 

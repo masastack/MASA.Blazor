@@ -1,7 +1,3 @@
----
-title: Contributing
----
-
 # Contributing
 
 MASA Blazor is an open source project, our goal is to allow you to easily create amazing applications. Anyone can submit issues and create requests for better development of MASA Blazor. Many times, you will encounter some problems that can be improved. Maybe it is a bug or you have better ideas about the use and function of the components. All can be raised on Github. 

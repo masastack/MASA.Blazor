@@ -1,8 +1,4 @@
-﻿---
-title: 图标字体
----
-
-# 图标字体
+﻿# 图标字体
 
 MASA Blazor 支持引导 Material Design 图标, Material 图标, Font Awesome 4 和 Font Awesome 5 默认情况下，应用程序将默认使用 <a href="https://materialdesignicons.com" target="_blank">Material Design 图标</a>。
 

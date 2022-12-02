@@ -1,7 +1,3 @@
----
-title: Upgrade Guide
----
-
 # pgrade Guide
 
 ## Upgrading from v0.5.x to v0.6.x

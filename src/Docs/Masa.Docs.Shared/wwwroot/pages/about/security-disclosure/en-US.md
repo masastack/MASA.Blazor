@@ -1,8 +1,4 @@
-﻿---
-title: Security disclosure
----
-
-# Security disclosure
+﻿# Security disclosure
 
 This document outlines the safety procedures and general policies of the MASA Blazor project. 
 

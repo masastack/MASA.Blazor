@@ -1,8 +1,4 @@
-﻿---
-title: Layouts
----
-
-# Layouts
+﻿# Layouts
 
 Build beautiful user experiences with customizable and expansive layout options.
 

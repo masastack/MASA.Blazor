@@ -1,8 +1,4 @@
-﻿---
-title: Internationalization (i18n)
----
-
-# Internationalization (i18n)
+﻿# Internationalization (i18n)
 
 MASA Blazor support component language internationalization (i18n).
 

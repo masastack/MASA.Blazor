@@ -1,8 +1,4 @@
-﻿---
-title: Meet the team
----
-
-# Meet the team
+﻿# Meet the team
 
 MASA Blazor is not a solo show. We have a very active and dedicated team, constantly working hard to bring a better experience for developers. Keep in mind that the following is not an exhaustive list of everyone who helped make MASA Blazor stronger. Thank you for your support, thank you for using MASA Blazor! 
 

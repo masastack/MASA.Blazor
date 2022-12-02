@@ -1,7 +1,6 @@
----
-title: Display helpers（显示辅助）
-desc: "The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type."
----
+# Display helpers（显示辅助）
+
+The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.
 
 ## 示例
 

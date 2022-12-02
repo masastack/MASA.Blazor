@@ -24,8 +24,8 @@ public class AppHeading : ComponentBase
 
     private static Dictionary<int, string> _map = new()
     {
-        { 1, "text-h3 text-sm-h3 mb-4" },
-        { 2, "text-h4 text-sm-h4 mb-3" },
+        { 1, "text-h3 text-sm-h3 mb-4 mt-4" },
+        { 2, "text-h4 text-sm-h4 mb-3 mt-3" },
         { 3, "text-h5 mb-2" },
         { 4, "text-h6 mb-2" },
         { 5, "text-subtitle-1 font-weight-medium mb-2" },

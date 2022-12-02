@@ -1,7 +1,6 @@
----
-title: Border radius（边框半径）
-desc: "使用边框半径辅助样式对元素快速应用 `border-radius` 样式"
----
+# Border radius（边框半径）
+
+使用边框半径辅助样式对元素快速应用 `border-radius` 样式
 
 ## 使用
 
